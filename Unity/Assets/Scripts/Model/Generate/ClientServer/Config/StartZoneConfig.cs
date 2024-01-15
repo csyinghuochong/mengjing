@@ -60,6 +60,8 @@ namespace ET
 		public int Id { get; set; }
 		/// <summary>数据库地址</summary>
 		public string DBConnection { get; set; }
+		/// <summary>物理区</summary>
+		public int PhysicZone { get; set; }
 		/// <summary>数据库名</summary>
 		public string DBName { get; set; }
 

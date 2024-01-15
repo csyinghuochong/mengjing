@@ -60,6 +60,14 @@ namespace ET
 		public int Id { get; set; }
 		/// <summary>所属机器</summary>
 		public int MachineId { get; set; }
+		/// <summary>内网端口</summary>
+		public int InnerPort { get; set; }
+		/// <summary>dll</summary>
+		public string dll { get; set; }
+		/// <summary>程序名</summary>
+		public string AppName { get; set; }
+		/// <summary>进程名</summary>
+		public string Title { get; set; }
 		/// <summary>外网端口</summary>
 		public int Port { get; set; }
 

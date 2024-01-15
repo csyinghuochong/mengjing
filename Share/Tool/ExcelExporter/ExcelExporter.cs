@@ -557,6 +557,8 @@ namespace ET
                 case "int[]":
                 case "int32[]":
                 case "long[]":
+                case "double[]":
+                    value = value.Replace("{", "").Replace("}", "");
                     return $"[{value}]";
                 case "string[]":
                 case "int[][]":
@@ -568,13 +570,17 @@ namespace ET
                 case "long":
                 case "float":
                 case "double":
+                    value = value.Replace("{", "").Replace("}", "");
                     if (value == "")
                     {
                         return "0";
                     }
-
                     return value;
                 case "string":
+                    if (value.Contains("{") && value.Contains("}"))
+                    {
+                        Log.Console($"value: {value}");
+                    }
                     value = value.Replace("\\", "\\\\");
                     value = value.Replace("\"", "\\\"");
                     return $"\"{value}\"";

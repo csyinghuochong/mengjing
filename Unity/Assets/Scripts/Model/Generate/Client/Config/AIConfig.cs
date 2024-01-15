@@ -65,7 +65,7 @@ namespace ET
 		/// <summary>节点名字</summary>
 		public string Name { get; set; }
 		/// <summary>节点参数</summary>
-		public int[] NodeParams { get; set; }
+		public string NodeParams { get; set; }
 
 	}
 }

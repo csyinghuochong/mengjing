@@ -58,14 +58,16 @@ namespace ET
 	{
 		/// <summary>Id</summary>
 		public int Id { get; set; }
-		/// <summary>所属进程</summary>
-		public int Process { get; set; }
 		/// <summary>所属区</summary>
 		public int Zone { get; set; }
+		/// <summary>所属进程</summary>
+		public int Process { get; set; }
 		/// <summary>类型</summary>
 		public string SceneType { get; set; }
 		/// <summary>名字</summary>
 		public string Name { get; set; }
+		/// <summary>外网端口</summary>
+		public int OuterPort { get; set; }
 		/// <summary>外网端口</summary>
 		public int Port { get; set; }
 
