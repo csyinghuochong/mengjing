@@ -35,7 +35,7 @@ namespace ET.Client
                 }
                 if (this.m_ELoginButton == null)
                 {
-                    this.m_ELoginButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject, "Sprite_BackGround/ELogin");
+                    this.m_ELoginButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject, "HideNode/BanHanNode/LoginBtn");
                 }
                 return this.m_ELoginButton;
             }
