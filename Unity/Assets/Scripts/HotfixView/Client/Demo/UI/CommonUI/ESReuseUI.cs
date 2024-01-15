@@ -4,7 +4,7 @@
     {
         public static void Test(this ESReuseUI self)
         {
-            self.ELabel_testText.text = "22222222222";
+            self.ELabel_testText.text = "这是一个公共组件";
         }
     }
 }

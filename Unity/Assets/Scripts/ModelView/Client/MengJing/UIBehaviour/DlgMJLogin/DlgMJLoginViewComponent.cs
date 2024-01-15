@@ -69,7 +69,7 @@ namespace ET.Client
                 }
                 if (this.m_EAccountInputField == null)
                 {
-                    this.m_EAccountInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject, "Sprite_BackGround/EAccount");
+                    this.m_EAccountInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject, "Panel/Account");
                 }
                 return this.m_EAccountInputField;
             }
@@ -103,7 +103,7 @@ namespace ET.Client
                 }
                 if (this.m_EPasswordInputField == null)
                 {
-                    this.m_EPasswordInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject, "Sprite_BackGround/EPassword");
+                    this.m_EPasswordInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject, "Panel/Password");
                 }
                 return this.m_EPasswordInputField;
             }
