@@ -6,7 +6,7 @@
         protected override async ETTask Run(Scene root, AppStartInitFinish args)
         {
             Log.Debug("AppStartInitFinish_CreateLoginUI");
-            await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Login);
+            await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_MJLogin);
         }
     }
 }
