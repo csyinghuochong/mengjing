@@ -8,6 +8,9 @@ namespace ET
     [DebuggerDisplay("ViewName,nq")]
     public partial class Unit: Entity, IAwake<int>
     {
+
+        public int Type { get; set; }
+
         public int ConfigId { get; set; } //配置表id
 
         [BsonElement]
