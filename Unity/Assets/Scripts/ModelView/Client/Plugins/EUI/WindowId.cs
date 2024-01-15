@@ -11,5 +11,7 @@ namespace ET.Client
     	WindowID_LSLobby,
 		WindowID_LSLogin,
 		WindowID_LSRoom,
-	}
+
+        WindowID_MJLogin,     //登录界面(所有和demo有冲突的都加上MJ作为前缀)
+    }
 }
