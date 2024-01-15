@@ -1,6 +1,5 @@
 
 using UnityEngine;
-using UnityEngine.UI;
 namespace ET.Client
 {
     [ComponentOf(typeof(DlgMJLogin))]
