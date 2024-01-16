@@ -88,7 +88,7 @@ namespace ET
                         Log.Error($"init fiber fail: {sceneType} {e}");
                     }
                 });
-
+                
                 await tcs.Task;
                 return fiberId;
             }

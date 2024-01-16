@@ -24,16 +24,35 @@ namespace ET
 		LockStepServer = 1 << 17,
 		RoomRoot = 1 << 18,
 		Watcher = 1 << 19,
+        Account = 1 << 20,
+        Activity = 1 << 25,
+        Arena = 1 << 33,
+        Battle = 1 << 32,
+        Chat = 1 << 23,
+        DBCache = 1 << 22,
+        EMail = 1 << 24,
+        Friend = 1 << 25,
+        FubenCenter = 1 << 26,
+        Happy = 1 << 27,
+        JiaYuan = 1 << 28,
+        LocalDungeon = 1 << 29,
+        PaiMai = 1 << 30,
+        Popularize = 1 << 31,
+        Queue = 1 << 32,
+        Rank = 1 << 33,
+        Solo = 1 << 34,
+        Team = 1 << 35,
+        Union = 1 << 36,
 
-		// 客户端
-		Demo = 1 << 30,
-		Current = 1L << 31,
-		LockStep = 1L << 32,
-		LockStepView = 1L << 33,
-		DemoView = 1L << 34,
-		NetClient = 1L << 35,
+        // 客户端
+        Demo = 1 << 50,
+		Current = 1L << 51,
+		LockStep = 1L << 52,
+		LockStepView = 1L << 53,
+		DemoView = 1L << 54,
+		NetClient = 1L << 55,
 
-		All = long.MaxValue,
+        All = long.MaxValue,
 	}
 
 	public static class SceneTypeHelper
