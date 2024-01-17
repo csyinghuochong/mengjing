@@ -90,7 +90,7 @@ namespace ET.Client
                 // GameSettingLanguge.TransformText(ui.GameObject.transform);
                 // GameSettingLanguge.TransformImage(ui.GameObject.transform);
 
-                if (ui.GameObject.GetComponent<UILayerScript>().UIType == ET.UIEnum.FullScreen)
+                if (ui.GameObject.GetComponent<UILayerScript>().UIType == UIEnum.FullScreen)
                 {
                     ui.GameObject.transform.GetComponent<RectTransform>().offsetMax = Vector2.zero;
                     ui.GameObject.transform.GetComponent<RectTransform>().offsetMin = Vector2.zero;
