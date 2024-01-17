@@ -15,11 +15,19 @@ namespace ET.Client
         {
             ReferenceCollector rc = self.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
 
+            self.UIAgeTip = rc.Get<GameObject>("UIAgeTip");
             self.AccountInF = rc.Get<GameObject>("AccountInF");
             self.PasswordInF = rc.Get<GameObject>("PasswordInF");
             self.EnterBtn = rc.Get<GameObject>("EnterBtn");
 
+            self.UIAgeTip.SetActive(false);
+            self.UIAgeTip.transform.Find("CloseBtn").GetComponent<Button>().onClick.AddListener(() => { self.OnCloseBtn_UIAgeTip(); });
             self.EnterBtn.GetComponent<Button>().onClick.AddListener(() => { self.OnLogin().Coroutine(); });
+        }
+
+        public static void OnCloseBtn_UIAgeTip(this UILoginComponent self)
+        {
+            self.UIAgeTip.SetActive(false);
         }
 
         public static async ETTask OnLogin(this UILoginComponent self)
