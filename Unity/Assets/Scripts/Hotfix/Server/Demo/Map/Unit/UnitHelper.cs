@@ -55,9 +55,6 @@ namespace ET.Server
             {
                 unit = UnitFactory.Create(scene, player.UnitId, UnitType.Player);
 
-                var roleInfos = await DBManagerComponent.Instance.GetZoneDB(player.Zone()).Query<RoleInfo>(d => d.Id == player.UnitId);
-                unit.AddComponent(roleInfos[0]);
-
                 UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
             }
 

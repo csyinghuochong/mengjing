@@ -11,7 +11,6 @@ namespace ET.Client
     {
         
     }
-    
 
     [ComponentOf()]
     [ChildOf(typeof(UIBaseWindow))]

@@ -38,7 +38,7 @@ namespace ET
 
         public StartSceneConfig GetUnitCacheConfig(int zone)
         {
-            return UnitCaches[zone];
+            return this.UnitCaches[zone];
         }
 
         public override void EndInit()

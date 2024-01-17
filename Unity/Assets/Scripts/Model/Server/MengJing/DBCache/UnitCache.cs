@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
     public interface IUnitCache
@@ -8,10 +8,10 @@ namespace ET
 
     }
 
-
+    [ChildOf(typeof(UnitCacheComponent))] 
     public class UnitCache : Entity, IAwake, IDestroy
     {
-        public string key;
+        public string key {  get; set; }
 
         public Dictionary<long, Entity> CacheCompoenntsDictionary = new Dictionary<long, Entity>();
     }

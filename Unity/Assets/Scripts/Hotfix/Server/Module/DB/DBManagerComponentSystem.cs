@@ -3,8 +3,22 @@
 namespace ET.Server
 {
     [FriendOf(typeof(DBManagerComponent))]
+    [EntitySystemOf(typeof(DBManagerComponent))]
     public static partial class DBManagerComponentSystem
     {
+
+        [EntitySystem]
+        private static void Awake(this DBManagerComponent self)
+        {
+            DBManagerComponent.Instance = self;
+        }
+
+        [EntitySystem]
+        private static void Destroy(this DBManagerComponent self)
+        {
+            DBManagerComponent.Instance = null;
+        }
+
         public static DBComponent GetZoneDB(this DBManagerComponent self, int zone)
         {
             DBComponent dbComponent = self.DBComponents[zone];
