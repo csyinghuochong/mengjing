@@ -45,5 +45,23 @@ namespace ET.Server
         {
             return self.GetComponent<AOIEntity>().GetBeSeePlayers();
         }
+
+        public static async ETTask<(bool, Unit)> LoadUnit(Player player, Scene scene)
+        {
+            Unit unit = await UnitCacheHelper.GetUnitCache(scene, player.UnitId);
+
+            bool isNewUnit = unit == null;
+            if (isNewUnit)
+            {
+                unit = UnitFactory.Create(scene, player.UnitId, UnitType.Player);
+
+                var roleInfos = await DBManagerComponent.Instance.GetZoneDB(player.Zone()).Query<RoleInfo>(d => d.Id == player.UnitId);
+                unit.AddComponent(roleInfos[0]);
+
+                UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
+            }
+
+            return (isNewUnit, unit);
+        }
     }
 }

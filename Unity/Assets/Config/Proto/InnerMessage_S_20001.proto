@@ -176,3 +176,59 @@ message M2M_UnitTransferResponse // IResponse
 	int32 Error = 2;
 	string Message = 3;
 }
+
+//----------玩家缓存相关----------------
+//增加或者更新Unit缓存
+//ResponseType UnitCache2Other_AddOrUpdateUnit
+message Other2UnitCache_AddOrUpdateUnit // IRequest
+{
+	 int32 RpcId = 90;
+
+     int64 UnitId = 1;				  // 需要缓存的UnitId
+     repeated string EntityTypes = 2;  //实体类型
+     repeated bytes EntityBytes = 3;   //实体序列化后的bytes
+}
+
+message UnitCache2Other_AddOrUpdateUnit // IResponse
+{
+	int32 RpcId = 90;
+    int32 Error = 91;
+    string Message = 92;
+}
+
+//获取Unit缓存
+//ResponseType UnitCache2Other_GetUnit
+message Other2UnitCache_GetUnit //IRequest
+{
+    int32 RpcId = 90;
+
+    int64 UnitId = 1;
+    repeated string ComponentNameList = 2; //需要获取的组件名
+}
+
+message UnitCache2Other_GetUnit //IResponse
+{
+    int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	repeated Entity EntityList = 1;
+	repeated string ComponentNameList = 2;
+}
+
+//删除Unit缓存
+//ResponseType UnitCache2Other_DeleteUnit
+message Other2UnitCache_DeleteUnit // IRequest
+{
+   int32 RpcId = 90;
+
+   int64 UnitId = 1;    
+}
+
+message UnitCache2Other_DeleteUnit // IResponse
+{
+    int32 RpcId = 90;
+    int32 Error = 91;
+    string Message = 92;
+}
+//----------玩家缓存相关----------------

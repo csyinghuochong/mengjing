@@ -9,9 +9,9 @@ namespace ET
             self.ConfigId = configId;
         }
 
-        public static UnitType Type(this Unit self)
+        public static int Type(this Unit self)
         {
-            return (UnitType)self.Type;
+            return self.Type;
         }
     }
 }

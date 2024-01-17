@@ -31,7 +31,7 @@
             <Link>Server\%(RecursiveDir)%(FileName)%(Extension)</Link> 
         </Compile>
 
-        <Compile Include="..\..\Unity\Assets\Scripts\Model\Client\**\*.cs"> 
+		<Compile Include="..\..\Unity\Assets\Scripts\Model\Client\**\*.cs"> 
             <Link>Client\%(RecursiveDir)%(FileName)%(Extension)</Link>
         </Compile>
         

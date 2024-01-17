@@ -1,9 +1,9 @@
 ﻿namespace ET
 {
-    public enum UnitType: byte
+    public static class UnitType
     {
-        Player = 1,
-        Monster = 2,
-        NPC = 3,
+        public const int Player = 1;
+        public const int Monster = 2;
+        public const int NPC = 3;
     }
 }
