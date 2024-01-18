@@ -35,6 +35,8 @@ namespace ET.Client
             self.View.E_TaskButton.AddListener(self.OnTaskButton);
             self.View.E_FriendButton.AddListener(self.OnFriendButton);
             self.View.E_ChengJiuButton.AddListener(self.OnChengJiuButton);
+            self.View.E_AdventureButton.AddListener(self.OnAdventureButton);
+            self.View.E_PetFormationButton.AddListener(self.OnPetFormationButton);
 
             self.View.E_YaoGanDiMoveEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
                 (pdata) => { self.PointerDown_Move(pdata as PointerEventData); });
@@ -95,6 +97,16 @@ namespace ET.Client
         private static void OnChengJiuButton(this DlgMain self)
         {
             Log.Debug("打开成就界面！！！");
+        }
+
+        private static void OnAdventureButton(this DlgMain self)
+        {
+            Log.Debug("进入冒险！！！");
+        }
+
+        private static void OnPetFormationButton(this DlgMain self)
+        {
+            Log.Debug("进入宠物探险！！！");
         }
 
         # region 摇杆

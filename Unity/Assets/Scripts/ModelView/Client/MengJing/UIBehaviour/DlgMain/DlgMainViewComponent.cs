@@ -381,6 +381,74 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_AdventureButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_AdventureButton == null )
+     			{
+		    		this.m_E_AdventureButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"DoMoveRight/HomeBtns/E_Adventure");
+     			}
+     			return this.m_E_AdventureButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_AdventureImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_AdventureImage == null )
+     			{
+		    		this.m_E_AdventureImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveRight/HomeBtns/E_Adventure");
+     			}
+     			return this.m_E_AdventureImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_PetFormationButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetFormationButton == null )
+     			{
+		    		this.m_E_PetFormationButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"DoMoveRight/HomeBtns/E_PetFormation");
+     			}
+     			return this.m_E_PetFormationButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_PetFormationImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetFormationImage == null )
+     			{
+		    		this.m_E_PetFormationImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveRight/HomeBtns/E_PetFormation");
+     			}
+     			return this.m_E_PetFormationImage;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_EG_JoystickMoveRectTransform = null;
@@ -405,6 +473,10 @@ namespace ET.Client
 			this.m_E_FriendImage = null;
 			this.m_E_ChengJiuButton = null;
 			this.m_E_ChengJiuImage = null;
+			this.m_E_AdventureButton = null;
+			this.m_E_AdventureImage = null;
+			this.m_E_PetFormationButton = null;
+			this.m_E_PetFormationImage = null;
 			this.uiTransform = null;
 		}
 
@@ -430,6 +502,10 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_FriendImage = null;
 		private UnityEngine.UI.Button m_E_ChengJiuButton = null;
 		private UnityEngine.UI.Image m_E_ChengJiuImage = null;
+		private UnityEngine.UI.Button m_E_AdventureButton = null;
+		private UnityEngine.UI.Image m_E_AdventureImage = null;
+		private UnityEngine.UI.Button m_E_PetFormationButton = null;
+		private UnityEngine.UI.Image m_E_PetFormationImage = null;
 		public Transform uiTransform = null;
 	}
 }
