@@ -1,15 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(DlgMJLogin))]
+    [FriendOf(typeof (DlgMJLogin))]
     public static class DlgMJLoginSystem
     {
-
         public static void RegisterUIEvent(this DlgMJLogin self)
         {
             self.View.ELoginButton.AddListener(self.OnLogin);
@@ -35,8 +31,8 @@ namespace ET.Client
                 self.Root(),
                 self.View.EAccountInputField.text,
                 self.View.EPasswordInputField.text).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_MJLobby).Coroutine();
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MJLogin);
         }
-
-
     }
 }
