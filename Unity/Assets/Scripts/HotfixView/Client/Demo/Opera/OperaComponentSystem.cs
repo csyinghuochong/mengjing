@@ -3,6 +3,20 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    public enum LayerEnum
+    {
+        Drop,
+        NPC,
+        Terrain,
+        Monster,
+        Player,
+        Map,
+        RenderTexture,
+        Box,
+        Obstruct,
+        Building,
+    }
+
     [EntitySystemOf(typeof(OperaComponent))]
     [FriendOf(typeof(OperaComponent))]
     public static partial class OperaComponentSystem

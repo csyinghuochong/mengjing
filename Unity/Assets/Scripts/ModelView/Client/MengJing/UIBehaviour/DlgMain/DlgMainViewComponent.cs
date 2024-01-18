@@ -7,6 +7,125 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgMainViewComponent : Entity,IAwake,IDestroy 
 	{
+		public UnityEngine.RectTransform EG_JoystickMoveRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_JoystickMoveRectTransform == null )
+     			{
+		    		this.m_EG_JoystickMoveRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_JoystickMove");
+     			}
+     			return this.m_EG_JoystickMoveRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_YaoGanDiMoveImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_YaoGanDiMoveImage == null )
+     			{
+		    		this.m_E_YaoGanDiMoveImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_JoystickMove/E_YaoGanDiMove");
+     			}
+     			return this.m_E_YaoGanDiMoveImage;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_YaoGanDiMoveEventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_YaoGanDiMoveEventTrigger == null )
+     			{
+		    		this.m_E_YaoGanDiMoveEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"EG_JoystickMove/E_YaoGanDiMove");
+     			}
+     			return this.m_E_YaoGanDiMoveEventTrigger;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_YaoGanDiFixImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_YaoGanDiFixImage == null )
+     			{
+		    		this.m_E_YaoGanDiFixImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_JoystickMove/E_YaoGanDiFix");
+     			}
+     			return this.m_E_YaoGanDiFixImage;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_YaoGanDiFixEventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_YaoGanDiFixEventTrigger == null )
+     			{
+		    		this.m_E_YaoGanDiFixEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"EG_JoystickMove/E_YaoGanDiFix");
+     			}
+     			return this.m_E_YaoGanDiFixEventTrigger;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_CenterShowImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CenterShowImage == null )
+     			{
+		    		this.m_E_CenterShowImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_JoystickMove/E_YaoGanDiFix/E_CenterShow");
+     			}
+     			return this.m_E_CenterShowImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ThumbImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ThumbImage == null )
+     			{
+		    		this.m_E_ThumbImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_JoystickMove/E_YaoGanDiFix/E_Thumb");
+     			}
+     			return this.m_E_ThumbImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_ShrinkButton
      	{
      		get
@@ -264,6 +383,13 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_EG_JoystickMoveRectTransform = null;
+			this.m_E_YaoGanDiMoveImage = null;
+			this.m_E_YaoGanDiMoveEventTrigger = null;
+			this.m_E_YaoGanDiFixImage = null;
+			this.m_E_YaoGanDiFixEventTrigger = null;
+			this.m_E_CenterShowImage = null;
+			this.m_E_ThumbImage = null;
 			this.m_E_ShrinkButton = null;
 			this.m_E_ShrinkImage = null;
 			this.m_EG_LeftBottomBtnsRectTransform = null;
@@ -282,6 +408,13 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.RectTransform m_EG_JoystickMoveRectTransform = null;
+		private UnityEngine.UI.Image m_E_YaoGanDiMoveImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_YaoGanDiMoveEventTrigger = null;
+		private UnityEngine.UI.Image m_E_YaoGanDiFixImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_YaoGanDiFixEventTrigger = null;
+		private UnityEngine.UI.Image m_E_CenterShowImage = null;
+		private UnityEngine.UI.Image m_E_ThumbImage = null;
 		private UnityEngine.UI.Button m_E_ShrinkButton = null;
 		private UnityEngine.UI.Image m_E_ShrinkImage = null;
 		private UnityEngine.RectTransform m_EG_LeftBottomBtnsRectTransform = null;

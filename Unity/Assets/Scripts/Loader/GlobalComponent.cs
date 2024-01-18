@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ET
 {
-    [FriendOf(typeof(GlobalComponent))]
+    [FriendOf(typeof (GlobalComponent))]
     public static partial class GlobalComponentSystem
     {
         [EntitySystem]
@@ -15,13 +15,15 @@ namespace ET
             self.PopUpRoot = GameObject.Find("/Global/UI/PopUpRoot").transform;
             self.FixedRoot = GameObject.Find("/Global/UI/FixedRoot").transform;
             self.OtherRoot = GameObject.Find("/Global/UI/OtherRoot").transform;
-            self.PoolRoot =  GameObject.Find("/Global/PoolRoot").transform;
-            
+            self.PoolRoot = GameObject.Find("/Global/PoolRoot").transform;
+            self.MainCamera = GameObject.Find("/Global/MainCamera").transform;
+            self.UICamera = GameObject.Find("/Global/UICamera").transform;
+
             self.GlobalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
         }
     }
-    
-    [ComponentOf(typeof(Scene))]
+
+    [ComponentOf(typeof (Scene))]
     public class GlobalComponent: Entity, IAwake
     {
         public Transform Global;
@@ -29,11 +31,15 @@ namespace ET
         public Transform UI;
 
         public GlobalConfig GlobalConfig { get; set; }
-        
-        public Transform NormalRoot{ get; set; }
-        public Transform PopUpRoot{ get; set; }
-        public Transform FixedRoot{ get; set; }
-        public Transform PoolRoot{ get; set; }
-        public Transform OtherRoot{ get; set; }
+
+        public Transform NormalRoot { get; set; }
+        public Transform PopUpRoot { get; set; }
+        public Transform FixedRoot { get; set; }
+        public Transform PoolRoot { get; set; }
+        public Transform OtherRoot { get; set; }
+
+        public Transform MainCamera { get; set; }
+
+        public Transform UICamera { get; set; }
     }
 }
