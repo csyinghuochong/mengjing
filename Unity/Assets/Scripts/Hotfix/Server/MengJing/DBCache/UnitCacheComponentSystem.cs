@@ -17,6 +17,11 @@ namespace ET.Server
             self.UnitCacheKeyList.Clear();
             foreach ((string key, Type type) in CodeTypes.Instance.GetTypes())
             {
+                if (key.Contains("Bag"))
+                {
+                    Log.Error("1");
+                }
+
                 if (type != typeof(IUnitCache) && typeof(IUnitCache).IsAssignableFrom(type))
                 {
                     self.UnitCacheKeyList.Add(type.Name);
