@@ -11,11 +11,11 @@ namespace ET.Client
         {
             Log.Debug("EntryEvent3_InitClient");
             GlobalComponent globalComponent = root.AddComponent<GlobalComponent>();
-            // root.AddComponent<UIPathComponent>();
-            // root.AddComponent<UIEventComponent>();
-            // root.AddComponent<UIComponent>();
-            root.AddComponent<MJUIEventComponent>();
-            root.AddComponent<MJUIComponent>();
+            root.AddComponent<UIPathComponent>();
+            root.AddComponent<UIEventComponent>();
+            root.AddComponent<UIComponent>();
+            // root.AddComponent<MJUIEventComponent>();
+            // root.AddComponent<MJUIComponent>();
             
             root.AddComponent<ResourcesLoaderComponent>();
             root.AddComponent<PlayerComponent>();
