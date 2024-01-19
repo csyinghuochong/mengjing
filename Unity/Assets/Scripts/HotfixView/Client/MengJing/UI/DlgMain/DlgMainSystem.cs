@@ -35,8 +35,14 @@ namespace ET.Client
             self.View.E_TaskButton.AddListener(self.OnTaskButton);
             self.View.E_FriendButton.AddListener(self.OnFriendButton);
             self.View.E_ChengJiuButton.AddListener(self.OnChengJiuButton);
+
             self.View.E_AdventureButton.AddListener(self.OnAdventureButton);
             self.View.E_PetFormationButton.AddListener(self.OnPetFormationButton);
+            self.View.E_CityHorseButton.AddListener(self.OnCityHorseButton);
+            self.View.E_TeamDungeonButton.AddListener(self.OnTeamDungeonButton);
+            self.View.E_JiaYuanButton.AddListener(self.OnJiaYuanButton);
+            self.View.E_NpcDuiHuaButton.AddListener(self.OnNpcDuiHuaButton);
+            self.View.E_UnionButton.AddListener(self.OnUnionButton);
 
             self.View.E_YaoGanDiMoveEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
                 (pdata) => { self.PointerDown_Move(pdata as PointerEventData); });
@@ -107,6 +113,31 @@ namespace ET.Client
         private static void OnPetFormationButton(this DlgMain self)
         {
             Log.Debug("进入宠物探险！！！");
+        }
+
+        private static void OnCityHorseButton(this DlgMain self)
+        {
+            Log.Debug("骑乘！！！");
+        }
+
+        private static void OnTeamDungeonButton(this DlgMain self)
+        {
+            Log.Debug("组队副本！！！");
+        }
+
+        private static void OnJiaYuanButton(this DlgMain self)
+        {
+            Log.Debug("家园！！！");
+        }
+
+        private static void OnNpcDuiHuaButton(this DlgMain self)
+        {
+            Log.Debug("对话！！！");
+        }
+
+        private static void OnUnionButton(this DlgMain self)
+        {
+            Log.Debug("家族！！！");
         }
 
         # region 摇杆

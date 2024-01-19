@@ -585,6 +585,210 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_CityHorseButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CityHorseButton == null )
+     			{
+		    		this.m_E_CityHorseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"DoMoveRight/HomeButton/E_CityHorse");
+     			}
+     			return this.m_E_CityHorseButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_CityHorseImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CityHorseImage == null )
+     			{
+		    		this.m_E_CityHorseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveRight/HomeButton/E_CityHorse");
+     			}
+     			return this.m_E_CityHorseImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_TeamDungeonButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TeamDungeonButton == null )
+     			{
+		    		this.m_E_TeamDungeonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"DoMoveRight/HomeButton/E_TeamDungeon");
+     			}
+     			return this.m_E_TeamDungeonButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_TeamDungeonImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TeamDungeonImage == null )
+     			{
+		    		this.m_E_TeamDungeonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveRight/HomeButton/E_TeamDungeon");
+     			}
+     			return this.m_E_TeamDungeonImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_JiaYuanButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_JiaYuanButton == null )
+     			{
+		    		this.m_E_JiaYuanButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"DoMoveRight/HomeButton/E_JiaYuan");
+     			}
+     			return this.m_E_JiaYuanButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_JiaYuanImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_JiaYuanImage == null )
+     			{
+		    		this.m_E_JiaYuanImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveRight/HomeButton/E_JiaYuan");
+     			}
+     			return this.m_E_JiaYuanImage;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_JiaYuanEventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_JiaYuanEventTrigger == null )
+     			{
+		    		this.m_E_JiaYuanEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"DoMoveRight/HomeButton/E_JiaYuan");
+     			}
+     			return this.m_E_JiaYuanEventTrigger;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_NpcDuiHuaButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_NpcDuiHuaButton == null )
+     			{
+		    		this.m_E_NpcDuiHuaButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"DoMoveRight/HomeButton/E_NpcDuiHua");
+     			}
+     			return this.m_E_NpcDuiHuaButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_NpcDuiHuaImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_NpcDuiHuaImage == null )
+     			{
+		    		this.m_E_NpcDuiHuaImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveRight/HomeButton/E_NpcDuiHua");
+     			}
+     			return this.m_E_NpcDuiHuaImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_UnionButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_UnionButton == null )
+     			{
+		    		this.m_E_UnionButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"DoMoveRight/HomeButton/E_Union");
+     			}
+     			return this.m_E_UnionButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_UnionImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_UnionImage == null )
+     			{
+		    		this.m_E_UnionImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveRight/HomeButton/E_Union");
+     			}
+     			return this.m_E_UnionImage;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_UnionEventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_UnionEventTrigger == null )
+     			{
+		    		this.m_E_UnionEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"DoMoveRight/HomeButton/E_Union");
+     			}
+     			return this.m_E_UnionEventTrigger;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_EG_JoystickMoveRectTransform = null;
@@ -621,6 +825,18 @@ namespace ET.Client
 			this.m_E_PetFormationButton = null;
 			this.m_E_PetFormationImage = null;
 			this.m_E_PetFormationEventTrigger = null;
+			this.m_E_CityHorseButton = null;
+			this.m_E_CityHorseImage = null;
+			this.m_E_TeamDungeonButton = null;
+			this.m_E_TeamDungeonImage = null;
+			this.m_E_JiaYuanButton = null;
+			this.m_E_JiaYuanImage = null;
+			this.m_E_JiaYuanEventTrigger = null;
+			this.m_E_NpcDuiHuaButton = null;
+			this.m_E_NpcDuiHuaImage = null;
+			this.m_E_UnionButton = null;
+			this.m_E_UnionImage = null;
+			this.m_E_UnionEventTrigger = null;
 			this.uiTransform = null;
 		}
 
@@ -658,6 +874,18 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_PetFormationButton = null;
 		private UnityEngine.UI.Image m_E_PetFormationImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_PetFormationEventTrigger = null;
+		private UnityEngine.UI.Button m_E_CityHorseButton = null;
+		private UnityEngine.UI.Image m_E_CityHorseImage = null;
+		private UnityEngine.UI.Button m_E_TeamDungeonButton = null;
+		private UnityEngine.UI.Image m_E_TeamDungeonImage = null;
+		private UnityEngine.UI.Button m_E_JiaYuanButton = null;
+		private UnityEngine.UI.Image m_E_JiaYuanImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_JiaYuanEventTrigger = null;
+		private UnityEngine.UI.Button m_E_NpcDuiHuaButton = null;
+		private UnityEngine.UI.Image m_E_NpcDuiHuaImage = null;
+		private UnityEngine.UI.Button m_E_UnionButton = null;
+		private UnityEngine.UI.Image m_E_UnionImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_UnionEventTrigger = null;
 		public Transform uiTransform = null;
 	}
 }
