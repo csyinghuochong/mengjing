@@ -500,6 +500,74 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_MainCityShowImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MainCityShowImage == null )
+     			{
+		    		this.m_E_MainCityShowImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveRight/UIMapMini/E_MainCityShow");
+     			}
+     			return this.m_E_MainCityShowImage;
+     		}
+     	}
+
+		public UnityEngine.UI.RawImage E_RawImageRawImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RawImageRawImage == null )
+     			{
+		    		this.m_E_RawImageRawImage = UIFindHelper.FindDeepChild<UnityEngine.UI.RawImage>(this.uiTransform.gameObject,"DoMoveRight/UIMapMini/E_MainCityShow/ImageDi_1/E_RawImage");
+     			}
+     			return this.m_E_RawImageRawImage;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_HeadListRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_HeadListRectTransform == null )
+     			{
+		    		this.m_EG_HeadListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"DoMoveRight/UIMapMini/E_MainCityShow/ImageDi_1/EG_HeadList");
+     			}
+     			return this.m_EG_HeadListRectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_HeadItemRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_HeadItemRectTransform == null )
+     			{
+		    		this.m_EG_HeadItemRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"DoMoveRight/UIMapMini/E_MainCityShow/ImageDi_1/EG_HeadList/EG_HeadItem");
+     			}
+     			return this.m_EG_HeadItemRectTransform;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_AdventureButton
      	{
      		get
@@ -789,6 +857,57 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_MapNameText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MapNameText == null )
+     			{
+		    		this.m_E_MapNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"MainTextUISet/RightUpSet/MapMini/E_MapName");
+     			}
+     			return this.m_E_MapNameText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_TianQiText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TianQiText == null )
+     			{
+		    		this.m_E_TianQiText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"MainTextUISet/RightUpSet/MapMini/E_TianQi");
+     			}
+     			return this.m_E_TianQiText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_TimeText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TimeText == null )
+     			{
+		    		this.m_E_TimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"MainTextUISet/RightUpSet/MapMini/E_Time");
+     			}
+     			return this.m_E_TimeText;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_EG_JoystickMoveRectTransform = null;
@@ -820,6 +939,10 @@ namespace ET.Client
 			this.m_E_FriendImage = null;
 			this.m_E_ChengJiuButton = null;
 			this.m_E_ChengJiuImage = null;
+			this.m_E_MainCityShowImage = null;
+			this.m_E_RawImageRawImage = null;
+			this.m_EG_HeadListRectTransform = null;
+			this.m_EG_HeadItemRectTransform = null;
 			this.m_E_AdventureButton = null;
 			this.m_E_AdventureImage = null;
 			this.m_E_PetFormationButton = null;
@@ -837,6 +960,9 @@ namespace ET.Client
 			this.m_E_UnionButton = null;
 			this.m_E_UnionImage = null;
 			this.m_E_UnionEventTrigger = null;
+			this.m_E_MapNameText = null;
+			this.m_E_TianQiText = null;
+			this.m_E_TimeText = null;
 			this.uiTransform = null;
 		}
 
@@ -869,6 +995,10 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_FriendImage = null;
 		private UnityEngine.UI.Button m_E_ChengJiuButton = null;
 		private UnityEngine.UI.Image m_E_ChengJiuImage = null;
+		private UnityEngine.UI.Image m_E_MainCityShowImage = null;
+		private UnityEngine.UI.RawImage m_E_RawImageRawImage = null;
+		private UnityEngine.RectTransform m_EG_HeadListRectTransform = null;
+		private UnityEngine.RectTransform m_EG_HeadItemRectTransform = null;
 		private UnityEngine.UI.Button m_E_AdventureButton = null;
 		private UnityEngine.UI.Image m_E_AdventureImage = null;
 		private UnityEngine.UI.Button m_E_PetFormationButton = null;
@@ -886,6 +1016,9 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_UnionButton = null;
 		private UnityEngine.UI.Image m_E_UnionImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_UnionEventTrigger = null;
+		private UnityEngine.UI.Text m_E_MapNameText = null;
+		private UnityEngine.UI.Text m_E_TianQiText = null;
+		private UnityEngine.UI.Text m_E_TimeText = null;
 		public Transform uiTransform = null;
 	}
 }
