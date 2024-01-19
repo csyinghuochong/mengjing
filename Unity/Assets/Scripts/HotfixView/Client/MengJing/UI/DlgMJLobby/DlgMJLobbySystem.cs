@@ -20,11 +20,8 @@ namespace ET.Client
 
         private static async ETTask OnEnterMapButton(this DlgMJLobby self)
         {
-            // 测试。。。
-            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Main);
-            
             await EnterMapHelper.EnterMapAsync(self.Root());
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Lobby);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MJLobby);
         }
     }
 }

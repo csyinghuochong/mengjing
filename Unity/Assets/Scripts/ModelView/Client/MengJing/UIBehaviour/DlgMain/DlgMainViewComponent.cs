@@ -137,7 +137,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RoseTaskButton == null )
      			{
-		    		this.m_E_RoseTaskButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"DoMoveLeft/MainTask/E_RoseTask");
+		    		this.m_E_RoseTaskButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"DoMoveLeft/PhoneLeft/UIMainTask/E_RoseTask");
      			}
      			return this.m_E_RoseTaskButton;
      		}
@@ -154,94 +154,9 @@ namespace ET.Client
      			}
      			if( this.m_E_RoseTaskImage == null )
      			{
-		    		this.m_E_RoseTaskImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveLeft/MainTask/E_RoseTask");
+		    		this.m_E_RoseTaskImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveLeft/PhoneLeft/UIMainTask/E_RoseTask");
      			}
      			return this.m_E_RoseTaskImage;
-     		}
-     	}
-
-		public UnityEngine.UI.LoopVerticalScrollRect E_MainTaskListLoopVerticalScrollRect
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_MainTaskListLoopVerticalScrollRect == null )
-     			{
-		    		this.m_E_MainTaskListLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"DoMoveLeft/MainTask/E_MainTaskList");
-     			}
-     			return this.m_E_MainTaskListLoopVerticalScrollRect;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_TaskNameText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_TaskNameText == null )
-     			{
-		    		this.m_E_TaskNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"DoMoveLeft/MainTask/E_MainTaskList/Content/Item_MainTask/E_TaskName");
-     			}
-     			return this.m_E_TaskNameText;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_TaskDesText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_TaskDesText == null )
-     			{
-		    		this.m_E_TaskDesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"DoMoveLeft/MainTask/E_MainTaskList/Content/Item_MainTask/E_TaskDes");
-     			}
-     			return this.m_E_TaskDesText;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_ClickButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ClickButton == null )
-     			{
-		    		this.m_E_ClickButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"DoMoveLeft/MainTask/E_MainTaskList/Content/Item_MainTask/E_Click");
-     			}
-     			return this.m_E_ClickButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ClickImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ClickImage == null )
-     			{
-		    		this.m_E_ClickImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveLeft/MainTask/E_MainTaskList/Content/Item_MainTask/E_Click");
-     			}
-     			return this.m_E_ClickImage;
      		}
      	}
 
@@ -276,6 +191,23 @@ namespace ET.Client
 		    		this.m_E_ShrinkImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveBottom/E_Shrink");
      			}
      			return this.m_E_ShrinkImage;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_ShrinkEventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ShrinkEventTrigger == null )
+     			{
+		    		this.m_E_ShrinkEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"DoMoveBottom/E_Shrink");
+     			}
+     			return this.m_E_ShrinkEventTrigger;
      		}
      	}
 
@@ -330,6 +262,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.EventSystems.EventTrigger E_RoseEquipEventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RoseEquipEventTrigger == null )
+     			{
+		    		this.m_E_RoseEquipEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"DoMoveBottom/EG_LeftBottomBtns/E_RoseEquip");
+     			}
+     			return this.m_E_RoseEquipEventTrigger;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_PetButton
      	{
      		get
@@ -361,6 +310,23 @@ namespace ET.Client
 		    		this.m_E_PetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveBottom/EG_LeftBottomBtns/E_Pet");
      			}
      			return this.m_E_PetImage;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_PetEventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetEventTrigger == null )
+     			{
+		    		this.m_E_PetEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"DoMoveBottom/EG_LeftBottomBtns/E_Pet");
+     			}
+     			return this.m_E_PetEventTrigger;
      		}
      	}
 
@@ -398,6 +364,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.EventSystems.EventTrigger E_RoseSkillEventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RoseSkillEventTrigger == null )
+     			{
+		    		this.m_E_RoseSkillEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"DoMoveBottom/EG_LeftBottomBtns/E_RoseSkill");
+     			}
+     			return this.m_E_RoseSkillEventTrigger;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_TaskButton
      	{
      		get
@@ -429,6 +412,23 @@ namespace ET.Client
 		    		this.m_E_TaskImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveBottom/EG_LeftBottomBtns/E_Task");
      			}
      			return this.m_E_TaskImage;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_TaskEventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TaskEventTrigger == null )
+     			{
+		    		this.m_E_TaskEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"DoMoveBottom/EG_LeftBottomBtns/E_Task");
+     			}
+     			return this.m_E_TaskEventTrigger;
      		}
      	}
 
@@ -511,7 +511,7 @@ namespace ET.Client
      			}
      			if( this.m_E_AdventureButton == null )
      			{
-		    		this.m_E_AdventureButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"DoMoveRight/HomeBtns/E_Adventure");
+		    		this.m_E_AdventureButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"DoMoveRight/HomeButton/E_Adventure");
      			}
      			return this.m_E_AdventureButton;
      		}
@@ -528,7 +528,7 @@ namespace ET.Client
      			}
      			if( this.m_E_AdventureImage == null )
      			{
-		    		this.m_E_AdventureImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveRight/HomeBtns/E_Adventure");
+		    		this.m_E_AdventureImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveRight/HomeButton/E_Adventure");
      			}
      			return this.m_E_AdventureImage;
      		}
@@ -545,7 +545,7 @@ namespace ET.Client
      			}
      			if( this.m_E_PetFormationButton == null )
      			{
-		    		this.m_E_PetFormationButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"DoMoveRight/HomeBtns/E_PetFormation");
+		    		this.m_E_PetFormationButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"DoMoveRight/HomeButton/E_PetFormation");
      			}
      			return this.m_E_PetFormationButton;
      		}
@@ -562,9 +562,26 @@ namespace ET.Client
      			}
      			if( this.m_E_PetFormationImage == null )
      			{
-		    		this.m_E_PetFormationImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveRight/HomeBtns/E_PetFormation");
+		    		this.m_E_PetFormationImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveRight/HomeButton/E_PetFormation");
      			}
      			return this.m_E_PetFormationImage;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_PetFormationEventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetFormationEventTrigger == null )
+     			{
+		    		this.m_E_PetFormationEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"DoMoveRight/HomeButton/E_PetFormation");
+     			}
+     			return this.m_E_PetFormationEventTrigger;
      		}
      	}
 
@@ -579,22 +596,22 @@ namespace ET.Client
 			this.m_E_ThumbImage = null;
 			this.m_E_RoseTaskButton = null;
 			this.m_E_RoseTaskImage = null;
-			this.m_E_MainTaskListLoopVerticalScrollRect = null;
-			this.m_E_TaskNameText = null;
-			this.m_E_TaskDesText = null;
-			this.m_E_ClickButton = null;
-			this.m_E_ClickImage = null;
 			this.m_E_ShrinkButton = null;
 			this.m_E_ShrinkImage = null;
+			this.m_E_ShrinkEventTrigger = null;
 			this.m_EG_LeftBottomBtnsRectTransform = null;
 			this.m_E_RoseEquipButton = null;
 			this.m_E_RoseEquipImage = null;
+			this.m_E_RoseEquipEventTrigger = null;
 			this.m_E_PetButton = null;
 			this.m_E_PetImage = null;
+			this.m_E_PetEventTrigger = null;
 			this.m_E_RoseSkillButton = null;
 			this.m_E_RoseSkillImage = null;
+			this.m_E_RoseSkillEventTrigger = null;
 			this.m_E_TaskButton = null;
 			this.m_E_TaskImage = null;
+			this.m_E_TaskEventTrigger = null;
 			this.m_E_FriendButton = null;
 			this.m_E_FriendImage = null;
 			this.m_E_ChengJiuButton = null;
@@ -603,6 +620,7 @@ namespace ET.Client
 			this.m_E_AdventureImage = null;
 			this.m_E_PetFormationButton = null;
 			this.m_E_PetFormationImage = null;
+			this.m_E_PetFormationEventTrigger = null;
 			this.uiTransform = null;
 		}
 
@@ -615,22 +633,22 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_ThumbImage = null;
 		private UnityEngine.UI.Button m_E_RoseTaskButton = null;
 		private UnityEngine.UI.Image m_E_RoseTaskImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_MainTaskListLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Text m_E_TaskNameText = null;
-		private UnityEngine.UI.Text m_E_TaskDesText = null;
-		private UnityEngine.UI.Button m_E_ClickButton = null;
-		private UnityEngine.UI.Image m_E_ClickImage = null;
 		private UnityEngine.UI.Button m_E_ShrinkButton = null;
 		private UnityEngine.UI.Image m_E_ShrinkImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_ShrinkEventTrigger = null;
 		private UnityEngine.RectTransform m_EG_LeftBottomBtnsRectTransform = null;
 		private UnityEngine.UI.Button m_E_RoseEquipButton = null;
 		private UnityEngine.UI.Image m_E_RoseEquipImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_RoseEquipEventTrigger = null;
 		private UnityEngine.UI.Button m_E_PetButton = null;
 		private UnityEngine.UI.Image m_E_PetImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_PetEventTrigger = null;
 		private UnityEngine.UI.Button m_E_RoseSkillButton = null;
 		private UnityEngine.UI.Image m_E_RoseSkillImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_RoseSkillEventTrigger = null;
 		private UnityEngine.UI.Button m_E_TaskButton = null;
 		private UnityEngine.UI.Image m_E_TaskImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_TaskEventTrigger = null;
 		private UnityEngine.UI.Button m_E_FriendButton = null;
 		private UnityEngine.UI.Image m_E_FriendImage = null;
 		private UnityEngine.UI.Button m_E_ChengJiuButton = null;
@@ -639,6 +657,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_AdventureImage = null;
 		private UnityEngine.UI.Button m_E_PetFormationButton = null;
 		private UnityEngine.UI.Image m_E_PetFormationImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_PetFormationEventTrigger = null;
 		public Transform uiTransform = null;
 	}
 }
