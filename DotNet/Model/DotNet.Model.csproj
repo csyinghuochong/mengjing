@@ -43,6 +43,9 @@
             <Link>Generate\%(RecursiveDir)%(FileName)%(Extension)</Link>
         </Compile>
         
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Remove="..\..\Unity\Assets\Scripts\Model\Share\MengJing\BagComponent.cs" />
     </ItemGroup> 
     <ItemGroup> 
         <ProjectReference Include="..\..\Share\Analyzer\Share.Analyzer.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
