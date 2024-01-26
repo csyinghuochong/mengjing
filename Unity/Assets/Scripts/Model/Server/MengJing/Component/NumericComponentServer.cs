@@ -2,47 +2,47 @@ using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Options;
 
-namespace ET.Client
+namespace ET.Server
 {
-    [FriendOf(typeof (NumericComponent))]
-    public static class NumericComponentSystem
+    [FriendOf(typeof (NumericComponentServer))]
+    public static class NumericComponentServerSystem
     {
-        public static float GetAsFloat(this NumericComponent self, int numericType)
+        public static float GetAsFloat(this NumericComponentServer self, int numericType)
         {
             return (float)self.GetByKey(numericType) / 10000;
         }
 
-        public static int GetAsInt(this NumericComponent self, int numericType)
+        public static int GetAsInt(this NumericComponentServer self, int numericType)
         {
             return (int)self.GetByKey(numericType);
         }
 
-        public static long GetAsLong(this NumericComponent self, int numericType)
+        public static long GetAsLong(this NumericComponentServer self, int numericType)
         {
             return self.GetByKey(numericType);
         }
 
-        public static void Set(this NumericComponent self, int nt, float value)
+        public static void Set(this NumericComponentServer self, int nt, float value)
         {
             self[nt] = (long)(value * 10000);
         }
 
-        public static void Set(this NumericComponent self, int nt, int value)
+        public static void Set(this NumericComponentServer self, int nt, int value)
         {
             self[nt] = value;
         }
 
-        public static void Set(this NumericComponent self, int nt, long value)
+        public static void Set(this NumericComponentServer self, int nt, long value)
         {
             self[nt] = value;
         }
 
-        public static void SetNoEvent(this NumericComponent self, int numericType, long value)
+        public static void SetNoEvent(this NumericComponentServer self, int numericType, long value)
         {
             self.Insert(numericType, value, false);
         }
 
-        public static void Insert(this NumericComponent self, int numericType, long value, bool isPublicEvent = true)
+        public static void Insert(this NumericComponentServer self, int numericType, long value, bool isPublicEvent = true)
         {
             long oldValue = self.GetByKey(numericType);
             if (oldValue == value)
@@ -65,14 +65,14 @@ namespace ET.Client
             }
         }
 
-        public static long GetByKey(this NumericComponent self, int key)
+        public static long GetByKey(this NumericComponentServer self, int key)
         {
             long value = 0;
             self.NumericDic.TryGetValue(key, out value);
             return value;
         }
 
-        public static void Update(this NumericComponent self, int numericType, bool isPublicEvent)
+        public static void Update(this NumericComponentServer self, int numericType, bool isPublicEvent)
         {
             int final = (int)numericType / 10;
             int bas = final * 10 + 1;
@@ -90,7 +90,7 @@ namespace ET.Client
     }
     
     [ComponentOf(typeof (Unit))]
-    public class NumericComponent: Entity, IAwake, ITransfer
+    public class NumericComponentServer: Entity, IAwake, ITransfer, IUnitCache
     {
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public Dictionary<int, long> NumericDic = new Dictionary<int, long>();

@@ -16,11 +16,11 @@ namespace ET.Server
                     unit.AddComponent<MoveComponent>();
                     unit.Position = new float3(-10, 0, -10);
                     unit.Type = UnitType.Player;
-                    NumericComponent numericComponent = unit.AddComponent<NumericComponent>();
-                    numericComponent.Set(NumericType.Speed, 6f); // 速度是6米每秒
-                    numericComponent.Set(NumericType.AOI, 15000); // 视野15米
+                    NumericComponentServer numericComponentServer = unit.AddComponent<NumericComponentServer>();
+                    numericComponentServer.Set(NumericType.Speed, 6f); // 速度是6米每秒
+                    numericComponentServer.Set(NumericType.AOI, 15000); // 视野15米
                     
-                    unit.AddComponent<BagComponent>();
+                    //unit.AddComponent<BagComponent>();
                     
                     unitComponent.Add(unit);
                     // 加入aoi
