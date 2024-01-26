@@ -5,7 +5,7 @@ namespace ET.Server
 {
 
     [ComponentOf(typeof(Unit))]
-    public class BagComponent : Entity, IAwake, IDestroy, ITransfer, IUnitCache
+    public class BagComponentServer : Entity, IAwake, IDestroy, ITransfer, IUnitCache
     {
         
         /// <summary>

@@ -9,7 +9,7 @@ namespace ET.Server
         {
             await ETTask.CompletedTask;
 
-            BagComponent bagComponent = unit.GetComponent<BagComponent>();
+            BagComponentServer bagComponentServer = unit.GetComponent<BagComponentServer>();
         }
     }
 }
