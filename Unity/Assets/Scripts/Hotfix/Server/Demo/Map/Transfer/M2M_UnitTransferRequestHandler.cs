@@ -16,8 +16,16 @@ namespace ET.Server
 
             foreach (byte[] bytes in request.Entitys)
             {
-                Entity entity = MongoHelper.Deserialize<Entity>(bytes);
-                unit.AddComponent(entity);
+                try
+                {
+                    Entity entity = MongoHelper.Deserialize<Entity>(bytes);
+                    unit.AddComponent(entity);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
             }
 
             unit.AddComponent<MoveComponent>();

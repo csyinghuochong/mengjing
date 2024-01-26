@@ -7,66 +7,69 @@ namespace ET.Server
     [ComponentOf(typeof(Unit))]
     public class BagComponent : Entity, IAwake, IDestroy, ITransfer, IUnitCache
     {
-        public List<int> QiangHuaLevel = new List<int>();
+        
+        /// <summary>
+        /// 赛季晶核方案
+        /// </summary>
+        public int SeasonJingHePlan { get; set; }
 
-        public List<int> QiangHuaFails = new List<int>();
+        public List<int> QiangHuaLevel { get; set; } = new();
+
+        public List<int> QiangHuaFails { get; set; } = new();
         
         /// <summary>
         /// ItemLocType.ItemWareHouse1 之后的所有仓库（购买格子数量）
         /// </summary>
-        public List<int> WarehouseAddedCell = new List<int>();
+        public List<int> WarehouseAddedCell { get; set; } = new();
 
         /// <summary>
         /// 附加格子，ItemLocType.ItemBag开始
         /// </summary>
-        public List<int> AdditionalCellNum = new List<int>();
+        public List<int> AdditionalCellNum { get; set; } = new();
 
         /// <summary>
         /// 激活的时装
         /// </summary>
-        public List<int> FashionActiveIds = new List<int>();
+        public List<int> FashionActiveIds { get; set; } = new();
 
         /// <summary>
         /// 穿戴的时装
         /// </summary>
-        public List<int> FashionEquipList = new List<int>();
-
+        public List<int> FashionEquipList { get; set; } = new();
+        
+        public List<BagInfo> BagItemList { get; set; } = new();
+        public List<BagInfo> BagItemPetHeXin { get; set; } = new();
+        public List<BagInfo> EquipList { get; set; } = new();
+        public List<BagInfo> GemList { get; set; } = new();
+        public List<BagInfo> PetHeXinList { get; set; } = new();
+        public List<BagInfo> Warehouse1 { get; set; } = new();
+        public List<BagInfo> Warehouse2 { get; set; } = new();
+        public List<BagInfo> Warehouse3 { get; set; } = new();
+        public List<BagInfo> Warehouse4 { get; set; } = new();
+        public List<BagInfo> JianYuanWareHouse1 { get; set; } = new();
+        public List<BagInfo> JianYuanWareHouse2 { get; set; } = new();
+        public List<BagInfo> JianYuanWareHouse3 { get; set; } = new();
+        public List<BagInfo> JianYuanWareHouse4 { get; set; } = new();
+        public List<BagInfo> JianYuanTreasureMapStorage1 { get; set; } = new();
+        public List<BagInfo> JianYuanTreasureMapStorage2 { get; set; } = new();
+        public List<BagInfo> ChouKaWarehouse { get; set; } = new();
+        public List<BagInfo> EquipList_2 { get; set; } = new();
+        public List<BagInfo> SeasonJingHe { get; set; } = new();
+        public List<BagInfo> PetEquipList { get; set; } = new();
+        public List<BagInfo> GemWareHouse1 { get; set; } = new();
+        
         /// <summary>
-        /// 赛季晶核方案
+        /// 可以放在unitinfocomponent
         /// </summary>
-        public int SeasonJingHePlan = 0;
-
-        public List<BagInfo> BagItemList = new List<BagInfo>();
-        public List<BagInfo> BagItemPetHeXin = new List<BagInfo>();
-        public List<BagInfo> EquipList = new List<BagInfo>();
-        public List<BagInfo> GemList = new List<BagInfo>();
-        public List<BagInfo> PetHeXinList = new List<BagInfo>();
-        public List<BagInfo> Warehouse1 = new List<BagInfo>();
-        public List<BagInfo> Warehouse2 = new List<BagInfo>();
-        public List<BagInfo> Warehouse3 = new List<BagInfo>();
-        public List<BagInfo> Warehouse4 = new List<BagInfo>();
-        public List<BagInfo> JianYuanWareHouse1 = new List<BagInfo>();
-        public List<BagInfo> JianYuanWareHouse2 = new List<BagInfo>();
-        public List<BagInfo> JianYuanWareHouse3 = new List<BagInfo>();
-        public List<BagInfo> JianYuanWareHouse4 = new List<BagInfo>();
-        public List<BagInfo> JianYuanTreasureMapStorage1 = new List<BagInfo>();
-        public List<BagInfo> JianYuanTreasureMapStorage2 = new List<BagInfo>();
-        public List<BagInfo> ChouKaWarehouse = new List<BagInfo>();
-        public List<BagInfo> EquipList_2 = new List<BagInfo>();
-        public List<BagInfo> SeasonJingHe = new List<BagInfo>();
-        public List<BagInfo> PetEquipList = new List<BagInfo>();
-        public List<BagInfo> GemWareHouse1 = new List<BagInfo>();
-
-        [BsonIgnore]
-        public int FuMoItemId = 0;
-
-        [BsonIgnore]
-        public List<HideProList> FuMoProList = new List<HideProList>();
+        //public int FuMoItemId { get; set; }   
 
         //[BsonIgnore]
         //public M2C_RoleBagUpdate message = new M2C_RoleBagUpdate() { };
 
-        [BsonIgnore]
-        public List<int> InheritSkills = new List<int>() { };
+        //[BsonIgnore]
+        //public List<HideProList> FuMoProList { get; set; } = new();
+        
+        //[BsonIgnore]
+        //public List<int> InheritSkills { get; set; } = new();
     }
 }
