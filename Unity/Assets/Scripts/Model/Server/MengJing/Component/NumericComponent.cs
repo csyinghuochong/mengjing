@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Options;
 
-namespace ET
+namespace ET.Server
 {
     [FriendOf(typeof (NumericComponent))]
     public static class NumericComponentSystem
@@ -90,7 +90,7 @@ namespace ET
     }
     
     [ComponentOf(typeof (Unit))]
-    public class NumericComponent: Entity, IAwake, ITransfer
+    public class NumericComponent: Entity, IAwake, ITransfer, IUnitCache
     {
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public Dictionary<int, long> NumericDic = new Dictionary<int, long>();
