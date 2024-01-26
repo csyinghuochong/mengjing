@@ -89,14 +89,6 @@ namespace ET
         }
     }
     
-    public struct NumbericChange
-    {
-        public Unit Unit;
-        public int NumericType;
-        public long Old;
-        public long New;
-    }
-
     [ComponentOf(typeof (Unit))]
     public class NumericComponent: Entity, IAwake, ITransfer
     {
