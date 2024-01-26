@@ -233,3 +233,63 @@ message G2C_Benchmark // ISessionResponse
 	int32 Error = 2;
 	string Message = 3;
 }
+
+message HideProList
+{
+	int32 HideID = 1;
+	int64 HideValue = 2;
+}
+
+message BagInfo
+{
+	int32 RpcId = 90;
+	string Name = 91;
+	int64 BagInfoID = 1;
+	int32 ItemID = 2;
+	int32 ItemNum = 3;
+	string ItemPar = 4;
+	int32 HideID = 5;
+	string GemHole = 6;	//对应的孔位颜色
+	int32 Loc = 8; //0背包 1装备
+	bool IfJianDing = 9;
+	repeated HideProList HideProLists = 10;					//鉴定属性
+	repeated HideProList XiLianHideProLists = 11;           //洗练属性
+	repeated int32 HideSkillLists = 12;
+	bool isBinging = 13;
+	repeated HideProList XiLianHideTeShuProLists = 14;		//洗练特殊属性
+	string GetWay = 16; //来源方式
+	string GemIDNew = 17;	//对应的宝石ID
+	string MakePlayer = 18;					//制作玩家名字
+	repeated HideProList FumoProLists = 20; //附魔属性
+	int32 InheritTimes = 21;
+	repeated int32 InheritSkills = 22;
+	bool IsProtect = 23;						///装备锁 宠物锁 功能 npc打开
+	repeated HideProList IncreaseProLists = 24; // 增幅属性
+	repeated int32 IncreaseSkillLists = 25; // 增幅技能
+	int32 EquipPlan = 26;
+	int32 EquipIndex = 27; 
+	int32 FuLing = 28;    //0未附灵 1附灵
+}
+
+//ResponseType M2C_BagInitResponse
+message C2M_BagInitRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_BagInitResponse  // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	repeated BagInfo BagInfos = 1;
+	repeated int32 QiangHuaLevel = 2;
+	repeated int32 QiangHuaFails = 3;
+	//int32 BagAddedCell = 4;
+	repeated int32 WarehouseAddedCell = 5;
+	repeated int32 FashionActiveIds = 6;
+	repeated int32 FashionEquipList = 7;
+	int32 SeasonJingHePlan = 8;
+	repeated int32 AdditionalCellNum = 9;
+}

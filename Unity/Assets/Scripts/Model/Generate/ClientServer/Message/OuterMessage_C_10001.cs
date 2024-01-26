@@ -969,6 +969,248 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.HideProList)]
+	[MemoryPackable]
+	public partial class HideProList: MessageObject
+	{
+		public static HideProList Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(HideProList), isFromPool) as HideProList; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int HideID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long HideValue { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.HideID = default;
+			this.HideValue = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.BagInfo)]
+	[MemoryPackable]
+	public partial class BagInfo: MessageObject
+	{
+		public static BagInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(BagInfo), isFromPool) as BagInfo; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Name { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long BagInfoID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ItemID { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int ItemNum { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string ItemPar { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int HideID { get; set; }
+
+		[MemoryPackOrder(5)]
+		public string GemHole { get; set; }
+
+		[MemoryPackOrder(7)]
+		public int Loc { get; set; }
+
+		[MemoryPackOrder(8)]
+		public bool IfJianDing { get; set; }
+
+		[MemoryPackOrder(9)]
+		public List<HideProList> HideProLists { get; set; } = new();
+
+		[MemoryPackOrder(10)]
+		public List<HideProList> XiLianHideProLists { get; set; } = new();
+
+		[MemoryPackOrder(11)]
+		public List<int> HideSkillLists { get; set; } = new();
+
+		[MemoryPackOrder(12)]
+		public bool isBinging { get; set; }
+
+		[MemoryPackOrder(13)]
+		public List<HideProList> XiLianHideTeShuProLists { get; set; } = new();
+
+		[MemoryPackOrder(15)]
+		public string GetWay { get; set; }
+
+		[MemoryPackOrder(16)]
+		public string GemIDNew { get; set; }
+
+		[MemoryPackOrder(17)]
+		public string MakePlayer { get; set; }
+
+		[MemoryPackOrder(19)]
+		public List<HideProList> FumoProLists { get; set; } = new();
+
+		[MemoryPackOrder(20)]
+		public int InheritTimes { get; set; }
+
+		[MemoryPackOrder(21)]
+		public List<int> InheritSkills { get; set; } = new();
+
+		[MemoryPackOrder(22)]
+		public bool IsProtect { get; set; }
+
+		[MemoryPackOrder(23)]
+		public List<HideProList> IncreaseProLists { get; set; } = new();
+
+		[MemoryPackOrder(24)]
+		public List<int> IncreaseSkillLists { get; set; } = new();
+
+		[MemoryPackOrder(25)]
+		public int EquipPlan { get; set; }
+
+		[MemoryPackOrder(26)]
+		public int EquipIndex { get; set; }
+
+		[MemoryPackOrder(27)]
+		public int FuLing { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Name = default;
+			this.BagInfoID = default;
+			this.ItemID = default;
+			this.ItemNum = default;
+			this.ItemPar = default;
+			this.HideID = default;
+			this.GemHole = default;
+			this.Loc = default;
+			this.IfJianDing = default;
+			this.HideProLists.Clear();
+			this.XiLianHideProLists.Clear();
+			this.HideSkillLists.Clear();
+			this.isBinging = default;
+			this.XiLianHideTeShuProLists.Clear();
+			this.GetWay = default;
+			this.GemIDNew = default;
+			this.MakePlayer = default;
+			this.FumoProLists.Clear();
+			this.InheritTimes = default;
+			this.InheritSkills.Clear();
+			this.IsProtect = default;
+			this.IncreaseProLists.Clear();
+			this.IncreaseSkillLists.Clear();
+			this.EquipPlan = default;
+			this.EquipIndex = default;
+			this.FuLing = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_BagInitResponse))]
+	[Message(OuterMessage.C2M_BagInitRequest)]
+	[MemoryPackable]
+	public partial class C2M_BagInitRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_BagInitRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_BagInitRequest), isFromPool) as C2M_BagInitRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_BagInitResponse)]
+	[MemoryPackable]
+	public partial class M2C_BagInitResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_BagInitResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_BagInitResponse), isFromPool) as M2C_BagInitResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<BagInfo> BagInfos { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public List<int> QiangHuaLevel { get; set; } = new();
+
+		[MemoryPackOrder(2)]
+		public List<int> QiangHuaFails { get; set; } = new();
+
+//int32 BagAddedCell = 4;
+		[MemoryPackOrder(4)]
+		public List<int> WarehouseAddedCell { get; set; } = new();
+
+		[MemoryPackOrder(5)]
+		public List<int> FashionActiveIds { get; set; } = new();
+
+		[MemoryPackOrder(6)]
+		public List<int> FashionEquipList { get; set; } = new();
+
+		[MemoryPackOrder(7)]
+		public int SeasonJingHePlan { get; set; }
+
+		[MemoryPackOrder(8)]
+		public List<int> AdditionalCellNum { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.BagInfos.Clear();
+			this.QiangHuaLevel.Clear();
+			this.QiangHuaFails.Clear();
+			this.WarehouseAddedCell.Clear();
+			this.FashionActiveIds.Clear();
+			this.FashionEquipList.Clear();
+			this.SeasonJingHePlan = default;
+			this.AdditionalCellNum.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -1005,5 +1247,9 @@ namespace ET
 		 public const ushort M2C_TransferMap = 10033;
 		 public const ushort C2G_Benchmark = 10034;
 		 public const ushort G2C_Benchmark = 10035;
+		 public const ushort HideProList = 10036;
+		 public const ushort BagInfo = 10037;
+		 public const ushort C2M_BagInitRequest = 10038;
+		 public const ushort M2C_BagInitResponse = 10039;
 	}
 }

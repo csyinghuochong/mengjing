@@ -8,7 +8,7 @@ namespace ET.Server
         public ETCancellationToken CancellationToken;
 
         public long Timer;
-
+        
         public int Current;
     }
 }
