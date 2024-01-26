@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ET;
 
 namespace ET.Server
@@ -30,12 +31,22 @@ namespace ET.Server
                     }
                 }
 
-                foreach (var key in dictionary.Keys)
+                List<string> entityKeys = dictionary.Keys.ToList();
+                foreach (var key in entityKeys)
                 {
                     Entity entity = await unitCacheComponent.Get(request.UnitId, key);
-                    dictionary[key] = entity;
-                }
 
+                    try
+                    {
+                        dictionary[key] = entity;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
+                }
+                
                 response.ComponentNameList.AddRange(dictionary.Keys);
                 response.EntityList.AddRange(dictionary.Values);
             }

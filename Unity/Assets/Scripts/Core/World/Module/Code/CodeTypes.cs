@@ -14,11 +14,6 @@ namespace ET
             Dictionary<string, Type> addTypes = AssemblyHelper.GetAssemblyTypes(assemblies);
             foreach ((string fullName, Type type) in addTypes)
             {
-                if (fullName.Contains("Bag"))
-                {
-                    Log.Error("1");
-                }
-
                 this.allTypes[fullName] = type;
                 
                 if (type.IsAbstract)

@@ -20,6 +20,8 @@ namespace ET.Server
                     numericComponent.Set(NumericType.Speed, 6f); // 速度是6米每秒
                     numericComponent.Set(NumericType.AOI, 15000); // 视野15米
                     
+                    unit.AddComponent<BagComponent>();
+                    
                     unitComponent.Add(unit);
                     // 加入aoi
                     unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
