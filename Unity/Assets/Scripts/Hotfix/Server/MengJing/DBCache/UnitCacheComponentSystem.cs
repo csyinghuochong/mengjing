@@ -14,6 +14,12 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this UnitCacheComponent self)
         {
+#if DOTNET
+            Log.Console("UnitCacheComponent DOTNET true");
+#else
+            Log.Console("UnitCacheComponent DOTNET false");
+#endif
+
             self.UnitCacheKeyList.Clear();
             foreach ((string key, Type type) in CodeTypes.Instance.GetTypes())
             {
@@ -22,7 +28,10 @@ namespace ET.Server
                     Log.Error("1");
                 }
 
-                if (type != typeof(IUnitCache) && typeof(IUnitCache).IsAssignableFrom(type))
+                bool iscache = type == typeof(IUnitCache);
+                bool isassig = typeof(IUnitCache).IsAssignableFrom(type);
+
+                if ( !iscache  && isassig)
                 {
                     self.UnitCacheKeyList.Add(type.Name);
                 }
