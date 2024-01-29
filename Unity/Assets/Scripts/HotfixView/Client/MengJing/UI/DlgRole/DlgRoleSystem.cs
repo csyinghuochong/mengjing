@@ -24,8 +24,8 @@ namespace ET.Client
             Log.Debug($"按下Toggle：{index}");
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
 
-            self.SetFunctionSetBtnShow(self.View.E_BagToggle.gameObject, index == 0);
-            self.SetFunctionSetBtnShow(self.View.E_PropertyToggle.gameObject, index == 1);
+            self.SetToggleShow(self.View.E_BagToggle.gameObject, index == 0);
+            self.SetToggleShow(self.View.E_PropertyToggle.gameObject, index == 1);
 
             switch (index)
             {
@@ -52,7 +52,7 @@ namespace ET.Client
             }
         }
 
-        private static void SetFunctionSetBtnShow(this DlgRole self, GameObject gameObject, bool isShow)
+        private static void SetToggleShow(this DlgRole self, GameObject gameObject, bool isShow)
         {
             gameObject.transform.Find("Background/XuanZhong").gameObject.SetActive(isShow);
             gameObject.transform.Find("Background/WeiXuanZhong").gameObject.SetActive(!isShow);

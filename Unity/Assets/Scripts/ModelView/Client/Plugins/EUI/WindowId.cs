@@ -17,5 +17,6 @@ namespace ET.Client
 		WindowID_CreateRole,
 		WindowID_Main,
 		WindowID_Role,
+		WindowID_RoleBag,
 	}
 }
