@@ -500,6 +500,57 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.LoopVerticalScrollRect E_MainChatListLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MainChatListLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_MainChatListLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"DoMoveBottom/UIMainChat/E_MainChatList");
+     			}
+     			return this.m_E_MainChatListLoopVerticalScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_OpenChatButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_OpenChatButton == null )
+     			{
+		    		this.m_E_OpenChatButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"DoMoveBottom/UIMainChat/E_OpenChat");
+     			}
+     			return this.m_E_OpenChatButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_OpenChatImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_OpenChatImage == null )
+     			{
+		    		this.m_E_OpenChatImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"DoMoveBottom/UIMainChat/E_OpenChat");
+     			}
+     			return this.m_E_OpenChatImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Image E_MainCityShowImage
      	{
      		get
@@ -939,6 +990,9 @@ namespace ET.Client
 			this.m_E_FriendImage = null;
 			this.m_E_ChengJiuButton = null;
 			this.m_E_ChengJiuImage = null;
+			this.m_E_MainChatListLoopVerticalScrollRect = null;
+			this.m_E_OpenChatButton = null;
+			this.m_E_OpenChatImage = null;
 			this.m_E_MainCityShowImage = null;
 			this.m_E_RawImageRawImage = null;
 			this.m_EG_HeadListRectTransform = null;
@@ -995,6 +1049,9 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_FriendImage = null;
 		private UnityEngine.UI.Button m_E_ChengJiuButton = null;
 		private UnityEngine.UI.Image m_E_ChengJiuImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_MainChatListLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_OpenChatButton = null;
+		private UnityEngine.UI.Image m_E_OpenChatImage = null;
 		private UnityEngine.UI.Image m_E_MainCityShowImage = null;
 		private UnityEngine.UI.RawImage m_E_RawImageRawImage = null;
 		private UnityEngine.RectTransform m_EG_HeadListRectTransform = null;

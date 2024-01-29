@@ -60,6 +60,8 @@ namespace ET.Client
             self.View.E_NpcDuiHuaButton.AddListener(self.OnNpcDuiHuaButton);
             self.View.E_UnionButton.AddListener(self.OnUnionButton);
 
+            self.View.E_OpenChatButton.AddListener(self.OnOpenChat);
+
             self.View.E_YaoGanDiMoveEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
                 (pdata) => { self.PointerDown_Move(pdata as PointerEventData); });
             self.View.E_YaoGanDiMoveEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.BeginDrag(pdata as PointerEventData); });
@@ -821,6 +823,78 @@ namespace ET.Client
             // DateTime serverTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
             // self.View.E_TimeText.text = $"{serverTime.Hour}:{serverTime.Minute}";
         }
+
+        #endregion
+
+        #region 聊天
+
+        private static void OnOpenChat(this DlgMain self)
+        {
+            // self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Chat).Coroutine();
+        }
+        
+        // private static void OnRecvChat(this DlgMain self, ChatInfo chatInfo)
+        // {
+        //     if (self.ChatInfoList.Count >= 10)
+        //     {
+        //         self.ChatInfoList.RemoveAt(0);
+        //     }
+        //
+        //     self.ChatInfoList.Add(chatInfo);
+        //
+        //     for (int i = 0; i < self.ChatInfoList.Count; i++)
+        //     {
+        //         UIMainChatItemComponent ui_2 = null;
+        //         if (i < self.ChatUIList.Count)
+        //         {
+        //             ui_2 = self.ChatUIList[i];
+        //             ui_2.GameObject.SetActive(true);
+        //         }
+        //         else
+        //         {
+        //             GameObject itemSpace = GameObject.Instantiate(self.UIMainChatItem);
+        //             UICommonHelper.SetParent(itemSpace, self.ChatUIListNode);
+        //             itemSpace.SetActive(true);
+        //             ui_2 = self.AddChild<UIMainChatItemComponent, GameObject>(itemSpace);
+        //             ui_2.SetClickHandler(() => { self.OnOpenChat(); });
+        //             self.ChatUIList.Add(ui_2);
+        //         }
+        //
+        //         ui_2.OnUpdateUI(self.ChatInfoList[i]);
+        //     }
+        //
+        //     for (int i = self.ChatInfoList.Count; i < self.ChatUIList.Count; i++)
+        //     {
+        //         self.ChatUIList[i].GameObject.SetActive(false);
+        //         self.ChatUIList[i].UpdateHeight = false;
+        //     }
+        //
+        //     self.UpdatePosition().Coroutine();
+        //     self.ImageButton.SetActive(self.ChatInfoList.Count < 4);
+        // }
+        //
+        // private static async ETTask UpdatePosition(this DlgMain self)
+        // {
+        //     long instanceid = self.InstanceId;
+        //     await TimerComponent.Instance.WaitAsync(100);
+        //     if (instanceid != self.InstanceId)
+        //     {
+        //         return;
+        //     }
+        //
+        //     for (int i = 0; i < self.ChatUIList.Count; i++)
+        //     {
+        //         self.ChatUIList[i].UpdateHeight();
+        //     }
+        //
+        //     await TimerComponent.Instance.WaitAsync(100);
+        //     if (instanceid != self.InstanceId)
+        //     {
+        //         return;
+        //     }
+        //
+        //     self.ScrollRect.GetComponent<ScrollRect>().verticalNormalizedPosition = 0f;
+        // }
 
         #endregion
     }
