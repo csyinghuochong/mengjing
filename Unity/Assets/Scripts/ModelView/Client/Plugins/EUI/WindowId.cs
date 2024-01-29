@@ -16,5 +16,6 @@ namespace ET.Client
     	WindowID_MJLobby,
 		WindowID_CreateRole,
 		WindowID_Main,
+		WindowID_Role,
 	}
 }
