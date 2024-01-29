@@ -621,6 +621,170 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.RechargeInfo)]
+	[MemoryPackable]
+	public partial class RechargeInfo: MessageObject
+	{
+		public static RechargeInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(RechargeInfo), isFromPool) as RechargeInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int Amount { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long Time { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string OrderInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.Amount = default;
+			this.Time = default;
+			this.UnitId = default;
+			this.OrderInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.KeyValuePair)]
+	[MemoryPackable]
+	public partial class KeyValuePair: MessageObject
+	{
+		public static KeyValuePair Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(KeyValuePair), isFromPool) as KeyValuePair; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int KeyId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string Value { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string Value2 { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.KeyId = default;
+			this.Value = default;
+			this.Value2 = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.PlayerInfo)]
+	[MemoryPackable]
+	public partial class PlayerInfo: MessageObject
+	{
+		public static PlayerInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(PlayerInfo), isFromPool) as PlayerInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int RealName { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string Name { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string IdCardNo { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int RealNameReward { get; set; }
+
+		[MemoryPackOrder(4)]
+		public List<RechargeInfo> RechargeInfos { get; set; } = new();
+
+		[MemoryPackOrder(5)]
+		public List<KeyValuePair> DeleteUserList { get; set; } = new();
+
+		[MemoryPackOrder(6)]
+		public List<int> BuChangZone { get; set; } = new();
+
+		[MemoryPackOrder(7)]
+		public string PhoneNumber { get; set; }
+
+		[MemoryPackOrder(8)]
+		public List<long> ShareTimes { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RealName = default;
+			this.Name = default;
+			this.IdCardNo = default;
+			this.RealNameReward = default;
+			this.RechargeInfos.Clear();
+			this.DeleteUserList.Clear();
+			this.BuChangZone.Clear();
+			this.PhoneNumber = default;
+			this.ShareTimes.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.CreateRoleInfo)]
+	[MemoryPackable]
+	public partial class CreateRoleInfo: MessageObject
+	{
+		public static CreateRoleInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(CreateRoleInfo), isFromPool) as CreateRoleInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int PlayerLv { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int PlayerOcc { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int WeaponId { get; set; }
+
+		[MemoryPackOrder(4)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int OccTwo { get; set; }
+
+		[MemoryPackOrder(6)]
+		public int EquipIndex { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UnitId = default;
+			this.PlayerLv = default;
+			this.PlayerOcc = default;
+			this.WeaponId = default;
+			this.PlayerName = default;
+			this.OccTwo = default;
+			this.EquipIndex = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	[Message(OuterMessage.R2C_Login)]
 	[MemoryPackable]
 	public partial class R2C_Login: MessageObject, ISessionResponse
@@ -1235,21 +1399,25 @@ namespace ET
 		 public const ushort C2M_Reload = 10021;
 		 public const ushort M2C_Reload = 10022;
 		 public const ushort C2R_Login = 10023;
-		 public const ushort R2C_Login = 10024;
-		 public const ushort C2G_LoginGate = 10025;
-		 public const ushort G2C_LoginGate = 10026;
-		 public const ushort G2C_TestHotfixMessage = 10027;
-		 public const ushort C2M_TestRobotCase = 10028;
-		 public const ushort M2C_TestRobotCase = 10029;
-		 public const ushort C2M_TestRobotCase2 = 10030;
-		 public const ushort M2C_TestRobotCase2 = 10031;
-		 public const ushort C2M_TransferMap = 10032;
-		 public const ushort M2C_TransferMap = 10033;
-		 public const ushort C2G_Benchmark = 10034;
-		 public const ushort G2C_Benchmark = 10035;
-		 public const ushort HideProList = 10036;
-		 public const ushort BagInfo = 10037;
-		 public const ushort C2M_BagInitRequest = 10038;
-		 public const ushort M2C_BagInitResponse = 10039;
+		 public const ushort RechargeInfo = 10024;
+		 public const ushort KeyValuePair = 10025;
+		 public const ushort PlayerInfo = 10026;
+		 public const ushort CreateRoleInfo = 10027;
+		 public const ushort R2C_Login = 10028;
+		 public const ushort C2G_LoginGate = 10029;
+		 public const ushort G2C_LoginGate = 10030;
+		 public const ushort G2C_TestHotfixMessage = 10031;
+		 public const ushort C2M_TestRobotCase = 10032;
+		 public const ushort M2C_TestRobotCase = 10033;
+		 public const ushort C2M_TestRobotCase2 = 10034;
+		 public const ushort M2C_TestRobotCase2 = 10035;
+		 public const ushort C2M_TransferMap = 10036;
+		 public const ushort M2C_TransferMap = 10037;
+		 public const ushort C2G_Benchmark = 10038;
+		 public const ushort G2C_Benchmark = 10039;
+		 public const ushort HideProList = 10040;
+		 public const ushort BagInfo = 10041;
+		 public const ushort C2M_BagInitRequest = 10042;
+		 public const ushort M2C_BagInitResponse = 10043;
 	}
 }

@@ -9,30 +9,64 @@ namespace ET.Server
     [MessageSessionHandler(SceneType.Realm)]
 	public class C2R_LoginHandler : MessageSessionHandler<C2R_Login, R2C_Login>
 	{
-		protected override async ETTask Run(Session session, C2R_Login request, R2C_Login response)
+
+        public int CanLogin(string identityCard, bool isHoliday, int age_type)
+        {
+            int age = IDCardHelper.GetBirthdayAgeSex(identityCard, age_type);
+            if (age >= 18)
+            {
+                return ErrorCode.ERR_Success;
+            }
+            if (age < 12)
+            {
+                return ErrorCode.ERR_FangChengMi_Tip6;
+            }
+            DateTime dateTime = TimeHelper.DateTimeNow();
+            if (isHoliday)
+            {
+                if (dateTime.Hour == 20)
+                {
+                    return ErrorCode.ERR_Success;           //允许登录
+                }
+                else
+                {
+                    return ErrorCode.ERR_FangChengMi_Tip7;
+                }
+            }
+            else
+            {
+                return ErrorCode.ERR_FangChengMi_Tip7;
+            }
+        }
+
+        protected override async ETTask Run(Session session, C2R_Login request, R2C_Login response)
 		{
 
-			if (string.IsNullOrEmpty(request.Account) || string.IsNullOrEmpty(request.Password))
+            if (session.Root().SceneType != SceneType.Account)
+            {
+                Log.Error($"LoginTest C2A_LoginAccount请求的Scene错误，当前Scene为：{session.Root().SceneType}");
+                session.Dispose();
+                return;
+            }
+
+            if (string.IsNullOrEmpty(request.Account) || string.IsNullOrEmpty(request.Password))
 			{
 				response.Error = 20002;
 				CloseSession(session).Coroutine();
                 return;
 			}
 
-			//DBComponent dBComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(session.Zone());
-			//List<AccountInfo> accountInfos = await dBComponent.Query<AccountInfo>(accountinfo => accountinfo.Account == request.Account);
-			//if (accountInfos.Count == 0)
-			//{
-   //             AccountInfoComponent accountInfoComponet = session.GetComponent<AccountInfoComponent>();
-				
-			//}
-			//else
-			//{ 
-				
-			//}
+            session.RemoveComponent<SessionAcceptTimeoutComponent>();
 
-			// 随机分配一个Gate
-			StartSceneConfig config = RealmGateAddressHelper.GetGate(session.Zone(), request.Account);
+            if (session.GetComponent<SessionLockingComponent>() != null)
+            {
+                response.Error = ErrorCode.ERR_RequestRepeatedly;
+                CloseSession(session).Coroutine();
+                return;
+            }
+
+            // 随机分配一个Gate
+            StartSceneConfig config = RealmGateAddressHelper.GetGate(session.Zone(), request.Account);
 			Log.Debug($"gate address: {config}");
 			
 			// 向gate请求一个key,客户端可以拿着这个key连接gate

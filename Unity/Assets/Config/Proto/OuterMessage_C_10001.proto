@@ -150,6 +150,45 @@ message C2R_Login // ISessionRequest
 	string  Password = 3;  // 密码
 }
 
+message RechargeInfo
+{
+	int32 Amount = 1;
+	int64 Time = 2;
+	int64 UnitId = 3;
+	string OrderInfo = 4;
+}
+
+message KeyValuePair
+{
+	int32 KeyId = 1;
+	string Value = 2;
+	string Value2 = 3;
+}
+
+message PlayerInfo
+{
+	int32 RealName = 1;
+	string Name = 2;
+	string IdCardNo = 3;
+	int32 RealNameReward = 4;
+	repeated RechargeInfo RechargeInfos = 5;
+	repeated KeyValuePair DeleteUserList = 6;
+	repeated int32 BuChangZone = 7;
+	string PhoneNumber = 8;
+	repeated int64 ShareTimes = 9;
+}
+
+message CreateRoleInfo
+{
+	int64 UnitId = 1;
+	int32 PlayerLv = 2;
+	int32 PlayerOcc = 3;
+	int32 WeaponId = 4;
+	string PlayerName = 5;
+	int32 OccTwo = 6;
+	int32 EquipIndex = 7;
+}
+
 message R2C_Login // ISessionResponse
 {
 	int32 RpcId = 1;
@@ -158,7 +197,11 @@ message R2C_Login // ISessionResponse
 	string Address = 4;
 	int64 Key = 5;
 	int64 GateId = 6;
+
+
 }
+
+
 
 //ResponseType G2C_LoginGate
 message C2G_LoginGate // ISessionRequest
