@@ -14,6 +14,7 @@ namespace ET.Client
                 // 等待场景切换完成
                 await root.GetComponent<ObjectWait>().Wait<Wait_SceneChangeFinish>();
 
+
                 M2C_BagInitResponse m2C_BagInit = await root.GetComponent<ClientSenderCompnent>().Call( new C2M_BagInitRequest() ) as M2C_BagInitResponse;
                 
 

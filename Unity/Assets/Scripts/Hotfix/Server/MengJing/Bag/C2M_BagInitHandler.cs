@@ -7,9 +7,12 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_BagInitRequest request, M2C_BagInitResponse response)
         {
+          
+            BagComponentServer bagComponentServer = unit.GetComponent<BagComponentServer>();
+            response.BagInfos = bagComponentServer.BagItemList;
+
             await ETTask.CompletedTask;
 
-            BagComponentServer bagComponentServer = unit.GetComponent<BagComponentServer>();
         }
     }
 }
