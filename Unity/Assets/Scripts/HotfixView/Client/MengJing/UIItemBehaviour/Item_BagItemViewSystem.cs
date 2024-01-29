@@ -20,6 +20,8 @@ namespace ET.Client
         public static void Refresh(this Scroll_Item_BagItem self, long id)
         {
             Log.Debug($"更新背包Item :{id}");
+            self.E_ItemNameText.text = id.ToString();
+            self.E_ItemNumText.text = "1";
             // Item item = self.ZoneScene().GetComponent<BagComponent>().GetItemById(id);
             //
             // self.E_IconImage.overrideSprite = IconHelper.LoadIconSprite("Icons", item.Config.Icon);

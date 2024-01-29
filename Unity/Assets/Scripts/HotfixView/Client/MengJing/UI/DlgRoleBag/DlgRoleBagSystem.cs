@@ -44,8 +44,8 @@ namespace ET.Client
 
             self.SetToggleShow(self.View.E_AllToggle.gameObject, index == 0);
             self.SetToggleShow(self.View.E_EquipToggle.gameObject, index == 1);
-            self.SetToggleShow(self.View.E_CaiLiaoToggle.gameObject, index == 3);
-            self.SetToggleShow(self.View.E_XiaoHaoToggle.gameObject, index == 4);
+            self.SetToggleShow(self.View.E_CaiLiaoToggle.gameObject, index == 2);
+            self.SetToggleShow(self.View.E_XiaoHaoToggle.gameObject, index == 3);
 
             self.CurrentItemType = index;
             self.Refresh();

@@ -30,7 +30,7 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    // uiComponent.ShowWindowAsync(WindowID.WindowID_Role).Coroutine();
+                    uiComponent.ShowWindowAsync(WindowID.WindowID_RoleBag).Coroutine();
                     Log.Debug($"打开 Bag");
                     break;
                 case 1:
@@ -41,7 +41,7 @@ namespace ET.Client
 
             if (index != 0)
             {
-                // uiComponent.HideWindow(WindowID.WindowID_Role);
+                uiComponent.HideWindow(WindowID.WindowID_RoleBag);
                 Log.Debug($"关闭 Bag");
             }
 
