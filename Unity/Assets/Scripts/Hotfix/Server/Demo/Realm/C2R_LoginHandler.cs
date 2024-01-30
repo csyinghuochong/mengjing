@@ -65,6 +65,8 @@ namespace ET.Server
                 return;
             }
 
+
+
             // 随机分配一个Gate
             StartSceneConfig config = RealmGateAddressHelper.GetGate(session.Zone(), request.Account);
 			Log.Debug($"gate address: {config}");
