@@ -42,12 +42,12 @@ namespace ET.Server
         protected override async ETTask Run(Session session, C2R_Login request, R2C_Login response)
 		{
 
-            if (session.Root().SceneType != SceneType.Account)
-            {
-                Log.Error($"LoginTest C2A_LoginAccount请求的Scene错误，当前Scene为：{session.Root().SceneType}");
-                session.Dispose();
-                return;
-            }
+            //if (session.Root().SceneType != SceneType.Account)
+            //{
+            //    Log.Error($"LoginTest C2A_LoginAccount请求的Scene错误，当前Scene为：{session.Root().SceneType}");
+            //    session.Dispose();
+            //    return;
+            //}
 
             if (string.IsNullOrEmpty(request.Account) || string.IsNullOrEmpty(request.Password))
 			{
