@@ -1,10 +1,14 @@
+using ET.Client;
 using System;
+using static System.Collections.Specialized.BitVector32;
 
 namespace ET.Server
 {
 
     public static class UnitCacheHelper
     {
+
+        public const string UserInfoComponent = "UserInfoComponent";
 
         /// <summary>
         /// 保存或者更新玩家缓存
@@ -70,7 +74,7 @@ namespace ET.Server
 
             Other2UnitCache_GetUnit message = new Other2UnitCache_GetUnit() { UnitId = unitId };
             message.ComponentNameList.Add(typeof(T).Name);
-           
+
             UnitCache2Other_GetUnit queryUnit = (UnitCache2Other_GetUnit)await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message);
             if (queryUnit.Error == ErrorCode.ERR_Success && queryUnit.EntityList.Count > 0)
             {
@@ -116,7 +120,34 @@ namespace ET.Server
 
             Scene root = unit.Root();
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(unit.Zone());
-            root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message).Coroutine(); 
+            root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message).Coroutine();
+        }
+
+        public static ActorId GetDbCacheId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.DBCache.ToString()).ActorId;
+        }
+
+        /// 获取玩家组件缓存
+        /// </summary>
+        /// <param name="unitId"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static async ETTask<T> GetComponentCache<T>(Scene root,  long unitId) where T : Entity
+        {
+            ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(root.Zone());
+            UnitCache2Other_GetComponent d2GGetUnit = (UnitCache2Other_GetComponent)await root.GetComponent<MessageSender>().Call(dbCacheId,
+                new Other2UnitCache_GetComponent() 
+                { 
+                    UnitId = unitId,
+                    Component = typeof(T).FullName
+                });
+
+            if (d2GGetUnit.Error == ErrorCode.ERR_Success && d2GGetUnit.Component != null)
+            {
+                return d2GGetUnit.Component as T;
+            }
+            return null;
         }
     }
 }

@@ -148,6 +148,10 @@ message C2R_Login // ISessionRequest
 	int32 RpcId = 1;
 	string  Account = 2;  // 帐号
 	string  Password = 3;  // 密码
+	string  Token = 3;  
+	string  ThirdLogin = 3;  
+	bool Relink = 5;
+	int32 age_type = 6;
 }
 
 message RechargeInfo
@@ -163,6 +167,20 @@ message KeyValuePair
 	int32 KeyId = 1;
 	string Value = 2;
 	string Value2 = 3;
+}
+
+
+message KeyValuePairInt
+{
+	int32 KeyId = 1;	
+	int64 Value = 2;
+}
+
+message KeyValuePairLong
+{
+	int64 KeyId = 1;	
+	int64 Value = 2;
+	int64 Value2 = 3;
 }
 
 message PlayerInfo
@@ -197,11 +215,13 @@ message R2C_Login // ISessionResponse
 	string Address = 4;
 	int64 Key = 5;
 	int64 GateId = 6;
-
-
+	string Token = 7;
+	int64 AccountId = 8;
+	int32 QueueNumber = 9;
+	string QueueAddres = 10;
+	PlayerInfo PlayerInfo = 11;
+	repeated CreateRoleInfo RoleLists = 12;
 }
-
-
 
 //ResponseType G2C_LoginGate
 message C2G_LoginGate // ISessionRequest
@@ -335,4 +355,354 @@ message M2C_BagInitResponse  // ILocationResponse
 	repeated int32 FashionEquipList = 7;
 	int32 SeasonJingHePlan = 8;
 	repeated int32 AdditionalCellNum = 9;
+}
+
+message MysteryItemInfo
+{
+	int32 MysteryId = 1;
+	int32 ItemID = 3;
+	int32 ItemNumber = 4; 
+	int32 ProductId = 5;
+}
+
+//战区领取记录
+message ZhanQuReceiveNumber
+{
+	int32 ActivityId = 1;
+	int32 ReceiveNum = 2;
+	repeated int64 ReceiveUnitIds = 3; 
+}
+
+message FirstWinInfo
+{
+	int64 UserId = 1;
+	int32 FirstWinId = 2;
+	string PlayerName = 3;
+	int64 KillTime = 4;
+	int32 Difficulty = 5;
+}
+
+message PetMingPlayerInfo
+{
+	int32 MineType = 1;		
+	int32 Postion = 2;
+	int64 UnitId = 3;
+	string PlayerName = 4;
+	repeated int32 PetConfig = 5;
+	repeated int64 PetIdList = 6;
+	int32 TeamId = 7;
+	int64 OccupyTime = 8;
+}
+
+message ChatInfo
+{
+	int64 UserId = 1;
+	string ChatMsg = 3;
+	string PlayerName = 4;
+	int32 ChannelId = 2;
+	int64 ParamId = 5;
+	int64 Time = 6;
+	int32 Occ = 7;
+	int32 PlayerLevel = 8;
+}
+
+message MailInfo
+{
+	int32 Status = 1;	//新增 更新 删除
+	string Context = 3;
+	int64 MailId = 5;
+	string Title = 6;
+	repeated BagInfo ItemList = 7;	
+	BagInfo ItemSell = 8;
+}
+
+message PaiMaiItemInfo
+{
+	int64 Id = 1;
+	int64 UserId = 2;
+	BagInfo BagInfo = 3;			
+	int32 Price = 5;
+	string PlayerName = 6;
+	int64 SellTime = 7;
+}
+
+message PaiMaiShopItemInfo
+{
+	int64 Id = 1;
+	int32 ItemNumber = 2; 
+	int32 PriceType = 3;
+	int32 Price = 4;
+	float PricePro = 5;
+	int32 BuyNum = 6;
+}
+
+message PopularizeInfo
+{
+	int64 UnitId = 1;
+	string Nmae = 2;
+	int32 Level = 3;
+	repeated int32 Rewards = 4;
+	int32 Occ = 5;
+	int32 OccTwo = 6;
+}
+
+message RankingInfo
+{
+	int64 UserId = 1;
+	string PlayerName = 2;
+	int32 PlayerLv = 3;
+	int64 Combat  = 4;
+	int32 Occ = 5;
+}
+
+message RankShouLieInfo
+{
+	int64 UnitID = 1;
+	string PlayerName = 2;
+	int64 KillNumber = 3;     //狩猎数量
+	int32 Occ = 4;				//显示头像
+}
+
+message RankPetInfo
+{
+	int64 UserId = 1;
+	string PlayerName = 2;
+	string TeamName = 3;
+	int32 RankId  = 4;
+	repeated int32 PetConfigId = 5;
+	repeated int64 PetUId = 6;
+}
+
+message ServerInfo
+{
+	int32 WorldLv = 1;
+	int64 ExChangeGold = 2;
+	RankingInfo RankingInfo = 4;
+	int32 TianQi = 5;
+	bool ShouLieOpen = 6;
+	int32 ChouKaDropId = 7;   //每天随机
+}
+
+message ServerMailItem
+{
+	int32 MailType = 1;		 //1全服邮件     2充值邮件   3等级邮件   4开启格子   5充值区间
+	string ParasmNew = 2;		//(Title == mailInfo[5])//0  充值金额    等级   开启第二个仓库并且格子没有开完的 
+	repeated BagInfo ItemList = 3;
+	int64  EndTime = 4;
+	int32 ServerMailIId = 5;
+	int32 Parasm = 6;   //(作废)
+}
+
+message UnionInfo
+{
+	string UnionName = 1;
+	int64 LeaderId = 2;
+	string LeaderName = 3;
+	int32 LevelLimit = 4;
+	string UnionPurpose = 5;
+	repeated int64 ApplyList = 6;
+	int64 UnionId = 7;
+	int32 Level = 8;
+	int32 Exp = 9;
+	repeated UnionPlayerInfo UnionPlayerList = 10;
+	repeated DonationRecord DonationRecords = 11;
+	repeated int64 JingXuanList = 12;
+	int64 JingXuanEndTime = 13;
+	repeated int32 UnionKeJiList = 14;
+	int32 KeJiActitePos = 15;			//当前升级的科技， 当前只能升级一个
+	int64 KeJiActiteTime = 16;			//当前升级时间
+	int64 UnionGold = 17;               //家族金币
+	repeated string ActiveRecord = 18;	//记录 $"{playerName}_{getWay}_{dataType}_{dataValue}
+}
+
+
+message UnionPlayerInfo
+{
+	string PlayerName = 1;
+	int32 PlayerLevel = 2;
+	int32 Position = 3;    ///1族长 2副族长  ///3长老  ///族长认命副族长 副族长可以认命长老 长老和副族长也可以包名家族战
+	int64 UserID = 4;
+	int32 Combat = 5;
+	int32 Occ = 6;
+	int32 OccTwo = 7;
+}
+
+message DonationRecord
+{
+	int64 UnitId = 1;
+	int64 Time = 2;
+	int Gold = 3;
+	string Name = 4;
+	int32 Occ = 5;
+	int Diamond = 6;
+}
+
+message A2C_Disconnect	//IMessage
+{
+	int32 Error = 1;
+}
+
+//等级 经验 货币 或者不变的数值都放在这。 
+message UserInfo
+{
+    int64 AccInfoID = 1;
+    string Name = 2;
+    int64 Gold  = 3;
+    //钻石
+    int64 Diamond = 4;
+
+    // 等级
+    int32 Lv = 5;
+    // 经验
+    int64 Exp = 6;
+    // 疲劳
+    int64 PiLao = 7;
+    //职业
+    int32 Occ = 8;
+
+    //职业
+    int32 OccTwo = 9;
+
+    int32 Combat = 10;
+
+    int32 RobotId = 11;
+
+    int32 Sp = 13;
+
+    int32 Vitality = 14;	//活力
+
+    int64 RongYu = 16;
+
+    string UnionName = 17;
+
+    int64 UserId = 18;
+
+    repeated KeyValuePair GameSettingInfos = 19;
+
+	repeated int32 MakeList = 20;
+
+	repeated int32 CompleteGuideIds = 21;
+
+	repeated KeyValuePairInt DayFubenTimes = 22;
+
+	repeated KeyValuePair MonsterRevives = 23;
+
+	repeated int32 TowerRewardIds = 24;
+
+	repeated int32 ChouKaRewardIds = 25;
+
+	repeated int32 XiuLianRewardIds = 26;
+
+	//购买过的神秘商品
+	repeated KeyValuePairInt  MysteryItems = 27;
+	
+	//已开启的宝箱记录
+	repeated KeyValuePair  OpenChestList = 28;
+
+	repeated KeyValuePairInt  MakeIdList = 29;
+
+	//已通关的副本列表
+    repeated FubenPassInfo FubenPassList = 30;
+
+	//每日道具使用限制
+	repeated KeyValuePairInt DayItemUse = 31;
+
+	repeated int32 HorseIds = 32;
+
+	//剧情副本每日刷新 global79
+	repeated KeyValuePairInt DayMonsters = 33;
+
+	//随机精灵每日刷新 global80
+	repeated int32 DayJingLing = 34;
+
+	int64 JiaYuanFund = 35;
+	int64 JiaYuanExp = 36;
+	int32 JiaYuanLv = 37;
+
+	int32 BaoShiDu = 38;
+
+	repeated KeyValuePair FirstWinSelf = 39;
+
+	int64 UnionZiJin = 40;
+
+	int32 ServerMailIdCur = 41;     //已领取的全服邮件
+
+	repeated int32 DiamondGetWay = 42;
+
+	string DemonName = 43;
+
+	repeated int32 PetMingRewards = 44;   //ini long都放在数值组件
+
+	repeated int32 OpenJingHeIds = 45;
+
+	int32 SeasonLevel = 46;		 //赛季等级
+	int32 SeasonExp = 47;		  //赛季经验
+	int64 SeasonCoin = 48;			//赛季币
+
+	repeated int32 WelfareTaskRewards = 49;
+
+	int64 CreateTime = 50;
+
+	repeated int32  WelfareInvestList = 51; //投资
+
+	repeated int32 RechargeReward = 52;
+
+	repeated int32 UnionKeJiList = 53;  //当前的能力id,客户端根据这个显示即可
+
+	repeated int32 PetExploreRewardIds = 54;
+
+	repeated int32 PetHeXinExploreRewardIds = 55;
+
+	string StallName = 56;
+
+	repeated int32 SingleRechargeIds = 57;
+
+	repeated int32 SingleRewardIds = 58;
+
+	repeated int32 ItemXiLianNumRewardIds = 59;
+
+	repeated int32 DefeatedBossIds = 60;
+}
+
+message M2C_RoleDataUpdate // IMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 UpdateType = 1;				//UserDataType
+	string UpdateTypeValue = 2;			
+	int64 UpdateValueLong = 3;			
+}
+
+message M2C_RoleDataBroadcast // IMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 UpdateType = 1;				//UserDataType
+	string UpdateTypeValue = 2;			
+	int64 UnitId = 3;
+}
+
+//技能列表
+message SkillPro
+{
+    int32 SkillID = 1;
+    int32 SkillPosition = 2;
+    int32 SkillSetType = 3;	//1技能 2道具 
+    int32 Actived = 4;  //0 未学习  1已学习
+    int32 SkillSource = 5; //1职业技能 2装备技能 3天赋技能 4 精灵技能 5 套装技能
+}
+
+//通过奖励
+message RewardItem
+{
+	int32 ItemID = 1;
+	int32 ItemNum = 2;
+}
+
+message FubenPassInfo
+{
+	int32 FubenId = 1;
+	int32 Difficulty = 2;			//1 difficulty普通 2 挑战  3困难
 }

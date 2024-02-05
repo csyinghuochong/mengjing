@@ -188,6 +188,8 @@ namespace ET
 		public int IfShowSkillZhiShi { get; set; }
 		/// <summary>结束时技能</summary>
 		public int EndSkillId { get; set; }
+		/// <summary>触发技能</summary>
+		public string BuffToSkill { get; set; }
 
 	}
 }

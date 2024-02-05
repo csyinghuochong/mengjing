@@ -609,12 +609,28 @@ namespace ET
 		[MemoryPackOrder(2)]
 		public string Password { get; set; }
 
+		[MemoryPackOrder(2)]
+		public string Token { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string ThirdLogin { get; set; }
+
+		[MemoryPackOrder(4)]
+		public bool Relink { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int age_type { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
 			this.RpcId = default;
 			this.Account = default;
 			this.Password = default;
+			this.Token = default;
+			this.ThirdLogin = default;
+			this.Relink = default;
+			this.age_type = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -672,6 +688,62 @@ namespace ET
 
 		[MemoryPackOrder(2)]
 		public string Value2 { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.KeyId = default;
+			this.Value = default;
+			this.Value2 = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.KeyValuePairInt)]
+	[MemoryPackable]
+	public partial class KeyValuePairInt: MessageObject
+	{
+		public static KeyValuePairInt Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(KeyValuePairInt), isFromPool) as KeyValuePairInt; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int KeyId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long Value { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.KeyId = default;
+			this.Value = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.KeyValuePairLong)]
+	[MemoryPackable]
+	public partial class KeyValuePairLong: MessageObject
+	{
+		public static KeyValuePairLong Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(KeyValuePairLong), isFromPool) as KeyValuePairLong; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long KeyId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long Value { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long Value2 { get; set; }
 
 		public override void Dispose() 
 		{
@@ -812,6 +884,24 @@ namespace ET
 		[MemoryPackOrder(5)]
 		public long GateId { get; set; }
 
+		[MemoryPackOrder(6)]
+		public string Token { get; set; }
+
+		[MemoryPackOrder(7)]
+		public long AccountId { get; set; }
+
+		[MemoryPackOrder(8)]
+		public int QueueNumber { get; set; }
+
+		[MemoryPackOrder(9)]
+		public string QueueAddres { get; set; }
+
+		[MemoryPackOrder(10)]
+		public PlayerInfo PlayerInfo { get; set; }
+
+		[MemoryPackOrder(11)]
+		public List<CreateRoleInfo> RoleLists { get; set; } = new();
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -821,6 +911,12 @@ namespace ET
 			this.Address = default;
 			this.Key = default;
 			this.GateId = default;
+			this.Token = default;
+			this.AccountId = default;
+			this.QueueNumber = default;
+			this.QueueAddres = default;
+			this.PlayerInfo = default;
+			this.RoleLists.Clear();
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -1375,6 +1471,1214 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.MysteryItemInfo)]
+	[MemoryPackable]
+	public partial class MysteryItemInfo: MessageObject
+	{
+		public static MysteryItemInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(MysteryItemInfo), isFromPool) as MysteryItemInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int MysteryId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int ItemID { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int ItemNumber { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int ProductId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.MysteryId = default;
+			this.ItemID = default;
+			this.ItemNumber = default;
+			this.ProductId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//战区领取记录
+	[Message(OuterMessage.ZhanQuReceiveNumber)]
+	[MemoryPackable]
+	public partial class ZhanQuReceiveNumber: MessageObject
+	{
+		public static ZhanQuReceiveNumber Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(ZhanQuReceiveNumber), isFromPool) as ZhanQuReceiveNumber; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int ActivityId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ReceiveNum { get; set; }
+
+		[MemoryPackOrder(2)]
+		public List<long> ReceiveUnitIds { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.ActivityId = default;
+			this.ReceiveNum = default;
+			this.ReceiveUnitIds.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.FirstWinInfo)]
+	[MemoryPackable]
+	public partial class FirstWinInfo: MessageObject
+	{
+		public static FirstWinInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(FirstWinInfo), isFromPool) as FirstWinInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long UserId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int FirstWinId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long KillTime { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int Difficulty { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UserId = default;
+			this.FirstWinId = default;
+			this.PlayerName = default;
+			this.KillTime = default;
+			this.Difficulty = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.PetMingPlayerInfo)]
+	[MemoryPackable]
+	public partial class PetMingPlayerInfo: MessageObject
+	{
+		public static PetMingPlayerInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(PetMingPlayerInfo), isFromPool) as PetMingPlayerInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int MineType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Postion { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(4)]
+		public List<int> PetConfig { get; set; } = new();
+
+		[MemoryPackOrder(5)]
+		public List<long> PetIdList { get; set; } = new();
+
+		[MemoryPackOrder(6)]
+		public int TeamId { get; set; }
+
+		[MemoryPackOrder(7)]
+		public long OccupyTime { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.MineType = default;
+			this.Postion = default;
+			this.UnitId = default;
+			this.PlayerName = default;
+			this.PetConfig.Clear();
+			this.PetIdList.Clear();
+			this.TeamId = default;
+			this.OccupyTime = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.ChatInfo)]
+	[MemoryPackable]
+	public partial class ChatInfo: MessageObject
+	{
+		public static ChatInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(ChatInfo), isFromPool) as ChatInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long UserId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string ChatMsg { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ChannelId { get; set; }
+
+		[MemoryPackOrder(4)]
+		public long ParamId { get; set; }
+
+		[MemoryPackOrder(5)]
+		public long Time { get; set; }
+
+		[MemoryPackOrder(6)]
+		public int Occ { get; set; }
+
+		[MemoryPackOrder(7)]
+		public int PlayerLevel { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UserId = default;
+			this.ChatMsg = default;
+			this.PlayerName = default;
+			this.ChannelId = default;
+			this.ParamId = default;
+			this.Time = default;
+			this.Occ = default;
+			this.PlayerLevel = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.MailInfo)]
+	[MemoryPackable]
+	public partial class MailInfo: MessageObject
+	{
+		public static MailInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(MailInfo), isFromPool) as MailInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int Status { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string Context { get; set; }
+
+		[MemoryPackOrder(4)]
+		public long MailId { get; set; }
+
+		[MemoryPackOrder(5)]
+		public string Title { get; set; }
+
+		[MemoryPackOrder(6)]
+		public List<BagInfo> ItemList { get; set; } = new();
+
+		[MemoryPackOrder(7)]
+		public BagInfo ItemSell { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.Status = default;
+			this.Context = default;
+			this.MailId = default;
+			this.Title = default;
+			this.ItemList.Clear();
+			this.ItemSell = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.PaiMaiItemInfo)]
+	[MemoryPackable]
+	public partial class PaiMaiItemInfo: MessageObject
+	{
+		public static PaiMaiItemInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(PaiMaiItemInfo), isFromPool) as PaiMaiItemInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long Id { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UserId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public BagInfo BagInfo { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int Price { get; set; }
+
+		[MemoryPackOrder(5)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(6)]
+		public long SellTime { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.Id = default;
+			this.UserId = default;
+			this.BagInfo = default;
+			this.Price = default;
+			this.PlayerName = default;
+			this.SellTime = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.PaiMaiShopItemInfo)]
+	[MemoryPackable]
+	public partial class PaiMaiShopItemInfo: MessageObject
+	{
+		public static PaiMaiShopItemInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(PaiMaiShopItemInfo), isFromPool) as PaiMaiShopItemInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long Id { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ItemNumber { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int PriceType { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int Price { get; set; }
+
+		[MemoryPackOrder(4)]
+		public float PricePro { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int BuyNum { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.Id = default;
+			this.ItemNumber = default;
+			this.PriceType = default;
+			this.Price = default;
+			this.PricePro = default;
+			this.BuyNum = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.PopularizeInfo)]
+	[MemoryPackable]
+	public partial class PopularizeInfo: MessageObject
+	{
+		public static PopularizeInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(PopularizeInfo), isFromPool) as PopularizeInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string Nmae { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Level { get; set; }
+
+		[MemoryPackOrder(3)]
+		public List<int> Rewards { get; set; } = new();
+
+		[MemoryPackOrder(4)]
+		public int Occ { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int OccTwo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UnitId = default;
+			this.Nmae = default;
+			this.Level = default;
+			this.Rewards.Clear();
+			this.Occ = default;
+			this.OccTwo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.RankingInfo)]
+	[MemoryPackable]
+	public partial class RankingInfo: MessageObject
+	{
+		public static RankingInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(RankingInfo), isFromPool) as RankingInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long UserId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int PlayerLv { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long Combat { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int Occ { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UserId = default;
+			this.PlayerName = default;
+			this.PlayerLv = default;
+			this.Combat = default;
+			this.Occ = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.RankShouLieInfo)]
+	[MemoryPackable]
+	public partial class RankShouLieInfo: MessageObject
+	{
+		public static RankShouLieInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(RankShouLieInfo), isFromPool) as RankShouLieInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long UnitID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long KillNumber { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int Occ { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UnitID = default;
+			this.PlayerName = default;
+			this.KillNumber = default;
+			this.Occ = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.RankPetInfo)]
+	[MemoryPackable]
+	public partial class RankPetInfo: MessageObject
+	{
+		public static RankPetInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(RankPetInfo), isFromPool) as RankPetInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long UserId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string TeamName { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int RankId { get; set; }
+
+		[MemoryPackOrder(4)]
+		public List<int> PetConfigId { get; set; } = new();
+
+		[MemoryPackOrder(5)]
+		public List<long> PetUId { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UserId = default;
+			this.PlayerName = default;
+			this.TeamName = default;
+			this.RankId = default;
+			this.PetConfigId.Clear();
+			this.PetUId.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.ServerInfo)]
+	[MemoryPackable]
+	public partial class ServerInfo: MessageObject
+	{
+		public static ServerInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(ServerInfo), isFromPool) as ServerInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int WorldLv { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long ExChangeGold { get; set; }
+
+		[MemoryPackOrder(3)]
+		public RankingInfo RankingInfo { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int TianQi { get; set; }
+
+		[MemoryPackOrder(5)]
+		public bool ShouLieOpen { get; set; }
+
+		[MemoryPackOrder(6)]
+		public int ChouKaDropId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.WorldLv = default;
+			this.ExChangeGold = default;
+			this.RankingInfo = default;
+			this.TianQi = default;
+			this.ShouLieOpen = default;
+			this.ChouKaDropId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.ServerMailItem)]
+	[MemoryPackable]
+	public partial class ServerMailItem: MessageObject
+	{
+		public static ServerMailItem Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(ServerMailItem), isFromPool) as ServerMailItem; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int MailType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string ParasmNew { get; set; }
+
+		[MemoryPackOrder(2)]
+		public List<BagInfo> ItemList { get; set; } = new();
+
+		[MemoryPackOrder(3)]
+		public long EndTime { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int ServerMailIId { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int Parasm { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.MailType = default;
+			this.ParasmNew = default;
+			this.ItemList.Clear();
+			this.EndTime = default;
+			this.ServerMailIId = default;
+			this.Parasm = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.UnionInfo)]
+	[MemoryPackable]
+	public partial class UnionInfo: MessageObject
+	{
+		public static UnionInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(UnionInfo), isFromPool) as UnionInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public string UnionName { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long LeaderId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string LeaderName { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int LevelLimit { get; set; }
+
+		[MemoryPackOrder(4)]
+		public string UnionPurpose { get; set; }
+
+		[MemoryPackOrder(5)]
+		public List<long> ApplyList { get; set; } = new();
+
+		[MemoryPackOrder(6)]
+		public long UnionId { get; set; }
+
+		[MemoryPackOrder(7)]
+		public int Level { get; set; }
+
+		[MemoryPackOrder(8)]
+		public int Exp { get; set; }
+
+		[MemoryPackOrder(9)]
+		public List<UnionPlayerInfo> UnionPlayerList { get; set; } = new();
+
+		[MemoryPackOrder(10)]
+		public List<DonationRecord> DonationRecords { get; set; } = new();
+
+		[MemoryPackOrder(11)]
+		public List<long> JingXuanList { get; set; } = new();
+
+		[MemoryPackOrder(12)]
+		public long JingXuanEndTime { get; set; }
+
+		[MemoryPackOrder(13)]
+		public List<int> UnionKeJiList { get; set; } = new();
+
+		[MemoryPackOrder(14)]
+		public int KeJiActitePos { get; set; }
+
+		[MemoryPackOrder(15)]
+		public long KeJiActiteTime { get; set; }
+
+		[MemoryPackOrder(16)]
+		public long UnionGold { get; set; }
+
+		[MemoryPackOrder(17)]
+		public List<string> ActiveRecord { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UnionName = default;
+			this.LeaderId = default;
+			this.LeaderName = default;
+			this.LevelLimit = default;
+			this.UnionPurpose = default;
+			this.ApplyList.Clear();
+			this.UnionId = default;
+			this.Level = default;
+			this.Exp = default;
+			this.UnionPlayerList.Clear();
+			this.DonationRecords.Clear();
+			this.JingXuanList.Clear();
+			this.JingXuanEndTime = default;
+			this.UnionKeJiList.Clear();
+			this.KeJiActitePos = default;
+			this.KeJiActiteTime = default;
+			this.UnionGold = default;
+			this.ActiveRecord.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.UnionPlayerInfo)]
+	[MemoryPackable]
+	public partial class UnionPlayerInfo: MessageObject
+	{
+		public static UnionPlayerInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(UnionPlayerInfo), isFromPool) as UnionPlayerInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int PlayerLevel { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Position { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long UserID { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int Combat { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int Occ { get; set; }
+
+		[MemoryPackOrder(6)]
+		public int OccTwo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.PlayerName = default;
+			this.PlayerLevel = default;
+			this.Position = default;
+			this.UserID = default;
+			this.Combat = default;
+			this.Occ = default;
+			this.OccTwo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.DonationRecord)]
+	[MemoryPackable]
+	public partial class DonationRecord: MessageObject
+	{
+		public static DonationRecord Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(DonationRecord), isFromPool) as DonationRecord; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long Time { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Gold { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string Name { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int Occ { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int Diamond { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UnitId = default;
+			this.Time = default;
+			this.Gold = default;
+			this.Name = default;
+			this.Occ = default;
+			this.Diamond = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.A2C_Disconnect)]
+	[MemoryPackable]
+	public partial class A2C_Disconnect: MessageObject, IMessage
+	{
+		public static A2C_Disconnect Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2C_Disconnect), isFromPool) as A2C_Disconnect; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//等级 经验 货币 或者不变的数值都放在这。
+	[Message(OuterMessage.UserInfo)]
+	[MemoryPackable]
+	public partial class UserInfo: MessageObject
+	{
+		public static UserInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(UserInfo), isFromPool) as UserInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long AccInfoID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string Name { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long Gold { get; set; }
+
+//钻石
+		[MemoryPackOrder(3)]
+		public long Diamond { get; set; }
+
+// 等级
+		[MemoryPackOrder(4)]
+		public int Lv { get; set; }
+
+// 经验
+		[MemoryPackOrder(5)]
+		public long Exp { get; set; }
+
+// 疲劳
+		[MemoryPackOrder(6)]
+		public long PiLao { get; set; }
+
+//职业
+		[MemoryPackOrder(7)]
+		public int Occ { get; set; }
+
+//职业
+		[MemoryPackOrder(8)]
+		public int OccTwo { get; set; }
+
+		[MemoryPackOrder(9)]
+		public int Combat { get; set; }
+
+		[MemoryPackOrder(10)]
+		public int RobotId { get; set; }
+
+		[MemoryPackOrder(12)]
+		public int Sp { get; set; }
+
+		[MemoryPackOrder(13)]
+		public int Vitality { get; set; }
+
+		[MemoryPackOrder(15)]
+		public long RongYu { get; set; }
+
+		[MemoryPackOrder(16)]
+		public string UnionName { get; set; }
+
+		[MemoryPackOrder(17)]
+		public long UserId { get; set; }
+
+		[MemoryPackOrder(18)]
+		public List<KeyValuePair> GameSettingInfos { get; set; } = new();
+
+		[MemoryPackOrder(19)]
+		public List<int> MakeList { get; set; } = new();
+
+		[MemoryPackOrder(20)]
+		public List<int> CompleteGuideIds { get; set; } = new();
+
+		[MemoryPackOrder(21)]
+		public List<KeyValuePairInt> DayFubenTimes { get; set; } = new();
+
+		[MemoryPackOrder(22)]
+		public List<KeyValuePair> MonsterRevives { get; set; } = new();
+
+		[MemoryPackOrder(23)]
+		public List<int> TowerRewardIds { get; set; } = new();
+
+		[MemoryPackOrder(24)]
+		public List<int> ChouKaRewardIds { get; set; } = new();
+
+		[MemoryPackOrder(25)]
+		public List<int> XiuLianRewardIds { get; set; } = new();
+
+//购买过的神秘商品
+		[MemoryPackOrder(26)]
+		public List<KeyValuePairInt> MysteryItems { get; set; } = new();
+
+//已开启的宝箱记录
+		[MemoryPackOrder(27)]
+		public List<KeyValuePair> OpenChestList { get; set; } = new();
+
+		[MemoryPackOrder(28)]
+		public List<KeyValuePairInt> MakeIdList { get; set; } = new();
+
+//已通关的副本列表
+		[MemoryPackOrder(29)]
+		public List<FubenPassInfo> FubenPassList { get; set; } = new();
+
+//每日道具使用限制
+		[MemoryPackOrder(30)]
+		public List<KeyValuePairInt> DayItemUse { get; set; } = new();
+
+		[MemoryPackOrder(31)]
+		public List<int> HorseIds { get; set; } = new();
+
+//剧情副本每日刷新 global79
+		[MemoryPackOrder(32)]
+		public List<KeyValuePairInt> DayMonsters { get; set; } = new();
+
+//随机精灵每日刷新 global80
+		[MemoryPackOrder(33)]
+		public List<int> DayJingLing { get; set; } = new();
+
+		[MemoryPackOrder(34)]
+		public long JiaYuanFund { get; set; }
+
+		[MemoryPackOrder(35)]
+		public long JiaYuanExp { get; set; }
+
+		[MemoryPackOrder(36)]
+		public int JiaYuanLv { get; set; }
+
+		[MemoryPackOrder(37)]
+		public int BaoShiDu { get; set; }
+
+		[MemoryPackOrder(38)]
+		public List<KeyValuePair> FirstWinSelf { get; set; } = new();
+
+		[MemoryPackOrder(39)]
+		public long UnionZiJin { get; set; }
+
+		[MemoryPackOrder(40)]
+		public int ServerMailIdCur { get; set; }
+
+		[MemoryPackOrder(41)]
+		public List<int> DiamondGetWay { get; set; } = new();
+
+		[MemoryPackOrder(42)]
+		public string DemonName { get; set; }
+
+		[MemoryPackOrder(43)]
+		public List<int> PetMingRewards { get; set; } = new();
+
+		[MemoryPackOrder(44)]
+		public List<int> OpenJingHeIds { get; set; } = new();
+
+		[MemoryPackOrder(45)]
+		public int SeasonLevel { get; set; }
+
+		[MemoryPackOrder(46)]
+		public int SeasonExp { get; set; }
+
+		[MemoryPackOrder(47)]
+		public long SeasonCoin { get; set; }
+
+		[MemoryPackOrder(48)]
+		public List<int> WelfareTaskRewards { get; set; } = new();
+
+		[MemoryPackOrder(49)]
+		public long CreateTime { get; set; }
+
+		[MemoryPackOrder(50)]
+		public List<int> WelfareInvestList { get; set; } = new();
+
+		[MemoryPackOrder(51)]
+		public List<int> RechargeReward { get; set; } = new();
+
+		[MemoryPackOrder(52)]
+		public List<int> UnionKeJiList { get; set; } = new();
+
+		[MemoryPackOrder(53)]
+		public List<int> PetExploreRewardIds { get; set; } = new();
+
+		[MemoryPackOrder(54)]
+		public List<int> PetHeXinExploreRewardIds { get; set; } = new();
+
+		[MemoryPackOrder(55)]
+		public string StallName { get; set; }
+
+		[MemoryPackOrder(56)]
+		public List<int> SingleRechargeIds { get; set; } = new();
+
+		[MemoryPackOrder(57)]
+		public List<int> SingleRewardIds { get; set; } = new();
+
+		[MemoryPackOrder(58)]
+		public List<int> ItemXiLianNumRewardIds { get; set; } = new();
+
+		[MemoryPackOrder(59)]
+		public List<int> DefeatedBossIds { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.AccInfoID = default;
+			this.Name = default;
+			this.Gold = default;
+			this.Diamond = default;
+			this.Lv = default;
+			this.Exp = default;
+			this.PiLao = default;
+			this.Occ = default;
+			this.OccTwo = default;
+			this.Combat = default;
+			this.RobotId = default;
+			this.Sp = default;
+			this.Vitality = default;
+			this.RongYu = default;
+			this.UnionName = default;
+			this.UserId = default;
+			this.GameSettingInfos.Clear();
+			this.MakeList.Clear();
+			this.CompleteGuideIds.Clear();
+			this.DayFubenTimes.Clear();
+			this.MonsterRevives.Clear();
+			this.TowerRewardIds.Clear();
+			this.ChouKaRewardIds.Clear();
+			this.XiuLianRewardIds.Clear();
+			this.MysteryItems.Clear();
+			this.OpenChestList.Clear();
+			this.MakeIdList.Clear();
+			this.FubenPassList.Clear();
+			this.DayItemUse.Clear();
+			this.HorseIds.Clear();
+			this.DayMonsters.Clear();
+			this.DayJingLing.Clear();
+			this.JiaYuanFund = default;
+			this.JiaYuanExp = default;
+			this.JiaYuanLv = default;
+			this.BaoShiDu = default;
+			this.FirstWinSelf.Clear();
+			this.UnionZiJin = default;
+			this.ServerMailIdCur = default;
+			this.DiamondGetWay.Clear();
+			this.DemonName = default;
+			this.PetMingRewards.Clear();
+			this.OpenJingHeIds.Clear();
+			this.SeasonLevel = default;
+			this.SeasonExp = default;
+			this.SeasonCoin = default;
+			this.WelfareTaskRewards.Clear();
+			this.CreateTime = default;
+			this.WelfareInvestList.Clear();
+			this.RechargeReward.Clear();
+			this.UnionKeJiList.Clear();
+			this.PetExploreRewardIds.Clear();
+			this.PetHeXinExploreRewardIds.Clear();
+			this.StallName = default;
+			this.SingleRechargeIds.Clear();
+			this.SingleRewardIds.Clear();
+			this.ItemXiLianNumRewardIds.Clear();
+			this.DefeatedBossIds.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RoleDataUpdate)]
+	[MemoryPackable]
+	public partial class M2C_RoleDataUpdate: MessageObject, IMessage
+	{
+		public static M2C_RoleDataUpdate Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RoleDataUpdate), isFromPool) as M2C_RoleDataUpdate; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int UpdateType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string UpdateTypeValue { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UpdateValueLong { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.UpdateType = default;
+			this.UpdateTypeValue = default;
+			this.UpdateValueLong = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RoleDataBroadcast)]
+	[MemoryPackable]
+	public partial class M2C_RoleDataBroadcast: MessageObject, IMessage
+	{
+		public static M2C_RoleDataBroadcast Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RoleDataBroadcast), isFromPool) as M2C_RoleDataBroadcast; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int UpdateType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string UpdateTypeValue { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UnitId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.UpdateType = default;
+			this.UpdateTypeValue = default;
+			this.UnitId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//技能列表
+	[Message(OuterMessage.SkillPro)]
+	[MemoryPackable]
+	public partial class SkillPro: MessageObject
+	{
+		public static SkillPro Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(SkillPro), isFromPool) as SkillPro; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int SkillID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int SkillPosition { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int SkillSetType { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int Actived { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int SkillSource { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.SkillID = default;
+			this.SkillPosition = default;
+			this.SkillSetType = default;
+			this.Actived = default;
+			this.SkillSource = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//通过奖励
+	[Message(OuterMessage.RewardItem)]
+	[MemoryPackable]
+	public partial class RewardItem: MessageObject
+	{
+		public static RewardItem Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(RewardItem), isFromPool) as RewardItem; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int ItemID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ItemNum { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.ItemID = default;
+			this.ItemNum = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.FubenPassInfo)]
+	[MemoryPackable]
+	public partial class FubenPassInfo: MessageObject
+	{
+		public static FubenPassInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(FubenPassInfo), isFromPool) as FubenPassInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int FubenId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Difficulty { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.FubenId = default;
+			this.Difficulty = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -1401,23 +2705,49 @@ namespace ET
 		 public const ushort C2R_Login = 10023;
 		 public const ushort RechargeInfo = 10024;
 		 public const ushort KeyValuePair = 10025;
-		 public const ushort PlayerInfo = 10026;
-		 public const ushort CreateRoleInfo = 10027;
-		 public const ushort R2C_Login = 10028;
-		 public const ushort C2G_LoginGate = 10029;
-		 public const ushort G2C_LoginGate = 10030;
-		 public const ushort G2C_TestHotfixMessage = 10031;
-		 public const ushort C2M_TestRobotCase = 10032;
-		 public const ushort M2C_TestRobotCase = 10033;
-		 public const ushort C2M_TestRobotCase2 = 10034;
-		 public const ushort M2C_TestRobotCase2 = 10035;
-		 public const ushort C2M_TransferMap = 10036;
-		 public const ushort M2C_TransferMap = 10037;
-		 public const ushort C2G_Benchmark = 10038;
-		 public const ushort G2C_Benchmark = 10039;
-		 public const ushort HideProList = 10040;
-		 public const ushort BagInfo = 10041;
-		 public const ushort C2M_BagInitRequest = 10042;
-		 public const ushort M2C_BagInitResponse = 10043;
+		 public const ushort KeyValuePairInt = 10026;
+		 public const ushort KeyValuePairLong = 10027;
+		 public const ushort PlayerInfo = 10028;
+		 public const ushort CreateRoleInfo = 10029;
+		 public const ushort R2C_Login = 10030;
+		 public const ushort C2G_LoginGate = 10031;
+		 public const ushort G2C_LoginGate = 10032;
+		 public const ushort G2C_TestHotfixMessage = 10033;
+		 public const ushort C2M_TestRobotCase = 10034;
+		 public const ushort M2C_TestRobotCase = 10035;
+		 public const ushort C2M_TestRobotCase2 = 10036;
+		 public const ushort M2C_TestRobotCase2 = 10037;
+		 public const ushort C2M_TransferMap = 10038;
+		 public const ushort M2C_TransferMap = 10039;
+		 public const ushort C2G_Benchmark = 10040;
+		 public const ushort G2C_Benchmark = 10041;
+		 public const ushort HideProList = 10042;
+		 public const ushort BagInfo = 10043;
+		 public const ushort C2M_BagInitRequest = 10044;
+		 public const ushort M2C_BagInitResponse = 10045;
+		 public const ushort MysteryItemInfo = 10046;
+		 public const ushort ZhanQuReceiveNumber = 10047;
+		 public const ushort FirstWinInfo = 10048;
+		 public const ushort PetMingPlayerInfo = 10049;
+		 public const ushort ChatInfo = 10050;
+		 public const ushort MailInfo = 10051;
+		 public const ushort PaiMaiItemInfo = 10052;
+		 public const ushort PaiMaiShopItemInfo = 10053;
+		 public const ushort PopularizeInfo = 10054;
+		 public const ushort RankingInfo = 10055;
+		 public const ushort RankShouLieInfo = 10056;
+		 public const ushort RankPetInfo = 10057;
+		 public const ushort ServerInfo = 10058;
+		 public const ushort ServerMailItem = 10059;
+		 public const ushort UnionInfo = 10060;
+		 public const ushort UnionPlayerInfo = 10061;
+		 public const ushort DonationRecord = 10062;
+		 public const ushort A2C_Disconnect = 10063;
+		 public const ushort UserInfo = 10064;
+		 public const ushort M2C_RoleDataUpdate = 10065;
+		 public const ushort M2C_RoleDataBroadcast = 10066;
+		 public const ushort SkillPro = 10067;
+		 public const ushort RewardItem = 10068;
+		 public const ushort FubenPassInfo = 10069;
 	}
 }

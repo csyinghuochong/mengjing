@@ -924,7 +924,299 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(UnitCache2Other_GetComponent))]
+	[Message(InnerMessage.Other2UnitCache_GetComponent)]
+	[MemoryPackable]
+	public partial class Other2UnitCache_GetComponent: MessageObject, IRequest
+	{
+		public static Other2UnitCache_GetComponent Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Other2UnitCache_GetComponent), isFromPool) as Other2UnitCache_GetComponent; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string Component { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.Component = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.UnitCache2Other_GetComponent)]
+	[MemoryPackable]
+	public partial class UnitCache2Other_GetComponent: MessageObject, IResponse
+	{
+		public static UnitCache2Other_GetComponent Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(UnitCache2Other_GetComponent), isFromPool) as UnitCache2Other_GetComponent; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public Entity Component { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.Component = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 //----------玩家缓存相关----------------
+	[ResponseType(nameof(Center2A_CheckAccount))]
+	[Message(InnerMessage.A2Center_CheckAccount)]
+	[MemoryPackable]
+	public partial class A2Center_CheckAccount: MessageObject, IRequest
+	{
+		public static A2Center_CheckAccount Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2Center_CheckAccount), isFromPool) as A2Center_CheckAccount; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string AccountName { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string Password { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string ThirdLogin { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.AccountName = default;
+			this.Password = default;
+			this.ThirdLogin = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.Center2A_CheckAccount)]
+	[MemoryPackable]
+	public partial class Center2A_CheckAccount: MessageObject, IResponse
+	{
+		public static Center2A_CheckAccount Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Center2A_CheckAccount), isFromPool) as Center2A_CheckAccount; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public PlayerInfo PlayerInfo { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long AccountId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public bool IsHoliday { get; set; }
+
+		[MemoryPackOrder(3)]
+		public bool StopServer { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PlayerInfo = default;
+			this.AccountId = default;
+			this.IsHoliday = default;
+			this.StopServer = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(Center2A_RegisterAccount))]
+	[Message(InnerMessage.A2Center_RegisterAccount)]
+	[MemoryPackable]
+	public partial class A2Center_RegisterAccount: MessageObject, IRequest
+	{
+		public static A2Center_RegisterAccount Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2Center_RegisterAccount), isFromPool) as A2Center_RegisterAccount; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string AccountName { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string Password { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int LoginType { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int age_type { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.AccountName = default;
+			this.Password = default;
+			this.LoginType = default;
+			this.age_type = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.Center2A_RegisterAccount)]
+	[MemoryPackable]
+	public partial class Center2A_RegisterAccount: MessageObject, IResponse
+	{
+		public static Center2A_RegisterAccount Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Center2A_RegisterAccount), isFromPool) as Center2A_RegisterAccount; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long AccountId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.AccountId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(L2A_LoginAccountResponse))]
+	[Message(InnerMessage.A2L_LoginAccountRequest)]
+	[MemoryPackable]
+	public partial class A2L_LoginAccountRequest: MessageObject, IRequest
+	{
+		public static A2L_LoginAccountRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2L_LoginAccountRequest), isFromPool) as A2L_LoginAccountRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long AccountId { get; set; }
+
+		[MemoryPackOrder(4)]
+		public bool Relink { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.AccountId = default;
+			this.Relink = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.L2A_LoginAccountResponse)]
+	[MemoryPackable]
+	public partial class L2A_LoginAccountResponse: MessageObject, IResponse
+	{
+		public static L2A_LoginAccountResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(L2A_LoginAccountResponse), isFromPool) as L2A_LoginAccountResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -956,5 +1248,13 @@ namespace ET
 		 public const ushort UnitCache2Other_GetUnit = 20028;
 		 public const ushort Other2UnitCache_DeleteUnit = 20029;
 		 public const ushort UnitCache2Other_DeleteUnit = 20030;
+		 public const ushort Other2UnitCache_GetComponent = 20031;
+		 public const ushort UnitCache2Other_GetComponent = 20032;
+		 public const ushort A2Center_CheckAccount = 20033;
+		 public const ushort Center2A_CheckAccount = 20034;
+		 public const ushort A2Center_RegisterAccount = 20035;
+		 public const ushort Center2A_RegisterAccount = 20036;
+		 public const ushort A2L_LoginAccountRequest = 20037;
+		 public const ushort L2A_LoginAccountResponse = 20038;
 	}
 }

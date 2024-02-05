@@ -124,6 +124,8 @@ namespace ET
 		public int[] AddSkill { get; set; }
 		/// <summary>被击杀后是否移除机制</summary>
 		public int DeadNoRemove { get; set; }
+		/// <summary>触发技能</summary>
+		public string BuffToSkill { get; set; }
 
 	}
 }
