@@ -7,7 +7,7 @@
         {
             Log.Debug("AppStartInitFinish_CreateLoginUI");
             //await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Login);
-            await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role);
+            await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Login);
         }
     }
 }
