@@ -18,5 +18,6 @@ namespace ET.Client
 		WindowID_Main,
 		WindowID_Role,
 		WindowID_RoleBag,
+		WindowID_ItemTips,
 	}
 }

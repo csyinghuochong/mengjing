@@ -26,14 +26,16 @@ namespace ET.Client
             string qualityiconStr = FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality);
             string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
             self.E_ItemQualityImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
-            // self.E_SelectButton.AddListenerWithId(self.OnShowItemEntryPopUpHandler, id);
+            self.E_ItemClickButton.AddListenerWithParam(self.OnShowItemEntryPopUpHandler, bagInfo);
         }
 
-        public static void OnShowItemEntryPopUpHandler(this Scroll_Item_BagItem self, long Id)
+        public static void OnShowItemEntryPopUpHandler(this Scroll_Item_BagItem self, BagInfo bagInfo)
         {
-            // self.ZoneScene().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_ItemPopUp);
-            // Item item = self.ZoneScene().GetComponent<BagComponent>().GetItemById(Id);
-            // self.ZoneScene().GetComponent<UIComponent>().GetDlgLogic<DlgItemPopUp>().RefreshInfo(item, ItemContainerType.Bag);
+            EventSystem.Instance.Publish(self.Root(),
+                new ShowItemTips()
+                {
+                    Scene = self.Root(), BagInfo = bagInfo, ItemOperateEnum = ItemOperateEnum.None, InputPoint = Input.mousePosition
+                });
         }
     }
 }
