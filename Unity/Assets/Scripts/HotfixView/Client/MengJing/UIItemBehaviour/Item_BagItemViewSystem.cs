@@ -17,15 +17,15 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void Refresh(this Scroll_Item_BagItem self, long id)
+        public static void Refresh(this Scroll_Item_BagItem self, BagInfo bagInfo)
         {
-            Log.Debug($"更新背包Item :{id}");
-            self.E_ItemNameText.text = id.ToString();
-            self.E_ItemNumText.text = "1";
-            // Item item = self.ZoneScene().GetComponent<BagComponent>().GetItemById(id);
-            //
-            // self.E_IconImage.overrideSprite = IconHelper.LoadIconSprite("Icons", item.Config.Icon);
-            // self.E_QualityImage.color = item.ItemQualityColor();
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+            self.E_ItemNumText.text = bagInfo.ItemNum.ToString();
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+            self.E_ItemIconImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            string qualityiconStr = FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality);
+            string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
+            self.E_ItemQualityImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
             // self.E_SelectButton.AddListenerWithId(self.OnShowItemEntryPopUpHandler, id);
         }
 

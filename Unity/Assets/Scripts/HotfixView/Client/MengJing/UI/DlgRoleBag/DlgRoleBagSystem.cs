@@ -23,7 +23,7 @@ namespace ET.Client
         private static void OnLoopItemRefreshHandler(this DlgRoleBag self, Transform transform, int index)
         {
             Scroll_Item_BagItem scrollItemBagItem = self.ScrollItemBagItems[index].BindTrans(transform);
-            scrollItemBagItem.Refresh(self.ShowBagInfos[index].BagInfoID);
+            scrollItemBagItem.Refresh(self.ShowBagInfos[index]);
         }
 
         private static void OnItemTypeSet(this DlgRoleBag self, int index)
@@ -52,13 +52,16 @@ namespace ET.Client
 
         private static void RefreshItems(this DlgRoleBag self)
         {
-            List<BagInfo> allBagInfos = new List<BagInfo>();
-            allBagInfos.Add(new BagInfo() { BagInfoID = 1, ItemID = 1 });
-            allBagInfos.Add(new BagInfo() { BagInfoID = 2, ItemID = 2 });
-            allBagInfos.Add(new BagInfo() { BagInfoID = 3, ItemID = 3 });
-            allBagInfos.Add(new BagInfo() { BagInfoID = 4, ItemID = 4 });
+            BagComponentClient bagComponentClient = self.Root().GetComponent<BagComponentClient>();
+            // 假数据
+            bagComponentClient.BagItemList.Clear();
+            bagComponentClient.BagItemList.Add(new BagInfo() { BagInfoID = 1, ItemID = 10000101 });
+            bagComponentClient.BagItemList.Add(new BagInfo() { BagInfoID = 2, ItemID = 10000102 });
+            bagComponentClient.BagItemList.Add(new BagInfo() { BagInfoID = 3, ItemID = 10000103 });
+            bagComponentClient.BagItemList.Add(new BagInfo() { BagInfoID = 4, ItemID = 10000104 });
+
             self.ShowBagInfos.Clear();
-            foreach (BagInfo bagInfo in allBagInfos)
+            foreach (BagInfo bagInfo in bagComponentClient.BagItemList)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
                 if (self.CurrentItemType == 0 || self.CurrentItemType == itemConfig.ItemType)
