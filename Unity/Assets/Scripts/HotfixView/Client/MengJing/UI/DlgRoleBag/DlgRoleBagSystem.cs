@@ -22,20 +22,8 @@ namespace ET.Client
 
         private static void OnLoopItemRefreshHandler(this DlgRoleBag self, Transform transform, int index)
         {
-            List<BagInfo> allBagInfos = new List<BagInfo>();
-            List<BagInfo> bagInfos = new List<BagInfo>();
-            foreach (BagInfo bagInfo in allBagInfos)
-            {
-                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
-                if (self.CurrentItemType == 0 || self.CurrentItemType == itemConfig.ItemType)
-                {
-                    bagInfos.Add(bagInfo);
-                }
-            }
-
             Scroll_Item_BagItem scrollItemBagItem = self.ScrollItemBagItems[index].BindTrans(transform);
-
-            scrollItemBagItem.Refresh(index < bagInfos.Count? bagInfos[index].BagInfoID : 0);
+            scrollItemBagItem.Refresh(self.ShowBagInfos[index].BagInfoID);
         }
 
         private static void OnItemTypeSet(this DlgRoleBag self, int index)
@@ -64,8 +52,23 @@ namespace ET.Client
 
         private static void RefreshItems(this DlgRoleBag self)
         {
-            self.AddUIScrollItems(ref self.ScrollItemBagItems, 100);
-            self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, 100);
+            List<BagInfo> allBagInfos = new List<BagInfo>();
+            allBagInfos.Add(new BagInfo() { BagInfoID = 1, ItemID = 1 });
+            allBagInfos.Add(new BagInfo() { BagInfoID = 2, ItemID = 2 });
+            allBagInfos.Add(new BagInfo() { BagInfoID = 3, ItemID = 3 });
+            allBagInfos.Add(new BagInfo() { BagInfoID = 4, ItemID = 4 });
+            self.ShowBagInfos.Clear();
+            foreach (BagInfo bagInfo in allBagInfos)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+                if (self.CurrentItemType == 0 || self.CurrentItemType == itemConfig.ItemType)
+                {
+                    self.ShowBagInfos.Add(bagInfo);
+                }
+            }
+
+            self.AddUIScrollItems(ref self.ScrollItemBagItems, self.ShowBagInfos.Count);
+            self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
     }
 }

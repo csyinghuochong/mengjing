@@ -11,6 +11,7 @@ namespace ET.Client
         }
 
         public Dictionary<int, Scroll_Item_BagItem> ScrollItemBagItems;
+        public List<BagInfo> ShowBagInfos = new();
         public int CurrentItemType;
     }
 }
