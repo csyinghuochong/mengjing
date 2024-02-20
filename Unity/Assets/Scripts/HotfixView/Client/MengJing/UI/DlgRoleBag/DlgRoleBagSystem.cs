@@ -56,9 +56,9 @@ namespace ET.Client
             // 假数据
             bagComponentClient.BagItemList.Clear();
             bagComponentClient.BagItemList.Add(new BagInfo() { BagInfoID = 1, ItemID = 10000101 });
-            bagComponentClient.BagItemList.Add(new BagInfo() { BagInfoID = 2, ItemID = 10000102 });
-            bagComponentClient.BagItemList.Add(new BagInfo() { BagInfoID = 3, ItemID = 10000103 });
-            bagComponentClient.BagItemList.Add(new BagInfo() { BagInfoID = 4, ItemID = 10000104 });
+            bagComponentClient.BagItemList.Add(new BagInfo() { BagInfoID = 2, ItemID = 10035001 });
+            bagComponentClient.BagItemList.Add(new BagInfo() { BagInfoID = 3, ItemID = 10041211 });
+            bagComponentClient.BagItemList.Add(new BagInfo() { BagInfoID = 4, ItemID = 15711003 });
 
             self.ShowBagInfos.Clear();
             foreach (BagInfo bagInfo in bagComponentClient.BagItemList)
