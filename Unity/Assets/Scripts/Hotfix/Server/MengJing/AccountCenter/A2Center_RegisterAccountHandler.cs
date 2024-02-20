@@ -14,7 +14,7 @@ namespace ET.Server
 
             using (await scene.GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Register, request.AccountName.GetHashCode()))
             {
-                DBComponent dBComponent = DBManagerComponent.Instance.GetZoneDB(scene.Zone());
+                DBComponent dBComponent = scene.Root().GetComponent<DBManagerComponent>().GetZoneDB(scene.Zone());
                 List<DBCenterAccountInfo> result = await dBComponent.Query<DBCenterAccountInfo>(scene.Zone(), _account => _account.Account == request.AccountName);
 
                 //如果查询数据不为空,表示当前账号已经被注册

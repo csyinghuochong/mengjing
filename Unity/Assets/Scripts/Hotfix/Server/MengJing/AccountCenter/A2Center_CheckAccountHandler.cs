@@ -11,7 +11,8 @@ namespace ET.Server
         protected override async ETTask Run(Scene scene, A2Center_CheckAccount request, Center2A_CheckAccount response)
         {
             Console.WriteLine("A2Center_CheckAccount");
-            DBComponent dBComponent = DBManagerComponent.Instance.GetZoneDB(scene.Zone());
+
+            DBComponent dBComponent = scene.Root().GetComponent<DBManagerComponent>().GetZoneDB(scene.Zone());
             List<DBCenterAccountInfo> centerAccountInfoList = await dBComponent.Query<DBCenterAccountInfo>(scene.Zone(), d => d.Account == request.AccountName && d.Password == request.Password);
 
             //ÊÖ»úºÅÅÐ¶Ï3/4

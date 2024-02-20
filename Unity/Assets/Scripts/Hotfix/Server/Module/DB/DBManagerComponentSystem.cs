@@ -10,13 +10,12 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this DBManagerComponent self)
         {
-            DBManagerComponent.Instance = self;
+           
         }
 
         [EntitySystem]
         private static void Destroy(this DBManagerComponent self)
         {
-            DBManagerComponent.Instance = null;
         }
 
         public static DBComponent GetZoneDB(this DBManagerComponent self, int zone)

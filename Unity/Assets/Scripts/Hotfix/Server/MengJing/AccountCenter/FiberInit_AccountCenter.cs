@@ -16,6 +16,7 @@ namespace ET.Server
             root.AddComponent<LocationManagerComoponent>();
             root.AddComponent<FangChenMiComponent>();
             root.AddComponent<TokenComponent>();
+            root.AddComponent<DBManagerComponent>();
             await ETTask.CompletedTask;
         }
     }

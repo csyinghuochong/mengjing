@@ -53,7 +53,7 @@ namespace ET.Server
             Entity entity = null;
             if (!self.CacheCompoenntsDictionary.TryGetValue(unitId, out entity))
             {
-                entity = await DBManagerComponent.Instance.GetZoneDB(self.Zone()).Query<Entity>(unitId, self.key);
+                entity = await self.Root().GetComponent<DBManagerComponent>().GetZoneDB(self.Zone()).Query<Entity>(unitId, self.key);
                 if (entity != null)
                 {
                     self.AddOrUpdate(entity);
