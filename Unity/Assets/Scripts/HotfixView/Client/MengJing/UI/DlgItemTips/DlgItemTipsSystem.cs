@@ -12,11 +12,21 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgItemTips self)
         {
+            self.View.E_BGButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips); });
+            self.View.E_SellButton.AddListener(self.OnSellButton);
+            self.View.E_UseButton.AddListener(self.OnUseButton);
+            self.View.E_SplitButton.AddListener(self.OnSplitButton);
+            self.View.E_PlanButton.AddListener(self.OnPlanButton);
+            self.View.E_StoreHouseButton.AddListener(self.OnStoreHouseButton);
+            self.View.E_HuiShouButton.AddListener(self.OnHuiShouButton);
+            self.View.E_HuiShouCancleButton.AddListener(self.OnHuiShouCancleButton);
+            self.View.E_XieXiaGemButton.AddListener(self.OnXieXiaGemButton);
+            self.View.E_PutBagButton.AddListener(self.OnPutBagButton);
         }
 
         public static void ShowWindow(this DlgItemTips self, Entity contextData = null)
         {
-            self.Img_backVector2 = self.View.E_BGImage.GetComponent<RectTransform>().sizeDelta;
+            self.Img_backVector2 = self.View.E_BackImage.GetComponent<RectTransform>().sizeDelta;
             self.Lab_ItemNameWidth = self.View.E_ItemNameText.GetComponent<RectTransform>().sizeDelta.x;
         }
 
@@ -284,6 +294,51 @@ namespace ET.Client
             {
                 self.View.E_ItemLvText.text = langStr + ":1";
             }
+        }
+
+        private static void OnSellButton(this DlgItemTips self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+        }
+
+        private static void OnUseButton(this DlgItemTips self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+        }
+
+        private static void OnSplitButton(this DlgItemTips self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+        }
+
+        private static void OnPlanButton(this DlgItemTips self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+        }
+
+        private static void OnStoreHouseButton(this DlgItemTips self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+        }
+
+        private static void OnHuiShouButton(this DlgItemTips self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+        }
+
+        private static void OnHuiShouCancleButton(this DlgItemTips self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+        }
+
+        private static void OnXieXiaGemButton(this DlgItemTips self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+        }
+
+        private static void OnPutBagButton(this DlgItemTips self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
         }
     }
 }
