@@ -1,0 +1,245 @@
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
+{
+	[ChildOf]
+	[EnableMethod]
+	public  class ES_CommonItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	{
+		public UnityEngine.UI.Button E_ItemClickButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemClickButton == null )
+     			{
+		    		this.m_E_ItemClickButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ItemClick");
+     			}
+     			return this.m_E_ItemClickButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ItemClickImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemClickImage == null )
+     			{
+		    		this.m_E_ItemClickImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ItemClick");
+     			}
+     			return this.m_E_ItemClickImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ItemDragImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemDragImage == null )
+     			{
+		    		this.m_E_ItemDragImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ItemDrag");
+     			}
+     			return this.m_E_ItemDragImage;
+     		}
+     	}
+
+		public UnityEngine.EventSystems.EventTrigger E_ItemDragEventTrigger
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemDragEventTrigger == null )
+     			{
+		    		this.m_E_ItemDragEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_ItemDrag");
+     			}
+     			return this.m_E_ItemDragEventTrigger;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ItemQualityImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemQualityImage == null )
+     			{
+		    		this.m_E_ItemQualityImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ItemQuality");
+     			}
+     			return this.m_E_ItemQualityImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ItemIconImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemIconImage == null )
+     			{
+		    		this.m_E_ItemIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ItemIcon");
+     			}
+     			return this.m_E_ItemIconImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_ItemNumText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemNumText == null )
+     			{
+		    		this.m_E_ItemNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_ItemNum");
+     			}
+     			return this.m_E_ItemNumText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_ItemNameText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemNameText == null )
+     			{
+		    		this.m_E_ItemNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_ItemName");
+     			}
+     			return this.m_E_ItemNameText;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_XuanZhongImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_XuanZhongImage == null )
+     			{
+		    		this.m_E_XuanZhongImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_XuanZhong");
+     			}
+     			return this.m_E_XuanZhongImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ItemEffectImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemEffectImage == null )
+     			{
+		    		this.m_E_ItemEffectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ItemEffect");
+     			}
+     			return this.m_E_ItemEffectImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_BindingImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_BindingImage == null )
+     			{
+		    		this.m_E_BindingImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Binding");
+     			}
+     			return this.m_E_BindingImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ProtectImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ProtectImage == null )
+     			{
+		    		this.m_E_ProtectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Protect");
+     			}
+     			return this.m_E_ProtectImage;
+     		}
+     	}
+
+		public void DestroyWidget()
+		{
+			this.m_E_ItemClickButton = null;
+			this.m_E_ItemClickImage = null;
+			this.m_E_ItemDragImage = null;
+			this.m_E_ItemDragEventTrigger = null;
+			this.m_E_ItemQualityImage = null;
+			this.m_E_ItemIconImage = null;
+			this.m_E_ItemNumText = null;
+			this.m_E_ItemNameText = null;
+			this.m_E_XuanZhongImage = null;
+			this.m_E_ItemEffectImage = null;
+			this.m_E_BindingImage = null;
+			this.m_E_ProtectImage = null;
+			this.uiTransform = null;
+		}
+
+		private UnityEngine.UI.Button m_E_ItemClickButton = null;
+		private UnityEngine.UI.Image m_E_ItemClickImage = null;
+		private UnityEngine.UI.Image m_E_ItemDragImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_ItemDragEventTrigger = null;
+		private UnityEngine.UI.Image m_E_ItemQualityImage = null;
+		private UnityEngine.UI.Image m_E_ItemIconImage = null;
+		private UnityEngine.UI.Text m_E_ItemNumText = null;
+		private UnityEngine.UI.Text m_E_ItemNameText = null;
+		private UnityEngine.UI.Image m_E_XuanZhongImage = null;
+		private UnityEngine.UI.Image m_E_ItemEffectImage = null;
+		private UnityEngine.UI.Image m_E_BindingImage = null;
+		private UnityEngine.UI.Image m_E_ProtectImage = null;
+		public Transform uiTransform = null;
+	}
+}

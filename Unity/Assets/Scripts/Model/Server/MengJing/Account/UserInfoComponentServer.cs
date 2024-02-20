@@ -10,17 +10,17 @@ namespace ET.Server
         public UserInfo UserInfo = new UserInfo();
 
           /// <summary>
-        /// µÇÂ¼»òÕßÁãµãË¢ĞÂµÄÊ±ºò»á¸Ä±ä.Ö÷ÒªÓÃÀ´ÌåÁ¦»Ö¸´£¬Ë¢ĞÂÊı¾İ
+        /// ç™»å½•æˆ–è€…é›¶ç‚¹åˆ·æ–°çš„æ—¶å€™ä¼šæ”¹å˜.ä¸»è¦ç”¨æ¥ä½“åŠ›æ¢å¤ï¼Œåˆ·æ–°æ•°æ®
         /// </summary>
         public long LastLoginTime;
 
         /// <summary>
-        /// ÁìµØ¾­Ñé
+        /// é¢†åœ°ç»éªŒ
         /// </summary>
         public int LingDiOnLine;
 
         /// <summary>
-        /// ½ñÈÕÔÚÏßÊ±³¤
+        /// ä»Šæ—¥åœ¨çº¿æ—¶é•¿
         /// </summary>
         public long TodayOnLine;
 
@@ -30,7 +30,7 @@ namespace ET.Server
         public string UserName;
 
         /// <summary>
-        /// á÷ÁÔ»÷É±Ò°¹ÖÊıÁ¿
+        /// ç‹©çŒå‡»æ€é‡æ€ªæ•°é‡
         /// </summary>
         public int ShouLieKill;
 
