@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System;
+using ET.Server;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,7 @@ namespace ET.Client
         public static void ShowWindow(this DlgRole self, Entity contextData = null)
         {
             self.View.E_BagToggle.IsSelected(true);
+            self.InitSubView();
         }
 
         private static void OnFunctionSetBtn(this DlgRole self, int index)
@@ -56,6 +58,17 @@ namespace ET.Client
         {
             gameObject.transform.Find("Background/XuanZhong").gameObject.SetActive(isShow);
             gameObject.transform.Find("Background/WeiXuanZhong").gameObject.SetActive(!isShow);
+        }
+
+        private static void InitSubView(this DlgRole self)
+        {
+            // 假数据
+            UserInfo userInfo = new UserInfo() { Lv = 10, Name = "玩家1号" };
+
+            self.View.E_RoseLvText.text = userInfo.Lv.ToString();
+            self.View.E_RoseNameText.text = userInfo.Name;
+            
+            
         }
     }
 }
