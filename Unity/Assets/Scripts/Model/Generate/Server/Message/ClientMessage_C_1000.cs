@@ -60,6 +60,15 @@ namespace ET
 		[MemoryPackOrder(3)]
 		public long PlayerId { get; set; }
 
+		[MemoryPackOrder(4)]
+		public long AccountId { get; set; }
+
+		[MemoryPackOrder(10)]
+		public PlayerInfo PlayerInfo { get; set; }
+
+		[MemoryPackOrder(11)]
+		public List<CreateRoleInfo> RoleLists { get; set; } = new();
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -67,6 +76,9 @@ namespace ET
 			this.Error = default;
 			this.Message = default;
 			this.PlayerId = default;
+			this.AccountId = default;
+			this.PlayerInfo = default;
+			this.RoleLists.Clear();
 			
 			ObjectPool.Instance.Recycle(this); 
 		}

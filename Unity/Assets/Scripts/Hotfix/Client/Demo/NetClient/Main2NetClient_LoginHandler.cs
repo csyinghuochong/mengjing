@@ -4,7 +4,7 @@ using System.Net.Sockets;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(AccountInfoComponentClient))]
+    [FriendOf(typeof(PlayerComponent))]
     [MessageHandler(SceneType.NetClient)]
     public class Main2NetClient_LoginHandler: MessageHandler<Scene, Main2NetClient_Login, NetClient2Main_Login>
     {
@@ -29,16 +29,16 @@ namespace ET.Client
             {
                 r2CLogin = (R2C_Login)await session.Call(new C2R_Login() { Account = account, Password = password });
             }
-
-            root.GetComponent<AccountInfoComponentClient>().CreateRoleList = r2CLogin.RoleLists;
+            
             // 创建一个gate Session,并且保存到SessionComponent中
             Session gateSession = await netComponent.CreateRouterSession(NetworkHelper.ToIPEndPoint(r2CLogin.Address), account, password);
             gateSession.AddComponent<ClientSessionErrorComponent>();
             root.AddComponent<SessionComponent>().Session = gateSession;
             G2C_LoginGate g2CLoginGate = (G2C_LoginGate)await gateSession.Call(new C2G_LoginGate() { Key = r2CLogin.Key, GateId = r2CLogin.GateId });
-
             Log.Debug("登陆gate成功!");
-
+            response.AccountId = r2CLogin.AccountId;
+            response.PlayerInfo = r2CLogin.PlayerInfo;
+            response.RoleLists = r2CLogin.RoleLists;
             response.PlayerId = g2CLoginGate.PlayerId;
         }
     }

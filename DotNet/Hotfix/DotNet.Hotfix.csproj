@@ -46,5 +46,10 @@
         <ProjectReference Include="..\Loader\DotNet.Loader.csproj" />
         <ProjectReference Include="..\Model\DotNet.Model.csproj" />
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="..\..\Unity\Assets\Scripts\Hotfix\Client\MengJing\Component\">
+        <Link>Client\MengJing\Component</Link>
+      </Folder>
+    </ItemGroup>
 
 </Project>

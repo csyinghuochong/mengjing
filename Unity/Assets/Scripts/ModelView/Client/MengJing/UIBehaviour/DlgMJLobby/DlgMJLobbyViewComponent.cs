@@ -105,7 +105,7 @@ namespace ET.Client
 				}
 				if( this.m_BtnSelectRole == null )
 				{
-					this.m_BtnSelectRole = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"RoleListSet/BtnSelectRole");
+					this.m_BtnSelectRole = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"RoleListSet/RoleList/BtnSelectRole");
 				}
 				return this.m_BtnSelectRole;
 			}

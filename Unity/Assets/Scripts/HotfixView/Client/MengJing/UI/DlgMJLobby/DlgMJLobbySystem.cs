@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (DlgMJLobby))]
-    [FriendOf(typeof(AccountInfoComponentClient))]
+    [FriendOf(typeof(PlayerComponent))]
     public static class DlgMJLobbySystem
     {
         public static void RegisterUIEvent(this DlgMJLobby self)
@@ -23,19 +23,19 @@ namespace ET.Client
 
         private static async ETTask OnBtnSelectRole(this DlgMJLobby self)
         {
-            AccountInfoComponentClient accountInfoComponentClient = self.Root().GetComponent<AccountInfoComponentClient>();
+            PlayerComponent accountInfoComponentClient = self.Root().GetComponent<PlayerComponent>();
             if (accountInfoComponentClient.CreateRoleList.Count > 0)
             {
                 Log.Debug("暂时只能创建一个角色！");
                 return;
             }
 
-            await ETTask.CompletedTask;
+            await EnterMapHelper.RequestCreateRole(self.Root(), accountInfoComponentClient.AccountId ,1, "ttt");
         }
 
         private static async ETTask OnEnterMapButton(this DlgMJLobby self)
         {
-            AccountInfoComponentClient accountInfoComponentClient = self.Root().GetComponent<AccountInfoComponentClient>();
+            PlayerComponent accountInfoComponentClient = self.Root().GetComponent<PlayerComponent>();
             if (accountInfoComponentClient.CreateRoleList.Count == 0)
             {
                 Log.Debug("需要先创建角色！");

@@ -4,6 +4,7 @@ namespace ET.Client
 {
     [EntitySystemOf(typeof(ClientSenderCompnent))]
     [FriendOf(typeof(ClientSenderCompnent))]
+    [FriendOf(typeof(PlayerComponent))]
     public static partial class ClientSenderCompnentSystem
     {
         [EntitySystem]
@@ -34,11 +35,17 @@ namespace ET.Client
         {
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);
-
+            
             NetClient2Main_Login response = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, new Main2NetClient_Login()
             {
                 OwnerFiberId = self.Fiber().Id, Account = account, Password = password
             }) as NetClient2Main_Login;
+
+            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            playerComponent.AccountId = response.AccountId;
+            playerComponent.PlayerInfo = response.PlayerInfo;
+            playerComponent.CreateRoleList = response.RoleLists;
+            
             return response.PlayerId;
         }
 

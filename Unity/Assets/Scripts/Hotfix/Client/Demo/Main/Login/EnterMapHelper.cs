@@ -3,6 +3,8 @@ using System;
 
 namespace ET.Client
 {
+    
+    [FriendOf(typeof(PlayerComponent))]
     public static partial class EnterMapHelper
     {
         public static async ETTask EnterMapAsync(Scene root)
@@ -39,11 +41,11 @@ namespace ET.Client
             }	
         }
 
-        public static async RequestCreateRole(Scene root, long accountId,  int occ, string name)
+        public static async ETTask RequestCreateRole(Scene root, long accountId,  int occ, string name)
         {
-
             C2A_CreateRoleData c2ACreateRoleData = new C2A_CreateRoleData() { AccountId = accountId, CreateOcc = occ, CreateName = name };
-
+            A2C_CreateRoleData a2CCreateRoleData = await root.GetComponent<ClientSenderCompnent>().Call(c2ACreateRoleData) as A2C_CreateRoleData;
+            root.GetComponent<PlayerComponent>().CreateRoleList.Add( a2CCreateRoleData.createRoleInfo);
         }
     }
 }

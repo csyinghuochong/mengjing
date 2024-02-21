@@ -157,7 +157,7 @@ namespace ET.Server
                     if (account == null)
                     {
                         //在该区创建账号信息
-                        account = session.AddChildWithId<DBAccountInfo>(centerAccount.AccountId);
+                        account = session.AddChildWithId<DBAccountInfo>(AccountId);
                         account.Account = request.Account;
                         account.Password = request.Password;
                         account.CreateTime = TimeHelper.ServerNow();
