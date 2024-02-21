@@ -59,7 +59,7 @@ namespace ET.Server
 						response.Error = ErrorCode.ERR_RoleNameRepeat;
 						return;
 					}
-
+					
 					int zone = session.Zone();
 					long userId = IdGenerater.Instance.GenerateId();
 					ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(zone);

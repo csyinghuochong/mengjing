@@ -51,7 +51,8 @@ namespace ET.Server
             Unit unit = await UnitCacheHelper.GetUnitCache(scene, player.UnitId);
 
             bool isNewUnit = unit == null;
-            if (isNewUnit)
+            
+            //if (isNewUnit)
             {
                 unit = UnitFactory.Create(scene, player.UnitId, UnitType.Player);
 
