@@ -1,5 +1,6 @@
 ﻿namespace ET.Server
 {
+	[FriendOf(typeof(Unit))]
 	[MessageSessionHandler(SceneType.Gate)]
 	public class C2G_EnterMapHandler : MessageSessionHandler<C2G_EnterMap, G2C_EnterMap>
 	{
@@ -18,11 +19,12 @@
             //Unit unit=  UnitFactory.Create(scene, player.Id, UnitType.Player);
             
             //测试，先写死
-            player.UnitId = player.Id;
+            player.UnitId = request.UnitId;
 
             (bool isNewPlayer, Unit unit)  = await UnitHelper.LoadUnit(player, scene); 
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map1");
-			response.MyId = player.Id;
+			response.MyId = request.UnitId;
+			unit.GateSessionActorId = player.Id;
 
 			// 等到一帧的最后面再传送，先让G2C_EnterMap返回，否则传送消息可能比G2C_EnterMap还早
 			TransferHelper.TransferAtFrameFinish(unit, startSceneConfig.ActorId, startSceneConfig.Name).Coroutine();

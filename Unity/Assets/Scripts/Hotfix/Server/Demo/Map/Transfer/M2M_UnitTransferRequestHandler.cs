@@ -8,6 +8,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Scene scene, M2M_UnitTransferRequest request, M2M_UnitTransferResponse response)
         {
+            Log.Debug($"M2M_UnitTransferRequest:1");
             UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
             Unit unit = MongoHelper.Deserialize<Unit>(request.Unit);
 
@@ -27,7 +28,7 @@ namespace ET.Server
                     throw;
                 }
             }
-
+            Log.Debug($"M2M_UnitTransferRequest:2");
             unit.AddComponent<MoveComponent>();
             unit.AddComponent<PathfindingComponent, string>(scene.Name);
             unit.Position = new float3(-10, 0, -10);
@@ -42,7 +43,7 @@ namespace ET.Server
             M2C_CreateMyUnit m2CCreateUnits = new();
             m2CCreateUnits.Unit = UnitHelper.CreateUnitInfo(unit);
             MapMessageHelper.SendToClient(unit, m2CCreateUnits);
-
+            Log.Debug($"M2M_UnitTransferRequest:5");
             // 加入aoi
             unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
 

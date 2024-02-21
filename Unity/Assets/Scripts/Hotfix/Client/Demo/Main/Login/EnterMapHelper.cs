@@ -12,14 +12,14 @@ namespace ET.Client
             try
             {
                 C2G_EnterMap c2GEnterMap = new C2G_EnterMap();
-                
+                c2GEnterMap.UnitId = root.GetComponent<PlayerComponent>().CurrentRoleId;
                 
                 G2C_EnterMap g2CEnterMap = await root.GetComponent<ClientSenderCompnent>().Call(c2GEnterMap) as G2C_EnterMap;
                 
                 // 等待场景切换完成
                 await root.GetComponent<ObjectWait>().Wait<Wait_SceneChangeFinish>();
 
-                await BagClientHelper.RequestBagInit(root);
+                //await BagClientHelper.RequestBagInit(root);
 
                 EventSystem.Instance.Publish(root, new EnterMapFinish());
             }

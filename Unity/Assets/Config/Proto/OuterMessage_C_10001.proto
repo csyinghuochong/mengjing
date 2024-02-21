@@ -32,6 +32,7 @@ message M2C_TestResponse // IResponse
 message C2G_EnterMap // ISessionRequest
 {
 	int32 RpcId = 1;
+	int64 UnitId = 2;
 }
 
 message G2C_EnterMap // ISessionResponse

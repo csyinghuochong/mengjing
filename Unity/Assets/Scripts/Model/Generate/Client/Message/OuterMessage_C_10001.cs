@@ -129,10 +129,14 @@ namespace ET
 		[MemoryPackOrder(0)]
 		public int RpcId { get; set; }
 
+		[MemoryPackOrder(1)]
+		public long UnitId { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
 			this.RpcId = default;
+			this.UnitId = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}

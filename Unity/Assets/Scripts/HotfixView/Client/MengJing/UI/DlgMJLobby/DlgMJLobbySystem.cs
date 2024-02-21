@@ -41,7 +41,8 @@ namespace ET.Client
                 Log.Debug("需要先创建角色！");
                 return;
             }
-           
+
+            accountInfoComponentClient.CurrentRoleId = accountInfoComponentClient.CreateRoleList[0].UnitId;
             await EnterMapHelper.EnterMapAsync(self.Root());
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MJLobby);
         }

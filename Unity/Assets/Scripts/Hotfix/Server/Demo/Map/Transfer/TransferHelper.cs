@@ -16,7 +16,7 @@ namespace ET.Server
         public static async ETTask Transfer(Unit unit, ActorId sceneInstanceId, string sceneName)
         {
             Scene root = unit.Root();
-            
+            Log.Debug($"M2M_UnitTransferRequest:0");
             // location加锁
             long unitId = unit.Id;
             

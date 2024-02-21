@@ -56,5 +56,7 @@ namespace ET
                 return $"{this.GetType().FullName} ({this.Id})";
             }
         }
+        
+        public long GateSessionActorId { get; set; }
     }
 }
