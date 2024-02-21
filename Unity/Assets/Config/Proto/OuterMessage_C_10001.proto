@@ -239,6 +239,23 @@ message G2C_LoginGate // ISessionResponse
 	int64 PlayerId = 4;
 }
 
+//ResponseType A2C_CreateRoleData
+message C2A_CreateRoleData // ISessionRequest
+{
+	int32 RpcId = 90;
+	int32 CreateOcc = 2;
+	string CreateName = 3;
+	int64 AccountId = 4;
+}
+
+message A2C_CreateRoleData // ISessionResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	CreateRoleInfo createRoleInfo = 1;
+}
+
 message G2C_TestHotfixMessage // ISessionMessage
 {
 	string Info = 1;
@@ -706,3 +723,4 @@ message FubenPassInfo
 	int32 FubenId = 1;
 	int32 Difficulty = 2;			//1 difficulty普通 2 挑战  3困难
 }
+
