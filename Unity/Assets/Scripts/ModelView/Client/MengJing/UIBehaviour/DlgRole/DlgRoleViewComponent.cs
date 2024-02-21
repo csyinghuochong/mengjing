@@ -7,6 +7,24 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgRoleViewComponent : Entity,IAwake,IDestroy 
 	{
+		public ES_ModelShow ES_ModelShow
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_modelshow == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/EquipSetHide/ES_ModelShow");
+		    	   this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
+     			}
+     			return this.m_es_modelshow;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_RoseNameText
      	{
      		get
@@ -94,6 +112,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_es_modelshow = null;
 			this.m_E_RoseNameText = null;
 			this.m_E_RoseLvText = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
@@ -102,6 +121,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
+		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		private UnityEngine.UI.Text m_E_RoseNameText = null;
 		private UnityEngine.UI.Text m_E_RoseLvText = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;

@@ -17,7 +17,7 @@ namespace ET.Client
         public static void ShowWindow(this DlgRole self, Entity contextData = null)
         {
             self.View.E_BagToggle.IsSelected(true);
-            self.InitSubView();
+            self.RefreshPlayerInfo();
         }
 
         private static void OnFunctionSetBtn(this DlgRole self, int index)
@@ -59,15 +59,17 @@ namespace ET.Client
             gameObject.transform.Find("Background/WeiXuanZhong").gameObject.SetActive(!isShow);
         }
 
-        private static void InitSubView(this DlgRole self)
+        private static void RefreshPlayerInfo(this DlgRole self)
         {
             // 假数据
-            UserInfo userInfo = new UserInfo() { Lv = 10, Name = "玩家1号" };
+            UserInfo userInfo = new UserInfo() { Lv = 10, Name = "玩家1号", Occ = 1 };
+            BagInfo bagInfo = new BagInfo();
 
             self.View.E_RoseLvText.text = userInfo.Lv.ToString();
             self.View.E_RoseNameText.text = userInfo.Name;
-            
-            
+
+            self.View.ES_ModelShow.SetPosition(Vector3.zero, new Vector3(0f, 70f, 150f));
+            self.View.ES_ModelShow.ShowPlayerModel(bagInfo, userInfo.Occ, 0);
         }
     }
 }

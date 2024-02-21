@@ -54,10 +54,10 @@ namespace ET.Client
             // self.ClickHandler?.Invoke();
         }
 
-        public static void SetPosition(this ES_ModelShow self, Vector3 position1, Vector3 position2)
+        public static void SetPosition(this ES_ModelShow self, Vector3 rootPos, Vector3 cameraPos)
         {
-            self.EG_RootRectTransform.transform.localPosition = position1;
-            self.EG_RootRectTransform.transform.Find("Camera").localPosition = position2;
+            self.EG_RootRectTransform.transform.localPosition = rootPos;
+            self.EG_RootRectTransform.transform.Find("Camera").localPosition = cameraPos;
         }
 
         public static void ShowPlayerModel(this ES_ModelShow self, BagInfo bagInfo, int occ, int equipIndex)
@@ -77,11 +77,11 @@ namespace ET.Client
             // changeEquipHelper.UseLayer = true;
             // changeEquipHelper.LoadEquipment(go, new List<int>(), occ);
             self.UnitModel = go;
-            Animator animator = self.UnitModel.GetComponentInChildren<Animator>();
-            if (animator != null)
-            {
-                animator.Play("ShowIdel");
-            }
+            // Animator animator = self.UnitModel.GetComponentInChildren<Animator>();
+            // if (animator != null)
+            // {
+            //     animator.Play("ShowIdel");
+            // }
 
             LayerHelp.ChangeLayerAll(go.transform, LayerEnum.RenderTexture);
             go.transform.localScale = Vector3.one;
