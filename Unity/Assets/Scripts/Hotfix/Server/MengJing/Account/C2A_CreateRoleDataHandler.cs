@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+
 namespace ET.Server
 {
 	[FriendOf(typeof(DBAccountInfo))]
 	[FriendOf(typeof(UserInfoComponentServer))]
-    [MessageSessionHandler(SceneType.Account)]
-    public class C2A_CreateRoleHandler: MessageSessionHandler<C2A_CreateRoleData, A2C_CreateRoleData>
+    [MessageSessionHandler(SceneType.Gate)]
+    public class C2A_CreateRoleDataHandler: MessageSessionHandler<C2A_CreateRoleData, A2C_CreateRoleData>
     {
 	    
 	    //获取角色创建列表信息
@@ -26,7 +27,7 @@ namespace ET.Server
 	    
         protected override async ETTask Run(Session session, C2A_CreateRoleData request, A2C_CreateRoleData response)
         {
-            
+	        Log.Debug("C2A_CreateRoleData.server1");
             //判断名字是否符合要求
             if (string.IsNullOrEmpty(request.CreateName))
             {

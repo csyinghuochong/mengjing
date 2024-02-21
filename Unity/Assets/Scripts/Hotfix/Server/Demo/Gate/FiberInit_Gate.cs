@@ -17,7 +17,8 @@ namespace ET.Server
             root.AddComponent<GateSessionKeyComponent>();
             root.AddComponent<LocationProxyComponent>();
             root.AddComponent<MessageLocationSenderComponent>();
-
+            root.AddComponent<DBManagerComponent>();
+            
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.Get((int)root.Id);
             root.AddComponent<NetComponent, IPEndPoint, NetworkProtocol>(startSceneConfig.InnerIPPort, NetworkProtocol.UDP);
             await ETTask.CompletedTask;
