@@ -93,7 +93,7 @@ namespace ET.Server
                 }
                 if (list.Count > 0)
                 {
-                    await self.Root().AddComponent<DBManagerComponent>().GetZoneDB(self.Zone()).Save(id, list);
+                    await self.Root().GetComponent<DBManagerComponent>().GetZoneDB(self.Zone()).Save(id, list);
                 }
             }
         }
