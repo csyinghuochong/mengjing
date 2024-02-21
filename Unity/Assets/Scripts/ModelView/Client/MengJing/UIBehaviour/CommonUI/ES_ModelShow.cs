@@ -7,6 +7,11 @@ namespace ET.Client
     [EnableMethod]
     public class ES_ModelShow: Entity, ET.IAwake<UnityEngine.Transform>, IDestroy
     {
+        public GameObject UnitModel;
+        public Transform ModelParent;
+        public Vector2 StartPosition;
+        public bool Draged = false;
+
         public UnityEngine.UI.Button E_RenderButton
         {
             get
