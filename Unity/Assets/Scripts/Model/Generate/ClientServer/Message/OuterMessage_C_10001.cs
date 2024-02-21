@@ -988,6 +988,52 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.ServerItem)]
+	[MemoryPackable]
+	public partial class ServerItem: MessageObject
+	{
+		public static ServerItem Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(ServerItem), isFromPool) as ServerItem; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int ServerId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string ServerIp { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string ServerName { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long ServerOpenTime { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int Show { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int New { get; set; }
+
+		[MemoryPackOrder(6)]
+		public List<int> PlatformList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.ServerId = default;
+			this.ServerIp = default;
+			this.ServerName = default;
+			this.ServerOpenTime = default;
+			this.Show = default;
+			this.New = default;
+			this.PlatformList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	[ResponseType(nameof(A2C_CreateRoleData))]
 	[Message(OuterMessage.C2A_CreateRoleData)]
 	[MemoryPackable]
@@ -2781,44 +2827,45 @@ namespace ET
 		 public const ushort R2C_Login = 10030;
 		 public const ushort C2G_LoginGate = 10031;
 		 public const ushort G2C_LoginGate = 10032;
-		 public const ushort C2A_CreateRoleData = 10033;
-		 public const ushort A2C_CreateRoleData = 10034;
-		 public const ushort G2C_TestHotfixMessage = 10035;
-		 public const ushort C2M_TestRobotCase = 10036;
-		 public const ushort M2C_TestRobotCase = 10037;
-		 public const ushort C2M_TestRobotCase2 = 10038;
-		 public const ushort M2C_TestRobotCase2 = 10039;
-		 public const ushort C2M_TransferMap = 10040;
-		 public const ushort M2C_TransferMap = 10041;
-		 public const ushort C2G_Benchmark = 10042;
-		 public const ushort G2C_Benchmark = 10043;
-		 public const ushort HideProList = 10044;
-		 public const ushort BagInfo = 10045;
-		 public const ushort C2M_BagInitRequest = 10046;
-		 public const ushort M2C_BagInitResponse = 10047;
-		 public const ushort MysteryItemInfo = 10048;
-		 public const ushort ZhanQuReceiveNumber = 10049;
-		 public const ushort FirstWinInfo = 10050;
-		 public const ushort PetMingPlayerInfo = 10051;
-		 public const ushort ChatInfo = 10052;
-		 public const ushort MailInfo = 10053;
-		 public const ushort PaiMaiItemInfo = 10054;
-		 public const ushort PaiMaiShopItemInfo = 10055;
-		 public const ushort PopularizeInfo = 10056;
-		 public const ushort RankingInfo = 10057;
-		 public const ushort RankShouLieInfo = 10058;
-		 public const ushort RankPetInfo = 10059;
-		 public const ushort ServerInfo = 10060;
-		 public const ushort ServerMailItem = 10061;
-		 public const ushort UnionInfo = 10062;
-		 public const ushort UnionPlayerInfo = 10063;
-		 public const ushort DonationRecord = 10064;
-		 public const ushort A2C_Disconnect = 10065;
-		 public const ushort UserInfo = 10066;
-		 public const ushort M2C_RoleDataUpdate = 10067;
-		 public const ushort M2C_RoleDataBroadcast = 10068;
-		 public const ushort SkillPro = 10069;
-		 public const ushort RewardItem = 10070;
-		 public const ushort FubenPassInfo = 10071;
+		 public const ushort ServerItem = 10033;
+		 public const ushort C2A_CreateRoleData = 10034;
+		 public const ushort A2C_CreateRoleData = 10035;
+		 public const ushort G2C_TestHotfixMessage = 10036;
+		 public const ushort C2M_TestRobotCase = 10037;
+		 public const ushort M2C_TestRobotCase = 10038;
+		 public const ushort C2M_TestRobotCase2 = 10039;
+		 public const ushort M2C_TestRobotCase2 = 10040;
+		 public const ushort C2M_TransferMap = 10041;
+		 public const ushort M2C_TransferMap = 10042;
+		 public const ushort C2G_Benchmark = 10043;
+		 public const ushort G2C_Benchmark = 10044;
+		 public const ushort HideProList = 10045;
+		 public const ushort BagInfo = 10046;
+		 public const ushort C2M_BagInitRequest = 10047;
+		 public const ushort M2C_BagInitResponse = 10048;
+		 public const ushort MysteryItemInfo = 10049;
+		 public const ushort ZhanQuReceiveNumber = 10050;
+		 public const ushort FirstWinInfo = 10051;
+		 public const ushort PetMingPlayerInfo = 10052;
+		 public const ushort ChatInfo = 10053;
+		 public const ushort MailInfo = 10054;
+		 public const ushort PaiMaiItemInfo = 10055;
+		 public const ushort PaiMaiShopItemInfo = 10056;
+		 public const ushort PopularizeInfo = 10057;
+		 public const ushort RankingInfo = 10058;
+		 public const ushort RankShouLieInfo = 10059;
+		 public const ushort RankPetInfo = 10060;
+		 public const ushort ServerInfo = 10061;
+		 public const ushort ServerMailItem = 10062;
+		 public const ushort UnionInfo = 10063;
+		 public const ushort UnionPlayerInfo = 10064;
+		 public const ushort DonationRecord = 10065;
+		 public const ushort A2C_Disconnect = 10066;
+		 public const ushort UserInfo = 10067;
+		 public const ushort M2C_RoleDataUpdate = 10068;
+		 public const ushort M2C_RoleDataBroadcast = 10069;
+		 public const ushort SkillPro = 10070;
+		 public const ushort RewardItem = 10071;
+		 public const ushort FubenPassInfo = 10072;
 	}
 }

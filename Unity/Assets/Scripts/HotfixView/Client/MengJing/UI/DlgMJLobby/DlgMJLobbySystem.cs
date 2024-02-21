@@ -7,19 +7,41 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (DlgMJLobby))]
+    [FriendOf(typeof(AccountInfoComponentClient))]
     public static class DlgMJLobbySystem
     {
         public static void RegisterUIEvent(this DlgMJLobby self)
         {
             self.View.E_EnterMapButton.AddListenerAsync(self.OnEnterMapButton);
+            self.View.E_BtnSelectRole.AddListenerAsync(self.OnBtnSelectRole);
         }
 
         public static void ShowWindow(this DlgMJLobby self, Entity contextData = null)
         {
+            
+        }
+
+        private static async ETTask OnBtnSelectRole(this DlgMJLobby self)
+        {
+            AccountInfoComponentClient accountInfoComponentClient = self.Root().GetComponent<AccountInfoComponentClient>();
+            if (accountInfoComponentClient.CreateRoleList.Count > 0)
+            {
+                Log.Debug("暂时只能创建一个角色！");
+                return;
+            }
+
+            await ETTask.CompletedTask;
         }
 
         private static async ETTask OnEnterMapButton(this DlgMJLobby self)
         {
+            AccountInfoComponentClient accountInfoComponentClient = self.Root().GetComponent<AccountInfoComponentClient>();
+            if (accountInfoComponentClient.CreateRoleList.Count == 0)
+            {
+                Log.Debug("需要先创建角色！");
+                return;
+            }
+           
             await EnterMapHelper.EnterMapAsync(self.Root());
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MJLobby);
         }

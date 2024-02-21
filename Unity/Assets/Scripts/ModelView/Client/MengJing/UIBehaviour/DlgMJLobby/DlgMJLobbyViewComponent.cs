@@ -74,6 +74,8 @@ namespace ET.Client
      			return this.m_E_EnterMapButton;
      		}
      	}
+		
+		
 
 		public UnityEngine.UI.Image E_EnterMapImage
      	{
@@ -92,6 +94,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_BtnSelectRole
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_BtnSelectRole == null )
+				{
+					this.m_BtnSelectRole = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"RoleListSet/BtnSelectRole");
+				}
+				return this.m_BtnSelectRole;
+			}
+		}
+		
 		public void DestroyWidget()
 		{
 			this.m_ELoopScrollList_RoleLoopVerticalScrollRect = null;
@@ -100,6 +119,7 @@ namespace ET.Client
 			this.m_E_EnterMapButton = null;
 			this.m_E_EnterMapImage = null;
 			this.uiTransform = null;
+			this.m_BtnSelectRole = null;
 		}
 
 		private UnityEngine.UI.LoopVerticalScrollRect m_ELoopScrollList_RoleLoopVerticalScrollRect = null;
@@ -107,6 +127,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_ENameText = null;
 		private UnityEngine.UI.Button m_E_EnterMapButton = null;
 		private UnityEngine.UI.Image m_E_EnterMapImage = null;
+		private UnityEngine.UI.Button m_BtnSelectRole = null;
 		public Transform uiTransform = null;
 	}
 }

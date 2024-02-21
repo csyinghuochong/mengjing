@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[FriendOf(typeof(DlgCreateRole))]
+	[FriendOf(typeof(AccountInfoComponentClient))]
 	public static  class DlgCreateRoleSystem
 	{
 
@@ -17,9 +18,7 @@ namespace ET.Client
 
 		public static void ShowWindow(this DlgCreateRole self, Entity contextData = null)
 		{
+			
 		}
-
-		 
-
 	}
 }
