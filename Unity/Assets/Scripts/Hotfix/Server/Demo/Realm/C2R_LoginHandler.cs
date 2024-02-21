@@ -279,6 +279,11 @@ namespace ET.Server
 
                         CreateRoleInfo roleList = GetRoleListInfo(userinfo.UserInfo, account.UserList[i]);
                         NumericComponentServer numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentServer>(session.Root(), account.UserList[i]);
+                        if (numericComponent == null)
+                        {
+                            continue;
+                        }
+
                         roleList.WeaponId = numericComponent.GetAsInt(NumericType.Now_Weapon);
                         roleList.EquipIndex = numericComponent.GetAsInt(NumericType.EquipIndex);
                         response.RoleLists.Add(roleList);

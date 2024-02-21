@@ -41,13 +41,14 @@ namespace ET.Server
                 }
                 case ILocationMessage actorLocationMessage:
                 {
-                    long unitId = session.GetComponent<SessionPlayerComponent>().Player.Id;
+                    long unitId = session.GetComponent<SessionPlayerComponent>().Player.UnitId;
+                    Log.Debug($"actorLocationMessageactorLocationMessage: { unitId}");
                     root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(unitId, actorLocationMessage);
                     break;
                 }
                 case ILocationRequest actorLocationRequest: // gate session收到actor rpc消息，先向actor 发送rpc请求，再将请求结果返回客户端
                 {
-                    long unitId = session.GetComponent<SessionPlayerComponent>().Player.Id;
+                    long unitId = session.GetComponent<SessionPlayerComponent>().Player.UnitId;
                     int rpcId = actorLocationRequest.RpcId; // 这里要保存客户端的rpcId
                     long instanceId = session.InstanceId;
                     IResponse iResponse = await root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(unitId, actorLocationRequest);
