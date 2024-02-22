@@ -32,6 +32,8 @@ namespace ET.Client
                     resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, "3"));
             self.View.E_Icon_3_2Image.sprite =
                     resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, "3"));
+
+            self.View.E_Occ1Toggle.IsSelected(true);
         }
 
         private static async ETTask OnCreateRoleButton(this DlgCreateRole self)
@@ -58,15 +60,21 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-
                     break;
                 case 1:
-
                     break;
                 case 2:
-
                     break;
             }
+
+            self.OnSelectOcc(index + 1);
+        }
+
+        private static void OnSelectOcc(this DlgCreateRole self, int occ)
+        {
+            self.Occ = occ;
+            self.View.ES_ModelShow.SetPosition(Vector3.zero, new Vector3(0f, 70f, 150f));
+            self.View.ES_ModelShow.ShowPlayerModel(new BagInfo(), occ, 0);
         }
 
         private static void OnCloseButton(this DlgCreateRole self)

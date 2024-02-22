@@ -15,7 +15,7 @@ namespace ET.Client
 
             self.ModelParent = self.EG_RootRectTransform.Find("ModelParent");
             self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown(pdata as PointerEventData); });
-            self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.PointerDown(pdata as PointerEventData); });
+            self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
             self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(pdata as PointerEventData); });
         }
 

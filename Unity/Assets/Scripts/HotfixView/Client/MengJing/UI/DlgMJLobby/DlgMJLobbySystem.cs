@@ -82,8 +82,8 @@ namespace ET.Client
             {
                 self.View.E_NameText.text = self.SeletRoleInfo.PlayerName;
                 self.View.E_LvText.text = $"{self.SeletRoleInfo.PlayerLv}级";
-
-                // self.View.ES_ModelShow.ShowPlayerModel(new BagInfo(), 1, 0);
+                self.View.ES_ModelShow.SetPosition(Vector3.zero, new Vector3(0f, 70f, 150f));
+                self.View.ES_ModelShow.ShowPlayerModel(new BagInfo(), 1, 0);
                 self.View.ES_ModelShow.SetShow(true);
             }
             else
