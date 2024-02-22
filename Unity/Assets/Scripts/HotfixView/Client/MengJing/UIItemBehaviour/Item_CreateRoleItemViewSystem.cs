@@ -4,12 +4,14 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (PlayerComponent))]
+    [FriendOf(typeof (Scroll_Item_CreateRoleItem))]
     [EntitySystemOf(typeof (Scroll_Item_CreateRoleItem))]
     public static partial class Scroll_Item_CreateRoleItemSystem
     {
         [EntitySystem]
         private static void Awake(this Scroll_Item_CreateRoleItem self)
         {
+            self.E_SelectRoleButton.AddListenerAsync(self.OnSelectRoleButton);
         }
 
         [EntitySystem]
@@ -20,6 +22,7 @@ namespace ET.Client
 
         public static void Refresh(this Scroll_Item_CreateRoleItem self, CreateRoleInfo createRoleInfo)
         {
+            self.CreateRoleInfo = createRoleInfo;
             if (createRoleInfo != null)
             {
                 self.E_RoleNameText.text = createRoleInfo.PlayerName;
@@ -61,6 +64,39 @@ namespace ET.Client
                     self.E_RoleHeadIconImage.gameObject.SetActive(false);
                     self.E_RoleOccText.text = "职业:战士/法师";
                 }
+            }
+        }
+
+        private static async ETTask OnSelectRoleButton(this Scroll_Item_CreateRoleItem self)
+        {
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+            if (self.CreateRoleInfo == null)
+            {
+                uiComponent.ShowWindow(WindowID.WindowID_CreateRole);
+                uiComponent.CloseWindow(WindowID.WindowID_MJLobby);
+            }
+
+            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            if (playerComponent.CreateRoleList.Count >= 8)
+            {
+                Log.Error("角色列表已达上限！");
+                return;
+            }
+
+            // 选中刷新
+        }
+
+        public static void UpdateSelectStatus(this Scroll_Item_CreateRoleItem self, CreateRoleInfo createRoleListInfo)
+        {
+            if (createRoleListInfo != null && createRoleListInfo == self.CreateRoleInfo)
+            {
+                self.ObjImgSelect.SetActive(true);
+                self.uiTransform.localScale = Vector3.one * 1.2f;
+            }
+            else
+            {
+                self.ObjImgSelect.SetActive(false);
+                self.uiTransform.transform.localScale = Vector3.one;
             }
         }
     }

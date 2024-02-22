@@ -70,6 +70,11 @@ namespace ET.Client
             // self.Update_Page();
         }
 
+        public static void UpdateSelect(this DlgMJLobby self)
+        {
+            
+        }
+        
         private static async ETTask OnBtnSelectRole(this DlgMJLobby self)
         {
             //參考危境，有角色则显示角色列表，点击空角色跳转到创建角色界面。
