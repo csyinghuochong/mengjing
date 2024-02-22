@@ -41,6 +41,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_OccShow_ZhanShiRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_OccShow_ZhanShiRectTransform == null )
+     			{
+		    		this.m_EG_OccShow_ZhanShiRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_OccShow_ZhanShi");
+     			}
+     			return this.m_EG_OccShow_ZhanShiRectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_OccShow_FaShiRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_OccShow_FaShiRectTransform == null )
+     			{
+		    		this.m_EG_OccShow_FaShiRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_OccShow_FaShi");
+     			}
+     			return this.m_EG_OccShow_FaShiRectTransform;
+     		}
+     	}
+
 		public ES_ModelShow ES_ModelShow
      	{
      		get
@@ -335,6 +369,8 @@ namespace ET.Client
 		{
 			this.m_E_CloseButton = null;
 			this.m_E_CloseImage = null;
+			this.m_EG_OccShow_ZhanShiRectTransform = null;
+			this.m_EG_OccShow_FaShiRectTransform = null;
 			this.m_es_modelshow = null;
 			this.m_E_CreateRoleNameInputField = null;
 			this.m_E_CreateRoleNameImage = null;
@@ -357,6 +393,8 @@ namespace ET.Client
 
 		private UnityEngine.UI.Button m_E_CloseButton = null;
 		private UnityEngine.UI.Image m_E_CloseImage = null;
+		private UnityEngine.RectTransform m_EG_OccShow_ZhanShiRectTransform = null;
+		private UnityEngine.RectTransform m_EG_OccShow_FaShiRectTransform = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		private UnityEngine.UI.InputField m_E_CreateRoleNameInputField = null;
 		private UnityEngine.UI.Image m_E_CreateRoleNameImage = null;

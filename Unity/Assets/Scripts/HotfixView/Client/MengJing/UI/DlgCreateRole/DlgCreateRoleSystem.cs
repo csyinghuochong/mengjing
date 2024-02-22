@@ -14,6 +14,7 @@ namespace ET.Client
         {
             self.View.E_CreateRoleButton.AddListenerAsync(self.OnCreateRoleButton);
             self.View.E_CloseButton.AddListener(self.OnCloseButton);
+            self.View.E_RandomNameButton.AddListener(self.OnRandomNameButton);
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
         }
 
@@ -36,8 +37,27 @@ namespace ET.Client
             self.View.E_Occ1Toggle.IsSelected(true);
         }
 
+        private static void OnRandomNameButton(this DlgCreateRole self)
+        {
+            self.View.E_CreateRoleNameInputField.text = $"玩家{RandomHelper.NextInt(0, 1000)}";
+        }
+
         private static async ETTask OnCreateRoleButton(this DlgCreateRole self)
         {
+            string createName = self.View.E_CreateRoleNameInputField.text;
+
+            if (string.IsNullOrEmpty(createName))
+            {
+                Log.Error("请输入名字！！！");
+                return;
+            }
+
+            if (self.Occ == 0)
+            {
+                Log.Error("请选择职业！！！");
+                return;
+            }
+
             //參考危境，有角色则显示角色列表，点击空角色跳转到创建角色界面。
             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
             if (playerComponent.CreateRoleList.Count > 0)
@@ -46,7 +66,9 @@ namespace ET.Client
                 return;
             }
 
-            await EnterMapHelper.RequestCreateRole(self.Root(), playerComponent.AccountId, 1, "ttt");
+            await EnterMapHelper.RequestCreateRole(self.Root(), playerComponent.AccountId, self.Occ, createName);
+
+            self.OnCloseButton();
         }
 
         private static void OnFunctionSetBtn(this DlgCreateRole self, int index)
@@ -57,24 +79,23 @@ namespace ET.Client
             UICommonHelper.SetToggleShow(self.View.E_Occ2Toggle.gameObject, index == 1);
             UICommonHelper.SetToggleShow(self.View.E_Occ3Toggle.gameObject, index == 2);
 
+            self.View.EG_OccShow_ZhanShiRectTransform.gameObject.SetActive(false);
+            self.View.EG_OccShow_FaShiRectTransform.gameObject.SetActive(false);
             switch (index)
             {
                 case 0:
+                    self.View.EG_OccShow_ZhanShiRectTransform.gameObject.SetActive(true);
                     break;
                 case 1:
+                    self.View.EG_OccShow_FaShiRectTransform.gameObject.SetActive(true);
                     break;
                 case 2:
                     break;
             }
 
-            self.OnSelectOcc(index + 1);
-        }
-
-        private static void OnSelectOcc(this DlgCreateRole self, int occ)
-        {
-            self.Occ = occ;
+            self.Occ = index + 1;
             self.View.ES_ModelShow.SetPosition(Vector3.zero, new Vector3(0f, 70f, 150f));
-            self.View.ES_ModelShow.ShowPlayerModel(new BagInfo(), occ, 0);
+            self.View.ES_ModelShow.ShowPlayerModel(new BagInfo(), self.Occ, 0);
         }
 
         private static void OnCloseButton(this DlgCreateRole self)
