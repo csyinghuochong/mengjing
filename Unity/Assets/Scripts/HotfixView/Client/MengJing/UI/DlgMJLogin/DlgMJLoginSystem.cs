@@ -31,8 +31,6 @@ namespace ET.Client
                 self.Root(),
                 self.View.EAccountInputField.text,
                 self.View.EPasswordInputField.text).Coroutine();
-            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_MJLobby).Coroutine();
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MJLogin);
         }
     }
 }
