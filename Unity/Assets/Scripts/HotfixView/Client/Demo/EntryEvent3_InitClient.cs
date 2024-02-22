@@ -14,8 +14,6 @@ namespace ET.Client
             root.AddComponent<UIPathComponent>();
             root.AddComponent<UIEventComponent>();
             root.AddComponent<UIComponent>();
-            // root.AddComponent<MJUIEventComponent>();
-            // root.AddComponent<MJUIComponent>();
             
             root.AddComponent<ResourcesLoaderComponent>();
             root.AddComponent<PlayerComponent>();

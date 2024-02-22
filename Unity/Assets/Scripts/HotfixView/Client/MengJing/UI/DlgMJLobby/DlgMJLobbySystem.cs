@@ -111,7 +111,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, DlgMJLobby_UpdateSelect args)
         {
-            scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMJLobby>().UpdateSelect(args.CreateRoleInfo);
+            scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMJLobby>()?.UpdateSelect(args.CreateRoleInfo);
             await ETTask.CompletedTask;
         }
     }

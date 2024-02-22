@@ -77,15 +77,10 @@ namespace ET.Client
                 uiComponent.ShowWindow(WindowID.WindowID_CreateRole);
                 uiComponent.CloseWindow(WindowID.WindowID_MJLobby);
             }
-
-            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
-            if (playerComponent.CreateRoleList.Count >= 8)
+            else
             {
-                Log.Error("角色列表已达上限！");
-                return;
+                EventSystem.Instance.Publish(self.Root(), new DlgMJLobby_UpdateSelect());
             }
-
-            EventSystem.Instance.Publish(self.Root(), new DlgMJLobby_UpdateSelect());
         }
 
         public static void UpdateSelectStatus(this Scroll_Item_CreateRoleItem self, CreateRoleInfo createRoleListInfo)

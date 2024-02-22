@@ -22,14 +22,14 @@ namespace ET.Client
         private static async ETTask OnCreateRoleButton(this DlgCreateRole self)
         {
             //參考危境，有角色则显示角色列表，点击空角色跳转到创建角色界面。
-            PlayerComponent accountInfoComponentClient = self.Root().GetComponent<PlayerComponent>();
-            if (accountInfoComponentClient.CreateRoleList.Count > 0)
+            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            if (playerComponent.CreateRoleList.Count > 0)
             {
                 Log.Debug("暂时只能创建一个角色！");
                 return;
             }
 
-            await EnterMapHelper.RequestCreateRole(self.Root(), accountInfoComponentClient.AccountId, 1, "ttt");
+            await EnterMapHelper.RequestCreateRole(self.Root(), playerComponent.AccountId, 1, "ttt");
         }
     }
 }
