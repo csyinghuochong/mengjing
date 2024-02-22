@@ -13,10 +13,25 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgCreateRole self)
         {
             self.View.E_CreateRoleButton.AddListenerAsync(self.OnCreateRoleButton);
+            self.View.E_CloseButton.AddListener(self.OnCloseButton);
+            self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
         }
 
         public static void ShowWindow(this DlgCreateRole self, Entity contextData = null)
         {
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            self.View.E_Icon_1_1Image.sprite =
+                    resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, "1"));
+            self.View.E_Icon_1_2Image.sprite =
+                    resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, "1"));
+            self.View.E_Icon_2_1Image.sprite =
+                    resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, "2"));
+            self.View.E_Icon_2_2Image.sprite =
+                    resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, "2"));
+            self.View.E_Icon_3_1Image.sprite =
+                    resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, "3"));
+            self.View.E_Icon_3_2Image.sprite =
+                    resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, "3"));
         }
 
         private static async ETTask OnCreateRoleButton(this DlgCreateRole self)
@@ -30,6 +45,35 @@ namespace ET.Client
             }
 
             await EnterMapHelper.RequestCreateRole(self.Root(), playerComponent.AccountId, 1, "ttt");
+        }
+
+        private static void OnFunctionSetBtn(this DlgCreateRole self, int index)
+        {
+            Log.Debug($"按下Toggle：{index}");
+
+            UICommonHelper.SetToggleShow(self.View.E_Occ1Toggle.gameObject, index == 0);
+            UICommonHelper.SetToggleShow(self.View.E_Occ2Toggle.gameObject, index == 1);
+            UICommonHelper.SetToggleShow(self.View.E_Occ3Toggle.gameObject, index == 2);
+
+            switch (index)
+            {
+                case 0:
+
+                    break;
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+            }
+        }
+
+        private static void OnCloseButton(this DlgCreateRole self)
+        {
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+            uiComponent.ShowWindow(WindowID.WindowID_MJLobby);
+            uiComponent.CloseWindow(WindowID.WindowID_CreateRole);
         }
     }
 }

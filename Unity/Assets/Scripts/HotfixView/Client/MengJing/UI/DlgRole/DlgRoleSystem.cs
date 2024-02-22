@@ -25,8 +25,8 @@ namespace ET.Client
             Log.Debug($"按下Toggle：{index}");
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
 
-            self.SetToggleShow(self.View.E_BagToggle.gameObject, index == 0);
-            self.SetToggleShow(self.View.E_PropertyToggle.gameObject, index == 1);
+            UICommonHelper.SetToggleShow(self.View.E_BagToggle.gameObject, index == 0);
+            UICommonHelper.SetToggleShow(self.View.E_PropertyToggle.gameObject, index == 1);
 
             switch (index)
             {
@@ -51,12 +51,6 @@ namespace ET.Client
                 // uiComponent.HideWindow(WindowID.WindowID_Main);
                 Log.Debug($"关闭 Property");
             }
-        }
-
-        private static void SetToggleShow(this DlgRole self, GameObject gameObject, bool isShow)
-        {
-            gameObject.transform.Find("Background/XuanZhong").gameObject.SetActive(isShow);
-            gameObject.transform.Find("Background/WeiXuanZhong").gameObject.SetActive(!isShow);
         }
 
         private static void RefreshPlayerInfo(this DlgRole self)

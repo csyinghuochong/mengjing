@@ -25,5 +25,11 @@ namespace ET.Client
                 UnityEngine.Object.Destroy(go.transform.GetChild(i).gameObject);
             }
         }
+
+        public static void SetToggleShow(GameObject gameObject, bool isShow)
+        {
+            gameObject.transform.Find("Background/XuanZhong").gameObject.SetActive(isShow);
+            gameObject.transform.Find("Background/WeiXuanZhong").gameObject.SetActive(!isShow);
+        }
     }
 }

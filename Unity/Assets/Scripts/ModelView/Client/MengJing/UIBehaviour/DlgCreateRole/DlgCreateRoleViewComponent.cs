@@ -7,6 +7,262 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgCreateRoleViewComponent : Entity,IAwake,IDestroy 
 	{
+		public UnityEngine.UI.Button E_CloseButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CloseButton == null )
+     			{
+		    		this.m_E_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Close");
+     			}
+     			return this.m_E_CloseButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_CloseImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CloseImage == null )
+     			{
+		    		this.m_E_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Close");
+     			}
+     			return this.m_E_CloseImage;
+     		}
+     	}
+
+		public ES_ModelShow ES_ModelShow
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_modelshow == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ModelShow");
+		    	   this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
+     			}
+     			return this.m_es_modelshow;
+     		}
+     	}
+
+		public UnityEngine.UI.InputField E_CreateRoleNameInputField
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CreateRoleNameInputField == null )
+     			{
+		    		this.m_E_CreateRoleNameInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"E_CreateRoleName");
+     			}
+     			return this.m_E_CreateRoleNameInputField;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_CreateRoleNameImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CreateRoleNameImage == null )
+     			{
+		    		this.m_E_CreateRoleNameImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_CreateRoleName");
+     			}
+     			return this.m_E_CreateRoleNameImage;
+     		}
+     	}
+
+		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_FunctionSetBtnToggleGroup == null )
+     			{
+		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
+     			}
+     			return this.m_E_FunctionSetBtnToggleGroup;
+     		}
+     	}
+
+		public UnityEngine.UI.Toggle E_Occ1Toggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Occ1Toggle == null )
+     			{
+		    		this.m_E_Occ1Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Occ1");
+     			}
+     			return this.m_E_Occ1Toggle;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Icon_1_1Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Icon_1_1Image == null )
+     			{
+		    		this.m_E_Icon_1_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Occ1/Background/XuanZhong/E_Icon_1_1");
+     			}
+     			return this.m_E_Icon_1_1Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Icon_1_2Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Icon_1_2Image == null )
+     			{
+		    		this.m_E_Icon_1_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Occ1/Background/WeiXuanZhong/E_Icon_1_2");
+     			}
+     			return this.m_E_Icon_1_2Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Toggle E_Occ2Toggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Occ2Toggle == null )
+     			{
+		    		this.m_E_Occ2Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Occ2");
+     			}
+     			return this.m_E_Occ2Toggle;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Icon_2_1Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Icon_2_1Image == null )
+     			{
+		    		this.m_E_Icon_2_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Occ2/Background/XuanZhong/E_Icon_2_1");
+     			}
+     			return this.m_E_Icon_2_1Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Icon_2_2Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Icon_2_2Image == null )
+     			{
+		    		this.m_E_Icon_2_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Occ2/Background/WeiXuanZhong/E_Icon_2_2");
+     			}
+     			return this.m_E_Icon_2_2Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Toggle E_Occ3Toggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Occ3Toggle == null )
+     			{
+		    		this.m_E_Occ3Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Occ3");
+     			}
+     			return this.m_E_Occ3Toggle;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Icon_3_1Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Icon_3_1Image == null )
+     			{
+		    		this.m_E_Icon_3_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Occ3/Background/XuanZhong/E_Icon_3_1");
+     			}
+     			return this.m_E_Icon_3_1Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Icon_3_2Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Icon_3_2Image == null )
+     			{
+		    		this.m_E_Icon_3_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Occ3/Background/WeiXuanZhong/E_Icon_3_2");
+     			}
+     			return this.m_E_Icon_3_2Image;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_CreateRoleButton
      	{
      		get
@@ -41,15 +297,83 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_RandomNameButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RandomNameButton == null )
+     			{
+		    		this.m_E_RandomNameButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_RandomName");
+     			}
+     			return this.m_E_RandomNameButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_RandomNameImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RandomNameImage == null )
+     			{
+		    		this.m_E_RandomNameImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RandomName");
+     			}
+     			return this.m_E_RandomNameImage;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
+			this.m_E_CloseButton = null;
+			this.m_E_CloseImage = null;
+			this.m_es_modelshow = null;
+			this.m_E_CreateRoleNameInputField = null;
+			this.m_E_CreateRoleNameImage = null;
+			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_E_Occ1Toggle = null;
+			this.m_E_Icon_1_1Image = null;
+			this.m_E_Icon_1_2Image = null;
+			this.m_E_Occ2Toggle = null;
+			this.m_E_Icon_2_1Image = null;
+			this.m_E_Icon_2_2Image = null;
+			this.m_E_Occ3Toggle = null;
+			this.m_E_Icon_3_1Image = null;
+			this.m_E_Icon_3_2Image = null;
 			this.m_E_CreateRoleButton = null;
 			this.m_E_CreateRoleImage = null;
+			this.m_E_RandomNameButton = null;
+			this.m_E_RandomNameImage = null;
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.UI.Button m_E_CloseButton = null;
+		private UnityEngine.UI.Image m_E_CloseImage = null;
+		private EntityRef<ES_ModelShow> m_es_modelshow = null;
+		private UnityEngine.UI.InputField m_E_CreateRoleNameInputField = null;
+		private UnityEngine.UI.Image m_E_CreateRoleNameImage = null;
+		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private UnityEngine.UI.Toggle m_E_Occ1Toggle = null;
+		private UnityEngine.UI.Image m_E_Icon_1_1Image = null;
+		private UnityEngine.UI.Image m_E_Icon_1_2Image = null;
+		private UnityEngine.UI.Toggle m_E_Occ2Toggle = null;
+		private UnityEngine.UI.Image m_E_Icon_2_1Image = null;
+		private UnityEngine.UI.Image m_E_Icon_2_2Image = null;
+		private UnityEngine.UI.Toggle m_E_Occ3Toggle = null;
+		private UnityEngine.UI.Image m_E_Icon_3_1Image = null;
+		private UnityEngine.UI.Image m_E_Icon_3_2Image = null;
 		private UnityEngine.UI.Button m_E_CreateRoleButton = null;
 		private UnityEngine.UI.Image m_E_CreateRoleImage = null;
+		private UnityEngine.UI.Button m_E_RandomNameButton = null;
+		private UnityEngine.UI.Image m_E_RandomNameImage = null;
 		public Transform uiTransform = null;
 	}
 }
