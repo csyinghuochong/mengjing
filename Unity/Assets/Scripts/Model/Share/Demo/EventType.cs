@@ -35,14 +35,4 @@ namespace ET.Client
     {
         public Unit Unit;
     }
-
-    public struct ShowItemTips
-    {
-        public Scene Scene;
-        public BagInfo BagInfo;
-        public ItemOperateEnum ItemOperateEnum;
-        public float3 InputPoint;
-        public List<BagInfo> EquipList;
-        public int Occ;
-    }
 }

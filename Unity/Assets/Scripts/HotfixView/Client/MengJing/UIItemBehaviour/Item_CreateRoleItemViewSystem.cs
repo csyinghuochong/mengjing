@@ -11,7 +11,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this Scroll_Item_CreateRoleItem self)
         {
-            self.E_SelectRoleButton.AddListenerAsync(self.OnSelectRoleButton);
+            self.E_SelectRoleButton.AddListener(self.OnSelectRoleButton);
         }
 
         [EntitySystem]
@@ -69,7 +69,7 @@ namespace ET.Client
             self.E_DiImage.gameObject.SetActive(self.CreateRoleInfo == null);
         }
 
-        private static async ETTask OnSelectRoleButton(this Scroll_Item_CreateRoleItem self)
+        private static void OnSelectRoleButton(this Scroll_Item_CreateRoleItem self)
         {
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
             if (self.CreateRoleInfo == null)
@@ -85,7 +85,7 @@ namespace ET.Client
                 return;
             }
 
-            uiComponent.GetDlgLogic<DlgMJLobby>().UpdateSelect(self.CreateRoleInfo);
+            EventSystem.Instance.Publish(self.Root(), new DlgMJLobby_UpdateSelect());
         }
 
         public static void UpdateSelectStatus(this Scroll_Item_CreateRoleItem self, CreateRoleInfo createRoleListInfo)

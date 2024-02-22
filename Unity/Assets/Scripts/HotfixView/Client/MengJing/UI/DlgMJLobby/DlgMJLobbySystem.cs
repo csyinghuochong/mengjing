@@ -119,4 +119,14 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MJLobby);
         }
     }
+
+    [Event(SceneType.Demo)]
+    public class DlgMJLobby_UpdateSelectHandler: AEvent<Scene, DlgMJLobby_UpdateSelect>
+    {
+        protected override async ETTask Run(Scene scene, DlgMJLobby_UpdateSelect args)
+        {
+            scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMJLobby>().UpdateSelect(args.CreateRoleInfo);
+            await ETTask.CompletedTask;
+        }
+    }
 }
