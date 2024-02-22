@@ -65,6 +65,8 @@ namespace ET.Client
                     self.E_RoleOccText.text = "职业:战士/法师";
                 }
             }
+
+            self.E_DiImage.gameObject.SetActive(self.CreateRoleInfo == null);
         }
 
         private static async ETTask OnSelectRoleButton(this Scroll_Item_CreateRoleItem self)
@@ -83,19 +85,19 @@ namespace ET.Client
                 return;
             }
 
-            // 选中刷新
+            uiComponent.GetDlgLogic<DlgMJLobby>().UpdateSelect(self.CreateRoleInfo);
         }
 
         public static void UpdateSelectStatus(this Scroll_Item_CreateRoleItem self, CreateRoleInfo createRoleListInfo)
         {
             if (createRoleListInfo != null && createRoleListInfo == self.CreateRoleInfo)
             {
-                self.ObjImgSelect.SetActive(true);
+                self.E_SelectImage.gameObject.SetActive(true);
                 self.uiTransform.localScale = Vector3.one * 1.2f;
             }
             else
             {
-                self.ObjImgSelect.SetActive(false);
+                self.E_SelectImage.gameObject.SetActive(false);
                 self.uiTransform.transform.localScale = Vector3.one;
             }
         }

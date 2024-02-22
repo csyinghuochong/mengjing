@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_CreateRoleItem : Entity,IAwake,IDestroy,IUIScrollItem
+	public  class Scroll_Item_CreateRoleItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
 		public CreateRoleInfo CreateRoleInfo;
 		public long DataId {get;set;}
@@ -40,6 +40,30 @@ namespace ET.Client
      			else
      			{
 		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Role");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_SelectImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_SelectImage == null )
+     				{
+		    			this.m_E_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Role/E_Select");
+     				}
+     				return this.m_E_SelectImage;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Role/E_Select");
      			}
      		}
      	}
@@ -164,6 +188,30 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_DiImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_DiImage == null )
+     				{
+		    			this.m_E_DiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_NoRole/E_Di");
+     				}
+     				return this.m_E_DiImage;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_NoRole/E_Di");
+     			}
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_SelectRoleButton
      	{
      		get
@@ -215,11 +263,13 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_EG_RoleRectTransform = null;
+			this.m_E_SelectImage = null;
 			this.m_E_RoleOccText = null;
 			this.m_E_RoleNameText = null;
 			this.m_E_RoleHeadIconImage = null;
 			this.m_E_RoleLvText = null;
 			this.m_EG_NoRoleRectTransform = null;
+			this.m_E_DiImage = null;
 			this.m_E_SelectRoleButton = null;
 			this.m_E_SelectRoleImage = null;
 			this.uiTransform = null;
@@ -227,11 +277,13 @@ namespace ET.Client
 		}
 
 		private UnityEngine.RectTransform m_EG_RoleRectTransform = null;
+		private UnityEngine.UI.Image m_E_SelectImage = null;
 		private UnityEngine.UI.Text m_E_RoleOccText = null;
 		private UnityEngine.UI.Text m_E_RoleNameText = null;
 		private UnityEngine.UI.Image m_E_RoleHeadIconImage = null;
 		private UnityEngine.UI.Text m_E_RoleLvText = null;
 		private UnityEngine.RectTransform m_EG_NoRoleRectTransform = null;
+		private UnityEngine.UI.Image m_E_DiImage = null;
 		private UnityEngine.UI.Button m_E_SelectRoleButton = null;
 		private UnityEngine.UI.Image m_E_SelectRoleImage = null;
 		public Transform uiTransform = null;

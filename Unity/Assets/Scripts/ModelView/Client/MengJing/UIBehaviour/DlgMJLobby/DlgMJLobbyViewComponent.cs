@@ -58,17 +58,75 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_LvText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_LvText == null )
+     			{
+		    		this.m_E_LvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lv");
+     			}
+     			return this.m_E_LvText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_NameText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_NameText == null )
+     			{
+		    		this.m_E_NameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Name");
+     			}
+     			return this.m_E_NameText;
+     		}
+     	}
+
+		public ES_ModelShow ES_ModelShow
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_modelshow == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ModelShow");
+		    	   this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
+     			}
+     			return this.m_es_modelshow;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_CreateRoleItemsLoopVerticalScrollRect = null;
 			this.m_E_EnterMapButton = null;
 			this.m_E_EnterMapImage = null;
+			this.m_E_LvText = null;
+			this.m_E_NameText = null;
+			this.m_es_modelshow = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_CreateRoleItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_EnterMapButton = null;
 		private UnityEngine.UI.Image m_E_EnterMapImage = null;
+		private UnityEngine.UI.Text m_E_LvText = null;
+		private UnityEngine.UI.Text m_E_NameText = null;
+		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		public Transform uiTransform = null;
 	}
 }

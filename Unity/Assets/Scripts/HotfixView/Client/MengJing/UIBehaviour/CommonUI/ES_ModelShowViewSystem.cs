@@ -88,5 +88,10 @@ namespace ET.Client
             go.transform.localPosition = Vector3.zero;
             go.transform.localEulerAngles = Vector3.zero;
         }
+
+        public static void SetShow(this ES_ModelShow self, bool isShow)
+        {
+            self.uiTransform.gameObject.SetActive(isShow);
+        }
     }
 }

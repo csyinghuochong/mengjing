@@ -70,11 +70,28 @@ namespace ET.Client
             // self.Update_Page();
         }
 
-        public static void UpdateSelect(this DlgMJLobby self)
+        public static void UpdateSelect(this DlgMJLobby self, CreateRoleInfo createRoleInfo)
         {
-            
+            self.SeletRoleInfo = createRoleInfo;
+            for (int i = 0; i < self.ScrollItemCreateRoleItems.Keys.Count; i++)
+            {
+                self.ScrollItemCreateRoleItems[i].UpdateSelectStatus(self.SeletRoleInfo);
+            }
+
+            if (self.SeletRoleInfo != null)
+            {
+                self.View.E_NameText.text = self.SeletRoleInfo.PlayerName;
+                self.View.E_LvText.text = $"{self.SeletRoleInfo.PlayerLv}级";
+
+                self.View.ES_ModelShow.ShowPlayerModel(new BagInfo(), 1, 0);
+                self.View.ES_ModelShow.SetShow(true);
+            }
+            else
+            {
+                self.View.ES_ModelShow.SetShow(false);
+            }
         }
-        
+
         private static async ETTask OnBtnSelectRole(this DlgMJLobby self)
         {
             //參考危境，有角色则显示角色列表，点击空角色跳转到创建角色界面。
