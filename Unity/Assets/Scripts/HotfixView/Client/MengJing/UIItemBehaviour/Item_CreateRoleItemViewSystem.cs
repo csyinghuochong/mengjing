@@ -11,7 +11,6 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this Scroll_Item_CreateRoleItem self)
         {
-            self.E_SelectRoleButton.AddListener(self.OnSelectRoleButton);
         }
 
         [EntitySystem]
@@ -67,6 +66,7 @@ namespace ET.Client
             }
 
             self.E_DiImage.gameObject.SetActive(self.CreateRoleInfo == null);
+            self.E_SelectRoleButton.AddListener(self.OnSelectRoleButton);
         }
 
         private static void OnSelectRoleButton(this Scroll_Item_CreateRoleItem self)
