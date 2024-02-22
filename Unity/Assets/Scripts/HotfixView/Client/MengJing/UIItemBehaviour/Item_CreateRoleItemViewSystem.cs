@@ -79,7 +79,7 @@ namespace ET.Client
             }
             else
             {
-                EventSystem.Instance.Publish(self.Root(), new DlgMJLobby_UpdateSelect());
+                EventSystem.Instance.Publish(self.Root(), new DlgMJLobby_UpdateSelect() { CreateRoleInfo = self.CreateRoleInfo });
             }
         }
 
@@ -93,7 +93,7 @@ namespace ET.Client
             else
             {
                 self.E_SelectImage.gameObject.SetActive(false);
-                self.uiTransform.transform.localScale = Vector3.one;
+                self.uiTransform.localScale = Vector3.one;
             }
         }
     }

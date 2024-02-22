@@ -72,7 +72,8 @@ namespace ET.Client
         public static void UpdateSelect(this DlgMJLobby self, CreateRoleInfo createRoleInfo)
         {
             self.SeletRoleInfo = createRoleInfo;
-            for (int i = 0; i < self.ScrollItemCreateRoleItems.Keys.Count; i++)
+            // EUIModelViewHelper.AddUIScrollItems 添加时用的<=,会多一个,不知道为什么
+            for (int i = 0; i < self.ScrollItemCreateRoleItems.Keys.Count - 1; i++)
             {
                 self.ScrollItemCreateRoleItems[i].UpdateSelectStatus(self.SeletRoleInfo);
             }
@@ -82,7 +83,7 @@ namespace ET.Client
                 self.View.E_NameText.text = self.SeletRoleInfo.PlayerName;
                 self.View.E_LvText.text = $"{self.SeletRoleInfo.PlayerLv}级";
 
-                self.View.ES_ModelShow.ShowPlayerModel(new BagInfo(), 1, 0);
+                // self.View.ES_ModelShow.ShowPlayerModel(new BagInfo(), 1, 0);
                 self.View.ES_ModelShow.SetShow(true);
             }
             else
