@@ -7,7 +7,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgCreateRoleViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Text ENameText
+		public UnityEngine.UI.Button E_CreateRoleButton
      	{
      		get
      		{
@@ -16,15 +16,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_ENameText == null )
+     			if( this.m_E_CreateRoleButton == null )
      			{
-		    		this.m_ENameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EName");
+		    		this.m_E_CreateRoleButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_CreateRole");
      			}
-     			return this.m_ENameText;
+     			return this.m_E_CreateRoleButton;
      		}
      	}
 
-		public UnityEngine.UI.Button ECreateButton
+		public UnityEngine.UI.Image E_CreateRoleImage
      	{
      		get
      		{
@@ -33,42 +33,23 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_ECreateButton == null )
+     			if( this.m_E_CreateRoleImage == null )
      			{
-		    		this.m_ECreateButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ECreate");
+		    		this.m_E_CreateRoleImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_CreateRole");
      			}
-     			return this.m_ECreateButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image ECreateImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_ECreateImage == null )
-     			{
-		    		this.m_ECreateImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ECreate");
-     			}
-     			return this.m_ECreateImage;
+     			return this.m_E_CreateRoleImage;
      		}
      	}
 
 		public void DestroyWidget()
 		{
-			this.m_ENameText = null;
-			this.m_ECreateButton = null;
-			this.m_ECreateImage = null;
+			this.m_E_CreateRoleButton = null;
+			this.m_E_CreateRoleImage = null;
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Text m_ENameText = null;
-		private UnityEngine.UI.Button m_ECreateButton = null;
-		private UnityEngine.UI.Image m_ECreateImage = null;
+		private UnityEngine.UI.Button m_E_CreateRoleButton = null;
+		private UnityEngine.UI.Image m_E_CreateRoleImage = null;
 		public Transform uiTransform = null;
 	}
 }

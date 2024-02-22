@@ -14,7 +14,6 @@ namespace ET.Client
         {
             self.View.E_EnterMapButton.AddListenerAsync(self.OnEnterMapButton);
             self.View.E_CreateRoleItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCreateRoleItemsRefresh);
-            // self.View.E_BtnSelectRole.AddListenerAsync(self.OnBtnSelectRole);
         }
 
         public static void ShowWindow(this DlgMJLobby self, Entity contextData = null)
@@ -90,19 +89,6 @@ namespace ET.Client
             {
                 self.View.ES_ModelShow.SetShow(false);
             }
-        }
-
-        private static async ETTask OnBtnSelectRole(this DlgMJLobby self)
-        {
-            //參考危境，有角色则显示角色列表，点击空角色跳转到创建角色界面。
-            PlayerComponent accountInfoComponentClient = self.Root().GetComponent<PlayerComponent>();
-            if (accountInfoComponentClient.CreateRoleList.Count > 0)
-            {
-                Log.Debug("暂时只能创建一个角色！");
-                return;
-            }
-
-            await EnterMapHelper.RequestCreateRole(self.Root(), accountInfoComponentClient.AccountId, 1, "ttt");
         }
 
         private static async ETTask OnEnterMapButton(this DlgMJLobby self)
