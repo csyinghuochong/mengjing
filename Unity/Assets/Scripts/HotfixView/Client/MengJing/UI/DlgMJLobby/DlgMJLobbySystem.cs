@@ -43,11 +43,10 @@ namespace ET.Client
 
             self.PageIndex = 0;
 
-            int pageIndex = self.PageIndex;
-            int starIndex = pageIndex * self.PageCount;
+            int starIndex = self.PageIndex * self.PageCount;
 
             int num = playerComponent.CreateRoleList.Count - starIndex + 1;
-            num = Mathf.Min(4, num);
+            num = Mathf.Min(self.PageCount, num);
 
             self.ShowCreateRoleInfos.Clear();
 
@@ -57,6 +56,11 @@ namespace ET.Client
                 {
                     self.ShowCreateRoleInfos.Add(playerComponent.CreateRoleList[starIndex + i]);
                 }
+            }
+
+            if (self.ShowCreateRoleInfos.Count < self.PageCount)
+            {
+                self.ShowCreateRoleInfos.Add(null);
             }
 
             self.AddUIScrollItems(ref self.ScrollItemCreateRoleItems, self.ShowCreateRoleInfos.Count);
