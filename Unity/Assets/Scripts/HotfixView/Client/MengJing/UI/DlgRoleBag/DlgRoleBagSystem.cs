@@ -12,7 +12,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgRoleBag self)
         {
             self.View.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
-            self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnLoopItemRefreshHandler);
+            self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
         }
 
         public static void ShowWindow(this DlgRoleBag self, Entity contextData = null)
@@ -20,7 +20,7 @@ namespace ET.Client
             self.View.E_AllToggle.IsSelected(true);
         }
 
-        private static void OnLoopItemRefreshHandler(this DlgRoleBag self, Transform transform, int index)
+        private static void OnBagItemsRefresh(this DlgRoleBag self, Transform transform, int index)
         {
             Scroll_Item_BagItem scrollItemBagItem = self.ScrollItemBagItems[index].BindTrans(transform);
             scrollItemBagItem.Refresh(self.ShowBagInfos[index]);
@@ -47,10 +47,10 @@ namespace ET.Client
 
         private static void Refresh(this DlgRoleBag self)
         {
-            self.RefreshItems();
+            self.RefreshBagItems();
         }
 
-        private static void RefreshItems(this DlgRoleBag self)
+        private static void RefreshBagItems(this DlgRoleBag self)
         {
             BagComponentClient bagComponentClient = self.Root().GetComponent<BagComponentClient>();
             // 假数据
