@@ -102,6 +102,7 @@ namespace ET.Client
         {
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
             uiComponent.ShowWindow(WindowID.WindowID_MJLobby);
+            uiComponent.GetDlgLogic<DlgMJLobby>().SelectNewCreateRole();
             uiComponent.CloseWindow(WindowID.WindowID_CreateRole);
         }
     }

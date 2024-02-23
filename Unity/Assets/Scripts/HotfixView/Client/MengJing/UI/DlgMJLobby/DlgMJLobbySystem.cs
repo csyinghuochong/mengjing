@@ -14,6 +14,8 @@ namespace ET.Client
         {
             self.View.E_EnterMapButton.AddListenerAsync(self.OnEnterMapButton);
             self.View.E_DeleteRoleButton.AddListenerAsync(self.OnDeleteRoleButton);
+            self.View.E_PrevButton.AddListener(self.OnPrevButton);
+            self.View.E_NextButton.AddListener(self.OnNextButton);
             self.View.E_CreateRoleItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCreateRoleItemsRefresh);
         }
 
@@ -31,17 +33,34 @@ namespace ET.Client
         private static void Refresh(this DlgMJLobby self)
         {
             self.RefreshCreateRoleItems();
+            self.UpdateSelect(self.ShowCreateRoleInfos[0]);
+        }
+
+        public static void SelectNewCreateRole(this DlgMJLobby self)
+        {
+            self.RefreshCreateRoleItems();
+            for (int i = self.ShowCreateRoleInfos.Count - 1; i >= 0; i--)
+            {
+                if (self.ShowCreateRoleInfos[i] != null)
+                {
+                    self.UpdateSelect(self.ShowCreateRoleInfos[i]);
+                    break;
+                }
+            }
         }
 
         private static void RefreshCreateRoleItems(this DlgMJLobby self)
         {
             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
-            if (playerComponent.CreateRoleList.Count > 0)
+            if (self.SeletRoleInfo == null)
             {
-                self.SeletRoleInfo = playerComponent.CreateRoleList[0];
-            }
+                if (playerComponent.CreateRoleList.Count > 0)
+                {
+                    self.SeletRoleInfo = playerComponent.CreateRoleList[0];
+                }
 
-            self.PageIndex = 0;
+                self.PageIndex = 0;
+            }
 
             int starIndex = self.PageIndex * self.PageCount;
 
@@ -66,8 +85,14 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemCreateRoleItems, self.ShowCreateRoleInfos.Count);
             self.View.E_CreateRoleItemsLoopVerticalScrollRect.SetVisible(true, self.ShowCreateRoleInfos.Count);
 
-            // self.UpdateSelectShow().Coroutine();
-            // self.Update_Page();
+            int roleNumber = playerComponent.CreateRoleList.Count;
+            roleNumber = Mathf.Max(roleNumber, 8);
+
+            int pagetotal = roleNumber / 4;
+            pagetotal += ((roleNumber % 4 > 0)? 1 : 0);
+
+            self.View.E_PrevButton.gameObject.SetActive(self.PageIndex > 0);
+            self.View.E_NextButton.gameObject.SetActive(self.PageIndex < pagetotal - 1);
         }
 
         public static void UpdateSelect(this DlgMJLobby self, CreateRoleInfo createRoleInfo)
@@ -117,6 +142,35 @@ namespace ET.Client
 
             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
             await EnterMapHelper.RequestDeleteRole(self.Root(), playerComponent.AccountId, self.SeletRoleInfo.UnitId, self.SeletRoleInfo);
+            self.Refresh();
+        }
+
+        private static void OnPrevButton(this DlgMJLobby self)
+        {
+            if (self.PageIndex < 1)
+            {
+                return;
+            }
+
+            self.PageIndex--;
+
+            self.Refresh();
+        }
+
+        private static void OnNextButton(this DlgMJLobby self)
+        {
+            int roleNumber = self.Root().GetComponent<PlayerComponent>().CreateRoleList.Count;
+            roleNumber = Mathf.Max(roleNumber, 8);
+
+            int pagetotal = roleNumber / 4;
+            pagetotal += ((roleNumber % 4 > 0)? 1 : 0);
+            if (self.PageIndex >= pagetotal - 1)
+            {
+                return;
+            }
+
+            self.PageIndex++;
+
             self.Refresh();
         }
     }

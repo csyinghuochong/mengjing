@@ -24,6 +24,74 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_PrevButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PrevButton == null )
+     			{
+		    		this.m_E_PrevButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"RightSet/E_Prev");
+     			}
+     			return this.m_E_PrevButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_PrevImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PrevImage == null )
+     			{
+		    		this.m_E_PrevImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RightSet/E_Prev");
+     			}
+     			return this.m_E_PrevImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_NextButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_NextButton == null )
+     			{
+		    		this.m_E_NextButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"RightSet/E_Next");
+     			}
+     			return this.m_E_NextButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_NextImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_NextImage == null )
+     			{
+		    		this.m_E_NextImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RightSet/E_Next");
+     			}
+     			return this.m_E_NextImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_EnterMapButton
      	{
      		get
@@ -147,6 +215,10 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_CreateRoleItemsLoopVerticalScrollRect = null;
+			this.m_E_PrevButton = null;
+			this.m_E_PrevImage = null;
+			this.m_E_NextButton = null;
+			this.m_E_NextImage = null;
 			this.m_E_EnterMapButton = null;
 			this.m_E_EnterMapImage = null;
 			this.m_E_DeleteRoleButton = null;
@@ -158,6 +230,10 @@ namespace ET.Client
 		}
 
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_CreateRoleItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_PrevButton = null;
+		private UnityEngine.UI.Image m_E_PrevImage = null;
+		private UnityEngine.UI.Button m_E_NextButton = null;
+		private UnityEngine.UI.Image m_E_NextImage = null;
 		private UnityEngine.UI.Button m_E_EnterMapButton = null;
 		private UnityEngine.UI.Image m_E_EnterMapImage = null;
 		private UnityEngine.UI.Button m_E_DeleteRoleButton = null;

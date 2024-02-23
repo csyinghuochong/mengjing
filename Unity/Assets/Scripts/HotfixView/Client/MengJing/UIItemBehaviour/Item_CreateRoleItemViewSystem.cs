@@ -39,7 +39,6 @@ namespace ET.Client
 
                 self.E_RoleHeadIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                         .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, createRoleInfo.PlayerOcc.ToString()));
-                self.E_RoleHeadIconImage.gameObject.SetActive(true);
                 self.EG_NoRoleRectTransform.gameObject.SetActive(false);
                 self.EG_RoleRectTransform.gameObject.SetActive(true);
             }
@@ -50,18 +49,11 @@ namespace ET.Client
                 {
                     self.EG_NoRoleRectTransform.gameObject.SetActive(false);
                     self.EG_RoleRectTransform.gameObject.SetActive(false);
-                    self.E_RoleLvText.gameObject.SetActive(false);
-                    self.E_RoleHeadIconImage.gameObject.SetActive(false);
                 }
                 else
                 {
-                    //显示为空
                     self.EG_NoRoleRectTransform.gameObject.SetActive(true);
                     self.EG_RoleRectTransform.gameObject.SetActive(false);
-                    self.E_RoleNameText.text = GameSettingLanguge.LoadLocalization("点击创建角色");
-                    self.E_RoleLvText.gameObject.SetActive(false);
-                    self.E_RoleHeadIconImage.gameObject.SetActive(false);
-                    self.E_RoleOccText.text = "职业:战士/法师";
                 }
             }
 
@@ -75,7 +67,7 @@ namespace ET.Client
             if (self.CreateRoleInfo == null)
             {
                 uiComponent.ShowWindow(WindowID.WindowID_CreateRole);
-                uiComponent.CloseWindow(WindowID.WindowID_MJLobby);
+                uiComponent.HideWindow(WindowID.WindowID_MJLobby);
             }
             else
             {
