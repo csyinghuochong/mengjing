@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace ET.Client
@@ -42,7 +43,7 @@ namespace ET.Client
         public float OffsetAngleY = 45;
  
         //相机与人物的坐标的偏移量
-        public Vector3 OffsetPostion;
+        public float3 OffsetPostion;
         //纪录偏移角度用于复原
         public float RecordAngleX;
         public float RecordAngleY;
@@ -59,6 +60,8 @@ namespace ET.Client
         public Unit MainUnit { get; set; }
         
         public Unit NpcUnit { get; set; }
+        
+        public bool OnBuildEnter  { get; set; }
     }
 
 }
