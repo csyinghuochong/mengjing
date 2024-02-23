@@ -60,9 +60,9 @@ namespace ET.Client
 
             //參考危境，有角色则显示角色列表，点击空角色跳转到创建角色界面。
             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
-            if (playerComponent.CreateRoleList.Count > 0)
+            if (playerComponent.CreateRoleList.Count >= 8)
             {
-                Log.Debug("暂时只能创建一个角色！");
+                Log.Debug("超出数量！");
                 return;
             }
 
