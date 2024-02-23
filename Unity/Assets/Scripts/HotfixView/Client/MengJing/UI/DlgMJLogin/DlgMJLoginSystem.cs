@@ -17,6 +17,8 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.Dictionary, 100);
             self.View.ELoopTestLoopHorizontalScrollRect.SetVisible(true, 100);
             self.View.ESReuseUI.Test();
+            self.View.EAccountInputField.text = PlayerPrefs.GetString("MJ_Account");
+            self.View.EPasswordInputField.text = PlayerPrefs.GetString("MJ_Password");
         }
 
         public static void OnLoop(this DlgMJLogin self, Transform transform, int index)
@@ -27,10 +29,11 @@ namespace ET.Client
 
         public static void OnLogin(this DlgMJLogin self)
         {
-            LoginHelper.Login(
-                self.Root(),
+            LoginHelper.Login(self.Root(),
                 self.View.EAccountInputField.text,
                 self.View.EPasswordInputField.text).Coroutine();
+            PlayerPrefs.SetString("MJ_Account", self.View.EAccountInputField.text);
+            PlayerPrefs.SetString("MJ_Password", self.View.EPasswordInputField.text);
         }
     }
 }
