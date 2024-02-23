@@ -75,6 +75,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_OccShow_LieRenRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_OccShow_LieRenRectTransform == null )
+     			{
+		    		this.m_EG_OccShow_LieRenRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_OccShow_LieRen");
+     			}
+     			return this.m_EG_OccShow_LieRenRectTransform;
+     		}
+     	}
+
 		public ES_ModelShow ES_ModelShow
      	{
      		get
@@ -371,6 +388,7 @@ namespace ET.Client
 			this.m_E_CloseImage = null;
 			this.m_EG_OccShow_ZhanShiRectTransform = null;
 			this.m_EG_OccShow_FaShiRectTransform = null;
+			this.m_EG_OccShow_LieRenRectTransform = null;
 			this.m_es_modelshow = null;
 			this.m_E_CreateRoleNameInputField = null;
 			this.m_E_CreateRoleNameImage = null;
@@ -395,6 +413,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_CloseImage = null;
 		private UnityEngine.RectTransform m_EG_OccShow_ZhanShiRectTransform = null;
 		private UnityEngine.RectTransform m_EG_OccShow_FaShiRectTransform = null;
+		private UnityEngine.RectTransform m_EG_OccShow_LieRenRectTransform = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		private UnityEngine.UI.InputField m_E_CreateRoleNameInputField = null;
 		private UnityEngine.UI.Image m_E_CreateRoleNameImage = null;

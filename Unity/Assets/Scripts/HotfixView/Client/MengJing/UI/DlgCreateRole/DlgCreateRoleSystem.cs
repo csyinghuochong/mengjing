@@ -81,6 +81,7 @@ namespace ET.Client
 
             self.View.EG_OccShow_ZhanShiRectTransform.gameObject.SetActive(false);
             self.View.EG_OccShow_FaShiRectTransform.gameObject.SetActive(false);
+            self.View.EG_OccShow_LieRenRectTransform.gameObject.SetActive(false);
             switch (index)
             {
                 case 0:
@@ -90,6 +91,7 @@ namespace ET.Client
                     self.View.EG_OccShow_FaShiRectTransform.gameObject.SetActive(true);
                     break;
                 case 2:
+                    self.View.EG_OccShow_LieRenRectTransform.gameObject.SetActive(true);
                     break;
             }
 
