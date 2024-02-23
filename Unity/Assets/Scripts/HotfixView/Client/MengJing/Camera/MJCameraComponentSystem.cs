@@ -10,11 +10,20 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this ET.Client.MJCameraComponent self)
         {
-            self.MainCamera = GameObject.Find("Global/Main Camera").GetComponent<Camera>();
+            self.MainCamera = Camera.main;
+            //GameObject.Find("Global/MainCamera").GetComponent<Camera>();
             self.OffsetPostion = new Vector3(0, 10f, -6f);
             self.PullRate = 1f;
             self.CameraMoveType = CameraMoveType.Normal;
             self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            if (self.MainUnit != null)
+            {
+                Log.Debug("self.MainUnit != null");
+            }
+            else
+            {
+                Log.Debug("self.MainUnit == null");
+            }
         }
         
         [EntitySystem]

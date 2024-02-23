@@ -14,6 +14,8 @@ namespace ET.Client
 
                 G2C_EnterMap g2CEnterMap = await root.GetComponent<ClientSenderCompnent>().Call(c2GEnterMap) as G2C_EnterMap;
 
+                root.GetComponent<PlayerComponent>().MyId = c2GEnterMap.UnitId;
+
                 // 等待场景切换完成
                 await root.GetComponent<ObjectWait>().Wait<Wait_SceneChangeFinish>();
 

@@ -6,7 +6,7 @@ namespace ET
     public static class GMHelp
     {
 
-        //qqUID_84E70C11CC937F72EE508CD43D7DD4DA Ò»Ö±ÅÖÍ·Óã
+        //qqUID_84E70C11CC937F72EE508CD43D7DD4DA Ò»Ö±ï¿½ï¿½Í·ï¿½ï¿½
         public static bool IsGmAccount(string account)
         {
             return account.Equals("tcg01")
@@ -22,15 +22,11 @@ namespace ET
             return false;
         }
 
-        /// <summary>
-        /// µ¯´°Íæ¼Ò
-        /// </summary>
         public static string GetPopUpPlayer(long unitId)
         {
-            // ÕËºÅ->·şÎñÆ÷ID(Åä0±íÊ¾È«²¿,9±íÊ¾ÏÈ·æÎåÇø,ÓëServerHelper.GetServerListÖĞ¶ÔÓ¦) ½ÇÉ«Ãû×Ö(Åä0±íÊ¾È«²¿) µ¯³öÄÚÈİ
             if (unitId == 2103768474428964866)
             {
-                return "9@¾°Ä­Ãì@Äã×÷±×ÁË£¡£¡£¡";
+                return "9@æç¤º1@ï¿½æç¤º2";
             }
             return string.Empty;
         }

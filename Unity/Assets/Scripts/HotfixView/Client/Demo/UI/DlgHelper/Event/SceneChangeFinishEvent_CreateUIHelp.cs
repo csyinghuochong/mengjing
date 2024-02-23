@@ -5,6 +5,8 @@
     {
         protected override async ETTask Run(Scene scene, SceneChangeFinish args)
         {
+             scene.AddComponent<MJCameraComponent>();
+            
              scene.GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Helper);
              await ETTask.CompletedTask;
         }
