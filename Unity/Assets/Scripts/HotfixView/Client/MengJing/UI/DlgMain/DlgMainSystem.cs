@@ -101,7 +101,7 @@ namespace ET.Client
 
         private static void OnRoseEquipButton(this DlgMain self)
         {
-            Log.Debug("打开背包界面！！！");
+            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Role);
         }
 
         private static void OnPetButton(this DlgMain self)
@@ -832,7 +832,7 @@ namespace ET.Client
         {
             // self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Chat).Coroutine();
         }
-        
+
         // private static void OnRecvChat(this DlgMain self, ChatInfo chatInfo)
         // {
         //     if (self.ChatInfoList.Count >= 10)
