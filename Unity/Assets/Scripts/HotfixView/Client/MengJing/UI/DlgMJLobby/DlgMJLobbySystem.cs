@@ -127,7 +127,13 @@ namespace ET.Client
                 return;
             }
 
-            accountInfoComponentClient.CurrentRoleId = accountInfoComponentClient.CreateRoleList[0].UnitId;
+            if (self.SeletRoleInfo == null)
+            {
+                Log.Debug("未选择角色！");
+                return;
+            }
+
+            accountInfoComponentClient.CurrentRoleId = self.SeletRoleInfo.UnitId;
             await EnterMapHelper.EnterMapAsync(self.Root());
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MJLobby);
         }
