@@ -736,3 +736,18 @@ message FubenPassInfo
 	int32 Difficulty = 2;			//1 difficulty普通 2 挑战  3困难
 }
 
+
+//ResponseType A2C_DeleteRoleData
+message C2A_DeleteRoleData // ISessionRequest
+{
+	int32 RpcId = 90;
+	int64 AccountId = 1;
+	int64 UserId = 2;
+}
+
+message A2C_DeleteRoleData // ISessionResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

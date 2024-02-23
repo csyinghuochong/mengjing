@@ -58,6 +58,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_DeleteRoleButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_DeleteRoleButton == null )
+     			{
+		    		this.m_E_DeleteRoleButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_DeleteRole");
+     			}
+     			return this.m_E_DeleteRoleButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_DeleteRoleImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_DeleteRoleImage == null )
+     			{
+		    		this.m_E_DeleteRoleImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_DeleteRole");
+     			}
+     			return this.m_E_DeleteRoleImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_LvText
      	{
      		get
@@ -115,6 +149,8 @@ namespace ET.Client
 			this.m_E_CreateRoleItemsLoopVerticalScrollRect = null;
 			this.m_E_EnterMapButton = null;
 			this.m_E_EnterMapImage = null;
+			this.m_E_DeleteRoleButton = null;
+			this.m_E_DeleteRoleImage = null;
 			this.m_E_LvText = null;
 			this.m_E_NameText = null;
 			this.m_es_modelshow = null;
@@ -124,6 +160,8 @@ namespace ET.Client
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_CreateRoleItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_EnterMapButton = null;
 		private UnityEngine.UI.Image m_E_EnterMapImage = null;
+		private UnityEngine.UI.Button m_E_DeleteRoleButton = null;
+		private UnityEngine.UI.Image m_E_DeleteRoleImage = null;
 		private UnityEngine.UI.Text m_E_LvText = null;
 		private UnityEngine.UI.Text m_E_NameText = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;

@@ -13,6 +13,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgMJLobby self)
         {
             self.View.E_EnterMapButton.AddListenerAsync(self.OnEnterMapButton);
+            self.View.E_DeleteRoleButton.AddListenerAsync(self.OnDeleteRoleButton);
             self.View.E_CreateRoleItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCreateRoleItemsRefresh);
         }
 
@@ -104,6 +105,19 @@ namespace ET.Client
             accountInfoComponentClient.CurrentRoleId = accountInfoComponentClient.CreateRoleList[0].UnitId;
             await EnterMapHelper.EnterMapAsync(self.Root());
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MJLobby);
+        }
+
+        private static async ETTask OnDeleteRoleButton(this DlgMJLobby self)
+        {
+            if (self.SeletRoleInfo == null)
+            {
+                Log.Error("请选择要删除的角色!");
+                return;
+            }
+
+            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            await EnterMapHelper.RequestDeleteRole(self.Root(), playerComponent.AccountId, self.SeletRoleInfo.UnitId, self.SeletRoleInfo);
+            self.Refresh();
         }
     }
 

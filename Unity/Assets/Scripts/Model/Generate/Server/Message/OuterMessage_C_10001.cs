@@ -2798,6 +2798,67 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(A2C_DeleteRoleData))]
+	[Message(OuterMessage.C2A_DeleteRoleData)]
+	[MemoryPackable]
+	public partial class C2A_DeleteRoleData: MessageObject, ISessionRequest
+	{
+		public static C2A_DeleteRoleData Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2A_DeleteRoleData), isFromPool) as C2A_DeleteRoleData; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long AccountId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UserId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.AccountId = default;
+			this.UserId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.A2C_DeleteRoleData)]
+	[MemoryPackable]
+	public partial class A2C_DeleteRoleData: MessageObject, ISessionResponse
+	{
+		public static A2C_DeleteRoleData Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2C_DeleteRoleData), isFromPool) as A2C_DeleteRoleData; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -2871,5 +2932,7 @@ namespace ET
 		 public const ushort SkillPro = 10070;
 		 public const ushort RewardItem = 10071;
 		 public const ushort FubenPassInfo = 10072;
+		 public const ushort C2A_DeleteRoleData = 10073;
+		 public const ushort A2C_DeleteRoleData = 10074;
 	}
 }
