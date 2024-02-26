@@ -20,6 +20,7 @@ namespace ET.Client
                 await root.GetComponent<ObjectWait>().Wait<Wait_SceneChangeFinish>();
 
                 await BagClientHelper.RequestBagInit(root);
+                await ActivityNetHelper.RequestActivityInfo(root);
 
                 EventSystem.Instance.Publish(root, new EnterMapFinish());
             }

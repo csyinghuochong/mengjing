@@ -759,3 +759,19 @@ message C2M_GMCommand // ILocationMessage
 	string GMMsg = 2;
 	string Account = 3;
 }
+
+//ResponseType A2C_ActivityInfoResponse
+message C2A_ActivityInfoRequest // IActivityActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 ActivityType = 1;
+}
+
+message A2C_ActivityInfoResponse // IActivityActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	string ActivityContent = 1;
+}

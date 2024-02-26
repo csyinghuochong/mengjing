@@ -11,4 +11,12 @@
     public interface ILocationResponse: IResponse
     {
     }
+    
+    public interface IActivityActorRequest : IRequest
+    {
+    }
+
+    public interface IActivityActorResponse : IResponse
+    {
+    }
 }

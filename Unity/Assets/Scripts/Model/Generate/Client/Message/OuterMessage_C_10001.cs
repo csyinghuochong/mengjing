@@ -2889,6 +2889,71 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(A2C_ActivityInfoResponse))]
+	[Message(OuterMessage.C2A_ActivityInfoRequest)]
+	[MemoryPackable]
+	public partial class C2A_ActivityInfoRequest: MessageObject, IActivityActorRequest
+	{
+		public static C2A_ActivityInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2A_ActivityInfoRequest), isFromPool) as C2A_ActivityInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ActivityType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ActivityType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.A2C_ActivityInfoResponse)]
+	[MemoryPackable]
+	public partial class A2C_ActivityInfoResponse: MessageObject, IActivityActorResponse
+	{
+		public static A2C_ActivityInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2C_ActivityInfoResponse), isFromPool) as A2C_ActivityInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string ActivityContent { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.ActivityContent = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -2965,5 +3030,7 @@ namespace ET
 		 public const ushort C2A_DeleteRoleData = 10073;
 		 public const ushort A2C_DeleteRoleData = 10074;
 		 public const ushort C2M_GMCommand = 10075;
+		 public const ushort C2A_ActivityInfoRequest = 10076;
+		 public const ushort A2C_ActivityInfoResponse = 10077;
 	}
 }

@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using System;
+
+namespace ET.Server
 {
 	[FriendOf(typeof(Unit))]
 	[MessageSessionHandler(SceneType.Gate)]
@@ -20,6 +22,7 @@
             
             //测试，先写死
             player.UnitId = request.UnitId;
+            player.ActivityServerId = UnitCacheHelper.GetActivityId(session.Zone());
 
             (bool isNewPlayer, Unit unit)  = await UnitHelper.LoadUnit(player, scene); 
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map1");

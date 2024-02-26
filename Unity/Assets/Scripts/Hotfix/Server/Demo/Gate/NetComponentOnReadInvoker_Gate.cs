@@ -62,6 +62,24 @@ namespace ET.Server
                 }
                 case IRequest actorRequest:  // 分发IActorRequest消息，目前没有用到，需要的自己添加
                 {
+                    IResponse response = null;
+                    int rpcId = actorRequest.RpcId;
+                    long instanceId = session.InstanceId;
+                    Player player = session.GetComponent<SessionPlayerComponent>().Player;
+                    if (actorRequest is IActivityActorRequest iActivityRequest)
+                    {
+                        ActorId ActivityServerId = player.ActivityServerId;
+                        response = await root.GetComponent<MessageSender>().Call(ActivityServerId, iActivityRequest);
+                    }
+                    if (response == null)
+                    {
+                        break;
+                    }
+                    response.RpcId = rpcId;
+                    if (session.InstanceId == instanceId)
+                    {
+                        session.Send(response);
+                    }
                     break;
                 }
                 case IMessage actorMessage:  // 分发IActorMessage消息，目前没有用到，需要的自己添加

@@ -128,6 +128,11 @@ namespace ET.Server
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.DBCache.ToString()).ActorId;
         }
 
+        public static ActorId GetActivityId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Activity.ToString()).ActorId;
+        }
+
         /// 获取玩家组件缓存
         /// </summary>
         /// <param name="unitId"></param>
