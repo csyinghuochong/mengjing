@@ -19,5 +19,6 @@ namespace ET.Client
 		WindowID_Role,
 		WindowID_RoleBag,
 		WindowID_ItemTips,
+		WindowID_HuoBiSet,
 	}
 }

@@ -17,6 +17,11 @@ namespace ET.Client
         public static void ShowWindow(this DlgRole self, Entity contextData = null)
         {
             self.View.E_BagToggle.IsSelected(true);
+
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
+            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
+
             self.RefreshPlayerInfo();
         }
 
@@ -35,7 +40,6 @@ namespace ET.Client
                     Log.Debug($"打开 Bag");
                     break;
                 case 1:
-                    // uiComponent.ShowWindowAsync(WindowID.WindowID_Role).Coroutine();
                     Log.Debug($"打开 Property");
                     break;
             }
@@ -43,14 +47,19 @@ namespace ET.Client
             if (index != 0)
             {
                 uiComponent.HideWindow(WindowID.WindowID_RoleBag);
-                Log.Debug($"关闭 Bag");
             }
 
             if (index != 1)
             {
-                // uiComponent.HideWindow(WindowID.WindowID_Main);
-                Log.Debug($"关闭 Property");
             }
+        }
+
+        public static void OnCloseButton(this DlgRole self)
+        {
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+            uiComponent.CloseWindow(WindowID.WindowID_RoleBag);
+
+            uiComponent.CloseWindow(WindowID.WindowID_Role);
         }
 
         private static void RefreshPlayerInfo(this DlgRole self)
