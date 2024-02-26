@@ -2954,6 +2954,258 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(A2C_FirstWinInfoResponse))]
+	[Message(OuterMessage.C2A_FirstWinInfoRequest)]
+	[MemoryPackable]
+	public partial class C2A_FirstWinInfoRequest: MessageObject, IActivityActorRequest
+	{
+		public static C2A_FirstWinInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2A_FirstWinInfoRequest), isFromPool) as C2A_FirstWinInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.A2C_FirstWinInfoResponse)]
+	[MemoryPackable]
+	public partial class A2C_FirstWinInfoResponse: MessageObject, IActivityActorResponse
+	{
+		public static A2C_FirstWinInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2C_FirstWinInfoResponse), isFromPool) as A2C_FirstWinInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<FirstWinInfo> FirstWinInfos { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.FirstWinInfos.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(A2C_MysteryListResponse))]
+	[Message(OuterMessage.C2A_MysteryListRequest)]
+	[MemoryPackable]
+	public partial class C2A_MysteryListRequest: MessageObject, IActivityActorRequest
+	{
+		public static C2A_MysteryListRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2A_MysteryListRequest), isFromPool) as C2A_MysteryListRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UserId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UserId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.A2C_MysteryListResponse)]
+	[MemoryPackable]
+	public partial class A2C_MysteryListResponse: MessageObject, IActivityActorResponse
+	{
+		public static A2C_MysteryListResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2C_MysteryListResponse), isFromPool) as A2C_MysteryListResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<MysteryItemInfo> MysteryItemInfos { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.MysteryItemInfos.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(A2C_PetMingChanChuResponse))]
+	[Message(OuterMessage.C2A_PetMingChanChuRequest)]
+	[MemoryPackable]
+	public partial class C2A_PetMingChanChuRequest: MessageObject, IActivityActorRequest
+	{
+		public static C2A_PetMingChanChuRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2A_PetMingChanChuRequest), isFromPool) as C2A_PetMingChanChuRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.A2C_PetMingChanChuResponse)]
+	[MemoryPackable]
+	public partial class A2C_PetMingChanChuResponse: MessageObject, IActivityActorResponse
+	{
+		public static A2C_PetMingChanChuResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2C_PetMingChanChuResponse), isFromPool) as A2C_PetMingChanChuResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(A2C_PetMingListResponse))]
+	[Message(OuterMessage.C2A_PetMingListRequest)]
+	[MemoryPackable]
+	public partial class C2A_PetMingListRequest: MessageObject, IActivityActorRequest
+	{
+		public static C2A_PetMingListRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2A_PetMingListRequest), isFromPool) as C2A_PetMingListRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.A2C_PetMingListResponse)]
+	[MemoryPackable]
+	public partial class A2C_PetMingListResponse: MessageObject, IActivityActorResponse
+	{
+		public static A2C_PetMingListResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2C_PetMingListResponse), isFromPool) as A2C_PetMingListResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long ChanChu { get; set; }
+
+		[MemoryPackOrder(1)]
+		public List<KeyValuePairInt> PetMineExtend { get; set; } = new();
+
+		[MemoryPackOrder(3)]
+		public List<PetMingPlayerInfo> PetMingPlayerInfos { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.ChanChu = default;
+			this.PetMineExtend.Clear();
+			this.PetMingPlayerInfos.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -3032,5 +3284,13 @@ namespace ET
 		 public const ushort C2M_GMCommand = 10075;
 		 public const ushort C2A_ActivityInfoRequest = 10076;
 		 public const ushort A2C_ActivityInfoResponse = 10077;
+		 public const ushort C2A_FirstWinInfoRequest = 10078;
+		 public const ushort A2C_FirstWinInfoResponse = 10079;
+		 public const ushort C2A_MysteryListRequest = 10080;
+		 public const ushort A2C_MysteryListResponse = 10081;
+		 public const ushort C2A_PetMingChanChuRequest = 10082;
+		 public const ushort A2C_PetMingChanChuResponse = 10083;
+		 public const ushort C2A_PetMingListRequest = 10084;
+		 public const ushort A2C_PetMingListResponse = 10085;
 	}
 }

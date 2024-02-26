@@ -752,7 +752,6 @@ message A2C_DeleteRoleData // ISessionResponse
 	string Message = 92;
 }
 
-
 message C2M_GMCommand // ILocationMessage
 {
 	int32 RpcId = 1;
@@ -774,4 +773,67 @@ message A2C_ActivityInfoResponse // IActivityActorResponse
 	int32 Error = 91;
 	string Message = 92;
 	string ActivityContent = 1;
+}
+
+//ResponseType A2C_FirstWinInfoResponse
+message C2A_FirstWinInfoRequest // IActivityActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message A2C_FirstWinInfoResponse // IActivityActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated FirstWinInfo FirstWinInfos = 1;
+}
+
+//ResponseType A2C_MysteryListResponse
+message C2A_MysteryListRequest // IActivityActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UserId = 1;
+}
+
+message A2C_MysteryListResponse // IActivityActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated MysteryItemInfo MysteryItemInfos = 1;
+}
+
+//ResponseType A2C_PetMingChanChuResponse
+message C2A_PetMingChanChuRequest // IActivityActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message A2C_PetMingChanChuResponse // IActivityActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType A2C_PetMingListResponse
+message C2A_PetMingListRequest // IActivityActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message A2C_PetMingListResponse // IActivityActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	int64 ChanChu = 1;
+	repeated KeyValuePairInt PetMineExtend = 2;
+	repeated PetMingPlayerInfo PetMingPlayerInfos = 4;
 }
