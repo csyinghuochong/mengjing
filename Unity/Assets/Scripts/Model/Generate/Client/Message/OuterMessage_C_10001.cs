@@ -2859,6 +2859,36 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.C2M_GMCommand)]
+	[MemoryPackable]
+	public partial class C2M_GMCommand: MessageObject, ILocationMessage
+	{
+		public static C2M_GMCommand Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_GMCommand), isFromPool) as C2M_GMCommand; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string GMMsg { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string Account { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.GMMsg = default;
+			this.Account = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -2934,5 +2964,6 @@ namespace ET
 		 public const ushort FubenPassInfo = 10072;
 		 public const ushort C2A_DeleteRoleData = 10073;
 		 public const ushort A2C_DeleteRoleData = 10074;
+		 public const ushort C2M_GMCommand = 10075;
 	}
 }

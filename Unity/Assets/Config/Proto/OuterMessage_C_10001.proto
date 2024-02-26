@@ -751,3 +751,11 @@ message A2C_DeleteRoleData // ISessionResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+
+message C2M_GMCommand // ILocationMessage
+{
+	int32 RpcId = 1;
+	string GMMsg = 2;
+	string Account = 3;
+}
