@@ -4,6 +4,22 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
+    
+    [Invoke(TimerInvokeType.ActivityServerTimer)]
+    public class ActivityServerTimer: ATimer<ActivityServerComponent>
+    {
+        protected override void Run(ActivityServerComponent self)
+        {
+            try
+            {
+                self.SaveDB();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"move timer error: {self.Id}\n{e}");
+            }
+        }
+    }
 
     [EntitySystemOf(typeof(ActivityServerComponent))]
     [FriendOf(typeof(ActivityServerComponent))]

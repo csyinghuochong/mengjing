@@ -13,11 +13,11 @@
         public const int MoveTimer = 201;
         public const int AITimer = 202;
         public const int SessionAcceptTimeout = 203;
+        public const int ActivityTipTimer = 204;
+        public const int ActivityServerTimer = 205;
         
         public const int RoomUpdate = 301;
         public const int JoystickTimer = 302;
         public const int MapMiniTimer = 303;
-        public const int ActivityTipTimer = 304;
-        public const int ActivityServerTimer = 305;
     }
 }
