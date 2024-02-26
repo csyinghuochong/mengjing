@@ -72,6 +72,13 @@ namespace ET
         public List<int> OpenDay;
     }
 
+    //技能ID 随机权重
+    public struct EquipChuanChengList
+    {
+        public int SkillID;
+        public int RandPro;
+    }
+    
     public struct WorldSayConfig
     {
         public int Time;

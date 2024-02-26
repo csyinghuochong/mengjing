@@ -6,8 +6,9 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 
+	[ChildOf(typeof(ActivityServerComponent))]
     [BsonIgnoreExtraElements]
-	public class DBDayActivityInfo : Entity
+	public class DBDayActivityInfo : Entity, IAwake
 	{
 		public int LastHour;
 		

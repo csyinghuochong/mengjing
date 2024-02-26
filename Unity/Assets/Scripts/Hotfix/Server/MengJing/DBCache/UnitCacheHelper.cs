@@ -133,6 +133,46 @@ namespace ET.Server
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Activity.ToString()).ActorId;
         }
 
+        public static ActorId GetGateServerId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Gate.ToString()).ActorId;
+        }
+
+        public static ActorId GetPaiMaiServerId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.PaiMai.ToString()).ActorId;
+        }
+        
+        public static ActorId GetRankServerId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Rank.ToString()).ActorId;
+        }
+        
+        public static ActorId GetFubenCenterId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.FubenCenter.ToString()).ActorId;
+        }
+        
+        public static ActorId GetArenaServerId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Arena.ToString()).ActorId;
+        }
+        
+        public static ActorId GetBattleServerId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Battle.ToString()).ActorId;
+        }
+        
+        public static ActorId GetUnionServerId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Union.ToString()).ActorId;
+        }
+        
+        public static ActorId GetSoloServerId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Solo.ToString()).ActorId;
+        }
+        
         /// 获取玩家组件缓存
         /// </summary>
         /// <param name="unitId"></param>
