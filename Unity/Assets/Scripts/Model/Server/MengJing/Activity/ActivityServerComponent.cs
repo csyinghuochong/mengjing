@@ -6,6 +6,7 @@ namespace ET.Server
     /// 活动服
     /// </summary>
     [ComponentOf(typeof(Scene))]
+    [FriendOf(typeof(DBDayActivityInfo))]
     public class ActivityServerComponent: Entity, IAwake, IDestroy
     {
         public long ActivityTimer;

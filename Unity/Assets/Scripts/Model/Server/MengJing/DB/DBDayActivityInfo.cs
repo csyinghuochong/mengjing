@@ -15,31 +15,31 @@ namespace ET.Server
 		/// <summary>
 		/// 小龟历史胜利次数
 		/// </summary>
-		public List<int> TurtleWinTimes = new List<int>() { }; 
+		public List<int> TurtleWinTimes = new();
 
         //神秘商品
-        public List<MysteryItemInfo> MysteryItemInfos = new List<MysteryItemInfo>();
+        public List<MysteryItemInfo> MysteryItemInfos = new();
 
 		//战区活动
-		public List<ZhanQuReceiveNumber> ZhanQuReveives = new List<ZhanQuReceiveNumber>();
+		public List<ZhanQuReceiveNumber> ZhanQuReveives = new();
 
 		//首胜记录
-		public List<FirstWinInfo> FirstWinInfos = new List<FirstWinInfo>();
+		public List<FirstWinInfo> FirstWinInfos = new();
 
 		//宠物矿场(矿场类型->玩家ID)
-		public List<PetMingPlayerInfo> PetMingList = new List<PetMingPlayerInfo>();
+		public List<PetMingPlayerInfo> PetMingList = new();
 
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-        public Dictionary<long, long> PetMingChanChu = new Dictionary<long, long>();
+        public Dictionary<long, long> PetMingChanChu = new();
 
 		//核心矿
-		public List<KeyValuePairInt> PetMingHexinList = new List<KeyValuePairInt> { };
+		public List<KeyValuePairInt> PetMingHexinList= new();
 
         /// <summary>
         /// 竞猜数字->竞猜玩家列表
         /// </summary>
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-        public Dictionary<int, List<long>> GuessPlayerList = new Dictionary<int, List<long>>();
+        public Dictionary<int, List<long>> GuessPlayerList = new();
 
         
 
@@ -47,13 +47,13 @@ namespace ET.Server
         /// 竞猜数字->中奖的玩家
         /// </summary>
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-        public Dictionary<int, List<long>> GuessRewardList = new Dictionary<int, List<long>>();
+        public Dictionary<int, List<long>> GuessRewardList = new();
       
         /// <summary>
         /// 喂食玩家列表
         /// </summary>
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-        public Dictionary<long, int> FeedPlayerList = new Dictionary<long, int>();
+        public Dictionary<long, int> FeedPlayerList = new();
 
         public int FeedRewardKey = 0;
 
@@ -62,7 +62,7 @@ namespace ET.Server
         /// <summary>
         /// 竞猜开奖的字
         /// </summary>
-        public List<int> OpenGuessIds = new List<int>() { };
+        public List<int> OpenGuessIds = new();
     }
 
 }
