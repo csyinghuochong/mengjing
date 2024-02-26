@@ -17,5 +17,7 @@
         public const int RoomUpdate = 301;
         public const int JoystickTimer = 302;
         public const int MapMiniTimer = 303;
+        public const int ActivityTipTimer = 304;
+        public const int ActivityServerTimer = 305;
     }
 }

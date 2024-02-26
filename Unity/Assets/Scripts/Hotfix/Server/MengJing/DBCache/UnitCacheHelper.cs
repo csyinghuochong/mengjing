@@ -173,6 +173,21 @@ namespace ET.Server
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Solo.ToString()).ActorId;
         }
         
+        public static ActorId GetHappyServerId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Happy.ToString()).ActorId;
+        }
+        
+        public static ActorId MainCityServerId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, $"Map101").ActorId;
+        }
+        
+        public static ActorId GetMailServerId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.EMail.ToString()).ActorId;
+        }
+        
         /// 获取玩家组件缓存
         /// </summary>
         /// <param name="unitId"></param>
