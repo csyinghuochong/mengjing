@@ -269,16 +269,16 @@ namespace ET.Server
 
                     response.RoleLists.Clear();
                     ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(session.Zone());
-                    for (int i = 0; i < account.UserList.Count; i++)
+                    for (int i = 0; i < account.RoleList.Count; i++)
                     {
-                        UserInfoComponentServer userinfo = await UnitCacheHelper.GetComponentCache<UserInfoComponentServer>(session.Root(), account.UserList[i]);
+                        UserInfoComponentServer userinfo = await UnitCacheHelper.GetComponentCache<UserInfoComponentServer>(session.Root(), account.RoleList[i].UnitId);
                         if (userinfo == null)
                         {
                             continue;
                         }
 
-                        CreateRoleInfo roleList = GetRoleListInfo(userinfo.UserInfo, account.UserList[i]);
-                        NumericComponentServer numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentServer>(session.Root(), account.UserList[i]);
+                        CreateRoleInfo roleList = GetRoleListInfo(userinfo.UserInfo, account.RoleList[i].UnitId);
+                        NumericComponentServer numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentServer>(session.Root(), account.RoleList[i].UnitId);
                         if (numericComponent == null)
                         {
                             continue;

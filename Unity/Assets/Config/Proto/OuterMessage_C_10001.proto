@@ -33,6 +33,7 @@ message C2G_EnterMap // ISessionRequest
 {
 	int32 RpcId = 1;
 	int64 UnitId = 2;
+	int64 AccountId = 3;
 }
 
 message G2C_EnterMap // ISessionResponse
@@ -206,6 +207,7 @@ message CreateRoleInfo
 	string PlayerName = 5;
 	int32 OccTwo = 6;
 	int32 EquipIndex = 7;
+	int32 RobotId = 8;
 }
 
 message R2C_Login // ISessionResponse
@@ -836,4 +838,105 @@ message A2C_PetMingListResponse // IActivityActorResponse
 	int64 ChanChu = 1;
 	repeated KeyValuePairInt PetMineExtend = 2;
 	repeated PetMingPlayerInfo PetMingPlayerInfos = 4;
+}
+
+message RolePetInfo
+{
+	int64 Id = 1;
+	int32 PetStatus = 2;   ///0休息 1出战 2散步 3仓库
+	int32 ConfigId = 3;
+	int32 PetLv = 4;
+	int32 Star = 5;
+	int32 PetExp = 7;
+	string PetName = 8;
+	bool IfBaby = 9;
+	int32 AddPropretyNum = 10;
+	string AddPropretyValue = 11;
+	int32 PetPingFen = 12;
+	int32 ZiZhi_Hp = 13;
+	int32 ZiZhi_Act = 14;
+	int32 ZiZhi_MageAct = 15;
+	int32 ZiZhi_Def = 16;
+	int32 ZiZhi_Adf = 17;
+	int32 ZiZhi_ActSpeed = 18;
+	float ZiZhi_ChengZhang = 19;
+	repeated int32 PetSkill = 20;
+	int32 EquipID_1 = 21;
+	string EquipIDHide_1 = 22;
+	int32 EquipID_2 = 23;
+	string EquipIDHide_2 = 24;
+	int32 EquipID_3 = 25;
+	string EquipIDHide_3 = 26;
+	repeated int32 Ks = 30;
+	repeated int64 Vs = 31;
+	int32 RoleCamp = 32;
+	string PlayerName = 33;
+	int32 SkinId = 34;
+	repeated int64 PetHeXinList = 35;
+	int32 UpStageStatus = 38;			//0 未进化  1 可进化  2 已进化
+	int32 ShouHuPos = 39;				//0-3
+	bool IsProtect = 40;					///装备锁 宠物锁 功能 npc打开
+	repeated int64 PetEquipList = 41;	//宠物装备
+	repeated int32 LockSkill = 42;      //只能锁定一个技能
+	int32 Luckly = 43;
+}
+
+message PetFubenInfo
+{
+	int32 PetFubenId = 1;
+	int32 Star = 2;
+	int32 Reward = 3;
+}
+
+message PetMingRecord
+{
+	int64 UnitID = 1;
+	int64 Time = 2;
+	int32 MineType = 3;
+	int32 Position = 4;
+	string WinPlayer = 5;
+}
+
+//宠物更新
+message M2C_RolePetBagUpdate // IMessage
+{
+	repeated RolePetInfo RolePetBag = 1;
+	int32 UpdateMode = 2;  //1新增  2删除
+}
+
+//宠物更新
+message M2C_PetListMessage	// IMessage
+{
+	repeated RolePetInfo PetList = 1;
+	int64 RemovePetId = 2;
+}
+
+//宠物更新
+message M2C_RolePetUpdate // IMessage
+{
+	repeated RolePetInfo PetInfoAdd = 1;
+	repeated RolePetInfo PetInfoUpdate = 2;
+	repeated RolePetInfo PetInfoDelete = 3;
+	int32 GetWay = 4;  //1新增 2从背包取出
+}
+
+message M2C_PetDataUpdate // IMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 PetId = 1;
+	int32 UpdateType = 2;				//1表示名称  2表示经验 3表示等级 4表示金币
+	string UpdateTypeValue = 3;
+}
+
+message M2C_PetDataBroadcast // IMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 PetId = 1;
+	int32 UpdateType = 2;				//1表示名称  2表示经验 3表示等级 4表示金币
+	string UpdateTypeValue = 3;
+	int64 UnitId = 4;
 }

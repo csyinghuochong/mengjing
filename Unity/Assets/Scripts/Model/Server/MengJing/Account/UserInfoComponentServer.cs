@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace ET.Server
 {
     
-    [ChildOf(typeof(Session))]
+    [ComponentOf(typeof(Unit))]
     public class UserInfoComponentServer : Entity, IAwake, IDestroy, ITransfer, IUnitCache
     {
         public string Account;

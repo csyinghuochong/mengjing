@@ -132,11 +132,15 @@ namespace ET
 		[MemoryPackOrder(1)]
 		public long UnitId { get; set; }
 
+		[MemoryPackOrder(2)]
+		public long AccountId { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
 			this.RpcId = default;
 			this.UnitId = default;
+			this.AccountId = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -845,6 +849,9 @@ namespace ET
 		[MemoryPackOrder(6)]
 		public int EquipIndex { get; set; }
 
+		[MemoryPackOrder(7)]
+		public int RobotId { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -855,6 +862,7 @@ namespace ET
 			this.PlayerName = default;
 			this.OccTwo = default;
 			this.EquipIndex = default;
+			this.RobotId = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -3206,6 +3214,417 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.RolePetInfo)]
+	[MemoryPackable]
+	public partial class RolePetInfo: MessageObject
+	{
+		public static RolePetInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(RolePetInfo), isFromPool) as RolePetInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long Id { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int PetStatus { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int ConfigId { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int PetLv { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int Star { get; set; }
+
+		[MemoryPackOrder(6)]
+		public int PetExp { get; set; }
+
+		[MemoryPackOrder(7)]
+		public string PetName { get; set; }
+
+		[MemoryPackOrder(8)]
+		public bool IfBaby { get; set; }
+
+		[MemoryPackOrder(9)]
+		public int AddPropretyNum { get; set; }
+
+		[MemoryPackOrder(10)]
+		public string AddPropretyValue { get; set; }
+
+		[MemoryPackOrder(11)]
+		public int PetPingFen { get; set; }
+
+		[MemoryPackOrder(12)]
+		public int ZiZhi_Hp { get; set; }
+
+		[MemoryPackOrder(13)]
+		public int ZiZhi_Act { get; set; }
+
+		[MemoryPackOrder(14)]
+		public int ZiZhi_MageAct { get; set; }
+
+		[MemoryPackOrder(15)]
+		public int ZiZhi_Def { get; set; }
+
+		[MemoryPackOrder(16)]
+		public int ZiZhi_Adf { get; set; }
+
+		[MemoryPackOrder(17)]
+		public int ZiZhi_ActSpeed { get; set; }
+
+		[MemoryPackOrder(18)]
+		public float ZiZhi_ChengZhang { get; set; }
+
+		[MemoryPackOrder(19)]
+		public List<int> PetSkill { get; set; } = new();
+
+		[MemoryPackOrder(20)]
+		public int EquipID_1 { get; set; }
+
+		[MemoryPackOrder(21)]
+		public string EquipIDHide_1 { get; set; }
+
+		[MemoryPackOrder(22)]
+		public int EquipID_2 { get; set; }
+
+		[MemoryPackOrder(23)]
+		public string EquipIDHide_2 { get; set; }
+
+		[MemoryPackOrder(24)]
+		public int EquipID_3 { get; set; }
+
+		[MemoryPackOrder(25)]
+		public string EquipIDHide_3 { get; set; }
+
+		[MemoryPackOrder(29)]
+		public List<int> Ks { get; set; } = new();
+
+		[MemoryPackOrder(30)]
+		public List<long> Vs { get; set; } = new();
+
+		[MemoryPackOrder(31)]
+		public int RoleCamp { get; set; }
+
+		[MemoryPackOrder(32)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(33)]
+		public int SkinId { get; set; }
+
+		[MemoryPackOrder(34)]
+		public List<long> PetHeXinList { get; set; } = new();
+
+		[MemoryPackOrder(37)]
+		public int UpStageStatus { get; set; }
+
+		[MemoryPackOrder(38)]
+		public int ShouHuPos { get; set; }
+
+		[MemoryPackOrder(39)]
+		public bool IsProtect { get; set; }
+
+		[MemoryPackOrder(40)]
+		public List<long> PetEquipList { get; set; } = new();
+
+		[MemoryPackOrder(41)]
+		public List<int> LockSkill { get; set; } = new();
+
+		[MemoryPackOrder(42)]
+		public int Luckly { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.Id = default;
+			this.PetStatus = default;
+			this.ConfigId = default;
+			this.PetLv = default;
+			this.Star = default;
+			this.PetExp = default;
+			this.PetName = default;
+			this.IfBaby = default;
+			this.AddPropretyNum = default;
+			this.AddPropretyValue = default;
+			this.PetPingFen = default;
+			this.ZiZhi_Hp = default;
+			this.ZiZhi_Act = default;
+			this.ZiZhi_MageAct = default;
+			this.ZiZhi_Def = default;
+			this.ZiZhi_Adf = default;
+			this.ZiZhi_ActSpeed = default;
+			this.ZiZhi_ChengZhang = default;
+			this.PetSkill.Clear();
+			this.EquipID_1 = default;
+			this.EquipIDHide_1 = default;
+			this.EquipID_2 = default;
+			this.EquipIDHide_2 = default;
+			this.EquipID_3 = default;
+			this.EquipIDHide_3 = default;
+			this.Ks.Clear();
+			this.Vs.Clear();
+			this.RoleCamp = default;
+			this.PlayerName = default;
+			this.SkinId = default;
+			this.PetHeXinList.Clear();
+			this.UpStageStatus = default;
+			this.ShouHuPos = default;
+			this.IsProtect = default;
+			this.PetEquipList.Clear();
+			this.LockSkill.Clear();
+			this.Luckly = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.PetFubenInfo)]
+	[MemoryPackable]
+	public partial class PetFubenInfo: MessageObject
+	{
+		public static PetFubenInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(PetFubenInfo), isFromPool) as PetFubenInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int PetFubenId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Star { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Reward { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.PetFubenId = default;
+			this.Star = default;
+			this.Reward = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.PetMingRecord)]
+	[MemoryPackable]
+	public partial class PetMingRecord: MessageObject
+	{
+		public static PetMingRecord Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(PetMingRecord), isFromPool) as PetMingRecord; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long UnitID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long Time { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int MineType { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int Position { get; set; }
+
+		[MemoryPackOrder(4)]
+		public string WinPlayer { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UnitID = default;
+			this.Time = default;
+			this.MineType = default;
+			this.Position = default;
+			this.WinPlayer = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//宠物更新
+	[Message(OuterMessage.M2C_RolePetBagUpdate)]
+	[MemoryPackable]
+	public partial class M2C_RolePetBagUpdate: MessageObject, IMessage
+	{
+		public static M2C_RolePetBagUpdate Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RolePetBagUpdate), isFromPool) as M2C_RolePetBagUpdate; 
+		}
+
+		[MemoryPackOrder(0)]
+		public List<RolePetInfo> RolePetBag { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public int UpdateMode { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RolePetBag.Clear();
+			this.UpdateMode = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//宠物更新
+	[Message(OuterMessage.M2C_PetListMessage)]
+	[MemoryPackable]
+	public partial class M2C_PetListMessage: MessageObject, IMessage
+	{
+		public static M2C_PetListMessage Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetListMessage), isFromPool) as M2C_PetListMessage; 
+		}
+
+		[MemoryPackOrder(0)]
+		public List<RolePetInfo> PetList { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public long RemovePetId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.PetList.Clear();
+			this.RemovePetId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//宠物更新
+	[Message(OuterMessage.M2C_RolePetUpdate)]
+	[MemoryPackable]
+	public partial class M2C_RolePetUpdate: MessageObject, IMessage
+	{
+		public static M2C_RolePetUpdate Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RolePetUpdate), isFromPool) as M2C_RolePetUpdate; 
+		}
+
+		[MemoryPackOrder(0)]
+		public List<RolePetInfo> PetInfoAdd { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public List<RolePetInfo> PetInfoUpdate { get; set; } = new();
+
+		[MemoryPackOrder(2)]
+		public List<RolePetInfo> PetInfoDelete { get; set; } = new();
+
+		[MemoryPackOrder(3)]
+		public int GetWay { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.PetInfoAdd.Clear();
+			this.PetInfoUpdate.Clear();
+			this.PetInfoDelete.Clear();
+			this.GetWay = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetDataUpdate)]
+	[MemoryPackable]
+	public partial class M2C_PetDataUpdate: MessageObject, IMessage
+	{
+		public static M2C_PetDataUpdate Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetDataUpdate), isFromPool) as M2C_PetDataUpdate; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PetId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int UpdateType { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string UpdateTypeValue { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PetId = default;
+			this.UpdateType = default;
+			this.UpdateTypeValue = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetDataBroadcast)]
+	[MemoryPackable]
+	public partial class M2C_PetDataBroadcast: MessageObject, IMessage
+	{
+		public static M2C_PetDataBroadcast Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetDataBroadcast), isFromPool) as M2C_PetDataBroadcast; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PetId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int UpdateType { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string UpdateTypeValue { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long UnitId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PetId = default;
+			this.UpdateType = default;
+			this.UpdateTypeValue = default;
+			this.UnitId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -3292,5 +3711,13 @@ namespace ET
 		 public const ushort A2C_PetMingChanChuResponse = 10083;
 		 public const ushort C2A_PetMingListRequest = 10084;
 		 public const ushort A2C_PetMingListResponse = 10085;
+		 public const ushort RolePetInfo = 10086;
+		 public const ushort PetFubenInfo = 10087;
+		 public const ushort PetMingRecord = 10088;
+		 public const ushort M2C_RolePetBagUpdate = 10089;
+		 public const ushort M2C_PetListMessage = 10090;
+		 public const ushort M2C_RolePetUpdate = 10091;
+		 public const ushort M2C_PetDataUpdate = 10092;
+		 public const ushort M2C_PetDataBroadcast = 10093;
 	}
 }

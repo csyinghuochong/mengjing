@@ -10,6 +10,7 @@ namespace ET.Client
             try
             {
                 C2G_EnterMap c2GEnterMap = new C2G_EnterMap();
+                c2GEnterMap.AccountId =  root.GetComponent<PlayerComponent>().AccountId;
                 c2GEnterMap.UnitId = root.GetComponent<PlayerComponent>().CurrentRoleId;
 
                 G2C_EnterMap g2CEnterMap = await root.GetComponent<ClientSenderCompnent>().Call(c2GEnterMap) as G2C_EnterMap;

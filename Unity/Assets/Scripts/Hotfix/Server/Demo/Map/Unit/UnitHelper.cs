@@ -46,7 +46,7 @@ namespace ET.Server
             return self.GetComponent<AOIEntity>().GetBeSeePlayers();
         }
 
-        public static async ETTask<(bool, Unit)> LoadUnit(Player player, Scene scene)
+        public static async ETTask<(bool, Unit)> LoadUnit(Player player, Scene scene,CreateRoleInfo createRoleInfo , string account, long accountId)
         {
             Unit unit = await UnitCacheHelper.GetUnitCache(scene, player.UnitId);
 
@@ -54,7 +54,7 @@ namespace ET.Server
             
             //if (isNewUnit)
             {
-                unit = UnitFactory.Create(scene, player.UnitId, UnitType.Player);
+                unit = UnitFactory.Create(scene, player.UnitId, UnitType.Player,createRoleInfo,account, accountId);
 
                 UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
             }

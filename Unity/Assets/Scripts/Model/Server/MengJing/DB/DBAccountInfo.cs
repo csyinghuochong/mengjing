@@ -15,10 +15,10 @@ namespace ET.Server
 		public string Password { get; set; }
 
 		//UserList列表
-		public List<long> UserList = new List<long>();
+		public List<CreateRoleInfo> RoleList = new List<CreateRoleInfo>();
 
 		//删除UserList列表
-		public List<long> DeleteUserList = new List<long>();
+		public List<long> DeleteRoleList = new List<long>();
 
 		public int AccountType { get; set; } //账号类型     0正常  1白名单  2黑名单
 

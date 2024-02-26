@@ -35,10 +35,17 @@ namespace ET.Server
 
                     DBAccountInfo newAccount = newAccountList[0];
                     //移除角色
-                    if (newAccount.UserList.Count > 0)
+                    if (newAccount.RoleList.Count > 0)
                     {
-                        newAccount.UserList.Remove(request.UserId);
-                        newAccount.DeleteUserList.Add(request.UserId);
+                        for (int i = newAccount.RoleList.Count - 1; i >= 0; i--)
+                        {
+                            if (newAccount.RoleList[i].UnitId == request.UserId)
+                            {
+                                newAccount.RoleList.RemoveAt(i);
+                            }
+                        }
+                        
+                        newAccount.DeleteRoleList.Add(request.UserId);
                     }
 
                     await dbComponent.Save<DBAccountInfo>(zone, newAccount);
