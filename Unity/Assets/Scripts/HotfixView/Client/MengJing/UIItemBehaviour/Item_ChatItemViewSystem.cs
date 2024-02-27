@@ -90,7 +90,7 @@ namespace ET.Client
                     self.E_HeadIconButton.gameObject.SetActive(true);
                     self.E_HeadIconXiTongImage.gameObject.SetActive(false);
 
-                    self.E_HeadIconXiTongImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                    self.E_HeadIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, chatInfo.Occ.ToString()));
                 }
 
