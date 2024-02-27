@@ -42,6 +42,7 @@ namespace ET.Client
             }) as NetClient2Main_Login;
 
             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            playerComponent.Account = account;
             playerComponent.AccountId = response.AccountId;
             playerComponent.PlayerInfo = response.PlayerInfo;
             playerComponent.CreateRoleList = response.RoleLists;

@@ -39,6 +39,16 @@ namespace ET.Client
             }
 
             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+
+            if (playerComponent != null)
+            {
+                Log.Debug("playerComponent != null");
+            }
+            else
+            {
+                Log.Debug("playerComponent == null");
+            }
+
             bool mask = false;
             if (!ET.GMHelp.IsGmAccount(playerComponent.Account))
             {
