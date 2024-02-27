@@ -203,9 +203,9 @@ namespace ET.Client
             self.View.E_ChatItemsLoopVerticalScrollRect.gameObject.SetActive(self.CurrentChatType != ChannelEnum.System);
 
             // 假数据
-            chatInfos.Add(new ChatInfo());
-            chatInfos.Add(new ChatInfo());
-            chatInfos.Add(new ChatInfo());
+            chatInfos.Add(new ChatInfo() { ChatMsg = "危境11111111111111111111111111111111111111111111111111111111111" });
+            chatInfos.Add(new ChatInfo() { ChatMsg = "危境22222222222222222222222222222222222222222222222222222222222" });
+            chatInfos.Add(new ChatInfo() { ChatMsg = "危境33333333333333333333333333333333333333333333333333333333333" });
 
             self.ShowChatInfos.Clear();
             self.ShowChatInfos.AddRange(chatInfos);
