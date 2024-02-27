@@ -53,15 +53,9 @@ namespace ET.Client
         private static void RefreshBagItems(this DlgRoleBag self)
         {
             BagComponentClient bagComponentClient = self.Root().GetComponent<BagComponentClient>();
-            // 假数据
-            bagComponentClient.BagItemList.Clear();
-            bagComponentClient.BagItemList.Add(new BagInfo() { BagInfoID = 1, ItemID = 10000101 });
-            bagComponentClient.BagItemList.Add(new BagInfo() { BagInfoID = 2, ItemID = 10035001 });
-            bagComponentClient.BagItemList.Add(new BagInfo() { BagInfoID = 3, ItemID = 10041211 });
-            bagComponentClient.BagItemList.Add(new BagInfo() { BagInfoID = 4, ItemID = 15711003 });
 
             self.ShowBagInfos.Clear();
-            foreach (BagInfo bagInfo in bagComponentClient.BagItemList)
+            foreach (BagInfo bagInfo in bagComponentClient.GetItemsByItem((int)ItemLocType.ItemLocBag))
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
                 if (self.CurrentItemType == 0 || self.CurrentItemType == itemConfig.ItemType)

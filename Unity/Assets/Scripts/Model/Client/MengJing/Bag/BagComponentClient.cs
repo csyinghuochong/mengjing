@@ -6,6 +6,6 @@ namespace ET.Client
     [ComponentOf(typeof(Scene))]
     public class BagComponentClient : Entity, IAwake, IDestroy
     {
-        public List<BagInfo> BagItemList { get; set; } = new();
+        public List<BagInfo>[] AllItemList;
     }
 }
