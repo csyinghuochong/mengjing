@@ -76,6 +76,7 @@ namespace ET.Client
             self.View.E_YaoGanDiFixEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.EndDrag(pdata as PointerEventData); });
             self.UICamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
             self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
+            self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
             self.ObstructLayer = 1 << LayerMask.NameToLayer(LayerEnum.Obstruct.ToString());
             self.BuildingLayer = 1 << LayerMask.NameToLayer(LayerEnum.Building.ToString());
@@ -310,82 +311,91 @@ namespace ET.Client
 
         private static void OnMainHeroMove(this DlgMain self)
         {
-            // Unit unit = self.MainUnit;
-            // Vector3 newv3 = unit.Position + unit.Rotation * Vector3.forward * 3f;
-            // int obstruct = self.CheckObstruct(unit, newv3);
-            // if (obstruct == 0)
-            // {
-            //     return;
-            // }
-            //
-            // if (unit.GetComponent<MoveComponent>().IsArrived())
-            // {
-            //     return;
-            // }
-            //
-            // self.ZoneScene().GetComponent<SessionComponent>().Session.Send(new C2M_Stop());
+            Unit unit = self.MainUnit;
+            Vector3 unitPosition = unit.Position;
+            Quaternion unitQuaternion = unit.Rotation;
+            Vector3 newv3 = unitPosition + unitQuaternion * Vector3.forward * 3f;
+            int obstruct = self.CheckObstruct(unit, newv3);
+            if (obstruct == 0)
+            {
+                return;
+            }
+
+            if (unit.GetComponent<MoveComponent>().IsArrived())
+            {
+                return;
+            }
+
+            self.Root().GetComponent<ClientSenderCompnent>().Send(new C2M_Stop());
         }
 
         private static void SendMove(this DlgMain self, int direction)
         {
-            // long clientNow = TimeHelper.ClientNow();
-            //
-            // if (clientNow - self.lastSendTime < 30)
-            // {
-            //     return;
-            // }
-            //
+            long clientNow = TimeHelper.ClientNow();
+
+            if (clientNow - self.lastSendTime < 30)
+            {
+                return;
+            }
+
             // if (clientNow - self.AttackComponent.MoveAttackTime < 200)
             // {
             //     return;
             // }
-            //
-            // if (self.lastDirection == direction && clientNow - self.lastSendTime < self.checkTime)
-            // {
-            //     return;
-            // }
-            //
-            // Unit unit = self.MainUnit;
-            // Quaternion rotation = Quaternion.Euler(0, direction, 0);
-            // float distance = self.CanMoveDistance(unit, rotation);
-            // distance = Mathf.Max(distance, 2f);
-            // float speed = self.NumericComponent.GetAsFloat(NumericType.Now_Speed);
-            // speed = Mathf.Max(speed, 4f);
-            // float needTime = distance / speed;
-            // self.checkTime = (int)(1000 * needTime) - 200;
-            //
-            // //Debug.Log("checkTime..." + distance / speed + " distance:" + distance + " speed:" + speed + " checkTime:" + self.checkTime);
-            // //移动速度最低发送间隔
-            //
-            // //检测光墙
-            // int obstruct = self.CheckObstruct(unit, unit.Position + rotation * Vector3.forward * 2f);
-            // if (obstruct != 0)
-            // {
-            //     unit.GetComponent<StateComponent>().ObstructStatus = 1;
-            //     self.ShowObstructTip(obstruct);
-            //     return;
-            // }
-            //
+
+            if (self.lastDirection == direction && clientNow - self.lastSendTime < self.checkTime)
+            {
+                return;
+            }
+
+            Unit unit = self.MainUnit;
+            Quaternion rotation = Quaternion.Euler(0, direction, 0);
+            float distance = self.CanMoveDistance(unit, rotation);
+            distance = Mathf.Max(distance, 2f);
+            float speed = unit.GetComponent<NumericComponentClient>().GetAsFloat(NumericType.Now_Speed);
+            speed = Mathf.Max(speed, 4f);
+            float needTime = distance / speed;
+            self.checkTime = (int)(1000 * needTime) - 200;
+
+            //Debug.Log("checkTime..." + distance / speed + " distance:" + distance + " speed:" + speed + " checkTime:" + self.checkTime);
+            //移动速度最低发送间隔
+
+            Vector3 unitPosition = unit.Position;
+            
+            //检测光墙
+            int obstruct = self.CheckObstruct(unit, unitPosition + rotation * Vector3.forward * 2f);
+            if (obstruct != 0)
+            {
+                // unit.GetComponent<StateComponent>().ObstructStatus = 1;
+                self.ShowObstructTip(obstruct);
+                return;
+            }
+
             // EventType.DataUpdate.Instance.DataType = DataType.BeforeMove;
             // EventType.DataUpdate.Instance.DataParamString = string.Empty;
             // Game.EventSystem.PublishClass(EventType.DataUpdate.Instance);
-            // Vector3 newv3 = unit.Position + rotation * Vector3.forward * distance;
-            //
-            // //MapHelper.LogMoveInfo($"移动发送请求: {TimeHelper.ServerNow()}");
+            Vector3 newv3 = unitPosition + rotation * Vector3.forward * distance;
+
+            //MapHelper.LogMoveInfo($"移动发送请求: {TimeHelper.ServerNow()}");
+
+            C2M_PathfindingResult c2MPathfindingResult = new();
+            c2MPathfindingResult.Position = newv3;
+            self.Root().GetComponent<ClientSenderCompnent>().Send(c2MPathfindingResult);
             // unit.MoveByYaoGan(newv3, direction, distance, null).Coroutine();
-            // self.lastSendTime = clientNow;
-            // self.lastDirection = direction;
+            
+            self.lastSendTime = clientNow;
+            self.lastDirection = direction;
         }
 
         private static void ShowObstructTip(this DlgMain self, int monsterId)
         {
-            // if (Time.time - self.LastShowTip < 1f)
-            // {
-            //     return;
-            // }
-            //
-            // self.LastShowTip = Time.time;
-            // string monsterName = MonsterConfigCategory.Instance.Get(monsterId).MonsterName;
+            if (Time.time - self.LastShowTip < 1f)
+            {
+                return;
+            }
+
+            self.LastShowTip = Time.time;
+            string monsterName = MonsterConfigCategory.Instance.Get(monsterId).MonsterName;
             // FloatTipManager.Instance.ShowFloatTip($"请先消灭{monsterName}");
         }
 
