@@ -3625,6 +3625,37 @@ namespace ET
 
 	}
 
+//道具[装备]更新
+	[Message(OuterMessage.M2C_RoleBagUpdate)]
+	[MemoryPackable]
+	public partial class M2C_RoleBagUpdate: MessageObject, IMessage
+	{
+		public static M2C_RoleBagUpdate Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RoleBagUpdate), isFromPool) as M2C_RoleBagUpdate; 
+		}
+
+		[MemoryPackOrder(0)]
+		public List<BagInfo> BagInfoAdd { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public List<BagInfo> BagInfoUpdate { get; set; } = new();
+
+		[MemoryPackOrder(2)]
+		public List<BagInfo> BagInfoDelete { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.BagInfoAdd.Clear();
+			this.BagInfoUpdate.Clear();
+			this.BagInfoDelete.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -3719,5 +3750,6 @@ namespace ET
 		 public const ushort M2C_RolePetUpdate = 10091;
 		 public const ushort M2C_PetDataUpdate = 10092;
 		 public const ushort M2C_PetDataBroadcast = 10093;
+		 public const ushort M2C_RoleBagUpdate = 10094;
 	}
 }
