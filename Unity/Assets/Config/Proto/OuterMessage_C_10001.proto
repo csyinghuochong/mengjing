@@ -365,29 +365,6 @@ message BagInfo
 	int32 FuLing = 28;    //0未附灵 1附灵
 }
 
-//ResponseType M2C_BagInitResponse
-message C2M_BagInitRequest // ILocationRequest
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-}
-
-message M2C_BagInitResponse  // ILocationResponse
-{
-	int32 RpcId = 90;
-	string Message = 91;
-	int32 Error = 92;
-	repeated BagInfo BagInfos = 1;
-	repeated int32 QiangHuaLevel = 2;
-	repeated int32 QiangHuaFails = 3;
-	//int32 BagAddedCell = 4;
-	repeated int32 WarehouseAddedCell = 5;
-	repeated int32 FashionActiveIds = 6;
-	repeated int32 FashionEquipList = 7;
-	int32 SeasonJingHePlan = 8;
-	repeated int32 AdditionalCellNum = 9;
-}
-
 message MysteryItemInfo
 {
 	int32 MysteryId = 1;
@@ -947,4 +924,74 @@ message M2C_RoleBagUpdate // IMessage
 	repeated BagInfo BagInfoAdd = 1;
 	repeated BagInfo BagInfoUpdate = 2;
 	repeated BagInfo BagInfoDelete = 3;
+}
+
+
+//ResponseType M2C_BagInitResponse
+message C2M_BagInitRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_BagInitResponse  // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	repeated BagInfo BagInfos = 1;
+	repeated int32 QiangHuaLevel = 2;
+	repeated int32 QiangHuaFails = 3;
+	//int32 BagAddedCell = 4;
+	repeated int32 WarehouseAddedCell = 5;
+	repeated int32 FashionActiveIds = 6;
+	repeated int32 FashionEquipList = 7;
+	int32 SeasonJingHePlan = 8;
+	repeated int32 AdditionalCellNum = 9;
+}
+
+//开启宝箱
+//ResponseType M2C_OpenBoxResponse
+message C2M_OpenBoxRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitId = 1;
+}
+
+message M2C_OpenBoxResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+message DropInfo
+{
+	int64 UnitId  = 1;
+	int32 ItemID = 3;
+	int32 ItemNum = 4;
+	float X = 5;
+	float Y = 6;
+	float Z = 7;
+	int32 DropType = 8; //0 公共掉落    1私人掉落
+	int32 CellIndex = 9;
+	int64 BeKillId = 10;
+}
+
+//拾取道具
+//ResponseType M2C_PickItemResponse
+message C2M_PickItemRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	repeated DropInfo ItemIds = 1;
+}
+
+message M2C_PickItemResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated int64 RemoveIds = 1; //不存在的掉落
 }

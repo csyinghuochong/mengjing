@@ -1508,96 +1508,6 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(M2C_BagInitResponse))]
-	[Message(OuterMessage.C2M_BagInitRequest)]
-	[MemoryPackable]
-	public partial class C2M_BagInitRequest: MessageObject, ILocationRequest
-	{
-		public static C2M_BagInitRequest Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(C2M_BagInitRequest), isFromPool) as C2M_BagInitRequest; 
-		}
-
-		[MemoryPackOrder(89)]
-		public int RpcId { get; set; }
-
-		[MemoryPackOrder(92)]
-		public long ActorId { get; set; }
-
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.ActorId = default;
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
-
-	}
-
-	[Message(OuterMessage.M2C_BagInitResponse)]
-	[MemoryPackable]
-	public partial class M2C_BagInitResponse: MessageObject, ILocationResponse
-	{
-		public static M2C_BagInitResponse Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(M2C_BagInitResponse), isFromPool) as M2C_BagInitResponse; 
-		}
-
-		[MemoryPackOrder(89)]
-		public int RpcId { get; set; }
-
-		[MemoryPackOrder(90)]
-		public string Message { get; set; }
-
-		[MemoryPackOrder(91)]
-		public int Error { get; set; }
-
-		[MemoryPackOrder(0)]
-		public List<BagInfo> BagInfos { get; set; } = new();
-
-		[MemoryPackOrder(1)]
-		public List<int> QiangHuaLevel { get; set; } = new();
-
-		[MemoryPackOrder(2)]
-		public List<int> QiangHuaFails { get; set; } = new();
-
-//int32 BagAddedCell = 4;
-		[MemoryPackOrder(4)]
-		public List<int> WarehouseAddedCell { get; set; } = new();
-
-		[MemoryPackOrder(5)]
-		public List<int> FashionActiveIds { get; set; } = new();
-
-		[MemoryPackOrder(6)]
-		public List<int> FashionEquipList { get; set; } = new();
-
-		[MemoryPackOrder(7)]
-		public int SeasonJingHePlan { get; set; }
-
-		[MemoryPackOrder(8)]
-		public List<int> AdditionalCellNum { get; set; } = new();
-
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.Message = default;
-			this.Error = default;
-			this.BagInfos.Clear();
-			this.QiangHuaLevel.Clear();
-			this.QiangHuaFails.Clear();
-			this.WarehouseAddedCell.Clear();
-			this.FashionActiveIds.Clear();
-			this.FashionEquipList.Clear();
-			this.SeasonJingHePlan = default;
-			this.AdditionalCellNum.Clear();
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
-
-	}
-
 	[Message(OuterMessage.MysteryItemInfo)]
 	[MemoryPackable]
 	public partial class MysteryItemInfo: MessageObject
@@ -3656,6 +3566,278 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_BagInitResponse))]
+	[Message(OuterMessage.C2M_BagInitRequest)]
+	[MemoryPackable]
+	public partial class C2M_BagInitRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_BagInitRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_BagInitRequest), isFromPool) as C2M_BagInitRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_BagInitResponse)]
+	[MemoryPackable]
+	public partial class M2C_BagInitResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_BagInitResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_BagInitResponse), isFromPool) as M2C_BagInitResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<BagInfo> BagInfos { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public List<int> QiangHuaLevel { get; set; } = new();
+
+		[MemoryPackOrder(2)]
+		public List<int> QiangHuaFails { get; set; } = new();
+
+//int32 BagAddedCell = 4;
+		[MemoryPackOrder(4)]
+		public List<int> WarehouseAddedCell { get; set; } = new();
+
+		[MemoryPackOrder(5)]
+		public List<int> FashionActiveIds { get; set; } = new();
+
+		[MemoryPackOrder(6)]
+		public List<int> FashionEquipList { get; set; } = new();
+
+		[MemoryPackOrder(7)]
+		public int SeasonJingHePlan { get; set; }
+
+		[MemoryPackOrder(8)]
+		public List<int> AdditionalCellNum { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.BagInfos.Clear();
+			this.QiangHuaLevel.Clear();
+			this.QiangHuaFails.Clear();
+			this.WarehouseAddedCell.Clear();
+			this.FashionActiveIds.Clear();
+			this.FashionEquipList.Clear();
+			this.SeasonJingHePlan = default;
+			this.AdditionalCellNum.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//开启宝箱
+	[ResponseType(nameof(M2C_OpenBoxResponse))]
+	[Message(OuterMessage.C2M_OpenBoxRequest)]
+	[MemoryPackable]
+	public partial class C2M_OpenBoxRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_OpenBoxRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_OpenBoxRequest), isFromPool) as C2M_OpenBoxRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_OpenBoxResponse)]
+	[MemoryPackable]
+	public partial class M2C_OpenBoxResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_OpenBoxResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_OpenBoxResponse), isFromPool) as M2C_OpenBoxResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.DropInfo)]
+	[MemoryPackable]
+	public partial class DropInfo: MessageObject
+	{
+		public static DropInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(DropInfo), isFromPool) as DropInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int ItemID { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int ItemNum { get; set; }
+
+		[MemoryPackOrder(4)]
+		public float X { get; set; }
+
+		[MemoryPackOrder(5)]
+		public float Y { get; set; }
+
+		[MemoryPackOrder(6)]
+		public float Z { get; set; }
+
+		[MemoryPackOrder(7)]
+		public int DropType { get; set; }
+
+		[MemoryPackOrder(8)]
+		public int CellIndex { get; set; }
+
+		[MemoryPackOrder(9)]
+		public long BeKillId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UnitId = default;
+			this.ItemID = default;
+			this.ItemNum = default;
+			this.X = default;
+			this.Y = default;
+			this.Z = default;
+			this.DropType = default;
+			this.CellIndex = default;
+			this.BeKillId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//拾取道具
+	[ResponseType(nameof(M2C_PickItemResponse))]
+	[Message(OuterMessage.C2M_PickItemRequest)]
+	[MemoryPackable]
+	public partial class C2M_PickItemRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PickItemRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PickItemRequest), isFromPool) as C2M_PickItemRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<DropInfo> ItemIds { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ItemIds.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PickItemResponse)]
+	[MemoryPackable]
+	public partial class M2C_PickItemResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PickItemResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PickItemResponse), isFromPool) as M2C_PickItemResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<long> RemoveIds { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RemoveIds.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -3703,53 +3885,58 @@ namespace ET
 		 public const ushort G2C_Benchmark = 10044;
 		 public const ushort HideProList = 10045;
 		 public const ushort BagInfo = 10046;
-		 public const ushort C2M_BagInitRequest = 10047;
-		 public const ushort M2C_BagInitResponse = 10048;
-		 public const ushort MysteryItemInfo = 10049;
-		 public const ushort ZhanQuReceiveNumber = 10050;
-		 public const ushort FirstWinInfo = 10051;
-		 public const ushort PetMingPlayerInfo = 10052;
-		 public const ushort ChatInfo = 10053;
-		 public const ushort MailInfo = 10054;
-		 public const ushort PaiMaiItemInfo = 10055;
-		 public const ushort PaiMaiShopItemInfo = 10056;
-		 public const ushort PopularizeInfo = 10057;
-		 public const ushort RankingInfo = 10058;
-		 public const ushort RankShouLieInfo = 10059;
-		 public const ushort RankPetInfo = 10060;
-		 public const ushort ServerInfo = 10061;
-		 public const ushort ServerMailItem = 10062;
-		 public const ushort UnionInfo = 10063;
-		 public const ushort UnionPlayerInfo = 10064;
-		 public const ushort DonationRecord = 10065;
-		 public const ushort A2C_Disconnect = 10066;
-		 public const ushort UserInfo = 10067;
-		 public const ushort M2C_RoleDataUpdate = 10068;
-		 public const ushort M2C_RoleDataBroadcast = 10069;
-		 public const ushort SkillPro = 10070;
-		 public const ushort RewardItem = 10071;
-		 public const ushort FubenPassInfo = 10072;
-		 public const ushort C2A_DeleteRoleData = 10073;
-		 public const ushort A2C_DeleteRoleData = 10074;
-		 public const ushort C2M_GMCommand = 10075;
-		 public const ushort C2A_ActivityInfoRequest = 10076;
-		 public const ushort A2C_ActivityInfoResponse = 10077;
-		 public const ushort C2A_FirstWinInfoRequest = 10078;
-		 public const ushort A2C_FirstWinInfoResponse = 10079;
-		 public const ushort C2A_MysteryListRequest = 10080;
-		 public const ushort A2C_MysteryListResponse = 10081;
-		 public const ushort C2A_PetMingChanChuRequest = 10082;
-		 public const ushort A2C_PetMingChanChuResponse = 10083;
-		 public const ushort C2A_PetMingListRequest = 10084;
-		 public const ushort A2C_PetMingListResponse = 10085;
-		 public const ushort RolePetInfo = 10086;
-		 public const ushort PetFubenInfo = 10087;
-		 public const ushort PetMingRecord = 10088;
-		 public const ushort M2C_RolePetBagUpdate = 10089;
-		 public const ushort M2C_PetListMessage = 10090;
-		 public const ushort M2C_RolePetUpdate = 10091;
-		 public const ushort M2C_PetDataUpdate = 10092;
-		 public const ushort M2C_PetDataBroadcast = 10093;
-		 public const ushort M2C_RoleBagUpdate = 10094;
+		 public const ushort MysteryItemInfo = 10047;
+		 public const ushort ZhanQuReceiveNumber = 10048;
+		 public const ushort FirstWinInfo = 10049;
+		 public const ushort PetMingPlayerInfo = 10050;
+		 public const ushort ChatInfo = 10051;
+		 public const ushort MailInfo = 10052;
+		 public const ushort PaiMaiItemInfo = 10053;
+		 public const ushort PaiMaiShopItemInfo = 10054;
+		 public const ushort PopularizeInfo = 10055;
+		 public const ushort RankingInfo = 10056;
+		 public const ushort RankShouLieInfo = 10057;
+		 public const ushort RankPetInfo = 10058;
+		 public const ushort ServerInfo = 10059;
+		 public const ushort ServerMailItem = 10060;
+		 public const ushort UnionInfo = 10061;
+		 public const ushort UnionPlayerInfo = 10062;
+		 public const ushort DonationRecord = 10063;
+		 public const ushort A2C_Disconnect = 10064;
+		 public const ushort UserInfo = 10065;
+		 public const ushort M2C_RoleDataUpdate = 10066;
+		 public const ushort M2C_RoleDataBroadcast = 10067;
+		 public const ushort SkillPro = 10068;
+		 public const ushort RewardItem = 10069;
+		 public const ushort FubenPassInfo = 10070;
+		 public const ushort C2A_DeleteRoleData = 10071;
+		 public const ushort A2C_DeleteRoleData = 10072;
+		 public const ushort C2M_GMCommand = 10073;
+		 public const ushort C2A_ActivityInfoRequest = 10074;
+		 public const ushort A2C_ActivityInfoResponse = 10075;
+		 public const ushort C2A_FirstWinInfoRequest = 10076;
+		 public const ushort A2C_FirstWinInfoResponse = 10077;
+		 public const ushort C2A_MysteryListRequest = 10078;
+		 public const ushort A2C_MysteryListResponse = 10079;
+		 public const ushort C2A_PetMingChanChuRequest = 10080;
+		 public const ushort A2C_PetMingChanChuResponse = 10081;
+		 public const ushort C2A_PetMingListRequest = 10082;
+		 public const ushort A2C_PetMingListResponse = 10083;
+		 public const ushort RolePetInfo = 10084;
+		 public const ushort PetFubenInfo = 10085;
+		 public const ushort PetMingRecord = 10086;
+		 public const ushort M2C_RolePetBagUpdate = 10087;
+		 public const ushort M2C_PetListMessage = 10088;
+		 public const ushort M2C_RolePetUpdate = 10089;
+		 public const ushort M2C_PetDataUpdate = 10090;
+		 public const ushort M2C_PetDataBroadcast = 10091;
+		 public const ushort M2C_RoleBagUpdate = 10092;
+		 public const ushort C2M_BagInitRequest = 10093;
+		 public const ushort M2C_BagInitResponse = 10094;
+		 public const ushort C2M_OpenBoxRequest = 10095;
+		 public const ushort M2C_OpenBoxResponse = 10096;
+		 public const ushort DropInfo = 10097;
+		 public const ushort C2M_PickItemRequest = 10098;
+		 public const ushort M2C_PickItemResponse = 10099;
 	}
 }
