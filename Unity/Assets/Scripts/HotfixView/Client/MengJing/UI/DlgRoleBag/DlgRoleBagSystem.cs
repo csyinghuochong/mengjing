@@ -29,6 +29,7 @@ namespace ET.Client
         private static void OnItemTypeSet(this DlgRoleBag self, int index)
         {
             Log.Debug($"按下Toggle：{index}");
+            self.Root().GetComponent<FlyTipComponent>().SpawnFlyTip(Vector3.zero, $"按下Toggle：{index}").Coroutine();
 
             self.SetToggleShow(self.View.E_AllToggle.gameObject, index == 0);
             self.SetToggleShow(self.View.E_EquipToggle.gameObject, index == 1);
