@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     
-    
+    [ComponentOf(typeof(Unit))]
     public class PetComponentServer : Entity, IAwake, ITransfer, IUnitCache
     {
         public int PetFubeRewardId = 0;
