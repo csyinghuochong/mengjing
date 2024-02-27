@@ -5339,27 +5339,84 @@ namespace ET
 
 	}
 
-//通用奖励
-	[Message(OuterMessage.RewardItem)]
+	[Message(OuterMessage.SkillInfo)]
 	[MemoryPackable]
-	public partial class RewardItem: MessageObject
+	public partial class SkillInfo: MessageObject
 	{
-		public static RewardItem Create(bool isFromPool = false) 
+		public static SkillInfo Create(bool isFromPool = false) 
 		{ 
-			return ObjectPool.Instance.Fetch(typeof(RewardItem), isFromPool) as RewardItem; 
+			return ObjectPool.Instance.Fetch(typeof(SkillInfo), isFromPool) as SkillInfo; 
 		}
 
-		[MemoryPackOrder(0)]
-		public int ItemID { get; set; }
-
 		[MemoryPackOrder(1)]
-		public int ItemNum { get; set; }
+		public long TargetID { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int TargetAngle { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int WeaponSkillID { get; set; }
+
+		[MemoryPackOrder(5)]
+		public float PosX { get; set; }
+
+		[MemoryPackOrder(6)]
+		public float PosY { get; set; }
+
+		[MemoryPackOrder(7)]
+		public float PosZ { get; set; }
+
+		[MemoryPackOrder(10)]
+		public long SkillBeginTime { get; set; }
+
+		[MemoryPackOrder(11)]
+		public long SkillEndTime { get; set; }
+
+		[MemoryPackOrder(12)]
+		public float SingValue { get; set; }
 
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
-			this.ItemID = default;
-			this.ItemNum = default;
+			this.TargetID = default;
+			this.TargetAngle = default;
+			this.WeaponSkillID = default;
+			this.PosX = default;
+			this.PosY = default;
+			this.PosZ = default;
+			this.SkillBeginTime = default;
+			this.SkillEndTime = default;
+			this.SingValue = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_UnitNumericListUpdate)]
+	[MemoryPackable]
+	public partial class M2C_UnitNumericListUpdate: MessageObject, ILocationMessage
+	{
+		public static M2C_UnitNumericListUpdate Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_UnitNumericListUpdate), isFromPool) as M2C_UnitNumericListUpdate; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long UnitID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public List<int> Ks { get; set; } = new();
+
+		[MemoryPackOrder(2)]
+		public List<long> Vs { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UnitID = default;
+			this.Ks.Clear();
+			this.Vs.Clear();
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -5513,6 +5570,7 @@ namespace ET
 		 public const ushort M2C_ItemSplitResponse = 10144;
 		 public const ushort C2M_ItemTreasureOpenRequest = 10145;
 		 public const ushort M2C_ItemTreasureOpenResponse = 10146;
-		 public const ushort RewardItem = 10147;
+		 public const ushort SkillInfo = 10147;
+		 public const ushort M2C_UnitNumericListUpdate = 10148;
 	}
 }

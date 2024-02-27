@@ -1382,9 +1382,22 @@ message M2C_ItemTreasureOpenResponse // ILocationResponse
 	RewardItem ReardItem = 5;
 }
 
-//通用奖励
-message RewardItem
+message SkillInfo
 {
-	int32 ItemID = 1;
-	int32 ItemNum = 2;
+	int64 TargetID = 2;
+	int32 TargetAngle = 3;
+	int32 WeaponSkillID = 5;			//真实技能
+	float PosX = 6;
+	float PosY = 7;
+	float PosZ = 8;
+	int64 SkillBeginTime = 11;
+	int64 SkillEndTime = 12;
+	float SingValue = 13;
+}
+
+message M2C_UnitNumericListUpdate // ILocationMessage
+{
+	int64 UnitID  = 1;
+	repeated int32 Ks = 2;
+	repeated int64 Vs = 3;
 }

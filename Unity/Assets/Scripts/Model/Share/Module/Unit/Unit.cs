@@ -13,6 +13,10 @@ namespace ET
 
         public int ConfigId { get; set; } //配置表id
 
+        public long MasterId {get; set; }
+        
+        public int SceneType {get; set; }
+
         [BsonElement]
         private float3 position; //坐标
 

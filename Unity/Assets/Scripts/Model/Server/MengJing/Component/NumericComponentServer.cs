@@ -41,6 +41,11 @@ namespace ET.Server
         {
             self.Insert(numericType, value, false);
         }
+        
+        public static void SetEvent(this NumericComponentServer self, int numericType, long value, bool notice)
+        {
+            self.Insert(numericType, value, notice);
+        }
 
         public static void Insert(this NumericComponentServer self, int numericType, long value, bool isPublicEvent = true)
         {
