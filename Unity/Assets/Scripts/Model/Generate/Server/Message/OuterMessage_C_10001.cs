@@ -5402,6 +5402,9 @@ namespace ET
 			return ObjectPool.Instance.Fetch(typeof(M2C_UnitNumericListUpdate), isFromPool) as M2C_UnitNumericListUpdate; 
 		}
 
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
 		[MemoryPackOrder(0)]
 		public long UnitID { get; set; }
 
@@ -5414,6 +5417,7 @@ namespace ET
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
+			this.RpcId = default;
 			this.UnitID = default;
 			this.Ks.Clear();
 			this.Vs.Clear();

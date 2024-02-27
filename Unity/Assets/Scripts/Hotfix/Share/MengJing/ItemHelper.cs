@@ -112,7 +112,6 @@ namespace ET
                 return new HideProList() { HideID = hideid, HideValue = hidevalue };
             }
         }
-#endif
 
         public static (float, float) GetJingHeHideProRange(float min, float max, int qulity)
         {
@@ -795,7 +794,7 @@ namespace ET
         public static string ItemGetWayName(int itemgetWay)
         { 
             string getname = string.Empty;
-            ItemGetWayNameList.TryGetValue(itemgetWay, out getname);
+                    ConfigData.ItemGetWayNameList.TryGetValue(itemgetWay, out getname);
             return getname; 
         }
 

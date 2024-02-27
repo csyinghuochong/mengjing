@@ -10,6 +10,7 @@ namespace ET.Server
     [FriendOf(typeof(SkillHandler))]
     [FriendOf(typeof(NumericComponentServer))]
     [FriendOf(typeof(UserInfoComponentServer))]
+    [FriendOf(typeof(PetComponentServer))]
     public static class Function_Fight
     {
         
@@ -21,7 +22,7 @@ namespace ET.Server
         /// <param name="skillHandler"></param>
         /// <param name="hurtMode">0 默认 1持续伤害</param>
         /// <returns></returns>
-        public bool Fight(Unit attackUnit, Unit defendUnit, SkillHandler skillHandler, int hurtMode)
+        public static bool Fight(Unit attackUnit, Unit defendUnit, SkillHandler skillHandler, int hurtMode)
         {
             if (defendUnit.IsDisposed)
             {
@@ -694,7 +695,7 @@ namespace ET.Server
                     actDamgeValue = skillconfig.DamgeChiXuValue;
                 }
 
-                damge = (long)(damge * (actDamge + skillHandler.ActTargetTemporaryAddPro + skillHandler.ActTargetAddPro + skillHandler.GetTianfuProAdd((int)SkillAttributeEnum.AddDamageCoefficient) + skillProAdd)) + actDamgeValue;
+                //damge = (long)(damge * (actDamge + skillHandler.ActTargetTemporaryAddPro + skillHandler.ActTargetAddPro + skillHandler.GetTianfuProAdd((int)SkillAttributeEnum.AddDamageCoefficient) + skillProAdd)) + actDamgeValue;
 
                 float damgePro = 1;
                 //伤害加成
@@ -937,7 +938,8 @@ namespace ET.Server
                     //根据双方战力调整系数
                     if (attackUnit.Type == UnitType.Player && defendUnit.Type == UnitType.Player)
                     {
-                        damgePro += GetFightValueActProValue(attackUnit.GetComponent<UserInfoComponentServer>().UserInfo.Combat, defendUnit.GetComponent<UserInfoComponent>().UserInfo.Combat);
+                        damgePro += GetFightValueActProValue(attackUnit.GetComponent<UserInfoComponentServer>().UserInfo.Combat, 
+                            defendUnit.GetComponent<UserInfoComponentServer>().UserInfo.Combat);
                     }
                 }
 
@@ -2443,12 +2445,11 @@ namespace ET.Server
             {
                 skillPointFight = 5000;
             }
-
-            //int zhanliValue =(int)(ShiLi_Act * (1 + ShiLi_ActPro) + ShiLi_Def * (1 + ShiLi_DefPro) + (ShiLi_Hp * 0.1f) * (1 + ShiLi_HpPro)) + roleLv * 50 + (int)proLvAdd + addZhanLi + addShouHuFight;
+            
             int zhanliValue = (int)(ShiLi_Act * (1 + ShiLi_ActPro) + ShiLi_Def * (1 + ShiLi_DefPro) + (ShiLi_Hp * 0.1f) * (1 + ShiLi_HpPro)) + roleLv * 60 + (int)proLvAdd + addZhanLi + addShouHuFight + chuanchengProAdd + skillPointFight;
 
             //更新战力
-            unit.GetComponent<UserInfoComponentServer>().UpdateRoleData(UserDataType.Combat, zhanliValue.ToString(), notice);
+            //unit.GetComponent<UserInfoComponentServer>().UpdateRoleData(UserDataType.Combat, zhanliValue.ToString(), notice);
 
             if (notice)
             {

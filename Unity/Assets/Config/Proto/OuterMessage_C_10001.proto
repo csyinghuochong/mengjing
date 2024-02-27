@@ -1397,6 +1397,7 @@ message SkillInfo
 
 message M2C_UnitNumericListUpdate // ILocationMessage
 {
+	int32 RpcId = 90;
 	int64 UnitID  = 1;
 	repeated int32 Ks = 2;
 	repeated int64 Vs = 3;
