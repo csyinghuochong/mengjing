@@ -361,7 +361,7 @@ namespace ET.Client
             //移动速度最低发送间隔
 
             Vector3 unitPosition = unit.Position;
-            
+
             //检测光墙
             int obstruct = self.CheckObstruct(unit, unitPosition + rotation * Vector3.forward * 2f);
             if (obstruct != 0)
@@ -382,7 +382,7 @@ namespace ET.Client
             c2MPathfindingResult.Position = newv3;
             self.Root().GetComponent<ClientSenderCompnent>().Send(c2MPathfindingResult);
             // unit.MoveByYaoGan(newv3, direction, distance, null).Coroutine();
-            
+
             self.lastSendTime = clientNow;
             self.lastDirection = direction;
         }
@@ -529,7 +529,7 @@ namespace ET.Client
             // }
 
             //MapHelper.LogMoveInfo($"移动摇杆停止: {TimeHelper.ServerNow()}");
-            // self.ZoneScene().GetComponent<SessionComponent>().Session.Send(new C2M_Stop());
+            self.Root().GetComponent<ClientSenderCompnent>().Send(new C2M_Stop());
         }
 
         private static void EndDrag_Old(this DlgMain self, PointerEventData pdata)
