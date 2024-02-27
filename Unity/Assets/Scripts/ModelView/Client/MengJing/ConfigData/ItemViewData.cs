@@ -14,14 +14,14 @@ namespace ET.Client
     
     public static  class ItemViewData
     {
-    [StaticField]
+        [StaticField]
         public static Dictionary<int, string> ItemTypeName = new()
         {
-            { ItemTypeEnum.Consume, GameSettingLanguge.LoadLocalization("消耗品") },
-            { ItemTypeEnum.Material, GameSettingLanguge.LoadLocalization("材料") },
-            { ItemTypeEnum.Equipment, GameSettingLanguge.LoadLocalization("装备") },
-            { ItemTypeEnum.Gemstone, GameSettingLanguge.LoadLocalization("宝石") },
-            { ItemTypeEnum.PetHeXin, GameSettingLanguge.LoadLocalization("宠物之核") },
+            { ItemTypeEnum.Consume, "消耗品" },
+            { ItemTypeEnum.Material, "材料" },
+            { ItemTypeEnum.Equipment, "装备" },
+            { ItemTypeEnum.Gemstone, "宝石" },
+            { ItemTypeEnum.PetHeXin, "宠物之核" },
         };
 
         [StaticField]
