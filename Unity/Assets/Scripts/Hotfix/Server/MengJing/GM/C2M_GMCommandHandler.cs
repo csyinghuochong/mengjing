@@ -28,10 +28,10 @@ namespace ET.Server
                         int itemId = int.Parse(commands[1]);
                         int itemNumber = int.Parse(commands[2]);
 
-                        // List<RewardItem> rewardItems = new List<RewardItem>();
-                        // rewardItems.Add(new RewardItem() { ItemID = itemId, ItemNum = itemNumber });
-                        // unit.GetComponent<BagComponentServer>()
-                        //         .OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.GM}_{TimeHelper.ServerNow()}", true, true);
+                        List<RewardItem> rewardItems = new List<RewardItem>();
+                        rewardItems.Add(new RewardItem() { ItemID = itemId, ItemNum = itemNumber });
+                        unit.GetComponent<BagComponentServer>()
+                                 .OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.GM}_{TimeHelper.ServerNow()}", true, true);
                         break;
 
                     default:
