@@ -830,7 +830,7 @@ namespace ET.Client
 
         private static void OnOpenChat(this DlgMain self)
         {
-            // self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Chat).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Chat).Coroutine();
         }
 
         // private static void OnRecvChat(this DlgMain self, ChatInfo chatInfo)
