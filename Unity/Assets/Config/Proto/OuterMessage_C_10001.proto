@@ -996,3 +996,395 @@ message M2C_PickItemResponse // ILocationResponse
 	repeated int64 RemoveIds = 1; //不存在的掉落
 }
 
+// 装备增幅
+//ResponseType M2C_EquipmentIncreaseResponse
+message C2M_EquipmentIncreaseRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	BagInfo EquipmentBagInfo = 1; // 待增幅的装备 
+	BagInfo ReelBagInfo = 2; // 所使用的卷轴 
+}
+
+message M2C_EquipmentIncreaseResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_FashionActiveResponse
+message C2M_FashionActiveRequest  // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 FashionId = 1;
+}
+
+message M2C_FashionActiveResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_FashionWearResponse
+message C2M_FashionWearRequest  // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 FashionId = 1;
+	int32 OperatateType = 2;  //1穿戴 2卸下
+}
+
+message M2C_FashionWearResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_GemHeChengQuickResponse
+//宝石一键合成
+message C2M_GemHeChengQuickRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 LocType = 1;
+}
+
+message M2C_GemHeChengQuickResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_ItemBuyCellResponse
+message C2M_ItemBuyCellRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 OperateType = 1; //ItemLocType
+}
+
+message M2C_ItemBuyCellResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+
+	//int32 BagAddedCell = 1;
+	repeated int32 WarehouseAddedCell = 2;
+	string GetItem = 3;
+}
+
+//销毁装备
+//ResponseType M2C_ItemDestoryResponse
+message C2M_ItemDestoryRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 OperateType = 1;
+	int64 OperateBagID = 2;
+}
+
+message M2C_ItemDestoryResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_ItemEquipIndexResponse
+//猎人穿戴装备特殊处理
+message C2M_ItemEquipIndexRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 EquipIndex = 1;
+}
+
+message M2C_ItemEquipIndexResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//附魔属性
+//ResponseType M2C_ItemFumoProResponse
+message C2M_ItemFumoProRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 OperateType = 1;
+	int32 Index = 2;
+}
+
+message M2C_ItemFumoProResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_ItemFumoUseResponse
+//附魔使用
+message C2M_ItemFumoUseRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 OperateType = 1;
+	int64 OperateBagID = 2;
+	repeated HideProList FuMoProList = 3;
+}
+
+message M2C_ItemFumoUseResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//回收装备
+//ResponseType M2C_ItemHuiShouResponse
+message C2M_ItemHuiShouRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	repeated int64 OperateBagID = 2;
+}
+
+message M2C_ItemHuiShouResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//增幅转移
+//ResponseType M2C_ItemIncreaseTransferResponse
+message C2M_ItemIncreaseTransferRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 OperateBagID_1 = 1;
+	int64 OperateBagID_2 = 2;
+}
+
+message M2C_ItemIncreaseTransferResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//装备传承
+//ResponseType M2C_ItemInheritResponse
+message C2M_ItemInheritRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 OperateBagID = 1;
+}
+
+message M2C_ItemInheritResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+
+	repeated int32 InheritSkills = 2;
+}
+
+//传承确认
+//ResponseType M2C_ItemInheritSelectResponse
+message C2M_ItemInheritSelectRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 OperateBagID = 1;
+	repeated int32 InheritSkills = 2;
+}
+
+message M2C_ItemInheritSelectResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//装备熔炼
+//ResponseType M2C_ItemMeltingResponse
+message C2M_ItemMeltingRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	repeated int64 OperateBagID = 2;
+	int32 MakeType = 3;
+	int32 Plan = 4;
+}
+
+message M2C_ItemMeltingResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//一键盘出售
+//ResponseType M2C_ItemOneSellResponse
+message C2M_ItemOneSellRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 OperateType = 1;				//操作类型 1
+	repeated int64 BagInfoIds = 2;
+}
+
+message M2C_ItemOneSellResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_ItemOperateGemResponse
+message C2M_ItemOperateGemRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 OperateType = 1;				//操作类型 9 装备宝石 10卸下宝石
+	int64 OperateBagID = 2;
+	string OperatePar = 3;				// 类型参数[穿戴饰品需要传位置]
+}
+
+message M2C_ItemOperateGemResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	string OperatePar = 1;
+}
+
+//穿戴装备
+//ResponseType M2C_ItemOperateResponse
+message C2M_ItemOperateRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 OperateType = 1;				//操作类型 1 背包使用  2 背包丢弃  3装备穿戴
+	int64 OperateBagID = 2;
+	string OperatePar = 3;				// 类型参数[穿戴饰品需要传位置]
+}
+
+message M2C_ItemOperateResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	string OperatePar = 1;
+}
+
+//猎人穿戴装备特殊处理
+//ResponseType M2C_ItemOperateWearResponse
+message C2M_ItemOperateWearRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 OperateType = 1;				//操作类型  3装备穿戴  4
+	int64 OperateBagID = 2;
+	string OperatePar = 3;				// 类型参数[穿戴饰品需要传位置]
+}
+
+message M2C_ItemOperateWearResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	string OperatePar = 1;
+}
+
+//装备锁定
+//ResponseType M2C_ItemProtectResponse
+message C2M_ItemProtectRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 OperateBagID = 1;
+	bool IsProtect = 2;
+}
+
+message M2C_ItemProtectResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//强化槽位
+//ResponseType M2C_ItemQiangHuaResponse
+message C2M_ItemQiangHuaRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 WeiZhi = 1;
+}
+
+message M2C_ItemQiangHuaResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	int32 QiangHuaLevel = 1;
+}
+
+//一键存放
+//ResponseType M2C_ItemQuickPutResponse
+message C2M_ItemQuickPutRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 HorseId = 1;
+}
+
+message M2C_ItemQuickPutResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//物品排序[通知服务器排序，暂时不需要返回]
+message C2M_ItemSortRequest // ILocationMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+//ResponseType M2C_ItemSplitResponse
+message C2M_ItemSplitRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 OperateType = 1;
+	int64 OperateBagID = 2;
+	string OperatePar = 3;			//拆分数量
+}
+
+message M2C_ItemSplitResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	string OperatePar = 1;
+}
+
+//藏宝图开启
+//ResponseType M2C_ItemTreasureOpenResponse
+message C2M_ItemTreasureOpenRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 OperateType = 1;
+	int64 OperateBagID = 2;
+	string OperatePar = 3;
+}
+
+message M2C_ItemTreasureOpenResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	string OperatePar = 1;
+	RewardItem ReardItem = 5;
+}
+
+//通用奖励
+message RewardItem
+{
+	int32 ItemID = 1;
+	int32 ItemNum = 2;
+}
