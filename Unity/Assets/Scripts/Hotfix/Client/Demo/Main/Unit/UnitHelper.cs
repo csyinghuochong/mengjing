@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using System.Collections.Generic;
+
+namespace ET.Client
 {
     public static partial class UnitHelper
     {
@@ -16,6 +18,20 @@
         {
             PlayerComponent playerComponent = currentScene.Root().GetComponent<PlayerComponent>();
             return currentScene.GetComponent<UnitComponent>().Get(playerComponent.MyId);
+        }
+
+        public static List<Unit> GetUnitsByType(Scene root, int unitType)
+        {
+            List<Unit> units = new List<Unit>();
+            foreach (Unit unit in root.CurrentScene().GetComponent<UnitComponent>().GetAll())
+            {
+                if (unit.Type == unitType)
+                {
+                    units.Add(unit);
+                }
+            }
+
+            return units;
         }
     }
 }

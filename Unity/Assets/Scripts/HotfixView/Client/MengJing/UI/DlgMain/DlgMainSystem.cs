@@ -434,22 +434,22 @@ namespace ET.Client
 
         private static int CheckObstruct(this DlgMain self, Unit unit, Vector3 target)
         {
-            // RaycastHit hit;
-            // Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.ObstructLayer);
-            // if (hit.collider == null)
-            // {
-            //     return 0;
-            // }
-            //
-            // int monsterid = int.Parse(hit.collider.gameObject.name);
-            // List<Unit> units = UnitHelper.GetUnitList(unit.DomainScene(), UnitType.Monster);
-            // for (int i = 0; i < units.Count; i++)
-            // {
-            //     if (units[i].ConfigId == monsterid)
-            //     {
-            //         return monsterid;
-            //     }
-            // }
+            RaycastHit hit;
+            Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.ObstructLayer);
+            if (hit.collider == null)
+            {
+                return 0;
+            }
+
+            int monsterid = int.Parse(hit.collider.gameObject.name);
+            List<Unit> units = UnitHelper.GetUnitsByType(unit.Root(), UnitType.Monster);
+            for (int i = 0; i < units.Count; i++)
+            {
+                if (units[i].ConfigId == monsterid)
+                {
+                    return monsterid;
+                }
+            }
 
             return 0;
         }
