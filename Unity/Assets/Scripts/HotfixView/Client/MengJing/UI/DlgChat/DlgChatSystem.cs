@@ -213,9 +213,18 @@ namespace ET.Client
             self.View.E_ChatItemsLoopVerticalScrollRect.gameObject.SetActive(self.CurrentChatType != ChannelEnum.System);
 
             // 假数据
-            chatInfos.Add(new ChatInfo() { ChatMsg = "危境11111111111111111111111111111111111111111111111111111111111" });
-            chatInfos.Add(new ChatInfo() { ChatMsg = "危境22222222222222222222222222222222222222222222222222222222222" });
-            chatInfos.Add(new ChatInfo() { ChatMsg = "危境33333333333333333333333333333333333333333333333333333333333" });
+            chatInfos.Add(new ChatInfo()
+            {
+                PlayerName = "刘备", PlayerLevel = 1, ChatMsg = "危境11111111111111111111111111111111111111111111111111111111111", Occ = 1
+            });
+            chatInfos.Add(new ChatInfo()
+            {
+                PlayerName = "关羽", PlayerLevel = 2, ChatMsg = "危境22222222222222222222222222222222222222222222222222222222222", Occ = 2
+            });
+            chatInfos.Add(new ChatInfo()
+            {
+                PlayerName = "刘备", PlayerLevel = 3, ChatMsg = "危境33333333333333333333333333333333333333333333333333333333333", Occ = 3
+            });
 
             self.ShowChatInfos.Clear();
             self.ShowChatInfos.AddRange(chatInfos);
