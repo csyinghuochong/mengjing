@@ -4,6 +4,7 @@ namespace ET.Server
 {
     [EntitySystemOf(typeof (BagComponentServer))]
     [FriendOf(typeof (BagComponentServer))]
+    [FriendOf(typeof(UserInfoComponentServer))]
     public static partial class BagComponentServerSystem
     {
         [EntitySystem]
@@ -162,7 +163,7 @@ namespace ET.Server
    }
 
 
-   public static void OnRecvItemSort(this BagComponent self, ItemLocType itemEquipType)
+   public static void OnRecvItemSort(this BagComponentServer self, ItemLocType itemEquipType)
    {
        List<BagInfo> ItemTypeList = self.GetItemByLoc(itemEquipType);
 
@@ -213,16 +214,16 @@ namespace ET.Server
        }
 
        //通知客户端背包道具发生改变
-       MessageHelper.SendToClient(self.GetParent<Unit>(), m2c_bagUpdate);
+       MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2c_bagUpdate);
 
-       ItemHelper.ItemLitSort(ItemTypeList);
+       //ItemHelper.ItemLitSort(ItemTypeList);
    }
 
-   public static void CheckValiedItem(this BagComponent self, List<BagInfo> bagInfos)
+   public static void CheckValiedItem(this BagComponentServer self, List<BagInfo> bagInfos)
    {
        Unit unit = self.GetParent<Unit>();
-       int occ = unit.GetComponent<UserInfoComponent>().UserInfo.Occ;
-       int occTwo = unit.GetComponent<UserInfoComponent>().UserInfo.OccTwo;
+       int occ = unit.GetComponent<UserInfoComponentServer>().UserInfo.Occ;
+       int occTwo = unit.GetComponent<UserInfoComponentServer>().UserInfo.OccTwo;
        for (int i = bagInfos.Count - 1; i >= 0; i--)
        {
            if (!ItemConfigCategory.Instance.Contain(bagInfos[i].ItemID))
@@ -238,7 +239,7 @@ namespace ET.Server
            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
            if (itemConfig.EquipType != 101 && itemConfig.ItemType == ItemTypeEnum.Equipment && bagInfos[i].InheritSkills.Count == 0 && itemConfig.ItemQuality >= 5 && itemConfig.UseLv >= 60)
            {
-               int skillid = XiLianHelper.XiLianChuanChengJianDing(itemConfig, occ, occTwo);
+               int skillid = 0;//XiLianHelper.XiLianChuanChengJianDing(itemConfig, occ, occTwo);
                if (skillid != 0)
                {
                    bagInfos[i].InheritSkills.Add(skillid);
@@ -267,7 +268,7 @@ namespace ET.Server
    }
 
    //获取自身所有的道具
-   public static List<BagInfo> GetAllItems(this BagComponent self)
+   public static List<BagInfo> GetAllItems(this BagComponentServer self)
    {
        List<BagInfo> bagList = new List<BagInfo>();
 
@@ -315,7 +316,7 @@ namespace ET.Server
        return bagList;
    }
 
-   public static List<BagInfo> GetIdItemList(this BagComponent self, int itemId)
+   public static List<BagInfo> GetIdItemList(this BagComponentServer self, int itemId)
    {
        List<BagInfo> baginfo = new List<BagInfo>();
        for (int i = 0; i < self.BagItemList.Count; i++)
@@ -329,9 +330,9 @@ namespace ET.Server
    }
 
    //获取某个道具的数量
-   public static long GetItemNumber(this BagComponent self, int itemId, ItemLocType itemLocType = ItemLocType.ItemLocBag)
+   public static long GetItemNumber(this BagComponentServer self, int itemId, ItemLocType itemLocType = ItemLocType.ItemLocBag)
    {
-       int userDataType = ItemHelper.GetItemToUserDataType(itemId);
+       int userDataType = 0;// ItemHelper.GetItemToUserDataType(itemId);
        long number = 0;
        switch (userDataType)
        {
@@ -346,22 +347,22 @@ namespace ET.Server
                }
                break;
            case UserDataType.Gold:
-               number = self.GetParent<Unit>().GetComponent<UserInfoComponent>().UserInfo.Gold;
+               number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.Gold;
                break;
            case UserDataType.Diamond:
-               number = self.GetParent<Unit>().GetComponent<UserInfoComponent>().UserInfo.Diamond;
+               number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.Diamond;
                break;
            case UserDataType.RongYu:
-               number = self.GetParent<Unit>().GetComponent<UserInfoComponent>().UserInfo.RongYu;
+               number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.RongYu;
                break;
            case UserDataType.JiaYuanFund:
-               number = self.GetParent<Unit>().GetComponent<UserInfoComponent>().UserInfo.JiaYuanFund;
+               number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.JiaYuanFund;
                break;
            case UserDataType.UnionContri:
-               number = self.GetParent<Unit>().GetComponent<UserInfoComponent>().UserInfo.UnionZiJin;
+               number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.UnionZiJin;
                break;
            case UserDataType.SeasonCoin:
-               number = self.GetParent<Unit>().GetComponent<UserInfoComponent>().UserInfo.SeasonCoin;
+               number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.SeasonCoin;
                break;
            default:
                break;
@@ -371,7 +372,7 @@ namespace ET.Server
 
 
    //根据ID获取对应的背包数据
-   public static BagInfo GetItemByLoc(this BagComponent self, ItemLocType itemLocType, long bagId)
+   public static BagInfo GetItemByLoc(this BagComponentServer self, ItemLocType itemLocType, long bagId)
    {
        if (bagId == 0)
            return null;
@@ -386,17 +387,17 @@ namespace ET.Server
        return null;
    }
 
-   public static bool IsBagFull(this BagComponent self)
+   public static bool IsBagFull(this BagComponentServer self)
    {
        return self.GetBagLeftCell() <= 0;
    }
 
-   public static int GetBagLeftCell(this BagComponent self)
+   public static int GetBagLeftCell(this BagComponentServer self)
    {
        return self.GetBagTotalCell() - self.BagItemList.Count;
    }
 
-   public static int GetBagTotalCell(this BagComponent self)
+   public static int GetBagTotalCell(this BagComponentServer self)
    {
        if (self.WarehouseAddedCell.Count == 0 || self.AdditionalCellNum.Count == 0)
        {
@@ -405,19 +406,19 @@ namespace ET.Server
        return self.WarehouseAddedCell[0] + self.AdditionalCellNum[0] + + GlobalValueConfigCategory.Instance.BagInitCapacity;
    }
 
-   public static bool IsHourseFullByLoc(this BagComponent self, int hourseId)
+   public static bool IsHourseFullByLoc(this BagComponentServer self, int hourseId)
    {
        List<BagInfo> ItemTypeList = self.GetItemByLoc((ItemLocType)hourseId);
        return ItemTypeList.Count >= self.GetHourseTotalCell(hourseId);
    }
 
-   public static int GetHourseLeftCell(this BagComponent self, int hourseId)
+   public static int GetHourseLeftCell(this BagComponentServer self, int hourseId)
    {
        List<BagInfo> ItemTypeList = self.GetItemByLoc((ItemLocType)hourseId);
        return self.GetHourseTotalCell(hourseId) - ItemTypeList.Count;
    }
 
-   public static int GetHourseTotalCell(this BagComponent self, int hourseId)
+   public static int GetHourseTotalCell(this BagComponentServer self, int hourseId)
    {
        int storeCapacity = GlobalValueConfigCategory.Instance.HourseInitCapacity;
        if (hourseId == (int)ItemLocType.GemWareHouse1)
@@ -432,12 +433,12 @@ namespace ET.Server
    /// </summary>
    /// <param name="self"></param>
    /// <returns></returns>
-   public static int GetChouKaLeftSpace(this BagComponent self)
+   public static int GetChouKaLeftSpace(this BagComponentServer self)
    {
        return 100 - self.ChouKaWarehouse.Count;
    }
 
-   public static void OnChangeItemLoc(this BagComponent self, BagInfo bagInfo, ItemLocType itemLocTypeTo, ItemLocType itemLocTypeFrom)
+   public static void OnChangeItemLoc(this BagComponentServer self, BagInfo bagInfo, ItemLocType itemLocTypeTo, ItemLocType itemLocTypeFrom)
    {
        List<BagInfo> ItemTypeListSour = self.GetItemByLoc(itemLocTypeFrom);
        for (int i = ItemTypeListSour.Count - 1; i >= 0; i--)
@@ -459,7 +460,7 @@ namespace ET.Server
    /// <param name="self"></param>
    /// <param name="skillId"></param>
    /// <returns></returns>
-   public static bool IsHaveEquipSkill(this BagComponent self, int skillId, long xilianequip)
+   public static bool IsHaveEquipSkill(this BagComponentServer self, int skillId, long xilianequip)
    {
        for (int i = 0; i < self.EquipList.Count; i++)
        {
@@ -485,7 +486,7 @@ namespace ET.Server
        return false;
    }
 
-   public static List<BagInfo> GetCurJingHeList(this BagComponent self)
+   public static List<BagInfo> GetCurJingHeList(this BagComponentServer self)
    {
        List<BagInfo> bagInfos = new List<BagInfo>();
        for (  int i = 0; i < self.SeasonJingHe.Count; i++ )
@@ -498,7 +499,7 @@ namespace ET.Server
        return bagInfos;
    }
 
-   public static bool IsEquipJingHe(this BagComponent self, int itemId)
+   public static bool IsEquipJingHe(this BagComponentServer self, int itemId)
    {
        List<BagInfo> bagInfos  =self.GetCurJingHeList();
        for (int i = 0; i < bagInfos.Count; i++)
@@ -511,7 +512,7 @@ namespace ET.Server
        return false;
    }
 
-   public static BagInfo GetJingHeByWeiZhi(this BagComponent self, int subType)
+   public static BagInfo GetJingHeByWeiZhi(this BagComponentServer self, int subType)
    {
        List<BagInfo> bagInfos = self.GetCurJingHeList();
        for (int i = 0; i < bagInfos.Count; i++)
@@ -524,7 +525,7 @@ namespace ET.Server
        return null;
    }
 
-   public static List<BagInfo> GetEquipListByWeizhi(this BagComponent self, ItemLocType equipIndex, int position)
+   public static List<BagInfo> GetEquipListByWeizhi(this BagComponentServer self, ItemLocType equipIndex, int position)
    {
        List<BagInfo> bagInfos = new List<BagInfo>();
        List<BagInfo> equipList = self.GetItemByLoc(equipIndex);
@@ -539,7 +540,7 @@ namespace ET.Server
        return bagInfos;
    }
 
-   public static int GetMaxQiangHuaLevel(this BagComponent self)
+   public static int GetMaxQiangHuaLevel(this BagComponentServer self)
    {
        int maxLevel = 0;
        for (int i = 0; i < self.QiangHuaLevel.Count; i++)
@@ -553,7 +554,7 @@ namespace ET.Server
    }
 
    //获取某个装备位置的道具数据
-   public static BagInfo GetEquipBySubType(this BagComponent self, ItemLocType equipIndex, int subType)
+   public static BagInfo GetEquipBySubType(this BagComponentServer self, ItemLocType equipIndex, int subType)
    {
        List<BagInfo> equipList = self.GetItemByLoc(equipIndex);
        for (int i = 0; i < equipList.Count; i++)
@@ -567,11 +568,11 @@ namespace ET.Server
        return null;
    }
 
-   public static void OnLogin(this BagComponent self, int robotId)
+   public static void OnLogin(this BagComponentServer self, int robotId)
    {
        Unit unit = self.GetParent<Unit>();
        int zodiacnumber = self.GetZodiacnumber();
-       unit.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.ZodiacEquipNumber_215, 0, zodiacnumber);
+       //unit.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.ZodiacEquipNumber_215, 0, zodiacnumber);
 
 
        ///old
@@ -584,19 +585,7 @@ namespace ET.Server
        //    }
        //}
 
-       //new 20240110
-       if (self.BagAddedCell >= 0)
-       {
-           //if (self.WarehouseAddedCell.Count > 0 && self.WarehouseAddedCell.Count < (int)ItemLocType.ItemLocMax - 5)
-           if (self.WarehouseAddedCell.Count > 0 )
-           {
-               List<int> bagaddCell = new List<int>() { self.BagAddedCell, 0,0,0,0 };
-               self.WarehouseAddedCell.InsertRange(0, bagaddCell);
-           }
-
-           self.BagAddedCell = -1;  //该字段废弃掉
-       }
-
+  
        for (int i = self.WarehouseAddedCell.Count; i < (int)ItemLocType.ItemLocMax; i++)
        {
            self.WarehouseAddedCell.Add(0);
@@ -635,7 +624,7 @@ namespace ET.Server
        if (robotId != 0)
        {
            int[] equipList = new int[0];
-           UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
+           UserInfoComponentServer userInfoComponent = unit.GetComponent<UserInfoComponentServer>();
            RobotConfig robotConfig = RobotConfigCategory.Instance.Get(robotId);
 
            if (robotConfig.Behaviour != 1 && robotConfig.Level > userInfoComponent.UserInfo.Lv)
@@ -679,7 +668,7 @@ namespace ET.Server
        }
    }
 
-   public static int GetZodiacnumber(this BagComponent self)
+   public static int GetZodiacnumber(this BagComponentServer self)
    {
        int number = 0;
        for (int i = 0; i < self.EquipList.Count; i++)
@@ -694,14 +683,14 @@ namespace ET.Server
        return number;
    }
 
-   public static int GetWuqiItemId(this BagComponent self)
+   public static int GetWuqiItemId(this BagComponentServer self)
    {
        BagInfo bagInfo = self.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
        return bagInfo != null ? bagInfo.ItemID : 0;
    }
 
    //字符串添加道具 
-   public static bool OnAddItemData(this BagComponent self, string rewardItems, string getType, bool notice = true)
+   public static bool OnAddItemData(this BagComponentServer self, string rewardItems, string getType, bool notice = true)
    {
        List<RewardItem> costItems = new List<RewardItem>();
        string[] needList = rewardItems.Split('@');
@@ -719,7 +708,7 @@ namespace ET.Server
        return self.OnAddItemData(costItems, string.Empty, getType, notice);
    }
 
-   public static void OnAddItemData(this BagComponent self, List<BagInfo> bagInfos, string getType)
+   public static void OnAddItemData(this BagComponentServer self, List<BagInfo> bagInfos, string getType)
    {
        for (int i = 0; i < bagInfos.Count; i++)
        {
@@ -727,7 +716,7 @@ namespace ET.Server
        }
    }
 
-   public static void OnAddItemData(this BagComponent self, BagInfo bagInfo, string getType)
+   public static void OnAddItemData(this BagComponentServer self, BagInfo bagInfo, string getType)
    {
        ItemConfig itemCof = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
        int maxPileSum = itemCof.ItemPileSum;
@@ -743,10 +732,10 @@ namespace ET.Server
            M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
            m2c_bagUpdate.BagInfoAdd.Add(bagInfo);
            //通知客户端背包道具发生改变
-           MessageHelper.SendToClient(self.GetParent<Unit>(), m2c_bagUpdate);
+           MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2c_bagUpdate);
 
            //检测任务需求道具
-           ItemAddHelper.OnGetItem(self.GetParent<Unit>(), int.Parse(getType.Split('_')[0]), bagInfo.ItemID, bagInfo.ItemNum);
+           //ItemAddHelper.OnGetItem(self.GetParent<Unit>(), int.Parse(getType.Split('_')[0]), bagInfo.ItemID, bagInfo.ItemNum);
        }
    }
 
@@ -765,7 +754,7 @@ namespace ET.Server
        M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
        m2c_bagUpdate.BagInfoAdd.Add(useBagInfo);
        //通知客户端背包道具发生改变
-       MessageHelper.SendToClient(self.GetParent<Unit>(), m2c_bagUpdate);
+       MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2c_bagUpdate);
    }
 
    public static void OnAddItemDataNewCell(this BagComponentServer self, BagInfo bagInfo, int itemnumber)
@@ -777,8 +766,8 @@ namespace ET.Server
        ItemConfig itemCof = ItemConfigCategory.Instance.Get(itemid);
        useBagInfo.Loc = itemCof.ItemType == (int)ItemTypeEnum.PetHeXin ? (int)ItemLocType.ItemPetHeXinBag : (int)ItemLocType.ItemLocBag;
        useBagInfo.BagInfoID = IdGenerater.Instance.GenerateId();
-       useBagInfo.GemHole = ItemHelper.DefaultGem;
-       useBagInfo.GemIDNew = ItemHelper.DefaultGem;
+       useBagInfo.GemHole = "0_0_0_0";
+       useBagInfo.GemIDNew = "0_0_0_0";
        useBagInfo.GetWay = bagInfo.GetWay;
        useBagInfo.isBinging = bagInfo.isBinging;
        self.GetItemByLoc((ItemLocType)useBagInfo.Loc).Add(useBagInfo);
@@ -786,7 +775,7 @@ namespace ET.Server
        M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
        m2c_bagUpdate.BagInfoAdd.Add(useBagInfo);
        //通知客户端背包道具发生改变
-       MessageHelper.SendToClient(self.GetParent<Unit>(), m2c_bagUpdate);
+       MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2c_bagUpdate);
    }
 
    /// <summary>
@@ -839,7 +828,8 @@ namespace ET.Server
        string[] getWayInfo = getWay.Split('_');
        int getType = int.Parse(getWayInfo[0]);
        Unit unit = self.GetParent<Unit>();
-       if (unit.IsRobot() && getType == ItemGetWay.PickItem)
+      // if (unit.IsRobot() && getType == ItemGetWay.PickItem)
+      if (getType == ItemGetWay.PickItem)
        {
            return true;
        }
@@ -940,11 +930,11 @@ namespace ET.Server
            int userDataType = ItemHelper.GetItemToUserDataType(itemID);
            if (userDataType == UserDataType.Gold && rewardItems[i].ItemNum > 1000000)
            {
-               LogHelper.LogWarning($"[获取金币]UserDataType.Gold  {unit.Id} {getType} {unit.GetComponent<UserInfoComponent>().UserName} {rewardItems[i].ItemNum}");
+               Log.Warning($"[获取金币]UserDataType.Gold  {unit.Id} {getType} {unit.GetComponent<UserInfoComponentServer>().UserName} {rewardItems[i].ItemNum}");
            }
            if (userDataType == UserDataType.Diamond)
            {
-               LogHelper.LogWarning($"[获取钻石]UserDataType.Diamond  {unit.Id} {getType} {unit.GetComponent<UserInfoComponent>().UserName} {rewardItems[i].ItemNum}");
+               Log.Warning($"[获取钻石]UserDataType.Diamond  {unit.Id} {getType} {unit.GetComponent<UserInfoComponentServer>().UserName} {rewardItems[i].ItemNum}");
            }
            if (userDataType == UserDataType.PiLao)
            {
@@ -953,7 +943,7 @@ namespace ET.Server
            if (userDataType != UserDataType.None)
            {
                //检测任务需求道具
-               unit.GetComponent<UserInfoComponent>().UpdateRoleMoneyAdd(userDataType, leftNum.ToString(), true, getType);
+               unit.GetComponent<UserInfoComponentServer>().UpdateRoleMoneyAdd(userDataType, leftNum.ToString(), true, getType);
                ItemAddHelper.OnGetItem(unit, getType, itemID, leftNum);
                continue;
            }
@@ -962,11 +952,11 @@ namespace ET.Server
            ItemConfig itemCof = ItemConfigCategory.Instance.Get(itemID);
            if (itemCof.EquipType == 101 || itemCof.ItemQuality >= 4 || (itemCof.Id >= 16000101 && itemCof.Id <= 16000312) || (itemCof.Id >= 10030011 && itemCof.Id <= 10030019))
            {
-               LogHelper.LogWarning($"[获取道具] {unit.Id} {getType} {itemID} {rewardItems[i].ItemNum}", true);
+               Log.Warning($"[获取道具] {unit.Id} {getType} {itemID} {rewardItems[i].ItemNum}");
            }
            if (leftNum >= 99)
            {
-               LogHelper.LogWarning($"[获取道具]leftNum >= 99  {unit.Id} {getType} {itemID} {rewardItems[i].ItemNum}", true);
+               Log.Warning($"[获取道具]leftNum >= 99  {unit.Id} {getType} {itemID} {rewardItems[i].ItemNum}");
            }
 
            int maxPileSum = (gm && itemCof.ItemPileSum > 1) ? 1000000 : itemCof.ItemPileSum;
@@ -984,7 +974,7 @@ namespace ET.Server
            }
            else if (getType == ItemGetWay.PickItem && itemCof.ItemType == ItemTypeEnum.Gemstone && itemCof.ItemQuality > 3)
            {
-               NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
+               NumericComponentServer numericComponent = unit.GetComponent<NumericComponentServer>();
                if (numericComponent.GetAsInt(NumericType.GemWarehouseOpen) >=1 && self.CheckCanAddItem(itemID, leftNum, ItemLocType.GemWareHouse1))
                {
                    itemLockType = ItemLocType.GemWareHouse1;
@@ -1041,8 +1031,8 @@ namespace ET.Server
                useBagInfo.ItemNum = (leftNum > maxPileSum) ? maxPileSum : leftNum;
                useBagInfo.Loc = (int)itemLockType;
                useBagInfo.BagInfoID = IdGenerater.Instance.GenerateId();
-               useBagInfo.GemHole = ItemHelper.DefaultGem;
-               useBagInfo.GemIDNew = ItemHelper.DefaultGem;
+               useBagInfo.GemHole = "0_0_0_0";
+               useBagInfo.GemIDNew = "0_0_0_0";
                useBagInfo.GetWay = getWay;
                leftNum -= useBagInfo.ItemNum;
 
@@ -1103,7 +1093,7 @@ namespace ET.Server
                //默认洗练
                if (!ItemHelper.IsBuyItem(getType) && itemCof.ItemEquipID != 0)
                {
-                   int xilianLevel = XiLianHelper.GetXiLianId(unit.GetComponent<NumericComponent>().GetAsInt(NumericType.ItemXiLianDu));
+                   int xilianLevel = XiLianHelper.GetXiLianId(unit.GetComponent<NumericComponentServer>().GetAsInt(NumericType.ItemXiLianDu));
                    xilianLevel = xilianLevel != 0 ? EquipXiLianConfigCategory.Instance.Get(xilianLevel).XiLianLevel : 0;
 
                    int xilianType = 0;
@@ -1168,7 +1158,7 @@ namespace ET.Server
                        makePlan = 1;
                    }
                    int shulianduNumeric = makePlan == 1 ? NumericType.MakeShuLianDu_1 : NumericType.MakeShuLianDu_2;
-                   int shuliandu = unit.GetComponent<NumericComponent>().GetAsInt(shulianduNumeric);
+                   int shuliandu = unit.GetComponent<NumericComponentServer>().GetAsInt(shulianduNumeric);
                    ItemAddHelper.JianDingFuItem(useBagInfo, shuliandu, getType);
                }
                //食物
@@ -1184,17 +1174,17 @@ namespace ET.Server
                //拾取到橙色装备
                if (itemCof.ItemType == 3 && itemCof.ItemQuality >= 5 && getType == ItemGetWay.PickItem)
                {
-                   string name = unit.GetComponent<UserInfoComponent>().UserInfo.Name;
+                   string name = unit.GetComponent<UserInfoComponentServer>().UserInfo.Name;
                    string noticeContent = $"恭喜玩家 {name} 获得装备: <color=#{ComHelp.QualityReturnColor(5)}>{itemCof.ItemName}</color>";
-                   ServerMessageHelper.SendBroadMessage(self.DomainZone(), NoticeType.Notice, noticeContent);
+                   //ServerMessageHelper.SendBroadMessage(self.Zone(), NoticeType.Notice, noticeContent);
                }
 
                //刷新传承属性
                if (itemCof.ItemType == ItemTypeEnum.Equipment && itemCof.EquipType != 101
                 && itemCof.ItemQuality >= 5 && itemCof.UseLv >= 60)
                {
-                   int occ = unit.GetComponent<UserInfoComponent>().UserInfo.Occ;
-                   int occTwo = unit.GetComponent<UserInfoComponent>().UserInfo.OccTwo;
+                   int occ = unit.GetComponent<UserInfoComponentServer>().UserInfo.Occ;
+                   int occTwo = unit.GetComponent<UserInfoComponentServer>().UserInfo.OccTwo;
                    int skillid = XiLianHelper.XiLianChuanChengJianDing(itemCof, occ, occTwo);
                    if (skillid != 0)
                    {
@@ -1233,7 +1223,7 @@ namespace ET.Server
                m2c_bagUpdate.BagInfoAdd.Add(useBagInfo);
            }
            //检测任务需求道具
-           ItemAddHelper.OnGetItem(unit, getType, itemID, leftNum);
+           //ItemAddHelper.OnGetItem(unit, getType, itemID, leftNum);
        }
 
        //通知客户端背包道具发生改变
@@ -1382,44 +1372,44 @@ namespace ET.Server
            if (itemID == (int)UserDataType.Gold)
            {
                itemNum = -1 * itemNum;
-               unit.GetComponent<UserInfoComponent>().UpdateRoleMoneySub(UserDataType.Gold, itemNum.ToString(), true, ItemGetWay.CostItem);
+               //unit.GetComponent<UserInfoComponentServer>().UpdateRoleMoneySub(UserDataType.Gold, itemNum.ToString(), true, ItemGetWay.CostItem);
                continue;
            }
            if (itemID == (int)UserDataType.Diamond)
            {
                itemNum = -1 * itemNum;
-               unit.GetComponent<UserInfoComponent>().UpdateRoleMoneySub(UserDataType.Diamond, itemNum.ToString(), true, ItemGetWay.CostItem);
+               //unit.GetComponent<UserInfoComponentServer>().UpdateRoleMoneySub(UserDataType.Diamond, itemNum.ToString(), true, ItemGetWay.CostItem);
                continue;
            }
            if (itemID == (int)UserDataType.RongYu)
            {
                itemNum = -1 * itemNum;
-               unit.GetComponent<UserInfoComponent>().UpdateRoleData(UserDataType.RongYu, itemNum.ToString());
+               //unit.GetComponent<UserInfoComponent>().UpdateRoleData(UserDataType.RongYu, itemNum.ToString());
                continue;
            }
            if (itemID == (int)UserDataType.JiaYuanFund)
            {
                itemNum = -1 * itemNum;
-               unit.GetComponent<UserInfoComponent>().UpdateRoleData(UserDataType.JiaYuanFund, itemNum.ToString());
+               //unit.GetComponent<UserInfoComponent>().UpdateRoleData(UserDataType.JiaYuanFund, itemNum.ToString());
                continue;
            }
            if (itemID == (int)UserDataType.SeasonCoin)
            {
                itemNum = -1 * itemNum;
-               unit.GetComponent<UserInfoComponent>().UpdateRoleData(UserDataType.SeasonCoin, itemNum.ToString());
+               //unit.GetComponent<UserInfoComponent>().UpdateRoleData(UserDataType.SeasonCoin, itemNum.ToString());
                continue;
            }
            if (itemID == (int)UserDataType.UnionContri)
            {
                itemNum = -1 * itemNum;
-               unit.GetComponent<UserInfoComponent>().UpdateRoleData(UserDataType.UnionContri, itemNum.ToString());
+               //unit.GetComponent<UserInfoComponent>().UpdateRoleData(UserDataType.UnionContri, itemNum.ToString());
                continue;
            }
            //if (!DllHelper.CheckItem)
            //{
            //    continue;
            //}
-           LogHelper.LogWarning($"消耗道具: {unit.Id} {itemID} {itemNum}", false);
+           Log.Warning($"消耗道具: {unit.Id} {itemID} {itemNum}");
            List<BagInfo> bagInfos = self.GetItemByLoc(itemLocType);
            for (int k = bagInfos.Count - 1; k >= 0; k--)
            {
@@ -1458,7 +1448,7 @@ namespace ET.Server
                    }
                }
            }
-           ItemAddHelper.OnCostItem(unit, itemID);
+           //ItemAddHelper.OnCostItem(unit, itemID);
        }
 
        //通知客户端背包道具发生改变
@@ -1516,8 +1506,8 @@ namespace ET.Server
        //bagInfos[index].FumoProLists.AddRange( ItemHelper.GetItemFumoPro(itemid) );
 
        //通知客户端背包道具发生改变
-       MessageHelper.SendToClient(self.GetParent<Unit>(), m2c_bagUpdate);
-       Function_Fight.GetInstance().UnitUpdateProperty_Base(self.GetParent<Unit>(), true, true);
+       MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2c_bagUpdate);
+       //Function_Fight.GetInstance().UnitUpdateProperty_Base(self.GetParent<Unit>(), true, true);
    }
     }
 }

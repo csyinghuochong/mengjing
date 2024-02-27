@@ -63,8 +63,8 @@ namespace ET.Server
         /// </summary>
         //public int FuMoItemId { get; set; }   
 
-        //[BsonIgnore]
-        //public M2C_RoleBagUpdate message = new M2C_RoleBagUpdate() { };
+        [BsonIgnore]
+        public M2C_RoleBagUpdate message = new M2C_RoleBagUpdate() { };
 
         //[BsonIgnore]
         //public List<HideProList> FuMoProList { get; set; } = new();
