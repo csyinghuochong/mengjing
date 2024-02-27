@@ -78,6 +78,7 @@ namespace ET.Server
                 //
                 //     singingvalue += buffHurtValueAdd;
                 // }
+                singingvalue += buffHurtValueAdd;
             }
 
             //闪电链增加的伤害
@@ -128,7 +129,7 @@ namespace ET.Server
             int DamgeType = 0;      //伤害类型
             //defendUnit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.BeHurt_3, attackUnit.Id);
             //defendUnit.GetComponent<BuffManagerComponent>()?.BuffRemoveType(2);
-
+            
             //获取攻击方属性
             NumericComponentServer numericComponentAttack = attackUnit.GetComponent<NumericComponentServer>();
             long attack_Hp = numericComponentAttack.GetAsLong(NumericType.Now_Hp);
@@ -696,6 +697,7 @@ namespace ET.Server
                 }
 
                 //damge = (long)(damge * (actDamge + skillHandler.ActTargetTemporaryAddPro + skillHandler.ActTargetAddPro + skillHandler.GetTianfuProAdd((int)SkillAttributeEnum.AddDamageCoefficient) + skillProAdd)) + actDamgeValue;
+                damge = (long)(damge * (actDamge + skillHandler.ActTargetTemporaryAddPro + skillHandler.ActTargetAddPro + skillProAdd)) + actDamgeValue;
 
                 float damgePro = 1;
                 //伤害加成
@@ -1060,6 +1062,11 @@ namespace ET.Server
                 {
                     //defendUnit.GetComponent<AttackRecordComponent>().BeAttacking(attackUnit, damge);
                 }
+                if (DamgeType == 0)
+                {
+                    Log.Debug("1");
+                }
+
 
                 //即将死亡
                 if (numericComponentDefend.GetAsInt(NumericType.Now_Hp) + damge <= 0)

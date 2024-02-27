@@ -10,6 +10,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_EquipmentIncreaseRequest request, M2C_EquipmentIncreaseResponse response)
         {
+            await ETTask.CompletedTask;
             BagComponentServer bagComponent = unit.GetComponent<BagComponentServer>();
              BagInfo reelBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.ReelBagInfo.BagInfoID);
              if (reelBagInfo == null)
@@ -146,8 +147,7 @@ namespace ET.Server
              MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
 
              // 更新角色属性
-             Function_Fight.GetInstance().UnitUpdateProperty_Base(unit, true, true);
-
+             Function_Fight.UnitUpdateProperty_Base(unit, true, true);
         }
     }
 }
