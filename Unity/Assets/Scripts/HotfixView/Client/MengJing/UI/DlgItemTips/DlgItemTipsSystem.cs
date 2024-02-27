@@ -56,7 +56,7 @@ namespace ET.Client
 
             // 类型描述
             string itemTypename = "消耗品";
-            ItemViewHelp.ItemTypeName.TryGetValue(itemType, out itemTypename);
+            ItemViewData.ItemTypeName.TryGetValue(itemType, out itemTypename);
             if (itemType == 1 && itemSubType == 131)
             {
                 itemTypename = "家园烹饪";
