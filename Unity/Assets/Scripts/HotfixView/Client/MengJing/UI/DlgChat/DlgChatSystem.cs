@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (PlayerComponent))]
     [FriendOf(typeof (DlgChat))]
     public static class DlgChatSystem
     {
@@ -13,6 +15,7 @@ namespace ET.Client
         {
             self.View.E_CloseButton.AddListener(self.OnCloseButton);
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+            self.View.E_SendButton.AddListener(self.OnSendButton);
             self.View.E_ChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChatItemsRefresh);
         }
 
@@ -24,6 +27,146 @@ namespace ET.Client
         private static void OnCloseButton(this DlgChat self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Chat);
+        }
+
+        private static void OnSendButton(this DlgChat self)
+        {
+            string text = self.View.E_ChatInputField.text;
+            if (string.IsNullOrEmpty(text) || text.Length == 0)
+            {
+                Log.Error("请输入聊天内容！");
+                return;
+            }
+
+            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            bool mask = false;
+            if (!ET.GMHelp.IsGmAccount(playerComponent.Account))
+            {
+                // 替换敏感词
+                // mask = MaskWordHelper.Instance.IsContainSensitiveWords(text);
+            }
+
+            if (text.Equals("#etgm"))
+            {
+                // UIHelper.Create(self.DomainScene(), UIType.UIGM).Coroutine();
+                return;
+            }
+
+            if (text.Equals("#blood"))
+            {
+                // SettingHelper.ShowBlood = !SettingHelper.ShowBlood;
+                self.View.E_ChatInputField.GetComponent<InputField>().text = "";
+                return;
+            }
+
+            if (text.Equals("#guanghuan"))
+            {
+                // SettingHelper.ShowGuangHuan = !SettingHelper.ShowGuangHuan;
+                self.View.E_ChatInputField.GetComponent<InputField>().text = "";
+                return;
+            }
+
+            if (text.Equals("#animation"))
+            {
+                // SettingHelper.ShowAnimation = !SettingHelper.ShowAnimation;
+                self.View.E_ChatInputField.GetComponent<InputField>().text = "";
+                return;
+            }
+
+            if (text.Equals("#sound"))
+            {
+                // SettingHelper.PlaySound = !SettingHelper.PlaySound;
+                self.View.E_ChatInputField.GetComponent<InputField>().text = "";
+                return;
+            }
+
+            if (text.Equals("#pool"))
+            {
+                // SettingHelper.UsePool = !SettingHelper.UsePool;
+                self.View.E_ChatInputField.GetComponent<InputField>().text = "";
+                return;
+            }
+
+            if (text.Equals("#openall"))
+            {
+                // SettingHelper.ShowBlood = true;
+                // SettingHelper.ShowEffect = true;
+                // SettingHelper.ShowGuangHuan = true;
+                // SettingHelper.ShowAnimation = true;
+                // SettingHelper.PlaySound = true;
+                self.View.E_ChatInputField.GetComponent<InputField>().text = "";
+                return;
+            }
+
+            if (text.Equals("#resetall"))
+            {
+                // SettingHelper.ShowBlood = false;
+                // SettingHelper.ShowEffect = false;
+                // SettingHelper.ShowGuangHuan = false;
+                // SettingHelper.ShowAnimation = false;
+                // SettingHelper.PlaySound = false;
+                self.View.E_ChatInputField.GetComponent<InputField>().text = "";
+                return;
+            }
+
+            if (mask)
+            {
+                Log.Error("请重新输入！");
+                return;
+            }
+
+            int itemType = self.CurrentChatType;
+            // if (itemType == (int)ChannelEnum.Team && !self.Root().GetComponent<TeamComponent>().IsHaveTeam())
+            // {
+            //     FloatTipManager.Instance.ShowFloatTip("没有队伍！");
+            //     return;
+            // }
+
+            if (text.Contains("#"))
+            {
+                string[] commands = text.Split('#');
+                if (commands[0] == "3")
+                {
+                    return;
+                }
+
+                if (commands[1].Contains("alltask"))
+                {
+                    List<TaskConfig> tasks = TaskConfigCategory.Instance.GetAll().Values.ToList();
+                    for (int i = 0; i < tasks.Count; i++)
+                    {
+                        if (tasks[i].TaskType != (int)TaskTargetType.ItemID_Number_2)
+                        {
+                            continue;
+                        }
+
+                        int monster = tasks[i].Target[0];
+                        if (!MonsterConfigCategory.Instance.Contain(monster))
+                        {
+                            Log.Error($"任务ID: {tasks[i].Id} 错误怪物ID: {monster}");
+                        }
+                    }
+
+                    return;
+                }
+
+                if (commands[1].Contains("chuji")
+                    || commands[1].Contains("zhongji")
+                    || commands[1].Contains("zhongji")
+                   )
+                {
+                    GMHelp.SendGmCommands(self.Root(), text);
+                    return;
+                }
+
+                GMHelp.SendGmCommand(self.Root(), text);
+            }
+            else
+            {
+                // self.Root().GetComponent<ChatComponent>().SendChat(itemType, text).Coroutine();
+            }
+
+            self.View.E_ChatInputField.GetComponent<InputField>().text = "";
         }
 
         private static void OnChatItemsRefresh(this DlgChat self, Transform transform, int index)
