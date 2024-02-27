@@ -124,45 +124,6 @@ namespace ET
             return vs;
         }
 
-#if !SERVER
-        public static void ExcurteGmList(Scene zongscene, List<string> gms)
-        {
-            for (int i = 0; i < gms.Count; i++)
-            {
-                SendGmCommand(zongscene, gms[i]);
-            }
-        }
-
-        public static void SendGmCommand(Scene zongscene, string gm)
-        {
-            //C2M_GMCommandRequest c2M_GMCommandRequest = new C2M_GMCommandRequest()
-            //{
-            //    GMMsg = gm,
-            //    Account = zongscene.GetComponent<AccountInfoComponent>().Account
-            //};
-            //zongscene.GetComponent<SessionComponent>().Session.Send(c2M_GMCommandRequest);
-        }
-
-        public static void SendGmCommands(Scene zongscene, string gmlist)
-        {
-            if (gmlist.Contains("chuji"))
-            {
-                ExcurteGmList(zongscene, GetChuJi());
-                return;
-            }
-            if (gmlist.Contains("zhongji"))
-            {
-                ExcurteGmList(zongscene, GetZhongJi());
-                return;
-            }
-            if (gmlist.Contains("gaoji"))
-            {
-                ExcurteGmList(zongscene, GetGaopJi());
-                return;
-            }
-        }
-#endif
-
         public static int GetRandomNumber()
         {
             return 2;

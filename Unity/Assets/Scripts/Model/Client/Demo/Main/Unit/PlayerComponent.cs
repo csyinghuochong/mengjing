@@ -27,7 +27,7 @@ namespace ET.Client
         //当前登录角色
         public int ServerId;
         public string ServerIp;
-        public string Account;
+        public string Account { get; set; }
         public string Password;
         public string LoginType;
         public long CurrentRoleId;
