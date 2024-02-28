@@ -40,6 +40,8 @@ namespace ET.Client
         public static void Refresh(this ES_EquipItem self, BagInfo bagInfo, int occ, ItemOperateEnum itemOperateEnum,
         List<BagInfo> equipList)
         {
+            self.E_EquipButton.AddListener(self.OnEquipButton);
+
             self.Occ = occ;
             self.BagInfo = bagInfo;
             self.ItemOperateEnum = itemOperateEnum;
@@ -62,6 +64,25 @@ namespace ET.Client
 
             //显示绑定
             self.E_BangDingImage.gameObject.SetActive(bagInfo.isBinging);
+        }
+
+        private static void OnEquipButton(this ES_EquipItem self)
+        {
+            if (self.BagInfo == null)
+            {
+                return;
+            }
+
+            EventSystem.Instance.Publish(self.Root(),
+                new ShowItemTips()
+                {
+                    Scene = self.Root(),
+                    BagInfo = self.BagInfo,
+                    ItemOperateEnum = self.ItemOperateEnum,
+                    InputPoint = Input.mousePosition,
+                    Occ = self.Occ,
+                    EquipList = self.EquipList
+                });
         }
     }
 }
