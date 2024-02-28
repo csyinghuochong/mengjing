@@ -44,44 +44,52 @@ namespace ET.Client
             await GameObjectPoolHelper.InitPoolFormGamObjectAsync(flyTipDi, 3);
         }
 
-        public static async ETTask SpawnFlyTip(this FlyTipComponent self, Vector3 startPos, string str)
+        public static void SpawnFlyTip(this FlyTipComponent self, string str)
         {
+            Vector3 startPos = new(0, -100, 0);
             GameObject FlyTipGO = GameObjectPoolHelper.GetObjectFromPool("FlyTip");
             FlyTipGO.transform.SetParent(self.Root().GetComponent<GlobalComponent>().PopUpRoot);
             self.FlyTips.Add(FlyTipGO);
             FlyTipGO.SetActive(true);
 
-            FlyTipGO.GetComponentInChildren<Text>().text = str;
-            FlyTipGO.transform.GetComponent<RectTransform>().localPosition = startPos;
-            FlyTipGO.transform.GetComponent<RectTransform>().localScale = Vector3.one;
-
-            FlyTipGO.transform.GetComponent<RectTransform>().DOMoveY(startPos.y + 4f, 1f).SetEase(Ease.OutQuad).onComplete = () =>
+            RectTransform rectTransform = FlyTipGO.transform.GetComponent<RectTransform>();
+            rectTransform.localPosition = startPos;
+            rectTransform.localScale = Vector3.one;
+            rectTransform.DOLocalMoveY(0, 2f).SetEase(Ease.OutQuad).onComplete = () =>
             {
                 FlyTipGO.SetActive(false);
                 self.FlyTips.Remove(FlyTipGO);
                 GameObjectPoolHelper.ReturnObjectToPool(FlyTipGO);
             };
-            await ETTask.CompletedTask;
+
+            Text text = FlyTipGO.GetComponentInChildren<Text>();
+            text.text = str;
+            text.color = Color.white;
+            text.DOColor(new Color(255, 255, 255, 0), 2f).SetEase(Ease.OutQuad);
         }
 
-        public static async ETTask SpawnFlyTipDi(this FlyTipComponent self, Vector3 startPos, string str)
+        public static void SpawnFlyTipDi(this FlyTipComponent self, string str)
         {
+            Vector3 startPos = new(0, -100, 0);
             GameObject FlyTipDiGO = GameObjectPoolHelper.GetObjectFromPool("FlyTipDi");
             FlyTipDiGO.transform.SetParent(self.Root().GetComponent<GlobalComponent>().PopUpRoot);
             self.FlyTips.Add(FlyTipDiGO);
             FlyTipDiGO.SetActive(true);
 
-            FlyTipDiGO.GetComponentInChildren<Text>().text = str;
-            FlyTipDiGO.transform.GetComponent<RectTransform>().localPosition = startPos;
-            FlyTipDiGO.transform.GetComponent<RectTransform>().localScale = Vector3.one;
-
-            FlyTipDiGO.transform.GetComponent<RectTransform>().DOMoveY(startPos.y + 4f, 1f).SetEase(Ease.OutQuad).onComplete = () =>
+            RectTransform rectTransform = FlyTipDiGO.transform.GetComponent<RectTransform>();
+            rectTransform.localPosition = startPos;
+            rectTransform.localScale = Vector3.one;
+            rectTransform.GetComponent<RectTransform>().DOMoveY(0, 2f).SetEase(Ease.OutQuad).onComplete = () =>
             {
                 FlyTipDiGO.SetActive(false);
                 self.FlyTips.Remove(FlyTipDiGO);
                 GameObjectPoolHelper.ReturnObjectToPool(FlyTipDiGO);
             };
-            await ETTask.CompletedTask;
+
+            Text text = FlyTipDiGO.GetComponentInChildren<Text>();
+            text.text = str;
+            text.color = Color.white;
+            text.DOColor(new Color(255, 255, 255, 0), 2f).SetEase(Ease.OutQuad);
         }
     }
 }
