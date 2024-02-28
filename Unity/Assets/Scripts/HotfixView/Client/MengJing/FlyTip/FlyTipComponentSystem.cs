@@ -90,6 +90,10 @@ namespace ET.Client
             text.text = str;
             text.color = Color.white;
             text.DOColor(new Color(255, 255, 255, 0), 2f).SetEase(Ease.OutQuad);
+
+            Image image = FlyTipDiGO.GetComponentInChildren<Image>();
+            image.color = Color.white;
+            image.DOColor(new Color(255, 255, 255, 0), 2f).SetEase(Ease.OutQuad);
         }
     }
 }
