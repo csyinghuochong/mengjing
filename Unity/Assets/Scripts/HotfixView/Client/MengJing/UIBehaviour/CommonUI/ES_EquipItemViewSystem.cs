@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -19,9 +20,48 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void RegisterEventHandler(this ES_EquipItem self, ItemSubTypeEnum equipPosition)
+        public static void InitUI(this ES_EquipItem self, int subType)
         {
-            // self.E_SelecteButton.AddListenerWithId(self.OnSelectedHandler, (int)equipPosition);
+            self.BagInfo = null;
+
+            self.E_EquipIconImage.gameObject.SetActive(false);
+            self.E_EquipQualityImage.gameObject.SetActive(false);
+            self.E_BangDingImage.gameObject.SetActive(false);
+
+            if (subType < 100)
+            {
+                string qianghuaName = ItemViewData.EquipWeiZhiToName[subType].Icon;
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, qianghuaName);
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                self.E_EquipBackImage.sprite = sp;
+            }
+        }
+
+        public static void Refresh(this ES_EquipItem self, BagInfo bagInfo, int occ, ItemOperateEnum itemOperateEnum,
+        List<BagInfo> equipList)
+        {
+            self.Occ = occ;
+            self.BagInfo = bagInfo;
+            self.ItemOperateEnum = itemOperateEnum;
+            self.EquipList = equipList;
+            ItemConfig itemconfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemconfig.Icon);
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+            self.E_EquipIconImage.gameObject.SetActive(true);
+            self.E_EquipIconImage.sprite = sp;
+
+            //设置品质
+            string ItemQuality = FunctionUI.ItemQualiytoPath(itemconfig.ItemQuality);
+            self.E_EquipQualityImage.gameObject.SetActive(true);
+            string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ItemQuality);
+            Sprite sp2 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
+
+            self.E_EquipQualityImage.sprite = sp2;
+
+            //显示绑定
+            self.E_BangDingImage.gameObject.SetActive(bagInfo.isBinging);
         }
     }
 }

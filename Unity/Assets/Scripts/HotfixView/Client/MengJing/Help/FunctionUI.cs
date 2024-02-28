@@ -78,5 +78,26 @@ namespace ET.Client
 
             return color;
         }
+
+        //weizhi 0 -12
+        public static int GetItemSubtypeByWeizhi(int weizhi)
+        {
+            if (weizhi < 4)
+            {
+                return weizhi + 1;
+            }
+
+            if (weizhi == 4 || weizhi == 5 || weizhi == 6)
+            {
+                return 5;
+            }
+
+            if (weizhi > 6)
+            {
+                return weizhi - 1;
+            }
+
+            return weizhi;
+        }
     }
 }

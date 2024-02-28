@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 
-
 namespace ET.Client
 {
-    
     public struct NumericAttribute
     {
         public string Name;
@@ -11,8 +9,7 @@ namespace ET.Client
         public string Icon;
     }
 
-    
-    public static  class ItemViewData
+    public static class ItemViewData
     {
         [StaticField]
         public static Dictionary<int, string> ItemTypeName = new()
@@ -109,7 +106,29 @@ namespace ET.Client
             { NumericType.Now_PetAllHp, new NumericAttribute() { Name = "宠物全体血量", Icon = string.Empty } },
         };
 
-    }
-    
-}
+        public struct EquipWeiZhiInfo
+        {
+            public string Name;
+            public string Icon;
+        }
 
+        /// <summary>
+        /// 装备位置配置
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, EquipWeiZhiInfo> EquipWeiZhiToName = new Dictionary<int, EquipWeiZhiInfo>()
+        {
+            { 1, new EquipWeiZhiInfo() { Icon = "Img_24", Name = "武器" } },
+            { 2, new EquipWeiZhiInfo() { Icon = "Img_28", Name = "衣服" } },
+            { 3, new EquipWeiZhiInfo() { Icon = "Img_29", Name = "护符" } },
+            { 4, new EquipWeiZhiInfo() { Icon = "Img_19", Name = "戒指" } },
+            { 5, new EquipWeiZhiInfo() { Icon = "Img_21", Name = "饰品" } },
+            { 6, new EquipWeiZhiInfo() { Icon = "Img_26", Name = "鞋子" } },
+            { 7, new EquipWeiZhiInfo() { Icon = "Img_20", Name = "裤子" } },
+            { 8, new EquipWeiZhiInfo() { Icon = "Img_27", Name = "腰带" } },
+            { 9, new EquipWeiZhiInfo() { Icon = "Img_22", Name = "手镯" } },
+            { 10, new EquipWeiZhiInfo() { Icon = "Img_23", Name = "头盔" } },
+            { 11, new EquipWeiZhiInfo() { Icon = "Img_25", Name = "项链" } },
+        };
+    }
+}
