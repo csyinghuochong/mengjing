@@ -22,6 +22,7 @@ namespace ET.Client
 
                 await BagClientHelper.RequestBagInit(root);
                 await ActivityNetHelper.RequestActivityInfo(root);
+                await UserInfoHelper.RequestUserInfoInit(root);
 
                 EventSystem.Instance.Publish(root, new EnterMapFinish());
             }

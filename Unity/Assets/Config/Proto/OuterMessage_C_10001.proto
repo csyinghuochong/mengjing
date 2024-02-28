@@ -1402,3 +1402,18 @@ message M2C_UnitNumericListUpdate // ILocationMessage
 	repeated int32 Ks = 2;
 	repeated int64 Vs = 3;
 }
+
+//ResponseType M2C_UserInfoInitResponse
+message C2M_UserInfoInitRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_UserInfoInitResponse  // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	UserInfo UserInfo = 1;
+}

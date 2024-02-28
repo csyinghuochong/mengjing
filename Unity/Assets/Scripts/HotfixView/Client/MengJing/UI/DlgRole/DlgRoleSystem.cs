@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (UserInfoComponentClient))]
     [FriendOf(typeof (DlgRole))]
     public static class DlgRoleSystem
     {
@@ -94,7 +95,7 @@ namespace ET.Client
         private static void RefreshEquip(this DlgRole self)
         {
             BagComponentClient bagComponentClient = self.Root().GetComponent<BagComponentClient>();
-            // UserInfoComponent userInfoComponent = self.Root().GetComponent<UserInfoComponent>();
+            UserInfoComponentClient userInfoComponentClient = self.Root().GetComponent<UserInfoComponentClient>();
 
             for (int i = 0; i < self.ESEquipItems_1.Count; i++)
             {
@@ -106,10 +107,11 @@ namespace ET.Client
                 self.ESEquipItems_2[i].InitUI(FunctionUI.GetItemSubtypeByWeizhi(i));
             }
 
-            self.RefreshEquip_1(bagComponentClient.GetItemsByItem((int)ItemLocType.ItemLocEquip), 1,
+            self.RefreshEquip_1(bagComponentClient.GetItemsByItem((int)ItemLocType.ItemLocEquip), userInfoComponentClient.UserInfo.Occ,
                 ItemOperateEnum.Juese);
 
-            self.RefreshEquip_2(bagComponentClient.GetItemsByItem((int)ItemLocType.ItemLocEquip_2), 1, ItemOperateEnum.Juese);
+            self.RefreshEquip_2(bagComponentClient.GetItemsByItem((int)ItemLocType.ItemLocEquip_2), userInfoComponentClient.UserInfo.Occ,
+                ItemOperateEnum.Juese);
         }
 
         private static void RefreshEquip_1(this DlgRole self, List<BagInfo> equiplist, int occ, ItemOperateEnum itemOperateEnum)
