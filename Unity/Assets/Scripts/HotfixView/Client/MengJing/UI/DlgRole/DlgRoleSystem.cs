@@ -82,14 +82,13 @@ namespace ET.Client
         private static void RefreshPlayerInfo(this DlgRole self)
         {
             // 假数据
-            UserInfo userInfo = new() { Lv = 10, Name = "玩家1号", Occ = 1 };
-            BagInfo bagInfo = new();
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentClient>().UserInfo;
 
             self.View.E_RoseLvText.text = userInfo.Lv.ToString();
             self.View.E_RoseNameText.text = userInfo.Name;
 
             self.View.ES_ModelShow.SetPosition(Vector3.zero, new Vector3(0f, 70f, 150f));
-            self.View.ES_ModelShow.ShowPlayerModel(bagInfo, userInfo.Occ, 0);
+            self.View.ES_ModelShow.ShowPlayerModel(new BagInfo(), userInfo.Occ, 0);
         }
 
         private static void RefreshEquip(this DlgRole self)

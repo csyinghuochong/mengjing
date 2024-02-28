@@ -61,6 +61,7 @@ namespace ET.Server
                             userInfo.Gold = 0;
                             userInfo.SeasonLevel = 1;
                             userInfo.Occ = createRoleInfo.PlayerOcc;
+                            userInfo.Name = createRoleInfo.PlayerName;
                         }
                     }
 
