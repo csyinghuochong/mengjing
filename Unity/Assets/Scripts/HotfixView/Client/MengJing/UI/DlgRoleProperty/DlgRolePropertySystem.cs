@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (UserInfoComponentClient))]
     [FriendOf(typeof (DlgRoleProperty))]
     public static class DlgRolePropertySystem
     {
@@ -97,6 +98,17 @@ namespace ET.Client
 
         private static void RefreshRoleProperty(this DlgRoleProperty self)
         {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            NumericComponentClient numericComponentClient = unit.GetComponent<NumericComponentClient>();
+            UserInfoComponentClient userInfoComponentClient = self.Root().GetComponent<UserInfoComponentClient>();
+
+            int maxPiLao = int.Parse(GlobalValueConfigCategory.Instance
+                    .Get(numericComponentClient.GetAsInt(NumericType.YueKaRemainTimes) > 0? 26 : 10).Value);
+            self.View.E_PiLaoImgImage.fillAmount = (float)userInfoComponentClient.UserInfo.PiLao / maxPiLao;
+            self.View.E_PiLaoTextText.text = userInfoComponentClient.UserInfo.PiLao + "/" + maxPiLao;
+            self.View.E_BaoShiDuImgImage.fillAmount = (float)userInfoComponentClient.UserInfo.BaoShiDu / ComHelp.GetMaxBaoShiDu();
+            self.View.E_BaoShiDuTextText.text = userInfoComponentClient.UserInfo.BaoShiDu + "/" + ComHelp.GetMaxBaoShiDu();
+
             self.AddUIScrollItems(ref self.ScrollItemRolePropertyBaseItems, self.ShowPropertyList_Base.Count);
             self.View.E_RolePropertyBaseItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPropertyList_Base.Count);
 
