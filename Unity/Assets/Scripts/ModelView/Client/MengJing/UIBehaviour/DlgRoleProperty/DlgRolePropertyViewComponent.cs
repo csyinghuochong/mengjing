@@ -24,6 +24,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.LoopVerticalScrollRect E_RolePropertyTeShuItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RolePropertyTeShuItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_RolePropertyTeShuItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/AttributeNode/E_RolePropertyTeShuItems");
+     			}
+     			return this.m_E_RolePropertyTeShuItemsLoopVerticalScrollRect;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_AddPointButton
      	{
      		get
@@ -61,12 +78,14 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_RolePropertyBaseItemsLoopVerticalScrollRect = null;
+			this.m_E_RolePropertyTeShuItemsLoopVerticalScrollRect = null;
 			this.m_E_AddPointButton = null;
 			this.m_E_AddPointImage = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_RolePropertyBaseItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_RolePropertyTeShuItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_AddPointButton = null;
 		private UnityEngine.UI.Image m_E_AddPointImage = null;
 		public Transform uiTransform = null;

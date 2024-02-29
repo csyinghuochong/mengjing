@@ -12,6 +12,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgRoleProperty self)
         {
             self.View.E_RolePropertyBaseItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRolePropertyBaseItemsRefresh);
+            self.View.E_RolePropertyTeShuItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRolePropertyTeShuItemsRefresh);
         }
 
         public static void ShowWindow(this DlgRoleProperty self, Entity contextData = null)
@@ -22,8 +23,14 @@ namespace ET.Client
 
         private static void OnRolePropertyBaseItemsRefresh(this DlgRoleProperty self, Transform transform, int index)
         {
-            Scroll_Item_RolePropertyBaseItem scrollItemBagItem = self.ScrollItemRolePropertyBaseItems[index].BindTrans(transform);
-            scrollItemBagItem.Refresh(self.ShowPropertyList_Base[index]);
+            Scroll_Item_RolePropertyBaseItem scrollItemRolePropertyBaseItem = self.ScrollItemRolePropertyBaseItems[index].BindTrans(transform);
+            scrollItemRolePropertyBaseItem.Refresh(self.ShowPropertyList_Base[index]);
+        }
+
+        private static void OnRolePropertyTeShuItemsRefresh(this DlgRoleProperty self, Transform transform, int index)
+        {
+            Scroll_Item_RolePropertyTeShuItem scrollItemRolePropertyTeShuItem = self.ScrollItemRolePropertyTeShuItems[index].BindTrans(transform);
+            scrollItemRolePropertyTeShuItem.Refresh(self.ShowPropertyList_TeShu[index]);
         }
 
         private static ShowPropertyList AddShowProperList(this DlgRoleProperty self, int numericType, string name, string iconID, int type)
@@ -92,6 +99,9 @@ namespace ET.Client
         {
             self.AddUIScrollItems(ref self.ScrollItemRolePropertyBaseItems, self.ShowPropertyList_Base.Count);
             self.View.E_RolePropertyBaseItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPropertyList_Base.Count);
+
+            self.AddUIScrollItems(ref self.ScrollItemRolePropertyTeShuItems, self.ShowPropertyList_TeShu.Count);
+            self.View.E_RolePropertyTeShuItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPropertyList_TeShu.Count);
         }
     }
 }

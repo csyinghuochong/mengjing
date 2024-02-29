@@ -8,9 +8,6 @@ namespace ET.Client
         {
             PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
             Scene currentScene = root.GetComponent<CurrentScenesComponent>().Scene;
-
-            Log.Debug("playerComponent.MyId: " + playerComponent.MyId);
-            
             return currentScene.GetComponent<UnitComponent>().Get(playerComponent.MyId);
         }
         

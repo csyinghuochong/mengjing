@@ -19,6 +19,7 @@ namespace ET.Client
         }
 
         public Dictionary<int, Scroll_Item_RolePropertyBaseItem> ScrollItemRolePropertyBaseItems;
+        public Dictionary<int, Scroll_Item_RolePropertyTeShuItem> ScrollItemRolePropertyTeShuItems;
         public List<ShowPropertyList> ShowPropertyList_Base = new();
         public List<ShowPropertyList> ShowPropertyList_TeShu = new();
     }
