@@ -57,6 +57,7 @@ namespace ET.Client
                     self.RefreshEquip();
                     break;
                 case 1:
+                    uiComponent.ShowWindowAsync(WindowID.WindowID_RoleProperty).Coroutine();
                     Log.Debug($"打开 Property");
                     break;
             }
@@ -68,6 +69,7 @@ namespace ET.Client
 
             if (index != 1)
             {
+                uiComponent.HideWindow(WindowID.WindowID_RoleProperty);
             }
         }
 
@@ -75,6 +77,7 @@ namespace ET.Client
         {
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
             uiComponent.CloseWindow(WindowID.WindowID_RoleBag);
+            uiComponent.CloseWindow(WindowID.WindowID_RoleProperty);
 
             uiComponent.CloseWindow(WindowID.WindowID_Role);
         }

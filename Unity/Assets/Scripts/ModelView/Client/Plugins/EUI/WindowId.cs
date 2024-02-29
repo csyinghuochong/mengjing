@@ -21,5 +21,6 @@ namespace ET.Client
 		WindowID_ItemTips,
 		WindowID_HuoBiSet,
 		WindowID_Chat,
+		WindowID_RoleProperty,
 	}
 }
