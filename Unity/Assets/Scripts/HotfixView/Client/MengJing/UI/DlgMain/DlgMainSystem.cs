@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (UserInfoComponentClient))]
     [FriendOf(typeof (DlgMain))]
     public static class DlgMainSystem
     {
@@ -74,25 +75,59 @@ namespace ET.Client
             self.View.E_YaoGanDiFixEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Draging(pdata as PointerEventData); });
             self.View.E_YaoGanDiFixEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.EndDrag(pdata as PointerEventData); });
             self.View.E_YaoGanDiFixEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.EndDrag(pdata as PointerEventData); });
+
+            self.View.E_SetButton.AddListener(self.OnSetButton);
+        }
+
+        public static void ShowWindow(this DlgMain self, Entity contextData = null)
+        {
             self.UICamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
             self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
             self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
             self.ObstructLayer = 1 << LayerMask.NameToLayer(LayerEnum.Obstruct.ToString());
             self.BuildingLayer = 1 << LayerMask.NameToLayer(LayerEnum.Building.ToString());
+
+            self.ResetJoystick();
+            self.RefreshLeftUp();
         }
 
-        public static void ShowWindow(this DlgMain self, Entity contextData = null)
+        #region 左上角信息
+
+        private static void OnSetButton(this DlgMain self)
         {
-            self.ResetUI();
-            self.AfterEnterScene();
+            self.Root().GetComponent<FlyTipComponent>().SpawnFlyTipDi("打开设置界面");
         }
 
-        public static void BeforeUnload(this DlgMain self)
+        private static void RefreshLeftUp(this DlgMain self)
         {
-            self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
-            self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
+            UserInfoComponentClient userInfoComponentClient = self.Root().GetComponent<UserInfoComponentClient>();
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            NumericComponentClient numericComponentClient = unit.GetComponent<NumericComponentClient>();
+
+            self.View.E_PlayerHeadIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, userInfoComponentClient.UserInfo.Occ.ToString()));
+
+            self.View.E_RoleNameText.text = userInfoComponentClient.UserInfo.Name;
+            self.View.E_RoleLvText.text = "等级:" + userInfoComponentClient.UserInfo.Lv;
+
+            int maxPiLao = int.Parse(GlobalValueConfigCategory.Instance
+                    .Get(numericComponentClient.GetAsInt(NumericType.YueKaRemainTimes) > 0? 26 : 10).Value);
+            self.View.E_RolePiLaoText.text = "体力:" + userInfoComponentClient.UserInfo.PiLao + "/" + maxPiLao;
+            self.View.E_RolePiLaoImgImage.fillAmount = 1f * userInfoComponentClient.UserInfo.PiLao / maxPiLao;
+
+            int skillNumber = 1 + numericComponentClient.GetAsInt(NumericType.MakeType_2) > 0? 1 : 0;
+            int maxHuoLi = unit.GetMaxHuoLi(skillNumber);
+            self.View.E_RoleHuoLiText.text = "活力:" + userInfoComponentClient.UserInfo.Vitality + "/" + maxHuoLi;
+            self.View.E_RoleHuoLiImgImage.fillAmount = 1f * userInfoComponentClient.UserInfo.Vitality / maxHuoLi;
+
+            // self.View.E_ServerNameText.text = ServerHelper.GetGetServerItem(!GlobalHelp.IsOutNetMode, accountInfoComponent.ServerId).ServerName;
+            self.View.E_CombatText.text = $"战力: {userInfoComponentClient.UserInfo.Combat}";
         }
+
+        #endregion
+
+        #region 左下角
 
         private static void OnShrinkButton(this DlgMain self)
         {
@@ -165,7 +200,15 @@ namespace ET.Client
             Log.Debug("家族！！！");
         }
 
+        #endregion
+
         # region 摇杆
+
+        public static void BeforeUnload(this DlgMain self)
+        {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
+        }
 
         private static void UpdateOperateMode(this DlgMain self, int operateMode)
         {
@@ -480,7 +523,7 @@ namespace ET.Client
             return start;
         }
 
-        private static void ResetUI(this DlgMain self)
+        private static void ResetJoystick(this DlgMain self)
         {
             self.SetAlpha(0.3f);
             if (self.OperateMode == 0)
@@ -502,16 +545,10 @@ namespace ET.Client
         {
         }
 
-        private static void AfterEnterScene(this DlgMain self)
-        {
-            // self.MainUnit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
-            // self.NumericComponent = self.MainUnit.GetComponent<NumericComponent>();
-        }
-
         private static void EndDrag(this DlgMain self, PointerEventData pdata)
         {
             long lastTimer = self.JoystickTimer;
-            self.ResetUI();
+            self.ResetJoystick();
             if (lastTimer == 0)
             {
                 return;
@@ -539,7 +576,7 @@ namespace ET.Client
                 return;
             }
 
-            self.ResetUI();
+            self.ResetJoystick();
             Unit unit = self.MainUnit;
             if (unit == null || unit.IsDisposed)
             {
