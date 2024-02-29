@@ -362,6 +362,59 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_SubViewRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_SubViewRectTransform == null )
+     			{
+		    		this.m_EG_SubViewRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SubView");
+     			}
+     			return this.m_EG_SubViewRectTransform;
+     		}
+     	}
+
+		public ES_RoleBag ES_RoleBag
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_rolebag == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleBag");
+		    	   this.m_es_rolebag = this.AddChild<ES_RoleBag,Transform>(subTrans);
+     			}
+     			return this.m_es_rolebag;
+     		}
+     	}
+
+		public ES_RoleProperty ES_RoleProperty
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_roleproperty == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleProperty");
+		    	   this.m_es_roleproperty = this.AddChild<ES_RoleProperty,Transform>(subTrans);
+     			}
+     			return this.m_es_roleproperty;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_es_modelshow = null;
@@ -384,6 +437,9 @@ namespace ET.Client
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_BagToggle = null;
 			this.m_E_PropertyToggle = null;
+			this.m_EG_SubViewRectTransform = null;
+			this.m_es_rolebag = null;
+			this.m_es_roleproperty = null;
 			this.uiTransform = null;
 		}
 
@@ -407,6 +463,9 @@ namespace ET.Client
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_BagToggle = null;
 		private UnityEngine.UI.Toggle m_E_PropertyToggle = null;
+		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
+		private EntityRef<ES_RoleBag> m_es_rolebag = null;
+		private EntityRef<ES_RoleProperty> m_es_roleproperty = null;
 		public Transform uiTransform = null;
 	}
 }

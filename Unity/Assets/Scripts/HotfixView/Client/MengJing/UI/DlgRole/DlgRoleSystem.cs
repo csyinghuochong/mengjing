@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_RoleProperty))]
+    [FriendOf(typeof (ES_RoleBag))]
     [FriendOf(typeof (UserInfoComponentClient))]
     [FriendOf(typeof (DlgRole))]
     public static class DlgRoleSystem
@@ -50,34 +52,22 @@ namespace ET.Client
             UICommonHelper.SetToggleShow(self.View.E_BagToggle.gameObject, index == 0);
             UICommonHelper.SetToggleShow(self.View.E_PropertyToggle.gameObject, index == 1);
 
+            UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
             {
                 case 0:
-                    uiComponent.ShowWindowAsync(WindowID.WindowID_RoleBag).Coroutine();
+                    self.View.ES_RoleBag.uiTransform.gameObject.SetActive(true);
                     self.RefreshEquip();
                     break;
                 case 1:
-                    uiComponent.ShowWindowAsync(WindowID.WindowID_RoleProperty).Coroutine();
-                    Log.Debug($"打开 Property");
+                    self.View.ES_RoleProperty.uiTransform.gameObject.SetActive(true);
                     break;
-            }
-
-            if (index != 0)
-            {
-                uiComponent.HideWindow(WindowID.WindowID_RoleBag);
-            }
-
-            if (index != 1)
-            {
-                uiComponent.HideWindow(WindowID.WindowID_RoleProperty);
             }
         }
 
         private static void OnCloseButton(this DlgRole self)
         {
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.CloseWindow(WindowID.WindowID_RoleBag);
-            uiComponent.CloseWindow(WindowID.WindowID_RoleProperty);
 
             uiComponent.CloseWindow(WindowID.WindowID_Role);
         }

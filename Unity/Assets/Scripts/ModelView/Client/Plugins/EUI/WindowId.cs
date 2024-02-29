@@ -17,10 +17,8 @@ namespace ET.Client
 		WindowID_CreateRole,
 		WindowID_Main,
 		WindowID_Role,
-		WindowID_RoleBag,
 		WindowID_ItemTips,
 		WindowID_HuoBiSet,
 		WindowID_Chat,
-		WindowID_RoleProperty,
 	}
 }

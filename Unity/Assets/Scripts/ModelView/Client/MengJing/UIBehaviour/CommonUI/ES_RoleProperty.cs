@@ -1,12 +1,29 @@
-﻿
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
-	[ComponentOf(typeof(DlgRoleProperty))]
-	[EnableMethod]
-	public  class DlgRolePropertyViewComponent : Entity,IAwake,IDestroy 
+	public class ShowPropertyList
 	{
+		public int NumericType;
+		public string Name;
+		public string IconID;
+		public int Type;
+	}
+	
+	[ChildOf]
+	[EnableMethod]
+	public  class ES_RoleProperty : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy ,IUILogic
+	{
+		public Dictionary<int, Scroll_Item_RolePropertyBaseItem> ScrollItemRolePropertyBaseItems;
+		public Dictionary<int, Scroll_Item_RolePropertyTeShuItem> ScrollItemRolePropertyTeShuItems;
+		public List<ShowPropertyList> ShowPropertyList_Base = new();
+		public List<ShowPropertyList> ShowPropertyList_TeShu = new();
+		public List<int> PointList = new();
+		public List<int> PointInit = new();
+		public int PointRemain;
+		public bool IsHoldDown;
+		
 		public UnityEngine.RectTransform EG_AttributeNodeRectTransform
      	{
      		get

@@ -1,12 +1,17 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
-	[ComponentOf(typeof(DlgRoleBag))]
+	[ChildOf]
 	[EnableMethod]
-	public  class DlgRoleBagViewComponent : Entity,IAwake,IDestroy 
+	public  class ES_RoleBag : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public Dictionary<int, Scroll_Item_BagItem> ScrollItemBagItems;
+		public List<BagInfo> ShowBagInfos = new();
+		public int CurrentItemType;
+		
 		public UnityEngine.UI.ToggleGroup E_ItemTypeSetToggleGroup
      	{
      		get

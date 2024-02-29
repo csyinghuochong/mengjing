@@ -31,5 +31,13 @@ namespace ET.Client
             gameObject.transform.Find("Background/XuanZhong").gameObject.SetActive(isShow);
             gameObject.transform.Find("Background/WeiXuanZhong").gameObject.SetActive(!isShow);
         }
+
+        public static void HideChildren(Transform transform)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
     }
 }
