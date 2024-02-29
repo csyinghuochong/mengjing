@@ -111,7 +111,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 15
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -286,7 +286,7 @@ RectTransform:
   - {fileID: 2425020750294393838}
   - {fileID: 2167908522604209337}
   m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -585,7 +585,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -768,7 +768,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -907,7 +907,7 @@ GameObject:
   - component: {fileID: 3016352083731877081}
   - component: {fileID: 6965162582755606492}
   m_Layer: 5
-  m_Name: Btn_Add
+  m_Name: E_Add_TiZhi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1015,19 +1015,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 398896061891944601}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-        m_MethodName: HandleEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Btn_AddTiLiClick
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &6965162582755606492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1040,39 +1028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_AddTiLiPointDown
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_AddTiLiPointUp
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Delegates: []
 --- !u!1 &810605248525695300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,7 +1138,7 @@ GameObject:
   - component: {fileID: 454925893793562545}
   - component: {fileID: 3735895986871343589}
   m_Layer: 5
-  m_Name: Lab_Value
+  m_Name: E_Value_ZhiLi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1691,7 +1647,7 @@ GameObject:
   - component: {fileID: 5986584106612530866}
   - component: {fileID: 8701745651532135710}
   m_Layer: 5
-  m_Name: Lab_Value
+  m_Name: E_Value_TiZhi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2035,7 +1991,7 @@ GameObject:
   - component: {fileID: 7517203595667500738}
   - component: {fileID: 160860896476361780}
   m_Layer: 5
-  m_Name: ButtonAddPointConfirm
+  m_Name: E_AddPointConfirm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2055,7 +2011,7 @@ RectTransform:
   m_Children:
   - {fileID: 8669959080438384892}
   m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2358,7 +2314,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2099462131388709416}
   m_Layer: 0
-  m_Name: AttributeNode
+  m_Name: EG_AttributeNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2504,7 +2460,7 @@ GameObject:
   - component: {fileID: 8830579437340160985}
   - component: {fileID: 6986665413933754141}
   m_Layer: 5
-  m_Name: Btn_Cost
+  m_Name: E_Cost_TiZhi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2612,19 +2568,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5292650126432842251}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-        m_MethodName: HandleEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Btn_CostTiLiClick
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &6986665413933754141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2637,115 +2581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_CostTiLiPointDown
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_CostTiLiPointUp
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!1 &2531332178348929043
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8526529449967770990}
-  - component: {fileID: 6594430813025146406}
-  - component: {fileID: 7363485147705661168}
-  m_Layer: 5
-  m_Name: Image_1 (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &8526529449967770990
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531332178348929043}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -56, y: -43.1}
-  m_SizeDelta: {x: 600, y: 600}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &6594430813025146406
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531332178348929043}
-  m_CullTransparentMesh: 1
---- !u!114 &7363485147705661168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531332178348929043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9d440d467484a2e4db3cb6cadcbe8cea, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_Delegates: []
 --- !u!1 &2573191848616271687
 GameObject:
   m_ObjectHideFlags: 0
@@ -2778,7 +2614,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2855,7 +2691,7 @@ GameObject:
   - component: {fileID: 6136023929841052246}
   - component: {fileID: 3531518645900603672}
   m_Layer: 5
-  m_Name: Lab_ShengYuNum
+  m_Name: E_ShengYuNum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2874,7 +2710,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3604,7 +3440,7 @@ GameObject:
   - component: {fileID: 8613567195790430980}
   - component: {fileID: 3844441865451711825}
   m_Layer: 5
-  m_Name: Btn_Add
+  m_Name: E_Add_ZhiLi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3712,19 +3548,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1215675493057433464}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-        m_MethodName: HandleEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Btn_AddZhiLiClick
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &3844441865451711825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3737,39 +3561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_AddZhiLiPointDown
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_AddZhiLiPointUp
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Delegates: []
 --- !u!1 &3523890843481041098
 GameObject:
   m_ObjectHideFlags: 0
@@ -3804,7 +3596,7 @@ RectTransform:
   - {fileID: 259900144117314673}
   - {fileID: 3219163899707459070}
   m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4456,7 +4248,7 @@ RectTransform:
   - {fileID: 7582139653891716331}
   - {fileID: 7048734700201065282}
   m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4494,7 +4286,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4742,7 +4534,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 14
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5291,7 +5083,7 @@ GameObject:
   - component: {fileID: 1124666237956497907}
   - component: {fileID: 4869717792319023451}
   m_Layer: 5
-  m_Name: Btn_Cost
+  m_Name: E_Cost_NaiLi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5399,19 +5191,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8436750730312510099}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-        m_MethodName: HandleEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Btn_CostNaiLiClick
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &4869717792319023451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5424,39 +5204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_CostNaiLiPointDown
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_CostNaiLiPointUp
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Delegates: []
 --- !u!1 &5979163923533083140
 GameObject:
   m_ObjectHideFlags: 0
@@ -5647,7 +5395,7 @@ GameObject:
   - component: {fileID: 6845620085136479721}
   - component: {fileID: 4064696404159993632}
   m_Layer: 5
-  m_Name: Btn_Cost
+  m_Name: E_Cost_LiLiang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5755,19 +5503,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4162753389568233309}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-        m_MethodName: HandleEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Btn_CostLiLiangClick
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &4064696404159993632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5781,114 +5517,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_CostLiLiangPointDown
-            m_BoolArgument: 0
-          m_CallState: 2
   - eventID: 3
     callback:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_CostLiLiangPointUp
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!1 &6212348581939013602
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8761758412012278990}
-  - component: {fileID: 8103858012376294329}
-  - component: {fileID: 2925095162584409019}
-  m_Layer: 5
-  m_Name: Image_1 (6)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &8761758412012278990
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6212348581939013602}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 16
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -72, y: -228.7}
-  m_SizeDelta: {x: 500, y: 19}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8103858012376294329
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6212348581939013602}
-  m_CullTransparentMesh: 1
---- !u!114 &2925095162584409019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6212348581939013602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f937f786b4bee1d4995e890229696373, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+        m_Calls: []
 --- !u!1 &6264820583974219343
 GameObject:
   m_ObjectHideFlags: 0
@@ -5900,7 +5532,7 @@ GameObject:
   - component: {fileID: 7159405012993932105}
   - component: {fileID: 908171480290521315}
   m_Layer: 5
-  m_Name: RoleAddPoint
+  m_Name: EG_RoleAddPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5918,8 +5550,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5732871014801795173}
-  - {fileID: 8526529449967770990}
   - {fileID: 5854248735997896187}
   - {fileID: 6216822763603608507}
   - {fileID: 7534964951405507900}
@@ -5934,7 +5564,6 @@ RectTransform:
   - {fileID: 8044321766998274067}
   - {fileID: 4625149392613986231}
   - {fileID: 6845768685805274014}
-  - {fileID: 8761758412012278990}
   - {fileID: 2976122545352290272}
   - {fileID: 6182154954551514931}
   m_Father: {fileID: 5877662859323526158}
@@ -6183,7 +5812,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 17
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6414,7 +6043,7 @@ GameObject:
   - component: {fileID: 8776633042766608011}
   - component: {fileID: 8409917729705732694}
   m_Layer: 5
-  m_Name: Btn_Cost
+  m_Name: E_Cost_ZhiLi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6522,19 +6151,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 527399620361247845}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-        m_MethodName: HandleEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Btn_CostZhiLiClick
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &8409917729705732694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6547,39 +6164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_CostZhiLiPointDown
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_CostZhiLiPointUp
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Delegates: []
 --- !u!1 &6602832915061733517
 GameObject:
   m_ObjectHideFlags: 0
@@ -6594,7 +6179,7 @@ GameObject:
   - component: {fileID: 2569640875189631444}
   - component: {fileID: 428878602734221462}
   m_Layer: 5
-  m_Name: Btn_Add
+  m_Name: E_Add_NaiLi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6702,19 +6287,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7314089261866765354}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-        m_MethodName: HandleEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Btn_AddNaiLiClick
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &428878602734221462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6727,39 +6300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_AddNaiLiPointDown
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_AddNaiLiPointUp
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Delegates: []
 --- !u!1 &6679230319582142395
 GameObject:
   m_ObjectHideFlags: 0
@@ -6774,7 +6315,7 @@ GameObject:
   - component: {fileID: 5099551941985760824}
   - component: {fileID: 2321981968997028919}
   m_Layer: 5
-  m_Name: Btn_Add
+  m_Name: E_Add_MingJie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7210,7 +6751,7 @@ RectTransform:
   - {fileID: 7266007070322850441}
   - {fileID: 8047936981798455255}
   m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7230,7 +6771,7 @@ GameObject:
   - component: {fileID: 5183658854238114881}
   - component: {fileID: 3512461669867042466}
   m_Layer: 5
-  m_Name: ButtonCloseAddPoint
+  m_Name: E_CloseAddPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7250,7 +6791,7 @@ RectTransform:
   m_Children:
   - {fileID: 4502319736005858550}
   m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7429,7 +6970,7 @@ GameObject:
   - component: {fileID: 4008817923623506508}
   - component: {fileID: 6830804177127185070}
   m_Layer: 5
-  m_Name: Btn_Cost
+  m_Name: E_Cost_MingJie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7537,19 +7078,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2050839545087697010}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-        m_MethodName: HandleEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Btn_CostLiLiangClick
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &6830804177127185070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7562,39 +7091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_CostLiLiangPointDown
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_CostLiLiangPointUp
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Delegates: []
 --- !u!1 &7160500888997537378
 GameObject:
   m_ObjectHideFlags: 0
@@ -7881,7 +7378,7 @@ GameObject:
   - component: {fileID: 4855773781622137564}
   - component: {fileID: 8289411766654417923}
   m_Layer: 5
-  m_Name: Btn_Add
+  m_Name: E_Add_LiLiang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7989,19 +7486,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7900055756953826067}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-        m_MethodName: HandleEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Btn_AddLiLiangClick
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &8289411766654417923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8014,39 +7499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_AddLiLiangPointDown
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: ILMonoBehaviour, Unity.Model
-          m_MethodName: HandleEvent
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Btn_AddLiLiangPointUp
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Delegates: []
 --- !u!1 &7547540324046334848
 GameObject:
   m_ObjectHideFlags: 0
@@ -8279,7 +7732,7 @@ GameObject:
   - component: {fileID: 3546618242671702426}
   - component: {fileID: 7908745308344365897}
   m_Layer: 5
-  m_Name: Lab_Value
+  m_Name: E_Value_NaiLi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8531,7 +7984,7 @@ GameObject:
   - component: {fileID: 2975838297156868223}
   - component: {fileID: 8571331320561826626}
   m_Layer: 5
-  m_Name: RecommendAddPointBtn
+  m_Name: E_RecommendAddPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8551,7 +8004,7 @@ RectTransform:
   m_Children:
   - {fileID: 2121373712486450337}
   m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 18
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8703,7 +8156,7 @@ GameObject:
   - component: {fileID: 251350351946565675}
   - component: {fileID: 1867469996211808291}
   m_Layer: 5
-  m_Name: Lab_Value
+  m_Name: E_Value_MingJie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9102,7 +8555,7 @@ GameObject:
   - component: {fileID: 2173997423564424292}
   - component: {fileID: 8220541513096915921}
   m_Layer: 5
-  m_Name: Lab_Value
+  m_Name: E_Value_LiLiang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9261,82 +8714,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &8954723460693109430
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5732871014801795173}
-  - component: {fileID: 326211552968680158}
-  - component: {fileID: 7417283163393780234}
-  m_Layer: 5
-  m_Name: Image_1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &5732871014801795173
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8954723460693109430}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -46.4, y: -43.1}
-  m_SizeDelta: {x: 400, y: 500}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &326211552968680158
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8954723460693109430}
-  m_CullTransparentMesh: 1
---- !u!114 &7417283163393780234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8954723460693109430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.5882353}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &9012594038960937191
 GameObject:
   m_ObjectHideFlags: 0
@@ -9467,7 +8844,7 @@ RectTransform:
   - {fileID: 2719847964315753483}
   - {fileID: 3451379802560929811}
   m_Father: {fileID: 7159405012993932105}
-  m_RootOrder: 13
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

@@ -22,5 +22,9 @@ namespace ET.Client
         public Dictionary<int, Scroll_Item_RolePropertyTeShuItem> ScrollItemRolePropertyTeShuItems;
         public List<ShowPropertyList> ShowPropertyList_Base = new();
         public List<ShowPropertyList> ShowPropertyList_TeShu = new();
+        public List<int> PointList = new();
+        public List<int> PointInit = new();
+        public int PointRemain;
+        public bool IsHoldDown;
     }
 }

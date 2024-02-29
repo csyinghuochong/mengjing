@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -14,12 +15,53 @@ namespace ET.Client
         {
             self.View.E_RolePropertyBaseItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRolePropertyBaseItemsRefresh);
             self.View.E_RolePropertyTeShuItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRolePropertyTeShuItemsRefresh);
+            self.View.E_AddPointButton.AddListener(self.OnAddPointButton);
+
+            self.View.E_Add_LiLiangEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_AddNum(0).Coroutine(); });
+            self.View.E_Add_LiLiangEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(); });
+            self.View.E_Cost_LiLiangEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_CostNum(0).Coroutine(); });
+            self.View.E_Cost_LiLiangEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(); });
+
+            self.View.E_Add_ZhiLiEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_AddNum(1).Coroutine(); });
+            self.View.E_Add_ZhiLiEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(); });
+            self.View.E_Cost_ZhiLiEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_CostNum(1).Coroutine(); });
+            self.View.E_Cost_ZhiLiEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(); });
+
+            self.View.E_Add_TiZhiEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_AddNum(2).Coroutine(); });
+            self.View.E_Add_TiZhiEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(); });
+            self.View.E_Cost_TiZhiEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_CostNum(2).Coroutine(); });
+            self.View.E_Cost_TiZhiEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(); });
+
+            self.View.E_Add_NaiLiEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_AddNum(3).Coroutine(); });
+            self.View.E_Add_NaiLiEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(); });
+            self.View.E_Cost_NaiLiEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_CostNum(3).Coroutine(); });
+            self.View.E_Cost_NaiLiEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(); });
+
+            self.View.E_Add_MingJieEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_AddNum(4).Coroutine(); });
+            self.View.E_Add_MingJieEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(); });
+            self.View.E_Cost_MingJieEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_CostNum(4).Coroutine(); });
+            self.View.E_Cost_MingJieEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(); });
+
+            self.View.E_CloseAddPointButton.AddListener(self.OnCloseAddPointButton);
+            self.View.E_AddPointConfirmButton.AddListener(self.OnAddPointConfirmButton);
+            self.View.E_RecommendAddPointButton.AddListener(self.OnRecommendAddPointButton);
         }
 
         public static void ShowWindow(this DlgRoleProperty self, Entity contextData = null)
         {
+            self.View.EG_AttributeNodeRectTransform.gameObject.SetActive(true);
+            self.View.EG_RoleAddPointRectTransform.gameObject.SetActive(false);
             self.InitShowPropertyList();
             self.RefreshRoleProperty();
+        }
+
+        # region 人物属性
+
+        private static void OnAddPointButton(this DlgRoleProperty self)
+        {
+            self.View.EG_AttributeNodeRectTransform.gameObject.SetActive(false);
+            self.View.EG_RoleAddPointRectTransform.gameObject.SetActive(true);
+            self.InitAddProperty();
         }
 
         private static void OnRolePropertyBaseItemsRefresh(this DlgRoleProperty self, Transform transform, int index)
@@ -115,5 +157,129 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemRolePropertyTeShuItems, self.ShowPropertyList_TeShu.Count);
             self.View.E_RolePropertyTeShuItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPropertyList_TeShu.Count);
         }
+
+        #endregion
+
+        #region 角色加点
+
+        private static async ETTask PointerDown_AddNum(this DlgRoleProperty self, int addType)
+        {
+            self.IsHoldDown = true;
+            self.ChangeValue(addType, 1);
+            int interval = 0;
+            TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
+            while (self.IsHoldDown)
+            {
+                interval++;
+                if (interval > 60)
+                {
+                    self.ChangeValue(addType, 1);
+                }
+
+                await timerComponent.WaitFrameAsync();
+            }
+        }
+
+        private static async ETTask PointerDown_CostNum(this DlgRoleProperty self, int addType)
+        {
+            self.IsHoldDown = true;
+            self.ChangeValue(addType, -1);
+            int interval = 0;
+            TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
+            while (self.IsHoldDown)
+            {
+                interval++;
+                if (interval > 60)
+                {
+                    self.ChangeValue(addType, -1);
+                }
+
+                await timerComponent.WaitFrameAsync();
+            }
+        }
+
+        private static void PointerUp(this DlgRoleProperty self)
+        {
+            self.IsHoldDown = false;
+        }
+
+        private static void ChangeValue(this DlgRoleProperty self, int addType, int value)
+        {
+            if (self.PointRemain <= 0 && value > 0)
+            {
+                return;
+            }
+
+            if (self.PointList[addType] <= self.PointInit[addType] && value < 0)
+            {
+                return;
+            }
+
+            self.PointRemain += (value * -1);
+            self.PointList[addType] += value;
+            self.RefreshAddProperty();
+        }
+
+        private static void InitAddProperty(this DlgRoleProperty self)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            NumericComponentClient numericComponentClient = unit.GetComponent<NumericComponentClient>();
+
+            self.PointList.Clear();
+            self.PointList.Add(numericComponentClient.GetAsInt(NumericType.PointLiLiang));
+            self.PointList.Add(numericComponentClient.GetAsInt(NumericType.PointZhiLi));
+            self.PointList.Add(numericComponentClient.GetAsInt(NumericType.PointTiZhi));
+            self.PointList.Add(numericComponentClient.GetAsInt(NumericType.PointNaiLi));
+            self.PointList.Add(numericComponentClient.GetAsInt(NumericType.PointMinJie));
+
+            self.PointInit.Clear();
+            self.PointInit.AddRange(self.PointList);
+
+            self.PointRemain = numericComponentClient.GetAsInt(NumericType.PointRemain);
+
+            self.RefreshAddProperty();
+        }
+
+        private static void RefreshAddProperty(this DlgRoleProperty self)
+        {
+            UserInfoComponentClient userInfoComponentClient = self.Root().GetComponent<UserInfoComponentClient>();
+            int lv = userInfoComponentClient.UserInfo.Lv;
+
+            self.View.E_Value_LiLiangText.text = (self.PointList[0] + lv * 2).ToString();
+            self.View.E_Value_ZhiLiText.text = (self.PointList[1] + lv * 2).ToString();
+            self.View.E_Value_TiZhiText.text = (self.PointList[2] + lv * 2).ToString();
+            self.View.E_Value_NaiLiText.text = (self.PointList[3] + lv * 2).ToString();
+            self.View.E_Value_MingJieText.text = (self.PointList[4] + lv * 2).ToString();
+
+            self.View.E_ShengYuNumText.text = self.PointRemain.ToString();
+        }
+
+        private static void OnCloseAddPointButton(this DlgRoleProperty self)
+        {
+            self.View.EG_AttributeNodeRectTransform.gameObject.SetActive(true);
+            self.View.EG_RoleAddPointRectTransform.gameObject.SetActive(false);
+        }
+
+        private static void OnAddPointConfirmButton(this DlgRoleProperty self)
+        {
+            self.Root().GetComponent<FlyTipComponent>().SpawnFlyTipDi("确认加点");
+            // long instanceId = self.InstanceId;
+            // C2M_RoleAddPointRequest request = new C2M_RoleAddPointRequest() { PointList = self.PointList, };
+            // M2C_RoleAddPointResponse response =
+            //         (M2C_RoleAddPointResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(request);
+            // if (instanceId != self.InstanceId)
+            // {
+            //     return;
+            // }
+
+            self.InitAddProperty();
+        }
+
+        private static void OnRecommendAddPointButton(this DlgRoleProperty self)
+        {
+            self.Root().GetComponent<FlyTipComponent>().SpawnFlyTipDi("推荐加点");
+        }
+
+        #endregion
     }
 }
