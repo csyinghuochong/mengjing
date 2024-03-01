@@ -15,7 +15,12 @@ namespace  ET.Server
                 Occ = 1,
                 PlayerLevel = 1,
             });
-            
+            response.FriendList.Add(new FriendInfo()
+            {
+                PlayerName = "玩家2",
+                Occ = 1,
+                PlayerLevel = 1,
+            });
             await ETTask.CompletedTask;
         }
     }

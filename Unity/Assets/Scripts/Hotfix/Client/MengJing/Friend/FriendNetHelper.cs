@@ -11,6 +11,10 @@ namespace ET.Client
         {
             C2F_FriendInfoRequest request = new C2F_FriendInfoRequest();
             F2C_FriendInfoResponse response = (F2C_FriendInfoResponse) await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            FriendComponent friendComponent = root.GetComponent<FriendComponent>();
+            friendComponent.FriendList = response.FriendList;
+            
             return ErrorCode.ERR_Success;
         }
     }
