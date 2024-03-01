@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System;
+using MongoDB.Bson;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +15,7 @@ namespace ET.Client
         {
             self.View.E_BGButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips); });
             self.View.E_SellButton.AddListener(self.OnSellButton);
-            self.View.E_UseButton.AddListener(self.OnUseButton);
+            self.View.E_UseButton.AddListenerAsync(self.OnUseButton);
             self.View.E_SplitButton.AddListener(self.OnSplitButton);
             self.View.E_PlanButton.AddListener(self.OnPlanButton);
             self.View.E_StoreHouseButton.AddListener(self.OnStoreHouseButton);
@@ -298,11 +299,314 @@ namespace ET.Client
 
         private static void OnSellButton(this DlgItemTips self)
         {
+            BagClientHelper.RequestSellItem(self.Root(), self.BagInfo, self.BagInfo.ItemNum.ToString()).Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
         }
 
-        private static void OnUseButton(this DlgItemTips self)
+        private static async ETTask OnUseButton(this DlgItemTips self)
         {
+            //发送消息
+            //判断当前技能是否再CD状态
+            UserInfoComponentClient userInfoComponent = self.Root().GetComponent<UserInfoComponentClient>();
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
+            int errorCode = ErrorCode.ERR_Success;
+            string usrPar = "";
+
+            if (itemConfig.DayUseNum > 0 && userInfoComponent.GetDayItemUse(itemConfig.Id) >= itemConfig.DayUseNum)
+            {
+                ErrorViewHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_ItemNoUseTime);
+                return;
+            }
+
+            // 增幅卷轴
+            if (itemConfig.ItemSubType == 17)
+            {
+                self.Root().GetComponent<FlyTipComponent>().SpawnFlyTip("请前往家园装备增幅系统");
+                return;
+            }
+
+            //材料
+            if (itemConfig.ItemType == (int)ItemTypeEnum.Material)
+            {
+                return;
+            }
+
+            //镶嵌宝石
+            // if (itemConfig.ItemType == (int)ItemTypeEnum.Gemstone)
+            // {
+            //     UI uiRole = UIHelper.GetUI(self.ZoneScene(), UIType.UIRole);
+            //     if (uiRole == null)
+            //     {
+            //         return;
+            //     }
+            //
+            //     UIRoleComponent uIRoleComponent = uiRole.GetComponent<UIRoleComponent>();
+            //     if (uIRoleComponent.UIPageButton.CurrentIndex != (int)RolePageEnum.RoleGem)
+            //     {
+            //         uIRoleComponent.UIPageButton.OnSelectIndex((int)RolePageEnum.RoleGem);
+            //         return;
+            //     }
+            //
+            //     UIRoleGemComponent uIRoleGemComponent =
+            //             uIRoleComponent.UIPageView.UISubViewList[(int)RolePageEnum.RoleGem].GetComponent<UIRoleGemComponent>();
+            //     if (uIRoleGemComponent.XiangQianItem == null)
+            //     {
+            //         FloatTipManager.Instance.ShowFloatTip("请选择装备！");
+            //         return;
+            //     }
+            //
+            //     string gemHole = uIRoleGemComponent.XiangQianItem.GemHole;
+            //     if (uIRoleGemComponent.XiangQianIndex == -1)
+            //     {
+            //         FloatTipManager.Instance.ShowFloatTip("请选择孔位！");
+            //         return;
+            //     }
+            //
+            //     string[] gemHolelist = gemHole.Split('_');
+            //     if (gemHolelist.Length <= uIRoleGemComponent.XiangQianIndex)
+            //     {
+            //         FloatTipManager.Instance.ShowFloatTip("请选择孔位！");
+            //         return;
+            //     }
+            //
+            //     string itemgem = gemHolelist[uIRoleGemComponent.XiangQianIndex];
+            //     if (itemgem != itemConfig.ItemSubType.ToString() && itemConfig.ItemSubType != 110 && itemConfig.ItemSubType != 111)
+            //     {
+            //         FloatTipManager.Instance.ShowFloatTip("宝石与孔位不符！");
+            //         return;
+            //     }
+            //
+            //     string[] getIdNew = uIRoleGemComponent.XiangQianItem.GemIDNew.Split('_');
+            //     usrPar = $"{uIRoleGemComponent.XiangQianItem.BagInfoID}_{uIRoleGemComponent.XiangQianIndex}";
+            //     if (getIdNew[uIRoleGemComponent.XiangQianIndex] != "0")
+            //     {
+            //         PopupTipHelp.OpenPopupTip(self.ZoneScene(), "镶嵌宝石", "是否需要覆盖宝石?\n覆盖后原有位置得宝石会自动销毁哦!", () => { self.RequestXiangQianGem(usrPar); })
+            //                 .Coroutine();
+            //     }
+            //     else
+            //     {
+            //         self.RequestXiangQianGem(usrPar);
+            //     }
+            //
+            //     return;
+            // }
+
+            // if (itemConfig.ItemType == (int)ItemTypeEnum.PetHeXin)
+            // {
+            //     UI uI = UIHelper.GetUI(self.ZoneScene(), UIType.UIPet);
+            //     errorCode = await uI.GetComponent<UIPetComponent>().RequestPetHeXinSelect();
+            //     //注销Tips
+            //     if (errorCode == ErrorCode.ERR_Success)
+            //     {
+            //         self.OnCloseTips();
+            //     }
+            //
+            //     return;
+            // }
+
+            // if (itemConfig.ItemSubType == 4 || itemConfig.ItemSubType == 14)
+            // {
+            //     if (self.ZoneScene().GetComponent<MapComponent>().SceneTypeEnum != (int)SceneTypeEnum.LocalDungeon)
+            //     {
+            //         FloatTipManager.Instance.ShowFloatTip("副本中才能使用!");
+            //         return;
+            //     }
+            // }
+
+            // if (itemConfig.ItemSubType == 5)
+            // {
+            //     UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UITuZhiMake);
+            //     uI.GetComponent<UITuZhiMakeComponent>().OnInitUI(self.BagInfo).Coroutine();
+            //     self.OnCloseTips();
+            //     return;
+            // }
+
+            // if (itemConfig.ItemSubType == 15) //附魔
+            // {
+            //     self.OnItemFumoUse(itemConfig).Coroutine();
+            //     return;
+            // }
+
+            // if (itemConfig.ItemSubType == 16) //锻造精灵
+            // {
+            //     int makeNew = int.Parse(itemConfig.ItemUsePar);
+            //     EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(makeNew);
+            //
+            //     Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
+            //     int makeType_1 = unit.GetComponent<NumericComponent>().GetAsInt(NumericType.MakeType_1);
+            //     int makeType_2 = unit.GetComponent<NumericComponent>().GetAsInt(NumericType.MakeType_2);
+            //     if (makeType_1 != equipMakeConfig.ProficiencyType && makeType_2 != equipMakeConfig.ProficiencyType)
+            //     {
+            //         ErrorHelp.Instance.ErrorHint(ErrorCode.ERR_MakeTypeError);
+            //         return;
+            //     }
+            //
+            //     if (self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo.MakeList.Contains(makeNew))
+            //     {
+            //         FloatTipManager.Instance.ShowFloatTip("已经学习过该技能！");
+            //         return;
+            //     }
+            // }
+
+            // if (itemConfig.ItemSubType == 101)
+            // {
+            //     Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
+            //     unit.GetComponent<SkillManagerComponent>().SendUseSkill(int.Parse(itemConfig.ItemUsePar), itemConfig.Id,
+            //         Mathf.FloorToInt(unit.Rotation.eulerAngles.y), 0, 0).Coroutine();
+            //     self.OnCloseTips();
+            //     return;
+            // }
+
+            // if (itemConfig.ItemSubType == 102)
+            // {
+            //     FloatTipManager.Instance.ShowFloatTip("请前往主城的宠物蛋孵化处!");
+            //     return;
+            // }
+
+            // if (itemConfig.ItemSubType == 112)
+            // {
+            //     AccountInfoComponent accountInfoComponent = self.ZoneScene().GetComponent<AccountInfoComponent>();
+            //     long openserverTime = ServerHelper.GetOpenServerTime(!GlobalHelp.IsOutNetMode, accountInfoComponent.ServerId);
+            //     if (TimeHelper.ServerNow() - openserverTime < TimeHelper.Hour * 4)
+            //     {
+            //         FloatTipManager.Instance.ShowFloatTip("开区4小时后开启!");
+            //         return;
+            //     }
+            //
+            //     UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIItemExpBox);
+            //     uI.GetComponent<UIItemExpBoxComponent>().OnInitUI(self.BagInfo);
+            //     self.OnCloseTips();
+            //     return;
+            // }
+            //
+            // // 弹出道具批量使用
+            // if (self.BagInfo.ItemNum >= 2 && ConfigHelper.BatchUseItemList.Contains(itemConfig.Id))
+            // {
+            //     UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIItemBatchUse);
+            //     uI.GetComponent<UIItemBatchUseComponent>().OnInitUI(self.BagInfo);
+            //     self.OnCloseTips();
+            //     return;
+            // }
+            //
+            // if (itemConfig.ItemSubType == 113 || itemConfig.ItemSubType == 127)
+            // {
+            //     if (self.BagComponent.GetBagLeftCell() < 1)
+            //     {
+            //         FloatTipManager.Instance.ShowFloatTip("背包格子不够！");
+            //         return;
+            //     }
+            //
+            //     int curSceneId = 0;
+            //     int needSceneId = int.Parse(self.BagInfo.ItemPar.Split('@')[0]);
+            //     MapComponent mapComponent = self.ZoneScene().GetComponent<MapComponent>();
+            //     if (mapComponent.SceneTypeEnum == (int)SceneTypeEnum.LocalDungeon)
+            //     {
+            //         curSceneId = mapComponent.SceneId;
+            //     }
+            //
+            //     if (curSceneId != needSceneId)
+            //     {
+            //         string fubenName = DungeonConfigCategory.Instance.Get(needSceneId).ChapterName;
+            //         FloatTipManager.Instance.ShowFloatTip($"请前往{fubenName}");
+            //         return;
+            //     }
+            //     else
+            //     {
+            //         // $"{dungeonid}@{"TaskMove_6"}@{dropId}";
+            //         Scene zoneScene = self.ZoneScene();
+            //         EventType.DigForTreasure.Instance.BagInfo = self.BagInfo;
+            //         EventType.DigForTreasure.Instance.ZoneScene = self.ZoneScene();
+            //         Game.EventSystem.PublishClass(EventType.DigForTreasure.Instance);
+            //         UIHelper.Remove(zoneScene, UIType.UIRole);
+            //         self.OnCloseTips();
+            //         FloatTipManager.Instance.ShowFloatTip($"消耗道具:{itemConfig.ItemName}");
+            //         return;
+            //     }
+            // }
+            //
+            // if (itemConfig.ItemSubType == 108
+            //     || itemConfig.ItemSubType == 109
+            //     || itemConfig.ItemSubType == 117
+            //     || itemConfig.ItemSubType == 118
+            //     || itemConfig.ItemSubType == 119
+            //     || itemConfig.ItemSubType == 122)
+            // {
+            //     PetComponent petComponent = self.ZoneScene().GetComponent<PetComponent>();
+            //     RolePetInfo petInfo = petComponent.GetFightPet();
+            //     if ((itemConfig.ItemSubType == 108
+            //             || itemConfig.ItemSubType == 109) && petInfo != null)
+            //     {
+            //         petComponent.RequestXiLian(self.BagInfo.BagInfoID, petInfo.Id).Coroutine();
+            //         self.OnCloseTips();
+            //         return;
+            //     }
+            //
+            //     FloatTipManager.Instance.ShowFloatTip("请前往宠物重塑界面使用！");
+            //     return;
+            // }
+            //
+            // if (itemConfig.ItemSubType == 132)
+            // {
+            //     FloatTipManager.Instance.ShowFloatTip("请前往赛季界面使用");
+            //     return;
+            // }
+            //
+            // if (itemConfig.ItemSubType == 137)
+            // {
+            //     UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIPetEggFuLing);
+            //     ui.GetComponent<UIPetEggFuLingComponent>().UpdateItemList(self.BagInfo).Coroutine();
+            //     UIHelper.PlayUIMusic("10010");
+            //     self.OnCloseTips();
+            //     return;
+            // }
+            //
+            // if (itemConfig.ItemSubType == 139)
+            // {
+            //     if (self.ZoneScene().GetComponent<BagComponent>().AdditionalCellNum[0] >= 10)
+            //     {
+            //         FloatTipManager.Instance.ShowFloatTipDi(GameSettingLanguge.LoadLocalization("已达到最大购买格子数量!"));
+            //         return;
+            //     }
+            // }
+            //
+            // if (itemConfig.ItemSubType == 140)
+            // {
+            //     if (self.ZoneScene().GetComponent<BagComponent>().AdditionalCellNum[5] >= 10)
+            //     {
+            //         FloatTipManager.Instance.ShowFloatTipDi(GameSettingLanguge.LoadLocalization("已达到最大购买格子数量!"));
+            //         return;
+            //     }
+            // }
+            //
+            // long instanceid = self.InstanceId;
+            errorCode = await BagClientHelper.RequestUseItem(self.Root(), self.BagInfo, usrPar);
+
+            // if (errorCode == ErrorCode.ERR_Success)
+            // {
+            //     FloatTipManager.Instance.ShowFloatTipDi(GameSettingLanguge.LoadLocalization("道具使用成功!"));
+            // }
+            //
+            // if (errorCode == ErrorCode.ERR_ItemOnlyUseOcc)
+            // {
+            //     OccupationConfig occupationConfig = OccupationConfigCategory.Instance.Get(itemConfig.UseOcc);
+            //     string tip = string.Format(ErrorHelp.Instance.GetHint(ErrorCode.ERR_ItemOnlyUseOcc), occupationConfig.OccupationName);
+            //     FloatTipManager.Instance.ShowFloatTipDi(GameSettingLanguge.LoadLocalization(tip));
+            // }
+            //
+            // //播放音效
+            // UIHelper.PlayUIMusic("10010");
+            //
+            // if (instanceid == self.InstanceId)
+            // {
+            //     if (itemConfig.ItemSubType == 110)
+            //     {
+            //         UIHelper.Remove(self.ZoneScene(), UIType.UIRole);
+            //     }
+            //
+            //     //注销Tips
+            //     self.OnCloseTips();
+            // }
+
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
         }
 

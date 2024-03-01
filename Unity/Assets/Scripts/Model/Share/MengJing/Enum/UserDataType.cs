@@ -4,44 +4,44 @@ namespace ET
     public static class UserDataType
     {
         public const int None = 0;
-        public const int Gold = 1;                 //½ğ±Ò
-        public const int Exp = 2;               //¾­ÑéÖµ
-        public const int Diamond = 3;                //×êÊ¯  
-        public const int Vitality = 4;               //»îÁ¦
-        public const int PiLao = 5;                  //Æ£ÀÍ  
-        public const int RongYu = 6;             //ÈÙÓş
-        public const int FangRong = 7;           //·±ÈÙ¶È
-        public const int MaoXianExp = 8;         //Ã°ÏÕ¼Ò¾­Ñé
-        public const int DungeonTimes = 9;       //Ã¿ÈÕ¸±±¾´ÎÊı
-        public const int Recharge = 10;          //³äÖµ
-        public const int HuoYue = 11;                 //»îÔ¾
-        public const int Sp = 12;                     //sp[¼¼ÄÜµã]
-        public const int JiaYuanFund = 13;           //¼ÒÔ°×Ê½ğ
-        public const int JiaYuanExp = 14;            //¼ÒÔ°¾­Ñé
+        public const int Gold = 1;                 //é‡‘å¸
+        public const int Exp = 2;               //ç»éªŒå€¼
+        public const int Diamond = 3;                //é’»çŸ³  
+        public const int Vitality = 4;               //æ´»åŠ›
+        public const int PiLao = 5;                  //ç–²åŠ³  
+        public const int RongYu = 6;             //è£èª‰
+        public const int FangRong = 7;           //ç¹è£åº¦
+        public const int MaoXianExp = 8;         //å†’é™©å®¶ç»éªŒ
+        public const int DungeonTimes = 9;       //æ¯æ—¥å‰¯æœ¬æ¬¡æ•°
+        public const int Recharge = 10;          //å……å€¼
+        public const int HuoYue = 11;                 //æ´»è·ƒ
+        public const int Sp = 12;                     //sp[æŠ€èƒ½ç‚¹]
+        public const int JiaYuanFund = 13;           //å®¶å›­èµ„é‡‘
+        public const int JiaYuanExp = 14;            //å®¶å›­ç»éªŒ
         public const int BaoShiDu = 15;
-        public const int UnionContri = 16;            //¼Ò×å¹±Ï×
-        public const int UnionExp = 17;              //¼Ò×å¾­Ñé
+        public const int UnionContri = 16;            //å®¶æ—è´¡çŒ®
+        public const int UnionExp = 17;              //å®¶æ—ç»éªŒ
         public const int JueXingExp = 18;
 
-        public const int Lv = 19;                     //µÈ¼¶       
-        public const int JiaYuanLv = 20;              //¼ÒÔ°µÈ¼¶
-        public const int Combat = 21;                 //zhanliÕ½Á¦  
-        public const int Occ = 22;                    //Ö°Òµ
-        public const int Name = 23;                   //Ãû³Æ
-        public const int StallName = 24;              //Ì¯Î»Ãû×Ö
-        public const int PetStatus = 25;              //³èÎï³öÕ¾×´Ì¬
+        public const int Lv = 19;                     //ç­‰çº§       
+        public const int JiaYuanLv = 20;              //å®¶å›­ç­‰çº§
+        public const int Combat = 21;                 //zhanliæˆ˜åŠ›  
+        public const int Occ = 22;                    //èŒä¸š
+        public const int Name = 23;                   //åç§°
+        public const int StallName = 24;              //æ‘Šä½åå­—
+        public const int PetStatus = 25;              //å® ç‰©å‡ºç«™çŠ¶æ€
         public const int UnionName = 26;
         public const int DemonName = 27;
         public const int Message = 28;
         public const int PullBack = 29;
         public const int BuffSkill = 30;
 
-        public const int SeasonExp = 31;                        //Èü¼¾¾­Ñé
-        public const int SeasonCoin = 32;                       //Èü¼¾±Ò
+        public const int SeasonExp = 31;                        //èµ›å­£ç»éªŒ
+        public const int SeasonCoin = 32;                       //èµ›å­£å¸
         public const int SeasonLevel = 33;
 
-        public const int InvestMent = 34;                       //Í¶×Ê×Ê½ğ
-        public const int UnionGold = 35;                        //¼Ò×å½ğ±Ò
+        public const int InvestMent = 34;                       //æŠ•èµ„èµ„é‡‘
+        public const int UnionGold = 35;                        //å®¶æ—é‡‘å¸
         public const int FirstUnionName = 36;                  //
 
         public const int Max = 100;

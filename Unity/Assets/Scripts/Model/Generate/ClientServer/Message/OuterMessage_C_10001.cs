@@ -2549,15 +2549,6 @@ namespace ET
 			return ObjectPool.Instance.Fetch(typeof(M2C_RoleDataUpdate), isFromPool) as M2C_RoleDataUpdate; 
 		}
 
-		[MemoryPackOrder(89)]
-		public int RpcId { get; set; }
-
-		[MemoryPackOrder(90)]
-		public int Error { get; set; }
-
-		[MemoryPackOrder(91)]
-		public string Message { get; set; }
-
 		[MemoryPackOrder(0)]
 		public int UpdateType { get; set; }
 
@@ -2570,9 +2561,6 @@ namespace ET
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.Error = default;
-			this.Message = default;
 			this.UpdateType = default;
 			this.UpdateTypeValue = default;
 			this.UpdateValueLong = default;

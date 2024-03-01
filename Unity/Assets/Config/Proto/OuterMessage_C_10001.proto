@@ -674,9 +674,6 @@ message UserInfo
 
 message M2C_RoleDataUpdate // IMessage
 {
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
 	int32 UpdateType = 1;				//UserDataType
 	string UpdateTypeValue = 2;			
 	int64 UpdateValueLong = 3;			

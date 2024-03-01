@@ -927,7 +927,7 @@ namespace ET.Server
            }
 
            int leftNum = rewardItems[i].ItemNum;
-           int userDataType = 0;// ItemHelper.GetItemToUserDataType(itemID);
+           int userDataType = ItemHelper.GetItemToUserDataType(itemID);
            if (userDataType == UserDataType.Gold && rewardItems[i].ItemNum > 1000000)
            {
                Log.Warning($"[获取金币]UserDataType.Gold  {unit.Id} {getType} {unit.GetComponent<UserInfoComponentServer>().UserName} {rewardItems[i].ItemNum}");
@@ -943,8 +943,8 @@ namespace ET.Server
            if (userDataType != UserDataType.None)
            {
                //检测任务需求道具
-               //unit.GetComponent<UserInfoComponentServer>().UpdateRoleMoneyAdd(userDataType, leftNum.ToString(), true, getType);
-               //ItemAddHelper.OnGetItem(unit, getType, itemID, leftNum);
+               unit.GetComponent<UserInfoComponentServer>().UpdateRoleMoneyAdd(userDataType, leftNum.ToString(), true, getType);
+               // ItemAddHelper.OnGetItem(unit, getType, itemID, leftNum);
                continue;
            }
 
