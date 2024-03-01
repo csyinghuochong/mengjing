@@ -14,7 +14,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgItemTips self)
         {
             self.View.E_BGButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips); });
-            self.View.E_SellButton.AddListener(self.OnSellButton);
+            self.View.E_SellButton.AddListenerAsync(self.OnSellButton);
             self.View.E_UseButton.AddListenerAsync(self.OnUseButton);
             self.View.E_SplitButton.AddListener(self.OnSplitButton);
             self.View.E_PlanButton.AddListener(self.OnPlanButton);
@@ -261,7 +261,7 @@ namespace ET.Client
 
         private static void OnSellButton(this DlgItemTips self)
         {
-            BagClientNetHelper.RequestSellItem(self.Root(), self.BagInfo, self.BagInfo.ItemNum.ToString()).Coroutine();
+            BagClientHelper.RequestSellItem(self.Root(), self.BagInfo, self.BagInfo.ItemNum.ToString()).Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
         }
 
@@ -541,7 +541,7 @@ namespace ET.Client
             // }
             //
             // long instanceid = self.InstanceId;
-            errorCode = await BagClientNetHelper.RequestUseItem(self.Root(), self.BagInfo, usrPar);
+            errorCode = await BagClientHelper.RequestUseItem(self.Root(), self.BagInfo, usrPar);
 
             // if (errorCode == ErrorCode.ERR_Success)
             // {
