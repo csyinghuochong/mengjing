@@ -5476,6 +5476,48 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.FriendInfo)]
+	[MemoryPackable]
+	public partial class FriendInfo: MessageObject
+	{
+		public static FriendInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(FriendInfo), isFromPool) as FriendInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long UserId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int PlayerLevel { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long OnLineTime { get; set; }
+
+		[MemoryPackOrder(4)]
+		public List<string> ChatMsgList { get; set; } = new();
+
+		[MemoryPackOrder(5)]
+		public int Occ { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UserId = default;
+			this.PlayerLevel = default;
+			this.PlayerName = default;
+			this.OnLineTime = default;
+			this.ChatMsgList.Clear();
+			this.Occ = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -5627,5 +5669,6 @@ namespace ET
 		 public const ushort M2C_UnitNumericListUpdate = 10148;
 		 public const ushort C2M_UserInfoInitRequest = 10149;
 		 public const ushort M2C_UserInfoInitResponse = 10150;
+		 public const ushort FriendInfo = 10151;
 	}
 }

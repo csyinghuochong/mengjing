@@ -1414,3 +1414,14 @@ message M2C_UserInfoInitResponse  // ILocationResponse
 	int32 Error = 92;
 	UserInfo UserInfo = 1;
 }
+
+message FriendInfo
+{
+	int64 UserId = 1;
+	int32 PlayerLevel = 2;
+	string PlayerName = 3;
+	int64 OnLineTime = 4;
+	repeated string ChatMsgList = 5;	//离线聊天
+	int32 Occ = 6;
+}
+
