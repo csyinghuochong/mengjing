@@ -92,7 +92,7 @@ namespace ET.Client
                 flyTipComponent.SpawnFlyTipDi("锁定道具不能出售!");
             }
 
-            int errorCode = await BagClientHelper.RequestSellItem(self.Root(), self.BagInfo, self.Num.ToString());
+            int errorCode = await BagClientNetHelper.RequestSellItem(self.Root(), self.BagInfo, self.Num.ToString());
             if (errorCode == ErrorCode.ERR_Success)
             {
                 flyTipComponent.SpawnFlyTipDi("出售完成!");
