@@ -72,6 +72,9 @@ namespace  ET.Client
         public void DestroyWidget()
         {
             this.uiTransform = null;
+            this.m_DlgFriendBlack = null;
+            this.m_DlgFriendList = null;
+            this.m_E_FunctionSetBtnToggleGroup = null;
         }
         
         

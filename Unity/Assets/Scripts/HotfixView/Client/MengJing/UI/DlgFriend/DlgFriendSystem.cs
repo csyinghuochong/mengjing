@@ -14,8 +14,6 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgFriend self, Entity contextData = null)
         {
-           
-            
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
             uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
             uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
