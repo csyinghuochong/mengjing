@@ -39,18 +39,18 @@ namespace ET.Client
         public static void RefreshInfo(this DlgItemTips self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum)
         {
             self.BagInfo = bagInfo;
-            ItemConfig itemconf = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
-            int itemType = itemconf.ItemType;
-            int itemSubType = itemconf.ItemSubType;
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+            int itemType = itemConfig.ItemType;
+            int itemSubType = itemConfig.ItemSubType;
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
 
-            string qualityiconLine = FunctionUI.ItemQualityLine(itemconf.ItemQuality);
+            string qualityiconLine = FunctionUI.ItemQualityLine(itemConfig.ItemQuality);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconLine);
             Sprite sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(path);
             self.View.E_QualityLineImage.sprite = sprite;
 
-            string qualityiconBack = FunctionUI.ItemQualityBack(itemconf.ItemQuality);
+            string qualityiconBack = FunctionUI.ItemQualityBack(itemConfig.ItemQuality);
             path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconBack);
             sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(path);
             self.View.E_QulityBgImage.sprite = sprite;
@@ -64,22 +64,6 @@ namespace ET.Client
             }
 
             self.View.E_ItemTypeText.text = "类型:" + itemTypename;
-
-            string Text_ItemDes = itemconf.ItemDes;
-            //获取道具描述的分隔符
-            string[] itemDesArray = Text_ItemDes.Split(';');
-            string itemMiaoShu = "";
-            for (int i = 0; i <= itemDesArray.Length - 1; i++)
-            {
-                if (itemMiaoShu == "")
-                {
-                    itemMiaoShu = itemDesArray[i];
-                }
-                else
-                {
-                    itemMiaoShu = itemMiaoShu + "\n" + itemDesArray[i];
-                }
-            }
 
             //显示是否绑定
             if (bagInfo.isBinging)
@@ -95,6 +79,22 @@ namespace ET.Client
                 self.View.E_BangDingText.gameObject.SetActive(false);
             }
 
+            string Text_ItemDes = itemConfig.ItemDes;
+            //获取道具描述的分隔符
+            string[] itemDesArray = Text_ItemDes.Split(';');
+            string itemMiaoShu = "";
+            for (int i = 0; i <= itemDesArray.Length - 1; i++)
+            {
+                if (itemMiaoShu == "")
+                {
+                    itemMiaoShu = itemDesArray[i];
+                }
+                else
+                {
+                    itemMiaoShu = itemMiaoShu + "\n" + itemDesArray[i];
+                }
+            }
+
             // 数组大于2表示有换行符,否则显示原来的描述
             if (itemDesArray.Length >= 2)
             {
@@ -106,15 +106,15 @@ namespace ET.Client
             Text_ItemDes = ItemViewHelp.GetItemDesc(bagInfo, ref i1);
 
             // 道具Icon
-            string ItemIcon = itemconf.Icon;
+            string ItemIcon = itemConfig.Icon;
             sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, ItemIcon));
             self.View.E_ItemIconImage.sprite = sprite;
-            string ItemQuality = FunctionUI.ItemQualiytoPath(itemconf.ItemQuality);
+            string ItemQuality = FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality);
             sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ItemQuality));
             self.View.E_ItemQualityImage.sprite = sprite;
 
             // 显示按钮
-            self.View.E_UseButton.GetComponentInChildren<Text>().text = itemconf.ItemSubType == 114? "镶嵌" : "使用";
+            self.View.E_UseButton.GetComponentInChildren<Text>().text = itemConfig.ItemSubType == 114? "镶嵌" : "使用";
             self.View.EG_BagOpenSetRectTransform.gameObject.SetActive(false);
             self.View.E_HuiShouButton.gameObject.SetActive(false);
             self.View.E_HuiShouCancleButton.gameObject.SetActive(false);
@@ -125,6 +125,7 @@ namespace ET.Client
             self.View.E_FuLingDesText.gameObject.SetActive(false);
             self.View.E_SellButton.gameObject.SetActive(false);
             self.View.E_StoreHouseButton.gameObject.SetActive(false);
+            self.View.E_PutBagButton.gameObject.SetActive(false);
             switch (itemOperateEnum)
             {
                 // 不显示任何按钮
@@ -241,8 +242,8 @@ namespace ET.Client
             //设置底的长度
             //self.ItemDi.GetComponent<RectTransform>().sizeDelta = new Vector2(301.0f, 180.0f + i1 * 20.0f + i2 * 16.0f + ItemBottomTextNum);
             //显示道具信息
-            self.View.E_ItemNameText.text = itemconf.ItemName;
-            self.View.E_ItemNameText.color = FunctionUI.QualityReturnColor(itemconf.ItemQuality);
+            self.View.E_ItemNameText.text = itemConfig.ItemName;
+            self.View.E_ItemNameText.color = FunctionUI.QualityReturnColor(itemConfig.ItemQuality);
             self.View.E_ItemDesText.text = Text_ItemDes;
             //赞助宝箱设置描述为绿色
             //if (itemSubType == 9)
@@ -257,7 +258,7 @@ namespace ET.Client
             }
 
             //鉴定品质符
-            if (itemconf.ItemSubType == 121)
+            if (itemConfig.ItemSubType == 121)
             {
                 self.View.E_ItemDesText.GetComponent<Text>().text = Text_ItemDes + "\n" + "\n" + $"鉴定符品质:{bagInfo.ItemPar}" + "\n" +
                         "品质越高,鉴定出极品的概率越高。" + "\n" +
@@ -265,31 +266,31 @@ namespace ET.Client
             }
 
             //鉴定品质符
-            if (itemconf.ItemType == 1 && itemconf.ItemSubType == 131)
+            if (itemConfig.ItemType == 1 && itemConfig.ItemSubType == 131)
             {
-                string[] addList = itemconf.ItemUsePar.Split(';')[0].Split(',');
+                string[] addList = itemConfig.ItemUsePar.Split(';')[0].Split(',');
                 self.View.E_ItemDesText.GetComponent<Text>().text = Text_ItemDes + "\n" + "\n" + "烹饪品质:" + bagInfo.ItemPar;
             }
 
             //宠物技能
-            if (itemconf.ItemType == 2 && itemconf.ItemSubType == 122)
+            if (itemConfig.ItemType == 2 && itemConfig.ItemSubType == 122)
             {
-                SkillConfig skillCof = SkillConfigCategory.Instance.Get(int.Parse(itemconf.ItemUsePar));
+                SkillConfig skillCof = SkillConfigCategory.Instance.Get(int.Parse(itemConfig.ItemUsePar));
                 self.View.E_ItemDesText.GetComponent<Text>().text = Text_ItemDes + "\n" + "\n" + $"技能描述:{skillCof.SkillDescribe}";
             }
 
             //藏宝图
-            if (itemconf.ItemSubType == 127 && !string.IsNullOrEmpty(self.BagInfo.ItemPar))
+            if (itemConfig.ItemSubType == 127 && !string.IsNullOrEmpty(self.BagInfo.ItemPar))
             {
                 int sceneID = int.Parse(self.BagInfo.ItemPar.Split('@')[0]);
                 self.View.E_ItemDesText.GetComponent<Text>().text =
-                        $"{itemconf.ItemDes}\n前往地图:{DungeonConfigCategory.Instance.Get(sceneID).ChapterName}开启藏宝图!";
+                        $"{itemConfig.ItemDes}\n前往地图:{DungeonConfigCategory.Instance.Get(sceneID).ChapterName}开启藏宝图!";
             }
 
             string langStr = GameSettingLanguge.LoadLocalization("使用等级");
-            if (itemconf.UseLv > 0)
+            if (itemConfig.UseLv > 0)
             {
-                self.View.E_ItemLvText.text = langStr + ":" + itemconf.UseLv;
+                self.View.E_ItemLvText.text = langStr + ":" + itemConfig.UseLv;
             }
             else
             {
