@@ -157,7 +157,7 @@ namespace ET.Client
 
         private static void OnFriendButton(this DlgMain self)
         {
-            Log.Debug("打开社交界面！！！");
+            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Friend);
         }
 
         private static void OnChengJiuButton(this DlgMain self)

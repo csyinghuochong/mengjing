@@ -1,0 +1,11 @@
+using System.Collections.Generic;
+
+namespace ET.Client
+{
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgFriend :Entity,IAwake,IUILogic
+    {
+        public DlgFriendViewComponent View { get => this.GetComponent<DlgFriendViewComponent>();}
+
+    }
+}
