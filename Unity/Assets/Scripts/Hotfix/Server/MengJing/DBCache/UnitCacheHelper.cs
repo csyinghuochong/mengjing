@@ -8,8 +8,6 @@ namespace ET.Server
     public static class UnitCacheHelper
     {
 
-        public const string UserInfoComponent = "UserInfoComponent";
-
         /// <summary>
         /// 保存或者更新玩家缓存
         /// </summary>
@@ -81,6 +79,33 @@ namespace ET.Server
                 return queryUnit.EntityList[0] as T;
             }
             return null;
+        }
+        
+        /// 获取玩家组件缓存
+        /// </summary>
+        /// <param name="unitId"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static async ETTask<T> GetComponentCache<T>(Scene root,  long unitId) where T : Entity
+        {
+            ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(root.Zone());
+            UnitCache2Other_GetComponent d2GGetUnit = (UnitCache2Other_GetComponent)await root.GetComponent<MessageSender>().Call(dbCacheId,
+                new Other2UnitCache_GetComponent() 
+                { 
+                    UnitId = unitId,
+                    Component = typeof(T).FullName
+                });
+
+            if (d2GGetUnit.Error == ErrorCode.ERR_Success && d2GGetUnit.Component != null)
+            {
+                return d2GGetUnit.Component as T;
+            }
+            return null;
+        }
+        
+        public static async ETTask SaveComponent(int zone, long unitId, Entity entity)
+        {
+            await ETTask.CompletedTask;
         }
 
         /// <summary>
@@ -191,28 +216,6 @@ namespace ET.Server
         public static ActorId GetMailServerId(int zone)
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.EMail.ToString()).ActorId;
-        }
-        
-        /// 获取玩家组件缓存
-        /// </summary>
-        /// <param name="unitId"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static async ETTask<T> GetComponentCache<T>(Scene root,  long unitId) where T : Entity
-        {
-            ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(root.Zone());
-            UnitCache2Other_GetComponent d2GGetUnit = (UnitCache2Other_GetComponent)await root.GetComponent<MessageSender>().Call(dbCacheId,
-                new Other2UnitCache_GetComponent() 
-                { 
-                    UnitId = unitId,
-                    Component = typeof(T).FullName
-                });
-
-            if (d2GGetUnit.Error == ErrorCode.ERR_Success && d2GGetUnit.Component != null)
-            {
-                return d2GGetUnit.Component as T;
-            }
-            return null;
         }
     }
 }

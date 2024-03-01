@@ -292,5 +292,50 @@ namespace ET.Server
                 MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_RoleDataUpdate1);
             }
         }
+        
+        public static int GetDayItemUse(this UserInfoComponentServer self, int mysteryId)
+        {
+            for (int i = 0; i < self.UserInfo.DayItemUse.Count; i++)
+            {
+                if (self.UserInfo.DayItemUse[i].KeyId == mysteryId)
+                {
+                    return (int)self.UserInfo.DayItemUse[i].Value;
+                }
+            }
+            return 0;
+        }
+        
+        public static void OnCleanBossCD(this UserInfoComponentServer self)
+        {
+            for (int i = 0; i < self.UserInfo.MonsterRevives.Count; i++)
+            {
+                self.UserInfo.MonsterRevives[i].Value = "0";
+            }
+        }
+        
+        public static void OnHorseActive(this UserInfoComponentServer self, int horseId, bool active)
+        {
+            if (active && !self.UserInfo.HorseIds.Contains(horseId))
+            {
+                self.UserInfo.HorseIds.Add(horseId);
+            }
+            if (!active && self.UserInfo.HorseIds.Contains(horseId))
+            {
+                self.UserInfo.HorseIds.Remove(horseId);
+            }
+        }
+        
+        public static void OnDayItemUse(this UserInfoComponentServer self, int itemId)
+        {
+            for (int i = 0; i < self.UserInfo.DayItemUse.Count; i++)
+            {
+                if (self.UserInfo.DayItemUse[i].KeyId == itemId)
+                {
+                    self.UserInfo.DayItemUse[i].Value += 1;
+                    return;
+                }
+            }
+            self.UserInfo.DayItemUse.Add(new KeyValuePairInt() { KeyId = itemId, Value = 1 });
+        }
     }
 }
