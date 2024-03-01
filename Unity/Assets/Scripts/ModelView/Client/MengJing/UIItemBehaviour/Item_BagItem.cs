@@ -4,8 +4,10 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_BagItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_BagItem : Entity,IAwake,IDestroy,IUIScrollItem
 	{
+		public BagInfo BagInfo;
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)

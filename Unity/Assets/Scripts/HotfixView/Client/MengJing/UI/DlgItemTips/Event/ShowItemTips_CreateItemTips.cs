@@ -76,17 +76,17 @@ namespace ET.Client
             }
             else
             {
-                UIComponent uiComponent = args.Scene.GetComponent<UIComponent>();
+                UIComponent uiComponent = root.GetComponent<UIComponent>();
                 await uiComponent.ShowWindowAsync(WindowID.WindowID_ItemTips);
-                uiComponent.GetDlgLogic<DlgItemTips>().SetPosition(ReturnX(args, itemWidth));
+                uiComponent.GetDlgLogic<DlgItemTips>().SetPosition(ReturnX(root, args, itemWidth));
                 uiComponent.GetDlgLogic<DlgItemTips>().RefreshInfo(args.BagInfo, args.ItemOperateEnum);
             }
         }
 
-        private Vector2 ReturnX(ShowItemTips args, float weight)
+        private Vector2 ReturnX(Scene root, ShowItemTips args, float weight)
         {
             Vector2 vectorPoint;
-            GlobalComponent globalComponent = args.Scene.GetComponent<GlobalComponent>();
+            GlobalComponent globalComponent = root.GetComponent<GlobalComponent>();
             RectTransform canvas = globalComponent.NormalRoot.GetComponent<RectTransform>();
             Camera uiCamera = globalComponent.UICamera.GetComponent<Camera>();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, new Vector2(x: args.InputPoint.x, y: args.InputPoint.y), uiCamera,

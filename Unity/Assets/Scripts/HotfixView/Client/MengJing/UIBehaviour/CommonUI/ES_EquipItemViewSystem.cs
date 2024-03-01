@@ -76,7 +76,6 @@ namespace ET.Client
             EventSystem.Instance.Publish(self.Root(),
                 new ShowItemTips()
                 {
-                    Scene = self.Root(),
                     BagInfo = self.BagInfo,
                     ItemOperateEnum = self.ItemOperateEnum,
                     InputPoint = Input.mousePosition,

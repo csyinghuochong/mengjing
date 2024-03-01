@@ -5,7 +5,6 @@ namespace ET.Client
 {
     public struct ShowItemTips
     {
-        public Scene Scene;
         public BagInfo BagInfo;
         public ItemOperateEnum ItemOperateEnum;
         public float3 InputPoint;
@@ -16,5 +15,10 @@ namespace ET.Client
     public struct DlgMJLobby_UpdateSelect
     {
         public CreateRoleInfo CreateRoleInfo;
+    }
+
+    public struct ES_RoleBag_UpdateSelect
+    {
+        public BagInfo BagInfo;
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_BagItem))]
     [EntitySystemOf(typeof (Scroll_Item_BagItem))]
     public static partial class Scroll_Item_BagItemSystem
     {
@@ -19,6 +20,7 @@ namespace ET.Client
 
         public static void Refresh(this Scroll_Item_BagItem self, BagInfo bagInfo)
         {
+            self.BagInfo = bagInfo;
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             self.E_ItemNumText.text = bagInfo.ItemNum.ToString();
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
@@ -32,10 +34,13 @@ namespace ET.Client
         public static void OnShowItemEntryPopUpHandler(this Scroll_Item_BagItem self, BagInfo bagInfo)
         {
             EventSystem.Instance.Publish(self.Root(),
-                new ShowItemTips()
-                {
-                    Scene = self.Root(), BagInfo = bagInfo, ItemOperateEnum = ItemOperateEnum.None, InputPoint = Input.mousePosition
-                });
+                new ShowItemTips() { BagInfo = bagInfo, ItemOperateEnum = ItemOperateEnum.None, InputPoint = Input.mousePosition });
+            EventSystem.Instance.Publish(self.Root(), new ES_RoleBag_UpdateSelect() { BagInfo = bagInfo });
+        }
+
+        public static void UpdateSelectStatus(this Scroll_Item_BagItem self, BagInfo bagInfo)
+        {
+            self.E_XuanZhongImage.gameObject.SetActive(self.BagInfo.BagInfoID == bagInfo.BagInfoID);
         }
     }
 }
