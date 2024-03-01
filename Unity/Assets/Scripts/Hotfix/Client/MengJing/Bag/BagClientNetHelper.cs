@@ -37,7 +37,7 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RequestUseItem(Scene root, BagInfo bagInfo, string par)
+        public static async ETTask<int> RequestUseItem(Scene root, BagInfo bagInfo, string parinfo)
         {
             UserInfoComponentClient infoComponent = root.GetComponent<UserInfoComponentClient>();
 
@@ -48,7 +48,7 @@ namespace ET.Client
                 return ErrorCode.ERR_ItemOnlyUseOcc;
             }
 
-            C2M_ItemOperateRequest request = new() { OperateType = 1, OperateBagID = bagInfo.BagInfoID, OperatePar = par };
+            C2M_ItemOperateRequest request = new() { OperateType = 1, OperateBagID = bagInfo.BagInfoID, OperatePar = parinfo };
             M2C_ItemOperateResponse response = (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             if (response.Error != ErrorCode.ERR_Success)
