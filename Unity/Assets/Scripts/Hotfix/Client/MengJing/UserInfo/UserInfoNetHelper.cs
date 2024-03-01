@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
     [FriendOf(typeof (UserInfoComponentClient))]
-    public static class UserInfoHelper
+    public static class UserInfoNetHelper
     {
         public static async ETTask<int> RequestUserInfoInit(Scene root)
         {

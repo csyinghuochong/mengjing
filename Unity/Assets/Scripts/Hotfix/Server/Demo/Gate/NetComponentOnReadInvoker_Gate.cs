@@ -68,9 +68,16 @@ namespace ET.Server
                     Player player = session.GetComponent<SessionPlayerComponent>().Player;
                     if (actorRequest is IActivityActorRequest iActivityRequest)
                     {
-                        ActorId ActivityServerId = player.ActivityServerId;
-                        response = await root.GetComponent<MessageSender>().Call(ActivityServerId, iActivityRequest);
+                        ActorId activityServerId = player.ActivityServerId;
+                        response = await root.GetComponent<MessageSender>().Call(activityServerId, iActivityRequest);
                     }
+
+                    if (actorRequest is IFriendActorRequest iFriendActorRequest)
+                    {
+                        ActorId friendServerId = player.FriendServerId;
+                        response = await root.GetComponent<MessageSender>().Call(friendServerId, iFriendActorRequest);
+                    }
+
                     if (response == null)
                     {
                         break;

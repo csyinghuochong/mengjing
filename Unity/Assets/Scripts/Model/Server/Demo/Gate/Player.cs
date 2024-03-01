@@ -24,5 +24,7 @@
         public long ChatInfoInstanceId { get; set; }
         
         public ActorId ActivityServerId { get; set; }
+        
+        public ActorId FriendServerId { get; set; }
     }
 }

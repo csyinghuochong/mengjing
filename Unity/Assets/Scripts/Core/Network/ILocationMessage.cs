@@ -19,4 +19,14 @@
     public interface IActivityActorResponse : IResponse
     {
     }
+
+    public interface IFriendActorRequest: IRequest
+    {
+        
+    }
+    
+    public interface IFriendActorResponse: IResponse
+    {
+        
+    }
 }

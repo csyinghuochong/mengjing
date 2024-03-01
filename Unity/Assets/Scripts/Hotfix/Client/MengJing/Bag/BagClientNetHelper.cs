@@ -5,7 +5,7 @@ namespace ET.Client
 {
     [FriendOf(typeof (UserInfoComponentClient))]
     [FriendOf(typeof (BagComponentClient))]
-    public static class BagClientHelper
+    public static class BagClientNetHelper
     {
         public static async ETTask<int> RequestBagInit(Scene root)
         {

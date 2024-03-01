@@ -1425,3 +1425,19 @@ message FriendInfo
 	int32 Occ = 6;
 }
 
+//好友申请
+//ResponseType F2C_FriendApplyResponse
+message C2F_FriendApplyRequest // IFriendActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitId = 2;
+	FriendInfo FriendInfo = 1;
+}
+
+message F2C_FriendApplyResponse // IFriendActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

@@ -5518,6 +5518,72 @@ namespace ET
 
 	}
 
+//好友申请
+	[ResponseType(nameof(F2C_FriendApplyResponse))]
+	[Message(OuterMessage.C2F_FriendApplyRequest)]
+	[MemoryPackable]
+	public partial class C2F_FriendApplyRequest: MessageObject, IFriendActorRequest
+	{
+		public static C2F_FriendApplyRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2F_FriendApplyRequest), isFromPool) as C2F_FriendApplyRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UserID { get; set; }
+
+		[MemoryPackOrder(0)]
+		public FriendInfo FriendInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UserID = default;
+			this.FriendInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.F2C_FriendApplyResponse)]
+	[MemoryPackable]
+	public partial class F2C_FriendApplyResponse: MessageObject, IFriendActorResponse
+	{
+		public static F2C_FriendApplyResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(F2C_FriendApplyResponse), isFromPool) as F2C_FriendApplyResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -5670,5 +5736,7 @@ namespace ET
 		 public const ushort C2M_UserInfoInitRequest = 10149;
 		 public const ushort M2C_UserInfoInitResponse = 10150;
 		 public const ushort FriendInfo = 10151;
+		 public const ushort C2F_FriendApplyRequest = 10152;
+		 public const ushort F2C_FriendApplyResponse = 10153;
 	}
 }

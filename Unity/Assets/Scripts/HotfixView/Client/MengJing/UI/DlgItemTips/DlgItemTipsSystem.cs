@@ -261,7 +261,7 @@ namespace ET.Client
 
         private static void OnSellButton(this DlgItemTips self)
         {
-            BagClientHelper.RequestSellItem(self.Root(), self.BagInfo, self.BagInfo.ItemNum.ToString()).Coroutine();
+            BagClientNetHelper.RequestSellItem(self.Root(), self.BagInfo, self.BagInfo.ItemNum.ToString()).Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
         }
 
@@ -541,7 +541,7 @@ namespace ET.Client
             // }
             //
             // long instanceid = self.InstanceId;
-            errorCode = await BagClientHelper.RequestUseItem(self.Root(), self.BagInfo, usrPar);
+            errorCode = await BagClientNetHelper.RequestUseItem(self.Root(), self.BagInfo, usrPar);
 
             // if (errorCode == ErrorCode.ERR_Success)
             // {
