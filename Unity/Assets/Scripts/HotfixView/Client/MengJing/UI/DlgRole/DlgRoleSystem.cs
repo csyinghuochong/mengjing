@@ -84,6 +84,12 @@ namespace ET.Client
             self.View.ES_ModelShow.ShowPlayerModel(new BagInfo(), userInfo.Occ, 0);
         }
 
+        public static void Refresh(this DlgRole self)
+        {
+            self.RefreshPlayerInfo();
+            self.RefreshEquip();
+        }
+
         private static void RefreshEquip(this DlgRole self)
         {
             BagComponentClient bagComponentClient = self.Root().GetComponent<BagComponentClient>();
@@ -155,6 +161,27 @@ namespace ET.Client
 
                 self.ESEquipItems_2[itemConfig.ItemSubType - 1].Refresh(equiplist[i], occ, itemOperateEnum, equiplist);
             }
+        }
+    }
+
+    [Event(SceneType.Demo)]
+    public class ES_RoleBag_RefreshBagItemsHandler: AEvent<Scene, ES_RoleBag_UpdateSelect>
+    {
+        protected override async ETTask Run(Scene scene, ES_RoleBag_UpdateSelect args)
+        {
+            scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleBag.UpdateSelect(args.BagInfo);
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
+    public class BagItemUpdate_DlgRoleAndBagRefreshHandler: AEvent<Scene, BagItemUpdate>
+    {
+        protected override async ETTask Run(Scene scene, BagItemUpdate args)
+        {
+            scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.Refresh();
+            scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleBag.Refresh();
+            await ETTask.CompletedTask;
         }
     }
 }

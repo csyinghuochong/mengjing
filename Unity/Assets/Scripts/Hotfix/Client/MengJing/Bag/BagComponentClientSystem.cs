@@ -114,6 +114,7 @@ namespace ET.Client
                 }
             }
 
+            EventSystem.Instance.Publish(self.Root(), new BagItemUpdate());
             // HintHelp.GetInstance().DataUpdate(DataType.BagItemUpdate);
         }
 

@@ -21,4 +21,8 @@ namespace ET.Client
     {
         public BagInfo BagInfo;
     }
+
+    public struct BagItemUpdate
+    {
+    }
 }
