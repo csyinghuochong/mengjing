@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_BagItem : Entity,IAwake,IDestroy,IUIScrollItem
+	public  class Scroll_Item_BagItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
 		public BagInfo BagInfo;
 		public ItemOperateEnum ItemOperateEnum;
@@ -21,6 +21,54 @@ namespace ET.Client
 			this.uiTransform = trans;
 			return this;
 		}
+
+		public UnityEngine.UI.Button E_ItemDiButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_ItemDiButton == null )
+     				{
+		    			this.m_E_ItemDiButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ItemDi");
+     				}
+     				return this.m_E_ItemDiButton;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ItemDi");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ItemDiImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_ItemDiImage == null )
+     				{
+		    			this.m_E_ItemDiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ItemDi");
+     				}
+     				return this.m_E_ItemDiImage;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ItemDi");
+     			}
+     		}
+     	}
 
 		public UnityEngine.UI.Button E_ItemClickButton
      	{
@@ -66,6 +114,30 @@ namespace ET.Client
      			else
      			{
 		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ItemClick");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_ItemDragButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_ItemDragButton == null )
+     				{
+		    			this.m_E_ItemDragButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ItemDrag");
+     				}
+     				return this.m_E_ItemDragButton;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ItemDrag");
      			}
      		}
      	}
@@ -238,30 +310,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_ItemEffectImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_E_ItemEffectImage == null )
-     				{
-		    			this.m_E_ItemEffectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ItemEffect");
-     				}
-     				return this.m_E_ItemEffectImage;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ItemEffect");
-     			}
-     		}
-     	}
-
 		public UnityEngine.UI.Image E_BindingImage
      	{
      		get
@@ -282,6 +330,30 @@ namespace ET.Client
      			else
      			{
 		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Binding");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_UpTipImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_UpTipImage == null )
+     				{
+		    			this.m_E_UpTipImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_UpTip");
+     				}
+     				return this.m_E_UpTipImage;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_UpTip");
      			}
      		}
      	}
@@ -310,10 +382,61 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_LockButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_LockButton == null )
+     				{
+		    			this.m_E_LockButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Lock");
+     				}
+     				return this.m_E_LockButton;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Lock");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_LockImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_LockImage == null )
+     				{
+		    			this.m_E_LockImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Lock");
+     				}
+     				return this.m_E_LockImage;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Lock");
+     			}
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
+			this.m_E_ItemDiButton = null;
+			this.m_E_ItemDiImage = null;
 			this.m_E_ItemClickButton = null;
 			this.m_E_ItemClickImage = null;
+			this.m_E_ItemDragButton = null;
 			this.m_E_ItemDragImage = null;
 			this.m_E_ItemDragEventTrigger = null;
 			this.m_E_ItemQualityImage = null;
@@ -321,15 +444,20 @@ namespace ET.Client
 			this.m_E_ItemNumText = null;
 			this.m_E_ItemNameText = null;
 			this.m_E_XuanZhongImage = null;
-			this.m_E_ItemEffectImage = null;
 			this.m_E_BindingImage = null;
+			this.m_E_UpTipImage = null;
 			this.m_E_ProtectImage = null;
+			this.m_E_LockButton = null;
+			this.m_E_LockImage = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
 
+		private UnityEngine.UI.Button m_E_ItemDiButton = null;
+		private UnityEngine.UI.Image m_E_ItemDiImage = null;
 		private UnityEngine.UI.Button m_E_ItemClickButton = null;
 		private UnityEngine.UI.Image m_E_ItemClickImage = null;
+		private UnityEngine.UI.Button m_E_ItemDragButton = null;
 		private UnityEngine.UI.Image m_E_ItemDragImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_ItemDragEventTrigger = null;
 		private UnityEngine.UI.Image m_E_ItemQualityImage = null;
@@ -337,9 +465,11 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_ItemNumText = null;
 		private UnityEngine.UI.Text m_E_ItemNameText = null;
 		private UnityEngine.UI.Image m_E_XuanZhongImage = null;
-		private UnityEngine.UI.Image m_E_ItemEffectImage = null;
 		private UnityEngine.UI.Image m_E_BindingImage = null;
+		private UnityEngine.UI.Image m_E_UpTipImage = null;
 		private UnityEngine.UI.Image m_E_ProtectImage = null;
+		private UnityEngine.UI.Button m_E_LockButton = null;
+		private UnityEngine.UI.Image m_E_LockImage = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -23,31 +23,51 @@ namespace ET.Client
             self.BagInfo = bagInfo;
             self.ItemOperateEnum = itemOperateEnum;
 
+            self.E_ItemDiImage.gameObject.SetActive(false);
+            self.E_ItemClickButton.gameObject.SetActive(false);
+            self.E_ItemDragButton.gameObject.SetActive(false);
+            self.E_ItemQualityImage.gameObject.SetActive(false);
+            self.E_ItemIconImage.gameObject.SetActive(false);
+            self.E_ItemNumText.gameObject.SetActive(false);
+            self.E_ItemNameText.gameObject.SetActive(false);
+            self.E_XuanZhongImage.gameObject.SetActive(false);
+            self.E_BindingImage.gameObject.SetActive(false);
+            self.E_UpTipImage.gameObject.SetActive(false);
+            self.E_ProtectImage.gameObject.SetActive(false);
+            self.E_LockButton.gameObject.SetActive(false);
+
             if (bagInfo != null)
             {
+                ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+
+                self.E_ItemQualityImage.gameObject.SetActive(true);
+                self.E_ItemQualityImage.overrideSprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(
+                    ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality)));
+
+                self.E_ItemIconImage.gameObject.SetActive(true);
+                self.E_ItemIconImage.overrideSprite =
+                        resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
+
+                self.E_ItemNumText.gameObject.SetActive(true);
                 self.E_ItemNumText.text = bagInfo.ItemNum.ToString();
-                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
-                self.E_ItemIconImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-                string qualityiconStr = FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality);
-                string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
-                self.E_ItemQualityImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
+
+                self.E_ItemClickButton.gameObject.SetActive(true);
                 self.E_ItemClickButton.AddListenerWithParam(self.OnShowItemEntryPopUpHandler, bagInfo);
+
+                self.E_BindingImage.gameObject.SetActive(bagInfo.isBinging);
+                self.E_ProtectImage.gameObject.SetActive(bagInfo.IsProtect);
             }
             else
             {
-                self.E_ItemQualityImage.gameObject.SetActive(false);
-                self.E_ItemIconImage.gameObject.SetActive(false);
-                self.E_ItemNumText.gameObject.SetActive(false);
-                self.E_BindingImage.gameObject.SetActive(false);
-                self.E_ProtectImage.gameObject.SetActive(false);
+                self.E_ItemDiImage.gameObject.SetActive(true);
             }
         }
 
         public static void OnShowItemEntryPopUpHandler(this Scroll_Item_BagItem self, BagInfo bagInfo)
         {
             EventSystem.Instance.Publish(self.Root(),
-                new ShowItemTips() { BagInfo = bagInfo, ItemOperateEnum = ItemOperateEnum.None, InputPoint = Input.mousePosition });
+                new ShowItemTips() { BagInfo = bagInfo, ItemOperateEnum = self.ItemOperateEnum, InputPoint = Input.mousePosition });
             EventSystem.Instance.Publish(self.Root(), new ES_RoleBag_UpdateSelect() { BagInfo = bagInfo });
         }
 
