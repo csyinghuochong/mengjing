@@ -22,5 +22,6 @@ namespace ET.Client
 		WindowID_Chat,
 		WindowID_Friend,
 		WindowID_ItemSellTip,
+		WindowID_EquipDuiBiTips,
 	}
 }
