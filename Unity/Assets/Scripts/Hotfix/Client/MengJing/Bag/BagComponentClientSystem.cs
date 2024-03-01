@@ -14,6 +14,8 @@ namespace ET.Client
             {
                 self.AllItemList[i] = new List<BagInfo>();
             }
+
+            self.RealAddItem = true;
         }
 
         [EntitySystem]
@@ -40,7 +42,7 @@ namespace ET.Client
 
                     if (newInfo.Loc == (int)ItemLocType.ItemLocBag && newInfo.ItemNum > oldInfo.ItemNum)
                     {
-                        // self.ShowGetItemTip(newInfo, newInfo.ItemNum - oldInfo.ItemNum);
+                        self.ShowGetItemTip(newInfo, newInfo.ItemNum - oldInfo.ItemNum);
                     }
 
                     if (newInfo.Loc == (int)ItemLocType.ChouKaWarehouse)
@@ -85,7 +87,7 @@ namespace ET.Client
                     BagInfo bagInfo = bagAdd[i];
                     if (bagInfo.Loc == (int)ItemLocType.ItemLocBag)
                     {
-                        // self.ShowGetItemTip(bagInfo, bagInfo.ItemNum);
+                        self.ShowGetItemTip(bagInfo, bagInfo.ItemNum);
                     }
 
                     if (bagInfo.Loc == (int)ItemLocType.ChouKaWarehouse)
@@ -116,6 +118,23 @@ namespace ET.Client
 
             EventSystem.Instance.Publish(self.Root(), new BagItemUpdate());
             // HintHelp.GetInstance().DataUpdate(DataType.BagItemUpdate);
+        }
+
+        private static void ShowGetItemTip(this BagComponentClient self, BagInfo bagInfo, int addNum)
+        {
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+            if (itemConfig.IfAutoUse == 1)
+            {
+                // self.SendUseItem( bagInfo).Coroutine();
+                return;
+            }
+
+            if (self.RealAddItem)
+            {
+                // self.ZoneScene().GetComponent<ShoujiComponent>().OnGetItem(bagInfo.ItemID);
+                // HintHelp.GetInstance().DataUpdate(DataType.BagItemAdd, $"{bagInfo.ItemID}_{addNum}");
+                EventSystem.Instance.Publish(self.Root(), new ShowFlyTip() { Type = 1, Str = $"获得 {itemConfig.ItemName} {addNum}" });
+            }
         }
 
         public static List<BagInfo> GetItemsByLoc(this BagComponentClient self, int loc)

@@ -25,4 +25,14 @@ namespace ET.Client
     public struct BagItemUpdate
     {
     }
+
+    public struct BagItemItemAdd
+    {
+    }
+
+    public struct ShowFlyTip
+    {
+        public int Type;
+        public string Str;
+    }
 }

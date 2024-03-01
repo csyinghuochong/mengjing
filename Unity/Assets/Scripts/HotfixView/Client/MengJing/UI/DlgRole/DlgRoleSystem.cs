@@ -165,22 +165,22 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class ES_RoleBag_RefreshBagItemsHandler: AEvent<Scene, ES_RoleBag_UpdateSelect>
+    public class ES_RoleBag_RefreshBagItems: AEvent<Scene, ES_RoleBag_UpdateSelect>
     {
         protected override async ETTask Run(Scene scene, ES_RoleBag_UpdateSelect args)
         {
-            scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleBag.UpdateSelect(args.BagInfo);
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleBag.UpdateSelect(args.BagInfo);
             await ETTask.CompletedTask;
         }
     }
 
     [Event(SceneType.Demo)]
-    public class BagItemUpdate_DlgRoleAndBagRefreshHandler: AEvent<Scene, BagItemUpdate>
+    public class BagItemUpdate_DlgRoleAndBagRefresh: AEvent<Scene, BagItemUpdate>
     {
         protected override async ETTask Run(Scene scene, BagItemUpdate args)
         {
-            scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.Refresh();
-            scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleBag.Refresh();
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.Refresh();
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleBag.Refresh();
             await ETTask.CompletedTask;
         }
     }
