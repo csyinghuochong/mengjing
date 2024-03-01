@@ -44,35 +44,40 @@ namespace ET.Client
 
             if (itemConfig.ItemType == (int)ItemTypeEnum.Equipment)
             {
-                // BagInfo haveEquip = null;
-                // if (itemConfig.EquipType == 301)
-                // {
-                //     UI uI1 = UIHelper.GetUI(args.ZoneScene, UIType.UIPet);
-                //     haveEquip = uI1 != null? uI1.GetComponent<UIPetComponent>().GetEquipBySubType(itemConfig.ItemSubType) : null;
-                // }
-                // else
-                // {
-                //     haveEquip = args.ZoneScene.GetComponent<BagComponent>().GetEquipBySubType(ItemLocType.ItemLocEquip, itemConfig.ItemSubType);
-                // }
-                //
-                // UI uI = await UIHelper.Create(args.ZoneScene, UIType.UIEquipDuiBiTips);
-                // if (haveEquip != null && (args.itemOperateEnum == ItemOperateEnum.Bag || args.itemOperateEnum == ItemOperateEnum.PaiMaiBuy ||
-                //         args.itemOperateEnum == ItemOperateEnum.PetEquipBag))
-                // {
-                //     uI.GetComponent<UIEquipDuiBiTipsComponent>().OnUpdateDuiBiUI(haveEquip, args, itemWidth, args.itemOperateEnum).Coroutine();
-                // }
-                // else if (args.bagInfo.IfJianDing == false)
-                // {
-                //     //鉴定后或无需鉴定的
-                //     uI.GetComponent<UIEquipDuiBiTipsComponent>().OnUpdateEquipUI(args).Coroutine();
-                //     uI.GetComponent<UIEquipDuiBiTipsComponent>().Tips1.GetComponent<RectTransform>().anchoredPosition = ReturnX(args, itemWidth);
-                // }
-                // else
-                // {
-                //     //显示未鉴定
-                //     uI.GetComponent<UIEquipDuiBiTipsComponent>().OnUpdateAppraisalUI(args).Coroutine();
-                //     uI.GetComponent<UIEquipDuiBiTipsComponent>().Tips1.GetComponent<RectTransform>().anchoredPosition = ReturnX(args, itemWidth);
-                // }
+                BagInfo haveEquip = null;
+                if (itemConfig.EquipType == 301)
+                {
+                    // UI uI1 = UIHelper.GetUI(args.ZoneScene, UIType.UIPet);
+                    // haveEquip = uI1 != null? uI1.GetComponent<UIPetComponent>().GetEquipBySubType(itemConfig.ItemSubType) : null;
+                }
+                else
+                {
+                    haveEquip = root.GetComponent<BagComponentClient>().GetEquipBySubType(ItemLocType.ItemLocEquip, itemConfig.ItemSubType);
+                }
+
+                await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_EquipDuiBiTips);
+                if (haveEquip != null && (args.ItemOperateEnum == ItemOperateEnum.Bag || args.ItemOperateEnum == ItemOperateEnum.PaiMaiBuy ||
+                        args.ItemOperateEnum == ItemOperateEnum.PetEquipBag))
+                {
+                    root.GetComponent<UIComponent>().GetDlgLogic<DlgEquipDuiBiTips>()
+                            .OnUpdateDuiBiUI(haveEquip, args, itemWidth, args.ItemOperateEnum).Coroutine();
+                }
+                else if (args.BagInfo.IfJianDing == false)
+                {
+                    //鉴定后或无需鉴定的
+                    root.GetComponent<UIComponent>().GetDlgLogic<DlgEquipDuiBiTips>().OnUpdateEquipUI(args).Coroutine();
+                    root.GetComponent<UIComponent>().GetDlgLogic<DlgEquipDuiBiTips>().View.EG_Tips1RectTransform.GetComponent<RectTransform>()
+                                    .anchoredPosition =
+                            ReturnX(root, args, itemWidth);
+                }
+                else
+                {
+                    //显示未鉴定
+                    root.GetComponent<UIComponent>().GetDlgLogic<DlgEquipDuiBiTips>().OnUpdateAppraisalUI(args).Coroutine();
+                    root.GetComponent<UIComponent>().GetDlgLogic<DlgEquipDuiBiTips>().View.EG_Tips1RectTransform.GetComponent<RectTransform>()
+                                    .anchoredPosition =
+                            ReturnX(root, args, itemWidth);
+                }
             }
             else
             {
