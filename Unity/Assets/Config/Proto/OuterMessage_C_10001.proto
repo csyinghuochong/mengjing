@@ -1536,3 +1536,10 @@ message F2C_FriendInfoResponse // IFriendActorResponse
 	repeated ChatInfo FriendChats = 5;
 }
 
+message ItemXiLianResult
+{
+	repeated HideProList XiLianHideProLists = 1;
+	repeated int32 HideSkillLists = 2;
+	repeated HideProList XiLianHideTeShuProLists = 3;
+}
+

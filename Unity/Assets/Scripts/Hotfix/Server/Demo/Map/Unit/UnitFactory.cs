@@ -29,9 +29,9 @@ namespace ET.Server
                     if (unit.GetComponent<UserInfoComponentServer>() == null)
                     {
                         
-                        UserInfoComponentServer userInfoComponent = unit.AddComponent<UserInfoComponentServer>();
-                        userInfoComponent.Account = account;
-                        UserInfo userInfo = userInfoComponent.UserInfo;
+                        UserInfoComponentServer userInfoComponentServer = unit.AddComponent<UserInfoComponentServer>();
+                        userInfoComponentServer.Account = account;
+                        UserInfo userInfo = userInfoComponentServer.UserInfo;
                         userInfo.Sp = 1;
                         userInfo.UserId = id;
                         userInfo.BaoShiDu = 100;

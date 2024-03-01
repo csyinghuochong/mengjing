@@ -105,10 +105,10 @@ namespace ET.Client
                 self.ESEquipItems_2[i].InitUI(FunctionUI.GetItemSubtypeByWeizhi(i));
             }
 
-            self.RefreshEquip_1(bagComponentClient.GetItemsByLoc((int)ItemLocType.ItemLocEquip), userInfoComponentClient.UserInfo.Occ,
+            self.RefreshEquip_1(bagComponentClient.GetItemsByLoc(ItemLocType.ItemLocEquip), userInfoComponentClient.UserInfo.Occ,
                 ItemOperateEnum.Juese);
 
-            self.RefreshEquip_2(bagComponentClient.GetItemsByLoc((int)ItemLocType.ItemLocEquip_2), userInfoComponentClient.UserInfo.Occ,
+            self.RefreshEquip_2(bagComponentClient.GetItemsByLoc(ItemLocType.ItemLocEquip_2), userInfoComponentClient.UserInfo.Occ,
                 ItemOperateEnum.Juese);
         }
 

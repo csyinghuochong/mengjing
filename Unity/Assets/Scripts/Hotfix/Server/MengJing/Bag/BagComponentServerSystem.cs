@@ -626,12 +626,12 @@ namespace ET.Server
        if (robotId != 0)
        {
            int[] equipList = new int[0];
-           UserInfoComponentServer userInfoComponent = unit.GetComponent<UserInfoComponentServer>();
+           UserInfoComponentServer userInfoComponentServer = unit.GetComponent<UserInfoComponentServer>();
            RobotConfig robotConfig = RobotConfigCategory.Instance.Get(robotId);
 
-           if (robotConfig.Behaviour != 1 && robotConfig.Level > userInfoComponent.UserInfo.Lv)
+           if (robotConfig.Behaviour != 1 && robotConfig.Level > userInfoComponentServer.UserInfo.Lv)
            {
-               userInfoComponent.UserInfo.Lv = robotConfig.Level;
+               userInfoComponentServer.UserInfo.Lv = robotConfig.Level;
            }
            if (robotConfig.EquipList != null)
            {
@@ -639,7 +639,7 @@ namespace ET.Server
            }
            else
            {
-               equipList = ItemConfigCategory.Instance.GetRandomEquipList(userInfoComponent.UserInfo.Occ, userInfoComponent.UserInfo.Lv);
+               equipList = ItemConfigCategory.Instance.GetRandomEquipList(userInfoComponentServer.UserInfo.Occ, userInfoComponentServer.UserInfo.Lv);
            }
            for (int i = 0; i < equipList.Length; i++)
            {

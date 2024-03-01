@@ -5,6 +5,8 @@ namespace ET
     public static class ConfigData
     {
         
+        
+        
         [StaticField]
         public static string DefaultGem = "0_0_0_0";
         

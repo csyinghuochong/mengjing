@@ -1298,8 +1298,8 @@ namespace ET.Server
             }
 
             //基础职业属性
-            UserInfoComponentServer UnitInfoComponent = unit.GetComponent<UserInfoComponentServer>();
-            UserInfo userInfo = UnitInfoComponent.UserInfo;
+            UserInfoComponentServer unitInfoComponentServer = unit.GetComponent<UserInfoComponentServer>();
+            UserInfo userInfo = unitInfoComponentServer.UserInfo;
             int roleLv = userInfo.Lv;
 
             //初始化属性

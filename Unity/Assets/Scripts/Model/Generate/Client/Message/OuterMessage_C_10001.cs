@@ -5933,6 +5933,36 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.ItemXiLianResult)]
+	[MemoryPackable]
+	public partial class ItemXiLianResult: MessageObject
+	{
+		public static ItemXiLianResult Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(ItemXiLianResult), isFromPool) as ItemXiLianResult; 
+		}
+
+		[MemoryPackOrder(0)]
+		public List<HideProList> XiLianHideProLists { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public List<int> HideSkillLists { get; set; } = new();
+
+		[MemoryPackOrder(2)]
+		public List<HideProList> XiLianHideTeShuProLists { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.XiLianHideProLists.Clear();
+			this.HideSkillLists.Clear();
+			this.XiLianHideTeShuProLists.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -6097,5 +6127,6 @@ namespace ET
 		 public const ushort F2C_FriendDeleteResponse = 10161;
 		 public const ushort C2F_FriendInfoRequest = 10162;
 		 public const ushort F2C_FriendInfoResponse = 10163;
+		 public const ushort ItemXiLianResult = 10164;
 	}
 }

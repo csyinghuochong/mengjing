@@ -30,8 +30,8 @@ namespace ET.Server
                       for (int i = 0; i < minglist.Count; i++)
                       {
                           long enemyId = minglist[i].UnitId;
-                          UserInfoComponentServer userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentServer>(scene.Root(), enemyId);
-                          if (userInfoComponent == null)
+                          UserInfoComponentServer userInfoComponentServer = await UnitCacheHelper.GetComponentCache<UserInfoComponentServer>(scene.Root(), enemyId);
+                          if (userInfoComponentServer == null)
                           {
                               continue;
                           }
@@ -65,7 +65,7 @@ namespace ET.Server
                               MineType = minglist[i].MineType,
                               Postion = minglist[i].Postion,
                               TeamId = teamid,
-                              PlayerName = userInfoComponent.UserInfo.Name,
+                              PlayerName = userInfoComponentServer.UserInfo.Name,
                               PetConfig = petconfidds,
                               PetIdList = petidlist,
                               UnitId = minglist[i].UnitId,
