@@ -5,6 +5,7 @@ namespace ET.Server
 {
     [FriendOf(typeof(MoveComponent))]
     [FriendOf(typeof(NumericComponentServer))]
+    [FriendOf(typeof(UserInfoComponentServer))]
     public static partial class UnitHelper
     {
         public static UnitInfo CreateUnitInfo(Unit unit)
@@ -60,6 +61,11 @@ namespace ET.Server
             }
 
             return (isNewUnit, unit);
+        }
+
+        public static bool IsRobot(this Unit self)
+        {
+            return self.GetComponent<UserInfoComponentServer>().UserInfo.RobotId > 0;
         }
     }
 }

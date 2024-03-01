@@ -76,8 +76,20 @@ namespace ET.Server
 					// await DBHelper.AddDataComponent<DBFriendInfo>(zone, userId, UnitCacheHelper.DBFriendInfo);
 					// await DBHelper.AddDataComponent<DBMailInfo>(zone, userId, UnitCacheHelper.DBMailInfo);
 
+					int robotId = 0;
+					if (newAccount.Password == ComHelp.RobotPassWord)
+					{
+						robotId = int.Parse(newAccount.Account.Split('_')[0]);
+					}
+
 					//存储账号信息
-					CreateRoleInfo createRoleInfo = new CreateRoleInfo() { UnitId = userId,PlayerLv = 1, PlayerOcc = request.CreateOcc, PlayerName  = request.CreateName};
+					CreateRoleInfo createRoleInfo = new CreateRoleInfo()
+					{
+						UnitId = userId,PlayerLv = 1, 
+						PlayerOcc = request.CreateOcc,
+						PlayerName  = request.CreateName,
+						RobotId = robotId,
+					};
 					newAccount.RoleList.Add(createRoleInfo);
 					await dbComponent.Save(newAccount);
 

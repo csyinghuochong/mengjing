@@ -10,7 +10,9 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this BagComponentServer self)
         {
-            
+            self.OnAddItemData(GlobalValueConfigCategory.Instance.Get(9).Value, $"{ItemGetWay.System}_{TimeHelper.ServerNow()}", false);
+            self.OnAddItemData($"10030001;1", $"{ItemGetWay.System}_{TimeHelper.ServerNow()}", false);
+            self.OnAddItemData($"14100005;1", $"{ItemGetWay.System}_{TimeHelper.ServerNow()}", false);
         }
 
         [EntitySystem]
@@ -828,8 +830,7 @@ namespace ET.Server
        string[] getWayInfo = getWay.Split('_');
        int getType = int.Parse(getWayInfo[0]);
        Unit unit = self.GetParent<Unit>();
-      // if (unit.IsRobot() && getType == ItemGetWay.PickItem)
-      if (getType == ItemGetWay.PickItem)
+       if (unit.IsRobot() && getType == ItemGetWay.PickItem)
        {
            return true;
        }

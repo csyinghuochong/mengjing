@@ -44,6 +44,7 @@ namespace ET.Server
                         userInfo.Vitality = int.Parse(GlobalValueConfigCategory.Instance.Get(10).Value);
                         userInfo.MakeList.AddRange(ComHelp.StringArrToIntList(GlobalValueConfigCategory.Instance.Get(18).Value.Split(';')));
                         userInfo.CreateTime = TimeHelper.ServerNow();
+                        userInfo.RobotId = createRoleInfo.RobotId;
 
                         if (createRoleInfo.RobotId > 0)
                         {
