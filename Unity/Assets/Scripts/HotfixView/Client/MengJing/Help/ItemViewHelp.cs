@@ -3,11 +3,9 @@ using ET;
 
 namespace ET.Client
 {
-   
     public static class ItemViewHelp
     {
-
-        public static string GetItemDesc(BagInfo baginfo, ref int i1)
+        public static string GetItemDesc(BagInfo baginfo)
         {
             ItemConfig itemconf = ItemConfigCategory.Instance.Get(baginfo.ItemID);
             string Text_ItemDes = itemconf.ItemDes;
@@ -35,7 +33,7 @@ namespace ET.Client
             }
 
             //根据Tips描述长度缩放底的大小
-            i1 = 0;
+            int i1 = 0;
             i1 = (int)((Text_ItemDes.Length) / 16) + 1;
             if (itemDesArray.Length > i1)
             {

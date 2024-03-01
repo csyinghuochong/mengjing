@@ -79,32 +79,6 @@ namespace ET.Client
                 self.View.E_BangDingText.gameObject.SetActive(false);
             }
 
-            string Text_ItemDes = itemConfig.ItemDes;
-            //获取道具描述的分隔符
-            string[] itemDesArray = Text_ItemDes.Split(';');
-            string itemMiaoShu = "";
-            for (int i = 0; i <= itemDesArray.Length - 1; i++)
-            {
-                if (itemMiaoShu == "")
-                {
-                    itemMiaoShu = itemDesArray[i];
-                }
-                else
-                {
-                    itemMiaoShu = itemMiaoShu + "\n" + itemDesArray[i];
-                }
-            }
-
-            // 数组大于2表示有换行符,否则显示原来的描述
-            if (itemDesArray.Length >= 2)
-            {
-                Text_ItemDes = itemMiaoShu;
-            }
-
-            // 根据Tips描述长度缩放底的大小
-            int i1 = 0;
-            Text_ItemDes = ItemViewHelp.GetItemDesc(bagInfo, ref i1);
-
             // 道具Icon
             string ItemIcon = itemConfig.Icon;
             sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, ItemIcon));
@@ -112,6 +86,67 @@ namespace ET.Client
             string ItemQuality = FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality);
             sprite = resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ItemQuality));
             self.View.E_ItemQualityImage.sprite = sprite;
+
+            // 宠物蛋附灵
+            if (itemType == 1 && itemSubType == 102 && self.BagInfo.FuLing == 1)
+            {
+                self.View.E_FuLingText.gameObject.SetActive(true);
+                self.View.E_FuLingDesText.gameObject.SetActive(true);
+            }
+
+            //显示道具信息
+            self.View.E_ItemNameText.text = itemConfig.ItemName;
+            self.View.E_ItemNameText.color = FunctionUI.QualityReturnColor(itemConfig.ItemQuality);
+
+            string itemDes = ItemViewHelp.GetItemDesc(bagInfo).Replace("\\n", "\n");
+            self.View.E_ItemDesText.text = itemDes;
+
+            float exceedWidth = self.View.E_ItemNameText.preferredWidth - self.Lab_ItemNameWidth;
+            if (exceedWidth > -20)
+            {
+                self.View.E_PutBagImage.GetComponent<RectTransform>().sizeDelta =
+                        new Vector2(self.Img_backVector2.x + exceedWidth + 30, self.Img_backVector2.y);
+            }
+
+            //鉴定品质符
+            if (itemConfig.ItemSubType == 121)
+            {
+                self.View.E_ItemDesText.GetComponent<Text>().text = itemDes + "\n" + "\n" + $"鉴定符品质:{bagInfo.ItemPar}" + "\n" +
+                        "品质越高,鉴定出极品的概率越高。" + "\n" +
+                        "鉴定符品质与制造者熟练度相关。";
+            }
+
+            //鉴定品质符
+            if (itemConfig.ItemType == 1 && itemConfig.ItemSubType == 131)
+            {
+                string[] addList = itemConfig.ItemUsePar.Split(';')[0].Split(',');
+                self.View.E_ItemDesText.GetComponent<Text>().text = itemDes + "\n" + "\n" + "烹饪品质:" + bagInfo.ItemPar;
+            }
+
+            //宠物技能
+            if (itemConfig.ItemType == 2 && itemConfig.ItemSubType == 122)
+            {
+                SkillConfig skillCof = SkillConfigCategory.Instance.Get(int.Parse(itemConfig.ItemUsePar));
+                self.View.E_ItemDesText.GetComponent<Text>().text = itemDes + "\n" + "\n" + $"技能描述:{skillCof.SkillDescribe}";
+            }
+
+            //藏宝图
+            if (itemConfig.ItemSubType == 127 && !string.IsNullOrEmpty(self.BagInfo.ItemPar))
+            {
+                int sceneID = int.Parse(self.BagInfo.ItemPar.Split('@')[0]);
+                self.View.E_ItemDesText.GetComponent<Text>().text =
+                        $"{itemConfig.ItemDes}\n前往地图:{DungeonConfigCategory.Instance.Get(sceneID).ChapterName}开启藏宝图!";
+            }
+
+            string langStr = GameSettingLanguge.LoadLocalization("使用等级");
+            if (itemConfig.UseLv > 0)
+            {
+                self.View.E_ItemLvText.text = langStr + ":" + itemConfig.UseLv;
+            }
+            else
+            {
+                self.View.E_ItemLvText.text = langStr + ":1";
+            }
 
             // 显示按钮
             self.View.E_UseButton.GetComponentInChildren<Text>().text = itemConfig.ItemSubType == 114? "镶嵌" : "使用";
@@ -221,80 +256,6 @@ namespace ET.Client
                 self.View.E_SellButton.gameObject.SetActive(false);
                 self.View.E_UseButton.gameObject.SetActive(true);
                 self.View.E_SplitButton.gameObject.SetActive(true);
-            }
-
-            // 宠物蛋附灵
-            if (itemType == 1 && itemSubType == 102 && self.BagInfo.FuLing == 1)
-            {
-                self.View.E_FuLingText.gameObject.SetActive(true);
-                // self.Lab_FuLing.GetComponent<Text>().color = new Color(175f / 255f, 1, 6f / 255f);
-                self.View.E_FuLingDesText.gameObject.SetActive(true);
-                // self.Lab_FuLingDes.GetComponent<Text>().color = new Color(175f / 255f, 1, 6f / 255f);
-            }
-
-            //判定道具为宝石时显示使用变为镶嵌字样
-            if (itemType == 4)
-            {
-                string langStr_A = GameSettingLanguge.LoadLocalization("镶 嵌");
-                //self.Obj_Btn_GemHoleText.GetComponent<Text>().text = langStr_A;
-            }
-
-            //设置底的长度
-            //self.ItemDi.GetComponent<RectTransform>().sizeDelta = new Vector2(301.0f, 180.0f + i1 * 20.0f + i2 * 16.0f + ItemBottomTextNum);
-            //显示道具信息
-            self.View.E_ItemNameText.text = itemConfig.ItemName;
-            self.View.E_ItemNameText.color = FunctionUI.QualityReturnColor(itemConfig.ItemQuality);
-            self.View.E_ItemDesText.text = Text_ItemDes;
-            //赞助宝箱设置描述为绿色
-            //if (itemSubType == 9)
-            //{
-            //    self.ItemDes.GetComponent<Text>().color = Color.green;
-            //}
-            float exceedWidth = self.View.E_ItemNameText.preferredWidth - self.Lab_ItemNameWidth;
-            if (exceedWidth > -20)
-            {
-                self.View.E_PutBagImage.GetComponent<RectTransform>().sizeDelta =
-                        new Vector2(self.Img_backVector2.x + exceedWidth + 30, self.Img_backVector2.y);
-            }
-
-            //鉴定品质符
-            if (itemConfig.ItemSubType == 121)
-            {
-                self.View.E_ItemDesText.GetComponent<Text>().text = Text_ItemDes + "\n" + "\n" + $"鉴定符品质:{bagInfo.ItemPar}" + "\n" +
-                        "品质越高,鉴定出极品的概率越高。" + "\n" +
-                        "鉴定符品质与制造者熟练度相关。";
-            }
-
-            //鉴定品质符
-            if (itemConfig.ItemType == 1 && itemConfig.ItemSubType == 131)
-            {
-                string[] addList = itemConfig.ItemUsePar.Split(';')[0].Split(',');
-                self.View.E_ItemDesText.GetComponent<Text>().text = Text_ItemDes + "\n" + "\n" + "烹饪品质:" + bagInfo.ItemPar;
-            }
-
-            //宠物技能
-            if (itemConfig.ItemType == 2 && itemConfig.ItemSubType == 122)
-            {
-                SkillConfig skillCof = SkillConfigCategory.Instance.Get(int.Parse(itemConfig.ItemUsePar));
-                self.View.E_ItemDesText.GetComponent<Text>().text = Text_ItemDes + "\n" + "\n" + $"技能描述:{skillCof.SkillDescribe}";
-            }
-
-            //藏宝图
-            if (itemConfig.ItemSubType == 127 && !string.IsNullOrEmpty(self.BagInfo.ItemPar))
-            {
-                int sceneID = int.Parse(self.BagInfo.ItemPar.Split('@')[0]);
-                self.View.E_ItemDesText.GetComponent<Text>().text =
-                        $"{itemConfig.ItemDes}\n前往地图:{DungeonConfigCategory.Instance.Get(sceneID).ChapterName}开启藏宝图!";
-            }
-
-            string langStr = GameSettingLanguge.LoadLocalization("使用等级");
-            if (itemConfig.UseLv > 0)
-            {
-                self.View.E_ItemLvText.text = langStr + ":" + itemConfig.UseLv;
-            }
-            else
-            {
-                self.View.E_ItemLvText.text = langStr + ":1";
             }
         }
 
