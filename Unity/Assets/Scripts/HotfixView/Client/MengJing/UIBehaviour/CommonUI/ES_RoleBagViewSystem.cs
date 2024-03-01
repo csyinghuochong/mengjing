@@ -46,7 +46,7 @@ namespace ET.Client
             gameObject.transform.Find("Background/WeiXuanZhong").gameObject.SetActive(!isShow);
         }
 
-        private static void Refresh(this ES_RoleBag self)
+        public static void Refresh(this ES_RoleBag self)
         {
             self.RefreshBagItems();
         }
@@ -85,16 +85,6 @@ namespace ET.Client
             {
                 self.ScrollItemBagItems[i].UpdateSelectStatus(bagInfo);
             }
-        }
-    }
-
-    [Event(SceneType.Demo)]
-    public class ES_RoleBag_UpdateSelectHandler: AEvent<Scene, ES_RoleBag_UpdateSelect>
-    {
-        protected override async ETTask Run(Scene scene, ES_RoleBag_UpdateSelect args)
-        {
-            scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleBag.UpdateSelect(args.BagInfo);
-            await ETTask.CompletedTask;
         }
     }
 }
