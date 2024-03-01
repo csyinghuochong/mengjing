@@ -7,6 +7,7 @@ namespace ET.Client
 	public  class Scroll_Item_BagItem : Entity,IAwake,IDestroy,IUIScrollItem
 	{
 		public BagInfo BagInfo;
+		public ItemOperateEnum ItemOperateEnum;
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;

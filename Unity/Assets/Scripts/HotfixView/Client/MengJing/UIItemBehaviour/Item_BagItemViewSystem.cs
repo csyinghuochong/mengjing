@@ -18,17 +18,30 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void Refresh(this Scroll_Item_BagItem self, BagInfo bagInfo)
+        public static void Refresh(this Scroll_Item_BagItem self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum)
         {
             self.BagInfo = bagInfo;
-            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
-            self.E_ItemNumText.text = bagInfo.ItemNum.ToString();
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
-            self.E_ItemIconImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-            string qualityiconStr = FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality);
-            string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
-            self.E_ItemQualityImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
-            self.E_ItemClickButton.AddListenerWithParam(self.OnShowItemEntryPopUpHandler, bagInfo);
+            self.ItemOperateEnum = itemOperateEnum;
+
+            if (bagInfo != null)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+                self.E_ItemNumText.text = bagInfo.ItemNum.ToString();
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+                self.E_ItemIconImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                string qualityiconStr = FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality);
+                string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
+                self.E_ItemQualityImage.overrideSprite = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
+                self.E_ItemClickButton.AddListenerWithParam(self.OnShowItemEntryPopUpHandler, bagInfo);
+            }
+            else
+            {
+                self.E_ItemQualityImage.gameObject.SetActive(false);
+                self.E_ItemIconImage.gameObject.SetActive(false);
+                self.E_ItemNumText.gameObject.SetActive(false);
+                self.E_BindingImage.gameObject.SetActive(false);
+                self.E_ProtectImage.gameObject.SetActive(false);
+            }
         }
 
         public static void OnShowItemEntryPopUpHandler(this Scroll_Item_BagItem self, BagInfo bagInfo)
