@@ -11,7 +11,7 @@ namespace ET.Client
         private static void Awake(this ES_RoleBag self, Transform transform)
         {
             self.uiTransform = transform;
-            
+
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
             self.E_AllToggle.IsSelected(true);
@@ -59,15 +59,25 @@ namespace ET.Client
             BagComponentClient bagComponentClient = self.Root().GetComponent<BagComponentClient>();
 
             self.ShowBagInfos.Clear();
-            foreach (BagInfo bagInfo in bagComponentClient.GetItemsByItem((int)ItemLocType.ItemLocBag))
+
+            int itemTypeEnum = ItemTypeEnum.ALL;
+            switch (self.CurrentItemType)
             {
-                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
-                if (self.CurrentItemType == 0 || self.CurrentItemType == itemConfig.ItemType)
-                {
-                    self.ShowBagInfos.Add(bagInfo);
-                }
+                case 0:
+                    itemTypeEnum = ItemTypeEnum.ALL;
+                    break;
+                case 1:
+                    itemTypeEnum = ItemTypeEnum.Equipment;
+                    break;
+                case 2:
+                    itemTypeEnum = ItemTypeEnum.Material;
+                    break;
+                case 3:
+                    itemTypeEnum = ItemTypeEnum.Consume;
+                    break;
             }
 
+            self.ShowBagInfos.AddRange(bagComponentClient.GetItemsByType(itemTypeEnum));
             self.AddUIScrollItems(ref self.ScrollItemBagItems, self.ShowBagInfos.Count);
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }

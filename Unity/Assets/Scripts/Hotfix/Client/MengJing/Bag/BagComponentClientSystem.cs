@@ -50,7 +50,7 @@ namespace ET.Client
 
                     if (oldInfo.Loc != newInfo.Loc)
                     {
-                        List<BagInfo> oldTemp = self.GetItemsByItem(oldInfo.Loc);
+                        List<BagInfo> oldTemp = self.GetItemsByLoc(oldInfo.Loc);
                         for (int k = oldTemp.Count - 1; k >= 0; k--)
                         {
                             if (oldTemp[k].BagInfoID == newInfo.BagInfoID)
@@ -60,12 +60,12 @@ namespace ET.Client
                             }
                         }
 
-                        List<BagInfo> temp = self.GetItemsByItem(newInfo.Loc);
+                        List<BagInfo> temp = self.GetItemsByLoc(newInfo.Loc);
                         temp.Add(bagUpdate[i]);
                     }
                     else
                     {
-                        List<BagInfo> temp = self.GetItemsByItem(newInfo.Loc);
+                        List<BagInfo> temp = self.GetItemsByLoc(newInfo.Loc);
                         for (int k = 0; k < temp.Count; k++)
                         {
                             if (temp[k].BagInfoID == newInfo.BagInfoID)
@@ -93,7 +93,7 @@ namespace ET.Client
                         // HintHelp.GetInstance().DataUpdate(DataType.ChouKaWarehouseAddItem);
                     }
 
-                    List<BagInfo> temp = self.GetItemsByItem(bagInfo.Loc);
+                    List<BagInfo> temp = self.GetItemsByLoc(bagInfo.Loc);
                     temp.Add(bagInfo);
                 }
             }
@@ -102,7 +102,7 @@ namespace ET.Client
             {
                 for (int i = 0; i < bagDelete.Count; i++)
                 {
-                    List<BagInfo> temp = self.GetItemsByItem(bagDelete[i].Loc);
+                    List<BagInfo> temp = self.GetItemsByLoc(bagDelete[i].Loc);
                     for (int k = temp.Count - 1; k >= 0; k--)
                     {
                         if (temp[k].BagInfoID == bagDelete[i].BagInfoID)
@@ -117,9 +117,28 @@ namespace ET.Client
             // HintHelp.GetInstance().DataUpdate(DataType.BagItemUpdate);
         }
 
-        public static List<BagInfo> GetItemsByItem(this BagComponentClient self, int loc)
+        public static List<BagInfo> GetItemsByLoc(this BagComponentClient self, int loc)
         {
             return self.AllItemList[loc];
+        }
+
+        public static List<BagInfo> GetItemsByType(this BagComponentClient self, int itemType)
+        {
+            List<BagInfo> bagInfos = self.GetItemsByLoc((int)ItemLocType.ItemLocBag);
+            if (itemType == ItemTypeEnum.ALL)
+                return bagInfos;
+
+            List<BagInfo> typeList = new List<BagInfo>();
+            for (int i = 0; i < bagInfos.Count; i++)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
+                if (itemConfig.ItemType == (int)itemType)
+                {
+                    typeList.Add(bagInfos[i]);
+                }
+            }
+
+            return typeList;
         }
 
         public static BagInfo GetBagInfo(this BagComponentClient self, long id)
