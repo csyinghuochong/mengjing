@@ -5518,6 +5518,146 @@ namespace ET
 
 	}
 
+//好友申请回复
+	[ResponseType(nameof(F2C_FriendApplyReplyResponse))]
+	[Message(OuterMessage.C2F_FriendApplyReplyRequest)]
+	[MemoryPackable]
+	public partial class C2F_FriendApplyReplyRequest: MessageObject, IFriendActorRequest
+	{
+		public static C2F_FriendApplyReplyRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2F_FriendApplyReplyRequest), isFromPool) as C2F_FriendApplyReplyRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long FriendID { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int ReplyCode { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.FriendID = default;
+			this.ReplyCode = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.F2C_FriendApplyReplyResponse)]
+	[MemoryPackable]
+	public partial class F2C_FriendApplyReplyResponse: MessageObject, IFriendActorResponse
+	{
+		public static F2C_FriendApplyReplyResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(F2C_FriendApplyReplyResponse), isFromPool) as F2C_FriendApplyReplyResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//黑名单
+	[ResponseType(nameof(F2C_FriendBlacklistResponse))]
+	[Message(OuterMessage.C2F_FriendBlacklistRequest)]
+	[MemoryPackable]
+	public partial class C2F_FriendBlacklistRequest: MessageObject, IFriendActorRequest
+	{
+		public static C2F_FriendBlacklistRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2F_FriendBlacklistRequest), isFromPool) as C2F_FriendBlacklistRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int OperateType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long FriendId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.OperateType = default;
+			this.UnitId = default;
+			this.FriendId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.F2C_FriendBlacklistResponse)]
+	[MemoryPackable]
+	public partial class F2C_FriendBlacklistResponse: MessageObject, IFriendActorResponse
+	{
+		public static F2C_FriendBlacklistResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(F2C_FriendBlacklistResponse), isFromPool) as F2C_FriendBlacklistResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 //好友申请
 	[ResponseType(nameof(F2C_FriendApplyResponse))]
 	[Message(OuterMessage.C2F_FriendApplyRequest)]
@@ -5536,7 +5676,7 @@ namespace ET
 		public long ActorId { get; set; }
 
 		[MemoryPackOrder(1)]
-		public long UserID { get; set; }
+		public long UnitId { get; set; }
 
 		[MemoryPackOrder(0)]
 		public FriendInfo FriendInfo { get; set; }
@@ -5546,7 +5686,7 @@ namespace ET
 			if (!this.IsFromPool) return;
 			this.RpcId = default;
 			this.ActorId = default;
-			this.UserID = default;
+			this.UnitId = default;
 			this.FriendInfo = default;
 			
 			ObjectPool.Instance.Recycle(this); 
@@ -5578,6 +5718,215 @@ namespace ET
 			this.RpcId = default;
 			this.Error = default;
 			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(F2C_FriendChatRead))]
+	[Message(OuterMessage.C2F_FriendChatRead)]
+	[MemoryPackable]
+	public partial class C2F_FriendChatRead: MessageObject, IFriendActorRequest
+	{
+		public static C2F_FriendChatRead Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2F_FriendChatRead), isFromPool) as C2F_FriendChatRead; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long FriendID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.FriendID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.F2C_FriendChatRead)]
+	[MemoryPackable]
+	public partial class F2C_FriendChatRead: MessageObject, IFriendActorResponse
+	{
+		public static F2C_FriendChatRead Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(F2C_FriendChatRead), isFromPool) as F2C_FriendChatRead; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//好友删除
+	[ResponseType(nameof(F2C_FriendDeleteResponse))]
+	[Message(OuterMessage.C2F_FriendDeleteRequest)]
+	[MemoryPackable]
+	public partial class C2F_FriendDeleteRequest: MessageObject, IFriendActorRequest
+	{
+		public static C2F_FriendDeleteRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2F_FriendDeleteRequest), isFromPool) as C2F_FriendDeleteRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long FriendID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.FriendID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.F2C_FriendDeleteResponse)]
+	[MemoryPackable]
+	public partial class F2C_FriendDeleteResponse: MessageObject, IFriendActorResponse
+	{
+		public static F2C_FriendDeleteResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(F2C_FriendDeleteResponse), isFromPool) as F2C_FriendDeleteResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//好友列表
+	[ResponseType(nameof(F2C_FriendInfoResponse))]
+	[Message(OuterMessage.C2F_FriendInfoRequest)]
+	[MemoryPackable]
+	public partial class C2F_FriendInfoRequest: MessageObject, IFriendActorRequest
+	{
+		public static C2F_FriendInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2F_FriendInfoRequest), isFromPool) as C2F_FriendInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.F2C_FriendInfoResponse)]
+	[MemoryPackable]
+	public partial class F2C_FriendInfoResponse: MessageObject, IFriendActorResponse
+	{
+		public static F2C_FriendInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(F2C_FriendInfoResponse), isFromPool) as F2C_FriendInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(1)]
+		public List<FriendInfo> FriendList { get; set; } = new();
+
+		[MemoryPackOrder(2)]
+		public List<FriendInfo> ApplyList { get; set; } = new();
+
+		[MemoryPackOrder(3)]
+		public List<FriendInfo> Blacklist { get; set; } = new();
+
+		[MemoryPackOrder(4)]
+		public List<ChatInfo> FriendChats { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.FriendList.Clear();
+			this.ApplyList.Clear();
+			this.Blacklist.Clear();
+			this.FriendChats.Clear();
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -5736,7 +6085,17 @@ namespace ET
 		 public const ushort C2M_UserInfoInitRequest = 10149;
 		 public const ushort M2C_UserInfoInitResponse = 10150;
 		 public const ushort FriendInfo = 10151;
-		 public const ushort C2F_FriendApplyRequest = 10152;
-		 public const ushort F2C_FriendApplyResponse = 10153;
+		 public const ushort C2F_FriendApplyReplyRequest = 10152;
+		 public const ushort F2C_FriendApplyReplyResponse = 10153;
+		 public const ushort C2F_FriendBlacklistRequest = 10154;
+		 public const ushort F2C_FriendBlacklistResponse = 10155;
+		 public const ushort C2F_FriendApplyRequest = 10156;
+		 public const ushort F2C_FriendApplyResponse = 10157;
+		 public const ushort C2F_FriendChatRead = 10158;
+		 public const ushort F2C_FriendChatRead = 10159;
+		 public const ushort C2F_FriendDeleteRequest = 10160;
+		 public const ushort F2C_FriendDeleteResponse = 10161;
+		 public const ushort C2F_FriendInfoRequest = 10162;
+		 public const ushort F2C_FriendInfoResponse = 10163;
 	}
 }

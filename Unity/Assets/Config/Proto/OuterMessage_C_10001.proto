@@ -1425,6 +1425,44 @@ message FriendInfo
 	int32 Occ = 6;
 }
 
+//好友申请回复
+//ResponseType F2C_FriendApplyReplyResponse
+message C2F_FriendApplyReplyRequest // IFriendActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 UnitId = 1;
+	int64 FriendID = 2;
+	int32 ReplyCode = 3;
+}
+
+message F2C_FriendApplyReplyResponse // IFriendActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//黑名单
+//ResponseType F2C_FriendBlacklistResponse
+message C2F_FriendBlacklistRequest // IFriendActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int32 OperateType = 1;	//添加  2移除
+	int64 UnitId = 2;
+	int64 FriendId = 3;
+}
+
+message F2C_FriendBlacklistResponse // IFriendActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
 //好友申请
 //ResponseType F2C_FriendApplyResponse
 message C2F_FriendApplyRequest // IFriendActorRequest
@@ -1441,3 +1479,60 @@ message F2C_FriendApplyResponse // IFriendActorResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType F2C_FriendChatRead
+message C2F_FriendChatRead // IFriendActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitId = 1;
+	int64 FriendID = 2;
+}
+
+message F2C_FriendChatRead // IFriendActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//好友删除
+//ResponseType F2C_FriendDeleteResponse
+message C2F_FriendDeleteRequest // IFriendActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 UnitId = 1;
+	int64 FriendID = 2;
+}
+
+message F2C_FriendDeleteResponse // IFriendActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//好友列表
+//ResponseType F2C_FriendInfoResponse
+message C2F_FriendInfoRequest // IFriendActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 UnitId = 1;
+}
+
+message F2C_FriendInfoResponse // IFriendActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	repeated FriendInfo FriendList = 2;
+	repeated FriendInfo ApplyList = 3;
+	repeated FriendInfo Blacklist = 4;
+	repeated ChatInfo FriendChats = 5;
+}
+
