@@ -5,8 +5,181 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ItemAppraisalTips : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_ItemAppraisalTips : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
+		public BagInfo BagInfo;
+		public ItemOperateEnum ItemOpetateType;
+		
+		public UnityEngine.UI.Image E_QualityBgImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_QualityBgImage == null )
+     			{
+		    		this.m_E_QualityBgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Img_back/E_QualityBg");
+     			}
+     			return this.m_E_QualityBgImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_QualityLineImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_QualityLineImage == null )
+     			{
+		    		this.m_E_QualityLineImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Img_back/E_QualityLine");
+     			}
+     			return this.m_E_QualityLineImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ItemBackImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemBackImage == null )
+     			{
+		    		this.m_E_ItemBackImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Img_back/CommonItem/E_ItemBack");
+     			}
+     			return this.m_E_ItemBackImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ItemQualityImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemQualityImage == null )
+     			{
+		    		this.m_E_ItemQualityImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Img_back/CommonItem/E_ItemQuality");
+     			}
+     			return this.m_E_ItemQualityImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ItemDiImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemDiImage == null )
+     			{
+		    		this.m_E_ItemDiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Img_back/CommonItem/E_ItemDi");
+     			}
+     			return this.m_E_ItemDiImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_ItemNumText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemNumText == null )
+     			{
+		    		this.m_E_ItemNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Img_back/CommonItem/E_ItemNum");
+     			}
+     			return this.m_E_ItemNumText;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ItemIconImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemIconImage == null )
+     			{
+		    		this.m_E_ItemIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Img_back/CommonItem/E_ItemIcon");
+     			}
+     			return this.m_E_ItemIconImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_BangDingImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_BangDingImage == null )
+     			{
+		    		this.m_E_BangDingImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Img_back/CommonItem/E_BangDing");
+     			}
+     			return this.m_E_BangDingImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_BangDingText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_BangDingText == null )
+     			{
+		    		this.m_E_BangDingText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Img_back/E_BangDing");
+     			}
+     			return this.m_E_BangDingText;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_FengYinImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_FengYinImage == null )
+     			{
+		    		this.m_E_FengYinImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Img_back/CommonItem/E_FengYin");
+     			}
+     			return this.m_E_FengYinImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_ItemNameText
      	{
      		get
@@ -123,23 +296,6 @@ namespace ET.Client
 		    		this.m_E_ItemJingHeQualityText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Img_back/E_ItemJingHeQuality");
      			}
      			return this.m_E_ItemJingHeQualityText;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_BangDingText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_BangDingText == null )
-     			{
-		    		this.m_E_BangDingText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Img_back/E_BangDing");
-     			}
-     			return this.m_E_BangDingText;
      		}
      	}
 
@@ -485,6 +641,16 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_QualityBgImage = null;
+			this.m_E_QualityLineImage = null;
+			this.m_E_ItemBackImage = null;
+			this.m_E_ItemQualityImage = null;
+			this.m_E_ItemDiImage = null;
+			this.m_E_ItemNumText = null;
+			this.m_E_ItemIconImage = null;
+			this.m_E_BangDingImage = null;
+			this.m_E_BangDingText = null;
+			this.m_E_FengYinImage = null;
 			this.m_E_ItemNameText = null;
 			this.m_E_ItemTypeText = null;
 			this.m_E_ItemLvText = null;
@@ -492,7 +658,6 @@ namespace ET.Client
 			this.m_E_ItemMakeText = null;
 			this.m_E_ItemDesText = null;
 			this.m_E_ItemJingHeQualityText = null;
-			this.m_E_BangDingText = null;
 			this.m_EG_BagOpenSetRectTransform = null;
 			this.m_E_SellButton = null;
 			this.m_E_SellImage = null;
@@ -516,6 +681,16 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.UI.Image m_E_QualityBgImage = null;
+		private UnityEngine.UI.Image m_E_QualityLineImage = null;
+		private UnityEngine.UI.Image m_E_ItemBackImage = null;
+		private UnityEngine.UI.Image m_E_ItemQualityImage = null;
+		private UnityEngine.UI.Image m_E_ItemDiImage = null;
+		private UnityEngine.UI.Text m_E_ItemNumText = null;
+		private UnityEngine.UI.Image m_E_ItemIconImage = null;
+		private UnityEngine.UI.Image m_E_BangDingImage = null;
+		private UnityEngine.UI.Text m_E_BangDingText = null;
+		private UnityEngine.UI.Image m_E_FengYinImage = null;
 		private UnityEngine.UI.Text m_E_ItemNameText = null;
 		private UnityEngine.UI.Text m_E_ItemTypeText = null;
 		private UnityEngine.UI.Text m_E_ItemLvText = null;
@@ -523,7 +698,6 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_ItemMakeText = null;
 		private UnityEngine.UI.Text m_E_ItemDesText = null;
 		private UnityEngine.UI.Text m_E_ItemJingHeQualityText = null;
-		private UnityEngine.UI.Text m_E_BangDingText = null;
 		private UnityEngine.RectTransform m_EG_BagOpenSetRectTransform = null;
 		private UnityEngine.UI.Button m_E_SellButton = null;
 		private UnityEngine.UI.Image m_E_SellImage = null;
