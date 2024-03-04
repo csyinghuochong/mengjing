@@ -5,8 +5,11 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_EquipTips : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_EquipTips : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
+		public BagInfo BagInfo;
+		public ItemOperateEnum ItemOpetateType;
+		
 		public UnityEngine.UI.Image E_BackImage
      	{
      		get

@@ -11,6 +11,48 @@ namespace ET.Client
 
     public static class ItemViewData
     {
+        //Administrator:
+        //当道具类型为1（消耗品）时该字段的意义
+        //1 获得金币值
+        //2 获得经验值
+        //101 触发某个技能ID
+        //103 宠物蛋
+        //104 随机道具盒子
+        //105 宠物洗炼相关道具
+        //106 道具盒子,打开获取指定东西
+        //当道具类型为3（装备）时该字段的意义
+        //1 武器
+        //2 衣服
+        //3 护符
+        //4 戒指
+        //5 饰品
+        //6 鞋子
+        //7 裤子
+        //8 腰带
+        //9 手镯
+        //10 头盔
+        //11 项链
+        /// <summary>
+        /// ItemSubType To Name
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, string> ItemSubType3Name = new()
+        {
+            { 0, GameSettingLanguge.LoadLocalization("全部") },
+            { 1, GameSettingLanguge.LoadLocalization("武器") },
+            { 2, GameSettingLanguge.LoadLocalization("衣服") },
+            { 3, GameSettingLanguge.LoadLocalization("护符") },
+            { 4, GameSettingLanguge.LoadLocalization("戒指") },
+            { 5, GameSettingLanguge.LoadLocalization("饰品") },
+            { 6, GameSettingLanguge.LoadLocalization("鞋子") },
+            { 7, GameSettingLanguge.LoadLocalization("裤子") },
+            { 8, GameSettingLanguge.LoadLocalization("腰带") },
+            { 9, GameSettingLanguge.LoadLocalization("手镯") },
+            { 10, GameSettingLanguge.LoadLocalization("头盔") },
+            { 11, GameSettingLanguge.LoadLocalization("项链") },
+            { 1100, GameSettingLanguge.LoadLocalization("生肖") },
+        };
+
         [StaticField]
         public static Dictionary<int, string> ItemTypeName = new()
         {

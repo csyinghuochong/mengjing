@@ -5,6 +5,13 @@ namespace ET.Client
 {
     public static class ItemViewHelp
     {
+        public static string GetItemSubType3Name(int subType)
+        {
+            string name = string.Empty;
+            ItemViewData.ItemSubType3Name.TryGetValue(subType, out name);
+            return name;
+        }
+
         public static string QualityReturnColorUI(int ItenQuality)
         {
             string color = "FFFFFF";

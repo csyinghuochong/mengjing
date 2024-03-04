@@ -4,6 +4,28 @@ namespace ET.Client
 {
     public static class FunctionUI
     {
+        //传入值获取属性名称
+        public static string ReturnEquipNeedPropertyName(string proprety)
+        {
+            string propertyName = "";
+            switch (proprety)
+            {
+                case "1":
+                    propertyName = "攻击";
+                    break;
+
+                case "2":
+                    propertyName = "物防";
+                    break;
+
+                case "3":
+                    propertyName = "魔防";
+                    break;
+            }
+
+            return propertyName;
+        }
+
         /// <summary>
         /// 根据品质返回品质字符串
         /// 根据道具品质返回对应的品质框
