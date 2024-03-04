@@ -11,10 +11,16 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgEquipDuiBiTips self)
         {
+            self.View.E_CloseButton.AddListener(self.OnCloseButton);
         }
 
         public static void ShowWindow(this DlgEquipDuiBiTips self, Entity contextData = null)
         {
+        }
+
+        private static void OnCloseButton(this DlgEquipDuiBiTips self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
         }
 
         public static async ETTask OnUpdateDuiBiUI(this DlgEquipDuiBiTips self, BagInfo bagInfo_1, ShowItemTips args, int weight,
