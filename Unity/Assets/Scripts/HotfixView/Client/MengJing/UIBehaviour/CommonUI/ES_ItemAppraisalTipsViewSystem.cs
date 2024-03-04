@@ -336,8 +336,8 @@ namespace ET.Client
             float exceedWidth = self.E_ItemNameText.preferredWidth - self.E_ItemNameText.transform.GetComponent<RectTransform>().sizeDelta.x;
             if (exceedWidth > -20)
             {
-                // self.Img_back.GetComponent<RectTransform>().sizeDelta =
-                //         new Vector2(self.Img_backVector2.x + exceedWidth + 30, self.Img_backVector2.y);
+                Vector2 vector2 = self.E_BackImage.GetComponent<RectTransform>().sizeDelta;
+                self.E_BackImage.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(vector2.x + exceedWidth + 30, vector2.y);
             }
 
             string langStr = GameSettingLanguge.LoadLocalization("等级");

@@ -60,7 +60,7 @@ namespace ET.Client
                         args.ItemOperateEnum == ItemOperateEnum.PetEquipBag))
                 {
                     root.GetComponent<UIComponent>().GetDlgLogic<DlgEquipDuiBiTips>()
-                            .OnUpdateDuiBiUI(haveEquip, args, itemWidth, args.ItemOperateEnum).Coroutine();
+                            .OnUpdateDuiBiUI(haveEquip, args, itemWidth, args.ItemOperateEnum);
                 }
                 else if (args.BagInfo.IfJianDing == false)
                 {
@@ -73,7 +73,7 @@ namespace ET.Client
                 else
                 {
                     //显示未鉴定
-                    root.GetComponent<UIComponent>().GetDlgLogic<DlgEquipDuiBiTips>().OnUpdateAppraisalUI(args).Coroutine();
+                    root.GetComponent<UIComponent>().GetDlgLogic<DlgEquipDuiBiTips>().OnUpdateAppraisalUI(args);
                     root.GetComponent<UIComponent>().GetDlgLogic<DlgEquipDuiBiTips>().View.EG_Tips1RectTransform.GetComponent<RectTransform>()
                                     .anchoredPosition =
                             ReturnX(root, args, itemWidth);
