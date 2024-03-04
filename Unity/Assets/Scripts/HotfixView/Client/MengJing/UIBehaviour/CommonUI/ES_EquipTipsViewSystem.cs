@@ -15,7 +15,8 @@ namespace ET.Client
             self.E_UseButton.AddListenerAsync(self.OnUseButton);
             self.E_TakeoffButton.AddListenerAsync(self.OnTakeoffButton);
             self.E_SellButton.AddListenerAsync(self.OnSellButton);
-
+            self.E_HuiShouFangZhiButton.AddListenerAsync(self.OnHuiShouFangZhiButton);
+            self.E_TakeButton.AddListenerAsync(self.OnTakeButton);
             self.E_SaveStoreHouseButton.AddListenerAsync(self.OnSaveStoreHouseButton);
         }
 
@@ -41,6 +42,16 @@ namespace ET.Client
         }
 
         private static async ETTask OnSaveStoreHouseButton(this ES_EquipTips self)
+        {
+            await ETTask.CompletedTask;
+        }
+
+        private static async ETTask OnHuiShouFangZhiButton(this ES_EquipTips self)
+        {
+            await ETTask.CompletedTask;
+        }
+
+        private static async ETTask OnTakeButton(this ES_EquipTips self)
         {
             await ETTask.CompletedTask;
         }

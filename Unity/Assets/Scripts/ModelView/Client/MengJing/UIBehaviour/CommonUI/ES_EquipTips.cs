@@ -330,6 +330,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_ShowEquipSuitButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ShowEquipSuitButton == null )
+     			{
+		    		this.m_E_ShowEquipSuitButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Back/EG_UIEquipSuit/E_ShowEquipSuit");
+     			}
+     			return this.m_E_ShowEquipSuitButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ShowEquipSuitImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ShowEquipSuitImage == null )
+     			{
+		    		this.m_E_ShowEquipSuitImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back/EG_UIEquipSuit/E_ShowEquipSuit");
+     			}
+     			return this.m_E_ShowEquipSuitImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Text EquipSuitItemNamePropertyTextText
      	{
      		get
@@ -657,6 +691,8 @@ namespace ET.Client
 			this.m_EG_UIEquipGemHoleSetRectTransform = null;
 			this.m_EG_EquipZhuanJingSetRectTransform = null;
 			this.m_EG_UIEquipSuitRectTransform = null;
+			this.m_E_ShowEquipSuitButton = null;
+			this.m_E_ShowEquipSuitImage = null;
 			this.m_EquipSuitItemNamePropertyTextText = null;
 			this.m_EG_EquipHintSkillRectTransform = null;
 			this.m_EG_EquipBtnSetRectTransform = null;
@@ -697,6 +733,8 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_UIEquipGemHoleSetRectTransform = null;
 		private UnityEngine.RectTransform m_EG_EquipZhuanJingSetRectTransform = null;
 		private UnityEngine.RectTransform m_EG_UIEquipSuitRectTransform = null;
+		private UnityEngine.UI.Button m_E_ShowEquipSuitButton = null;
+		private UnityEngine.UI.Image m_E_ShowEquipSuitImage = null;
 		private UnityEngine.UI.Text m_EquipSuitItemNamePropertyTextText = null;
 		private UnityEngine.RectTransform m_EG_EquipHintSkillRectTransform = null;
 		private UnityEngine.RectTransform m_EG_EquipBtnSetRectTransform = null;
