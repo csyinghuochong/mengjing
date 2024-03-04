@@ -5,7 +5,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_EquipTips : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_EquipTips : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public BagInfo BagInfo;
 		public ItemOperateEnum ItemOpetateType;
@@ -418,6 +418,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_EquipMakeText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_EquipMakeText == null )
+     			{
+		    		this.m_E_EquipMakeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/E_EquipMake");
+     			}
+     			return this.m_E_EquipMakeText;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_TakeButton
      	{
      		get
@@ -483,6 +500,40 @@ namespace ET.Client
 		    		this.m_E_HuiShouFangZhiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/E_HuiShouFangZhi");
      			}
      			return this.m_E_HuiShouFangZhiImage;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_EquipBottomRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_EquipBottomRectTransform == null )
+     			{
+		    		this.m_EG_EquipBottomRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/EG_EquipBottom");
+     			}
+     			return this.m_EG_EquipBottomRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_EquipDesText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_EquipDesText == null )
+     			{
+		    		this.m_E_EquipDesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/EG_EquipBottom/E_EquipDes");
+     			}
+     			return this.m_E_EquipDesText;
      		}
      	}
 
@@ -699,10 +750,13 @@ namespace ET.Client
 			this.m_EquipSuitItemNamePropertyTextText = null;
 			this.m_EG_EquipHintSkillRectTransform = null;
 			this.m_EG_EquipBtnSetRectTransform = null;
+			this.m_E_EquipMakeText = null;
 			this.m_E_TakeButton = null;
 			this.m_E_TakeImage = null;
 			this.m_E_HuiShouFangZhiButton = null;
 			this.m_E_HuiShouFangZhiImage = null;
+			this.m_EG_EquipBottomRectTransform = null;
+			this.m_E_EquipDesText = null;
 			this.m_E_SaveStoreHouseButton = null;
 			this.m_E_SaveStoreHouseImage = null;
 			this.m_E_StoreHouseSetButton = null;
@@ -741,10 +795,13 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_EquipSuitItemNamePropertyTextText = null;
 		private UnityEngine.RectTransform m_EG_EquipHintSkillRectTransform = null;
 		private UnityEngine.RectTransform m_EG_EquipBtnSetRectTransform = null;
+		private UnityEngine.UI.Text m_E_EquipMakeText = null;
 		private UnityEngine.UI.Button m_E_TakeButton = null;
 		private UnityEngine.UI.Image m_E_TakeImage = null;
 		private UnityEngine.UI.Button m_E_HuiShouFangZhiButton = null;
 		private UnityEngine.UI.Image m_E_HuiShouFangZhiImage = null;
+		private UnityEngine.RectTransform m_EG_EquipBottomRectTransform = null;
+		private UnityEngine.UI.Text m_E_EquipDesText = null;
 		private UnityEngine.UI.Button m_E_SaveStoreHouseButton = null;
 		private UnityEngine.UI.Image m_E_SaveStoreHouseImage = null;
 		private UnityEngine.UI.Button m_E_StoreHouseSetButton = null;

@@ -70,7 +70,7 @@ namespace ET.Client
             textEquipTypeSon = self.GetEquipType(itemconf.EquipType);
             textEquipType = GameSettingLanguge.LoadLocalization(textEquipType);
 
-            //生肖处理
+            // 生肖处理
             if (itemconf.EquipType == 101)
             {
                 textEquipType = self.GetEquipShengXiaoType(itemconf.ItemSubType % 100);
@@ -104,7 +104,7 @@ namespace ET.Client
             else
             {
                 self.E_EquipBangDingText.text = GameSettingLanguge.LoadLocalization("未绑定");
-                self.E_EquipBangDingText.color = new Color(255 / 255, 240f / 255f, 200f / 255f);
+                self.E_EquipBangDingText.color = new Color(255f / 255f, 240f / 255f, 200f / 255f);
                 self.E_EquipBangDingText.gameObject.SetActive(false);
             }
 
@@ -125,7 +125,6 @@ namespace ET.Client
             //显示基础信息
             self.E_EquipNameText.text = equipName;
             self.E_EquipNameText.color = FunctionUI.QualityReturnColor(ItemQuality);
-            //self.Lab_EquipType.GetComponent<Text>().text = "类型" + " : " + textEquipType;
             float exceedWidth = self.E_EquipNameText.preferredWidth - self.E_EquipNameText.transform.GetComponent<RectTransform>().sizeDelta.x;
             if (exceedWidth > 0)
             {
@@ -174,7 +173,6 @@ namespace ET.Client
                         int value = 0;
                         if (value < int.Parse(needProperty[1]))
                         {
-                            //Obj_EquipWearNeedProperty.GetComponent<Text>().color = Color.red;
                             string langStr_3 = GameSettingLanguge.LoadLocalization("攻击力不足");
                             self.E_EquipNeedProText.text = langStr_1 + langStr_4 + langStr_2 + " ：" + needProperty[1] +
                                     "<color=#ff0000ff>  (" + langStr_3 + ")</color>";
@@ -190,32 +188,25 @@ namespace ET.Client
                 self.E_EquipNeedProText.gameObject.SetActive(false);
             }
 
-            // int ItemBlackNum = 0;
-            // if (ItemBlackDes != "0" && ItemBlackDes != "")
-            // {
-            //     ItemBlackNum = (int)((ItemBlackDes.Length - 16) / 16) + 1;
-            // }
-            // else
-            // {
-            //     self.Obj_EquipBottom.SetActive(false);
-            // }
-            //
-            // if (ItemBlackDes.Length > 32 && self.Obj_EquipDes != null)
-            // {
-            //     ItemBlackNum = (int)((ItemBlackDes.Length - 32) / 16) + 1;
-            //     self.Obj_EquipDes.GetComponent<RectTransform>().sizeDelta = new Vector2(240.0f, 40.0f + 16.0f * ItemBlackNum);
-            //     self.Obj_EquipDes.GetComponent<Text>().text = ItemBlackDes;
-            // }
-            //
-            // // 显示制造方
-            // if (!string.IsNullOrEmpty(self.BagInfo.MakePlayer))
-            // {
-            //     self.Obj_Lab_EquipMake.GetComponent<Text>().text = $"由<color=#805100>{self.BagInfo.MakePlayer}</color>打造";
-            // }
-            // else
-            // {
-            //     self.Obj_Lab_EquipMake.GetComponent<Text>().text = "";
-            // }
+            int ItemBlackNum = 0;
+            if (ItemBlackDes != "0" && ItemBlackDes != "")
+            {
+                ItemBlackNum = (ItemBlackDes.Length - 16) / 16 + 1;
+            }
+            else
+            {
+                self.EG_EquipBottomRectTransform.gameObject.SetActive(false);
+            }
+
+            if (ItemBlackDes.Length > 32)
+            {
+                ItemBlackNum = (ItemBlackDes.Length - 32) / 16 + 1;
+                self.E_EquipDesText.GetComponent<RectTransform>().sizeDelta = new Vector2(240.0f, 40.0f + 16.0f * ItemBlackNum);
+                self.E_EquipDesText.text = ItemBlackDes;
+            }
+
+            // 显示制造方
+            self.E_EquipMakeText.text = !string.IsNullOrEmpty(self.BagInfo.MakePlayer)? $"由<color=#805100>{self.BagInfo.MakePlayer}</color>打造" : "";
         }
 
         //获取装备子类型名称
