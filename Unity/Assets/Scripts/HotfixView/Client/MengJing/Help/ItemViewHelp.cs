@@ -5,6 +5,109 @@ namespace ET.Client
 {
     public static class ItemViewHelp
     {
+        public static string QualityReturnColorUI(int ItenQuality)
+        {
+            string color = "FFFFFF";
+            switch (ItenQuality)
+            {
+                case 1:
+                    color = "686868";
+                    break;
+
+                case 2:
+                    color = "47930F";
+                    break;
+                case 3:
+                    color = "108793";
+                    break;
+
+                case 4:
+                    color = "9D298C";
+                    break;
+                case 5:
+                    color = "9C2933";
+                    break;
+                case 6:
+                    color = "9C2933";
+                    break;
+            }
+
+            return color;
+        }
+
+        public static string GetEquipSonType(string itemSubType)
+        {
+            switch (itemSubType)
+            {
+                case "1":
+                    return "武器";
+
+                case "2":
+                    return "衣服";
+
+                case "3":
+                    return "护符";
+
+                case "4":
+                    return "戒指";
+
+                case "5":
+                    return "饰品";
+
+                case "6":
+                    return "鞋子";
+
+                case "7":
+                    return "裤子";
+
+                case "8":
+                    return "腰带";
+
+                case "9":
+                    return "手套";
+
+                case "10":
+                    return "头盔";
+
+                case "11":
+                    return "项链";
+            }
+
+            return "";
+        }
+
+        public static string GetEquipTypeShow(int type)
+        {
+            switch (type)
+            {
+                case 0:
+                    return "首饰";
+
+                case 1:
+                    return "剑";
+
+                case 2:
+                    return "刀";
+
+                case 3:
+                    return "法杖";
+
+                case 4:
+                    return "魔法书";
+
+                case 11:
+                    return "布甲";
+
+                case 12:
+                    return "轻甲";
+
+                case 13:
+                    return "重甲";
+            }
+
+            return "";
+        }
+
         public static string GetItemDesc(BagInfo baginfo)
         {
             ItemConfig itemconf = ItemConfigCategory.Instance.Get(baginfo.ItemID);

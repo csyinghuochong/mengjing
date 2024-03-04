@@ -5,7 +5,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ItemAppraisalTips : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_ItemAppraisalTips : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public BagInfo BagInfo;
 		public ItemOperateEnum ItemOpetateType;
@@ -282,6 +282,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_ItemCostDesText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemCostDesText == null )
+     			{
+		    		this.m_E_ItemCostDesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Img_back/E_ItemDes/E_ItemCostDes");
+     			}
+     			return this.m_E_ItemCostDesText;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_ItemJingHeQualityText
      	{
      		get
@@ -296,6 +313,40 @@ namespace ET.Client
 		    		this.m_E_ItemJingHeQualityText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Img_back/E_ItemJingHeQuality");
      			}
      			return this.m_E_ItemJingHeQualityText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_ItemJingHePropertyText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemJingHePropertyText == null )
+     			{
+		    		this.m_E_ItemJingHePropertyText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Img_back/E_ItemJingHeQuality/E_ItemJingHeProperty");
+     			}
+     			return this.m_E_ItemJingHePropertyText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_ItemJingHeTipText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ItemJingHeTipText == null )
+     			{
+		    		this.m_E_ItemJingHeTipText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Img_back/E_ItemJingHeQuality/E_ItemJingHeTip");
+     			}
+     			return this.m_E_ItemJingHeTipText;
      		}
      	}
 
@@ -657,7 +708,10 @@ namespace ET.Client
 			this.m_E_ItemSubTypeText = null;
 			this.m_E_ItemMakeText = null;
 			this.m_E_ItemDesText = null;
+			this.m_E_ItemCostDesText = null;
 			this.m_E_ItemJingHeQualityText = null;
+			this.m_E_ItemJingHePropertyText = null;
+			this.m_E_ItemJingHeTipText = null;
 			this.m_EG_BagOpenSetRectTransform = null;
 			this.m_E_SellButton = null;
 			this.m_E_SellImage = null;
@@ -697,7 +751,10 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_ItemSubTypeText = null;
 		private UnityEngine.UI.Text m_E_ItemMakeText = null;
 		private UnityEngine.UI.Text m_E_ItemDesText = null;
+		private UnityEngine.UI.Text m_E_ItemCostDesText = null;
 		private UnityEngine.UI.Text m_E_ItemJingHeQualityText = null;
+		private UnityEngine.UI.Text m_E_ItemJingHePropertyText = null;
+		private UnityEngine.UI.Text m_E_ItemJingHeTipText = null;
 		private UnityEngine.RectTransform m_EG_BagOpenSetRectTransform = null;
 		private UnityEngine.UI.Button m_E_SellButton = null;
 		private UnityEngine.UI.Image m_E_SellImage = null;

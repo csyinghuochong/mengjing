@@ -39,5 +39,18 @@ namespace ET.Client
                 transform.GetChild(i).gameObject.SetActive(false);
             }
         }
+
+        public static void SetImageGray(Scene root, GameObject obj, bool val)
+        {
+            if (val)
+            {
+                Material mat = root.GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Material>(ABPathHelper.GetMaterialPath("UI_Hui"));
+                obj.GetComponent<Image>().material = mat;
+            }
+            else
+            {
+                obj.GetComponent<Image>().material = null;
+            }
+        }
     }
 }
