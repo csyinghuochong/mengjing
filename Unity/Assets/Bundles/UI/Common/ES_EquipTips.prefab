@@ -1517,7 +1517,7 @@ RectTransform:
   - {fileID: 8205965442934585770}
   - {fileID: 6292898131831555855}
   m_Father: {fileID: 22433626}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -1610,7 +1610,7 @@ GameObject:
   - component: {fileID: 22255452}
   - component: {fileID: 5522059074052291450}
   m_Layer: 5
-  m_Name: Img_EquipQuality
+  m_Name: E_EquipQuality
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1893,7 +1893,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22410252}
   m_Layer: 5
-  m_Name: EquipHintSkill
+  m_Name: EG_EquipHintSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1915,7 +1915,7 @@ RectTransform:
   - {fileID: 22400524}
   - {fileID: 2127443172047836372}
   m_Father: {fileID: 22433626}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -2030,7 +2030,7 @@ GameObject:
   - component: {fileID: 22201352}
   - component: {fileID: 11477402}
   m_Layer: 5
-  m_Name: Img_EquipName
+  m_Name: E_EquipName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2188,7 +2188,7 @@ GameObject:
   - component: {fileID: 22280246}
   - component: {fileID: 11464188}
   m_Layer: 5
-  m_Name: Img_back
+  m_Name: E_Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2219,6 +2219,7 @@ RectTransform:
   - {fileID: 6782266643122227561}
   - {fileID: 3187636884617841883}
   - {fileID: 8562765440198010920}
+  - {fileID: 228798881656879158}
   - {fileID: 22488176}
   - {fileID: 4168483418614422191}
   - {fileID: 22438596}
@@ -2227,7 +2228,6 @@ RectTransform:
   - {fileID: 22494566}
   - {fileID: 22410252}
   - {fileID: 22445696}
-  - {fileID: 228798881656879158}
   m_Father: {fileID: 22429478}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2286,7 +2286,7 @@ GameObject:
   - component: {fileID: 22260902}
   - component: {fileID: 11479676}
   m_Layer: 5
-  m_Name: Obj_EquipPropertyText
+  m_Name: E_EquipPropertyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2305,7 +2305,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 22433626}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2851,7 +2851,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22494566}
   m_Layer: 5
-  m_Name: Obj_UIEquipSuit
+  m_Name: EG_UIEquipSuit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2878,7 +2878,7 @@ RectTransform:
   - {fileID: 1790535353717131799}
   - {fileID: 6027690583831304678}
   m_Father: {fileID: 22433626}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -2897,7 +2897,7 @@ GameObject:
   - component: {fileID: 22272818}
   - component: {fileID: 11403556}
   m_Layer: 5
-  m_Name: Img_EquipLv
+  m_Name: E_EquipLv
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2975,7 +2975,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22445696}
   m_Layer: 5
-  m_Name: EquipBtnSet
+  m_Name: EG_EquipBtnSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3003,7 +3003,7 @@ RectTransform:
   - {fileID: 22471092}
   - {fileID: 22466812}
   m_Father: {fileID: 22433626}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -3232,7 +3232,7 @@ GameObject:
   - component: {fileID: 22295194}
   - component: {fileID: 9203384889058410813}
   m_Layer: 5
-  m_Name: Img_EquipIcon
+  m_Name: E_EquipIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3634,7 +3634,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22435850}
   m_Layer: 5
-  m_Name: Obj_UIEquipGemHoleSet
+  m_Name: EG_UIEquipGemHoleSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3657,7 +3657,7 @@ RectTransform:
   - {fileID: 22427846}
   - {fileID: 22426852}
   m_Father: {fileID: 22433626}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -4136,7 +4136,7 @@ GameObject:
   - component: {fileID: 5261277701778802063}
   - component: {fileID: 8454842721177295437}
   m_Layer: 5
-  m_Name: Lab_EquipBangDing
+  m_Name: E_EquipBangDing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4376,7 +4376,7 @@ GameObject:
   - component: {fileID: 101235505322017243}
   - component: {fileID: 217735008111827894}
   m_Layer: 5
-  m_Name: Img_EquipBangDing
+  m_Name: E_EquipBangDingImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4660,7 +4660,7 @@ GameObject:
   - component: {fileID: 133437793956114968}
   - component: {fileID: 1247041787870449777}
   m_Layer: 5
-  m_Name: Lab_EquipQiangHua
+  m_Name: E_EquipQiangHua
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4679,7 +4679,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 22433626}
-  m_RootOrder: 21
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -4974,7 +4974,7 @@ GameObject:
   - component: {fileID: 2012740735487676193}
   - component: {fileID: 6977628843122649342}
   m_Layer: 5
-  m_Name: Lab_EquipNeedLv
+  m_Name: E_EquipNeedLv
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5520,7 +5520,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3555494663580831805
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5715,7 +5715,7 @@ GameObject:
   - component: {fileID: 4233432363910444981}
   - component: {fileID: 1653021494524829359}
   m_Layer: 5
-  m_Name: Img_EquipDi
+  m_Name: E_EquipDi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5791,7 +5791,7 @@ GameObject:
   - component: {fileID: 8085699715775169134}
   - component: {fileID: 749896864611280908}
   m_Layer: 5
-  m_Name: Img_EquipTypeSon
+  m_Name: E_EquipTypeSon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5889,7 +5889,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 22433626}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -5932,7 +5932,7 @@ GameObject:
   - component: {fileID: 5554969584530193257}
   - component: {fileID: 9017059751499089309}
   m_Layer: 5
-  m_Name: Lab_EquipNeedPro
+  m_Name: E_EquipNeedPro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6392,7 +6392,7 @@ GameObject:
   - component: {fileID: 2669951151838272551}
   - component: {fileID: 7445282083581107742}
   m_Layer: 5
-  m_Name: ImageQualityLine
+  m_Name: E_QualityLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6468,7 +6468,7 @@ GameObject:
   - component: {fileID: 1251510913223293042}
   - component: {fileID: 2144047580735875544}
   m_Layer: 5
-  m_Name: Lab_EquipType
+  m_Name: E_EquipType
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6689,7 +6689,7 @@ GameObject:
   - component: {fileID: 4199758170451089445}
   - component: {fileID: 469512450182325845}
   m_Layer: 5
-  m_Name: ImageQualityBg
+  m_Name: E_QualityBg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6763,7 +6763,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2956074884418475024}
   m_Layer: 5
-  m_Name: ObjEquipZhuanJingSet
+  m_Name: EG_EquipZhuanJingSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6784,7 +6784,7 @@ RectTransform:
   - {fileID: 4346037148072066380}
   - {fileID: 6629893382390867818}
   m_Father: {fileID: 22433626}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
