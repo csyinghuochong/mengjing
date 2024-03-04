@@ -381,6 +381,261 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_TakeButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TakeButton == null )
+     			{
+		    		this.m_E_TakeButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/E_Take");
+     			}
+     			return this.m_E_TakeButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_TakeImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TakeImage == null )
+     			{
+		    		this.m_E_TakeImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/E_Take");
+     			}
+     			return this.m_E_TakeImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_HuiShouFangZhiButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_HuiShouFangZhiButton == null )
+     			{
+		    		this.m_E_HuiShouFangZhiButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/E_HuiShouFangZhi");
+     			}
+     			return this.m_E_HuiShouFangZhiButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_HuiShouFangZhiImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_HuiShouFangZhiImage == null )
+     			{
+		    		this.m_E_HuiShouFangZhiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/E_HuiShouFangZhi");
+     			}
+     			return this.m_E_HuiShouFangZhiImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_SaveStoreHouseButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SaveStoreHouseButton == null )
+     			{
+		    		this.m_E_SaveStoreHouseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/E_SaveStoreHouse");
+     			}
+     			return this.m_E_SaveStoreHouseButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_SaveStoreHouseImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SaveStoreHouseImage == null )
+     			{
+		    		this.m_E_SaveStoreHouseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/E_SaveStoreHouse");
+     			}
+     			return this.m_E_SaveStoreHouseImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_StoreHouseSetButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_StoreHouseSetButton == null )
+     			{
+		    		this.m_E_StoreHouseSetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/E_StoreHouseSet");
+     			}
+     			return this.m_E_StoreHouseSetButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_StoreHouseSetImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_StoreHouseSetImage == null )
+     			{
+		    		this.m_E_StoreHouseSetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/E_StoreHouseSet");
+     			}
+     			return this.m_E_StoreHouseSetImage;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_BagOpenSetRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_BagOpenSetRectTransform == null )
+     			{
+		    		this.m_EG_BagOpenSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/EG_BagOpenSet");
+     			}
+     			return this.m_EG_BagOpenSetRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_SellButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SellButton == null )
+     			{
+		    		this.m_E_SellButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/EG_BagOpenSet/E_Sell");
+     			}
+     			return this.m_E_SellButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_SellImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SellImage == null )
+     			{
+		    		this.m_E_SellImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/EG_BagOpenSet/E_Sell");
+     			}
+     			return this.m_E_SellImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_UseButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_UseButton == null )
+     			{
+		    		this.m_E_UseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/EG_BagOpenSet/E_Use");
+     			}
+     			return this.m_E_UseButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_UseImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_UseImage == null )
+     			{
+		    		this.m_E_UseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/EG_BagOpenSet/E_Use");
+     			}
+     			return this.m_E_UseImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_TakeoffButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TakeoffButton == null )
+     			{
+		    		this.m_E_TakeoffButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/RoseEquipOpenSet/E_Takeoff");
+     			}
+     			return this.m_E_TakeoffButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_TakeoffImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TakeoffImage == null )
+     			{
+		    		this.m_E_TakeoffImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/RoseEquipOpenSet/E_Takeoff");
+     			}
+     			return this.m_E_TakeoffImage;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_BackImage = null;
@@ -405,6 +660,21 @@ namespace ET.Client
 			this.m_EquipSuitItemNamePropertyTextText = null;
 			this.m_EG_EquipHintSkillRectTransform = null;
 			this.m_EG_EquipBtnSetRectTransform = null;
+			this.m_E_TakeButton = null;
+			this.m_E_TakeImage = null;
+			this.m_E_HuiShouFangZhiButton = null;
+			this.m_E_HuiShouFangZhiImage = null;
+			this.m_E_SaveStoreHouseButton = null;
+			this.m_E_SaveStoreHouseImage = null;
+			this.m_E_StoreHouseSetButton = null;
+			this.m_E_StoreHouseSetImage = null;
+			this.m_EG_BagOpenSetRectTransform = null;
+			this.m_E_SellButton = null;
+			this.m_E_SellImage = null;
+			this.m_E_UseButton = null;
+			this.m_E_UseImage = null;
+			this.m_E_TakeoffButton = null;
+			this.m_E_TakeoffImage = null;
 			this.uiTransform = null;
 		}
 
@@ -430,6 +700,21 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_EquipSuitItemNamePropertyTextText = null;
 		private UnityEngine.RectTransform m_EG_EquipHintSkillRectTransform = null;
 		private UnityEngine.RectTransform m_EG_EquipBtnSetRectTransform = null;
+		private UnityEngine.UI.Button m_E_TakeButton = null;
+		private UnityEngine.UI.Image m_E_TakeImage = null;
+		private UnityEngine.UI.Button m_E_HuiShouFangZhiButton = null;
+		private UnityEngine.UI.Image m_E_HuiShouFangZhiImage = null;
+		private UnityEngine.UI.Button m_E_SaveStoreHouseButton = null;
+		private UnityEngine.UI.Image m_E_SaveStoreHouseImage = null;
+		private UnityEngine.UI.Button m_E_StoreHouseSetButton = null;
+		private UnityEngine.UI.Image m_E_StoreHouseSetImage = null;
+		private UnityEngine.RectTransform m_EG_BagOpenSetRectTransform = null;
+		private UnityEngine.UI.Button m_E_SellButton = null;
+		private UnityEngine.UI.Image m_E_SellImage = null;
+		private UnityEngine.UI.Button m_E_UseButton = null;
+		private UnityEngine.UI.Image m_E_UseImage = null;
+		private UnityEngine.UI.Button m_E_TakeoffButton = null;
+		private UnityEngine.UI.Image m_E_TakeoffImage = null;
 		public Transform uiTransform = null;
 	}
 }
