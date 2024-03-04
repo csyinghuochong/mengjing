@@ -316,6 +316,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_ZhuanJingStatusDesText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ZhuanJingStatusDesText == null )
+     			{
+		    		this.m_E_ZhuanJingStatusDesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Back/EG_EquipZhuanJingSet/Img_Title_1/E_ZhuanJingStatusDes");
+     			}
+     			return this.m_E_ZhuanJingStatusDesText;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ZhuanJingStatusImgImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ZhuanJingStatusImgImage == null )
+     			{
+		    		this.m_E_ZhuanJingStatusImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back/EG_EquipZhuanJingSet/Img_Title_1/E_ZhuanJingStatusDes/E_ZhuanJingStatusImg");
+     			}
+     			return this.m_E_ZhuanJingStatusImgImage;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_UIEquipSuitRectTransform
      	{
      		get
@@ -744,6 +778,8 @@ namespace ET.Client
 			this.m_E_EquipPropertyTextText = null;
 			this.m_EG_UIEquipGemHoleSetRectTransform = null;
 			this.m_EG_EquipZhuanJingSetRectTransform = null;
+			this.m_E_ZhuanJingStatusDesText = null;
+			this.m_E_ZhuanJingStatusImgImage = null;
 			this.m_EG_UIEquipSuitRectTransform = null;
 			this.m_E_ShowEquipSuitButton = null;
 			this.m_E_ShowEquipSuitImage = null;
@@ -789,6 +825,8 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_EquipPropertyTextText = null;
 		private UnityEngine.RectTransform m_EG_UIEquipGemHoleSetRectTransform = null;
 		private UnityEngine.RectTransform m_EG_EquipZhuanJingSetRectTransform = null;
+		private UnityEngine.UI.Text m_E_ZhuanJingStatusDesText = null;
+		private UnityEngine.UI.Image m_E_ZhuanJingStatusImgImage = null;
 		private UnityEngine.RectTransform m_EG_UIEquipSuitRectTransform = null;
 		private UnityEngine.UI.Button m_E_ShowEquipSuitButton = null;
 		private UnityEngine.UI.Image m_E_ShowEquipSuitImage = null;

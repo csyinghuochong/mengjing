@@ -53,6 +53,7 @@ namespace ET.Client
             self.E_QualityBgImage.sprite = sp;
 
             self.ShowBaseAttribute();
+            self.ZhuanJingStatus(occTwoValue, itemconf, baginfo);
         }
 
         private static void ShowBaseAttribute(this ES_EquipTips self)
@@ -207,6 +208,37 @@ namespace ET.Client
 
             // 显示制造方
             self.E_EquipMakeText.text = !string.IsNullOrEmpty(self.BagInfo.MakePlayer)? $"由<color=#805100>{self.BagInfo.MakePlayer}</color>打造" : "";
+        }
+
+        private static void ZhuanJingStatus(this ES_EquipTips self, int occTwoValue, ItemConfig itemconf, BagInfo baginfo)
+        {
+            if (occTwoValue != 0)
+            {
+                if (itemconf.EquipType == 11 || itemconf.EquipType == 12 || itemconf.EquipType == 13 && baginfo.Loc == (int)ItemLocType.ItemLocEquip)
+                {
+                    self.E_ZhuanJingStatusDesText.gameObject.SetActive(true);
+                    int selfMastery = OccupationTwoConfigCategory.Instance.Get(occTwoValue).ArmorMastery;
+                    if (selfMastery == itemconf.EquipType)
+                    {
+                        //occShowStr = "         (护甲专精+20%)";
+                        self.E_ZhuanJingStatusDesText.text = "已激活护甲专精";
+                        self.E_ZhuanJingStatusDesText.color = new Color(0.52f, 0.75f, 0);
+                        self.E_ZhuanJingStatusImgImage.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        self.E_ZhuanJingStatusDesText.text = "未激活护甲专精";
+                        self.E_ZhuanJingStatusDesText.color = new Color(0.58f, 0.58f, 0.58f);
+                        self.E_ZhuanJingStatusImgImage.gameObject.SetActive(false);
+                    }
+                }
+            }
+            else
+            {
+                self.E_ZhuanJingStatusDesText.text = "转职后激活护甲专精";
+                self.E_ZhuanJingStatusDesText.color = new Color(0.58f, 0.58f, 0.58f);
+                self.E_ZhuanJingStatusImgImage.gameObject.SetActive(false);
+            }
         }
 
         //获取装备子类型名称
