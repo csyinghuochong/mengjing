@@ -23,5 +23,6 @@ namespace ET.Client
 		WindowID_Friend,
 		WindowID_ItemSellTip,
 		WindowID_EquipDuiBiTips,
+		WindowID_PopupTip,
 	}
 }
