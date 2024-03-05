@@ -57,7 +57,6 @@ namespace ET.Client
                 self.E_ItemClickButton.gameObject.SetActive(true);
                 self.E_ItemClickButton.AddListener(() =>
                 {
-                    Log.Info("1111111111");
                     EventSystem.Instance.Publish(self.Root(),
                         new ShowItemTips() { BagInfo = bagInfo, ItemOperateEnum = self.ItemOperateEnum, InputPoint = Input.mousePosition });
                     updateSelectAction?.Invoke(self.BagInfo);
