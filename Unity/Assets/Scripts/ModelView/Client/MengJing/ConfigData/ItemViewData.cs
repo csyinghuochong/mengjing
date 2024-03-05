@@ -11,6 +11,12 @@ namespace ET.Client
 
     public static class ItemViewData
     {
+        [StaticField]
+        public static Dictionary<int, List<int>> OccWeaponList = new()
+        {
+            { 1, new List<int>() { 0, 1, 2 } }, { 2, new List<int>() { 0, 3, 4 } }, { 3, new List<int>() { 0, 1, 5 } }
+        };
+
         //宝石槽位
         [StaticField]
         public static Dictionary<int, string> GemHoleName = new()

@@ -28,7 +28,7 @@ namespace ET.Client
         public static void OnUpdateEquipUI(this DlgEquipDuiBiTips self, ShowItemTips args)
         {
             self.View.ES_EquipTips.uiTransform.gameObject.SetActive(true);
-            self.View.ES_EquipTips.InitData(args.BagInfo, args.ItemOperateEnum, 0, args.EquipList);
+            self.View.ES_EquipTips.RefreshInfo(args.BagInfo, args.ItemOperateEnum, 0, args.EquipList);
         }
 
         public static void OnUpdateAppraisalUI(this DlgEquipDuiBiTips self, ShowItemTips args)

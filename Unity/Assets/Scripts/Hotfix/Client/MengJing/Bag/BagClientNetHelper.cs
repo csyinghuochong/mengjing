@@ -115,5 +115,71 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask RequestWearEquip(Scene root, BagInfo bagInfo)
+        {
+            ItemConfig itemCof = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+            // if (self.GetEquipByItemId(bagInfo.ItemID)!=null && itemCof.ItemSubType == 5)
+            // {
+            //     HintHelp.GetInstance().ShowHint("已佩戴该装备！");
+            //     return;
+            // }
+            // if (itemCof.ItemType == 4)
+            // {
+            //     HintHelp.GetInstance().ShowHint("请到装备界面穿戴宝石！");
+            //     return;
+            // }
+
+            //猎人单独处理
+            int occ = root.GetComponent<UserInfoComponentClient>().UserInfo.Occ;
+            if (occ == 3 && itemCof.ItemSubType == (int)ItemSubTypeEnum.Wuqi)
+            {
+                C2M_ItemOperateWearRequest c2M_ItemOperate = new C2M_ItemOperateWearRequest() { OperateType = 3, OperateBagID = bagInfo.BagInfoID };
+                M2C_ItemOperateWearResponse m2C_ItemOperate =
+                        (M2C_ItemOperateWearResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2M_ItemOperate);
+            }
+            else
+            {
+                C2M_ItemOperateRequest m_ItemOperateWear = new C2M_ItemOperateRequest() { OperateType = 3, OperateBagID = bagInfo.BagInfoID };
+                M2C_ItemOperateResponse r2c_roleEquip =
+                        (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(m_ItemOperateWear);
+            }
+
+            string ItemModelID = "";
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+            if (itemConfig.ItemSubType == (int)ItemSubTypeEnum.Wuqi)
+            {
+                ItemModelID = itemConfig.ItemModelID;
+            }
+
+            // self.ZoneScene().GetComponent<AttackComponent>().UpdateComboTime();
+            // HintHelp.GetInstance().DataUpdate(DataType.EquipWear, ItemModelID);
+        }
+
+        public static async ETTask RequestTakeoffEquip(Scene root, BagInfo bagInfo)
+        {
+            //猎人单独处理
+            int occ = root.GetComponent<UserInfoComponentClient>().UserInfo.Occ;
+            ItemConfig itemCof = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+            if (occ == 3 && itemCof.ItemSubType == (int)ItemSubTypeEnum.Wuqi)
+            {
+                C2M_ItemOperateWearRequest c2M_ItemOperate = new C2M_ItemOperateWearRequest() { OperateType = 4, OperateBagID = bagInfo.BagInfoID };
+                M2C_ItemOperateWearResponse m2C_ItemOperate =
+                        (M2C_ItemOperateWearResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2M_ItemOperate);
+            }
+            else
+            {
+                C2M_ItemOperateRequest m_ItemOperateWear = new C2M_ItemOperateRequest() { OperateType = 4, OperateBagID = bagInfo.BagInfoID };
+                M2C_ItemOperateResponse r2c_roleEquip =
+                        (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(m_ItemOperateWear);
+                if (r2c_roleEquip.Error != 0)
+                {
+                    return;
+                }
+            }
+
+            // self.ZoneScene().GetComponent<AttackComponent>().UpdateComboTime();
+            // HintHelp.GetInstance().DataUpdate(DataType.EquipWear);
+        }
     }
 }
