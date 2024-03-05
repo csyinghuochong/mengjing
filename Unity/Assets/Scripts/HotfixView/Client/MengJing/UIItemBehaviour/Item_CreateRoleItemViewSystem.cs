@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -19,7 +20,7 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void Refresh(this Scroll_Item_CreateRoleItem self, CreateRoleInfo createRoleInfo)
+        public static void Refresh(this Scroll_Item_CreateRoleItem self, CreateRoleInfo createRoleInfo, Action<CreateRoleInfo> updateSelectAction)
         {
             self.CreateRoleInfo = createRoleInfo;
             if (createRoleInfo != null)
@@ -58,21 +59,19 @@ namespace ET.Client
             }
 
             self.E_DiImage.gameObject.SetActive(self.CreateRoleInfo == null);
-            self.E_SelectRoleButton.AddListener(self.OnSelectRoleButton);
-        }
-
-        private static void OnSelectRoleButton(this Scroll_Item_CreateRoleItem self)
-        {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            if (self.CreateRoleInfo == null)
+            self.E_SelectRoleButton.AddListener(() =>
             {
-                uiComponent.ShowWindow(WindowID.WindowID_CreateRole);
-                uiComponent.HideWindow(WindowID.WindowID_MJLobby);
-            }
-            else
-            {
-                EventSystem.Instance.Publish(self.Root(), new DlgMJLobby_UpdateSelect() { CreateRoleInfo = self.CreateRoleInfo });
-            }
+                UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+                if (self.CreateRoleInfo == null)
+                {
+                    uiComponent.ShowWindow(WindowID.WindowID_CreateRole);
+                    uiComponent.HideWindow(WindowID.WindowID_MJLobby);
+                }
+                else
+                {
+                    updateSelectAction?.Invoke(self.CreateRoleInfo);
+                }
+            });
         }
 
         public static void UpdateSelectStatus(this Scroll_Item_CreateRoleItem self, CreateRoleInfo createRoleListInfo)

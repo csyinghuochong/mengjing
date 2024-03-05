@@ -27,7 +27,7 @@ namespace ET.Client
         private static void OnCreateRoleItemsRefresh(this DlgMJLobby self, Transform transform, int index)
         {
             Scroll_Item_CreateRoleItem scrollItemCreateRoleItem = self.ScrollItemCreateRoleItems[index].BindTrans(transform);
-            scrollItemCreateRoleItem.Refresh(self.ShowCreateRoleInfos[index]);
+            scrollItemCreateRoleItem.Refresh(self.ShowCreateRoleInfos[index], self.UpdateSelect);
         }
 
         private static void Refresh(this DlgMJLobby self)
@@ -178,16 +178,6 @@ namespace ET.Client
             self.PageIndex++;
 
             self.Refresh();
-        }
-    }
-
-    [Event(SceneType.Demo)]
-    public class DlgMJLobby_UpdateSelectHandler: AEvent<Scene, DlgMJLobby_UpdateSelect>
-    {
-        protected override async ETTask Run(Scene scene, DlgMJLobby_UpdateSelect args)
-        {
-            scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMJLobby>()?.UpdateSelect(args.CreateRoleInfo);
-            await ETTask.CompletedTask;
         }
     }
 }

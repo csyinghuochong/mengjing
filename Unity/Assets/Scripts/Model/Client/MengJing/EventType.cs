@@ -12,11 +12,6 @@ namespace ET.Client
         public int Occ;
     }
 
-    public struct DlgMJLobby_UpdateSelect
-    {
-        public CreateRoleInfo CreateRoleInfo;
-    }
-
     public struct BagItemUpdate
     {
     }
