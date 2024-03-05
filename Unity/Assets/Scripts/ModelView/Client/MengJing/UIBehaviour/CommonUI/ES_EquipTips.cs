@@ -724,6 +724,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_RoseEquipOpenSetRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_RoseEquipOpenSetRectTransform == null )
+     			{
+		    		this.m_EG_RoseEquipOpenSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/EG_RoseEquipOpenSet");
+     			}
+     			return this.m_EG_RoseEquipOpenSetRectTransform;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_TakeoffButton
      	{
      		get
@@ -735,7 +752,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TakeoffButton == null )
      			{
-		    		this.m_E_TakeoffButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/RoseEquipOpenSet/E_Takeoff");
+		    		this.m_E_TakeoffButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/EG_RoseEquipOpenSet/E_Takeoff");
      			}
      			return this.m_E_TakeoffButton;
      		}
@@ -752,7 +769,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TakeoffImage == null )
      			{
-		    		this.m_E_TakeoffImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/RoseEquipOpenSet/E_Takeoff");
+		    		this.m_E_TakeoffImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back/EG_EquipBtnSet/EG_RoseEquipOpenSet/E_Takeoff");
      			}
      			return this.m_E_TakeoffImage;
      		}
@@ -802,6 +819,7 @@ namespace ET.Client
 			this.m_E_SellImage = null;
 			this.m_E_UseButton = null;
 			this.m_E_UseImage = null;
+			this.m_EG_RoseEquipOpenSetRectTransform = null;
 			this.m_E_TakeoffButton = null;
 			this.m_E_TakeoffImage = null;
 			this.uiTransform = null;
@@ -849,6 +867,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_SellImage = null;
 		private UnityEngine.UI.Button m_E_UseButton = null;
 		private UnityEngine.UI.Image m_E_UseImage = null;
+		private UnityEngine.RectTransform m_EG_RoseEquipOpenSetRectTransform = null;
 		private UnityEngine.UI.Button m_E_TakeoffButton = null;
 		private UnityEngine.UI.Image m_E_TakeoffImage = null;
 		public Transform uiTransform = null;

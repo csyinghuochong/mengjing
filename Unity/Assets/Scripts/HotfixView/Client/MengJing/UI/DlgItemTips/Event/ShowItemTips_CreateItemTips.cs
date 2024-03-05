@@ -65,7 +65,7 @@ namespace ET.Client
                 else if (args.BagInfo.IfJianDing == false)
                 {
                     //鉴定后或无需鉴定的
-                    root.GetComponent<UIComponent>().GetDlgLogic<DlgEquipDuiBiTips>().OnUpdateEquipUI(args).Coroutine();
+                    root.GetComponent<UIComponent>().GetDlgLogic<DlgEquipDuiBiTips>().OnUpdateEquipUI(args);
                     root.GetComponent<UIComponent>().GetDlgLogic<DlgEquipDuiBiTips>().View.EG_Tips1RectTransform.GetComponent<RectTransform>()
                                     .anchoredPosition =
                             ReturnX(root, args, itemWidth);

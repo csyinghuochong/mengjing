@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_EquipTips))]
     [FriendOf(typeof (ES_ItemAppraisalTips))]
     [FriendOf(typeof (DlgEquipDuiBiTips))]
     public static class DlgEquipDuiBiTipsSystem
@@ -24,10 +25,10 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
         }
 
-        public static void OnUpdateDuiBiUI(this DlgEquipDuiBiTips self, BagInfo bagInfo_1, ShowItemTips args, int weight,
-        ItemOperateEnum itemOperateEnum)
+        public static void OnUpdateEquipUI(this DlgEquipDuiBiTips self, ShowItemTips args)
         {
-            
+            self.View.ES_EquipTips.uiTransform.gameObject.SetActive(true);
+            self.View.ES_EquipTips.InitData(args.BagInfo, args.ItemOperateEnum, 0, args.EquipList);
         }
 
         public static void OnUpdateAppraisalUI(this DlgEquipDuiBiTips self, ShowItemTips args)
@@ -36,9 +37,9 @@ namespace ET.Client
             self.View.ES_ItemAppraisalTips.RefreshInfo(args.BagInfo, args.ItemOperateEnum);
         }
 
-        public static async ETTask OnUpdateEquipUI(this DlgEquipDuiBiTips self, ShowItemTips args)
+        public static void OnUpdateDuiBiUI(this DlgEquipDuiBiTips self, BagInfo bagInfo_1, ShowItemTips args, int weight,
+        ItemOperateEnum itemOperateEnum)
         {
-            await ETTask.CompletedTask;
         }
     }
 }
