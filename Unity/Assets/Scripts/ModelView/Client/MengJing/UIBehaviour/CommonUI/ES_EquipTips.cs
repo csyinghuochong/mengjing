@@ -12,6 +12,9 @@ namespace ET.Client
 		public float TitleBigHeight_160;      //底图头部的宽度
 		public float TextItemHeight_40;       //底图属性的宽度
 		public float TitleMiniHeight_50;
+		public GameObject[] Obj_UIEquipGemHoleList;
+		public GameObject[] Obj_UIEquipGemHoleTextList;
+		public GameObject[] Obj_UIEquipGemHoleIconList;
 		
 		public UnityEngine.UI.Image E_BackImage
      	{
@@ -265,6 +268,210 @@ namespace ET.Client
 		    		this.m_EG_UIEquipGemHoleSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"E_Back/EG_UIEquipGemHoleSet");
      			}
      			return this.m_EG_UIEquipGemHoleSetRectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_UIEquipGemHole_1RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_UIEquipGemHole_1RectTransform == null )
+     			{
+		    		this.m_EG_UIEquipGemHole_1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"E_Back/EG_UIEquipGemHoleSet/EG_UIEquipGemHole_1");
+     			}
+     			return this.m_EG_UIEquipGemHole_1RectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_UIEquipGemHoleIcon_1Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_UIEquipGemHoleIcon_1Image == null )
+     			{
+		    		this.m_E_UIEquipGemHoleIcon_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back/EG_UIEquipGemHoleSet/EG_UIEquipGemHole_1/E_UIEquipGemHoleIcon_1");
+     			}
+     			return this.m_E_UIEquipGemHoleIcon_1Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_UIEquipGemHoleText_1Text
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_UIEquipGemHoleText_1Text == null )
+     			{
+		    		this.m_E_UIEquipGemHoleText_1Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Back/EG_UIEquipGemHoleSet/EG_UIEquipGemHole_1/E_UIEquipGemHoleText_1");
+     			}
+     			return this.m_E_UIEquipGemHoleText_1Text;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_UIEquipGemHole_2RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_UIEquipGemHole_2RectTransform == null )
+     			{
+		    		this.m_EG_UIEquipGemHole_2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"E_Back/EG_UIEquipGemHoleSet/EG_UIEquipGemHole_2");
+     			}
+     			return this.m_EG_UIEquipGemHole_2RectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_UIEquipGemHoleIcon_2Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_UIEquipGemHoleIcon_2Image == null )
+     			{
+		    		this.m_E_UIEquipGemHoleIcon_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back/EG_UIEquipGemHoleSet/EG_UIEquipGemHole_2/E_UIEquipGemHoleIcon_2");
+     			}
+     			return this.m_E_UIEquipGemHoleIcon_2Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_UIEquipGemHoleText_2Text
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_UIEquipGemHoleText_2Text == null )
+     			{
+		    		this.m_E_UIEquipGemHoleText_2Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Back/EG_UIEquipGemHoleSet/EG_UIEquipGemHole_2/E_UIEquipGemHoleText_2");
+     			}
+     			return this.m_E_UIEquipGemHoleText_2Text;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_UIEquipGemHole_3RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_UIEquipGemHole_3RectTransform == null )
+     			{
+		    		this.m_EG_UIEquipGemHole_3RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"E_Back/EG_UIEquipGemHoleSet/EG_UIEquipGemHole_3");
+     			}
+     			return this.m_EG_UIEquipGemHole_3RectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_UIEquipGemHoleIcon_3Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_UIEquipGemHoleIcon_3Image == null )
+     			{
+		    		this.m_E_UIEquipGemHoleIcon_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back/EG_UIEquipGemHoleSet/EG_UIEquipGemHole_3/E_UIEquipGemHoleIcon_3");
+     			}
+     			return this.m_E_UIEquipGemHoleIcon_3Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_UIEquipGemHoleText_3Text
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_UIEquipGemHoleText_3Text == null )
+     			{
+		    		this.m_E_UIEquipGemHoleText_3Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Back/EG_UIEquipGemHoleSet/EG_UIEquipGemHole_3/E_UIEquipGemHoleText_3");
+     			}
+     			return this.m_E_UIEquipGemHoleText_3Text;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_UIEquipGemHole_4RectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_UIEquipGemHole_4RectTransform == null )
+     			{
+		    		this.m_EG_UIEquipGemHole_4RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"E_Back/EG_UIEquipGemHoleSet/EG_UIEquipGemHole_4");
+     			}
+     			return this.m_EG_UIEquipGemHole_4RectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_UIEquipGemHoleIcon_4Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_UIEquipGemHoleIcon_4Image == null )
+     			{
+		    		this.m_E_UIEquipGemHoleIcon_4Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back/EG_UIEquipGemHoleSet/EG_UIEquipGemHole_4/E_UIEquipGemHoleIcon_4");
+     			}
+     			return this.m_E_UIEquipGemHoleIcon_4Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_UIEquipGemHoleText_4Text
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_UIEquipGemHoleText_4Text == null )
+     			{
+		    		this.m_E_UIEquipGemHoleText_4Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Back/EG_UIEquipGemHoleSet/EG_UIEquipGemHole_4/E_UIEquipGemHoleText_4");
+     			}
+     			return this.m_E_UIEquipGemHoleText_4Text;
      		}
      	}
 
@@ -846,6 +1053,18 @@ namespace ET.Client
 			this.m_EG_EquipBaseSetListRectTransform = null;
 			this.m_E_EquipPropertyTextText = null;
 			this.m_EG_UIEquipGemHoleSetRectTransform = null;
+			this.m_EG_UIEquipGemHole_1RectTransform = null;
+			this.m_E_UIEquipGemHoleIcon_1Image = null;
+			this.m_E_UIEquipGemHoleText_1Text = null;
+			this.m_EG_UIEquipGemHole_2RectTransform = null;
+			this.m_E_UIEquipGemHoleIcon_2Image = null;
+			this.m_E_UIEquipGemHoleText_2Text = null;
+			this.m_EG_UIEquipGemHole_3RectTransform = null;
+			this.m_E_UIEquipGemHoleIcon_3Image = null;
+			this.m_E_UIEquipGemHoleText_3Text = null;
+			this.m_EG_UIEquipGemHole_4RectTransform = null;
+			this.m_E_UIEquipGemHoleIcon_4Image = null;
+			this.m_E_UIEquipGemHoleText_4Text = null;
 			this.m_EG_EquipZhuanJingSetRectTransform = null;
 			this.m_E_ZhuanJingStatusDesText = null;
 			this.m_E_ZhuanJingStatusImgImage = null;
@@ -897,6 +1116,18 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_EquipBaseSetListRectTransform = null;
 		private UnityEngine.UI.Text m_E_EquipPropertyTextText = null;
 		private UnityEngine.RectTransform m_EG_UIEquipGemHoleSetRectTransform = null;
+		private UnityEngine.RectTransform m_EG_UIEquipGemHole_1RectTransform = null;
+		private UnityEngine.UI.Image m_E_UIEquipGemHoleIcon_1Image = null;
+		private UnityEngine.UI.Text m_E_UIEquipGemHoleText_1Text = null;
+		private UnityEngine.RectTransform m_EG_UIEquipGemHole_2RectTransform = null;
+		private UnityEngine.UI.Image m_E_UIEquipGemHoleIcon_2Image = null;
+		private UnityEngine.UI.Text m_E_UIEquipGemHoleText_2Text = null;
+		private UnityEngine.RectTransform m_EG_UIEquipGemHole_3RectTransform = null;
+		private UnityEngine.UI.Image m_E_UIEquipGemHoleIcon_3Image = null;
+		private UnityEngine.UI.Text m_E_UIEquipGemHoleText_3Text = null;
+		private UnityEngine.RectTransform m_EG_UIEquipGemHole_4RectTransform = null;
+		private UnityEngine.UI.Image m_E_UIEquipGemHoleIcon_4Image = null;
+		private UnityEngine.UI.Text m_E_UIEquipGemHoleText_4Text = null;
 		private UnityEngine.RectTransform m_EG_EquipZhuanJingSetRectTransform = null;
 		private UnityEngine.UI.Text m_E_ZhuanJingStatusDesText = null;
 		private UnityEngine.UI.Image m_E_ZhuanJingStatusImgImage = null;

@@ -25,6 +25,24 @@ namespace ET.Client
             self.TitleBigHeight_160 = 160f; //标题底框高度
             self.TitleMiniHeight_50 = 50; //条目标题高度
             self.TextItemHeight_40 = 40; //条目文本高度
+
+            self.Obj_UIEquipGemHoleList = new GameObject[4];
+            self.Obj_UIEquipGemHoleList[0] = self.EG_UIEquipGemHole_1RectTransform.gameObject;
+            self.Obj_UIEquipGemHoleList[1] = self.EG_UIEquipGemHole_2RectTransform.gameObject;
+            self.Obj_UIEquipGemHoleList[2] = self.EG_UIEquipGemHole_3RectTransform.gameObject;
+            self.Obj_UIEquipGemHoleList[3] = self.EG_UIEquipGemHole_4RectTransform.gameObject;
+
+            self.Obj_UIEquipGemHoleTextList = new GameObject[4];
+            self.Obj_UIEquipGemHoleTextList[0] = self.E_UIEquipGemHoleText_1Text.gameObject;
+            self.Obj_UIEquipGemHoleTextList[1] = self.E_UIEquipGemHoleText_2Text.gameObject;
+            self.Obj_UIEquipGemHoleTextList[2] = self.E_UIEquipGemHoleText_3Text.gameObject;
+            self.Obj_UIEquipGemHoleTextList[3] = self.E_UIEquipGemHoleText_4Text.gameObject;
+
+            self.Obj_UIEquipGemHoleIconList = new GameObject[4];
+            self.Obj_UIEquipGemHoleIconList[0] = self.E_UIEquipGemHoleIcon_1Image.gameObject;
+            self.Obj_UIEquipGemHoleIconList[1] = self.E_UIEquipGemHoleIcon_2Image.gameObject;
+            self.Obj_UIEquipGemHoleIconList[2] = self.E_UIEquipGemHoleIcon_3Image.gameObject;
+            self.Obj_UIEquipGemHoleIconList[3] = self.E_UIEquipGemHoleIcon_4Image.gameObject;
         }
 
         [EntitySystem]
@@ -267,35 +285,35 @@ namespace ET.Client
             Vector2 equipNeedvec2 = new Vector2(155.5f, startPostionY);
             self.EG_UIEquipGemHoleSetRectTransform.GetComponent<RectTransform>().anchoredPosition = equipNeedvec2;
             int gemNumber = 0;
-            // if (!string.IsNullOrEmpty(self.BagInfo.GemHole))
-            // {
-            //     string[] gemHoles = self.BagInfo.GemHole.Split('_');
-            //     string[] gemIds = self.BagInfo.GemIDNew.Split('_');
-            //     for (int g = 0; g < self.Obj_UIEquipGemHoleList.Length; g++)
-            //     {
-            //         self.Obj_UIEquipGemHoleList[g].SetActive(false);
-            //     }
-            //
-            //     for (int i = 0; i < gemIds.Length; i++)
-            //     {
-            //         if (gemHoles.Length <= i || string.IsNullOrEmpty(gemHoles[i]))
-            //         {
-            //             continue;
-            //         }
-            //
-            //         self.Obj_UIEquipGemHoleList[gemNumber].SetActive(gemHoles[i] != "0");
-            //         self.TipsShowEquipGem(self.Obj_UIEquipGemHoleIconList[gemNumber], self.Obj_UIEquipGemHoleTextList[gemNumber],
-            //             int.Parse(gemHoles[gemNumber]), int.Parse(gemIds[gemNumber]));
-            //         gemNumber += (gemHoles[i] != "0"? 1 : 0);
-            //     }
-            // }
-            // else
-            // {
-            //     self.Obj_UIEquipGemHoleList[0].SetActive(false);
-            //     self.Obj_UIEquipGemHoleList[1].SetActive(false);
-            //     self.Obj_UIEquipGemHoleList[2].SetActive(false);
-            //     self.Obj_UIEquipGemHoleList[3].SetActive(false);
-            // }
+            if (!string.IsNullOrEmpty(self.BagInfo.GemHole))
+            {
+                string[] gemHoles = self.BagInfo.GemHole.Split('_');
+                string[] gemIds = self.BagInfo.GemIDNew.Split('_');
+                for (int g = 0; g < self.Obj_UIEquipGemHoleList.Length; g++)
+                {
+                    self.Obj_UIEquipGemHoleList[g].SetActive(false);
+                }
+
+                for (int i = 0; i < gemIds.Length; i++)
+                {
+                    if (gemHoles.Length <= i || string.IsNullOrEmpty(gemHoles[i]))
+                    {
+                        continue;
+                    }
+
+                    self.Obj_UIEquipGemHoleList[gemNumber].SetActive(gemHoles[i] != "0");
+                    self.TipsShowEquipGem(self.Obj_UIEquipGemHoleIconList[gemNumber], self.Obj_UIEquipGemHoleTextList[gemNumber],
+                        int.Parse(gemHoles[gemNumber]), int.Parse(gemIds[gemNumber]));
+                    gemNumber += (gemHoles[i] != "0"? 1 : 0);
+                }
+            }
+            else
+            {
+                self.Obj_UIEquipGemHoleList[0].SetActive(false);
+                self.Obj_UIEquipGemHoleList[1].SetActive(false);
+                self.Obj_UIEquipGemHoleList[2].SetActive(false);
+                self.Obj_UIEquipGemHoleList[3].SetActive(false);
+            }
 
             float gemHoleShowHeight = gemNumber * 35f;
 
@@ -340,6 +358,55 @@ namespace ET.Client
             }
 
             //显示装备制造者的名字[名字直接放入baginfo]
+        }
+
+        public static void TipsShowEquipGem(this ES_EquipTips self, GameObject icon, GameObject text, int gemHole, int gemId)
+        {
+            if (gemHole == 0)
+            {
+                return;
+            }
+
+            if (gemId != 0)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(gemId);
+                text.GetComponent<Text>().text = itemConfig.ItemName;
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+                icon.GetComponent<Image>().sprite = sp;
+
+                int equipShiShiGemNum = 0;
+                List<BagInfo> equipList = self.Root().GetComponent<BagComponentClient>().GetItemsByLoc(ItemLocType.ItemLocEquip);
+                for (int i = 0; i < equipList.Count; i++)
+                {
+                    string[] gemList = equipList[i].GemIDNew.Split('_');
+                    for (int y = 0; y < gemList.Length; y++)
+                    {
+                        if (ComHelp.IfNull(gemList[y]) == false)
+                        {
+                            ItemConfig gemItemCof = ItemConfigCategory.Instance.Get(int.Parse(gemList[y]));
+                            if (gemItemCof.ItemSubType == 110)
+                            {
+                                equipShiShiGemNum += 1;
+                            }
+                        }
+                    }
+                }
+
+                if (itemConfig.ItemSubType == 110 && equipShiShiGemNum > 4)
+                {
+                    text.GetComponent<Text>().text += "(超过4个,属性无效)";
+                }
+            }
+            else
+            {
+                text.GetComponent<Text>().text = ItemViewData.GemHoleName[gemHole];
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, $"Img_hole_{gemHole}");
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+                icon.GetComponent<Image>().sprite = sp;
+            }
         }
 
         public static int ShowSuitEquipInfo(this ES_EquipTips self, ItemConfig itemConfig, int equipSuitID, float startPostionY,

@@ -11,6 +11,17 @@ namespace ET.Client
 
     public static class ItemViewData
     {
+        //宝石槽位
+        [StaticField]
+        public static Dictionary<int, string> GemHoleName = new()
+        {
+            { 101, GameSettingLanguge.LoadLocalization("黄色插槽") },
+            { 102, GameSettingLanguge.LoadLocalization("紫色插槽") },
+            { 103, GameSettingLanguge.LoadLocalization("蓝色插槽") },
+            { 104, GameSettingLanguge.LoadLocalization("绿色插槽") },
+            { 105, GameSettingLanguge.LoadLocalization("橙色插槽") },
+        };
+
         //Administrator:
         //当道具类型为1（消耗品）时该字段的意义
         //1 获得金币值
