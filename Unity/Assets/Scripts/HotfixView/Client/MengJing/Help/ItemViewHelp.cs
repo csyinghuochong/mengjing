@@ -9,20 +9,14 @@ namespace ET.Client
     public static class ItemViewHelp
     {
         //装备基础属性
-        public static int ShowBaseAttribute(List<BagInfo> equipItemList, BagInfo baginfo, GameObject Obj_EquipPropertyText,
-        GameObject Obj_EquipBaseSetList)
+        public static int ShowBaseAttribute(List<BagInfo> equipItemList, BagInfo baginfo, GameObject propertyGO,
+        GameObject parentGO)
         {
             int properShowNum = 0;
-            ItemConfig itemconf = ItemConfigCategory.Instance.Get(baginfo.ItemID);
-            string ItemIcon = itemconf.Icon;
-            int ItemQuality = itemconf.ItemQuality;
-            string equip_ID = itemconf.ItemEquipID.ToString();
-            string equipName = itemconf.ItemName;
-            string equipLv = itemconf.UseLv.ToString();
-            string ItemBlackDes = itemconf.ItemDes;
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(baginfo.ItemID);
 
             // 赛季晶核
-            if (itemconf.ItemType == 3 && itemconf.EquipType == 201)
+            if (itemConfig.ItemType == 3 && itemConfig.EquipType == 201)
             {
                 string showColor = "1";
                 if (baginfo.XiLianHideProLists != null)
@@ -42,7 +36,7 @@ namespace ET.Client
                             attribute = $"当前附加 {proName}:" + hideProList.HideValue;
                         }
 
-                        ShowPropertyText(attribute, showColor, Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                        ShowPropertyText(attribute, showColor, propertyGO, parentGO);
                         properShowNum += 1;
                     }
                 }
@@ -54,37 +48,31 @@ namespace ET.Client
                         int skillID = baginfo.HideSkillLists[i];
                         SkillConfig skillCof = SkillConfigCategory.Instance.Get(skillID);
                         string proStr = "当前附加技能" + ":" + skillCof.SkillName;
-                        ShowPropertyText(proStr, "2", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                        ShowPropertyText(proStr, "2", propertyGO, parentGO);
                         properShowNum += 1;
                     }
                 }
             }
 
-            EquipConfig equipconf = EquipConfigCategory.Instance.Get(itemconf.ItemEquipID);
-            int equip_Hp = equipconf.Equip_Hp;
-            int equip_MinAct = equipconf.Equip_MinAct;
-            int equip_MaxAct = equipconf.Equip_MaxAct;
-            int equip_MinMagAct = equipconf.Equip_MinMagAct;
-            int equip_MaxMagAct = equipconf.Equip_MaxMagAct;
-            int equip_MinDef = equipconf.Equip_MinDef;
-            int equip_MaxDef = equipconf.Equip_MaxDef;
-            int equip_MinAdf = equipconf.Equip_MinAdf;
-            int equip_MaxAdf = equipconf.Equip_MaxAdf;
-            double equip_Cri = equipconf.Equip_Cri;
-            double equip_Hit = equipconf.Equip_Hit;
-            double equip_Dodge = equipconf.Equip_Dodge;
-            double equip_DamgeAdd = equipconf.Equip_DamgeAdd;
-            double equip_DamgeSub = equipconf.Equip_DamgeSub;
-            double equip_Speed = equipconf.Equip_Speed;
-            double equip_Lucky = equipconf.Equip_Lucky;
-            /*
-            HideProList hide1 = new HideProList();
-            hide1.HideID = (int)NumericType.Base_MaxAct_Base;
-            hide1.HideValue = 12;
-            baginfo.XiLianHideProLists.Add(hide1);
-            */
+            EquipConfig equipConfig = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID);
+            int equip_Hp = equipConfig.Equip_Hp;
+            int equip_MinAct = equipConfig.Equip_MinAct;
+            int equip_MaxAct = equipConfig.Equip_MaxAct;
+            int equip_MinMagAct = equipConfig.Equip_MinMagAct;
+            int equip_MaxMagAct = equipConfig.Equip_MaxMagAct;
+            int equip_MinDef = equipConfig.Equip_MinDef;
+            int equip_MaxDef = equipConfig.Equip_MaxDef;
+            int equip_MinAdf = equipConfig.Equip_MinAdf;
+            int equip_MaxAdf = equipConfig.Equip_MaxAdf;
+            double equip_Cri = equipConfig.Equip_Cri;
+            double equip_Hit = equipConfig.Equip_Hit;
+            double equip_Dodge = equipConfig.Equip_Dodge;
+            double equip_DamgeAdd = equipConfig.Equip_DamgeAdd;
+            double equip_DamgeSub = equipConfig.Equip_DamgeSub;
+            double equip_Speed = equipConfig.Equip_Speed;
+            double equip_Lucky = equipConfig.Equip_Lucky;
 
-            //换算总显示数值
+            // 换算总显示数值
             if (baginfo.XiLianHideProLists != null)
             {
                 for (int i = 0; i < baginfo.XiLianHideProLists.Count; i++)
@@ -106,16 +94,11 @@ namespace ET.Client
                         case NumericType.Base_MaxAdf_Base:
                             equip_MaxAdf = equip_MaxAdf + hidePropertyValue;
                             break;
-                        /*
-                        case NumericType.Base_Agility_Base:
-                            equip_MaxAdf = equip_MaxAdf + hidePropertyValue;
-                            break;
-                        */
                     }
                 }
             }
 
-            //显示职业护甲加成
+            // 显示职业护甲加成
             string occShowStr = "";
             string textShow = "";
             string langStr = "";
@@ -124,7 +107,6 @@ namespace ET.Client
             {
                 langStr = GameSettingLanguge.LoadLocalization("生命");
                 textShow = langStr + "  " + equip_Hp + occShowStr;
-                //textNum = textNum + 1;
 
                 bool ifHideProperty = false;
                 if (baginfo.XiLianHideProLists != null)
@@ -144,12 +126,12 @@ namespace ET.Client
 
                 if (ifHideProperty)
                 {
-                    ShowPropertyText(textShow, "1", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                    ShowPropertyText(textShow, "1", propertyGO, parentGO);
                     properShowNum += 1;
                 }
                 else
                 {
-                    ShowPropertyText(textShow, "0", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                    ShowPropertyText(textShow, "0", propertyGO, parentGO);
                     properShowNum += 1;
                 }
             }
@@ -158,9 +140,6 @@ namespace ET.Client
             {
                 langStr = GameSettingLanguge.LoadLocalization("攻击");
                 textShow = langStr + " ：" + equip_MinAct + " - " + equip_MaxAct;
-                //textShow = langStr + "  " + equip_MaxAct + occShowStr;
-                //textNum = textNum + 1;
-                //ShowPropertyText(textShow);
                 bool ifHideProperty = false;
                 if (baginfo.XiLianHideProLists != null)
                 {
@@ -172,7 +151,6 @@ namespace ET.Client
                         if (hidePropertyType == NumericType.Base_MaxAct_Base)
                         {
                             textShow = langStr + " ：" + equip_MinAct + " - " + equip_MaxAct + "(+" + hidePropertyValue + ")" + occShowStr;
-                            //textShow = langStr + "  " + equip_MaxAct + "(+" + hidePropertyValue + ")" + occShowStr;
                             ifHideProperty = true;
                         }
                     }
@@ -180,12 +158,12 @@ namespace ET.Client
 
                 if (ifHideProperty)
                 {
-                    ShowPropertyText(textShow, "1", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                    ShowPropertyText(textShow, "1", propertyGO, parentGO);
                     properShowNum += 1;
                 }
                 else
                 {
-                    ShowPropertyText(textShow, "0", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                    ShowPropertyText(textShow, "0", propertyGO, parentGO);
                     properShowNum += 1;
                 }
             }
@@ -194,9 +172,6 @@ namespace ET.Client
             {
                 langStr = GameSettingLanguge.LoadLocalization("防御");
                 textShow = langStr + " ：" + equip_MinDef + " - " + equip_MaxDef;
-                //textShow = langStr + "  " + equip_MaxDef + occShowStr;
-                //textNum = textNum + 1;
-                //ShowPropertyText(textShow);
                 bool ifHideProperty = false;
                 if (baginfo.XiLianHideProLists != null)
                 {
@@ -208,7 +183,6 @@ namespace ET.Client
                         if (hidePropertyType == NumericType.Base_MaxDef_Base)
                         {
                             textShow = langStr + " ：" + equip_MinDef + " - " + equip_MaxDef + "(+" + hidePropertyValue + ")" + occShowStr;
-                            //textShow = langStr + "  " + equip_MaxDef + "(+" + hidePropertyValue + ")" + occShowStr;
                             ifHideProperty = true;
                         }
                     }
@@ -216,12 +190,12 @@ namespace ET.Client
 
                 if (ifHideProperty)
                 {
-                    ShowPropertyText(textShow, "1", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                    ShowPropertyText(textShow, "1", propertyGO, parentGO);
                     properShowNum += 1;
                 }
                 else
                 {
-                    ShowPropertyText(textShow, "0", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                    ShowPropertyText(textShow, "0", propertyGO, parentGO);
                     properShowNum += 1;
                 }
             }
@@ -230,7 +204,6 @@ namespace ET.Client
             {
                 langStr = GameSettingLanguge.LoadLocalization("魔防");
                 textShow = langStr + " ：" + equip_MinAdf + " - " + equip_MaxAdf;
-                //textShow = langStr + "  " + equip_MaxAdf + occShowStr;
                 bool ifHideProperty = false;
                 if (baginfo.XiLianHideProLists != null)
                 {
@@ -242,7 +215,6 @@ namespace ET.Client
                         if (hidePropertyType == NumericType.Base_MaxAdf_Base)
                         {
                             textShow = langStr + " ：" + equip_MinAdf + " - " + equip_MaxAdf + "(+" + hidePropertyValue + ")" + occShowStr;
-                            //textShow = langStr + "  " + equip_MaxAdf + "(+" + hidePropertyValue + ")" + occShowStr;
                             ifHideProperty = true;
                         }
                     }
@@ -250,12 +222,12 @@ namespace ET.Client
 
                 if (ifHideProperty)
                 {
-                    ShowPropertyText(textShow, "1", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                    ShowPropertyText(textShow, "1", propertyGO, parentGO);
                     properShowNum += 1;
                 }
                 else
                 {
-                    ShowPropertyText(textShow, "0", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                    ShowPropertyText(textShow, "0", propertyGO, parentGO);
                     properShowNum += 1;
                 }
             }
@@ -264,8 +236,7 @@ namespace ET.Client
             {
                 langStr = GameSettingLanguge.LoadLocalization("暴击");
                 textShow = langStr + "  " + equip_Cri * 100 + "%\n";
-                //textNum = textNum + 1;
-                ShowPropertyText(textShow, "0", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                ShowPropertyText(textShow, "0", propertyGO, parentGO);
                 properShowNum += 1;
             }
 
@@ -273,8 +244,7 @@ namespace ET.Client
             {
                 langStr = GameSettingLanguge.LoadLocalization("命中");
                 textShow = langStr + "  " + equip_Hit * 100 + "%\n";
-                //textNum = textNum + 1;
-                ShowPropertyText(textShow, "0", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                ShowPropertyText(textShow, "0", propertyGO, parentGO);
                 properShowNum += 1;
             }
 
@@ -282,8 +252,7 @@ namespace ET.Client
             {
                 langStr = GameSettingLanguge.LoadLocalization("闪避");
                 textShow = langStr + "  " + equip_Dodge * 100 + "%\n";
-                //textNum = textNum + 1;
-                ShowPropertyText(textShow, "0", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                ShowPropertyText(textShow, "0", propertyGO, parentGO);
                 properShowNum += 1;
             }
 
@@ -291,8 +260,7 @@ namespace ET.Client
             {
                 langStr = GameSettingLanguge.LoadLocalization("伤害加成");
                 textShow = langStr + "  " + equip_DamgeAdd * 100 + "%\n";
-                //textNum = textNum + 1;
-                ShowPropertyText(textShow, "0", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                ShowPropertyText(textShow, "0", propertyGO, parentGO);
                 properShowNum += 1;
             }
 
@@ -300,8 +268,7 @@ namespace ET.Client
             {
                 langStr = GameSettingLanguge.LoadLocalization("伤害减免");
                 textShow = langStr + "  " + equip_DamgeSub * 100 + "%\n";
-                //textNum = textNum + 1;
-                ShowPropertyText(textShow, "0", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                ShowPropertyText(textShow, "0", propertyGO, parentGO);
                 properShowNum += 1;
             }
 
@@ -309,8 +276,7 @@ namespace ET.Client
             {
                 langStr = GameSettingLanguge.LoadLocalization("移动速度");
                 textShow = langStr + "  " + equip_Dodge;
-                //textNum = textNum + 1;
-                ShowPropertyText(textShow, "0", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                ShowPropertyText(textShow, "0", propertyGO, parentGO);
                 properShowNum += 1;
             }
 
@@ -318,8 +284,7 @@ namespace ET.Client
             {
                 langStr = GameSettingLanguge.LoadLocalization("幸运值");
                 textShow = langStr + "  " + equip_Lucky;
-                //textNum = textNum + 1;
-                ShowPropertyText(textShow, "6", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                ShowPropertyText(textShow, "6", propertyGO, parentGO);
                 properShowNum += 1;
             }
 
@@ -353,7 +318,7 @@ namespace ET.Client
                             }
                         }
 
-                        ShowPropertyText(proStr, showColor, Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                        ShowPropertyText(proStr, showColor, propertyGO, parentGO);
                         properShowNum += 1;
                     }
                 }
@@ -362,44 +327,44 @@ namespace ET.Client
             //显示隐藏技能
             if (baginfo.HideSkillLists != null)
             {
-                string skillTip = itemconf.EquipType == 301? "套装效果，附加技能：" : "隐藏技能：";
+                string skillTip = itemConfig.EquipType == 301? "套装效果，附加技能：" : "隐藏技能：";
                 for (int i = 0; i < baginfo.HideSkillLists.Count; i++)
                 {
                     int skillID = baginfo.HideSkillLists[i];
                     SkillConfig skillCof = SkillConfigCategory.Instance.Get(skillID);
                     string proStr = GameSettingLanguge.LoadLocalization(skillTip) + skillCof.SkillName;
-                    ShowPropertyText(proStr, "2", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                    ShowPropertyText(proStr, "2", propertyGO, parentGO);
                     properShowNum += 1;
                 }
             }
 
             //显示装备附加属性
-            for (int i = 0; i < equipconf.AddPropreListType.Length; i++)
+            for (int i = 0; i < equipConfig.AddPropreListType.Length; i++)
             {
-                if (equipconf.AddPropreListIfShow.Length <= i)
+                if (equipConfig.AddPropreListIfShow.Length <= i)
                 {
                     continue;
                 }
 
-                if (equipconf.AddPropreListIfShow[i] == 0)
+                if (equipConfig.AddPropreListIfShow[i] == 0)
                 {
-                    int numericType = equipconf.AddPropreListType[i];
+                    int numericType = equipConfig.AddPropreListType[i];
                     if (numericType == 0)
                     {
                         continue;
                     }
 
                     string attribute = "";
-                    long numericValue = equipconf.AddPropreListValue[i];
+                    long numericValue = equipConfig.AddPropreListValue[i];
 
                     for (int y = 0; y < baginfo.XiLianHideProLists.Count; y++)
                     {
-                        if (equipconf.AddPropreListType.Length <= y)
+                        if (equipConfig.AddPropreListType.Length <= y)
                         {
                             break;
                         }
 
-                        if (baginfo.XiLianHideProLists[y].HideID == equipconf.AddPropreListType[i])
+                        if (baginfo.XiLianHideProLists[y].HideID == equipConfig.AddPropreListType[i])
                         {
                             numericValue += baginfo.XiLianHideProLists[i].HideValue;
                         }
@@ -409,7 +374,6 @@ namespace ET.Client
                     if (showType == 2)
                     {
                         float value = (float)numericValue / 100f;
-                        //attribute = $"{ItemViewHelp.GetAttributeName(showType)} + {numericValue * 0.01f}%";
                         attribute = $"{ItemViewHelp.GetAttributeName(numericType)} + " + value.ToString("0.##") + "%";
                     }
                     else
@@ -417,7 +381,7 @@ namespace ET.Client
                         attribute = $"{ItemViewHelp.GetAttributeName(numericType)} + {numericValue}";
                     }
 
-                    ShowPropertyText(attribute, "0", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                    ShowPropertyText(attribute, "0", propertyGO, parentGO);
                     properShowNum += 1;
                 }
             }
@@ -438,7 +402,7 @@ namespace ET.Client
                     attribute = $"附魔属性: {ItemViewHelp.GetAttributeName(hideProList.HideID)} + {hideProList.HideValue}";
                 }
 
-                ShowPropertyText(attribute, "1", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                ShowPropertyText(attribute, "1", propertyGO, parentGO);
                 properShowNum += 1;
             }
 
@@ -467,7 +431,7 @@ namespace ET.Client
                     attribute = $"{canTransf}增幅: {proName} + {hide.HideValue}";
                 }
 
-                ShowPropertyText(attribute, "1", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                ShowPropertyText(attribute, "1", propertyGO, parentGO);
                 properShowNum += 1;
             }
 
@@ -485,14 +449,14 @@ namespace ET.Client
                 }
 
                 string attribute = $"{canTransf}增幅: " + skillName;
-                ShowPropertyText(attribute, "1", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                ShowPropertyText(attribute, "1", propertyGO, parentGO);
                 properShowNum += 1;
             }
 
-            //显示描述
-            if (itemconf.ItemDes != "" && itemconf.ItemDes != "0" && itemconf.ItemDes != null)
+            // 显示描述
+            if (itemConfig.ItemDes != "" && itemConfig.ItemDes != "0" && itemConfig.ItemDes != null)
             {
-                string[] des = itemconf.ItemDes.Split('\n');
+                string[] des = itemConfig.ItemDes.Split('\n');
                 foreach (string s in des)
                 {
                     int allLength = s.Length;
@@ -501,14 +465,11 @@ namespace ET.Client
                     {
                         int leftNum = allLength - a * 18;
                         leftNum = Math.Min(leftNum, 18);
-                        ShowPropertyText(s.Substring(a * 18, leftNum), "1", Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                        ShowPropertyText(s.Substring(a * 18, leftNum), "1", propertyGO, parentGO);
                     }
 
                     properShowNum += addNum;
                 }
-
-                //int zifuLenght = GetNumbers(itemconf.ItemDes) + GetTeShu(itemconf.ItemDes);
-                //int lenght = (allLength - zifuLenght) + (int)(zifuLenght * 0.5f);
             }
 
             //显示传承技能
@@ -563,7 +524,7 @@ namespace ET.Client
                         {
                             int leftNum = allLength - a * 18;
                             leftNum = Math.Min(leftNum, 18);
-                            ShowPropertyText(proStr.Substring(a * 18, leftNum), showYanSe, Obj_EquipPropertyText, Obj_EquipBaseSetList);
+                            ShowPropertyText(proStr.Substring(a * 18, leftNum), showYanSe, propertyGO, parentGO);
                             properShowNum += 1;
                         }
                     }
@@ -575,50 +536,45 @@ namespace ET.Client
 
         public static GameObject ShowPropertyText(string showText, string showType, GameObject proItem, GameObject parObj)
         {
-            GameObject propertyObj = (GameObject)GameObject.Instantiate(proItem);
-            propertyObj.transform.SetParent(parObj.transform);
-            propertyObj.transform.localScale = new Vector3(1, 1, 1);
-            propertyObj.GetComponent<Text>().text = showText;
-            //propertyObj.transform.localPosition = new Vector3(-12, -30 - 25 * self.properShowNum, 0);
-            propertyObj.transform.localPosition = new Vector3(0, 0, 0);
-            propertyObj.SetActive(true);
+            GameObject go = UnityEngine.Object.Instantiate(proItem, parObj.transform, true);
+            go.transform.localScale = new Vector3(1, 1, 1);
+            go.GetComponent<Text>().text = showText;
+            go.transform.localPosition = new Vector3(0, 0, 0);
+            go.SetActive(true);
 
             switch (showType)
             {
                 //极品提示  绿色
                 case "1":
-                    //propertyObj.GetComponent<Text>().color = new Color(0.5f, 1f, 0f);
-                    propertyObj.GetComponent<Text>().color = new Color(80f / 255f, 160f / 255f, 0f);
+                    go.GetComponent<Text>().color = new Color(80f / 255f, 160f / 255f, 0f);
                     break;
                 //隐藏技能  橙色
                 case "2":
-                    propertyObj.GetComponent<Text>().color = new Color(248 / 255f, 62f / 255, 191f / 255f);
+                    go.GetComponent<Text>().color = new Color(248 / 255f, 62f / 255, 191f / 255f);
                     break;
                 //红色
                 case "3":
-                    propertyObj.GetComponent<Text>().color = Color.red;
+                    go.GetComponent<Text>().color = Color.red;
                     break;
                 //蓝色
                 case "4":
-                    propertyObj.GetComponent<Text>().color = new Color(1f, 0.5f, 1f);
+                    go.GetComponent<Text>().color = new Color(1f, 0.5f, 1f);
                     break;
                 //白色
                 case "5":
-                    //propertyObj.GetComponent<Text>().color = new Color(1f, 1f, 1f);
-                    propertyObj.GetComponent<Text>().color = new Color(100f / 255f, 80f / 255f, 60f / 255f);
+                    go.GetComponent<Text>().color = new Color(100f / 255f, 80f / 255f, 60f / 255f);
                     break;
                 //橙色
                 case "6":
-                    //propertyObj.GetComponent<Text>().color = new Color(1f, 1f, 1f);
-                    propertyObj.GetComponent<Text>().color = new Color(255f / 255f, 90f / 255f, 0f);
+                    go.GetComponent<Text>().color = new Color(255f / 255f, 90f / 255f, 0f);
                     break;
                 //灰色
                 case "11":
-                    propertyObj.GetComponent<Text>().color = new Color(0.66f, 0.66f, 0.66f);
+                    go.GetComponent<Text>().color = new Color(0.66f, 0.66f, 0.66f);
                     break;
             }
 
-            return propertyObj;
+            return go;
         }
 
         public static string GetItemSubType3Name(int subType)

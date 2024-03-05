@@ -253,8 +253,9 @@ namespace ET.Client
             }
 
             //基础属性  专精属性  隐藏技能  套装属性
-            //基础属性
-            // int properShowNum = ItemViewHelp.ShowBaseAttribute(equipItemList, baginfo, self.E_EquipPropertyTextText.gameObject, self.EquipBaseSetList);
+            // 基础属性
+            // int properShowNum =
+            //         ItemViewHelp.ShowBaseAttribute(equipItemList, bagInfo, self.E_EquipPropertyTextText.gameObject, self.EquipBaseSetList);
             //
             // //显示宝石
             // float startPostionY = 0 - self.TitleBigHeight_160 - self.TitleMiniHeight_50 - self.TextItemHeight_40 * properShowNum;
