@@ -8,6 +8,63 @@ namespace ET.Client
 {
     public static class ItemViewHelp
     {
+        public static string GetProName(int proID)
+        {
+            if (proID >= 10000)
+            {
+                proID = (int)(proID / 100);
+            }
+
+            string returnName = "";
+
+            switch (proID)
+            {
+                case 1002:
+                    returnName = "血量";
+                    break;
+                case 1003:
+                    returnName = "最低攻击";
+                    break;
+                case 1004:
+                    returnName = "最高攻击";
+                    break;
+                case 1005:
+                    returnName = "最低防御";
+                    break;
+                case 1006:
+                    returnName = "最高防御";
+                    break;
+                case 1007:
+                    returnName = "最低魔防";
+                    break;
+                case 1008:
+                    returnName = "最高魔防";
+                    break;
+
+                case 1051:
+                    returnName = "力量";
+                    break;
+
+                case 1052:
+                    returnName = "敏捷";
+                    break;
+
+                case 1053:
+                    returnName = "智力";
+                    break;
+
+                case 1054:
+                    returnName = "耐力";
+                    break;
+
+                case 1055:
+                    returnName = "体质";
+                    break;
+            }
+
+            return returnName;
+        }
+
         //装备基础属性
         public static int ShowBaseAttribute(List<BagInfo> equipItemList, BagInfo baginfo, GameObject propertyGO,
         GameObject parentGO)

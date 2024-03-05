@@ -9,6 +9,9 @@ namespace ET.Client
 	{
 		public BagInfo BagInfo;
 		public ItemOperateEnum ItemOpetateType;
+		public float TitleBigHeight_160;      //底图头部的宽度
+		public float TextItemHeight_40;       //底图属性的宽度
+		public float TitleMiniHeight_50;
 		
 		public UnityEngine.UI.Image E_BackImage
      	{
@@ -78,23 +81,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_EquipDiImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_EquipDiImage == null )
-     			{
-		    		this.m_E_EquipDiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back/E_EquipDi");
-     			}
-     			return this.m_E_EquipDiImage;
-     		}
-     	}
-
 		public UnityEngine.UI.Image E_EquipIconImage
      	{
      		get
@@ -146,23 +132,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Text E_EquipLvText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_EquipLvText == null )
-     			{
-		    		this.m_E_EquipLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Back/E_EquipLv");
-     			}
-     			return this.m_E_EquipLvText;
-     		}
-     	}
-
 		public UnityEngine.UI.Text E_EquipTypeText
      	{
      		get
@@ -194,23 +163,6 @@ namespace ET.Client
 		    		this.m_E_EquipNeedLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Back/E_EquipNeedLv");
      			}
      			return this.m_E_EquipNeedLvText;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_EquipNeedProText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_EquipNeedProText == null )
-     			{
-		    		this.m_E_EquipNeedProText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Back/E_EquipNeedPro");
-     			}
-     			return this.m_E_EquipNeedProText;
      		}
      	}
 
@@ -262,6 +214,23 @@ namespace ET.Client
 		    		this.m_E_EquipQiangHuaText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Back/E_EquipQiangHua");
      			}
      			return this.m_E_EquipQiangHuaText;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_EquipBaseSetListRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_EquipBaseSetListRectTransform == null )
+     			{
+		    		this.m_EG_EquipBaseSetListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"E_Back/EG_EquipBaseSetList");
+     			}
+     			return this.m_EG_EquipBaseSetListRectTransform;
      		}
      	}
 
@@ -350,6 +319,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_EquipZhuanJingSetListRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_EquipZhuanJingSetListRectTransform == null )
+     			{
+		    		this.m_EG_EquipZhuanJingSetListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"E_Back/EG_EquipZhuanJingSet/EG_EquipZhuanJingSetList");
+     			}
+     			return this.m_EG_EquipZhuanJingSetListRectTransform;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_UIEquipSuitRectTransform
      	{
      		get
@@ -364,6 +350,23 @@ namespace ET.Client
 		    		this.m_EG_UIEquipSuitRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"E_Back/EG_UIEquipSuit");
      			}
      			return this.m_EG_UIEquipSuitRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_SuitNameText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SuitNameText == null )
+     			{
+		    		this.m_E_SuitNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Back/EG_UIEquipSuit/E_SuitName");
+     			}
+     			return this.m_E_SuitNameText;
      		}
      	}
 
@@ -401,6 +404,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_EquipSuitSetListRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_EquipSuitSetListRectTransform == null )
+     			{
+		    		this.m_EG_EquipSuitSetListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"E_Back/EG_UIEquipSuit/EG_EquipSuitSetList");
+     			}
+     			return this.m_EG_EquipSuitSetListRectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_EquipSuitShowListSetRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_EquipSuitShowListSetRectTransform == null )
+     			{
+		    		this.m_EG_EquipSuitShowListSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"E_Back/EG_UIEquipSuit/EG_EquipSuitShowListSet");
+     			}
+     			return this.m_EG_EquipSuitShowListSetRectTransform;
+     		}
+     	}
+
 		public UnityEngine.UI.Text EquipSuitItemNamePropertyTextText
      	{
      		get
@@ -412,7 +449,7 @@ namespace ET.Client
      			}
      			if( this.m_EquipSuitItemNamePropertyTextText == null )
      			{
-		    		this.m_EquipSuitItemNamePropertyTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Back/EG_UIEquipSuit/EquipSuitShowListSet/Img_back (2)/EquipSuitShowNameListSet/EquipSuitItemNamePropertyText");
+		    		this.m_EquipSuitItemNamePropertyTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Back/EG_UIEquipSuit/EG_EquipSuitShowListSet/Img_back (2)/EquipSuitShowNameListSet/EquipSuitItemNamePropertyText");
      			}
      			return this.m_EquipSuitItemNamePropertyTextText;
      		}
@@ -432,6 +469,23 @@ namespace ET.Client
 		    		this.m_EG_EquipHintSkillRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"E_Back/EG_EquipHintSkill");
      			}
      			return this.m_EG_EquipHintSkillRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_WearNeedText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_WearNeedText == null )
+     			{
+		    		this.m_E_WearNeedText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Back/EG_EquipHintSkill/E_WearNeed");
+     			}
+     			return this.m_E_WearNeedText;
      		}
      	}
 
@@ -781,27 +835,30 @@ namespace ET.Client
 			this.m_E_QualityBgImage = null;
 			this.m_E_QualityLineImage = null;
 			this.m_E_EquipQualityImage = null;
-			this.m_E_EquipDiImage = null;
 			this.m_E_EquipIconImage = null;
 			this.m_E_EquipNameText = null;
 			this.m_E_EquipTypeSonText = null;
-			this.m_E_EquipLvText = null;
 			this.m_E_EquipTypeText = null;
 			this.m_E_EquipNeedLvText = null;
-			this.m_E_EquipNeedProText = null;
 			this.m_E_EquipBangDingText = null;
 			this.m_E_EquipBangDingImgImage = null;
 			this.m_E_EquipQiangHuaText = null;
+			this.m_EG_EquipBaseSetListRectTransform = null;
 			this.m_E_EquipPropertyTextText = null;
 			this.m_EG_UIEquipGemHoleSetRectTransform = null;
 			this.m_EG_EquipZhuanJingSetRectTransform = null;
 			this.m_E_ZhuanJingStatusDesText = null;
 			this.m_E_ZhuanJingStatusImgImage = null;
+			this.m_EG_EquipZhuanJingSetListRectTransform = null;
 			this.m_EG_UIEquipSuitRectTransform = null;
+			this.m_E_SuitNameText = null;
 			this.m_E_ShowEquipSuitButton = null;
 			this.m_E_ShowEquipSuitImage = null;
+			this.m_EG_EquipSuitSetListRectTransform = null;
+			this.m_EG_EquipSuitShowListSetRectTransform = null;
 			this.m_EquipSuitItemNamePropertyTextText = null;
 			this.m_EG_EquipHintSkillRectTransform = null;
+			this.m_E_WearNeedText = null;
 			this.m_EG_EquipBtnSetRectTransform = null;
 			this.m_E_EquipMakeText = null;
 			this.m_E_TakeButton = null;
@@ -829,27 +886,30 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_QualityBgImage = null;
 		private UnityEngine.UI.Image m_E_QualityLineImage = null;
 		private UnityEngine.UI.Image m_E_EquipQualityImage = null;
-		private UnityEngine.UI.Image m_E_EquipDiImage = null;
 		private UnityEngine.UI.Image m_E_EquipIconImage = null;
 		private UnityEngine.UI.Text m_E_EquipNameText = null;
 		private UnityEngine.UI.Text m_E_EquipTypeSonText = null;
-		private UnityEngine.UI.Text m_E_EquipLvText = null;
 		private UnityEngine.UI.Text m_E_EquipTypeText = null;
 		private UnityEngine.UI.Text m_E_EquipNeedLvText = null;
-		private UnityEngine.UI.Text m_E_EquipNeedProText = null;
 		private UnityEngine.UI.Text m_E_EquipBangDingText = null;
 		private UnityEngine.UI.Image m_E_EquipBangDingImgImage = null;
 		private UnityEngine.UI.Text m_E_EquipQiangHuaText = null;
+		private UnityEngine.RectTransform m_EG_EquipBaseSetListRectTransform = null;
 		private UnityEngine.UI.Text m_E_EquipPropertyTextText = null;
 		private UnityEngine.RectTransform m_EG_UIEquipGemHoleSetRectTransform = null;
 		private UnityEngine.RectTransform m_EG_EquipZhuanJingSetRectTransform = null;
 		private UnityEngine.UI.Text m_E_ZhuanJingStatusDesText = null;
 		private UnityEngine.UI.Image m_E_ZhuanJingStatusImgImage = null;
+		private UnityEngine.RectTransform m_EG_EquipZhuanJingSetListRectTransform = null;
 		private UnityEngine.RectTransform m_EG_UIEquipSuitRectTransform = null;
+		private UnityEngine.UI.Text m_E_SuitNameText = null;
 		private UnityEngine.UI.Button m_E_ShowEquipSuitButton = null;
 		private UnityEngine.UI.Image m_E_ShowEquipSuitImage = null;
+		private UnityEngine.RectTransform m_EG_EquipSuitSetListRectTransform = null;
+		private UnityEngine.RectTransform m_EG_EquipSuitShowListSetRectTransform = null;
 		private UnityEngine.UI.Text m_EquipSuitItemNamePropertyTextText = null;
 		private UnityEngine.RectTransform m_EG_EquipHintSkillRectTransform = null;
+		private UnityEngine.UI.Text m_E_WearNeedText = null;
 		private UnityEngine.RectTransform m_EG_EquipBtnSetRectTransform = null;
 		private UnityEngine.UI.Text m_E_EquipMakeText = null;
 		private UnityEngine.UI.Button m_E_TakeButton = null;
