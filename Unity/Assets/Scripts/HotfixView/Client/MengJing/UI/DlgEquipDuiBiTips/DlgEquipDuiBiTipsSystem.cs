@@ -27,6 +27,7 @@ namespace ET.Client
         public static void OnUpdateDuiBiUI(this DlgEquipDuiBiTips self, BagInfo bagInfo_1, ShowItemTips args, int weight,
         ItemOperateEnum itemOperateEnum)
         {
+            
         }
 
         public static void OnUpdateAppraisalUI(this DlgEquipDuiBiTips self, ShowItemTips args)

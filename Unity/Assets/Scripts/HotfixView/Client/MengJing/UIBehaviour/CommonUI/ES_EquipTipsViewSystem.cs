@@ -54,6 +54,57 @@ namespace ET.Client
 
             self.ShowBaseAttribute();
             self.ZhuanJingStatus(occTwoValue, itemconf, baginfo);
+            self.ShowButton();
+
+            //基础属性  专精属性  隐藏技能  套装属性
+            //基础属性
+            // int properShowNum = ItemViewHelp.ShowBaseAttribute(equipItemList, baginfo, self.E_EquipPropertyTextText.gameObject, self.EquipBaseSetList);
+            //
+            // //显示宝石
+            // float startPostionY = 0 - self.TitleBigHeight_160 - self.TitleMiniHeight_50 - self.TextItemHeight_40 * properShowNum;
+            // Vector2 equipNeedvec2 = new Vector2(155.5f, startPostionY);
+            // self.Obj_UIEquipGemHoleSet.transform.GetComponent<RectTransform>().anchoredPosition = equipNeedvec2;
+            // float gemHoleShowHeight = self.ShowGemList() * 35f;
+            //
+            // //显示专精属性
+            // startPostionY -= gemHoleShowHeight;
+            // startPostionY -= 5;
+            // int zhunjingNumber = self.ShowZhuanJingAttribute(itemconf, startPostionY);
+            //
+            // //显示隐藏技能
+            // //float HintTextNum = 50;
+            // startPostionY -= (zhunjingNumber > 0? self.TitleMiniHeight_50 : 0);
+            // startPostionY = startPostionY - zhunjingNumber * self.TextItemHeight_40;
+            // startPostionY -= 5;
+            // int hideSkillNumber = self.ShowHideSkill(itemconf, startPostionY);
+            //
+            // //显示装备套装信息
+            // //float equipSuitTextNum = 0;
+            // startPostionY -= (hideSkillNumber > 0? self.TitleMiniHeight_50 : 0);
+            // startPostionY -= hideSkillNumber * self.TextItemHeight_40;
+            //
+            // int suitEquipNumber = self.ShowSuitEquipInfo(itemconf, equipconf.EquipSuitID, startPostionY, equipItemList);
+            // suitEquipNumber = suitEquipNumber + (suitEquipNumber > 0? 2 : 0);
+            // startPostionY = startPostionY - self.TitleMiniHeight_50 - suitEquipNumber * self.TextItemHeight_40;
+            // startPostionY -= 5;
+            //
+            // float DiHight = startPostionY * -1 + 70;
+            // if (DiHight > self.Img_backVector2.y)
+            // {
+            //     self.Img_back.GetComponent<RectTransform>().sizeDelta = new Vector2(self.Img_backVector2.x, DiHight);
+            // }
+            //
+            // if (DiHight > 1150)
+            // {
+            //     float height = (DiHight - 1098f) * 0.5f;
+            //     self.Obj_BtnSet.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, height);
+            // }
+            // else
+            // {
+            //     self.Obj_BtnSet.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+            // }
+
+            //显示装备制造者的名字[名字直接放入baginfo]
         }
 
         private static void ShowBaseAttribute(this ES_EquipTips self)
@@ -238,6 +289,79 @@ namespace ET.Client
                 self.E_ZhuanJingStatusDesText.text = "转职后激活护甲专精";
                 self.E_ZhuanJingStatusDesText.color = new Color(0.58f, 0.58f, 0.58f);
                 self.E_ZhuanJingStatusImgImage.gameObject.SetActive(false);
+            }
+        }
+
+        private static void ShowButton(this ES_EquipTips self)
+        {
+            self.EG_BagOpenSetRectTransform.gameObject.SetActive(false);
+            // self.Obj_RoseEquipOpenSet.SetActive(false);
+            self.E_StoreHouseSetButton.gameObject.SetActive(false);
+            self.E_SaveStoreHouseButton.gameObject.SetActive(false);
+            self.E_HuiShouFangZhiButton.gameObject.SetActive(false);
+            self.E_TakeButton.gameObject.SetActive(false);
+            switch (self.ItemOpetateType)
+            {
+                case ItemOperateEnum.None:
+                case ItemOperateEnum.PaiMaiSell:
+                case ItemOperateEnum.PetHeXinBag:
+                case ItemOperateEnum.PaiMaiBuy:
+                case ItemOperateEnum.PetEquipBag:
+                case ItemOperateEnum.Bag:
+                    bool StoreHouseStatus = false;
+                    if (StoreHouseStatus)
+                    {
+                        self.E_SaveStoreHouseButton.gameObject.SetActive(true);
+                        // self.Obj_Diu.SetActive(false);
+                    }
+                    else
+                    {
+                        self.E_SaveStoreHouseButton.gameObject.SetActive(false);
+                        // self.Obj_Diu.SetActive(true);
+                    }
+
+                    ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
+                    // 赛季晶核
+                    if (itemConfig.ItemType == 3 && itemConfig.EquipType == 201)
+                    {
+                        self.E_EquipMakeText.gameObject.SetActive(false);
+                        self.E_UseButton.gameObject.SetActive(false);
+                        Vector3 localPosition = self.E_SellButton.GetComponent<RectTransform>().localPosition;
+                        localPosition.x = 0;
+                        self.E_SellButton.GetComponent<RectTransform>().localPosition = localPosition;
+                    }
+
+                    break;
+                case ItemOperateEnum.XiangQianBag:
+                    break;
+                case ItemOperateEnum.Juese:
+                    // self.Obj_RoseEquipOpenSet.SetActive(true);
+                    break;
+                case ItemOperateEnum.Shop:
+                    // self.Obj_RoseEquipOpenSet.SetActive(false);
+                    break;
+                case ItemOperateEnum.Cangku:
+                case ItemOperateEnum.GemCangku:
+                case ItemOperateEnum.AccountCangku:
+                    self.E_StoreHouseSetButton.gameObject.SetActive(true);
+                    break;
+                case ItemOperateEnum.CangkuBag:
+                case ItemOperateEnum.AccountBag:
+                    self.E_SaveStoreHouseButton.gameObject.SetActive(true);
+                    break;
+                case ItemOperateEnum.MailReward:
+                    break;
+                case ItemOperateEnum.Watch:
+
+                    break;
+                case ItemOperateEnum.HuishouBag:
+                    self.E_HuiShouFangZhiButton.gameObject.SetActive(true);
+                    break;
+                case ItemOperateEnum.HuishouShow:
+                    self.E_TakeButton.gameObject.SetActive(true);
+                    break;
+                case ItemOperateEnum.MakeItem:
+                    break;
             }
         }
 
