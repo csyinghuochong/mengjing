@@ -26,7 +26,7 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this ES_RoleBag self, Transform transform, int index)
         {
             Scroll_Item_BagItem scrollItemBagItem = self.ScrollItemBagItems[index].BindTrans(transform);
-            scrollItemBagItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.Bag);
+            scrollItemBagItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.Bag, self.UpdateSelect);
         }
 
         private static void OnItemTypeSet(this ES_RoleBag self, int index)

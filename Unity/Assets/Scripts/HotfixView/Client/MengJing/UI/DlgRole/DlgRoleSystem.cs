@@ -165,16 +165,6 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class ES_RoleBag_RefreshBagItems: AEvent<Scene, ES_RoleBag_UpdateSelect>
-    {
-        protected override async ETTask Run(Scene scene, ES_RoleBag_UpdateSelect args)
-        {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleBag.UpdateSelect(args.BagInfo);
-            await ETTask.CompletedTask;
-        }
-    }
-
-    [Event(SceneType.Demo)]
     public class BagItemUpdate_DlgRoleAndBagRefresh: AEvent<Scene, BagItemUpdate>
     {
         protected override async ETTask Run(Scene scene, BagItemUpdate args)

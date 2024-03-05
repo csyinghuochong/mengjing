@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -18,7 +19,8 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void Refresh(this Scroll_Item_BagItem self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum)
+        public static void Refresh(this Scroll_Item_BagItem self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum,
+        Action<BagInfo> updateSelectAction)
         {
             self.BagInfo = bagInfo;
             self.ItemOperateEnum = itemOperateEnum;
@@ -51,9 +53,15 @@ namespace ET.Client
 
                 self.E_ItemNumText.gameObject.SetActive(true);
                 self.E_ItemNumText.text = bagInfo.ItemNum.ToString();
-
+                
                 self.E_ItemClickButton.gameObject.SetActive(true);
-                self.E_ItemClickButton.AddListenerWithParam(self.OnShowItemEntryPopUpHandler, bagInfo);
+                self.E_ItemClickButton.AddListener(() =>
+                {
+                    Log.Info("1111111111");
+                    EventSystem.Instance.Publish(self.Root(),
+                        new ShowItemTips() { BagInfo = bagInfo, ItemOperateEnum = self.ItemOperateEnum, InputPoint = Input.mousePosition });
+                    updateSelectAction?.Invoke(self.BagInfo);
+                });
 
                 self.E_BindingImage.gameObject.SetActive(bagInfo.isBinging);
                 self.E_ProtectImage.gameObject.SetActive(bagInfo.IsProtect);
@@ -62,13 +70,6 @@ namespace ET.Client
             {
                 self.E_ItemDiImage.gameObject.SetActive(true);
             }
-        }
-
-        public static void OnShowItemEntryPopUpHandler(this Scroll_Item_BagItem self, BagInfo bagInfo)
-        {
-            EventSystem.Instance.Publish(self.Root(),
-                new ShowItemTips() { BagInfo = bagInfo, ItemOperateEnum = self.ItemOperateEnum, InputPoint = Input.mousePosition });
-            EventSystem.Instance.Publish(self.Root(), new ES_RoleBag_UpdateSelect() { BagInfo = bagInfo });
         }
 
         public static void UpdateSelectStatus(this Scroll_Item_BagItem self, BagInfo bagInfo)

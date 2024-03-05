@@ -17,11 +17,6 @@ namespace ET.Client
         public CreateRoleInfo CreateRoleInfo;
     }
 
-    public struct ES_RoleBag_UpdateSelect
-    {
-        public BagInfo BagInfo;
-    }
-
     public struct BagItemUpdate
     {
     }
