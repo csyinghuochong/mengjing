@@ -25,4 +25,12 @@ namespace ET.Client
         public int Type;
         public string Str;
     }
+
+    public struct UserDataTypeUpdate_Gold
+    {
+    }
+
+    public struct UserDataTypeUpdate_Diamond
+    {
+    }
 }

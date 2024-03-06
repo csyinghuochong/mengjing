@@ -7,6 +7,142 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgHuoBiSetViewComponent : Entity,IAwake,IDestroy 
 	{
+		public UnityEngine.RectTransform EG_GoldSetRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GoldSetRectTransform == null )
+     			{
+		    		this.m_EG_GoldSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_GoldSet");
+     			}
+     			return this.m_EG_GoldSetRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_GoldText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_GoldText == null )
+     			{
+		    		this.m_E_GoldText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_GoldSet/E_Gold");
+     			}
+     			return this.m_E_GoldText;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_AddGoldButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_AddGoldButton == null )
+     			{
+		    		this.m_E_AddGoldButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_GoldSet/E_AddGold");
+     			}
+     			return this.m_E_AddGoldButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_AddGoldImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_AddGoldImage == null )
+     			{
+		    		this.m_E_AddGoldImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_GoldSet/E_AddGold");
+     			}
+     			return this.m_E_AddGoldImage;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_ZuanShiSetRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_ZuanShiSetRectTransform == null )
+     			{
+		    		this.m_EG_ZuanShiSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_ZuanShiSet");
+     			}
+     			return this.m_EG_ZuanShiSetRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_AddZuanShiButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_AddZuanShiButton == null )
+     			{
+		    		this.m_E_AddZuanShiButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_ZuanShiSet/E_AddZuanShi");
+     			}
+     			return this.m_E_AddZuanShiButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_AddZuanShiImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_AddZuanShiImage == null )
+     			{
+		    		this.m_E_AddZuanShiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_ZuanShiSet/E_AddZuanShi");
+     			}
+     			return this.m_E_AddZuanShiImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_ZuanShiText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ZuanShiText == null )
+     			{
+		    		this.m_E_ZuanShiText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_ZuanShiSet/E_ZuanShi");
+     			}
+     			return this.m_E_ZuanShiText;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_CloseButton
      	{
      		get
@@ -77,6 +213,14 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_EG_GoldSetRectTransform = null;
+			this.m_E_GoldText = null;
+			this.m_E_AddGoldButton = null;
+			this.m_E_AddGoldImage = null;
+			this.m_EG_ZuanShiSetRectTransform = null;
+			this.m_E_AddZuanShiButton = null;
+			this.m_E_AddZuanShiImage = null;
+			this.m_E_ZuanShiText = null;
 			this.m_E_CloseButton = null;
 			this.m_E_CloseImage = null;
 			this.m_E_Close2Button = null;
@@ -84,6 +228,14 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.RectTransform m_EG_GoldSetRectTransform = null;
+		private UnityEngine.UI.Text m_E_GoldText = null;
+		private UnityEngine.UI.Button m_E_AddGoldButton = null;
+		private UnityEngine.UI.Image m_E_AddGoldImage = null;
+		private UnityEngine.RectTransform m_EG_ZuanShiSetRectTransform = null;
+		private UnityEngine.UI.Button m_E_AddZuanShiButton = null;
+		private UnityEngine.UI.Image m_E_AddZuanShiImage = null;
+		private UnityEngine.UI.Text m_E_ZuanShiText = null;
 		private UnityEngine.UI.Button m_E_CloseButton = null;
 		private UnityEngine.UI.Image m_E_CloseImage = null;
 		private UnityEngine.UI.Button m_E_Close2Button = null;

@@ -58,6 +58,8 @@
                 case (int)UserDataType.Gold:
                     updateValue = (long.Parse(message.UpdateTypeValue) - userInfo.Gold).ToString();
                     userInfo.Gold = long.Parse(message.UpdateTypeValue);
+
+                    EventSystem.Instance.Publish(root, new UserDataTypeUpdate_Gold());
                     break;
                 case (int)UserDataType.RongYu:
                     updateValue = (long.Parse(message.UpdateTypeValue) - userInfo.RongYu).ToString();
@@ -67,6 +69,8 @@
                 case (int)UserDataType.Diamond:
                     updateValue = (long.Parse(message.UpdateTypeValue) - userInfo.Diamond).ToString();
                     userInfo.Diamond = long.Parse(message.UpdateTypeValue);
+
+                    EventSystem.Instance.Publish(root, new UserDataTypeUpdate_Diamond());
                     break;
                 case (int)UserDataType.DungeonTimes:
                     userInfo.DayFubenTimes.Clear();
