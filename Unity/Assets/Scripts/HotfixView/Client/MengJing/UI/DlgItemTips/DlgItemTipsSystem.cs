@@ -16,7 +16,7 @@ namespace ET.Client
             self.View.E_BGButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips); });
             self.View.E_SellButton.AddListenerAsync(self.OnSellButton);
             self.View.E_UseButton.AddListenerAsync(self.OnUseButton);
-            self.View.E_SplitButton.AddListener(self.OnSplitButton);
+            self.View.E_SplitButton.AddListenerAsync(self.OnSplitButton);
             self.View.E_PlanButton.AddListener(self.OnPlanButton);
             self.View.E_StoreHouseButton.AddListener(self.OnStoreHouseButton);
             self.View.E_HuiShouButton.AddListener(self.OnHuiShouButton);
@@ -170,8 +170,6 @@ namespace ET.Client
                     //ItemBottomTextNum = 0;
                     break;
                 case ItemOperateEnum.JianYuanBag:
-                    self.View.EG_BagOpenSetRectTransform.gameObject.SetActive(false);
-                    self.View.E_SplitButton.gameObject.SetActive(false);
                     break;
                 // 背包打开显示对应功能按钮
                 case ItemOperateEnum.Bag:
@@ -188,28 +186,23 @@ namespace ET.Client
                     break;
                 // 商店查看属性
                 case ItemOperateEnum.Shop:
-                    self.View.EG_BagOpenSetRectTransform.gameObject.SetActive(false);
                     //ItemBottomTextNum = 0;
                     break;
                 // 仓库查看属性
                 case ItemOperateEnum.Cangku:
-                    self.View.EG_BagOpenSetRectTransform.gameObject.SetActive(false);
                     self.View.E_PutBagButton.gameObject.SetActive(true);
                     //ItemBottomTextNum = 0;
                     break;
                 case ItemOperateEnum.GemCangku:
-                    self.View.EG_BagOpenSetRectTransform.gameObject.SetActive(false);
                     self.View.E_PutBagButton.gameObject.SetActive(true);
                     break;
                 case ItemOperateEnum.GemBag:
                     self.View.EG_BagOpenSetRectTransform.gameObject.SetActive(true);
                     self.View.E_StoreHouseButton.gameObject.SetActive(true);
-                    self.View.E_UseButton.gameObject.SetActive(false);
                     break;
                 case ItemOperateEnum.CangkuBag:
                     self.View.EG_BagOpenSetRectTransform.gameObject.SetActive(true);
                     self.View.E_StoreHouseButton.gameObject.SetActive(true);
-                    self.View.E_UseButton.gameObject.SetActive(false);
                     break;
                 // 回收背包打开
                 case ItemOperateEnum.HuishouBag:
@@ -218,7 +211,6 @@ namespace ET.Client
                     break;
                 // 回收功能显示
                 case ItemOperateEnum.HuishouShow:
-                    self.View.EG_BagOpenSetRectTransform.gameObject.SetActive(false);
                     self.View.E_HuiShouCancleButton.gameObject.SetActive(true);
                     break;
                 // 牧场  不显示任何按钮
@@ -237,7 +229,6 @@ namespace ET.Client
                     break;
                 // 镶嵌在装备上的宝石
                 case ItemOperateEnum.XiangQianGem:
-                    self.View.EG_BagOpenSetRectTransform.gameObject.SetActive(false);
                     self.View.E_XieXiaGemButton.gameObject.SetActive(true);
                     break;
                 case ItemOperateEnum.PetHeXinBag:
@@ -573,8 +564,10 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
         }
 
-        private static void OnSplitButton(this DlgItemTips self)
+        private static async ETTask OnSplitButton(this DlgItemTips self)
         {
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RoleBagSplit);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRoleBagSplit>().Init(self.BagInfo);
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
         }
 

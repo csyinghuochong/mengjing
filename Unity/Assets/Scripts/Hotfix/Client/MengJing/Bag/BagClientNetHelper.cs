@@ -181,5 +181,13 @@ namespace ET.Client
             // self.ZoneScene().GetComponent<AttackComponent>().UpdateComboTime();
             // HintHelp.GetInstance().DataUpdate(DataType.EquipWear);
         }
+
+        public static async ETTask<int> RequestSplitItem(Scene root, BagInfo bagInfo, int splitnumber)
+        {
+            C2M_ItemSplitRequest request = new() { OperateBagID = bagInfo.BagInfoID, OperatePar = splitnumber.ToString() };
+            M2C_ItemSplitResponse response = (M2C_ItemSplitResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
 }

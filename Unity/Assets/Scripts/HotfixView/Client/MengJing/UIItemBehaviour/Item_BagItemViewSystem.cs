@@ -20,7 +20,7 @@ namespace ET.Client
         }
 
         public static void Refresh(this Scroll_Item_BagItem self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum,
-        Action<BagInfo> updateSelectAction)
+        Action<BagInfo> onClickAction = null)
         {
             self.BagInfo = bagInfo;
             self.ItemOperateEnum = itemOperateEnum;
@@ -53,13 +53,13 @@ namespace ET.Client
 
                 self.E_ItemNumText.gameObject.SetActive(true);
                 self.E_ItemNumText.text = bagInfo.ItemNum.ToString();
-                
+
                 self.E_ItemClickButton.gameObject.SetActive(true);
                 self.E_ItemClickButton.AddListener(() =>
                 {
                     EventSystem.Instance.Publish(self.Root(),
                         new ShowItemTips() { BagInfo = bagInfo, ItemOperateEnum = self.ItemOperateEnum, InputPoint = Input.mousePosition });
-                    updateSelectAction?.Invoke(self.BagInfo);
+                    onClickAction?.Invoke(self.BagInfo);
                 });
 
                 self.E_BindingImage.gameObject.SetActive(bagInfo.isBinging);
