@@ -20,7 +20,6 @@ namespace ET.Client
 		{
 			self.AddUIScrollItems(ref self.Dictionary,100);
 			self.View.ELoopTestLoopHorizontalScrollRect.SetVisible(true,100);
-			self.View.ESReuseUI.Test();
 		}
 
 		public static void OnLoop(this DlgLogin self, Transform transform, int index)

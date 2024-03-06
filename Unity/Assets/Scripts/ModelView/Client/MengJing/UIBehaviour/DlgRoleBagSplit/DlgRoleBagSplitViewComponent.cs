@@ -7,6 +7,24 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgRoleBagSplitViewComponent : Entity,IAwake,IDestroy 
 	{
+		public ES_CommonItem ES_CommonItem
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_commonitem == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem");
+		    	   this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
+     			}
+     			return this.m_es_commonitem;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_SplitButton
      	{
      		get
@@ -213,6 +231,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_es_commonitem = null;
 			this.m_E_SplitButton = null;
 			this.m_E_SplitImage = null;
 			this.m_E_AddNumButton = null;
@@ -228,6 +247,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
+		private EntityRef<ES_CommonItem> m_es_commonitem = null;
 		private UnityEngine.UI.Button m_E_SplitButton = null;
 		private UnityEngine.UI.Image m_E_SplitImage = null;
 		private UnityEngine.UI.Button m_E_AddNumButton = null;

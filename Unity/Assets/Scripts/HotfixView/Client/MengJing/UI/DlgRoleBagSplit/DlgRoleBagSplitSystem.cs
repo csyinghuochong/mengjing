@@ -26,6 +26,7 @@ namespace ET.Client
         {
             self.BagInfo = bagInfo;
             self.Num = 1;
+            self.View.ES_CommonItem.Refresh(bagInfo, ItemOperateEnum.None);
             self.View.E_NumInputField.text = self.Num.ToString();
         }
 
