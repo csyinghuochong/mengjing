@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
-using static UnityEngine.UI.CanvasScaler;
 
 
 namespace ET.Server
