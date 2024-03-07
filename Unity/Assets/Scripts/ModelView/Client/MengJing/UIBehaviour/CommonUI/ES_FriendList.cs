@@ -1,12 +1,16 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_FriendList : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_FriendList : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy ,IUILogic
 	{
+		public Dictionary<int, Scroll_Item_FriendListItem> ScrollItemFriendListItems;
+		public List<FriendInfo> ShowFriendInfos = new();
+		
 		public UnityEngine.UI.LoopVerticalScrollRect E_FriendListItemsLoopVerticalScrollRect
      	{
      		get
