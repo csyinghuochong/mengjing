@@ -189,5 +189,18 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<int> RequestSortByLoc(Scene root, ItemLocType loc)
+        {
+            BagComponentClient bagComponentClient = root.GetComponent<BagComponentClient>();
+            bagComponentClient.RealAddItem = false;
+            int loctype = (int)loc;
+            C2M_ItemOperateRequest request = new() { OperateType = 8, OperateBagID = 0, OperatePar = loctype.ToString() };
+            M2C_ItemOperateResponse response = (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            bagComponentClient.RealAddItem = true;
+            bagComponentClient.OnRecvItemSort(loc);
+
+            return response.Error;
+        }
     }
 }

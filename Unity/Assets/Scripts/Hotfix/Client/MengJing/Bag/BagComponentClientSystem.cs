@@ -23,6 +23,13 @@ namespace ET.Client
         {
         }
 
+        public static void OnRecvItemSort(this BagComponentClient self, ItemLocType itemEquipType)
+        {
+            List<BagInfo> ItemTypeList = self.GetItemsByLoc(itemEquipType);
+            ItemHelper.ItemLitSort(ItemTypeList);
+            EventSystem.Instance.Publish(self.Root(), new BagItemUpdate());
+        }
+
         public static void OnRecvBagUpdate(this BagComponentClient self, M2C_RoleBagUpdate message)
         {
             var bagUpdate = message.BagInfoUpdate;

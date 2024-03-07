@@ -14,6 +14,7 @@ namespace ET.Client
 
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
+            self.E_ZhengLiButton.AddListenerAsync(self.OnZhengLiButton);
             self.E_AllToggle.IsSelected(true);
         }
 
@@ -38,12 +39,6 @@ namespace ET.Client
 
             self.CurrentItemType = index;
             self.Refresh();
-        }
-
-        private static void SetToggleShow(this ES_RoleBag self, GameObject gameObject, bool isShow)
-        {
-            gameObject.transform.Find("Background/XuanZhong").gameObject.SetActive(isShow);
-            gameObject.transform.Find("Background/WeiXuanZhong").gameObject.SetActive(!isShow);
         }
 
         public static void Refresh(this ES_RoleBag self)
@@ -79,11 +74,21 @@ namespace ET.Client
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
-        public static void UpdateSelect(this ES_RoleBag self, BagInfo bagInfo)
+        private static void UpdateSelect(this ES_RoleBag self, BagInfo bagInfo)
         {
             for (int i = 0; i < self.ScrollItemBagItems.Keys.Count - 1; i++)
             {
                 self.ScrollItemBagItems[i].UpdateSelectStatus(bagInfo);
+            }
+        }
+
+        private static async ETTask OnZhengLiButton(this ES_RoleBag self)
+        {
+            FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
+            int errorCode = await BagClientNetHelper.RequestSortByLoc(self.Root(), ItemLocType.ItemLocBag);
+            if (errorCode == ErrorCode.ERR_Success)
+            {
+                flyTipComponent.SpawnFlyTipDi("整理完成!");
             }
         }
     }

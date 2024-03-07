@@ -218,7 +218,7 @@ namespace ET.Server
        //通知客户端背包道具发生改变
        MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2c_bagUpdate);
 
-       //ItemHelper.ItemLitSort(ItemTypeList);
+       ItemHelper.ItemLitSort(ItemTypeList);
    }
 
    public static void CheckValiedItem(this BagComponentServer self, List<BagInfo> bagInfos)
