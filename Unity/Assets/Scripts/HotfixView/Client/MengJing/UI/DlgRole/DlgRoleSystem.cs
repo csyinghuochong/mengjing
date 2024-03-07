@@ -46,9 +46,6 @@ namespace ET.Client
 
         private static void OnFunctionSetBtn(this DlgRole self, int index)
         {
-            Log.Debug($"按下Toggle：{index}");
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
             UICommonHelper.SetToggleShow(self.View.E_BagToggle.gameObject, index == 0);
             UICommonHelper.SetToggleShow(self.View.E_PropertyToggle.gameObject, index == 1);
 
