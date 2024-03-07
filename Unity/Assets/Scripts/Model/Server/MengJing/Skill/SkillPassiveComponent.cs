@@ -41,9 +41,6 @@ namespace ET.Server
 
         public C2M_SkillCmd C2M_SkillCmd = new C2M_SkillCmd();
 
-        public StateComponentServer StateComponent { get; set; }
-        public NumericComponentServer NumericComponent { get; set; }
-
         public SkillPassiveInfo SingSkillIfo;
         public long SingTargetId = 0;
 

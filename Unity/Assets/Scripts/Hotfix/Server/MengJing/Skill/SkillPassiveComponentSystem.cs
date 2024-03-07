@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using static UnityEngine.UI.CanvasScaler;
 
 
 namespace ET.Server
@@ -44,10 +45,10 @@ namespace ET.Server
 
             //ª∫¥Ê÷µ
             self.UnitType = unit.Type;
-            self.StateComponent = unit.GetComponent<StateComponentServer>();
-            self.NumericComponent = unit.GetComponent<NumericComponentServer>();
+            StateComponentServer StateComponent = unit.GetComponent<StateComponentServer>();
+            NumericComponentServer NumericComponent = unit.GetComponent<NumericComponentServer>();
 
-            if (unit.GetComponent<NumericComponentServer>().GetAsInt(NumericType.Now_Dead) != 0)
+            if (NumericComponent.GetAsInt(NumericType.Now_Dead) != 0)
             {
                 return;
             }
@@ -359,13 +360,16 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillIfo.SkillId);
             int angle = 0; // (int)Quaternion.QuaternionToEuler(unit.Rotation).y;
-            self.StateComponent.StateTypeAdd(StateTypeEnum.Singing, $"{skillIfo.SkillId}_{angle}");
+            StateComponentServer StateComponent = unit.GetComponent<StateComponentServer>();
+            StateComponent.StateTypeAdd(StateTypeEnum.Singing, $"{skillIfo.SkillId}_{angle}");
             self.SingTimer = self.Root().GetComponent<TimerComponent>().NewOnceTimer(TimeHelper.ServerNow() + (long)(skillConfig.SkillFrontSingTime * 1000), TimerInvokeType.MonsterSingingTimer, self);
         }
 
         public static void OnSingOver(this SkillPassiveComponent self)
         {
-            self.StateComponent.StateTypeRemove(StateTypeEnum.Singing);
+            Unit unit = self.GetParent<Unit>();
+            StateComponentServer StateComponent = unit.GetComponent<StateComponentServer>();
+            StateComponent.StateTypeRemove(StateTypeEnum.Singing);
             if (self.SingSkillIfo != null)
             {
                 self.ImmediateUseSkill(self.SingSkillIfo, self.SingTargetId);
@@ -374,10 +378,12 @@ namespace ET.Server
 
         public static void StateTypeAdd(this SkillPassiveComponent self, long nowStateType)
         {
+            Unit unit = self.GetParent<Unit>();
+            StateComponentServer StateComponent = unit.GetComponent<StateComponentServer>();
             if (self.SingTimer > 0 && (nowStateType == StateTypeEnum.Silence || nowStateType == StateTypeEnum.Dizziness))
             {
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.SingTimer);
-                self.StateComponent.StateTypeRemove(StateTypeEnum.Singing);
+                StateComponent.StateTypeRemove(StateTypeEnum.Singing);
             }
         }
 
@@ -455,7 +461,7 @@ namespace ET.Server
                 Log.Debug("SkillPassiveComponent :unit.IsDisposed ");
                 return;
             }
-            self.StateComponent.SetRigidityEndTime(rigidityEndTime);
+            unit.GetComponent< StateComponentServer> ().SetRigidityEndTime(rigidityEndTime);
         }
 
         public static void OnPlayerMove(this SkillPassiveComponent self)
