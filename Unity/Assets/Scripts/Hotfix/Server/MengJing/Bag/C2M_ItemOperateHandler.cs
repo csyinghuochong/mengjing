@@ -753,7 +753,7 @@ namespace ET.Server
 
                 bagComponent.OnChangeItemLoc(useBagInfo, ItemLocType.ItemLocBag, ItemLocType.ItemLocEquip);
                 //unit.GetComponent<SkillSetComponent>().OnTakeOffEquip(ItemLocType.ItemLocEquip, useBagInfo);
-                Function_Fight.UnitUpdateProperty_Base(unit, true, true);
+                // Function_Fight.UnitUpdateProperty_Base(unit, true, true);
                 m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
                 if (weizhi == (int) ItemSubTypeEnum.Wuqi)
                 {

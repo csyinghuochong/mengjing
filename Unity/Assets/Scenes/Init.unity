@@ -927,7 +927,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1784017108}
-  - component: {fileID: 1784017109}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -954,29 +953,6 @@ Transform:
   m_Father: {fileID: 575235020}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1784017109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1784017107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502d8cafd6a5a0447ab1db9a24cdcb10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-  - key: High
-    gameObject: {fileID: 0}
-  - key: Mid
-    gameObject: {fileID: 493985069}
-  - key: Low
-    gameObject: {fileID: 251107983}
-  - key: Blood
-    gameObject: {fileID: 109513348}
-  - key: Hidden
-    gameObject: {fileID: 872594939}
 --- !u!850595691 &1972482029
 LightingSettings:
   m_ObjectHideFlags: 0
