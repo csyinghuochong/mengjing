@@ -723,7 +723,7 @@ namespace ET.Server
                 int zodiacnumber = bagComponent.GetZodiacnumber();
                 //unit.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.ZodiacEquipNumber_215, 0, zodiacnumber);
 
-                Function_Fight.UnitUpdateProperty_Base(unit, true, true);
+                // Function_Fight.UnitUpdateProperty_Base(unit, true, true);
                 useBagInfo.isBinging = true;
                 m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
 
