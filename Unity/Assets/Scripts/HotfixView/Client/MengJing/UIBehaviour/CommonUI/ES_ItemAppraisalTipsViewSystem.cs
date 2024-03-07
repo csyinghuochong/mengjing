@@ -360,11 +360,56 @@ namespace ET.Client
 
         private static async ETTask OnSellButton(this ES_ItemAppraisalTips self)
         {
+            //发送消息
+            if (ItemConfigCategory.Instance.Get(self.BagInfo.ItemID).ItemQuality >= 4)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
+                PopupTipHelp.OpenPopupTip(self.Root(), "出售道具", "是否出售道具:" + itemConfig.ItemName, () =>
+                {
+                    BagClientNetHelper.RequestSellItem(self.Root(), self.BagInfo, self.BagInfo.ItemNum.ToString()).Coroutine();
+                    self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
+                }).Coroutine();
+            }
+            else
+            {
+                BagClientNetHelper.RequestSellItem(self.Root(), self.BagInfo, self.BagInfo.ItemNum.ToString()).Coroutine();
+                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
+            }
+
             await ETTask.CompletedTask;
         }
 
         private static async ETTask OnUseButton(this ES_ItemAppraisalTips self)
         {
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
+
+            if (itemConfig.EquipType == 101)
+            {
+                // int appraisalItem = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID).AppraisalItem;
+                //
+                // BagComponentClient bagComponentClient = self.Root().GetComponent<BagComponentClient>();
+                // BagInfo costbaginfo = bagComponentClient.GetBagInfo(appraisalItem);
+                // if (costbaginfo == null)
+                // {
+                //     FloatTipManager.Instance.ShowFloatTip("道具不足！");
+                //     return;
+                // }
+                //
+                // string costitem = ItemConfigCategory.Instance.Get(appraisalItem).ItemName;
+                // PopupTipHelp.OpenPopupTip(self.ZoneScene(), "开启封印", $"是否消耗{costitem}开启封印?", () =>
+                // {
+                //     bagComponentClient.SendAppraisalItem(self.BagInfo, costbaginfo.BagInfoID).Coroutine();
+                //     self.OnCloseTips();
+                // }).Coroutine();
+            }
+            else
+            {
+                //发送消息
+                // UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIAppraisalSelect);
+                // uI.GetComponent<UIAppraisalSelectComponent>().OnInitUI(self.BagInfo);
+                // self.OnCloseTips();
+            }
+
             await ETTask.CompletedTask;
         }
 
