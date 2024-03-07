@@ -217,6 +217,7 @@ namespace ET.Client
                 case ItemOperateEnum.PaiMaiSell:
                 case ItemOperateEnum.PetHeXinBag:
                 case ItemOperateEnum.PaiMaiBuy:
+                    break;
                 case ItemOperateEnum.PetEquipBag:
                     self.EG_BagOpenSetRectTransform.gameObject.SetActive(true);
                     break;

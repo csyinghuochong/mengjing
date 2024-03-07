@@ -45,14 +45,18 @@ namespace ET.Client
             BagInfo bagInfo_2 = args.BagInfo;
 
             height_1 = self.View.ES_EquipTips_1.E_BackImage.GetComponent<RectTransform>().sizeDelta.y;
+            self.View.ES_EquipTips_1.RefreshInfo(bagInfo_1, ItemOperateEnum.None, 0, args.EquipList);
+            self.View.ES_EquipTips_1.uiTransform.gameObject.SetActive(true);
             if (bagInfo_2.IfJianDing == false)
             {
                 height_2 = self.View.ES_EquipTips_2.E_BackImage.GetComponent<RectTransform>().sizeDelta.y;
+                self.View.ES_EquipTips_2.RefreshInfo(bagInfo_2, itemOperateEnum, 0, args.EquipList);
                 self.View.ES_EquipTips_2.uiTransform.gameObject.SetActive(true);
             }
             else
             {
                 height_2 = self.View.ES_ItemAppraisalTips_2.E_BackImage.GetComponent<RectTransform>().sizeDelta.y;
+                self.View.ES_ItemAppraisalTips_2.RefreshInfo(bagInfo_2, itemOperateEnum);
                 self.View.ES_ItemAppraisalTips_2.uiTransform.gameObject.SetActive(true);
             }
 
