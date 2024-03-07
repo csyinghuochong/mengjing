@@ -56,6 +56,8 @@ namespace ET.Server
             m2C_FashionUpdate.UnitID = unit.Id;
             m2C_FashionUpdate.FashionEquipList = bagComponent.FashionEquipList;
             MapMessageHelper.Broadcast(unit, m2C_FashionUpdate);
+
+            await ETTask.CompletedTask;
         }
     }
     

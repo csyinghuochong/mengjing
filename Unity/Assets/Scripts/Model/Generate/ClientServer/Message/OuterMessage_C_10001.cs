@@ -5965,7 +5965,7 @@ namespace ET
 
 	[Message(OuterMessage.M2C_FashionUpdate)]
 	[MemoryPackable]
-	public partial class M2C_FashionUpdate: MessageObject, IActorMessage
+	public partial class M2C_FashionUpdate: MessageObject, IMessage
 	{
 		public static M2C_FashionUpdate Create(bool isFromPool = false) 
 		{ 
