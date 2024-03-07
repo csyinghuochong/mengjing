@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_BagItem))]
     [EntitySystemOf(typeof (ES_RoleBag))]
     [FriendOfAttribute(typeof (ES_RoleBag))]
     public static partial class ES_RoleBagSystem
@@ -79,7 +80,11 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemBagItems.Keys.Count - 1; i++)
             {
-                self.ScrollItemBagItems[i].UpdateSelectStatus(bagInfo);
+                // 滚动组件的子物体是动态从对象池里拿的，只引用看的到的
+                if (self.ScrollItemBagItems[i].uiTransform != null)
+                {
+                    self.ScrollItemBagItems[i].UpdateSelectStatus(bagInfo);
+                }
             }
         }
 

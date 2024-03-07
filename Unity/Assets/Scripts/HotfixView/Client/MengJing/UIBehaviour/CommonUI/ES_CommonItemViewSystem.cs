@@ -74,6 +74,11 @@ namespace ET.Client
 
         public static void UpdateSelectStatus(this ES_CommonItem self, BagInfo bagInfo)
         {
+            if (null == bagInfo || null == self.BagInfo)
+            {
+                return;
+            }
+            
             self.E_XuanZhongImage.gameObject.SetActive(self.BagInfo.BagInfoID == bagInfo.BagInfoID);
         }
     }
