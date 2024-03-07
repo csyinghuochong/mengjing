@@ -194,20 +194,20 @@ namespace ET.Server
             }
 
             //打断吟唱中技能
-            unit.GetComponent<SkillManagerComponent>().InterruptSing(0, true);
-            unit.GetComponent<SkillPassiveComponent>().StateTypeAdd(nowStateType);
-            //发送改变属性的相关消息
-            if (self.IsBroadcastType(nowStateType))
-            {
-                MessageHelper.Broadcast(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateValue = stateValue, StateOperateType = 1, StateTime = 0 });
-            }
-            else
-            {
-                if (unit.Type == UnitType.Player)
-                {
-                    MessageHelper.SendToClient(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateValue = stateValue, StateOperateType = 1, StateTime = 0 });
-                }
-            }
+            //unit.GetComponent<SkillManagerComponent>().InterruptSing(0, true);
+            //unit.GetComponent<SkillPassiveComponent>().StateTypeAdd(nowStateType);
+            ////发送改变属性的相关消息
+            //if (self.IsBroadcastType(nowStateType))
+            //{
+            //    MessageHelper.Broadcast(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateValue = stateValue, StateOperateType = 1, StateTime = 0 });
+            //}
+            //else
+            //{
+            //    if (unit.Type == UnitType.Player)
+            //    {
+            //        MessageHelper.SendToClient(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateValue = stateValue, StateOperateType = 1, StateTime = 0 });
+            //    }
+            //}
         }
 
         public static bool IsBroadcastType(this StateComponentServer self, long nowStateType)
@@ -233,17 +233,17 @@ namespace ET.Server
             if (unit == null || unit.IsDisposed)
                 return;
 
-            if (self.IsBroadcastType(nowStateType))
-            {
-                MapMessageHelper.Broadcast(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateOperateType = 2, StateTime = 0 });
-            }
-            else
-            {
-                if (unit.Type == UnitType.Player)
-                {
-                    MapMessageHelper.SendToClient(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateOperateType = 2, StateTime = 0 });
-                }
-            }
+            //if (self.IsBroadcastType(nowStateType))
+            //{
+            //    MapMessageHelper.Broadcast(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateOperateType = 2, StateTime = 0 });
+            //}
+            //else
+            //{
+            //    if (unit.Type == UnitType.Player)
+            //    {
+            //        MapMessageHelper.SendToClient(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateOperateType = 2, StateTime = 0 });
+            //    }
+            //}
         }
 
         /// <summary>
