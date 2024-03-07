@@ -4,7 +4,7 @@ namespace ET.Server
     [EntitySystemOf(typeof(StateComponentServer))]
     [FriendOf(typeof(StateComponentServer))]
     [FriendOf(typeof(NumericComponentServer))]
-    [FriendOf(typeof(SkillPassiveComponent))]
+    //[FriendOf(typeof(SkillPassiveComponent))]
     public static partial class StateComponentServerSystem
     {
         [EntitySystem]
@@ -186,7 +186,7 @@ namespace ET.Server
             }
             if (nowStateType == StateTypeEnum.Dizziness)
             {
-                unit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.Dizziness_13);
+                //unit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.Dizziness_13);
             }
             if (nowStateType == StateTypeEnum.BaTi)
             {

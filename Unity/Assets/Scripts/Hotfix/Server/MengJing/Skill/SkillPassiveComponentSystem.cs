@@ -10,7 +10,7 @@ namespace ET.Server
     [EntitySystemOf(typeof(SkillPassiveComponent))]
     [FriendOf(typeof(SkillPassiveComponent))]
     [FriendOf(typeof(SkillSetComponentServer))]
-    [FriendOf(typeof(AIComponent))]
+    //[FriendOf(typeof(AIComponent))]
     public  static partial class SkillPassiveComponentSystem
     {
         [EntitySystem]
@@ -395,40 +395,40 @@ namespace ET.Server
             {
                 return;
             }
-            Unit unit = self.GetParent<Unit>();
-            List<long> targetIdList = new List<long>();
-            AIComponent aIComponent = unit.GetComponent<AIComponent>();
-            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillIfo.SkillId);
-            if (aIComponent != null)
-            {
-                targetId = aIComponent.TargetID;
-                Unit aiTarget = unit.GetParent<UnitComponent>().Get(targetId);
-                if (aiTarget != null && skillConfig.SkillTargetType == (int)SkillTargetType.TargetOnly
-                    && PositionHelper.Distance2D(unit.Position, aiTarget.Position) > aIComponent.ActDistance)
-                {
-                    return;
-                }
+            //Unit unit = self.GetParent<Unit>();
+            //List<long> targetIdList = new List<long>();
+            //AIComponent aIComponent = unit.GetComponent<AIComponent>();
+            //SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillIfo.SkillId);
+            //if (aIComponent != null)
+            //{
+            //    targetId = aIComponent.TargetID;
+            //    Unit aiTarget = unit.GetParent<UnitComponent>().Get(targetId);
+            //    if (aiTarget != null && skillConfig.SkillTargetType == (int)SkillTargetType.TargetOnly
+            //        && PositionHelper.Distance2D(unit.Position, aiTarget.Position) > aIComponent.ActDistance)
+            //    {
+            //        return;
+            //    }
 
-                if (skillConfig.SkillTargetTypeNum == 0)
-                {
-                    targetIdList.Add(targetId);
-                }
-                else
-                {
-                    List<long> enemyids = AIHelp.GetNearestEnemyIds(unit, (float)aIComponent.ActRange, skillConfig.SkillTargetTypeNum);
-                    if ((skillConfig.SkillTargetTypeNum == 2 || skillConfig.SkillTargetTypeNum == 3) && enemyids.Count > 0)
-                    {
-                        aIComponent.ChangeTarget(enemyids[0]);
-                    }
+            //    if (skillConfig.SkillTargetTypeNum == 0)
+            //    {
+            //        targetIdList.Add(targetId);
+            //    }
+            //    else
+            //    {
+            //        //List<long> enemyids = AIHelp.GetNearestEnemyIds(unit, (float)aIComponent.ActRange, skillConfig.SkillTargetTypeNum);
+            //        //if ((skillConfig.SkillTargetTypeNum == 2 || skillConfig.SkillTargetTypeNum == 3) && enemyids.Count > 0)
+            //        //{
+            //        //    aIComponent.ChangeTarget(enemyids[0]);
+            //        //}
 
-                    targetIdList.AddRange(enemyids);
-                }
-            }
-            if (targetIdList.Count == 0)
-            {
-                targetId = targetId > 0 ? targetId : self.GetParent<Unit>().Id;
-                targetIdList.Add(targetId);
-            }
+            //        //targetIdList.AddRange(enemyids);
+            //    }
+            //}
+            //if (targetIdList.Count == 0)
+            //{
+            //    targetId = targetId > 0 ? targetId : self.GetParent<Unit>().Id;
+            //    targetIdList.Add(targetId);
+            //}
 
             //int targetAngle = 0; /// (int)Quaternion.QuaternionToEuler(unit.Rotation).y;
             //Unit target = unit.GetParent<UnitComponent>().Get(targetId);
@@ -456,14 +456,14 @@ namespace ET.Server
             //    skillManagerComponent.OnUseSkill(cmd, false);
             //}
 
-            long serverTime = TimeHelper.ServerNow();
-            long rigidityEndTime = (long)(skillConfig.SkillRigidity * 1000) + serverTime;
-            if (unit.IsDisposed)
-            {
-                Log.Debug("SkillPassiveComponent :unit.IsDisposed ");
-                return;
-            }
-            unit.GetComponent< StateComponentServer> ().SetRigidityEndTime(rigidityEndTime);
+            //long serverTime = TimeHelper.ServerNow();
+            //long rigidityEndTime = (long)(skillConfig.SkillRigidity * 1000) + serverTime;
+            //if (unit.IsDisposed)
+            //{
+            //    Log.Debug("SkillPassiveComponent :unit.IsDisposed ");
+            //    return;
+            //}
+            //unit.GetComponent< StateComponentServer> ().SetRigidityEndTime(rigidityEndTime);
         }
 
         public static void OnPlayerMove(this SkillPassiveComponent self)
