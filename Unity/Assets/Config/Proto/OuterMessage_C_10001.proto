@@ -1551,3 +1551,64 @@ message M2C_FashionUpdate // IMessage
 	repeated int32 FashionEquipList = 2;
 }
 
+//ResponseType M2C_SkillCmd
+message C2M_SkillCmd // ILocationRequest
+{
+    int32 RpcId = 90;
+    int64 ActorId = 93;
+    int32 SkillID = 1;
+    int64 TargetID = 2;
+    int32 TargetAngle = 3;
+    float TargetDistance = 4;
+    int32 WeaponSkillID = 5;
+    int32 ItemId = 6;
+	float SingValue = 7;
+}
+
+message M2C_SkillCmd // ILocationResponse
+{
+
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 CDEndTime = 1;
+	int64 PublicCDTime = 2;
+}
+
+message M2C_UnitUseSkill // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 UnitId = 94;
+	int32 SkillID = 1;				//表现用
+
+	int32 TargetAngle = 3;				//用来角色转向
+	repeated SkillInfo SkillInfos = 4;		//技能列表[一个技能可以同时触发多个技能]
+	int32 ItemId = 6;
+	int64 CDEndTime = 7;
+	int64 PublicCDTime = 8;
+}
+
+message LifeShieldInfo
+{
+	int32 ShieldType = 1;
+	int32 Level = 2;
+	int32 Exp = 3;
+	string Message = 4;
+}
+
+message SkillSetInfo
+{
+	repeated SkillPro SkillList = 1;
+	repeated int32 TianFuList = 2;
+	repeated LifeShieldInfo LifeShieldList = 3;
+	repeated int32 TianFuList1 = 4;
+	int32 TianFuPlan = 5;
+}
+
+//技能天赋更新
+message M2C_SkillSetMessage	// IMessage
+{
+	SkillSetInfo SkillSetInfo = 1;
+}

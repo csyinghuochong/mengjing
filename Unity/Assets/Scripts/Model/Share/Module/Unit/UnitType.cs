@@ -6,5 +6,6 @@
         public const int Monster = 2;
         public const int NPC = 3;
         public const int Pet = 4;
+        public const int JingLing = 5;  
     }
 }

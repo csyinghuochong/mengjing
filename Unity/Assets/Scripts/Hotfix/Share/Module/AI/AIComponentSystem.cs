@@ -83,6 +83,14 @@ namespace ET
             
         }
 
+        public static void ChangeTarget(this AIComponent self, long targetId)
+        {
+            if (!self.IsRetreat)
+            {
+                self.TargetID = targetId;
+            }
+        }
+
         private static void Cancel(this AIComponent self)
         {
             self.CancellationToken?.Cancel();

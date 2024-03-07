@@ -12,5 +12,13 @@ namespace ET
         public long Timer;
 
         public int Current;
+
+        public long TargetID;
+
+        public double ActDistance;
+
+        public double ActRange;
+
+        public bool IsRetreat;
     }
 }

@@ -5997,6 +5997,248 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_SkillCmd))]
+	[Message(OuterMessage.C2M_SkillCmd)]
+	[MemoryPackable]
+	public partial class C2M_SkillCmd: MessageObject, ILocationRequest
+	{
+		public static C2M_SkillCmd Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_SkillCmd), isFromPool) as C2M_SkillCmd; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int SkillID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long TargetID { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int TargetAngle { get; set; }
+
+		[MemoryPackOrder(3)]
+		public float TargetDistance { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int WeaponSkillID { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int ItemId { get; set; }
+
+		[MemoryPackOrder(6)]
+		public float SingValue { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.SkillID = default;
+			this.TargetID = default;
+			this.TargetAngle = default;
+			this.TargetDistance = default;
+			this.WeaponSkillID = default;
+			this.ItemId = default;
+			this.SingValue = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_SkillCmd)]
+	[MemoryPackable]
+	public partial class M2C_SkillCmd: MessageObject, ILocationResponse
+	{
+		public static M2C_SkillCmd Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SkillCmd), isFromPool) as M2C_SkillCmd; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long CDEndTime { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long PublicCDTime { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.CDEndTime = default;
+			this.PublicCDTime = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_UnitUseSkill)]
+	[MemoryPackable]
+	public partial class M2C_UnitUseSkill: MessageObject, IMessage
+	{
+		public static M2C_UnitUseSkill Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_UnitUseSkill), isFromPool) as M2C_UnitUseSkill; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(93)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int SkillID { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int TargetAngle { get; set; }
+
+		[MemoryPackOrder(3)]
+		public List<SkillInfo> SkillInfos { get; set; } = new();
+
+		[MemoryPackOrder(5)]
+		public int ItemId { get; set; }
+
+		[MemoryPackOrder(6)]
+		public long CDEndTime { get; set; }
+
+		[MemoryPackOrder(7)]
+		public long PublicCDTime { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.SkillID = default;
+			this.TargetAngle = default;
+			this.SkillInfos.Clear();
+			this.ItemId = default;
+			this.CDEndTime = default;
+			this.PublicCDTime = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.LifeShieldInfo)]
+	[MemoryPackable]
+	public partial class LifeShieldInfo: MessageObject
+	{
+		public static LifeShieldInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(LifeShieldInfo), isFromPool) as LifeShieldInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int ShieldType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Level { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Exp { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.ShieldType = default;
+			this.Level = default;
+			this.Exp = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.SkillSetInfo)]
+	[MemoryPackable]
+	public partial class SkillSetInfo: MessageObject
+	{
+		public static SkillSetInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(SkillSetInfo), isFromPool) as SkillSetInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public List<SkillPro> SkillList { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public List<int> TianFuList { get; set; } = new();
+
+		[MemoryPackOrder(2)]
+		public List<LifeShieldInfo> LifeShieldList { get; set; } = new();
+
+		[MemoryPackOrder(3)]
+		public List<int> TianFuList1 { get; set; } = new();
+
+		[MemoryPackOrder(4)]
+		public int TianFuPlan { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.SkillList.Clear();
+			this.TianFuList.Clear();
+			this.LifeShieldList.Clear();
+			this.TianFuList1.Clear();
+			this.TianFuPlan = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//技能天赋更新
+	[Message(OuterMessage.M2C_SkillSetMessage)]
+	[MemoryPackable]
+	public partial class M2C_SkillSetMessage: MessageObject, IMessage
+	{
+		public static M2C_SkillSetMessage Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SkillSetMessage), isFromPool) as M2C_SkillSetMessage; 
+		}
+
+		[MemoryPackOrder(0)]
+		public SkillSetInfo SkillSetInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.SkillSetInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -6163,5 +6405,11 @@ namespace ET
 		 public const ushort F2C_FriendInfoResponse = 10163;
 		 public const ushort ItemXiLianResult = 10164;
 		 public const ushort M2C_FashionUpdate = 10165;
+		 public const ushort C2M_SkillCmd = 10166;
+		 public const ushort M2C_SkillCmd = 10167;
+		 public const ushort M2C_UnitUseSkill = 10168;
+		 public const ushort LifeShieldInfo = 10169;
+		 public const ushort SkillSetInfo = 10170;
+		 public const ushort M2C_SkillSetMessage = 10171;
 	}
 }
