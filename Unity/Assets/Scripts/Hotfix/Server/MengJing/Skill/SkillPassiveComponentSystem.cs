@@ -58,8 +58,8 @@ namespace ET.Server
                 {
                     return;
                 }
-               
-                int equipId = self.NumericComponent.GetAsInt(NumericType.Now_Weapon);
+             
+                int equipId = NumericComponent.GetAsInt(NumericType.Now_Weapon);
                 self.OnTrigegerPassiveSkill(SkillPassiveTypeEnum.WandBuff_8, equipId);
                 self.OnTrigegerPassiveSkill(SkillPassiveTypeEnum.EquipIndex_15);
             }
@@ -99,18 +99,21 @@ namespace ET.Server
             {
                 return;
             }
+            NumericComponentServer NumericComponent = self.GetParent<Unit>().GetComponent<NumericComponentServer>();
+
 
             //只有玩家和宠物有回血
             if (self.UnitType == UnitType.Pet)
             {
-                long maxHp = self.NumericComponent.GetAsLong(NumericType.Now_MaxHp);
+                
+                long maxHp = NumericComponent.GetAsLong(NumericType.Now_MaxHp);
 
                 //满血不触发回血
-                if (self.NumericComponent.GetAsLong((int)NumericType.Now_Hp) >= maxHp)
+                if (NumericComponent.GetAsLong((int)NumericType.Now_Hp) >= maxHp)
                     return;
 
                 long addHpValue = 0;
-                float now_SecHpAddPro = self.NumericComponent.GetAsFloat(NumericType.Now_SecHpAddPro);
+                float now_SecHpAddPro = NumericComponent.GetAsFloat(NumericType.Now_SecHpAddPro);
                 if (now_SecHpAddPro > 0f)
                 {
                     addHpValue = (long)(maxHp * now_SecHpAddPro);
@@ -118,25 +121,25 @@ namespace ET.Server
                 addHpValue += (long)(maxHp * 0.05f);
 
                 //每5秒恢复5%生命
-                self.NumericComponent.SetEvent(NumericType.Now_Hp, addHpValue,  true);
+                NumericComponent.SetEvent(NumericType.Now_Hp, addHpValue,  true);
             }
 
             if (self.UnitType == UnitType.Player)
             {
-                long maxHp = self.NumericComponent.GetAsLong(NumericType.Now_MaxHp);
+                long maxHp = NumericComponent.GetAsLong(NumericType.Now_MaxHp);
 
                 //满血不触发回血
-                if (self.NumericComponent.GetAsLong((int)NumericType.Now_Hp) >= maxHp)
+                if (NumericComponent.GetAsLong((int)NumericType.Now_Hp) >= maxHp)
                     return;
 
                 long addHpValue = 0;
-                float now_SecHpAddPro = self.NumericComponent.GetAsFloat(NumericType.Now_SecHpAddPro);
+                float now_SecHpAddPro = NumericComponent.GetAsFloat(NumericType.Now_SecHpAddPro);
                 if (now_SecHpAddPro > 0f)
                 {
                     addHpValue = (long)(maxHp * now_SecHpAddPro);
                 }
 
-                long now_HuiXue = self.NumericComponent.GetAsLong(NumericType.Now_HuiXue);
+                long now_HuiXue = NumericComponent.GetAsLong(NumericType.Now_HuiXue);
                 if (now_HuiXue > 0f)
                 {
                     addHpValue = now_HuiXue * 5;
@@ -144,7 +147,7 @@ namespace ET.Server
 
                 if (addHpValue > 0)
                 {
-                    self.NumericComponent.SetEvent(NumericType.Now_Hp, addHpValue, true);
+                    NumericComponent.SetEvent(NumericType.Now_Hp, addHpValue, true);
                 }
             }
         }
@@ -157,7 +160,7 @@ namespace ET.Server
             self.OnTrigegerPassiveSkill(SkillPassiveTypeEnum.IdleStill_14, unit.Id);
             if (unit.Type == UnitType.Player && unit.ConfigId == 3)
             {
-                NumericComponentServer numericComponent = self.NumericComponent;
+                NumericComponentServer numericComponent = unit.GetComponent<NumericComponentServer>();
                 int nowMp = numericComponent.GetAsInt(NumericType.SkillUseMP);
                 int maxMp = numericComponent.GetAsInt(NumericType.Max_SkillUseMP);
                 float addMp = numericComponent.GetAsFloat(NumericType.Max_SkillUseMPAdd);
