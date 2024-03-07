@@ -1543,3 +1543,11 @@ message ItemXiLianResult
 	repeated HideProList XiLianHideTeShuProLists = 3;
 }
 
+message M2C_FashionUpdate // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitID = 1;
+	repeated int32 FashionEquipList = 2;
+}
+

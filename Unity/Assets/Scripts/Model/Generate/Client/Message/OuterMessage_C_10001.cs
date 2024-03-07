@@ -5963,6 +5963,40 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.M2C_FashionUpdate)]
+	[MemoryPackable]
+	public partial class M2C_FashionUpdate: MessageObject, IActorMessage
+	{
+		public static M2C_FashionUpdate Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_FashionUpdate), isFromPool) as M2C_FashionUpdate; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public List<int> FashionEquipList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitID = default;
+			this.FashionEquipList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -6128,5 +6162,6 @@ namespace ET
 		 public const ushort C2F_FriendInfoRequest = 10162;
 		 public const ushort F2C_FriendInfoResponse = 10163;
 		 public const ushort ItemXiLianResult = 10164;
+		 public const ushort M2C_FashionUpdate = 10165;
 	}
 }
