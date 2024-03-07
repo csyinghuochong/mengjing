@@ -422,13 +422,13 @@ namespace ET.Server
                 targetIdList.Add(targetId);
             }
 
-            int targetAngle = 0; /// (int)Quaternion.QuaternionToEuler(unit.Rotation).y;
-            Unit target = unit.GetParent<UnitComponent>().Get(targetId);
-            if (target != null && target.Id != targetId)
-            {
-                float3 direction = target.Position - unit.Position;
-                targetAngle = 0;/// (int)Mathf.Rad2Deg(Mathf.Atan2(direction.x, direction.z));
-            }
+            //int targetAngle = 0; /// (int)Quaternion.QuaternionToEuler(unit.Rotation).y;
+            //Unit target = unit.GetParent<UnitComponent>().Get(targetId);
+            //if (target != null && target.Id != targetId)
+            //{
+            //    float3 direction = target.Position - unit.Position;
+            //    targetAngle = 0;/// (int)Mathf.Rad2Deg(Mathf.Atan2(direction.x, direction.z));
+            //}
             //SkillManagerComponent skillManagerComponent = unit.GetComponent<SkillManagerComponent>();
             //for (int i = 0; i < targetIdList.Count; i++)
             //{
