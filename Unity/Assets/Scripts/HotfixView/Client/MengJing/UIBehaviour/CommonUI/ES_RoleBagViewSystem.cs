@@ -27,7 +27,7 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this ES_RoleBag self, Transform transform, int index)
         {
             Scroll_Item_BagItem scrollItemBagItem = self.ScrollItemBagItems[index].BindTrans(transform);
-            scrollItemBagItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.Bag, self.UpdateSelect);
+            scrollItemBagItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.Bag, self.UpdateSelect);
         }
 
         private static void OnItemTypeSet(this ES_RoleBag self, int index)
@@ -69,9 +69,10 @@ namespace ET.Client
                     break;
             }
 
+            int maxCount = GlobalValueConfigCategory.Instance.BagMaxCapacity;
             self.ShowBagInfos.AddRange(bagComponentClient.GetItemsByType(itemTypeEnum));
-            self.AddUIScrollItems(ref self.ScrollItemBagItems, self.ShowBagInfos.Count);
-            self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
+            self.AddUIScrollItems(ref self.ScrollItemBagItems, maxCount);
+            self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, maxCount);
         }
 
         private static void UpdateSelect(this ES_RoleBag self, BagInfo bagInfo)
