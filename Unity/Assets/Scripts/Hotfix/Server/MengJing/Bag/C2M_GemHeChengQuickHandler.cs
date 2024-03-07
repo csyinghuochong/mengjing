@@ -69,13 +69,11 @@ namespace ET.Server
             if (userInfo.Gold < costgold)
             {
                 response.Error = ErrorCode.ERR_GoldNotEnoughError;
-                reply();
                 return;
             }
             if (userInfo.Vitality < costvitality)
             {
                 response.Error = ErrorCode.ERR_VitalityNotEnoughError;
-                reply();
                 return;
             }
 
@@ -114,6 +112,7 @@ namespace ET.Server
 
             unit.GetComponent<UserInfoComponentServer>().UpdateRoleMoneySub(UserDataType.Gold, (costgold * -1).ToString(), true, ItemGetWay.SkillMake);
             unit.GetComponent<UserInfoComponentServer>().UpdateRoleData(UserDataType.Vitality, (costvitality * -1).ToString());
+            await ETTask.CompletedTask;
         }
     }
     
