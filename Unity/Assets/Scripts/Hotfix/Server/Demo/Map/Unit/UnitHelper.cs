@@ -63,9 +63,5 @@ namespace ET.Server
             return (isNewUnit, unit);
         }
 
-        public static bool IsRobot(this Unit self)
-        {
-            return self.GetComponent<UserInfoComponentServer>().UserInfo.RobotId > 0;
-        }
     }
 }

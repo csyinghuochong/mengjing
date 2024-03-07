@@ -894,8 +894,8 @@ namespace ET.Server
             {
                 bagComponent.OnRecvItemSort((ItemLocType) (int.Parse(request.OperatePar)));
             }
-
-            if (unit.IsRobot())
+            bool isRobot = unit.GetComponent<UserInfoComponentServer>().UserInfo.RobotId > 0;
+            if (isRobot)
             {
                 UnitCacheHelper.SaveComponent(unit.Zone(), unit.Id, bagComponent).Coroutine();
             }

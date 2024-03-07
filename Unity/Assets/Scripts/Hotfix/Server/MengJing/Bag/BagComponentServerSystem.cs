@@ -830,7 +830,8 @@ namespace ET.Server
        string[] getWayInfo = getWay.Split('_');
        int getType = int.Parse(getWayInfo[0]);
        Unit unit = self.GetParent<Unit>();
-       if (unit.IsRobot() && getType == ItemGetWay.PickItem)
+       bool isRobot = unit.GetComponent<UserInfoComponentServer>().UserInfo.RobotId > 0;
+       if (isRobot && getType == ItemGetWay.PickItem)
        {
            return true;
        }
