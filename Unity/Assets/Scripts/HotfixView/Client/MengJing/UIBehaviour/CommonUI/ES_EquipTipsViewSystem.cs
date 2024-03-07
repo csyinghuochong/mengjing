@@ -770,32 +770,30 @@ namespace ET.Client
                 }
             }
 
-            // if (haveGem)
-            // {
-            //     ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
-            //     PopupTipHelp.OpenPopupTip(self.ZoneScene(), "出售道具", "该装备镶嵌有宝石，是否出售道具？", () =>
-            //     {
-            //         self.BagComponent.SendSellItem(self.BagInfo, self.BagInfo.ItemNum.ToString()).Coroutine();
-            //         self.OnCloseTips();
-            //     }).Coroutine();
-            //
-            //     return;
-            // }
+            if (haveGem)
+            {
+                PopupTipHelp.OpenPopupTip(self.Root(), "出售道具", "该装备镶嵌有宝石，是否出售道具？", () =>
+                {
+                    BagClientNetHelper.RequestSellItem(self.Root(), self.BagInfo, self.BagInfo.ItemNum.ToString()).Coroutine();
+                    self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
+                }).Coroutine();
 
-            // if (ItemConfigCategory.Instance.Get(self.BagInfo.ItemID).ItemQuality >= 4)
-            // {
-            //     ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
-            //     PopupTipHelp.OpenPopupTip(self.ZoneScene(), "出售道具", "是否出售道具:" + itemConfig.ItemName, () =>
-            //     {
-            //         self.BagComponent.SendSellItem(self.BagInfo, self.BagInfo.ItemNum.ToString()).Coroutine();
-            //         self.OnCloseTips();
-            //     }).Coroutine();
-            //
-            //     return;
-            // }
+                return;
+            }
+
+            if (ItemConfigCategory.Instance.Get(self.BagInfo.ItemID).ItemQuality >= 4)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
+                PopupTipHelp.OpenPopupTip(self.Root(), "出售道具", "是否出售道具:" + itemConfig.ItemName, () =>
+                {
+                    BagClientNetHelper.RequestSellItem(self.Root(), self.BagInfo, self.BagInfo.ItemNum.ToString()).Coroutine();
+                    self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
+                }).Coroutine();
+
+                return;
+            }
 
             BagClientNetHelper.RequestSellItem(self.Root(), self.BagInfo, self.BagInfo.ItemNum.ToString()).Coroutine();
-
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
             await ETTask.CompletedTask;
         }

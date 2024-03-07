@@ -7,7 +7,7 @@
         {
              scene.AddComponent<MJCameraComponent>();
             
-             scene.GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Helper);
+             // scene.GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Helper);
              await ETTask.CompletedTask;
         }
     }
