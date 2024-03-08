@@ -46,6 +46,14 @@ namespace ET.Client
         {
             self.ES_ChatView.uiTransform.gameObject.SetActive(true);
             self.ES_ChatView.Refresh(friendInfo);
+
+            FriendComponent friendComponent = self.Root().GetComponent<FriendComponent>();
+            if (friendComponent.FriendChatId.Contains(friendInfo.UserId))
+            {
+                friendComponent.FriendChatId.Remove(friendInfo.UserId);
+            }
+
+            FriendNetHelper.RequestFriendChatRead(self.Root(), friendInfo.UserId).Coroutine();
         }
 
         private static void OnDeleteHandler(this ES_FriendList self)

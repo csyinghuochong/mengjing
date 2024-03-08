@@ -38,5 +38,13 @@ namespace ET.Client
 
             return response;
         }
+
+        public static async ETTask<int> RequestFriendChatRead(Scene root, long friendId)
+        {
+            C2F_FriendChatRead request = new() { UnitId = UnitHelper.GetMyUnitFromClientScene(root).Id, FriendID = friendId };
+            F2C_FriendChatRead response = (F2C_FriendChatRead)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
 }

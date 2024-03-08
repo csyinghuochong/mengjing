@@ -15,6 +15,8 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_FriendChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnFriendChatItemsRefresh);
+            self.E_CloseChatButton.AddListener(self.OnCloseChatButton);
+            self.E_SendButton.AddListenerAsync(self.OnSendButton);
         }
 
         [EntitySystem]
@@ -32,6 +34,7 @@ namespace ET.Client
         public static void Refresh(this ES_ChatView self, FriendInfo friendInfo)
         {
             self.FriendInfo = friendInfo;
+            self.E_ChatPlayNameText.text = "与" + friendInfo.PlayerName + "私聊中...";
             self.RefreshFriendChatItems();
         }
 
@@ -48,6 +51,38 @@ namespace ET.Client
 
             self.AddUIScrollItems(ref self.ScrollItemFriendChatItems, self.ShowChatInfos.Count);
             self.E_FriendChatItemsLoopVerticalScrollRect.SetVisible(true, self.ShowChatInfos.Count);
+            self.UpdatePosition().Coroutine();
+        }
+
+        private static async ETTask UpdatePosition(this ES_ChatView self)
+        {
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(100);
+            RectTransform rectTransform = self.E_FriendChatItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>();
+            if (rectTransform.sizeDelta.y > 600)
+            {
+                rectTransform.anchoredPosition = new Vector2(0, rectTransform.sizeDelta.y - 600);
+            }
+        }
+
+        private static void OnCloseChatButton(this ES_ChatView self)
+        {
+            self.uiTransform.gameObject.SetActive(false);
+        }
+
+        private static async ETTask OnSendButton(this ES_ChatView self)
+        {
+            FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
+            string text = self.E_InputInputField.text;
+            if (string.IsNullOrEmpty(text) || text.Length == 0)
+            {
+                flyTipComponent.SpawnFlyTipDi("请输入聊天内容！");
+            }
+
+            int error = await ChatNetHelper.RequestSendChat(self.Root(), ChannelEnum.Friend, text, self.FriendInfo.UserId);
+            if (error == ErrorCode.ERR_Success)
+            {
+                self.E_InputInputField.text = "";
+            }
         }
     }
 }
