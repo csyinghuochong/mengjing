@@ -74,5 +74,13 @@ namespace ET.Client
             self.SetChatData(chatInfo);
             EventSystem.Instance.Publish(self.Root(), new DataUpdate_FriendChat());
         }
+
+        public static void InitFrindChat(this FriendComponent self, List<ChatInfo> chatlist)
+        {
+            for (int i = 0; i < chatlist.Count; i++)
+            {
+                self.SetChatData(chatlist[i]);
+            }
+        }
     }
 }
