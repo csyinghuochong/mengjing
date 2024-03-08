@@ -1670,3 +1670,53 @@ message M2C_ChengJiuActiveMessage // IMessage
 	string Message = 92;
 	int32 ChengJiuId = 1;
 }
+
+//任务列表
+message TaskPro
+{
+    int32 taskID = 1;
+
+    int32 taskTargetNum_1 = 2;
+    int32 taskTargetNum_2 = 5;
+    int32 taskTargetNum_3 = 6;
+    int32 taskStatus = 3;	//0未激活 1已接取 2已完成 3已领取
+    int32 TrackStatus = 4;	//0未追踪 1追踪
+    int32 FubenId = 7;
+    int32 WaveId = 8;
+}
+
+message M2C_TaskCountryUpdate // IMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 92;
+	int64 ActorId = 93;
+	
+	int32 UpdateMode = 1;	//1增量更新   2全量更新
+	repeated TaskPro TaskCountryList = 2;
+}
+
+message M2C_TaskUpdate // IMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 92;
+	int64 ActorId = 93;
+	
+	repeated TaskPro RoleTaskList = 1;
+	repeated TaskPro DayTaskList = 2;
+}
+
+//任务追踪
+//ResponseType M2C_TaskTrackResponse
+message C2M_TaskTrackRequest	//ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 TaskId = 1;
+	int32 TrackStatus = 2;	//0未追踪 1已追踪
+}
+
+message M2C_TaskTrackResponse	//ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

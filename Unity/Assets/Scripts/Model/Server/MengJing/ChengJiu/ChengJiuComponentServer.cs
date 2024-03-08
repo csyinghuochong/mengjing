@@ -3,6 +3,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 
+    [ComponentOf(typeof(Unit))]
     public class ChengJiuComponentServer : Entity, IAwake, ITransfer, IUnitCache
     {
 
