@@ -315,6 +315,26 @@ namespace ET.Server
             return self.UserInfo.Lv;
         }
 
+        public static int GetOcc(this UserInfoComponentServer self)
+        {
+            return self.UserInfo.Occ;
+        }
+
+        public static string GetName(this UserInfoComponentServer self)
+        {
+            return self.UserInfo.Name;
+        }
+
+        public static int GetOccTwo(this UserInfoComponentServer self)
+        {
+            return self.UserInfo.OccTwo;
+        }
+
+        public static int GetJiaYuanLv(this UserInfoComponentServer self)
+        {
+            return self.UserInfo.JiaYuanLv;
+        }
+
         public static void OnCleanBossCD(this UserInfoComponentServer self)
         {
             for (int i = 0; i < self.UserInfo.MonsterRevives.Count; i++)

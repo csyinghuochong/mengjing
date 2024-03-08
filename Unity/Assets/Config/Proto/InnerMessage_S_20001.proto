@@ -325,14 +325,30 @@ message Chat2G_EnterChat // IResponse
 }
 
 //ResponseType Chat2G_RequestExitChat
-message G2Chat_RequestExitChat // ILocationRequest
+message G2Chat_RequestExitChat // IRequest
 {
 	int32 RpcId = 90;
 }
 
-message Chat2G_RequestExitChat // ILocationResponse
+message Chat2G_RequestExitChat // IResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
+}
+
+//ResponseType R2M_RankUnionRaceResponse
+message M2R_RankUnionRaceRequest // IRequest
+{
+    int32 RpcId = 90;
+    int64 ActorId = 93;
+    int32 CampId = 1;
+    RankShouLieInfo RankingInfo = 2;
+}
+
+message R2M_RankUnionRaceResponse // IResponse
+{
+    int32 RpcId = 90;
+    int32 Error = 91;
+    string Message = 92;
 }
