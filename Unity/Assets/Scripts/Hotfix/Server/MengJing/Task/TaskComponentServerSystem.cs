@@ -832,13 +832,13 @@ namespace ET.Server
             {
                 RankingInfo = rankingInfo
             };
-            long mapInstanceId = DBHelper.GetRankServerId(self.DomainZone());
-            R2M_RankUnionRaceResponse Response = (R2M_RankUnionRaceResponse)await ActorMessageSenderComponent.Instance.Call
+            ActorId mapInstanceId = UnitCacheHelper.GetRankServerId(self.Zone());
+            R2M_RankUnionRaceResponse Response = (R2M_RankUnionRaceResponse)await self.Root().GetComponent<MessageSender>().Call
                      (mapInstanceId, request);
         }
 
         //击杀怪物可触发多种类型的任务
-        public static void OnKillUnit(this TaskComponent self, Unit bekill, int sceneType)
+        public static void OnKillUnit(this TaskComponentServer self, Unit bekill, int sceneType)
         {
             if (bekill == null || bekill.IsDisposed)
                 return;
@@ -846,7 +846,7 @@ namespace ET.Server
             if (bekill.Type == UnitType.Player && sceneType == SceneTypeEnum.Battle)
             {
                 self.TriggerTaskCountryEvent(TaskTargetType.BattleKillPlayer_1102, 0, 1);
-                bekill.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.BattleDead_1104, 0, 1);
+                bekill.GetComponent<TaskComponentServer>().TriggerTaskCountryEvent(TaskTargetType.BattleDead_1104, 0, 1);
             }
             if (bekill.Type == UnitType.Player && sceneType == SceneTypeEnum.UnionRace)
             {
@@ -924,7 +924,7 @@ namespace ET.Server
         }
 
         //等级更新
-        public static void OnUpdateLevel(this TaskComponent self, int rolelv)
+        public static void OnUpdateLevel(this TaskComponentServer self, int rolelv)
         {
             self.TriggerTaskEvent(TaskTargetType.PlayerLv_4, 0, rolelv);
             self.TriggerTaskCountryEvent(TaskTargetType.PlayerLv_4, 0, rolelv);
@@ -937,14 +937,14 @@ namespace ET.Server
         }
 
         //登录
-        public static void OnLogin(this TaskComponent self)
+        public static void OnLogin(this TaskComponentServer self)
         {
-            UserInfoComponent userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponent>();
-            NumericComponent numericComponent = self.GetParent<Unit>().GetComponent<NumericComponent>();
+            UserInfoComponentServer userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>();
+            NumericComponentServer numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentServer>();
 
             if (self.TaskCountryList.Count == 0)
             {
-                Log.Debug($"活跃任务为空: {self.DomainZone()} {self.GetParent<Unit>().Id}");
+                Log.Debug($"活跃任务为空: {self.Zone()} {self.GetParent<Unit>().Id}");
             }
             for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
             {
@@ -980,7 +980,7 @@ namespace ET.Server
                 }
                 if (taskConfig.TargetType == TaskTargetType.PlayerLv_4)
                 {
-                    int roleLv = userInfoComponent.UserInfo.Lv;
+                    int roleLv = userInfoComponent.GetUserLv();
                     self.TriggerTaskEvent(TaskTargetType.PlayerLv_4, taskConfig.Target[0], roleLv);
                     continue;
                 }
@@ -1013,7 +1013,7 @@ namespace ET.Server
             //试炼副本
             for (int i = 0; i < self.TaskCountryList.Count; i++)
             {
-                int trialid = self.GetParent<Unit>().GetComponent<NumericComponent>().GetAsInt(NumericType.TrialDungeonId);
+                int trialid = self.GetParent<Unit>().GetComponent<NumericComponentServer>().GetAsInt(NumericType.TrialDungeonId);
                 TaskCountryConfig taskCountryConfig = TaskCountryConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
                 if (taskCountryConfig.TargetType == (int)TaskTargetType.TrialFuben_1012 && trialid >= 20100)
                 {
@@ -1062,14 +1062,14 @@ namespace ET.Server
         }
 
         //收集道具
-        public static void OnGetItemForWarehouse(this TaskComponent self, int itemId)
+        public static void OnGetItemForWarehouse(this TaskComponentServer self, int itemId)
         {
             self.TriggerTaskEvent(TaskTargetType.ItemID_Number_2, itemId, 0);
             self.TriggerTaskCountryEvent(TaskTargetType.ItemID_Number_2, itemId, 0);
         }
 
         //累计获得道具数量
-        public static void OnGetItemNumber(this TaskComponent self, int getWay, int itemId, int itemNumber)
+        public static void OnGetItemNumber(this TaskComponentServer self, int getWay, int itemId, int itemNumber)
         {
             if (itemId == 1 || (getWay != ItemGetWay.ReceieMail && getWay != ItemGetWay.PaiMaiSell))
             {
@@ -1086,13 +1086,13 @@ namespace ET.Server
         }
 
         //收集道具
-        public static void OnGetItem_2(this TaskComponent self, int itemId)
+        public static void OnGetItem_2(this TaskComponentServer self, int itemId)
         {
             self.TriggerTaskEvent(TaskTargetType.ItemID_Number_2, itemId, 0);
             self.TriggerTaskCountryEvent(TaskTargetType.ItemID_Number_2, itemId, 0);
         }
 
-        public static void CompletCurrentTask(this TaskComponent self)
+        public static void CompletCurrentTask(this TaskComponentServer self)
         {
             for (int i = 0; i < self.RoleTaskList.Count; i++)
             {
@@ -1120,10 +1120,10 @@ namespace ET.Server
 
             M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
             m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
-            MessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
+            MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
         }
 
-        public static void OnPetMineLogin(this TaskComponent self, List<PetMingPlayerInfo> petMingPlayers, List<KeyValuePairInt> extends)
+        public static void OnPetMineLogin(this TaskComponentServer self, List<PetMingPlayerInfo> petMingPlayers, List<KeyValuePairInt> extends)
         {
             for (int i = 0; i < petMingPlayers.Count; i++)
             {
@@ -1142,7 +1142,7 @@ namespace ET.Server
             }
         }
 
-        public static void TriggerTaskEvent(this TaskComponent self, int targetType, int targetTypeId, int targetValue)
+        public static void TriggerTaskEvent(this TaskComponentServer self, int targetType, int targetTypeId, int targetValue)
         {
             bool updateTask = false;
 
@@ -1172,20 +1172,20 @@ namespace ET.Server
 
             M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
             m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
-            MessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
+            MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
         }
 
 
         /// <summary>
         /// 以TaskCountryTargetType为准
         /// </summary>
-        public static void CheckTaskPro(this TaskComponent self, TaskPro taskPro, int targetType, int[] Target, int targetTypeId, int targetValue)
+        public static void CheckTaskPro(this TaskComponentServer self, TaskPro taskPro, int targetType, int[] Target, int targetTypeId, int targetValue)
         {
             for (int t = 0; t < Target.Length; t++)
             {
                 if (targetType == TaskTargetType.ItemID_Number_2)
                 {
-                    targetValue = (int)self.GetParent<Unit>().GetComponent<BagComponent>().GetItemNumber(Target[t]);
+                    targetValue = (int)self.GetParent<Unit>().GetComponent<BagComponentServer>().GetItemNumber(Target[t]);
                 }
 
                 if (targetType == TaskTargetType.MakeQulityNumber_29
@@ -1280,7 +1280,7 @@ namespace ET.Server
             }
         }
 
-        public static void TriggerTaskCountryEvent(this TaskComponent self, int targetType, int targetTypeId, int targetValue, bool notice = true)
+        public static void TriggerTaskCountryEvent(this TaskComponentServer self, int targetType, int targetTypeId, int targetValue, bool notice = true)
         {
             bool updateTask = false;
             List<TaskPro> countryList = new List<TaskPro>();
@@ -1313,10 +1313,10 @@ namespace ET.Server
             M2C_TaskCountryUpdate m2C_TaskUpdate = self.m2C_TaskCountryUpdate;
             m2C_TaskUpdate.UpdateMode = 1;
             m2C_TaskUpdate.TaskCountryList = countryList;
-            MessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
+            MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
         }
 
-        public static void UpdateCountryList(this TaskComponent self, bool notice)
+        public static void UpdateCountryList(this TaskComponentServer self, bool notice)
         {
             Unit unit = self.GetParent<Unit>();
             if (self.TaskCountryList.Count == 0)
@@ -1350,12 +1350,12 @@ namespace ET.Server
             }
             //UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
             //userInfoComponent.UpdateRoleData(UserDataType.HuoYue, (0 - userInfoComponent.UserInfo.HuoYue).ToString(), notice);
-            Log.Debug($"更新活跃任务:  {unit.Id} {self.DomainZone()}  {self.TaskCountryList.Count}");
+            Log.Debug($"更新活跃任务:  {unit.Id} {self.Zone()}  {self.TaskCountryList.Count}");
         }
 
-        public static void CheckDailyTask(this TaskComponent self, bool notice)
+        public static void CheckDailyTask(this TaskComponentServer self, bool notice)
         {
-            NumericComponent numericComponent = self.GetParent<Unit>().GetComponent<NumericComponent>();
+            NumericComponentServer numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentServer>();
             if (numericComponent.GetAsInt(NumericType.DailyTaskID) != 0)
             {
                 return;
@@ -1365,13 +1365,13 @@ namespace ET.Server
                 return;
             }
 
-            int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponent>().UserInfo.Lv;
-            numericComponent.ApplyValue(NumericType.DailyTaskID, TaskHelper.GetTaskIdByType(TaskTypeEnum.Daily, roleLv), notice);
+            int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().GetUserLv();
+            numericComponent.SetEvent(NumericType.DailyTaskID, TaskHelper.GetTaskIdByType(TaskTypeEnum.Daily, roleLv), notice);
         }
 
-        public static void CheckRingTask(this TaskComponent self)
+        public static void CheckRingTask(this TaskComponentServer self)
         {
-            NumericComponent numericComponent = self.GetParent<Unit>().GetComponent<NumericComponent>();
+            NumericComponentServer numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentServer>();
             if (numericComponent.GetAsInt(NumericType.RingTaskId) == 0 && numericComponent.GetAsInt(NumericType.RingTaskNumber) < 1)
             {
                 //self.ClearTypeTask(TaskTypeEnum.Ring);
@@ -1382,19 +1382,19 @@ namespace ET.Server
             }
         }
 
-        public static void CheckWeeklyTask(this TaskComponent self)
+        public static void CheckWeeklyTask(this TaskComponentServer self)
         {
-            NumericComponent numericComponent = self.GetParent<Unit>().GetComponent<NumericComponent>();
+            NumericComponentServer numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentServer>();
             if (numericComponent.GetAsInt(NumericType.WeeklyTaskId) == 0 && numericComponent.GetAsInt(NumericType.WeeklyTaskNumber) < 1)
             {
                 //self.ClearTypeTask(TaskTypeEnum.Ring);
-                int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponent>().UserInfo.Lv;
+                int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().GetUserLv();
                 int weekTaskId = TaskHelper.GetTaskIdByType(TaskTypeEnum.Weekly, roleLv);
-                numericComponent.ApplyValue(NumericType.WeeklyTaskId, weekTaskId, false);
+                numericComponent.SetEvent(NumericType.WeeklyTaskId, weekTaskId, false);
             }
         }
 
-        public static void CheckSystemTask(this TaskComponent self)
+        public static void CheckSystemTask(this TaskComponentServer self)
         {
             bool have = false;
             for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
@@ -1414,7 +1414,7 @@ namespace ET.Server
                 return;
             }
 
-            int curTakskid = self.GetParent<Unit>().GetComponent<NumericComponent>().GetAsInt(NumericType.SystemTask);
+            int curTakskid = self.GetParent<Unit>().GetComponent<NumericComponentServer>().GetAsInt(NumericType.SystemTask);
             foreach ((int taskid, TaskConfig taskcofnig) in TaskConfigCategory.Instance.GetAll())
             {
                 if (taskcofnig.TaskType != TaskTypeEnum.System || taskid <= curTakskid)
@@ -1428,26 +1428,26 @@ namespace ET.Server
 
             M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
             m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
-            MessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
+            MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
         }
 
-        public static void CheckUnionTask(this TaskComponent self)
+        public static void CheckUnionTask(this TaskComponentServer self)
         {
-            NumericComponent numericComponent = self.GetParent<Unit>().GetComponent<NumericComponent>();
+            NumericComponentServer numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentServer>();
             if (numericComponent.GetAsInt(NumericType.UnionTaskId) == 0 && numericComponent.GetAsInt(NumericType.UnionTaskNumber) < 1)
             {
 
-                int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponent>().UserInfo.Lv;
-                numericComponent.ApplyValue(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), false);
+                int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().GetUserLv();
+                numericComponent.SetEvent(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), false);
             }
         }
 
-        public static void ClearSeasonData(this TaskComponent self)
+        public static void ClearSeasonData(this TaskComponentServer self)
         {
 
         }
 
-        public static void InitSeasonMainTask(this TaskComponent self, bool notice)
+        public static void InitSeasonMainTask(this TaskComponentServer self, bool notice)
         {
             bool have = false;
             for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
@@ -1464,7 +1464,7 @@ namespace ET.Server
                 return;
             }
 
-            int curTakskid = self.GetParent<Unit>().GetComponent<NumericComponent>().GetAsInt(NumericType.SeasonTask);
+            int curTakskid = self.GetParent<Unit>().GetComponent<NumericComponentServer>().GetAsInt(NumericType.SeasonTask);
             foreach ((int taskid, TaskConfig taskcofnig) in TaskConfigCategory.Instance.GetAll())
             {
                 if (taskcofnig.TaskType == TaskTypeEnum.Season && taskid > curTakskid)
@@ -1478,14 +1478,14 @@ namespace ET.Server
             {
                 M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
                 m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
-                MessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
+                MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
             }
         }
 
-        public static void UpdateTargetTask(this TaskComponent self, bool notice)
+        public static void UpdateTargetTask(this TaskComponentServer self, bool notice)
         {
-            int createDay = self.GetParent<Unit>().GetComponent<UserInfoComponent>().GetCrateDay();
-            if (createDay == 0 || createDay > ConfigHelper.WelfareTaskList.Count)
+            int createDay = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().GetCrateDay();
+            if (createDay == 0 || createDay > ConfigHelper.WelfareTaskList().Count)
             {
                 return;
             }
@@ -1494,7 +1494,7 @@ namespace ET.Server
             List<int> taskids = new List<int>();
             for (int i = 0; i < createDay; i++)
             {
-                taskids.AddRange(ConfigHelper.WelfareTaskList[i]);
+                taskids.AddRange(ConfigHelper.WelfareTaskList()[i]);
             }
             for (int i = 0; i < taskids.Count; i++)
             {
@@ -1512,7 +1512,7 @@ namespace ET.Server
             }
         }
 
-        public static void ClearTypeTask(this TaskComponent self, int taskType)
+        public static void ClearTypeTask(this TaskComponentServer self, int taskType)
         {
             for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
             {
@@ -1529,7 +1529,7 @@ namespace ET.Server
             }
         }
 
-        public static void UpdateDayTask(this TaskComponent self, bool notice)
+        public static void UpdateDayTask(this TaskComponentServer self, bool notice)
         {
 
             //清空每日任务
@@ -1550,20 +1550,20 @@ namespace ET.Server
                 }
             }
 
-            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
-            int roleLv = unit.GetComponent<UserInfoComponent>().UserInfo.Lv;
+            NumericComponentServer numericComponent = unit.GetComponent<NumericComponentServer>();
+            int roleLv = unit.GetComponent<UserInfoComponentServer>().GetUserLv();
 
-            numericComponent.ApplyValue(NumericType.DailyTaskNumber, 0, notice);
-            numericComponent.ApplyValue(NumericType.UnionTaskNumber, 0, notice);
-            numericComponent.ApplyValue(NumericType.DailyTaskID, TaskHelper.GetTaskIdByType(TaskTypeEnum.Daily, roleLv), notice);
-            numericComponent.ApplyValue(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), notice);
+            numericComponent.SetEvent(NumericType.DailyTaskNumber, 0, notice);
+            numericComponent.SetEvent(NumericType.UnionTaskNumber, 0, notice);
+            numericComponent.SetEvent(NumericType.DailyTaskID, TaskHelper.GetTaskIdByType(TaskTypeEnum.Daily, roleLv), notice);
+            numericComponent.SetNoEvent(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), notice);
 
             //int ringTaskId = TaskHelper.GetTaskIdByType(TaskTypeEnum.Ring, roleLv);
             //numericComponent.ApplyValue(NumericType.RingTaskId, ringTaskId, notice);
             //Log.Debug($"更新每日任务: {numericComponent.GetAsInt(NumericType.DailyTaskID)}");
         }
 
-        public static TaskPro GetTreasureMonster(this TaskComponent self, int fubenid)
+        public static TaskPro GetTreasureMonster(this TaskComponentServer self, int fubenid)
         {
             List<TaskPro> taskPros = self.GetTaskList(TaskTypeEnum.Treasure);
             for (int i = 0; i < taskPros.Count; i++)
@@ -1581,7 +1581,7 @@ namespace ET.Server
             return null;
         }
 
-        public static void CheckWeeklyUpdate(this TaskComponent self)
+        public static void CheckWeeklyUpdate(this TaskComponentServer self)
         {
             System.DateTime dateTime = TimeHelper.DateTimeNow();
             if (dateTime.DayOfWeek == System.DayOfWeek.Monday)
@@ -1591,7 +1591,7 @@ namespace ET.Server
             }
         }
 
-        public static void ResetWeeklyTask(this TaskComponent self)
+        public static void ResetWeeklyTask(this TaskComponentServer self)
         {
             for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
             {
@@ -1624,21 +1624,21 @@ namespace ET.Server
             }
 
             Unit unit = self.GetParent<Unit>();
-            int roleLv = unit.GetComponent<UserInfoComponent>().UserInfo.Lv;
-            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
-            numericComponent.ApplyValue(NumericType.RingTaskNumber, 0, false);
-            numericComponent.ApplyValue(NumericType.RingTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Ring, roleLv), false);
+            int roleLv = unit.GetComponent<UserInfoComponentServer>().GetUserLv();
+            NumericComponentServer numericComponent = unit.GetComponent<NumericComponentServer>();
+            numericComponent.SetEvent(NumericType.RingTaskNumber, 0, false);
+            numericComponent.SetEvent(NumericType.RingTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Ring, roleLv), false);
 
-            numericComponent.ApplyValue(NumericType.WeeklyTaskNumber, 0, false);
-            numericComponent.ApplyValue(NumericType.WeeklyTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Weekly, roleLv), false);
+            numericComponent.SetEvent(NumericType.WeeklyTaskNumber, 0, false);
+            numericComponent.SetEvent(NumericType.WeeklyTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Weekly, roleLv), false);
 
             self.UpdateSeasonWeekTask(false);
         }
 
-        public static void UpdateSeasonWeekTask(this TaskComponent self, bool notice)
+        public static void UpdateSeasonWeekTask(this TaskComponentServer self, bool notice)
         {
             Unit unit = self.GetParent<Unit>();
-            unit.GetComponent<NumericComponent>().ApplyValue(NumericType.SeasonTowerId, 0, notice);
+            unit.GetComponent<NumericComponentServer>().ApplyValue(NumericType.SeasonTowerId, 0, notice);
 
             //赛季任务每周清空
             for (int i = self.TaskCountryList.Count - 1; i >= 0; i--)
@@ -1656,7 +1656,8 @@ namespace ET.Server
                     continue;
                 }
             }
-            UserInfoComponent userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponent>();
+
+            UserInfoComponentServer userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>();
             if (SeasonHelper.IsOpenSeason(userInfoComponent.UserInfo.Lv))
             {
                 List<int> taskCountryList = TaskHelper.GetSeasonTask();
@@ -1671,11 +1672,11 @@ namespace ET.Server
                 M2C_TaskCountryUpdate m2C_TaskUpdate = self.m2C_TaskCountryUpdate;
                 m2C_TaskUpdate.UpdateMode = 2;
                 m2C_TaskUpdate.TaskCountryList = self.TaskCountryList;
-                MessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
+                MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
             }
         }
 
-        public static void CheckWeeklyUpdate(this TaskComponent self, long lastTime, long curTime)
+        public static void CheckWeeklyUpdate(this TaskComponentServer self, long lastTime, long curTime)
         {
             //判断条件。 超过一周或者过了周末
             float passday = ((curTime - lastTime) * 1f / TimeHelper.OneDay);
@@ -1708,7 +1709,7 @@ namespace ET.Server
         /// 重置每日活跃
         /// </summary> 
         /// <param name="self"></param>
-        public static void OnZeroClockUpdate(this TaskComponent self, bool notice)
+        public static void OnZeroClockUpdate(this TaskComponentServer self, bool notice)
         {
             self.OnLineTime = 0;
             Unit unit = self.GetParent<Unit>();
@@ -1721,13 +1722,13 @@ namespace ET.Server
                 M2C_TaskCountryUpdate m2C_TaskUpdate = self.m2C_TaskCountryUpdate;
                 m2C_TaskUpdate.UpdateMode = 2;
                 m2C_TaskUpdate.TaskCountryList = self.TaskCountryList;
-                MessageHelper.SendToClient(unit, m2C_TaskUpdate);
+                MapMessageHelper.SendToClient(unit, m2C_TaskUpdate);
             }
             if (notice)
             {
                 M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
                 m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
-                MessageHelper.SendToClient(unit, m2C_TaskUpdate);
+                MapMessageHelper.SendToClient(unit, m2C_TaskUpdate);
             }
         }
     }

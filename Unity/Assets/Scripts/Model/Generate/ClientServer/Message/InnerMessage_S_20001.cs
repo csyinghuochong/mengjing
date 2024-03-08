@@ -1293,7 +1293,7 @@ namespace ET
 	[ResponseType(nameof(Chat2G_RequestExitChat))]
 	[Message(InnerMessage.G2Chat_RequestExitChat)]
 	[MemoryPackable]
-	public partial class G2Chat_RequestExitChat: MessageObject, ILocationRequest
+	public partial class G2Chat_RequestExitChat: MessageObject, IRequest
 	{
 		public static G2Chat_RequestExitChat Create(bool isFromPool = false) 
 		{ 
@@ -1315,11 +1315,76 @@ namespace ET
 
 	[Message(InnerMessage.Chat2G_RequestExitChat)]
 	[MemoryPackable]
-	public partial class Chat2G_RequestExitChat: MessageObject, ILocationResponse
+	public partial class Chat2G_RequestExitChat: MessageObject, IResponse
 	{
 		public static Chat2G_RequestExitChat Create(bool isFromPool = false) 
 		{ 
 			return ObjectPool.Instance.Fetch(typeof(Chat2G_RequestExitChat), isFromPool) as Chat2G_RequestExitChat; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(R2M_RankUnionRaceResponse))]
+	[Message(InnerMessage.M2R_RankUnionRaceRequest)]
+	[MemoryPackable]
+	public partial class M2R_RankUnionRaceRequest: MessageObject, IRequest
+	{
+		public static M2R_RankUnionRaceRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2R_RankUnionRaceRequest), isFromPool) as M2R_RankUnionRaceRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int CampId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public RankShouLieInfo RankingInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.CampId = default;
+			this.RankingInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.R2M_RankUnionRaceResponse)]
+	[MemoryPackable]
+	public partial class R2M_RankUnionRaceResponse: MessageObject, IResponse
+	{
+		public static R2M_RankUnionRaceResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2M_RankUnionRaceResponse), isFromPool) as R2M_RankUnionRaceResponse; 
 		}
 
 		[MemoryPackOrder(89)]
@@ -1386,5 +1451,7 @@ namespace ET
 		 public const ushort Chat2G_EnterChat = 20040;
 		 public const ushort G2Chat_RequestExitChat = 20041;
 		 public const ushort Chat2G_RequestExitChat = 20042;
+		 public const ushort M2R_RankUnionRaceRequest = 20043;
+		 public const ushort R2M_RankUnionRaceResponse = 20044;
 	}
 }
