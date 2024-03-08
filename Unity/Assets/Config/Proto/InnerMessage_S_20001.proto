@@ -292,14 +292,45 @@ message Center2A_RegisterAccount // IResponse
 }
 
 //ResponseType L2A_LoginAccountResponse
-message A2L_LoginAccountRequest //IRequest
+message A2L_LoginAccountRequest // IRequest
 {
 	int32 RpcId = 90;
 	int64 AccountId = 1;
 	bool Relink = 5;
 }
 
-message L2A_LoginAccountResponse //IResponse
+message L2A_LoginAccountResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType Chat2G_EnterChat
+message G2Chat_EnterChat // IRequest
+{
+	int32 RpcId = 90;
+	string Name = 1;
+	int64 UnitId = 2;
+	int64 GateSessionActorId = 3;
+	int64 UnionId = 4;
+}
+
+message Chat2G_EnterChat // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 ChatInfoUnitInstanceId = 1;
+}
+
+//ResponseType Chat2G_RequestExitChat
+message G2Chat_RequestExitChat // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message Chat2G_RequestExitChat // ILocationResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;

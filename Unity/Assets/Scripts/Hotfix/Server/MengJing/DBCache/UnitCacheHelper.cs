@@ -163,6 +163,11 @@ namespace ET.Server
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Friend.ToString()).ActorId;
         }
         
+        public static ActorId GetChatId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Chat.ToString()).ActorId;
+        }
+        
         public static ActorId GetGateServerId(int zone)
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Gate.ToString()).ActorId;

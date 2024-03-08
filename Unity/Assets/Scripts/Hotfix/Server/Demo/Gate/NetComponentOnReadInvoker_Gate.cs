@@ -39,6 +39,20 @@ namespace ET.Server
                     root.GetComponent<MessageSender>().Send(roomActorId, actorRoom);
                     break;
                 }
+                case IChatActorRequest actorChatLocationRequest: // gate session收到actor rpc消息，先向actor 发送rpc请求，再将请求结果返回客户端
+                {
+                    long chatUnitId = session.GetComponent<SessionPlayerComponent>().Player.ChatInfoInstanceId;
+                    int rpcId = actorChatLocationRequest.RpcId; // 这里要保存客户端的rpcId
+                    long instanceId = session.InstanceId;
+                    IResponse iResponse = await root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Chat).Call(chatUnitId, actorChatLocationRequest);
+                    iResponse.RpcId = rpcId;
+                    // session可能已经断开了，所以这里需要判断
+                    if (session.InstanceId == instanceId)
+                    {
+                        session.Send(iResponse);
+                    }
+                    break;
+                }
                 case ILocationMessage actorLocationMessage:
                 {
                     long unitId = session.GetComponent<SessionPlayerComponent>().Player.UnitId;

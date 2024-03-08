@@ -15,12 +15,12 @@
             // {
             //     return ErrorCode.ERR_UnionChatLimit;
             // }
-            //
-            // UserInfo userInfo = root.GetComponent<UserInfoComponentClient>().UserInfo;
-            // C2C_SendChatRequest c2S_SendChatRequest = new C2C_SendChatRequest() { };
-            // c2S_SendChatRequest.ChatInfo = new ChatInfo();
-            // c2S_SendChatRequest.ChatInfo.PlayerLevel = userInfo.Lv;
-            // c2S_SendChatRequest.ChatInfo.Occ = userInfo.Occ;
+
+            UserInfo userInfo = root.GetComponent<UserInfoComponentClient>().UserInfo;
+            C2C_SendChatRequest request = new C2C_SendChatRequest() { };
+            request.ChatInfo = new ChatInfo();
+            request.ChatInfo.PlayerLevel = userInfo.Lv;
+            request.ChatInfo.Occ = userInfo.Occ;
             // switch (channelEnum)
             // {
             //     case ChannelEnum.Word:
@@ -41,21 +41,14 @@
             //         break;
             // }
             //
-            // c2S_SendChatRequest.ChatInfo.UserId = userInfo.UserId;
-            // c2S_SendChatRequest.ChatInfo.ChannelId = (int)channelEnum;
-            // c2S_SendChatRequest.ChatInfo.ChatMsg = content;
-            // c2S_SendChatRequest.ChatInfo.PlayerName = userInfo.Name;
-            // C2C_SendChatResponse sendChatResponse =
-            //         (C2C_SendChatResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2S_SendChatRequest);
-            //
-            // if (sendChatResponse.Error != ErrorCode.ERR_Success)
-            // {
-            //     ;
-            // }
-            //
-            // return response.Error;
-            await ETTask.CompletedTask;
-            return 0;
+            request.ChatInfo.UserId = userInfo.UserId;
+            request.ChatInfo.ChannelId = (int)channelEnum;
+            request.ChatInfo.ChatMsg = content;
+            request.ChatInfo.PlayerName = userInfo.Name;
+            C2C_SendChatResponse response =
+                    (C2C_SendChatResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
         }
     }
 }

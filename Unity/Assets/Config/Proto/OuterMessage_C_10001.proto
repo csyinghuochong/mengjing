@@ -1612,3 +1612,44 @@ message M2C_SkillSetMessage	// IMessage
 {
 	SkillSetInfo SkillSetInfo = 1;
 }
+
+//ResponseType Chat2C_GetChatResponse
+message C2Chat_GetChatRequest // IChatActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message Chat2C_GetChatResponse // IChatActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated ChatInfo ChatInfos = 1;
+}
+
+//ResponseType C2C_SendChatResponse
+message C2C_SendChatRequest // IChatActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	
+	ChatInfo ChatInfo = 1;
+}
+
+message C2C_SendChatResponse // IChatActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	string ChatMsg = 1;
+	int32 ChannelId = 2;	//0世界 1帮派 2队伍
+}
+
+message C2C_SyncChatInfo // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	
+	ChatInfo ChatInfo = 1;
+}

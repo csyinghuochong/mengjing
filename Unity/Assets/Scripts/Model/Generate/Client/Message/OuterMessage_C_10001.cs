@@ -6239,6 +6239,166 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Chat2C_GetChatResponse))]
+	[Message(OuterMessage.C2Chat_GetChatRequest)]
+	[MemoryPackable]
+	public partial class C2Chat_GetChatRequest: MessageObject, IChatActorRequest
+	{
+		public static C2Chat_GetChatRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2Chat_GetChatRequest), isFromPool) as C2Chat_GetChatRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.Chat2C_GetChatResponse)]
+	[MemoryPackable]
+	public partial class Chat2C_GetChatResponse: MessageObject, IChatActorResponse
+	{
+		public static Chat2C_GetChatResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Chat2C_GetChatResponse), isFromPool) as Chat2C_GetChatResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<ChatInfo> ChatInfos { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.ChatInfos.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(C2C_SendChatResponse))]
+	[Message(OuterMessage.C2C_SendChatRequest)]
+	[MemoryPackable]
+	public partial class C2C_SendChatRequest: MessageObject, IChatActorRequest
+	{
+		public static C2C_SendChatRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2C_SendChatRequest), isFromPool) as C2C_SendChatRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public ChatInfo ChatInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ChatInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.C2C_SendChatResponse)]
+	[MemoryPackable]
+	public partial class C2C_SendChatResponse: MessageObject, IChatActorResponse
+	{
+		public static C2C_SendChatResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2C_SendChatResponse), isFromPool) as C2C_SendChatResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string ChatMsg { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ChannelId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.ChatMsg = default;
+			this.ChannelId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.C2C_SyncChatInfo)]
+	[MemoryPackable]
+	public partial class C2C_SyncChatInfo: MessageObject, IMessage
+	{
+		public static C2C_SyncChatInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2C_SyncChatInfo), isFromPool) as C2C_SyncChatInfo; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public ChatInfo ChatInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ChatInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -6411,5 +6571,10 @@ namespace ET
 		 public const ushort LifeShieldInfo = 10169;
 		 public const ushort SkillSetInfo = 10170;
 		 public const ushort M2C_SkillSetMessage = 10171;
+		 public const ushort C2Chat_GetChatRequest = 10172;
+		 public const ushort Chat2C_GetChatResponse = 10173;
+		 public const ushort C2C_SendChatRequest = 10174;
+		 public const ushort C2C_SendChatResponse = 10175;
+		 public const ushort C2C_SyncChatInfo = 10176;
 	}
 }

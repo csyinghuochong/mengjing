@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
+	[FriendOf(typeof(UserInfoComponentServer))]
 	[FriendOf(typeof(Unit))]
 	[FriendOf(typeof(DBAccountInfo))]
 	[MessageSessionHandler(SceneType.Gate)]
@@ -55,9 +56,24 @@ namespace ET.Server
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map1");
 			response.MyId = request.UnitId;
 			unit.GateSessionActorId = player.Id;
+			
+			player.ChatInfoInstanceId = await EnterWorldChatServer(unit);   //登录聊天服
 
 			// 等到一帧的最后面再传送，先让G2C_EnterMap返回，否则传送消息可能比G2C_EnterMap还早
 			TransferHelper.TransferAtFrameFinish(unit, startSceneConfig.ActorId, startSceneConfig.Name).Coroutine();
+		}
+		
+		private async ETTask<long> EnterWorldChatServer(Unit unit)
+		{
+			ActorId chatServerId = UnitCacheHelper.GetChatId(unit.Zone());
+			Chat2G_EnterChat chat2G_EnterChat = (Chat2G_EnterChat)await unit.Root().GetComponent<MessageSender>().Call(chatServerId, new G2Chat_EnterChat()
+			{ 
+				UnitId = unit.Id,
+				Name = unit.GetComponent<UserInfoComponentServer>().UserInfo.Name,
+				UnionId = unit.GetComponent<NumericComponentServer>().GetAsLong(NumericType.UnionId_0),
+				GateSessionActorId = unit.GateSessionActorId
+			});
+			return chat2G_EnterChat.ChatInfoUnitInstanceId;
 		}
 	}
 }

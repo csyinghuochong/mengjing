@@ -29,4 +29,14 @@
     {
         
     }
+    
+    public interface IChatActorRequest: ILocationRequest
+    {
+        
+    }
+    
+    public interface IChatActorResponse: ILocationResponse
+    {
+        
+    }
 }
