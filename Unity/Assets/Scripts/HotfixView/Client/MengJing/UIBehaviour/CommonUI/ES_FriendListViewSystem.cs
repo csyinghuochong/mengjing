@@ -45,6 +45,7 @@ namespace ET.Client
         private static void OnChatHandler(this ES_FriendList self, FriendInfo friendInfo)
         {
             self.ES_ChatView.uiTransform.gameObject.SetActive(true);
+            self.ES_ChatView.Refresh(friendInfo);
         }
 
         private static void OnDeleteHandler(this ES_FriendList self)

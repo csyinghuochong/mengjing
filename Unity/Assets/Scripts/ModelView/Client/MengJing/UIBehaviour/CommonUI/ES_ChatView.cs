@@ -1,12 +1,17 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ChatView : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_ChatView : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public FriendInfo FriendInfo;
+		public Dictionary<int, Scroll_Item_FriendChatItem> ScrollItemFriendChatItems;
+		public List<ChatInfo> ShowChatInfos = new();
+		
 		public UnityEngine.UI.Text E_ChatPlayNameText
      	{
      		get
