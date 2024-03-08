@@ -11,7 +11,6 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this Scroll_Item_FriendListItem self)
         {
-            self.E_WatchButton.AddListenerAsync(self.OnWatchButton);
         }
 
         [EntitySystem]
@@ -35,6 +34,7 @@ namespace ET.Client
                 await FriendNetHelper.RequestFriendDelete(self.Root(), self.FriendInfo.UserId);
                 deleteAction?.Invoke();
             });
+            self.E_WatchButton.AddListenerAsync(self.OnWatchButton);
             self.E_ChatButton.AddListener(() => { chatAction.Invoke(self.FriendInfo); });
         }
 
