@@ -70,13 +70,13 @@ namespace ET.Client
             {
                 self.View.E_BangDingText.text = GameSettingLanguge.LoadLocalization("已绑定");
                 self.View.E_BangDingText.color = new Color(175f / 255f, 1, 6f / 255f);
-                self.View.E_BangDingText.gameObject.SetActive(true);
+                self.View.E_BindingImage.gameObject.SetActive(true);
             }
             else
             {
                 self.View.E_BangDingText.GetComponent<Text>().text = GameSettingLanguge.LoadLocalization("未绑定");
                 self.View.E_BangDingText.GetComponent<Text>().color = new Color(255f / 255f, 240f / 255f, 200f / 255f);
-                self.View.E_BangDingText.gameObject.SetActive(false);
+                self.View.E_BindingImage.gameObject.SetActive(false);
             }
 
             // 道具Icon

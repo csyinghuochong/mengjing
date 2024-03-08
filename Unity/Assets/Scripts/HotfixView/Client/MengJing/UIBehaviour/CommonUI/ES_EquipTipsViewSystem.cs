@@ -132,13 +132,13 @@ namespace ET.Client
             {
                 self.E_EquipBangDingText.text = GameSettingLanguge.LoadLocalization("已绑定");
                 self.E_EquipBangDingText.color = new Color(175f / 255f, 1, 6f / 255f);
-                self.E_EquipBangDingText.gameObject.SetActive(true);
+                self.E_EquipBangDingImgImage.gameObject.SetActive(true);
             }
             else
             {
                 self.E_EquipBangDingText.text = GameSettingLanguge.LoadLocalization("未绑定");
                 self.E_EquipBangDingText.color = new Color(255f / 255f, 240f / 255f, 200f / 255f);
-                self.E_EquipBangDingText.gameObject.SetActive(false);
+                self.E_EquipBangDingImgImage.gameObject.SetActive(false);
             }
 
             // 强化
