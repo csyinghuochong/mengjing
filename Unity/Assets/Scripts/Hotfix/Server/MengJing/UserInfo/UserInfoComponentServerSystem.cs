@@ -304,7 +304,17 @@ namespace ET.Server
             }
             return 0;
         }
-        
+
+        public static bool IsRobot(this UserInfoComponentServer self)
+        {
+            return self.UserInfo.RobotId > 0;
+        }
+
+        public static int GetUserLv(this UserInfoComponentServer self)
+        {
+            return self.UserInfo.Lv;
+        }
+
         public static void OnCleanBossCD(this UserInfoComponentServer self)
         {
             for (int i = 0; i < self.UserInfo.MonsterRevives.Count; i++)

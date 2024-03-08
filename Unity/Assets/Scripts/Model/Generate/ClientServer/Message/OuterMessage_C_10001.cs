@@ -6430,6 +6430,41 @@ namespace ET
 
 	}
 
+//激活成就
+	[Message(OuterMessage.M2C_ChengJiuActiveMessage)]
+	[MemoryPackable]
+	public partial class M2C_ChengJiuActiveMessage: MessageObject, IMessage
+	{
+		public static M2C_ChengJiuActiveMessage Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ChengJiuActiveMessage), isFromPool) as M2C_ChengJiuActiveMessage; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ChengJiuId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.ChengJiuId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -6608,5 +6643,6 @@ namespace ET
 		 public const ushort C2C_SendChatResponse = 10175;
 		 public const ushort C2C_SyncChatInfo = 10176;
 		 public const ushort ChengJiuInfo = 10177;
+		 public const ushort M2C_ChengJiuActiveMessage = 10178;
 	}
 }

@@ -1661,3 +1661,12 @@ message ChengJiuInfo
 	int32 ChengJiuProgess = 2;
 	int64 ChengJiuProgessLong = 3;
 }
+
+//激活成就
+message M2C_ChengJiuActiveMessage // IMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 ChengJiuId = 1;
+}

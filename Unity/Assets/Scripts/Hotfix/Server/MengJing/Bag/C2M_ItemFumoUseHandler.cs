@@ -18,7 +18,7 @@ namespace ET.Server
             unit.GetComponent<BagComponentServer>().OnCostItemData(bagInfoID, 1);
             unit.GetComponent<BagComponentServer>().FuMoItemId = useBagInfo.ItemID;
             unit.GetComponent<BagComponentServer>().FuMoProList = request.FuMoProList;
-            unit.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.FoMoNumber_213, 0, 1);
+            unit.GetComponent<ChengJiuComponentServer>().TriggerEvent(ChengJiuTargetEnum.FoMoNumber_213, 0, 1);
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(useBagInfo.ItemID);
 
