@@ -8,9 +8,9 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class UserDataTypeUpdate_OnRecvChat_ChatItemsRefresh: AEvent<Scene, UserDataTypeUpdate_OnRecvChat>
+    public class DataUpdate_OnRecvChat_ChatItemsRefresh: AEvent<Scene, DataUpdate_OnRecvChat>
     {
-        protected override async ETTask Run(Scene root, UserDataTypeUpdate_OnRecvChat args)
+        protected override async ETTask Run(Scene root, DataUpdate_OnRecvChat args)
         {
             root.GetComponent<UIComponent>().GetDlgLogic<DlgChat>()?.Refresh();
             await ETTask.CompletedTask;
@@ -25,7 +25,7 @@ namespace ET.Client
         {
             self.View.E_CloseButton.AddListener(self.OnCloseButton);
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
-            self.View.E_SendButton.AddListener(self.OnSendButton);
+            self.View.E_SendButton.AddListenerAsync(self.OnSendButton);
             self.View.E_ChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChatItemsRefresh);
         }
 
@@ -39,7 +39,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Chat);
         }
 
-        private static void OnSendButton(this DlgChat self)
+        private static async ETTask OnSendButton(this DlgChat self)
         {
             string text = self.View.E_ChatInputField.text;
             if (string.IsNullOrEmpty(text) || text.Length == 0)
@@ -183,7 +183,7 @@ namespace ET.Client
             }
             else
             {
-                ChatNetHelper.RequestSendChat(self.Root(), itemType, text).Coroutine();
+                await ChatNetHelper.RequestSendChat(self.Root(), itemType, text);
             }
 
             self.View.E_ChatInputField.GetComponent<InputField>().text = "";

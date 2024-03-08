@@ -34,11 +34,11 @@ namespace ET.Client
     {
     }
     
-    public struct UserDataTypeUpdate_FriendChat
+    public struct DataUpdate_FriendChat
     {
     }
     
-    public struct UserDataTypeUpdate_OnRecvChat
+    public struct DataUpdate_OnRecvChat
     {
     }
 }

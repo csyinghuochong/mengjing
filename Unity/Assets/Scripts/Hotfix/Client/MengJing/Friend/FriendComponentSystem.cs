@@ -72,7 +72,7 @@ namespace ET.Client
         public static void OnRecvChat(this FriendComponent self, ChatInfo chatInfo)
         {
             self.SetChatData(chatInfo);
-            EventSystem.Instance.Publish(self.Root(), new UserDataTypeUpdate_FriendChat());
+            EventSystem.Instance.Publish(self.Root(), new DataUpdate_FriendChat());
         }
     }
 }

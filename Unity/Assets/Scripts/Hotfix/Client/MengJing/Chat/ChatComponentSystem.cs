@@ -68,7 +68,7 @@ namespace ET.Client
             }
 
             chatInfos.Add(chatInfo);
-            EventSystem.Instance.Publish(self.Root(), new UserDataTypeUpdate_OnRecvChat());
+            EventSystem.Instance.Publish(self.Root(), new DataUpdate_OnRecvChat());
         }
     }
 }
