@@ -20,7 +20,9 @@ namespace ET.Client
         public static void Refresh(this Scroll_Item_FriendChatItem self, ChatInfo chatInfo)
         {
             self.E_HeadIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
-                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, friendInfo.Occ.ToString()));
+                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, chatInfo.Occ.ToString()));
+            self.E_NameText.text = chatInfo.PlayerName;
+            self.E_InfoText.text = chatInfo.ChatMsg;
         }
     }
 }

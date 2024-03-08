@@ -2594,6 +2594,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ES_FriendList
       objectReference: {fileID: 0}
+    - target: {fileID: 1294751218042004942, guid: 3bafcd8a2bb9c4e47866b765de5d54b0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5376104356691808649, guid: 3bafcd8a2bb9c4e47866b765de5d54b0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6910968749921511130, guid: 3bafcd8a2bb9c4e47866b765de5d54b0,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2699,7 +2709,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6235996390812322059, guid: 3bafcd8a2bb9c4e47866b765de5d54b0, type: 3}
+    - {fileID: 9104987318700100088, guid: 3bafcd8a2bb9c4e47866b765de5d54b0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3bafcd8a2bb9c4e47866b765de5d54b0, type: 3}
 --- !u!224 &6572488837336882451 stripped
 RectTransform:

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -37,7 +38,13 @@ namespace ET.Client
         private static void RefreshFriendChatItems(this ES_ChatView self)
         {
             FriendComponent friendComponent = self.Root().GetComponent<FriendComponent>();
-            friendComponent.ChatMsgList.TryGetValue(self.FriendInfo.UserId, out self.ShowChatInfos);
+            List<ChatInfo> chatInfos = null;
+            friendComponent.ChatMsgList.TryGetValue(self.FriendInfo.UserId, out chatInfos);
+            self.ShowChatInfos.Clear();
+            if (null != chatInfos)
+            {
+                self.ShowChatInfos.AddRange(chatInfos);
+            }
 
             self.AddUIScrollItems(ref self.ScrollItemFriendChatItems, self.ShowChatInfos.Count);
             self.E_FriendChatItemsLoopVerticalScrollRect.SetVisible(true, self.ShowChatInfos.Count);
