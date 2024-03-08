@@ -33,4 +33,12 @@ namespace ET.Client
     public struct UserDataTypeUpdate_Diamond
     {
     }
+    
+    public struct UserDataTypeUpdate_FriendChat
+    {
+    }
+    
+    public struct UserDataTypeUpdate_OnRecvChat
+    {
+    }
 }

@@ -6,6 +6,17 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class BagItemUpdate_DlgRoleAndBagRefresh: AEvent<Scene, BagItemUpdate>
+    {
+        protected override async ETTask Run(Scene scene, BagItemUpdate args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.Refresh();
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleBag.Refresh();
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof (ES_RoleProperty))]
     [FriendOf(typeof (ES_RoleBag))]
     [FriendOf(typeof (UserInfoComponentClient))]
@@ -158,17 +169,6 @@ namespace ET.Client
 
                 self.ESEquipItems_2[itemConfig.ItemSubType - 1].Refresh(equiplist[i], occ, itemOperateEnum, equiplist);
             }
-        }
-    }
-
-    [Event(SceneType.Demo)]
-    public class BagItemUpdate_DlgRoleAndBagRefresh: AEvent<Scene, BagItemUpdate>
-    {
-        protected override async ETTask Run(Scene scene, BagItemUpdate args)
-        {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.Refresh();
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleBag.Refresh();
-            await ETTask.CompletedTask;
         }
     }
 }

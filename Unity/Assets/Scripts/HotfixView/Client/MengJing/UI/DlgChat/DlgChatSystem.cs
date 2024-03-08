@@ -7,6 +7,16 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class UserDataTypeUpdate_OnRecvChat_ChatItemsRefresh: AEvent<Scene, UserDataTypeUpdate_OnRecvChat>
+    {
+        protected override async ETTask Run(Scene root, UserDataTypeUpdate_OnRecvChat args)
+        {
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgChat>()?.Refresh();
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof (PlayerComponent))]
     [FriendOf(typeof (DlgChat))]
     public static class DlgChatSystem
@@ -173,7 +183,7 @@ namespace ET.Client
             }
             else
             {
-                // self.Root().GetComponent<ChatComponent>().SendChat(itemType, text).Coroutine();
+                ChatNetHelper.RequestSendChat(self.Root(), itemType, text).Coroutine();
             }
 
             self.View.E_ChatInputField.GetComponent<InputField>().text = "";
@@ -201,33 +211,18 @@ namespace ET.Client
             self.Refresh();
         }
 
-        private static void Refresh(this DlgChat self)
+        public static void Refresh(this DlgChat self)
         {
             self.RefreshChatItems();
         }
 
         private static void RefreshChatItems(this DlgChat self)
         {
-            // List<ChatInfo> chatlist = self.Root().GetComponent<ChatComponent>().GetChatListByType(itemType);
-            List<ChatInfo> chatInfos = new List<ChatInfo>();
+            List<ChatInfo> chatlist = self.Root().GetComponent<ChatComponent>().GetChatListByType(self.CurrentChatType);
             self.View.E_ChatItemsLoopVerticalScrollRect.gameObject.SetActive(self.CurrentChatType != ChannelEnum.System);
 
-            // 假数据
-            chatInfos.Add(new ChatInfo()
-            {
-                PlayerName = "刘备", PlayerLevel = 1, ChatMsg = "危境11111111111111111111111111111111111111111111111111111111111", Occ = 1
-            });
-            chatInfos.Add(new ChatInfo()
-            {
-                PlayerName = "关羽", PlayerLevel = 2, ChatMsg = "危境22222222222222222222222222222222222222222222222222222222222", Occ = 2
-            });
-            chatInfos.Add(new ChatInfo()
-            {
-                PlayerName = "刘备", PlayerLevel = 3, ChatMsg = "危境33333333333333333333333333333333333333333333333333333333333", Occ = 3
-            });
-
             self.ShowChatInfos.Clear();
-            self.ShowChatInfos.AddRange(chatInfos);
+            self.ShowChatInfos.AddRange(chatlist);
 
             self.AddUIScrollItems(ref self.ScrollItemChatItems, self.ShowChatInfos.Count);
             self.View.E_ChatItemsLoopVerticalScrollRect.SetVisible(true, self.ShowChatInfos.Count);

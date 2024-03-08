@@ -78,7 +78,7 @@ namespace ET.Client
                 flyTipComponent.SpawnFlyTipDi("请输入聊天内容！");
             }
 
-            int error = await ChatNetHelper.RequestSendChat(self.Root(), ChannelEnum.Word, text, self.FriendInfo.UserId);
+            int error = await ChatNetHelper.RequestSendChat(self.Root(), ChannelEnum.Friend, text, self.FriendInfo.UserId);
             if (error == ErrorCode.ERR_Success)
             {
                 self.E_InputInputField.text = "";
