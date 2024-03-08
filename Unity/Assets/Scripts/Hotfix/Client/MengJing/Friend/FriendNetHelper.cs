@@ -59,5 +59,36 @@ namespace ET.Client
             F2C_FriendBlacklistResponse response = (F2C_FriendBlacklistResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<int> RequestFriendApplyReply(Scene root, FriendInfo friendInfo, int code)
+        {
+            C2F_FriendApplyReplyRequest request = new()
+            {
+                UnitId = UnitHelper.GetMyUnitFromClientScene(root).Id, FriendID = friendInfo.UserId, ReplyCode = code
+            };
+            F2C_FriendApplyReplyResponse response = (F2C_FriendApplyReplyResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                FriendComponent friendComponent = root.GetComponent<FriendComponent>();
+                if (code == 1)
+                {
+                    friendComponent.FriendList.Add(friendInfo);
+                }
+
+                for (int i = friendComponent.ApplyList.Count - 1; i >= 0; i--)
+                {
+                    if (friendComponent.ApplyList[i].UserId == friendInfo.UserId)
+                    {
+                        friendComponent.ApplyList.RemoveAt(i);
+                        break;
+                    }
+                }
+
+                EventSystem.Instance.Publish(root, new DataUpdate_FriendUpdate());
+            }
+
+            return response.Error;
+        }
     }
 }

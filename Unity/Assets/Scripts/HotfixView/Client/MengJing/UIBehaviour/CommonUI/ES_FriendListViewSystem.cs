@@ -32,7 +32,7 @@ namespace ET.Client
             scrollItemFriendListItem.Refresh(self.ShowFriendInfos[index], self.OnDeleteHandler, self.OnChatHandler);
         }
 
-        private static void Refresh(this ES_FriendList self)
+        public static void Refresh(this ES_FriendList self)
         {
             FriendComponent friendComponent = self.Root().GetComponent<FriendComponent>();
             self.ShowFriendInfos.Clear();

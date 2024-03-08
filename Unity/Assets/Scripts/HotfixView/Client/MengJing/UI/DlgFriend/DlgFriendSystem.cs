@@ -9,6 +9,17 @@ namespace ET.Client
     [FriendOf(typeof (ES_RoleBag))]
     public static class DlgFriendSystem
     {
+        [Event(SceneType.Demo)]
+        public class DataUpdate_FriendUpdate_FriendItemsRefresh: AEvent<Scene, DataUpdate_FriendUpdate>
+        {
+            protected override async ETTask Run(Scene root, DataUpdate_FriendUpdate args)
+            {
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgFriend>()?.View.ES_FriendList.Refresh();
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgFriend>()?.View.ES_FriendApply.Refresh();
+                await ETTask.CompletedTask;
+            }
+        }
+
         public static void RegisterUIEvent(this DlgFriend self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
