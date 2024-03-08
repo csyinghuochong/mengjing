@@ -8,11 +8,14 @@ namespace ET.Client
     {
         public static async ETTask<int> RequestFriendInfo(Scene root)
         {
-            C2F_FriendInfoRequest request = new C2F_FriendInfoRequest();
+            C2F_FriendInfoRequest request = new();
             F2C_FriendInfoResponse response = (F2C_FriendInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             FriendComponent friendComponent = root.GetComponent<FriendComponent>();
             friendComponent.FriendList = response.FriendList;
+            friendComponent.ApplyList = response.ApplyList;
+            friendComponent.Blacklist = response.Blacklist;
+            friendComponent.InitFrindChat(response.FriendChats);
 
             return ErrorCode.ERR_Success;
         }
@@ -44,6 +47,16 @@ namespace ET.Client
             C2F_FriendChatRead request = new() { UnitId = UnitHelper.GetMyUnitFromClientScene(root).Id, FriendID = friendId };
             F2C_FriendChatRead response = (F2C_FriendChatRead)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
+            return response.Error;
+        }
+
+        public static async ETTask<int> RequestRemoveBlack(Scene root, long friendId)
+        {
+            C2F_FriendBlacklistRequest request = new()
+            {
+                OperateType = 2, UnitId = UnitHelper.GetMyUnitFromClientScene(root).Id, FriendId = friendId
+            };
+            F2C_FriendBlacklistResponse response = (F2C_FriendBlacklistResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
     }
