@@ -29,7 +29,7 @@ namespace ET.Client
         private static void OnFriendListItemsRefresh(this ES_FriendList self, Transform transform, int index)
         {
             Scroll_Item_FriendListItem scrollItemFriendListItem = self.ScrollItemFriendListItems[index].BindTrans(transform);
-            scrollItemFriendListItem.Refresh(self.ShowFriendInfos[index]);
+            scrollItemFriendListItem.Refresh(self.ShowFriendInfos[index], self.OnDeleteHandler, self.OnChatHandler);
         }
 
         private static void Refresh(this ES_FriendList self)
@@ -40,6 +40,16 @@ namespace ET.Client
 
             self.AddUIScrollItems(ref self.ScrollItemFriendListItems, self.ShowFriendInfos.Count);
             self.E_FriendListItemsLoopVerticalScrollRect.SetVisible(true, self.ShowFriendInfos.Count);
+        }
+
+        private static void OnChatHandler(this ES_FriendList self, FriendInfo friendInfo)
+        {
+            self.ES_ChatView.uiTransform.gameObject.SetActive(true);
+        }
+
+        private static void OnDeleteHandler(this ES_FriendList self)
+        {
+            self.Refresh();
         }
     }
 }
