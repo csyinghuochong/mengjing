@@ -6399,6 +6399,37 @@ namespace ET
 
 	}
 
+//成就进度
+	[Message(OuterMessage.ChengJiuInfo)]
+	[MemoryPackable]
+	public partial class ChengJiuInfo: MessageObject
+	{
+		public static ChengJiuInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(ChengJiuInfo), isFromPool) as ChengJiuInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int ChengJiuID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ChengJiuProgess { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long ChengJiuProgessLong { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.ChengJiuID = default;
+			this.ChengJiuProgess = default;
+			this.ChengJiuProgessLong = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -6576,5 +6607,6 @@ namespace ET
 		 public const ushort C2C_SendChatRequest = 10174;
 		 public const ushort C2C_SendChatResponse = 10175;
 		 public const ushort C2C_SyncChatInfo = 10176;
+		 public const ushort ChengJiuInfo = 10177;
 	}
 }

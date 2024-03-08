@@ -61,15 +61,15 @@ namespace ET.Server
         /// <summary>
         /// 可以放在unitinfocomponent
         /// </summary>
-        //public int FuMoItemId { get; set; }   
+        public int FuMoItemId { get; set; }   
 
         [BsonIgnore]
         public M2C_RoleBagUpdate message = new M2C_RoleBagUpdate() { };
 
-        //[BsonIgnore]
-        //public List<HideProList> FuMoProList { get; set; } = new();
+        [BsonIgnore]
+        public List<HideProList> FuMoProList { get; set; } = new();
         
-        //[BsonIgnore]
-        //public List<int> InheritSkills { get; set; } = new();
+        [BsonIgnore]
+        public List<int> InheritSkills { get; set; } = new();
     }
 }

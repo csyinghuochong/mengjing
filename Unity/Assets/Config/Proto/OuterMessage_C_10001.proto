@@ -1653,3 +1653,11 @@ message C2C_SyncChatInfo // IMessage
 	
 	ChatInfo ChatInfo = 1;
 }
+
+//成就进度
+message ChengJiuInfo
+{
+	int32 ChengJiuID = 1;
+	int32 ChengJiuProgess = 2;
+	int64 ChengJiuProgessLong = 3;
+}
