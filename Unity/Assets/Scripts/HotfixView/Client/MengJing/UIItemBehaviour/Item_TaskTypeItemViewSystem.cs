@@ -32,8 +32,7 @@ namespace ET.Client
             self.E_ClickButton.AddListener(() =>
             {
                 onClickAction?.Invoke(self.TaskPro.taskID);
-                // 抛事件，通知任务面板刷新
-                Log.Info($"点击任务：{taskConfig.TaskName}");
+                EventSystem.Instance.Publish(self.Root(), new TaskTypeItemClick() { TaskPro = self.TaskPro });
             });
         }
 

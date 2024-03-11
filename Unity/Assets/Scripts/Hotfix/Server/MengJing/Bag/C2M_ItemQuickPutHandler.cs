@@ -54,6 +54,8 @@ namespace ET.Server
             }
 
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
+
+            await ETTask.CompletedTask;
         }
     }
 }

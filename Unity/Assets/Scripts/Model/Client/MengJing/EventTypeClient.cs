@@ -26,6 +26,11 @@ namespace ET.Client
         public string Str;
     }
 
+    public struct TaskTypeItemClick
+    {
+        public TaskPro TaskPro;
+    }
+    
     public struct UserDataTypeUpdate_Gold
     {
     }

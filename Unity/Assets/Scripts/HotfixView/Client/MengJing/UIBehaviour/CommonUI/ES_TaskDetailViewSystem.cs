@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -15,12 +16,30 @@ namespace ET.Client
             self.ES_TaskType_0.InitData(TaskTypeEnum.Main, self.SetTalkUp);
             self.ES_TaskType_1.InitData(TaskTypeEnum.Branch, self.SetTalkUp);
             self.ES_TaskType_2.InitData(TaskTypeEnum.Daily, self.SetTalkUp);
+
+            self.EG_RightRectTransform.gameObject.SetActive(false);
         }
 
         [EntitySystem]
         private static void Destroy(this ES_TaskDetail self)
         {
             self.DestroyWidget();
+        }
+
+        public static void RefreshTaskInfo(this ES_TaskDetail self, TaskPro taskPro)
+        {
+            if (taskPro == null)
+            {
+                self.EG_RightRectTransform.gameObject.SetActive(false);
+                return;
+            }
+
+            self.EG_RightRectTransform.gameObject.SetActive(true);
+
+            TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
+
+            self.ES_RewardList.Refresh(new List<RewardItem>() { new() { ItemID = 1, ItemNum = 1 }, new() { ItemID = 2, ItemNum = 2 } });
+            self.E_TeskDesText.text = taskConfig.TaskDes;
         }
 
         private static void SetTalkUp(this ES_TaskDetail self, int taskType)
