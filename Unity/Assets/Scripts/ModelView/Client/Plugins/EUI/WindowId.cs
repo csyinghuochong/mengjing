@@ -25,5 +25,6 @@ namespace ET.Client
 		WindowID_EquipDuiBiTips,
 		WindowID_PopupTip,
 		WindowID_RoleBagSplit,
+		WindowID_Task,
 	}
 }
