@@ -24,7 +24,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_BagToggle
+		public UnityEngine.UI.Toggle E_TaskDetailToggle
      	{
      		get
      		{
@@ -33,11 +33,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_BagToggle == null )
+     			if( this.m_E_TaskDetailToggle == null )
      			{
-		    		this.m_E_BagToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Bag");
+		    		this.m_E_TaskDetailToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_TaskDetail");
      			}
-     			return this.m_E_BagToggle;
+     			return this.m_E_TaskDetailToggle;
      		}
      	}
 
@@ -79,14 +79,14 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_FunctionSetBtnToggleGroup = null;
-			this.m_E_BagToggle = null;
+			this.m_E_TaskDetailToggle = null;
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_taskdetail = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_BagToggle = null;
+		private UnityEngine.UI.Toggle m_E_TaskDetailToggle = null;
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_TaskDetail> m_es_taskdetail = null;
 		public Transform uiTransform = null;

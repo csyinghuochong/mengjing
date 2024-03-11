@@ -40,7 +40,7 @@ namespace ET.Server
             bagInfo.isBinging = true;
             bagInfo.InheritTimes += 1;
             unit.GetComponent<BagComponentServer>().InheritSkills = response.InheritSkills;
-            //Í¨Öª¿Í»§¶Ë±³°üµÀ¾ß·¢Éú¸Ä±ä
+            //é€šçŸ¥å®¢æˆ·ç«¯èƒŒåŒ…é“å…·å‘ç”Ÿæ”¹å˜
             M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate(); ;
             m2c_bagUpdate.BagInfoUpdate.Add(bagInfo);
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);

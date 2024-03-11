@@ -46,10 +46,10 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgMain self)
         {
             self.View.E_ShrinkButton.AddListener(self.OnShrinkButton);
-            self.View.E_RoseEquipButton.AddListener(self.OnRoseEquipButton);
+            self.View.E_RoseEquipButton.AddListenerAsync(self.OnRoseEquipButton);
             self.View.E_PetButton.AddListener(self.OnPetButton);
             self.View.E_RoseSkillButton.AddListener(self.OnRoseSkillButton);
-            self.View.E_TaskButton.AddListener(self.OnTaskButton);
+            self.View.E_TaskButton.AddListenerAsync(self.OnTaskButton);
             self.View.E_FriendButton.AddListener(self.OnFriendButton);
             self.View.E_ChengJiuButton.AddListener(self.OnChengJiuButton);
 
@@ -135,9 +135,9 @@ namespace ET.Client
             self.View.EG_LeftBottomBtnsRectTransform.gameObject.SetActive(isShow);
         }
 
-        private static void OnRoseEquipButton(this DlgMain self)
+        private static async ETTask OnRoseEquipButton(this DlgMain self)
         {
-            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Role);
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role);
         }
 
         private static void OnPetButton(this DlgMain self)
@@ -150,9 +150,9 @@ namespace ET.Client
             Log.Debug("打开技能界面！！！");
         }
 
-        private static void OnTaskButton(this DlgMain self)
+        private static async ETTask OnTaskButton(this DlgMain self)
         {
-            Log.Debug("打开任务界面！！！");
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Task);
         }
 
         private static void OnFriendButton(this DlgMain self)
