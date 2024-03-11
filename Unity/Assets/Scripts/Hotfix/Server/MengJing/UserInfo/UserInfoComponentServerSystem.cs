@@ -325,6 +325,11 @@ namespace ET.Server
             return self.UserInfo.Occ;
         }
 
+        public static int GetRobotId(this UserInfoComponentServer self)
+        {
+            return self.UserInfo.RobotId;
+        }
+
         public static string GetName(this UserInfoComponentServer self)
         {
             return self.UserInfo.Name;
@@ -333,6 +338,11 @@ namespace ET.Server
         public static int GetOccTwo(this UserInfoComponentServer self)
         {
             return self.UserInfo.OccTwo;
+        }
+
+        public static void SetOccTwo(this UserInfoComponentServer self, int  occTwo)
+        {
+            self.UserInfo.OccTwo = 0;
         }
 
         public static int GetJiaYuanLv(this UserInfoComponentServer self)

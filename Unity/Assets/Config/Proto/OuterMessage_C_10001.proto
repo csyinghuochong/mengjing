@@ -1754,3 +1754,35 @@ message M2C_TaskCommitResponse    // ILocationResponse
 
 	repeated int32 RoleComoleteTaskList = 1;
 }
+
+//ResponseType M2C_TianFuActiveResponse
+message C2M_TianFuActiveRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 TianFuId = 1;
+}
+
+message M2C_TianFuActiveResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_SkillSet
+//技能设置
+message C2M_SkillSet	// ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 SkillID = 1;
+	int32 Position = 2;
+	int32 SkillType = 3;
+}
+
+message M2C_SkillSet	// ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}

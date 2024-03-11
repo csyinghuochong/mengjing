@@ -6782,6 +6782,133 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_TianFuActiveResponse))]
+	[Message(OuterMessage.C2M_TianFuActiveRequest)]
+	[MemoryPackable]
+	public partial class C2M_TianFuActiveRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TianFuActiveRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TianFuActiveRequest), isFromPool) as C2M_TianFuActiveRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int TianFuId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.TianFuId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TianFuActiveResponse)]
+	[MemoryPackable]
+	public partial class M2C_TianFuActiveResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TianFuActiveResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TianFuActiveResponse), isFromPool) as M2C_TianFuActiveResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_SkillSet))]
+//技能设置
+	[Message(OuterMessage.C2M_SkillSet)]
+	[MemoryPackable]
+	public partial class C2M_SkillSet: MessageObject, ILocationRequest
+	{
+		public static C2M_SkillSet Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_SkillSet), isFromPool) as C2M_SkillSet; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int SkillID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Position { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int SkillType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.SkillID = default;
+			this.Position = default;
+			this.SkillType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_SkillSet)]
+	[MemoryPackable]
+	public partial class M2C_SkillSet: MessageObject, ILocationResponse
+	{
+		public static M2C_SkillSet Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SkillSet), isFromPool) as M2C_SkillSet; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -6970,5 +7097,9 @@ namespace ET
 		 public const ushort M2C_TaskNoticeResponse = 10185;
 		 public const ushort C2M_TaskCommitRequest = 10186;
 		 public const ushort M2C_TaskCommitResponse = 10187;
+		 public const ushort C2M_TianFuActiveRequest = 10188;
+		 public const ushort M2C_TianFuActiveResponse = 10189;
+		 public const ushort C2M_SkillSet = 10190;
+		 public const ushort M2C_SkillSet = 10191;
 	}
 }
