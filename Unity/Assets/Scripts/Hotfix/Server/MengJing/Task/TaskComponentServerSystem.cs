@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace ET.Server
@@ -130,7 +131,7 @@ namespace ET.Server
                 return (null, ErrorCode.ERR_TaskCanNotGet);
             }
             Unit unit = self.GetParent<Unit>();
-            bool canget = FunctionHelp.CheckTaskOn(unit, TaskConfigCategory.Instance.Get(taskId));
+            bool canget = FunctionHelp.CheckTaskOn(taskId, 1);
             if (!canget)
             {
                 Log.Debug($"CanNotGetTask: {unit.Zone()} {unit.Id} {taskId}");
@@ -618,13 +619,13 @@ namespace ET.Server
                 int unionTaskNumber = numericComponent.GetAsInt(NumericType.UnionTaskNumber) + 1;
                 if (unionTaskNumber < GlobalValueConfigCategory.Instance.Get(108).Value2)
                 {
-                    numericComponent.SetEvent(null, NumericType.UnionTaskNumber, unionTaskNumber, 0);
+                    numericComponent.SetEvent(NumericType.UnionTaskNumber, unionTaskNumber, false);
                     numericComponent.SetEvent(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), true);
                 }
                 else
                 {
-                    numericComponent.SetEvent(NumericType.UnionTaskId, 0, true);
-                    numericComponent.SetEvent(null, NumericType.UnionTaskNumber, unionTaskNumber, 0, true);
+                    numericComponent.SetEvent(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), true);
+                    numericComponent.SetEvent(NumericType.UnionTaskNumber, unionTaskNumber, true);
                 }
 
             }
@@ -863,16 +864,16 @@ namespace ET.Server
                 int unitconfigId = bekill.ConfigId;
                 MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitconfigId);
                 bool isBoss = monsterConfig.MonsterType == (int)MonsterTypeEnum.Boss;
-                MapComponent mapComponent = self.DomainScene().GetComponent<MapComponent>();
+                MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
                 int fubenDifficulty = FubenDifficulty.None;
-                Scene DomainScene = self.GetParent<Unit>().DomainScene();
-                if (mapComponent.SceneTypeEnum == (int)SceneTypeEnum.CellDungeon)
+                Scene DomainScene = self.GetParent<Unit>().Root();
+                if (mapComponent.SceneType == (int)SceneTypeEnum.CellDungeon)
                 {
-                    fubenDifficulty = DomainScene.GetComponent<CellDungeonComponent>().FubenDifficulty;
+                    //fubenDifficulty = DomainScene.GetComponent<CellDungeonComponent>().FubenDifficulty;
                 }
-                if (mapComponent.SceneTypeEnum == (int)SceneTypeEnum.LocalDungeon)
+                if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
                 {
-                    fubenDifficulty = DomainScene.GetComponent<LocalDungeonComponent>().FubenDifficulty;
+                    //fubenDifficulty = DomainScene.GetComponent<LocalDungeonComponent>().FubenDifficulty;
                 }
 
                 self.TriggerTaskEvent(TaskTargetType.KillMonsterID_1, unitconfigId, 1);
@@ -993,7 +994,7 @@ namespace ET.Server
                 }
                 if (taskConfig.TargetType == TaskTargetType.CombatToValue_133)
                 {
-                    int combat = userInfoComponent.UserInfo.Combat;
+                    int combat = userInfoComponent.GetCombat();
                     self.TriggerTaskEvent(TaskTargetType.CombatToValue_133, 0, combat);
                     self.TriggerTaskCountryEvent(TaskTargetType.CombatToValue_133, 0, combat);
                     continue;
@@ -1321,7 +1322,7 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             if (self.TaskCountryList.Count == 0)
             {
-                Log.Debug($"更新活跃任务ERROE:  {unit.Id} {notice} {self.DomainZone()} ");
+                Log.Debug($"更新活跃任务ERROE:  {unit.Id} {notice} {self.Zone()} ");
             }
 
             //赛季任务每周清空
@@ -1337,7 +1338,7 @@ namespace ET.Server
 
             self.ReceiveHuoYueIds.Clear();
             List<int> taskCountryList = new List<int>();
-            taskCountryList.AddRange(TaskHelper.GetTaskCountrys(unit));
+            taskCountryList.AddRange(TaskHelper.GetTaskCountrys(unit, 100));
             taskCountryList.AddRange(TaskHelper.GetBattleTask());
             taskCountryList.AddRange(TaskHelper.GetShowLieTask());
             taskCountryList.AddRange(TaskHelper.GetUnionRaceTask());
@@ -1376,9 +1377,9 @@ namespace ET.Server
             {
                 //self.ClearTypeTask(TaskTypeEnum.Ring);
 
-                int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponent>().UserInfo.Lv;
+                int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().GetUserLv(); ;
                 int ringTaskId = TaskHelper.GetTaskIdByType(TaskTypeEnum.Ring, roleLv);
-                numericComponent.ApplyValue(NumericType.RingTaskId, ringTaskId, false);
+                numericComponent.SetEvent(NumericType.RingTaskId, ringTaskId, false);
             }
         }
 
@@ -1556,7 +1557,7 @@ namespace ET.Server
             numericComponent.SetEvent(NumericType.DailyTaskNumber, 0, notice);
             numericComponent.SetEvent(NumericType.UnionTaskNumber, 0, notice);
             numericComponent.SetEvent(NumericType.DailyTaskID, TaskHelper.GetTaskIdByType(TaskTypeEnum.Daily, roleLv), notice);
-            numericComponent.SetNoEvent(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), notice);
+            numericComponent.SetEvent(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), notice);
 
             //int ringTaskId = TaskHelper.GetTaskIdByType(TaskTypeEnum.Ring, roleLv);
             //numericComponent.ApplyValue(NumericType.RingTaskId, ringTaskId, notice);
@@ -1638,7 +1639,7 @@ namespace ET.Server
         public static void UpdateSeasonWeekTask(this TaskComponentServer self, bool notice)
         {
             Unit unit = self.GetParent<Unit>();
-            unit.GetComponent<NumericComponentServer>().ApplyValue(NumericType.SeasonTowerId, 0, notice);
+            unit.GetComponent<NumericComponentServer>().SetEvent(NumericType.SeasonTowerId, 0, notice);
 
             //赛季任务每周清空
             for (int i = self.TaskCountryList.Count - 1; i >= 0; i--)
@@ -1658,7 +1659,7 @@ namespace ET.Server
             }
 
             UserInfoComponentServer userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>();
-            if (SeasonHelper.IsOpenSeason(userInfoComponent.UserInfo.Lv))
+            if (SeasonHelper.IsOpenSeason(userInfoComponent.GetUserLv()))
             {
                 List<int> taskCountryList = TaskHelper.GetSeasonTask();
                 for (int i = 0; i < taskCountryList.Count; i++)

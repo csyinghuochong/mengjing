@@ -207,7 +207,7 @@ namespace ET
             return tip;
         }
 
-        public static bool CheckTaskOn(Scene scene, int triggerType, int triggerValue)
+        public static bool CheckTaskOn( int triggerType, int triggerValue)
         {
             bool open = false;
             switch (triggerType)

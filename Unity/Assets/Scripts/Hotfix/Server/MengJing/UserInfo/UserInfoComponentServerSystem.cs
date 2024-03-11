@@ -315,6 +315,11 @@ namespace ET.Server
             return self.UserInfo.Lv;
         }
 
+        public static int GetCombat(this UserInfoComponentServer self)
+        {
+            return self.UserInfo.Combat;
+        }
+
         public static int GetOcc(this UserInfoComponentServer self)
         {
             return self.UserInfo.Occ;
@@ -354,7 +359,18 @@ namespace ET.Server
                 self.UserInfo.HorseIds.Remove(horseId);
             }
         }
-        
+
+        public static int GetCrateDay(this UserInfoComponentServer self)
+        {
+            return 1;
+        }
+
+        public static long GetReviveTime(this UserInfoComponentServer self, int monsterId)
+        {
+            return 0;
+
+        }
+
         public static void OnDayItemUse(this UserInfoComponentServer self, int itemId)
         {
             for (int i = 0; i < self.UserInfo.DayItemUse.Count; i++)

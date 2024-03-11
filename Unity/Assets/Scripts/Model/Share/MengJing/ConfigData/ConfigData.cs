@@ -177,5 +177,23 @@ namespace ET
             new WorldSayConfig() { Time = 2200, OpenDay = new List<int> { 2, 4, 6 }, Conent = "家族入侵:家族出现了入侵怪兽,想要奖励的小勇士请带上你们的武器速速前往!" },
             new WorldSayConfig() { Time = 2200, OpenDay = new List<int> { 1, 3, 5, 0 }, Conent = "竞技场活动已经开启,想要证明自己能力的小伙伴记得前往噢!" },
         };
+
+
+
+        /// <summary>
+        /// 赛季开始时间
+        /// </summary>
+       [StaticField]
+        public static long SeasonOpenTime = 1701360000000;
+
+        //赛季结束时间
+        [StaticField]
+        public static long SeasonCloseTime = 1711814400000;
+
+        /// <summary>
+        /// 赛季BOSS
+        /// </summary>
+        [StaticField]
+        public static int SeasonBossId = 90000051;
     }
 }
