@@ -6,7 +6,7 @@ namespace ET.Server
 {
 
     [ComponentOf(typeof(Unit))]
-    public class SkillSetComponentServer : Entity
+    public class SkillSetComponentServer : Entity, IAwake, ITransfer, IDestroy, IUnitCache, IDeserialize
     {
         public int TianFuPlan = 0;
 
