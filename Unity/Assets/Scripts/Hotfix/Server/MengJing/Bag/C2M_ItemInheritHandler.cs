@@ -6,6 +6,8 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_ItemInheritRequest request, M2C_ItemInheritResponse response)
         {
+
+
             await ETTask.CompletedTask;
         }
     }
