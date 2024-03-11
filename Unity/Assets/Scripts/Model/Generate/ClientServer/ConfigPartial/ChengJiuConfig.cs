@@ -1,7 +1,4 @@
-
-
 using System.Collections.Generic;
-using static UnityEditor.Progress;
 
 namespace ET
 {
@@ -34,6 +31,14 @@ namespace ET
             {12,  "积累成就" },
             {21,  "宠物成就" },
         };
+
+        public List<int> GetChengJiuTargetData(int chengJiuTargetInt)
+        {
+            List<int> chengjiuList = null;
+
+            ChengJiuTargetData.TryGetValue(chengJiuTargetInt, out chengjiuList);
+            return chengjiuList;
+        }
 
 
         public override void EndInit()

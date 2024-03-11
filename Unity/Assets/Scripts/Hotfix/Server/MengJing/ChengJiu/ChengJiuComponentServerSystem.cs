@@ -217,9 +217,7 @@ namespace ET.Server
         public static void TriggerEvent(this ChengJiuComponentServer self, ChengJiuTargetEnum chengJiuTarget, int target_id, int target_value = 1)
         {
             int chengJiuTargetInt = (int)chengJiuTarget;
-            List<int> chengjiuList = null;
-
-            ChengJiuConfigCategory.Instance.ChengJiuTargetData.TryGetValue(chengJiuTargetInt, out chengjiuList);
+            List<int> chengjiuList = null;/// ChengJiuConfigCategory.Instance.GetChengJiuTargetData(chengJiuTargetInt);
             if (chengjiuList == null)
             {
                 return;
