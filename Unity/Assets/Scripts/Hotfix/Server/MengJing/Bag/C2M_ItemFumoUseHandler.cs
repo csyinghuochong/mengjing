@@ -22,8 +22,8 @@ namespace ET.Server
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(useBagInfo.ItemID);
 
-            unit.GetComponent<TaskComponentServerSystem>().TriggerTaskEvent(TaskTargetType.FuMoQulity_41, itemConfig.ItemQuality, 1);
-            unit.GetComponent<TaskComponentServerSystem>().TriggerTaskCountryEvent(TaskTargetType.FuMoQulity_41, itemConfig.ItemQuality, 1);
+            unit.GetComponent<TaskComponentServer>().TriggerTaskEvent(TaskTargetType.FuMoQulity_41, itemConfig.ItemQuality, 1);
+            unit.GetComponent<TaskComponentServer>().TriggerTaskCountryEvent(TaskTargetType.FuMoQulity_41, itemConfig.ItemQuality, 1);
 
             await ETTask.CompletedTask;
         }

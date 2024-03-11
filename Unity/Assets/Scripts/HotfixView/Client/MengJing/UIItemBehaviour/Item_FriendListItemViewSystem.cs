@@ -34,7 +34,7 @@ namespace ET.Client
                 await FriendNetHelper.RequestFriendDelete(self.Root(), self.FriendInfo.UserId);
                 deleteAction?.Invoke();
             });
-            self.E_WatchButton.AddListenerAsync(async () =>
+            self.E_WatchButton.AddListener( () =>
             {
                 FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
                 flyTipComponent.SpawnFlyTipDi("功能暂未开放");

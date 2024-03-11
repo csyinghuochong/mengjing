@@ -195,5 +195,8 @@ namespace ET
         /// </summary>
         [StaticField]
         public static int SeasonBossId = 90000051;
+
+        [StaticField]
+        public static Dictionary<int, int> MonsterToFuben = new Dictionary<int, int>();
     }
 }

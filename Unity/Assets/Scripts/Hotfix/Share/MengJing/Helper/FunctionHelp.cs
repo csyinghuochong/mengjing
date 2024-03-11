@@ -166,7 +166,7 @@ namespace ET
             int[] contion_2 = funtionOpenConfig.ConditionParam;
             for (int i = 0; i < contion_1.Length; i++)
             {
-                if (!CheckTaskOn(zongScene, contion_1[i], contion_2[i]))
+                if (!CheckTaskOn( contion_1[i], contion_2[i]))
                 {
                     return false;
                 }
