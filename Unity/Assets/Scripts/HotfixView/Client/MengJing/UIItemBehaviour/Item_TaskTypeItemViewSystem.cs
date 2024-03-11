@@ -26,7 +26,7 @@ namespace ET.Client
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
             self.E_HighlightImage.gameObject.SetActive(false);
             self.E_TaskNameText.text = taskConfig.TaskName;
-            self.E_GoingImage.gameObject.SetActive(taskPro.taskStatus != (int)TaskStatuEnum.Completed);
+            self.E_GoingImage.gameObject.SetActive(false);
             self.E_CompleteImage.gameObject.SetActive(taskPro.taskStatus == (int)TaskStatuEnum.Completed);
 
             self.E_ClickButton.AddListener(() =>

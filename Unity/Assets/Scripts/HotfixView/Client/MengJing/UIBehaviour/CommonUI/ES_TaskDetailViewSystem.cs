@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (UserInfoComponentClient))]
     [EntitySystemOf(typeof (ES_TaskDetail))]
     [FriendOf(typeof (ES_TaskDetail))]
     public static partial class ES_TaskDetailSystem
@@ -34,12 +35,58 @@ namespace ET.Client
                 return;
             }
 
-            self.EG_RightRectTransform.gameObject.SetActive(true);
-
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
 
-            self.ES_RewardList.Refresh(new List<RewardItem>() { new() { ItemID = 1, ItemNum = 1 }, new() { ItemID = 2, ItemNum = 2 } });
+            if (taskConfig.CompleteNpcID > 0)
+            {
+                string npcName = NpcConfigCategory.Instance.Get(taskConfig.CompleteNpcID).Name;
+                self.E_ComTaskNpcText.text = $"完成任务请找:<color=#5C7B32>{npcName}</color>";
+            }
+
             self.E_TeskDesText.text = taskConfig.TaskDes;
+            
+            // self.E_TaskTargetText.text = TaskViewHelp.Instance.GetTaskProgessDesc(taskPro);
+
+            self.E_ZhuizongButton.gameObject.SetActive(taskPro.TrackStatus == 0);
+            self.E_CancelZhuizongButton.gameObject.SetActive(taskPro.TrackStatus == 1);
+
+            float coffiexp = 1f;
+            float cofficoin = 1f;
+            if (taskConfig.Development == 1)
+            {
+                UserInfoComponentClient userInfoComponent = self.Root().GetComponent<UserInfoComponentClient>();
+                coffiexp = ComHelp.GetTaskExpRewardCof(userInfoComponent.UserInfo.Lv);
+                cofficoin = ComHelp.GetTaskCoinRewardCof(userInfoComponent.UserInfo.Lv);
+            }
+
+            int taskExp = (int)(taskConfig.TaskExp * coffiexp);
+            int taskCoin = (int)(taskConfig.TaskCoin * cofficoin);
+
+            string rewardStr = taskConfig.ItemID;
+            string rewardNum = taskConfig.ItemNum;
+            if (ComHelp.IfNull(rewardStr))
+            {
+                rewardStr = "1;2";
+                rewardNum = taskCoin + ";" + taskExp;
+            }
+            else
+            {
+                rewardStr = "1;2;" + rewardStr;
+                rewardNum = taskCoin + ";" + taskExp + ";" + rewardNum;
+            }
+
+            string[] rewarditems = rewardStr.Split(';');
+            string[] rewardItemNums = rewardNum.Split(';');
+
+            List<RewardItem> rewardItems = new List<RewardItem>();
+            for (int i = 0; i < rewarditems.Length; i++)
+            {
+                rewardItems.Add(new RewardItem() { ItemID = int.Parse(rewarditems[i]), ItemNum = int.Parse(rewardItemNums[i]) });
+            }
+
+            self.ES_RewardList.Refresh(rewardItems);
+
+            self.EG_RightRectTransform.gameObject.SetActive(true);
         }
 
         private static void SetTalkUp(this ES_TaskDetail self, int taskType)

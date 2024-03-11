@@ -72,7 +72,6 @@ namespace ET.Client
             {
                 if (self.ScrollItemTaskTypeItems.Values.ToList()[0].uiTransform != null)
                 {
-                    Log.Info("???????????????????");
                     ExecuteEvents.Execute(self.ScrollItemTaskTypeItems.Values.ToList()[0].E_ClickButton.gameObject,
                         new PointerEventData(UnityEngine.EventSystems.EventSystem.current), ExecuteEvents.pointerClickHandler);
                 }
@@ -115,7 +114,8 @@ namespace ET.Client
             //     taskPros.AddRange(TaskComponent.GetTaskTypeList(TaskTypeEnum.Treasure));
             // }
 
-            self.ShowTaskPros.Add(new TaskPro() { taskID = 30010001 });
+            // 假数据
+            self.ShowTaskPros.Add(new TaskPro() { taskID = 30010001, taskStatus = (int)TaskStatuEnum.Completed });
             self.ShowTaskPros.Add(new TaskPro() { taskID = 30010002 });
 
             self.AddUIScrollItems(ref self.ScrollItemTaskTypeItems, self.ShowTaskPros.Count);
