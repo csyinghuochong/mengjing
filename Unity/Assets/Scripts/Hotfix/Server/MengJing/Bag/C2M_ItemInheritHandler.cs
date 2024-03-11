@@ -29,7 +29,7 @@ namespace ET.Server
             unit.GetComponent<BagComponentServer>().OnCostItemData(costitem);
 
             int subtype = itemConfig.ItemSubType;
-            int skillid = XiLianHelper.XiLianChuanChengJianDing(itemConfig, unit.GetComponent<UserInfoComponent>().UserInfo.Occ, unit.GetComponent<UserInfoComponent>().UserInfo.OccTwo);
+            int skillid = XiLianHelper.XiLianChuanChengJianDing(itemConfig, unit.GetComponent<UserInfoComponentServer>().GetOcc(), unit.GetComponent<UserInfoComponentServer>().GetOccTwo());
 
             if (skillid == 0)
             {
