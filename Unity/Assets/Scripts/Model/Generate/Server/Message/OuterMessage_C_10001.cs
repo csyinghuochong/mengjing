@@ -6716,72 +6716,6 @@ namespace ET
 
 	}
 
-//提交任务
-	[ResponseType(nameof(M2C_TaskCommitResponse))]
-	[Message(OuterMessage.C2M_TaskCommitRequest)]
-	[MemoryPackable]
-	public partial class C2M_TaskCommitRequest: MessageObject, ILocationRequest
-	{
-		public static C2M_TaskCommitRequest Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(C2M_TaskCommitRequest), isFromPool) as C2M_TaskCommitRequest; 
-		}
-
-		[MemoryPackOrder(89)]
-		public int RpcId { get; set; }
-
-		[MemoryPackOrder(0)]
-		public int TaskId { get; set; }
-
-		[MemoryPackOrder(1)]
-		public long BagInfoID { get; set; }
-
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.TaskId = default;
-			this.BagInfoID = default;
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
-
-	}
-
-	[Message(OuterMessage.M2C_TaskCommitResponse)]
-	[MemoryPackable]
-	public partial class M2C_TaskCommitResponse: MessageObject, ILocationResponse
-	{
-		public static M2C_TaskCommitResponse Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(M2C_TaskCommitResponse), isFromPool) as M2C_TaskCommitResponse; 
-		}
-
-		[MemoryPackOrder(89)]
-		public int RpcId { get; set; }
-
-		[MemoryPackOrder(90)]
-		public int Error { get; set; }
-
-		[MemoryPackOrder(91)]
-		public string Message { get; set; }
-
-		[MemoryPackOrder(0)]
-		public List<int> RoleComoleteTaskList { get; set; } = new();
-
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.Error = default;
-			this.Message = default;
-			this.RoleComoleteTaskList.Clear();
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
-
-	}
-
 	[ResponseType(nameof(M2C_TianFuActiveResponse))]
 	[Message(OuterMessage.C2M_TianFuActiveRequest)]
 	[MemoryPackable]
@@ -6903,6 +6837,625 @@ namespace ET
 			this.RpcId = default;
 			this.Message = default;
 			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//提交任务
+	[ResponseType(nameof(M2C_TaskCommitResponse))]
+	[Message(OuterMessage.C2M_TaskCommitRequest)]
+	[MemoryPackable]
+	public partial class C2M_TaskCommitRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TaskCommitRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TaskCommitRequest), isFromPool) as C2M_TaskCommitRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int TaskId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long BagInfoID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.TaskId = default;
+			this.BagInfoID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TaskCommitResponse)]
+	[MemoryPackable]
+	public partial class M2C_TaskCommitResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TaskCommitResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TaskCommitResponse), isFromPool) as M2C_TaskCommitResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<int> RoleComoleteTaskList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RoleComoleteTaskList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//提交任务
+	[ResponseType(nameof(M2C_CommitTaskCountryResponse))]
+	[Message(OuterMessage.C2M_CommitTaskCountryRequest)]
+	[MemoryPackable]
+	public partial class C2M_CommitTaskCountryRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_CommitTaskCountryRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_CommitTaskCountryRequest), isFromPool) as C2M_CommitTaskCountryRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int TaskId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long BagInfoID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.TaskId = default;
+			this.BagInfoID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_CommitTaskCountryResponse)]
+	[MemoryPackable]
+	public partial class M2C_CommitTaskCountryResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_CommitTaskCountryResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_CommitTaskCountryResponse), isFromPool) as M2C_CommitTaskCountryResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//每日活跃
+	[ResponseType(nameof(M2C_TaskCountryInitResponse))]
+	[Message(OuterMessage.C2M_TaskCountryInitRequest)]
+	[MemoryPackable]
+	public partial class C2M_TaskCountryInitRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TaskCountryInitRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TaskCountryInitRequest), isFromPool) as C2M_TaskCountryInitRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TaskCountryInitResponse)]
+	[MemoryPackable]
+	public partial class M2C_TaskCountryInitResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TaskCountryInitResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TaskCountryInitResponse), isFromPool) as M2C_TaskCountryInitResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<TaskPro> TaskCountryList { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public List<int> ReceiveHuoYueIds { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.TaskCountryList.Clear();
+			this.ReceiveHuoYueIds.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//接取任务
+	[ResponseType(nameof(M2C_TaskGetResponse))]
+	[Message(OuterMessage.C2M_TaskGetRequest)]
+	[MemoryPackable]
+	public partial class C2M_TaskGetRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TaskGetRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TaskGetRequest), isFromPool) as C2M_TaskGetRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int TaskId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int TaskStatus { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.TaskId = default;
+			this.TaskStatus = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TaskGetResponse)]
+	[MemoryPackable]
+	public partial class M2C_TaskGetResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TaskGetResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TaskGetResponse), isFromPool) as M2C_TaskGetResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public TaskPro TaskPro { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.TaskPro = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//放弃任务
+	[ResponseType(nameof(M2C_TaskGiveUpResponse))]
+	[Message(OuterMessage.C2M_TaskGiveUpRequest)]
+	[MemoryPackable]
+	public partial class C2M_TaskGiveUpRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TaskGiveUpRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TaskGiveUpRequest), isFromPool) as C2M_TaskGiveUpRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int TaskId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.TaskId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TaskGiveUpResponse)]
+	[MemoryPackable]
+	public partial class M2C_TaskGiveUpResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TaskGiveUpResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TaskGiveUpResponse), isFromPool) as M2C_TaskGiveUpResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//活跃宝箱
+	[ResponseType(nameof(M2C_TaskHuoYueRewardResponse))]
+	[Message(OuterMessage.C2M_TaskHuoYueRewardRequest)]
+	[MemoryPackable]
+	public partial class C2M_TaskHuoYueRewardRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TaskHuoYueRewardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TaskHuoYueRewardRequest), isFromPool) as C2M_TaskHuoYueRewardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int HuoYueId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.HuoYueId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TaskHuoYueRewardResponse)]
+	[MemoryPackable]
+	public partial class M2C_TaskHuoYueRewardResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TaskHuoYueRewardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TaskHuoYueRewardResponse), isFromPool) as M2C_TaskHuoYueRewardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//任务列表
+	[ResponseType(nameof(M2C_TaskInitResponse))]
+	[Message(OuterMessage.C2M_TaskInitRequest)]
+	[MemoryPackable]
+	public partial class C2M_TaskInitRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TaskInitRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TaskInitRequest), isFromPool) as C2M_TaskInitRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TaskInitResponse)]
+	[MemoryPackable]
+	public partial class M2C_TaskInitResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TaskInitResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TaskInitResponse), isFromPool) as M2C_TaskInitResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<TaskPro> RoleTaskList { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public List<int> RoleComoleteTaskList { get; set; } = new();
+
+		[MemoryPackOrder(2)]
+		public List<TaskPro> TaskCountryList { get; set; } = new();
+
+		[MemoryPackOrder(3)]
+		public List<int> ReceiveHuoYueIds { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RoleTaskList.Clear();
+			this.RoleComoleteTaskList.Clear();
+			this.TaskCountryList.Clear();
+			this.ReceiveHuoYueIds.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//任务通知【目前用于对话完成】
+	[ResponseType(nameof(M2C_TaskNoticeResponse))]
+	[Message(OuterMessage.C2M_TaskNoticeRequest)]
+	[MemoryPackable]
+	public partial class C2M_TaskNoticeRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TaskNoticeRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TaskNoticeRequest), isFromPool) as C2M_TaskNoticeRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int TaskId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int TaskStatus { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.TaskId = default;
+			this.TaskStatus = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TaskNoticeResponse)]
+	[MemoryPackable]
+	public partial class M2C_TaskNoticeResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TaskNoticeResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TaskNoticeResponse), isFromPool) as M2C_TaskNoticeResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_TaskOnLoginResponse))]
+	[Message(OuterMessage.C2M_TaskOnLoginRequest)]
+	[MemoryPackable]
+	public partial class C2M_TaskOnLoginRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TaskOnLoginRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TaskOnLoginRequest), isFromPool) as C2M_TaskOnLoginRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TaskOnLoginResponse)]
+	[MemoryPackable]
+	public partial class M2C_TaskOnLoginResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TaskOnLoginResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TaskOnLoginResponse), isFromPool) as M2C_TaskOnLoginResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//任务追踪
+	[ResponseType(nameof(M2C_TaskTrackResponse))]
+	[Message(OuterMessage.C2M_TaskTrackRequest)]
+	[MemoryPackable]
+	public partial class C2M_TaskTrackRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TaskTrackRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TaskTrackRequest), isFromPool) as C2M_TaskTrackRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int TaskId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int TrackStatus { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.TaskId = default;
+			this.TrackStatus = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TaskTrackResponse)]
+	[MemoryPackable]
+	public partial class M2C_TaskTrackResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TaskTrackResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TaskTrackResponse), isFromPool) as M2C_TaskTrackResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -7095,11 +7648,29 @@ namespace ET
 		 public const ushort M2C_TaskTrackResponse = 10183;
 		 public const ushort C2M_TaskNoticeRequest = 10184;
 		 public const ushort M2C_TaskNoticeResponse = 10185;
-		 public const ushort C2M_TaskCommitRequest = 10186;
-		 public const ushort M2C_TaskCommitResponse = 10187;
-		 public const ushort C2M_TianFuActiveRequest = 10188;
-		 public const ushort M2C_TianFuActiveResponse = 10189;
-		 public const ushort C2M_SkillSet = 10190;
-		 public const ushort M2C_SkillSet = 10191;
+		 public const ushort C2M_TianFuActiveRequest = 10186;
+		 public const ushort M2C_TianFuActiveResponse = 10187;
+		 public const ushort C2M_SkillSet = 10188;
+		 public const ushort M2C_SkillSet = 10189;
+		 public const ushort C2M_TaskCommitRequest = 10190;
+		 public const ushort M2C_TaskCommitResponse = 10191;
+		 public const ushort C2M_CommitTaskCountryRequest = 10192;
+		 public const ushort M2C_CommitTaskCountryResponse = 10193;
+		 public const ushort C2M_TaskCountryInitRequest = 10194;
+		 public const ushort M2C_TaskCountryInitResponse = 10195;
+		 public const ushort C2M_TaskGetRequest = 10196;
+		 public const ushort M2C_TaskGetResponse = 10197;
+		 public const ushort C2M_TaskGiveUpRequest = 10198;
+		 public const ushort M2C_TaskGiveUpResponse = 10199;
+		 public const ushort C2M_TaskHuoYueRewardRequest = 10200;
+		 public const ushort M2C_TaskHuoYueRewardResponse = 10201;
+		 public const ushort C2M_TaskInitRequest = 10202;
+		 public const ushort M2C_TaskInitResponse = 10203;
+		 public const ushort C2M_TaskNoticeRequest = 10204;
+		 public const ushort M2C_TaskNoticeResponse = 10205;
+		 public const ushort C2M_TaskOnLoginRequest = 10206;
+		 public const ushort M2C_TaskOnLoginResponse = 10207;
+		 public const ushort C2M_TaskTrackRequest = 10208;
+		 public const ushort M2C_TaskTrackResponse = 10209;
 	}
 }

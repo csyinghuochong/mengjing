@@ -1737,24 +1737,6 @@ message M2C_TaskNoticeResponse    // ILocationResponse
 	string Message = 92;
 }
 
-//提交任务
-//ResponseType M2C_TaskCommitResponse
-message C2M_TaskCommitRequest    // ILocationRequest
-{
-	int32 RpcId = 90;
-	int32 TaskId = 1;
-	int64 BagInfoID = 2;			//给予任务道具ID
-}
-
-message M2C_TaskCommitResponse    // ILocationResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-
-	repeated int32 RoleComoleteTaskList = 1;
-}
-
 //ResponseType M2C_TianFuActiveResponse
 message C2M_TianFuActiveRequest // ILocationRequest
 {
@@ -1786,3 +1768,163 @@ message M2C_SkillSet	// ILocationResponse
 	string Message = 91;
 	int32 Error = 92;
 }
+
+//提交任务
+//ResponseType M2C_TaskCommitResponse
+message C2M_TaskCommitRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 TaskId = 1;
+	int64 BagInfoID = 2;			//给予任务道具ID
+}
+
+message M2C_TaskCommitResponse    // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated int32 RoleComoleteTaskList = 1;
+}
+
+//提交任务
+//ResponseType M2C_CommitTaskCountryResponse
+message C2M_CommitTaskCountryRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 TaskId = 1;
+	int64 BagInfoID = 2;
+}
+
+message M2C_CommitTaskCountryResponse    // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//每日活跃
+//ResponseType M2C_TaskCountryInitResponse
+message C2M_TaskCountryInitRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_TaskCountryInitResponse    // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated TaskPro TaskCountryList = 1;
+	repeated int32 ReceiveHuoYueIds = 2;
+}
+
+//接取任务
+//ResponseType M2C_TaskGetResponse
+message C2M_TaskGetRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 TaskId = 1;
+	int32 TaskStatus = 2; //0未激活 1已接取 2已完成 3已领取
+}
+
+message M2C_TaskGetResponse    // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	TaskPro TaskPro = 1;
+}
+
+//放弃任务
+//ResponseType M2C_TaskGiveUpResponse
+message C2M_TaskGiveUpRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 TaskId = 1;
+}
+
+message M2C_TaskGiveUpResponse    // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//活跃宝箱
+//ResponseType M2C_TaskHuoYueRewardResponse
+message C2M_TaskHuoYueRewardRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 HuoYueId = 1;
+}
+
+message M2C_TaskHuoYueRewardResponse    // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//任务列表
+//ResponseType M2C_TaskInitResponse
+message C2M_TaskInitRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_TaskInitResponse    // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated TaskPro RoleTaskList = 1;
+	repeated int32 RoleComoleteTaskList = 2;
+	repeated TaskPro TaskCountryList = 3;
+	repeated int32 ReceiveHuoYueIds = 4;
+}
+
+//任务通知【目前用于对话完成】
+//ResponseType M2C_TaskNoticeResponse
+message C2M_TaskNoticeRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 TaskId = 1;
+	int32 TaskStatus = 2; //0未激活 1已接取 2已完成 3已领取
+}
+
+message M2C_TaskNoticeResponse    // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_TaskOnLoginResponse
+message C2M_TaskOnLoginRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_TaskOnLoginResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//任务追踪
+//ResponseType M2C_TaskTrackResponse
+message C2M_TaskTrackRequest	//ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 TaskId = 1;
+	int32 TrackStatus = 2;	    //0未追踪 1已追踪
+}
+
+message M2C_TaskTrackResponse	//ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
