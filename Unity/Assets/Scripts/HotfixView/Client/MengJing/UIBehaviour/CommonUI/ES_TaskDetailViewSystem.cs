@@ -44,8 +44,8 @@ namespace ET.Client
             }
 
             self.E_TeskDesText.text = taskConfig.TaskDes;
-            
-            // self.E_TaskTargetText.text = TaskViewHelp.Instance.GetTaskProgessDesc(taskPro);
+
+            self.E_TaskTargetText.text = TaskViewHelp.GetTaskProgessDesc(taskPro);
 
             self.E_ZhuizongButton.gameObject.SetActive(taskPro.TrackStatus == 0);
             self.E_CancelZhuizongButton.gameObject.SetActive(taskPro.TrackStatus == 1);
