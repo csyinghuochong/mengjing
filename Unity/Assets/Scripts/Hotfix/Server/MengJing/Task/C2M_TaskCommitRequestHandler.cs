@@ -18,7 +18,6 @@ namespace ET.Server
             response.RoleComoleteTaskList = taskComponent.RoleComoleteTaskList;
 
             await ETTask.CompletedTask;
-            await ETTask.CompletedTask;
         }
     }
 }
