@@ -1705,38 +1705,6 @@ message M2C_TaskUpdate // IMessage
 	repeated TaskPro DayTaskList = 2;
 }
 
-//任务追踪
-//ResponseType M2C_TaskTrackResponse
-message C2M_TaskTrackRequest	//ILocationRequest
-{
-	int32 RpcId = 90;
-	int32 TaskId = 1;
-	int32 TrackStatus = 2;	//0未追踪 1已追踪
-}
-
-message M2C_TaskTrackResponse	//ILocationResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-}
-
-//任务通知【目前用于对话完成】
-//ResponseType M2C_TaskNoticeResponse
-message C2M_TaskNoticeRequest    // ILocationRequest
-{
-	int32 RpcId = 90;
-	int32 TaskId = 1;
-	int32 TaskStatus = 2; //0未激活 1已接取 2已完成 3已领取
-}
-
-message M2C_TaskNoticeResponse    // ILocationResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-}
-
 //ResponseType M2C_TianFuActiveResponse
 message C2M_TianFuActiveRequest // ILocationRequest
 {

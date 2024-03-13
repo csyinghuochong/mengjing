@@ -25,6 +25,7 @@ namespace ET.Client
                 await UserInfoNetHelper.RequestUserInfoInit(root);
                 await FriendNetHelper.RequestFriendInfo(root);
 
+
                 EventSystem.Instance.Publish(root, new EnterMapFinish());
             }
             catch (Exception e)

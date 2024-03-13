@@ -6592,130 +6592,6 @@ namespace ET
 
 	}
 
-//任务追踪
-	[ResponseType(nameof(M2C_TaskTrackResponse))]
-	[Message(OuterMessage.C2M_TaskTrackRequest)]
-	[MemoryPackable]
-	public partial class C2M_TaskTrackRequest: MessageObject, ILocationRequest
-	{
-		public static C2M_TaskTrackRequest Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(C2M_TaskTrackRequest), isFromPool) as C2M_TaskTrackRequest; 
-		}
-
-		[MemoryPackOrder(89)]
-		public int RpcId { get; set; }
-
-		[MemoryPackOrder(0)]
-		public int TaskId { get; set; }
-
-		[MemoryPackOrder(1)]
-		public int TrackStatus { get; set; }
-
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.TaskId = default;
-			this.TrackStatus = default;
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
-
-	}
-
-	[Message(OuterMessage.M2C_TaskTrackResponse)]
-	[MemoryPackable]
-	public partial class M2C_TaskTrackResponse: MessageObject, ILocationResponse
-	{
-		public static M2C_TaskTrackResponse Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(M2C_TaskTrackResponse), isFromPool) as M2C_TaskTrackResponse; 
-		}
-
-		[MemoryPackOrder(89)]
-		public int RpcId { get; set; }
-
-		[MemoryPackOrder(90)]
-		public int Error { get; set; }
-
-		[MemoryPackOrder(91)]
-		public string Message { get; set; }
-
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.Error = default;
-			this.Message = default;
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
-
-	}
-
-//任务通知【目前用于对话完成】
-	[ResponseType(nameof(M2C_TaskNoticeResponse))]
-	[Message(OuterMessage.C2M_TaskNoticeRequest)]
-	[MemoryPackable]
-	public partial class C2M_TaskNoticeRequest: MessageObject, ILocationRequest
-	{
-		public static C2M_TaskNoticeRequest Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(C2M_TaskNoticeRequest), isFromPool) as C2M_TaskNoticeRequest; 
-		}
-
-		[MemoryPackOrder(89)]
-		public int RpcId { get; set; }
-
-		[MemoryPackOrder(0)]
-		public int TaskId { get; set; }
-
-		[MemoryPackOrder(1)]
-		public int TaskStatus { get; set; }
-
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.TaskId = default;
-			this.TaskStatus = default;
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
-
-	}
-
-	[Message(OuterMessage.M2C_TaskNoticeResponse)]
-	[MemoryPackable]
-	public partial class M2C_TaskNoticeResponse: MessageObject, ILocationResponse
-	{
-		public static M2C_TaskNoticeResponse Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(M2C_TaskNoticeResponse), isFromPool) as M2C_TaskNoticeResponse; 
-		}
-
-		[MemoryPackOrder(89)]
-		public int RpcId { get; set; }
-
-		[MemoryPackOrder(90)]
-		public int Error { get; set; }
-
-		[MemoryPackOrder(91)]
-		public string Message { get; set; }
-
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.Error = default;
-			this.Message = default;
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
-
-	}
-
 	[ResponseType(nameof(M2C_TianFuActiveResponse))]
 	[Message(OuterMessage.C2M_TianFuActiveRequest)]
 	[MemoryPackable]
@@ -7644,33 +7520,29 @@ namespace ET
 		 public const ushort TaskPro = 10179;
 		 public const ushort M2C_TaskCountryUpdate = 10180;
 		 public const ushort M2C_TaskUpdate = 10181;
-		 public const ushort C2M_TaskTrackRequest = 10182;
-		 public const ushort M2C_TaskTrackResponse = 10183;
-		 public const ushort C2M_TaskNoticeRequest = 10184;
-		 public const ushort M2C_TaskNoticeResponse = 10185;
-		 public const ushort C2M_TianFuActiveRequest = 10186;
-		 public const ushort M2C_TianFuActiveResponse = 10187;
-		 public const ushort C2M_SkillSet = 10188;
-		 public const ushort M2C_SkillSet = 10189;
-		 public const ushort C2M_TaskCommitRequest = 10190;
-		 public const ushort M2C_TaskCommitResponse = 10191;
-		 public const ushort C2M_CommitTaskCountryRequest = 10192;
-		 public const ushort M2C_CommitTaskCountryResponse = 10193;
-		 public const ushort C2M_TaskCountryInitRequest = 10194;
-		 public const ushort M2C_TaskCountryInitResponse = 10195;
-		 public const ushort C2M_TaskGetRequest = 10196;
-		 public const ushort M2C_TaskGetResponse = 10197;
-		 public const ushort C2M_TaskGiveUpRequest = 10198;
-		 public const ushort M2C_TaskGiveUpResponse = 10199;
-		 public const ushort C2M_TaskHuoYueRewardRequest = 10200;
-		 public const ushort M2C_TaskHuoYueRewardResponse = 10201;
-		 public const ushort C2M_TaskInitRequest = 10202;
-		 public const ushort M2C_TaskInitResponse = 10203;
-		 public const ushort C2M_TaskNoticeRequest = 10204;
-		 public const ushort M2C_TaskNoticeResponse = 10205;
-		 public const ushort C2M_TaskOnLoginRequest = 10206;
-		 public const ushort M2C_TaskOnLoginResponse = 10207;
-		 public const ushort C2M_TaskTrackRequest = 10208;
-		 public const ushort M2C_TaskTrackResponse = 10209;
+		 public const ushort C2M_TianFuActiveRequest = 10182;
+		 public const ushort M2C_TianFuActiveResponse = 10183;
+		 public const ushort C2M_SkillSet = 10184;
+		 public const ushort M2C_SkillSet = 10185;
+		 public const ushort C2M_TaskCommitRequest = 10186;
+		 public const ushort M2C_TaskCommitResponse = 10187;
+		 public const ushort C2M_CommitTaskCountryRequest = 10188;
+		 public const ushort M2C_CommitTaskCountryResponse = 10189;
+		 public const ushort C2M_TaskCountryInitRequest = 10190;
+		 public const ushort M2C_TaskCountryInitResponse = 10191;
+		 public const ushort C2M_TaskGetRequest = 10192;
+		 public const ushort M2C_TaskGetResponse = 10193;
+		 public const ushort C2M_TaskGiveUpRequest = 10194;
+		 public const ushort M2C_TaskGiveUpResponse = 10195;
+		 public const ushort C2M_TaskHuoYueRewardRequest = 10196;
+		 public const ushort M2C_TaskHuoYueRewardResponse = 10197;
+		 public const ushort C2M_TaskInitRequest = 10198;
+		 public const ushort M2C_TaskInitResponse = 10199;
+		 public const ushort C2M_TaskNoticeRequest = 10200;
+		 public const ushort M2C_TaskNoticeResponse = 10201;
+		 public const ushort C2M_TaskOnLoginRequest = 10202;
+		 public const ushort M2C_TaskOnLoginResponse = 10203;
+		 public const ushort C2M_TaskTrackRequest = 10204;
+		 public const ushort M2C_TaskTrackResponse = 10205;
 	}
 }
