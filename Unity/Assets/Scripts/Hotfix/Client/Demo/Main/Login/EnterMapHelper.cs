@@ -24,7 +24,7 @@ namespace ET.Client
                 await ActivityNetHelper.RequestActivityInfo(root);
                 await UserInfoNetHelper.RequestUserInfoInit(root);
                 await FriendNetHelper.RequestFriendInfo(root);
-
+                await TaskClientNetHelper.RequestTaskInit(root);
 
                 EventSystem.Instance.Publish(root, new EnterMapFinish());
             }
