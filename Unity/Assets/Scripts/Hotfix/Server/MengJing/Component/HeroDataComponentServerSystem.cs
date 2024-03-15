@@ -6,7 +6,6 @@ namespace ET.Server
 
     [EntitySystemOf(typeof(HeroDataComponentServer))]
     [FriendOf(typeof(HeroDataComponentServer))]
-    [FriendOf(typeof(NumericComponentServer))]
     public static partial class HeroDataComponentServerSystem
     {
         [EntitySystem]
@@ -19,17 +18,7 @@ namespace ET.Server
          {
              Unit unit = self.GetParent<Unit>();
              NumericComponentServer numericComponent = unit.GetComponent<NumericComponentServer>();
-             //重置所有属性
-             long max = (int)NumericType.Max;
-             foreach (int key in numericComponent.NumericDic.Keys)
-             {
-                 //这个范围内的属性为特殊属性不进行重置
-                 if (key < max)
-                 {
-                     continue;
-                 }
-                 numericComponent.NumericDic[key] = 0;
-             }
+             numericComponent.Reset();
 
              if (numericComponent.GetAsInt(NumericType.Ling_DiLv) == 0)
              {
@@ -280,16 +269,17 @@ namespace ET.Server
          {
              Unit unit = self.GetParent<Unit>();
              NumericComponentServer numericComponent = unit.GetComponent<NumericComponentServer>();
-             numericComponent.NumericDic[NumericType.Now_Dead] = 0;
-             numericComponent.NumericDic[NumericType.Now_Damage] = 0;
-             numericComponent.NumericDic[NumericType.BossBelongID] = 0;
-             numericComponent.NumericDic[NumericType.Now_Shield_HP] = 0;
-             numericComponent.NumericDic[NumericType.Now_Shield_MaxHP] = 0;
-             numericComponent.NumericDic[NumericType.Now_Shield_DamgeCostPro] = 0;
+             numericComponent.Set(NumericType.Now_Dead, 0);
+             numericComponent.Set(NumericType.Now_Damage, 0);
+             numericComponent.Set(NumericType.BossBelongID, 0);
+             numericComponent.Set(NumericType.Now_Shield_HP, 0);
+             numericComponent.Set(NumericType.Now_Shield_MaxHP, 0);
+             numericComponent.Set(NumericType.Now_Shield_DamgeCostPro, 0);
+
              if (unit.GetComponent<NumericComponentServer>().GetAsLong(NumericType.Now_Dead) <= 0)
              {
                  long max_hp = self.GetParent<Unit>().GetComponent<NumericComponentServer>().GetAsLong(NumericType.Now_MaxHp);
-                 unit.GetComponent<NumericComponentServer>().NumericDic[NumericType.Now_Hp] = max_hp;
+                 unit.GetComponent<NumericComponentServer>().Set(NumericType.Now_Hp, max_hp);
              }
          }
 
@@ -440,7 +430,7 @@ namespace ET.Server
              long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
 
              numericComponent.Set(NumericType.Now_Dead, 0);
-             numericComponent.NumericDic[NumericType.Now_Hp] = 0;
+             numericComponent.Set(NumericType.Now_Hp, 0);
              numericComponent.Set(NumericType.Now_Hp, max_hp);
              numericComponent.Set(NumericType.ReviveTime, 0);
              unit.GetComponent<SkillPassiveComponent>()?.Activeted();
@@ -493,7 +483,7 @@ namespace ET.Server
              numericComponent.SetEvent((int)NumericType.Base_DamgeSubPro_Base, monsterConfig.DamgeAdd, false);
 
              //设置当前血量
-             numericComponent.NumericDic[(int)NumericType.Now_Hp] = numericComponent.NumericDic[(int)NumericType.Now_MaxHp];
+             numericComponent.SetEvent((int)NumericType.Now_Hp, numericComponent.GetAsLong(NumericType.Now_MaxHp), false);
          }
 
          public static void InitJiaYuanPet(this HeroDataComponentServer self,  bool notice)
@@ -536,10 +526,10 @@ namespace ET.Server
              NumericComponentServer masterNumericComponent = master.GetComponent<NumericComponentServer>();
 
              NumericComponentServer numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentServer>();
-             foreach ((int ntype, long value) in masterNumericComponent.NumericDic)
-             {
-                 numericComponent.SetEvent(ntype, value, false);
-             }
+             // foreach ((int ntype, long value) in masterNumericComponent.NumericDic)
+             // {
+             //     numericComponent.SetEvent(ntype, value, false);
+             // }
          }
 
          /// <summary>

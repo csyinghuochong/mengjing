@@ -3,7 +3,6 @@ namespace ET.Server
 
     [EntitySystemOf(typeof(StateComponentServer))]
     [FriendOf(typeof(StateComponentServer))]
-    [FriendOf(typeof(NumericComponentServer))]
     //[FriendOf(typeof(SkillPassiveComponent))]
     public static partial class StateComponentServerSystem
     {
@@ -78,7 +77,7 @@ namespace ET.Server
                 return ErrorCode.ERR_CanNotUseSkill_Hung;
             }
 
-            //³ÁÄ¬ºó¿ÉÒÔÆÕÍ¨¹¥»÷ºÍÇ°³å
+            //ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½
             if (self.StateTypeGet(StateTypeEnum.Silence))
             {
                 if (skillConfig.Id != 60000011 && skillConfig.SkillActType != 0)
@@ -171,7 +170,7 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// Ôö¼ÓÄ³¸ö×´Ì¬
+        /// ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½×´Ì¬
         /// </summary>
         /// <param name="nowStateType"></param>
         public static void StateTypeAdd(this StateComponentServer self, long nowStateType, string stateValue = "0")
@@ -179,10 +178,10 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             self.CurrentStateType = self.CurrentStateType | nowStateType;
 
-            //Ñ£ÔÎ×´Ì¬Í£Ö¹µ±Ç°ÒÆ¶¯(·þÎñÆ÷´úÂë)
+            //Ñ£ï¿½ï¿½×´Ì¬Í£Ö¹ï¿½ï¿½Ç°ï¿½Æ¶ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
             if (ErrorCode.ERR_Success != self.CanMove())
             {
-                unit.Stop(0);        //Í£Ö¹µ±Ç°ÒÆ¶¯
+                unit.Stop(0);        //Í£Ö¹ï¿½ï¿½Ç°ï¿½Æ¶ï¿½
             }
             if (nowStateType == StateTypeEnum.Dizziness)
             {
@@ -193,10 +192,10 @@ namespace ET.Server
                 ///unit.GetComponent<BuffManagerComponent>().OnRemoveBuffByState(StateTypeEnum.Dizziness);
             }
 
-            //´ò¶ÏÒ÷³ªÖÐ¼¼ÄÜ
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½
             //unit.GetComponent<SkillManagerComponent>().InterruptSing(0, true);
             //unit.GetComponent<SkillPassiveComponent>().StateTypeAdd(nowStateType);
-            ////·¢ËÍ¸Ä±äÊôÐÔµÄÏà¹ØÏûÏ¢
+            ////ï¿½ï¿½ï¿½Í¸Ä±ï¿½ï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
             //if (self.IsBroadcastType(nowStateType))
             //{
             //    MessageHelper.Broadcast(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateValue = stateValue, StateOperateType = 1, StateTime = 0 });
@@ -220,7 +219,7 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// ÒÆ³ýÄ³¸ö×´Ì¬
+        /// ï¿½Æ³ï¿½Ä³ï¿½ï¿½×´Ì¬
         /// </summary>
         /// <param name="nowStateType"></param>
         public static void StateTypeRemove(this StateComponentServer self, long nowStateType)
@@ -228,7 +227,7 @@ namespace ET.Server
             self.CurrentStateType = self.CurrentStateType & ~nowStateType;
 
 
-            //·¢ËÍ¸Ä±äÊôÐÔµÄÏà¹ØÏûÏ¢
+            //ï¿½ï¿½ï¿½Í¸Ä±ï¿½ï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
             Unit unit = self.GetParent<Unit>();
             if (unit == null || unit.IsDisposed)
                 return;
@@ -247,14 +246,14 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// »ñÈ¡Ä³¸ö×´Ì¬ÊÇ·ñ´æÔÚ
+        /// ï¿½ï¿½È¡Ä³ï¿½ï¿½×´Ì¬ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="nowStateType"></param>
         public static bool StateTypeGet(this StateComponentServer self, long nowStateType)
         {
             long state = (self.CurrentStateType & nowStateType);
             //Log.Debug("nowStateTypes = " + nowStateTypes + " state = " + state);
-            // 0 ±íÊ¾Ã»ÓÐ×´Ì¬   ´óÓÚ0±íÊ¾ÓÐ×´Ì¬
+            // 0 ï¿½ï¿½Ê¾Ã»ï¿½ï¿½×´Ì¬   ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½Ê¾ï¿½ï¿½×´Ì¬
             if (state > 0)
             {
                 return true;
@@ -266,7 +265,7 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// »ñÈ¡µ±Ç°×´Ì¬
+        /// ï¿½ï¿½È¡ï¿½ï¿½Ç°×´Ì¬
         /// </summary>
         /// <returns></returns>
         public static long GetNowStateType(this StateComponentServer self)

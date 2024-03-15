@@ -7,6 +7,22 @@ namespace ET.Server
     [FriendOf(typeof (NumericComponentServer))]
     public static class NumericComponentServerSystem
     {
+
+        public static void Reset(this NumericComponentServer self)
+        {
+            //重置所有属性
+            long max = (int)NumericType.Max;
+            foreach (int key in self.NumericDic.Keys)
+            {
+                //这个范围内的属性为特殊属性不进行重置
+                if (key < max)
+                {
+                    continue;
+                }
+                self.NumericDic[key] = 0;
+            }
+        }
+
         public static float GetAsFloat(this NumericComponentServer self, int numericType)
         {
             return (float)self.GetByKey(numericType) / 10000;
