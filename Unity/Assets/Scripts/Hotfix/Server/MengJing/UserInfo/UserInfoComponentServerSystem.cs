@@ -315,6 +315,11 @@ namespace ET.Server
             return self.UserInfo.Lv;
         }
 
+        public static long GetPiLao(this UserInfoComponentServer self)
+        {
+            return self.UserInfo.PiLao;
+        }
+
         public static int GetCombat(this UserInfoComponentServer self)
         {
             return self.UserInfo.Combat;

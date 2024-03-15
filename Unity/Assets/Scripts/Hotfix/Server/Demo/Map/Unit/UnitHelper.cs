@@ -114,5 +114,53 @@ namespace ET.Server
             }
             return 0;
         }
+        
+        public static int GetMonsterType(this Unit self)
+        {
+            return MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterType;
+        }
+        
+        public static bool IsSceneItem(this Unit self)
+        {
+            if (self.Type != UnitType.Monster)
+            {
+                return false;
+            }
+            return self.GetMonsterType() == MonsterTypeEnum.SceneItem;
+        }
+        
+        public static bool IsSameTeam(this Unit self, Unit other)
+        {
+            if (self.Id == other.Id)
+            {
+                return true;
+            }
+            long teamid_1 = self.GetTeamId();
+            long teamid_2 = other.GetTeamId();
+            return teamid_1 == teamid_2 && teamid_1 != 0;
+        }
+        
+        public static long GetTeamId(this Unit self)
+        {
+            return self.GetComponent<NumericComponentServer>().GetAsInt(NumericType.TeamId);
+        }
+        
+        public static int GetAttackMode(this Unit self)
+        {
+            return self.GetComponent<NumericComponentServer>().GetAsInt(NumericType.AttackMode);
+        }
+        
+        public static long GetUnionId(this Unit self)
+        {
+            return self.GetComponent<NumericComponentServer>().GetAsLong(NumericType.UnionId_0);
+        }
+        
+        public static void SetBornPosition(this Unit self, float3 vector3, bool notice)
+        {
+            NumericComponentServer numericComponent = self.GetComponent<NumericComponentServer>();
+            numericComponent.SetEvent(NumericType.Born_X, (long)(vector3.x * 10000), notice);
+            numericComponent.SetEvent(NumericType.Born_Y, (long)(vector3.y * 10000), notice);
+            numericComponent.SetEvent(NumericType.Born_Z, (long)(vector3.z * 10000), notice);
+        }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ET.Server;
 using Unity.Mathematics;
 
 namespace ET
@@ -50,5 +51,9 @@ namespace ET
         public long AIDelay;
 
         public List<float3> TargetPoint = new List<float3>();
+
+        public Unit LocalDungeonUnit { get; set; }
+
+        public PetComponentServer LocalDungeonUnitPetComponent { get; set; }
     }
 }

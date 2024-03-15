@@ -9,6 +9,8 @@ namespace ET
     public partial class Unit: Entity, IAwake<int>
     {
 
+        public int AI{ get; set; }
+        
         public int Type { get; set; }
 
         public int ConfigId { get; set; } //配置表id
