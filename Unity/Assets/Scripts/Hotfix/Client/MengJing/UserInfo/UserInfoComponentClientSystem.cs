@@ -35,5 +35,30 @@
 
             self.UserInfo.DayItemUse.Add(new KeyValuePairInt() { KeyId = itemId, Value = 1 });
         }
+
+        public static long GetSceneFubenTimes(this UserInfoComponentClient self, int sceneId)
+        {
+            for (int i = 0; i < self.UserInfo.DayFubenTimes.Count; i++)
+            {
+                if (self.UserInfo.DayFubenTimes[i].KeyId == sceneId)
+                {
+                    return self.UserInfo.DayFubenTimes[i].Value;
+                }
+            }
+            return 0;
+        }
+
+        public static void AddSceneFubenTimes(this UserInfoComponentClient self, int sceneId)
+        {
+            for (int i = 0; i < self.UserInfo.DayFubenTimes.Count; i++)
+            {
+                if (self.UserInfo.DayFubenTimes[i].KeyId == sceneId)
+                {
+                    self.UserInfo.DayFubenTimes[i].Value++;
+                    return;
+                }
+            }
+            self.UserInfo.DayFubenTimes.Add(new KeyValuePairInt() { KeyId = sceneId, Value = 1 });
+        }
     }
 }

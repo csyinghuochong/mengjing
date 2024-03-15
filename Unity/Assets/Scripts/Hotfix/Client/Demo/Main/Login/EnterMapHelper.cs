@@ -43,47 +43,46 @@ namespace ET.Client
                 return ErrorCode.ERR_OperationOften;
             }
             mapComponent.LastQuitTime = TimeHelper.ServerNow();
-            if (!SceneConfigHelper.CanTransfer(mapComponent.SceneTypeEnum, newsceneType))
+            if (!SceneConfigHelper.CanTransfer(mapComponent.SceneType, newsceneType))
             {
-                HintHelp.GetInstance().ShowHint("请先退出副本！");
                 return ErrorCode.ERR_RequestExitFuben;
             }
 
-            Unit unit = UnitHelper.GetMyUnitFromZoneScene(zoneScene);
-            if (unit.GetComponent<NumericComponent>().GetAsLong(NumericType.Now_Stall) > 0)
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+            if (unit.GetComponent<NumericComponentClient>().GetAsLong(NumericType.Now_Stall) > 0)
             {
-                HintHelp.GetInstance().ShowHint("请先退出摆摊！");
                 return ErrorCode.ERR_RequestExitFuben;
             }
 
-            UserInfoComponent userInfoComponent = zoneScene.GetComponent<UserInfoComponent>();
+            UserInfoComponentClient userInfoComponent = root.GetComponent<UserInfoComponentClient>();
             if (SceneConfigHelper.UseSceneConfig(newsceneType) && sceneId > 0)
             {
                 SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
                 if (sceneConfig.DayEnterNum > 0 && sceneConfig.DayEnterNum <= userInfoComponent.GetSceneFubenTimes(sceneId))
                 {
-                    HintHelp.GetInstance().ShowHint("次数不足！");
                     return ErrorCode.ERR_TimesIsNot;
                 }
                 if (sceneConfig.EnterLv > userInfoComponent.UserInfo.Lv)
                 {
-                    HintHelp.GetInstance().ShowHint($"{sceneConfig.EnterLv}级开启！");
                     return ErrorCode.ERR_LevelIsNot;
                 }
             }
             if (DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(sceneId))
             {
-                zoneScene.GetComponent<BattleMessageComponent>().LastDungeonId = mapComponent.SceneId;
+                root.GetComponent<BattleMessageComponent>().LastDungeonId = mapComponent.SceneId;
             }
             else
             {
-                zoneScene.GetComponent<BattleMessageComponent>().LastDungeonId = 0;
+                root.GetComponent<BattleMessageComponent>().LastDungeonId = 0;
             }
               
-            Actor_TransferRequest c2M_ItemHuiShouRequest = new Actor_TransferRequest() { SceneType = newsceneType, SceneId = sceneId,  Difficulty = difficulty, paramInfo = paraminfo };
-            Actor_TransferResponse r2c_roleEquip = (Actor_TransferResponse)await zoneScene.GetComponent<SessionComponent>().Session.Call(c2M_ItemHuiShouRequest);
+            C2M_TransferMap c2M_ItemHuiShouRequest = new C2M_TransferMap()
+            { 
+                SceneType = newsceneType, SceneId = sceneId,  Difficulty = difficulty, paramInfo = paraminfo
+            };
+            M2C_TransferMap r2c_roleEquip = (M2C_TransferMap)await root.GetComponent<ClientSenderCompnent>().Call(c2M_ItemHuiShouRequest);
             userInfoComponent.AddSceneFubenTimes(sceneId);
-
+            return ErrorCode.ERR_Success;
         }
 
         public static async ETTask Match(Fiber fiber)

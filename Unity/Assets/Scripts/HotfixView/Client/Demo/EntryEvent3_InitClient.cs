@@ -24,6 +24,7 @@ namespace ET.Client
             root.AddComponent<FriendComponent>();
             root.AddComponent<ChatComponent>();
             root.AddComponent<TaskComponentClient>();
+            root.AddComponent<BattleMessageComponent>();
 
             // 根据配置修改掉Main Fiber的SceneType
             SceneType sceneType = EnumHelper.FromString<SceneType>(globalComponent.GlobalConfig.AppType.ToString());

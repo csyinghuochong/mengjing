@@ -1263,10 +1263,26 @@ namespace ET
 		[MemoryPackOrder(0)]
 		public int RpcId { get; set; }
 
+		[MemoryPackOrder(1)]
+		public int SceneId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int SceneType { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int Difficulty { get; set; }
+
+		[MemoryPackOrder(5)]
+		public string paramInfo { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
 			this.RpcId = default;
+			this.SceneId = default;
+			this.SceneType = default;
+			this.Difficulty = default;
+			this.paramInfo = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}

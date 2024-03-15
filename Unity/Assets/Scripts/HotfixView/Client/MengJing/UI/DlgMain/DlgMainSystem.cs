@@ -168,9 +168,7 @@ namespace ET.Client
         private static void OnAdventureButton(this DlgMain self)
         {
             Log.Debug("进入冒险！！！");
-            EnterMapHelper
-            C2M_TransferMap c2MTransferMap = new();
-            self.Root().GetComponent<ClientSenderCompnent>().Call(c2MTransferMap).Coroutine();
+            EnterMapHelper.RequestTransfer( self.Root(), SceneTypeEnum.LocalDungeon, 1 ).Coroutine();
         }
 
         private static void OnPetFormationButton(this DlgMain self)
