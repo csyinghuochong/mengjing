@@ -10,6 +10,10 @@ namespace ET
         public int SceneType { set; get; }
 
         public long LastQuitTime { set; get; }
+        
+        public int SonSceneId{ set; get; }
+
+        public int NavMeshId { set; get; }
     }
 }
 

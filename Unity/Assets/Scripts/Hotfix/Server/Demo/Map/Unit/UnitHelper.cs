@@ -63,5 +63,56 @@ namespace ET.Server
             return (isNewUnit, unit);
         }
 
+        public static void RecordPostion(this Unit self, int sceneType, int sceneId)
+        {
+            bool record = false;
+            NumericComponentServer numericComponent = self.GetComponent<NumericComponentServer>();
+            if (!SceneConfigHelper.UseSceneConfig(sceneType) || sceneId == 0)
+            {
+                record = false;
+            }
+            else
+            {
+                if (!SceneConfigCategory.Instance.Contain(sceneId))
+                {
+                    record = false;
+                    Log.Debug($"sceneconfig ==null:  sceneType: {sceneType} sceneId: {sceneId}");
+                }
+                else
+                {
+                    record = SceneConfigCategory.Instance.Get(sceneId).IfInitPosi == 1;
+                }
+            }
+            if (record)
+            {
+                numericComponent.Set(NumericType.MainCity_X, self.Position.x);
+                numericComponent.Set(NumericType.MainCity_Y, self.Position.y);
+                numericComponent.Set(NumericType.MainCity_Z, self.Position.z);
+            }
+            else
+            {
+                numericComponent.Set(NumericType.MainCity_X, 0f);
+                numericComponent.Set(NumericType.MainCity_Y, 0f);
+                numericComponent.Set(NumericType.MainCity_Z, 0f);
+            }
+        }
+        
+        public static int GetCurrentTowerId(this Unit self, int sceneType)
+        {
+            NumericComponentServer numericComponent = self.GetComponent<NumericComponentServer>();
+            if (sceneType == SceneTypeEnum.TrialDungeon)
+            {
+                return numericComponent.GetAsInt(NumericType.TrialDungeonId);
+            }
+            if (sceneType == SceneTypeEnum.RandomTower)
+            {
+                return numericComponent.GetAsInt(NumericType.RandomTowerId);
+            }
+            if (sceneType == SceneTypeEnum.Tower)
+            {
+                return numericComponent.GetAsInt(NumericType.TowerId);
+            }
+            return 0;
+        }
     }
 }

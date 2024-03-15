@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using Unity.Mathematics;
+
 namespace ET
 {
     // 客户端挂在ClientScene上，服务端挂在Unit上
@@ -14,11 +17,38 @@ namespace ET
         public int Current;
 
         public long TargetID;
-
-        public double ActDistance;
-
+        
         public double ActRange;
 
         public bool IsRetreat;
+        
+        /// <summary>
+        /// 追击范围，超出则撤退
+        /// </summary>
+        public float ChaseRange;
+        
+        /// <summary>
+        /// 巡逻范围
+        /// </summary>
+        public float PatrolRange;
+        
+        public double ActDistance;
+        
+        public List<int> AISkillIDList = new List<int>();     //当前所有技能
+        
+        public long LastChangeTime;
+        
+        public long LastZhuiJiTime;
+        
+        public float3 TargetZhuiJi;
+        
+        public int SceneType;
+        
+        public bool noCheckStatus;            //检测状态  true 就是不检测 待机除外
+        public int CheckJianGeTimeNum;          //检测间隔时间次数
+
+        public long AIDelay;
+
+        public List<float3> TargetPoint = new List<float3>();
     }
 }
