@@ -119,301 +119,295 @@ namespace ET.Server
              }
          }
 
- public static void OnLogin(this HeroDataComponentServer self, int robotId)
- {
-     Unit unit = self.GetParent<Unit>();
-     NumericComponentServer numericComponent = unit.GetComponent<NumericComponentServer>();
-     numericComponent.SetEvent((int)NumericType.Now_Dead , 0, false);
-     numericComponent.SetEvent((int)NumericType.Now_Damage, 0, false);
-     numericComponent.SetEvent((int)NumericType.Now_Stall, 0, false);
-     numericComponent.SetEvent((int)NumericType.TeamId, 0, false);
-     numericComponent.SetEvent((int)NumericType.Now_Hp, numericComponent.GetAsLong((int)NumericType.Now_MaxHp), false);
-     numericComponent.SetEvent((int)NumericType.Now_Weapon, unit.GetComponent<BagComponentServer>().GetWuqiItemId(), false);
-     numericComponent.SetEvent(NumericType.JueXingAnger, 0, false);
-     numericComponent.SetEvent(NumericType.RunRaceRankId, 0, false);
-     numericComponent.SetEvent(NumericType.ZeroClock, 0, false);
-
-     if (robotId != 0)
-     {
-         RobotConfig robotConfig = RobotConfigCategory.Instance.Get(robotId);
-         numericComponent.SetEvent(NumericType.PointLiLiang, robotConfig.PointList[0], false);
-         numericComponent.SetEvent(NumericType.PointZhiLi, robotConfig.PointList[1], false);
-         numericComponent.SetEvent(NumericType.PointTiZhi, robotConfig.PointList[2], false);
-         numericComponent.SetEvent(NumericType.PointNaiLi, robotConfig.PointList[3], false);
-         numericComponent.SetEvent(NumericType.PointMinJie, robotConfig.PointList[4], false);
-     }
-
-     if (numericComponent.GetAsInt(NumericType.CostTiLi) > 600)
-     {
-         UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
-         Log.Console($"体力消耗异常: {self.DomainZone()}  {userInfoComponent.UserInfo.Name} {numericComponent.GetAsInt(NumericType.CostTiLi)}");
-     }
-
-     if (numericComponent.UpdateNumber < 1)
-     {
-         numericComponent.UpdateNumber = 1;
-         numericComponent.ApplyValue(NumericType.PetExploreLuckly, 100, false);
-     }
-
-     ///赛季数据[赛季开始]
-     long serverTime = TimeHelper.ServerNow();
-     long seasonopenTime = numericComponent.GetAsLong(NumericType.SeasonOpenTime);
-     if (seasonopenTime != 0 && seasonopenTime != SeasonHelper.SeasonOpenTime)
-     {
-         //清空赛季相关数据. 赛季任务 晶核
-         numericComponent.ApplyValue(NumericType.SeasonOpenTime, 0, false);
-
-         Log.Console("清空赛季任务！");
-     }
-
-     if (numericComponent.GetAsInt(NumericType.SkillMakePlan2) == 0)
-     {
-         numericComponent.ApplyValue(NumericType.MakeType_2, 0, false);
-     }
-
-     self.CheckSeasonOpen(false);
- }
-
- public static void ClearSeasonData(this HeroDataComponent self)
- { 
-     
- }
-
- public static void CheckSeasonOpen(this HeroDataComponent self, bool notice)
- {
-     Unit unit = self.GetParent<Unit>();
-     UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
-     NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
-
-     if (numericComponent.GetAsInt(NumericType.SeasonBossFuben) >= 100000)
-     {
-         numericComponent.ApplyValue(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.UserInfo.Lv));
-     }
-
-     if (numericComponent.GetAsInt(NumericType.SeasonBossFuben) >= ConfigHelper.GMDungeonId)
-     {
-         numericComponent.ApplyValue(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.UserInfo.Lv));
-     }
-
-     if (numericComponent.GetAsLong(NumericType.SeasonOpenTime) == 0 && SeasonHelper.IsOpenSeason(userInfoComponent.UserInfo.Lv))
-     {
-         Log.Console($"CheckSeasonOpen: {unit.Id}");
-
-         //刷新boss
-         numericComponent.ApplyValue(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.UserInfo.Lv));
-         numericComponent.ApplyValue(NumericType.SeasonBossRefreshTime, TimeHelper.ServerNow() + TimeHelper.Minute);
-         numericComponent.ApplyValue(NumericType.SeasonOpenTime, SeasonHelper.SeasonOpenTime);
-
-         //刷新任务
-         TaskComponent taskComponent = unit.GetComponent<TaskComponent>();
-         taskComponent.InitSeasonMainTask(notice);
-
-         taskComponent.UpdateSeasonWeekTask(notice); 
-     }
- }
-
- /// <summary>
- /// 重置。隔天登录或者零点刷新
- /// </summary>
- /// <param name="self"></param>
- /// <param name="notice"></param>
- public static void OnZeroClockUpdate(this HeroDataComponent self, bool notice = false)
- {
-     Unit unit = self.GetParent<Unit>();
-     NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
-
-     numericComponent.ApplyValue(NumericType.HongBao, 0, notice);
-     numericComponent.ApplyValue(NumericType.Now_XiLian, 0, notice);
-     numericComponent.ApplyValue(NumericType.PetChouKa, 0, notice);
-     numericComponent.ApplyValue(NumericType.YueKaAward, 0, notice);
-     numericComponent.ApplyValue(NumericType.XiuLian_ExpNumber, 0, notice);
-     numericComponent.ApplyValue(NumericType.XiuLian_CoinNumber, 0, notice);
-     numericComponent.ApplyValue(NumericType.XiuLian_ExpTime, 0, notice);
-     numericComponent.ApplyValue(NumericType.XiuLian_CoinTime, 0, notice);
-     numericComponent.ApplyValue(NumericType.TiLiKillNumber, 0, notice);
-     numericComponent.ApplyValue(NumericType.ChouKa, 0, notice);
-     numericComponent.ApplyValue(NumericType.ExpToGoldTimes, 0, notice);
-     numericComponent.ApplyValue(NumericType.RechargeSign, 0, notice);
-     numericComponent.ApplyValue(NumericType.TeamDungeonTimes, 0, notice);
-     numericComponent.ApplyValue(NumericType.TeamDungeonXieZhu, 0, notice);
-     numericComponent.ApplyValue(NumericType.BattleTodayKill, 0, notice);
-     numericComponent.ApplyValue(NumericType.FubenTimesReset, 0, notice);
-     numericComponent.ApplyValue(NumericType.FenShangSet, 0, notice);
-     numericComponent.ApplyValue(NumericType.ArenaNumber, 0, notice);
-     numericComponent.ApplyValue(NumericType.LocalDungeonTime, 0, notice);
-     numericComponent.ApplyValue(NumericType.TreasureTask, 0, notice);
-     numericComponent.ApplyValue(NumericType.JiaYuanExchangeZiJin, 0, notice);
-     numericComponent.ApplyValue(NumericType.JiaYuanExchangeExp, 0, notice);
-     numericComponent.ApplyValue(NumericType.JiaYuanVisitRefresh, 0, notice);
-     numericComponent.ApplyValue(NumericType.JiaYuanGatherOther, 0, notice);
-     numericComponent.ApplyValue(NumericType.JiaYuanPickOther, 0, notice);
-     numericComponent.ApplyValue(NumericType.UnionDonationNumber, 0, notice);
-     numericComponent.ApplyValue(NumericType.UnionDiamondDonationNumber, 0, notice);
-     numericComponent.ApplyValue(NumericType.RaceDonationNumber, 0, notice);
-     // 重置封印之塔数据
-     numericComponent.ApplyValue(NumericType.JiaYuanPurchaseRefresh, 0, notice);
-     numericComponent.ApplyValue(NumericType.TowerOfSealArrived, 0, notice);
-     numericComponent.ApplyValue(NumericType.TowerOfSealFinished, 0, notice);
-
-     numericComponent.ApplyValue(NumericType.RunRaceRankId, 0, notice);
-     numericComponent.ApplyValue(NumericType.HappyCellIndex, 0, notice);
-     numericComponent.ApplyValue(NumericType.HappyMoveNumber, 0, notice);
-
-     numericComponent.ApplyValue(NumericType.PetMineBattle, 0, notice);
-     numericComponent.ApplyValue(NumericType.PetMineLogin, 0, notice);
-
-     numericComponent.ApplyValue(NumericType.CostTiLi, 0, notice);
-     numericComponent.ApplyValue(NumericType.DrawIndex, 0, notice);
-     numericComponent.ApplyValue(NumericType.DrawReward, 0, notice);
-
-     numericComponent.ApplyValue(NumericType.PetMineReset, 0, notice);
-
-     numericComponent.ApplyValue(NumericType.V1DayCostDiamond, 0, notice);
-     numericComponent.ApplyValue(NumericType.V1ChouKaNumber, 0, notice);
-     numericComponent.ApplyValue(NumericType.V1RechageNumber, 0, notice);
-     numericComponent.ApplyValue(NumericType.PetExploreNumber, 0, notice);
-     numericComponent.ApplyValue(NumericType.PetHeXinExploreNumber, 0, notice);
-     numericComponent.ApplyValue(NumericType.ItemXiLianNumber, 0, notice);
-     
-     int lirun =  (int)(numericComponent.GetAsInt(NumericType.InvestTotal) * 0.25f);
-     numericComponent.ApplyValue(NumericType.InvestTotal, numericComponent.GetAsInt(NumericType.InvestTotal) + lirun, notice);
- }
-
- /// <summary>
- /// 返回主城
- /// </summary>
- /// <param name="self"></param>
- public static void OnReturn(this HeroDataComponent self)
- {
-     Unit unit = self.GetParent<Unit>();
-     NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
-     numericComponent.NumericDic[NumericType.Now_Dead] = 0;
-     numericComponent.NumericDic[NumericType.Now_Damage] = 0;
-     numericComponent.NumericDic[NumericType.BossBelongID] = 0;
-     numericComponent.NumericDic[NumericType.Now_Shield_HP] = 0;
-     numericComponent.NumericDic[NumericType.Now_Shield_MaxHP] = 0;
-     numericComponent.NumericDic[NumericType.Now_Shield_DamgeCostPro] = 0;
-     if (unit.GetComponent<NumericComponent>().GetAsLong(NumericType.Now_Dead) <= 0)
-     {
-         long max_hp = self.Parent.GetComponent<NumericComponent>().GetAsLong(NumericType.Now_MaxHp);
-         unit.GetComponent<NumericComponent>().NumericDic[NumericType.Now_Hp] = max_hp;
-     }
- }
-
- public static void OnResetPoint(this HeroDataComponent self)
- {
-     Unit unit = self.GetParent<Unit>();
-     NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
-     UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
-     numericComponent.ApplyValue(NumericType.PointLiLiang, 0);
-     numericComponent.ApplyValue(NumericType.PointZhiLi, 0);
-     numericComponent.ApplyValue(NumericType.PointTiZhi, 0);
-     numericComponent.ApplyValue(NumericType.PointNaiLi, 0);
-     numericComponent.ApplyValue(NumericType.PointMinJie,0);
-     numericComponent.ApplyValue(NumericType.PointRemain, (userInfoComponent.UserInfo.Lv - 1) * 10);
-     Function_Fight.GetInstance().UnitUpdateProperty_Base(unit, true, true); ;
- }
-
- /// <summary>
- /// 0 不复活 1等待复活
- /// </summary>
- /// <param name="self"></param>
- /// <returns></returns>
- public static int OnWaitRevive(this HeroDataComponent self)
- {
-     Unit unit = self.GetParent<Unit>();
-     if (unit.Type != UnitType.Monster)
-     {
-         return 0;
-     }
-
-     MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
-     int resurrection = (int)monsterConfig.ReviveTime;
-     MapComponent mapComponent = unit.DomainScene().GetComponent<MapComponent>();
-     if (SeasonHelper.SeasonBossId == unit.ConfigId && mapComponent.SceneTypeEnum == (int)SceneTypeEnum.LocalDungeon)
-     {
-         LocalDungeonComponent localDungeon = unit.DomainScene().GetComponent<LocalDungeonComponent>();
-         UserInfoComponent userInfoComponent = localDungeon.MainUnit.GetComponent<UserInfoComponent>();
-         localDungeon.MainUnit.GetComponent<NumericComponent>().ApplyValue(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.UserInfo.Lv));
-         localDungeon.MainUnit.GetComponent<NumericComponent>().ApplyValue(NumericType.SeasonBossRefreshTime, TimeHelper.ServerNow() + resurrection * 1000);
-         resurrection = 0;
-     }
-     if (resurrection == 0)
-     {
-         return 0;
-     }
-  
-     if (monsterConfig.MonsterType != (int)MonsterTypeEnum.Boss)
-     {
-         //unit.DomainScene().GetComponent<YeWaiRefreshComponent>().OnAddRefreshList(unit, resurrection * 1000);
-         if (mapComponent.SceneTypeEnum == (int)SceneTypeEnum.LocalDungeon
-          || mapComponent.SceneTypeEnum == (int)SceneTypeEnum.MiJing
-          || mapComponent.SceneTypeEnum == (int)SceneTypeEnum.RunRace)
+         public static void OnLogin(this HeroDataComponentServer self, int robotId)
          {
-             unit.DomainScene().GetComponent<YeWaiRefreshComponent>().OnAddRefreshList(unit, resurrection * 1000);
-         }
-         return 0;
-     }
-     else
-     {
-         long resurrectionTime = 0;
-         if (mapComponent.SceneTypeEnum == (int)SceneTypeEnum.LocalDungeon)
-         {
-             LocalDungeonComponent localDungeon = unit.DomainScene().GetComponent<LocalDungeonComponent>();
-             UserInfoComponent userInfoComponent = localDungeon.MainUnit.GetComponent<UserInfoComponent>();
-             int killNumber = userInfoComponent.GetMonsterKillNumber(unit.ConfigId)  +  1;
-             int chpaterid = DungeonConfigCategory.Instance.GetChapterByDungeon(mapComponent.SceneId);
-             BossDevelopment bossDevelopment = ConfigHelper.GetBossDevelopmentByKill(chpaterid , killNumber);
-             resurrection = (int)(resurrection * bossDevelopment.ReviveTimeAdd);
+             Unit unit = self.GetParent<Unit>();
+             NumericComponentServer numericComponent = unit.GetComponent<NumericComponentServer>();
+             numericComponent.SetEvent((int)NumericType.Now_Dead , 0, false);
+             numericComponent.SetEvent((int)NumericType.Now_Damage, 0, false);
+             numericComponent.SetEvent((int)NumericType.Now_Stall, 0, false);
+             numericComponent.SetEvent((int)NumericType.TeamId, 0, false);
+             numericComponent.SetEvent((int)NumericType.Now_Hp, numericComponent.GetAsLong((int)NumericType.Now_MaxHp), false);
+             numericComponent.SetEvent((int)NumericType.Now_Weapon, unit.GetComponent<BagComponentServer>().GetWuqiItemId(), false);
+             numericComponent.SetEvent(NumericType.JueXingAnger, 0, false);
+             numericComponent.SetEvent(NumericType.RunRaceRankId, 0, false);
+             numericComponent.SetEvent(NumericType.ZeroClock, 0, false);
 
-             resurrectionTime = TimeHelper.ServerNow() + resurrection * 1000;
-             unit.GetComponent<NumericComponent>().ApplyValue(NumericType.ReviveTime, resurrectionTime);
-             userInfoComponent.OnAddRevive(unit.ConfigId, resurrectionTime);
-             unit.RemoveComponent<ReviveTimeComponent>();
-             unit.AddComponent<ReviveTimeComponent, long>(resurrectionTime);
-
-             userInfoComponent.OnAddFirstWinSelf(unit, localDungeon.FubenDifficulty);
-             FirstWinHelper.SendFirstWinInfo(localDungeon.MainUnit, unit, localDungeon.FubenDifficulty);
-             return 1;
-         }
-         else
-         {
-             if (mapComponent.SceneTypeEnum == (int)SceneTypeEnum.MiJing)
+             if (robotId != 0)
              {
-                 resurrectionTime = TimeHelper.ServerNow() + resurrection * 1000;
-                 unit.GetComponent<NumericComponent>().ApplyValue(NumericType.ReviveTime, resurrectionTime);
+                 RobotConfig robotConfig = RobotConfigCategory.Instance.Get(robotId);
+                 numericComponent.SetEvent(NumericType.PointLiLiang, robotConfig.PointList[0], false);
+                 numericComponent.SetEvent(NumericType.PointZhiLi, robotConfig.PointList[1], false);
+                 numericComponent.SetEvent(NumericType.PointTiZhi, robotConfig.PointList[2], false);
+                 numericComponent.SetEvent(NumericType.PointNaiLi, robotConfig.PointList[3], false);
+                 numericComponent.SetEvent(NumericType.PointMinJie, robotConfig.PointList[4], false);
+             }
 
-                 unit.RemoveComponent<ReviveTimeComponent>();
-                 unit.AddComponent<ReviveTimeComponent, long>(resurrectionTime);
-                 return 1;
+             if (numericComponent.GetAsInt(NumericType.CostTiLi) > 600)
+             {
+                 UserInfoComponentServer userInfoComponent = unit.GetComponent<UserInfoComponentServer>();
+                 Log.Console($"体力消耗异常: {self.Zone()}  {userInfoComponent.GetName()} {numericComponent.GetAsInt(NumericType.CostTiLi)}");
+             }
+
+             ///赛季数据[赛季开始]
+             long serverTime = TimeHelper.ServerNow();
+             long seasonopenTime = numericComponent.GetAsLong(NumericType.SeasonOpenTime);
+             if (seasonopenTime != 0 && seasonopenTime != ConfigData.SeasonOpenTime)
+             {
+                 //清空赛季相关数据. 赛季任务 晶核
+                 numericComponent.SetEvent(NumericType.SeasonOpenTime, 0, false);
+
+                 Log.Console("清空赛季任务！");
+             }
+
+             if (numericComponent.GetAsInt(NumericType.SkillMakePlan2) == 0)
+             {
+                 numericComponent.SetEvent(NumericType.MakeType_2, 0, false);
+             }
+
+             self.CheckSeasonOpen(false);
+         }
+
+         public static void ClearSeasonData(this HeroDataComponentServer self)
+         { 
+             
+         }
+
+         public static void CheckSeasonOpen(this HeroDataComponentServer self, bool notice)
+         {
+             Unit unit = self.GetParent<Unit>();
+             UserInfoComponentServer userInfoComponent = unit.GetComponent<UserInfoComponentServer>();
+             NumericComponentServer numericComponent = unit.GetComponent<NumericComponentServer>();
+
+             if (numericComponent.GetAsInt(NumericType.SeasonBossFuben) >= 100000)
+             {
+                 numericComponent.SetEvent(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
+             }
+
+             if (numericComponent.GetAsInt(NumericType.SeasonBossFuben) >= ConfigHelper.GMDungeonId())
+             {
+                 numericComponent.SetEvent(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
+             }
+
+             if (numericComponent.GetAsLong(NumericType.SeasonOpenTime) == 0 && SeasonHelper.IsOpenSeason(userInfoComponent.GetUserLv()))
+             {
+                 Log.Console($"CheckSeasonOpen: {unit.Id}");
+
+                 //刷新boss
+                 numericComponent.SetEvent(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
+                 numericComponent.SetEvent(NumericType.SeasonBossRefreshTime, TimeHelper.ServerNow() + TimeHelper.Minute, false);
+                 numericComponent.SetEvent(NumericType.SeasonOpenTime, ConfigData.SeasonOpenTime, false);
+
+                 //刷新任务
+                 TaskComponentServer taskComponent = unit.GetComponent<TaskComponentServer>();
+                 taskComponent.InitSeasonMainTask(notice);
+
+                 taskComponent.UpdateSeasonWeekTask(notice); 
              }
          }
-         return 0;
-     }
- }
 
- public static void OnKillZhaoHuan(this HeroDataComponent self, Unit attack)
- {
-     Unit unit = self.GetParent<Unit>();
-     UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
-     if (unitInfoComponent == null)
-     {
-         Log.Debug($"unitInfoComponent == null  {unit.Type } {unit.IsDisposed}");
-         return;
-     }
-     for (int i = unitInfoComponent.ZhaohuanIds.Count - 1; i >= 0; i--)
-     {
-         Unit zhaohuan = unit.GetParent<UnitComponent>().Get(unitInfoComponent.ZhaohuanIds[i]);
-         if (zhaohuan == null)
+         /// <summary>
+         /// 重置。隔天登录或者零点刷新
+         /// </summary>
+         /// <param name="self"></param>
+         /// <param name="notice"></param>
+         public static void OnZeroClockUpdate(this HeroDataComponentServer self, bool notice = false)
          {
-             continue;
+             Unit unit = self.GetParent<Unit>();
+             NumericComponentServer numericComponent = unit.GetComponent<NumericComponentServer>();
+
+             numericComponent.SetEvent(NumericType.HongBao, 0, notice);
+             numericComponent.SetEvent(NumericType.Now_XiLian, 0, notice);
+             numericComponent.SetEvent(NumericType.PetChouKa, 0, notice);
+             numericComponent.SetEvent(NumericType.YueKaAward, 0, notice);
+             numericComponent.SetEvent(NumericType.XiuLian_ExpNumber, 0, notice);
+             numericComponent.SetEvent(NumericType.XiuLian_CoinNumber, 0, notice);
+             numericComponent.SetEvent(NumericType.XiuLian_ExpTime, 0, notice);
+             numericComponent.SetEvent(NumericType.XiuLian_CoinTime, 0, notice);
+             numericComponent.SetEvent(NumericType.TiLiKillNumber, 0, notice);
+             numericComponent.SetEvent(NumericType.ChouKa, 0, notice);
+             numericComponent.SetEvent(NumericType.ExpToGoldTimes, 0, notice);
+             numericComponent.SetEvent(NumericType.RechargeSign, 0, notice);
+             numericComponent.SetEvent(NumericType.TeamDungeonTimes, 0, notice);
+             numericComponent.SetEvent(NumericType.TeamDungeonXieZhu, 0, notice);
+             numericComponent.SetEvent(NumericType.BattleTodayKill, 0, notice);
+             numericComponent.SetEvent(NumericType.FubenTimesReset, 0, notice);
+             numericComponent.SetEvent(NumericType.FenShangSet, 0, notice);
+             numericComponent.SetEvent(NumericType.ArenaNumber, 0, notice);
+             numericComponent.SetEvent(NumericType.LocalDungeonTime, 0, notice);
+             numericComponent.SetEvent(NumericType.TreasureTask, 0, notice);
+             numericComponent.SetEvent(NumericType.JiaYuanExchangeZiJin, 0, notice);
+             numericComponent.SetEvent(NumericType.JiaYuanExchangeExp, 0, notice);
+             numericComponent.SetEvent(NumericType.JiaYuanVisitRefresh, 0, notice);
+             numericComponent.SetEvent(NumericType.JiaYuanGatherOther, 0, notice);
+             numericComponent.SetEvent(NumericType.JiaYuanPickOther, 0, notice);
+             numericComponent.SetEvent(NumericType.UnionDonationNumber, 0, notice);
+             numericComponent.SetEvent(NumericType.UnionDiamondDonationNumber, 0, notice);
+             numericComponent.SetEvent(NumericType.RaceDonationNumber, 0, notice);
+             // 重置封印之塔数据
+             numericComponent.SetEvent(NumericType.JiaYuanPurchaseRefresh, 0, notice);
+             numericComponent.SetEvent(NumericType.TowerOfSealArrived, 0, notice);
+             numericComponent.SetEvent(NumericType.TowerOfSealFinished, 0, notice);
+
+             numericComponent.SetEvent(NumericType.RunRaceRankId, 0, notice);
+             numericComponent.SetEvent(NumericType.HappyCellIndex, 0, notice);
+             numericComponent.SetEvent(NumericType.HappyMoveNumber, 0, notice);
+
+             numericComponent.SetEvent(NumericType.PetMineBattle, 0, notice);
+             numericComponent.SetEvent(NumericType.PetMineLogin, 0, notice);
+
+             numericComponent.SetEvent(NumericType.CostTiLi, 0, notice);
+             numericComponent.SetEvent(NumericType.DrawIndex, 0, notice);
+             numericComponent.SetEvent(NumericType.DrawReward, 0, notice);
+
+             numericComponent.SetEvent(NumericType.PetMineReset, 0, notice);
+
+             numericComponent.SetEvent(NumericType.V1DayCostDiamond, 0, notice);
+             numericComponent.SetEvent(NumericType.V1ChouKaNumber, 0, notice);
+             numericComponent.SetEvent(NumericType.V1RechageNumber, 0, notice);
+             numericComponent.SetEvent(NumericType.PetExploreNumber, 0, notice);
+             numericComponent.SetEvent(NumericType.PetHeXinExploreNumber, 0, notice);
+             numericComponent.SetEvent(NumericType.ItemXiLianNumber, 0, notice);
+             
+             int lirun =  (int)(numericComponent.GetAsInt(NumericType.InvestTotal) * 0.25f);
+             numericComponent.SetEvent(NumericType.InvestTotal, numericComponent.GetAsInt(NumericType.InvestTotal) + lirun, notice);
          }
-         //zhaohuan.GetComponent<SkillPassiveComponent>()?.Stop();
-         //zhaohuan.GetComponent<NumericComponent>().ApplyChange(args.Attack, NumericType.Now_Hp, -1000000, args.SkillId);
-         zhaohuan.GetComponent<HeroDataComponent>().OnDead(attack!=null ? attack : zhaohuan);
-     }
-     unitInfoComponent.ZhaohuanIds.Clear();
- }
+
+         /// <summary>
+         /// 返回主城
+         /// </summary>
+         /// <param name="self"></param>
+         public static void OnReturn(this HeroDataComponentServer self)
+         {
+             Unit unit = self.GetParent<Unit>();
+             NumericComponentServer numericComponent = unit.GetComponent<NumericComponentServer>();
+             numericComponent.NumericDic[NumericType.Now_Dead] = 0;
+             numericComponent.NumericDic[NumericType.Now_Damage] = 0;
+             numericComponent.NumericDic[NumericType.BossBelongID] = 0;
+             numericComponent.NumericDic[NumericType.Now_Shield_HP] = 0;
+             numericComponent.NumericDic[NumericType.Now_Shield_MaxHP] = 0;
+             numericComponent.NumericDic[NumericType.Now_Shield_DamgeCostPro] = 0;
+             if (unit.GetComponent<NumericComponentServer>().GetAsLong(NumericType.Now_Dead) <= 0)
+             {
+                 long max_hp = self.Parent.GetComponent<NumericComponentServer>().GetAsLong(NumericType.Now_MaxHp);
+                 unit.GetComponent<NumericComponentServer>().NumericDic[NumericType.Now_Hp] = max_hp;
+             }
+         }
+
+         public static void OnResetPoint(this HeroDataComponentServer self)
+         {
+             Unit unit = self.GetParent<Unit>();
+             NumericComponentServer numericComponent = unit.GetComponent<NumericComponentServer>();
+             UserInfoComponentServer userInfoComponent = unit.GetComponent<UserInfoComponentServer>();
+             numericComponent.SetEvent(NumericType.PointLiLiang, 0, false);
+             numericComponent.SetEvent(NumericType.PointZhiLi, 0, false);
+             numericComponent.SetEvent(NumericType.PointTiZhi, 0, false);
+             numericComponent.SetEvent(NumericType.PointNaiLi, 0, false);
+             numericComponent.SetEvent(NumericType.PointMinJie,0, false);
+             numericComponent.SetEvent(NumericType.PointRemain, (userInfoComponent.GetUserLv()- 1) * 10, false);
+             Function_Fight.UnitUpdateProperty_Base(unit, true, true); ;
+         }
+
+         /// <summary>
+         /// 0 不复活 1等待复活
+         /// </summary>
+         /// <param name="self"></param>
+         /// <returns></returns>
+         public static int OnWaitRevive(this HeroDataComponentServer self)
+         {
+             Unit unit = self.GetParent<Unit>();
+             if (unit.Type != UnitType.Monster)
+             {
+                 return 0;
+             }
+
+             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+             int resurrection = (int)monsterConfig.ReviveTime;
+             MapComponent mapComponent = unit.Root().GetComponent<MapComponent>();
+             if (ConfigData.SeasonBossId == unit.ConfigId && mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
+             {
+                 LocalDungeonComponent localDungeon = unit.Root().GetComponent<LocalDungeonComponent>();
+                 UserInfoComponentServer userInfoComponent = localDungeon.MainUnit.GetComponent<UserInfoComponentServer>();
+                 localDungeon.MainUnit.GetComponent<NumericComponentServer>().SetEvent(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
+                 localDungeon.MainUnit.GetComponent<NumericComponentServer>().SetEvent(NumericType.SeasonBossRefreshTime, TimeHelper.ServerNow() + resurrection * 1000, false);
+                 resurrection = 0;
+             }
+             if (resurrection == 0)
+             {
+                 return 0;
+             }
+          
+             if (monsterConfig.MonsterType != (int)MonsterTypeEnum.Boss)
+             {
+                 if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon
+                  || mapComponent.SceneType == (int)SceneTypeEnum.MiJing
+                  || mapComponent.SceneType == (int)SceneTypeEnum.RunRace)
+                 {
+                     //unit.Root().GetComponent<YeWaiRefreshComponent>().OnAddRefreshList(unit, resurrection * 1000);
+                 }
+                 return 0;
+             }
+             else
+             {
+                 long resurrectionTime = 0;
+                 if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
+                 {
+                     LocalDungeonComponent localDungeon = unit.Root().GetComponent<LocalDungeonComponent>();
+                     UserInfoComponentServer userInfoComponent = localDungeon.MainUnit.GetComponent<UserInfoComponentServer>();
+                     int killNumber = userInfoComponent.GetMonsterKillNumber(unit.ConfigId)  +  1;
+                     int chpaterid = DungeonConfigCategory.Instance.GetChapterByDungeon(mapComponent.SceneId);
+                     BossDevelopment bossDevelopment = ConfigHelper.GetBossDevelopmentByKill(chpaterid , killNumber);
+                     resurrection = (int)(resurrection * bossDevelopment.ReviveTimeAdd);
+
+                     resurrectionTime = TimeHelper.ServerNow() + resurrection * 1000;
+                     unit.GetComponent<NumericComponentServer>().SetEvent(NumericType.ReviveTime, resurrectionTime, false);
+                     userInfoComponent.OnAddRevive(unit.ConfigId, resurrectionTime);
+                     unit.RemoveComponent<ReviveTimeComponent>();
+                     unit.AddComponent<ReviveTimeComponent, long>(resurrectionTime);
+
+                     userInfoComponent.OnAddFirstWinSelf(unit, localDungeon.FubenDifficulty);
+                     FirstWinHelper.SendFirstWinInfo(localDungeon.MainUnit, unit, localDungeon.FubenDifficulty);
+                     return 1;
+                 }
+                 else
+                 {
+                     if (mapComponent.SceneType == (int)SceneTypeEnum.MiJing)
+                     {
+                         resurrectionTime = TimeHelper.ServerNow() + resurrection * 1000;
+                         unit.GetComponent<NumericComponentServer>().Set(NumericType.ReviveTime, resurrectionTime);
+
+                         unit.RemoveComponent<ReviveTimeComponent>();
+                         unit.AddComponent<ReviveTimeComponent, long>(resurrectionTime);
+                         return 1;
+                     }
+                 }
+                 return 0;
+             }
+         }
+
+         public static void OnKillZhaoHuan(this HeroDataComponentServer self, Unit attack)
+         {
+             Unit unit = self.GetParent<Unit>();
+             UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
+             if (unitInfoComponent == null)
+             {
+                 Log.Debug($"unitInfoComponent == null  {unit.Type } {unit.IsDisposed}");
+                 return;
+             }
+
+             List<long> zhaohuanids = unitInfoComponent.GetZhaoHuanList();
+             for (int i = zhaohuanids.Count - 1; i >= 0; i--)
+             {
+                 Unit zhaohuan = unit.GetParent<UnitComponent>().Get(zhaohuanids[i]);
+                 if (zhaohuan == null)
+                 {
+                     continue;
+                 }
+                 
+                 //zhaohuan.GetComponent<HeroDataComponentServer>().OnDead(attack!=null ? attack : zhaohuan);
+             }
+             zhaohuanids.Clear();
+         }
 
  public static void PlayDeathSkill(this HeroDataComponent self,Unit attack)
  {
