@@ -273,7 +273,7 @@ namespace ET.Server
                             }
                         }
 
-                        LocalDungeonComponent localDungeon = unit.DomainScene().GetComponent<LocalDungeonComponent>();
+                        LocalDungeonComponent localDungeon = unit.Root().GetComponent<LocalDungeonComponent>();
                         request.Difficulty = localDungeon != null ? localDungeon.FubenDifficulty : request.Difficulty;
                         unit.GetComponent<SkillManagerComponent>()?.OnFinish(false);
                         int errorCode = await TransferHelper.LocalDungeonTransfer(unit, request.SceneId, int.Parse(request.paramInfo), request.Difficulty);
@@ -443,7 +443,7 @@ namespace ET.Server
             MapComponent mapComponent = unit.Root().GetComponent<MapComponent>();
             int sceneTypeEnum = mapComponent.SceneType;
             long userId = unit.Id;
-            unit.GetComponent<UnitInfoComponent>().LastDungeonId = 0;
+            //unit.GetComponent<UnitInfoComponent>().LastDungeonId = 0;
             //传送回主场景
             ActorId mapInstanceId = UnitCacheHelper.MainCityServerId(unit.Zone());
             //动态删除副本

@@ -162,5 +162,13 @@ namespace ET.Server
             numericComponent.SetEvent(NumericType.Born_Y, (long)(vector3.y * 10000), notice);
             numericComponent.SetEvent(NumericType.Born_Z, (long)(vector3.z * 10000), notice);
         }
+        
+        public static float3 GetBornPostion(this Unit self)
+        {
+            NumericComponentServer numericComponent = self.GetComponent<NumericComponentServer>();
+            return new float3(numericComponent.GetAsFloat(NumericType.Born_X),
+                numericComponent.GetAsFloat(NumericType.Born_Y),
+                numericComponent.GetAsFloat(NumericType.Born_Z));
+        }
     }
 }

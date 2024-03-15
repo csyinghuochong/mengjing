@@ -47,6 +47,11 @@ namespace ET.Server
             self.Insert(numericType, value, notice);
         }
 
+        public static void SetEvent(this NumericComponentServer self, int numericType, double value, bool notice)
+        {
+            self.Insert(numericType, (long)(value * 10000), notice);
+        }
+        
         public static void Insert(this NumericComponentServer self, int numericType, long value, bool isPublicEvent = true)
         {
             long oldValue = self.GetByKey(numericType);

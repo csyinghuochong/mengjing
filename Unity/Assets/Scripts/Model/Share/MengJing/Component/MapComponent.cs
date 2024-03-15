@@ -1,3 +1,5 @@
+using NLog.Targets.Wrappers;
+
 namespace ET
 {
     
@@ -14,6 +16,8 @@ namespace ET
         public int SonSceneId{ set; get; }
 
         public int NavMeshId { set; get; }
+
+        public int FubenDifficulty { set; get; }
     }
 }
 

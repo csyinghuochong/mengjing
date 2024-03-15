@@ -338,6 +338,11 @@ namespace ET
             self.Current = -1;
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
-        
+
+        public static float GetActRange(this AIComponent self)
+        {
+            return self.ActRange;
+        }
+
     }
 } 

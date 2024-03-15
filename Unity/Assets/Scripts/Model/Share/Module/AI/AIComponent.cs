@@ -18,8 +18,8 @@ namespace ET
         public int Current;
 
         public long TargetID;
-        
-        public double ActRange;
+
+        public float ActRange { get; set; }
 
         public bool IsRetreat;
         

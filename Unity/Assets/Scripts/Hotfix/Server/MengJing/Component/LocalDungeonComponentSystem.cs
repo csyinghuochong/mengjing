@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -115,16 +116,16 @@ namespace ET.Server
 
               DungeonTransferConfig dungeonTransferConfig = DungeonTransferConfigCategory.Instance.Get(transferId);
               int[] position = dungeonTransferConfig.Position;
-              Vector3 vector3 = new Vector3(position[0] * 0.01f, position[1] * 0.01f, position[2] * 0.01f);
+              float3 vector3 = new float3(position[0] * 0.01f, position[1] * 0.01f, position[2] * 0.01f);
               //创建传送点Unit
-              Unit chuansong = self.DomainScene().GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), 1);
-              self.DomainScene().GetComponent<UnitComponent>().Add(chuansong);
+              Unit chuansong = self.Root().GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), 1);
+              self.Root().GetComponent<UnitComponent>().Add(chuansong);
               chuansong.AddComponent<ChuansongComponent>();
               UnitInfoComponent unitInfoComponent = chuansong.AddComponent<UnitInfoComponent>();
               chuansong.ConfigId = transferId;
               chuansong.Type = UnitType.Chuansong;
               chuansong.Position = vector3;
-              chuansong.AddComponent<AOIEntity, int, Vector3>(9 * 1000, chuansong.Position);
+              chuansong.AddComponent<AOIEntity, int, float3>(9 * 1000, chuansong.Position);
           }
       }
       

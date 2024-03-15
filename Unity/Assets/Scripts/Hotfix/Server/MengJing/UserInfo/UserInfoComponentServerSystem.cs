@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ET.Server
 {
@@ -514,6 +515,85 @@ namespace ET.Server
             //M2C_FirstWinSelfUpdateMessage m2C_FirstWinSelfUpdateMessage = new M2C_FirstWinSelfUpdateMessage() { FirstWinInfos = self.UserInfo.FirstWinSelf  };
             //MessageHelper.SendToClient( self.GetParent<Unit>(), m2C_FirstWinSelfUpdateMessage);
         }
-        
+
+
+         public static int GetRandomMonsterId(this UserInfoComponentServer self)
+         {
+             List<KeyValuePairInt> dayMonster = self.UserInfo.DayMonsters;
+             List<DayMonsters> dayMonsterConfig = GlobalValueConfigCategory.Instance.DayMonsterList;
+
+             for (int i = 0; i < dayMonsterConfig.Count; i++)
+             {
+                 if (RandomHelper.RandFloat01() > dayMonsterConfig[i].GaiLv)
+                 {
+                     continue;
+                 }
+
+                 KeyValuePairInt keyValuePairInt = null;
+                 for (int d = 0; d < dayMonster.Count; d++)
+                 {
+                     if (dayMonster[d].KeyId != dayMonsterConfig[i].MonsterId)
+                     {
+                         continue;
+                     }
+                     keyValuePairInt = dayMonster[d];
+                 }
+                 if (keyValuePairInt == null)
+                 {
+                     keyValuePairInt = new KeyValuePairInt() { KeyId = dayMonsterConfig[i].MonsterId, Value = 0 };
+                     dayMonster.Add(keyValuePairInt);
+                 }
+                 if (keyValuePairInt.Value < dayMonsterConfig[i].TotalNumber)
+                 {
+                     keyValuePairInt.Value++;
+                     return dayMonsterConfig[i].MonsterId;
+                 }
+             }
+
+             return 0;
+         }
+
+         public static bool IsCheskOpen(this UserInfoComponentServer self, int fubenId, int monsterId)
+         {
+             List<KeyValuePair> chestList = self.UserInfo.OpenChestList;
+             for (int i = 0; i < chestList.Count; i++)
+             {
+                 if (chestList[i].KeyId == fubenId)
+                 {
+                     return chestList[i].Value.Contains(monsterId.ToString());
+                 }
+             }
+             return false;
+         }
+         
+         public static int GetRandomJingLingId(this UserInfoComponentServer self)
+         {
+             List<DayJingLing> dayMonsterConfig = GlobalValueConfigCategory.Instance.DayJingLingList;
+             List<int> dayMonster = self.UserInfo.DayJingLing;
+             for(int i = 0; i < dayMonsterConfig.Count; i++)
+             {
+                 if (RandomHelper.RandFloat01() > dayMonsterConfig[i].GaiLv)
+                 {
+                     continue;
+                 }
+                 if (dayMonster.Count <= i)
+                 {
+                     for (int d = dayMonster.Count; d < i+1; d++)
+                     {
+                         dayMonster.Add(0);
+                     }
+                 }
+                 if (dayMonster[i] >= dayMonsterConfig[i].TotalNumber)
+                 {
+                     continue;
+                 }
+
+                 dayMonster[i]++;
+                 int randomIndex = RandomHelper.RandomByWeight(dayMonsterConfig[i].Weights);
+                 return dayMonsterConfig[i].MonsterId[randomIndex];
+             }
+
+             return 0;
+         }
     }
 }
