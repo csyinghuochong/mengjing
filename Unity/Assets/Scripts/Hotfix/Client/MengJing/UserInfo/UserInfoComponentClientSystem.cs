@@ -9,6 +9,11 @@
         {
         }
 
+        public static int GetUserLv(this UserInfoComponentClient self)
+        {
+            return self.UserInfo.Lv;
+        }
+
         public static int GetDayItemUse(this UserInfoComponentClient self, int mysteryId)
         {
             for (int i = 0; i < self.UserInfo.DayItemUse.Count; i++)

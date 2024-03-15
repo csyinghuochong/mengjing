@@ -62,18 +62,18 @@ namespace ET.Client
                 {
                     return ErrorCode.ERR_TimesIsNot;
                 }
-                if (sceneConfig.EnterLv > userInfoComponent.UserInfo.Lv)
+                if (sceneConfig.EnterLv > userInfoComponent.GetUserLv())
                 {
                     return ErrorCode.ERR_LevelIsNot;
                 }
             }
             if (DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(sceneId))
             {
-                root.GetComponent<BattleMessageComponent>().LastDungeonId = mapComponent.SceneId;
+                root.GetComponent<BattleMessageComponent>().SetLastDungeonId(mapComponent.SceneId);
             }
             else
             {
-                root.GetComponent<BattleMessageComponent>().LastDungeonId = 0;
+                root.GetComponent<BattleMessageComponent>().SetLastDungeonId(0);
             }
               
             C2M_TransferMap c2M_ItemHuiShouRequest = new C2M_TransferMap()
