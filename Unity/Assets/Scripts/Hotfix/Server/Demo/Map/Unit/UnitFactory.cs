@@ -165,12 +165,12 @@ namespace ET.Server
                  unit.AI = ai;
                  unit.AddComponent<ObjectWait>();
                  unit.AddComponent<MoveComponent>();
-                 unit.AddComponent<SkillManagerComponent>();
+                 unit.AddComponent<SkillComponentServer>();
                  unit.AddComponent<SkillPassiveComponent>();
-                 unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
+                 unit.AddComponent<PathfindingComponent, string>(scene.GetComponent<MapComponent>().NavMeshId.ToString());
                  //添加其他组件
                  unit.AddComponent<StateComponentServer>();         //添加状态组件
-                 unit.AddComponent<BuffManagerComponent>();      //添加Buff管理器
+                 unit.AddComponent<BuffComponentServer>();      //添加Buff管理器
                  unit.GetComponent<SkillPassiveComponent>().UpdateMonsterPassiveSkill();
                  unit.GetComponent<SkillPassiveComponent>().Activeted();
                  numericComponent.Set(NumericType.MasterId, createMonsterInfo.MasterID);

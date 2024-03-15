@@ -316,9 +316,19 @@ namespace ET.Server
             return self.UserInfo.Lv;
         }
 
+        public static void SetUserLv(this UserInfoComponentServer self, int lv)
+        {
+            self.UserInfo.Lv = lv;
+        }
+
         public static long GetPiLao(this UserInfoComponentServer self)
         {
             return self.UserInfo.PiLao;
+        }
+
+        public static long GetGold(this UserInfoComponentServer self)
+        {
+            return self.UserInfo.Gold;
         }
 
         public static int GetCombat(this UserInfoComponentServer self)

@@ -275,12 +275,12 @@ namespace ET.Server
 
                         LocalDungeonComponent localDungeon = unit.Root().GetComponent<LocalDungeonComponent>();
                         request.Difficulty = localDungeon != null ? localDungeon.FubenDifficulty : request.Difficulty;
-                        unit.GetComponent<SkillManagerComponent>()?.OnFinish(false);
-                        int errorCode = await TransferHelper.LocalDungeonTransfer(unit, request.SceneId, int.Parse(request.paramInfo), request.Difficulty);
-                        if (errorCode != ErrorCode.ERR_Success)
-                        {
-                            return errorCode;
-                        }
+                        //unit.GetComponent<SkillComponentServer>()?.OnFinish(false);
+                        // int errorCode = await TransferHelper.LocalDungeonTransfer(unit, request.SceneId, int.Parse(request.paramInfo), request.Difficulty);
+                        // if (errorCode != ErrorCode.ERR_Success)
+                        // {
+                        //     return errorCode;
+                        // }
                         break;
                     case SceneTypeEnum.BaoZang:
                     case SceneTypeEnum.MiJing:
@@ -435,7 +435,7 @@ namespace ET.Server
         {
             await unit.Fiber().WaitFrameFinish();
 
-            await TransferHelper.Transfer(unit, sceneInstanceId, sceneName);
+            await TransferHelper.Transfer(unit, sceneInstanceId, SceneTypeEnum.MainCityScene, 101,  1, "0");
         }
         
         public static async ETTask MainCityTransfer(Unit unit)

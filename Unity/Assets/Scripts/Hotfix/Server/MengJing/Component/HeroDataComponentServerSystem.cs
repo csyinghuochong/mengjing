@@ -47,7 +47,7 @@ namespace ET.Server
              long yuekeEndTime = numericComponent.GetAsLong(NumericType.YueKaEndTime) - TimeHelper.ServerNow();
              if (yuekeEndTime > 0)
              {
-                 int leftDay = Mathf.CeilToInt(yuekeEndTime * 1f / TimeHelper.OneDay);
+                 int leftDay = (int)math.ceil(yuekeEndTime * 1f / TimeHelper.OneDay);
                  leftDay = math.min(7, leftDay);
                  numericComponent.Set(NumericType.YueKaEndTime, 0);
                  numericComponent.Set(NumericType.YueKaRemainTimes, leftDay);

@@ -120,7 +120,6 @@ namespace ET.Server
               //创建传送点Unit
               Unit chuansong = self.Root().GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), 1);
               self.Root().GetComponent<UnitComponent>().Add(chuansong);
-              chuansong.AddComponent<ChuansongComponent>();
               UnitInfoComponent unitInfoComponent = chuansong.AddComponent<UnitInfoComponent>();
               chuansong.ConfigId = transferId;
               chuansong.Type = UnitType.Chuansong;

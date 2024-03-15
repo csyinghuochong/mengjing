@@ -4,7 +4,6 @@ namespace ET.Server
 {
     [EntitySystemOf(typeof (BagComponentServer))]
     [FriendOf(typeof (BagComponentServer))]
-    [FriendOf(typeof(UserInfoComponentServer))]
     public static partial class BagComponentServerSystem
     {
         [EntitySystem]
@@ -224,8 +223,8 @@ namespace ET.Server
    public static void CheckValiedItem(this BagComponentServer self, List<BagInfo> bagInfos)
    {
        Unit unit = self.GetParent<Unit>();
-       int occ = unit.GetComponent<UserInfoComponentServer>().UserInfo.Occ;
-       int occTwo = unit.GetComponent<UserInfoComponentServer>().UserInfo.OccTwo;
+       int occ = unit.GetComponent<UserInfoComponentServer>().GetOcc();
+       int occTwo = unit.GetComponent<UserInfoComponentServer>().GetOccTwo();
        for (int i = bagInfos.Count - 1; i >= 0; i--)
        {
            if (!ItemConfigCategory.Instance.Contain(bagInfos[i].ItemID))
@@ -349,22 +348,22 @@ namespace ET.Server
                }
                break;
            case UserDataType.Gold:
-               number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.Gold;
+               number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().GetGold();
                break;
            case UserDataType.Diamond:
-               number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.Diamond;
+               //number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.Diamond;
                break;
            case UserDataType.RongYu:
-               number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.RongYu;
+               //number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.RongYu;
                break;
            case UserDataType.JiaYuanFund:
-               number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.JiaYuanFund;
+               //number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.JiaYuanFund;
                break;
            case UserDataType.UnionContri:
-               number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.UnionZiJin;
+               //number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.UnionZiJin;
                break;
            case UserDataType.SeasonCoin:
-               number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.SeasonCoin;
+               //number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.SeasonCoin;
                break;
            default:
                break;
@@ -629,9 +628,9 @@ namespace ET.Server
            UserInfoComponentServer userInfoComponentServer = unit.GetComponent<UserInfoComponentServer>();
            RobotConfig robotConfig = RobotConfigCategory.Instance.Get(robotId);
 
-           if (robotConfig.Behaviour != 1 && robotConfig.Level > userInfoComponentServer.UserInfo.Lv)
+           if (robotConfig.Behaviour != 1 && robotConfig.Level > userInfoComponentServer.GetUserLv())
            {
-               userInfoComponentServer.UserInfo.Lv = robotConfig.Level;
+               userInfoComponentServer.SetUserLv(robotConfig.Level);
            }
            if (robotConfig.EquipList != null)
            {
@@ -639,7 +638,7 @@ namespace ET.Server
            }
            else
            {
-               equipList = ItemConfigCategory.Instance.GetRandomEquipList(userInfoComponentServer.UserInfo.Occ, userInfoComponentServer.UserInfo.Lv);
+               equipList = ItemConfigCategory.Instance.GetRandomEquipList(userInfoComponentServer.GetOcc(), userInfoComponentServer.GetUserLv());
            }
            for (int i = 0; i < equipList.Length; i++)
            {
@@ -830,7 +829,7 @@ namespace ET.Server
        string[] getWayInfo = getWay.Split('_');
        int getType = int.Parse(getWayInfo[0]);
        Unit unit = self.GetParent<Unit>();
-       bool isRobot = unit.GetComponent<UserInfoComponentServer>().UserInfo.RobotId > 0;
+       bool isRobot = unit.GetComponent<UserInfoComponentServer>().IsRobot();
        if (isRobot && getType == ItemGetWay.PickItem)
        {
            return true;
@@ -932,11 +931,11 @@ namespace ET.Server
            int userDataType = ItemHelper.GetItemToUserDataType(itemID);
            if (userDataType == UserDataType.Gold && rewardItems[i].ItemNum > 1000000)
            {
-               Log.Warning($"[获取金币]UserDataType.Gold  {unit.Id} {getType} {unit.GetComponent<UserInfoComponentServer>().UserName} {rewardItems[i].ItemNum}");
+               Log.Warning($"[获取金币]UserDataType.Gold  {unit.Id} {getType} {unit.GetComponent<UserInfoComponentServer>().GetName()} {rewardItems[i].ItemNum}");
            }
            if (userDataType == UserDataType.Diamond)
            {
-               Log.Warning($"[获取钻石]UserDataType.Diamond  {unit.Id} {getType} {unit.GetComponent<UserInfoComponentServer>().UserName} {rewardItems[i].ItemNum}");
+               Log.Warning($"[获取钻石]UserDataType.Diamond  {unit.Id} {getType} {unit.GetComponent<UserInfoComponentServer>().GetName()} {rewardItems[i].ItemNum}");
            }
            if (userDataType == UserDataType.PiLao)
            {
@@ -1172,7 +1171,7 @@ namespace ET.Server
                //拾取到橙色装备
                if (itemCof.ItemType == 3 && itemCof.ItemQuality >= 5 && getType == ItemGetWay.PickItem)
                {
-                   string name = unit.GetComponent<UserInfoComponentServer>().UserInfo.Name;
+                   string name = unit.GetComponent<UserInfoComponentServer>().GetName();
                    string noticeContent = $"恭喜玩家 {name} 获得装备: <color=#{ComHelp.QualityReturnColor(5)}>{itemCof.ItemName}</color>";
                    //ServerMessageHelper.SendBroadMessage(self.Zone(), NoticeType.Notice, noticeContent);
                }
@@ -1181,8 +1180,8 @@ namespace ET.Server
                if (itemCof.ItemType == ItemTypeEnum.Equipment && itemCof.EquipType != 101
                 && itemCof.ItemQuality >= 5 && itemCof.UseLv >= 60)
                {
-                   int occ = unit.GetComponent<UserInfoComponentServer>().UserInfo.Occ;
-                   int occTwo = unit.GetComponent<UserInfoComponentServer>().UserInfo.OccTwo;
+                   int occ = unit.GetComponent<UserInfoComponentServer>().GetOcc();
+                   int occTwo = unit.GetComponent<UserInfoComponentServer>().GetOccTwo();
                    int skillid = 0;// XiLianHelper.XiLianChuanChengJianDing(itemCof, occ, occTwo);
                    if (skillid != 0)
                    {
