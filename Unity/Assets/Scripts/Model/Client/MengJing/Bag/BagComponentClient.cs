@@ -8,5 +8,14 @@ namespace ET.Client
     {
         public List<BagInfo>[] AllItemList;
         public bool RealAddItem;
+        /// <summary>
+        /// ItemLocType.ItemWareHouse1 之后的所有仓库（购买格子数量）
+        /// </summary>
+        public List<int> WarehouseAddedCell = new List<int>();
+
+        /// <summary>
+        /// 附加格子，ItemLocType.ItemBag开始
+        /// </summary>
+        public List<int> AdditionalCellNum = new List<int>();
     }
 }

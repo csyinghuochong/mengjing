@@ -34,5 +34,57 @@ namespace ET.Client
             EventSystem.Instance.Publish(root,new DataUpdate_TaskTrace());
             return response.Error;
         }
+
+        public static async ETTask<int> RequestCommitTask(Scene root, int taskid, long banginfoId)
+        {
+            TaskComponentClient taskComponentClient = root.GetComponent<TaskComponentClient>();
+            TaskPro taskPro = taskComponentClient.GetTaskById(taskid);
+            if (taskPro == null || taskPro.taskStatus != (int)TaskStatuEnum.Completed)
+            {
+                return ErrorCode.Pre_Condition_Error;
+            }
+            TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskid);
+            List<RewardItem> rewardItems = TaskHelper.GetTaskRewards(taskid, taskConfig);
+            if (root.GetComponent<BagComponentClient>().GetBagLeftCell() < rewardItems.Count)
+            {
+                return ErrorCode.ERR_BagIsFull;
+            }
+            
+            C2M_TaskCommitRequest request = new() { TaskId = taskid, BagInfoID = banginfoId };
+            M2C_TaskCommitResponse response = (M2C_TaskCommitResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return response.Error;
+            }
+                
+            for (int i = taskComponentClient.RoleTaskList.Count - 1; i >= 0; i--)
+            {
+                if (taskComponentClient.RoleTaskList[i].taskID == taskid)
+                {
+                    taskComponentClient.RoleTaskList.RemoveAt(i);
+                    break;
+                }
+            }
+            taskComponentClient.RoleComoleteTaskList = response.RoleComoleteTaskList;
+            EventSystem.Instance.Publish(root,new DataUpdate_TaskComplete());
+            return response.Error;
+        }
+
+
+        public static async ETTask<int> RequestGetTask(Scene root, int taskId)
+        {
+            C2M_TaskGetRequest request = new () { TaskId = taskId };
+            M2C_TaskGetResponse response = (M2C_TaskGetResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return response.Error;
+            }
+            
+            TaskComponentClient taskComponentClient = root.GetComponent<TaskComponentClient>();
+            taskComponentClient.RoleTaskList.Add(response.TaskPro);
+            EventSystem.Instance.Publish(root,new DataUpdate_TaskGet());
+            return response.Error;
+        }
     }
 }

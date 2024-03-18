@@ -7,6 +7,7 @@ namespace ET
     public static class TaskHelper
     {
 
+        
         public static int GetChapterByNpc(int npcId)
         {
             List<ChapterConfig> chapterList = ChapterConfigCategory.Instance.GetAll().Values.ToList();
@@ -82,7 +83,7 @@ namespace ET
         }
 
         /// <summary>
-        /// ÅÜ»·ÈÎÎñ
+        /// è·‘ç¯ä»»åŠ¡
         /// </summary>
         /// <param name="roleLv"></param>
         /// <returns></returns>
@@ -154,18 +155,18 @@ namespace ET
         }
 
         /// <summary>
-        /// »îÔ¾ÈÎÎñ
+        /// æ´»è·ƒä»»åŠ¡
         /// </summary>
         /// <returns></returns>
         public static List<int> GetTaskCountrys(Unit unit, int playerLv)
         {
-            //»îÔ¾ÈÎÎñ
+            //æ´»è·ƒä»»åŠ¡
           
             List<int> taskCountryList = new List<int>();
             string[] dayTaskID = GlobalValueConfigCategory.Instance.Get(8).Value.Split(';');
             for (int i = 0; i < dayTaskID.Length; i++)
             {
-                //»ñÈ¡ÈÎÎñ¸ÅÂÊ
+                //è·å–ä»»åŠ¡æ¦‚ç‡
                 float taskRandValue = RandomHelper.RandFloat01();
                 int writeTaskID = int.Parse(dayTaskID[i]);
                 int writeTaskID_Next = writeTaskID;
@@ -178,7 +179,7 @@ namespace ET
 
                     if (taskCountryConfig.TriggerType == 1 && playerLv < taskCountryConfig.TargetValue[0])
                     {
-                        //Ìõ¼ş²»Âú×ã
+                        //æ¡ä»¶ä¸æ»¡è¶³
                         if (taskCountryConfig.NextTask == 0)
                         {
                             break;
@@ -265,7 +266,7 @@ namespace ET
         }
 
         /// <summary>
-        /// Èü¼¾Ã¿ÖÜÈÎÎñ
+        /// èµ›å­£æ¯å‘¨ä»»åŠ¡
         /// </summary>
         /// <returns></returns>
         public static List<int> GetSeasonTask()
@@ -311,10 +312,10 @@ namespace ET
         }
 
         /// <summary>
-        /// 1 Õ½Á¦
-        ///2 ¼¼ÄÜÊıÁ¿
-        ///3 ÉúÃü×ÊÖÊ
-        ///4 ¹¥»÷×ÊÖÊ 5 Ä§·¨×ÊÖÊ 6 ·ÀÓù×ÊÖÊ 7 Ä§·À×ÊÖÊ 8 ³É³¤
+        /// 1 æˆ˜åŠ›
+        ///2 æŠ€èƒ½æ•°é‡
+        ///3 ç”Ÿå‘½èµ„è´¨
+        ///4 æ”»å‡»èµ„è´¨ 5 é­”æ³•èµ„è´¨ 6 é˜²å¾¡èµ„è´¨ 7 é­”é˜²èµ„è´¨ 8 æˆé•¿
         /// </summary>
         /// <param name="taskId"></param>
         /// <param name="petinfo"></param>
@@ -353,7 +354,7 @@ namespace ET
                     case 3:
                         value = petinfo.ZiZhi_Hp >= targetValue;
                         break;
-                    //4 ¹¥»÷×ÊÖÊ 5 Ä§·¨×ÊÖÊ 6 ·ÀÓù×ÊÖÊ 7 Ä§·À×ÊÖÊ 8 ³É³¤
+                    //4 æ”»å‡»èµ„è´¨ 5 é­”æ³•èµ„è´¨ 6 é˜²å¾¡èµ„è´¨ 7 é­”é˜²èµ„è´¨ 8 æˆé•¿
                     case 4:
                         value = petinfo.ZiZhi_Act >= targetValue;
                         break;
@@ -382,21 +383,21 @@ namespace ET
             return true;
         }
 
-        //Ä¿±êÀàĞÍÎª10£º
-        //Ö§³Ö¶à¸ö ±ÈÈçTarget×Ö¶ÎÅäÖÃ1,3 TargetValue×Ö¶ÎÅäÖÃ10,3 ¾ÍÊÇÕÒÒ»¸ö10¼¶ÒÔÉÏ,Æ·ÖÊÎªÀ¶É«ÒÔÉÏµÄµÀ¾ß¡£
-        //            Ä¿±êÖµÅä¶ÔÓ¦µÄÖµ
-        //1.µÀ¾ßµÈ¼¶
-        //2.µÀ¾ß²¿Î»
-        //3.µÀ¾ßÆ·ÖÊ
-        //4:¾ßÌåµÀ¾ßID
-        //5:µÀ¾ß¼ø¶¨ÌõÄ¿Êı
-        //6:»¤¼×ÀàĞÍ  
-        //7:Òş²Ø¼¼ÄÜ
-        //105101.×°±¸¼ø¶¨ÊôĞÔÁ¦Á¿
-        //105201.×°±¸¼ø¶¨ÊôĞÔÃô½İ
-        //105301.×°±¸¼ø¶¨ÊôĞÔÖÇÁ¦
-        //105401.×°±¸¼ø¶¨ÊôĞÔÄÍÁ¦
-        //105501.×°±¸¼ø¶¨ÊôĞÔÌåÖÊ
+        //ç›®æ ‡ç±»å‹ä¸º10ï¼š
+        //æ”¯æŒå¤šä¸ª æ¯”å¦‚Targetå­—æ®µé…ç½®1,3 TargetValueå­—æ®µé…ç½®10,3 å°±æ˜¯æ‰¾ä¸€ä¸ª10çº§ä»¥ä¸Š,å“è´¨ä¸ºè“è‰²ä»¥ä¸Šçš„é“å…·ã€‚
+        //            ç›®æ ‡å€¼é…å¯¹åº”çš„å€¼
+        //1.é“å…·ç­‰çº§
+        //2.é“å…·éƒ¨ä½
+        //3.é“å…·å“è´¨
+        //4:å…·ä½“é“å…·ID
+        //5:é“å…·é‰´å®šæ¡ç›®æ•°
+        //6:æŠ¤ç”²ç±»å‹  
+        //7:éšè—æŠ€èƒ½
+        //105101.è£…å¤‡é‰´å®šå±æ€§åŠ›é‡
+        //105201.è£…å¤‡é‰´å®šå±æ€§æ•æ·
+        //105301.è£…å¤‡é‰´å®šå±æ€§æ™ºåŠ›
+        //105401.è£…å¤‡é‰´å®šå±æ€§è€åŠ›
+        //105501.è£…å¤‡é‰´å®šå±æ€§ä½“è´¨
 
         public static bool IsTaskGiveItem(int TargetType, int[] Target, int[] TargetValue, BagInfo bagInfo)
         {
@@ -474,7 +475,7 @@ namespace ET
         }
 
         /// <summary>
-        /// ¸£Àû»î¶¯£¬µ±ÌìµÄÈÎÎñÊÇ·ñÈ«²¿Íê³É
+        /// ç¦åˆ©æ´»åŠ¨ï¼Œå½“å¤©çš„ä»»åŠ¡æ˜¯å¦å…¨éƒ¨å®Œæˆ
         /// </summary>
         /// <param name="completeids"></param>
         /// <param name="day"></param>

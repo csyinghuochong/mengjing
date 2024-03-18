@@ -215,5 +215,24 @@ namespace ET.Client
 
             return null;
         }
+        
+        public static List<BagInfo> GetBagList(this BagComponentClient self)
+        {
+            return self.AllItemList[(int)ItemLocType.ItemLocBag];
+        }
+        
+        public static int GetBagLeftCell(this BagComponentClient self)
+        {
+            return self.GetBagTotalCell() - self.GetBagList().Count;
+        }
+        
+        public static int GetBagTotalCell(this BagComponentClient self)
+        {
+            if (self.WarehouseAddedCell.Count == 0 || self.AdditionalCellNum.Count == 0)
+            {
+                return  GlobalValueConfigCategory.Instance.BagInitCapacity;
+            }
+            return self.WarehouseAddedCell[0] + self.AdditionalCellNum[0] + GlobalValueConfigCategory.Instance.BagInitCapacity;
+        }
     }
 }

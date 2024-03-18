@@ -7,10 +7,21 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (TaskComponentClient))]
     [FriendOf(typeof (UserInfoComponentClient))]
     [FriendOf(typeof (DlgMain))]
     public static class DlgMainSystem
     {
+        [Event(SceneType.Demo)]
+        public class DataUpdate_TaskTrace_Refresh: AEvent<Scene, DataUpdate_TaskTrace>
+        {
+            protected override async ETTask Run(Scene scene, DataUpdate_TaskTrace args)
+            {
+                scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnRecvTaskTrace();
+                await ETTask.CompletedTask;
+            }
+        }
+        
         [Invoke(TimerInvokeType.JoystickTimer)]
         public class JoystickTimer: ATimer<DlgMain>
         {
@@ -77,6 +88,11 @@ namespace ET.Client
             self.View.E_YaoGanDiFixEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.EndDrag(pdata as PointerEventData); });
 
             self.View.E_SetButton.AddListener(self.OnSetButton);
+            
+            
+            self.View.E_MainTaskItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainTaskItemsRefresh);
+            self.View.E_RoseTaskButton.AddListener(self.OnRoseTaskButton);
+            self.RefreshMainTaskItems();
         }
 
         public static void ShowWindow(this DlgMain self, Entity contextData = null)
@@ -90,8 +106,84 @@ namespace ET.Client
 
             self.ResetJoystick();
             self.RefreshLeftUp();
+            
+            // IOS适配
+            IPHoneHelper.SetPosition(self.View.EG_PhoneLeftRectTransform.gameObject, new Vector2(120f, 0f));
         }
 
+        #region 左边
+
+        public static void OnRecvTaskTrace(this DlgMain self)
+        {
+            self.RefreshMainTaskItems();
+        }
+
+        private static void OnMainTaskItemsRefresh(this DlgMain self, Transform transform, int index)
+        {
+            Scroll_Item_MainTask scrollItemMainTask = self.ScrollItemMainTasks[index].BindTrans(transform);
+            scrollItemMainTask.Refresh(self.ShowTaskPros[index]);
+        }
+
+        private static void RefreshMainTaskItems(this DlgMain self)
+        {
+            self.ShowTaskPros.Clear();
+            foreach (TaskPro taskPro in self.Root().GetComponent<TaskComponentClient>().RoleTaskList)
+            {
+                if (taskPro.TrackStatus == 0)
+                {
+                    continue;
+                }
+                
+                self.ShowTaskPros.Add(taskPro);
+            }
+            self.View.E_RoseTaskButton.gameObject.SetActive(self.ShowTaskPros.Count == 0);
+            
+            self.AddUIScrollItems(ref self.ScrollItemMainTasks, self.ShowTaskPros.Count);
+            self.View.E_MainTaskItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskPros.Count);
+        }
+
+        private static void OnRoseTaskButton(this DlgMain self)
+        {
+            TaskComponentClient taskComponent = self.Root().GetComponent<TaskComponentClient>();
+
+            int nextTask = taskComponent.GetNextMainTask();
+            if (nextTask == 0)
+            {
+                self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Task);
+                return;
+            }
+
+            int getNpc = TaskConfigCategory.Instance.Get(nextTask).GetNpcID;
+            int fubenId = TaskViewHelp.GetFubenByNpc(getNpc);
+            if (fubenId == 0)
+            {
+                return;
+            }
+
+            string fubenName = $"请前往{DungeonConfigCategory.Instance.Get(fubenId).ChapterName} {NpcConfigCategory.Instance.Get(getNpc).Name} 出接取任务";
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
+            if (mapComponent.SceneType != SceneTypeEnum.LocalDungeon)
+            {
+                flyTipComponent.SpawnFlyTipDi(fubenName);
+                return;
+            }
+            int curdungeonid = mapComponent.SceneId;
+            if (curdungeonid == fubenId)
+            {
+                TaskViewHelp.MoveToNpc(self.Root(), getNpc).Coroutine();
+                return;
+            }
+            if (TaskViewHelp.GeToOtherFuben(self.Root(), fubenId, mapComponent.SceneId))
+            {
+                return;
+            }
+
+            flyTipComponent.SpawnFlyTipDi(fubenName);
+        }
+
+        #endregion
+        
         #region 左上角信息
 
         private static void OnSetButton(this DlgMain self)

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace ET.Client
 {
@@ -44,6 +45,51 @@ namespace ET.Client
             }
             return taskPros;
         }
+        
+        public static TaskPro GetTaskById(this TaskComponentClient self, int taskId)
+        {
+            for (int i = 0; i < self.RoleTaskList.Count; i++)
+            {
+                if (self.RoleTaskList[i].taskID == taskId)
+                    return self.RoleTaskList[i];
+            }
+            return null;
+        }
+        
+        public static int GetNextMainTask(this TaskComponentClient self)
+        {
+            int maxTask = 0;
+            int nextTask = 0;
+            List<int> completeTask = self.RoleComoleteTaskList;
+            for (int i = 0; i < completeTask.Count; i++)
+            {
+                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(completeTask[i]);
+                if (taskConfig.TaskType != TaskTypeEnum.Main)
+                {
+                    continue;
+                }
+                if (taskConfig.Id > maxTask)
+                {
+                    maxTask = taskConfig.Id;
+                }
+            }
+            List<TaskConfig> taskConfigs = TaskConfigCategory.Instance.GetAll().Values.ToList();
+            for (int i = 0; i < taskConfigs.Count; i++)
+            {
+                if (taskConfigs[i].TaskType != TaskTypeEnum.Main)
+                {
+                    continue;
+                }
+                if (taskConfigs[i].Id > maxTask)
+                {
+                    nextTask = taskConfigs[i].Id;
+                    break;
+                }
+            }
+            return nextTask;
+        }
+
+        
     }
 }
 

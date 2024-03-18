@@ -51,7 +51,26 @@ namespace ET.Client
     {
     }
     
+    public struct DataUpdate_TaskGet
+    {
+    }
+    
     public struct DataUpdate_TaskTrace
     {
+    }
+    
+    public struct DataUpdate_TaskComplete
+    {
+    }
+    
+    public struct DataUpdate_BeforeMove
+    {
+        public string DataParamString;
+    }
+
+    public struct TaskNpcDialog
+    {
+        public int NpcId;
+        public int ErrorCode;
     }
 }
