@@ -32,7 +32,7 @@ namespace ET.Client
 
         public static void RefreshTaskInfo(this ES_TaskDetail self, TaskPro taskPro)
         {
-            self.TaskPro = null;
+            self.TaskPro = taskPro;
             
             if (taskPro == null)
             {
@@ -118,8 +118,6 @@ namespace ET.Client
             {
                 return;
             }
-            
-            TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.TaskPro.taskID);
 
             FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
             if (self.Root().GetComponent<TaskComponentClient>().GetAllTrackList().Count >= 3 && track)

@@ -786,12 +786,14 @@ namespace ET.Client
             // UI ui = await UIHelper.Create(zoneScene, UIType.UIGivePet);
             // ui.GetComponent<UIGivePetComponent>().InitTask(taskPro.taskID, 1);
             // ui.GetComponent<UIGivePetComponent>().OnUpdateUI();
+            await ETTask.CompletedTask;
         }
         
         private static async ETTask OpenUIGiveTask(Scene zoneScene, TaskPro taskPro)
         {
             // UI ui = await UIHelper.Create(zoneScene, UIType.UIGiveTask);
             // ui.GetComponent<UIGiveTaskComponent>().InitTask(taskPro.taskID, 1);
+            await ETTask.CompletedTask;
         }
         
         private static int GetFubenByNpc(int npcId)

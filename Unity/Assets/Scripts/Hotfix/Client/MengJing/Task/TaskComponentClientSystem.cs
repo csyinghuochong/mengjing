@@ -29,6 +29,21 @@ namespace ET.Client
             }
             return taskPros;
         }
+        
+        public static List<TaskPro> GetTaskTypeList(this TaskComponentClient self, int taskTypeEnum)
+        {
+            List<TaskPro> taskPros = new List<TaskPro>();
+            for (int i = 0; i < self.RoleTaskList.Count; i++)
+            {
+                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.RoleTaskList[i].taskID);
+                if (taskConfig.TaskType != (int)taskTypeEnum)
+                {
+                    continue;
+                }
+                taskPros.Add(self.RoleTaskList[i]);
+            }
+            return taskPros;
+        }
     }
 }
 

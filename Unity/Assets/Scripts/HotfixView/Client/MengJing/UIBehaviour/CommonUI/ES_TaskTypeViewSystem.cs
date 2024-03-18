@@ -109,14 +109,19 @@ namespace ET.Client
         {
             self.ShowTaskPros.Clear();
 
-            // if (self.TaskType == TaskTypeEnum.Daily)
-            // {
-            //     taskPros.AddRange(TaskComponent.GetTaskTypeList(TaskTypeEnum.Treasure));
-            // }
-
-            // 假数据
-            self.ShowTaskPros.Add(new TaskPro() { taskID = 30010001, taskStatus = (int)TaskStatuEnum.Completed });
-            self.ShowTaskPros.Add(new TaskPro() { taskID = 30010002 });
+            TaskComponentClient taskComponentClient = self.Root().GetComponent<TaskComponentClient>();
+            self.ShowTaskPros = taskComponentClient.GetTaskTypeList(self.TaskType);
+            if (self.TaskType == TaskTypeEnum.Branch)
+            {
+                
+            }
+            if (self.TaskType == TaskTypeEnum.Daily)
+            {
+                self.ShowTaskPros.AddRange(taskComponentClient.GetTaskTypeList(TaskTypeEnum.Treasure));
+                self.ShowTaskPros.AddRange(taskComponentClient.GetTaskTypeList(TaskTypeEnum.Union));
+                self.ShowTaskPros.AddRange(taskComponentClient.GetTaskTypeList(TaskTypeEnum.Ring));
+                self.ShowTaskPros.AddRange(taskComponentClient.GetTaskTypeList(TaskTypeEnum.Weekly));
+            }
 
             self.AddUIScrollItems(ref self.ScrollItemTaskTypeItems, self.ShowTaskPros.Count);
             self.E_TaskTypeItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskPros.Count);
