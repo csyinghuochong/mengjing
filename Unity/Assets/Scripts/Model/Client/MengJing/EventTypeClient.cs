@@ -50,4 +50,8 @@ namespace ET.Client
     public struct DataUpdate_FriendUpdate
     {
     }
+    
+    public struct DataUpdate_TaskTrace
+    {
+    }
 }

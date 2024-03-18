@@ -18,6 +18,9 @@ namespace ET.Client
             self.ES_TaskType_1.InitData(TaskTypeEnum.Branch, self.SetTalkUp);
             self.ES_TaskType_2.InitData(TaskTypeEnum.Daily, self.SetTalkUp);
 
+            self.E_ZhuizongButton.AddListener(() => { self.OnTrackTask(true); });
+            self.E_CancelZhuizongButton.AddListener(() => { self.OnTrackTask(false); });
+            
             self.EG_RightRectTransform.gameObject.SetActive(false);
         }
 
@@ -29,6 +32,8 @@ namespace ET.Client
 
         public static void RefreshTaskInfo(this ES_TaskDetail self, TaskPro taskPro)
         {
+            self.TaskPro = null;
+            
             if (taskPro == null)
             {
                 self.EG_RightRectTransform.gameObject.SetActive(false);
@@ -105,6 +110,31 @@ namespace ET.Client
             {
                 self.ES_TaskType_2.TalkUp();
             }
+        }
+        
+        private static void OnTrackTask(this ES_TaskDetail self, bool track)
+        {
+            if (self.TaskPro == null)
+            {
+                return;
+            }
+            
+            TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.TaskPro.taskID);
+
+            FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
+            if (self.Root().GetComponent<TaskComponentClient>().GetAllTrackList().Count >= 3 && track)
+            {
+                flyTipComponent.SpawnFlyTipDi("追踪数量不能超过三个!");
+                return;
+            }
+            
+            TaskClientNetHelper.RequestTaskTrack(self.Root(),self.TaskPro.taskID, self.TaskPro.TrackStatus == 0 ? 1 : 0).Coroutine();
+            
+            self.E_ZhuizongButton.gameObject.SetActive(!self.E_ZhuizongButton.gameObject.activeSelf);
+            self.E_CancelZhuizongButton.gameObject.SetActive(!self.E_CancelZhuizongButton.gameObject.activeSelf);
+            
+            // 提示
+            flyTipComponent.SpawnFlyTipDi(self.E_ZhuizongButton.gameObject.activeSelf == false? "任务开启追踪!" : "任务取消追踪!");
         }
     }
 }

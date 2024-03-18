@@ -16,5 +16,23 @@ namespace ET.Client
             taskComponentClient.RoleTaskList = response.RoleTaskList;       
             return ErrorCode.ERR_Success;
         }
+
+        public static async ETTask<int> RequestTaskTrack(Scene root, int taskId, int trackStatus)
+        {
+            C2M_TaskTrackRequest request = new () { TaskId = taskId, TrackStatus = trackStatus };
+            M2C_TaskTrackResponse response = (M2C_TaskTrackResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            TaskComponentClient taskComponentClient = root.GetComponent<TaskComponentClient>();
+            for (int i = 0; i < taskComponentClient.RoleTaskList.Count; i++)
+            {
+                if (taskComponentClient.RoleTaskList[i].taskID == taskId)
+                {
+                    taskComponentClient.RoleTaskList[i].TrackStatus = trackStatus;
+                }
+            }
+            
+            EventSystem.Instance.Publish(root,new DataUpdate_TaskTrace());
+            return response.Error;
+        }
     }
 }

@@ -5,8 +5,10 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_TaskDetail : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_TaskDetail : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
+		public TaskPro TaskPro;
+		
 		public ES_TaskType ES_TaskType_0
      	{
      		get
