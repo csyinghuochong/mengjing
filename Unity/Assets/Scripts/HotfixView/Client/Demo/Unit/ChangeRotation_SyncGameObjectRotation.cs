@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [FriendOf(typeof(GameObjectComponent))]
     [Event(SceneType.Current)]
     public class ChangeRotation_SyncGameObjectRotation: AEvent<Scene, ChangeRotation>
     {

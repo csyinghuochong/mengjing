@@ -2,6 +2,7 @@
 
 namespace ET.Client
 {
+    [FriendOf(typeof(GameObjectComponent))]
     [Event(SceneType.Current)]
     public class ChangePosition_SyncGameObjectPos: AEvent<Scene, ChangePosition>
     {
@@ -14,7 +15,7 @@ namespace ET.Client
                 return;
             }
 
-            Transform transform = gameObjectComponent.Transform;
+            Transform transform = gameObjectComponent.GameObject.transform;
             transform.position = unit.Position;
             await ETTask.CompletedTask;
         }

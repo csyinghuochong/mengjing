@@ -24,5 +24,7 @@
         public const int MapMiniTimer = 303;
         public const int ChatSceneTimer = 304;
         public const int FsmTimer = 305;
+        public const int HighLightTimer = 306;
+        public const int DelayShowTimer = 307;
     }
 }

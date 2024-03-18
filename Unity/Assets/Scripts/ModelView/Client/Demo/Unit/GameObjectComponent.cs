@@ -5,21 +5,17 @@ namespace ET.Client
     [ComponentOf(typeof(Unit))]
     public class GameObjectComponent: Entity, IAwake, IDestroy
     {
-        private GameObject gameObject;
+        public string UnitAssetsPath;
+        public GameObject GameObject;
+        public string HorseAssetsPath;
+        public GameObject ObjectHorse;
+        public Material Material;
+        public long DelayShow;
 
-        public GameObject GameObject
-        {
-            get
-            {
-                return this.gameObject;
-            }
-            set
-            {
-                this.gameObject = value;
-                this.Transform = value.transform;
-            }
-        }
+        public long HighLightTimer;
+        public long DelayShowTimer;
+        public string OldShader;
 
-        public Transform Transform { get; private set; }
+        public bool BianShenEffect;
     }
 }
