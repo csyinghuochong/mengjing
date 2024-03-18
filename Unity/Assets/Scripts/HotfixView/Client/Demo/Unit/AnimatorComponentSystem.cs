@@ -10,16 +10,83 @@ namespace ET.Client
 		[EntitySystem]
 		private static void Destroy(this AnimatorComponent self)
 		{
-			self.animationClips = null;
-			self.Parameter = null;
 			self.Animator = null;
 		}
 			
 		[EntitySystem]
 		private static void Awake(this AnimatorComponent self)
 		{
-			Animator animator = self.GetParent<Unit>().GetComponent<GameObjectComponent>().GameObject.GetComponent<Animator>();
+			self.Parameter.Clear();
+			self.MissParameter.Clear();
+			self.animationClips.Clear();
+			self.animatorControllers.Clear();
+			GameObject gameObject = self.GetParent<Unit>().GetComponent<GameObjectComponent>().GameObject;
+			self.InitController(gameObject);
+			self.UpdateAnimator(gameObject);
+			self.UpdateController();
+		}
 
+		public static void InitController(this AnimatorComponent self, GameObject gameObject)
+		{
+            Unit unit = self.GetParent<Unit>();
+            if (unit.Type != UnitType.Player || unit.ConfigId != 3)
+            {
+                return;
+            }
+			ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
+			if (rc == null)
+			{
+				self.animatorControllers.Add(gameObject.GetComponent<Animator>().runtimeAnimatorController);
+
+                return;
+			}
+            GameObject AnimatorList = rc.Get<GameObject>("AnimatorList");
+			if (AnimatorList == null)
+			{
+                self.animatorControllers.Add(gameObject.GetComponent<Animator>().runtimeAnimatorController);
+
+                return;
+			}
+            for(int i = 0; i < AnimatorList.transform.childCount; i++)
+			{
+				GameObject child = AnimatorList.transform.GetChild(i).gameObject;
+				self.animatorControllers.Add( child.GetComponent<Animator>().runtimeAnimatorController );
+            }
+        }
+
+        public static void UpdateController(this AnimatorComponent self)
+		{
+			Unit unit = self.GetParent<Unit>();
+			if (unit.Type != UnitType.Player || unit.ConfigId != 3)
+			{
+				return;
+			}
+			int equipIndex = unit.GetComponent<NumericComponentClient>().GetAsInt(NumericType.EquipIndex);
+			if (self.animatorControllers.Count < equipIndex)
+			{
+                equipIndex = 0;
+			}
+
+            GameObject gameObject = unit.GetComponent<GameObjectComponent>().GameObject;
+            Animator animator = gameObject.GetComponentInChildren<Animator>();
+			animator.runtimeAnimatorController = self.animatorControllers[equipIndex];
+
+            self.Animator = animator;
+            self.animationClips.Clear();	
+			self.Parameter.Clear();	
+            foreach (AnimationClip animationClip in animator.runtimeAnimatorController.animationClips)
+            {
+                self.animationClips[animationClip.name] = animationClip;
+            }
+            foreach (AnimatorControllerParameter animatorControllerParameter in animator.parameters)
+            {
+                self.Parameter.Add(animatorControllerParameter.name);
+            }
+        }
+
+		public static void UpdateAnimator(this AnimatorComponent self, GameObject gameObject)
+		{
+			Animator animator = gameObject.GetComponentInChildren<Animator>();
 			if (animator == null)
 			{
 				return;
@@ -35,7 +102,9 @@ namespace ET.Client
 				return;
 			}
 			self.Animator = animator;
-			foreach (AnimationClip animationClip in animator.runtimeAnimatorController.animationClips)
+			self.animationClips.Clear();
+			self.Parameter.Clear();
+            foreach (AnimationClip animationClip in animator.runtimeAnimatorController.animationClips)
 			{
 				self.animationClips[animationClip.name] = animationClip;
 			}
@@ -44,9 +113,8 @@ namespace ET.Client
 				self.Parameter.Add(animatorControllerParameter.name);
 			}
 		}
-		
-		[EntitySystem]
-		private static void Update(this AnimatorComponent self)
+
+		public static void Update(this AnimatorComponent self)
 		{
 			if (self.isStop)
 			{
@@ -78,42 +146,47 @@ namespace ET.Client
 			return self.Parameter.Contains(parameter);
 		}
 
-		public static void PlayInTime(this AnimatorComponent self, MotionType motionType, float time)
+		public static string CurrentAnimation(this AnimatorComponent self)
 		{
-			AnimationClip animationClip;
-			if (!self.animationClips.TryGetValue(motionType.ToString(), out animationClip))
-			{
-				throw new Exception($"找不到该动作: {motionType}");
-			}
-
-			float motionSpeed = animationClip.length / time;
-			if (motionSpeed < 0.01f || motionSpeed > 1000f)
-			{
-				Log.Error($"motionSpeed数值异常, {motionSpeed}, 此动作跳过");
-				return;
-			}
-			self.MotionType = motionType;
-			self.MontionSpeed = motionSpeed;
+			AnimatorClipInfo animatorClipInfo = self.Animator.GetCurrentAnimatorClipInfo(0)[0];
+			Log.Debug($"animatorClipInfo.clip.name： {animatorClipInfo.clip.name}");
+			return animatorClipInfo.clip.name;
 		}
 
-		public static void Play(this AnimatorComponent self, MotionType motionType, float motionSpeed = 1f)
+		public static float CurrentSateTime(this AnimatorComponent self)
 		{
-			if (!self.HasParameter(motionType.ToString()))
+			AnimatorStateInfo animatorStateInfo = self.Animator.GetCurrentAnimatorStateInfo(0); 
+			return animatorStateInfo.normalizedTime;
+		}
+
+		public static void Play(this AnimatorComponent self, string motionType, float motionSpeed = 1f)
+		{
+			self.MotionType = motionType;
+			self.MontionSpeed = motionSpeed;
+			if (null == self.Animator || !SettingData.ShowAnimation)
 			{
 				return;
 			}
-			self.MotionType = motionType;
-			self.MontionSpeed = motionSpeed;
-		}
-
-		public static float AnimationTime(this AnimatorComponent self, MotionType motionType)
-		{
-			AnimationClip animationClip;
-			if (!self.animationClips.TryGetValue(motionType.ToString(), out animationClip))
+			if (self.MissParameter.Contains(motionType))
 			{
-				throw new Exception($"找不到该动作: {motionType}");
+				return;
 			}
-			return animationClip.length;
+            if (self.HasParameter(motionType.ToString()))
+            {
+				self.Animator.Play(motionType);
+				return;
+            }
+
+            bool hasAction = self.Animator.HasState(0,Animator.StringToHash(motionType));
+			if (hasAction)
+			{
+				self.Parameter.Add(motionType);
+				self.Animator.Play(motionType);
+			}
+			else
+			{
+				self.MissParameter.Add(motionType);
+			}
 		}
 
 		public static void PauseAnimator(this AnimatorComponent self)
@@ -150,41 +223,29 @@ namespace ET.Client
 
 		public static void SetBoolValue(this AnimatorComponent self, string name, bool state)
 		{
-			if (!self.HasParameter(name))
+			if (self.Animator == null)
 			{
 				return;
 			}
-
+			if (!self.HasParameter(name))
+            {
+                return;
+            }
 			self.Animator.SetBool(name, state);
 		}
 
 		public static void SetFloatValue(this AnimatorComponent self, string name, float state)
 		{
-			if (!self.HasParameter(name))
-			{
-				return;
-			}
-
 			self.Animator.SetFloat(name, state);
 		}
 
 		public static void SetIntValue(this AnimatorComponent self, string name, int value)
 		{
-			if (!self.HasParameter(name))
-			{
-				return;
-			}
-
 			self.Animator.SetInteger(name, value);
 		}
 
 		public static void SetTrigger(this AnimatorComponent self, string name)
 		{
-			if (!self.HasParameter(name))
-			{
-				return;
-			}
-
 			self.Animator.SetTrigger(name);
 		}
 

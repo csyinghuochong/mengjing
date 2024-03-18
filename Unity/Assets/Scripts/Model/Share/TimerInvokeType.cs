@@ -23,5 +23,6 @@
         public const int JoystickTimer = 302;
         public const int MapMiniTimer = 303;
         public const int ChatSceneTimer = 304;
+        public const int FsmTimer = 305;
     }
 }
