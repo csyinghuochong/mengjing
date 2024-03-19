@@ -31,12 +31,13 @@ namespace ET.Server
                         numericComponentServer.Set(NumericType.AOI, 15000); // 视野15米
                     }
                     unit.AddDataComponent<TaskComponentServer>();
+                    unit.AddDataComponent<ShoujiComponentServer>();
                     unit.AddDataComponent<ChengJiuComponentServer>();
                     unit.AddDataComponent<BagComponentServer>();
+                    unit.AddDataComponent<PetComponentServer>();
                     unit.AddDataComponent<SkillSetComponentServer>();
                     unit.AddDataComponent<ActivityServerComponent>();
-                    unit.AddDataComponent<ShoujiComponentServer>();
-                    unit.AddDataComponent<PetComponentServer>();
+                    
                     
                     unitComponent.Add(unit);
                     // 加入aoi

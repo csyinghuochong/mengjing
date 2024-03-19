@@ -7964,6 +7964,328 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.JiaYuanRecord)]
+	[MemoryPackable]
+	public partial class JiaYuanRecord: MessageObject
+	{
+		public static JiaYuanRecord Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(JiaYuanRecord), isFromPool) as JiaYuanRecord; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long Time { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int OperateType { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int OperateId { get; set; }
+
+		[MemoryPackOrder(6)]
+		public long PlayerId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.Time = default;
+			this.PlayerName = default;
+			this.OperateType = default;
+			this.OperateId = default;
+			this.PlayerId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.JiaYuanOperate)]
+	[MemoryPackable]
+	public partial class JiaYuanOperate: MessageObject
+	{
+		public static JiaYuanOperate Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(JiaYuanOperate), isFromPool) as JiaYuanOperate; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long Time { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int OperateType { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int OperateId { get; set; }
+
+		[MemoryPackOrder(4)]
+		public string OperatePar { get; set; }
+
+		[MemoryPackOrder(5)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(6)]
+		public long PlayerId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.Time = default;
+			this.PlayerName = default;
+			this.OperateType = default;
+			this.OperateId = default;
+			this.OperatePar = default;
+			this.UnitId = default;
+			this.PlayerId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.JiaYuanPurchaseItem)]
+	[MemoryPackable]
+	public partial class JiaYuanPurchaseItem: MessageObject
+	{
+		public static JiaYuanPurchaseItem Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(JiaYuanPurchaseItem), isFromPool) as JiaYuanPurchaseItem; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int ItemID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int BuyZiJin { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long MakeTime { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int LeftNum { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int PurchaseId { get; set; }
+
+		[MemoryPackOrder(5)]
+		public long EndTime { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.ItemID = default;
+			this.BuyZiJin = default;
+			this.MakeTime = default;
+			this.LeftNum = default;
+			this.PurchaseId = default;
+			this.EndTime = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.JiaYuanPlant)]
+	[MemoryPackable]
+	public partial class JiaYuanPlant: MessageObject
+	{
+		public static JiaYuanPlant Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(JiaYuanPlant), isFromPool) as JiaYuanPlant; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int CellIndex { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ItemId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long StartTime { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int GatherNumber { get; set; }
+
+		[MemoryPackOrder(4)]
+		public long GatherLastTime { get; set; }
+
+		[MemoryPackOrder(5)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(6)]
+		public int StealNumber { get; set; }
+
+		[MemoryPackOrder(7)]
+		public List<JiaYuanRecord> GatherRecord { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.CellIndex = default;
+			this.ItemId = default;
+			this.StartTime = default;
+			this.GatherNumber = default;
+			this.GatherLastTime = default;
+			this.UnitId = default;
+			this.StealNumber = default;
+			this.GatherRecord.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.JiaYuanPastures)]
+	[MemoryPackable]
+	public partial class JiaYuanPastures: MessageObject
+	{
+		public static JiaYuanPastures Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(JiaYuanPastures), isFromPool) as JiaYuanPastures; 
+		}
+
+		[MemoryPackOrder(1)]
+		public int ConfigId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long StartTime { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int GatherNumber { get; set; }
+
+		[MemoryPackOrder(4)]
+		public long GatherLastTime { get; set; }
+
+		[MemoryPackOrder(5)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(6)]
+		public int StealNumber { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.ConfigId = default;
+			this.StartTime = default;
+			this.GatherNumber = default;
+			this.GatherLastTime = default;
+			this.UnitId = default;
+			this.StealNumber = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.JiaYuanMonster)]
+	[MemoryPackable]
+	public partial class JiaYuanMonster: MessageObject
+	{
+		public static JiaYuanMonster Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(JiaYuanMonster), isFromPool) as JiaYuanMonster; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long unitId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public float x { get; set; }
+
+		[MemoryPackOrder(2)]
+		public float y { get; set; }
+
+		[MemoryPackOrder(3)]
+		public float z { get; set; }
+
+		[MemoryPackOrder(4)]
+		public long BornTime { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int ConfigId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.unitId = default;
+			this.x = default;
+			this.y = default;
+			this.z = default;
+			this.BornTime = default;
+			this.ConfigId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.JiaYuanPet)]
+	[MemoryPackable]
+	public partial class JiaYuanPet: MessageObject
+	{
+		public static JiaYuanPet Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(JiaYuanPet), isFromPool) as JiaYuanPet; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long unitId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ConfigId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long TotalExp { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long CurExp { get; set; }
+
+		[MemoryPackOrder(4)]
+		public long StartTime { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int MoodValue { get; set; }
+
+		[MemoryPackOrder(6)]
+		public int PetLv { get; set; }
+
+		[MemoryPackOrder(7)]
+		public long LastExpTime { get; set; }
+
+		[MemoryPackOrder(8)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(9)]
+		public string PetName { get; set; }
+
+		[MemoryPackOrder(10)]
+		public int Position { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.unitId = default;
+			this.ConfigId = default;
+			this.TotalExp = default;
+			this.CurExp = default;
+			this.StartTime = default;
+			this.MoodValue = default;
+			this.PetLv = default;
+			this.LastExpTime = default;
+			this.PlayerName = default;
+			this.PetName = default;
+			this.Position = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -8189,5 +8511,12 @@ namespace ET
 		 public const ushort M2C_RoleAddPointResponse = 10222;
 		 public const ushort M2C_UnitNumericUpdate = 10223;
 		 public const ushort ShouJiChapterInfo = 10224;
+		 public const ushort JiaYuanRecord = 10225;
+		 public const ushort JiaYuanOperate = 10226;
+		 public const ushort JiaYuanPurchaseItem = 10227;
+		 public const ushort JiaYuanPlant = 10228;
+		 public const ushort JiaYuanPastures = 10229;
+		 public const ushort JiaYuanMonster = 10230;
+		 public const ushort JiaYuanPet = 10231;
 	}
 }

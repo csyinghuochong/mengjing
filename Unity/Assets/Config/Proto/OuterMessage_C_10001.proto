@@ -2056,3 +2056,81 @@ message ShouJiChapterInfo
 	int32 RewardInfo = 3;
 	repeated int32 ShouJiItemList = 4;
 }
+
+message JiaYuanRecord
+{
+	int64 Time = 1;
+	string PlayerName = 2;
+	int32 OperateType = 3;   //1进入家园 2收获植物 3收获动物  4清理 
+	int32 OperateId = 4;
+	int64 PlayerId = 7;        //玩家id
+}
+
+message JiaYuanOperate
+{
+	int64 Time = 1;
+	string PlayerName = 2;
+	int32 OperateType = 3;   //1进入家园 2收获植物 3收获动物  4清理 
+	int32 OperateId = 4;
+	string OperatePar = 5;
+	int64 UnitId = 6;
+	int64 PlayerId = 7;        //玩家id
+}
+
+message JiaYuanPurchaseItem
+{
+	int32 ItemID = 1;
+	int32 BuyZiJin = 2;
+	int64 MakeTime = 3;
+	int32 LeftNum = 4;
+	int32 PurchaseId = 5;
+	int64 EndTime = 6;
+}
+
+message JiaYuanPlant
+{
+	int32 CellIndex = 1;
+	int32 ItemId = 2;
+	int64 StartTime = 3;
+	int32 GatherNumber = 4;
+	int64 GatherLastTime = 5;
+	int64 UnitId = 6;
+	int32 StealNumber = 7;
+	repeated JiaYuanRecord GatherRecord = 8;
+}
+
+message JiaYuanPastures
+{
+	int32 ConfigId = 2;
+	int64 StartTime = 3;
+	int32 GatherNumber = 4;
+	int64 GatherLastTime = 5;
+	int64 UnitId = 6;
+	int32 StealNumber = 7;
+}
+
+
+message JiaYuanMonster
+{
+	int64 unitId = 1;
+	float x = 2;
+	float y = 3;
+	float z = 4;
+	int64 BornTime = 5;
+	int32 ConfigId = 6;
+}
+
+message JiaYuanPet
+{
+	int64 unitId = 1;
+	int32 ConfigId = 2;
+	int64 TotalExp = 3;
+	int64 CurExp = 4;
+	int64 StartTime = 5;
+	int32 MoodValue = 6;
+	int32 PetLv = 7;
+	int64 LastExpTime = 8;
+	string PlayerName = 9;
+	string PetName = 10;
+	int32 Position = 11;
+}
