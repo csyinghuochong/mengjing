@@ -7412,44 +7412,6 @@ namespace ET
 
 	}
 
-	[Message(OuterMessage.SkillSetInfo)]
-	[MemoryPackable]
-	public partial class SkillSetInfo: MessageObject
-	{
-		public static SkillSetInfo Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(SkillSetInfo), isFromPool) as SkillSetInfo; 
-		}
-
-		[MemoryPackOrder(0)]
-		public List<SkillPro> SkillList { get; set; } = new();
-
-		[MemoryPackOrder(1)]
-		public List<int> TianFuList { get; set; } = new();
-
-		[MemoryPackOrder(2)]
-		public List<LifeShieldInfo> LifeShieldList { get; set; } = new();
-
-		[MemoryPackOrder(3)]
-		public List<int> TianFuList1 { get; set; } = new();
-
-		[MemoryPackOrder(4)]
-		public int TianFuPlan { get; set; }
-
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.SkillList.Clear();
-			this.TianFuList.Clear();
-			this.LifeShieldList.Clear();
-			this.TianFuList1.Clear();
-			this.TianFuPlan = default;
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
-
-	}
-
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -7658,6 +7620,5 @@ namespace ET
 		 public const ushort M2C_TaskTrackResponse = 10205;
 		 public const ushort C2M_SkillInitRequest = 10206;
 		 public const ushort M2C_SkillInitResponse = 10207;
-		 public const ushort SkillSetInfo = 10208;
 	}
 }

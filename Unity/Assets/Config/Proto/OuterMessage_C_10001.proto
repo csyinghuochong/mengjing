@@ -1915,12 +1915,3 @@ message M2C_SkillInitResponse	// ILocationResponse
 	int32 Error = 92;
 	SkillSetInfo SkillSetInfo = 1;
 }
-
-message SkillSetInfo
-{
-	repeated SkillPro SkillList = 1;
-	repeated int32 TianFuList = 2;
-	repeated LifeShieldInfo LifeShieldList = 3;
-	repeated int32 TianFuList1 = 4;
-	int32 TianFuPlan = 5;
-}
