@@ -7,10 +7,13 @@
 	
 	public struct NumbericChange
 	{
-		public Unit Unit;
+		public Unit Defend;
+		public Unit Attack;
 		public int NumericType;
-		public long Old;
-		public long New;
+		public long OldValue;
+		public long NewValue;
+		public int SkillId;
+		public int DamgeType;           //1 暴击   2闪避
 	}
 
 }

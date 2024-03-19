@@ -6,7 +6,7 @@
 	{
 		protected override async ETTask Run(Scene scene, NumbericChange args)
 		{
-			NumericWatcherComponent.Instance.Run(args.Unit, args);
+			NumericWatcherComponent.Instance.Run(args.Defend, args);
 			await ETTask.CompletedTask;
 		}
 	}

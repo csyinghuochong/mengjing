@@ -169,14 +169,14 @@ namespace ET.Server
                 case UserDataType.Lv:
                     self.UserInfo.Lv += int.Parse(value);
                     saveValue = self.UserInfo.Lv.ToString();
-                    // long maxHp = unit.GetComponent<NumericComponentServer>().GetAsLong((int)NumericType.Now_MaxHp);
-                    // unit.GetComponent<NumericComponentServer>().ApplyValue(NumericType.Now_Hp, maxHp, false);
-                    // unit.GetComponent<NumericComponentServer>().ApplyChange(null, NumericType.PointRemain, int.Parse(value) * 10, 0);
+                    long maxHp = unit.GetComponent<NumericComponentServer>().GetAsLong((int)NumericType.Now_MaxHp);
+                    unit.GetComponent<NumericComponentServer>().Set(NumericType.Now_Hp, maxHp);
+                    unit.GetComponent<NumericComponentServer>().Set(NumericType.PointRemain, int.Parse(value) * 10);
                     // unit.GetComponent<TaskComponent>().OnUpdateLevel(self.UserInfo.Lv);
                     // unit.GetComponent<ChengJiuComponent>().OnUpdateLevel(self.UserInfo.Lv);
                     // unit.GetComponent<HeroDataComponent>().CheckSeasonOpen(true);
-                    // self.UpdateRoleData(UserDataType.Sp, value, notice);
-                    // Function_Fight.GetInstance().UnitUpdateProperty_Base(unit, true, true);
+                    self.UpdateRoleData(UserDataType.Sp, value, notice);
+                    // Function_Fight.UnitUpdateProperty_Base(unit, true, true);
                     break;
                 case UserDataType.Sp:
                     self.UserInfo.Sp += int.Parse(value);

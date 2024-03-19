@@ -87,7 +87,7 @@ namespace ET.Server
             if (isPublicEvent)
             {
                 EventSystem.Instance.Publish(self.Scene(),
-                    new NumbericChange() { Unit = self.GetParent<Unit>(), New = value, Old = oldValue, NumericType = numericType });
+                    new NumbericChange() { Defend = self.GetParent<Unit>(), NewValue = value, OldValue = oldValue, NumericType = numericType });
             }
         }
 

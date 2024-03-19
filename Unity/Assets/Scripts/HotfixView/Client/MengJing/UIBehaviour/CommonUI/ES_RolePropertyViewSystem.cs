@@ -45,13 +45,14 @@ namespace ET.Client
             self.E_Cost_MingJieEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(); });
 
             self.E_CloseAddPointButton.AddListener(self.OnCloseAddPointButton);
-            self.E_AddPointConfirmButton.AddListener(self.OnAddPointConfirmButton);
+            self.E_AddPointConfirmButton.AddListenerAsync(self.OnAddPointConfirmButton);
             self.E_RecommendAddPointButton.AddListener(self.OnRecommendAddPointButton);
 
             self.EG_AttributeNodeRectTransform.gameObject.SetActive(true);
             self.EG_RoleAddPointRectTransform.gameObject.SetActive(false);
             self.InitShowPropertyList();
             self.RefreshRoleProperty();
+            self.InitAddProperty();
         }
 
         [EntitySystem]
@@ -265,17 +266,17 @@ namespace ET.Client
             self.EG_RoleAddPointRectTransform.gameObject.SetActive(false);
         }
 
-        private static void OnAddPointConfirmButton(this ES_RoleProperty self)
+        private static async ETTask OnAddPointConfirmButton(this ES_RoleProperty self)
         {
             self.Root().GetComponent<FlyTipComponent>().SpawnFlyTipDi("确认加点");
-            // long instanceId = self.InstanceId;
-            // C2M_RoleAddPointRequest request = new C2M_RoleAddPointRequest() { PointList = self.PointList, };
-            // M2C_RoleAddPointResponse response =
-            //         (M2C_RoleAddPointResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(request);
-            // if (instanceId != self.InstanceId)
-            // {
-            //     return;
-            // }
+            long instanceId = self.InstanceId;
+            C2M_RoleAddPointRequest request = new() { PointList = self.PointList };
+            M2C_RoleAddPointResponse response =
+                    (M2C_RoleAddPointResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            if (instanceId != self.InstanceId)
+            {
+                return;
+            }
 
             self.InitAddProperty();
         }

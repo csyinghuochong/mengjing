@@ -37,7 +37,7 @@ namespace ET
         }
 
         /// <summary>
-        /// 单人副本
+        /// 鍗曚汉鍓湰
         /// </summary>
         /// <param name="sceneTypeEnum"></param>
         /// <returns></returns>

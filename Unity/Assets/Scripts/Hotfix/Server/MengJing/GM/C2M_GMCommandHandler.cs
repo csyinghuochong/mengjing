@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
+    [FriendOf(typeof(UserInfoComponentServer))]
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_GMCommandHandler: MessageLocationHandler<Unit, C2M_GMCommand>
     {
@@ -33,7 +34,14 @@ namespace ET.Server
                         unit.GetComponent<BagComponentServer>()
                                  .OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.GM}_{TimeHelper.ServerNow()}", true, true);
                         break;
-
+                    case 6:
+                        int newLevel = int.Parse(commands[1]);
+                        if (newLevel <= 70)
+                        {
+                            int level = newLevel - unit.GetComponent<UserInfoComponentServer>().UserInfo.Lv;
+                            unit.GetComponent<UserInfoComponentServer>().UpdateRoleData(UserDataType.Lv, level.ToString());
+                        }
+                        break;
                     default:
                         break;
                 }

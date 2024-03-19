@@ -61,7 +61,7 @@ namespace ET.Client
             if (isPublicEvent)
             {
                 EventSystem.Instance.Publish(self.Scene(),
-                    new NumbericChange() { Unit = self.GetParent<Unit>(), New = value, Old = oldValue, NumericType = numericType });
+                    new NumbericChange() { Defend = self.GetParent<Unit>(), NewValue = value, OldValue = oldValue, NumericType = numericType });
             }
         }
 
@@ -86,6 +86,44 @@ namespace ET.Client
             long result = (long)(((self.GetByKey(bas) + self.GetByKey(add)) * (100 + self.GetAsFloat(pct)) / 100f + self.GetByKey(finalAdd)) *
                 (100 + self.GetAsFloat(finalPct)) / 100f);
             self.Insert(final, result, isPublicEvent);
+        }
+        
+        /// <summary>
+        /// 传入改变值,设置当前的属性值, 不走公式，一定会广播给客户端
+        /// </summary>
+        /// <param name="attack"></param>
+        /// <param name="numericType"></param>
+        /// <param name="changedValue">变化值</param>
+        /// <param name="skillID"></param>
+        /// <param name="notice"></param>
+        /// <param name="DamgeType"></param>
+        /// <param name="compare">是否比较变化值</param>
+        public static void ApplyValue(this NumericComponentClient self, Unit attack, int numericType, long value, int skillID, bool notice = true, int DamgeType = 0)
+        {
+            //是否超过指定上限值
+            long old = self.GetByKey(numericType);
+            self[numericType] = value;
+
+            //血量特殊处理
+            if (old == value && numericType != NumericType.Now_Hp && numericType != NumericType.RingTaskId &&
+                numericType != NumericType.UnionTaskId && numericType != NumericType.DailyTaskID)
+            {
+                return;
+            }
+
+            if (notice)
+            {
+                //发送改变属性的相关消息
+                NumbericChange args = new NumbericChange();
+                args.Defend = self.Parent as Unit;
+                args.Attack = attack;
+                args.NumericType = numericType;
+                args.OldValue = old;
+                args.NewValue = self[numericType];
+                args.SkillId = skillID;
+                args.DamgeType = DamgeType;
+                EventSystem.Instance.Publish(self.Scene(), args);
+            }
         }
     }
     
