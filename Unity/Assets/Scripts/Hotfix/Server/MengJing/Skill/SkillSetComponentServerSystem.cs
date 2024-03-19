@@ -15,7 +15,7 @@ namespace ET.Server
             self.TianFuList.Clear();
             self.TianFuList1.Clear();
 
-            //¸ù¾Ý²»Í¬µÄÖ°Òµ³õÊ¼»¯¼¼ÄÜ
+            //ï¿½ï¿½ï¿½Ý²ï¿½Í¬ï¿½ï¿½Ö°Òµï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (self.SkillList.Count == 0)
             {
                 int[] SkillList = OccupationConfigCategory.Instance.Get(self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().GetOcc()).InitSkillID;
@@ -169,7 +169,7 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// Ôö¼ÓÌì¸³ÊôÐÔ
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ì¸³ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="self"></param>
         /// <param name="tianfuId"></param>
@@ -334,7 +334,7 @@ namespace ET.Server
             return proList;
         }
 
-        //ºÍGetSkillRoleProLists·½·¨Ò»ÖÂ Ö÷ÒªÊÇ»ñÈ¡ÀàÐÍÎª8µÄ±»¶¯¼¼ÄÜ,8µÄ±»¶¯¼¼ÄÜ²»¼ÓÕ½¶·Á¦
+        //ï¿½ï¿½GetSkillRoleProListsï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ ï¿½ï¿½Òªï¿½Ç»ï¿½È¡ï¿½ï¿½ï¿½ï¿½Îª8ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,8ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü²ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½
         public static List<PropertyValue> GetSkillRoleProLists_8(this SkillSetComponentServer self)
         {
             List<PropertyValue> proList = new List<PropertyValue>();
@@ -591,7 +591,7 @@ namespace ET.Server
             return HideProList;
         }
 
-        //×ª»»Ö°Òµ
+        //×ªï¿½ï¿½Ö°Òµ
         public static void OnChangeOccTwoRequest(this SkillSetComponentServer self, int occTwo)
         {
             if (occTwo == 0)
@@ -607,7 +607,7 @@ namespace ET.Server
             }
 
             //useInfo.OccTwo = occTwo;
-            //ÐÂÔö¼¼ÄÜ
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             OccupationTwoConfig occupationTwoConfig = OccupationTwoConfigCategory.Instance.Get(occTwo);
             int[] addSkills = occupationTwoConfig.SkillID;
             for (int i = 0; i < addSkills.Length; i++)
@@ -628,7 +628,7 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// »ñÈ¡¼¤»îµÄ¾õÐÑ¼¼ÄÜ
+        /// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½Ñ¼ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="self"></param>
         /// <returns></returns>
@@ -722,7 +722,7 @@ namespace ET.Server
                     continue;
                 }
 
-                //ÆäËû×°±¸Ò²³ÖÓÐ¸Ã¼¼ÄÜ
+                //ï¿½ï¿½ï¿½ï¿½×°ï¿½ï¿½Ò²ï¿½ï¿½ï¿½Ð¸Ã¼ï¿½ï¿½ï¿½
                 if (bagComponent.IsHaveEquipSkill(skillId, baginfoid))
                 {
                     continue;
@@ -788,7 +788,7 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// ¾õÐÑ
+        /// ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="self"></param>
         /// <param name="skillid"></param>
@@ -860,7 +860,7 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// ÍÑÏÂ×°±¸
+        /// ï¿½ï¿½ï¿½ï¿½×°ï¿½ï¿½
         /// </summary>
         /// <param name="self"></param>
         /// <param name="bagInfo"></param>
@@ -885,7 +885,7 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// ´©´÷×°±¸
+        /// ï¿½ï¿½ï¿½ï¿½×°ï¿½ï¿½
         /// </summary>
         /// <param name="self"></param>
         /// <param name="bagInfo"></param>
@@ -912,7 +912,7 @@ namespace ET.Server
         public static int SetSkillIdByPosition(this SkillSetComponentServer self, C2M_SkillSet request)
         {
             SkillPro newSkill = null;
-            if (request.SkillType == 1) //¼¼ÄÜ
+            if (request.SkillType == 1) //ï¿½ï¿½ï¿½ï¿½
             {
                 SkillPro oldSkill = self.GetByPosition(request.Position);
                 if (oldSkill != null)
@@ -923,11 +923,11 @@ namespace ET.Server
 
                 if (newSkill == null)
                 {
-                    Log.Warning($"¼¼ÄÜÉèÖÃ´íÎó: {request.SkillID}");
+                    Log.Warning($"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½: {request.SkillID}");
                     return ErrorCode.ERR_ModifyData;
                 }
             }
-            else    //Ò©¼Á
+            else    //Ò©ï¿½ï¿½
             {
                 SkillPro oldSkill = self.GetByPosition(request.Position);
                 if (oldSkill != null)
@@ -981,7 +981,7 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// ¼¼ÄÜÊé
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="self"></param>
         /// <param name="skillSourceEnum"></param>
@@ -1003,7 +1003,7 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// ÖØÖÃµÚ¶þÖ°Òµ
+        /// ï¿½ï¿½ï¿½ÃµÚ¶ï¿½Ö°Òµ
         /// </summary>
         /// <param name="self"></param>
         public static int OnOccReset(this SkillSetComponentServer self)
@@ -1102,7 +1102,7 @@ namespace ET.Server
                             }
                             catch (Exception ex)
                             {
-                                Log.Debug(ex.ToString() + $"±¨´íLifeShield: {lifeShiledid}");
+                                Log.Debug(ex.ToString() + $"ï¿½ï¿½ï¿½ï¿½LifeShield: {lifeShiledid}");
                             }
 
                             proList.Add(new PropertyValue() { HideID = numericType, HideValue = lvalue });
@@ -1117,6 +1117,11 @@ namespace ET.Server
             return proList;
         }
 
+        public static List<LifeShieldInfo> GetLifeShieldList(this SkillSetComponentServer self)
+        {
+            return self.LifeShieldList;
+        }
+
         public static void OnShieldAddExp(this SkillSetComponentServer self, int shieldType, int addExp)
         {
             LifeShieldInfo keyValuePair = null;
@@ -1129,7 +1134,7 @@ namespace ET.Server
             }
             if (keyValuePair == null)
             {
-                //Ä¬ÈÏ0¼¶ 0¾­Ñé
+                //Ä¬ï¿½ï¿½0ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½
                 keyValuePair = new LifeShieldInfo() { ShieldType = shieldType, Level = 0, Exp = 0 };
                 self.LifeShieldList.Add(keyValuePair);
             }
@@ -1153,13 +1158,13 @@ namespace ET.Server
                 return;
             }
 
-            //¿ÉÒÔÉý¼¶
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             keyValuePair.Level = (curLv + 1);
             keyValuePair.Exp = (curExp + addExp - lifeShieldConfig.ShieldExp);
         }
 
         /// <summary>
-        /// ÉúÃüÖ®¶ÜÖ®ÍâµÄÆäËû×îÐ¡µÈ¼¶
+        /// ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½È¼ï¿½
         /// </summary>
         /// <param name="self"></param>
         /// <returns></returns>
@@ -1193,7 +1198,7 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// ÖØÖÃ¼¼ÄÜµã
+        /// ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½Üµï¿½
         /// </summary>
         /// <param name="self"></param>
         public static void OnSkillReset(this SkillSetComponentServer self)
