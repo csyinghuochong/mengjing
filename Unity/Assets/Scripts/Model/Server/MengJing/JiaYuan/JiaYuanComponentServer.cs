@@ -4,7 +4,7 @@ namespace ET.Server
 {
     
     [ComponentOf(typeof(Unit))]
-    public class JiaYuanComponentServer: Entity, IAwake<long>, IDestroy
+    public class JiaYuanComponentServer:         Entity, IAwake, IDestroy, ITransfer, IUnitCache
     {
         public long RefreshMonsterTime_2 = 0;
 

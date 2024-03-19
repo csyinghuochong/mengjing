@@ -6,7 +6,7 @@ namespace ET.Server
     
     
     [ComponentOf(typeof(Unit))]
-    public class TitleComponentServer: Entity, IAwake<long>, IDestroy
+    public class TitleComponentServer:         Entity, IAwake, IDestroy, ITransfer, IUnitCache
     {
         //称号
         public List<KeyValuePairInt> TitleList = new List<KeyValuePairInt>();

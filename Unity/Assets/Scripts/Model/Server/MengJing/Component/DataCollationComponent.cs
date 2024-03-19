@@ -6,7 +6,7 @@ namespace ET.Server
     
     
     [ComponentOf(typeof(Unit))]
-    public class DataCollationComponent: Entity, IAwake<long>, IDestroy
+    public class DataCollationComponent:       Entity, IAwake, IDestroy, ITransfer, IUnitCache
     {
         //    userid,
 

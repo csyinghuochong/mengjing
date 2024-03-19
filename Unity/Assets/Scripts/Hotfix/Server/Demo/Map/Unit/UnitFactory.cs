@@ -37,7 +37,11 @@ namespace ET.Server
                     unit.AddDataComponent<PetComponentServer>();
                     unit.AddDataComponent<SkillSetComponentServer>();
                     unit.AddDataComponent<ActivityServerComponent>();
-                    
+                    unit.AddDataComponent<RechargeComponent>();
+                    unit.AddDataComponent<ReddotComponentServer>();
+                    unit.AddDataComponent<TitleComponentServer>();
+                    unit.AddDataComponent<JiaYuanComponentServer>();
+                    unit.AddDataComponent<DataCollationComponent>();
                     
                     unitComponent.Add(unit);
                     // 加入aoi
