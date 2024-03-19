@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -169,6 +170,14 @@ namespace ET.Server
             return new float3(numericComponent.GetAsFloat(NumericType.Born_X),
                 numericComponent.GetAsFloat(NumericType.Born_Y),
                 numericComponent.GetAsFloat(NumericType.Born_Z));
+        }
+
+        public static void AddDataComponent<K>(this Unit self) where K : Entity, IAwake, new()
+        {
+            if (self.GetComponent<K>() == null)
+            {
+                self.AddComponent<K>();
+            }
         }
     }
 }

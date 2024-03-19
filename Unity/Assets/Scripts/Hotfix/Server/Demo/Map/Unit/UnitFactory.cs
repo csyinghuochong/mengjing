@@ -30,24 +30,12 @@ namespace ET.Server
                         numericComponentServer.Set(NumericType.Speed, 6f); // 速度是6米每秒
                         numericComponentServer.Set(NumericType.AOI, 15000); // 视野15米
                     }
-                    if (unit.GetComponent<TaskComponentServer>() == null)
-                    {
-                        unit.AddComponent<TaskComponentServer>();
-                    }
-                    if (unit.GetComponent<ChengJiuComponentServer>() == null)
-                    {
-                        unit.AddComponent<ChengJiuComponentServer>();
-                    }
-                    if (unit.GetComponent<BagComponentServer>() == null)
-                    {
-                        unit.AddComponent<BagComponentServer>();
-                    }
-                    if (unit.GetComponent<SkillSetComponentServer>() == null)
-                    {
-                        unit.AddComponent<SkillSetComponentServer>();
-                    }
-
-
+                    unit.AddDataComponent<TaskComponentServer>();
+                    unit.AddDataComponent<ChengJiuComponentServer>();
+                    unit.AddDataComponent<BagComponentServer>();
+                    unit.AddDataComponent<SkillSetComponentServer>();
+                    unit.AddDataComponent<ActivityServerComponent>();
+                   
                     unitComponent.Add(unit);
                     // 加入aoi
                     unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
