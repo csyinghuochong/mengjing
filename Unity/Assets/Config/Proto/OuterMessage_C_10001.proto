@@ -1901,3 +1901,26 @@ message M2C_TaskTrackResponse	//ILocationResponse
 	string Message = 92;
 }
 
+//ResponseType M2C_SkillInitResponse
+//技能升级
+message C2M_SkillInitRequest	// ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_SkillInitResponse	// ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	SkillSetInfo SkillSetInfo = 1;
+}
+
+message SkillSetInfo
+{
+	repeated SkillPro SkillList = 1;
+	repeated int32 TianFuList = 2;
+	repeated LifeShieldInfo LifeShieldList = 3;
+	repeated int32 TianFuList1 = 4;
+	int32 TianFuPlan = 5;
+}

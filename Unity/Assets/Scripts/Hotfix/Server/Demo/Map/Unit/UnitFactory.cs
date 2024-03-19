@@ -74,6 +74,10 @@ namespace ET.Server
                     {
                         unit.AddComponent<TaskComponentServer>();
                     }
+                    if (unit.GetComponent<SkillSetComponentServer>() == null)
+                    {
+                        unit.AddComponent<SkillSetComponentServer>();
+                    }
 
 
                     unitComponent.Add(unit);
