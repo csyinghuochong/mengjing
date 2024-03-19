@@ -7658,6 +7658,136 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_LifeShieldCostResponse))]
+	[Message(OuterMessage.C2M_LifeShieldCostRequest)]
+	[MemoryPackable]
+	public partial class C2M_LifeShieldCostRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_LifeShieldCostRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_LifeShieldCostRequest), isFromPool) as C2M_LifeShieldCostRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int OperateType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public List<long> OperateBagID { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.OperateType = default;
+			this.OperateBagID.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_LifeShieldCostResponse)]
+	[MemoryPackable]
+	public partial class M2C_LifeShieldCostResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_LifeShieldCostResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_LifeShieldCostResponse), isFromPool) as M2C_LifeShieldCostResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<LifeShieldInfo> ShieldList { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public int AddExp { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.ShieldList.Clear();
+			this.AddExp = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_TianFuPlanResponse))]
+	[Message(OuterMessage.C2M_TianFuPlanRequest)]
+	[MemoryPackable]
+	public partial class C2M_TianFuPlanRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TianFuPlanRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TianFuPlanRequest), isFromPool) as C2M_TianFuPlanRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int TianFuPlan { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.TianFuPlan = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TianFuPlanResponse)]
+	[MemoryPackable]
+	public partial class M2C_TianFuPlanResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TianFuPlanResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TianFuPlanResponse), isFromPool) as M2C_TianFuPlanResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -7874,5 +8004,9 @@ namespace ET
 		 public const ushort M2C_SkillOperation = 10213;
 		 public const ushort C2M_SkillUp = 10214;
 		 public const ushort M2C_SkillUp = 10215;
+		 public const ushort C2M_LifeShieldCostRequest = 10216;
+		 public const ushort M2C_LifeShieldCostResponse = 10217;
+		 public const ushort C2M_TianFuPlanRequest = 10218;
+		 public const ushort M2C_TianFuPlanResponse = 10219;
 	}
 }
