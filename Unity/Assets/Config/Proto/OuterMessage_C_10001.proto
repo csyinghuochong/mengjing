@@ -1979,4 +1979,36 @@ message M2C_SkillUp	// ILocationResponse
 	int32 NewSkillID = 1;
 }
 
+//ResponseType M2C_LifeShieldCostResponse
+message C2M_LifeShieldCostRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
 
+	int32 OperateType = 1;
+	repeated int64 OperateBagID = 2;
+}
+
+message M2C_LifeShieldCostResponse    // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	repeated LifeShieldInfo ShieldList = 1;
+	int32 AddExp = 2;
+}
+
+//ResponseType M2C_TianFuPlanResponse
+message C2M_TianFuPlanRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 TianFuPlan = 1;
+}
+
+message M2C_TianFuPlanResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
