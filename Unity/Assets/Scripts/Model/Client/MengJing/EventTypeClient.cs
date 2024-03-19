@@ -55,6 +55,10 @@ namespace ET.Client
     {
     }
     
+    public struct DataUpdate_TaskGiveUp
+    {
+    }
+    
     public struct DataUpdate_TaskTrace
     {
     }

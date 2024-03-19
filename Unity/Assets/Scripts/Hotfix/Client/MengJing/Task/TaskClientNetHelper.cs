@@ -86,5 +86,24 @@ namespace ET.Client
             EventSystem.Instance.Publish(root,new DataUpdate_TaskGet());
             return response.Error;
         }
+
+        public static async ETTask<int> RequestGiveUpTask(Scene root, int taskId)
+        {
+            C2M_TaskGiveUpRequest request = new() { TaskId = taskId };
+            M2C_TaskGiveUpResponse response = (M2C_TaskGiveUpResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            TaskComponentClient taskComponentClient = root.GetComponent<TaskComponentClient>();
+            for (int i = taskComponentClient.RoleTaskList.Count - 1; i >= 0; i--)
+            {
+                if (taskComponentClient.RoleTaskList[i].taskID == taskId)
+                {
+                    taskComponentClient.RoleTaskList.RemoveAt(i);
+                    break;
+                }
+            }
+            
+            EventSystem.Instance.Publish(root,new DataUpdate_TaskGet());
+            return response.Error;
+        }
     }
 }

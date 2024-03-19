@@ -20,6 +20,9 @@ namespace ET.Client
 
             self.E_ZhuizongButton.AddListener(() => { self.OnTrackTask(true); });
             self.E_CancelZhuizongButton.AddListener(() => { self.OnTrackTask(false); });
+
+            self.E_GiveupButton.AddListener(self.OnGiveupButton);
+            self.E_GoingButton.AddListener(self.OnGoingButton);
             
             self.EG_RightRectTransform.gameObject.SetActive(false);
         }
@@ -94,6 +97,43 @@ namespace ET.Client
             self.EG_RightRectTransform.gameObject.SetActive(true);
         }
 
+        private static void OnGiveupButton(this ES_TaskDetail self)
+        {
+            if (self.TaskPro == null)
+                return;
+
+            TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.TaskPro.taskID);
+            FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
+            if (taskConfig.TaskType == (int)TaskTypeEnum.Main)
+            {
+                flyTipComponent.SpawnFlyTipDi("主线任务不能放弃");
+                return;
+            }
+            if (taskConfig.TaskType == TaskTypeEnum.Ring)
+            {
+                flyTipComponent.SpawnFlyTipDi("跑环任务不能放弃");
+                return;
+            }
+
+            TaskClientNetHelper.RequestGiveUpTask(self.Root(), self.TaskPro.taskID).Coroutine();
+        }
+
+        private static void OnGoingButton(this ES_TaskDetail self)
+        {
+            bool value = TaskViewHelp.ExcuteTask(self.Root(), self.TaskPro);
+            TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.TaskPro.taskID);
+            if (value && taskConfig.TaskType != TaskTypeEnum.Ring && taskConfig.TaskType != TaskTypeEnum.Union &&
+                taskConfig.TaskType != TaskTypeEnum.Daily && taskConfig.TaskType != TaskTypeEnum.Treasure)
+            {
+                self.OnCloseTask();
+            }
+        }
+        
+        private static void OnCloseTask(this ES_TaskDetail self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Task);
+        }
+        
         private static void SetTalkUp(this ES_TaskDetail self, int taskType)
         {
             if (taskType != TaskTypeEnum.Main)
