@@ -17,6 +17,44 @@ namespace ET.Server
         {
         }
 
+        public static void OnInit(this UserInfoComponentServer self, string account, long id, long accountId, CreateRoleInfo createRoleInfo)
+        {
+             self.Account = account;
+            UserInfo userInfo = self.UserInfo;
+            userInfo.Sp = 1;
+            userInfo.UserId = id;
+            userInfo.BaoShiDu = 100;
+            userInfo.JiaYuanLv = 10001;
+            userInfo.JiaYuanFund = 10000;
+            userInfo.AccInfoID = accountId;
+            userInfo.Name = "";
+            userInfo.ServerMailIdCur = -1;
+            userInfo.PiLao = int.Parse(GlobalValueConfigCategory.Instance.Get(10).Value);        //初始化疲劳
+            userInfo.Vitality = int.Parse(GlobalValueConfigCategory.Instance.Get(10).Value);
+            userInfo.MakeList.AddRange(ComHelp.StringArrToIntList(GlobalValueConfigCategory.Instance.Get(18).Value.Split(';')));
+            userInfo.CreateTime = TimeHelper.ServerNow();
+            userInfo.RobotId = createRoleInfo.RobotId;
+
+            if (createRoleInfo.RobotId > 0)
+            {
+                int robotId = createRoleInfo.RobotId;
+                RobotConfig robotConfig = RobotConfigCategory.Instance.Get(robotId);
+                userInfo.Lv = robotConfig.Behaviour == 1 ?  RandomHelper.RandomNumber(10, 19) : robotConfig.Level;
+                userInfo.Occ = robotConfig.Behaviour == 1 ?  RandomHelper.RandomNumber(1, 3) : robotConfig.Occ;
+                userInfo.Gold = 100000;
+                userInfo.RobotId = robotId;
+                //userInfo.OccTwo = robotConfig.OccTwo;
+            }
+            else
+            {
+                userInfo.Lv = 1;
+                userInfo.Gold = 0;
+                userInfo.SeasonLevel = 1;
+                userInfo.Occ = createRoleInfo.PlayerOcc;
+                userInfo.Name = createRoleInfo.PlayerName;
+            }
+        }
+
         public static void UpdateRoleMoneyAdd(this UserInfoComponentServer self, int Type, string value, bool notice, int getWay,
         string paramsifo = "")
         {
