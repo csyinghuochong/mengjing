@@ -2012,3 +2012,11 @@ message M2C_TianFuPlanResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//终止技能
+message M2C_UnitFinishSkill // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitId = 1;
+}
