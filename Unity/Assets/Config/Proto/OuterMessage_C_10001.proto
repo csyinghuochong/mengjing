@@ -2048,3 +2048,11 @@ message M2C_UnitNumericUpdate // IMessage
 	int32 DamgeType = 5;
 	int64 AttackId = 6;
 }
+
+message ShouJiChapterInfo
+{
+	int32 ChapterId = 1;
+	int32 StarNum = 2;
+	int32 RewardInfo = 3;
+	repeated int32 ShouJiItemList = 4;
+}

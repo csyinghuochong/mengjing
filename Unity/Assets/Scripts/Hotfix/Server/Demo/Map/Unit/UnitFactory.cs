@@ -35,7 +35,9 @@ namespace ET.Server
                     unit.AddDataComponent<BagComponentServer>();
                     unit.AddDataComponent<SkillSetComponentServer>();
                     unit.AddDataComponent<ActivityServerComponent>();
-                   
+                    unit.AddDataComponent<ShoujiComponentServer>();
+                    unit.AddDataComponent<PetComponentServer>();
+                    
                     unitComponent.Add(unit);
                     // 加入aoi
                     unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);

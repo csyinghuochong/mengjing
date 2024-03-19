@@ -7930,6 +7930,40 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.ShouJiChapterInfo)]
+	[MemoryPackable]
+	public partial class ShouJiChapterInfo: MessageObject
+	{
+		public static ShouJiChapterInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(ShouJiChapterInfo), isFromPool) as ShouJiChapterInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int ChapterId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int StarNum { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int RewardInfo { get; set; }
+
+		[MemoryPackOrder(3)]
+		public List<int> ShouJiItemList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.ChapterId = default;
+			this.StarNum = default;
+			this.RewardInfo = default;
+			this.ShouJiItemList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -8154,5 +8188,6 @@ namespace ET
 		 public const ushort C2M_RoleAddPointRequest = 10221;
 		 public const ushort M2C_RoleAddPointResponse = 10222;
 		 public const ushort M2C_UnitNumericUpdate = 10223;
+		 public const ushort ShouJiChapterInfo = 10224;
 	}
 }
