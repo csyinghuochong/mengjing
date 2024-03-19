@@ -2020,3 +2020,31 @@ message M2C_UnitFinishSkill // IMessage
 	int64 ActorId = 93;
 	int64 UnitId = 1;
 }
+
+
+//ResponseType M2C_RoleAddPointResponse
+message C2M_RoleAddPointRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	repeated int32 PointList = 6;
+}
+
+message M2C_RoleAddPointResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+message M2C_UnitNumericUpdate // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitId = 94;
+	int32 SkillId = 1;
+	int32 NumericType = 2;
+	int64 OldValue = 3;
+	int64 NewValue = 4;
+	int32 DamgeType = 5;
+	int64 AttackId = 6;
+}

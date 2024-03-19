@@ -7819,6 +7819,117 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_RoleAddPointResponse))]
+	[Message(OuterMessage.C2M_RoleAddPointRequest)]
+	[MemoryPackable]
+	public partial class C2M_RoleAddPointRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_RoleAddPointRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RoleAddPointRequest), isFromPool) as C2M_RoleAddPointRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(5)]
+		public List<int> PointList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.PointList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RoleAddPointResponse)]
+	[MemoryPackable]
+	public partial class M2C_RoleAddPointResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_RoleAddPointResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RoleAddPointResponse), isFromPool) as M2C_RoleAddPointResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_UnitNumericUpdate)]
+	[MemoryPackable]
+	public partial class M2C_UnitNumericUpdate: MessageObject, IMessage
+	{
+		public static M2C_UnitNumericUpdate Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_UnitNumericUpdate), isFromPool) as M2C_UnitNumericUpdate; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(93)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int SkillId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int NumericType { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long OldValue { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long NewValue { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int DamgeType { get; set; }
+
+		[MemoryPackOrder(5)]
+		public long AttackId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.SkillId = default;
+			this.NumericType = default;
+			this.OldValue = default;
+			this.NewValue = default;
+			this.DamgeType = default;
+			this.AttackId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -8040,5 +8151,8 @@ namespace ET
 		 public const ushort C2M_TianFuPlanRequest = 10218;
 		 public const ushort M2C_TianFuPlanResponse = 10219;
 		 public const ushort M2C_UnitFinishSkill = 10220;
+		 public const ushort C2M_RoleAddPointRequest = 10221;
+		 public const ushort M2C_RoleAddPointResponse = 10222;
+		 public const ushort M2C_UnitNumericUpdate = 10223;
 	}
 }
