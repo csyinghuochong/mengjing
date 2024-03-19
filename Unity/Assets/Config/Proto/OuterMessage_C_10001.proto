@@ -1915,3 +1915,66 @@ message M2C_SkillInitResponse	// ILocationResponse
 	int32 Error = 92;
 	SkillSetInfo SkillSetInfo = 1;
 }
+
+//技能打断
+message C2M_SkillInterruptRequest // ILocationMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 SkillID = 1;
+}
+
+message M2C_SkillInterruptResult // IMessage
+{
+	int64 ActorId = 93;
+	int64 UnitId = 1;
+	int32 SkillId = 2;
+}
+
+//ResponseType M2C_SkillJueXingResponse
+message C2M_SkillJueXingRequest			// ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 JueXingId = 1;
+}
+
+message M2C_SkillJueXingResponse		// ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_SkillOperation
+//技能操作
+message C2M_SkillOperation	// ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 SkillID = 1;
+	int32 OperationType = 3;	//1技能点重置
+	string OperationValue = 4;
+}
+
+message M2C_SkillOperation	// ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+
+//ResponseType M2C_SkillUp
+//技能升级
+message C2M_SkillUp	// ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 SkillID = 1;
+}
+
+message M2C_SkillUp	// ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	int32 NewSkillID = 1;
+}

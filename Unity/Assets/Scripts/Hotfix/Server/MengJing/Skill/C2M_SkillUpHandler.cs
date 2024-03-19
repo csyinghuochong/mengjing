@@ -1,6 +1,8 @@
-namespace ET.Server;
-
-public class C2M_SkillUpHandler
+namespace ET.Serve
 {
+    public class C2M_SkillUpHandler
+    {
     
+    }
 }
+

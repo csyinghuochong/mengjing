@@ -7412,6 +7412,252 @@ namespace ET
 
 	}
 
+//技能打断
+	[Message(OuterMessage.C2M_SkillInterruptRequest)]
+	[MemoryPackable]
+	public partial class C2M_SkillInterruptRequest: MessageObject, ILocationMessage
+	{
+		public static C2M_SkillInterruptRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_SkillInterruptRequest), isFromPool) as C2M_SkillInterruptRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int SkillID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.SkillID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_SkillInterruptResult)]
+	[MemoryPackable]
+	public partial class M2C_SkillInterruptResult: MessageObject, IMessage
+	{
+		public static M2C_SkillInterruptResult Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SkillInterruptResult), isFromPool) as M2C_SkillInterruptResult; 
+		}
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int SkillId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.SkillId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_SkillJueXingResponse))]
+	[Message(OuterMessage.C2M_SkillJueXingRequest)]
+	[MemoryPackable]
+	public partial class C2M_SkillJueXingRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_SkillJueXingRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_SkillJueXingRequest), isFromPool) as C2M_SkillJueXingRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int JueXingId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.JueXingId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_SkillJueXingResponse)]
+	[MemoryPackable]
+	public partial class M2C_SkillJueXingResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_SkillJueXingResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SkillJueXingResponse), isFromPool) as M2C_SkillJueXingResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_SkillOperation))]
+//技能操作
+	[Message(OuterMessage.C2M_SkillOperation)]
+	[MemoryPackable]
+	public partial class C2M_SkillOperation: MessageObject, ILocationRequest
+	{
+		public static C2M_SkillOperation Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_SkillOperation), isFromPool) as C2M_SkillOperation; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int SkillID { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int OperationType { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string OperationValue { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.SkillID = default;
+			this.OperationType = default;
+			this.OperationValue = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_SkillOperation)]
+	[MemoryPackable]
+	public partial class M2C_SkillOperation: MessageObject, ILocationResponse
+	{
+		public static M2C_SkillOperation Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SkillOperation), isFromPool) as M2C_SkillOperation; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_SkillUp))]
+//技能升级
+	[Message(OuterMessage.C2M_SkillUp)]
+	[MemoryPackable]
+	public partial class C2M_SkillUp: MessageObject, ILocationRequest
+	{
+		public static C2M_SkillUp Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_SkillUp), isFromPool) as C2M_SkillUp; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int SkillID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.SkillID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_SkillUp)]
+	[MemoryPackable]
+	public partial class M2C_SkillUp: MessageObject, ILocationResponse
+	{
+		public static M2C_SkillUp Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SkillUp), isFromPool) as M2C_SkillUp; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int NewSkillID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.NewSkillID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -7620,5 +7866,13 @@ namespace ET
 		 public const ushort M2C_TaskTrackResponse = 10205;
 		 public const ushort C2M_SkillInitRequest = 10206;
 		 public const ushort M2C_SkillInitResponse = 10207;
+		 public const ushort C2M_SkillInterruptRequest = 10208;
+		 public const ushort M2C_SkillInterruptResult = 10209;
+		 public const ushort C2M_SkillJueXingRequest = 10210;
+		 public const ushort M2C_SkillJueXingResponse = 10211;
+		 public const ushort C2M_SkillOperation = 10212;
+		 public const ushort M2C_SkillOperation = 10213;
+		 public const ushort C2M_SkillUp = 10214;
+		 public const ushort M2C_SkillUp = 10215;
 	}
 }
