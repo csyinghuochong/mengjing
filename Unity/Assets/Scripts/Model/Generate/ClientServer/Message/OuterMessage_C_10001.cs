@@ -7788,6 +7788,37 @@ namespace ET
 
 	}
 
+//终止技能
+	[Message(OuterMessage.M2C_UnitFinishSkill)]
+	[MemoryPackable]
+	public partial class M2C_UnitFinishSkill: MessageObject, IMessage
+	{
+		public static M2C_UnitFinishSkill Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_UnitFinishSkill), isFromPool) as M2C_UnitFinishSkill; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -8008,5 +8039,6 @@ namespace ET
 		 public const ushort M2C_LifeShieldCostResponse = 10217;
 		 public const ushort C2M_TianFuPlanRequest = 10218;
 		 public const ushort M2C_TianFuPlanResponse = 10219;
+		 public const ushort M2C_UnitFinishSkill = 10220;
 	}
 }
