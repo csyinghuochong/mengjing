@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace ET.Server
 {
 
@@ -6,6 +9,48 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_SkillUp request, M2C_SkillUp response)
         {
+            SkillSetComponentServer skillSetComponent = unit.GetComponent<SkillSetComponentServer>();
+			if (skillSetComponent.GetBySkillID(request.SkillID) == null)
+			{
+			    response.Error = ErrorCode.ERR_ModifyData;
+			    return;
+			}
+
+			List<SkillPro> SkillList = skillSetComponent.GetSkillList();
+			SkillConfig skillconf = SkillConfigCategory.Instance.Get(request.SkillID);
+			int nextSkillID = skillconf.NextSkillID;
+			if (nextSkillID == 0)
+			{
+				response.Error = ErrorCode.ERR_GoldNotEnoughError;     //错误码:技能达到最大等级
+				return;
+			}
+
+			UserInfoComponentServer unitInfoComponent = unit.GetComponent<UserInfoComponentServer>();
+			int costGoldValue = skillconf.CostGoldValue;
+			int costSPValue = skillconf.CostSPValue;
+			int RoseSP = unitInfoComponent.GetSp();
+			if (/*unitInfoComponent.UserInfo.Gold < costGoldValue || */RoseSP < costSPValue)
+			{
+				response.Error = ErrorCode.ERR_GoldNotEnoughError;     //错误码:升级所需金币或者能量值不足
+				return;
+			}
+
+			//替换原有技能
+			for (int i = SkillList.Count - 1; i >= 0; i--)
+			{
+				if (SkillList[i].SkillID == request.SkillID)
+				{
+					SkillList[i].SkillID = nextSkillID;
+					break;
+				}
+			}
+				
+			response.NewSkillID = nextSkillID;
+			unit.GetComponent<UserInfoComponentServer>().UpdateRoleMoneySub(UserDataType.Gold, (costGoldValue*-1).ToString(), true, ItemGetWay.CostItem);
+			unit.GetComponent<UserInfoComponentServer>().UpdateRoleData(UserDataType.Sp, (costSPValue * -1).ToString());
+
+			Function_Fight.UnitUpdateProperty_Base( unit,true, true );
+
             await ETTask.CompletedTask;
         }
     }

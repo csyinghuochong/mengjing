@@ -316,6 +316,11 @@ namespace ET.Server
             return self.UserInfo.Lv;
         }
 
+        public static int GetSp(this UserInfoComponentServer self)
+        {
+            return self.UserInfo.Sp;
+        }
+
         public static void SetUserLv(this UserInfoComponentServer self, int lv)
         {
             self.UserInfo.Lv = lv;
@@ -331,6 +336,11 @@ namespace ET.Server
             return self.UserInfo.Gold;
         }
 
+        public static long GetDiamond(this UserInfoComponentServer self)
+        {
+            return self.UserInfo.Diamond;
+        }
+
         public static int GetCombat(this UserInfoComponentServer self)
         {
             return self.UserInfo.Combat;
@@ -340,7 +350,7 @@ namespace ET.Server
         {
             return self.UserInfo.Occ;
         }
-
+        
         public static int GetRobotId(this UserInfoComponentServer self)
         {
             return self.UserInfo.RobotId;

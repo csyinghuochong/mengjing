@@ -1262,6 +1262,11 @@ namespace ET.Server
             MapMessageHelper.SendToClient(unit, self.M2C_SkillSetMessage);
         }
 
+
+        public static List<SkillPro> GetSkillList(this SkillSetComponentServer self)
+        {
+            return self.SkillList;
+        }
     }
 
 }

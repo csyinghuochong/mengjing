@@ -10,15 +10,15 @@ namespace ET.Server
     {
         public int TianFuPlan = 0;
 
-        public List<int> TianFuList = new List<int>();          //µÚÒ»Ì×ÌìÙx·½°¸
+        public List<int> TianFuList = new List<int>();          //ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½ï¿½ï¿½ï¿½
 
-        public List<int> TianFuList1 = new List<int>();         //µÚ¶þÌ×ÌìÙx·½°¸
+        public List<int> TianFuList1 = new List<int>();         //ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½ï¿½ï¿½ï¿½
 
-        public List<int> TianFuAddition = new List<int>();         //¸½¼ÓÌì¸³
+        public List<int> TianFuAddition = new List<int>();         //ï¿½ï¿½ï¿½ï¿½ï¿½ì¸³
 
         public List<SkillPro> SkillList = new List<SkillPro>();
 
-        //ÉúÃüÖ®¶Ü
+        //ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½
         public List<LifeShieldInfo> LifeShieldList = new List<LifeShieldInfo>();
 
 

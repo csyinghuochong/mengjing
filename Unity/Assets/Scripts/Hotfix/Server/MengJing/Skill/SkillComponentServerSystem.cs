@@ -21,6 +21,11 @@ namespace ET.Server
             return null;
         }
 
+        public static void InterruptSkill(this SkillComponentServer self, int skillId)
+        {
+            
+        }
+
         public static bool IsSkillSecond(this SkillComponentServer self, int skillId)
         {
             return self.SkillSecond.ContainsKey(skillId);
