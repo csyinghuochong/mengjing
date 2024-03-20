@@ -485,7 +485,7 @@ namespace ET.Server
                 }
 
                 int dropId = 0;
-                ConfigHelper.WeekTaskDrop().TryGetValue(weekTaskNumber, out dropId);
+                ConfigData.WeekTaskDrop.TryGetValue(weekTaskNumber, out dropId);
                 if (dropId > 0)
                 {
                     List<RewardItem> droplist = new List<RewardItem>();

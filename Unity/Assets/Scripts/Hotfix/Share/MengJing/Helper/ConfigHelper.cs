@@ -1112,17 +1112,6 @@ namespace ET
         }
 
         /// <summary>
-        /// 周任务奖励
-        /// </summary>
-        public static Dictionary<int, int> WeekTaskDrop()
-        {
-            return new Dictionary<int, int>()
-            {
-                { 10, 61500001},   //完成每20环对应奖励
-            };
-        }
-
-        /// <summary>
         /// 宠物探宝奖励
         /// </summary>
         public static Dictionary<int, string> PetExploreReward()

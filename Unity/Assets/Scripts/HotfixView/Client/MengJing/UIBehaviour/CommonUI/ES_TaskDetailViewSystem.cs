@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +24,7 @@ namespace ET.Client
 
             self.E_GiveupButton.AddListener(self.OnGiveupButton);
             self.E_GoingButton.AddListener(self.OnGoingButton);
-            
+
             self.EG_RightRectTransform.gameObject.SetActive(false);
         }
 
@@ -36,7 +37,7 @@ namespace ET.Client
         public static void RefreshTaskInfo(this ES_TaskDetail self, TaskPro taskPro)
         {
             self.TaskPro = taskPro;
-            
+
             if (taskPro == null)
             {
                 self.EG_RightRectTransform.gameObject.SetActive(false);
@@ -86,6 +87,62 @@ namespace ET.Client
             string[] rewarditems = rewardStr.Split(';');
             string[] rewardItemNums = rewardNum.Split(';');
 
+            // 跑环任务显示对应的环数奖励
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int taskType = TaskConfigCategory.Instance.Get(taskPro.taskID).TaskType;
+            int nowNum = 0;
+            if (taskType == 5)
+            {
+                nowNum = unit.GetComponent<NumericComponentClient>().GetAsInt(NumericType.WeeklyTaskNumber) + 1;
+
+                if (nowNum != 0)
+                {
+                    if (ConfigData.WeekTaskDrop.ContainsKey(nowNum))
+                    {
+                        List<RewardItem> droplist = new List<RewardItem>();
+                        DropHelper.DropIDToDropItem_2(ConfigData.WeekTaskDrop[nowNum], droplist);
+
+                        if (droplist.Count > 0)
+                        {
+                            for (int i = 0; i < droplist.Count; i++)
+                            {
+                                Array.Resize(ref rewarditems, rewarditems.Length + 1);
+                                rewarditems[rewarditems.Length - 1] = droplist[i].ItemID.ToString();
+
+                                Array.Resize(ref rewardItemNums, rewardItemNums.Length + 1);
+                                rewardItemNums[rewardItemNums.Length - 1] = droplist[i].ItemNum.ToString();
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (taskType == 10)
+            {
+                nowNum = unit.GetComponent<NumericComponentClient>().GetAsInt(NumericType.RingTaskNumber) + 1;
+
+                if (nowNum != 0)
+                {
+                    if (ConfigData.RingTaskDrop.ContainsKey(nowNum))
+                    {
+                        List<RewardItem> droplist = new List<RewardItem>();
+                        DropHelper.DropIDToDropItem_2(ConfigData.RingTaskDrop[nowNum], droplist);
+
+                        if (droplist.Count > 0)
+                        {
+                            for (int i = 0; i < droplist.Count; i++)
+                            {
+                                Array.Resize(ref rewarditems, rewarditems.Length + 1);
+                                rewarditems[rewarditems.Length - 1] = droplist[i].ItemID.ToString();
+
+                                Array.Resize(ref rewardItemNums, rewardItemNums.Length + 1);
+                                rewardItemNums[rewardItemNums.Length - 1] = droplist[i].ItemNum.ToString();
+                            }
+                        }
+                    }
+                }
+            }
+
             List<RewardItem> rewardItems = new List<RewardItem>();
             for (int i = 0; i < rewarditems.Length; i++)
             {
@@ -109,6 +166,7 @@ namespace ET.Client
                 flyTipComponent.SpawnFlyTipDi("主线任务不能放弃");
                 return;
             }
+
             if (taskConfig.TaskType == TaskTypeEnum.Ring)
             {
                 flyTipComponent.SpawnFlyTipDi("跑环任务不能放弃");
@@ -128,12 +186,12 @@ namespace ET.Client
                 self.OnCloseTask();
             }
         }
-        
+
         private static void OnCloseTask(this ES_TaskDetail self)
         {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Task);
         }
-        
+
         private static void SetTalkUp(this ES_TaskDetail self, int taskType)
         {
             if (taskType != TaskTypeEnum.Main)
@@ -151,7 +209,7 @@ namespace ET.Client
                 self.ES_TaskType_2.TalkUp();
             }
         }
-        
+
         private static void OnTrackTask(this ES_TaskDetail self, bool track)
         {
             if (self.TaskPro == null)
@@ -165,12 +223,12 @@ namespace ET.Client
                 flyTipComponent.SpawnFlyTipDi("追踪数量不能超过三个!");
                 return;
             }
-            
-            TaskClientNetHelper.RequestTaskTrack(self.Root(),self.TaskPro.taskID, self.TaskPro.TrackStatus == 0 ? 1 : 0).Coroutine();
-            
+
+            TaskClientNetHelper.RequestTaskTrack(self.Root(), self.TaskPro.taskID, self.TaskPro.TrackStatus == 0? 1 : 0).Coroutine();
+
             self.E_ZhuizongButton.gameObject.SetActive(!self.E_ZhuizongButton.gameObject.activeSelf);
             self.E_CancelZhuizongButton.gameObject.SetActive(!self.E_CancelZhuizongButton.gameObject.activeSelf);
-            
+
             // 提示
             flyTipComponent.SpawnFlyTipDi(self.E_ZhuizongButton.gameObject.activeSelf == false? "任务开启追踪!" : "任务取消追踪!");
         }
