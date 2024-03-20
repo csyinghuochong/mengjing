@@ -1007,9 +1007,10 @@ namespace ET.Client
 
             self.AddUIScrollItems(ref self.ScrollItemMainChatItems, self.ShowChatInfos.Count);
             self.View.E_MainChatItemsLoopVerticalScrollRect.SetVisible(true, self.ShowChatInfos.Count);
+            self.UpdatePosition().Coroutine();
         }
 
-        public static async ETTask UpdatePosition(this DlgMain self)
+        private static async ETTask UpdatePosition(this DlgMain self)
         {
             long instanceid = self.InstanceId;
             TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();

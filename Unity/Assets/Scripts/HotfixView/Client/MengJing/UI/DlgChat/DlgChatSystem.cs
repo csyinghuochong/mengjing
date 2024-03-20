@@ -226,6 +226,7 @@ namespace ET.Client
 
             self.AddUIScrollItems(ref self.ScrollItemChatItems, self.ShowChatInfos.Count);
             self.View.E_ChatItemsLoopVerticalScrollRect.SetVisible(true, self.ShowChatInfos.Count);
+            self.View.E_ChatItemsLoopVerticalScrollRect.RefillCellsFromEnd();
         }
     }
 }
