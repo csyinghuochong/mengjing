@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ChatComponent))]
     [FriendOf(typeof (TaskComponentClient))]
     [FriendOf(typeof (UserInfoComponentClient))]
     [FriendOf(typeof (DlgMain))]
@@ -21,7 +22,17 @@ namespace ET.Client
                 await ETTask.CompletedTask;
             }
         }
-        
+
+        [Event(SceneType.Demo)]
+        public class DataUpdate_OnRecvChat_MainChatItemsRefresh: AEvent<Scene, DataUpdate_OnRecvChat>
+        {
+            protected override async ETTask Run(Scene root, DataUpdate_OnRecvChat args)
+            {
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnRecvChat();
+                await ETTask.CompletedTask;
+            }
+        }
+
         [Invoke(TimerInvokeType.JoystickTimer)]
         public class JoystickTimer: ATimer<DlgMain>
         {
@@ -88,9 +99,10 @@ namespace ET.Client
             self.View.E_YaoGanDiFixEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.EndDrag(pdata as PointerEventData); });
 
             self.View.E_SetButton.AddListener(self.OnSetButton);
-            
-            
+
+
             self.View.E_MainTaskItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainTaskItemsRefresh);
+            self.View.E_MainChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainChatItemsRefresh);
             self.View.E_RoseTaskButton.AddListener(self.OnRoseTaskButton);
             self.RefreshMainTaskItems();
         }
@@ -106,7 +118,7 @@ namespace ET.Client
 
             self.ResetJoystick();
             self.RefreshLeftUp();
-            
+
             // IOS适配
             IPHoneHelper.SetPosition(self.View.EG_PhoneLeftRectTransform.gameObject, new Vector2(120f, 0f));
         }
@@ -133,11 +145,12 @@ namespace ET.Client
                 {
                     continue;
                 }
-                
+
                 self.ShowTaskPros.Add(taskPro);
             }
+
             self.View.E_RoseTaskButton.gameObject.SetActive(self.ShowTaskPros.Count == 0);
-            
+
             self.AddUIScrollItems(ref self.ScrollItemMainTasks, self.ShowTaskPros.Count);
             self.View.E_MainTaskItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskPros.Count);
         }
@@ -168,12 +181,14 @@ namespace ET.Client
                 flyTipComponent.SpawnFlyTipDi(fubenName);
                 return;
             }
+
             int curdungeonid = mapComponent.SceneId;
             if (curdungeonid == fubenId)
             {
                 TaskViewHelp.MoveToNpc(self.Root(), getNpc).Coroutine();
                 return;
             }
+
             if (TaskViewHelp.GeToOtherFuben(self.Root(), fubenId, mapComponent.SceneId))
             {
                 return;
@@ -183,7 +198,7 @@ namespace ET.Client
         }
 
         #endregion
-        
+
         #region 左上角信息
 
         private static void OnSetButton(this DlgMain self)
@@ -260,7 +275,7 @@ namespace ET.Client
         private static void OnAdventureButton(this DlgMain self)
         {
             Log.Debug("进入冒险！！！");
-            EnterMapHelper.RequestTransfer( self.Root(), SceneTypeEnum.LocalDungeon, 1 ).Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, 1).Coroutine();
         }
 
         private static void OnPetFormationButton(this DlgMain self)
@@ -973,69 +988,25 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Chat).Coroutine();
         }
 
-        // private static void OnRecvChat(this DlgMain self, ChatInfo chatInfo)
-        // {
-        //     if (self.ChatInfoList.Count >= 10)
-        //     {
-        //         self.ChatInfoList.RemoveAt(0);
-        //     }
-        //
-        //     self.ChatInfoList.Add(chatInfo);
-        //
-        //     for (int i = 0; i < self.ChatInfoList.Count; i++)
-        //     {
-        //         UIMainChatItemComponent ui_2 = null;
-        //         if (i < self.ChatUIList.Count)
-        //         {
-        //             ui_2 = self.ChatUIList[i];
-        //             ui_2.GameObject.SetActive(true);
-        //         }
-        //         else
-        //         {
-        //             GameObject itemSpace = GameObject.Instantiate(self.UIMainChatItem);
-        //             UICommonHelper.SetParent(itemSpace, self.ChatUIListNode);
-        //             itemSpace.SetActive(true);
-        //             ui_2 = self.AddChild<UIMainChatItemComponent, GameObject>(itemSpace);
-        //             ui_2.SetClickHandler(() => { self.OnOpenChat(); });
-        //             self.ChatUIList.Add(ui_2);
-        //         }
-        //
-        //         ui_2.OnUpdateUI(self.ChatInfoList[i]);
-        //     }
-        //
-        //     for (int i = self.ChatInfoList.Count; i < self.ChatUIList.Count; i++)
-        //     {
-        //         self.ChatUIList[i].GameObject.SetActive(false);
-        //         self.ChatUIList[i].UpdateHeight = false;
-        //     }
-        //
-        //     self.UpdatePosition().Coroutine();
-        //     self.ImageButton.SetActive(self.ChatInfoList.Count < 4);
-        // }
-        //
-        // private static async ETTask UpdatePosition(this DlgMain self)
-        // {
-        //     long instanceid = self.InstanceId;
-        //     await TimerComponent.Instance.WaitAsync(100);
-        //     if (instanceid != self.InstanceId)
-        //     {
-        //         return;
-        //     }
-        //
-        //     for (int i = 0; i < self.ChatUIList.Count; i++)
-        //     {
-        //         self.ChatUIList[i].UpdateHeight();
-        //     }
-        //
-        //     await TimerComponent.Instance.WaitAsync(100);
-        //     if (instanceid != self.InstanceId)
-        //     {
-        //         return;
-        //     }
-        //
-        //     self.ScrollRect.GetComponent<ScrollRect>().verticalNormalizedPosition = 0f;
-        // }
+        public static void OnRecvChat(this DlgMain self)
+        {
+            self.RefreshMainChatItems();
+        }
 
+        private static void OnMainChatItemsRefresh(this DlgMain self, Transform transform, int index)
+        {
+            Scroll_Item_MainChatItem scrollItemMainChatItem = self.ScrollItemMainChatItems[index].BindTrans(transform);
+            scrollItemMainChatItem.Refresh(self.ShowChatInfos[index]);
+        }
+
+        private static void RefreshMainChatItems(this DlgMain self)
+        {
+            ChatComponent chatComponent = self.Root().GetComponent<ChatComponent>();
+            self.ShowChatInfos.Add(chatComponent.LastChatInfo);
+
+            self.AddUIScrollItems(ref self.ScrollItemMainChatItems, self.ShowChatInfos.Count);
+            self.View.E_MainChatItemsLoopVerticalScrollRect.SetVisible(true, self.ShowChatInfos.Count);
+        }
         #endregion
     }
 }

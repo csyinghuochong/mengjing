@@ -891,7 +891,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_MainChatListLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_MainChatItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -900,11 +900,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_MainChatListLoopVerticalScrollRect == null )
+     			if( this.m_E_MainChatItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_MainChatListLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_LeftBottomSet/EG_MainChat/E_MainChatList");
+		    		this.m_E_MainChatItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_LeftBottomSet/EG_MainChat/E_MainChatItems");
      			}
-     			return this.m_E_MainChatListLoopVerticalScrollRect;
+     			return this.m_E_MainChatItemsLoopVerticalScrollRect;
      		}
      	}
 
@@ -1421,7 +1421,7 @@ namespace ET.Client
 			this.m_E_ChengJiuImage = null;
 			this.m_EG_RoseExpRectTransform = null;
 			this.m_EG_MainChatRectTransform = null;
-			this.m_E_MainChatListLoopVerticalScrollRect = null;
+			this.m_E_MainChatItemsLoopVerticalScrollRect = null;
 			this.m_E_OpenChatButton = null;
 			this.m_E_OpenChatImage = null;
 			this.m_EG_RightSetRectTransform = null;
@@ -1504,7 +1504,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_ChengJiuImage = null;
 		private UnityEngine.RectTransform m_EG_RoseExpRectTransform = null;
 		private UnityEngine.RectTransform m_EG_MainChatRectTransform = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_MainChatListLoopVerticalScrollRect = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_MainChatItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_OpenChatButton = null;
 		private UnityEngine.UI.Image m_E_OpenChatImage = null;
 		private UnityEngine.RectTransform m_EG_RightSetRectTransform = null;
