@@ -2281,3 +2281,134 @@ message M2C_PetChangePosResponse // ILocationResponse
 	string Message = 91;
 	int32 Error = 92;
 }
+
+//ResponseType M2C_PetDuiHuanResponse
+message C2M_PetDuiHuanRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 OperateId = 1;
+}
+
+message M2C_PetDuiHuanResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	RolePetInfo RolePetInfo = 1;
+}
+
+//ResponseType M2C_PetEggChouKaResponse
+message C2M_PetEggChouKaRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 ChouKaType = 1;
+
+}
+
+message M2C_PetEggChouKaResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	repeated RewardItem ReardList = 1;		//奖励列表
+}
+
+//ResponseType M2C_PetEggDuiHuanResponse
+message C2M_PetEggDuiHuanRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 ChouKaId = 1;
+}
+
+message M2C_PetEggDuiHuanResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	repeated RewardItem ReardList = 1;
+}
+
+//ResponseType M2C_PetEquipResponse
+//宠物装备
+message C2M_PetEquipRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 PetInfoId = 1;
+	int64 BagInfoId = 2;
+	int32 OperateType = 4;   //1装备 2卸下
+}
+
+message M2C_PetEquipResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	RolePetInfo RolePetInfo = 1;
+}
+
+//ResponseType M2C_PetExploreReward 
+message C2M_PetExploreReward // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 RewardId = 1;   //PetExploreReward.ley
+}
+
+message M2C_PetExploreReward // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_PetFragmentDuiHuan
+message C2M_PetFragmentDuiHuan // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 OperateId = 1;
+}
+
+message M2C_PetFragmentDuiHuan // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	RolePetInfo RolePetInfo = 1;
+}
+
+//ResponseType M2C_PetFubenBeginResponse
+//宠物副本开始战斗
+message C2M_PetFubenBeginRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_PetFubenBeginResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//宠物副本结束战斗
+message C2M_PetFubenOverRequest // ILocationMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+//ResponseType M2C_PetFubenRewardResponse
+//宠物副本星级奖励
+message C2M_PetFubenRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_PetFubenRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
