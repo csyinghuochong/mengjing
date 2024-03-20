@@ -30,6 +30,8 @@ namespace ET.Server
         private static void Awake(this ET.Server.ActivityServerComponent self)
         {
             self.MapIdList.Clear();
+            Log.Debug($"self.Zone:  {self.Zone()}");
+            
             self.MapIdList.Add(UnitCacheHelper.GetGateServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetPaiMaiServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetRankServerId(self.Zone()));
