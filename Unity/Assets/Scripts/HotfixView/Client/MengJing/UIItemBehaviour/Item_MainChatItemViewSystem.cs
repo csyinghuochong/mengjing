@@ -70,5 +70,26 @@ namespace ET.Client
 				}
 			}
 		}
+		
+		public static  void UpdateHeight(this Scroll_Item_MainChatItem self)
+		{
+			if (!self.UpdateHeight)
+			{
+				return;
+			}
+			self.UpdateHeight = false;
+			float preferredHeight = self.E_ChatTextText.preferredHeight;
+			if (preferredHeight > 40f)
+			{
+				self.uiTransform.GetComponent<RectTransform>().sizeDelta = new Vector2(400, preferredHeight + 50);
+				self.uiTransform.gameObject.SetActive(false);
+				self.uiTransform.gameObject.SetActive(true);
+			}
+			else
+			{
+				self.uiTransform.GetComponent<RectTransform>().sizeDelta = new Vector2(400, 40);
+			}
+		}
+
 	}
 }

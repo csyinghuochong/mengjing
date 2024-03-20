@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_MainChatItem))]
     [FriendOf(typeof (ChatComponent))]
     [FriendOf(typeof (TaskComponentClient))]
     [FriendOf(typeof (UserInfoComponentClient))]
@@ -1007,6 +1008,41 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemMainChatItems, self.ShowChatInfos.Count);
             self.View.E_MainChatItemsLoopVerticalScrollRect.SetVisible(true, self.ShowChatInfos.Count);
         }
+
+        public static async ETTask UpdatePosition(this DlgMain self)
+        {
+            long instanceid = self.InstanceId;
+            TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
+            await timerComponent.WaitAsync(100);
+            if (instanceid != self.InstanceId)
+            {
+                return;
+            }
+
+            foreach (Scroll_Item_MainChatItem scrollItemMainChatItem in self.ScrollItemMainChatItems.Values)
+            {
+                if (scrollItemMainChatItem == null)
+                {
+                    continue;
+                }
+
+                if (scrollItemMainChatItem.uiTransform == null)
+                {
+                    continue;
+                }
+
+                scrollItemMainChatItem.UpdateHeight();
+            }
+
+            await timerComponent.WaitAsync(100);
+            if (instanceid != self.InstanceId)
+            {
+                return;
+            }
+
+            self.View.E_MainChatItemsLoopVerticalScrollRect.verticalNormalizedPosition = 0f;
+        }
+
         #endregion
     }
 }

@@ -8,6 +8,7 @@ namespace ET.Client
 	{
 		public ChatInfo ChatInfo;
 		public GameObject[] TitleList = new GameObject[ChannelEnum.Number];
+		public bool UpdateHeight;
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
