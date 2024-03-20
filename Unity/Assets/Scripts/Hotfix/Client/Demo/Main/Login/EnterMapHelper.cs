@@ -20,9 +20,10 @@ namespace ET.Client
                 // 等待场景切换完成
                 await root.GetComponent<ObjectWait>().Wait<Wait_SceneChangeFinish>();
 
+                await UserInfoNetHelper.RequestUserInfoInit(root);
+                 
                 await BagClientNetHelper.RequestBagInit(root);
                 await ActivityNetHelper.RequestActivityInfo(root);
-                await UserInfoNetHelper.RequestUserInfoInit(root);
                 await FriendNetHelper.RequestFriendInfo(root);
                 await TaskClientNetHelper.RequestTaskInit(root);
 

@@ -43,11 +43,7 @@ namespace ET.Server
 			gateMapComponent.Scene = await GateMapFactory.Create(gateMapComponent, player.Id, IdGenerater.Instance.GenerateInstanceId(), "GateMap");
 
 			Scene scene = gateMapComponent.Scene;
-
-            // 这里可以从DB中加载Unit
-            //Unit unit=  UnitFactory.Create(scene, player.Id, UnitType.Player);
-            
-            //测试，先写死
+			
             player.UnitId = request.UnitId;
             player.ActivityServerId = UnitCacheHelper.GetActivityId(session.Zone());
             player.FriendServerId = UnitCacheHelper.GetFriendId(session.Zone());
