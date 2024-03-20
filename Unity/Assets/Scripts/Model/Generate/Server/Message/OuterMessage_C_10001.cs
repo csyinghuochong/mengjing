@@ -8733,6 +8733,76 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_RolePetHeCheng))]
+//宠物合成
+	[Message(OuterMessage.C2M_RolePetHeCheng)]
+	[MemoryPackable]
+	public partial class C2M_RolePetHeCheng: MessageObject, ILocationRequest
+	{
+		public static C2M_RolePetHeCheng Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RolePetHeCheng), isFromPool) as C2M_RolePetHeCheng; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PetInfoId1 { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long PetInfoId2 { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.PetInfoId1 = default;
+			this.PetInfoId2 = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RolePetHeCheng)]
+	[MemoryPackable]
+	public partial class M2C_RolePetHeCheng: MessageObject, ILocationResponse
+	{
+		public static M2C_RolePetHeCheng Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RolePetHeCheng), isFromPool) as M2C_RolePetHeCheng; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public RolePetInfo rolePetInfo { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long DeletePetInfoId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.rolePetInfo = default;
+			this.DeletePetInfoId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -8977,5 +9047,7 @@ namespace ET
 		 public const ushort M2C_RolePetFenjie = 10241;
 		 public const ushort C2M_RolePetXiLian = 10242;
 		 public const ushort M2C_RolePetXiLian = 10243;
+		 public const ushort C2M_RolePetHeCheng = 10244;
+		 public const ushort M2C_RolePetHeCheng = 10245;
 	}
 }
