@@ -8803,6 +8803,2086 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_PetChangePosResponse))]
+	[Message(OuterMessage.C2M_PetChangePosRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetChangePosRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PetChangePosRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetChangePosRequest), isFromPool) as C2M_PetChangePosRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int Index1 { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Index2 { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Index1 = default;
+			this.Index2 = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetChangePosResponse)]
+	[MemoryPackable]
+	public partial class M2C_PetChangePosResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PetChangePosResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetChangePosResponse), isFromPool) as M2C_PetChangePosResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetDuiHuanResponse))]
+	[Message(OuterMessage.C2M_PetDuiHuanRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetDuiHuanRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PetDuiHuanRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetDuiHuanRequest), isFromPool) as C2M_PetDuiHuanRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int OperateId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.OperateId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetDuiHuanResponse)]
+	[MemoryPackable]
+	public partial class M2C_PetDuiHuanResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PetDuiHuanResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetDuiHuanResponse), isFromPool) as M2C_PetDuiHuanResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public RolePetInfo RolePetInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.RolePetInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetEggChouKaResponse))]
+	[Message(OuterMessage.C2M_PetEggChouKaRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetEggChouKaRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PetEggChouKaRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetEggChouKaRequest), isFromPool) as C2M_PetEggChouKaRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ChouKaType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ChouKaType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetEggChouKaResponse)]
+	[MemoryPackable]
+	public partial class M2C_PetEggChouKaResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PetEggChouKaResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetEggChouKaResponse), isFromPool) as M2C_PetEggChouKaResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<RewardItem> ReardList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.ReardList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetEggDuiHuanResponse))]
+	[Message(OuterMessage.C2M_PetEggDuiHuanRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetEggDuiHuanRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PetEggDuiHuanRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetEggDuiHuanRequest), isFromPool) as C2M_PetEggDuiHuanRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ChouKaId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ChouKaId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetEggDuiHuanResponse)]
+	[MemoryPackable]
+	public partial class M2C_PetEggDuiHuanResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PetEggDuiHuanResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetEggDuiHuanResponse), isFromPool) as M2C_PetEggDuiHuanResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<RewardItem> ReardList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.ReardList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetEquipResponse))]
+//宠物装备
+	[Message(OuterMessage.C2M_PetEquipRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetEquipRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PetEquipRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetEquipRequest), isFromPool) as C2M_PetEquipRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PetInfoId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long BagInfoId { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int OperateType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.PetInfoId = default;
+			this.BagInfoId = default;
+			this.OperateType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetEquipResponse)]
+	[MemoryPackable]
+	public partial class M2C_PetEquipResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PetEquipResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetEquipResponse), isFromPool) as M2C_PetEquipResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public RolePetInfo RolePetInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.RolePetInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetExploreReward))]
+	[Message(OuterMessage.C2M_PetExploreReward)]
+	[MemoryPackable]
+	public partial class C2M_PetExploreReward: MessageObject, ILocationRequest
+	{
+		public static C2M_PetExploreReward Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetExploreReward), isFromPool) as C2M_PetExploreReward; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RewardId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.RewardId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetExploreReward)]
+	[MemoryPackable]
+	public partial class M2C_PetExploreReward: MessageObject, ILocationResponse
+	{
+		public static M2C_PetExploreReward Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetExploreReward), isFromPool) as M2C_PetExploreReward; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetFragmentDuiHuan))]
+	[Message(OuterMessage.C2M_PetFragmentDuiHuan)]
+	[MemoryPackable]
+	public partial class C2M_PetFragmentDuiHuan: MessageObject, ILocationRequest
+	{
+		public static C2M_PetFragmentDuiHuan Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetFragmentDuiHuan), isFromPool) as C2M_PetFragmentDuiHuan; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int OperateId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.OperateId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetFragmentDuiHuan)]
+	[MemoryPackable]
+	public partial class M2C_PetFragmentDuiHuan: MessageObject, ILocationResponse
+	{
+		public static M2C_PetFragmentDuiHuan Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetFragmentDuiHuan), isFromPool) as M2C_PetFragmentDuiHuan; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public RolePetInfo RolePetInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.RolePetInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetFubenBeginResponse))]
+//宠物副本开始战斗
+	[Message(OuterMessage.C2M_PetFubenBeginRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetFubenBeginRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PetFubenBeginRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetFubenBeginRequest), isFromPool) as C2M_PetFubenBeginRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetFubenBeginResponse)]
+	[MemoryPackable]
+	public partial class M2C_PetFubenBeginResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PetFubenBeginResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetFubenBeginResponse), isFromPool) as M2C_PetFubenBeginResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//宠物副本结束战斗
+	[Message(OuterMessage.C2M_PetFubenOverRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetFubenOverRequest: MessageObject, ILocationMessage
+	{
+		public static C2M_PetFubenOverRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetFubenOverRequest), isFromPool) as C2M_PetFubenOverRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetFubenRewardResponse))]
+//宠物副本星级奖励
+	[Message(OuterMessage.C2M_PetFubenRewardRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetFubenRewardRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PetFubenRewardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetFubenRewardRequest), isFromPool) as C2M_PetFubenRewardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetFubenRewardResponse)]
+	[MemoryPackable]
+	public partial class M2C_PetFubenRewardResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PetFubenRewardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetFubenRewardResponse), isFromPool) as M2C_PetFubenRewardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetHeXinChouKaResponse))]
+	[Message(OuterMessage.C2M_PetHeXinChouKaRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetHeXinChouKaRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PetHeXinChouKaRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetHeXinChouKaRequest), isFromPool) as C2M_PetHeXinChouKaRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ChouKaType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ChouKaType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetHeXinChouKaResponse)]
+	[MemoryPackable]
+	public partial class M2C_PetHeXinChouKaResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PetHeXinChouKaResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetHeXinChouKaResponse), isFromPool) as M2C_PetHeXinChouKaResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<RewardItem> ReardList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.ReardList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetHeXinExploreReward))]
+	[Message(OuterMessage.C2M_PetHeXinExploreReward)]
+	[MemoryPackable]
+	public partial class C2M_PetHeXinExploreReward: MessageObject, ILocationRequest
+	{
+		public static C2M_PetHeXinExploreReward Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetHeXinExploreReward), isFromPool) as C2M_PetHeXinExploreReward; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RewardId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.RewardId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetHeXinExploreReward)]
+	[MemoryPackable]
+	public partial class M2C_PetHeXinExploreReward: MessageObject, ILocationResponse
+	{
+		public static M2C_PetHeXinExploreReward Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetHeXinExploreReward), isFromPool) as M2C_PetHeXinExploreReward; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetHeXinHeChengResponse))]
+//宠物之核合成
+	[Message(OuterMessage.C2M_PetHeXinHeChengRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetHeXinHeChengRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PetHeXinHeChengRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetHeXinHeChengRequest), isFromPool) as C2M_PetHeXinHeChengRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long BagInfoID_1 { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long BagInfoID_2 { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.BagInfoID_1 = default;
+			this.BagInfoID_2 = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetHeXinHeChengResponse)]
+	[MemoryPackable]
+	public partial class M2C_PetHeXinHeChengResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PetHeXinHeChengResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetHeXinHeChengResponse), isFromPool) as M2C_PetHeXinHeChengResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetHeXinHeChengQuickResponse))]
+//宠物之核一键合成
+	[Message(OuterMessage.C2M_PetHeXinHeChengQuickRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetHeXinHeChengQuickRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PetHeXinHeChengQuickRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetHeXinHeChengQuickRequest), isFromPool) as C2M_PetHeXinHeChengQuickRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetHeXinHeChengQuickResponse)]
+	[MemoryPackable]
+	public partial class M2C_PetHeXinHeChengQuickResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PetHeXinHeChengQuickResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetHeXinHeChengQuickResponse), isFromPool) as M2C_PetHeXinHeChengQuickResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetMingOccupyResponse))]
+	[Message(OuterMessage.C2M_PetMingOccupyRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetMingOccupyRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PetMingOccupyRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetMingOccupyRequest), isFromPool) as C2M_PetMingOccupyRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int Operate { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Operate = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetMingOccupyResponse)]
+	[MemoryPackable]
+	public partial class M2C_PetMingOccupyResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PetMingOccupyResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetMingOccupyResponse), isFromPool) as M2C_PetMingOccupyResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetMingRecordResponse))]
+	[Message(OuterMessage.C2M_PetMingRecordRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetMingRecordRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PetMingRecordRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetMingRecordRequest), isFromPool) as C2M_PetMingRecordRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetMingRecordResponse)]
+	[MemoryPackable]
+	public partial class M2C_PetMingRecordResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PetMingRecordResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetMingRecordResponse), isFromPool) as M2C_PetMingRecordResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<PetMingRecord> PetMingRecords { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PetMingRecords.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetMingResetResponse))]
+	[Message(OuterMessage.C2M_PetMingResetRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetMingResetRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PetMingResetRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetMingResetRequest), isFromPool) as C2M_PetMingResetRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetMingResetResponse)]
+	[MemoryPackable]
+	public partial class M2C_PetMingResetResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PetMingResetResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetMingResetResponse), isFromPool) as M2C_PetMingResetResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetMingRewardResponse))]
+	[Message(OuterMessage.C2M_PetMingRewardRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetMingRewardRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PetMingRewardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetMingRewardRequest), isFromPool) as C2M_PetMingRewardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int Number { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Number = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetMingRewardResponse)]
+	[MemoryPackable]
+	public partial class M2C_PetMingRewardResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PetMingRewardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetMingRewardResponse), isFromPool) as M2C_PetMingRewardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetOpenCangKu))]
+	[Message(OuterMessage.C2M_PetOpenCangKu)]
+	[MemoryPackable]
+	public partial class C2M_PetOpenCangKu: MessageObject, ILocationRequest
+	{
+		public static C2M_PetOpenCangKu Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetOpenCangKu), isFromPool) as C2M_PetOpenCangKu; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int OpenIndex { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.OpenIndex = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetOpenCangKu)]
+	[MemoryPackable]
+	public partial class M2C_PetOpenCangKu: MessageObject, ILocationResponse
+	{
+		public static M2C_PetOpenCangKu Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetOpenCangKu), isFromPool) as M2C_PetOpenCangKu; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetPutCangKu))]
+	[Message(OuterMessage.C2M_PetPutCangKu)]
+	[MemoryPackable]
+	public partial class C2M_PetPutCangKu: MessageObject, ILocationRequest
+	{
+		public static C2M_PetPutCangKu Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetPutCangKu), isFromPool) as C2M_PetPutCangKu; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PetInfoId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int PetStatus { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int OpenIndex { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.PetInfoId = default;
+			this.PetStatus = default;
+			this.OpenIndex = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetPutCangKu)]
+	[MemoryPackable]
+	public partial class M2C_PetPutCangKu: MessageObject, ILocationResponse
+	{
+		public static M2C_PetPutCangKu Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetPutCangKu), isFromPool) as M2C_PetPutCangKu; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetShouHuActiveResponse))]
+//宠物守护
+	[Message(OuterMessage.C2M_PetShouHuActiveRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetShouHuActiveRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PetShouHuActiveRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetShouHuActiveRequest), isFromPool) as C2M_PetShouHuActiveRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int PetShouHuActive { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.PetShouHuActive = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetShouHuActiveResponse)]
+	[MemoryPackable]
+	public partial class M2C_PetShouHuActiveResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PetShouHuActiveResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetShouHuActiveResponse), isFromPool) as M2C_PetShouHuActiveResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int PetShouHuActive { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PetShouHuActive = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetShouHuResponse))]
+//宠物守护
+	[Message(OuterMessage.C2M_PetShouHuRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetShouHuRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PetShouHuRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetShouHuRequest), isFromPool) as C2M_PetShouHuRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PetInfoId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Position { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.PetInfoId = default;
+			this.Position = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetShouHuResponse)]
+	[MemoryPackable]
+	public partial class M2C_PetShouHuResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PetShouHuResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetShouHuResponse), isFromPool) as M2C_PetShouHuResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<long> PetShouHuList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PetShouHuList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetTakeOutBag))]
+	[Message(OuterMessage.C2M_PetTakeOutBag)]
+	[MemoryPackable]
+	public partial class C2M_PetTakeOutBag: MessageObject, ILocationRequest
+	{
+		public static C2M_PetTakeOutBag Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetTakeOutBag), isFromPool) as C2M_PetTakeOutBag; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PetInfoId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.PetInfoId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetTakeOutBag)]
+	[MemoryPackable]
+	public partial class M2C_PetTakeOutBag: MessageObject, ILocationResponse
+	{
+		public static M2C_PetTakeOutBag Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetTakeOutBag), isFromPool) as M2C_PetTakeOutBag; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_PetTargetLockResponse))]
+	[Message(OuterMessage.C2M_PetTargetLockRequest)]
+	[MemoryPackable]
+	public partial class C2M_PetTargetLockRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PetTargetLockRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PetTargetLockRequest), isFromPool) as C2M_PetTargetLockRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long TargetId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.TargetId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PetTargetLockResponse)]
+	[MemoryPackable]
+	public partial class M2C_PetTargetLockResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PetTargetLockResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PetTargetLockResponse), isFromPool) as M2C_PetTargetLockResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_RolePetEggHatch))]
+//宠物蛋孵化
+	[Message(OuterMessage.C2M_RolePetEggHatch)]
+	[MemoryPackable]
+	public partial class C2M_RolePetEggHatch: MessageObject, ILocationRequest
+	{
+		public static C2M_RolePetEggHatch Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RolePetEggHatch), isFromPool) as C2M_RolePetEggHatch; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long BagInfoId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Index { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.BagInfoId = default;
+			this.Index = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RolePetEggHatch)]
+	[MemoryPackable]
+	public partial class M2C_RolePetEggHatch: MessageObject, ILocationResponse
+	{
+		public static M2C_RolePetEggHatch Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RolePetEggHatch), isFromPool) as M2C_RolePetEggHatch; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public KeyValuePairInt RolePetEgg { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.RolePetEgg = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_RolePetEggOpen))]
+//宠物蛋开启【时间未到需要扣除钻石】
+	[Message(OuterMessage.C2M_RolePetEggOpen)]
+	[MemoryPackable]
+	public partial class C2M_RolePetEggOpen: MessageObject, ILocationRequest
+	{
+		public static C2M_RolePetEggOpen Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RolePetEggOpen), isFromPool) as C2M_RolePetEggOpen; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int Index { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Index = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RolePetEggOpen)]
+	[MemoryPackable]
+	public partial class M2C_RolePetEggOpen: MessageObject, ILocationResponse
+	{
+		public static M2C_RolePetEggOpen Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RolePetEggOpen), isFromPool) as M2C_RolePetEggOpen; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public RolePetInfo PetInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.PetInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_RolePetEggPutOut))]
+//宠物蛋卸下
+	[Message(OuterMessage.C2M_RolePetEggPutOut)]
+	[MemoryPackable]
+	public partial class C2M_RolePetEggPutOut: MessageObject, ILocationRequest
+	{
+		public static C2M_RolePetEggPutOut Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RolePetEggPutOut), isFromPool) as C2M_RolePetEggPutOut; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Index { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Index = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RolePetEggPutOut)]
+	[MemoryPackable]
+	public partial class M2C_RolePetEggPutOut: MessageObject, ILocationResponse
+	{
+		public static M2C_RolePetEggPutOut Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RolePetEggPutOut), isFromPool) as M2C_RolePetEggPutOut; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public KeyValuePairInt RolePetEgg { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.RolePetEgg = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_RolePetHeXin))]
+//更改宠物之核
+	[Message(OuterMessage.C2M_RolePetHeXin)]
+	[MemoryPackable]
+	public partial class C2M_RolePetHeXin: MessageObject, ILocationRequest
+	{
+		public static C2M_RolePetHeXin Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RolePetHeXin), isFromPool) as C2M_RolePetHeXin; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PetInfoId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long BagInfoId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Position { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int OperateType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.PetInfoId = default;
+			this.BagInfoId = default;
+			this.Position = default;
+			this.OperateType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RolePetHeXin)]
+	[MemoryPackable]
+	public partial class M2C_RolePetHeXin: MessageObject, ILocationResponse
+	{
+		public static M2C_RolePetHeXin Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RolePetHeXin), isFromPool) as M2C_RolePetHeXin; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public RolePetInfo RolePetInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.RolePetInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_RolePetJiadian))]
+//宠物加点
+	[Message(OuterMessage.C2M_RolePetJiadian)]
+	[MemoryPackable]
+	public partial class C2M_RolePetJiadian: MessageObject, ILocationRequest
+	{
+		public static C2M_RolePetJiadian Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RolePetJiadian), isFromPool) as C2M_RolePetJiadian; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PetInfoId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public List<int> AddPropretyValue { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.PetInfoId = default;
+			this.AddPropretyValue.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RolePetJiadian)]
+	[MemoryPackable]
+	public partial class M2C_RolePetJiadian: MessageObject, ILocationResponse
+	{
+		public static M2C_RolePetJiadian Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RolePetJiadian), isFromPool) as M2C_RolePetJiadian; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(2)]
+		public RolePetInfo RolePetInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.RolePetInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_RolePetProtect))]
+	[Message(OuterMessage.C2M_RolePetProtect)]
+	[MemoryPackable]
+	public partial class C2M_RolePetProtect: MessageObject, ILocationRequest
+	{
+		public static C2M_RolePetProtect Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RolePetProtect), isFromPool) as C2M_RolePetProtect; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PetInfoId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public bool IsProtect { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.PetInfoId = default;
+			this.IsProtect = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RolePetProtect)]
+	[MemoryPackable]
+	public partial class M2C_RolePetProtect: MessageObject, ILocationResponse
+	{
+		public static M2C_RolePetProtect Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RolePetProtect), isFromPool) as M2C_RolePetProtect; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_RolePetRName))]
+//宠物改名
+	[Message(OuterMessage.C2M_RolePetRName)]
+	[MemoryPackable]
+	public partial class C2M_RolePetRName: MessageObject, ILocationRequest
+	{
+		public static C2M_RolePetRName Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RolePetRName), isFromPool) as C2M_RolePetRName; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PetInfoId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string PetName { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.PetInfoId = default;
+			this.PetName = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RolePetRName)]
+	[MemoryPackable]
+	public partial class M2C_RolePetRName: MessageObject, ILocationResponse
+	{
+		public static M2C_RolePetRName Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RolePetRName), isFromPool) as M2C_RolePetRName; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_RolePetSkinSet))]
+//更改宠物皮肤
+	[Message(OuterMessage.C2M_RolePetSkinSet)]
+	[MemoryPackable]
+	public partial class C2M_RolePetSkinSet: MessageObject, ILocationRequest
+	{
+		public static C2M_RolePetSkinSet Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RolePetSkinSet), isFromPool) as C2M_RolePetSkinSet; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PetInfoId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int SkinId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.PetInfoId = default;
+			this.SkinId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RolePetSkinSet)]
+	[MemoryPackable]
+	public partial class M2C_RolePetSkinSet: MessageObject, ILocationResponse
+	{
+		public static M2C_RolePetSkinSet Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RolePetSkinSet), isFromPool) as M2C_RolePetSkinSet; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_RolePetUpStage))]
+//宠物进化
+	[Message(OuterMessage.C2M_RolePetUpStage)]
+	[MemoryPackable]
+	public partial class C2M_RolePetUpStage: MessageObject, ILocationRequest
+	{
+		public static C2M_RolePetUpStage Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RolePetUpStage), isFromPool) as C2M_RolePetUpStage; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PetInfoId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long PetInfoXianJiId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.PetInfoId = default;
+			this.PetInfoXianJiId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RolePetUpStage)]
+	[MemoryPackable]
+	public partial class M2C_RolePetUpStage: MessageObject, ILocationResponse
+	{
+		public static M2C_RolePetUpStage Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RolePetUpStage), isFromPool) as M2C_RolePetUpStage; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public RolePetInfo OldPetInfo { get; set; }
+
+		[MemoryPackOrder(1)]
+		public RolePetInfo NewPetInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.OldPetInfo = default;
+			this.NewPetInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_RolePetXiuLian))]
+//宠物修炼
+	[Message(OuterMessage.C2M_RolePetXiuLian)]
+	[MemoryPackable]
+	public partial class C2M_RolePetXiuLian: MessageObject, ILocationRequest
+	{
+		public static C2M_RolePetXiuLian Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RolePetXiuLian), isFromPool) as C2M_RolePetXiuLian; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PetInfoId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int XiuLianId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.PetInfoId = default;
+			this.XiuLianId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RolePetXiuLian)]
+	[MemoryPackable]
+	public partial class M2C_RolePetXiuLian: MessageObject, ILocationResponse
+	{
+		public static M2C_RolePetXiuLian Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RolePetXiuLian), isFromPool) as M2C_RolePetXiuLian; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public RolePetInfo rolePetInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.rolePetInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -9049,5 +11129,72 @@ namespace ET
 		 public const ushort M2C_RolePetXiLian = 10243;
 		 public const ushort C2M_RolePetHeCheng = 10244;
 		 public const ushort M2C_RolePetHeCheng = 10245;
+		 public const ushort C2M_PetChangePosRequest = 10246;
+		 public const ushort M2C_PetChangePosResponse = 10247;
+		 public const ushort C2M_PetDuiHuanRequest = 10248;
+		 public const ushort M2C_PetDuiHuanResponse = 10249;
+		 public const ushort C2M_PetEggChouKaRequest = 10250;
+		 public const ushort M2C_PetEggChouKaResponse = 10251;
+		 public const ushort C2M_PetEggDuiHuanRequest = 10252;
+		 public const ushort M2C_PetEggDuiHuanResponse = 10253;
+		 public const ushort C2M_PetEquipRequest = 10254;
+		 public const ushort M2C_PetEquipResponse = 10255;
+		 public const ushort C2M_PetExploreReward = 10256;
+		 public const ushort M2C_PetExploreReward = 10257;
+		 public const ushort C2M_PetFragmentDuiHuan = 10258;
+		 public const ushort M2C_PetFragmentDuiHuan = 10259;
+		 public const ushort C2M_PetFubenBeginRequest = 10260;
+		 public const ushort M2C_PetFubenBeginResponse = 10261;
+		 public const ushort C2M_PetFubenOverRequest = 10262;
+		 public const ushort C2M_PetFubenRewardRequest = 10263;
+		 public const ushort M2C_PetFubenRewardResponse = 10264;
+		 public const ushort C2M_PetHeXinChouKaRequest = 10265;
+		 public const ushort M2C_PetHeXinChouKaResponse = 10266;
+		 public const ushort C2M_PetHeXinExploreReward = 10267;
+		 public const ushort M2C_PetHeXinExploreReward = 10268;
+		 public const ushort C2M_PetHeXinHeChengRequest = 10269;
+		 public const ushort M2C_PetHeXinHeChengResponse = 10270;
+		 public const ushort C2M_PetHeXinHeChengQuickRequest = 10271;
+		 public const ushort M2C_PetHeXinHeChengQuickResponse = 10272;
+		 public const ushort C2M_PetMingOccupyRequest = 10273;
+		 public const ushort M2C_PetMingOccupyResponse = 10274;
+		 public const ushort C2M_PetMingRecordRequest = 10275;
+		 public const ushort M2C_PetMingRecordResponse = 10276;
+		 public const ushort C2M_PetMingResetRequest = 10277;
+		 public const ushort M2C_PetMingResetResponse = 10278;
+		 public const ushort C2M_PetMingRewardRequest = 10279;
+		 public const ushort M2C_PetMingRewardResponse = 10280;
+		 public const ushort C2M_PetOpenCangKu = 10281;
+		 public const ushort M2C_PetOpenCangKu = 10282;
+		 public const ushort C2M_PetPutCangKu = 10283;
+		 public const ushort M2C_PetPutCangKu = 10284;
+		 public const ushort C2M_PetShouHuActiveRequest = 10285;
+		 public const ushort M2C_PetShouHuActiveResponse = 10286;
+		 public const ushort C2M_PetShouHuRequest = 10287;
+		 public const ushort M2C_PetShouHuResponse = 10288;
+		 public const ushort C2M_PetTakeOutBag = 10289;
+		 public const ushort M2C_PetTakeOutBag = 10290;
+		 public const ushort C2M_PetTargetLockRequest = 10291;
+		 public const ushort M2C_PetTargetLockResponse = 10292;
+		 public const ushort C2M_RolePetEggHatch = 10293;
+		 public const ushort M2C_RolePetEggHatch = 10294;
+		 public const ushort C2M_RolePetEggOpen = 10295;
+		 public const ushort M2C_RolePetEggOpen = 10296;
+		 public const ushort C2M_RolePetEggPutOut = 10297;
+		 public const ushort M2C_RolePetEggPutOut = 10298;
+		 public const ushort C2M_RolePetHeXin = 10299;
+		 public const ushort M2C_RolePetHeXin = 10300;
+		 public const ushort C2M_RolePetJiadian = 10301;
+		 public const ushort M2C_RolePetJiadian = 10302;
+		 public const ushort C2M_RolePetProtect = 10303;
+		 public const ushort M2C_RolePetProtect = 10304;
+		 public const ushort C2M_RolePetRName = 10305;
+		 public const ushort M2C_RolePetRName = 10306;
+		 public const ushort C2M_RolePetSkinSet = 10307;
+		 public const ushort M2C_RolePetSkinSet = 10308;
+		 public const ushort C2M_RolePetUpStage = 10309;
+		 public const ushort M2C_RolePetUpStage = 10310;
+		 public const ushort C2M_RolePetXiuLian = 10311;
+		 public const ushort M2C_RolePetXiuLian = 10312;
 	}
 }

@@ -2472,3 +2472,323 @@ message M2C_PetHeXinHeChengQuickResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType M2C_PetMingOccupyResponse
+message C2M_PetMingOccupyRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 Operate = 1;  //0 放弃 1 占领
+}
+
+message M2C_PetMingOccupyResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_PetMingRecordResponse
+message C2M_PetMingRecordRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_PetMingRecordResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated PetMingRecord PetMingRecords = 1;
+}
+
+//ResponseType M2C_PetMingResetResponse
+message C2M_PetMingResetRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_PetMingResetResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_PetMingRewardResponse
+message C2M_PetMingRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 Number = 1;
+}
+
+message M2C_PetMingRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_PetOpenCangKu
+message C2M_PetOpenCangKu // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 OpenIndex = 1;
+}
+
+message M2C_PetOpenCangKu // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_PetPutCangKu
+message C2M_PetPutCangKu // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 PetInfoId = 1;
+	int32 PetStatus = 2;
+	int32 OpenIndex = 3;
+}
+
+message M2C_PetPutCangKu // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_PetShouHuActiveResponse
+//宠物守护
+message C2M_PetShouHuActiveRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 PetShouHuActive = 1;
+}
+
+message M2C_PetShouHuActiveResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 PetShouHuActive = 1;
+}
+
+//ResponseType M2C_PetShouHuResponse
+//宠物守护
+message C2M_PetShouHuRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 PetInfoId = 1;
+	int32 Position = 2;
+}
+
+message M2C_PetShouHuResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated int64 PetShouHuList = 1;
+}
+
+//ResponseType M2C_PetTakeOutBag
+message C2M_PetTakeOutBag // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 PetInfoId = 1;
+}
+
+message M2C_PetTakeOutBag // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_PetTargetLockResponse
+message C2M_PetTargetLockRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 TargetId = 1;
+}
+
+message M2C_PetTargetLockResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_RolePetEggHatch
+//宠物蛋孵化
+message C2M_RolePetEggHatch // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 BagInfoId = 1;
+	int32 Index = 2;
+}
+
+message M2C_RolePetEggHatch // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	KeyValuePairInt RolePetEgg = 1;
+}
+
+
+//ResponseType M2C_RolePetEggOpen
+//宠物蛋开启【时间未到需要扣除钻石】
+message C2M_RolePetEggOpen // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 Index = 1;
+}
+
+message M2C_RolePetEggOpen // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	RolePetInfo PetInfo = 1;
+}
+
+//ResponseType M2C_RolePetEggPutOut
+//宠物蛋卸下
+message C2M_RolePetEggPutOut // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 Index = 2;
+}
+
+message M2C_RolePetEggPutOut // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	KeyValuePairInt RolePetEgg = 1;
+}
+
+//ResponseType M2C_RolePetHeXin
+//更改宠物之核
+message C2M_RolePetHeXin // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 PetInfoId = 1;
+	int64 BagInfoId = 2;
+	int32 Position = 3;
+	int32 OperateType = 4;
+}
+
+message M2C_RolePetHeXin // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	RolePetInfo RolePetInfo = 1;
+}
+
+//ResponseType M2C_RolePetJiadian
+//宠物加点
+message C2M_RolePetJiadian // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 PetInfoId = 1;
+	repeated int32 AddPropretyValue = 2;
+}
+
+message M2C_RolePetJiadian  // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	RolePetInfo RolePetInfo = 3;
+}
+
+//ResponseType M2C_RolePetProtect
+message C2M_RolePetProtect // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 PetInfoId = 1;
+	bool IsProtect = 2;
+}
+
+message M2C_RolePetProtect // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_RolePetRName
+//宠物改名
+message C2M_RolePetRName // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 PetInfoId = 1;
+	string PetName = 2;
+}
+
+message M2C_RolePetRName // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_RolePetSkinSet
+//更改宠物皮肤
+message C2M_RolePetSkinSet // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 PetInfoId = 1;
+	int32 SkinId = 2;
+}
+
+message M2C_RolePetSkinSet // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_RolePetUpStage
+//宠物进化
+message C2M_RolePetUpStage // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 PetInfoId = 1;
+	int64 PetInfoXianJiId = 2;
+}
+
+message M2C_RolePetUpStage // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	RolePetInfo OldPetInfo = 1;
+	RolePetInfo NewPetInfo = 2;
+}
+
+//ResponseType M2C_RolePetXiuLian
+//宠物修炼
+message C2M_RolePetXiuLian // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 PetInfoId = 1;
+	int32 XiuLianId = 2;
+}
+
+message M2C_RolePetXiuLian  // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	RolePetInfo rolePetInfo = 1;
+}
