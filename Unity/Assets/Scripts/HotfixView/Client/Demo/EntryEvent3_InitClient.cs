@@ -26,7 +26,8 @@ namespace ET.Client
             root.AddComponent<TaskComponentClient>();
             root.AddComponent<BattleMessageComponent>();
             root.AddComponent<MapComponent>();
-            
+            root.AddComponent<PetComponentClient>();
+
             // 根据配置修改掉Main Fiber的SceneType
             SceneType sceneType = EnumHelper.FromString<SceneType>(globalComponent.GlobalConfig.AppType.ToString());
             root.SceneType = sceneType;
