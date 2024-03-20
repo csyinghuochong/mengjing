@@ -2134,3 +2134,99 @@ message JiaYuanPet
 	string PetName = 10;
 	int32 Position = 11;
 }
+
+//ResponseType M2C_RolePetList
+message C2M_RolePetList // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_RolePetList // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	repeated RolePetInfo RolePetInfos = 1;
+	repeated int64 TeamPetList = 2;
+	repeated KeyValuePairInt RolePetEggs = 3;		//正在孵化的宠物蛋
+	repeated int64 PetFormations = 4;
+	repeated PetFubenInfo PetFubenInfos = 5;
+	repeated KeyValuePair PetSkinList = 6;
+	int32 PetFubeRewardId = 7; //已领取的奖励ID
+	repeated int64 PetShouHuList = 8;		//宠物守护
+	int32 PetShouHuActive = 9;
+	repeated int32 PetCangKuOpen = 10;
+	repeated int64 PetMingList = 11;
+	repeated int64 PetMingPosition = 12;
+	repeated RolePetInfo RolePetBag = 13;
+}
+
+//ResponseType M2C_RolePetFormationSet
+//宠物出战设置
+message C2M_RolePetFormationSet // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 Index = 1;
+	int64 PetId = 2;
+	int32 OperateType = 3;// 1上阵  2替换  3下阵 
+
+	int32 SceneType = 4;
+	repeated int64 PetFormat = 5;
+	repeated int64 PetPosition = 6;
+}
+
+message M2C_RolePetFormationSet // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_RolePetFight
+//宠物出战[1出战 0休息]
+message C2M_RolePetFight // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 PetInfoId = 1;
+	int32 PetStatus = 2;
+}
+
+message M2C_RolePetFight // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_RolePetUpStar
+//宠物合成
+message C2M_RolePetUpStar // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 PetInfoId = 1;
+	repeated int64 CostPetInfoIds = 2;
+}
+
+message M2C_RolePetUpStar  // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	RolePetInfo rolePetInfo = 1;
+	repeated int64 CostPetInfoIds = 2;
+}
+
+//ResponseType M2C_RolePetFenjie
+//宠物分解
+message C2M_RolePetFenjie // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 PetInfoId = 1;
+}
+
+message M2C_RolePetFenjie // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
