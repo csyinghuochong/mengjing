@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,7 +60,13 @@ namespace ET.Client
                 self.E_ItemClickButton.AddListener(() =>
                 {
                     EventSystem.Instance.Publish(self.Root(),
-                        new ShowItemTips() { BagInfo = bagInfo, ItemOperateEnum = self.ItemOperateEnum, InputPoint = Input.mousePosition });
+                        new ShowItemTips()
+                        {
+                            BagInfo = bagInfo,
+                            ItemOperateEnum = self.ItemOperateEnum,
+                            InputPoint = Input.mousePosition,
+                            EquipList = new List<BagInfo>()
+                        });
                     onClickAction?.Invoke(self.BagInfo);
                 });
 

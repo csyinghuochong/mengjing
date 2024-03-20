@@ -333,7 +333,7 @@ namespace ET.Server
    //获取某个道具的数量
    public static long GetItemNumber(this BagComponentServer self, int itemId, ItemLocType itemLocType = ItemLocType.ItemLocBag)
    {
-       int userDataType = 0;// ItemHelper.GetItemToUserDataType(itemId);
+       int userDataType = ItemHelper.GetItemToUserDataType(itemId);
        long number = 0;
        switch (userDataType)
        {
