@@ -27,7 +27,7 @@ namespace ET.Server
                     if (unit.GetComponent<NumericComponentServer>() ==  null)
                     {
                         NumericComponentServer numericComponentServer = unit.AddComponent<NumericComponentServer>();
-                        numericComponentServer.SetNoEvent(NumericType.Speed, 6f); // 速度是6米每秒
+                        numericComponentServer.SetNoEvent(NumericType.Speed, 60000); // 速度是6米每秒
                         numericComponentServer.SetNoEvent(NumericType.AOI, 15000); // 视野15米
                     }
                     unit.AddDataComponent<TaskComponentServer>();
