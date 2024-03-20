@@ -7,7 +7,6 @@ namespace ET.Server
 
     [EntitySystemOf(typeof(PetComponentServer))]
     [FriendOf(typeof(PetComponentServer))]
-    [FriendOf(typeof(UserInfoComponentServer))]
     public static partial class PetComponentServerSystem
     {
         [EntitySystem]
@@ -164,11 +163,11 @@ namespace ET.Server
             }
 
             Unit unit = self.GetParent<Unit>();
-            UserInfo userInfo = unit.GetComponent<UserInfoComponentServer>().UserInfo;
+            string userName = unit.GetComponent<UserInfoComponentServer>().GetName();
             for (int i = 0; i < self.RolePetInfos.Count; i++)
             {
                 RolePetInfo rolePetInfo = self.RolePetInfos[i];
-                rolePetInfo.PlayerName = userInfo.Name;
+                rolePetInfo.PlayerName = userName;
                 if (rolePetInfo.PetHeXinList.Count == 0)
                 {
                     rolePetInfo.PetHeXinList = new List<long>() { 0, 0, 0 };
@@ -239,7 +238,7 @@ namespace ET.Server
             newpet.AddPropretyValue = "0_0_0_0";
             newpet.ShouHuPos = RandomHelper.RandomNumber(1, 5);
             newpet.PetName = PetSkinConfigCategory.Instance.Get(newpet.SkinId).Name;
-            newpet.PlayerName = unit.GetComponent<UserInfoComponentServer>().UserInfo.Name;
+            newpet.PlayerName = unit.GetComponent<UserInfoComponentServer>().GetName();
             return newpet;
         }
 
@@ -569,7 +568,7 @@ namespace ET.Server
                 return;
             }
             MonsterConfig mCof = MonsterConfigCategory.Instance.Get(beKill.ConfigId);
-            int playerLv = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.Lv;
+            int playerLv = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().GetUserLv();
 
             //超过5级不能获得经验
             if (rolePetInfo.PetLv >= playerLv + 5)
@@ -788,7 +787,7 @@ namespace ET.Server
                 return;
             }
             Unit unit = self.GetParent<Unit>();
-            int playerLv = unit.GetComponent<UserInfoComponentServer>().UserInfo.Lv;
+            int playerLv = unit.GetComponent<UserInfoComponentServer>().GetUserLv();
             int newLevel = rolePetInfo.PetLv + lv;
             newLevel = Math.Min(Math.Max(0, newLevel), playerLv + 5);
             rolePetInfo.AddPropretyNum += (newLevel - rolePetInfo.PetLv) * 5;
@@ -1522,7 +1521,7 @@ namespace ET.Server
         public static bool PetIsFull(this PetComponentServer self)
         {
             Unit unit = self.GetParent<Unit>();
-            int userLv = unit.GetComponent<UserInfoComponentServer>().UserInfo.Lv;
+            int userLv = unit.GetComponent<UserInfoComponentServer>().GetUserLv();
             int petextend = unit.GetComponent<NumericComponentServer>().GetAsInt(NumericType.PetExtendNumber);
             if (PetHelper.GetBagPetNum(self.RolePetInfos) >= PetHelper.GetPetMaxNumber(unit, userLv,petextend))
             {
