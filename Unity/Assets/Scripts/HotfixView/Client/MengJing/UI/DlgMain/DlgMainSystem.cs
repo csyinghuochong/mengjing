@@ -1041,6 +1041,7 @@ namespace ET.Client
                 return;
             }
 
+            // 无效。。。
             self.View.E_MainChatItemsLoopVerticalScrollRect.verticalNormalizedPosition = 0f;
         }
 
