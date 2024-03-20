@@ -20,7 +20,7 @@ namespace ET
             foreach (ShouJiConfig sceneConfig in this.GetAll().Values)
             {
                 int itemId = sceneConfig.ItemListID;
-                while (itemId != 0)
+                //while (itemId != 0)
                 { 
                     // ShouJiItemConfig shouJiItemConfig = ShouJiItemConfigCategory.Instance.Get(itemId);
                     // itemId = shouJiItemConfig.NextID;
@@ -32,7 +32,5 @@ namespace ET
                 }
             }
         }
-
-        
     }
 }
