@@ -24,8 +24,8 @@ namespace ET.Client
 
         private static void OnBagItemsRefresh(this ES_RewardList self, Transform transform, int index)
         {
-            Scroll_Item_BagItem scrollItemBagItem = self.ScrollItemBagItems[index].BindTrans(transform);
-            scrollItemBagItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.None);
+            Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
+            scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.None);
         }
 
         public static void Refresh(this ES_RewardList self, List<RewardItem> rewardItems)
@@ -36,7 +36,7 @@ namespace ET.Client
                 self.ShowBagInfos.Add(new BagInfo() { ItemID = item.ItemID, ItemNum = item.ItemNum });
             }
 
-            self.AddUIScrollItems(ref self.ScrollItemBagItems, self.ShowBagInfos.Count);
+            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 

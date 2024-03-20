@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_BagItem))]
+    [FriendOf(typeof (Scroll_Item_CommonItem))]
     [EntitySystemOf(typeof (ES_RoleBag))]
     [FriendOfAttribute(typeof (ES_RoleBag))]
     public static partial class ES_RoleBagSystem
@@ -27,8 +27,8 @@ namespace ET.Client
 
         private static void OnBagItemsRefresh(this ES_RoleBag self, Transform transform, int index)
         {
-            Scroll_Item_BagItem scrollItemBagItem = self.ScrollItemBagItems[index].BindTrans(transform);
-            scrollItemBagItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.Bag, self.UpdateSelect);
+            Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
+            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.Bag, self.UpdateSelect);
         }
 
         private static void OnItemTypeSet(this ES_RoleBag self, int index)
@@ -72,18 +72,18 @@ namespace ET.Client
 
             int maxCount = GlobalValueConfigCategory.Instance.BagMaxCapacity;
             self.ShowBagInfos.AddRange(bagComponentClient.GetItemsByType(itemTypeEnum));
-            self.AddUIScrollItems(ref self.ScrollItemBagItems, maxCount);
+            self.AddUIScrollItems(ref self.ScrollItemCommonItems, maxCount);
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, maxCount);
         }
 
         private static void UpdateSelect(this ES_RoleBag self, BagInfo bagInfo)
         {
-            for (int i = 0; i < self.ScrollItemBagItems.Keys.Count - 1; i++)
+            for (int i = 0; i < self.ScrollItemCommonItems.Keys.Count - 1; i++)
             {
                 // 滚动组件的子物体是动态从对象池里拿的，只引用看的到的
-                if (self.ScrollItemBagItems[i].uiTransform != null)
+                if (self.ScrollItemCommonItems[i].uiTransform != null)
                 {
-                    self.ScrollItemBagItems[i].UpdateSelectStatus(bagInfo);
+                    self.ScrollItemCommonItems[i].UpdateSelectStatus(bagInfo);
                 }
             }
         }
