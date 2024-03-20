@@ -202,5 +202,13 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<int> RequestAppraisalItem(Scene root, BagInfo bagInfo, long appID = 0)
+        {
+            C2M_ItemOperateRequest request = new() { OperateType = 5, OperateBagID = bagInfo.BagInfoID, OperatePar = appID.ToString() };
+            M2C_ItemOperateResponse response = (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
 }

@@ -6,6 +6,36 @@ namespace ET.Client
 {
     public static class UICommonHelper
     {
+        
+        // 根据品质返回一个Color
+        public static Color QualityReturnColor(int ItenQuality)
+        {
+            Color color = new Color(1, 1, 1);
+            switch (ItenQuality)
+            {
+                case 1:
+                    color = new Color(1, 1, 1);
+                    break;
+
+                case 2:
+                    color = new Color(0, 1, 0);
+                    break;
+                case 3:
+                    color = new Color(0.047f, 0.76f, 0.847f);
+                    break;
+
+                case 4:
+                    color = new Color(0.937f, 0.5f, 1.0f);
+                    break;
+                case 5:
+                    color = new Color(1, 0.49f, 0);
+                    break;
+                case 6:
+                    color = new Color(0.80f, 0.49f, 0.19f);
+                    break;
+            }
+            return color;
+        }
         public static void SetParent(GameObject son, GameObject parent)
         {
             if (son == null || parent == null)

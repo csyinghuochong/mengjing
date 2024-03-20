@@ -382,32 +382,31 @@ namespace ET.Client
         private static async ETTask OnUseButton(this ES_ItemAppraisalTips self)
         {
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
-
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
             if (itemConfig.EquipType == 101)
             {
-                // int appraisalItem = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID).AppraisalItem;
-                //
-                // BagComponentClient bagComponentClient = self.Root().GetComponent<BagComponentClient>();
-                // BagInfo costbaginfo = bagComponentClient.GetBagInfo(appraisalItem);
-                // if (costbaginfo == null)
-                // {
-                //     FloatTipManager.Instance.ShowFloatTip("道具不足！");
-                //     return;
-                // }
-                //
-                // string costitem = ItemConfigCategory.Instance.Get(appraisalItem).ItemName;
-                // PopupTipHelp.OpenPopupTip(self.ZoneScene(), "开启封印", $"是否消耗{costitem}开启封印?", () =>
-                // {
-                //     bagComponentClient.SendAppraisalItem(self.BagInfo, costbaginfo.BagInfoID).Coroutine();
-                //     self.OnCloseTips();
-                // }).Coroutine();
+                int appraisalItem = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID).AppraisalItem;
+
+                BagComponentClient bagComponentClient = self.Root().GetComponent<BagComponentClient>();
+                BagInfo costbaginfo = bagComponentClient.GetBagInfo(appraisalItem);
+                if (costbaginfo == null)
+                {
+                    self.Root().GetComponent<FlyTipComponent>().SpawnFlyTipDi("道具不足！");
+                    return;
+                }
+
+                string costitem = ItemConfigCategory.Instance.Get(appraisalItem).ItemName;
+                PopupTipHelp.OpenPopupTip(self.Root(), "开启封印", $"是否消耗{costitem}开启封印?", () =>
+                {
+                    BagClientNetHelper.RequestAppraisalItem(self.Root(), self.BagInfo, costbaginfo.BagInfoID).Coroutine();
+                    self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
+                }).Coroutine();
             }
             else
             {
-                //发送消息
-                // UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIAppraisalSelect);
-                // uI.GetComponent<UIAppraisalSelectComponent>().OnInitUI(self.BagInfo);
-                // self.OnCloseTips();
+                await uiComponent.ShowWindowAsync(WindowID.WindowID_AppraisalSelect);
+                uiComponent.GetDlgLogic<DlgAppraisalSelect>().OnInitUI(self.BagInfo);
+                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
             }
 
             await ETTask.CompletedTask;

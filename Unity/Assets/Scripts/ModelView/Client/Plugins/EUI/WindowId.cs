@@ -26,5 +26,6 @@ namespace ET.Client
 		WindowID_PopupTip,
 		WindowID_RoleBagSplit,
 		WindowID_Task,
+		WindowID_AppraisalSelect,
 	}
 }
