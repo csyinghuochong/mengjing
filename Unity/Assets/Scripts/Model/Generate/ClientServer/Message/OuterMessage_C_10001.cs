@@ -8659,6 +8659,80 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_RolePetXiLian))]
+//宠物洗练
+	[Message(OuterMessage.C2M_RolePetXiLian)]
+	[MemoryPackable]
+	public partial class C2M_RolePetXiLian: MessageObject, ILocationRequest
+	{
+		public static C2M_RolePetXiLian Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RolePetXiLian), isFromPool) as C2M_RolePetXiLian; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PetInfoId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long BagInfoID { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int CostItemNum { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string ParamInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.PetInfoId = default;
+			this.BagInfoID = default;
+			this.CostItemNum = default;
+			this.ParamInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RolePetXiLian)]
+	[MemoryPackable]
+	public partial class M2C_RolePetXiLian: MessageObject, ILocationResponse
+	{
+		public static M2C_RolePetXiLian Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RolePetXiLian), isFromPool) as M2C_RolePetXiLian; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public RolePetInfo rolePetInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.rolePetInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -8901,5 +8975,7 @@ namespace ET
 		 public const ushort M2C_RolePetUpStar = 10239;
 		 public const ushort C2M_RolePetFenjie = 10240;
 		 public const ushort M2C_RolePetFenjie = 10241;
+		 public const ushort C2M_RolePetXiLian = 10242;
+		 public const ushort M2C_RolePetXiLian = 10243;
 	}
 }

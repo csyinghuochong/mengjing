@@ -168,42 +168,16 @@ namespace ET.Client
                  }
              }
          }
-
-         public static async ETTask RequestFenJie(this PetComponentClient self, long petId)
+         
+         public static  void RequestXiLian(this PetComponentClient self, long itemId, long petId, RolePetInfo rolePetInfo)
          {
-             C2M_RolePetFenjie c2M_RolePetXiLian = new C2M_RolePetFenjie() { PetInfoId = petId };
-             M2C_RolePetFenjie m2C_RolePetXiLian = (M2C_RolePetFenjie)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_RolePetXiLian);
-
-             if (m2C_RolePetXiLian.Error != 0)
-             {
-                 return;
-             }
-             self.RemovePet(petId);
-             //HintHelp.GetInstance().DataUpdate(DataType.PetFenJieUpdate);
-         }
-
-         public static async ETTask RequestXiLian(this PetComponentClient self, long itemId, long petId)
-         {
-             C2M_RolePetXiLian c2M_RolePetXiLian = new C2M_RolePetXiLian() { BagInfoID = itemId, PetInfoId = petId };
-             M2C_RolePetXiLian m2C_RolePetXiLian = (M2C_RolePetXiLian)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_RolePetXiLian);
-
-             //Log.ILog.Info("ConfigId = " + m2C_RolePetXiLian.rolePetInfo.ConfigId + "ZIZHI:" + m2C_RolePetXiLian.rolePetInfo.ZiZhi_Hp);
-
-             if (m2C_RolePetXiLian.Error != 0)
-             {
-                 return;
-             }
              for (int i = self.RolePetInfos.Count - 1; i >= 0; i--)
              {
-                 if (self.RolePetInfos[i].Id == m2C_RolePetXiLian.rolePetInfo.Id)
+                 if (self.RolePetInfos[i].Id == rolePetInfo.Id)
                  {
-                     self.RolePetInfos[i] = m2C_RolePetXiLian.rolePetInfo;
+                     self.RolePetInfos[i] = rolePetInfo;
                  }
              }
-
-             //出发对应提示
-             HintHelp.GetInstance().ShowHint("道具在宠物身上发生了作用！");
-             HintHelp.GetInstance().DataUpdate(DataType.PetXiLianUpdate);
          }
 
          public static void OnPetProtect(this PetComponentClient self, long rolePetInfoId, bool isprotect)

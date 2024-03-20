@@ -75,14 +75,27 @@ namespace ET.Client
         public static async ETTask RequestFenJie(Scene root, long petId)
         {
             C2M_RolePetFenjie c2M_RolePetXiLian = new C2M_RolePetFenjie() { PetInfoId = petId };
-            M2C_RolePetFenjie m2C_RolePetXiLian = (M2C_RolePetFenjie)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_RolePetXiLian);
+            M2C_RolePetFenjie m2C_RolePetXiLian = (M2C_RolePetFenjie)await root.GetComponent<ClientSenderCompnent>().Call(c2M_RolePetXiLian);
 
-            if (m2C_RolePetXiLian.Error != 0)
+            if (m2C_RolePetXiLian.Error == ErrorCode.ERR_Success)
             {
-                return;
+                root.GetComponent<PetComponentClient>().RemovePet(petId);;
             }
-            self.RemovePet(petId);
             //HintHelp.GetInstance().DataUpdate(DataType.PetFenJieUpdate);
         }
+        
+        public static async ETTask<int> RequestXiLian(Scene root, long itemId, long petId)
+        {
+            C2M_RolePetXiLian c2M_RolePetXiLian = new C2M_RolePetXiLian() { BagInfoID = itemId, PetInfoId = petId };
+            M2C_RolePetXiLian m2C_RolePetXiLian = (M2C_RolePetXiLian) await root.GetComponent<ClientSenderCompnent>().Call(c2M_RolePetXiLian);
+            
+            if (m2C_RolePetXiLian.Error == ErrorCode.ERR_Success)
+            {
+                root.GetComponent<PetComponentClient>().RequestXiLian( itemId, petId, m2C_RolePetXiLian.rolePetInfo );
+            }
+
+            return m2C_RolePetXiLian.Error;
+        }
+
     }
 }
