@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -21,6 +20,12 @@ namespace ET.Client
 
 		public static void Refresh(this Scroll_Item_MainChatItem self, ChatInfo chatInfo)
 		{
+			for (int i = 0; i < ChannelEnum.Number; i++)
+			{
+				self.TitleList[i] = self.uiTransform.Find(i.ToString()).gameObject;
+				self.TitleList[i].transform.localPosition = new Vector3(- 300f, -15.9f, 0);
+			}
+			
 			self.ChatInfo = chatInfo;
 			string showValue = string.Empty;
 			if (!string.IsNullOrEmpty(chatInfo.ChatMsg))
@@ -42,7 +47,7 @@ namespace ET.Client
 				}
 				else
 				{
-					// self.E_ChatTextText.text = StringBuilderHelper.GetChatText(chatInfo.PlayerName, showValue);
+					self.E_ChatTextText.text = StringBuilderHelper.GetChatText(chatInfo.PlayerName, showValue);
 				}
 
 				float preferredHeight = self.E_ChatTextText.preferredHeight;

@@ -1002,7 +1002,7 @@ namespace ET.Client
         private static void RefreshMainChatItems(this DlgMain self)
         {
             ChatComponent chatComponent = self.Root().GetComponent<ChatComponent>();
-            self.ShowChatInfos.Add(chatComponent.LastChatInfo);
+            self.ShowChatInfos.Insert(0, chatComponent.LastChatInfo);
 
             self.AddUIScrollItems(ref self.ScrollItemMainChatItems, self.ShowChatInfos.Count);
             self.View.E_MainChatItemsLoopVerticalScrollRect.SetVisible(true, self.ShowChatInfos.Count);
