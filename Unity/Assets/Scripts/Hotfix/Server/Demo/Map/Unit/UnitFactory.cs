@@ -43,6 +43,11 @@ namespace ET.Server
                     unit.AddDataComponent<JiaYuanComponentServer>();
                     unit.AddDataComponent<DataCollationComponent>();
                     
+                    unit.AddDataComponent<StateComponentServer>();
+                    unit.AddDataComponent<DBSaveComponent>();
+                    unit.AddDataComponent<HeroDataComponentServer>();
+                    unit.AddDataComponent<SkillPassiveComponent>();
+                    
                     unitComponent.Add(unit);
                     // 加入aoi
                     unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
