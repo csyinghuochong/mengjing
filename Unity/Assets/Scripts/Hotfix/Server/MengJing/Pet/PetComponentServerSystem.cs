@@ -1263,6 +1263,12 @@ namespace ET.Server
             self.ResetFormation(self.PetMingPosition, petId);
         }
 
+        public static List<RolePetInfo> GetAllPets(this PetComponentServer self)
+        {
+            return self.RolePetInfos;
+        }
+
+
         /// <summary>
         /// Get可以取缓存数据，不用读缓存数据库
         /// </summary>
@@ -1382,21 +1388,7 @@ namespace ET.Server
             }
             return skillNumber;
         }
-
-        public static List<RolePetInfo> GetAllPets(this PetComponentServer self)
-        {
-            for (int i = 0; i < self.RolePetInfos.Count; i++)
-            {
-                RolePetInfo rolePetInfo = self.RolePetInfos[i];
-                if (string.IsNullOrEmpty(rolePetInfo.AddPropretyValue))
-                {
-                    rolePetInfo.AddPropretyNum = (rolePetInfo.PetLv - 1) * 5;
-                    rolePetInfo.AddPropretyValue = "0_0_0_0";
-                }
-            }
-            return self.RolePetInfos;
-        }
-
+        
         public static int GetShenShouNumber(this PetComponentServer self)
         {
             int shenshouNumber = 0;
