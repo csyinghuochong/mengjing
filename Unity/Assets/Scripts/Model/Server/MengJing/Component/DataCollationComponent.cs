@@ -142,5 +142,9 @@ namespace ET.Server
         public long PaiMaiGold;
 
         public int JinZhiPaiMai;
+
+        public int IsRoot;
+
+        public string DeviceID;
     }
 }

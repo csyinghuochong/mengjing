@@ -108,7 +108,7 @@ namespace ET
             return (float)Math.Round(zhizhiValue, 2);
         }
 
-        public static int GetPetMaxNumber(Unit unit, int level, int petExtendNumber)
+        public static int GetPetMaxNumber( int level, int petExtendNumber)
         {
             int petNumber = 1;
             string[] petInfos = GlobalValueConfigCategory.Instance.Get(34).Value.Split('@');

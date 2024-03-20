@@ -7,7 +7,7 @@ namespace ET.Server
     [ComponentOf(typeof(Unit))]
     public class UserInfoComponentServer : Entity, IAwake, IDestroy, ITransfer, IUnitCache
     {
-        public string Account;
+        public string Account { get; set; }
         public UserInfo UserInfo = new UserInfo();
 
           /// <summary>
@@ -23,12 +23,12 @@ namespace ET.Server
         /// <summary>
         /// 今日在线时长
         /// </summary>
-        public long TodayOnLine;
+        public long TodayOnLine { get; set; }
 
         public long LastJiaYuanExpTime = 0;
         public string RemoteAddress;
         public string DeviceName;
-        public string UserName;
+        public string UserName  { get; set; }
 
         /// <summary>
         /// 狩猎击杀野怪数量

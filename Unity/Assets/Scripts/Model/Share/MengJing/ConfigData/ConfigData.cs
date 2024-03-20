@@ -344,6 +344,24 @@ namespace ET
             { 10, 61500001 } //完成每20环对应奖励
         };
 
+        
+        //1.锻造类型
+        //2.裁缝类型
+        //3.炼金类型
+        //4.宝石类型
+        //5.神器类型
+        //6.附魔类型
+        //8.家园类型
+        [StaticField]
+        public static Dictionary<int, string> MakeTypeName = new Dictionary<int, string>()
+        {
+            { 0, "无"},
+            { 1, "锻造"},
+            { 2, "裁缝"},
+            { 3, "炼金"},
+        };
+
+        
         /// <summary>
         /// 跑环任务奖励
         /// </summary>

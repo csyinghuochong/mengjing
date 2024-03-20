@@ -379,6 +379,21 @@ namespace ET.Server
             return self.UserInfo.Diamond;
         }
 
+        public static string GetUnionName(this UserInfoComponentServer self)
+        {
+            return self.UserInfo.UnionName;
+        }
+        
+        public static int GetVitality(this UserInfoComponentServer self)
+        {
+            return self.UserInfo.Vitality;
+        }
+        
+        public static long GetJiaYuanFund(this UserInfoComponentServer self)
+        {
+            return self.UserInfo.JiaYuanFund;
+        }
+        
         public static int GetCombat(this UserInfoComponentServer self)
         {
             return self.UserInfo.Combat;

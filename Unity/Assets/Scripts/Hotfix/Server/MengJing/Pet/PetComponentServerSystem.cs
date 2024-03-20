@@ -1515,7 +1515,7 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             int userLv = unit.GetComponent<UserInfoComponentServer>().GetUserLv();
             int petextend = unit.GetComponent<NumericComponentServer>().GetAsInt(NumericType.PetExtendNumber);
-            if (PetHelper.GetBagPetNum(self.RolePetInfos) >= PetHelper.GetPetMaxNumber(unit, userLv,petextend))
+            if (PetHelper.GetBagPetNum(self.RolePetInfos) >= PetHelper.GetPetMaxNumber( userLv,petextend))
             {
                 return true;
             }
