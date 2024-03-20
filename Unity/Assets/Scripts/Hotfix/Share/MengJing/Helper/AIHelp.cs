@@ -461,8 +461,7 @@ namespace ET
             for (int i = 0; i < monsters.Count; i++)
             {
                 Unit unit = monsters[i];
-                AIComponent aIComponent = monsters[i].GetComponent<AIComponent>();
-                if (aIComponent == null || unit.Type != UnitType.Monster)
+                if ( unit.Type != UnitType.Monster)
                 {
                     continue;
                 }

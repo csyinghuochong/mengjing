@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using ET.Server;
 using Unity.Mathematics;
 
-namespace ET
+namespace ET.Server
 {
     // 客户端挂在ClientScene上，服务端挂在Unit上
     //[ComponentOf(typeof(Scene))]
@@ -54,6 +53,6 @@ namespace ET
 
         public Unit LocalDungeonUnit { get; set; }
 
-        public PetComponentServer LocalDungeonUnitPetComponent { get; set; }
+        //public PetComponentServer LocalDungeonUnitPetComponent { get; set; }
     }
 }

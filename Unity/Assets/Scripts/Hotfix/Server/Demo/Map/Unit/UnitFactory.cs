@@ -150,7 +150,7 @@ namespace ET.Server
                  {
                      case SceneTypeEnum.LocalDungeon:
                          aIComponent.LocalDungeonUnit = mainUnit;
-                         aIComponent.LocalDungeonUnitPetComponent = mainUnit.GetComponent<PetComponentServer>();
+                         //aIComponent.LocalDungeonUnitPetComponent = mainUnit.GetComponent<PetComponentServer>();
                          aIComponent.InitMonster(monsterConfig.Id);
                          break;
                      case SceneTypeEnum.PetDungeon:

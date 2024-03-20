@@ -21,7 +21,7 @@ namespace ET.Client
                 await root.GetComponent<ObjectWait>().Wait<Wait_SceneChangeFinish>();
 
                 await UserInfoNetHelper.RequestUserInfoInit(root);
-                 
+                
                 await BagClientNetHelper.RequestBagInit(root);
                 await ActivityNetHelper.RequestActivityInfo(root);
                 await FriendNetHelper.RequestFriendInfo(root);
