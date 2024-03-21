@@ -627,6 +627,7 @@ namespace ET.Server
                     return self.JianYuanPlantList_7[i];
                 }
             }
+            return null;
         }
 
         public static JiaYuanPlant GetCellPlant(this JiaYuanComponentServer self, int cell)
@@ -638,6 +639,8 @@ namespace ET.Server
                     return self.JianYuanPlantList_7[i];
                 }
             }
+
+            return null;
         }
 
         public static void UprootPlant(this JiaYuanComponentServer self, int cellIndex)

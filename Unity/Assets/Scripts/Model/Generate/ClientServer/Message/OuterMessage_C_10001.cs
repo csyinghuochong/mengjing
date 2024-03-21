@@ -10981,7 +10981,7 @@ namespace ET
 
 	[Message(OuterMessage.M2C_FubenSettlement)]
 	[MemoryPackable]
-	public partial class M2C_FubenSettlement: MessageObject, IActorMessage
+	public partial class M2C_FubenSettlement: MessageObject, IMessage
 	{
 		public static M2C_FubenSettlement Create(bool isFromPool = false) 
 		{ 
@@ -11031,6 +11031,29 @@ namespace ET
 			this.ReardList.Clear();
 			this.ReardListExcess.Clear();
 			this.StarInfos.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//家园刷新
+	[Message(OuterMessage.M2C_JiaYuanUpdate)]
+	[MemoryPackable]
+	public partial class M2C_JiaYuanUpdate: MessageObject, IMessage
+	{
+		public static M2C_JiaYuanUpdate Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_JiaYuanUpdate), isFromPool) as M2C_JiaYuanUpdate; 
+		}
+
+		[MemoryPackOrder(1)]
+		public List<JiaYuanPurchaseItem> PurchaseItemList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.PurchaseItemList.Clear();
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -11354,5 +11377,6 @@ namespace ET
 		 public const ushort M2C_RolePetEggPut = 10314;
 		 public const ushort BattleSummonInfo = 10315;
 		 public const ushort M2C_FubenSettlement = 10316;
+		 public const ushort M2C_JiaYuanUpdate = 10317;
 	}
 }

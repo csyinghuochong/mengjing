@@ -763,7 +763,8 @@ namespace ET
         };
 
         //关卡boss显示列表
-        public const List<int> BossShowTimeList =
+        [StaticField]
+        public static List<int> BossShowTimeList =
                 new List<int>
                 {
                     70001004,70001011,70001104,70001206,70001209,

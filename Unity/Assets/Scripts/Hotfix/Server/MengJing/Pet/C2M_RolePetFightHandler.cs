@@ -7,18 +7,16 @@ namespace ET.Server
 	[MessageLocationHandler(SceneType.Map)]
 	public class C2M_RolePetFightHandler : MessageLocationHandler<Unit, C2M_RolePetFight, M2C_RolePetFight>
 	{
-		protected override async ETTask Run(Unit unit, C2M_RolePetFight request, M2C_RolePetFight response, Action reply)
+		protected override async ETTask Run(Unit unit, C2M_RolePetFight request, M2C_RolePetFight response)
 		{
-			RolePetInfo petinfo = unit.GetComponent<PetComponent>().GetPetInfo(request.PetInfoId);
+			RolePetInfo petinfo = unit.GetComponent<PetComponentServer>().GetPetInfo(request.PetInfoId);
 			if (petinfo == null)
 			{
                 response.Error = ErrorCode.ERR_Pet_NoExist;
-				reply();
 				return;
 			}
             if (petinfo.PetStatus == 2 || petinfo.PetStatus == 3)
             {
-                reply();
                 return;
             }
 
@@ -26,7 +24,7 @@ namespace ET.Server
             if (request.PetStatus == 1)
             {
                 //出战要清掉之前的
-                RolePetInfo fightpet =  unit.GetComponent<PetComponent>().GetFightPet();
+                RolePetInfo fightpet =  unit.GetComponent<PetComponentServer>().GetFightPet();
                 if (fightpet != null)
                 {
                     fightpet.PetStatus = 0;
@@ -34,7 +32,7 @@ namespace ET.Server
                 }
                 if (unit.GetParent<UnitComponent>().Get(petinfo.Id) == null)
                 {
-                    unit.GetComponent<PetComponent>().UpdatePetAttribute(petinfo, false);
+                    unit.GetComponent<PetComponentServer>().UpdatePetAttribute(petinfo, false);
                     UnitFactory.CreatePet(unit, petinfo);
                 }
 
@@ -46,10 +44,7 @@ namespace ET.Server
                 petinfo.PetStatus = request.PetStatus;
                 unit.GetParent<UnitComponent>().Remove(petinfo.Id);
             }
-
-
-
-
+            
             ///移除有问题的宠物
             //List<Unit> entities = unit.GetParent<UnitComponent>().GetAll();
             //{
@@ -71,8 +66,6 @@ namespace ET.Server
             //                    unit.GetParent<UnitComponent>().Remove(entities[i].Id);
             //                }
             //}
-
-            reply();
 			await ETTask.CompletedTask;
 		}
 	}

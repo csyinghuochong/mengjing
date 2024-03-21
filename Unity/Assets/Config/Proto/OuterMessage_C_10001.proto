@@ -2817,7 +2817,7 @@ message BattleSummonInfo
 	int32 SummonNumber = 3;			//召唤次数
 }
 
-message M2C_FubenSettlement // IActorMessage
+message M2C_FubenSettlement // IMessage
 {
 	int32 RpcId = 90;
 	int32 Error = 92;
@@ -2832,4 +2832,10 @@ message M2C_FubenSettlement // IActorMessage
 	repeated RewardItem ReardListExcess = 6;	//冒险家额外奖励
 
 	repeated int32 StarInfos = 7;			//领主 时间 伤害
+}
+
+//家园刷新
+message M2C_JiaYuanUpdate // IMessage
+{
+	repeated JiaYuanPurchaseItem PurchaseItemList = 2;
 }
