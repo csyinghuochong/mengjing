@@ -11,7 +11,6 @@ namespace ET.Client
 	{
 		public int Index;
 		public Action<int> ClickHandler;
-		public List<string> AssetPath = new List<string>();
 		
 		public UnityEngine.UI.Button E_SelectButton
      	{
@@ -44,6 +43,23 @@ namespace ET.Client
 		    		this.m_E_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Select");
      			}
      			return this.m_E_SelectImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_HoleBackImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_HoleBackImage == null )
+     			{
+		    		this.m_E_HoleBackImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_HoleBack");
+     			}
+     			return this.m_E_HoleBackImage;
      		}
      	}
 
@@ -82,7 +98,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_BackImage
+		public UnityEngine.UI.Image E_HighlightImage
      	{
      		get
      		{
@@ -91,11 +107,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_BackImage == null )
+     			if( this.m_E_HighlightImage == null )
      			{
-		    		this.m_E_BackImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Back");
+		    		this.m_E_HighlightImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Highlight");
      			}
-     			return this.m_E_BackImage;
+     			return this.m_E_HighlightImage;
      		}
      	}
 
@@ -103,17 +119,19 @@ namespace ET.Client
 		{
 			this.m_E_SelectButton = null;
 			this.m_E_SelectImage = null;
+			this.m_E_HoleBackImage = null;
 			this.m_E_HoleNameText = null;
 			this.m_es_commonitem = null;
-			this.m_E_BackImage = null;
+			this.m_E_HighlightImage = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.UI.Button m_E_SelectButton = null;
 		private UnityEngine.UI.Image m_E_SelectImage = null;
+		private UnityEngine.UI.Image m_E_HoleBackImage = null;
 		private UnityEngine.UI.Text m_E_HoleNameText = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
-		private UnityEngine.UI.Image m_E_BackImage = null;
+		private UnityEngine.UI.Image m_E_HighlightImage = null;
 		public Transform uiTransform = null;
 	}
 }

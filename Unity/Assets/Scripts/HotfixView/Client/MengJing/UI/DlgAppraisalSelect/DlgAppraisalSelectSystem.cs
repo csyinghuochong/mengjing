@@ -43,7 +43,7 @@ namespace ET.Client
 
             self.View.E_CoinNumText.text = ItemHelper.GetJianDingCoin(itemConfig.UseLv).ToString();
 
-            self.View.ES_CommonItem_1.Refresh(bagInfo, ItemOperateEnum.None);
+            self.View.ES_CommonItem_1.UpdateItem(bagInfo, ItemOperateEnum.None);
             ItemConfig itemConfig_app = ItemConfigCategory.Instance.Get(self.AppraisalItemConfigId);
             self.View.ES_CommonItem_2.uiTransform.gameObject.SetActive(false);
             self.View.E_Tip_1Text.text = $"需要消耗：{itemConfig_app.ItemName}";
@@ -62,7 +62,7 @@ namespace ET.Client
         {
             ItemConfig itemCof = ItemConfigCategory.Instance.Get(self.BagInfo_Equip.ItemID);
             self.BagInfo_Appri = bagInfo;
-            self.View.ES_CommonItem_2.Refresh(bagInfo, ItemOperateEnum.None);
+            self.View.ES_CommonItem_2.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.View.ES_CommonItem_2.uiTransform.gameObject.SetActive(true);
             self.View.E_JianDingQualityText.text = "品质:" + bagInfo.ItemPar;
             string jianDingStr = "大海捞针";

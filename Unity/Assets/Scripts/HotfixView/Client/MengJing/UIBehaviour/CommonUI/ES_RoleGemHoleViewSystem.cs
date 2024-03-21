@@ -30,7 +30,7 @@ namespace ET.Client
 
             if (self.ES_CommonItem.uiTransform.gameObject.activeSelf)
             {
-                // self.UIGemItem.OnClickUIItem();
+                self.ES_CommonItem.OnClickUIItem();
             }
 
             self.ClickHandler(self.Index);
@@ -38,7 +38,7 @@ namespace ET.Client
 
         public static void SetSelected(this ES_RoleGemHole self, bool selected)
         {
-            self.E_BackImage.gameObject.SetActive(selected);
+            self.E_HighlightImage.gameObject.SetActive(selected);
         }
 
         public static void SetClickHandler(this ES_RoleGemHole self, Action<int> clickHander)
@@ -48,60 +48,46 @@ namespace ET.Client
 
         public static void OnUpdateUI(this ES_RoleGemHole self, int holeId, int gemId, int index)
         {
-            // self.Index = index;
-            // self.E_BackImage.gameObject.SetActive(false);
-            // if (holeId == 0)
-            // {
-            //     self.Lab_HoleName.SetActive(false);
-            //     self.ImageHoleName.SetActive(false);
-            //     self.UIGemItem.GameObject.SetActive(false);
-            //     return;
-            // }
-            //
-            // if (holeId != 0)
-            // {
-            //     string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, $"Img_hole_{holeId}");
-            //     Sprite sp = ResourcesComponent.Instance.LoadAsset<Sprite>(path);
-            //     if (!self.AssetPath.Contains(path))
-            //     {
-            //         self.AssetPath.Add(path);
-            //     }
-            //
-            //     self.ImageHoleName.GetComponent<Image>().sprite = sp;
-            //     self.ImageHoleName.SetActive(true);
-            // }
-            //
-            // if (gemId == 0)
-            // {
-            //     self.Lab_HoleName.SetActive(true);
-            //     //self.ImageHoleName.SetActive(true);
-            //     self.UIGemItem.GameObject.SetActive(false);
-            //     self.Lab_HoleName.GetComponent<Text>().text = ItemViewHelp.GemHoleName[holeId];
-            //     string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, $"Img_hole_{holeId}");
-            //     Sprite sp = ResourcesComponent.Instance.LoadAsset<Sprite>(path);
-            //     if (!self.AssetPath.Contains(path))
-            //     {
-            //         self.AssetPath.Add(path);
-            //     }
-            //
-            //     self.ImageHoleName.GetComponent<Image>().sprite = sp;
-            //     self.ImageHoleName.SetActive(true);
-            //     return;
-            // }
-            //
-            // self.ImageHoleName.SetActive(true);
-            // string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, $"Img_hole_{holeId}");
-            // Sprite sp1 = ResourcesComponent.Instance.LoadAsset<Sprite>(path1);
-            // if (!self.AssetPath.Contains(path1))
-            // {
-            //     self.AssetPath.Add(path1);
-            // }
-            //
-            // self.ImageHoleName.GetComponent<Image>().sprite = sp1;
-            // self.Lab_HoleName.SetActive(false);
-            // self.UIGemItem.GameObject.SetActive(true);
-            // BagInfo bagInfo = new BagInfo() { ItemID = gemId, ItemNum = 1 };
-            // self.UIGemItem.UpdateItem(bagInfo, ItemOperateEnum.XiangQianGem);
+            self.Index = index;
+            self.E_HighlightImage.gameObject.SetActive(false);
+            if (holeId == 0)
+            {
+                self.E_HoleNameText.gameObject.SetActive(false);
+                self.E_HoleBackImage.gameObject.SetActive(false);
+                self.ES_CommonItem.uiTransform.gameObject.SetActive(false);
+                return;
+            }
+
+            if (holeId != 0)
+            {
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, $"Img_hole_{holeId}");
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                self.E_HoleBackImage.sprite = sp;
+                self.E_HoleBackImage.gameObject.SetActive(true);
+            }
+
+            if (gemId == 0)
+            {
+                self.E_HoleNameText.gameObject.SetActive(true);
+                self.ES_CommonItem.uiTransform.gameObject.SetActive(false);
+                self.E_HoleNameText.text = ItemViewData.GemHoleName[holeId];
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, $"Img_hole_{holeId}");
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+                self.E_HoleBackImage.sprite = sp;
+                self.E_HoleBackImage.gameObject.SetActive(true);
+                return;
+            }
+
+            self.E_HoleBackImage.gameObject.SetActive(true);
+            string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, $"Img_hole_{holeId}");
+            Sprite sp1 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path1);
+
+            self.E_HoleBackImage.sprite = sp1;
+            self.E_HoleNameText.gameObject.SetActive(false);
+            self.ES_CommonItem.uiTransform.gameObject.SetActive(true);
+            BagInfo bagInfo = new BagInfo() { ItemID = gemId, ItemNum = 1 };
+            self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.XiangQianGem);
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_CommonItem))]
     [FriendOf(typeof (Scroll_Item_CommonItem))]
     [EntitySystemOf(typeof (ES_RoleGem))]
     [FriendOfAttribute(typeof (ES_RoleGem))]
@@ -77,14 +78,6 @@ namespace ET.Client
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, maxCount);
         }
 
-        private static void ResetHole(this ES_RoleGem self)
-        {
-            for (int i = 0; i < self.GemHoleList.Count; i++)
-            {
-                self.GemHoleList[i].OnUpdateUI(0, 0, -1);
-            }
-        }
-
         private static void UpdateSelect(this ES_RoleGem self, BagInfo bagInfo)
         {
             for (int i = 0; i < self.ScrollItemCommonItems.Keys.Count - 1; i++)
@@ -94,6 +87,59 @@ namespace ET.Client
                 {
                     self.ScrollItemCommonItems[i].UpdateSelectStatus(bagInfo);
                 }
+            }
+        }
+
+        private static void ResetHole(this ES_RoleGem self)
+        {
+            for (int i = 0; i < self.GemHoleList.Count; i++)
+            {
+                self.GemHoleList[i].OnUpdateUI(0, 0, -1);
+            }
+        }
+
+        public static void OnUpdateUI(this ES_RoleGem self)
+        {
+            self.XiangQianItem = null;
+            self.XiangQianIndex = -1;
+            self.ResetHole();
+            self.RefreshBagItems();
+            self.ES_CommonItem.uiTransform.gameObject.SetActive(false);
+        }
+
+        public static void OnClickXiangQianItem(this ES_RoleGem self, BagInfo info)
+        {
+            self.XiangQianItem = info;
+            if (info == null)
+            {
+                self.ResetHole();
+                return;
+            }
+
+            self.ES_CommonItem.uiTransform.gameObject.SetActive(true);
+            self.ES_CommonItem.UpdateItem(info, ItemOperateEnum.None);
+
+            info.GemHole = string.IsNullOrEmpty(info.GemHole)? "" : info.GemHole;
+            info.GemIDNew = string.IsNullOrEmpty(info.GemIDNew)? "" : info.GemIDNew;
+            string[] gemHoles = info.GemHole.Split('_');
+            string[] gemIds = info.GemIDNew.Split('_');
+
+            for (int i = 0; i < 4; i++)
+            {
+                int gemHoleId = (gemHoles.Length > i && gemHoles[i] != "")? int.Parse(gemHoles[i]) : 0;
+                int gemId = (gemIds.Length > i && gemIds[i] != "")? int.Parse(gemIds[i]) : 0;
+
+                self.GemHoleList[i].OnUpdateUI(gemHoleId, gemId, i);
+                self.GemHoleList[i].SetClickHandler(self.OnSetHoleIndex);
+            }
+        }
+
+        public static void OnSetHoleIndex(this ES_RoleGem self, int index)
+        {
+            self.XiangQianIndex = index;
+            for (int i = 0; i < self.GemHoleList.Count; i++)
+            {
+                self.GemHoleList[i].SetSelected(i == index);
             }
         }
     }

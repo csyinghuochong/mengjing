@@ -1,5 +1,7 @@
 ﻿
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 namespace ET.Client
 {
@@ -7,8 +9,17 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_CommonItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		public BagInfo BagInfo;
+		public BagInfo Baginfo;
+		public string ItemNum;
+		public int ItemID;
+		public bool ShowTip;
 		public ItemOperateEnum ItemOperateEnum;
+		public Action<BagInfo> ClickItemHandler;
+		public Action<BagInfo, PointerEventData> BeginDragHandler;
+		public Action<BagInfo, PointerEventData> DragingHandler;
+		public Action<BagInfo, PointerEventData> EndDragHandler;
+		public Action<BagInfo, PointerEventData> PointerDownHandler;
+		public Action<BagInfo, PointerEventData> PointerUpHandler;
 		
 		public UnityEngine.UI.Button E_ItemDiButton
      	{
