@@ -362,6 +362,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Toggle E_GemToggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_GemToggle == null )
+     			{
+		    		this.m_E_GemToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Gem");
+     			}
+     			return this.m_E_GemToggle;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
      		get
@@ -415,6 +432,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_RoleGem ES_RoleGem
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_rolegem == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleGem");
+		    	   this.m_es_rolegem = this.AddChild<ES_RoleGem,Transform>(subTrans);
+     			}
+     			return this.m_es_rolegem;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_es_modelshow = null;
@@ -437,9 +472,11 @@ namespace ET.Client
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_BagToggle = null;
 			this.m_E_PropertyToggle = null;
+			this.m_E_GemToggle = null;
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_rolebag = null;
 			this.m_es_roleproperty = null;
+			this.m_es_rolegem = null;
 			this.uiTransform = null;
 		}
 
@@ -463,9 +500,11 @@ namespace ET.Client
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_BagToggle = null;
 		private UnityEngine.UI.Toggle m_E_PropertyToggle = null;
+		private UnityEngine.UI.Toggle m_E_GemToggle = null;
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_RoleBag> m_es_rolebag = null;
 		private EntityRef<ES_RoleProperty> m_es_roleproperty = null;
+		private EntityRef<ES_RoleGem> m_es_rolegem = null;
 		public Transform uiTransform = null;
 	}
 }

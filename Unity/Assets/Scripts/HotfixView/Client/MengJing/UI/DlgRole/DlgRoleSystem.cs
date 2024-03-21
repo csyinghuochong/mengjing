@@ -12,11 +12,13 @@ namespace ET.Client
         protected override async ETTask Run(Scene scene, BagItemUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.Refresh();
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleBag.Refresh();
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleBag?.Refresh();
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleGem?.Refresh();
             await ETTask.CompletedTask;
         }
     }
 
+    [FriendOf(typeof (ES_RoleGem))]
     [FriendOf(typeof (ES_RoleProperty))]
     [FriendOf(typeof (ES_RoleBag))]
     [FriendOf(typeof (UserInfoComponentClient))]
@@ -59,6 +61,7 @@ namespace ET.Client
         {
             UICommonHelper.SetToggleShow(self.View.E_BagToggle.gameObject, index == 0);
             UICommonHelper.SetToggleShow(self.View.E_PropertyToggle.gameObject, index == 1);
+            UICommonHelper.SetToggleShow(self.View.E_GemToggle.gameObject, index == 2);
 
             UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
@@ -69,6 +72,9 @@ namespace ET.Client
                     break;
                 case 1:
                     self.View.ES_RoleProperty.uiTransform.gameObject.SetActive(true);
+                    break;
+                case 2:
+                    self.View.ES_RoleGem.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
@@ -82,7 +88,6 @@ namespace ET.Client
 
         private static void RefreshPlayerInfo(this DlgRole self)
         {
-            // 假数据
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentClient>().UserInfo;
 
             self.View.E_RoseLvText.text = userInfo.Lv.ToString();
