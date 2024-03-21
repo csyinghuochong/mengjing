@@ -155,18 +155,18 @@ namespace ET.Client
             {
                 case SceneTypeEnum.PetTianTi:
                     self.CameraMoveType = CameraMoveType.PetFuben;
-                    self.MainCamera.transform.position = AIHelp.FuBenCameraPosition();
-                    self.MainCamera.transform.localRotation = Quaternion.Euler(AIHelp.FuBenCameraRotation());
+                    self.MainCamera.transform.position = ConfigData.FuBenCameraPosition;
+                    self.MainCamera.transform.localRotation = Quaternion.Euler(ConfigData.FuBenCameraRotation);
                     break;
                 case SceneTypeEnum.PetDungeon:
                     self.CameraMoveType = CameraMoveType.PetFuben;
-                    self.MainCamera.transform.position = AIHelp.FuBenCameraPosition();
-                    self.MainCamera.transform.localRotation = Quaternion.Euler(AIHelp.FuBenCameraRotation());
+                    self.MainCamera.transform.position = ConfigData.FuBenCameraPosition;
+                    self.MainCamera.transform.localRotation = Quaternion.Euler(ConfigData.FuBenCameraRotation);
                     break;
                 case SceneTypeEnum.PetMing:
                     self.CameraMoveType = CameraMoveType.PetFuben;
-                    self.MainCamera.transform.position = AIHelp.FuBenCameraPosition();
-                    self.MainCamera.transform.localRotation = Quaternion.Euler(AIHelp.FuBenCameraRotation());
+                    self.MainCamera.transform.position = ConfigData.FuBenCameraPosition;
+                    self.MainCamera.transform.localRotation = Quaternion.Euler(ConfigData.FuBenCameraRotation);
                     break;
                 default:
                     self.CameraMoveType = CameraMoveType.Normal;

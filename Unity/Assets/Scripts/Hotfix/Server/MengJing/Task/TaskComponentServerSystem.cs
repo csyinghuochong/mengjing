@@ -502,7 +502,7 @@ namespace ET.Server
                 }
 
                 int dropId = 0;
-                ConfigHelper.RingTaskDrop().TryGetValue(ringTaskNumber, out dropId);
+                ConfigData.RingTaskDrop.TryGetValue(ringTaskNumber, out dropId);
                 if (dropId > 0)
                 {
                     List<RewardItem> droplist = new List<RewardItem>();
