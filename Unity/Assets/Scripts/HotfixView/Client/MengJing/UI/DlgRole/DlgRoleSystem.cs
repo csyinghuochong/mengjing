@@ -18,6 +18,16 @@ namespace ET.Client
         }
     }
 
+    [Event(SceneType.Demo)]
+    public class DataUpdate_EquipWear_RefreshEquip: AEvent<Scene, DataUpdate_EquipWear>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_EquipWear args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.OnEquipWear();
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof (ES_EquipSet))]
     [FriendOf(typeof (ES_RoleGem))]
     [FriendOf(typeof (ES_RoleProperty))]
@@ -78,6 +88,14 @@ namespace ET.Client
             }
 
             self.Refresh();
+        }
+
+        public static void OnEquipWear(this DlgRole self)
+        {
+            BagComponentClient bagComponent = self.Root().GetComponent<BagComponentClient>();
+            UserInfoComponentClient userInfoComponent = self.Root().GetComponent<UserInfoComponentClient>();
+            BagInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
+            self.View.ES_EquipSet.ChangeWeapon(bagInfo, userInfoComponent.UserInfo.Occ);
         }
 
         public static void Refresh(this DlgRole self)

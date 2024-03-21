@@ -72,6 +72,10 @@ namespace ET.Client
         public string DataParamString;
     }
 
+    public struct DataUpdate_EquipWear
+    {
+    }
+
     public struct TaskNpcDialog
     {
         public int NpcId;

@@ -14,6 +14,23 @@ namespace ET.Client
 		public List<ES_EquipItem> ESEquipItems_2 = new();
 		public List<BagInfo> EquipInfoList = new();
 		
+		public UnityEngine.RectTransform EG_EquipSetHideRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_EquipSetHideRectTransform == null )
+     			{
+		    		this.m_EG_EquipSetHideRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_EquipSetHide");
+     			}
+     			return this.m_EG_EquipSetHideRectTransform;
+     		}
+     	}
+
 		public ES_ModelShow ES_ModelShow
      	{
      		get
@@ -25,7 +42,7 @@ namespace ET.Client
      			}
      			if( this.m_es_modelshow == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSetHide/ES_ModelShow");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_EquipSetHide/ES_ModelShow");
 		    	   this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
      			}
      			return this.m_es_modelshow;
@@ -43,7 +60,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RoseNameText == null )
      			{
-		    		this.m_E_RoseNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EquipSetHide/RoseNameLv/E_RoseName");
+		    		this.m_E_RoseNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_EquipSetHide/RoseNameLv/E_RoseName");
      			}
      			return this.m_E_RoseNameText;
      		}
@@ -60,7 +77,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RoseLvText == null )
      			{
-		    		this.m_E_RoseLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EquipSetHide/RoseNameLv/E_RoseLv");
+		    		this.m_E_RoseLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_EquipSetHide/RoseNameLv/E_RoseLv");
      			}
      			return this.m_E_RoseLvText;
      		}
@@ -320,6 +337,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_EG_EquipSetHideRectTransform = null;
 			this.m_es_modelshow = null;
 			this.m_E_RoseNameText = null;
 			this.m_E_RoseLvText = null;
@@ -340,6 +358,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.RectTransform m_EG_EquipSetHideRectTransform = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		private UnityEngine.UI.Text m_E_RoseNameText = null;
 		private UnityEngine.UI.Text m_E_RoseLvText = null;

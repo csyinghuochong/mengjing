@@ -64,6 +64,11 @@ namespace ET.Client
             self.EG_RootRectTransform.transform.Find("Camera").localPosition = cameraPos;
         }
 
+        public static void ChangeWeapon(this ES_ModelShow self, BagInfo bagInfo, int occ)
+        {
+            self.GetComponent<ChangeEquipComponent>().ChangeWeapon(self.GetWeaponId(bagInfo, occ));
+        }
+        
         public static void ShowPlayerModel(this ES_ModelShow self, BagInfo bagInfo, int occ, int equipIndex)
         {
             if (self.UnitModel != null)

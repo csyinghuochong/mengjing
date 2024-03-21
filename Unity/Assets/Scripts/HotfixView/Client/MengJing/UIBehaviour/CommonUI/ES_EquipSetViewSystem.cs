@@ -69,14 +69,22 @@ namespace ET.Client
             self.RefreshEquip_2(bagComponentClient.GetItemsByLoc(ItemLocType.ItemLocEquip_2), userInfoComponentClient.UserInfo.Occ,
                 ItemOperateEnum.Juese);
         }
+
         public static void EquipSetHide(this ES_EquipSet self, bool value)
         {
+            self.EG_EquipSetHideRectTransform.gameObject.SetActive(value);
         }
+
         public static void PlayShowIdelAnimate(this ES_EquipSet self, BagInfo bagInfo)
         {
             self.ES_ModelShow.PlayShowIdelAnimate();
         }
-        
+
+        public static void ChangeWeapon(this ES_EquipSet self, BagInfo bagInfo, int occ)
+        {
+            self.ES_ModelShow.ChangeWeapon(bagInfo, occ);
+        }
+
         private static void RefreshEquip_1(this ES_EquipSet self, List<BagInfo> equiplist, int occ, ItemOperateEnum itemOperateEnum)
         {
             int shipingIndex = 0;

@@ -153,7 +153,7 @@ namespace ET.Client
             }
 
             // self.ZoneScene().GetComponent<AttackComponent>().UpdateComboTime();
-            // HintHelp.GetInstance().DataUpdate(DataType.EquipWear, ItemModelID);
+            EventSystem.Instance.Publish(root, new DataUpdate_EquipWear());
         }
 
         public static async ETTask RequestTakeoffEquip(Scene root, BagInfo bagInfo)
@@ -180,6 +180,7 @@ namespace ET.Client
 
             // self.ZoneScene().GetComponent<AttackComponent>().UpdateComboTime();
             // HintHelp.GetInstance().DataUpdate(DataType.EquipWear);
+            EventSystem.Instance.Publish(root, new DataUpdate_EquipWear());
         }
 
         public static async ETTask<int> RequestSplitItem(Scene root, BagInfo bagInfo, int splitnumber)
