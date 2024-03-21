@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ET.Server;
-using UnityEngine;
+using Unity.Mathematics;
 
 namespace ET
 {
@@ -19,9 +18,9 @@ namespace ET
         }
 
 
-        public static Vector3 GetRandomPos()
+        public static float3 GetRandomPos()
         {
-            return new Vector3
+            return new float3
                 (
                     RandomHelper.RandomNumberFloat(-2.5f, 2.5f) + ConfigData.PastureInitPos.x,
                     ConfigData.PastureInitPos.y,
@@ -76,7 +75,7 @@ namespace ET
             }
         }
 
-        public static Vector3 GetMonsterPostion()
+        public static float3 GetMonsterPostion()
         {
             int positionId = 50001;
             List<MonsterPositionConfig> configs = new List<MonsterPositionConfig>();
@@ -90,7 +89,7 @@ namespace ET
             MonsterPositionConfig monsterPosition = configs[ RandomHelper.RandomNumber(0, configs.Count)];
             float range = (float)monsterPosition.CreateRange;
             string[] position = monsterPosition.Position.Split(',');
-            Vector3 vector3 = new Vector3();
+            float3 vector3 = new float3();
             vector3.x = float.Parse(position[0]) + RandomHelper.RandomNumberFloat(-1 * range, range);
             vector3.y = float.Parse(position[1]);
             vector3.z = float.Parse(position[2]) + RandomHelper.RandomNumberFloat(-1 * range, range);

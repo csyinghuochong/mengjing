@@ -10,10 +10,9 @@ namespace ET.Server
 		protected override async ETTask Run(Unit unit, C2M_RolePetJiadian request, M2C_RolePetJiadian response)
 		{
 			//读取数据库
-			RolePetInfo rolePetInfo = unit.GetComponent<PetComponent>().GetPetInfo(request.PetInfoId);
+			RolePetInfo rolePetInfo = unit.GetComponent<PetComponentServer>().GetPetInfo(request.PetInfoId);
 			if (rolePetInfo == null)
 			{
-				reply();
 				return;
 			}
 
@@ -34,13 +33,11 @@ namespace ET.Server
 				|| request.AddPropretyValue[2] > maxPoint
 				|| request.AddPropretyValue[3] > maxPoint)
 			{
-				rolePetInfo.AddPropretyValue = ItemHelper.DefaultGem;
+				rolePetInfo.AddPropretyValue = ConfigData.DefaultGem;
                 rolePetInfo.AddPropretyNum = (rolePetInfo.PetLv - 1) * 5;
 			}
-			unit.GetComponent<PetComponent>().UpdatePetAttribute(rolePetInfo, true);
+			unit.GetComponent<PetComponentServer>().UpdatePetAttribute(rolePetInfo, true);
 			response.RolePetInfo = rolePetInfo;	
-
-			reply();
 			await ETTask.CompletedTask;
 		}
 	}

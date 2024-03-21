@@ -10,20 +10,18 @@ namespace ET.Server
 		protected override async ETTask Run(Unit unit, C2M_RolePetXiLian request, M2C_RolePetXiLian response)
 		{
 			//读取数据库
-			RolePetInfo petInfo = unit.GetComponent<PetComponent>().GetPetInfo(request.PetInfoId);
-			BagInfo bagInfo = unit.GetComponent<BagComponent>().GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoID);
+			RolePetInfo petInfo = unit.GetComponent<PetComponentServer>().GetPetInfo(request.PetInfoId);
+			BagInfo bagInfo = unit.GetComponent<BagComponentServer>().GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoID);
 
 			//判断是否有足够的道具
 			if (bagInfo == null || petInfo == null)
 			{
 				response.Error = ErrorCode.ERR_ItemNotEnoughError;
-				reply();
 				return;
 			}
-			if (unit.GetComponent<BagComponent>().GetItemNumber(bagInfo.ItemID) < request.CostItemNum)
+			if (unit.GetComponent<BagComponentServer>().GetItemNumber(bagInfo.ItemID) < request.CostItemNum)
 			{
 				response.Error = ErrorCode.ERR_ItemNotEnoughError;
-				reply();
 				return;
 			}
 
@@ -38,7 +36,6 @@ namespace ET.Server
 				if(itemSubType == 105 || itemSubType == 118 || itemSubType == 119 || itemSubType == 122)
                 {
 					response.Error = ErrorCode.ERR_Pet_NoUseItem;
-					reply();
 					return;
 				}
 			}
@@ -66,8 +63,8 @@ namespace ET.Server
 					}
 
 					//重置资质系数
-					petInfo = unit.GetComponent<PetComponent>().PetXiLian(petInfo,2, bagInfo.ItemID, 0);
-                    unit.GetComponent<PetComponent>().UpdatePetAttribute(petInfo, true);
+					petInfo = unit.GetComponent<PetComponentServer>().PetXiLian(petInfo,2, bagInfo.ItemID, 0);
+                    unit.GetComponent<PetComponentServer>().UpdatePetAttribute(petInfo, true);
                     petInfo.LockSkill.Clear();
                     response.rolePetInfo = petInfo;
 					break;
@@ -76,7 +73,7 @@ namespace ET.Server
 					if (ExpConfigCategory.Instance.Contain(petInfo.PetLv))
 					{
                         int addExp = ExpConfigCategory.Instance.Get(petInfo.PetLv).PetItemUpExp;
-                        unit.GetComponent<PetComponent>().PetAddExp(petInfo, addExp);
+                        unit.GetComponent<PetComponentServer>().PetAddExp(petInfo, addExp);
                         response.rolePetInfo = petInfo;
                     }
 					break;
@@ -85,26 +82,25 @@ namespace ET.Server
 					///////
 					if ( !ExpConfigCategory.Instance.Contain(petInfo.PetLv + 1) )
 					{
-						reply();
 						return;
 					}
-					unit.GetComponent<PetComponent>().PetAddLv(petInfo, 1);
+					unit.GetComponent<PetComponentServer>().PetAddLv(petInfo, 1);
 					response.rolePetInfo = petInfo;
 					break;
 				case 117:	//洗点
-					unit.GetComponent<PetComponent>().OnResetPoint(petInfo);
+					unit.GetComponent<PetComponentServer>().OnResetPoint(petInfo);
                     petInfo.LockSkill.Clear();
                     response.rolePetInfo = petInfo;
 					break;
 				case 118: //资质
-					unit.GetComponent<PetComponent>().UpdatePetZiZhi(petInfo, bagInfo.ItemID);
-					unit.GetComponent<PetComponent>().UpdatePetAttribute(petInfo, true);
+					unit.GetComponent<PetComponentServer>().UpdatePetZiZhi(petInfo, bagInfo.ItemID);
+					unit.GetComponent<PetComponentServer>().UpdatePetAttribute(petInfo, true);
                     petInfo.LockSkill.Clear();
                     response.rolePetInfo = petInfo;
 					break;
 				case 119: //成长
-					unit.GetComponent<PetComponent>().UpdatePetChengZhang(petInfo, bagInfo.ItemID);
-					unit.GetComponent<PetComponent>().UpdatePetAttribute(petInfo, true);
+					unit.GetComponent<PetComponentServer>().UpdatePetChengZhang(petInfo, bagInfo.ItemID);
+					unit.GetComponent<PetComponentServer>().UpdatePetAttribute(petInfo, true);
 					response.rolePetInfo = petInfo;
 					break;
 				//学习技能书
@@ -112,9 +108,9 @@ namespace ET.Server
 					bool ifok = Pet_AddSkill(unit, petInfo, int.Parse(itemConfig.ItemUsePar));
 					if (ifok)
 					{
-                        unit.GetComponent<PetComponent>().UpdatePetAttribute(petInfo, true);
-                        unit.GetComponent<TaskComponent>().TriggerTaskEvent(TaskTargetType.PetUseSkillBook_36, 0, 1);
-                        unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.PetUseSkillBook_36, 0, 1);
+                        unit.GetComponent<PetComponentServer>().UpdatePetAttribute(petInfo, true);
+                        unit.GetComponent<TaskComponentServer>().TriggerTaskEvent(TaskTargetType.PetUseSkillBook_36, 0, 1);
+                        unit.GetComponent<TaskComponentServer>().TriggerTaskCountryEvent(TaskTargetType.PetUseSkillBook_36, 0, 1);
                     }
 					petInfo.LockSkill.Clear();
                     response.rolePetInfo = petInfo;
@@ -131,8 +127,8 @@ namespace ET.Server
 					//}
 
 					//重置资质系数
-					petInfo = unit.GetComponent<PetComponent>().PetXiLian(petInfo, 2, bagInfo.ItemID, 0);
-                    unit.GetComponent<PetComponent>().UpdatePetAttribute(petInfo, true);
+					petInfo = unit.GetComponent<PetComponentServer>().PetXiLian(petInfo, 2, bagInfo.ItemID, 0);
+                    unit.GetComponent<PetComponentServer>().UpdatePetAttribute(petInfo, true);
 					response.rolePetInfo = petInfo;
 					break;
 				case 134:
@@ -140,7 +136,6 @@ namespace ET.Server
 					if (PetHelper.IsBianYI(petInfo))
 					{
 						response.Error = ErrorCode.ERR_Pet_NoUseItem;
-						reply();
 						return;
 					}
 
@@ -154,7 +149,6 @@ namespace ET.Server
 					if (petInfo.PetSkill.Count < 2)
 					{
                         response.Error = ErrorCode.ERR_Pet_CanNotLock;
-                        reply();
                         return;
                     }
 
@@ -174,20 +168,19 @@ namespace ET.Server
 				//扣除道具
 				List<RewardItem> rewardItems = new List<RewardItem>();
 				rewardItems.Add(new RewardItem() { ItemID = bagInfo.ItemID, ItemNum = 1 });
-				unit.GetComponent<BagComponent>().OnCostItemData(rewardItems);		
-				unit.GetComponent<ChengJiuComponent>().OnPetXiLian(petInfo);		//激活成就
-				unit.GetComponent<TaskComponent>().OnPetXiLian(petInfo);                    //激活任务
+				unit.GetComponent<BagComponentServer>().OnCostItemData(rewardItems);		
+				unit.GetComponent<ChengJiuComponentServer>().OnPetXiLian(petInfo);		//激活成就
+				unit.GetComponent<TaskComponentServer>().OnPetXiLian(petInfo);                    //激活任务
 
 				if (itemSubType == 105 || itemSubType == 133)
                 {
-                    unit.GetComponent<TaskComponent>().TriggerTaskEvent(TaskTargetType.PetXiLian10010086_33, 0, 1);
-                    unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.PetXiLian10010086_33, 0, 1);
+                    unit.GetComponent<TaskComponentServer>().TriggerTaskEvent(TaskTargetType.PetXiLian10010086_33, 0, 1);
+                    unit.GetComponent<TaskComponentServer>().TriggerTaskCountryEvent(TaskTargetType.PetXiLian10010086_33, 0, 1);
                 }
             }
-            unit.GetComponent<PetComponent>().CheckPetPingFen();
-            unit.GetComponent<PetComponent>().CheckPetZiZhi();
-
-            reply();
+            unit.GetComponent<PetComponentServer>().CheckPetPingFen();
+            unit.GetComponent<PetComponentServer>().CheckPetZiZhi();
+            
 			await ETTask.CompletedTask;
 		}
 
@@ -296,7 +289,8 @@ namespace ET.Server
 		//成长提高
 		private bool Pet_AddRandomChengZhang(RolePetInfo petinfo)
 		{
-			return Function_AI.GetInstance().Pet_AddRandomChengZhang(petinfo);
+			return false;
+			//return Function_AI.GetInstance().Pet_AddRandomChengZhang(petinfo);
 			//langStrHint = Game_PublicClassVar.Get_gameSettingLanguge.LoadLocalizationHint("hint_228");
 			//Game_PublicClassVar.Get_function_UI.GameGirdHint_Front(langStrHint);
 			////Game_PublicClassVar.Get_function_UI.GameGirdHint_Front("一股神秘的力量让你的宠物成长提高了！");

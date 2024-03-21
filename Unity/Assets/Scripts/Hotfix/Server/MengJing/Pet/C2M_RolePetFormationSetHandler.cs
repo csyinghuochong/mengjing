@@ -8,7 +8,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_RolePetFormationSet request, M2C_RolePetFormationSet response)
         {
-            PetComponent petComponent = unit.GetComponent<PetComponent>();
+            PetComponentServer petComponent = unit.GetComponent<PetComponentServer>();
             switch (request.SceneType)
             {
                 case SceneTypeEnum.PetDungeon:
@@ -22,8 +22,8 @@ namespace ET.Server
                     petComponent.PetMingPosition = request.PetPosition;   
                     break;
             }
-            DBHelper.SaveComponent( unit.DomainZone(), unit.Id, petComponent).Coroutine();
-            reply();
+            UnitCacheHelper.SaveComponent( unit.Zone(), unit.Id, petComponent).Coroutine();
+
             await ETTask.CompletedTask;
         }
     }

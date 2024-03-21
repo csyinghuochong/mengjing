@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -11,20 +11,18 @@ namespace ET.Server
 		protected override async ETTask Run(Unit unit, C2M_RolePetHeCheng request, M2C_RolePetHeCheng response)
 		{
 			//读取数据库
-			PetComponent petComponent = unit.GetComponent<PetComponent>();
+			PetComponentServer petComponent = unit.GetComponent<PetComponentServer>();
 
 			RolePetInfo petinfo_1 = petComponent.GetPetInfo(request.PetInfoId1);
 			RolePetInfo petinfo_2 = petComponent.GetPetInfo(request.PetInfoId2);
 			if (petinfo_1 == null || petinfo_2 == null)
 			{
 				response.Error = ErrorCode.ERR_Pet_NoExist;
-				reply();
 				return;
 			}
             if (petinfo_1.PetStatus == 1 || petinfo_2.PetStatus == 1)
             {
                 response.Error = ErrorCode.ERR_Pet_Hint_4;
-                reply();
                 return;
             }
 			//错误码
@@ -223,12 +221,12 @@ namespace ET.Server
 
 			int pet_exp = 0;
 			int addPropertyNum = pet_Lv * 5 + 20;
-			string addPropertyValue = ItemHelper.DefaultGem;
+			string addPropertyValue = ConfigData.DefaultGem;
             bool baby = false;
 
 
 			//合成等级
-			pet_Lv = (int)(Mathf.Min(petLv_1, petLv_2) * 0.75f + (Mathf.Max(petLv_1, petLv_2) - Mathf.Min(petLv_1, petLv_2)) * GetRandomZeroTOne());
+			pet_Lv = (int)(math.min(petLv_1, petLv_2) * 0.75f + (math.max(petLv_1, petLv_2) - math.min(petLv_1, petLv_2)) * GetRandomZeroTOne());
 			pet_exp = 10000; // Config.Instance.GetConf<Exp>(pet_Lv).PetUpExp;
 			pet_exp = (int)(pet_exp * GetRandomZeroTOne());
 			if (pet_Lv < 1)
@@ -364,16 +362,15 @@ namespace ET.Server
             petinfo_update.LockSkill.Clear();
             petComponent.OnResetPoint(petinfo_update);
 			petComponent.RemovePet(petinfo_delete.Id);
-			unit.GetComponent<ChengJiuComponent>().OnPetHeCheng(petinfo_update);
-			unit.GetComponent<TaskComponent>().OnPetHeCheng(petinfo_update);
+			unit.GetComponent<ChengJiuComponentServer>().OnPetHeCheng(petinfo_update);
+			unit.GetComponent<TaskComponentServer>().OnPetHeCheng(petinfo_update);
 			unit.GetComponent<DataCollationComponent>().PetHeCheng++;
 
             petComponent.CheckPetPingFen();
 			petComponent.CheckPetZiZhi();
-            Function_Fight.GetInstance().UnitUpdateProperty_Base(unit, true, true);
+            Function_Fight.UnitUpdateProperty_Base(unit, true, true);
             response.DeletePetInfoId = petinfo_delete.Id;
 			response.rolePetInfo = petinfo_update;
-			reply();
 			await ETTask.CompletedTask;
 		}
 
@@ -393,7 +390,7 @@ namespace ET.Server
 			//取4个随机值
 			float ran_1 = RandomHelper.RandomNumber(0, 5) * 0.1f;
 			float ran_2 = RandomHelper.RandomNumber(0, 5) * 0.1f;
-			int ran_ss = Mathf.FloorToInt((1 - ran_1 - ran_2) * 10);
+			int ran_ss = (int)math.floor((1 - ran_1 - ran_2) * 10);
 			float ran_3 = RandomHelper.RandomNumber(0, ran_ss) * 0.1f;
 			float ran_4 = 1 - ran_1 - ran_2 - ran_3;
 			int add_1 = (int)(sumNum * ran_1);
@@ -430,8 +427,8 @@ namespace ET.Server
 			float zhizhiValue = Mathf.Min(zizhiValue_1, zizhiValue_2) * zizhi_2 + ((Mathf.Min(zizhiValue_1, zizhiValue_2) * zizhi_3 + Mathf.Max(zizhiValue_1, zizhiValue_2) - Mathf.Min(zizhiValue_1, zizhiValue_2))) * number2 * zizhi_4;
 			*/
 
-			float ZiZhimin = Mathf.Min(zizhiValue_1, zizhiValue_2);
-			float ZiZhimax = Mathf.Max(zizhiValue_1, zizhiValue_2);
+			float ZiZhimin = math.min(zizhiValue_1, zizhiValue_2);
+			float ZiZhimax = math.max(zizhiValue_1, zizhiValue_2);
 
 			ZiZhimin = ZiZhimin * 0.95f;
 			ZiZhimax = ZiZhimax * 1.05f;

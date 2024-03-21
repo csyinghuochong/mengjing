@@ -134,7 +134,7 @@ namespace ET.Server
 
         public string Account;
 
-        public int PetHeCheng;
+        public int PetHeCheng { get; set; }
 
         //模拟器
         public int Simulator;

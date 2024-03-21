@@ -16,13 +16,12 @@ namespace ET.Server
                 //通知客户端背包道具发生改变
                 m2c_bagUpdate.BagInfoUpdate = new List<BagInfo>();
 
-                PetComponent petComponent = unit.GetComponent<PetComponent>();
-                BagComponent bagComponent = unit.GetComponent<BagComponent>();
+                PetComponentServer petComponent = unit.GetComponent<PetComponentServer>();
+                BagComponentServer bagComponent = unit.GetComponent<BagComponentServer>();
                 RolePetInfo rolePetInfo = petComponent.GetPetInfo(request.PetInfoId);
                 if (rolePetInfo == null)
                 {
                     response.Error = ErrorCode.ERR_Pet_NoExist;
-                    reply();
                     return;
                 }
 
@@ -44,7 +43,6 @@ namespace ET.Server
                     BagInfo bagInfo = bagComponent.GetItemByLoc(itemLocType, request.BagInfoId);
                     if (bagInfo == null)
                     {
-                        reply();
                         return;
                     }
 
@@ -54,10 +52,9 @@ namespace ET.Server
                     rolePetInfo.PetHeXinList[request.Position] = request.BagInfoId;
                 }
                 petComponent.UpdatePetAttribute(rolePetInfo, true);
-                MessageHelper.SendToClient(unit, m2c_bagUpdate);
+                MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
 
                 response.RolePetInfo = rolePetInfo;
-                reply();
                 await ETTask.CompletedTask;
             }
             catch (Exception ex)

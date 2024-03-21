@@ -9,7 +9,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_RolePetUpStar request, M2C_RolePetUpStar response)
         {
 
-            PetComponent petComponent = unit.GetComponent<PetComponent>();
+            PetComponentServer petComponent = unit.GetComponent<PetComponentServer>();
             //string upStarStone = GlobalValueConfigCategory.Instance.Get(7).Value;
             //string[] upStarStoneInfo = upStarStone.Split(';');
             //int upStarStoneId = int.Parse(upStarStoneInfo[0]);
@@ -61,7 +61,6 @@ namespace ET.Server
             if (starError)
             {
                 response.Error = ErrorCode.ERR_Pet_Hint_1;
-                reply();
                 return;
             }
 
@@ -69,7 +68,6 @@ namespace ET.Server
             if (!success)
             {
                 response.Error = ErrorCode.ERR_Pet_UpStar;
-                reply();
                 return;
             }
 
@@ -79,8 +77,7 @@ namespace ET.Server
                 petComponent.RemovePet(request.CostPetInfoIds[i]);
             }
             response.rolePetInfo = rolePetInfo;
-
-            reply();
+            
             await ETTask.CompletedTask;
         }
     }

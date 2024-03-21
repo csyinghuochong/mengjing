@@ -8,13 +8,12 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_RolePetUpStage request, M2C_RolePetUpStage response)
         {
-            PetComponent petComponent = unit.GetComponent<PetComponent>();
+            PetComponentServer petComponent = unit.GetComponent<PetComponentServer>();
             RolePetInfo rolePetInfo = petComponent.GetPetInfo(request.PetInfoId);
 
             if (rolePetInfo ==null || request.PetInfoXianJiId <= 0) 
             {
                 response.Error = ErrorCode.ERR_Pet_UpStage;
-                reply();
                 return;
             }
 
@@ -23,7 +22,6 @@ namespace ET.Server
             if (petCof.PetType == 2)
             {
                 response.Error = ErrorCode.ERR_Pet_UpStage;
-                reply();
                 return;
             }
 
@@ -35,7 +33,6 @@ namespace ET.Server
                 if (rolePetInfo.UpStageStatus == 2)
                 {
                     response.Error = ErrorCode.ERR_Pet_UpStage;
-                    reply();
                     return; 
                 }
 
@@ -64,7 +61,6 @@ namespace ET.Server
                 response.Error = ErrorCode.ERR_Pet_UpStage;
             }
 
-            reply();
             await ETTask.CompletedTask;
         }
     }
