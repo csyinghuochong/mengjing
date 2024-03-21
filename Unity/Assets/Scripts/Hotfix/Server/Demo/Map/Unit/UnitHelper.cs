@@ -199,6 +199,19 @@ namespace ET.Server
 
             return true;
         }
+        
+        public static Unit GetUnitByCellIndex(Scene curScene, int cellIndex, List<Unit> allunits)
+        {
+            for (int i = 0; i < allunits.Count; i++)
+            {
+                if (allunits[i].GetComponent<NumericComponentServer>().GetAsInt(NumericType.GatherCellIndex) == cellIndex)
+                {
+                    return allunits[i];
+                }
+            }
+            return null;
+
+        }
 
         public static void AddDataComponent<K>(this Unit self) where K : Entity, IAwake, new()
         {

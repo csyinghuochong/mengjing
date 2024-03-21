@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ET.Server;
 using UnityEngine;
 
 namespace ET
@@ -22,30 +23,20 @@ namespace ET
         {
             return new Vector3
                 (
-                    RandomHelper.RandomNumberFloat(-2.5f, 2.5f) + .PastureInitPos.x,
+                    RandomHelper.RandomNumberFloat(-2.5f, 2.5f) + ConfigData.PastureInitPos.x,
                     ConfigData.PastureInitPos.y,
-                    RandomHelper.RandomNumberFloat(-5f, 5f) + PastureInitPos.z
+                    RandomHelper.RandomNumberFloat(-5f, 5f) + ConfigData.PastureInitPos.z
                 );
         }
 
 
-        public static List<Vector3> JiaYuanPetPosition = new List<Vector3>()
-        {
-             new Vector3(13.42f, 0f, -42.45f),
-             new Vector3(12.26f, 0f, -29.74f),
-             new Vector3( -9.1f, 0f, -16.16f),
-             new Vector3( -9.3f, 0f, 19.97f),
-             new Vector3( 29.93f, 0f, 12.59f),
-             new Vector3( 27.27f, 0f, -27.595f),
-        };
-
         public static int GetRandomMonster()
         {
-            int[] monster = new int[ConfigHelper.JiaYuanMonster.Count];
-            int[] weights = new int[ConfigHelper.JiaYuanMonster.Count];
+            int[] monster = new int[ConfigData.JiaYuanMonster.Count];
+            int[] weights = new int[ConfigData.JiaYuanMonster.Count];
 
             int index = 0;
-            foreach (var item in ConfigHelper.JiaYuanMonster)
+            foreach (var item in ConfigData.JiaYuanMonster)
             {
                 monster[index] = item.Key;
                 weights[index] = item.Value;
@@ -115,9 +106,9 @@ namespace ET
             List<JiaYuanPurchaseItem> newJiaYuanPurchases = new List<JiaYuanPurchaseItem>();
             //int[] dest =  RandomHelper.GetRandoms(4, 0, ConfigHelper.JiaYuanPurchaseList.Count);
             long serverTime = TimeHelper.ServerNow();
-            for (int i = 0; i < ConfigHelper.JiaYuanPurchaseList.Count; i++)
+            for (int i = 0; i < ConfigData.JiaYuanPurchaseList.Count; i++)
             {
-                JiaYuanPurchase jiaYuanPurchase = ConfigHelper.JiaYuanPurchaseList[i];
+                JiaYuanPurchase jiaYuanPurchase = ConfigData.JiaYuanPurchaseList[i];
                 ItemConfig itemCof = ItemConfigCategory.Instance.Get(jiaYuanPurchase.ItemID);
                 //家园订单只给超过自身家园等级的
                 if (itemCof.UseLv <= jiayuanCof.Lv)
@@ -425,19 +416,6 @@ namespace ET
             return costItemsList[page - 1];
             
         }
-
-        public static Unit GetUnitByCellIndex(Scene curScene, int cellIndex)
-        {
-            List<Unit> allunits = UnitHelper.GetUnitList(curScene, UnitType.Plant);
-            for (int i = 0; i < allunits.Count; i++)
-            {
-                if (allunits[i].GetComponent<NumericComponent>().GetAsInt(NumericType.GatherCellIndex) == cellIndex)
-                {
-                   return allunits[i];
-                }
-            }
-            return null;
-
-        }
+        
     }
 }

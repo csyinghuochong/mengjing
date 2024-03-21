@@ -324,21 +324,6 @@ namespace ET
 
        
         /// <summary>
-        /// 家园随机怪
-        /// </summary>
-
-        public static Dictionary<int, int> JiaYuanMonster()
-        {
-            return new Dictionary<int, int>()
-            {
-                { 83000101, 50 },       //石块  资金
-                { 83000102, 30 },       //树叶  给材料
-                { 83000103, 5 },        //宝箱
-                { 83000104, 15 }        //带锁的宝箱
-            };
-        }
-
-        /// <summary>
         /// 序列号奖励 奖励最多不超过五个格子 
         /// </summary>
         public static Dictionary<long, string> SerialReward()
@@ -517,62 +502,7 @@ namespace ET
             };
         }
 
-        //收购列表
-        public static List<JiaYuanPurchase> JiaYuanPurchaseList()
-        {
-            return new List<JiaYuanPurchase>
-        {
-            new JiaYuanPurchase{ ItemID = 10036001,ItemNum = 1, BuyMinZiJin = 1500,BuyMaxZiJin = 3000},  //炒鸡蛋
-            new JiaYuanPurchase{ ItemID = 10036002,ItemNum = 1, BuyMinZiJin = 2646,BuyMaxZiJin = 5292},  //咸鸭蛋
-            new JiaYuanPurchase{ ItemID = 10036003,ItemNum = 1, BuyMinZiJin = 3345,BuyMaxZiJin = 6690},  //胡萝卜汁
-            new JiaYuanPurchase{ ItemID = 10036004,ItemNum = 1, BuyMinZiJin = 3105,BuyMaxZiJin = 6210},  //腌蛋
-            new JiaYuanPurchase{ ItemID = 10036005,ItemNum = 1, BuyMinZiJin = 3912,BuyMaxZiJin = 7824},  //红萝卜汁
-            new JiaYuanPurchase{ ItemID = 10036006,ItemNum = 1, BuyMinZiJin = 3330,BuyMaxZiJin = 6660},  //鸡汤
-            new JiaYuanPurchase{ ItemID = 10036007,ItemNum = 1, BuyMinZiJin = 7452,BuyMaxZiJin = 14904},  //兔绒披风
-            new JiaYuanPurchase{ ItemID = 10036008,ItemNum = 1, BuyMinZiJin = 11448,BuyMaxZiJin = 22896},  //绒毛面具
-            new JiaYuanPurchase{ ItemID = 10036009,ItemNum = 1, BuyMinZiJin = 7299,BuyMaxZiJin = 14598},  //红薯团
-            new JiaYuanPurchase{ ItemID = 10036010,ItemNum = 1, BuyMinZiJin = 7658,BuyMaxZiJin = 15315},  //鸡蛋汉堡
-            new JiaYuanPurchase{ ItemID = 10036011,ItemNum = 1, BuyMinZiJin = 7805,BuyMaxZiJin = 15609},  //烤肉
-            new JiaYuanPurchase{ ItemID = 10036012,ItemNum = 1, BuyMinZiJin = 14396,BuyMaxZiJin = 28791},  //猪肉串
-            new JiaYuanPurchase{ ItemID = 10036013,ItemNum = 1, BuyMinZiJin = 19662,BuyMaxZiJin = 39324},  //牛皮护腕
-            new JiaYuanPurchase{ ItemID = 10036014,ItemNum = 1, BuyMinZiJin = 10236,BuyMaxZiJin = 20472},  //清蒸土豆
-            new JiaYuanPurchase{ ItemID = 10036015,ItemNum = 1, BuyMinZiJin = 12014,BuyMaxZiJin = 24027},  //水果汁
-            new JiaYuanPurchase{ ItemID = 10036016,ItemNum = 1, BuyMinZiJin = 15392,BuyMaxZiJin = 30783},  //南瓜羹
-            new JiaYuanPurchase{ ItemID = 10036017,ItemNum = 1, BuyMinZiJin = 23364,BuyMaxZiJin = 46728},  //绒毛围裙
-            new JiaYuanPurchase{ ItemID = 10036018,ItemNum = 1, BuyMinZiJin = 22941,BuyMaxZiJin = 45882},  //黄瓜汁
-            new JiaYuanPurchase{ ItemID = 10036019,ItemNum = 1, BuyMinZiJin = 24843,BuyMaxZiJin = 49686},  //牛奶点心
-            new JiaYuanPurchase{ ItemID = 10036020,ItemNum = 1, BuyMinZiJin = 19740,BuyMaxZiJin = 39480},  //西红柿炒蛋
-            new JiaYuanPurchase{ ItemID = 10036021,ItemNum = 1, BuyMinZiJin = 22550,BuyMaxZiJin = 45099},  //美味拼盘
-            new JiaYuanPurchase{ ItemID = 10036022,ItemNum = 1, BuyMinZiJin = 38349,BuyMaxZiJin = 76698},  //美味蛋糕
-            new JiaYuanPurchase{ ItemID = 10036023,ItemNum = 1, BuyMinZiJin = 32340,BuyMaxZiJin = 64680},  //美味奶汁
-            new JiaYuanPurchase{ ItemID = 10036024,ItemNum = 1, BuyMinZiJin = 40698,BuyMaxZiJin = 81396},  //玉米骨汤
-            new JiaYuanPurchase{ ItemID = 10036025,ItemNum = 1, BuyMinZiJin = 25772,BuyMaxZiJin = 51543},  //风味肉汁
-            new JiaYuanPurchase{ ItemID = 10036026,ItemNum = 1, BuyMinZiJin = 51462,BuyMaxZiJin = 102924},  //风味炒饭
-            new JiaYuanPurchase{ ItemID = 10036027,ItemNum = 1, BuyMinZiJin = 37527,BuyMaxZiJin = 75054},  //风味奶酪
-            new JiaYuanPurchase{ ItemID = 10036028,ItemNum = 1, BuyMinZiJin = 18240,BuyMaxZiJin = 36480},  //西红柿组合
-            new JiaYuanPurchase{ ItemID = 10036029,ItemNum = 1, BuyMinZiJin = 22995,BuyMaxZiJin = 45990},  //风味南瓜粥
-            new JiaYuanPurchase{ ItemID = 10036030,ItemNum = 1, BuyMinZiJin = 27378,BuyMaxZiJin = 54756},  //回味汤圆
-            new JiaYuanPurchase{ ItemID = 10036031,ItemNum = 1, BuyMinZiJin = 5178,BuyMaxZiJin = 10356},  //烤鸡肉
-            new JiaYuanPurchase{ ItemID = 10036032,ItemNum = 1, BuyMinZiJin = 11882,BuyMaxZiJin = 23763},  //红烧烤肉
-            new JiaYuanPurchase{ ItemID = 10036033,ItemNum = 1, BuyMinZiJin = 31329,BuyMaxZiJin = 62658},  //加厚皮裙
-            new JiaYuanPurchase{ ItemID = 10036034,ItemNum = 1, BuyMinZiJin = 26460,BuyMaxZiJin = 52920},  //香味奶汁
-            new JiaYuanPurchase{ ItemID = 10036035,ItemNum = 1, BuyMinZiJin = 16521,BuyMaxZiJin = 33042},  //绿色果汁
-        };
-        }
-
-        //关卡boss显示列表
-        public static List<int> BossShowTimeList()
-        {
-            return new List<int>
-            {
-                70001004,70001011,70001104,70001206,70001209,
-                70002003,70002007,70002012,
-                70003003,70003006,70003012,70003016,
-                70004003,70004006,70004010,70004013,
-                70005003,70005004,70005012,70005013,
-                70006011,70006012
-            };
-        }
+       
 
         //副本深渊模式创建怪物   参数：场景ID,MonsterPositionConfigID
         public static Dictionary<int, int> ShenYuanCreateConfig()
