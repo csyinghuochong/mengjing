@@ -50,6 +50,7 @@ namespace ET
             string stringBuilder = string.Empty;
             for (int i = 0; i < gemids.Count; i++)
             {
+                stringBuilder += gemids[i];
                 if (i < gemids.Count - 1)
                 {
                     stringBuilder += "_";

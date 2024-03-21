@@ -46,7 +46,7 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this ES_RoleGem self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.Bag, self.UpdateSelect);
+            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.XiangQianBag, self.UpdateSelect);
         }
 
         public static void RefreshBagItems(this ES_RoleGem self)
@@ -76,6 +76,12 @@ namespace ET.Client
             self.ShowBagInfos.AddRange(bagComponentClient.GetItemsByType(itemTypeEnum));
             self.AddUIScrollItems(ref self.ScrollItemCommonItems, maxCount);
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, maxCount);
+            
+            if (self.XiangQianItem != null)
+            {
+                BagInfo bagInfo = self.Root().GetComponent<BagComponentClient>().GetBagInfo(self.XiangQianItem.BagInfoID);
+                self.OnClickXiangQianItem(bagInfo);
+            }
         }
 
         private static void UpdateSelect(this ES_RoleGem self, BagInfo bagInfo)

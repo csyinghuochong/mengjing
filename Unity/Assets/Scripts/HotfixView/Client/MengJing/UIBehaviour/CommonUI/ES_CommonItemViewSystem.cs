@@ -121,6 +121,7 @@ namespace ET.Client
         {
             self.Baginfo = bagInfo;
             self.ItemOperateEnum = itemOperateEnum;
+            self.ShowTip = true;
 
             self.E_ItemDiImage.gameObject.SetActive(false);
             self.E_ItemClickButton.gameObject.SetActive(false);

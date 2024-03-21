@@ -11,35 +11,30 @@ namespace ET.Client
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(args.BagInfo.ItemID);
             if (args.ItemOperateEnum == ItemOperateEnum.XiangQianBag)
             {
-                // if (itemConfig.ItemType == (int)ItemTypeEnum.PetHeXin)
-                // {
-                //     return;
-                // }
-                //
-                // if (args.bagInfo.IfJianDing)
-                // {
-                //     return;
-                // }
+                if (itemConfig.ItemType == (int)ItemTypeEnum.PetHeXin)
+                {
+                    return;
+                }
+                
+                if (args.BagInfo.IfJianDing)
+                {
+                    return;
+                }
             }
 
             if (args.ItemOperateEnum == ItemOperateEnum.Juese)
             {
-                // UI uirole = UIHelper.GetUI(args.ZoneScene, UIType.UIRole);
-                // UIRoleComponent roleComponent = uirole.GetComponent<UIRoleComponent>();
-                // bool rolegem = roleComponent.UIPageButton.CurrentIndex == (int)RolePageEnum.RoleGem;
-                // if (rolegem)
-                // {
-                //     uirole.GetComponent<UIRoleComponent>().OnClickXiangQianItem(args.bagInfo);
-                //     return;
-                // }
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.OnClickXiangQianItem(args.BagInfo);
+
+                return;
             }
 
             if (args.ItemOperateEnum == ItemOperateEnum.XiangQianBag
                 && itemConfig.ItemType == (int)ItemTypeEnum.Equipment)
             {
-                // UI uirole = UIHelper.GetUI(args.ZoneScene, UIType.UIRole);
-                // uirole.GetComponent<UIRoleComponent>().OnClickXiangQianItem(args.bagInfo);
-                // return;
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.OnClickXiangQianItem(args.BagInfo);
+
+                return;
             }
 
             if (itemConfig.ItemType == (int)ItemTypeEnum.Equipment)

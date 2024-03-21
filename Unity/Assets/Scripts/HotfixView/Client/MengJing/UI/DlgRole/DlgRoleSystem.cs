@@ -81,6 +81,7 @@ namespace ET.Client
                     self.View.ES_EquipSet.EquipSetHide(false);
                     break;
                 case 3:
+                    
                     self.View.E_ZodiacButton.gameObject.SetActive(false);
                     self.View.ES_EquipSet.uiTransform.gameObject.SetActive(false);
                     self.View.ES_EquipSet.EquipSetHide(true);
@@ -109,6 +110,14 @@ namespace ET.Client
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
 
             uiComponent.CloseWindow(WindowID.WindowID_Role);
+        }
+        
+        public static void OnClickXiangQianItem(this DlgRole self, BagInfo bagInfo)
+        {
+            if (self.View.ES_RoleGem.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_RoleGem.OnClickXiangQianItem(bagInfo);
+            }
         }
     }
 }
