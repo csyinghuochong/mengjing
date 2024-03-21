@@ -64,11 +64,11 @@ namespace ET.Analyzer
             // 筛选出实体类
             if (baseType== Definition.EntityType)
             {
-                AnalyzeDelegateMember(context, namedTypeSymbol);
+                // AnalyzeDelegateMember(context, namedTypeSymbol);
                 AnalyzeEntityMember(context, namedTypeSymbol);
             }else if (baseType == Definition.LSEntityType)
             {
-                AnalyzeDelegateMember(context, namedTypeSymbol);
+                // AnalyzeDelegateMember(context, namedTypeSymbol);
                 AnalyzeEntityMember(context, namedTypeSymbol);
                 AnalyzeFloatMemberInLSEntity(context,namedTypeSymbol);
             }

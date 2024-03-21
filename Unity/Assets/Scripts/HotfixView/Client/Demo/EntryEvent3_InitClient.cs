@@ -16,6 +16,7 @@ namespace ET.Client
             root.AddComponent<UIComponent>();
             
             root.AddComponent<ResourcesLoaderComponent>();
+            root.AddComponent<GameObjectPoolComponent>();
             root.AddComponent<PlayerComponent>();
             root.AddComponent<CurrentScenesComponent>();
             root.AddComponent<BagComponentClient>();

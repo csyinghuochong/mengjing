@@ -1,0 +1,131 @@
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace ET.Client
+{
+    [FriendOf(typeof (UserInfoComponentClient))]
+    [EntitySystemOf(typeof (ES_EquipSet))]
+    [FriendOfAttribute(typeof (ES_EquipSet))]
+    public static partial class ES_EquipSetSystem
+    {
+        [EntitySystem]
+        private static void Awake(this ES_EquipSet self, Transform transform)
+        {
+            self.uiTransform = transform;
+
+            self.ESEquipItems_1.Add(self.ES_EquipItemWuqi_1);
+            self.ESEquipItems_1.Add(self.ES_EquipItemYifu_1);
+            self.ESEquipItems_1.Add(self.ES_EquipItemFuhu_1);
+            self.ESEquipItems_1.Add(self.ES_EquipItemJiezhi_1);
+            self.ESEquipItems_1.Add(self.ES_EquipItemShiping1_1);
+            self.ESEquipItems_1.Add(self.ES_EquipItemShiping2_1);
+            self.ESEquipItems_1.Add(self.ES_EquipItemShiping3_1);
+            self.ESEquipItems_1.Add(self.ES_EquipItemXiezi_1);
+            self.ESEquipItems_1.Add(self.ES_EquipItemKuzi_1);
+            self.ESEquipItems_1.Add(self.ES_EquipItemYaodai_1);
+            self.ESEquipItems_1.Add(self.ES_EquipItemShouzhuo_1);
+            self.ESEquipItems_1.Add(self.ES_EquipItemToukui_1);
+            self.ESEquipItems_1.Add(self.ES_EquipItemXianglian_1);
+
+            self.ESEquipItems_2.Add(self.ES_EquipItemWuqi_2);
+        }
+
+        [EntitySystem]
+        private static void Destroy(this ES_EquipSet self)
+        {
+            self.DestroyWidget();
+        }
+
+        public static void RefreshPlayerInfo(this ES_EquipSet self)
+        {
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentClient>().UserInfo;
+
+            self.E_RoseLvText.text = userInfo.Lv.ToString();
+            self.E_RoseNameText.text = userInfo.Name;
+
+            self.ES_ModelShow.SetPosition(Vector3.zero, new Vector3(0f, 70f, 150f));
+            self.ES_ModelShow.ShowPlayerModel(new BagInfo(), userInfo.Occ, 0);
+        }
+
+        public static void RefreshEquip(this ES_EquipSet self)
+        {
+            BagComponentClient bagComponentClient = self.Root().GetComponent<BagComponentClient>();
+            UserInfoComponentClient userInfoComponentClient = self.Root().GetComponent<UserInfoComponentClient>();
+
+            for (int i = 0; i < self.ESEquipItems_1.Count; i++)
+            {
+                self.ESEquipItems_1[i].InitUI(FunctionUI.GetItemSubtypeByWeizhi(i));
+            }
+
+            for (int i = 0; i < self.ESEquipItems_2.Count; i++)
+            {
+                self.ESEquipItems_2[i].InitUI(FunctionUI.GetItemSubtypeByWeizhi(i));
+            }
+
+            self.RefreshEquip_1(bagComponentClient.GetItemsByLoc(ItemLocType.ItemLocEquip), userInfoComponentClient.UserInfo.Occ,
+                ItemOperateEnum.Juese);
+
+            self.RefreshEquip_2(bagComponentClient.GetItemsByLoc(ItemLocType.ItemLocEquip_2), userInfoComponentClient.UserInfo.Occ,
+                ItemOperateEnum.Juese);
+        }
+        public static void EquipSetHide(this ES_EquipSet self, bool value)
+        {
+        }
+        public static void PlayShowIdelAnimate(this ES_EquipSet self, BagInfo bagInfo)
+        {
+            self.ES_ModelShow.PlayShowIdelAnimate();
+        }
+        
+        private static void RefreshEquip_1(this ES_EquipSet self, List<BagInfo> equiplist, int occ, ItemOperateEnum itemOperateEnum)
+        {
+            int shipingIndex = 0;
+            self.Occ = occ;
+            self.EquipInfoList = equiplist;
+            self.ItemOperateEnum = itemOperateEnum;
+            for (int i = 0; i < equiplist.Count; i++)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(equiplist[i].ItemID);
+                if (itemConfig.EquipType == 101 || itemConfig.EquipType == 201)
+                {
+                    continue;
+                }
+
+                if (itemConfig.ItemType == 4)
+                {
+                    continue;
+                }
+
+                if (itemConfig.ItemSubType < (int)ItemSubTypeEnum.Shiping)
+                {
+                    self.ESEquipItems_1[itemConfig.ItemSubType - 1].Refresh(equiplist[i], occ, itemOperateEnum, equiplist);
+                }
+
+                if (itemConfig.ItemSubType == (int)ItemSubTypeEnum.Shiping)
+                {
+                    self.ESEquipItems_1[itemConfig.ItemSubType + shipingIndex - 1].Refresh(equiplist[i], occ, itemOperateEnum, equiplist);
+                    shipingIndex++;
+                }
+
+                if (itemConfig.ItemSubType > (int)ItemSubTypeEnum.Shiping)
+                {
+                    self.ESEquipItems_1[itemConfig.ItemSubType + 1].Refresh(equiplist[i], occ, itemOperateEnum, equiplist);
+                }
+            }
+        }
+
+        private static void RefreshEquip_2(this ES_EquipSet self, List<BagInfo> equiplist, int occ, ItemOperateEnum itemOperateEnum)
+        {
+            for (int i = 0; i < equiplist.Count; i++)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(equiplist[i].ItemID);
+                if (itemConfig.EquipType == 101)
+                {
+                    continue;
+                }
+
+                self.ESEquipItems_2[itemConfig.ItemSubType - 1].Refresh(equiplist[i], occ, itemOperateEnum, equiplist);
+            }
+        }
+    }
+}

@@ -26,5 +26,6 @@
         public const int FsmTimer = 305;
         public const int HighLightTimer = 306;
         public const int DelayShowTimer = 307;
+        public const int GameObjectPoolTimer = 308;
     }
 }

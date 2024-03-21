@@ -11,6 +11,13 @@ namespace ET.Client
         public Transform ModelParent;
         public Vector2 StartPosition;
         public bool Draged = false;
+        private EntityRef<ChangeEquipComponent> changeEquipComponent;
+
+        public ChangeEquipComponent ChangeEquipComponent
+        {
+            get => this.changeEquipComponent;
+            set => this.changeEquipComponent = value;
+        }
 
         public UnityEngine.UI.Button E_RenderButton
         {
