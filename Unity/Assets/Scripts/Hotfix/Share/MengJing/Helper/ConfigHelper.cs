@@ -1048,7 +1048,7 @@ namespace ET
             //}
             if ( occRankId >= 1 && occRankId <= 3)
             {
-                return OccRankChengHao()[ (occ - 1) * 3 + occRankId - 1 ];
+                return ConfigData.OccRankChengHao[ (occ - 1) * 3 + occRankId - 1 ];
             }
             return string.Empty;
         }

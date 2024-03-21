@@ -707,5 +707,37 @@ namespace ET
             { 80, 61500001 },
             { 100, 61500011 },
         };
+        
+        [StaticField]
+        public static float3 PastureInitPos = new float3(-15f, 0f, -20f);
+        
+        [StaticField]
+        public static List<float3> PlanPositionList = new List<float3>()
+        {
+            new float3(4f - 0.5f, 0f, -31.24f - 0.5f),
+            new float3(4f - 0.5f, 0f, -33.32f - 0.5f),
+            new float3(4f - 0.5f, 0f, -35.39f - 0.5f),
+            new float3(4f - 0.5f, 0f, -37.58f - 0.5f),
+
+            new float3(1.25f - 0.5f, 0f, -31.24f - 0.5f),
+            new float3(1.25f - 0.5f, 0f, -33.32f - 0.5f),
+            new float3(1.25f - 0.5f, 0f, -35.39f - 0.5f),
+            new float3(1.25f - 0.5f, 0f, -37.58f - 0.5f),
+
+            new float3(-2f, 0f, -31.24f - 0.5f),
+            new float3(-2f, 0f, -33.32f - 0.5f),
+            new float3(-2f, 0f, -35.39f - 0.5f),
+            new float3(-2f, 0f, -37.58f - 0.5f),
+
+            new float3(-4.75f, 0f, -31.24f - 0.5f),
+            new float3(-4.75f, 0f, -33.32f - 0.5f),
+            new float3(-4.75f, 0f, -35.39f - 0.5f),
+            new float3(-4.75f, 0f, -37.58f - 0.5f),
+
+            new float3(-7.5f, 0f, -31.24f - 0.5f),
+            new float3(-7.5f, 0f, -33.32f - 0.5f),
+            new float3(-7.5f, 0f, -35.39f - 0.5f),
+            new float3(-7.5f, 0f, -37.58f - 0.5f),
+        };
     }
 }
