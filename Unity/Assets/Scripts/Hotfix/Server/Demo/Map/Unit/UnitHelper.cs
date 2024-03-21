@@ -172,6 +172,12 @@ namespace ET.Server
                 numericComponent.GetAsFloat(NumericType.Born_Z));
         }
 
+        public static int GetBattleCamp(this Unit self)
+        {
+            NumericComponentServer numericComponent = self.GetComponent<NumericComponentServer>();
+            return numericComponent.GetAsInt(NumericType.BattleCamp);
+        }
+
         public static void AddDataComponent<K>(this Unit self) where K : Entity, IAwake, new()
         {
             if (self.GetComponent<K>() == null)

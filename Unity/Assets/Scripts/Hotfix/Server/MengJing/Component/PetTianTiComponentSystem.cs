@@ -1,0 +1,202 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace ET.Server
+{
+
+    [EntitySystemOf(typeof(PetTianTiComponent))]
+    [FriendOf(typeof(PetTianTiComponent))]
+    public static partial class PetTianTiComponentSystem
+    {
+        [EntitySystem]
+        private static void Awake(this ET.Server.PetTianTiComponent self)
+        {
+
+        }
+        [EntitySystem]
+        private static void Destroy(this ET.Server.PetTianTiComponent self)
+        {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+        }
+        
+
+         public static  async ETTask GeneratePetFuben(this PetTianTiComponent self)
+         {
+             Unit unit = self.MainUnit;
+             unit.GetComponent<StateComponentServer>().StateTypeAdd(StateTypeEnum.WuDi);
+
+             PetComponentServer petComponent = self.MainUnit.GetComponent<PetComponentServer>();
+             petComponent.CheckSkin();
+             for (int i = 0; i < petComponent.TeamPetList.Count; i++)
+             {
+                 RolePetInfo rolePetInfo = petComponent.GetPetInfo(petComponent.TeamPetList[i]);
+                 if (rolePetInfo == null)
+                 {
+                     continue;
+                 }
+                 
+                 Unit petunit = UnitFactory.CreateTianTiPet(unit.Root(), unit.Id,
+                    unit.GetBattleCamp(), rolePetInfo, ConfigData.Formation_1[i], 0f, i);
+             }
+
+             //先查找真实玩家。再查找
+             ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(self.Zone());
+             PetComponentServer petComponent_enemy =  await UnitCacheHelper.GetComponentCache<PetComponentServer>(self.Root(), self.EnemyId);
+             if (petComponent_enemy!= null)
+             {
+                 petComponent_enemy.CheckSkin();
+                 for (int i = 0; i < petComponent_enemy.TeamPetList.Count; i++)
+                 {
+                     RolePetInfo rolePetInfo = petComponent_enemy.GetPetInfo(petComponent_enemy.TeamPetList[i]);
+                     if (rolePetInfo == null)
+                     {
+                         continue;
+                     }
+                     if (unit.Root().GetComponent<UnitComponent>().Get(rolePetInfo.Id)!=null)
+                     {
+                         Log.Debug($"宠物ID重复：{unit.Id}");
+                         continue;
+                     }
+
+                     BagComponentServer bagComponent_enemy =  await UnitCacheHelper.GetComponentCache<BagComponentServer>(self.Root(), self.EnemyId);
+                     
+                     NumericComponentServer numericComponent_enemy =  await UnitCacheHelper.GetComponentCache<NumericComponentServer>(self.Root(), self.EnemyId);
+                     
+                     petComponent_enemy.UpdatePetAttributeWithData(bagComponent_enemy, numericComponent_enemy, rolePetInfo, false);
+                     Unit petunit = UnitFactory.CreateTianTiPet(unit.Root(), 0,
+                        CampEnum.CampPlayer_2, rolePetInfo, ConfigData.Formation_2[i], 180f, i);
+
+                 }
+             }
+             else
+             {
+                 List<int> petlist = new List<int>() { 1000101, 1000201, 1000301 };
+                 for (int k = 0; k < petlist.Count; k++)
+                 {
+                     RolePetInfo petInfo = petComponent.GenerateNewPet(petlist[0], 0);
+                     petComponent.PetXiLian(petInfo, 2, 0, 0 );
+                     petComponent.UpdatePetAttribute(petInfo, false);
+                     petInfo.PlayerName = "机器人";
+                     Unit petunit = UnitFactory.CreateTianTiPet(unit.Root(), 0,
+                        CampEnum.CampPlayer_2,  petInfo, ConfigData.Formation_2[k], 180f, k);
+                 }
+             }
+         }
+         
+
+         public static void OnKillEvent(this PetTianTiComponent self)
+         {
+             int result = self.GetCombatResult();
+             if (result != CombatResultEnum.None)
+             {
+                 self.OnGameOver(result).Coroutine();
+             }
+         }
+
+         public static async ETTask OnGameOver(this PetTianTiComponent self, int result)
+         {
+             List<Unit> units = self.Root().GetComponent<UnitComponent>().GetAll();
+             for (int i = 0; i < units.Count; i++)
+             {
+                 AIComponent aIComponent = units[i].GetComponent<AIComponent>();
+                 aIComponent?.Stop();
+             }
+
+             int rankid = await self.NoticeRankServer(result);
+
+             M2C_FubenSettlement m2C_FubenSettlement = new M2C_FubenSettlement();
+             m2C_FubenSettlement.BattleResult = result;
+             if (result == CombatResultEnum.Win)
+             {
+                 GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(68);
+                 int dropId = int.Parse(globalValueConfig.Value);
+                 List<RewardItem> rewardItems = new List<RewardItem>();
+                 DropHelper.DropIDToDropItem(dropId, rewardItems);
+                 DropHelper.zhenglirewardItems(rewardItems);
+                 m2C_FubenSettlement.ReardList.AddRange(rewardItems);
+                 m2C_FubenSettlement.StarInfos = new List<int> { 1, 1, 1 };
+
+                 self.MainUnit.GetComponent<BagComponentServer>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.PetTianTiReward}_{TimeHelper.ServerNow()}");
+                 self.MainUnit.GetComponent<TaskComponentServer>().TriggerTaskEvent( TaskTargetType.PetTianDiWin_37, 0, 1 );
+                 self.MainUnit.GetComponent<TaskComponentServer>().TriggerTaskCountryEvent(TaskTargetType.PetTianDiWin_37, 0, 1);
+             }
+             else
+             {
+                 m2C_FubenSettlement.StarInfos = new List<int> { 0,0,0 };
+             }
+             if (rankid > 0)
+             {
+                 self.MainUnit.GetComponent<ChengJiuComponentServer>().TriggerEvent(ChengJiuTargetEnum.PetTianTiRank_309, 0, rankid);
+                 self.MainUnit.GetComponent<TaskComponentServer>().TriggerTaskCountryEvent(TaskTargetType.PetTianTiRank_82, 0, rankid);
+                 self.MainUnit.GetComponent<TaskComponentServer>().TriggerTaskEvent(TaskTargetType.PetTianTiRank_82, 0, rankid);
+             }
+             MapMessageHelper.SendToClient(self.MainUnit, m2C_FubenSettlement);
+         }
+
+             /// <summary>
+             /// 失败不通知
+             /// </summary>
+             /// <param name="self"></param>
+             /// <param name=""></param>
+             /// <returns></returns>
+             public static async ETTask<int> NoticeRankServer(this PetTianTiComponent self, int result)
+             {
+                 //获取传送map的 actorId
+                 long mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(self.DomainZone(), Enum.GetName(SceneType.Rank)).InstanceId;
+
+                 Unit unit = self.MainUnit;
+                 RankPetInfo rankPetInfo = new RankPetInfo();
+                 UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
+                 rankPetInfo.UserId = userInfoComponent.UserInfo.UserId;
+                 rankPetInfo.PlayerName = userInfoComponent.UserInfo.Name;
+                 rankPetInfo.PetUId = unit.GetComponent<PetComponent>().TeamPetList;
+                 rankPetInfo.TeamName = rankPetInfo.PlayerName;
+                 for (int i = 0; i < rankPetInfo.PetUId.Count; i++ )
+                 {
+                     RolePetInfo rolePetInfo = unit.GetComponent<PetComponent>().GetPetInfo(rankPetInfo.PetUId[i]);
+                     rankPetInfo.PetConfigId.Add(rolePetInfo!=null ? rolePetInfo.ConfigId :0);
+                 }
+                 R2M_PetRankUpdateResponse m2m_TrasferUnitResponse = (R2M_PetRankUpdateResponse)await ActorMessageSenderComponent.Instance.Call
+                          (mapInstanceId, new M2R_PetRankUpdateRequest() {  RankPetInfo = rankPetInfo, Win = result, EnemyId = self.DomainScene().GetComponent<PetTianTiComponent>().EnemyId });
+
+                 return m2m_TrasferUnitResponse.SelfRank;
+             }
+ 
+             /// <summary>
+             /// 1 成功 2失败
+             /// </summary>
+             /// <param name="self"></param>
+             /// <returns></returns>
+             public static int GetCombatResult(this PetTianTiComponent self)
+             {
+                 int number_self = 0;
+                 int number_enemy = 0;
+                 List<Unit> unitList = self.Root().GetComponent<UnitComponent>().GetAll();
+                 for(int i = 0; i < unitList.Count; i++)
+                 {
+                     Unit unit = unitList[i];    
+                     if (unit.Type != UnitType.Pet || !unit.IsCanBeAttack())
+                     {
+                         continue;
+                     }
+                     if (unit.GetBattleCamp() == CampEnum.CampPlayer_1)
+                     {
+                         number_self++;
+                     }
+                     else
+                     {
+                         number_enemy++;
+                     }
+                 }
+                 if (number_self > 0 && number_enemy > 0)
+                     return CombatResultEnum.None;
+                 if (number_self > 0 && number_enemy == 0)
+                     return CombatResultEnum.Win;
+                 return CombatResultEnum.Fail;
+             }
+                    
+    }
+
+
+}
+

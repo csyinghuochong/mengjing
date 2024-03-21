@@ -196,6 +196,53 @@ namespace ET.Server
             return unit;
         }
         
+          public static Unit CreateTianTiPet(Scene scene,  long masterId, int roleCamp, RolePetInfo petinfo, float3 postion, float rotation, int cell)
+          {
+              Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(petinfo.Id, 1);
+              scene.GetComponent<UnitComponent>().Add(unit);
+              unit.AddComponent<ObjectWait>();
+              NumericComponentServer numericComponent = unit.AddComponent<NumericComponentServer>();
+              unit.AddComponent<MoveComponent>();
+              UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
+              unit.AddComponent<SkillComponentServer>();
+              unit.AddComponent<PathfindingComponent, string>(scene.GetComponent<MapComponent>().NavMeshId.ToString());
+              unit.AddComponent<AttackRecordComponent>();
+              unit.ConfigId = petinfo.ConfigId;
+              unit.MasterId = masterId;
+              unitInfoComponent.UnitName = petinfo.PetName;
+              unitInfoComponent.MasterName = petinfo.PlayerName;
+              unit.AddComponent<StateComponentServer>();         //添加状态组件
+              unit.AddComponent<BuffComponentServer>();      //添加
+              unit.Position = postion;
+              unit.Type = UnitType.Pet;
+              unit.Rotation = quaternion.Euler(0f, rotation, 0f);
+              AIComponent aIComponent = unit.AddComponent<AIComponent, int>(1);     //AI行为树序号
+              MapComponent mapComponent = scene.GetComponent<MapComponent>();
+              switch (mapComponent.SceneType)
+              {
+                  case (int)SceneTypeEnum.PetDungeon:
+                  case (int)SceneTypeEnum.PetTianTi:
+                  case (int)SceneTypeEnum.PetMing:
+                      aIComponent.InitTianTiPet(petinfo.ConfigId);
+                      break;
+                  default:
+                      aIComponent.InitPet(petinfo);
+                      break;
+              }
+
+              //添加其他组件
+              unit.AddComponent<HeroDataComponentServer>().InitPet(petinfo, false);
+              numericComponent.Set(NumericType.BattleCamp, roleCamp);
+              numericComponent.Set(NumericType.MasterId, masterId);
+              numericComponent.Set(NumericType.UnitPositon, cell);
+              long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
+              numericComponent.SetNoEvent( NumericType.Now_Hp  ,max_hp);
+              unit.AddComponent<AOIEntity, int, float3>(1 * 1000, unit.Position);
+              unit.AddComponent<SkillPassiveComponent>().UpdatePetPassiveSkill(petinfo);
+              unit.GetComponent<SkillPassiveComponent>().Activeted();
+              return unit;
+          }
+        
         public static Unit CreateNpcByPosition(Scene scene, int npcId, float3 vector3)
         {
             NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcId);

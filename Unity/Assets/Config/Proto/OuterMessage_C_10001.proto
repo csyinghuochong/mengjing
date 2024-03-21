@@ -2809,3 +2809,27 @@ message M2C_RolePetEggPut // ILocationResponse
 	int32 Error = 92;
 	KeyValuePairInt RolePetEgg = 1;
 }
+
+message BattleSummonInfo
+{
+	int32 SummonId = 1;				//BattleSummonConfig
+	int64 SummonTime = 2;				//最近一次召唤的时间戳
+	int32 SummonNumber = 3;			//召唤次数
+}
+
+message M2C_FubenSettlement // IActorMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 92;
+	int64 ActorId = 93;
+
+	int32 BattleResult = 1;	// 0失败 1胜利
+	int32 BattleGrade = 2;	//评级
+	int32 RewardExp = 3;
+	int32 RewardGold = 4;
+
+	repeated RewardItem ReardList = 5;		//奖励列表
+	repeated RewardItem ReardListExcess = 6;	//冒险家额外奖励
+
+	repeated int32 StarInfos = 7;			//领主 时间 伤害
+}

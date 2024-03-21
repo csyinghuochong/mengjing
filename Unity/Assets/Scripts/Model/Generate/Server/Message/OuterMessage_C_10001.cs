@@ -10883,6 +10883,160 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_RolePetEggPut))]
+//宠物蛋放入
+	[Message(OuterMessage.C2M_RolePetEggPut)]
+	[MemoryPackable]
+	public partial class C2M_RolePetEggPut: MessageObject, ILocationRequest
+	{
+		public static C2M_RolePetEggPut Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RolePetEggPut), isFromPool) as C2M_RolePetEggPut; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long BagInfoId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Index { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.BagInfoId = default;
+			this.Index = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RolePetEggPut)]
+	[MemoryPackable]
+	public partial class M2C_RolePetEggPut: MessageObject, ILocationResponse
+	{
+		public static M2C_RolePetEggPut Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RolePetEggPut), isFromPool) as M2C_RolePetEggPut; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public KeyValuePairInt RolePetEgg { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.RolePetEgg = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.BattleSummonInfo)]
+	[MemoryPackable]
+	public partial class BattleSummonInfo: MessageObject
+	{
+		public static BattleSummonInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(BattleSummonInfo), isFromPool) as BattleSummonInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int SummonId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long SummonTime { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int SummonNumber { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.SummonId = default;
+			this.SummonTime = default;
+			this.SummonNumber = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_FubenSettlement)]
+	[MemoryPackable]
+	public partial class M2C_FubenSettlement: MessageObject, IActorMessage
+	{
+		public static M2C_FubenSettlement Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_FubenSettlement), isFromPool) as M2C_FubenSettlement; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int BattleResult { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int BattleGrade { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int RewardExp { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int RewardGold { get; set; }
+
+		[MemoryPackOrder(4)]
+		public List<RewardItem> ReardList { get; set; } = new();
+
+		[MemoryPackOrder(5)]
+		public List<RewardItem> ReardListExcess { get; set; } = new();
+
+		[MemoryPackOrder(6)]
+		public List<int> StarInfos { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.ActorId = default;
+			this.BattleResult = default;
+			this.BattleGrade = default;
+			this.RewardExp = default;
+			this.RewardGold = default;
+			this.ReardList.Clear();
+			this.ReardListExcess.Clear();
+			this.StarInfos.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -11196,5 +11350,9 @@ namespace ET
 		 public const ushort M2C_RolePetUpStage = 10310;
 		 public const ushort C2M_RolePetXiuLian = 10311;
 		 public const ushort M2C_RolePetXiuLian = 10312;
+		 public const ushort C2M_RolePetEggPut = 10313;
+		 public const ushort M2C_RolePetEggPut = 10314;
+		 public const ushort BattleSummonInfo = 10315;
+		 public const ushort M2C_FubenSettlement = 10316;
 	}
 }
