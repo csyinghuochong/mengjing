@@ -13,6 +13,7 @@ namespace ET.Client
         private static void Awake(this ES_RoleGemHole self, Transform transform)
         {
             self.uiTransform = transform;
+            self.E_SelectButton.AddListener(self.OnBtn_Select);
         }
 
         [EntitySystem]
