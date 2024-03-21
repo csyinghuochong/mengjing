@@ -2792,3 +2792,20 @@ message M2C_RolePetXiuLian  // ILocationResponse
 	int32 Error = 92;
 	RolePetInfo rolePetInfo = 1;
 }
+
+//ResponseType M2C_RolePetEggPut
+//宠物蛋放入
+message C2M_RolePetEggPut // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 BagInfoId = 1;
+	int32 Index = 2;
+}
+
+message M2C_RolePetEggPut // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	KeyValuePairInt RolePetEgg = 1;
+}

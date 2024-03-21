@@ -363,6 +363,36 @@ namespace ET
 
         
         /// <summary>
+        /// 家园开启宠物仓库的消耗
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, string> PetOpenCangKu =
+        new Dictionary<int, string>()
+        {
+            //第一个格子默认开启
+            { 1, "13;200000" },    //第二个格子
+            { 2, "13;500000" },    //第三个格子
+            { 3, "13;1000000" },   //第四个格子
+            { 4, "13;2000000" },   //第五个格子
+            { 5, "13;4000000" },   //第六个格子
+        };
+
+        
+        /// <summary>
+        /// 宠物探宝奖励
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, string> PetExploreReward = 
+                new Dictionary<int, string>()
+                {
+                    { 50, "10010086;1$3;100,1000" }, //钻石特殊处理, 也可以定位其他格式
+                    { 100, "10010096;1$3;200,1000" }, //钻石特殊处理
+                    { 150, "10010094;1$3;300,1500" },
+                    { 200, "10010094;1$3;400,2000" },
+                    { 300, "10000136;1$3;500,2500" },
+                };
+        
+        /// <summary>
         /// 跑环任务奖励
         /// </summary>
         [StaticField]

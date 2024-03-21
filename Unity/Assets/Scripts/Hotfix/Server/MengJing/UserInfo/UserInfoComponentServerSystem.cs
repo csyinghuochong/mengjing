@@ -354,6 +354,11 @@ namespace ET.Server
             return self.UserInfo.Lv;
         }
 
+        public static List<int> GetPetExploreRewardIds(this UserInfoComponentServer self)
+        {
+            return self.UserInfo.PetExploreRewardIds;
+        }
+
         public static int GetSp(this UserInfoComponentServer self)
         {
             return self.UserInfo.Sp;
