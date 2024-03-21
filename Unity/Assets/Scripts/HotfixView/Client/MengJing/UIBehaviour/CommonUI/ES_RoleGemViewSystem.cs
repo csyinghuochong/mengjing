@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -13,9 +14,15 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
+            self.GemHoleList.Add(self.ES_RoleGemHole_0);
+            self.GemHoleList.Add(self.ES_RoleGemHole_1);
+            self.GemHoleList.Add(self.ES_RoleGemHole_2);
+            self.GemHoleList.Add(self.ES_RoleGemHole_3);
+
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
             self.E_AllToggle.IsSelected(true);
+            self.XiangQianIndex = -1;
         }
 
         [EntitySystem]
@@ -32,7 +39,7 @@ namespace ET.Client
             UICommonHelper.SetToggleShow(self.E_XiaoHaoToggle.gameObject, index == 3);
 
             self.CurrentItemType = index;
-            self.Refresh();
+            self.RefreshBagItems();
         }
 
         private static void OnBagItemsRefresh(this ES_RoleGem self, Transform transform, int index)
@@ -41,12 +48,7 @@ namespace ET.Client
             scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.Bag, self.UpdateSelect);
         }
 
-        public static void Refresh(this ES_RoleGem self)
-        {
-            self.RefreshBagItems();
-        }
-
-        private static void RefreshBagItems(this ES_RoleGem self)
+        public static void RefreshBagItems(this ES_RoleGem self)
         {
             BagComponentClient bagComponentClient = self.Root().GetComponent<BagComponentClient>();
 
@@ -73,6 +75,14 @@ namespace ET.Client
             self.ShowBagInfos.AddRange(bagComponentClient.GetItemsByType(itemTypeEnum));
             self.AddUIScrollItems(ref self.ScrollItemCommonItems, maxCount);
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, maxCount);
+        }
+
+        private static void ResetHole(this ES_RoleGem self)
+        {
+            for (int i = 0; i < self.GemHoleList.Count; i++)
+            {
+                self.GemHoleList[i].OnUpdateUI(0, 0, -1);
+            }
         }
 
         private static void UpdateSelect(this ES_RoleGem self, BagInfo bagInfo)

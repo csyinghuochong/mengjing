@@ -39,15 +39,10 @@ namespace ET.Client
             UICommonHelper.SetToggleShow(self.E_XiaoHaoToggle.gameObject, index == 3);
 
             self.CurrentItemType = index;
-            self.Refresh();
-        }
-
-        public static void Refresh(this ES_RoleBag self)
-        {
             self.RefreshBagItems();
         }
 
-        private static void RefreshBagItems(this ES_RoleBag self)
+        public static void RefreshBagItems(this ES_RoleBag self)
         {
             BagComponentClient bagComponentClient = self.Root().GetComponent<BagComponentClient>();
 

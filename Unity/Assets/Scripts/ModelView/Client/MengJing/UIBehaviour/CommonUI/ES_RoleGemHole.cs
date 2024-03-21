@@ -1,4 +1,6 @@
 ﻿
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +9,10 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_RoleGemHole : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public int Index;
+		public Action<int> ClickHandler;
+		public List<string> AssetPath = new List<string>();
+		
 		public UnityEngine.UI.Button E_SelectButton
      	{
      		get
