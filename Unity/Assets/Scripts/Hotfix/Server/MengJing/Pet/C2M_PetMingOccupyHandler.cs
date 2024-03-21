@@ -12,7 +12,7 @@ namespace ET.Server
             {
                 return;
             }
-            PetMingDungeonComponent petMingDungeon  = unit.DomainScene().GetComponent<PetMingDungeonComponent>();
+            PetMingDungeonComponent petMingDungeon  = unit.Root().GetComponent<PetMingDungeonComponent>();
             if (petMingDungeon == null )
             {
                 return;

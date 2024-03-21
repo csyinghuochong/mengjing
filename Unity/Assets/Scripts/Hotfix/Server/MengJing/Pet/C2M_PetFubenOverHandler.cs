@@ -20,9 +20,9 @@ namespace ET.Server
             {
                 int result = domainScene.GetComponent<PetTianTiComponent>().GetCombatResult();
                 result = result == CombatResultEnum.None ? CombatResultEnum.Fail : result;
-                domainScene.GetComponent<PetTianTiComponent>().OnGameOver(result);
+                domainScene.GetComponent<PetTianTiComponent>().OnGameOver(result).Coroutine();
             }
-            if (mapComponent.SceneTypeEnum == SceneTypeEnum.PetMing)
+            if (mapComponent.SceneType == SceneTypeEnum.PetMing)
             {
                 int result = domainScene.GetComponent<PetMingDungeonComponent>().GetCombatResult();
                 result = result == CombatResultEnum.None ? CombatResultEnum.Fail : result;

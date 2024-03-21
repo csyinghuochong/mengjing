@@ -644,6 +644,23 @@ namespace ET.Server
              return false;
          }
          
+         public static void AddFubenTimes(this UserInfoComponentServer self, int sceneId, int times)
+         {
+             for (int i = 0; i < self.UserInfo.DayFubenTimes.Count; i++)
+             {
+                 if (self.UserInfo.DayFubenTimes[i].KeyId == sceneId)
+                 {
+                     long curTimes = self.UserInfo.DayFubenTimes[i].Value -= times;
+                     if (curTimes < 0)
+                     {
+                         curTimes = 0;
+                     }
+                     self.UserInfo.DayFubenTimes[i].Value = curTimes;
+                     break;
+                 }
+             }
+         }
+         
          public static int GetRandomJingLingId(this UserInfoComponentServer self)
          {
              List<DayJingLing> dayMonsterConfig = GlobalValueConfigCategory.Instance.DayJingLingList;

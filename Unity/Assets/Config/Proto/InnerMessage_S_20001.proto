@@ -352,3 +352,57 @@ message R2M_RankUnionRaceResponse // IResponse
     int32 Error = 91;
     string Message = 92;
 }
+
+//ResponseType R2M_PetRankUpdateResponse
+message M2R_PetRankUpdateRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 EnemyId = 1;
+	RankPetInfo RankPetInfo = 2;
+	int32 Win = 3;
+}
+
+message R2M_PetRankUpdateResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 SelfRank = 1;
+}
+
+//ResponseType A2M_PetMingBattleWinResponse
+message M2A_PetMingBattleWinRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 MingType = 1;
+	int32 Postion = 2;
+	int64 UnitID = 3;
+	int32 TeamId = 4;
+	string WinPlayer = 5;
+}
+
+message A2M_PetMingBattleWinResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType A2M_PetMingPlayerInfoResponse
+message M2A_PetMingPlayerInfoRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 MingType = 1;
+	int32 Postion = 2;
+}
+
+message A2M_PetMingPlayerInfoResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	PetMingPlayerInfo PetMingPlayerInfo = 1;
+}

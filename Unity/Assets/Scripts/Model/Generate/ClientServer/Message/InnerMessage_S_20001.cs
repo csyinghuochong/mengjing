@@ -1408,6 +1408,225 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(R2M_PetRankUpdateResponse))]
+	[Message(InnerMessage.M2R_PetRankUpdateRequest)]
+	[MemoryPackable]
+	public partial class M2R_PetRankUpdateRequest: MessageObject, IRequest
+	{
+		public static M2R_PetRankUpdateRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2R_PetRankUpdateRequest), isFromPool) as M2R_PetRankUpdateRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long EnemyId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public RankPetInfo RankPetInfo { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Win { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.EnemyId = default;
+			this.RankPetInfo = default;
+			this.Win = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.R2M_PetRankUpdateResponse)]
+	[MemoryPackable]
+	public partial class R2M_PetRankUpdateResponse: MessageObject, IResponse
+	{
+		public static R2M_PetRankUpdateResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2M_PetRankUpdateResponse), isFromPool) as R2M_PetRankUpdateResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int SelfRank { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.SelfRank = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(A2M_PetMingBattleWinResponse))]
+	[Message(InnerMessage.M2A_PetMingBattleWinRequest)]
+	[MemoryPackable]
+	public partial class M2A_PetMingBattleWinRequest: MessageObject, IRequest
+	{
+		public static M2A_PetMingBattleWinRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2A_PetMingBattleWinRequest), isFromPool) as M2A_PetMingBattleWinRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int MingType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Postion { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UnitID { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int TeamId { get; set; }
+
+		[MemoryPackOrder(4)]
+		public string WinPlayer { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.MingType = default;
+			this.Postion = default;
+			this.UnitID = default;
+			this.TeamId = default;
+			this.WinPlayer = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.A2M_PetMingBattleWinResponse)]
+	[MemoryPackable]
+	public partial class A2M_PetMingBattleWinResponse: MessageObject, IResponse
+	{
+		public static A2M_PetMingBattleWinResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2M_PetMingBattleWinResponse), isFromPool) as A2M_PetMingBattleWinResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(A2M_PetMingPlayerInfoResponse))]
+	[Message(InnerMessage.M2A_PetMingPlayerInfoRequest)]
+	[MemoryPackable]
+	public partial class M2A_PetMingPlayerInfoRequest: MessageObject, IRequest
+	{
+		public static M2A_PetMingPlayerInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2A_PetMingPlayerInfoRequest), isFromPool) as M2A_PetMingPlayerInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int MingType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Postion { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.MingType = default;
+			this.Postion = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.A2M_PetMingPlayerInfoResponse)]
+	[MemoryPackable]
+	public partial class A2M_PetMingPlayerInfoResponse: MessageObject, IResponse
+	{
+		public static A2M_PetMingPlayerInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2M_PetMingPlayerInfoResponse), isFromPool) as A2M_PetMingPlayerInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public PetMingPlayerInfo PetMingPlayerInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PetMingPlayerInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -1453,5 +1672,11 @@ namespace ET
 		 public const ushort Chat2G_RequestExitChat = 20042;
 		 public const ushort M2R_RankUnionRaceRequest = 20043;
 		 public const ushort R2M_RankUnionRaceResponse = 20044;
+		 public const ushort M2R_PetRankUpdateRequest = 20045;
+		 public const ushort R2M_PetRankUpdateResponse = 20046;
+		 public const ushort M2A_PetMingBattleWinRequest = 20047;
+		 public const ushort A2M_PetMingBattleWinResponse = 20048;
+		 public const ushort M2A_PetMingPlayerInfoRequest = 20049;
+		 public const ushort A2M_PetMingPlayerInfoResponse = 20050;
 	}
 }

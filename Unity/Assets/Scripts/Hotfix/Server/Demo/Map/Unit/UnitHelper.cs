@@ -177,6 +177,28 @@ namespace ET.Server
             NumericComponentServer numericComponent = self.GetComponent<NumericComponentServer>();
             return numericComponent.GetAsInt(NumericType.BattleCamp);
         }
+        
+        
+        public static bool IsCanBeAttack(this Unit self, bool checkdead = true)
+        {
+            if (self.Type == UnitType.Npc || self.Type == UnitType.DropItem
+                || self.Type == UnitType.Chuansong || self.Type == UnitType.JingLing
+                || self.Type == UnitType.Pasture || self.Type == UnitType.Plant 
+                || self.Type == UnitType.Bullet || self.Type == UnitType.Stall)
+                return false;
+            if (self.Type == UnitType.Monster && (self.GetMonsterType() == (int)MonsterTypeEnum.SceneItem))
+                return false;
+
+            if (checkdead)
+            {
+                NumericComponentServer numericComponent = self.GetComponent<NumericComponentServer>();
+                if (numericComponent.GetAsLong((int)NumericType.Now_Hp) <= 0
+                    || numericComponent.GetAsLong((int)NumericType.Now_Dead) == 1)
+                    return false;
+            }
+
+            return true;
+        }
 
         public static void AddDataComponent<K>(this Unit self) where K : Entity, IAwake, new()
         {

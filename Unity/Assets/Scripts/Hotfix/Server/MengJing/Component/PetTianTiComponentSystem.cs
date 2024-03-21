@@ -142,22 +142,22 @@ namespace ET.Server
              public static async ETTask<int> NoticeRankServer(this PetTianTiComponent self, int result)
              {
                  //获取传送map的 actorId
-                 long mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(self.DomainZone(), Enum.GetName(SceneType.Rank)).InstanceId;
+                 ActorId mapInstanceId = UnitCacheHelper.GetRankServerId(self.Zone());
 
                  Unit unit = self.MainUnit;
                  RankPetInfo rankPetInfo = new RankPetInfo();
-                 UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
+                 UserInfoComponentServer userInfoComponent = unit.GetComponent<UserInfoComponentServer>();
                  rankPetInfo.UserId = userInfoComponent.UserInfo.UserId;
                  rankPetInfo.PlayerName = userInfoComponent.UserInfo.Name;
-                 rankPetInfo.PetUId = unit.GetComponent<PetComponent>().TeamPetList;
+                 rankPetInfo.PetUId = unit.GetComponent<PetComponentServer>().TeamPetList;
                  rankPetInfo.TeamName = rankPetInfo.PlayerName;
                  for (int i = 0; i < rankPetInfo.PetUId.Count; i++ )
                  {
-                     RolePetInfo rolePetInfo = unit.GetComponent<PetComponent>().GetPetInfo(rankPetInfo.PetUId[i]);
+                     RolePetInfo rolePetInfo = unit.GetComponent<PetComponentServer>().GetPetInfo(rankPetInfo.PetUId[i]);
                      rankPetInfo.PetConfigId.Add(rolePetInfo!=null ? rolePetInfo.ConfigId :0);
                  }
-                 R2M_PetRankUpdateResponse m2m_TrasferUnitResponse = (R2M_PetRankUpdateResponse)await ActorMessageSenderComponent.Instance.Call
-                          (mapInstanceId, new M2R_PetRankUpdateRequest() {  RankPetInfo = rankPetInfo, Win = result, EnemyId = self.DomainScene().GetComponent<PetTianTiComponent>().EnemyId });
+                 R2M_PetRankUpdateResponse m2m_TrasferUnitResponse = (R2M_PetRankUpdateResponse)await self.Root().GetComponent<MessageSender>().Call
+                          (mapInstanceId, new M2R_PetRankUpdateRequest() {  RankPetInfo = rankPetInfo, Win = result, EnemyId = self.Root().GetComponent<PetTianTiComponent>().EnemyId });
 
                  return m2m_TrasferUnitResponse.SelfRank;
              }
