@@ -11,7 +11,7 @@ namespace ET.Server
 
         public long BeAttackId;
 
-        public long PetLockId;
+        public long PetLockId { get; set; }
 
         public long LastBelongTime;
 

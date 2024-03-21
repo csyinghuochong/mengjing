@@ -9,7 +9,7 @@ namespace ET.Server
 		protected override async ETTask Run(Unit unit, C2M_RolePetFenjie request, M2C_RolePetFenjie response, Action reply)
 		{
 			//判断背包是否满
-			if (unit.GetComponent<BagComponent>().GetBagLeftCell() <= 1)
+			if (unit.GetComponent<BagComponentServer>().GetBagLeftCell() <= 1)
 			{
 				response.Error = ErrorCode.ERR_BagIsFull;       //提示背包已满
 				reply();
@@ -18,12 +18,12 @@ namespace ET.Server
 
 
 			int petType = 1;
-			RolePetInfo rolePetInfo = unit.GetComponent<PetComponent>().GetPetInfo(request.PetInfoId);
+			RolePetInfo rolePetInfo = unit.GetComponent<PetComponentServer>().GetPetInfo(request.PetInfoId);
 
 			if (rolePetInfo == null)
 			{
 				petType = 2;
-                rolePetInfo = unit.GetComponent<PetComponent>().GetPetInfoByBag(request.PetInfoId);
+                rolePetInfo = unit.GetComponent<PetComponentServer>().GetPetInfoByBag(request.PetInfoId);
             }
 
 			if (rolePetInfo == null)
@@ -43,20 +43,20 @@ namespace ET.Server
             PetConfig petCof = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
 			if (petCof.ReleaseReward != null && petCof.ReleaseReward.Length == 2)
 			{
-				unit.GetComponent<BagComponent>().OnAddItemData($"{petCof.ReleaseReward[0]};{petCof.ReleaseReward[1]}", $"{ItemGetWay.PetFenjie}_{TimeHelper.ServerNow()}");
+				unit.GetComponent<BagComponentServer>().OnAddItemData($"{petCof.ReleaseReward[0]};{petCof.ReleaseReward[1]}", $"{ItemGetWay.PetFenjie}_{TimeHelper.ServerNow()}");
 			}
 
 			if (petType == 1)
 			{
-                unit.GetComponent<PetComponent>().OnRolePetFenjie(request.PetInfoId);
+                unit.GetComponent<PetComponentServer>().OnRolePetFenjie(request.PetInfoId);
             }
 			else
 			{
-                unit.GetComponent<PetComponent>().RemovePetBag(request.PetInfoId);
+                unit.GetComponent<PetComponentServer>().RemovePetBag(request.PetInfoId);
             }
 
 			
-			unit.GetComponent<JiaYuanComponent>().OnJiaYuanPetWalk(rolePetInfo, 0, -1);
+			unit.GetComponent<JiaYuanComponentServer>().OnJiaYuanPetWalk(rolePetInfo, 0, -1);
 
 			if (unit.GetParent<UnitComponent>().Get(rolePetInfo.Id) != null)
 			{
@@ -64,7 +64,7 @@ namespace ET.Server
 				unit.GetParent<UnitComponent>().Remove(rolePetInfo.Id);
 			}
 
-			Function_Fight.GetInstance().UnitUpdateProperty_Base( unit, true, true );
+			Function_Fight.UnitUpdateProperty_Base( unit, true, true );
 
             reply();
 			await ETTask.CompletedTask;

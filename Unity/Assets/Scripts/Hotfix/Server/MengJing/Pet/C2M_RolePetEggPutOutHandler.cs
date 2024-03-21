@@ -4,18 +4,17 @@ namespace ET.Server
 {
     
     [MessageLocationHandler(SceneType.Map)]
-    public class C2M_RolePetEggPutOutHandler : AMActorLocationRpcHandler<Unit, C2M_RolePetEggPutOut, M2C_RolePetEggPutOut>
+    public class C2M_RolePetEggPutOutHandler : MessageLocationHandler<Unit, C2M_RolePetEggPutOut, M2C_RolePetEggPutOut>
     {
-        protected override async ETTask Run(Unit unit, C2M_RolePetEggPutOut request, M2C_RolePetEggPutOut response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_RolePetEggPutOut request, M2C_RolePetEggPutOut response)
         {
-            PetComponent petComponent = unit.GetComponent<PetComponent>();
-            RolePetEgg rolePetEgg = petComponent.RolePetEggs[request.Index];
-            BagComponent bagComponent = unit.GetComponent<BagComponent>();
-            bagComponent.OnAddItemData($"{rolePetEgg.ItemId};1", $"{ItemGetWay.PetEggDuiHuan}_{TimeHelper.ServerNow()}");
-            rolePetEgg.ItemId = 0;
-            rolePetEgg.EndTime = 0;
+            PetComponentServer petComponent = unit.GetComponent<PetComponentServer>();
+            KeyValuePairInt rolePetEgg = petComponent.RolePetEggs[request.Index];
+            BagComponentServer bagComponent = unit.GetComponent<BagComponentServer>();
+            bagComponent.OnAddItemData($"{rolePetEgg.KeyId};1", $"{ItemGetWay.PetEggDuiHuan}_{TimeHelper.ServerNow()}");
+            rolePetEgg.KeyId = 0;
+            rolePetEgg.Value = 0;
             response.RolePetEgg = rolePetEgg;
-            reply();
             await ETTask.CompletedTask;
         }
     }
