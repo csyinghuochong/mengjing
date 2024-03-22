@@ -2844,3 +2844,87 @@ message M2C_FriendApplyResult	// IMessage
 {
 	FriendInfo FriendInfo = 1;
 }
+
+//ResponseType M2C_ChengJiuListResponse
+message C2M_ChengJiuListRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_ChengJiuListResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated ChengJiuInfo ChengJiuProgessList = 1;
+	repeated int32 ChengJiuCompleteList = 2;
+	int32 TotalChengJiuPoint = 3;
+	repeated int32 AlreadReceivedId = 4;
+	repeated int32 JingLingList = 5;
+	int32 JingLingId = 6;
+	int32 RandomDrop = 7;
+}
+
+//ResponseType M2C_ChengJiuRewardResponse
+message C2M_ChengJiuRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 RewardId = 1;
+}
+
+message M2C_ChengJiuRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//抓捕精灵
+//ResponseType M2C_JingLingCatchResponse
+message C2M_JingLingCatchRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 JingLingId = 1;
+	int32 ItemId = 2;
+	string OperateType = 5;
+}
+
+message M2C_JingLingCatchResponse    // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//精灵掉落
+//ResponseType M2C_JingLingDropResponse
+message C2M_JingLingDropRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_JingLingDropResponse    // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//出战精灵
+//ResponseType M2C_JingLingUseResponse
+message C2M_JingLingUseRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 JingLingId = 1;
+	int32 OperateType = 2; //
+}
+
+message M2C_JingLingUseResponse    // ILocationResponsesr
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 JingLingId = 1;
+}

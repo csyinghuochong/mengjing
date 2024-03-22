@@ -11082,6 +11082,338 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_ChengJiuListResponse))]
+	[Message(OuterMessage.C2M_ChengJiuListRequest)]
+	[MemoryPackable]
+	public partial class C2M_ChengJiuListRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ChengJiuListRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ChengJiuListRequest), isFromPool) as C2M_ChengJiuListRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ChengJiuListResponse)]
+	[MemoryPackable]
+	public partial class M2C_ChengJiuListResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ChengJiuListResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ChengJiuListResponse), isFromPool) as M2C_ChengJiuListResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<ChengJiuInfo> ChengJiuProgessList { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public List<int> ChengJiuCompleteList { get; set; } = new();
+
+		[MemoryPackOrder(2)]
+		public int TotalChengJiuPoint { get; set; }
+
+		[MemoryPackOrder(3)]
+		public List<int> AlreadReceivedId { get; set; } = new();
+
+		[MemoryPackOrder(4)]
+		public List<int> JingLingList { get; set; } = new();
+
+		[MemoryPackOrder(5)]
+		public int JingLingId { get; set; }
+
+		[MemoryPackOrder(6)]
+		public int RandomDrop { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.ChengJiuProgessList.Clear();
+			this.ChengJiuCompleteList.Clear();
+			this.TotalChengJiuPoint = default;
+			this.AlreadReceivedId.Clear();
+			this.JingLingList.Clear();
+			this.JingLingId = default;
+			this.RandomDrop = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_ChengJiuRewardResponse))]
+	[Message(OuterMessage.C2M_ChengJiuRewardRequest)]
+	[MemoryPackable]
+	public partial class C2M_ChengJiuRewardRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ChengJiuRewardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ChengJiuRewardRequest), isFromPool) as C2M_ChengJiuRewardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RewardId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.RewardId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ChengJiuRewardResponse)]
+	[MemoryPackable]
+	public partial class M2C_ChengJiuRewardResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ChengJiuRewardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ChengJiuRewardResponse), isFromPool) as M2C_ChengJiuRewardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//抓捕精灵
+	[ResponseType(nameof(M2C_JingLingCatchResponse))]
+	[Message(OuterMessage.C2M_JingLingCatchRequest)]
+	[MemoryPackable]
+	public partial class C2M_JingLingCatchRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_JingLingCatchRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_JingLingCatchRequest), isFromPool) as C2M_JingLingCatchRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long JingLingId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ItemId { get; set; }
+
+		[MemoryPackOrder(4)]
+		public string OperateType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.JingLingId = default;
+			this.ItemId = default;
+			this.OperateType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_JingLingCatchResponse)]
+	[MemoryPackable]
+	public partial class M2C_JingLingCatchResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_JingLingCatchResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_JingLingCatchResponse), isFromPool) as M2C_JingLingCatchResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//精灵掉落
+	[ResponseType(nameof(M2C_JingLingDropResponse))]
+	[Message(OuterMessage.C2M_JingLingDropRequest)]
+	[MemoryPackable]
+	public partial class C2M_JingLingDropRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_JingLingDropRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_JingLingDropRequest), isFromPool) as C2M_JingLingDropRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_JingLingDropResponse)]
+	[MemoryPackable]
+	public partial class M2C_JingLingDropResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_JingLingDropResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_JingLingDropResponse), isFromPool) as M2C_JingLingDropResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//出战精灵
+	[ResponseType(nameof(M2C_JingLingUseResponse))]
+	[Message(OuterMessage.C2M_JingLingUseRequest)]
+	[MemoryPackable]
+	public partial class C2M_JingLingUseRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_JingLingUseRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_JingLingUseRequest), isFromPool) as C2M_JingLingUseRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int JingLingId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int OperateType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.JingLingId = default;
+			this.OperateType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_JingLingUseResponse)]
+	[MemoryPackable]
+	public partial class M2C_JingLingUseResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_JingLingUseResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_JingLingUseResponse), isFromPool) as M2C_JingLingUseResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int JingLingId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.JingLingId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -11401,5 +11733,15 @@ namespace ET
 		 public const ushort M2C_FubenSettlement = 10316;
 		 public const ushort M2C_JiaYuanUpdate = 10317;
 		 public const ushort M2C_FriendApplyResult = 10318;
+		 public const ushort C2M_ChengJiuListRequest = 10319;
+		 public const ushort M2C_ChengJiuListResponse = 10320;
+		 public const ushort C2M_ChengJiuRewardRequest = 10321;
+		 public const ushort M2C_ChengJiuRewardResponse = 10322;
+		 public const ushort C2M_JingLingCatchRequest = 10323;
+		 public const ushort M2C_JingLingCatchResponse = 10324;
+		 public const ushort C2M_JingLingDropRequest = 10325;
+		 public const ushort M2C_JingLingDropResponse = 10326;
+		 public const ushort C2M_JingLingUseRequest = 10327;
+		 public const ushort M2C_JingLingUseResponse = 10328;
 	}
 }
