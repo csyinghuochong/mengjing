@@ -12,11 +12,15 @@ namespace ET.Server
             response.BagInfos = bagComponentServer.GetAllItems();
 
             // 测试。。
-            for (int i = 0; i <= 11; i++)
+            if (bagComponentServer.QiangHuaLevel.Count == 0)
             {
-                bagComponentServer.QiangHuaLevel.Add(0);
-                bagComponentServer.QiangHuaFails.Add(0);
+                for (int i = 0; i <= 11; i++)
+                {
+                    bagComponentServer.QiangHuaLevel.Add(0);
+                    bagComponentServer.QiangHuaFails.Add(0);
+                }
             }
+
 
             response.QiangHuaLevel = bagComponentServer.QiangHuaLevel;
             response.QiangHuaFails = bagComponentServer.QiangHuaFails;
