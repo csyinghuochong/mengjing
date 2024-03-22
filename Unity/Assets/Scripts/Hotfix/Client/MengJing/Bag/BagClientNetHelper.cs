@@ -20,6 +20,14 @@ namespace ET.Client
                 bagList.Add(response.BagInfos[i]);
             }
 
+            bagComponentClient.QiangHuaLevel = response.QiangHuaLevel;
+            bagComponentClient.QiangHuaFails = response.QiangHuaFails;
+            bagComponentClient.WarehouseAddedCell = response.WarehouseAddedCell;
+            bagComponentClient.FashionActiveIds = response.FashionActiveIds;
+            bagComponentClient.FashionEquipList = response.FashionEquipList;
+            bagComponentClient.SeasonJingHePlan = response.SeasonJingHePlan;
+            bagComponentClient.AdditionalCellNum = response.AdditionalCellNum;
+
             Log.Debug($"C2M_BagInitHandler: client1");
             return ErrorCode.ERR_Success;
         }
