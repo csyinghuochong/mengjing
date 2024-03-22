@@ -115,6 +115,7 @@ namespace ET.Client
                     break;
                 case 3:
                     self.View.ES_RoleHuiShou.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_RoleHuiShou.OnUpdateUI();
                     self.View.E_ZodiacButton.gameObject.SetActive(false);
                     self.View.ES_EquipSet.uiTransform.gameObject.SetActive(false);
                     self.View.ES_EquipSet.EquipSetHide(true);

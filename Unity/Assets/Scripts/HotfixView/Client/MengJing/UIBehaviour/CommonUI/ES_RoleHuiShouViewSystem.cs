@@ -38,8 +38,6 @@ namespace ET.Client
 			self.ES_CommonItem_7.UpdateItem(null, ItemOperateEnum.None);
 			self.HuiShouUIList[7] = self.ES_CommonItem_8;
 			self.ES_CommonItem_8.UpdateItem(null, ItemOperateEnum.None);
-
-			self.OnUpdateUI();
 		}
 
 		[EntitySystem]
@@ -122,10 +120,16 @@ namespace ET.Client
 				// 滚动组件的子物体是动态从对象池里拿的，只引用看的到的
 				if (self.ScrollItemCommonItems[i].uiTransform != null)
 				{
+					if (self.ScrollItemCommonItems[i].ES_CommonItem.Baginfo == null)
+					{
+						continue;
+					}
+
 					bool have = false;
 					for (int h = 0; h < self.HuiShouInfos.Length; h++)
 					{
-						if (self.HuiShouInfos[h].BagInfoID == self.ScrollItemCommonItems[i].ES_CommonItem.Baginfo.BagInfoID)
+						if (self.HuiShouInfos[h] != null &&
+						    self.HuiShouInfos[h].BagInfoID == self.ScrollItemCommonItems[i].ES_CommonItem.Baginfo.BagInfoID)
 						{
 							have = true;
 							break;
