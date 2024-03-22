@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof( ES_RoleGem))]
+    [FriendOf(typeof (ES_RoleGem))]
     [FriendOf(typeof (DlgItemTipsViewComponent))]
     [FriendOf(typeof (DlgItemTips))]
     public static class DlgItemTipsSystem
@@ -597,6 +597,19 @@ namespace ET.Client
 
         private static void OnXieXiaGemButton(this DlgItemTips self)
         {
+            DlgRole dlgRole = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRole>();
+            if (dlgRole == null)
+            {
+                return;
+            }
+
+            if (!dlgRole.View.ES_RoleGem.uiTransform.gameObject.activeSelf)
+            {
+                return;
+            }
+
+            BagClientNetHelper.RequestXieXiaGem(self.Root(), dlgRole.View.ES_RoleGem.XiangQianItem,
+                dlgRole.View.ES_RoleGem.XiangQianIndex.ToString()).Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
         }
 
