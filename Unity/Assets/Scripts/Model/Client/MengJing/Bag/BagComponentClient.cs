@@ -8,6 +8,8 @@ namespace ET.Client
     {
         public List<int> QiangHuaLevel = new List<int>();
         
+        public List<int> QiangHuaFails = new List<int>();
+        
         public List<BagInfo>[] AllItemList;
         
         public bool RealAddItem;

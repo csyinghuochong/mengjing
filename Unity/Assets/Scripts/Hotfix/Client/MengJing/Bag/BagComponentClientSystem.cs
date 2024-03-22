@@ -2,6 +2,7 @@
 
 namespace ET.Client
 {
+    [FriendOf(typeof (UserInfoComponentClient))]
     [FriendOf(typeof (BagComponentClient))]
     [EntitySystemOf(typeof (BagComponentClient))]
     public static partial class BagComponentClientSystem
@@ -142,6 +143,85 @@ namespace ET.Client
                 // HintHelp.GetInstance().DataUpdate(DataType.BagItemAdd, $"{bagInfo.ItemID}_{addNum}");
                 EventSystem.Instance.Publish(self.Root(), new ShowFlyTip() { Type = 1, Str = $"获得 {itemConfig.ItemName} {addNum}" });
             }
+        }
+
+        //检测
+        public static bool CheckNeedItem(this BagComponentClient self, string needitems)
+        {
+            if (string.IsNullOrEmpty(needitems))
+            {
+                return true;
+            }
+
+            string[] needList = needitems.Split('@');
+
+            List<RewardItem> costItems = new List<RewardItem>();
+            for (int i = 0; i < needList.Length; i++)
+            {
+                string[] itemInfo = needList[i].Split(';');
+                int itemId = int.Parse(itemInfo[0]);
+                int itemNum = int.Parse(itemInfo[1]);
+                costItems.Add(new RewardItem() { ItemID = itemId, ItemNum = itemNum });
+            }
+
+            return self.CheckNeedItem(costItems);
+        }
+
+        public static bool CheckNeedItem(this BagComponentClient self, List<RewardItem> costItems)
+        {
+            for (int i = costItems.Count - 1; i >= 0; i--)
+            {
+                int itemID = costItems[i].ItemID;
+                long itemNum = costItems[i].ItemNum;
+                //获取背包内的道具是否足够
+                if (self.GetItemNumber(itemID) < itemNum)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static long GetItemNumber(this BagComponentClient self, int itemId)
+        {
+            int userDataType = ItemHelper.GetItemToUserDataType(itemId);
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentClient>().UserInfo;
+            long number = 0;
+            switch (userDataType)
+            {
+                case UserDataType.None:
+                    List<BagInfo> bagInfos = self.GetBagList();
+                    for (int i = 0; i < bagInfos.Count; i++)
+                    {
+                        if (bagInfos[i].ItemID == itemId)
+                        {
+                            number += bagInfos[i].ItemNum;
+                        }
+                    }
+
+                    break;
+                case UserDataType.Gold:
+                    number = userInfo.Gold;
+                    break;
+                case UserDataType.Diamond:
+                    number = userInfo.Diamond;
+                    break;
+                case UserDataType.JiaYuanFund:
+                    number = userInfo.JiaYuanFund;
+                    break;
+                case UserDataType.UnionContri:
+                    number = userInfo.UnionZiJin;
+                    break;
+                case UserDataType.SeasonCoin:
+                    number = userInfo.SeasonCoin;
+                    break;
+                default:
+                    number = 0;
+                    break;
+            }
+
+            return number;
         }
 
         public static List<BagInfo> GetItemsByLoc(this BagComponentClient self, ItemLocType itemLocType)

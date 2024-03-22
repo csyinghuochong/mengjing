@@ -236,5 +236,13 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<(int, int)> RequestItemQiangHua(Scene root, int itemSubType)
+        {
+            C2M_ItemQiangHuaRequest request = new() { WeiZhi = itemSubType };
+            M2C_ItemQiangHuaResponse response = (M2C_ItemQiangHuaResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return (response.Error, response.QiangHuaLevel);
+        }
     }
 }

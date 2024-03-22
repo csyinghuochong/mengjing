@@ -84,6 +84,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_BangDingRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_BangDingRectTransform == null )
+     			{
+		    		this.m_EG_BangDingRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_BangDing");
+     			}
+     			return this.m_EG_BangDingRectTransform;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_EquipButton
      	{
      		get
@@ -175,6 +192,7 @@ namespace ET.Client
 			this.m_E_EquipBackTextImage = null;
 			this.m_E_EquipQualityImage = null;
 			this.m_E_EquipIconImage = null;
+			this.m_EG_BangDingRectTransform = null;
 			this.m_E_EquipButton = null;
 			this.m_E_EquipImage = null;
 			this.m_E_EquipEventTrigger = null;
@@ -187,6 +205,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_EquipBackTextImage = null;
 		private UnityEngine.UI.Image m_E_EquipQualityImage = null;
 		private UnityEngine.UI.Image m_E_EquipIconImage = null;
+		private UnityEngine.RectTransform m_EG_BangDingRectTransform = null;
 		private UnityEngine.UI.Button m_E_EquipButton = null;
 		private UnityEngine.UI.Image m_E_EquipImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_EquipEventTrigger = null;

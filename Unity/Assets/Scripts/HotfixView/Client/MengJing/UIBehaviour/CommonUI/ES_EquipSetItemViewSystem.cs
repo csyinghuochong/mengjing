@@ -52,7 +52,7 @@ namespace ET.Client
 
             self.E_EquipIconImage.gameObject.SetActive(false);
             self.E_EquipQualityImage.gameObject.SetActive(false);
-            // self.E_Img_EquipBangDing.SetActive(false);
+            self.EG_BangDingRectTransform.gameObject.SetActive(false);
 
             if (subType < 100)
             {
@@ -92,11 +92,11 @@ namespace ET.Client
                 //显示绑定
                 if (bagInfo.isBinging)
                 {
-                    // self.Img_EquipBangDing.SetActive(true);
+                    self.EG_BangDingRectTransform.gameObject.SetActive(true);
                 }
                 else
                 {
-                    // self.Img_EquipBangDing.SetActive(false);
+                    self.EG_BangDingRectTransform.gameObject.SetActive(false);
                 }
             }
             catch (Exception ex)

@@ -42,6 +42,16 @@ namespace ET.Client
 
         public static void Refresh(this ES_RewardList self, string rewarfItems)
         {
+            self.ShowBagInfos.Clear();
+            string[] items = rewarfItems.Split('@');
+            foreach (string item in items)
+            {
+                string[] it = item.Split(';');
+                self.ShowBagInfos.Add(new BagInfo() { ItemID = int.Parse(it[0]), ItemNum = int.Parse(it[1]) });
+            }
+
+            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
+            self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
     }
 }

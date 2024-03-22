@@ -47,7 +47,7 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
     }
-    
+
     [Event(SceneType.Demo)]
     public class DataUpdate_UpdateRoleProper_Refresh: AEvent<Scene, DataUpdate_UpdateRoleProper>
     {
@@ -58,6 +58,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof (ES_RoleQiangHua))]
     [FriendOf(typeof (ES_RoleHuiShou))]
     [FriendOf(typeof (ES_EquipSet))]
     [FriendOf(typeof (ES_RoleGem))]
@@ -87,6 +88,7 @@ namespace ET.Client
             UICommonHelper.SetToggleShow(self.View.E_PropertyToggle.gameObject, index == 1);
             UICommonHelper.SetToggleShow(self.View.E_GemToggle.gameObject, index == 2);
             UICommonHelper.SetToggleShow(self.View.E_HuiShowToggle.gameObject, index == 3);
+            UICommonHelper.SetToggleShow(self.View.E_QiangHuaToggle.gameObject, index == 4);
 
             UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
@@ -116,6 +118,13 @@ namespace ET.Client
                 case 3:
                     self.View.ES_RoleHuiShou.uiTransform.gameObject.SetActive(true);
                     self.View.ES_RoleHuiShou.OnUpdateUI();
+                    self.View.E_ZodiacButton.gameObject.SetActive(false);
+                    self.View.ES_EquipSet.uiTransform.gameObject.SetActive(false);
+                    self.View.ES_EquipSet.EquipSetHide(true);
+                    break;
+                case 4:
+                    self.View.ES_RoleQiangHua.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_RoleQiangHua.OnUpdateUI();
                     self.View.E_ZodiacButton.gameObject.SetActive(false);
                     self.View.ES_EquipSet.uiTransform.gameObject.SetActive(false);
                     self.View.ES_EquipSet.EquipSetHide(true);

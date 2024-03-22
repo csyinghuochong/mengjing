@@ -110,6 +110,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Toggle E_QiangHuaToggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_QiangHuaToggle == null )
+     			{
+		    		this.m_E_QiangHuaToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_QiangHua");
+     			}
+     			return this.m_E_QiangHuaToggle;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_ZodiacButton
      	{
      		get
@@ -233,6 +250,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_RoleQiangHua ES_RoleQiangHua
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_roleqianghua == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleQiangHua");
+		    	   this.m_es_roleqianghua = this.AddChild<ES_RoleQiangHua,Transform>(subTrans);
+     			}
+     			return this.m_es_roleqianghua;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_es_equipset = null;
@@ -241,6 +276,7 @@ namespace ET.Client
 			this.m_E_PropertyToggle = null;
 			this.m_E_GemToggle = null;
 			this.m_E_HuiShowToggle = null;
+			this.m_E_QiangHuaToggle = null;
 			this.m_E_ZodiacButton = null;
 			this.m_E_ZodiacImage = null;
 			this.m_EG_SubViewRectTransform = null;
@@ -248,6 +284,7 @@ namespace ET.Client
 			this.m_es_roleproperty = null;
 			this.m_es_rolegem = null;
 			this.m_es_rolehuishou = null;
+			this.m_es_roleqianghua = null;
 			this.uiTransform = null;
 		}
 
@@ -257,6 +294,7 @@ namespace ET.Client
 		private UnityEngine.UI.Toggle m_E_PropertyToggle = null;
 		private UnityEngine.UI.Toggle m_E_GemToggle = null;
 		private UnityEngine.UI.Toggle m_E_HuiShowToggle = null;
+		private UnityEngine.UI.Toggle m_E_QiangHuaToggle = null;
 		private UnityEngine.UI.Button m_E_ZodiacButton = null;
 		private UnityEngine.UI.Image m_E_ZodiacImage = null;
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
@@ -264,6 +302,7 @@ namespace ET.Client
 		private EntityRef<ES_RoleProperty> m_es_roleproperty = null;
 		private EntityRef<ES_RoleGem> m_es_rolegem = null;
 		private EntityRef<ES_RoleHuiShou> m_es_rolehuishou = null;
+		private EntityRef<ES_RoleQiangHua> m_es_roleqianghua = null;
 		public Transform uiTransform = null;
 	}
 }
