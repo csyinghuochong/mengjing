@@ -29,7 +29,7 @@ namespace ET.Server
             {
                 return;
             }
-            UserInfoComponentServer userInfo =  player.GetComponent<UserInfoComponentServer>();
+            UserInfoComponent_S userInfo =  player.GetComponent<UserInfoComponent_S>();
             FirstWinInfo firstWinInfo = new FirstWinInfo();
             firstWinInfo.FirstWinId = firstwinid;
             firstWinInfo.KillTime = TimeHelper.ServerNow();

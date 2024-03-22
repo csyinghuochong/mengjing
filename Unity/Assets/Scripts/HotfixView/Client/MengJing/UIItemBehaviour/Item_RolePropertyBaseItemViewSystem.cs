@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponentClient))]
+    [FriendOf(typeof (UserInfoComponent_C))]
     [EntitySystemOf(typeof (Scroll_Item_RolePropertyBaseItem))]
     public static partial class Scroll_Item_RolePropertyBaseItemSystem
     {
@@ -20,8 +20,8 @@ namespace ET.Client
 
         public static void Refresh(this Scroll_Item_RolePropertyBaseItem self, ShowPropertyList showPropertyList)
         {
-            NumericComponentClient numericComponentClient = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentClient>();
-            UserInfoComponentClient userInfoComponentClient = self.Root().GetComponent<UserInfoComponentClient>();
+            NumericComponent_C numericComponentC = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponent_C>();
+            UserInfoComponent_C userInfoComponentC = self.Root().GetComponent<UserInfoComponent_C>();
 
             //获取强化技能属性,用于显示
             long Power_value_add = 0;
@@ -59,69 +59,69 @@ namespace ET.Client
             self.E_PropertyTypeText.text = showPropertyList.Name;
             if (showPropertyList.NumericType == NumericType.Now_Speed)
             {
-                self.E_ProTypeValueText.text = numericComponentClient.GetAsFloat(showPropertyList.NumericType).ToString();
+                self.E_ProTypeValueText.text = numericComponentC.GetAsFloat(showPropertyList.NumericType).ToString();
             }
             else
             {
                 if (showPropertyList.NumericType == NumericType.Now_MaxAct)
                 {
-                    self.E_ProTypeValueText.text = numericComponentClient.GetAsLong(NumericType.Now_MinAct) + "-" +
-                            numericComponentClient.GetAsLong(NumericType.Now_MaxAct);
+                    self.E_ProTypeValueText.text = numericComponentC.GetAsLong(NumericType.Now_MinAct) + "-" +
+                            numericComponentC.GetAsLong(NumericType.Now_MaxAct);
                 }
                 else if (showPropertyList.NumericType == NumericType.Now_MaxDef)
                 {
-                    self.E_ProTypeValueText.text = numericComponentClient.GetAsLong(NumericType.Now_MinDef) + "-" +
-                            numericComponentClient.GetAsLong(NumericType.Now_MaxDef);
+                    self.E_ProTypeValueText.text = numericComponentC.GetAsLong(NumericType.Now_MinDef) + "-" +
+                            numericComponentC.GetAsLong(NumericType.Now_MaxDef);
                 }
                 else if (showPropertyList.NumericType == NumericType.Now_MaxAdf)
                 {
-                    self.E_ProTypeValueText.text = numericComponentClient.GetAsLong(NumericType.Now_MinAdf) + "-" +
-                            numericComponentClient.GetAsLong(NumericType.Now_MaxAdf);
+                    self.E_ProTypeValueText.text = numericComponentC.GetAsLong(NumericType.Now_MinAdf) + "-" +
+                            numericComponentC.GetAsLong(NumericType.Now_MaxAdf);
                 }
                 else if (showPropertyList.NumericType == NumericType.Now_Mage)
                 {
                     self.E_ProTypeValueText.gameObject.SetActive(false);
-                    self.E_ProTypeValueRightText.text = numericComponentClient.GetAsLong(showPropertyList.NumericType).ToString();
+                    self.E_ProTypeValueRightText.text = numericComponentC.GetAsLong(showPropertyList.NumericType).ToString();
                     self.E_ProTypeValueRightText.gameObject.SetActive(true);
                 }
                 else if (showPropertyList.NumericType == NumericType.Now_Power)
                 {
-                    self.E_ProTypeValueText.text = (numericComponentClient.GetAsLong(showPropertyList.NumericType) +
-                                numericComponentClient.GetAsLong(NumericType.PointLiLiang) + Power_value_add +
-                                userInfoComponentClient.UserInfo.Lv * 2)
+                    self.E_ProTypeValueText.text = (numericComponentC.GetAsLong(showPropertyList.NumericType) +
+                                numericComponentC.GetAsLong(NumericType.PointLiLiang) + Power_value_add +
+                                userInfoComponentC.UserInfo.Lv * 2)
                             .ToString();
                 }
                 else if (showPropertyList.NumericType == NumericType.Now_Agility)
                 {
-                    self.E_ProTypeValueText.text = (numericComponentClient.GetAsLong(showPropertyList.NumericType) +
-                                numericComponentClient.GetAsLong(NumericType.PointMinJie) + Agility_value_add +
-                                userInfoComponentClient.UserInfo.Lv * 2)
+                    self.E_ProTypeValueText.text = (numericComponentC.GetAsLong(showPropertyList.NumericType) +
+                                numericComponentC.GetAsLong(NumericType.PointMinJie) + Agility_value_add +
+                                userInfoComponentC.UserInfo.Lv * 2)
                             .ToString();
                 }
                 else if (showPropertyList.NumericType == NumericType.Now_Intellect)
                 {
-                    self.E_ProTypeValueText.text = (numericComponentClient.GetAsLong(showPropertyList.NumericType) +
-                                numericComponentClient.GetAsLong(NumericType.PointZhiLi) + Intellect_value_add +
-                                userInfoComponentClient.UserInfo.Lv * 2)
+                    self.E_ProTypeValueText.text = (numericComponentC.GetAsLong(showPropertyList.NumericType) +
+                                numericComponentC.GetAsLong(NumericType.PointZhiLi) + Intellect_value_add +
+                                userInfoComponentC.UserInfo.Lv * 2)
                             .ToString();
                 }
                 else if (showPropertyList.NumericType == NumericType.Now_Stamina)
                 {
-                    self.E_ProTypeValueText.text = (numericComponentClient.GetAsLong(showPropertyList.NumericType) +
-                                numericComponentClient.GetAsLong(NumericType.PointNaiLi) + Stamina_value_add +
-                                userInfoComponentClient.UserInfo.Lv * 2)
+                    self.E_ProTypeValueText.text = (numericComponentC.GetAsLong(showPropertyList.NumericType) +
+                                numericComponentC.GetAsLong(NumericType.PointNaiLi) + Stamina_value_add +
+                                userInfoComponentC.UserInfo.Lv * 2)
                             .ToString();
                 }
                 else if (showPropertyList.NumericType == NumericType.Now_Constitution)
                 {
-                    self.E_ProTypeValueText.text = (numericComponentClient.GetAsLong(showPropertyList.NumericType) +
-                                numericComponentClient.GetAsLong(NumericType.PointTiZhi) + Constitution_value_add +
-                                userInfoComponentClient.UserInfo.Lv * 2)
+                    self.E_ProTypeValueText.text = (numericComponentC.GetAsLong(showPropertyList.NumericType) +
+                                numericComponentC.GetAsLong(NumericType.PointTiZhi) + Constitution_value_add +
+                                userInfoComponentC.UserInfo.Lv * 2)
                             .ToString();
                 }
                 else
                 {
-                    self.E_ProTypeValueText.text = numericComponentClient.GetAsLong(showPropertyList.NumericType).ToString();
+                    self.E_ProTypeValueText.text = numericComponentC.GetAsLong(showPropertyList.NumericType).ToString();
                 }
             }
 

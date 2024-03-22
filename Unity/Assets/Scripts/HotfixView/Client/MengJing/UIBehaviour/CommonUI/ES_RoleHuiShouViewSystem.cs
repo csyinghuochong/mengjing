@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[FriendOf(typeof (Scroll_Item_CommonItem))]
-	[FriendOf(typeof (UserInfoComponentClient))]
+	[FriendOf(typeof (UserInfoComponent_C))]
 	[FriendOf(typeof (ES_CommonItem))]
 	[EntitySystemOf(typeof (ES_RoleHuiShou))]
 	[FriendOfAttribute(typeof (ES_RoleHuiShou))]
@@ -80,7 +80,7 @@ namespace ET.Client
 		private static void UpdateHuiShouInfo(this ES_RoleHuiShou self, string dataparams)
 		{
 			string[] huishouInfo = dataparams.Split('_');
-			BagInfo bagInfo = self.Root().GetComponent<BagComponentClient>().GetBagInfo(long.Parse(huishouInfo[1]));
+			BagInfo bagInfo = self.Root().GetComponent<BagComponent_C>().GetBagInfo(long.Parse(huishouInfo[1]));
 			if (huishouInfo[0] == "1")
 			{
 				for (int i = 0; i < self.HuiShouInfos.Length; i++)
@@ -143,14 +143,14 @@ namespace ET.Client
 
 		private static void RefreshBagItems(this ES_RoleHuiShou self)
 		{
-			BagComponentClient bagComponentClient = self.Root().GetComponent<BagComponentClient>();
+			BagComponent_C bagComponentC = self.Root().GetComponent<BagComponent_C>();
 
 			self.ShowBagInfos.Clear();
 
-			self.ShowBagInfos.AddRange(bagComponentClient.GetItemsByType(ItemTypeEnum.Equipment));
-			self.ShowBagInfos.AddRange(bagComponentClient.GetItemsByType(ItemTypeEnum.Gemstone));
-			self.ShowBagInfos.AddRange(bagComponentClient.GetItemsByLoc(ItemLocType.ItemPetHeXinBag));
-			self.ShowBagInfos.AddRange(bagComponentClient.GetItemsByTypeAndSubType(ItemTypeEnum.Consume, 5));
+			self.ShowBagInfos.AddRange(bagComponentC.GetItemsByType(ItemTypeEnum.Equipment));
+			self.ShowBagInfos.AddRange(bagComponentC.GetItemsByType(ItemTypeEnum.Gemstone));
+			self.ShowBagInfos.AddRange(bagComponentC.GetItemsByLoc(ItemLocType.ItemPetHeXinBag));
+			self.ShowBagInfos.AddRange(bagComponentC.GetItemsByTypeAndSubType(ItemTypeEnum.Consume, 5));
 
 			self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
 			self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
@@ -170,7 +170,7 @@ namespace ET.Client
 					BagInfo = binfo,
 					ItemOperateEnum = ItemOperateEnum.None,
 					InputPoint = Input.mousePosition,
-					Occ = self.Root().GetComponent<UserInfoComponentClient>().UserInfo.Occ,
+					Occ = self.Root().GetComponent<UserInfoComponent_C>().UserInfo.Occ,
 					EquipList = new List<BagInfo>()
 				});
 		}
@@ -187,9 +187,9 @@ namespace ET.Client
 			self.HuiShouInfos = new BagInfo[self.HuiShouInfos.Length];
 
 			int number = 0;
-			BagComponentClient bagComponentClient = self.Root().GetComponent<BagComponentClient>();
-			List<BagInfo> bagInfos = bagComponentClient.GetItemsByType(ItemTypeEnum.Equipment);
-			bagInfos.AddRange(bagComponentClient.GetItemsByType(ItemTypeEnum.Gemstone));
+			BagComponent_C bagComponentC = self.Root().GetComponent<BagComponent_C>();
+			List<BagInfo> bagInfos = bagComponentC.GetItemsByType(ItemTypeEnum.Equipment);
+			bagInfos.AddRange(bagComponentC.GetItemsByType(ItemTypeEnum.Gemstone));
 			for (int i = 0; i < bagInfos.Count; i++)
 			{
 				if (bagInfos[i].IsProtect)

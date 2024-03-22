@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(UserInfoComponentClient))]
-    [FriendOf(typeof(TaskComponentClient))]
+    [FriendOf(typeof(UserInfoComponent_C))]
+    [FriendOf(typeof(TaskComponent_C))]
     public static class TaskClientNetHelper
     {
         public static async ETTask<int> RequestTaskInit(Scene root)
@@ -12,8 +12,8 @@ namespace ET.Client
             Log.Debug($"C2M_TaskInitRequest: client0");
             M2C_TaskInitResponse response = (M2C_TaskInitResponse)await root.GetComponent<ClientSenderCompnent>().Call(new C2M_TaskInitRequest());
 
-            TaskComponentClient taskComponentClient = root.GetComponent<TaskComponentClient>();
-            taskComponentClient.RoleTaskList = response.RoleTaskList;       
+            TaskComponent_C taskComponentC = root.GetComponent<TaskComponent_C>();
+            taskComponentC.RoleTaskList = response.RoleTaskList;       
             return ErrorCode.ERR_Success;
         }
 
@@ -22,12 +22,12 @@ namespace ET.Client
             C2M_TaskTrackRequest request = new () { TaskId = taskId, TrackStatus = trackStatus };
             M2C_TaskTrackResponse response = (M2C_TaskTrackResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
-            TaskComponentClient taskComponentClient = root.GetComponent<TaskComponentClient>();
-            for (int i = 0; i < taskComponentClient.RoleTaskList.Count; i++)
+            TaskComponent_C taskComponentC = root.GetComponent<TaskComponent_C>();
+            for (int i = 0; i < taskComponentC.RoleTaskList.Count; i++)
             {
-                if (taskComponentClient.RoleTaskList[i].taskID == taskId)
+                if (taskComponentC.RoleTaskList[i].taskID == taskId)
                 {
-                    taskComponentClient.RoleTaskList[i].TrackStatus = trackStatus;
+                    taskComponentC.RoleTaskList[i].TrackStatus = trackStatus;
                 }
             }
             
@@ -37,15 +37,15 @@ namespace ET.Client
 
         public static async ETTask<int> RequestCommitTask(Scene root, int taskid, long banginfoId)
         {
-            TaskComponentClient taskComponentClient = root.GetComponent<TaskComponentClient>();
-            TaskPro taskPro = taskComponentClient.GetTaskById(taskid);
+            TaskComponent_C taskComponentC = root.GetComponent<TaskComponent_C>();
+            TaskPro taskPro = taskComponentC.GetTaskById(taskid);
             if (taskPro == null || taskPro.taskStatus != (int)TaskStatuEnum.Completed)
             {
                 return ErrorCode.Pre_Condition_Error;
             }
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskid);
             List<RewardItem> rewardItems = TaskHelper.GetTaskRewards(taskid, taskConfig);
-            if (root.GetComponent<BagComponentClient>().GetBagLeftCell() < rewardItems.Count)
+            if (root.GetComponent<BagComponent_C>().GetBagLeftCell() < rewardItems.Count)
             {
                 return ErrorCode.ERR_BagIsFull;
             }
@@ -57,15 +57,15 @@ namespace ET.Client
                 return response.Error;
             }
                 
-            for (int i = taskComponentClient.RoleTaskList.Count - 1; i >= 0; i--)
+            for (int i = taskComponentC.RoleTaskList.Count - 1; i >= 0; i--)
             {
-                if (taskComponentClient.RoleTaskList[i].taskID == taskid)
+                if (taskComponentC.RoleTaskList[i].taskID == taskid)
                 {
-                    taskComponentClient.RoleTaskList.RemoveAt(i);
+                    taskComponentC.RoleTaskList.RemoveAt(i);
                     break;
                 }
             }
-            taskComponentClient.RoleComoleteTaskList = response.RoleComoleteTaskList;
+            taskComponentC.RoleComoleteTaskList = response.RoleComoleteTaskList;
             EventSystem.Instance.Publish(root,new DataUpdate_TaskComplete());
             return response.Error;
         }
@@ -81,8 +81,8 @@ namespace ET.Client
                 return response.Error;
             }
             
-            TaskComponentClient taskComponentClient = root.GetComponent<TaskComponentClient>();
-            taskComponentClient.RoleTaskList.Add(response.TaskPro);
+            TaskComponent_C taskComponentC = root.GetComponent<TaskComponent_C>();
+            taskComponentC.RoleTaskList.Add(response.TaskPro);
             EventSystem.Instance.Publish(root,new DataUpdate_TaskGet());
             return response.Error;
         }
@@ -92,12 +92,12 @@ namespace ET.Client
             C2M_TaskGiveUpRequest request = new() { TaskId = taskId };
             M2C_TaskGiveUpResponse response = (M2C_TaskGiveUpResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
-            TaskComponentClient taskComponentClient = root.GetComponent<TaskComponentClient>();
-            for (int i = taskComponentClient.RoleTaskList.Count - 1; i >= 0; i--)
+            TaskComponent_C taskComponentC = root.GetComponent<TaskComponent_C>();
+            for (int i = taskComponentC.RoleTaskList.Count - 1; i >= 0; i--)
             {
-                if (taskComponentClient.RoleTaskList[i].taskID == taskId)
+                if (taskComponentC.RoleTaskList[i].taskID == taskId)
                 {
-                    taskComponentClient.RoleTaskList.RemoveAt(i);
+                    taskComponentC.RoleTaskList.RemoveAt(i);
                     break;
                 }
             }

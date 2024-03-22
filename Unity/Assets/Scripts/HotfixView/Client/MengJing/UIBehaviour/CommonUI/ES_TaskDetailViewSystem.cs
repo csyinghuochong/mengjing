@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponentClient))]
+    [FriendOf(typeof (UserInfoComponent_C))]
     [EntitySystemOf(typeof (ES_TaskDetail))]
     [FriendOf(typeof (ES_TaskDetail))]
     public static partial class ES_TaskDetailSystem
@@ -63,7 +63,7 @@ namespace ET.Client
             float cofficoin = 1f;
             if (taskConfig.Development == 1)
             {
-                UserInfoComponentClient userInfoComponent = self.Root().GetComponent<UserInfoComponentClient>();
+                UserInfoComponent_C userInfoComponent = self.Root().GetComponent<UserInfoComponent_C>();
                 coffiexp = ComHelp.GetTaskExpRewardCof(userInfoComponent.UserInfo.Lv);
                 cofficoin = ComHelp.GetTaskCoinRewardCof(userInfoComponent.UserInfo.Lv);
             }
@@ -93,7 +93,7 @@ namespace ET.Client
             int nowNum = 0;
             if (taskType == 5)
             {
-                nowNum = unit.GetComponent<NumericComponentClient>().GetAsInt(NumericType.WeeklyTaskNumber) + 1;
+                nowNum = unit.GetComponent<NumericComponent_C>().GetAsInt(NumericType.WeeklyTaskNumber) + 1;
 
                 if (nowNum != 0)
                 {
@@ -119,7 +119,7 @@ namespace ET.Client
 
             if (taskType == 10)
             {
-                nowNum = unit.GetComponent<NumericComponentClient>().GetAsInt(NumericType.RingTaskNumber) + 1;
+                nowNum = unit.GetComponent<NumericComponent_C>().GetAsInt(NumericType.RingTaskNumber) + 1;
 
                 if (nowNum != 0)
                 {
@@ -218,7 +218,7 @@ namespace ET.Client
             }
 
             FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
-            if (self.Root().GetComponent<TaskComponentClient>().GetAllTrackList().Count >= 3 && track)
+            if (self.Root().GetComponent<TaskComponent_C>().GetAllTrackList().Count >= 3 && track)
             {
                 flyTipComponent.SpawnFlyTipDi("追踪数量不能超过三个!");
                 return;

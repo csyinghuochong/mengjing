@@ -9,14 +9,14 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_PetHeXinChouKaRequest request, M2C_PetHeXinChouKaResponse response)
         {
-            if (unit.GetComponent<BagComponentServer>().GetBagLeftCell() < request.ChouKaType)
+            if (unit.GetComponent<BagComponent_S>().GetBagLeftCell() < request.ChouKaType)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;
             }
 
             int dropId = 0;
-            int exlporeNumber = unit.GetComponent<NumericComponentServer>().GetAsInt(NumericType.PetHeXinExploreNumber);
+            int exlporeNumber = unit.GetComponent<NumericComponent_S>().GetAsInt(NumericType.PetHeXinExploreNumber);
             string[] set = GlobalValueConfigCategory.Instance.Get(112).Value.Split(';');
             float discount;
             if (exlporeNumber < int.Parse(set[0])) // 超过300次打8折
@@ -32,7 +32,7 @@ namespace ET.Server
             {
                 string needItems = GlobalValueConfigCategory.Instance.Get(110).Value.Split('@')[0];
                 dropId = int.Parse(GlobalValueConfigCategory.Instance.Get(110).Value.Split('@')[1]);
-                bool sucess = unit.GetComponent<BagComponentServer>().OnCostItemData(needItems);
+                bool sucess = unit.GetComponent<BagComponent_S>().OnCostItemData(needItems);
                 if (!sucess)
                 {
                     response.Error = ErrorCode.ERR_ItemNotEnoughError;
@@ -45,7 +45,7 @@ namespace ET.Server
             {
                 string[] itemInfo10 = GlobalValueConfigCategory.Instance.Get(111).Value.Split('@')[0].Split(';');
                 dropId = int.Parse(GlobalValueConfigCategory.Instance.Get(111).Value.Split('@')[1]);
-                bool sucess = unit.GetComponent<BagComponentServer>().OnCostItemData(new List<RewardItem>()
+                bool sucess = unit.GetComponent<BagComponent_S>().OnCostItemData(new List<RewardItem>()
                 {
                     new RewardItem() { ItemID = int.Parse(itemInfo10[0]), ItemNum = (int)(int.Parse(itemInfo10[1]) * discount) }
                 });
@@ -54,7 +54,7 @@ namespace ET.Server
                     response.Error = ErrorCode.ERR_ItemNotEnoughError;
                     return;
                 }
-                unit.GetComponent<NumericComponentServer>().ApplyChange(null, NumericType.PetHeXinExploreNumber, 10, 0);
+                unit.GetComponent<NumericComponent_S>().ApplyChange(null, NumericType.PetHeXinExploreNumber, 10, 0);
             }
 
             List<RewardItem> rewardItems = new List<RewardItem>();
@@ -63,7 +63,7 @@ namespace ET.Server
                 DropHelper.DropIDToDropItem_2(dropId, rewardItems);
             }
             
-            unit.GetComponent<BagComponentServer>()
+            unit.GetComponent<BagComponent_S>()
                     .OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.PetExplore}_{TimeHelper.ServerNow()}");
             response.ReardList = rewardItems;
 

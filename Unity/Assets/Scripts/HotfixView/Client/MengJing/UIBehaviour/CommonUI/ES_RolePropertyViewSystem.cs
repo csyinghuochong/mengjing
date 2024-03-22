@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     
-    [FriendOf(typeof (UserInfoComponentClient))]
+    [FriendOf(typeof (UserInfoComponent_C))]
     [EntitySystemOf(typeof (ES_RoleProperty))]
     [FriendOfAttribute(typeof (ES_RoleProperty))]
     public static partial class ES_RolePropertySystem
@@ -147,15 +147,15 @@ namespace ET.Client
         public static void RefreshRoleProperty(this ES_RoleProperty self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            NumericComponentClient numericComponentClient = unit.GetComponent<NumericComponentClient>();
-            UserInfoComponentClient userInfoComponentClient = self.Root().GetComponent<UserInfoComponentClient>();
+            NumericComponent_C numericComponentC = unit.GetComponent<NumericComponent_C>();
+            UserInfoComponent_C userInfoComponentC = self.Root().GetComponent<UserInfoComponent_C>();
 
             int maxPiLao = int.Parse(GlobalValueConfigCategory.Instance
-                    .Get(numericComponentClient.GetAsInt(NumericType.YueKaRemainTimes) > 0? 26 : 10).Value);
-            self.E_PiLaoImgImage.fillAmount = (float)userInfoComponentClient.UserInfo.PiLao / maxPiLao;
-            self.E_PiLaoTextText.text = userInfoComponentClient.UserInfo.PiLao + "/" + maxPiLao;
-            self.E_BaoShiDuImgImage.fillAmount = (float)userInfoComponentClient.UserInfo.BaoShiDu / ComHelp.GetMaxBaoShiDu();
-            self.E_BaoShiDuTextText.text = userInfoComponentClient.UserInfo.BaoShiDu + "/" + ComHelp.GetMaxBaoShiDu();
+                    .Get(numericComponentC.GetAsInt(NumericType.YueKaRemainTimes) > 0? 26 : 10).Value);
+            self.E_PiLaoImgImage.fillAmount = (float)userInfoComponentC.UserInfo.PiLao / maxPiLao;
+            self.E_PiLaoTextText.text = userInfoComponentC.UserInfo.PiLao + "/" + maxPiLao;
+            self.E_BaoShiDuImgImage.fillAmount = (float)userInfoComponentC.UserInfo.BaoShiDu / ComHelp.GetMaxBaoShiDu();
+            self.E_BaoShiDuTextText.text = userInfoComponentC.UserInfo.BaoShiDu + "/" + ComHelp.GetMaxBaoShiDu();
 
             self.AddUIScrollItems(ref self.ScrollItemRolePropertyBaseItems, self.ShowPropertyList_Base.Count);
             self.E_RolePropertyBaseItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPropertyList_Base.Count);
@@ -229,27 +229,27 @@ namespace ET.Client
         private static void InitAddProperty(this ES_RoleProperty self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            NumericComponentClient numericComponentClient = unit.GetComponent<NumericComponentClient>();
+            NumericComponent_C numericComponentC = unit.GetComponent<NumericComponent_C>();
 
             self.PointList.Clear();
-            self.PointList.Add(numericComponentClient.GetAsInt(NumericType.PointLiLiang));
-            self.PointList.Add(numericComponentClient.GetAsInt(NumericType.PointZhiLi));
-            self.PointList.Add(numericComponentClient.GetAsInt(NumericType.PointTiZhi));
-            self.PointList.Add(numericComponentClient.GetAsInt(NumericType.PointNaiLi));
-            self.PointList.Add(numericComponentClient.GetAsInt(NumericType.PointMinJie));
+            self.PointList.Add(numericComponentC.GetAsInt(NumericType.PointLiLiang));
+            self.PointList.Add(numericComponentC.GetAsInt(NumericType.PointZhiLi));
+            self.PointList.Add(numericComponentC.GetAsInt(NumericType.PointTiZhi));
+            self.PointList.Add(numericComponentC.GetAsInt(NumericType.PointNaiLi));
+            self.PointList.Add(numericComponentC.GetAsInt(NumericType.PointMinJie));
 
             self.PointInit.Clear();
             self.PointInit.AddRange(self.PointList);
 
-            self.PointRemain = numericComponentClient.GetAsInt(NumericType.PointRemain);
+            self.PointRemain = numericComponentC.GetAsInt(NumericType.PointRemain);
 
             self.RefreshAddProperty();
         }
 
         private static void RefreshAddProperty(this ES_RoleProperty self)
         {
-            UserInfoComponentClient userInfoComponentClient = self.Root().GetComponent<UserInfoComponentClient>();
-            int lv = userInfoComponentClient.UserInfo.Lv;
+            UserInfoComponent_C userInfoComponentC = self.Root().GetComponent<UserInfoComponent_C>();
+            int lv = userInfoComponentC.UserInfo.Lv;
 
             self.E_Value_LiLiangText.text = (self.PointList[0] + lv * 2).ToString();
             self.E_Value_ZhiLiText.text = (self.PointList[1] + lv * 2).ToString();

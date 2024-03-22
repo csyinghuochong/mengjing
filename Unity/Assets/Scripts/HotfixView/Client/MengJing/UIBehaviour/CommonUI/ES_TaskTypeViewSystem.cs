@@ -109,18 +109,18 @@ namespace ET.Client
         {
             self.ShowTaskPros.Clear();
 
-            TaskComponentClient taskComponentClient = self.Root().GetComponent<TaskComponentClient>();
-            self.ShowTaskPros = taskComponentClient.GetTaskTypeList(self.TaskType);
+            TaskComponent_C taskComponentC = self.Root().GetComponent<TaskComponent_C>();
+            self.ShowTaskPros = taskComponentC.GetTaskTypeList(self.TaskType);
             if (self.TaskType == TaskTypeEnum.Branch)
             {
                 
             }
             if (self.TaskType == TaskTypeEnum.Daily)
             {
-                self.ShowTaskPros.AddRange(taskComponentClient.GetTaskTypeList(TaskTypeEnum.Treasure));
-                self.ShowTaskPros.AddRange(taskComponentClient.GetTaskTypeList(TaskTypeEnum.Union));
-                self.ShowTaskPros.AddRange(taskComponentClient.GetTaskTypeList(TaskTypeEnum.Ring));
-                self.ShowTaskPros.AddRange(taskComponentClient.GetTaskTypeList(TaskTypeEnum.Weekly));
+                self.ShowTaskPros.AddRange(taskComponentC.GetTaskTypeList(TaskTypeEnum.Treasure));
+                self.ShowTaskPros.AddRange(taskComponentC.GetTaskTypeList(TaskTypeEnum.Union));
+                self.ShowTaskPros.AddRange(taskComponentC.GetTaskTypeList(TaskTypeEnum.Ring));
+                self.ShowTaskPros.AddRange(taskComponentC.GetTaskTypeList(TaskTypeEnum.Weekly));
             }
 
             self.AddUIScrollItems(ref self.ScrollItemTaskTypeItems, self.ShowTaskPros.Count);

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponentClient))]
+    [FriendOf(typeof (UserInfoComponent_C))]
     [EntitySystemOf(typeof (ES_EquipSet))]
     [FriendOfAttribute(typeof (ES_EquipSet))]
     public static partial class ES_EquipSetSystem
@@ -39,7 +39,7 @@ namespace ET.Client
 
         public static void RefreshPlayerInfo(this ES_EquipSet self)
         {
-            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentClient>().UserInfo;
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponent_C>().UserInfo;
 
             self.E_RoseLvText.text = userInfo.Lv.ToString();
             self.E_RoseNameText.text = userInfo.Name;
@@ -50,8 +50,8 @@ namespace ET.Client
 
         public static void RefreshEquip(this ES_EquipSet self)
         {
-            BagComponentClient bagComponentClient = self.Root().GetComponent<BagComponentClient>();
-            UserInfoComponentClient userInfoComponentClient = self.Root().GetComponent<UserInfoComponentClient>();
+            BagComponent_C bagComponentC = self.Root().GetComponent<BagComponent_C>();
+            UserInfoComponent_C userInfoComponentC = self.Root().GetComponent<UserInfoComponent_C>();
 
             for (int i = 0; i < self.ESEquipItems_1.Count; i++)
             {
@@ -63,10 +63,10 @@ namespace ET.Client
                 self.ESEquipItems_2[i].InitUI(FunctionUI.GetItemSubtypeByWeizhi(i));
             }
 
-            self.RefreshEquip_1(bagComponentClient.GetItemsByLoc(ItemLocType.ItemLocEquip), userInfoComponentClient.UserInfo.Occ,
+            self.RefreshEquip_1(bagComponentC.GetItemsByLoc(ItemLocType.ItemLocEquip), userInfoComponentC.UserInfo.Occ,
                 ItemOperateEnum.Juese);
 
-            self.RefreshEquip_2(bagComponentClient.GetItemsByLoc(ItemLocType.ItemLocEquip_2), userInfoComponentClient.UserInfo.Occ,
+            self.RefreshEquip_2(bagComponentC.GetItemsByLoc(ItemLocType.ItemLocEquip_2), userInfoComponentC.UserInfo.Occ,
                 ItemOperateEnum.Juese);
         }
 

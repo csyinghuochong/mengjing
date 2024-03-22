@@ -9,7 +9,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_RolePetProtect request, M2C_RolePetProtect response)
         {
-            RolePetInfo rolePetInfo = unit.GetComponent<PetComponentServer>().GetPetInfo(request.PetInfoId);
+            RolePetInfo rolePetInfo = unit.GetComponent<PetComponent_S>().GetPetInfo(request.PetInfoId);
             if (rolePetInfo == null)
             {
                 response.Error = ErrorCode.ERR_Pet_NoExist;

@@ -16,28 +16,28 @@ namespace ET.Server
                 return;
             }
 
-            NumericComponentServer numericComponent = unit.GetComponent<NumericComponentServer>();
+            NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
             if (numericComponent.GetAsLong(NumericType.JueXingExp) < occupationJueXingConfig.costExp)
             {
                 response.Error = ErrorCode.ERR_ExpNoEnough;
                 return;
             }
 
-            UserInfoComponentServer userInfoComponent = unit.GetComponent<UserInfoComponentServer>();
+            UserInfoComponent_S userInfoComponent = unit.GetComponent<UserInfoComponent_S>();
             if (userInfoComponent.GetGold() < occupationJueXingConfig.costGold)
             {
                 response.Error = ErrorCode.ERR_GoldNotEnoughError;
                 return;
             }
 
-            BagComponentServer bagComponent = unit.GetComponent<BagComponentServer>();
+            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
             if (!bagComponent.CheckCostItem(occupationJueXingConfig.costItem))
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
                 return;
             }
 
-            SkillSetComponentServer skillSetComponent = unit.GetComponent<SkillSetComponentServer>();
+            SkillSetComponent_S skillSetComponent = unit.GetComponent<SkillSetComponent_S>();
 
             bool preerror = false;
             if (occupationJueXingConfig.Pre_Condition != null)

@@ -9,7 +9,7 @@ namespace ET.Server
 
     [EntitySystemOf(typeof(SkillPassiveComponent))]
     [FriendOf(typeof(SkillPassiveComponent))]
-    [FriendOf(typeof(SkillSetComponentServer))]
+    [FriendOf(typeof(SkillSetComponent_S))]
     //[FriendOf(typeof(AIComponent))]
     public  static partial class SkillPassiveComponentSystem
     {
@@ -42,10 +42,10 @@ namespace ET.Server
         {
             Unit unit = self.GetParent<Unit>();
 
-            //»º´æÖµ
+            //ç¼“å­˜å€¼
             self.UnitType = unit.Type;
-            StateComponentServer StateComponent = unit.GetComponent<StateComponentServer>();
-            NumericComponentServer NumericComponent = unit.GetComponent<NumericComponentServer>();
+            StateComponent_S StateComponent = unit.GetComponent<StateComponent_S>();
+            NumericComponent_S NumericComponent = unit.GetComponent<NumericComponent_S>();
 
             if (NumericComponent.GetAsInt(NumericType.Now_Dead) != 0)
             {
@@ -89,7 +89,7 @@ namespace ET.Server
         public static void CheckHuiXue(this SkillPassiveComponent self)
         {
             self.HuixueTimeNum = self.HuixueTimeNum + 1;
-            //5Ãë´¥·¢Ò»´Î»ØÑª
+            //5ç§’è§¦å‘ä¸€æ¬¡å›žè¡€
             if (self.HuixueTimeNum >= 5)
             {
                 self.HuixueTimeNum = 0;
@@ -98,16 +98,16 @@ namespace ET.Server
             {
                 return;
             }
-            NumericComponentServer NumericComponent = self.GetParent<Unit>().GetComponent<NumericComponentServer>();
+            NumericComponent_S NumericComponent = self.GetParent<Unit>().GetComponent<NumericComponent_S>();
 
 
-            //Ö»ÓÐÍæ¼ÒºÍ³èÎïÓÐ»ØÑª
+            //åªæœ‰çŽ©å®¶å’Œå® ç‰©æœ‰å›žè¡€
             if (self.UnitType == UnitType.Pet)
             {
                 
                 long maxHp = NumericComponent.GetAsLong(NumericType.Now_MaxHp);
 
-                //ÂúÑª²»´¥·¢»ØÑª
+                //æ»¡è¡€ä¸è§¦å‘å›žè¡€
                 if (NumericComponent.GetAsLong((int)NumericType.Now_Hp) >= maxHp)
                     return;
 
@@ -119,7 +119,7 @@ namespace ET.Server
                 }
                 addHpValue += (long)(maxHp * 0.05f);
 
-                //Ã¿5Ãë»Ö¸´5%ÉúÃü
+                //æ¯5ç§’æ¢å¤5%ç”Ÿå‘½
                 NumericComponent.SetEvent(NumericType.Now_Hp, addHpValue,  true);
             }
 
@@ -127,7 +127,7 @@ namespace ET.Server
             {
                 long maxHp = NumericComponent.GetAsLong(NumericType.Now_MaxHp);
 
-                //ÂúÑª²»´¥·¢»ØÑª
+                //æ»¡è¡€ä¸è§¦å‘å›žè¡€
                 if (NumericComponent.GetAsLong((int)NumericType.Now_Hp) >= maxHp)
                     return;
 
@@ -159,12 +159,12 @@ namespace ET.Server
             self.OnTrigegerPassiveSkill(SkillPassiveTypeEnum.IdleStill_14, unit.Id);
             if (unit.Type == UnitType.Player && unit.ConfigId == 3)
             {
-                NumericComponentServer numericComponent = unit.GetComponent<NumericComponentServer>();
+                NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
                 int nowMp = numericComponent.GetAsInt(NumericType.SkillUseMP);
                 int maxMp = numericComponent.GetAsInt(NumericType.Max_SkillUseMP);
                 float addMp = numericComponent.GetAsFloat(NumericType.Max_SkillUseMPAdd);
                 int equipIndex = numericComponent.GetAsInt(NumericType.EquipIndex);
-                //equipIndex 0¹­   1½£
+                //equipIndex 0å¼“   1å‰‘
                 int huifuspeed = equipIndex == 0 ? 1 : 2;
                 if (addMp == 0f && nowMp < maxMp)
                 {
@@ -198,14 +198,14 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// ¸üÐÂ½ÇÉ«±»¶¯¼¼ÄÜ
+        /// æ›´æ–°è§’è‰²è¢«åŠ¨æŠ€èƒ½
         /// </summary>
         /// <param name="self"></param>
         public static void UpdatePassiveSkill(this SkillPassiveComponent self)
         {
             self.SkillPassiveInfos.Clear();
 
-            List<SkillPro> skillList = self.GetParent<Unit>().GetComponent<SkillSetComponentServer>().SkillList;
+            List<SkillPro> skillList = self.GetParent<Unit>().GetComponent<SkillSetComponent_S>().SkillList;
             for (int i = 0; i < skillList.Count; i++)
             {
                 if (skillList[i].SkillSetType == (int)SkillSetEnum.Item)
@@ -222,7 +222,7 @@ namespace ET.Server
         }
 
         /// <summary>
-        /// ¸üÐÂ¹ÖÎï±»¶¯¼¼ÄÜ
+        /// æ›´æ–°æ€ªç‰©è¢«åŠ¨æŠ€èƒ½
         /// </summary>
         /// <param name="self"></param>
         public static void UpdateMonsterPassiveSkill(this SkillPassiveComponent self)
@@ -362,7 +362,7 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillIfo.SkillId);
             int angle = 0; // (int)Quaternion.QuaternionToEuler(unit.Rotation).y;
-            StateComponentServer StateComponent = unit.GetComponent<StateComponentServer>();
+            StateComponent_S StateComponent = unit.GetComponent<StateComponent_S>();
             StateComponent.StateTypeAdd(StateTypeEnum.Singing, $"{skillIfo.SkillId}_{angle}");
             self.SingTimer = self.Root().GetComponent<TimerComponent>().NewOnceTimer(TimeHelper.ServerNow() + (long)(skillConfig.SkillFrontSingTime * 1000), TimerInvokeType.MonsterSingingTimer, self);
         }
@@ -370,7 +370,7 @@ namespace ET.Server
         public static void OnSingOver(this SkillPassiveComponent self)
         {
             Unit unit = self.GetParent<Unit>();
-            StateComponentServer StateComponent = unit.GetComponent<StateComponentServer>();
+            StateComponent_S StateComponent = unit.GetComponent<StateComponent_S>();
             StateComponent.StateTypeRemove(StateTypeEnum.Singing);
             if (self.SingSkillIfo != null)
             {
@@ -381,7 +381,7 @@ namespace ET.Server
         public static void StateTypeAdd(this SkillPassiveComponent self, long nowStateType)
         {
             Unit unit = self.GetParent<Unit>();
-            StateComponentServer StateComponent = unit.GetComponent<StateComponentServer>();
+            StateComponent_S StateComponent = unit.GetComponent<StateComponent_S>();
             if (self.SingTimer > 0 && (nowStateType == StateTypeEnum.Silence || nowStateType == StateTypeEnum.Dizziness))
             {
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.SingTimer);
@@ -538,12 +538,12 @@ namespace ET.Server
                     }
                     continue;
                 }
-                //Ö»´¥·¢Ò»´Î
+                //åªè§¦å‘ä¸€æ¬¡
                 if (skillIfo.LastTriggerTime > 0 && skillIfo.TriggerOnce == 1)
                 {
                     continue;
                 }
-                //´¥·¢ÏÞÖÆ
+                //è§¦å‘é™åˆ¶
                 if (skillIfo.TriggerInterval > 0 && serverTime - skillIfo.LastTriggerTime < skillIfo.TriggerInterval)
                 {
                     continue;
@@ -556,11 +556,11 @@ namespace ET.Server
                         trigger = skillproValue >= RandomHelper.RandFloat01();
                         break;
                     case SkillPassiveTypeEnum.XueLiang_2:
-                        NumericComponentServer numCom = unit.GetComponent<NumericComponentServer>();
+                        NumericComponent_S numCom = unit.GetComponent<NumericComponent_S>();
                         if (unit.Type == UnitType.JingLing)
                         {
                             Unit master = unit.GetParent<UnitComponent>().Get(unit.MasterId);
-                            numCom = (master != null && !master.IsDisposed) ? master.GetComponent<NumericComponentServer>() : numCom;
+                            numCom = (master != null && !master.IsDisposed) ? master.GetComponent<NumericComponent_S>() : numCom;
                         }
 
                         long nowHp = numCom.GetAsLong((int)NumericType.Now_Hp);

@@ -5,13 +5,13 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof(ChengJiuComponentServer))]
+    [FriendOf(typeof(ChengJiuComponent_S))]
     public class C2M_ChengJiuListHandler : MessageLocationHandler<Unit, C2M_ChengJiuListRequest, M2C_ChengJiuListResponse>
     {
 
         protected override async ETTask Run(Unit unit, C2M_ChengJiuListRequest request, M2C_ChengJiuListResponse response)
         {
-            ChengJiuComponentServer chengJiuComponent = unit.GetComponent<ChengJiuComponentServer>();
+            ChengJiuComponent_S chengJiuComponent = unit.GetComponent<ChengJiuComponent_S>();
             response.ChengJiuProgessList = chengJiuComponent.ChengJiuProgessList;
             response.ChengJiuCompleteList = chengJiuComponent.ChengJiuCompleteList;
             response.TotalChengJiuPoint = chengJiuComponent.TotalChengJiuPoint;

@@ -6,15 +6,15 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_ItemInheritSelectRequest request, M2C_ItemInheritSelectResponse response)
         {
-            BagInfo bagInfo = unit.GetComponent<BagComponentServer  >().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID);
+            BagInfo bagInfo = unit.GetComponent<BagComponent_S  >().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID);
             if (bagInfo == null)
             {
                 response.Error = ErrorCode.ERR_ItemNotExist;
                 return;
             }
-            bagInfo.InheritSkills = unit.GetComponent<BagComponentServer>().InheritSkills;
+            bagInfo.InheritSkills = unit.GetComponent<BagComponent_S>().InheritSkills;
 
-            //Í¨Öª¿Í»§¶Ë±³°üµÀ¾ß·¢Éú¸Ä±ä
+            //é€šçŸ¥å®¢æˆ·ç«¯èƒŒåŒ…é“å…·å‘ç”Ÿæ”¹å˜
             M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
             m2c_bagUpdate.BagInfoUpdate.Add(bagInfo);
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);

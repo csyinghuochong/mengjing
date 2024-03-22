@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
-    [FriendOf(typeof(TaskComponentServer))]
+    [FriendOf(typeof(TaskComponent_S))]
     public class C2M_TaskCountryCommitHandler : MessageLocationHandler<Unit, C2M_CommitTaskCountryRequest, M2C_CommitTaskCountryResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_CommitTaskCountryRequest request, M2C_CommitTaskCountryResponse response)
@@ -16,13 +16,13 @@ namespace ET.Server
 
             TaskCountryConfig taskCountryConfig = TaskCountryConfigCategory.Instance.Get(request.TaskId);
             int itemItem = taskCountryConfig.RewardItem.Split('@').Length;
-            if (unit.GetComponent<BagComponentServer>().GetBagLeftCell() < itemItem)
+            if (unit.GetComponent<BagComponent_S>().GetBagLeftCell() < itemItem)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;
             }
             int errorCode = ErrorCode.ERR_Success;
-            TaskComponentServer taskComponent = unit.GetComponent<TaskComponentServer>();
+            TaskComponent_S taskComponent = unit.GetComponent<TaskComponent_S>();
             TaskPro taskPro = null;
             for (int i = 0; i < taskComponent.TaskCountryList.Count; i++)
             {
@@ -46,7 +46,7 @@ namespace ET.Server
                 return;
             }
 
-            int checkError = unit.GetComponent<TaskComponentServer>().CheckGiveItemTask(taskCountryConfig.TargetType, taskCountryConfig.Target, taskCountryConfig.TargetValue, request.BagInfoID, taskPro);
+            int checkError = unit.GetComponent<TaskComponent_S>().CheckGiveItemTask(taskCountryConfig.TargetType, taskCountryConfig.Target, taskCountryConfig.TargetValue, request.BagInfoID, taskPro);
             if (checkError != ErrorCode.ERR_Success)
             {
                 response.Error = checkError;
@@ -60,14 +60,14 @@ namespace ET.Server
                 return;
             }
 
-            unit.GetComponent<BagComponentServer>().OnAddItemData(taskCountryConfig.RewardItem, $"{ItemGetWay.TaskCountry}_{TimeHelper.ServerNow()}");
+            unit.GetComponent<BagComponent_S>().OnAddItemData(taskCountryConfig.RewardItem, $"{ItemGetWay.TaskCountry}_{TimeHelper.ServerNow()}");
 
             if (taskCountryConfig.RewardGold > 0)
             {
-                //ÃÌº”Ω±“
-                unit.GetComponent<UserInfoComponentServer>().UpdateRoleMoneyAdd(UserDataType.Gold, taskCountryConfig.RewardGold.ToString(), true, ItemGetWay.TaskCountry);
+                //Ê∑ªÂä†ÈáëÂ∏Å
+                unit.GetComponent<UserInfoComponent_S>().UpdateRoleMoneyAdd(UserDataType.Gold, taskCountryConfig.RewardGold.ToString(), true, ItemGetWay.TaskCountry);
             }
-            //ÃÌº”ªÓ‘æ
+            //Ê∑ªÂä†Ê¥ªË∑É
             //unit.GetComponent<UserInfoComponent>().UpdateRoleData(UserDataType.HuoYue, taskCountryConfig.EveryTaskRewardNum.ToString());
             await ETTask.CompletedTask;
         }

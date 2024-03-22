@@ -8,9 +8,9 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_RolePetEggPutOut request, M2C_RolePetEggPutOut response)
         {
-            PetComponentServer petComponent = unit.GetComponent<PetComponentServer>();
+            PetComponent_S petComponent = unit.GetComponent<PetComponent_S>();
             KeyValuePairInt rolePetEgg = petComponent.RolePetEggs[request.Index];
-            BagComponentServer bagComponent = unit.GetComponent<BagComponentServer>();
+            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
             bagComponent.OnAddItemData($"{rolePetEgg.KeyId};1", $"{ItemGetWay.PetEggDuiHuan}_{TimeHelper.ServerNow()}");
             rolePetEgg.KeyId = 0;
             rolePetEgg.Value = 0;

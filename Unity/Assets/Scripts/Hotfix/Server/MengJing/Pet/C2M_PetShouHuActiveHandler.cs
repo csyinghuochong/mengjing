@@ -9,7 +9,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_PetShouHuActiveRequest request, M2C_PetShouHuActiveResponse response)
         {
-            unit.GetComponent<PetComponentServer>().PetShouHuActive  = request.PetShouHuActive;
+            unit.GetComponent<PetComponent_S>().PetShouHuActive  = request.PetShouHuActive;
             response.PetShouHuActive = request.PetShouHuActive;
             Function_Fight.UnitUpdateProperty_Base( unit, true, true );
             await ETTask.CompletedTask;

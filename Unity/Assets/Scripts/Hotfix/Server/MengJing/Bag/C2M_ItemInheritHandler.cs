@@ -6,7 +6,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_ItemInheritRequest request, M2C_ItemInheritResponse response)
         {
-            BagInfo bagInfo = unit.GetComponent<BagComponentServer>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID);
+            BagInfo bagInfo = unit.GetComponent<BagComponent_S>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID);
             if (bagInfo == null)
             {
                 response.Error = ErrorCode.ERR_ItemNotExist;
@@ -20,16 +20,16 @@ namespace ET.Server
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             string costitem = GlobalValueConfigCategory.Instance.Get(88).Value;
-            BagComponentServer bagComponent = unit.GetComponent<BagComponentServer>();
+            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
             if (!bagComponent.CheckCostItem(costitem))
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
                 return;
             }
-            unit.GetComponent<BagComponentServer>().OnCostItemData(costitem);
+            unit.GetComponent<BagComponent_S>().OnCostItemData(costitem);
 
             int subtype = itemConfig.ItemSubType;
-            int skillid = XiLianHelper.XiLianChuanChengJianDing(itemConfig, unit.GetComponent<UserInfoComponentServer>().GetOcc(), unit.GetComponent<UserInfoComponentServer>().GetOccTwo());
+            int skillid = XiLianHelper.XiLianChuanChengJianDing(itemConfig, unit.GetComponent<UserInfoComponent_S>().GetOcc(), unit.GetComponent<UserInfoComponent_S>().GetOccTwo());
 
             if (skillid == 0)
             {
@@ -39,7 +39,7 @@ namespace ET.Server
             response.InheritSkills.Add(skillid);
             bagInfo.isBinging = true;
             bagInfo.InheritTimes += 1;
-            unit.GetComponent<BagComponentServer>().InheritSkills = response.InheritSkills;
+            unit.GetComponent<BagComponent_S>().InheritSkills = response.InheritSkills;
             //通知客户端背包道具发生改变
             M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate(); ;
             m2c_bagUpdate.BagInfoUpdate.Add(bagInfo);

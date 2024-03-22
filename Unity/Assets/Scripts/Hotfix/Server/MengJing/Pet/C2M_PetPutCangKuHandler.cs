@@ -9,7 +9,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_PetPutCangKu request, M2C_PetPutCangKu response)
         {
-            PetComponentServer petComponent = unit.GetComponent<PetComponentServer>();
+            PetComponent_S petComponent = unit.GetComponent<PetComponent_S>();
             RolePetInfo petinfo = petComponent.GetPetInfo(request.PetInfoId);
             if (petinfo == null)
             {

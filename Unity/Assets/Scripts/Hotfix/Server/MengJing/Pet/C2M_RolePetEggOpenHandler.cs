@@ -9,7 +9,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_RolePetEggOpen request, M2C_RolePetEggOpen response)
         {
-            PetComponentServer petComponent = unit.GetComponent<PetComponentServer>();
+            PetComponent_S petComponent = unit.GetComponent<PetComponent_S>();
             KeyValuePairInt rolePetEgg = petComponent.RolePetEggs[request.Index];
             if (rolePetEgg.KeyId == 0)
             {
@@ -20,12 +20,12 @@ namespace ET.Server
             string[] petinfos = itemConf.ItemUsePar.Split('@');
             int needCost = ComHelp.ReturnPetOpenTimeDiamond(rolePetEgg.KeyId,rolePetEgg.Value);
             
-            if (unit.GetComponent<UserInfoComponentServer>().GetDiamond() < needCost)
+            if (unit.GetComponent<UserInfoComponent_S>().GetDiamond() < needCost)
             {
                 response.Error = ErrorCode.ERR_DiamondNotEnoughError;
                 return;
             }
-            unit.GetComponent<UserInfoComponentServer>().UpdateRoleMoneySub(UserDataType.Diamond, (needCost * -1).ToString(), true,ItemGetWay.PetChouKa);
+            unit.GetComponent<UserInfoComponent_S>().UpdateRoleMoneySub(UserDataType.Diamond, (needCost * -1).ToString(), true,ItemGetWay.PetChouKa);
             List<int> weights = new List<int>();
             List<int> petlists = new List<int>();
             for (int i = 2; i < petinfos.Length; i++)
@@ -41,14 +41,14 @@ namespace ET.Server
             }
             if (rolePetEgg.KeyId == 10010093)
             {
-                unit.GetComponent<ChengJiuComponentServer>().TriggerEvent(ChengJiuTargetEnum.OpenZGPetEggNumber_306, 0, 1);
+                unit.GetComponent<ChengJiuComponent_S>().TriggerEvent(ChengJiuTargetEnum.OpenZGPetEggNumber_306, 0, 1);
             }
-            response.PetInfo =  unit.GetComponent<PetComponentServer>().OnAddPet(ItemGetWay.PetEggDuiHuan, petlists[index]);
-            unit.GetComponent<TaskComponentServer>().TriggerTaskEvent( TaskTargetType.PetFuHuaNumber_34, 0, 1 );
-            unit.GetComponent<TaskComponentServer>().TriggerTaskCountryEvent(TaskTargetType.PetFuHuaNumber_34, 0, 1);
+            response.PetInfo =  unit.GetComponent<PetComponent_S>().OnAddPet(ItemGetWay.PetEggDuiHuan, petlists[index]);
+            unit.GetComponent<TaskComponent_S>().TriggerTaskEvent( TaskTargetType.PetFuHuaNumber_34, 0, 1 );
+            unit.GetComponent<TaskComponent_S>().TriggerTaskCountryEvent(TaskTargetType.PetFuHuaNumber_34, 0, 1);
 
-            unit.GetComponent<TaskComponentServer>().TriggerTaskEvent(TaskTargetType.PetFuHuaId_35, rolePetEgg.KeyId, 1);
-            unit.GetComponent<TaskComponentServer>().TriggerTaskCountryEvent(TaskTargetType.PetFuHuaId_35, rolePetEgg.KeyId, 1);
+            unit.GetComponent<TaskComponent_S>().TriggerTaskEvent(TaskTargetType.PetFuHuaId_35, rolePetEgg.KeyId, 1);
+            unit.GetComponent<TaskComponent_S>().TriggerTaskCountryEvent(TaskTargetType.PetFuHuaId_35, rolePetEgg.KeyId, 1);
 
             rolePetEgg.KeyId = 0;
             rolePetEgg.Value = 0;

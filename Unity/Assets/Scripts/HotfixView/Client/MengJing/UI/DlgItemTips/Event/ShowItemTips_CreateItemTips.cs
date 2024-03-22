@@ -47,7 +47,7 @@ namespace ET.Client
                 }
                 else
                 {
-                    haveEquip = root.GetComponent<BagComponentClient>().GetEquipBySubType(ItemLocType.ItemLocEquip, itemConfig.ItemSubType);
+                    haveEquip = root.GetComponent<BagComponent_C>().GetEquipBySubType(ItemLocType.ItemLocEquip, itemConfig.ItemSubType);
                 }
 
                 await root.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_EquipDuiBiTips);

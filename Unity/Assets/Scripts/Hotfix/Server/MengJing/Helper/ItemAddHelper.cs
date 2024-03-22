@@ -5,14 +5,14 @@ namespace ET.Server
 {
 
     /// <summary>
-    /// ¸½¼Ó·½·¨
+    /// é™„åŠ æ–¹æ³•
     /// </summary>
     public static class ItemAddHelper
     {
 
         public static void OnItemUpdate(Unit self, BagInfo bagInfo)
         {
-            //Í¨Öª¿Í»§¶Ë±³°üµÀ¾ß·¢Éú¸Ä±ä
+            //é€šçŸ¥å®¢æˆ·ç«¯èƒŒåŒ…é“å…·å‘ç”Ÿæ”¹å˜
             M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
             m2c_bagUpdate.BagInfoUpdate = new List<BagInfo>();
             m2c_bagUpdate.BagInfoUpdate.Add(bagInfo);
@@ -21,26 +21,26 @@ namespace ET.Server
 
         public static void OnGetItem(this Unit self, int getWay, int itemId, int itemNum)
         {
-            self.GetComponent<TaskComponentServer>().OnGetItem_2(itemId);
-            self.GetComponent<TaskComponentServer>().OnGetItemNumber(getWay, itemId, itemNum);
+            self.GetComponent<TaskComponent_S>().OnGetItem_2(itemId);
+            self.GetComponent<TaskComponent_S>().OnGetItemNumber(getWay, itemId, itemNum);
             //self.GetComponent<ShoujiComponentServer>().OnGetItem(itemId);
         }
 
         /// <summary>
-        /// ÈÎÎñÀàĞÍ2Òª¼ì²âÒ»ÏÂµÀ¾ßÊıÁ¿
+        /// ä»»åŠ¡ç±»å‹2è¦æ£€æµ‹ä¸€ä¸‹é“å…·æ•°é‡
         /// </summary>
         /// <param name="self"></param>
         /// <param name="itemId"></param>
         public static void OnCostItem(this Unit self, int itemId)
         {
-            self.GetComponent<TaskComponentServer>().OnGetItem_2(itemId);
+            self.GetComponent<TaskComponent_S>().OnGetItem_2(itemId);
         }
 
         /// <summary>
-        /// ¼ø¶¨·û¸ù¾İÊìÁ·¶ÈËãÆ·ÖÊµÄ·½·¨
+        /// é‰´å®šç¬¦æ ¹æ®ç†Ÿç»ƒåº¦ç®—å“è´¨çš„æ–¹æ³•
         /// </summary>
         /// <param name="bagInf0"></param>
-        /// <param name="getType">1¹ºÂò</param>
+        /// <param name="getType">1è´­ä¹°</param>
         public static void JianDingFuItem(BagInfo bagInf0, int shulianValue, int getType)
         {
             if (ItemHelper.IsBuyItem(getType))
@@ -49,7 +49,7 @@ namespace ET.Server
                 return;
             }
 
-            //ÍòÄÜ¼ø¶¨·û¹Ì¶¨Îª60
+            //ä¸‡èƒ½é‰´å®šç¬¦å›ºå®šä¸º60
             if (bagInf0.ItemID == 11200000)
             {
                 bagInf0.ItemPar = "100";
@@ -88,7 +88,7 @@ namespace ET.Server
             List<DungeonConfig> dungeonConfigs = new List<DungeonConfig>();
             List<DungeonConfig> dungeonConfigsAll = DungeonConfigCategory.Instance.GetAll().Values.ToList();
 
-            int roleLv = unit.GetComponent<UserInfoComponentServer>().GetUserLv();
+            int roleLv = unit.GetComponent<UserInfoComponent_S>().GetUserLv();
 
             for (int i = 0; i < dungeonConfigsAll.Count; i++)
             {
@@ -108,7 +108,7 @@ namespace ET.Server
             int dropId = int.Parse(itemConfig.ItemUsePar);
             List<RewardItem> rewardList = new List<RewardItem>();
 
-            //»ñÈ¡×îÖÕ½±Àø
+            //è·å–æœ€ç»ˆå¥–åŠ±
             if (RandomHelper.RandFloat01() <= 0.7f)
             {
                 DropHelper.DropIDToDropItem_2(dropId, rewardList);
@@ -130,21 +130,21 @@ namespace ET.Server
             }
 
             bagInfo.ItemPar = $"{dungeonid}@{"TaskMove_6"}@{rewardList[0].ItemID + ";" + rewardList[0].ItemNum}";
-            Log.Debug($"Éú³É²Ø±¦Í¼:  {unit.Id} {unit.GetComponent<UserInfoComponentServer>().GetName()} {rewardList[0].ItemID}");
+            Log.Debug($"ç”Ÿæˆè—å®å›¾:  {unit.Id} {unit.GetComponent<UserInfoComponent_S>().GetName()} {rewardList[0].ItemID}");
         }
 
 
-        //»ñÈ¡×°±¸µÄ¼ø¶¨ÊôĞÔ
+        //è·å–è£…å¤‡çš„é‰´å®šå±æ€§
         public static List<HideProList> GetEquipZhuanJingHidePro(int equipID, int itemID, int jianDingPinZhi, Unit unit, bool ifItem)
         {
-            //»ñÈ¡×î´óÖµ
+            //è·å–æœ€å¤§å€¼
             EquipConfig equipCof = EquipConfigCategory.Instance.Get(equipID);
             List<HideProList> hideList = new List<HideProList>();
 
-            //»ñÈ¡µ±Ç°¼ø¶¨ÏµÊı
+            //è·å–å½“å‰é‰´å®šç³»æ•°
             ItemConfig itemCof = ItemConfigCategory.Instance.Get(itemID);
 
-            //¼ø¶¨·ûÆ·ÖÊ´óÓÚ×°±¸µÈ¼¶
+            //é‰´å®šç¬¦å“è´¨å¤§äºè£…å¤‡ç­‰çº§
             /*
             float JianDingPro = 1f;
             if (jianDingPinZhi >= itemCof.UseLv)
@@ -157,10 +157,10 @@ namespace ET.Server
             }
             */
 
-            //²âÊÔ
+            //æµ‹è¯•
             //jianDingPinZhi = 99;
 
-            //×îµÍÏµÊıÊÇ20
+            //æœ€ä½ç³»æ•°æ˜¯20
             int pro = itemCof.UseLv;
             if (pro <= 20)
             {
@@ -172,7 +172,7 @@ namespace ET.Server
                 jianDingPinZhi = jianDingPinZhi + 5;
             }
 
-            //¼ø¶¨·ûºÍµ±Ç°×°±¸µÄµÈ¼¶²î
+            //é‰´å®šç¬¦å’Œå½“å‰è£…å¤‡çš„ç­‰çº§å·®
             float JianDingPro = (float)jianDingPinZhi / (float)pro;
             float addJianDingPro = 0;
 
@@ -220,7 +220,7 @@ namespace ET.Server
             }
             */
 
-            //65¼¶×°±¸Ä¬ÈÏ×îµÍ2ÌõÊôĞÔ
+            //65çº§è£…å¤‡é»˜è®¤æœ€ä½2æ¡å±æ€§
             if (itemCof.UseLv >= 65 && randomNum < 2)
             {
                 randomNum = 2;
@@ -230,7 +230,7 @@ namespace ET.Server
             {
                 if (randomNum >= 2)
                 {
-                    string noticeContent = $"¹§Ï²Íæ¼Ò<color=#B6FF00>{unit.GetComponent<UserInfoComponentServer>().GetName()}</color>Ê¹ÓÃ¼ø¶¨·û¼ø¶¨×°±¸Ê±,Ò»µÀ½ğ¹â×°±¸³öÏÖ<color=#FFA313>{randomNum}Ìõ¼«Æ·ÊôĞÔ</color>";
+                    string noticeContent = $"æ­å–œç©å®¶<color=#B6FF00>{unit.GetComponent<UserInfoComponent_S>().GetName()}</color>ä½¿ç”¨é‰´å®šç¬¦é‰´å®šè£…å¤‡æ—¶,ä¸€é“é‡‘å…‰è£…å¤‡å‡ºç°<color=#FFA313>{randomNum}æ¡æå“å±æ€§</color>";
                     //ServerMessageHelper.SendBroadMessage(unit.DomainZone(), NoticeType.Notice, noticeContent);
                 }
             }
@@ -240,12 +240,12 @@ namespace ET.Server
                 return null;
             }
 
-            //»ñÈ¡Ëæ»úÊôĞÔµÄ×î´óÖµºÍ×îĞ¡Öµ
+            //è·å–éšæœºå±æ€§çš„æœ€å¤§å€¼å’Œæœ€å°å€¼
             JianDingDate jiandingDate = ItemHelper.GetEquipZhuanJingPro(equipID, itemID, jianDingPinZhi, ifItem);
 
             for (int i = 0; i < randomNum; i++)
             {
-                //Ëæ»úÖµ(¸ßÆ·ÖÊ±£µ×ÊôĞÔ)
+                //éšæœºå€¼(é«˜å“è´¨ä¿åº•å±æ€§)
                 /*
                 int minNum = 1;
                 if (JianDingPro > 1f) {
@@ -267,7 +267,7 @@ namespace ET.Server
                 {
                     randomValueInt = equipCof.OneProRandomValue;
                 }
-                //Èç¹ûÆ·ÖÊ·û×ã¹»ºÃ,±£µ×Îª5
+                //å¦‚æœå“è´¨ç¬¦è¶³å¤Ÿå¥½,ä¿åº•ä¸º5
                 if (randomValueInt < 5)
                 {
                     if (JianDingPro >= 1.5f)
@@ -280,13 +280,13 @@ namespace ET.Server
                     }
                 }
 
-                //±£µ×Îª1µã,·ÀÖ¹³öÏÖ0µãÊôĞÔ
+                //ä¿åº•ä¸º1ç‚¹,é˜²æ­¢å‡ºç°0ç‚¹å±æ€§
                 if (randomValueInt < 1)
                 {
                     randomValueInt = 1;
                 }
 
-                //Ëæ»úÊôĞÔÀàĞÍ
+                //éšæœºå±æ€§ç±»å‹
                 int randomIDInt = RandomHelper.RandomNumber(1, 6);
                 //
                 int proID = 105101;

@@ -105,7 +105,7 @@ namespace ET
         {
             MonsterConfig MonsterCof = MonsterConfigCategory.Instance.Get(monsteConfigId);
             //初始化AI组件的一些东西
-            self.ActRange = (float)MonsterCof.ActRange + self.GetParent<Unit>().GetComponent<NumericComponentServer>().GetAsInt(NumericType.Now_MonsterDis);        //5-10  与主角距离小于此值时,向主角发动追击
+            self.ActRange = (float)MonsterCof.ActRange + self.GetParent<Unit>().GetComponent<NumericComponent_S>().GetAsInt(NumericType.Now_MonsterDis);        //5-10  与主角距离小于此值时,向主角发动追击
             self.ChaseRange = (float)MonsterCof.ChaseRange;    //超出会返回到出生点
             self.ActDistance = (float)MonsterCof.ActDistance;  //2    小于转攻击
             self.PatrolRange = (float)MonsterCof.PatrolRange;
@@ -253,7 +253,7 @@ namespace ET
         
         public static bool IsCanZhuiJi(this AIComponent self)
         {
-            StateComponentServer stateComponent = self.GetParent<Unit>().GetComponent<StateComponentServer>();
+            StateComponent_S stateComponent = self.GetParent<Unit>().GetComponent<StateComponent_S>();
             if (ErrorCode.ERR_Success!=stateComponent.CanMove())
             {
                 return false;
@@ -269,7 +269,7 @@ namespace ET
         {
             //0.1的概率概率转移仇恨
             float moveActPro = 0.1f;
-            moveActPro = moveActPro * (1+ attack.GetComponent<NumericComponentServer>().GetAsFloat(NumericType.Now_ChaoFengPro));
+            moveActPro = moveActPro * (1+ attack.GetComponent<NumericComponent_S>().GetAsFloat(NumericType.Now_ChaoFengPro));
             if (moveActPro <= 0 && self.TargetID > 0)
             {
                 return;
@@ -318,7 +318,7 @@ namespace ET
         public static void Begin(this AIComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-            NumericComponentServer numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentServer>();
+            NumericComponent_S numericComponent = self.GetParent<Unit>().GetComponent<NumericComponent_S>();
             if (numericComponent.GetAsInt(NumericType.Now_Dead)!=0)
             {
                 return;

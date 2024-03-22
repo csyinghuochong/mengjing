@@ -13,7 +13,7 @@ namespace  ET.Server
             for (int i = 0; i < friends.Count; i++)
             {
                 long friendId = friends[i];
-                UserInfoComponentServer userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentServer>(root, friendId);
+                UserInfoComponent_S userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponent_S>(root, friendId);
                 if (userInfoComponent == null)
                 {
                     continue;

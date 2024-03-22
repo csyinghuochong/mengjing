@@ -6,8 +6,8 @@ namespace ET.Server
     [MessageHandler(SceneType.Activity)]
     [FriendOf(typeof(ActivityServerComponent))]
     [FriendOf(typeof(DBDayActivityInfo))]
-    [FriendOf(typeof(PetComponentServer))]
-    [FriendOf(typeof(UserInfoComponentServer))]
+    [FriendOf(typeof(PetComponent_S))]
+    [FriendOf(typeof(UserInfoComponent_S))]
     public class C2A_PetMingListHandler: MessageHandler<Scene, C2A_PetMingListRequest, A2C_PetMingListResponse>
     {
         protected override async ETTask Run(Scene scene, C2A_PetMingListRequest request, A2C_PetMingListResponse response)
@@ -30,13 +30,13 @@ namespace ET.Server
                       for (int i = 0; i < minglist.Count; i++)
                       {
                           long enemyId = minglist[i].UnitId;
-                          UserInfoComponentServer userInfoComponentServer = await UnitCacheHelper.GetComponentCache<UserInfoComponentServer>(scene.Root(), enemyId);
-                          if (userInfoComponentServer == null)
+                          UserInfoComponent_S userInfoComponentS = await UnitCacheHelper.GetComponentCache<UserInfoComponent_S>(scene.Root(), enemyId);
+                          if (userInfoComponentS == null)
                           {
                               continue;
                           }
                         
-                          PetComponentServer petComponent = await UnitCacheHelper.GetComponentCache<PetComponentServer>(scene.Root(), enemyId);
+                          PetComponent_S petComponent = await UnitCacheHelper.GetComponentCache<PetComponent_S>(scene.Root(), enemyId);
                           if (petComponent == null)
                           {
                               continue;
@@ -65,7 +65,7 @@ namespace ET.Server
                               MineType = minglist[i].MineType,
                               Postion = minglist[i].Postion,
                               TeamId = teamid,
-                              PlayerName = userInfoComponentServer.UserInfo.Name,
+                              PlayerName = userInfoComponentS.UserInfo.Name,
                               PetConfig = petconfidds,
                               PetIdList = petidlist,
                               UnitId = minglist[i].UnitId,

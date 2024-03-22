@@ -9,7 +9,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_PetHeXinHeChengQuickRequest request, M2C_PetHeXinHeChengQuickResponse response)
         {
-            BagComponentServer bagComponent = unit.GetComponent<BagComponentServer>();
+            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
             List<BagInfo> allPetHeXin = bagComponent.BagItemPetHeXin;
 
             List<long> costList = new List<long>();

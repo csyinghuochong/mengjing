@@ -9,14 +9,14 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_ItemIncreaseTransferRequest request, M2C_ItemIncreaseTransferResponse response)
         {
-            BagInfo bagInfo_1 = unit.GetComponent<BagComponentServer>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID_1);
-            BagInfo bagInfo_2 = unit.GetComponent<BagComponentServer>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID_2);
+            BagInfo bagInfo_1 = unit.GetComponent<BagComponent_S>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID_1);
+            BagInfo bagInfo_2 = unit.GetComponent<BagComponent_S>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID_2);
             if (bagInfo_1 == null || bagInfo_2 == null)
             {
                 return;
             }
 
-            //ÅĞ¶ÏÆ·ÖÊ
+            //åˆ¤æ–­å“è´¨
             ItemConfig itemConfig_0 = ItemConfigCategory.Instance.Get(bagInfo_1.ItemID);
             ItemConfig itemConfig_1 = ItemConfigCategory.Instance.Get(bagInfo_2.ItemID);
 
@@ -32,22 +32,22 @@ namespace ET.Server
                 return;
             }
 
-            //°ó¶¨×°±¸ÎŞ·¨×ªÒÆ(¿Í»§¶ËÒÑ¾­¸ø³ö¶ÔÓ¦ÌáÊ¾)
+            //ç»‘å®šè£…å¤‡æ— æ³•è½¬ç§»(å®¢æˆ·ç«¯å·²ç»ç»™å‡ºå¯¹åº”æç¤º)
             if (bagInfo_1.isBinging == true && bagInfo_2.isBinging == false && itemConfig_1.ItemQuality == 4)
             {
                 bagInfo_2.isBinging = true;
             }
 
-            //×ÏÉ«Æ·ÖÊÒÔÉÏ²Å¿ÉÒÔ×ªÒÆ
+            //ç´«è‰²å“è´¨ä»¥ä¸Šæ‰å¯ä»¥è½¬ç§»
             if (itemConfig_0.ItemQuality < 4 || itemConfig_1.ItemQuality < 4)
             {
                 return;
             }
 
-            //ÏàÍ¬²¿Î»  Ö»ÓĞ»¤¼×ÀàĞÍÏàÍ¬µÄ×°±¸²ÅÄÜ×ªÒÆ
+            //ç›¸åŒéƒ¨ä½  åªæœ‰æŠ¤ç”²ç±»å‹ç›¸åŒçš„è£…å¤‡æ‰èƒ½è½¬ç§»
             if (itemConfig_0.EquipType != 99 && itemConfig_1.EquipType != 99)
             {
-                //ÏàÍ¬²¿Î»
+                //ç›¸åŒéƒ¨ä½
                 if (itemConfig_0.EquipType != itemConfig_1.EquipType)
                 {
                     return;
@@ -56,7 +56,7 @@ namespace ET.Server
 
             if (itemConfig_0.EquipType != 99 && itemConfig_1.EquipType != 99)
             {
-                //ÏàÍ¬²¿Î»  Ö»ÓĞÏàÍ¬²¿Î»µÄ×°±¸²ÅÄÜ×ªÒÆ
+                //ç›¸åŒéƒ¨ä½  åªæœ‰ç›¸åŒéƒ¨ä½çš„è£…å¤‡æ‰èƒ½è½¬ç§»
                 if (itemConfig_0.ItemSubType != itemConfig_1.ItemSubType)
                 {
                     return;
@@ -64,7 +64,7 @@ namespace ET.Server
             }
 
             string costItem = GlobalValueConfigCategory.Instance.Get(51).Value;
-            if (!unit.GetComponent<BagComponentServer   >().OnCostItemData(costItem))
+            if (!unit.GetComponent<BagComponent_S   >().OnCostItemData(costItem))
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
                 return;
@@ -72,7 +72,7 @@ namespace ET.Server
 
             List<HideProList> canTransfHideProLists = new List<HideProList>();
             List<int> canTransfSkillLists = new List<int>();
-            // ´ÓÎïÆ·A»ñÈ¡ÄÜ´«³ĞµÄÊôĞÔ£¬²¢ÒÆ³ö
+            // ä»ç‰©å“Aè·å–èƒ½ä¼ æ‰¿çš„å±æ€§ï¼Œå¹¶ç§»å‡º
             for (int i = bagInfo_1.IncreaseProLists.Count - 1; i >= 0; i--)
             {
                 HideProListConfig hideProListConfig = HideProListConfigCategory.Instance.Get(bagInfo_1.IncreaseProLists[i].HideID);
@@ -82,7 +82,7 @@ namespace ET.Server
                     bagInfo_1.IncreaseProLists.RemoveAt(i);
                 }
             }
-            // ´ÓÎïÆ·A»ñÈ¡ÄÜ´«³ĞµÄ¼¼ÄÜ£¬²¢ÒÆ³ö
+            // ä»ç‰©å“Aè·å–èƒ½ä¼ æ‰¿çš„æŠ€èƒ½ï¼Œå¹¶ç§»å‡º
             for (int i = bagInfo_1.IncreaseSkillLists.Count - 1; i >= 0; i--)
             {
                 HideProListConfig hideProListConfig = HideProListConfigCategory.Instance.Get(bagInfo_1.IncreaseSkillLists[i]);
@@ -93,10 +93,10 @@ namespace ET.Server
                 }
             }
 
-            // ÅĞ¶ÏÊÇ·ñĞèÒª×ªÒÆ
+            // åˆ¤æ–­æ˜¯å¦éœ€è¦è½¬ç§»
             if (canTransfHideProLists.Count > 0 || canTransfSkillLists.Count > 0)
             {
-                // ´ÓÎïÆ·BÖĞÒÆ³ıÓµÓĞµÄ´«³ĞÊôĞÔ£¬²¢¼ÓÈëĞÂµÄ´«³ĞÊôĞÔ
+                // ä»ç‰©å“Bä¸­ç§»é™¤æ‹¥æœ‰çš„ä¼ æ‰¿å±æ€§ï¼Œå¹¶åŠ å…¥æ–°çš„ä¼ æ‰¿å±æ€§
                 for (int i = bagInfo_2.IncreaseProLists.Count - 1; i >= 0; i--)
                 {
                     HideProListConfig hideProListConfig = HideProListConfigCategory.Instance.Get(bagInfo_2.IncreaseProLists[i].HideID);
@@ -107,7 +107,7 @@ namespace ET.Server
                 }
                 bagInfo_2.IncreaseProLists.AddRange(canTransfHideProLists);
 
-                // ´ÓÎïÆ·BÖĞÒÆ³ıÓµÓĞµÄ´«³Ğ¼¼ÄÜ£¬²¢¼ÓÈëĞÂµÄ´«³Ğ¼¼ÄÜ
+                // ä»ç‰©å“Bä¸­ç§»é™¤æ‹¥æœ‰çš„ä¼ æ‰¿æŠ€èƒ½ï¼Œå¹¶åŠ å…¥æ–°çš„ä¼ æ‰¿æŠ€èƒ½
                 for (int i = bagInfo_2.IncreaseSkillLists.Count - 1; i >= 0; i--)
                 {
                     HideProListConfig hideProListConfig = HideProListConfigCategory.Instance.Get(bagInfo_2.IncreaseSkillLists[i]);
@@ -121,11 +121,11 @@ namespace ET.Server
 
             bagInfo_1.isBinging = true;
             bagInfo_2.isBinging = true;
-            unit.GetComponent<TaskComponentServer>().TriggerTaskEvent(TaskTargetType.IncreaseNumber_46, 0, 1);
-            unit.GetComponent<TaskComponentServer>().TriggerTaskCountryEvent(TaskTargetType.IncreaseNumber_46, 0, 1);
+            unit.GetComponent<TaskComponent_S>().TriggerTaskEvent(TaskTargetType.IncreaseNumber_46, 0, 1);
+            unit.GetComponent<TaskComponent_S>().TriggerTaskCountryEvent(TaskTargetType.IncreaseNumber_46, 0, 1);
 
             M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
-            //Í¨Öª¿Í»§¶Ë±³°üµÀ¾ß·¢Éú¸Ä±ä
+            //é€šçŸ¥å®¢æˆ·ç«¯èƒŒåŒ…é“å…·å‘ç”Ÿæ”¹å˜
             m2c_bagUpdate.BagInfoUpdate = new List<BagInfo>();
             m2c_bagUpdate.BagInfoUpdate.Add(bagInfo_1);
             m2c_bagUpdate.BagInfoUpdate.Add(bagInfo_2);

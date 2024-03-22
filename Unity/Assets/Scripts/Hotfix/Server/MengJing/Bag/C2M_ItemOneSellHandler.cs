@@ -13,15 +13,15 @@ namespace ET.Server
 
             for (int i = 0; i < request.BagInfoIds.Count; i++)
             {
-                BagInfo useBagInfo = unit.GetComponent<BagComponentServer>().GetItemByLoc((ItemLocType)request.OperateType, request.BagInfoIds[i]);
+                BagInfo useBagInfo = unit.GetComponent<BagComponent_S>().GetItemByLoc((ItemLocType)request.OperateType, request.BagInfoIds[i]);
                 if (useBagInfo == null)
                 {
                     continue;
                 }
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(useBagInfo.ItemID);
 
-                //Ä¬ÈÏ³öÊÛÈ«²¿
-                //¸øÓë¶ÔÓ¦½ğ±Ò»ò»õ±Ò½±Àø
+                //é»˜è®¤å‡ºå”®å…¨éƒ¨
+                //ç»™ä¸å¯¹åº”é‡‘å¸æˆ–è´§å¸å¥–åŠ±
                 string[] gemids = useBagInfo.GemIDNew.Split('_');
                 List<int> gemIdList = new List<int>();
                 for (int gem = 0; gem < gemids.Length; gem++)
@@ -32,18 +32,18 @@ namespace ET.Server
                     }
                     gemIdList.Add(int.Parse(gemids[gem]));
                     ItemConfig itemConf = ItemConfigCategory.Instance.Get(int.Parse(gemids[gem]));
-                    unit.GetComponent<UserInfoComponentServer>().UpdateRoleData((int)itemConf.SellMoneyType, (itemConf.SellMoneyValue).ToString());
+                    unit.GetComponent<UserInfoComponent_S>().UpdateRoleData((int)itemConf.SellMoneyType, (itemConf.SellMoneyValue).ToString());
                 }
 
-                //Õä±¦ÊôĞÔ¼Û¸ñÌáÉı
+                //çå®å±æ€§ä»·æ ¼æå‡
                 int sellValue = itemConfig.SellMoneyValue;
                 if (useBagInfo.HideSkillLists.Contains(68000102))
                 {
                     sellValue = itemConfig.SellMoneyValue * 20;
                 }
 
-                unit.GetComponent<UserInfoComponentServer>().UpdateRoleMoneyAdd((int)itemConfig.SellMoneyType, (useBagInfo.ItemNum * sellValue).ToString(), true, 39);
-                unit.GetComponent<BagComponentServer    >().OnCostItemData(useBagInfo, (ItemLocType)request.OperateType, useBagInfo.ItemNum);
+                unit.GetComponent<UserInfoComponent_S>().UpdateRoleMoneyAdd((int)itemConfig.SellMoneyType, (useBagInfo.ItemNum * sellValue).ToString(), true, 39);
+                unit.GetComponent<BagComponent_S    >().OnCostItemData(useBagInfo, (ItemLocType)request.OperateType, useBagInfo.ItemNum);
 
                 if (useBagInfo.ItemNum == 0)
                 {

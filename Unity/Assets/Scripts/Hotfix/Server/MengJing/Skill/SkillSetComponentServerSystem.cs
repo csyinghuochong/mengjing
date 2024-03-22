@@ -4,12 +4,12 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 
-    [EntitySystemOf(typeof(SkillSetComponentServer))]
-    [FriendOf(typeof(SkillSetComponentServer))]
+    [EntitySystemOf(typeof(SkillSetComponent_S))]
+    [FriendOf(typeof(SkillSetComponent_S))]
     public static partial class SkillSetComponentServerSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.SkillSetComponentServer self)
+        private static void Awake(this ET.Server.SkillSetComponent_S self)
         {
             self.TianFuPlan = 0;
             self.TianFuList.Clear();
@@ -18,7 +18,7 @@ namespace ET.Server
             //���ݲ�ͬ��ְҵ��ʼ������
             if (self.SkillList.Count == 0)
             {
-                int[] SkillList = OccupationConfigCategory.Instance.Get(self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().GetOcc()).InitSkillID;
+                int[] SkillList = OccupationConfigCategory.Instance.Get(self.GetParent<Unit>().GetComponent<UserInfoComponent_S>().GetOcc()).InitSkillID;
                 for (int i = 0; i < SkillList.Length; i++)
                 {
                     if (i == 0)
@@ -37,7 +37,7 @@ namespace ET.Server
                 self.SkillList.Add(new SkillPro() { SkillID = int.Parse(needList[1].Split(';')[0]), SkillPosition = 10, SkillSetType = (int)SkillSetEnum.Item });
             }
 
-            int robotId = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().GetRobotId();
+            int robotId = self.GetParent<Unit>().GetComponent<UserInfoComponent_S>().GetRobotId();
             if (robotId != 0)
             {
                 RobotConfig robotConfig = RobotConfigCategory.Instance.Get(robotId);
@@ -45,22 +45,22 @@ namespace ET.Server
             }
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.SkillSetComponentServer self)
+        private static void Destroy(this ET.Server.SkillSetComponent_S self)
         {
 
         }
         [EntitySystem]
-        private static void Deserialize(this ET.Server.SkillSetComponentServer self)
+        private static void Deserialize(this ET.Server.SkillSetComponent_S self)
         {
 
         }
 
 
-        public static bool IfJuexXingSkill(this SkillSetComponentServer self)
+        public static bool IfJuexXingSkill(this SkillSetComponent_S self)
         {
             int juexingid = 0;
             Unit unit = self.GetParent<Unit>();
-            int occtwo = unit.GetComponent<UserInfoComponentServer>().GetOccTwo();
+            int occtwo = unit.GetComponent<UserInfoComponent_S>().GetOccTwo();
             if (occtwo == 0)
             {
                 return false;
@@ -71,12 +71,12 @@ namespace ET.Server
             return self.GetBySkillID(juexingid) != null;
         }
 
-        public static List<int> TianFuList(this SkillSetComponentServer self)
+        public static List<int> TianFuList(this SkillSetComponent_S self)
         {
             return self.TianFuPlan == 0 ? self.TianFuList : self.TianFuList1;
         }
 
-        public static List<int> TianFuListAll(this SkillSetComponentServer self)
+        public static List<int> TianFuListAll(this SkillSetComponent_S self)
         {
             List<int> list = new List<int>();
 
@@ -90,7 +90,7 @@ namespace ET.Server
             return list;
         }
 
-        public static int HaveSameTianFu(this SkillSetComponentServer self, int tianfuId)
+        public static int HaveSameTianFu(this SkillSetComponent_S self, int tianfuId)
         {
             int tifuId = 0;
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(tianfuId);
@@ -109,7 +109,7 @@ namespace ET.Server
             return tifuId;
         }
 
-        public static void TianFuRemove(this SkillSetComponentServer self, int tianFuid)
+        public static void TianFuRemove(this SkillSetComponent_S self, int tianFuid)
         {
             List<int> tianfuIds = self.TianFuList;
             if (tianFuid > 0 && tianfuIds.Contains(tianFuid))
@@ -125,7 +125,7 @@ namespace ET.Server
             }
         }
 
-        public static void TianFuAdd(this SkillSetComponentServer self, int tianFuid)
+        public static void TianFuAdd(this SkillSetComponent_S self, int tianFuid)
         {
             if (tianFuid > 0 && !self.TianFuList().Contains(tianFuid))
             {
@@ -134,7 +134,7 @@ namespace ET.Server
             }
         }
 
-        public static void AddiontTianFu(this SkillSetComponentServer self, int tianFuid, bool active)
+        public static void AddiontTianFu(this SkillSetComponent_S self, int tianFuid, bool active)
         {
             if (self.TianFuAddition.Contains(tianFuid) && !active)
             {
@@ -149,7 +149,7 @@ namespace ET.Server
         }
 
 
-        public static void UpdateTianFuPlan(this SkillSetComponentServer self, int plan)
+        public static void UpdateTianFuPlan(this SkillSetComponent_S self, int plan)
         {
             self.TianFuPlan = plan;
 
@@ -173,7 +173,7 @@ namespace ET.Server
         /// </summary>
         /// <param name="self"></param>
         /// <param name="tianfuId"></param>
-        public static void AddTianFuAttribute(this SkillSetComponentServer self, int tianfuId, bool add)
+        public static void AddTianFuAttribute(this SkillSetComponent_S self, int tianfuId, bool add)
         {
             if (tianfuId == 0)
             {
@@ -208,7 +208,7 @@ namespace ET.Server
             }
         }
 
-        public static void OnSkillIdAdd(this SkillSetComponentServer self, string[] properInfo, bool add)
+        public static void OnSkillIdAdd(this SkillSetComponent_S self, string[] properInfo, bool add)
         {
             int skillId = int.Parse(properInfo[1]);
 
@@ -230,7 +230,7 @@ namespace ET.Server
             }
         }
 
-        public static void OnRolePropertyAdd(this SkillSetComponentServer self, string[] properInfo, int rate)
+        public static void OnRolePropertyAdd(this SkillSetComponent_S self, string[] properInfo, int rate)
         {
             int numericKey = int.Parse(properInfo[1]);
             int valueType = NumericHelp.GetNumericValueType(numericKey);
@@ -244,7 +244,7 @@ namespace ET.Server
             }
         }
 
-        public static List<PropertyValue> GetTianfuRoleProLists(this SkillSetComponentServer self)
+        public static List<PropertyValue> GetTianfuRoleProLists(this SkillSetComponent_S self)
         {
             List<PropertyValue> proList = new List<PropertyValue>();
             List<int> tianfuids = self.TianFuListAll();
@@ -278,7 +278,7 @@ namespace ET.Server
             return proList;
         }
 
-        public static List<PropertyValue> GetSkillRoleProLists(this SkillSetComponentServer self)
+        public static List<PropertyValue> GetSkillRoleProLists(this SkillSetComponent_S self)
         {
             List<PropertyValue> proList = new List<PropertyValue>();
             for (int i = 0; i < self.SkillList.Count; i++)
@@ -335,7 +335,7 @@ namespace ET.Server
         }
 
         //��GetSkillRoleProLists����һ�� ��Ҫ�ǻ�ȡ����Ϊ8�ı�������,8�ı������ܲ���ս����
-        public static List<PropertyValue> GetSkillRoleProLists_8(this SkillSetComponentServer self)
+        public static List<PropertyValue> GetSkillRoleProLists_8(this SkillSetComponent_S self)
         {
             List<PropertyValue> proList = new List<PropertyValue>();
             for (int i = 0; i < self.SkillList.Count; i++)
@@ -387,7 +387,7 @@ namespace ET.Server
             return proList;
         }
 
-        public static List<int> GetTianFuIdsByType(this SkillSetComponentServer self, string proType)
+        public static List<int> GetTianFuIdsByType(this SkillSetComponent_S self, string proType)
         {
             List<int> typeTianfus = new List<int>();
             List<int> tianfuIds = self.TianFuListAll();
@@ -411,7 +411,7 @@ namespace ET.Server
             return typeTianfus;
         }
 
-        public static Dictionary<int, float> GetSkillPropertyAdd(this SkillSetComponentServer self, int skillId)
+        public static Dictionary<int, float> GetSkillPropertyAdd(this SkillSetComponent_S self, int skillId)
         {
             List<int> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.SkillPropertyAdd);
             if (tianfuids.Count == 0)
@@ -447,7 +447,7 @@ namespace ET.Server
             return HideProList;
         }
 
-        public static bool IsSkillSingingCancel(this SkillSetComponentServer self, int skillId)
+        public static bool IsSkillSingingCancel(this SkillSetComponent_S self, int skillId)
         {
             List<int> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.SkillSingingCancel);
             if (tianfuids.Count == 0)
@@ -469,7 +469,7 @@ namespace ET.Server
             return false;
         }
 
-        public static List<int> GetBuffIdAdd(this SkillSetComponentServer self, int skillId)
+        public static List<int> GetBuffIdAdd(this SkillSetComponent_S self, int skillId)
         {
             List<int> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffIdAdd);
             if (tianfuids.Count == 0)
@@ -496,7 +496,7 @@ namespace ET.Server
             return addBuffs;
         }
 
-        public static List<int> GetBuffInitIdAdd(this SkillSetComponentServer self, int skillId)
+        public static List<int> GetBuffInitIdAdd(this SkillSetComponent_S self, int skillId)
         {
             List<int> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffInitIdAdd);
             if (tianfuids.Count == 0)
@@ -523,7 +523,7 @@ namespace ET.Server
             return addBuffs;
         }
 
-        public static int GetReplaceSkillId(this SkillSetComponentServer self, int skillId)
+        public static int GetReplaceSkillId(this SkillSetComponent_S self, int skillId)
         {
             List<int> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.ReplaceSkillId);
             if (tianfuids.Count == 0)
@@ -548,7 +548,7 @@ namespace ET.Server
             return 0;
         }
 
-        public static Dictionary<int, float> GetBuffPropertyAdd(this SkillSetComponentServer self, int buffId)
+        public static Dictionary<int, float> GetBuffPropertyAdd(this SkillSetComponent_S self, int buffId)
         {
             List<int> tianfuids = self.GetTianFuIdsByType(TianFuProEnum.BuffPropertyAdd);
             if (tianfuids.Count == 0)
@@ -592,14 +592,14 @@ namespace ET.Server
         }
 
         //ת��ְҵ
-        public static void OnChangeOccTwoRequest(this SkillSetComponentServer self, int occTwo)
+        public static void OnChangeOccTwoRequest(this SkillSetComponent_S self, int occTwo)
         {
             if (occTwo == 0)
             {
                 return;
             }
             Unit unit = self.GetParent<Unit>();
-            occTwo = unit.GetComponent<UserInfoComponentServer>().GetOccTwo();
+            occTwo = unit.GetComponent<UserInfoComponent_S>().GetOccTwo();
             if (occTwo != 0)
             {
                 //useInfo.OccTwo = occTwo;
@@ -619,7 +619,7 @@ namespace ET.Server
                 self.SkillList.Add(skillPro);
             }
 
-            if (!unit.GetComponent<UserInfoComponentServer>().IsRobot())
+            if (!unit.GetComponent<UserInfoComponent_S>().IsRobot())
             {
                 self.UpdateSkillSet();
                 Function_Fight.UnitUpdateProperty_Base(unit, true, true);
@@ -632,11 +632,11 @@ namespace ET.Server
         /// </summary>
         /// <param name="self"></param>
         /// <returns></returns>
-        public static List<int> GetJueSkillIds(this SkillSetComponentServer self)
+        public static List<int> GetJueSkillIds(this SkillSetComponent_S self)
         {
             List<int> ids = new List<int>();
 
-            int occtweo = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().GetOccTwo();
+            int occtweo = self.GetParent<Unit>().GetComponent<UserInfoComponent_S>().GetOccTwo();
             if (occtweo == 0)
             {
                 return ids;
@@ -656,7 +656,7 @@ namespace ET.Server
             return ids;
         }
 
-        public static void OnAddItemSkill(this SkillSetComponentServer self, List<int> itemSkills)
+        public static void OnAddItemSkill(this SkillSetComponent_S self, List<int> itemSkills)
         {
             Unit unit = self.GetParent<Unit>();
             for (int i = 0; i < itemSkills.Count; i++)
@@ -696,7 +696,7 @@ namespace ET.Server
             self.UpdateSkillSet();
         }
 
-        public static void CheckSkillTianFu(this SkillSetComponentServer self, int skillId, bool active)
+        public static void CheckSkillTianFu(this SkillSetComponent_S self, int skillId, bool active)
         {
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
 
@@ -708,11 +708,11 @@ namespace ET.Server
             self.AddiontTianFu(tianfuid, active);
         }
 
-        public static void OnRmItemSkill(this SkillSetComponentServer self, List<int> itemSkills, long baginfoid)
+        public static void OnRmItemSkill(this SkillSetComponent_S self, List<int> itemSkills, long baginfoid)
         {
 
             Unit unit = self.GetParent<Unit>();
-            BagComponentServer bagComponent = unit.GetComponent<BagComponentServer>();
+            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
             SkillPassiveComponent skillPassiveComponent = unit.GetComponent<SkillPassiveComponent>();
             for (int i = 0; i < itemSkills.Count; i++)
             {
@@ -757,7 +757,7 @@ namespace ET.Server
         }
 
 
-        public static void OnActiveTianfu(this SkillSetComponentServer self, C2M_TianFuActiveRequest request)
+        public static void OnActiveTianfu(this SkillSetComponent_S self, C2M_TianFuActiveRequest request)
         {
             int tianfuId = request.TianFuId;
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(tianfuId);
@@ -792,12 +792,12 @@ namespace ET.Server
         /// </summary>
         /// <param name="self"></param>
         /// <param name="skillid"></param>
-        public static void OnJueXing(this SkillSetComponentServer self, int skillid)
+        public static void OnJueXing(this SkillSetComponent_S self, int skillid)
         {
             self.OnAddItemSkill(new List<int>() { skillid });
         }
 
-        public static void OnLogin(this SkillSetComponentServer self, int occ)
+        public static void OnLogin(this SkillSetComponent_S self, int occ)
         {
             for (int k = self.SkillList.Count - 1; k >= 0; k--)
             {
@@ -852,7 +852,7 @@ namespace ET.Server
 
         }
 
-        public static void OnChangeEquipIndex(this SkillSetComponentServer self, int equipIndex)
+        public static void OnChangeEquipIndex(this SkillSetComponent_S self, int equipIndex)
         {
             self.OnRmItemSkill(ConfigHelper.HunterFarSkill(), 0);
             self.OnRmItemSkill(ConfigHelper.HunterNearSkill(), 0);
@@ -864,7 +864,7 @@ namespace ET.Server
         /// </summary>
         /// <param name="self"></param>
         /// <param name="bagInfo"></param>
-        public static void OnTakeOffEquip(this SkillSetComponentServer self, ItemLocType ItemLocBag, BagInfo bagInfo, long baginfoid = 0)
+        public static void OnTakeOffEquip(this SkillSetComponent_S self, ItemLocType ItemLocBag, BagInfo bagInfo, long baginfoid = 0)
         {
             if (ItemLocBag != ItemLocType.ItemLocEquip
                 && ItemLocBag != ItemLocType.ItemLocEquip_2
@@ -889,7 +889,7 @@ namespace ET.Server
         /// </summary>
         /// <param name="self"></param>
         /// <param name="bagInfo"></param>
-        public static void OnWearEquip(this SkillSetComponentServer self, BagInfo bagInfo)
+        public static void OnWearEquip(this SkillSetComponent_S self, BagInfo bagInfo)
         {
             if (bagInfo.Loc != (int)ItemLocType.ItemLocEquip
                 && bagInfo.Loc != (int)ItemLocType.ItemLocEquip_2
@@ -909,7 +909,7 @@ namespace ET.Server
             self.TianFuAdd(equipConfig.TianFuId);
         }
 
-        public static int SetSkillIdByPosition(this SkillSetComponentServer self, C2M_SkillSet request)
+        public static int SetSkillIdByPosition(this SkillSetComponent_S self, C2M_SkillSet request)
         {
             SkillPro newSkill = null;
             if (request.SkillType == 1) //����
@@ -956,7 +956,7 @@ namespace ET.Server
             return ErrorCode.ERR_Success;
         }
 
-        public static SkillPro GetBySkillID(this SkillSetComponentServer self, int skillid)
+        public static SkillPro GetBySkillID(this SkillSetComponent_S self, int skillid)
         {
             for (int i = self.SkillList.Count - 1; i >= 0; i--)
             {
@@ -968,7 +968,7 @@ namespace ET.Server
             return null;
         }
 
-        public static SkillPro GetByPosition(this SkillSetComponentServer self, int pos)
+        public static SkillPro GetByPosition(this SkillSetComponent_S self, int pos)
         {
             for (int i = self.SkillList.Count - 1; i >= 0; i--)
             {
@@ -986,7 +986,7 @@ namespace ET.Server
         /// <param name="self"></param>
         /// <param name="skillSourceEnum"></param>
         /// <param name="skillId"></param>
-        public static void OnAddSkillBook(this SkillSetComponentServer self, int skillSourceEnum, int skillId)
+        public static void OnAddSkillBook(this SkillSetComponent_S self, int skillSourceEnum, int skillId)
         {
             if (self.GetBySkillID(skillId) != null)
             {
@@ -1006,11 +1006,11 @@ namespace ET.Server
         /// ���õڶ�ְҵ
         /// </summary>
         /// <param name="self"></param>
-        public static int OnOccReset(this SkillSetComponentServer self)
+        public static int OnOccReset(this SkillSetComponent_S self)
         {
             int sp = 0;
             List<int> skilllist = new List<int>();
-            UserInfoComponentServer userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>();
+            UserInfoComponent_S userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponent_S>();
             if (userInfoComponent.GetOccTwo() != 0)
             {
                 int[] twoskill = OccupationTwoConfigCategory.Instance.Get(userInfoComponent.GetOccTwo()).SkillID;
@@ -1060,7 +1060,7 @@ namespace ET.Server
             return sp;
         }
 
-        public static List<PropertyValue> GetShieldProLists(this SkillSetComponentServer self)
+        public static List<PropertyValue> GetShieldProLists(this SkillSetComponent_S self)
         {
             List<PropertyValue> proList = new List<PropertyValue>();
             for (int i = 0; i < self.LifeShieldList.Count; i++)
@@ -1117,12 +1117,12 @@ namespace ET.Server
             return proList;
         }
 
-        public static List<LifeShieldInfo> GetLifeShieldList(this SkillSetComponentServer self)
+        public static List<LifeShieldInfo> GetLifeShieldList(this SkillSetComponent_S self)
         {
             return self.LifeShieldList;
         }
 
-        public static void OnShieldAddExp(this SkillSetComponentServer self, int shieldType, int addExp)
+        public static void OnShieldAddExp(this SkillSetComponent_S self, int shieldType, int addExp)
         {
             LifeShieldInfo keyValuePair = null;
             for (int i = 0; i < self.LifeShieldList.Count; i++)
@@ -1168,7 +1168,7 @@ namespace ET.Server
         /// </summary>
         /// <param name="self"></param>
         /// <returns></returns>
-        public static int GetOtherMinLevel(this SkillSetComponentServer self)
+        public static int GetOtherMinLevel(this SkillSetComponent_S self)
         {
             int minLevel = 0;
             for (int i = 0; i < self.LifeShieldList.Count; i++)
@@ -1185,7 +1185,7 @@ namespace ET.Server
             return minLevel;
         }
 
-        public static int GetLifeShieldLevel(this SkillSetComponentServer self, int sType)
+        public static int GetLifeShieldLevel(this SkillSetComponent_S self, int sType)
         {
             for (int i = 0; i < self.LifeShieldList.Count; i++)
             {
@@ -1201,10 +1201,10 @@ namespace ET.Server
         /// ���ü��ܵ�
         /// </summary>
         /// <param name="self"></param>
-        public static void OnSkillReset(this SkillSetComponentServer self)
+        public static void OnSkillReset(this SkillSetComponent_S self)
         {
             List<int> skilllist = new List<int>();
-            UserInfoComponentServer userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>();
+            UserInfoComponent_S userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponent_S>();
             int[] initskill = OccupationConfigCategory.Instance.Get(userInfoComponent.GetOcc()).InitSkillID;
             int[] baseSkill = OccupationConfigCategory.Instance.Get(userInfoComponent.GetOcc()).BaseSkill;
             skilllist.AddRange(initskill);
@@ -1250,7 +1250,7 @@ namespace ET.Server
             self.UpdateSkillSet();
         }
 
-        public static void UpdateSkillSet(this SkillSetComponentServer self)
+        public static void UpdateSkillSet(this SkillSetComponent_S self)
         {
             Unit unit = self.GetParent<Unit>();
             SkillSetInfo SkillSetInfo = self.M2C_SkillSetMessage.SkillSetInfo;
@@ -1263,7 +1263,7 @@ namespace ET.Server
         }
 
 
-        public static List<SkillPro> GetSkillList(this SkillSetComponentServer self)
+        public static List<SkillPro> GetSkillList(this SkillSetComponent_S self)
         {
             return self.SkillList;
         }

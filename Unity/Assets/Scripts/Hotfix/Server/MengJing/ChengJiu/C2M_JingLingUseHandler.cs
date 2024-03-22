@@ -5,12 +5,12 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof(ChengJiuComponentServer))]
+    [FriendOf(typeof(ChengJiuComponent_S))]
     public class C2M_JingLingUseHandler : MessageLocationHandler<Unit, C2M_JingLingUseRequest, M2C_JingLingUseResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_JingLingUseRequest request, M2C_JingLingUseResponse response)
         {
-            ChengJiuComponentServer chengJiuComponent = unit.GetComponent<ChengJiuComponentServer>();
+            ChengJiuComponent_S chengJiuComponent = unit.GetComponent<ChengJiuComponent_S>();
             if (unit.GetParent<UnitComponent>().Get(chengJiuComponent.JingLingUnitId) != null)
             {
                 unit.GetParent<UnitComponent>().Remove(chengJiuComponent.JingLingUnitId);
@@ -21,7 +21,7 @@ namespace ET.Server
                 if (jingLingConfig.FunctionType == JingLingFunctionType.AddSkill)
                 {
                     int skillid = int.Parse(jingLingConfig.FunctionValue);
-                    BuffComponentServer buffManagerComponent = unit.GetComponent<BuffComponentServer>();
+                    BuffComponent_S buffManagerComponent = unit.GetComponent<BuffComponent_S>();
                     //buffManagerComponent.BuffRemoveBySkillid(skillid);
                 }
             }

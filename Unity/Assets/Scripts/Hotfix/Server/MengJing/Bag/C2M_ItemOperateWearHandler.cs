@@ -6,13 +6,13 @@ namespace ET.Server
 {
 
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof (UserInfoComponentServer))]
-    [FriendOf(typeof (BagComponentServer))]
+    [FriendOf(typeof (UserInfoComponent_S))]
+    [FriendOf(typeof (BagComponent_S))]
     public class C2M_ItemOperateWearHandler: MessageLocationHandler<Unit, C2M_ItemOperateWearRequest, M2C_ItemOperateWearResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_ItemOperateWearRequest request, M2C_ItemOperateWearResponse response)
         {
-            UserInfoComponentServer userInfoComponent = unit.GetComponent<UserInfoComponentServer>();
+            UserInfoComponent_S userInfoComponent = unit.GetComponent<UserInfoComponent_S>();
             UserInfo useInfo = userInfoComponent.UserInfo;
             long bagInfoID = request.OperateBagID;
 
@@ -20,23 +20,23 @@ namespace ET.Server
             {
 
                 ItemLocType locType = ItemLocType.ItemLocBag;
-                BagInfo useBagInfo = unit.GetComponent<BagComponentServer>().GetItemByLoc(locType, bagInfoID);
+                BagInfo useBagInfo = unit.GetComponent<BagComponent_S>().GetItemByLoc(locType, bagInfoID);
                 if (useBagInfo == null)
                 {
                     return;
                 }
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(useBagInfo.ItemID);
 
-                //ÅĞ¶ÏµÈ¼¶
+                //åˆ¤æ–­ç­‰çº§
                 int roleLv = useInfo.Lv;
                 int equipLv = itemConfig.UseLv;
-                //¼òÒ×
+                //ç®€æ˜“
                 if (useBagInfo.HideSkillLists.Contains(68000103))
                 {
                     equipLv = equipLv - 5;
                 }
 
-                //ÎŞ¼¶±ğ
+                //æ— çº§åˆ«
                 if (useBagInfo.HideSkillLists.Contains(68000106))
                 {
                     equipLv = 1;
@@ -48,16 +48,16 @@ namespace ET.Server
                     return;
                 }
 
-                //¶ÔÓ¦²¿Î»ÊÇ·ñ·ûºÏ
+                //å¯¹åº”éƒ¨ä½æ˜¯å¦ç¬¦åˆ
                 if (itemConfig.ItemType == 3 && itemConfig.EquipType != 0)
                 {
-                    //²é¿´×ÔÉíÊÇ·ñÊÇ¶ş×ª
+                    //æŸ¥çœ‹è‡ªèº«æ˜¯å¦æ˜¯äºŒè½¬
                     if (useInfo.OccTwo > 0)
                     {
                         OccupationTwoConfig occtwoCof = OccupationTwoConfigCategory.Instance.Get(useInfo.OccTwo);
                         if (occtwoCof.ArmorMastery == itemConfig.EquipType || itemConfig.EquipType == 99 || itemConfig.EquipType == 101)
                         {
-                            //¿ÉÒÔ´©´÷
+                            //å¯ä»¥ç©¿æˆ´
                         }
                         else
                         {
@@ -76,10 +76,10 @@ namespace ET.Server
                                 ifWear = true;
                             }
 
-                            //Åå´÷²¿Î»²»·û
+                            //ä½©æˆ´éƒ¨ä½ä¸ç¬¦
                             if (ifWear == false)
                             {
-                                response.Error = ErrorCode.ERR_EquipType;     //´íÎóÂë:´©´÷ÀàĞÍ²»·û
+                                response.Error = ErrorCode.ERR_EquipType;     //é”™è¯¯ç :ç©¿æˆ´ç±»å‹ä¸ç¬¦
                                 return;
                             }
                         }
@@ -89,12 +89,12 @@ namespace ET.Server
                 int weizhi = itemConfig.ItemSubType;
                 if (weizhi != (int)ItemSubTypeEnum.Wuqi)
                 {
-                    response.Error = ErrorCode.ERR_EquipType;     //´íÎóÂë:´©´÷ÀàĞÍ²»·û
+                    response.Error = ErrorCode.ERR_EquipType;     //é”™è¯¯ç :ç©¿æˆ´ç±»å‹ä¸ç¬¦
                     return;
                 }
 
-                ///Ä¬ÈÏ 0¹­¼ı   1½£
-                int equipIndex = unit.GetComponent<NumericComponentServer>().GetAsInt(NumericType.EquipIndex);
+                ///é»˜è®¤ 0å¼“ç®­   1å‰‘
+                int equipIndex = unit.GetComponent<NumericComponent_S>().GetAsInt(NumericType.EquipIndex);
                 int equipType = itemConfig.EquipType;
                 int findIndex = -1;
                 if (equipType == (int)ItemEquipType.Bow)
@@ -107,34 +107,34 @@ namespace ET.Server
                 }
                 if (findIndex == -1)
                 {
-                    response.Error = ErrorCode.ERR_EquipType;     //´íÎóÂë:´©´÷ÀàĞÍ²»·û
+                    response.Error = ErrorCode.ERR_EquipType;     //é”™è¯¯ç :ç©¿æˆ´ç±»å‹ä¸ç¬¦
                     return;
                 }
 
-                //Í¨Öª¿Í»§¶Ë±³°üË¢ĞÂ
+                //é€šçŸ¥å®¢æˆ·ç«¯èƒŒåŒ…åˆ·æ–°
                 M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
 
-                //»ñÈ¡Ö®Ç°µÄÎ»ÖÃÊÇ·ñÓĞ×°±¸
+                //è·å–ä¹‹å‰çš„ä½ç½®æ˜¯å¦æœ‰è£…å¤‡
                 ItemLocType toLocType = findIndex == 0 ? ItemLocType.ItemLocEquip : ItemLocType.ItemLocEquip_2;
-                BagInfo beforeequip = unit.GetComponent<BagComponentServer>().GetEquipBySubType(toLocType, weizhi);
+                BagInfo beforeequip = unit.GetComponent<BagComponent_S>().GetEquipBySubType(toLocType, weizhi);
 
                 if (beforeequip != null)
                 {
-                    unit.GetComponent<BagComponentServer>().OnChangeItemLoc(beforeequip, ItemLocType.ItemLocBag, toLocType);
-                    unit.GetComponent<BagComponentServer>().OnChangeItemLoc(useBagInfo, toLocType, ItemLocType.ItemLocBag);
+                    unit.GetComponent<BagComponent_S>().OnChangeItemLoc(beforeequip, ItemLocType.ItemLocBag, toLocType);
+                    unit.GetComponent<BagComponent_S>().OnChangeItemLoc(useBagInfo, toLocType, ItemLocType.ItemLocBag);
 
-                    unit.GetComponent<SkillSetComponentServer>().OnTakeOffEquip(toLocType, beforeequip);
-                    unit.GetComponent<SkillSetComponentServer>().OnWearEquip(useBagInfo);
+                    unit.GetComponent<SkillSetComponent_S>().OnTakeOffEquip(toLocType, beforeequip);
+                    unit.GetComponent<SkillSetComponent_S>().OnWearEquip(useBagInfo);
                     m2c_bagUpdate.BagInfoUpdate.Add(beforeequip);
                 }
                 else
                 {
-                    unit.GetComponent<BagComponentServer>().OnChangeItemLoc(useBagInfo, toLocType, ItemLocType.ItemLocBag);
-                    unit.GetComponent<SkillSetComponentServer>().OnWearEquip(useBagInfo);
+                    unit.GetComponent<BagComponent_S>().OnChangeItemLoc(useBagInfo, toLocType, ItemLocType.ItemLocBag);
+                    unit.GetComponent<SkillSetComponent_S>().OnWearEquip(useBagInfo);
                 }
 
-                int zodiacnumber = unit.GetComponent<BagComponentServer>().GetZodiacnumber();
-                unit.GetComponent<ChengJiuComponentServer>().TriggerEvent(ChengJiuTargetEnum.ZodiacEquipNumber_215, 0, zodiacnumber);
+                int zodiacnumber = unit.GetComponent<BagComponent_S>().GetZodiacnumber();
+                unit.GetComponent<ChengJiuComponent_S>().TriggerEvent(ChengJiuTargetEnum.ZodiacEquipNumber_215, 0, zodiacnumber);
 
                 Function_Fight.UnitUpdateProperty_Base(unit, true, true);
                 useBagInfo.isBinging = true;
@@ -152,29 +152,29 @@ namespace ET.Server
             {
 
                 ItemLocType beloc = ItemLocType.ItemLocEquip;
-                BagInfo useBagInfo = unit.GetComponent<BagComponentServer>().GetItemByLoc(beloc, bagInfoID);
+                BagInfo useBagInfo = unit.GetComponent<BagComponent_S>().GetItemByLoc(beloc, bagInfoID);
                 if (useBagInfo == null)
                 {
                     beloc = ItemLocType.ItemLocEquip_2;
-                    useBagInfo = unit.GetComponent<BagComponentServer>().GetItemByLoc(beloc, bagInfoID);
+                    useBagInfo = unit.GetComponent<BagComponent_S>().GetItemByLoc(beloc, bagInfoID);
                 }
 
                 if (useBagInfo == null)
                 {
                     return;
                 }
-                //Í¨Öª¿Í»§¶Ë±³°üË¢ĞÂ
+                //é€šçŸ¥å®¢æˆ·ç«¯èƒŒåŒ…åˆ·æ–°
                 M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
 
-                unit.GetComponent<BagComponentServer>().OnChangeItemLoc(useBagInfo, ItemLocType.ItemLocBag, beloc);
-                unit.GetComponent<SkillSetComponentServer>().OnTakeOffEquip(beloc, useBagInfo);
+                unit.GetComponent<BagComponent_S>().OnChangeItemLoc(useBagInfo, ItemLocType.ItemLocBag, beloc);
+                unit.GetComponent<SkillSetComponent_S>().OnTakeOffEquip(beloc, useBagInfo);
                 Function_Fight.UnitUpdateProperty_Base(unit, true, true);
                 m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
                 MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
             }
 
-            BagInfo equip_0 = unit.GetComponent<BagComponentServer  >().GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
-            unit.GetComponent<NumericComponentServer>().SetEvent(NumericType.Now_Weapon, equip_0 != null ? equip_0.ItemID : 0, true);
+            BagInfo equip_0 = unit.GetComponent<BagComponent_S  >().GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
+            unit.GetComponent<NumericComponent_S>().SetEvent(NumericType.Now_Weapon, equip_0 != null ? equip_0.ItemID : 0, true);
 
             await ETTask.CompletedTask;
         }

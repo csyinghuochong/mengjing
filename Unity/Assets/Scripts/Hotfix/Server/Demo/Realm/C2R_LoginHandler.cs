@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [FriendOf(typeof(DBAccountInfo))]
-    [FriendOf(typeof(UserInfoComponentServer))]
+    [FriendOf(typeof(UserInfoComponent_S))]
     [FriendOf(typeof(GlobalValueConfigCategory))]
     [MessageSessionHandler(SceneType.Realm)]
 	public class C2R_LoginHandler : MessageSessionHandler<C2R_Login, R2C_Login>
@@ -271,14 +271,14 @@ namespace ET.Server
                     ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(session.Zone());
                     for (int i = 0; i < account.RoleList.Count; i++)
                     {
-                        UserInfoComponentServer userinfo = await UnitCacheHelper.GetComponentCache<UserInfoComponentServer>(session.Root(), account.RoleList[i].UnitId);
+                        UserInfoComponent_S userinfo = await UnitCacheHelper.GetComponentCache<UserInfoComponent_S>(session.Root(), account.RoleList[i].UnitId);
                         if (userinfo == null)
                         {
                             continue;
                         }
 
                         CreateRoleInfo roleList = GetRoleListInfo(userinfo.UserInfo, account.RoleList[i].UnitId);
-                        NumericComponentServer numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentServer>(session.Root(), account.RoleList[i].UnitId);
+                        NumericComponent_S numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponent_S>(session.Root(), account.RoleList[i].UnitId);
                         if (numericComponent == null)
                         {
                             continue;

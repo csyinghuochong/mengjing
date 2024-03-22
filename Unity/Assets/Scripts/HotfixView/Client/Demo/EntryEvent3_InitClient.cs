@@ -19,15 +19,15 @@ namespace ET.Client
             root.AddComponent<GameObjectPoolComponent>();
             root.AddComponent<PlayerComponent>();
             root.AddComponent<CurrentScenesComponent>();
-            root.AddComponent<BagComponentClient>();
+            root.AddComponent<BagComponent_C>();
             root.AddComponent<FlyTipComponent>();
-            root.AddComponent<UserInfoComponentClient>();
+            root.AddComponent<UserInfoComponent_C>();
             root.AddComponent<FriendComponent>();
             root.AddComponent<ChatComponent>();
-            root.AddComponent<TaskComponentClient>();
+            root.AddComponent<TaskComponent_C>();
             root.AddComponent<BattleMessageComponent>();
             root.AddComponent<MapComponent>();
-            root.AddComponent<PetComponentClient>();
+            root.AddComponent<PetComponent_C>();
 
             // 根据配置修改掉Main Fiber的SceneType
             SceneType sceneType = EnumHelper.FromString<SceneType>(globalComponent.GlobalConfig.AppType.ToString());

@@ -9,8 +9,8 @@ namespace ET.Client
 {
     [FriendOf(typeof (Scroll_Item_MainChatItem))]
     [FriendOf(typeof (ChatComponent))]
-    [FriendOf(typeof (TaskComponentClient))]
-    [FriendOf(typeof (UserInfoComponentClient))]
+    [FriendOf(typeof (TaskComponent_C))]
+    [FriendOf(typeof (UserInfoComponent_C))]
     [FriendOf(typeof (DlgMain))]
     public static class DlgMainSystem
     {
@@ -140,7 +140,7 @@ namespace ET.Client
         private static void RefreshMainTaskItems(this DlgMain self)
         {
             self.ShowTaskPros.Clear();
-            foreach (TaskPro taskPro in self.Root().GetComponent<TaskComponentClient>().RoleTaskList)
+            foreach (TaskPro taskPro in self.Root().GetComponent<TaskComponent_C>().RoleTaskList)
             {
                 if (taskPro.TrackStatus == 0)
                 {
@@ -158,7 +158,7 @@ namespace ET.Client
 
         private static void OnRoseTaskButton(this DlgMain self)
         {
-            TaskComponentClient taskComponent = self.Root().GetComponent<TaskComponentClient>();
+            TaskComponent_C taskComponent = self.Root().GetComponent<TaskComponent_C>();
 
             int nextTask = taskComponent.GetNextMainTask();
             if (nextTask == 0)
@@ -209,28 +209,28 @@ namespace ET.Client
 
         private static void RefreshLeftUp(this DlgMain self)
         {
-            UserInfoComponentClient userInfoComponentClient = self.Root().GetComponent<UserInfoComponentClient>();
+            UserInfoComponent_C userInfoComponentC = self.Root().GetComponent<UserInfoComponent_C>();
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            NumericComponentClient numericComponentClient = unit.GetComponent<NumericComponentClient>();
+            NumericComponent_C numericComponentC = unit.GetComponent<NumericComponent_C>();
 
             self.View.E_PlayerHeadIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
-                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, userInfoComponentClient.UserInfo.Occ.ToString()));
+                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, userInfoComponentC.UserInfo.Occ.ToString()));
 
-            self.View.E_RoleNameText.text = userInfoComponentClient.UserInfo.Name;
-            self.View.E_RoleLvText.text = "等级:" + userInfoComponentClient.UserInfo.Lv;
+            self.View.E_RoleNameText.text = userInfoComponentC.UserInfo.Name;
+            self.View.E_RoleLvText.text = "等级:" + userInfoComponentC.UserInfo.Lv;
 
             int maxPiLao = int.Parse(GlobalValueConfigCategory.Instance
-                    .Get(numericComponentClient.GetAsInt(NumericType.YueKaRemainTimes) > 0? 26 : 10).Value);
-            self.View.E_RolePiLaoText.text = "体力:" + userInfoComponentClient.UserInfo.PiLao + "/" + maxPiLao;
-            self.View.E_RolePiLaoImgImage.fillAmount = 1f * userInfoComponentClient.UserInfo.PiLao / maxPiLao;
+                    .Get(numericComponentC.GetAsInt(NumericType.YueKaRemainTimes) > 0? 26 : 10).Value);
+            self.View.E_RolePiLaoText.text = "体力:" + userInfoComponentC.UserInfo.PiLao + "/" + maxPiLao;
+            self.View.E_RolePiLaoImgImage.fillAmount = 1f * userInfoComponentC.UserInfo.PiLao / maxPiLao;
 
-            int skillNumber = 1 + numericComponentClient.GetAsInt(NumericType.MakeType_2) > 0? 1 : 0;
+            int skillNumber = 1 + numericComponentC.GetAsInt(NumericType.MakeType_2) > 0? 1 : 0;
             int maxHuoLi = unit.GetMaxHuoLi(skillNumber);
-            self.View.E_RoleHuoLiText.text = "活力:" + userInfoComponentClient.UserInfo.Vitality + "/" + maxHuoLi;
-            self.View.E_RoleHuoLiImgImage.fillAmount = 1f * userInfoComponentClient.UserInfo.Vitality / maxHuoLi;
+            self.View.E_RoleHuoLiText.text = "活力:" + userInfoComponentC.UserInfo.Vitality + "/" + maxHuoLi;
+            self.View.E_RoleHuoLiImgImage.fillAmount = 1f * userInfoComponentC.UserInfo.Vitality / maxHuoLi;
 
             // self.View.E_ServerNameText.text = ServerHelper.GetGetServerItem(!GlobalHelp.IsOutNetMode, accountInfoComponent.ServerId).ServerName;
-            self.View.E_CombatText.text = $"战力: {userInfoComponentClient.UserInfo.Combat}";
+            self.View.E_CombatText.text = $"战力: {userInfoComponentC.UserInfo.Combat}";
         }
 
         #endregion
@@ -504,7 +504,7 @@ namespace ET.Client
             Quaternion rotation = Quaternion.Euler(0, direction, 0);
             float distance = self.CanMoveDistance(unit, rotation);
             distance = Mathf.Max(distance, 2f);
-            float speed = unit.GetComponent<NumericComponentClient>().GetAsFloat(NumericType.Now_Speed);
+            float speed = unit.GetComponent<NumericComponent_C>().GetAsFloat(NumericType.Now_Speed);
             speed = Mathf.Max(speed, 4f);
             float needTime = distance / speed;
             self.checkTime = (int)(1000 * needTime) - 200;

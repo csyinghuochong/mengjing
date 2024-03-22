@@ -8,31 +8,31 @@ namespace ET.Server
     public class C2M_ItemMeltingHandler: MessageLocationHandler<Unit, C2M_ItemMeltingRequest, M2C_ItemMeltingResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_ItemMeltingRequest request, M2C_ItemMeltingResponse response)
-        {//Í¨¹ı»ØÊÕÁĞ±í¼ÆËãËùµÃ
+        {//é€šè¿‡å›æ”¶åˆ—è¡¨è®¡ç®—æ‰€å¾—
             int getItemId = ComHelp.MeltingItemId;
             int getNumber = 1;
 
 
-            //¸ù¾İ²»Í¬µÄ×¨Òµ¼¼ÄÜÈÛÁ¶²»Í¬µÄµÀ¾ß
+            //æ ¹æ®ä¸åŒçš„ä¸“ä¸šæŠ€èƒ½ç†”ç‚¼ä¸åŒçš„é“å…·
             switch (request.MakeType)
             {
 
-                //¶ÍÔì
+                //é”»é€ 
                 case 1:
                     getItemId = 10000144;
                     break;
 
-                //²Ã·ì
+                //è£ç¼
                 case 2:
                     getItemId = 10000145;
                     break;
 
-                //Á¶½ğ
+                //ç‚¼é‡‘
                 case 3:
                     getItemId = 10000146;
                     break;
 
-                //¸½Ä§
+                //é™„é­”
                 case 6:
                     getItemId = 10000147;
                     break;
@@ -40,7 +40,7 @@ namespace ET.Server
             }
 
             List<long> huishouIdList = request.OperateBagID;
-            BagComponentServer bagComponent = unit.GetComponent<BagComponentServer>();
+            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
             int minNum = 0;
             int minMax = 0;
 
@@ -49,7 +49,7 @@ namespace ET.Server
                 BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, huishouIdList[i]);
                 if (bagInfo == null)
                 {
-                    Log.Info("C2M_ItemMeltingÎŞĞ§µÄÎïÆ·ID: " + huishouIdList[i]);
+                    Log.Info("C2M_ItemMeltingæ— æ•ˆçš„ç‰©å“ID: " + huishouIdList[i]);
                     continue;
                 }
 
@@ -93,7 +93,7 @@ namespace ET.Server
                 getNumber += RandomHelper.NextInt(minNum, minMax);
             }
 
-            //¿Û³ı×°±¸
+            //æ‰£é™¤è£…å¤‡
             bagComponent.OnCostItemData(huishouIdList);
 
             bagComponent.OnAddItemData($"{getItemId};{getNumber}", $"{ItemGetWay.Melting}_{TimeHelper.ServerNow()}");

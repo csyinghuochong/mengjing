@@ -64,7 +64,7 @@ namespace ET.Client
     [FriendOf(typeof (ES_RoleGem))]
     [FriendOf(typeof (ES_RoleProperty))]
     [FriendOf(typeof (ES_RoleBag))]
-    [FriendOf(typeof (UserInfoComponentClient))]
+    [FriendOf(typeof (UserInfoComponent_C))]
     [FriendOf(typeof (DlgRole))]
     public static class DlgRoleSystem
     {
@@ -136,8 +136,8 @@ namespace ET.Client
 
         public static void OnEquipWear(this DlgRole self)
         {
-            BagComponentClient bagComponent = self.Root().GetComponent<BagComponentClient>();
-            UserInfoComponentClient userInfoComponent = self.Root().GetComponent<UserInfoComponentClient>();
+            BagComponent_C bagComponent = self.Root().GetComponent<BagComponent_C>();
+            UserInfoComponent_C userInfoComponent = self.Root().GetComponent<UserInfoComponent_C>();
             BagInfo bagInfo = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
             self.View.ES_EquipSet.ChangeWeapon(bagInfo, userInfoComponent.UserInfo.Occ);
         }

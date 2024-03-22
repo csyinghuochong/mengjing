@@ -5,17 +5,17 @@ namespace ET.Server
 {
 
 
-    [EntitySystemOf(typeof(JiaYuanComponentServer))]
-    [FriendOf(typeof(JiaYuanComponentServer))]
+    [EntitySystemOf(typeof(JiaYuanComponent_S))]
+    [FriendOf(typeof(JiaYuanComponent_S))]
     public static partial class JiaYuanComponentServerSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.JiaYuanComponentServer self)
+        private static void Awake(this ET.Server.JiaYuanComponent_S self)
         {
             self.InitOpenList();
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.JiaYuanComponentServer self)
+        private static void Destroy(this ET.Server.JiaYuanComponent_S self)
         {
 
         }
@@ -26,7 +26,7 @@ namespace ET.Server
         /// <param name="self"></param>
         /// <param name="unitid"></param>
         /// <param name="status"></param>
-        public static void OnJiaYuanPetWalk(this JiaYuanComponentServer self, RolePetInfo rolePetInfo, int status, int position)
+        public static void OnJiaYuanPetWalk(this JiaYuanComponent_S self, RolePetInfo rolePetInfo, int status, int position)
         {
 
             for (int i = self.JiaYuanPetList_2.Count - 1; i >= 0; i--)
@@ -54,7 +54,7 @@ namespace ET.Server
             }
         }
 
-        public static void AddJiaYuanRecord(this JiaYuanComponentServer self, JiaYuanRecord jiaYuanRecord)
+        public static void AddJiaYuanRecord(this JiaYuanComponent_S self, JiaYuanRecord jiaYuanRecord)
         {
             self.JiaYuanRecordList_1.Add(jiaYuanRecord);
 
@@ -64,7 +64,7 @@ namespace ET.Server
             }
         }
 
-        public static JiaYuanPet GetJiaYuanPet(this JiaYuanComponentServer self, long unitid)
+        public static JiaYuanPet GetJiaYuanPet(this JiaYuanComponent_S self, long unitid)
         {
             for (int i = 0; i < self.JiaYuanPetList_2.Count; i++)
             {
@@ -76,7 +76,7 @@ namespace ET.Server
             return null;
         }
 
-        public static JiaYuanPet GetJiaYuanPetGetPosition(this JiaYuanComponentServer self, int position)
+        public static JiaYuanPet GetJiaYuanPetGetPosition(this JiaYuanComponent_S self, int position)
         {
             for (int i = 0; i < self.JiaYuanPetList_2.Count; i++)
             {
@@ -88,9 +88,9 @@ namespace ET.Server
             return null;
         }
 
-        public static void CheckDaShiPro(this JiaYuanComponentServer self)
+        public static void CheckDaShiPro(this JiaYuanComponent_S self)
         {
-            UserInfo userInfo = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo;
+            UserInfo userInfo = self.GetParent<Unit>().GetComponent<UserInfoComponent_S>().UserInfo;
             JiaYuanConfig jiaYuanConfig = JiaYuanConfigCategory.Instance.Get(userInfo.JiaYuanLv);
 
             string proMax = jiaYuanConfig.ProMax;
@@ -139,7 +139,7 @@ namespace ET.Server
             }
         }
 
-        public static List<PropertyValue> GetJianYuanPro(this JiaYuanComponentServer self)
+        public static List<PropertyValue> GetJianYuanPro(this JiaYuanComponent_S self)
         {
             List<PropertyValue> proList = new List<PropertyValue>();
 
@@ -170,7 +170,7 @@ namespace ET.Server
             return proList;
         }
 
-        public static void UpdateDaShiProInfo(this JiaYuanComponentServer self, int keyid, int addvalue)
+        public static void UpdateDaShiProInfo(this JiaYuanComponent_S self, int keyid, int addvalue)
         {
             for (int i = 0; i < self.JiaYuanProList_7.Count; i++)
             {
@@ -185,7 +185,7 @@ namespace ET.Server
             self.JiaYuanProList_7.Add( new KeyValuePair() { KeyId = keyid, Value = addvalue.ToString() } );
         }
 
-        public static KeyValuePair GetDaShiProInfo(this JiaYuanComponentServer self, int keyid)
+        public static KeyValuePair GetDaShiProInfo(this JiaYuanComponent_S self, int keyid)
         {
             for (int i = 0; i < self.JiaYuanProList_7.Count; i++)
             {
@@ -197,7 +197,7 @@ namespace ET.Server
             return null;
         }
 
-        public static bool IsMyJiaYuan(this JiaYuanComponentServer self, long selfId)
+        public static bool IsMyJiaYuan(this JiaYuanComponent_S self, long selfId)
         {
             return false;
 
@@ -207,7 +207,7 @@ namespace ET.Server
         /// 老的农场作物 过了24个小时自动去掉
         /// </summary>
         /// <param name="self"></param>
-        public static void CheckOvertime(this JiaYuanComponentServer self)
+        public static void CheckOvertime(this JiaYuanComponent_S self)
         {
             long serverTime = TimeHelper.ServerNow();
             //植物
@@ -247,7 +247,7 @@ namespace ET.Server
             }
         }
 
-        public static List<int> InitOpenList(this JiaYuanComponentServer self)
+        public static List<int> InitOpenList(this JiaYuanComponent_S self)
         {
             List<int> inits = new List<int>() { 0, 1, 2, 3 };
             for (int i = 0; i < inits.Count; i++)
@@ -261,10 +261,10 @@ namespace ET.Server
         }
 
 
-        public static void OnLogin(this JiaYuanComponentServer self)
+        public static void OnLogin(this JiaYuanComponent_S self)
         {
             //检测宠物
-            PetComponentServer petComponent = self.GetParent<Unit>().GetComponent<PetComponentServer>();
+            PetComponent_S petComponent = self.GetParent<Unit>().GetComponent<PetComponent_S>();
             for(int i = self.JiaYuanPetList_2.Count - 1; i >= 0; i--)
             {
                 RolePetInfo rolePetInfo = petComponent.GetPetInfo(self.JiaYuanPetList_2[i].unitId);
@@ -292,14 +292,14 @@ namespace ET.Server
             }
         }
 
-        public static void OnBeforEnter(this JiaYuanComponentServer self)
+        public static void OnBeforEnter(this JiaYuanComponent_S self)
         {
             self.CheckOvertime();
             self.CheckRefreshMonster();
             self.CheckPetExp();
         }
 
-        public static void UpdatePetMood(this JiaYuanComponentServer self, long unitid, int addvalue)
+        public static void UpdatePetMood(this JiaYuanComponent_S self, long unitid, int addvalue)
         {
             for (int i = 0; i < self.JiaYuanPetList_2.Count; i++)
             {
@@ -313,10 +313,10 @@ namespace ET.Server
             }
         }
 
-        public static void CheckPetExp(this JiaYuanComponentServer self)
+        public static void CheckPetExp(this JiaYuanComponent_S self)
         {
             long serverTime = TimeHelper.ServerNow();
-            PetComponentServer petComponent = self.GetParent<Unit>().GetComponent<PetComponentServer>();
+            PetComponent_S petComponent = self.GetParent<Unit>().GetComponent<PetComponent_S>();
             for ( int i = self.JiaYuanPetList_2.Count - 1; i >= 0; i--)
             {
                 JiaYuanPet jiaYuanPet = self.JiaYuanPetList_2[i];
@@ -345,7 +345,7 @@ namespace ET.Server
 
         }
 
-        public static void OnRemoveUnit(this JiaYuanComponentServer self, long unitid)
+        public static void OnRemoveUnit(this JiaYuanComponent_S self, long unitid)
         {
             for (int i = self.JiaYuanMonster_2.Count - 1; i >= 0; i--)
             {
@@ -357,7 +357,7 @@ namespace ET.Server
             }
         }
 
-        public static void CheckRefreshMonster(this JiaYuanComponentServer self)
+        public static void CheckRefreshMonster(this JiaYuanComponent_S self)
         {
             //keyValuePair.KeyId    怪物id
             //keyValuePair.Value    怪物出生时间戳
@@ -407,7 +407,7 @@ namespace ET.Server
             }
         }
 
-        public static int OnPastureBuyRequest(this JiaYuanComponentServer self, int ProductId)
+        public static int OnPastureBuyRequest(this JiaYuanComponent_S self, int ProductId)
         {
             for (int i = 0; i < self.PastureGoods_7.Count; i++)
             {
@@ -428,7 +428,7 @@ namespace ET.Server
             return ErrorCode.ERR_ItemNotEnoughError;
         }
 
-        public static int OnMysteryBuyRequest(this JiaYuanComponentServer self, int ProductId, List<MysteryItemInfo> jiayuanMysterylist)
+        public static int OnMysteryBuyRequest(this JiaYuanComponent_S self, int ProductId, List<MysteryItemInfo> jiayuanMysterylist)
         {
 
             for (int i = 0; i < jiayuanMysterylist.Count; i++)
@@ -450,7 +450,7 @@ namespace ET.Server
             return ErrorCode.ERR_ItemNotEnoughError;
         }
 
-        public static void SaveDB(this JiaYuanComponentServer self)
+        public static void SaveDB(this JiaYuanComponent_S self)
         { 
             
         }
@@ -459,7 +459,7 @@ namespace ET.Server
         /// 零点刷新
         /// </summary>
         /// <param name="self"></param>
-        public static void OnZeroClockUpdate(this JiaYuanComponentServer self, bool notice)
+        public static void OnZeroClockUpdate(this JiaYuanComponent_S self, bool notice)
         {
             self.UpdatePlanGoodList();
             self.UpdatePurchaseItemList(notice);
@@ -472,7 +472,7 @@ namespace ET.Server
         /// <param name="self"></param>
         /// <param name="hour_1"></param>
         /// <param name="hour_2"></param>
-        public static void OnLoginCheck(this JiaYuanComponentServer self, int hour_1, int hour_2)
+        public static void OnLoginCheck(this JiaYuanComponent_S self, int hour_1, int hour_2)
         {
            
             ///收购12点刷新
@@ -491,10 +491,10 @@ namespace ET.Server
             }
         }
 
-        public static void UpdatePlanGoodList(this JiaYuanComponentServer self)
+        public static void UpdatePlanGoodList(this JiaYuanComponent_S self)
         {
             int openday = ServerHelper.GetOpenServerDay(false, self.Zone());
-            UserInfo userInfo = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo;
+            UserInfo userInfo = self.GetParent<Unit>().GetComponent<UserInfoComponent_S>().UserInfo;
             int jiayuanlv = JiaYuanConfigCategory.Instance.Get(userInfo.JiaYuanLv).Lv;
 
             GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(87);
@@ -512,7 +512,7 @@ namespace ET.Server
         /// <param name="self"></param>
         /// <param name="hour_1"></param>
         /// <param name="hour_2"></param>
-        public static void OnHourUpdate(this JiaYuanComponentServer self, int hour_1, bool notice)
+        public static void OnHourUpdate(this JiaYuanComponent_S self, int hour_1, bool notice)
         {
             ///收购12点刷新
             if (hour_1 == 12)
@@ -525,15 +525,15 @@ namespace ET.Server
             }
         }
 
-        public static void UpdatePurchaseItemList_2(this JiaYuanComponentServer self)
+        public static void UpdatePurchaseItemList_2(this JiaYuanComponent_S self)
         {
             self.PurchaseItemList_7.Clear();
 
-            UserInfo userInfo = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo;
+            UserInfo userInfo = self.GetParent<Unit>().GetComponent<UserInfoComponent_S>().UserInfo;
             JiaYuanHelper.InitPurchaseItemList(userInfo.JiaYuanLv, self.PurchaseItemList_7);
         }
 
-        public static void UpdatePurchaseItemList(this JiaYuanComponentServer self, bool notice)
+        public static void UpdatePurchaseItemList(this JiaYuanComponent_S self, bool notice)
         {
             long serverTime = TimeHelper.ServerNow();
             for (int i = 0; i < self.PurchaseItemList_7.Count; i++)
@@ -544,7 +544,7 @@ namespace ET.Server
                 }
             }
 
-            UserInfo userInfo = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo;
+            UserInfo userInfo = self.GetParent<Unit>().GetComponent<UserInfoComponent_S>().UserInfo;
             JiaYuanHelper.InitPurchaseItemList(userInfo.JiaYuanLv, self.PurchaseItemList_7);
             if (notice)
             {
@@ -553,7 +553,7 @@ namespace ET.Server
             }
         }
 
-        public static void UprootPasture(this JiaYuanComponentServer self, long unitid)
+        public static void UprootPasture(this JiaYuanComponent_S self, long unitid)
         {
             for (int i = self.JiaYuanPastureList_7.Count - 1; i >= 0; i--)
             {
@@ -564,7 +564,7 @@ namespace ET.Server
             }
         }
 
-        public static JiaYuanPastures GetJiaYuanPastures(this JiaYuanComponentServer self, long unitid)
+        public static JiaYuanPastures GetJiaYuanPastures(this JiaYuanComponent_S self, long unitid)
         {
             for (int i = 0; i < self.JiaYuanPastureList_7.Count; i++)
             {
@@ -576,7 +576,7 @@ namespace ET.Server
             return null;
         }
 
-        public static int GetRubbishNumber(this JiaYuanComponentServer self)
+        public static int GetRubbishNumber(this JiaYuanComponent_S self)
         {
             int number = 0;
             long serverNow = TimeHelper.ServerNow();
@@ -594,7 +594,7 @@ namespace ET.Server
             return number;
         }
 
-        public static int GetCanGatherNumber(this JiaYuanComponentServer self)
+        public static int GetCanGatherNumber(this JiaYuanComponent_S self)
         {
             int number = 0;
             for (int i = 0; i < self.JianYuanPlantList_7.Count; i++)
@@ -618,7 +618,7 @@ namespace ET.Server
             return number;
         }
 
-        public static JiaYuanPlant GetJiaYuanPlant(this JiaYuanComponentServer self, long unitid)
+        public static JiaYuanPlant GetJiaYuanPlant(this JiaYuanComponent_S self, long unitid)
         {
             for (int i = 0; i < self.JianYuanPlantList_7.Count; i++)
             {
@@ -630,7 +630,7 @@ namespace ET.Server
             return null;
         }
 
-        public static JiaYuanPlant GetCellPlant(this JiaYuanComponentServer self, int cell)
+        public static JiaYuanPlant GetCellPlant(this JiaYuanComponent_S self, int cell)
         {
             for (int i = 0; i < self.JianYuanPlantList_7.Count; i++)
             {
@@ -643,7 +643,7 @@ namespace ET.Server
             return null;
         }
 
-        public static void UprootPlant(this JiaYuanComponentServer self, int cellIndex)
+        public static void UprootPlant(this JiaYuanComponent_S self, int cellIndex)
         {
             for (int i = self.JianYuanPlantList_7.Count - 1; i >= 0; i--)
             {
@@ -654,7 +654,7 @@ namespace ET.Server
             }
         }
 
-        public static int GetPeopleNumber(this JiaYuanComponentServer self)
+        public static int GetPeopleNumber(this JiaYuanComponent_S self)
         {
             int number = 0;
             for (int i = 0; i < self.JiaYuanPastureList_7.Count; i++)
@@ -665,7 +665,7 @@ namespace ET.Server
             return number;
         }
 
-        public static int GetOpenPlanNumber(this JiaYuanComponentServer self)
+        public static int GetOpenPlanNumber(this JiaYuanComponent_S self)
         {
             return self.PlanOpenList_7.Count;
         }

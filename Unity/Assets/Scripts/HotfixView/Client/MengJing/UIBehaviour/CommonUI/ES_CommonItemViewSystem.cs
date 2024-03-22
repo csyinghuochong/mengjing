@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponentClient))]
+    [FriendOf(typeof (UserInfoComponent_C))]
     [EntitySystemOf(typeof (ES_CommonItem))]
     [FriendOfAttribute(typeof (ES_CommonItem))]
     public static partial class ES_CommonItemSystem
@@ -94,7 +94,7 @@ namespace ET.Client
                         BagInfo = self.Baginfo,
                         ItemOperateEnum = self.ItemOperateEnum,
                         InputPoint = Input.mousePosition,
-                        Occ = self.Root().GetComponent<UserInfoComponentClient>().UserInfo.Occ,
+                        Occ = self.Root().GetComponent<UserInfoComponent_C>().UserInfo.Occ,
                         EquipList = new List<BagInfo>()
                     });
             }

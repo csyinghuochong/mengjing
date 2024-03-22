@@ -2,13 +2,13 @@ namespace ET.Server
 {
 
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof(BagComponentServer))]
-    [FriendOf(typeof(NumericComponentServer))]
+    [FriendOf(typeof(BagComponent_S))]
+    [FriendOf(typeof(NumericComponent_S))]
     public class C2M_ItemEquipIndexHandler: MessageLocationHandler<Unit, C2M_ItemEquipIndexRequest, M2C_ItemEquipIndexResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_ItemEquipIndexRequest request, M2C_ItemEquipIndexResponse response)
         {
-            BagComponentServer bagComponent = unit.GetComponent<BagComponentServer>();
+            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
             BagInfo equip_0 = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
             BagInfo equip_1 = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip_2, (int)ItemSubTypeEnum.Wuqi);
             if (equip_0 == null || equip_1 == null)
@@ -17,13 +17,13 @@ namespace ET.Server
                 return;
             }
 
-            //0Ô¶³Ì 1½üÕ½
-            int equipIndex = unit.GetComponent<NumericComponentServer>().GetAsInt(NumericType.EquipIndex);
+            //0è¿œç¨‹ 1è¿‘æˆ˜
+            int equipIndex = unit.GetComponent<NumericComponent_S>().GetAsInt(NumericType.EquipIndex);
 
-            //Í¨Öª¿Í»§¶Ë±³°üË¢ĞÂ
+            //é€šçŸ¥å®¢æˆ·ç«¯èƒŒåŒ…åˆ·æ–°
             M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
 
-            //½»»»×°±¸Î»ÖÃ
+            //äº¤æ¢è£…å¤‡ä½ç½®
             bagComponent.OnChangeItemLoc(equip_0, ItemLocType.ItemLocEquip_2, ItemLocType.ItemLocEquip);
             bagComponent.OnChangeItemLoc(equip_1, ItemLocType.ItemLocEquip, ItemLocType.ItemLocEquip_2);
 
@@ -35,8 +35,8 @@ namespace ET.Server
             m2c_bagUpdate.BagInfoUpdate.Add(equip_1);
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
 
-            unit.GetComponent<NumericComponentServer>().SetEvent(NumericType.EquipIndex, request.EquipIndex, true);
-            unit.GetComponent<NumericComponentServer>().SetEvent(NumericType.Now_Weapon, bagComponent.GetWuqiItemId(), true);
+            unit.GetComponent<NumericComponent_S>().SetEvent(NumericType.EquipIndex, request.EquipIndex, true);
+            unit.GetComponent<NumericComponent_S>().SetEvent(NumericType.Now_Weapon, bagComponent.GetWuqiItemId(), true);
 
             //unit.GetComponent<SkillSetComponentServer>().OnChangeEquipIndex(request.EquipIndex);
             unit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.EquipIndex_15);

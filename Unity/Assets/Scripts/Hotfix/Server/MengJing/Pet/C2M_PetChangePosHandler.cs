@@ -8,7 +8,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_PetChangePosRequest request, M2C_PetChangePosResponse response)
         {
             
-            PetComponentServer petComponent = unit.GetComponent<PetComponentServer>();
+            PetComponent_S petComponent = unit.GetComponent<PetComponent_S>();
             List<RolePetInfo> RolePetInfos = petComponent.GetAllPets();
             if (request.Index1 < 0 || request.Index1 >= RolePetInfos.Count)
             {

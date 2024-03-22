@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 	[FriendOf(typeof(DBAccountInfo))]
-	[FriendOf(typeof(UserInfoComponentServer))]
+	[FriendOf(typeof(UserInfoComponent_S))]
     [MessageSessionHandler(SceneType.Gate)]
     public class C2A_CreateRoleDataHandler: MessageSessionHandler<C2A_CreateRoleData, A2C_CreateRoleData>
     {
@@ -53,7 +53,7 @@ namespace ET.Server
 				using (await session.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.LoginAccount, request.AccountId.GetHashCode()))
 				{
 					DBComponent dbComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(session.Zone());
-					List<UserInfoComponentServer> result = await dbComponent.Query<UserInfoComponentServer>(session.Zone(), _account => _account.UserName == request.CreateName);
+					List<UserInfoComponent_S> result = await dbComponent.Query<UserInfoComponent_S>(session.Zone(), _account => _account.UserName == request.CreateName);
 					if (result.Count > 0)
 					{
 						response.Error = ErrorCode.ERR_RoleNameRepeat;

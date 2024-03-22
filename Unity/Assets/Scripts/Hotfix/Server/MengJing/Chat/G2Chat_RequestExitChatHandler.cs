@@ -6,7 +6,7 @@
     {
         protected override async ETTask Run(ChatInfoUnit unit, G2Chat_RequestExitChat request, Chat2G_RequestExitChat response)
         {
-            ChatSceneComponent chatInfoUnitsComponent = unit.Root().GetComponent<ChatSceneComponent>();
+            ChatServerComponent chatInfoUnitsComponent = unit.Root().GetComponent<ChatServerComponent>();
 
             chatInfoUnitsComponent.Remove(unit.Id);
 

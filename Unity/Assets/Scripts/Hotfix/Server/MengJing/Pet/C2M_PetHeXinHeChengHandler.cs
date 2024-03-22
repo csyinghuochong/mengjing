@@ -9,8 +9,8 @@ namespace ET.Server
 
         protected override async ETTask Run(Unit unit, C2M_PetHeXinHeChengRequest request, M2C_PetHeXinHeChengResponse response)
         {
-            BagInfo bagInfo_1 = unit.GetComponent<BagComponentServer>().GetItemByLoc(ItemLocType.ItemPetHeXinBag, request.BagInfoID_1);
-            BagInfo bagInfo_2 = unit.GetComponent<BagComponentServer>().GetItemByLoc(ItemLocType.ItemPetHeXinBag, request.BagInfoID_2);
+            BagInfo bagInfo_1 = unit.GetComponent<BagComponent_S>().GetItemByLoc(ItemLocType.ItemPetHeXinBag, request.BagInfoID_1);
+            BagInfo bagInfo_2 = unit.GetComponent<BagComponent_S>().GetItemByLoc(ItemLocType.ItemPetHeXinBag, request.BagInfoID_2);
             if (bagInfo_1 == null || bagInfo_2 == null)
             {
                 return;
@@ -26,7 +26,7 @@ namespace ET.Server
             }
 
             using ListComponent<long> costids = new ListComponent<long>() { bagInfo_1.BagInfoID,bagInfo_2.BagInfoID };
-            BagComponentServer bagComponent = unit.GetComponent<BagComponentServer>();
+            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
             bagComponent.OnCostItemData(costids, ItemLocType.ItemPetHeXinBag);
             bagComponent.OnAddItemData($"{itemConfig.PetHeXinHeChengID};1", $"{ItemGetWay.PetHeXinHeCheng}_{TimeHelper.ServerNow()}");
 

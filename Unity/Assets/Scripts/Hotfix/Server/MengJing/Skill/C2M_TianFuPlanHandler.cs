@@ -6,7 +6,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_TianFuPlanRequest request, M2C_TianFuPlanResponse response)
         { 
-            SkillSetComponentServer skillSetComponent = unit.GetComponent<SkillSetComponentServer>();
+            SkillSetComponent_S skillSetComponent = unit.GetComponent<SkillSetComponent_S>();
             skillSetComponent.UpdateTianFuPlan ( request.TianFuPlan);  
             await ETTask.CompletedTask;
         }

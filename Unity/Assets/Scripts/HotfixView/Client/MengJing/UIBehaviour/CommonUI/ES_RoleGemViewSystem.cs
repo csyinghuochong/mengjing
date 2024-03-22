@@ -63,7 +63,7 @@ namespace ET.Client
 
         public static void RefreshBagItems(this ES_RoleGem self)
         {
-            BagComponentClient bagComponentClient = self.Root().GetComponent<BagComponentClient>();
+            BagComponent_C bagComponentC = self.Root().GetComponent<BagComponent_C>();
 
             self.ShowBagInfos.Clear();
 
@@ -85,13 +85,13 @@ namespace ET.Client
             }
 
             int maxCount = GlobalValueConfigCategory.Instance.BagMaxCapacity;
-            self.ShowBagInfos.AddRange(bagComponentClient.GetItemsByType(itemTypeEnum));
+            self.ShowBagInfos.AddRange(bagComponentC.GetItemsByType(itemTypeEnum));
             self.AddUIScrollItems(ref self.ScrollItemCommonItems, maxCount);
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, maxCount);
 
             if (self.XiangQianItem != null)
             {
-                BagInfo bagInfo = self.Root().GetComponent<BagComponentClient>().GetBagInfo(self.XiangQianItem.BagInfoID);
+                BagInfo bagInfo = self.Root().GetComponent<BagComponent_C>().GetBagInfo(self.XiangQianItem.BagInfoID);
                 self.OnClickXiangQianItem(bagInfo);
             }
         }

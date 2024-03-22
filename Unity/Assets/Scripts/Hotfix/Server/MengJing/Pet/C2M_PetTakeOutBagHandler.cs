@@ -9,7 +9,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_PetTakeOutBag request, M2C_PetTakeOutBag response)
         {
-            unit.GetComponent<PetComponentServer>().TakeOutBag(request.PetInfoId);
+            unit.GetComponent<PetComponent_S>().TakeOutBag(request.PetInfoId);
             await ETTask.CompletedTask;
         }
     }

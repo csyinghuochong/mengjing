@@ -9,7 +9,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_SkillUp request, M2C_SkillUp response)
         {
-            SkillSetComponentServer skillSetComponent = unit.GetComponent<SkillSetComponentServer>();
+            SkillSetComponent_S skillSetComponent = unit.GetComponent<SkillSetComponent_S>();
 			if (skillSetComponent.GetBySkillID(request.SkillID) == null)
 			{
 			    response.Error = ErrorCode.ERR_ModifyData;
@@ -25,7 +25,7 @@ namespace ET.Server
 				return;
 			}
 
-			UserInfoComponentServer unitInfoComponent = unit.GetComponent<UserInfoComponentServer>();
+			UserInfoComponent_S unitInfoComponent = unit.GetComponent<UserInfoComponent_S>();
 			int costGoldValue = skillconf.CostGoldValue;
 			int costSPValue = skillconf.CostSPValue;
 			int RoseSP = unitInfoComponent.GetSp();
@@ -46,8 +46,8 @@ namespace ET.Server
 			}
 				
 			response.NewSkillID = nextSkillID;
-			unit.GetComponent<UserInfoComponentServer>().UpdateRoleMoneySub(UserDataType.Gold, (costGoldValue*-1).ToString(), true, ItemGetWay.CostItem);
-			unit.GetComponent<UserInfoComponentServer>().UpdateRoleData(UserDataType.Sp, (costSPValue * -1).ToString());
+			unit.GetComponent<UserInfoComponent_S>().UpdateRoleMoneySub(UserDataType.Gold, (costGoldValue*-1).ToString(), true, ItemGetWay.CostItem);
+			unit.GetComponent<UserInfoComponent_S>().UpdateRoleData(UserDataType.Sp, (costSPValue * -1).ToString());
 
 			Function_Fight.UnitUpdateProperty_Base( unit,true, true );
 

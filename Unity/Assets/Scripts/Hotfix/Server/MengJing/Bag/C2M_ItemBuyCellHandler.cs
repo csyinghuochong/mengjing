@@ -5,13 +5,13 @@ namespace ET.Server
 {
     
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof(BagComponentServer))]
-    [FriendOf(typeof(UserInfoComponentServer))]
+    [FriendOf(typeof(BagComponent_S))]
+    [FriendOf(typeof(UserInfoComponent_S))]
     public class C2M_ItemBuyCellHandler: MessageLocationHandler<Unit, C2M_ItemBuyCellRequest, M2C_ItemBuyCellResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_ItemBuyCellRequest request, M2C_ItemBuyCellResponse response)
         {
-            BagComponentServer bagComponent = unit.GetComponent<BagComponentServer>();
+            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
            
             if (request.OperateType == (int)ItemLocType.ItemLocBag)
             {
@@ -42,7 +42,7 @@ namespace ET.Server
             }
             else if (request.OperateType == (int)ItemLocType.GemWareHouse1)
             {
-                Log.Warning("还没有购买格子的需求！");
+                Log.Warning("杩樻病鏈夎喘涔版牸瀛愮殑闇�姹傦紒");
             }
             else
             {

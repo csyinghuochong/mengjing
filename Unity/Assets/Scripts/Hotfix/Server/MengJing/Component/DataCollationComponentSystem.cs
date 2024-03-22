@@ -187,10 +187,10 @@ namespace ET.Server
         {
             Unit unit = self.GetParent<Unit>();
 
-            UserInfoComponentServer userInfoComponent = unit.GetComponent<UserInfoComponentServer>();
-            NumericComponentServer numericComponent = unit.GetComponent<NumericComponentServer>();
-            PetComponentServer petComponent = unit.GetComponent<PetComponentServer>();
-            BagComponentServer bagComponent = unit.GetComponent<BagComponentServer>();
+            UserInfoComponent_S userInfoComponent = unit.GetComponent<UserInfoComponent_S>();
+            NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+            PetComponent_S petComponent = unit.GetComponent<PetComponent_S>();
+            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
 
             self.Name = userInfoComponent.GetName();
             self.Level = userInfoComponent.GetUserLv();
@@ -215,7 +215,7 @@ namespace ET.Server
 
             self.LastLoginTime = TimeHelper.DateTimeNow().ToString();
 
-            self.MainTask = unit.GetComponent<TaskComponentServer>().GetMainTaskId();
+            self.MainTask = unit.GetComponent<TaskComponent_S>().GetMainTaskId();
 
             self.PetPingfen = petComponent.GetPingfenList();
 

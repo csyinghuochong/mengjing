@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponentClient))]
-    [FriendOf(typeof (BagComponentClient))]
+    [FriendOf(typeof (UserInfoComponent_C))]
+    [FriendOf(typeof (BagComponent_C))]
     public static class BagClientNetHelper
     {
         public static async ETTask<int> RequestBagInit(Scene root)
@@ -12,21 +12,21 @@ namespace ET.Client
             Log.Debug($"C2M_BagInitHandler: client0");
             M2C_BagInitResponse response = (M2C_BagInitResponse)await root.GetComponent<ClientSenderCompnent>().Call(new C2M_BagInitRequest());
 
-            BagComponentClient bagComponentClient = root.GetComponent<BagComponentClient>();
+            BagComponent_C bagComponentC = root.GetComponent<BagComponent_C>();
             for (int i = 0; i < response.BagInfos.Count; i++)
             {
                 int Loc = response.BagInfos[i].Loc;
-                List<BagInfo> bagList = bagComponentClient.AllItemList[Loc];
+                List<BagInfo> bagList = bagComponentC.AllItemList[Loc];
                 bagList.Add(response.BagInfos[i]);
             }
 
-            bagComponentClient.QiangHuaLevel = response.QiangHuaLevel;
-            bagComponentClient.QiangHuaFails = response.QiangHuaFails;
-            bagComponentClient.WarehouseAddedCell = response.WarehouseAddedCell;
-            bagComponentClient.FashionActiveIds = response.FashionActiveIds;
-            bagComponentClient.FashionEquipList = response.FashionEquipList;
-            bagComponentClient.SeasonJingHePlan = response.SeasonJingHePlan;
-            bagComponentClient.AdditionalCellNum = response.AdditionalCellNum;
+            bagComponentC.QiangHuaLevel = response.QiangHuaLevel;
+            bagComponentC.QiangHuaFails = response.QiangHuaFails;
+            bagComponentC.WarehouseAddedCell = response.WarehouseAddedCell;
+            bagComponentC.FashionActiveIds = response.FashionActiveIds;
+            bagComponentC.FashionEquipList = response.FashionEquipList;
+            bagComponentC.SeasonJingHePlan = response.SeasonJingHePlan;
+            bagComponentC.AdditionalCellNum = response.AdditionalCellNum;
 
             Log.Debug($"C2M_BagInitHandler: client1");
             return ErrorCode.ERR_Success;
@@ -47,7 +47,7 @@ namespace ET.Client
 
         public static async ETTask<int> RequestUseItem(Scene root, BagInfo bagInfo, string parinfo)
         {
-            UserInfoComponentClient infoComponent = root.GetComponent<UserInfoComponentClient>();
+            UserInfoComponent_C infoComponent = root.GetComponent<UserInfoComponent_C>();
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             int occ = infoComponent.UserInfo.Occ;
@@ -139,7 +139,7 @@ namespace ET.Client
             // }
 
             //猎人单独处理
-            int occ = root.GetComponent<UserInfoComponentClient>().UserInfo.Occ;
+            int occ = root.GetComponent<UserInfoComponent_C>().UserInfo.Occ;
             if (occ == 3 && itemCof.ItemSubType == (int)ItemSubTypeEnum.Wuqi)
             {
                 C2M_ItemOperateWearRequest c2M_ItemOperate = new C2M_ItemOperateWearRequest() { OperateType = 3, OperateBagID = bagInfo.BagInfoID };
@@ -167,7 +167,7 @@ namespace ET.Client
         public static async ETTask RequestTakeoffEquip(Scene root, BagInfo bagInfo)
         {
             //猎人单独处理
-            int occ = root.GetComponent<UserInfoComponentClient>().UserInfo.Occ;
+            int occ = root.GetComponent<UserInfoComponent_C>().UserInfo.Occ;
             ItemConfig itemCof = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             if (occ == 3 && itemCof.ItemSubType == (int)ItemSubTypeEnum.Wuqi)
             {
@@ -201,13 +201,13 @@ namespace ET.Client
 
         public static async ETTask<int> RequestSortByLoc(Scene root, ItemLocType loc)
         {
-            BagComponentClient bagComponentClient = root.GetComponent<BagComponentClient>();
-            bagComponentClient.RealAddItem = false;
+            BagComponent_C bagComponentC = root.GetComponent<BagComponent_C>();
+            bagComponentC.RealAddItem = false;
             int loctype = (int)loc;
             C2M_ItemOperateRequest request = new() { OperateType = 8, OperateBagID = 0, OperatePar = loctype.ToString() };
             M2C_ItemOperateResponse response = (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
-            bagComponentClient.RealAddItem = true;
-            bagComponentClient.OnRecvItemSort(loc);
+            bagComponentC.RealAddItem = true;
+            bagComponentC.OnRecvItemSort(loc);
 
             return response.Error;
         }

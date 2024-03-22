@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_RoleQiangHuaItem))]
-    [FriendOf(typeof (BagComponentClient))]
+    [FriendOf(typeof (BagComponent_C))]
     [EntitySystemOf(typeof (ES_RoleQiangHua))]
     [FriendOfAttribute(typeof (ES_RoleQiangHua))]
     public static partial class ES_RoleQiangHuaSystem
@@ -59,7 +59,7 @@ namespace ET.Client
 
         public static void OnUpdateUI(this ES_RoleQiangHua self)
         {
-            BagComponentClient bagComponent = self.Root().GetComponent<BagComponentClient>();
+            BagComponent_C bagComponent = self.Root().GetComponent<BagComponent_C>();
             for (int i = 0; i < self.QiangHuaItemList.Count; i++)
             {
                 self.QiangHuaItemList[i].OnUpateUI(bagComponent.QiangHuaLevel[i + 1]);
@@ -78,7 +78,7 @@ namespace ET.Client
         {
             self.ES_EquipSetItem.InitUI(subType);
 
-            BagComponentClient bagComponent = self.Root().GetComponent<BagComponentClient>();
+            BagComponent_C bagComponent = self.Root().GetComponent<BagComponent_C>();
             int qianghuaLevel = bagComponent.QiangHuaLevel[subType];
             int maxLevel = QiangHuaHelper.GetQiangHuaMaxLevel(subType);
 
@@ -127,7 +127,7 @@ namespace ET.Client
 
         public static async ETTask OnButtonQiangHua(this ES_RoleQiangHua self)
         {
-            BagComponentClient bagComponent = self.Root().GetComponent<BagComponentClient>();
+            BagComponent_C bagComponent = self.Root().GetComponent<BagComponent_C>();
             int qianghuaLevel = bagComponent.QiangHuaLevel[self.ItemSubType];
             int maxLevel = QiangHuaHelper.GetQiangHuaMaxLevel(self.ItemSubType);
             if (qianghuaLevel >= maxLevel - 1)

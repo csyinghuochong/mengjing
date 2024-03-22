@@ -225,11 +225,11 @@ namespace ET.Server
 			LocalDungeonComponent localDungeonComponent = scene.GetComponent<LocalDungeonComponent>();
 			Unit mainUnit = localDungeonComponent.MainUnit;
 
-			UserInfoComponentServer userInfoComponent = mainUnit.GetComponent<UserInfoComponentServer>();
-			NumericComponentServer numericComponent = mainUnit.GetComponent<NumericComponentServer>();
+			UserInfoComponent_S userInfoComponent = mainUnit.GetComponent<UserInfoComponent_S>();
+			NumericComponent_S numericComponent = mainUnit.GetComponent<NumericComponent_S>();
 
 
-			TaskPro taskPro = mainUnit.GetComponent<TaskComponentServer>().GetTreasureMonster(mapComponent.SceneId);
+			TaskPro taskPro = mainUnit.GetComponent<TaskComponent_S>().GetTreasureMonster(mapComponent.SceneId);
 			if (taskPro != null)
 			{
 				TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
@@ -379,8 +379,8 @@ namespace ET.Server
 				if (sceneType == SceneTypeEnum.LocalDungeon && monsterConfig.MonsterSonType == 55)
 				{
 					LocalDungeonComponent localDungeonComponent = scene.GetComponent<LocalDungeonComponent>();
-					UserInfoComponentServer userInfoComponent = localDungeonComponent.MainUnit.GetComponent<UserInfoComponentServer>();
-					TaskComponentServer taskComponent = localDungeonComponent.MainUnit.GetComponent<TaskComponentServer>();
+					UserInfoComponent_S userInfoComponent = localDungeonComponent.MainUnit.GetComponent<UserInfoComponent_S>();
+					TaskComponent_S taskComponent = localDungeonComponent.MainUnit.GetComponent<TaskComponent_S>();
 					if (userInfoComponent.IsCheskOpen(mapComponent.SceneId, monsterid)
 					    && !taskComponent.IsItemTask(monsterid))
 					{
@@ -529,7 +529,7 @@ namespace ET.Server
 			List<Unit> units = scene.GetComponent<UnitComponent>().GetAll();
 			for (int i = 0; i < units.Count; i++)
 			{
-				if (units[i].Type == UnitType.Pet && units[i].GetComponent<NumericComponentServer>().GetAsInt(NumericType.Now_Dead) == 0)
+				if (units[i].Type == UnitType.Pet && units[i].GetComponent<NumericComponent_S>().GetAsInt(NumericType.Now_Dead) == 0)
 				{
 					petNumber++;
 				}

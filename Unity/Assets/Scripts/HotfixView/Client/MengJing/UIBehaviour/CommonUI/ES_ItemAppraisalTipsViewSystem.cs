@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponentClient))]
+    [FriendOf(typeof (UserInfoComponent_C))]
     [EntitySystemOf(typeof (ES_ItemAppraisalTips))]
     [FriendOfAttribute(typeof (ES_ItemAppraisalTips))]
     public static partial class ES_ItemAppraisalTipsSystem
@@ -345,7 +345,7 @@ namespace ET.Client
             {
                 self.E_ItemLvText.text = langStr + ":" + itemconf.UseLv;
 
-                if (itemconf.UseLv > self.Root().GetComponent<UserInfoComponentClient>().UserInfo.Lv)
+                if (itemconf.UseLv > self.Root().GetComponent<UserInfoComponent_C>().UserInfo.Lv)
                 {
                     self.E_ItemLvText.text = langStr + " : " + itemconf.UseLv;
                     //self.ItemItemLv.GetComponent<Text>().text = langStr + " : " + itemconf.UseLv + " (等级不足)";
@@ -387,8 +387,8 @@ namespace ET.Client
             {
                 int appraisalItem = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID).AppraisalItem;
 
-                BagComponentClient bagComponentClient = self.Root().GetComponent<BagComponentClient>();
-                BagInfo costbaginfo = bagComponentClient.GetBagInfo(appraisalItem);
+                BagComponent_C bagComponentC = self.Root().GetComponent<BagComponent_C>();
+                BagInfo costbaginfo = bagComponentC.GetBagInfo(appraisalItem);
                 if (costbaginfo == null)
                 {
                     self.Root().GetComponent<FlyTipComponent>().SpawnFlyTipDi("道具不足！");

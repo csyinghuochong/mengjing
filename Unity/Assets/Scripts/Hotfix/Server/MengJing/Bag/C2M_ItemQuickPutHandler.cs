@@ -21,7 +21,7 @@ namespace ET.Server
 
             M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
 
-            BagComponentServer bagComponent = unit.GetComponent<BagComponentServer>();
+            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
 
             List<BagInfo> warehourselist = bagComponent.GetItemByLoc((ItemLocType)hourseId);
 

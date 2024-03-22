@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
-    [FriendOf(typeof(TaskComponentServer))]
+    [FriendOf(typeof(TaskComponent_S))]
     public class C2M_TaskGetRequestHandler : MessageLocationHandler<Unit, C2M_TaskGetRequest, M2C_TaskGetResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_TaskGetRequest request, M2C_TaskGetResponse response)
@@ -17,21 +17,21 @@ namespace ET.Server
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(request.TaskId);
             if (taskConfig.TaskType == TaskTypeEnum.Daily)
             {
-                TaskComponentServer taskComponent = unit.GetComponent<TaskComponentServer>();
+                TaskComponent_S taskComponent = unit.GetComponent<TaskComponent_S>();
                 if (taskComponent.GetTaskList(TaskTypeEnum.Daily).Count > 0)
                 {
                     response.Error = ErrorCode.ERR_TaskCanNotGet;
                     return;
                 }
 
-                //获取当前任务是否已达上限
-                if (unit.GetComponent<NumericComponentServer>().GetAsInt(NumericType.DailyTaskNumber) >= GlobalValueConfigCategory.Instance.Get(58).Value2)
+                //鑾峰彇褰撳墠浠诲姟鏄惁宸茶揪涓婇檺
+                if (unit.GetComponent<NumericComponent_S>().GetAsInt(NumericType.DailyTaskNumber) >= GlobalValueConfigCategory.Instance.Get(58).Value2)
                 {
                     response.Error = ErrorCode.ERR_ShangJinNumFull;
                     return;
                 }
 
-                NumericComponentServer numericComponent = unit.GetComponent<NumericComponentServer>();
+                NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
                 int dailyTask = numericComponent.GetAsInt(NumericType.DailyTaskID);
                 if (dailyTask == 0)
                 {
@@ -42,22 +42,22 @@ namespace ET.Server
             }
             else if (taskConfig.TaskType == TaskTypeEnum.Union)
             {
-                TaskComponentServer taskComponent = unit.GetComponent<TaskComponentServer>();
+                TaskComponent_S taskComponent = unit.GetComponent<TaskComponent_S>();
                 if (taskComponent.GetTaskList(TaskTypeEnum.Union).Count > 0)
                 {
                     response.Error = ErrorCode.ERR_TaskNoComplete;
                     return;
                 }
 
-                //获取当前任务是否已达上限
-                int uniontask = unit.GetComponent<NumericComponentServer>().GetAsInt(NumericType.UnionTaskNumber);
+                //鑾峰彇褰撳墠浠诲姟鏄惁宸茶揪涓婇檺
+                int uniontask = unit.GetComponent<NumericComponent_S>().GetAsInt(NumericType.UnionTaskNumber);
                 if (uniontask >= GlobalValueConfigCategory.Instance.Get(108).Value2)
                 {
                     response.Error = ErrorCode.ERR_TaskLimited;
                     return;
                 }
 
-                NumericComponentServer numericComponent = unit.GetComponent<NumericComponentServer>();
+                NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
                 int unionTaskId = numericComponent.GetAsInt(NumericType.UnionTaskId);
                 if (unionTaskId == 0)
                 {
@@ -69,18 +69,18 @@ namespace ET.Server
             else if (taskConfig.TaskType == TaskTypeEnum.Treasure
                 || taskConfig.TaskType == TaskTypeEnum.Ring)
             {
-                if (unit.GetComponent<TaskComponentServer>().GetTaskList(taskConfig.TaskType).Count > 1)
+                if (unit.GetComponent<TaskComponent_S>().GetTaskList(taskConfig.TaskType).Count > 1)
                 {
                     response.Error = ErrorCode.ERR_ModifyData;
                     return;
                 }
-                (TaskPro taskPro, int error) = unit.GetComponent<TaskComponentServer>().OnAcceptedTask(request.TaskId);
+                (TaskPro taskPro, int error) = unit.GetComponent<TaskComponent_S>().OnAcceptedTask(request.TaskId);
                 response.Error = error;
                 response.TaskPro = taskPro;
             }
             else
             {
-                (TaskPro taskPro, int error) = unit.GetComponent<TaskComponentServer>().OnAcceptedTask(request.TaskId);
+                (TaskPro taskPro, int error) = unit.GetComponent<TaskComponent_S>().OnAcceptedTask(request.TaskId);
                 response.Error = error;
                 response.TaskPro = taskPro;
             }

@@ -2,14 +2,14 @@
 
 namespace ET.Server
 {
-    [FriendOf(typeof (ChatSceneComponent))]
-    [EntitySystemOf(typeof (ChatSceneComponent))]
+    [FriendOf(typeof (ChatServerComponent))]
+    [EntitySystemOf(typeof (ChatServerComponent))]
     public static partial class ChatSceneComponentSystem
     {
         [Invoke(TimerInvokeType.ChatSceneTimer)]
-        public class ChatSceneTimer: ATimer<ChatSceneComponent>
+        public class ChatSceneTimer: ATimer<ChatServerComponent>
         {
-            protected override void Run(ChatSceneComponent self)
+            protected override void Run(ChatServerComponent self)
             {
                 try
                 {
@@ -23,14 +23,14 @@ namespace ET.Server
         }
 
         [EntitySystem]
-        private static void Awake(this ChatSceneComponent self)
+        private static void Awake(this ChatServerComponent self)
         {
             self.WordSayList.Clear();
             self.OnZeroClockUpdate();
         }
 
         [EntitySystem]
-        private static void Destroy(this ChatSceneComponent self)
+        private static void Destroy(this ChatServerComponent self)
         {
             TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
             timerComponent.Remove(ref self.Timer);
@@ -41,7 +41,7 @@ namespace ET.Server
             }
         }
 
-        public static void OnZeroClockUpdate(this ChatSceneComponent self)
+        public static void OnZeroClockUpdate(this ChatServerComponent self)
         {
             long serverTime = TimeHelper.ServerNow();
             DateTime dateTime = TimeHelper.DateTimeNow();
@@ -76,7 +76,7 @@ namespace ET.Server
             self.StartTimer();
         }
 
-        public static void StartTimer(this ChatSceneComponent self)
+        public static void StartTimer(this ChatServerComponent self)
         {
             TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
             if (self.WordSayList.Count > 0)
@@ -90,7 +90,7 @@ namespace ET.Server
             }
         }
 
-        public static void OnCheck(this ChatSceneComponent self)
+        public static void OnCheck(this ChatServerComponent self)
         {
             if (self.WordSayList.Count > 0)
             {
@@ -104,7 +104,7 @@ namespace ET.Server
             self.StartTimer();
         }
 
-        public static void Add(this ChatSceneComponent self, ChatInfoUnit chatInfoUnit)
+        public static void Add(this ChatServerComponent self, ChatInfoUnit chatInfoUnit)
         {
             if (self.ChatInfoUnitsDict.ContainsKey(chatInfoUnit.Id))
             {
@@ -115,13 +115,13 @@ namespace ET.Server
             self.ChatInfoUnitsDict.Add(chatInfoUnit.Id, chatInfoUnit);
         }
 
-        public static ChatInfoUnit Get(this ChatSceneComponent self, long id)
+        public static ChatInfoUnit Get(this ChatServerComponent self, long id)
         {
             self.ChatInfoUnitsDict.TryGetValue(id, out ChatInfoUnit chatInfoUnit);
             return chatInfoUnit;
         }
 
-        public static void Remove(this ChatSceneComponent self, long id)
+        public static void Remove(this ChatServerComponent self, long id)
         {
             if (self.ChatInfoUnitsDict.TryGetValue(id, out ChatInfoUnit chatInfoUnit))
             {

@@ -62,7 +62,7 @@ namespace ET.Client
 			{
 				return;
 			}
-			int equipIndex = unit.GetComponent<NumericComponentClient>().GetAsInt(NumericType.EquipIndex);
+			int equipIndex = unit.GetComponent<NumericComponent_C>().GetAsInt(NumericType.EquipIndex);
 			if (self.animatorControllers.Count < equipIndex)
 			{
                 equipIndex = 0;

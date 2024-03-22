@@ -14,11 +14,11 @@ namespace ET.Server
             }
 
             PetEggDuiHuanConfig config = PetEggDuiHuanConfigCategory.Instance.Get(request.ChouKaId);
-            if (unit.GetComponent<BagComponentServer>().OnCostItemData(config.CostItems))
+            if (unit.GetComponent<BagComponent_S>().OnCostItemData(config.CostItems))
             {
                 List<RewardItem> rewardItems = new List<RewardItem>();
                 DropHelper.DropIDToDropItem_2(config.DropID, rewardItems);
-                unit.GetComponent<BagComponentServer>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.PetEggDuiHuan}_{TimeHelper.ServerNow()}");
+                unit.GetComponent<BagComponent_S>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.PetEggDuiHuan}_{TimeHelper.ServerNow()}");
                 response.ReardList = rewardItems;   
             }
             await ETTask.CompletedTask;

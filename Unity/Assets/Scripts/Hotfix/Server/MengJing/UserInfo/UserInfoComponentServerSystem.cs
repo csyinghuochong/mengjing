@@ -3,21 +3,21 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-    [FriendOf(typeof (UserInfoComponentServer))]
-    [EntitySystemOf(typeof (UserInfoComponentServer))]
+    [FriendOf(typeof (UserInfoComponent_S))]
+    [EntitySystemOf(typeof (UserInfoComponent_S))]
     public static partial class UserInfoComponentServerSystem
     {
         [EntitySystem]
-        private static void Awake(this UserInfoComponentServer self)
+        private static void Awake(this UserInfoComponent_S self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this UserInfoComponentServer self)
+        private static void Destroy(this UserInfoComponent_S self)
         {
         }
 
-        public static void OnInit(this UserInfoComponentServer self, string account, long id, long accountId, CreateRoleInfo createRoleInfo)
+        public static void OnInit(this UserInfoComponent_S self, string account, long id, long accountId, CreateRoleInfo createRoleInfo)
         {
              self.Account = account;
              self.UserInfo = new UserInfo();
@@ -56,7 +56,7 @@ namespace ET.Server
             }
         }
 
-        public static void UpdateRoleMoneyAdd(this UserInfoComponentServer self, int Type, string value, bool notice, int getWay,
+        public static void UpdateRoleMoneyAdd(this UserInfoComponent_S self, int Type, string value, bool notice, int getWay,
         string paramsifo = "")
         {
             Unit unit = self.GetParent<Unit>();
@@ -114,7 +114,7 @@ namespace ET.Server
         }
 
         //扣金币
-        public static void UpdateRoleMoneySub(this UserInfoComponentServer self, int Type, string value, bool notice = true,
+        public static void UpdateRoleMoneySub(this UserInfoComponent_S self, int Type, string value, bool notice = true,
         int getWay = ItemGetWay.System,
         string paramsifo = "")
         {
@@ -138,7 +138,7 @@ namespace ET.Server
             self.UpdateRoleData(Type, value, notice);
         }
 
-        public static void UpdateRoleData(this UserInfoComponentServer self, int Type, string value, bool notice = true)
+        public static void UpdateRoleData(this UserInfoComponent_S self, int Type, string value, bool notice = true)
         {
             Unit unit = self.GetParent<Unit>();
             string saveValue = "";
@@ -208,9 +208,9 @@ namespace ET.Server
                 case UserDataType.Lv:
                     self.UserInfo.Lv += int.Parse(value);
                     saveValue = self.UserInfo.Lv.ToString();
-                    long maxHp = unit.GetComponent<NumericComponentServer>().GetAsLong((int)NumericType.Now_MaxHp);
-                    unit.GetComponent<NumericComponentServer>().Set(NumericType.Now_Hp, maxHp);
-                    unit.GetComponent<NumericComponentServer>().Set(NumericType.PointRemain, int.Parse(value) * 10);
+                    long maxHp = unit.GetComponent<NumericComponent_S>().GetAsLong((int)NumericType.Now_MaxHp);
+                    unit.GetComponent<NumericComponent_S>().Set(NumericType.Now_Hp, maxHp);
+                    unit.GetComponent<NumericComponent_S>().Set(NumericType.PointRemain, int.Parse(value) * 10);
                     // unit.GetComponent<TaskComponent>().OnUpdateLevel(self.UserInfo.Lv);
                     // unit.GetComponent<ChengJiuComponent>().OnUpdateLevel(self.UserInfo.Lv);
                     // unit.GetComponent<HeroDataComponent>().CheckSeasonOpen(true);
@@ -333,7 +333,7 @@ namespace ET.Server
             }
         }
         
-        public static int GetDayItemUse(this UserInfoComponentServer self, int mysteryId)
+        public static int GetDayItemUse(this UserInfoComponent_S self, int mysteryId)
         {
             for (int i = 0; i < self.UserInfo.DayItemUse.Count; i++)
             {
@@ -345,97 +345,97 @@ namespace ET.Server
             return 0;
         }
 
-        public static bool IsRobot(this UserInfoComponentServer self)
+        public static bool IsRobot(this UserInfoComponent_S self)
         {
             return self.UserInfo.RobotId > 0;
         }
 
-        public static int GetUserLv(this UserInfoComponentServer self)
+        public static int GetUserLv(this UserInfoComponent_S self)
         {
             return self.UserInfo.Lv;
         }
 
-        public static List<int> GetPetExploreRewardIds(this UserInfoComponentServer self)
+        public static List<int> GetPetExploreRewardIds(this UserInfoComponent_S self)
         {
             return self.UserInfo.PetExploreRewardIds;
         }
 
-        public static int GetSp(this UserInfoComponentServer self)
+        public static int GetSp(this UserInfoComponent_S self)
         {
             return self.UserInfo.Sp;
         }
 
-        public static void SetUserLv(this UserInfoComponentServer self, int lv)
+        public static void SetUserLv(this UserInfoComponent_S self, int lv)
         {
             self.UserInfo.Lv = lv;
         }
 
-        public static long GetPiLao(this UserInfoComponentServer self)
+        public static long GetPiLao(this UserInfoComponent_S self)
         {
             return self.UserInfo.PiLao;
         }
 
-        public static long GetGold(this UserInfoComponentServer self)
+        public static long GetGold(this UserInfoComponent_S self)
         {
             return self.UserInfo.Gold;
         }
 
-        public static long GetDiamond(this UserInfoComponentServer self)
+        public static long GetDiamond(this UserInfoComponent_S self)
         {
             return self.UserInfo.Diamond;
         }
 
-        public static string GetUnionName(this UserInfoComponentServer self)
+        public static string GetUnionName(this UserInfoComponent_S self)
         {
             return self.UserInfo.UnionName;
         }
         
-        public static int GetVitality(this UserInfoComponentServer self)
+        public static int GetVitality(this UserInfoComponent_S self)
         {
             return self.UserInfo.Vitality;
         }
         
-        public static long GetJiaYuanFund(this UserInfoComponentServer self)
+        public static long GetJiaYuanFund(this UserInfoComponent_S self)
         {
             return self.UserInfo.JiaYuanFund;
         }
         
-        public static int GetCombat(this UserInfoComponentServer self)
+        public static int GetCombat(this UserInfoComponent_S self)
         {
             return self.UserInfo.Combat;
         }
 
-        public static int GetOcc(this UserInfoComponentServer self)
+        public static int GetOcc(this UserInfoComponent_S self)
         {
             return self.UserInfo.Occ;
         }
         
-        public static int GetRobotId(this UserInfoComponentServer self)
+        public static int GetRobotId(this UserInfoComponent_S self)
         {
             return self.UserInfo.RobotId;
         }
 
-        public static string GetName(this UserInfoComponentServer self)
+        public static string GetName(this UserInfoComponent_S self)
         {
             return self.UserInfo.Name;
         }
 
-        public static int GetOccTwo(this UserInfoComponentServer self)
+        public static int GetOccTwo(this UserInfoComponent_S self)
         {
             return self.UserInfo.OccTwo;
         }
 
-        public static void SetOccTwo(this UserInfoComponentServer self, int  occTwo)
+        public static void SetOccTwo(this UserInfoComponent_S self, int  occTwo)
         {
             self.UserInfo.OccTwo = 0;
         }
 
-        public static int GetJiaYuanLv(this UserInfoComponentServer self)
+        public static int GetJiaYuanLv(this UserInfoComponent_S self)
         {
             return self.UserInfo.JiaYuanLv;
         }
 
-        public static void OnCleanBossCD(this UserInfoComponentServer self)
+        public static void OnCleanBossCD(this UserInfoComponent_S self)
         {
             for (int i = 0; i < self.UserInfo.MonsterRevives.Count; i++)
             {
@@ -443,7 +443,7 @@ namespace ET.Server
             }
         }
         
-        public static void OnHorseActive(this UserInfoComponentServer self, int horseId, bool active)
+        public static void OnHorseActive(this UserInfoComponent_S self, int horseId, bool active)
         {
             if (active && !self.UserInfo.HorseIds.Contains(horseId))
             {
@@ -455,18 +455,18 @@ namespace ET.Server
             }
         }
 
-        public static int GetCrateDay(this UserInfoComponentServer self)
+        public static int GetCrateDay(this UserInfoComponent_S self)
         {
             return 1;
         }
 
-        public static long GetReviveTime(this UserInfoComponentServer self, int monsterId)
+        public static long GetReviveTime(this UserInfoComponent_S self, int monsterId)
         {
             return 0;
 
         }
 
-        public static void OnDayItemUse(this UserInfoComponentServer self, int itemId)
+        public static void OnDayItemUse(this UserInfoComponent_S self, int itemId)
         {
             for (int i = 0; i < self.UserInfo.DayItemUse.Count; i++)
             {
@@ -479,7 +479,7 @@ namespace ET.Server
             self.UserInfo.DayItemUse.Add(new KeyValuePairInt() { KeyId = itemId, Value = 1 });
         }
         
-        public static long GetSceneFubenTimes(this UserInfoComponentServer self, int sceneId)
+        public static long GetSceneFubenTimes(this UserInfoComponent_S self, int sceneId)
         {
             for (int i = 0; i < self.UserInfo.DayFubenTimes.Count; i++)
             {
@@ -491,7 +491,7 @@ namespace ET.Server
             return 0;
         }
         
-        public static void AddSceneFubenTimes(this UserInfoComponentServer self, int sceneId)
+        public static void AddSceneFubenTimes(this UserInfoComponent_S self, int sceneId)
         {
             for (int i = 0; i < self.UserInfo.DayFubenTimes.Count; i++)
             {
@@ -504,7 +504,7 @@ namespace ET.Server
             self.UserInfo.DayFubenTimes.Add(new KeyValuePairInt() { KeyId = sceneId, Value = 1 });
         }
         
-        public static int GetMonsterKillNumber(this UserInfoComponentServer self, int monsterId)
+        public static int GetMonsterKillNumber(this UserInfoComponent_S self, int monsterId)
         {
             for (int i = 0; i < self.UserInfo.MonsterRevives.Count; i++)
             {
@@ -525,7 +525,7 @@ namespace ET.Server
             return 0;
         }
         
-        public static void OnAddRevive(this UserInfoComponentServer self, int monsterId, long reviveTime)
+        public static void OnAddRevive(this UserInfoComponent_S self, int monsterId, long reviveTime)
         {
             bool have = false;  
             for (int i = 0; i < self.UserInfo.MonsterRevives.Count; i++)
@@ -555,7 +555,7 @@ namespace ET.Server
             //MessageHelper.SendToClient( self.GetParent<Unit>(), m2C_UpdateUserInfo );
         }
 
-        public static void OnAddFirstWinSelf(this UserInfoComponentServer self, Unit boss, int difficulty)
+        public static void OnAddFirstWinSelf(this UserInfoComponent_S self, Unit boss, int difficulty)
         {
             if (difficulty == 0)
             {
@@ -596,7 +596,7 @@ namespace ET.Server
         }
 
 
-         public static int GetRandomMonsterId(this UserInfoComponentServer self)
+         public static int GetRandomMonsterId(this UserInfoComponent_S self)
          {
              List<KeyValuePairInt> dayMonster = self.UserInfo.DayMonsters;
              List<DayMonsters> dayMonsterConfig = GlobalValueConfigCategory.Instance.DayMonsterList;
@@ -632,7 +632,7 @@ namespace ET.Server
              return 0;
          }
 
-         public static bool IsCheskOpen(this UserInfoComponentServer self, int fubenId, int monsterId)
+         public static bool IsCheskOpen(this UserInfoComponent_S self, int fubenId, int monsterId)
          {
              List<KeyValuePair> chestList = self.UserInfo.OpenChestList;
              for (int i = 0; i < chestList.Count; i++)
@@ -645,7 +645,7 @@ namespace ET.Server
              return false;
          }
          
-         public static void AddFubenTimes(this UserInfoComponentServer self, int sceneId, int times)
+         public static void AddFubenTimes(this UserInfoComponent_S self, int sceneId, int times)
          {
              for (int i = 0; i < self.UserInfo.DayFubenTimes.Count; i++)
              {
@@ -662,7 +662,7 @@ namespace ET.Server
              }
          }
          
-         public static int GetRandomJingLingId(this UserInfoComponentServer self)
+         public static int GetRandomJingLingId(this UserInfoComponent_S self)
          {
              List<DayJingLing> dayMonsterConfig = GlobalValueConfigCategory.Instance.DayJingLingList;
              List<int> dayMonster = self.UserInfo.DayJingLing;

@@ -5,14 +5,14 @@ using Unity.Mathematics;
 namespace ET.Server
 {
     [FriendOf(typeof(MoveComponent))]
-    [FriendOf(typeof(NumericComponentServer))]
-    [FriendOf(typeof(UserInfoComponentServer))]
+    [FriendOf(typeof(NumericComponent_S))]
+    [FriendOf(typeof(UserInfoComponent_S))]
     public static partial class UnitHelper
     {
         public static UnitInfo CreateUnitInfo(Unit unit)
         {
             UnitInfo unitInfo = new();
-            NumericComponentServer nc = unit.GetComponent<NumericComponentServer>();
+            NumericComponent_S nc = unit.GetComponent<NumericComponent_S>();
             unitInfo.UnitId = unit.Id;
             unitInfo.ConfigId = unit.ConfigId;
             unitInfo.Type = (int)unit.Type();
@@ -67,7 +67,7 @@ namespace ET.Server
         public static void RecordPostion(this Unit self, int sceneType, int sceneId)
         {
             bool record = false;
-            NumericComponentServer numericComponent = self.GetComponent<NumericComponentServer>();
+            NumericComponent_S numericComponent = self.GetComponent<NumericComponent_S>();
             if (!SceneConfigHelper.UseSceneConfig(sceneType) || sceneId == 0)
             {
                 record = false;
@@ -100,7 +100,7 @@ namespace ET.Server
         
         public static int GetCurrentTowerId(this Unit self, int sceneType)
         {
-            NumericComponentServer numericComponent = self.GetComponent<NumericComponentServer>();
+            NumericComponent_S numericComponent = self.GetComponent<NumericComponent_S>();
             if (sceneType == SceneTypeEnum.TrialDungeon)
             {
                 return numericComponent.GetAsInt(NumericType.TrialDungeonId);
@@ -143,22 +143,22 @@ namespace ET.Server
         
         public static long GetTeamId(this Unit self)
         {
-            return self.GetComponent<NumericComponentServer>().GetAsInt(NumericType.TeamId);
+            return self.GetComponent<NumericComponent_S>().GetAsInt(NumericType.TeamId);
         }
         
         public static int GetAttackMode(this Unit self)
         {
-            return self.GetComponent<NumericComponentServer>().GetAsInt(NumericType.AttackMode);
+            return self.GetComponent<NumericComponent_S>().GetAsInt(NumericType.AttackMode);
         }
         
         public static long GetUnionId(this Unit self)
         {
-            return self.GetComponent<NumericComponentServer>().GetAsLong(NumericType.UnionId_0);
+            return self.GetComponent<NumericComponent_S>().GetAsLong(NumericType.UnionId_0);
         }
         
         public static void SetBornPosition(this Unit self, float3 vector3, bool notice)
         {
-            NumericComponentServer numericComponent = self.GetComponent<NumericComponentServer>();
+            NumericComponent_S numericComponent = self.GetComponent<NumericComponent_S>();
             numericComponent.SetEvent(NumericType.Born_X, (long)(vector3.x * 10000), notice);
             numericComponent.SetEvent(NumericType.Born_Y, (long)(vector3.y * 10000), notice);
             numericComponent.SetEvent(NumericType.Born_Z, (long)(vector3.z * 10000), notice);
@@ -166,7 +166,7 @@ namespace ET.Server
         
         public static float3 GetBornPostion(this Unit self)
         {
-            NumericComponentServer numericComponent = self.GetComponent<NumericComponentServer>();
+            NumericComponent_S numericComponent = self.GetComponent<NumericComponent_S>();
             return new float3(numericComponent.GetAsFloat(NumericType.Born_X),
                 numericComponent.GetAsFloat(NumericType.Born_Y),
                 numericComponent.GetAsFloat(NumericType.Born_Z));
@@ -174,7 +174,7 @@ namespace ET.Server
 
         public static int GetBattleCamp(this Unit self)
         {
-            NumericComponentServer numericComponent = self.GetComponent<NumericComponentServer>();
+            NumericComponent_S numericComponent = self.GetComponent<NumericComponent_S>();
             return numericComponent.GetAsInt(NumericType.BattleCamp);
         }
         
@@ -191,7 +191,7 @@ namespace ET.Server
 
             if (checkdead)
             {
-                NumericComponentServer numericComponent = self.GetComponent<NumericComponentServer>();
+                NumericComponent_S numericComponent = self.GetComponent<NumericComponent_S>();
                 if (numericComponent.GetAsLong((int)NumericType.Now_Hp) <= 0
                     || numericComponent.GetAsLong((int)NumericType.Now_Dead) == 1)
                     return false;
@@ -204,7 +204,7 @@ namespace ET.Server
         {
             for (int i = 0; i < allunits.Count; i++)
             {
-                if (allunits[i].GetComponent<NumericComponentServer>().GetAsInt(NumericType.GatherCellIndex) == cellIndex)
+                if (allunits[i].GetComponent<NumericComponent_S>().GetAsInt(NumericType.GatherCellIndex) == cellIndex)
                 {
                     return allunits[i];
                 }

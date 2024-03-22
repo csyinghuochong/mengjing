@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [FriendOf(typeof (DBAccountInfo))]
-    [FriendOf(typeof (UserInfoComponentServer))]
+    [FriendOf(typeof (UserInfoComponent_S))]
     [MessageSessionHandler(SceneType.Gate)]
     public class C2A_DeleteRoleDataHandler: MessageSessionHandler<C2A_DeleteRoleData, A2C_DeleteRoleData>
     {

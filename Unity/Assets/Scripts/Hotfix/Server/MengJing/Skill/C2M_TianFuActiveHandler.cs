@@ -7,7 +7,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_TianFuActiveRequest request, M2C_TianFuActiveResponse response)
         {
             await ETTask.CompletedTask;
-            SkillSetComponentServer skillSetComponent = unit.GetComponent<SkillSetComponentServer>();
+            SkillSetComponent_S skillSetComponent = unit.GetComponent<SkillSetComponent_S>();
             int oldId = skillSetComponent.HaveSameTianFu(request.TianFuId);
             if (oldId != 0 && oldId != request.TianFuId)
             {
@@ -15,14 +15,14 @@ namespace ET.Server
                 TalentConfig talentConfig = TalentConfigCategory.Instance.Get(request.TianFuId);
                 int num = 50000 + talentConfig.LearnRoseLv * 100;
                 string cost = "1;" + num;
-                if (!unit.GetComponent<BagComponentServer>().OnCostItemData(cost))
+                if (!unit.GetComponent<BagComponent_S>().OnCostItemData(cost))
                 {
                     response.Error = ErrorCode.ERR_ItemNotEnoughError;
                     return;
                 }
             }
 
-            unit.GetComponent<SkillSetComponentServer>().OnActiveTianfu(request);
+            unit.GetComponent<SkillSetComponent_S>().OnActiveTianfu(request);
         }
     }
 }
