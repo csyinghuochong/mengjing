@@ -20,6 +20,7 @@ namespace ET.Server
         public static void OnInit(this UserInfoComponentServer self, string account, long id, long accountId, CreateRoleInfo createRoleInfo)
         {
              self.Account = account;
+             self.UserInfo = new UserInfo();
             UserInfo userInfo = self.UserInfo;
             userInfo.Sp = 1;
             userInfo.UserId = id;
