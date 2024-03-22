@@ -2839,3 +2839,8 @@ message M2C_JiaYuanUpdate // IMessage
 {
 	repeated JiaYuanPurchaseItem PurchaseItemList = 2;
 }
+
+message M2C_FriendApplyResult	// IMessage
+{
+	FriendInfo FriendInfo = 1;
+}

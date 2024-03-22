@@ -12,7 +12,6 @@ namespace ET.Server
         /// 好友列表
         /// </summary>
         public List<long> FriendList = new List<long>();
-
         /// <summary>
         /// 申请列表
         /// </summary>
