@@ -28,6 +28,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof (ES_RoleHuiShou))]
     [FriendOf(typeof (ES_EquipSet))]
     [FriendOf(typeof (ES_RoleGem))]
     [FriendOf(typeof (ES_RoleProperty))]
@@ -55,6 +56,7 @@ namespace ET.Client
             UICommonHelper.SetToggleShow(self.View.E_BagToggle.gameObject, index == 0);
             UICommonHelper.SetToggleShow(self.View.E_PropertyToggle.gameObject, index == 1);
             UICommonHelper.SetToggleShow(self.View.E_GemToggle.gameObject, index == 2);
+            UICommonHelper.SetToggleShow(self.View.E_HuiShowToggle.gameObject, index == 3);
 
             UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
@@ -81,7 +83,7 @@ namespace ET.Client
                     self.View.ES_EquipSet.EquipSetHide(false);
                     break;
                 case 3:
-                    
+                    self.View.ES_RoleHuiShou.uiTransform.gameObject.SetActive(true);
                     self.View.E_ZodiacButton.gameObject.SetActive(false);
                     self.View.ES_EquipSet.uiTransform.gameObject.SetActive(false);
                     self.View.ES_EquipSet.EquipSetHide(true);
@@ -111,7 +113,7 @@ namespace ET.Client
 
             uiComponent.CloseWindow(WindowID.WindowID_Role);
         }
-        
+
         public static void OnClickXiangQianItem(this DlgRole self, BagInfo bagInfo)
         {
             if (self.View.ES_RoleGem.uiTransform.gameObject.activeSelf)

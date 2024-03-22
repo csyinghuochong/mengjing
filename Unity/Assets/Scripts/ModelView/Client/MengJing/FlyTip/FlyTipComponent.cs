@@ -8,5 +8,8 @@ namespace ET.Client
     {
         public List<GameObject> FlyTips = new();
         public List<GameObject> FlyTipDis = new();
+
+        [StaticField]
+        public static FlyTipComponent Instance;
     }
 }

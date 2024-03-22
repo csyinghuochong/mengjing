@@ -211,5 +211,14 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<int> RequestHuiShou(Scene root, List<long> huishouList)
+        {
+            C2M_ItemHuiShouRequest request = new() { OperateBagID = huishouList };
+            M2C_ItemHuiShouResponse response = (M2C_ItemHuiShouResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            EventSystem.Instance.Publish(root, new DataUpdate_EquipHuiShow());
+            return response.Error;
+        }
     }
 }

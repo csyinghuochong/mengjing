@@ -173,6 +173,25 @@ namespace ET.Client
             return typeList;
         }
 
+        public static List<BagInfo> GetItemsByTypeAndSubType(this BagComponentClient self, int itemType, int itemSubType)
+        {
+            List<BagInfo> bagInfos = self.GetBagList();
+            if (itemType == ItemTypeEnum.ALL)
+                return bagInfos;
+
+            List<BagInfo> typeList = new List<BagInfo>();
+            for (int i = 0; i < bagInfos.Count; i++)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
+                if (itemConfig.ItemType == (int)itemType && itemConfig.ItemSubType == itemSubType)
+                {
+                    typeList.Add(bagInfos[i]);
+                }
+            }
+
+            return typeList;
+        }
+
         public static BagInfo GetBagInfo(this BagComponentClient self, long id)
         {
             for (int i = 0; i < self.AllItemList.Length; i++)
@@ -215,23 +234,24 @@ namespace ET.Client
 
             return null;
         }
-        
+
         public static List<BagInfo> GetBagList(this BagComponentClient self)
         {
             return self.AllItemList[(int)ItemLocType.ItemLocBag];
         }
-        
+
         public static int GetBagLeftCell(this BagComponentClient self)
         {
             return self.GetBagTotalCell() - self.GetBagList().Count;
         }
-        
+
         public static int GetBagTotalCell(this BagComponentClient self)
         {
             if (self.WarehouseAddedCell.Count == 0 || self.AdditionalCellNum.Count == 0)
             {
-                return  GlobalValueConfigCategory.Instance.BagInitCapacity;
+                return GlobalValueConfigCategory.Instance.BagInitCapacity;
             }
+
             return self.WarehouseAddedCell[0] + self.AdditionalCellNum[0] + GlobalValueConfigCategory.Instance.BagInitCapacity;
         }
     }

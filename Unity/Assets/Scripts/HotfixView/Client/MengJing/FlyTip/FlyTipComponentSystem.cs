@@ -12,6 +12,7 @@ namespace ET.Client
         private static void Awake(this FlyTipComponent self)
         {
             self.OnAwake().Coroutine();
+            FlyTipComponent.Instance = self;
         }
 
         [EntitySystem]

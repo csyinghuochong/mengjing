@@ -93,6 +93,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Toggle E_HuiShowToggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_HuiShowToggle == null )
+     			{
+		    		this.m_E_HuiShowToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_HuiShow");
+     			}
+     			return this.m_E_HuiShowToggle;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_ZodiacButton
      	{
      		get
@@ -223,6 +240,7 @@ namespace ET.Client
 			this.m_E_BagToggle = null;
 			this.m_E_PropertyToggle = null;
 			this.m_E_GemToggle = null;
+			this.m_E_HuiShowToggle = null;
 			this.m_E_ZodiacButton = null;
 			this.m_E_ZodiacImage = null;
 			this.m_EG_SubViewRectTransform = null;
@@ -238,6 +256,7 @@ namespace ET.Client
 		private UnityEngine.UI.Toggle m_E_BagToggle = null;
 		private UnityEngine.UI.Toggle m_E_PropertyToggle = null;
 		private UnityEngine.UI.Toggle m_E_GemToggle = null;
+		private UnityEngine.UI.Toggle m_E_HuiShowToggle = null;
 		private UnityEngine.UI.Button m_E_ZodiacButton = null;
 		private UnityEngine.UI.Image m_E_ZodiacImage = null;
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;

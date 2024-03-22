@@ -1,12 +1,19 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RoleHuiShou : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_RoleHuiShou : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public BagInfo[] HuiShouInfos = new BagInfo[8];
+		public ES_CommonItem[] HuiShouUIList = new ES_CommonItem[8];
+		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public List<BagInfo> ShowBagInfos = new();
+		public bool IsHoldDown;
+		
 		public ES_CommonItem ES_CommonItem_1
      	{
      		get

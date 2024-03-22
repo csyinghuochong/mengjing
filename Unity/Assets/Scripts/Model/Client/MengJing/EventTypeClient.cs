@@ -30,7 +30,7 @@ namespace ET.Client
     {
         public TaskPro TaskPro;
     }
-    
+
     public struct UserDataTypeUpdate_Gold
     {
     }
@@ -50,29 +50,38 @@ namespace ET.Client
     public struct DataUpdate_FriendUpdate
     {
     }
-    
+
     public struct DataUpdate_TaskGet
     {
     }
-    
+
     public struct DataUpdate_TaskGiveUp
     {
     }
-    
+
     public struct DataUpdate_TaskTrace
     {
     }
-    
+
     public struct DataUpdate_TaskComplete
     {
     }
-    
+
     public struct DataUpdate_BeforeMove
     {
         public string DataParamString;
     }
 
     public struct DataUpdate_EquipWear
+    {
+    }
+
+    public struct DataUpdate_HuiShouSelect
+    {
+        public string DataParamString;
+    }
+
+    public struct DataUpdate_EquipHuiShow
     {
     }
 
