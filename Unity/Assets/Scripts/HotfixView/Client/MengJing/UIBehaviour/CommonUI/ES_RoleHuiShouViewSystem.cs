@@ -64,7 +64,12 @@ namespace ET.Client
 			self.OnUpdateGetList();
 			self.UpdateSelected();
 		}
-		
+
+		public static void OnEquipHuiShow(this ES_RoleHuiShou self)
+		{
+			self.OnUpdateUI();
+		}
+
 		public static void OnUpdateUI(this ES_RoleHuiShou self)
 		{
 			self.HuiShouInfos = new BagInfo[self.HuiShouInfos.Length];

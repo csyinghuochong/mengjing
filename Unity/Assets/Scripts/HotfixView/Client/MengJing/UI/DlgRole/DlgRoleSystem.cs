@@ -28,6 +28,26 @@ namespace ET.Client
         }
     }
 
+    [Event(SceneType.Demo)]
+    public class DataUpdate_HuiShouSelect_Refreshitem: AEvent<Scene, DataUpdate_HuiShouSelect>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_HuiShouSelect args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.OnHuiShouSelect(args.DataParamString);
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
+    public class DataUpdate_EquipHuiShow_Refreshitem: AEvent<Scene, DataUpdate_EquipHuiShow>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_EquipHuiShow args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.OnEquipHuiShow();
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof (ES_RoleHuiShou))]
     [FriendOf(typeof (ES_EquipSet))]
     [FriendOf(typeof (ES_RoleGem))]
@@ -121,12 +141,20 @@ namespace ET.Client
                 self.View.ES_RoleGem.OnClickXiangQianItem(bagInfo);
             }
         }
-        
+
         public static void OnHuiShouSelect(this DlgRole self, string param_1)
         {
             if (self.View.ES_RoleHuiShou.uiTransform.gameObject.activeSelf)
             {
                 self.View.ES_RoleHuiShou.OnHuiShouSelect(param_1);
+            }
+        }
+
+        public static void OnEquipHuiShow(this DlgRole self)
+        {
+            if (self.View.ES_RoleHuiShou.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_RoleHuiShou.OnEquipHuiShow();
             }
         }
     }
