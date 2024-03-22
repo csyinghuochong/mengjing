@@ -198,6 +198,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_RoleHuiShou ES_RoleHuiShou
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_rolehuishou == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleHuiShou");
+		    	   this.m_es_rolehuishou = this.AddChild<ES_RoleHuiShou,Transform>(subTrans);
+     			}
+     			return this.m_es_rolehuishou;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_es_equipset = null;
@@ -211,6 +229,7 @@ namespace ET.Client
 			this.m_es_rolebag = null;
 			this.m_es_roleproperty = null;
 			this.m_es_rolegem = null;
+			this.m_es_rolehuishou = null;
 			this.uiTransform = null;
 		}
 
@@ -225,6 +244,7 @@ namespace ET.Client
 		private EntityRef<ES_RoleBag> m_es_rolebag = null;
 		private EntityRef<ES_RoleProperty> m_es_roleproperty = null;
 		private EntityRef<ES_RoleGem> m_es_rolegem = null;
+		private EntityRef<ES_RoleHuiShou> m_es_rolehuishou = null;
 		public Transform uiTransform = null;
 	}
 }
