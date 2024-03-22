@@ -7,7 +7,7 @@ namespace ET.Server
     /// </summary>
     [ComponentOf(typeof(Scene))]
     [FriendOf(typeof(DBDayActivityInfo))]
-    public class ActivityServerComponent:        Entity, IAwake, IDestroy, ITransfer, IUnitCache
+    public class ActivityServerComponent:        Entity, IAwake, IDestroy
     {
         public long ActivityTimer;
         public List<ActivityTimer> ActivityTimerList = new List<ActivityTimer>();
