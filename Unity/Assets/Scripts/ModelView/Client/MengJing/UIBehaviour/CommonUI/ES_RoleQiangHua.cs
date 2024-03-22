@@ -6,7 +6,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RoleQiangHua : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_RoleQiangHua : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public int ItemSubType;
 		public List<ES_RoleQiangHuaItem> QiangHuaItemList = new();
@@ -397,7 +397,7 @@ namespace ET.Client
      		}
      	}
 
-		public ES_RewardList ES_RewardList
+		public ES_CostList ES_CostList
      	{
      		get
      		{
@@ -406,12 +406,12 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rewardlist == null )
+     			if( this.m_es_costlist == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/EG_NextNode/ES_RewardList");
-		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/EG_NextNode/ES_CostList");
+		    	   this.m_es_costlist = this.AddChild<ES_CostList,Transform>(subTrans);
      			}
-     			return this.m_es_rewardlist;
+     			return this.m_es_costlist;
      		}
      	}
 
@@ -473,7 +473,7 @@ namespace ET.Client
 			this.m_E_SuccessRateText = null;
 			this.m_E_SuccessAdditionText = null;
 			this.m_E_CostTipText = null;
-			this.m_es_rewardlist = null;
+			this.m_es_costlist = null;
 			this.m_E_Attribute1Text = null;
 			this.m_E_QiangHuaNameText = null;
 			this.uiTransform = null;
@@ -501,7 +501,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_SuccessRateText = null;
 		private UnityEngine.UI.Text m_E_SuccessAdditionText = null;
 		private UnityEngine.UI.Text m_E_CostTipText = null;
-		private EntityRef<ES_RewardList> m_es_rewardlist = null;
+		private EntityRef<ES_CostList> m_es_costlist = null;
 		private UnityEngine.UI.Text m_E_Attribute1Text = null;
 		private UnityEngine.UI.Text m_E_QiangHuaNameText = null;
 		public Transform uiTransform = null;

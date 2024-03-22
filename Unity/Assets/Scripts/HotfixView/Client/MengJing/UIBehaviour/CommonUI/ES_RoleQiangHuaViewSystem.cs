@@ -118,10 +118,8 @@ namespace ET.Client
 
             string costItems = equipQiangHuaConfig.CostItem;
             costItems += $"@1;{equipQiangHuaConfig.CostGold}";
-            self.ES_RewardList.Refresh(costItems);
+            self.ES_CostList.Refresh(costItems);
             
-            
-
             self.E_SuccessRateText.text = $"强化成功率: {(int)(equipQiangHuaConfig.SuccessPro * 100)}%";
             double addPro = QiangHuaHelper.GetQiangHuaConfig(subType, qianghuaLevel).AdditionPro * bagComponent.QiangHuaFails[subType];
             self.E_SuccessAdditionText.text = $"附加成功率 {(int)(addPro * 100)}%";

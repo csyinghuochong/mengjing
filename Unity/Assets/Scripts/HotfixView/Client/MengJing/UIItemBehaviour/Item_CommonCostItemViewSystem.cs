@@ -1,20 +1,43 @@
 ﻿
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
-	[EntitySystemOf(typeof(Scroll_Item_CommonCostItem))]
-	public static partial class Scroll_Item_CommonCostItemSystem 
+	[EntitySystemOf(typeof (Scroll_Item_CommonCostItem))]
+	public static partial class Scroll_Item_CommonCostItemSystem
 	{
 		[EntitySystem]
-		private static void Awake(this Scroll_Item_CommonCostItem self )
+		private static void Awake(this Scroll_Item_CommonCostItem self)
 		{
 		}
 
 		[EntitySystem]
-		private static void Destroy(this Scroll_Item_CommonCostItem self )
+		private static void Destroy(this Scroll_Item_CommonCostItem self)
 		{
 			self.DestroyWidget();
+		}
+
+		public static void UpdateItem(this Scroll_Item_CommonCostItem self, int itemId, int itemNum)
+		{
+			BagComponentClient bagComponent = self.Root().GetComponent<BagComponentClient>();
+			ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemId);
+
+			self.E_ItemNameText.text = itemConfig.ItemName;
+
+			//显示字
+			//self.Label_ItemNum.GetComponent<Text>().text = $"{bagComponent.GetItemNumber(itemId)}/{itemNum}";
+			self.E_ItemNumText.text = $"{UICommonHelper.NumToWString(bagComponent.GetItemNumber(itemId))}/{UICommonHelper.NumToWString(itemNum)}";
+			//显示颜色
+			self.E_ItemNumText.color = (itemNum < bagComponent.GetItemNumber(itemId))? Color.green : Color.red;
+			string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+			Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+			self.E_ItemIconImage.sprite = sp;
+
+			string qualityiconStr = FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality);
+			string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
+			Sprite sp2 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
+			self.E_ItemQualityImage.sprite = sp2;
 		}
 	}
 }

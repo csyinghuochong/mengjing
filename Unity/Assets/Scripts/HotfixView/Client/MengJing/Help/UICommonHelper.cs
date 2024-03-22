@@ -6,6 +6,25 @@ namespace ET.Client
 {
     public static class UICommonHelper
     {
+        //数字转换万
+        public static string NumToWString(long num) {
+
+            //超过10万才显示
+            if (num >= 100000)
+            {
+                if (num % 10000 == 0)
+                {
+                    return (num / 10000).ToString() + "万";
+                }
+                else {
+                    return ((float)num / 10000f).ToString("F2") + "万";
+                }
+            }
+            else {
+                return num.ToString();
+            }
+
+        }
         
         // 根据品质返回一个Color
         public static Color QualityReturnColor(int ItenQuality)
