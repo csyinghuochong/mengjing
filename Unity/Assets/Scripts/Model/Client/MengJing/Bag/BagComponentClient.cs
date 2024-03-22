@@ -6,7 +6,10 @@ namespace ET.Client
     [ComponentOf(typeof (Scene))]
     public class BagComponentClient: Entity, IAwake, IDestroy
     {
+        public List<int> QiangHuaLevel = new List<int>();
+        
         public List<BagInfo>[] AllItemList;
+        
         public bool RealAddItem;
         /// <summary>
         /// ItemLocType.ItemWareHouse1 之后的所有仓库（购买格子数量）
