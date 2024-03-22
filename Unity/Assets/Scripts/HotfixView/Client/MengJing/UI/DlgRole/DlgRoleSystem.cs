@@ -121,5 +121,13 @@ namespace ET.Client
                 self.View.ES_RoleGem.OnClickXiangQianItem(bagInfo);
             }
         }
+        
+        public static void OnHuiShouSelect(this DlgRole self, string param_1)
+        {
+            if (self.View.ES_RoleHuiShou.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_RoleHuiShou.OnHuiShouSelect(param_1);
+            }
+        }
     }
 }

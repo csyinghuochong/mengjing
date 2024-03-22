@@ -57,6 +57,14 @@ namespace ET.Client
 			scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (binfo, pdata) => { self.OnPointerUp(binfo, pdata); };
 		}
 
+		public static void OnHuiShouSelect(this ES_RoleHuiShou self, string dataparams)
+		{
+			self.UpdateHuiShouInfo(dataparams);
+			self.UpdateHuiShouUI();
+			self.OnUpdateGetList();
+			self.UpdateSelected();
+		}
+		
 		public static void OnUpdateUI(this ES_RoleHuiShou self)
 		{
 			self.HuiShouInfos = new BagInfo[self.HuiShouInfos.Length];
@@ -66,7 +74,43 @@ namespace ET.Client
 			self.UpdateSelected();
 		}
 
-		public static void UpdateSelected(this ES_RoleHuiShou self)
+		private static void UpdateHuiShouInfo(this ES_RoleHuiShou self, string dataparams)
+		{
+			string[] huishouInfo = dataparams.Split('_');
+			BagInfo bagInfo = self.Root().GetComponent<BagComponentClient>().GetBagInfo(long.Parse(huishouInfo[1]));
+			if (huishouInfo[0] == "1")
+			{
+				for (int i = 0; i < self.HuiShouInfos.Length; i++)
+				{
+					if (self.HuiShouInfos[i] == bagInfo)
+					{
+						return;
+					}
+				}
+
+				for (int i = 0; i < self.HuiShouInfos.Length; i++)
+				{
+					if (self.HuiShouInfos[i] == null)
+					{
+						self.HuiShouInfos[i] = bagInfo;
+						break;
+					}
+				}
+			}
+			else
+			{
+				for (int i = 0; i < self.HuiShouInfos.Length; i++)
+				{
+					if (self.HuiShouInfos[i] == bagInfo)
+					{
+						self.HuiShouInfos[i] = null;
+						break;
+					}
+				}
+			}
+		}
+
+		private static void UpdateSelected(this ES_RoleHuiShou self)
 		{
 			for (int i = 0; i < self.ScrollItemCommonItems.Keys.Count - 1; i++)
 			{
