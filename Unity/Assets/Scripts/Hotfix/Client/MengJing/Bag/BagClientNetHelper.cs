@@ -220,5 +220,13 @@ namespace ET.Client
             EventSystem.Instance.Publish(root, new DataUpdate_EquipHuiShow());
             return response.Error;
         }
+
+        public static async ETTask<int> RequestXiangQianGem(Scene root, BagInfo bagInfo, string par = "")
+        {
+            C2M_ItemOperateGemRequest request = new() { OperateType = 9, OperateBagID = bagInfo.BagInfoID, OperatePar = par };
+            M2C_ItemOperateGemResponse response = (M2C_ItemOperateGemResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
 }

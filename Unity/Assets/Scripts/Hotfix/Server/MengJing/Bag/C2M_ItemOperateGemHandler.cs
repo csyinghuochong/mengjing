@@ -21,24 +21,24 @@ namespace ET.Server
                 return;
             }
 
-            // Í¨Öª¿Í»§¶Ë±³°üË¢ĞÂ
+            // é€šçŸ¥å®¢æˆ·ç«¯èƒŒåŒ…åˆ·æ–°
             M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
-            //Í¨Öª¿Í»§¶Ë±³°üµÀ¾ß·¢Éú¸Ä±ä
+            //é€šçŸ¥å®¢æˆ·ç«¯èƒŒåŒ…é“å…·å‘ç”Ÿæ”¹å˜
             m2c_bagUpdate.BagInfoUpdate = new List<BagInfo>();
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(useBagInfo.ItemID);
 
-            //ÏâÇ¶±¦Ê¯
+            //é•¶åµŒå®çŸ³
             if (request.OperateType == 9)
             {
-                //±¦Ê¯ÏâÇ¶
+                //å®çŸ³é•¶åµŒ
                 string[] geminfos = request.OperatePar.Split('_');
                 long equipid = long.Parse(geminfos[0]);
                 int gemIndex = int.Parse(geminfos[1]);
 
                 BagInfo equipInfo = unit.GetComponent<BagComponentServer>().GetItemByLoc(ItemLocType.ItemLocEquip, equipid);
 
-                //»ñÈ¡×°±¸baginfo
+                //è·å–è£…å¤‡baginfo
                 if (equipInfo == null)
                 {
                     equipInfo = unit.GetComponent<BagComponentServer>().GetItemByLoc(ItemLocType.ItemLocBag, equipid);
@@ -49,7 +49,7 @@ namespace ET.Server
                     return;
                 }
 
-                //ÅĞ¶Ï¿×Î»ÊÇ·ñÏà·û
+                //åˆ¤æ–­å­”ä½æ˜¯å¦ç›¸ç¬¦
                 string[] equipGeminfos = equipInfo.GemHole.Split('_');
 
                 if (equipGeminfos[gemIndex] != itemConfig.ItemSubType.ToString() && itemConfig.ItemSubType != 110 && itemConfig.ItemSubType != 111)
@@ -58,7 +58,7 @@ namespace ET.Server
                     return;
                 }
 
-                //Ê·Ê«±¦Ê¯×î¶àÏâÇ¶4¸ö
+                //å²è¯—å®çŸ³æœ€å¤šé•¶åµŒ4ä¸ª
                 if (itemConfig.ItemSubType == 110)
                 {
                     int equipShiShiGemNum = 0;
@@ -103,12 +103,12 @@ namespace ET.Server
                 equipInfo.GemIDNew = gemIDNew.Substring(0, gemIDNew.Length - 1);
                 equipInfo.isBinging = true;
                 m2c_bagUpdate.BagInfoUpdate.Add(equipInfo);
-                //ÏûºÄ±¦Ê¯
+                //æ¶ˆè€—å®çŸ³
                 unit.GetComponent<BagComponentServer>().OnCostItemData(useBagInfo.BagInfoID, 1);
                 Function_Fight.UnitUpdateProperty_Base(unit, true, true);
             }
 
-            //Ğ¶ÏÂ±¦Ê¯
+            //å¸ä¸‹å®çŸ³
             if (request.OperateType == 10)
             {
                 if (unit.GetComponent<BagComponentServer>().GetBagLeftCell() < 1)
@@ -121,7 +121,7 @@ namespace ET.Server
                 string[] gemIdList = useBagInfo.GemIDNew.Split('_');
                 int gemItemId = int.Parse(gemIdList[gemIndex]);
 
-                //ÀàĞÍ110µÄ²»ÄÜĞ¶
+                //ç±»å‹110çš„ä¸èƒ½å¸
                 if (!ItemConfigCategory.Instance.Contain(gemItemId))
                 {
                     response.Error = ErrorCode.ERR_GemNoError;
@@ -143,7 +143,7 @@ namespace ET.Server
                 useBagInfo.GemIDNew = gemIDNew.Substring(0, gemIDNew.Length - 1);
                 m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
 
-                //»ØÊÕ±¦Ê¯
+                //å›æ”¶å®çŸ³
                 if (gemItemId != 0)
                 {
                     unit.GetComponent<BagComponentServer    >().OnAddItemData($"{gemItemId};1", $"{ItemGetWay.GemHuiShou}_{TimeHelper.ServerNow()}");

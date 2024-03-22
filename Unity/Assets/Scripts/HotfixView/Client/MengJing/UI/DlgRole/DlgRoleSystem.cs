@@ -47,6 +47,16 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
     }
+    
+    [Event(SceneType.Demo)]
+    public class DataUpdate_UpdateRoleProper_Refresh: AEvent<Scene, DataUpdate_UpdateRoleProper>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_UpdateRoleProper args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleProperty.RefreshRoleProperty();
+            await ETTask.CompletedTask;
+        }
+    }
 
     [FriendOf(typeof (ES_RoleHuiShou))]
     [FriendOf(typeof (ES_EquipSet))]
@@ -97,6 +107,7 @@ namespace ET.Client
                     break;
                 case 2:
                     self.View.ES_RoleGem.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_RoleGem.OnUpdateUI();
                     self.View.E_ZodiacButton.gameObject.SetActive(false);
                     self.View.ES_EquipSet.uiTransform.gameObject.SetActive(true);
                     self.View.ES_EquipSet.PlayShowIdelAnimate(null);

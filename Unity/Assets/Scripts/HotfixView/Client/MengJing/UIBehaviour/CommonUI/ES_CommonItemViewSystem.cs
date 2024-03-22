@@ -154,6 +154,9 @@ namespace ET.Client
 
                 self.E_ItemClickButton.gameObject.SetActive(true);
                 self.E_ItemClickButton.AddListener(self.OnClickUIItem);
+                
+                self.E_ItemNameText.text = itemConfig.ItemName;
+                self.E_ItemNameText.color = FunctionUI.QualityReturnColorDi(itemConfig.ItemQuality);
 
                 self.E_BindingImage.gameObject.SetActive(bagInfo.isBinging);
                 self.E_ProtectImage.gameObject.SetActive(bagInfo.IsProtect);

@@ -34,7 +34,7 @@ namespace ET.Client
                 self.ES_CommonItem.OnClickUIItem();
             }
 
-            self.ClickHandler(self.Index);
+            self.ClickHandler?.Invoke(self.Index);
         }
 
         public static void SetSelected(this ES_RoleGemHole self, bool selected)
@@ -89,6 +89,7 @@ namespace ET.Client
             self.ES_CommonItem.uiTransform.gameObject.SetActive(true);
             BagInfo bagInfo = new BagInfo() { ItemID = gemId, ItemNum = 1 };
             self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.XiangQianGem);
+            self.ES_CommonItem.E_ItemQualityImage.gameObject.SetActive(false);
         }
     }
 }

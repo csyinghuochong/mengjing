@@ -4,6 +4,34 @@ namespace ET.Client
 {
     public static class FunctionUI
     {
+        public static Color QualityReturnColorDi(int ItenQuality)
+        {
+            Color color = new Color(1, 1, 1);
+            switch (ItenQuality)
+            {
+                case 1:
+                    color = new Color(70f / 255f, 70f/255f, 70f / 255f);
+                    break;
+                case 2:
+                    color = new Color(0, 110f / 255f, 0);
+                    break;
+                case 3:
+                    color = new Color(0f, 110f / 255f, 110f / 255f);
+                    break;
+
+                case 4:
+                    color = new Color(221f / 255f, 43f / 255f, 186f / 255f);
+                    break;
+                case 5:
+                    color = new Color(200f / 255f, 96f / 255f, 0);
+                    break;
+                case 6:
+                    color = new Color(245f / 255f, 43f / 255f, 96f / 255f);
+                    break;
+            }
+            return color;
+        }
+        
         //传入值获取属性名称
         public static string ReturnEquipNeedPropertyName(string proprety)
         {

@@ -85,6 +85,11 @@ namespace ET.Client
     {
     }
 
+    public struct DataUpdate_UpdateRoleProper
+    {
+        
+    }
+
     public struct TaskNpcDialog
     {
         public int NpcId;

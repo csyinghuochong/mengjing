@@ -1899,80 +1899,80 @@ namespace ET.Server
             // }
 
             //家族修炼属性
-            int xiuLian_0 = numericComponent.GetAsInt(NumericType.UnionXiuLian_0);
-            int xiuLian_1 = numericComponent.GetAsInt(NumericType.UnionXiuLian_1);
-            int xiuLian_2 = numericComponent.GetAsInt(NumericType.UnionXiuLian_2);
-            int xiuLian_3 = numericComponent.GetAsInt(NumericType.UnionXiuLian_3);
-            List<int> unionXiuLianids = new List<int>() { xiuLian_0, xiuLian_1, xiuLian_2, xiuLian_3 };
-            for (int i = 0; i < unionXiuLianids.Count; i++)
-            {
-                UnionQiangHuaConfig unionQiangHuaCof = UnionQiangHuaConfigCategory.Instance.Get(unionXiuLianids[i]);
-                List<PropertyValue> jiazuProList = new List<PropertyValue>();
-                NumericHelp.GetProList(unionQiangHuaCof.EquipPropreAdd, jiazuProList);
-                for (int pro = 0; pro < jiazuProList.Count; pro++)
-                {
-                    AddUpdateProDicList(jiazuProList[pro].HideID, jiazuProList[pro].HideValue, UpdateProDicList);
-                }
-            }
+            // int xiuLian_0 = numericComponent.GetAsInt(NumericType.UnionXiuLian_0);
+            // int xiuLian_1 = numericComponent.GetAsInt(NumericType.UnionXiuLian_1);
+            // int xiuLian_2 = numericComponent.GetAsInt(NumericType.UnionXiuLian_2);
+            // int xiuLian_3 = numericComponent.GetAsInt(NumericType.UnionXiuLian_3);
+            // List<int> unionXiuLianids = new List<int>() { xiuLian_0, xiuLian_1, xiuLian_2, xiuLian_3 };
+            // for (int i = 0; i < unionXiuLianids.Count; i++)
+            // {
+            //     UnionQiangHuaConfig unionQiangHuaCof = UnionQiangHuaConfigCategory.Instance.Get(unionXiuLianids[i]);
+            //     List<PropertyValue> jiazuProList = new List<PropertyValue>();
+            //     NumericHelp.GetProList(unionQiangHuaCof.EquipPropreAdd, jiazuProList);
+            //     for (int pro = 0; pro < jiazuProList.Count; pro++)
+            //     {
+            //         AddUpdateProDicList(jiazuProList[pro].HideID, jiazuProList[pro].HideValue, UpdateProDicList);
+            //     }
+            // }
 
             //血石
-            int bloodstone = numericComponent.GetAsInt(NumericType.Bloodstone);
-            PublicQiangHuaConfig publicQiangHuaConfig = PublicQiangHuaConfigCategory.Instance.Get(bloodstone);
-            List<PropertyValue> publicqianghuaProList = new List<PropertyValue>();
-            NumericHelp.GetProList(publicQiangHuaConfig.EquipPropreAdd, publicqianghuaProList);
-            for (int pro = 0; pro < publicqianghuaProList.Count; pro++)
-            {
-                AddUpdateProDicList(publicqianghuaProList[pro].HideID, publicqianghuaProList[pro].HideValue, UpdateProDicList);
-            }
+            // int bloodstone = numericComponent.GetAsInt(NumericType.Bloodstone);
+            // PublicQiangHuaConfig publicQiangHuaConfig = PublicQiangHuaConfigCategory.Instance.Get(bloodstone);
+            // List<PropertyValue> publicqianghuaProList = new List<PropertyValue>();
+            // NumericHelp.GetProList(publicQiangHuaConfig.EquipPropreAdd, publicqianghuaProList);
+            // for (int pro = 0; pro < publicqianghuaProList.Count; pro++)
+            // {
+            //     AddUpdateProDicList(publicqianghuaProList[pro].HideID, publicqianghuaProList[pro].HideValue, UpdateProDicList);
+            // }
 
             //宠物修炼属性。 玩家数值
-            int pet_xiuLian_0 = numericComponent.GetAsInt(NumericType.UnionPetXiuLian_0);
-            int pet_xiuLian_1 = numericComponent.GetAsInt(NumericType.UnionPetXiuLian_1);
-            int pet_xiuLian_2 = numericComponent.GetAsInt(NumericType.UnionPetXiuLian_2);
-            int pet_xiuLian_3 = numericComponent.GetAsInt(NumericType.UnionPetXiuLian_3);
-            List<int> petUnionXiuLianids = new List<int>() { pet_xiuLian_0, pet_xiuLian_1, pet_xiuLian_2, pet_xiuLian_3 };
-            for (int i = 0; i < petUnionXiuLianids.Count; i++)
-            {
-                if (petUnionXiuLianids[i] == 0)
-                {
-                    continue;
-                }
-                UnionQiangHuaConfig unionQiangHuaCof = UnionQiangHuaConfigCategory.Instance.Get(petUnionXiuLianids[i]);
-                List<PropertyValue> jiazuProList = new List<PropertyValue>();
-                NumericHelp.GetProList(unionQiangHuaCof.EquipPropreAdd, jiazuProList);
-                for (int pro = 0; pro < jiazuProList.Count; pro++)
-                {
-                    AddUpdateProDicList(jiazuProList[pro].HideID, jiazuProList[pro].HideValue, UpdateProDicList);
-                }
-            }
+            // int pet_xiuLian_0 = numericComponent.GetAsInt(NumericType.UnionPetXiuLian_0);
+            // int pet_xiuLian_1 = numericComponent.GetAsInt(NumericType.UnionPetXiuLian_1);
+            // int pet_xiuLian_2 = numericComponent.GetAsInt(NumericType.UnionPetXiuLian_2);
+            // int pet_xiuLian_3 = numericComponent.GetAsInt(NumericType.UnionPetXiuLian_3);
+            // List<int> petUnionXiuLianids = new List<int>() { pet_xiuLian_0, pet_xiuLian_1, pet_xiuLian_2, pet_xiuLian_3 };
+            // for (int i = 0; i < petUnionXiuLianids.Count; i++)
+            // {
+            //     if (petUnionXiuLianids[i] == 0)
+            //     {
+            //         continue;
+            //     }
+            //     UnionQiangHuaConfig unionQiangHuaCof = UnionQiangHuaConfigCategory.Instance.Get(petUnionXiuLianids[i]);
+            //     List<PropertyValue> jiazuProList = new List<PropertyValue>();
+            //     NumericHelp.GetProList(unionQiangHuaCof.EquipPropreAdd, jiazuProList);
+            //     for (int pro = 0; pro < jiazuProList.Count; pro++)
+            //     {
+            //         AddUpdateProDicList(jiazuProList[pro].HideID, jiazuProList[pro].HideValue, UpdateProDicList);
+            //     }
+            // }
 
-            List<int> unionKejiIds = userInfo.UnionKeJiList;
-            for (int i = 0; i < unionKejiIds.Count; i++)
-            {
-                UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(unionKejiIds[i]);
-                List<PropertyValue> jiazuProList = new List<PropertyValue>();
-                NumericHelp.GetProList(unionKeJiConfig.EquipPropreAdd, jiazuProList);
-                for (int pro = 0; pro < jiazuProList.Count; pro++)
-                {
-                    AddUpdateProDicList(jiazuProList[pro].HideID, jiazuProList[pro].HideValue, UpdateProDicList);
-                }
-            }
+            // List<int> unionKejiIds = userInfo.UnionKeJiList;
+            // for (int i = 0; i < unionKejiIds.Count; i++)
+            // {
+            //     UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(unionKejiIds[i]);
+            //     List<PropertyValue> jiazuProList = new List<PropertyValue>();
+            //     NumericHelp.GetProList(unionKeJiConfig.EquipPropreAdd, jiazuProList);
+            //     for (int pro = 0; pro < jiazuProList.Count; pro++)
+            //     {
+            //         AddUpdateProDicList(jiazuProList[pro].HideID, jiazuProList[pro].HideValue, UpdateProDicList);
+            //     }
+            // }
 
             //神兽羁绊属性
-            int shenshouNumber = unit.GetComponent<PetComponentServer>().GetShenShouNumber();
-            List<PropertyValue> shenshoujiban = new List<PropertyValue>();
-            foreach ((int petnumber, List<PropertyValue> prolist) in ConfigHelper.ShenShouJiBan())
-            {
-                if (shenshouNumber >= petnumber)
-                {
-                    shenshoujiban.AddRange(prolist);
-                }
-            }
-
-            for (int i = 0; i < shenshoujiban.Count; i++)
-            {
-                AddUpdateProDicList(shenshoujiban[i].HideID, shenshoujiban[i].HideValue, UpdateProDicList);
-            }
+            // int shenshouNumber = unit.GetComponent<PetComponentServer>().GetShenShouNumber();
+            // List<PropertyValue> shenshoujiban = new List<PropertyValue>();
+            // foreach ((int petnumber, List<PropertyValue> prolist) in ConfigHelper.ShenShouJiBan())
+            // {
+            //     if (shenshouNumber >= petnumber)
+            //     {
+            //         shenshoujiban.AddRange(prolist);
+            //     }
+            // }
+            //
+            // for (int i = 0; i < shenshoujiban.Count; i++)
+            // {
+            //     AddUpdateProDicList(shenshoujiban[i].HideID, shenshoujiban[i].HideValue, UpdateProDicList);
+            // }
 
             
             //汇总属性
@@ -2111,31 +2111,31 @@ namespace ET.Server
             //     AddUpdateProDicList(tianfuProList[i].HideID, tianfuProList[i].HideValue, UpdateProDicListCopy);
             // }
 
-            List<PropertyValue> skillProList_8 = null;/// unit.GetComponent<SkillSetComponent>().GetSkillRoleProLists_8();
-            for (int i = 0; i < skillProList_8.Count; i++)
-            {
-                switch (skillProList_8[i].HideID)
-                {
-                    case NumericType.Base_Power_Add:
-                        Power_value_add += skillProList_8[i].HideValue;
-                        break;
-                    case NumericType.Base_Intellect_Add:
-                        Intellect_value_add += skillProList_8[i].HideValue;
-                        break;
-                    case NumericType.Base_Agility_Add:
-                        Agility_value_add += skillProList_8[i].HideValue;
-                        break;
-                    case NumericType.Base_Stamina_Add:
-                        Stamina_value_add += skillProList_8[i].HideValue;
-                        break;
-                    case NumericType.Base_Constitution_Add:
-                        Constitution_value_add += skillProList_8[i].HideValue;
-                        break;
-                    default:
-                        AddUpdateProDicList(skillProList_8[i].HideID, skillProList_8[i].HideValue, UpdateProDicListCopy);
-                        break;
-                }
-            }
+            // List<PropertyValue> skillProList_8 = null;/// unit.GetComponent<SkillSetComponent>().GetSkillRoleProLists_8();
+            // for (int i = 0; i < skillProList_8.Count; i++)
+            // {
+            //     switch (skillProList_8[i].HideID)
+            //     {
+            //         case NumericType.Base_Power_Add:
+            //             Power_value_add += skillProList_8[i].HideValue;
+            //             break;
+            //         case NumericType.Base_Intellect_Add:
+            //             Intellect_value_add += skillProList_8[i].HideValue;
+            //             break;
+            //         case NumericType.Base_Agility_Add:
+            //             Agility_value_add += skillProList_8[i].HideValue;
+            //             break;
+            //         case NumericType.Base_Stamina_Add:
+            //             Stamina_value_add += skillProList_8[i].HideValue;
+            //             break;
+            //         case NumericType.Base_Constitution_Add:
+            //             Constitution_value_add += skillProList_8[i].HideValue;
+            //             break;
+            //         default:
+            //             AddUpdateProDicList(skillProList_8[i].HideID, skillProList_8[i].HideValue, UpdateProDicListCopy);
+            //             break;
+            //     }
+            // }
 
 
 
@@ -2391,21 +2391,21 @@ namespace ET.Server
 
             //宠物守护附加战力
             int fightNum = 0;
-            PetComponentServer petCom = unit.GetComponent<PetComponentServer>();
-            for (int i = 0; i < 4; i++)
-            {
-                if (petCom.PetShouHuList.Count < 4)
-                {
-                    break;
-                }
-
-                RolePetInfo rolePetInfoNow = petCom.GetPetInfo(petCom.PetShouHuList[i]);
-                if (rolePetInfoNow == null)
-                {
-                    continue;
-                }
-                fightNum = fightNum + rolePetInfoNow.PetPingFen;
-            }
+            // PetComponentServer petCom = unit.GetComponent<PetComponentServer>();
+            // for (int i = 0; i < 4; i++)
+            // {
+            //     if (petCom.PetShouHuList.Count < 4)
+            //     {
+            //         break;
+            //     }
+            //
+            //     RolePetInfo rolePetInfoNow = petCom.GetPetInfo(petCom.PetShouHuList[i]);
+            //     if (rolePetInfoNow == null)
+            //     {
+            //         continue;
+            //     }
+            //     fightNum = fightNum + rolePetInfoNow.PetPingFen;
+            // }
 
             int addShouHuFight = (int)fightNum / 10;
 
@@ -2413,20 +2413,20 @@ namespace ET.Server
             int addZhanLi = numericComponent.GetAsInt(NumericType.Now_FightValue);
 
             //觉醒战力附加
-            List<int> juexingSkillList = null;// unit.GetComponent<SkillSetComponent>().GetJueSkillIds();
+            // List<int> juexingSkillList = null;// unit.GetComponent<SkillSetComponent>().GetJueSkillIds();
             int addJueXingZhanLi = 0;
-            if (juexingSkillList.Count >= 1)
-            {
-                addJueXingZhanLi = Math.Min(juexingSkillList.Count, 3) * 300;
-            }
-            if (juexingSkillList.Count >= 4)
-            {
-                addJueXingZhanLi += (Math.Min(juexingSkillList.Count, 7) - 3) * 400;
-            }
-            if (juexingSkillList.Count >= 8)
-            {
-                addJueXingZhanLi += 500;
-            }
+            // if (juexingSkillList.Count >= 1)
+            // {
+            //     addJueXingZhanLi = Math.Min(juexingSkillList.Count, 3) * 300;
+            // }
+            // if (juexingSkillList.Count >= 4)
+            // {
+            //     addJueXingZhanLi += (Math.Min(juexingSkillList.Count, 7) - 3) * 400;
+            // }
+            // if (juexingSkillList.Count >= 8)
+            // {
+            //     addJueXingZhanLi += 500;
+            // }
 
             addZhanLi += addJueXingZhanLi;
 

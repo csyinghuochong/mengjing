@@ -144,7 +144,7 @@ namespace ET.Client
             self.ShowPropertyList_TeShu.Add(self.AddShowProperList(NumericType.Now_MageBossSubPro, "领主魔攻减免", "", 2));
         }
 
-        private static void RefreshRoleProperty(this ES_RoleProperty self)
+        public static void RefreshRoleProperty(this ES_RoleProperty self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentClient numericComponentClient = unit.GetComponent<NumericComponentClient>();

@@ -20,6 +20,8 @@ namespace ET.Client
             self.GemHoleList.Add(self.ES_RoleGemHole_2);
             self.GemHoleList.Add(self.ES_RoleGemHole_3);
 
+            self.ES_CommonItem.uiTransform.gameObject.SetActive(false);
+
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
             self.E_AllToggle.IsSelected(true);
@@ -30,6 +32,15 @@ namespace ET.Client
         private static void Destroy(this ES_RoleGem self)
         {
             self.DestroyWidget();
+        }
+
+        public static void OnUpdateUI(this ES_RoleGem self)
+        {
+            self.XiangQianItem = null;
+            self.XiangQianIndex = -1;
+            self.ResetHole();
+            self.RefreshBagItems();
+            self.ES_CommonItem.uiTransform.gameObject.SetActive(false);
         }
 
         private static void OnItemTypeSet(this ES_RoleGem self, int index)
@@ -46,7 +57,8 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this ES_RoleGem self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.XiangQianBag, self.UpdateSelect);
+            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.XiangQianBag,
+                self.UpdateSelect);
         }
 
         public static void RefreshBagItems(this ES_RoleGem self)
@@ -76,7 +88,7 @@ namespace ET.Client
             self.ShowBagInfos.AddRange(bagComponentClient.GetItemsByType(itemTypeEnum));
             self.AddUIScrollItems(ref self.ScrollItemCommonItems, maxCount);
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, maxCount);
-            
+
             if (self.XiangQianItem != null)
             {
                 BagInfo bagInfo = self.Root().GetComponent<BagComponentClient>().GetBagInfo(self.XiangQianItem.BagInfoID);
@@ -104,15 +116,6 @@ namespace ET.Client
             }
         }
 
-        public static void OnUpdateUI(this ES_RoleGem self)
-        {
-            self.XiangQianItem = null;
-            self.XiangQianIndex = -1;
-            self.ResetHole();
-            self.RefreshBagItems();
-            self.ES_CommonItem.uiTransform.gameObject.SetActive(false);
-        }
-
         public static void OnClickXiangQianItem(this ES_RoleGem self, BagInfo info)
         {
             self.XiangQianItem = info;
@@ -124,6 +127,7 @@ namespace ET.Client
 
             self.ES_CommonItem.uiTransform.gameObject.SetActive(true);
             self.ES_CommonItem.UpdateItem(info, ItemOperateEnum.None);
+            self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
 
             info.GemHole = string.IsNullOrEmpty(info.GemHole)? "" : info.GemHole;
             info.GemIDNew = string.IsNullOrEmpty(info.GemIDNew)? "" : info.GemIDNew;
