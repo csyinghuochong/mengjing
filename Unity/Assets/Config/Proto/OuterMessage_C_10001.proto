@@ -1397,7 +1397,7 @@ message SkillInfo
 	float SingValue = 13;
 }
 
-message M2C_UnitNumericListUpdate // ILocationMessage
+message M2C_UnitNumericListUpdate // IMessage
 {
 	int32 RpcId = 90;
 	int64 UnitID  = 1;
@@ -2921,7 +2921,7 @@ message C2M_JingLingUseRequest    // ILocationRequest
 	int32 OperateType = 2; //
 }
 
-message M2C_JingLingUseResponse    // ILocationResponsesr
+message M2C_JingLingUseResponse    // ILocationResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;

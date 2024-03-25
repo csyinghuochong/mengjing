@@ -5399,7 +5399,7 @@ namespace ET
 
 	[Message(OuterMessage.M2C_UnitNumericListUpdate)]
 	[MemoryPackable]
-	public partial class M2C_UnitNumericListUpdate: MessageObject, ILocationMessage
+	public partial class M2C_UnitNumericListUpdate: MessageObject, IMessage
 	{
 		public static M2C_UnitNumericListUpdate Create(bool isFromPool = false) 
 		{ 
