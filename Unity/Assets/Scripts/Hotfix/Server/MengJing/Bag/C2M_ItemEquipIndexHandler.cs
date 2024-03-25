@@ -2,13 +2,13 @@ namespace ET.Server
 {
 
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof(BagComponent_S))]
-    [FriendOf(typeof(NumericComponent_S))]
+    [FriendOf(typeof(BagComponentS))]
+    [FriendOf(typeof(NumericComponentS))]
     public class C2M_ItemEquipIndexHandler: MessageLocationHandler<Unit, C2M_ItemEquipIndexRequest, M2C_ItemEquipIndexResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_ItemEquipIndexRequest request, M2C_ItemEquipIndexResponse response)
         {
-            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             BagInfo equip_0 = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
             BagInfo equip_1 = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip_2, (int)ItemSubTypeEnum.Wuqi);
             if (equip_0 == null || equip_1 == null)
@@ -18,7 +18,7 @@ namespace ET.Server
             }
 
             //0远程 1近战
-            int equipIndex = unit.GetComponent<NumericComponent_S>().GetAsInt(NumericType.EquipIndex);
+            int equipIndex = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.EquipIndex);
 
             //通知客户端背包刷新
             M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
@@ -35,8 +35,8 @@ namespace ET.Server
             m2c_bagUpdate.BagInfoUpdate.Add(equip_1);
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
 
-            unit.GetComponent<NumericComponent_S>().SetEvent(NumericType.EquipIndex, request.EquipIndex, true);
-            unit.GetComponent<NumericComponent_S>().SetEvent(NumericType.Now_Weapon, bagComponent.GetWuqiItemId(), true);
+            unit.GetComponent<NumericComponentS>().SetEvent(NumericType.EquipIndex, request.EquipIndex, true);
+            unit.GetComponent<NumericComponentS>().SetEvent(NumericType.Now_Weapon, bagComponent.GetWuqiItemId(), true);
 
             //unit.GetComponent<SkillSetComponentServer>().OnChangeEquipIndex(request.EquipIndex);
             unit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.EquipIndex_15);

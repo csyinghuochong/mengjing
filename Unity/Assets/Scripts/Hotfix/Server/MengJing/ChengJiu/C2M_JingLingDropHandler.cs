@@ -5,13 +5,13 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof(ChengJiuComponent_S))]
+    [FriendOf(typeof(ChengJiuComponentS))]
     public class C2M_JingLingDropHandler : MessageLocationHandler<Unit, C2M_JingLingDropRequest, M2C_JingLingDropResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_JingLingDropRequest request, M2C_JingLingDropResponse response)
         {
             await ETTask.CompletedTask;
-            ChengJiuComponent_S chengJiuComponent = unit.GetComponent<ChengJiuComponent_S>();
+            ChengJiuComponentS chengJiuComponent = unit.GetComponent<ChengJiuComponentS>();
             int jinglingid = chengJiuComponent.JingLingId;
             if (jinglingid == 0 || chengJiuComponent.RandomDrop == 1)
             {
@@ -29,12 +29,12 @@ namespace ET.Server
             }
             List<RewardItem> droplist = new List<RewardItem>();
             DropHelper.DropIDToDropItem_2(dropId, droplist);
-            if (unit.GetComponent<BagComponent_S>().GetBagLeftCell() < droplist.Count)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < droplist.Count)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;
             }
-            unit.GetComponent<BagComponent_S>().OnAddItemData(droplist, string.Empty, $"{ItemGetWay.JingLing}_{TimeHelper.ServerNow()}", false);
+            unit.GetComponent<BagComponentS>().OnAddItemData(droplist, string.Empty, $"{ItemGetWay.JingLing}_{TimeHelper.ServerNow()}", false);
             chengJiuComponent.RandomDrop = 1;
         }
     }

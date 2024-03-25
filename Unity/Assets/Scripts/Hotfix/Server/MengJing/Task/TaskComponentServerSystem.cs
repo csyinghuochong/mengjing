@@ -4,12 +4,12 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 
-    [EntitySystemOf(typeof(TaskComponent_S))]
-    [FriendOf(typeof(TaskComponent_S))]
+    [EntitySystemOf(typeof(TaskComponentS))]
+    [FriendOf(typeof(TaskComponentS))]
     public static partial class TaskComponentServerSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.TaskComponent_S self)
+        private static void Awake(this ET.Server.TaskComponentS self)
         {
             if (self.RoleTaskList.Count == 0)
             {
@@ -18,17 +18,17 @@ namespace ET.Server
             }
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.TaskComponent_S self)
+        private static void Destroy(this ET.Server.TaskComponentS self)
         {
 
         }
         [EntitySystem]
-        private static void Deserialize(this ET.Server.TaskComponent_S self)
+        private static void Deserialize(this ET.Server.TaskComponentS self)
         {
 
         }
 
-        public static bool ShowPaiMai(this TaskComponent_S self, int lv, int simulator)
+        public static bool ShowPaiMai(this TaskComponentS self, int lv, int simulator)
         {
             if (simulator == 0)
             {
@@ -46,7 +46,7 @@ namespace ET.Server
             return lv >= 5 && self.RoleComoleteTaskList.Count > lv;
         }
 
-        public static int GetHuoYueDu(this TaskComponent_S self)
+        public static int GetHuoYueDu(this TaskComponentS self)
         {
             int huoYueDu = 0;
             for (int i = 0; i < self.TaskCountryList.Count; i++)
@@ -61,19 +61,19 @@ namespace ET.Server
             return huoYueDu;
         }
 
-        public static void Check(this TaskComponent_S self)
+        public static void Check(this TaskComponentS self)
         {
             self.OnLineTime++;
             self.OnLineTime(1);
         }
 
-        public static bool IsTaskComplete(this TaskComponent_S self, int taskid)
+        public static bool IsTaskComplete(this TaskComponentS self, int taskid)
         {
             return self.RoleComoleteTaskList.IndexOf(taskid) >= 0;
         }
 
         //����׷��
-        public static int TaskTrack(this TaskComponent_S self, C2M_TaskTrackRequest request)
+        public static int TaskTrack(this TaskComponentS self, C2M_TaskTrackRequest request)
         {
             for (int i = 0; i < self.RoleTaskList.Count; i++)
             {
@@ -86,7 +86,7 @@ namespace ET.Server
         }
 
         //�Ի�֮��������ɿͻ��˴������
-        public static void OnTaskNotice(this TaskComponent_S self, C2M_TaskNoticeRequest request)
+        public static void OnTaskNotice(this TaskComponentS self, C2M_TaskNoticeRequest request)
         {
             int taskid = request.TaskId;
             for (int i = 0; i < self.RoleTaskList.Count; i++)
@@ -104,7 +104,7 @@ namespace ET.Server
         /// </summary>
         /// <param name="self"></param>
         /// <param name="taskId"></param>
-        public static void OnRecvGiveUpTask(this TaskComponent_S self, int taskId)
+        public static void OnRecvGiveUpTask(this TaskComponentS self, int taskId)
         {
             for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
             {
@@ -124,7 +124,7 @@ namespace ET.Server
         /// <param name="request"></param>
         /// <param name="response"></param>
         /// <returns></returns>
-        public static (TaskPro, int) OnAcceptedTask(this TaskComponent_S self, int taskId)
+        public static (TaskPro, int) OnAcceptedTask(this TaskComponentS self, int taskId)
         {
             if (taskId == 0)
             {
@@ -146,14 +146,14 @@ namespace ET.Server
             return (taskPro, ErrorCode.ERR_Success);
         }
 
-        public static TaskPro OnGetDailyTask(this TaskComponent_S self, int taskId)
+        public static TaskPro OnGetDailyTask(this TaskComponentS self, int taskId)
         {
             TaskPro taskPro = self.CreateTask(taskId);
             self.RoleTaskList.Add(taskPro);
             return taskPro;
         }
 
-        public static string GetMainTaskId(this TaskComponent_S self)
+        public static string GetMainTaskId(this TaskComponentS self)
         {
             string maintask = string.Empty;
             List<TaskPro> taskPros = self.GetTaskList(TaskTypeEnum.Main);
@@ -172,7 +172,7 @@ namespace ET.Server
             }
         }
 
-        public static List<TaskPro> GetTaskList(this TaskComponent_S self, int taskType)
+        public static List<TaskPro> GetTaskList(this TaskComponentS self, int taskType)
         {
             List<TaskPro> taskPros = new List<TaskPro>();
             for (int i = 0; i < self.RoleTaskList.Count; i++)
@@ -188,7 +188,7 @@ namespace ET.Server
             return taskPros;
         }
 
-        public static bool IsItemTask(this TaskComponent_S self, int monsterid)
+        public static bool IsItemTask(this TaskComponentS self, int monsterid)
         {
             int taskId = 0;
             switch (monsterid)
@@ -216,7 +216,7 @@ namespace ET.Server
             return false;
         }
 
-        public static bool IsHaveTask(this TaskComponent_S self, int taskId)
+        public static bool IsHaveTask(this TaskComponentS self, int taskId)
         {
             if (self.RoleComoleteTaskList.Contains(taskId))
             {
@@ -232,7 +232,7 @@ namespace ET.Server
             return false;
         }
 
-        public static TaskPro CreateTask(this TaskComponent_S self, int taskid)
+        public static TaskPro CreateTask(this TaskComponentS self, int taskid)
         {
             Unit unit = self.GetParent<Unit>();
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskid);
@@ -242,18 +242,18 @@ namespace ET.Server
             switch (taskConfig.TargetType)
             {
                 case (int)TaskTargetType.KillMonsterID_1:
-                    taskPro.taskTargetNum_1 = unit.GetComponent<UserInfoComponent_S>().GetReviveTime(taskConfig.Target[0]) > 0 ? 1 : 0;
+                    taskPro.taskTargetNum_1 = unit.GetComponent<UserInfoComponentS>().GetReviveTime(taskConfig.Target[0]) > 0 ? 1 : 0;
                     break;
                 case (int)TaskTargetType.ItemID_Number_2:
                     for (int i = 0; i < taskConfig.Target.Length; i++)
                     {
                         if (i == 0)
                         {
-                            taskPro.taskTargetNum_1 = (int)unit.GetComponent<BagComponent_S>().GetItemNumber(taskConfig.Target[i]);
+                            taskPro.taskTargetNum_1 = (int)unit.GetComponent<BagComponentS>().GetItemNumber(taskConfig.Target[i]);
                         }
                         if (i == 1)
                         {
-                            taskPro.taskTargetNum_2 = (int)unit.GetComponent<BagComponent_S>().GetItemNumber(taskConfig.Target[i]);
+                            taskPro.taskTargetNum_2 = (int)unit.GetComponent<BagComponentS>().GetItemNumber(taskConfig.Target[i]);
                         }
                     }
                     break;
@@ -261,31 +261,31 @@ namespace ET.Server
                     taskPro.taskTargetNum_1 = 1;
                     break;
                 case (int)(int)TaskTargetType.PlayerLv_4:
-                    taskPro.taskTargetNum_1 = unit.GetComponent<UserInfoComponent_S>().GetUserLv();
+                    taskPro.taskTargetNum_1 = unit.GetComponent<UserInfoComponentS>().GetUserLv();
                     break;
                 case (int)TaskTargetType.ChangeOcc_8:
-                    taskPro.taskTargetNum_1 = unit.GetComponent<UserInfoComponent_S>().GetOccTwo() > 0 ? 1 : 0;
+                    taskPro.taskTargetNum_1 = unit.GetComponent<UserInfoComponentS>().GetOccTwo() > 0 ? 1 : 0;
                     break;
                 case (int)TaskTargetType.JoinUnion_9:
-                    taskPro.taskTargetNum_1 = unit.GetComponent<NumericComponent_S>().GetAsLong(NumericType.UnionId_0) > 0 ? 1 : 0;
+                    taskPro.taskTargetNum_1 = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.UnionId_0) > 0 ? 1 : 0;
                     break;
                 case (int)TaskTargetType.PetNumber1_11:
-                    taskPro.taskTargetNum_1 = unit.GetComponent<PetComponent_S>().GetAllPets().Count;
+                    taskPro.taskTargetNum_1 = unit.GetComponent<PetComponentS>().GetAllPets().Count;
                     break;
                 case (int)TaskTargetType.QiangHuaLevel_17:
-                    taskPro.taskTargetNum_1 = unit.GetComponent<BagComponent_S>().GetMaxQiangHuaLevel();
+                    taskPro.taskTargetNum_1 = unit.GetComponent<BagComponentS>().GetMaxQiangHuaLevel();
                     break;
                 case (int)TaskTargetType.PetNSkill_18:
-                    taskPro.taskTargetNum_1 = unit.GetComponent<PetComponent_S>().GetMaxSkillNumber();
+                    taskPro.taskTargetNum_1 = unit.GetComponent<PetComponentS>().GetMaxSkillNumber();
                     break;
                 case (int)TaskTargetType.PetFubenId_19:
-                    taskPro.taskTargetNum_1 = unit.GetComponent<PetComponent_S>().GetPassMaxFubenId();
+                    taskPro.taskTargetNum_1 = unit.GetComponent<PetComponentS>().GetPassMaxFubenId();
                     break;
                 case (int)TaskTargetType.JiaYuanLevel_22:
-                    taskPro.taskTargetNum_1 = unit.GetComponent<UserInfoComponent_S>().GetJiaYuanLv() - 10000;
+                    taskPro.taskTargetNum_1 = unit.GetComponent<UserInfoComponentS>().GetJiaYuanLv() - 10000;
                     break;
                 case (int)TaskTargetType.TrialTowerCeng_134:
-                    int curtrialid = unit.GetComponent<NumericComponent_S>().GetAsInt(NumericType.TrialDungeonId);
+                    int curtrialid = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.TrialDungeonId);
                     if (curtrialid > taskConfig.Target[0])
                     {
                         taskPro.taskTargetNum_1 = 1;
@@ -312,10 +312,10 @@ namespace ET.Server
             return taskPro;
         }
 
-        public static void GetRandomFubenId(this TaskComponent_S self, TaskPro taskPro)
+        public static void GetRandomFubenId(this TaskComponentS self, TaskPro taskPro)
         {
             List<int> openfubenids = new List<int>();
-            int lv = self.GetParent<Unit>().GetComponent<UserInfoComponent_S>().GetUserLv();
+            int lv = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetUserLv();
 
             Dictionary<int, DungeonConfig> allfuben = DungeonConfigCategory.Instance.GetAll();
             foreach ((int fubenid, DungeonConfig config) in allfuben)
@@ -340,7 +340,7 @@ namespace ET.Server
             Log.Warning($"���ɲر�ͼ�����: {self.GetParent<Unit>().Id} {dungeonid} {taskPro.WaveId}");
         }
 
-        public static bool IsCompleted(this TaskComponent_S self, TaskPro taskPro, int TargetType, int[] Target, int[] TargetValue)
+        public static bool IsCompleted(this TaskComponentS self, TaskPro taskPro, int TargetType, int[] Target, int[] TargetValue)
         {
             if (TargetType == (int)TaskTargetType.TeamDungeonHurt_136)
             {
@@ -361,7 +361,7 @@ namespace ET.Server
             return true;
         }
 
-        public static void OnGMGetTask(this TaskComponent_S self, int taskid)
+        public static void OnGMGetTask(this TaskComponentS self, int taskid)
         {
             for (int i = 0; i < self.RoleTaskList.Count; i++)
             {
@@ -379,7 +379,7 @@ namespace ET.Server
             MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
         }
 
-        public static List<TaskPro> GetTrackTaskList(this TaskComponent_S self)
+        public static List<TaskPro> GetTrackTaskList(this TaskComponentS self)
         {
             List<TaskPro> taskPros = new List<TaskPro>();
             for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
@@ -392,7 +392,7 @@ namespace ET.Server
             return taskPros;
         }
 
-        public static TaskPro GetTaskById(this TaskComponent_S self, int taskid)
+        public static TaskPro GetTaskById(this TaskComponentS self, int taskid)
         {
             for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
             {
@@ -404,13 +404,13 @@ namespace ET.Server
             return null;
         }
 
-        public static int CheckGiveItemTask(this TaskComponent_S self, int TargetType, int[] Target, int[] TargetValue, long BagInfoID, TaskPro taskPro)
+        public static int CheckGiveItemTask(this TaskComponentS self, int TargetType, int[] Target, int[] TargetValue, long BagInfoID, TaskPro taskPro)
         {
             //�ռ����ߵ�����
 
             if (TargetType == (int)TaskTargetType.ItemID_Number_2)
             {
-                BagComponent_S bagComponent = self.GetParent<Unit>().GetComponent<BagComponent_S>();
+                BagComponentS bagComponent = self.GetParent<Unit>().GetComponent<BagComponentS>();
                 int needid = Target[0];
                 int neednumber = TargetValue[0];
                 int curnumber = (int)bagComponent.GetItemNumber(needid);
@@ -427,7 +427,7 @@ namespace ET.Server
             //��������
             if (TargetType == (int)TaskTargetType.GiveItem_10)
             {
-                BagComponent_S bagComponent = self.GetParent<Unit>().GetComponent<BagComponent_S>();
+                BagComponentS bagComponent = self.GetParent<Unit>().GetComponent<BagComponentS>();
                 BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, BagInfoID);
                 if (bagInfo == null)
                 {
@@ -443,7 +443,7 @@ namespace ET.Server
             //�������
             if (TargetType == (int)TaskTargetType.GivePet_25)
             {
-                PetComponent_S petComponent = self.GetParent<Unit>().GetComponent<PetComponent_S>();
+                PetComponentS petComponent = self.GetParent<Unit>().GetComponent<PetComponentS>();
                 RolePetInfo rolePetInfo = petComponent.GetPetInfo(BagInfoID);
                 if (rolePetInfo == null)
                 {
@@ -462,7 +462,7 @@ namespace ET.Server
         }
 
         //��ȡ����
-        public static int OnCommitTask(this TaskComponent_S self, C2M_TaskCommitRequest request)
+        public static int OnCommitTask(this TaskComponentS self, C2M_TaskCommitRequest request)
         {
             int taskid = request.TaskId;
             TaskPro taskPro = self.GetTaskById(taskid);
@@ -472,8 +472,8 @@ namespace ET.Server
             }
             Unit unit = self.GetParent<Unit>();
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskid);
-            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
-            NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
             List<RewardItem> rewardItems = TaskHelper.GetTaskRewards(taskid, taskConfig);
             if (taskConfig.TaskType == TaskTypeEnum.Weekly)
@@ -552,7 +552,7 @@ namespace ET.Server
                 }
             }
 
-            UserInfoComponent_S userInfoComponent = unit.GetComponent<UserInfoComponent_S>();
+            UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
             float coffiexp = 1f;
             float cofficoin = 1f;
             if (taskConfig.Development == 1)
@@ -669,7 +669,7 @@ namespace ET.Server
         /// תְ
         /// </summary>
         /// <param name="self"></param>
-        public static void OnChangeOccTwo(this TaskComponent_S self)
+        public static void OnChangeOccTwo(this TaskComponentS self)
         {
             self.TriggerTaskEvent(TaskTargetType.ChangeOcc_8, 0, 1);
             self.TriggerTaskCountryEvent(TaskTargetType.ChangeOcc_8, 0, 1);
@@ -678,7 +678,7 @@ namespace ET.Server
         /// <summary>
         /// ����
         /// </summary>
-        public static void OnMakeItem(this TaskComponent_S self)
+        public static void OnMakeItem(this TaskComponentS self)
         {
             self.TriggerTaskCountryEvent(TaskTargetType.MakeItem_1006, 0, 1);
         }
@@ -687,7 +687,7 @@ namespace ET.Server
         /// ����ϴ��
         /// </summary>
         /// <param name="self"></param>
-        public static void OnPetXiLian(this TaskComponent_S self, RolePetInfo rolePetInfo)
+        public static void OnPetXiLian(this TaskComponentS self, RolePetInfo rolePetInfo)
         {
             self.TriggerTaskEvent(TaskTargetType.PetNSkill_18, 0, rolePetInfo.PetSkill.Count);
             self.TriggerTaskCountryEvent(TaskTargetType.PetNSkill_18, 0, rolePetInfo.PetSkill.Count);
@@ -695,7 +695,7 @@ namespace ET.Server
             self.TriggerTaskCountryEvent(TaskTargetType.PetXiLian_1007, 0, 1);
         }
 
-        public static void OnPetHeCheng(this TaskComponent_S self, RolePetInfo rolePetInfo)
+        public static void OnPetHeCheng(this TaskComponentS self, RolePetInfo rolePetInfo)
         {
             self.TriggerTaskEvent(TaskTargetType.PetNumber1_11, 0, 1);
             self.TriggerTaskCountryEvent(TaskTargetType.PetNumber1_11, 0, 1);
@@ -720,7 +720,7 @@ namespace ET.Server
         /// ��ó���
         /// </summary>
         /// <param name="self"></param>
-        public static void OnGetPet(this TaskComponent_S self, RolePetInfo rolePetInfo)
+        public static void OnGetPet(this TaskComponentS self, RolePetInfo rolePetInfo)
         {
             self.TriggerTaskEvent(TaskTargetType.PetNumber1_11, 0, 1);
             self.TriggerTaskCountryEvent(TaskTargetType.PetNumber1_11, 0, 1);
@@ -741,7 +741,7 @@ namespace ET.Server
         /// ����ϴ��
         /// </summary>
         /// <param name="self"></param>
-        public static void OnEquipXiLian(this TaskComponent_S self, int times)
+        public static void OnEquipXiLian(this TaskComponentS self, int times)
         {
             self.TriggerTaskEvent(TaskTargetType.EquipXiLian_13, 0, times);
             self.TriggerTaskCountryEvent(TaskTargetType.EquipXiLian_13, 0, times);
@@ -752,7 +752,7 @@ namespace ET.Server
         /// ����ʱ������ʱһ���Ӵ���һ��
         /// </summary>
         /// <param name="self"></param>
-        public static void OnLineTime(this TaskComponent_S self, int time)
+        public static void OnLineTime(this TaskComponentS self, int time)
         {
             self.TriggerTaskCountryEvent(TaskTargetType.OnLineTime_1010, 0, 1);
 
@@ -766,7 +766,7 @@ namespace ET.Server
         /// ���߻���
         /// </summary>
         /// <param name="self"></param>
-        public static void OnItemHuiShow(this TaskComponent_S self, int itemNumber)
+        public static void OnItemHuiShow(this TaskComponentS self, int itemNumber)
         {
             self.TriggerTaskEvent(TaskTargetType.EquipHuiShou_16, 0, itemNumber);
             self.TriggerTaskCountryEvent(TaskTargetType.EquipHuiShou_16, 0, itemNumber);
@@ -777,7 +777,7 @@ namespace ET.Server
         /// ���Ľ��
         /// </summary>
         /// <param name="self"></param>
-        public static void OnCostCoin(this TaskComponent_S self, int costCoin)
+        public static void OnCostCoin(this TaskComponentS self, int costCoin)
         {
             if (costCoin >= 0)
                 return;
@@ -793,7 +793,7 @@ namespace ET.Server
         /// <param name="difficulty"></param>
         /// <param name="chapterid"></param>
         /// <param name="star"></param>
-        public static void OnPassFuben(this TaskComponent_S self, int difficulty, int chapterid, int star)
+        public static void OnPassFuben(this TaskComponentS self, int difficulty, int chapterid, int star)
         {
             self.TriggerTaskEvent(TaskTargetType.PassFubenID_7, chapterid, 1);
             self.TriggerTaskCountryEvent(TaskTargetType.PassFubenID_7, chapterid, 1);
@@ -809,25 +809,25 @@ namespace ET.Server
             }
         }
 
-        public static void OnWinCampBattle(this TaskComponent_S self)
+        public static void OnWinCampBattle(this TaskComponentS self)
         {
             self.TriggerTaskCountryEvent(TaskTargetType.BattleWin_1101, 0, 1);
         }
 
-        public static void OnPassTeamFuben(this TaskComponent_S self)
+        public static void OnPassTeamFuben(this TaskComponentS self)
         {
             self.TriggerTaskCountryEvent(TaskTargetType.PassTeamFuben_1004, 0, 1);
         }
 
-        public static async ETTask UpdateUnionRaceRank(this TaskComponent_S self)
+        public static async ETTask UpdateUnionRaceRank(this TaskComponentS self)
         {
             Unit unit = self.GetParent<Unit>();
             RankShouLieInfo rankingInfo = new RankShouLieInfo()
             {
                 UnitID = unit.Id,
                 KillNumber = 1,
-                Occ = unit.GetComponent<UserInfoComponent_S>().GetOcc(),
-                PlayerName = unit.GetComponent<UserInfoComponent_S>().GetName()
+                Occ = unit.GetComponent<UserInfoComponentS>().GetOcc(),
+                PlayerName = unit.GetComponent<UserInfoComponentS>().GetName()
             };
             M2R_RankUnionRaceRequest request = new M2R_RankUnionRaceRequest()
             {
@@ -839,7 +839,7 @@ namespace ET.Server
         }
 
         //��ɱ����ɴ����������͵�����
-        public static void OnKillUnit(this TaskComponent_S self, Unit bekill, int sceneType)
+        public static void OnKillUnit(this TaskComponentS self, Unit bekill, int sceneType)
         {
             if (bekill == null || bekill.IsDisposed)
                 return;
@@ -847,7 +847,7 @@ namespace ET.Server
             if (bekill.Type == UnitType.Player && sceneType == SceneTypeEnum.Battle)
             {
                 self.TriggerTaskCountryEvent(TaskTargetType.BattleKillPlayer_1102, 0, 1);
-                bekill.GetComponent<TaskComponent_S>().TriggerTaskCountryEvent(TaskTargetType.BattleDead_1104, 0, 1);
+                bekill.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.BattleDead_1104, 0, 1);
             }
             if (bekill.Type == UnitType.Player && sceneType == SceneTypeEnum.UnionRace)
             {
@@ -925,7 +925,7 @@ namespace ET.Server
         }
 
         //�ȼ�����
-        public static void OnUpdateLevel(this TaskComponent_S self, int rolelv)
+        public static void OnUpdateLevel(this TaskComponentS self, int rolelv)
         {
             self.TriggerTaskEvent(TaskTargetType.PlayerLv_4, 0, rolelv);
             self.TriggerTaskCountryEvent(TaskTargetType.PlayerLv_4, 0, rolelv);
@@ -938,10 +938,10 @@ namespace ET.Server
         }
 
         //��¼
-        public static void OnLogin(this TaskComponent_S self)
+        public static void OnLogin(this TaskComponentS self)
         {
-            UserInfoComponent_S userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponent_S>();
-            NumericComponent_S numericComponent = self.GetParent<Unit>().GetComponent<NumericComponent_S>();
+            UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
+            NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
 
             if (self.TaskCountryList.Count == 0)
             {
@@ -1014,7 +1014,7 @@ namespace ET.Server
             //��������
             for (int i = 0; i < self.TaskCountryList.Count; i++)
             {
-                int trialid = self.GetParent<Unit>().GetComponent<NumericComponent_S>().GetAsInt(NumericType.TrialDungeonId);
+                int trialid = self.GetParent<Unit>().GetComponent<NumericComponentS>().GetAsInt(NumericType.TrialDungeonId);
                 TaskCountryConfig taskCountryConfig = TaskCountryConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
                 if (taskCountryConfig.TargetType == (int)TaskTargetType.TrialFuben_1012 && trialid >= 20100)
                 {
@@ -1063,14 +1063,14 @@ namespace ET.Server
         }
 
         //�ռ�����
-        public static void OnGetItemForWarehouse(this TaskComponent_S self, int itemId)
+        public static void OnGetItemForWarehouse(this TaskComponentS self, int itemId)
         {
             self.TriggerTaskEvent(TaskTargetType.ItemID_Number_2, itemId, 0);
             self.TriggerTaskCountryEvent(TaskTargetType.ItemID_Number_2, itemId, 0);
         }
 
         //�ۼƻ�õ�������
-        public static void OnGetItemNumber(this TaskComponent_S self, int getWay, int itemId, int itemNumber)
+        public static void OnGetItemNumber(this TaskComponentS self, int getWay, int itemId, int itemNumber)
         {
             if (itemId == 1 || (getWay != ItemGetWay.ReceieMail && getWay != ItemGetWay.PaiMaiSell))
             {
@@ -1087,13 +1087,13 @@ namespace ET.Server
         }
 
         //�ռ�����
-        public static void OnGetItem_2(this TaskComponent_S self, int itemId)
+        public static void OnGetItem_2(this TaskComponentS self, int itemId)
         {
             self.TriggerTaskEvent(TaskTargetType.ItemID_Number_2, itemId, 0);
             self.TriggerTaskCountryEvent(TaskTargetType.ItemID_Number_2, itemId, 0);
         }
 
-        public static void CompletCurrentTask(this TaskComponent_S self)
+        public static void CompletCurrentTask(this TaskComponentS self)
         {
             for (int i = 0; i < self.RoleTaskList.Count; i++)
             {
@@ -1124,7 +1124,7 @@ namespace ET.Server
             MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
         }
 
-        public static void OnPetMineLogin(this TaskComponent_S self, List<PetMingPlayerInfo> petMingPlayers, List<KeyValuePairInt> extends)
+        public static void OnPetMineLogin(this TaskComponentS self, List<PetMingPlayerInfo> petMingPlayers, List<KeyValuePairInt> extends)
         {
             for (int i = 0; i < petMingPlayers.Count; i++)
             {
@@ -1143,7 +1143,7 @@ namespace ET.Server
             }
         }
 
-        public static void TriggerTaskEvent(this TaskComponent_S self, int targetType, int targetTypeId, int targetValue)
+        public static void TriggerTaskEvent(this TaskComponentS self, int targetType, int targetTypeId, int targetValue)
         {
             bool updateTask = false;
 
@@ -1180,13 +1180,13 @@ namespace ET.Server
         /// <summary>
         /// ��TaskCountryTargetTypeΪ׼
         /// </summary>
-        public static void CheckTaskPro(this TaskComponent_S self, TaskPro taskPro, int targetType, int[] Target, int targetTypeId, int targetValue)
+        public static void CheckTaskPro(this TaskComponentS self, TaskPro taskPro, int targetType, int[] Target, int targetTypeId, int targetValue)
         {
             for (int t = 0; t < Target.Length; t++)
             {
                 if (targetType == TaskTargetType.ItemID_Number_2)
                 {
-                    targetValue = (int)self.GetParent<Unit>().GetComponent<BagComponent_S>().GetItemNumber(Target[t]);
+                    targetValue = (int)self.GetParent<Unit>().GetComponent<BagComponentS>().GetItemNumber(Target[t]);
                 }
 
                 if (targetType == TaskTargetType.MakeQulityNumber_29
@@ -1281,7 +1281,7 @@ namespace ET.Server
             }
         }
 
-        public static void TriggerTaskCountryEvent(this TaskComponent_S self, int targetType, int targetTypeId, int targetValue, bool notice = true)
+        public static void TriggerTaskCountryEvent(this TaskComponentS self, int targetType, int targetTypeId, int targetValue, bool notice = true)
         {
             bool updateTask = false;
             List<TaskPro> countryList = new List<TaskPro>();
@@ -1317,7 +1317,7 @@ namespace ET.Server
             MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
         }
 
-        public static void UpdateCountryList(this TaskComponent_S self, bool notice)
+        public static void UpdateCountryList(this TaskComponentS self, bool notice)
         {
             Unit unit = self.GetParent<Unit>();
             if (self.TaskCountryList.Count == 0)
@@ -1354,9 +1354,9 @@ namespace ET.Server
             Log.Debug($"���»�Ծ����:  {unit.Id} {self.Zone()}  {self.TaskCountryList.Count}");
         }
 
-        public static void CheckDailyTask(this TaskComponent_S self, bool notice)
+        public static void CheckDailyTask(this TaskComponentS self, bool notice)
         {
-            NumericComponent_S numericComponent = self.GetParent<Unit>().GetComponent<NumericComponent_S>();
+            NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
             if (numericComponent.GetAsInt(NumericType.DailyTaskID) != 0)
             {
                 return;
@@ -1366,36 +1366,36 @@ namespace ET.Server
                 return;
             }
 
-            int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponent_S>().GetUserLv();
+            int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetUserLv();
             numericComponent.SetEvent(NumericType.DailyTaskID, TaskHelper.GetTaskIdByType(TaskTypeEnum.Daily, roleLv), notice);
         }
 
-        public static void CheckRingTask(this TaskComponent_S self)
+        public static void CheckRingTask(this TaskComponentS self)
         {
-            NumericComponent_S numericComponent = self.GetParent<Unit>().GetComponent<NumericComponent_S>();
+            NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
             if (numericComponent.GetAsInt(NumericType.RingTaskId) == 0 && numericComponent.GetAsInt(NumericType.RingTaskNumber) < 1)
             {
                 //self.ClearTypeTask(TaskTypeEnum.Ring);
 
-                int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponent_S>().GetUserLv();
+                int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetUserLv();
                 int ringTaskId = TaskHelper.GetTaskIdByType(TaskTypeEnum.Ring, roleLv);
                 numericComponent.SetEvent(NumericType.RingTaskId, ringTaskId, false);
             }
         }
 
-        public static void CheckWeeklyTask(this TaskComponent_S self)
+        public static void CheckWeeklyTask(this TaskComponentS self)
         {
-            NumericComponent_S numericComponent = self.GetParent<Unit>().GetComponent<NumericComponent_S>();
+            NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
             if (numericComponent.GetAsInt(NumericType.WeeklyTaskId) == 0 && numericComponent.GetAsInt(NumericType.WeeklyTaskNumber) < 1)
             {
                 //self.ClearTypeTask(TaskTypeEnum.Ring);
-                int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponent_S>().GetUserLv();
+                int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetUserLv();
                 int weekTaskId = TaskHelper.GetTaskIdByType(TaskTypeEnum.Weekly, roleLv);
                 numericComponent.SetEvent(NumericType.WeeklyTaskId, weekTaskId, false);
             }
         }
 
-        public static void CheckSystemTask(this TaskComponent_S self)
+        public static void CheckSystemTask(this TaskComponentS self)
         {
             bool have = false;
             for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
@@ -1415,7 +1415,7 @@ namespace ET.Server
                 return;
             }
 
-            int curTakskid = self.GetParent<Unit>().GetComponent<NumericComponent_S>().GetAsInt(NumericType.SystemTask);
+            int curTakskid = self.GetParent<Unit>().GetComponent<NumericComponentS>().GetAsInt(NumericType.SystemTask);
             foreach ((int taskid, TaskConfig taskcofnig) in TaskConfigCategory.Instance.GetAll())
             {
                 if (taskcofnig.TaskType != TaskTypeEnum.System || taskid <= curTakskid)
@@ -1432,23 +1432,23 @@ namespace ET.Server
             MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
         }
 
-        public static void CheckUnionTask(this TaskComponent_S self)
+        public static void CheckUnionTask(this TaskComponentS self)
         {
-            NumericComponent_S numericComponent = self.GetParent<Unit>().GetComponent<NumericComponent_S>();
+            NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
             if (numericComponent.GetAsInt(NumericType.UnionTaskId) == 0 && numericComponent.GetAsInt(NumericType.UnionTaskNumber) < 1)
             {
 
-                int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponent_S>().GetUserLv();
+                int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetUserLv();
                 numericComponent.SetEvent(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), false);
             }
         }
 
-        public static void ClearSeasonData(this TaskComponent_S self)
+        public static void ClearSeasonData(this TaskComponentS self)
         {
 
         }
 
-        public static void InitSeasonMainTask(this TaskComponent_S self, bool notice)
+        public static void InitSeasonMainTask(this TaskComponentS self, bool notice)
         {
             bool have = false;
             for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
@@ -1465,7 +1465,7 @@ namespace ET.Server
                 return;
             }
 
-            int curTakskid = self.GetParent<Unit>().GetComponent<NumericComponent_S>().GetAsInt(NumericType.SeasonTask);
+            int curTakskid = self.GetParent<Unit>().GetComponent<NumericComponentS>().GetAsInt(NumericType.SeasonTask);
             foreach ((int taskid, TaskConfig taskcofnig) in TaskConfigCategory.Instance.GetAll())
             {
                 if (taskcofnig.TaskType == TaskTypeEnum.Season && taskid > curTakskid)
@@ -1483,9 +1483,9 @@ namespace ET.Server
             }
         }
 
-        public static void UpdateTargetTask(this TaskComponent_S self, bool notice)
+        public static void UpdateTargetTask(this TaskComponentS self, bool notice)
         {
-            int createDay = self.GetParent<Unit>().GetComponent<UserInfoComponent_S>().GetCrateDay();
+            int createDay = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetCrateDay();
             if (createDay == 0 || createDay > ConfigHelper.WelfareTaskList().Count)
             {
                 return;
@@ -1513,7 +1513,7 @@ namespace ET.Server
             }
         }
 
-        public static void ClearTypeTask(this TaskComponent_S self, int taskType)
+        public static void ClearTypeTask(this TaskComponentS self, int taskType)
         {
             for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
             {
@@ -1530,7 +1530,7 @@ namespace ET.Server
             }
         }
 
-        public static void UpdateDayTask(this TaskComponent_S self, bool notice)
+        public static void UpdateDayTask(this TaskComponentS self, bool notice)
         {
 
             //���ÿ������
@@ -1551,8 +1551,8 @@ namespace ET.Server
                 }
             }
 
-            NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
-            int roleLv = unit.GetComponent<UserInfoComponent_S>().GetUserLv();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            int roleLv = unit.GetComponent<UserInfoComponentS>().GetUserLv();
 
             numericComponent.SetEvent(NumericType.DailyTaskNumber, 0, notice);
             numericComponent.SetEvent(NumericType.UnionTaskNumber, 0, notice);
@@ -1564,7 +1564,7 @@ namespace ET.Server
             //Log.Debug($"����ÿ������: {numericComponent.GetAsInt(NumericType.DailyTaskID)}");
         }
 
-        public static TaskPro GetTreasureMonster(this TaskComponent_S self, int fubenid)
+        public static TaskPro GetTreasureMonster(this TaskComponentS self, int fubenid)
         {
             List<TaskPro> taskPros = self.GetTaskList(TaskTypeEnum.Treasure);
             for (int i = 0; i < taskPros.Count; i++)
@@ -1582,7 +1582,7 @@ namespace ET.Server
             return null;
         }
 
-        public static void CheckWeeklyUpdate(this TaskComponent_S self)
+        public static void CheckWeeklyUpdate(this TaskComponentS self)
         {
             System.DateTime dateTime = TimeHelper.DateTimeNow();
             if (dateTime.DayOfWeek == System.DayOfWeek.Monday)
@@ -1592,7 +1592,7 @@ namespace ET.Server
             }
         }
 
-        public static void ResetWeeklyTask(this TaskComponent_S self)
+        public static void ResetWeeklyTask(this TaskComponentS self)
         {
             for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
             {
@@ -1625,8 +1625,8 @@ namespace ET.Server
             }
 
             Unit unit = self.GetParent<Unit>();
-            int roleLv = unit.GetComponent<UserInfoComponent_S>().GetUserLv();
-            NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+            int roleLv = unit.GetComponent<UserInfoComponentS>().GetUserLv();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             numericComponent.SetEvent(NumericType.RingTaskNumber, 0, false);
             numericComponent.SetEvent(NumericType.RingTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Ring, roleLv), false);
 
@@ -1636,10 +1636,10 @@ namespace ET.Server
             self.UpdateSeasonWeekTask(false);
         }
 
-        public static void UpdateSeasonWeekTask(this TaskComponent_S self, bool notice)
+        public static void UpdateSeasonWeekTask(this TaskComponentS self, bool notice)
         {
             Unit unit = self.GetParent<Unit>();
-            unit.GetComponent<NumericComponent_S>().SetEvent(NumericType.SeasonTowerId, 0, notice);
+            unit.GetComponent<NumericComponentS>().SetEvent(NumericType.SeasonTowerId, 0, notice);
 
             //��������ÿ�����
             for (int i = self.TaskCountryList.Count - 1; i >= 0; i--)
@@ -1658,7 +1658,7 @@ namespace ET.Server
                 }
             }
 
-            UserInfoComponent_S userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponent_S>();
+            UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
             if (SeasonHelper.IsOpenSeason(userInfoComponent.GetUserLv()))
             {
                 List<int> taskCountryList = TaskHelper.GetSeasonTask();
@@ -1677,7 +1677,7 @@ namespace ET.Server
             }
         }
 
-        public static void CheckWeeklyUpdate(this TaskComponent_S self, long lastTime, long curTime)
+        public static void CheckWeeklyUpdate(this TaskComponentS self, long lastTime, long curTime)
         {
             //�ж������� ����һ�ܻ��߹�����ĩ
             float passday = ((curTime - lastTime) * 1f / TimeHelper.OneDay);
@@ -1710,7 +1710,7 @@ namespace ET.Server
         /// ����ÿ�ջ�Ծ
         /// </summary> 
         /// <param name="self"></param>
-        public static void OnZeroClockUpdate(this TaskComponent_S self, bool notice)
+        public static void OnZeroClockUpdate(this TaskComponentS self, bool notice)
         {
             self.OnLineTime = 0;
             Unit unit = self.GetParent<Unit>();

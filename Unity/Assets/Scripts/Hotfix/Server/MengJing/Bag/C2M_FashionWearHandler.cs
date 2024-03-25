@@ -2,20 +2,20 @@ namespace ET.Server
 {
     
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof(BagComponent_S))]
-    [FriendOf(typeof(UserInfoComponent_S))]
+    [FriendOf(typeof(BagComponentS))]
+    [FriendOf(typeof(UserInfoComponentS))]
     public class C2M_FashionWearHandler: MessageLocationHandler<Unit, C2M_FashionWearRequest, M2C_FashionWearResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_FashionWearRequest request, M2C_FashionWearResponse response)
         {
-            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             if (!bagComponent.FashionActiveIds.Contains(request.FashionId))
             {
                 response.Error = ErrorCode.ERR_ModifyData;
                 return;
             }
 
-            int occ = unit.GetComponent<UserInfoComponent_S>().UserInfo.Occ;
+            int occ = unit.GetComponent<UserInfoComponentS>().UserInfo.Occ;
             FashionConfig fashionConfig = FashionConfigCategory.Instance.Get(request.FashionId);
 
             bool canwear = false;

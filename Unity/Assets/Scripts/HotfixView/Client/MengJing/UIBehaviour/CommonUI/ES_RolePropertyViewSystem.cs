@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     
-    [FriendOf(typeof (UserInfoComponent_C))]
+    [FriendOf(typeof (UserInfoComponentC))]
     [EntitySystemOf(typeof (ES_RoleProperty))]
     [FriendOfAttribute(typeof (ES_RoleProperty))]
     public static partial class ES_RolePropertySystem
@@ -147,8 +147,8 @@ namespace ET.Client
         public static void RefreshRoleProperty(this ES_RoleProperty self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            NumericComponent_C numericComponentC = unit.GetComponent<NumericComponent_C>();
-            UserInfoComponent_C userInfoComponentC = self.Root().GetComponent<UserInfoComponent_C>();
+            NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
+            UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
 
             int maxPiLao = int.Parse(GlobalValueConfigCategory.Instance
                     .Get(numericComponentC.GetAsInt(NumericType.YueKaRemainTimes) > 0? 26 : 10).Value);
@@ -229,7 +229,7 @@ namespace ET.Client
         private static void InitAddProperty(this ES_RoleProperty self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            NumericComponent_C numericComponentC = unit.GetComponent<NumericComponent_C>();
+            NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
 
             self.PointList.Clear();
             self.PointList.Add(numericComponentC.GetAsInt(NumericType.PointLiLiang));
@@ -248,7 +248,7 @@ namespace ET.Client
 
         private static void RefreshAddProperty(this ES_RoleProperty self)
         {
-            UserInfoComponent_C userInfoComponentC = self.Root().GetComponent<UserInfoComponent_C>();
+            UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
             int lv = userInfoComponentC.UserInfo.Lv;
 
             self.E_Value_LiLiangText.text = (self.PointList[0] + lv * 2).ToString();

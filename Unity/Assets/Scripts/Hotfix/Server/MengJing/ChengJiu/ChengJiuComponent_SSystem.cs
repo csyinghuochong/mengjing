@@ -3,17 +3,17 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 
-    [EntitySystemOf(typeof(ChengJiuComponent_S))]
-    [FriendOf(typeof(ChengJiuComponent_S))]
+    [EntitySystemOf(typeof(ChengJiuComponentS))]
+    [FriendOf(typeof(ChengJiuComponentS))]
     public static partial class ChengJiuComponent_SSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.ChengJiuComponent_S self)
+        private static void Awake(this ET.Server.ChengJiuComponentS self)
         {
 
         }
 
-        public static List<PropertyValue> GetJingLingProLists(this ChengJiuComponent_S self)
+        public static List<PropertyValue> GetJingLingProLists(this ChengJiuComponentS self)
         {
             List<PropertyValue> proList = new List<PropertyValue>();
 
@@ -37,9 +37,9 @@ namespace ET.Server
             return proList;
         }
 
-        public static void OnLogin(this ChengJiuComponent_S self)
+        public static void OnLogin(this ChengJiuComponentS self)
         {
-            NumericComponent_S numericComponent = self.GetParent<Unit>().GetComponent<NumericComponent_S>();
+            NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
             if (self.Zone() <= 48 && numericComponent.GetAsLong(NumericType.RechargeNumber) < 400 && self.JingLingList.Contains(10003))
             {
                 Log.Warning($"充值小于400有精灵龟: {self.Id}");
@@ -48,16 +48,16 @@ namespace ET.Server
                 self.JingLingUnitId = 0;
             }
 
-            self.TriggerEvent(ChengJiuTargetEnum.PlayerLevel_205, 0, self.GetParent<Unit>().GetComponent<UserInfoComponent_S>().GetUserLv());
+            self.TriggerEvent(ChengJiuTargetEnum.PlayerLevel_205, 0, self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetUserLv());
         }
 
-        public static void OnZeroClockUpdate(this ChengJiuComponent_S self)
+        public static void OnZeroClockUpdate(this ChengJiuComponentS self)
         {
             self.RandomDrop = 0;
         }
 
         //击杀怪物可触发多种类型的成就
-        public static void OnKillUnit(this ChengJiuComponent_S self, Unit defend)
+        public static void OnKillUnit(this ChengJiuComponentS self, Unit defend)
         {
             if (defend == null || defend.IsDisposed)
                 return;
@@ -102,7 +102,7 @@ namespace ET.Server
             }
         }
 
-        public static void OnPassFuben(this ChengJiuComponent_S self, int difficulty, int chapterid, int star)
+        public static void OnPassFuben(this ChengJiuComponentS self, int difficulty, int chapterid, int star)
         {
             self.TriggerEvent(ChengJiuTargetEnum.PassNormalFubenID_11, chapterid, 1);
             if ((int)difficulty >= (int)FubenDifficulty.TiaoZhan)  //挑战
@@ -119,27 +119,27 @@ namespace ET.Server
             }
         }
 
-        public static void OnChouKaTen(this ChengJiuComponent_S self)
+        public static void OnChouKaTen(this ChengJiuComponentS self)
         {
             self.TriggerEvent(ChengJiuTargetEnum.TotalChouKaTen_202, 0, 1);
         }
 
-        public static void OnEquipXiLian(this ChengJiuComponent_S self, int times)
+        public static void OnEquipXiLian(this ChengJiuComponentS self, int times)
         {
             self.TriggerEvent(ChengJiuTargetEnum.TotalEquipXiLian_203, 0, times);
         }
 
-        public static void OnRevive(this ChengJiuComponent_S self)
+        public static void OnRevive(this ChengJiuComponentS self)
         {
             self.TriggerEvent(ChengJiuTargetEnum.TotalRevive_204, 0, 1);
         }
 
-        public static void OnUpdateLevel(this ChengJiuComponent_S self, int lv)
+        public static void OnUpdateLevel(this ChengJiuComponentS self, int lv)
         {
             self.TriggerEvent(ChengJiuTargetEnum.PlayerLevel_205, 0, lv);
         }
 
-        public static void OnGetGold(this ChengJiuComponent_S self, int coin)
+        public static void OnGetGold(this ChengJiuComponentS self, int coin)
         {
             if (coin < 0)
             {
@@ -151,41 +151,41 @@ namespace ET.Server
             }
         }
 
-        public static void OnGetPet(this ChengJiuComponent_S self, RolePetInfo rolePetInfo)
+        public static void OnGetPet(this ChengJiuComponentS self, RolePetInfo rolePetInfo)
         {
             self.TriggerEvent(ChengJiuTargetEnum.PetIdNumber_301, rolePetInfo.ConfigId, 1);
             self.TriggerEvent(ChengJiuTargetEnum.TotalPetNumber_302, 0, 1);
             self.TriggerEvent(ChengJiuTargetEnum.PetNSkill_305, 0, rolePetInfo.PetSkill.Count);
         }
 
-        public static void OnPetHeCheng(this ChengJiuComponent_S self, RolePetInfo rolePetInfo)
+        public static void OnPetHeCheng(this ChengJiuComponentS self, RolePetInfo rolePetInfo)
         {
             self.TriggerEvent(ChengJiuTargetEnum.TotalPetHeCheng_303, 0, 1);
             self.TriggerEvent(ChengJiuTargetEnum.PetNSkill_305, 0, rolePetInfo.PetSkill.Count);
         }
 
-        public static void OnPetXiLian(this ChengJiuComponent_S self, RolePetInfo rolePetInfo)
+        public static void OnPetXiLian(this ChengJiuComponentS self, RolePetInfo rolePetInfo)
         {
             self.TriggerEvent(ChengJiuTargetEnum.TotalPetXiLian_304, 0, 1);
             self.TriggerEvent(ChengJiuTargetEnum.PetNSkill_305, 0, rolePetInfo.PetSkill.Count);
         }
 
-        public static void OnItemHuiShow(this ChengJiuComponent_S self, int itemNumber)
+        public static void OnItemHuiShow(this ChengJiuComponentS self, int itemNumber)
         {
             self.TriggerEvent(ChengJiuTargetEnum.TotalEquipHuiShou_206, 0, itemNumber);
         }
 
-        public static void OnCostDiamond(this ChengJiuComponent_S self, long costNumber)
+        public static void OnCostDiamond(this ChengJiuComponentS self, long costNumber)
         {
             self.TriggerEvent(ChengJiuTargetEnum.TotalDiamondCost_207, 0, (int)(costNumber * -1));
         }
 
-        public static void OnSkillShuLianDu(this ChengJiuComponent_S self, int shuLianDu)
+        public static void OnSkillShuLianDu(this ChengJiuComponentS self, int shuLianDu)
         {
             self.TriggerEvent(ChengJiuTargetEnum.SkillShuLianDu_208, 0, shuLianDu);
         }
 
-        public static int ReceivedReward(this ChengJiuComponent_S self, int rewardId)
+        public static int ReceivedReward(this ChengJiuComponentS self, int rewardId)
         {
             if (self.AlreadReceivedId.Contains(rewardId))
             {
@@ -193,7 +193,7 @@ namespace ET.Server
             }
 
             ChengJiuRewardConfig chengJiuRewardConfig = ChengJiuRewardConfigCategory.Instance.Get(rewardId);
-            bool success = self.GetParent<Unit>().GetComponent<BagComponent_S>().OnAddItemData(chengJiuRewardConfig.RewardItems, $"{ItemGetWay.ChengJiuRward}_{TimeHelper.ServerNow()}");
+            bool success = self.GetParent<Unit>().GetComponent<BagComponentS>().OnAddItemData(chengJiuRewardConfig.RewardItems, $"{ItemGetWay.ChengJiuRward}_{TimeHelper.ServerNow()}");
             if (success)
             {
                 self.AlreadReceivedId.Add(rewardId);
@@ -205,7 +205,7 @@ namespace ET.Server
             }
         }
 
-        public static void OnActiveJingLing(this ChengJiuComponent_S self, int jid)
+        public static void OnActiveJingLing(this ChengJiuComponentS self, int jid)
         {
             if (self.JingLingList.Contains(jid))
             {
@@ -214,7 +214,7 @@ namespace ET.Server
             self.JingLingList.Add(jid);
         }
 
-        public static void TriggerEvent(this ChengJiuComponent_S self, ChengJiuTargetEnum chengJiuTarget, int target_id, int target_value = 1)
+        public static void TriggerEvent(this ChengJiuComponentS self, ChengJiuTargetEnum chengJiuTarget, int target_id, int target_value = 1)
         {
             int chengJiuTargetInt = (int)chengJiuTarget;
             List<int> chengjiuList = null;/// ChengJiuConfigCategory.Instance.GetChengJiuTargetData(chengJiuTargetInt);
@@ -320,7 +320,7 @@ namespace ET.Server
                         break;
                 }
 
-                if (acitiveId > 0 && !self.GetParent<UserInfoComponent_S>().IsRobot())
+                if (acitiveId > 0 && !self.GetParent<UserInfoComponentS>().IsRobot())
                 {
                     MapMessageHelper.SendToClient(self.GetParent<Unit>(), new M2C_ChengJiuActiveMessage() { ChengJiuId = acitiveId });
                 }

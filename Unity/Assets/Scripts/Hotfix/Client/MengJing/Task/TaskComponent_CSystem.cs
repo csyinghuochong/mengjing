@@ -3,21 +3,21 @@ using System.Linq;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(TaskComponent_C))]
-    [EntitySystemOf(typeof(TaskComponent_C))]
+    [FriendOf(typeof(TaskComponentC))]
+    [EntitySystemOf(typeof(TaskComponentC))]
     public static partial class TaskComponent_CSystem
     {
         [EntitySystem]
-        private static void Awake(this TaskComponent_C self)
+        private static void Awake(this TaskComponentC self)
         {
 
         }
         [EntitySystem]
-        private static void Destroy(this TaskComponent_C self)
+        private static void Destroy(this TaskComponentC self)
         {
 
         }
-        public static List<TaskPro> GetAllTrackList(this TaskComponent_C self)
+        public static List<TaskPro> GetAllTrackList(this TaskComponentC self)
         {
             List<TaskPro> taskPros = new List<TaskPro>();
             for (int i = 0; i < self.RoleTaskList.Count; i++)
@@ -31,7 +31,7 @@ namespace ET.Client
             return taskPros;
         }
         
-        public static List<TaskPro> GetTaskTypeList(this TaskComponent_C self, int taskTypeEnum)
+        public static List<TaskPro> GetTaskTypeList(this TaskComponentC self, int taskTypeEnum)
         {
             List<TaskPro> taskPros = new List<TaskPro>();
             for (int i = 0; i < self.RoleTaskList.Count; i++)
@@ -46,7 +46,7 @@ namespace ET.Client
             return taskPros;
         }
         
-        public static TaskPro GetTaskById(this TaskComponent_C self, int taskId)
+        public static TaskPro GetTaskById(this TaskComponentC self, int taskId)
         {
             for (int i = 0; i < self.RoleTaskList.Count; i++)
             {
@@ -56,7 +56,7 @@ namespace ET.Client
             return null;
         }
         
-        public static int GetNextMainTask(this TaskComponent_C self)
+        public static int GetNextMainTask(this TaskComponentC self)
         {
             int maxTask = 0;
             int nextTask = 0;

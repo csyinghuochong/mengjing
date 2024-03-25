@@ -8,7 +8,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_RolePetEggHatch request, M2C_RolePetEggHatch response)
         {
-            PetComponent_S petComponent = unit.GetComponent<PetComponent_S>();
+            PetComponentS petComponent = unit.GetComponent<PetComponentS>();
             KeyValuePairInt rolePetEgg = petComponent.RolePetEggs[request.Index];
             if (rolePetEgg.Value == 0 && rolePetEgg.KeyId!= 0)
             {

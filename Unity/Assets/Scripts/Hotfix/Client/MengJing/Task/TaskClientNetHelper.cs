@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(UserInfoComponent_C))]
-    [FriendOf(typeof(TaskComponent_C))]
+    [FriendOf(typeof(UserInfoComponentC))]
+    [FriendOf(typeof(TaskComponentC))]
     public static class TaskClientNetHelper
     {
         public static async ETTask<int> RequestTaskInit(Scene root)
@@ -12,7 +12,7 @@ namespace ET.Client
             Log.Debug($"C2M_TaskInitRequest: client0");
             M2C_TaskInitResponse response = (M2C_TaskInitResponse)await root.GetComponent<ClientSenderCompnent>().Call(new C2M_TaskInitRequest());
 
-            TaskComponent_C taskComponentC = root.GetComponent<TaskComponent_C>();
+            TaskComponentC taskComponentC = root.GetComponent<TaskComponentC>();
             taskComponentC.RoleTaskList = response.RoleTaskList;       
             return ErrorCode.ERR_Success;
         }
@@ -22,7 +22,7 @@ namespace ET.Client
             C2M_TaskTrackRequest request = new () { TaskId = taskId, TrackStatus = trackStatus };
             M2C_TaskTrackResponse response = (M2C_TaskTrackResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
-            TaskComponent_C taskComponentC = root.GetComponent<TaskComponent_C>();
+            TaskComponentC taskComponentC = root.GetComponent<TaskComponentC>();
             for (int i = 0; i < taskComponentC.RoleTaskList.Count; i++)
             {
                 if (taskComponentC.RoleTaskList[i].taskID == taskId)
@@ -37,7 +37,7 @@ namespace ET.Client
 
         public static async ETTask<int> RequestCommitTask(Scene root, int taskid, long banginfoId)
         {
-            TaskComponent_C taskComponentC = root.GetComponent<TaskComponent_C>();
+            TaskComponentC taskComponentC = root.GetComponent<TaskComponentC>();
             TaskPro taskPro = taskComponentC.GetTaskById(taskid);
             if (taskPro == null || taskPro.taskStatus != (int)TaskStatuEnum.Completed)
             {
@@ -45,7 +45,7 @@ namespace ET.Client
             }
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskid);
             List<RewardItem> rewardItems = TaskHelper.GetTaskRewards(taskid, taskConfig);
-            if (root.GetComponent<BagComponent_C>().GetBagLeftCell() < rewardItems.Count)
+            if (root.GetComponent<BagComponentC>().GetBagLeftCell() < rewardItems.Count)
             {
                 return ErrorCode.ERR_BagIsFull;
             }
@@ -81,7 +81,7 @@ namespace ET.Client
                 return response.Error;
             }
             
-            TaskComponent_C taskComponentC = root.GetComponent<TaskComponent_C>();
+            TaskComponentC taskComponentC = root.GetComponent<TaskComponentC>();
             taskComponentC.RoleTaskList.Add(response.TaskPro);
             EventSystem.Instance.Publish(root,new DataUpdate_TaskGet());
             return response.Error;
@@ -92,7 +92,7 @@ namespace ET.Client
             C2M_TaskGiveUpRequest request = new() { TaskId = taskId };
             M2C_TaskGiveUpResponse response = (M2C_TaskGiveUpResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
-            TaskComponent_C taskComponentC = root.GetComponent<TaskComponent_C>();
+            TaskComponentC taskComponentC = root.GetComponent<TaskComponentC>();
             for (int i = taskComponentC.RoleTaskList.Count - 1; i >= 0; i--)
             {
                 if (taskComponentC.RoleTaskList[i].taskID == taskId)

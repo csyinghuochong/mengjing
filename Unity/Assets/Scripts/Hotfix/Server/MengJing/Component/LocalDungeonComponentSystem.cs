@@ -34,7 +34,7 @@ namespace ET.Server
       }
 
       MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
-      UserInfoComponent_S userInfoComponent = self.MainUnit.GetComponent<UserInfoComponent_S>();
+      UserInfoComponentS userInfoComponent = self.MainUnit.GetComponent<UserInfoComponentS>();
       if (userInfoComponent == null || userInfoComponent.IsDisposed)
       {
           return;
@@ -75,7 +75,7 @@ namespace ET.Server
           {
               continue;
           }
-          if (entity.GetComponent<NumericComponent_S>().GetAsInt(NumericType.Now_Dead)  == 1)
+          if (entity.GetComponent<NumericComponentS>().GetAsInt(NumericType.Now_Dead)  == 1)
           {
               //entity.GetComponent<HeroDataComponentServer>().OnRevive();
           }

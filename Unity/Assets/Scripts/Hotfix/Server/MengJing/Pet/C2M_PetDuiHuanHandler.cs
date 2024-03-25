@@ -7,9 +7,9 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_PetDuiHuanRequest request, M2C_PetDuiHuanResponse response)
         {
-            PetComponent_S petComponent = unit.GetComponent<PetComponent_S>();
-            int userLv = unit.GetComponent<UserInfoComponent_S>().GetUserLv();
-            int petexpendNumber = unit.GetComponent<NumericComponent_S>().GetAsInt(NumericType.PetExtendNumber);
+            PetComponentS petComponent = unit.GetComponent<PetComponentS>();
+            int userLv = unit.GetComponent<UserInfoComponentS>().GetUserLv();
+            int petexpendNumber = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetExtendNumber);
             if (PetHelper.GetBagPetNum(petComponent.GetAllPets()) >= PetHelper.GetPetMaxNumber( userLv, petexpendNumber))
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
@@ -25,7 +25,7 @@ namespace ET.Server
                 return;
             }
 
-            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             if (!bagComponent.OnCostItemData(configInfo[0]))
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;

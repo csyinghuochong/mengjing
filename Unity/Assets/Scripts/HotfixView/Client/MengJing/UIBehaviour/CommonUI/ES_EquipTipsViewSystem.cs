@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponent_C))]
+    [FriendOf(typeof (UserInfoComponentC))]
     [EntitySystemOf(typeof (ES_EquipTips))]
     [FriendOfAttribute(typeof (ES_EquipTips))]
     public static partial class ES_EquipTipsSystem
@@ -105,7 +105,7 @@ namespace ET.Client
             self.E_EquipTypeText.text = GameSettingLanguge.LoadLocalization("部位") + ":" + textEquipType;
             self.E_EquipTypeSonText.text = GameSettingLanguge.LoadLocalization("类型") + ":" + textEquipTypeSon;
 
-            int occTwo = self.Root().GetComponent<UserInfoComponent_C>().UserInfo.OccTwo;
+            int occTwo = self.Root().GetComponent<UserInfoComponentC>().UserInfo.OccTwo;
             if (occTwo != 0)
             {
                 OccupationTwoConfig occupationTwo = OccupationTwoConfigCategory.Instance.Get(occTwo);
@@ -117,7 +117,7 @@ namespace ET.Client
             }
 
             // 使用等级
-            if (itemConfig.UseLv > self.Root().GetComponent<UserInfoComponent_C>().UserInfo.Lv)
+            if (itemConfig.UseLv > self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv)
             {
                 self.E_EquipNeedLvText.text = GameSettingLanguge.LoadLocalization("等级") + " : " + itemConfig.UseLv + " (等级不足)";
                 self.E_EquipNeedLvText.color = new Color(255f / 255f, 200f / 255f, 200f / 255f);
@@ -370,7 +370,7 @@ namespace ET.Client
                 icon.GetComponent<Image>().sprite = sp;
 
                 int equipShiShiGemNum = 0;
-                List<BagInfo> equipList = self.Root().GetComponent<BagComponent_C>().GetItemsByLoc(ItemLocType.ItemLocEquip);
+                List<BagInfo> equipList = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemLocEquip);
                 for (int i = 0; i < equipList.Count; i++)
                 {
                     string[] gemList = equipList[i].GemIDNew.Split('_');
@@ -564,7 +564,7 @@ namespace ET.Client
                     //显示职业护甲加成
                     if (itemconf.EquipType == 11 || itemconf.EquipType == 12 || itemconf.EquipType == 13)
                     {
-                        int occTwo = self.Root().GetComponent<UserInfoComponent_C>().UserInfo.OccTwo;
+                        int occTwo = self.Root().GetComponent<UserInfoComponentC>().UserInfo.OccTwo;
                         if (occTwo != 0)
                         {
                             int selfMastery = OccupationTwoConfigCategory.Instance.Get(occTwo).ArmorMastery;
@@ -673,7 +673,7 @@ namespace ET.Client
         private static async ETTask OnUseButton(this ES_EquipTips self)
         {
             FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
-            UserInfo userInfo = self.Root().GetComponent<UserInfoComponent_C>().UserInfo;
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             int occTwo = userInfo.OccTwo;
             ItemConfig itemconf = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
             if (itemconf.EquipType == 301)

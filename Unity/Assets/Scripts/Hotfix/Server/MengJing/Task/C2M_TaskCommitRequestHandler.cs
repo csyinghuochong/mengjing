@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
-    [FriendOf(typeof(TaskComponent_S))]
+    [FriendOf(typeof(TaskComponentS))]
     public class C2M_TaskCommitRequestHandler : MessageLocationHandler<Unit, C2M_TaskCommitRequest, M2C_TaskCommitResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_TaskCommitRequest request, M2C_TaskCommitResponse response)
@@ -13,7 +13,7 @@ namespace ET.Server
                 return;
             }
 
-            TaskComponent_S taskComponent = unit.GetComponent<TaskComponent_S>();
+            TaskComponentS taskComponent = unit.GetComponent<TaskComponentS>();
             response.Error = taskComponent.OnCommitTask(request);
             response.RoleComoleteTaskList = taskComponent.RoleComoleteTaskList;
 

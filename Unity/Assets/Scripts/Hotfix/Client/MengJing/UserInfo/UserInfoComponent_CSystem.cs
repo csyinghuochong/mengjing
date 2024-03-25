@@ -1,20 +1,20 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponent_C))]
-    [EntitySystemOf(typeof (UserInfoComponent_C))]
+    [FriendOf(typeof (UserInfoComponentC))]
+    [EntitySystemOf(typeof (UserInfoComponentC))]
     public static partial class UserInfoComponent_CSystem
     {
         [EntitySystem]
-        private static void Awake(this UserInfoComponent_C self)
+        private static void Awake(this UserInfoComponentC self)
         {
         }
 
-        public static int GetUserLv(this UserInfoComponent_C self)
+        public static int GetUserLv(this UserInfoComponentC self)
         {
             return self.UserInfo.Lv;
         }
 
-        public static int GetDayItemUse(this UserInfoComponent_C self, int mysteryId)
+        public static int GetDayItemUse(this UserInfoComponentC self, int mysteryId)
         {
             for (int i = 0; i < self.UserInfo.DayItemUse.Count; i++)
             {
@@ -27,7 +27,7 @@
             return 0;
         }
 
-        public static void OnDayItemUse(this UserInfoComponent_C self, int itemId)
+        public static void OnDayItemUse(this UserInfoComponentC self, int itemId)
         {
             for (int i = 0; i < self.UserInfo.DayItemUse.Count; i++)
             {
@@ -41,7 +41,7 @@
             self.UserInfo.DayItemUse.Add(new KeyValuePairInt() { KeyId = itemId, Value = 1 });
         }
 
-        public static long GetSceneFubenTimes(this UserInfoComponent_C self, int sceneId)
+        public static long GetSceneFubenTimes(this UserInfoComponentC self, int sceneId)
         {
             for (int i = 0; i < self.UserInfo.DayFubenTimes.Count; i++)
             {
@@ -53,7 +53,7 @@
             return 0;
         }
 
-        public static void AddSceneFubenTimes(this UserInfoComponent_C self, int sceneId)
+        public static void AddSceneFubenTimes(this UserInfoComponentC self, int sceneId)
         {
             for (int i = 0; i < self.UserInfo.DayFubenTimes.Count; i++)
             {

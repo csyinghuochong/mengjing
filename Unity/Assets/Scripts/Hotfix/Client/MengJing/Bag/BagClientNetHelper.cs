@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponent_C))]
-    [FriendOf(typeof (BagComponent_C))]
+    [FriendOf(typeof (UserInfoComponentC))]
+    [FriendOf(typeof (BagComponentC))]
     public static class BagClientNetHelper
     {
         public static async ETTask<int> RequestBagInit(Scene root)
@@ -12,7 +12,7 @@ namespace ET.Client
             Log.Debug($"C2M_BagInitHandler: client0");
             M2C_BagInitResponse response = (M2C_BagInitResponse)await root.GetComponent<ClientSenderCompnent>().Call(new C2M_BagInitRequest());
 
-            BagComponent_C bagComponentC = root.GetComponent<BagComponent_C>();
+            BagComponentC bagComponentC = root.GetComponent<BagComponentC>();
             for (int i = 0; i < response.BagInfos.Count; i++)
             {
                 int Loc = response.BagInfos[i].Loc;
@@ -47,7 +47,7 @@ namespace ET.Client
 
         public static async ETTask<int> RequestUseItem(Scene root, BagInfo bagInfo, string parinfo)
         {
-            UserInfoComponent_C infoComponent = root.GetComponent<UserInfoComponent_C>();
+            UserInfoComponentC infoComponent = root.GetComponent<UserInfoComponentC>();
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             int occ = infoComponent.UserInfo.Occ;
@@ -139,7 +139,7 @@ namespace ET.Client
             // }
 
             //猎人单独处理
-            int occ = root.GetComponent<UserInfoComponent_C>().UserInfo.Occ;
+            int occ = root.GetComponent<UserInfoComponentC>().UserInfo.Occ;
             if (occ == 3 && itemCof.ItemSubType == (int)ItemSubTypeEnum.Wuqi)
             {
                 C2M_ItemOperateWearRequest c2M_ItemOperate = new C2M_ItemOperateWearRequest() { OperateType = 3, OperateBagID = bagInfo.BagInfoID };
@@ -167,7 +167,7 @@ namespace ET.Client
         public static async ETTask RequestTakeoffEquip(Scene root, BagInfo bagInfo)
         {
             //猎人单独处理
-            int occ = root.GetComponent<UserInfoComponent_C>().UserInfo.Occ;
+            int occ = root.GetComponent<UserInfoComponentC>().UserInfo.Occ;
             ItemConfig itemCof = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             if (occ == 3 && itemCof.ItemSubType == (int)ItemSubTypeEnum.Wuqi)
             {
@@ -201,7 +201,7 @@ namespace ET.Client
 
         public static async ETTask<int> RequestSortByLoc(Scene root, ItemLocType loc)
         {
-            BagComponent_C bagComponentC = root.GetComponent<BagComponent_C>();
+            BagComponentC bagComponentC = root.GetComponent<BagComponentC>();
             bagComponentC.RealAddItem = false;
             int loctype = (int)loc;
             C2M_ItemOperateRequest request = new() { OperateType = 8, OperateBagID = 0, OperatePar = loctype.ToString() };

@@ -10,15 +10,15 @@ namespace ET.Server
 
         protected override async ETTask Run(Unit unit, C2M_PetFubenRewardRequest request, M2C_PetFubenRewardResponse response)
         {
-            int rewardId = unit.GetComponent<PetComponent_S>().GetCanRewardId();
+            int rewardId = unit.GetComponent<PetComponentS>().GetCanRewardId();
             if (rewardId == 0)
             {
                 response.Error = ErrorCode.ERR_AlreadyFinish;
                 return;
             }
             PetFubenRewardConfig rewardConfig = PetFubenRewardConfigCategory.Instance.Get(rewardId);
-            unit.GetComponent<BagComponent_S>().OnAddItemData(rewardConfig.RewardItems, $"{ItemGetWay.PetFubenReward}_{TimeHelper.ServerNow()}");
-            unit.GetComponent<PetComponent_S>().PetFubeRewardId = rewardId;
+            unit.GetComponent<BagComponentS>().OnAddItemData(rewardConfig.RewardItems, $"{ItemGetWay.PetFubenReward}_{TimeHelper.ServerNow()}");
+            unit.GetComponent<PetComponentS>().PetFubeRewardId = rewardId;
             
             await ETTask.CompletedTask;
         }

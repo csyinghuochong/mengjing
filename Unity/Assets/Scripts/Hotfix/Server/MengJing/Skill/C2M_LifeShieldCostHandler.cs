@@ -5,14 +5,14 @@ using System.Linq;
 namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
-    [FriendOf(typeof(TaskComponent_S))]
+    [FriendOf(typeof(TaskComponentS))]
     public class C2M_LifeShieldCostHandler : MessageLocationHandler<Unit, C2M_LifeShieldCostRequest, M2C_LifeShieldCostResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_LifeShieldCostRequest request, M2C_LifeShieldCostResponse response)
         {
             await ETTask.CompletedTask;
             
-            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             int addExp =  0;
             List<long> bagidList = new List<long>();
         
@@ -38,7 +38,7 @@ namespace ET.Server
                 response.AddExp = addExp;
             }
 
-            SkillSetComponent_S skillsetComponent = unit.GetComponent<SkillSetComponent_S>();
+            SkillSetComponentS skillsetComponent = unit.GetComponent<SkillSetComponentS>();
 
             //其他盾的等级要大于生命之盾
 

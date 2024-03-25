@@ -4,20 +4,20 @@ using Unity.Mathematics;
 namespace ET.Server
 {
 
-    [EntitySystemOf(typeof(HeroDataComponent_S))]
-    [FriendOf(typeof(HeroDataComponent_S))]
+    [EntitySystemOf(typeof(HeroDataComponentS))]
+    [FriendOf(typeof(HeroDataComponentS))]
     public static partial class HeroDataComponentServerSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.HeroDataComponent_S self)
+        private static void Awake(this ET.Server.HeroDataComponentS self)
         {
 
         }
         
-         public static void CheckNumeric(this HeroDataComponent_S self)
+         public static void CheckNumeric(this HeroDataComponentS self)
          {
              Unit unit = self.GetParent<Unit>();
-             NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
              numericComponent.Reset();
 
              if (numericComponent.GetAsInt(NumericType.Ling_DiLv) == 0)
@@ -74,7 +74,7 @@ namespace ET.Server
                  numericComponent.Set(NumericType.Bloodstone, 10100);
              }
 
-             UserInfoComponent_S userInfoComponent = unit.GetComponent<UserInfoComponent_S>();
+             UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
              int PointLiLiang = numericComponent.GetAsInt(NumericType.PointLiLiang);
              int PointZhiLi = numericComponent.GetAsInt(NumericType.PointZhiLi);
              int PointTiZhi = numericComponent.GetAsInt(NumericType.PointTiZhi);
@@ -84,7 +84,7 @@ namespace ET.Server
              int totalPoint = (userInfoComponent.GetUserLv() - 1) * 10;
              
              //检测属性点
-             if (unit.GetComponent<UserInfoComponent_S>().IsRobot())
+             if (unit.GetComponent<UserInfoComponentS>().IsRobot())
              {
                  //机器人属性点
              }
@@ -107,16 +107,16 @@ namespace ET.Server
              }
          }
 
-         public static void OnLogin(this HeroDataComponent_S self, int robotId)
+         public static void OnLogin(this HeroDataComponentS self, int robotId)
          {
              Unit unit = self.GetParent<Unit>();
-             NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
              numericComponent.SetEvent((int)NumericType.Now_Dead , 0, false);
              numericComponent.SetEvent((int)NumericType.Now_Damage, 0, false);
              numericComponent.SetEvent((int)NumericType.Now_Stall, 0, false);
              numericComponent.SetEvent((int)NumericType.TeamId, 0, false);
              numericComponent.SetEvent((int)NumericType.Now_Hp, numericComponent.GetAsLong((int)NumericType.Now_MaxHp), false);
-             numericComponent.SetEvent((int)NumericType.Now_Weapon, unit.GetComponent<BagComponent_S>().GetWuqiItemId(), false);
+             numericComponent.SetEvent((int)NumericType.Now_Weapon, unit.GetComponent<BagComponentS>().GetWuqiItemId(), false);
              numericComponent.SetEvent(NumericType.JueXingAnger, 0, false);
              numericComponent.SetEvent(NumericType.RunRaceRankId, 0, false);
              numericComponent.SetEvent(NumericType.ZeroClock, 0, false);
@@ -133,7 +133,7 @@ namespace ET.Server
 
              if (numericComponent.GetAsInt(NumericType.CostTiLi) > 600)
              {
-                 UserInfoComponent_S userInfoComponent = unit.GetComponent<UserInfoComponent_S>();
+                 UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                  Log.Console($"体力消耗异常: {self.Zone()}  {userInfoComponent.GetName()} {numericComponent.GetAsInt(NumericType.CostTiLi)}");
              }
 
@@ -156,16 +156,16 @@ namespace ET.Server
              self.CheckSeasonOpen(false);
          }
 
-         public static void ClearSeasonData(this HeroDataComponent_S self)
+         public static void ClearSeasonData(this HeroDataComponentS self)
          { 
              
          }
 
-         public static void CheckSeasonOpen(this HeroDataComponent_S self, bool notice)
+         public static void CheckSeasonOpen(this HeroDataComponentS self, bool notice)
          {
              Unit unit = self.GetParent<Unit>();
-             UserInfoComponent_S userInfoComponent = unit.GetComponent<UserInfoComponent_S>();
-             NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+             UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
+             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
              if (numericComponent.GetAsInt(NumericType.SeasonBossFuben) >= 100000)
              {
@@ -187,7 +187,7 @@ namespace ET.Server
                  numericComponent.SetEvent(NumericType.SeasonOpenTime, ConfigData.SeasonOpenTime, false);
 
                  //刷新任务
-                 TaskComponent_S taskComponent = unit.GetComponent<TaskComponent_S>();
+                 TaskComponentS taskComponent = unit.GetComponent<TaskComponentS>();
                  taskComponent.InitSeasonMainTask(notice);
 
                  taskComponent.UpdateSeasonWeekTask(notice); 
@@ -199,10 +199,10 @@ namespace ET.Server
          /// </summary>
          /// <param name="self"></param>
          /// <param name="notice"></param>
-         public static void OnZeroClockUpdate(this HeroDataComponent_S self, bool notice = false)
+         public static void OnZeroClockUpdate(this HeroDataComponentS self, bool notice = false)
          {
              Unit unit = self.GetParent<Unit>();
-             NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
              numericComponent.SetEvent(NumericType.HongBao, 0, notice);
              numericComponent.SetEvent(NumericType.Now_XiLian, 0, notice);
@@ -265,10 +265,10 @@ namespace ET.Server
          /// 返回主城
          /// </summary>
          /// <param name="self"></param>
-         public static void OnReturn(this HeroDataComponent_S self)
+         public static void OnReturn(this HeroDataComponentS self)
          {
              Unit unit = self.GetParent<Unit>();
-             NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
              numericComponent.Set(NumericType.Now_Dead, 0);
              numericComponent.Set(NumericType.Now_Damage, 0);
              numericComponent.Set(NumericType.BossBelongID, 0);
@@ -276,18 +276,18 @@ namespace ET.Server
              numericComponent.Set(NumericType.Now_Shield_MaxHP, 0);
              numericComponent.Set(NumericType.Now_Shield_DamgeCostPro, 0);
 
-             if (unit.GetComponent<NumericComponent_S>().GetAsLong(NumericType.Now_Dead) <= 0)
+             if (unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_Dead) <= 0)
              {
-                 long max_hp = self.GetParent<Unit>().GetComponent<NumericComponent_S>().GetAsLong(NumericType.Now_MaxHp);
-                 unit.GetComponent<NumericComponent_S>().Set(NumericType.Now_Hp, max_hp);
+                 long max_hp = self.GetParent<Unit>().GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_MaxHp);
+                 unit.GetComponent<NumericComponentS>().Set(NumericType.Now_Hp, max_hp);
              }
          }
 
-         public static void OnResetPoint(this HeroDataComponent_S self)
+         public static void OnResetPoint(this HeroDataComponentS self)
          {
              Unit unit = self.GetParent<Unit>();
-             NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
-             UserInfoComponent_S userInfoComponent = unit.GetComponent<UserInfoComponent_S>();
+             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+             UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
              numericComponent.SetEvent(NumericType.PointLiLiang, 0, false);
              numericComponent.SetEvent(NumericType.PointZhiLi, 0, false);
              numericComponent.SetEvent(NumericType.PointTiZhi, 0, false);
@@ -302,7 +302,7 @@ namespace ET.Server
          /// </summary>
          /// <param name="self"></param>
          /// <returns></returns>
-         public static int OnWaitRevive(this HeroDataComponent_S self)
+         public static int OnWaitRevive(this HeroDataComponentS self)
          {
              Unit unit = self.GetParent<Unit>();
              if (unit.Type != UnitType.Monster)
@@ -316,9 +316,9 @@ namespace ET.Server
              if (ConfigData.SeasonBossId == unit.ConfigId && mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
              {
                  LocalDungeonComponent localDungeon = unit.Root().GetComponent<LocalDungeonComponent>();
-                 UserInfoComponent_S userInfoComponent = localDungeon.MainUnit.GetComponent<UserInfoComponent_S>();
-                 localDungeon.MainUnit.GetComponent<NumericComponent_S>().SetEvent(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
-                 localDungeon.MainUnit.GetComponent<NumericComponent_S>().SetEvent(NumericType.SeasonBossRefreshTime, TimeHelper.ServerNow() + resurrection * 1000, false);
+                 UserInfoComponentS userInfoComponent = localDungeon.MainUnit.GetComponent<UserInfoComponentS>();
+                 localDungeon.MainUnit.GetComponent<NumericComponentS>().SetEvent(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
+                 localDungeon.MainUnit.GetComponent<NumericComponentS>().SetEvent(NumericType.SeasonBossRefreshTime, TimeHelper.ServerNow() + resurrection * 1000, false);
                  resurrection = 0;
              }
              if (resurrection == 0)
@@ -342,14 +342,14 @@ namespace ET.Server
                  if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
                  {
                      LocalDungeonComponent localDungeon = unit.Root().GetComponent<LocalDungeonComponent>();
-                     UserInfoComponent_S userInfoComponent = localDungeon.MainUnit.GetComponent<UserInfoComponent_S>();
+                     UserInfoComponentS userInfoComponent = localDungeon.MainUnit.GetComponent<UserInfoComponentS>();
                      int killNumber = userInfoComponent.GetMonsterKillNumber(unit.ConfigId)  +  1;
                      int chpaterid = DungeonConfigCategory.Instance.GetChapterByDungeon(mapComponent.SceneId);
                      BossDevelopment bossDevelopment = ConfigHelper.GetBossDevelopmentByKill(chpaterid , killNumber);
                      resurrection = (int)(resurrection * bossDevelopment.ReviveTimeAdd);
 
                      resurrectionTime = TimeHelper.ServerNow() + resurrection * 1000;
-                     unit.GetComponent<NumericComponent_S>().SetEvent(NumericType.ReviveTime, resurrectionTime, false);
+                     unit.GetComponent<NumericComponentS>().SetEvent(NumericType.ReviveTime, resurrectionTime, false);
                      userInfoComponent.OnAddRevive(unit.ConfigId, resurrectionTime);
                      unit.RemoveComponent<ReviveTimeComponent>();
                      unit.AddComponent<ReviveTimeComponent, long>(resurrectionTime);
@@ -363,7 +363,7 @@ namespace ET.Server
                      if (mapComponent.SceneType == (int)SceneTypeEnum.MiJing)
                      {
                          resurrectionTime = TimeHelper.ServerNow() + resurrection * 1000;
-                         unit.GetComponent<NumericComponent_S>().Set(NumericType.ReviveTime, resurrectionTime);
+                         unit.GetComponent<NumericComponentS>().Set(NumericType.ReviveTime, resurrectionTime);
 
                          unit.RemoveComponent<ReviveTimeComponent>();
                          unit.AddComponent<ReviveTimeComponent, long>(resurrectionTime);
@@ -374,7 +374,7 @@ namespace ET.Server
              }
          }
 
-         public static void OnKillZhaoHuan(this HeroDataComponent_S self, Unit attack)
+         public static void OnKillZhaoHuan(this HeroDataComponentS self, Unit attack)
          {
              Unit unit = self.GetParent<Unit>();
              UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
@@ -398,7 +398,7 @@ namespace ET.Server
              zhaohuanids.Clear();
          }
 
-         public static void PlayDeathSkill(this HeroDataComponent_S self,Unit attack)
+         public static void PlayDeathSkill(this HeroDataComponentS self,Unit attack)
          {
              Unit unit = self.GetParent<Unit>();
              if (unit.Type == UnitType.Monster)
@@ -423,10 +423,10 @@ namespace ET.Server
              }
          }
 
-         public static void OnRevive(this HeroDataComponent_S self, bool bornPostion = false)
+         public static void OnRevive(this HeroDataComponentS self, bool bornPostion = false)
          {
              Unit unit = self.GetParent<Unit>();
-             NumericComponent_S numericComponent  = unit.GetComponent<NumericComponent_S>();
+             NumericComponentS numericComponent  = unit.GetComponent<NumericComponentS>();
              long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
 
              numericComponent.Set(NumericType.Now_Dead, 0);
@@ -442,16 +442,16 @@ namespace ET.Server
              }
          }
 
-         public static void InitTempFollower(this HeroDataComponent_S self, Unit matster, int monster)
+         public static void InitTempFollower(this HeroDataComponentS self, Unit matster, int monster)
          {
              Unit nowUnit = self.GetParent<Unit>();
-             NumericComponent_S numericComponent = nowUnit.GetComponent<NumericComponent_S>();
+             NumericComponentS numericComponent = nowUnit.GetComponent<NumericComponentS>();
              MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monster);
 
              //判定是否为成长怪物
              if (monsterConfig.MonsterSonType == 1)
              {
-                 int nowUserLv = nowUnit.GetComponent<UserInfoComponent_S>().GetUserLv();
+                 int nowUserLv = nowUnit.GetComponent<UserInfoComponentS>().GetUserLv();
                  for (int i = 0; i < monsterConfig.Parameter.Length; i++)
                  {
                      MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(monsterConfig.Parameter[i]);
@@ -463,7 +463,7 @@ namespace ET.Server
                  }
              }
 
-             NumericComponent_S numericComponentMaster = matster.GetComponent<NumericComponent_S>();
+             NumericComponentS numericComponentMaster = matster.GetComponent<NumericComponentS>();
              
              numericComponent.SetEvent((int)NumericType.Base_MaxHp_Base, (int)(numericComponentMaster.GetAsInt(NumericType.Base_MaxHp_Base) * 0.5f), false);
              numericComponent.SetEvent((int)NumericType.Base_MinAct_Base, (int)(numericComponentMaster.GetAsInt(NumericType.Base_MinAct_Base) * 0.5f), false);
@@ -486,18 +486,18 @@ namespace ET.Server
              numericComponent.SetEvent((int)NumericType.Now_Hp, numericComponent.GetAsLong(NumericType.Now_MaxHp), false);
          }
 
-         public static void InitJiaYuanPet(this HeroDataComponent_S self,  bool notice)
+         public static void InitJiaYuanPet(this HeroDataComponentS self,  bool notice)
          {
-             NumericComponent_S numericComponent = self.GetParent<Unit>().GetComponent<NumericComponent_S>();
+             NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
              numericComponent.SetEvent(NumericType.Now_MaxHp, 1, notice);
              numericComponent.SetEvent(NumericType.Now_Hp, 1, notice);
          }
 
-         public static void InitPet(this HeroDataComponent_S self, RolePetInfo rolePetInfo, bool notice)
+         public static void InitPet(this HeroDataComponentS self, RolePetInfo rolePetInfo, bool notice)
          {
              Unit unit = self.GetParent<Unit>();
 
-             NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
              for (int i = 0; i < rolePetInfo.Ks.Count; i++)
              {
                  numericComponent.SetEvent(rolePetInfo.Ks[i], rolePetInfo.Vs[i], notice);
@@ -521,11 +521,11 @@ namespace ET.Server
          //     numericComponent.Set(NumericType.GatherLastTime, jiaYuanPlant.GatherLastTime);
          // }
 
-         public static void InitJingLing(this HeroDataComponent_S self, Unit master, int jinglingid, bool notice)
+         public static void InitJingLing(this HeroDataComponentS self, Unit master, int jinglingid, bool notice)
          {
-             NumericComponent_S masterNumericComponent = master.GetComponent<NumericComponent_S>();
+             NumericComponentS masterNumericComponent = master.GetComponent<NumericComponentS>();
 
-             NumericComponent_S numericComponent = self.GetParent<Unit>().GetComponent<NumericComponent_S>();
+             NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
              // foreach ((int ntype, long value) in masterNumericComponent.NumericDic)
              // {
              //     numericComponent.SetEvent(ntype, value, false);
@@ -535,16 +535,16 @@ namespace ET.Server
          /// <summary>
          /// 角色属性模块初始化
          /// </summary>
-         public static void InitMonsterInfo_Summon2(this HeroDataComponent_S self, MonsterConfig monsterConfig, CreateMonsterInfo createMonsterInfo)
+         public static void InitMonsterInfo_Summon2(this HeroDataComponentS self, MonsterConfig monsterConfig, CreateMonsterInfo createMonsterInfo)
          {
              Unit nowUnit = self.GetParent<Unit>();
-             NumericComponent_S numericComponent = nowUnit.GetComponent<NumericComponent_S>();
+             NumericComponentS numericComponent = nowUnit.GetComponent<NumericComponentS>();
 
              int monsterlevel = 1;
              Unit masterUnit = nowUnit.GetParent<UnitComponent>().Get(createMonsterInfo.MasterID);
              if (masterUnit.Type == UnitType.Player)
              {
-                 monsterlevel = masterUnit.GetComponent<UserInfoComponent_S>().GetUserLv();
+                 monsterlevel = masterUnit.GetComponent<UserInfoComponentS>().GetUserLv();
              }
              else
              {
@@ -561,7 +561,7 @@ namespace ET.Server
              string[] attributeList_1 = summonInfo[1].Split(',');    //比列
              string[] attributeList_2 = summonInfo[2].Split(',');    //固定值
 
-             NumericComponent_S masterNumberComponent = masterUnit.GetComponent<NumericComponent_S>();
+             NumericComponentS masterNumberComponent = masterUnit.GetComponent<NumericComponentS>();
              numericComponent.SetEvent((int)NumericType.Now_Lv, monsterlevel, false);
              numericComponent.SetEvent((int)NumericType.Base_MaxHp_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_MaxHp) * float.Parse(attributeList_1[0]) * (1+ masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[0]), false);
              numericComponent.SetEvent((int)NumericType.Base_MinAct_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_MaxAct) * float.Parse(attributeList_1[1]) * (1 + masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[1]), false);  //召唤怪物继承当前角色最大攻击
@@ -602,10 +602,10 @@ namespace ET.Server
          /// <summary>
          /// 角色属性模块初始化
          /// </summary>
-         public static void InitMonsterInfo(this HeroDataComponent_S self, MonsterConfig monsterConfig, CreateMonsterInfo createMonsterInfo)
+         public static void InitMonsterInfo(this HeroDataComponentS self, MonsterConfig monsterConfig, CreateMonsterInfo createMonsterInfo)
          {
              Unit nowUnit = self.GetParent<Unit>();
-             NumericComponent_S numericComponent = nowUnit.GetComponent<NumericComponent_S>();
+             NumericComponentS numericComponent = nowUnit.GetComponent<NumericComponentS>();
 
              float hpCoefficient = 1f;
              float ackCoefficient = 1f;
@@ -629,7 +629,7 @@ namespace ET.Server
                          {
                              LocalDungeonComponent localDungeonComponent = nowUnit.Root().GetComponent<LocalDungeonComponent>();
                              Unit mainUnit = localDungeonComponent.MainUnit;
-                             int killNumber = mainUnit.GetComponent<UserInfoComponent_S>().GetMonsterKillNumber(monsterConfig.Id);
+                             int killNumber = mainUnit.GetComponent<UserInfoComponentS>().GetMonsterKillNumber(monsterConfig.Id);
                              int chpaterid = DungeonConfigCategory.Instance.GetChapterByDungeon(mapComponent.SceneId);
                              BossDevelopment bossDevelopment = ConfigHelper.GetBossDevelopmentByKill(chpaterid, killNumber);
                              attributeAdd = bossDevelopment.AttributeAdd;
@@ -680,7 +680,7 @@ namespace ET.Server
              //判定是否为成长怪物
              if (monsterConfig.MonsterSonType == 1)
              {
-                 int nowUserLv = nowUnit.GetComponent<UserInfoComponent_S>().GetUserLv();
+                 int nowUserLv = nowUnit.GetComponent<UserInfoComponentS>().GetUserLv();
                  for (int i = 0; i < monsterConfig.Parameter.Length; i++)
                  {
                      MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(monsterConfig.Parameter[i]);
@@ -735,11 +735,11 @@ namespace ET.Server
          /// <summary>
          /// 更新当前角色身上的buff信息, 更新基础属性
          /// </summary>
-         public static void BuffPropertyUpdate_Long(this HeroDataComponent_S self, int numericType, long NumericTypeValue)
+         public static void BuffPropertyUpdate_Long(this HeroDataComponentS self, int numericType, long NumericTypeValue)
          {
 
              Unit nowUnit = self.GetParent<Unit>();
-             NumericComponent_S numericComponent = nowUnit.GetComponent<NumericComponent_S>();
+             NumericComponentS numericComponent = nowUnit.GetComponent<NumericComponentS>();
              long newvalue = numericComponent.GetAsLong(numericType) + NumericTypeValue;
              numericComponent.Set(numericType, newvalue);
 
@@ -761,16 +761,16 @@ namespace ET.Server
              */
          }
 
-         public static void BuffPropertyUpdate_Float(this HeroDataComponent_S self, int numericType, float NumericTypeValue)
+         public static void BuffPropertyUpdate_Float(this HeroDataComponentS self, int numericType, float NumericTypeValue)
          {
              Unit nowUnit = self.GetParent<Unit>();
-             NumericComponent_S numericComponent = nowUnit.GetComponent<NumericComponent_S>();
+             NumericComponentS numericComponent = nowUnit.GetComponent<NumericComponentS>();
              float newvalue = numericComponent.GetAsFloat(numericType) + NumericTypeValue;
              numericComponent.Set(numericType, newvalue);
          }
 
 
-         public static void OnDead(this HeroDataComponent_S self, Unit attack)
+         public static void OnDead(this HeroDataComponentS self, Unit attack)
          {
              Unit unit = self.GetParent<Unit>();
              unit.GetComponent<MoveComponent>()?.Stop(false);
@@ -782,14 +782,14 @@ namespace ET.Server
              unit.GetComponent<SkillPassiveComponent>()?.Stop();
              //unit.GetComponent<SkillManagerComponent>()?.OnFinish(false);
              //unit.GetComponent<BuffManagerComponent>()?.OnDead(attack);
-             NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
              if (unit.Type == UnitType.Player)
              {
-                 RolePetInfo rolePetInfo = unit.GetComponent<PetComponent_S>().GetFightPet();
+                 RolePetInfo rolePetInfo = unit.GetComponent<PetComponentS>().GetFightPet();
                  if (rolePetInfo != null)
                  {
                      unit.GetParent<UnitComponent>().Remove(rolePetInfo.Id);
-                     unit.GetComponent<PetComponent_S>().OnPetDead(rolePetInfo.Id);
+                     unit.GetComponent<PetComponentS>().OnPetDead(rolePetInfo.Id);
                  }
 
                  int now_horse = numericComponent.GetAsInt(NumericType.HorseRide);
@@ -824,7 +824,7 @@ namespace ET.Server
                      long manster = numericComponent.GetAsLong(NumericType.MasterId);
                      Unit unit_manster = unit.GetParent<UnitComponent>().Get(manster);
                      //修改宠物出战状态
-                     unit_manster.GetComponent<PetComponent_S>().OnPetDead(unit.Id);
+                     unit_manster.GetComponent<PetComponentS>().OnPetDead(unit.Id);
                  }
              }
              //怪物死亡， 清除玩家BUFF

@@ -8,7 +8,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_RolePetFormationSet request, M2C_RolePetFormationSet response)
         {
-            PetComponent_S petComponent = unit.GetComponent<PetComponent_S>();
+            PetComponentS petComponent = unit.GetComponent<PetComponentS>();
             switch (request.SceneType)
             {
                 case SceneTypeEnum.PetDungeon:

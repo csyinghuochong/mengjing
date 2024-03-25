@@ -12,7 +12,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_PetHeXinExploreReward request, M2C_PetHeXinExploreReward response)
         {
-            UserInfoComponent_S userInfoComponent = unit.GetComponent<UserInfoComponent_S>();
+            UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
             if (userInfoComponent.UserInfo.PetHeXinExploreRewardIds.Contains(request.RewardId))
             {
                 response.Error = ErrorCode.ERR_AlreadyReceived;
@@ -25,7 +25,7 @@ namespace ET.Server
                 return;
             }
 
-            if (unit.GetComponent<NumericComponent_S>().GetAsInt(NumericType.PetHeXinExploreNumber) < request.RewardId)
+            if (unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetHeXinExploreNumber) < request.RewardId)
             {
                 response.Error = ErrorCode.Pre_Condition_Error;
                 return;
@@ -34,7 +34,7 @@ namespace ET.Server
             string[] reward = ConfigData.PetHeXinExploreReward[request.RewardId].Split('$');
             string[] items = reward[0].Split('@');
             string[] diamond = reward[1].Split(';')[1].Split(',');
-            if (unit.GetComponent<BagComponent_S>().GetBagLeftCell() < items.Length)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < items.Length)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;
@@ -42,8 +42,8 @@ namespace ET.Server
 
             userInfoComponent.UserInfo.PetHeXinExploreRewardIds.Add(request.RewardId);
             int randomZuanshi = RandomHelper.RandomNumber(int.Parse(diamond[0]), int.Parse(diamond[1]));
-            unit.GetComponent<BagComponent_S>().OnAddItemData(reward[0], $"{ItemGetWay.PetChouKa}_{TimeHelper.ServerNow()}");
-            unit.GetComponent<UserInfoComponent_S>().UpdateRoleMoneyAdd(UserDataType.Diamond, randomZuanshi.ToString(), true, ItemGetWay.PetChouKa);
+            unit.GetComponent<BagComponentS>().OnAddItemData(reward[0], $"{ItemGetWay.PetChouKa}_{TimeHelper.ServerNow()}");
+            unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneyAdd(UserDataType.Diamond, randomZuanshi.ToString(), true, ItemGetWay.PetChouKa);
             
             await ETTask.CompletedTask;
         }

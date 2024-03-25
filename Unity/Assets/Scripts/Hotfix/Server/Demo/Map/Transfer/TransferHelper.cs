@@ -21,7 +21,7 @@ namespace ET.Server
                     Log.Debug($"LoginTest1  Actor_Transfer unitId{unit.Id} oldScene:{oldScene}  requestscene{request.SceneType}");
                     return ErrorCode.ERR_RequestRepeatedly;
                 }
-                UserInfoComponent_S userInfoComponent = unit.GetComponent<UserInfoComponent_S>();
+                UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                 if (SceneConfigHelper.UseSceneConfig(request.SceneType) && request.SceneId > 0)
                 {
                     if (!SceneConfigCategory.Instance.Contain(request.SceneId))
@@ -91,7 +91,7 @@ namespace ET.Server
                         break;
                     case SceneTypeEnum.SeasonTower:
                         //计算赛季之塔下一关
-                        int seasonTowerid = unit.GetComponent<NumericComponent_S>().GetAsInt(NumericType.SeasonTowerId);
+                        int seasonTowerid = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.SeasonTowerId);
                         if (seasonTowerid == 0)
                         {
                             request.paramInfo = TowerHelper.GetFirstTowerIdByScene(SceneTypeEnum.SeasonTower).ToString();
@@ -117,7 +117,7 @@ namespace ET.Server
                         TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
                         break;
                     case SceneTypeEnum.TowerOfSeal:
-                        int finished = unit.GetComponent<NumericComponent_S>().GetAsInt(NumericType.TowerOfSealFinished);
+                        int finished = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.TowerOfSealFinished);
                         // 服务端再判断是否已经通关塔顶
                         if (finished >= 100)
                         {
@@ -149,7 +149,7 @@ namespace ET.Server
                         TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
                         break;
                     case (int)SceneTypeEnum.Union:
-                        long unionid = unit.GetComponent<NumericComponent_S>().GetAsLong(NumericType.UnionId_0);
+                        long unionid = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.UnionId_0);
                         if (unionid == 0)
                         {
                             return ErrorCode.ERR_Union_Not_Exist;
@@ -218,7 +218,7 @@ namespace ET.Server
                         // }
                         break;
                     case (int)SceneTypeEnum.PetMing:
-                        long cdTime = unit.GetComponent<NumericComponent_S>().GetAsLong(NumericType.PetMineCDTime);
+                        long cdTime = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.PetMineCDTime);
                         if (cdTime > TimeHelper.ServerNow())
                         {
                             return ErrorCode.ERR_InMakeCD;
@@ -343,7 +343,7 @@ namespace ET.Server
                         // }
                         break;
                     case SceneTypeEnum.UnionRace:
-                        unionid = unit.GetComponent<NumericComponent_S>().GetAsLong(NumericType.UnionId_0);
+                        unionid = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.UnionId_0);
                         if (unionid == 0)
                         {
                             return ErrorCode.ERR_Union_Not_Exist;

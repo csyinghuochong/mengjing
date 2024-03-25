@@ -8,7 +8,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_RolePetXiuLian request, M2C_RolePetXiuLian response)
         {
-            RolePetInfo petinfo = unit.GetComponent<PetComponent_S>().GetPetInfo(request.PetInfoId);
+            RolePetInfo petinfo = unit.GetComponent<PetComponentS>().GetPetInfo(request.PetInfoId);
             if (petinfo == null)
             {
                 response.Error = ErrorCode.ERR_Pet_NoExist;
@@ -31,7 +31,7 @@ namespace ET.Server
             }
 
             //List<ComponentWithId> resultuserinfo = await dbProxy.Query<UserInfo>(_userInfo => _userInfo.Id == player.UserId);
-            UserInfo userinfo = unit.GetComponent<UserInfoComponent_S>().UserInfo;
+            UserInfo userinfo = unit.GetComponent<UserInfoComponentS>().UserInfo;
 
             //判定消耗
             string[] costItemList = costItemNum.Split(',');

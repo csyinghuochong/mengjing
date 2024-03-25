@@ -7,7 +7,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_ItemQiangHuaRequest request, M2C_ItemQiangHuaResponse response)
         {
             int maxLevel = QiangHuaHelper.GetQiangHuaMaxLevel(request.WeiZhi);
-            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             if (bagComponent.QiangHuaLevel[request.WeiZhi] >= maxLevel - 1)
             {
                 return;
@@ -33,8 +33,8 @@ namespace ET.Server
                 bagComponent.QiangHuaFails[request.WeiZhi]++;
             }
             response.QiangHuaLevel = bagComponent.QiangHuaLevel[request.WeiZhi];
-            unit.GetComponent<TaskComponent_S>().TriggerTaskEvent(TaskTargetType.QiangHuaLevel_17, 0, response.QiangHuaLevel);
-            unit.GetComponent<TaskComponent_S>().TriggerTaskCountryEvent(TaskTargetType.QiangHuaLevel_17, 0, response.QiangHuaLevel);
+            unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.QiangHuaLevel_17, 0, response.QiangHuaLevel);
+            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.QiangHuaLevel_17, 0, response.QiangHuaLevel);
             Function_Fight.UnitUpdateProperty_Base(unit, true, true);
             await ETTask.CompletedTask;
         }

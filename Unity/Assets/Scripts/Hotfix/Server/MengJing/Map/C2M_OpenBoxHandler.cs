@@ -2,8 +2,8 @@
 namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof(PetComponent_S))]
-    [FriendOf(typeof(BagComponent_S))]
+    [FriendOf(typeof(PetComponentS))]
+    [FriendOf(typeof(BagComponentS))]
     public class C2M_OpenBoxHandler: MessageLocationHandler<Unit, C2M_OpenBoxRequest, M2C_OpenBoxResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_OpenBoxRequest request, M2C_OpenBoxResponse response)
@@ -16,7 +16,7 @@ namespace ET.Server
                 response.Error = ErrorCode.ERR_Success;
                 return;
             }
-            if (boxUnit.GetComponent<NumericComponent_S>().GetAsInt(NumericType.Now_Dead) == 1)
+            if (boxUnit.GetComponent<NumericComponentS>().GetAsInt(NumericType.Now_Dead) == 1)
             {
                 response.Error = ErrorCode.ERR_Success;
                 return;
@@ -29,7 +29,7 @@ namespace ET.Server
             {
                 itemneeds = $"{monsterConfig.Parameter[0]};{monsterConfig.Parameter[1]}";
             }
-            if (itemneeds.Length >2 && !unit.GetComponent<BagComponent_S>().OnCostItemData(itemneeds))
+            if (itemneeds.Length >2 && !unit.GetComponent<BagComponentS>().OnCostItemData(itemneeds))
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
                 return;
@@ -38,14 +38,14 @@ namespace ET.Server
             if (monsterConfig.MonsterSonType == 57) 
             {
                 //背包是否满
-                if (unit.GetComponent<BagComponent_S>().IsBagFull())
+                if (unit.GetComponent<BagComponentS>().IsBagFull())
                 {
                     response.Error = ErrorCode.ERR_BagIsFull;
                     return;
                 }
 
                 //宠物已满
-                if (unit.GetComponent<PetComponent_S>().PetIsFull())
+                if (unit.GetComponent<PetComponentS>().PetIsFull())
                 {
                     response.Error = ErrorCode.ERR_PetIsFull;
                     return;

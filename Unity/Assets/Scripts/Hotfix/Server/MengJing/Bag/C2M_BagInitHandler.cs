@@ -8,7 +8,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_BagInitRequest request, M2C_BagInitResponse response)
         {
             Log.Debug($"C2M_BagInitHandler: server0");
-            BagComponent_S bagComponentS = unit.GetComponent<BagComponent_S>();
+            BagComponentS bagComponentS = unit.GetComponent<BagComponentS>();
             response.BagInfos = bagComponentS.GetAllItems();
 
             // 测试。。

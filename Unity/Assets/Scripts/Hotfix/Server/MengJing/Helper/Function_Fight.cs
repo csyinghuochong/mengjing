@@ -8,9 +8,9 @@ namespace ET.Server
 {
     
     [FriendOf(typeof(SkillHandler))]
-    [FriendOf(typeof(NumericComponent_S))]
-    [FriendOf(typeof(UserInfoComponent_S))]
-    [FriendOf(typeof(PetComponent_S))]
+    [FriendOf(typeof(NumericComponentS))]
+    [FriendOf(typeof(UserInfoComponentS))]
+    [FriendOf(typeof(PetComponentS))]
     public static class Function_Fight
     {
         
@@ -98,7 +98,7 @@ namespace ET.Server
 
 
             //已死亡
-            if (defendUnit.GetComponent<NumericComponent_S>().GetAsInt(NumericType.Now_Dead) == 1)
+            if (defendUnit.GetComponent<NumericComponentS>().GetAsInt(NumericType.Now_Dead) == 1)
             {
                 return false;
             }
@@ -131,7 +131,7 @@ namespace ET.Server
             //defendUnit.GetComponent<BuffManagerComponent>()?.BuffRemoveType(2);
             
             //获取攻击方属性
-            NumericComponent_S numericComponentAttack = attackUnit.GetComponent<NumericComponent_S>();
+            NumericComponentS numericComponentAttack = attackUnit.GetComponent<NumericComponentS>();
             long attack_Hp = numericComponentAttack.GetAsLong(NumericType.Now_Hp);
             long attack_MaxHp = numericComponentAttack.GetAsLong(NumericType.Now_MaxHp);
             long attack_MinAct = numericComponentAttack.GetAsLong(NumericType.Now_MinAct);
@@ -201,7 +201,7 @@ namespace ET.Server
             if (attackUnit.Type == UnitType.Player)
             {
                 //攻击强度和法术强度
-                switch (attackUnit.GetComponent<UserInfoComponent_S>().UserInfo.Occ)
+                switch (attackUnit.GetComponent<UserInfoComponentS>().UserInfo.Occ)
                 {
                     //战士
                     case 1:
@@ -220,7 +220,7 @@ namespace ET.Server
             //long attack_def = (long)RandomHelper.RandomNumberFloat(attack_MinDef, attack_MaxDef);
 
             //获取受击方属性
-            NumericComponent_S numericComponentDefend = defendUnit.GetComponent<NumericComponent_S>();
+            NumericComponentS numericComponentDefend = defendUnit.GetComponent<NumericComponentS>();
             //long defend_Hp = numericComponentDefend.GetAsLong(NumericType.Now_Hp);
             //long defend_MaxHp = numericComponentDefend.GetAsLong(NumericType.Now_MaxHp);
             long defend_MinAct = numericComponentDefend.GetAsLong(NumericType.Now_MinAct);
@@ -283,7 +283,7 @@ namespace ET.Server
                     break;
                 //玩家
                 case UnitType.Player:
-                    defendUnitLv = defendUnit.GetComponent<UserInfoComponent_S>().UserInfo.Lv;
+                    defendUnitLv = defendUnit.GetComponent<UserInfoComponentS>().UserInfo.Lv;
                     //受击增加怒气值
                     // if (defendUnit.GetComponent<SkillSetComponent>().IfJuexXingSkill())
                     // {
@@ -323,7 +323,7 @@ namespace ET.Server
                     break;
                 //玩家
                 case UnitType.Player:
-                    attackUnitLv = attackUnit.GetComponent<UserInfoComponent_S>().UserInfo.Lv;
+                    attackUnitLv = attackUnit.GetComponent<UserInfoComponentS>().UserInfo.Lv;
                    
                     //攻击者增加怒气值
                     // if (attackUnit.GetComponent<SkillSetComponent>().IfJuexXingSkill())
@@ -625,7 +625,7 @@ namespace ET.Server
                 if (attackUnit.Type == UnitType.Monster && defendUnit.Type == UnitType.Player)
                 {
                     //战士降低受到怪物普攻20%的伤害
-                    if (defendUnit.GetComponent<UserInfoComponent_S>().UserInfo.Occ == 1)
+                    if (defendUnit.GetComponent<UserInfoComponentS>().UserInfo.Occ == 1)
                     {
 
                         if (skillconfig.SkillActType == 0)
@@ -909,7 +909,7 @@ namespace ET.Server
                         int juexingid = 0;
                         if (attackUnit.Type == UnitType.Player)
                         {
-                            int occtwo = attackUnit.GetComponent<UserInfoComponent_S>().UserInfo.OccTwo;
+                            int occtwo = attackUnit.GetComponent<UserInfoComponentS>().UserInfo.OccTwo;
                             if (occtwo != 0)
                             {
                                 OccupationTwoConfig occupationConfig = OccupationTwoConfigCategory.Instance.Get(occtwo);
@@ -940,8 +940,8 @@ namespace ET.Server
                     //根据双方战力调整系数
                     if (attackUnit.Type == UnitType.Player && defendUnit.Type == UnitType.Player)
                     {
-                        damgePro += GetFightValueActProValue(attackUnit.GetComponent<UserInfoComponent_S>().UserInfo.Combat, 
-                            defendUnit.GetComponent<UserInfoComponent_S>().UserInfo.Combat);
+                        damgePro += GetFightValueActProValue(attackUnit.GetComponent<UserInfoComponentS>().UserInfo.Combat, 
+                            defendUnit.GetComponent<UserInfoComponentS>().UserInfo.Combat);
                     }
                 }
 
@@ -1230,7 +1230,7 @@ namespace ET.Server
         /// <param name="notice"></param>
         public static void UnitUpdateProperty_DemonBig(Unit unit, bool notice)
         {
-            NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
             numericComponent.SetEvent(NumericType.Base_Speed_Mul, 0, notice);
             numericComponent.SetEvent(NumericType.Base_Speed_Add, 0, notice);
@@ -1246,7 +1246,7 @@ namespace ET.Server
         /// <param name="notice"></param>
         public static void UnitUpdateProperty_DemonLittle(Unit unit, bool notice)
         {
-            NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             numericComponent.SetEvent(NumericType.Base_Speed_Mul, 0, notice);
             numericComponent.SetEvent(NumericType.Base_Speed_Add, 0, notice);
             numericComponent.SetEvent(NumericType.Extra_Buff_Speed_Add, 0, notice);
@@ -1261,7 +1261,7 @@ namespace ET.Server
         /// <param name="notice"></param>
         public static void UnitUpdateProperty_DemonGhost(Unit unit, bool notice)
         {
-            NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             numericComponent.SetEvent(NumericType.Base_Speed_Mul, 0, notice);
             numericComponent.SetEvent(NumericType.Base_Speed_Add, 0, notice);
             numericComponent.SetEvent(NumericType.Extra_Buff_Speed_Add, 0, notice);
@@ -1276,7 +1276,7 @@ namespace ET.Server
         /// <param name="notice"></param>
         public static void UnitUpdateProperty_RunRace(Unit unit, bool notice)
         {
-            NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             int monsterid = numericComponent.GetAsInt(NumericType.RunRaceTransform);
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterid);
             numericComponent.SetEvent(NumericType.Base_Speed_Mul, 0, notice);
@@ -1298,12 +1298,12 @@ namespace ET.Server
             }
 
             //基础职业属性
-            UserInfoComponent_S unitInfoComponentS = unit.GetComponent<UserInfoComponent_S>();
+            UserInfoComponentS unitInfoComponentS = unit.GetComponent<UserInfoComponentS>();
             UserInfo userInfo = unitInfoComponentS.UserInfo;
             int roleLv = userInfo.Lv;
 
             //初始化属性
-            NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             //numericComponent.ResetProperty();
 
             //缓存列表
@@ -1346,7 +1346,7 @@ namespace ET.Server
             //装备属性
             List<int> equipIDList = new List<int>();
             List<int> equipSuitIDList = new List<int>();
-            List<BagInfo> equipList = unit.GetComponent<BagComponent_S>().GetItemByLoc(ItemLocType.ItemLocEquip);
+            List<BagInfo> equipList = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip);
 
             for (int i = equipList.Count - 1; i >= 0; i--)
             {
@@ -1373,7 +1373,7 @@ namespace ET.Server
                 }
 
                 bool ifAddHidePro = true;
-                int occTwoValue = unit.GetComponent<UserInfoComponent_S>().UserInfo.OccTwo;
+                int occTwoValue = unit.GetComponent<UserInfoComponentS>().UserInfo.OccTwo;
                 if (occTwoValue != 0)
                 {
                     if (itemCof.EquipType == 11 || itemCof.EquipType == 12 || itemCof.EquipType == 13 && equipList[i].Loc == (int)ItemLocType.ItemLocEquip)
@@ -1591,7 +1591,7 @@ namespace ET.Server
                     int[] needEquipList = equipSuitCof.NeedEquipID;
                     for (int y = 0; y < needEquipList.Length; y++)
                     {
-                        if (unit.GetComponent<BagComponent_S>().FashionActiveIds.Contains(needEquipList[y]))
+                        if (unit.GetComponent<BagComponentS>().FashionActiveIds.Contains(needEquipList[y]))
                         {
                             num++;
                         }
@@ -1729,7 +1729,7 @@ namespace ET.Server
                 }
 
                 //强化登录（List长度13， 13个位置）
-                int qianghuaLv = unit.GetComponent<BagComponent_S>().GetQiangHuaLevel(itemCof.ItemSubType);
+                int qianghuaLv = unit.GetComponent<BagComponentS>().GetQiangHuaLevel(itemCof.ItemSubType);
 
                 EquipQiangHuaConfig equipQiangHuaConfig = null;/// QiangHuaHelper.GetQiangHuaConfig(itemCof.ItemSubType, qianghuaLv);
                 if (equipQiangHuaConfig != null)
@@ -2083,7 +2083,7 @@ namespace ET.Server
             }
 
             ///晶核列表
-            List<BagInfo> jingHeList = unit.GetComponent<BagComponent_S>().GetCurJingHeList();
+            List<BagInfo> jingHeList = unit.GetComponent<BagComponentS>().GetCurJingHeList();
             for (int i = 0; i < jingHeList.Count; i++)
             {
                 //存储装备精炼数值
@@ -2098,7 +2098,7 @@ namespace ET.Server
             }
 
             //家园守护
-            List<PropertyValue> shouhuPros = unit.GetComponent<PetComponent_S>().GetPetShouHuPro();
+            List<PropertyValue> shouhuPros = unit.GetComponent<PetComponentS>().GetPetShouHuPro();
             for (int i = 0; i < shouhuPros.Count; i++)
             {
                 AddUpdateProDicList(shouhuPros[i].HideID, shouhuPros[i].HideValue, UpdateProDicListCopy);
@@ -2281,7 +2281,7 @@ namespace ET.Server
             }
             
             //---------------
-            NumericComponent_S numericComponent_1 = new NumericComponent_S();
+            NumericComponentS numericComponent_1 = new NumericComponentS();
 
             //更新属性,算战力
             foreach (int key in UpdateProDicList.Keys)

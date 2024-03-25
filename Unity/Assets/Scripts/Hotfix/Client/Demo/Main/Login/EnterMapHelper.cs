@@ -50,12 +50,12 @@ namespace ET.Client
             }
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
-            if (unit.GetComponent<NumericComponent_C>().GetAsLong(NumericType.Now_Stall) > 0)
+            if (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.Now_Stall) > 0)
             {
                 return ErrorCode.ERR_RequestExitFuben;
             }
 
-            UserInfoComponent_C userInfoComponent = root.GetComponent<UserInfoComponent_C>();
+            UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
             if (SceneConfigHelper.UseSceneConfig(newsceneType) && sceneId > 0)
             {
                 SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);

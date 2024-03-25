@@ -9,14 +9,14 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_PetMingResetRequest request, M2C_PetMingResetResponse response)
         {
-            NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             if (numericComponent.GetAsInt(NumericType.PetMineReset) >= 3)
             {
                 response.Error = ErrorCode.ERR_TimesIsNot;
                 return;
             }
 
-            UserInfoComponent_S userInfoComponent = unit.GetComponent<UserInfoComponent_S>();   
+            UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();   
             if (userInfoComponent.UserInfo.Diamond < 350)
             {
                 response.Error = ErrorCode.ERR_DiamondNotEnoughError;

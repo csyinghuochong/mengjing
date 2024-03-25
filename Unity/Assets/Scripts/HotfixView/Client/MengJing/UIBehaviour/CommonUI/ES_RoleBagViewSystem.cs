@@ -44,7 +44,7 @@ namespace ET.Client
 
         public static void RefreshBagItems(this ES_RoleBag self)
         {
-            BagComponent_C bagComponentC = self.Root().GetComponent<BagComponent_C>();
+            BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
 
             self.ShowBagInfos.Clear();
 

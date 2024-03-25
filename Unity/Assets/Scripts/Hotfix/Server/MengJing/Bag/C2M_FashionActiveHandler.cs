@@ -2,7 +2,7 @@ namespace ET.Server
 {
     
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof(BagComponent_S))]
+    [FriendOf(typeof(BagComponentS))]
     public class C2M_FashionActiveHandler: MessageLocationHandler<Unit, C2M_FashionActiveRequest, M2C_FashionActiveResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_FashionActiveRequest request, M2C_FashionActiveResponse response)
@@ -13,7 +13,7 @@ namespace ET.Server
                 return;
             }
 
-            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             if (bagComponent.FashionActiveIds.Contains(request.FashionId))
             {
                 response.Error = ErrorCode.ERR_AlreadyLearn;

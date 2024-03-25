@@ -27,7 +27,7 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (UserInfoComponent_C))]
+    [FriendOf(typeof (UserInfoComponentC))]
     [FriendOf(typeof (DlgHuoBiSet))]
     public static class DlgHuoBiSetSystem
     {
@@ -54,7 +54,7 @@ namespace ET.Client
 
         public static void Refresh(this DlgHuoBiSet self)
         {
-            UserInfo userInfo = self.Root().GetComponent<UserInfoComponent_C>().UserInfo;
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             self.View.E_GoldText.text = userInfo.Gold.ToString();
             self.View.E_ZuanShiText.text = userInfo.Diamond.ToString();
         }

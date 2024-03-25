@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponent_C))]
+    [FriendOf(typeof (UserInfoComponentC))]
     [EntitySystemOf(typeof (ES_EquipSet))]
     [FriendOfAttribute(typeof (ES_EquipSet))]
     public static partial class ES_EquipSetSystem
@@ -39,7 +39,7 @@ namespace ET.Client
 
         public static void RefreshPlayerInfo(this ES_EquipSet self)
         {
-            UserInfo userInfo = self.Root().GetComponent<UserInfoComponent_C>().UserInfo;
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
 
             self.E_RoseLvText.text = userInfo.Lv.ToString();
             self.E_RoseNameText.text = userInfo.Name;
@@ -50,8 +50,8 @@ namespace ET.Client
 
         public static void RefreshEquip(this ES_EquipSet self)
         {
-            BagComponent_C bagComponentC = self.Root().GetComponent<BagComponent_C>();
-            UserInfoComponent_C userInfoComponentC = self.Root().GetComponent<UserInfoComponent_C>();
+            BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
+            UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
 
             for (int i = 0; i < self.ESEquipItems_1.Count; i++)
             {

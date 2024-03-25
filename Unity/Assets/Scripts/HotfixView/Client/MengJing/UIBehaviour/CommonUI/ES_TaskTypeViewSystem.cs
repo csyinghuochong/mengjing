@@ -109,7 +109,7 @@ namespace ET.Client
         {
             self.ShowTaskPros.Clear();
 
-            TaskComponent_C taskComponentC = self.Root().GetComponent<TaskComponent_C>();
+            TaskComponentC taskComponentC = self.Root().GetComponent<TaskComponentC>();
             self.ShowTaskPros = taskComponentC.GetTaskTypeList(self.TaskType);
             if (self.TaskType == TaskTypeEnum.Branch)
             {

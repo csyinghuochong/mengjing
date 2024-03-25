@@ -9,8 +9,8 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_ItemIncreaseTransferRequest request, M2C_ItemIncreaseTransferResponse response)
         {
-            BagInfo bagInfo_1 = unit.GetComponent<BagComponent_S>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID_1);
-            BagInfo bagInfo_2 = unit.GetComponent<BagComponent_S>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID_2);
+            BagInfo bagInfo_1 = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID_1);
+            BagInfo bagInfo_2 = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID_2);
             if (bagInfo_1 == null || bagInfo_2 == null)
             {
                 return;
@@ -64,7 +64,7 @@ namespace ET.Server
             }
 
             string costItem = GlobalValueConfigCategory.Instance.Get(51).Value;
-            if (!unit.GetComponent<BagComponent_S   >().OnCostItemData(costItem))
+            if (!unit.GetComponent<BagComponentS   >().OnCostItemData(costItem))
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
                 return;
@@ -121,8 +121,8 @@ namespace ET.Server
 
             bagInfo_1.isBinging = true;
             bagInfo_2.isBinging = true;
-            unit.GetComponent<TaskComponent_S>().TriggerTaskEvent(TaskTargetType.IncreaseNumber_46, 0, 1);
-            unit.GetComponent<TaskComponent_S>().TriggerTaskCountryEvent(TaskTargetType.IncreaseNumber_46, 0, 1);
+            unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.IncreaseNumber_46, 0, 1);
+            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.IncreaseNumber_46, 0, 1);
 
             M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
             //通知客户端背包道具发生改变

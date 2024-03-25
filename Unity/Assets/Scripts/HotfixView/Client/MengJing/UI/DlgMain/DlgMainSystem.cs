@@ -9,8 +9,8 @@ namespace ET.Client
 {
     [FriendOf(typeof (Scroll_Item_MainChatItem))]
     [FriendOf(typeof (ChatComponent))]
-    [FriendOf(typeof (TaskComponent_C))]
-    [FriendOf(typeof (UserInfoComponent_C))]
+    [FriendOf(typeof (TaskComponentC))]
+    [FriendOf(typeof (UserInfoComponentC))]
     [FriendOf(typeof (DlgMain))]
     public static class DlgMainSystem
     {
@@ -140,7 +140,7 @@ namespace ET.Client
         private static void RefreshMainTaskItems(this DlgMain self)
         {
             self.ShowTaskPros.Clear();
-            foreach (TaskPro taskPro in self.Root().GetComponent<TaskComponent_C>().RoleTaskList)
+            foreach (TaskPro taskPro in self.Root().GetComponent<TaskComponentC>().RoleTaskList)
             {
                 if (taskPro.TrackStatus == 0)
                 {
@@ -158,7 +158,7 @@ namespace ET.Client
 
         private static void OnRoseTaskButton(this DlgMain self)
         {
-            TaskComponent_C taskComponent = self.Root().GetComponent<TaskComponent_C>();
+            TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
 
             int nextTask = taskComponent.GetNextMainTask();
             if (nextTask == 0)
@@ -209,9 +209,9 @@ namespace ET.Client
 
         private static void RefreshLeftUp(this DlgMain self)
         {
-            UserInfoComponent_C userInfoComponentC = self.Root().GetComponent<UserInfoComponent_C>();
+            UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            NumericComponent_C numericComponentC = unit.GetComponent<NumericComponent_C>();
+            NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
 
             self.View.E_PlayerHeadIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                     .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, userInfoComponentC.UserInfo.Occ.ToString()));
@@ -504,7 +504,7 @@ namespace ET.Client
             Quaternion rotation = Quaternion.Euler(0, direction, 0);
             float distance = self.CanMoveDistance(unit, rotation);
             distance = Mathf.Max(distance, 2f);
-            float speed = unit.GetComponent<NumericComponent_C>().GetAsFloat(NumericType.Now_Speed);
+            float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
             speed = Mathf.Max(speed, 4f);
             float needTime = distance / speed;
             self.checkTime = (int)(1000 * needTime) - 200;

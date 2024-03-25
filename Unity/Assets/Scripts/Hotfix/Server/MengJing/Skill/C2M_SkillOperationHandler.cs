@@ -7,7 +7,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_SkillOperation request, M2C_SkillOperation response)
         {
             await ETTask.CompletedTask;
-            UserInfoComponent_S userInfoComponent = unit.GetComponent<UserInfoComponent_S>();
+            UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
             int level = userInfoComponent.GetUserLv();
             int sp = userInfoComponent.GetSp();
             switch (request.OperationType)
@@ -15,7 +15,7 @@ namespace ET.Server
                 case 1:
                     GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(20);
                     int needGold = int.Parse(globalValueConfig.Value);
-                    userInfoComponent = unit.GetComponent<UserInfoComponent_S>();
+                    userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                     if (userInfoComponent.GetGold() < needGold)
                     {
                         response.Error = ErrorCode.ERR_GoldNotEnoughError;
@@ -24,7 +24,7 @@ namespace ET.Server
 
                     userInfoComponent.UpdateRoleMoneySub(UserDataType.Gold, (needGold * -1).ToString());
                     userInfoComponent.UpdateRoleData(UserDataType.Sp, (level - sp - 1).ToString());
-                    unit.GetComponent<SkillSetComponent_S>().OnSkillReset();
+                    unit.GetComponent<SkillSetComponentS>().OnSkillReset();
                     break;
                 case 2:
                     globalValueConfig = GlobalValueConfigCategory.Instance.Get(29);
@@ -36,14 +36,14 @@ namespace ET.Server
                         return;
                     }
 
-                    sp = unit.GetComponent<SkillSetComponent_S>().OnOccReset();
+                    sp = unit.GetComponent<SkillSetComponentS>().OnOccReset();
                     userInfoComponent.UpdateRoleData(UserDataType.Sp, sp.ToString());
                     break;
                 case 3:
-                    unit.GetComponent<NumericComponent_S>().SetEvent(NumericType.SkillMakePlan2, 1, false);
+                    unit.GetComponent<NumericComponentS>().SetEvent(NumericType.SkillMakePlan2, 1, false);
                     break;
                 case 4:
-                    unit.GetComponent<NumericComponent_S>().SetEvent(NumericType.GemWarehouseOpen, 1, false);
+                    unit.GetComponent<NumericComponentS>().SetEvent(NumericType.GemWarehouseOpen, 1, false);
                     break;
             }
         }

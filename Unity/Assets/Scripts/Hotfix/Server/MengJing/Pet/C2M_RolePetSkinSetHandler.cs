@@ -8,7 +8,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_RolePetSkinSet request, M2C_RolePetSkinSet response)
         {
-            PetComponent_S petComponent = unit.GetComponent<PetComponent_S>();
+            PetComponentS petComponent = unit.GetComponent<PetComponentS>();
             RolePetInfo rolePetInfo = petComponent.GetPetInfo(request.PetInfoId);
             rolePetInfo.SkinId = request.SkinId;
 
@@ -16,7 +16,7 @@ namespace ET.Server
             Unit unitPet = unit.GetParent<UnitComponent>().Get(request.PetInfoId);
             if (unitPet != null)
             {
-                unitPet.GetComponent<NumericComponent_S>().SetEvent(NumericType.PetSkin, rolePetInfo.SkinId, true);
+                unitPet.GetComponent<NumericComponentS>().SetEvent(NumericType.PetSkin, rolePetInfo.SkinId, true);
             }
 
             await ETTask.CompletedTask;

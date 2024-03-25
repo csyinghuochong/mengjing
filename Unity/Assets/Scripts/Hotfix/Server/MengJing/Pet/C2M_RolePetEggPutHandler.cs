@@ -8,14 +8,14 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_RolePetEggPut request, M2C_RolePetEggPut response)
         {
-            PetComponent_S petComponent = unit.GetComponent<PetComponent_S>();
+            PetComponentS petComponent = unit.GetComponent<PetComponentS>();
             KeyValuePairInt rolePetEgg = petComponent.RolePetEggs[request.Index];
             if (rolePetEgg.KeyId != 0)
             {
                 return;
             }
 
-            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             BagInfo useBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoId);
             if (useBagInfo == null)
             {

@@ -13,7 +13,7 @@ namespace ET.Server
 
             for (int i = 0; i < request.BagInfoIds.Count; i++)
             {
-                BagInfo useBagInfo = unit.GetComponent<BagComponent_S>().GetItemByLoc((ItemLocType)request.OperateType, request.BagInfoIds[i]);
+                BagInfo useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc((ItemLocType)request.OperateType, request.BagInfoIds[i]);
                 if (useBagInfo == null)
                 {
                     continue;
@@ -32,7 +32,7 @@ namespace ET.Server
                     }
                     gemIdList.Add(int.Parse(gemids[gem]));
                     ItemConfig itemConf = ItemConfigCategory.Instance.Get(int.Parse(gemids[gem]));
-                    unit.GetComponent<UserInfoComponent_S>().UpdateRoleData((int)itemConf.SellMoneyType, (itemConf.SellMoneyValue).ToString());
+                    unit.GetComponent<UserInfoComponentS>().UpdateRoleData((int)itemConf.SellMoneyType, (itemConf.SellMoneyValue).ToString());
                 }
 
                 //珍宝属性价格提升
@@ -42,8 +42,8 @@ namespace ET.Server
                     sellValue = itemConfig.SellMoneyValue * 20;
                 }
 
-                unit.GetComponent<UserInfoComponent_S>().UpdateRoleMoneyAdd((int)itemConfig.SellMoneyType, (useBagInfo.ItemNum * sellValue).ToString(), true, 39);
-                unit.GetComponent<BagComponent_S    >().OnCostItemData(useBagInfo, (ItemLocType)request.OperateType, useBagInfo.ItemNum);
+                unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneyAdd((int)itemConfig.SellMoneyType, (useBagInfo.ItemNum * sellValue).ToString(), true, 39);
+                unit.GetComponent<BagComponentS    >().OnCostItemData(useBagInfo, (ItemLocType)request.OperateType, useBagInfo.ItemNum);
 
                 if (useBagInfo.ItemNum == 0)
                 {

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[FriendOf(typeof (Scroll_Item_CommonItem))]
-	[FriendOf(typeof (UserInfoComponent_C))]
+	[FriendOf(typeof (UserInfoComponentC))]
 	[FriendOf(typeof (ES_CommonItem))]
 	[EntitySystemOf(typeof (ES_RoleHuiShou))]
 	[FriendOfAttribute(typeof (ES_RoleHuiShou))]
@@ -80,7 +80,7 @@ namespace ET.Client
 		private static void UpdateHuiShouInfo(this ES_RoleHuiShou self, string dataparams)
 		{
 			string[] huishouInfo = dataparams.Split('_');
-			BagInfo bagInfo = self.Root().GetComponent<BagComponent_C>().GetBagInfo(long.Parse(huishouInfo[1]));
+			BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(long.Parse(huishouInfo[1]));
 			if (huishouInfo[0] == "1")
 			{
 				for (int i = 0; i < self.HuiShouInfos.Length; i++)
@@ -143,7 +143,7 @@ namespace ET.Client
 
 		private static void RefreshBagItems(this ES_RoleHuiShou self)
 		{
-			BagComponent_C bagComponentC = self.Root().GetComponent<BagComponent_C>();
+			BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
 
 			self.ShowBagInfos.Clear();
 
@@ -170,7 +170,7 @@ namespace ET.Client
 					BagInfo = binfo,
 					ItemOperateEnum = ItemOperateEnum.None,
 					InputPoint = Input.mousePosition,
-					Occ = self.Root().GetComponent<UserInfoComponent_C>().UserInfo.Occ,
+					Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
 					EquipList = new List<BagInfo>()
 				});
 		}
@@ -187,7 +187,7 @@ namespace ET.Client
 			self.HuiShouInfos = new BagInfo[self.HuiShouInfos.Length];
 
 			int number = 0;
-			BagComponent_C bagComponentC = self.Root().GetComponent<BagComponent_C>();
+			BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
 			List<BagInfo> bagInfos = bagComponentC.GetItemsByType(ItemTypeEnum.Equipment);
 			bagInfos.AddRange(bagComponentC.GetItemsByType(ItemTypeEnum.Gemstone));
 			for (int i = 0; i < bagInfos.Count; i++)

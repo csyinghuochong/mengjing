@@ -40,7 +40,7 @@ namespace ET.Server
             }
 
             List<long> huishouIdList = request.OperateBagID;
-            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             int minNum = 0;
             int minMax = 0;
 

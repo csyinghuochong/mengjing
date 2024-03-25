@@ -5,7 +5,7 @@ namespace ET.Server
 {
 
     [MessageHandler(SceneType.Map)]
-    [FriendOf(typeof(TaskComponent_S))]
+    [FriendOf(typeof(TaskComponentS))]
     public class C2M_SkillCmdHandler : MessageLocationHandler<Unit, C2M_SkillCmd, M2C_SkillCmd>
     {
         protected override async ETTask Run(Unit unit, C2M_SkillCmd request, M2C_SkillCmd response)
@@ -13,7 +13,7 @@ namespace ET.Server
             await ETTask.CompletedTask;
             
              int juexingid = 0;
-             int occtwo = unit.GetComponent<UserInfoComponent_S>().GetOccTwo();
+             int occtwo = unit.GetComponent<UserInfoComponentS>().GetOccTwo();
              if (occtwo != 0)
              {
                  OccupationTwoConfig occupationConfig = OccupationTwoConfigCategory.Instance.Get(occtwo);
@@ -21,7 +21,7 @@ namespace ET.Server
              }
              if (juexingid == request.SkillID)
              {
-                 if (unit.GetComponent<NumericComponent_S>().GetAsLong(NumericType.JueXingAnger) < 500)
+                 if (unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.JueXingAnger) < 500)
                  {
                      response.Error = ErrorCode.Error_AngleNotEnough;
                      return;
@@ -29,8 +29,8 @@ namespace ET.Server
              }
 
              unit.GetComponent<DBSaveComponent>().NoFindPath = 0;
-             unit.GetComponent<NumericComponent_S>().SetEvent(NumericType.HorseRide, 0, true);
-             SkillManagerComponent_S skillManagerManagerComponent = unit.GetComponent<SkillManagerComponent_S>();   
+             unit.GetComponent<NumericComponentS>().SetEvent(NumericType.HorseRide, 0, true);
+             SkillManagerComponentS skillManagerManagerComponent = unit.GetComponent<SkillManagerComponentS>();   
              M2C_SkillCmd m2C_SkillCmd = skillManagerManagerComponent.OnUseSkill(request, true);
 
              if (skillManagerManagerComponent.IsSkillSecond(request.SkillID))
@@ -40,7 +40,7 @@ namespace ET.Server
                  List<Unit> allDefend = unit.GetParent<UnitComponent>().GetAll();
                  for (int defend = 0; defend < allDefend.Count; defend++)
                  {
-                     BuffComponent_S buffManagerComponent = allDefend[defend].GetComponent<BuffComponent_S>();
+                     BuffComponentS buffManagerComponent = allDefend[defend].GetComponent<BuffComponentS>();
                      if (buffManagerComponent == null || allDefend[defend].Id == request.TargetID || allDefend[defend].Id == unit.Id)
                      {
                          continue;
@@ -52,7 +52,7 @@ namespace ET.Server
                      }
                      request.TargetID = allDefend[defend].Id;
                      buffManagerComponent.BuffRemoveByUnit(0, buffId);
-                     unit.GetComponent<SkillManagerComponent_S>().OnUseSkill(request, false);
+                     unit.GetComponent<SkillManagerComponentS>().OnUseSkill(request, false);
                  }
              }
 
@@ -60,18 +60,18 @@ namespace ET.Server
              {
                  if (request.ItemId > 0)
                  {
-                     unit.GetComponent<BagComponent_S>().OnCostItemData($"{request.ItemId};1");
+                     unit.GetComponent<BagComponentS>().OnCostItemData($"{request.ItemId};1");
 
                      if (ConfigData.ChengJiuLianJin.Contains(request.ItemId))
                      {
-                         unit.GetComponent<ChengJiuComponent_S>().TriggerEvent(ChengJiuTargetEnum.BattleUseItem_214, 0, 1);
-                         unit.GetComponent<TaskComponent_S>().TriggerTaskEvent(TaskTargetType.BattleUseItem_30, 0, 1);
-                         unit.GetComponent<TaskComponent_S>().TriggerTaskCountryEvent(TaskTargetType.BattleUseItem_30, 0, 1);
+                         unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.BattleUseItem_214, 0, 1);
+                         unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.BattleUseItem_30, 0, 1);
+                         unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.BattleUseItem_30, 0, 1);
                      }
                  }
                  if (juexingid == request.SkillID)
                  {
-                     unit.GetComponent<NumericComponent_S>().Set(NumericType.JueXingAnger, 0);
+                     unit.GetComponent<NumericComponentS>().Set(NumericType.JueXingAnger, 0);
                  }
              }
              

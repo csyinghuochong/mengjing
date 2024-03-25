@@ -9,7 +9,7 @@ namespace ET.Server
 
     [EntitySystemOf(typeof(SkillPassiveComponent))]
     [FriendOf(typeof(SkillPassiveComponent))]
-    [FriendOf(typeof(SkillSetComponent_S))]
+    [FriendOf(typeof(SkillSetComponentS))]
     //[FriendOf(typeof(AIComponent))]
     public  static partial class SkillPassiveComponentSystem
     {
@@ -44,8 +44,8 @@ namespace ET.Server
 
             //缓存值
             self.UnitType = unit.Type;
-            StateComponent_S StateComponent = unit.GetComponent<StateComponent_S>();
-            NumericComponent_S NumericComponent = unit.GetComponent<NumericComponent_S>();
+            StateComponentS StateComponent = unit.GetComponent<StateComponentS>();
+            NumericComponentS NumericComponent = unit.GetComponent<NumericComponentS>();
 
             if (NumericComponent.GetAsInt(NumericType.Now_Dead) != 0)
             {
@@ -98,7 +98,7 @@ namespace ET.Server
             {
                 return;
             }
-            NumericComponent_S NumericComponent = self.GetParent<Unit>().GetComponent<NumericComponent_S>();
+            NumericComponentS NumericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
 
 
             //只有玩家和宠物有回血
@@ -159,7 +159,7 @@ namespace ET.Server
             self.OnTrigegerPassiveSkill(SkillPassiveTypeEnum.IdleStill_14, unit.Id);
             if (unit.Type == UnitType.Player && unit.ConfigId == 3)
             {
-                NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+                NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
                 int nowMp = numericComponent.GetAsInt(NumericType.SkillUseMP);
                 int maxMp = numericComponent.GetAsInt(NumericType.Max_SkillUseMP);
                 float addMp = numericComponent.GetAsFloat(NumericType.Max_SkillUseMPAdd);
@@ -205,7 +205,7 @@ namespace ET.Server
         {
             self.SkillPassiveInfos.Clear();
 
-            List<SkillPro> skillList = self.GetParent<Unit>().GetComponent<SkillSetComponent_S>().SkillList;
+            List<SkillPro> skillList = self.GetParent<Unit>().GetComponent<SkillSetComponentS>().SkillList;
             for (int i = 0; i < skillList.Count; i++)
             {
                 if (skillList[i].SkillSetType == (int)SkillSetEnum.Item)
@@ -362,7 +362,7 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillIfo.SkillId);
             int angle = 0; // (int)Quaternion.QuaternionToEuler(unit.Rotation).y;
-            StateComponent_S StateComponent = unit.GetComponent<StateComponent_S>();
+            StateComponentS StateComponent = unit.GetComponent<StateComponentS>();
             StateComponent.StateTypeAdd(StateTypeEnum.Singing, $"{skillIfo.SkillId}_{angle}");
             self.SingTimer = self.Root().GetComponent<TimerComponent>().NewOnceTimer(TimeHelper.ServerNow() + (long)(skillConfig.SkillFrontSingTime * 1000), TimerInvokeType.MonsterSingingTimer, self);
         }
@@ -370,7 +370,7 @@ namespace ET.Server
         public static void OnSingOver(this SkillPassiveComponent self)
         {
             Unit unit = self.GetParent<Unit>();
-            StateComponent_S StateComponent = unit.GetComponent<StateComponent_S>();
+            StateComponentS StateComponent = unit.GetComponent<StateComponentS>();
             StateComponent.StateTypeRemove(StateTypeEnum.Singing);
             if (self.SingSkillIfo != null)
             {
@@ -381,7 +381,7 @@ namespace ET.Server
         public static void StateTypeAdd(this SkillPassiveComponent self, long nowStateType)
         {
             Unit unit = self.GetParent<Unit>();
-            StateComponent_S StateComponent = unit.GetComponent<StateComponent_S>();
+            StateComponentS StateComponent = unit.GetComponent<StateComponentS>();
             if (self.SingTimer > 0 && (nowStateType == StateTypeEnum.Silence || nowStateType == StateTypeEnum.Dizziness))
             {
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.SingTimer);
@@ -556,11 +556,11 @@ namespace ET.Server
                         trigger = skillproValue >= RandomHelper.RandFloat01();
                         break;
                     case SkillPassiveTypeEnum.XueLiang_2:
-                        NumericComponent_S numCom = unit.GetComponent<NumericComponent_S>();
+                        NumericComponentS numCom = unit.GetComponent<NumericComponentS>();
                         if (unit.Type == UnitType.JingLing)
                         {
                             Unit master = unit.GetParent<UnitComponent>().Get(unit.MasterId);
-                            numCom = (master != null && !master.IsDisposed) ? master.GetComponent<NumericComponent_S>() : numCom;
+                            numCom = (master != null && !master.IsDisposed) ? master.GetComponent<NumericComponentS>() : numCom;
                         }
 
                         long nowHp = numCom.GetAsLong((int)NumericType.Now_Hp);

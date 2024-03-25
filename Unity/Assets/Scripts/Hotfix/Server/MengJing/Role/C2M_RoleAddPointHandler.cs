@@ -2,7 +2,7 @@
 
 namespace ET.Server
 {
-    [FriendOf(typeof (UserInfoComponent_S))]
+    [FriendOf(typeof (UserInfoComponentS))]
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_RoleAddPointHandler: MessageLocationHandler<Unit, C2M_RoleAddPointRequest, M2C_RoleAddPointResponse>
     {
@@ -23,14 +23,14 @@ namespace ET.Server
                     totalPoint += request.PointList[i];
                 }
 
-                int remainPoint = (unit.GetComponent<UserInfoComponent_S>().UserInfo.Lv - 1) * 10 - totalPoint;
+                int remainPoint = (unit.GetComponent<UserInfoComponentS>().UserInfo.Lv - 1) * 10 - totalPoint;
                 if (remainPoint < 0)
                 {
                     response.Error = ErrorCode.ERR_ModifyData;
                     return;
                 }
 
-                NumericComponent_S numericComponent = unit.GetComponent<NumericComponent_S>();
+                NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
                 numericComponent.Set(NumericType.PointLiLiang, request.PointList[0]);
                 numericComponent.Set(NumericType.PointZhiLi, request.PointList[1]);
                 numericComponent.Set(NumericType.PointTiZhi, request.PointList[2]);

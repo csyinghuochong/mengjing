@@ -6,13 +6,13 @@ namespace ET.Server
 {
 
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof (UserInfoComponent_S))]
-    [FriendOf(typeof (BagComponent_S))]
+    [FriendOf(typeof (UserInfoComponentS))]
+    [FriendOf(typeof (BagComponentS))]
     public class C2M_ItemOperateWearHandler: MessageLocationHandler<Unit, C2M_ItemOperateWearRequest, M2C_ItemOperateWearResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_ItemOperateWearRequest request, M2C_ItemOperateWearResponse response)
         {
-            UserInfoComponent_S userInfoComponent = unit.GetComponent<UserInfoComponent_S>();
+            UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
             UserInfo useInfo = userInfoComponent.UserInfo;
             long bagInfoID = request.OperateBagID;
 
@@ -20,7 +20,7 @@ namespace ET.Server
             {
 
                 ItemLocType locType = ItemLocType.ItemLocBag;
-                BagInfo useBagInfo = unit.GetComponent<BagComponent_S>().GetItemByLoc(locType, bagInfoID);
+                BagInfo useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(locType, bagInfoID);
                 if (useBagInfo == null)
                 {
                     return;
@@ -94,7 +94,7 @@ namespace ET.Server
                 }
 
                 ///默认 0弓箭   1剑
-                int equipIndex = unit.GetComponent<NumericComponent_S>().GetAsInt(NumericType.EquipIndex);
+                int equipIndex = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.EquipIndex);
                 int equipType = itemConfig.EquipType;
                 int findIndex = -1;
                 if (equipType == (int)ItemEquipType.Bow)
@@ -116,25 +116,25 @@ namespace ET.Server
 
                 //获取之前的位置是否有装备
                 ItemLocType toLocType = findIndex == 0 ? ItemLocType.ItemLocEquip : ItemLocType.ItemLocEquip_2;
-                BagInfo beforeequip = unit.GetComponent<BagComponent_S>().GetEquipBySubType(toLocType, weizhi);
+                BagInfo beforeequip = unit.GetComponent<BagComponentS>().GetEquipBySubType(toLocType, weizhi);
 
                 if (beforeequip != null)
                 {
-                    unit.GetComponent<BagComponent_S>().OnChangeItemLoc(beforeequip, ItemLocType.ItemLocBag, toLocType);
-                    unit.GetComponent<BagComponent_S>().OnChangeItemLoc(useBagInfo, toLocType, ItemLocType.ItemLocBag);
+                    unit.GetComponent<BagComponentS>().OnChangeItemLoc(beforeequip, ItemLocType.ItemLocBag, toLocType);
+                    unit.GetComponent<BagComponentS>().OnChangeItemLoc(useBagInfo, toLocType, ItemLocType.ItemLocBag);
 
-                    unit.GetComponent<SkillSetComponent_S>().OnTakeOffEquip(toLocType, beforeequip);
-                    unit.GetComponent<SkillSetComponent_S>().OnWearEquip(useBagInfo);
+                    unit.GetComponent<SkillSetComponentS>().OnTakeOffEquip(toLocType, beforeequip);
+                    unit.GetComponent<SkillSetComponentS>().OnWearEquip(useBagInfo);
                     m2c_bagUpdate.BagInfoUpdate.Add(beforeequip);
                 }
                 else
                 {
-                    unit.GetComponent<BagComponent_S>().OnChangeItemLoc(useBagInfo, toLocType, ItemLocType.ItemLocBag);
-                    unit.GetComponent<SkillSetComponent_S>().OnWearEquip(useBagInfo);
+                    unit.GetComponent<BagComponentS>().OnChangeItemLoc(useBagInfo, toLocType, ItemLocType.ItemLocBag);
+                    unit.GetComponent<SkillSetComponentS>().OnWearEquip(useBagInfo);
                 }
 
-                int zodiacnumber = unit.GetComponent<BagComponent_S>().GetZodiacnumber();
-                unit.GetComponent<ChengJiuComponent_S>().TriggerEvent(ChengJiuTargetEnum.ZodiacEquipNumber_215, 0, zodiacnumber);
+                int zodiacnumber = unit.GetComponent<BagComponentS>().GetZodiacnumber();
+                unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.ZodiacEquipNumber_215, 0, zodiacnumber);
 
                 Function_Fight.UnitUpdateProperty_Base(unit, true, true);
                 useBagInfo.isBinging = true;
@@ -152,11 +152,11 @@ namespace ET.Server
             {
 
                 ItemLocType beloc = ItemLocType.ItemLocEquip;
-                BagInfo useBagInfo = unit.GetComponent<BagComponent_S>().GetItemByLoc(beloc, bagInfoID);
+                BagInfo useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(beloc, bagInfoID);
                 if (useBagInfo == null)
                 {
                     beloc = ItemLocType.ItemLocEquip_2;
-                    useBagInfo = unit.GetComponent<BagComponent_S>().GetItemByLoc(beloc, bagInfoID);
+                    useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(beloc, bagInfoID);
                 }
 
                 if (useBagInfo == null)
@@ -166,15 +166,15 @@ namespace ET.Server
                 //通知客户端背包刷新
                 M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
 
-                unit.GetComponent<BagComponent_S>().OnChangeItemLoc(useBagInfo, ItemLocType.ItemLocBag, beloc);
-                unit.GetComponent<SkillSetComponent_S>().OnTakeOffEquip(beloc, useBagInfo);
+                unit.GetComponent<BagComponentS>().OnChangeItemLoc(useBagInfo, ItemLocType.ItemLocBag, beloc);
+                unit.GetComponent<SkillSetComponentS>().OnTakeOffEquip(beloc, useBagInfo);
                 Function_Fight.UnitUpdateProperty_Base(unit, true, true);
                 m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
                 MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
             }
 
-            BagInfo equip_0 = unit.GetComponent<BagComponent_S  >().GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
-            unit.GetComponent<NumericComponent_S>().SetEvent(NumericType.Now_Weapon, equip_0 != null ? equip_0.ItemID : 0, true);
+            BagInfo equip_0 = unit.GetComponent<BagComponentS  >().GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
+            unit.GetComponent<NumericComponentS>().SetEvent(NumericType.Now_Weapon, equip_0 != null ? equip_0.ItemID : 0, true);
 
             await ETTask.CompletedTask;
         }

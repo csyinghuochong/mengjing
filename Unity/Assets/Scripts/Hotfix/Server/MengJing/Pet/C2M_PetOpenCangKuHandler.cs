@@ -10,19 +10,19 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_PetOpenCangKu request, M2C_PetOpenCangKu response)
         {
             string costitem = ConfigData.PetOpenCangKu[request.OpenIndex - 1];
-            if (!unit.GetComponent<BagComponent_S>().CheckCostItem(costitem))
+            if (!unit.GetComponent<BagComponentS>().CheckCostItem(costitem))
             {
                 response.Error = ErrorCode.ERR_GoldNotEnoughError;
                 return;
             }
-            if (unit.GetComponent<PetComponent_S>().PetCangKuOpen.Contains(request.OpenIndex - 1)) 
+            if (unit.GetComponent<PetComponentS>().PetCangKuOpen.Contains(request.OpenIndex - 1)) 
             {
                 response.Error = ErrorCode.ERR_CangKu_Already;
                 return;
             }
 
-            unit.GetComponent<PetComponent_S>().PetCangKuOpen.Add(request.OpenIndex - 1);
-            unit.GetComponent<BagComponent_S>().OnCostItemData(costitem);
+            unit.GetComponent<PetComponentS>().PetCangKuOpen.Add(request.OpenIndex - 1);
+            unit.GetComponent<BagComponentS>().OnCostItemData(costitem);
 
             await ETTask.CompletedTask;
         }

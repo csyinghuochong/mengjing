@@ -9,7 +9,7 @@ namespace ET.Server
 	{
 		protected override async ETTask Run(Unit unit, C2M_RolePetFight request, M2C_RolePetFight response)
 		{
-			RolePetInfo petinfo = unit.GetComponent<PetComponent_S>().GetPetInfo(request.PetInfoId);
+			RolePetInfo petinfo = unit.GetComponent<PetComponentS>().GetPetInfo(request.PetInfoId);
 			if (petinfo == null)
 			{
                 response.Error = ErrorCode.ERR_Pet_NoExist;
@@ -24,7 +24,7 @@ namespace ET.Server
             if (request.PetStatus == 1)
             {
                 //出战要清掉之前的
-                RolePetInfo fightpet =  unit.GetComponent<PetComponent_S>().GetFightPet();
+                RolePetInfo fightpet =  unit.GetComponent<PetComponentS>().GetFightPet();
                 if (fightpet != null)
                 {
                     fightpet.PetStatus = 0;
@@ -32,7 +32,7 @@ namespace ET.Server
                 }
                 if (unit.GetParent<UnitComponent>().Get(petinfo.Id) == null)
                 {
-                    unit.GetComponent<PetComponent_S>().UpdatePetAttribute(petinfo, false);
+                    unit.GetComponent<PetComponentS>().UpdatePetAttribute(petinfo, false);
                     UnitFactory.CreatePet(unit, petinfo);
                 }
 

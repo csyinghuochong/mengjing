@@ -262,7 +262,7 @@ namespace ET.Client
         {
             //发送消息
             //判断当前技能是否再CD状态
-            UserInfoComponent_C userInfoComponent = self.Root().GetComponent<UserInfoComponent_C>();
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
             int errorCode = ErrorCode.ERR_Success;
             string usrPar = "";

@@ -15,7 +15,7 @@
 
             //客户端的NumericComponent.Set不会抛出事件。需要自己手动抛出
             Unit attack = currentScene.GetComponent<UnitComponent>().Get(message.AttackId);
-            NumericComponent_C numericComponent = nowNunt.GetComponent<NumericComponent_C>();
+            NumericComponentC numericComponent = nowNunt.GetComponent<NumericComponentC>();
             numericComponent.ApplyValue(attack, message.NumericType, message.NewValue, message.SkillId, true, message.DamgeType);
             await ETTask.CompletedTask;
         }

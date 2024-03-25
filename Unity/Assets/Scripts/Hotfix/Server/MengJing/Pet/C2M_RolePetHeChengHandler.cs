@@ -11,7 +11,7 @@ namespace ET.Server
 		protected override async ETTask Run(Unit unit, C2M_RolePetHeCheng request, M2C_RolePetHeCheng response)
 		{
 			//读取数据库
-			PetComponent_S petComponent = unit.GetComponent<PetComponent_S>();
+			PetComponentS petComponent = unit.GetComponent<PetComponentS>();
 
 			RolePetInfo petinfo_1 = petComponent.GetPetInfo(request.PetInfoId1);
 			RolePetInfo petinfo_2 = petComponent.GetPetInfo(request.PetInfoId2);
@@ -362,8 +362,8 @@ namespace ET.Server
             petinfo_update.LockSkill.Clear();
             petComponent.OnResetPoint(petinfo_update);
 			petComponent.RemovePet(petinfo_delete.Id);
-			unit.GetComponent<ChengJiuComponent_S>().OnPetHeCheng(petinfo_update);
-			unit.GetComponent<TaskComponent_S>().OnPetHeCheng(petinfo_update);
+			unit.GetComponent<ChengJiuComponentS>().OnPetHeCheng(petinfo_update);
+			unit.GetComponent<TaskComponentS>().OnPetHeCheng(petinfo_update);
 			unit.GetComponent<DataCollationComponent>().PetHeCheng++;
 
             petComponent.CheckPetPingFen();

@@ -5,7 +5,7 @@
     {
         protected override async ETTask Run(Scene root, M2C_RoleBagUpdate message)
         {
-            root.GetComponent<BagComponent_C>().OnRecvBagUpdate(message);
+            root.GetComponent<BagComponentC>().OnRecvBagUpdate(message);
             await ETTask.CompletedTask;
         }
     }

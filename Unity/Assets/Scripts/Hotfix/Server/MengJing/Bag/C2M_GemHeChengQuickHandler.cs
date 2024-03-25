@@ -5,8 +5,8 @@ namespace ET.Server
 {
     
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof(BagComponent_S))]
-    [FriendOf(typeof(UserInfoComponent_S))]
+    [FriendOf(typeof(BagComponentS))]
+    [FriendOf(typeof(UserInfoComponentS))]
     public class C2M_GemHeChengQuickHandler: MessageLocationHandler<Unit, C2M_GemHeChengQuickRequest, M2C_GemHeChengQuickResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_GemHeChengQuickRequest request, M2C_GemHeChengQuickResponse response)
@@ -18,7 +18,7 @@ namespace ET.Server
                 return;
             }
 
-            List<BagInfo> bagItemList = unit.GetComponent<BagComponent_S>().GetItemByLoc((ItemLocType)request.LocType);
+            List<BagInfo> bagItemList = unit.GetComponent<BagComponentS>().GetItemByLoc((ItemLocType)request.LocType);
 
             List<BagInfo> gemList = new List<BagInfo>();
             for (int i = 0; i < bagItemList.Count; i++)
@@ -65,7 +65,7 @@ namespace ET.Server
                 removeids[gemList[i].ItemID] += (neednumber * newnumber);
             }
 
-            UserInfo userInfo = unit.GetComponent<UserInfoComponent_S>().UserInfo;
+            UserInfo userInfo = unit.GetComponent<UserInfoComponentS>().UserInfo;
             if (userInfo.Gold < costgold)
             {
                 response.Error = ErrorCode.ERR_GoldNotEnoughError;
@@ -94,7 +94,7 @@ namespace ET.Server
             }
             if (removeItems != string.Empty)
             {
-                unit.GetComponent<BagComponent_S>().OnCostItemData(removeItems, (ItemLocType)request.LocType);
+                unit.GetComponent<BagComponentS>().OnCostItemData(removeItems, (ItemLocType)request.LocType);
             }
 
             List<RewardItem> rewardItems = new List<RewardItem>();
@@ -107,11 +107,11 @@ namespace ET.Server
 
                 rewardItems.Add(new RewardItem() { ItemID = itemid, ItemNum = number });
             }
-            unit.GetComponent<BagComponent_S>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.GemHeCheng}_{TimeHelper.ServerNow()}",
+            unit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.GemHeCheng}_{TimeHelper.ServerNow()}",
                 UseLocType: (ItemLocType)request.LocType);
 
-            unit.GetComponent<UserInfoComponent_S>().UpdateRoleMoneySub(UserDataType.Gold, (costgold * -1).ToString(), true, ItemGetWay.SkillMake);
-            unit.GetComponent<UserInfoComponent_S>().UpdateRoleData(UserDataType.Vitality, (costvitality * -1).ToString());
+            unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneySub(UserDataType.Gold, (costgold * -1).ToString(), true, ItemGetWay.SkillMake);
+            unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.Vitality, (costvitality * -1).ToString());
             await ETTask.CompletedTask;
         }
     }

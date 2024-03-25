@@ -11,7 +11,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_ItemHuiShouRequest request, M2C_ItemHuiShouResponse response)
         {
             List<long> huishouList = request.OperateBagID;
-            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
 
             //回收所得
             Dictionary<int, RewardItem> huishouGet = new Dictionary<int, RewardItem>();
@@ -65,8 +65,8 @@ namespace ET.Server
             bagComponent.OnCostItemData(petHexin, ItemLocType.ItemPetHeXinBag);
             bagComponent.OnCostItemData(bagsList, ItemLocType.ItemLocBag);
             bagComponent.OnAddItemData(huishouGet.Values.ToList(), string.Empty, $"{ItemGetWay.HuiShou}_{TimeHelper.ServerNow()}");
-            unit.GetComponent<TaskComponent_S>().OnItemHuiShow(bagsList.Count);
-            unit.GetComponent<ChengJiuComponent_S>().OnItemHuiShow(bagsList.Count);
+            unit.GetComponent<TaskComponentS>().OnItemHuiShow(bagsList.Count);
+            unit.GetComponent<ChengJiuComponentS>().OnItemHuiShow(bagsList.Count);
 
             await ETTask.CompletedTask;
         }

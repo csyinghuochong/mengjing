@@ -23,7 +23,7 @@ namespace ET.Server
              if (self.CombatResultEnum == CombatResultEnum.Win && self.MainUnit != null)
              {
                  string logInfo = string.Empty;
-                 string unitName = self.MainUnit.GetComponent<UserInfoComponent_S>().GetName();
+                 string unitName = self.MainUnit.GetComponent<UserInfoComponentS>().GetName();
                  MineBattleConfig mineBattleConfig = MineBattleConfigCategory.Instance.Get(self.MineType);
                  logInfo = $"玩家 {unitName} 队伍{self.TeamId + 1} 占领了第{self.Position+1} {mineBattleConfig.Name}";
                  
@@ -51,15 +51,15 @@ namespace ET.Server
              m2C_FubenSettlement.BattleResult = result;
              m2C_FubenSettlement.StarInfos = result == CombatResultEnum.Win ?  new List<int>() { 1, 1, 1 } : new List<int>() { 0,0,0};
              MapMessageHelper.SendToClient(self.MainUnit, m2C_FubenSettlement);
-             self.MainUnit.GetComponent<NumericComponent_S>().SetEvent( NumericType.PetMineBattle,1, true  );
-             self.MainUnit.GetComponent<NumericComponent_S>().SetEvent( NumericType.PetMineCDTime, TimeHelper.ServerNow() + cdTime, true);
+             self.MainUnit.GetComponent<NumericComponentS>().SetEvent( NumericType.PetMineBattle,1, true  );
+             self.MainUnit.GetComponent<NumericComponentS>().SetEvent( NumericType.PetMineCDTime, TimeHelper.ServerNow() + cdTime, true);
 
-             self.MainUnit.GetComponent<TaskComponent_S>().TriggerTaskEvent(TaskTargetType.MineBattleNumber_402, 0, 1);
-             self.MainUnit.GetComponent<TaskComponent_S>().TriggerTaskCountryEvent(TaskTargetType.MineBattleNumber_402, 0, 1);
+             self.MainUnit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.MineBattleNumber_402, 0, 1);
+             self.MainUnit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.MineBattleNumber_402, 0, 1);
              if (result == CombatResultEnum.Win)
              {
-                 self.MainUnit.GetComponent<TaskComponent_S>().TriggerTaskEvent(TaskTargetType.MineWinNumber_403, 0, 1);
-                 self.MainUnit.GetComponent<TaskComponent_S>().TriggerTaskCountryEvent(TaskTargetType.MineWinNumber_403, 0, 1);
+                 self.MainUnit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.MineWinNumber_403, 0, 1);
+                 self.MainUnit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.MineWinNumber_403, 0, 1);
              }
 
              await ETTask.CompletedTask;
@@ -125,8 +125,8 @@ namespace ET.Server
 
                  //己方队伍
                  Unit unit = self.MainUnit;
-                 unit.GetComponent<StateComponent_S>().StateTypeAdd(StateTypeEnum.WuDi);
-                 PetComponent_S petComponent = unit.GetComponent<PetComponent_S>();
+                 unit.GetComponent<StateComponentS>().StateTypeAdd(StateTypeEnum.WuDi);
+                 PetComponentS petComponent = unit.GetComponent<PetComponentS>();
                  petComponent.CheckSkin();
                  List<long> pets = petComponent.PetMingList;
                  for (int i = 0; i <  5; i++)
@@ -175,12 +175,12 @@ namespace ET.Server
                      
 
                      //self.EnemyId = enemyId;
-                     PetComponent_S petComponent_enemy = await UnitCacheHelper.GetComponentCache<PetComponent_S>(self.Root(), enemyId);
+                     PetComponentS petComponent_enemy = await UnitCacheHelper.GetComponentCache<PetComponentS>(self.Root(), enemyId);
                      if (petComponent_enemy != null)
                      {
-                         BagComponent_S bagComponentS = await UnitCacheHelper.GetComponentCache<BagComponent_S>(self.Root(), enemyId);
+                         BagComponentS bagComponentS = await UnitCacheHelper.GetComponentCache<BagComponentS>(self.Root(), enemyId);
                          
-                         NumericComponent_S numericComponentS = await UnitCacheHelper.GetComponentCache<NumericComponent_S>(self.Root(), enemyId);
+                         NumericComponentS numericComponentS = await UnitCacheHelper.GetComponentCache<NumericComponentS>(self.Root(), enemyId);
                          
                          petComponent_enemy.CheckSkin();
                          List<long> petsenemy = petComponent_enemy.PetMingList;

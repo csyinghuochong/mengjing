@@ -130,7 +130,7 @@ namespace ET.Client
         {
             self.ShowBagInfos.Clear();
 
-            List<BagInfo> bagInfos = self.Root().GetComponent<BagComponent_C>().GetBagList();
+            List<BagInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetBagList();
             //鉴定符
             for (int i = 0; i < bagInfos.Count; i++)
             {

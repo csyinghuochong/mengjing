@@ -16,8 +16,8 @@ namespace ET.Server
                 //通知客户端背包道具发生改变
                 m2c_bagUpdate.BagInfoUpdate = new List<BagInfo>();
 
-                PetComponent_S petComponent = unit.GetComponent<PetComponent_S>();
-                BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
+                PetComponentS petComponent = unit.GetComponent<PetComponentS>();
+                BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
                 RolePetInfo rolePetInfo = petComponent.GetPetInfo(request.PetInfoId);
                 if (rolePetInfo == null)
                 {

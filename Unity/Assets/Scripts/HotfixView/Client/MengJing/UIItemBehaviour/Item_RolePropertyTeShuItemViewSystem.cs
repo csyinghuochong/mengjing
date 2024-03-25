@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponent_C))]
+    [FriendOf(typeof (UserInfoComponentC))]
     [EntitySystemOf(typeof (Scroll_Item_RolePropertyTeShuItem))]
     public static partial class Scroll_Item_RolePropertyTeShuItemSystem
     {
@@ -20,8 +20,8 @@ namespace ET.Client
 
         public static void Refresh(this Scroll_Item_RolePropertyTeShuItem self, ShowPropertyList showPropertyList)
         {
-            NumericComponent_C numericComponentC = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponent_C>();
-            UserInfoComponent_C userInfoComponentC = self.Root().GetComponent<UserInfoComponent_C>();
+            NumericComponentC numericComponentC = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>();
+            UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
 
             self.E_PropertyTypeText.text = showPropertyList.Name;
 

@@ -13,7 +13,7 @@ namespace ET.Client
             M2C_RolePetList response =
                     (M2C_RolePetList)await root.GetComponent<ClientSenderCompnent>().Call(new C2M_RolePetList());
 
-            root.GetComponent<PetComponent_C>().RequestAllPets(response);
+            root.GetComponent<PetComponentC>().RequestAllPets(response);
         }
 
 
@@ -30,7 +30,7 @@ namespace ET.Client
             {
                 return m2C_RolePetFormationSet.Error;
             }
-            root.GetComponent<PetComponent_C>().RequestPetFormationSet(sceneType, petList, positionList);
+            root.GetComponent<PetComponentC>().RequestPetFormationSet(sceneType, petList, positionList);
             return ErrorCode.ERR_Success;
         }
 
@@ -52,7 +52,7 @@ namespace ET.Client
 
             if (m2C_RolePetFight.Error == ErrorCode.ERR_Success)
             {
-                root.GetComponent<PetComponent_C>().RequestPetFight(petId, fight);
+                root.GetComponent<PetComponentC>().RequestPetFight(petId, fight);
             }
 
             return m2C_RolePetFight.Error;
@@ -67,7 +67,7 @@ namespace ET.Client
 
             if (m2C_RolePetXiLian.Error == ErrorCode.ERR_Success )
             {
-                root.GetComponent<PetComponent_C>().RequestUpStar(mainId, costIds, m2C_RolePetXiLian.rolePetInfo);
+                root.GetComponent<PetComponentC>().RequestUpStar(mainId, costIds, m2C_RolePetXiLian.rolePetInfo);
             }
             
             return m2C_RolePetXiLian.Error;
@@ -81,7 +81,7 @@ namespace ET.Client
 
             if (m2C_RolePetXiLian.Error == ErrorCode.ERR_Success)
             {
-                root.GetComponent<PetComponent_C>().RemovePet(petId);;
+                root.GetComponent<PetComponentC>().RemovePet(petId);;
             }
             //HintHelp.GetInstance().DataUpdate(DataType.PetFenJieUpdate);
         }
@@ -93,7 +93,7 @@ namespace ET.Client
             
             if (m2C_RolePetXiLian.Error == ErrorCode.ERR_Success)
             {
-                root.GetComponent<PetComponent_C>().RequestXiLian( itemId, petId, m2C_RolePetXiLian.rolePetInfo );
+                root.GetComponent<PetComponentC>().RequestXiLian( itemId, petId, m2C_RolePetXiLian.rolePetInfo );
             }
 
             return m2C_RolePetXiLian.Error;

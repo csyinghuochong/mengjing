@@ -18,33 +18,33 @@ namespace ET.Server
                     unit.Position = new float3(-10, 0, -10);
                     unit.Type = UnitType.Player;
                     
-                    if (unit.GetComponent<UserInfoComponent_S>() == null)
+                    if (unit.GetComponent<UserInfoComponentS>() == null)
                     {
-                        UserInfoComponent_S userInfoComponentS = unit.AddComponent<UserInfoComponent_S>();
+                        UserInfoComponentS userInfoComponentS = unit.AddComponent<UserInfoComponentS>();
                         userInfoComponentS.OnInit(account, id, accountId, createRoleInfo);
                     }
 
-                    if (unit.GetComponent<NumericComponent_S>() ==  null)
+                    if (unit.GetComponent<NumericComponentS>() ==  null)
                     {
-                        NumericComponent_S numericComponentS = unit.AddComponent<NumericComponent_S>();
+                        NumericComponentS numericComponentS = unit.AddComponent<NumericComponentS>();
                         numericComponentS.SetNoEvent(NumericType.Speed, 60000); // 速度是6米每秒
                         numericComponentS.SetNoEvent(NumericType.AOI, 15000); // 视野15米
                     }
-                    unit.AddDataComponent<TaskComponent_S>();
-                    unit.AddDataComponent<ShoujiComponent_S>();
-                    unit.AddDataComponent<ChengJiuComponent_S>();
-                    unit.AddDataComponent<BagComponent_S>();
-                    unit.AddDataComponent<PetComponent_S>();
-                    unit.AddDataComponent<SkillSetComponent_S>();
+                    unit.AddDataComponent<TaskComponentS>();
+                    unit.AddDataComponent<ShoujiComponentS>();
+                    unit.AddDataComponent<ChengJiuComponentS>();
+                    unit.AddDataComponent<BagComponentS>();
+                    unit.AddDataComponent<PetComponentS>();
+                    unit.AddDataComponent<SkillSetComponentS>();
                     unit.AddDataComponent<RechargeComponent>();
-                    unit.AddDataComponent<ReddotComponent_S>();
-                    unit.AddDataComponent<TitleComponent_S>();
-                    unit.AddDataComponent<JiaYuanComponent_S>();
+                    unit.AddDataComponent<ReddotComponentS>();
+                    unit.AddDataComponent<TitleComponentS>();
+                    unit.AddDataComponent<JiaYuanComponentS>();
                     unit.AddDataComponent<DataCollationComponent>();
                     
-                    unit.AddDataComponent<StateComponent_S>();
+                    unit.AddDataComponent<StateComponentS>();
                     unit.AddDataComponent<DBSaveComponent>();
-                    unit.AddDataComponent<HeroDataComponent_S>();
+                    unit.AddDataComponent<HeroDataComponentS>();
                     unit.AddDataComponent<SkillPassiveComponent>();
                     
                     
@@ -88,8 +88,8 @@ namespace ET.Server
              long unitid = createMonsterInfo.UnitId > 0 ? createMonsterInfo.UnitId : IdGenerater.Instance.GenerateId();
              Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(unitid, 1001);
              //unit.AddComponent<AttackRecordComponent>();
-             NumericComponent_S numericComponent = unit.AddComponent<NumericComponent_S>();
-             HeroDataComponent_S heroDataComponent = unit.AddComponent<HeroDataComponent_S>();
+             NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
+             HeroDataComponentS heroDataComponent = unit.AddComponent<HeroDataComponentS>();
              UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
              unitInfoComponent.EnergySkillId = createMonsterInfo.SkillId;
              unitInfoComponent.UnitName = monsterConfig.MonsterName;
@@ -111,7 +111,7 @@ namespace ET.Server
              if (mapComponent.SceneType == SceneTypeEnum.LocalDungeon)
              {
                  mainUnit = scene.GetComponent<LocalDungeonComponent>().MainUnit;
-                 revetime = mainUnit.GetComponent<UserInfoComponent_S>().GetReviveTime(monsterConfig.Id);
+                 revetime = mainUnit.GetComponent<UserInfoComponentS>().GetReviveTime(monsterConfig.Id);
              }
 
              if (monsterConfig.DeathTime > 0)
@@ -148,12 +148,12 @@ namespace ET.Server
                  unit.AI = ai;
                  unit.AddComponent<ObjectWait>();
                  unit.AddComponent<MoveComponent>();
-                 unit.AddComponent<SkillManagerComponent_S>();
+                 unit.AddComponent<SkillManagerComponentS>();
                  unit.AddComponent<SkillPassiveComponent>();
                  unit.AddComponent<PathfindingComponent, string>(scene.GetComponent<MapComponent>().NavMeshId.ToString());
                  //添加其他组件
-                 unit.AddComponent<StateComponent_S>();         //添加状态组件
-                 unit.AddComponent<BuffComponent_S>();      //添加Buff管理器
+                 unit.AddComponent<StateComponentS>();         //添加状态组件
+                 unit.AddComponent<BuffComponentS>();      //添加Buff管理器
                  unit.GetComponent<SkillPassiveComponent>().UpdateMonsterPassiveSkill();
                  unit.GetComponent<SkillPassiveComponent>().Activeted();
                  numericComponent.Set(NumericType.MasterId, createMonsterInfo.MasterID);
@@ -195,8 +195,8 @@ namespace ET.Server
             if (npcConfig.AI > 0)
             {
                 unit.AddComponent<MoveComponent>();
-                unit.AddComponent<StateComponent_S>();
-                NumericComponent_S numericComponent = unit.AddComponent<NumericComponent_S>();
+                unit.AddComponent<StateComponentS>();
+                NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
                 numericComponent.Set(NumericType.Now_Speed, npcConfig.NpcPar[0]);
                 unit.AddComponent<PathfindingComponent, string>(scene.GetComponent<MapComponent>().NavMeshId.ToString());
                 unit.AddComponent<AIComponent, int>(npcConfig.AI);     //AI行为树序号	
@@ -214,10 +214,10 @@ namespace ET.Server
                Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(petinfo.Id, 1);
                scene.GetComponent<UnitComponent>().Add(unit);
                unit.AddComponent<ObjectWait>();
-               NumericComponent_S numericComponent = unit.AddComponent<NumericComponent_S>();
+               NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
                UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
                unit.AddComponent<MoveComponent>();
-               unit.AddComponent<SkillManagerComponent_S>();
+               unit.AddComponent<SkillManagerComponentS>();
                unit.AddComponent<PathfindingComponent, string>(scene.GetComponent<MapComponent>().NavMeshId.ToString());
                unit.AddComponent<AttackRecordComponent>();
                unitInfoComponent.MasterName = petinfo.PlayerName;
@@ -225,15 +225,15 @@ namespace ET.Server
               
                unit.ConfigId = petinfo.ConfigId;
                unit.MasterId = master.Id;
-               unit.AddComponent<StateComponent_S>();         //添加状态组件
-               unit.AddComponent<BuffComponent_S>();      //添加
+               unit.AddComponent<StateComponentS>();         //添加状态组件
+               unit.AddComponent<BuffComponentS>();      //添加
                unit.Position = new float3(master.Position.x + RandomHelper.RandFloat01() * 1f, master.Position.y, master.Position.z + RandomHelper.RandFloat01() * 1f);
                unit.Type = UnitType.Pet;
                AIComponent aIComponent = unit.AddComponent<AIComponent, int>(2);     //AI行为树序号
                aIComponent.InitPet(petinfo);
                aIComponent.Begin();
                //添加其他组件
-               unit.AddComponent<HeroDataComponent_S>().InitPet(petinfo, false);
+               unit.AddComponent<HeroDataComponentS>().InitPet(petinfo, false);
                numericComponent.SetEvent(NumericType.MasterId, master.Id, false);
                numericComponent.SetEvent(NumericType.BattleCamp, master.GetBattleCamp(), false);
                numericComponent.SetEvent(NumericType.AttackMode, master != null ? master.GetAttackMode() : 0, false);
@@ -241,7 +241,7 @@ namespace ET.Server
                numericComponent.SetEvent(NumericType.UnionId_0, master.GetUnionId(), false);
                long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
                numericComponent.SetNoEvent(NumericType.Now_Hp, max_hp);
-               numericComponent.SetEvent(NumericType.Base_Speed_Base, master.GetComponent<NumericComponent_S>().GetAsLong(NumericType.Base_Speed_Base), false); 
+               numericComponent.SetEvent(NumericType.Base_Speed_Base, master.GetComponent<NumericComponentS>().GetAsLong(NumericType.Base_Speed_Base), false); 
 
                unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
                if (scene.GetComponent<MapComponent>().SceneType != (int)SceneTypeEnum.MainCityScene)
@@ -258,18 +258,18 @@ namespace ET.Server
               Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(petinfo.Id, 1);
               scene.GetComponent<UnitComponent>().Add(unit);
               unit.AddComponent<ObjectWait>();
-              NumericComponent_S numericComponent = unit.AddComponent<NumericComponent_S>();
+              NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
               unit.AddComponent<MoveComponent>();
               UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
-              unit.AddComponent<SkillManagerComponent_S>();
+              unit.AddComponent<SkillManagerComponentS>();
               unit.AddComponent<PathfindingComponent, string>(scene.GetComponent<MapComponent>().NavMeshId.ToString());
               unit.AddComponent<AttackRecordComponent>();
               unit.ConfigId = petinfo.ConfigId;
               unit.MasterId = masterId;
               unitInfoComponent.UnitName = petinfo.PetName;
               unitInfoComponent.MasterName = petinfo.PlayerName;
-              unit.AddComponent<StateComponent_S>();         //添加状态组件
-              unit.AddComponent<BuffComponent_S>();      //添加
+              unit.AddComponent<StateComponentS>();         //添加状态组件
+              unit.AddComponent<BuffComponentS>();      //添加
               unit.Position = postion;
               unit.Type = UnitType.Pet;
               unit.Rotation = quaternion.Euler(0f, rotation, 0f);
@@ -288,7 +288,7 @@ namespace ET.Server
               }
 
               //添加其他组件
-              unit.AddComponent<HeroDataComponent_S>().InitPet(petinfo, false);
+              unit.AddComponent<HeroDataComponentS>().InitPet(petinfo, false);
               numericComponent.Set(NumericType.BattleCamp, roleCamp);
               numericComponent.Set(NumericType.MasterId, masterId);
               numericComponent.Set(NumericType.UnitPositon, cell);
@@ -307,19 +307,19 @@ namespace ET.Server
     Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), jinglingId);
     scene.GetComponent<UnitComponent>().Add(unit);
     unit.AddComponent<ObjectWait>();
-    NumericComponent_S numericComponent = unit.AddComponent<NumericComponent_S>();
+    NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
     UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
     unit.AddComponent<MoveComponent>();
-    unit.AddComponent<SkillManagerComponent_S>();
+    unit.AddComponent<SkillManagerComponentS>();
     unit.AddComponent<PathfindingComponent, string>(scene.GetComponent<MapComponent>().NavMeshId.ToString());
     unit.AddComponent<AttackRecordComponent>();
-    unitInfoComponent.MasterName = master.GetComponent<UserInfoComponent_S>().GetName();
+    unitInfoComponent.MasterName = master.GetComponent<UserInfoComponentS>().GetName();
     unitInfoComponent.UnitName = JingLingConfigCategory.Instance.Get(jinglingId).Name;
    
     unit.ConfigId = jinglingId;
     unit.MasterId = master.Id;
-    unit.AddComponent<StateComponent_S>();         //添加状态组件
-    unit.AddComponent<BuffComponent_S>();      //添加
+    unit.AddComponent<StateComponentS>();         //添加状态组件
+    unit.AddComponent<BuffComponentS>();      //添加
     unit.Position = new float3(master.Position.x + RandomHelper.RandFloat01() * 1f, master.Position.y, master.Position.z + RandomHelper.RandFloat01() * 1f);
     unit.Type = UnitType.JingLing;
 
@@ -328,7 +328,7 @@ namespace ET.Server
     aIComponent.Begin();
 
     //添加其他组件
-    unit.AddComponent<HeroDataComponent_S>().InitJingLing(master, jinglingId, false);
+    unit.AddComponent<HeroDataComponentS>().InitJingLing(master, jinglingId, false);
     numericComponent.SetEvent(NumericType.MasterId, master.Id, false);
     numericComponent.SetEvent(NumericType.BattleCamp, master.GetBattleCamp(), false);
     numericComponent.SetEvent(NumericType.AttackMode, master != null ? master.GetAttackMode() : 0, false);
@@ -357,8 +357,8 @@ namespace ET.Server
             if (npcConfig.AI > 0)
             {
                 unit.AddComponent<MoveComponent>();
-                unit.AddComponent<StateComponent_S>();
-                NumericComponent_S numericComponent = unit.AddComponent<NumericComponent_S>();
+                unit.AddComponent<StateComponentS>();
+                NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
                 numericComponent.Set(NumericType.Now_Speed, npcConfig.NpcPar[0]);
                 unit.AddComponent<PathfindingComponent, string>(scene.GetComponent<MapComponent>().NavMeshId.ToString());
                 unit.AddComponent<AIComponent, int>(npcConfig.AI);     //AI行为树序号	

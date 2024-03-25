@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponent_C))]
+    [FriendOf(typeof (UserInfoComponentC))]
     public static class ChatNetHelper
     {
         public static async ETTask<int> RequestSendChat(Scene root, int channelEnum, string content, long paramId = 0)
@@ -16,7 +16,7 @@
             //     return ErrorCode.ERR_UnionChatLimit;
             // }
 
-            UserInfo userInfo = root.GetComponent<UserInfoComponent_C>().UserInfo;
+            UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
             C2C_SendChatRequest request = new C2C_SendChatRequest() { };
             request.ChatInfo = new ChatInfo();
             request.ChatInfo.PlayerLevel = userInfo.Lv;

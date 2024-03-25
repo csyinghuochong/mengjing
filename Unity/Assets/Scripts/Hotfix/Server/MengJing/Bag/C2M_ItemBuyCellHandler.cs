@@ -5,13 +5,13 @@ namespace ET.Server
 {
     
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof(BagComponent_S))]
-    [FriendOf(typeof(UserInfoComponent_S))]
+    [FriendOf(typeof(BagComponentS))]
+    [FriendOf(typeof(UserInfoComponentS))]
     public class C2M_ItemBuyCellHandler: MessageLocationHandler<Unit, C2M_ItemBuyCellRequest, M2C_ItemBuyCellResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_ItemBuyCellRequest request, M2C_ItemBuyCellResponse response)
         {
-            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
            
             if (request.OperateType == (int)ItemLocType.ItemLocBag)
             {

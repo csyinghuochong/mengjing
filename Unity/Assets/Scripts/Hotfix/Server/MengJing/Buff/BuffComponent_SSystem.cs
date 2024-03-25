@@ -1,26 +1,26 @@
 namespace ET.Server
 {
-    [EntitySystemOf(typeof(BuffComponent_S))]
-    [FriendOf(typeof(BuffComponent_S))]
+    [EntitySystemOf(typeof(BuffComponentS))]
+    [FriendOf(typeof(BuffComponentS))]
     public static partial class BuffComponent_SSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.BuffComponent_S self)
+        private static void Awake(this ET.Server.BuffComponentS self)
         {
 
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.BuffComponent_S self)
+        private static void Destroy(this ET.Server.BuffComponentS self)
         {
 
         }
 
-        public static int GetBuffSourceNumber(this ET.Server.BuffComponent_S self ,long unitid, int  buffid)
+        public static int GetBuffSourceNumber(this ET.Server.BuffComponentS self ,long unitid, int  buffid)
         {
             return 0;
         }
 
-        public static void BuffRemoveByUnit(this ET.Server.BuffComponent_S self, long unitid, int  buffid)
+        public static void BuffRemoveByUnit(this ET.Server.BuffComponentS self, long unitid, int  buffid)
         {
             
         }

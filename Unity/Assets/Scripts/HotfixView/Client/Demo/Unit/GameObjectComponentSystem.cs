@@ -99,7 +99,7 @@ namespace ET.Client
                     }
                     var path = string.Empty;
 
-                    NumericComponent_C numericComponent = unit.GetComponent<NumericComponent_C>();
+                    NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
                     int runmonsterId = numericComponent.GetAsInt(NumericType.RunRaceTransform);
                     int cardtransform = numericComponent.GetAsInt(NumericType.CardTransform);
                     self.OnRunRaceMonster(runmonsterId, cardtransform, false);
@@ -279,7 +279,7 @@ namespace ET.Client
 
             self.ObjectHorse = go;
             Unit unit = self.GetParent<Unit>();
-            NumericComponent_C numericComponent = unit.GetComponent<NumericComponent_C>();
+            NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             if (numericComponent.GetAsInt(NumericType.RunRaceTransform) > 0
                 || numericComponent.GetAsInt(NumericType.CardTransform) > 0)
             {

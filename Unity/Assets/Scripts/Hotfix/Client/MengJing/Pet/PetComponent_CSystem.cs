@@ -4,23 +4,23 @@ using System.Collections.Generic;
 namespace ET.Client
 {
 
-    [EntitySystemOf(typeof(PetComponent_C))]
-    [FriendOf(typeof(PetComponent_C))]
+    [EntitySystemOf(typeof(PetComponentC))]
+    [FriendOf(typeof(PetComponentC))]
     public static partial class PetComponent_CSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.PetComponent_C self)
+        private static void Awake(this ET.Client.PetComponentC self)
         {
 
         }
         [EntitySystem]
-        private static void Destroy(this ET.Client.PetComponent_C self)
+        private static void Destroy(this ET.Client.PetComponentC self)
         {
 
         }
         
         
-         public static  void RequestAllPets(this PetComponent_C self, M2C_RolePetList m2C_RolePetList )
+         public static  void RequestAllPets(this PetComponentC self, M2C_RolePetList m2C_RolePetList )
          {
              self.RolePetInfos = m2C_RolePetList.RolePetInfos;
              self.TeamPetList = m2C_RolePetList.TeamPetList;
@@ -37,7 +37,7 @@ namespace ET.Client
              self.RolePetBag = m2C_RolePetList.RolePetBag;
          }
 
-         public static void OnRecvRolePetUpdate(this PetComponent_C self, M2C_RolePetUpdate m2C_RolePetUpdate)
+         public static void OnRecvRolePetUpdate(this PetComponentC self, M2C_RolePetUpdate m2C_RolePetUpdate)
          {
              RolePetInfo rolePetInfo = m2C_RolePetUpdate.PetInfoAdd[0];
              PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
@@ -47,7 +47,7 @@ namespace ET.Client
              self.RolePetInfos.AddRange(m2C_RolePetUpdate.PetInfoAdd);
          }
 
-         public static int GetShenShouNumber(this PetComponent_C self)
+         public static int GetShenShouNumber(this PetComponentC self)
          {
              int shenshouNumber = 0;
              for (int i = 0; i < self.RolePetInfos.Count; i++)
@@ -61,7 +61,7 @@ namespace ET.Client
          }
 
 
-         public static RolePetInfo GetPetInfoByID(this PetComponent_C self, long petid)
+         public static RolePetInfo GetPetInfoByID(this PetComponentC self, long petid)
          {
              for (int i = self.RolePetInfos.Count - 1; i >= 0; i--)
              {
@@ -73,13 +73,13 @@ namespace ET.Client
              return null;
          }
 
-         public static long GetFightPetId(this PetComponent_C self)
+         public static long GetFightPetId(this PetComponentC self)
          {
              RolePetInfo rolePetInfo = self.GetFightPet();
              return rolePetInfo != null ? rolePetInfo.Id : 0;
          }
 
-         public static RolePetInfo GetFightPet(this PetComponent_C self)
+         public static RolePetInfo GetFightPet(this PetComponentC self)
          {
              for (int i = self.RolePetInfos.Count - 1; i >= 0; i--)
              {
@@ -92,7 +92,7 @@ namespace ET.Client
          }
 
 
-         public static void RequestPetFormationSet(this PetComponent_C self, int sceneType, List<long> petList, List<long> positionList)
+         public static void RequestPetFormationSet(this PetComponentC self, int sceneType, List<long> petList, List<long> positionList)
          {
              switch (sceneType)
              {
@@ -109,7 +109,7 @@ namespace ET.Client
              }
          }
 
-         public static  void RequestPetFight(this PetComponent_C self, long petId, int fight)
+         public static  void RequestPetFight(this PetComponentC self, long petId, int fight)
          {
              //出战要清掉之前的
              if (fight == 1)
@@ -125,7 +125,7 @@ namespace ET.Client
              //HintHelp.GetInstance().DataUpdate(DataType.OnPetFightSet);
          }
 
-         public static void RequestUpStar(this PetComponent_C self, long mainId, List<long> costIds, RolePetInfo rolePetInfo)
+         public static void RequestUpStar(this PetComponentC self, long mainId, List<long> costIds, RolePetInfo rolePetInfo)
          {
              for (int i = 0; i < costIds.Count; i++)
              {
@@ -142,7 +142,7 @@ namespace ET.Client
              //HintHelp.GetInstance().DataUpdate(DataType.PetUpStarUpdate, mainId.ToString());
          }
 
-         public static void RemovePet(this PetComponent_C self, long petId)
+         public static void RemovePet(this PetComponentC self, long petId)
          {
              for (int i = self.RolePetInfos.Count - 1; i >= 0; i--)
              {
@@ -158,7 +158,7 @@ namespace ET.Client
              self.ResetFormation(self.PetMingList, petId);
          }
 
-         public static void ResetFormation(this PetComponent_C self, List<long> formation, long petId)
+         public static void ResetFormation(this PetComponentC self, List<long> formation, long petId)
          {
              for (int i = 0; i < formation.Count; i++)
              {
@@ -169,7 +169,7 @@ namespace ET.Client
              }
          }
          
-         public static  void RequestXiLian(this PetComponent_C self, long itemId, long petId, RolePetInfo rolePetInfo)
+         public static  void RequestXiLian(this PetComponentC self, long itemId, long petId, RolePetInfo rolePetInfo)
          {
              for (int i = self.RolePetInfos.Count - 1; i >= 0; i--)
              {
@@ -180,7 +180,7 @@ namespace ET.Client
              }
          }
 
-         public static void OnPetProtect(this PetComponent_C self, long rolePetInfoId, bool isprotect)
+         public static void OnPetProtect(this PetComponentC self, long rolePetInfoId, bool isprotect)
          {
              for (int i = 0; i < self.RolePetInfos.Count; i++)
              {
@@ -198,7 +198,7 @@ namespace ET.Client
          /// <param name="rolePetInfoId"></param>
          /// <param name="index"></param>
          /// <param name="operateType"></param>
-         public static void OnFormationSet(this PetComponent_C self, long rolePetInfoId, int index, int operateType)
+         public static void OnFormationSet(this PetComponentC self, long rolePetInfoId, int index, int operateType)
          {
              //index == -1 下阵
              if (operateType == 1)
@@ -237,7 +237,7 @@ namespace ET.Client
              }
          }
 
-         public static int GetPetFuben(this PetComponent_C self)
+         public static int GetPetFuben(this PetComponentC self)
          {
              int petfubenId = 0;
              for (int i = 0; i < self.PetFubenInfos.Count; i++)
@@ -250,7 +250,7 @@ namespace ET.Client
              return petfubenId;
          }
 
-         public static int GetTotalStar(this PetComponent_C self)
+         public static int GetTotalStar(this PetComponentC self)
          {
              int star = 0;
              for (int i = 0; i < self.PetFubenInfos.Count; i++)
@@ -266,7 +266,7 @@ namespace ET.Client
          /// </summary>
          /// <param name="self"></param>
          /// <returns></returns>
-         public static int GetCanRewardId(this PetComponent_C self)
+         public static int GetCanRewardId(this PetComponentC self)
          {
              int rewardId = 0;
              int totalStar = self.GetTotalStar();
@@ -284,7 +284,7 @@ namespace ET.Client
              return rewardId;
          }
 
-         public static int GetFubenStar(this PetComponent_C self, int petfubenId)
+         public static int GetFubenStar(this PetComponentC self, int petfubenId)
          {
              for (int i = 0; i < self.PetFubenInfos.Count; i++)
              {
@@ -296,7 +296,7 @@ namespace ET.Client
              return 0;
          }
 
-         public static void OnRolePetUpdate(this PetComponent_C self, RolePetInfo rolePetInfo)
+         public static void OnRolePetUpdate(this PetComponentC self, RolePetInfo rolePetInfo)
          {
              for (int i = self.RolePetInfos.Count - 1; i >= 0; i--)
              {
@@ -308,7 +308,7 @@ namespace ET.Client
              }
          }
 
-         public static void OnPassPetFuben(this PetComponent_C self, int petfubenId, int star)
+         public static void OnPassPetFuben(this PetComponentC self, int petfubenId, int star)
          {
              for (int i = 0; i < self.PetFubenInfos.Count; i++)
              {
@@ -321,7 +321,7 @@ namespace ET.Client
              self.PetFubenInfos.Add(new PetFubenInfo() { PetFubenId = petfubenId, Star = star, Reward = 0 });
          }
 
-         public static bool HavePetSkin(this PetComponent_C self, int petId, int skinId)
+         public static bool HavePetSkin(this PetComponentC self, int petId, int skinId)
          {
              for (int p = 0; p < self.PetSkinList.Count; p++)
              {
@@ -334,7 +334,7 @@ namespace ET.Client
              return false;
          }
 
-         public static void OnUnlockSkin(this PetComponent_C self, string skininfo)
+         public static void OnUnlockSkin(this PetComponentC self, string skininfo)
          {
              string[] petskininfo = skininfo.Split(';');
              int petId = int.Parse(petskininfo[0]);
@@ -353,7 +353,7 @@ namespace ET.Client
              }
          }
 
-         public static List<long> GetPetFormatList(this PetComponent_C self, int sceneType)
+         public static List<long> GetPetFormatList(this PetComponentC self, int sceneType)
          {
              if (sceneType == SceneTypeEnum.PetDungeon)
              {
@@ -371,7 +371,7 @@ namespace ET.Client
          }
          
 
-         public static List<KeyValuePair> GetPetSkinCopy(this PetComponent_C self)
+         public static List<KeyValuePair> GetPetSkinCopy(this PetComponentC self)
          {
              List<KeyValuePair> keyValuePairs = new List<KeyValuePair>();
              for (int i = 0; i < self.RolePetInfos.Count; i++)
@@ -387,7 +387,7 @@ namespace ET.Client
          /// </summary>
          /// <param name="self"></param>c
          /// <returns></returns>
-         public static void OnRecvHeCheng(this PetComponent_C self, M2C_RolePetHeCheng m2C_RolePetHeCheng)
+         public static void OnRecvHeCheng(this PetComponentC self, M2C_RolePetHeCheng m2C_RolePetHeCheng)
          {
              self.RemovePet(m2C_RolePetHeCheng.DeletePetInfoId);
              for (int i = self.RolePetInfos.Count - 1; i >= 0; i--)

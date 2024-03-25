@@ -13,7 +13,7 @@ namespace ET.Client
 	        unit.Position = unitInfo.Position;
 	        unit.Forward = unitInfo.Forward;
 	        
-	        NumericComponent_C numericComponentC = unit.AddComponent<NumericComponent_C>();
+	        NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
 
 			foreach (var kv in unitInfo.KV)
 			{

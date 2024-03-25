@@ -5,17 +5,17 @@ using ET;
 
 namespace ET.Server
 {
-    [EntitySystemOf(typeof(ShoujiComponent_S))]
-    [FriendOf(typeof(ShoujiComponent_S))]
+    [EntitySystemOf(typeof(ShoujiComponentS))]
+    [FriendOf(typeof(ShoujiComponentS))]
     public static partial class ShoujiComponentServerSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.ShoujiComponent_S self)
+        private static void Awake(this ET.Server.ShoujiComponentS self)
         {
 
         }
         
-            public static ShouJiChapterInfo GetShouJiChapterInfo(this ShoujiComponent_S self, int chapterId)
+            public static ShouJiChapterInfo GetShouJiChapterInfo(this ShoujiComponentS self, int chapterId)
             {
                 for (int i = 0; i < self.ShouJiChapterInfos.Count; i++)
                 {
@@ -27,7 +27,7 @@ namespace ET.Server
                 return null;
             }
 
-    public static bool HaveShouJiItem(this ShoujiComponent_S self, int chapterId, int itemId)
+    public static bool HaveShouJiItem(this ShoujiComponentS self, int chapterId, int itemId)
     {
         ShouJiChapterInfo shouJiChapterInfo = self.GetShouJiChapterInfo(chapterId);
         if (shouJiChapterInfo == null)
@@ -37,7 +37,7 @@ namespace ET.Server
         return shouJiChapterInfo.ShouJiItemList.Contains(itemId);
     }
 
-    public static void OnGetItem(this ShoujiComponent_S self, int itemId)
+    public static void OnGetItem(this ShoujiComponentS self, int itemId)
     {
         ItemStarInfo itemStarInfo = null;
         List<ItemStarInfo> itemStars = ShouJiConfigCategory.Instance.ItemStarInfos;
@@ -67,7 +67,7 @@ namespace ET.Server
         }
     }
 
-    public static int GetShoujiIdByItemId(this ShoujiComponent_S self, int itemId)
+    public static int GetShoujiIdByItemId(this ShoujiComponentS self, int itemId)
     {
         int shoujiId = 0;   
         Dictionary<int, ShouJiItemConfig> keyValuePairs = ShouJiItemConfigCategory.Instance.GetAll();
@@ -82,7 +82,7 @@ namespace ET.Server
         return shoujiId;
     }
 
-    public static void UpdateShouJIStar(this ShoujiComponent_S self)
+    public static void UpdateShouJIStar(this ShoujiComponentS self)
     {
         for (int i = 0; i < self.ShouJiChapterInfos.Count; i++)
         {
@@ -100,7 +100,7 @@ namespace ET.Server
         }
     }
 
-    public static void OnShouJiTreasure(this ShoujiComponent_S self, int shoujiId, int itemNum)
+    public static void OnShouJiTreasure(this ShoujiComponentS self, int shoujiId, int itemNum)
     {
         KeyValuePairInt keyValuePairInt = null;
         for (int i = 0; i < self.TreasureInfo.Count; i++)
@@ -118,7 +118,7 @@ namespace ET.Server
         }
     }
 
-    public static KeyValuePairInt GetTreasureInfo(this ShoujiComponent_S self, int shoujiId)
+    public static KeyValuePairInt GetTreasureInfo(this ShoujiComponentS self, int shoujiId)
     {
         KeyValuePairInt keyValuePairInt = null;
         for (int i = 0; i < self.TreasureInfo.Count; i++)
@@ -131,7 +131,7 @@ namespace ET.Server
         return keyValuePairInt;
     }
 
-    public static List<PropertyValue> GetTreasurePro(this ShoujiComponent_S self)
+    public static List<PropertyValue> GetTreasurePro(this ShoujiComponentS self)
     {
         List<PropertyValue> proList = new List<PropertyValue>();
 
@@ -164,13 +164,13 @@ namespace ET.Server
         return proList;
     }
 
-    public static int GetChapterStar(this ShoujiComponent_S self, int chapterid)
+    public static int GetChapterStar(this ShoujiComponentS self, int chapterid)
     {
         ShouJiChapterInfo shouJiChapterInfo = self.GetShouJiChapterInfo((int)chapterid);
         return shouJiChapterInfo != null ? shouJiChapterInfo.StarNum : 0;
     }
 
-    public static bool GetChapterStarLevel(this ShoujiComponent_S self, int chapterid, int level)
+    public static bool GetChapterStarLevel(this ShoujiComponentS self, int chapterid, int level)
     {
         int star = self.GetChapterStar(chapterid);
         ShouJiConfig shouJiConfig = ShouJiConfigCategory.Instance.Get(chapterid);
@@ -189,7 +189,7 @@ namespace ET.Server
         return false;
     }
 
-    public static List<PropertyValue> GetChapterPro(this ShoujiComponent_S self, int chapterid, int level)
+    public static List<PropertyValue> GetChapterPro(this ShoujiComponentS self, int chapterid, int level)
     {
         List<PropertyValue> proList = new List<PropertyValue>();
         int star = self.GetChapterStar(chapterid);
@@ -218,7 +218,7 @@ namespace ET.Server
         return proList;
     }
 
-    public static List<PropertyValue> GetProList(this ShoujiComponent_S self)
+    public static List<PropertyValue> GetProList(this ShoujiComponentS self)
     {
         List<PropertyValue> proList = new List<PropertyValue>();
         foreach (var item in self.ShouJiChapterInfos)

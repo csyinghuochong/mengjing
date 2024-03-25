@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof(ChengJiuComponent_S))]
+    [FriendOf(typeof(ChengJiuComponentS))]
     public class C2M_JingLingCatchHandler : MessageLocationHandler<Unit, C2M_JingLingCatchRequest, M2C_JingLingCatchResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_JingLingCatchRequest request, M2C_JingLingCatchResponse response)
@@ -17,7 +17,7 @@ namespace ET.Server
                 return;
             }
 
-            if (unit.GetComponent<BagComponent_S>().GetBagLeftCell() < 1)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < 1)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
                 return;
@@ -25,7 +25,7 @@ namespace ET.Server
 
             if (request.ItemId != 0)
             {
-                bool costresult =  unit.GetComponent<BagComponent_S>().OnCostItemData($"{request.ItemId};1");
+                bool costresult =  unit.GetComponent<BagComponentS>().OnCostItemData($"{request.ItemId};1");
                 if (costresult == false)
                 {
                     response.Error = ErrorCode.ERR_ItemNotEnoughError;
@@ -37,13 +37,13 @@ namespace ET.Server
             if (RandomHelper.RandFloat01() <= gailv * 0.0001f)
             {
                 response.Message = String.Empty;
-                int skinId = zhupuUnit.GetComponent<NumericComponent_S>().GetAsInt(NumericType.PetSkin);
+                int skinId = zhupuUnit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetSkin);
 
                 MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(zhupuUnit.ConfigId);
                 int getItemid = monsterConfig.Parameter[1];
-                unit.GetComponent<BagComponent_S>().OnAddItemData($"{getItemid};1",$"{ItemGetWay.PickItem}_{TimeHelper.ServerNow()}");
+                unit.GetComponent<BagComponentS>().OnAddItemData($"{getItemid};1",$"{ItemGetWay.PickItem}_{TimeHelper.ServerNow()}");
 
-                List<BagInfo> bagInfolist = unit.GetComponent<BagComponent_S>().GetIdItemList(getItemid);
+                List<BagInfo> bagInfolist = unit.GetComponent<BagComponentS>().GetIdItemList(getItemid);
                 if (bagInfolist.Count > 0)
                 {
                     bagInfolist[bagInfolist.Count - 1].ItemPar = skinId.ToString();

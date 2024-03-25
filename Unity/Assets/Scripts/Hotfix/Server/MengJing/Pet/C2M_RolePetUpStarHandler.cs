@@ -9,7 +9,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_RolePetUpStar request, M2C_RolePetUpStar response)
         {
 
-            PetComponent_S petComponent = unit.GetComponent<PetComponent_S>();
+            PetComponentS petComponent = unit.GetComponent<PetComponentS>();
             //string upStarStone = GlobalValueConfigCategory.Instance.Get(7).Value;
             //string[] upStarStoneInfo = upStarStone.Split(';');
             //int upStarStoneId = int.Parse(upStarStoneInfo[0]);

@@ -63,7 +63,7 @@ namespace ET.Client
 
         public static void RefreshBagItems(this ES_RoleGem self)
         {
-            BagComponent_C bagComponentC = self.Root().GetComponent<BagComponent_C>();
+            BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
 
             self.ShowBagInfos.Clear();
 
@@ -91,7 +91,7 @@ namespace ET.Client
 
             if (self.XiangQianItem != null)
             {
-                BagInfo bagInfo = self.Root().GetComponent<BagComponent_C>().GetBagInfo(self.XiangQianItem.BagInfoID);
+                BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(self.XiangQianItem.BagInfoID);
                 self.OnClickXiangQianItem(bagInfo);
             }
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-	[FriendOf(typeof(UserInfoComponent_S))]
+	[FriendOf(typeof(UserInfoComponentS))]
 	[FriendOf(typeof(Unit))]
 	[FriendOf(typeof(DBAccountInfo))]
 	[MessageSessionHandler(SceneType.Gate)]
@@ -65,8 +65,8 @@ namespace ET.Server
 			Chat2G_EnterChat chat2G_EnterChat = (Chat2G_EnterChat)await unit.Root().GetComponent<MessageSender>().Call(chatServerId, new G2Chat_EnterChat()
 			{ 
 				UnitId = unit.Id,
-				Name = unit.GetComponent<UserInfoComponent_S>().UserInfo.Name,
-				UnionId = unit.GetComponent<NumericComponent_S>().GetAsLong(NumericType.UnionId_0),
+				Name = unit.GetComponent<UserInfoComponentS>().UserInfo.Name,
+				UnionId = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.UnionId_0),
 				GateSessionActorId = unit.GateSessionActorId
 			});
 			return chat2G_EnterChat.ChatInfoUnitInstanceId;

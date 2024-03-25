@@ -10,10 +10,10 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_ItemOperateGemRequest request, M2C_ItemOperateGemResponse response)
         {
             long bagInfoID = request.OperateBagID;
-            BagInfo useBagInfo = unit.GetComponent<BagComponent_S>().GetItemByLoc(ItemLocType.ItemLocBag, bagInfoID);
+            BagInfo useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, bagInfoID);
             if (useBagInfo == null)
             {
-                useBagInfo = unit.GetComponent<BagComponent_S>().GetItemByLoc(ItemLocType.ItemLocEquip, bagInfoID);
+                useBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip, bagInfoID);
             }
             if (useBagInfo == null)
             {
@@ -36,12 +36,12 @@ namespace ET.Server
                 long equipid = long.Parse(geminfos[0]);
                 int gemIndex = int.Parse(geminfos[1]);
 
-                BagInfo equipInfo = unit.GetComponent<BagComponent_S>().GetItemByLoc(ItemLocType.ItemLocEquip, equipid);
+                BagInfo equipInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip, equipid);
 
                 //获取装备baginfo
                 if (equipInfo == null)
                 {
-                    equipInfo = unit.GetComponent<BagComponent_S>().GetItemByLoc(ItemLocType.ItemLocBag, equipid);
+                    equipInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, equipid);
                 }
                 if (equipInfo == null)
                 {
@@ -63,7 +63,7 @@ namespace ET.Server
                 {
                     int equipShiShiGemNum = 0;
                     bool isTihuan = false;
-                    List<BagInfo> EquipList = unit.GetComponent<BagComponent_S>().EquipList;
+                    List<BagInfo> EquipList = unit.GetComponent<BagComponentS>().EquipList;
                     for (int i = 0; i < EquipList.Count; i++)
                     {
                         string[] gemList = EquipList[i].GemIDNew.Split('_');
@@ -104,14 +104,14 @@ namespace ET.Server
                 equipInfo.isBinging = true;
                 m2c_bagUpdate.BagInfoUpdate.Add(equipInfo);
                 //消耗宝石
-                unit.GetComponent<BagComponent_S>().OnCostItemData(useBagInfo.BagInfoID, 1);
+                unit.GetComponent<BagComponentS>().OnCostItemData(useBagInfo.BagInfoID, 1);
                 Function_Fight.UnitUpdateProperty_Base(unit, true, true);
             }
 
             //卸下宝石
             if (request.OperateType == 10)
             {
-                if (unit.GetComponent<BagComponent_S>().GetBagLeftCell() < 1)
+                if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < 1)
                 {
                     response.Error = ErrorCode.ERR_BagIsFull;
                     return;
@@ -146,7 +146,7 @@ namespace ET.Server
                 //回收宝石
                 if (gemItemId != 0)
                 {
-                    unit.GetComponent<BagComponent_S    >().OnAddItemData($"{gemItemId};1", $"{ItemGetWay.GemHuiShou}_{TimeHelper.ServerNow()}");
+                    unit.GetComponent<BagComponentS    >().OnAddItemData($"{gemItemId};1", $"{ItemGetWay.GemHuiShou}_{TimeHelper.ServerNow()}");
                     Function_Fight.UnitUpdateProperty_Base(unit, true, true);
                 }
             }

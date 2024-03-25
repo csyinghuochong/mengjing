@@ -5,13 +5,13 @@ namespace ET.Server
 {
     
     [MessageLocationHandler(SceneType.Map)]
-    [FriendOf(typeof(BagComponent_S))]
+    [FriendOf(typeof(BagComponentS))]
     public class C2M_EquipmentIncreaseHandler : MessageLocationHandler<Unit, C2M_EquipmentIncreaseRequest, M2C_EquipmentIncreaseResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_EquipmentIncreaseRequest request, M2C_EquipmentIncreaseResponse response)
         {
             await ETTask.CompletedTask;
-            BagComponent_S bagComponent = unit.GetComponent<BagComponent_S>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
              BagInfo reelBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.ReelBagInfo.BagInfoID);
              if (reelBagInfo == null)
              {
@@ -22,11 +22,11 @@ namespace ET.Server
              BagInfo equipmentBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.EquipmentBagInfo.BagInfoID);
              if(equipmentBagInfo == null)
              {
-                 equipmentBagInfo = unit.GetComponent<BagComponent_S>().GetItemByLoc(ItemLocType.ItemLocEquip, request.EquipmentBagInfo.BagInfoID);
+                 equipmentBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip, request.EquipmentBagInfo.BagInfoID);
              }
              if (equipmentBagInfo == null)
              {
-                 equipmentBagInfo = unit.GetComponent<BagComponent_S>().GetItemByLoc(ItemLocType.ItemLocEquip_2, request.EquipmentBagInfo.BagInfoID);
+                 equipmentBagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip_2, request.EquipmentBagInfo.BagInfoID);
              }
 
              if (equipmentBagInfo == null)

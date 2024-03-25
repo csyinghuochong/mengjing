@@ -1,12 +1,12 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponent_C))]
+    [FriendOf(typeof (UserInfoComponentC))]
     [MessageHandler(SceneType.Demo)]
     public class M2C_RoleDataUpdateHandler: MessageHandler<Scene, M2C_RoleDataUpdate>
     {
         protected override async ETTask Run(Scene root, M2C_RoleDataUpdate message)
         {
-            UserInfo userInfo = root.GetComponent<UserInfoComponent_C>().UserInfo;
+            UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
             string updateValue = "0";
             long longValue = 0;
 

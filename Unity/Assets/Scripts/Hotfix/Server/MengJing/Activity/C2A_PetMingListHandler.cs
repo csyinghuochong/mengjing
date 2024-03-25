@@ -6,8 +6,8 @@ namespace ET.Server
     [MessageHandler(SceneType.Activity)]
     [FriendOf(typeof(ActivityServerComponent))]
     [FriendOf(typeof(DBDayActivityInfo))]
-    [FriendOf(typeof(PetComponent_S))]
-    [FriendOf(typeof(UserInfoComponent_S))]
+    [FriendOf(typeof(PetComponentS))]
+    [FriendOf(typeof(UserInfoComponentS))]
     public class C2A_PetMingListHandler: MessageHandler<Scene, C2A_PetMingListRequest, A2C_PetMingListResponse>
     {
         protected override async ETTask Run(Scene scene, C2A_PetMingListRequest request, A2C_PetMingListResponse response)
@@ -30,13 +30,13 @@ namespace ET.Server
                       for (int i = 0; i < minglist.Count; i++)
                       {
                           long enemyId = minglist[i].UnitId;
-                          UserInfoComponent_S userInfoComponentS = await UnitCacheHelper.GetComponentCache<UserInfoComponent_S>(scene.Root(), enemyId);
+                          UserInfoComponentS userInfoComponentS = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), enemyId);
                           if (userInfoComponentS == null)
                           {
                               continue;
                           }
                         
-                          PetComponent_S petComponent = await UnitCacheHelper.GetComponentCache<PetComponent_S>(scene.Root(), enemyId);
+                          PetComponentS petComponent = await UnitCacheHelper.GetComponentCache<PetComponentS>(scene.Root(), enemyId);
                           if (petComponent == null)
                           {
                               continue;

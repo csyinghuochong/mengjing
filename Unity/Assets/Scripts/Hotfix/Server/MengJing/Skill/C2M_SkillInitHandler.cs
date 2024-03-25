@@ -5,7 +5,7 @@ namespace ET.Server
 {
 
     [MessageHandler(SceneType.Map)]
-    [FriendOf(typeof(SkillSetComponent_S))]
+    [FriendOf(typeof(SkillSetComponentS))]
     public class C2M_SkillInitHandler : MessageLocationHandler<Unit, C2M_SkillInitRequest, M2C_SkillInitResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_SkillInitRequest request, M2C_SkillInitResponse response)
@@ -13,9 +13,9 @@ namespace ET.Server
 
             await ETTask.CompletedTask;
             
-             int occ = unit.GetComponent<UserInfoComponent_S>().GetOcc();
-            int occTwo = unit.GetComponent<UserInfoComponent_S>().GetOccTwo();
-             SkillSetComponent_S skillSetComponent = unit.GetComponent<SkillSetComponent_S>();
+             int occ = unit.GetComponent<UserInfoComponentS>().GetOcc();
+            int occTwo = unit.GetComponent<UserInfoComponentS>().GetOccTwo();
+             SkillSetComponentS skillSetComponent = unit.GetComponent<SkillSetComponentS>();
              response.SkillSetInfo = new SkillSetInfo();
 
 

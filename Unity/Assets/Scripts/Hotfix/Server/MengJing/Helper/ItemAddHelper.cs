@@ -21,8 +21,8 @@ namespace ET.Server
 
         public static void OnGetItem(this Unit self, int getWay, int itemId, int itemNum)
         {
-            self.GetComponent<TaskComponent_S>().OnGetItem_2(itemId);
-            self.GetComponent<TaskComponent_S>().OnGetItemNumber(getWay, itemId, itemNum);
+            self.GetComponent<TaskComponentS>().OnGetItem_2(itemId);
+            self.GetComponent<TaskComponentS>().OnGetItemNumber(getWay, itemId, itemNum);
             //self.GetComponent<ShoujiComponentServer>().OnGetItem(itemId);
         }
 
@@ -33,7 +33,7 @@ namespace ET.Server
         /// <param name="itemId"></param>
         public static void OnCostItem(this Unit self, int itemId)
         {
-            self.GetComponent<TaskComponent_S>().OnGetItem_2(itemId);
+            self.GetComponent<TaskComponentS>().OnGetItem_2(itemId);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace ET.Server
             List<DungeonConfig> dungeonConfigs = new List<DungeonConfig>();
             List<DungeonConfig> dungeonConfigsAll = DungeonConfigCategory.Instance.GetAll().Values.ToList();
 
-            int roleLv = unit.GetComponent<UserInfoComponent_S>().GetUserLv();
+            int roleLv = unit.GetComponent<UserInfoComponentS>().GetUserLv();
 
             for (int i = 0; i < dungeonConfigsAll.Count; i++)
             {
@@ -130,7 +130,7 @@ namespace ET.Server
             }
 
             bagInfo.ItemPar = $"{dungeonid}@{"TaskMove_6"}@{rewardList[0].ItemID + ";" + rewardList[0].ItemNum}";
-            Log.Debug($"生成藏宝图:  {unit.Id} {unit.GetComponent<UserInfoComponent_S>().GetName()} {rewardList[0].ItemID}");
+            Log.Debug($"生成藏宝图:  {unit.Id} {unit.GetComponent<UserInfoComponentS>().GetName()} {rewardList[0].ItemID}");
         }
 
 
@@ -230,7 +230,7 @@ namespace ET.Server
             {
                 if (randomNum >= 2)
                 {
-                    string noticeContent = $"恭喜玩家<color=#B6FF00>{unit.GetComponent<UserInfoComponent_S>().GetName()}</color>使用鉴定符鉴定装备时,一道金光装备出现<color=#FFA313>{randomNum}条极品属性</color>";
+                    string noticeContent = $"恭喜玩家<color=#B6FF00>{unit.GetComponent<UserInfoComponentS>().GetName()}</color>使用鉴定符鉴定装备时,一道金光装备出现<color=#FFA313>{randomNum}条极品属性</color>";
                     //ServerMessageHelper.SendBroadMessage(unit.DomainZone(), NoticeType.Notice, noticeContent);
                 }
             }
