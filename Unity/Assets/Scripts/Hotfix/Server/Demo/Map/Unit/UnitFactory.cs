@@ -6,7 +6,7 @@ namespace ET.Server
 {
     public static partial class UnitFactory
     {
-        public static Unit Create(Scene scene, long id, int unitType,CreateRoleInfo createRoleInfo, string account, long accountId)
+        public static async ETTask<Unit> Create(Scene scene, long id, int unitType,CreateRoleInfo createRoleInfo, string account, long accountId)
         {
             UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
             switch (unitType)
@@ -46,6 +46,18 @@ namespace ET.Server
                     unit.AddDataComponent<DBSaveComponent>();
                     unit.AddDataComponent<HeroDataComponent_S>();
                     unit.AddDataComponent<SkillPassiveComponent>();
+                    
+                    
+                    DBComponent dbComponent = scene.Root().GetComponent<DBManagerComponent>().GetZoneDB(scene.Zone());
+                    List<DBFriendInfo> dbFriendInfos = await dbComponent.Query<DBFriendInfo>( scene.Zone(), d=> d.Id == id);
+                    if (dbFriendInfos == null || dbFriendInfos.Count == 0)
+                    {
+                        DBFriendInfo dbFriendInfo = unit.AddComponent<DBFriendInfo>();
+                        await  dbComponent.Save(scene.Zone(), dbFriendInfo);
+                        dbFriendInfo.Dispose();
+                    }
+
+                    
                     
                     unitComponent.Add(unit);
                     // 加入aoi

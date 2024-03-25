@@ -56,7 +56,7 @@ namespace ET.Server
             
             //if (isNewUnit)
             {
-                unit = UnitFactory.Create(scene, player.UnitId, UnitType.Player,createRoleInfo,account, accountId);
+                unit = await UnitFactory.Create(scene, player.UnitId, UnitType.Player,createRoleInfo,account, accountId);
 
                 UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
             }
@@ -220,5 +220,6 @@ namespace ET.Server
                 self.AddComponent<K>();
             }
         }
+        
     }
 }

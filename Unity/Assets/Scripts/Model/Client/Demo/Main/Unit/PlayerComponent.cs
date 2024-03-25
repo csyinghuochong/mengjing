@@ -30,7 +30,7 @@ namespace ET.Client
         public string Account { get; set; }
         public string Password;
         public string LoginType;
-        public long CurrentRoleId;
+        public long CurrentRoleId { get; set; }
 
         public long LastTime = 0;
 
