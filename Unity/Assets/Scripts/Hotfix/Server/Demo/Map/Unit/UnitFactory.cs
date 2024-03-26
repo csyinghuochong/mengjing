@@ -6,14 +6,14 @@ namespace ET.Server
 {
     public static partial class UnitFactory
     {
-        public static async ETTask<Unit> Create(Scene scene, long id, int unitType,CreateRoleInfo createRoleInfo, string account, long accountId)
+        public static async ETTask<Unit> Create(Scene scene, Unit unit, long id, int unitType,CreateRoleInfo createRoleInfo, string account, long accountId)
         {
             UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
             switch (unitType)
             {
                 case UnitType.Player:
                 {
-                    Unit unit = unitComponent.AddChildWithId<Unit, int>(id, 1001);
+                    //Unit unit = unitComponent.AddChildWithId<Unit, int>(id, 1001);
                     unit.AddComponent<MoveComponent>();
                     unit.Position = new float3(-10, 0, -10);
                     unit.Type = UnitType.Player;

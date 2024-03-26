@@ -53,12 +53,22 @@ namespace ET.Server
             Unit unit = await UnitCacheHelper.GetUnitCache(scene, player.UnitId);
 
             bool isNewUnit = unit == null;
-            if (isNewUnit)
-            {
-                unit = await UnitFactory.Create(scene, player.UnitId, UnitType.Player,createRoleInfo,account, accountId);
-
-                UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
+            
+            UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
+            if (unit == null)
+            { 
+                unit =  unitComponent.AddChildWithId<Unit, int>(player.UnitId, 1001);
             }
+            // if (isNewUnit)
+            // {
+            //     unit = await UnitFactory.Create(scene, player.UnitId, UnitType.Player,createRoleInfo,account, accountId);
+            //
+            //     UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
+            // }
+            
+            await UnitFactory.Create(scene,unit, player.UnitId, UnitType.Player,createRoleInfo,account, accountId);
+
+            UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
 
             return (isNewUnit, unit);
         }
