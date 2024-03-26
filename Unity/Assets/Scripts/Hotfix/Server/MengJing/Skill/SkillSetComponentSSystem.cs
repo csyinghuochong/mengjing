@@ -6,7 +6,7 @@ namespace ET.Server
 
     [EntitySystemOf(typeof(SkillSetComponentS))]
     [FriendOf(typeof(SkillSetComponentS))]
-    public static partial class SkillSetComponentServerSystem
+    public static partial class SkillSetComponentSSystem
     {
         [EntitySystem]
         private static void Awake(this ET.Server.SkillSetComponentS self)

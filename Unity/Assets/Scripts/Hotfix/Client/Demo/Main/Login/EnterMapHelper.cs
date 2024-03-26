@@ -23,10 +23,11 @@ namespace ET.Client
                 await UserInfoNetHelper.RequestUserInfoInit(root);
                 await BagClientNetHelper.RequestBagInit(root);
                 await PetNetHelper.RequestPetInfo(root);
+                await TaskClientNetHelper.RequestTaskInit(root);
+                
                 await ActivityNetHelper.RequestActivityInfo(root);
                 await FriendNetHelper.RequestFriendInfo(root);
-                await TaskClientNetHelper.RequestTaskInit(root);
-
+                
                 EventSystem.Instance.Publish(root, new EnterMapFinish());
             }
             catch (Exception e)
