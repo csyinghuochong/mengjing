@@ -22,19 +22,19 @@ namespace ET.Client
         
          public static  void RequestAllPets(this PetComponentC self, M2C_RolePetList m2C_RolePetList )
          {
-             self.RolePetInfos = m2C_RolePetList.RolePetInfos;
-             self.TeamPetList = m2C_RolePetList.TeamPetList;
-             self.RolePetEggs = m2C_RolePetList.RolePetEggs;
-             self.PetFormations = m2C_RolePetList.PetFormations;
-             self.PetFubenInfos = m2C_RolePetList.PetFubenInfos;
+             self.RolePetInfos.AddRange(m2C_RolePetList.RolePetInfos);
+             self.TeamPetList.AddRange(m2C_RolePetList.TeamPetList);
+             self.RolePetEggs.AddRange(m2C_RolePetList.RolePetEggs);
+             self.PetFormations.AddRange(m2C_RolePetList.PetFormations);
+             self.PetFubenInfos.AddRange(m2C_RolePetList.PetFubenInfos);
              self.PetFubeRewardId = m2C_RolePetList.PetFubeRewardId;
-             self.PetSkinList = m2C_RolePetList.PetSkinList;
-             self.PetShouHuList = m2C_RolePetList.PetShouHuList;
+             self.PetSkinList.AddRange(m2C_RolePetList.PetSkinList);
+             self.PetShouHuList.AddRange(m2C_RolePetList.PetShouHuList);
              self.PetShouHuActive = m2C_RolePetList.PetShouHuActive;
-             self.PetCangKuOpen = m2C_RolePetList.PetCangKuOpen;
-             self.PetMingList = m2C_RolePetList.PetMingList;
-             self.PetMingPosition = m2C_RolePetList.PetMingPosition;
-             self.RolePetBag = m2C_RolePetList.RolePetBag;
+             self.PetCangKuOpen.AddRange(m2C_RolePetList.PetCangKuOpen);
+             self.PetMingList.AddRange(m2C_RolePetList.PetMingList);
+             self.PetMingPosition.AddRange(m2C_RolePetList.PetMingPosition);
+             self.RolePetBag.AddRange(m2C_RolePetList.RolePetBag);
          }
 
          public static void OnRecvRolePetUpdate(this PetComponentC self, M2C_RolePetUpdate m2C_RolePetUpdate)

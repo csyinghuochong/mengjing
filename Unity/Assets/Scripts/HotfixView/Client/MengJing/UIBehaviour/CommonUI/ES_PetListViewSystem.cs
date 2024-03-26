@@ -180,8 +180,8 @@ namespace ET.Client
             self.UpdateAttribute(rolePetInfo);
             self.UpdateExpAndLv(rolePetInfo);
             self.UpdatePetZizhi(rolePetInfo);
-            self.UpdatePetSkin(rolePetInfo);
-            self.UpdateSkillList(rolePetInfo);
+            // self.UpdatePetSkin(rolePetInfo);
+            // self.UpdateSkillList(rolePetInfo);
 
             self.E_Text_PetPingFenText.text = PetHelper.PetPingJia(rolePetInfo).ToString();
 
