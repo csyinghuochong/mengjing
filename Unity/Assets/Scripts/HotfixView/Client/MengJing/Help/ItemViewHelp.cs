@@ -8,6 +8,20 @@ namespace ET.Client
 {
     public static class ItemViewHelp
     {
+
+        public static string GetAttributeIcon(int numberType)
+        {
+            NumericAttribute numericAttribute;
+            ItemViewData.AttributeToName.TryGetValue(numberType, out numericAttribute);
+            string icon = numericAttribute.Icon;
+            if (string.IsNullOrEmpty(icon) && numberType > NumericType.Max)
+            {
+                return GetAttributeIcon(numberType / 100);
+            }
+
+            return numericAttribute.Icon;
+        }
+
         public static string GetProName(int proID)
         {
             if (proID >= 10000)

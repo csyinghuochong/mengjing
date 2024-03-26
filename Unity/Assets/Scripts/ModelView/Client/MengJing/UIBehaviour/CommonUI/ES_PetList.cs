@@ -8,6 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetList : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public GameObject[] PetZiZhiItemList = new GameObject[6];
 		public long ClickTime;
 		public bool IsChange;
 		public int PetSkinId;

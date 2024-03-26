@@ -5,6 +5,19 @@ namespace ET
 {
     public static class ConfigData
     {
+        /// <summary>
+        /// 宠物守护（0-3）
+        /// </summary>
+        [StaticField]
+        public static List<KeyValuePair> PetShouHuAttri = new List<KeyValuePair>
+        {
+            new KeyValuePair(){  Value = "青龙守护", Value2 = "200101" },                      //暴击
+            new KeyValuePair(){  Value = "白虎守护", Value2 = "200401" },                      //抗暴
+            new KeyValuePair(){  Value = "朱雀守护", Value2 = "200201" },                      //命中
+            new KeyValuePair(){  Value = "玄武守护", Value2 = "200301" },                      //闪避
+            new KeyValuePair(){  Value = "神兽守护", Value2 = "" },
+        };
+        
         [StaticField]
         public static string DefaultGem = "0_0_0_0";
 

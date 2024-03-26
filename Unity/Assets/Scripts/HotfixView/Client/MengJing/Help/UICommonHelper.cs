@@ -6,6 +6,12 @@ namespace ET.Client
 {
     public static class UICommonHelper
     {
+        public static string ShowFloatValue(float value)
+        {
+            string svalue = value.ToString("0.##");
+            return svalue;
+        }
+
         public static string GetPetQualityName(int quality)
         {
 
