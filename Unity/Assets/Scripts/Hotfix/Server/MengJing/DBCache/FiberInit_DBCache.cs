@@ -14,6 +14,9 @@ namespace ET.Server
             root.AddComponent<CoroutineLockComponent>();
             root.AddComponent<UnitCacheComponent>();
             root.AddComponent<DBManagerComponent>();
+            root.AddComponent<TimerComponent>();
+            root.AddComponent<LocationProxyComponent>();
+            root.AddComponent<MessageLocationSenderComponent>();
             await ETTask.CompletedTask;
         }
     }

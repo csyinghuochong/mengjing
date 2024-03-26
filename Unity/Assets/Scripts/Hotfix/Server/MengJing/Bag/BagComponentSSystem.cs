@@ -5,7 +5,7 @@ namespace ET.Server
     [FriendOf(typeof(UserInfoComponentS))]
     [EntitySystemOf(typeof (BagComponentS))]
     [FriendOf(typeof (BagComponentS))]
-    public static partial class BagComponent_SSystem
+    public static partial class BagComponentSSystem
     {
         [EntitySystem]
         private static void Awake(this BagComponentS self)
