@@ -307,19 +307,8 @@ namespace ET.Client
 		/// <param name="skillId"></param>
 		/// <param name="skillType">1技能 2物品</param>
 		/// <param name="pos"></param>
-		public static async ETTask SetSkillIdByPosition(this SkillSetComponentC self, int skillId, int skillType, int pos)
+		public static  void OnSetSkillIdByPosition(this SkillSetComponentC self, int skillId, int skillType, int pos)
 		{
-			if (skillType == (int)SkillSetEnum.Skill && pos > 8)
-				return;
-			if (skillType == (int)SkillSetEnum.Item && pos <= 8)
-				return;
-
-			C2M_SkillSet c2M_SkillSet = new C2M_SkillSet() { SkillID = skillId, SkillType = skillType, Position = pos };
-			M2C_SkillSet m2C_SkillSet = (M2C_SkillSet)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_SkillSet);
-
-			if (m2C_SkillSet.Error != 0)
-				return;
-
 			//清除之前该位置的技能
 
 			SkillPro newSkill = null;
@@ -351,8 +340,7 @@ namespace ET.Client
 			newSkill.SkillID = skillId;
 			newSkill.SkillPosition = pos;
 			newSkill.SkillSetType = skillType;
-
-			HintHelp.GetInstance().DataUpdate(DataType.SkillSetting);
+			
 		}
 
 		public static bool IfEquipMainSkill(this SkillSetComponentC self, int skillId)

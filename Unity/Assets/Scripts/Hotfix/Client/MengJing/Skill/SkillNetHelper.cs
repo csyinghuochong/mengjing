@@ -50,7 +50,7 @@ namespace ET.Client
         {
             UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
             C2M_ChangeOccTwoRequest c2M_ChangeOccTwoRequest = new C2M_ChangeOccTwoRequest() { OccTwoID = occTwoID };
-            M2C_ChangeOccTwoResponse m2C_SkillSet = (M2C_ChangeOccTwoResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_ChangeOccTwoRequest);
+            M2C_ChangeOccTwoResponse m2C_SkillSet = (M2C_ChangeOccTwoResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2M_ChangeOccTwoRequest);
 
             if (m2C_SkillSet.Error == 0)
             {
@@ -67,9 +67,25 @@ namespace ET.Client
                 //HintHelp.GetInstance().ShowErrHint(m2C_SkillSet.Error);
                 return false;
             }
-
         }
 
+
+        public static async ETTask SetSkillIdByPosition(Scene root, int skillId, int skillType, int pos)
+        {
+            if (skillType == (int)SkillSetEnum.Skill && pos > 8)
+                return;
+            if (skillType == (int)SkillSetEnum.Item && pos <= 8)
+                return;
+
+            C2M_SkillSet c2M_SkillSet = new C2M_SkillSet() { SkillID = skillId, SkillType = skillType, Position = pos };
+            M2C_SkillSet m2C_SkillSet = (M2C_SkillSet)await root.GetComponent<ClientSenderCompnent>().Call(c2M_SkillSet);
+
+            if (m2C_SkillSet.Error != 0)
+                return;
+
+            root.GetComponent<SkillSetComponentC>().OnSetSkillIdByPosition(skillId, skillType, pos);
+            //HintHelp.GetInstance().DataUpdate(DataType.SkillSetting);
+        }
     }
     
 }
