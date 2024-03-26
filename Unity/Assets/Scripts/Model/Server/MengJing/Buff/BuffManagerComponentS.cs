@@ -4,7 +4,7 @@ namespace ET.Server
 {
     
     [ComponentOf(typeof(Unit))]
-    public class BuffComponentS: Entity, IAwake, IDestroy
+    public class BuffManagerComponentS: Entity, IAwake, IDestroy
     {
         public long Timer;
         public int SceneType;

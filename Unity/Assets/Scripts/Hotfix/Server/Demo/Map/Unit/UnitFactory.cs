@@ -153,7 +153,7 @@ namespace ET.Server
                  unit.AddComponent<PathfindingComponent, string>(scene.GetComponent<MapComponent>().NavMeshId.ToString());
                  //添加其他组件
                  unit.AddComponent<StateComponentS>();         //添加状态组件
-                 unit.AddComponent<BuffComponentS>();      //添加Buff管理器
+                 unit.AddComponent<BuffManagerComponentS>();      //添加Buff管理器
                  unit.GetComponent<SkillPassiveComponent>().UpdateMonsterPassiveSkill();
                  unit.GetComponent<SkillPassiveComponent>().Activeted();
                  numericComponent.Set(NumericType.MasterId, createMonsterInfo.MasterID);
@@ -226,7 +226,7 @@ namespace ET.Server
                unit.ConfigId = petinfo.ConfigId;
                unit.MasterId = master.Id;
                unit.AddComponent<StateComponentS>();         //添加状态组件
-               unit.AddComponent<BuffComponentS>();      //添加
+               unit.AddComponent<BuffManagerComponentS>();      //添加
                unit.Position = new float3(master.Position.x + RandomHelper.RandFloat01() * 1f, master.Position.y, master.Position.z + RandomHelper.RandFloat01() * 1f);
                unit.Type = UnitType.Pet;
                AIComponent aIComponent = unit.AddComponent<AIComponent, int>(2);     //AI行为树序号
@@ -269,7 +269,7 @@ namespace ET.Server
               unitInfoComponent.UnitName = petinfo.PetName;
               unitInfoComponent.MasterName = petinfo.PlayerName;
               unit.AddComponent<StateComponentS>();         //添加状态组件
-              unit.AddComponent<BuffComponentS>();      //添加
+              unit.AddComponent<BuffManagerComponentS>();      //添加
               unit.Position = postion;
               unit.Type = UnitType.Pet;
               unit.Rotation = quaternion.Euler(0f, rotation, 0f);
@@ -319,7 +319,7 @@ namespace ET.Server
     unit.ConfigId = jinglingId;
     unit.MasterId = master.Id;
     unit.AddComponent<StateComponentS>();         //添加状态组件
-    unit.AddComponent<BuffComponentS>();      //添加
+    unit.AddComponent<BuffManagerComponentS>();      //添加
     unit.Position = new float3(master.Position.x + RandomHelper.RandFloat01() * 1f, master.Position.y, master.Position.z + RandomHelper.RandFloat01() * 1f);
     unit.Type = UnitType.JingLing;
 

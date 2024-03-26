@@ -40,18 +40,18 @@ namespace ET.Server
                  List<Unit> allDefend = unit.GetParent<UnitComponent>().GetAll();
                  for (int defend = 0; defend < allDefend.Count; defend++)
                  {
-                     BuffComponentS buffManagerComponent = allDefend[defend].GetComponent<BuffComponentS>();
-                     if (buffManagerComponent == null || allDefend[defend].Id == request.TargetID || allDefend[defend].Id == unit.Id)
+                     BuffManagerComponentS buffManagerManagerComponent = allDefend[defend].GetComponent<BuffManagerComponentS>();
+                     if (buffManagerManagerComponent == null || allDefend[defend].Id == request.TargetID || allDefend[defend].Id == unit.Id)
                      {
                          continue;
                      }
-                     int buffNum = buffManagerComponent.GetBuffSourceNumber(unit.Id, buffId);
+                     int buffNum = buffManagerManagerComponent.GetBuffSourceNumber(unit.Id, buffId);
                      if (buffNum <= 0)
                      {
                          continue;
                      }
                      request.TargetID = allDefend[defend].Id;
-                     buffManagerComponent.BuffRemoveByUnit(0, buffId);
+                     buffManagerManagerComponent.BuffRemoveByUnit(0, buffId);
                      unit.GetComponent<SkillManagerComponentS>().OnUseSkill(request, false);
                  }
              }

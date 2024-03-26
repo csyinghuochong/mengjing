@@ -21,7 +21,7 @@ namespace ET.Server
                 if (jingLingConfig.FunctionType == JingLingFunctionType.AddSkill)
                 {
                     int skillid = int.Parse(jingLingConfig.FunctionValue);
-                    BuffComponentS buffManagerComponent = unit.GetComponent<BuffComponentS>();
+                    BuffManagerComponentS buffManagerManagerComponent = unit.GetComponent<BuffManagerComponentS>();
                     //buffManagerComponent.BuffRemoveBySkillid(skillid);
                 }
             }
