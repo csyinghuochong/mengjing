@@ -42,12 +42,18 @@ namespace ET.Server
             }
 
             int indexOf = queryUnit.ComponentNameList.IndexOf(typeof(Unit).FullName);
-            Unit unit = queryUnit.EntityList[indexOf] as Unit;
-            if (unit == null)
-            {
-                return null;
-            }
-            scene.GetComponent<UnitComponent>().AddChild(unit);
+             Unit unit = queryUnit.EntityList[indexOf] as Unit;
+             UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
+             if (unit == null)
+             {
+                
+                 unit =  unitComponent.AddChildWithId<Unit, int>(unitId, 1001);
+             }
+             else
+             {
+                 unitComponent.Add(unit);
+             }
+
             foreach (Entity entity in queryUnit.EntityList)
             {
                 if (entity == null || entity is Unit)

@@ -54,11 +54,6 @@ namespace ET.Server
 
             bool isNewUnit = unit == null;
             
-            UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
-            if (unit == null)
-            { 
-                unit =  unitComponent.AddChildWithId<Unit, int>(player.UnitId, 1001);
-            }
             // if (isNewUnit)
             // {
             //     unit = await UnitFactory.Create(scene, player.UnitId, UnitType.Player,createRoleInfo,account, accountId);
