@@ -139,6 +139,7 @@ namespace ET.Server
                 {
                     continue;
                 }
+                
                 message.EntityTypes.Add(key.FullName);
                 message.EntityBytes.Add(entity.ToBson());
             }

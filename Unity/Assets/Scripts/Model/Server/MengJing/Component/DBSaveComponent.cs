@@ -6,9 +6,9 @@ namespace ET.Server
 {
     
     [ComponentOf(typeof(Unit))]
-    public class DBSaveComponent:Entity, IAwake, ITransfer
+    public class DBSaveComponent:Entity, IAwake, ITransfer, IDestroy
     {
-        public long Timer { get; set; }
+        public long Timer= 0;
         public long DBInterval{ get; set; }
         public long NoFindPath{ get; set; }
 

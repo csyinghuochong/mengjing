@@ -34,6 +34,7 @@ namespace ET.Server
             unit.Position = new float3(-10, 0, -10);
 
             unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
+            unit.GetComponent<DBSaveComponent>().Activeted();
 
             // 通知客户端开始切场景
             M2C_StartSceneChange m2CStartSceneChange = new() { SceneInstanceId = scene.InstanceId, SceneName = scene.Name };
