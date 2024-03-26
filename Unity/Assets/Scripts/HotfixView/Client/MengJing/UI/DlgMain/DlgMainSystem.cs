@@ -70,7 +70,7 @@ namespace ET.Client
         {
             self.View.E_ShrinkButton.AddListener(self.OnShrinkButton);
             self.View.E_RoseEquipButton.AddListenerAsync(self.OnRoseEquipButton);
-            self.View.E_PetButton.AddListener(self.OnPetButton);
+            self.View.E_PetButton.AddListenerAsync(self.OnPetButton);
             self.View.E_RoseSkillButton.AddListener(self.OnRoseSkillButton);
             self.View.E_TaskButton.AddListenerAsync(self.OnTaskButton);
             self.View.E_FriendButton.AddListener(self.OnFriendButton);
@@ -248,9 +248,9 @@ namespace ET.Client
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Role);
         }
 
-        private static void OnPetButton(this DlgMain self)
+        private static async ETTask OnPetButton(this DlgMain self)
         {
-            Log.Debug("打开宠物界面！！！");
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Pet);
         }
 
         private static void OnRoseSkillButton(this DlgMain self)
