@@ -16,6 +16,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
             self.E_PetListItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetListItemsRefresh);
+            self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
         }
 
         [EntitySystem]
@@ -30,6 +31,19 @@ namespace ET.Client
             self.LastSelectItem = null;
 
             self.RefreshCreateRoleItems();
+        }
+
+        private static void OnItemTypeSet(this ES_PetList self, int index)
+        {
+            UICommonHelper.SetToggleShow(self.E_ZiZhiToggle.gameObject, index == 0);
+            UICommonHelper.SetToggleShow(self.E_ProToggle.gameObject, index == 1);
+            UICommonHelper.SetToggleShow(self.E_VariantToggle.gameObject, index == 2);
+
+            self.EG_PetZiZhiSetRectTransform.gameObject.SetActive(index == 0);
+            self.E_PetProSetNodeImage.gameObject.SetActive(index == 1);
+            self.EG_PetPiFuSetRectTransform.gameObject.SetActive(index == 2);
+
+            self.EG_ButtonNodeRectTransform.gameObject.SetActive(index != 2);
         }
 
         private static void OnPetListItemsRefresh(this ES_PetList self, Transform transform, int index)
