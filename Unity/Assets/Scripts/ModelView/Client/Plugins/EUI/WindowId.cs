@@ -27,5 +27,6 @@ namespace ET.Client
 		WindowID_RoleBagSplit,
 		WindowID_Task,
 		WindowID_AppraisalSelect,
+		WindowID_Pet,
 	}
 }
