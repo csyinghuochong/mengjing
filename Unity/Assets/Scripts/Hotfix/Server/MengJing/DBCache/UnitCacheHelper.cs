@@ -44,15 +44,16 @@ namespace ET.Server
             int indexOf = queryUnit.ComponentNameList.IndexOf(typeof(Unit).FullName);
              Unit unit = queryUnit.EntityList[indexOf] as Unit;
              UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
-             if (unit == null)
-             {
-                
-                 unit =  unitComponent.AddChildWithId<Unit, int>(unitId, 1001);
-             }
-             else
-             {
-                 unitComponent.Add(unit);
-             }
+             // if (unit == null)
+             // {
+             //     unit =  unitComponent.AddChildWithId<Unit, int>(unitId, 1001);
+             // }
+             // else
+             // {
+             //     unitComponent.AddChild(unit);
+             // }
+             
+             unit =  unitComponent.AddChildWithId<Unit, int>(unitId, 1001);
 
             foreach (Entity entity in queryUnit.EntityList)
             {
@@ -61,6 +62,7 @@ namespace ET.Server
                     continue;
                 }
                 unit.AddComponent(entity);
+                Log.Debug(($"Transfer_get:  {entity.GetType().FullName}"));
             }
             return unit;
         }

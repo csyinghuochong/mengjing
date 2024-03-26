@@ -479,6 +479,11 @@ namespace ET.Server
                 if (entity is ITransfer)
                 {
                     request.Entitys.Add(entity.ToBson());
+                    Log.Debug(($"Transfer0:  {entity.GetType().FullName}"));
+                }
+                else
+                {
+                    Log.Debug(($"Transferx:  {entity.GetType().FullName}"));
                 }
             }
             unit.Dispose();
