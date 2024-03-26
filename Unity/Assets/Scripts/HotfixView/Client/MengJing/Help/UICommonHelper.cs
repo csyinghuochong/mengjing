@@ -6,6 +6,33 @@ namespace ET.Client
 {
     public static class UICommonHelper
     {
+        public static string GetPetQualityName(int quality)
+        {
+
+            switch (quality)
+            {
+
+                case 1:
+                    return "大众";
+                //break;
+                case 2:
+                    return "优秀";
+                //break;
+                case 3:
+                    return "百里挑一";
+                //break;
+                case 4:
+                    return "千载难逢";
+                //break;
+                case 5:
+                    return "万众瞩目";
+                //break;
+            }
+
+            return "";
+
+        }
+
         //数字转换万
         public static string NumToWString(long num) {
 

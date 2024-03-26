@@ -602,7 +602,7 @@ GameObject:
   - component: {fileID: 6099169045308142027}
   - component: {fileID: 4549939846573801478}
   m_Layer: 5
-  m_Name: Btn_XiuXi
+  m_Name: E_Btn_XiuXi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -721,7 +721,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3579686626686768831}
   m_Layer: 5
-  m_Name: PetZiZhiItem6
+  m_Name: EG_PetZiZhiItem6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -827,6 +827,94 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &400028696436446575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5374929739556624557}
+  - component: {fileID: 3921103613285683385}
+  - component: {fileID: 7761270532208217670}
+  m_Layer: 5
+  m_Name: E_PetListItems
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5374929739556624557
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400028696436446575}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 846216568432077363}
+  m_Father: {fileID: 5806234919280393777}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -67, y: 0}
+  m_SizeDelta: {x: 500, y: 850}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3921103613285683385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400028696436446575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce71017a2903f7c4c9a699e438d0b897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabSource:
+    prefabName: 
+    poolSize: 5
+  totalCount: 0
+  reverseDirection: 0
+  m_Content: {fileID: 846216568432077363}
+  m_Horizontal: 0
+  m_Vertical: 1
+  m_MovementType: 1
+  m_Elasticity: 0.1
+  m_Inertia: 1
+  m_DecelerationRate: 0.135
+  m_ScrollSensitivity: 1
+  m_Viewport: {fileID: 0}
+  m_HorizontalScrollbar: {fileID: 0}
+  m_VerticalScrollbar: {fileID: 0}
+  m_HorizontalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 0
+  m_HorizontalScrollbarSpacing: 0
+  m_VerticalScrollbarSpacing: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7761270532208217670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400028696436446575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &412436807207367754
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,7 +925,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1205336021497361927}
   m_Layer: 5
-  m_Name: PetProSetItem_1
+  m_Name: EG_PetProSetItem_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -878,7 +966,7 @@ GameObject:
   - component: {fileID: 4828317210172713722}
   - component: {fileID: 8323057462318643689}
   m_Layer: 5
-  m_Name: PetHeXinSuitBtn
+  m_Name: E_PetHeXinSuit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1266,7 +1354,7 @@ GameObject:
   - component: {fileID: 5748701303909567360}
   - component: {fileID: 3551660088277699752}
   m_Layer: 5
-  m_Name: ImageShouHu
+  m_Name: E_ImageShouHu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1439,7 +1527,7 @@ GameObject:
   - component: {fileID: 5223345954193489142}
   - component: {fileID: 8925387780854175046}
   m_Layer: 5
-  m_Name: ButtonAddPoint
+  m_Name: E_ButtonAddPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1903,7 +1991,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1427471999512080808}
   m_Layer: 5
-  m_Name: BtnItemTypeSet
+  m_Name: EG_BtnItemTypeSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2097,7 +2185,7 @@ GameObject:
   - component: {fileID: 5995959289189791886}
   - component: {fileID: 1173005416513850588}
   m_Layer: 5
-  m_Name: JiBanBtn
+  m_Name: E_JiBan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2293,7 +2381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2448869776250428775}
   m_Layer: 5
-  m_Name: PetZiZhiItem2
+  m_Name: EG_PetZiZhiItem2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2800,7 +2888,7 @@ GameObject:
   - component: {fileID: 7014123198059788110}
   - component: {fileID: 8347424907636558019}
   m_Layer: 5
-  m_Name: InputFieldName
+  m_Name: E_InputFieldName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2946,7 +3034,7 @@ GameObject:
   - component: {fileID: 7523360865261340434}
   - component: {fileID: 8292939217423522305}
   m_Layer: 5
-  m_Name: SkinWeiJiHuo
+  m_Name: E_SkinWeiJiHuo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3237,7 +3325,7 @@ GameObject:
   - component: {fileID: 6769472446208081386}
   - component: {fileID: 2921795338926750097}
   m_Layer: 5
-  m_Name: PropertyShowText
+  m_Name: E_PropertyShowText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3333,7 +3421,7 @@ GameObject:
   - component: {fileID: 8281993975807590171}
   - component: {fileID: 2777455162405584632}
   m_Layer: 5
-  m_Name: ButtonCloseHexin
+  m_Name: E_ButtonCloseHexin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4468,7 +4556,7 @@ GameObject:
   - component: {fileID: 1162754259436752379}
   - component: {fileID: 4223560564226423229}
   m_Layer: 5
-  m_Name: PetHeXinItem2
+  m_Name: E_PetHeXinItem2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5078,7 +5166,7 @@ GameObject:
   - component: {fileID: 8197598792963531368}
   - component: {fileID: 9105877132695830048}
   m_Layer: 5
-  m_Name: Btn_FangSheng
+  m_Name: E_Btn_FangSheng
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5197,7 +5285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5254787277422114915}
   m_Layer: 5
-  m_Name: PetZiZhiItem5
+  m_Name: EG_PetZiZhiItem5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5412,7 +5500,7 @@ GameObject:
   - component: {fileID: 5877896434136876609}
   - component: {fileID: 707488974488570816}
   m_Layer: 5
-  m_Name: PetProSetNode_2
+  m_Name: E_PetProSetNode_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5665,7 +5753,7 @@ GameObject:
   - component: {fileID: 4327912695152252163}
   - component: {fileID: 4022898706685595728}
   m_Layer: 5
-  m_Name: Text_PetExp
+  m_Name: E_Text_PetExp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5834,7 +5922,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2460182733165922345}
   m_Layer: 5
-  m_Name: PetPiFuSet
+  m_Name: EG_PetPiFuSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6882,7 +6970,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4073444575203299331}
   m_Layer: 5
-  m_Name: AttributeNode
+  m_Name: EG_AttributeNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6923,7 +7011,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4571791223332643522}
   m_Layer: 5
-  m_Name: ImagePetStar
+  m_Name: EG_ImagePetStar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6967,7 +7055,7 @@ GameObject:
   - component: {fileID: 3362772616234020229}
   - component: {fileID: 8911139976652734046}
   m_Layer: 5
-  m_Name: ButtonRName
+  m_Name: E_ButtonRName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8452,7 +8540,7 @@ GameObject:
   - component: {fileID: 2968995538075614740}
   - component: {fileID: 5853163238984624871}
   m_Layer: 5
-  m_Name: PetAddPoint
+  m_Name: EG_PetAddPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11629,7 +11717,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4232567587996907045}
   m_Layer: 5
-  m_Name: EquipSet
+  m_Name: EG_EquipSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11950,7 +12038,7 @@ GameObject:
   - component: {fileID: 7076811105517370416}
   - component: {fileID: 623854563819762171}
   m_Layer: 5
-  m_Name: SkinJiHuo
+  m_Name: E_SkinJiHuo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12123,7 +12211,7 @@ GameObject:
   - component: {fileID: 6721563695168099458}
   - component: {fileID: 8195113214101741321}
   m_Layer: 5
-  m_Name: PetProSetNode
+  m_Name: E_PetProSetNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12483,7 +12571,7 @@ GameObject:
   - component: {fileID: 333824475501130866}
   - component: {fileID: 3262755770841113473}
   m_Layer: 5
-  m_Name: JinHuaReddot
+  m_Name: E_JinHuaReddot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13568,7 +13656,7 @@ GameObject:
   - component: {fileID: 2872932924718478544}
   - component: {fileID: 7024541065608319785}
   m_Layer: 5
-  m_Name: ImageExpValue
+  m_Name: E_ImageExpValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14145,7 +14233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3568278751143817424}
   m_Layer: 5
-  m_Name: GameObject2
+  m_Name: EG_GameObject2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14182,7 +14270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3940994970782213096}
   m_Layer: 5
-  m_Name: PetZiZhiItem3
+  m_Name: EG_PetZiZhiItem3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15736,7 +15824,7 @@ GameObject:
   - component: {fileID: 1747085239902856497}
   - component: {fileID: 1998565492049325076}
   m_Layer: 5
-  m_Name: PetRawImage
+  m_Name: E_PetRawImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16101,7 +16189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
   - key: PetListNode
-    gameObject: {fileID: 7707979670519355844}
+    gameObject: {fileID: 0}
   - key: PetSkillNode
     gameObject: {fileID: 2930904117429548144}
   - key: GameObject1
@@ -16213,7 +16301,7 @@ MonoBehaviour:
   - key: Img_Mask
     gameObject: {fileID: 7094729949572317768}
   - key: ScrollView1
-    gameObject: {fileID: 7139523806257747344}
+    gameObject: {fileID: 0}
 --- !u!1 &4937500015458314991
 GameObject:
   m_ObjectHideFlags: 0
@@ -16307,7 +16395,7 @@ GameObject:
   - component: {fileID: 4937500015448594123}
   - component: {fileID: 4937500015448614219}
   m_Layer: 5
-  m_Name: Btn_ChuZhan
+  m_Name: E_Btn_ChuZhan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16796,97 +16884,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0.49056602, g: 0.20969294, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!1 &5051148887924157278
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6258702930565458609}
-  - component: {fileID: 4677577999881885600}
-  - component: {fileID: 8557140272635033318}
-  - component: {fileID: 2024953256617200486}
-  m_Layer: 5
-  m_Name: Viewport
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &6258702930565458609
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5051148887924157278}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3959641274136702033}
-  m_Father: {fileID: 6314563138251990099}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: -17}
-  m_Pivot: {x: 0, y: 1}
---- !u!222 &4677577999881885600
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5051148887924157278}
-  m_CullTransparentMesh: 1
---- !u!114 &8557140272635033318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5051148887924157278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!114 &2024953256617200486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5051148887924157278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 0
 --- !u!1 &5075901570445472654
 GameObject:
   m_ObjectHideFlags: 0
@@ -16900,7 +16897,7 @@ GameObject:
   - component: {fileID: 3752530149684151292}
   - component: {fileID: 7649401088080898809}
   m_Layer: 5
-  m_Name: ImageJinHua
+  m_Name: E_ImageJinHua
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17405,7 +17402,7 @@ GameObject:
   - component: {fileID: 8273207749946722042}
   - component: {fileID: 1903366355921444602}
   m_Layer: 5
-  m_Name: Lab_JinHua
+  m_Name: E_Lab_JinHua
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17499,7 +17496,7 @@ GameObject:
   - component: {fileID: 3249490708465885676}
   - component: {fileID: 3900346546822003771}
   m_Layer: 5
-  m_Name: PetHeXinSet
+  m_Name: EG_PetHeXinSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18205,7 +18202,7 @@ GameObject:
   - component: {fileID: 7042685079643879317}
   - component: {fileID: 4045078318966704946}
   m_Layer: 5
-  m_Name: PetHeXinItem1
+  m_Name: E_PetHeXinItem1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18457,7 +18454,7 @@ GameObject:
   - component: {fileID: 7101835766383752270}
   - component: {fileID: 5587742230722919573}
   m_Layer: 5
-  m_Name: ButtonUseSkin
+  m_Name: E_ButtonUseSkin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18736,7 +18733,7 @@ GameObject:
   - component: {fileID: 461328506319912481}
   - component: {fileID: 3081077521932329256}
   m_Layer: 5
-  m_Name: PetSkinRawImage
+  m_Name: E_PetSkinRawImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19388,7 +19385,7 @@ GameObject:
   - component: {fileID: 8194154604960688694}
   - component: {fileID: 6567883178573350421}
   m_Layer: 5
-  m_Name: Right
+  m_Name: EG_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19471,7 +19468,7 @@ GameObject:
   - component: {fileID: 8453221315133776805}
   - component: {fileID: 7847001824814625787}
   m_Layer: 5
-  m_Name: PetHeXinItem0
+  m_Name: E_PetHeXinItem0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20289,7 +20286,7 @@ GameObject:
   - component: {fileID: 1474761885340706229}
   - component: {fileID: 7899235509343222890}
   m_Layer: 5
-  m_Name: Text_PetPingFen
+  m_Name: E_Text_PetPingFen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20425,7 +20422,7 @@ GameObject:
   - component: {fileID: 7094729949558514668}
   - component: {fileID: 2852463488357430556}
   m_Layer: 5
-  m_Name: Img_Mask
+  m_Name: EG_Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20465,52 +20462,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-  - key: ImageXuanzhong
-    gameObject: {fileID: 0}
-  - key: Img_PeteroQuality
-    gameObject: {fileID: 0}
   - key: Img_PetHeroIon
     gameObject: {fileID: 7094729949572394416}
-  - key: Lab_PetName
-    gameObject: {fileID: 0}
-  - key: Lab_PetLv
-    gameObject: {fileID: 0}
-  - key: Img_CanZhan
-    gameObject: {fileID: 0}
-  - key: ImageDiButton
-    gameObject: {fileID: 0}
-  - key: Img_Start_1
-    gameObject: {fileID: 0}
-  - key: Img_Start_2
-    gameObject: {fileID: 0}
-  - key: Img_Start_3
-    gameObject: {fileID: 0}
-  - key: Img_Start_4
-    gameObject: {fileID: 0}
-  - key: Img_Start_5
-    gameObject: {fileID: 0}
-  - key: StartSet
-    gameObject: {fileID: 0}
-  - key: StartShowSet
-    gameObject: {fileID: 0}
-  - key: Lab_StartShow
-    gameObject: {fileID: 0}
-  - key: Lab_PetQuality
-    gameObject: {fileID: 0}
-  - key: Text_Open
-    gameObject: {fileID: 0}
-  - key: Node_1
-    gameObject: {fileID: 0}
-  - key: Node_2
-    gameObject: {fileID: 0}
-  - key: Reddot
-    gameObject: {fileID: 0}
-  - key: Lab_Status
-    gameObject: {fileID: 0}
-  - key: Image_Protect
-    gameObject: {fileID: 0}
-  - key: ImageDiEventTrigger
-    gameObject: {fileID: 0}
 --- !u!1 &7094729949572394416
 GameObject:
   m_ObjectHideFlags: 0
@@ -20819,114 +20772,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &7139523806257747344
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6314563138251990099}
-  - component: {fileID: 1646531281041850103}
-  - component: {fileID: 2341522197625344952}
-  - component: {fileID: 3721611208581408184}
-  m_Layer: 5
-  m_Name: ScrollView1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &6314563138251990099
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7139523806257747344}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6258702930565458609}
-  m_Father: {fileID: 5806234919280393777}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -67, y: 0}
-  m_SizeDelta: {x: 500, y: 850}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &1646531281041850103
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7139523806257747344}
-  m_CullTransparentMesh: 1
---- !u!114 &2341522197625344952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7139523806257747344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!114 &3721611208581408184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7139523806257747344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Content: {fileID: 3959641274136702033}
-  m_Horizontal: 0
-  m_Vertical: 1
-  m_MovementType: 1
-  m_Elasticity: 0.1
-  m_Inertia: 1
-  m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
-  m_Viewport: {fileID: 6258702930565458609}
-  m_HorizontalScrollbar: {fileID: 0}
-  m_VerticalScrollbar: {fileID: 0}
-  m_HorizontalScrollbarVisibility: 2
-  m_VerticalScrollbarVisibility: 2
-  m_HorizontalScrollbarSpacing: -3
-  m_VerticalScrollbarSpacing: -3
-  m_OnValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &7162759037195713030
 GameObject:
   m_ObjectHideFlags: 0
@@ -21628,7 +21473,7 @@ GameObject:
   - component: {fileID: 782682962491021770}
   - component: {fileID: 1145946472296741955}
   m_Layer: 5
-  m_Name: Text_PetNumber
+  m_Name: E_Text_PetNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21826,97 +21671,6 @@ RectTransform:
   m_AnchoredPosition: {x: 251, y: 329}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &7707979670519355844
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3959641274136702033}
-  - component: {fileID: 1012897569781071671}
-  - component: {fileID: 6378095609452590048}
-  - component: {fileID: 8545207995686025447}
-  m_Layer: 5
-  m_Name: PetListNode
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &3959641274136702033
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7707979670519355844}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6258702930565458609}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 1}
---- !u!114 &1012897569781071671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7707979670519355844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
-  m_VerticalFit: 2
---- !u!114 &6378095609452590048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7707979670519355844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 10
-    m_Right: 0
-    m_Top: 20
-    m_Bottom: 0
-  m_ChildAlignment: 1
-  m_StartCorner: 0
-  m_StartAxis: 1
-  m_CellSize: {x: 390, y: 140}
-  m_Spacing: {x: 0, y: 20}
-  m_Constraint: 1
-  m_ConstraintCount: 1
---- !u!114 &8545207995686025447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7707979670519355844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
-  m_VerticalFit: 2
 --- !u!1 &7764501125347246528
 GameObject:
   m_ObjectHideFlags: 0
@@ -22225,7 +21979,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7214245889323489701}
   m_Layer: 5
-  m_Name: PetProSetItem_2
+  m_Name: EG_PetProSetItem_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22414,7 +22168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4146776851999268873}
   m_Layer: 5
-  m_Name: PetZiZhiItem1
+  m_Name: EG_PetZiZhiItem1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22892,7 +22646,7 @@ GameObject:
   - component: {fileID: 1187164914528308286}
   - component: {fileID: 2691929546532129568}
   m_Layer: 5
-  m_Name: Text_ShouHu
+  m_Name: E_Text_ShouHu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23061,7 +22815,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7259542771352595805}
   m_Layer: 5
-  m_Name: PetZiZhiSet
+  m_Name: EG_PetZiZhiSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23448,7 +23202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2201756358401295788}
   m_Layer: 5
-  m_Name: PetZiZhiItem4
+  m_Name: EG_PetZiZhiItem4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23569,7 +23323,7 @@ GameObject:
   - component: {fileID: 6146998374576319801}
   - component: {fileID: 1442906918985186383}
   m_Layer: 5
-  m_Name: ButtonCloseAddPoint
+  m_Name: E_ButtonCloseAddPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23860,6 +23614,82 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!1 &8576400915116820592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 846216568432077363}
+  - component: {fileID: 1211935023674768921}
+  - component: {fileID: 6436139505005157356}
+  m_Layer: 5
+  m_Name: Content
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &846216568432077363
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8576400915116820592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5374929739556624557}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 0}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &1211935023674768921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8576400915116820592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 10
+    m_Right: 0
+    m_Top: 20
+    m_Bottom: 0
+  m_ChildAlignment: 1
+  m_StartCorner: 0
+  m_StartAxis: 1
+  m_CellSize: {x: 390, y: 140}
+  m_Spacing: {x: 0, y: 20}
+  m_Constraint: 1
+  m_ConstraintCount: 1
+--- !u!114 &6436139505005157356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8576400915116820592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &8659843434321481991
 GameObject:
   m_ObjectHideFlags: 0
@@ -23966,7 +23796,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6636386830796977989}
   m_Layer: 5
-  m_Name: ButtonNode
+  m_Name: EG_ButtonNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24175,7 +24005,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6314563138251990099}
+  - {fileID: 5374929739556624557}
   - {fileID: 7094729949558514668}
   m_Father: {fileID: 4937500015438813561}
   m_RootOrder: 1
@@ -24370,7 +24200,7 @@ GameObject:
   - component: {fileID: 1447128961168930862}
   - component: {fileID: 3969187428585854260}
   m_Layer: 5
-  m_Name: Text_PetLevel
+  m_Name: E_Text_PetLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24638,7 +24468,7 @@ GameObject:
   - component: {fileID: 8778322859930433410}
   - component: {fileID: 8093058703700481049}
   m_Layer: 5
-  m_Name: PetProSetNode_1
+  m_Name: E_PetProSetNode_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

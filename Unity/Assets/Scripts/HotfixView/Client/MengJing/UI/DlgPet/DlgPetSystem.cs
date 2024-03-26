@@ -39,6 +39,7 @@ namespace ET.Client
 			{
 				case 0:
 					self.View.ES_PetList.uiTransform.gameObject.SetActive(true);
+					self.View.ES_PetList.OnUpdateUI();
 					break;
 				case 1:
 					self.View.ES_PetHeCheng.uiTransform.gameObject.SetActive(true);
