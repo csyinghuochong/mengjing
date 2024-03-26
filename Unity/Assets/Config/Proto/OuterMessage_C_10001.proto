@@ -1618,6 +1618,21 @@ message M2C_SkillSetMessage	// IMessage
 	SkillSetInfo SkillSetInfo = 1;
 }
 
+//ResponseType M2C_ChangeOccTwoResponse
+//转换职业
+message C2M_ChangeOccTwoRequest		// ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 OccTwoID = 1;
+}
+
+message M2C_ChangeOccTwoResponse	// ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
 //ResponseType Chat2C_GetChatResponse
 message C2Chat_GetChatRequest // IChatActorRequest
 {
