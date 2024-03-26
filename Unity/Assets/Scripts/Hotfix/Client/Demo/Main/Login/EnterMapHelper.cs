@@ -24,7 +24,7 @@ namespace ET.Client
                 await BagClientNetHelper.RequestBagInit(root);
                 await PetNetHelper.RequestPetInfo(root);
                 await TaskClientNetHelper.RequestTaskInit(root);
-                
+                await SkillNetHelper.RequestSkillSet(root);
                 await ActivityNetHelper.RequestActivityInfo(root);
                 await FriendNetHelper.RequestFriendInfo(root);
                 

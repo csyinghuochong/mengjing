@@ -27,6 +27,7 @@ namespace ET.Server
 
             unit.GetComponent<SkillSetComponentS>().OnChangeOccTwoRequest(request.OccTwoID);
             unit.GetComponent<TaskComponentS>().OnChangeOccTwo();
+            await ETTask.CompletedTask;
         }
     }
 }
