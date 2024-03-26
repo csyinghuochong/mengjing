@@ -95,4 +95,10 @@ namespace ET.Client
         public int NpcId;
         public int ErrorCode;
     }
+
+    public struct RolePetAdd
+    {
+        public List<KeyValuePair> OldPetSkin;
+        public RolePetInfo RolePetInfo;
+    }
 }

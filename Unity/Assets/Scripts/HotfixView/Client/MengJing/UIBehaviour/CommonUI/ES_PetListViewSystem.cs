@@ -141,7 +141,7 @@ namespace ET.Client
 
             self.PetSkinId = 0;
             self.LastSelectItem = self.Root().GetComponent<PetComponentC>().GetPetInfoByID(petId);
-            // self.UIPageButton.OnSelectIndex(0);
+            self.E_ZiZhiToggle.IsSelected(true);
             // self.OnChangeNode(1);
             // self.OnUpdatePetInfo(self.LastSelectItem);
             // self.UpdatePetModel(self.LastSelectItem);
