@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ET;
 
 namespace ET.Server
 {
@@ -17,7 +16,9 @@ namespace ET.Server
             {
                 if (request.ComponentNameList.Count == 0)
                 {
-                    dictionary.Add(nameof(Unit), null);
+                    Type tttt = typeof (Unit);
+                    string nbaaa = tttt.FullName;
+                    dictionary.Add(nbaaa, null);
                     foreach (string s in unitCacheComponent.UnitCacheKeyList)
                     {
                         dictionary.Add(s, null);
@@ -43,6 +44,7 @@ namespace ET.Server
                     catch (Exception e)
                     {
                         Console.WriteLine(e);
+                        Log.Debug(e.ToString());
                         throw;
                     }
                 }

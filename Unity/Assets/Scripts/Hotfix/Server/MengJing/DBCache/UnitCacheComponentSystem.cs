@@ -28,7 +28,7 @@ namespace ET.Server
 
                 if ( !iscache  && isassig)
                 {
-                    self.UnitCacheKeyList.Add(type.Name);
+                    self.UnitCacheKeyList.Add(type.FullName);
                 }
             }
 
@@ -81,7 +81,7 @@ namespace ET.Server
             {
                 foreach (Entity entity in entityList)
                 {
-                    string key = entity.GetType().Name;
+                    string key = entity.GetType().FullName;
                     if (!self.UnitCaches.TryGetValue(key, out UnitCache unitCache))
                     {
                         unitCache = self.AddChild<UnitCache>();

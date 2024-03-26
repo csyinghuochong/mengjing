@@ -41,7 +41,7 @@ namespace ET.Server
                 return null;
             }
 
-            int indexOf = queryUnit.ComponentNameList.IndexOf(nameof(Unit));
+            int indexOf = queryUnit.ComponentNameList.IndexOf(typeof(Unit).FullName);
             Unit unit = queryUnit.EntityList[indexOf] as Unit;
             if (unit == null)
             {
@@ -71,7 +71,7 @@ namespace ET.Server
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(scene.Zone());
 
             Other2UnitCache_GetUnit message = new Other2UnitCache_GetUnit() { UnitId = unitId };
-            message.ComponentNameList.Add(typeof(T).Name);
+            message.ComponentNameList.Add(typeof(T).FullName);
 
             UnitCache2Other_GetUnit queryUnit = (UnitCache2Other_GetUnit)await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message);
             if (queryUnit.Error == ErrorCode.ERR_Success && queryUnit.EntityList.Count > 0)
