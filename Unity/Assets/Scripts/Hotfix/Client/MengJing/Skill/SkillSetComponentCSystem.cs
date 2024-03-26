@@ -18,14 +18,7 @@ namespace ET.Client
 
         }
         
-        public static async ETTask RequestSkillSet(this SkillSetComponentC self)
-		{
-			C2M_SkillInitRequest c2M_SkillSet = new C2M_SkillInitRequest() { };
-			M2C_SkillInitResponse m2C_SkillSet = (M2C_SkillInitResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_SkillSet);
-
-			self.UpdateSkillSet(m2C_SkillSet.SkillSetInfo);
-		}
-
+        
 		public static void UpdateSkillSet(this SkillSetComponentC self, SkillSetInfo skillSetInfo)
 		{
 			self.SkillList = skillSetInfo.SkillList;
@@ -58,20 +51,17 @@ namespace ET.Client
 			return sameId;
 		}
 
-		//激活天赋
-		public static async ETTask ActiveTianFu(this SkillSetComponentC self, int tianfuId)
+		public static void OnActiveSkillID(this SkillSetComponentC self, int skillId, int newSkillId)
 		{
-			C2M_TianFuActiveRequest c2M_SkillSet = new C2M_TianFuActiveRequest() { TianFuId = tianfuId };
-			M2C_TianFuActiveResponse m2C_SkillSet = (M2C_TianFuActiveResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_SkillSet);
-
-			if (m2C_SkillSet.Error != 0)
+			//升级替换技能
+			for (int i = self.SkillList.Count - 1; i >= 0; i--)
 			{
-				return;
+				if (self.SkillList[i].SkillID == skillId)
+				{
+					self.SkillList[i].SkillID = newSkillId;
+					break;
+				}
 			}
-
-			//如果有相同等级的天赋则替换
-			HintHelp.GetInstance().DataUpdate(DataType.OnActiveTianFu);
-			HintHelp.GetInstance().ShowHint("激活成功！");
 		}
 
 		public static void TianFuRemove(this SkillSetComponentC self, int tianFuid)
@@ -300,28 +290,6 @@ namespace ET.Client
 			return skillids;
 		}
 
-		//激活技能
-		public static async ETTask ActiveSkillID(this SkillSetComponentC self, int skillId)
-		{
-			C2M_SkillUp c2M_SkillSet = new C2M_SkillUp() { SkillID = skillId };
-			M2C_SkillUp m2C_SkillSet = (M2C_SkillUp)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_SkillSet);
-
-			if (m2C_SkillSet.Error != 0)
-				return;
-
-			//升级替换技能
-			for (int i = self.SkillList.Count - 1; i >= 0; i--)
-			{
-				if (self.SkillList[i].SkillID == skillId)
-				{
-					self.SkillList[i].SkillID = m2C_SkillSet.NewSkillID;
-					break;
-				}
-			}
-
-			HintHelp.GetInstance().DataUpdate(DataType.SkillUpgrade, skillId.ToString() + "_" + m2C_SkillSet.NewSkillID.ToString());
-		}
-
 		public static SkillPro GetSkillPro(this SkillSetComponentC self, int skillId)
 		{
 			for (int i = 0; i < self.SkillList.Count; i++)
@@ -331,31 +299,7 @@ namespace ET.Client
 			}
 			return null;
 		}
-
-		public static async ETTask<bool> ChangeOccTwoRequest(this SkillSetComponentC self, int occTwoID)
-		{
-			UserInfoComponent userInfoComponent = self.ZoneScene().GetComponent<UserInfoComponent>();
-			C2M_ChangeOccTwoRequest c2M_ChangeOccTwoRequest = new C2M_ChangeOccTwoRequest() { OccTwoID = occTwoID };
-			M2C_ChangeOccTwoResponse m2C_SkillSet = (M2C_ChangeOccTwoResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_ChangeOccTwoRequest);
-
-			if (m2C_SkillSet.Error == 0)
-			{
-				UserInfo userInfo = userInfoComponent.UserInfo;
-				userInfo.OccTwo = occTwoID;
-
-				//飘字
-				HintHelp.GetInstance().ShowHint("恭喜你!转职成功");
-				return true;
-
-			}
-			else
-			{
-				//HintHelp.GetInstance().ShowErrHint(m2C_SkillSet.Error);
-				return false;
-			}
-
-		}
-
+		
 		/// <summary>
 		/// 技能设置
 		/// </summary>
