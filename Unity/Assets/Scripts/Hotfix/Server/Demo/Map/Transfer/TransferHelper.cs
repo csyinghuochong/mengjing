@@ -275,12 +275,12 @@ namespace ET.Server
 
                         LocalDungeonComponent localDungeon = unit.Root().GetComponent<LocalDungeonComponent>();
                         request.Difficulty = localDungeon != null ? localDungeon.FubenDifficulty : request.Difficulty;
-                        //unit.GetComponent<SkillComponentServer>()?.OnFinish(false);
-                        // int errorCode = await TransferHelper.LocalDungeonTransfer(unit, request.SceneId, int.Parse(request.paramInfo), request.Difficulty);
-                        // if (errorCode != ErrorCode.ERR_Success)
-                        // {
-                        //     return errorCode;
-                        // }
+                        unit.GetComponent<SkillManagerComponentS>()?.OnFinish(false);
+                         int errorCode = await TransferHelper.LocalDungeonTransfer(unit, request.SceneId, int.Parse(request.paramInfo), request.Difficulty);
+                         if (errorCode != ErrorCode.ERR_Success)
+                         {
+                             return errorCode;
+                         }
                         break;
                     case SceneTypeEnum.BaoZang:
                     case SceneTypeEnum.MiJing:
@@ -430,6 +430,58 @@ namespace ET.Server
             return ErrorCode.ERR_Success;
         }
         
+        
+         public static async ETTask<int> LocalDungeonTransfer(Unit unit, int sceneId, int transferId, int difficulty)
+         {
+             if (transferId != 0 && !DungeonTransferConfigCategory.Instance.Contain(transferId))
+             {
+                 return ErrorCode.ERR_ModifyData;
+             }
+
+             //前往神秘之门
+             if (DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(sceneId))
+             {
+                 unit.GetComponent<UnitInfoComponent>().LastDungeonId = unit.Root().GetComponent<MapComponent>().SceneId;
+                 unit.GetComponent<UnitInfoComponent>().LastDungeonPosition = unit.Position;
+             }
+
+             long oldsceneid = unit.Root().Id;
+             List<StartSceneConfig> zonelocaldungeons = StartSceneConfigCategory.Instance.LocalDungeons[unit.Zone()];
+             int n = (int)( (unit.Id / 99) % zonelocaldungeons.Count);
+             
+             StartSceneConfig startSceneConfig =  zonelocaldungeons[n];
+             sceneId = transferId != 0 ? DungeonTransferConfigCategory.Instance.Get(transferId).MapID : sceneId;
+             if (sceneId == 0)
+             {
+                 Log.Error($"zonelocaldungeonsb:  unitid: {unit.Id}  n: {n}  transferId: {transferId} sceneId: {sceneId} ");
+                 return ErrorCode.ERR_NotFindLevel;
+             }
+             //Log.Console($"zonelocaldungeonsb:  unitid: {unit.Id}  n: {n}  transferId: {transferId} sceneId: {sceneId} ");
+             LocalDungeon2M_EnterResponse createUnit = (LocalDungeon2M_EnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                         startSceneConfig.ActorId, new M2LocalDungeon_EnterRequest()
+                         { 
+                             UserID = unit.Id, SceneType = SceneTypeEnum.LocalDungeon, SceneId = sceneId, TransferId = transferId, Difficulty = difficulty
+                         });
+
+             if (createUnit.Error != ErrorCode.ERR_Success)
+             {
+                 return createUnit.Error;
+             }
+
+             TransferHelper.BeforeTransfer(unit);
+             ActorId FubenInstanceId =  new ActorId(createUnit.Process, createUnit.RootId, createUnit.FubenInstanceId);
+             await TransferHelper.Transfer(unit, FubenInstanceId, (int)SceneTypeEnum.LocalDungeon, sceneId, difficulty, transferId.ToString());
+
+             //移除旧scene
+             Scene scene = unit.Root().GetChild<Scene>(oldsceneid);
+             if (scene.GetComponent<LocalDungeonComponent>() != null)
+             {
+                 //动态删除副本
+                 TransferHelper.NoticeFubenCenter(scene, 2).Coroutine();
+                 scene.Dispose();
+             }
+             return ErrorCode.ERR_Success;   
+         }
         
         public static async ETTask TransferAtFrameFinish(Unit unit, ActorId sceneInstanceId, string sceneName)
         {

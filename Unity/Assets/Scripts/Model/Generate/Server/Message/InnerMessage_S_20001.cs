@@ -1627,6 +1627,100 @@ namespace ET
 
 	}
 
+//进入副本
+	[ResponseType(nameof(LocalDungeon2M_EnterResponse))]
+	[Message(InnerMessage.M2LocalDungeon_EnterRequest)]
+	[MemoryPackable]
+	public partial class M2LocalDungeon_EnterRequest: MessageObject, IRequest
+	{
+		public static M2LocalDungeon_EnterRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2LocalDungeon_EnterRequest), isFromPool) as M2LocalDungeon_EnterRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UserID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int SceneId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int TransferId { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int Difficulty { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int SceneType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UserID = default;
+			this.SceneId = default;
+			this.TransferId = default;
+			this.Difficulty = default;
+			this.SceneType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.LocalDungeon2M_EnterResponse)]
+	[MemoryPackable]
+	public partial class LocalDungeon2M_EnterResponse: MessageObject, IResponse
+	{
+		public static LocalDungeon2M_EnterResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(LocalDungeon2M_EnterResponse), isFromPool) as LocalDungeon2M_EnterResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long FubenId { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long FubenInstanceId { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int RootId { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int Process { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.FubenId = default;
+			this.FubenInstanceId = default;
+			this.RootId = default;
+			this.Process = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -1678,5 +1772,7 @@ namespace ET
 		 public const ushort A2M_PetMingBattleWinResponse = 20048;
 		 public const ushort M2A_PetMingPlayerInfoRequest = 20049;
 		 public const ushort A2M_PetMingPlayerInfoResponse = 20050;
+		 public const ushort M2LocalDungeon_EnterRequest = 20051;
+		 public const ushort LocalDungeon2M_EnterResponse = 20052;
 	}
 }

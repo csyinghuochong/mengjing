@@ -29,6 +29,8 @@ namespace ET
         public StartSceneConfig LoginCenterConfig;
 
         public Dictionary<int, StartSceneConfig> UnitCaches = new Dictionary<int, StartSceneConfig>();
+        
+        public MultiMap<int, StartSceneConfig> LocalDungeons = new MultiMap<int, StartSceneConfig>();
 
         public List<StartSceneConfig> GetByProcess(int process)
         {
@@ -64,6 +66,9 @@ namespace ET
                         break;
                     case SceneType.Gate:
                         this.Gates.Add(startSceneConfig.Zone, startSceneConfig);
+                        break;
+                    case SceneType.LocalDungeon:
+                        this.LocalDungeons.Add(startSceneConfig.Zone, startSceneConfig);
                         break;
                     case SceneType.Location:
                         this.LocationConfig = startSceneConfig;

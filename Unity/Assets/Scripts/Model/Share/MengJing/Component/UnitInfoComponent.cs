@@ -28,7 +28,7 @@ namespace ET
         public List<int> FashionEquipList = new List<int>();
 
 
-        public int LastDungeonId = 0;
-        public float3 LastDungeonPosition;
+        public int LastDungeonId  { get; set; } = 0;
+        public float3 LastDungeonPosition { get; set; } 
     }
 }

@@ -3,7 +3,7 @@ namespace ET.Server
 
     [FriendOf(typeof(SkillManagerComponentS))]
     [EntitySystemOf(typeof(SkillManagerComponentS))]
-    public static partial class SkillComponentServerSystem
+    public static partial class SkillManagerComponentSSystem
     {
         [EntitySystem]
         private static void Awake(this ET.Server.SkillManagerComponentS self)
@@ -34,6 +34,11 @@ namespace ET.Server
         public static int SkillSecondBuffId(this SkillManagerComponentS self, int skillId)
         {
             return self.SkillSecond[skillId];
+        }
+
+        public static void OnFinish(this SkillManagerComponentS self, bool notice)
+        {
+            
         }
     }
 
