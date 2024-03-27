@@ -35,6 +35,11 @@ namespace ET.Client
      			}
      			return this.m_es_commonitem;
      		}
+
+	        set
+	        {
+		        this.m_es_commonitem = value;
+	        }
      	}
 
 		public void DestroyWidget()
