@@ -25,8 +25,9 @@ namespace ET.Client
                 await PetNetHelper.RequestPetInfo(root);
                 await TaskClientNetHelper.RequestTaskInit(root);
                 await SkillNetHelper.RequestSkillSet(root);
-                await ActivityNetHelper.RequestActivityInfo(root);
                 await FriendNetHelper.RequestFriendInfo(root);
+                await ActivityNetHelper.RequestActivityInfo(root);
+                
                 
                 EventSystem.Instance.Publish(root, new EnterMapFinish());
             }
