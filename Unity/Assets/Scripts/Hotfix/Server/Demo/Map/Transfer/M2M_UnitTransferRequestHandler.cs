@@ -22,7 +22,6 @@ namespace ET.Server
                     Entity entity = MongoHelper.Deserialize<Entity>(bytes);
                     unit.AddComponent(entity);
                     
-                    Log.Debug(($"Transfer2:  {entity.GetType().FullName}"));
                 }
                 catch (Exception e)
                 {

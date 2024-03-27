@@ -62,7 +62,6 @@ namespace ET.Server
                     continue;
                 }
                 unit.AddComponent(entity);
-                Log.Debug(($"Transfer_get:  {entity.GetType().FullName}"));
             }
             return unit;
         }

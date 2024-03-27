@@ -467,7 +467,6 @@ namespace ET.Server
         public static async ETTask Transfer(Unit unit, ActorId sceneInstanceId, int sceneType, int sceneId, int fubenDifficulty,  string paramInfo)
         {
             Scene root = unit.Root();
-            Log.Debug($"M2M_UnitTransferRequest_c:{unit.Components.Count}");
             // location加锁
             long unitId = unit.Id;
             
@@ -479,11 +478,9 @@ namespace ET.Server
                 if (entity is ITransfer)
                 {
                     request.Entitys.Add(entity.ToBson());
-                    Log.Debug(($"Transfer0:  {entity.GetType().FullName}"));
                 }
                 else
                 {
-                    Log.Debug(($"Transferx:  {entity.GetType().FullName}"));
                 }
             }
             unit.Dispose();
