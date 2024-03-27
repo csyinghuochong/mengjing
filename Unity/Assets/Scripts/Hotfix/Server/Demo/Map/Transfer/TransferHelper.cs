@@ -435,7 +435,7 @@ namespace ET.Server
         {
             await unit.Fiber().WaitFrameFinish();
 
-            await TransferHelper.Transfer(unit, sceneInstanceId, SceneTypeEnum.MainCityScene, 101,  1, "0");
+            await Transfer(unit, sceneInstanceId, SceneTypeEnum.MainCityScene, 101,  1, "0");
         }
         
         public static async ETTask MainCityTransfer(Unit unit)
@@ -467,7 +467,7 @@ namespace ET.Server
         public static async ETTask Transfer(Unit unit, ActorId sceneInstanceId, int sceneType, int sceneId, int fubenDifficulty,  string paramInfo)
         {
             Scene root = unit.Root();
-            Log.Debug($"M2M_UnitTransferRequest:0");
+            Log.Debug($"M2M_UnitTransferRequest_c:{unit.Components.Count}");
             // location加锁
             long unitId = unit.Id;
             

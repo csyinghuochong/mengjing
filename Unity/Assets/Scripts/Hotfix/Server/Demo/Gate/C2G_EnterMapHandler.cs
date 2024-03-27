@@ -48,13 +48,13 @@ namespace ET.Server
             player.ActivityServerId = UnitCacheHelper.GetActivityId(session.Zone());
             player.FriendServerId = UnitCacheHelper.GetFriendId(session.Zone());
 
-            (bool isNewPlayer, Unit unit)  = await UnitHelper.LoadUnit(player, scene, createRoleInfo, newAccountList[0].Account, request.AccountId); 
+            Unit unit = await UnitHelper.LoadUnit(player, scene, createRoleInfo, newAccountList[0].Account, request.AccountId); 
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map1");
 			response.MyId = request.UnitId;
 			unit.GateSessionActorId = player.Id;
-			
+			Log.Debug($"M2M_UnitTransferRequest_a:{unit.Components.Count}");
 			player.ChatInfoInstanceId = await EnterWorldChatServer(unit);   //登录聊天服
-			
+			Log.Debug($"M2M_UnitTransferRequest_b:{unit.Components.Count}");
 			// 等到一帧的最后面再传送，先让G2C_EnterMap返回，否则传送消息可能比G2C_EnterMap还早
 			TransferHelper.TransferAtFrameFinish(unit, startSceneConfig.ActorId, startSceneConfig.Name).Coroutine();
 		}
