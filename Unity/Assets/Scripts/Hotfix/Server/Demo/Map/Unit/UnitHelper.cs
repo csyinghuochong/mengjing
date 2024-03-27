@@ -61,7 +61,7 @@ namespace ET.Server
             //     UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
             // }
             
-            UnitFactory.Create(scene,unit, player.UnitId, UnitType.Player,createRoleInfo,account, accountId);
+            await UnitFactory.Create(scene,unit, player.UnitId, UnitType.Player,createRoleInfo,account, accountId);
 
             //UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
 

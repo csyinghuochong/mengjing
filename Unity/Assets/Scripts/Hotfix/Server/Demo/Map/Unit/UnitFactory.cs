@@ -6,7 +6,7 @@ namespace ET.Server
 {
     public static partial class UnitFactory
     {
-        public static Unit  Create(Scene scene, Unit unit, long id, int unitType,CreateRoleInfo createRoleInfo, string account, long accountId)
+        public static async ETTask Create(Scene scene, Unit unit, long id, int unitType,CreateRoleInfo createRoleInfo, string account, long accountId)
         {
             //UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
             switch (unitType)
@@ -47,21 +47,19 @@ namespace ET.Server
                     unit.AddDataComponent<HeroDataComponentS>();
                     unit.AddDataComponent<SkillPassiveComponent>();
                     
-                    
-                    // DBComponent dbComponent = scene.Root().GetComponent<DBManagerComponent>().GetZoneDB(scene.Zone());
-                    // List<DBFriendInfo> dbFriendInfos = await dbComponent.Query<DBFriendInfo>( scene.Zone(), d=> d.Id == id);
-                    // if (dbFriendInfos == null || dbFriendInfos.Count == 0)
-                    // {
-                    //     DBFriendInfo dbFriendInfo = unit.AddComponent<DBFriendInfo>();
-                    //     await  dbComponent.Save(scene.Zone(), dbFriendInfo);
-                    //     dbFriendInfo.Dispose();
-                    // }
-
+                    DBComponent dbComponent = scene.Root().GetComponent<DBManagerComponent>().GetZoneDB(scene.Zone());
+                    List<DBFriendInfo> dbFriendInfos = await dbComponent.Query<DBFriendInfo>( scene.Zone(), d=> d.Id == id);
+                    if (dbFriendInfos == null || dbFriendInfos.Count == 0)
+                    {
+                        DBFriendInfo dbFriendInfo = unit.AddComponent<DBFriendInfo>();
+                        await  dbComponent.Save(scene.Zone(), dbFriendInfo);
+                        dbFriendInfo.Dispose();
+                    }
                     
                     //unitComponent.Add(unit);
                     // 加入aoi
                     unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
-                    return unit;
+                    return;
                 }
                 default:
                     throw new Exception($"not such unit type: {unitType}");
