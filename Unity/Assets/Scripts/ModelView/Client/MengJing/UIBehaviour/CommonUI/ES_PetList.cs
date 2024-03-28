@@ -12,6 +12,7 @@ namespace ET.Client
 		public GameObject[] PetZiZhiItemList = new GameObject[6];
 		public long ClickTime;
 		public bool IsChange;
+		public int PetHeXinSuit;
 		public int PetSkinId;
 		public RolePetInfo LastSelectItem;
 		public Dictionary<int, Scroll_Item_PetListItem> ScrollItemPetListItems;
@@ -878,6 +879,108 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_ImageIconImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ImageIconImage == null )
+     			{
+		    		this.m_E_ImageIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/EG_PetHeXinSet/E_ImageIcon");
+     			}
+     			return this.m_E_ImageIconImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_TextNameText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TextNameText == null )
+     			{
+		    		this.m_E_TextNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Right/EG_PetHeXinSet/E_TextName");
+     			}
+     			return this.m_E_TextNameText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_TextLevelText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TextLevelText == null )
+     			{
+		    		this.m_E_TextLevelText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Right/EG_PetHeXinSet/E_TextLevel");
+     			}
+     			return this.m_E_TextLevelText;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopVerticalScrollRect E_PetHeXinListLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetHeXinListLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_PetHeXinListLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_Right/EG_PetHeXinSet/E_PetHeXinList");
+     			}
+     			return this.m_E_PetHeXinListLoopVerticalScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_ButtonEquipHeXinButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ButtonEquipHeXinButton == null )
+     			{
+		    		this.m_E_ButtonEquipHeXinButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Right/EG_PetHeXinSet/E_ButtonEquipHeXin");
+     			}
+     			return this.m_E_ButtonEquipHeXinButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ButtonEquipHeXinImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ButtonEquipHeXinImage == null )
+     			{
+		    		this.m_E_ButtonEquipHeXinImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/EG_PetHeXinSet/E_ButtonEquipHeXin");
+     			}
+     			return this.m_E_ButtonEquipHeXinImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_ButtonCloseHexinButton
      	{
      		get
@@ -909,6 +1012,91 @@ namespace ET.Client
 		    		this.m_E_ButtonCloseHexinImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/EG_PetHeXinSet/E_ButtonCloseHexin");
      			}
      			return this.m_E_ButtonCloseHexinImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_ButtonHeXinHeChengButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ButtonHeXinHeChengButton == null )
+     			{
+		    		this.m_E_ButtonHeXinHeChengButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Right/EG_PetHeXinSet/E_ButtonHeXinHeCheng");
+     			}
+     			return this.m_E_ButtonHeXinHeChengButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ButtonHeXinHeChengImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ButtonHeXinHeChengImage == null )
+     			{
+		    		this.m_E_ButtonHeXinHeChengImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/EG_PetHeXinSet/E_ButtonHeXinHeCheng");
+     			}
+     			return this.m_E_ButtonHeXinHeChengImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_TextTypeText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TextTypeText == null )
+     			{
+		    		this.m_E_TextTypeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Right/EG_PetHeXinSet/E_TextType");
+     			}
+     			return this.m_E_TextTypeText;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_ButtonEquipXieXiaButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ButtonEquipXieXiaButton == null )
+     			{
+		    		this.m_E_ButtonEquipXieXiaButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Right/EG_PetHeXinSet/E_ButtonEquipXieXia");
+     			}
+     			return this.m_E_ButtonEquipXieXiaButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ButtonEquipXieXiaImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ButtonEquipXieXiaImage == null )
+     			{
+		    		this.m_E_ButtonEquipXieXiaImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/EG_PetHeXinSet/E_ButtonEquipXieXia");
+     			}
+     			return this.m_E_ButtonEquipXieXiaImage;
      		}
      	}
 
@@ -1304,8 +1492,19 @@ namespace ET.Client
 			this.m_E_PetProSetNode_1Image = null;
 			this.m_E_PetProSetNode_2Image = null;
 			this.m_EG_PetHeXinSetRectTransform = null;
+			this.m_E_ImageIconImage = null;
+			this.m_E_TextNameText = null;
+			this.m_E_TextLevelText = null;
+			this.m_E_PetHeXinListLoopVerticalScrollRect = null;
+			this.m_E_ButtonEquipHeXinButton = null;
+			this.m_E_ButtonEquipHeXinImage = null;
 			this.m_E_ButtonCloseHexinButton = null;
 			this.m_E_ButtonCloseHexinImage = null;
+			this.m_E_ButtonHeXinHeChengButton = null;
+			this.m_E_ButtonHeXinHeChengImage = null;
+			this.m_E_TextTypeText = null;
+			this.m_E_ButtonEquipXieXiaButton = null;
+			this.m_E_ButtonEquipXieXiaImage = null;
 			this.m_EG_PetAddPointRectTransform = null;
 			this.m_E_ButtonCloseAddPointButton = null;
 			this.m_E_ButtonCloseAddPointImage = null;
@@ -1379,8 +1578,19 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_PetProSetNode_1Image = null;
 		private UnityEngine.UI.Image m_E_PetProSetNode_2Image = null;
 		private UnityEngine.RectTransform m_EG_PetHeXinSetRectTransform = null;
+		private UnityEngine.UI.Image m_E_ImageIconImage = null;
+		private UnityEngine.UI.Text m_E_TextNameText = null;
+		private UnityEngine.UI.Text m_E_TextLevelText = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetHeXinListLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_ButtonEquipHeXinButton = null;
+		private UnityEngine.UI.Image m_E_ButtonEquipHeXinImage = null;
 		private UnityEngine.UI.Button m_E_ButtonCloseHexinButton = null;
 		private UnityEngine.UI.Image m_E_ButtonCloseHexinImage = null;
+		private UnityEngine.UI.Button m_E_ButtonHeXinHeChengButton = null;
+		private UnityEngine.UI.Image m_E_ButtonHeXinHeChengImage = null;
+		private UnityEngine.UI.Text m_E_TextTypeText = null;
+		private UnityEngine.UI.Button m_E_ButtonEquipXieXiaButton = null;
+		private UnityEngine.UI.Image m_E_ButtonEquipXieXiaImage = null;
 		private UnityEngine.RectTransform m_EG_PetAddPointRectTransform = null;
 		private UnityEngine.UI.Button m_E_ButtonCloseAddPointButton = null;
 		private UnityEngine.UI.Image m_E_ButtonCloseAddPointImage = null;

@@ -234,40 +234,35 @@ namespace ET.Client
 
         public static void UpdatePetHeXin(this ES_PetList self, RolePetInfo rolePetItem)
         {
-            // for (int i = 0; i < self.PetHeXinItemList.Length; i++)
-            // {
-            //     self.PetHeXinItemList[i].transform.Find("Node_2").gameObject.SetActive(false);
-            // }
-            //
-            // List<int> petheXinLv = new List<int>();
-            // BagComponent bagComponent = self.ZoneScene().GetComponent<BagComponent>();
-            // for (int i = 0; i < rolePetItem.PetHeXinList.Count; i++)
-            // {
-            //     if (rolePetItem.PetHeXinList[i] == 0)
-            //     {
-            //         continue;
-            //     }
-            //
-            //     BagInfo bagInfo = bagComponent.GetBagInfo(rolePetItem.PetHeXinList[i]);
-            //     ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
-            //     Transform itemTransform = self.PetHeXinItemList[i].transform;
-            //     //int position = int.Parse(itemConfig.ItemUsePar);
-            //     itemTransform.Find("Node_2").gameObject.SetActive(true);
-            //     itemTransform.Find("Node_2/TextName").gameObject.GetComponent<Text>().text = itemConfig.ItemName;
-            //     itemTransform.Find("Node_2/TextIcon").gameObject.GetComponent<Text>().text = $"等级 {itemConfig.UseLv}";
-            //     Image ImageIcon = itemTransform.Find("Node_2/ImageIcon").gameObject.GetComponent<Image>();
-            //     string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
-            //     Sprite sp = ResourcesComponent.Instance.LoadAsset<Sprite>(path);
-            //     if (!self.AssetPath.Contains(path))
-            //     {
-            //         self.AssetPath.Add(path);
-            //     }
-            //
-            //     ImageIcon.sprite = sp;
-            //
-            //     petheXinLv.Add(itemConfig.UseLv);
-            // }
-            //
+            for (int i = 0; i < self.PetHeXinItemList.Length; i++)
+            {
+                self.PetHeXinItemList[i].transform.Find("Node_2").gameObject.SetActive(false);
+            }
+
+            List<int> petheXinLv = new List<int>();
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            for (int i = 0; i < rolePetItem.PetHeXinList.Count; i++)
+            {
+                if (rolePetItem.PetHeXinList[i] == 0)
+                {
+                    continue;
+                }
+
+                BagInfo bagInfo = bagComponent.GetBagInfo(rolePetItem.PetHeXinList[i]);
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+                Transform itemTransform = self.PetHeXinItemList[i].transform;
+                itemTransform.Find("Node_2").gameObject.SetActive(true);
+                itemTransform.Find("Node_2/TextName").gameObject.GetComponent<Text>().text = itemConfig.ItemName;
+                itemTransform.Find("Node_2/TextIcon").gameObject.GetComponent<Text>().text = $"等级 {itemConfig.UseLv}";
+                Image ImageIcon = itemTransform.Find("Node_2/ImageIcon").gameObject.GetComponent<Image>();
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+                ImageIcon.sprite = sp;
+
+                petheXinLv.Add(itemConfig.UseLv);
+            }
+
             // for (int i = 0; i < self.EquipList.Count; i++)
             // {
             //     self.EquipList[i].InitUI(FunctionUI.GetItemSubtypeByWeizhi_Pet(i));
@@ -279,69 +274,65 @@ namespace ET.Client
             //     ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             //     self.EquipList[itemConfig.ItemSubType - 3001].UpdateData(bagInfo, ItemOperateEnum.None, null);
             // }
-            //
-            // self.PetHeXinSuitBtn.SetActive(true);
-            // int lv5number = 0;
-            // int lv8number = 0;
-            // int lv10number = 0;
-            // Material mat = ResourcesComponent.Instance.LoadAsset<Material>(ABPathHelper.GetMaterialPath("UI_Hui"));
-            // for (int i = 0; i < petheXinLv.Count; i++)
-            // {
-            //     if (petheXinLv[i] >= 5)
-            //     {
-            //         lv5number++;
-            //     }
-            //
-            //     if (petheXinLv[i] >= 8)
-            //     {
-            //         lv8number++;
-            //     }
-            //
-            //     if (petheXinLv[i] >= 10)
-            //     {
-            //         lv10number++;
-            //     }
-            // }
-            //
-            // int index = 0;
-            // if (lv10number >= 3)
-            // {
-            //     self.PetHeXinSuitBtn.GetComponentInChildren<Text>().text = "高级核心";
-            //     self.PetHeXinSuitBtn.GetComponent<Image>().material = null;
-            //     index = 3;
-            //     self.PetHeXinSuit = 10;
-            // }
-            // else if (lv8number >= 3)
-            // {
-            //     self.PetHeXinSuitBtn.GetComponentInChildren<Text>().text = "中级核心";
-            //     self.PetHeXinSuitBtn.GetComponent<Image>().material = null;
-            //     index = 2;
-            //     self.PetHeXinSuit = 8;
-            // }
-            // else if (lv5number >= 3)
-            // {
-            //     self.PetHeXinSuitBtn.GetComponentInChildren<Text>().text = "初级核心";
-            //     self.PetHeXinSuitBtn.GetComponent<Image>().material = null;
-            //     index = 1;
-            //     self.PetHeXinSuit = 5;
-            // }
-            // else
-            // {
-            //     self.PetHeXinSuitBtn.GetComponentInChildren<Text>().text = "初级核心";
-            //     self.PetHeXinSuitBtn.GetComponent<Image>().material = mat;
-            //     index = 1;
-            //     self.PetHeXinSuit = 0;
-            // }
-            //
-            // // 更换图标
-            // string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, $"hexin{index}");
-            // Sprite sp1 = ResourcesComponent.Instance.LoadAsset<Sprite>(path1);
-            // if (!self.AssetPath.Contains(path1))
-            // {
-            //     self.AssetPath.Add(path1);
-            // }
-            //
-            // self.PetHeXinSuitBtn.GetComponent<Image>().sprite = sp1;
+
+            self.E_PetHeXinSuitButton.gameObject.SetActive(true);
+            int lv5number = 0;
+            int lv8number = 0;
+            int lv10number = 0;
+            Material mat = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Material>(ABPathHelper.GetMaterialPath("UI_Hui"));
+            for (int i = 0; i < petheXinLv.Count; i++)
+            {
+                if (petheXinLv[i] >= 5)
+                {
+                    lv5number++;
+                }
+
+                if (petheXinLv[i] >= 8)
+                {
+                    lv8number++;
+                }
+
+                if (petheXinLv[i] >= 10)
+                {
+                    lv10number++;
+                }
+            }
+
+            int index = 0;
+            if (lv10number >= 3)
+            {
+                self.E_PetHeXinSuitButton.GetComponentInChildren<Text>().text = "高级核心";
+                self.E_PetHeXinSuitButton.GetComponent<Image>().material = null;
+                index = 3;
+                self.PetHeXinSuit = 10;
+            }
+            else if (lv8number >= 3)
+            {
+                self.E_PetHeXinSuitButton.GetComponentInChildren<Text>().text = "中级核心";
+                self.E_PetHeXinSuitButton.GetComponent<Image>().material = null;
+                index = 2;
+                self.PetHeXinSuit = 8;
+            }
+            else if (lv5number >= 3)
+            {
+                self.E_PetHeXinSuitButton.GetComponentInChildren<Text>().text = "初级核心";
+                self.E_PetHeXinSuitButton.GetComponent<Image>().material = null;
+                index = 1;
+                self.PetHeXinSuit = 5;
+            }
+            else
+            {
+                self.E_PetHeXinSuitButton.GetComponentInChildren<Text>().text = "初级核心";
+                self.E_PetHeXinSuitButton.GetComponent<Image>().material = mat;
+                index = 1;
+                self.PetHeXinSuit = 0;
+            }
+
+            // 更换图标
+            string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, $"hexin{index}");
+            Sprite sp1 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path1);
+
+            self.E_PetHeXinSuitButton.GetComponent<Image>().sprite = sp1;
         }
 
         /// <summary>
@@ -374,45 +365,80 @@ namespace ET.Client
 
         private static void UpdatePetHexinItem(this ES_PetList self, List<BagInfo> bagInfos)
         {
-            // self.ButtonHeXinHeCheng.SetActive(true);
-            // self.ButtonEquipXieXia.GetComponent<Button>().onClick.RemoveAllListeners();
-            // ButtonHelp.AddListenerEx(self.ButtonEquipXieXia, () => { self.OnButtonEquipXieXia().Coroutine(); });
-            // List<string> TypeNames = new List<string>() { "进攻能量", "守护能量", "生命能量" };
-            // self.TextType.GetComponent<Text>().text = TypeNames[self.Position];
-            //
-            // UICommonHelper.DestoryChild(self.AttributeListNode);
-            // long baginfoId = self.RolePetInfo.PetHeXinList[self.Position];
-            // BagInfo bagInfo = null;
-            // for (int i = 0; i < bagInfos.Count; i++)
-            // {
-            //     if (bagInfos[i].BagInfoID == baginfoId)
-            //     {
-            //         bagInfo = bagInfos[i];
-            //     }
-            // }
-            //
-            // self.ImageIcon.SetActive(bagInfo != null);
-            // self.ButtonEquipXieXia.SetActive(bagInfo != null);
-            // if (bagInfo == null)
-            // {
-            //     self.TextName.GetComponent<Text>().text = "空";
-            //     self.TextLevel.GetComponent<Text>().text = "等级: 0";
-            //     return;
-            // }
-            //
-            // ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
-            // self.TextName.GetComponent<Text>().text = itemConfig.ItemName;
-            // self.TextLevel.GetComponent<Text>().text = $"等级: {itemConfig.UseLv}";
-            // string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
-            // Sprite sp = ResourcesComponent.Instance.LoadAsset<Sprite>(path);
-            // if (!self.AssetPath.Contains(path))
-            // {
-            //     self.AssetPath.Add(path);
-            // }
-            //
-            // self.ImageIcon.GetComponent<Image>().sprite = sp;
-            //
-            // self.ShowAttributeItemList(itemConfig.ItemUsePar, self.AttributeListNode, self.TextAttributeItem);
+            self.E_ButtonHeXinHeChengButton.gameObject.SetActive(true);
+            self.E_ButtonEquipXieXiaButton.AddListenerAsync(self.OnButtonEquipXieXia);
+            List<string> TypeNames = new List<string>() { "进攻能量", "守护能量", "生命能量" };
+            self.E_TextTypeText.text = TypeNames[self.Position];
+
+            UICommonHelper.DestoryChild(self.EG_AttributeNodeRectTransform.gameObject);
+            long baginfoId = self.LastSelectItem.PetHeXinList[self.Position];
+            BagInfo bagInfo = null;
+            for (int i = 0; i < bagInfos.Count; i++)
+            {
+                if (bagInfos[i].BagInfoID == baginfoId)
+                {
+                    bagInfo = bagInfos[i];
+                }
+            }
+
+            self.E_ImageIconImage.gameObject.SetActive(bagInfo != null);
+            self.E_ButtonEquipXieXiaButton.gameObject.SetActive(bagInfo != null);
+            if (bagInfo == null)
+            {
+                self.E_TextNameText.text = "空";
+                self.E_TextLevelText.text = "等级: 0";
+                return;
+            }
+
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+            self.E_TextNameText.text = itemConfig.ItemName;
+            self.E_TextLevelText.text = $"等级: {itemConfig.UseLv}";
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+            self.E_ImageIconImage.sprite = sp;
+
+            // self.ShowAttributeItemList(itemConfig.ItemUsePar, self.EG_AttributeNodeRectTransform.gameObject, self.TextAttributeItem);
+        }
+
+        private static void ShowAttributeItemList(this ES_PetList self, string itemList, GameObject itemNodeList, GameObject attributeItem)
+        {
+            string[] attributeinfos = itemList.Split('@');
+            for (int i = 0; i < attributeinfos.Length; i++)
+            {
+                if (string.IsNullOrEmpty(attributeinfos[i]))
+                {
+                    continue;
+                }
+
+                string[] attributeInfo = attributeinfos[i].Split(';');
+                int numberType = int.Parse(attributeInfo[0]);
+                float numberValue = float.Parse(attributeInfo[1]);
+                GameObject gameObject = GameObject.Instantiate(attributeItem);
+                gameObject.SetActive(true);
+                UICommonHelper.SetParent(gameObject, itemNodeList);
+                string icon = ItemViewHelp.GetAttributeIcon(numberType);
+                if (!string.IsNullOrEmpty(icon))
+                {
+                    string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PropertyIcon, icon);
+                    Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+                    gameObject.transform.Find("Img_Icon").GetComponent<Image>().sprite = sp;
+                }
+
+                int showType = NumericHelp.GetNumericValueType(numberType);
+                string attribute;
+                if (showType == 2)
+                {
+                    attribute = $"{ItemViewHelp.GetAttributeName(numberType)} + {numberValue * 100}%";
+                }
+                else
+                {
+                    attribute = $"{ItemViewHelp.GetAttributeName(numberType)} + {numberValue}";
+                }
+
+                gameObject.transform.Find("Lab_ProTypeValue").GetComponent<Text>().text = attribute;
+            }
         }
 
         private static void OnUpdateItemList(this ES_PetList self, List<BagInfo> bagInfos)
@@ -420,7 +446,7 @@ namespace ET.Client
             // self.BagInfo = null;
             // long instanceid = self.InstanceId;
             // var path = ABPathHelper.GetUGUIPath("Main/Common/UICommonItem");
-            // var bundleGameObject = ResourcesComponent.Instance.LoadAsset<GameObject>(path);
+            // var bundleGameObject = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
             // if (instanceid != self.InstanceId)
             // {
             //     return;
@@ -479,6 +505,24 @@ namespace ET.Client
             // {
             //     self.uIItems[i].GameObject.SetActive(false);
             // }
+        }
+
+        public static async ETTask OnButtonEquipXieXia(this ES_PetList self)
+        {
+            // BagComponent bagComponent = self.ZoneScene().GetComponent<BagComponent>();
+            // long baginfoId = self.RolePetInfo.PetHeXinList[self.Position];
+            // BagInfo bagInfo = bagComponent.GetBagInfo(baginfoId);
+            //
+            // C2M_RolePetHeXin c2M_RolePetHeXin = new C2M_RolePetHeXin()
+            // {
+            //     OperateType = 2, BagInfoId = bagInfo.BagInfoID, PetInfoId = self.RolePetInfo.Id, Position = self.Position
+            // };
+            // M2C_RolePetHeXin m2C_RolePetHeXin =
+            //         (M2C_RolePetHeXin)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(c2M_RolePetHeXin);
+            // self.ZoneScene().GetComponent<PetComponent>().OnRolePetUpdate(m2C_RolePetHeXin.RolePetInfo);
+            // self.RolePetInfo = m2C_RolePetHeXin.RolePetInfo;
+            // UI uI = UIHelper.GetUI(self.ZoneScene(), UIType.UIPet);
+            // uI.GetComponent<UIPetComponent>().OnEquipPetHeXin();
         }
 
         private static void OnUpdatePetInfo(this ES_PetList self, RolePetInfo rolePetInfo)
