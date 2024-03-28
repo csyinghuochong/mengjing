@@ -690,7 +690,7 @@ namespace ET
 		public int SceneType { get; set; }
 
 		[MemoryPackOrder(5)]
-		public int ChapterId { get; set; }
+		public int SceneId { get; set; }
 
 		[MemoryPackOrder(6)]
 		public int Difficulty { get; set; }
@@ -706,7 +706,7 @@ namespace ET
 			this.Unit = default;
 			this.Entitys.Clear();
 			this.SceneType = default;
-			this.ChapterId = default;
+			this.SceneId = default;
 			this.Difficulty = default;
 			this.ParamInfo = default;
 			

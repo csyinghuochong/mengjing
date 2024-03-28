@@ -516,6 +516,22 @@ namespace ET.Server
             //RemovePetAndJingLing(unit);
         }
 
+        public static void AfterTransfer(Unit unit)
+        {
+            RolePetInfo fightId = unit.GetComponent<PetComponentS>().GetFightPet();
+            if (fightId != null)
+            {
+                unit.GetComponent<PetComponentS>().UpdatePetAttribute(fightId, false);
+                UnitFactory.CreatePet(unit, fightId);
+            }
+            int jinglingid  = unit.GetComponent<ChengJiuComponentS>().JingLingId;
+            if (jinglingid != 0)
+            {
+                long JingLingUnitId = UnitFactory.CreateJingLing(unit, jinglingid).Id;
+                unit.GetComponent<ChengJiuComponentS>().JingLingUnitId = JingLingUnitId;
+            }
+        }
+        
         public static async ETTask Transfer(Unit unit, ActorId sceneInstanceId, int sceneType, int sceneId, int fubenDifficulty,  string paramInfo)
         {
             Scene root = unit.Root();
@@ -525,6 +541,9 @@ namespace ET.Server
             M2M_UnitTransferRequest request = M2M_UnitTransferRequest.Create();
             request.OldActorId = unit.GetActorId();
             request.Unit = unit.ToBson();
+            request.SceneType = sceneType;
+            request.ChapterId = sceneId;
+            
             foreach (Entity entity in unit.Components.Values)
             {
                 if (entity is ITransfer)

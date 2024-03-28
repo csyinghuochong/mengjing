@@ -169,7 +169,7 @@ message M2M_UnitTransferRequest // IRequest
 	bytes Unit = 3;
 	repeated bytes Entitys = 4;
 	int32 SceneType = 5;
-	int32 ChapterId = 6;
+	int32 SceneId = 6;
 	int32 Difficulty = 7;
 	string  ParamInfo = 8;
 }
