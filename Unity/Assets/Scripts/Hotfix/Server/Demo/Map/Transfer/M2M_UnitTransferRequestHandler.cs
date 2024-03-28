@@ -32,8 +32,13 @@ namespace ET.Server
             Log.Debug($"M2M_UnitTransferRequest:2");
             unit.AddComponent<MoveComponent>();
             unit.AddComponent<PathfindingComponent, int>(101);
-            unit.Position = new float3(-10, 0, -10);
 
+            switch (request.)
+            {
+                
+            }
+            
+            unit.Position = new float3(-10, 0, -10);
             unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
             unit.GetComponent<DBSaveComponent>().Activeted();
 

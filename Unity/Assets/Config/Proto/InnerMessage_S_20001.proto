@@ -168,6 +168,10 @@ message M2M_UnitTransferRequest // IRequest
 	ActorId OldActorId = 2;
 	bytes Unit = 3;
 	repeated bytes Entitys = 4;
+	int32 SceneType = 5;
+	int32 ChapterId = 6;
+	int32 Difficulty = 7;
+	string  ParamInfo = 8;
 }
 
 message M2M_UnitTransferResponse // IResponse

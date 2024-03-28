@@ -686,6 +686,18 @@ namespace ET
 		[MemoryPackOrder(3)]
 		public List<byte[]> Entitys { get; set; } = new();
 
+		[MemoryPackOrder(4)]
+		public int SceneType { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int ChapterId { get; set; }
+
+		[MemoryPackOrder(6)]
+		public int Difficulty { get; set; }
+
+		[MemoryPackOrder(7)]
+		public string ParamInfo { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -693,6 +705,10 @@ namespace ET
 			this.OldActorId = default;
 			this.Unit = default;
 			this.Entitys.Clear();
+			this.SceneType = default;
+			this.ChapterId = default;
+			this.Difficulty = default;
+			this.ParamInfo = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
