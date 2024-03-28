@@ -6,7 +6,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetList : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_PetList : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy ,IUILogic
 	{
 		public GameObject[] PetZiZhiItemList = new GameObject[6];
 		public long ClickTime;
@@ -16,6 +16,23 @@ namespace ET.Client
 		public Dictionary<int, Scroll_Item_PetListItem> ScrollItemPetListItems;
 		public List<RolePetInfo> ShowRolePetInfos = new();
 		
+		public UnityEngine.RectTransform EG_MaskRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_MaskRectTransform == null )
+     			{
+		    		this.m_EG_MaskRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Mask");
+     			}
+     			return this.m_EG_MaskRectTransform;
+     		}
+     	}
+
 		public UnityEngine.UI.LoopVerticalScrollRect E_PetListItemsLoopVerticalScrollRect
      	{
      		get
@@ -30,23 +47,6 @@ namespace ET.Client
 		    		this.m_E_PetListItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_PetListItems");
      			}
      			return this.m_E_PetListItemsLoopVerticalScrollRect;
-     		}
-     	}
-
-		public UnityEngine.RectTransform EG_MaskRectTransform
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_EG_MaskRectTransform == null )
-     			{
-		    		this.m_EG_MaskRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_Mask");
-     			}
-     			return this.m_EG_MaskRectTransform;
      		}
      	}
 
@@ -1242,8 +1242,8 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_E_PetListItemsLoopVerticalScrollRect = null;
 			this.m_EG_MaskRectTransform = null;
+			this.m_E_PetListItemsLoopVerticalScrollRect = null;
 			this.m_EG_RightRectTransform = null;
 			this.m_E_PetRawImageButton = null;
 			this.m_E_PetRawImageRawImage = null;
@@ -1317,8 +1317,8 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetListItemsLoopVerticalScrollRect = null;
 		private UnityEngine.RectTransform m_EG_MaskRectTransform = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetListItemsLoopVerticalScrollRect = null;
 		private UnityEngine.RectTransform m_EG_RightRectTransform = null;
 		private UnityEngine.UI.Button m_E_PetRawImageButton = null;
 		private UnityEngine.UI.RawImage m_E_PetRawImageRawImage = null;

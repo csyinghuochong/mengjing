@@ -542,7 +542,7 @@ namespace ET.Client
                 self.EG_MaskRectTransform.gameObject.SetActive(true);
                 self.EG_MaskRectTransform.transform.Find("Img_PetIcon").GetComponent<Image>().sprite =
                         self.ScrollItemPetListItems[index1].E_Img_PetHeroIonImage.sprite;
-                self.EG_MaskRectTransform.transform.SetParent(self.Root().GetComponent<GlobalComponent>().PopUpRoot);
+                // self.EG_MaskRectTransform.transform.SetParent(self.Root().GetComponent<GlobalComponent>().PopUpRoot);
                 self.EG_MaskRectTransform.transform.localScale = Vector3.one;
             }
         }
@@ -600,7 +600,7 @@ namespace ET.Client
                     break;
                 }
 
-                self.EG_MaskRectTransform.transform.SetParent(self.uiTransform);
+                // self.EG_MaskRectTransform.transform.SetParent(self.uiTransform);
                 self.EG_MaskRectTransform.gameObject.SetActive(false);
             }
             else
