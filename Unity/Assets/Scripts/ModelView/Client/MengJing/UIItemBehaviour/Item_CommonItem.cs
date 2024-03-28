@@ -35,11 +35,6 @@ namespace ET.Client
      			}
      			return this.m_es_commonitem;
      		}
-
-	        set
-	        {
-		        this.m_es_commonitem = value;
-	        }
      	}
 
 		public void DestroyWidget()
@@ -49,7 +44,7 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private EntityRef<ES_CommonItem> m_es_commonitem = null;
+		public EntityRef<ES_CommonItem> m_es_commonitem = null;
 		public Transform uiTransform = null;
 	}
 }
