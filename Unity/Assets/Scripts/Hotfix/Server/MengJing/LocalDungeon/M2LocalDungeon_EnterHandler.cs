@@ -24,6 +24,7 @@ namespace ET.Server
                      response.FubenInstanceId = fubenInstanceId;
                      response.RootId = scene.Fiber().Id;
                      response.Process = scene.Fiber().Process;
+                     localDungeon.GenerateFubenScene(request.SceneId);
                      TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
                      break;
                  case SceneTypeEnum.Battle:
