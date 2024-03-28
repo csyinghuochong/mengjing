@@ -180,7 +180,7 @@ namespace ET.Client
             self.UpdateAttribute(rolePetInfo);
             self.UpdateExpAndLv(rolePetInfo);
             self.UpdatePetZizhi(rolePetInfo);
-            // self.UpdatePetSkin(rolePetInfo);
+            self.UpdatePetSkin(rolePetInfo);
             // self.UpdateSkillList(rolePetInfo);
 
             self.E_Text_PetPingFenText.text = PetHelper.PetPingJia(rolePetInfo).ToString();
@@ -340,40 +340,31 @@ namespace ET.Client
 
         private static void UpdatePetSkin(this ES_PetList self, RolePetInfo rolePetInfo)
         {
-            // if (self.LastSelectItem == null)
-            // {
-            //     return;
-            // }
-            //
-            // self.PetSkinList.Clear();
-            // UICommonHelper.DestoryChild(self.ScrollViewSkin);
-            // PetConfig petConfig = PetConfigCategory.Instance.Get(self.LastSelectItem.ConfigId);
-            //
-            // int selectIndex = 0;
-            // var path = ABPathHelper.GetUGUIPath("Main/Pet/UIPetSkinIcon");
-            // var bundleGameObject = ResourcesComponent.Instance.LoadAsset<GameObject>(path);
-            // PetComponent petComponent = self.ZoneScene().GetComponent<PetComponent>();
-            // for (int i = 0; i < petConfig.Skin.Length; i++)
-            // {
-            //     if (petConfig.Skin[i] == 0)
-            //     {
-            //         continue;
-            //     }
-            //
-            //     if (petConfig.Skin[i] == rolePetInfo.SkinId)
-            //     {
-            //         selectIndex = i;
-            //     }
-            //
-            //     GameObject bagSpace = GameObject.Instantiate(bundleGameObject);
-            //     UICommonHelper.SetParent(bagSpace, self.ScrollViewSkin);
-            //     UIPetSkinIconComponent uIPetSkinIcon = self.AddChild<UIPetSkinIconComponent, GameObject>(bagSpace);
-            //     uIPetSkinIcon.OnUpdateUI(petConfig.Skin[i], petConfig.Skin[i] == self.LastSelectItem.SkinId);
-            //     uIPetSkinIcon.SetClickHandler(self.OnSelectSkinHandler);
-            //     self.PetSkinList.Add(uIPetSkinIcon);
-            // }
-            //
-            // self.PetSkinList[selectIndex].OnImage_ItemButton();
+            if (self.LastSelectItem == null)
+            {
+                return;
+            }
+            
+            PetConfig petConfig = PetConfigCategory.Instance.Get(self.LastSelectItem.ConfigId);
+            int selectIndex = 0;
+            for (int i = 0; i < petConfig.Skin.Length; i++)
+            {
+                if (petConfig.Skin[i] == 0)
+                {
+                    continue;
+                }
+
+                if (petConfig.Skin[i] == rolePetInfo.SkinId)
+                {
+                    selectIndex = i;
+                }
+            }
+            
+            self.ShowPetSkins = petConfig.Skin;
+            self.AddUIScrollItems(ref self.ScrollItemPetSkinIconItems, self.ShowPetSkins.Length);
+            
+
+            // self.ScrollItemPetSkinIconItems[selectIndex].OnImage_ItemButton();
         }
 
         private static void UpdateSkillList(this ES_PetList self, RolePetInfo rolePetInfo)

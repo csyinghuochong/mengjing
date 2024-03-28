@@ -15,6 +15,8 @@ namespace ET.Client
 		public RolePetInfo LastSelectItem;
 		public Dictionary<int, Scroll_Item_PetListItem> ScrollItemPetListItems;
 		public List<RolePetInfo> ShowRolePetInfos = new();
+		public Dictionary<int, Scroll_Item_PetSkinIconItem> ScrollItemPetSkinIconItems;
+		public int[] ShowPetSkins;
 		
 		public UnityEngine.RectTransform EG_MaskRectTransform
      	{
