@@ -64,7 +64,7 @@ namespace ET.Server
                         int sceneTypeEnum = mapComponent.SceneType;
                         long fubenid = IdGenerater.Instance.GenerateId();
                         long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-                        
+                 
                         Scene fubnescene = await GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "PetFuben" + fubenid.ToString());
                         fubnescene.AddComponent<PetFubenComponent>();
                         fubnescene.GetComponent<MapComponent>().SetMapInfo((int)SceneTypeEnum.PetDungeon, request.SceneId, int.Parse(request.paramInfo));
@@ -461,7 +461,6 @@ namespace ET.Server
              
              Log.Debug("M2LocalDungeon_EnterRequest_2");
              
-             
              LocalDungeon2M_EnterResponse createUnit = (LocalDungeon2M_EnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
                          startSceneConfig.ActorId, new M2LocalDungeon_EnterRequest()
                          { 
@@ -474,17 +473,20 @@ namespace ET.Server
              }
 
              TransferHelper.BeforeTransfer(unit);
+             
+             Log.Debug($"M2LocalDungeon_EnterRequest_2:{createUnit.Process} {createUnit.RootId} {createUnit.FubenInstanceId}");
+             
              ActorId FubenInstanceId =  new ActorId(createUnit.Process, createUnit.RootId, createUnit.FubenInstanceId);
              await TransferHelper.Transfer(unit, FubenInstanceId, (int)SceneTypeEnum.LocalDungeon, sceneId, difficulty, transferId.ToString());
 
              //移除旧scene
-             Scene scene = unit.Root().GetChild<Scene>(oldsceneid);
-             if (scene.GetComponent<LocalDungeonComponent>() != null)
-             {
-                 //动态删除副本
-                 TransferHelper.NoticeFubenCenter(scene, 2).Coroutine();
-                 scene.Dispose();
-             }
+             // Scene scene = unit.Root().GetChild<Scene>(oldsceneid);
+             // if (scene.GetComponent<LocalDungeonComponent>() != null)
+             // {
+             //     //动态删除副本
+             //     TransferHelper.NoticeFubenCenter(scene, 2).Coroutine();
+             //     scene.Dispose();
+             // }
              return ErrorCode.ERR_Success;   
          }
         

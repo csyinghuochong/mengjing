@@ -35,7 +35,6 @@ namespace ET.Server
         
         public static void SendToClient(Unit unit, IMessage message)
         {
-            Log.Debug($"M2M_UnitTransferRequest:{unit.Id}");
             unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(unit.GateSessionActorId, message);
         }
         

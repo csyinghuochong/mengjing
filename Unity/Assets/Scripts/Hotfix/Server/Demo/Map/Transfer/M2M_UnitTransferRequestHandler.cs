@@ -30,6 +30,7 @@ namespace ET.Server
                 }
             }
             Log.Debug($"M2M_UnitTransferRequest:2");
+            
             unit.AddComponent<MoveComponent>();
             unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
             unit.GetComponent<DBSaveComponent>().Activeted();
@@ -47,10 +48,14 @@ namespace ET.Server
             
             //TransferHelper.AfterTransfer();
             
+            
+            Log.Debug($"M2M_UnitTransferRequest:3");
             // 通知客户端开始切场景
             M2C_StartSceneChange m2CStartSceneChange = new() { SceneInstanceId = scene.InstanceId, SceneName = request.SceneId.ToString() };
             MapMessageHelper.SendToClient(unit, m2CStartSceneChange);
 
+            Log.Debug($"M2M_UnitTransferRequest:4");
+            
             // 通知客户端创建My Unit
             M2C_CreateMyUnit m2CCreateUnits = new();
             m2CCreateUnits.Unit = UnitHelper.CreateUnitInfo(unit);

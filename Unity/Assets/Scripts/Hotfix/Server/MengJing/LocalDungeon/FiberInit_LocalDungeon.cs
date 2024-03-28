@@ -14,7 +14,8 @@ namespace ET.Server
             root.AddComponent<ProcessInnerSender>();
             root.AddComponent<MessageSender>();
             root.AddComponent<LocationManagerComoponent>();
-
+            root.AddComponent<MessageLocationSenderComponent>();
+            root.AddComponent<LocationProxyComponent>();
             await ETTask.CompletedTask;
         }
     }
