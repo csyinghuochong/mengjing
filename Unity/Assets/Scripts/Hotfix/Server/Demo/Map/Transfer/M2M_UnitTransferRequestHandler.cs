@@ -31,14 +31,14 @@ namespace ET.Server
             }
             Log.Debug($"M2M_UnitTransferRequest:2");
             unit.AddComponent<MoveComponent>();
-            unit.AddComponent<PathfindingComponent, string>(scene.Name);
+            unit.AddComponent<PathfindingComponent, int>(101);
             unit.Position = new float3(-10, 0, -10);
 
             unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
             unit.GetComponent<DBSaveComponent>().Activeted();
 
             // 通知客户端开始切场景
-            M2C_StartSceneChange m2CStartSceneChange = new() { SceneInstanceId = scene.InstanceId, SceneName = scene.Name };
+            M2C_StartSceneChange m2CStartSceneChange = new() { SceneInstanceId = scene.InstanceId, SceneName = "101" };
             MapMessageHelper.SendToClient(unit, m2CStartSceneChange);
 
             // 通知客户端创建My Unit

@@ -13,10 +13,10 @@ namespace ET
     public static partial class PathfindingComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this PathfindingComponent self, string name)
+        private static void Awake(this PathfindingComponent self, int name)
         {
             self.Name = name;
-            byte[] buffer = NavmeshComponent.Instance.Get(name);
+            byte[] buffer = NavmeshComponent.Instance.Get(name.ToString());
             
             DtMeshSetReader reader = new();
             using MemoryStream ms = new(buffer);
@@ -35,7 +35,7 @@ namespace ET
         [EntitySystem]
         private static void Destroy(this PathfindingComponent self)
         {
-            self.Name = string.Empty;
+            self.Name = 0;
             self.navMesh = null;
         }
         
