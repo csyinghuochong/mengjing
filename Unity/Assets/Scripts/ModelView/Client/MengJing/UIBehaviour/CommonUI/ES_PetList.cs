@@ -6,7 +6,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetList : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy ,IUILogic
+	public  class ES_PetList : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public GameObject[] PetZiZhiItemList = new GameObject[6];
 		public long ClickTime;
@@ -681,6 +681,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.LoopVerticalScrollRect E_PetSkinIconItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_PetSkinIconItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_PetSkinIconItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_Right/EG_AttributeNode/EG_PetPiFuSet/E_PetSkinIconItems");
+     			}
+     			return this.m_E_PetSkinIconItemsLoopVerticalScrollRect;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_ButtonUseSkinButton
      	{
      		get
@@ -1283,6 +1300,7 @@ namespace ET.Client
 			this.m_E_PetSkinRawImageButton = null;
 			this.m_E_PetSkinRawImageRawImage = null;
 			this.m_E_PetSkinRawImageEventTrigger = null;
+			this.m_E_PetSkinIconItemsLoopVerticalScrollRect = null;
 			this.m_E_ButtonUseSkinButton = null;
 			this.m_E_ButtonUseSkinImage = null;
 			this.m_E_PropertyShowTextText = null;
@@ -1358,6 +1376,7 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_PetSkinRawImageButton = null;
 		private UnityEngine.UI.RawImage m_E_PetSkinRawImageRawImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_PetSkinRawImageEventTrigger = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetSkinIconItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_ButtonUseSkinButton = null;
 		private UnityEngine.UI.Image m_E_ButtonUseSkinImage = null;
 		private UnityEngine.UI.Text m_E_PropertyShowTextText = null;

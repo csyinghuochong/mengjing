@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_PetSkinIconItem))]
     [FriendOf(typeof (Scroll_Item_PetListItem))]
     [FriendOf(typeof (PetComponentC))]
     [EntitySystemOf(typeof (ES_PetList))]
@@ -24,6 +25,7 @@ namespace ET.Client
             self.PetZiZhiItemList[5] = self.EG_PetZiZhiItem6RectTransform.gameObject;
 
             self.E_PetListItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetListItemsRefresh);
+            self.E_PetSkinIconItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetSkinIconItemsRefresh);
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
         }
 
@@ -76,6 +78,46 @@ namespace ET.Client
             scrollItemPetListItem.uiTransform.gameObject.name = $"UIPetListItem_{index}";
 
             scrollItemPetListItem.OnInitData(self.ShowRolePetInfos[index], self.NextPetNumber());
+        }
+
+        private static void OnPetSkinIconItemsRefresh(this ES_PetList self, Transform transform, int index)
+        {
+            Scroll_Item_PetSkinIconItem scrollItemPetSkinIconItem = self.ScrollItemPetSkinIconItems[index].BindTrans(transform);
+            scrollItemPetSkinIconItem.OnUpdateUI(self.ShowPetSkins[index], self.ShowPetSkins[index] == self.LastSelectItem.SkinId);
+            scrollItemPetSkinIconItem.SetClickHandler(self.OnSelectSkinHandler);
+        }
+
+        private static void OnSelectSkinHandler(this ES_PetList self, int skinId)
+        {
+            self.PetSkinId = skinId;
+            for (int i = 0; i < self.ScrollItemPetSkinIconItems.Count; i++)
+            {
+                if (self.ScrollItemPetSkinIconItems[i].uiTransform != null)
+                {
+                    self.ScrollItemPetSkinIconItems[i].OnSelected(skinId);
+                }
+            }
+
+            PetSkinConfig petConfig = PetSkinConfigCategory.Instance.Get(skinId);
+            // if (self.SkinModelShowComponent != null)
+            // {
+            //     self.SkinModelShowComponent.GetComponent<UIModelShowComponent>().ShowOtherModel("Pet/" + petConfig.SkinID.ToString(), true)
+            //             .Coroutine();
+            // }
+
+            self.E_SkinJiHuoImage.gameObject.SetActive(self.LastSelectItem.SkinId == self.PetSkinId);
+            self.E_SkinWeiJiHuoImage.gameObject.SetActive(!self.E_SkinJiHuoImage.gameObject.activeSelf);
+
+            //显示激活属性
+            if (petConfig.PripertyShow != "" && petConfig.PripertyShow != "0")
+            {
+                self.E_PropertyShowTextText.gameObject.SetActive(true);
+                self.E_PropertyShowTextText.text = GameSettingLanguge.LoadLocalization("激活属性") + ":" + petConfig.PripertyShow;
+            }
+            else
+            {
+                self.E_PropertyShowTextText.gameObject.SetActive(false);
+            }
         }
 
         private static void RefreshCreateRoleItems(this ES_PetList self)
@@ -344,7 +386,7 @@ namespace ET.Client
             {
                 return;
             }
-            
+
             PetConfig petConfig = PetConfigCategory.Instance.Get(self.LastSelectItem.ConfigId);
             int selectIndex = 0;
             for (int i = 0; i < petConfig.Skin.Length; i++)
@@ -359,12 +401,12 @@ namespace ET.Client
                     selectIndex = i;
                 }
             }
-            
+
             self.ShowPetSkins = petConfig.Skin;
             self.AddUIScrollItems(ref self.ScrollItemPetSkinIconItems, self.ShowPetSkins.Length);
-            
+            self.E_PetSkinIconItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPetSkins.Length);
 
-            // self.ScrollItemPetSkinIconItems[selectIndex].OnImage_ItemButton();
+            self.ScrollItemPetSkinIconItems[selectIndex].OnImage_ItemButton();
         }
 
         private static void UpdateSkillList(this ES_PetList self, RolePetInfo rolePetInfo)
