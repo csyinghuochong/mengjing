@@ -28,17 +28,17 @@ namespace ET.Client
             self.E_PetHeXinItem0Image.transform.Find("Node_1/ButtonAdd").GetComponent<Button>().AddListener(() =>
             {
                 self.OnChangeNode(2);
-                // self.OnButtonPetHeXinItem(0);
+                self.OnButtonPetHeXinItem(0);
             });
             self.E_PetHeXinItem1Image.transform.Find("Node_1/ButtonAdd").GetComponent<Button>().AddListener(() =>
             {
                 self.OnChangeNode(2);
-                // self.OnButtonPetHeXinItem(1);
+                self.OnButtonPetHeXinItem(1);
             });
             self.E_PetHeXinItem2Image.transform.Find("Node_1/ButtonAdd").GetComponent<Button>().AddListener(() =>
             {
                 self.OnChangeNode(2);
-                // self.OnButtonPetHeXinItem(2);
+                self.OnButtonPetHeXinItem(2);
             });
 
             self.E_PetHeXinItem0Image.transform.Find("ImageSelect").gameObject.SetActive(false);
@@ -357,19 +357,129 @@ namespace ET.Client
             self.EG_PetAddPointRectTransform.gameObject.SetActive(nodetype == 3);
         }
 
-        // public static void OnButtonPetHeXinItem(this ES_PetList self, int position)
-        // {
-        //     List<BagInfo> bagInfos = self.ZoneScene().GetComponent<BagComponent>().GetItemsByLoc(ItemLocType.ItemPetHeXinBag);
-        //     List<BagInfo> eqipInfos = self.ZoneScene().GetComponent<BagComponent>().GetItemsByLoc(ItemLocType.ItemPetHeXinEquip);
-        //     for (int i = 0; i < self.PetHeXinItemList.Length; i++)
-        //     {
-        //         self.PetHeXinItemList[i].transform.Find("ImageSelect").gameObject.SetActive(i == position);
-        //     }
-        //
-        //     self.PetHeXinSetComponent.OnUpdateUI(self.LastSelectItem, position);
-        //     self.PetHeXinSetComponent.UpdatePetHexinItem(eqipInfos);
-        //     self.PetHeXinSetComponent.OnUpdateItemList(bagInfos);
-        // }
+        public static void OnButtonPetHeXinItem(this ES_PetList self, int position)
+        {
+            List<BagInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinBag);
+            List<BagInfo> eqipInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinEquip);
+            for (int i = 0; i < self.PetHeXinItemList.Length; i++)
+            {
+                self.PetHeXinItemList[i].transform.Find("ImageSelect").gameObject.SetActive(i == position);
+            }
+
+            self.BagInfo = null;
+            self.Position = position;
+            self.UpdatePetHexinItem(eqipInfos);
+            self.OnUpdateItemList(bagInfos);
+        }
+
+        private static void UpdatePetHexinItem(this ES_PetList self, List<BagInfo> bagInfos)
+        {
+            // self.ButtonHeXinHeCheng.SetActive(true);
+            // self.ButtonEquipXieXia.GetComponent<Button>().onClick.RemoveAllListeners();
+            // ButtonHelp.AddListenerEx(self.ButtonEquipXieXia, () => { self.OnButtonEquipXieXia().Coroutine(); });
+            // List<string> TypeNames = new List<string>() { "进攻能量", "守护能量", "生命能量" };
+            // self.TextType.GetComponent<Text>().text = TypeNames[self.Position];
+            //
+            // UICommonHelper.DestoryChild(self.AttributeListNode);
+            // long baginfoId = self.RolePetInfo.PetHeXinList[self.Position];
+            // BagInfo bagInfo = null;
+            // for (int i = 0; i < bagInfos.Count; i++)
+            // {
+            //     if (bagInfos[i].BagInfoID == baginfoId)
+            //     {
+            //         bagInfo = bagInfos[i];
+            //     }
+            // }
+            //
+            // self.ImageIcon.SetActive(bagInfo != null);
+            // self.ButtonEquipXieXia.SetActive(bagInfo != null);
+            // if (bagInfo == null)
+            // {
+            //     self.TextName.GetComponent<Text>().text = "空";
+            //     self.TextLevel.GetComponent<Text>().text = "等级: 0";
+            //     return;
+            // }
+            //
+            // ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+            // self.TextName.GetComponent<Text>().text = itemConfig.ItemName;
+            // self.TextLevel.GetComponent<Text>().text = $"等级: {itemConfig.UseLv}";
+            // string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+            // Sprite sp = ResourcesComponent.Instance.LoadAsset<Sprite>(path);
+            // if (!self.AssetPath.Contains(path))
+            // {
+            //     self.AssetPath.Add(path);
+            // }
+            //
+            // self.ImageIcon.GetComponent<Image>().sprite = sp;
+            //
+            // self.ShowAttributeItemList(itemConfig.ItemUsePar, self.AttributeListNode, self.TextAttributeItem);
+        }
+
+        private static void OnUpdateItemList(this ES_PetList self, List<BagInfo> bagInfos)
+        {
+            // self.BagInfo = null;
+            // long instanceid = self.InstanceId;
+            // var path = ABPathHelper.GetUGUIPath("Main/Common/UICommonItem");
+            // var bundleGameObject = ResourcesComponent.Instance.LoadAsset<GameObject>(path);
+            // if (instanceid != self.InstanceId)
+            // {
+            //     return;
+            // }
+            //
+            // int number = 0;
+            // self.uIItems.Clear();
+            // UICommonHelper.DestoryChild(self.PetHeXinListNode);
+            // List<BagInfo> petHeXins = new List<BagInfo>();
+            // for (int i = 0; i < bagInfos.Count; i++)
+            // {
+            //     ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
+            //
+            //     if (itemConfig.ItemSubType - 1 != self.Position)
+            //     {
+            //         continue;
+            //     }
+            //
+            //     petHeXins.Add(bagInfos[i]);
+            // }
+            //
+            // petHeXins.Sort((bagInfo1, bagInfo2) =>
+            // {
+            //     ItemConfig itemConfig1 = ItemConfigCategory.Instance.Get(bagInfo1.ItemID);
+            //     ItemConfig itemConfig2 = ItemConfigCategory.Instance.Get(bagInfo2.ItemID);
+            //     return itemConfig2.UseLv - itemConfig1.UseLv;
+            // });
+            //
+            // for (int i = 0; i < petHeXins.Count; i++)
+            // {
+            //     ItemConfig itemConfig = ItemConfigCategory.Instance.Get(petHeXins[i].ItemID);
+            //
+            //     UIItemComponent uIItemComponent = null;
+            //     if (number < self.uIItems.Count)
+            //     {
+            //         uIItemComponent = self.uIItems[number];
+            //         uIItemComponent.GameObject.SetActive(true);
+            //     }
+            //     else
+            //     {
+            //         GameObject gameObject = UnityEngine.Object.Instantiate(bundleGameObject);
+            //         UICommonHelper.SetParent(gameObject, self.PetHeXinListNode);
+            //         gameObject.transform.localScale = Vector3.one;
+            //         uIItemComponent = self.AddChild<UIItemComponent, GameObject>(gameObject);
+            //         uIItemComponent.HideItemName();
+            //         self.uIItems.Add(uIItemComponent);
+            //     }
+            //
+            //     uIItemComponent.UpdateItem(petHeXins[i], ItemOperateEnum.PetHeXinBag);
+            //     uIItemComponent.SetClickHandler(self.SelectItemHandlder);
+            //     uIItemComponent.Label_ItemNum.GetComponent<Text>().text = $"{itemConfig.UseLv}级";
+            //     number++;
+            // }
+            //
+            // for (int i = number; i < self.uIItems.Count; i++)
+            // {
+            //     self.uIItems[i].GameObject.SetActive(false);
+            // }
+        }
 
         private static void OnUpdatePetInfo(this ES_PetList self, RolePetInfo rolePetInfo)
         {

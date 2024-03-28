@@ -23,6 +23,10 @@ namespace ET.Client
 		public int UnactiveId;
 		public int UnactiveNum;
 		
+		public int Position;
+		public int Type;
+		public BagInfo BagInfo;
+		
 		public UnityEngine.RectTransform EG_MaskRectTransform
      	{
      		get
