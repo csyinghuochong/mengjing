@@ -60,20 +60,20 @@ namespace ET.Client
             scrollItemPetListItem.SetClickHandler((long petId) => { self.OnClickPetHandler(petId); });
 
             scrollItemPetListItem.E_ImageDiButtonButton.gameObject.SetActive(false);
-            scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.gameObject.SetActive(true);
-            int i1 = index;
-            scrollItemPetListItem.uiTransform.gameObject.name = $"UIPetListItem_{i1}";
 
             scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
                 (pdata) => { self.OnPointerDown(pdata as PointerEventData); });
             scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.RegisterEvent(EventTriggerType.PointerUp,
-                (pdata) => { self.OnPointerUp(pdata as PointerEventData, i1); });
+                (pdata) => { self.OnPointerUp(pdata as PointerEventData, index); });
             scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.RegisterEvent(EventTriggerType.BeginDrag,
-                (pdata) => { self.OnBeginDrag(pdata as PointerEventData, i1); });
+                (pdata) => { self.OnBeginDrag(pdata as PointerEventData, index); });
             scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.RegisterEvent(EventTriggerType.Drag,
                 (pdata) => { self.OnDraging(pdata as PointerEventData); });
             scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.RegisterEvent(EventTriggerType.EndDrag,
-                (pdata) => { self.OnEndDrag(pdata as PointerEventData, i1); });
+                (pdata) => { self.OnEndDrag(pdata as PointerEventData, index); });
+            scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.gameObject.SetActive(true);
+
+            scrollItemPetListItem.uiTransform.gameObject.name = $"UIPetListItem_{index}";
 
             scrollItemPetListItem.OnInitData(self.ShowRolePetInfos[index], self.NextPetNumber());
         }

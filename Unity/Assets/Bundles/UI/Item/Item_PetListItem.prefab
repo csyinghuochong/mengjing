@@ -1214,6 +1214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2583136549912446326}
   - component: {fileID: 7366008966243832710}
+  - component: {fileID: 8355585390007620489}
   m_Layer: 5
   m_Name: Item_PetListItem
   m_TagString: Untagged
@@ -1302,6 +1303,26 @@ MonoBehaviour:
     gameObject: {fileID: 8242377212668563691}
   - key: ImageDiEventTrigger
     gameObject: {fileID: 6782425814526355265}
+--- !u!114 &8355585390007620489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2583136549890417874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 390
+  m_PreferredHeight: 140
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &3380299063808425606
 GameObject:
   m_ObjectHideFlags: 0
