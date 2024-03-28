@@ -69,7 +69,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_PetRawImageButton
+		public ES_ModelShow ES_ModelShow
      	{
      		get
      		{
@@ -78,45 +78,12 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_PetRawImageButton == null )
+     			if( this.m_es_modelshow == null )
      			{
-		    		this.m_E_PetRawImageButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Right/E_PetRawImage");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Right/ES_ModelShow");
+		    	   this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
      			}
-     			return this.m_E_PetRawImageButton;
-     		}
-     	}
-
-		public UnityEngine.UI.RawImage E_PetRawImageRawImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_PetRawImageRawImage == null )
-     			{
-		    		this.m_E_PetRawImageRawImage = UIFindHelper.FindDeepChild<UnityEngine.UI.RawImage>(this.uiTransform.gameObject,"EG_Right/E_PetRawImage");
-     			}
-     			return this.m_E_PetRawImageRawImage;
-     		}
-     	}
-
-		public UnityEngine.EventSystems.EventTrigger E_PetRawImageEventTrigger
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_PetRawImageEventTrigger == null )
-     			{
-		    		this.m_E_PetRawImageEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"EG_Right/E_PetRawImage");
-     			}
-     			return this.m_E_PetRawImageEventTrigger;
+     			return this.m_es_modelshow;
      		}
      	}
 
@@ -1264,9 +1231,7 @@ namespace ET.Client
 			this.m_EG_MaskRectTransform = null;
 			this.m_E_PetListItemsLoopVerticalScrollRect = null;
 			this.m_EG_RightRectTransform = null;
-			this.m_E_PetRawImageButton = null;
-			this.m_E_PetRawImageRawImage = null;
-			this.m_E_PetRawImageEventTrigger = null;
+			this.m_es_modelshow = null;
 			this.m_EG_ImagePetStarRectTransform = null;
 			this.m_E_ButtonRNameButton = null;
 			this.m_E_ButtonRNameImage = null;
@@ -1340,9 +1305,7 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_MaskRectTransform = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetListItemsLoopVerticalScrollRect = null;
 		private UnityEngine.RectTransform m_EG_RightRectTransform = null;
-		private UnityEngine.UI.Button m_E_PetRawImageButton = null;
-		private UnityEngine.UI.RawImage m_E_PetRawImageRawImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_PetRawImageEventTrigger = null;
+		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		private UnityEngine.RectTransform m_EG_ImagePetStarRectTransform = null;
 		private UnityEngine.UI.Button m_E_ButtonRNameButton = null;
 		private UnityEngine.UI.Image m_E_ButtonRNameImage = null;

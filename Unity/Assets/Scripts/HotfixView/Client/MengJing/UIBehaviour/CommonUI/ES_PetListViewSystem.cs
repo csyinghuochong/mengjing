@@ -99,11 +99,9 @@ namespace ET.Client
             }
 
             PetSkinConfig petConfig = PetSkinConfigCategory.Instance.Get(skinId);
-            // if (self.SkinModelShowComponent != null)
-            // {
-            //     self.SkinModelShowComponent.GetComponent<UIModelShowComponent>().ShowOtherModel("Pet/" + petConfig.SkinID.ToString(), true)
-            //             .Coroutine();
-            // }
+
+            self.ES_ModelShow.SetPosition(new Vector3(1 * 1000, 0, 0), new Vector3(0f, 115, 257f));
+            self.ES_ModelShow.ShowOtherModel("Pet/" + petConfig.SkinID.ToString(), true).Coroutine();
 
             self.E_SkinJiHuoImage.gameObject.SetActive(self.LastSelectItem.SkinId == self.PetSkinId);
             self.E_SkinWeiJiHuoImage.gameObject.SetActive(!self.E_SkinJiHuoImage.gameObject.activeSelf);
