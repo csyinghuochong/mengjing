@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_CommonSkillItem))]
     [FriendOf(typeof (Scroll_Item_PetSkinIconItem))]
     [FriendOf(typeof (Scroll_Item_PetListItem))]
     [FriendOf(typeof (PetComponentC))]
     [EntitySystemOf(typeof (ES_PetList))]
-    [FriendOfAttribute(typeof (ES_PetList))]
+    [FriendOf(typeof (ES_PetList))]
     public static partial class ES_PetListSystem
     {
         [EntitySystem]
@@ -26,6 +27,7 @@ namespace ET.Client
 
             self.E_PetListItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetListItemsRefresh);
             self.E_PetSkinIconItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetSkinIconItemsRefresh);
+            self.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
         }
 
@@ -85,6 +87,15 @@ namespace ET.Client
             Scroll_Item_PetSkinIconItem scrollItemPetSkinIconItem = self.ScrollItemPetSkinIconItems[index].BindTrans(transform);
             scrollItemPetSkinIconItem.OnUpdateUI(self.ShowPetSkins[index], self.ShowPetSkins[index] == self.LastSelectItem.SkinId);
             scrollItemPetSkinIconItem.SetClickHandler(self.OnSelectSkinHandler);
+        }
+
+        private static void OnCommonSkillItemsRefresh(this ES_PetList self, Transform transform, int index)
+        {
+            Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
+            bool unactive = self.ShowPetSkills[index] == self.UnactiveId;
+            scrollItemCommonSkillItem.OnUpdatePetSkill(self.ShowPetSkills[index], ABAtlasTypes.PetSkillIcon,
+                self.LastSelectItem.LockSkill.Contains(self.ShowPetSkills[index]), unactive, self.UnactiveNum);
+            UICommonHelper.SetImageGray(self.Root(), scrollItemCommonSkillItem.E_ImageIconImage.gameObject, unactive);
         }
 
         private static void OnSelectSkinHandler(this ES_PetList self, int skinId)
@@ -221,7 +232,7 @@ namespace ET.Client
             self.UpdateExpAndLv(rolePetInfo);
             self.UpdatePetZizhi(rolePetInfo);
             self.UpdatePetSkin(rolePetInfo);
-            // self.UpdateSkillList(rolePetInfo);
+            self.UpdateSkillList(rolePetInfo);
 
             self.E_Text_PetPingFenText.text = PetHelper.PetPingJia(rolePetInfo).ToString();
 
@@ -409,73 +420,45 @@ namespace ET.Client
 
         private static void UpdateSkillList(this ES_PetList self, RolePetInfo rolePetInfo)
         {
-            // var path = ABPathHelper.GetUGUIPath("Main/Common/UICommonSkillItem");
-            // var bundleGameObject = ResourcesComponent.Instance.LoadAsset<GameObject>(path);
-            //
-            // PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
-            // List<int> zhuanzhuids = new List<int>();
-            // string[] zhuanzhuskills = petConfig.ZhuanZhuSkillID.Split(';');
-            // for (int i = 0; i < zhuanzhuskills.Length; i++)
-            // {
-            //     if (zhuanzhuskills[i].Length > 1)
-            //     {
-            //         zhuanzhuids.Add(int.Parse(zhuanzhuskills[i]));
-            //     }
-            // }
-            //
-            // List<int> skills = new List<int>();
-            // for (int i = 0; i < rolePetInfo.PetSkill.Count; i++)
-            // {
-            //     if (zhuanzhuids.Contains(rolePetInfo.PetSkill[i]))
-            //     {
-            //         skills.Insert(0, rolePetInfo.PetSkill[i]);
-            //     }
-            //     else
-            //     {
-            //         skills.Add(rolePetInfo.PetSkill[i]);
-            //     }
-            // }
-            //
-            // int unactiveId = 0;
-            // int unactiveNum = 0;
-            // BagComponent bagComponent = self.ZoneScene().GetComponent<BagComponent>();
-            // Dictionary<int, int> equipSkilllist = PetHelper.GetEquipSkillList(rolePetInfo, bagComponent);
-            // foreach (var item in equipSkilllist)
-            // {
-            //     if (!rolePetInfo.PetSkill.Contains(item.Key))
-            //     {
-            //         unactiveId = item.Key;
-            //         unactiveNum = item.Value;
-            //         skills.Add(item.Key);
-            //         break;
-            //     }
-            // }
-            //
-            // for (int i = 0; i < skills.Count; i++)
-            // {
-            //     UICommonSkillItemComponent ui_item = null;
-            //     if (i < self.PetSkillUIList.Count)
-            //     {
-            //         ui_item = self.PetSkillUIList[i];
-            //         ui_item.GameObject.SetActive(true);
-            //     }
-            //     else
-            //     {
-            //         GameObject bagSpace = GameObject.Instantiate(bundleGameObject);
-            //         UICommonHelper.SetParent(bagSpace, self.PetSkillNode);
-            //         ui_item = self.AddChild<UICommonSkillItemComponent, GameObject>(bagSpace);
-            //         self.PetSkillUIList.Add(ui_item);
-            //     }
-            //
-            //     bool unactive = skills[i] == unactiveId;
-            //     ui_item.OnUpdatePetSkill(skills[i], ABAtlasTypes.PetSkillIcon, rolePetInfo.LockSkill.Contains(skills[i]), unactive, unactiveNum);
-            //     UICommonHelper.SetImageGray(ui_item.ImageIcon, unactive);
-            // }
-            //
-            // for (int i = skills.Count; i < self.PetSkillUIList.Count; i++)
-            // {
-            //     self.PetSkillUIList[i].GameObject.SetActive(false);
-            // }
+            PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
+            List<int> zhuanzhuids = new List<int>();
+            string[] zhuanzhuskills = petConfig.ZhuanZhuSkillID.Split(';');
+            for (int i = 0; i < zhuanzhuskills.Length; i++)
+            {
+                if (zhuanzhuskills[i].Length > 1)
+                {
+                    zhuanzhuids.Add(int.Parse(zhuanzhuskills[i]));
+                }
+            }
+
+            self.ShowPetSkills.Clear();
+            for (int i = 0; i < rolePetInfo.PetSkill.Count; i++)
+            {
+                if (zhuanzhuids.Contains(rolePetInfo.PetSkill[i]))
+                {
+                    self.ShowPetSkills.Insert(0, rolePetInfo.PetSkill[i]);
+                }
+                else
+                {
+                    self.ShowPetSkills.Add(rolePetInfo.PetSkill[i]);
+                }
+            }
+
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            Dictionary<int, int> equipSkilllist = PetHelper.GetEquipSkillList(rolePetInfo, bagComponent.GetItemsByLoc(ItemLocType.PetLocEquip));
+            foreach (var item in equipSkilllist)
+            {
+                if (!rolePetInfo.PetSkill.Contains(item.Key))
+                {
+                    self.UnactiveId = item.Key;
+                    self.UnactiveNum = item.Value;
+                    self.ShowPetSkills.Add(item.Key);
+                    break;
+                }
+            }
+
+            self.AddUIScrollItems(ref self.ScrollItemCommonSkillItems, self.ShowPetSkills.Count);
+            self.E_CommonSkillItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPetSkills.Count);
         }
 
         private static void UpdateAttributeItem(this ES_PetList self, int index, GameObject itemObj, GameObject parentObj, string iconid,

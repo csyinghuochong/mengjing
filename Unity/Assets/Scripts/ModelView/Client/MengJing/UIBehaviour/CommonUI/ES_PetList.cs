@@ -17,6 +17,10 @@ namespace ET.Client
 		public List<RolePetInfo> ShowRolePetInfos = new();
 		public Dictionary<int, Scroll_Item_PetSkinIconItem> ScrollItemPetSkinIconItems;
 		public int[] ShowPetSkins;
+		public Dictionary<int, Scroll_Item_CommonSkillItem> ScrollItemCommonSkillItems;
+		public List<int> ShowPetSkills = new();
+		public int UnactiveId;
+		public int UnactiveNum;
 		
 		public UnityEngine.RectTransform EG_MaskRectTransform
      	{
@@ -577,6 +581,23 @@ namespace ET.Client
 		    		this.m_EG_PetZiZhiItem6RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Right/EG_AttributeNode/EG_PetZiZhiSet/EG_PetZiZhiItem6");
      			}
      			return this.m_EG_PetZiZhiItem6RectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopVerticalScrollRect E_CommonSkillItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CommonSkillItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_CommonSkillItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_Right/EG_AttributeNode/EG_PetZiZhiSet/E_CommonSkillItems");
+     			}
+     			return this.m_E_CommonSkillItemsLoopVerticalScrollRect;
      		}
      	}
 
@@ -1261,6 +1282,7 @@ namespace ET.Client
 			this.m_EG_PetZiZhiItem4RectTransform = null;
 			this.m_EG_PetZiZhiItem5RectTransform = null;
 			this.m_EG_PetZiZhiItem6RectTransform = null;
+			this.m_E_CommonSkillItemsLoopVerticalScrollRect = null;
 			this.m_EG_PetPiFuSetRectTransform = null;
 			this.m_E_PetSkinRawImageButton = null;
 			this.m_E_PetSkinRawImageRawImage = null;
@@ -1335,6 +1357,7 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_PetZiZhiItem4RectTransform = null;
 		private UnityEngine.RectTransform m_EG_PetZiZhiItem5RectTransform = null;
 		private UnityEngine.RectTransform m_EG_PetZiZhiItem6RectTransform = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_CommonSkillItemsLoopVerticalScrollRect = null;
 		private UnityEngine.RectTransform m_EG_PetPiFuSetRectTransform = null;
 		private UnityEngine.UI.Button m_E_PetSkinRawImageButton = null;
 		private UnityEngine.UI.RawImage m_E_PetSkinRawImageRawImage = null;
