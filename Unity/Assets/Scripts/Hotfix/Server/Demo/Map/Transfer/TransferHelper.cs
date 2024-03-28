@@ -433,6 +433,8 @@ namespace ET.Server
         
          public static async ETTask<int> LocalDungeonTransfer(Unit unit, int sceneId, int transferId, int difficulty)
          {
+             
+             Log.Debug("M2LocalDungeon_EnterRequest_1");
              if (transferId != 0 && !DungeonTransferConfigCategory.Instance.Contain(transferId))
              {
                  return ErrorCode.ERR_ModifyData;
@@ -456,7 +458,10 @@ namespace ET.Server
                  Log.Error($"zonelocaldungeonsb:  unitid: {unit.Id}  n: {n}  transferId: {transferId} sceneId: {sceneId} ");
                  return ErrorCode.ERR_NotFindLevel;
              }
-             //Log.Console($"zonelocaldungeonsb:  unitid: {unit.Id}  n: {n}  transferId: {transferId} sceneId: {sceneId} ");
+             
+             Log.Debug("M2LocalDungeon_EnterRequest_2");
+             
+             
              LocalDungeon2M_EnterResponse createUnit = (LocalDungeon2M_EnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
                          startSceneConfig.ActorId, new M2LocalDungeon_EnterRequest()
                          { 
@@ -542,7 +547,7 @@ namespace ET.Server
             request.OldActorId = unit.GetActorId();
             request.Unit = unit.ToBson();
             request.SceneType = sceneType;
-            request.ChapterId = sceneId;
+            request.SceneId = sceneId;
             
             foreach (Entity entity in unit.Components.Values)
             {

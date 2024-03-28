@@ -276,7 +276,7 @@ namespace ET.Client
         private static void OnAdventureButton(this DlgMain self)
         {
             Log.Debug("进入冒险！！！");
-            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, 1).Coroutine();
+            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, 10001).Coroutine();
         }
 
         private static void OnPetFormationButton(this DlgMain self)
