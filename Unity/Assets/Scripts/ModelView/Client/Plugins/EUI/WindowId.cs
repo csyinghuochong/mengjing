@@ -28,5 +28,6 @@ namespace ET.Client
 		WindowID_Task,
 		WindowID_AppraisalSelect,
 		WindowID_Pet,
+		WindowID_SkillTips,
 	}
 }

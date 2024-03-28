@@ -85,28 +85,28 @@ namespace ET.Client
             self.E_ImageIconEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.EndDrag(pdata as PointerEventData); });
         }
 
-        public static async ETTask BeginDrag(this Scroll_Item_CommonSkillItem self, PointerEventData pdata)
+        private static async ETTask BeginDrag(this Scroll_Item_CommonSkillItem self, PointerEventData pdata)
         {
-            // await self.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Chat);
-            //
-            // Vector2 localPoint;
-            // RectTransform canvas = UIEventComponent.Instance.UILayers[(int)UILayer.Mid].gameObject.GetComponent<RectTransform>();
-            // Camera uiCamera = self.DomainScene().GetComponent<UIComponent>().UICamera;
-            // RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
-            // skillTips.GetComponent<UISkillTipsComponent>()
-            //         .OnUpdateData(self.SkillId, new Vector3(localPoint.x, localPoint.y, 0f), self.SkillAtlas, self.addTip);
-            //
-            // if (self.UnActive)
-            // {
-            //     skillTips.GetComponent<UISkillTipsComponent>().ShowUnActive(self.SkillId, self.HaveSkillNum);
-            // }
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SkillTips);
+
+            Vector2 localPoint;
+            RectTransform canvas = self.Root().GetComponent<GlobalComponent>().NormalRoot.GetComponent<RectTransform>();
+            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
+            DlgSkillTips dlgSkillTips = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgSkillTips>();
+            dlgSkillTips.OnUpdateData(self.SkillId, new Vector3(localPoint.x, localPoint.y, 0f), self.SkillAtlas, self.addTip);
+
+            if (self.UnActive)
+            {
+                dlgSkillTips.ShowUnActive(self.SkillId, self.HaveSkillNum);
+            }
+
             await ETTask.CompletedTask;
         }
 
-        public static void EndDrag(this Scroll_Item_CommonSkillItem self, PointerEventData pdata)
+        private static void EndDrag(this Scroll_Item_CommonSkillItem self, PointerEventData pdata)
         {
-            // self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_);
-            // UIHelper.Remove(self.DomainScene(), UIType.UISkillTips);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SkillTips);
             self.SelectAction?.Invoke(self.SkillId);
         }
     }
