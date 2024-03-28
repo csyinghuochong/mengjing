@@ -27,7 +27,9 @@ namespace ET.Client
 		public int Position;
 		public int Type;
 		public BagInfo BagInfo;
-		
+		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public List<BagInfo> ShowBagInfos = new();
+
 		public UnityEngine.RectTransform EG_MaskRectTransform
      	{
      		get
@@ -930,6 +932,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_TextAttributeItemRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_TextAttributeItemRectTransform == null )
+     			{
+		    		this.m_EG_TextAttributeItemRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Right/EG_PetHeXinSet/EG_TextAttributeItem");
+     			}
+     			return this.m_EG_TextAttributeItemRectTransform;
+     		}
+     	}
+
 		public UnityEngine.UI.LoopVerticalScrollRect E_PetHeXinListLoopVerticalScrollRect
      	{
      		get
@@ -1495,6 +1514,7 @@ namespace ET.Client
 			this.m_E_ImageIconImage = null;
 			this.m_E_TextNameText = null;
 			this.m_E_TextLevelText = null;
+			this.m_EG_TextAttributeItemRectTransform = null;
 			this.m_E_PetHeXinListLoopVerticalScrollRect = null;
 			this.m_E_ButtonEquipHeXinButton = null;
 			this.m_E_ButtonEquipHeXinImage = null;
@@ -1581,6 +1601,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_ImageIconImage = null;
 		private UnityEngine.UI.Text m_E_TextNameText = null;
 		private UnityEngine.UI.Text m_E_TextLevelText = null;
+		private UnityEngine.RectTransform m_EG_TextAttributeItemRectTransform = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetHeXinListLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_ButtonEquipHeXinButton = null;
 		private UnityEngine.UI.Image m_E_ButtonEquipHeXinImage = null;

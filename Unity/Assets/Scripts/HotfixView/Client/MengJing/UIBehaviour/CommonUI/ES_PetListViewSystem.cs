@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_CommonItem))]
     [FriendOf(typeof (Scroll_Item_CommonSkillItem))]
     [FriendOf(typeof (Scroll_Item_PetSkinIconItem))]
     [FriendOf(typeof (Scroll_Item_PetListItem))]
@@ -52,6 +53,7 @@ namespace ET.Client
             self.E_PetListItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetListItemsRefresh);
             self.E_PetSkinIconItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetSkinIconItemsRefresh);
             self.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
+            self.E_PetHeXinListLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetHeXinListItemsRefresh);
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
         }
 
@@ -398,7 +400,8 @@ namespace ET.Client
 
             self.E_ImageIconImage.sprite = sp;
 
-            // self.ShowAttributeItemList(itemConfig.ItemUsePar, self.EG_AttributeNodeRectTransform.gameObject, self.TextAttributeItem);
+            self.ShowAttributeItemList(itemConfig.ItemUsePar, self.EG_AttributeNodeRectTransform.gameObject,
+                self.EG_TextAttributeItemRectTransform.gameObject);
         }
 
         private static void ShowAttributeItemList(this ES_PetList self, string itemList, GameObject itemNodeList, GameObject attributeItem)
@@ -443,86 +446,72 @@ namespace ET.Client
 
         private static void OnUpdateItemList(this ES_PetList self, List<BagInfo> bagInfos)
         {
-            // self.BagInfo = null;
-            // long instanceid = self.InstanceId;
-            // var path = ABPathHelper.GetUGUIPath("Main/Common/UICommonItem");
-            // var bundleGameObject = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-            // if (instanceid != self.InstanceId)
-            // {
-            //     return;
-            // }
-            //
-            // int number = 0;
-            // self.uIItems.Clear();
-            // UICommonHelper.DestoryChild(self.PetHeXinListNode);
-            // List<BagInfo> petHeXins = new List<BagInfo>();
-            // for (int i = 0; i < bagInfos.Count; i++)
-            // {
-            //     ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
-            //
-            //     if (itemConfig.ItemSubType - 1 != self.Position)
-            //     {
-            //         continue;
-            //     }
-            //
-            //     petHeXins.Add(bagInfos[i]);
-            // }
-            //
-            // petHeXins.Sort((bagInfo1, bagInfo2) =>
-            // {
-            //     ItemConfig itemConfig1 = ItemConfigCategory.Instance.Get(bagInfo1.ItemID);
-            //     ItemConfig itemConfig2 = ItemConfigCategory.Instance.Get(bagInfo2.ItemID);
-            //     return itemConfig2.UseLv - itemConfig1.UseLv;
-            // });
-            //
-            // for (int i = 0; i < petHeXins.Count; i++)
-            // {
-            //     ItemConfig itemConfig = ItemConfigCategory.Instance.Get(petHeXins[i].ItemID);
-            //
-            //     UIItemComponent uIItemComponent = null;
-            //     if (number < self.uIItems.Count)
-            //     {
-            //         uIItemComponent = self.uIItems[number];
-            //         uIItemComponent.GameObject.SetActive(true);
-            //     }
-            //     else
-            //     {
-            //         GameObject gameObject = UnityEngine.Object.Instantiate(bundleGameObject);
-            //         UICommonHelper.SetParent(gameObject, self.PetHeXinListNode);
-            //         gameObject.transform.localScale = Vector3.one;
-            //         uIItemComponent = self.AddChild<UIItemComponent, GameObject>(gameObject);
-            //         uIItemComponent.HideItemName();
-            //         self.uIItems.Add(uIItemComponent);
-            //     }
-            //
-            //     uIItemComponent.UpdateItem(petHeXins[i], ItemOperateEnum.PetHeXinBag);
-            //     uIItemComponent.SetClickHandler(self.SelectItemHandlder);
-            //     uIItemComponent.Label_ItemNum.GetComponent<Text>().text = $"{itemConfig.UseLv}级";
-            //     number++;
-            // }
-            //
-            // for (int i = number; i < self.uIItems.Count; i++)
-            // {
-            //     self.uIItems[i].GameObject.SetActive(false);
-            // }
+            self.BagInfo = null;
+
+            self.ShowBagInfos.Clear();
+            for (int i = 0; i < bagInfos.Count; i++)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
+
+                if (itemConfig.ItemSubType - 1 != self.Position)
+                {
+                    continue;
+                }
+
+                self.ShowBagInfos.Add(bagInfos[i]);
+            }
+
+            self.ShowBagInfos.Sort((bagInfo1, bagInfo2) =>
+            {
+                ItemConfig itemConfig1 = ItemConfigCategory.Instance.Get(bagInfo1.ItemID);
+                ItemConfig itemConfig2 = ItemConfigCategory.Instance.Get(bagInfo2.ItemID);
+                return itemConfig2.UseLv - itemConfig1.UseLv;
+            });
+
+            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
+            self.E_PetHeXinListLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
-        public static async ETTask OnButtonEquipXieXia(this ES_PetList self)
+        private static void OnPetHeXinListItemsRefresh(this ES_PetList self, Transform transform, int index)
         {
-            // BagComponent bagComponent = self.ZoneScene().GetComponent<BagComponent>();
-            // long baginfoId = self.RolePetInfo.PetHeXinList[self.Position];
-            // BagInfo bagInfo = bagComponent.GetBagInfo(baginfoId);
-            //
-            // C2M_RolePetHeXin c2M_RolePetHeXin = new C2M_RolePetHeXin()
-            // {
-            //     OperateType = 2, BagInfoId = bagInfo.BagInfoID, PetInfoId = self.RolePetInfo.Id, Position = self.Position
-            // };
-            // M2C_RolePetHeXin m2C_RolePetHeXin =
-            //         (M2C_RolePetHeXin)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(c2M_RolePetHeXin);
-            // self.ZoneScene().GetComponent<PetComponent>().OnRolePetUpdate(m2C_RolePetHeXin.RolePetInfo);
-            // self.RolePetInfo = m2C_RolePetHeXin.RolePetInfo;
-            // UI uI = UIHelper.GetUI(self.ZoneScene(), UIType.UIPet);
-            // uI.GetComponent<UIPetComponent>().OnEquipPetHeXin();
+            Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
+            scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.PetHeXinBag);
+            scrollItemCommonItem.ES_CommonItem.SetClickHandler(self.SelectItemHandlder);
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.ShowBagInfos[index].ItemID);
+            scrollItemCommonItem.ES_CommonItem.E_ItemNumText.text = $"{itemConfig.UseLv}级";
+        }
+
+        private static void SelectItemHandlder(this ES_PetList self, BagInfo bagInfo)
+        {
+            self.BagInfo = bagInfo;
+            for (int i = 0; i < self.ScrollItemCommonItems.Count; i++)
+            {
+                if (self.ScrollItemCommonItems[i].uiTransform != null)
+                {
+                    self.ScrollItemCommonItems[i].ES_CommonItem.SetSelected(bagInfo);
+                }
+            }
+        }
+
+        private static async ETTask OnButtonEquipXieXia(this ES_PetList self)
+        {
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            long baginfoId = self.LastSelectItem.PetHeXinList[self.Position];
+            BagInfo bagInfo = bagComponent.GetBagInfo(baginfoId);
+
+            self.LastSelectItem = await PetNetHelper.RequestRolePetHeXin(self.Root(), bagInfo.BagInfoID, self.LastSelectItem.Id, self.Position);
+            self.OnEquipPetHeXin();
+        }
+
+        private static void OnEquipPetHeXin(this ES_PetList self)
+        {
+            List<BagInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinBag);
+            List<BagInfo> eqipInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinEquip);
+            self.UpdatePetHeXin(self.LastSelectItem);
+            self.UpdateAttribute(self.LastSelectItem);
+            self.SelectItemHandlder(null);
+            self.UpdatePetHexinItem(eqipInfos);
+            self.OnUpdateItemList(bagInfos);
         }
 
         private static void OnUpdatePetInfo(this ES_PetList self, RolePetInfo rolePetInfo)

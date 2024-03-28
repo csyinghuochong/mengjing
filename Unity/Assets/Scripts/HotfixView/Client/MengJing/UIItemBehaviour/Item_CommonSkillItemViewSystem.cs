@@ -47,6 +47,7 @@ namespace ET.Client
             self.E_Image_LockImage.gameObject.SetActive(lockSkill);
 
             self.E_BorderImgImage.gameObject.SetActive(false);
+            self.E_ImageIconEventTrigger.triggers.Clear();
             self.E_ImageIconEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
                 (pdata) => { self.BeginDrag(pdata as PointerEventData).Coroutine(); });
             self.E_ImageIconEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.EndDrag(pdata as PointerEventData); });
@@ -106,7 +107,7 @@ namespace ET.Client
 
         private static void EndDrag(this Scroll_Item_CommonSkillItem self, PointerEventData pdata)
         {
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SkillTips);
+            self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_SkillTips);
             self.SelectAction?.Invoke(self.SkillId);
         }
     }
