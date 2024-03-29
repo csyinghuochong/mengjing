@@ -98,8 +98,21 @@ public partial class UICodeSpawner
         strBuilder.AppendFormat("\tpublic  class {0} : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy \r\n", strDlgName)
             .AppendLine("\t{");
         
-       
+        
         CreateWidgetBindCode(ref strBuilder, objPanel.transform);
+        strBuilder.AppendLine("		    public Transform UITransform");
+        strBuilder.AppendLine("         {");
+        strBuilder.AppendLine("     	    get");
+        strBuilder.AppendLine("     	    {");
+        strBuilder.AppendLine("     		    return this.uiTransform;");
+        strBuilder.AppendLine("     	    }");
+        strBuilder.AppendLine("     	    set");
+        strBuilder.AppendLine("     	    {");
+        strBuilder.AppendLine("     		    this.uiTransform = value;");
+        strBuilder.AppendLine("     	    }");
+        strBuilder.AppendLine("         }");
+        strBuilder.AppendLine();
+        
         CreateDestroyWidgetCode(ref strBuilder);
         CreateDeclareCode(ref strBuilder);
         strBuilder.AppendLine("\t\tpublic Transform uiTransform = null;");

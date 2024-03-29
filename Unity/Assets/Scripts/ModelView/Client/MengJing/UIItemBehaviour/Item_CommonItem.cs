@@ -41,12 +41,20 @@ namespace ET.Client
      			{
      				if( this.m_es_commonitem != null )
      				{
+		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem");
 		    			ES_CommonItem es = this.m_es_commonitem;
-     					es.Dispose();
-		    			this.m_es_commonitem = null;
+     					if( es.UITransform != subTrans )
+     					{
+     						es.Dispose();
+		    				this.m_es_commonitem = null;
+		    				this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
+     					}
      				}
-		    		Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem");
-		    		this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
+     				else
+     				{
+		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem");
+		    			this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
+     				}
      				return this.m_es_commonitem;
      			}
      		}

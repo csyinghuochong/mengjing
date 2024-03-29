@@ -2,7 +2,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
@@ -310,6 +309,17 @@ namespace ET.Client
      		}
      	}
 
+		    public Transform UITransform
+         {
+     	    get
+     	    {
+     		    return this.uiTransform;
+     	    }
+     	    set
+     	    {
+     		    this.uiTransform = value;
+     	    }
+         }
 		public void DestroyWidget()
 		{
 			this.m_E_ItemDiButton = null;
