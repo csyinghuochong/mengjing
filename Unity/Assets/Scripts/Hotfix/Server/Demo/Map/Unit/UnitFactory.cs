@@ -94,11 +94,11 @@ namespace ET.Server
              unit.Position = vector3;
              unit.ConfigId = monsterConfig.Id;
              unit.Rotation = quaternion.Euler(0, createMonsterInfo.Rotation, 0);
-             numericComponent.Set(NumericType.BattleCamp, createMonsterInfo.Camp);
-             numericComponent.Set(NumericType.TeamId, master != null ? master.GetTeamId() : 0);
-             numericComponent.Set(NumericType.AttackMode, master!=null ?  master.GetAttackMode() : 0);
-             numericComponent.Set(NumericType.UnionId_0, master != null ? master.GetUnionId() : 0);
-             numericComponent.Set(NumericType.PetSkin, createMonsterInfo.SkinId);
+             numericComponent.SetNoEvent(NumericType.BattleCamp, createMonsterInfo.Camp);
+             numericComponent.SetNoEvent(NumericType.TeamId, master != null ? master.GetTeamId() : 0);
+             numericComponent.SetNoEvent(NumericType.AttackMode, master!=null ?  master.GetAttackMode() : 0);
+             numericComponent.SetNoEvent(NumericType.UnionId_0, master != null ? master.GetUnionId() : 0);
+             numericComponent.SetNoEvent(NumericType.PetSkin, createMonsterInfo.SkinId);
         
              unit.SetBornPosition(unit.Position, false);
              unit.MasterId = createMonsterInfo.MasterID;
@@ -119,8 +119,8 @@ namespace ET.Server
              if (mainUnit != null && TimeHelper.ServerNow() < revetime)
              {
                  unit.AddComponent<ReviveTimeComponent, long>(revetime);
-                 numericComponent.SetEvent(NumericType.ReviveTime, revetime, false);
-                 numericComponent.SetEvent(NumericType.Now_Dead, 1, false);
+                 numericComponent.SetNoEvent(NumericType.ReviveTime, revetime);
+                 numericComponent.SetNoEvent(NumericType.Now_Dead, 1);
              }
              //51 场景怪
              //52 能量台子

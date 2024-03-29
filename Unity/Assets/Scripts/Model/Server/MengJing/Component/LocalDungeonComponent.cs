@@ -8,8 +8,19 @@ namespace ET.Server
 
         public int RandomMonster { get; set; }
         public int RandomJingLing { get; set; }
-
-        public Unit MainUnit { get; set; }
+        
+        private EntityRef<Unit> mainUnit;
+        public Unit MainUnit
+        {
+            get
+            {
+                return this.mainUnit;
+            }
+            set
+            {
+                this.mainUnit = value;
+            }
+        }
     }
     
 }

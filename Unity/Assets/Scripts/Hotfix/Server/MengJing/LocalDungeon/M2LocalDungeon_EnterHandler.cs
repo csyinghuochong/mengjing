@@ -19,12 +19,12 @@ namespace ET.Server
                      //fubnescene.AddComponent<YeWaiRefreshComponent>();
                      LocalDungeonComponent localDungeon = fubnescene.AddComponent<LocalDungeonComponent>();
                      localDungeon.FubenDifficulty = request.Difficulty;
-                     fubnescene.AddComponent<MapComponent>();
-                     fubnescene.GetComponent<MapComponent>().SetMapInfo((int)SceneTypeEnum.LocalDungeon, request.SceneId, 0);
+                     MapComponent mapComponent = fubnescene.AddComponent<MapComponent>();
+                     mapComponent.SetMapInfo((int)SceneTypeEnum.LocalDungeon, request.SceneId, 0);
+                     mapComponent.NavMeshId = DungeonConfigCategory.Instance.Get(request.SceneId).MapID;
                      response.FubenInstanceId = fubenInstanceId;
                      response.RootId = scene.Fiber().Id;
                      response.Process = scene.Fiber().Process;
-                     localDungeon.GenerateFubenScene(request.SceneId);
                      TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
                      break;
                  case SceneTypeEnum.Battle:

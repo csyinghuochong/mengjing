@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Unity.Mathematics;
-
+using ET;
 
 namespace ET.Server
 {
-
 
     [EntitySystemOf(typeof(SkillPassiveComponent))]
     [FriendOf(typeof(SkillPassiveComponent))]
@@ -13,6 +11,25 @@ namespace ET.Server
     //[FriendOf(typeof(AIComponent))]
     public  static partial class SkillPassiveComponentSystem
     {
+        
+        [Invoke(TimerInvokeType.SkillPassive)]
+        public class SkillPassiveTimer: ATimer<SkillPassiveComponent>
+        {
+            protected override void Run(SkillPassiveComponent self)
+            {
+                try
+                {
+                    //self.Check();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+
+
+        
         [EntitySystem]
         private static void Awake(this ET.Server.SkillPassiveComponent self)
         {

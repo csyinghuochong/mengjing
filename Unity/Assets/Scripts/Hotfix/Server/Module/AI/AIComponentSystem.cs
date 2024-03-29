@@ -9,6 +9,7 @@ namespace ET
     [FriendOf(typeof(AIDispatcherComponent))]
     public static partial class AIComponentSystem
     {
+        
         [Invoke(TimerInvokeType.AITimer)]
         public class AITimer: ATimer<AIComponent>
         {
@@ -16,7 +17,7 @@ namespace ET
             {
                 try
                 {
-                    self.Check();
+                    //self.Check();
                 }
                 catch (Exception e)
                 {

@@ -611,7 +611,7 @@ namespace ET.Server
              float ackCoefficient = 1f;
              //根据副本难度刷新属性
              //进入 挑战关卡 怪物血量增加 1.5 伤害增加 1.2 低于关卡 血量增加2 伤害增加 1.5
-             MapComponent mapComponent = nowUnit.Root().GetComponent<MapComponent>();
+             MapComponent mapComponent = nowUnit.Scene().GetComponent<MapComponent>();
              int sceneType = mapComponent.SceneType;
              int fubenDifficulty = FubenDifficulty.None;
 
@@ -627,7 +627,7 @@ namespace ET.Server
                      case SceneTypeEnum.LocalDungeon:
                          if (monsterConfig.MonsterType == MonsterTypeEnum.Boss)
                          {
-                             LocalDungeonComponent localDungeonComponent = nowUnit.Root().GetComponent<LocalDungeonComponent>();
+                             LocalDungeonComponent localDungeonComponent = nowUnit.Scene().GetComponent<LocalDungeonComponent>();
                              Unit mainUnit = localDungeonComponent.MainUnit;
                              int killNumber = mainUnit.GetComponent<UserInfoComponentS>().GetMonsterKillNumber(monsterConfig.Id);
                              int chpaterid = DungeonConfigCategory.Instance.GetChapterByDungeon(mapComponent.SceneId);
@@ -728,7 +728,7 @@ namespace ET.Server
              numericComponent.SetEvent((int)NumericType.Base_DamgeSubPro_Base, monsterConfig.DamgeAdd, false);
 
              //设置当前血量
-             numericComponent.Set((int)NumericType.Now_Hp,  numericComponent.GetAsInt(NumericType.Now_MaxHp));
+             numericComponent.SetNoEvent((int)NumericType.Now_Hp,  numericComponent.GetAsInt(NumericType.Now_MaxHp));
              //Log.Debug("初始化当前怪物血量:" + numericComponent.GetAsLong(NumericType.Now_Hp));
          }
 

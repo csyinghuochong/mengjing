@@ -43,6 +43,8 @@ namespace ET.Server
                 case  SceneTypeEnum.LocalDungeon:
                     unit.Position = new float3(-0.72f, 0, -2.57f);
                     unit.AddComponent<PathfindingComponent, int>(10001);
+                    scene.GetComponent<LocalDungeonComponent>().MainUnit = unit;
+                    scene.GetComponent<LocalDungeonComponent>().GenerateFubenScene(request.SceneId);
                     break;
             }
             
