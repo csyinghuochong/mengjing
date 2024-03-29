@@ -28,12 +28,26 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_commonitem == null )
+     			if (this.isCacheNode)
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem");
-		    	   this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
+     				if( this.m_es_commonitem == null )
+     				{
+		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem");
+		    			this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
+     				}
+     				return this.m_es_commonitem;
      			}
-     			return this.m_es_commonitem;
+     			else
+     			{
+     				if( this.m_es_commonitem != null )
+     				{
+		    			ES_CommonItem es = this.m_es_commonitem;
+     					es.Dispose();
+     				}
+		    		Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem");
+		    		this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
+     				return this.m_es_commonitem;
+     			}
      		}
      	}
 
@@ -44,7 +58,7 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		public EntityRef<ES_CommonItem> m_es_commonitem = null;
+		private EntityRef<ES_CommonItem> m_es_commonitem = null;
 		public Transform uiTransform = null;
 	}
 }

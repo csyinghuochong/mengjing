@@ -441,6 +441,18 @@ public partial class UICodeSpawner
 				string strClassType = widget.GetType().ToString();
 				string strInterfaceType = strClassType;
 				
+				if (pair.Key.StartsWith(CommonUIPrefix) && transRoot.gameObject.name.StartsWith(UIItemPrefix))
+				{
+					var subUIClassPrefab = PrefabUtility.GetCorrespondingObjectFromOriginalSource(widget);
+					if (subUIClassPrefab==null)
+					{
+						Debug.LogError($"公共UI找不到所属的Prefab! {pair.Key}");
+						return;
+					}
+					GetSubUIBaseWindowCode_2(ref strBuilder, pair.Key,strPath,subUIClassPrefab.name);
+					continue;
+				}
+				
 				if (pair.Key.StartsWith(CommonUIPrefix))
 				{
 					var subUIClassPrefab = PrefabUtility.GetCorrespondingObjectFromOriginalSource(widget);
@@ -612,6 +624,44 @@ public partial class UICodeSpawner
 	    
 	    
 	    
+	    strBuilder.AppendLine("     	}\n");
+    }
+    
+    static void GetSubUIBaseWindowCode_2(ref StringBuilder strBuilder,string widget,string strPath, string subUIClassType)
+    {
+	    
+	    strBuilder.AppendFormat("		public {0} {1}\r\n", subUIClassType, widget );
+	    strBuilder.AppendLine("     	{");
+	    strBuilder.AppendLine("     		get");
+	    strBuilder.AppendLine("     		{");
+			
+	    strBuilder.AppendLine("     			if (this.uiTransform == null)");
+	    strBuilder.AppendLine("     			{");
+	    strBuilder.AppendLine("     				Log.Error(\"uiTransform is null.\");");
+	    strBuilder.AppendLine("     				return null;");
+	    strBuilder.AppendLine("     			}");
+	    
+	    strBuilder.AppendLine("     			if (this.isCacheNode)");
+	    strBuilder.AppendLine("     			{");
+	    strBuilder.AppendFormat("     				if( this.m_{0} == null )\n" , widget.ToLower());
+	    strBuilder.AppendLine("     				{");
+	    strBuilder.AppendFormat("		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,\"{0}\");\r\n",  strPath);
+	    strBuilder.AppendFormat("		    			this.m_{0} = this.AddChild<{1},Transform>(subTrans);\r\n", widget.ToLower(),subUIClassType);
+	    strBuilder.AppendLine("     				}");
+	    strBuilder.AppendFormat("     				return this.m_{0};\n" , widget.ToLower());
+	    strBuilder.AppendLine("     			}");
+	    strBuilder.AppendLine("     			else");
+	    strBuilder.AppendLine("     			{");
+	    strBuilder.AppendFormat("     				if( this.m_{0} != null )\n" , widget.ToLower());
+	    strBuilder.AppendLine("     				{");
+	    strBuilder.AppendFormat("		    			{0} es = this.m_{1};\r\n", subUIClassType, widget.ToLower());
+	    strBuilder.AppendLine("     					es.Dispose();");
+	    strBuilder.AppendLine("     				}");
+	    strBuilder.AppendFormat("		    		Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,\"{0}\");\r\n",  strPath);
+	    strBuilder.AppendFormat("		    		this.m_{0} = this.AddChild<{1},Transform>(subTrans);\r\n", widget.ToLower(),subUIClassType);
+	    strBuilder.AppendFormat("     				return this.m_{0};\n" , widget.ToLower());
+	    strBuilder.AppendLine("     			}");
+	    strBuilder.AppendLine("     		}");
 	    strBuilder.AppendLine("     	}\n");
     }
     

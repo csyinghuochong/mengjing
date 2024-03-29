@@ -23,13 +23,6 @@ namespace ET.Client
         public static void Refresh(this Scroll_Item_CommonItem self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum,
         Action<BagInfo> onClickAction = null)
         {
-            if (self.m_es_commonitem != null)
-            {
-                ES_CommonItem esCommonItem = self.m_es_commonitem;
-                esCommonItem.Dispose();
-                self.m_es_commonitem = null;
-            }
-
             self.ES_CommonItem.UpdateItem(bagInfo, itemOperateEnum);
             self.ES_CommonItem.SetClickHandler(onClickAction);
         }
