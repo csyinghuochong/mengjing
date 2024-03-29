@@ -20,6 +20,9 @@ namespace ET.Client
                     MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(unit.ConfigId);
                     assetsName = StringBuilderHelper.GetMonsterUnitPath(monsterCof.MonsterModelID);
                     break;
+                case UnitType.Npc:
+                    
+                    break;
             }
             
             // Unit View层
