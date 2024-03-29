@@ -105,7 +105,7 @@ namespace ET.Server
                         continue;
                     }
 
-                    UnitFactory.CreateNpc(self.Root(), npcList[i]);
+                    UnitFactory.CreateNpc(self.Scene(), npcList[i]);
                 }
             }
 
@@ -125,9 +125,9 @@ namespace ET.Server
                     int[] position = dungeonTransferConfig.Position;
                     float3 vector3 = new float3(position[0] * 0.01f, position[1] * 0.01f, position[2] * 0.01f);
                     //创建传送点Unit
-                    Unit chuansong = self.Root().GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), 1);
-                    self.Root().GetComponent<UnitComponent>().Add(chuansong);
-                    UnitInfoComponent unitInfoComponent = chuansong.AddComponent<UnitInfoComponent>();
+                    Unit chuansong = self.Scene().GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), 1);
+                    self.Scene().GetComponent<UnitComponent>().Add(chuansong);
+                    chuansong.AddComponent<UnitInfoComponent>();
                     chuansong.ConfigId = transferId;
                     chuansong.Type = UnitType.Chuansong;
                     chuansong.Position = vector3;
