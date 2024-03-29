@@ -43,6 +43,7 @@ namespace ET.Client
      				{
 		    			ES_CommonItem es = this.m_es_commonitem;
      					es.Dispose();
+		    			this.m_es_commonitem = null;
      				}
 		    		Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem");
 		    		this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
