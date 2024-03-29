@@ -88,10 +88,6 @@ namespace ET.Server
             DungeonConfig chapterSonConfig = DungeonConfigCategory.Instance.Get(mapid);
 
             string allmonster = SceneConfigHelper.GetLocalDungeonMonsters_2(mapid);
-
-            Scene scene = self.Scene();
-            Scene root = self.Root();
-
             FubenHelp.CreateMonsterList(self.Scene(), allmonster);
 
             //生成npc
