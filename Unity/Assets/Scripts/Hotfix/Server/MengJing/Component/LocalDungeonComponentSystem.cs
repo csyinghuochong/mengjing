@@ -124,6 +124,7 @@ namespace ET.Server
                     Unit chuansong = self.Scene().GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), 1);
                     self.Scene().GetComponent<UnitComponent>().Add(chuansong);
                     chuansong.AddComponent<UnitInfoComponent>();
+                    chuansong.AddComponent<NumericComponentS>();
                     chuansong.ConfigId = transferId;
                     chuansong.Type = UnitType.Chuansong;
                     chuansong.Position = vector3;

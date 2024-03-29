@@ -9,11 +9,21 @@ namespace ET.Client
         protected override async ETTask Run(Scene scene, AfterUnitCreate args)
         {
             Unit unit = args.Unit;
-            // Unit View层
-            string assetsName = $"Assets/Bundles/Unit/Player/Hero_2.prefab";
-            GameObject bundleGameObject = await scene.GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(assetsName);
-            //GameObject prefab = bundleGameObject.Get<GameObject>("Skeleton");
 
+            string assetsName = $"Assets/Bundles/Unit/Player/Hero_2.prefab";
+            switch (unit.Type )
+            {
+                case UnitType.Player:
+                    assetsName = $"Assets/Bundles/Unit/Player/Hero_2.prefab";
+                    break;
+                case UnitType.Monster:
+                    MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+                    assetsName = StringBuilderHelper.GetMonsterUnitPath(monsterCof.MonsterModelID);
+                    break;
+            }
+            
+            // Unit View层
+            GameObject bundleGameObject = await scene.GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(assetsName);
             GlobalComponent globalComponent = scene.Root().GetComponent<GlobalComponent>();
             GameObject go = UnityEngine.Object.Instantiate(bundleGameObject, globalComponent.Unit, true);
             go.transform.position = unit.Position;

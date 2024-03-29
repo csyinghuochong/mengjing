@@ -189,18 +189,18 @@ namespace ET.Server
             unit.Position = new float3(npcConfig.Position[0] * 0.01f, npcConfig.Position[1] * 0.01f, npcConfig.Position[2] * 0.01f);
             unit.Rotation = quaternion.Euler(0, npcConfig.Rotation, 0);
             unit.Type = UnitType.Npc;
+            NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
             if (npcConfig.AI > 0)
             {
                 unit.AddComponent<MoveComponent>();
                 unit.AddComponent<StateComponentS>();
-                NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
                 numericComponent.Set(NumericType.Now_Speed, npcConfig.NpcPar[0]);
                 unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
                 unit.AddComponent<AIComponent, int>(npcConfig.AI);     //AI行为树序号	
                 unit.GetComponent<AIComponent>().InitNpc(npcId);
                 unit.GetComponent<AIComponent>().Begin();
             }
-
+            
             unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
             return unit;
         }

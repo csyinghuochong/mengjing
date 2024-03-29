@@ -9,9 +9,10 @@ namespace ET.Client
 	        UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
 	        Unit unit = unitComponent.AddChildWithId<Unit, int>(unitInfo.UnitId, unitInfo.ConfigId);
 	        unitComponent.Add(unit);
-	        
+	        unit.Type = unitInfo.Type;
 	        unit.Position = unitInfo.Position;
 	        unit.Forward = unitInfo.Forward;
+	        unit.ConfigId = unitInfo.ConfigId;
 	        
 	        NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
 
@@ -31,8 +32,14 @@ namespace ET.Client
 	        }
 
 	        unit.AddComponent<ObjectWait>();
-
-	        unit.AddComponent<XunLuoPathComponent>();
+	        //unit.AddComponent<HeroDataComponentC>();
+	        //unit.AddComponent<StateComponentC>();
+	        //unit.AddComponent<XunLuoPathComponent>();
+	        UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
+	        // unitInfoComponent.UnitName = unitInfo.UnitName;
+	        // unitInfoComponent.MasterName = unitInfo.MasterName;
+	        // unitInfoComponent.UnionName = unitInfo.UnionName;
+	        // unitInfoComponent.FashionEquipList = unitInfo.FashionEquipList;
 	        
 	        EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() {Unit = unit});
             return unit;
