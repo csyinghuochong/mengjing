@@ -21,7 +21,8 @@ namespace ET.Client
                     assetsName = StringBuilderHelper.GetMonsterUnitPath(monsterCof.MonsterModelID);
                     break;
                 case UnitType.Npc:
-                    
+                    NpcConfig npcConfig = NpcConfigCategory.Instance.Get(unit.ConfigId);
+                    assetsName = ABPathHelper.GetUnitPath("Npc/" + npcConfig.Asset);
                     break;
             }
             
