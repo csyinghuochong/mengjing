@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using System.Collections.Generic;
+
+namespace ET.Client
 {
     public enum PetOperationType
     {
@@ -20,5 +22,7 @@
         }
 
         public PetOperationType OperationType;
+        public Dictionary<int, Scroll_Item_PetSelectItem> ScrollItemPetSelectItems;
+        public List<RolePetInfo> ShowRolePetInfos = new();
     }
 }

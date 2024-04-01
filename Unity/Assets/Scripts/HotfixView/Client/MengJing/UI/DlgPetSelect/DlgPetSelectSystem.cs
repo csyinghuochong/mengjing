@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_PetSelectItem))]
     [FriendOf(typeof (ES_PetList))]
     [FriendOf(typeof (PetComponentC))]
     [FriendOf(typeof (DlgPetSelect))]
@@ -13,10 +14,18 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgPetSelect self)
         {
+            self.View.E_PetSelectItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetSelectItemsRefresh);
         }
 
         public static void ShowWindow(this DlgPetSelect self, Entity contextData = null)
         {
+        }
+
+        private static void OnPetSelectItemsRefresh(this DlgPetSelect self, Transform transform, int index)
+        {
+            Scroll_Item_PetSelectItem scrollItemPetSelectItem = self.ScrollItemPetSelectItems[index];
+            scrollItemPetSelectItem.OnInitData(self.ShowRolePetInfos[index]);
+            scrollItemPetSelectItem.OperationType = self.OperationType;
         }
 
         public static void OnSetType(this DlgPetSelect self, PetOperationType bagOperationType)
@@ -83,6 +92,7 @@ namespace ET.Client
         public static void OnInitData(this DlgPetSelect self)
         {
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
+            self.ShowRolePetInfos.Clear();
             List<RolePetInfo> list = petComponent.RolePetInfos;
 
             List<long> selected = self.GetSelectedPet();
@@ -110,14 +120,7 @@ namespace ET.Client
                     // }
                 }
 
-                // GameObject go = GameObject.Instantiate(self.UIPetSelectItem);
-                // go.SetActive(true);
-                // UICommonHelper.SetParent(go, self.PetListNode);
-                //
-                // UI uiitem = self.AddChild<UI, string, GameObject>("UIPetXuanZeItem_" + i, go);
-                // UIPetSelectItemComponent uIPetHeChengXuanZeItemComponent = uiitem.AddComponent<UIPetSelectItemComponent>();
-                // uIPetHeChengXuanZeItemComponent.OnInitData(list[i]);
-                // uIPetHeChengXuanZeItemComponent.OperationType = self.OperationType;
+                self.ShowRolePetInfos.Add(list[i]);
             }
         }
 

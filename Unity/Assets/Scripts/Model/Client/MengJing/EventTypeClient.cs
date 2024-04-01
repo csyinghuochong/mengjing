@@ -81,6 +81,11 @@ namespace ET.Client
         public string DataParamString;
     }
 
+    public struct DataUpdate_PetItemSelect
+    {
+        public string DataParamString;
+    }
+
     public struct DataUpdate_EquipHuiShow
     {
     }

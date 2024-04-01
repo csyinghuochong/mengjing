@@ -6,6 +6,9 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_PetSelectItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
+		public PetOperationType OperationType; //1合成 2洗练
+		public RolePetInfo RolePetInfo;
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
