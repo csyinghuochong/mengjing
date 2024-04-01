@@ -102,9 +102,9 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<RolePetInfo> RequestRolePetHeXin(Scene root, long bagInfoId, long PetInfoId, int position)
+        public static async ETTask<RolePetInfo> RequestRolePetHeXin(Scene root, int operateType, long bagInfoId, long PetInfoId, int position)
         {
-            C2M_RolePetHeXin request = new() { OperateType = 2, BagInfoId = bagInfoId, PetInfoId = PetInfoId, Position = position };
+            C2M_RolePetHeXin request = new() { OperateType = operateType, BagInfoId = bagInfoId, PetInfoId = PetInfoId, Position = position };
             M2C_RolePetHeXin response = (M2C_RolePetHeXin)await root.GetComponent<ClientSenderCompnent>().Call(request);
             root.GetComponent<PetComponentC>().OnRolePetUpdate(response.RolePetInfo);
             return response.RolePetInfo;

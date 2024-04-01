@@ -493,13 +493,39 @@ namespace ET.Client
             }
         }
 
+        public static async ETTask<int> OnButtonEquipHeXin(this ES_PetList self)
+        {
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
+            if (itemConfig.ItemType != (int)ItemTypeEnum.PetHeXin)
+            {
+                return -1;
+            }
+
+            if (itemConfig.ItemSubType - 1 != self.Position)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("孔位不符！");
+                return -1;
+            }
+
+            long instanceid = self.InstanceId;
+            await PetNetHelper.RequestRolePetHeXin(self.Root(), 1, self.BagInfo.BagInfoID, self.LastSelectItem.Id, self.Position);
+
+            if (instanceid != self.InstanceId)
+            {
+                return -1;
+            }
+
+            self.OnEquipPetHeXin();
+            return 0;
+        }
+
         private static async ETTask OnButtonEquipXieXia(this ES_PetList self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             long baginfoId = self.LastSelectItem.PetHeXinList[self.Position];
             BagInfo bagInfo = bagComponent.GetBagInfo(baginfoId);
 
-            self.LastSelectItem = await PetNetHelper.RequestRolePetHeXin(self.Root(), bagInfo.BagInfoID, self.LastSelectItem.Id, self.Position);
+            self.LastSelectItem = await PetNetHelper.RequestRolePetHeXin(self.Root(), 2, bagInfo.BagInfoID, self.LastSelectItem.Id, self.Position);
             self.OnEquipPetHeXin();
         }
 

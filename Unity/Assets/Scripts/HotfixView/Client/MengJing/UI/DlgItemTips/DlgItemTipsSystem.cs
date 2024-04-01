@@ -295,7 +295,6 @@ namespace ET.Client
                     return;
                 }
 
-
                 if (!dlgRole.View.ES_RoleGem.uiTransform.gameObject.activeSelf)
                 {
                     return;
@@ -343,18 +342,18 @@ namespace ET.Client
                 return;
             }
 
-            // if (itemConfig.ItemType == (int)ItemTypeEnum.PetHeXin)
-            // {
-            //     UI uI = UIHelper.GetUI(self.ZoneScene(), UIType.UIPet);
-            //     errorCode = await uI.GetComponent<UIPetComponent>().RequestPetHeXinSelect();
-            //     //注销Tips
-            //     if (errorCode == ErrorCode.ERR_Success)
-            //     {
-            //         self.OnCloseTips();
-            //     }
-            //
-            //     return;
-            // }
+            if (itemConfig.ItemType == (int)ItemTypeEnum.PetHeXin)
+            {
+                DlgPet dlgPet = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>();
+                errorCode = await dlgPet.RequestPetHeXinSelect();
+                //注销Tips
+                if (errorCode == ErrorCode.ERR_Success)
+                {
+                    self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+                }
+
+                return;
+            }
 
             // if (itemConfig.ItemSubType == 4 || itemConfig.ItemSubType == 14)
             // {
@@ -587,13 +586,13 @@ namespace ET.Client
 
         private static void OnHuiShouButton(this DlgItemTips self)
         {
-            EventSystem.Instance.Publish(self.Root(),new DataUpdate_HuiShouSelect(){DataParamString = $"1_{self.BagInfo.BagInfoID}"});
+            EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"1_{self.BagInfo.BagInfoID}" });
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
         }
 
         private static void OnHuiShouCancleButton(this DlgItemTips self)
         {
-            EventSystem.Instance.Publish(self.Root(),new DataUpdate_HuiShouSelect(){DataParamString = $"0_{self.BagInfo.BagInfoID}"});
+            EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"0_{self.BagInfo.BagInfoID}" });
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
         }
 
