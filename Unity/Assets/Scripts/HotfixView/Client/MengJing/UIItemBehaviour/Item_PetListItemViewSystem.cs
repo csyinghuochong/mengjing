@@ -21,7 +21,7 @@ namespace ET.Client
 
         public static void OnClickPetItem(this Scroll_Item_PetListItem self)
         {
-            self.ClickPetHandler(self.PetId);
+            self.ClickPetHandler?.Invoke(self.PetId);
         }
 
         public static void OnSelectUI(this Scroll_Item_PetListItem self, RolePetInfo rolePetInfo)

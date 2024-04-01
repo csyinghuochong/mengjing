@@ -372,7 +372,7 @@ namespace ET.Client
             List<string> TypeNames = new List<string>() { "进攻能量", "守护能量", "生命能量" };
             self.E_TextTypeText.text = TypeNames[self.Position];
 
-            UICommonHelper.DestoryChild(self.EG_AttributeNodeRectTransform.gameObject);
+            UICommonHelper.DestoryChild(self.EG_AttributeListNodeRectTransform.gameObject);
             long baginfoId = self.LastSelectItem.PetHeXinList[self.Position];
             BagInfo bagInfo = null;
             for (int i = 0; i < bagInfos.Count; i++)
