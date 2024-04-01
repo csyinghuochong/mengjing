@@ -16,9 +16,13 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            // self.E_Btn_HeChengExplainButton.AddListener(() => { self.Root().GetComponent<UIComponent>().ShowWindowAsync().Coroutine(); });
-            
-            
+            self.E_Btn_HeChengExplainButton.AddListener(() =>
+            {
+                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetHeXinHeCheng).Coroutine();
+            });
+            self.E_Btn_HeChengButton.AddListener(self.OnClickHeCheng);
+            self.E_Btn_PreviewButton.AddListenerAsync(self.OnBtn_Preview);
+
             self.OnInitSubView();
         }
 

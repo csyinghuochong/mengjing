@@ -80,6 +80,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_Btn_HeChengButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_HeChengButton == null )
+     			{
+		    		this.m_E_Btn_HeChengButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_HeCheng");
+     			}
+     			return this.m_E_Btn_HeChengButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_HeChengImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_HeChengImage == null )
+     			{
+		    		this.m_E_Btn_HeChengImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_HeCheng");
+     			}
+     			return this.m_E_Btn_HeChengImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_Btn_PreviewButton
      	{
      		get
@@ -166,6 +200,8 @@ namespace ET.Client
 			this.m_es_petinfoshow_1 = null;
 			this.m_EG_PetInfo2RectTransform = null;
 			this.m_es_petinfoshow_2 = null;
+			this.m_E_Btn_HeChengButton = null;
+			this.m_E_Btn_HeChengImage = null;
 			this.m_E_Btn_PreviewButton = null;
 			this.m_E_Btn_PreviewImage = null;
 			this.m_E_Btn_HeChengExplainButton = null;
@@ -177,6 +213,8 @@ namespace ET.Client
 		private EntityRef<ES_PetInfoShow> m_es_petinfoshow_1 = null;
 		private UnityEngine.RectTransform m_EG_PetInfo2RectTransform = null;
 		private EntityRef<ES_PetInfoShow> m_es_petinfoshow_2 = null;
+		private UnityEngine.UI.Button m_E_Btn_HeChengButton = null;
+		private UnityEngine.UI.Image m_E_Btn_HeChengImage = null;
 		private UnityEngine.UI.Button m_E_Btn_PreviewButton = null;
 		private UnityEngine.UI.Image m_E_Btn_PreviewImage = null;
 		private UnityEngine.UI.Button m_E_Btn_HeChengExplainButton = null;

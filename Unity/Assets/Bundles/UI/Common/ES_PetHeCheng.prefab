@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 1123637111508772507}
   - component: {fileID: 8157418260809982933}
   m_Layer: 5
-  m_Name: Btn_HeCheng
+  m_Name: E_Btn_HeCheng
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1090,6 +1090,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ES_PetInfoShow_1
       objectReference: {fileID: 0}
+    - target: {fileID: 378713181137239769, guid: fa606a91e31158a4293bf73c17630089,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1099037363632075035, guid: fa606a91e31158a4293bf73c17630089,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1213,7 +1218,12 @@ PrefabInstance:
     - target: {fileID: 378713181137239769, guid: fa606a91e31158a4293bf73c17630089,
         type: 3}
       propertyPath: m_Name
-      value: ES_PetInfoShow
+      value: ES_PetInfoShow_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 378713181137239769, guid: fa606a91e31158a4293bf73c17630089,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1099037363632075035, guid: fa606a91e31158a4293bf73c17630089,
         type: 3}
