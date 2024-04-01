@@ -7,6 +7,9 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetHeCheng : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public RolePetInfo HeChengPet_Left;
+		public RolePetInfo HeChengPet_Right;
+		
 		public UnityEngine.RectTransform EG_PetInfo1RectTransform
      	{
      		get
@@ -24,6 +27,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_PetInfoShow ES_PetInfoShow_1
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_petinfoshow_1 == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetInfo1/ES_PetInfoShow_1");
+		    	   this.m_es_petinfoshow_1 = this.AddChild<ES_PetInfoShow,Transform>(subTrans);
+     			}
+     			return this.m_es_petinfoshow_1;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_PetInfo2RectTransform
      	{
      		get
@@ -38,6 +59,24 @@ namespace ET.Client
 		    		this.m_EG_PetInfo2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PetInfo2");
      			}
      			return this.m_EG_PetInfo2RectTransform;
+     		}
+     	}
+
+		public ES_PetInfoShow ES_PetInfoShow_2
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_petinfoshow_2 == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetInfo2/ES_PetInfoShow_2");
+		    	   this.m_es_petinfoshow_2 = this.AddChild<ES_PetInfoShow,Transform>(subTrans);
+     			}
+     			return this.m_es_petinfoshow_2;
      		}
      	}
 
@@ -109,10 +148,24 @@ namespace ET.Client
      		}
      	}
 
+		    public Transform UITransform
+         {
+     	    get
+     	    {
+     		    return this.uiTransform;
+     	    }
+     	    set
+     	    {
+     		    this.uiTransform = value;
+     	    }
+         }
+
 		public void DestroyWidget()
 		{
 			this.m_EG_PetInfo1RectTransform = null;
+			this.m_es_petinfoshow_1 = null;
 			this.m_EG_PetInfo2RectTransform = null;
+			this.m_es_petinfoshow_2 = null;
 			this.m_E_Btn_PreviewButton = null;
 			this.m_E_Btn_PreviewImage = null;
 			this.m_E_Btn_HeChengExplainButton = null;
@@ -121,7 +174,9 @@ namespace ET.Client
 		}
 
 		private UnityEngine.RectTransform m_EG_PetInfo1RectTransform = null;
+		private EntityRef<ES_PetInfoShow> m_es_petinfoshow_1 = null;
 		private UnityEngine.RectTransform m_EG_PetInfo2RectTransform = null;
+		private EntityRef<ES_PetInfoShow> m_es_petinfoshow_2 = null;
 		private UnityEngine.UI.Button m_E_Btn_PreviewButton = null;
 		private UnityEngine.UI.Image m_E_Btn_PreviewImage = null;
 		private UnityEngine.UI.Button m_E_Btn_HeChengExplainButton = null;

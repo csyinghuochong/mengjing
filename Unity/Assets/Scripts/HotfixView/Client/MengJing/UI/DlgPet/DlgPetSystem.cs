@@ -43,6 +43,7 @@ namespace ET.Client
                     break;
                 case 1:
                     self.View.ES_PetHeCheng.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PetHeCheng.OnUpdateUI();
                     break;
                 case 2:
                     self.View.ES_PetXiLian.uiTransform.gameObject.SetActive(true);
