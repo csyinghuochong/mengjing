@@ -6,6 +6,23 @@ namespace ET.Client
 {
     public static class UICommonHelper
     {
+        public static string GetNeedItemDesc(string needitems)
+        {
+            string itemDesc = "";
+            string[] needList = needitems.Split('@');
+
+            for (int i = 0; i < needList.Length; i++)
+            {
+                string[] itemInfo = needList[i].Split(';');
+                int itemId = int.Parse(itemInfo[0]);
+                int itemNum = int.Parse(itemInfo[1]);
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemId);
+                itemDesc += $"{itemConfig.ItemName} x {itemNum} ";
+            }
+
+            return itemDesc;
+        }
+
         public static string ShowFloatValue(float value)
         {
             string svalue = value.ToString("0.##");
@@ -14,10 +31,8 @@ namespace ET.Client
 
         public static string GetPetQualityName(int quality)
         {
-
             switch (quality)
             {
-
                 case 1:
                     return "大众";
                 //break;
@@ -36,12 +51,11 @@ namespace ET.Client
             }
 
             return "";
-
         }
 
         //数字转换万
-        public static string NumToWString(long num) {
-
+        public static string NumToWString(long num)
+        {
             //超过10万才显示
             if (num >= 100000)
             {
@@ -49,16 +63,17 @@ namespace ET.Client
                 {
                     return (num / 10000).ToString() + "万";
                 }
-                else {
+                else
+                {
                     return ((float)num / 10000f).ToString("F2") + "万";
                 }
             }
-            else {
+            else
+            {
                 return num.ToString();
             }
-
         }
-        
+
         // 根据品质返回一个Color
         public static Color QualityReturnColor(int ItenQuality)
         {
@@ -86,8 +101,10 @@ namespace ET.Client
                     color = new Color(0.80f, 0.49f, 0.19f);
                     break;
             }
+
             return color;
         }
+
         public static void SetParent(GameObject son, GameObject parent)
         {
             if (son == null || parent == null)

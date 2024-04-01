@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_CommonItem))]
     [FriendOf(typeof (Scroll_Item_CommonItem))]
     [EntitySystemOf(typeof (ES_RoleBag))]
     [FriendOfAttribute(typeof (ES_RoleBag))]
@@ -29,6 +31,130 @@ namespace ET.Client
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.Bag, self.UpdateSelect);
+
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            int openell = bagComponent.GetBagTotalCell();
+            if (index < openell)
+            {
+                scrollItemCommonItem.ES_CommonItem.UpdateUnLock(true);
+            }
+            else
+            {
+                int addcell = bagComponent.WarehouseAddedCell[0] + (index - openell);
+                BuyCellCost buyCellCost = ConfigData.BuyBagCellCosts[addcell];
+                int itemid = int.Parse(buyCellCost.Get.Split(';')[0]);
+                int itemnum = int.Parse(buyCellCost.Get.Split(';')[1]);
+                scrollItemCommonItem.Refresh(new BagInfo() { ItemID = itemid, BagInfoID = index, ItemNum = itemnum }, ItemOperateEnum.None);
+                scrollItemCommonItem.ES_CommonItem.E_LockButton.AddListener(self.OnClickImage_Lock);
+                scrollItemCommonItem.ES_CommonItem.UpdateUnLock(false);
+            }
+
+            self.CheckUpItem();
+        }
+
+        public static void CheckUpItem(this ES_RoleBag self)
+        {
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            for (int i = 0; i < self.ScrollItemCommonItems.Count; i++)
+            {
+                if (self.ScrollItemCommonItems[i].uiTransform == null)
+                {
+                    continue;
+                }
+
+                BagInfo bagInfo = self.ScrollItemCommonItems[i].ES_CommonItem.Baginfo;
+                if (bagInfo == null)
+                {
+                    continue;
+                }
+
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+                if (itemConfig.ItemType != 3)
+                {
+                    continue;
+                }
+
+                int curQulity = 0;
+                int curLevel = 0;
+                List<BagInfo> curEquiplist = bagComponent.GetEquipListByWeizhi(itemConfig.ItemSubType);
+                for (int e = 0; e < curEquiplist.Count; e++)
+                {
+                    ItemConfig curEquipConfig = ItemConfigCategory.Instance.Get(curEquiplist[e].ItemID);
+                    if (curEquipConfig.UseLv < curLevel || curLevel == 0)
+                    {
+                        curLevel = curEquipConfig.UseLv;
+                    }
+
+                    if (curEquipConfig.ItemQuality < curQulity || curQulity == 0)
+                    {
+                        curQulity = curEquipConfig.ItemQuality;
+                    }
+                }
+
+                if (curEquiplist.Count < 3 && itemConfig.ItemSubType == 5)
+                {
+                    curQulity = 0;
+                    curLevel = 0;
+                }
+
+                if (itemConfig.EquipType != 0 && itemConfig.EquipType != 99 && itemConfig.EquipType != 101 && itemConfig.EquipType != 201)
+                {
+                    //武器类型
+                    switch (userInfoComponent.UserInfo.Occ)
+                    {
+                        //战士
+                        case 1:
+                            if (itemConfig.EquipType < 10 && itemConfig.EquipType != 1 && itemConfig.EquipType != 2)
+                            {
+                                continue;
+                            }
+
+                            break;
+
+                        //法师
+                        case 2:
+                            if (itemConfig.EquipType < 10 && itemConfig.EquipType != 3 && itemConfig.EquipType != 4)
+                            {
+                                continue;
+                            }
+
+                            break;
+                        //猎人
+                        case 3:
+                            if (itemConfig.EquipType < 10 && itemConfig.EquipType != 1 && itemConfig.EquipType != 5)
+                            {
+                                continue;
+                            }
+
+                            break;
+                    }
+
+                    if (userInfoComponent.UserInfo.OccTwo > 100)
+                    {
+                        OccupationTwoConfig occTwoCof = OccupationTwoConfigCategory.Instance.Get(userInfoComponent.UserInfo.OccTwo);
+                        //护甲类型
+                        if (itemConfig.EquipType > 10 && itemConfig.EquipType != occTwoCof.ArmorMastery)
+                        {
+                            continue;
+                        }
+                    }
+                }
+
+                self.ScrollItemCommonItems[i].ES_CommonItem.E_UpTipImage.gameObject.SetActive(userInfoComponent.UserInfo.Lv >= itemConfig.UseLv
+                    && itemConfig.UseLv > curLevel && itemConfig.ItemQuality > curQulity && itemConfig.EquipType != 201); // 晶核不显示箭头
+            }
+        }
+
+        public static void OnClickImage_Lock(this ES_RoleBag self)
+        {
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            BuyCellCost buyCellCost = ConfigData.BuyBagCellCosts[bagComponent.WarehouseAddedCell[0]];
+
+            PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
+                $"是否花费{UICommonHelper.GetNeedItemDesc(buyCellCost.Cost)}购买一个背包格子?",
+                () => { BagClientNetHelper.RequestBuyBagCell(self.Root(), 0).Coroutine(); }, null).Coroutine();
+            return;
         }
 
         private static void OnItemTypeSet(this ES_RoleBag self, int index)
@@ -65,10 +191,11 @@ namespace ET.Client
                     break;
             }
 
-            int maxCount = GlobalValueConfigCategory.Instance.BagMaxCapacity;
+            int allNumber = bagComponentC.GetBagShowCell();
+            // int maxCount = GlobalValueConfigCategory.Instance.BagMaxCapacity;
             self.ShowBagInfos.AddRange(bagComponentC.GetItemsByType(itemTypeEnum));
-            self.AddUIScrollItems(ref self.ScrollItemCommonItems, maxCount);
-            self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, maxCount);
+            self.AddUIScrollItems(ref self.ScrollItemCommonItems, allNumber);
+            self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, allNumber);
         }
 
         private static void UpdateSelect(this ES_RoleBag self, BagInfo bagInfo)

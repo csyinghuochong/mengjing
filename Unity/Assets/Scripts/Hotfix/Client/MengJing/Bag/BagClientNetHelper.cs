@@ -252,5 +252,13 @@ namespace ET.Client
 
             return (response.Error, response.QiangHuaLevel);
         }
+
+        public static async ETTask<int> RequestBuyBagCell(Scene root, int itemlocktype)
+        {
+            C2M_ItemBuyCellRequest request = new() { OperateType = itemlocktype };
+            M2C_ItemBuyCellResponse response = (M2C_ItemBuyCellResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
 }

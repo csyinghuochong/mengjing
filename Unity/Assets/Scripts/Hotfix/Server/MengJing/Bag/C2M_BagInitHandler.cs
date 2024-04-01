@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace ET.Server
 {
@@ -20,7 +21,15 @@ namespace ET.Server
                     bagComponentS.QiangHuaFails.Add(0);
                 }
             }
+            for (int i = bagComponentS.WarehouseAddedCell.Count; i < (int)ItemLocType.ItemLocMax; i++)
+            {
+                bagComponentS.WarehouseAddedCell.Add(0);
+            }
 
+            for (int i = bagComponentS.AdditionalCellNum.Count; i < (int)ItemLocType.ItemLocMax; i++)
+            {
+                bagComponentS.AdditionalCellNum.Add(0);
+            }
 
             response.QiangHuaLevel = bagComponentS.QiangHuaLevel;
             response.QiangHuaFails = bagComponentS.QiangHuaFails;

@@ -5,6 +5,22 @@ namespace ET
 {
     public static class ConfigData
     {
+        //购买背包
+        [StaticField]
+        public static List<BuyCellCost> BuyBagCellCosts = new List<BuyCellCost>
+        {
+            new BuyCellCost { Cost = "10000156;1", Get = "10010041;5" },
+            new BuyCellCost { Cost = "10000156;1", Get = "10010046;1" },
+            new BuyCellCost { Cost = "10000156;1", Get = "10010093;1" },
+            new BuyCellCost { Cost = "10000156;1", Get = "10000104;1" },
+            new BuyCellCost { Cost = "10000156;1", Get = "10000143;5" },
+            new BuyCellCost { Cost = "10000156;1", Get = "10010088;2" },
+            new BuyCellCost { Cost = "10000156;1", Get = "10000150;1" },
+            new BuyCellCost { Cost = "10000156;1", Get = "10000141;1" },
+            new BuyCellCost { Cost = "10000156;1", Get = "10010086;2" },
+            new BuyCellCost { Cost = "10000156;1", Get = "10010026;1" },
+        };
+
         /// <summary>
         /// 三个对应等级套装属性
         /// </summary>
@@ -15,20 +31,20 @@ namespace ET
             { 8, "205003,0.1;203003,0.25;203103,0.25" },
             { 10, "205003,0.15;203003,0.3;203103,0.3" },
         };
-        
+
         /// <summary>
         /// 宠物守护（0-3）
         /// </summary>
         [StaticField]
         public static List<KeyValuePair> PetShouHuAttri = new List<KeyValuePair>
         {
-            new KeyValuePair(){  Value = "青龙守护", Value2 = "200101" },                      //暴击
-            new KeyValuePair(){  Value = "白虎守护", Value2 = "200401" },                      //抗暴
-            new KeyValuePair(){  Value = "朱雀守护", Value2 = "200201" },                      //命中
-            new KeyValuePair(){  Value = "玄武守护", Value2 = "200301" },                      //闪避
-            new KeyValuePair(){  Value = "神兽守护", Value2 = "" },
+            new KeyValuePair() { Value = "青龙守护", Value2 = "200101" }, //暴击
+            new KeyValuePair() { Value = "白虎守护", Value2 = "200401" }, //抗暴
+            new KeyValuePair() { Value = "朱雀守护", Value2 = "200201" }, //命中
+            new KeyValuePair() { Value = "玄武守护", Value2 = "200301" }, //闪避
+            new KeyValuePair() { Value = "神兽守护", Value2 = "" },
         };
-        
+
         [StaticField]
         public static string DefaultGem = "0_0_0_0";
 
@@ -203,8 +219,6 @@ namespace ET
             new WorldSayConfig() { Time = 2200, OpenDay = new List<int> { 1, 3, 5, 0 }, Conent = "竞技场活动已经开启,想要证明自己能力的小伙伴记得前往噢!" },
         };
 
-
-
         /// <summary>
         /// 赛季开始时间
         /// </summary>
@@ -223,8 +237,6 @@ namespace ET
 
         [StaticField]
         public static Dictionary<int, int> MonsterToFuben = new Dictionary<int, int>();
-
-
 
         //成就炼金使用这些药剂增加点数
         [StaticField]
@@ -359,7 +371,6 @@ namespace ET
             31001008
         };
 
-
         /// <summary>
         /// 周任务奖励
         /// </summary>
@@ -369,7 +380,6 @@ namespace ET
             { 10, 61500001 } //完成每20环对应奖励
         };
 
-        
         //1.锻造类型
         //2.裁缝类型
         //3.炼金类型
@@ -380,34 +390,29 @@ namespace ET
         [StaticField]
         public static Dictionary<int, string> MakeTypeName = new Dictionary<int, string>()
         {
-            { 0, "无"},
-            { 1, "锻造"},
-            { 2, "裁缝"},
-            { 3, "炼金"},
+            { 0, "无" }, { 1, "锻造" }, { 2, "裁缝" }, { 3, "炼金" },
         };
 
-        
         /// <summary>
         /// 家园开启宠物仓库的消耗
         /// </summary>
         [StaticField]
         public static Dictionary<int, string> PetOpenCangKu =
-        new Dictionary<int, string>()
-        {
-            //第一个格子默认开启
-            { 1, "13;200000" },    //第二个格子
-            { 2, "13;500000" },    //第三个格子
-            { 3, "13;1000000" },   //第四个格子
-            { 4, "13;2000000" },   //第五个格子
-            { 5, "13;4000000" },   //第六个格子
-        };
+                new Dictionary<int, string>()
+                {
+                    //第一个格子默认开启
+                    { 1, "13;200000" }, //第二个格子
+                    { 2, "13;500000" }, //第三个格子
+                    { 3, "13;1000000" }, //第四个格子
+                    { 4, "13;2000000" }, //第五个格子
+                    { 5, "13;4000000" }, //第六个格子
+                };
 
-        
         /// <summary>
         /// 宠物探宝奖励
         /// </summary>
         [StaticField]
-        public static Dictionary<int, string> PetExploreReward = 
+        public static Dictionary<int, string> PetExploreReward =
                 new Dictionary<int, string>()
                 {
                     { 50, "10010086;1$3;100,1000" }, //钻石特殊处理, 也可以定位其他格式
@@ -416,29 +421,28 @@ namespace ET
                     { 200, "10010094;1$3;400,2000" },
                     { 300, "10000136;1$3;500,2500" },
                 };
-        
-        
+
         [StaticField]
-          public static List<float3> Formation_1 = 
-                  new List<float3>()
-                  {
-                      //前排
-                      new float3(-1.88f, 0f, -9.11f),
-                      new float3(1.17f, 0f, -9.11f),
-                      new float3(4.28f, 0f, -9.11f),
-                      //中排
-                      new float3(-1.88f, 0f, -12.16f),
-                      new float3(1.17f, 0f, -12.16f),
-                      new float3(4.28f, 0f, -12.16f),
-                      //后排
-                      new float3(-1.88f, 0f, -15.33f),
-                      new float3(1.17f, 0f, -15.33f),
-                      new float3(4.28f, 0f, -15.33f),
-                  };
+        public static List<float3> Formation_1 =
+                new List<float3>()
+                {
+                    //前排
+                    new float3(-1.88f, 0f, -9.11f),
+                    new float3(1.17f, 0f, -9.11f),
+                    new float3(4.28f, 0f, -9.11f),
+                    //中排
+                    new float3(-1.88f, 0f, -12.16f),
+                    new float3(1.17f, 0f, -12.16f),
+                    new float3(4.28f, 0f, -12.16f),
+                    //后排
+                    new float3(-1.88f, 0f, -15.33f),
+                    new float3(1.17f, 0f, -15.33f),
+                    new float3(4.28f, 0f, -15.33f),
+                };
 
         //对方位置
         [StaticField]
-        public static List<float3> Formation_2 = 
+        public static List<float3> Formation_2 =
                 new List<float3>()
                 {
                     //前排
@@ -455,133 +459,131 @@ namespace ET
                     new float3(4.28f, 0f, 16.14f),
                 };
 
-
         /// <summary>
         /// 每个格子对应的搜索顺序
         /// </summary>
         [StaticField]
-        public static List<int>[] PetPositionAttack = 
-      new List<int>[]
-            {
-                new List<int>()
+        public static List<int>[] PetPositionAttack =
+                new List<int>[]
                 {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8
-                },
-                new List<int>()
-                {
-                    1,
-                    0,
-                    2,
-                    4,
-                    3,
-                    5,
-                    7,
-                    6,
-                    8
-                },
-                new List<int>()
-                {
-                    2,
-                    1,
-                    0,
-                    5,
-                    4,
-                    3,
-                    8,
-                    7,
-                    6
-                },
-                new List<int>()
-                {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8
-                },
-                new List<int>()
-                {
-                    1,
-                    0,
-                    2,
-                    4,
-                    3,
-                    5,
-                    7,
-                    6,
-                    8
-                },
-                new List<int>()
-                {
-                    2,
-                    1,
-                    0,
-                    5,
-                    4,
-                    3,
-                    8,
-                    7,
-                    6
-                },
-                new List<int>()
-                {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8
-                },
-                new List<int>()
-                {
-                    1,
-                    0,
-                    2,
-                    4,
-                    3,
-                    5,
-                    7,
-                    6,
-                    8
-                },
-                new List<int>()
-                {
-                    2,
-                    1,
-                    0,
-                    5,
-                    4,
-                    3,
-                    8,
-                    7,
-                    6
-                }
-            };
+                    new List<int>()
+                    {
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8
+                    },
+                    new List<int>()
+                    {
+                        1,
+                        0,
+                        2,
+                        4,
+                        3,
+                        5,
+                        7,
+                        6,
+                        8
+                    },
+                    new List<int>()
+                    {
+                        2,
+                        1,
+                        0,
+                        5,
+                        4,
+                        3,
+                        8,
+                        7,
+                        6
+                    },
+                    new List<int>()
+                    {
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8
+                    },
+                    new List<int>()
+                    {
+                        1,
+                        0,
+                        2,
+                        4,
+                        3,
+                        5,
+                        7,
+                        6,
+                        8
+                    },
+                    new List<int>()
+                    {
+                        2,
+                        1,
+                        0,
+                        5,
+                        4,
+                        3,
+                        8,
+                        7,
+                        6
+                    },
+                    new List<int>()
+                    {
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8
+                    },
+                    new List<int>()
+                    {
+                        1,
+                        0,
+                        2,
+                        4,
+                        3,
+                        5,
+                        7,
+                        6,
+                        8
+                    },
+                    new List<int>()
+                    {
+                        2,
+                        1,
+                        0,
+                        5,
+                        4,
+                        3,
+                        8,
+                        7,
+                        6
+                    }
+                };
 
         //摄像机位置
         [StaticField]
-        public static float3 FuBenCameraPosition = 
+        public static float3 FuBenCameraPosition =
                 new float3(14, 22f, 0f);
 
         [StaticField]
-        public static float3 FuBenCameraRotation = 
+        public static float3 FuBenCameraRotation =
                 new float3(60f, -90f, 0);
-
 
         //拖动位置
         public const float FuBenCameraPositionMin_X = -50f;
@@ -589,8 +591,6 @@ namespace ET
         public const float FuBenCameraPositionMin_Z = -50f;
         public const float FuBenCameraPositionMax_Z = 50f;
 
-        
-        
         /// <summary>
         /// 等级奖励,大于或等于可以领取奖励.  一个道具直接领取，多个道具弹出选择界面
         /// 三个职业 以&切分
@@ -600,46 +600,43 @@ namespace ET
                 new Dictionary<int, string>()
                 {
                     //14060006
-                    { 5, "14060006;1" },            //升级到6级装备
-                    { 8,  "14100021;1@14100022;1&14100121;1@14100122;1&14100221;1" },       //本职业特色武器
-                    { 10, "10031002;1" },       //小松鼠
-                    { 12, "10010033;1" },       //金钥匙
-                    { 14, "10000106;1" },       //国王的宝石箱子
-                    { 16, "10000120;1" },       //国王的装备盒子
-                    { 18, "10000122;1" },       //二章装备盒子
-                    { 20, "10010092;1" },       //稀少的宠物蛋
-                    { 22, "10000156;1" },       //背包扩展袋子
-                    { 24, "10000158;1" },       //封印之塔挑战凭证
-                    { 26, "10000140;1" },       //忘灵丹
-                    { 28, "10010088;5" }       //体力补充
+                    { 5, "14060006;1" }, //升级到6级装备
+                    { 8, "14100021;1@14100022;1&14100121;1@14100122;1&14100221;1" }, //本职业特色武器
+                    { 10, "10031002;1" }, //小松鼠
+                    { 12, "10010033;1" }, //金钥匙
+                    { 14, "10000106;1" }, //国王的宝石箱子
+                    { 16, "10000120;1" }, //国王的装备盒子
+                    { 18, "10000122;1" }, //二章装备盒子
+                    { 20, "10010092;1" }, //稀少的宠物蛋
+                    { 22, "10000156;1" }, //背包扩展袋子
+                    { 24, "10000158;1" }, //封印之塔挑战凭证
+                    { 26, "10000140;1" }, //忘灵丹
+                    { 28, "10010088;5" } //体力补充
                 };
-
 
         /// <summary>  
         /// 击杀怪物奖励。     NumericType.KillMonsterNumber击杀怪物数量  NumericType.KillMonsterReward击杀怪物领取奖励记录
         /// </summary>
         [StaticField]
-        public static Dictionary<int, string> KillMonsterReward = 
+        public static Dictionary<int, string> KillMonsterReward =
                 new Dictionary<int, string>
                 {
-                    { 50, "10041101;1" },       //优秀的赤精石
-                    { 100, "14070003;1" },      //森之戒指
-                    { 200, "10010091;1" },      //幼小的宠物蛋
-                    { 300, "10000121;1" },      //一章装备盒子
-                    { 500, "14080002;1" },      //精灵守护
-                    { 750, "11200001;1" },      //锻造鉴定符
-                    { 1000, "10010046;1" },     //领主刷新券
+                    { 50, "10041101;1" }, //优秀的赤精石
+                    { 100, "14070003;1" }, //森之戒指
+                    { 200, "10010091;1" }, //幼小的宠物蛋
+                    { 300, "10000121;1" }, //一章装备盒子
+                    { 500, "14080002;1" }, //精灵守护
+                    { 750, "11200001;1" }, //锻造鉴定符
+                    { 1000, "10010046;1" }, //领主刷新券
 
                     //{ 300, "14100021;1@14100022;1&14100121;1@14100122;1&14100221;1" }
                 };
-
-      
 
         /// <summary>
         /// 宠物核心探宝奖励
         /// </summary>
         [StaticField]
-        public static Dictionary<int, string> PetHeXinExploreReward = 
+        public static Dictionary<int, string> PetHeXinExploreReward =
                 new Dictionary<int, string>()
                 {
                     { 50, "10020001;1$1;100,1000" }, //钻石特殊处理, 也可以定位其他格式
@@ -653,72 +650,100 @@ namespace ET
         /// 宠物抽奖掉落展示
         /// </summary>
         [StaticField]
-        public static string PetChouKaRewardItemShow =   "10000136;1@10010078;1@10010079;1@10010093;1@10010086;1@10010096;1@10031015;1@10031016;1@10031017;1@10031014;1@10031013;1@10031012;1@10031011;1@10031010;1@10031009;1@10060105;1@10060205;1@10060305;1@10060405;1@10060505;1@10060605;1@10060705;1";
-
+        public static string PetChouKaRewardItemShow =
+                "10000136;1@10010078;1@10010079;1@10010093;1@10010086;1@10010096;1@10031015;1@10031016;1@10031017;1@10031014;1@10031013;1@10031012;1@10031011;1@10031010;1@10031009;1@10060105;1@10060205;1@10060305;1@10060405;1@10060505;1@10060605;1@10060705;1";
 
         /// <summary>
         /// 宠物之核抽奖掉落展示
         /// </summary>
         [StaticField]
         public static string PetHeXinChouKaRewardItemShow = "10060205;1@10060305;1@10060405;1@10060505;1@10060605;1@10060705;1";
-        
 
         [StaticField]
-        public static List<int> BaoShiBuff =new List<int>() { 99001042, 99001031, 99001032, 99001011 };
-       
-        
+        public static List<int> BaoShiBuff = new List<int>() { 99001042, 99001031, 99001032, 99001011 };
+
         [StaticField]
         public static List<int> DonationBuff =
-                new List<int>() { 99003011 , 99003012, 99003013, 99003021, 99003022, 99003023,
-                    99003031, 99003032, 99003033,99003041,  99003042, 99003043,
-                    99003051, 99003052,99003053,99003061,99003062,99003063, 99003064};
+                new List<int>()
+                {
+                    99003011,
+                    99003012,
+                    99003013,
+                    99003021,
+                    99003022,
+                    99003023,
+                    99003031,
+                    99003032,
+                    99003033,
+                    99003041,
+                    99003042,
+                    99003043,
+                    99003051,
+                    99003052,
+                    99003053,
+                    99003061,
+                    99003062,
+                    99003063,
+                    99003064
+                };
 
         [StaticField]
-        public static List<string> RankChengHao = 
+        public static List<string> RankChengHao =
                 new List<string>() { "天下第一勇士", "天下第二勇士", "天下第三勇士" };
 
-        
-        
         [StaticField]
-        public static List<string> OccRankChengHao = 
-                new List<string>() { 
-                    "全区第一战士", "全区第二战士", "全区第三战士",
-                    "全区第一法师","全区第二法师","全区第三法师",
-                    "全区第一猎人","全区第二猎人","全区第三猎人" };
+        public static List<string> OccRankChengHao =
+                new List<string>()
+                {
+                    "全区第一战士",
+                    "全区第二战士",
+                    "全区第三战士",
+                    "全区第一法师",
+                    "全区第二法师",
+                    "全区第三法师",
+                    "全区第一猎人",
+                    "全区第二猎人",
+                    "全区第三猎人"
+                };
 
         /// <summary>
         /// 职业排行榜第一名buff 
         /// </summary>
         [StaticField]
-        public static List<int> CombatRankBuff = new  List<int>() {
-            99007001, 99007002, 99007003,
-            99007001, 99007002, 99007003,
-            99007001, 99007002, 99007003 };
-        
+        public static List<int> CombatRankBuff = new List<int>()
+        {
+            99007001,
+            99007002,
+            99007003,
+            99007001,
+            99007002,
+            99007003,
+            99007001,
+            99007002,
+            99007003
+        };
 
         /// <summary>
         /// 第一个权重大优先显示全区称号
         /// </summary>
         [StaticField]
-        public static List<int> ChengHaoWeight =new List<int>() { 100, 0 };
-        
-        
+        public static List<int> ChengHaoWeight = new List<int>() { 100, 0 };
+
         /// <summary>
         /// 家园大师 
         /// </summary>
         [StaticField]
-        public static List<KeyValuePair> JiaYuanDaShiPro = 
+        public static List<KeyValuePair> JiaYuanDaShiPro =
                 new List<KeyValuePair>()
                 {
-                    new KeyValuePair(){ KeyId = 1, Value = "美味大师1级", Value2 = "50@100203,1000" },
-                    new KeyValuePair(){ KeyId = 2, Value = "美味大师2级", Value2 = "100@100203,1500" },
-                    new KeyValuePair(){ KeyId = 3, Value = "美味大师3级", Value2 = "250@100203,2000" },
-                    new KeyValuePair(){ KeyId = 4, Value = "美味大师4级", Value2 = "500@100203,2500" },
-                    new KeyValuePair(){ KeyId = 5, Value = "美味大师5级", Value2 = "1000@100203,3000" },
-                    new KeyValuePair(){ KeyId = 6, Value = "美味大师6级", Value2 = "2000@100203,4000" },
+                    new KeyValuePair() { KeyId = 1, Value = "美味大师1级", Value2 = "50@100203,1000" },
+                    new KeyValuePair() { KeyId = 2, Value = "美味大师2级", Value2 = "100@100203,1500" },
+                    new KeyValuePair() { KeyId = 3, Value = "美味大师3级", Value2 = "250@100203,2000" },
+                    new KeyValuePair() { KeyId = 4, Value = "美味大师4级", Value2 = "500@100203,2500" },
+                    new KeyValuePair() { KeyId = 5, Value = "美味大师5级", Value2 = "1000@100203,3000" },
+                    new KeyValuePair() { KeyId = 6, Value = "美味大师6级", Value2 = "2000@100203,4000" },
                 };
 
-        
         /// <summary>
         /// 跑环任务奖励
         /// </summary>
@@ -731,90 +756,105 @@ namespace ET
             { 80, 61500001 },
             { 100, 61500011 },
         };
-        
-        
+
         [StaticField]
         public static List<float3> JiaYuanPetPosition = new List<float3>()
         {
             new float3(13.42f, 0f, -42.45f),
             new float3(12.26f, 0f, -29.74f),
-            new float3( -9.1f, 0f, -16.16f),
-            new float3( -9.3f, 0f, 19.97f),
-            new float3( 29.93f, 0f, 12.59f),
-            new float3( 27.27f, 0f, -27.595f),
+            new float3(-9.1f, 0f, -16.16f),
+            new float3(-9.3f, 0f, 19.97f),
+            new float3(29.93f, 0f, 12.59f),
+            new float3(27.27f, 0f, -27.595f),
         };
 
-         //收购列表
-         [StaticField]
+        //收购列表
+        [StaticField]
         public static List<JiaYuanPurchase> JiaYuanPurchaseList =
-       new List<JiaYuanPurchase>
-        {
-            new JiaYuanPurchase{ ItemID = 10036001,ItemNum = 1, BuyMinZiJin = 1500,BuyMaxZiJin = 3000},  //炒鸡蛋
-            new JiaYuanPurchase{ ItemID = 10036002,ItemNum = 1, BuyMinZiJin = 2646,BuyMaxZiJin = 5292},  //咸鸭蛋
-            new JiaYuanPurchase{ ItemID = 10036003,ItemNum = 1, BuyMinZiJin = 3345,BuyMaxZiJin = 6690},  //胡萝卜汁
-            new JiaYuanPurchase{ ItemID = 10036004,ItemNum = 1, BuyMinZiJin = 3105,BuyMaxZiJin = 6210},  //腌蛋
-            new JiaYuanPurchase{ ItemID = 10036005,ItemNum = 1, BuyMinZiJin = 3912,BuyMaxZiJin = 7824},  //红萝卜汁
-            new JiaYuanPurchase{ ItemID = 10036006,ItemNum = 1, BuyMinZiJin = 3330,BuyMaxZiJin = 6660},  //鸡汤
-            new JiaYuanPurchase{ ItemID = 10036007,ItemNum = 1, BuyMinZiJin = 7452,BuyMaxZiJin = 14904},  //兔绒披风
-            new JiaYuanPurchase{ ItemID = 10036008,ItemNum = 1, BuyMinZiJin = 11448,BuyMaxZiJin = 22896},  //绒毛面具
-            new JiaYuanPurchase{ ItemID = 10036009,ItemNum = 1, BuyMinZiJin = 7299,BuyMaxZiJin = 14598},  //红薯团
-            new JiaYuanPurchase{ ItemID = 10036010,ItemNum = 1, BuyMinZiJin = 7658,BuyMaxZiJin = 15315},  //鸡蛋汉堡
-            new JiaYuanPurchase{ ItemID = 10036011,ItemNum = 1, BuyMinZiJin = 7805,BuyMaxZiJin = 15609},  //烤肉
-            new JiaYuanPurchase{ ItemID = 10036012,ItemNum = 1, BuyMinZiJin = 14396,BuyMaxZiJin = 28791},  //猪肉串
-            new JiaYuanPurchase{ ItemID = 10036013,ItemNum = 1, BuyMinZiJin = 19662,BuyMaxZiJin = 39324},  //牛皮护腕
-            new JiaYuanPurchase{ ItemID = 10036014,ItemNum = 1, BuyMinZiJin = 10236,BuyMaxZiJin = 20472},  //清蒸土豆
-            new JiaYuanPurchase{ ItemID = 10036015,ItemNum = 1, BuyMinZiJin = 12014,BuyMaxZiJin = 24027},  //水果汁
-            new JiaYuanPurchase{ ItemID = 10036016,ItemNum = 1, BuyMinZiJin = 15392,BuyMaxZiJin = 30783},  //南瓜羹
-            new JiaYuanPurchase{ ItemID = 10036017,ItemNum = 1, BuyMinZiJin = 23364,BuyMaxZiJin = 46728},  //绒毛围裙
-            new JiaYuanPurchase{ ItemID = 10036018,ItemNum = 1, BuyMinZiJin = 22941,BuyMaxZiJin = 45882},  //黄瓜汁
-            new JiaYuanPurchase{ ItemID = 10036019,ItemNum = 1, BuyMinZiJin = 24843,BuyMaxZiJin = 49686},  //牛奶点心
-            new JiaYuanPurchase{ ItemID = 10036020,ItemNum = 1, BuyMinZiJin = 19740,BuyMaxZiJin = 39480},  //西红柿炒蛋
-            new JiaYuanPurchase{ ItemID = 10036021,ItemNum = 1, BuyMinZiJin = 22550,BuyMaxZiJin = 45099},  //美味拼盘
-            new JiaYuanPurchase{ ItemID = 10036022,ItemNum = 1, BuyMinZiJin = 38349,BuyMaxZiJin = 76698},  //美味蛋糕
-            new JiaYuanPurchase{ ItemID = 10036023,ItemNum = 1, BuyMinZiJin = 32340,BuyMaxZiJin = 64680},  //美味奶汁
-            new JiaYuanPurchase{ ItemID = 10036024,ItemNum = 1, BuyMinZiJin = 40698,BuyMaxZiJin = 81396},  //玉米骨汤
-            new JiaYuanPurchase{ ItemID = 10036025,ItemNum = 1, BuyMinZiJin = 25772,BuyMaxZiJin = 51543},  //风味肉汁
-            new JiaYuanPurchase{ ItemID = 10036026,ItemNum = 1, BuyMinZiJin = 51462,BuyMaxZiJin = 102924},  //风味炒饭
-            new JiaYuanPurchase{ ItemID = 10036027,ItemNum = 1, BuyMinZiJin = 37527,BuyMaxZiJin = 75054},  //风味奶酪
-            new JiaYuanPurchase{ ItemID = 10036028,ItemNum = 1, BuyMinZiJin = 18240,BuyMaxZiJin = 36480},  //西红柿组合
-            new JiaYuanPurchase{ ItemID = 10036029,ItemNum = 1, BuyMinZiJin = 22995,BuyMaxZiJin = 45990},  //风味南瓜粥
-            new JiaYuanPurchase{ ItemID = 10036030,ItemNum = 1, BuyMinZiJin = 27378,BuyMaxZiJin = 54756},  //回味汤圆
-            new JiaYuanPurchase{ ItemID = 10036031,ItemNum = 1, BuyMinZiJin = 5178,BuyMaxZiJin = 10356},  //烤鸡肉
-            new JiaYuanPurchase{ ItemID = 10036032,ItemNum = 1, BuyMinZiJin = 11882,BuyMaxZiJin = 23763},  //红烧烤肉
-            new JiaYuanPurchase{ ItemID = 10036033,ItemNum = 1, BuyMinZiJin = 31329,BuyMaxZiJin = 62658},  //加厚皮裙
-            new JiaYuanPurchase{ ItemID = 10036034,ItemNum = 1, BuyMinZiJin = 26460,BuyMaxZiJin = 52920},  //香味奶汁
-            new JiaYuanPurchase{ ItemID = 10036035,ItemNum = 1, BuyMinZiJin = 16521,BuyMaxZiJin = 33042},  //绿色果汁
-        };
+                new List<JiaYuanPurchase>
+                {
+                    new JiaYuanPurchase { ItemID = 10036001, ItemNum = 1, BuyMinZiJin = 1500, BuyMaxZiJin = 3000 }, //炒鸡蛋
+                    new JiaYuanPurchase { ItemID = 10036002, ItemNum = 1, BuyMinZiJin = 2646, BuyMaxZiJin = 5292 }, //咸鸭蛋
+                    new JiaYuanPurchase { ItemID = 10036003, ItemNum = 1, BuyMinZiJin = 3345, BuyMaxZiJin = 6690 }, //胡萝卜汁
+                    new JiaYuanPurchase { ItemID = 10036004, ItemNum = 1, BuyMinZiJin = 3105, BuyMaxZiJin = 6210 }, //腌蛋
+                    new JiaYuanPurchase { ItemID = 10036005, ItemNum = 1, BuyMinZiJin = 3912, BuyMaxZiJin = 7824 }, //红萝卜汁
+                    new JiaYuanPurchase { ItemID = 10036006, ItemNum = 1, BuyMinZiJin = 3330, BuyMaxZiJin = 6660 }, //鸡汤
+                    new JiaYuanPurchase { ItemID = 10036007, ItemNum = 1, BuyMinZiJin = 7452, BuyMaxZiJin = 14904 }, //兔绒披风
+                    new JiaYuanPurchase { ItemID = 10036008, ItemNum = 1, BuyMinZiJin = 11448, BuyMaxZiJin = 22896 }, //绒毛面具
+                    new JiaYuanPurchase { ItemID = 10036009, ItemNum = 1, BuyMinZiJin = 7299, BuyMaxZiJin = 14598 }, //红薯团
+                    new JiaYuanPurchase { ItemID = 10036010, ItemNum = 1, BuyMinZiJin = 7658, BuyMaxZiJin = 15315 }, //鸡蛋汉堡
+                    new JiaYuanPurchase { ItemID = 10036011, ItemNum = 1, BuyMinZiJin = 7805, BuyMaxZiJin = 15609 }, //烤肉
+                    new JiaYuanPurchase { ItemID = 10036012, ItemNum = 1, BuyMinZiJin = 14396, BuyMaxZiJin = 28791 }, //猪肉串
+                    new JiaYuanPurchase { ItemID = 10036013, ItemNum = 1, BuyMinZiJin = 19662, BuyMaxZiJin = 39324 }, //牛皮护腕
+                    new JiaYuanPurchase { ItemID = 10036014, ItemNum = 1, BuyMinZiJin = 10236, BuyMaxZiJin = 20472 }, //清蒸土豆
+                    new JiaYuanPurchase { ItemID = 10036015, ItemNum = 1, BuyMinZiJin = 12014, BuyMaxZiJin = 24027 }, //水果汁
+                    new JiaYuanPurchase { ItemID = 10036016, ItemNum = 1, BuyMinZiJin = 15392, BuyMaxZiJin = 30783 }, //南瓜羹
+                    new JiaYuanPurchase { ItemID = 10036017, ItemNum = 1, BuyMinZiJin = 23364, BuyMaxZiJin = 46728 }, //绒毛围裙
+                    new JiaYuanPurchase { ItemID = 10036018, ItemNum = 1, BuyMinZiJin = 22941, BuyMaxZiJin = 45882 }, //黄瓜汁
+                    new JiaYuanPurchase { ItemID = 10036019, ItemNum = 1, BuyMinZiJin = 24843, BuyMaxZiJin = 49686 }, //牛奶点心
+                    new JiaYuanPurchase { ItemID = 10036020, ItemNum = 1, BuyMinZiJin = 19740, BuyMaxZiJin = 39480 }, //西红柿炒蛋
+                    new JiaYuanPurchase { ItemID = 10036021, ItemNum = 1, BuyMinZiJin = 22550, BuyMaxZiJin = 45099 }, //美味拼盘
+                    new JiaYuanPurchase { ItemID = 10036022, ItemNum = 1, BuyMinZiJin = 38349, BuyMaxZiJin = 76698 }, //美味蛋糕
+                    new JiaYuanPurchase { ItemID = 10036023, ItemNum = 1, BuyMinZiJin = 32340, BuyMaxZiJin = 64680 }, //美味奶汁
+                    new JiaYuanPurchase { ItemID = 10036024, ItemNum = 1, BuyMinZiJin = 40698, BuyMaxZiJin = 81396 }, //玉米骨汤
+                    new JiaYuanPurchase { ItemID = 10036025, ItemNum = 1, BuyMinZiJin = 25772, BuyMaxZiJin = 51543 }, //风味肉汁
+                    new JiaYuanPurchase { ItemID = 10036026, ItemNum = 1, BuyMinZiJin = 51462, BuyMaxZiJin = 102924 }, //风味炒饭
+                    new JiaYuanPurchase { ItemID = 10036027, ItemNum = 1, BuyMinZiJin = 37527, BuyMaxZiJin = 75054 }, //风味奶酪
+                    new JiaYuanPurchase { ItemID = 10036028, ItemNum = 1, BuyMinZiJin = 18240, BuyMaxZiJin = 36480 }, //西红柿组合
+                    new JiaYuanPurchase { ItemID = 10036029, ItemNum = 1, BuyMinZiJin = 22995, BuyMaxZiJin = 45990 }, //风味南瓜粥
+                    new JiaYuanPurchase { ItemID = 10036030, ItemNum = 1, BuyMinZiJin = 27378, BuyMaxZiJin = 54756 }, //回味汤圆
+                    new JiaYuanPurchase { ItemID = 10036031, ItemNum = 1, BuyMinZiJin = 5178, BuyMaxZiJin = 10356 }, //烤鸡肉
+                    new JiaYuanPurchase { ItemID = 10036032, ItemNum = 1, BuyMinZiJin = 11882, BuyMaxZiJin = 23763 }, //红烧烤肉
+                    new JiaYuanPurchase { ItemID = 10036033, ItemNum = 1, BuyMinZiJin = 31329, BuyMaxZiJin = 62658 }, //加厚皮裙
+                    new JiaYuanPurchase { ItemID = 10036034, ItemNum = 1, BuyMinZiJin = 26460, BuyMaxZiJin = 52920 }, //香味奶汁
+                    new JiaYuanPurchase { ItemID = 10036035, ItemNum = 1, BuyMinZiJin = 16521, BuyMaxZiJin = 33042 }, //绿色果汁
+                };
 
         //关卡boss显示列表
         [StaticField]
         public static List<int> BossShowTimeList =
                 new List<int>
                 {
-                    70001004,70001011,70001104,70001206,70001209,
-                    70002003,70002007,70002012,
-                    70003003,70003006,70003012,70003016,
-                    70004003,70004006,70004010,70004013,
-                    70005003,70005004,70005012,70005013,
-                    70006011,70006012
+                    70001004,
+                    70001011,
+                    70001104,
+                    70001206,
+                    70001209,
+                    70002003,
+                    70002007,
+                    70002012,
+                    70003003,
+                    70003006,
+                    70003012,
+                    70003016,
+                    70004003,
+                    70004006,
+                    70004010,
+                    70004013,
+                    70005003,
+                    70005004,
+                    70005012,
+                    70005013,
+                    70006011,
+                    70006012
                 };
-        
+
         /// <summary>
         /// 家园随机怪
         /// </summary>
         [StaticField]
-        public static Dictionary<int, int> JiaYuanMonster = 
+        public static Dictionary<int, int> JiaYuanMonster =
                 new Dictionary<int, int>()
                 {
-                    { 83000101, 50 },       //石块  资金
-                    { 83000102, 30 },       //树叶  给材料
-                    { 83000103, 5 },        //宝箱
-                    { 83000104, 15 }        //带锁的宝箱
+                    { 83000101, 50 }, //石块  资金
+                    { 83000102, 30 }, //树叶  给材料
+                    { 83000103, 5 }, //宝箱
+                    { 83000104, 15 } //带锁的宝箱
                 };
-        
+
         [StaticField]
         public static float3 PastureInitPos = new float3(-15f, 0f, -20f);
-        
+
         [StaticField]
         public static List<float3> PlanPositionList = new List<float3>()
         {
@@ -822,22 +862,18 @@ namespace ET
             new float3(4f - 0.5f, 0f, -33.32f - 0.5f),
             new float3(4f - 0.5f, 0f, -35.39f - 0.5f),
             new float3(4f - 0.5f, 0f, -37.58f - 0.5f),
-
             new float3(1.25f - 0.5f, 0f, -31.24f - 0.5f),
             new float3(1.25f - 0.5f, 0f, -33.32f - 0.5f),
             new float3(1.25f - 0.5f, 0f, -35.39f - 0.5f),
             new float3(1.25f - 0.5f, 0f, -37.58f - 0.5f),
-
             new float3(-2f, 0f, -31.24f - 0.5f),
             new float3(-2f, 0f, -33.32f - 0.5f),
             new float3(-2f, 0f, -35.39f - 0.5f),
             new float3(-2f, 0f, -37.58f - 0.5f),
-
             new float3(-4.75f, 0f, -31.24f - 0.5f),
             new float3(-4.75f, 0f, -33.32f - 0.5f),
             new float3(-4.75f, 0f, -35.39f - 0.5f),
             new float3(-4.75f, 0f, -37.58f - 0.5f),
-
             new float3(-7.5f, 0f, -31.24f - 0.5f),
             new float3(-7.5f, 0f, -33.32f - 0.5f),
             new float3(-7.5f, 0f, -35.39f - 0.5f),

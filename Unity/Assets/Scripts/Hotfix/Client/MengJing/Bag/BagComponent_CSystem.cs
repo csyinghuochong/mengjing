@@ -334,5 +334,31 @@ namespace ET.Client
 
             return self.WarehouseAddedCell[0] + self.AdditionalCellNum[0] + GlobalValueConfigCategory.Instance.BagInitCapacity;
         }
+
+        public static int GetBagShowCell(this BagComponentC self)
+        {
+            return self.AdditionalCellNum[0] + GlobalValueConfigCategory.Instance.BagInitCapacity + GlobalValueConfigCategory.Instance.Get(84).Value2;
+        }
+
+        public static List<BagInfo> GetEquipListByWeizhi(this BagComponentC self, int position)
+        {
+            List<BagInfo> bagInfos = new List<BagInfo>();
+            List<BagInfo> equipList = self.GetEquipList();
+            for (int i = 0; i < equipList.Count; i++)
+            {
+                ItemConfig itemCof = ItemConfigCategory.Instance.Get(equipList[i].ItemID);
+                if (itemCof.ItemSubType == position)
+                {
+                    bagInfos.Add(equipList[i]);
+                }
+            }
+
+            return bagInfos;
+        }
+
+        public static List<BagInfo> GetEquipList(this BagComponentC self)
+        {
+            return self.AllItemList[(int)ItemLocType.ItemLocEquip];
+        }
     }
 }
