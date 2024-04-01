@@ -155,11 +155,16 @@ namespace ET.Client
             uiComponent.CloseWindow(WindowID.WindowID_Role);
         }
 
-        public static void OnClickXiangQianItem(this DlgRole self, BagInfo bagInfo)
+        public static bool OnClickXiangQianItem(this DlgRole self, BagInfo bagInfo)
         {
             if (self.View.ES_RoleGem.uiTransform.gameObject.activeSelf)
             {
                 self.View.ES_RoleGem.OnClickXiangQianItem(bagInfo);
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

@@ -24,16 +24,21 @@ namespace ET.Client
 
             if (args.ItemOperateEnum == ItemOperateEnum.Juese)
             {
-                root.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.OnClickXiangQianItem(args.BagInfo);
-
-                return;
+                DlgRole dlgRole = root.GetComponent<UIComponent>().GetDlgLogic<DlgRole>();
+                if (dlgRole != null && dlgRole.OnClickXiangQianItem(args.BagInfo))
+                {
+                    return;
+                }
             }
 
             if (args.ItemOperateEnum == ItemOperateEnum.XiangQianBag
                 && itemConfig.ItemType == (int)ItemTypeEnum.Equipment)
             {
-                root.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.OnClickXiangQianItem(args.BagInfo);
-
+                DlgRole dlgRole = root.GetComponent<UIComponent>().GetDlgLogic<DlgRole>();
+                if (dlgRole != null && dlgRole.OnClickXiangQianItem(args.BagInfo))
+                {
+                    return;
+                }
                 return;
             }
 
