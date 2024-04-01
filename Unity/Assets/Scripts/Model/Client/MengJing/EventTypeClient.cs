@@ -87,7 +87,6 @@ namespace ET.Client
 
     public struct DataUpdate_UpdateRoleProper
     {
-        
     }
 
     public struct TaskNpcDialog
@@ -100,5 +99,12 @@ namespace ET.Client
     {
         public List<KeyValuePair> OldPetSkin;
         public RolePetInfo RolePetInfo;
+    }
+
+    public struct RolePetUpdate
+    {
+        public long PetId;
+        public int UpdateType;
+        public string UpdateValue;
     }
 }
