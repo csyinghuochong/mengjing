@@ -30,5 +30,6 @@ namespace ET.Client
 		WindowID_Pet,
 		WindowID_SkillTips,
 		WindowID_PetHeXinHeCheng,
+		WindowID_PetHeXinSuit,
 	}
 }

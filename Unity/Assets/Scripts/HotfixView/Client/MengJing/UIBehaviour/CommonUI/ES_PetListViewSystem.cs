@@ -63,6 +63,7 @@ namespace ET.Client
             self.E_ButtonAddPointButton.AddListener(self.OnButtonAddPoint);
             self.E_Btn_ConfirmButton.AddListenerAsync(self.OnBtn_Confirm);
             self.E_ButtonCloseAddPointButton.AddListener(self.OnButtonCloseAddPoint);
+            self.E_PetHeXinSuitButton.AddListenerAsync(self.OnPetHeXinSuitBtn);
 
             EventTrigger LiLiang_Btn_Add = self.EG_AddProperty_LiLiangRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
             EventTrigger LiLiang_Btn_Cost = self.EG_AddProperty_LiLiangRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
@@ -126,6 +127,12 @@ namespace ET.Client
             string text_old = self.E_InputFieldNameInputField.text;
             MaskWordComponent.Instance.IsContainSensitiveWords(ref text_old, out text_new);
             self.E_InputFieldNameInputField.GetComponent<InputField>().text = text_old;
+        }
+
+        public static async ETTask OnPetHeXinSuitBtn(this ES_PetList self)
+        {
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetHeXinSuit);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetHeXinSuit>().UpdateInfo(self.PetHeXinSuit);
         }
 
         private static async ETTask OnButtonRName(this ES_PetList self)

@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 109513352}
   - component: {fileID: 109513351}
   - component: {fileID: 109513350}
-  - component: {fileID: 109513353}
   m_Layer: 0
   m_Name: PopUpRoot
   m_TagString: Untagged
@@ -156,7 +155,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1784017108}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -224,18 +223,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 10
   m_TargetDisplay: 0
---- !u!114 &109513353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 109513348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26ee4a4fb5b13bd48aaae46ec8913c4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &251107983
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,7 +235,6 @@ GameObject:
   - component: {fileID: 251107987}
   - component: {fileID: 251107986}
   - component: {fileID: 251107985}
-  - component: {fileID: 251107988}
   m_Layer: 0
   m_Name: FixedRoot
   m_TagString: Untagged
@@ -269,7 +255,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1784017108}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -337,18 +323,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 20
   m_TargetDisplay: 0
---- !u!114 &251107988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 251107983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26ee4a4fb5b13bd48aaae46ec8913c4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &380230900
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +434,6 @@ GameObject:
   - component: {fileID: 493985073}
   - component: {fileID: 493985072}
   - component: {fileID: 493985071}
-  - component: {fileID: 493985074}
   m_Layer: 0
   m_Name: OtherRoot
   m_TagString: Untagged
@@ -549,18 +522,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 30
   m_TargetDisplay: 0
---- !u!114 &493985074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 493985069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26ee4a4fb5b13bd48aaae46ec8913c4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &575235018
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,8 +908,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 872594940}
-  - {fileID: 251107984}
   - {fileID: 109513349}
+  - {fileID: 251107984}
   - {fileID: 493985070}
   m_Father: {fileID: 575235020}
   m_RootOrder: 3

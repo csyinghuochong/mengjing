@@ -6,6 +6,17 @@ namespace ET
     public static class ConfigData
     {
         /// <summary>
+        /// 三个对应等级套装属性
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, string> PetSuitProperty = new Dictionary<int, string>()
+        {
+            { 5, "205003,0.05;203003,0.2;203103,0.2" },
+            { 8, "205003,0.1;203003,0.25;203103,0.25" },
+            { 10, "205003,0.15;203003,0.3;203103,0.3" },
+        };
+        
+        /// <summary>
         /// 宠物守护（0-3）
         /// </summary>
         [StaticField]
