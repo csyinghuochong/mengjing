@@ -30,6 +30,11 @@ namespace ET.Client
 		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
 		
+		public bool IsHoldDown;
+		public List<int> PointList = new List<int>();
+		public List<int> PointInit = new List<int>();
+		public int PointRemain = 0;
+		
 		public UnityEngine.RectTransform EG_MaskRectTransform
      	{
      		get

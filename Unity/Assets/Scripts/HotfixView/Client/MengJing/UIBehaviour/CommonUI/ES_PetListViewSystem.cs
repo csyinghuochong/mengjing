@@ -58,6 +58,7 @@ namespace ET.Client
             self.E_ButtonEquipHeXinButton.AddListenerAsync(self.OnButtonEquipHeXin);
             self.E_ButtonHeXinHeChengButton.AddListener(self.OnButtonHeXinHeCheng);
             self.E_ButtonCloseHexinButton.AddListener(() => { self.OnChangeNode(1); });
+            self.E_ButtonAddPointButton.AddListener(self.OnButtonAddPoint);
         }
 
         [EntitySystem]
@@ -353,6 +354,8 @@ namespace ET.Client
             self.EG_PetAddPointRectTransform.gameObject.SetActive(nodetype == 3);
         }
 
+        # region 核心
+
         public static void OnButtonPetHeXinItem(this ES_PetList self, int position)
         {
             List<BagInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinBag);
@@ -541,6 +544,44 @@ namespace ET.Client
             self.UpdatePetHexinItem(eqipInfos);
             self.OnUpdateItemList(bagInfos);
         }
+
+        # endregion
+
+        # region 加点
+
+        private static void OnButtonAddPoint(this ES_PetList self)
+        {
+            self.OnChangeNode(3);
+            self.OnInitAddPointUI();
+        }
+
+        private static void OnInitAddPointUI(this ES_PetList self)
+        {
+            self.PointList.Clear();
+            self.PointInit.Clear();
+            string[] propertyList = self.LastSelectItem.AddPropretyValue.Split('_');
+            self.PointList.Add(int.Parse(propertyList[0]));
+            self.PointList.Add(int.Parse(propertyList[1]));
+            self.PointList.Add(int.Parse(propertyList[2]));
+            self.PointList.Add(int.Parse(propertyList[3]));
+            self.PointInit.Clear();
+            self.PointInit.AddRange(self.PointList);
+            self.PointRemain = self.LastSelectItem.AddPropretyNum;
+
+            self.OnUpdateAddPointUI();
+        }
+
+        public static void OnUpdateAddPointUI(this ES_PetList self)
+        {
+            // self.Lab_ShengYuNum.GetComponent<Text>().text = self.PointRemain.ToString();
+            // string[] propertyList = self.RolePetInfo.AddPropretyValue.Split('_');
+            // self.OnUpdateItem(self.AddProperty_LiLiang, self.PointList[0], self.RolePetInfo.PetLv);
+            // self.OnUpdateItem(self.AddProperty_ZhiLi, self.PointList[1], self.RolePetInfo.PetLv);
+            // self.OnUpdateItem(self.AddProperty_TiZhi, self.PointList[2], self.RolePetInfo.PetLv);
+            // self.OnUpdateItem(self.AddProperty_NaiLi, self.PointList[3], self.RolePetInfo.PetLv);
+        }
+
+        # endregion
 
         private static void OnUpdatePetInfo(this ES_PetList self, RolePetInfo rolePetInfo)
         {
