@@ -30,13 +30,15 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this ES_RoleBag self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.Bag, self.UpdateSelect);
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             int openell = bagComponent.GetBagTotalCell();
             if (index < openell)
             {
                 scrollItemCommonItem.ES_CommonItem.UpdateUnLock(true);
+                scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.Bag,
+                    self.UpdateSelect);
             }
             else
             {
@@ -49,101 +51,86 @@ namespace ET.Client
                 scrollItemCommonItem.ES_CommonItem.UpdateUnLock(false);
             }
 
-            self.CheckUpItem();
-        }
-
-        public static void CheckUpItem(this ES_RoleBag self)
-        {
-            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            for (int i = 0; i < self.ScrollItemCommonItems.Count; i++)
+            BagInfo bagInfo = scrollItemCommonItem.ES_CommonItem.Baginfo;
+            if (bagInfo == null)
             {
-                if (self.ScrollItemCommonItems[i].uiTransform == null)
-                {
-                    continue;
-                }
-
-                BagInfo bagInfo = self.ScrollItemCommonItems[i].ES_CommonItem.Baginfo;
-                if (bagInfo == null)
-                {
-                    continue;
-                }
-
-                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
-                if (itemConfig.ItemType != 3)
-                {
-                    continue;
-                }
-
-                int curQulity = 0;
-                int curLevel = 0;
-                List<BagInfo> curEquiplist = bagComponent.GetEquipListByWeizhi(itemConfig.ItemSubType);
-                for (int e = 0; e < curEquiplist.Count; e++)
-                {
-                    ItemConfig curEquipConfig = ItemConfigCategory.Instance.Get(curEquiplist[e].ItemID);
-                    if (curEquipConfig.UseLv < curLevel || curLevel == 0)
-                    {
-                        curLevel = curEquipConfig.UseLv;
-                    }
-
-                    if (curEquipConfig.ItemQuality < curQulity || curQulity == 0)
-                    {
-                        curQulity = curEquipConfig.ItemQuality;
-                    }
-                }
-
-                if (curEquiplist.Count < 3 && itemConfig.ItemSubType == 5)
-                {
-                    curQulity = 0;
-                    curLevel = 0;
-                }
-
-                if (itemConfig.EquipType != 0 && itemConfig.EquipType != 99 && itemConfig.EquipType != 101 && itemConfig.EquipType != 201)
-                {
-                    //武器类型
-                    switch (userInfoComponent.UserInfo.Occ)
-                    {
-                        //战士
-                        case 1:
-                            if (itemConfig.EquipType < 10 && itemConfig.EquipType != 1 && itemConfig.EquipType != 2)
-                            {
-                                continue;
-                            }
-
-                            break;
-
-                        //法师
-                        case 2:
-                            if (itemConfig.EquipType < 10 && itemConfig.EquipType != 3 && itemConfig.EquipType != 4)
-                            {
-                                continue;
-                            }
-
-                            break;
-                        //猎人
-                        case 3:
-                            if (itemConfig.EquipType < 10 && itemConfig.EquipType != 1 && itemConfig.EquipType != 5)
-                            {
-                                continue;
-                            }
-
-                            break;
-                    }
-
-                    if (userInfoComponent.UserInfo.OccTwo > 100)
-                    {
-                        OccupationTwoConfig occTwoCof = OccupationTwoConfigCategory.Instance.Get(userInfoComponent.UserInfo.OccTwo);
-                        //护甲类型
-                        if (itemConfig.EquipType > 10 && itemConfig.EquipType != occTwoCof.ArmorMastery)
-                        {
-                            continue;
-                        }
-                    }
-                }
-
-                self.ScrollItemCommonItems[i].ES_CommonItem.E_UpTipImage.gameObject.SetActive(userInfoComponent.UserInfo.Lv >= itemConfig.UseLv
-                    && itemConfig.UseLv > curLevel && itemConfig.ItemQuality > curQulity && itemConfig.EquipType != 201); // 晶核不显示箭头
+                return;
             }
+
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+            if (itemConfig.ItemType != 3)
+            {
+                return;
+            }
+
+            int curQulity = 0;
+            int curLevel = 0;
+            List<BagInfo> curEquiplist = bagComponent.GetEquipListByWeizhi(itemConfig.ItemSubType);
+            for (int e = 0; e < curEquiplist.Count; e++)
+            {
+                ItemConfig curEquipConfig = ItemConfigCategory.Instance.Get(curEquiplist[e].ItemID);
+                if (curEquipConfig.UseLv < curLevel || curLevel == 0)
+                {
+                    curLevel = curEquipConfig.UseLv;
+                }
+
+                if (curEquipConfig.ItemQuality < curQulity || curQulity == 0)
+                {
+                    curQulity = curEquipConfig.ItemQuality;
+                }
+            }
+
+            if (curEquiplist.Count < 3 && itemConfig.ItemSubType == 5)
+            {
+                curQulity = 0;
+                curLevel = 0;
+            }
+
+            if (itemConfig.EquipType != 0 && itemConfig.EquipType != 99 && itemConfig.EquipType != 101 && itemConfig.EquipType != 201)
+            {
+                //武器类型
+                switch (userInfoComponent.UserInfo.Occ)
+                {
+                    //战士
+                    case 1:
+                        if (itemConfig.EquipType < 10 && itemConfig.EquipType != 1 && itemConfig.EquipType != 2)
+                        {
+                            return;
+                        }
+
+                        break;
+
+                    //法师
+                    case 2:
+                        if (itemConfig.EquipType < 10 && itemConfig.EquipType != 3 && itemConfig.EquipType != 4)
+                        {
+                            return;
+                        }
+
+                        break;
+                    //猎人
+                    case 3:
+                        if (itemConfig.EquipType < 10 && itemConfig.EquipType != 1 && itemConfig.EquipType != 5)
+                        {
+                            return;
+                        }
+
+                        break;
+                }
+
+                if (userInfoComponent.UserInfo.OccTwo > 100)
+                {
+                    OccupationTwoConfig occTwoCof = OccupationTwoConfigCategory.Instance.Get(userInfoComponent.UserInfo.OccTwo);
+                    //护甲类型
+                    if (itemConfig.EquipType > 10 && itemConfig.EquipType != occTwoCof.ArmorMastery)
+                    {
+                        return;
+                    }
+                }
+            }
+
+            scrollItemCommonItem.ES_CommonItem.E_UpTipImage.gameObject.SetActive(userInfoComponent.UserInfo.Lv >= itemConfig.UseLv
+                && itemConfig.UseLv > curLevel && itemConfig.ItemQuality > curQulity && itemConfig.EquipType != 201); // 晶核不显示箭头
         }
 
         public static void OnClickImage_Lock(this ES_RoleBag self)
