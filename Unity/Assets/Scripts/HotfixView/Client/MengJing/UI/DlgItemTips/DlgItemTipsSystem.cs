@@ -345,12 +345,9 @@ namespace ET.Client
             if (itemConfig.ItemType == (int)ItemTypeEnum.PetHeXin)
             {
                 DlgPet dlgPet = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>();
-                errorCode = await dlgPet.RequestPetHeXinSelect();
-                //注销Tips
-                if (errorCode == ErrorCode.ERR_Success)
-                {
-                    self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
-                }
+                await dlgPet.RequestPetHeXinSelect();
+
+                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
 
                 return;
             }

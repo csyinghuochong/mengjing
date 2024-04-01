@@ -60,9 +60,9 @@ namespace ET.Client
 			uiComponent.CloseWindow(WindowID.WindowID_Pet);
 		}
 		
-		public static async ETTask<int> RequestPetHeXinSelect(this DlgPet self)
+		public static async ETTask RequestPetHeXinSelect(this DlgPet self)
 		{
-			return await self.View.ES_PetList.OnButtonEquipHeXin();
+			await self.View.ES_PetList.OnButtonEquipHeXin();
 		}
 
 	}
