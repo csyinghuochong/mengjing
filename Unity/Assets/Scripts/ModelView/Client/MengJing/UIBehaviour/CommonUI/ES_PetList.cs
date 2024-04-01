@@ -34,7 +34,7 @@ namespace ET.Client
 		public List<int> PointList = new List<int>();
 		public List<int> PointInit = new List<int>();
 		public int PointRemain = 0;
-		
+
 		public UnityEngine.RectTransform EG_MaskRectTransform
      	{
      		get
@@ -1158,6 +1158,125 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_Lab_ShengYuNumText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Lab_ShengYuNumText == null )
+     			{
+		    		this.m_E_Lab_ShengYuNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Right/EG_PetAddPoint/E_Lab_ShengYuNum");
+     			}
+     			return this.m_E_Lab_ShengYuNumText;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_ConfirmButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_ConfirmButton == null )
+     			{
+		    		this.m_E_Btn_ConfirmButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Right/EG_PetAddPoint/E_Btn_Confirm");
+     			}
+     			return this.m_E_Btn_ConfirmButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_ConfirmImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_ConfirmImage == null )
+     			{
+		    		this.m_E_Btn_ConfirmImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/EG_PetAddPoint/E_Btn_Confirm");
+     			}
+     			return this.m_E_Btn_ConfirmImage;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_AddProperty_LiLiangRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_AddProperty_LiLiangRectTransform == null )
+     			{
+		    		this.m_EG_AddProperty_LiLiangRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Right/EG_PetAddPoint/EG_AddProperty_LiLiang");
+     			}
+     			return this.m_EG_AddProperty_LiLiangRectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_AddProperty_ZhiLiRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_AddProperty_ZhiLiRectTransform == null )
+     			{
+		    		this.m_EG_AddProperty_ZhiLiRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Right/EG_PetAddPoint/EG_AddProperty_ZhiLi");
+     			}
+     			return this.m_EG_AddProperty_ZhiLiRectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_AddProperty_TiZhiRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_AddProperty_TiZhiRectTransform == null )
+     			{
+		    		this.m_EG_AddProperty_TiZhiRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Right/EG_PetAddPoint/EG_AddProperty_TiZhi");
+     			}
+     			return this.m_EG_AddProperty_TiZhiRectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_AddProperty_NaiLiRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_AddProperty_NaiLiRectTransform == null )
+     			{
+		    		this.m_EG_AddProperty_NaiLiRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Right/EG_PetAddPoint/EG_AddProperty_NaiLi");
+     			}
+     			return this.m_EG_AddProperty_NaiLiRectTransform;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_ButtonCloseAddPointButton
      	{
      		get
@@ -1561,6 +1680,13 @@ namespace ET.Client
 			this.m_E_ButtonEquipXieXiaButton = null;
 			this.m_E_ButtonEquipXieXiaImage = null;
 			this.m_EG_PetAddPointRectTransform = null;
+			this.m_E_Lab_ShengYuNumText = null;
+			this.m_E_Btn_ConfirmButton = null;
+			this.m_E_Btn_ConfirmImage = null;
+			this.m_EG_AddProperty_LiLiangRectTransform = null;
+			this.m_EG_AddProperty_ZhiLiRectTransform = null;
+			this.m_EG_AddProperty_TiZhiRectTransform = null;
+			this.m_EG_AddProperty_NaiLiRectTransform = null;
 			this.m_E_ButtonCloseAddPointButton = null;
 			this.m_E_ButtonCloseAddPointImage = null;
 			this.m_EG_EquipSetRectTransform = null;
@@ -1649,6 +1775,13 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_ButtonEquipXieXiaButton = null;
 		private UnityEngine.UI.Image m_E_ButtonEquipXieXiaImage = null;
 		private UnityEngine.RectTransform m_EG_PetAddPointRectTransform = null;
+		private UnityEngine.UI.Text m_E_Lab_ShengYuNumText = null;
+		private UnityEngine.UI.Button m_E_Btn_ConfirmButton = null;
+		private UnityEngine.UI.Image m_E_Btn_ConfirmImage = null;
+		private UnityEngine.RectTransform m_EG_AddProperty_LiLiangRectTransform = null;
+		private UnityEngine.RectTransform m_EG_AddProperty_ZhiLiRectTransform = null;
+		private UnityEngine.RectTransform m_EG_AddProperty_TiZhiRectTransform = null;
+		private UnityEngine.RectTransform m_EG_AddProperty_NaiLiRectTransform = null;
 		private UnityEngine.UI.Button m_E_ButtonCloseAddPointButton = null;
 		private UnityEngine.UI.Image m_E_ButtonCloseAddPointImage = null;
 		private UnityEngine.RectTransform m_EG_EquipSetRectTransform = null;

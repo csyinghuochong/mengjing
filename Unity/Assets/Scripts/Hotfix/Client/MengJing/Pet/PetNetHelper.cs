@@ -126,5 +126,16 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<RolePetInfo> RequestRolePetJiadian(Scene root, long petInfoId, List<int> addPropretyValue)
+        {
+            C2M_RolePetJiadian request = new() { PetInfoId = petInfoId, AddPropretyValue = addPropretyValue };
+            M2C_RolePetJiadian response =
+                    (M2C_RolePetJiadian)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            root.GetComponent<PetComponentC>().OnRolePetUpdate(response.RolePetInfo);
+
+            return response.RolePetInfo;
+        }
     }
 }

@@ -59,6 +59,35 @@ namespace ET.Client
             self.E_ButtonHeXinHeChengButton.AddListener(self.OnButtonHeXinHeCheng);
             self.E_ButtonCloseHexinButton.AddListener(() => { self.OnChangeNode(1); });
             self.E_ButtonAddPointButton.AddListener(self.OnButtonAddPoint);
+            self.E_Btn_ConfirmButton.AddListenerAsync(self.OnBtn_Confirm);
+
+            EventTrigger LiLiang_Btn_Add = self.EG_AddProperty_LiLiangRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
+            EventTrigger LiLiang_Btn_Cost = self.EG_AddProperty_LiLiangRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
+            LiLiang_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(0).Coroutine(); });
+            LiLiang_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(0).Coroutine(); });
+            LiLiang_Btn_Add.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
+            LiLiang_Btn_Cost.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
+
+            EventTrigger ZhiLi_Btn_Add = self.EG_AddProperty_ZhiLiRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
+            EventTrigger ZhiLi_Btn_Cost = self.EG_AddProperty_ZhiLiRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
+            ZhiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(0).Coroutine(); });
+            ZhiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(0).Coroutine(); });
+            ZhiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
+            ZhiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
+
+            EventTrigger TiZhi_Btn_Add = self.EG_AddProperty_TiZhiRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
+            EventTrigger TiZhi_Btn_Cost = self.EG_AddProperty_TiZhiRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
+            TiZhi_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(0).Coroutine(); });
+            TiZhi_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(0).Coroutine(); });
+            TiZhi_Btn_Add.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
+            TiZhi_Btn_Cost.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
+
+            EventTrigger NaiLi_Btn_Add = self.EG_AddProperty_NaiLiRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
+            EventTrigger NaiLi_Btn_Cost = self.EG_AddProperty_NaiLiRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
+            NaiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(0).Coroutine(); });
+            NaiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(0).Coroutine(); });
+            NaiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
+            NaiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
         }
 
         [EntitySystem]
@@ -555,6 +584,11 @@ namespace ET.Client
             self.OnInitAddPointUI();
         }
 
+        private static void OnButtonCloseAddPoint(this ES_PetList self)
+        {
+            self.OnChangeNode(1);
+        }
+
         private static void OnInitAddPointUI(this ES_PetList self)
         {
             self.PointList.Clear();
@@ -571,14 +605,83 @@ namespace ET.Client
             self.OnUpdateAddPointUI();
         }
 
-        public static void OnUpdateAddPointUI(this ES_PetList self)
+        private static void OnUpdateAddPointUI(this ES_PetList self)
         {
-            // self.Lab_ShengYuNum.GetComponent<Text>().text = self.PointRemain.ToString();
-            // string[] propertyList = self.RolePetInfo.AddPropretyValue.Split('_');
-            // self.OnUpdateItem(self.AddProperty_LiLiang, self.PointList[0], self.RolePetInfo.PetLv);
-            // self.OnUpdateItem(self.AddProperty_ZhiLi, self.PointList[1], self.RolePetInfo.PetLv);
-            // self.OnUpdateItem(self.AddProperty_TiZhi, self.PointList[2], self.RolePetInfo.PetLv);
-            // self.OnUpdateItem(self.AddProperty_NaiLi, self.PointList[3], self.RolePetInfo.PetLv);
+            self.E_Lab_ShengYuNumText.text = self.PointRemain.ToString();
+            self.OnUpdateItem(self.EG_AddProperty_LiLiangRectTransform.gameObject, self.PointList[0], self.LastSelectItem.PetLv);
+            self.OnUpdateItem(self.EG_AddProperty_ZhiLiRectTransform.gameObject, self.PointList[1], self.LastSelectItem.PetLv);
+            self.OnUpdateItem(self.EG_AddProperty_TiZhiRectTransform.gameObject, self.PointList[2], self.LastSelectItem.PetLv);
+            self.OnUpdateItem(self.EG_AddProperty_NaiLiRectTransform.gameObject, self.PointList[3], self.LastSelectItem.PetLv);
+        }
+
+        private static void OnUpdateItem(this ES_PetList self, GameObject gameObject, int number, int level)
+        {
+            gameObject.transform.Find("Lab_Value").GetComponent<Text>().text = (number + level).ToString();
+        }
+
+        private static async ETTask PointerDown_Btn_AddNum(this ES_PetList self, int addType)
+        {
+            self.IsHoldDown = true;
+            self.Btn_AddProprety(addType, 1);
+            int interval = 0;
+            while (self.IsHoldDown)
+            {
+                interval++;
+                if (interval > 60)
+                {
+                    self.Btn_AddProprety(addType, 1);
+                }
+
+                await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
+            }
+        }
+
+        private static async ETTask PointerDown_Btn_CostNum(this ES_PetList self, int addType)
+        {
+            self.IsHoldDown = true;
+            self.Btn_AddProprety(addType, -1);
+            int interval = 0;
+            while (self.IsHoldDown)
+            {
+                interval++;
+                if (interval > 60)
+                {
+                    self.Btn_AddProprety(addType, -1);
+                }
+
+                await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
+            }
+        }
+
+        private static void PointerUp_Btn_AddNum(this ES_PetList self)
+        {
+            self.IsHoldDown = false;
+        }
+
+        private static void Btn_AddProprety(this ES_PetList self, int addType, int value)
+        {
+            if (self.PointRemain <= 0 && value > 0)
+            {
+                return;
+            }
+
+            int typeValue = self.PointList[addType];
+            if (typeValue <= self.PointInit[addType] && value < 0)
+            {
+                return;
+            }
+
+            self.PointRemain += (value * -1);
+            self.PointList[addType] += value;
+
+            self.OnUpdateUI();
+        }
+
+        private static async ETTask OnBtn_Confirm(this ES_PetList self)
+        {
+            self.LastSelectItem = await PetNetHelper.RequestRolePetJiadian(self.Root(), self.LastSelectItem.Id, self.PointList);
+            self.OnInitAddPointUI();
+            self.OnUpdatePetPoint(self.LastSelectItem);
         }
 
         # endregion
