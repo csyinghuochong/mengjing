@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (BattleMessageComponent))]
     [FriendOf(typeof (Scroll_Item_CommonItem))]
     [FriendOf(typeof (Scroll_Item_CommonSkillItem))]
     [FriendOf(typeof (Scroll_Item_PetSkinIconItem))]
@@ -50,6 +51,8 @@ namespace ET.Client
             self.PetHeXinItemList[1] = self.E_PetHeXinItem1Image.gameObject;
             self.PetHeXinItemList[2] = self.E_PetHeXinItem2Image.gameObject;
 
+            self.E_Btn_FangShengButton.AddListener(self.OnBtn_FangSheng);
+            self.E_Btn_ChuZhanButton.AddListener(self.OnClickChuZhan);
             self.E_InputFieldNameInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords(); });
             self.E_ButtonRNameButton.AddListenerAsync(self.OnButtonRName);
             self.E_PetListItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetListItemsRefresh);
@@ -119,6 +122,99 @@ namespace ET.Client
             self.EG_PetPiFuSetRectTransform.gameObject.SetActive(index == 2);
 
             self.EG_ButtonNodeRectTransform.gameObject.SetActive(index != 2);
+        }
+
+        private static void OnBtn_FangSheng(this ES_PetList self)
+        {
+            if (self.LastSelectItem == null)
+            {
+                return;
+            }
+
+            if (self.LastSelectItem.IsProtect)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("宠物已锁定！");
+                return;
+            }
+
+            if (self.LastSelectItem.PetStatus == 1)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("出战宠物不能分解！");
+                return;
+            }
+
+            if (self.LastSelectItem.PetStatus == 2)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("请先停止家园散步！");
+                return;
+            }
+
+            if (self.LastSelectItem.PetStatus == 3)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("请先从仓库取出！");
+                return;
+            }
+
+            if (self.Root().GetComponent<PetComponentC>().TeamPetList.Contains(self.LastSelectItem.Id))
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("当前宠物存在于宠物天梯上阵中,不能分解！");
+                return;
+            }
+
+            if (self.Root().GetComponent<PetComponentC>().PetFormations.Contains(self.LastSelectItem.Id))
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("当前宠物存在于宠物副本上阵中,不能分解！");
+                return;
+            }
+
+            if (PetHelper.IsShenShou(self.LastSelectItem.ConfigId))
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("神兽不能放生");
+                return;
+            }
+
+            if (PetHelper.HavePetHeXin(self.LastSelectItem))
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("请先卸下宠物之核！");
+                return;
+            }
+
+            //if (self.PetComponent.PetMingList.Contains(self.LastSelectItem.Id))
+            //{
+            //    FloatTipManager.Instance.ShowFloatTip("当前宠物存在于宠物矿场队伍中,不能分解！");
+            //    return;
+            //}
+            PopupTipHelp.OpenPopupTip(self.Root(), "", GameSettingLanguge.LoadLocalization("确定放生?"),
+                () => { PetNetHelper.RequestFenJie(self.Root(), self.LastSelectItem.Id).Coroutine(); },
+                null).Coroutine();
+        }
+
+        private static void OnClickChuZhan(this ES_PetList self)
+        {
+            RolePetInfo rolePetInfo = self.LastSelectItem;
+            if (rolePetInfo == null)
+            {
+                return;
+            }
+
+            if (rolePetInfo.PetStatus == 2)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("先停止散步！");
+                return;
+            }
+
+            Dictionary<long, long> PetFightTime = self.Root().GetComponent<BattleMessageComponent>().PetFightCD;
+            long cdTime = 0;
+            //出战
+            PetFightTime.TryGetValue(rolePetInfo.Id, out cdTime);
+
+            if (TimeHelper.ClientNow() - cdTime < 180 * TimeHelper.Second)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("出战冷却中！");
+                return;
+            }
+
+            PetNetHelper.RequestPetFight(self.Root(), rolePetInfo.Id, rolePetInfo.PetStatus == 0? 1 : 0).Coroutine();
         }
 
         private static void CheckSensitiveWords(this ES_PetList self)
