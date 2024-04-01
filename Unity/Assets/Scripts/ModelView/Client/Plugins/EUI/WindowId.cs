@@ -31,5 +31,6 @@ namespace ET.Client
 		WindowID_SkillTips,
 		WindowID_PetHeXinHeCheng,
 		WindowID_PetHeXinSuit,
+		WindowID_PetSelect,
 	}
 }

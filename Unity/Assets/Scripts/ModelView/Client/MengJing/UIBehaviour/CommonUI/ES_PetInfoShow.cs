@@ -1,12 +1,20 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetInfoShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_PetInfoShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public GameObject[] PetZiZhiItemList = new GameObject[6];
+		public int Weizhi; //-1左 1 右边
+		public PetOperationType BagOperationType;
+		public RolePetInfo RolePetInfo;
+		public Dictionary<int, Scroll_Item_CommonSkillItem> ScrollItemCommonSkillItems;
+		public List<int> ShowPetSkills = new();
+		
 		public UnityEngine.RectTransform EG_ImageStarListRectTransform
      	{
      		get
