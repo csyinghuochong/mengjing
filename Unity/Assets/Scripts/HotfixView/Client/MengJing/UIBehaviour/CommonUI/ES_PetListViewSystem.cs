@@ -55,6 +55,9 @@ namespace ET.Client
             self.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
             self.E_PetHeXinListLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetHeXinListItemsRefresh);
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
+            self.E_ButtonEquipHeXinButton.AddListenerAsync(self.OnButtonEquipHeXin);
+            self.E_ButtonHeXinHeChengButton.AddListener(self.OnButtonHeXinHeCheng);
+            self.E_ButtonCloseHexinButton.AddListener(() => { self.OnChangeNode(1); });
         }
 
         [EntitySystem]
@@ -511,6 +514,11 @@ namespace ET.Client
                     await PetNetHelper.RequestRolePetHeXin(self.Root(), 1, self.BagInfo.BagInfoID, self.LastSelectItem.Id, self.Position);
 
             self.OnEquipPetHeXin();
+        }
+
+        public static void OnButtonHeXinHeCheng(this ES_PetList self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetHeXinHeCheng).Coroutine();
         }
 
         private static async ETTask OnButtonEquipXieXia(this ES_PetList self)

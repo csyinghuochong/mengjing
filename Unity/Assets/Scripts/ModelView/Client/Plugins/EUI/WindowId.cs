@@ -29,5 +29,6 @@ namespace ET.Client
 		WindowID_AppraisalSelect,
 		WindowID_Pet,
 		WindowID_SkillTips,
+		WindowID_PetHeXinHeCheng,
 	}
 }
