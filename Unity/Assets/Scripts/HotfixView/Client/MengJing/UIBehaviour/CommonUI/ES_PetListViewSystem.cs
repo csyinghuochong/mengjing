@@ -531,7 +531,7 @@ namespace ET.Client
             self.OnEquipPetHeXin();
         }
 
-        private static void OnEquipPetHeXin(this ES_PetList self)
+        public static void OnEquipPetHeXin(this ES_PetList self)
         {
             List<BagInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinBag);
             List<BagInfo> eqipInfos = self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinEquip);

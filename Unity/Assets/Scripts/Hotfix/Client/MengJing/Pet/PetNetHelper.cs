@@ -109,5 +109,22 @@ namespace ET.Client
             root.GetComponent<PetComponentC>().OnRolePetUpdate(response.RolePetInfo);
             return response.RolePetInfo;
         }
+
+        public static async ETTask<int> RequestPetHeXinHeCheng(Scene root, long bagInfoID_1, long bagInfoID_2)
+        {
+            C2M_PetHeXinHeChengRequest request = new() { BagInfoID_1 = bagInfoID_1, BagInfoID_2 = bagInfoID_2 };
+            M2C_PetHeXinHeChengResponse response = (M2C_PetHeXinHeChengResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> RequestPetHeXinHeChengQuick(Scene root)
+        {
+            C2M_PetHeXinHeChengQuickRequest request = new();
+            M2C_PetHeXinHeChengQuickResponse response =
+                    (M2C_PetHeXinHeChengQuickResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
 }

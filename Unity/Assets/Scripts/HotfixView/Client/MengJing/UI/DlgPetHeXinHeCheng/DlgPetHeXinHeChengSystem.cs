@@ -2,24 +2,193 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
-	[FriendOf(typeof(DlgPetHeXinHeCheng))]
-	public static  class DlgPetHeXinHeChengSystem
-	{
+    [FriendOf(typeof (DlgPetHeXinHeChengViewComponent))]
+    [FriendOf(typeof (Scroll_Item_CommonItem))]
+    [FriendOf(typeof (ES_CommonItem))]
+    [FriendOf(typeof (DlgPetHeXinHeCheng))]
+    public static class DlgPetHeXinHeChengSystem
+    {
+        public static void RegisterUIEvent(this DlgPetHeXinHeCheng self)
+        {
+        }
 
-		public static void RegisterUIEvent(this DlgPetHeXinHeCheng self)
-		{
-		 
-		}
+        public static void ShowWindow(this DlgPetHeXinHeCheng self, Entity contextData = null)
+        {
+            self.View.E_ImagePetHexinItemIconImage.gameObject.SetActive(false);
 
-		public static void ShowWindow(this DlgPetHeXinHeCheng self, Entity contextData = null)
-		{
-		}
+            self.View.E_PetHeXinListLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetHeXinListItemsRefresh);
 
-		 
+            self.View.E_Btn_CloseButton.AddListener(() =>
+            {
+                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetHeXinHeCheng);
+            });
+            self.View.E_Button_OneKeyButton.AddListenerAsync(self.Button_OneKey);
 
-	}
+            self.OnUpdateItemList();
+        }
+
+        public static async ETTask Button_OneKey(this DlgPetHeXinHeCheng self)
+        {
+            int error = await PetNetHelper.RequestPetHeXinHeChengQuick(self.Root());
+
+            if (error == 0)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("宠物之核合成成功！"));
+            }
+
+            self.OnUpdateItemList();
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>()?.OnEquipPetHeXin();
+        }
+
+        private static void OnUpdateItemList(this DlgPetHeXinHeCheng self)
+        {
+            self.ShowBagInfos.Clear();
+            self.ShowBagInfos.AddRange(self.Root().GetComponent<BagComponentC>().GetItemsByLoc(ItemLocType.ItemPetHeXinBag));
+
+            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
+            self.View.E_PetHeXinListLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
+        }
+
+        private static void OnPetHeXinListItemsRefresh(this DlgPetHeXinHeCheng self, Transform transform, int index)
+        {
+            Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
+
+            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (BagInfo binfo, PointerEventData pdata) =>
+            {
+                self.PointerDown(binfo, pdata).Coroutine();
+            };
+            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (BagInfo binfo, PointerEventData pdata) => { self.PointerUp(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (BagInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.DragingHandler = (BagInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.EndDragHandler = (BagInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
+
+            scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.None);
+
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.ShowBagInfos[index].ItemID);
+            scrollItemCommonItem.ES_CommonItem.HideItemName();
+            scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
+            scrollItemCommonItem.ES_CommonItem.E_ItemNumText.text = $"{itemConfig.UseLv}级";
+            scrollItemCommonItem.uiTransform.GetChild(0).name = $"PetHeXinHeCheng_Image_ItemButton@{self.ShowBagInfos[index].BagInfoID}";
+        }
+
+        private static async ETTask PointerDown(this DlgPetHeXinHeCheng self, BagInfo binfo, PointerEventData pdata)
+        {
+            self.IsHoldDown = true;
+            self.BagInfo = binfo;
+            self.cancellationToken?.Cancel();
+            self.cancellationToken = new ETCancellationToken();
+            long instanceId = self.InstanceId;
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(200, self.cancellationToken);
+            if (instanceId != self.InstanceId)
+            {
+                return;
+            }
+
+            if (self.IsHoldDown)
+            {
+                EventSystem.Instance.Publish(self.Root(),
+                    new ShowItemTips()
+                    {
+                        BagInfo = self.BagInfo,
+                        ItemOperateEnum = ItemOperateEnum.None,
+                        InputPoint = Input.mousePosition,
+                        Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
+                        EquipList = new List<BagInfo>()
+                    });
+            }
+        }
+
+        private static void PointerUp(this DlgPetHeXinHeCheng self, BagInfo binfo, PointerEventData pdata)
+        {
+            self.IsHoldDown = false;
+            self.BagInfo = null;
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+        }
+
+        private static void BeginDrag(this DlgPetHeXinHeCheng self, BagInfo binfo, PointerEventData pdata)
+        {
+            self.IsHoldDown = false;
+            self.BagInfo = null;
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+            self.BagItemCopy = UnityEngine.Object.Instantiate(self.View.E_ImagePetHexinItemIconImage.gameObject, self.View.uiTransform);
+            self.BagItemCopy.SetActive(true);
+
+            ItemConfig itemconfig = ItemConfigCategory.Instance.Get(binfo.ItemID);
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemconfig.Icon);
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+            self.BagItemCopy.GetComponent<Image>().sprite = sp;
+        }
+
+        private static void Draging(this DlgPetHeXinHeCheng self, BagInfo binfo, PointerEventData pdata)
+        {
+            self.IsHoldDown = false;
+            self.BagInfo = null;
+            Vector2 localPoint;
+            RectTransform canvas = self.BagItemCopy.transform.parent.GetComponent<RectTransform>();
+            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
+
+            self.BagItemCopy.transform.localPosition = new Vector3(localPoint.x, localPoint.y, 0f);
+        }
+
+        private static void EndDrag(this DlgPetHeXinHeCheng self, BagInfo binfo, PointerEventData pdata)
+        {
+            self.IsHoldDown = false;
+            self.BagInfo = null;
+            RectTransform canvas = self.BagItemCopy.transform.parent.GetComponent<RectTransform>();
+            GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();
+            List<RaycastResult> results = new List<RaycastResult>();
+            gr.Raycast(pdata, results);
+
+            for (int i = 0; i < results.Count; i++)
+            {
+                string name = results[i].gameObject.name;
+                if (!name.Contains("PetHeXinHeCheng_Image_ItemButton"))
+                {
+                    continue;
+                }
+
+                long baginfoId = long.Parse(name.Split('@')[1]);
+                self.RequestPetHeXinHeCheng(binfo, self.Root().GetComponent<BagComponentC>().GetBagInfo(baginfoId)).Coroutine();
+                break;
+            }
+
+            if (self.BagItemCopy != null)
+            {
+                UnityEngine.Object.Destroy(self.BagItemCopy);
+                self.BagItemCopy = null;
+            }
+        }
+
+        private static async ETTask RequestPetHeXinHeCheng(this DlgPetHeXinHeCheng self, BagInfo bagInfo1, BagInfo bagInfo2)
+        {
+            if (bagInfo1.BagInfoID == bagInfo2.BagInfoID)
+            {
+                return;
+            }
+
+            if (bagInfo1.ItemID != bagInfo2.ItemID)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("同类型和同等级的宠物之核才能合成！"));
+                return;
+            }
+
+            int error = await PetNetHelper.RequestPetHeXinHeCheng(self.Root(), bagInfo1.BagInfoID, bagInfo2.BagInfoID);
+
+            if (error == 0)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("宠物之核合成成功！"));
+            }
+
+            self.OnUpdateItemList();
+
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>()?.OnEquipPetHeXin();
+        }
+    }
 }
