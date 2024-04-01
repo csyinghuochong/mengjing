@@ -6,7 +6,7 @@ namespace ET.Client
     public class GameObjectComponent: Entity, IAwake, IDestroy
     {
         public string UnitAssetsPath;
-        public GameObject GameObject;
+        public GameObject GameObject { get; set; }
         public string HorseAssetsPath;
         public GameObject ObjectHorse;
         public Material Material;

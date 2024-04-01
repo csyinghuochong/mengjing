@@ -25,7 +25,7 @@ namespace ET
         //掉落
         public List<DropInfo> Drops = new List<DropInfo>();
 
-        public List<int> FashionEquipList = new List<int>();
+        public List<int> FashionEquipList { get; set; } = new List<int>();
 
 
         public int LastDungeonId  { get; set; } = 0;

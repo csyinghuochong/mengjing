@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -103,115 +104,115 @@ namespace ET.Client
                     int runmonsterId = numericComponent.GetAsInt(NumericType.RunRaceTransform);
                     int cardtransform = numericComponent.GetAsInt(NumericType.CardTransform);
                     self.OnRunRaceMonster(runmonsterId, cardtransform, false);
-                    //if (runmonsterId > 0)
-                    //{
-                    //    self.OnRunRaceMonster( runmonsterId, false );  
-                    //}
-                    //else
-                    //{
-                    //    path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(unit.ConfigId).ModelAsset}");
-                    //    GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
-                    //    self.UnitAssetsPath = string.Empty;
-                    //}
+                    if (runmonsterId > 0)
+                    {
+                        self.OnRunRaceMonster( runmonsterId, false );  
+                    }
+                    else
+                    {
+                        path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(unit.ConfigId).ModelAsset}");
+                        GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
+                        self.UnitAssetsPath = string.Empty;
+                    }
                     break;
                 case UnitType.Stall:
                     path = ABPathHelper.GetUnitPath("Player/BaiTan");
                     // GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
                     self.UnitAssetsPath = path;
                     break;
-                // case UnitType.Monster:
-                //     int monsterId = unit.ConfigId;
-                //     MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(monsterId);
-                //     int userMaterModel = unit.GetComponent<NumericComponentClient>().GetAsInt(NumericType.UseMasterModel);
-                //     long masterId = unit.GetComponent<NumericComponentClient>().GetAsLong(NumericType.MasterId);
-                //     Unit master = unit.GetParent<UnitComponent>().Get(masterId);
-                //
-                //     if (userMaterModel == 1 && master != null
-                //         && master.GetComponent<GameObjectComponent>() != null
-                //         && master.GetComponent<GameObjectComponent>().GameObject != null)
-                //     {
-                //         GameObject gameObject = GameObject.Instantiate(master.GetComponent<GameObjectComponent>().GameObject);
-                //         self.OnLoadGameObject(gameObject, self.InstanceId);
-                //     }
-                //     else if (monsterCof.MonsterSonType == 58)
-                //     {
-                //         //path = ABPathHelper.GetUnitPath("Pet/" + monsterCof.MonsterModelID);
-                //         int itemid = monsterCof.Parameter[1];
-                //         ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemid);
-                //         int petskinId = unit.GetComponent<NumericComponentClient>().GetAsInt(NumericType.PetSkin);
-                //         path = ABPathHelper.GetUnitPath("Pet/" + PetSkinConfigCategory.Instance.Get(petskinId).SkinID);
-                //         GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
-                //         self.UnitAssetsPath = path;
-                //     }
-                //     else if (monsterCof.MonsterSonType == 59)
-                //     {
-                //         path = ABPathHelper.GetUnitPath("JingLing/" + monsterCof.MonsterModelID);
-                //         GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
-                //         self.UnitAssetsPath = path;
-                //     }
-                //     else
-                //     {
-                //         path = StringBuilderHelper.GetMonsterUnitPath(monsterCof.MonsterModelID);
-                //         GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
-                //         self.UnitAssetsPath = path;
-                //     }
-                //     break;
-                // case UnitType.Pet:
-                //     int skinId = unit.GetComponent<NumericComponentClient>().GetAsInt(NumericType.PetSkin);
-                //     int configId = unit.ConfigId;
-                //     PetConfig petConfig = PetConfigCategory.Instance.Get(configId);
-                //     if (skinId == 0)
-                //     {
-                //         skinId = petConfig.Skin[0];
-                //     }
-                //     PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(skinId);
-                //     path = ABPathHelper.GetUnitPath("Pet/" + petSkinConfig.SkinID.ToString());
-                //     GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
-                //     self.UnitAssetsPath = path;
-                //     break;
-                // case UnitType.Bullet:   //从特效里面加载
-                //     int skillid = unit.ConfigId;
-                //     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
-                //     EffectConfig effectConfig = EffectConfigCategory.Instance.Get(skillConfig.SkillEffectID[0]);
-                //     self.DelayShow =  (long)(1000 * effectConfig.SkillEffectDelayTime);
-                //     path = ABPathHelper.GetEffetPath("SkillEffect/" + effectConfig.EffectName);
-                //     GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
-                //     self.UnitAssetsPath = path;
-                //     break;
-                // case UnitType.Npc:
-                //     int npcId = unit.ConfigId;
-                //     NpcConfig config = NpcConfigCategory.Instance.Get(npcId);
-                //     path = ABPathHelper.GetUnitPath("Npc/" + config.Asset);
-                //     GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
-                //     self.UnitAssetsPath = path;
-                //     break;
-                // case UnitType.DropItem:
-                //     DropComponent dropComponent = unit.GetComponent<DropComponent>();
-                //     string assetPath = dropComponent.DropInfo.ItemID == 1 ? "DropICoin" : "DropItem";
-                //     path = ABPathHelper.GetUnitPath($"Player/{assetPath}");
-                //     GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
-                //     self.UnitAssetsPath = path;
-                //     break;
-                // case UnitType.Chuansong:
-                //     path = ABPathHelper.GetUnitPath("Monster/DorrWay_1");
-                //     GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
-                //     break;
-                // case UnitType.JingLing:
-                //     JingLingConfig jingLing = JingLingConfigCategory.Instance.Get(unit.ConfigId);
-                //     path = ABPathHelper.GetUnitPath("JingLing/" + jingLing.Assets);
-                //     GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
-                //     self.UnitAssetsPath = path;
-                //     break;
-                // case UnitType.Plant:
-                //     self.OnUpdatePlan();
-                //     break;
-                // case UnitType.Pasture:
-                //     JiaYuanPastureConfig jiaYuanPastureConfig = JiaYuanPastureConfigCategory.Instance.Get(unit.ConfigId);
-                //     path = ABPathHelper.GetUnitPath("Pasture/" + jiaYuanPastureConfig.Assets);
-                //     GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
-                //     break;
-                // default:
-                //     break;
+                case UnitType.Monster:
+                    int monsterId = unit.ConfigId;
+                    MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(monsterId);
+                    int userMaterModel = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.UseMasterModel);
+                    long masterId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.MasterId);
+                    Unit master = unit.GetParent<UnitComponent>().Get(masterId);
+                
+                    if (userMaterModel == 1 && master != null
+                        && master.GetComponent<GameObjectComponent>() != null
+                        && master.GetComponent<GameObjectComponent>().GameObject != null)
+                    {
+                        GameObject gameObject = GameObject.Instantiate(master.GetComponent<GameObjectComponent>().GameObject);
+                        self.OnLoadGameObject(gameObject, self.InstanceId);
+                    }
+                    else if (monsterCof.MonsterSonType == 58)
+                    {
+                        //path = ABPathHelper.GetUnitPath("Pet/" + monsterCof.MonsterModelID);
+                        int itemid = monsterCof.Parameter[1];
+                        ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemid);
+                        int petskinId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetSkin);
+                        path = ABPathHelper.GetUnitPath("Pet/" + PetSkinConfigCategory.Instance.Get(petskinId).SkinID);
+                        GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
+                        self.UnitAssetsPath = path;
+                    }
+                    else if (monsterCof.MonsterSonType == 59)
+                    {
+                        path = ABPathHelper.GetUnitPath("JingLing/" + monsterCof.MonsterModelID);
+                        GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
+                        self.UnitAssetsPath = path;
+                    }
+                    else
+                    {
+                        path = StringBuilderHelper.GetMonsterUnitPath(monsterCof.MonsterModelID);
+                        GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
+                        self.UnitAssetsPath = path;
+                    }
+                    break;
+                case UnitType.Pet:
+                    int skinId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetSkin);
+                    int configId = unit.ConfigId;
+                    PetConfig petConfig = PetConfigCategory.Instance.Get(configId);
+                    if (skinId == 0)
+                    {
+                        skinId = petConfig.Skin[0];
+                    }
+                    PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(skinId);
+                    path = ABPathHelper.GetUnitPath("Pet/" + petSkinConfig.SkinID.ToString());
+                    GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
+                    self.UnitAssetsPath = path;
+                    break;
+                case UnitType.Bullet:   //从特效里面加载
+                    int skillid = unit.ConfigId;
+                    SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
+                    EffectConfig effectConfig = EffectConfigCategory.Instance.Get(skillConfig.SkillEffectID[0]);
+                    self.DelayShow =  (long)(1000 * effectConfig.SkillEffectDelayTime);
+                    path = ABPathHelper.GetEffetPath("SkillEffect/" + effectConfig.EffectName);
+                    GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
+                    self.UnitAssetsPath = path;
+                    break;
+                case UnitType.Npc:
+                    int npcId = unit.ConfigId;
+                    NpcConfig config = NpcConfigCategory.Instance.Get(npcId);
+                    path = ABPathHelper.GetUnitPath("Npc/" + config.Asset);
+                    GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
+                    self.UnitAssetsPath = path;
+                    break;
+                case UnitType.DropItem:
+                    // DropComponent dropComponent = unit.GetComponent<DropComponent>();
+                    // string assetPath = dropComponent.DropInfo.ItemID == 1 ? "DropICoin" : "DropItem";
+                    // path = ABPathHelper.GetUnitPath($"Player/{assetPath}");
+                    // GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
+                    // self.UnitAssetsPath = path;
+                    break;
+                case UnitType.Chuansong:
+                    path = ABPathHelper.GetUnitPath("Monster/DorrWay_1");
+                    GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
+                    break;
+                case UnitType.JingLing:
+                    JingLingConfig jingLing = JingLingConfigCategory.Instance.Get(unit.ConfigId);
+                    path = ABPathHelper.GetUnitPath("JingLing/" + jingLing.Assets);
+                    GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
+                    self.UnitAssetsPath = path;
+                    break;
+                case UnitType.Plant:
+                    self.OnUpdatePlan();
+                    break;
+                case UnitType.Pasture:
+                    JiaYuanPastureConfig jiaYuanPastureConfig = JiaYuanPastureConfigCategory.Instance.Get(unit.ConfigId);
+                    path = ABPathHelper.GetUnitPath("Pasture/" + jiaYuanPastureConfig.Assets);
+                    GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -445,283 +446,284 @@ namespace ET.Client
             }
             self.GameObject = go;
             self.InitMaterial();
-            // if (self.DelayShow > 0)
-            // {
-            //     go.SetActive(false);
-            //     TimerComponent.Instance.Remove(ref self.DelayShowTimer);
-            //     self.DelayShowTimer = TimerComponent.Instance.NewOnceTimer (TimeHelper.ServerNow() + self.DelayShow, TimerType.DelayShowTimer, self);
-            // }
-            // else
-            // {
-            //     self.ShowGameObject();
-            // }
-            // Unit unit = self.GetParent<Unit>();
-            // switch (unit.Type)
-            // {
-            //     case UnitType.Player:
-            //         UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitPlayer.gameObject);
-            //         go.transform.localPosition = unit.Position;
-            //         go.transform.rotation = unit.Rotation;
-            //         MapComponent mapComponent = self.ZoneScene().GetComponent<MapComponent>();
-            //         LayerHelp.ChangeLayer(go.transform, LayerEnum.Player);
-            //         self.OnAddCollider(go);
-            //         NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
-            //         int weaponid = numericComponent.GetAsInt(NumericType.Now_Weapon);
-            //         List<int> fashionids = unit.GetComponent<UnitInfoComponent>().FashionEquipList;
-            //         go.transform.name = unit.Id.ToString();
-            //         unit.AddComponent<HeroTransformComponent>();              //获取角色绑点组件
-            //         
-            //         unit.AddComponent<AnimatorComponent>();
-            //         unit.AddComponent<FsmComponent>();                         //当前状态组建
-            //         unit.AddComponent<EffectViewComponent>();               //添加特效组建
-            //         unit.AddComponent<SkillYujingComponent>();
-            //         unit.AddComponent<UIUnitHpComponent>();
-            //
-            //         self.OnUpdateHorse();
-            //         unit.GetComponent<BuffManagerComponent>()?.InitBuff();
-            //         unit.GetComponent<SkillManagerComponent>()?.InitSkill();
-            //
-            //         if (numericComponent.GetAsInt(NumericType.RunRaceTransform) == 0
-            //             && numericComponent.GetAsInt(NumericType.CardTransform) == 0)
-            //         {
-            //             unit.AddComponent<ChangeEquipComponent>().InitWeapon(fashionids, unit.ConfigId, weaponid);
-            //             self.OnUnitStallUpdate(numericComponent.GetAsLong(NumericType.Now_Stall));
-            //         }
-            //         StateComponent stateComponent = unit.GetComponent<StateComponent>();    
-            //         if (stateComponent.StateTypeGet(StateTypeEnum.Stealth))
-            //         { 
-            //             self.EnterStealth(); 
-            //         }
-            //         if (stateComponent.StateTypeGet(StateTypeEnum.Hide))
-            //         {
-            //             self.EnterHide();
-            //         }
-            //         if (numericComponent.GetAsInt(NumericType.Now_Dead) == 1)
-            //         {
-            //             EventType.UnitDead.Instance.Unit = unit;
-            //             Game.EventSystem.PublishClass(EventType.UnitDead.Instance);
-            //         }
-            //         if (unit.MainHero)
-            //         {
-            //             Transform topTf = unit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head).transform;
-            //             NpcLocalHelper.OnMainHero(topTf, go.transform, mapComponent.SceneTypeEnum);
-            //         }
-            //         if (self.BianShenEffect)
-            //         {
-            //             self.BianShenEffect = false;
-            //             FunctionEffect.GetInstance().PlaySelfEffect(unit, 30000002);
-            //         }
-            //         break;
-            //     case UnitType.Stall:
-            //         UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
-            //         go.transform.localPosition = unit.Position;
-            //         go.transform.rotation = unit.Rotation;
-            //         LayerHelp.ChangeLayer(go.transform, LayerEnum.Player);
-            //         self.OnAddCollider(go);
-            //         go.name = unit.Id.ToString();
-            //         unit.AddComponent<AnimatorComponent>();
-            //         unit.AddComponent<HeroTransformComponent>();
-            //         unit.AddComponent<UIUnitHpComponent>(true);
-            //         break;
-            //     case UnitType.Monster:
-            //         UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
-            //         go.transform.localPosition = unit.Position;
-            //         go.transform.rotation = unit.Rotation;
-            //         go.transform.name = unit.Id.ToString();
-            //         MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(unit.ConfigId);
-            //         if (monsterCof.AI != 0)
-            //         {
-            //             LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
-            //             self.OnAddCollider(go);
-            //             unit.AddComponent<EffectViewComponent>(true);            //添加特效组建
-            //             unit.AddComponent<AnimatorComponent>(true);
-            //             unit.AddComponent<FsmComponent>(true);                 //当前状态组建
-            //             unit.AddComponent<SkillYujingComponent>(true);
-            //         }
-            //         if (monsterCof.MonsterType == (int)MonsterTypeEnum.Boss)
-            //         {
-            //             unit.AddComponent<MonsterActRangeComponent, int>(monsterCof.Id, true);         //血条UI组件
-            //
-            //             mapComponent = self.ZoneScene().GetComponent<MapComponent>();
-            //             bool shenYuan = mapComponent.SceneTypeEnum == SceneTypeEnum.TeamDungeon && mapComponent.FubenDifficulty == TeamFubenType.ShenYuan;
-            //             go.transform.localScale = shenYuan ? Vector3.one * 1.3f : Vector3.one;
-            //         }
-            //
-            //         //51 场景怪 有AI 不显示名称
-            //         //52 能量台子 无AI
-            //         //54 场景怪 有AI 显示名称
-            //         //55 宝箱类 无AI
-            //         //56 宝箱类 刷新地图后即可刷新
-            //         //57 宠物蛋 直接掉落进背包
-            //         //58 宠物实体
-            //         //59 精灵实体
-            //         //60 家园物品
-            //
-            //         if (monsterCof.MonsterSonType == 51)
-            //         {
-            //            
-            //         }
-            //         else if (monsterCof.MonsterSonType == 52 || monsterCof.MonsterSonType == 54)
-            //         {
-            //             self.OnAddCollider(go);
-            //             unit.AddComponent<SceneItemUIComponent>(true); //血条UI组件
-            //         }
-            //         else if (monsterCof.MonsterSonType == 58 || monsterCof.MonsterSonType == 59)
-            //         {
-            //             self.OnAddCollider(go);
-            //             unit.AddComponent<SceneItemUIComponent>(true);         //血条UI组件
-            //             LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
-            //
-            //             if (monsterCof.MonsterSonType == 58)
-            //             {
-            //                 //实例化特效
-            //                 FunctionEffect.GetInstance().PlaySelfEffect(unit, 91000106);
-            //             }
-            //
-            //             if (monsterCof.MonsterSonType == 59)
-            //             {
-            //                 //实例化特效
-            //                 FunctionEffect.GetInstance().PlaySelfEffect(unit, 91000107);
-            //             }
-            //         }
-            //         else if (unit.IsChest() || monsterCof.MonsterSonType == 60)
-            //         {
-            //             unit.AddComponent<SceneItemUIComponent>(true);         //血条UI组件
-            //             LayerHelp.ChangeLayer(go.transform, LayerEnum.Box);
-            //         }
-            //         else if (monsterCof.MonsterSonType == 61)
-            //         {
-            //             self.OnAddCollider(go);
-            //             unit.AddComponent<SceneItemUIComponent>(true);         //血条UI组件
-            //             LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
-            //         }
-            //         else if (monsterCof.MonsterType != (int)MonsterTypeEnum.SceneItem)
-            //         {
-            //             unit.AddComponent<HeroTransformComponent>(true);       //获取角色绑点组件
-            //             unit.AddComponent<UIUnitHpComponent>(true);         //血条UI组件
-            //         }
-            //
-            //         if (unit.GetComponent<NumericComponent>().GetAsInt(NumericType.Now_Dead) == 1)
-            //         {
-            //             EventType.UnitDead.Instance.Unit = unit;
-            //             Game.EventSystem.PublishClass(EventType.UnitDead.Instance);
-            //         }
-            //         else
-            //         {
-            //             unit.GetComponent<BuffManagerComponent>()?.InitBuff();
-            //             unit.GetComponent<SkillManagerComponent>()?.InitSkill();
-            //         }
-            //         break;
-            //     case UnitType.Pet:
-            //         UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
-            //         go.transform.localPosition = unit.Position;
-            //         go.transform.rotation = unit.Rotation;
-            //         go.transform.name = unit.Id.ToString();
-            //         unit.AddComponent<EffectViewComponent>();            //添加特效组建
-            //         unit.AddComponent<AnimatorComponent>();
-            //         unit.AddComponent<HeroTransformComponent>();       //获取角色绑点组件
-            //         unit.AddComponent<FsmComponent>();                 //当前状态组建
-            //         unit.AddComponent<UIUnitHpComponent>();         //血条UI组件
-            //         self.OnAddCollider(go);
-            //         LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
-            //         break;
-            //     case UnitType.Npc:
-            //         UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
-            //         go.transform.localPosition = unit.Position;
-            //         go.transform.rotation = unit.Rotation;
-            //         LayerHelp.ChangeLayer(go.transform, LayerEnum.NPC);
-            //         self.OnAddCollider(go);
-            //         go.name = unit.ConfigId.ToString();
-            //         unit.AddComponent<AnimatorComponent>();
-            //         unit.AddComponent<HeroTransformComponent>();
-            //         unit.AddComponent<NpcHeadBarComponent>();
-            //         unit.AddComponent<FsmComponent>();
-            //         unit.AddComponent<EffectViewComponent>();
-            //         break;
-            //     case UnitType.DropItem:
-            //         UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
-            //         go.transform.localPosition = unit.Position;
-            //         go.transform.rotation = unit.Rotation;
-            //         go.name = unit.Id.ToString();
-            //         DropComponent dropComponent = unit.GetComponent<DropComponent>();
-            //         unit.AddComponent<EffectViewComponent>();
-            //         unit.AddComponent<DropUIComponent>().InitData(dropComponent.DropInfo);
-            //         break;
-            //     case UnitType.Chuansong:
-            //         UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
-            //         go.transform.localPosition = unit.Position;
-            //         go.transform.rotation = unit.Rotation;
-            //         go.name = unit.Id.ToString();
-            //         switch (unit.GetComponent<ChuansongComponent>().DirectionType)
-            //         {
-            //             case 1: //上
-            //                 go.transform.localRotation = Quaternion.Euler(-90, 0, 180);         //设置旋转
-            //                 break;
-            //             case 2: //左
-            //                 go.transform.localRotation = Quaternion.Euler(-90, 0, 90);         //设置旋转
-            //                 break;
-            //             case 3: //下
-            //                 go.transform.localRotation = Quaternion.Euler(-90, 0, 0);         //设置旋转
-            //                 break;
-            //             case 4: //右
-            //                 go.transform.localRotation = Quaternion.Euler(-90, 0, -90);         //设置旋转
-            //                 break;
-            //             default:
-            //                 break;
-            //         }
-            //         unit.AddComponent<TransferUIComponent>().OnInitUI(unit.ConfigId).Coroutine();
-            //         break;
-            //     case UnitType.JingLing:
-            //         UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
-            //         go.transform.localPosition = unit.Position;
-            //         go.transform.rotation = unit.Rotation;
-            //         go.transform.name = unit.Id.ToString();
-            //         unit.AddComponent<EffectViewComponent>();            //添加特效组建
-            //         unit.AddComponent<AnimatorComponent>();
-            //         unit.AddComponent<HeroTransformComponent>();       //获取角色绑点组件
-            //         unit.AddComponent<FsmComponent>();                 //当前状态组建
-            //         unit.AddComponent<UIUnitHpComponent>();         //血条UI组件
-            //         break;
-            //     case UnitType.Pasture:
-            //         UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
-            //         go.transform.localPosition = unit.Position;
-            //         go.transform.rotation = unit.Rotation;
-            //         LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
-            //         self.OnAddCollider(go);
-            //         go.transform.name = unit.Id.ToString();
-            //         unit.AddComponent<EffectViewComponent>();            //添加特效组建
-            //         unit.AddComponent<AnimatorComponent>();
-            //         unit.AddComponent<HeroTransformComponent>();       //获取角色绑点组件
-            //         unit.AddComponent<FsmComponent>();                 //当前状态组建
-            //         unit.AddComponent<JiaYuanPastureUIComponent>();         //血条UI组件
-            //         break;
-            //     case UnitType.Plant:
-            //         UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
-            //         go.transform.localPosition = unit.Position;
-            //         go.transform.rotation = unit.Rotation;
-            //         go.transform.name = unit.Id.ToString();
-            //         go.transform.localScale = Vector3.one * 10f;
-            //         unit.AddComponent<JiaYuanPlanUIComponent>();
-            //         unit.AddComponent<JiaYuanPlanEffectComponent>();
-            //         break;
-            //     case UnitType.Bullet:
-            //         UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitEffect.gameObject);
-            //         go.name = unit.Id.ToString();
-            //         go.transform.localPosition = unit.Position;
-            //         go.transform.rotation = unit.Rotation;
-            //         break;
-            //     default:
-            //         break;
-            // }
-            //
-            // if (unit.Type == UnitType.Bullet)
-            // {
-            //     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(unit.ConfigId);
-            //     if (skillConfig.GameObjectName.Equals(StringBuilderHelper.Skill_ComTargetMove_RangDamge_2))
-            //     {
-            //         unit.AddComponent<RoleBullet2Componnet>().BaseOnBulletInit(unit.ConfigId);
-            //     }
-            // }
+            if (self.DelayShow > 0)
+            {
+                go.SetActive(false);
+                self.Root().GetComponent<TimerComponent>().Remove(ref self.DelayShowTimer);
+                self.DelayShowTimer = self.Root().GetComponent<TimerComponent>().NewOnceTimer (TimeHelper.ServerNow() + self.DelayShow, TimerInvokeType.DelayShowTimer, self);
+            }
+            else
+            {
+                self.ShowGameObject();
+            }
+            Unit unit = self.GetParent<Unit>();
+            GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
+            switch (unit.Type)
+            {
+                case UnitType.Player:
+                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
+                    go.transform.localPosition = unit.Position;
+                    go.transform.rotation = unit.Rotation;
+                    MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+                    LayerHelp.ChangeLayer(go.transform, LayerEnum.Player);
+                    self.OnAddCollider(go);
+                    NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
+                    int weaponid = numericComponent.GetAsInt(NumericType.Now_Weapon);
+                    List<int> fashionids = unit.GetComponent<UnitInfoComponent>().FashionEquipList;
+                    go.transform.name = unit.Id.ToString();
+                    
+                    unit.AddComponent<AnimatorComponent>();
+                    unit.AddComponent<FsmComponent>();                         //当前状态组建
+                    unit.AddComponent<HeroTransformComponent>();              //获取角色绑点组件
+                    unit.AddComponent<EffectViewComponent>();               //添加特效组建
+                    unit.AddComponent<SkillYujingComponent>();
+                    unit.AddComponent<UIUnitHpComponent>();
+                    unit.GetComponent<BuffManagerComponent>()?.InitBuff();
+                    unit.GetComponent<SkillManagerComponentC>()?.InitSkill();
+                    self.OnUpdateHorse();
+            
+                    if (numericComponent.GetAsInt(NumericType.RunRaceTransform) == 0
+                        && numericComponent.GetAsInt(NumericType.CardTransform) == 0)
+                    {
+                        //unit.AddComponent<ChangeEquipComponent>().InitWeapon(fashionids, unit.ConfigId, weaponid);
+                        //self.OnUnitStallUpdate(numericComponent.GetAsLong(NumericType.Now_Stall));
+                    }
+                    
+                    StateComponent stateComponent = unit.GetComponent<StateComponent>();    
+                    if (stateComponent.StateTypeGet(StateTypeEnum.Stealth))
+                    { 
+                        self.EnterStealth(); 
+                    }
+                    if (stateComponent.StateTypeGet(StateTypeEnum.Hide))
+                    {
+                        self.EnterHide();
+                    }
+                    if (numericComponent.GetAsInt(NumericType.Now_Dead) == 1)
+                    {
+                        //EventType.UnitDead.Instance.Unit = unit;
+                        //Game.EventSystem.PublishClass(EventType.UnitDead.Instance);
+                    }
+                    if (unit.MainHero)
+                    {
+                        Transform topTf = unit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head).transform;
+                        NpcLocalHelper.OnMainHero(topTf, go.transform, mapComponent.SceneTypeEnum);
+                    }
+                    if (self.BianShenEffect)
+                    {
+                        self.BianShenEffect = false;
+                        FunctionEffect.GetInstance().PlaySelfEffect(unit, 30000002);
+                    }
+                    break;
+                case UnitType.Stall:
+                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    go.transform.localPosition = unit.Position;
+                    go.transform.rotation = unit.Rotation;
+                    LayerHelp.ChangeLayer(go.transform, LayerEnum.Player);
+                    self.OnAddCollider(go);
+                    go.name = unit.Id.ToString();
+                    unit.AddComponent<AnimatorComponent>();
+                    unit.AddComponent<HeroTransformComponent>();
+                    unit.AddComponent<UIUnitHpComponent>(true);
+                    break;
+                case UnitType.Monster:
+                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    go.transform.localPosition = unit.Position;
+                    go.transform.rotation = unit.Rotation;
+                    go.transform.name = unit.Id.ToString();
+                    MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+                    if (monsterCof.AI != 0)
+                    {
+                        LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
+                        self.OnAddCollider(go);
+                        unit.AddComponent<EffectViewComponent>(true);            //添加特效组建
+                        unit.AddComponent<AnimatorComponent>(true);
+                        unit.AddComponent<FsmComponent>(true);                 //当前状态组建
+                        unit.AddComponent<SkillYujingComponent>(true);
+                    }
+                    if (monsterCof.MonsterType == (int)MonsterTypeEnum.Boss)
+                    {
+                        unit.AddComponent<MonsterActRangeComponent, int>(monsterCof.Id, true);         //血条UI组件
+            
+                        mapComponent = self.ZoneScene().GetComponent<MapComponent>();
+                        bool shenYuan = mapComponent.SceneTypeEnum == SceneTypeEnum.TeamDungeon && mapComponent.FubenDifficulty == TeamFubenType.ShenYuan;
+                        go.transform.localScale = shenYuan ? Vector3.one * 1.3f : Vector3.one;
+                    }
+            
+                    //51 场景怪 有AI 不显示名称
+                    //52 能量台子 无AI
+                    //54 场景怪 有AI 显示名称
+                    //55 宝箱类 无AI
+                    //56 宝箱类 刷新地图后即可刷新
+                    //57 宠物蛋 直接掉落进背包
+                    //58 宠物实体
+                    //59 精灵实体
+                    //60 家园物品
+            
+                    if (monsterCof.MonsterSonType == 51)
+                    {
+                       
+                    }
+                    else if (monsterCof.MonsterSonType == 52 || monsterCof.MonsterSonType == 54)
+                    {
+                        self.OnAddCollider(go);
+                        unit.AddComponent<SceneItemUIComponent>(true); //血条UI组件
+                    }
+                    else if (monsterCof.MonsterSonType == 58 || monsterCof.MonsterSonType == 59)
+                    {
+                        self.OnAddCollider(go);
+                        unit.AddComponent<SceneItemUIComponent>(true);         //血条UI组件
+                        LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
+            
+                        if (monsterCof.MonsterSonType == 58)
+                        {
+                            //实例化特效
+                            FunctionEffect.GetInstance().PlaySelfEffect(unit, 91000106);
+                        }
+            
+                        if (monsterCof.MonsterSonType == 59)
+                        {
+                            //实例化特效
+                            FunctionEffect.GetInstance().PlaySelfEffect(unit, 91000107);
+                        }
+                    }
+                    else if (unit.IsChest() || monsterCof.MonsterSonType == 60)
+                    {
+                        unit.AddComponent<SceneItemUIComponent>(true);         //血条UI组件
+                        LayerHelp.ChangeLayer(go.transform, LayerEnum.Box);
+                    }
+                    else if (monsterCof.MonsterSonType == 61)
+                    {
+                        self.OnAddCollider(go);
+                        unit.AddComponent<SceneItemUIComponent>(true);         //血条UI组件
+                        LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
+                    }
+                    else if (monsterCof.MonsterType != (int)MonsterTypeEnum.SceneItem)
+                    {
+                        unit.AddComponent<HeroTransformComponent>(true);       //获取角色绑点组件
+                        unit.AddComponent<UIUnitHpComponent>(true);         //血条UI组件
+                    }
+            
+                    if (unit.GetComponent<NumericComponent>().GetAsInt(NumericType.Now_Dead) == 1)
+                    {
+                        EventType.UnitDead.Instance.Unit = unit;
+                        Game.EventSystem.PublishClass(EventType.UnitDead.Instance);
+                    }
+                    else
+                    {
+                        unit.GetComponent<BuffManagerComponent>()?.InitBuff();
+                        unit.GetComponent<SkillManagerComponent>()?.InitSkill();
+                    }
+                    break;
+                case UnitType.Pet:
+                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    go.transform.localPosition = unit.Position;
+                    go.transform.rotation = unit.Rotation;
+                    go.transform.name = unit.Id.ToString();
+                    unit.AddComponent<EffectViewComponent>();            //添加特效组建
+                    unit.AddComponent<AnimatorComponent>();
+                    unit.AddComponent<HeroTransformComponent>();       //获取角色绑点组件
+                    unit.AddComponent<FsmComponent>();                 //当前状态组建
+                    unit.AddComponent<UIUnitHpComponent>();         //血条UI组件
+                    self.OnAddCollider(go);
+                    LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
+                    break;
+                case UnitType.Npc:
+                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    go.transform.localPosition = unit.Position;
+                    go.transform.rotation = unit.Rotation;
+                    LayerHelp.ChangeLayer(go.transform, LayerEnum.NPC);
+                    self.OnAddCollider(go);
+                    go.name = unit.ConfigId.ToString();
+                    unit.AddComponent<AnimatorComponent>();
+                    unit.AddComponent<HeroTransformComponent>();
+                    unit.AddComponent<NpcHeadBarComponent>();
+                    unit.AddComponent<FsmComponent>();
+                    unit.AddComponent<EffectViewComponent>();
+                    break;
+                case UnitType.DropItem:
+                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    go.transform.localPosition = unit.Position;
+                    go.transform.rotation = unit.Rotation;
+                    go.name = unit.Id.ToString();
+                    DropComponent dropComponent = unit.GetComponent<DropComponent>();
+                    unit.AddComponent<EffectViewComponent>();
+                    unit.AddComponent<DropUIComponent>().InitData(dropComponent.DropInfo);
+                    break;
+                case UnitType.Chuansong:
+                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    go.transform.localPosition = unit.Position;
+                    go.transform.rotation = unit.Rotation;
+                    go.name = unit.Id.ToString();
+                    switch (unit.GetComponent<ChuansongComponent>().DirectionType)
+                    {
+                        case 1: //上
+                            go.transform.localRotation = Quaternion.Euler(-90, 0, 180);         //设置旋转
+                            break;
+                        case 2: //左
+                            go.transform.localRotation = Quaternion.Euler(-90, 0, 90);         //设置旋转
+                            break;
+                        case 3: //下
+                            go.transform.localRotation = Quaternion.Euler(-90, 0, 0);         //设置旋转
+                            break;
+                        case 4: //右
+                            go.transform.localRotation = Quaternion.Euler(-90, 0, -90);         //设置旋转
+                            break;
+                        default:
+                            break;
+                    }
+                    unit.AddComponent<TransferUIComponent>().OnInitUI(unit.ConfigId).Coroutine();
+                    break;
+                case UnitType.JingLing:
+                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    go.transform.localPosition = unit.Position;
+                    go.transform.rotation = unit.Rotation;
+                    go.transform.name = unit.Id.ToString();
+                    unit.AddComponent<EffectViewComponent>();            //添加特效组建
+                    unit.AddComponent<AnimatorComponent>();
+                    unit.AddComponent<HeroTransformComponent>();       //获取角色绑点组件
+                    unit.AddComponent<FsmComponent>();                 //当前状态组建
+                    unit.AddComponent<UIUnitHpComponent>();         //血条UI组件
+                    break;
+                case UnitType.Pasture:
+                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    go.transform.localPosition = unit.Position;
+                    go.transform.rotation = unit.Rotation;
+                    LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
+                    self.OnAddCollider(go);
+                    go.transform.name = unit.Id.ToString();
+                    unit.AddComponent<EffectViewComponent>();            //添加特效组建
+                    unit.AddComponent<AnimatorComponent>();
+                    unit.AddComponent<HeroTransformComponent>();       //获取角色绑点组件
+                    unit.AddComponent<FsmComponent>();                 //当前状态组建
+                    unit.AddComponent<JiaYuanPastureUIComponent>();         //血条UI组件
+                    break;
+                case UnitType.Plant:
+                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    go.transform.localPosition = unit.Position;
+                    go.transform.rotation = unit.Rotation;
+                    go.transform.name = unit.Id.ToString();
+                    go.transform.localScale = Vector3.one * 10f;
+                    unit.AddComponent<JiaYuanPlanUIComponent>();
+                    unit.AddComponent<JiaYuanPlanEffectComponent>();
+                    break;
+                case UnitType.Bullet:
+                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitEffect.gameObject);
+                    go.name = unit.Id.ToString();
+                    go.transform.localPosition = unit.Position;
+                    go.transform.rotation = unit.Rotation;
+                    break;
+                default:
+                    break;
+            }
+            
+            if (unit.Type == UnitType.Bullet)
+            {
+                // SkillConfig skillConfig = SkillConfigCategory.Instance.Get(unit.ConfigId);
+                // if (skillConfig.GameObjectName.Equals(StringBuilderHelper.Skill_ComTargetMove_RangDamge_2))
+                // {
+                //     unit.AddComponent<RoleBullet2Componnet>().BaseOnBulletInit(unit.ConfigId);
+                // }
+            }
         }
 
         public static void InitMaterial(this GameObjectComponent self)
