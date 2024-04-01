@@ -50,6 +50,8 @@ namespace ET.Client
             self.PetHeXinItemList[1] = self.E_PetHeXinItem1Image.gameObject;
             self.PetHeXinItemList[2] = self.E_PetHeXinItem2Image.gameObject;
 
+            self.E_InputFieldNameInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords(); });
+            self.E_ButtonRNameButton.AddListenerAsync(self.OnButtonRName);
             self.E_PetListItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetListItemsRefresh);
             self.E_PetSkinIconItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetSkinIconItemsRefresh);
             self.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
@@ -116,6 +118,55 @@ namespace ET.Client
             self.EG_PetPiFuSetRectTransform.gameObject.SetActive(index == 2);
 
             self.EG_ButtonNodeRectTransform.gameObject.SetActive(index != 2);
+        }
+
+        private static void CheckSensitiveWords(this ES_PetList self)
+        {
+            string text_new = "";
+            string text_old = self.E_InputFieldNameInputField.text;
+            MaskWordComponent.Instance.IsContainSensitiveWords(ref text_old, out text_new);
+            self.E_InputFieldNameInputField.GetComponent<InputField>().text = text_old;
+        }
+
+        private static async ETTask OnButtonRName(this ES_PetList self)
+        {
+            string text_old = self.E_InputFieldNameInputField.text;
+            if (string.IsNullOrEmpty(text_old) || text_old.Length == 0)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("请输入名字！");
+                return;
+            }
+
+            bool mask = MaskWordComponent.Instance.IsContainSensitiveWords(text_old);
+            if (mask)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("请重新输入！");
+                return;
+            }
+
+            if (text_old.Length > 10)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("名字过长！");
+                return;
+            }
+
+            await PetNetHelper.RequestRolePetRName(self.Root(), self.LastSelectItem.Id, text_old);
+            RolePetInfo rolePetInfo = self.Root().GetComponent<PetComponentC>().GetPetInfoByID(self.LastSelectItem.Id);
+            rolePetInfo.PetName = text_old;
+            self.LastSelectItem = rolePetInfo;
+            self.OnUpdatePetInfo(rolePetInfo);
+            for (int i = 0; i < self.ScrollItemPetListItems.Count; i++)
+            {
+                if (self.ScrollItemPetListItems[i].uiTransform == null)
+                {
+                    continue;
+                }
+
+                if (self.ScrollItemPetListItems[i].PetId == self.LastSelectItem.Id)
+                {
+                    self.ScrollItemPetListItems[i].OnRName(rolePetInfo);
+                }
+            }
         }
 
         private static void OnPetListItemsRefresh(this ES_PetList self, Transform transform, int index)

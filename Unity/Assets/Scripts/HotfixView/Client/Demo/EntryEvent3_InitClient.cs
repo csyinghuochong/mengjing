@@ -30,6 +30,7 @@ namespace ET.Client
             root.AddComponent<PetComponentC>();
             root.AddComponent<SkillSetComponentC>();
             root.AddComponent<ChengJiuComponentC>();
+            root.AddComponent<MaskWordComponent>();
             
 
             // 根据配置修改掉Main Fiber的SceneType
