@@ -60,6 +60,7 @@ namespace ET.Client
             self.E_ButtonCloseHexinButton.AddListener(() => { self.OnChangeNode(1); });
             self.E_ButtonAddPointButton.AddListener(self.OnButtonAddPoint);
             self.E_Btn_ConfirmButton.AddListenerAsync(self.OnBtn_Confirm);
+            self.E_ButtonCloseAddPointButton.AddListener(self.OnButtonCloseAddPoint);
 
             EventTrigger LiLiang_Btn_Add = self.EG_AddProperty_LiLiangRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
             EventTrigger LiLiang_Btn_Cost = self.EG_AddProperty_LiLiangRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
