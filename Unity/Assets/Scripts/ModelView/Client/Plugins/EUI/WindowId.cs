@@ -34,5 +34,6 @@ namespace ET.Client
 		WindowID_PetSelect,
 		WindowID_PetHeChengExplain,
 		WindowID_PetHeChengPreview,
+		WindowID_PetChouKaGet,
 	}
 }
