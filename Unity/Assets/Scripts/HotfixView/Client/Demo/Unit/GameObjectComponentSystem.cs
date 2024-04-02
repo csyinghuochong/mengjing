@@ -478,7 +478,7 @@ namespace ET.Client
                     unit.AddComponent<EffectViewComponent>();               //添加特效组建
                     unit.AddComponent<SkillYujingComponent>();
                     unit.AddComponent<UIPlayerHpComponent>();
-                    unit.GetComponent<BuffManagerComponent>()?.InitBuff();
+                    unit.GetComponent<BuffManagerComponentC>()?.InitBuff();
                     unit.GetComponent<SkillManagerComponentC>()?.InitSkill();
                     self.OnUpdateHorse();
             
@@ -610,7 +610,7 @@ namespace ET.Client
                     }
                     else
                     {
-                        unit.GetComponent<BuffManagerComponent>()?.InitBuff();
+                        unit.GetComponent<BuffManagerComponentC>()?.InitBuff();
                         unit.GetComponent<SkillManagerComponent>()?.InitSkill();
                     }
                     break;
