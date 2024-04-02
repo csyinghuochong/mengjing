@@ -14,8 +14,8 @@ public class HeadBarUI : MonoBehaviour
 
     void Start()
     {
-        UiCamera = GameObject.Find("Global/UI/UICamera").GetComponent<Camera>();
-        MainCamera = GameObject.Find("Global/Main Camera").GetComponent<Camera>();
+        UiCamera = GameObject.Find("Global/UICamera").GetComponent<Camera>();
+        MainCamera = GameObject.Find("Global/MainCamera").GetComponent<Camera>();
     }
 
     public void UpdatePostion()

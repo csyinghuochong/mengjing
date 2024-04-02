@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
@@ -287,13 +288,15 @@ namespace ET.Client
                  int occ = unit.ConfigId;
                  unionname = ConfigHelper.GetRankChengHao(rankId, occRankId, occ);
              }
-             if (string.IsNullOrEmpty(unionname) )
+             if (string.IsNullOrEmpty(unionname) && !string.IsNullOrEmpty(infoComponent.UnionName))
              {
                  unionname = infoComponent.UnionName;
              }
-
+             
+             unionname = String.Empty;
+             
              self.Lal_JiaZuName.GetComponent<Text>().text = unionname;
-             Vector3 vector3_pos = unionname.Length > 0 ? new Vector3(0f, 100f, 0f) : new Vector3(0f, 75f, 0f);
+             Vector3 vector3_pos = (!string.IsNullOrEmpty(unionname) && unionname.Length > 0) ? new Vector3(0f, 100f, 0f) : new Vector3(0f, 75f, 0f);
              self.Img_ChengHao.transform.localPosition = vector3_pos;
          }
 

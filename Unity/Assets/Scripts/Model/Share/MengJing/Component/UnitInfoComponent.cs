@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 
@@ -16,7 +17,7 @@ namespace ET
 
         public string MasterName { get; set; }  //主人名字
 
-        public string UnionName { get; set; }  //帮会名字
+        public string UnionName { get; set; } = String.Empty;  //帮会名字
 
         public string DemonName { get; set; }
 
