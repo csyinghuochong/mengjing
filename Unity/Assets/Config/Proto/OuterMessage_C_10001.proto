@@ -2943,3 +2943,14 @@ message M2C_JingLingUseResponse    // ILocationResponse
 	string Message = 92;
 	int32 JingLingId = 1;
 }
+
+message C2M_UnitStateUpdate // ILocationMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 StateType = 2;
+	int32 StateOperateType = 3;
+	int32 StateTime = 4;
+	string StateValue = 5;
+}

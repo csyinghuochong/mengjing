@@ -1,8 +1,15 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
 namespace ET.Client
 {
     
-    public class UIXuLieZhenComponent: Entity, IAwake, IDestroy
+    [ChildOf(typeof(UIPlayerHpComponent))]
+    public class UIXuLieZhenComponent: Entity, IAwake<GameObject>, IDestroy
     {
-    
+        public GameObject GameObject;
+        public XuLieZhen XuLieZhen;
     }
 }

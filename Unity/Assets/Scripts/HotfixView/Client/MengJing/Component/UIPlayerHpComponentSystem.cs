@@ -221,7 +221,7 @@ namespace ET.Client
              StateComponent stateComponent = unit.GetComponent<StateComponent>();
              if (stateComponent.StateTypeGet(StateTypeEnum.Stealth))
              {
-                 this.EnterStealth(canAttack ? 0f : 0.3f);
+                 self.EnterStealth(canAttack ? 0f : 0.3f);
              }
              if (stateComponent.StateTypeGet(StateTypeEnum.Hide)
                       || unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.Now_Stall) > 0)

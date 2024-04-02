@@ -11472,6 +11472,48 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.C2M_UnitStateUpdate)]
+	[MemoryPackable]
+	public partial class C2M_UnitStateUpdate: MessageObject, ILocationMessage
+	{
+		public static C2M_UnitStateUpdate Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_UnitStateUpdate), isFromPool) as C2M_UnitStateUpdate; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long StateType { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int StateOperateType { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int StateTime { get; set; }
+
+		[MemoryPackOrder(4)]
+		public string StateValue { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.StateType = default;
+			this.StateOperateType = default;
+			this.StateTime = default;
+			this.StateValue = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -11803,5 +11845,6 @@ namespace ET
 		 public const ushort M2C_JingLingDropResponse = 10328;
 		 public const ushort C2M_JingLingUseRequest = 10329;
 		 public const ushort M2C_JingLingUseResponse = 10330;
+		 public const ushort C2M_UnitStateUpdate = 10331;
 	}
 }
