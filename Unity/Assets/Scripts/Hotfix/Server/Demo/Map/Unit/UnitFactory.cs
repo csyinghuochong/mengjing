@@ -17,7 +17,7 @@ namespace ET.Server
                     unit.AddComponent<MoveComponent>();
                     unit.Position = new float3(-10, 0, -10);
                     unit.Type = UnitType.Player;
-                    
+                    unit.ConfigId = createRoleInfo.PlayerOcc;
                     if (unit.GetComponent<UserInfoComponentS>() == null)
                     {
                         UserInfoComponentS userInfoComponentS = unit.AddComponent<UserInfoComponentS>();

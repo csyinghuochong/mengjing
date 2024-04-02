@@ -23,7 +23,6 @@ namespace ET.Client
     /// <summary>
     /// 适用于动画切换的栈式状态机
     /// </summary>
-    [FriendOf(typeof(AnimatorComponent))]
     [FriendOf(typeof(FsmComponent))]
     [EntitySystemOf(typeof(FsmComponent))]
     public static partial class FsmComponentSystem
@@ -32,7 +31,6 @@ namespace ET.Client
         private static void Awake(this FsmComponent self)
         {
             Unit unit = self.GetParent<Unit>();
-            self.AnimatorComponent = unit.GetComponent<AnimatorComponent>();
             MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
             bool idle = moveComponent == null || moveComponent.IsArrived();
             self.ChangeState(idle? FsmStateEnum.FsmIdleState : FsmStateEnum.FsmRunState);
@@ -45,15 +43,7 @@ namespace ET.Client
         }
         
         public static void Check(this FsmComponent self)
-        {
-            if (self.AnimatorComponent == null)
-            {
-                int monsterId = self.GetParent<Unit>().ConfigId;
-                Log.Error($"{self.AnimatorComponent == null} {monsterId}");
-                self.EndTimer();
-                return;
-            }
-
+        { 
             SkillManagerComponentC skillManagerComponentCSystem = self.GetParent<Unit>().GetComponent<SkillManagerComponentC>();
             if (skillManagerComponentCSystem.SkillMoveTime != 0 && TimeHelper.ClientNow() >= skillManagerComponentCSystem.SkillMoveTime)
             {
@@ -100,8 +90,10 @@ namespace ET.Client
         }
 
         public static void ChangeState(this FsmComponent self, int targetFsm, int skillid = 0)
-        {
-            if (self.AnimatorComponent == null)
+        { 
+            Unit unit = self.GetParent<Unit>();
+            AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
+            if (animatorComponent == null)
             {
                 return;
             }
@@ -118,18 +110,18 @@ namespace ET.Client
                     self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
                     break;
                 case FsmStateEnum.FsmDeathState:
-                    self.AnimatorComponent.SetBoolValue("Death", false);
+                    animatorComponent.SetBoolValue("Death", false);
                     break;
                 case FsmStateEnum.FsmNpcSpeak:
-                    self.AnimatorComponent.SetBoolValue("Idle", true);
+                    animatorComponent.SetBoolValue("Idle", true);
                     break;
                 case FsmStateEnum.FsmSinging:
-                    self.AnimatorComponent.SetBoolValue("Run", false);
-                    self.AnimatorComponent.SetBoolValue("Idle", true);
+                    animatorComponent.SetBoolValue("Run", false);
+                    animatorComponent.SetBoolValue("Idle", true);
                     break;
                 case FsmStateEnum.FsmSkillState:
-                    self.AnimatorComponent.SetBoolValue("Run", false);
-                    self.AnimatorComponent.SetBoolValue("Idle", true);
+                    animatorComponent.SetBoolValue("Run", false);
+                    animatorComponent.SetBoolValue("Idle", true);
                     break;
                 default:
                     break;
@@ -139,47 +131,47 @@ namespace ET.Client
             {
                 case FsmStateEnum.FsmComboState:
                     //this.ClearnAnimator();
-                    self.AnimatorComponent.SetBoolValue("Idle", false);
-                    self.AnimatorComponent.SetBoolValue("Run", false);
+                    animatorComponent.SetBoolValue("Idle", false);
+                    animatorComponent.SetBoolValue("Run", false);
                     self.OnEnterFsmComboState(skillid);
                     break;
                 case FsmStateEnum.FsmDeathState:
-                    self.AnimatorComponent.SetBoolValue("Idle", false);
-                    self.AnimatorComponent.SetBoolValue("Death", true);
-                    self.AnimatorComponent.Play("Death");
+                    animatorComponent.SetBoolValue("Idle", false);
+                    animatorComponent.SetBoolValue("Death", true);
+                    animatorComponent.Play("Death");
                     break;
                 case FsmStateEnum.FsmHui:
-                    self.AnimatorComponent.SetBoolValue("Idle", false);
-                    self.AnimatorComponent.Play("Hui");
+                    animatorComponent.SetBoolValue("Idle", false);
+                    animatorComponent.Play("Hui");
                     break;
                 case FsmStateEnum.FsmIdleState:
                     self.OnEnterIdleState();
                     break;
                 case FsmStateEnum.FsmNpcSpeak:
-                    self.AnimatorComponent.SetBoolValue("Idle", false);
-                    self.AnimatorComponent.SetBoolValue("Run", false);
-                    self.AnimatorComponent.Play("Speak");
+                    animatorComponent.SetBoolValue("Idle", false);
+                    animatorComponent.SetBoolValue("Run", false);
+                    animatorComponent.Play("Speak");
                     break;
                 case FsmStateEnum.FsmRunState:
                     self.OnEnterFsmRunState();
                     break;
                 case FsmStateEnum.FsmShiQuItem:
-                    self.AnimatorComponent.SetBoolValue("Idle", false);
-                    self.AnimatorComponent.SetBoolValue("Run", false);
-                    self.AnimatorComponent.Play("ShiQu");
+                    animatorComponent.SetBoolValue("Idle", false);
+                    animatorComponent.SetBoolValue("Run", false);
+                    animatorComponent.Play("ShiQu");
                     break;
                 case FsmStateEnum.FsmSinging:
-                    self.AnimatorComponent.SetBoolValue("Idle", false);
-                    self.AnimatorComponent.SetBoolValue("Run", false);
-                    self.AnimatorComponent.Play("YinChang");
+                    animatorComponent.SetBoolValue("Idle", false);
+                    animatorComponent.SetBoolValue("Run", false);
+                    animatorComponent.Play("YinChang");
                     break;
                 case FsmStateEnum.FsmSkillState:
                     self.OnEnterFsmSkillState(skillid);
                     break;
                 case FsmStateEnum.FsmHorse:
-                    self.AnimatorComponent.SetBoolValue("Idle", false);
-                    self.AnimatorComponent.SetBoolValue("Run", false);
-                    self.AnimatorComponent.Play("Horse");
+                    animatorComponent.SetBoolValue("Idle", false);
+                    animatorComponent.SetBoolValue("Run", false);
+                    animatorComponent.Play("Horse");
                     break;
                 default:
                     break;
@@ -189,21 +181,25 @@ namespace ET.Client
 
         public static void OnEnterFsmSkillState(this FsmComponent self, int skillid)
         {
-            SkillManagerComponentC skillManagerComponentCSystem = self.GetParent<Unit>().GetComponent<SkillManagerComponentC>();
+
+            Unit unit = self.GetParent<Unit>();
+            AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
+            SkillManagerComponentC skillManagerComponentCSystem = unit.GetComponent<SkillManagerComponentC>();
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
+            
             if (skillManagerComponentCSystem.SkillMoveTime > TimeHelper.ClientNow()
                || skillManagerComponentCSystem.SkillSingTime > TimeHelper.ClientNow())
             {
-                self.AnimatorComponent.SetBoolValue("Idle", false);
-                self.AnimatorComponent.SetBoolValue("Run", false);
+                animatorComponent.SetBoolValue("Idle", false);
+                animatorComponent.SetBoolValue("Run", false);
                 self.BeginTimer();
             }
             else
             {
-                self.AnimatorComponent.SetBoolValue("Run", false);
-                self.AnimatorComponent.SetBoolValue("Idle", true);
+                animatorComponent.SetBoolValue("Run", false);
+                animatorComponent.SetBoolValue("Idle", true);
             }
-            self.AnimatorComponent.Play(skillConfig.SkillAnimation);
+            animatorComponent.Play(skillConfig.SkillAnimation);
         }
 
         public static void OnEnterFsmRunState(this FsmComponent self)
@@ -229,23 +225,29 @@ namespace ET.Client
 
         public static void SetHorseState(this FsmComponent self)
         {
-            self.AnimatorComponent.SetBoolValue("Run", false);
-            self.AnimatorComponent.SetBoolValue("Idle", false);
-            self.AnimatorComponent.Animator.Play("ZuoQi");
+            Unit unit = self.GetParent<Unit>();
+            AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
+            animatorComponent.SetBoolValue("Run", false);
+            animatorComponent.SetBoolValue("Idle", false);
+            animatorComponent.Animator.Play("ZuoQi");
         }
 
         public static void SetIdleState(this FsmComponent self)
         {
-            self.AnimatorComponent.SetBoolValue("Run", false);
-            self.AnimatorComponent.SetBoolValue("Idle", true);
-            self.AnimatorComponent.Play("Idle");
+            Unit unit = self.GetParent<Unit>();
+            AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
+            animatorComponent.SetBoolValue("Run", false);
+            animatorComponent.SetBoolValue("Idle", true);
+            animatorComponent.Play("Idle");
         }
 
         public static void SetRunState(this FsmComponent self)
-        {
-            self.AnimatorComponent.SetBoolValue("Idle", false);
-            self.AnimatorComponent.SetBoolValue("Run", true);
-            self.AnimatorComponent.Play("Run");
+        { 
+            Unit unit = self.GetParent<Unit>();
+            AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
+            animatorComponent.SetBoolValue("Idle", false);
+            animatorComponent.SetBoolValue("Run", true);
+            animatorComponent.Play("Run");
         }
 
         public static void OnEnterFsmComboState(this FsmComponent self, int skillid)
@@ -261,6 +263,8 @@ namespace ET.Client
             //}
 
             //1:剑 2:刀 11 默认11  //(EquipType == 2)
+            AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
+
             if (unit.ConfigId == 1)
             {
                 string boolAnimation = skillConfig.SkillAnimation;
@@ -276,9 +280,9 @@ namespace ET.Client
                 {
                     boolAnimation = "Act_3";
                 }
-
+                
                 string curAckAnimation = String.Empty;
-                AnimatorStateInfo animatorStateInfo = self.AnimatorComponent.Animator.GetCurrentAnimatorStateInfo(0);
+                AnimatorStateInfo animatorStateInfo = animatorComponent.Animator.GetCurrentAnimatorStateInfo(0);
                 foreach (var item in SkillData.AckExitTime)
                 {
                     if (animatorStateInfo.IsName(item.Key))
@@ -289,24 +293,24 @@ namespace ET.Client
                 }
                 if (self.LastAnimator == skillConfig.SkillAnimation)
                 {
-                    self.AnimatorComponent.SetBoolValue("Act_1", false);
-                    self.AnimatorComponent.SetBoolValue("Act_2", false);
-                    self.AnimatorComponent.SetBoolValue("Act_3", false);
-                    self.AnimatorComponent.Play(skillConfig.SkillAnimation);
+                    animatorComponent.SetBoolValue("Act_1", false);
+                    animatorComponent.SetBoolValue("Act_2", false);
+                    animatorComponent.SetBoolValue("Act_3", false);
+                    animatorComponent.Play(skillConfig.SkillAnimation);
                 }
                 else if (curAckAnimation == String.Empty)
                 {
-                    self.AnimatorComponent.SetBoolValue("Act_1", false);
-                    self.AnimatorComponent.SetBoolValue("Act_2", false);
-                    self.AnimatorComponent.SetBoolValue("Act_3", false);
-                    self.AnimatorComponent.Play(skillConfig.SkillAnimation);
+                    animatorComponent.SetBoolValue("Act_1", false);
+                    animatorComponent.SetBoolValue("Act_2", false);
+                    animatorComponent.SetBoolValue("Act_3", false);
+                    animatorComponent.Play(skillConfig.SkillAnimation);
                 }
                 else
                 {
-                    self.AnimatorComponent.SetBoolValue("Act_1", false);
-                    self.AnimatorComponent.SetBoolValue("Act_2", false);
-                    self.AnimatorComponent.SetBoolValue("Act_3", false);
-                    self.AnimatorComponent.SetBoolValue(boolAnimation, true);
+                    animatorComponent.SetBoolValue("Act_1", false);
+                    animatorComponent.SetBoolValue("Act_2", false);
+                    animatorComponent.SetBoolValue("Act_3", false);
+                    animatorComponent.SetBoolValue(boolAnimation, true);
                 }
 
                 self.LastAnimator = skillConfig.SkillAnimation;
@@ -316,20 +320,22 @@ namespace ET.Client
             }
             else
             {
-                self.AnimatorComponent.Play(skillConfig.SkillAnimation);
+                animatorComponent.Play(skillConfig.SkillAnimation);
             }
         }
 
         public static void ClearnAnimator(this FsmComponent self)
         {
             //重置参数
-            self.AnimatorComponent.SetBoolValue("Idle", false);
-            self.AnimatorComponent.SetBoolValue("Run", false);
-            self.AnimatorComponent.SetBoolValue("Death", false);
-            self.AnimatorComponent.SetBoolValue("CriAct", false);
-            self.AnimatorComponent.SetBoolValue("Act_1", false);
-            self.AnimatorComponent.SetBoolValue("Act_2", false);
-            self.AnimatorComponent.SetBoolValue("Act_3", false);
+            Unit unit = self.GetParent<Unit>();
+            AnimatorComponent animatorComponent = unit.GetComponent<AnimatorComponent>();
+            animatorComponent.SetBoolValue("Idle", false);
+            animatorComponent.SetBoolValue("Run", false);
+            animatorComponent.SetBoolValue("Death", false);
+            animatorComponent.SetBoolValue("CriAct", false);
+            animatorComponent.SetBoolValue("Act_1", false);
+            animatorComponent.SetBoolValue("Act_2", false);
+            animatorComponent.SetBoolValue("Act_3", false);
         }
     }
 }

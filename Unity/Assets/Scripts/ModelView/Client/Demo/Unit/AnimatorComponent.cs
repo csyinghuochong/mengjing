@@ -30,7 +30,7 @@ namespace ET.Client
 		public bool isStop;
 		public float stopSpeed;
 
-		public Animator Animator;
+		public Animator Animator { get; set; }
 		public int Speed = 1;
 	}
 }
