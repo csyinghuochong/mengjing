@@ -116,43 +116,41 @@ namespace ET.Client
                 () => { self.ReqestHeCheng().Coroutine(); }).Coroutine();
         }
 
-        public static async ETTask OnBtn_Preview(this ES_PetHeCheng self)
+        private static async ETTask OnBtn_Preview(this ES_PetHeCheng self)
         {
-            // if (self.HeChengPet_Left == null || self.HeChengPet_Right == null)
-            // {
-            //     FlyTipComponent.Instance.SpawnFlyTipDi("请选择要合成的宠物！");
-            //     return;
-            // }
-            //
-            // if (PetHelper.IsShenShou(self.HeChengPet_Left.ConfigId)
-            //     || PetHelper.IsShenShou(self.HeChengPet_Right.ConfigId))
-            // {
-            //     FlyTipComponent.Instance.SpawnFlyTipDi("神兽不能合成！");
-            //     return;
-            // }
-            //
-            // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIPetHeChengPreview);
-            // ui.GetComponent<UIPetHeChengPreviewComponent>().UpdateInfo(self.HeChengPet_Left, self.HeChengPet_Right);
+            if (self.HeChengPet_Left == null || self.HeChengPet_Right == null)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("请选择要合成的宠物！");
+                return;
+            }
 
-            await ETTask.CompletedTask;
+            if (PetHelper.IsShenShou(self.HeChengPet_Left.ConfigId)
+                || PetHelper.IsShenShou(self.HeChengPet_Right.ConfigId))
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("神兽不能合成！");
+                return;
+            }
+
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetHeChengPreview);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetHeChengPreview>().UpdateInfo(self.HeChengPet_Left, self.HeChengPet_Right);
         }
 
-        public static async ETTask ReqestHeCheng(this ES_PetHeCheng self)
+        private static async ETTask ReqestHeCheng(this ES_PetHeCheng self)
         {
-            // PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
-            // List<KeyValuePair> oldPetSkin = petComponent.GetPetSkinCopy();
-            // C2M_RolePetHeCheng c2M_RolePetHeCheng =
-            //         new C2M_RolePetHeCheng() { PetInfoId1 = self.HeChengPet_Left.Id, PetInfoId2 = self.HeChengPet_Right.Id };
-            // M2C_RolePetHeCheng m2C_RolePetHeCheng =
-            //         (M2C_RolePetHeCheng)await self.Root().GetComponent<SessionComponent>().Session.Call(c2M_RolePetHeCheng);
-            // if (m2C_RolePetHeCheng.Error != 0 || m2C_RolePetHeCheng.rolePetInfo == null)
-            // {
-            //     return;
-            // }
-            //
-            // self.HeChengPet_Left = null;
-            // self.HeChengPet_Right = null;
-            //
+            PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
+            List<KeyValuePair> oldPetSkin = petComponent.GetPetSkinCopy();
+            C2M_RolePetHeCheng c2M_RolePetHeCheng =
+                    new C2M_RolePetHeCheng() { PetInfoId1 = self.HeChengPet_Left.Id, PetInfoId2 = self.HeChengPet_Right.Id };
+            M2C_RolePetHeCheng m2C_RolePetHeCheng =
+                    (M2C_RolePetHeCheng)await self.Root().GetComponent<SessionComponent>().Session.Call(c2M_RolePetHeCheng);
+            if (m2C_RolePetHeCheng.Error != 0 || m2C_RolePetHeCheng.rolePetInfo == null)
+            {
+                return;
+            }
+
+            self.HeChengPet_Left = null;
+            self.HeChengPet_Right = null;
+
             // long instanceId = self.InstanceId;
             // UI uI = await UIHelper.Create(self.DomainScene(), UIType.UIPetChouKaGet);
             // if (instanceId != self.InstanceId)
