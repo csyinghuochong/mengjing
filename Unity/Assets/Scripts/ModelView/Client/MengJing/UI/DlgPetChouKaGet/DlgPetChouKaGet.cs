@@ -1,12 +1,16 @@
-﻿namespace ET.Client
+﻿using UnityEngine;
+
+namespace ET.Client
 {
-	 [ComponentOf(typeof(UIBaseWindow))]
-	public  class DlgPetChouKaGet :Entity,IAwake,IUILogic
-	{
+    [ComponentOf(typeof (UIBaseWindow))]
+    public class DlgPetChouKaGet: Entity, IAwake, IUILogic
+    {
+        public DlgPetChouKaGetViewComponent View
+        {
+            get => this.GetComponent<DlgPetChouKaGetViewComponent>();
+        }
 
-		public DlgPetChouKaGetViewComponent View { get => this.GetComponent<DlgPetChouKaGetViewComponent>();} 
-
-		 
-
-	}
+        public GameObject[] PetZiZhiItemList = new GameObject[6];
+        public GameObject[] PetZiZhiItemAddList = new GameObject[6];
+    }
 }
