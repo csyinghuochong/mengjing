@@ -32,8 +32,8 @@ namespace ET.Client
 	        }
 
 	        unit.AddComponent<ObjectWait>();
-	        //unit.AddComponent<HeroDataComponentC>();
-	        //unit.AddComponent<StateComponentC>();
+	        unit.AddComponent<HeroDataComponentC>();
+	        unit.AddComponent<StateComponentC>();
 	        //unit.AddComponent<XunLuoPathComponent>();
 	        UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
 	        // unitInfoComponent.UnitName = unitInfo.UnitName;
