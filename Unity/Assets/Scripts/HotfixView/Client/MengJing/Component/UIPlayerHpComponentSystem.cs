@@ -218,7 +218,7 @@ namespace ET.Client
 
              self.UpdateSkillUseMP();
 
-             StateComponent stateComponent = unit.GetComponent<StateComponent>();
+             StateComponentC stateComponent = unit.GetComponent<StateComponentC>();
              if (stateComponent.StateTypeGet(StateTypeEnum.Stealth))
              {
                  self.EnterStealth(canAttack ? 0f : 0.3f);
@@ -310,8 +310,8 @@ namespace ET.Client
                  
                  self.UIXuLieZhenComponent.OnUpdateTitle(tilteid).Coroutine();
                  self.Lal_Name.GetComponent<Text>().text = infoComponent.UnitName;
-                 this.UpdateDemonName(infoComponent.DemonName);
-                 this.OnUpdateUnionName();
+                 self.UpdateDemonName(infoComponent.DemonName);
+                 self.OnUpdateUnionName();
              }
              //显示怪物名称
              if (unit.Type == UnitType.Monster)
@@ -417,13 +417,13 @@ namespace ET.Client
          {
              if (self.Lal_Name != null)
              {
-                 UpdateShow();
+                 self.UpdateShow();
              }
          }
 
          public static void UpdateBlood(this UIPlayerHpComponent self)
          {
-             NumericComponentC numericComponent = self.Parent.GetComponent<NumericComponentC>();
+             NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
              float curhp = numericComponent.GetAsLong(NumericType.Now_Hp); // + value;
              float blood = curhp / numericComponent.GetAsLong(NumericType.Now_MaxHp);
              blood = Mathf.Max(blood, 0f);
@@ -459,7 +459,7 @@ namespace ET.Client
          public  static void OnTimer(this UIPlayerHpComponent self)
          {
              MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(self.GetParent<Unit>().ConfigId);
-             long leftTime = self.Parent.GetComponent<NumericComponentC>().GetAsLong(NumericType.ReviveTime) - TimeHelper.ClientNow();
+             long leftTime = self.GetParent<Unit>().GetComponent<NumericComponentC>().GetAsLong(NumericType.ReviveTime) - TimeHelper.ClientNow();
              leftTime = leftTime / 1000;
              ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
              GameObject reviveTime = rc.Get<GameObject>("ReviveTime");
