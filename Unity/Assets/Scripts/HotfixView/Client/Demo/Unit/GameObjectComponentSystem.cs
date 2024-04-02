@@ -489,7 +489,7 @@ namespace ET.Client
                         //self.OnUnitStallUpdate(numericComponent.GetAsLong(NumericType.Now_Stall));
                     }
                     
-                    StateComponent stateComponent = unit.GetComponent<StateComponent>();    
+                    StateComponentC stateComponent = unit.GetComponent<StateComponentC>();    
                     if (stateComponent.StateTypeGet(StateTypeEnum.Stealth))
                     { 
                         self.EnterStealth(); 
