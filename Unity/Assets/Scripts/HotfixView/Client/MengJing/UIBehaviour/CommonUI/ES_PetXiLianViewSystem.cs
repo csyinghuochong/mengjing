@@ -115,7 +115,7 @@ namespace ET.Client
         {
             self.RolePetInfo = self.Root().GetComponent<PetComponentC>().GetPetInfoByID(self.RolePetInfo.Id);
             self.ES_PetInfoShow.OnInitData(self.RolePetInfo);
-            self.UpdateConsume().Coroutine();
+            self.UpdateConsume();
         }
 
         public static void OnXiLianSelect(this ES_PetXiLian self, RolePetInfo rolePetInfo)
@@ -123,7 +123,7 @@ namespace ET.Client
             self.RolePetInfo = rolePetInfo;
             self.ES_PetInfoShow.OnInitData(rolePetInfo);
 
-            self.UpdateConsume().Coroutine();
+            self.UpdateConsume();
         }
 
         private static void OnSelectItem(this ES_PetXiLian self, BagInfo bagInfo)
@@ -154,7 +154,7 @@ namespace ET.Client
             self.CostItemInfo = null;
             self.E_Img_ItemIconImage.gameObject.SetActive(false);
             self.E_Text_ItemNameText.text = "";
-            self.UpdateConsume().Coroutine();
+            self.UpdateConsume();
             self.ES_PetInfoShow.OnInitData(self.RolePetInfo);
         }
 
@@ -167,7 +167,7 @@ namespace ET.Client
             scrollItemCommonItem.ES_CommonItem.E_ItemNumText.gameObject.SetActive(true);
         }
 
-        private static async ETTask UpdateConsume(this ES_PetXiLian self)
+        private static  void UpdateConsume(this ES_PetXiLian self)
         {
             self.ShowBagInfos.Clear();
             List<BagInfo> bagList = self.Root().GetComponent<BagComponentC>().GetBagList();

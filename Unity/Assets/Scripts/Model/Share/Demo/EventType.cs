@@ -35,4 +35,9 @@ namespace ET.Client
     {
         public Unit Unit;
     }
+    
+    public struct UnitDead
+    {
+        public Unit Unit;
+    }
 }

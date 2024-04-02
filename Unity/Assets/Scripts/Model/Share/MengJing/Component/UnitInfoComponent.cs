@@ -30,5 +30,7 @@ namespace ET
 
         public int LastDungeonId  { get; set; } = 0;
         public float3 LastDungeonPosition { get; set; } 
+        
+        public int DirectionType  { get; set; } = 0;
     }
 }

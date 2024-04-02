@@ -50,7 +50,7 @@ namespace ET.Client
                 self.RolePetInfo.LockSkill.Contains(self.ShowPetSkills[index]));
         }
 
-        private static async ETTask UpdateSkillList(this ES_PetInfoShow self, RolePetInfo rolePetInfo)
+        private static void  UpdateSkillList(this ES_PetInfoShow self, RolePetInfo rolePetInfo)
         {
             self.RolePetInfo = rolePetInfo;
             PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
@@ -169,7 +169,7 @@ namespace ET.Client
                 return;
             }
 
-            self.UpdateSkillList(rolePetInfo).Coroutine();
+            self.UpdateSkillList(rolePetInfo);
             self.UpdateAttribute(rolePetInfo);
         }
     }

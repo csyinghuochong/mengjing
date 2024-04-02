@@ -506,7 +506,7 @@ namespace ET.Client
                     if (unit.MainHero)
                     {
                         Transform topTf = unit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head).transform;
-                        UIMapHelper.OnMainHeroMove(topTf, go.transform, mapComponent.SceneType);
+                        UIMapHelper.OnMainHeroInit(unit.Root(), topTf, go.transform, mapComponent.SceneType);
                     }
                     if (self.BianShenEffect)
                     {
@@ -605,17 +605,16 @@ namespace ET.Client
             
                     if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Dead) == 1)
                     {
-                        EventType.UnitDead.Instance.Unit = unit;
-                        Game.EventSystem.PublishClass(EventType.UnitDead.Instance);
+                        EventSystem.Instance.Publish(self.Root(), new UnitDead(){ Unit =  unit});
                     }
                     else
                     {
                         unit.GetComponent<BuffManagerComponentC>()?.InitBuff();
-                        unit.GetComponent<SkillManagerComponent>()?.InitSkill();
+                        unit.GetComponent<SkillManagerComponentC>()?.InitSkill();
                     }
                     break;
                 case UnitType.Pet:
-                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.transform.name = unit.Id.ToString();
@@ -623,12 +622,12 @@ namespace ET.Client
                     unit.AddComponent<AnimatorComponent>();
                     unit.AddComponent<HeroTransformComponent>();       //获取角色绑点组件
                     unit.AddComponent<FsmComponent>();                 //当前状态组建
-                    unit.AddComponent<UIUnitHpComponent>();         //血条UI组件
+                    unit.AddComponent<UIPetHpComponent>();         //血条UI组件
                     self.OnAddCollider(go);
                     LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
                     break;
                 case UnitType.Npc:
-                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     LayerHelp.ChangeLayer(go.transform, LayerEnum.NPC);
@@ -636,25 +635,25 @@ namespace ET.Client
                     go.name = unit.ConfigId.ToString();
                     unit.AddComponent<AnimatorComponent>();
                     unit.AddComponent<HeroTransformComponent>();
-                    unit.AddComponent<NpcHeadBarComponent>();
+                    unit.AddComponent<UINpcHpComponent>();
                     unit.AddComponent<FsmComponent>();
                     unit.AddComponent<EffectViewComponent>();
                     break;
                 case UnitType.DropItem:
-                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.name = unit.Id.ToString();
-                    DropComponent dropComponent = unit.GetComponent<DropComponent>();
+                    DropComponentC dropComponent = unit.GetComponent<DropComponentC>();
                     unit.AddComponent<EffectViewComponent>();
-                    unit.AddComponent<DropUIComponent>().InitData(dropComponent.DropInfo);
+                    unit.AddComponent<UIDropComponent>().InitData(dropComponent.DropInfo);
                     break;
                 case UnitType.Chuansong:
-                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.name = unit.Id.ToString();
-                    switch (unit.GetComponent<ChuansongComponent>().DirectionType)
+                    switch (unit.GetComponent<UnitInfoComponent>().DirectionType)
                     {
                         case 1: //上
                             go.transform.localRotation = Quaternion.Euler(-90, 0, 180);         //设置旋转
@@ -671,10 +670,10 @@ namespace ET.Client
                         default:
                             break;
                     }
-                    unit.AddComponent<TransferUIComponent>().OnInitUI(unit.ConfigId).Coroutine();
+                    unit.AddComponent<UITransferHpComponent>().OnInitUI(unit.ConfigId).Coroutine();
                     break;
                 case UnitType.JingLing:
-                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.transform.name = unit.Id.ToString();
@@ -682,10 +681,10 @@ namespace ET.Client
                     unit.AddComponent<AnimatorComponent>();
                     unit.AddComponent<HeroTransformComponent>();       //获取角色绑点组件
                     unit.AddComponent<FsmComponent>();                 //当前状态组建
-                    unit.AddComponent<UIUnitHpComponent>();         //血条UI组件
+                    unit.AddComponent<UIJingLingHpComponent>();         //血条UI组件
                     break;
                 case UnitType.Pasture:
-                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
@@ -695,19 +694,19 @@ namespace ET.Client
                     unit.AddComponent<AnimatorComponent>();
                     unit.AddComponent<HeroTransformComponent>();       //获取角色绑点组件
                     unit.AddComponent<FsmComponent>();                 //当前状态组建
-                    unit.AddComponent<JiaYuanPastureUIComponent>();         //血条UI组件
+                    unit.AddComponent<UIJiaYuanPastureComponent>();         //血条UI组件
                     break;
                 case UnitType.Plant:
-                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.transform.name = unit.Id.ToString();
                     go.transform.localScale = Vector3.one * 10f;
-                    unit.AddComponent<JiaYuanPlanUIComponent>();
+                    unit.AddComponent<UIJiaYuanPlanComponent>();
                     unit.AddComponent<JiaYuanPlanEffectComponent>();
                     break;
                 case UnitType.Bullet:
-                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitEffect.gameObject);
+                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.name = unit.Id.ToString();
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;

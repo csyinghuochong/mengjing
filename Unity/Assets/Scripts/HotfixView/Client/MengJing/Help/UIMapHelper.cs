@@ -6,6 +6,36 @@ namespace ET.Client
 {
     public static class UIMapHelper
     {
+        
+        public static void OnMainHeroInit(Scene root, Transform topTf, Transform mainTf, int sceneTypeEnum)
+        {
+            Camera camera = UIEventComponent.Instance.MainCamera;
+            camera.GetComponent<MyCamera_1>().enabled = sceneTypeEnum == SceneTypeEnum.MainCityScene;
+            camera.GetComponent<MyCamera_1>().Target = topTf;
+
+            GameObject shiBingSet = GameObject.Find("ShiBingSet");
+            if (shiBingSet != null)
+            {
+                string path_2 = ABPathHelper.GetUGUIPath("Blood/UINpcLocal");
+                GameObject npc_go = root.GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path_2);
+                for (int i = 0; i < shiBingSet.transform.childCount; i++)
+                {
+                    GameObject shiBingItem = shiBingSet.transform.GetChild(i).gameObject;
+                    NpcLocal npcLocal = shiBingItem.GetComponent<NpcLocal>();
+                    if (npcLocal == null)
+                    {
+                        continue;
+                    }
+                    NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcLocal.NpcId);
+                    npcLocal.Target = mainTf;
+                    npcLocal.NpcName = npcConfig.Name;
+                    npcLocal.NpcSpeak = npcConfig.SpeakText;
+                    npcLocal.AssetBundle = npc_go;
+                }
+            }
+        }
+
+        
         public static void OnMainHeroMove(Unit self)
         {
             float curTime = Time.time;

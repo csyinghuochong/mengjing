@@ -23,7 +23,6 @@ namespace ET.Client
     /// <summary>
     /// 适用于动画切换的栈式状态机
     /// </summary>
-    [FriendOf(typeof(SkillManagerComponentCSystem))]
     [FriendOf(typeof(AnimatorComponent))]
     [FriendOf(typeof(FsmComponent))]
     [EntitySystemOf(typeof(FsmComponent))]
@@ -55,7 +54,7 @@ namespace ET.Client
                 return;
             }
 
-            SkillManagerComponentCSystem skillManagerComponentCSystem = self.GetParent<Unit>().GetComponent<SkillManagerComponentCSystem>();
+            SkillManagerComponentC skillManagerComponentCSystem = self.GetParent<Unit>().GetComponent<SkillManagerComponentC>();
             if (skillManagerComponentCSystem.SkillMoveTime != 0 && TimeHelper.ClientNow() >= skillManagerComponentCSystem.SkillMoveTime)
             {
                 skillManagerComponentCSystem.SkillMoveTime = 0;
@@ -190,7 +189,7 @@ namespace ET.Client
 
         public static void OnEnterFsmSkillState(this FsmComponent self, int skillid)
         {
-            SkillManagerComponentCSystem skillManagerComponentCSystem = self.GetParent<Unit>().GetComponent<SkillManagerComponentCSystem>();
+            SkillManagerComponentC skillManagerComponentCSystem = self.GetParent<Unit>().GetComponent<SkillManagerComponentC>();
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
             if (skillManagerComponentCSystem.SkillMoveTime > TimeHelper.ClientNow()
                || skillManagerComponentCSystem.SkillSingTime > TimeHelper.ClientNow())
@@ -211,7 +210,7 @@ namespace ET.Client
         {
             self.LastAnimator = string.Empty;
             Unit unit = self.GetParent<Unit>();
-            SkillManagerComponentCSystem skillManagerComponentCSystem = unit.GetComponent<SkillManagerComponentCSystem>();
+            SkillManagerComponentC skillManagerComponentCSystem = unit.GetComponent<SkillManagerComponentC>();
             if (TimeHelper.ClientNow() > skillManagerComponentCSystem.SkillMoveTime)
             {
                 self.SetRunState();
@@ -221,7 +220,7 @@ namespace ET.Client
         public static void OnEnterIdleState(this FsmComponent self)
         {
             self.LastAnimator = string.Empty;
-            SkillManagerComponentCSystem skillManagerComponentCSystem = self.GetParent<Unit>().GetComponent<SkillManagerComponentCSystem>();
+            SkillManagerComponentC skillManagerComponentCSystem = self.GetParent<Unit>().GetComponent<SkillManagerComponentC>();
             if (skillManagerComponentCSystem == null || TimeHelper.ClientNow() > skillManagerComponentCSystem.SkillMoveTime)
             {
                 self.SetIdleState();
