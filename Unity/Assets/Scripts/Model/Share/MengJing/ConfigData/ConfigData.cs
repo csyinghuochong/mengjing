@@ -854,6 +854,13 @@ namespace ET
 
         [StaticField]
         public static float3 PastureInitPos = new float3(-15f, 0f, -20f);
+        
+        [StaticField]
+        public static string UI_pro_4_2 = "UI_pro_4_2";
+        [StaticField]
+        public static string UI_pro_3_2 = "UI_pro_3_2";
+        [StaticField]
+        public static string UI_pro_3_4 = "UI_pro_3_4";
 
         [StaticField]
         public static List<float3> PlanPositionList = new List<float3>()

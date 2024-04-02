@@ -106,7 +106,7 @@ namespace ET.Client
                     self.OnRunRaceMonster(runmonsterId, cardtransform, false);
                     if (runmonsterId > 0)
                     {
-                        self.OnRunRaceMonster( runmonsterId, false );  
+                        self.OnRunRaceMonster(0, runmonsterId, false );  
                     }
                     else
                     {
@@ -477,7 +477,7 @@ namespace ET.Client
                     unit.AddComponent<HeroTransformComponent>();              //获取角色绑点组件
                     unit.AddComponent<EffectViewComponent>();               //添加特效组建
                     unit.AddComponent<SkillYujingComponent>();
-                    unit.AddComponent<UIUnitHpComponent>();
+                    unit.AddComponent<UIPlayerHpComponent>();
                     unit.GetComponent<BuffManagerComponent>()?.InitBuff();
                     unit.GetComponent<SkillManagerComponentC>()?.InitSkill();
                     self.OnUpdateHorse();

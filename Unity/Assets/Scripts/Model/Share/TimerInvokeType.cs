@@ -28,5 +28,7 @@
         public const int DelayShowTimer = 307;
         public const int GameObjectPoolTimer = 308;
         public const int YujingTimer = 309;
+        public const int UIUnitReviveTime = 310;
+        public const int DialogTimer = 311;
     }
 }

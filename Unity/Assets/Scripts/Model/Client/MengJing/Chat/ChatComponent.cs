@@ -9,6 +9,6 @@ namespace ET.Client
 
         public long LastSendWord;
 
-        public ChatInfo LastChatInfo;
+        public ChatInfo LastChatInfo { get; set; }
     }
 }
