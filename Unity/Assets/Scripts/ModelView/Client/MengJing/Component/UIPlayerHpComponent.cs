@@ -30,7 +30,7 @@ namespace ET.Client
         public GameObject Lal_AddtionName;
         public GameObject PlayerNameSet;
         public GameObject Lal_JiaZuName;
-        public UIXuLieZhenComponent UIXuLieZhenComponent;
+        public UIXuLieZhenComponent UIXuLieZhenComponent { get; set; }
         public float LastTime;
         public long Timer;
         public long DialogTimer;
