@@ -8,8 +8,9 @@ namespace ET.Client
     {
         
         public static void OnMainHeroInit(Scene root, Transform topTf, Transform mainTf, int sceneTypeEnum)
-        {
-            Camera camera = UIEventComponent.Instance.MainCamera;
+        { 
+            GlobalComponent globalComponent = root.GetComponent<GlobalComponent>();
+            Camera camera =globalComponent.MainCamera.GetComponent<Camera>() ;
             camera.GetComponent<MyCamera_1>().enabled = sceneTypeEnum == SceneTypeEnum.MainCityScene;
             camera.GetComponent<MyCamera_1>().Target = topTf;
 

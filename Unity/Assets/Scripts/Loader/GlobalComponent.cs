@@ -1,4 +1,5 @@
 using UnityEngine;
+using ET.Client;
 
 namespace ET
 {
@@ -18,8 +19,27 @@ namespace ET
             self.PoolRoot = GameObject.Find("/Global/PoolRoot").transform;
             self.MainCamera = GameObject.Find("/Global/MainCamera").transform;
             self.UICamera = GameObject.Find("/Global/UICamera").transform;
-
             self.GlobalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
+            
+            GameObject uiRoot = GameObject.Find("/Global/UI");
+            self.BloodPlayer = new GameObject("BloodPlayer");
+            self.BloodPlayer.AddComponent<RectTransform>();
+            SetParent(self.BloodPlayer, self.NormalRoot.gameObject);
+            self.BloodMonster = new GameObject("BloodMonster");
+            self.BloodMonster.AddComponent<RectTransform>();
+            SetParent(self.BloodMonster, self.NormalRoot.gameObject);
+            self.BloodText = new GameObject("BloodText");
+            self.BloodText.AddComponent<RectTransform>();
+            SetParent(self.BloodText, self.NormalRoot.gameObject);
+        }
+        
+        public static void SetParent(GameObject son, GameObject parent)
+        {
+            if (son == null || parent == null)
+                return;
+            son.transform.SetParent(parent.transform);
+            son.transform.localPosition = Vector3.zero;
+            son.transform.localScale = Vector3.one;
         }
     }
 
@@ -41,5 +61,10 @@ namespace ET
         public Transform MainCamera { get; set; }
 
         public Transform UICamera { get; set; }
+        
+        
+        public GameObject BloodPlayer { get; set; }
+        public GameObject BloodMonster { get; set; }
+        public GameObject BloodText { get; set; }
     }
 }

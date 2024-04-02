@@ -171,31 +171,32 @@ namespace ET.Client
              self.Img_HpValue.GetComponent<RectTransform>().sizeDelta = lierenxuetiao ? new Vector2(160f, 14f) : new Vector2(160f, 18f);
              self.Img_HpValue.transform.localPosition = lierenxuetiao ? new Vector3(-82.5f, 1.9f, 0f) : new Vector3(-82.5f, 0.1f, 0f);
 
-             
              self.Lal_Name = rc.Get<GameObject>("Lal_Name");
              self.Lal_JiaZuName = rc.Get<GameObject>("Lal_JiaZuName");
              self.UIPosition = unit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head);
-             GameObject bloodparent = unit.Type == UnitType.Monster ? UIEventComponent.Instance.BloodMonster :  UIEventComponent.Instance.BloodPlayer ;
+             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
+             GameObject bloodparent = unit.Type == UnitType.Monster ? globalComponent.BloodMonster :  globalComponent.BloodPlayer ;
              self.GameObject.transform.SetParent(bloodparent.transform);
              self.GameObject.transform.localScale = Vector3.one;
 
              self.UIPlayerHpText = rc.Get<GameObject>("UIPlayerHpText");
-             self.UIPlayerHpText.transform.SetParent(UIEventComponent.Instance.BloodText.transform);
+           
+             self.UIPlayerHpText.transform.SetParent(globalComponent.BloodText.transform);
              self.UIPlayerHpText.transform.localScale = Vector3.one;
              HeadBarUI HeadBarUI_1 = self.UIPlayerHpText.GetComponent<HeadBarUI>();
              HeadBarUI_1.enabled = !unit.MainHero;
              HeadBarUI_1.HeadPos = self.UIPosition;
              HeadBarUI_1.HeadBar = self.UIPlayerHpText;
-             HeadBarUI_1.UiCamera = UIEventComponent.Instance.UICamera;
-             HeadBarUI_1.MainCamera = UIEventComponent.Instance.MainCamera;
+             HeadBarUI_1.UiCamera = globalComponent.UICamera.GetComponent<Camera>();
+             HeadBarUI_1.MainCamera = globalComponent.MainCamera.GetComponent<Camera>();
              HeadBarUI_1.UpdatePostion();
 
              HeadBarUI HeadBarUI_2 = self.GameObject.GetComponent<HeadBarUI>();
              HeadBarUI_2.enabled =  !unit.MainHero;
              HeadBarUI_2.HeadPos = self.UIPosition;
              HeadBarUI_2.HeadBar = self.GameObject;
-             HeadBarUI_2.UiCamera = UIEventComponent.Instance.UICamera;
-             HeadBarUI_2.MainCamera = UIEventComponent.Instance.MainCamera;
+             HeadBarUI_2.UiCamera = globalComponent.UICamera.GetComponent<Camera>();
+             HeadBarUI_2.MainCamera = globalComponent.MainCamera.GetComponent<Camera>();
              HeadBarUI_2.UpdatePostion();
 
              if (unit.MainHero)
