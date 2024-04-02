@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,7 +8,13 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetXiLian : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		public UnityEngine.UI.LoopVerticalScrollRect E_CommonSkillItemsLoopVerticalScrollRect
+		public BagInfo CostItemInfo;
+		public RolePetInfo RolePetInfo;
+
+		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public List<BagInfo> ShowBagInfos = new();
+		
+		public ES_PetInfoShow ES_PetInfoShow
      	{
      		get
      		{
@@ -16,11 +23,29 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_CommonSkillItemsLoopVerticalScrollRect == null )
+     			if( this.m_es_petinfoshow == null )
      			{
-		    		this.m_E_CommonSkillItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"DoMove/E_CommonSkillItems");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"E_UIPetInfo1/ES_PetInfoShow");
+		    	   this.m_es_petinfoshow = this.AddChild<ES_PetInfoShow,Transform>(subTrans);
      			}
-     			return this.m_E_CommonSkillItemsLoopVerticalScrollRect;
+     			return this.m_es_petinfoshow;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopVerticalScrollRect E_CommonItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CommonItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_CommonItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"DoMove/E_CommonItems");
+     			}
+     			return this.m_E_CommonItemsLoopVerticalScrollRect;
      		}
      	}
 
@@ -109,9 +134,22 @@ namespace ET.Client
      		}
      	}
 
+		    public Transform UITransform
+         {
+     	    get
+     	    {
+     		    return this.uiTransform;
+     	    }
+     	    set
+     	    {
+     		    this.uiTransform = value;
+     	    }
+         }
+
 		public void DestroyWidget()
 		{
-			this.m_E_CommonSkillItemsLoopVerticalScrollRect = null;
+			this.m_es_petinfoshow = null;
+			this.m_E_CommonItemsLoopVerticalScrollRect = null;
 			this.m_E_Btn_XiLianButton = null;
 			this.m_E_Btn_XiLianImage = null;
 			this.m_E_Img_ItemQualityImage = null;
@@ -120,7 +158,8 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_CommonSkillItemsLoopVerticalScrollRect = null;
+		private EntityRef<ES_PetInfoShow> m_es_petinfoshow = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_CommonItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_Btn_XiLianButton = null;
 		private UnityEngine.UI.Image m_E_Btn_XiLianImage = null;
 		private UnityEngine.UI.Image m_E_Img_ItemQualityImage = null;
