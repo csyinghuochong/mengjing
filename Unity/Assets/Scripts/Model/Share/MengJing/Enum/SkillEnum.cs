@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
+using Unity.Mathematics;
 
 namespace ET
 {
@@ -201,7 +202,7 @@ namespace ET
 
         public int EffectId;
 
-        public Vector3 EffectPosition;
+        public float3 EffectPosition;
         public float EffectAngle;
 
         public int TargetAngle;

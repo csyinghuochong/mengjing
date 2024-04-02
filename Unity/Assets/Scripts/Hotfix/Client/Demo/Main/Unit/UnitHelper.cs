@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Client
 {
@@ -29,6 +30,24 @@ namespace ET.Client
             }
 
             return units;
+        }
+
+        public static float3 GetBornPostion(this Unit self)
+        {
+            NumericComponentC numericComponent = self.GetComponent<NumericComponentC>();
+            return new float3(numericComponent.GetAsFloat(NumericType.Born_X),
+                numericComponent.GetAsFloat(NumericType.Born_Y),
+                numericComponent.GetAsFloat(NumericType.Born_Z));
+        }
+        
+        public static bool IsChest(this Unit self)
+        {
+            if (self.Type != UnitType.Monster)
+            {
+                return false;
+            }
+            int sonType = MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterSonType;
+            return sonType == 55 || sonType == 56 || sonType == 57;
         }
     }
 }

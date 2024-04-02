@@ -506,16 +506,16 @@ namespace ET.Client
                     if (unit.MainHero)
                     {
                         Transform topTf = unit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head).transform;
-                        NpcLocalHelper.OnMainHero(topTf, go.transform, mapComponent.SceneTypeEnum);
+                        UIMapHelper.OnMainHeroMove(topTf, go.transform, mapComponent.SceneType);
                     }
                     if (self.BianShenEffect)
                     {
                         self.BianShenEffect = false;
-                        FunctionEffect.GetInstance().PlaySelfEffect(unit, 30000002);
+                        FunctionEffect.PlaySelfEffect(unit, 30000002);
                     }
                     break;
                 case UnitType.Stall:
-                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     LayerHelp.ChangeLayer(go.transform, LayerEnum.Player);
@@ -523,10 +523,10 @@ namespace ET.Client
                     go.name = unit.Id.ToString();
                     unit.AddComponent<AnimatorComponent>();
                     unit.AddComponent<HeroTransformComponent>();
-                    unit.AddComponent<UIUnitHpComponent>(true);
+                    unit.AddComponent<UIStallHpComponent>(true);
                     break;
                 case UnitType.Monster:
-                    UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitMonster.gameObject);
+                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.transform.name = unit.Id.ToString();
@@ -544,8 +544,8 @@ namespace ET.Client
                     {
                         unit.AddComponent<MonsterActRangeComponent, int>(monsterCof.Id, true);         //血条UI组件
             
-                        mapComponent = self.ZoneScene().GetComponent<MapComponent>();
-                        bool shenYuan = mapComponent.SceneTypeEnum == SceneTypeEnum.TeamDungeon && mapComponent.FubenDifficulty == TeamFubenType.ShenYuan;
+                        mapComponent = self.Root().GetComponent<MapComponent>();
+                        bool shenYuan = mapComponent.SceneType == SceneTypeEnum.TeamDungeon && mapComponent.FubenDifficulty == TeamFubenType.ShenYuan;
                         go.transform.localScale = shenYuan ? Vector3.one * 1.3f : Vector3.one;
                     }
             
@@ -566,44 +566,44 @@ namespace ET.Client
                     else if (monsterCof.MonsterSonType == 52 || monsterCof.MonsterSonType == 54)
                     {
                         self.OnAddCollider(go);
-                        unit.AddComponent<SceneItemUIComponent>(true); //血条UI组件
+                        unit.AddComponent<UISceneItemComponent>(true); //血条UI组件
                     }
                     else if (monsterCof.MonsterSonType == 58 || monsterCof.MonsterSonType == 59)
                     {
                         self.OnAddCollider(go);
-                        unit.AddComponent<SceneItemUIComponent>(true);         //血条UI组件
+                        unit.AddComponent<UISceneItemComponent>(true);         //血条UI组件
                         LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
             
                         if (monsterCof.MonsterSonType == 58)
                         {
                             //实例化特效
-                            FunctionEffect.GetInstance().PlaySelfEffect(unit, 91000106);
+                            FunctionEffect.PlaySelfEffect(unit, 91000106);
                         }
             
                         if (monsterCof.MonsterSonType == 59)
                         {
                             //实例化特效
-                            FunctionEffect.GetInstance().PlaySelfEffect(unit, 91000107);
+                            FunctionEffect.PlaySelfEffect(unit, 91000107);
                         }
                     }
                     else if (unit.IsChest() || monsterCof.MonsterSonType == 60)
                     {
-                        unit.AddComponent<SceneItemUIComponent>(true);         //血条UI组件
+                        unit.AddComponent<UISceneItemComponent>(true);         //血条UI组件
                         LayerHelp.ChangeLayer(go.transform, LayerEnum.Box);
                     }
                     else if (monsterCof.MonsterSonType == 61)
                     {
                         self.OnAddCollider(go);
-                        unit.AddComponent<SceneItemUIComponent>(true);         //血条UI组件
+                        unit.AddComponent<UISceneItemComponent>(true);         //血条UI组件
                         LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
                     }
                     else if (monsterCof.MonsterType != (int)MonsterTypeEnum.SceneItem)
                     {
                         unit.AddComponent<HeroTransformComponent>(true);       //获取角色绑点组件
-                        unit.AddComponent<UIUnitHpComponent>(true);         //血条UI组件
+                        unit.AddComponent<UIMonsterHpComponent>(true);         //血条UI组件
                     }
             
-                    if (unit.GetComponent<NumericComponent>().GetAsInt(NumericType.Now_Dead) == 1)
+                    if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Dead) == 1)
                     {
                         EventType.UnitDead.Instance.Unit = unit;
                         Game.EventSystem.PublishClass(EventType.UnitDead.Instance);

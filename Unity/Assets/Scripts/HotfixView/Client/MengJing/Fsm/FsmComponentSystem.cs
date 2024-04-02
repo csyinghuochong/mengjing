@@ -23,7 +23,7 @@ namespace ET.Client
     /// <summary>
     /// 适用于动画切换的栈式状态机
     /// </summary>
-    [FriendOf(typeof(SkillManagerComponentC))]
+    [FriendOf(typeof(SkillManagerComponentCSystem))]
     [FriendOf(typeof(AnimatorComponent))]
     [FriendOf(typeof(FsmComponent))]
     [EntitySystemOf(typeof(FsmComponent))]
@@ -55,10 +55,10 @@ namespace ET.Client
                 return;
             }
 
-            SkillManagerComponentC skillManagerComponentC = self.GetParent<Unit>().GetComponent<SkillManagerComponentC>();
-            if (skillManagerComponentC.SkillMoveTime != 0 && TimeHelper.ClientNow() >= skillManagerComponentC.SkillMoveTime)
+            SkillManagerComponentCSystem skillManagerComponentCSystem = self.GetParent<Unit>().GetComponent<SkillManagerComponentCSystem>();
+            if (skillManagerComponentCSystem.SkillMoveTime != 0 && TimeHelper.ClientNow() >= skillManagerComponentCSystem.SkillMoveTime)
             {
-                skillManagerComponentC.SkillMoveTime = 0;
+                skillManagerComponentCSystem.SkillMoveTime = 0;
                 if (self.CurrentFsm == FsmStateEnum.FsmIdleState)
                 {
                     self.SetIdleState();
@@ -73,9 +73,9 @@ namespace ET.Client
                 }
                 self.EndTimer();
             }
-            if (skillManagerComponentC.SkillSingTime > 0 && TimeHelper.ClientNow() >= skillManagerComponentC.SkillSingTime)
+            if (skillManagerComponentCSystem.SkillSingTime > 0 && TimeHelper.ClientNow() >= skillManagerComponentCSystem.SkillSingTime)
             {
-                skillManagerComponentC.SkillSingTime = 0;
+                skillManagerComponentCSystem.SkillSingTime = 0;
                 self.SetIdleState();
                 self.EndTimer();
             }
@@ -190,10 +190,10 @@ namespace ET.Client
 
         public static void OnEnterFsmSkillState(this FsmComponent self, int skillid)
         {
-            SkillManagerComponentC skillManagerComponentC = self.GetParent<Unit>().GetComponent<SkillManagerComponentC>();
+            SkillManagerComponentCSystem skillManagerComponentCSystem = self.GetParent<Unit>().GetComponent<SkillManagerComponentCSystem>();
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
-            if (skillManagerComponentC.SkillMoveTime > TimeHelper.ClientNow()
-               || skillManagerComponentC.SkillSingTime > TimeHelper.ClientNow())
+            if (skillManagerComponentCSystem.SkillMoveTime > TimeHelper.ClientNow()
+               || skillManagerComponentCSystem.SkillSingTime > TimeHelper.ClientNow())
             {
                 self.AnimatorComponent.SetBoolValue("Idle", false);
                 self.AnimatorComponent.SetBoolValue("Run", false);
@@ -211,8 +211,8 @@ namespace ET.Client
         {
             self.LastAnimator = string.Empty;
             Unit unit = self.GetParent<Unit>();
-            SkillManagerComponentC skillManagerComponentC = unit.GetComponent<SkillManagerComponentC>();
-            if (TimeHelper.ClientNow() > skillManagerComponentC.SkillMoveTime)
+            SkillManagerComponentCSystem skillManagerComponentCSystem = unit.GetComponent<SkillManagerComponentCSystem>();
+            if (TimeHelper.ClientNow() > skillManagerComponentCSystem.SkillMoveTime)
             {
                 self.SetRunState();
             }
@@ -221,8 +221,8 @@ namespace ET.Client
         public static void OnEnterIdleState(this FsmComponent self)
         {
             self.LastAnimator = string.Empty;
-            SkillManagerComponentC skillManagerComponentC = self.GetParent<Unit>().GetComponent<SkillManagerComponentC>();
-            if (skillManagerComponentC == null || TimeHelper.ClientNow() > skillManagerComponentC.SkillMoveTime)
+            SkillManagerComponentCSystem skillManagerComponentCSystem = self.GetParent<Unit>().GetComponent<SkillManagerComponentCSystem>();
+            if (skillManagerComponentCSystem == null || TimeHelper.ClientNow() > skillManagerComponentCSystem.SkillMoveTime)
             {
                 self.SetIdleState();
             }
