@@ -397,7 +397,8 @@ namespace ET.Client
                      self.RolePetInfos[i] = m2C_RolePetHeCheng.rolePetInfo;
                  }
              }
-             //HintHelp.GetInstance().DataUpdate(DataType.PetHeChengUpdate);
+             
+             EventSystem.Instance.Publish(self.Root(),new DataUpdate_PetHeChengUpdate());
          }
 
         

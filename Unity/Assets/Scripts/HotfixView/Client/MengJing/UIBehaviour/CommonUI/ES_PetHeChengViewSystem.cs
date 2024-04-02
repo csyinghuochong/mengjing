@@ -139,11 +139,8 @@ namespace ET.Client
         {
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
             List<KeyValuePair> oldPetSkin = petComponent.GetPetSkinCopy();
-            C2M_RolePetHeCheng c2M_RolePetHeCheng =
-                    new C2M_RolePetHeCheng() { PetInfoId1 = self.HeChengPet_Left.Id, PetInfoId2 = self.HeChengPet_Right.Id };
-            M2C_RolePetHeCheng m2C_RolePetHeCheng =
-                    (M2C_RolePetHeCheng)await self.Root().GetComponent<SessionComponent>().Session.Call(c2M_RolePetHeCheng);
-            if (m2C_RolePetHeCheng.Error != 0 || m2C_RolePetHeCheng.rolePetInfo == null)
+            M2C_RolePetHeCheng response = await PetNetHelper.RequestRolePetHeCheng(self.Root(), self.HeChengPet_Left.Id, self.HeChengPet_Right.Id);
+            if (response.Error != 0 || response.rolePetInfo == null)
             {
                 return;
             }
@@ -151,17 +148,11 @@ namespace ET.Client
             self.HeChengPet_Left = null;
             self.HeChengPet_Right = null;
 
-            // long instanceId = self.InstanceId;
-            // UI uI = await UIHelper.Create(self.DomainScene(), UIType.UIPetChouKaGet);
-            // if (instanceId != self.InstanceId)
-            // {
-            //     return;
-            // }
-            //
-            // uI.GetComponent<UIPetChouKaGetComponent>().OnInitUI(m2C_RolePetHeCheng.rolePetInfo, oldPetSkin);
-            // self.ZoneScene().GetComponent<PetComponent>().OnRecvHeCheng(m2C_RolePetHeCheng);
+            self.Root().GetComponent<PetComponentC>().OnRecvHeCheng(response);
 
-            await ETTask.CompletedTask;
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetChouKaGet);
+
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetChouKaGet>().OnInitUI(response.rolePetInfo, oldPetSkin);
         }
 
         public static void OnHeChengReturn(this ES_PetHeCheng self)

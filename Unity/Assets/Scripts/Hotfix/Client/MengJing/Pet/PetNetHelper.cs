@@ -145,5 +145,13 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<M2C_RolePetHeCheng> RequestRolePetHeCheng(Scene root, long petInfoId1, long petInfoId2)
+        {
+            C2M_RolePetHeCheng request = new() { PetInfoId1 = petInfoId1, PetInfoId2 = petInfoId2 };
+            M2C_RolePetHeCheng response = (M2C_RolePetHeCheng)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
     }
 }

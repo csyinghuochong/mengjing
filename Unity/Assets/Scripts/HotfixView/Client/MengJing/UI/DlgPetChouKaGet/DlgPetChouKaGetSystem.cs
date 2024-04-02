@@ -17,7 +17,7 @@ namespace ET.Client
         {
         }
 
-        public static void InitModelShowView(this DlgPetChouKaGet self, RolePetInfo rolePetInfo)
+        private static void InitModelShowView(this DlgPetChouKaGet self, RolePetInfo rolePetInfo)
         {
             self.View.ES_ModelShow.SetPosition(Vector3.zero, new Vector3(0f, 115, 257f));
 
@@ -32,7 +32,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetChouKaGet);
         }
 
-        private static void OnInitUI(this DlgPetChouKaGet self, RolePetInfo rolePetInfo, List<KeyValuePair> oldSkins,
+        public static void OnInitUI(this DlgPetChouKaGet self, RolePetInfo rolePetInfo, List<KeyValuePair> oldSkins,
         RolePetInfo oldRolePetInfo = null)
         {
             try

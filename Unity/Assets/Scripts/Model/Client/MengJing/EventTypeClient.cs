@@ -94,6 +94,10 @@ namespace ET.Client
     {
     }
 
+    public struct DataUpdate_PetHeChengUpdate
+    {
+    }
+
     public struct TaskNpcDialog
     {
         public int NpcId;
