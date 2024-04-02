@@ -22,7 +22,7 @@ namespace ET.Client
             self.Img_MpValue = null;
             self.HeadBarPath = "";
             self.LastTime = 0f;
-            self.HeadBarPath = ABPathHelper.GetUGUIPath("Blood/UIUnitHp");
+            self.HeadBarPath = ABPathHelper.GetUGUIPath("Blood/UIPlayerHp");
           
             GameObjectPoolComponent.Instance.AddLoadQueue(self.HeadBarPath, self.InstanceId, self.OnLoadGameObject);
         }
