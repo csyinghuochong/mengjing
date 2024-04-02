@@ -331,6 +331,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_PetSkinIconRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_PetSkinIconRectTransform == null )
+     			{
+		    		this.m_EG_PetSkinIconRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PetSkinIcon");
+     			}
+     			return this.m_EG_PetSkinIconRectTransform;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_NewSkinNameText
      	{
      		get
@@ -342,7 +359,7 @@ namespace ET.Client
      			}
      			if( this.m_E_NewSkinNameText == null )
      			{
-		    		this.m_E_NewSkinNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"UIPetSkinIcon/E_NewSkinName");
+		    		this.m_E_NewSkinNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_PetSkinIcon/E_NewSkinName");
      			}
      			return this.m_E_NewSkinNameText;
      		}
@@ -403,6 +420,7 @@ namespace ET.Client
 			this.m_E_Text_QualityText = null;
 			this.m_EG_PiFuJiHuoRectTransform = null;
 			this.m_E_Text_FightValueText = null;
+			this.m_EG_PetSkinIconRectTransform = null;
 			this.m_E_NewSkinNameText = null;
 			this.m_E_Btn_CloseButton = null;
 			this.m_E_Btn_CloseImage = null;
@@ -428,6 +446,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_Text_QualityText = null;
 		private UnityEngine.RectTransform m_EG_PiFuJiHuoRectTransform = null;
 		private UnityEngine.UI.Text m_E_Text_FightValueText = null;
+		private UnityEngine.RectTransform m_EG_PetSkinIconRectTransform = null;
 		private UnityEngine.UI.Text m_E_NewSkinNameText = null;
 		private UnityEngine.UI.Button m_E_Btn_CloseButton = null;
 		private UnityEngine.UI.Image m_E_Btn_CloseImage = null;

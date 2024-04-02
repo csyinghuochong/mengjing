@@ -11,6 +11,8 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgPetChouKaGet self)
         {
+            self.View.E_Btn_CloseButton.AddListener(self.OnBtn_Close);
+            self.View.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
         }
 
         public static void ShowWindow(this DlgPetChouKaGet self, Entity contextData = null)
@@ -27,7 +29,7 @@ namespace ET.Client
 
         private static void OnBtn_Close(this DlgPetChouKaGet self)
         {
-            // self.Root().GetComponent<BattleMessageComponent>().ShowPetChouKaGet = false;
+            self.Root().GetComponent<BattleMessageComponent>().ShowPetChouKaGet = false;
             // self.Root().GetComponent<BattleMessageComponent>().ShowRolePetAdd();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetChouKaGet);
         }
@@ -35,102 +37,79 @@ namespace ET.Client
         public static void OnInitUI(this DlgPetChouKaGet self, RolePetInfo rolePetInfo, List<KeyValuePair> oldSkins,
         RolePetInfo oldRolePetInfo = null)
         {
-            try
+            self.RolePetInfo = rolePetInfo;
+            self.OldRolePetInfo = oldRolePetInfo;
+
+            self.InitModelShowView(rolePetInfo);
+
+            PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
+
+            bool newSkin = true;
+            for (int p = 0; p < oldSkins.Count; p++)
             {
-                self.InitModelShowView(rolePetInfo);
-
-                PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
-
-                bool newSkin = true;
-                for (int p = 0; p < oldSkins.Count; p++)
+                if (oldSkins[p].KeyId != rolePetInfo.ConfigId)
                 {
-                    if (oldSkins[p].KeyId != rolePetInfo.ConfigId)
-                    {
-                        continue;
-                    }
-
-                    if (oldSkins[p].Value.Contains(rolePetInfo.SkinId.ToString()))
-                    {
-                        newSkin = false;
-                        break;
-                    }
+                    continue;
                 }
 
-                // 获取此模型是否被激活
-                if (newSkin == true)
+                if (oldSkins[p].Value.Contains(rolePetInfo.SkinId.ToString()))
                 {
-                    self.View.E_NewSkinNameText.gameObject.SetActive(true);
-                    self.View.EG_PiFuJiHuoRectTransform.gameObject.SetActive(true);
+                    newSkin = false;
+                    break;
                 }
-                else
-                {
-                    self.View.E_NewSkinNameText.gameObject.SetActive(false);
-                    self.View.EG_PiFuJiHuoRectTransform.gameObject.SetActive(false);
-                }
-
-                self.View.E_Text_TipText.text = $"{petConfig.PetName}";
-                // self.PetSkinIconComponent.OnUpdateUI(rolePetInfo.SkinId, true);
-
-                PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
-                self.View.E_Text_PetNameText.text = petSkinConfig.Name;
-
-                self.View.E_BianYiDiButton.gameObject.SetActive(rolePetInfo.SkinId != petConfig.Skin[0]);
-                self.View.E_LucklyButton.gameObject.SetActive(rolePetInfo.Luckly == 1);
-
-                self.UpdateSkillList(rolePetInfo, oldRolePetInfo);
-                self.UpdateAttribute(rolePetInfo, oldRolePetInfo);
-
-                self.View.E_Text_FightValueText.text = PetHelper.PetPingJia(rolePetInfo).ToString();
             }
-            catch (Exception ex)
+
+            // 获取此模型是否被激活
+            if (newSkin == true)
             {
-                Log.Error("PetChouKaError: " + ex.ToString());
+                self.View.E_NewSkinNameText.gameObject.SetActive(true);
+                self.View.EG_PiFuJiHuoRectTransform.gameObject.SetActive(true);
             }
+            else
+            {
+                self.View.E_NewSkinNameText.gameObject.SetActive(false);
+                self.View.EG_PiFuJiHuoRectTransform.gameObject.SetActive(false);
+            }
+
+            self.View.E_Text_TipText.text = $"{petConfig.PetName}";
+            ReferenceCollector rc = self.View.EG_PetSkinIconRectTransform.GetComponent<ReferenceCollector>();
+            PetSkinConfig skillConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, skillConfig.IconID.ToString());
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            rc.Get<GameObject>("Image_ItemIcon").GetComponent<Image>().sprite = sp;
+            rc.Get<GameObject>("TextSkinName").GetComponent<Text>().text = skillConfig.Name;
+            rc.Get<GameObject>("JiHuoSet").SetActive(true);
+
+            PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
+            self.View.E_Text_PetNameText.text = petSkinConfig.Name;
+
+            self.View.E_BianYiDiButton.gameObject.SetActive(rolePetInfo.SkinId != petConfig.Skin[0]);
+            self.View.E_LucklyButton.gameObject.SetActive(rolePetInfo.Luckly == 1);
+
+            self.AddUIScrollItems(ref self.ScrollItemCommonSkillItems, self.RolePetInfo.PetSkill.Count);
+            self.View.E_CommonSkillItemsLoopVerticalScrollRect.SetVisible(true, self.RolePetInfo.PetSkill.Count);
+            self.UpdateAttribute(rolePetInfo, oldRolePetInfo);
+
+            self.View.E_Text_FightValueText.text = PetHelper.PetPingJia(rolePetInfo).ToString();
         }
 
-        public static void UpdateSkillList(this DlgPetChouKaGet self, RolePetInfo rolePetInfo, RolePetInfo oldPetInfo = null)
+        private static void OnCommonSkillItemsRefresh(this DlgPetChouKaGet self, Transform transform, int index)
         {
-            // var path = ABPathHelper.GetUGUIPath("Main/Common/UICommonSkillItem");
-            // var bundleGameObject = ResourcesComponent.Instance.LoadAsset<GameObject>(path);
-            //
-            // for (int i = 0; i < rolePetInfo.PetSkill.Count; i++)
-            // {
-            //     UICommonSkillItemComponent ui_item = null;
-            //     if (i < self.PetSkillUIList.Count)
-            //     {
-            //         ui_item = self.PetSkillUIList[i];
-            //         ui_item.GameObject.SetActive(true);
-            //     }
-            //     else
-            //     {
-            //         GameObject bagSpace = GameObject.Instantiate(bundleGameObject);
-            //         UICommonHelper.SetParent(bagSpace, self.PetSkillNode);
-            //         ui_item = self.AddChild<UICommonSkillItemComponent, GameObject>(bagSpace);
-            //         self.PetSkillUIList.Add(ui_item);
-            //
-            //         if (oldPetInfo != null)
-            //         {
-            //             if (oldPetInfo.PetSkill.Contains(rolePetInfo.PetSkill[i]) == false)
-            //             {
-            //                 ui_item.NewSkillHint.SetActive(true);
-            //             }
-            //         }
-            //     }
-            //
-            //     ui_item.OnUpdateUI(rolePetInfo.PetSkill[i], ABAtlasTypes.PetSkillIcon);
-            // }
-            //
-            // for (int i = rolePetInfo.PetSkill.Count; i < self.PetSkillUIList.Count; i++)
-            // {
-            //     self.PetSkillUIList[i].GameObject.SetActive(false);
-            // }
+            Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
+            scrollItemCommonSkillItem.OnUpdatePetSkill(self.RolePetInfo.PetSkill[index], ABAtlasTypes.PetSkillIcon);
+            if (self.OldRolePetInfo != null)
+            {
+                if (self.OldRolePetInfo.PetSkill.Contains(self.RolePetInfo.PetSkill[index]) == false)
+                {
+                    scrollItemCommonSkillItem.E_NewSkillHintImage.gameObject.SetActive(true);
+                }
+            }
         }
 
-        public static void UpdateAttribute(this DlgPetChouKaGet self, RolePetInfo rolePetInfo, RolePetInfo oldPetInfo = null)
+        private static void UpdateAttribute(this DlgPetChouKaGet self, RolePetInfo rolePetInfo, RolePetInfo oldPetInfo = null)
         {
             for (int i = 0; i < self.View.EG_ImageStarListRectTransform.transform.childCount; i++)
             {
-                //self.ImageStarList.transform.GetChild(i).gameObject.SetActive(rolePetInfo.Star > i);
                 if (rolePetInfo.Star > i)
                 {
                     self.StartShowImg(self.View.EG_ImageStarListRectTransform.transform.GetChild(i).gameObject);
@@ -187,7 +166,7 @@ namespace ET.Client
                     new Vector3(Mathf.Clamp(rolePetInfo.ZiZhi_ChengZhang * 1f / (float)petConfig.ZiZhi_ChengZhang_Max, 0f, 1f), 1f, 1f);
         }
 
-        public static void StartShowImg(this DlgPetChouKaGet self, GameObject startObj)
+        private static void StartShowImg(this DlgPetChouKaGet self, GameObject startObj)
         {
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, "Start_2");
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);

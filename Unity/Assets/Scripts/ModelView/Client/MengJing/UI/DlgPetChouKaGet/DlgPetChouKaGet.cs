@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -12,5 +13,10 @@ namespace ET.Client
 
         public GameObject[] PetZiZhiItemList = new GameObject[6];
         public GameObject[] PetZiZhiItemAddList = new GameObject[6];
+
+        public Dictionary<int, Scroll_Item_CommonSkillItem> ScrollItemCommonSkillItems;
+
+        public RolePetInfo RolePetInfo;
+        public RolePetInfo OldRolePetInfo;
     }
 }

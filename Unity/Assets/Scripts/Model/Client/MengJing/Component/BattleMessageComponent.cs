@@ -41,7 +41,7 @@ namespace ET
 
         public int FirstWinBossId;
 
-        public bool ShowPetChouKaGet = false;
+        public bool ShowPetChouKaGet { get; set; } = false;
         //public List<EventType.RolePetAdd> RolePetAdds = new List<EventType.RolePetAdd>();
 
         public Dictionary<long, long> OneChallengeTime = new Dictionary<long, long>();
