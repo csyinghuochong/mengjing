@@ -2,7 +2,6 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof(GameObjectComponent))]
     [Event(SceneType.Current)]
     public class AfterUnitCreate_CreateUnitView: AEvent<Scene, AfterUnitCreate>
     {

@@ -11,8 +11,8 @@ namespace ET.Client
 
         public long NetWaitEndTime;
 
-        public int ObstructStatus;
-        
+        public int ObstructStatus { get; set; } = 0;
+
         public C2M_UnitStateUpdate c2M_UnitStateUpdate = null;
 
         /// <summary>
