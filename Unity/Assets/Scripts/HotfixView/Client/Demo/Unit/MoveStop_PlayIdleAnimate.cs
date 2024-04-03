@@ -9,8 +9,6 @@ namespace ET.Client
         protected override async ETTask Run(Scene scene, MoveStop args)
         { 
             Unit unit = args.Unit;
-
-
             int unitType = unit.Type;
             
             Log.Debug(($"MoveStop_PlayIdleAnimate : {unitType}"));

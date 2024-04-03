@@ -13,7 +13,8 @@ namespace ET.Client
 				return;
 			}
 			
-			EventSystem.Instance.Publish(root, new MoveStop() {Unit = unit});
+			Log.Debug($"MoveStop Publish: {root.Id} ");
+			EventSystem.Instance.Publish(root.CurrentScene(), new MoveStop() {Unit = unit});
 			
 			MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
 			moveComponent.Stop(message.Error == 0);

@@ -207,7 +207,7 @@ namespace ET.Server
         
            public static Unit CreatePet(Unit master, RolePetInfo petinfo)
            {
-               Scene scene = master.Root();
+               Scene scene = master.Scene();
                Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(petinfo.Id, 1);
                scene.GetComponent<UnitComponent>().Add(unit);
                unit.AddComponent<ObjectWait>();

@@ -18,7 +18,8 @@ namespace ET.Server
             root.AddComponent<RoomManagerComponent>();
             root.AddComponent<LocationProxyComponent>();
             root.AddComponent<MessageLocationSenderComponent>();
-
+            root.AddComponent<MapComponent>().NavMeshId =root.Name == "Map1" ?101:0;
+            
             await ETTask.CompletedTask;
         }
     }
