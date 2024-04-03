@@ -10,8 +10,12 @@ namespace ET.Client
         { 
             Unit unit = args.Unit;
 
-            int unitType = args.Unit.Type;
-            if (unitType == UnitType.Player && args.Unit.GetComponent<StateComponentC>().ObstructStatus == 1)
+
+            int unitType = unit.Type;
+            
+            Log.Debug(($"MoveStop_PlayIdleAnimate : {unitType}"));
+            
+            if (unitType == UnitType.Player && unit.GetComponent<StateComponentC>().ObstructStatus == 1)
             {
                 args.Unit.GetComponent<StateComponentC>().ObstructStatus = 0;
             }
@@ -21,7 +25,7 @@ namespace ET.Client
             }
 
             //播放移动特效
-            HeroTransformComponent heroTransformComponent = args.Unit.GetComponent<HeroTransformComponent>();
+            HeroTransformComponent heroTransformComponent = unit.GetComponent<HeroTransformComponent>();
             if (heroTransformComponent!=null && heroTransformComponent.RunEffect != null)
             {
                 heroTransformComponent.RunEffect.SetActive(false);

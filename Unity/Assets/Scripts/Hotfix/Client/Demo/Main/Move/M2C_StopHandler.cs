@@ -12,7 +12,9 @@ namespace ET.Client
 			{
 				return;
 			}
-
+			
+			EventSystem.Instance.Publish(root, new MoveStop() {Unit = unit});
+			
 			MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
 			moveComponent.Stop(message.Error == 0);
 			unit.Position = message.Position;
