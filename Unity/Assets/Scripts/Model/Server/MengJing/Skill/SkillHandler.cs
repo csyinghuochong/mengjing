@@ -105,14 +105,14 @@ namespace ET.Server
     
     
     [SkillHandler]
-    public abstract class SkillHandler: Entity
+    public abstract class SkillHandler
     {
-        // public abstract void OnInit(SkillInfo skillId, Unit theUnitFrom);
-        //
-        // public abstract void OnExecute();
-        //
-        // public abstract void OnUpdate();
-        //
-        // public abstract void OnFinished();
+        public abstract void OnInit(SkillInfo skillId, Unit theUnitFrom);
+        
+        public abstract void OnExecute();
+        
+        public abstract void OnUpdate();
+        
+        public abstract void OnFinished();
     }
 }
