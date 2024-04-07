@@ -15,6 +15,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgPetSelect self)
         {
             self.View.E_PetSelectItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetSelectItemsRefresh);
+            self.View.E_Btn_CloseButton.AddListener(self.OnClickCoseButton);
         }
 
         public static void ShowWindow(this DlgPetSelect self, Entity contextData = null)
