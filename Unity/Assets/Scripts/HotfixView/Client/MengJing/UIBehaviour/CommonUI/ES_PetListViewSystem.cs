@@ -279,6 +279,7 @@ namespace ET.Client
 
             scrollItemPetListItem.E_ImageDiButtonButton.gameObject.SetActive(false);
 
+            scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.triggers.Clear();
             scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
                 (pdata) => { self.OnPointerDown(pdata as PointerEventData); });
             scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.RegisterEvent(EventTriggerType.PointerUp,
