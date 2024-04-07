@@ -82,6 +82,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_RewardList ES_RewardList
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_rewardlist == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList");
+		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
+     			}
+     			return this.m_es_rewardlist;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_GetBtnButton
      	{
      		get
@@ -185,6 +203,7 @@ namespace ET.Client
 			this.m_E_TaskNameTextText = null;
 			this.m_E_ProgressTextText = null;
 			this.m_E_TaskDescTextText = null;
+			this.m_es_rewardlist = null;
 			this.m_E_GetBtnButton = null;
 			this.m_E_GetBtnImage = null;
 			this.m_E_GiveBtnButton = null;
@@ -197,6 +216,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_TaskNameTextText = null;
 		private UnityEngine.UI.Text m_E_ProgressTextText = null;
 		private UnityEngine.UI.Text m_E_TaskDescTextText = null;
+		private EntityRef<ES_RewardList> m_es_rewardlist = null;
 		private UnityEngine.UI.Button m_E_GetBtnButton = null;
 		private UnityEngine.UI.Image m_E_GetBtnImage = null;
 		private UnityEngine.UI.Button m_E_GiveBtnButton = null;

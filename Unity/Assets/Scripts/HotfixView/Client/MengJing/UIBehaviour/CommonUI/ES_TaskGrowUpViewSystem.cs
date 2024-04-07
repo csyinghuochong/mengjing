@@ -15,6 +15,10 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_TaskGrowUpItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskGrowUpItemsRefresh);
+            self.E_GetBtnButton.AddListenerAsync(self.OnGetBtn);
+            self.E_GiveBtnButton.AddListenerAsync(self.OnGiveBtn);
+
+            self.UpdateTask();
         }
 
         [EntitySystem]
@@ -201,23 +205,22 @@ namespace ET.Client
             }
 
             self.E_TaskDescTextText.text = taskConfig.TaskDes;
-            // if (!ComHelp.IfNull(taskConfig.ItemID))
-            // {
-            //     UICommonHelper.DestoryChild(self.RewardListNode);
-            //     List<RewardItem> rewardItems = new List<RewardItem>();
-            //     if (taskConfig.TaskCoin != 0)
-            //     {
-            //         rewardItems.Add(new RewardItem() { ItemID = 1, ItemNum = taskConfig.TaskCoin });
-            //     }
-            //
-            //     if (taskConfig.TaskExp != 0)
-            //     {
-            //         rewardItems.Add(new RewardItem() { ItemID = 2, ItemNum = taskConfig.TaskExp });
-            //     }
-            //
-            //     rewardItems.AddRange(TaskHelper.GetTaskRewards(taskId));
-            //     UICommonHelper.ShowItemList(rewardItems, self.RewardListNode, self, 0.8f);
-            // }
+            if (!ComHelp.IfNull(taskConfig.ItemID))
+            {
+                List<RewardItem> rewardItems = new List<RewardItem>();
+                if (taskConfig.TaskCoin != 0)
+                {
+                    rewardItems.Add(new RewardItem() { ItemID = 1, ItemNum = taskConfig.TaskCoin });
+                }
+
+                if (taskConfig.TaskExp != 0)
+                {
+                    rewardItems.Add(new RewardItem() { ItemID = 2, ItemNum = taskConfig.TaskExp });
+                }
+
+                rewardItems.AddRange(TaskHelper.GetTaskRewards(taskId));
+                self.ES_RewardList.Refresh(rewardItems);
+            }
 
             for (int i = 0; i < self.ScrollItemTaskGrowUpItems.Count; i++)
             {
