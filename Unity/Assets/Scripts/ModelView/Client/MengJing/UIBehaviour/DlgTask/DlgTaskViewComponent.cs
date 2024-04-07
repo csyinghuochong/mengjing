@@ -41,6 +41,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Toggle E_TaskGrowUpToggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TaskGrowUpToggle == null )
+     			{
+		    		this.m_E_TaskGrowUpToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_TaskGrowUp");
+     			}
+     			return this.m_E_TaskGrowUpToggle;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
      		get
@@ -76,19 +93,41 @@ namespace ET.Client
      		}
      	}
 
+		public ES_TaskGrowUp ES_TaskGrowUp
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_taskgrowup == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_TaskGrowUp");
+		    	   this.m_es_taskgrowup = this.AddChild<ES_TaskGrowUp,Transform>(subTrans);
+     			}
+     			return this.m_es_taskgrowup;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_TaskDetailToggle = null;
+			this.m_E_TaskGrowUpToggle = null;
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_taskdetail = null;
+			this.m_es_taskgrowup = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_TaskDetailToggle = null;
+		private UnityEngine.UI.Toggle m_E_TaskGrowUpToggle = null;
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_TaskDetail> m_es_taskdetail = null;
+		private EntityRef<ES_TaskGrowUp> m_es_taskgrowup = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -16,6 +16,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof (ES_TaskGrowUp))]
     [FriendOf(typeof (ES_TaskDetail))]
     [FriendOf(typeof (DlgTask))]
     public static class DlgTaskSystem
@@ -37,12 +38,16 @@ namespace ET.Client
         private static void OnFunctionSetBtn(this DlgTask self, int index)
         {
             UICommonHelper.SetToggleShow(self.View.E_TaskDetailToggle.gameObject, index == 0);
+            UICommonHelper.SetToggleShow(self.View.E_TaskGrowUpToggle.gameObject, index == 1);
 
             UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
             {
                 case 0:
                     self.View.ES_TaskDetail.uiTransform.gameObject.SetActive(true);
+                    break;
+                case 1:
+                    self.View.ES_TaskGrowUp.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
