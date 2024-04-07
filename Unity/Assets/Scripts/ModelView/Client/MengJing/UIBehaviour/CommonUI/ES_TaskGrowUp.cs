@@ -1,12 +1,19 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_TaskGrowUp : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_TaskGrowUp : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public TaskPro TaskPro;
+		public int CompeletTaskId;
+		public List<int> ShowTaskConfigIds = new();
+		public Dictionary<int, Scroll_Item_TaskGrowUpItem> ScrollItemTaskGrowUpItems;
+		public int DownIndex;
+		
 		public UnityEngine.UI.LoopVerticalScrollRect E_TaskGrowUpItemsLoopVerticalScrollRect
      	{
      		get
