@@ -6,6 +6,16 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class DataUpdate_PetItemSelect_Refresh: AEvent<Scene, DataUpdate_PetItemSelect>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_PetItemSelect args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgPet>()?.PetItemSelect(args.DataParamString);
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof (ES_PetList))]
     [FriendOf(typeof (ES_PetHeCheng))]
     [FriendOf(typeof (ES_PetXiLian))]
@@ -52,6 +62,29 @@ namespace ET.Client
                 case 3:
                     self.View.ES_PetShouHu.uiTransform.gameObject.SetActive(true);
                     break;
+            }
+        }
+
+        public static void PetItemSelect(this DlgPet self, string dataParams)
+        {
+            string[] paramsList = dataParams.Split('@');
+            long petId = long.Parse(paramsList[1]);
+            RolePetInfo rolePetInfo = self.Root().GetComponent<PetComponentC>().GetPetInfoByID(petId);
+            if (paramsList[0] == PetOperationType.XiLian.ToString())
+            {
+                self.View.ES_PetXiLian.OnXiLianSelect(rolePetInfo);
+            }
+            else if (paramsList[0] == PetOperationType.HeCheng.ToString())
+            {
+                self.View.ES_PetHeCheng.OnHeChengSelect(rolePetInfo);
+            }
+            else if (paramsList[0] == PetOperationType.UpStar_Main.ToString())
+            {
+                // self.UIPageView.UISubViewList[(int)PetPageEnum.PetUpStar].GetComponent<UIPetUpStarComponent>().PetMainSelect(rolePetInfo);
+            }
+            else if (paramsList[0] == PetOperationType.UpStar_FuZh.ToString())
+            {
+                // self.UIPageView.UISubViewList[(int)PetPageEnum.PetUpStar].GetComponent<UIPetUpStarComponent>().PetItemSelect(rolePetInfo);
             }
         }
 

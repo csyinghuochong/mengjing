@@ -163,7 +163,7 @@ namespace ET.Client
 
         public static void OnHeChengSelect(this ES_PetHeCheng self, RolePetInfo rolePetInfo)
         {
-            if (self.GetParent<DlgPet>().PetItemWeizhi == -1)
+            if (self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>().PetItemWeizhi == -1)
             {
                 self.HeChengPet_Left = rolePetInfo;
                 self.ES_PetInfoShow_1.OnInitData(self.HeChengPet_Left);
