@@ -101,7 +101,10 @@ namespace ET.Client
 
         public static void OnHeChengReturn(this DlgPet self)
         {
-            self.View.ES_PetHeCheng.OnHeChengReturn();
+            if (self.View.ES_PetHeCheng.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_PetHeCheng.OnHeChengReturn();
+            }
         }
 
         private static void OnCloseButton(this DlgPet self)
@@ -113,12 +116,18 @@ namespace ET.Client
 
         public static async ETTask RequestPetHeXinSelect(this DlgPet self)
         {
-            await self.View.ES_PetList.OnButtonEquipHeXin();
+            if (self.View.ES_PetList.uiTransform.gameObject.activeSelf)
+            {
+                await self.View.ES_PetList.OnButtonEquipHeXin();
+            }
         }
 
         public static void OnEquipPetHeXin(this DlgPet self)
         {
-            self.View.ES_PetList.OnEquipPetHeXin();
+            if (self.View.ES_PetList.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_PetList.OnEquipPetHeXin();
+            }
         }
     }
 }
