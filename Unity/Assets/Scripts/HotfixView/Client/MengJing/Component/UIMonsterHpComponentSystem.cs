@@ -1,7 +1,395 @@
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
 namespace ET.Client
 {
+
+
+    [EntitySystemOf(typeof(UIMonsterHpComponent))]
+    [FriendOf(typeof(UIMonsterHpComponent))]
     public static partial class UIMonsterHpComponentSystem
     {
-    
+        [EntitySystem]
+        private static void Awake(this ET.Client.UIMonsterHpComponent self)
+        {
+            self.GameObject = null;
+            self.Img_HpValue = null;
+            self.Img_AngleValue = null;
+            self.Img_AngleValueDi = null;
+            self.Img_MpValueDi = null;
+            self.Img_MpValue = null;
+            self.HeadBarPath = "";
+            self.LastTime = 0f;
+            self.HeadBarPath = ABPathHelper.GetUGUIPath("Blood/UIMonsterHp");
+            GameObjectPoolComponent.Instance.AddLoadQueue(self.HeadBarPath, self.InstanceId, self.OnLoadGameObject);
+        }
+        [EntitySystem]
+        private static void Destroy(this ET.Client.UIMonsterHpComponent self)
+        {
+            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+            self.RecoverGameObject(self.GameObject);
+        }
+        
+         public static void ShowHearBar(this ET.Client.UIMonsterHpComponent self, bool show)
+         {
+             self.GameObject.SetActive(show);
+         }
+
+         public static void ExitStealth(this ET.Client.UIMonsterHpComponent self)
+         {
+             if (self.GameObject == null)
+             {
+                 return;
+             }
+
+             Image[] hpImages = self.GameObject.GetComponentsInChildren<Image>();
+             foreach (Image image in hpImages)
+             {
+                 Color oldColor = image.color;
+                 image.color = new Color(oldColor.r, oldColor.g, oldColor.b, 1f);
+             }
+
+             //TextMeshProUGUI[] hpTextMeshPros = this.GameObject.GetComponentsInChildren<TextMeshProUGUI>();
+             //foreach (TextMeshProUGUI textMeshPro in hpTextMeshPros)
+             //{
+             //    Color oldColor = textMeshPro.color;
+             //    textMeshPro.color = new Color(oldColor.r, oldColor.g, oldColor.b, alpha);
+             //}
+
+             // 名称恢复
+             Image[] nameImages = self.UIPlayerHpText.GetComponentsInChildren<Image>();
+             foreach (Image image in nameImages)
+             {
+                 Color oldColor = image.color;
+                 image.color = new Color(oldColor.r, oldColor.g, oldColor.b, 1f);
+             }
+
+             //TextMeshProUGUI[] nameTextMeshPros = this.UIPlayerHpText.GetComponentsInChildren<TextMeshProUGUI>();
+             //foreach (TextMeshProUGUI textMeshPro in nameTextMeshPros)
+             //{
+             //    Color oldColor = textMeshPro.color;
+             //    textMeshPro.color = new Color(oldColor.r, oldColor.g, oldColor.b, 1f);
+             //}
+         }
+
+         public static void EnterHide(this ET.Client.UIMonsterHpComponent self)
+         { 
+             if (self.GameObject == null)
+             {
+                 return;
+             }
+             self.GameObject.SetActive(false);
+             self.UIPlayerHpText.SetActive(false);
+         }
+
+         public static void ExitHide(this ET.Client.UIMonsterHpComponent self)
+         {
+             if (self.GameObject == null)
+             {
+                 return;
+             }
+             self.GameObject.SetActive(true);
+             self.UIPlayerHpText.SetActive(true);
+         }
+
+         public static void EnterStealth(this ET.Client.UIMonsterHpComponent self, float alpha)
+         {
+             if (self.GameObject == null)
+             {
+                 return;
+             }
+
+             // 血条隐形
+             Image[] hpImages = self.GameObject.GetComponentsInChildren<Image>();
+             foreach (Image image in hpImages)
+             {
+                 Color oldColor = image.color;
+                 image.color = new Color(oldColor.r, oldColor.g, oldColor.b, alpha);
+             }
+
+             //TextMeshProUGUI[] hpTextMeshPros = this.GameObject.GetComponentsInChildren<TextMeshProUGUI>();
+             //foreach (TextMeshProUGUI textMeshPro in hpTextMeshPros)
+             //{
+             //    Color oldColor = textMeshPro.color;
+             //    textMeshPro.color = new Color(oldColor.r, oldColor.g, oldColor.b, alpha);
+             //}
+
+             // 名称隐形
+             Image[] nameImages = self.UIPlayerHpText.GetComponentsInChildren<Image>();
+             foreach (Image image in nameImages)
+             {
+                 Color oldColor = image.color;
+                 image.color = new Color(oldColor.r, oldColor.g, oldColor.b, alpha);
+             }
+
+             //TextMeshProUGUI[] nameTextMeshPros = this.UIPlayerHpText.GetComponentsInChildren<TextMeshProUGUI>();
+             //foreach (TextMeshProUGUI textMeshPro in nameTextMeshPros)
+             //{
+             //    Color oldColor = textMeshPro.color;
+             //    textMeshPro.color = new Color(oldColor.r, oldColor.g, oldColor.b, alpha);
+             //}
+         }
+
+         public static void OnLoadGameObject(this ET.Client.UIMonsterHpComponent self, GameObject gameObject, long formId)
+         {
+             if (self.IsDisposed)
+             {
+                 self.RecoverGameObject(gameObject);
+                 return;
+             }
+             self.GameObject = gameObject;
+             Unit unit = self.GetParent<Unit>();
+             ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
+
+             Unit mainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+             bool canAttack = mainUnit.IsCanAttackUnit(unit);
+             self.Img_HpValue = rc.Get<GameObject>("Img_HpValue");
+             
+             string imageHp = canAttack ? ConfigData.UI_pro_4_2 : ConfigData.UI_pro_3_2;
+             Sprite sp = rc.Get<GameObject>(imageHp).GetComponent<Image>().sprite;
+             rc.Get<GameObject>("Img_HpValue").SetActive(true);
+             self.Img_HpValue.GetComponent<Image>().sprite = sp;
+             rc.Get<GameObject>("Alive").SetActive(true);
+             rc.Get<GameObject>("Dead").SetActive(false);
+             rc.Get<GameObject>("ReviveTime").SetActive(false);
+             
+             self.Lal_Name = rc.Get<GameObject>("Lal_Name");
+             self.Lal_JiaZuName = rc.Get<GameObject>("Lal_JiaZuName");
+             self.UIPosition = unit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head);
+             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
+             GameObject bloodparent = globalComponent.BloodMonster  ;
+             self.GameObject.transform.SetParent(bloodparent.transform);
+             self.GameObject.transform.localScale = Vector3.one;
+
+             self.UIPlayerHpText = rc.Get<GameObject>("UIPlayerHpText");
+             self.UIPlayerHpText.transform.SetParent(globalComponent.BloodText.transform);
+             self.UIPlayerHpText.transform.localScale = Vector3.one;
+             HeadBarUI HeadBarUI_1 = self.UIPlayerHpText.GetComponent<HeadBarUI>();
+             HeadBarUI_1.enabled = !unit.MainHero;
+             HeadBarUI_1.HeadPos = self.UIPosition;
+             HeadBarUI_1.HeadBar = self.UIPlayerHpText;
+             HeadBarUI_1.UiCamera = globalComponent.UICamera.GetComponent<Camera>();
+             HeadBarUI_1.MainCamera = globalComponent.MainCamera.GetComponent<Camera>();
+             HeadBarUI_1.UpdatePostion();
+
+             HeadBarUI HeadBarUI_2 = self.GameObject.GetComponent<HeadBarUI>();
+             HeadBarUI_2.enabled =  !unit.MainHero;
+             HeadBarUI_2.HeadPos = self.UIPosition;
+             HeadBarUI_2.HeadBar = self.GameObject;
+             HeadBarUI_2.UiCamera = globalComponent.UICamera.GetComponent<Camera>();
+             HeadBarUI_2.MainCamera = globalComponent.MainCamera.GetComponent<Camera>();
+             HeadBarUI_2.UpdatePostion();
+
+             self.GameObject.transform.SetAsFirstSibling();
+             self.GameObject.SetActive(true);
+
+             //初始化当前血条
+             self.UpdateBlood();
+             //更新显示
+             self.UpdateShow();
+
+             StateComponentC stateComponent = unit.GetComponent<StateComponentC>();
+             if (stateComponent.StateTypeGet(StateTypeEnum.Stealth))
+             {
+                 self.EnterStealth(canAttack ? 0f : 0.3f);
+             }
+             if (stateComponent.StateTypeGet(StateTypeEnum.Hide)
+                      || unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.Now_Stall) > 0)
+             {
+                 self.EnterHide();
+             }
+         }
+
+         public static void OnUpdateHorse( this UIMonsterHpComponent self  )
+         {
+             if (self.GameObject == null)
+             {
+                 return;
+             }
+
+             Unit unit = self.GetParent<Unit>();
+             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
+             int horseRide = numericComponent.GetAsInt(NumericType.HorseRide);
+
+             Vector3 vector3_zuoqi = new Vector3(0f, 180f, 0f);
+             Vector3 vector3_normal = new Vector3(0f, 120f, 0f);
+             if (horseRide > 0)
+             {
+                 ZuoQiShowConfig zuoQiShowConfig = ZuoQiShowConfigCategory.Instance.Get(horseRide);
+                 vector3_zuoqi.y +=(float) zuoQiShowConfig.NameShowUp;
+             }
+
+             self.GameObject.transform.localPosition = horseRide > 0 ? vector3_zuoqi : vector3_normal;
+             if (unit.MainHero)
+             {
+                 self.UIPlayerHpText.transform.localPosition = horseRide > 0 ? vector3_zuoqi : vector3_normal;
+             }
+         }
+
+ 
+         //更新显示
+         public static void UpdateShow(this UIMonsterHpComponent self)
+         {
+             Unit unit = self.GetParent<Unit>();
+             UnitInfoComponent infoComponent = unit.GetComponent<UnitInfoComponent>();
+            
+             //显示怪物名称
+             if (unit.Type == UnitType.Monster)
+             {
+                 MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(self.GetParent<Unit>().ConfigId);
+                 Text textMeshProUGUI = self.Lal_Name.GetComponent<Text>();
+                 bool isboos = monsterCof.MonsterType == (int)MonsterTypeEnum.Boss;
+                 textMeshProUGUI.fontSize = isboos? 32 : 26;
+                 textMeshProUGUI.color = isboos? new Color(255, 95, 255) : Color.white;
+                 string colorstr = isboos? "<color=#FF5FFF>" : "<color=#FFFFFF>";
+                 //NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
+                 //this.ObjName.GetComponent<TextMeshProUGUI>().text = $"{colorstr}{monsterCof.MonsterName}_{numericComponent.GetAsInt(NumericType.Now_AI)}</color>";
+                 MapComponent mapComponent = unit.Root().GetComponent<MapComponent>();
+                 bool shenYuan = mapComponent.SceneType == SceneTypeEnum.TeamDungeon && mapComponent.FubenDifficulty == TeamFubenType.ShenYuan;
+                 if (shenYuan)
+                 {
+                     if (monsterCof.MonsterType == 3)
+                     {
+                         self.Lal_Name.GetComponent<Text>().text = $"深渊召唤:{colorstr}{monsterCof.MonsterName}</color>";
+                     }
+                     else
+                     {
+                         self.Lal_Name.GetComponent<Text>().text = $"{colorstr}{monsterCof.MonsterName}</color>";
+                     }
+                 }
+                 else
+                 {
+                     self.Lal_Name.GetComponent<Text>().text = $"{colorstr}{monsterCof.MonsterName}</color>";
+                 }
+
+                 //怪物等级显示
+                 ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
+                 int monsterLv = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Lv);
+                 if (monsterLv > 0)
+                 {
+                     rc.Get<GameObject>("Lal_Lv").GetComponent<Text>().text = monsterLv.ToString();
+                 }
+                 else
+                 {
+                     rc.Get<GameObject>("Lal_Lv").GetComponent<Text>().text = monsterCof.Lv.ToString();
+                 }
+             }
+             
+         }
+
+         public static void OnRevive(this UIMonsterHpComponent self )
+         {
+             if (self.GameObject == null)
+             {
+                 return;
+             }
+             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+             if (self.GetParent<Unit>().Type == UnitType.Monster)
+             {
+                 ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
+                 rc.Get<GameObject>("Alive").SetActive(true);
+                 rc.Get<GameObject>("Dead").SetActive(false);
+                 rc.Get<GameObject>("ReviveTime").SetActive(false);
+             } 
+             self.UpdateBlood();
+         }
+
+         public static void OnDead(this UIMonsterHpComponent self)
+         {
+             if (self.GetParent<Unit>().Type != UnitType.Monster)
+             {
+                 return;
+             }
+             if (self.GameObject == null)
+             {
+                 return;
+             }
+             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(self.GetParent<Unit>().ConfigId);
+             if (monsterConfig.ReviveTime > 0)
+             {
+                 ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
+                 rc.Get<GameObject>("Alive").SetActive(false);
+                 rc.Get<GameObject>("Dead").SetActive(true);
+                 rc.Get<GameObject>("ReviveTime").SetActive(true);
+
+                 self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+                 self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.UIUnitReviveTime, self);
+             }
+         }
+
+         public static void UpdateAI(this UIMonsterHpComponent self)
+         {
+             if (self.Lal_Name != null)
+             {
+                 self.UpdateShow();
+             }
+         }
+
+         public static void UpdateBlood(this UIMonsterHpComponent self)
+         {
+             NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
+             float curhp = numericComponent.GetAsLong(NumericType.Now_Hp); // + value;
+             float blood = curhp / numericComponent.GetAsLong(NumericType.Now_MaxHp);
+             blood = Mathf.Max(blood, 0f);
+             if (self.Img_HpValue == null)
+             {
+                 return;
+             }
+             int unitType = self.GetParent<Unit>().Type;
+             switch (unitType)
+             {
+                 case UnitType.Player:
+                     self.Img_HpValue.GetComponent<Image>().fillAmount = blood;
+                     int shieldHp = numericComponent.GetAsInt(NumericType.Now_Shield_HP);
+                     int shieldMax = numericComponent.GetAsInt(NumericType.Now_Shield_MaxHP);
+                     if (shieldMax > 0)
+                     {
+                         self.BuffShieldValue.GetComponent<Image>().fillAmount = shieldHp * 1f / shieldMax;
+                     }
+                     else
+                     {
+                         self.BuffShieldValue.GetComponent<Image>().fillAmount = 0f;
+                     }
+                     break;
+                 case UnitType.Pet:
+                     self.Img_HpValue.GetComponent<Image>().fillAmount = blood;
+                     break;
+                 default:
+                     self.Img_HpValue.GetComponent<Image>().fillAmount = blood;
+                     break;
+             }
+         }
+
+         public  static void OnTimer(this UIMonsterHpComponent self)
+         {
+             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(self.GetParent<Unit>().ConfigId);
+             long leftTime = self.GetParent<Unit>().GetComponent<NumericComponentC>().GetAsLong(NumericType.ReviveTime) - TimeHelper.ClientNow();
+             leftTime = leftTime / 1000;
+             ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
+             GameObject reviveTime = rc.Get<GameObject>("ReviveTime");
+             int hour = (int) leftTime / 3600;
+             int min = (int)((leftTime - (hour * 3600))/60);
+             int sec = (int)(leftTime - (hour * 3600) - (min * 60));
+             string showStr = hour + "时" + min + "分" + sec + "秒";
+             reviveTime.GetComponent<Text>().text = $"{monsterConfig.MonsterName} 刷新剩余时间:{showStr}";
+         }
+         
+         public static void RecoverGameObject(this UIMonsterHpComponent self, GameObject gameobject)
+         {
+             if (gameobject != null)
+             {
+                 gameobject.GetComponent<HeadBarUI>().enabled = false;
+                 if (self.UIPlayerHpText != null)
+                 {
+                     self.UIPlayerHpText.GetComponent<HeadBarUI>().enabled = false;
+                     self.UIPlayerHpText.transform.SetParent(gameobject.transform);
+                 }
+                    
+                 GameObjectPoolComponent.Instance.RecoverGameObject(self.HeadBarPath, gameobject);
+                 self.GameObject = null;
+             }
+         }
+
     }
 }

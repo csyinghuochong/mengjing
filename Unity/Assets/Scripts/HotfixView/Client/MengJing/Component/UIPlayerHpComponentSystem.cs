@@ -317,47 +317,6 @@ namespace ET.Client
                  self.UpdateDemonName(infoComponent.DemonName);
                  self.OnUpdateUnionName();
              }
-             //显示怪物名称
-             if (unit.Type == UnitType.Monster)
-             {
-                 MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(self.GetParent<Unit>().ConfigId);
-                 Text textMeshProUGUI = self.Lal_Name.GetComponent<Text>();
-                 bool isboos = monsterCof.MonsterType == (int)MonsterTypeEnum.Boss;
-                 textMeshProUGUI.fontSize = isboos ? 32 : 26;
-                 textMeshProUGUI.color = isboos ? new Color(255,95,255): Color.white;
-                 string colorstr = isboos ? "<color=#FF5FFF>" : "<color=#FFFFFF>";
-                 //NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
-                 //this.ObjName.GetComponent<TextMeshProUGUI>().text = $"{colorstr}{monsterCof.MonsterName}_{numericComponent.GetAsInt(NumericType.Now_AI)}</color>";
-                 MapComponent mapComponent = unit.Root().GetComponent<MapComponent>();    
-                 bool shenYuan = mapComponent.SceneType == SceneTypeEnum.TeamDungeon && mapComponent.FubenDifficulty == TeamFubenType.ShenYuan;
-                 if (shenYuan)
-                 {
-                     if (monsterCof.MonsterType == 3)
-                     {
-                         self.Lal_Name.GetComponent<Text>().text = $"深渊召唤:{colorstr}{monsterCof.MonsterName}</color>";
-                     }
-                     else
-                     {
-                         self.Lal_Name.GetComponent<Text>().text = $"{colorstr}{monsterCof.MonsterName}</color>";
-                     }
-                 }
-                 else
-                 {
-                     self.Lal_Name.GetComponent<Text>().text = $"{colorstr}{monsterCof.MonsterName}</color>";
-                 }
-
-                 //怪物等级显示
-                 ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
-                 int monsterLv = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Lv);
-                 if (monsterLv > 0)
-                 {
-                     rc.Get<GameObject>("Lal_Lv").GetComponent<Text>().text = monsterLv.ToString();
-                 }
-                 else
-                 {
-                     rc.Get<GameObject>("Lal_Lv").GetComponent<Text>().text = monsterCof.Lv.ToString();
-                 }
-             }
              if (self.GetParent<Unit>().Type == UnitType.Pet) 
              {
                  UnitInfoComponent unitInfoComponent = self.GetParent<Unit>().GetComponent<UnitInfoComponent>();
@@ -628,6 +587,9 @@ namespace ET.Client
                             Sprite sp = rc.Get<GameObject>(imageHp).GetComponent<Image>().sprite;
                             uIUnitHpComponent.Img_HpValue.GetComponent<Image>().sprite = sp;
                         }
+                        break;
+                        case UnitType.Monster:
+                            break;
                         break;
                 }
             }
