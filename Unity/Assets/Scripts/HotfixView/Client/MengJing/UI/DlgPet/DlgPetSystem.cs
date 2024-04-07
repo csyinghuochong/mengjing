@@ -71,6 +71,7 @@ namespace ET.Client
                     break;
                 case 3:
                     self.View.ES_PetShouHu.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PetShouHu.OnUpdateUI();
                     break;
             }
         }

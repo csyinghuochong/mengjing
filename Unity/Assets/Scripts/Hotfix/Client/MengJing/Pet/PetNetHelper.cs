@@ -153,5 +153,37 @@ namespace ET.Client
 
             return response;
         }
+
+        public static async ETTask<int> RequestPetShouHuActive(Scene root, int petShouHuActive)
+        {
+            C2M_PetShouHuActiveRequest request = new() { PetShouHuActive = petShouHuActive };
+            M2C_PetShouHuActiveResponse response =
+                    (M2C_PetShouHuActiveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return response.Error;
+            }
+
+            root.GetComponent<PetComponentC>().PetShouHuActive = response.PetShouHuActive;
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> RequestPetShouHu(Scene root, long petInfoId, int position)
+        {
+            C2M_PetShouHuRequest request = new() { PetInfoId = petInfoId, Position = position };
+            M2C_PetShouHuResponse response =
+                    (M2C_PetShouHuResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return response.Error;
+            }
+
+            root.GetComponent<PetComponentC>().PetShouHuList = response.PetShouHuList;
+
+            return response.Error;
+        }
     }
 }

@@ -33,25 +33,19 @@ namespace ET.Client
         public static async ETTask OnButtonSet(this ES_PetShouHu self)
         {
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
-            C2M_PetShouHuActiveRequest request = new C2M_PetShouHuActiveRequest() { PetShouHuActive = self.SelectIndex + 1 };
-            M2C_PetShouHuActiveResponse response =
-                    (M2C_PetShouHuActiveResponse)await self.Root().GetComponent<SessionComponent>().Session.Call(request);
-            if (self.IsDisposed || response.Error != ErrorCode.ERR_Success)
+            int error = await PetNetHelper.RequestPetShouHuActive(self.Root(), self.SelectIndex + 1);
+            if (error != ErrorCode.ERR_Success)
             {
                 return;
             }
 
-            petComponent.PetShouHuActive = response.PetShouHuActive;
             self.SetShouHuActive(petComponent.PetShouHuActive - 1);
             FlyTipComponent.Instance.SpawnFlyTipDi($"激活: {ConfigData.PetShouHuAttri[petComponent.PetShouHuActive - 1].Value}");
         }
 
         public static async ETTask OnButtonShouHuHandler(this ES_PetShouHu self, long petid)
         {
-            C2M_PetShouHuRequest request = new C2M_PetShouHuRequest() { PetInfoId = petid, Position = self.SelectIndex };
-            M2C_PetShouHuResponse response = (M2C_PetShouHuResponse)await self.Root().GetComponent<SessionComponent>().Session.Call(request);
-
-            self.Root().GetComponent<PetComponentC>().PetShouHuList = response.PetShouHuList;
+            await PetNetHelper.RequestPetShouHu(self.Root(), petid, self.SelectIndex);
 
             self.OnUpdateUI();
         }
