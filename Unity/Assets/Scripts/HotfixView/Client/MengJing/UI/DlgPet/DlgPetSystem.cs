@@ -16,6 +16,16 @@ namespace ET.Client
         }
     }
 
+    [Event(SceneType.Demo)]
+    public class DataUpdate_PetHeChengUpdate_Refresh: AEvent<Scene, DataUpdate_PetHeChengUpdate>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_PetHeChengUpdate args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgPet>()?.OnHeChengReturn();
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof (ES_PetList))]
     [FriendOf(typeof (ES_PetHeCheng))]
     [FriendOf(typeof (ES_PetXiLian))]
@@ -86,6 +96,11 @@ namespace ET.Client
             {
                 // self.UIPageView.UISubViewList[(int)PetPageEnum.PetUpStar].GetComponent<UIPetUpStarComponent>().PetItemSelect(rolePetInfo);
             }
+        }
+
+        public static void OnHeChengReturn(this DlgPet self)
+        {
+            self.View.ES_PetHeCheng.OnHeChengReturn();
         }
 
         private static void OnCloseButton(this DlgPet self)
