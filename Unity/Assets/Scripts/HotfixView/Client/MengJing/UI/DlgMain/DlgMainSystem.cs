@@ -101,7 +101,6 @@ namespace ET.Client
 
             self.View.E_SetButton.AddListener(self.OnSetButton);
 
-
             self.View.E_MainTaskItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainTaskItemsRefresh);
             self.View.E_MainChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainChatItemsRefresh);
             self.View.E_RoseTaskButton.AddListener(self.OnRoseTaskButton);
@@ -270,7 +269,7 @@ namespace ET.Client
 
         private static void OnChengJiuButton(this DlgMain self)
         {
-            Log.Debug("打开成就界面！！！");
+            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_ChengJiu);
         }
 
         private static void OnAdventureButton(this DlgMain self)

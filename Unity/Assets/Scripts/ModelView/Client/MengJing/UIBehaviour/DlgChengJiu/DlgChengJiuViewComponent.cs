@@ -109,6 +109,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_ChengJiuReward ES_ChengJiuReward
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_chengjiureward == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ChengJiuReward");
+		    	   this.m_es_chengjiureward = this.AddChild<ES_ChengJiuReward,Transform>(subTrans);
+     			}
+     			return this.m_es_chengjiureward;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_FunctionSetBtnToggleGroup = null;
@@ -117,6 +135,7 @@ namespace ET.Client
 			this.m_E_JingLingToggle = null;
 			this.m_E_TuJianToggle = null;
 			this.m_EG_SubViewRectTransform = null;
+			this.m_es_chengjiureward = null;
 			this.uiTransform = null;
 		}
 
@@ -126,6 +145,7 @@ namespace ET.Client
 		private UnityEngine.UI.Toggle m_E_JingLingToggle = null;
 		private UnityEngine.UI.Toggle m_E_TuJianToggle = null;
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
+		private EntityRef<ES_ChengJiuReward> m_es_chengjiureward = null;
 		public Transform uiTransform = null;
 	}
 }
