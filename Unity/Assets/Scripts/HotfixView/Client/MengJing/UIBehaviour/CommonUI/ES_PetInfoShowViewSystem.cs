@@ -36,7 +36,8 @@ namespace ET.Client
 
         private static async ETTask OnClickSelect(this ES_PetInfoShow self)
         {
-            self.GetParent<DlgPet>().PetItemWeizhi = self.Weizhi;
+            DlgPet dlgPet = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>();
+            dlgPet.PetItemWeizhi = self.Weizhi;
 
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetSelect);
             DlgPetSelect dlgPetSelect = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetSelect>();
@@ -50,7 +51,7 @@ namespace ET.Client
                 self.RolePetInfo.LockSkill.Contains(self.ShowPetSkills[index]));
         }
 
-        private static void  UpdateSkillList(this ES_PetInfoShow self, RolePetInfo rolePetInfo)
+        private static void UpdateSkillList(this ES_PetInfoShow self, RolePetInfo rolePetInfo)
         {
             self.RolePetInfo = rolePetInfo;
             PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
@@ -149,15 +150,9 @@ namespace ET.Client
                 self.PetZiZhiItemList[i].SetActive(havepet);
             }
 
-            for (int i = 0; i < self.ScrollItemCommonSkillItems.Count; i++)
-            {
-                if (self.ScrollItemCommonSkillItems[i].uiTransform == null)
-                {
-                    continue;
-                }
-
-                self.ScrollItemCommonSkillItems[i].uiTransform.gameObject.SetActive(false);
-            }
+            self.ShowPetSkills.Clear();
+            self.AddUIScrollItems(ref self.ScrollItemCommonSkillItems, self.ShowPetSkills.Count);
+            self.E_CommonSkillItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPetSkills.Count);
         }
 
         public static void OnInitData(this ES_PetInfoShow self, RolePetInfo rolePetInfo)

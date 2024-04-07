@@ -121,6 +121,8 @@ namespace ET.Client
                 }
 
                 self.ShowRolePetInfos.Add(list[i]);
+                self.AddUIScrollItems(ref self.ScrollItemPetSelectItems, self.ShowRolePetInfos.Count);
+                self.View.E_PetSelectItemsLoopVerticalScrollRect.SetVisible(true, self.ShowRolePetInfos.Count);
             }
         }
 
