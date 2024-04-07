@@ -41,7 +41,7 @@ namespace ET.Server
         public List<SkillParValue_HpUpAct> SkillParValueHpUpAct = new List<SkillParValue_HpUpAct>();        //目标血量处理高或者低 提升自身伤害
 
         //攻击目标临时增加/降低伤害
-        public float ActTargetTemporaryAddPro;
+        public float ActTargetTemporaryAddPro { get; set; }
 
         //自身增加/降低伤害
         public float ActTargetAddPro = 0f;
@@ -56,10 +56,11 @@ namespace ET.Server
         /// </summary>
         public Unit TheUnitFrom { get; set; }
 
-        public Unit TheUnitTarget{ get; set; }
+        public Unit TheUnitTarget { get; set; }
 
         public List<Shape> ICheckShape;
 
-        public SkillInfo SkillInfo;
+        public SkillInfo SkillInfo{ get; set; }
+
     }
 }
