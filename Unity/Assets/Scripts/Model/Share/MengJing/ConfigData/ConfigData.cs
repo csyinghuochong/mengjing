@@ -25,6 +25,11 @@ namespace ET
             new BuyCellCost { Cost = "10000156;1", Get = "10010026;1" },
         };
 
+
+        [StaticField]
+        public static string ChongJiSkill = "Skill_Other_ChongJi_1";
+        [StaticField]
+        public static string Skill_Halo_2 = "Skill_Halo_2";  
         /// <summary>
         /// 三个对应等级套装属性
         /// </summary>

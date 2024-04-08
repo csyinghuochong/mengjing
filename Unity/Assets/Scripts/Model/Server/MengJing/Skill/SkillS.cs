@@ -5,7 +5,7 @@ using Unity.Mathematics;
 namespace ET.Server
 {
     
-    [ChildOf(typeof(Unit))]
+    [ChildOf(typeof(SkillManagerComponentS))]
     public class SkillS:Entity,IAwake,IDestroy
     {
         public List<long> HurtIds { get; set; }= new List<long>();

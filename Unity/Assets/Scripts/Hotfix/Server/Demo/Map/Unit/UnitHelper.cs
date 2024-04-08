@@ -262,5 +262,21 @@ namespace ET.Server
             return self.Id == defend.Id;
         }
 
+        public static int GetEquipType(this Unit self)
+        {
+            if (self.Type != UnitType.Player)
+            { 
+                return ItemEquipType.Common;    
+            }
+            int itemId = self.GetComponent<NumericComponentS>().GetAsInt(NumericType.Now_Weapon);
+            return ItemHelper.GetEquipType(self.ConfigId, itemId);
+        }
+        
+        public static int GetWeaponSkill(this Unit self, int skillId, List<SkillPro> skillPros)
+        {
+            int EquipType = self.GetEquipType();
+            return SkillHelp.GetWeaponSkill(skillId, EquipType, skillPros);
+        }
+        
     }
 }

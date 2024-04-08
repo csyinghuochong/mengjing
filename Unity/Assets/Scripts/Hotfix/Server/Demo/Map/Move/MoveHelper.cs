@@ -69,6 +69,28 @@ namespace ET.Server
             }
         }
         
+        public static float3 GetCanReachPath(int navMeshId, float3 start, float3 target)
+        {
+            // using var list = ListComponent<Vector3>.Create();
+            // Vector3 dir = (start - target).normalized;
+            // while (true)
+            // {
+            //     Game.Scene.GetComponent<RecastPathComponent>().SearchPath(self.NavMeshId, start, target, list, 2);
+            //     if (list.Count >= 2)
+            //     {
+            //         target = list[list.Count - 1];
+            //         break;
+            //     }
+            //     if (Vector3.Distance(start, target) < 0.5f)
+            //     {
+            //         break;
+            //     }
+            //     target = target + (0.5f * dir);
+            // }
+            return target;
+        }
+        
+        
         public static void Stop(this Unit unit, int error)
         {
             unit.GetComponent<MoveComponent>().Stop(error == 0);

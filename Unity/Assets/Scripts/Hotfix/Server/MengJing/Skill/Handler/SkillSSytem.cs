@@ -562,6 +562,26 @@ namespace ET.Server
              uu.GetComponent<BuffManagerComponentS>().BuffFactory(buffData, self.TheUnitFrom, self);
              //Log.Info("结束释放buff" + buffID);
          }
+
+
+         public static void OnInit(this ET.Server.SkillS self, SkillInfo skillInfo, Unit from)
+         {
+             
+         }
+
+         public static void OnFinished(this ET.Server.SkillS self)
+         {
+             
+         }
+
+         public static void OnExecute(this ET.Server.SkillS self)
+         {
+             
+         }
+
+         public static void Check_Map(this ET.Server.SkillS self)
+         {
+         }
     }
 
 }

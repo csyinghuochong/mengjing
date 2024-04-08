@@ -10,13 +10,10 @@ namespace ET
 
         public static bool CleanSkill()
         {
-            return false; }
-
-        public static string ChongJiSkill()
-        {
-            return "Skill_Other_ChongJi_1";
+            return false; 
         }
 
+       
         public static List<string> NotCombatSkill()
         {
             return new List<string>() { "Act_11", "Act_12", "Act_13" };

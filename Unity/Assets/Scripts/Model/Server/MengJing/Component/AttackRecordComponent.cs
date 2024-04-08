@@ -7,9 +7,9 @@ namespace ET.Server
     [ComponentOf(typeof(Unit))]
     public class AttackRecordComponent : Entity, IAwake, IDestroy
     {
-        public long AttackingId;
+        public long AttackingId{ get; set; }
 
-        public long BeAttackId;
+        public long BeAttackId{ get; set; }
 
         public long PetLockId { get; set; }
 
