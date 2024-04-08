@@ -12,7 +12,6 @@ namespace ET.Client
 		public int CompeletTaskId;
 		public List<int> ShowTaskConfigIds = new();
 		public Dictionary<int, Scroll_Item_TaskGrowUpItem> ScrollItemTaskGrowUpItems;
-		public int DownIndex;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_TaskGrowUpItemsLoopVerticalScrollRect
      	{

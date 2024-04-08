@@ -84,12 +84,11 @@ namespace ET.Client
 
             if (self.ShowTaskConfigIds[index] == self.TaskPro.taskID)
             {
-                self.DownIndex = index;
                 scrollItemTaskGrowUpItem.E_Img_lineImage.gameObject.SetActive(false);
             }
 
             // 尾巴隐藏
-            if (self.ScrollItemTaskGrowUpItems.Count > 0 && index == self.ScrollItemTaskGrowUpItems.Count - 1)
+            if (self.ShowTaskConfigIds.Count > 0 && index == self.ShowTaskConfigIds.Count - 1)
             {
                 scrollItemTaskGrowUpItem.E_Img_lineImage.gameObject.SetActive(false);
                 scrollItemTaskGrowUpItem.E_Img_lineDiImage.gameObject.SetActive(false);
@@ -98,8 +97,11 @@ namespace ET.Client
 
         public static void UpdateTask(this ES_TaskGrowUp self)
         {
-            self.CompeletTaskId =
-                    (int)UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>()[NumericType.SystemTask];
+            // self.CompeletTaskId =
+            //         (int)UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>()[NumericType.SystemTask];
+            // 测试
+            self.CompeletTaskId = 82000014;
+
             List<TaskPro> taskPros = self.Root().GetComponent<TaskComponentC>().RoleTaskList;
             for (int i = 0; i < taskPros.Count; i++)
             {
@@ -116,12 +118,19 @@ namespace ET.Client
                 self.TaskPro = new TaskPro() { taskID = self.CompeletTaskId };
             }
 
+            int index = 0;
+
             self.ShowTaskConfigIds.Clear();
             foreach (TaskConfig taskConfig in TaskConfigCategory.Instance.GetAll().Values)
             {
                 if (taskConfig.TaskType == TaskTypeEnum.System)
                 {
                     self.ShowTaskConfigIds.Add(taskConfig.Id);
+
+                    if (taskConfig.Id == self.TaskPro.taskID)
+                    {
+                        index = self.ShowTaskConfigIds.Count;
+                    }
                 }
             }
 
@@ -131,9 +140,9 @@ namespace ET.Client
             self.UpdateInfo(self.TaskPro.taskID);
 
             // 滑动到对应位置
-            // Vector3 vector3 = self.UITaskBItemListNode.GetComponent<RectTransform>().localPosition;
-            // vector3.y = index * 160;
-            // self.UITaskBItemListNode.GetComponent<RectTransform>().localPosition = vector3;
+            Vector3 vector3 = self.E_TaskGrowUpItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>().localPosition;
+            vector3.y = index * 160;
+            self.E_TaskGrowUpItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>().localPosition = vector3;
         }
 
         public static void UpdateInfo(this ES_TaskGrowUp self, int taskId)
@@ -267,6 +276,8 @@ namespace ET.Client
                 // ui.GetComponent<UIGivePetComponent>().OnUpdateUI();
                 // ui.GetComponent<UIGivePetComponent>().OnGiveAction = self.UpdateTaskB;
             }
+
+            await ETTask.CompletedTask;
         }
 
         public static void UpdateTaskB(this ES_TaskGrowUp self)
