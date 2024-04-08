@@ -569,7 +569,7 @@ namespace ET.Server
              SkillHandlerS aaiHandler = SkillDispatcherComponent.Instance.Get(self.SkillConf.GameObjectName);
              if (aaiHandler != null)
              {
-                 aaiHandler.OnInit(self, self.SkillInfo, from  );
+                 aaiHandler.OnInit(self, from  );
              }
          }
 

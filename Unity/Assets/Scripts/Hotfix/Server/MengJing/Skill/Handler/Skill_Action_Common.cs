@@ -5,9 +5,9 @@
     public class Skill_Action_Common : SkillHandlerS
     {
         
-        public override void OnInit(SkillS skillS, SkillInfo skillInfo, Unit theUnitFrom)
+        public override void OnInit(SkillS skillS,Unit theUnitFrom)
         {
-            skillS.BaseOnInit(skillInfo, theUnitFrom);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
         }
 
         public override void OnExecute(SkillS skillS)

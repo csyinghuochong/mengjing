@@ -9,9 +9,9 @@ namespace ET.Server
     public class Skill_Boomerang : SkillHandlerS
     {
         
-        public override void OnInit(SkillS skillS, SkillInfo skillInfo, Unit theUnitFrom)
+        public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            skillS.BaseOnInit(skillInfo, theUnitFrom);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
             skillS.Return = false;
         }
 

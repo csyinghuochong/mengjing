@@ -107,7 +107,7 @@ namespace ET.Server
     [SkillHandlerS]
     public abstract class SkillHandlerS
     {
-        public abstract void OnInit(SkillS skillS, SkillInfo skillInfo, Unit theUnitFrom);
+        public abstract void OnInit(SkillS skillS,  Unit theUnitFrom);
         
         public abstract void OnExecute(SkillS skillS);
         
