@@ -35,7 +35,7 @@ namespace ET.Client
             self.ClickHandler = action;
         }
 
-        public static async ETTask OnEnterChapter(this Scroll_Item_DungeonLevelItem self)
+        private static async ETTask OnEnterChapter(this Scroll_Item_DungeonLevelItem self)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace ET.Client
                 self.SendTime = Time.time;
                 DlgDungeonLevel uIDungeonLevel = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgDungeonLevel>();
 
-                FlyTipComponent.Instance.SpawnFlyTipDi($"请求传送{self.ChapterId}");
+                FlyTipComponent.Instance.SpawnFlyTipDi($"请求传送 副本Id:{self.ChapterId} 副本难度：{uIDungeonLevel.Difficulty}");
 
                 int errorCode =
                         await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, self.ChapterId, uIDungeonLevel.Difficulty);
@@ -83,6 +83,8 @@ namespace ET.Client
 
             //Sprite sp = ABAtlasHelp.GetIconSprite(ABAtlasTypes.MonsterIcon, chapterConfig.BossIcon.ToString());
             //self.ImageBossIcon.GetComponent<Image>().sprite = sp;
+
+            self.E_ButtonEnterButton.AddListenerAsync(self.OnEnterChapter);
         }
     }
 }

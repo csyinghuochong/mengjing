@@ -109,6 +109,9 @@ namespace ET.Client
                         dungeonSectionConfig.RandomArea.Length.ToString() + ")";
             }
 
+            self.AddUIScrollItems(ref self.ScrollItemDungeonLevelItems, self.ShowLevel.Count);
+            self.View.E_DungeonLevelItemLoopVerticalScrollRect.SetVisible(true, self.ShowLevel.Count);
+
             await self.Root().GetComponent<TimerComponent>().WaitAsync(10);
             // self.ZoneScene().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, UIType.UIDungeonLevel);
         }
