@@ -1,48 +1,94 @@
-﻿using Unity.Mathematics;
+﻿using System.Numerics;
+using Unity.Mathematics;
 
 namespace ET.Client
 {
     public static partial class UnitFactory
     {
-        public static Unit Create(Scene currentScene, UnitInfo unitInfo)
+        public static Unit CreateUnit(Scene currentScene, UnitInfo unitInfo, bool mainHero = false)
         {
-	        UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
-	        Unit unit = unitComponent.AddChildWithId<Unit, int>(unitInfo.UnitId, unitInfo.ConfigId);
-	        unitComponent.Add(unit);
-	        unit.Type = unitInfo.Type;
-	        unit.Position = unitInfo.Position;
-	        unit.Forward = unitInfo.Forward;
-	        unit.ConfigId = unitInfo.ConfigId;
-	        
-	        NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
+            bool selfpet = false;
+            bool mainScene = currentScene.Name.Equals(StringBuilderData.MainCity);
+            if (mainScene && unitInfo.Type == UnitType.Pet || unitInfo.Type == UnitType.JingLing)
+            {
+                long mainunitid = UnitHelper.GetMyUnitFromCurrentScene(currentScene).Id;
+                foreach (var kv in unitInfo.KV)
+                {
+                    if (kv.Key == NumericType.MasterId && kv.Value == mainunitid)
+                    {
+                        selfpet = true;
+                        break;
+                    }
+                }
+            }
 
-			foreach (var kv in unitInfo.KV)
-			{
-				numericComponentC.Set(kv.Key, kv.Value);
-			}
-	        
-	        unit.AddComponent<MoveComponent>();
-	        if (unitInfo.MoveInfo != null)
-	        {
-		        if (unitInfo.MoveInfo.Points.Count > 0)
-				{
-					unitInfo.MoveInfo.Points[0] = unit.Position;
-					unit.MoveToAsync(unitInfo.MoveInfo.Points).Coroutine();
-				}
-	        }
+            if (unitInfo.Type == UnitType.Npc)
+            {
+                selfpet = true;
+            }
 
-	        unit.AddComponent<ObjectWait>();
-	        unit.AddComponent<HeroDataComponentC>();
-	        unit.AddComponent<StateComponentC>();
-	        unit.AddComponent<SkillManagerComponentC>();
-	        //unit.AddComponent<XunLuoPathComponent>();
-	        UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
-	        // unitInfoComponent.UnitName = unitInfo.UnitName;
-	        // unitInfoComponent.MasterName = unitInfo.MasterName;
-	        // unitInfoComponent.UnionName = unitInfo.UnionName;
-	        // unitInfoComponent.FashionEquipList = unitInfo.FashionEquipList;
-	        
-	        EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() {Unit = unit});
+            if (mainScene && (SettingData.NoShowOther || UnitHelper.GetUnitList(currentScene, UnitType.Player).Count >= SettingData.NoShowPlayer)
+                && !mainHero && !selfpet)
+            {
+                return null;
+            }
+
+            UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
+            Unit unit = unitComponent.AddChildWithId<Unit, int>(unitInfo.UnitId, (int)unitInfo.ConfigId);
+            unitComponent.Add(unit);
+            unit.MainHero = mainHero;
+            unit.Type = unitInfo.Type;
+            unit.ConfigId = unitInfo.ConfigId;
+
+            unit.AddComponent<ObjectWait>();
+            unit.AddComponent<HeroDataComponentC>();
+            unit.AddComponent<StateComponentC>();
+            // unit.AddComponent<SingingComponent>();
+            unit.AddComponent<MoveComponent>();
+            UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
+            // unitInfoComponent.UnitName = unitInfo.UnitName;
+            // unitInfoComponent.MasterName = unitInfo.MasterName;
+            // unitInfoComponent.UnionName = unitInfo.UnionName;
+            // unitInfoComponent.FashionEquipList = unitInfo.FashionEquipList;
+
+            unit.Position = unitInfo.Position;
+            unit.Forward = unitInfo.Forward;
+
+            NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
+
+            foreach (var kv in unitInfo.KV)
+            {
+                numericComponentC.Set(kv.Key, kv.Value);
+            }
+
+            unit.MasterId = numericComponentC.GetAsLong(NumericType.MasterId);
+            if (unitInfo.MoveInfo != null && unitInfo.MoveInfo.Points.Count > 0)
+            {
+                using (ListComponent<float3> list = ListComponent<float3>.Create())
+                {
+                    list.Add(unit.Position);
+                    list.AddRange(unitInfo.MoveInfo.Points);
+
+                    unit.MoveToAsync(list).Coroutine();
+                }
+            }
+
+            bool noSkill = unit.Type == UnitType.Npc && NpcConfigCategory.Instance.Get(unit.ConfigId).AI == 0;
+            if (!noSkill)
+            {
+                // unit.AddComponent<BuffManagerComponent>(); //buff管理器组建
+                unit.AddComponent<SkillManagerComponentC>();
+                // unit.GetComponent<BuffManagerComponent>().t_Buffs = unitInfo.Buffs;
+                // unit.GetComponent<SkillManagerComponent>().t_Skills = unitInfo.Skills;
+            }
+
+            if (mainHero)
+            {
+                int runraceMonster = numericComponentC.GetAsInt(NumericType.RunRaceTransform);
+                // unit.ZoneScene().GetComponent<AttackComponent>().OnTransformId(unit.ConfigId, runraceMonster);
+            }
+
+            EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
             return unit;
         }
     }

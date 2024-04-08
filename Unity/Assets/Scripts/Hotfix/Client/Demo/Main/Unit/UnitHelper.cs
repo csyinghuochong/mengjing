@@ -5,6 +5,21 @@ namespace ET.Client
 {
     public static partial class UnitHelper
     {
+        public static List<Unit> GetUnitList(Scene currentScene, int unitType)
+        {
+            List<Unit> list = new List<Unit>();
+            List<Unit> allunits = currentScene.GetComponent<UnitComponent>().GetAll();
+            for (int i = 0; i < allunits.Count; i++)
+            {
+                if (allunits[i].Type == unitType)
+                {
+                    list.Add(allunits[i]);
+                }
+            }
+
+            return list;
+        }
+
         public static Unit GetMyUnitFromClientScene(Scene root)
         {
             PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
