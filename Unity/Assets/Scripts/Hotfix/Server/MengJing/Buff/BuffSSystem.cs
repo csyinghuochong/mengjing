@@ -16,8 +16,24 @@ namespace ET.Server
         {
 
         }
+
+        public static void OnFinished(this ET.Server.BuffS self)
+        {
+            BuffHandlerS aaiHandler = BuffDispatcherComponentS.Instance.Get(self.mBuffConfig.BuffScript);
+            aaiHandler.OnFinished();
+        }
         
-        
+        public static void OnInit(this ET.Server.BuffS self, Unit from , Unit to, SkillS skillS)
+        {
+            BuffHandlerS aaiHandler = BuffDispatcherComponentS.Instance.Get(self.mBuffConfig.BuffScript);
+            aaiHandler.OnInit(self.BuffData, from, to, skillS);
+        }
+
+        public static void OnUpdate(this ET.Server.BuffS self)
+        {
+            BuffHandlerS aaiHandler = BuffDispatcherComponentS.Instance.Get(self.mBuffConfig.BuffScript);
+            aaiHandler.OnUpdate();
+        }
     }
 
 }
