@@ -35,18 +35,18 @@ namespace ET.Server
         /// </summary>
         public Unit TheUnitBelongto { get; set; }
 
-        public bool IsTrigger;
-        public long DelayTime;
-        public long BeginTime;
-        public long PassTime;
+        public bool IsTrigger{ get; set; }
+        public long DelayTime{ get; set; }
+        public long BeginTime{ get; set; }
+        public long PassTime{ get; set; }
 
         public float3 StartPosition{ get; set; }
         public float3 TargetPosition{ get; set; }
 
-        public long InterValTime;
-        public long InterValTimeBegin;
+        public long InterValTime{ get; set; }
+        public long InterValTimeBegin{ get; set; }
 
-        public float NowBuffValue;
+        public float NowBuffValue{ get; set; }
     }
     
 }
