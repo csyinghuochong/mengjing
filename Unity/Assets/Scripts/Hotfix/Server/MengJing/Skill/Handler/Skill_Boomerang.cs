@@ -70,5 +70,10 @@ namespace ET.Server
             }
             skillS.Clear();
         }
+        
+        public override void Check_Map(SkillS skillS)
+        {
+            
+        }
     }
 }
