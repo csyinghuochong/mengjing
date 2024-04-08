@@ -34,6 +34,8 @@ namespace ET.Client
             {
                 self.E_MapText.text = $"({DungeonConfigCategory.Instance.Get(dungeonid).ChapterName})";
             }
+
+            self.RefreshTime();
         }
 
         public static void RefreshTime(this Scroll_Item_BossRefreshTimeItem self)
