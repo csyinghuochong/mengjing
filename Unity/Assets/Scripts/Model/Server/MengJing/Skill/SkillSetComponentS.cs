@@ -10,13 +10,13 @@ namespace ET.Server
     {
         public int TianFuPlan = 0;
 
-        public List<int> TianFuList = new List<int>();          //��һ�����x����
+        public List<int> TianFuList = new List<int>();         
 
-        public List<int> TianFuList1 = new List<int>();         //�ڶ������x����
+        public List<int> TianFuList1 = new List<int>();        
 
-        public List<int> TianFuAddition = new List<int>();         //�����츳
+        public List<int> TianFuAddition = new List<int>();       
 
-        public List<SkillPro> SkillList = new List<SkillPro>();
+        public List<SkillPro> SkillList { get; set; } = new List<SkillPro>();
 
         //����֮��
         public List<LifeShieldInfo> LifeShieldList = new List<LifeShieldInfo>();

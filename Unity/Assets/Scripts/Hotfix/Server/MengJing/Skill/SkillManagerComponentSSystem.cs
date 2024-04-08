@@ -946,140 +946,140 @@ namespace ET.Server
 
               //有伤害才同步 打断CD. 只同步一次
               M2C_SkillSecondResult request = new M2C_SkillSecondResult() { UnitId = self.Id, SkillId = skillHandler.SkillConf.Id, HurtIds = hurtIds };
-              MessageHelper.SendToClient(self.GetParent<Unit>(), request);
+              MapMessageHelper.SendToClient(self.GetParent<Unit>(), request);
           }
 
-  public static void CheckEndSkill(this SkillManagerComponent self, int endSkillId)
-  {
-      if (endSkillId == 0)
-      {
-          return;
-      }
-      if (!SkillConfigCategory.Instance.Contain(endSkillId))
-      {
-          return;
-      }
-
-      Unit unit = self.GetParent<Unit>();
-      C2M_SkillCmd cmd = new C2M_SkillCmd();
-      cmd.SkillID = endSkillId;
-      cmd.TargetID = unit.Id;
-      cmd.TargetAngle = (int)Quaternion.QuaternionToEuler(unit.Rotation).y;
-      cmd.TargetDistance = 0f;
-      self.OnUseSkill(cmd, false);
-  }
-
-  public static void Check(this SkillManagerComponent self)
-  {
-      int skillcnt = self.Skills.Count;
-      for (int i = skillcnt - 1; i >= 0; i-- )
-      {
-          self.Skills[i].OnUpdate();
-          if (self.Skills.Count == 0 || self.SelfUnit.IsDisposed)
+          public static void CheckEndSkill(this SkillManagerComponentS self, int endSkillId)
           {
-              //Unit unit = self.GetParent<Unit>();
-              //Log.Debug($"SkillManagerComponent582:  {unit.Type} {unit.ConfigId} {unit.InstanceId}");
-              break;
-          }
-          if (i >= self.Skills.Count)
-          {
-              Unit unit = self.GetParent<Unit>();
-              Log.Console($"SkillManagerComponentError:  {unit.Type} {unit.ConfigId} {unit.InstanceId}");
-              Log.Warning($"SkillManagerComponentError:  {unit.Type} {unit.ConfigId} {unit.InstanceId}");
-              break;
-          }
-
-          if (self.Skills[i].GetSkillState() == SkillState.Finished)
-          {
-              SkillHandler skillHandler = self.Skills[i];
-              ObjectPool.Instance.Recycle(skillHandler);
-              self.CheckEndSkill(skillHandler.SkillConf.EndSkillId);
-              skillHandler.OnFinished();
-              self.Skills.RemoveAt(i);
-              continue;
-          }
-      }
-
-      int dalaycnt = self.DelaySkillList.Count;
-      for (int i = dalaycnt - 1; i >= 0; i--)
-      {
-          SkillInfo skillInfo = self.DelaySkillList[i];
-          
-          Unit target = self.SelfUnitComponent.Get(skillInfo.TargetID);
-          if (target != null && !target.IsDisposed)
-          {
-              skillInfo.PosX = target.Position.x;
-              skillInfo.PosY = target.Position.y;
-              skillInfo.PosZ = target.Position.z;
-          }
-          if (TimeHelper.ServerNow() < skillInfo.SkillBeginTime)
-          {
-              continue;
-          }
-          
-          //Unit from = self.GetParent<Unit>();
-          SkillHandler skillAction = self.SkillFactory(skillInfo, self.SelfUnit);
-          skillInfo.SkillBeginTime = skillAction.SkillBeginTime;
-          skillInfo.SkillEndTime = skillAction.SkillEndTime;
-          self.Skills.Add(skillAction);
-
-          //M2C_UnitUseSkill useSkill = new M2C_UnitUseSkill();
-          //{
-          //    UnitId = self.SelfUnit.Id,
-          //    SkillID = 0,
-          //    TargetAngle = 0,
-          //    SkillInfos = new List<SkillInfo>() { skillInfo }
-          //};
-          M2C_UnitUseSkill useSkill = MessageHelper.m2C_UnitUseSkill;
-          useSkill.UnitId = self.SelfUnit.Id;
-          useSkill.SkillID = 0;
-          useSkill.TargetAngle = 0;
-          useSkill.SkillInfos = new List<SkillInfo>() { skillInfo };
-          useSkill.PublicCDTime = 0;
-          useSkill.CDEndTime = 0;
-          //MessageHelper.Broadcast(self.SelfUnit, useSkill);
-          self.BroadcastSkill(self.SelfUnit, useSkill);
-          self.DelaySkillList.RemoveAt(i);
-      }
-
-      //循环检查冷却CD的技能
-      /*
-      if (self.SkillCDs.Count >= 1)
-      {
-          long nowTime = TimeHelper.ServerNow();
-          List<int> removeList = new List<int>();
-          foreach (SkillCDItem skillcd in self.SkillCDs.Values)
-          {
-              if (nowTime >= skillcd.CDEndTime
-               && nowTime >= skillcd.CDPassive)
+              if (endSkillId == 0)
               {
-                  removeList.Add(skillcd.SkillID);
+                  return;
+              }
+              if (!SkillConfigCategory.Instance.Contain(endSkillId))
+              {
+                  return;
+              }
+
+              Unit unit = self.GetParent<Unit>();
+              C2M_SkillCmd cmd = new C2M_SkillCmd();
+              cmd.SkillID = endSkillId;
+              cmd.TargetID = unit.Id;
+              cmd.TargetAngle = (int)math.forward(unit.Rotation).y;
+              cmd.TargetDistance = 0f;
+              self.OnUseSkill(cmd, false);
+          }
+
+          public static void Check(this SkillManagerComponentS self)
+          {
+              int skillcnt = self.Skills.Count;
+              for (int i = skillcnt - 1; i >= 0; i-- )
+              {
+                  self.Skills[i].OnUpdate();
+                  if (self.Skills.Count == 0 || self.SelfUnit.IsDisposed)
+                  {
+                      //Unit unit = self.GetParent<Unit>();
+                      //Log.Debug($"SkillManagerComponent582:  {unit.Type} {unit.ConfigId} {unit.InstanceId}");
+                      break;
+                  }
+                  if (i >= self.Skills.Count)
+                  {
+                      Unit unit = self.GetParent<Unit>();
+                      Log.Console($"SkillManagerComponentError:  {unit.Type} {unit.ConfigId} {unit.InstanceId}");
+                      Log.Warning($"SkillManagerComponentError:  {unit.Type} {unit.ConfigId} {unit.InstanceId}");
+                      break;
+                  }
+
+                  if (self.Skills[i].GetSkillState() == SkillState.Finished)
+                  {
+                      SkillS skillHandler = self.Skills[i];
+                      ObjectPool.Instance.Recycle(skillHandler);
+                      self.CheckEndSkill(skillHandler.SkillConf.EndSkillId);
+                      skillHandler.OnFinished();
+                      self.Skills.RemoveAt(i);
+                      continue;
+                  }
+              }
+
+              int dalaycnt = self.DelaySkillList.Count;
+              for (int i = dalaycnt - 1; i >= 0; i--)
+              {
+                  SkillInfo skillInfo = self.DelaySkillList[i];
+                  
+                  Unit target = self.SelfUnitComponent.Get(skillInfo.TargetID);
+                  if (target != null && !target.IsDisposed)
+                  {
+                      skillInfo.PosX = target.Position.x;
+                      skillInfo.PosY = target.Position.y;
+                      skillInfo.PosZ = target.Position.z;
+                  }
+                  if (TimeHelper.ServerNow() < skillInfo.SkillBeginTime)
+                  {
+                      continue;
+                  }
+                  
+                  //Unit from = self.GetParent<Unit>();
+                  SkillS skillAction = self.SkillFactory(skillInfo, self.SelfUnit);
+                  skillInfo.SkillBeginTime = skillAction.SkillBeginTime;
+                  skillInfo.SkillEndTime = skillAction.SkillEndTime;
+                  self.Skills.Add(skillAction);
+
+                  //M2C_UnitUseSkill useSkill = new M2C_UnitUseSkill();
+                  //{
+                  //    UnitId = self.SelfUnit.Id,
+                  //    SkillID = 0,
+                  //    TargetAngle = 0,
+                  //    SkillInfos = new List<SkillInfo>() { skillInfo }
+                  //};
+                  M2C_UnitUseSkill useSkill = new M2C_UnitUseSkill();
+                  useSkill.UnitId = self.SelfUnit.Id;
+                  useSkill.SkillID = 0;
+                  useSkill.TargetAngle = 0;
+                  useSkill.SkillInfos = new List<SkillInfo>() { skillInfo };
+                  useSkill.PublicCDTime = 0;
+                  useSkill.CDEndTime = 0;
+                  //MessageHelper.Broadcast(self.SelfUnit, useSkill);
+                  self.BroadcastSkill(self.SelfUnit, useSkill);
+                  self.DelaySkillList.RemoveAt(i);
+              }
+
+              //循环检查冷却CD的技能
+              /*
+              if (self.SkillCDs.Count >= 1)
+              {
+                  long nowTime = TimeHelper.ServerNow();
+                  List<int> removeList = new List<int>();
+                  foreach (SkillCDItem skillcd in self.SkillCDs.Values)
+                  {
+                      if (nowTime >= skillcd.CDEndTime
+                       && nowTime >= skillcd.CDPassive)
+                      {
+                          removeList.Add(skillcd.SkillID);
+                      }
+                  }
+
+                  //移除技能cd结束的技能
+                  foreach (int removeID in removeList)
+                  {
+                      self.SkillCDs.Remove(removeID);
+                  }
+              }
+              */
+              
+              if (self.Skills.Count == 0 && self.DelaySkillList.Count == 0)
+              {
+                  self.Root().GetComponent<TimerComponent>().Remove( ref self.Timer );
               }
           }
 
-          //移除技能cd结束的技能
-          foreach (int removeID in removeList)
+          //技能广播
+          public static void BroadcastSkill(this SkillManagerComponentS self, Unit unit, IMessage message)
           {
-              self.SkillCDs.Remove(removeID);
+              //主城不广播技能
+              if (unit.SceneType != SceneTypeEnum.MainCityScene)
+              {
+                  MapMessageHelper.Broadcast(unit, message);
+              }
           }
-      }
-      */
-      
-      if (self.Skills.Count == 0 && self.DelaySkillList.Count == 0)
-      {
-          TimerComponent.Instance.Remove( ref self.Timer );
-      }
-  }
-
-  //技能广播
-  public static void BroadcastSkill(this SkillManagerComponent self, Unit unit, IActorMessage message)
-  {
-      //主城不广播技能
-      if (unit.SceneType != SceneTypeEnum.MainCityScene)
-      {
-          MessageHelper.Broadcast(unit, message);
-      }
-  }
         
     }
 
