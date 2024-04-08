@@ -41,6 +41,12 @@ namespace ET.Client
                     self.Root().GetComponent<ClientSenderCompnent>().Send(c2MPathfindingResult);
                 }
             }
+            
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                C2M_SkillCmd c2MSkillCmd = new C2M_SkillCmd(){  SkillID = 60000331};
+                self.Root().GetComponent<ClientSenderCompnent>().Send(c2MSkillCmd);
+            }
 
             if (Input.GetKeyDown(KeyCode.R))
             {

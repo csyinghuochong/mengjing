@@ -338,42 +338,12 @@ namespace ET.Client
 
          public static void OnRevive(this UIPlayerHpComponent self )
          {
-             if (self.GameObject == null)
-             {
-                 return;
-             }
-             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-             if (self.GetParent<Unit>().Type == UnitType.Monster)
-             {
-                 ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
-                 rc.Get<GameObject>("Alive").SetActive(true);
-                 rc.Get<GameObject>("Dead").SetActive(false);
-                 rc.Get<GameObject>("ReviveTime").SetActive(false);
-             } 
-             self.UpdateBlood();
+             
          }
 
          public static void OnDead(this UIPlayerHpComponent self)
          {
-             if (self.GetParent<Unit>().Type != UnitType.Monster)
-             {
-                 return;
-             }
-             if (self.GameObject == null)
-             {
-                 return;
-             }
-             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(self.GetParent<Unit>().ConfigId);
-             if (monsterConfig.ReviveTime > 0)
-             {
-                 ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
-                 rc.Get<GameObject>("Alive").SetActive(false);
-                 rc.Get<GameObject>("Dead").SetActive(true);
-                 rc.Get<GameObject>("ReviveTime").SetActive(true);
-
-                 self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-                 self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.UIUnitReviveTime, self);
-             }
+             
          }
 
          public static void UpdateAI(this UIPlayerHpComponent self)
@@ -418,20 +388,7 @@ namespace ET.Client
                      break;
              }
          }
-
-         public  static void OnTimer(this UIPlayerHpComponent self)
-         {
-             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(self.GetParent<Unit>().ConfigId);
-             long leftTime = self.GetParent<Unit>().GetComponent<NumericComponentC>().GetAsLong(NumericType.ReviveTime) - TimeHelper.ClientNow();
-             leftTime = leftTime / 1000;
-             ReferenceCollector rc = self.GameObject.GetComponent<ReferenceCollector>();
-             GameObject reviveTime = rc.Get<GameObject>("ReviveTime");
-             int hour = (int) leftTime / 3600;
-             int min = (int)((leftTime - (hour * 3600))/60);
-             int sec = (int)(leftTime - (hour * 3600) - (min * 60));
-             string showStr = hour + "时" + min + "分" + sec + "秒";
-             reviveTime.GetComponent<Text>().text = $"{monsterConfig.MonsterName} 刷新剩余时间:{showStr}";
-         }
+         
 
          public static void OnGetUseInfoUpdate(this UIPlayerHpComponent self)
          {
