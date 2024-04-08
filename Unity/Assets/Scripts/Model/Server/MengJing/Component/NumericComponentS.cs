@@ -59,6 +59,11 @@ namespace ET.Server
 			self.Insert(numericType, value, false);
 		}
 
+		public static void SetNoEvent(this NumericComponentS self, int numericType, double value)
+		{
+			self.Insert(numericType,  (long)(value * 10000), false);
+		}
+		
 		public static void SetEvent(this NumericComponentS self, int numericType, long value, bool notice)
 		{
 			self.Insert(numericType, value, notice);

@@ -8,9 +8,9 @@ namespace ET.Server
     {
         public long Timer;
         public int SceneType;
-        
-        public List<BuffS> m_Buffs = new List<BuffS>();
-        
+
+        public List<BuffS> m_Buffs { get; set; } = new List<BuffS>();
+
         public List<KeyValuePairLong> m_BuffRecord = new List<KeyValuePairLong>();  //buffid_增删_
         public readonly M2C_UnitBuffUpdate m2C_UnitBuffUpdate = new M2C_UnitBuffUpdate();
         public readonly M2C_UnitBuffRemove m2C_UnitBuffRemove = new M2C_UnitBuffRemove();   
