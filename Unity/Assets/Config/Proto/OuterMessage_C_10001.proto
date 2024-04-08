@@ -2981,3 +2981,12 @@ message M2C_UnitBuffStatus // IMessage
 	int32 FlyType = 3;
 	int64 UnitID = 4;
 }
+
+//二段技能
+message M2C_SkillSecondResult // IMessage
+{
+	int64 ActorId = 93;
+	int64 UnitId = 1;
+	int32 SkillId = 2;
+	repeated int64 HurtIds = 3;
+}

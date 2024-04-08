@@ -11628,6 +11628,41 @@ namespace ET
 
 	}
 
+//二段技能
+	[Message(OuterMessage.M2C_SkillSecondResult)]
+	[MemoryPackable]
+	public partial class M2C_SkillSecondResult: MessageObject, IMessage
+	{
+		public static M2C_SkillSecondResult Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SkillSecondResult), isFromPool) as M2C_SkillSecondResult; 
+		}
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int SkillId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public List<long> HurtIds { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.SkillId = default;
+			this.HurtIds.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -11963,5 +11998,6 @@ namespace ET
 		 public const ushort M2C_UnitBuffUpdate = 10332;
 		 public const ushort M2C_UnitBuffRemove = 10333;
 		 public const ushort M2C_UnitBuffStatus = 10334;
+		 public const ushort M2C_SkillSecondResult = 10335;
 	}
 }
