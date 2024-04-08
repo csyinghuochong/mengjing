@@ -103,10 +103,10 @@ namespace ET.Client
             self.ShowBoosRefreshTime.Clear();
 
             // 测试
-            bossRevivesTime.Add(new KeyValuePair() { KeyId = 70001004, Value = (TimeInfo.Instance.ClientNow() + 9999999).ToString() });
-            bossRevivesTime.Add(new KeyValuePair() { KeyId = 70001011, Value = (TimeInfo.Instance.ClientNow() + 8888888).ToString() });
-            bossRevivesTime.Add(new KeyValuePair() { KeyId = 70001104, Value = (TimeInfo.Instance.ClientNow() + 7777777).ToString() });
-            bossRevivesTime.Add(new KeyValuePair() { KeyId = 70001206, Value = (TimeInfo.Instance.ClientNow() + 7777777).ToString() });
+            // bossRevivesTime.Add(new KeyValuePair() { KeyId = 70001004, Value = (TimeInfo.Instance.ClientNow() + 9999999).ToString() });
+            // bossRevivesTime.Add(new KeyValuePair() { KeyId = 70001011, Value = (TimeInfo.Instance.ClientNow() + 8888888).ToString() });
+            // bossRevivesTime.Add(new KeyValuePair() { KeyId = 70001104, Value = (TimeInfo.Instance.ClientNow() + 7777777).ToString() });
+            // bossRevivesTime.Add(new KeyValuePair() { KeyId = 70001206, Value = (TimeInfo.Instance.ClientNow() + 7777777).ToString() });
 
             for (int i = 0; i < bossRevivesTime.Count; i++)
             {
