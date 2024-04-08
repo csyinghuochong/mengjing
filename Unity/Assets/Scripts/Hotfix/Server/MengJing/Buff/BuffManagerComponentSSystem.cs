@@ -605,7 +605,7 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
 
             int jifen = unit.GetMaoXianExp();
-            int activityid = unit.GetComponent<ActivityComponent>().GetMaxActivityId(jifen);
+            int activityid = unit.GetComponent<ActivityComponentS>().GetMaxActivityId(jifen);
             if (activityid == 0)
             {
                 return;
@@ -621,7 +621,7 @@ namespace ET.Server
             self.InitMaoXianJiaBuff();
         }
 
-        public static void InitMaoXianJiaBuff(this BuffManagerComponent self)
+        public static void InitMaoXianJiaBuff(this BuffManagerComponentS self)
         {
             Unit unit = self.GetParent<Unit>();
             if (unit.Type != UnitType.Player)
@@ -630,7 +630,7 @@ namespace ET.Server
             }
 
             int jifen = unit.GetMaoXianExp();
-            int activityid = unit.GetComponent<ActivityComponent>().GetMaxActivityId(jifen);
+            int activityid = unit.GetComponent<ActivityComponentS>().GetMaxActivityId(jifen);
             if (activityid == 0)
             {
                 return;
@@ -646,7 +646,7 @@ namespace ET.Server
             }
         }
 
-        public static void InitCombatRankBuff(this BuffManagerComponent self)
+        public static void InitCombatRankBuff(this BuffManagerComponentS self)
         {
             Unit unit = self.GetParent<Unit>();
             if (unit.Type != UnitType.Player)
@@ -654,13 +654,13 @@ namespace ET.Server
                 return;
             }
 
-            self.BuffRemoveList(ConfigHelper.CombatRankBuff);
-            int rankId = unit.GetComponent<NumericComponent>().GetAsInt(NumericType.CombatRankID);
-            int occRankId = unit.GetComponent<NumericComponent>().GetAsInt(NumericType.OccCombatRankID);
+            self.BuffRemoveList(ConfigData.CombatRankBuff);
+            int rankId = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.CombatRankID);
+            int occRankId = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.OccCombatRankID);
             //Log.Console($"战力排行buff: {rankId}");
             if (occRankId >= 1 && occRankId <= 3)
             {
-                int occ = unit.GetComponent<UserInfoComponent>().UserInfo.Occ;
+                int occ = unit.GetComponent<UserInfoComponentS>().UserInfo.Occ;
                 BuffData buffData_2 = new BuffData();
                 buffData_2.SkillId = 67000278;
                 buffData_2.BuffId = ConfigHelper.GetRankBuff(rankId, occRankId, occ);
@@ -668,7 +668,7 @@ namespace ET.Server
             }
         }
 
-        public static void InitBaoShiBuff(this BuffManagerComponent self)
+        public static void InitBaoShiBuff(this BuffManagerComponentS self)
         {
             Unit unit = self.GetParent<Unit>();
             if (unit.Type != UnitType.Player)
@@ -680,9 +680,9 @@ namespace ET.Server
             //self.BuffRemove(99001031);
             //self.BuffRemove(99001032);
             //self.BuffRemove(99001011);
-            self.BuffRemoveList(ConfigHelper.BaoShiBuff);
+            self.BuffRemoveList(ConfigData.BaoShiBuff);
 
-            UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
+            UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
             if (userInfoComponent.UserInfo.BaoShiDu >= 80)
             {
                 BuffData buffData_2 = new BuffData();
@@ -726,7 +726,7 @@ namespace ET.Server
             }
         }
 
-        public static void InitBuff(this BuffManagerComponent self, int sceneType)
+        public static void InitBuff(this BuffManagerComponentS self, int sceneType)
         {
             Unit unit = self.GetParent<Unit>();
             UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
@@ -751,7 +751,7 @@ namespace ET.Server
             }
         }
 
-        public static void InitSoloBuff(this BuffManagerComponent self, int sceneType)
+        public static void InitSoloBuff(this BuffManagerComponentS self, int sceneType)
         {
             if (sceneType != SceneTypeEnum.Solo)
             {
@@ -764,26 +764,26 @@ namespace ET.Server
                 return;
             }
 
-            for (int i = 0; i < ConfigHelper.SoloBuffIds.Count; i++)
+            for (int i = 0; i < ConfigData.SoloBuffIds.Count; i++)
             {
                 BuffData buffData_2 = new BuffData();
                 buffData_2.SkillId = 67000278;
-                buffData_2.BuffId = ConfigHelper.SoloBuffIds[i];
+                buffData_2.BuffId = ConfigData.SoloBuffIds[i];
                 self.BuffFactory(buffData_2, unit, null);
             }
 
             //恢复血量
-            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
-            numericComponent.NumericDic[NumericType.Now_Hp] = 0;
+            numericComponent.Set(NumericType.Now_Hp , 0);
             numericComponent.ApplyChange(null, NumericType.Now_Hp, max_hp, 0);
         }
 
-        public static void InitDonationBuff(this BuffManagerComponent self)
+        public static void InitDonationBuff(this BuffManagerComponentS self)
         {
-            self.BuffRemoveList(ConfigHelper.DonationBuff);
+            self.BuffRemoveList(ConfigData.DonationBuff);
 
-            int rankid = self.GetParent<Unit>().GetComponent<NumericComponent>().GetAsInt(NumericType.RaceDonationRankID);
+            int rankid = self.GetParent<Unit>().GetComponent<NumericComponentS>().GetAsInt(NumericType.RaceDonationRankID);
             if (rankid == 0)
             {
                 return;
@@ -884,12 +884,12 @@ namespace ET.Server
             }
         }
 
-        public static List<KeyValuePair> GetMessageBuff(this BuffManagerComponent self)
+        public static List<KeyValuePair> GetMessageBuff(this BuffManagerComponentS self)
         {
             List<KeyValuePair> Buffs = new List<KeyValuePair>();
             for (int i = 0; i < self.m_Buffs.Count; i++)
             {
-                BuffHandler buffHandler = self.m_Buffs[i];
+                BuffS buffHandler = self.m_Buffs[i];
                 SkillBuffConfig skillBuffConfig = buffHandler.mBuffConfig;
                 if (skillBuffConfig == null || skillBuffConfig.Id < 10) //子弹
                 {
@@ -908,14 +908,14 @@ namespace ET.Server
             return Buffs;
         }
 
-        public static void BeforeTransfer(this BuffManagerComponent self)
+        public static void BeforeTransfer(this BuffManagerComponentS self)
         {
             UnitInfoComponent unitInfoComponent = self.GetParent<Unit>().GetComponent<UnitInfoComponent>();
             unitInfoComponent.Buffs.Clear();
             int buffcnt = self.m_Buffs.Count;
             for (int i = buffcnt - 1; i >= 0; i--)
             {
-                BuffHandler buffHandler = self.m_Buffs[i];
+                BuffS buffHandler = self.m_Buffs[i];
                 buffHandler.OnFinished();
                 ObjectPool.Instance.Recycle(buffHandler);
                 self.m_Buffs.RemoveAt(i);

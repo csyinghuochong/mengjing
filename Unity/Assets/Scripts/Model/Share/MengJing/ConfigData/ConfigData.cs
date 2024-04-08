@@ -26,6 +26,13 @@ namespace ET
         };
 
 
+        /// <summary>
+        /// 竞技场buff
+        /// </summary>
+        [StaticField]
+        public static List<int> SoloBuffIds = new List<int>() { 99004006 };
+
+        
         [StaticField]
         public static string ChongJiSkill = "Skill_Other_ChongJi_1";
         [StaticField]

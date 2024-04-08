@@ -278,5 +278,12 @@ namespace ET.Server
             return SkillHelp.GetWeaponSkill(skillId, EquipType, skillPros);
         }
         
+        public static int GetMaoXianExp(this Unit self)
+        {
+            int rechargeNum = self.GetComponent<NumericComponentS>().GetAsInt(NumericType.RechargeNumber);
+            rechargeNum *= 10;
+            rechargeNum += self.GetComponent<NumericComponentS>().GetAsInt(NumericType.MaoXianExp);
+            return rechargeNum;
+        }
     }
 }

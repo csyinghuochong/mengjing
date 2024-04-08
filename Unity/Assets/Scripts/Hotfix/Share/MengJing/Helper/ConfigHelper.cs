@@ -11,14 +11,7 @@ namespace ET
             return 10000152;
         }
 
-        /// <summary>
-        /// 竞技场buff
-        /// </summary>
-        public static List<int> SoloBuffIds()
-        {
-            return new List<int>() { 99004006 };
-        }
-
+       
         /// <summary>
         /// 奔跑大赛随机怪
         /// </summary>
