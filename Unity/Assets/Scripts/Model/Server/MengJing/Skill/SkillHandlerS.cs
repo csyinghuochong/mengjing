@@ -69,7 +69,7 @@ namespace ET.Server
     {
         public float3 s_position { get; set; }     //检测体坐标
 
-        public float3 s_rotation{ get; set; }     //检测体坐标
+        public quaternion s_rotation{ get; set; }     //检测体坐标
 
         public float3 skill_distance{ get; set; }     //检测体坐标
 
@@ -107,12 +107,12 @@ namespace ET.Server
     [SkillHandlerS]
     public abstract class SkillHandlerS
     {
-        public abstract void OnInit(SkillS skillS, Unit theUnitFrom);
+        public abstract void OnInit(SkillS skillS, SkillInfo skillInfo, Unit theUnitFrom);
         
-        public abstract void OnExecute();
+        public abstract void OnExecute(SkillS skillS);
         
-        public abstract void OnUpdate();
+        public abstract void OnUpdate(SkillS skillS);
         
-        public abstract void OnFinished();
+        public abstract void OnFinished(SkillS skillS);
     }
 }

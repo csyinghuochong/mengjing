@@ -24,6 +24,11 @@ namespace ET.Server
         {
             
         }
+
+        public static void BuffFactory(this BuffManagerComponentS self, BuffData buffData, Unit from, SkillS skillHandler, bool notice = true)
+        {
+            
+        }
     }
 }
 

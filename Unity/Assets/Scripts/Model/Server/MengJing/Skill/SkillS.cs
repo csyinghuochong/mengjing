@@ -8,7 +8,7 @@ namespace ET.Server
     [ChildOf(typeof(Unit))]
     public class SkillS:Entity,IAwake,IDestroy
     {
-        public List<long> HurtIds = new List<long>();
+        public List<long> HurtIds { get; set; }= new List<long>();
         public Dictionary<long, long> LastHurtTimes = new Dictionary<long, long>();
         public Dictionary<int, float> TianfuProAdd;
 
@@ -17,13 +17,13 @@ namespace ET.Server
 
         public SkillConfig SkillConf { get; set; }
 
-        public long SkillBeginTime;    
-        public long SkillEndTime;
+        public long SkillBeginTime{ get; set; }
+        public long SkillEndTime{ get; set; }
         /// <summary>
         /// 记录是否触发过技能伤害
         /// </summary>
         public bool IsExcuteHurt;
-        public long SkillExcuteHurtTime;
+        public long SkillExcuteHurtTime{ get; set; }
         public long SkillTriggerInvelTime;      //技能伤害触发间隔时间
         public long SkillTriggerLastTime;
         public long SkillFirstHurtTime;
@@ -35,8 +35,8 @@ namespace ET.Server
 
         public int SkillExcuteNum;
 
-        public float3 NowPosition;             //当前技能的坐标点
-        public float3 TargetPosition;
+        public float3 NowPosition { get; set; } = 0f;             //当前技能的坐标点
+        public float3 TargetPosition { get; set; } = 0f;
 
         public List<SkillParValue_HpUpAct> SkillParValueHpUpAct = new List<SkillParValue_HpUpAct>();        //目标血量处理高或者低 提升自身伤害
 
@@ -62,5 +62,7 @@ namespace ET.Server
 
         public SkillInfo SkillInfo{ get; set; }
 
+        public bool Return{ get; set; }
+        public Unit BulletUnit{ get; set; }
     }
 }
