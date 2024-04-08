@@ -6,7 +6,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetXiLian : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_PetXiLian : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public BagInfo CostItemInfo;
 		public RolePetInfo RolePetInfo;

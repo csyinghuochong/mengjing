@@ -26,6 +26,16 @@ namespace ET.Client
         }
     }
 
+    [Event(SceneType.Demo)]
+    public class DDataUpdate_PetXiLianUpdate_Refresh: AEvent<Scene, DataUpdate_PetXiLianUpdate>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_PetXiLianUpdate args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgPet>()?.OnXiLianUpdate();
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof (ES_PetList))]
     [FriendOf(typeof (ES_PetHeCheng))]
     [FriendOf(typeof (ES_PetXiLian))]
@@ -127,6 +137,14 @@ namespace ET.Client
             if (self.View.ES_PetList.uiTransform.gameObject.activeSelf)
             {
                 self.View.ES_PetList.OnEquipPetHeXin();
+            }
+        }
+
+        public static void OnXiLianUpdate(this DlgPet self)
+        {
+            if (self.View.ES_PetXiLian.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_PetXiLian.OnXiLianUpdate();
             }
         }
     }

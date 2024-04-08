@@ -91,6 +91,9 @@ namespace ET.Client
                 root.GetComponent<PetComponentC>().RequestXiLian(itemId, petId, m2C_RolePetXiLian.rolePetInfo);
             }
 
+            EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = "道具在宠物身上发生了作用！" });
+            EventSystem.Instance.Publish(root, new DataUpdate_PetXiLianUpdate());
+
             return m2C_RolePetXiLian.Error;
         }
 

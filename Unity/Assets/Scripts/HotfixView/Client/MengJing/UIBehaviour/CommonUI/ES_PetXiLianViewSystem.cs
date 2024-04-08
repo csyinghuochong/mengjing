@@ -167,7 +167,7 @@ namespace ET.Client
             scrollItemCommonItem.ES_CommonItem.E_ItemNumText.gameObject.SetActive(true);
         }
 
-        private static  void UpdateConsume(this ES_PetXiLian self)
+        private static void UpdateConsume(this ES_PetXiLian self)
         {
             self.ShowBagInfos.Clear();
             List<BagInfo> bagList = self.Root().GetComponent<BagComponentC>().GetBagList();
@@ -189,6 +189,9 @@ namespace ET.Client
 
                 self.ShowBagInfos.Add(bagList[i]);
             }
+
+            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
+            self.E_CommonItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
 
             if (self.ShowBagInfos.Count == 0)
             {

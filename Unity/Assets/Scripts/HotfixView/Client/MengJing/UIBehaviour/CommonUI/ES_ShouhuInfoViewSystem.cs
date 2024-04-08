@@ -22,7 +22,7 @@ namespace ET.Client
 
         public static void OnClickButton(this ES_ShouhuInfo self)
         {
-            self.SelectHandler(self.Index);
+            self.SelectHandler?.Invoke(self.Index);
         }
 
         public static void SetSelectHandler(this ES_ShouhuInfo self, int index, Action<int> action)
