@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_ShouhuInfo))]
     [EntitySystemOf(typeof (ES_PetShouHu))]
     [FriendOfAttribute(typeof (ES_PetShouHu))]
     public static partial class ES_PetShouHuSystem
@@ -12,6 +13,11 @@ namespace ET.Client
         private static void Awake(this ES_PetShouHu self, Transform transform)
         {
             self.uiTransform = transform;
+
+            self.ES_ShouhuInfo0.SetSelectHandler(0, self.OnSetSelectHandler);
+            self.ES_ShouhuInfo1.SetSelectHandler(1, self.OnSetSelectHandler);
+            self.ES_ShouhuInfo2.SetSelectHandler(2, self.OnSetSelectHandler);
+            self.ES_ShouhuInfo3.SetSelectHandler(3, self.OnSetSelectHandler);
 
             self.ShouhuInfos.Add(self.ES_ShouhuInfo0);
             self.ShouhuInfos.Add(self.ES_ShouhuInfo1);

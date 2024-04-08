@@ -68,14 +68,11 @@ namespace ET.Client
         {
             self.GetComponent<ChangeEquipComponent>().ChangeWeapon(self.GetWeaponId(bagInfo, occ));
         }
-        
+
         public static void ShowPlayerModel(this ES_ModelShow self, BagInfo bagInfo, int occ, int equipIndex)
         {
-            if (self.UnitModel != null)
-            {
-                UnityEngine.Object.Destroy(self.UnitModel);
-                self.UnitModel = null;
-            }
+            UICommonHelper.DestoryChild(self.ModelParent.gameObject);
+            self.UnitModel = null;
 
             string path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(occ).ModelAsset}");
             GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
@@ -111,11 +108,8 @@ namespace ET.Client
 
         public static void ShowPlayerPreviewModel(this ES_ModelShow self, BagInfo bagInfo, List<int> fashionids, int occ)
         {
-            if (self.UnitModel != null)
-            {
-                UnityEngine.Object.Destroy(self.UnitModel);
-                self.UnitModel = null;
-            }
+            UICommonHelper.DestoryChild(self.ModelParent.gameObject);
+            self.UnitModel = null;
 
             var path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(occ).ModelAsset}");
             GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
@@ -141,11 +135,8 @@ namespace ET.Client
 
         public static async ETTask ShowOtherModel(this ES_ModelShow self, string assetPath, bool isPet = false)
         {
-            if (self.UnitModel != null)
-            {
-                UnityEngine.Object.Destroy(self.UnitModel);
-                self.UnitModel = null;
-            }
+            UICommonHelper.DestoryChild(self.ModelParent.gameObject);
+            self.UnitModel = null;
 
             string path = ABPathHelper.GetUnitPath(assetPath);
             long instanceId = self.InstanceId;
@@ -173,6 +164,14 @@ namespace ET.Client
                 Animator animator = go.GetComponentInChildren<Animator>();
                 animator.Play(RandomHelper.RandFloat01() >= 0.5? "Skill_1" : "Skill_2");
             }
+        }
+
+        public static void ReSetTexture(this ES_ModelShow self)
+        {
+            RenderTexture renderTexture = new RenderTexture(512, 512, 16, RenderTextureFormat.ARGB32);
+            renderTexture.Create();
+            self.E_RenderRawImage.texture = renderTexture;
+            self.EG_RootRectTransform.transform.Find("Camera").GetComponent<Camera>().targetTexture = renderTexture;
         }
 
         public static void PlayShowIdelAnimate(this ES_ModelShow self)

@@ -12,6 +12,8 @@ namespace ET.Client
         private static void Awake(this ES_ShouhuInfo self, Transform transform)
         {
             self.uiTransform = transform;
+
+            self.E_ImageButtonButton.AddListener(self.OnClickButton);
         }
 
         [EntitySystem]
@@ -62,6 +64,7 @@ namespace ET.Client
             PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
             self.ES_ModelShow.SetShow(true);
             GameObject gameObject = self.ES_ModelShow.EG_RootRectTransform.gameObject;
+            self.ES_ModelShow.ReSetTexture();
             self.ES_ModelShow.ShowOtherModel("Pet/" + petConfig.PetModel).Coroutine();
             gameObject.transform.Find("Camera").localPosition = new Vector3(0f, 100f, 450f);
             gameObject.transform.Find("Camera").GetComponent<Camera>().fieldOfView = 30;
