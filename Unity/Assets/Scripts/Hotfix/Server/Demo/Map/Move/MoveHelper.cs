@@ -91,6 +91,12 @@ namespace ET.Server
         }
         
         
+        public static float3 GetCanChongJiPath(int navmeshid , float3 start, float3 target)
+        {
+            return target;
+        }
+        
+        
         public static void Stop(this Unit unit, int error)
         {
             unit.GetComponent<MoveComponent>().Stop(error == 0);
