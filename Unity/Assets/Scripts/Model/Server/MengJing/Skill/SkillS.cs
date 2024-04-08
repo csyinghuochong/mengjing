@@ -15,7 +15,7 @@ namespace ET.Server
         //1 正在执行   2完成使命
         public SkillState SkillState;
 
-        public SkillConfig SkillConf;
+        public SkillConfig SkillConf { get; set; }
 
         public long SkillBeginTime;    
         public long SkillEndTime;
@@ -44,12 +44,12 @@ namespace ET.Server
         public float ActTargetTemporaryAddPro { get; set; }
 
         //自身增加/降低伤害
-        public float ActTargetAddPro = 0f;
+        public float ActTargetAddPro { get; set; } = 0f;
 
         /// <summary>
         /// 伤害增加系数
         /// </summary>
-        public float HurtAddPro = 0f;
+        public float HurtAddPro { get; set; } = 0f;
 
         /// <summary>
         /// 来自哪个Unit

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     
-    [FriendOf(typeof(SkillHandler))]
+    [FriendOf(typeof(SkillHandlerS))]
     [FriendOf(typeof(NumericComponentS))]
     [FriendOf(typeof(UserInfoComponentS))]
     [FriendOf(typeof(PetComponentS))]
@@ -19,23 +19,23 @@ namespace ET.Server
         /// </summary>
         /// <param name="attackUnit"></param>
         /// <param name="defendUnit"></param>
-        /// <param name="skillHandler"></param>
+        /// <param name="skillHandlerS"></param>
         /// <param name="hurtMode">0 默认 1持续伤害</param>
         /// <returns></returns>
-        public static bool Fight(Unit attackUnit, Unit defendUnit, SkillHandler skillHandler, int hurtMode)
+        public static bool Fight(Unit attackUnit, Unit defendUnit, SkillS skillHandlerS, int hurtMode)
         {
             if (defendUnit.IsDisposed)
             {
                 return false;
             }
 
-            SkillConfig skillconfig = skillHandler.SkillConf;
+            SkillConfig skillconfig = skillHandlerS.SkillConf;
             //吟唱进度
             float singingvalue = 1;
             //蓄力技能计算伤害
             if (skillconfig.SkillType == 1 && SkillHelp.havePassiveSkillType(skillconfig.PassiveSkillType, 2))
             {
-                singingvalue = skillHandler.SkillInfo.SingValue;
+                singingvalue = skillHandlerS.SkillInfo.SingValue;
                 if (singingvalue < 0.3f)
                 {
                     singingvalue = 0.3f;
@@ -82,7 +82,7 @@ namespace ET.Server
             }
 
             //闪电链增加的伤害
-            float chainLightningAddValue = skillHandler.HurtAddPro;
+            float chainLightningAddValue = skillHandlerS.HurtAddPro;
 
             //设置PK状态
             bool playerPKStatus = false;
@@ -697,7 +697,7 @@ namespace ET.Server
                 }
 
                 //damge = (long)(damge * (actDamge + skillHandler.ActTargetTemporaryAddPro + skillHandler.ActTargetAddPro + skillHandler.GetTianfuProAdd((int)SkillAttributeEnum.AddDamageCoefficient) + skillProAdd)) + actDamgeValue;
-                damge = (long)(damge * (actDamge + skillHandler.ActTargetTemporaryAddPro + skillHandler.ActTargetAddPro + skillProAdd)) + actDamgeValue;
+                damge = (long)(damge * (actDamge + skillHandlerS.ActTargetTemporaryAddPro + skillHandlerS.ActTargetAddPro + skillProAdd)) + actDamgeValue;
 
                 float damgePro = 1;
                 //伤害加成
@@ -899,7 +899,7 @@ namespace ET.Server
                     }
 
                     bool jueXinSkill = false;
-                    if (ConfigHelper.JueXingSkillIDList().Contains(skillHandler.SkillConf.Id))
+                    if (ConfigHelper.JueXingSkillIDList().Contains(skillHandlerS.SkillConf.Id))
                     {
                         jueXinSkill = true;
                     }
@@ -917,7 +917,7 @@ namespace ET.Server
                             }
                         }
 
-                        jueXinSkill = juexingid != 0 && juexingid == skillHandler.SkillConf.Id;
+                        jueXinSkill = juexingid != 0 && juexingid == skillHandlerS.SkillConf.Id;
                     }
 
                     //觉醒技能伤害减半

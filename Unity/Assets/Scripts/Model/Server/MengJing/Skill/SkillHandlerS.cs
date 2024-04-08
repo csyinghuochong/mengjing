@@ -98,16 +98,16 @@ namespace ET.Server
         public float actAddPro;     // 攻击要求百分比
     }
     
-    public class SkillHandlerAttribute : BaseAttribute
+    public class SkillHandlerSAttribute : BaseAttribute
     {
 
     }
     
     
-    [SkillHandler]
-    public abstract class SkillHandler
+    [SkillHandlerS]
+    public abstract class SkillHandlerS
     {
-        public abstract void OnInit(SkillInfo skillId, Unit theUnitFrom);
+        public abstract void OnInit(SkillS skillS, Unit theUnitFrom);
         
         public abstract void OnExecute();
         

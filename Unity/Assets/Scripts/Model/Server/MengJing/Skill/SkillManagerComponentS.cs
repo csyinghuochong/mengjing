@@ -6,7 +6,7 @@ namespace ET.Server
     [ComponentOf(typeof(Unit))]
     public class SkillManagerComponentS: Entity, IAwake, IDestroy
     {
-        public List<SkillHandler> Skills = new List<SkillHandler>();
+        public List<SkillS> Skills = new List<SkillS>();
         public List<SkillInfo> DelaySkillList = new List<SkillInfo>();
         public Dictionary<int, SkillCDItem> SkillCDs = new Dictionary<int, SkillCDItem>();  //技能CD列表
         public Dictionary<int, int> SkillSecond = new Dictionary<int, int>();      
