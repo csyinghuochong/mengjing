@@ -858,7 +858,8 @@ namespace ET.Server
               // }
               //skillHandler.OnInit(skillcmd, from);
               SkillS skillS = self.AddChild<SkillS>();
-              skillS.OnInit(skillcmd,  from );
+              skillS.SkillInfo = skillcmd;
+              skillS.OnInit( from );
               return skillS;
           }
 

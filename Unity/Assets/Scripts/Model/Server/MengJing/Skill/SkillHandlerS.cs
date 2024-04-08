@@ -114,5 +114,7 @@ namespace ET.Server
         public abstract void OnUpdate(SkillS skillS);
         
         public abstract void OnFinished(SkillS skillS);
+
+        public abstract void Check_Map(SkillS skillS);
     }
 }
