@@ -887,7 +887,8 @@ namespace ET.Server
                   {
                       continue;
                   }
-                  //self.Skills[i].OnUpdate();
+                  
+                  self.Skills[i].OnUpdate();
                   if (!skillHandler.SkillConf.GameObjectName.Equals(ConfigData.Skill_Halo_2))
                   {
                       continue;
