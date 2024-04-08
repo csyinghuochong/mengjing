@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeadBarUI : MonoBehaviour
+public class HeadBarUI: MonoBehaviour
 {
     // Start is called before the first frame update
 
@@ -11,6 +11,8 @@ public class HeadBarUI : MonoBehaviour
 
     public Transform HeadPos;
     public GameObject HeadBar;
+
+    private Vector3 velocity = Vector3.zero;
 
     void Start()
     {
@@ -24,14 +26,16 @@ public class HeadBarUI : MonoBehaviour
         {
             return;
         }
+
         Vector2 OldPosition = WorldPosiToUIPos.WorldPosiToUIPosition(this.HeadPos.position, HeadBar, UiCamera, MainCamera, false);
         Vector3 NewPosition = Vector3.zero;
         NewPosition.x = OldPosition.x;
         NewPosition.y = OldPosition.y;
-        HeadBar.transform.localPosition = NewPosition;
+        // HeadBar.transform.localPosition = NewPosition;
+        HeadBar.transform.localPosition = Vector3.SmoothDamp(HeadBar.transform.localPosition, NewPosition, ref velocity, 0.1f);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         UpdatePostion();
     }
