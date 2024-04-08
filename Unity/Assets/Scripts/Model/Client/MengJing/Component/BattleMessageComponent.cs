@@ -32,7 +32,7 @@ namespace ET
 
         public long UploadMemoryTime;
 
-        public int LastDungeonId;
+        public int LastDungeonId { get; set; }
 
         public Dictionary<long, long> PetFightCD = new Dictionary<long, long>();
 

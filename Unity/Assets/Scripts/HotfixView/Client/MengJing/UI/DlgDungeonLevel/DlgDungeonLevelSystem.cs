@@ -1,0 +1,116 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace ET.Client
+{
+    [FriendOf(typeof (Scroll_Item_DungeonLevelItem))]
+    [FriendOf(typeof (DlgDungeonLevel))]
+    public static class DlgDungeonLevelSystem
+    {
+        public static void RegisterUIEvent(this DlgDungeonLevel self)
+        {
+            self.View.E_NanDu_1_ButtonButton.AddListener(() => { self.OnNanDu_Button(1); });
+            self.View.E_NanDu_2_ButtonButton.AddListener(() => { self.OnNanDu_Button(2); });
+            self.View.E_NanDu_3_ButtonButton.AddListener(() => { self.OnNanDu_Button(3); });
+
+            self.View.E_ButtonCloseButton.AddListenerAsync(self.OnCloseChapter);
+            self.View.E_DungeonLevelItemLoopVerticalScrollRect.AddItemRefreshListener(self.OnDungeonLevelItemsRefresh);
+        }
+
+        public static void ShowWindow(this DlgDungeonLevel self, Entity contextData = null)
+        {
+        }
+
+        public static void OnNanDu_Button(this DlgDungeonLevel self, int diff)
+        {
+            int openLv = DungeonSectionConfigCategory.Instance.Get(self.ChapterId).OpenLevel[diff - 1];
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            if (userInfo.Lv < openLv)
+            {
+                self.Difficulty = 1;
+                FlyTipComponent.Instance.SpawnFlyTipDi($"{openLv}级开启");
+                return;
+            }
+
+            self.Difficulty = diff;
+            self.View.E_NanDu_1_SelectImage.gameObject.SetActive(diff == 1);
+            self.View.E_NanDu_2_SelectImage.gameObject.SetActive(diff == 2);
+            self.View.E_NanDu_3_SelectImage.gameObject.SetActive(diff == 3);
+
+            UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            PlayerPrefsHelp.SetChapterDifficulty($"{userinfo.UserId}{self.ChapterId}", diff);
+        }
+
+        public static void OnClickHandler(this DlgDungeonLevel self, int chapterId)
+        {
+            for (int i = 0; i < self.ScrollItemDungeonLevelItems.Count; i++)
+            {
+                if (self.ScrollItemDungeonLevelItems[i].uiTransform != null)
+                {
+                    self.ScrollItemDungeonLevelItems[i].SetSelected(self.ScrollItemDungeonLevelItems[i].ChapterId == chapterId);
+                }
+            }
+        }
+
+        public static async ETTask OnCloseChapter(this DlgDungeonLevel self)
+        {
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Dungeon);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DungeonLevel);
+        }
+
+        public static void OnInitData(this DlgDungeonLevel self, int chapterId)
+        {
+            self.ChapterId = chapterId;
+
+            int[] openLv = DungeonSectionConfigCategory.Instance.Get(self.ChapterId).OpenLevel;
+            self.View.E_NanDu_1_ButtonButton.transform.Find("TextOpenLevel").GetComponent<Text>().text = $"激活等级:{openLv[0]}级";
+            self.View.E_NanDu_2_ButtonButton.transform.Find("TextOpenLevel").GetComponent<Text>().text = $"激活等级:{openLv[1]}级";
+            self.View.E_NanDu_3_ButtonButton.transform.Find("TextOpenLevel").GetComponent<Text>().text = $"激活等级:{openLv[2]}级";
+
+            UserInfo userinfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            self.OnNanDu_Button(PlayerPrefsHelp.GetChapterDifficulty($"{userinfo.UserId}{self.ChapterId}"));
+            self.UpdateLevelList(chapterId).Coroutine();
+        }
+
+        private static void OnDungeonLevelItemsRefresh(this DlgDungeonLevel self, Transform transform, int index)
+        {
+            Scroll_Item_DungeonLevelItem scrollItemDungeonLevelItem = self.ScrollItemDungeonLevelItems[index].BindTrans(transform);
+            scrollItemDungeonLevelItem.OnInitData(self.ChapterId, self.ShowLevel[index], self.DungeonSectionConfig.RandomArea[self.ShowLevel[index]]);
+        }
+
+        public static async ETTask UpdateLevelList(this DlgDungeonLevel self, int chapterid)
+        {
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            DungeonSectionConfig dungeonSectionConfig = DungeonSectionConfigCategory.Instance.Get(chapterid);
+            self.DungeonSectionConfig = dungeonSectionConfig;
+            self.ShowLevel.Clear();
+
+            for (int i = 0; i < dungeonSectionConfig.RandomArea.Length; i++)
+            {
+                //只显示满足进入等级的关卡
+                DungeonConfig chapterCof = DungeonConfigCategory.Instance.Get(dungeonSectionConfig.RandomArea[i]);
+                if (userInfo.Lv < chapterCof.EnterLv)
+                {
+                    break;
+                }
+
+                if (chapterCof.Id >= ConfigData.GMDungeonId)
+                {
+                    break;
+                }
+
+                self.ShowLevel.Add(i);
+
+                self.View.E_Lab_LevelNameText.text = dungeonSectionConfig.Name;
+                self.View.E_Lab_OpenNumShowText.text = "(" + GameSettingLanguge.LoadLocalization("冒险进度") + "：" + (i + 1).ToString() + "/" +
+                        dungeonSectionConfig.RandomArea.Length.ToString() + ")";
+            }
+
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(10);
+            // self.ZoneScene().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, UIType.UIDungeonLevel);
+        }
+    }
+}

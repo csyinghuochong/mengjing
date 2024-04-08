@@ -30,5 +30,6 @@
         public const int YujingTimer = 309;
         public const int UIUnitReviveTime = 310;
         public const int DialogTimer = 311;
+        public const int UIDungenBossRefreshTimer = 312;
     }
 }

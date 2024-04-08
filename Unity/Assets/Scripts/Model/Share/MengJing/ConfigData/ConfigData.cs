@@ -5,6 +5,10 @@ namespace ET
 {
     public static class ConfigData
     {
+        // 个人副本  gm账号显示副本和新地图,大于等于指定副本id不显示
+        [StaticField]
+        public static int GMDungeonId = 1060003;
+
         //购买背包
         [StaticField]
         public static List<BuyCellCost> BuyBagCellCosts = new List<BuyCellCost>
@@ -854,11 +858,13 @@ namespace ET
 
         [StaticField]
         public static float3 PastureInitPos = new float3(-15f, 0f, -20f);
-        
+
         [StaticField]
         public static string UI_pro_4_2 = "UI_pro_4_2";
+
         [StaticField]
         public static string UI_pro_3_2 = "UI_pro_3_2";
+
         [StaticField]
         public static string UI_pro_3_4 = "UI_pro_3_4";
 
