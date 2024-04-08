@@ -127,6 +127,60 @@ namespace ET.Client
      		}
      	}
 
+		public ES_ChengJiuShow ES_ChengJiuShow
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_chengjiushow == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ChengJiuShow");
+		    	   this.m_es_chengjiushow = this.AddChild<ES_ChengJiuShow,Transform>(subTrans);
+     			}
+     			return this.m_es_chengjiushow;
+     		}
+     	}
+
+		public ES_ChengJiuJingling ES_ChengJiuJingling
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_chengjiujingling == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ChengJiuJingling");
+		    	   this.m_es_chengjiujingling = this.AddChild<ES_ChengJiuJingling,Transform>(subTrans);
+     			}
+     			return this.m_es_chengjiujingling;
+     		}
+     	}
+
+		public ES_PetTuJian ES_PetTuJian
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_pettujian == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetTuJian");
+		    	   this.m_es_pettujian = this.AddChild<ES_PetTuJian,Transform>(subTrans);
+     			}
+     			return this.m_es_pettujian;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_FunctionSetBtnToggleGroup = null;
@@ -136,6 +190,9 @@ namespace ET.Client
 			this.m_E_TuJianToggle = null;
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_chengjiureward = null;
+			this.m_es_chengjiushow = null;
+			this.m_es_chengjiujingling = null;
+			this.m_es_pettujian = null;
 			this.uiTransform = null;
 		}
 
@@ -146,6 +203,9 @@ namespace ET.Client
 		private UnityEngine.UI.Toggle m_E_TuJianToggle = null;
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_ChengJiuReward> m_es_chengjiureward = null;
+		private EntityRef<ES_ChengJiuShow> m_es_chengjiushow = null;
+		private EntityRef<ES_ChengJiuJingling> m_es_chengjiujingling = null;
+		private EntityRef<ES_PetTuJian> m_es_pettujian = null;
 		public Transform uiTransform = null;
 	}
 }

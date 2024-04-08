@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_PetTuJian))]
+    [FriendOf(typeof (ES_ChengJiuJingling))]
+    [FriendOf(typeof (ES_ChengJiuShow))]
     [FriendOf(typeof (ES_ChengJiuReward))]
     [FriendOf(typeof (DlgChengJiu))]
     public static class DlgChengJiuSystem
@@ -27,12 +30,24 @@ namespace ET.Client
         private static void OnFunctionSetBtn(this DlgChengJiu self, int index)
         {
             UICommonHelper.SetToggleShow(self.View.E_RewardToggle.gameObject, index == 0);
+            UICommonHelper.SetToggleShow(self.View.E_ListToggle.gameObject, index == 1);
+            UICommonHelper.SetToggleShow(self.View.E_JingLingToggle.gameObject, index == 2);
+            UICommonHelper.SetToggleShow(self.View.E_TuJianToggle.gameObject, index == 3);
 
             UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
             {
                 case 0:
                     self.View.ES_ChengJiuReward.uiTransform.gameObject.SetActive(true);
+                    break;
+                case 1:
+                    self.View.ES_ChengJiuShow.uiTransform.gameObject.SetActive(true);
+                    break;
+                case 2:
+                    self.View.ES_ChengJiuJingling.uiTransform.gameObject.SetActive(true);
+                    break;
+                case 3:
+                    self.View.ES_PetTuJian.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
