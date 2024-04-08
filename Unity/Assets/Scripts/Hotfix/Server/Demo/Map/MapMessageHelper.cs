@@ -44,7 +44,7 @@ namespace ET.Server
 
             ///0 全部 1 队友
             Dictionary<long, AOIEntity> dict = unit.GetBeSeePlayers();
-            (ushort opcode, MemoryStream stream) = MessageSerializeHelper.MessageToStream(message);
+            //(ushort opcode, MemoryStream stream) = MessageSerializeHelper.MessageToStream(message);
 
             foreach (AOIEntity u in dict.Values)
             {
