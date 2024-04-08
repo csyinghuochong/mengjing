@@ -11663,6 +11663,95 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.TokenRecvive)]
+	[MemoryPackable]
+	public partial class TokenRecvive: MessageObject
+	{
+		public static TokenRecvive Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(TokenRecvive), isFromPool) as TokenRecvive; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int ActivityId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ReceiveIndex { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.ActivityId = default;
+			this.ReceiveIndex = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//第一版的活动
+	[Message(OuterMessage.ActivityV1Info)]
+	[MemoryPackable]
+	public partial class ActivityV1Info: MessageObject
+	{
+		public static ActivityV1Info Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(ActivityV1Info), isFromPool) as ActivityV1Info; 
+		}
+
+		[MemoryPackOrder(0)]
+		public List<int> GuessIds { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public List<int> LastGuessReward { get; set; } = new();
+
+		[MemoryPackOrder(2)]
+		public List<int> ConsumeDiamondReward { get; set; } = new();
+
+		[MemoryPackOrder(3)]
+		public List<int> ChouKaNumberReward { get; set; } = new();
+
+		[MemoryPackOrder(4)]
+		public int ChouKaDropId { get; set; }
+
+		[MemoryPackOrder(5)]
+		public List<int> LiBaoAllIds { get; set; } = new();
+
+		[MemoryPackOrder(6)]
+		public List<int> LiBaoBuyIds { get; set; } = new();
+
+		[MemoryPackOrder(7)]
+		public int BaoShiDu { get; set; }
+
+		[MemoryPackOrder(8)]
+		public string ChouKa2ItemList { get; set; }
+
+		[MemoryPackOrder(9)]
+		public List<int> ChouKa2RewardIds { get; set; } = new();
+
+		[MemoryPackOrder(10)]
+		public List<int> OpenGuessIds { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.GuessIds.Clear();
+			this.LastGuessReward.Clear();
+			this.ConsumeDiamondReward.Clear();
+			this.ChouKaNumberReward.Clear();
+			this.ChouKaDropId = default;
+			this.LiBaoAllIds.Clear();
+			this.LiBaoBuyIds.Clear();
+			this.BaoShiDu = default;
+			this.ChouKa2ItemList = default;
+			this.ChouKa2RewardIds.Clear();
+			this.OpenGuessIds.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -11999,5 +12088,7 @@ namespace ET
 		 public const ushort M2C_UnitBuffRemove = 10333;
 		 public const ushort M2C_UnitBuffStatus = 10334;
 		 public const ushort M2C_SkillSecondResult = 10335;
+		 public const ushort TokenRecvive = 10336;
+		 public const ushort ActivityV1Info = 10337;
 	}
 }

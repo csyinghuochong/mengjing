@@ -33,6 +33,44 @@ namespace ET.Server
             }
         }
         
+        public static void BroadcastBuff(Unit unit, IMessage message, SkillBuffConfig buffConfig, int sceneType)
+        {
+            //主城只给自己广播
+            if (unit.Type == UnitType.Player && sceneType == SceneTypeEnum.MainCityScene)
+            {
+                SendToClient(unit, message);
+                return;
+            }
+
+            ///0 全部 1 队友
+            Dictionary<long, AOIEntity> dict = unit.GetBeSeePlayers();
+            (ushort opcode, MemoryStream stream) = MessageSerializeHelper.MessageToStream(message);
+
+            foreach (AOIEntity u in dict.Values)
+            {
+                bool broadcast = unit.Id == u.Unit.Id;
+
+                if (!broadcast)
+                {
+                    if (buffConfig.BroadcastType == 0)
+                    {
+                        broadcast = true;
+                    }
+                    if (buffConfig.BroadcastType == 1)  //队友
+                    {
+                        broadcast = unit.IsSameTeam(u.Unit);
+                    }
+                }
+
+                if (!broadcast)
+                {
+                    continue;
+                }
+
+                SendToClient(u.Unit, message);
+            }
+        }
+        
         public static void SendToClient(Unit unit, IMessage message)
         {
             unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(unit.GateSessionActorId, message);

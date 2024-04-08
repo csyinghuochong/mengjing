@@ -9,20 +9,20 @@ namespace ET.Server
         /// <summary>
         /// Buff当前状态
         /// </summary>
-        public BuffState BuffState;
+        public BuffState BuffState { get; set; }
 
         /// <summary>
         /// 最多持续到什么时候
         /// </summary>
-        public long BuffEndTime;
+        public long BuffEndTime { get; set; }
 
         /// <summary>
         /// Buff数据
         /// </summary>
-        public BuffData BuffData;
+        public BuffData BuffData{ get; set; }
 
-        public SkillBuffConfig mBuffConfig;
-        public SkillConfig mSkillConf;
+        public SkillBuffConfig mBuffConfig{ get; set; }
+        public SkillConfig mSkillConf{ get; set; }
         public SkillS mSkillHandler { get; set; }
 
         /// <summary>
@@ -40,8 +40,8 @@ namespace ET.Server
         public long BeginTime;
         public long PassTime;
 
-        public float3 StartPosition;
-        public float3 TargetPosition;
+        public float3 StartPosition{ get; set; }
+        public float3 TargetPosition{ get; set; }
 
         public long InterValTime;
         public long InterValTimeBegin;

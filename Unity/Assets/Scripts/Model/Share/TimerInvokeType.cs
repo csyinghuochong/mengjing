@@ -19,6 +19,7 @@
         public const int MonsterSingingTimer = 207;
         public const int DBSaveTimer = 208;
         public const int SkillTimer = 209;
+        public const int BuffTimer = 210;
         
         public const int RoomUpdate = 301;
         public const int JoystickTimer = 302;
