@@ -225,5 +225,42 @@ namespace ET.Server
             }
         }
         
+        public static long GetMasterId(this Unit self)
+        {
+            if (self.Type == UnitType.Player)
+            {
+                return self.Id;
+            }
+            if (self.Type == UnitType.Pet || self.Type == UnitType.Monster 
+                || self.Type == UnitType.JingLing || self.Type == UnitType.Pasture)
+            {
+                return self.GetComponent<NumericComponentS>().GetAsLong(NumericType.MasterId);
+            }
+            return 0;
+        }
+        
+        public static bool IsMasterOrPet(this Unit self, Unit defend, PetComponentS petComponent)
+        {
+            long masterId = self.GetComponent<NumericComponentS>().GetAsLong(NumericType.MasterId);
+            long othermaster = defend.GetComponent<NumericComponentS>().GetAsLong(NumericType.MasterId);
+            if (self.Type != UnitType.Player && masterId == defend.Id)
+            {
+                return true;
+            }
+            if (self.Type == UnitType.Player && othermaster == self.Id)
+            {
+                return true;
+            }
+            if (masterId > 0 && masterId == othermaster)
+            {
+                return true;
+            }
+            if (self.Type == UnitType.Player && petComponent.GetFightPetId() == defend.Id)
+            {
+                return true;
+            }
+            return self.Id == defend.Id;
+        }
+
     }
 }

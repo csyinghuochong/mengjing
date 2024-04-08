@@ -40,6 +40,13 @@ namespace ET.Server
         {
             
         }
+
+        public static void CheckSkillSecond(this SkillManagerComponentS self, SkillS skillHandler, long hurtId)
+        {
+            
+        }
+        
+        
     }
 
 }
