@@ -589,7 +589,8 @@ namespace ET.Client
                         }
                         break;
                         case UnitType.Monster:
-                            break;
+                        break;
+                    default:
                         break;
                 }
             }

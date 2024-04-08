@@ -34,7 +34,7 @@ namespace ET
 
         public static bool IsChongJi(string skillname)
         {
-            return skillname.Equals(ChongJiSkill());
+            return skillname.Equals(ConfigData.ChongJiSkill);
         }
 
         public static bool havePassiveSkillType(int[] typelist, int passType)

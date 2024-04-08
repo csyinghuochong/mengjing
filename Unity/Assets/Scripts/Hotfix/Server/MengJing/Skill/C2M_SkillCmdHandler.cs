@@ -33,9 +33,9 @@ namespace ET.Server
              SkillManagerComponentS skillManagerManagerComponent = unit.GetComponent<SkillManagerComponentS>();   
              M2C_SkillCmd m2C_SkillCmd = skillManagerManagerComponent.OnUseSkill(request, true);
 
-             if (skillManagerManagerComponent.IsSkillSecond(request.SkillID))
+             if (skillManagerManagerComponent.SkillSecond.ContainsKey(request.SkillID))
              {
-                 int buffId = (int)SkillConfigCategory.Instance.BuffSecondSkill[skillManagerManagerComponent.SkillSecondBuffId(request.SkillID)].KeyId;
+                 int buffId = (int)SkillConfigCategory.Instance.BuffSecondSkill[skillManagerManagerComponent.SkillSecond[request.SkillID]].KeyId;
 
                  List<Unit> allDefend = unit.GetParent<UnitComponent>().GetAll();
                  for (int defend = 0; defend < allDefend.Count; defend++)

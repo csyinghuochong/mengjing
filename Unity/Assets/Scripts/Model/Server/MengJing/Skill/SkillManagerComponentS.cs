@@ -9,7 +9,7 @@ namespace ET.Server
         public List<SkillS> Skills = new List<SkillS>();
         public List<SkillInfo> DelaySkillList = new List<SkillInfo>();
         public Dictionary<int, SkillCDItem> SkillCDs = new Dictionary<int, SkillCDItem>();  //技能CD列表
-        public Dictionary<int, int> SkillSecond = new Dictionary<int, int>();      
+        public Dictionary<int, int> SkillSecond { get; set; } = new Dictionary<int, int>();
         public long SkillPublicCDTime;      //公共CD
         public int FangunComboNumber;
         public long FangunLastTime;
