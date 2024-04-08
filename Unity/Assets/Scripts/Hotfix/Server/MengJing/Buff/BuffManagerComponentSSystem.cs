@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 
@@ -7,6 +8,23 @@ namespace ET.Server
     [FriendOf(typeof (BuffManagerComponentS))]
     public static partial class BuffManagerComponentSSystem
     {
+        
+        [Invoke(TimerInvokeType.BuffTimer)]
+        public class BuffTimer: ATimer<BuffManagerComponentS>
+        {
+            protected override void Run(BuffManagerComponentS self)
+            {
+                try
+                {
+                    self.Check();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+        
         [EntitySystem]
         private static void Awake(this ET.Server.BuffManagerComponentS self)
         {

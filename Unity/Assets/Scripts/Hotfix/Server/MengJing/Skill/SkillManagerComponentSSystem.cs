@@ -5,11 +5,28 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-
+    
     [FriendOf(typeof(SkillManagerComponentS))]
     [EntitySystemOf(typeof(SkillManagerComponentS))]
     public static partial class SkillManagerComponentSSystem
     {
+        
+        [Invoke(TimerInvokeType.SkillTimer)]
+        public class SkillTimer: ATimer<SkillManagerComponentS>
+        {
+            protected override void Run(SkillManagerComponentS self)
+            {
+                try
+                {
+                    self.Check();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+        
         [EntitySystem]
         private static void Awake(this ET.Server.SkillManagerComponentS self)
         {
