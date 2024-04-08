@@ -3012,3 +3012,19 @@ message ActivityV1Info
 	repeated int32 ChouKa2RewardIds = 10;	//抽卡2已抽取奖励   达到一半可以刷新奖励
 	repeated int32 OpenGuessIds = 11;       //竞猜开奖字
 }
+
+//闪电链
+message M2C_ChainLightning // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 UnitId = 1;
+	int64 TargetID = 2;
+	int32 SkillID = 3;
+	float PosX = 6;
+	float PosY = 7;
+	float PosZ = 8;
+	int32 Type = 9;
+	int64 InstanceId = 10;
+}

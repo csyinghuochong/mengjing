@@ -11,7 +11,7 @@ namespace ET
 
         public int EnergySkillId { get; set; }
 
-        public List<long> ZhaohuanIds = new List<long>();
+        public List<long> ZhaohuanIds { get; set; }= new List<long>();
 
         public string UnitName { get; set; }    //自身名字
 

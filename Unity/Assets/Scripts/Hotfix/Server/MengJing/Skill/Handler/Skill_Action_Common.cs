@@ -16,7 +16,7 @@
             skillS.OnUpdate();
         }
         
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
             skillS.BaseOnUpdate();
             skillS.CheckChiXuHurt();
@@ -27,7 +27,7 @@
             skillS.Clear();
         }
 
-        public override void Check_Map(SkillS skillS)
+        public void Check_Map(SkillS skillS)
         {
             
         }

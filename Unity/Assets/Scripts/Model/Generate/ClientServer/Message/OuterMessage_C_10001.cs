@@ -11752,6 +11752,65 @@ namespace ET
 
 	}
 
+//闪电链
+	[Message(OuterMessage.M2C_ChainLightning)]
+	[MemoryPackable]
+	public partial class M2C_ChainLightning: MessageObject, IMessage
+	{
+		public static M2C_ChainLightning Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ChainLightning), isFromPool) as M2C_ChainLightning; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long TargetID { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int SkillID { get; set; }
+
+		[MemoryPackOrder(5)]
+		public float PosX { get; set; }
+
+		[MemoryPackOrder(6)]
+		public float PosY { get; set; }
+
+		[MemoryPackOrder(7)]
+		public float PosZ { get; set; }
+
+		[MemoryPackOrder(8)]
+		public int Type { get; set; }
+
+		[MemoryPackOrder(9)]
+		public long InstanceId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.TargetID = default;
+			this.SkillID = default;
+			this.PosX = default;
+			this.PosY = default;
+			this.PosZ = default;
+			this.Type = default;
+			this.InstanceId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -12090,5 +12149,6 @@ namespace ET
 		 public const ushort M2C_SkillSecondResult = 10335;
 		 public const ushort TokenRecvive = 10336;
 		 public const ushort ActivityV1Info = 10337;
+		 public const ushort M2C_ChainLightning = 10338;
 	}
 }

@@ -62,7 +62,7 @@ namespace ET
         }
 
         /// <summary>
-        /// »ñÈ¡lowerÓëUpperÖ®¼äµÄËæ»úÊı,°üº¬ÏÂÏŞ£¬²»°üº¬ÉÏÏŞ
+        /// ï¿½ï¿½È¡lowerï¿½ï¿½UpperÖ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ş£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="lower"></param>
         /// <param name="upper"></param>
@@ -74,7 +74,7 @@ namespace ET
         }
 
         /// <summary>
-        /// »ñÈ¡lowerÓëUpperÖ®¼äµÄËæ»úÊı,°üº¬ÏÂÏŞºÍÉÏÏŞ
+        /// ï¿½ï¿½È¡lowerï¿½ï¿½UpperÖ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Şºï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="lower"></param>
         /// <param name="upper"></param>
@@ -84,6 +84,30 @@ namespace ET
         //    int value = random.Next(lower, upper+1);
         //    return value;
         //}
+        
+        //ä¼ å…¥éšæœºèŒƒå›´,ç”Ÿæˆä¸€ä¸ªéšæœºæ•°(å¹³å‡æ¦‚ç‡)
+        public static int ReturnRamdomValue_Int(int randomMinValue, int randomMaxValue)
+        {
+
+            int randomChaValue = randomMaxValue - randomMinValue;
+            float randomRangeValue_Now = RandomHelper.RandomNumber(0, 10) * 0.1f;
+            //System.Math.Round
+            //è®¡ç®—æœ€ç»ˆå€¼
+            int retunrnValue = (int)(System.Math.Round(randomMinValue + randomChaValue * randomRangeValue_Now));
+            return retunrnValue;
+        }
+
+        //ä¼ å…¥éšæœºèŒƒå›´,ç”Ÿæˆä¸€ä¸ªéšæœºæ•°(å¹³å‡æ¦‚ç‡)
+        public static float ReturnRamdomValue_Float(float randomMinValue, float randomMaxValue)
+        {
+
+            float randomChaValue = randomMaxValue - randomMinValue;
+            float randomRangeValue_Now = RandomHelper.RandomNumber(0, 10) * 0.1f;
+
+            //è®¡ç®—æœ€ç»ˆå€¼
+            float retunrnValue = randomMinValue + randomChaValue * randomRangeValue_Now;
+            return retunrnValue;
+        }
 
         public static long NextLong(long minValue, long maxValue)
         {
@@ -128,10 +152,10 @@ namespace ET
         }
 
         /// <summary>
-        /// ´òÂÒÊı×é
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="arr">Òª´òÂÒµÄÊı×é</param>
+        /// <param name="arr">Òªï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½</param>
         public static void BreakRank<T>(this List<T> arr)
         {
             if (arr == null || arr.Count < 2)
@@ -152,17 +176,17 @@ namespace ET
         {
             int[] arr = new int[sum];
             int j = 0;
-            //±íÊ¾¼üºÍÖµ¶ÔµÄ¼¯ºÏ¡£
+            //ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Öµï¿½ÔµÄ¼ï¿½ï¿½Ï¡ï¿½
             Hashtable hashtable = new Hashtable();
             Random rm = random;
             while (hashtable.Count < sum)
             {
-                //·µ»ØÒ»¸öminµ½maxÖ®¼äµÄËæ»úÊı
+                //ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½minï¿½ï¿½maxÖ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 int nValue = rm.Next(min, max);
-                // ÊÇ·ñ°üº¬ÌØ¶¨Öµ
+                // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½Öµ
                 if (!hashtable.ContainsValue(nValue))
                 {
-                    //°Ñ¼üºÍÖµÌí¼Óµ½hashtable
+                    //ï¿½Ñ¼ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½Óµï¿½hashtable
                     hashtable.Add(nValue, nValue);
                     arr[j] = nValue;
                     j++;
@@ -173,8 +197,8 @@ namespace ET
         }
 
         /// <summary>
-        /// Ëæ»ú´ÓÊı×éÖĞÈ¡Èô¸É¸ö²»ÖØ¸´µÄÔªËØ£¬
-        /// ÎªÁË½µµÍËã·¨¸´ÔÓ¶È£¬ËùÒÔÊÇÎ±Ëæ»ú£¬¶ÔËæ»úÒªÇó²»ÊÇ·Ç³£¸ßµÄÂß¼­¿ÉÒÔÓÃ
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½É¸ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½Ôªï¿½Ø£ï¿½
+        /// Îªï¿½Ë½ï¿½ï¿½ï¿½ï¿½ã·¨ï¿½ï¿½ï¿½Ó¶È£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Ç·Ç³ï¿½ï¿½ßµï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="sourceList"></param>
@@ -218,13 +242,13 @@ namespace ET
             return (float)a / 1000000f;
         }
 
-        //È¡Ëæ»úÖµ ±£ÁôÁ½Î»
+        //È¡ï¿½ï¿½ï¿½Öµ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»
         public static float RandFloatKeep2()
         {
             return (float)Math.Round(random.NextDouble(), 2);
         }
 
-        //È¡Ëæ»úÖµ ±£ÁôÁ½Î»
+        //È¡ï¿½ï¿½ï¿½Öµ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»
         public static float RandomNumberFloatKeep2(float lower, float upper)
         {
 
@@ -235,12 +259,12 @@ namespace ET
 
         private static int Rand(int n)
         {
-            // ×¢Òâ£¬·µ»ØÖµÊÇ×ó±ÕÓÒ¿ª£¬ËùÒÔmaxValueÒª¼Ó1
+            // ×¢ï¿½â£¬ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½maxValueÒªï¿½ï¿½1
             return random.Next(1, n + 1);
         }
 
         /// <summary>
-        /// Í¨¹ıÈ¨ÖØËæ»ú
+        /// Í¨ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="weights"></param>
         /// <returns></returns>

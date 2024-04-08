@@ -111,10 +111,8 @@ namespace ET.Server
         
         public abstract void OnExecute(SkillS skillS);
         
-        public abstract void OnUpdate(SkillS skillS);
+        public abstract void OnUpdate(SkillS skillS,  int updateMode);
         
         public abstract void OnFinished(SkillS skillS);
-
-        public abstract void Check_Map(SkillS skillS);
     }
 }

@@ -28,7 +28,7 @@ namespace ET.Server
             skillS.OnUpdate();    
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
             //this.BaseOnUpdate();
             long serverNow = TimeHelper.ServerNow();
@@ -71,7 +71,7 @@ namespace ET.Server
             skillS.Clear();
         }
         
-        public override void Check_Map(SkillS skillS)
+        public void Check_Map(SkillS skillS)
         {
             
         }

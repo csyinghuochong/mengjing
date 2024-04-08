@@ -22,18 +22,18 @@ namespace ET.Server
         /// <summary>
         /// 记录是否触发过技能伤害
         /// </summary>
-        public bool IsExcuteHurt;
+        public bool IsExcuteHurt{ get; set; }
         public long SkillExcuteHurtTime{ get; set; }
-        public long SkillTriggerInvelTime;      //技能伤害触发间隔时间
-        public long SkillTriggerLastTime;
-        public long SkillFirstHurtTime;
+        public long SkillTriggerInvelTime{ get; set; }      //技能伤害触发间隔时间
+        public long SkillTriggerLastTime{ get; set; }
+        public long SkillFirstHurtTime{ get; set; }
 
         /// <summary>
         /// 持续伤害
         /// </summary>
-        public long DamgeChiXuLastTime;
+        public long DamgeChiXuLastTime{ get; set; }
 
-        public int SkillExcuteNum;
+        public int SkillExcuteNum{ get; set; }
 
         public float3 NowPosition { get; set; } = 0f;             //当前技能的坐标点
         public float3 TargetPosition { get; set; } = 0f;
