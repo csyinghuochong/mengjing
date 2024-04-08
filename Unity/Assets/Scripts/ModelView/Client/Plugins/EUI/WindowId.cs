@@ -36,5 +36,6 @@ namespace ET.Client
 		WindowID_PetHeChengPreview,
 		WindowID_PetChouKaGet,
 		WindowID_ChengJiu,
+		WindowID_Dungeon,
 	}
 }
