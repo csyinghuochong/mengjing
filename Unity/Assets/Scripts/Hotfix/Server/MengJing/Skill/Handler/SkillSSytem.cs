@@ -566,7 +566,7 @@ namespace ET.Server
 
          public static void OnInit(this ET.Server.SkillS self,  Unit from)
          {
-             SkillHandlerS aaiHandler = SkillDispatcherComponent.Instance.Get(self.SkillConf.GameObjectName);
+             SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(self.SkillConf.GameObjectName);
              if (aaiHandler != null)
              {
                  aaiHandler.OnInit(self, from  );
@@ -575,7 +575,7 @@ namespace ET.Server
 
          public static void OnFinished(this ET.Server.SkillS self)
          {
-             SkillHandlerS aaiHandler = SkillDispatcherComponent.Instance.Get(self.SkillConf.GameObjectName);
+             SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(self.SkillConf.GameObjectName);
              if (aaiHandler != null)
              {
                  aaiHandler.OnFinished(self);
@@ -584,7 +584,7 @@ namespace ET.Server
 
          public static void OnExecute(this ET.Server.SkillS self)
          {
-             SkillHandlerS aaiHandler = SkillDispatcherComponent.Instance.Get(self.SkillConf.GameObjectName);
+             SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(self.SkillConf.GameObjectName);
              if (aaiHandler != null)
              {
                  aaiHandler.OnExecute(self);
@@ -593,7 +593,7 @@ namespace ET.Server
 
          public static void Check_Map(this ET.Server.SkillS self)
          {
-             SkillHandlerS aaiHandler = SkillDispatcherComponent.Instance.Get(self.SkillConf.GameObjectName);
+             SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(self.SkillConf.GameObjectName);
              if (aaiHandler != null)
              {
                  aaiHandler.Check_Map(self);

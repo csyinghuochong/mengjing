@@ -5,7 +5,7 @@ namespace ET.Server
 {
 
     [Code]
-    public class SkillDispatcherComponent: Singleton<SkillDispatcherComponent>, ISingletonAwake
+    public class SkillDispatcherComponentS: Singleton<SkillDispatcherComponentS>, ISingletonAwake
     {
         private readonly Dictionary<string, SkillHandlerS> aiHandlers = new();
         
