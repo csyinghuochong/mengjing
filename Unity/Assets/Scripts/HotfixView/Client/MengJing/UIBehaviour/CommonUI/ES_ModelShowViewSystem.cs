@@ -16,9 +16,6 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.ModelParent = self.EG_RootRectTransform.Find("ModelParent");
-            self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown(pdata as PointerEventData); });
-            self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
-            self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(pdata as PointerEventData); });
 
             self.AddComponent<ChangeEquipComponent>();
         }
@@ -69,13 +66,21 @@ namespace ET.Client
             self.GetComponent<ChangeEquipComponent>().ChangeWeapon(self.GetWeaponId(bagInfo, occ));
         }
 
-        public static void ShowPlayerModel(this ES_ModelShow self, BagInfo bagInfo, int occ, int equipIndex)
+        public static void ShowPlayerModel(this ES_ModelShow self, BagInfo bagInfo, int occ, int equipIndex, bool canDrag = true)
         {
+            self.E_RenderEventTrigger.triggers.Clear();
+            if (canDrag)
+            {
+                self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown(pdata as PointerEventData); });
+                self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
+                self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(pdata as PointerEventData); });
+            }
+
             UICommonHelper.DestoryChild(self.ModelParent.gameObject);
             self.UnitModel = null;
 
             self.ReSetTexture();
-            
+
             string path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(occ).ModelAsset}");
             GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
             GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
@@ -108,13 +113,21 @@ namespace ET.Client
             return weaponId;
         }
 
-        public static void ShowPlayerPreviewModel(this ES_ModelShow self, BagInfo bagInfo, List<int> fashionids, int occ)
+        public static void ShowPlayerPreviewModel(this ES_ModelShow self, BagInfo bagInfo, List<int> fashionids, int occ, bool canDrag = true)
         {
+            self.E_RenderEventTrigger.triggers.Clear();
+            if (canDrag)
+            {
+                self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown(pdata as PointerEventData); });
+                self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
+                self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(pdata as PointerEventData); });
+            }
+
             UICommonHelper.DestoryChild(self.ModelParent.gameObject);
             self.UnitModel = null;
 
             self.ReSetTexture();
-            
+
             var path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(occ).ModelAsset}");
             GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
             GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
@@ -137,11 +150,19 @@ namespace ET.Client
             go.transform.localEulerAngles = Vector3.zero;
         }
 
-        public static async ETTask ShowOtherModel(this ES_ModelShow self, string assetPath, bool isPet = false)
+        public static async ETTask ShowOtherModel(this ES_ModelShow self, string assetPath, bool isPet = false, bool canDrag = true)
         {
+            self.E_RenderEventTrigger.triggers.Clear();
+            if (canDrag)
+            {
+                self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown(pdata as PointerEventData); });
+                self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
+                self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(pdata as PointerEventData); });
+            }
+
             UICommonHelper.DestoryChild(self.ModelParent.gameObject);
             self.UnitModel = null;
-            
+
             self.ReSetTexture();
 
             string path = ABPathHelper.GetUnitPath(assetPath);

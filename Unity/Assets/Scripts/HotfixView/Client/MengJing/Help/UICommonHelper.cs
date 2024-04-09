@@ -151,5 +151,18 @@ namespace ET.Client
                 obj.GetComponent<Image>().material = null;
             }
         }
+
+        public static void SetRawImageGray(Scene root, GameObject obj, bool val)
+        {
+            if (val)
+            {
+                Material mat = root.GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Material>(ABPathHelper.GetMaterialPath("UI_Hui"));
+                obj.GetComponent<RawImage>().material = mat;
+            }
+            else
+            {
+                obj.GetComponent<RawImage>().material = null;
+            }
+        }
     }
 }

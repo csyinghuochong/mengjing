@@ -58,7 +58,7 @@ namespace ET.Client
         {
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
 
-            uiComponent.CloseWindow(WindowID.WindowID_Task);
+            uiComponent.CloseWindow(WindowID.WindowID_ChengJiu);
         }
     }
 }
