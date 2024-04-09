@@ -24,6 +24,6 @@ namespace ET.Server
 
         public long CreateTime { get; set; } //创建时间
 
-        public List<BagInfo> BagInfoList = new List<BagInfo>();
-    }
+        public List<BagInfo> BagInfoList { get; set; } = new List<BagInfo>();
+	}
 }
