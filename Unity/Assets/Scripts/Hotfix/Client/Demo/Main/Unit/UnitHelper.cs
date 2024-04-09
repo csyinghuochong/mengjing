@@ -64,5 +64,17 @@ namespace ET.Client
             int sonType = MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterSonType;
             return sonType == 55 || sonType == 56 || sonType == 57;
         }
+        
+        public static int GetEquipType(Scene root)
+        {
+            Unit unit = GetMyUnitFromClientScene(root);
+            int itemId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Weapon);
+            return ItemHelper.GetEquipType(unit.ConfigId, itemId);
+        }
+        
+        public static bool IsRobot(this Unit self)
+        {
+            return self.Root().GetComponent<UserInfoComponentC>().UserInfo.RobotId > 0;
+        }
     }
 }

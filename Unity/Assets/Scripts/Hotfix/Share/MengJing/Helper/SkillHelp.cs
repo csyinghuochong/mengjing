@@ -14,10 +14,7 @@ namespace ET
         }
 
        
-        public static List<string> NotCombatSkill()
-        {
-            return new List<string>() { "Act_11", "Act_12", "Act_13" };
-        }
+      
 
         public static Dictionary<string, long> AckExitTime()
         {

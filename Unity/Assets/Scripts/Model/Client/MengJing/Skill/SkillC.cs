@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
+using Unity.Mathematics;
 
 namespace ET.Client
 {
@@ -8,10 +9,10 @@ namespace ET.Client
     [ChildOf(typeof(SkillManagerComponentC))]
     public abstract class SkillC :Entity,IAwake,IDestroy
     {
-        public Vector3 NowPosition;
+        public float3 NowPosition;
         public SkillState SkillState;
 
-        public SkillConfig SkillConf;
+        public SkillConfig SkillConf { get; set; }
         public int EffectId;
 
         public bool IsExcuteHurt;
@@ -25,7 +26,7 @@ namespace ET.Client
         public Unit TheUnitFrom { get; set; }
 
         public SkillInfo SkillInfo;
-        public Vector3 TargetPosition;
+        public float3 TargetPosition;
         
     }
 }

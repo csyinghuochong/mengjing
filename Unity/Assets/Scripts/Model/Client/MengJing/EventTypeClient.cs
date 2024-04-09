@@ -124,4 +124,73 @@ namespace ET.Client
         public int UpdateType;
         public string UpdateValue;
     }
+    
+    public struct SkillSound 
+    {
+        public string Asset;
+    }
+    
+    //技能特效
+    public struct SkillEffect
+    {
+        public EffectData EffectData;
+        public Unit Unit;
+    }
+    
+    //技能预警
+    public struct SkillYuJing
+    {
+        public SkillConfig SkillConfig;
+        public SkillInfo SkillInfo;
+        public Unit Unit;
+    }
+
+    public struct SkillEffectFinish
+    {
+        public long EffectInstanceId;
+        public Unit Unit;
+    }
+
+    public struct SkillCDUpdate
+    {
+        
+    }
+    
+    //吟唱
+    public struct SingingUpdate
+    {
+        public Scene ZoneScene;
+        public long PassTime;
+        public long TotalTime;
+        public int Type;
+    }
+    
+    public struct ChangeCameraMoveType
+    {
+        public int CameraType;
+    }
+
+    public struct OnSkillUse
+    {
+        public int SkillId;
+    }
+    
+    //动画
+    public struct PlayAnimator 
+    {
+        
+        public string Animator;
+        public Unit Unit;
+    }
+    
+    //状态机
+    public struct FsmChange 
+    {
+     
+        public int FsmHandlerType;
+        public int SkillId;
+        public Unit Unit;
+        
+    }
+    
 }

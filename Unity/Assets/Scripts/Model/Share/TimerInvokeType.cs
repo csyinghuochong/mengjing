@@ -20,6 +20,9 @@
         public const int DBSaveTimer = 208;
         public const int SkillTimer = 209;
         public const int BuffTimer = 210;
+        public const int PlayerSingingTimer = 211;
+        public const int AutoAttackGridTimer = 212;
+        
         
         public const int RoomUpdate = 301;
         public const int JoystickTimer = 302;

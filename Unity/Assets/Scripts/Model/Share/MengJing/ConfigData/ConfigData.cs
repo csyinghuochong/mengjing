@@ -33,6 +33,9 @@ namespace ET
             { 2000, "10010045;1"},
         };
 
+        [StaticField]
+        public static List<string> NotCombatSkill = new List<string>() { "Act_11", "Act_12", "Act_13" };
+        
         /// <summary>
         /// 洗练次数奖励
         /// </summary>
