@@ -7,45 +7,50 @@ namespace ET.Server
 
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            this.IsExcuteHurt = true;
-            this.InitSelfBuff();
-            this.OnUpdate();
+            skillS.IsExcuteHurt = true;
+            skillS.InitSelfBuff();
+            this.OnUpdate(skillS, 0);
         }
 
-        public void Check_Map( )
+        public void Check_Map(SkillS skillS )
         {
-            List<Unit> entities = this.TheUnitFrom.DomainScene().GetComponent<UnitComponent>().GetAll();
+            List<Unit> entities = skillS.TheUnitFrom.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < entities.Count; i++)
             {
                 if (entities[i].Type != UnitType.Player)
                 {
                     continue;
                 }
-                if (this.TheUnitFrom.IsSameTeam(entities[i]))
+                if (skillS.TheUnitFrom.IsSameTeam(entities[i]))
                 {
-                    this.OnCollisionUnit(entities[i]);
+                    skillS.OnCollisionUnit(entities[i]);
                 }
             }
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS,int updateMode)
         {
+            if (updateMode == 1)
+            {
+                Check_Map(skillS);
+                return;
+            }
 
-            this.BaseOnUpdate();
+
+            skillS.BaseOnUpdate();
             
-            this.CheckChiXuHurt();
-
-            //this.UpdateCheckPoint(this.TheUnitFrom.Position);
+            skillS.CheckChiXuHurt();
+            
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            this.Clear();
+            skillS.Clear();
         }
 
     }

@@ -68,7 +68,12 @@ namespace ET.Server
         public int isChonFeng{ get; set; }
         public float SpeedAddValue { get; set; }= 0f;
 
-        public long MoveTime{ get; set; } = 0f;
-        public int IsStop{ get; set; } = 0f;
+        public long MoveTime{ get; set; } = 0;
+        public int IsStop{ get; set; } = 0;
+        
+        public List<long> ComboTimeList { get; set; } = new List<long>();
+
+        public int TriggeSkillId { get; set; }
+
     }
 }

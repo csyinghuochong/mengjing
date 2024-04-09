@@ -33,7 +33,7 @@ namespace ET.Server
 
         public override void OnUpdate(SkillS skillS, int updateMode)
         {
-            this.CreateBullet();
+            this.CreateBullet(skillS);
             if (TimeHelper.ServerNow() > skillS.SkillEndTime)
             {
                 skillS.SetSkillState(SkillState.Finished);
@@ -57,7 +57,7 @@ namespace ET.Server
                     continue;
                 }
 
-                this.ReSetUnit(unit);
+                this.ReSetUnit(skillS, unit);
             }
 
             skillS.Clear();
@@ -80,7 +80,7 @@ namespace ET.Server
             Unit unit = UnitFactory.CreateBullet(skillS.TheUnitFrom.Scene(), skillS.TheUnitFrom.Id, skillS.SkillConf.Id, 0, skillS.TheUnitFrom.Position,
                 new CreateMonsterInfo());
             //unit.AddComponent<RoleBullet5Componnet>().OnBaseBulletInit(this, this.TheUnitFrom.Id);
-            float3 target = this.GetBulletTargetPoint(skillS.SkillInfo.TargetAngle);
+            float3 target = this.GetBulletTargetPoint(skillS, skillS.SkillInfo.TargetAngle);
             unit.BulletMoveToAsync(target).Coroutine();
             skillS.SkillExcuteNum--;
 

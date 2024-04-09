@@ -8,8 +8,12 @@ namespace ET.Server
     [ComponentOf(typeof(Unit))]
     public class AIComponent: Entity, IAwake<int>, IDestroy
     {
-        public int AIConfigId;
-        
+        public int AIConfigId
+        {
+            get;set
+            ;
+        }
+
         public ETCancellationToken CancellationToken;
 
         public long Timer;
@@ -49,7 +53,7 @@ namespace ET.Server
 
         public long AIDelay;
 
-        public List<float3> TargetPoint = new List<float3>();
+        public List<float3> TargetPoint  { get; set; }= new List<float3>();
 
         public Unit LocalDungeonUnit { get; set; }
 

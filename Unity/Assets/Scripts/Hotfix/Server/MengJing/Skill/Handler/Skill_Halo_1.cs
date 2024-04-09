@@ -6,47 +6,47 @@
 
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            this.InitSelfBuff();
-            this.OnUpdate();
+            skillS.InitSelfBuff();
+            this.OnUpdate(skillS, 0);
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
-            this.BaseOnUpdate();
+            skillS.BaseOnUpdate();
 
-            this.IsExcuteHurt = false;
-            this.UpdateCheckPoint(this.TheUnitFrom.Position);
-            for (int i = HurtIds.Count - 1; i >= 0; i--)
+            skillS.IsExcuteHurt = false;
+            skillS.UpdateCheckPoint(skillS.TheUnitFrom.Position);
+            for (int i = skillS.HurtIds.Count - 1; i >= 0; i--)
             {
-                Unit unit = this.TheUnitFrom.Domain.GetComponent<UnitComponent>().Get(HurtIds[i]);
+                Unit unit = skillS.TheUnitFrom.GetParent<UnitComponent>().Get(skillS.HurtIds[i]);
                 if (unit == null || unit.IsDisposed)
                 {
-                    HurtIds.RemoveAt(i);
+                    skillS.HurtIds.RemoveAt(i);
                     continue;
                 }
-                if (!this.CheckShape(unit.Position))
+                if (!skillS.CheckShape(unit.Position))
                 {
-                    unit.GetComponent<BuffManagerComponent>().BuffRemoveByUnit(0, SkillConf.BuffID[0]);
-                    this.HurtIds.RemoveAt(i);
+                    unit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, skillS.SkillConf.BuffID[0]);
+                    skillS.HurtIds.RemoveAt(i);
                     continue;
                 }
                 if (!unit.IsCanBeAttack())
                 {
-                    this.HurtIds.RemoveAt(i);
+                    skillS.HurtIds.RemoveAt(i);
                     continue;
                 }
             }
-            this.CheckChiXuHurt();
+            skillS.CheckChiXuHurt();
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            this.Clear();
+            skillS.Clear();
         }
 
     }

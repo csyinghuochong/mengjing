@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Unity.Mathematics;
+
 namespace ET.Server
 {
     //牵引拉怪
@@ -7,31 +9,31 @@ namespace ET.Server
         //初始化
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
 
-            if (this.SkillConf.SkillMoveSpeed == 0f)
+            if (skillS.SkillConf.SkillMoveSpeed == 0f)
             {
-                this.NowPosition = this.TargetPosition;
+                skillS.NowPosition = skillS.TargetPosition;
             }
             else
             {
-                this.NowPosition = theUnitFrom.Position;
-                Quaternion rotation = Quaternion.Euler(0, skillId.TargetAngle, 0); //按照Z轴旋转30度的Quaterion
-                Vector3 movePosition = rotation * Vector3.forward * (this.SkillConf.SkillLiveTime * (float)(this.SkillConf.SkillMoveSpeed) * 0.001f);
-                this.TargetPosition = this.NowPosition + movePosition;
+                skillS.NowPosition = theUnitFrom.Position;
+                quaternion rotation = quaternion.Euler(0, skillS.SkillInfo.TargetAngle, 0); //按照Z轴旋转30度的Quaterion
+                float3 movePosition = math.mul( rotation , new float3(0,1,0)  )* (skillS.SkillConf.SkillLiveTime * (float)(skillS.SkillConf.SkillMoveSpeed) * 0.001f);
+                skillS.TargetPosition = skillS.NowPosition + movePosition;
             }
-            OnExecute();
+            skillS.OnExecute();
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            this.InitSelfBuff();
-            this.OnUpdate();
+            skillS.InitSelfBuff();
+            this.OnUpdate(skillS, 0);
         }
 
-        public void UpdatePullPlayer()
+        public void UpdatePullPlayer(SkillS skillS)
         {
-            List<Unit> players = AIHelp.GetEnemyUnit(this.TheUnitFrom, UnitType.Player, this.NowPosition, (float)(2f * this.SkillConf.DamgeRange[0]));
+            List<Unit> players = AIHelp.GetEnemyUnit(skillS.TheUnitFrom, UnitType.Player, skillS.NowPosition, (float)(2f * skillS.SkillConf.DamgeRange[0]));
             for (int i = players.Count - 1; i >= 0; i--)
             {
                 Unit unit = players[i];
@@ -40,47 +42,47 @@ namespace ET.Server
                     continue;
                 }
 
-                if (this.LastHurtTimes.ContainsKey(players[i].Id))
+                if (skillS.LastHurtTimes.ContainsKey(players[i].Id))
                 {
                     continue;
                 }
-                this.LastHurtTimes.Add(players[i].Id, TimeHelper.ServerNow());
+                skillS.LastHurtTimes.Add(players[i].Id, TimeHelper.ServerNow());
                 BuffData buffData_2 = new BuffData();
-                buffData_2.SkillId = this.SkillConf.Id;
+                buffData_2.SkillId = skillS.SkillConf.Id;
                 buffData_2.BuffId = 99002001;
-                unit.GetComponent<BuffManagerComponent>().BuffFactory(buffData_2, unit, null);
-                unit.GetComponent<StateComponent>().StateTypeAdd(StateTypeEnum.BePulled);
+                unit.GetComponent<BuffManagerComponentS>().BuffFactory(buffData_2, unit, null);
+                unit.GetComponent<StateComponentS>().StateTypeAdd(StateTypeEnum.BePulled);
                 players[i].Stop(0);
-                players[i].FindPathMoveToAsync(this.NowPosition, null, false).Coroutine();
+                players[i].FindPathMoveToAsync(skillS.NowPosition).Coroutine();
             }
 
             List<long> removeIds = new List<long>();
-            foreach ((long uid, long time) in this.LastHurtTimes)
+            foreach ((long uid, long time) in skillS.LastHurtTimes)
             {
-                Unit unit = this.TheUnitFrom.GetParent<UnitComponent>().Get(uid);
+                Unit unit = skillS.TheUnitFrom.GetParent<UnitComponent>().Get(uid);
                 if (unit == null)
                 {
                     removeIds.Add(uid);
                     continue;
                 }
               
-                if (Vector3.Distance(unit.Position, this.NowPosition) > (float)(2f * this.SkillConf.DamgeRange[0]))
+                if (PositionHelper.Distance2D(unit.Position, skillS.NowPosition) > (float)(2f * skillS.SkillConf.DamgeRange[0]))
                 {
-                    unit.GetComponent<BuffManagerComponent>().BuffRemoveByUnit(0, 99002001);
-                    unit.GetComponent<StateComponent>().StateTypeRemove(StateTypeEnum.BePulled);
+                    unit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, 99002001);
+                    unit.GetComponent<StateComponentS>().StateTypeRemove(StateTypeEnum.BePulled);
                     removeIds.Add(uid);
                     continue;
                 }
             }
             for (int i = 0; i < removeIds.Count; i++)
             {
-                this.LastHurtTimes.Remove(removeIds[i]);
+                skillS.LastHurtTimes.Remove(removeIds[i]);
             }
         }
 
-        public void UpdatePullMonster()
+        public void UpdatePullMonster(SkillS skillS)
         {
-            List<Unit> monsters = AIHelp.GetEnemyMonsters(this.TheUnitFrom, this.NowPosition, (float)(2f *this.SkillConf.DamgeRange[0]));
+            List<Unit> monsters = AIHelp.GetEnemyMonsters(skillS.TheUnitFrom, skillS.NowPosition, (float)(2f *skillS.SkillConf.DamgeRange[0]));
             for (int i = monsters.Count - 1; i >= 0; i--)
             {
                 Unit unit = monsters[i];
@@ -89,27 +91,27 @@ namespace ET.Server
                 {
                     continue;
                 }
-                if (this.LastHurtTimes.ContainsKey(monsters[i].Id))
+                if (skillS.LastHurtTimes.ContainsKey(monsters[i].Id))
                 {
                     continue;
                 }
 
-                this.LastHurtTimes.Add(monsters[i].Id, TimeHelper.ServerNow());
+                skillS.LastHurtTimes.Add(monsters[i].Id, TimeHelper.ServerNow());
                 BuffData buffData_2 = new BuffData();
-                buffData_2.SkillId = this.SkillConf.Id;
+                buffData_2.SkillId = skillS.SkillConf.Id;
                 buffData_2.BuffId = 99002001;
-                unit.GetComponent<BuffManagerComponent>().BuffFactory(buffData_2, unit, null);
-                unit.GetComponent<StateComponent>().StateTypeAdd(StateTypeEnum.BePulled);
+                unit.GetComponent<BuffManagerComponentS>().BuffFactory(buffData_2, unit, null);
+                unit.GetComponent<StateComponentS>().StateTypeAdd(StateTypeEnum.BePulled);
                 aIComponent.TargetPoint.Clear();
-                aIComponent.TargetPoint.Add(this.NowPosition);
+                aIComponent.TargetPoint.Add(skillS.NowPosition);
                 monsters[i].Stop(0);
                 aIComponent.AIConfigId = 9;   //牵引AI
             }
 
             List<long> removeIds = new List<long>();
-            foreach((long uid, long time) in this.LastHurtTimes)
+            foreach((long uid, long time) in skillS.LastHurtTimes)
             {
-                Unit unit = this.TheUnitFrom.GetParent<UnitComponent>().Get(uid);
+                Unit unit = skillS.TheUnitFrom.GetParent<UnitComponent>().Get(uid);
                 if (unit == null)
                 {
                     removeIds.Add(uid);
@@ -122,10 +124,10 @@ namespace ET.Server
                     continue;
                 }
                 
-                if (Vector3.Distance(unit.Position, this.NowPosition) > (float)(2f * this.SkillConf.DamgeRange[0]))
+                if (PositionHelper.Distance2D(unit.Position, skillS.NowPosition) > (float)(2f * skillS.SkillConf.DamgeRange[0]))
                 {
-                    unit.GetComponent<BuffManagerComponent>().BuffRemoveByUnit(0, 99002001);
-                    unit.GetComponent<StateComponent>().StateTypeRemove(StateTypeEnum.BePulled);
+                    unit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, 99002001);
+                    unit.GetComponent<StateComponentS>().StateTypeRemove(StateTypeEnum.BePulled);
                     aIComponent.TargetPoint.Clear();
                     removeIds.Add(uid);
                     continue;
@@ -146,20 +148,20 @@ namespace ET.Server
                 //float angle_1 = Mathf.Rad2Deg(Mathf.Atan2(v1.x, v1.y));
                 //float angle_2 = Mathf.Rad2Deg(Mathf.Atan2(v2.x, v2.y));
                 //Log.Debug($" angle:  {angle_1} { angle_2}  {angle}");
-                aIComponent.TargetPoint[0] = this.NowPosition;
+                aIComponent.TargetPoint[0] = skillS.NowPosition;
             }
 
             for (int i = 0; i < removeIds.Count; i++)
             { 
-                this.LastHurtTimes.Remove(removeIds[i]);    
+                skillS.LastHurtTimes.Remove(removeIds[i]);    
             }
         }
 
-        public void FinishPullUnits()
+        public void FinishPullUnits(SkillS skillS)
         {
-            foreach( (long unitid, long htime) in this.LastHurtTimes)
+            foreach( (long unitid, long htime) in skillS.LastHurtTimes)
             {
-                Unit unit = this.TheUnitFrom.GetParent<UnitComponent>().Get(unitid);
+                Unit unit = skillS.TheUnitFrom.GetParent<UnitComponent>().Get(unitid);
                 if (unit == null)
                 {
                     continue;
@@ -172,58 +174,59 @@ namespace ET.Server
                     {
                         continue;
                     }
-                    unit.GetComponent<BuffManagerComponent>().BuffRemoveByUnit(0, 99002001);
-                    unit.GetComponent<StateComponent>().StateTypeRemove(StateTypeEnum.BePulled);
+                    unit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, 99002001);
+                    unit.GetComponent<StateComponentS>().StateTypeRemove(StateTypeEnum.BePulled);
                     aIComponent.TargetPoint.Clear();
                 }
                 else
                 {
-                    unit.GetComponent<BuffManagerComponent>().BuffRemoveByUnit(0, 99002001);
-                    unit.GetComponent<StateComponent>().StateTypeRemove(StateTypeEnum.BePulled);
+                    unit.GetComponent<BuffManagerComponentS>().BuffRemoveByUnit(0, 99002001);
+                    unit.GetComponent<StateComponentS>().StateTypeRemove(StateTypeEnum.BePulled);
                 }
             }
-            this.HurtIds.Clear();
-            this.LastHurtTimes.Clear();
+            skillS.HurtIds.Clear();
+            skillS.LastHurtTimes.Clear();
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
             long serverNow = TimeHelper.ServerNow();
             //根据技能效果延迟触发伤害
-            if (serverNow < this.SkillExcuteHurtTime)
+            if (serverNow < skillS.SkillExcuteHurtTime)
             {
                 return;
             }
-            Vector3 dir = (this.TargetPosition - NowPosition).normalized;
-            float dis = PositionHelper.Distance2D(NowPosition, this.TargetPosition);
-            float move = (float)this.SkillConf.SkillMoveSpeed * 0.1f;            //服务器0.1秒一帧
-            move = Mathf.Min(dis, move);
-            this.NowPosition = this.NowPosition + move * dir;
-            this.NowPosition.y = this.TargetPosition.y + 0.5f;
+            float3 dir = math.normalize(skillS.TargetPosition - skillS.NowPosition);
+            float dis = PositionHelper.Distance2D(skillS.NowPosition, skillS.TargetPosition);
+            float move = (float)skillS.SkillConf.SkillMoveSpeed * 0.1f;            //服务器0.1秒一帧
+            move = math.min(dis, move);
+            
+            float3 nowposition = skillS.NowPosition + move * dir;
+            skillS.NowPosition = new float3(nowposition.x, skillS.TargetPosition.y + 0.5f, nowposition.z);
 
-            this.UpdatePullMonster();
-            if(this.SkillConf.GameObjectParameter == "1")
+            this.UpdatePullMonster(skillS);
+            if(skillS.SkillConf.GameObjectParameter == "1")
             {
-                this.UpdatePullPlayer();
+                this.UpdatePullPlayer(skillS);
             }
 
-            this.UpdateCheckPoint(this.NowPosition);
-            this.IsExcuteHurt = false;
-            this.BaseOnUpdate();
+            skillS.UpdateCheckPoint(skillS.NowPosition);
+            skillS.IsExcuteHurt = false;
+            skillS.BaseOnUpdate();
             //获取目标与自身的距离是否小于0.5f,小于触发将伤害,销毁自身
-            dis = PositionHelper.Distance2D(NowPosition, this.TargetPosition);
-            if (this.SkillConf.SkillMoveSpeed > 0f && dis < 0.5f)
+            dis = PositionHelper.Distance2D(skillS.NowPosition, skillS.TargetPosition);
+            if (skillS.SkillConf.SkillMoveSpeed > 0f && dis < 0.5f)
             {
-                this.SetSkillState(SkillState.Finished);
+                skillS.SetSkillState(SkillState.Finished);
             }
 
-            this.CheckChiXuHurt();
+            skillS.CheckChiXuHurt();
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            this.FinishPullUnits();
-            this.Clear();
+            this.FinishPullUnits(skillS);
+            skillS.Clear();
         }
     }
 }

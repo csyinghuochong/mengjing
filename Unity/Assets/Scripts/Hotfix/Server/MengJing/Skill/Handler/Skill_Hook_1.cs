@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Unity.Mathematics;
+
 namespace ET.Server
 {
 
@@ -8,31 +10,31 @@ namespace ET.Server
         //初始化
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
-            this.TheUnitTarget = this.TheUnitFrom.GetParent<UnitComponent>().Get(this.SkillInfo.TargetID);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
+            skillS.TheUnitTarget = skillS.TheUnitFrom.GetParent<UnitComponent>().Get(skillS.SkillInfo.TargetID);
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            this.InitSelfBuff();
+            skillS.InitSelfBuff();
 
-            Vector3 dir = (this.TheUnitTarget.Position - this.TheUnitFrom.Position ).normalized;
+            float3 dir = math.normalize(skillS.TheUnitTarget.Position - skillS.TheUnitFrom.Position );
 
-            this.TheUnitTarget.GetComponent<MoveComponent>().Clear();
-            this.TheUnitTarget.Position = dir * Vector3.one + this.TheUnitFrom.Position;
-            this.TheUnitTarget.Stop(-2);
+            skillS.TheUnitTarget.GetComponent<MoveComponent>().Stop(true);
+            skillS.TheUnitTarget.Position =  math.mul(dir, new float3(1,1,1)) + skillS.TheUnitFrom.Position;
+            skillS.TheUnitTarget.Stop(-2);
 
-            this.OnUpdate();
+            this.OnUpdate(skillS, 0);
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
-            this.BaseOnUpdate();
+            skillS.BaseOnUpdate();
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            this.Clear();
+            skillS.Clear();
         }
     }
 }

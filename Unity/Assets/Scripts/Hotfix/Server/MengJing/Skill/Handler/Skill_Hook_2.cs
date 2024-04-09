@@ -1,5 +1,7 @@
 ﻿using NLog.Targets;
 using System.Collections.Generic;
+using Unity.Mathematics;
+
 namespace ET.Server
 {
     //钩子技能:指定范围
@@ -7,48 +9,48 @@ namespace ET.Server
     {
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            this.InitSelfBuff();
+            skillS.InitSelfBuff();
 
-            List<Unit> units = this.TheUnitFrom.GetParent<UnitComponent>().GetAll();
+            List<Unit> units = skillS.TheUnitFrom.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
                 Unit unit = units[i];
-                if (unit.IsDisposed || this.TheUnitFrom.Id == unit.Id)
+                if (unit.IsDisposed || skillS.TheUnitFrom.Id == unit.Id)
                 {
                     continue;
                 }
-                if (!this.CheckShape(unit.Position))
+                if (!skillS.CheckShape(unit.Position))
                 {
                     continue;
                 }
 
-                if (!this.TheUnitFrom.IsCanAttackUnit(unit))
+                if (!skillS.TheUnitFrom.IsCanAttackUnit(unit))
                 {
                     continue;
                 }
-                Vector3 dir = (unit.Position - this.TheUnitFrom.Position).normalized;
+                float3 dir = math.normalize(unit.Position - skillS.TheUnitFrom.Position);
 
-                unit.GetComponent<MoveComponent>().Clear();
-                unit.Position = dir * Vector3.one + this.TheUnitFrom.Position;
+                unit.GetComponent<MoveComponent>().Stop(true);
+                unit.Position = math.mul(dir ,new float3(1,1,1)) + skillS.TheUnitFrom.Position;
                 unit.Stop(-2);
             }
 
-            this.OnUpdate();
+            this.OnUpdate(skillS, 0);
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
-            this.BaseOnUpdate();
+            skillS.BaseOnUpdate();
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            this.Clear();
+            skillS.Clear();
         }
     }
 }

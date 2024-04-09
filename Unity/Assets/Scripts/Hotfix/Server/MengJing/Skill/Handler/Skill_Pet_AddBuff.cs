@@ -9,60 +9,60 @@ namespace ET.Server
 
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
         }
 
-        public Unit GetPetOrMaster()
+        public Unit GetPetOrMaster(SkillS skillS)
         {
-            if (this.TheUnitFrom.Type == UnitType.Pet)
+            if (skillS.TheUnitFrom.Type == UnitType.Pet)
             {
-                long unitid = this.TheUnitFrom.GetComponent<NumericComponent>().GetAsLong(NumericType.MasterId);
-                return this.TheUnitFrom.GetParent<UnitComponent>().Get(unitid);
+                long unitid = skillS.TheUnitFrom.GetComponent<NumericComponentS>().GetAsLong(NumericType.MasterId);
+                return skillS.TheUnitFrom.GetParent<UnitComponent>().Get(unitid);
             }
-            else if (this.TheUnitFrom.Type == UnitType.Player)
+            else if (skillS.TheUnitFrom.Type == UnitType.Player)
             {
-                RolePetInfo rolePetInfo = this.TheUnitFrom.GetComponent<PetComponent>().GetFightPet();
-                return rolePetInfo == null ? null : this.TheUnitFrom.GetParent<UnitComponent>().Get(rolePetInfo.Id);
+                RolePetInfo rolePetInfo = skillS.TheUnitFrom.GetComponent<PetComponentS>().GetFightPet();
+                return rolePetInfo == null ? null : skillS.TheUnitFrom.GetParent<UnitComponent>().Get(rolePetInfo.Id);
             }
             return null;
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            Unit other = GetPetOrMaster();
+            Unit other = GetPetOrMaster(skillS);
 
             //触发初始化BUFF
-            if (SkillConf.InitBuffID[0] != 0)
+            if (skillS.SkillConf.InitBuffID[0] != 0)
             {
-                for (int y = 0; y < SkillConf.InitBuffID.Length; y++)
+                for (int y = 0; y < skillS.SkillConf.InitBuffID.Length; y++)
                 {
-                    this.SkillBuff(SkillConf.InitBuffID[y], TheUnitFrom);
-                    this.SkillBuff(SkillConf.InitBuffID[y], other);
+                    skillS.SkillBuff(skillS.SkillConf.InitBuffID[y], skillS.TheUnitFrom);
+                    skillS.SkillBuff(skillS.SkillConf.InitBuffID[y], other);
                 }
             }
 
-            SkillSetComponent skillSetComponent = TheUnitFrom.GetComponent<SkillSetComponent>();
-            List<int> buffInitAdd = skillSetComponent != null ? skillSetComponent.GetBuffInitIdAdd(SkillConf.Id) : null;
+            SkillSetComponentS skillSetComponent = skillS.TheUnitFrom.GetComponent<SkillSetComponentS>();
+            List<int> buffInitAdd = skillSetComponent != null ? skillSetComponent.GetBuffInitIdAdd(skillS.SkillConf.Id) : null;
             if (buffInitAdd != null)
             {
                 for (int i = 0; i < buffInitAdd.Count; i++)
                 {
-                    this.SkillBuff(buffInitAdd[i], TheUnitFrom);
-                    this.SkillBuff(buffInitAdd[i], other);
+                    skillS.SkillBuff(buffInitAdd[i], skillS.TheUnitFrom);
+                    skillS.SkillBuff(buffInitAdd[i], other);
                 }
             }
 
-            this.OnUpdate();
+            this.OnUpdate(skillS, 0);
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS,int updateMod3)
         {
-            this.BaseOnUpdate();
+            skillS.BaseOnUpdate();
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            this.Clear();
+            skillS.Clear();
         }
 
     }

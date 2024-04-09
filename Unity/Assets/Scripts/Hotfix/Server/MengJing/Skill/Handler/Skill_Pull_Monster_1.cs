@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Unity.Mathematics;
+
 namespace ET.Server
 {
 
@@ -8,18 +10,18 @@ namespace ET.Server
         //初始化
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
-            this.NowPosition = theUnitFrom.Position;
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
+            skillS.NowPosition = theUnitFrom.Position;
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            this.OnUpdate();
+            this.OnUpdate(skillS, 0);
         }
 
-        public void InitPullMonster()
+        public void InitPullMonster(SkillS skillS)
         {
-            List<Unit> monsters = AIHelp.GetEnemyMonsters(this.TheUnitFrom, this.TargetPosition, (float)(this.SkillConf.DamgeRange[0])*2);
+            List<Unit> monsters = AIHelp.GetEnemyMonsters(skillS.TheUnitFrom, skillS.TargetPosition, (float)(skillS.SkillConf.DamgeRange[0])*2);
          
             for (int i = 0; i < monsters.Count; i++)
             {
@@ -29,35 +31,35 @@ namespace ET.Server
                 {
                     continue;
                 }
-                Vector3 dir = (unit.Position - this.TargetPosition).normalized;
-                unit.GetComponent<MoveComponent>().Stop();
-                unit.Position = this.TargetPosition + dir * Vector3.one;
+                float3 dir = math.normalize(unit.Position - skillS.TargetPosition);
+                unit.GetComponent<MoveComponent>().Stop(true);
+                unit.Position = skillS.TargetPosition + math.mul(dir , new float3(1,1,1));
                 unit.Stop(-2);
             }
         }
 
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
             long serverNow = TimeHelper.ServerNow();
 
             //根据技能效果延迟触发伤害
-            if (serverNow < this.SkillExcuteHurtTime)
+            if (serverNow < skillS.SkillExcuteHurtTime)
             {
                 return;
             }
             //只触发一次，需要多次触发的重写
-            if (!this.IsExcuteHurt)
+            if (!skillS.IsExcuteHurt)
             {
-                this.InitPullMonster();
+                InitPullMonster(skillS);
             }
-            this.BaseOnUpdate();
-            this.CheckChiXuHurt();
+            skillS.BaseOnUpdate();
+            skillS.CheckChiXuHurt();
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            this.Clear();
+            skillS.Clear();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using Unity.Mathematics;
+
+namespace ET.Server
 {
 
     //创建怪物矩阵
@@ -7,12 +9,12 @@
         //初始化
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            string gameObjectParameter = this.SkillConf.GameObjectParameter;
+            string gameObjectParameter = skillS.SkillConf.GameObjectParameter;
             //召唤ID；是否复刻玩家形象（0不是，1是）；行数量，列数量；行间距，列间距；血量比例,攻击比例,魔法比例,物防比例，魔防比例；血量固定值,攻击固定值，魔法固定值，物防固定值，魔防固定值
             //'90000001;1;3,4;1,1;0.5,0.5,0.5,0.5,0.5;0,0,0,0,0
             //'90000101;0;3,4;2,2;0.5,0.5,0.5,0.5,0.5;0,0,0,0,0
@@ -35,7 +37,7 @@
 
             if (rowNumber * columnNumber > 100)
             {
-                Log.Error($"Skill_MonsterMatrix: {this.SkillConf.Id}");
+                Log.Error($"Skill_MonsterMatrix: {skillS.SkillConf.Id}");
                 return;
             }
 
@@ -43,17 +45,17 @@
             {
                 for (int z = 0; z < columnNumber; z++)
                 {
-                    float newX = this.TargetPosition.x + (x - centerX) * rowSpace;     
-                    float newZ = this.TargetPosition.z + (z - centerZ) * columnSpace; 
-                    Vector3 createVector3 = new Vector3(newX, this.TargetPosition.y, newZ);
-                    Unit unit = UnitFactory.CreateMonster(this.TheUnitFrom.DomainScene(), monsterId, createVector3,
+                    float newX = skillS.TargetPosition.x + (x - centerX) * rowSpace;     
+                    float newZ = skillS.TargetPosition.z + (z - centerZ) * columnSpace; 
+                    float3 createVector3 = new float3(newX, skillS.TargetPosition.y, newZ);
+                    Unit unit = UnitFactory.CreateMonster(skillS.TheUnitFrom.Scene(), monsterId, createVector3,
                         new CreateMonsterInfo()
                         {
-                            Camp = this.TheUnitFrom.GetBattleCamp(),
-                            MasterID = this.TheUnitFrom.Id,
+                            Camp = skillS.TheUnitFrom.GetBattleCamp(),
+                            MasterID = skillS.TheUnitFrom.Id,
                             AttributeParams = summonParList[1] + ";" + summonParList[4] + ";" + summonParList[5]
                         });
-                    this.TheUnitFrom.GetComponent<UnitInfoComponent>().ZhaohuanIds.Add(unit.Id);
+                    skillS.TheUnitFrom.GetComponent<UnitInfoComponent>().ZhaohuanIds.Add(unit.Id);
 
                     curNumber++;
                     if (curNumber >= maxNumber)
@@ -63,17 +65,17 @@
                 }
             }
 
-            this.OnUpdate();
+            OnUpdate(skillS, 0);
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
-            this.BaseOnUpdate();
+            skillS.BaseOnUpdate();
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            this.Clear();
+            skillS.Clear();
         }
     }
 }

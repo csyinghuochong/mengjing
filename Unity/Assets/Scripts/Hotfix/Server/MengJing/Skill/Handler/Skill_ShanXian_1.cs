@@ -7,60 +7,60 @@
 
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            if (this.SkillConf.GameObjectParameter == "0")
+            if (skillS.SkillConf.GameObjectParameter == "0")
             {
                 //先跳过去再触发伤害
-                this.SyncPostion();
-                this.InitSelfBuff();
+                this.SyncPostion(skillS);
+                skillS.InitSelfBuff();
             }
             else
             {
                 //先触发伤害再跳过去
-                this.UpdateCheckPoint(this.TheUnitFrom.Position);
-                this.InitSelfBuff();
+                skillS.UpdateCheckPoint(skillS.TheUnitFrom.Position);
+                skillS.InitSelfBuff();
             }
 
-            this.OnUpdate();
+            this.OnUpdate(skillS, 0);
         }
 
-        public void SyncPostion()
+        public void SyncPostion(SkillS skillS)
         {
-            if (this.TheUnitFrom.GetComponent<StateComponent>().CanMove() == ErrorCode.ERR_Success)
+            if (skillS.TheUnitFrom.GetComponent<StateComponentS>().CanMove() == ErrorCode.ERR_Success)
             {
-                TheUnitFrom.Position = this.TargetPosition;
-                TheUnitFrom.Stop(-3);
+                skillS.TheUnitFrom.Position = skillS.TargetPosition;
+                skillS.TheUnitFrom.Stop(-3);
             }
             else
             {
-                Log.Debug($"FsmStateEnum.ShanXian被定[S] {TargetPosition}");
+                Log.Debug($"FsmStateEnum.ShanXian被定[S] {skillS.TargetPosition}");
             }
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
             long serverNow = TimeHelper.ServerNow();
             //根据技能效果延迟触发伤害
-            if (serverNow < this.SkillExcuteHurtTime)
+            if (serverNow < skillS.SkillExcuteHurtTime)
             {
                 return;
             }
 
-            this.BaseOnUpdate();
-            if (this.SkillConf.GameObjectParameter == "1"  && serverNow > this.SkillExcuteHurtTime)
+            skillS.BaseOnUpdate();
+            if (skillS.SkillConf.GameObjectParameter == "1"  && serverNow > skillS.SkillExcuteHurtTime)
             {
-                this.SyncPostion();
-                this.SetSkillState( SkillState.Finished);
+                this.SyncPostion(skillS);
+                skillS.SetSkillState( SkillState.Finished);
             }
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            this.Clear();
+            skillS.Clear();
         }
     }
 }

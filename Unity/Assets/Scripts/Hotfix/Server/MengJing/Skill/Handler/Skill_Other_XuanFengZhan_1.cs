@@ -10,42 +10,42 @@ namespace ET.Server
       
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
-            this.SkillTriggerLastTime = TimeHelper.ServerNow();
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
+            skillS.SkillTriggerLastTime = TimeHelper.ServerNow();
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            this.InitSelfBuff();
+            skillS.InitSelfBuff();
 
-            this.OnUpdate();
+            this.OnUpdate(skillS, 0);
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
             //每间隔一段时间触发一次伤害
             long serverNow = TimeHelper.ServerNow();
-            if (serverNow - this.SkillTriggerLastTime >= 250)
+            if (serverNow - skillS.SkillTriggerLastTime >= 250)
             {
-                SkillTriggerLastTime = TimeHelper.ServerNow();
-                HurtIds.Clear();
-                this.UpdateCheckPoint(this.TheUnitFrom.Position);
-                this.ExcuteSkillAction();
+                skillS.SkillTriggerLastTime = TimeHelper.ServerNow();
+                skillS.HurtIds.Clear();
+                skillS.UpdateCheckPoint(skillS.TheUnitFrom.Position);
+                skillS.ExcuteSkillAction();
             }
 
             //技能存在时间
-            if (serverNow > this.SkillEndTime)
+            if (serverNow > skillS.SkillEndTime)
             {
-                this.SetSkillState(SkillState.Finished);
+                skillS.SetSkillState(SkillState.Finished);
                 return;
             }
 
-            this.CheckChiXuHurt();
+            skillS.CheckChiXuHurt();
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            this.Clear();
+            skillS.Clear();
         }
     }
 }
