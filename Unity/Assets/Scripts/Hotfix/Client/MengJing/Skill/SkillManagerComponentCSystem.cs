@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+using Unity.Mathematics;
 
 namespace ET.Client
 {
@@ -333,18 +332,18 @@ namespace ET.Client
                 Unit target = unit.GetParent<UnitComponent>().Get(skillcmd.SkillInfos[0].TargetID);
                 if (target != null)
                 {
-                    Vector3 direction = target.Position - unit.Position;
-                    float ange = Mathf.Rad2Deg * Mathf.Atan2(direction.x, direction.z);
-                    unit.Rotation = Quaternion.Euler(0, ange, 0);
+                    float3 direction = target.Position - unit.Position;
+                    float ange = 0;// math.Rad2Deg * Mathf.Atan2(direction.x, direction.z);
+                    unit.Rotation = quaternion.Euler(0, ange, 0);
                 }
                 else
                 {
-                    unit.Rotation = Quaternion.Euler(0, skillcmd.TargetAngle, 0);
+                    unit.Rotation = quaternion.Euler(0, skillcmd.TargetAngle, 0);
                 }
             }
             else
             {
-                unit.Rotation = Quaternion.Euler(0, skillcmd.TargetAngle, 0);
+                unit.Rotation = quaternion.Euler(0, skillcmd.TargetAngle, 0);
             }
 
             //播放对应攻击动作
