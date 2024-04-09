@@ -39,6 +39,7 @@ namespace ET.Client
             {
                 case 0:
                     self.View.ES_ChengJiuReward.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_ChengJiuReward.OnUpdateUI();
                     break;
                 case 1:
                     self.View.ES_ChengJiuShow.uiTransform.gameObject.SetActive(true);

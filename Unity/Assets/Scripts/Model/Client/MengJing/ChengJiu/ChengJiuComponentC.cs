@@ -6,7 +6,7 @@ namespace ET.Client
     [ComponentOf(typeof(Scene))]
     public class ChengJiuComponentC: Entity, IAwake, IDestroy
     {
-        public int TotalChengJiuPoint = 0;
+        public int TotalChengJiuPoint { get; set; } = 0;
         public List<int> AlreadReceivedId { get; set; } = new List<int>();
         public List<int> ChengJiuCompleteList = new List<int>();
         public List<int> JingLingList = new List<int>();
