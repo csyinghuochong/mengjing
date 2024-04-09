@@ -2,11 +2,9 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-    
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_AccountWarehousOperateHandler: MessageLocationHandler<Unit, C2M_AccountWarehousOperateRequest, M2C_AccountWarehousOperateResponse>
     {
-        
         protected override async ETTask Run(Unit unit, C2M_AccountWarehousOperateRequest request, M2C_AccountWarehousOperateResponse response)
         {
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Buy, unit.Id))
@@ -17,7 +15,7 @@ namespace ET.Server
                     response.Error = ErrorCode.ERR_NetWorkError;
                     return;
                 }
-                
+
                 BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
                 switch (request.OperatateType)
                 {
