@@ -124,7 +124,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001704819200003899}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce71017a2903f7c4c9a699e438d0b897, type: 3}
   m_Name: 
@@ -545,7 +545,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4050343937527273288}
   - component: {fileID: 5604722445213462582}
-  - component: {fileID: 8063945690709209892}
   m_Layer: 0
   m_Name: Item_ChengJiuTypeItem
   m_TagString: Untagged
@@ -576,8 +575,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 680, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 680, y: 100}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &5604722445213462582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,23 +600,3 @@ MonoBehaviour:
     gameObject: {fileID: 7880667302660836882}
   - key: UIChengJiuTypeItem
     gameObject: {fileID: 0}
---- !u!114 &8063945690709209892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8875234703022490205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1

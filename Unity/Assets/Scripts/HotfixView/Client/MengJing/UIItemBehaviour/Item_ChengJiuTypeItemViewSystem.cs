@@ -27,6 +27,13 @@ namespace ET.Client
             self.ShowChapter.Clear();
             self.ShowChapter.AddRange(self.Root().GetComponent<ChengJiuComponentC>().GetChaptersByType(self.ChengJiuTypeId));
 
+            // 设置高度
+            self.uiTransform.GetComponent<RectTransform>().sizeDelta = new Vector2(700, 70f + 176 * self.ShowChapter.Count);
+            self.E_ChengJiuTypeItemItemsLoopVerticalScrollRect.transform.GetComponent<RectTransform>().sizeDelta =
+                    new Vector2(700, 176 * self.ShowChapter.Count);
+            // 刷新一下父物体
+            LayoutRebuilder.ForceRebuildLayoutImmediate(self.uiTransform.parent.GetComponent<RectTransform>());
+
             self.AddUIScrollItems(ref self.ScrollItemChengJiuTypeItemItems, self.ShowChapter.Count);
             self.E_ChengJiuTypeItemItemsLoopVerticalScrollRect.SetVisible(true, self.ShowChapter.Count);
 
@@ -58,6 +65,11 @@ namespace ET.Client
 
         public static void UnSelectedAll(this Scroll_Item_ChengJiuTypeItem self)
         {
+            if (self.ScrollItemChengJiuTypeItemItems == null)
+            {
+                return;
+            }
+
             for (int i = 0; i < self.ScrollItemChengJiuTypeItemItems.Count; i++)
             {
                 if (self.ScrollItemChengJiuTypeItemItems[i].uiTransform != null)
@@ -65,6 +77,13 @@ namespace ET.Client
                     self.ScrollItemChengJiuTypeItemItems[i].SetSelected(-1);
                 }
             }
+
+            // 设置高度
+            self.uiTransform.GetComponent<RectTransform>().sizeDelta = new Vector2(700, 70f);
+            self.E_ChengJiuTypeItemItemsLoopVerticalScrollRect.transform.GetComponent<RectTransform>().sizeDelta =
+                    new Vector2(700, 0);
+            // 刷新一下父物体
+            LayoutRebuilder.ForceRebuildLayoutImmediate(self.uiTransform.parent.GetComponent<RectTransform>());
         }
 
         public static void OnClickTaskTypeItem(this Scroll_Item_ChengJiuTypeItem self, int chapterid)
