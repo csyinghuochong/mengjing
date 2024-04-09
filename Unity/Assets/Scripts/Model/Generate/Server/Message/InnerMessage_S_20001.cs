@@ -1737,6 +1737,646 @@ namespace ET
 
 	}
 
+//喂食物
+	[ResponseType(nameof(A2M_ActivityFeedResponse))]
+	[Message(InnerMessage.M2A_ActivityFeedRequest)]
+	[MemoryPackable]
+	public partial class M2A_ActivityFeedRequest: MessageObject, IRequest
+	{
+		public static M2A_ActivityFeedRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2A_ActivityFeedRequest), isFromPool) as M2A_ActivityFeedRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.A2M_ActivityFeedResponse)]
+	[MemoryPackable]
+	public partial class A2M_ActivityFeedResponse: MessageObject, IResponse
+	{
+		public static A2M_ActivityFeedResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2M_ActivityFeedResponse), isFromPool) as A2M_ActivityFeedResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int BaoShiDu { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.BaoShiDu = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(A2M_ActivityGuessResponse))]
+	[Message(InnerMessage.M2A_ActivityGuessRequest)]
+	[MemoryPackable]
+	public partial class M2A_ActivityGuessRequest: MessageObject, IRequest
+	{
+		public static M2A_ActivityGuessRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2A_ActivityGuessRequest), isFromPool) as M2A_ActivityGuessRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int GuessId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.GuessId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.A2M_ActivityGuessResponse)]
+	[MemoryPackable]
+	public partial class A2M_ActivityGuessResponse: MessageObject, IResponse
+	{
+		public static A2M_ActivityGuessResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2M_ActivityGuessResponse), isFromPool) as A2M_ActivityGuessResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(A2M_ActivitySelfInfo))]
+	[Message(InnerMessage.M2A_ActivitySelfInfo)]
+	[MemoryPackable]
+	public partial class M2A_ActivitySelfInfo: MessageObject, IRequest
+	{
+		public static M2A_ActivitySelfInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2A_ActivitySelfInfo), isFromPool) as M2A_ActivitySelfInfo; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.A2M_ActivitySelfInfo)]
+	[MemoryPackable]
+	public partial class A2M_ActivitySelfInfo: MessageObject, IResponse
+	{
+		public static A2M_ActivitySelfInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2M_ActivitySelfInfo), isFromPool) as A2M_ActivitySelfInfo; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<int> GuessIds { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public List<int> LastGuessReward { get; set; } = new();
+
+		[MemoryPackOrder(2)]
+		public int BaoShiDu { get; set; }
+
+		[MemoryPackOrder(3)]
+		public List<int> OpenGuessIds { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.GuessIds.Clear();
+			this.LastGuessReward.Clear();
+			this.BaoShiDu = default;
+			this.OpenGuessIds.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.M2A_FirstWinInfoMessage)]
+	[MemoryPackable]
+	public partial class M2A_FirstWinInfoMessage: MessageObject, IMessage
+	{
+		public static M2A_FirstWinInfoMessage Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2A_FirstWinInfoMessage), isFromPool) as M2A_FirstWinInfoMessage; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public FirstWinInfo FirstWinInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.FirstWinInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(A2M_MysteryBuyResponse))]
+	[Message(InnerMessage.M2A_MysteryBuyRequest)]
+	[MemoryPackable]
+	public partial class M2A_MysteryBuyRequest: MessageObject, IRequest
+	{
+		public static M2A_MysteryBuyRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2A_MysteryBuyRequest), isFromPool) as M2A_MysteryBuyRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public MysteryItemInfo MysteryItemInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.MysteryItemInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.A2M_MysteryBuyResponse)]
+	[MemoryPackable]
+	public partial class A2M_MysteryBuyResponse: MessageObject, IResponse
+	{
+		public static A2M_MysteryBuyResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2M_MysteryBuyResponse), isFromPool) as A2M_MysteryBuyResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(A2M_TurtleRecordResponse))]
+	[Message(InnerMessage.M2A_TurtleRecordRequest)]
+	[MemoryPackable]
+	public partial class M2A_TurtleRecordRequest: MessageObject, IRequest
+	{
+		public static M2A_TurtleRecordRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2A_TurtleRecordRequest), isFromPool) as M2A_TurtleRecordRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long AccountId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.AccountId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.A2M_TurtleRecordResponse)]
+	[MemoryPackable]
+	public partial class A2M_TurtleRecordResponse: MessageObject, IResponse
+	{
+		public static A2M_TurtleRecordResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2M_TurtleRecordResponse), isFromPool) as A2M_TurtleRecordResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int SupportId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public List<int> WinTimes { get; set; } = new();
+
+		[MemoryPackOrder(3)]
+		public List<int> SupportTimes { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.SupportId = default;
+			this.WinTimes.Clear();
+			this.SupportTimes.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(A2M_TurtleReportResponse))]
+	[Message(InnerMessage.M2A_TurtleReportRequest)]
+	[MemoryPackable]
+	public partial class M2A_TurtleReportRequest: MessageObject, IRequest
+	{
+		public static M2A_TurtleReportRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2A_TurtleReportRequest), isFromPool) as M2A_TurtleReportRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int TurtleId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.TurtleId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.A2M_TurtleReportResponse)]
+	[MemoryPackable]
+	public partial class A2M_TurtleReportResponse: MessageObject, IResponse
+	{
+		public static A2M_TurtleReportResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2M_TurtleReportResponse), isFromPool) as A2M_TurtleReportResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(A2M_TurtleSupportResponse))]
+	[Message(InnerMessage.M2A_TurtleSupportRequest)]
+	[MemoryPackable]
+	public partial class M2A_TurtleSupportRequest: MessageObject, IRequest
+	{
+		public static M2A_TurtleSupportRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2A_TurtleSupportRequest), isFromPool) as M2A_TurtleSupportRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int SupportId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long AccountId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UnitId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.SupportId = default;
+			this.AccountId = default;
+			this.UnitId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.A2M_TurtleSupportResponse)]
+	[MemoryPackable]
+	public partial class A2M_TurtleSupportResponse: MessageObject, IResponse
+	{
+		public static A2M_TurtleSupportResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2M_TurtleSupportResponse), isFromPool) as A2M_TurtleSupportResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(A2M_ZhanQuInfoResponse))]
+	[Message(InnerMessage.M2A_ZhanQuInfoRequest)]
+	[MemoryPackable]
+	public partial class M2A_ZhanQuInfoRequest: MessageObject, IRequest
+	{
+		public static M2A_ZhanQuInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2A_ZhanQuInfoRequest), isFromPool) as M2A_ZhanQuInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UserId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UserId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.A2M_ZhanQuInfoResponse)]
+	[MemoryPackable]
+	public partial class A2M_ZhanQuInfoResponse: MessageObject, IResponse
+	{
+		public static A2M_ZhanQuInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2M_ZhanQuInfoResponse), isFromPool) as A2M_ZhanQuInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<int> DayTeHui { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public List<ZhanQuReceiveNumber> ReceiveNum { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.DayTeHui.Clear();
+			this.ReceiveNum.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(A2M_ZhanQuReceiveResponse))]
+	[Message(InnerMessage.M2A_ZhanQuReceiveRequest)]
+	[MemoryPackable]
+	public partial class M2A_ZhanQuReceiveRequest: MessageObject, IRequest
+	{
+		public static M2A_ZhanQuReceiveRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2A_ZhanQuReceiveRequest), isFromPool) as M2A_ZhanQuReceiveRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ActivityType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ActivityId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UnitId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ActivityType = default;
+			this.ActivityId = default;
+			this.UnitId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.A2M_ZhanQuReceiveResponse)]
+	[MemoryPackable]
+	public partial class A2M_ZhanQuReceiveResponse: MessageObject, IResponse
+	{
+		public static A2M_ZhanQuReceiveResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2M_ZhanQuReceiveResponse), isFromPool) as A2M_ZhanQuReceiveResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -1790,5 +2430,24 @@ namespace ET
 		 public const ushort A2M_PetMingPlayerInfoResponse = 20050;
 		 public const ushort M2LocalDungeon_EnterRequest = 20051;
 		 public const ushort LocalDungeon2M_EnterResponse = 20052;
+		 public const ushort M2A_ActivityFeedRequest = 20053;
+		 public const ushort A2M_ActivityFeedResponse = 20054;
+		 public const ushort M2A_ActivityGuessRequest = 20055;
+		 public const ushort A2M_ActivityGuessResponse = 20056;
+		 public const ushort M2A_ActivitySelfInfo = 20057;
+		 public const ushort A2M_ActivitySelfInfo = 20058;
+		 public const ushort M2A_FirstWinInfoMessage = 20059;
+		 public const ushort M2A_MysteryBuyRequest = 20060;
+		 public const ushort A2M_MysteryBuyResponse = 20061;
+		 public const ushort M2A_TurtleRecordRequest = 20062;
+		 public const ushort A2M_TurtleRecordResponse = 20063;
+		 public const ushort M2A_TurtleReportRequest = 20064;
+		 public const ushort A2M_TurtleReportResponse = 20065;
+		 public const ushort M2A_TurtleSupportRequest = 20066;
+		 public const ushort A2M_TurtleSupportResponse = 20067;
+		 public const ushort M2A_ZhanQuInfoRequest = 20068;
+		 public const ushort A2M_ZhanQuInfoResponse = 20069;
+		 public const ushort M2A_ZhanQuReceiveRequest = 20070;
+		 public const ushort A2M_ZhanQuReceiveResponse = 20071;
 	}
 }

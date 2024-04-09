@@ -436,3 +436,169 @@ message LocalDungeon2M_EnterResponse // IResponse
 	int32 RootId = 5;
 	int32 Process = 6;
 }
+
+//喂食物
+//ResponseType A2M_ActivityFeedResponse
+message M2A_ActivityFeedRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitID = 1;
+}
+
+message A2M_ActivityFeedResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 BaoShiDu = 1;
+}
+
+//ResponseType A2M_ActivityGuessResponse
+message M2A_ActivityGuessRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitId = 1;
+	int32 GuessId = 2;
+}
+
+message A2M_ActivityGuessResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType A2M_ActivitySelfInfo
+message M2A_ActivitySelfInfo // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitId = 1;
+}
+
+message A2M_ActivitySelfInfo // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated int32 GuessIds = 1;
+	repeated int32 LastGuessReward = 2;   //竞猜中奖纪录
+	int32 BaoShiDu = 3;
+	repeated int32 OpenGuessIds = 4;
+}
+
+message M2A_FirstWinInfoMessage // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	FirstWinInfo FirstWinInfo = 1;
+}
+
+//ResponseType A2M_MysteryBuyResponse
+message M2A_MysteryBuyRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	MysteryItemInfo MysteryItemInfo = 2;
+}
+
+message A2M_MysteryBuyResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType A2M_TurtleRecordResponse
+message M2A_TurtleRecordRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 AccountId = 1;
+}
+
+message A2M_TurtleRecordResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	int32 SupportId = 2;				//支持的id // ConfigHelper.TurtleList
+	repeated int32 WinTimes = 3;		//胜利次数
+	repeated int32  SupportTimes = 4;   //支持次数
+}
+
+//ResponseType A2M_TurtleReportResponse
+message M2A_TurtleReportRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int32 TurtleId = 1;
+}
+
+message A2M_TurtleReportResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType A2M_TurtleSupportResponse
+message M2A_TurtleSupportRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int32 SupportId = 1;
+	int64 AccountId = 2;
+	int64 UnitId = 3;
+}
+
+message A2M_TurtleSupportResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType A2M_ZhanQuInfoResponse
+message M2A_ZhanQuInfoRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UserId = 1;
+}
+
+message A2M_ZhanQuInfoResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	repeated int32 DayTeHui = 1;
+	repeated ZhanQuReceiveNumber ReceiveNum = 2;
+}
+
+
+//ResponseType A2M_ZhanQuReceiveResponse
+message M2A_ZhanQuReceiveRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 ActivityType = 1;		//活动类型
+	int32 ActivityId = 2;		//活动ID
+	int64 UnitId = 3;
+}
+
+message A2M_ZhanQuReceiveResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+
