@@ -11881,6 +11881,140 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_AccountWarehousInfoResponse))]
+	[Message(OuterMessage.C2M_AccountWarehousInfoRequest)]
+	[MemoryPackable]
+	public partial class C2M_AccountWarehousInfoRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_AccountWarehousInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_AccountWarehousInfoRequest), isFromPool) as C2M_AccountWarehousInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long AccInfoID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.AccInfoID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_AccountWarehousInfoResponse)]
+	[MemoryPackable]
+	public partial class M2C_AccountWarehousInfoResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_AccountWarehousInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_AccountWarehousInfoResponse), isFromPool) as M2C_AccountWarehousInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<BagInfo> BagInfos { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.BagInfos.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_AccountWarehousOperateResponse))]
+	[Message(OuterMessage.C2M_AccountWarehousOperateRequest)]
+	[MemoryPackable]
+	public partial class C2M_AccountWarehousOperateRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_AccountWarehousOperateRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_AccountWarehousOperateRequest), isFromPool) as C2M_AccountWarehousOperateRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int OperatateType { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long OperateBagID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.OperatateType = default;
+			this.OperateBagID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_AccountWarehousOperateResponse)]
+	[MemoryPackable]
+	public partial class M2C_AccountWarehousOperateResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_AccountWarehousOperateResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_AccountWarehousOperateResponse), isFromPool) as M2C_AccountWarehousOperateResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(1)]
+		public BagInfo BagInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.BagInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -12222,5 +12356,9 @@ namespace ET
 		 public const ushort M2C_ChainLightning = 10338;
 		 public const ushort C2M_StoreBuyRequest = 10339;
 		 public const ushort M2C_StoreBuyResponse = 10340;
+		 public const ushort C2M_AccountWarehousInfoRequest = 10341;
+		 public const ushort M2C_AccountWarehousInfoResponse = 10342;
+		 public const ushort C2M_AccountWarehousOperateRequest = 10343;
+		 public const ushort M2C_AccountWarehousOperateResponse = 10344;
 	}
 }

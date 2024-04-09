@@ -3049,3 +3049,35 @@ message M2C_StoreBuyResponse	// ILocationResponse
 	int32 Error = 92;
 }
 
+//ResponseType M2C_AccountWarehousInfoResponse
+message C2M_AccountWarehousInfoRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 AccInfoID = 1;
+}
+
+message M2C_AccountWarehousInfoResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated BagInfo BagInfos = 1;
+}
+
+//ResponseType M2C_AccountWarehousOperateResponse
+message C2M_AccountWarehousOperateRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 OperatateType = 2;    //1放入仓库  2取出仓库 3整理仓库 
+	int64 OperateBagID = 3;
+}
+
+message M2C_AccountWarehousOperateResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	BagInfo BagInfo = 2;
+}
