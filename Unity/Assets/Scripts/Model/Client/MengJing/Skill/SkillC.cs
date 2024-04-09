@@ -1,16 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
 
-namespace ET
+namespace ET.Client
 {
 
-    public class SkillHandlerAttribute : BaseAttribute
-    {
-        
-    }
 
-    [SkillHandler]
-    public abstract class ASkillHandler 
+    [ChildOf(typeof(SkillManagerComponentC))]
+    public abstract class SkillC :Entity,IAwake,IDestroy
     {
         public Vector3 NowPosition;
         public SkillState SkillState;
@@ -26,18 +22,10 @@ namespace ET
         /// <summary>
         /// 来自哪个Unit
         /// </summary>
-        public Unit TheUnitFrom;
+        public Unit TheUnitFrom { get; set; }
 
         public SkillInfo SkillInfo;
         public Vector3 TargetPosition;
-
-        public abstract void OnInit(SkillInfo skillcmd, Unit theUnitFrom);
-
-        public abstract void OnExecute();
-
-        public abstract void OnUpdate();
-
-        public abstract void OnFinished();
-
+        
     }
 }
