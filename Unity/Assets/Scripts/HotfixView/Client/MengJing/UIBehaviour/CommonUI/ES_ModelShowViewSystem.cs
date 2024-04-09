@@ -74,6 +74,8 @@ namespace ET.Client
             UICommonHelper.DestoryChild(self.ModelParent.gameObject);
             self.UnitModel = null;
 
+            self.ReSetTexture();
+            
             string path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(occ).ModelAsset}");
             GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
             GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
@@ -111,6 +113,8 @@ namespace ET.Client
             UICommonHelper.DestoryChild(self.ModelParent.gameObject);
             self.UnitModel = null;
 
+            self.ReSetTexture();
+            
             var path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(occ).ModelAsset}");
             GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
             GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
@@ -137,6 +141,8 @@ namespace ET.Client
         {
             UICommonHelper.DestoryChild(self.ModelParent.gameObject);
             self.UnitModel = null;
+            
+            self.ReSetTexture();
 
             string path = ABPathHelper.GetUnitPath(assetPath);
             long instanceId = self.InstanceId;

@@ -46,6 +46,7 @@ namespace ET.Client
                     break;
                 case 2:
                     self.View.ES_ChengJiuJingling.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_ChengJiuJingling.OnUpdateUI();
                     break;
                 case 3:
                     self.View.ES_PetTuJian.uiTransform.gameObject.SetActive(true);

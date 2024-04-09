@@ -8,9 +8,9 @@ namespace ET.Client
         public int TotalChengJiuPoint { get; set; } = 0;
         public List<int> AlreadReceivedId { get; set; } = new List<int>();
         public List<int> ChengJiuCompleteList { get; set; } = new List<int>();
-        public List<int> JingLingList = new List<int>();
-        public int JingLingId = 0;
-        public int RandomDrop = 0;
+        public List<int> JingLingList { get; set; } = new List<int>();
+        public int JingLingId { get; set; } = 0;
+        public int RandomDrop { get; set; } = 0;
         public Dictionary<int, ChengJiuInfo> ChengJiuProgessList { get; set; } = new Dictionary<int, ChengJiuInfo>();
     }
 }

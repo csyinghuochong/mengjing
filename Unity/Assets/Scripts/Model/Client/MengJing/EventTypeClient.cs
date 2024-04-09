@@ -101,6 +101,10 @@ namespace ET.Client
     public struct DataUpdate_PetXiLianUpdate
     {
     }
+    
+    public struct DataUpdate_JingLingButton
+    {
+    }
 
     public struct TaskNpcDialog
     {
