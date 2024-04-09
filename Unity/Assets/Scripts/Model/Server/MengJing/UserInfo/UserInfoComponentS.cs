@@ -8,7 +8,7 @@ namespace ET.Server
     public class UserInfoComponentS : Entity, IAwake, IDestroy, ITransfer, IUnitCache
     {
         public string Account { get; set; }
-        public UserInfo UserInfo  { get; set; }
+        public UserInfo UserInfo { get; set; } = new UserInfo();
 
           /// <summary>
         /// 登录或者零点刷新的时候会改变.主要用来体力恢复，刷新数据

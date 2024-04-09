@@ -11,23 +11,23 @@ namespace ET.Server
 	public class DBDayActivityInfo : Entity, IAwake
 	{
 		public int LastHour;
-		
+
 		/// <summary>
 		/// 小龟历史胜利次数
 		/// </summary>
-		public List<int> TurtleWinTimes = new();
+		public List<int> TurtleWinTimes { get; set; } = new();
 
-        //神秘商品
-        public List<MysteryItemInfo> MysteryItemInfos = new();
+		//神秘商品
+        public List<MysteryItemInfo> MysteryItemInfos  { get; set; }= new();
 
 		//战区活动
-		public List<ZhanQuReceiveNumber> ZhanQuReveives = new();
+		public List<ZhanQuReceiveNumber> ZhanQuReveives  { get; set; }= new();
 
 		//首胜记录
-		public List<FirstWinInfo> FirstWinInfos = new();
+		public List<FirstWinInfo> FirstWinInfos { get; set; } = new();
 
 		//宠物矿场(矿场类型->玩家ID)
-		public List<PetMingPlayerInfo> PetMingList = new();
+		public List<PetMingPlayerInfo> PetMingList{ get; set; } = new();
 
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         public Dictionary<long, long> PetMingChanChu = new();
@@ -35,34 +35,35 @@ namespace ET.Server
 		//核心矿
 		public List<KeyValuePairInt> PetMingHexinList= new();
 
-        /// <summary>
-        /// 竞猜数字->竞猜玩家列表
-        /// </summary>
-        [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-        public Dictionary<int, List<long>> GuessPlayerList = new();
+		/// <summary>
+		/// 竞猜数字->竞猜玩家列表
+		/// </summary>
+		[BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
+		public Dictionary<int, List<long>> GuessPlayerList { get; set; } = new();
 
-        
 
-        /// <summary>
+
+		/// <summary>
         /// 竞猜数字->中奖的玩家
         /// </summary>
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-        public Dictionary<int, List<long>> GuessRewardList = new();
-      
+        public Dictionary<int, List<long>> GuessRewardList { get; set; } = new();
+
         /// <summary>
         /// 喂食玩家列表
         /// </summary>
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
-        public Dictionary<long, int> FeedPlayerList = new();
+        public Dictionary<long, int> FeedPlayerList { get; set; } = new();
 
-        public int FeedRewardKey = 0;
 
-        public int BaoShiDu = 0;
+        public int FeedRewardKey  { get; set; }= 0;
+
+        public int BaoShiDu { get; set; } = 0;
 
         /// <summary>
         /// 竞猜开奖的字
         /// </summary>
-        public List<int> OpenGuessIds = new();
+        public List<int> OpenGuessIds{ get; set; }  = new();
     }
 
 }

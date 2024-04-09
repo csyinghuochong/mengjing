@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2A_PetMingPlayerInfoHandler : AMActorRpcHandler<Scene, M2A_PetMingPlayerInfoRequest, A2M_PetMingPlayerInfoResponse>
+    [MessageHandler(SceneType.Activity)]
+    [FriendOf(typeof(ActivityServerComponent))]
+    public class M2A_PetMingPlayerInfoHandler : MessageHandler<Scene, M2A_PetMingPlayerInfoRequest, A2M_PetMingPlayerInfoResponse>
     {
 
-        protected override async ETTask Run(Scene scene, M2A_PetMingPlayerInfoRequest request, A2M_PetMingPlayerInfoResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2A_PetMingPlayerInfoRequest request, A2M_PetMingPlayerInfoResponse response)
         {
-            List<PetMingPlayerInfo> petMingPlayerInfos = scene.GetComponent<ActivitySceneComponent>().DBDayActivityInfo.PetMingList;
+            List<PetMingPlayerInfo> petMingPlayerInfos = scene.GetComponent<ActivityServerComponent>().DBDayActivityInfo.PetMingList;
             for (int i = 0; i < petMingPlayerInfos.Count; i++)
             {
                 if (petMingPlayerInfos[i].MineType == request.MingType
@@ -18,7 +19,7 @@ namespace ET
                     response.PetMingPlayerInfo = petMingPlayerInfos[i]; 
                 }
             }
-            reply();
+
             await ETTask.CompletedTask;
         }
     }

@@ -7,6 +7,6 @@ namespace ET.Server
     [BsonIgnoreExtraElements]
     public class DBMailInfo : Entity
     {
-        public List<MailInfo> MailInfoList = new List<MailInfo>();
+        public List<MailInfo> MailInfoList { get; set; } = new List<MailInfo>();
     }
 }

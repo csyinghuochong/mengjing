@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class M2A_ActivitySelfInfoHandler : AMActorRpcHandler<Scene, M2A_ActivitySelfInfo, A2M_ActivitySelfInfo>
+    [MessageHandler(SceneType.Activity)]
+    [FriendOf(typeof(ActivityServerComponent))]
+    public class M2A_ActivitySelfInfoHandler : MessageHandler<Scene, M2A_ActivitySelfInfo, A2M_ActivitySelfInfo>
     {
-        protected override async ETTask Run(Scene scene, M2A_ActivitySelfInfo request, A2M_ActivitySelfInfo response, Action reply)
+        protected override async ETTask Run(Scene scene, M2A_ActivitySelfInfo request, A2M_ActivitySelfInfo response)
         {
             List<int> guessIds = new List<int>();
             List<int> lastGuessRewatd = new List<int>();
-            DBDayActivityInfo dBDayActivityInfo = scene.GetComponent<ActivitySceneComponent>().DBDayActivityInfo;
+            DBDayActivityInfo dBDayActivityInfo = scene.GetComponent<ActivityServerComponent>().DBDayActivityInfo;
             Dictionary<int, List<long>> guessplayers = dBDayActivityInfo.GuessPlayerList;
             Dictionary<int, List<long>> guessRewards = dBDayActivityInfo.GuessRewardList;
 
@@ -35,7 +36,6 @@ namespace ET
             response.LastGuessReward = lastGuessRewatd;
             response.BaoShiDu = dBDayActivityInfo.BaoShiDu;
             response.OpenGuessIds = dBDayActivityInfo.OpenGuessIds;
-            reply();
             await ETTask.CompletedTask;
         }
     }

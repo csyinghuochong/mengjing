@@ -47,14 +47,7 @@ namespace ET
             };
         }
 
-        /// <summary>
-        /// 小龟选手 npcconfig
-        /// </summary>
-        public static List<int> TurtleList()
-        {
-            return new List<int>() { 20099011, 20099012, 20099013 };
-        }
-
+       
         public static List<BagInfo> GetHeQuReward(int lv)
         {
             List<BagInfo> rewards = new List<BagInfo>();

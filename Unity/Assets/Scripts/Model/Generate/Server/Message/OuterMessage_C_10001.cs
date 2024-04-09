@@ -1754,6 +1754,9 @@ namespace ET
 		[MemoryPackOrder(7)]
 		public BagInfo ItemSell { get; set; }
 
+		[MemoryPackOrder(8)]
+		public long BuyPlayerId { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -1763,6 +1766,7 @@ namespace ET
 			this.Title = default;
 			this.ItemList.Clear();
 			this.ItemSell = default;
+			this.BuyPlayerId = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}

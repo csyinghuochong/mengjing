@@ -1,5 +1,6 @@
 using ET.Client;
 using System;
+using System.Collections.Generic;
 using static System.Collections.Specialized.BitVector32;
 
 namespace ET.Server
@@ -110,9 +111,27 @@ namespace ET.Server
             return null;
         }
         
-        public static async ETTask SaveComponent(int zone, long unitId, Entity entity)
+        public static async ETTask SaveComponentCache(int zone, long unitId, Entity entity)
         {
             await ETTask.CompletedTask;
+        }
+
+        public static async ETTask<T> GetComponentBD<T>(Scene root, long unitId) where T : Entity
+        {
+            DBComponent dbComponent = root.GetComponent<DBManagerComponent>().GetZoneDB(root.Zone());
+            List<T> resulets = await dbComponent.Query<T>(root.Zone(), d => d.Id == unitId);
+            if (resulets == null || resulets.Count == 0)
+            {
+                return null;
+            }
+
+            return resulets[0];
+        }
+        
+        public static async ETTask SaveComponentDB(Scene root, long unitId, Entity entity)
+        {
+            DBComponent dbComponent = root.GetComponent<DBManagerComponent>().GetZoneDB(root.Zone());
+            await dbComponent.Save(root.Zone(), entity);
         }
 
         /// <summary>

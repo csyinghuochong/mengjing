@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2A_PetMingBattleWinHandler : AMActorRpcHandler<Scene, M2A_PetMingBattleWinRequest, A2M_PetMingBattleWinResponse>
+    
+    [MessageHandler(SceneType.Activity)]
+    [FriendOf(typeof(ActivityServerComponent))]
+    public class M2A_PetMingBattleWinHandler : MessageHandler<Scene, M2A_PetMingBattleWinRequest, A2M_PetMingBattleWinResponse>
     {
-        protected override async ETTask Run(Scene scene, M2A_PetMingBattleWinRequest request, A2M_PetMingBattleWinResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2A_PetMingBattleWinRequest request, A2M_PetMingBattleWinResponse response)
         {
             long oldUnitid = 0;
             long serverTime = TimeHelper.ServerNow();
 
-            List<PetMingPlayerInfo> petMingPlayerInfos = scene.GetComponent<ActivitySceneComponent>().DBDayActivityInfo.PetMingList;
+            List<PetMingPlayerInfo> petMingPlayerInfos = scene.GetComponent<ActivityServerComponent>().DBDayActivityInfo.PetMingList;
 
             //移除改队伍之前占领
             for (int i = petMingPlayerInfos.Count - 1; i >= 0; i--)
@@ -75,29 +77,26 @@ namespace ET
                     UnitID = oldUnitid,
                     PetMingRecord = petMingRecord
                 };
-
-                M2A_PetMingRecordResponse m2G_RechargeResponse = (M2A_PetMingRecordResponse)await ActorLocationSenderComponent.Instance.Call(oldUnitid, a2M_PetMing);
+                
+                // root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(unitId, actorLocationMessage);
+                M2A_PetMingRecordResponse m2G_RechargeResponse =  (M2A_PetMingRecordResponse) await scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(oldUnitid, a2M_PetMing);
                 if (m2G_RechargeResponse.Error != ErrorCode.ERR_Success)
                 {
-                    long dbCacheId = DBHelper.GetDbCacheId(scene.DomainZone());
-                    D2G_GetComponent d2GGet = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = oldUnitid, Component = DBHelper.PetComponent });
-                    PetComponent petComponent = d2GGet.Component as PetComponent;
+                    ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(scene.Zone());
+                    PetComponentS petComponent = await UnitCacheHelper.GetComponentCache<PetComponentS>(scene.Root(), oldUnitid);
                     petComponent.OnPetMingRecord(petMingRecord);
-                    D2M_SaveComponent d2GSave = (D2M_SaveComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new M2D_SaveComponent() { UnitId = oldUnitid, EntityByte = MongoHelper.ToBson(petComponent), ComponentType = DBHelper.PetComponent });
-
-                    D2G_GetComponent d2GGet_2 = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = oldUnitid, Component = DBHelper.ReddotComponent });
-                    ReddotComponent redComponent = d2GGet_2.Component as ReddotComponent;
-                    redComponent.AddReddont((int)ReddotType.PetMine);
-                    D2M_SaveComponent d2GSave_2 = (D2M_SaveComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new M2D_SaveComponent() { UnitId = oldUnitid, EntityByte = MongoHelper.ToBson(redComponent), ComponentType = DBHelper.ReddotComponent });
-
-                    D2G_GetComponent d2GGet_3 = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = oldUnitid, Component = DBHelper.NumericComponent });
-                    NumericComponent numComponent = d2GGet_3.Component as NumericComponent;
-                    numComponent.ApplyValue( NumericType.PetMineCDTime, 0, false );
-                    D2M_SaveComponent d2GSave_3 = (D2M_SaveComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new M2D_SaveComponent() { UnitId = oldUnitid, EntityByte = MongoHelper.ToBson(numComponent), ComponentType = DBHelper.NumericComponent });
+                    await UnitCacheHelper.SaveComponentCache(scene.Zone(),oldUnitid, petComponent);
+                    
+                    ReddotComponentS roReddotComponentS = await UnitCacheHelper.GetComponentCache<ReddotComponentS>(scene.Root(), oldUnitid);
+                    roReddotComponentS.AddReddont((int)ReddotType.PetMine);
+                    await UnitCacheHelper.SaveComponentCache(scene.Zone(),oldUnitid, roReddotComponentS);
+                    
+                    NumericComponentS numericComponentS = await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene.Root(), oldUnitid);
+                    numericComponentS.ApplyValue( NumericType.PetMineCDTime, 0, false );
+                    await UnitCacheHelper.SaveComponentCache(scene.Zone(),oldUnitid, numericComponentS);
                 }
             }
-
-            reply();
+            
             await ETTask.CompletedTask;
         }
     }

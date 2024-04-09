@@ -25,7 +25,19 @@ namespace ET
             new BuyCellCost { Cost = "10000156;1", Get = "10010026;1" },
         };
 
+        ///当饱食度达到一定值时,会为每位贡献者赠送一个礼包哦
+        [StaticField]
+        public static Dictionary<int, string> Feed1RewardList=new Dictionary<int, string>()
+        {
+            { 10, "10010045;1"},
+            { 2000, "10010045;1"},
+        };
 
+        /// <summary>
+        /// 小龟选手 npcconfig
+        /// </summary>
+        [StaticField]
+        public static List<int> TurtleList = new List<int>() { 20099011, 20099012, 20099013 };
         
         /// <summary>
         /// 击败过的BossId,包含在这个列表的才记录

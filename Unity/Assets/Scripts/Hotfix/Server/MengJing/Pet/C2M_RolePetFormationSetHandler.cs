@@ -22,7 +22,7 @@ namespace ET.Server
                     petComponent.PetMingPosition = request.PetPosition;   
                     break;
             }
-            UnitCacheHelper.SaveComponent( unit.Zone(), unit.Id, petComponent).Coroutine();
+            UnitCacheHelper.SaveComponentCache( unit.Zone(), unit.Id, petComponent).Coroutine();
 
             await ETTask.CompletedTask;
         }

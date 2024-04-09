@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2A_TurtleSupportHandler : AMActorRpcHandler<Scene, M2A_TurtleSupportRequest, A2M_TurtleSupportResponse>
+    [MessageHandler(SceneType.Activity)]
+    [FriendOf(typeof(ActivityServerComponent))]
+    public class M2A_TurtleSupportHandler : MessageHandler<Scene, M2A_TurtleSupportRequest, A2M_TurtleSupportResponse>
     {
-        protected override async ETTask Run(Scene scene, M2A_TurtleSupportRequest request, A2M_TurtleSupportResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2A_TurtleSupportRequest request, A2M_TurtleSupportResponse response)
         {
-            ActivitySceneComponent activitySceneComponent = scene.GetComponent<ActivitySceneComponent>();
+            ActivityServerComponent activitySceneComponent = scene.GetComponent<ActivityServerComponent>();
             if (!activitySceneComponent.TurtleSupportList.ContainsKey(request.SupportId))
             {
                 activitySceneComponent.TurtleSupportList.Add(request.SupportId, new List<KeyValuePair<long, long>>());
@@ -20,13 +21,11 @@ namespace ET
                 if (supportlist[i].Key == request.AccountId)
                 {
                     response.Error = ErrorCode.ERR_TurtleSupport_1;
-                    reply();
                     return;
                 }
             }
             
             activitySceneComponent.TurtleSupportList[request.SupportId].Add(new KeyValuePair<long, long>(request.AccountId, request.UnitId)); 
-            reply();
             await ETTask.CompletedTask;
         }
     }

@@ -1,21 +1,15 @@
-﻿using System;
+using System.Collections.Generic;
 
-namespace ET
+
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class C2A_ActivityInfoHandler : AMActorRpcHandler<Scene, C2A_ActivityInfoRequest, A2C_ActivityInfoResponse>
+    
+    [MessageHandler(SceneType.Activity)]
+    public class C2A_ActivityInfoHandler : MessageHandler<Scene,C2A_ActivityInfoRequest,  A2C_ActivityInfoResponse>
     {
-        protected override async ETTask Run(Scene scene, C2A_ActivityInfoRequest request, A2C_ActivityInfoResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2A_ActivityInfoRequest request, A2C_ActivityInfoResponse response)
         {
-            DBDayActivityInfo dBDayActivityInfo = scene.GetComponent<ActivitySceneComponent>().DBDayActivityInfo;
-            switch (request.ActivityType)
-            {
-                default:
-                    break;
-            }
-
-            reply();
+            Log.Debug("1111111111111:C2A_ActivityInfoRequest");
             await ETTask.CompletedTask;
         }
     }

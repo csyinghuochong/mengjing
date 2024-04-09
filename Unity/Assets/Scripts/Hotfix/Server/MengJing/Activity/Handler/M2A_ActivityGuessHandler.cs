@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2A_ActivityGuessHandler : AMActorRpcHandler<Scene, M2A_ActivityGuessRequest, A2M_ActivityGuessResponse>
+    [MessageHandler(SceneType.Activity)]
+    [FriendOf(typeof(ActivityServerComponent))]
+    public class M2A_ActivityGuessHandler : MessageHandler<Scene, M2A_ActivityGuessRequest, A2M_ActivityGuessResponse>
     {
-        protected override async ETTask Run(Scene scene, M2A_ActivityGuessRequest request, A2M_ActivityGuessResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2A_ActivityGuessRequest request, A2M_ActivityGuessResponse response)
         {
-            Dictionary<int, List<long>> guessplayers = scene.GetComponent<ActivitySceneComponent>().DBDayActivityInfo.GuessPlayerList;
+            Dictionary<int, List<long>> guessplayers = scene.GetComponent<ActivityServerComponent>().DBDayActivityInfo.GuessPlayerList;
 
             if (!guessplayers.ContainsKey(request.GuessId))
             {
@@ -19,8 +20,6 @@ namespace ET
             {
                 guessplayers[request.GuessId].Add(request.UnitId);
             }
-           
-            reply();
             await ETTask.CompletedTask;
         }
     }

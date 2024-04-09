@@ -2377,6 +2377,166 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(E2M_EMailSendResponse))]
+	[Message(InnerMessage.M2E_EMailSendRequest)]
+	[MemoryPackable]
+	public partial class M2E_EMailSendRequest: MessageObject, IRequest
+	{
+		public static M2E_EMailSendRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2E_EMailSendRequest), isFromPool) as M2E_EMailSendRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long Id { get; set; }
+
+		[MemoryPackOrder(2)]
+		public MailInfo MailInfo { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int GetWay { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Id = default;
+			this.MailInfo = default;
+			this.GetWay = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.E2M_EMailSendResponse)]
+	[MemoryPackable]
+	public partial class E2M_EMailSendResponse: MessageObject, IResponse
+	{
+		public static E2M_EMailSendResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(E2M_EMailSendResponse), isFromPool) as E2M_EMailSendResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2A_PetMingRecordResponse))]
+	[Message(InnerMessage.A2M_PetMingRecordRequest)]
+	[MemoryPackable]
+	public partial class A2M_PetMingRecordRequest: MessageObject, IRequest
+	{
+		public static A2M_PetMingRecordRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2M_PetMingRecordRequest), isFromPool) as A2M_PetMingRecordRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UnitID { get; set; }
+
+		[MemoryPackOrder(0)]
+		public PetMingRecord PetMingRecord { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitID = default;
+			this.PetMingRecord = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.M2A_PetMingRecordResponse)]
+	[MemoryPackable]
+	public partial class M2A_PetMingRecordResponse: MessageObject, IResponse
+	{
+		public static M2A_PetMingRecordResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2A_PetMingRecordResponse), isFromPool) as M2A_PetMingRecordResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.Mail2M_SendServerMailItem)]
+	[MemoryPackable]
+	public partial class Mail2M_SendServerMailItem: MessageObject, ILocationMessage
+	{
+		public static Mail2M_SendServerMailItem Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Mail2M_SendServerMailItem), isFromPool) as Mail2M_SendServerMailItem; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public ServerMailItem ServerMailItem { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ServerMailItem = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -2449,5 +2609,10 @@ namespace ET
 		 public const ushort A2M_ZhanQuInfoResponse = 20069;
 		 public const ushort M2A_ZhanQuReceiveRequest = 20070;
 		 public const ushort A2M_ZhanQuReceiveResponse = 20071;
+		 public const ushort M2E_EMailSendRequest = 20072;
+		 public const ushort E2M_EMailSendResponse = 20073;
+		 public const ushort A2M_PetMingRecordRequest = 20074;
+		 public const ushort M2A_PetMingRecordResponse = 20075;
+		 public const ushort Mail2M_SendServerMailItem = 20076;
 	}
 }

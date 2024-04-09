@@ -427,6 +427,7 @@ message MailInfo
 	string Title = 6;
 	repeated BagInfo ItemList = 7;	
 	BagInfo ItemSell = 8;
+	int64  BuyPlayerId = 9;
 }
 
 message PaiMaiItemInfo

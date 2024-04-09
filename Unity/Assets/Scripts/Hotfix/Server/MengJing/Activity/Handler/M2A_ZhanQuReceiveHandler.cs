@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using ET.Server;
 
 namespace ET
 {
 
-    [ActorMessageHandler]
-    public class M2A_ZhanQuReceiveHandler : AMActorRpcHandler<Scene, M2A_ZhanQuReceiveRequest, A2M_ZhanQuReceiveResponse>
+    [MessageHandler(SceneType.Activity)]
+    [FriendOf(typeof(ActivityServerComponent))]
+    public class M2A_ZhanQuReceiveHandler : MessageHandler<Scene, M2A_ZhanQuReceiveRequest, A2M_ZhanQuReceiveResponse>
     {
 
-        protected override async ETTask Run(Scene scene, M2A_ZhanQuReceiveRequest request, A2M_ZhanQuReceiveResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2A_ZhanQuReceiveRequest request, A2M_ZhanQuReceiveResponse response)
         {
-            List<ZhanQuReceiveNumber> zhanQuReceiveNumbers =  scene.GetComponent<ActivitySceneComponent>().DBDayActivityInfo.ZhanQuReveives;
+            List<ZhanQuReceiveNumber> zhanQuReceiveNumbers =  scene.GetComponent<ActivityServerComponent>().DBDayActivityInfo.ZhanQuReveives;
 
             int receiveNum = 0;
             for (int i = 0; i < zhanQuReceiveNumbers.Count; i++)
@@ -25,7 +27,6 @@ namespace ET
             if (int.Parse(activityConfig.Par_2) <= receiveNum)
             {
                 response.Error = ErrorCode.ERR_AlreadyFinish;
-                reply();
                 return;
             }
 
@@ -40,7 +41,6 @@ namespace ET
                 if (zhanQuReceiveNumbers[i].ReceiveUnitIds.Contains(request.UnitId))
                 {
                     response.Error = ErrorCode.ERR_AlreadyReceived;
-                    reply();
                     return;
                 }
 
@@ -57,7 +57,6 @@ namespace ET
                 zhanQuReceiveNumber.ReceiveUnitIds.Add(request.UnitId);
                 zhanQuReceiveNumbers.Add(zhanQuReceiveNumber);
             }
-            reply();
             await ETTask.CompletedTask;
         }
     }

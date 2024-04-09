@@ -2,20 +2,21 @@
 using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2A_TurtleReportHandler : AMActorRpcHandler<Scene, M2A_TurtleReportRequest, A2M_TurtleReportResponse>
+    [MessageHandler(SceneType.Activity)]
+    [FriendOf(typeof(ActivityServerComponent))]
+    public class M2A_TurtleReportHandler : MessageHandler<Scene, M2A_TurtleReportRequest, A2M_TurtleReportResponse>
     {
-        protected override async ETTask Run(Scene scene, M2A_TurtleReportRequest request, A2M_TurtleReportResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2A_TurtleReportRequest request, A2M_TurtleReportResponse response)
         {
-            DBDayActivityInfo dBDayActivityInfo = scene.GetComponent<ActivitySceneComponent>().DBDayActivityInfo;
+            DBDayActivityInfo dBDayActivityInfo = scene.GetComponent<ActivityServerComponent>().DBDayActivityInfo;
             if (dBDayActivityInfo.TurtleWinTimes.Count < 3)
             {
                 dBDayActivityInfo.TurtleWinTimes = new List<int> { 0,0,0 };
             }
             
-            int index = ConfigHelper.TurtleList.IndexOf( request.TurtleId );
+            int index = ConfigData.TurtleList.IndexOf( request.TurtleId );
             if (index != -1)
             {
                 dBDayActivityInfo.TurtleWinTimes[index]++;
@@ -23,7 +24,7 @@ namespace ET
 
             //发竞猜邮件
             List<KeyValuePair<long, long>>  playerids = null;
-            scene.GetComponent<ActivitySceneComponent>().TurtleSupportList.TryGetValue(request.TurtleId, out playerids);
+            scene.GetComponent<ActivityServerComponent>().TurtleSupportList.TryGetValue(request.TurtleId, out playerids);
             if (playerids != null)
             {
                 MailInfo mailInfo = new MailInfo();
@@ -47,11 +48,10 @@ namespace ET
 
                 for (int i = 0; i < playerids.Count; i++)
                 {
-                    MailHelp.SendUserMail(scene.DomainZone(), playerids[i].Value, mailInfo).Coroutine();
+                    MailHelp.SendUserMail(scene.Root(), playerids[i].Value, mailInfo).Coroutine();
                 }
             }
-
-            reply();
+            
             await ETTask.CompletedTask;
         }
     }

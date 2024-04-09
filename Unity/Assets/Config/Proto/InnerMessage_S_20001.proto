@@ -601,4 +601,42 @@ message A2M_ZhanQuReceiveResponse // IResponse
 	string Message = 92;
 }
 
+//ResponseType E2M_EMailSendResponse
+message M2E_EMailSendRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 Id = 1;
+	MailInfo MailInfo = 3;
+	int32 GetWay = 4;
+}
 
+message E2M_EMailSendResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2A_PetMingRecordResponse
+message A2M_PetMingRecordRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitID = 3;
+
+	PetMingRecord PetMingRecord = 1;
+}
+
+message M2A_PetMingRecordResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+message Mail2M_SendServerMailItem // ILocationMessage
+{
+	int32 RpcId = 90;
+	ServerMailItem ServerMailItem = 1;
+}

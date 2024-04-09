@@ -1,13 +1,14 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2A_FirstWinInfoHandler : AMActorHandler<Scene, M2A_FirstWinInfoMessage>
+    [MessageHandler(SceneType.Activity)]
+    [FriendOf(typeof(ActivityServerComponent))]
+    public class M2A_FirstWinInfoHandler : MessageHandler<Scene, M2A_FirstWinInfoMessage>
     {
         protected override async ETTask Run(Scene scene, M2A_FirstWinInfoMessage message)
         {
-            DBDayActivityInfo dBFirstWinInfo = scene.GetComponent<ActivitySceneComponent>().DBDayActivityInfo;
+            DBDayActivityInfo dBFirstWinInfo = scene.GetComponent<ActivityServerComponent>().DBDayActivityInfo;
             for (int i= 0; i < dBFirstWinInfo.FirstWinInfos.Count; i++)
             {
                 FirstWinInfo firstWinInfo = dBFirstWinInfo.FirstWinInfos[i];
@@ -49,8 +50,8 @@ namespace ET
             }
 
             dBFirstWinInfo.FirstWinInfos.Add(message.FirstWinInfo);
-            long mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(scene.DomainZone(), Enum.GetName(SceneType.EMail)).InstanceId;
-            E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await ActorMessageSenderComponent.Instance.Call
+            ActorId mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(scene.Zone(), "EMail").ActorId;
+            E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await scene.Root().GetComponent<MessageSender>().Call
                      (mailServerId, new M2E_EMailSendRequest()
                      {
                          Id = message.FirstWinInfo.UserId,

@@ -238,17 +238,7 @@ namespace ET
             };
         }
 
-        ///当饱食度达到一定值时,会为每位贡献者赠送一个礼包哦
-
-        public static Dictionary<int, string> Feed1RewardList()
-        {
-            return new Dictionary<int, string>()
-            {
-                { 10, "10010045;1"},
-                { 2000, "10010045;1"},
-            };
-        }
-
+      
         /// <summary>
         /// 每日礼包
         /// </summary>

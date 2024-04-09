@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2A_ActivityFeedHandler : AMActorRpcHandler<Scene, M2A_ActivityFeedRequest, A2M_ActivityFeedResponse>
+    [MessageHandler(SceneType.Activity)]
+    [FriendOf(typeof(ActivityServerComponent))]
+    public class M2A_ActivityFeedHandler : MessageHandler<Scene, M2A_ActivityFeedRequest, A2M_ActivityFeedResponse>
     {
-        protected override async ETTask Run(Scene scene, M2A_ActivityFeedRequest request, A2M_ActivityFeedResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2A_ActivityFeedRequest request, A2M_ActivityFeedResponse response)
         {
-            ActivitySceneComponent activitySceneComponent = scene.GetComponent<ActivitySceneComponent>();
+            
+            ActivityServerComponent activitySceneComponent = scene.GetComponent<ActivityServerComponent>();
             if (!activitySceneComponent.DBDayActivityInfo.FeedPlayerList.ContainsKey(request.UnitID))
             {
                 activitySceneComponent.DBDayActivityInfo.FeedPlayerList.Add( request.UnitID, 0 );
@@ -16,16 +18,16 @@ namespace ET
             activitySceneComponent.DBDayActivityInfo.FeedPlayerList[request.UnitID]++;
             int baoshidu = ++activitySceneComponent.DBDayActivityInfo.BaoShiDu;
 
-            if (ActivityConfigHelper.Feed1RewardList.ContainsKey(baoshidu) 
+            if (ConfigData.Feed1RewardList.ContainsKey(baoshidu) 
                 && baoshidu > activitySceneComponent.DBDayActivityInfo.FeedRewardKey )
             {
                 ///发送饱食度奖励
                 activitySceneComponent.DBDayActivityInfo.FeedRewardKey = baoshidu;
 
-                long mailServerId = DBHelper.GetMailServerId(scene.DomainZone());
+                ActorId mailServerId = UnitCacheHelper.GetMailServerId(scene.Zone());
 
                 List<BagInfo> itemList = new List<BagInfo>();
-                string[] rewardItem = ActivityConfigHelper.Feed1RewardList[baoshidu].Split('@');
+                string[] rewardItem = ConfigData.Feed1RewardList[baoshidu].Split('@');
                 for (int i = 0; i < rewardItem.Length; i++)
                 {
                     string[] itemInfo = rewardItem[i].Split(';');
@@ -40,7 +42,7 @@ namespace ET
                     mailInfo.MailId = IdGenerater.Instance.GenerateId();
                     mailInfo.ItemList.AddRange(itemList);
 
-                    E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await ActorMessageSenderComponent.Instance.Call
+                    E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await scene.Root().GetComponent<MessageSender>().Call
                                        (mailServerId, new M2E_EMailSendRequest()
                                        {
                                            Id = unitid,
@@ -51,7 +53,6 @@ namespace ET
             }
             
             response.BaoShiDu = baoshidu;
-            reply();
             await ETTask.CompletedTask;
         }
     }
