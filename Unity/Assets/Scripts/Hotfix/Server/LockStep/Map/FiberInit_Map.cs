@@ -18,7 +18,11 @@ namespace ET.Server
             root.AddComponent<RoomManagerComponent>();
             root.AddComponent<LocationProxyComponent>();
             root.AddComponent<MessageLocationSenderComponent>();
-            root.AddComponent<MapComponent>().NavMeshId =root.Name == "Map1" ?101:0;
+            MapComponent mapComponent =  root.AddComponent<MapComponent>();
+            mapComponent.NavMeshId = 101;
+            mapComponent.SceneId = 101;
+            mapComponent.SceneType = SceneTypeEnum.MainCityScene;
+            FubenHelp.CreateNpc(root, 101);
             
             await ETTask.CompletedTask;
         }

@@ -49,7 +49,7 @@ namespace ET.Server
             player.FriendServerId = UnitCacheHelper.GetFriendId(session.Zone());
 
             Unit unit = await UnitHelper.LoadUnit(player, scene, createRoleInfo, newAccountList[0].Account, request.AccountId); 
-            StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map1");
+            StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map101");
 			response.MyId = request.UnitId;
 			unit.GateSessionActorId = player.Id;
 			Log.Debug($"M2M_UnitTransferRequest_a:{unit.Components.Count}");
