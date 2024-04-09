@@ -17,7 +17,7 @@ namespace ET.Server
         public override void OnExecute(SkillS skillS)
         {
             skillS.InitSelfBuff();
-            skillS.OnUpdate();
+            OnUpdate(skillS, 0);
         }
 
         public void BroadcastSkill(SkillS skillS, long unitid, long targetId, float x, float y, float z)

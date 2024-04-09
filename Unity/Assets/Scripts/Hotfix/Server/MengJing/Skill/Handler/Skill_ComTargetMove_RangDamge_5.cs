@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using Unity.Mathematics;
+
+namespace ET.Server
 {
     /// <summary>
     /// 前方投掷一个球,球会向前方移动，拖拽敌人
@@ -7,51 +9,47 @@
     /// </summary>
     public class Skill_ComTargetMove_RangDamge_5: SkillHandlerS
     {
-        private int isChonFeng;
-        private float SpeedAddValue = 0f;
-        private Vector3 UnitTargetPos;
-
+      
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
 
-            string[] paraminfos = this.SkillConf.GameObjectParameter.Split(';');
-            this.isChonFeng = int.Parse(paraminfos[0]);
+            string[] paraminfos = skillS.SkillConf.GameObjectParameter.Split(';');
+            skillS.isChonFeng = int.Parse(paraminfos[0]);
             if (paraminfos[1] != "0")
             {
-                this.SkillTriggerInvelTime = (long)(float.Parse(paraminfos[1]) * 1000);
+                skillS.SkillTriggerInvelTime = (long)(float.Parse(paraminfos[1]) * 1000);
             }
 
-            this.SkillExcuteNum = 1;
-
-            this.UnitTargetPos = this.TheUnitFrom.Position;
+            skillS.SkillExcuteNum = 1;
+            skillS.TargetPosition = skillS.TheUnitFrom.Position;
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            this.InitSelfBuff();
-            this.OnUpdate();
+            skillS.InitSelfBuff();
+            this.OnUpdate(skillS, 0);
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
             this.CreateBullet();
-            if (TimeHelper.ServerNow() > SkillEndTime)
+            if (TimeHelper.ServerNow() > skillS.SkillEndTime)
             {
-                this.SetSkillState(SkillState.Finished);
+                skillS.SetSkillState(SkillState.Finished);
                 return;
             }
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            if (this.isChonFeng == 1)
+            if (skillS.isChonFeng == 1)
             {
-                this.ReSetUnit(this.TheUnitFrom);
+                ReSetUnit(skillS, skillS.TheUnitFrom);
             }
 
-            UnitComponent unitComponent = this.TheUnitFrom.GetParent<UnitComponent>();
-            foreach (long id in this.HurtIds)
+            UnitComponent unitComponent = skillS.TheUnitFrom.GetParent<UnitComponent>();
+            foreach (long id in skillS.HurtIds)
             {
                 Unit unit = unitComponent.Get(id);
                 if (unit == null)
@@ -62,84 +60,81 @@
                 this.ReSetUnit(unit);
             }
 
-            this.Clear();
+            skillS.Clear();
         }
 
-        public void CreateBullet()
+        public void CreateBullet(SkillS skillS)
         {
-            if (TimeHelper.ServerNow() < this.SkillExcuteHurtTime)
+            if (TimeHelper.ServerNow() < skillS.SkillExcuteHurtTime)
             {
                 return;
             }
 
-            if (this.SkillExcuteNum <= 0)
+            if (skillS.SkillExcuteNum <= 0)
             {
                 return;
             }
 
-            this.HurtIds.Clear();
+            skillS.HurtIds.Clear();
 
-            Unit unit = UnitFactory.CreateBullet(this.TheUnitFrom.DomainScene(), this.TheUnitFrom.Id, this.SkillConf.Id, 0, this.TheUnitFrom.Position,
+            Unit unit = UnitFactory.CreateBullet(skillS.TheUnitFrom.Scene(), skillS.TheUnitFrom.Id, skillS.SkillConf.Id, 0, skillS.TheUnitFrom.Position,
                 new CreateMonsterInfo());
-            unit.AddComponent<RoleBullet5Componnet>().OnBaseBulletInit(this, this.TheUnitFrom.Id);
-            Vector3 target = this.GetBulletTargetPoint(this.SkillInfo.TargetAngle);
+            //unit.AddComponent<RoleBullet5Componnet>().OnBaseBulletInit(this, this.TheUnitFrom.Id);
+            float3 target = this.GetBulletTargetPoint(skillS.SkillInfo.TargetAngle);
             unit.BulletMoveToAsync(target).Coroutine();
-            this.SkillExcuteNum--;
+            skillS.SkillExcuteNum--;
 
-            this.UnitTargetPos = this.TheUnitFrom.DomainScene().GetComponent<MapComponent>().GetCanChongJiPath(this.TheUnitFrom.Position, target);
-            if (this.isChonFeng == 1)
+            int navmeshid = skillS.TheUnitFrom.Scene().GetComponent<MapComponent>().NavMeshId;
+            skillS.TargetPosition = MoveHelper.GetCanChongJiPath(navmeshid, skillS.TheUnitFrom.Position, target);
+            if (skillS.isChonFeng == 1)
             {
-                this.PushUnit(this.TheUnitFrom);
+                this.PushUnit(skillS, skillS.TheUnitFrom);
             }
         }
 
-        public void PushUnit(Unit unit)
+        public void PushUnit(SkillS skillS, Unit unit)
         {
-            unit.GetComponent<StateComponent>().StateTypeAdd(StateTypeEnum.BePulled);
-            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
+            unit.GetComponent<StateComponentS>().StateTypeAdd(StateTypeEnum.BePulled);
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             float oldSpeed = numericComponent.GetAsFloat(NumericType.Now_Speed);
             float oldspeedAdd = numericComponent.GetAsFloat(NumericType.Extra_Buff_Speed_Add);
             double addPro = (double)numericComponent.GetAsInt(NumericType.Now_JumpDisAdd) / 10;
-            float newSpeed = (float)(this.SkillConf.SkillMoveSpeed * (1 + addPro));
+            float newSpeed = (float)(skillS.SkillConf.SkillMoveSpeed * (1 + addPro));
             float newspeedAdd = newSpeed - oldSpeed;
 
             if (newSpeed > oldSpeed && newspeedAdd > oldspeedAdd)
             {
-                this.SpeedAddValue = newspeedAdd - oldspeedAdd;
+                skillS.SpeedAddValue = newspeedAdd - oldspeedAdd;
                 numericComponent.Set(NumericType.Extra_Buff_Speed_Add, newspeedAdd);
             }
             else
             {
-                this.SpeedAddValue = 0f;
+                skillS.SpeedAddValue = 0f;
             }
 
-            unit.GetComponent<StateComponent>().SetRigidityEndTime(0);
-            unit.FindPathMoveToAsync(this.UnitTargetPos,
-                null,
-                false).Coroutine();
+            unit.GetComponent<StateComponentS>().SetRigidityEndTime(0);
+            unit.FindPathMoveToAsync(skillS.TargetPosition).Coroutine();
         }
 
-        public void ReSetPush(Unit unit)
+        public void ReSetPush(SkillS skillS,  Unit unit)
         {
-            unit.GetComponent<StateComponent>().SetRigidityEndTime(0);
-            unit.FindPathMoveToAsync(this.UnitTargetPos,
-                null,
-                false).Coroutine();
+            unit.GetComponent<StateComponentS>().SetRigidityEndTime(0);
+            unit.FindPathMoveToAsync(skillS.TargetPosition).Coroutine();
         }
 
-        public void ReSetUnit(Unit unit)
+        public void ReSetUnit(SkillS skillS, Unit unit)
         {
-            unit.GetComponent<StateComponent>().StateTypeRemove(StateTypeEnum.BePulled);
-            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
-            float curspeedAdd = numericComponent.GetAsFloat(NumericType.Extra_Buff_Speed_Add) - this.SpeedAddValue;
-            numericComponent.Set(NumericType.Extra_Buff_Speed_Add, Mathf.Max(0, curspeedAdd));
+            unit.GetComponent<StateComponentS>().StateTypeRemove(StateTypeEnum.BePulled);
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            float curspeedAdd = numericComponent.GetAsFloat(NumericType.Extra_Buff_Speed_Add) - skillS.SpeedAddValue;
+            numericComponent.Set(NumericType.Extra_Buff_Speed_Add, math.max(0, curspeedAdd));
         }
 
-        public Vector3 GetBulletTargetPoint(int angle)
+        public float3 GetBulletTargetPoint(SkillS skillS, int angle)
         {
-            Vector3 sourcePoint = this.TheUnitFrom.Position;
-            Quaternion rotation = Quaternion.Euler(0, angle, 0);
-            Vector3 TargetPoint = sourcePoint + rotation * Vector3.forward * SkillConf.SkillLiveTime * (float)SkillConf.SkillMoveSpeed * 0.001f;
+            float3 sourcePoint = skillS.TheUnitFrom.Position;
+            quaternion rotation = quaternion.Euler(0, angle, 0);
+            float3 TargetPoint = sourcePoint + math.mul(rotation , new float3(0,1,0)) * skillS.SkillConf.SkillLiveTime * (float)skillS.SkillConf.SkillMoveSpeed * 0.001f;
             return TargetPoint;
         }
     }

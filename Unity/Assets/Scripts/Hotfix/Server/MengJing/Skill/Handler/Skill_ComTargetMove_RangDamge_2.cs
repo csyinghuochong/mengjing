@@ -8,20 +8,20 @@ namespace ET.Server
       
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
 
-            this.SkillExcuteNum = int.Parse(this.SkillConf.GameObjectParameter);
+            skillS.SkillExcuteNum = int.Parse(skillS.SkillConf.GameObjectParameter);
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            if (this.SkillExcuteNum > 100)
+            if (skillS.SkillExcuteNum > 100)
             {
-                Log.Error($"Skill_ComTargetMove_RangDamge_2: {this.SkillConf.Id}");
+                Log.Error($"Skill_ComTargetMove_RangDamge_2: {skillS.SkillConf.Id}");
                 return;
             }
 
-            for (int i = 0; i < this.SkillExcuteNum; i++)
+            for (int i = 0; i < skillS.SkillExcuteNum; i++)
             {
                 //BuffData buffData = new BuffData();
                 //buffData.BuffId = 7;
@@ -29,25 +29,25 @@ namespace ET.Server
                 //buffData.TargetAngle = 360 / SkillExcuteNum * i;      //设置旋转球出现的位置
                 //this.TheUnitFrom.GetComponent<BuffManagerComponent>().BulletFactory(buffData, TheUnitFrom, this);
 
-                Unit unit = UnitFactory.CreateBullet(this.TheUnitFrom.DomainScene(),  this.TheUnitFrom.Id, this.SkillConf.Id, 360 / SkillExcuteNum * i, this.TheUnitFrom.Position, new CreateMonsterInfo());
-                unit.AddComponent<RoleBullet2Componnet>().OnBaseBulletInit(this, this.TheUnitFrom.Id);
+                Unit unit = UnitFactory.CreateBullet(skillS.TheUnitFrom.Scene(),  skillS.TheUnitFrom.Id, skillS.SkillConf.Id, 360 / skillS.SkillExcuteNum * i, skillS.TheUnitFrom.Position, new CreateMonsterInfo());
+                //unit.AddComponent<RoleBullet2Componnet>().OnBaseBulletInit(this, this.TheUnitFrom.Id);
             }
 
-            this.OnUpdate();
+            this.OnUpdate(skillS, 0);
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
-            if (TimeHelper.ServerNow() > SkillEndTime)
+            if (TimeHelper.ServerNow() > skillS.SkillEndTime)
             {
-                this.SetSkillState(SkillState.Finished);
+                skillS.SetSkillState(SkillState.Finished);
                 return;
             }
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            this.Clear();
+            skillS.Clear();
         }
     }
 }

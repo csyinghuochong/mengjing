@@ -13,7 +13,7 @@
         public override void OnExecute(SkillS skillS)
         {
             skillS.InitSelfBuff();
-            skillS.OnUpdate();
+            OnUpdate(skillS, 0);
         }
         
         public override void OnUpdate(SkillS skillS, int updateMode)

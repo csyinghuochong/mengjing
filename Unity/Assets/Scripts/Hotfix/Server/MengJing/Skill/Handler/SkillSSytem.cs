@@ -123,12 +123,6 @@ namespace ET.Server
                  }
              }
          }
-
-         public static void  OnUpdate(this ET.Server.SkillS self)
-         {
-             self.BaseOnUpdate();
-             self.CheckChiXuHurt();
-         }
          
          //每帧检测
          public static void BaseOnUpdate(this ET.Server.SkillS self)
@@ -591,12 +585,21 @@ namespace ET.Server
              }
          }
 
+         public static void  OnUpdate(this ET.Server.SkillS self, int uddateMode)
+         {
+             SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(self.SkillConf.GameObjectName);
+             if (aaiHandler != null)
+             {
+                 aaiHandler.OnUpdate(self, uddateMode);
+             }
+         }
+         
          public static void Check_Map(this ET.Server.SkillS self)
          {
              SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(self.SkillConf.GameObjectName);
              if (aaiHandler != null)
              {
-                 aaiHandler.Check_Map(self);
+                 aaiHandler.OnUpdate(self, 1);
              }
          }
     }

@@ -25,7 +25,7 @@ namespace ET.Server
             skillS.TargetPosition = TargetPoint;
             skillS.BulletUnit.BulletMoveToAsync(TargetPoint).Coroutine();
 
-            skillS.OnUpdate();    
+            OnUpdate(skillS, 0);    
         }
 
         public override void OnUpdate(SkillS skillS, int updateMode)

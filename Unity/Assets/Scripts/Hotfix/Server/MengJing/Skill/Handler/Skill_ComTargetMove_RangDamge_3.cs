@@ -9,11 +9,11 @@
         
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
 
-            this.ICheckShape.Clear();
-            string[] paraminfos = this.SkillConf.GameObjectParameter.Split(';');
-            int angle = this.SkillInfo.TargetAngle;
+            skillS.ICheckShape.Clear();
+            string[] paraminfos = skillS.SkillConf.GameObjectParameter.Split(';');
+            int angle = skillS.SkillInfo.TargetAngle;
             int range = paraminfos.Length > 1 ? int.Parse(paraminfos[0]) : 0;
             int number = paraminfos.Length > 1 ? int.Parse(paraminfos[1]) : 1;
             int delta = number > 1 ? range / (number - 1) : 0;
@@ -21,42 +21,42 @@
 
             for (int i = 0; i < 3; i++)
             {
-                this.ICheckShape.Add(this.CreateCheckShape(starAngle + i * delta));
+                skillS.ICheckShape.Add(skillS.CreateCheckShape(starAngle + i * delta));
             }
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            this.InitSelfBuff();
+            skillS.InitSelfBuff();
 
-            this.OnUpdate();
+            this.OnUpdate(skillS, 0);
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
             long serverNow = TimeHelper.ServerNow();
             //根据技能效果延迟触发伤害
-            if (serverNow < this.SkillExcuteHurtTime)
+            if (serverNow < skillS.SkillExcuteHurtTime)
             {
                 return;
             }
             //根据技能存在时间设置其结束状态
-            if (serverNow > this.SkillEndTime)
+            if (serverNow > skillS.SkillEndTime)
             {
-                this.SetSkillState(SkillState.Finished);
+                skillS.SetSkillState(SkillState.Finished);
                 return;
             }
-            if (!this.IsExcuteHurt)
+            if (!skillS.IsExcuteHurt)
             {
-                this.IsExcuteHurt= true;
-                this.ExcuteSkillAction();
-                this.CheckChiXuHurt();
+                skillS.IsExcuteHurt= true;
+                skillS.ExcuteSkillAction();
+                skillS.CheckChiXuHurt();
             }
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            this.Clear();
+            skillS.Clear();
         }
 
     }

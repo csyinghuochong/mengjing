@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -10,21 +11,21 @@ namespace ET.Server
     {
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            this.InitSelfBuff();
+            skillS.InitSelfBuff();
 
-            Unit theUnitFrom = this.TheUnitFrom;
+            Unit theUnitFrom = skillS.TheUnitFrom;
 
             if (theUnitFrom.Type == UnitType.Player)
             {
                 // 召唤物释放相同技能
                 // '90000102,90000103(如果填0是所有)
                 // 召唤ID,召唤ID
-                string[] summonParList = this.SkillConf.GameObjectParameter.Split(';');
+                string[] summonParList = skillS.SkillConf.GameObjectParameter.Split(';');
                 List<int> monsterIds = new List<int>();
                 bool allMonster = false;
                 try
@@ -42,7 +43,6 @@ namespace ET.Server
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("Skill_Com_Summon_6:Error:  ", this.SkillConf.Id);
                     Log.Error(ex.ToString());
                     return;
                 }
@@ -52,42 +52,42 @@ namespace ET.Server
                 {
                     if (unit.Type == UnitType.Monster && unit.MasterId == theUnitFrom.Id && (allMonster || monsterIds.Contains(unit.ConfigId)))
                     {
-                        C2M_SkillCmd cmd = unit.GetComponent<AIComponent>().c2M_SkillCmd;
-                        cmd.TargetID = this.SkillInfo.TargetID;
-                        cmd.SkillID = this.SkillConf.Id;
-                        if (this.SkillConf.SkillZhishiTargetType == 1) //自身点
+                        C2M_SkillCmd cmd = new C2M_SkillCmd();
+                        cmd.TargetID = skillS.SkillInfo.TargetID;
+                        cmd.SkillID = skillS.SkillConf.Id;
+                        if (skillS.SkillConf.SkillZhishiTargetType == 1) //自身点
                         {
                             cmd.TargetAngle = 0;
                             cmd.TargetDistance = 0;
                         }
                         else
                         {
-                            if (this.TheUnitTarget != null)
+                            if (skillS.TheUnitTarget != null)
                             {
-                                Vector3 direction = this.TheUnitTarget.Position - unit.Position;
-                                float ange = Mathf.Rad2Deg(Mathf.Atan2(direction.x, direction.z));
-                                cmd.TargetAngle = Mathf.FloorToInt(ange);
-                                cmd.TargetDistance = Vector3.Distance(unit.Position, this.TheUnitTarget.Position);
+                                float3 direction = skillS.TheUnitTarget.Position - unit.Position;
+                                float ange = math.atan2(direction.x, direction.z) * 3.14f;
+                                cmd.TargetAngle = (int)math.floor(ange);
+                                cmd.TargetDistance = PositionHelper.Distance2D(unit.Position, skillS.TheUnitTarget.Position);
                             }
                         }
 
-                        unit.GetComponent<SkillManagerComponent>().OnUseSkill(cmd, true);
+                        unit.GetComponent<SkillManagerComponentS>().OnUseSkill(cmd, true);
                     }
                 }
             }
 
-            this.OnUpdate();
+            OnUpdate(skillS, 0);
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
-            this.BaseOnUpdate();
-            this.CheckChiXuHurt();
+            skillS.BaseOnUpdate();
+            skillS.CheckChiXuHurt();
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            this.Clear();
+            skillS.Clear();
         }
     }
 }

@@ -10,95 +10,92 @@ namespace ET.Server
      
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
 
-            if (string.IsNullOrEmpty(SkillConf.GameObjectParameter))
+            if (string.IsNullOrEmpty(skillS.SkillConf.GameObjectParameter))
             {
-                this.SkillTriggerInvelTime = 1000;
-                Log.Warning($"SkillConf.GameObjectParameter:  {SkillConf.Id}  {SkillConf.GameObjectParameter}");
+                skillS.SkillTriggerInvelTime = 1000;
             }
             else
             {
                 try
                 {
-                    this.SkillTriggerInvelTime = (long)(float.Parse(SkillConf.GameObjectParameter) * 1000);
+                    skillS.SkillTriggerInvelTime = (long)(float.Parse(skillS.SkillConf.GameObjectParameter) * 1000);
                 }
                 catch (Exception ex)
                 {
                     Log.Debug(ex.ToString());
-                    Log.Warning($"SkillConf.GameObjectParameter:  {SkillConf.Id}  {SkillConf.GameObjectParameter}");
                 }
-
             }
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            this.InitSelfBuff();
-            this.OnUpdate();
+            skillS.InitSelfBuff();
+            OnUpdate(skillS, 0);
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
-            this.IsExcuteHurt = false;
-            if (this.SkillConf.SkillTargetType == SkillTargetType.SelfFollow)
+            skillS.IsExcuteHurt = false;
+            if (skillS.SkillConf.SkillTargetType == SkillTargetType.SelfFollow)
             {
-                this.UpdateCheckPoint(this.TheUnitFrom.Position);
+                skillS.UpdateCheckPoint(skillS.TheUnitFrom.Position);
             }
 
             long curTime = TimeHelper.ServerNow();
-            for (int i = HurtIds.Count - 1; i >= 0; i--)
+            for (int i = skillS.HurtIds.Count - 1; i >= 0; i--)
             {
-                long unitId = this.HurtIds[i];
-                Unit unit = this.TheUnitFrom.Domain.GetComponent<UnitComponent>().Get(unitId);
+                long unitId = skillS.HurtIds[i];
+                Unit unit = skillS.TheUnitFrom.GetParent<UnitComponent>().Get(unitId);
                 if (unit == null || unit.IsDisposed)
                 {
-                    this.HurtIds.RemoveAt(i);
-                    RemoveHurtTime(unitId);
+                    skillS.HurtIds.RemoveAt(i);
+                    RemoveHurtTime(skillS,unitId);
                     continue;
                 }
 
-                if (!this.CheckShape(unit.Position))
+                if (!skillS.CheckShape(unit.Position))
                 {
-                    this.HurtIds.RemoveAt(i);
-                    RemoveHurtTime(unitId);
+                    skillS.HurtIds.RemoveAt(i);
+                    RemoveHurtTime(skillS, unitId);
                     continue;
                 }
-                if (!this.LastHurtTimes.ContainsKey(unitId))
+                if (!skillS.LastHurtTimes.ContainsKey(unitId))
                 {
                     continue;
                 }
            
-                if (curTime - this.LastHurtTimes[unitId] >= this.SkillTriggerInvelTime)
+                if (curTime - skillS.LastHurtTimes[unitId] >= skillS.SkillTriggerInvelTime)
                 {
-                    this.HurtIds.RemoveAt(i);
-                    RemoveHurtTime(unitId);
+                    skillS.HurtIds.RemoveAt(i);
+                    RemoveHurtTime(skillS, unitId);
                 }
             }
 
-            this.BaseOnUpdate();
-            this.CheckChiXuHurt();
+            skillS.BaseOnUpdate();
+            skillS.CheckChiXuHurt();
 
-            for (int i = HurtIds.Count - 1; i >= 0; i--)
+            for (int i = skillS.HurtIds.Count - 1; i >= 0; i--)
             {
-                long unitId = this.HurtIds[i];
-                if (!this.LastHurtTimes.ContainsKey(unitId))
+                long unitId = skillS.HurtIds[i];
+                if (!skillS.LastHurtTimes.ContainsKey(unitId))
                 {
-                    this.LastHurtTimes.Add(unitId, TimeHelper.ServerNow());
+                    skillS.LastHurtTimes.Add(unitId, TimeHelper.ServerNow());
                 }
             }
         }
 
-        private void RemoveHurtTime(long unitId)
+        private void RemoveHurtTime(SkillS skillS, long unitId)
         {
-            if (!this.LastHurtTimes.ContainsKey(unitId))
+            if (!skillS.LastHurtTimes.ContainsKey(unitId))
                 return;
-            this.LastHurtTimes.Remove(unitId);
+            skillS.LastHurtTimes.Remove(unitId);
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            this.Clear();
+            skillS.Clear();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace ET.Server
+﻿using Unity.Mathematics;
+
+namespace ET.Server
 {
     /// <summary>
     /// 向前方释放一个火球火球移动过程造成一次伤害，移动x秒后位置固定，并且对周围造成持续伤害持续伤害间隔时间，中途碰撞时是否停下
@@ -6,62 +8,59 @@
     /// </summary>
     public class Skill_ComTargetMove_RangDamge_6: SkillHandlerS
     {
-        private long MoveTime;
-        private int IsStop;
-
+        
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
 
-            string[] paraminfos = this.SkillConf.GameObjectParameter.Split(';');
-            this.MoveTime = (long)(float.Parse(paraminfos[0]) * 1000);
-            this.SkillTriggerInvelTime = (long)(float.Parse(paraminfos[1]) * 1000);
-            this.IsStop = int.Parse(paraminfos[2]);
+            string[] paraminfos = skillS.SkillConf.GameObjectParameter.Split(';');
+            skillS.MoveTime = (long)(float.Parse(paraminfos[0]) * 1000);
+            skillS.SkillTriggerInvelTime = (long)(float.Parse(paraminfos[1]) * 1000);
+            skillS.IsStop = int.Parse(paraminfos[2]);
 
-            this.SkillExcuteNum = 1;
+            skillS.SkillExcuteNum = 1;
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            this.InitSelfBuff();
-            this.OnUpdate();
+            skillS.InitSelfBuff();
+            this.OnUpdate(skillS, 0);
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
-            this.CreateBullet();
-            if (TimeHelper.ServerNow() > SkillEndTime)
+            this.CreateBullet(skillS);
+            if (TimeHelper.ServerNow() > skillS.SkillEndTime)
             {
-                this.SetSkillState(SkillState.Finished);
+                skillS.SetSkillState(SkillState.Finished);
                 return;
             }
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            this.Clear();
+            skillS.Clear();
         }
 
-        public void CreateBullet()
+        public void CreateBullet(SkillS skillS)
         {
-            if (TimeHelper.ServerNow() < this.SkillExcuteHurtTime)
+            if (TimeHelper.ServerNow() < skillS.SkillExcuteHurtTime)
             {
                 return;
             }
 
-            if (this.SkillExcuteNum <= 0)
+            if (skillS.SkillExcuteNum <= 0)
             {
                 return;
             }
-
-            Unit unit = UnitFactory.CreateBullet(this.TheUnitFrom.DomainScene(), this.TheUnitFrom.Id, this.SkillConf.Id, 0, this.TheUnitFrom.Position,
+            Unit unit = UnitFactory.CreateBullet(skillS.TheUnitFrom.Scene(), skillS.TheUnitFrom.Id, skillS.SkillConf.Id, 0, skillS.TheUnitFrom.Position,
                 new CreateMonsterInfo());
-            unit.AddComponent<RoleBullet6Componnet>().OnBaseBulletInit(this, this.TheUnitFrom.Id, this.IsStop);
-            Vector3 sourcePoint = this.TheUnitFrom.Position;
-            Quaternion rotation = Quaternion.Euler(0, this.SkillInfo.TargetAngle, 0);
-            Vector3 TargetPoint = sourcePoint + rotation * Vector3.forward * this.MoveTime * (float)SkillConf.SkillMoveSpeed * 0.001f;
+            //unit.AddComponent<RoleBullet6Componnet>().OnBaseBulletInit(this, this.TheUnitFrom.Id, this.IsStop);
+            float3 sourcePoint = skillS.TheUnitFrom.Position;
+            quaternion rotation = quaternion.Euler(0, skillS.SkillInfo.TargetAngle, 0);
+            float3 TargetPoint = sourcePoint + math.mul(rotation ,new float3(0,1,0)) * skillS.MoveTime * (float)skillS.SkillConf.SkillMoveSpeed * 0.001f;
             unit.BulletMoveToAsync(TargetPoint).Coroutine();
-            this.SkillExcuteNum--;
+            skillS.SkillExcuteNum--;
         }
     }
 }

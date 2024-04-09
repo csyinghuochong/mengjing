@@ -9,7 +9,7 @@ namespace ET.Server
     public class SkillS:Entity,IAwake,IDestroy
     {
         public List<long> HurtIds { get; set; }= new List<long>();
-        public Dictionary<long, long> LastHurtTimes = new Dictionary<long, long>();
+        public Dictionary<long, long> LastHurtTimes{ get; set; }=  new Dictionary<long, long>();
         public Dictionary<int, float> TianfuProAdd;
 
         //1 正在执行   2完成使命
@@ -58,11 +58,17 @@ namespace ET.Server
 
         public Unit TheUnitTarget { get; set; }
 
-        public List<Shape> ICheckShape;
+        public List<Shape> ICheckShape  { get; set; }
 
         public SkillInfo SkillInfo{ get; set; }
 
         public bool Return{ get; set; }
         public Unit BulletUnit{ get; set; }
+        
+        public int isChonFeng{ get; set; }
+        public float SpeedAddValue { get; set; }= 0f;
+
+        public long MoveTime{ get; set; } = 0f;
+        public int IsStop{ get; set; } = 0f;
     }
 }

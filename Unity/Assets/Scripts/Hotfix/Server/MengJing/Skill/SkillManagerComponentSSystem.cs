@@ -905,7 +905,7 @@ namespace ET.Server
                       continue;
                   }
                   
-                  self.Skills[i].OnUpdate();
+                  self.Skills[i].OnUpdate(0);
                   if (!skillHandler.SkillConf.GameObjectName.Equals(ConfigData.Skill_Halo_2))
                   {
                       continue;
@@ -993,7 +993,7 @@ namespace ET.Server
               int skillcnt = self.Skills.Count;
               for (int i = skillcnt - 1; i >= 0; i-- )
               {
-                  self.Skills[i].OnUpdate();
+                  self.Skills[i].OnUpdate(0);
                   if (self.Skills.Count == 0 || self.SelfUnit.IsDisposed)
                   {
                       //Unit unit = self.GetParent<Unit>();

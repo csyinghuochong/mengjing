@@ -1,4 +1,6 @@
 ﻿
+using Unity.Mathematics;
+
 namespace ET.Server
 {
     //指定目标攻击
@@ -6,70 +8,73 @@ namespace ET.Server
     {
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
-            this.NowPosition = theUnitFrom.Position;
-            this.NowPosition.y = theUnitFrom.Position.y + SkillHelp.GetCenterHigh(theUnitFrom.Type, theUnitFrom.ConfigId);
-
-            this.TheUnitTarget = this.TheUnitFrom.GetParent<UnitComponent>().Get(this.SkillInfo.TargetID);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
+            float3 nowPosition = new float3(theUnitFrom.Position.x,
+                theUnitFrom.Position.y + SkillHelp.GetCenterHigh(theUnitFrom.Type, theUnitFrom.ConfigId),
+                theUnitFrom.Position.z);
+            skillS.NowPosition = nowPosition;
+            skillS.TheUnitTarget = skillS.TheUnitFrom.GetParent<UnitComponent>().Get(skillS.SkillInfo.TargetID);
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            this.InitSelfBuff();
-            this.OnUpdate();
+            skillS.InitSelfBuff();
+            OnUpdate(skillS, 0);
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
             long serverNow = TimeHelper.ServerNow();
             //根据技能效果延迟触发伤害
-            if (serverNow < this.SkillExcuteHurtTime)
+            if (serverNow < skillS.SkillExcuteHurtTime)
             {
                 return;
             }
 
-            if (this.TheUnitTarget != null && !this.TheUnitTarget.IsDisposed)
+            if (skillS.TheUnitTarget != null && !skillS.TheUnitTarget.IsDisposed)
             {
-                this.TargetPosition = this.TheUnitTarget.Position;
-                this.TargetPosition.y = this.TheUnitTarget.Position.y + SkillHelp.GetCenterHigh(this.TheUnitTarget.Type, this.TheUnitTarget.ConfigId);
+                float3 targetPosition = new float3(skillS.TheUnitTarget.Position.x,
+                    skillS.TheUnitTarget.Position.y + SkillHelp.GetCenterHigh(skillS.TheUnitTarget.Type, skillS.TheUnitTarget.ConfigId),
+                    skillS.TheUnitTarget.Position.z);
+                skillS.TargetPosition = targetPosition;
             }
             else
             {
-                this.SetSkillState(SkillState.Finished);
+                skillS.SetSkillState(SkillState.Finished);
                 return;
             }
             
-            Vector3 dir = (this.TargetPosition - this.NowPosition).normalized;
-            float dis = PositionHelper.Distance2D(this.NowPosition, this.TargetPosition);
-            float move = (float)this.SkillConf.SkillMoveSpeed * 0.1f;            //服务器0.1秒一帧
-            move = Mathf.Min(dis, move);
-            this.NowPosition = this.NowPosition + move * dir;
+            float3 dir = math.normalize(skillS.TargetPosition - skillS.NowPosition);
+            float dis = PositionHelper.Distance2D(skillS.NowPosition, skillS.TargetPosition);
+            float move = (float)skillS.SkillConf.SkillMoveSpeed * 0.1f;            //服务器0.1秒一帧
+            move = math.min(dis, move);
+            skillS.NowPosition = skillS.NowPosition + move * dir;
           
             //获取目标与自身的距离是否小于0.5f,小于触发将伤害,销毁自身
-            dis = PositionHelper.Distance2D(this.NowPosition, this.TargetPosition);
+            dis = PositionHelper.Distance2D(skillS.NowPosition, skillS.TargetPosition);
             if (dis > 0.5f)
             {
                 return;
             }
 
-            float damgeRange = (float)this.SkillConf.DamgeRange[0];
-            if (this.SkillConf.SkillTargetType == (int)SkillTargetType.TargetOnly
-            || this.SkillConf.SkillTargetType == (int)SkillTargetType.MulTarget
+            float damgeRange = (float)skillS.SkillConf.DamgeRange[0];
+            if (skillS.SkillConf.SkillTargetType == (int)SkillTargetType.TargetOnly
+            || skillS.SkillConf.SkillTargetType == (int)SkillTargetType.MulTarget
             ||  damgeRange == 0f)
             {
-                this.OnCollisionUnit(this.TheUnitTarget);
+                skillS.OnCollisionUnit( skillS.TheUnitTarget);
             }
             else
             {
-                this.UpdateCheckPoint(this.NowPosition);
-                this.ExcuteSkillAction();
+                skillS.UpdateCheckPoint(skillS.NowPosition);
+                skillS.ExcuteSkillAction();
             }
-            this.SetSkillState(SkillState.Finished);
+            skillS.SetSkillState(SkillState.Finished);
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            this.Clear();
+            skillS.Clear();
         }
     }
 }

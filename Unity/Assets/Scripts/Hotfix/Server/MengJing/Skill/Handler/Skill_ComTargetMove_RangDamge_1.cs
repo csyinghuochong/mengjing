@@ -1,4 +1,6 @@
 ﻿
+using Unity.Mathematics;
+
 namespace ET.Server
 {
 
@@ -8,51 +10,51 @@ namespace ET.Server
 
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
 
             //60; 5; 0.3; 3
-            string[] paraminfos = this.SkillConf.GameObjectParameter.Split(';');//0;1;0.3;2  90011941
+            string[] paraminfos = skillS.SkillConf.GameObjectParameter.Split(';');//0;1;0.3;2  90011941
             if (paraminfos.Length >= 4)
             {
-                this.SkillTriggerLastTime = 0;
-                this.SkillTriggerInvelTime = (long)(float.Parse(paraminfos[2]) * 1000);
-                this.SkillExcuteNum = int.Parse(paraminfos[3]);
+                skillS.SkillTriggerLastTime = 0;
+                skillS.SkillTriggerInvelTime = (long)(float.Parse(paraminfos[2]) * 1000);
+                skillS.SkillExcuteNum = int.Parse(paraminfos[3]);
             }
             else
             {
-                this.SkillExcuteNum = 1;
+                skillS.SkillExcuteNum = 1;
             }
         }
 
-        public Vector3 GetBulletTargetPoint(int angle)
+        public float3 GetBulletTargetPoint(SkillS skillS, int angle)
         {
-            Vector3 sourcePoint = TheUnitFrom.Position;
-            Quaternion rotation = Quaternion.Euler(0, angle, 0);
-            Vector3 TargetPoint = sourcePoint + rotation * Vector3.forward * SkillConf.SkillLiveTime * (float)SkillConf.SkillMoveSpeed * 0.001f;
+            float3 sourcePoint = skillS.TheUnitFrom.Position;
+            quaternion rotation = quaternion.Euler(0, angle, 0);
+            float3 TargetPoint = sourcePoint + math.mul(rotation , new float3(0,1,0)) * skillS.SkillConf.SkillLiveTime * (float)skillS.SkillConf.SkillMoveSpeed * 0.001f;
             return TargetPoint;
         }
 
-        public void CreateBullet()
+        public void CreateBullet(SkillS skillS)
         {
-            if (TimeHelper.ServerNow() < this.SkillExcuteHurtTime)
+            if (TimeHelper.ServerNow() < skillS.SkillExcuteHurtTime)
             {
                 return;
             }
 
-            if (this.SkillExcuteNum <= 0)
+            if (skillS.SkillExcuteNum <= 0)
             {
                 return;
             }
             long serverTime = TimeHelper.ServerNow();
-            if (serverTime - this.SkillTriggerLastTime < this.SkillTriggerInvelTime)
+            if (serverTime - skillS.SkillTriggerLastTime < skillS.SkillTriggerInvelTime)
             {
                 return;
             }
 
-            this.HurtIds.Clear();
-            this.SkillTriggerLastTime = serverTime;
-            string[] paraminfos = this.SkillConf.GameObjectParameter.Split(';');
-            int angle = this.SkillInfo.TargetAngle;
+            skillS.HurtIds.Clear();
+            skillS.SkillTriggerLastTime = serverTime;
+            string[] paraminfos = skillS.SkillConf.GameObjectParameter.Split(';');
+            int angle = skillS.SkillInfo.TargetAngle;
             int range = paraminfos.Length > 1 ? int.Parse(paraminfos[0]) : 0;
             int number = paraminfos.Length > 1 ? int.Parse(paraminfos[1]) : 1;
             int delta = number > 1 ? range / (number - 1) : 0;
@@ -60,42 +62,41 @@ namespace ET.Server
 
             if (number > 100)
             {
-                Log.Error($"Skill_ComTargetMove_RangDamge_1: {this.SkillConf.Id}");
                 return;
             }
             for (int i = 0; i < number; i++)
             {
-                Vector3 targetpos = this.GetBulletTargetPoint(starAngle + i * delta);
-                Unit unit = UnitFactory.CreateBullet(this.TheUnitFrom.DomainScene(), this.TheUnitFrom.Id, this.SkillConf.Id, 0, this.TheUnitFrom.Position, new CreateMonsterInfo());
-                unit.AddComponent<RoleBullet1Componnet>().OnBaseBulletInit(this, this.TheUnitFrom.Id);
+                float3 targetpos = this.GetBulletTargetPoint(skillS, starAngle + i * delta);
+                Unit unit = UnitFactory.CreateBullet(skillS.TheUnitFrom.Scene(), skillS.TheUnitFrom.Id, skillS.SkillConf.Id, 0, skillS.TheUnitFrom.Position, new CreateMonsterInfo());
+                //unit.AddComponent<RoleBullet1Componnet>().OnBaseBulletInit(this, skillS.TheUnitFrom.Id);
                 unit.BulletMoveToAsync(targetpos).Coroutine();
             }
-            this.SkillExcuteNum--;
+            skillS.SkillExcuteNum--;
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            this.InitSelfBuff();
+            skillS.InitSelfBuff();
 
-            this.CreateBullet();
+            CreateBullet(skillS);
 
-            this.OnUpdate();
+            OnUpdate(skillS, 0);
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
-            this.CreateBullet();
+            CreateBullet(skillS);
 
-            if (TimeHelper.ServerNow() > SkillEndTime)
+            if (TimeHelper.ServerNow() > skillS.SkillEndTime)
             {
-                this.SetSkillState(SkillState.Finished);
+                skillS.SetSkillState(SkillState.Finished);
                 return;
             }
         }
 
         public override void OnFinished(SkillS skillS)
         {
-            this.Clear();
+            skillS.Clear();
         }
     }
 }

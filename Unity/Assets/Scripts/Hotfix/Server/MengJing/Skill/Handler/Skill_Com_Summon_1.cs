@@ -69,7 +69,7 @@ namespace ET.Server
                     unitInfoComponent.ZhaohuanIds.Add(unit.Id);
                 }
             }
-            skillS.OnUpdate();
+            OnUpdate(skillS, 0);
         }
 
         public override void OnUpdate(SkillS skillS, int updateMode)

@@ -3,74 +3,73 @@
     //量子导弹
     public class Skill_Follow_Damge_1 : SkillHandlerS
     {
-        private Unit BulletUnit;
-
+        
         public override void OnInit(SkillS skillS, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
-            this.SkillTriggerInvelTime = (long)(float.Parse(SkillConf.GameObjectParameter) * 1000);
-            this.SkillTriggerLastTime = 0;
+            skillS.BaseOnInit(skillS.SkillInfo, theUnitFrom);
+            skillS.SkillTriggerInvelTime = (long)(float.Parse(skillS.SkillConf.GameObjectParameter) * 1000);
+            skillS.SkillTriggerLastTime = 0;
         }
 
         public override void OnExecute(SkillS skillS)
         {
-            this.BulletUnit = UnitFactory.CreateBullet(this.TheUnitFrom.DomainScene(), this.TheUnitFrom.Id, this.SkillConf.Id, 0, this.NowPosition, new CreateMonsterInfo());
-            this.BulletUnit.AddComponent<DeathTimeComponent, long>((long)(this.SkillConf.SkillLiveTime * 1000 + TimeHelper.Minute));
+            skillS.BulletUnit = UnitFactory.CreateBullet(skillS.TheUnitFrom.Scene(), skillS.TheUnitFrom.Id, skillS.SkillConf.Id, 0, skillS.NowPosition, new CreateMonsterInfo());
+            skillS.BulletUnit.AddComponent<DeathTimeComponent, long>((long)(skillS.SkillConf.SkillLiveTime * 1000 + TimeHelper.Minute));
 
-            this.GetTheUnitTarget();
-            this.OnUpdate();
+            this.GetTheUnitTarget(skillS);
+            this.OnUpdate(skillS, 0);
         }
 
-        public void GetTheUnitTarget()
+        public void GetTheUnitTarget(SkillS skillS)
         {
             //寻找最近的可攻击对象
-            this.TheUnitTarget = AIHelp.GetNearestEnemyByPosition(this.TheUnitFrom, this.BulletUnit.Position, 10);
+            skillS.TheUnitTarget = AIHelp.GetNearestEnemyByPosition(skillS.TheUnitFrom, skillS.BulletUnit.Position, 10);
         }
 
-        public override void OnUpdate(SkillS skillS)
+        public override void OnUpdate(SkillS skillS, int updateMode)
         {
             //this.BaseOnUpdate();
             long serverNow = TimeHelper.ServerNow();
             //根据技能效果延迟触发伤害
-            if (serverNow < this.SkillExcuteHurtTime)
+            if (serverNow < skillS.SkillExcuteHurtTime)
             {
                 return;
             }
             //根据技能存在时间设置其结束状态
-            if (serverNow > this.SkillEndTime)
+            if (serverNow > skillS.SkillEndTime)
             {
-                this.SetSkillState(SkillState.Finished);
+                skillS.SetSkillState(SkillState.Finished);
                 return;
             }
-            if (this.BulletUnit == null || this.BulletUnit.IsDisposed)
+            if (skillS.BulletUnit == null || skillS.BulletUnit.IsDisposed)
             {
                 return;
             }
-            if (this.TheUnitTarget == null || this.TheUnitTarget.IsDisposed)
+            if (skillS.TheUnitTarget == null || skillS.TheUnitTarget.IsDisposed)
             {
-                this.GetTheUnitTarget();
+                this.GetTheUnitTarget(skillS);
                 return;
             }
            
-            if (serverNow - this.SkillTriggerLastTime < this.SkillTriggerInvelTime)
+            if (serverNow - skillS.SkillTriggerLastTime < skillS.SkillTriggerInvelTime)
             {
                 return;
             }
-            this.SkillTriggerLastTime = serverNow;
-            this.HurtIds.Clear();
-            this.UpdateCheckPoint(this.BulletUnit.Position);
-            this.ExcuteSkillAction();
-            this.BulletUnit.BulletMoveToAsync(this.TheUnitTarget.Position).Coroutine();
+            skillS.SkillTriggerLastTime = serverNow;
+            skillS.HurtIds.Clear();
+            skillS.UpdateCheckPoint(skillS.BulletUnit.Position);
+            skillS.ExcuteSkillAction();
+            skillS.BulletUnit.BulletMoveToAsync(skillS.TheUnitTarget.Position).Coroutine();
         }
 
         public override void OnFinished(SkillS skillS)
         {
             //移除Unity
-            if (this.BulletUnit != null && !this.BulletUnit.IsDisposed)
+            if (skillS.BulletUnit != null && !skillS.BulletUnit.IsDisposed)
             {
-                this.BulletUnit.GetParent<UnitComponent>().Remove(BulletUnit.Id);
+                skillS.BulletUnit.GetParent<UnitComponent>().Remove(skillS.BulletUnit.Id);
             }
-            this.Clear();
+            skillS.Clear();
         }
     } 
 
