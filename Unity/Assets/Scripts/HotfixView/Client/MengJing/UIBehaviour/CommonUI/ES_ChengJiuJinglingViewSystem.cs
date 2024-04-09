@@ -16,6 +16,8 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_ChengJiuJinglingItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChengJiuJinglingItemsRefresh);
+            
+            self.OnInitUI();
         }
 
         [EntitySystem]
@@ -32,7 +34,7 @@ namespace ET.Client
                 chengJiuComponent.JingLingList.Contains(self.ShowJingLing[index].Id));
         }
 
-        public static void  OnInitUI(this ES_ChengJiuJingling self)
+        public static async ETTask OnInitUI(this ES_ChengJiuJingling self)
         {
             self.ShowJingLing.Clear();
             self.ShowJingLing.AddRange(JingLingConfigCategory.Instance.GetAll().Values.ToList());

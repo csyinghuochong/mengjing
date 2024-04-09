@@ -47,7 +47,10 @@ namespace ET.Client
             self.E_ChengHaoNameText.text = jingLingConfig.Name;
 
             GameObject gameObject = self.ES_ModelShow.EG_RootRectTransform.gameObject;
-            self.ES_ModelShow.ShowOtherModel("JingLing/" + jingLingConfig.Assets).Coroutine();
+            // self.ES_ModelShow.ShowOtherModel("JingLing/" + jingLingConfig.Assets).Coroutine();
+            // 测试 70001001
+            self.ES_ModelShow.ShowOtherModel("JingLing/" + 70001001, canDrag: false).Coroutine();
+
             gameObject.transform.Find("Camera").localPosition = new Vector3(0f, 40f, 200f);
             gameObject.transform.localPosition = new Vector2(jingLingConfig.Id % 10 * 1000, 0);
             gameObject.transform.Find("ModelParent").localRotation = Quaternion.Euler(0f, -45f, 0f);
@@ -55,7 +58,7 @@ namespace ET.Client
             self.E_Text_valueText.text = jingLingConfig.Des;
             self.E_ObjGetTextText.text = jingLingConfig.GetDes;
             self.E_JingLingDesText.text = jingLingConfig.ProDes;
-            UICommonHelper.SetImageGray(self.Root(), self.ES_ModelShow.E_RenderRawImage.gameObject, !active);
+            UICommonHelper.SetRawImageGray(self.Root(), self.ES_ModelShow.E_RenderRawImage.gameObject, !active);
 
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
             bool current = chengJiuComponent.JingLingId == jid;
