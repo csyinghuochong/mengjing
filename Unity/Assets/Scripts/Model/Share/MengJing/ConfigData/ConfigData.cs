@@ -34,6 +34,19 @@ namespace ET
         };
 
         /// <summary>
+        /// 洗练次数奖励
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, string> ItemXiLianNumReward = new Dictionary<int, string>()
+        {
+            { 30, "1;200000@10000158;1$1;0,0" },
+            { 80, "1;300000@10000158;2$1;0,0" },
+            { 150, "1;500000@10010053;1@10000151;1$1;0,0" },
+            { 300, "1;1000000@10000151;1@11200000;1$1;0,0" },
+        };
+        
+        
+        /// <summary>
         /// 小龟选手 npcconfig
         /// </summary>
         [StaticField]

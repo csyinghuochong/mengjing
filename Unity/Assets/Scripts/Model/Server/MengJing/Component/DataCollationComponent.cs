@@ -99,7 +99,7 @@ namespace ET.Server
         public int XiLianTimes;
 
         //钻石洗练次数
-        public int DiamondXiLianTimes;
+        public int DiamondXiLianTimes { get; set; }
 
         //上次封印之塔层数（不是最高, 上一次即可）
         public int LastSealTowerId;

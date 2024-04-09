@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ET
+
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2M_ItemXiLianTransferHandler : AMActorLocationRpcHandler<Unit, C2M_ItemXiLianTransferRequest, M2C_ItemXiLianTransferResponse>
+    [MessageLocationHandler(SceneType.Map)]
+    public class C2M_ItemXiLianTransferHandler : MessageLocationHandler<Unit, C2M_ItemXiLianTransferRequest, M2C_ItemXiLianTransferResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_ItemXiLianTransferRequest request, M2C_ItemXiLianTransferResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_ItemXiLianTransferRequest request, M2C_ItemXiLianTransferResponse response)
         {
-            BagInfo bagInfo_1 = unit.GetComponent<BagComponent>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID_1);
-            BagInfo bagInfo_2 = unit.GetComponent<BagComponent>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID_2);
+            BagInfo bagInfo_1 = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID_1);
+            BagInfo bagInfo_2 = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID_2);
             if (bagInfo_1 == null || bagInfo_2 == null)
             {
-                reply();
                 return;
             }
 
@@ -33,7 +30,6 @@ namespace ET
             //紫色品质以上才可以转移
             if (itemConfig_0.ItemQuality < 4 || itemConfig_1.ItemQuality < 4)
             {
-                reply();
                 return;
             }
 
@@ -43,7 +39,6 @@ namespace ET
                 //相同部位
                 if (itemConfig_0.EquipType != itemConfig_1.EquipType)
                 {
-                    reply();
                     return;
                 }
             }
@@ -53,16 +48,14 @@ namespace ET
                 //相同部位  只有相同部位的装备才能转移
                 if (itemConfig_0.ItemSubType != itemConfig_1.ItemSubType)
                 {
-                    reply();
                     return;
                 }
             }
 
             string costItem = GlobalValueConfigCategory.Instance.Get(51).Value;
-            if (!unit.GetComponent<BagComponent>().OnCostItemData(costItem))
+            if (!unit.GetComponent<BagComponentS>().OnCostItemData(costItem))
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                reply();
                 return;
             }
 
@@ -82,9 +75,7 @@ namespace ET
             m2c_bagUpdate.BagInfoUpdate = new List<BagInfo>();
             m2c_bagUpdate.BagInfoUpdate.Add(bagInfo_1);
             m2c_bagUpdate.BagInfoUpdate.Add(bagInfo_2);
-            MessageHelper.SendToClient(unit, m2c_bagUpdate);
-
-            reply();
+            MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
             await ETTask.CompletedTask;
         }
     }

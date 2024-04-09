@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2M_ItemXiLianHandler : AMActorLocationRpcHandler<Unit, C2M_ItemXiLianRequest, M2C_ItemXiLianResponse>
+    [MessageLocationHandler(SceneType.Map)]
+    public class C2M_ItemXiLianHandler : MessageLocationHandler<Unit, C2M_ItemXiLianRequest, M2C_ItemXiLianResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_ItemXiLianRequest request, M2C_ItemXiLianResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_ItemXiLianRequest request, M2C_ItemXiLianResponse response)
         {
             try
             {
                 ItemLocType itemLocType = ItemLocType.ItemLocBag;
-                BagComponent bagComponent = unit.GetComponent<BagComponent>();
+                BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
                 BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID);
 
                 if (bagInfo == null)
@@ -31,7 +31,6 @@ namespace ET
                 if (itemConfig.EquipType == 101 || itemConfig.EquipType == 201)
                 {
                     response.Error = ErrorCode.ERR_ItemUseError;
-                    reply();
                     return;
                 }
 
@@ -51,8 +50,8 @@ namespace ET
                 else
                 {
                     //钻石洗炼
-                    UserInfo userInfo = unit.GetComponent<UserInfoComponent>().UserInfo;
-                    int itemXiLianNumber = unit.GetComponent<NumericComponent>().GetAsInt(NumericType.ItemXiLianNumber);
+                    UserInfo userInfo = unit.GetComponent<UserInfoComponentS>().UserInfo;
+                    int itemXiLianNumber = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.ItemXiLianNumber);
                     string[] set = GlobalValueConfigCategory.Instance.Get(116).Value.Split(';');
                     double discount;
                     if (itemXiLianNumber < int.Parse(set[0]))
@@ -68,7 +67,6 @@ namespace ET
                     if (userInfo.Diamond < needDimanond)
                     {
                         response.Error = ErrorCode.ERR_DiamondNotEnoughError;
-                        reply();
                         return;
                     }
                     rewardItems.Add(new RewardItem() { ItemID = (int)UserDataType.Diamond, ItemNum = needDimanond });
@@ -78,25 +76,25 @@ namespace ET
                 bool sucess = bagComponent.OnCostItemData(rewardItems);
                 if (!sucess)
                 {
-                    reply();
                     return;
                 }
                 int diamondXiLianTimes = unit.GetComponent<DataCollationComponent>().DiamondXiLianTimes;
-                int xilianLevel = XiLianHelper.GetXiLianId(unit.GetComponent<NumericComponent>().GetAsInt(NumericType.ItemXiLianDu));
+                int xilianLevel = XiLianHelper.GetXiLianId(unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.ItemXiLianDu));
                 xilianLevel = xilianLevel != 0 ? EquipXiLianConfigCategory.Instance.Get(xilianLevel).XiLianLevel : 0;
+                string userName = unit.GetComponent<UserInfoComponentS>().UserName;
                 for (int i = 0; i < request.Times; i++)
                 {
-                    response.ItemXiLianResults.Add( XiLianHelper.XiLianItem(unit, bagInfo, 1, xilianLevel, ifZuanShi ? 1: 0, diamondXiLianTimes) );     //精炼属性不进行重置
+                    response.ItemXiLianResults.Add( XiLianHelper.XiLianItem(unit, bagInfo, 1, xilianLevel, ifZuanShi ? 1: 0, diamondXiLianTimes, 0, userName) );     //精炼属性不进行重置
                 }
 
                 if (ifZuanShi)
                 {
-                    unit.GetComponent<NumericComponent>().ApplyChange(null, NumericType.ItemXiLianNumber, request.Times, 0);
+                    unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.ItemXiLianNumber, request.Times, 0);
                 }
 
                 if (request.Times == 1 && (itemLocType == ItemLocType.ItemLocEquip || itemLocType == ItemLocType.ItemLocEquip_2))
                 {
-                    unit.GetComponent<SkillSetComponent>().OnTakeOffEquip(itemLocType, bagInfo, bagInfo.BagInfoID);
+                    unit.GetComponent<SkillSetComponentS>().OnTakeOffEquip(itemLocType, bagInfo, bagInfo.BagInfoID);
                 }
 
                 if (request.Times == 1)
@@ -109,12 +107,12 @@ namespace ET
                     M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
                     //通知客户端背包道具发生改变
                     m2c_bagUpdate.BagInfoUpdate.Add(bagInfo);
-                    MessageHelper.SendToClient(unit, m2c_bagUpdate);
+                    MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
                 }
 
                 if (request.Times == 1 && (itemLocType == ItemLocType.ItemLocEquip || itemLocType == ItemLocType.ItemLocEquip_2))
                 {
-                    unit.GetComponent<SkillSetComponent>().OnWearEquip(bagInfo);
+                    unit.GetComponent<SkillSetComponentS>().OnWearEquip(bagInfo);
                 }
 
                 for (int i = 0; i < response.ItemXiLianResults.Count; i++)
@@ -122,23 +120,23 @@ namespace ET
                     ItemXiLianResult itemXiLianResult = response.ItemXiLianResults[i];
                     for (int skill = 0; skill < itemXiLianResult.HideSkillLists.Count; skill++)
                     {
-                        unit.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.EquipActiveSkillId_222, itemXiLianResult.HideSkillLists[skill], 1);
+                        unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.EquipActiveSkillId_222, itemXiLianResult.HideSkillLists[skill], 1);
                     }
 
                     for (int attr = 0;  attr < itemXiLianResult.XiLianHideProLists.Count; attr++ )
                     {
-                        unit.GetComponent<TaskComponent>().TriggerTaskEvent( TaskTargetType.XiLianAttriId_45, itemXiLianResult.XiLianHideProLists[0].HideID, 1);
-                        unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.XiLianAttriId_45, itemXiLianResult.XiLianHideProLists[0].HideID, 1);
+                        unit.GetComponent<TaskComponentS>().TriggerTaskEvent( TaskTargetType.XiLianAttriId_45, itemXiLianResult.XiLianHideProLists[0].HideID, 1);
+                        unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.XiLianAttriId_45, itemXiLianResult.XiLianHideProLists[0].HideID, 1);
                     }
 
-                    unit.GetComponent<TaskComponent>().TriggerTaskEvent(TaskTargetType.XiLianSkillNumber_44, itemXiLianResult.HideSkillLists.Count, 1);
-                    unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.XiLianSkillNumber_44, itemXiLianResult.HideSkillLists.Count, 1);
+                    unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.XiLianSkillNumber_44, itemXiLianResult.HideSkillLists.Count, 1);
+                    unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.XiLianSkillNumber_44, itemXiLianResult.HideSkillLists.Count, 1);
                 }
 
-                unit.GetComponent<ChengJiuComponent>().OnEquipXiLian(request.Times);
-                unit.GetComponent<TaskComponent>().OnEquipXiLian(request.Times);
+                unit.GetComponent<ChengJiuComponentS>().OnEquipXiLian(request.Times);
+                unit.GetComponent<TaskComponentS>().OnEquipXiLian(request.Times);
                 unit.GetComponent<DataCollationComponent>().OnXiLian(request.Times);
-                Function_Fight.GetInstance().UnitUpdateProperty_Base( unit, true, true );
+                Function_Fight.UnitUpdateProperty_Base( unit, true, true );
 
 
                 string[] xiliandu = GlobalValueConfigCategory.Instance.Get(49).Value.Split(";");
@@ -151,9 +149,8 @@ namespace ET
                 {
                     addXilian = (int)(addXilian * 0.7f);
                 }
-                unit.GetComponent<NumericComponent>().ApplyChange(null, NumericType.ItemXiLianDu, addXilian * request.Times, 0, true);
-                //unit.GetComponent<NumericComponent>().ApplyChange(null, NumericType.Now_XiLian,1, 0, true);
-                reply();
+                unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.ItemXiLianDu, addXilian * request.Times, 0, true);
+
                 await ETTask.CompletedTask;
             }
             catch (Exception ex)

@@ -1,29 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_ItemXiLianSelectHandler : AMActorLocationRpcHandler<Unit, C2M_ItemXiLianSelectRequest, M2C_ItemXiLianSelectResponse>
+    [MessageLocationHandler(SceneType.Map)]
+    public class C2M_ItemXiLianSelectHandler : MessageLocationHandler<Unit, C2M_ItemXiLianSelectRequest, M2C_ItemXiLianSelectResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_ItemXiLianSelectRequest request, M2C_ItemXiLianSelectResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_ItemXiLianSelectRequest request, M2C_ItemXiLianSelectResponse response)
         {
             ItemLocType itemLocType = ItemLocType.ItemLocBag;
-            BagInfo bagInfo = unit.GetComponent<BagComponent>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID);
+            BagInfo bagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, request.OperateBagID);
             if (bagInfo == null)
             {
-                bagInfo = unit.GetComponent<BagComponent>().GetItemByLoc(ItemLocType.ItemLocEquip, request.OperateBagID);
+                bagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip, request.OperateBagID);
                 itemLocType = ItemLocType.ItemLocEquip;
             }
             if (bagInfo == null)
             {
-                bagInfo = unit.GetComponent<BagComponent>().GetItemByLoc(ItemLocType.ItemLocEquip_2, request.OperateBagID);
+                bagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocEquip_2, request.OperateBagID);
                 itemLocType = ItemLocType.ItemLocEquip_2;
             }
 
             if (itemLocType == ItemLocType.ItemLocEquip || itemLocType == ItemLocType.ItemLocEquip_2)
             {
-                unit.GetComponent<SkillSetComponent>().OnTakeOffEquip(itemLocType, bagInfo, bagInfo.BagInfoID);
+                unit.GetComponent<SkillSetComponentS>().OnTakeOffEquip(itemLocType, bagInfo, bagInfo.BagInfoID);
             }
 
             ItemXiLianResult itemXiLian = request.ItemXiLianResult;
@@ -36,17 +36,16 @@ namespace ET
 
             if (itemLocType == ItemLocType.ItemLocEquip || itemLocType == ItemLocType.ItemLocEquip_2)
             {
-                    unit.GetComponent<SkillSetComponent>().OnWearEquip(bagInfo);
+                    unit.GetComponent<SkillSetComponentS>().OnWearEquip(bagInfo);
             }
 
             M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
             //通知客户端背包道具发生改变
             m2c_bagUpdate.BagInfoUpdate.Add(bagInfo);
-            MessageHelper.SendToClient(unit, m2c_bagUpdate);
+            MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
 
-            Function_Fight.GetInstance().UnitUpdateProperty_Base(unit, true, true);
-
-            reply();
+            Function_Fight.UnitUpdateProperty_Base(unit, true, true);
+            
             await ETTask.CompletedTask;
         }
     }

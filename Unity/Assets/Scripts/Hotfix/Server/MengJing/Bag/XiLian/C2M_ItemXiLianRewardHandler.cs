@@ -2,34 +2,31 @@
 using System.Collections.Generic;
 
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_ItemXiLianRewardHandler : AMActorLocationRpcHandler<Unit, C2M_ItemXiLianRewardRequest, M2C_ItemXiLianRewardResponse>
+    [MessageLocationHandler(SceneType.Map)]
+    public class C2M_ItemXiLianRewardHandler : MessageLocationHandler<Unit, C2M_ItemXiLianRewardRequest, M2C_ItemXiLianRewardResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_ItemXiLianRewardRequest request, M2C_ItemXiLianRewardResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_ItemXiLianRewardRequest request, M2C_ItemXiLianRewardResponse response)
         {
-            UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
+            UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
 
             if (userInfoComponent.UserInfo.XiuLianRewardIds.Contains(request.XiLianId))
             {
                 response.Error = ErrorCode.ERR_AlreadyReceived;
-                reply();
                 return;
             }
 
             EquipXiLianConfig equipXiLianConfig = EquipXiLianConfigCategory.Instance.Get(request.XiLianId);
             string[] rewarditems = equipXiLianConfig.RewardList.Split('@');
-            if (unit.GetComponent<BagComponent>().GetBagLeftCell() < rewarditems.Length)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < rewarditems.Length)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
-                reply();
                 return;
             }
 
             userInfoComponent.UserInfo.XiuLianRewardIds.Add(request.XiLianId);
-            unit.GetComponent<BagComponent>().OnAddItemData(equipXiLianConfig.RewardList, $"{ItemGetWay.XiLianLevel}_{TimeHelper.ServerNow()}");
-            reply();
+            unit.GetComponent<BagComponentS>().OnAddItemData(equipXiLianConfig.RewardList, $"{ItemGetWay.XiLianLevel}_{TimeHelper.ServerNow()}");
             await ETTask.CompletedTask;
         }
     }
