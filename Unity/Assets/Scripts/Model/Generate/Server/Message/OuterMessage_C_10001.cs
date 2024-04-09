@@ -2493,6 +2493,9 @@ namespace ET
 		[MemoryPackOrder(59)]
 		public List<int> DefeatedBossIds { get; set; } = new();
 
+		[MemoryPackOrder(60)]
+		public List<KeyValuePairInt> BuyStoreItems { get; set; } = new();
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -2554,6 +2557,7 @@ namespace ET
 			this.SingleRewardIds.Clear();
 			this.ItemXiLianNumRewardIds.Clear();
 			this.DefeatedBossIds.Clear();
+			this.BuyStoreItems.Clear();
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -11815,6 +11819,68 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_StoreBuyResponse))]
+//商店购买
+	[Message(OuterMessage.C2M_StoreBuyRequest)]
+	[MemoryPackable]
+	public partial class C2M_StoreBuyRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_StoreBuyRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_StoreBuyRequest), isFromPool) as C2M_StoreBuyRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int SellItemID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int SellItemNum { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.SellItemID = default;
+			this.SellItemNum = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_StoreBuyResponse)]
+	[MemoryPackable]
+	public partial class M2C_StoreBuyResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_StoreBuyResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_StoreBuyResponse), isFromPool) as M2C_StoreBuyResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -12154,5 +12220,7 @@ namespace ET
 		 public const ushort TokenRecvive = 10336;
 		 public const ushort ActivityV1Info = 10337;
 		 public const ushort M2C_ChainLightning = 10338;
+		 public const ushort C2M_StoreBuyRequest = 10339;
+		 public const ushort M2C_StoreBuyResponse = 10340;
 	}
 }

@@ -676,6 +676,8 @@ message UserInfo
 	repeated int32 ItemXiLianNumRewardIds = 59;
 
 	repeated int32 DefeatedBossIds = 60;
+	
+	repeated  KeyValuePairInt BuyStoreItems = 61;
 }
 
 message M2C_RoleDataUpdate // IMessage
@@ -3029,3 +3031,21 @@ message M2C_ChainLightning // IMessage
 	int32 Type = 9;
 	int64 InstanceId = 10;
 }
+
+
+//ResponseType M2C_StoreBuyResponse
+//商店购买
+message C2M_StoreBuyRequest		// ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 SellItemID = 1;
+	int32 SellItemNum = 2;
+}
+
+message M2C_StoreBuyResponse	// ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+

@@ -662,6 +662,31 @@ namespace ET.Server
              }
          }
          
+         public static int GetStoreBuy(this UserInfoComponentS self, int mysteryId)
+         {
+             for (int i = 0; i < self.UserInfo.BuyStoreItems.Count; i++)
+             {
+                 if (self.UserInfo.BuyStoreItems[i].KeyId == mysteryId)
+                 {
+                     return (int)self.UserInfo.BuyStoreItems[i].Value;
+                 }
+             }
+             return 0;
+         }
+
+         public static void OnStoreBuy(this UserInfoComponentS self, int mysteryId)
+         {
+             for (int i = 0; i < self.UserInfo.BuyStoreItems.Count; i++)
+             {
+                 if (self.UserInfo.BuyStoreItems[i].KeyId == mysteryId)
+                 {
+                     self.UserInfo.BuyStoreItems[i].Value += 1;
+                     return;
+                 }
+             }
+             self.UserInfo.BuyStoreItems.Add(new KeyValuePairInt() { KeyId = mysteryId, Value = 1 });
+         }
+         
          public static int GetRandomJingLingId(this UserInfoComponentS self)
          {
              List<DayJingLing> dayMonsterConfig = GlobalValueConfigCategory.Instance.DayJingLingList;
