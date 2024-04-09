@@ -11,6 +11,8 @@ namespace ET.Server
             {
                 long accountId = unit.GetComponent<UserInfoComponentS>().UserInfo.AccInfoID;
                 DBAccountInfo dBAccountWarehouse = await UnitCacheHelper.GetComponentBD<DBAccountInfo>(unit.Root(), accountId);
+                
+                if(dBAccountWarehouse == null)
                 {
                     response.Error = ErrorCode.ERR_NetWorkError;
                     return;
