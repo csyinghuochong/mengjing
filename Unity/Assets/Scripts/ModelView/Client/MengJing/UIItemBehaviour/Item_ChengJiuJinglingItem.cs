@@ -45,7 +45,7 @@ namespace ET.Client
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ModelShow");
 		    			ES_ModelShow es = this.m_es_modelshow;
-     					if( es.UITransform != subTrans )
+     					if( es.EG_RootRectTransform != subTrans )
      					{
      						es.Dispose();
 		    				this.m_es_modelshow = null;
