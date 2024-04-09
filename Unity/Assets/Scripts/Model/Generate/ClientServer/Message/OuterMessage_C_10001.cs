@@ -12015,6 +12015,314 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_ItemXiLianResponse))]
+//洗练装备
+	[Message(OuterMessage.C2M_ItemXiLianRequest)]
+	[MemoryPackable]
+	public partial class C2M_ItemXiLianRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ItemXiLianRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ItemXiLianRequest), isFromPool) as C2M_ItemXiLianRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long OperateBagID { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int Times { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.OperateBagID = default;
+			this.Times = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ItemXiLianResponse)]
+	[MemoryPackable]
+	public partial class M2C_ItemXiLianResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ItemXiLianResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ItemXiLianResponse), isFromPool) as M2C_ItemXiLianResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<ItemXiLianResult> ItemXiLianResults { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.ItemXiLianResults.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_ItemXiLianNumReward))]
+	[Message(OuterMessage.C2M_ItemXiLianNumReward)]
+	[MemoryPackable]
+	public partial class C2M_ItemXiLianNumReward: MessageObject, ILocationRequest
+	{
+		public static C2M_ItemXiLianNumReward Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ItemXiLianNumReward), isFromPool) as C2M_ItemXiLianNumReward; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RewardId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.RewardId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ItemXiLianNumReward)]
+	[MemoryPackable]
+	public partial class M2C_ItemXiLianNumReward: MessageObject, ILocationResponse
+	{
+		public static M2C_ItemXiLianNumReward Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ItemXiLianNumReward), isFromPool) as M2C_ItemXiLianNumReward; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_ItemXiLianRewardResponse))]
+	[Message(OuterMessage.C2M_ItemXiLianRewardRequest)]
+	[MemoryPackable]
+	public partial class C2M_ItemXiLianRewardRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ItemXiLianRewardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ItemXiLianRewardRequest), isFromPool) as C2M_ItemXiLianRewardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int XiLianId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.XiLianId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ItemXiLianRewardResponse)]
+	[MemoryPackable]
+	public partial class M2C_ItemXiLianRewardResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ItemXiLianRewardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ItemXiLianRewardResponse), isFromPool) as M2C_ItemXiLianRewardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_ItemXiLianSelectResponse))]
+//洗练装备
+	[Message(OuterMessage.C2M_ItemXiLianSelectRequest)]
+	[MemoryPackable]
+	public partial class C2M_ItemXiLianSelectRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ItemXiLianSelectRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ItemXiLianSelectRequest), isFromPool) as C2M_ItemXiLianSelectRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long OperateBagID { get; set; }
+
+		[MemoryPackOrder(0)]
+		public ItemXiLianResult ItemXiLianResult { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.OperateBagID = default;
+			this.ItemXiLianResult = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ItemXiLianSelectResponse)]
+	[MemoryPackable]
+	public partial class M2C_ItemXiLianSelectResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ItemXiLianSelectResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ItemXiLianSelectResponse), isFromPool) as M2C_ItemXiLianSelectResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_ItemXiLianTransferResponse))]
+//洗练转移
+	[Message(OuterMessage.C2M_ItemXiLianTransferRequest)]
+	[MemoryPackable]
+	public partial class C2M_ItemXiLianTransferRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ItemXiLianTransferRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ItemXiLianTransferRequest), isFromPool) as C2M_ItemXiLianTransferRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long OperateBagID_1 { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long OperateBagID_2 { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.OperateBagID_1 = default;
+			this.OperateBagID_2 = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ItemXiLianTransferResponse)]
+	[MemoryPackable]
+	public partial class M2C_ItemXiLianTransferResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ItemXiLianTransferResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ItemXiLianTransferResponse), isFromPool) as M2C_ItemXiLianTransferResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -12360,5 +12668,15 @@ namespace ET
 		 public const ushort M2C_AccountWarehousInfoResponse = 10342;
 		 public const ushort C2M_AccountWarehousOperateRequest = 10343;
 		 public const ushort M2C_AccountWarehousOperateResponse = 10344;
+		 public const ushort C2M_ItemXiLianRequest = 10345;
+		 public const ushort M2C_ItemXiLianResponse = 10346;
+		 public const ushort C2M_ItemXiLianNumReward = 10347;
+		 public const ushort M2C_ItemXiLianNumReward = 10348;
+		 public const ushort C2M_ItemXiLianRewardRequest = 10349;
+		 public const ushort M2C_ItemXiLianRewardResponse = 10350;
+		 public const ushort C2M_ItemXiLianSelectRequest = 10351;
+		 public const ushort M2C_ItemXiLianSelectResponse = 10352;
+		 public const ushort C2M_ItemXiLianTransferRequest = 10353;
+		 public const ushort M2C_ItemXiLianTransferResponse = 10354;
 	}
 }

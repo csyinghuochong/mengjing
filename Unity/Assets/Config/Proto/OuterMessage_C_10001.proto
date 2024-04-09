@@ -3081,3 +3081,82 @@ message M2C_AccountWarehousOperateResponse // ILocationResponse
 	string Message = 92;
 	BagInfo BagInfo = 2;
 }
+
+//ResponseType M2C_ItemXiLianResponse
+//洗练装备
+message C2M_ItemXiLianRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 OperateBagID = 2;
+	int32 Times = 1;
+}
+
+message M2C_ItemXiLianResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+
+	repeated ItemXiLianResult ItemXiLianResults = 1;
+}
+
+//ResponseType M2C_ItemXiLianNumReward 
+message C2M_ItemXiLianNumReward // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 RewardId = 1;   //PetExploreReward.ley
+}
+
+message M2C_ItemXiLianNumReward // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_ItemXiLianRewardResponse
+message C2M_ItemXiLianRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 XiLianId = 1;
+}
+
+message M2C_ItemXiLianRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_ItemXiLianSelectResponse
+//洗练装备
+message C2M_ItemXiLianSelectRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 OperateBagID = 2;
+	ItemXiLianResult ItemXiLianResult = 1;
+}
+
+message M2C_ItemXiLianSelectResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_ItemXiLianTransferResponse
+//洗练转移
+message C2M_ItemXiLianTransferRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 OperateBagID_1 = 1;
+	int64 OperateBagID_2 = 2;
+}
+
+message M2C_ItemXiLianTransferResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
