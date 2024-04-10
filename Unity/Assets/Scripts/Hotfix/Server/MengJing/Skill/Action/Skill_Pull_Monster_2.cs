@@ -22,7 +22,7 @@ namespace ET.Server
                 float3 movePosition = math.mul( rotation , new float3(0,1,0)  )* (skillS.SkillConf.SkillLiveTime * (float)(skillS.SkillConf.SkillMoveSpeed) * 0.001f);
                 skillS.TargetPosition = skillS.NowPosition + movePosition;
             }
-            skillS.OnExecute();
+            OnExecute(skillS);
         }
 
         public override void OnExecute(SkillS skillS)
