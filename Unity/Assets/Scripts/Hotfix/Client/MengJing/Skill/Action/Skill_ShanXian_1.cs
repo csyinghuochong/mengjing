@@ -31,7 +31,7 @@
         public override void OnUpdate(SkillC skils)
         {
             long serverNow = TimeHelper.ServerNow();
-            if (skils.SkillConf.GameObjectParameter == "1" && skils.IsExcuteHurt && serverNow >= this.SkillExcuteHurtTime)
+            if (skils.SkillConf.GameObjectParameter == "1" && skils.IsExcuteHurt && serverNow >= skils.SkillExcuteHurtTime)
             {
                 //先跳过去再触发伤害
                 //TheUnitFrom.Position = TargetPosition;

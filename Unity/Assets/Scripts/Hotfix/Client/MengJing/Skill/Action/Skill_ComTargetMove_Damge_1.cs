@@ -1,7 +1,5 @@
 ﻿
 using Unity.Mathematics;
-using UnityEngine;
-
 namespace ET.Client
 {
     //指定目标攻击
@@ -66,9 +64,9 @@ namespace ET.Client
             }
 
             float dis = PositionHelper.Distance2D(skils.TargetPosition, skils.NowPosition);
-            float move = (float)skils.SkillConf.SkillMoveSpeed * Time.deltaTime;
+            float move = (float)skils.SkillConf.SkillMoveSpeed * 0.033f; /// //Time.deltaTime;
             
-            move = Mathf.Min(dis, move);
+            move = math.min(dis, move);
             skils.NowPosition = skils.NowPosition + (move * dir);
 
             if (skils.EffectId!=0)
