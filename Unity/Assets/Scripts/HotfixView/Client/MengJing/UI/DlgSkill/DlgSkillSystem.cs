@@ -36,6 +36,16 @@ namespace ET.Client
         }
     }
 
+    [Event(SceneType.Demo)]
+    public class DataUpdate_OnActiveTianFu_Refresh: AEvent<Scene, DataUpdate_OnActiveTianFu>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_OnActiveTianFu args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgSkill>()?.OnActiveTianFu();
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof (ES_SkillLearn))]
     [FriendOf(typeof (ES_SkillSet))]
     [FriendOf(typeof (ES_SkillMake))]
@@ -130,6 +140,14 @@ namespace ET.Client
             if (self.View.ES_SkillSet.uiTransform.gameObject.activeSelf)
             {
                 self.View.ES_SkillSet.OnSkillSetting();
+            }
+        }
+
+        public static void OnActiveTianFu(this DlgSkill self)
+        {
+            if (self.View.ES_SkillTianFu.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_SkillTianFu.OnActiveTianFu();
             }
         }
     }

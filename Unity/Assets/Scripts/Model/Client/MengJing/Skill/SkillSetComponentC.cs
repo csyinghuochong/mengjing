@@ -6,7 +6,7 @@ namespace ET.Client
     [ComponentOf(typeof(Scene))]
     public class SkillSetComponentC: Entity, IAwake, IDestroy
     {
-        public int TianFuPlan = 0;
+        public int TianFuPlan { get; set; } = 0;
 
         public List<int> TianFuList { get; set; } = new List<int>(); //第一套天賦方案
 

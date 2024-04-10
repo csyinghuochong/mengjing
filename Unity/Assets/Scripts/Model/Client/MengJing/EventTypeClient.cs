@@ -119,6 +119,10 @@ namespace ET.Client
     {
     }
 
+    public struct DataUpdate_OnActiveTianFu
+    {
+    }
+
     public struct TaskNpcDialog
     {
         public int NpcId;

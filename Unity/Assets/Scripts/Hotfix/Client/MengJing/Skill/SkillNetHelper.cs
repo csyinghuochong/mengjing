@@ -24,6 +24,7 @@ namespace ET.Client
                 return;
             }
 
+            EventSystem.Instance.Publish(root, new DataUpdate_OnActiveTianFu());
             //如果有相同等级的天赋则替换
             //HintHelp.GetInstance().DataUpdate(DataType.OnActiveTianFu);
             //HintHelp.GetInstance().ShowHint("激活成功！");
@@ -90,6 +91,15 @@ namespace ET.Client
             C2M_SkillOperation request = new() { OperationType = operationType };
             M2C_SkillOperation response =
                     (M2C_SkillOperation)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> TianFuPlan(Scene root, int tianFuPlan)
+        {
+            C2M_TianFuPlanRequest request = new() { TianFuPlan = tianFuPlan };
+            M2C_TianFuPlanResponse response =
+                    (M2C_TianFuPlanResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
         }
