@@ -40,18 +40,18 @@ namespace ET.Client
             {
                 self.EG_RightRectTransform.gameObject.SetActive(false);
                 self.EG_LeftRectTransform.gameObject.SetActive(false);
-                self.E_selecSelect.SetActive(true);
-                self.Melt.SetActive(false);
+                self.EG_SelectRectTransform.gameObject.SetActive(true);
+                self.EG_MeltRectTransform.gameObject.SetActive(false);
             }, null).Coroutine();
         }
 
         public static void OnBtn_Learn(this ES_SkillMake self)
         {
-            PopupTipHelp.OpenPopupTip(self.ZoneScene(), "学习技能", "可以在主城对应的各职业学习大师处学习当前等级最新的生活技能喔!", () =>
+            PopupTipHelp.OpenPopupTip(self.Root(), "学习技能", "可以在主城对应的各职业学习大师处学习当前等级最新的生活技能喔!", () =>
             {
-                Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
+                Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
                 int makeTypenumreic = self.Plan == 1? NumericType.MakeType_1 : NumericType.MakeType_2;
-                int makeId = unit.GetComponent<NumericComponent>().GetAsInt(makeTypenumreic);
+                int makeId = unit.GetComponent<NumericComponentC>().GetAsInt(makeTypenumreic);
                 int npcId = 0;
                 switch (makeId)
                 {
@@ -77,26 +77,25 @@ namespace ET.Client
                     return;
                 }
 
-                self.ZoneScene().CurrentScene().GetComponent<OperaComponent>().OnClickNpc(npcId).Coroutine();
-                UIHelper.Remove(self.ZoneScene(), UIType.UISkill);
+                // self.Root().CurrentScene().GetComponent<OperaComponent>().OnClickNpc(npcId).Coroutine();
+
+                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Skill);
             }, null).Coroutine();
         }
 
         public static async ETTask RequestMakeSelect(this ES_SkillMake self, int makeId)
         {
-            Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
-            int makeType_1 = unit.GetComponent<NumericComponent>().GetAsInt(NumericType.MakeType_1);
-            int makeType_2 = unit.GetComponent<NumericComponent>().GetAsInt(NumericType.MakeType_2);
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int makeType_1 = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.MakeType_1);
+            int makeType_2 = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.MakeType_2);
             if (makeType_1 == makeId || makeType_2 == makeId)
             {
-                FloatTipManager.Instance.ShowFloatTip("该生活技能已学习！");
+                FlyTipComponent.Instance.SpawnFlyTipDi("该生活技能已学习！");
                 return;
             }
 
-            C2M_MakeSelectRequest request = new C2M_MakeSelectRequest() { MakeType = makeId, Plan = self.Plan == -1? 1 : self.Plan };
-            M2C_MakeSelectResponse response = (M2C_MakeSelectResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(request);
-            self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo.MakeList.Clear();
-            self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo.MakeList = response.MakeList;
+            await SkillNetHelper.MakeSelect(self.Root(), makeId, self.Plan == -1? 1 : self.Plan);
+
             self.OnUpdateMakeType();
             self.UpdateShuLianDu();
         }

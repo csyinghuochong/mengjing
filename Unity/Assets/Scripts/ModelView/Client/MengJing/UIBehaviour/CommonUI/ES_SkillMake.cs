@@ -9,7 +9,6 @@ namespace ET.Client
 	{
 		public int MakeId;
 		public long Timer;
-
 		public int Plan = -1;
 		
 		public UnityEngine.RectTransform EG_RightRectTransform
@@ -403,6 +402,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_SelectRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_SelectRectTransform == null )
+     			{
+		    		this.m_EG_SelectRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Select");
+     			}
+     			return this.m_EG_SelectRectTransform;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_Button_Select_1Button
      	{
      		get
@@ -414,7 +430,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_Select_1Button == null )
      			{
-		    		this.m_E_Button_Select_1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Select/Select_1/E_Button_Select_1");
+		    		this.m_E_Button_Select_1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Select/Select_1/E_Button_Select_1");
      			}
      			return this.m_E_Button_Select_1Button;
      		}
@@ -431,7 +447,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_Select_1Image == null )
      			{
-		    		this.m_E_Button_Select_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Select/Select_1/E_Button_Select_1");
+		    		this.m_E_Button_Select_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Select/Select_1/E_Button_Select_1");
      			}
      			return this.m_E_Button_Select_1Image;
      		}
@@ -448,7 +464,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_Select_2Button == null )
      			{
-		    		this.m_E_Button_Select_2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Select/Select_2/E_Button_Select_2");
+		    		this.m_E_Button_Select_2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Select/Select_2/E_Button_Select_2");
      			}
      			return this.m_E_Button_Select_2Button;
      		}
@@ -465,7 +481,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_Select_2Image == null )
      			{
-		    		this.m_E_Button_Select_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Select/Select_2/E_Button_Select_2");
+		    		this.m_E_Button_Select_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Select/Select_2/E_Button_Select_2");
      			}
      			return this.m_E_Button_Select_2Image;
      		}
@@ -482,7 +498,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_Select_3Button == null )
      			{
-		    		this.m_E_Button_Select_3Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Select/Select_3/E_Button_Select_3");
+		    		this.m_E_Button_Select_3Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Select/Select_3/E_Button_Select_3");
      			}
      			return this.m_E_Button_Select_3Button;
      		}
@@ -499,7 +515,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_Select_3Image == null )
      			{
-		    		this.m_E_Button_Select_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Select/Select_3/E_Button_Select_3");
+		    		this.m_E_Button_Select_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Select/Select_3/E_Button_Select_3");
      			}
      			return this.m_E_Button_Select_3Image;
      		}
@@ -516,7 +532,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_Select_4Button == null )
      			{
-		    		this.m_E_Button_Select_4Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Select/Select_4/E_Button_Select_4");
+		    		this.m_E_Button_Select_4Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Select/Select_4/E_Button_Select_4");
      			}
      			return this.m_E_Button_Select_4Button;
      		}
@@ -533,7 +549,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_Select_4Image == null )
      			{
-		    		this.m_E_Button_Select_4Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Select/Select_4/E_Button_Select_4");
+		    		this.m_E_Button_Select_4Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Select/Select_4/E_Button_Select_4");
      			}
      			return this.m_E_Button_Select_4Image;
      		}
@@ -678,6 +694,7 @@ namespace ET.Client
 			this.m_E_Btn_MeltImage = null;
 			this.m_E_Btn_LearnButton = null;
 			this.m_E_Btn_LearnImage = null;
+			this.m_EG_SelectRectTransform = null;
 			this.m_E_Button_Select_1Button = null;
 			this.m_E_Button_Select_1Image = null;
 			this.m_E_Button_Select_2Button = null;
@@ -718,6 +735,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_Btn_MeltImage = null;
 		private UnityEngine.UI.Button m_E_Btn_LearnButton = null;
 		private UnityEngine.UI.Image m_E_Btn_LearnImage = null;
+		private UnityEngine.RectTransform m_EG_SelectRectTransform = null;
 		private UnityEngine.UI.Button m_E_Button_Select_1Button = null;
 		private UnityEngine.UI.Image m_E_Button_Select_1Image = null;
 		private UnityEngine.UI.Button m_E_Button_Select_2Button = null;

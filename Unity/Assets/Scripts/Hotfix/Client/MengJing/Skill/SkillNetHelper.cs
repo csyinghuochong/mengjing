@@ -103,5 +103,17 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<int> MakeSelect(Scene root, int makeType, int plan)
+        {
+            C2M_MakeSelectRequest request = new() { MakeType = makeType, Plan = plan };
+            M2C_MakeSelectResponse response =
+                    (M2C_MakeSelectResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            root.GetComponent<UserInfoComponentC>().UserInfo.MakeList.Clear();
+            root.GetComponent<UserInfoComponentC>().UserInfo.MakeList = response.MakeList;
+
+            return response.Error;
+        }
     }
 }
