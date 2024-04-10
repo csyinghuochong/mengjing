@@ -81,6 +81,7 @@ namespace ET.Client
             self.HaveSkillNum = 1;
 
             self.E_BorderImgImage.gameObject.SetActive(false);
+            self.E_ImageIconEventTrigger.triggers.Clear();
             self.E_ImageIconEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
                 (pdata) => { self.BeginDrag(pdata as PointerEventData).Coroutine(); });
             self.E_ImageIconEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.EndDrag(pdata as PointerEventData); });
