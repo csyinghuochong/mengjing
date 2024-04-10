@@ -227,6 +227,10 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemChatItems, self.ShowChatInfos.Count);
             self.View.E_ChatItemsLoopVerticalScrollRect.SetVisible(true, self.ShowChatInfos.Count);
             self.View.E_ChatItemsLoopVerticalScrollRect.RefillCellsFromEnd();
+            
+            Vector3 vector3 = self.View.E_ChatItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>().localPosition;
+            vector3.y = self.ShowChatInfos.Count * 200;
+            self.View.E_ChatItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>().localPosition = vector3;
         }
     }
 }
