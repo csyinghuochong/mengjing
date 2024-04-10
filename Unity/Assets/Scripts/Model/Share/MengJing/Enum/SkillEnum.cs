@@ -200,7 +200,7 @@ namespace ET
         public int SkillId;
         public int BuffId;
 
-        public int EffectId;
+        public int EffectId { get; set; }
 
         public float3 EffectPosition;
         public float EffectAngle;

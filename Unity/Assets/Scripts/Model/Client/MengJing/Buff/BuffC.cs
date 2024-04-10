@@ -40,6 +40,13 @@ namespace ET.Client
         public SkillConfig mSkillConf;
         public EffectConfig mEffectConf;
         public SkillBuffConfig mSkillBuffConf;
+        
+        public float mDelayTime{ get; set; }
+        public bool IsDelayPlay{ get; set; }
+        public long EffectInstanceId{ get; set; }
+        public float mAngle{ get; set; }
+        public float startAngle{ get; set; }
+        public float mRadius{ get; set; }
     }
     
 }
