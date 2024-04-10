@@ -101,8 +101,21 @@ namespace ET.Client
     public struct DataUpdate_PetXiLianUpdate
     {
     }
-    
+
     public struct DataUpdate_JingLingButton
+    {
+    }
+
+    public struct DataUpdate_SkillReset
+    {
+    }
+
+    public struct DataUpdate_SkillUpgrade
+    {
+        public string DataParamString;
+    }
+
+    public struct DataUpdate_SkillSetting
     {
     }
 
@@ -124,19 +137,19 @@ namespace ET.Client
         public int UpdateType;
         public string UpdateValue;
     }
-    
-    public struct SkillSound 
+
+    public struct SkillSound
     {
         public string Asset;
     }
-    
+
     //技能特效
     public struct SkillEffect
     {
         public EffectData EffectData;
         public Unit Unit;
     }
-    
+
     //技能预警
     public struct SkillYuJing
     {
@@ -153,9 +166,8 @@ namespace ET.Client
 
     public struct SkillCDUpdate
     {
-        
     }
-    
+
     //吟唱
     public struct SingingUpdate
     {
@@ -164,7 +176,7 @@ namespace ET.Client
         public long TotalTime;
         public int Type;
     }
-    
+
     public struct ChangeCameraMoveType
     {
         public int CameraType;
@@ -174,23 +186,19 @@ namespace ET.Client
     {
         public int SkillId;
     }
-    
+
     //动画
-    public struct PlayAnimator 
+    public struct PlayAnimator
     {
-        
         public string Animator;
         public Unit Unit;
     }
-    
+
     //状态机
-    public struct FsmChange 
+    public struct FsmChange
     {
-     
         public int FsmHandlerType;
         public int SkillId;
         public Unit Unit;
-        
     }
-    
 }

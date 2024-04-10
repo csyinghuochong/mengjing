@@ -269,7 +269,7 @@ namespace ET.Client
 
             if (itemConfig.DayUseNum > 0 && userInfoComponent.GetDayItemUse(itemConfig.Id) >= itemConfig.DayUseNum)
             {
-                ErrorViewHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_ItemNoUseTime);
+                ErrorViewHelp.ShowErrorHint(ErrorCode.ERR_ItemNoUseTime);
                 return;
             }
 

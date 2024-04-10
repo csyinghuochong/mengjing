@@ -1,9 +1,7 @@
 namespace ET.Client
 {
-    
     public static class SkillNetHelper
     {
-    
         public static async ETTask RequestSkillSet(Scene root)
         {
             C2M_SkillInitRequest c2M_SkillSet = new C2M_SkillInitRequest() { };
@@ -11,8 +9,10 @@ namespace ET.Client
 
             SkillSetComponentC skillSetComponent = root.GetComponent<SkillSetComponentC>();
             skillSetComponent.UpdateSkillSet(m2C_SkillSet.SkillSetInfo);
+
+            EventSystem.Instance.Publish(root, new DataUpdate_SkillSetting());
         }
-        
+
         //激活天赋
         public static async ETTask ActiveTianFu(Scene root, int tianfuId)
         {
@@ -29,8 +29,6 @@ namespace ET.Client
             //HintHelp.GetInstance().ShowHint("激活成功！");
         }
 
-        
-        
         //激活技能
         public static async ETTask ActiveSkillID(Scene root, int skillId)
         {
@@ -42,15 +40,17 @@ namespace ET.Client
 
             SkillSetComponentC skillSetComponent = root.GetComponent<SkillSetComponentC>();
             skillSetComponent.OnActiveSkillID(skillId, m2C_SkillSet.NewSkillID);
-            
-            //HintHelp.GetInstance().DataUpdate(DataType.SkillUpgrade, skillId.ToString() + "_" + m2C_SkillSet.NewSkillID.ToString());
+
+            EventSystem.Instance.Publish(root,
+                new DataUpdate_SkillUpgrade { DataParamString = skillId + "_" + m2C_SkillSet.NewSkillID });
         }
-        
+
         public static async ETTask<bool> ChangeOccTwoRequest(Scene root, int occTwoID)
         {
             UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
             C2M_ChangeOccTwoRequest c2M_ChangeOccTwoRequest = new C2M_ChangeOccTwoRequest() { OccTwoID = occTwoID };
-            M2C_ChangeOccTwoResponse m2C_SkillSet = (M2C_ChangeOccTwoResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2M_ChangeOccTwoRequest);
+            M2C_ChangeOccTwoResponse m2C_SkillSet =
+                    (M2C_ChangeOccTwoResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2M_ChangeOccTwoRequest);
 
             if (m2C_SkillSet.Error == 0)
             {
@@ -60,7 +60,6 @@ namespace ET.Client
                 //飘字
                 //HintHelp.GetInstance().ShowHint("恭喜你!转职成功");
                 return true;
-
             }
             else
             {
@@ -68,7 +67,6 @@ namespace ET.Client
                 return false;
             }
         }
-
 
         public static async ETTask SetSkillIdByPosition(Scene root, int skillId, int skillType, int pos)
         {
@@ -86,6 +84,14 @@ namespace ET.Client
             root.GetComponent<SkillSetComponentC>().OnSetSkillIdByPosition(skillId, skillType, pos);
             //HintHelp.GetInstance().DataUpdate(DataType.SkillSetting);
         }
+
+        public static async ETTask<int> SkillOperation(Scene root, int operationType)
+        {
+            C2M_SkillOperation request = new() { OperationType = operationType };
+            M2C_SkillOperation response =
+                    (M2C_SkillOperation)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
-    
 }

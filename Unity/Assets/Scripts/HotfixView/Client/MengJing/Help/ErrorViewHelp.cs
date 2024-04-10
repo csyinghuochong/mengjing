@@ -14,7 +14,7 @@
             return hintStr;
         }
 
-        public static void ShowErrorHint(Scene root, int code)
+        public static void ShowErrorHint(int code)
         {
             if (code == 0)
             {
@@ -23,7 +23,7 @@
 
             string hintStr = code.ToString();
             ErrorViewData.ErrorHints.TryGetValue(code, out hintStr);
-            root.GetComponent<FlyTipComponent>().SpawnFlyTipDi(string.IsNullOrEmpty(hintStr)? code.ToString() : hintStr);
+            FlyTipComponent.Instance.SpawnFlyTipDi(string.IsNullOrEmpty(hintStr)? code.ToString() : hintStr);
         }
     }
 }

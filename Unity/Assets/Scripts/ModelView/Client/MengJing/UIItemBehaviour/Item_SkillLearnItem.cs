@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -6,6 +7,9 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_SkillLearnItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
+		public SkillPro SkillPro;
+		public Action<SkillPro> ClickHandler;
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
