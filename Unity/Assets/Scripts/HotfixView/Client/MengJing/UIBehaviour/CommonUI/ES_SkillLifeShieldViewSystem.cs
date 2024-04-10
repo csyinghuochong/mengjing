@@ -22,6 +22,13 @@ namespace ET.Client
             self.ShieldUIList.Add(self.ES_Shield_4);
             self.ShieldUIList.Add(self.ES_Shield_5);
             self.ShieldUIList.Add(self.ES_Shield_6);
+            self.ES_Shield_1.OnInitUI(1);
+            self.ES_Shield_2.OnInitUI(2);
+            self.ES_Shield_3.OnInitUI(3);
+            self.ES_Shield_4.OnInitUI(4);
+            self.ES_Shield_5.OnInitUI(5);
+            self.ES_Shield_6.OnInitUI(6);
+
             self.ShieldUIList[0].OnButtonClick();
 
             self.HuiShoulist.Add(self.ES_CommonItem_1);
