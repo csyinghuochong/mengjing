@@ -1,71 +1,75 @@
-﻿using UnityEngine;
+﻿using Unity.Mathematics;
 
-namespace ET
+namespace ET.Client
 {
 
-    [SkillHandler]
-    public class Skill_Pull_Monster_2 : ASkillHandler
+    public class Skill_Pull_Monster_2 : SkillHandlerC
     {
-        public override void OnInit(SkillInfo skillId, Unit theUnitFrom)
+        public override void OnInit(SkillC skils, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skils.BaseOnInit(skils.SkillInfo, theUnitFrom);
            
-            if (this.SkillConf.SkillMoveSpeed == 0f)
+            if (skils.SkillConf.SkillMoveSpeed == 0f)
             {
-                this.NowPosition = this.TargetPosition;
+                skils.NowPosition = skils.TargetPosition;
             }
             else
             {
-                this.NowPosition = theUnitFrom.Position;
-                Quaternion rotation = Quaternion.Euler(0, skillId.TargetAngle, 0); //按照Z轴旋转30度的Quaterion
-                Vector3 movePosition = rotation * Vector3.forward * (this.SkillConf.SkillLiveTime * (float)(this.SkillConf.SkillMoveSpeed) * 0.001f);
-                this.TargetPosition = this.NowPosition + movePosition;
+                skils.NowPosition = theUnitFrom.Position;
+                quaternion rotation = quaternion.Euler(0, skils.SkillInfo.TargetAngle, 0); //按照Z轴旋转30度的Quaterion
+                float3 movePosition = math.mul( rotation , new float3(0,1,0)  )* (skils.SkillConf.SkillLiveTime * (float)(skils.SkillConf.SkillMoveSpeed) * 0.001f);
+                skils.TargetPosition = skils.NowPosition + movePosition;
             }
 
-            this.OnExecute();
+            this.OnExecute(skils);
         }
 
-        public override void OnExecute()
+        public override void OnExecute(SkillC skils)
         {
-            this.PlaySkillEffects(this.NowPosition);
-            this.OnShowSkillIndicator(this.SkillInfo);
-            this.OnUpdate();
+            skils.PlaySkillEffects(skils.NowPosition);
+            skils.OnShowSkillIndicator(skils.SkillInfo);
+            this.OnUpdate(skils);
         }
 
-        public override void OnUpdate()
+        public override void OnUpdate(SkillC skils)
         {
             long serverNow = TimeHelper.ServerNow();
-            float passTime = (serverNow - this.SkillInfo.SkillBeginTime) * 0.001f;
-            if (passTime < this.SkillConf.SkillDelayTime)
+            float passTime = (serverNow - skils.SkillInfo.SkillBeginTime) * 0.001f;
+            if (passTime < skils.SkillConf.SkillDelayTime)
             {
                 return;
             }
 
-            Vector3 dir = (this.TargetPosition - this.NowPosition).normalized;
-            float dis = PositionHelper.Distance2D(this.TargetPosition, this.NowPosition);
-            float move = (float)this.SkillConf.SkillMoveSpeed * 0.033f;
-            move = Mathf.Min(dis, move);
+            float3 dir = math.normalize(skils.TargetPosition - skils.NowPosition);
+            float dis = PositionHelper.Distance2D(skils.TargetPosition, skils.NowPosition);
+            float move = (float)skils.SkillConf.SkillMoveSpeed * 0.033f;
+            move = math.min(dis, move);
 
-            this.NowPosition = this.NowPosition + (move * dir);
-            this.NowPosition.y = this.TargetPosition.y + 0.5f;
+            float3 nowPosition = skils.NowPosition + (move * dir);
 
-            EventType.SkillEffectMove.Instance.EffectInstanceId = this.EffectInstanceId[0];
-            EventType.SkillEffectMove.Instance.Unit = this.TheUnitFrom;
-            EventType.SkillEffectMove.Instance.Postion = this.NowPosition;
-            EventType.SkillEffectMove.Instance.Angle = -1;
-            EventSystem.Instance.PublishClass(EventType.SkillEffectMove.Instance);
+            skils.NowPosition = new float3(nowPosition.x,
+                skils.TargetPosition.y + 0.5f,
+                nowPosition.z);
 
-            dis = PositionHelper.Distance2D(this.NowPosition, this.TargetPosition);
-            if (this.SkillConf.SkillMoveSpeed > 0f &&  dis < 0.5f  )
+            EventSystem.Instance.Publish(skils.Root(), new SkillEffectMove()
             {
-                this.SetSkillState(SkillState.Finished);
+                EffectInstanceId = skils.EffectInstanceId[0],
+                Unit = skils.TheUnitFrom,
+                Postion = skils.NowPosition,
+                Angle = -1
+            });
+
+            dis = PositionHelper.Distance2D(skils.NowPosition, skils.TargetPosition);
+            if (skils.SkillConf.SkillMoveSpeed > 0f &&  dis < 0.5f  )
+            {
+                skils.SetSkillState(SkillState.Finished);
             }
-            this.BaseOnUpdate();
+            skils.BaseOnUpdate();
         }
 
-        public override void OnFinished()
+        public override void OnFinished(SkillC skils)
         {
-            this.EndSkillEffect();
+            skils.EndSkillEffect();
         }
     }
 }

@@ -1,48 +1,45 @@
-﻿using UnityEngine;
-
-namespace ET
+﻿namespace ET.Client
 {
     //闪现(玩家技能)
-    [SkillHandler]
-    public class Skill_ShanXian_1 : ASkillHandler
+    public class Skill_ShanXian_1 : SkillHandlerC
     {
-        public override void OnInit(SkillInfo skillId, Unit theUnitFrom)
+        public override void OnInit(SkillC skils, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skils.BaseOnInit(skils.SkillInfo, theUnitFrom);
             
-            this.OnExecute();
+            this.OnExecute(skils);
         }
 
-        public override void OnExecute()
+        public override void OnExecute(SkillC skils)
         {
             //更新位置
-            if (this.SkillConf.GameObjectParameter == "0")
+            if (skils.SkillConf.GameObjectParameter == "0")
             {
                 //先跳过去再触发伤害
                 //TheUnitFrom.Position = TargetPosition;
-                this.PlaySkillEffects(this.TargetPosition);
+                skils.PlaySkillEffects(skils.TargetPosition);
             }
             else
             {
-                this.PlaySkillEffects(this.TheUnitFrom.Position);
+                skils.PlaySkillEffects(skils.TheUnitFrom.Position);
             }
 
-            this.OnShowSkillIndicator(this.SkillInfo);
-            this.OnUpdate();
+            skils.OnShowSkillIndicator(skils.SkillInfo);
+            this.OnUpdate(skils);
         }
 
-        public override void OnUpdate()
+        public override void OnUpdate(SkillC skils)
         {
             long serverNow = TimeHelper.ServerNow();
-            if (this.SkillConf.GameObjectParameter == "1" && this.IsExcuteHurt && serverNow >= this.SkillExcuteHurtTime)
+            if (skils.SkillConf.GameObjectParameter == "1" && skils.IsExcuteHurt && serverNow >= this.SkillExcuteHurtTime)
             {
                 //先跳过去再触发伤害
                 //TheUnitFrom.Position = TargetPosition;
             }
-            this.BaseOnUpdate();
+            skils.BaseOnUpdate();
         }
 
-        public override void OnFinished()
+        public override void OnFinished(SkillC skils)
         {
 
         }

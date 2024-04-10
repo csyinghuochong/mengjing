@@ -1,20 +1,20 @@
 ﻿namespace ET.Client
 {
     //子弹1
-    public class Skill_ComTargetMove_RangDamge_1 : ASkillHandler
+    public class Skill_ComTargetMove_RangDamge_1 : SkillHandlerC
     {
 
-        public override void OnInit(SkillInfo skillId, Unit theUnitFrom)
+        public override void OnInit(SkillC skils, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skils.BaseOnInit(skils.SkillInfo, theUnitFrom);
 
-            this.OnExecute();
+            this.OnExecute(skils);
         }
 
-        protected void PlayBullet_1()
+        private void PlayBullet_1(SkillC skils)
         {
-            string[] paraminfos = this.SkillConf.GameObjectParameter.Split(';');
-            int angle = this.SkillInfo.TargetAngle;
+            string[] paraminfos = skils.SkillConf.GameObjectParameter.Split(';');
+            int angle = skils.SkillInfo.TargetAngle;
             int range = paraminfos.Length > 1 ?  int.Parse(paraminfos[0]) : 0;
             int number = paraminfos.Length > 1 ? int.Parse(paraminfos[1]) : 1;
             int delta = number > 1 ?  range / (number - 1) : 0;
@@ -22,27 +22,26 @@
 
             for (int i = 0; i < number; i++ )
             {
-                SkillInfo skillInfo = ComHelp.DeepCopy<SkillInfo>(this.SkillInfo);
+                SkillInfo skillInfo = ComHelp.DeepCopy<SkillInfo>(skils.SkillInfo);
                 skillInfo.TargetAngle = starAngle + i * delta;
-                this.OnShowSkillIndicator(skillInfo);
+                skils.OnShowSkillIndicator(skillInfo);
             }
         }
 
-        public override void OnExecute()
+        public override void OnExecute(SkillC skils)
         {
-            this.PlayBullet_1();     //播放特效
-            this.OnUpdate();
+            this.PlayBullet_1(skils);     //播放特效
+            this.OnUpdate(skils);
         }
 
-        public override void OnUpdate()
+        public override void OnUpdate(SkillC skils)
         {
-            this.BaseOnUpdate();
+            skils.BaseOnUpdate();
         }
 
-        public override void OnFinished()
+        public override void OnFinished(SkillC skils)
         {
             
         }
-
     }
 }

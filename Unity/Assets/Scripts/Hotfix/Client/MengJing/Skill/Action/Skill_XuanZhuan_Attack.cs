@@ -1,22 +1,21 @@
-﻿using UnityEngine;
+﻿using Unity.Mathematics;
 
-namespace ET
+namespace ET.Client
 {
-
-    [SkillHandler]
+    
     public class Skill_XuanZhuan_Attack : Skill_Action_Common
     {
-        public override void OnInit(SkillInfo skillId, Unit theUnitFrom)
+        public override void OnInit(SkillC skils, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skils.BaseOnInit(skils.SkillInfo, theUnitFrom);
 
-            this.OnExecute();
+            this.OnExecute(skils);
         }
 
-        public override void OnExecute()
+        public override void OnExecute(SkillC skils)
         {
-            string[] paraminfos = this.SkillConf.GameObjectParameter.Split(';');
-            int angle = this.SkillInfo.TargetAngle;
+            string[] paraminfos = skils.SkillConf.GameObjectParameter.Split(';');
+            int angle = skils.SkillInfo.TargetAngle;
             int range = paraminfos.Length > 1 ? int.Parse(paraminfos[0]) : 0;
             int number = paraminfos.Length > 1 ? int.Parse(paraminfos[1]) : 1;
             int delta = number > 1 ? range / (number - 1) : 0;
@@ -24,27 +23,27 @@ namespace ET
 
             for (int i = 0; i < number; i++)
             {
-                this.PlaySkillEffects(this.TargetPosition, starAngle + i * delta);
+                skils.PlaySkillEffects(skils.TargetPosition, starAngle + i * delta);
 
-                SkillInfo skillInfo = ComHelp.DeepCopy<SkillInfo>(this.SkillInfo);
+                SkillInfo skillInfo = ComHelp.DeepCopy<SkillInfo>(skils.SkillInfo);
                 skillInfo.TargetAngle = starAngle + i * delta;
-                this.OnShowSkillIndicator(skillInfo);
+                skils.OnShowSkillIndicator(skillInfo);
             }
 
-            this.OnUpdate();
+            this.OnUpdate(skils);
         }
 
-        public override void OnUpdate()
+        public override void OnUpdate(SkillC skils)
         {
             long serverNow = TimeHelper.ServerNow();
             //根据技能效果延迟触发伤害
-            if (serverNow < this.SkillExcuteHurtTime)
+            if (serverNow < skils.SkillExcuteHurtTime)
             {
                 return;
             }
 
-            string[] paraminfos = this.SkillConf.GameObjectParameter.Split(';');
-            int angle = this.SkillInfo.TargetAngle;
+            string[] paraminfos = skils.SkillConf.GameObjectParameter.Split(';');
+            int angle = skils.SkillInfo.TargetAngle;
             int speed = paraminfos.Length > 1 ? int.Parse(paraminfos[0]) : 0;   //每秒转多少角度
             int number = paraminfos.Length > 1 ? int.Parse(paraminfos[1]) : 1;
             //两条线的间隔
@@ -52,27 +51,30 @@ namespace ET
             int starAngle = angle;
             if (number > 1)
             {
-                delta = Mathf.FloorToInt(360f / number);
+                delta = (int)math.floor(360f / number);
                 starAngle = angle - 180;
             }
-            long passTime = (serverNow - this.SkillInfo.SkillBeginTime);
+            long passTime = (serverNow - skils.SkillInfo.SkillBeginTime);
             int addrangle = (int)(passTime * speed * 0.001f);
 
-            for (int i = 0; i < this.EffectInstanceId.Count; i++)
+            for (int i = 0; i < skils.EffectInstanceId.Count; i++)
             {
-                EventType.SkillEffectMove.Instance.Postion = this.TargetPosition;
-                EventType.SkillEffectMove.Instance.Unit = this.TheUnitFrom;
-                EventType.SkillEffectMove.Instance.Angle = starAngle + i * delta + addrangle;
-                EventType.SkillEffectMove.Instance.EffectInstanceId = this.EffectInstanceId[i];
-                EventSystem.Instance.PublishClass(EventType.SkillEffectMove.Instance);
+                EventSystem.Instance.Publish(skils.Root(), new SkillEffectMove()
+                {
+                    Postion = skils.TargetPosition,
+                    Unit = skils.TheUnitFrom,
+                    Angle = starAngle + i * delta + addrangle,
+                    EffectInstanceId = skils.EffectInstanceId[i]
+                });
+                
             }
-            this.TheUnitFrom.Rotation = Quaternion.Euler(0, angle + addrangle, 0);
-            this.BaseOnUpdate();
+            skils.TheUnitFrom.Rotation = quaternion.Euler(0, angle + addrangle, 0);
+            skils.BaseOnUpdate();
         }
 
-        public override void OnFinished()
+        public override void OnFinished(SkillC skils)
         {
-            this.EndSkillEffect();
+            skils.EndSkillEffect();
         }
     }
 }

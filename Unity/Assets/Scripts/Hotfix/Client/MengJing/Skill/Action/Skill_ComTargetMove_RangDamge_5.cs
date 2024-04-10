@@ -1,27 +1,27 @@
-﻿namespace ET
+﻿namespace ET.Client
 {
-    [SkillHandler]
-    public class Skill_ComTargetMove_RangDamge_5: Skill_Action_Common
+
+    public class Skill_ComTargetMove_RangDamge_5: SkillHandlerC
     {
-        public override void OnInit(SkillInfo skillId, Unit theUnitFrom)
+        public override void OnInit(SkillC skils, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skils.BaseOnInit(skils.SkillInfo, theUnitFrom);
 
-            this.OnExecute();
+            this.OnExecute(skils);
         }
 
-        public override void OnExecute()
+        public override void OnExecute(SkillC skils)
         {
-            this.OnShowSkillIndicator(this.SkillInfo);
-            this.OnUpdate();
+            skils.OnShowSkillIndicator(skils.SkillInfo);
+            this.OnUpdate(skils);
         }
 
-        public override void OnUpdate()
+        public override void OnUpdate(SkillC skils)
         {
-            this.BaseOnUpdate();
+            skils.BaseOnUpdate();
         }
 
-        public override void OnFinished()
+        public override void OnFinished(SkillC skils)
         {
         }
     }

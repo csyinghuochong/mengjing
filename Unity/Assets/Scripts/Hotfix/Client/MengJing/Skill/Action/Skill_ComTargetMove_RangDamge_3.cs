@@ -1,25 +1,22 @@
-using UnityEngine;
-
-namespace ET
+namespace ET.Client
 {
 
     /// <summary>
     /// 多条裂地斩
     /// </summary>
-    [SkillHandler]
-    public class Skill_ComTargetMove_RangDamge_3 : Skill_Action_Common
+    public class Skill_ComTargetMove_RangDamge_3 : SkillHandlerC
     {
-        public override void OnInit(SkillInfo skillId, Unit theUnitFrom)
+        public override void OnInit(SkillC skils, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
+            skils.BaseOnInit(skils.SkillInfo, theUnitFrom);
 
-            this.OnExecute();
+            this.OnExecute(skils);
         }
 
-        public override void OnExecute()
+        public override void OnExecute(SkillC skils)
         {
-            string[] paraminfos = this.SkillConf.GameObjectParameter.Split(';');
-            int angle = this.SkillInfo.TargetAngle;
+            string[] paraminfos = skils.SkillConf.GameObjectParameter.Split(';');
+            int angle = skils.SkillInfo.TargetAngle;
             int range = paraminfos.Length > 1 ? int.Parse(paraminfos[0]) : 0;
             int number = paraminfos.Length > 1 ? int.Parse(paraminfos[1]) : 1;
             int delta = number > 1 ? range / (number - 1) : 0;
@@ -27,23 +24,23 @@ namespace ET
 
             for (int i = 0; i < number; i++)
             {
-                this.PlaySkillEffects(this.TargetPosition, starAngle + i * delta);
-                SkillInfo skillInfo = ComHelp.DeepCopy<SkillInfo>(this.SkillInfo);
+                skils.PlaySkillEffects(skils.TargetPosition, starAngle + i * delta);
+                SkillInfo skillInfo = ComHelp.DeepCopy<SkillInfo>(skils.SkillInfo);
                 skillInfo.TargetAngle = starAngle + i * delta;
-                this.OnShowSkillIndicator(skillInfo);
+                skils.OnShowSkillIndicator(skillInfo);
             }
 
-            this.OnUpdate();
+            this.OnUpdate(skils);
         }
 
-        public override void OnUpdate()
+        public override void OnUpdate(SkillC skils)
         {
-            this.BaseOnUpdate();
+            skils.BaseOnUpdate();
         }
 
-        public override void OnFinished()
+        public override void OnFinished(SkillC skils)
         {
-            this.EndSkillEffect();
+            skils.EndSkillEffect();
         }
     }
 }
