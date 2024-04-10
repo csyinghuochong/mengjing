@@ -1,5 +1,7 @@
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_UnionMy))]
+    [FriendOf(typeof (ES_UnionShow))]
     [FriendOf(typeof (ES_FriendList))]
     [FriendOf(typeof (ES_FriendBlack))]
     [FriendOf(typeof (ES_FriendApply))]
@@ -39,6 +41,8 @@ namespace ET.Client
             UICommonHelper.SetToggleShow(self.View.E_Button_0Toggle.gameObject, index == 0);
             UICommonHelper.SetToggleShow(self.View.E_Button_1Toggle.gameObject, index == 1);
             UICommonHelper.SetToggleShow(self.View.E_Button_2Toggle.gameObject, index == 2);
+            UICommonHelper.SetToggleShow(self.View.E_Button_3Toggle.gameObject, index == 3);
+            UICommonHelper.SetToggleShow(self.View.E_Button_4Toggle.gameObject, index == 4);
 
             UICommonHelper.HideChildren(self.View.EG_SubViewNodeRectTransform);
 
@@ -48,10 +52,16 @@ namespace ET.Client
                     self.View.ES_FriendList.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.View.ES_FriendBlack.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_FriendApply.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-                    self.View.ES_FriendApply.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_FriendBlack.uiTransform.gameObject.SetActive(true);
+                    break;
+                case 3:
+                    self.View.ES_UnionShow.uiTransform.gameObject.SetActive(true);
+                    break;
+                case 4:
+                    self.View.ES_UnionMy.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
