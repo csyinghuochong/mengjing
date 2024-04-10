@@ -1,48 +1,52 @@
-﻿using UnityEngine;
+﻿
+using Unity.Mathematics;
+using UnityEngine;
 
-namespace ET
+namespace ET.Client
 {
-
     //指定目标攻击
-    [SkillHandler]
-    public class Skill_ComTargetMove_Damge_1 : ASkillHandler
+    public class Skill_ComTargetMove_Damge_1 : SkillHandlerC
     {
 
-        public override void OnInit(SkillInfo skillId, Unit theUnitFrom)
+        public override void OnInit(SkillC skils, Unit theUnitFrom)
         {
-            this.BaseOnInit(skillId, theUnitFrom);
-            this.NowPosition = theUnitFrom.Position;
-            this.NowPosition.y = theUnitFrom.Position.y + SkillHelp.GetCenterHigh(theUnitFrom.Type, theUnitFrom.ConfigId);
+            skils.BaseOnInit(skils.SkillInfo, theUnitFrom);
+            float3 nowPosition = new float3(theUnitFrom.Position.x,
+                theUnitFrom.Position.y + SkillHelp.GetCenterHigh(theUnitFrom.Type, theUnitFrom.ConfigId),
+                theUnitFrom.Position.z);
+            skils.NowPosition = nowPosition;
 
-            this.OnExecute();
+            this.OnExecute(skils);
         }
 
-        public override void OnExecute()
+        public override void OnExecute(SkillC skils)
         {
-            this.OnShowSkillIndicator(this.SkillInfo);
-            this.OnUpdate();
+            skils.OnShowSkillIndicator(skils.SkillInfo);
+            this.OnUpdate(skils);
         }
 
-        public override void OnUpdate()
+        public override void OnUpdate(SkillC skils)
         {
-            this.BaseOnUpdate();
+            skils.BaseOnUpdate();
             long serverNow = TimeHelper.ServerNow();
-            float passTime = (serverNow - this.SkillInfo.SkillBeginTime) * 0.001f;
-            if (passTime < this.SkillConf.SkillDelayTime)
+            float passTime = (serverNow - skils.SkillInfo.SkillBeginTime) * 0.001f;
+            if (passTime < skils.SkillConf.SkillDelayTime)
             {
                 return;
             }
             
-            Unit targetUnit = TheUnitFrom.GetParent<UnitComponent>().Get(this.SkillInfo.TargetID);
+            Unit targetUnit = skils.TheUnitFrom.GetParent<UnitComponent>().Get(skils.SkillInfo.TargetID);
             if (targetUnit != null)
             {
-                this.TargetPosition = targetUnit.Position;
-                this.TargetPosition.y = targetUnit.Position.y + SkillHelp.GetCenterHigh(targetUnit.Type, targetUnit.ConfigId);
+                float3 targetPosition = new float3(targetUnit.Position.x,
+                    targetUnit.Position.y + SkillHelp.GetCenterHigh(targetUnit.Type, targetUnit.ConfigId),
+                    targetUnit.Position.z);
+                skils.TargetPosition = targetPosition;
             }
 
-            Vector3 dir = (this.TargetPosition - this.NowPosition).normalized;
-            float effectAngle = Mathf.Atan2(dir.x, dir.z) * 180f / 3.1415926535897931f;
-            if (this.EffectInstanceId.Count == 0)
+            float3 dir =  math.normalize(skils.TargetPosition - skils.NowPosition);
+            float effectAngle = math.atan2(dir.x, dir.z) * 180f / 3.1415926535897931f;
+            if (skils.EffectInstanceId.Count == 0)
             {
                 //Vector3 newestPositon = this.TheUnitFrom.Position;
                 //newestPositon.y = this.TheUnitFrom.Position.y + SkillHelp.GetCenterHigh(this.TheUnitFrom.Type, this.TheUnitFrom.ConfigId);
@@ -58,38 +62,36 @@ namespace ET
                 //    effectAngle = Mathf.Atan2(dire2.x, dire2.z) * 180 / 3.141592653589793f;
                 //}
                 //this.PlaySkillEffects(this.NowPosition, effectAngle);
-                this.PlaySkillEffects(this.NowPosition, effectAngle);
+                skils.PlaySkillEffects(skils.NowPosition, effectAngle);
             }
 
-            float dis = PositionHelper.Distance2D(this.TargetPosition, this.NowPosition);
-#if !SERVER && NOT_UNITY
-            float move = (float)this.SkillConf.SkillMoveSpeed * 0.033f; 
-#else
-            float move = (float)this.SkillConf.SkillMoveSpeed * Time.deltaTime;
-#endif
-
+            float dis = PositionHelper.Distance2D(skils.TargetPosition, skils.NowPosition);
+            float move = (float)skils.SkillConf.SkillMoveSpeed * Time.deltaTime;
+            
             move = Mathf.Min(dis, move);
-            this.NowPosition = this.NowPosition + (move * dir);
+            skils.NowPosition = skils.NowPosition + (move * dir);
 
-            if (this.EffectId!=0)
+            if (skils.EffectId!=0)
             {
-                EventType.SkillEffectMove.Instance.EffectInstanceId = this.EffectInstanceId[0];
-                EventType.SkillEffectMove.Instance.Unit = this.TheUnitFrom;
-                EventType.SkillEffectMove.Instance.Postion = this.NowPosition;
-                EventType.SkillEffectMove.Instance.Angle = effectAngle;
-                EventSystem.Instance.PublishClass(EventType.SkillEffectMove.Instance);
+                EventSystem.Instance.Publish(skils.Root(), new SkillEffectMove()
+                {
+                    EffectInstanceId = skils.EffectInstanceId[0],
+                    Unit = skils.TheUnitFrom,
+                    Postion = skils.NowPosition,
+                    Angle = effectAngle
+                });
             }
           
-            dis = PositionHelper.Distance2D(this.NowPosition, this.TargetPosition);
+            dis = PositionHelper.Distance2D(skils.NowPosition, skils.TargetPosition);
             if (dis < 0.5f || passTime > 20f)
             {
-                this.SetSkillState(SkillState.Finished);
+                skils.SetSkillState(SkillState.Finished);
             }
         }
 
-        public override void OnFinished()
+        public override void OnFinished(SkillC skils)
         {
-            this.EndSkillEffect();
+            skils.EndSkillEffect();
         }
 
     }

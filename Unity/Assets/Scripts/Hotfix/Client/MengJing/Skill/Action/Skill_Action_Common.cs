@@ -1,9 +1,7 @@
 ﻿namespace ET.Client
 {
-    
     public class Skill_Action_Common : SkillHandlerC
     {
-     
         public override void OnInit(SkillC skils, Unit theUnitFrom)
         {
             skils.BaseOnInit(skils.SkillInfo, theUnitFrom);

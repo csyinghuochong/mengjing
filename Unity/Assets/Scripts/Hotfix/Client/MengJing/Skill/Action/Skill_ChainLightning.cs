@@ -1,13 +1,11 @@
-﻿namespace ET
+﻿namespace ET.Client
 {
-
-
-    [SkillHandler]
+    
     public class Skill_ChainLightning : Skill_Action_Common
     {
-        public override void OnExecute()
+        public override void OnExecute(SkillC skils)
         {
-            this.OnUpdate();
+            skils.BaseOnUpdate();
         }
     }
 }

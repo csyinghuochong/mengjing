@@ -214,5 +214,13 @@ namespace ET.Client
     public struct SkillFinish
     {
         public int SkillId;
+    } 
+    
+    public struct SkillEffectMove 
+    {
+        public long EffectInstanceId;
+        public float3 Postion;
+        public float Angle;
+        public Unit Unit;
     }
 }

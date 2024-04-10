@@ -1,7 +1,5 @@
-namespace ET
+namespace ET.Client
 {
-
-    [SkillHandler]
     public class Skill_Boomerang : Skill_Action_Common
     {
         

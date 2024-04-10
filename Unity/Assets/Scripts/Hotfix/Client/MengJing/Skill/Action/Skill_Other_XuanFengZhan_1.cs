@@ -1,8 +1,7 @@
-﻿namespace ET
+﻿namespace ET.Client
 {
 
-    //旋风斩
-    [SkillHandler]
+    //召唤
     public class Skill_Other_XuanFengZhan_1 : Skill_Action_Common
     { 
     }

@@ -1,9 +1,8 @@
-namespace ET
+namespace ET.Client
 {
 
-    //光环
-    [SkillHandler]
+    //召唤
     public class Skill_Halo_2 : Skill_Action_Common
-    {
+    { 
     }
 }

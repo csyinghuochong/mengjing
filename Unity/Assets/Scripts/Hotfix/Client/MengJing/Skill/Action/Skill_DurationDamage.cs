@@ -1,10 +1,9 @@
-﻿namespace ET
+﻿namespace ET.Client
 {
 
-    /// <summary>
-    /// 持续性伤害
-    /// </summary>
-    public class Skill_DurationDamage: Skill_Action_Common
-    {
+    //召唤
+    public class Skill_DurationDamage : Skill_Action_Common
+    { 
+    
     }
 }

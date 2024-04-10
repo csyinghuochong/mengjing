@@ -1,14 +1,14 @@
-namespace ET
+
+namespace ET.Client
 {
 
-    //范围轰炸
-    [SkillHandler]
+    //召唤
     public class Skill_Follow_Damge_1 : Skill_Action_Common
-    {
-        public override void OnExecute()
+    { 
+        public override void OnExecute(SkillC skillC)
         {
-            this.OnShowSkillIndicator(this.SkillInfo);
-            this.OnUpdate();
+            skillC.OnShowSkillIndicator(skillC.SkillInfo);
+            this.OnUpdate(skillC);
         }
     }
 }

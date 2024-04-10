@@ -1,8 +1,6 @@
-﻿namespace ET
+﻿namespace ET.Client
 {
-
     //子弹1
-    [SkillHandler]
     public class Skill_ComTargetMove_RangDamge_1 : ASkillHandler
     {
 
