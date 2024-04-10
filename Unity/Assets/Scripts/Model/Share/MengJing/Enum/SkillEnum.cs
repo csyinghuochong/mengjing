@@ -206,7 +206,7 @@ namespace ET
         public float EffectAngle;
 
         public int TargetAngle;
-        public long TargetID;
+        public long TargetID { get; set; }
 
         public long InstanceId;
 

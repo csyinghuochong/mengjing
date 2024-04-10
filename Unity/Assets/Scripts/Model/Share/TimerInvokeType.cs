@@ -37,5 +37,6 @@
         public const int DialogTimer = 311;
         public const int UIDungenBossRefreshTimer = 312;
         public const int MakeCDTimer = 313;
+        public const int ChainLightningTimer = 314;
     }
 }
