@@ -254,7 +254,7 @@ namespace ET.Client
 
             self.OnUpdateMakeType();
             self.UpdateShuLianDu();
-            self.OnBagItemUpdate().Coroutine();
+            self.OnBagItemUpdate();
         }
 
         public static void UpdateShuLianDu(this ES_SkillMake self)
@@ -268,7 +268,7 @@ namespace ET.Client
             self.E_Img_ShuLianProImage.fillAmount = curValue * 1f / maxValue;
         }
 
-        public static async ETTask OnBagItemUpdate(this ES_SkillMake self)
+        public static void OnBagItemUpdate(this ES_SkillMake self)
         {
             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(self.MakeId);
 
@@ -276,14 +276,6 @@ namespace ET.Client
             {
                 self.ES_CommonItem.UpdateItem(new BagInfo() { ItemID = equipMakeConfig.MakeItemID }, ItemOperateEnum.MakeItem);
                 self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
-            }
-
-            long instanceid = self.InstanceId;
-            var path = ABPathHelper.GetUGUIPath("Main/Make/UIMakeNeed");
-            var bundleGameObject = await ResourcesComponent.Instance.LoadAssetAsync<GameObject>(path);
-            if (instanceid != self.InstanceId)
-            {
-                return;
             }
 
             string needItems = equipMakeConfig.NeedItems;
@@ -312,7 +304,6 @@ namespace ET.Client
 
             self.ShowMakeNeed.Clear();
 
-            int number = 0;
             for (int i = 0; i < itemsList.Length; i++)
             {
                 string[] itemInfo = itemsList[i].Split(';');
@@ -389,7 +380,7 @@ namespace ET.Client
             self.EG_SelectRectTransform.gameObject.SetActive(false);
             self.EG_MeltRectTransform.gameObject.SetActive(false);
             self.EG_MakeINeedNodeRectTransform.gameObject.SetActive(true);
-            self.OnBagItemUpdate().Coroutine();
+            self.OnBagItemUpdate();
 
             //设置选中框
             for (int k = 0; k < self.ScrollItemMakeItems.Count; k++)
