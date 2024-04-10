@@ -9,24 +9,24 @@ namespace ET.Client
     [ChildOf(typeof(SkillManagerComponentC))]
     public abstract class SkillC :Entity,IAwake,IDestroy
     {
-        public float3 NowPosition;
-        public SkillState SkillState;
+        public float3 NowPosition { get; set; }
+        public SkillState SkillState { get; set; }
 
         public SkillConfig SkillConf { get; set; }
-        public int EffectId;
+        public int EffectId { get; set; }
 
-        public bool IsExcuteHurt;
-        public long SkillExcuteHurtTime;
+        public bool IsExcuteHurt { get; set; }
+        public long SkillExcuteHurtTime { get; set; }
 
-        public List<long> EffectInstanceId = new List<long>();
+        public List<long> EffectInstanceId  { get; set; }= new List<long>();
 
         /// <summary>
         /// 来自哪个Unit
         /// </summary>
         public Unit TheUnitFrom { get; set; }
 
-        public SkillInfo SkillInfo;
-        public float3 TargetPosition;
+        public SkillInfo SkillInfo { get; set; }
+        public float3 TargetPosition { get; set; }
         
     }
 }

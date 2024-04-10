@@ -1,15 +1,30 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Unity.Mathematics;
+using UnityEngine;
 
-namespace ET.Client
+namespace ET
 {
-    [EntitySystemOf(typeof (SkillManagerComponentC))]
-    [FriendOf(typeof (SkillManagerComponentC))]
-    public static partial class SkillManagerComponentCSystem
+
+    [Timer(TimerType.SkillTimer)]
+    public class SkillViewTimer : ATimer<SkillManagerComponent>
     {
-        [EntitySystem]
-        private static void Awake(this ET.Client.SkillManagerComponentC self)
+        public override void Run(SkillManagerComponent self)
+        {
+            try
+            {
+                self.OnUpdate();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"move timer error: {self.Id}\n{e}");
+            }
+        }
+    }
+
+    [ObjectSystem]
+    public class SkillManagerComponentAwakeSystem : AwakeSystem<SkillManagerComponent>
+    {
+        public override void Awake(SkillManagerComponent self)
         {
             self.t_Skills.Clear();
             self.Skills.Clear();
@@ -20,25 +35,35 @@ namespace ET.Client
             Unit unit = self.GetParent<Unit>();
             self.MainHero = unit.MainHero;
         }
+    }
 
-        [EntitySystem]
-        private static void Destroy(this ET.Client.SkillManagerComponentC self)
+    [ObjectSystem]
+    public class SkillManagerComponentDestroySystem : DestroySystem<SkillManagerComponent>
+    {
+        public override void Destroy(SkillManagerComponent self)
         {
             self.SkillCDs.Clear();
             self.OnFinish();
         }
+    }
 
-        public static bool IsSkillMoveTime(this SkillManagerComponentC self)
+    /// <summary>
+    /// 技能管理
+    /// </summary>
+
+    public static class SkillManagerComponentSystem
+    {
+        public static bool IsSkillMoveTime(this SkillManagerComponent self)
         {
             return TimeHelper.ClientNow() < self.SkillMoveTime;
         }
 
-        public static bool IsSkillSingTime(this SkillManagerComponentC self)
+        public static bool IsSkillSingTime(this SkillManagerComponent self)
         {
             return TimeHelper.ClientNow() < self.SkillSingTime;
         }
 
-        public static SkillCDItem GetSkillCD(this SkillManagerComponentC self, int skillId)
+        public static SkillCDItem GetSkillCD(this SkillManagerComponent self, int skillId)
         {
             for (int i = 0; i < self.SkillCDs.Count; i++)
             {
@@ -47,18 +72,16 @@ namespace ET.Client
                     return self.SkillCDs[i];
                 }
             }
-
             return null;
         }
 
-        public static long GetCdTime(this SkillManagerComponentC self, int skillId, long nowTime)
+        public static long GetCdTime(this SkillManagerComponent self, int skillId, long nowTime)
         {
             SkillCDItem skillCD = self.GetSkillCD(skillId);
-            if (skillCD != null)
+            if (skillCD!=null)
             {
                 return skillCD.CDEndTime - nowTime;
             }
-
             return 0;
         }
 
@@ -66,13 +89,13 @@ namespace ET.Client
         /// 清除所有技能和Cd
         /// </summary>
         /// <param name="self"></param>
-        public static void ClearSkillAndCd(this SkillManagerComponentC self)
+        public static void ClearSkillAndCd(this SkillManagerComponent self)
         {
             self.SkillCDs.Clear();
             self.OnFinish();
         }
 
-        public static void ClearSkillCD(this SkillManagerComponentC self, int skillId)
+        public static void ClearSkillCD(this SkillManagerComponent self,  int skillId)
         {
             for (int i = 0; i < self.SkillCDs.Count; i++)
             {
@@ -83,7 +106,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnUpdate(this SkillManagerComponentC self)
+        public static void OnUpdate(this SkillManagerComponent self)
         {
             long nowTime = TimeHelper.ServerNow();
             int skillcdcnt = self.SkillCDs.Count;
@@ -98,52 +121,46 @@ namespace ET.Client
             int skillcnt = self.Skills.Count;
             for (int i = skillcnt - 1; i >= 0; i--)
             {
-                SkillC skillHandler = self.Skills[i];
-                SkillHandlerC aaiHandler = SkillDispatcherComponentC.Instance.Get(skillHandler.SkillConf.GameObjectName);
+                ASkillHandler skillHandler = self.Skills[i];
                 if (skillHandler.IsSkillFinied())
                 {
-                    aaiHandler.OnFinished( skillHandler);
+                    skillHandler.OnFinished();
                     self.Skills.RemoveAt(i);
                     ObjectPool.Instance.Recycle(skillHandler);
                     continue;
                 }
-
-                //self.Skills[i].OnUpdate();
-                aaiHandler.OnUpdate( skillHandler);
+                self.Skills[i].OnUpdate();
             }
 
             if (self.MainHero)
             {
-                EventSystem.Instance.Publish(self.Root(), new SkillCDUpdate());
+                EventType.DataUpdate.Instance.DataType = DataType.SkillCDUpdate;
+                EventSystem.Instance.PublishClass(EventType.DataUpdate.Instance);
             }
-
             if (self.Skills.Count == 0 && self.SkillCDs.Count == 0 && self.SkillPublicCDTime < nowTime)
             {
-                self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+                TimerComponent.Instance?.Remove(ref self.Timer);
             }
         }
 
-        public static void OnFinish(this SkillManagerComponentC self)
+        public static void OnFinish(this SkillManagerComponent self)
         {
             int skillcnt = self.Skills.Count;
             for (int i = skillcnt - 1; i >= 0; i--)
             {
-                SkillC skillHandler = self.Skills[i];
-                SkillHandlerC aaiHandler = SkillDispatcherComponentC.Instance.Get(skillHandler.SkillConf.GameObjectName);
-                aaiHandler.OnFinished(skillHandler);
+                ASkillHandler skillHandler = self.Skills[i];
+                skillHandler.OnFinished();
                 self.Skills.RemoveAt(i);
                 ObjectPool.Instance.Recycle(skillHandler);
             }
-
             if (self.Skills.Count == 0 && self.SkillCDs.Count == 0)
             {
-                self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+                TimerComponent.Instance?.Remove(ref self.Timer);
             }
         }
 
         //发送使用消息的技能
-        public static async ETTask<int> SendUseSkill(this SkillManagerComponentC self, int skillid, int itemId, int angle, long targetId,
-        float distance, bool checksing = true)
+        public static async ETTask<int> SendUseSkill(this SkillManagerComponent self, int skillid, int itemId, int angle, long targetId, float distance, bool checksing = true)
         {
             try
             {
@@ -152,7 +169,6 @@ namespace ET.Client
                 {
                     self.SkillCmd = new C2M_SkillCmd();
                 }
-
                 C2M_SkillCmd skillCmd = self.SkillCmd;
                 skillCmd.SkillID = skillid;
                 skillCmd.TargetAngle = angle;
@@ -162,10 +178,9 @@ namespace ET.Client
                 int errorCode = self.CanUseSkill(itemId, skillid);
                 if (errorCode != ErrorCode.ERR_Success)
                 {
-                    EventSystem.Instance.Publish(self.Root(), new ShowFlyTip() { Type = errorCode });
-                    return errorCode;
+                    HintHelp.GetInstance().ShowHintError(errorCode);
+                    return errorCode;       
                 }
-
                 if (unit.GetComponent<SingingComponent>().IsSkillSinging(skillid))
                 {
                     return ErrorCode.ERR_Success;
@@ -173,23 +188,21 @@ namespace ET.Client
 
                 unit.GetComponent<SingingComponent>().BeginSkill();
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
-                SkillSetComponentC skillSetComponent = unit.Root().GetComponent<SkillSetComponentC>();
+                SkillSetComponent skillSetComponent = unit.ZoneScene().GetComponent<SkillSetComponent>();
                 if (checksing && skillConfig.SkillFrontSingTime > 0 && !skillSetComponent.IsSkillSingingCancel(skillConfig.Id))
                 {
                     unit.GetComponent<SingingComponent>().BeforeSkillSing(skillCmd);
-                    unit.GetComponent<AttackComponent>().RemoveTimer();
-                    errorCode = ErrorCode.ERR_Success;
+                    unit.ZoneScene().GetComponent<AttackComponent>().RemoveTimer();
+                    errorCode =  ErrorCode.ERR_Success;
                 }
                 else
                 {
                     errorCode = await self.ImmediateUseSkill(skillCmd);
                 }
-
                 if (errorCode == ErrorCode.ERR_Success)
                 {
                     unit.GetComponent<SingingComponent>().AfterSkillSing(skillConfig);
                 }
-
                 return errorCode;
             }
             catch (Exception e)
@@ -199,26 +212,24 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask<int> ImmediateUseSkill(this SkillManagerComponentC self, C2M_SkillCmd skillCmd)
+        public static async ETTask<int> ImmediateUseSkill(this SkillManagerComponent self, C2M_SkillCmd skillCmd)
         {
             long time_1 = TimeHelper.ClientNow();
             Unit unit = self.GetParent<Unit>();
             try
             {
-                unit.GetComponent<StateComponentC>().SetNetWaitEndTime(time_1 + 200);
-                M2C_SkillCmd m2C_SkillCmd = await self.Root().GetComponent<ClientSenderCompnent>().Call(skillCmd) as M2C_SkillCmd;
+                unit.GetComponent<StateComponent>().SetNetWaitEndTime(time_1 + 200);
+                M2C_SkillCmd m2C_SkillCmd = await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(skillCmd) as M2C_SkillCmd;
                 if (unit.IsDisposed)
                 {
                     return ErrorCode.ERR_NetWorkError;
                 }
-
-                unit.GetComponent<StateComponentC>().SetNetWaitEndTime(0);
+                unit.GetComponent<StateComponent>().SetNetWaitEndTime(0);
                 if (m2C_SkillCmd.Error == 0)
                 {
-                    BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-                    SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
-                    int weaponSkill = SkillHelp.GetWeaponSkill(skillCmd.SkillID, UnitHelper.GetEquipType(self.Root()),
-                        skillSetComponent.SkillList);
+                    BagComponent bagComponent = self.ZoneScene().GetComponent<BagComponent>();
+                    SkillSetComponent skillSetComponent = self.ZoneScene().GetComponent<SkillSetComponent>();   
+                    int weaponSkill = SkillHelp.GetWeaponSkill(skillCmd.SkillID, UnitHelper.GetEquipType(self.ZoneScene()), skillSetComponent.SkillList);
                     SkillConfig skillWeaponConfig = SkillConfigCategory.Instance.Get(weaponSkill);
 
                     long addTime = (long)(skillWeaponConfig.SkillRigidity * 1000);
@@ -226,43 +237,40 @@ namespace ET.Client
                     long rigidity = addTime - (time_2 - time_1);
                     rigidity = Math.Max(rigidity, 0);
 
-                    unit.GetComponent<StateComponentC>().SetRigidityEndTime(rigidity + time_2);
+                    unit.GetComponent<StateComponent>().SetRigidityEndTime(rigidity + time_2);
                 }
                 else
                 {
-                    unit.GetComponent<StateComponentC>().SetRigidityEndTime(0);
+                    unit.GetComponent<StateComponent>().SetRigidityEndTime(0);
                 }
-
                 if (!string.IsNullOrEmpty(m2C_SkillCmd.Message))
                 {
-                    EventSystem.Instance.Publish(self.Root(), new ShowFlyTip(){ Str = m2C_SkillCmd.Message });
+                    HintHelp.GetInstance().ShowHint(m2C_SkillCmd.Message);
                 }
-
                 return m2C_SkillCmd.Error;
             }
             catch (Exception ex)
             {
                 Log.Debug(ex.ToString());
-                unit.GetComponent<AttackComponent>()?.RemoveTimer();
+                self.ZoneScene()?.GetComponent<AttackComponent>()?.RemoveTimer();
                 return ErrorCode.ERR_NetWorkError;
             }
         }
 
-        public static void AddSkillSecond(this SkillManagerComponentC self, int skillId, int secondId)
+        public static void AddSkillSecond(this SkillManagerComponent self, int skillId, int secondId)
         {
             if (self.SkillSecond.ContainsKey(secondId))
             {
                 return;
             }
-
             self.SkillSecond.Add(secondId, skillId);
         }
 
-        public static void AddSkillCD(this SkillManagerComponentC self, int skillId, long cdEndTime, long pulicCD)
+        public static void AddSkillCD(this SkillManagerComponent self, int skillId, long cdEndTime, long pulicCD)
         {
             if (self.SkillSecond.ContainsKey(skillId))
             {
-                skillId = self.SkillSecond[skillId];
+                skillId = self.SkillSecond[skillId];    
             }
 
             //添加技能CD列表
@@ -272,24 +280,21 @@ namespace ET.Client
                 skillcd = new SkillCDItem();
                 self.SkillCDs.Add(skillcd);
             }
-
             skillcd.SkillID = skillId;
-            skillcd.CDEndTime = cdEndTime;
-            ; // + 100;
-            self.SkillPublicCDTime = pulicCD;
-            ; // + 100;
+            skillcd.CDEndTime = cdEndTime; ;// + 100;
+            self.SkillPublicCDTime = pulicCD; ;// + 100;
             self.AddSkillTimer();
         }
 
-        public static void AddSkillTimer(this SkillManagerComponentC self)
+        public static void AddSkillTimer(this SkillManagerComponent self)
         {
             if (self.Timer == 0)
             {
-                self.Timer =  self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.SkillTimer, self);
+                self.Timer = TimerComponent.Instance.NewFrameTimer(TimerType.SkillTimer, self);
             }
         }
 
-        public static void InitSkill(this SkillManagerComponentC self)
+        public static void InitSkill(this SkillManagerComponent self)
         {
             List<SkillInfo> skillInfos = self.t_Skills;
             for (int i = 0; i < skillInfos.Count; i++)
@@ -298,12 +303,10 @@ namespace ET.Client
                 {
                     continue;
                 }
-
                 M2C_UnitUseSkill m2C_UnitUseSkill = new M2C_UnitUseSkill();
                 m2C_UnitUseSkill.SkillInfos.Add(skillInfos[i]);
                 self.OnUseSkill(m2C_UnitUseSkill);
             }
-
             self.t_Skills.Clear();
         }
 
@@ -312,22 +315,24 @@ namespace ET.Client
         /// </summary>
         /// <param name="self"></param>
         /// <param name="skillcmd"></param>
-        public static void OnUseSkill(this SkillManagerComponentC self, M2C_UnitUseSkill skillcmd)
+        public static void OnUseSkill(this SkillManagerComponent self, M2C_UnitUseSkill skillcmd )
         {
             Unit unit = self.GetParent<Unit>();
             MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillcmd.SkillInfos[0].WeaponSkillID);
-
+          
             if (moveComponent != null && !moveComponent.IsArrived() && skillConfig.IfStopMove == 0)
             {
-                moveComponent.Stop(true);
+                moveComponent.Stop();
             }
-
+           
             if (unit.MainHero && !unit.IsRobot())
             {
-                self.AddSkillCD(skillcmd.SkillID, skillcmd.CDEndTime, skillcmd.PublicCDTime);
-                
-                EventSystem.Instance.Publish(self.Root(), new OnSkillUse(){ SkillId = skillcmd.SkillID });
+                self.AddSkillCD( skillcmd.SkillID, skillcmd.CDEndTime, skillcmd.PublicCDTime);
+
+                EventType.DataUpdate.Instance.DataType = DataType.OnSkillUse;
+                EventType.DataUpdate.Instance.UpdateValue = skillcmd.SkillID;
+                EventSystem.Instance.PublishClass(EventType.DataUpdate.Instance);
             }
 
             if (unit.Type != UnitType.Player && skillcmd.SkillInfos.Count > 0)
@@ -335,60 +340,63 @@ namespace ET.Client
                 Unit target = unit.GetParent<UnitComponent>().Get(skillcmd.SkillInfos[0].TargetID);
                 if (target != null)
                 {
-                    float3 direction = target.Position - unit.Position;
-                    float ange = 0;// math.Rad2Deg * Mathf.Atan2(direction.x, direction.z);
-                    unit.Rotation = quaternion.Euler(0, ange, 0);
+#if !SERVER && NOT_UNITY
+                    Vector3 direction = target.Position - unit.Position;
+                    float ange = Mathf.Rad2Deg(Mathf.Atan2(direction.x, direction.z));
+                    unit.Rotation = Quaternion.Euler(0, ange, 0);
+#else
+                    Vector3 direction = target.Position - unit.Position;
+                    float ange = Mathf.Rad2Deg * Mathf.Atan2(direction.x, direction.z);
+                    unit.Rotation = Quaternion.Euler(0, ange, 0);
+#endif
                 }
                 else
                 {
-                    unit.Rotation = quaternion.Euler(0, skillcmd.TargetAngle, 0);
+                    unit.Rotation = Quaternion.Euler(0, skillcmd.TargetAngle, 0);
                 }
             }
             else
             {
-                unit.Rotation = quaternion.Euler(0, skillcmd.TargetAngle, 0);
+                unit.Rotation = Quaternion.Euler(0, skillcmd.TargetAngle, 0);
             }
+
 
             //播放对应攻击动作
             if (skillConfig.IfStopMove == 1)
             {
-                EventSystem.Instance.Publish( self.Root(), new  PlayAnimator()
-                {
-                    Unit = unit,
-                    Animator = skillConfig.SkillAnimation
-                });
+                EventType.PlayAnimator.Instance.Unit = unit;
+                EventType.PlayAnimator.Instance.Animator = skillConfig.SkillAnimation;
+                Game.EventSystem.PublishClass(EventType.PlayAnimator.Instance);
             }
             else
             {
                 bool noMoveSkill = skillConfig.GameObjectName.Equals("Skill_Other_XuanFengZhan_1");
-                long SkillMoveTime = noMoveSkill? skillConfig.SkillLiveTime + TimeHelper.ClientNow() : 0;
+                long SkillMoveTime = noMoveSkill ? skillConfig.SkillLiveTime + TimeHelper.ClientNow() : 0;
                 self.SkillMoveTime = SkillMoveTime;
 
                 double singTime = skillConfig.SkillSingTime;
-                self.SkillSingTime = singTime == 0f? 0 : TimeHelper.ClientNow() + (int)(1000f * singTime);
+                self.SkillSingTime = singTime == 0f ? 0 : TimeHelper.ClientNow() + (int)(1000f * singTime);
 
                 double rigibTime = skillConfig.SkillRigidity;
                 long skillRigibTime = TimeHelper.ClientNow() + (int)(1000f * rigibTime);
                 //光之能量 保持在动作的最后一帧
-                if (!noMoveSkill && skillConfig.Id >= 61022301 && skillConfig.Id <= 61022306)
+                if (!noMoveSkill && skillConfig.Id >= 61022301 && skillConfig.Id <= 61022306 )
                 {
                     self.SkillMoveTime = skillRigibTime;
                 }
-
+               
                 if (!ComHelp.IfNull(skillConfig.SkillAnimation))
                 {
-                    int fsmType = skillConfig.ComboSkillID > 0? 5 : 4;
-                    if (ConfigData.NotCombatSkill.Contains(skillConfig.SkillAnimation))
+                    int fsmType = skillConfig.ComboSkillID > 0 ? 5 : 4;
+                    if (SkillHelp.NotCombatSkill.Contains(skillConfig.SkillAnimation))
                     {
                         fsmType = 4;
                     }
 
-                    EventSystem.Instance.Publish( self.Root(), new FsmChange()
-                    {
-                        FsmHandlerType = fsmType,
-                        SkillId = skillcmd.SkillInfos[0].WeaponSkillID,
-                        Unit = unit
-                    });
+                    EventType.FsmChange.Instance.FsmHandlerType = fsmType;
+                    EventType.FsmChange.Instance.SkillId = skillcmd.SkillInfos[0].WeaponSkillID;
+                    EventType.FsmChange.Instance.Unit = unit;
+                    Game.EventSystem.PublishClass(EventType.FsmChange.Instance);
                 }
             }
 
@@ -403,45 +411,42 @@ namespace ET.Client
                     continue;
                 }
 
-                SkillC skillHandler = self.AddChild<SkillC>();
+                ASkillHandler skillHandler = (ASkillHandler)ObjectPool.Instance.Fetch(SkillDispatcherComponent.Instance.SkillTypes[skillConfig1.GameObjectName]);
                 self.Skills.Add(skillHandler);
-                //skillHandler.OnInit(skillcmd.SkillInfos[i], unit);
-                SkillHandlerC aaiHandler = SkillDispatcherComponentC.Instance.Get(skillHandler.SkillConf.GameObjectName);
-                aaiHandler.OnInit( skillHandler, unit);
+                skillHandler.OnInit(skillcmd.SkillInfos[i], unit);
             }
-
             self.AddSkillTimer();
         }
 
-        public static void InterruptSkill(this SkillManagerComponentC self, int skillId)
+        public static void InterruptSkill(this SkillManagerComponent self, int skillId)
         {
             int skillcnt = self.Skills.Count;
             for (int i = skillcnt - 1; i >= 0; i--)
             {
-                SkillC skillHandler = self.Skills[i];
+                ASkillHandler skillHandler = self.Skills[i];
                 if (skillHandler.SkillConf.Id != skillId)
                 {
                     continue;
                 }
-
                 skillHandler.SetSkillState(SkillState.Finished);
             }
         }
 
-        public static void OnSkillSecondResult(this SkillManagerComponentC self, M2C_SkillSecondResult message)
+        public static void OnSkillSecondResult(this SkillManagerComponent self, M2C_SkillSecondResult message)
         {
             if (message.HurtIds.Count == 0)
-            {
+            { 
+                
             }
         }
 
-        public static int CanUseSkill(this SkillManagerComponentC self, int itemId, int skillId)
+        public static int CanUseSkill(this SkillManagerComponent self,int itemId, int skillId)
         {
             Unit unit = self.GetParent<Unit>();
 
             //检查魔法值
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
-            int skillMp = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.SkillUseMP);
+            int skillMp = unit.GetComponent<NumericComponent>().GetAsInt( NumericType.SkillUseMP );
             if (skillConfig.SkillUseMP > 0 && skillMp < skillConfig.SkillUseMP)
             {
                 return ErrorCode.ERR_CanNotUseSkill_MP;
@@ -456,7 +461,6 @@ namespace ET.Client
                 {
                     return ErrorCode.ERR_UseSkillInCD5;
                 }
-
                 //公共技能冷却
                 long leftPublicCD = self.SkillPublicCDTime - TimeHelper.ServerNow();
                 if (leftPublicCD > 1500)
@@ -465,28 +469,25 @@ namespace ET.Client
                     self.SkillPublicCDTime = TimeHelper.ServerNow();
                     leftPublicCD = 0;
                 }
-
-                if (itemId == 0 && leftPublicCD > 0)
+                if (itemId==0 && leftPublicCD > 0)
                 {
                     return ErrorCode.ERR_UseSkillInCD6;
                 }
             }
 
-            StateComponentC stateComponent = unit.GetComponent<StateComponentC>();
+            StateComponent stateComponent = unit.GetComponent<StateComponent>();
             int errorCode = stateComponent.CanUseSkill(skillConfig, true);
-            if (errorCode != ErrorCode.ERR_Success)
+            if (errorCode!=ErrorCode.ERR_Success)
             {
                 stateComponent.CheckSilence();
                 return errorCode;
             }
-
             if (self.IsSkillMoveTime())
             {
                 return ErrorCode.ERR_SkillMoveTime;
             }
-
-            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (itemId > 0 && SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
+            MapComponent mapComponent = self.ZoneScene().GetComponent<MapComponent>();
+            if (itemId > 0 && SceneConfigHelper.UseSceneConfig(mapComponent.SceneTypeEnum))
             {
                 SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(mapComponent.SceneId);
                 if (sceneConfig.IfUseSkillItem == 1)
@@ -497,5 +498,8 @@ namespace ET.Client
 
             return 0;
         }
+
+
     }
+
 }

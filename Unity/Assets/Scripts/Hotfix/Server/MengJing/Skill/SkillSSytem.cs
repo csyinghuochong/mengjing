@@ -556,43 +556,6 @@ namespace ET.Server
              uu.GetComponent<BuffManagerComponentS>().BuffFactory(buffData, self.TheUnitFrom, self);
              //Log.Info("结束释放buff" + buffID);
          }
-
-
-         public static void OnInit(this ET.Server.SkillS self,  Unit from)
-         {
-             SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(self.SkillConf.GameObjectName);
-             if (aaiHandler != null)
-             {
-                 aaiHandler.OnInit(self, from  );
-             }
-         }
-
-         public static void OnFinished(this ET.Server.SkillS self)
-         {
-             SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(self.SkillConf.GameObjectName);
-             if (aaiHandler != null)
-             {
-                 aaiHandler.OnFinished(self);
-             }
-         }
-
-         public static void OnExecute(this ET.Server.SkillS self)
-         {
-             SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(self.SkillConf.GameObjectName);
-             if (aaiHandler != null)
-             {
-                 aaiHandler.OnExecute(self);
-             }
-         }
-
-         public static void  OnUpdate(this ET.Server.SkillS self, int uddateMode)
-         {
-             SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(self.SkillConf.GameObjectName);
-             if (aaiHandler != null)
-             {
-                 aaiHandler.OnUpdate(self, uddateMode);
-             }
-         }
          
          public static void Check_Map(this ET.Server.SkillS self)
          {

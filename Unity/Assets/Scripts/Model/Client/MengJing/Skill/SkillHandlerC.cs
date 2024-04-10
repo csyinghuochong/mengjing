@@ -9,7 +9,7 @@ namespace ET.Client
     [SkillHandlerC]
     public abstract class SkillHandlerC
     {
-        public abstract void OnInit(SkillC skillc, SkillInfo skillcmd, Unit theUnitFrom);
+        public abstract void OnInit(SkillC skillc, Unit theUnitFrom);
 
         public abstract void OnExecute(SkillC skillc);
 

@@ -201,4 +201,9 @@ namespace ET.Client
         public int SkillId;
         public Unit Unit;
     }
+
+    public struct SkillBeging
+    {
+        public int SkillId;
+    }
 }

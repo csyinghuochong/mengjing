@@ -163,21 +163,6 @@ namespace ET.Client
                 Unit =  unit
             });
         }
-        
-        
-        public static void OnFinished(this SkillC self)
-        {
-            
-        }
 
-        public static void OnUpdate(this SkillC self)
-        {
-            
-        }
-
-        public static void OnInit(this SkillC self, SkillInfo skillInfo, Unit unit)
-        {
-            
-        }
     }
 }
