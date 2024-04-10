@@ -38,5 +38,6 @@
         public const int UIDungenBossRefreshTimer = 312;
         public const int MakeCDTimer = 313;
         public const int ChainLightningTimer = 314;
+        public const int Effectimer = 315;
     }
 }

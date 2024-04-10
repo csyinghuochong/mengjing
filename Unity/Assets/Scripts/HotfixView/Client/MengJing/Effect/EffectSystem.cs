@@ -20,7 +20,7 @@ namespace ET.Client
             self.EffectState = BuffState.Running;
             self.TheUnitBelongto = theUnitBelongto;
             self.EffectConfig = EffectConfigCategory.Instance.Get(effectData.EffectId);
-            self.EffectData.EffectBeginTime = effectData.EffectBeginTime > 0? effectData.EffectBeginTime : TimeHelper.ServerNow();
+            self.EffectBeginTime =  TimeHelper.ServerNow();
             self.EffectEndTime = TimeHelper.ServerNow() + self.EffectConfig.SkillEffectLiveTime;
 
             self.OnUpdate();
@@ -196,7 +196,7 @@ namespace ET.Client
             }
 
             long serverTime = TimeHelper.ServerNow();
-            float passTime = (serverTime - self.EffectData.EffectBeginTime) * 0.001f;
+            float passTime = (serverTime - self.EffectBeginTime) * 0.001f;
             if (passTime < self.EffectConfig.SkillEffectDelayTime)
             {
                 return;
@@ -241,11 +241,51 @@ namespace ET.Client
             }
         }
 
+        
+        /// <summary>
+        /// 添加服务器的碰撞范围,显示作用
+        /// </summary>
+        /// <param name="effect"></param>
+        /// <param name="rangeType"></param>
+        /// <param name="rangeValue"></param>
+        public static void AddCollider(this Effect self, GameObject effect,int rangeType,  float[] rangeValue )
+        {
+            //Log.Debug("实装碰撞体:" + self.EffectConfig.Id.ToString() + "rangeType :" + rangeType + "rangeValue:" + rangeValue);
+            if (rangeType == 1 && effect.GetComponent<SphereCollider>() == null)
+            {
+                SphereCollider collider = effect.AddComponent<SphereCollider>();
+                collider.radius = rangeValue[0];
+                collider.isTrigger = true;
+            }
+            if (rangeType == 2 && effect.GetComponent<BoxCollider>() == null)
+            {
+                BoxCollider collider = effect.AddComponent<BoxCollider>();
+                collider.center = new Vector3(0,0, rangeValue[1]*0.5f);
+                collider.size = new Vector3(rangeValue[0], 1, rangeValue[1]);
+                collider.isTrigger = true;
+            }
+        }
+
+        /// <summary>
+        /// 实时更新当前特效位置
+        /// </summary>
+        public static void UpdateEffectPosition(this Effect self, Vector3 vec3, float angle)
+        {
+            if (self.EffectObj == null)
+            {
+                return;
+            }
+            if (angle != -1)
+            {
+                self.EffectObj.transform.rotation = Quaternion.Euler(0, angle, 0);
+            }
+            self.EffectObj.transform.position = vec3;
+        }
+        
         public static void OnFinished(this Effect self)
         {
             GameObjectPoolComponent.Instance.RecoverGameObject(self.EffectPath, self.EffectObj);
             self.EffectState = BuffState.Finished;
-            self.EffectData.InstanceId = 0;
             self.TheUnitBelongto = null;
             self.EffectObj = null;
             self.EffectPath = String.Empty;

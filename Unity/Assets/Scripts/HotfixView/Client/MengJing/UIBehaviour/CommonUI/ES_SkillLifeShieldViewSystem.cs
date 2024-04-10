@@ -290,7 +290,6 @@ namespace ET.Client
             allInfos.AddRange(bagComponent.GetItemsByType(ItemTypeEnum.Equipment));
 
             self.ShowBagInfos.Clear();
-            int number = 0;
             for (int i = 0; i < allInfos.Count; i++)
             {
                 if (!ConfigData.ItemAddShieldExp.ContainsKey(allInfos[i].ItemID))

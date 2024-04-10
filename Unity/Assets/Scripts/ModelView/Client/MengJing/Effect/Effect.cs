@@ -9,14 +9,14 @@ namespace ET.Client
         /// <summary>
         /// Buff当前状态
         /// </summary>
-        public BuffState EffectState;
+        public BuffState EffectState { get; set; }
 
-        public EffectConfig EffectConfig;
+        public EffectConfig EffectConfig { get; set; }
 
         /// <summary>
         /// Buff数据
         /// </summary>
-        public EffectData EffectData;
+        public EffectData EffectData { get; set; }
 
         /// <summary>
         /// 寄生于哪个Unit，并不代表当前Buff实际寄居者，需要通过GetBuffTarget来获取，因为它赋值于Buff链起源的地方，具体值取决于那个起源Buff
@@ -27,7 +27,8 @@ namespace ET.Client
         /// 最多持续到什么时候
         /// </summary>
         public long EffectEndTime;
-
+        
+        public long EffectBeginTime { get; set; }
 
         public float HideObjTime;          //隐藏物体间隔时间    
 
