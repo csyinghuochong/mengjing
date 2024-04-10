@@ -96,6 +96,7 @@ namespace ET.Client
                     break;
                 case 4:
                     self.View.ES_SkillLifeShield.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_SkillLifeShield.OnUpdateUI();
                     break;
             }
         }

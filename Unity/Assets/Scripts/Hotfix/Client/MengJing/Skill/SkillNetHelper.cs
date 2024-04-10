@@ -153,5 +153,14 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<M2C_LifeShieldCostResponse> LifeShieldCost(Scene root, int operateType, List<long> operateBagID)
+        {
+            C2M_LifeShieldCostRequest request = new() { OperateType = operateType, OperateBagID = operateBagID };
+            M2C_LifeShieldCostResponse response =
+                    (M2C_LifeShieldCostResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
     }
 }
