@@ -5,8 +5,642 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_SkillMake : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_SkillMake : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public int MakeId;
+		public long Timer;
+
+		public int Plan = -1;
+		
+		public UnityEngine.RectTransform EG_RightRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_RightRectTransform == null )
+     			{
+		    		this.m_EG_RightRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Right");
+     			}
+     			return this.m_EG_RightRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_Text_CurrentText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Text_CurrentText == null )
+     			{
+		    		this.m_E_Text_CurrentText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Right/E_Text_Current");
+     			}
+     			return this.m_E_Text_CurrentText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_Lab_HuoLiText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Lab_HuoLiText == null )
+     			{
+		    		this.m_E_Lab_HuoLiText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Right/E_Lab_HuoLi");
+     			}
+     			return this.m_E_Lab_HuoLiText;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_MakeINeedNodeRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_MakeINeedNodeRectTransform == null )
+     			{
+		    		this.m_EG_MakeINeedNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Right/EG_MakeINeedNode");
+     			}
+     			return this.m_EG_MakeINeedNodeRectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_UIItemMakeRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_UIItemMakeRectTransform == null )
+     			{
+		    		this.m_EG_UIItemMakeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Right/EG_MakeINeedNode/EG_UIItemMake");
+     			}
+     			return this.m_EG_UIItemMakeRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopVerticalScrollRect E_MakeNeedItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MakeNeedItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_MakeNeedItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_Right/EG_MakeINeedNode/E_MakeNeedItems");
+     			}
+     			return this.m_E_MakeNeedItemsLoopVerticalScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_MakeButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_MakeButton == null )
+     			{
+		    		this.m_E_Btn_MakeButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Right/EG_MakeINeedNode/E_Btn_Make");
+     			}
+     			return this.m_E_Btn_MakeButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_MakeImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_MakeImage == null )
+     			{
+		    		this.m_E_Btn_MakeImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Right/EG_MakeINeedNode/E_Btn_Make");
+     			}
+     			return this.m_E_Btn_MakeImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_Lab_MakeNameText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Lab_MakeNameText == null )
+     			{
+		    		this.m_E_Lab_MakeNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Right/EG_MakeINeedNode/E_Lab_MakeName");
+     			}
+     			return this.m_E_Lab_MakeNameText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_Lab_MakeNumText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Lab_MakeNumText == null )
+     			{
+		    		this.m_E_Lab_MakeNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Right/EG_MakeINeedNode/E_Lab_MakeNum");
+     			}
+     			return this.m_E_Lab_MakeNumText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_Lab_MakeCDTimeText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Lab_MakeCDTimeText == null )
+     			{
+		    		this.m_E_Lab_MakeCDTimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Right/EG_MakeINeedNode/E_Lab_MakeCDTime");
+     			}
+     			return this.m_E_Lab_MakeCDTimeText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_Lab_ShuLianShowText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Lab_ShuLianShowText == null )
+     			{
+		    		this.m_E_Lab_ShuLianShowText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Right/EG_MakeINeedNode/E_Lab_ShuLianShow");
+     			}
+     			return this.m_E_Lab_ShuLianShowText;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_LeftRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_LeftRectTransform == null )
+     			{
+		    		this.m_EG_LeftRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Left");
+     			}
+     			return this.m_EG_LeftRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_ResetButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_ResetButton == null )
+     			{
+		    		this.m_E_Btn_ResetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Left/E_Btn_Reset");
+     			}
+     			return this.m_E_Btn_ResetButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_ResetImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_ResetImage == null )
+     			{
+		    		this.m_E_Btn_ResetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Left/E_Btn_Reset");
+     			}
+     			return this.m_E_Btn_ResetImage;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopVerticalScrollRect E_MakeItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MakeItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_MakeItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_Left/E_MakeItems");
+     			}
+     			return this.m_E_MakeItemsLoopVerticalScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Img_ShuLianProImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Img_ShuLianProImage == null )
+     			{
+		    		this.m_E_Img_ShuLianProImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Left/Img_ProSet/E_Img_ShuLianPro");
+     			}
+     			return this.m_E_Img_ShuLianProImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_Lab_ShuLianDuText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Lab_ShuLianDuText == null )
+     			{
+		    		this.m_E_Lab_ShuLianDuText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Left/Img_ProSet/E_Lab_ShuLianDu");
+     			}
+     			return this.m_E_Lab_ShuLianDuText;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ImageSelectImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ImageSelectImage == null )
+     			{
+		    		this.m_E_ImageSelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Left/E_ImageSelect");
+     			}
+     			return this.m_E_ImageSelectImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_MeltButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_MeltButton == null )
+     			{
+		    		this.m_E_Btn_MeltButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Left/E_Btn_Melt");
+     			}
+     			return this.m_E_Btn_MeltButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_MeltImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_MeltImage == null )
+     			{
+		    		this.m_E_Btn_MeltImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Left/E_Btn_Melt");
+     			}
+     			return this.m_E_Btn_MeltImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_LearnButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_LearnButton == null )
+     			{
+		    		this.m_E_Btn_LearnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Left/E_Btn_Learn");
+     			}
+     			return this.m_E_Btn_LearnButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_LearnImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_LearnImage == null )
+     			{
+		    		this.m_E_Btn_LearnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Left/E_Btn_Learn");
+     			}
+     			return this.m_E_Btn_LearnImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_Select_1Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_Select_1Button == null )
+     			{
+		    		this.m_E_Button_Select_1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Select/Select_1/E_Button_Select_1");
+     			}
+     			return this.m_E_Button_Select_1Button;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_Select_1Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_Select_1Image == null )
+     			{
+		    		this.m_E_Button_Select_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Select/Select_1/E_Button_Select_1");
+     			}
+     			return this.m_E_Button_Select_1Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_Select_2Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_Select_2Button == null )
+     			{
+		    		this.m_E_Button_Select_2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Select/Select_2/E_Button_Select_2");
+     			}
+     			return this.m_E_Button_Select_2Button;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_Select_2Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_Select_2Image == null )
+     			{
+		    		this.m_E_Button_Select_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Select/Select_2/E_Button_Select_2");
+     			}
+     			return this.m_E_Button_Select_2Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_Select_3Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_Select_3Button == null )
+     			{
+		    		this.m_E_Button_Select_3Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Select/Select_3/E_Button_Select_3");
+     			}
+     			return this.m_E_Button_Select_3Button;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_Select_3Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_Select_3Image == null )
+     			{
+		    		this.m_E_Button_Select_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Select/Select_3/E_Button_Select_3");
+     			}
+     			return this.m_E_Button_Select_3Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_Select_4Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_Select_4Button == null )
+     			{
+		    		this.m_E_Button_Select_4Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Select/Select_4/E_Button_Select_4");
+     			}
+     			return this.m_E_Button_Select_4Button;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_Select_4Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_Select_4Image == null )
+     			{
+		    		this.m_E_Button_Select_4Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Select/Select_4/E_Button_Select_4");
+     			}
+     			return this.m_E_Button_Select_4Image;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_MeltRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_MeltRectTransform == null )
+     			{
+		    		this.m_EG_MeltRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Melt");
+     			}
+     			return this.m_EG_MeltRectTransform;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_TitleSetRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_TitleSetRectTransform == null )
+     			{
+		    		this.m_EG_TitleSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_TitleSet");
+     			}
+     			return this.m_EG_TitleSetRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_TianFu_1Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_TianFu_1Button == null )
+     			{
+		    		this.m_E_Btn_TianFu_1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_TitleSet/E_Btn_TianFu_1");
+     			}
+     			return this.m_E_Btn_TianFu_1Button;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_TianFu_1Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_TianFu_1Image == null )
+     			{
+		    		this.m_E_Btn_TianFu_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_TitleSet/E_Btn_TianFu_1");
+     			}
+     			return this.m_E_Btn_TianFu_1Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_TianFu_2Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_TianFu_2Button == null )
+     			{
+		    		this.m_E_Btn_TianFu_2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_TitleSet/E_Btn_TianFu_2");
+     			}
+     			return this.m_E_Btn_TianFu_2Button;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_TianFu_2Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_TianFu_2Image == null )
+     			{
+		    		this.m_E_Btn_TianFu_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_TitleSet/E_Btn_TianFu_2");
+     			}
+     			return this.m_E_Btn_TianFu_2Image;
+     		}
+     	}
+
 		    public Transform UITransform
          {
      	    get
@@ -21,9 +655,83 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_EG_RightRectTransform = null;
+			this.m_E_Text_CurrentText = null;
+			this.m_E_Lab_HuoLiText = null;
+			this.m_EG_MakeINeedNodeRectTransform = null;
+			this.m_EG_UIItemMakeRectTransform = null;
+			this.m_E_MakeNeedItemsLoopVerticalScrollRect = null;
+			this.m_E_Btn_MakeButton = null;
+			this.m_E_Btn_MakeImage = null;
+			this.m_E_Lab_MakeNameText = null;
+			this.m_E_Lab_MakeNumText = null;
+			this.m_E_Lab_MakeCDTimeText = null;
+			this.m_E_Lab_ShuLianShowText = null;
+			this.m_EG_LeftRectTransform = null;
+			this.m_E_Btn_ResetButton = null;
+			this.m_E_Btn_ResetImage = null;
+			this.m_E_MakeItemsLoopVerticalScrollRect = null;
+			this.m_E_Img_ShuLianProImage = null;
+			this.m_E_Lab_ShuLianDuText = null;
+			this.m_E_ImageSelectImage = null;
+			this.m_E_Btn_MeltButton = null;
+			this.m_E_Btn_MeltImage = null;
+			this.m_E_Btn_LearnButton = null;
+			this.m_E_Btn_LearnImage = null;
+			this.m_E_Button_Select_1Button = null;
+			this.m_E_Button_Select_1Image = null;
+			this.m_E_Button_Select_2Button = null;
+			this.m_E_Button_Select_2Image = null;
+			this.m_E_Button_Select_3Button = null;
+			this.m_E_Button_Select_3Image = null;
+			this.m_E_Button_Select_4Button = null;
+			this.m_E_Button_Select_4Image = null;
+			this.m_EG_MeltRectTransform = null;
+			this.m_EG_TitleSetRectTransform = null;
+			this.m_E_Btn_TianFu_1Button = null;
+			this.m_E_Btn_TianFu_1Image = null;
+			this.m_E_Btn_TianFu_2Button = null;
+			this.m_E_Btn_TianFu_2Image = null;
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.RectTransform m_EG_RightRectTransform = null;
+		private UnityEngine.UI.Text m_E_Text_CurrentText = null;
+		private UnityEngine.UI.Text m_E_Lab_HuoLiText = null;
+		private UnityEngine.RectTransform m_EG_MakeINeedNodeRectTransform = null;
+		private UnityEngine.RectTransform m_EG_UIItemMakeRectTransform = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_MakeNeedItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_Btn_MakeButton = null;
+		private UnityEngine.UI.Image m_E_Btn_MakeImage = null;
+		private UnityEngine.UI.Text m_E_Lab_MakeNameText = null;
+		private UnityEngine.UI.Text m_E_Lab_MakeNumText = null;
+		private UnityEngine.UI.Text m_E_Lab_MakeCDTimeText = null;
+		private UnityEngine.UI.Text m_E_Lab_ShuLianShowText = null;
+		private UnityEngine.RectTransform m_EG_LeftRectTransform = null;
+		private UnityEngine.UI.Button m_E_Btn_ResetButton = null;
+		private UnityEngine.UI.Image m_E_Btn_ResetImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_MakeItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Image m_E_Img_ShuLianProImage = null;
+		private UnityEngine.UI.Text m_E_Lab_ShuLianDuText = null;
+		private UnityEngine.UI.Image m_E_ImageSelectImage = null;
+		private UnityEngine.UI.Button m_E_Btn_MeltButton = null;
+		private UnityEngine.UI.Image m_E_Btn_MeltImage = null;
+		private UnityEngine.UI.Button m_E_Btn_LearnButton = null;
+		private UnityEngine.UI.Image m_E_Btn_LearnImage = null;
+		private UnityEngine.UI.Button m_E_Button_Select_1Button = null;
+		private UnityEngine.UI.Image m_E_Button_Select_1Image = null;
+		private UnityEngine.UI.Button m_E_Button_Select_2Button = null;
+		private UnityEngine.UI.Image m_E_Button_Select_2Image = null;
+		private UnityEngine.UI.Button m_E_Button_Select_3Button = null;
+		private UnityEngine.UI.Image m_E_Button_Select_3Image = null;
+		private UnityEngine.UI.Button m_E_Button_Select_4Button = null;
+		private UnityEngine.UI.Image m_E_Button_Select_4Image = null;
+		private UnityEngine.RectTransform m_EG_MeltRectTransform = null;
+		private UnityEngine.RectTransform m_EG_TitleSetRectTransform = null;
+		private UnityEngine.UI.Button m_E_Btn_TianFu_1Button = null;
+		private UnityEngine.UI.Image m_E_Btn_TianFu_1Image = null;
+		private UnityEngine.UI.Button m_E_Btn_TianFu_2Button = null;
+		private UnityEngine.UI.Image m_E_Btn_TianFu_2Image = null;
 		public Transform uiTransform = null;
 	}
 }
