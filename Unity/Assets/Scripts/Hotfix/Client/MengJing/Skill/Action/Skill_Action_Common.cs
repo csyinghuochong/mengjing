@@ -7,7 +7,7 @@
         public override void OnInit(SkillC skils, Unit theUnitFrom)
         {
             skils.BaseOnInit(skils.SkillInfo, theUnitFrom);
-            this.OnExecute();
+            this.OnExecute(skils);
 
             if (theUnitFrom.MainHero && skils.SkillConf.SkillType == 1 && SkillHelp.havePassiveSkillType(skils.SkillConf.PassiveSkillType, 1))
             {
@@ -30,17 +30,18 @@
             skils.BaseOnUpdate();
         }
 
-        public override void OnFinished()
+        public override void OnFinished(SkillC skils)
         {
-            if (this.TheUnitFrom.MainHero && this.SkillConf.SkillType == 1 && SkillHelp.havePassiveSkillType(this.SkillConf.PassiveSkillType, 1))
+            if (skils.TheUnitFrom.MainHero && skils.SkillConf.SkillType == 1 && SkillHelp.havePassiveSkillType(skils.SkillConf.PassiveSkillType, 1))
             {
-                EventType.DataUpdate.Instance.DataType = DataType.SkillFinish;
-                EventType.DataUpdate.Instance.DataParamString = this.SkillConf.Id.ToString();
-                EventSystem.Instance.PublishClass(EventType.DataUpdate.Instance);
+                EventSystem.Instance.Publish(skils.Root(), new SkillFinish()
+                {
+                    SkillId =  skils.SkillConf.Id
+                });
             }
 
-            this.EndSkillEffect();
-            this.SkillInfo = null;
+            skils.EndSkillEffect();
+            skils.SkillInfo = null;
         }
     }
 }

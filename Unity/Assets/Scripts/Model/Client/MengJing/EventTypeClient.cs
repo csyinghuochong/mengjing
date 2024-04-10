@@ -206,4 +206,9 @@ namespace ET.Client
     {
         public int SkillId;
     }
+
+    public struct SkillFinish
+    {
+        public int SkillId;
+    }
 }
