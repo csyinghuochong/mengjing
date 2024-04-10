@@ -76,5 +76,20 @@ namespace ET.Client
         {
             return self.Root().GetComponent<UserInfoComponentC>().UserInfo.RobotId > 0;
         }
+        
+        
+        public static int GetMonsterType(this Unit self)
+        {
+            return MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterType;
+        }
+        
+        public static bool IsBoss(this Unit self)
+        {
+            if (self.Type != UnitType.Monster)
+            {
+                return false;
+            }
+            return self.GetMonsterType() == MonsterTypeEnum.Boss;
+        }
     }
 }

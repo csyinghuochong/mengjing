@@ -10,7 +10,7 @@ namespace ET.Client
         /// <summary>
         /// Buff当前状态
         /// </summary>
-        public BuffState BuffState;
+        public BuffState BuffState { get; set;}
 
         /// <summary>
         /// 最多持续到什么时候
@@ -39,7 +39,7 @@ namespace ET.Client
 
         public SkillConfig mSkillConf;
         public EffectConfig mEffectConf;
-        public SkillBuffConfig mSkillBuffConf;
+        public SkillBuffConfig mSkillBuffConf{ get; set; }
         
         public float mDelayTime{ get; set; }
         public bool IsDelayPlay{ get; set; }
