@@ -76,6 +76,7 @@ namespace ET.Client
                     break;
                 case 1:
                     self.View.ES_SkillSet.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_SkillSet.UpdateSkillListUI();
                     break;
                 case 2:
                     self.View.ES_SkillTianFu.uiTransform.gameObject.SetActive(true);
@@ -128,7 +129,7 @@ namespace ET.Client
 
             if (self.View.ES_SkillSet.uiTransform.gameObject.activeSelf)
             {
-                // self.View.ES_SkillSet.OnSkillSetting();
+                self.View.ES_SkillSet.OnSkillSetting();
             }
         }
     }

@@ -82,7 +82,7 @@ namespace ET.Client
                 return;
 
             root.GetComponent<SkillSetComponentC>().OnSetSkillIdByPosition(skillId, skillType, pos);
-            //HintHelp.GetInstance().DataUpdate(DataType.SkillSetting);
+            EventSystem.Instance.Publish(root, new DataUpdate_SkillSetting());
         }
 
         public static async ETTask<int> SkillOperation(Scene root, int operationType)
