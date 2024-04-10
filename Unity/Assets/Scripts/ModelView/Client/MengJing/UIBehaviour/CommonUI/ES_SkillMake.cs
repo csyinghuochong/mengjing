@@ -19,6 +19,7 @@ namespace ET.Client
 		
 		public BagInfo[] HuiShouInfos = new BagInfo[5];
 		public ES_CommonItem[] HuiShouUIList = new ES_CommonItem[5];
+		public List<BagInfo> ShowBagInfos = new();
 		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
 		public bool IsHoldDown = false;
 		public int PlanMelt = 1;
@@ -585,6 +586,165 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.LoopVerticalScrollRect E_CommonItemLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_CommonItemLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_CommonItemLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_Melt/E_CommonItem");
+     			}
+     			return this.m_E_CommonItemLoopVerticalScrollRect;
+     		}
+     	}
+
+		public ES_CommonItem ES_CommonItem_0
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_commonitem_0 == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Melt/ES_CommonItem_0");
+		    	   this.m_es_commonitem_0 = this.AddChild<ES_CommonItem,Transform>(subTrans);
+     			}
+     			return this.m_es_commonitem_0;
+     		}
+     	}
+
+		public ES_CommonItem ES_CommonItem_1
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_commonitem_1 == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Melt/ES_CommonItem_1");
+		    	   this.m_es_commonitem_1 = this.AddChild<ES_CommonItem,Transform>(subTrans);
+     			}
+     			return this.m_es_commonitem_1;
+     		}
+     	}
+
+		public ES_CommonItem ES_CommonItem_2
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_commonitem_2 == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Melt/ES_CommonItem_2");
+		    	   this.m_es_commonitem_2 = this.AddChild<ES_CommonItem,Transform>(subTrans);
+     			}
+     			return this.m_es_commonitem_2;
+     		}
+     	}
+
+		public ES_CommonItem ES_CommonItem_3
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_commonitem_3 == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Melt/ES_CommonItem_3");
+		    	   this.m_es_commonitem_3 = this.AddChild<ES_CommonItem,Transform>(subTrans);
+     			}
+     			return this.m_es_commonitem_3;
+     		}
+     	}
+
+		public ES_CommonItem ES_CommonItem_4
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_commonitem_4 == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Melt/ES_CommonItem_4");
+		    	   this.m_es_commonitem_4 = this.AddChild<ES_CommonItem,Transform>(subTrans);
+     			}
+     			return this.m_es_commonitem_4;
+     		}
+     	}
+
+		public ES_CommonItem ES_CommonItem_5
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_commonitem_5 == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Melt/ES_CommonItem_5");
+		    	   this.m_es_commonitem_5 = this.AddChild<ES_CommonItem,Transform>(subTrans);
+     			}
+     			return this.m_es_commonitem_5;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_MeltBeginButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_MeltBeginButton == null )
+     			{
+		    		this.m_E_Btn_MeltBeginButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Melt/E_Btn_MeltBegin");
+     			}
+     			return this.m_E_Btn_MeltBeginButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_MeltBeginImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_MeltBeginImage == null )
+     			{
+		    		this.m_E_Btn_MeltBeginImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Melt/E_Btn_MeltBegin");
+     			}
+     			return this.m_E_Btn_MeltBeginImage;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_TitleSetRectTransform
      	{
      		get
@@ -717,6 +877,15 @@ namespace ET.Client
 			this.m_E_Button_Select_4Button = null;
 			this.m_E_Button_Select_4Image = null;
 			this.m_EG_MeltRectTransform = null;
+			this.m_E_CommonItemLoopVerticalScrollRect = null;
+			this.m_es_commonitem_0 = null;
+			this.m_es_commonitem_1 = null;
+			this.m_es_commonitem_2 = null;
+			this.m_es_commonitem_3 = null;
+			this.m_es_commonitem_4 = null;
+			this.m_es_commonitem_5 = null;
+			this.m_E_Btn_MeltBeginButton = null;
+			this.m_E_Btn_MeltBeginImage = null;
 			this.m_EG_TitleSetRectTransform = null;
 			this.m_E_Btn_TianFu_1Button = null;
 			this.m_E_Btn_TianFu_1Image = null;
@@ -758,6 +927,15 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_Button_Select_4Button = null;
 		private UnityEngine.UI.Image m_E_Button_Select_4Image = null;
 		private UnityEngine.RectTransform m_EG_MeltRectTransform = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_CommonItemLoopVerticalScrollRect = null;
+		private EntityRef<ES_CommonItem> m_es_commonitem_0 = null;
+		private EntityRef<ES_CommonItem> m_es_commonitem_1 = null;
+		private EntityRef<ES_CommonItem> m_es_commonitem_2 = null;
+		private EntityRef<ES_CommonItem> m_es_commonitem_3 = null;
+		private EntityRef<ES_CommonItem> m_es_commonitem_4 = null;
+		private EntityRef<ES_CommonItem> m_es_commonitem_5 = null;
+		private UnityEngine.UI.Button m_E_Btn_MeltBeginButton = null;
+		private UnityEngine.UI.Image m_E_Btn_MeltBeginImage = null;
 		private UnityEngine.RectTransform m_EG_TitleSetRectTransform = null;
 		private UnityEngine.UI.Button m_E_Btn_TianFu_1Button = null;
 		private UnityEngine.UI.Image m_E_Btn_TianFu_1Image = null;

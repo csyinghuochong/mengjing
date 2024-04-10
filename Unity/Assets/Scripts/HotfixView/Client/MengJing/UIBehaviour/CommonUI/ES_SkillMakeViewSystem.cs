@@ -33,6 +33,15 @@ namespace ET.Client
             self.E_MakeNeedItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMakeNeedItemsRefresh);
             self.E_MakeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMakeItemsRefresh);
 
+            self.E_Btn_MeltBeginButton.AddListenerAsync(self.OnBtn_MeltBegin);
+            self.E_CommonItemLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonItemsRefresh);
+
+            self.HuiShouUIList[0] = self.ES_CommonItem_1;
+            self.HuiShouUIList[1] = self.ES_CommonItem_2;
+            self.HuiShouUIList[2] = self.ES_CommonItem_3;
+            self.HuiShouUIList[3] = self.ES_CommonItem_4;
+            self.HuiShouUIList[4] = self.ES_CommonItem_5;
+
             self.OnBtn_Plan(1);
         }
 
@@ -574,13 +583,21 @@ namespace ET.Client
             }
         }
 
+        private static void OnCommonItemsRefresh(this ES_SkillMake self, Transform transform, int index)
+        {
+            Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
+            scrollItemCommonItem.ES_CommonItem.UpdateItem(self.ShowBagInfos[index], ItemOperateEnum.HuishouBag);
+            scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
+            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (BagInfo binfo, PointerEventData pdata) => { self.OnPointerDown(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (BagInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
+        }
+
         public static void UpdateBagUI(this ES_SkillMake self, int itemType = -1)
         {
-            var path = ABPathHelper.GetUGUIPath("Main/Common/UICommonItem");
-            var bundleGameObject = ResourcesComponent.Instance.LoadAsset<GameObject>(path);
+            self.ShowBagInfos.Clear();
 
-            int number = 0;
-            List<BagInfo> bagInfos = self.ZoneScene().GetComponent<BagComponent>().GetItemsByType(ItemTypeEnum.Equipment);
+            List<BagInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetItemsByType(ItemTypeEnum.Equipment);
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 if (bagInfos[i].IsProtect)
@@ -594,50 +611,30 @@ namespace ET.Client
                     continue;
                 }
 
-                UIItemComponent uI_1 = null;
-                if (number < self.ItemUIlist.Count)
-                {
-                    uI_1 = self.ItemUIlist[number];
-                    uI_1.GameObject.SetActive(true);
-                }
-                else
-                {
-                    GameObject go = GameObject.Instantiate(bundleGameObject);
-                    UICommonHelper.SetParent(go, self.BagListNode);
-                    go.transform.localScale = Vector3.one;
-
-                    uI_1 = self.AddChild<UIItemComponent, GameObject>(go);
-                    uI_1.SetEventTrigger(true);
-                    uI_1.PointerDownHandler = (BagInfo binfo, PointerEventData pdata) => { self.OnPointerDown(binfo, pdata); };
-                    uI_1.PointerUpHandler = (BagInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
-
-                    self.ItemUIlist.Add(uI_1);
-                }
-
-                uI_1.UpdateItem(bagInfos[i], ItemOperateEnum.HuishouBag);
-                uI_1.Label_ItemName.SetActive(true);
-                number++;
+                self.ShowBagInfos.Add(bagInfos[i]);
             }
 
-            for (int i = number; i < self.ItemUIlist.Count; i++)
-            {
-                self.ItemUIlist[i].GameObject.SetActive(false);
-            }
+            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
+            self.E_CommonItemLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
         public static async ETTask OnPutInItem(this ES_SkillMake self, BagInfo binfo)
         {
             self.IsHoldDown = true;
-            HintHelp.GetInstance().DataUpdate(LightingExplorerTableColumn.DataType.HuiShouSelect, $"1_{binfo.BagInfoID}");
-            await TimerComponent.Instance.WaitAsync(500);
+            EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(500);
             if (!self.IsHoldDown)
                 return;
-            EventType.ShowItemTips.Instance.ZoneScene = self.DomainScene();
-            EventType.ShowItemTips.Instance.bagInfo = binfo;
-            EventType.ShowItemTips.Instance.itemOperateEnum = ItemOperateEnum.None;
-            EventType.ShowItemTips.Instance.inputPoint = Input.mousePosition;
-            EventType.ShowItemTips.Instance.Occ = self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo.Occ;
-            Game.EventSystem.PublishClass(EventType.ShowItemTips.Instance);
+
+            EventSystem.Instance.Publish(self.Root(),
+                new ShowItemTips()
+                {
+                    BagInfo = binfo,
+                    ItemOperateEnum = ItemOperateEnum.None,
+                    InputPoint = Input.mousePosition,
+                    Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
+                    EquipList = new List<BagInfo>()
+                });
         }
 
         public static void OnPointerDown(this ES_SkillMake self, BagInfo binfo, PointerEventData pdata)
@@ -650,7 +647,7 @@ namespace ET.Client
                     return;
                 }
 
-                PopupTipHelp.OpenPopupTip(self.ZoneScene(), "生活熔炼", "该装备镶嵌有宝石，是否放入熔炼?", () => { self.OnPutInItem(binfo).Coroutine(); }, null)
+                PopupTipHelp.OpenPopupTip(self.Root(), "生活熔炼", "该装备镶嵌有宝石，是否放入熔炼?", () => { self.OnPutInItem(binfo).Coroutine(); }, null)
                         .Coroutine();
             }
             else
@@ -662,7 +659,7 @@ namespace ET.Client
         public static void OnPointerUp(this ES_SkillMake self, BagInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = false;
-            UIHelper.Remove(self.DomainScene(), UIType.UIEquipDuiBiTips);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
         }
     }
 }
