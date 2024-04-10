@@ -12323,6 +12323,152 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_MakeSelectResponse))]
+	[Message(OuterMessage.C2M_MakeSelectRequest)]
+	[MemoryPackable]
+	public partial class C2M_MakeSelectRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_MakeSelectRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_MakeSelectRequest), isFromPool) as C2M_MakeSelectRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int MakeType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Plan { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.MakeType = default;
+			this.Plan = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_MakeSelectResponse)]
+	[MemoryPackable]
+	public partial class M2C_MakeSelectResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_MakeSelectResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_MakeSelectResponse), isFromPool) as M2C_MakeSelectResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<int> MakeList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.MakeList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_MakeEquipResponse))]
+	[Message(OuterMessage.C2M_MakeEquipRequest)]
+	[MemoryPackable]
+	public partial class C2M_MakeEquipRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_MakeEquipRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_MakeEquipRequest), isFromPool) as C2M_MakeEquipRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int MakeId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long BagInfoID { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Plan { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.MakeId = default;
+			this.BagInfoID = default;
+			this.Plan = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_MakeEquipResponse)]
+	[MemoryPackable]
+	public partial class M2C_MakeEquipResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_MakeEquipResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_MakeEquipResponse), isFromPool) as M2C_MakeEquipResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ItemId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int NewMakeId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.ItemId = default;
+			this.NewMakeId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -12678,5 +12824,9 @@ namespace ET
 		 public const ushort M2C_ItemXiLianSelectResponse = 10352;
 		 public const ushort C2M_ItemXiLianTransferRequest = 10353;
 		 public const ushort M2C_ItemXiLianTransferResponse = 10354;
+		 public const ushort C2M_MakeSelectRequest = 10355;
+		 public const ushort M2C_MakeSelectResponse = 10356;
+		 public const ushort C2M_MakeEquipRequest = 10357;
+		 public const ushort M2C_MakeEquipResponse = 10358;
 	}
 }
