@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace ET.Client
 {
     public static class SkillNetHelper
@@ -112,6 +114,42 @@ namespace ET.Client
 
             root.GetComponent<UserInfoComponentC>().UserInfo.MakeList.Clear();
             root.GetComponent<UserInfoComponentC>().UserInfo.MakeList = response.MakeList;
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> MakeEquip(Scene root, long bagInfoID, int makeId, int plan)
+        {
+            C2M_MakeEquipRequest request = new() { BagInfoID = bagInfoID, MakeId = makeId, Plan = plan };
+            M2C_MakeEquipResponse response =
+                    (M2C_MakeEquipResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            if (response.ItemId == 0)
+            {
+                EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = "制作失败!" });
+            }
+
+            if (response.NewMakeId != 0)
+            {
+                EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(response.NewMakeId);
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(equipMakeConfig.MakeItemID);
+                EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = $"恭喜你领悟到新的制作技能 {itemConfig.ItemName}" });
+                root.GetComponent<UserInfoComponentC>().UserInfo.MakeList.Add(response.NewMakeId);
+            }
+
+            if (bagInfoID == 0)
+            {
+                root.GetComponent<UserInfoComponentC>().OnMakeItem(makeId);
+            }
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> ItemMelting(Scene root, List<long> operateBagID, int makeType)
+        {
+            C2M_ItemMeltingRequest request = new C2M_ItemMeltingRequest() { OperateBagID = operateBagID, MakeType = makeType };
+            M2C_ItemMeltingResponse response =
+                    (M2C_ItemMeltingResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
         }

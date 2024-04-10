@@ -36,5 +36,6 @@
         public const int UIUnitReviveTime = 310;
         public const int DialogTimer = 311;
         public const int UIDungenBossRefreshTimer = 312;
+        public const int MakeCDTimer = 313;
     }
 }

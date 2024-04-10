@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -10,6 +11,17 @@ namespace ET.Client
 		public int MakeId;
 		public long Timer;
 		public int Plan = -1;
+
+		public List<(int, int)> ShowMakeNeed = new();
+		public Dictionary<int, Scroll_Item_MakeNeedItem> ScrollItemMakeNeedItems;
+		public List<int> ShowMake = new();
+		public Dictionary<int, Scroll_Item_MakeItem> ScrollItemMakeItems;
+		
+		public BagInfo[] HuiShouInfos = new BagInfo[5];
+		public ES_CommonItem[] HuiShouUIList = new ES_CommonItem[5];
+		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public bool IsHoldDown = false;
+		public int PlanMelt = 1;
 		
 		public UnityEngine.RectTransform EG_RightRectTransform
      	{
@@ -79,7 +91,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_UIItemMakeRectTransform
+		public ES_CommonItem ES_CommonItem
      	{
      		get
      		{
@@ -88,11 +100,12 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_UIItemMakeRectTransform == null )
+     			if( this.m_es_commonitem == null )
      			{
-		    		this.m_EG_UIItemMakeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Right/EG_MakeINeedNode/EG_UIItemMake");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Right/EG_MakeINeedNode/ES_CommonItem");
+		    	   this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
      			}
-     			return this.m_EG_UIItemMakeRectTransform;
+     			return this.m_es_commonitem;
      		}
      	}
 
@@ -675,7 +688,7 @@ namespace ET.Client
 			this.m_E_Text_CurrentText = null;
 			this.m_E_Lab_HuoLiText = null;
 			this.m_EG_MakeINeedNodeRectTransform = null;
-			this.m_EG_UIItemMakeRectTransform = null;
+			this.m_es_commonitem = null;
 			this.m_E_MakeNeedItemsLoopVerticalScrollRect = null;
 			this.m_E_Btn_MakeButton = null;
 			this.m_E_Btn_MakeImage = null;
@@ -716,7 +729,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_Text_CurrentText = null;
 		private UnityEngine.UI.Text m_E_Lab_HuoLiText = null;
 		private UnityEngine.RectTransform m_EG_MakeINeedNodeRectTransform = null;
-		private UnityEngine.RectTransform m_EG_UIItemMakeRectTransform = null;
+		private EntityRef<ES_CommonItem> m_es_commonitem = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_MakeNeedItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_Btn_MakeButton = null;
 		private UnityEngine.UI.Image m_E_Btn_MakeImage = null;
