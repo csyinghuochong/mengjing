@@ -716,5 +716,51 @@ namespace ET.Server
 
              return 0;
          }
+
+         public static void ClearMakeListByType(this UserInfoComponentS self, int makeType)
+         {
+             if (makeType == 0)
+             {
+                 return;
+             }
+
+             for (int i = self.UserInfo.MakeList.Count - 1; i >= 0; i--)
+             {
+                 int makeId = self.UserInfo.MakeList[i];
+                 if (makeId == 0)
+                 {
+                     self.UserInfo.MakeList.RemoveAt(i);
+                     continue;
+                 }
+
+                 EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(makeId);
+                 if (equipMakeConfig.ProficiencyType == makeType)
+                 {
+                     self.UserInfo.MakeList.RemoveAt(i);
+                 }
+             }
+         }
+
+         public static void OnMakeItem(this UserInfoComponentS self, int makeId)
+         {
+             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(makeId);
+             List<KeyValuePairInt> makeList = self.UserInfo.MakeIdList;
+
+             bool have = false;
+             long endTime = TimeHelper.ServerNow() + equipMakeConfig.MakeTime * 1000;
+             for (int i = 0; i < makeList.Count; i++)
+             {
+                 if (makeList[i].KeyId == makeId)
+                 {
+                     makeList[i].Value = endTime;
+                     have = true;
+                 }
+             }
+
+             if (!have)
+             {
+                 self.UserInfo.MakeIdList.Add(new KeyValuePairInt() { KeyId = makeId, Value = endTime });
+             }
+         }
     }
 }
