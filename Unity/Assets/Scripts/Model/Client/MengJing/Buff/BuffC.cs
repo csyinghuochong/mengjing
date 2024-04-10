@@ -15,9 +15,9 @@ namespace ET.Client
         /// <summary>
         /// 最多持续到什么时候
         /// </summary>
-        public long BuffEndTime;
+        public long BuffEndTime{ get; set; }
 
-        public long BuffBeginTime;
+        public long BuffBeginTime{ get; set; }
 
         /// <summary>
         /// Buff数据
@@ -34,11 +34,11 @@ namespace ET.Client
         /// <summary>
         /// 执行的时间
         /// </summary>
-        public float PassTime;
-        public float3 StartPosition;
+        public float PassTime{ get; set; }
+        public float3 StartPosition{ get; set; }
 
-        public SkillConfig mSkillConf;
-        public EffectConfig mEffectConf;
+        public SkillConfig mSkillConf{ get; set; }
+        public EffectConfig mEffectConf{ get; set; }
         public SkillBuffConfig mSkillBuffConf{ get; set; }
         
         public float mDelayTime{ get; set; }

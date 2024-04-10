@@ -1,10 +1,6 @@
 ﻿using System;
-using UnityEngine;
-
-namespace ET
+namespace ET.Client
 {
-
-    [BuffHandler]
     public class RoleBuff_ChaoFeng : RoleBuff_Base
     {
     }

@@ -1,21 +1,20 @@
-﻿namespace ET
+﻿namespace ET.Client
 {
-    [BuffHandler]
     public class RoleBuff_Shield : RoleBuff_Base
     {
-        public override void OnUpdate()
+        public override void OnUpdate(BuffC buffC)
         {
-            this.BaseOnUpdate();
+            buffC.BaseOnUpdate();
 
-            NumericComponent numericComponent = this.TheUnitBelongto.GetComponent<NumericComponent>();
+            NumericComponentC numericComponent = buffC.TheUnitBelongto.GetComponent<NumericComponentC>();
             if (numericComponent.GetAsLong(NumericType.Now_Shield_HP) <= 0)
             {
-                this.BuffState = BuffState.Finished;
+                buffC.BuffState = BuffState.Finished;
                 return;
             }
-            if (TimeHelper.ServerNow() >= this.BuffEndTime)
+            if (TimeHelper.ServerNow() >= buffC.BuffEndTime)
             {
-                this.BuffState = BuffState.Finished;
+                buffC.BuffState = BuffState.Finished;
             }
         }
     }

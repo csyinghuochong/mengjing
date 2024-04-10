@@ -1,7 +1,5 @@
-﻿namespace ET
+﻿namespace ET.Client
 {
-
-    [BuffHandler]
     public class RoleBuff_Attribute : RoleBuff_Base
     {
 

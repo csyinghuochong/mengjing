@@ -223,4 +223,27 @@ namespace ET.Client
         public float Angle;
         public Unit Unit;
     }
+    
+    public struct BuffUpdate
+    {
+        public BuffC ABuffHandler;
+        public int OperateType;
+
+        public Scene ZoneScene;
+        public Unit Unit;
+    }
+    
+    public struct SkillEffectReset
+    {
+        public long EffectInstanceId ;
+        public Unit Unit;
+    }
+    
+    public struct BuffScale 
+    {
+        public BuffC ABuffHandler;
+        public int OperateType;    //0开始 1结束
+        public Scene ZoneScene;
+        public Unit Unit;
+    }
 }

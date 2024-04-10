@@ -1,14 +1,15 @@
-﻿
-namespace ET
+﻿using System.Collections.Generic;
+using Unity.Mathematics;
+
+namespace ET.Client
 {
-    [BuffHandler]
     public class RoleBuffQuSan : RoleBuff_Base
     {
-        public override void OnInit(BuffData buffData, Unit theUnitBelongto)
+        public override void OnInit(BuffC buffc, BuffData buffData, Unit theUnitBelongto)
         {
-            this.BaseOnBuffInit(buffData, theUnitBelongto);
+            buffc.BaseOnBuffInit(buffData, theUnitBelongto);
 
-            BuffManagerComponent buffManager = theUnitBelongto.GetComponent<BuffManagerComponent>();
+            BuffManagerComponentC buffManager = theUnitBelongto.GetComponent<BuffManagerComponentC>();
             for (int i = buffManager.m_Buffs.Count - 1; i >= 0; i--)
             {
                 SkillBuffConfig skillBuff = buffManager.m_Buffs[i].mSkillBuffConf;

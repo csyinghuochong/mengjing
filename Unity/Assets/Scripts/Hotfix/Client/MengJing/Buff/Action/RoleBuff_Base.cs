@@ -9,79 +9,88 @@ namespace ET.Client
         public override void OnInit(BuffC buffc, BuffData buffData, Unit theUnitBelongto)
         {
             buffc.BaseOnBuffInit(buffData,  theUnitBelongto);
-            this.OnExecute();
+            this.OnExecute(buffc);
 
             if (buffc.mSkillBuffConf.IfShowIconTips == 0 || buffc.BuffState == BuffState.Finished)
             {
                 return;
             }
-            UnitHelper
+            
             if (buffc.TheUnitBelongto.MainHero || buffc.TheUnitBelongto.IsBoss())
             {
-                EventType.BuffUpdate.Instance.Unit = this.TheUnitBelongto;
-                EventType.BuffUpdate.Instance.ZoneScene = this.TheUnitBelongto.ZoneScene();
-                EventType.BuffUpdate.Instance.ABuffHandler = this;
-                EventType.BuffUpdate.Instance.OperateType = 1;
-                //EventType.DataUpdate.Instance.DataParams = $"{buffData.BuffConfig.Id}@1";
-                EventSystem.Instance.PublishClass(EventType.BuffUpdate.Instance);
+                EventSystem.Instance.Publish( buffc.Root(), new BuffUpdate()
+                {
+                    Unit = buffc.TheUnitBelongto,
+                    ZoneScene = buffc.Root(),
+                    ABuffHandler = buffc,
+                    OperateType = 1,
+                });
             }
         }
 
-        public override void OnExecute()
+        public override void OnExecute(BuffC buffc)
         {
-            this.EffectInstanceId = this.PlayBuffEffects();
-            this.BuffState = BuffState.Running;
+            buffc.EffectInstanceId = buffc.PlayBuffEffects();
+            buffc.BuffState = BuffState.Running;
         }
 
-        public override void OnReset(long endTime)
+        public override void OnReset(BuffC buffc, long endTime)
         {
-            this.PassTime = 0f;
-            this.BuffBeginTime = TimeHelper.ClientNow();
-            this.BuffEndTime = endTime;
-            EventType.SkillEffectReset.Instance.Unit = TheUnitBelongto;
-            EventType.SkillEffectReset.Instance.EffectInstanceId = this.EffectInstanceId;
-            EventSystem.Instance.PublishClass(EventType.SkillEffectReset.Instance);
+            buffc.PassTime = 0f;
+            buffc.BuffBeginTime = TimeHelper.ClientNow();
+            buffc.BuffEndTime = endTime;
+            EventSystem.Instance.Publish( buffc.Root(), new SkillEffectReset()
+            {
+                Unit = buffc.TheUnitBelongto,
+                EffectInstanceId = buffc.EffectInstanceId
+            });
 
-            if (this.mSkillBuffConf.IfShowIconTips == 0)
+            if (buffc.mSkillBuffConf.IfShowIconTips == 0)
             {
                 return;
             }
-            if (this.TheUnitBelongto.MainHero || this.TheUnitBelongto.IsBoss())
+            if (buffc.TheUnitBelongto.MainHero || buffc.TheUnitBelongto.IsBoss())
             {
-                EventType.BuffUpdate.Instance.Unit = this.TheUnitBelongto;
-                EventType.BuffUpdate.Instance.ZoneScene = this.TheUnitBelongto.ZoneScene();
-                EventType.BuffUpdate.Instance.ABuffHandler = this;
-                EventType.BuffUpdate.Instance.OperateType = 3;
-                EventSystem.Instance.PublishClass(EventType.BuffUpdate.Instance);
+                EventSystem.Instance.Publish( buffc.Root(), new  BuffUpdate()
+                {
+                    Unit = buffc.TheUnitBelongto,
+                    ZoneScene = buffc.TheUnitBelongto.Root(),
+                    ABuffHandler = buffc,
+                    OperateType = 3
+                });
             }
         }
 
-        public override void OnUpdate()
+        public override void OnUpdate(BuffC buffC)
         {
-            this.BaseOnUpdate();
-            if (TimeHelper.ServerNow() >= this.BuffEndTime)
+            buffC.BaseOnUpdate();
+            if (TimeHelper.ServerNow() >= buffC.BuffEndTime)
             {
-                this.BuffState = BuffState.Finished;
+                buffC.BuffState = BuffState.Finished;
             }
         }
 
-        public override void OnFinished()
+        public override void OnFinished(BuffC buffC)
         {
-            EventType.SkillEffectFinish.Instance.EffectInstanceId = this.EffectInstanceId;
-            EventType.SkillEffectFinish.Instance.Unit = this.TheUnitBelongto;
-            EventSystem.Instance.PublishClass(EventType.SkillEffectFinish.Instance);
+            EventSystem.Instance.Publish( buffC.Root(), new SkillEffectFinish()
+            {
+                EffectInstanceId = buffC.EffectInstanceId,
+                Unit = buffC.TheUnitBelongto,
+            });
 
-            if (this.mSkillBuffConf.IfShowIconTips == 0)
+            if (buffC.mSkillBuffConf.IfShowIconTips == 0)
             {
                 return;
             }
-            if (this.TheUnitBelongto.MainHero || this.TheUnitBelongto.IsBoss())
+            if (buffC.TheUnitBelongto.MainHero || buffC.TheUnitBelongto.IsBoss())
             {
-                EventType.BuffUpdate.Instance.Unit = this.TheUnitBelongto;
-                EventType.BuffUpdate.Instance.ZoneScene = this.TheUnitBelongto.ZoneScene();
-                EventType.BuffUpdate.Instance.ABuffHandler = this;
-                EventType.BuffUpdate.Instance.OperateType = 2;
-                EventSystem.Instance.PublishClass(EventType.BuffUpdate.Instance);
+                EventSystem.Instance.Publish( buffC.Root(), new BuffUpdate()
+                {
+                    Unit = buffC.TheUnitBelongto,
+                    ZoneScene = buffC.TheUnitBelongto.Root(),
+                    ABuffHandler = buffC,
+                    OperateType = 2,
+                });
             }
         }
     }

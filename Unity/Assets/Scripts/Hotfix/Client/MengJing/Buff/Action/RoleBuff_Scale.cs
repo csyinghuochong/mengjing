@@ -1,34 +1,33 @@
 using System;
-using UnityEngine;
 
-namespace ET
+namespace ET.Client
 {
-
-    [BuffHandler]
+    
     public class RoleBuff_Scale : RoleBuff_Base
     {
-        public override void OnInit(BuffData buffData, Unit theUnitBelongto)
+        public override void OnInit(BuffC buffC, BuffData buffData, Unit theUnitBelongto)
         {
-            base.OnInit(buffData, theUnitBelongto);
-
-            EventType.BuffScale.Instance.Unit = this.TheUnitBelongto;
-            EventType.BuffScale.Instance.ZoneScene = this.TheUnitBelongto.ZoneScene();
-            EventType.BuffScale.Instance.ABuffHandler = this;
-            EventType.BuffScale.Instance.OperateType = 1;
-            EventSystem.Instance.PublishClass(EventType.BuffScale.Instance);
+            base.OnInit(buffC, buffData, theUnitBelongto);
+            EventSystem.Instance.Publish( buffC.Root(), new  BuffScale()
+            {
+                Unit = buffC.TheUnitBelongto,
+                ZoneScene = buffC.TheUnitBelongto.Root(),
+                ABuffHandler = buffC,
+                OperateType = 1,
+            });
         }
 
-
-
-        public override void OnFinished()
+        public override void OnFinished(BuffC buffC)
         {
-            EventType.BuffScale.Instance.Unit = this.TheUnitBelongto;
-            EventType.BuffScale.Instance.ZoneScene = this.TheUnitBelongto.ZoneScene();
-            EventType.BuffScale.Instance.ABuffHandler = this;
-            EventType.BuffScale.Instance.OperateType = 2;
-            EventSystem.Instance.PublishClass(EventType.BuffScale.Instance);
+            EventSystem.Instance.Publish( buffC.Root(), new  BuffScale()
+            {
+                Unit = buffC.TheUnitBelongto,
+                ZoneScene = buffC.TheUnitBelongto.Root(),
+                ABuffHandler = buffC,
+                OperateType = 2,
+            });
 
-            base.OnFinished();
+            base.OnFinished(buffC);
         }
     }
 }

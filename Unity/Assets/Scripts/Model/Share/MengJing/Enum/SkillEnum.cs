@@ -227,7 +227,7 @@ namespace ET
         public int SkillId;
         public int BuffId;
 
-        public Vector3 TargetPostion;
+        public float3 TargetPostion;
     }
 
     public enum SkillState

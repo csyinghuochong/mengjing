@@ -10,7 +10,7 @@ namespace ET.Client
         public int SceneType;
         
         public List<KeyValuePair> t_Buffs = new List<KeyValuePair>();
-        public List<BuffC> m_Buffs = new List<BuffC>(); 
+        public List<BuffC> m_Buffs { get; set; } = new List<BuffC>();
     }
     
 }
