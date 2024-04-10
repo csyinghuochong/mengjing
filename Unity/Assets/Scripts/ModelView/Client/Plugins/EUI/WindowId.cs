@@ -38,5 +38,6 @@ namespace ET.Client
 		WindowID_ChengJiu,
 		WindowID_Dungeon,
 		WindowID_DungeonLevel,
+		WindowID_Skill,
 	}
 }
