@@ -8,6 +8,23 @@ namespace ET.Client
     [FriendOf(typeof (SkillManagerComponentC))]
     public static partial class SkillManagerComponentCSystem
     {
+        
+        [Invoke(TimerInvokeType.SkillTimerC)]
+        public class SkillTimer: ATimer<SkillManagerComponentC>
+        {
+            protected override void Run(SkillManagerComponentC self)
+            {
+                try
+                {
+                    self.Check();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+        
         [EntitySystem]
         private static void Awake(this ET.Client.SkillManagerComponentC self)
         {
@@ -83,7 +100,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnUpdate(this SkillManagerComponentC self)
+        public static void Check(this SkillManagerComponentC self)
         {
             long nowTime = TimeHelper.ServerNow();
             int skillcdcnt = self.SkillCDs.Count;

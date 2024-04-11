@@ -18,10 +18,12 @@
         public const int SkillPassive = 206;
         public const int MonsterSingingTimer = 207;
         public const int DBSaveTimer = 208;
-        public const int SkillTimer = 209;
-        public const int BuffTimer = 210;
-        public const int PlayerSingingTimer = 211;
-        public const int AutoAttackGridTimer = 212;
+        public const int SkillTimerS = 209;
+        public const int BuffTimerS = 210;
+        public const int SkillTimerC = 211;
+        public const int BuffTimerC = 212;
+        public const int PlayerSingingTimer = 213;
+        public const int AutoAttackGridTimer = 214;
         
         
         public const int RoomUpdate = 301;
