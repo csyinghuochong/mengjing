@@ -158,6 +158,8 @@ namespace ET.Client
             //         (U2C_UnionOperatateResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_ItemHuiShouRequest);
             self.UnionInfo.UnionName = text;
             self.E_Text_UnionNameText.text = self.UnionInfo.UnionName;
+
+            await ETTask.CompletedTask;
         }
 
         public static void OnButtonLeave(this ES_UnionMy self)

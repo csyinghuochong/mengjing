@@ -97,6 +97,8 @@ namespace ET.Client
             // };
             // C2C_ChatJinYanResponse response = (C2C_ChatJinYanResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(reuqest);
             self.OnClickImageBg();
+
+            await ETTask.CompletedTask;
         }
 
         public static async ETTask OnButton_ServerBlack(this DlgWatchMenu self)
@@ -124,6 +126,8 @@ namespace ET.Client
             // };
             // C2C_GMCommonResponse repose = (C2C_GMCommonResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(request);
             self.OnClickImageBg();
+
+            await ETTask.CompletedTask;
         }
 
         public static async ETTask OnButton_OneChallenge(this DlgWatchMenu self)
@@ -148,6 +152,8 @@ namespace ET.Client
             // M2C_OneChallengeResponse response =
             //         (M2C_OneChallengeResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(request);
             self.OnClickImageBg();
+
+            await ETTask.CompletedTask;
         }
 
         public static async ETTask OnButton_UnionOperate(this DlgWatchMenu self, int postion)
@@ -162,6 +168,8 @@ namespace ET.Client
             // UI uI = UIHelper.GetUI(self.ZoneScene(), UIType.UIFriend);
             // uI?.GetComponent<UIFriendComponent>().OnUpdateMyUnion();
             self.OnClickImageBg();
+
+            await ETTask.CompletedTask;
         }
 
         public static void OnButton_UnionTransfer(this DlgWatchMenu self)
@@ -177,6 +185,8 @@ namespace ET.Client
             // UI uI = UIHelper.GetUI(self.ZoneScene(), UIType.UIFriend);
             // uI?.GetComponent<UIFriendComponent>().OnUpdateMyUnion();
             self.OnClickImageBg();
+
+            await ETTask.CompletedTask;
         }
 
         public static async ETTask RequestKickUnion(this DlgWatchMenu self)
@@ -191,6 +201,8 @@ namespace ET.Client
             // uifreind.GetComponent<UIFriendComponent>().OnUpdateMyUnion();
 
             self.OnClickImageBg();
+
+            await ETTask.CompletedTask;
         }
 
         public static void OnButton_KickOut(this DlgWatchMenu self)
@@ -220,6 +232,8 @@ namespace ET.Client
             // F2C_FriendApplyResponse f2C_FriendApplyResponse =
             //         (F2C_FriendApplyResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2F_FriendApplyReplyRequest);
             self.OnClickImageBg();
+
+            await ETTask.CompletedTask;
         }
 
         public static async ETTask OnButton_BlackAdd(this DlgWatchMenu self)
@@ -233,6 +247,8 @@ namespace ET.Client
             //         (F2C_FriendBlacklistResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2F_FriendApplyReplyRequest);
             // NetHelper.RequestFriendInfo(self.ZoneScene()).Coroutine();
             self.OnClickImageBg();
+
+            await ETTask.CompletedTask;
         }
 
         public static async ETTask OnButton_BlackRemove(this DlgWatchMenu self)
@@ -246,6 +262,8 @@ namespace ET.Client
             //         (F2C_FriendBlacklistResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2F_FriendApplyReplyRequest);
             // NetHelper.RequestFriendInfo(self.ZoneScene()).Coroutine();
             self.OnClickImageBg();
+
+            await ETTask.CompletedTask;
         }
 
         public static async ETTask OnButton_InviteTeam(this DlgWatchMenu self)
@@ -258,6 +276,8 @@ namespace ET.Client
             //         (T2C_TeamInviteResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_SkillSet);
 
             self.OnClickImageBg();
+
+            await ETTask.CompletedTask;
         }
 
         public static void OnButton_ApplyTeam(this DlgWatchMenu self)
@@ -277,6 +297,8 @@ namespace ET.Client
             // uI.GetComponent<UIWatchComponent>().OnUpdateUI(m2C_SkillSet);
 
             self.OnClickImageBg();
+
+            await ETTask.CompletedTask;
         }
 
         /// <summary>
@@ -392,6 +414,8 @@ namespace ET.Client
             }
 
             self.OnUpdateDi();
+
+            await ETTask.CompletedTask;
         }
     }
 }
