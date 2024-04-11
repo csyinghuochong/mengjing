@@ -40,5 +40,6 @@ namespace ET.Client
 		WindowID_DungeonLevel,
 		WindowID_Skill,
 		WindowID_WatchMenu,
+		WindowID_MapBig,
 	}
 }
