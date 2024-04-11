@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_CommonItem))]
     [FriendOf(typeof (ES_CommonItem))]
     [EntitySystemOf(typeof (ES_SkillLifeShield))]
     [FriendOfAttribute(typeof (ES_SkillLifeShield))]
@@ -28,6 +29,12 @@ namespace ET.Client
             self.ES_Shield_4.OnInitUI(4);
             self.ES_Shield_5.OnInitUI(5);
             self.ES_Shield_6.OnInitUI(6);
+            self.ES_Shield_1.SetClickHandler(self.OnClickShieldHandler);
+            self.ES_Shield_2.SetClickHandler(self.OnClickShieldHandler);
+            self.ES_Shield_3.SetClickHandler(self.OnClickShieldHandler);
+            self.ES_Shield_4.SetClickHandler(self.OnClickShieldHandler);
+            self.ES_Shield_5.SetClickHandler(self.OnClickShieldHandler);
+            self.ES_Shield_6.SetClickHandler(self.OnClickShieldHandler);
 
             self.ShieldUIList[0].OnButtonClick();
 
@@ -182,6 +189,11 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemCommonItems.Count; i++)
             {
+                if (self.ScrollItemCommonItems[i].uiTransform == null)
+                {
+                    continue;
+                }
+
                 Scroll_Item_CommonItem uIItemComponent = self.ScrollItemCommonItems[i];
                 BagInfo bagInfo = uIItemComponent.ES_CommonItem.Baginfo;
                 if (bagInfo == null)
