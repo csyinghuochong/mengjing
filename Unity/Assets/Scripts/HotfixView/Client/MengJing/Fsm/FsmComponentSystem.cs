@@ -199,6 +199,8 @@ namespace ET.Client
                 animatorComponent.SetBoolValue("Run", false);
                 animatorComponent.SetBoolValue("Idle", true);
             }
+            
+            Log.Debug($"PlayAnimator: {skillConfig.SkillAnimation}");
             animatorComponent.Play(skillConfig.SkillAnimation);
         }
 

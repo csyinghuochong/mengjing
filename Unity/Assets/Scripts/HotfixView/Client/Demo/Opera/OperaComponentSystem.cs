@@ -1,5 +1,9 @@
 using System;
+<<<<<<< Updated upstream
 using System.Collections.Generic;
+=======
+using Unity.Mathematics;
+>>>>>>> Stashed changes
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -46,7 +50,17 @@ namespace ET.Client
 
             if (Input.GetKeyDown(KeyCode.W))
             {
-                C2M_SkillCmd c2MSkillCmd = new C2M_SkillCmd() { SkillID = 60000311 };
+                Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                //float3 float3 = MathHelper.QuatationToEulerAngle(unit.Rotation);
+                Quaternion quaternion = unit.Rotation;
+                int targetAngle = (int)quaternion.eulerAngles.y;
+
+                Log.Debug($"targetAngle:  {targetAngle} ");
+                C2M_SkillCmd c2MSkillCmd = new C2M_SkillCmd()
+                {
+                    SkillID = 60000311,
+                    TargetAngle = targetAngle
+                };
                 self.Root().GetComponent<ClientSenderCompnent>().Send(c2MSkillCmd);
             }
 
