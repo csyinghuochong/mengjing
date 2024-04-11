@@ -39,5 +39,6 @@
         public const int MakeCDTimer = 313;
         public const int ChainLightningTimer = 314;
         public const int Effectimer = 315;
+        public const int UnionJingXuanTimer = 316;
     }
 }

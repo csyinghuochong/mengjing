@@ -63,6 +63,7 @@ namespace ET.Client
                     break;
                 case 4:
                     self.View.ES_UnionMy.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_UnionMy.OnUpdateUI().Coroutine();
                     break;
             }
         }
