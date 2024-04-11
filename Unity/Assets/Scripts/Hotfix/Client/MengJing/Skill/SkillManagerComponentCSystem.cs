@@ -285,7 +285,7 @@ namespace ET.Client
         {
             if (self.Timer == 0)
             {
-                self.Timer =  self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.SkillTimer, self);
+                self.Timer =  self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.SkillTimerC, self);
             }
         }
 

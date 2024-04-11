@@ -11,7 +11,7 @@ namespace ET.Server
     public static partial class SkillManagerComponentSSystem
     {
         
-        [Invoke(TimerInvokeType.SkillTimer)]
+        [Invoke(TimerInvokeType.SkillTimerS)]
         public class SkillTimer: ATimer<SkillManagerComponentS>
         {
             protected override void Run(SkillManagerComponentS self)
@@ -563,7 +563,7 @@ namespace ET.Server
               {
                   self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
                   long repeatertime = 100;//// unit.Type == UnitType.Monster && MonsterConfigCategory.Instance.NoSkillMonsterList.Contains(unit.ConfigId) ? 200 : 200;
-                  self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(repeatertime, TimerInvokeType.SkillTimer, self);
+                  self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(repeatertime, TimerInvokeType.SkillTimerS, self);
               }
           }
 

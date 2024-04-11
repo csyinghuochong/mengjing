@@ -9,7 +9,7 @@ namespace ET.Server
     public static partial class BuffManagerComponentSSystem
     {
         
-        [Invoke(TimerInvokeType.BuffTimer)]
+        [Invoke(TimerInvokeType.BuffTimerS)]
         public class BuffTimer: ATimer<BuffManagerComponentS>
         {
             protected override void Run(BuffManagerComponentS self)
@@ -319,7 +319,7 @@ namespace ET.Server
         {
             if (self.Timer == 0)
             {
-                self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(500, TimerInvokeType.BuffTimer, self);
+                self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(500, TimerInvokeType.BuffTimerS, self);
             }
         }
 
