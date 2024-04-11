@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ET
 {
@@ -99,6 +100,23 @@ namespace ET
 
 			argStr += "]";
 			return argStr;
+		}
+		
+		
+		//第一种思路，将所有特殊字符都列出来，判断目标字符串包含特殊字符。
+		public static bool IsSpecialChar(string str)
+		{
+			//中文、英文、数字但不包括下划线等符号
+			//Regex regExp = new Regex("[ \\[ \\] \\^ \\-_*×――(^)$%~!＠@＃#$…&%￥—+=<>《》!！??？:：•`·、。，；,.;/\'\"{}（）‘’“”-]");
+			//Regex regExp = new Regex(@"^[\u4E00-\u9FA5A-Za-z0-9]{2,20}$");
+			//if (regExp.IsMatch(str))
+			//{
+			//	return true;
+			//}
+			//return false;
+			bool l_bFlag = false;
+			l_bFlag = Regex.Matches(str, "^[\u4e00-\u9fa5a-zA-Z-z0-9]+$").Count > 0;
+			return l_bFlag;
 		}
 	}
 }

@@ -59,6 +59,7 @@ namespace ET.Client
                     break;
                 case 3:
                     self.View.ES_UnionShow.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_UnionShow.OnUpdateUI();
                     break;
                 case 4:
                     self.View.ES_UnionMy.uiTransform.gameObject.SetActive(true);
