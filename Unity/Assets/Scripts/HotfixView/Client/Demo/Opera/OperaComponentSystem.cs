@@ -431,6 +431,7 @@ namespace ET.Client
             //     uI.GetComponent<UIJiaYuanMenuComponent>().OnUpdatePasture(unitmonster);
             //     return;
             // }
+            await ETTask.CompletedTask;
         }
 
         public static bool CheckNpc(this OperaComponent self)
