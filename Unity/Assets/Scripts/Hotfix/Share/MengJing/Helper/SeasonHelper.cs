@@ -6,6 +6,8 @@ namespace ET
     public static class SeasonHelper
     {
 
+        public const int SeasonBossId = 90000051;
+        
         public static bool IsOpenSeason(int userLv)
         {
             if (userLv < 55)

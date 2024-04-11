@@ -123,6 +123,10 @@ namespace ET.Client
     {
     }
 
+    public struct DataUpdate_MainHeroMove
+    {
+    }
+
     public struct TaskNpcDialog
     {
         public int NpcId;
@@ -214,16 +218,16 @@ namespace ET.Client
     public struct SkillFinish
     {
         public int SkillId;
-    } 
-    
-    public struct SkillEffectMove 
+    }
+
+    public struct SkillEffectMove
     {
         public long EffectInstanceId;
         public float3 Postion;
         public float Angle;
         public Unit Unit;
     }
-    
+
     public struct BuffUpdate
     {
         public BuffC ABuffHandler;
@@ -232,17 +236,17 @@ namespace ET.Client
         public Scene ZoneScene;
         public Unit Unit;
     }
-    
+
     public struct SkillEffectReset
     {
-        public long EffectInstanceId ;
+        public long EffectInstanceId;
         public Unit Unit;
     }
-    
-    public struct BuffScale 
+
+    public struct BuffScale
     {
         public BuffC ABuffHandler;
-        public int OperateType;    //0开始 1结束
+        public int OperateType; //0开始 1结束
         public Scene ZoneScene;
         public Unit Unit;
     }
