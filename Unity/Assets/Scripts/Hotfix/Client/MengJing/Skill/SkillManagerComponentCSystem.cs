@@ -404,6 +404,8 @@ namespace ET.Client
                 }
 
                 SkillC skillHandler = self.AddChild<SkillC>();
+                skillHandler.SkillInfo = skillcmd.SkillInfos[i];
+                skillHandler.SkillConf = skillConfig1;
                 self.Skills.Add(skillHandler);
                 //skillHandler.OnInit(skillcmd.SkillInfos[i], unit);
                 SkillHandlerC aaiHandler = SkillDispatcherComponentC.Instance.Get(skillHandler.SkillConf.GameObjectName);

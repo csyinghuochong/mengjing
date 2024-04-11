@@ -7,7 +7,7 @@ namespace ET.Client
 
 
     [ChildOf(typeof(SkillManagerComponentC))]
-    public abstract class SkillC :Entity,IAwake,IDestroy
+    public class SkillC :Entity,IAwake,IDestroy
     {
         public float3 NowPosition { get; set; }
         public SkillState SkillState { get; set; }

@@ -44,7 +44,7 @@ namespace ET.Client
             
             if (Input.GetKeyDown(KeyCode.W))
             {
-                C2M_SkillCmd c2MSkillCmd = new C2M_SkillCmd(){  SkillID = 60000331};
+                C2M_SkillCmd c2MSkillCmd = new C2M_SkillCmd(){  SkillID = 60000311};
                 self.Root().GetComponent<ClientSenderCompnent>().Send(c2MSkillCmd);
             }
 

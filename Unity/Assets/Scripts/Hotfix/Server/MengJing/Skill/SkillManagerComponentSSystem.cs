@@ -880,7 +880,7 @@ namespace ET.Server
               //skillHandler.OnInit(skillcmd, from);
               SkillS skillS = self.AddChild<SkillS>();
               skillS.SkillInfo = skillcmd;
-          
+              skillS.SkillConf = SkillConfigCategory.Instance.Get(skillcmd.WeaponSkillID);
               SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(skillS.SkillConf.GameObjectName);
               aaiHandler.OnInit(skillS, from  );
               return skillS;
@@ -1021,13 +1021,11 @@ namespace ET.Server
                   if (self.Skills[i].GetSkillState() == SkillState.Finished)
                   {
                       SkillS skillHandler = self.Skills[i];
-                      ObjectPool.Instance.Recycle(skillHandler);
                       self.CheckEndSkill(skillHandler.SkillConf.EndSkillId);
                       
                       aaiHandler.OnFinished(skillHandler);
-                      
+                      skillHandler.Dispose();
                       self.Skills.RemoveAt(i);
-                      continue;
                   }
               }
 

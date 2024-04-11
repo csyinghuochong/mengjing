@@ -32,6 +32,9 @@ namespace ET.Server
             Log.Debug($"M2M_UnitTransferRequest:2");
             
             unit.AddComponent<MoveComponent>();
+            unit.AddComponent<SkillManagerComponentS>();
+            unit.AddComponent<BuffManagerComponentS>();
+            unit.AddComponent<AttackRecordComponent>();
             unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
             unit.GetComponent<DBSaveComponent>().Activeted();
             switch (request.SceneType)

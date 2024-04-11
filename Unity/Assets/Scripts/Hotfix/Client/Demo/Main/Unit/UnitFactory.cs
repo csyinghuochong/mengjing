@@ -43,7 +43,7 @@ namespace ET.Client
             unit.AddComponent<ObjectWait>();
             unit.AddComponent<HeroDataComponentC>();
             unit.AddComponent<StateComponentC>();
-            // unit.AddComponent<SingingComponent>();
+            unit.AddComponent<SingingComponent>();
             unit.AddComponent<MoveComponent>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
             // unitInfoComponent.UnitName = unitInfo.UnitName;
@@ -76,8 +76,8 @@ namespace ET.Client
             bool noSkill = unit.Type == UnitType.Npc && NpcConfigCategory.Instance.Get(unit.ConfigId).AI == 0;
             if (!noSkill)
             {
-                // unit.AddComponent<BuffManagerComponent>(); //buff管理器组建
                 unit.AddComponent<SkillManagerComponentC>();
+                unit.AddComponent<BuffManagerComponentC>();
                 // unit.GetComponent<BuffManagerComponent>().t_Buffs = unitInfo.Buffs;
                 // unit.GetComponent<SkillManagerComponent>().t_Skills = unitInfo.Skills;
             }
