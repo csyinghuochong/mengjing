@@ -313,7 +313,6 @@ namespace ET.Client
             if (monsterConfig.MonsterType != (int)MonsterTypeEnum.Boss)
             {
                 return monsterPosition.NextID;
-                ;
             }
 
             Vector3 vector3 = new Vector3(float.Parse(position[0]), float.Parse(position[2]), 0);
@@ -501,7 +500,7 @@ namespace ET.Client
             }
 
             GameObject mapCamera = self.MapCamera;
-            RectTransform canvas = self.View.E_RawImageRawImage.transform.GetComponent<RectTransform>();
+            RectTransform canvas = self.View.E_RawImageRawImage.transform.parent.parent.GetComponent<RectTransform>();
             Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out self.localPoint);
 
@@ -521,7 +520,7 @@ namespace ET.Client
             if (hit.collider != null)
             {
                 EventSystem.Instance.Publish(self.Root(), new DataUpdate_BeforeMove() { DataParamString = "1" });
-                // unit.MoveToAsync2(hit.point).Coroutine();
+                unit.MoveToAsync(hit.point).Coroutine();
             }
         }
 
