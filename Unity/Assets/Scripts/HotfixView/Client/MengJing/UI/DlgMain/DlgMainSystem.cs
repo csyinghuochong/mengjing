@@ -115,6 +115,8 @@ namespace ET.Client
             self.View.E_MainChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainChatItemsRefresh);
             self.View.E_RoseTaskButton.AddListener(self.OnRoseTaskButton);
             self.RefreshMainTaskItems();
+
+            self.View.E_MiniMapButtonButton.AddListener(self.OnOpenMap);
         }
 
         public static void ShowWindow(this DlgMain self, Entity contextData = null)
@@ -729,6 +731,43 @@ namespace ET.Client
         #endregion
 
         #region 小地图
+
+        public static void OnOpenMap(this DlgMain self)
+        {
+            // 测试
+            self.Root().GetComponent<MapComponent>().SceneType = (int)SceneTypeEnum.MainCityScene;
+            self.Root().GetComponent<MapComponent>().SceneId = 101;
+
+            int sceneType = self.Root().GetComponent<MapComponent>().SceneType;
+            int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
+            switch (sceneType)
+            {
+                case (int)SceneTypeEnum.MainCityScene:
+                case (int)SceneTypeEnum.LocalDungeon:
+                    self.OnOpenBigMap(); //打开主城
+                    break;
+                case (int)SceneTypeEnum.CellDungeon:
+                    // self.OnShowFubenIndex(); //打开副本小地图
+                    break;
+                default:
+                    SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
+                    if (sceneConfig.ifShowMinMap == 0)
+                    {
+                        FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("当前场景不支持查看小地图"));
+                    }
+                    else
+                    {
+                        self.OnOpenBigMap(); //打开主城
+                    }
+
+                    break;
+            }
+        }
+
+        public static void OnOpenBigMap(this DlgMain self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_MapBig);
+        }
 
         private static void UpdateTianQi(this DlgMain self, string tianqi)
         {

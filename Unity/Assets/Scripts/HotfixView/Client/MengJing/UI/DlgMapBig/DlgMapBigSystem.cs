@@ -19,6 +19,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof (Scroll_Item_MapBigNpcItem))]
     [FriendOf(typeof (MoveComponent))]
     [FriendOf(typeof (DlgMapBig))]
     public static class DlgMapBigSystem
@@ -91,8 +92,7 @@ namespace ET.Client
             self.ScaleRateY = self.View.E_RawImageEventTrigger.transform.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
 
             self.OnMainHeroMove();
-            self.View.EG_mainPostionRectTransform.transform.Find("Text").GetComponent<Text>().text =
-                    self.Root().GetComponent<UserInfoComponentC>().UserInfo.Name;
+            self.View.E_TextText.text = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Name;
 
             await self.Root().GetComponent<TimerComponent>().WaitAsync(200);
             if (self.IsDisposed)
@@ -455,7 +455,21 @@ namespace ET.Client
         public static void OnClickNpcItem(this DlgMapBig self, int unitype, int configid)
         {
             self.View.EG_ImageSelectRectTransform.gameObject.SetActive(true);
-            UICommonHelper.SetParent(self.View.EG_ImageSelectRectTransform.gameObject, self.NpcGameObject[configid]);
+            for (int i = 0; i < self.ScrollItemMapBigNpcItems.Count; i++)
+            {
+                if (self.ScrollItemMapBigNpcItems[i].uiTransform == null)
+                {
+                    continue;
+                }
+
+                if (self.ScrollItemMapBigNpcItems[i].ConfigId == configid)
+                {
+                    UICommonHelper.SetParent(self.View.EG_ImageSelectRectTransform.gameObject,
+                        self.ScrollItemMapBigNpcItems[i].uiTransform.gameObject);
+                    break;
+                }
+            }
+
             self.View.EG_ImageSelectRectTransform.transform.SetSiblingIndex(0);
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());

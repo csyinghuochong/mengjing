@@ -1078,6 +1078,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_MiniMapButtonButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MiniMapButtonButton == null )
+     			{
+		    		this.m_E_MiniMapButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/UIMapMini/E_MiniMapButton");
+     			}
+     			return this.m_E_MiniMapButtonButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_MiniMapButtonImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MiniMapButtonImage == null )
+     			{
+		    		this.m_E_MiniMapButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/UIMapMini/E_MiniMapButton");
+     			}
+     			return this.m_E_MiniMapButtonImage;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_AdventureButton
      	{
      		get
@@ -1432,6 +1466,8 @@ namespace ET.Client
 			this.m_E_MapNameText = null;
 			this.m_E_TianQiText = null;
 			this.m_E_TimeText = null;
+			this.m_E_MiniMapButtonButton = null;
+			this.m_E_MiniMapButtonImage = null;
 			this.m_E_AdventureButton = null;
 			this.m_E_AdventureImage = null;
 			this.m_E_PetFormationButton = null;
@@ -1515,6 +1551,8 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_MapNameText = null;
 		private UnityEngine.UI.Text m_E_TianQiText = null;
 		private UnityEngine.UI.Text m_E_TimeText = null;
+		private UnityEngine.UI.Button m_E_MiniMapButtonButton = null;
+		private UnityEngine.UI.Image m_E_MiniMapButtonImage = null;
 		private UnityEngine.UI.Button m_E_AdventureButton = null;
 		private UnityEngine.UI.Image m_E_AdventureImage = null;
 		private UnityEngine.UI.Button m_E_PetFormationButton = null;
