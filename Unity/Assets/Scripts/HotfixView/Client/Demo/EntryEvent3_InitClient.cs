@@ -31,6 +31,7 @@ namespace ET.Client
             root.AddComponent<SkillSetComponentC>();
             root.AddComponent<ChengJiuComponentC>();
             root.AddComponent<MaskWordComponent>();
+            root.AddComponent<LockTargetComponent>();
             
 
             // 根据配置修改掉Main Fiber的SceneType

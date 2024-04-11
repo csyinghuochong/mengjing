@@ -1,13 +1,44 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace ET
 {
     public static class TaskHelper
     {
+        public const float NpcSpeakDistance = 2f;
 
-        
+        public static Unit GetNpcByConfigId(Scene zongScene, Vector3 position, int npcid)
+        {
+            Unit npc = null;
+            float distance = -1f;
+            List<Unit> units = zongScene.CurrentScene().GetComponent<UnitComponent>().GetAll();
+            UnitInfoComponent unitInfoComponent;
+            for (int i = 0; i < units.Count; i++)
+            {
+                unitInfoComponent = units[i].GetComponent<UnitInfoComponent>();
+                if (units[i].Type != UnitType.Npc)
+                {
+                    continue;
+                }
+
+                if (units[i].ConfigId != npcid)
+                {
+                    continue;
+                }
+
+                Vector3 unitPos = new Vector3(units[i].Position.x, units[i].Position.y, units[i].Position.z);
+                if (Vector3.Distance(position, unitPos) < distance || distance < 0f)
+                {
+                    npc = units[i];
+                    distance = Vector3.Distance(position, unitPos);
+                }
+            }
+
+            return npc;
+        }
+
         public static int GetChapterByNpc(int npcId)
         {
             List<ChapterConfig> chapterList = ChapterConfigCategory.Instance.GetAll().Values.ToList();
@@ -20,9 +51,9 @@ namespace ET
                     return chapterList[i].Id;
                 }
             }
+
             return 0;
         }
-
 
         public static bool HaveNpc(Scene zoneScene, int npcId)
         {
@@ -36,6 +67,7 @@ namespace ET
                     npcList = new List<int>(sceneConfig.NpcList);
                 }
             }
+
             if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
             {
                 DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(mapComponent.SceneId);
@@ -44,9 +76,9 @@ namespace ET
                     npcList = new List<int>(dungeonConfig.NpcList);
                 }
             }
+
             return npcList.Contains(npcId);
         }
-
 
         public static int GetChapterSection(int chapterId)
         {
@@ -59,10 +91,12 @@ namespace ET
                     return chapterSectionConfigs[i].Id;
                 }
             }
+
             if (chapterId != 0)
             {
                 Log.Error("GetChapterSection:   return 0");
             }
+
             return 0;
         }
 
@@ -103,7 +137,7 @@ namespace ET
                 }
             }
 
-            int randomNumber = allTaskIds.Count > taskNum ? taskNum : allTaskIds.Count;
+            int randomNumber = allTaskIds.Count > taskNum? taskNum : allTaskIds.Count;
             RandomHelper.GetRandListByCount(allTaskIds, randomIds, randomNumber);
             return randomIds;
         }
@@ -128,15 +162,18 @@ namespace ET
                     allWeights.Add(item.Value.Weight);
                 }
             }
+
             if (allTaskIds.Count == 0)
             {
                 return 0;
             }
+
             int index = RandomHelper.RandomByWeight(allWeights);
             if (index == -1)
             {
                 index = RandomHelper.RandomNumber(0, allTaskIds.Count);
             }
+
             return allTaskIds[index];
         }
 
@@ -151,6 +188,7 @@ namespace ET
                     taskIds.Add(item.Key);
                 }
             }
+
             return taskIds;
         }
 
@@ -161,7 +199,7 @@ namespace ET
         public static List<int> GetTaskCountrys(Unit unit, int playerLv)
         {
             //活跃任务
-          
+
             List<int> taskCountryList = new List<int>();
             string[] dayTaskID = GlobalValueConfigCategory.Instance.Get(8).Value.Split(';');
             for (int i = 0; i < dayTaskID.Length; i++)
@@ -191,7 +229,6 @@ namespace ET
                         }
                     }
 
-
                     triggerPro = taskCountryConfig.TriggerPro;
                     writeTaskID_Next = taskCountryConfig.NextTask;
 
@@ -199,15 +236,14 @@ namespace ET
                     {
                         taskRandValue = -1;
                     }
-
-                } while (taskRandValue >= triggerPro);
+                }
+                while (taskRandValue >= triggerPro);
 
                 taskCountryList.Add(writeTaskID);
             }
 
             return taskCountryList;
         }
-
 
         public static List<int> GetBattleTask()
         {
@@ -220,6 +256,7 @@ namespace ET
                     taskIds.Add(item.Key);
                 }
             }
+
             return taskIds;
         }
 
@@ -234,6 +271,7 @@ namespace ET
                     taskIds.Add(item.Key);
                 }
             }
+
             return taskIds;
         }
 
@@ -248,6 +286,7 @@ namespace ET
                     taskIds.Add(item.Key);
                 }
             }
+
             return taskIds;
         }
 
@@ -262,6 +301,7 @@ namespace ET
                     taskIds.Add(item.Key);
                 }
             }
+
             return taskIds;
         }
 
@@ -272,11 +312,11 @@ namespace ET
         public static List<int> GetSeasonTask()
         {
             List<int> taskIds = new List<int>();
-          
-            foreach((  int number , List<int> ids ) in TaskCountryConfigCategory.Instance.SeasonTaskList)
+
+            foreach ((int number, List<int> ids) in TaskCountryConfigCategory.Instance.SeasonTaskList)
             {
-                int[] randomids = RandomHelper.GetRandoms( number, 0, ids.Count );
-                for ( int i = 0; i < randomids.Length; i++ )
+                int[] randomids = RandomHelper.GetRandoms(number, 0, ids.Count);
+                for (int i = 0; i < randomids.Length; i++)
                 {
                     taskIds.Add(ids[randomids[i]]);
                 }
@@ -303,11 +343,13 @@ namespace ET
                 {
                     continue;
                 }
+
                 RewardItem taskReward = new RewardItem();
                 taskReward.ItemID = int.Parse(ids[i]);
                 taskReward.ItemNum = int.Parse(nums[i]);
                 taskRewards.Add(taskReward);
             }
+
             return taskRewards;
         }
 
@@ -331,6 +373,7 @@ namespace ET
             {
                 return false;
             }
+
             if (Target.Length != TargetValue.Length)
             {
                 return false;

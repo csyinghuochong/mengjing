@@ -27,6 +27,12 @@ namespace ET.Client
             return currentScene.GetComponent<UnitComponent>().Get(playerComponent.MyId);
         }
         
+        public static Unit GetUnitFromZoneSceneByID(Scene zoneScene, long id)
+        {
+            Scene currentScene = zoneScene.GetComponent<CurrentScenesComponent>().Scene;
+            return currentScene.GetComponent<UnitComponent>().Get(id);
+        }
+        
         public static Unit GetMyUnitFromCurrentScene(Scene currentScene)
         {
             PlayerComponent playerComponent = currentScene.Root().GetComponent<PlayerComponent>();
