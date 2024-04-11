@@ -478,11 +478,11 @@ namespace ET.Client
 
             if (unitype == UnitType.Npc)
             {
-                // self.Root().CurrentScene().GetComponent<OperaComponent>().OnClickNpc(configid, "1").Coroutine();
+                self.Root().CurrentScene().GetComponent<OperaComponent>().OnClickNpc(configid, "1").Coroutine();
             }
             else
             {
-                // unit.MoveToAsync2(self.BossList[configid], false).Coroutine();
+                unit.MoveToAsync(self.BossList[configid]).Coroutine();
             }
         }
 
