@@ -24,7 +24,7 @@ namespace ET.Client
         public Camera UICamera;
         public Camera MainCamera;
         public float LastShowTip;
-        public EntityRef<Unit> MainUnit;
+        public Unit MainUnit { get; set; }
         public int ObstructLayer;
         public int BuildingLayer;
         public long JoystickTimer;

@@ -40,7 +40,7 @@ namespace ET.Client
         public static void OnMainHeroMove(Unit self)
         {
             float curTime = Time.time;
-            List<Unit> units = self.Root().GetComponent<UnitComponent>().GetAll();
+            List<Unit> units = self.Scene().GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
                 Unit unit = units[i];

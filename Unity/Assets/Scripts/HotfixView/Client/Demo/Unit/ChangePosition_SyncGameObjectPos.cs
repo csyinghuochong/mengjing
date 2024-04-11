@@ -2,7 +2,7 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof(GameObjectComponent))]
+    [FriendOf(typeof (GameObjectComponent))]
     [Event(SceneType.Current)]
     public class ChangePosition_SyncGameObjectPos: AEvent<Scene, ChangePosition>
     {
@@ -17,6 +17,15 @@ namespace ET.Client
 
             Transform transform = gameObjectComponent.GameObject.transform;
             transform.position = unit.Position;
+
+            //主角
+            if (unit.MainHero)
+            {
+                EventSystem.Instance.Publish(scene.Root(), new DataUpdate_MainHeroMove());
+
+                UIMapHelper.OnMainHeroMove(unit);
+            }
+
             await ETTask.CompletedTask;
         }
     }

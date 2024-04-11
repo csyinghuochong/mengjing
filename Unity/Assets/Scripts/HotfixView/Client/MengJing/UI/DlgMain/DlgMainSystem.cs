@@ -44,6 +44,22 @@ namespace ET.Client
             }
         }
 
+        [Event(SceneType.Demo)]
+        public class DataUpdate_BeforeMove_Refresh: AEvent<Scene, DataUpdate_BeforeMove>
+        {
+            protected override async ETTask Run(Scene root, DataUpdate_BeforeMove args)
+            {
+                if (args.DataParamString == "1")
+                {
+                    root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.AutoHorse();
+                }
+
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnMoveStart();
+
+                await ETTask.CompletedTask;
+            }
+        }
+
         [Invoke(TimerInvokeType.JoystickTimer)]
         public class JoystickTimer: ATimer<DlgMain>
         {
@@ -139,6 +155,57 @@ namespace ET.Client
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
             self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
+        }
+
+        public static void AutoHorse(this DlgMain self)
+        {
+            NumericComponentC numericComponent = self.MainUnit.GetComponent<NumericComponentC>();
+            if (numericComponent.GetAsInt(NumericType.HorseRide) == 0 && numericComponent.GetAsInt(NumericType.HorseFightID) > 0)
+            {
+                self.OnButton_Horse(false);
+            }
+        }
+
+        public static void OnButton_Horse(this DlgMain self, bool showtip)
+        {
+            // Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            // int now_horse = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HorseRide);
+            // if (now_horse == 0 && !self.Root().GetComponent<BattleMessageComponent>().IsCanRideHorse())
+            // {
+            //     FlyTipComponent.Instance.SpawnFlyTipDi("战斗状态不能骑马!");
+            //     return;
+            // }
+            //
+            // MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            // if (SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
+            // {
+            //     int sceneid = mapComponent.SceneId;
+            //     SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
+            //     if (sceneConfig.IfMount == 1)
+            //     {
+            //         if (showtip)
+            //         {
+            //             FlyTipComponent.Instance.SpawnFlyTipDi("该场景不能骑马!");
+            //         }
+            //
+            //         return;
+            //     }
+            // }
+            //
+            // C2M_HorseRideRequest request = new C2M_HorseRideRequest() { };
+            // self.ZoneScene().GetComponent<SessionComponent>().Session.Call(request).Coroutine();
+        }
+
+        public static void OnMoveStart(this DlgMain self)
+        {
+            // if (self.UIOpenBoxComponent != null && self.UIOpenBoxComponent.BoxUnitId > 0)
+            // {
+            //     self.UIOpenBoxComponent.OnOpenBox(null);
+            // }
+            //
+            // self.UIMainSkillComponent.UIAttackGrid.OnMoveStart();
+            //
+            // self.MainUnit.GetComponent<SingingComponent>()?.BeginMove();
         }
 
         public static void OnMainHeroMove(this DlgMain self)
