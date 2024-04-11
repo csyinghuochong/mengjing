@@ -500,7 +500,7 @@ namespace ET.Client
             }
 
             GameObject mapCamera = self.MapCamera;
-            RectTransform canvas = self.View.E_RawImageRawImage.transform.parent.parent.GetComponent<RectTransform>();
+            RectTransform canvas = self.View.E_RawImageRawImage.transform.GetComponent<RectTransform>();
             Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out self.localPoint);
 
