@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,6 +7,22 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Invoke(TimerInvokeType.MakeCDTimer)]
+    public class SkillMakeTimer: ATimer<ES_SkillMake>
+    {
+        protected override void Run(ES_SkillMake self)
+        {
+            try
+            {
+                self.OnUpdate();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"move timer error: {self.Id}\n{e}");
+            }
+        }
+    }
+
     [FriendOf(typeof (ES_CommonItem))]
     [FriendOf(typeof (Scroll_Item_CommonItem))]
     [FriendOf(typeof (Scroll_Item_MakeNeedItem))]
@@ -272,11 +289,8 @@ namespace ET.Client
         {
             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(self.MakeId);
 
-            if (self.ES_CommonItem != null)
-            {
-                self.ES_CommonItem.UpdateItem(new BagInfo() { ItemID = equipMakeConfig.MakeItemID }, ItemOperateEnum.MakeItem);
-                self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
-            }
+            self.ES_CommonItem_0.UpdateItem(new BagInfo() { ItemID = equipMakeConfig.MakeItemID }, ItemOperateEnum.MakeItem);
+            self.ES_CommonItem_0.E_ItemNumText.gameObject.SetActive(false);
 
             string needItems = equipMakeConfig.NeedItems;
             string[] itemsList = needItems.Split('@');

@@ -46,6 +46,16 @@ namespace ET.Client
         }
     }
 
+    [Event(SceneType.Demo)]
+    public class DataUpdate_HuiShouSelect_Refresh: AEvent<Scene, DataUpdate_HuiShouSelect>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_HuiShouSelect args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgSkill>()?.OnHuiShouSelect(args.DataParamString);
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof (ES_SkillLearn))]
     [FriendOf(typeof (ES_SkillSet))]
     [FriendOf(typeof (ES_SkillMake))]
@@ -113,6 +123,14 @@ namespace ET.Client
             // self.UIPageButton.SetButtonReddot((int)SkillPageEnum.SkillLearn, num > 0);
         }
 
+        public static void OnActiveTianFu(this DlgSkill self)
+        {
+            if (self.View.ES_SkillTianFu.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_SkillTianFu.OnActiveTianFu();
+            }
+        }
+
         public static void OnSkillReset(this DlgSkill self)
         {
             if (self.View.ES_SkillLearn.uiTransform.gameObject.activeSelf)
@@ -144,11 +162,16 @@ namespace ET.Client
             }
         }
 
-        public static void OnActiveTianFu(this DlgSkill self)
+        public static void OnHuiShouSelect(this DlgSkill self, string dataParams)
         {
-            if (self.View.ES_SkillTianFu.uiTransform.gameObject.activeSelf)
+            if (self.View.ES_SkillMake.uiTransform.gameObject.activeSelf)
             {
-                self.View.ES_SkillTianFu.OnActiveTianFu();
+                self.View.ES_SkillMake.OnHuiShouSelect(dataParams);
+            }
+
+            if (self.View.ES_SkillLifeShield.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_SkillLifeShield.OnHuiShouSelect(dataParams);
             }
         }
     }
