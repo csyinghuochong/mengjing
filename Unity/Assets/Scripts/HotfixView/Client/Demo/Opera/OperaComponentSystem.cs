@@ -1,9 +1,6 @@
 using System;
-<<<<<<< Updated upstream
 using System.Collections.Generic;
-=======
 using Unity.Mathematics;
->>>>>>> Stashed changes
 using UnityEngine;
 using UnityEngine.EventSystems;
 
