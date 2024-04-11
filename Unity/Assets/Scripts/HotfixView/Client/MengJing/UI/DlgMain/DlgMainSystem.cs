@@ -34,6 +34,16 @@ namespace ET.Client
             }
         }
 
+        [Event(SceneType.Demo)]
+        public class DataUpdate_MainHeroMove_MainChatItemsRefresh: AEvent<Scene, DataUpdate_MainHeroMove>
+        {
+            protected override async ETTask Run(Scene root, DataUpdate_MainHeroMove args)
+            {
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnMainHeroMove();
+                await ETTask.CompletedTask;
+            }
+        }
+
         [Invoke(TimerInvokeType.JoystickTimer)]
         public class JoystickTimer: ATimer<DlgMain>
         {
@@ -121,6 +131,24 @@ namespace ET.Client
 
             // IOS适配
             IPHoneHelper.SetPosition(self.View.EG_PhoneLeftRectTransform.gameObject, new Vector2(120f, 0f));
+        }
+
+        public static void BeforeUnload(this DlgMain self)
+        {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
+        }
+
+        public static void OnMainHeroMove(this DlgMain self)
+        {
+            self.OnMainHeroMoveMiniMap();
+            // self.LockTargetComponent.OnMainHeroMove();
+            // self.SkillIndicatorComponent.OnMainHeroMove();
+            //
+            // if (self.TianQiEffectObj != null)
+            // {
+            //     self.TianQiEffectObj.transform.localPosition = self.MainUnit.Position;
+            // }
         }
 
         #region 左边
@@ -311,12 +339,6 @@ namespace ET.Client
 
         # region 摇杆
 
-        public static void BeforeUnload(this DlgMain self)
-        {
-            self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
-            self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
-        }
-
         private static void UpdateOperateMode(this DlgMain self, int operateMode)
         {
             self.OperateMode = operateMode;
@@ -459,7 +481,7 @@ namespace ET.Client
             self.SendMove(self.direction);
         }
 
-        private static void OnMainHeroMove(this DlgMain self)
+        private static void OnMainHeroMoveYaoGan(this DlgMain self)
         {
             Unit unit = self.MainUnit;
             Vector3 unitPosition = unit.Position;
@@ -852,48 +874,48 @@ namespace ET.Client
 
         private static async ETTask LoadMapCamera(this DlgMain self)
         {
-            // GameObject mapCamera = GameObject.Find("MapCamera");
-            // if (mapCamera == null)
-            // {
-            //     var path = ABPathHelper.GetUnitPath("Component/MapCamera");
-            //     GameObject prefab = ResourcesComponent.Instance.LoadAsset<GameObject>(path);
-            //     mapCamera = GameObject.Instantiate(prefab);
-            //     mapCamera.name = "MapCamera";
-            // }
-            //
-            // Camera camera = mapCamera.GetComponent<Camera>();
-            // camera.enabled = true;
-            //
-            // MapComponent mapComponent = self.ZoneScene().GetComponent<MapComponent>();
-            // if (mapComponent.SceneTypeEnum == (int)SceneTypeEnum.LocalDungeon)
-            // {
-            //     DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(mapComponent.SceneId);
-            //     mapCamera.transform.position = new Vector3((float)dungeonConfig.CameraPos[0], (float)dungeonConfig.CameraPos[1],
-            //         (float)dungeonConfig.CameraPos[2]);
-            //     mapCamera.transform.eulerAngles = new Vector3(90, 0, (float)dungeonConfig.CameraPos[3]);
-            //     camera.orthographicSize = (float)dungeonConfig.CameraPos[4];
-            // }
-            //
-            // if (SceneConfigHelper.UseSceneConfig(mapComponent.SceneTypeEnum)
-            //     && SceneConfigHelper.ShowMiniMap(mapComponent.SceneTypeEnum, mapComponent.SceneId))
-            // {
-            //     SceneConfig dungeonConfig = SceneConfigCategory.Instance.Get(mapComponent.SceneId);
-            //     mapCamera.transform.position = new Vector3((float)dungeonConfig.CameraPos[0], (float)dungeonConfig.CameraPos[1],
-            //         (float)dungeonConfig.CameraPos[2]);
-            //     mapCamera.transform.eulerAngles = new Vector3(90, 0, (float)dungeonConfig.CameraPos[3]);
-            //     camera.orthographicSize = (float)dungeonConfig.CameraPos[4];
-            // }
-            //
-            // self.MapCamera = mapCamera;
-            //
-            // self.SceneTypeEnum = self.Root().GetComponent<MapComponent>().SceneTypeEnum;
-            // self.ScaleRateX = self.View.E_RawImageRawImage.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
-            // self.ScaleRateY = self.View.E_RawImageRawImage.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
-            // self.View.E_RawImageRawImage.transform.localPosition = Vector2.zero;
-            // await self.Root().GetComponent<TimerComponent>().WaitAsync(200);
-            // camera.enabled = false;
-            //
-            // self.OnMainHeroMove();
+            GameObject mapCamera = GameObject.Find("MapCamera");
+            if (mapCamera == null)
+            {
+                var path = ABPathHelper.GetUnitPath("Component/MapCamera");
+                GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+                mapCamera = GameObject.Instantiate(prefab);
+                mapCamera.name = "MapCamera";
+            }
+
+            Camera camera = mapCamera.GetComponent<Camera>();
+            camera.enabled = true;
+
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
+            {
+                DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(mapComponent.SceneId);
+                mapCamera.transform.position = new Vector3((float)dungeonConfig.CameraPos[0], (float)dungeonConfig.CameraPos[1],
+                    (float)dungeonConfig.CameraPos[2]);
+                mapCamera.transform.eulerAngles = new Vector3(90, 0, (float)dungeonConfig.CameraPos[3]);
+                camera.orthographicSize = (float)dungeonConfig.CameraPos[4];
+            }
+
+            if (SceneConfigHelper.UseSceneConfig(mapComponent.SceneType)
+                && SceneConfigHelper.ShowMiniMap(mapComponent.SceneType, mapComponent.SceneId))
+            {
+                SceneConfig dungeonConfig = SceneConfigCategory.Instance.Get(mapComponent.SceneId);
+                mapCamera.transform.position = new Vector3((float)dungeonConfig.CameraPos[0], (float)dungeonConfig.CameraPos[1],
+                    (float)dungeonConfig.CameraPos[2]);
+                mapCamera.transform.eulerAngles = new Vector3(90, 0, (float)dungeonConfig.CameraPos[3]);
+                camera.orthographicSize = (float)dungeonConfig.CameraPos[4];
+            }
+
+            self.MapCamera = mapCamera;
+
+            self.SceneTypeEnum = self.Root().GetComponent<MapComponent>().SceneType;
+            self.ScaleRateX = self.View.E_RawImageRawImage.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
+            self.ScaleRateY = self.View.E_RawImageRawImage.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
+            self.View.E_RawImageRawImage.transform.localPosition = Vector2.zero;
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(200);
+            camera.enabled = false;
+
+            self.OnMainHeroMoveMiniMap();
             await ETTask.CompletedTask;
         }
 
@@ -909,73 +931,73 @@ namespace ET.Client
 
         private static void OnEnterScene(this DlgMain self)
         {
-            // self.LoadMapCamera().Coroutine();
-            //
-            // int sceneTypeEnum = self.Root().GetComponent<MapComponent>().SceneTypeEnum;
-            // int difficulty = self.Root().GetComponent<MapComponent>().FubenDifficulty;
-            // int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
-            // self.View.E_MainCityShowImage.gameObject.SetActive(true);
-            //
-            // //显示地图名称
-            // switch (sceneTypeEnum)
-            // {
-            //     case (int)SceneTypeEnum.CellDungeon:
-            //         self.View.E_MapNameText.text = ChapterConfigCategory.Instance.Get(sceneId).ChapterName;
-            //         break;
-            //     case (int)SceneTypeEnum.LocalDungeon:
-            //         string str = string.Empty;
-            //         if (difficulty == FubenDifficulty.Normal)
-            //         {
-            //             str = "(普通)";
-            //         }
-            //
-            //         if (difficulty == FubenDifficulty.TiaoZhan)
-            //         {
-            //             str = "(挑战)";
-            //         }
-            //
-            //         if (difficulty == FubenDifficulty.DiYu)
-            //         {
-            //             str = "(地狱)";
-            //         }
-            //
-            //         if (DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(sceneId))
-            //         {
-            //             str = string.Empty;
-            //         }
-            //
-            //         self.View.E_MapNameText.text = DungeonConfigCategory.Instance.Get(sceneId).ChapterName + str;
-            //         break;
-            //     case (int)SceneTypeEnum.TeamDungeon:
-            //         str = "";
-            //         if (difficulty == TeamFubenType.XieZhu)
-            //         {
-            //             str = "(协助)";
-            //         }
-            //
-            //         if (difficulty == TeamFubenType.ShenYuan)
-            //         {
-            //             str = "(深渊)";
-            //         }
-            //
-            //         self.View.E_MapNameText.text = SceneConfigCategory.Instance.Get(sceneId).Name + str;
-            //         break;
-            //     case SceneTypeEnum.Union:
-            //         UserInfoComponent userInfoComponent = self.Root().GetComponent<UserInfoComponent>();
-            //         self.View.E_MapNameText.text = $"{userInfoComponent.UserInfo.UnionName} 家族地图";
-            //         break;
-            //     default:
-            //         //显示地图名称
-            //         self.View.E_MapNameText.text = SceneConfigCategory.Instance.Get(sceneId).Name;
-            //         break;
-            // }
-            //
-            // self.View.EG_HeadListRectTransform.gameObject.SetActive(true);
-            // self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
-            // self.MapMiniTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(200, TimerInvokeType.MapMiniTimer, self);
-            //
-            // DateTime serverTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
-            // self.View.E_TimeText.text = $"{serverTime.Hour}:{serverTime.Minute}";
+            self.LoadMapCamera().Coroutine();
+
+            int sceneTypeEnum = self.Root().GetComponent<MapComponent>().SceneType;
+            int difficulty = self.Root().GetComponent<MapComponent>().FubenDifficulty;
+            int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
+            self.View.E_MainCityShowImage.gameObject.SetActive(true);
+
+            //显示地图名称
+            switch (sceneTypeEnum)
+            {
+                case (int)SceneTypeEnum.CellDungeon:
+                    self.View.E_MapNameText.text = ChapterConfigCategory.Instance.Get(sceneId).ChapterName;
+                    break;
+                case (int)SceneTypeEnum.LocalDungeon:
+                    string str = string.Empty;
+                    if (difficulty == FubenDifficulty.Normal)
+                    {
+                        str = "(普通)";
+                    }
+
+                    if (difficulty == FubenDifficulty.TiaoZhan)
+                    {
+                        str = "(挑战)";
+                    }
+
+                    if (difficulty == FubenDifficulty.DiYu)
+                    {
+                        str = "(地狱)";
+                    }
+
+                    if (DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(sceneId))
+                    {
+                        str = string.Empty;
+                    }
+
+                    self.View.E_MapNameText.text = DungeonConfigCategory.Instance.Get(sceneId).ChapterName + str;
+                    break;
+                case (int)SceneTypeEnum.TeamDungeon:
+                    str = "";
+                    if (difficulty == TeamFubenType.XieZhu)
+                    {
+                        str = "(协助)";
+                    }
+
+                    if (difficulty == TeamFubenType.ShenYuan)
+                    {
+                        str = "(深渊)";
+                    }
+
+                    self.View.E_MapNameText.text = SceneConfigCategory.Instance.Get(sceneId).Name + str;
+                    break;
+                case SceneTypeEnum.Union:
+                    UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+                    self.View.E_MapNameText.text = $"{userInfoComponent.UserInfo.UnionName} 家族地图";
+                    break;
+                default:
+                    //显示地图名称
+                    self.View.E_MapNameText.text = SceneConfigCategory.Instance.Get(sceneId).Name;
+                    break;
+            }
+
+            self.View.EG_HeadListRectTransform.gameObject.SetActive(true);
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
+            self.MapMiniTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(200, TimerInvokeType.MapMiniTimer, self);
+
+            DateTime serverTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+            self.View.E_TimeText.text = $"{serverTime.Hour}:{serverTime.Minute}";
         }
 
         #endregion
