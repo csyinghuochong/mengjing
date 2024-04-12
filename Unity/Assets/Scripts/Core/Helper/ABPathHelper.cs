@@ -79,6 +79,16 @@
         //图集2
         public static string GetAtlasPath_2( string path, string name)
         {
+            if (path == "PropertyIcon" )
+            {
+                name = "PetPro_2";
+            }
+
+            if (path == "OtherIcon")
+            {
+                name = "Img_hole_102";
+            }
+
             return $"Assets/Bundles/Icon/{path}/{name}.png";
         }
 
