@@ -135,7 +135,7 @@ namespace ET.Client
                 self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
                         string.Format("{0}/{1}", (float)petConfig.ZiZhi_ChengZhang_Max, 1.25f);
                 Sprite sprite17 = self.Root().GetComponent<ResourcesLoaderComponent>()
-                        .LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Pro_17.png");
+                        .LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Img_20.png");
                 self.PetZiZhiItemList[0].transform.Find("ImageExpValue").GetComponent<Image>().sprite = sprite17;
                 self.PetZiZhiItemList[0].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount =
                         Mathf.Clamp((float)petConfig.ZiZhi_Hp_Max / 3000f, 0f, 1f);
