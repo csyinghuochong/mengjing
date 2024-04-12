@@ -31,6 +31,8 @@ namespace ET.Client
             if (subType < 100)
             {
                 string qianghuaName = ItemViewData.EquipWeiZhiToName[subType].Icon;
+
+                qianghuaName = "Img_20";
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, qianghuaName);
                 Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
                 self.E_EquipBackImage.sprite = sp;
