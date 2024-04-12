@@ -8,6 +8,23 @@ namespace ET.Client
     [FriendOf(typeof (EffectViewComponent))]
     public static partial class EffectViewComponnetSytstem
     {
+        
+        [Invoke(TimerInvokeType.Effectimer)]
+        public class BuffTimer: ATimer<EffectViewComponent>
+        {
+            protected override void Run(EffectViewComponent self)
+            {
+                try
+                {
+                    self.Check();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+                
         [EntitySystem]
         private static void Awake(this ET.Client.EffectViewComponent self)
         {
@@ -99,7 +116,7 @@ namespace ET.Client
             }
         }
 
-        public static void OnUpdate(this EffectViewComponent self)
+        public static void Check(this EffectViewComponent self)
         {
             for (int i = self.Effects.Count - 1; i >= 0; i--)
             {
