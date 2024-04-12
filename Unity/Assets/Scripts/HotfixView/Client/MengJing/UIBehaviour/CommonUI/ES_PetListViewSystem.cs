@@ -612,6 +612,9 @@ namespace ET.Client
                 gameObject.SetActive(true);
                 UICommonHelper.SetParent(gameObject, itemNodeList);
                 string icon = ItemViewHelp.GetAttributeIcon(numberType);
+
+                icon = "PetPro_2";
+                
                 if (!string.IsNullOrEmpty(icon))
                 {
                     string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PropertyIcon, icon);
