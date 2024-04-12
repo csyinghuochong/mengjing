@@ -358,12 +358,12 @@ namespace ET.Client
                 }
                 else
                 {
-                    unit.Rotation = quaternion.Euler(0, skillcmd.TargetAngle, 0);
+                    unit.Rotation = quaternion.Euler(0,  math.radians(skillcmd.TargetAngle) , 0);
                 }
             }
             else
-            {
-                unit.Rotation = quaternion.Euler(0, skillcmd.TargetAngle, 0);
+            {  
+                unit.Rotation = quaternion.Euler(0,  math.radians(skillcmd.TargetAngle) , 0);
             }
 
             //播放对应攻击动作

@@ -13,7 +13,7 @@ namespace ET.Client
 				return;
 			}
 			
-			Log.Debug($"MoveStop Publish: {root.Id} ");
+			Log.Debug($"TargetAngle: {root.Id} ");
 			EventSystem.Instance.Publish(root.CurrentScene(), new MoveStop() {Unit = unit});
 			
 			MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
