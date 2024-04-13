@@ -40,7 +40,7 @@ namespace YooAsset.Editor
 					if (taskAttribute != null)
 						BuildLogger.Log($"---------------------------------------->{taskAttribute.TaskDesc}<---------------------------------------");
 					task.Run(context);
-					_buildWatch.Stop();
+					_buildWatch.Stop(); 
 
 					// 统计耗时
 					int seconds = GetBuildSeconds();

@@ -83,10 +83,14 @@
             {
                 name = "PetPro_2";
             }
-
             if (path == "OtherIcon")
             {
                 name = "Img_hole_102";
+            }
+
+            if (path == "RoleSkillIcon")
+            {
+                name = "80000001";
             }
 
             return $"Assets/Bundles/Icon/{path}/{name}.png";
