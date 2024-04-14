@@ -7,7 +7,7 @@ namespace ET
 
        
         
-        public static  float QuatationToEulerAngle_Y(quaternion q)
+        public static  float QuaternionToEulerAngle_Y(quaternion q)
         {
             // 标准化四元数
             q = math.normalize(q);

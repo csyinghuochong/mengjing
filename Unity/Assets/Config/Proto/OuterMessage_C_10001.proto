@@ -3196,3 +3196,9 @@ message M2C_MakeEquipResponse // ILocationResponse
 	int32 ItemId = 1;
 	int32 NewMakeId = 2;
 }
+
+message M2C_TurtleRewardMessage // IMessage
+{
+	int64 UnitID = 1;
+	repeated string PlayerName = 2;		//获奖玩家名字
+}

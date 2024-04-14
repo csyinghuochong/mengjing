@@ -20,35 +20,35 @@ namespace ET.Server
 
         public int Current;
 
-        public long TargetID;
+        public long TargetID{ get; set; }
 
         public float ActRange { get; set; }
 
-        public bool IsRetreat;
+        public bool IsRetreat{ get; set; }
         
         /// <summary>
         /// 追击范围，超出则撤退
         /// </summary>
-        public float ChaseRange;
+        public float ChaseRange{ get; set; }
         
         /// <summary>
         /// 巡逻范围
         /// </summary>
-        public float PatrolRange;
+        public float PatrolRange{ get; set; }
         
-        public double ActDistance;
+        public double ActDistance{ get; set; }
         
-        public List<int> AISkillIDList = new List<int>();     //当前所有技能
+        public List<int> AISkillIDList{ get; set; } = new List<int>();     //当前所有技能
         
         public long LastChangeTime;
         
         public long LastZhuiJiTime;
         
-        public float3 TargetZhuiJi;
+        public float3 TargetZhuiJi{ get; set; }
         
-        public int SceneType;
+        public int SceneType { get; set; }
         
-        public bool noCheckStatus;            //检测状态  true 就是不检测 待机除外
+        public bool noCheckStatus { get; set; }            //检测状态  true 就是不检测 待机除外
         public int CheckJianGeTimeNum;          //检测间隔时间次数
 
         public long AIDelay;

@@ -285,5 +285,48 @@ namespace ET.Server
             rechargeNum += self.GetComponent<NumericComponentS>().GetAsInt(NumericType.MaoXianExp);
             return rechargeNum;
         }
+        
+        public static bool IsBoss(this Unit self)
+        {
+            if (self.Type != UnitType.Monster)
+            {
+                return false;
+            }
+            return self.GetMonsterType() == MonsterTypeEnum.Boss;
+        }
+        
+        public static List<Unit> GetUnitList(Scene scene, int unitType)
+        {
+            List<Unit> list = new List<Unit>();
+            List<Unit> allunits = scene.GetComponent<UnitComponent>().GetAll();
+            for (int i = 0; i < allunits.Count; i++)
+            {
+                if (allunits[i].Type == unitType)
+                {
+                    list.Add(allunits[i]);
+                }
+            }
+            return list;
+        }
+
+        public static List<Unit> GetUnitList(Scene scene, float3 position, int unitType, float distance)
+        {
+            List<Unit> units = new List<Unit>();
+            List<Unit> allunits = scene.GetComponent<UnitComponent>().GetAll();
+            for (int i = 0; i < allunits.Count; i++)
+            {
+                if (allunits[i].Type != unitType)
+                {
+                    continue;
+                }
+                if (math.distance(allunits[i].Position, position ) > distance)
+                {
+                    continue;
+                }
+
+                units.Add(allunits[i]);
+            }
+            return units;
+        }
     }
 }

@@ -49,7 +49,7 @@ namespace ET.Client
             {
                 Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
                 
-                float float3 = MathHelper.QuatationToEulerAngle_Y(unit.Rotation);
+                float float3 = MathHelper.QuaternionToEulerAngle_Y(unit.Rotation);
                 
                 C2M_SkillCmd c2MSkillCmd = new C2M_SkillCmd()
                 {

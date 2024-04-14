@@ -5,13 +5,13 @@ namespace ET.Server
     [ComponentOf(typeof(Unit))]
     public class StateComponentS : Entity, IAwake, ITransfer, IDeserialize
     {
-        public long CurrentStateType;
+        public long CurrentStateType { get; set; }
 
-        public long RigidityEndTime;
+        public long RigidityEndTime { get; set; }
 
-        public long NetWaitEndTime;
+        public long NetWaitEndTime { get; set; }
 
-        public int ObstructStatus;
+        public int ObstructStatus { get; set; }
 
     }
 
