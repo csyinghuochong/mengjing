@@ -15,7 +15,7 @@ namespace ET.Server
             Unit master = unitComponent.Get(masterid);
             if (master == null)
             {
-                return 0;
+                return 1;
             }
 
             float distance = math.distance(unit.Position, master.Position);
@@ -24,7 +24,7 @@ namespace ET.Server
             {
                 aiComponent.TargetID = 0;
                 attackRecordComponent.PetLockId = 0;
-                return 1;
+                return 0;
             }
 
             long mastaerAttackId = attackRecordComponent.PetLockId;
@@ -46,13 +46,13 @@ namespace ET.Server
             if (enemyUnit == null || !unit.IsCanAttackUnit(enemyUnit))
             {
                 aiComponent.TargetID = 0;
-                return 1;
+                return 0;
             }
 
             distance = math.distance(unit.Position, enemyUnit.Position);
             ///1
             aiComponent.TargetID = enemyUnit.Id;
-            return (aiComponent.TargetID == 0) ? 1 : 0;
+            return (aiComponent.TargetID > 0) ? 1 : 0;
         }
 
         public static float3 GetFollowPosition(Unit unit, Unit master)

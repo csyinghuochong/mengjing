@@ -17,7 +17,7 @@ namespace ET
             {
                 try
                 {
-                    //self.Check();
+                    self.Check();
                 }
                 catch (Exception e)
                 {
@@ -30,6 +30,12 @@ namespace ET
         private static void Awake(this AIComponent self, int aiConfigId)
         {
             self.AIConfigId = aiConfigId;
+            self.IsRetreat = false;
+            self.PatrolRange = 0f;
+            self.AISkillIDList.Clear();
+            self.TargetPoint.Clear();
+            self.TargetZhuiJi = float3.zero;
+            self.SceneType = self.Scene().GetComponent<MapComponent>().SceneType;
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.AITimer, self);
         }
 

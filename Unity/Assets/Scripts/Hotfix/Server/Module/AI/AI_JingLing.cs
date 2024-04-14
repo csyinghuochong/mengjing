@@ -9,7 +9,7 @@ namespace ET.Server
 
         public override int Check(AIComponent aiComponent, AIConfig aiConfig)
         {
-            return 1;
+            return 0;
         }
 
         public static float3 GetFollowPosition(Unit unit, Unit master)

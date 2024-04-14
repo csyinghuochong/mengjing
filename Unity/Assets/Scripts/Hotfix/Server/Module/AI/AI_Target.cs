@@ -9,11 +9,11 @@ namespace ET.Server
         {
             if (aiComponent.TargetID != 0)
             {
-                return 0;
+                return 1;
             }
             if (aiComponent.TargetPoint.Count == 0)
             {
-                return 0;
+                return 1;
             }
             Unit unit = aiComponent.GetParent<Unit>();
             Unit nearest = AIHelp.GetNearestEnemy(unit, aiComponent.ActRange, true);
@@ -21,9 +21,9 @@ namespace ET.Server
             {
                 aiComponent.TargetZhuiJi = unit.Position;
                 aiComponent.TargetID = nearest.Id;
-                return 0;
+                return 1;
             }
-            return 1;
+            return 0;
         }
 
         public override async ETTask Execute(AIComponent aiComponent, AIConfig aiConfig, ETCancellationToken cancellationToken)

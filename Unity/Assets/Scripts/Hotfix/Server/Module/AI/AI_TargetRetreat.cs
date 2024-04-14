@@ -11,10 +11,10 @@ namespace ET.Server
             Unit unit = aiComponent.GetParent<Unit>();
             if (math.distance(aiComponent.TargetZhuiJi ,float3.zero) == 0)
             {
-                return 0;
+                return 1;
             }
             float distance = PositionHelper.Distance2D(aiComponent.TargetZhuiJi, unit.Position);
-            return (!aiComponent.IsRetreat && distance >= aiComponent.ChaseRange) ? 1 : 0;
+            return (!aiComponent.IsRetreat && distance >= aiComponent.ChaseRange) ? 0 : 1;
         }
 
         public override async ETTask Execute(AIComponent aiComponent, AIConfig aiConfig, ETCancellationToken cancellationToken)

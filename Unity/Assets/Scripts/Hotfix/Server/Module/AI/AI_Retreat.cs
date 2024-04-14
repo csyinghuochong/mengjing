@@ -52,11 +52,11 @@ namespace ET.Server
             if (unit.IsBoss())
             {
                 Unit enemy = GetHaveEnemy(aiComponent, posVec3, aiComponent.ChaseRange);
-                return (distance >= aiComponent.ChaseRange && enemy == null) ? 1 : 0;
+                return (distance >= aiComponent.ChaseRange && enemy == null) ? 0: 1;
             }
             else
             {
-                return (distance >= aiComponent.ChaseRange) ? 1 : 0;
+                return (distance >= aiComponent.ChaseRange) ? 0 : 1;
             }
         }
 

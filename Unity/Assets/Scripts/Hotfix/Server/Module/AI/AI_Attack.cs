@@ -14,11 +14,11 @@ namespace ET.Server
             if (target == null || target.IsDisposed)
             {
                 aiComponent.TargetID = 0;
-                return 0;
+                return 1;
             }
 
             float distance = math.distance(target.Position, aiComponent.GetParent<Unit>().Position);
-            return (distance <= aiComponent.ActDistance) ? 1 : 0;
+            return (distance > aiComponent.ActDistance) ? 1 : 0;
         }
 
         public override async ETTask Execute(AIComponent aiComponent, AIConfig aiConfig, ETCancellationToken cancellationToken)

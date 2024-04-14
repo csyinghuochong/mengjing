@@ -82,7 +82,7 @@ namespace ET.Server
                 unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.BossInCombat, 1, true, true);
             }
             aiComponent.TargetID = nearestEnemy.Id;
-            return (aiComponent.TargetID > 0) ? 1 : 0;
+            return (aiComponent.TargetID == 0) ? 1 : 0;
         }
 
 

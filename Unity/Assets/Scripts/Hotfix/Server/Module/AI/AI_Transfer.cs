@@ -8,7 +8,7 @@ namespace ET.Server
     {
         public override int Check(AIComponent aiComponent, AIConfig aiConfig)
         {
-            return (aiComponent.TargetPoint.Count == 0) ? 1 : 0;
+            return (aiComponent.TargetPoint.Count > 0) ? 1 : 0;
         }
 
         public override async ETTask Execute(AIComponent aiComponent, AIConfig aiConfig, ETCancellationToken cancellationToken)

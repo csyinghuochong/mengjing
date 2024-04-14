@@ -14,7 +14,7 @@ namespace ET.Server
         {
             if (aiComponent.TargetID != 0 || aiComponent.IsRetreat)
             {
-                return 0;
+                return 1;
             }
             Unit nearest = null;
             Unit unit = aiComponent.GetParent<Unit>();
@@ -22,7 +22,7 @@ namespace ET.Server
             {
                 aiComponent.Stop();
                 Log.Error($"aiComponent.LocalDungeonUnit == null: scenetype:{ aiComponent.SceneType}  confidid: {unit.ConfigId}");
-                return 1;
+                return 0;
             }
             if (math.distance(unit.Position, aiComponent.LocalDungeonUnit.Position) <= aiComponent.ActRange)
             {
@@ -45,7 +45,7 @@ namespace ET.Server
             {
                 aiComponent.TargetID = 0;
                 aiComponent.noCheckStatus = true;
-                return 1;
+                return 0;
             }
 
             if (unit.IsBoss())
@@ -53,7 +53,7 @@ namespace ET.Server
                 unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.BossInCombat, 1, true, true);
             }
             aiComponent.TargetID = nearest.Id;
-            return (aiComponent.TargetID == 0)?1 : 0;
+            return (aiComponent.TargetID > 0)?1 : 0;
         }
 
         public override async ETTask Execute(AIComponent aiComponent, AIConfig aiConfig, ETCancellationToken cancellationToken)

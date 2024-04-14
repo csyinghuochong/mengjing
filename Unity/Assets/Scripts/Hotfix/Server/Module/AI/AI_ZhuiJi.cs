@@ -10,18 +10,18 @@ namespace ET.Server
         {
             if (aiComponent.TargetID == 0 || aiComponent.IsRetreat)
             {
-                return 0;
+                return 1;
             }
             Unit target = aiComponent.Scene().GetComponent<UnitComponent>().Get(aiComponent.TargetID);
             if (target == null)
             {
                 aiComponent.TargetID = 0;
-                return 0;
+                return 1;
             }
             //获取范敌人是否在攻击范围内
             float distance = math.distance(target.Position, aiComponent.GetParent<Unit>().Position);
             bool zhuiji = distance >= aiComponent.ActDistance && aiComponent.IsCanZhuiJi();
-            return zhuiji?1 : 0;
+            return zhuiji?0 : 1;
         }
 
         public override async ETTask Execute(AIComponent aiComponent, AIConfig aiConfig, ETCancellationToken cancellationToken)

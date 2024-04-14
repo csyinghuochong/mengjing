@@ -161,6 +161,7 @@ namespace ET.Server
                          aIComponent.LocalDungeonUnit = mainUnit;
                          //aIComponent.LocalDungeonUnitPetComponent = mainUnit.GetComponent<PetComponentServer>();
                          aIComponent.InitMonster(monsterConfig.Id);
+                         aIComponent.Begin();
                          break;
                      case SceneTypeEnum.PetDungeon:
                          aIComponent.InitPetFubenMonster(monsterConfig.Id);
