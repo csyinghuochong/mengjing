@@ -88,7 +88,12 @@ namespace ET
             { 70006013, 90000223 }        
         };
 
-
+        
+        /// <summary>
+        /// 200内部区 201版号区 202中心区 203机器人
+        /// </summary>
+        [StaticField]
+        public  static  List<int> InnerZoneList = new List<int>(4) { 200, 201, 202, 203 };
         
         /// <summary>
         /// 竞技场buff

@@ -1,37 +1,37 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Unity.Mathematics;
 
-namespace ET
+namespace ET.Server
 {
 
-    [AIHandler]
     public class AI_ZhuiJi : AAIHandler
     {
-        public override bool Check(AIComponent aiComponent, AIConfig aiConfig)
+        public override int Check(AIComponent aiComponent, AIConfig aiConfig)
         {
             if (aiComponent.TargetID == 0 || aiComponent.IsRetreat)
             {
-                return false;
+                return 0;
             }
-            Unit target = aiComponent.UnitComponent.Get(aiComponent.TargetID);
+            Unit target = aiComponent.Scene().GetComponent<UnitComponent>().Get(aiComponent.TargetID);
             if (target == null)
             {
                 aiComponent.TargetID = 0;
-                return false;
+                return 0;
             }
             //获取范敌人是否在攻击范围内
-            float distance = Vector3.Distance(target.Position, aiComponent.GetParent<Unit>().Position);
+            float distance = math.distance(target.Position, aiComponent.GetParent<Unit>().Position);
             bool zhuiji = distance >= aiComponent.ActDistance && aiComponent.IsCanZhuiJi();
-            return zhuiji;
+            return zhuiji?1 : 0;
         }
 
         public override async ETTask Execute(AIComponent aiComponent, AIConfig aiConfig, ETCancellationToken cancellationToken)
         {
             //获取附近最近距离的目标进行追击
             Unit unit = aiComponent.GetParent<Unit>();
-            StateComponent stateComponent = unit.GetComponent<StateComponent>();
+            StateComponentS stateComponent = unit.GetComponent<StateComponentS>();
 
             long checktime;
-            switch (aiComponent.SceneTypeEnum)
+            switch (aiComponent.SceneType)
             {
                 case SceneTypeEnum.PetDungeon:
                 case SceneTypeEnum.PetTianTi:
@@ -45,17 +45,17 @@ namespace ET
 
             for (int i = 0; i < 10000; i++)
             {
-                Unit target = aiComponent.UnitComponent.Get(aiComponent.TargetID);
+                Unit target = unit.GetParent<UnitComponent>().Get(aiComponent.TargetID);
                 if (target != null)
                 {
-                    bool zhuiji =   Vector3.Distance(unit.Position, target.Position) >= aiComponent.ActDistance;
+                    bool zhuiji =   math.distance(unit.Position, target.Position) >= aiComponent.ActDistance;
                     if (!zhuiji)
                     {
                         unit.Stop(-2);
                     }
                     if (zhuiji && checktime == 100 && stateComponent.CanMove() == ErrorCode.ERR_Success)
                     {
-                        unit.FindPathMoveToAsync(target.Position, cancellationToken, false).Coroutine();
+                        unit.FindPathMoveToAsync(target.Position).Coroutine();
                     }
                     if (zhuiji && checktime == 200 && stateComponent.CanMove() == ErrorCode.ERR_Success && i % 5 == 0)
                     {
@@ -65,11 +65,11 @@ namespace ET
                         //Quaternion rotation = Quaternion.Euler(0, ange + addg, 0);
                         //Vector3 ttt = target.Position + rotation * Vector3.forward * ((float)aiComponent.ActDistance - 0.2f);
                         //unit.FindPathMoveToAsync(ttt, cancellationToken, false).Coroutine();
-                        unit.FindPathMoveToAsync(target.Position, cancellationToken, false).Coroutine();
+                        unit.FindPathMoveToAsync(target.Position).Coroutine();
                     }
                 }
-                bool timeRet = await TimerComponent.Instance.WaitAsync(checktime, cancellationToken);
-                if (!timeRet)
+                await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(checktime, cancellationToken);
+                if (cancellationToken.IsCancel())
                 {
                     return;
                 }

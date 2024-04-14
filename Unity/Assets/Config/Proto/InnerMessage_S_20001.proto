@@ -640,3 +640,20 @@ message Mail2M_SendServerMailItem // ILocationMessage
 	int32 RpcId = 90;
 	ServerMailItem ServerMailItem = 1;
 }
+
+
+//ResponseType A2A_ServerMessageRResponse
+message A2A_ServerMessageRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 MessageType = 2;
+	string MessageValue = 5;
+}
+
+message A2A_ServerMessageRResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

@@ -48,17 +48,7 @@ namespace  ET
         {
             return 120;
         }
-
         
-        
-        /// <summary>
-        /// 200内部区 201版号区 202中心区 203机器人
-        /// </summary>
-        public  static  List<int> InnerZoneList()
-        {
-            return  new List<int>(4) { 200, 201, 202, 203 };
-        }
-
         //宠物魔法技能
         public static List<int> PetMagicSkill()
         {

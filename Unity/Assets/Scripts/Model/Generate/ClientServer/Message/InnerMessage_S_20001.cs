@@ -2537,6 +2537,71 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(A2A_ServerMessageRResponse))]
+	[Message(InnerMessage.A2A_ServerMessageRequest)]
+	[MemoryPackable]
+	public partial class A2A_ServerMessageRequest: MessageObject, IRequest
+	{
+		public static A2A_ServerMessageRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2A_ServerMessageRequest), isFromPool) as A2A_ServerMessageRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int MessageType { get; set; }
+
+		[MemoryPackOrder(4)]
+		public string MessageValue { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.MessageType = default;
+			this.MessageValue = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.A2A_ServerMessageRResponse)]
+	[MemoryPackable]
+	public partial class A2A_ServerMessageRResponse: MessageObject, IResponse
+	{
+		public static A2A_ServerMessageRResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2A_ServerMessageRResponse), isFromPool) as A2A_ServerMessageRResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -2614,5 +2679,7 @@ namespace ET
 		 public const ushort A2M_PetMingRecordRequest = 20074;
 		 public const ushort M2A_PetMingRecordResponse = 20075;
 		 public const ushort Mail2M_SendServerMailItem = 20076;
+		 public const ushort A2A_ServerMessageRequest = 20077;
+		 public const ushort A2A_ServerMessageRResponse = 20078;
 	}
 }
