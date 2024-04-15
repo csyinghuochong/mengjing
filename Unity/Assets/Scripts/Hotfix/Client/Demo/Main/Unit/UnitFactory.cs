@@ -55,7 +55,6 @@ namespace ET.Client
             unit.Forward = unitInfo.Forward;
 
             NumericComponentC numericComponentC = unit.AddComponent<NumericComponentC>();
-
             foreach (var kv in unitInfo.KV)
             {
                 numericComponentC.Set(kv.Key, kv.Value);

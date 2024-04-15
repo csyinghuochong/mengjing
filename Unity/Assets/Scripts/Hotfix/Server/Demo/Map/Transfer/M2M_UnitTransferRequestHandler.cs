@@ -39,6 +39,10 @@ namespace ET.Server
             unit.GetComponent<DBSaveComponent>().Activeted();
             
             Function_Fight.UnitUpdateProperty_Base(unit, false, false);
+
+            long speed = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_Speed);
+            Log.Debug($"Now_Speed:  {speed}");
+            
             switch (request.SceneType)
             {
                 case SceneTypeEnum.MainCityScene:

@@ -74,12 +74,12 @@ namespace ET.Client
 
         public static void Update(this NumericComponentC self, int numericType, bool isPublicEvent)
         {
-            int final = (int)numericType / 10;
-            int bas = final * 10 + 1;
-            int add = final * 10 + 2;
-            int pct = final * 10 + 3;
-            int finalAdd = final * 10 + 4;
-            int finalPct = final * 10 + 5;
+            int final = (int)numericType / 100;
+            int bas = final * 100 + 1;
+            int add = final * 100 + 2;
+            int pct = final * 100 + 3;
+            int finalAdd = final * 100 + 4;
+            int finalPct = final * 100 + 5;
 
             // 一个数值可能会多种情况影响，比如速度,加个buff可能增加速度绝对值100，也有些buff增加10%速度，所以一个值可以由5个值进行控制其最终结果
             // final = (((base + add) * (100 + pct) / 100) + finalAdd) * (100 + finalPct) / 100;

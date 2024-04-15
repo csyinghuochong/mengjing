@@ -8,7 +8,7 @@
 			Unit unit = root.CurrentScene().GetComponent<UnitComponent>().Get(message.Id);
 
 			float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
-
+			Log.Debug($"Now_Speed.Client:  {speed}");
 			await unit.GetComponent<MoveComponent>().MoveToAsync(message.Points, speed);
 		}
 	}
