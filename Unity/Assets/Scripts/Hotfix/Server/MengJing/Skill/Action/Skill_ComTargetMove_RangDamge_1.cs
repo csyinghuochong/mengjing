@@ -68,7 +68,7 @@ namespace ET.Server
             {
                 float3 targetpos = this.GetBulletTargetPoint(skillS, starAngle + i * delta);
                 Unit unit = UnitFactory.CreateBullet(skillS.TheUnitFrom.Scene(), skillS.TheUnitFrom.Id, skillS.SkillConf.Id, 0, skillS.TheUnitFrom.Position, new CreateMonsterInfo());
-                //unit.AddComponent<RoleBullet1Componnet>().OnBaseBulletInit(this, skillS.TheUnitFrom.Id);
+                unit.AddComponent<RoleBullet1Componet>().OnBaseBulletInit(skillS, skillS.TheUnitFrom.Id);
                 unit.BulletMoveToAsync(targetpos).Coroutine();
             }
             skillS.SkillExcuteNum--;

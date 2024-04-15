@@ -41,13 +41,13 @@ namespace ET.Server
             Function_Fight.UnitUpdateProperty_Base(unit, false, false);
 
             long speed = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_Speed);
-            Log.Debug($"Now_Speed:  {speed}");
             
             switch (request.SceneType)
             {
                 case SceneTypeEnum.MainCityScene:
                     unit.Position = new float3(-10, 0, -10);
                     unit.AddComponent<PathfindingComponent, int>(101);
+                    unit.GetComponent<HeroDataComponentS>().OnReturn();
                     break;
                 case  SceneTypeEnum.LocalDungeon:
                     unit.Position = new float3(-0.72f, 0, -2.57f);

@@ -84,7 +84,7 @@ namespace ET.Server
 
              long unitid = createMonsterInfo.UnitId > 0 ? createMonsterInfo.UnitId : IdGenerater.Instance.GenerateId();
              Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(unitid, 1001);
-             //unit.AddComponent<AttackRecordComponent>();
+             unit.AddComponent<AttackRecordComponent>();
              NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
              HeroDataComponentS heroDataComponent = unit.AddComponent<HeroDataComponentS>();
              UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
@@ -159,7 +159,6 @@ namespace ET.Server
                  {
                      case SceneTypeEnum.LocalDungeon:
                          aIComponent.LocalDungeonUnit = mainUnit;
-                         //aIComponent.LocalDungeonUnitPetComponent = mainUnit.GetComponent<PetComponentServer>();
                          aIComponent.InitMonster(monsterConfig.Id);
                          aIComponent.Begin();
                          break;

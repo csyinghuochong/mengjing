@@ -53,7 +53,7 @@ namespace ET.Client
                 
                 C2M_SkillCmd c2MSkillCmd = new C2M_SkillCmd()
                 {
-                    SkillID = 60000311,
+                    SkillID = 62000503,
                     TargetAngle = (int)math.floor(float3)
                 };
                 self.Root().GetComponent<ClientSenderCompnent>().Send(c2MSkillCmd);
@@ -98,7 +98,7 @@ namespace ET.Client
                 // }
 
                 // 测试技能
-                List<int> skillids = new List<int>() { 77008002 };
+                List<int> skillids = new List<int>() { 62000503 };
                 Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
                 long targetId = self.Root().GetComponent<LockTargetComponent>().LastLockId;
 

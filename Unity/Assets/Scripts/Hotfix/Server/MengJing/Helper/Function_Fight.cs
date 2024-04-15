@@ -1305,6 +1305,7 @@ namespace ET.Server
             //初始化属性
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             //numericComponent.ResetProperty();
+            numericComponent.SetEvent(NumericType.Base_Speed_Base, 0, false);
 
             //缓存列表
             Dictionary<int, long> UpdateProDicList = new Dictionary<int, long>();
@@ -2262,7 +2263,7 @@ namespace ET.Server
                     jianDingPro.Remove(key);
                 }
                 long setValue = numericComponent.GetAsLong(key) + UpdateProDicListCopy[key];
-
+                
                 if (!notice)
                 {
                     numericComponent.SetEvent(key, setValue, false);
@@ -2270,10 +2271,12 @@ namespace ET.Server
                 }
                 if (NumericData.BroadcastType.Contains(key))
                 {
+                    long numType = key / 100;
                     numericComponent.SetEvent(key, setValue, true);
                 }
                 else
                 {
+                    long numType = key / 100;
                     numericComponent.SetEvent(key, setValue, false);
                     keys.Add(key);
                 }

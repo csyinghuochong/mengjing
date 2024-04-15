@@ -30,7 +30,9 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this ET.Client.UIPlayerHpComponent self)
         {
-
+            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+            self.RecoverGameObject(self.GameObject);
+            self.UIXuLieZhenComponent = null;
         }
         
          public static void ShowHearBar(this ET.Client.UIPlayerHpComponent self, bool show)

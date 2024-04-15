@@ -34,7 +34,7 @@ namespace ET.Server
 
             //创建一个Unit添加子弹组件向目标点移动
             Unit unit = UnitFactory.CreateBullet(skillS.TheUnitFrom.Scene(), skillS.TheUnitFrom.Id, skillS.SkillConf.Id, 0, startpos, new CreateMonsterInfo());
-            //unit.AddComponent<RoleBullet1Componnet>().OnBaseBulletInit(this, this.TheUnitFrom.Id);
+            unit.AddComponent<RoleBullet1Componet>().OnBaseBulletInit(skillS, skillS.TheUnitFrom.Id);
             unit.BulletMoveToAsync(targetpos).Coroutine();
 
             this.OnUpdate(skillS, 0);

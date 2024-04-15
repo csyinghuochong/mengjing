@@ -19,7 +19,7 @@ namespace ET.Client
             }
             else
             {
-                args.Unit.GetComponent<FsmComponent>().ChangeState(FsmStateEnum.FsmIdleState);
+                args.Unit.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmIdleState);
             }
 
             //播放移动特效

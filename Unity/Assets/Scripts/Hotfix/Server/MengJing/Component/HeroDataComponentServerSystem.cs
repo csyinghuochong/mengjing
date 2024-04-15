@@ -269,18 +269,15 @@ namespace ET.Server
          {
              Unit unit = self.GetParent<Unit>();
              NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-             numericComponent.Set(NumericType.Now_Dead, 0);
-             numericComponent.Set(NumericType.Now_Damage, 0);
-             numericComponent.Set(NumericType.BossBelongID, 0);
-             numericComponent.Set(NumericType.Now_Shield_HP, 0);
-             numericComponent.Set(NumericType.Now_Shield_MaxHP, 0);
-             numericComponent.Set(NumericType.Now_Shield_DamgeCostPro, 0);
+             numericComponent.SetNoEvent(NumericType.Now_Dead, 0);
+             numericComponent.SetNoEvent(NumericType.Now_Damage, 0);
+             numericComponent.SetNoEvent(NumericType.BossBelongID, 0);
+             numericComponent.SetNoEvent(NumericType.Now_Shield_HP, 0);
+             numericComponent.SetNoEvent(NumericType.Now_Shield_MaxHP, 0);
+             numericComponent.SetNoEvent(NumericType.Now_Shield_DamgeCostPro, 0);
 
-             if (unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_Dead) <= 0)
-             {
-                 long max_hp = self.GetParent<Unit>().GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_MaxHp);
-                 unit.GetComponent<NumericComponentS>().Set(NumericType.Now_Hp, max_hp);
-             }
+             long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
+             unit.GetComponent<NumericComponentS>().SetNoEvent(NumericType.Now_Hp, max_hp);
          }
 
          public static void OnResetPoint(this HeroDataComponentS self)
