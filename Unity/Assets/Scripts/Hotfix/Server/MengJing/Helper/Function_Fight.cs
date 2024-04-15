@@ -1995,23 +1995,22 @@ namespace ET.Server
             double BaseDamgeSub = occBaseDamgeSubAdd + BaseDamgeSub_EquipSuit;
 
             //更新基础属性
-            AddUpdateProDicList((int)NumericType.Base_MaxHp_Base, BaseHp, UpdateProDicList);
-            AddUpdateProDicList((int)NumericType.Base_MinAct_Base, BaseMinAct, UpdateProDicList);
-            AddUpdateProDicList((int)NumericType.Base_MaxAct_Base, BaseMaxAct, UpdateProDicList);
-            AddUpdateProDicList((int)NumericType.Base_Mage_Base, BaseMaxMage, UpdateProDicList);
-            //AddUpdateProDicList((int)NumericType.Base_MaxMage_Base, BaseMaxMage, UpdateProDicList);
-            AddUpdateProDicList((int)NumericType.Base_MinDef_Base, BaseMinDef, UpdateProDicList);
-            AddUpdateProDicList((int)NumericType.Base_MaxDef_Base, BaseMaxDef, UpdateProDicList);
-            AddUpdateProDicList((int)NumericType.Base_MinAdf_Base, BaseMinAdf, UpdateProDicList);
-            AddUpdateProDicList((int)NumericType.Base_MaxAdf_Base, BaseMaxAdf, UpdateProDicList);
-            AddUpdateProDicList((int)NumericType.Base_Speed_Base, (int)(BaseMoveSpeed * 10000), UpdateProDicList);
-            AddUpdateProDicList((int)NumericType.Base_Cri_Base, (int)(BaseCri * 10000), UpdateProDicList);
-            AddUpdateProDicList((int)NumericType.Base_Hit_Base, (int)(BaseHit * 10000), UpdateProDicList);
-            AddUpdateProDicList((int)NumericType.Base_Dodge_Base, (int)(BaseDodge * 10000), UpdateProDicList);
-            AddUpdateProDicList((int)NumericType.Base_ActDamgeSubPro_Base, (int)(BaseDefSub * 10000), UpdateProDicList);
-            AddUpdateProDicList((int)NumericType.Base_MageDamgeSubPro_Base, (int)(BaseAdfSub * 10000), UpdateProDicList);
-            AddUpdateProDicList((int)NumericType.Base_DamgeAddPro_Base, (int)(BaseDamgeAdd * 10000), UpdateProDicList);
-            AddUpdateProDicList((int)NumericType.Base_DamgeSubPro_Base, (int)(BaseDamgeSub * 10000), UpdateProDicList);
+            AddUpdateProDicList(NumericType.Base_MaxHp_Base, BaseHp, UpdateProDicList);
+            AddUpdateProDicList(NumericType.Base_MinAct_Base, BaseMinAct, UpdateProDicList);
+            AddUpdateProDicList(NumericType.Base_MaxAct_Base, BaseMaxAct, UpdateProDicList);
+            AddUpdateProDicList(NumericType.Base_Mage_Base, BaseMaxMage, UpdateProDicList);
+            AddUpdateProDicList(NumericType.Base_MinDef_Base, BaseMinDef, UpdateProDicList);
+            AddUpdateProDicList(NumericType.Base_MaxDef_Base, BaseMaxDef, UpdateProDicList);
+            AddUpdateProDicList(NumericType.Base_MinAdf_Base, BaseMinAdf, UpdateProDicList);
+            AddUpdateProDicList(NumericType.Base_MaxAdf_Base, BaseMaxAdf, UpdateProDicList);
+            AddUpdateProDicList(NumericType.Base_Speed_Base, (int)(BaseMoveSpeed * 10000), UpdateProDicList);
+            AddUpdateProDicList(NumericType.Base_Cri_Base, (int)(BaseCri * 10000), UpdateProDicList);
+            AddUpdateProDicList(NumericType.Base_Hit_Base, (int)(BaseHit * 10000), UpdateProDicList);
+            AddUpdateProDicList(NumericType.Base_Dodge_Base, (int)(BaseDodge * 10000), UpdateProDicList);
+            AddUpdateProDicList(NumericType.Base_ActDamgeSubPro_Base, (int)(BaseDefSub * 10000), UpdateProDicList);
+            AddUpdateProDicList(NumericType.Base_MageDamgeSubPro_Base, (int)(BaseAdfSub * 10000), UpdateProDicList);
+            AddUpdateProDicList(NumericType.Base_DamgeAddPro_Base, (int)(BaseDamgeAdd * 10000), UpdateProDicList);
+            AddUpdateProDicList(NumericType.Base_DamgeSubPro_Base, (int)(BaseDamgeSub * 10000), UpdateProDicList);
 
             //怒气
             if (userInfo.Occ == 3)

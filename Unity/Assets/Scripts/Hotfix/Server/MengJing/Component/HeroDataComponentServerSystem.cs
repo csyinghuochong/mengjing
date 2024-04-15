@@ -711,24 +711,24 @@ namespace ET.Server
              }
 
              //attributeAdd   (boss成长boss加成)
-             numericComponent.SetEvent((int)NumericType.Base_MaxHp_Base, (int)(monsterConfig.Hp * hpCoefficient * attributeAdd), false);
-             numericComponent.SetEvent((int)NumericType.Base_MinAct_Base, (int)(monsterConfig.Act * ackCoefficient * attributeAdd), false);
-             numericComponent.SetEvent((int)NumericType.Base_MaxAct_Base, (int)(monsterConfig.Act * ackCoefficient * attributeAdd), false);
-             numericComponent.SetEvent((int)NumericType.Base_MinDef_Base, monsterConfig.Def, false);
-             numericComponent.SetEvent((int)NumericType.Base_MaxDef_Base, monsterConfig.Def, false);
-             numericComponent.SetEvent((int)NumericType.Base_MinAdf_Base, monsterConfig.Adf, false);
-             numericComponent.SetEvent((int)NumericType.Base_MaxAdf_Base, monsterConfig.Adf, false);
-             numericComponent.SetEvent((int)NumericType.Base_Speed_Base, monsterConfig.MoveSpeed, false);
-             numericComponent.SetEvent((int)NumericType.Base_Cri_Base, monsterConfig.Cri, false);
-             numericComponent.SetEvent((int)NumericType.Base_Res_Base, monsterConfig.Res, false);
-             numericComponent.SetEvent((int)NumericType.Base_Hit_Base, monsterConfig.Hit, false);
-             numericComponent.SetEvent((int)NumericType.Base_Dodge_Base, monsterConfig.Dodge, false);
-             numericComponent.SetEvent((int)NumericType.Base_ActDamgeSubPro_Base, monsterConfig.DefAdd, false);
-             numericComponent.SetEvent((int)NumericType.Base_MageDamgeSubPro_Base, monsterConfig.AdfAdd, false);
-             numericComponent.SetEvent((int)NumericType.Base_DamgeSubPro_Base, monsterConfig.DamgeAdd, false);
+             numericComponent.SetEvent(NumericType.Base_MaxHp_Base, (int)(monsterConfig.Hp * hpCoefficient * attributeAdd), false);
+             numericComponent.SetEvent(NumericType.Base_MinAct_Base, (int)(monsterConfig.Act * ackCoefficient * attributeAdd), false);
+             numericComponent.SetEvent(NumericType.Base_MaxAct_Base, (int)(monsterConfig.Act * ackCoefficient * attributeAdd), false);
+             numericComponent.SetEvent(NumericType.Base_MinDef_Base, monsterConfig.Def, false);
+             numericComponent.SetEvent(NumericType.Base_MaxDef_Base, monsterConfig.Def, false);
+             numericComponent.SetEvent(NumericType.Base_MinAdf_Base, monsterConfig.Adf, false);
+             numericComponent.SetEvent(NumericType.Base_MaxAdf_Base, monsterConfig.Adf, false);
+             numericComponent.SetEvent(NumericType.Base_Speed_Base, monsterConfig.MoveSpeed, false);
+             numericComponent.SetEvent(NumericType.Base_Cri_Base, monsterConfig.Cri, false);
+             numericComponent.SetEvent(NumericType.Base_Res_Base, monsterConfig.Res, false);
+             numericComponent.SetEvent(NumericType.Base_Hit_Base, monsterConfig.Hit, false);
+             numericComponent.SetEvent(NumericType.Base_Dodge_Base, monsterConfig.Dodge, false);
+             numericComponent.SetEvent(NumericType.Base_ActDamgeSubPro_Base, monsterConfig.DefAdd, false);
+             numericComponent.SetEvent(NumericType.Base_MageDamgeSubPro_Base, monsterConfig.AdfAdd, false);
+             numericComponent.SetEvent(NumericType.Base_DamgeSubPro_Base, monsterConfig.DamgeAdd, false);
 
              //设置当前血量
-             numericComponent.SetNoEvent((int)NumericType.Now_Hp,  numericComponent.GetAsInt(NumericType.Now_MaxHp));
+             numericComponent.SetNoEvent(NumericType.Now_Hp,  numericComponent.GetAsInt(NumericType.Now_MaxHp));
              //Log.Debug("初始化当前怪物血量:" + numericComponent.GetAsLong(NumericType.Now_Hp));
          }
 

@@ -1,6 +1,5 @@
 ﻿namespace ET
 {
-	// 这个可弄个配置表生成
     public static class NumericType
     {
         //最小值，小于此值的都被认为是原始属性
@@ -45,7 +44,7 @@
         public const int ChouKaOneTime = 3040;                                     //抽卡在线时间
         public const int ChouKaTenTime = 3041;                                     //抽卡在线时间
         public const int PointLiLiang = 3042;
-        public const int PointZhiLi = 3043;
+        public const int PointZhiLi  = 3043;
         public const int PointTiZhi = 3044;
         public const int PointNaiLi = 3045;
         public const int PointMinJie = 3046;
@@ -69,7 +68,7 @@
         public const int YueKaRemainTimes = 3066;                               //月卡剩余次数                    
         public const int TeamDungeonTimes = 3067;
         public const int Now_AI = 3068;
-        public const int TrialDungeonId = 3069;
+        public const int TrialDungeonId = 3069;                       
         public const int TeamId = 3072;
         public const int BattleTodayKill = 3073;                                   //战场击杀人数
         public const int PetExtendNumber = 3074;                                    //宠物扩展数量
@@ -135,7 +134,7 @@
         public const int SkillUseMP = 3134;                                         //技能怒气
         public const int EquipIndex = 3135;                                         //只有猎人用到（默认为弓箭）
         public const int PetMineBattle = 3136;
-        public const int PetMineLogin = 3137;
+        public const int PetMineLogin = 3137;                                    
         public const int SeasonBossFuben = 3138;                                    //赛季之王出现的副本id
         public const int SeasonBossRefreshTime = 3139;                              //赛季之王出现的时间
         public const int SeasonReward = 3140;                                       //赛季奖励领取的等级
@@ -184,31 +183,12 @@
         public const int Bloodstone = 3183;                                         //血石
         public const int BloodstoneFail = 3184;                                     //血石升级失败
         public const int GemWarehouseOpen = 3185;
+        public const int PaiMaiOpen = 3186;
+        public const int UpdateActivty = 3187;                                     //更新活动
+        public const int MasterPlayerId = 3188;                                          //主人【玩家】
+        public const int PaiMaiTodayGold = 3189;
+        public const int ShenMiDungeonNumber = 3190;
         public const int Max = 10000;
-
-	    public const int Speed = 1000;
-	    public const int SpeedBase = Speed * 10 + 1;
-	    public const int SpeedAdd = Speed * 10 + 2;
-	    public const int SpeedPct = Speed * 10 + 3;
-	    public const int SpeedFinalAdd = Speed * 10 + 4;
-	    public const int SpeedFinalPct = Speed * 10 + 5;
-
-	    public const int Hp = 1001;
-	    public const int HpBase = Hp * 10 + 1;
-
-	    public const int MaxHp = 1002;
-	    public const int MaxHpBase = MaxHp * 10 + 1;
-	    public const int MaxHpAdd = MaxHp * 10 + 2;
-	    public const int MaxHpPct = MaxHp * 10 + 3;
-	    public const int MaxHpFinalAdd = MaxHp * 10 + 4;
-	    public const int MaxHpFinalPct = MaxHp * 10 + 5;
-
-	    public const int AOI = 1003;
-	    public const int AOIBase = AOI * 10 + 1;
-	    public const int AOIAdd = AOI * 10 + 2;
-	    public const int AOIPct = AOI * 10 + 3;
-	    public const int AOIFinalAdd = AOI * 10 + 4;
-	    public const int AOIFinalPct = AOI * 10 + 5;
 
         public const int Now_MaxHp = 1002;                                       //生命总值
         public const int Base_MaxHp_Base = Now_MaxHp * 100 + 1;                  //属性累加
@@ -733,7 +713,7 @@
         public const int Base_FuHuoPro_Add = Now_FuHuoPro * 100 + 3;                   //属性附加
         public const int Extra_Buff_FuHuoPro_Add = Now_FuHuoPro * 100 + 11;            //属性Buff附加加法
         public const int Extra_Buff_FuHuoPro_Mul = Now_FuHuoPro * 100 + 12;            //属性Buff附加乘法
-
+                
         public const int Now_WuShiFangYuPro = 2039;          //当前无视防御
         public const int Base_WuShiFangYuPro_Base = Now_WuShiFangYuPro * 100 + 1;              //属性累加
         public const int Base_WuShiFangYuPro_Mul = Now_WuShiFangYuPro * 100 + 2;               //属性乘法
@@ -845,7 +825,7 @@
         public const int Base_ShuActAddPro_Add = Now_ShuActAddPro * 100 + 3;                   //属性附加
         public const int Extra_Buff_ShuActAddPro_Add = Now_ShuActAddPro * 100 + 11;            //属性Buff附加加法
         public const int Extra_Buff_ShuActAddPro_Mul = Now_ShuActAddPro * 100 + 12;            //属性Buff附加乘法
-
+  
         public const int Now_ActReboundDamgePro = 2055;          //当前攻击反弹伤害比例
         public const int Base_ActReboundDamgePro_Base = Now_ActReboundDamgePro * 100 + 1;              //属性累加
         public const int Base_ActReboundDamgePro_Mul = Now_ActReboundDamgePro * 100 + 2;               //属性乘法
@@ -1051,7 +1031,7 @@
         public const int Base_ExpAdd_Pro_Add = Now_ExpAdd_Pro * 100 + 3;                   //属性附加
         public const int Extra_Buff_ExpAdd_Pro_Add = Now_ExpAdd_Pro * 100 + 11;            //属性Buff附加加法
         public const int Extra_Buff_ExpAdd_Pro_Mul = Now_ExpAdd_Pro * 100 + 12;            //属性Buff附加乘法
-
+        
 
         public const int Now_DropAdd_Pro = 2203;          //爆率收益
         public const int Base_DropAdd_Pro_Base = Now_DropAdd_Pro * 100 + 1;                  //属性累加
@@ -1060,33 +1040,40 @@
         public const int Extra_Buff_DropAdd_Pro_Add = Now_DropAdd_Pro * 100 + 11;            //属性Buff附加加法
         public const int Extra_Buff_DropAdd_Pro_Mul = Now_DropAdd_Pro * 100 + 12;            //属性Buff附加乘法
 
+        public const int AOI = 2204;
+        public const int AOIBase = AOI * 10 + 1;
+        public const int AOIAdd = AOI * 10 + 2;
+        public const int AOIPct = AOI * 10 + 3;
+        public const int AOIFinalAdd = AOI * 10 + 4;
+        public const int AOIFinalPct = AOI * 10 + 5;
+        
         public const int Now_MonsterActIncreaseDamgeSubPro = 2230;          //怪攻增伤
         public const int Base_MonsterActIncreaseDamgeSubPro_Base = Now_MonsterActIncreaseDamgeSubPro * 100 + 1;              //属性累加
         public const int Base_MonsterActIncreaseDamgeSubPro_Mul = Now_MonsterActIncreaseDamgeSubPro * 100 + 2;               //属性乘法
         public const int Base_MonsterActIncreaseDamgeSubPro_Add = Now_MonsterActIncreaseDamgeSubPro * 100 + 3;                   //属性附加
         public const int Extra_MonsterActIncreaseDamgeSubPro_Add = Now_MonsterActIncreaseDamgeSubPro * 100 + 11;            //属性Buff附加加法
-        public const int Extra_MonsterActIncreaseDamgeSubPro_Mul = Now_MonsterActIncreaseDamgeSubPro * 100 + 12;
+        public const int Extra_MonsterActIncreaseDamgeSubPro_Mul = Now_MonsterActIncreaseDamgeSubPro * 100 + 12;    
 
         public const int Now_MonsterMageIncreaseDamgeSubPro = 2231;          //怪技增伤
         public const int Base_MonsterMageIncreaseDamgeSubPro_Base = Now_MonsterMageIncreaseDamgeSubPro * 100 + 1;              //属性累加
         public const int Base_MonsterMageIncreaseDamgeSubPro_Mul = Now_MonsterMageIncreaseDamgeSubPro * 100 + 2;               //属性乘法
         public const int Base_MonsterMageIncreaseDamgeSubPro_Add = Now_MonsterMageIncreaseDamgeSubPro * 100 + 3;                   //属性附加
         public const int Extra_MonsterMageIncreaseDamgeSubPro_Add = Now_MonsterMageIncreaseDamgeSubPro * 100 + 11;            //属性Buff附加加法
-        public const int Extra_MonsterMageIncreaseDamgeSubPro_Mul = Now_MonsterMageIncreaseDamgeSubPro * 100 + 12;
+        public const int Extra_MonsterMageIncreaseDamgeSubPro_Mul = Now_MonsterMageIncreaseDamgeSubPro * 100 + 12; 
 
         public const int Now_MonsterActReduceDamgeSubPro = 2232;          //怪攻减伤
         public const int Base_MonsterActReduceDamgeSubPro_Base = Now_MonsterActReduceDamgeSubPro * 100 + 1;              //属性累加
         public const int Base_MonsterActReduceDamgeSubPro_Mul = Now_MonsterActReduceDamgeSubPro * 100 + 2;               //属性乘法
         public const int Base_MonsterActReduceDamgeSubPro_Add = Now_MonsterActReduceDamgeSubPro * 100 + 3;                   //属性附加
         public const int Extra_MonsterActReduceDamgeSubPro_Add = Now_MonsterActReduceDamgeSubPro * 100 + 11;            //属性Buff附加加法
-        public const int Extra_MonsterActReduceDamgeSubPro_Mul = Now_MonsterActReduceDamgeSubPro * 100 + 12;
-
+        public const int Extra_MonsterActReduceDamgeSubPro_Mul = Now_MonsterActReduceDamgeSubPro * 100 + 12;    
+        
         public const int Now_MonsterMageReduceDamgeSubPro = 2233;          //怪技减伤
         public const int Base_MonsterMageReduceDamgeSubPro_Base = Now_MonsterMageReduceDamgeSubPro * 100 + 1;              //属性累加
         public const int Base_MonsterMageReduceDamgeSubPro_Mul = Now_MonsterMageReduceDamgeSubPro * 100 + 2;               //属性乘法
         public const int Base_MonsterMageReduceDamgeSubPro_Add = Now_MonsterMageReduceDamgeSubPro * 100 + 3;                   //属性附加
         public const int Extra_MonsterMageReduceDamgeSubPro_Add = Now_MonsterMageReduceDamgeSubPro * 100 + 11;            //属性Buff附加加法
-        public const int Extra_MonsterMageReduceDamgeSubPro_Mul = Now_MonsterMageReduceDamgeSubPro * 100 + 12;
+        public const int Extra_MonsterMageReduceDamgeSubPro_Mul = Now_MonsterMageReduceDamgeSubPro * 100 + 12; 
 
         //宠物全体暴击
         public const int Now_PetAllCri = 2301;         //宠物全体暴击
@@ -1169,5 +1156,6 @@
         public const int Max_SkillUseMP_Add = Max_SkillUseMP * 100 + 3;                     //属性附加
         public const int Extra__SkillUseMP_Add = Max_SkillUseMP * 100 + 11;              //属性Buff附加加法
         public const int Extra__SkillUseMP_Mul = Max_SkillUseMP * 100 + 12;              //属性Buff附加乘法
+        
     }
 }

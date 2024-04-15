@@ -37,6 +37,8 @@ namespace ET.Server
             unit.AddComponent<AttackRecordComponent>();
             unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
             unit.GetComponent<DBSaveComponent>().Activeted();
+            
+            Function_Fight.UnitUpdateProperty_Base(unit, false, false);
             switch (request.SceneType)
             {
                 case SceneTypeEnum.MainCityScene:
