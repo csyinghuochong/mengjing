@@ -48,14 +48,10 @@ namespace ET.Server
             }
 
             M2C_PathfindingResult m2CPathfindingResult = new();
-            unit.GetComponent<PathfindingComponent>().Find(unit.Position, target, m2CPathfindingResult.Points);
+            m2CPathfindingResult.Points.Add(unit.Position);
+            m2CPathfindingResult.Points.Add(unit.Position + (target - unit.Position) * 0.5f);
+            m2CPathfindingResult.Points.Add(target);
 
-            if (m2CPathfindingResult.Points.Count < 2)
-            {
-                unit.SendStop(3);
-                return;
-            }
-                
             // 广播寻路路径
             m2CPathfindingResult.Id = unit.Id;
             MapMessageHelper.Broadcast(unit, m2CPathfindingResult);
