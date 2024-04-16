@@ -15,8 +15,10 @@ namespace ET.Client
                 return;
             }
 
-            Transform transform = gameObjectComponent.GameObject.transform;
-            transform.position = unit.Position;
+            //Transform transform = gameObjectComponent.GameObject.transform;
+            //transform.position = unit.Position;
+            unit.GetComponent<GameObjectComponent>()?.UpdatePositon(unit.Position);
+            unit.GetComponent<EffectViewComponent>()?.UpdatePositon();
 
             //主角
             if (unit.MainHero)

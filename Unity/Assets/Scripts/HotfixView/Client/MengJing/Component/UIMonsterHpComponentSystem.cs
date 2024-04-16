@@ -386,7 +386,7 @@ namespace ET.Client
                      self.UIPlayerHpText.transform.SetParent(gameobject.transform);
                  }
                     
-                 GameObjectPoolComponent.Instance.RecoverGameObject(self.HeadBarPath, gameobject);
+                 GameObjectPoolComponent.Instance?.RecoverGameObject(self.HeadBarPath, gameobject);
                  self.GameObject = null;
              }
          }
