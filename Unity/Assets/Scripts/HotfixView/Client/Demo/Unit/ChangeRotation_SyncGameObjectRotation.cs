@@ -13,7 +13,7 @@ namespace ET.Client
             {
                 return;
             }
-            gameObjectComponent.SetRotation(unit.Rotation);
+            gameObjectComponent.UpdateRotation(unit.Rotation);
             await ETTask.CompletedTask;
         }
     }

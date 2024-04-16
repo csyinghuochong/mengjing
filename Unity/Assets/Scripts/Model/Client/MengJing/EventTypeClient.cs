@@ -250,4 +250,14 @@ namespace ET.Client
         public Scene ZoneScene;
         public Unit Unit;
     }
+    
+    //更新血量
+    public struct UnitHpUpdate
+    {
+        public Unit Attack;
+        public Unit Defend;
+        public int SkillID;
+        public int DamgeType;
+        public long ChangeHpValue;
+    }
 }

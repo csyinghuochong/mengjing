@@ -1068,12 +1068,5 @@ namespace ET.Client
                 self.ExitHide();
             }
         }
-
-        public static void SetRotation(this GameObjectComponent self, Quaternion quaternion)
-        {
-            Transform transform = self.GameObject.transform;
-            transform.rotation = quaternion;
-        }
-
     }
 }

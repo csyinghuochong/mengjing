@@ -1010,7 +1010,7 @@ namespace ET.Server
                         damge = (long)((float)damge * criDamge);
                         
                         //闪避触发被动技能
-                        //attackUnit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.Critical_4, defendUnit.Id);
+                        attackUnit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.Critical_4, defendUnit.Id);
                     }
                     
                     //是否触发秒杀
@@ -1030,7 +1030,7 @@ namespace ET.Server
                         int dunDamge = (int)((float)damge * shield_pro);
                         damge -= dunDamge;
                         damge = Math.Max(0, damge);
-                        //numericComponentDefend.ApplyChange(attackUnit, NumericType.Now_Shield_HP, -1 * dunDamge, skillconfig.Id, true, DamgeType);
+                        numericComponentDefend.ApplyChange(attackUnit, NumericType.Now_Shield_HP, -1 * dunDamge, skillconfig.Id, true, DamgeType);
                     }
 
                     //吸血处理(普通攻击触发吸血)
@@ -1040,7 +1040,7 @@ namespace ET.Server
                         if (hushi > 0f)
                         {
                             int addHp = (int)((float)damge * hushi);
-                            //numericComponentAttack.ApplyChange(attackUnit, NumericType.Now_Hp, addHp, 0);
+                            numericComponentDefend.ApplyChange(attackUnit, NumericType.Now_Hp, addHp, 0);
                         }
                     }
 
@@ -1049,7 +1049,7 @@ namespace ET.Server
                     if (xixueAll > 0f)
                     {
                         int addHp = (int)((float)damge * xixueAll);
-                        //numericComponentAttack.ApplyChange(attackUnit, NumericType.Now_Hp, addHp, 0);
+                        numericComponentAttack.ApplyChange(attackUnit, NumericType.Now_Hp, addHp, 0);
                     }
 
                     damge *= -1;
@@ -1060,7 +1060,7 @@ namespace ET.Server
                 }
                 if (defendUnit.Type == UnitType.Monster && ifMonsterBoss_Act)
                 {
-                    //defendUnit.GetComponent<AttackRecordComponent>().BeAttacking(attackUnit, damge);
+                    defendUnit.GetComponent<AttackRecordComponent>().BeAttacking(attackUnit, damge);
                 }
                 if (DamgeType == 0)
                 {
@@ -1075,14 +1075,14 @@ namespace ET.Server
                     if (RandomHelper.RandFloat01() < numericComponentDefend.GetAsFloat(NumericType.Now_FuHuoPro))
                     {
                         //复活存在30%的血量
-                        //defendUnit.GetComponent<BuffManagerComponent>().UpdateFuHuoStatus();
-                        //numericComponentDefend.ApplyChange(null, NumericType.Now_Hp, (int)(numericComponentAttack.GetAsInt(NumericType.Now_MaxHp) * 0.3f), 0);
+                        defendUnit.GetComponent<BuffManagerComponentS>().UpdateFuHuoStatus();
+                        numericComponentDefend.ApplyChange(null, NumericType.Now_Hp, (int)(numericComponentAttack.GetAsInt(NumericType.Now_MaxHp) * 0.3f), 0);
                     }
                     else if (RandomHelper.RandFloat01() < numericComponentDefend.GetAsFloat(NumericType.Now_ShenYouPro))
                     {
                         //神佑存在100%的血量
-                        //defendUnit.GetComponent<BuffManagerComponent>().UpdateFuHuoStatus();
-                        //numericComponentDefend.ApplyChange(null, NumericType.Now_Hp, (int)(numericComponentAttack.GetAsInt(NumericType.Now_MaxHp) * 1f), 0);
+                        defendUnit.GetComponent<BuffManagerComponentS>().UpdateFuHuoStatus();
+                        numericComponentDefend.ApplyChange(null, NumericType.Now_Hp, (int)(numericComponentAttack.GetAsInt(NumericType.Now_MaxHp) * 1f), 0);
                     }
                     else
                     {
@@ -1093,12 +1093,12 @@ namespace ET.Server
                 if (numericComponentDefend.GetAsFloat(NumericType.Now_ActReboundDamgePro) > 0 && skillconfig.DamgeType == 1)
                 {
                     int fantanValue = (int)((float)damge * numericComponentDefend.GetAsFloat(NumericType.Now_ActReboundDamgePro));
-                    //numericComponentAttack.ApplyChange(attackUnit, NumericType.Now_Hp, fantanValue, skillconfig.Id, true, DamgeType);
+                    numericComponentAttack.ApplyChange(attackUnit, NumericType.Now_Hp, fantanValue, skillconfig.Id, true, DamgeType);
                 }
                 if (attackUnit.IsDisposed == false)
                 {
                     //设置目标当前
-                    //numericComponentDefend.ApplyChange(attackUnit, NumericType.Now_Hp, damge, skillconfig.Id, true, DamgeType);
+                    numericComponentDefend.ApplyChange(attackUnit, NumericType.Now_Hp, damge, skillconfig.Id, true, DamgeType);
 
                     //攻击方反弹即将死亡
                     if (numericComponentAttack.GetAsInt(NumericType.Now_Hp) <= 0)
@@ -1110,10 +1110,10 @@ namespace ET.Server
             {
                 //设置伤害为0,用于伤害飘字
                 long now_hp = numericComponentDefend.GetAsLong(NumericType.Now_Hp);
-                //numericComponentDefend.ApplyValue(attackUnit, NumericType.Now_Hp, now_hp, 0);
+                numericComponentDefend.ApplyValue(attackUnit, NumericType.Now_Hp, now_hp, 0);
 
                 //闪避触发被动技能
-                //defendUnit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.ShanBi_5, attackUnit.Id);
+                defendUnit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.ShanBi_5, attackUnit.Id);
             }
             return ifHit;
         }
