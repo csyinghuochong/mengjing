@@ -13,13 +13,18 @@ namespace ET
         {
 
         }
+        
+        [EntitySystem]
+        private static void Destroy(this ET.UnitInfoComponent self)
+        {
 
+        }
 
-        public  static List<long> GetZhaoHuanList(this ET.UnitInfoComponent self)
+        public static List<long> GetZhaoHuanList(this ET.UnitInfoComponent self)
         {
             return self.ZhaohuanIds;
         }
-        
+
         public static int GetZhaoHuanNumber(this UnitInfoComponent self, UnitComponent unitComponent)
         {
             int number = 0;
@@ -34,6 +39,7 @@ namespace ET
             }
             return number;
         }
+       
     }
 
 }

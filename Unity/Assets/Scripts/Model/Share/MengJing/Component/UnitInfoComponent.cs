@@ -6,7 +6,7 @@ namespace ET
 {
     
     [ComponentOf(typeof(Unit))]
-    public class UnitInfoComponent : Entity, IAwake
+    public class UnitInfoComponent : Entity, IAwake, ITransfer, IDestroy
     {
 
         public int EnergySkillId { get; set; }

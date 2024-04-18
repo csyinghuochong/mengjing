@@ -177,7 +177,7 @@ namespace ET.Client
 				self.Animator.Play(motionType);
 				return;
             }
-
+            
             bool hasAction = self.Animator.HasState(0,Animator.StringToHash(motionType));
 			if (hasAction)
 			{
