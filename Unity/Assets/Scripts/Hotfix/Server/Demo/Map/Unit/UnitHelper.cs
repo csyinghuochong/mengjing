@@ -38,7 +38,47 @@ namespace ET.Server
             {
                 unitInfo.KV.Add(key, value);
             }
-
+            
+            UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
+            switch (unit.Type)
+            {
+                case UnitType.Player:
+                    //携带的buff
+                    unitInfo.Buffs = unit.GetComponent<BuffManagerComponentS>().GetMessageBuff();
+                    unitInfo.Skills = unit.GetComponent<SkillManagerComponentS>().GetMessageSkill();
+                    //设置数据
+                    UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
+                    unitInfo.UnitName = userInfoComponent.UserInfo.Name;
+                    unitInfo.ConfigId = userInfoComponent.UserInfo.Occ;
+                    unitInfo.UnionName = string.IsNullOrWhiteSpace(userInfoComponent.UserInfo.UnionName) ? string.Empty : userInfoComponent.UserInfo.UnionName;
+                    unitInfo.DemonName = unitInfoComponent.DemonName;
+                    unitInfo.FashionEquipList = unit.GetComponent<BagComponentS>().FashionEquipList;
+                    break;
+                case UnitType.JingLing:
+                    unitInfo.MasterName = unitInfoComponent.MasterName;
+                    unitInfo.UnitName = unitInfoComponent.UnitName;
+                    break;
+                case UnitType.Pasture:
+                case UnitType.Plant:
+                    unitInfo.MasterName = unitInfoComponent.MasterName;
+                    unitInfo.UnitName = unitInfoComponent.UnitName;
+                    break;
+                case UnitType.Pet:
+                    unitInfo.MasterName = unit.GetComponent<UnitInfoComponent>().MasterName;
+                    unitInfo.UnitName = unit.GetComponent<UnitInfoComponent>().UnitName;
+                    break;
+                case UnitType.Bullet:
+                    unitInfo.UnitName = unit.GetComponent<UnitInfoComponent>().UnitName;
+                    break;
+                case UnitType.Stall:
+                    unitInfo.UnitName = unit.GetComponent<UnitInfoComponent>().UnitName;
+                    break;
+                case UnitType.Npc:
+                    break;
+                default:
+                    break;
+            }
+            
             return unitInfo;
         }
         

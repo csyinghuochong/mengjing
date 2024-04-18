@@ -46,10 +46,10 @@ namespace ET.Client
             unit.AddComponent<SingingComponent>();
             unit.AddComponent<MoveComponent>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
-            // unitInfoComponent.UnitName = unitInfo.UnitName;
-            // unitInfoComponent.MasterName = unitInfo.MasterName;
-            // unitInfoComponent.UnionName = unitInfo.UnionName;
-            // unitInfoComponent.FashionEquipList = unitInfo.FashionEquipList;
+            unitInfoComponent.UnitName = unitInfo.UnitName;
+            unitInfoComponent.MasterName = unitInfo.MasterName;
+            unitInfoComponent.UnionName = unitInfo.UnionName;
+            unitInfoComponent.FashionEquipList = unitInfo.FashionEquipList;
 
             unit.Position = unitInfo.Position;
             unit.Forward = unitInfo.Forward;

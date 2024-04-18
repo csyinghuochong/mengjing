@@ -61,6 +61,16 @@ message UnitInfo
 	Unity.Mathematics.float3 Forward = 5;
 	map<int32, int64> KV = 6;
 	MoveInfo MoveInfo = 7;
+
+	repeated KeyValuePair Buffs = 19;
+	repeated SkillInfo Skills = 20;
+
+	string UnitName = 21;		//自身名字
+	string MasterName = 22;		//主人名字
+	string UnionName = 24;
+	string DemonName = 25;          //
+
+	repeated int32 FashionEquipList = 26;
 }
 
 message M2C_CreateUnits // IMessage

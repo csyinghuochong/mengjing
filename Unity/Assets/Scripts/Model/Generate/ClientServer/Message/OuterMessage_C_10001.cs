@@ -242,6 +242,27 @@ namespace ET
 		[MemoryPackOrder(6)]
 		public MoveInfo MoveInfo { get; set; }
 
+		[MemoryPackOrder(18)]
+		public List<KeyValuePair> Buffs { get; set; } = new();
+
+		[MemoryPackOrder(19)]
+		public List<SkillInfo> Skills { get; set; } = new();
+
+		[MemoryPackOrder(20)]
+		public string UnitName { get; set; }
+
+		[MemoryPackOrder(21)]
+		public string MasterName { get; set; }
+
+		[MemoryPackOrder(23)]
+		public string UnionName { get; set; }
+
+		[MemoryPackOrder(24)]
+		public string DemonName { get; set; }
+
+		[MemoryPackOrder(25)]
+		public List<int> FashionEquipList { get; set; } = new();
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -252,6 +273,13 @@ namespace ET
 			this.Forward = default;
 			this.KV.Clear();
 			this.MoveInfo = default;
+			this.Buffs.Clear();
+			this.Skills.Clear();
+			this.UnitName = default;
+			this.MasterName = default;
+			this.UnionName = default;
+			this.DemonName = default;
+			this.FashionEquipList.Clear();
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
