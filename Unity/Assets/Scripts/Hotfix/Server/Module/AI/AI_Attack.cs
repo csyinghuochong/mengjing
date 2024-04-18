@@ -58,7 +58,7 @@ namespace ET.Server
                     }
                     else
                     {
-                        float ange = math.radians(math.atan2(direction.x, direction.z));
+                        float ange = math.degrees(math.atan2(direction.x, direction.z));
                         cmd.TargetAngle = (int)math.floor(ange);
                         cmd.TargetDistance = math.distance(unit.Position, target.Position);
                     }
@@ -72,7 +72,7 @@ namespace ET.Server
                 }
 
                 // 因为协程可能被中断，任何协程都要传入cancellationToken，判断如果是中断则要返回
-                await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(200, cancellationToken);
+                await aiComponent.Root().GetComponent<TimerComponent>().WaitAsync(200 * 100, cancellationToken);
                 if (cancellationToken.IsCancel())
                 {
                     return;

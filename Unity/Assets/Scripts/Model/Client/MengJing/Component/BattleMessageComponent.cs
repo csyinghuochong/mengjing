@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ET.Client;
 
 namespace ET
 {
@@ -42,10 +43,11 @@ namespace ET
         public int FirstWinBossId;
 
         public bool ShowPetChouKaGet { get; set; } = false;
-        //public List<EventType.RolePetAdd> RolePetAdds = new List<EventType.RolePetAdd>();
-
+        public List<RolePetAdd> RolePetAdds = new List<RolePetAdd>();
         public Dictionary<long, long> OneChallengeTime = new Dictionary<long, long>();
 
         public List<long> AttackSelfPlayer = new List<long>();
+        
+        public long LastPopularize_ListTime = 0;
     }
 }
