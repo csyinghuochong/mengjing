@@ -220,7 +220,7 @@ namespace ET.Server
                   case (int)SkillTargetType.MulTarget:
                       int targetNum = int.Parse( skillConfig.GameObjectParameter);
                       float range = (float)skillConfig.SkillRangeSize;
-                      List<long> targetIds = AIHelp.GetNearestEnemyByNumber(unit, range, targetNum);
+                      List<long> targetIds = GetTargetHelp.GetNearestEnemyByNumber(unit, range, targetNum);
                       if (!targetIds.Contains(skillcmd.TargetID) && skillcmd.TargetID > 0)
                       {
                           targetIds.Insert(0, skillcmd.TargetID);

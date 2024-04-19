@@ -68,7 +68,7 @@ namespace ET.Server
             }
             else
             {
-                nearestEnemy = AIHelp.GetNearestEnemy(unit, aiComponent.ActRange, true); ;
+                nearestEnemy = GetTargetHelp.GetNearestEnemy(unit, aiComponent.ActRange, true); ;
             } 
             if (nearestEnemy == null)
             {

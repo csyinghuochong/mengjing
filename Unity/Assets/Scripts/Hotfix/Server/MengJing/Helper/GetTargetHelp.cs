@@ -5,7 +5,7 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    public static class AIHelp
+    public static class GetTargetHelp
     {
         /// <summary>
         /// 服务器使用。不需要找最近的
