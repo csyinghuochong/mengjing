@@ -40,6 +40,7 @@ namespace ET.Client
         {
             self.ExternalReferences.Clear();
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+            GameObjectPoolComponent.Instance = null;
         }
 
         public static void OnUpdate(this GameObjectPoolComponent self)

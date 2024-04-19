@@ -26,13 +26,13 @@ namespace ET.Client
             Scene currentScene = root.GetComponent<CurrentScenesComponent>().Scene;
             return currentScene.GetComponent<UnitComponent>().Get(playerComponent.MyId);
         }
-        
+
         public static Unit GetUnitFromZoneSceneByID(Scene zoneScene, long id)
         {
             Scene currentScene = zoneScene.GetComponent<CurrentScenesComponent>().Scene;
             return currentScene.GetComponent<UnitComponent>().Get(id);
         }
-        
+
         public static Unit GetMyUnitFromCurrentScene(Scene currentScene)
         {
             PlayerComponent playerComponent = currentScene.Root().GetComponent<PlayerComponent>();
@@ -60,56 +60,272 @@ namespace ET.Client
                 numericComponent.GetAsFloat(NumericType.Born_Y),
                 numericComponent.GetAsFloat(NumericType.Born_Z));
         }
-        
+
         public static bool IsChest(this Unit self)
         {
             if (self.Type != UnitType.Monster)
             {
                 return false;
             }
+
             int sonType = MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterSonType;
             return sonType == 55 || sonType == 56 || sonType == 57;
         }
-        
+
         public static int GetEquipType(Scene root)
         {
             Unit unit = GetMyUnitFromClientScene(root);
             int itemId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Weapon);
             return ItemHelper.GetEquipType(unit.ConfigId, itemId);
         }
-        
+
         public static bool IsRobot(this Unit self)
         {
             return self.Root().GetComponent<UserInfoComponentC>().UserInfo.RobotId > 0;
         }
-        
-        
+
         public static int GetMonsterType(this Unit self)
         {
             return MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterType;
         }
-        
+
         public static long GetMasterId(this Unit self)
         {
             if (self.Type == UnitType.Player)
             {
                 return self.Id;
             }
-            if (self.Type == UnitType.Pet || self.Type == UnitType.Monster 
+
+            if (self.Type == UnitType.Pet || self.Type == UnitType.Monster
                 || self.Type == UnitType.JingLing || self.Type == UnitType.Pasture)
             {
                 return self.GetComponent<NumericComponentC>().GetAsLong(NumericType.MasterId);
             }
+
             return 0;
         }
-        
+
         public static bool IsBoss(this Unit self)
         {
             if (self.Type != UnitType.Monster)
             {
                 return false;
             }
+
             return self.GetMonsterType() == MonsterTypeEnum.Boss;
+        }
+
+        public static bool IsYeWaiMonster(this Unit self)
+        {
+            return self.Type == UnitType.Monster && self.GetComponent<NumericComponentC>().GetAsLong(NumericType.MasterId) == 0;
+        }
+
+        public static int GetBattleCamp(this Unit self)
+        {
+            return self.GetComponent<NumericComponentC>().GetAsInt(NumericType.BattleCamp);
+        }
+
+        public static long GetTeamId(this Unit self)
+        {
+            return self.GetComponent<NumericComponentC>().GetAsInt(NumericType.TeamId);
+        }
+
+        public static bool IsSameTeam(this Unit self, Unit other)
+        {
+            if (self.Id == other.Id)
+            {
+                return true;
+            }
+
+            long teamid_1 = self.GetTeamId();
+            long teamid_2 = other.GetTeamId();
+            return teamid_1 == teamid_2 && teamid_1 != 0;
+        }
+
+        public static long GetUnionId(this Unit self)
+        {
+            return self.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
+        }
+
+        public static bool IsSameUnion(this Unit self, Unit other)
+        {
+            long teamid_1 = self.GetUnionId();
+            long teamid_2 = other.GetUnionId();
+            return teamid_1 == teamid_2 && teamid_1 != 0;
+        }
+
+        public static int GetAttackMode(this Unit self)
+        {
+            return self.GetComponent<NumericComponentC>().GetAsInt(NumericType.AttackMode);
+        }
+
+        public static bool IsMasterOrPet(this Unit self, Unit defend, PetComponentC petComponent)
+        {
+            long masterId = self.GetComponent<NumericComponentC>().GetAsLong(NumericType.MasterId);
+            long othermaster = defend.GetComponent<NumericComponentC>().GetAsLong(NumericType.MasterId);
+            if (self.Type != UnitType.Player && masterId == defend.Id)
+            {
+                return true;
+            }
+
+            if (self.Type == UnitType.Player && othermaster == self.Id)
+            {
+                return true;
+            }
+
+            if (masterId > 0 && masterId == othermaster)
+            {
+                return true;
+            }
+
+            if (self.Type == UnitType.Player && petComponent.GetFightPetId() == defend.Id)
+            {
+                return true;
+            }
+
+            return self.Id == defend.Id;
+        }
+
+        //己方位置
+        public static Unit GetNearestEnemy_Client(Unit main, float maxdis)
+        {
+            Unit nearest = null;
+            float distance = -1f;
+            List<Unit> units = main.GetParent<UnitComponent>().GetAll();
+            for (int i = 0; i < units.Count; i++)
+            {
+                Unit unit = units[i];
+                if (unit.IsDisposed || main.Id == unit.Id)
+                {
+                    continue;
+                }
+
+                float dd = PositionHelper.Distance2D(main.Position, unit.Position);
+                if (dd > maxdis || !main.IsCanAttackUnit(unit))
+                {
+                    continue;
+                }
+
+                //找到目标直接跳出来
+                if (dd < distance || distance < 0f)
+                {
+                    distance = dd;
+                    nearest = unit;
+                }
+            }
+
+            return nearest;
+        }
+        
+        public static bool IsCanAttackUnit(this Unit self, Unit defend, bool checkdead = true)
+        {
+            if (self.Id == defend.Id)
+            {
+                return false;
+            }
+
+            if (!defend.IsCanBeAttack(checkdead))
+            {
+                return false;
+            }
+
+            MapComponent mapComponent = defend.Root().GetComponent<MapComponent>();
+            PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
+
+            if (mapComponent.SceneType != SceneTypeEnum.Battle
+                && self.IsYeWaiMonster() && defend.IsYeWaiMonster())
+            {
+                return false;
+            }
+
+            if (mapComponent.SceneType == (int)SceneTypeEnum.PetDungeon
+                || mapComponent.SceneType == (int)SceneTypeEnum.PetTianTi
+                || mapComponent.SceneType == (int)SceneTypeEnum.PetMing)
+            {
+                if (self.Type == UnitType.Player)
+                {
+                    return self.GetBattleCamp() != defend.GetBattleCamp();
+                }
+                else
+                {
+                    return defend.Type != UnitType.Player && self.GetBattleCamp() != defend.GetBattleCamp();
+                }
+            }
+
+            if (mapComponent.SceneType == (int)SceneTypeEnum.BaoZang
+                || mapComponent.SceneType == (int)SceneTypeEnum.MiJing)
+            {
+                //0不允许pvp
+                if (SceneConfigCategory.Instance.Get(mapComponent.SceneId).IfPVP == 0)
+                {
+                    return self.GetBattleCamp() != defend.GetBattleCamp() && !self.IsSameTeam(defend);
+                }
+
+                //0全体: 对全部造成伤害
+                //1队伍 : 对自己队伍之外的人和怪造成伤害
+                //2家族：对自己家族外的人和怪造成伤害
+                //3和平：对任何人都不造成伤害
+                int attackmode = self.GetAttackMode();
+                if (attackmode == 1 && self.IsSameTeam(defend))
+                {
+                    return false;
+                }
+
+                if (attackmode == 2 && self.IsSameUnion(defend))
+                {
+                    return false;
+                }
+
+                if (attackmode == 3 && defend.Type == UnitType.Player)
+                {
+                    return false;
+                }
+
+                //允许pk地图
+                return !self.IsMasterOrPet(defend, petComponent);
+            }
+
+            if (mapComponent.SceneType == SceneTypeEnum.UnionRace)
+            {
+                if (self.IsSameUnion(defend))
+                {
+                    return false;
+                }
+
+                if (self.IsMasterOrPet(defend, petComponent))
+                {
+                    return false;
+                }
+
+                return true;
+            }
+
+            if (mapComponent.SceneType == SceneTypeEnum.Union)
+            {
+                return self.GetBattleCamp() != defend.GetBattleCamp();
+            }
+
+            if (mapComponent.SceneType == (int)SceneTypeEnum.Arena
+                || mapComponent.SceneType == (int)SceneTypeEnum.Solo
+                || mapComponent.SceneType == SceneTypeEnum.RunRace
+                || mapComponent.SceneType == SceneTypeEnum.OneChallenge)
+            {
+                //允许pk地图
+                return !self.IsMasterOrPet(defend, petComponent);
+            }
+
+            if (mapComponent.SceneType == (int)SceneTypeEnum.Battle
+                || mapComponent.SceneType == SceneTypeEnum.Demon)
+            {
+                return self.GetBattleCamp() != defend.GetBattleCamp();
+            }
+
+            if (mapComponent.SceneType == (int)SceneTypeEnum.JiaYuan)
+            {
+                return false;
+            }
+
+            return self.GetBattleCamp() != defend.GetBattleCamp() && !self.IsSameTeam(defend);
         }
     }
 }

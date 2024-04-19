@@ -55,13 +55,16 @@ namespace ET.Client
             {
                 case UnitType.Player:
                     UIPlayerHpComponent heroHeadBarComponent = unitDefend.GetComponent<UIPlayerHpComponent>();
-                    HpGameObject = heroHeadBarComponent.GameObject;
-                    heroHeadBarComponent.UpdateBlood();
+                    if (heroHeadBarComponent != null)
+                    {
+                        HpGameObject = heroHeadBarComponent.GameObject;
+                        heroHeadBarComponent.UpdateBlood();
+                    }
                     break;
             }
            
             bool showfloattext = unitAttack != null && UnitHelper.GetMasterId(unitAttack) == myunitid;
-            if (HpGameObject!= null && unitDefend.MainHero || UnitHelper.GetMasterId(unitDefend) == myunitid || showfloattext)
+            if (HpGameObject!= null && ( unitDefend.MainHero || UnitHelper.GetMasterId(unitDefend) == myunitid || showfloattext) )
             {
                 FallingFontComponent fallingFontComponent = unitDefend.Root().GetComponent<FallingFontComponent>();
                 //触发飘字

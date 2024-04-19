@@ -1,48 +1,12 @@
 using System;
 using System.Collections.Generic;
+using ET.Client;
 using Unity.Mathematics;
 
-namespace ET
+namespace ET.Server
 {
     public static class AIHelp
     {
-        //己方位置
-      
-        public static bool IsCanAttackUnit(this Unit self, Unit defend, bool checkdead = true)
-        {
-            return true;
-        }
-
-        public static Unit GetNearestEnemy_Client(Unit main, float maxdis)
-        {
-            Unit nearest = null;
-            float distance = -1f;
-            List<Unit> units = main.GetParent<UnitComponent>().GetAll();
-            for (int i = 0; i < units.Count; i++)
-            {
-                Unit unit = units[i];
-                if (unit.IsDisposed || main.Id == unit.Id)
-                {
-                    continue;
-                }
-
-                float dd = PositionHelper.Distance2D(main.Position, unit.Position);
-                if (dd > maxdis || !main.IsCanAttackUnit(unit))
-                {
-                    continue;
-                }
-
-                //找到目标直接跳出来
-                if (dd < distance || distance < 0f)
-                {
-                    distance = dd;
-                    nearest = unit;
-                }
-            }
-
-            return nearest;
-        }
-
         /// <summary>
         /// 服务器使用。不需要找最近的
         /// </summary>

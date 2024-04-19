@@ -9,12 +9,16 @@ namespace ET.Client
     {
         [EntitySystem]
         private static void Awake(this ET.Client.FallingFontShowComponent self)
-        {
+        {  
+            self.Transform = null;
+            self.GameObject = null;
+            self.DamgeFlyTimeSum = 0;
         }
 
         [EntitySystem]
         private static void Destroy(this ET.Client.FallingFontShowComponent self)
         {
+            self.RecoveryGameObject(self.GameObject);
         }
 
         public static void RecoveryGameObject(this FallingFontShowComponent self, GameObject FlyFontObj)
