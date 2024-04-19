@@ -325,7 +325,9 @@ namespace ET.Client
                 return false;
             }
 
-            return self.GetBattleCamp() != defend.GetBattleCamp() && !self.IsSameTeam(defend);
+            int camp_1 = self.GetBattleCamp();
+            int camp_2 = defend.GetBattleCamp();
+            return camp_1 != camp_2 && !self.IsSameTeam(defend);
         }
     }
 }

@@ -37,11 +37,14 @@ namespace ET.Server
             unit.AddComponent<AttackRecordComponent>();
             unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
             unit.GetComponent<DBSaveComponent>().Activeted();
+
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            numericComponent.SetEvent(NumericType.BattleCamp, CampEnum.CampPlayer_1, false);
+            numericComponent.SetEvent(NumericType.RunRaceTransform, 0, false);
+            numericComponent.SetEvent(NumericType.CardTransform, 0, false);
             
             Function_Fight.UnitUpdateProperty_Base(unit, false, false);
 
-            long speed = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_Speed);
-            
             switch (request.SceneType)
             {
                 case SceneTypeEnum.MainCityScene:
@@ -62,7 +65,7 @@ namespace ET.Server
             
             Log.Debug($"M2M_UnitTransferRequest:3");
             // 通知客户端开始切场景
-            M2C_StartSceneChange m2CStartSceneChange = new() { SceneInstanceId = scene.InstanceId, SceneName = request.SceneId.ToString() };
+            M2C_StartSceneChange m2CStartSceneChange = new() { SceneInstanceId = scene.InstanceId, SceneId = request.SceneId, SceneType = request.SceneType, Difficulty = request.Difficulty, ParamInfo = request.ParamInfo };
             MapMessageHelper.SendToClient(unit, m2CStartSceneChange);
 
             Log.Debug($"M2M_UnitTransferRequest:4");

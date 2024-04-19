@@ -550,6 +550,7 @@ namespace ET.Server
             request.Unit = unit.ToBson();
             request.SceneType = sceneType;
             request.SceneId = sceneId;
+            request.ParamInfo = paramInfo;
             
             foreach (Entity entity in unit.Components.Values)
             {

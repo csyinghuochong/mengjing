@@ -152,7 +152,7 @@ namespace ET.Server
 					Log.Error($"monsterPosition.CreateNum:  {monsterPos}");
 					return 0;
 				}
-
+		
 				for (int c = 0; c < monsterPosition.CreateNum; c++)
 				{
 					float range = (float) monsterPosition.CreateRange;

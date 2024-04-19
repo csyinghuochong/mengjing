@@ -2,16 +2,28 @@
 {
     public static partial class SceneChangeHelper
     {
+        
         // 场景切换协程
-        public static async ETTask SceneChangeTo(Scene root, string sceneName, long sceneInstanceId)
+        //message.SceneType, message.SceneId, message.Difficulty, message.ParamInfo);
+        public static async ETTask SceneChangeTo(Scene root,  long sceneInstanceId, int sceneType, int sceneId, int difficulty, string pagramInfo)
         {
             //root.RemoveComponent<AIComponent>();
             
             CurrentScenesComponent currentScenesComponent = root.GetComponent<CurrentScenesComponent>();
             currentScenesComponent.Scene?.Dispose(); // 删除之前的CurrentScene，创建新的
-            Scene currentScene = CurrentSceneFactory.Create(sceneInstanceId, sceneName, currentScenesComponent);
+            Scene currentScene = CurrentSceneFactory.Create(sceneInstanceId, sceneId.ToString(), currentScenesComponent);
             UnitComponent unitComponent = currentScene.AddComponent<UnitComponent>();
-         
+
+            MapComponent mapComponent = root.GetComponent<MapComponent>();
+            if (sceneType == SceneTypeEnum.PetMing)
+            {
+                mapComponent.SetMapInfo(sceneType, sceneId, 0);
+            }
+            else
+            {
+                mapComponent.SetMapInfo(sceneType, sceneId, int.Parse(pagramInfo));
+            }
+            
             // 可以订阅这个事件中创建Loading界面
             EventSystem.Instance.Publish(root, new SceneChangeStart());
             // 等待CreateMyUnit的消息

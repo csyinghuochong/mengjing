@@ -383,7 +383,7 @@ namespace ET.Server
                 return false;
             }
 
-            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
             PetComponentS petComponent = self.Type == UnitType.Player? self.GetComponent<PetComponentS>() : null;
 
             if (mapComponent.SceneType != SceneTypeEnum.Battle &&

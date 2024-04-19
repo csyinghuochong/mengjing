@@ -343,13 +343,25 @@ namespace ET
 		public long SceneInstanceId { get; set; }
 
 		[MemoryPackOrder(1)]
-		public string SceneName { get; set; }
+		public int SceneType { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int SceneId { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int Difficulty { get; set; }
+
+		[MemoryPackOrder(4)]
+		public string ParamInfo { get; set; }
 
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
 			this.SceneInstanceId = default;
-			this.SceneName = default;
+			this.SceneType = default;
+			this.SceneId = default;
+			this.Difficulty = default;
+			this.ParamInfo = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
