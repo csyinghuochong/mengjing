@@ -1,7 +1,6 @@
 namespace ET.Client
 {
     
-    
     [NumericWatcher(SceneType.Current, NumericType.Now_Hp)]
     public class NumericWatcher_Update_Now_Hp: INumericWatcher
     {
@@ -16,7 +15,7 @@ namespace ET.Client
             
             long nowHpValue = numericComponentDefend.GetAsLong(NumericType.Now_Hp);
             long costHp = (nowHpValue - args.OldValue);
-            EventSystem.Instance.Publish( unit.Root(), new UnitHpUpdate()
+            EventSystem.Instance.Publish( unit.Root(), new Now_Hp_Update()
             {
                 Defend = unit,
                 ChangeHpValue = costHp,

@@ -42,5 +42,6 @@
         public const int ChainLightningTimer = 314;
         public const int Effectimer = 315;
         public const int UnionJingXuanTimer = 316;
+        public const int FallingFont = 317;
     }
 }

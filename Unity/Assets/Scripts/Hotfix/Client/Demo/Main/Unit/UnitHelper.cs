@@ -89,6 +89,20 @@ namespace ET.Client
             return MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterType;
         }
         
+        public static long GetMasterId(this Unit self)
+        {
+            if (self.Type == UnitType.Player)
+            {
+                return self.Id;
+            }
+            if (self.Type == UnitType.Pet || self.Type == UnitType.Monster 
+                || self.Type == UnitType.JingLing || self.Type == UnitType.Pasture)
+            {
+                return self.GetComponent<NumericComponentC>().GetAsLong(NumericType.MasterId);
+            }
+            return 0;
+        }
+        
         public static bool IsBoss(this Unit self)
         {
             if (self.Type != UnitType.Monster)

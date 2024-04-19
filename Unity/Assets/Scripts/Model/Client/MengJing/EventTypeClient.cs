@@ -252,7 +252,7 @@ namespace ET.Client
     }
     
     //更新血量
-    public struct UnitHpUpdate
+    public struct Now_Hp_Update
     {
         public Unit Attack;
         public Unit Defend;

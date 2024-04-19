@@ -15,7 +15,7 @@ namespace ET.Client
         public GameObject DialogText;
         public GameObject Lal_Name;
         public GameObject Img_HpValue;
-        public GameObject GameObject;
+        public GameObject GameObject { get; set; }
         public GameObject UIPlayerHpText;
         public GameObject BuffShieldValue;
         public GameObject Img_ChengHao;

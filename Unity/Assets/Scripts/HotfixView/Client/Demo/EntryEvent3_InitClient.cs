@@ -32,8 +32,8 @@ namespace ET.Client
             root.AddComponent<ChengJiuComponentC>();
             root.AddComponent<MaskWordComponent>();
             root.AddComponent<LockTargetComponent>();
+            root.AddComponent<FallingFontComponent>();
             
-
             // 根据配置修改掉Main Fiber的SceneType
             SceneType sceneType = EnumHelper.FromString<SceneType>(globalComponent.GlobalConfig.AppType.ToString());
             root.SceneType = sceneType;

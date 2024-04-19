@@ -72,11 +72,11 @@ namespace ET.Client
             }
             if (DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(sceneId))
             {
-                root.GetComponent<BattleMessageComponent>().SetLastDungeonId(mapComponent.SceneId);
+                root.GetComponent<BattleMessageComponent>().LastDungeonId = mapComponent.SceneId;
             }
             else
             {
-                root.GetComponent<BattleMessageComponent>().SetLastDungeonId(0);
+                root.GetComponent<BattleMessageComponent>().LastDungeonId = 0;
             }
               
             C2M_TransferMap c2M_ItemHuiShouRequest = new C2M_TransferMap()

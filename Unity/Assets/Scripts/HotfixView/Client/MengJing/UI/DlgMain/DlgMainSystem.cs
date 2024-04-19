@@ -1172,5 +1172,23 @@ namespace ET.Client
         }
 
         #endregion
+        
+        public static void OnUpdateHP(this DlgMain self, int sceneType, Unit defend, Unit attack, long hurtvalue)
+        {
+            // int unitType = defend.Type;
+            // if (unitType == UnitType.Player && sceneType == SceneTypeEnum.TeamDungeon)
+            // {
+            //     self.UIMainTeam.OnUpdateHP(defend);
+            // }
+            // if (unitType == UnitType.Monster)
+            // {
+            //     self.UIMainHpBar.OnUpdateHP(defend);
+            //     self.UIMainHpBar.OnUpdateHP(defend, attack, hurtvalue);
+            // }
+            // if (unitType == UnitType.Pet)
+            // {
+            //     self.UIRoleHead.OnUpdatePetHP(defend);
+            // }
+        }
     }
 }

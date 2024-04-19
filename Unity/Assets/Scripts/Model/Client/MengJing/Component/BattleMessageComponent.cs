@@ -43,10 +43,10 @@ namespace ET
         public int FirstWinBossId;
 
         public bool ShowPetChouKaGet { get; set; } = false;
-        public List<RolePetAdd> RolePetAdds = new List<RolePetAdd>();
+        public List<RolePetAdd> RolePetAdds { get; set; } = new List<RolePetAdd>();
         public Dictionary<long, long> OneChallengeTime = new Dictionary<long, long>();
 
-        public List<long> AttackSelfPlayer = new List<long>();
+        public List<long> AttackSelfPlayer  { get; set; }= new List<long>();
         
         public long LastPopularize_ListTime = 0;
     }
