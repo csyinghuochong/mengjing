@@ -500,15 +500,31 @@ namespace ET.Server
         public static async ETTask MainCityTransfer(Unit unit)
         {
             MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
-            int sceneTypeEnum = mapComponent.SceneType;
-            long userId = unit.Id;
-            //unit.GetComponent<UnitInfoComponent>().LastDungeonId = 0;
+            unit.GetComponent<UnitInfoComponent>().LastDungeonId = 0;
             //传送回主场景
             ActorId mapInstanceId = UnitCacheHelper.MainCityServerId(unit.Zone());
             //动态删除副本
-            Scene scene = unit.Root();
+            long userId = unit.Id;
+            Scene scene = unit.Scene();
             TransferHelper.BeforeTransfer(unit);
             await TransferHelper.Transfer(unit, mapInstanceId, (int)SceneTypeEnum.MainCityScene, ComHelp.MainCityID(), 0, "0");
+            OnTransfer(scene, userId);
+        }
+        
+        public static void OnTransfer( Scene scene, long userId )
+        {
+            if (scene.IsDisposed)
+            {
+                Log.Warning($"ReturnMainCity: scene.IsDisposed");
+                return;
+            }
+
+            int sceneTypeEnum = scene.GetComponent<MapComponent>().SceneType;
+            if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
+            {
+                TransferHelper.NoticeFubenCenter(scene, 2).Coroutine();
+                scene.Dispose();
+            }
         }
         
         public static void BeforeTransfer(Unit unit)
