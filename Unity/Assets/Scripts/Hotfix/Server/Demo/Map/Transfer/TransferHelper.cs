@@ -15,7 +15,7 @@ namespace ET.Server
                 {
                     return ErrorCode.ERR_RequestRepeatedly;
                 }
-                int oldScene = unit.Root().GetComponent<MapComponent>().SceneType;
+                int oldScene = unit.Scene().GetComponent<MapComponent>().SceneType;
                 if (!SceneConfigHelper.CanTransfer(oldScene, request.SceneType))
                 {
                     Log.Debug($"LoginTest1  Actor_Transfer unitId{unit.Id} oldScene:{oldScene}  requestscene{request.SceneType}");
@@ -499,7 +499,7 @@ namespace ET.Server
         
         public static async ETTask MainCityTransfer(Unit unit)
         {
-            MapComponent mapComponent = unit.Root().GetComponent<MapComponent>();
+            MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
             int sceneTypeEnum = mapComponent.SceneType;
             long userId = unit.Id;
             //unit.GetComponent<UnitInfoComponent>().LastDungeonId = 0;

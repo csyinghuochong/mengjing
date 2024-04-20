@@ -114,5 +114,10 @@ namespace ET.Client
             A2C_DeleteRoleData response = await root.GetComponent<ClientSenderCompnent>().Call(request) as A2C_DeleteRoleData;
             root.GetComponent<PlayerComponent>().CreateRoleList.Remove(createRoleInfo);
         }
+        
+        public static void RequestQuitFuben(Scene zoneScene)
+        {
+            RequestTransfer(zoneScene, (int)SceneTypeEnum.MainCityScene, ComHelp.MainCityID()).Coroutine();
+        }
     }
 }

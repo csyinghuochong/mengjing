@@ -109,8 +109,9 @@ namespace ET.Client
             self.View.E_JiaYuanButton.AddListener(self.OnJiaYuanButton);
             self.View.E_NpcDuiHuaButton.AddListener(self.OnNpcDuiHuaButton);
             self.View.E_UnionButton.AddListener(self.OnUnionButton);
-
             self.View.E_OpenChatButton.AddListener(self.OnOpenChat);
+            self.View.E_Button_ZhanKai.AddListener(self.OnButtonZhanKai);
+            self.View.E_Btn_RerurnBuilding.AddListener(self.OnClickReturnButton);
 
             self.View.E_YaoGanDiMoveEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
                 (pdata) => { self.PointerDown_Move(pdata as PointerEventData); });
@@ -1113,6 +1114,35 @@ namespace ET.Client
         private static void OnOpenChat(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Chat).Coroutine();
+        }
+
+        private static void OnButtonZhanKai(this DlgMain self)
+        {
+            bool active = self.View.E_Btn_TopRight_1.gameObject.activeSelf;
+            self.View.E_Btn_TopRight_1.gameObject.SetActive(!active);
+            self.View.E_Btn_TopRight_2.gameObject.SetActive(!active);
+            self.View.E_Btn_TopRight_3.gameObject.SetActive(!active);
+
+            self.View.E_Button_ZhanKai.transform.localScale = active ? new Vector3(1f, 1f, 1f) :  new Vector3(-1f, 1f, 1f);
+        }
+        
+        public static void OnClickReturnButton(this DlgMain self)
+        {
+            Scene zoneScene = self.Root();
+            MapComponent mapComponent = zoneScene.GetComponent<MapComponent>();
+           
+            string tipStr = "确定返回主城？";
+            if (mapComponent.SceneType == SceneTypeEnum.Battle)
+            {
+                tipStr = "现在离开战场,将不会获得战场胜利的奖励哦";
+            }
+
+            PopupTipHelp.OpenPopupTip(self.Root(), "", GameSettingLanguge.LoadLocalization(tipStr),
+                () =>
+                {
+                    EnterMapHelper.RequestQuitFuben(self.Root());
+                },
+                null).Coroutine();
         }
 
         public static void OnRecvChat(this DlgMain self)

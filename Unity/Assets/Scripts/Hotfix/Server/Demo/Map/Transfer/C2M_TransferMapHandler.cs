@@ -22,8 +22,16 @@ namespace ET.Server
 			// StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(unit.Fiber().Zone, toMap);
 			// TransferHelper.TransferAtFrameFinish(unit, startSceneConfig.ActorId, toMap).Coroutine();
 			
-			TransferHelper.LocalDungeonTransfer(unit, request.SceneId,0,0).Coroutine();
-			
+			//TransferHelper.LocalDungeonTransfer(unit, request.SceneId,0,0).Coroutine();
+			try
+			{
+				response.Error = await TransferHelper.TransferUnit(unit, request);
+				await ETTask.CompletedTask;
+			}
+			catch (Exception ex)
+			{
+				Log.Error(ex);
+			}
 		}
 	}
 }
