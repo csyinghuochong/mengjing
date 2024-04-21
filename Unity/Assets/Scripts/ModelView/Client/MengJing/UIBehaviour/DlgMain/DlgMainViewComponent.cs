@@ -1594,6 +1594,7 @@ namespace ET.Client
 			this.m_E_Btn_TopRight_2 = null;
 			this.m_E_Btn_TopRight_3 = null;
 			this.m_E_Btn_RerurnBuilding = null;
+			this.m_es_MainSkill = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_JoystickMoveRectTransform = null;
@@ -1685,5 +1686,6 @@ namespace ET.Client
 		private UnityEngine.Transform m_E_Btn_TopRight_3 = null;
 		private UnityEngine.UI.Button m_E_Btn_RerurnBuilding = null;
 		private EntityRef<ES_MainTeam> m_es_MainTeam = null;
+		private EntityRef<ES_MainSkill> m_es_MainSkill = null;
 	}
 }

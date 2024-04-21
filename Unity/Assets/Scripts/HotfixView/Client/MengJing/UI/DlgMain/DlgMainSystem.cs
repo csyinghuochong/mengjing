@@ -1224,10 +1224,10 @@ namespace ET.Client
         public static void BeginEnterScene(this DlgMain self, int lastScene)
         {
             self.View.ES_MainTeam.ResetUI();
-            // self.UIMainSkillComponent.ResetUI();
+            self.UIMainSkillComponent.ResetUI();
             // self.UIMainBuffComponent.ResetUI();
             // self.UIJoystickMoveComponent.ResetUI();
-            //
+
             // self.UIMapMini.BeginChangeScene(lastScene);
             // self.UISingingComponent.GameObject.SetActive(false);
             // self.UIMainHpBar.BeginEnterScene();
