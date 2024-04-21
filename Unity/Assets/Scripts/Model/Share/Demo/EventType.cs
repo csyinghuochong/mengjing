@@ -5,6 +5,11 @@ namespace ET.Client
 {
     public struct SceneChangeStart
     {
+        public Scene RootScene;
+        public int LastSceneType;
+        public int LastChapterId;
+        public int SceneType;
+        public int ChapterId;
     }
     
     public struct SceneChangeFinish

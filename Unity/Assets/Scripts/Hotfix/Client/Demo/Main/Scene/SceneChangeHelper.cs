@@ -15,6 +15,8 @@
             UnitComponent unitComponent = currentScene.AddComponent<UnitComponent>();
 
             MapComponent mapComponent = root.GetComponent<MapComponent>();
+            int lastSceneType = mapComponent.SceneType;
+            int lastChapterid = mapComponent.SceneId;
             if (sceneType == SceneTypeEnum.PetMing)
             {
                 mapComponent.SetMapInfo(sceneType, sceneId, 0);
@@ -25,7 +27,14 @@
             }
             
             // 可以订阅这个事件中创建Loading界面
-            EventSystem.Instance.Publish(root, new SceneChangeStart());
+            EventSystem.Instance.Publish(root, new SceneChangeStart()
+            {
+                RootScene = root,
+                LastSceneType = lastSceneType,
+                LastChapterId = lastChapterid,
+                SceneType = sceneType,
+                ChapterId = sceneId,
+            });
             // 等待CreateMyUnit的消息
             Wait_CreateMyUnit waitCreateMyUnit = await root.GetComponent<ObjectWait>().Wait<Wait_CreateMyUnit>();
             M2C_CreateMyUnit m2CCreateMyUnit = waitCreateMyUnit.Message;

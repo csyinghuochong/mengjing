@@ -1220,5 +1220,21 @@ namespace ET.Client
             //     self.UIRoleHead.OnUpdatePetHP(defend);
             // }
         }
+        
+        public static void BeginEnterScene(this DlgMain self, int lastScene)
+        {
+            self.UIMainTeam.ResetUI();
+            self.UIMainSkillComponent.ResetUI();
+            self.UIMainBuffComponent.ResetUI();
+            self.UIJoystickMoveComponent.ResetUI();
+
+            self.UIMapMini.BeginChangeScene(lastScene);
+            self.UISingingComponent.GameObject.SetActive(false);
+            self.UIMainHpBar.BeginEnterScene();
+            self.ZoneScene().GetComponent<SkillIndicatorComponent>().BeginEnterScene();
+            self.ZoneScene().GetComponent<LockTargetComponent>().BeginEnterScene();
+            self.ZoneScene().GetComponent<BattleMessageComponent>().CancelRideTargetUnit(0);
+            self.ZoneScene().GetComponent<BattleMessageComponent>().AttackSelfPlayer.Clear();
+        }
     }
 }
