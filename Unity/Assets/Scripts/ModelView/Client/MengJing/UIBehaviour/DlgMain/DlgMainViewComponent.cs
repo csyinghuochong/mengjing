@@ -1468,7 +1468,25 @@ namespace ET.Client
      			return this.m_E_UnionImage;
      		}
      	}
-
+		
+		public ES_MainTeam ES_MainTeam
+		{
+			get
+			{
+				if (this.m_es_MainTeam == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_es_MainTeam == null )
+				{
+					Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_LeftSet/EG_PhoneLeft/EG_MainTeam");
+					this.m_es_MainTeam = this.AddChild<ES_MainTeam,Transform>(subTrans);
+				}
+				return this.m_es_MainTeam;
+			}
+		}
+		
 		public UnityEngine.EventSystems.EventTrigger E_UnionEventTrigger
      	{
      		get
@@ -1666,5 +1684,6 @@ namespace ET.Client
 		private UnityEngine.Transform m_E_Btn_TopRight_2 = null;
 		private UnityEngine.Transform m_E_Btn_TopRight_3 = null;
 		private UnityEngine.UI.Button m_E_Btn_RerurnBuilding = null;
+		private EntityRef<ES_MainTeam> m_es_MainTeam = null;
 	}
 }
