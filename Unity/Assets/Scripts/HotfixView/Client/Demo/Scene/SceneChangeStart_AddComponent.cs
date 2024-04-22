@@ -19,7 +19,7 @@ namespace ET.Client
                 // 切换到map场景
 
                 //await SceneManager.LoadSceneAsync(currentScene.Name);
-                root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().BeginEnterScene(args.LastSceneType);
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.BeginEnterScene(args.LastSceneType);
 
                 currentScene.AddComponent<OperaComponent>();
             }

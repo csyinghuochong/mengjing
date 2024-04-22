@@ -17857,7 +17857,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3055922816199946566}
-  - component: {fileID: 2869583918399894704}
   m_Layer: 5
   m_Name: UIMainSkill
   m_TagString: Untagged
@@ -17891,75 +17890,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2869583918399894704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3055922816199946565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502d8cafd6a5a0447ab1db9a24cdcb10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data:
-  - key: UI_MainRose_attack
-    gameObject: {fileID: 1422906385606496629}
-  - key: Btn_CancleSkill
-    gameObject: {fileID: 3055922816038601311}
-  - key: Btn_Target
-    gameObject: {fileID: 7457035082970603327}
-  - key: Btn_ShiQu
-    gameObject: {fileID: 3055922816031088535}
-  - key: Button_ZhuaPu
-    gameObject: {fileID: 4058046584240254821}
-  - key: Btn_JingLing
-    gameObject: {fileID: 6955334595808501298}
-  - key: Btn_NpcDuiHua
-    gameObject: {fileID: 994023502805177163}
-  - key: UI_MainRose_FanGun
-    gameObject: {fileID: 3055922817029534672}
-  - key: UI_MainRoseSkill_item_0
-    gameObject: {fileID: 3055922816776994102}
-  - key: UI_MainRoseSkill_item_1
-    gameObject: {fileID: 4016554446734763478}
-  - key: UI_MainRoseSkill_item_2
-    gameObject: {fileID: 7847590187579786771}
-  - key: UI_MainRoseSkill_item_3
-    gameObject: {fileID: 5803804909680834980}
-  - key: UI_MainRoseSkill_item_4
-    gameObject: {fileID: 3147827414930135828}
-  - key: UI_MainRoseSkill_item_5
-    gameObject: {fileID: 2510808066608518431}
-  - key: UI_MainRoseSkill_item_6
-    gameObject: {fileID: 8325496796344164885}
-  - key: UI_MainRoseSkill_item_7
-    gameObject: {fileID: 5332470328471769046}
-  - key: UI_MainRoseSkill_item_8
-    gameObject: {fileID: 7093807757868586125}
-  - key: UI_MainRoseSkill_item_9
-    gameObject: {fileID: 7791909064344505313}
-  - key: ImageSkillPositionSet
-    gameObject: {fileID: 3546270112493667921}
-  - key: Btn_SkilPositionCancel
-    gameObject: {fileID: 147669471344604549}
-  - key: Btn_SkilPositionReset
-    gameObject: {fileID: 6170409790047507044}
-  - key: Btn_SkilPositionSave
-    gameObject: {fileID: 5257121357810194917}
-  - key: UI_MainRoseSkill_item_juexing
-    gameObject: {fileID: 4521713936213170578}
-  - key: Normal
-    gameObject: {fileID: 8697209410111610523}
-  - key: Transforms
-    gameObject: {fileID: 2418654505806436964}
-  - key: Btn_PetTarget
-    gameObject: {fileID: 6579666388318322297}
-  - key: Button_Switch_0
-    gameObject: {fileID: 5127273118102799622}
-  - key: Button_Switch_CD
-    gameObject: {fileID: 9173403817937300338}
 --- !u!1 &3055922816209195441
 GameObject:
   m_ObjectHideFlags: 0
