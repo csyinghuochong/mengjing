@@ -3,7 +3,7 @@ namespace ET.Client
     
     [ChildOf]
     [EnableMethod]
-    public class ES_MainSkill: Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+    public class ES_MainSkill: Entity,ET.IAwake<UnityEngine.Transform>,IDestroy, IUILogic
     {
     
     }

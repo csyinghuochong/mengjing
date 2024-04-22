@@ -375,7 +375,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_PhoneLeftRectTransform == null )
      			{
-		    		this.m_EG_PhoneLeftRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_LeftSet/EG_PhoneLeft");
+		    		this.m_EG_PhoneLeftRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PhoneLeft");
      			}
      			return this.m_EG_PhoneLeftRectTransform;
      		}
@@ -392,7 +392,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_MainTaskRectTransform == null )
      			{
-		    		this.m_EG_MainTaskRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_LeftSet/EG_PhoneLeft/EG_MainTask");
+		    		this.m_EG_MainTaskRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PhoneLeft/EG_MainTask");
      			}
      			return this.m_EG_MainTaskRectTransform;
      		}
@@ -409,7 +409,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RoseTaskButton == null )
      			{
-		    		this.m_E_RoseTaskButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_LeftSet/EG_PhoneLeft/EG_MainTask/E_RoseTask");
+		    		this.m_E_RoseTaskButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_PhoneLeft/EG_MainTask/E_RoseTask");
      			}
      			return this.m_E_RoseTaskButton;
      		}
@@ -426,7 +426,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RoseTaskImage == null )
      			{
-		    		this.m_E_RoseTaskImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LeftSet/EG_PhoneLeft/EG_MainTask/E_RoseTask");
+		    		this.m_E_RoseTaskImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PhoneLeft/EG_MainTask/E_RoseTask");
      			}
      			return this.m_E_RoseTaskImage;
      		}
@@ -443,7 +443,7 @@ namespace ET.Client
      			}
      			if( this.m_E_MainTaskItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_MainTaskItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_LeftSet/EG_PhoneLeft/EG_MainTask/E_MainTaskItems");
+		    		this.m_E_MainTaskItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_PhoneLeft/EG_MainTask/E_MainTaskItems");
      			}
      			return this.m_E_MainTaskItemsLoopVerticalScrollRect;
      		}
@@ -460,7 +460,7 @@ namespace ET.Client
      			}
      			if( this.m_E_LeftTypeSetToggleGroup == null )
      			{
-		    		this.m_E_LeftTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"EG_LeftSet/EG_PhoneLeft/E_LeftTypeSet");
+		    		this.m_E_LeftTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"EG_PhoneLeft/E_LeftTypeSet");
      			}
      			return this.m_E_LeftTypeSetToggleGroup;
      		}
@@ -477,7 +477,7 @@ namespace ET.Client
      			}
      			if( this.m_E_LeftTypeSetImage == null )
      			{
-		    		this.m_E_LeftTypeSetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LeftSet/EG_PhoneLeft/E_LeftTypeSet");
+		    		this.m_E_LeftTypeSetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PhoneLeft/E_LeftTypeSet");
      			}
      			return this.m_E_LeftTypeSetImage;
      		}
@@ -494,7 +494,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_MainTeamRectTransform == null )
      			{
-		    		this.m_EG_MainTeamRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_LeftSet/EG_PhoneLeft/EG_MainTeam");
+		    		this.m_EG_MainTeamRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PhoneLeft/EG_MainTeam");
      			}
      			return this.m_EG_MainTeamRectTransform;
      		}
@@ -1480,13 +1480,31 @@ namespace ET.Client
 				}
 				if( this.m_es_MainTeam == null )
 				{
-					Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_LeftSet/EG_PhoneLeft/EG_MainTeam");
+					Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PhoneLeft/EG_MainTeam");
 					this.m_es_MainTeam = this.AddChild<ES_MainTeam,Transform>(subTrans);
 				}
 				return this.m_es_MainTeam;
 			}
 		}
-		
+
+		public ES_MainSkill ES_MainSkill
+		{
+			get
+			{
+				if (this.m_es_MainSkill == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_es_MainSkill == null )
+				{
+					Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_RightSet/UIMainSkill");
+					this.m_es_MainSkill = this.AddChild<ES_MainSkill,Transform>(subTrans);
+				}
+				return this.m_es_MainSkill;
+			}
+		}
+
 		public UnityEngine.EventSystems.EventTrigger E_UnionEventTrigger
      	{
      		get
