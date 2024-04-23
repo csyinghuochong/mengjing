@@ -237,9 +237,10 @@ namespace ET.Client
         private UnityEngine.UI.Button m_e_Btn_Target;
         private UnityEngine.UI.Button m_e_Btn_CancleSkill;
         
-        //private UIFangunSkillComponent m_e_UI_MainRose_FanGun;
-        //private UIAttackGridComponent m_e_UI_MainRose_attack;
-        private Transform uiTransform = null;
+        //private List<UISkillGridComponent>
+        //private UISkillFangunComponent m_e_UI_MainRose_FanGun;
+        //private UISkillAttackGComponent m_e_UI_MainRose_attack;
+        public Transform uiTransform = null;
     }
     
 }

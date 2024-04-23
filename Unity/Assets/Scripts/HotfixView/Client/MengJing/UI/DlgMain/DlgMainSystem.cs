@@ -1224,7 +1224,7 @@ namespace ET.Client
         public static void BeginEnterScene(this DlgMain self, int lastScene)
         {
             self.View.ES_MainTeam.ResetUI();
-            //self.UIMainSkillComponent.ResetUI();
+            self.View.ES_MainSkill.ResetUI();
             // self.UIMainBuffComponent.ResetUI();
             // self.UIJoystickMoveComponent.ResetUI();
 
