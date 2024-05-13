@@ -257,15 +257,18 @@ namespace ET.Client
         private UnityEngine.UI.Button m_e_Btn_CancleSkill;
         private GameObject m_e_MainRoseSkill_item;
         
-
-        //private UISkillFangunComponent m_e_UI_MainRose_FanGun;
+        
         //private UISkillAttackGComponent m_e_UI_MainRose_attack;
+        public ES_MainSkillFangun MainSkillFungun{ get; set; }
         public ES_MainSkillGrid SkillGridBianSheng{ get; set; }
         public ES_MainSkillGrid SkillGridJueXing{ get; set; }
         public List<ES_MainSkillGrid> MainSkillGridList { get; set; } = new List<ES_MainSkillGrid>();
         public Transform uiTransform = null;
 
+        public int JueXingSkillId = 0;
         public long SwitchCDEndTime = 0;
+        public long LastPickTime = 0;
+        public long LastLockTime = 0;
     }
     
 }

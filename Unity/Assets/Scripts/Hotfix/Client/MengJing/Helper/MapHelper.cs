@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
 
 namespace ET.Client
@@ -27,7 +26,7 @@ namespace ET.Client
                     continue;
                 }
 
-                float dd = Vector3.Distance(main.Position, unit.Position);
+                float dd = PositionHelper.Distance2D(main.Position, unit.Position);
                 if (dd > distance && distance > 0)
                 {
                     continue;

@@ -14,8 +14,8 @@ namespace ET.Client
         public List<SkillC> Skills = new List<SkillC>();
         public List<SkillCDItem> SkillCDs = new List<SkillCDItem>();       //冷却时间列表
         public C2M_SkillCmd SkillCmd = null;
-        public long SkillPublicCDTime;                                                              //技能公共CD
-        public int FangunSkillId;
+        public long SkillPublicCDTime { get; set; } //技能公共CD
+        public int FangunSkillId { get; set; }
         public long FangunLastTime;
 
         public long SkillMoveTime { get; set; } = 0;  //1旋风斩之类的技能. 可以移动但是需要保持技能动作
