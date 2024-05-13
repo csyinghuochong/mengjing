@@ -1473,7 +1473,7 @@ namespace ET.Client
 		{
 			get
 			{
-				if (this.m_es_MainTeam == null)
+				if (this.uiTransform == null)
 				{
 					Log.Error("uiTransform is null.");
 					return null;
@@ -1491,7 +1491,7 @@ namespace ET.Client
 		{
 			get
 			{
-				if (this.m_es_MainSkill == null)
+				if (this.uiTransform == null)
 				{
 					Log.Error("uiTransform is null.");
 					return null;
@@ -1521,6 +1521,40 @@ namespace ET.Client
      			return this.m_E_UnionEventTrigger;
      		}
      	}
+
+		public UnityEngine.Transform E_HomeButton
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_e_HomeButton == null )
+				{
+					this.m_e_HomeButton = UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"EG_RightSet/HomeButton");
+				}
+				return this.m_e_HomeButton;
+			}
+		}
+
+		public UnityEngine.Transform E_UIMainSkill
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_e_UIMainSkill == null )
+				{
+					this.m_e_UIMainSkill = UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"EG_RightSet/UIMainSkill");
+				}
+				return this.m_e_UIMainSkill;
+			}
+		}
 
 		public void DestroyWidget()
 		{
@@ -1613,6 +1647,7 @@ namespace ET.Client
 			this.m_E_Btn_TopRight_3 = null;
 			this.m_E_Btn_RerurnBuilding = null;
 			this.m_es_MainSkill = null;
+			this.m_e_HomeButton = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_JoystickMoveRectTransform = null;
@@ -1702,6 +1737,8 @@ namespace ET.Client
 		private UnityEngine.Transform m_E_Btn_TopRight_1 = null;
 		private UnityEngine.Transform m_E_Btn_TopRight_2 = null;
 		private UnityEngine.Transform m_E_Btn_TopRight_3 = null;
+		private UnityEngine.Transform m_e_HomeButton = null;
+		private UnityEngine.Transform m_e_UIMainSkill = null;
 		private UnityEngine.UI.Button m_E_Btn_RerurnBuilding = null;
 		private EntityRef<ES_MainTeam> m_es_MainTeam = null;
 		private EntityRef<ES_MainSkill> m_es_MainSkill = null;

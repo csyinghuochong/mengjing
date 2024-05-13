@@ -556,15 +556,7 @@ namespace ET
             } },
         };
         }
-
-        /// <summary>
-        /// 猎人切换状态CD
-        /// </summary>
-        public static long HunterSwichCD()
-        {
-            return TimeHelper.Second * 10;
-        }
-
+        
         /// <summary>
         /// 猎人远程技能
         /// </summary>

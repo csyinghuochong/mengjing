@@ -147,6 +147,7 @@ namespace ET.Client
 
             self.ResetJoystick();
             self.RefreshLeftUp();
+            self.AfterEnterScene(SceneTypeEnum.MainCityScene);
 
             // IOS适配
             IPHoneHelper.SetPosition(self.View.EG_PhoneLeftRectTransform.gameObject, new Vector2(120f, 0f));
@@ -1223,6 +1224,8 @@ namespace ET.Client
         
         public static void BeginEnterScene(this DlgMain self, int lastScene)
         {
+            Log.Debug("BeginEnterScene");
+            
             self.View.ES_MainTeam.ResetUI();
             self.View.ES_MainSkill.ResetUI();
             // self.UIMainBuffComponent.ResetUI();
@@ -1235,6 +1238,12 @@ namespace ET.Client
             // self.ZoneScene().GetComponent<LockTargetComponent>().BeginEnterScene();
             // self.ZoneScene().GetComponent<BattleMessageComponent>().CancelRideTargetUnit(0);
             // self.ZoneScene().GetComponent<BattleMessageComponent>().AttackSelfPlayer.Clear();
+        }
+
+        public static void AfterEnterScene(this DlgMain self, int sceneTypeEnum)
+        {
+            self.View.E_UIMainSkill.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.MainCityScene);
+            self.View.E_HomeButton.gameObject.SetActive( sceneTypeEnum == SceneTypeEnum.MainCityScene );
         }
     }
 }

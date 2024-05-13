@@ -47,7 +47,13 @@ namespace ET
             { 150, "1;500000@10010053;1@10000151;1$1;0,0" },
             { 300, "1;1000000@10000151;1@11200000;1$1;0,0" },
         };
-        
+
+
+        /// <summary>
+        /// 猎人切换状态CD
+        /// </summary>
+        [StaticField]
+        public static long HunterSwichCD = TimeHelper.Second * 10;
         
         /// <summary>
         /// 小龟选手 npcconfig

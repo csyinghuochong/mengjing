@@ -43,5 +43,6 @@
         public const int Effectimer = 315;
         public const int UnionJingXuanTimer = 316;
         public const int FallingFont = 317;
+        public const int SkillInfoShowTimer = 318;
     }
 }

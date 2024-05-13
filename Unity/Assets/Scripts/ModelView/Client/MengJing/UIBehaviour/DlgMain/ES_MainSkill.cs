@@ -180,6 +180,24 @@ namespace ET.Client
             }
         }
 
+        public  GameObject E_MainRoseSkill_item
+        {
+            get
+            {
+                if (this.uiTransform == null)
+                {
+                    Log.Error("uiTransform is null.");
+                    return null;
+                }
+                if( this.m_e_MainRoseSkill_item == null )
+                {
+                    this.m_e_MainRoseSkill_item = UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"Normal/UI_MainRoseSkill_item_0").gameObject;
+                }
+                return this.m_e_MainRoseSkill_item;
+            }
+        }
+
+
         public Button E_Btn_CancleSkill
         {
             get
@@ -196,7 +214,7 @@ namespace ET.Client
                 return this.m_e_Btn_CancleSkill;
             }
         }
-
+        
         public Transform UITransform
         {
             get
@@ -209,6 +227,7 @@ namespace ET.Client
             }
         }
 
+        
         public void DestroyWidget()
         {
             this.uiTransform = null;
@@ -236,11 +255,17 @@ namespace ET.Client
         private UnityEngine.UI.Button m_e_shiquButton;
         private UnityEngine.UI.Button m_e_Btn_Target;
         private UnityEngine.UI.Button m_e_Btn_CancleSkill;
+        private GameObject m_e_MainRoseSkill_item;
         
-        //private List<UISkillGridComponent>
+
         //private UISkillFangunComponent m_e_UI_MainRose_FanGun;
         //private UISkillAttackGComponent m_e_UI_MainRose_attack;
+        public ES_MainSkillGrid SkillGridBianSheng{ get; set; }
+        public ES_MainSkillGrid SkillGridJueXing{ get; set; }
+        public List<ES_MainSkillGrid> MainSkillGridList { get; set; } = new List<ES_MainSkillGrid>();
         public Transform uiTransform = null;
+
+        public long SwitchCDEndTime = 0;
     }
     
 }

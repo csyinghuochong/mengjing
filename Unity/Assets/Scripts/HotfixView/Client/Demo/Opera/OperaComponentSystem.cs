@@ -50,12 +50,10 @@ namespace ET.Client
                 Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
                 
                 float float3 = MathHelper.QuaternionToEulerAngle_Y(unit.Rotation);
-                
-                C2M_SkillCmd c2MSkillCmd = new C2M_SkillCmd()
-                {
-                    SkillID = 62000503,
-                    TargetAngle = (int)math.floor(float3)
-                };
+
+                C2M_SkillCmd c2MSkillCmd = C2M_SkillCmd.Create();
+                c2MSkillCmd.SkillID = 62000503;
+                c2MSkillCmd.TargetAngle = (int)math.floor(float3);
                 self.Root().GetComponent<ClientSenderCompnent>().Send(c2MSkillCmd);
             }
 

@@ -260,4 +260,8 @@ namespace ET.Client
         public int DamgeType;
         public long ChangeHpValue;
     }
+    
+    public struct BeforeSkill
+    {
+    }
 }
