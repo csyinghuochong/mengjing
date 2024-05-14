@@ -284,7 +284,7 @@ namespace ET.Client
         
         public static void OnFinished(this Effect self)
         {
-            GameObjectPoolComponent.Instance.RecoverGameObject(self.EffectPath, self.EffectObj);
+            GameObjectPoolComponent.Instance?.RecoverGameObject(self.EffectPath, self.EffectObj);
             self.EffectState = BuffState.Finished;
             self.TheUnitBelongto = null;
             self.EffectObj = null;

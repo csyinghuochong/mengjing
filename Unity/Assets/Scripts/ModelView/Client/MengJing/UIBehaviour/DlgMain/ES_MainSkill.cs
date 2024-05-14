@@ -123,7 +123,7 @@ namespace ET.Client
                 }
                 if( this.m_e_Btn_JingLing == null )
                 {
-                    this.m_e_Btn_JingLing = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ButtonList/Normal");
+                    this.m_e_Btn_JingLing = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ButtonList/Btn_JingLing");
                 }
                 return this.m_e_Btn_JingLing;
             }

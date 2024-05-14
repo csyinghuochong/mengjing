@@ -8,6 +8,9 @@
              scene.AddComponent<MJCameraComponent>();
             
              // scene.GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Helper);
+             
+             scene.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.AfterEnterScene(args.SceneType);
+             
              await ETTask.CompletedTask;
         }
     }

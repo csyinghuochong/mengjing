@@ -14,6 +14,7 @@ namespace ET.Client
     
     public struct SceneChangeFinish
     {
+        public int SceneType;
     }
     
     public struct AfterCreateClientScene

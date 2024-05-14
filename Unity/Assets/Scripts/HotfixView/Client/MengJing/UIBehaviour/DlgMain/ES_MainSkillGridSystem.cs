@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Image = UnityEngine.UIElements.Image;
+using Image = UnityEngine.UI.Image;
 
 namespace ET.Client
 {
@@ -460,7 +460,7 @@ namespace ET.Client
                     self.AssetPath.Add(path);
                 }
 
-                self.E_Img_SkillIcon.GetComponent<Image>().sprite = sp;
+                self.E_Img_SkillIcon.gameObject.GetComponent<Image>().sprite = sp;
 
                 self.SkillWuqiConfig = skillConfig;
                 self.SkillBaseConfig = SkillConfigCategory.Instance.Get(skillpro.SkillID);

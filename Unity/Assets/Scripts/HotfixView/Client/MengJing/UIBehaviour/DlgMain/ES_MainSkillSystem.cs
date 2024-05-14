@@ -24,8 +24,8 @@ namespace ET.Client
             EventTrigger eventTrigger = self.E_Btn_CancleSkill.GetComponent<EventTrigger>();
             eventTrigger.RegisterEvent(EventTriggerType.PointerEnter, (pdata) => { self.OnEnterCancelButton(); });
 
-            self.E_Btn_JingLing.GetComponent<Button>().onClick.AddListener(() => { self.OnBtn_JingLing().Coroutine(); });
-            self.E_Button_Switch_0.GetComponent<Button>().onClick.AddListener(() => { self.OnButton_Switch().Coroutine(); });
+            self.E_Btn_JingLing.onClick.AddListener(() => { self.OnBtn_JingLing().Coroutine(); });
+            self.E_Button_Switch_0.onClick.AddListener(() => { self.OnButton_Switch().Coroutine(); });
 
             self.OnInitUI();
         }
@@ -559,7 +559,7 @@ namespace ET.Client
                 uISkillGridComponent.SkillSecond = 0;
             }
 
-            self.MainSkillFungun.OnUpdate(0);
+            self.MainSkillFungun?.OnUpdate(0);
         }
 
         public static void OnLockTargetUnit(this ES_MainSkill self)
@@ -591,7 +591,7 @@ namespace ET.Client
                 self.MainSkillGridList[i].OnEnterCancelButton();
             }
 
-            self.SkillGridJueXing.OnEnterCancelButton();
+            self.SkillGridJueXing?.OnEnterCancelButton();
         }
 
         public static void OnBagItemUpdate(this ES_MainSkill self)

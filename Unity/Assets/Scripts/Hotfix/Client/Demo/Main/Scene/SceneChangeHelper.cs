@@ -42,7 +42,7 @@
             unitComponent.Add(unit);
             //root.RemoveComponent<AIComponent>();
             
-            EventSystem.Instance.Publish(currentScene, new SceneChangeFinish());
+            EventSystem.Instance.Publish(currentScene, new SceneChangeFinish() { SceneType = sceneType} );
             // 通知等待场景切换的协程
             root.GetComponent<ObjectWait>().Notify(new Wait_SceneChangeFinish());
         }

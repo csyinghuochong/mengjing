@@ -155,6 +155,7 @@ namespace ET.Client
 
         public static void BeforeUnload(this DlgMain self)
         {
+            Log.Debug("DlgMain.BeforeUnload");
             self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
             self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
         }
@@ -1240,10 +1241,19 @@ namespace ET.Client
             // self.ZoneScene().GetComponent<BattleMessageComponent>().AttackSelfPlayer.Clear();
         }
 
+        /// <summary>
+        /// 返回myunit 并且场景加载完成 
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="sceneTypeEnum"></param>
         public static void AfterEnterScene(this DlgMain self, int sceneTypeEnum)
         {
+            //
+            self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
             self.View.E_UIMainSkill.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.MainCityScene);
             self.View.E_HomeButton.gameObject.SetActive( sceneTypeEnum == SceneTypeEnum.MainCityScene );
+            
+            self.View.ES_MainSkill.OnSkillSetUpdate();
         }
     }
 }
