@@ -136,6 +136,11 @@ namespace ET.Client
         //结束播放技能特效
         public static void EndSkillEffect(this SkillC self)
         {
+            if (self.Scene() == null)
+            {
+                return;
+            }
+
             for (int i = 0; i < self.EffectInstanceId.Count; i++)
             {
                 EventSystem.Instance.Publish( self.Root(), new SkillEffectFinish

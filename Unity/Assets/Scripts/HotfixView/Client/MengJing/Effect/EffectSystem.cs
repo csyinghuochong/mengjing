@@ -185,6 +185,9 @@ namespace ET.Client
 
             string effectNamePath = effectFileName + self.EffectConfig.EffectName;
             self.EffectPath = StringBuilderHelper.GetEffetPath(effectNamePath);
+            
+            Log.Debug($"effectNamePath:  {effectNamePath}");
+            
             GameObjectPoolComponent.Instance.AddLoadQueue(self.EffectPath, self.InstanceId, self.OnLoadGameObject);
         }
 

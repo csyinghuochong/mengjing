@@ -20,7 +20,6 @@ namespace ET.Client
 
                 //await SceneManager.LoadSceneAsync(currentScene.Name);
                 root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.BeginEnterScene(args.LastSceneType);
-               
 
                 currentScene.AddComponent<OperaComponent>();
             }
