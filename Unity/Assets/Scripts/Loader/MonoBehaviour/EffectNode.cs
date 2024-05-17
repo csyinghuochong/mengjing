@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
 public enum eUpdateMode
 {
     NONE,
@@ -17,8 +18,11 @@ public enum eNodeType
     SpecialNode,
     Yujing
 }
+
 namespace Assets.Scripts.Com.Game.Mono
 {
+
+
     public class EffectNode : MonoBehaviour
     {
         public eUpdateMode updateMode;
