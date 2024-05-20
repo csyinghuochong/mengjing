@@ -41,5 +41,6 @@ namespace ET.Client
 		WindowID_Skill,
 		WindowID_WatchMenu,
 		WindowID_MapBig,
+		WindowID_RoleZodiac,
 	}
 }

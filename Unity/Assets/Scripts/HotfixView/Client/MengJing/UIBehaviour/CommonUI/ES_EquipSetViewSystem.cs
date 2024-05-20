@@ -120,6 +120,12 @@ namespace ET.Client
                     self.ESEquipItems_1[itemConfig.ItemSubType + 1].Refresh(equiplist[i], occ, itemOperateEnum, equiplist);
                 }
             }
+
+            DlgRoleZodiac dlgRoleZodiac = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRoleZodiac>();
+            if (dlgRoleZodiac != null)
+            {
+                dlgRoleZodiac.UpdateBagUI(self.EquipInfoList, self.Occ, self.ItemOperateEnum);
+            }
         }
 
         private static void RefreshEquip_2(this ES_EquipSet self, List<BagInfo> equiplist, int occ, ItemOperateEnum itemOperateEnum)

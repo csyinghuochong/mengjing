@@ -71,6 +71,7 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgRole self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+            self.View.E_ZodiacButton.AddListenerAsync(self.OnButtonZodiac);
         }
 
         public static void ShowWindow(this DlgRole self, Entity contextData = null)
@@ -153,6 +154,7 @@ namespace ET.Client
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
 
             uiComponent.CloseWindow(WindowID.WindowID_Role);
+            uiComponent.CloseWindow(WindowID.WindowID_RoleZodiac);
         }
 
         public static bool OnClickXiangQianItem(this DlgRole self, BagInfo bagInfo)
@@ -182,6 +184,29 @@ namespace ET.Client
             {
                 self.View.ES_RoleHuiShou.OnEquipHuiShow();
             }
+        }
+
+        public static async ETTask OnButtonZodiac(this DlgRole self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            if (userInfoComponent.UserInfo.Lv < 30)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("30级开启生肖系统喔！");
+                return;
+            }
+
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RoleZodiac);
+            DlgRoleZodiac dlgRoleZodiac = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRoleZodiac>();
+            dlgRoleZodiac.OnInitUI(self.View.ES_EquipSet.EquipInfoList, self.View.ES_EquipSet.Occ, self.View.ES_EquipSet.ItemOperateEnum);
+
+            self.View.E_ZodiacButton.gameObject.SetActive(false);
+            self.View.ES_EquipSet.uiTransform.gameObject.SetActive(false);
+        }
+
+        public static void OnCloseRoleZodiac(this DlgRole self)
+        {
+            self.View.E_ZodiacButton.gameObject.SetActive(true);
+            self.View.ES_EquipSet.uiTransform.gameObject.SetActive(true);
         }
     }
 }
