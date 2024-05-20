@@ -17,6 +17,7 @@ namespace ET.Client
 
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
+            self.E_OneGemButton.AddListener(self.OnOneGemButton);
             self.E_ZhengLiButton.AddListenerAsync(self.OnZhengLiButton);
             self.E_OneSellButton.AddListener(self.OnOneSellButton);
             self.E_AllToggle.IsSelected(true);
@@ -196,6 +197,57 @@ namespace ET.Client
                     self.ScrollItemCommonItems[i].UpdateSelectStatus(bagInfo);
                 }
             }
+        }
+
+        private static void OnOneGemButton(this ES_RoleBag self)
+        {
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            if (bagComponent.GetBagLeftCell() < 1)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("请至少预留一个格子");
+                return;
+            }
+
+            List<BagInfo> bagItemList = bagComponent.GetBagList();
+            List<BagInfo> gemList = new List<BagInfo>();
+            for (int i = 0; i < bagItemList.Count; i++)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagItemList[i].ItemID);
+                if (itemConfig.ItemType != ItemTypeEnum.Gemstone)
+                {
+                    continue;
+                }
+
+                if (!EquipMakeConfigCategory.Instance.GetHeChengList.ContainsKey(itemConfig.Id))
+                {
+                    continue;
+                }
+
+                gemList.Add(bagItemList[i]);
+            }
+
+            long costgold = 0;
+            long costvitality = 0;
+            for (int i = gemList.Count - 1; i >= 0; i--)
+            {
+                KeyValuePairInt keyValuePair = EquipMakeConfigCategory.Instance.GetHeChengList[gemList[i].ItemID];
+                int neednumber = (int)keyValuePair.Value;
+                int newmakeid = keyValuePair.KeyId;
+                int newnumber = gemList[i].ItemNum / neednumber;
+                EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(newmakeid);
+                costgold += (equipMakeConfig.MakeNeedGold * newnumber);
+                costvitality += (equipMakeConfig.CostVitality * newnumber);
+            }
+
+            if (costgold <= 0)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("当前背包暂无可合成宝石");
+                return;
+            }
+
+            PopupTipHelp.OpenPopupTip(self.Root(), "合成宝石", $"一键合成消耗{costgold}金币",
+                        () => { BagClientNetHelper.RquestGemHeCheng(self.Root()).Coroutine(); }, null)
+                    .Coroutine();
         }
 
         private static async ETTask OnZhengLiButton(this ES_RoleBag self)
