@@ -873,6 +873,12 @@ namespace ET.Client
         private static void OnUpdateMiniMap(this DlgMain self)
         {
             Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
+
+            if (main == null)
+            {
+                return;
+            }
+            
             List<Unit> allUnit = main.GetParent<UnitComponent>().GetAll();
 
             int teamNumber = 0;
@@ -983,12 +989,12 @@ namespace ET.Client
 
         private static async ETTask LoadMapCamera(this DlgMain self)
         {
-            GameObject mapCamera = GameObject.Find("MapCamera");
+            GameObject mapCamera = GameObject.Find("Global/MapCamera");
             if (mapCamera == null)
             {
                 var path = ABPathHelper.GetUnitPath("Component/MapCamera");
                 GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-                mapCamera = GameObject.Instantiate(prefab);
+                mapCamera = UnityEngine.Object.Instantiate(prefab, GameObject.Find("Global").transform);
                 mapCamera.name = "MapCamera";
             }
 
@@ -1021,7 +1027,7 @@ namespace ET.Client
             self.ScaleRateX = self.View.E_RawImageRawImage.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
             self.ScaleRateY = self.View.E_RawImageRawImage.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
             self.View.E_RawImageRawImage.transform.localPosition = Vector2.zero;
-            await self.Root().GetComponent<TimerComponent>().WaitAsync(200);
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
             camera.enabled = false;
 
             self.OnMainHeroMoveMiniMap();
@@ -1125,14 +1131,14 @@ namespace ET.Client
             self.View.E_Btn_TopRight_2.gameObject.SetActive(!active);
             self.View.E_Btn_TopRight_3.gameObject.SetActive(!active);
 
-            self.View.E_Button_ZhanKai.transform.localScale = active ? new Vector3(1f, 1f, 1f) :  new Vector3(-1f, 1f, 1f);
+            self.View.E_Button_ZhanKai.transform.localScale = active? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
         }
-        
+
         public static void OnClickReturnButton(this DlgMain self)
         {
             Scene zoneScene = self.Root();
             MapComponent mapComponent = zoneScene.GetComponent<MapComponent>();
-           
+
             string tipStr = "确定返回主城？";
             if (mapComponent.SceneType == SceneTypeEnum.Battle)
             {
@@ -1140,10 +1146,7 @@ namespace ET.Client
             }
 
             PopupTipHelp.OpenPopupTip(self.Root(), "", GameSettingLanguge.LoadLocalization(tipStr),
-                () =>
-                {
-                    EnterMapHelper.RequestQuitFuben(self.Root());
-                },
+                () => { EnterMapHelper.RequestQuitFuben(self.Root()); },
                 null).Coroutine();
         }
 
@@ -1204,7 +1207,7 @@ namespace ET.Client
         }
 
         #endregion
-        
+
         public static void OnUpdateHP(this DlgMain self, int sceneType, Unit defend, Unit attack, long hurtvalue)
         {
             // int unitType = defend.Type;
@@ -1222,11 +1225,11 @@ namespace ET.Client
             //     self.UIRoleHead.OnUpdatePetHP(defend);
             // }
         }
-        
+
         public static void BeginEnterScene(this DlgMain self, int lastScene)
         {
             Log.Debug("BeginEnterScene");
-            
+
             self.View.ES_MainTeam.ResetUI();
             self.View.ES_MainSkill.ResetUI();
             // self.UIMainBuffComponent.ResetUI();
@@ -1251,8 +1254,8 @@ namespace ET.Client
             //
             self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
             self.View.E_UIMainSkill.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.MainCityScene);
-            self.View.E_HomeButton.gameObject.SetActive( sceneTypeEnum == SceneTypeEnum.MainCityScene );
-            
+            self.View.E_HomeButton.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.MainCityScene);
+
             self.View.ES_MainSkill.OnSkillSetUpdate();
             self.OnEnterScene();
         }
