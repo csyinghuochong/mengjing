@@ -93,6 +93,8 @@ namespace ET.Client
                 }
             }
 
+            self.E_Text_DescText.text = self.E_Text_DescText.text.Replace("\\n", "\n");
+
             self.E_ButtonLearnButton.gameObject.SetActive(false);
             self.E_ButtonUpButton.gameObject.SetActive(false);
             self.E_ButtonMaxButton.gameObject.SetActive(false);

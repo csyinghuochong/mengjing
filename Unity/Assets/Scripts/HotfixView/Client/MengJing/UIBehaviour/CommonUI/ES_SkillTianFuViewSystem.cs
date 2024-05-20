@@ -148,6 +148,7 @@ namespace ET.Client
                 UICommonHelper.SetParent(gameObject, self.EG_DescListNodeRectTransform.gameObject);
                 gameObject.SetActive(true);
                 gameObject.GetComponent<Text>().text = descList[i];
+                gameObject.GetComponent<Text>().text = gameObject.GetComponent<Text>().text.Replace("\\n", "\n");
                 gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(600f, gameObject.GetComponent<Text>().preferredHeight);
             }
 
