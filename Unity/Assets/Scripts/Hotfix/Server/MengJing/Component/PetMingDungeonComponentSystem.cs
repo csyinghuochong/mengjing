@@ -51,8 +51,8 @@ namespace ET.Server
              m2C_FubenSettlement.BattleResult = result;
              m2C_FubenSettlement.StarInfos = result == CombatResultEnum.Win ?  new List<int>() { 1, 1, 1 } : new List<int>() { 0,0,0};
              MapMessageHelper.SendToClient(self.MainUnit, m2C_FubenSettlement);
-             self.MainUnit.GetComponent<NumericComponentS>().SetEvent( NumericType.PetMineBattle,1, true  );
-             self.MainUnit.GetComponent<NumericComponentS>().SetEvent( NumericType.PetMineCDTime, TimeHelper.ServerNow() + cdTime, true);
+             self.MainUnit.GetComponent<NumericComponentS>().ApplyValue( NumericType.PetMineBattle,1, true  );
+             self.MainUnit.GetComponent<NumericComponentS>().ApplyValue( NumericType.PetMineCDTime, TimeHelper.ServerNow() + cdTime, true);
 
              self.MainUnit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.MineBattleNumber_402, 0, 1);
              self.MainUnit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.MineBattleNumber_402, 0, 1);

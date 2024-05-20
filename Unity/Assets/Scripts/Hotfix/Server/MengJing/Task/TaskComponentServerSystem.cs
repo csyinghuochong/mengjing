@@ -573,13 +573,13 @@ namespace ET.Server
                 int dailyTaskNumber = numericComponent.GetAsInt(NumericType.DailyTaskNumber) + 1;
                 if (dailyTaskNumber < GlobalValueConfigCategory.Instance.Get(58).Value2)
                 {
-                    numericComponent.SetEvent(NumericType.DailyTaskNumber, dailyTaskNumber, true);
-                    numericComponent.SetEvent(NumericType.DailyTaskID, TaskHelper.GetTaskIdByType(TaskTypeEnum.Daily, roleLv), true);
+                    numericComponent.ApplyValue(NumericType.DailyTaskNumber, dailyTaskNumber, true);
+                    numericComponent.ApplyValue(NumericType.DailyTaskID, TaskHelper.GetTaskIdByType(TaskTypeEnum.Daily, roleLv), true);
                 }
                 else
                 {
-                    numericComponent.SetEvent(NumericType.DailyTaskID, 0, true);
-                    numericComponent.SetEvent(NumericType.DailyTaskNumber, dailyTaskNumber, true);
+                    numericComponent.ApplyValue(NumericType.DailyTaskID, 0, true);
+                    numericComponent.ApplyValue(NumericType.DailyTaskNumber, dailyTaskNumber, true);
                 }
 
                 self.TriggerTaskCountryEvent(TaskTargetType.DailyTask_1014, 0, 1);
@@ -590,13 +590,13 @@ namespace ET.Server
 
                 if (weekTaskNumber < GlobalValueConfigCategory.Instance.Get(109).Value2)
                 {
-                    numericComponent.SetEvent(NumericType.WeeklyTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Weekly, roleLv), true);
-                    numericComponent.SetEvent(NumericType.WeeklyTaskNumber, weekTaskNumber, true);
+                    numericComponent.ApplyValue(NumericType.WeeklyTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Weekly, roleLv), true);
+                    numericComponent.ApplyValue(NumericType.WeeklyTaskNumber, weekTaskNumber, true);
                 }
                 else
                 {
-                    numericComponent.SetEvent(NumericType.WeeklyTaskId, 0, true);
-                    numericComponent.SetEvent(NumericType.WeeklyTaskNumber, weekTaskNumber, true);
+                    numericComponent.ApplyValue(NumericType.WeeklyTaskId, 0, true);
+                    numericComponent.ApplyValue(NumericType.WeeklyTaskNumber, weekTaskNumber, true);
                 }
             }
             if (taskConfig.TaskType == TaskTypeEnum.Ring)
@@ -605,13 +605,13 @@ namespace ET.Server
 
                 if (ringTaskNumber < 100)
                 {
-                    numericComponent.SetEvent(NumericType.RingTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Ring, roleLv), true);
-                    numericComponent.SetEvent(NumericType.RingTaskNumber, ringTaskNumber, true);
+                    numericComponent.ApplyValue(NumericType.RingTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Ring, roleLv), true);
+                    numericComponent.ApplyValue(NumericType.RingTaskNumber, ringTaskNumber, true);
                 }
                 else
                 {
-                    numericComponent.SetEvent(NumericType.RingTaskId, 0, true);
-                    numericComponent.SetEvent(NumericType.RingTaskNumber, ringTaskNumber, true);
+                    numericComponent.ApplyValue(NumericType.RingTaskId, 0, true);
+                    numericComponent.ApplyValue(NumericType.RingTaskNumber, ringTaskNumber, true);
                 }
             }
             if (taskConfig.TaskType == TaskTypeEnum.Union)
@@ -619,24 +619,24 @@ namespace ET.Server
                 int unionTaskNumber = numericComponent.GetAsInt(NumericType.UnionTaskNumber) + 1;
                 if (unionTaskNumber < GlobalValueConfigCategory.Instance.Get(108).Value2)
                 {
-                    numericComponent.SetEvent( NumericType.UnionTaskNumber, unionTaskNumber, true);
-                    numericComponent.SetEvent(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), true);
+                    numericComponent.ApplyValue( NumericType.UnionTaskNumber, unionTaskNumber, true);
+                    numericComponent.ApplyValue(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), true);
                 }
                 else
                 {
-                    numericComponent.SetEvent(NumericType.UnionTaskId, 0, true);
-                    numericComponent.SetEvent(NumericType.UnionTaskNumber, unionTaskNumber,  true);
+                    numericComponent.ApplyValue(NumericType.UnionTaskId, 0, true);
+                    numericComponent.ApplyValue(NumericType.UnionTaskNumber, unionTaskNumber,  true);
                 }
 
             }
             if (taskConfig.TaskType == TaskTypeEnum.Treasure)
             {
                 int treasureTask = numericComponent.GetAsInt(NumericType.TreasureTask);
-                numericComponent.SetEvent(NumericType.TreasureTask, treasureTask + 1, true);
+                numericComponent.ApplyValue(NumericType.TreasureTask, treasureTask + 1, true);
             }
             if (taskConfig.TaskType == TaskTypeEnum.Season)
             {
-                numericComponent.SetEvent(NumericType.SeasonTask, taskid, true);
+                numericComponent.ApplyValue(NumericType.SeasonTask, taskid, true);
                 if (TaskConfigCategory.Instance.Contain(taskid + 1) && TaskConfigCategory.Instance.Get(taskid + 1).TaskType == TaskTypeEnum.Season)
                 {
                     self.OnAcceptedTask(taskid + 1);
@@ -648,7 +648,7 @@ namespace ET.Server
             }
             if (taskConfig.TaskType == TaskTypeEnum.System)
             {
-                numericComponent.SetEvent(NumericType.SystemTask, taskid, true  );
+                numericComponent.ApplyValue(NumericType.SystemTask, taskid, true  );
                 if (TaskConfigCategory.Instance.Contain(taskid + 1) && TaskConfigCategory.Instance.Get(taskid + 1).TaskType == TaskTypeEnum.System)
                 {
                     self.OnAcceptedTask(taskid + 1);
@@ -1367,7 +1367,7 @@ namespace ET.Server
             }
 
             int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetUserLv();
-            numericComponent.SetEvent(NumericType.DailyTaskID, TaskHelper.GetTaskIdByType(TaskTypeEnum.Daily, roleLv), notice);
+            numericComponent.ApplyValue(NumericType.DailyTaskID, TaskHelper.GetTaskIdByType(TaskTypeEnum.Daily, roleLv), notice);
         }
 
         public static void CheckRingTask(this TaskComponentS self)
@@ -1379,7 +1379,7 @@ namespace ET.Server
 
                 int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetUserLv();
                 int ringTaskId = TaskHelper.GetTaskIdByType(TaskTypeEnum.Ring, roleLv);
-                numericComponent.SetEvent(NumericType.RingTaskId, ringTaskId, false);
+                numericComponent.ApplyValue(NumericType.RingTaskId, ringTaskId, false);
             }
         }
 
@@ -1391,7 +1391,7 @@ namespace ET.Server
                 //self.ClearTypeTask(TaskTypeEnum.Ring);
                 int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetUserLv();
                 int weekTaskId = TaskHelper.GetTaskIdByType(TaskTypeEnum.Weekly, roleLv);
-                numericComponent.SetEvent(NumericType.WeeklyTaskId, weekTaskId, false);
+                numericComponent.ApplyValue(NumericType.WeeklyTaskId, weekTaskId, false);
             }
         }
 
@@ -1439,7 +1439,7 @@ namespace ET.Server
             {
 
                 int roleLv = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetUserLv();
-                numericComponent.SetEvent(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), false);
+                numericComponent.ApplyValue(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), false);
             }
         }
 
@@ -1554,10 +1554,10 @@ namespace ET.Server
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             int roleLv = unit.GetComponent<UserInfoComponentS>().GetUserLv();
 
-            numericComponent.SetEvent(NumericType.DailyTaskNumber, 0, notice);
-            numericComponent.SetEvent(NumericType.UnionTaskNumber, 0, notice);
-            numericComponent.SetEvent(NumericType.DailyTaskID, TaskHelper.GetTaskIdByType(TaskTypeEnum.Daily, roleLv), notice);
-            numericComponent.SetEvent(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), notice);
+            numericComponent.ApplyValue(NumericType.DailyTaskNumber, 0, notice);
+            numericComponent.ApplyValue(NumericType.UnionTaskNumber, 0, notice);
+            numericComponent.ApplyValue(NumericType.DailyTaskID, TaskHelper.GetTaskIdByType(TaskTypeEnum.Daily, roleLv), notice);
+            numericComponent.ApplyValue(NumericType.UnionTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Union, roleLv), notice);
 
             //int ringTaskId = TaskHelper.GetTaskIdByType(TaskTypeEnum.Ring, roleLv);
             //numericComponent.ApplyValue(NumericType.RingTaskId, ringTaskId, notice);
@@ -1627,11 +1627,11 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             int roleLv = unit.GetComponent<UserInfoComponentS>().GetUserLv();
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-            numericComponent.SetEvent(NumericType.RingTaskNumber, 0, false);
-            numericComponent.SetEvent(NumericType.RingTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Ring, roleLv), false);
+            numericComponent.ApplyValue(NumericType.RingTaskNumber, 0, false);
+            numericComponent.ApplyValue(NumericType.RingTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Ring, roleLv), false);
 
-            numericComponent.SetEvent(NumericType.WeeklyTaskNumber, 0, false);
-            numericComponent.SetEvent(NumericType.WeeklyTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Weekly, roleLv), false);
+            numericComponent.ApplyValue(NumericType.WeeklyTaskNumber, 0, false);
+            numericComponent.ApplyValue(NumericType.WeeklyTaskId, TaskHelper.GetTaskIdByType(TaskTypeEnum.Weekly, roleLv), false);
 
             self.UpdateSeasonWeekTask(false);
         }
@@ -1639,7 +1639,7 @@ namespace ET.Server
         public static void UpdateSeasonWeekTask(this TaskComponentS self, bool notice)
         {
             Unit unit = self.GetParent<Unit>();
-            unit.GetComponent<NumericComponentS>().SetEvent(NumericType.SeasonTowerId, 0, notice);
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SeasonTowerId, 0, notice);
 
             //��������ÿ�����
             for (int i = self.TaskCountryList.Count - 1; i >= 0; i--)

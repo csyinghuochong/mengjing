@@ -22,15 +22,15 @@ namespace ET.Server
 
              if (numericComponent.GetAsInt(NumericType.Ling_DiLv) == 0)
              {
-                 numericComponent.SetEvent(NumericType.Ling_DiLv, 1, false);
+                 numericComponent.ApplyValue(NumericType.Ling_DiLv, 1, false);
              }
              if (numericComponent.GetAsInt(NumericType.CangKuNumber) == 0)
              {
-                 numericComponent.SetEvent(NumericType.CangKuNumber, 1, false);
+                 numericComponent.ApplyValue(NumericType.CangKuNumber, 1, false);
              }
              if (numericComponent.GetAsInt(NumericType.JianYuanCangKu) == 0)
              {
-                 numericComponent.SetEvent(NumericType.JianYuanCangKu, 1, false);
+                 numericComponent.ApplyValue(NumericType.JianYuanCangKu, 1, false);
              }
 
              long yuekeEndTime = numericComponent.GetAsLong(NumericType.YueKaEndTime) - TimeHelper.ServerNow();
@@ -111,24 +111,24 @@ namespace ET.Server
          {
              Unit unit = self.GetParent<Unit>();
              NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-             numericComponent.SetEvent((int)NumericType.Now_Dead , 0, false);
-             numericComponent.SetEvent((int)NumericType.Now_Damage, 0, false);
-             numericComponent.SetEvent((int)NumericType.Now_Stall, 0, false);
-             numericComponent.SetEvent((int)NumericType.TeamId, 0, false);
-             numericComponent.SetEvent((int)NumericType.Now_Hp, numericComponent.GetAsLong((int)NumericType.Now_MaxHp), false);
-             numericComponent.SetEvent((int)NumericType.Now_Weapon, unit.GetComponent<BagComponentS>().GetWuqiItemId(), false);
-             numericComponent.SetEvent(NumericType.JueXingAnger, 0, false);
-             numericComponent.SetEvent(NumericType.RunRaceRankId, 0, false);
-             numericComponent.SetEvent(NumericType.ZeroClock, 0, false);
+             numericComponent.ApplyValue((int)NumericType.Now_Dead , 0, false);
+             numericComponent.ApplyValue((int)NumericType.Now_Damage, 0, false);
+             numericComponent.ApplyValue((int)NumericType.Now_Stall, 0, false);
+             numericComponent.ApplyValue((int)NumericType.TeamId, 0, false);
+             numericComponent.ApplyValue((int)NumericType.Now_Hp, numericComponent.GetAsLong((int)NumericType.Now_MaxHp), false);
+             numericComponent.ApplyValue((int)NumericType.Now_Weapon, unit.GetComponent<BagComponentS>().GetWuqiItemId(), false);
+             numericComponent.ApplyValue(NumericType.JueXingAnger, 0, false);
+             numericComponent.ApplyValue(NumericType.RunRaceRankId, 0, false);
+             numericComponent.ApplyValue(NumericType.ZeroClock, 0, false);
 
              if (robotId != 0)
              {
                  RobotConfig robotConfig = RobotConfigCategory.Instance.Get(robotId);
-                 numericComponent.SetEvent(NumericType.PointLiLiang, robotConfig.PointList[0], false);
-                 numericComponent.SetEvent(NumericType.PointZhiLi, robotConfig.PointList[1], false);
-                 numericComponent.SetEvent(NumericType.PointTiZhi, robotConfig.PointList[2], false);
-                 numericComponent.SetEvent(NumericType.PointNaiLi, robotConfig.PointList[3], false);
-                 numericComponent.SetEvent(NumericType.PointMinJie, robotConfig.PointList[4], false);
+                 numericComponent.ApplyValue(NumericType.PointLiLiang, robotConfig.PointList[0], false);
+                 numericComponent.ApplyValue(NumericType.PointZhiLi, robotConfig.PointList[1], false);
+                 numericComponent.ApplyValue(NumericType.PointTiZhi, robotConfig.PointList[2], false);
+                 numericComponent.ApplyValue(NumericType.PointNaiLi, robotConfig.PointList[3], false);
+                 numericComponent.ApplyValue(NumericType.PointMinJie, robotConfig.PointList[4], false);
              }
 
              if (numericComponent.GetAsInt(NumericType.CostTiLi) > 600)
@@ -143,14 +143,14 @@ namespace ET.Server
              if (seasonopenTime != 0 && seasonopenTime != ConfigData.SeasonOpenTime)
              {
                  //清空赛季相关数据. 赛季任务 晶核
-                 numericComponent.SetEvent(NumericType.SeasonOpenTime, 0, false);
+                 numericComponent.ApplyValue(NumericType.SeasonOpenTime, 0, false);
 
                  Log.Console("清空赛季任务！");
              }
 
              if (numericComponent.GetAsInt(NumericType.SkillMakePlan2) == 0)
              {
-                 numericComponent.SetEvent(NumericType.MakeType_2, 0, false);
+                 numericComponent.ApplyValue(NumericType.MakeType_2, 0, false);
              }
 
              self.CheckSeasonOpen(false);
@@ -169,12 +169,12 @@ namespace ET.Server
 
              if (numericComponent.GetAsInt(NumericType.SeasonBossFuben) >= 100000)
              {
-                 numericComponent.SetEvent(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
+                 numericComponent.ApplyValue(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
              }
 
              if (numericComponent.GetAsInt(NumericType.SeasonBossFuben) >= ConfigHelper.GMDungeonId())
              {
-                 numericComponent.SetEvent(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
+                 numericComponent.ApplyValue(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
              }
 
              if (numericComponent.GetAsLong(NumericType.SeasonOpenTime) == 0 && SeasonHelper.IsOpenSeason(userInfoComponent.GetUserLv()))
@@ -182,9 +182,9 @@ namespace ET.Server
                  Log.Console($"CheckSeasonOpen: {unit.Id}");
 
                  //刷新boss
-                 numericComponent.SetEvent(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
-                 numericComponent.SetEvent(NumericType.SeasonBossRefreshTime, TimeHelper.ServerNow() + TimeHelper.Minute, false);
-                 numericComponent.SetEvent(NumericType.SeasonOpenTime, ConfigData.SeasonOpenTime, false);
+                 numericComponent.ApplyValue(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
+                 numericComponent.ApplyValue(NumericType.SeasonBossRefreshTime, TimeHelper.ServerNow() + TimeHelper.Minute, false);
+                 numericComponent.ApplyValue(NumericType.SeasonOpenTime, ConfigData.SeasonOpenTime, false);
 
                  //刷新任务
                  TaskComponentS taskComponent = unit.GetComponent<TaskComponentS>();
@@ -204,61 +204,61 @@ namespace ET.Server
              Unit unit = self.GetParent<Unit>();
              NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
-             numericComponent.SetEvent(NumericType.HongBao, 0, notice);
-             numericComponent.SetEvent(NumericType.Now_XiLian, 0, notice);
-             numericComponent.SetEvent(NumericType.PetChouKa, 0, notice);
-             numericComponent.SetEvent(NumericType.YueKaAward, 0, notice);
-             numericComponent.SetEvent(NumericType.XiuLian_ExpNumber, 0, notice);
-             numericComponent.SetEvent(NumericType.XiuLian_CoinNumber, 0, notice);
-             numericComponent.SetEvent(NumericType.XiuLian_ExpTime, 0, notice);
-             numericComponent.SetEvent(NumericType.XiuLian_CoinTime, 0, notice);
-             numericComponent.SetEvent(NumericType.TiLiKillNumber, 0, notice);
-             numericComponent.SetEvent(NumericType.ChouKa, 0, notice);
-             numericComponent.SetEvent(NumericType.ExpToGoldTimes, 0, notice);
-             numericComponent.SetEvent(NumericType.RechargeSign, 0, notice);
-             numericComponent.SetEvent(NumericType.TeamDungeonTimes, 0, notice);
-             numericComponent.SetEvent(NumericType.TeamDungeonXieZhu, 0, notice);
-             numericComponent.SetEvent(NumericType.BattleTodayKill, 0, notice);
-             numericComponent.SetEvent(NumericType.FubenTimesReset, 0, notice);
-             numericComponent.SetEvent(NumericType.FenShangSet, 0, notice);
-             numericComponent.SetEvent(NumericType.ArenaNumber, 0, notice);
-             numericComponent.SetEvent(NumericType.LocalDungeonTime, 0, notice);
-             numericComponent.SetEvent(NumericType.TreasureTask, 0, notice);
-             numericComponent.SetEvent(NumericType.JiaYuanExchangeZiJin, 0, notice);
-             numericComponent.SetEvent(NumericType.JiaYuanExchangeExp, 0, notice);
-             numericComponent.SetEvent(NumericType.JiaYuanVisitRefresh, 0, notice);
-             numericComponent.SetEvent(NumericType.JiaYuanGatherOther, 0, notice);
-             numericComponent.SetEvent(NumericType.JiaYuanPickOther, 0, notice);
-             numericComponent.SetEvent(NumericType.UnionDonationNumber, 0, notice);
-             numericComponent.SetEvent(NumericType.UnionDiamondDonationNumber, 0, notice);
-             numericComponent.SetEvent(NumericType.RaceDonationNumber, 0, notice);
+             numericComponent.ApplyValue(NumericType.HongBao, 0, notice);
+             numericComponent.ApplyValue(NumericType.Now_XiLian, 0, notice);
+             numericComponent.ApplyValue(NumericType.PetChouKa, 0, notice);
+             numericComponent.ApplyValue(NumericType.YueKaAward, 0, notice);
+             numericComponent.ApplyValue(NumericType.XiuLian_ExpNumber, 0, notice);
+             numericComponent.ApplyValue(NumericType.XiuLian_CoinNumber, 0, notice);
+             numericComponent.ApplyValue(NumericType.XiuLian_ExpTime, 0, notice);
+             numericComponent.ApplyValue(NumericType.XiuLian_CoinTime, 0, notice);
+             numericComponent.ApplyValue(NumericType.TiLiKillNumber, 0, notice);
+             numericComponent.ApplyValue(NumericType.ChouKa, 0, notice);
+             numericComponent.ApplyValue(NumericType.ExpToGoldTimes, 0, notice);
+             numericComponent.ApplyValue(NumericType.RechargeSign, 0, notice);
+             numericComponent.ApplyValue(NumericType.TeamDungeonTimes, 0, notice);
+             numericComponent.ApplyValue(NumericType.TeamDungeonXieZhu, 0, notice);
+             numericComponent.ApplyValue(NumericType.BattleTodayKill, 0, notice);
+             numericComponent.ApplyValue(NumericType.FubenTimesReset, 0, notice);
+             numericComponent.ApplyValue(NumericType.FenShangSet, 0, notice);
+             numericComponent.ApplyValue(NumericType.ArenaNumber, 0, notice);
+             numericComponent.ApplyValue(NumericType.LocalDungeonTime, 0, notice);
+             numericComponent.ApplyValue(NumericType.TreasureTask, 0, notice);
+             numericComponent.ApplyValue(NumericType.JiaYuanExchangeZiJin, 0, notice);
+             numericComponent.ApplyValue(NumericType.JiaYuanExchangeExp, 0, notice);
+             numericComponent.ApplyValue(NumericType.JiaYuanVisitRefresh, 0, notice);
+             numericComponent.ApplyValue(NumericType.JiaYuanGatherOther, 0, notice);
+             numericComponent.ApplyValue(NumericType.JiaYuanPickOther, 0, notice);
+             numericComponent.ApplyValue(NumericType.UnionDonationNumber, 0, notice);
+             numericComponent.ApplyValue(NumericType.UnionDiamondDonationNumber, 0, notice);
+             numericComponent.ApplyValue(NumericType.RaceDonationNumber, 0, notice);
              // 重置封印之塔数据
-             numericComponent.SetEvent(NumericType.JiaYuanPurchaseRefresh, 0, notice);
-             numericComponent.SetEvent(NumericType.TowerOfSealArrived, 0, notice);
-             numericComponent.SetEvent(NumericType.TowerOfSealFinished, 0, notice);
+             numericComponent.ApplyValue(NumericType.JiaYuanPurchaseRefresh, 0, notice);
+             numericComponent.ApplyValue(NumericType.TowerOfSealArrived, 0, notice);
+             numericComponent.ApplyValue(NumericType.TowerOfSealFinished, 0, notice);
 
-             numericComponent.SetEvent(NumericType.RunRaceRankId, 0, notice);
-             numericComponent.SetEvent(NumericType.HappyCellIndex, 0, notice);
-             numericComponent.SetEvent(NumericType.HappyMoveNumber, 0, notice);
+             numericComponent.ApplyValue(NumericType.RunRaceRankId, 0, notice);
+             numericComponent.ApplyValue(NumericType.HappyCellIndex, 0, notice);
+             numericComponent.ApplyValue(NumericType.HappyMoveNumber, 0, notice);
 
-             numericComponent.SetEvent(NumericType.PetMineBattle, 0, notice);
-             numericComponent.SetEvent(NumericType.PetMineLogin, 0, notice);
+             numericComponent.ApplyValue(NumericType.PetMineBattle, 0, notice);
+             numericComponent.ApplyValue(NumericType.PetMineLogin, 0, notice);
 
-             numericComponent.SetEvent(NumericType.CostTiLi, 0, notice);
-             numericComponent.SetEvent(NumericType.DrawIndex, 0, notice);
-             numericComponent.SetEvent(NumericType.DrawReward, 0, notice);
+             numericComponent.ApplyValue(NumericType.CostTiLi, 0, notice);
+             numericComponent.ApplyValue(NumericType.DrawIndex, 0, notice);
+             numericComponent.ApplyValue(NumericType.DrawReward, 0, notice);
 
-             numericComponent.SetEvent(NumericType.PetMineReset, 0, notice);
+             numericComponent.ApplyValue(NumericType.PetMineReset, 0, notice);
 
-             numericComponent.SetEvent(NumericType.V1DayCostDiamond, 0, notice);
-             numericComponent.SetEvent(NumericType.V1ChouKaNumber, 0, notice);
-             numericComponent.SetEvent(NumericType.V1RechageNumber, 0, notice);
-             numericComponent.SetEvent(NumericType.PetExploreNumber, 0, notice);
-             numericComponent.SetEvent(NumericType.PetHeXinExploreNumber, 0, notice);
-             numericComponent.SetEvent(NumericType.ItemXiLianNumber, 0, notice);
+             numericComponent.ApplyValue(NumericType.V1DayCostDiamond, 0, notice);
+             numericComponent.ApplyValue(NumericType.V1ChouKaNumber, 0, notice);
+             numericComponent.ApplyValue(NumericType.V1RechageNumber, 0, notice);
+             numericComponent.ApplyValue(NumericType.PetExploreNumber, 0, notice);
+             numericComponent.ApplyValue(NumericType.PetHeXinExploreNumber, 0, notice);
+             numericComponent.ApplyValue(NumericType.ItemXiLianNumber, 0, notice);
              
              int lirun =  (int)(numericComponent.GetAsInt(NumericType.InvestTotal) * 0.25f);
-             numericComponent.SetEvent(NumericType.InvestTotal, numericComponent.GetAsInt(NumericType.InvestTotal) + lirun, notice);
+             numericComponent.ApplyValue(NumericType.InvestTotal, numericComponent.GetAsInt(NumericType.InvestTotal) + lirun, notice);
          }
 
          /// <summary>
@@ -285,12 +285,12 @@ namespace ET.Server
              Unit unit = self.GetParent<Unit>();
              NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
              UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
-             numericComponent.SetEvent(NumericType.PointLiLiang, 0, false);
-             numericComponent.SetEvent(NumericType.PointZhiLi, 0, false);
-             numericComponent.SetEvent(NumericType.PointTiZhi, 0, false);
-             numericComponent.SetEvent(NumericType.PointNaiLi, 0, false);
-             numericComponent.SetEvent(NumericType.PointMinJie,0, false);
-             numericComponent.SetEvent(NumericType.PointRemain, (userInfoComponent.GetUserLv()- 1) * 10, false);
+             numericComponent.ApplyValue(NumericType.PointLiLiang, 0, false);
+             numericComponent.ApplyValue(NumericType.PointZhiLi, 0, false);
+             numericComponent.ApplyValue(NumericType.PointTiZhi, 0, false);
+             numericComponent.ApplyValue(NumericType.PointNaiLi, 0, false);
+             numericComponent.ApplyValue(NumericType.PointMinJie,0, false);
+             numericComponent.ApplyValue(NumericType.PointRemain, (userInfoComponent.GetUserLv()- 1) * 10, false);
              Function_Fight.UnitUpdateProperty_Base(unit, true, true); ;
          }
 
@@ -314,8 +314,8 @@ namespace ET.Server
              {
                  LocalDungeonComponent localDungeon = unit.Root().GetComponent<LocalDungeonComponent>();
                  UserInfoComponentS userInfoComponent = localDungeon.MainUnit.GetComponent<UserInfoComponentS>();
-                 localDungeon.MainUnit.GetComponent<NumericComponentS>().SetEvent(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
-                 localDungeon.MainUnit.GetComponent<NumericComponentS>().SetEvent(NumericType.SeasonBossRefreshTime, TimeHelper.ServerNow() + resurrection * 1000, false);
+                 localDungeon.MainUnit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SeasonBossFuben, SeasonHelper.GetFubenId(userInfoComponent.GetUserLv()), false);
+                 localDungeon.MainUnit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SeasonBossRefreshTime, TimeHelper.ServerNow() + resurrection * 1000, false);
                  resurrection = 0;
              }
              if (resurrection == 0)
@@ -346,7 +346,7 @@ namespace ET.Server
                      resurrection = (int)(resurrection * bossDevelopment.ReviveTimeAdd);
 
                      resurrectionTime = TimeHelper.ServerNow() + resurrection * 1000;
-                     unit.GetComponent<NumericComponentS>().SetEvent(NumericType.ReviveTime, resurrectionTime, false);
+                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.ReviveTime, resurrectionTime, false);
                      userInfoComponent.OnAddRevive(unit.ConfigId, resurrectionTime);
                      unit.RemoveComponent<ReviveTimeComponent>();
                      unit.AddComponent<ReviveTimeComponent, long>(resurrectionTime);
@@ -462,32 +462,32 @@ namespace ET.Server
 
              NumericComponentS numericComponentMaster = matster.GetComponent<NumericComponentS>();
              
-             numericComponent.SetEvent((int)NumericType.Base_MaxHp_Base, (int)(numericComponentMaster.GetAsInt(NumericType.Base_MaxHp_Base) * 0.5f), false);
-             numericComponent.SetEvent((int)NumericType.Base_MinAct_Base, (int)(numericComponentMaster.GetAsInt(NumericType.Base_MinAct_Base) * 0.5f), false);
-             numericComponent.SetEvent((int)NumericType.Base_MaxAct_Base, (int)(numericComponentMaster.GetAsInt(NumericType.Base_MaxAct_Base) * 0.5f), false);
-             numericComponent.SetEvent((int)NumericType.Base_MinDef_Base, (int)(numericComponentMaster.GetAsInt(NumericType.Base_MinDef_Base) * 0.5f), false);
-             numericComponent.SetEvent((int)NumericType.Base_MaxDef_Base, (int)(numericComponentMaster.GetAsInt(NumericType.Base_MaxDef_Base) * 0.5f), false);
-             numericComponent.SetEvent((int)NumericType.Base_MinAdf_Base, (int)(numericComponentMaster.GetAsInt(NumericType.Base_MinAdf_Base) * 0.5f), false);
-             numericComponent.SetEvent((int)NumericType.Base_MaxAdf_Base, (int)(numericComponentMaster.GetAsInt(NumericType.Base_MaxAdf_Base) * 0.5f), false);
+             numericComponent.ApplyValue((int)NumericType.Base_MaxHp_Base, (int)(numericComponentMaster.GetAsInt(NumericType.Base_MaxHp_Base) * 0.5f), false);
+             numericComponent.ApplyValue((int)NumericType.Base_MinAct_Base, (int)(numericComponentMaster.GetAsInt(NumericType.Base_MinAct_Base) * 0.5f), false);
+             numericComponent.ApplyValue((int)NumericType.Base_MaxAct_Base, (int)(numericComponentMaster.GetAsInt(NumericType.Base_MaxAct_Base) * 0.5f), false);
+             numericComponent.ApplyValue((int)NumericType.Base_MinDef_Base, (int)(numericComponentMaster.GetAsInt(NumericType.Base_MinDef_Base) * 0.5f), false);
+             numericComponent.ApplyValue((int)NumericType.Base_MaxDef_Base, (int)(numericComponentMaster.GetAsInt(NumericType.Base_MaxDef_Base) * 0.5f), false);
+             numericComponent.ApplyValue((int)NumericType.Base_MinAdf_Base, (int)(numericComponentMaster.GetAsInt(NumericType.Base_MinAdf_Base) * 0.5f), false);
+             numericComponent.ApplyValue((int)NumericType.Base_MaxAdf_Base, (int)(numericComponentMaster.GetAsInt(NumericType.Base_MaxAdf_Base) * 0.5f), false);
 
-             numericComponent.SetEvent((int)NumericType.Base_Speed_Base, monsterConfig.MoveSpeed, false);
-             numericComponent.SetEvent((int)NumericType.Base_Cri_Base, monsterConfig.Cri, false);
-             numericComponent.SetEvent((int)NumericType.Base_Res_Base, monsterConfig.Res, false);
-             numericComponent.SetEvent((int)NumericType.Base_Hit_Base, monsterConfig.Hit, false);
-             numericComponent.SetEvent((int)NumericType.Base_Dodge_Base, monsterConfig.Dodge, false);
-             numericComponent.SetEvent((int)NumericType.Base_ActDamgeSubPro_Base, monsterConfig.DefAdd, false);
-             numericComponent.SetEvent((int)NumericType.Base_MageDamgeSubPro_Base, monsterConfig.AdfAdd, false);
-             numericComponent.SetEvent((int)NumericType.Base_DamgeSubPro_Base, monsterConfig.DamgeAdd, false);
+             numericComponent.ApplyValue((int)NumericType.Base_Speed_Base, monsterConfig.MoveSpeed, false);
+             numericComponent.ApplyValue((int)NumericType.Base_Cri_Base, monsterConfig.Cri, false);
+             numericComponent.ApplyValue((int)NumericType.Base_Res_Base, monsterConfig.Res, false);
+             numericComponent.ApplyValue((int)NumericType.Base_Hit_Base, monsterConfig.Hit, false);
+             numericComponent.ApplyValue((int)NumericType.Base_Dodge_Base, monsterConfig.Dodge, false);
+             numericComponent.ApplyValue((int)NumericType.Base_ActDamgeSubPro_Base, monsterConfig.DefAdd, false);
+             numericComponent.ApplyValue((int)NumericType.Base_MageDamgeSubPro_Base, monsterConfig.AdfAdd, false);
+             numericComponent.ApplyValue((int)NumericType.Base_DamgeSubPro_Base, monsterConfig.DamgeAdd, false);
 
              //设置当前血量
-             numericComponent.SetEvent((int)NumericType.Now_Hp, numericComponent.GetAsLong(NumericType.Now_MaxHp), false);
+             numericComponent.ApplyValue((int)NumericType.Now_Hp, numericComponent.GetAsLong(NumericType.Now_MaxHp), false);
          }
 
          public static void InitJiaYuanPet(this HeroDataComponentS self,  bool notice)
          {
              NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
-             numericComponent.SetEvent(NumericType.Now_MaxHp, 1, notice);
-             numericComponent.SetEvent(NumericType.Now_Hp, 1, notice);
+             numericComponent.ApplyValue(NumericType.Now_MaxHp, 1, notice);
+             numericComponent.ApplyValue(NumericType.Now_Hp, 1, notice);
          }
 
          public static void InitPet(this HeroDataComponentS self, RolePetInfo rolePetInfo, bool notice)
@@ -497,7 +497,7 @@ namespace ET.Server
              NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
              for (int i = 0; i < rolePetInfo.Ks.Count; i++)
              {
-                 numericComponent.SetEvent(rolePetInfo.Ks[i], rolePetInfo.Vs[i], notice);
+                 numericComponent.ApplyValue(rolePetInfo.Ks[i], rolePetInfo.Vs[i], notice);
              }
          }
 
@@ -553,33 +553,33 @@ namespace ET.Server
              string[] summonInfo = createMonsterInfo.AttributeParams.Split(';');
 
              int useMasterModel = int.Parse(summonInfo[0]);
-             numericComponent.SetEvent((int)NumericType.UseMasterModel, useMasterModel, false);
+             numericComponent.ApplyValue((int)NumericType.UseMasterModel, useMasterModel, false);
 
              string[] attributeList_1 = summonInfo[1].Split(',');    //比列
              string[] attributeList_2 = summonInfo[2].Split(',');    //固定值
 
              NumericComponentS masterNumberComponent = masterUnit.GetComponent<NumericComponentS>();
-             numericComponent.SetEvent((int)NumericType.Now_Lv, monsterlevel, false);
-             numericComponent.SetEvent((int)NumericType.Base_MaxHp_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_MaxHp) * float.Parse(attributeList_1[0]) * (1+ masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[0]), false);
-             numericComponent.SetEvent((int)NumericType.Base_MinAct_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_MaxAct) * float.Parse(attributeList_1[1]) * (1 + masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[1]), false);  //召唤怪物继承当前角色最大攻击
-             numericComponent.SetEvent((int)NumericType.Base_MaxAct_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_MaxAct) * float.Parse(attributeList_1[1]) * (1 + masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[1]), false);
-             numericComponent.SetEvent((int)NumericType.Base_Mage_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_Mage) * float.Parse(attributeList_1[2]) * (1 + masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[2]), false);
-             numericComponent.SetEvent((int)NumericType.Base_MinDef_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_MinDef) * float.Parse(attributeList_1[3]) * (1 + masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[3]), false);
-             numericComponent.SetEvent((int)NumericType.Base_MaxDef_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_MaxDef) * float.Parse(attributeList_1[3]) * (1 + masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[3]), false);
-             numericComponent.SetEvent((int)NumericType.Base_MinAdf_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_MinAdf) * float.Parse(attributeList_1[4]) * (1 + masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[4]), false);
-             numericComponent.SetEvent((int)NumericType.Base_MaxAdf_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_MaxAdf) * float.Parse(attributeList_1[4]) * (1 + masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[4]), false);
+             numericComponent.ApplyValue((int)NumericType.Now_Lv, monsterlevel, false);
+             numericComponent.ApplyValue((int)NumericType.Base_MaxHp_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_MaxHp) * float.Parse(attributeList_1[0]) * (1+ masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[0]), false);
+             numericComponent.ApplyValue((int)NumericType.Base_MinAct_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_MaxAct) * float.Parse(attributeList_1[1]) * (1 + masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[1]), false);  //召唤怪物继承当前角色最大攻击
+             numericComponent.ApplyValue((int)NumericType.Base_MaxAct_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_MaxAct) * float.Parse(attributeList_1[1]) * (1 + masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[1]), false);
+             numericComponent.ApplyValue((int)NumericType.Base_Mage_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_Mage) * float.Parse(attributeList_1[2]) * (1 + masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[2]), false);
+             numericComponent.ApplyValue((int)NumericType.Base_MinDef_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_MinDef) * float.Parse(attributeList_1[3]) * (1 + masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[3]), false);
+             numericComponent.ApplyValue((int)NumericType.Base_MaxDef_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_MaxDef) * float.Parse(attributeList_1[3]) * (1 + masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[3]), false);
+             numericComponent.ApplyValue((int)NumericType.Base_MinAdf_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_MinAdf) * float.Parse(attributeList_1[4]) * (1 + masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[4]), false);
+             numericComponent.ApplyValue((int)NumericType.Base_MaxAdf_Base, (int)((float)masterNumberComponent.GetAsInt(NumericType.Now_MaxAdf) * float.Parse(attributeList_1[4]) * (1 + masterNumberComponent.GetAsFloat(NumericType.Now_SummonAddPro))) + int.Parse(attributeList_2[4]), false);
 
              //属性
-             numericComponent.SetEvent((int)NumericType.Base_Speed_Base, monsterConfig.MoveSpeed, false);
-             numericComponent.SetEvent((int)NumericType.Base_Cri_Base, monsterConfig.Cri, false);
-             numericComponent.SetEvent((int)NumericType.Base_Res_Base, monsterConfig.Res, false);
-             numericComponent.SetEvent((int)NumericType.Base_Hit_Base, monsterConfig.Hit, false);
-             numericComponent.SetEvent((int)NumericType.Base_Dodge_Base, monsterConfig.Dodge, false);
-             numericComponent.SetEvent((int)NumericType.Base_ActDamgeSubPro_Base, monsterConfig.DefAdd, false);
-             numericComponent.SetEvent((int)NumericType.Base_MageDamgeSubPro_Base, monsterConfig.AdfAdd, false);
-             numericComponent.SetEvent((int)NumericType.Base_DamgeSubPro_Base, monsterConfig.DamgeAdd, false);
+             numericComponent.ApplyValue((int)NumericType.Base_Speed_Base, monsterConfig.MoveSpeed, false);
+             numericComponent.ApplyValue((int)NumericType.Base_Cri_Base, monsterConfig.Cri, false);
+             numericComponent.ApplyValue((int)NumericType.Base_Res_Base, monsterConfig.Res, false);
+             numericComponent.ApplyValue((int)NumericType.Base_Hit_Base, monsterConfig.Hit, false);
+             numericComponent.ApplyValue((int)NumericType.Base_Dodge_Base, monsterConfig.Dodge, false);
+             numericComponent.ApplyValue((int)NumericType.Base_ActDamgeSubPro_Base, monsterConfig.DefAdd, false);
+             numericComponent.ApplyValue((int)NumericType.Base_MageDamgeSubPro_Base, monsterConfig.AdfAdd, false);
+             numericComponent.ApplyValue((int)NumericType.Base_DamgeSubPro_Base, monsterConfig.DamgeAdd, false);
              //设置当前血量
-             numericComponent.SetEvent((int)NumericType.Now_Hp, numericComponent.GetAsInt(NumericType.Now_MaxHp), false);
+             numericComponent.ApplyValue((int)NumericType.Now_Hp, numericComponent.GetAsInt(NumericType.Now_MaxHp), false);
              //Log.Debug("初始化当前怪物血量:" + numericComponent.GetAsLong(NumericType.Now_Hp));
 
              //新增的参数
@@ -588,10 +588,10 @@ namespace ET.Server
              {
                  float a = masterNumberComponent.GetAsFloat(NumericType.Now_Cri);
                  //暴击,命中,闪避,韧性
-                 numericComponent.SetEvent((int)NumericType.Base_Cri_Base, (float.Parse(attributeList_1[5]) * masterNumberComponent.GetAsFloat(NumericType.Now_Cri)), false);
-                 numericComponent.SetEvent((int)NumericType.Base_Hit_Base, (float.Parse(attributeList_1[6]) * masterNumberComponent.GetAsFloat(NumericType.Now_Hit)), false);
-                 numericComponent.SetEvent((int)NumericType.Base_Dodge_Base, (float.Parse(attributeList_1[7]) * masterNumberComponent.GetAsFloat(NumericType.Now_Dodge)), false);
-                 numericComponent.SetEvent((int)NumericType.Base_Res_Base, (float.Parse(attributeList_1[8]) * masterNumberComponent.GetAsFloat(NumericType.Now_Res)), false);
+                 numericComponent.ApplyValue((int)NumericType.Base_Cri_Base, (float.Parse(attributeList_1[5]) * masterNumberComponent.GetAsFloat(NumericType.Now_Cri)), false);
+                 numericComponent.ApplyValue((int)NumericType.Base_Hit_Base, (float.Parse(attributeList_1[6]) * masterNumberComponent.GetAsFloat(NumericType.Now_Hit)), false);
+                 numericComponent.ApplyValue((int)NumericType.Base_Dodge_Base, (float.Parse(attributeList_1[7]) * masterNumberComponent.GetAsFloat(NumericType.Now_Dodge)), false);
+                 numericComponent.ApplyValue((int)NumericType.Base_Res_Base, (float.Parse(attributeList_1[8]) * masterNumberComponent.GetAsFloat(NumericType.Now_Res)), false);
              }
 
          }
@@ -708,21 +708,21 @@ namespace ET.Server
              }
 
              //attributeAdd   (boss成长boss加成)
-             numericComponent.SetEvent(NumericType.Base_MaxHp_Base, (int)(monsterConfig.Hp * hpCoefficient * attributeAdd), false);
-             numericComponent.SetEvent(NumericType.Base_MinAct_Base, (int)(monsterConfig.Act * ackCoefficient * attributeAdd), false);
-             numericComponent.SetEvent(NumericType.Base_MaxAct_Base, (int)(monsterConfig.Act * ackCoefficient * attributeAdd), false);
-             numericComponent.SetEvent(NumericType.Base_MinDef_Base, monsterConfig.Def, false);
-             numericComponent.SetEvent(NumericType.Base_MaxDef_Base, monsterConfig.Def, false);
-             numericComponent.SetEvent(NumericType.Base_MinAdf_Base, monsterConfig.Adf, false);
-             numericComponent.SetEvent(NumericType.Base_MaxAdf_Base, monsterConfig.Adf, false);
-             numericComponent.SetEvent(NumericType.Base_Speed_Base, monsterConfig.MoveSpeed, false);
-             numericComponent.SetEvent(NumericType.Base_Cri_Base, monsterConfig.Cri, false);
-             numericComponent.SetEvent(NumericType.Base_Res_Base, monsterConfig.Res, false);
-             numericComponent.SetEvent(NumericType.Base_Hit_Base, monsterConfig.Hit, false);
-             numericComponent.SetEvent(NumericType.Base_Dodge_Base, monsterConfig.Dodge, false);
-             numericComponent.SetEvent(NumericType.Base_ActDamgeSubPro_Base, monsterConfig.DefAdd, false);
-             numericComponent.SetEvent(NumericType.Base_MageDamgeSubPro_Base, monsterConfig.AdfAdd, false);
-             numericComponent.SetEvent(NumericType.Base_DamgeSubPro_Base, monsterConfig.DamgeAdd, false);
+             numericComponent.ApplyValue(NumericType.Base_MaxHp_Base, (int)(monsterConfig.Hp * hpCoefficient * attributeAdd), false);
+             numericComponent.ApplyValue(NumericType.Base_MinAct_Base, (int)(monsterConfig.Act * ackCoefficient * attributeAdd), false);
+             numericComponent.ApplyValue(NumericType.Base_MaxAct_Base, (int)(monsterConfig.Act * ackCoefficient * attributeAdd), false);
+             numericComponent.ApplyValue(NumericType.Base_MinDef_Base, monsterConfig.Def, false);
+             numericComponent.ApplyValue(NumericType.Base_MaxDef_Base, monsterConfig.Def, false);
+             numericComponent.ApplyValue(NumericType.Base_MinAdf_Base, monsterConfig.Adf, false);
+             numericComponent.ApplyValue(NumericType.Base_MaxAdf_Base, monsterConfig.Adf, false);
+             numericComponent.ApplyValue(NumericType.Base_Speed_Base, monsterConfig.MoveSpeed, false);
+             numericComponent.ApplyValue(NumericType.Base_Cri_Base, monsterConfig.Cri, false);
+             numericComponent.ApplyValue(NumericType.Base_Res_Base, monsterConfig.Res, false);
+             numericComponent.ApplyValue(NumericType.Base_Hit_Base, monsterConfig.Hit, false);
+             numericComponent.ApplyValue(NumericType.Base_Dodge_Base, monsterConfig.Dodge, false);
+             numericComponent.ApplyValue(NumericType.Base_ActDamgeSubPro_Base, monsterConfig.DefAdd, false);
+             numericComponent.ApplyValue(NumericType.Base_MageDamgeSubPro_Base, monsterConfig.AdfAdd, false);
+             numericComponent.ApplyValue(NumericType.Base_DamgeSubPro_Base, monsterConfig.DamgeAdd, false);
 
              //设置当前血量
              numericComponent.SetNoEvent(NumericType.Now_Hp,  numericComponent.GetAsInt(NumericType.Now_MaxHp));
@@ -792,7 +792,7 @@ namespace ET.Server
                  int now_horse = numericComponent.GetAsInt(NumericType.HorseRide);
                  if (now_horse > 0)
                  {
-                     numericComponent.SetEvent(NumericType.HorseRide, 0, false);
+                     numericComponent.ApplyValue(NumericType.HorseRide, 0, false);
                  }
              }
              //玩家死亡，怪物技能清空

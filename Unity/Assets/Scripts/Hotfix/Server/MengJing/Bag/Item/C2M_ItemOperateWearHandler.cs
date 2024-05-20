@@ -174,7 +174,7 @@ namespace ET.Server
             }
 
             BagInfo equip_0 = unit.GetComponent<BagComponentS  >().GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
-            unit.GetComponent<NumericComponentS>().SetEvent(NumericType.Now_Weapon, equip_0 != null ? equip_0.ItemID : 0, true);
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Now_Weapon, equip_0 != null ? equip_0.ItemID : 0, true);
 
             await ETTask.CompletedTask;
         }

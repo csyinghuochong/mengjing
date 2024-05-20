@@ -39,9 +39,9 @@ namespace ET.Server
             unit.GetComponent<DBSaveComponent>().Activeted();
 
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-            numericComponent.SetEvent(NumericType.BattleCamp, CampEnum.CampPlayer_1, false);
-            numericComponent.SetEvent(NumericType.RunRaceTransform, 0, false);
-            numericComponent.SetEvent(NumericType.CardTransform, 0, false);
+            numericComponent.ApplyValue(NumericType.BattleCamp, CampEnum.CampPlayer_1, false);
+            numericComponent.ApplyValue(NumericType.RunRaceTransform, 0, false);
+            numericComponent.ApplyValue(NumericType.CardTransform, 0, false);
             
             Function_Fight.UnitUpdateProperty_Base(unit, false, false);
 

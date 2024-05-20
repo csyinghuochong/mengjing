@@ -192,10 +192,10 @@ namespace ET.Server
              unit.Position = vector3;
              unit.Type = UnitType.Bullet;            //子弹Unity,根据这个类型会实例化出特效
              SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
-             numericComponent.SetEvent(NumericType.Base_Speed_Base, skillConfig.SkillMoveSpeed, false);
-             numericComponent.SetEvent(NumericType.MasterId, masterid, false);
-             numericComponent.SetEvent(NumericType.StartAngle, starangle, false);
-             numericComponent.SetEvent(NumericType.StartTime, TimeHelper.ServerNow(), false);
+             numericComponent.ApplyValue(NumericType.Base_Speed_Base, skillConfig.SkillMoveSpeed, false);
+             numericComponent.ApplyValue(NumericType.MasterId, masterid, false);
+             numericComponent.ApplyValue(NumericType.StartAngle, starangle, false);
+             numericComponent.ApplyValue(NumericType.StartTime, TimeHelper.ServerNow(), false);
              unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);        //添加视野
              return unit;
          }
@@ -256,14 +256,14 @@ namespace ET.Server
                aIComponent.Begin();
                //添加其他组件
                unit.AddComponent<HeroDataComponentS>().InitPet(petinfo, false);
-               numericComponent.SetEvent(NumericType.MasterId, master.Id, false);
-               numericComponent.SetEvent(NumericType.BattleCamp, master.GetBattleCamp(), false);
-               numericComponent.SetEvent(NumericType.AttackMode, master != null ? master.GetAttackMode() : 0, false);
-               numericComponent.SetEvent(NumericType.TeamId, master.GetTeamId(), false); ;
-               numericComponent.SetEvent(NumericType.UnionId_0, master.GetUnionId(), false);
+               numericComponent.ApplyValue(NumericType.MasterId, master.Id, false);
+               numericComponent.ApplyValue(NumericType.BattleCamp, master.GetBattleCamp(), false);
+               numericComponent.ApplyValue(NumericType.AttackMode, master != null ? master.GetAttackMode() : 0, false);
+               numericComponent.ApplyValue(NumericType.TeamId, master.GetTeamId(), false); ;
+               numericComponent.ApplyValue(NumericType.UnionId_0, master.GetUnionId(), false);
                long max_hp = numericComponent.GetAsLong(NumericType.Now_MaxHp);
                numericComponent.SetNoEvent(NumericType.Now_Hp, max_hp);
-               numericComponent.SetEvent(NumericType.Base_Speed_Base, master.GetComponent<NumericComponentS>().GetAsLong(NumericType.Base_Speed_Base), false); 
+               numericComponent.ApplyValue(NumericType.Base_Speed_Base, master.GetComponent<NumericComponentS>().GetAsLong(NumericType.Base_Speed_Base), false); 
 
                unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
                if (scene.GetComponent<MapComponent>().SceneType != (int)SceneTypeEnum.MainCityScene)
@@ -351,11 +351,11 @@ namespace ET.Server
 
     //添加其他组件
     unit.AddComponent<HeroDataComponentS>().InitJingLing(master, jinglingId, false);
-    numericComponent.SetEvent(NumericType.MasterId, master.Id, false);
-    numericComponent.SetEvent(NumericType.BattleCamp, master.GetBattleCamp(), false);
-    numericComponent.SetEvent(NumericType.AttackMode, master != null ? master.GetAttackMode() : 0, false);
-    numericComponent.SetEvent(NumericType.TeamId, master.GetTeamId(), false);
-    numericComponent.SetEvent(NumericType.UnionId_0, master.GetUnionId(), false);
+    numericComponent.ApplyValue(NumericType.MasterId, master.Id, false);
+    numericComponent.ApplyValue(NumericType.BattleCamp, master.GetBattleCamp(), false);
+    numericComponent.ApplyValue(NumericType.AttackMode, master != null ? master.GetAttackMode() : 0, false);
+    numericComponent.ApplyValue(NumericType.TeamId, master.GetTeamId(), false);
+    numericComponent.ApplyValue(NumericType.UnionId_0, master.GetUnionId(), false);
     //numericComponent.Set(NumericType.Base_Speed_Base, 50000, false);
 
     unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);

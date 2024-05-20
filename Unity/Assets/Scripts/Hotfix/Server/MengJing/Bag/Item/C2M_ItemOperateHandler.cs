@@ -421,7 +421,7 @@ namespace ET.Server
                         case 119: //宠物成长
                             break;
                         case 120: //120 冒险积分
-                            unit.GetComponent<NumericComponentS>().SetEvent( NumericType.MaoXianExp, int.Parse(itemConfig.ItemUsePar), true);
+                            unit.GetComponent<NumericComponentS>().ApplyValue( NumericType.MaoXianExp, int.Parse(itemConfig.ItemUsePar), true);
                             break;
                         case 121: //鉴定符
                             break;
@@ -429,11 +429,11 @@ namespace ET.Server
                             break;
                         case 123: //宠物扩展工具
                             int petnumer = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.PetExtendNumber);
-                            unit.GetComponent<NumericComponentS>().SetEvent(NumericType.PetExtendNumber, petnumer + 1, true);
+                            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetExtendNumber, petnumer + 1, true);
                             break;
                         case 124: //仓库扩展工具
                             int cangkuNumber = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.CangKuNumber);
-                            unit.GetComponent<NumericComponentS>().SetEvent(NumericType.CangKuNumber, cangkuNumber + 1, true);
+                            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.CangKuNumber, cangkuNumber + 1, true);
                             break;
                         case 125: //坐骑获取
                             userInfoComponent.OnHorseActive(int.Parse(itemConfig.ItemUsePar), true);
@@ -441,7 +441,7 @@ namespace ET.Server
                             bool canhorse = hourseId == 10001? userInfoComponent.UserInfo.Lv >= 25 : true;
                             if (canhorse && userInfoComponent.UserInfo.HorseIds.Count == 1)
                             {
-                                unit.GetComponent<NumericComponentS>().SetEvent(NumericType.HorseFightID, hourseId, true);
+                                unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.HorseFightID, hourseId, true);
                             }
 
                             Function_Fight.UnitUpdateProperty_Base(unit, true, true);
@@ -481,7 +481,7 @@ namespace ET.Server
                             break;
                         case 132:
                             long reduceTime = long.Parse(itemConfig.ItemUsePar);
-                            unit.GetComponent<NumericComponentS>().SetEvent( NumericType.SeasonBossRefreshTime, -1 * reduceTime, true);
+                            unit.GetComponent<NumericComponentS>().ApplyValue( NumericType.SeasonBossRefreshTime, -1 * reduceTime, true);
                             break;
                         case 133:
                         case 134:
@@ -506,7 +506,7 @@ namespace ET.Server
                         case 138:
                             // 增加副本次数
                             int teamTime = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.TeamDungeonTimes);
-                            unit.GetComponent<NumericComponentS>().SetEvent(NumericType.TeamDungeonTimes, teamTime - 1, true);
+                            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.TeamDungeonTimes, teamTime - 1, true);
                             break;
                         case 139:
                             //增加背包格子
@@ -730,8 +730,8 @@ namespace ET.Server
                 if (weizhi == (int) ItemSubTypeEnum.Wuqi)
                 {
                     //unit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.WandBuff_8, useBagInfo.ItemID);
-                    unit.GetComponent<NumericComponentS>().SetEvent(NumericType.Now_Weapon, useBagInfo.ItemID, true);
-                    unit.GetComponent<NumericComponentS>().SetEvent(NumericType.WearWeaponFisrt, 1, true);
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Now_Weapon, useBagInfo.ItemID, true);
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.WearWeaponFisrt, 1, true);
                 }
             }
 
@@ -758,7 +758,7 @@ namespace ET.Server
                 if (weizhi == (int) ItemSubTypeEnum.Wuqi)
                 {
                     //unit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.WandBuff_8, 0);
-                    unit.GetComponent<NumericComponentS>().SetEvent(NumericType.Now_Weapon, 0, true);
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Now_Weapon, 0, true);
                 }
             }
 

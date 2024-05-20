@@ -35,8 +35,8 @@ namespace ET.Server
             m2c_bagUpdate.BagInfoUpdate.Add(equip_1);
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
 
-            unit.GetComponent<NumericComponentS>().SetEvent(NumericType.EquipIndex, request.EquipIndex, true);
-            unit.GetComponent<NumericComponentS>().SetEvent(NumericType.Now_Weapon, bagComponent.GetWuqiItemId(), true);
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.EquipIndex, request.EquipIndex, true);
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Now_Weapon, bagComponent.GetWuqiItemId(), true);
 
             //unit.GetComponent<SkillSetComponentServer>().OnChangeEquipIndex(request.EquipIndex);
             unit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.EquipIndex_15);

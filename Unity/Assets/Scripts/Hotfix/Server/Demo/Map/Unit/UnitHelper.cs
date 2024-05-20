@@ -210,9 +210,9 @@ namespace ET.Server
         public static void SetBornPosition(this Unit self, float3 vector3, bool notice)
         {
             NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
-            numericComponent.SetEvent(NumericType.Born_X, (long)(vector3.x * 10000), notice);
-            numericComponent.SetEvent(NumericType.Born_Y, (long)(vector3.y * 10000), notice);
-            numericComponent.SetEvent(NumericType.Born_Z, (long)(vector3.z * 10000), notice);
+            numericComponent.ApplyValue(NumericType.Born_X, (long)(vector3.x * 10000), notice);
+            numericComponent.ApplyValue(NumericType.Born_Y, (long)(vector3.y * 10000), notice);
+            numericComponent.ApplyValue(NumericType.Born_Z, (long)(vector3.z * 10000), notice);
         }
 
         public static float3 GetBornPostion(this Unit self)

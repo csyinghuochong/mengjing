@@ -16,7 +16,7 @@ namespace ET.Server
             Unit unitPet = unit.GetParent<UnitComponent>().Get(request.PetInfoId);
             if (unitPet != null)
             {
-                unitPet.GetComponent<NumericComponentS>().SetEvent(NumericType.PetSkin, rolePetInfo.SkinId, true);
+                unitPet.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetSkin, rolePetInfo.SkinId, true);
             }
 
             await ETTask.CompletedTask;

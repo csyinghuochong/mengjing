@@ -36,12 +36,7 @@ namespace ET.Client
         {
             self[nt] = value;
         }
-
-        public static void SetNoEvent(this NumericComponentC self, int numericType, long value)
-        {
-            self.Insert(numericType, value, false);
-        }
-
+        
         public static void Insert(this NumericComponentC self, int numericType, long value, bool isPublicEvent = true)
         {
             long oldValue = self.GetByKey(numericType);
@@ -58,11 +53,11 @@ namespace ET.Client
                 return;
             }
 
-            if (isPublicEvent)
-            {
-                EventSystem.Instance.Publish(self.Scene(),
-                    new NumbericChange() { Defend = self.GetParent<Unit>(), NewValue = value, OldValue = oldValue, NumericType = numericType });
-            }
+            // if (isPublicEvent)
+            // {
+            //     EventSystem.Instance.Publish(self.Scene(),
+            //         new NumbericChange() { Defend = self.GetParent<Unit>(), NewValue = value, OldValue = oldValue, NumericType = numericType });
+            // }
         }
 
         public static long GetByKey(this NumericComponentC self, int key)

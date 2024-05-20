@@ -28,10 +28,10 @@ namespace ET.Client
                 return;
             }
 
-            //ReferenceCollector rc = FlyFontObj.GetComponent<ReferenceCollector>();
-            //rc.Get<GameObject>("FlyText_Self").SetActive(false);
-            //rc.Get<GameObject>("FlyText_Add").SetActive(false);
-            //rc.Get<GameObject>("FlyText_Target").SetActive(false);
+            ReferenceCollector rc = FlyFontObj.GetComponent<ReferenceCollector>();
+            rc.Get<GameObject>("FlyText_Self").SetActive(false);
+            rc.Get<GameObject>("FlyText_Add").SetActive(false);
+            rc.Get<GameObject>("FlyText_Target").SetActive(false);
             if (self.ObjFlyText != null)
             {
                 self.ObjFlyText.transform.localPosition = new Vector3(-5000f, 0f, 0f);
@@ -89,29 +89,29 @@ namespace ET.Client
             {
                 //addStr = "SB";  //闪避
                 addStr = "闪避"; //闪避
-                ObjFlyText.GetComponent<Text>().text = addStr;
             }
             else if (type == 11)
             {
                 addStr = "抵抗";
-                ObjFlyText.GetComponent<Text>().text = addStr;
             }
             else if (type == 12)
             {
                 addStr = "免疫";
-                ObjFlyText.GetComponent<Text>().text = addStr;
+
             }
             else
             {
-                ObjFlyText.GetComponent<Text>().text = StringBuilderHelper.GetFallText(addStr + selfNull, targetValue);
+                addStr = StringBuilderHelper.GetFallText(addStr + selfNull, targetValue);
             }
-
-            GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
+            ObjFlyText.GetComponent<Text>().text = addStr;
             self.ObjFlyText = ObjFlyText;
+            GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
             ObjFlyText.transform.localPosition = Vector3.zero;
             FlyFontObj.transform.SetParent(globalComponent.BloodText.transform);
             FlyFontObj.transform.localScale = Vector3.one;
             FlyFontObj.transform.localPosition = self.HeadBar.transform.localPosition + new Vector3(0, 80f, 0);
+            
+            Log.Debug($"addStr:  {addStr}");
         }
 
         public static void OnInitData(this FallingFontShowComponent self, GameObject HeadBar, long targetValue, Unit unit, int type)

@@ -137,7 +137,7 @@ namespace ET.Server
                 addHpValue += (long)(maxHp * 0.05f);
 
                 //每5秒恢复5%生命
-                NumericComponent.SetEvent(NumericType.Now_Hp, addHpValue,  true);
+                NumericComponent.ApplyValue(NumericType.Now_Hp, addHpValue,  true);
             }
 
             if (self.UnitType == UnitType.Player)
@@ -163,7 +163,7 @@ namespace ET.Server
 
                 if (addHpValue > 0)
                 {
-                    NumericComponent.SetEvent(NumericType.Now_Hp, addHpValue, true);
+                    NumericComponent.ApplyValue(NumericType.Now_Hp, addHpValue, true);
                 }
             }
         }

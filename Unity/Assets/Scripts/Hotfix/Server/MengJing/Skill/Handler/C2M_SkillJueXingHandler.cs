@@ -59,7 +59,7 @@ namespace ET.Server
             }
 
             int oldvalue = numericComponent.GetAsInt(occupationJueXingConfig.costExp);
-            numericComponent.SetEvent(NumericType.JueXingExp, oldvalue + occupationJueXingConfig.costExp * -1, true);
+            numericComponent.ApplyValue(NumericType.JueXingExp, oldvalue + occupationJueXingConfig.costExp * -1, true);
 
             userInfoComponent.UpdateRoleMoneySub(UserDataType.Gold, (occupationJueXingConfig.costGold * -1).ToString(), true, ItemGetWay.JueXing);
 

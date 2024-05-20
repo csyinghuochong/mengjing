@@ -89,16 +89,6 @@ namespace ET.Server
 			self.Insert(numericType,  (long)(value * 10000), false);
 		}
 		
-		public static void SetEvent(this NumericComponentS self, int numericType, long value, bool notice)
-		{
-			self.Insert(numericType, value, notice);
-		}
-
-		public static void SetEvent(this NumericComponentS self, int numericType, double value, bool notice)
-		{
-			self.Insert(numericType, (long)(value * 10000), notice);
-		}
-
 		public static void Insert(this NumericComponentS self, int numericType, long value, bool isPublicEvent = true)
 		{
 			long oldValue = self.GetByKey(numericType);
@@ -115,11 +105,11 @@ namespace ET.Server
 				return;
 			}
 
-			if (isPublicEvent)
-			{
-				EventSystem.Instance.Publish(self.Scene(),
-					new NumbericChange() { Defend = self.GetParent<Unit>(), NewValue = value, OldValue = oldValue, NumericType = numericType });
-			}
+			// if (isPublicEvent)
+			// {
+			// 	EventSystem.Instance.Publish(self.Scene(),
+			// 		new NumbericChange() { Defend = self.GetParent<Unit>(), NewValue = value, OldValue = oldValue, NumericType = numericType });
+			// }
 		}
 
 		public static long GetByKey(this NumericComponentS self, int key)
@@ -178,7 +168,11 @@ namespace ET.Server
 			//return GetAsFloat((int)nowPropertyValue);
 			return (float)nowPropertyValue / 10000f;
 		}
-
+		
+		public static void ApplyValue(this NumericComponentS self, int numericType, double value, bool notice = true)
+		{
+			self.ApplyValue(numericType, (long)(value * 10000), notice);
+		}
 
 		public static void ApplyValue(this NumericComponentS self, int numericType, long value, bool notice = true, bool check = false)
 		{

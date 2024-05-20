@@ -1232,11 +1232,11 @@ namespace ET.Server
         {
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
-            numericComponent.SetEvent(NumericType.Base_Speed_Mul, 0, notice);
-            numericComponent.SetEvent(NumericType.Base_Speed_Add, 0, notice);
-            numericComponent.SetEvent(NumericType.Extra_Buff_Speed_Add, 0, notice);
-            numericComponent.SetEvent(NumericType.Extra_Buff_Speed_Mul, 0, notice);
-            numericComponent.SetEvent(NumericType.Base_Speed_Base, 100000, notice);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Mul, 0, notice);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Add, 0, notice);
+            numericComponent.ApplyValue(NumericType.Extra_Buff_Speed_Add, 0, notice);
+            numericComponent.ApplyValue(NumericType.Extra_Buff_Speed_Mul, 0, notice);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Base, 100000, notice);
         }
 
         /// <summary>
@@ -1247,11 +1247,11 @@ namespace ET.Server
         public static void UnitUpdateProperty_DemonLittle(Unit unit, bool notice)
         {
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-            numericComponent.SetEvent(NumericType.Base_Speed_Mul, 0, notice);
-            numericComponent.SetEvent(NumericType.Base_Speed_Add, 0, notice);
-            numericComponent.SetEvent(NumericType.Extra_Buff_Speed_Add, 0, notice);
-            numericComponent.SetEvent(NumericType.Extra_Buff_Speed_Mul, 0, notice);
-            numericComponent.SetEvent(NumericType.Base_Speed_Base, 80000, notice);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Mul, 0, notice);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Add, 0, notice);
+            numericComponent.ApplyValue(NumericType.Extra_Buff_Speed_Add, 0, notice);
+            numericComponent.ApplyValue(NumericType.Extra_Buff_Speed_Mul, 0, notice);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Base, 80000, notice);
         }
 
         /// <summary>
@@ -1262,11 +1262,11 @@ namespace ET.Server
         public static void UnitUpdateProperty_DemonGhost(Unit unit, bool notice)
         {
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-            numericComponent.SetEvent(NumericType.Base_Speed_Mul, 0, notice);
-            numericComponent.SetEvent(NumericType.Base_Speed_Add, 0, notice);
-            numericComponent.SetEvent(NumericType.Extra_Buff_Speed_Add, 0, notice);
-            numericComponent.SetEvent(NumericType.Extra_Buff_Speed_Mul, 0, notice);
-            numericComponent.SetEvent(NumericType.Base_Speed_Base, 50000, notice);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Mul, 0, notice);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Add, 0, notice);
+            numericComponent.ApplyValue(NumericType.Extra_Buff_Speed_Add, 0, notice);
+            numericComponent.ApplyValue(NumericType.Extra_Buff_Speed_Mul, 0, notice);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Base, 50000, notice);
         }
 
         /// <summary>
@@ -1279,11 +1279,11 @@ namespace ET.Server
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             int monsterid = numericComponent.GetAsInt(NumericType.RunRaceTransform);
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterid);
-            numericComponent.SetEvent(NumericType.Base_Speed_Mul, 0, notice);
-            numericComponent.SetEvent(NumericType.Base_Speed_Add, 0, notice);
-            numericComponent.SetEvent(NumericType.Extra_Buff_Speed_Add, 0, notice);
-            numericComponent.SetEvent(NumericType.Extra_Buff_Speed_Mul, 0, notice);
-            numericComponent.SetEvent(NumericType.Base_Speed_Base, (long)(10000 * monsterConfig.MoveSpeed), notice);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Mul, 0, notice);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Add, 0, notice);
+            numericComponent.ApplyValue(NumericType.Extra_Buff_Speed_Add, 0, notice);
+            numericComponent.ApplyValue(NumericType.Extra_Buff_Speed_Mul, 0, notice);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Base, (long)(10000 * monsterConfig.MoveSpeed), notice);
         }
 
         /// <summary>
@@ -1305,7 +1305,7 @@ namespace ET.Server
             //初始化属性
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             //numericComponent.ResetProperty();
-            numericComponent.SetEvent(NumericType.Base_Speed_Base, 0, false);
+            numericComponent.ApplyValue(NumericType.Base_Speed_Base, 0, false);
 
             //缓存列表
             Dictionary<int, long> UpdateProDicList = new Dictionary<int, long>();
@@ -2266,18 +2266,18 @@ namespace ET.Server
                 
                 if (!notice)
                 {
-                    numericComponent.SetEvent(key, setValue, false);
+                    numericComponent.ApplyValue(key, setValue, false);
                     continue;
                 }
                 if (NumericData.BroadcastType.Contains(key))
                 {
                     long numType = key / 100;
-                    numericComponent.SetEvent(key, setValue, true);
+                    numericComponent.ApplyValue(key, setValue, true);
                 }
                 else
                 {
                     long numType = key / 100;
-                    numericComponent.SetEvent(key, setValue, false);
+                    numericComponent.ApplyValue(key, setValue, false);
                     keys.Add(key);
                 }
             }
@@ -2290,7 +2290,7 @@ namespace ET.Server
             {
                 long setValue = numericComponent_1.GetAsLong(key) + UpdateProDicList[key];
                 //Log.Info("key = " + key + ":" + setValue);
-                numericComponent_1.SetEvent(key, setValue, false);
+                numericComponent_1.ApplyValue(key, setValue, false);
             }
 
 
