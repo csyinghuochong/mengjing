@@ -166,16 +166,10 @@ namespace ET.Client
             self.ReSetTexture();
 
             string path = ABPathHelper.GetUnitPath(assetPath);
-            long instanceId = self.InstanceId;
-            GameObject prefab = await ResourcesComponent.Instance.LoadAssetAsync<GameObject>(path);
+            GameObject prefab = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(path);
             if (prefab == null)
             {
                 Log.Error($"prefab == null: {path}");
-            }
-
-            if (instanceId != self.InstanceId)
-            {
-                return;
             }
 
             GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
