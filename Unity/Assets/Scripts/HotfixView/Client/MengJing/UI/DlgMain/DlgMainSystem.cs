@@ -1254,6 +1254,7 @@ namespace ET.Client
             self.View.E_HomeButton.gameObject.SetActive( sceneTypeEnum == SceneTypeEnum.MainCityScene );
             
             self.View.ES_MainSkill.OnSkillSetUpdate();
+            self.OnEnterScene();
         }
     }
 }
