@@ -260,5 +260,77 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<int> RequestOneSell(Scene root, ItemLocType itemLocType)
+        {
+            List<long> baginfoids = new List<long>();
+            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
+            List<BagInfo> bagInfos = bagComponent.GetItemsByLoc(itemLocType);
+
+            UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
+            string value = userInfoComponent.GetGameSettingValue(GameSettingEnum.OneSellSet);
+            string[] setvalues = value.Split('@'); //绿色 蓝色 宝石 材料
+
+            for (int i = 0; i < bagInfos.Count; i++)
+            {
+                //锁定装备不能一键出售
+                if (bagInfos[i].IsProtect)
+                {
+                    continue;
+                }
+
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
+
+                if (itemConfig.ItemType == ItemTypeEnum.Gemstone)
+                {
+                    if (setvalues[2] == "1" && itemConfig.ItemQuality <= 3)
+                    {
+                        baginfoids.Add(bagInfos[i].BagInfoID);
+                        continue;
+                    }
+                }
+
+                if (itemConfig.ItemType == ItemTypeEnum.Equipment)
+                {
+                    if (setvalues[0] == "1" && itemConfig.ItemQuality <= 2)
+                    {
+                        // 绿色品质的生肖不出售
+                        if (itemConfig.EquipType == 101)
+                        {
+                            continue;
+                        }
+
+                        baginfoids.Add(bagInfos[i].BagInfoID);
+                        continue;
+                    }
+
+                    if (setvalues[1] == "1" && itemConfig.ItemQuality <= 3)
+                    {
+                        // 蓝色品质的生肖不出售
+                        if (itemConfig.EquipType == 101)
+                        {
+                            continue;
+                        }
+
+                        baginfoids.Add(bagInfos[i].BagInfoID);
+                        continue;
+                    }
+                }
+
+                if (itemConfig.ItemType == ItemTypeEnum.Material)
+                {
+                    if (setvalues.Length > 3 && setvalues[3] == "1" && ConfigData.OneSellMaterialList.Contains(bagInfos[i].ItemID))
+                    {
+                        baginfoids.Add(bagInfos[i].BagInfoID);
+                        continue;
+                    }
+                }
+            }
+
+            C2M_ItemOneSellRequest request = new() { BagInfoIds = baginfoids, OperateType = (int)itemLocType };
+            M2C_ItemOneSellResponse response = (M2C_ItemOneSellResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
 }

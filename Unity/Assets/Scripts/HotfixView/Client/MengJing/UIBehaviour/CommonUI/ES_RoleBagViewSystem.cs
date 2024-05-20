@@ -18,6 +18,7 @@ namespace ET.Client
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
             self.E_ZhengLiButton.AddListenerAsync(self.OnZhengLiButton);
+            self.E_OneSellButton.AddListener(self.OnOneSellButton);
             self.E_AllToggle.IsSelected(true);
         }
 
@@ -205,6 +206,13 @@ namespace ET.Client
             {
                 flyTipComponent.SpawnFlyTipDi("整理完成!");
             }
+        }
+
+        private static void OnOneSellButton(this ES_RoleBag self)
+        {
+            PopupTipHelp.OpenPopupTip(self.Root(), "一键出售", "是否一键出售低品质装备和宝石,出售品质可以在设置中进行选择",
+                        () => { BagClientNetHelper.RequestOneSell(self.Root(), ItemLocType.ItemLocBag).Coroutine(); }, null)
+                    .Coroutine();
         }
     }
 }

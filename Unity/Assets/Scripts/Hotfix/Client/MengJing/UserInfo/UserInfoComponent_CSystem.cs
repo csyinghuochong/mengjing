@@ -52,6 +52,7 @@ namespace ET.Client
                     return self.UserInfo.DayFubenTimes[i].Value;
                 }
             }
+
             return 0;
         }
 
@@ -65,6 +66,7 @@ namespace ET.Client
                     return;
                 }
             }
+
             self.UserInfo.DayFubenTimes.Add(new KeyValuePairInt() { KeyId = sceneId, Value = 1 });
         }
 
@@ -101,6 +103,45 @@ namespace ET.Client
             if (!have)
             {
                 self.UserInfo.MakeIdList.Add(new KeyValuePairInt() { KeyId = makeId, Value = endTime });
+            }
+        }
+
+        public static string GetGameSettingValue(this UserInfoComponentC self, GameSettingEnum gameSettingEnum)
+        {
+            for (int i = 0; i < self.UserInfo.GameSettingInfos.Count; i++)
+            {
+                if (self.UserInfo.GameSettingInfos[i].KeyId == (int)gameSettingEnum)
+                    return self.UserInfo.GameSettingInfos[i].Value;
+            }
+
+            switch (gameSettingEnum)
+            {
+                case GameSettingEnum.Music:
+                    return "1";
+                case GameSettingEnum.Sound:
+                    return "0";
+                case GameSettingEnum.YanGan: //0 固定 1移动
+                    return "0";
+                case GameSettingEnum.FenBianlLv:
+                    return "1";
+                case GameSettingEnum.OneSellSet:
+                    return "1@0@0@0";
+                case GameSettingEnum.OneSellSet2:
+                    return "0@0@0@0@0@0";
+                case GameSettingEnum.HighFps:
+                    return "1";
+                case GameSettingEnum.AutoAttack:
+                    return "1";
+                case GameSettingEnum.GuaJiAutoUseSkill:
+                    return "";
+                case GameSettingEnum.HideLeftBottom:
+                    return "0";
+                case GameSettingEnum.SkillAttackPlayerFirst:
+                    return "0";
+                case GameSettingEnum.PickSet:
+                    return "0@0";
+                default:
+                    return "0";
             }
         }
     }
