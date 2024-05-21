@@ -186,6 +186,11 @@ namespace ET.Server
                      continue;
                  }
 
+                 if (uu.Type == UnitType.Npc || uu.Type == UnitType.Chuansong)
+                 {
+                     continue;
+                 }
+
                  //检测目标是否在技能范围
                  if (!self.CheckShape(uu.Position))
                  {
@@ -391,7 +396,8 @@ namespace ET.Server
                  case 2:
                      ishape = new Rectangle();
                      (ishape as Rectangle).s_position = self.TargetPosition;
-                     //(ishape as Rectangle).s_forward = (quaternion.Euler(0, targetAngle, 0) * new Vector3(0,1,0)).normalized;
+                     quaternion forward = quaternion.Euler(0, math.radians(targetAngle), 0);
+                     (ishape as Rectangle).s_forward = math.mul(forward, math.forward());
                      (ishape as Rectangle).x_range = (float)(self.SkillConf.DamgeRange[0] ) * 0.5f;
                      (ishape as Rectangle).z_range = (float)(self.SkillConf.DamgeRange[1]  + addRange);
                      break;

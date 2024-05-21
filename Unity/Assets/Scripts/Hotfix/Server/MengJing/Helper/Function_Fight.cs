@@ -967,6 +967,8 @@ namespace ET.Server
                     damge = 1;
                 }
 
+                damge = 20;
+                
                 //存储是为万为单位的
                 //damge = (damge / 10000 * 10000);
                 if (damge > 0)

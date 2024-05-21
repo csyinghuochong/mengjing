@@ -5,8 +5,12 @@ namespace ET
     public static class MathHelper
     {
 
-       
-        
+
+        public static bool Equal (float3 lhs, float3 rhs)
+        {
+            return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z;
+        }
+
         public static  float QuaternionToEulerAngle_Y(quaternion q)
         {
             // 标准化四元数

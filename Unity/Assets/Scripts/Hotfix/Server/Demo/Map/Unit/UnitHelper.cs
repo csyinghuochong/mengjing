@@ -480,7 +480,10 @@ namespace ET.Server
                 return false;
             }
 
-            return self.GetBattleCamp() != defend.GetBattleCamp() && !self.IsSameTeam(defend);
+            int camp_1 = self.GetBattleCamp();
+            int camp_2 = defend.GetBattleCamp();
+            bool result = camp_1!= camp_2 && !self.IsSameTeam(defend);
+            return result;
         }
 
         public static List<Unit> GetUnitList(Scene scene, float3 position, int unitType, float distance)

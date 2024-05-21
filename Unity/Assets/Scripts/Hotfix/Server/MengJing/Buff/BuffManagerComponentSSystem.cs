@@ -487,6 +487,7 @@ namespace ET.Server
                 string BuffClassScript = skillBuffConfig.BuffScript;
                 buffHandler = self.AddChild<BuffS>();
                 buffHandler.BuffData = buffData;
+                buffHandler.mBuffConfig = SkillBuffConfigCategory.Instance.Get(buffData.BuffId);
                 buffHandler.OnInit( from, unit, skillHandler);
                 self.m_Buffs.Insert(0, buffHandler); //添加至buff列表中
                 self.AddTimer();

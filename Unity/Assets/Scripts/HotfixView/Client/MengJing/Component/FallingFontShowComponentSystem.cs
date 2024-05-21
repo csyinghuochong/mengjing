@@ -103,6 +103,7 @@ namespace ET.Client
             {
                 addStr = StringBuilderHelper.GetFallText(addStr + selfNull, targetValue);
             }
+            ObjFlyText.SetActive(true);
             ObjFlyText.GetComponent<Text>().text = addStr;
             self.ObjFlyText = ObjFlyText;
             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
