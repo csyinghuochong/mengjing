@@ -82,5 +82,32 @@ namespace ET.Client
                 self.SetChatData(chatlist[i]);
             }
         }
+
+        /// <summary>
+        /// 1 好友  2黑名单
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public static int GetFriendType(this FriendComponent self, long userId)
+        {
+            for (int i = 0; i < self.FriendList.Count; i++)
+            {
+                if (self.FriendList[i].UserId == userId)
+                {
+                    return 1;
+                }
+            }
+
+            for (int i = 0; i < self.Blacklist.Count; i++)
+            {
+                if (self.Blacklist[i].UserId == userId)
+                {
+                    return 2;
+                }
+            }
+
+            return 0;
+        }
     }
 }

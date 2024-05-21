@@ -1558,6 +1558,33 @@ message F2C_FriendInfoResponse // IFriendActorResponse
 	repeated ChatInfo FriendChats = 5;
 }
 
+//ResponseType F2C_WatchPlayerResponse
+message C2F_WatchPlayerRequest // IFriendActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UserId = 1;
+	int32 WatchType = 2;			//0 表示全部  1 表示只请求名字显示 2 队伍Id
+}
+
+message F2C_WatchPlayerResponse // IFriendActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	string Name = 1;
+	int32 Lv = 2;
+	repeated BagInfo EquipList = 3;	//装备 
+	int64 TeamId = 4;
+	int32 Occ = 5;
+	repeated RolePetInfo RolePetInfos = 7;
+	repeated KeyValuePair PetSkinList = 8;
+	repeated BagInfo PetHeXinList = 9;
+	repeated int32 Ks = 11;
+	repeated int64 Vs = 12;
+	repeated int32 FashionIds = 13;
+}
+
 message ItemXiLianResult
 {
 	repeated HideProList XiLianHideProLists = 1;

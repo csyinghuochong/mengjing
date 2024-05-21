@@ -40,6 +40,23 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgWatchMenu self)
         {
+            self.View.E_ImageBgButton.AddListener(self.OnClickImageBg);
+            self.View.E_Button_InviteUnionButton.AddListener(self.OnButton_InviteUnion);
+            self.View.E_Button_KickUnionButton.AddListener(self.OnButton_KickUnion);
+            self.View.E_Button_LeaveTeamButton.AddListener(self.OnButton_KickOut);
+            self.View.E_Button_AddFriendButton.AddListenerAsync(self.OnButton_AddFriend);
+            self.View.E_Button_WatchButton.AddListenerAsync(self.OnClickButton_Watch);
+            self.View.E_Button_InviteTeamButton.AddListenerAsync(self.OnButton_InviteTeam);
+            self.View.E_Button_ApplyTeamButton.AddListener(self.OnButton_ApplyTeam);
+            self.View.E_Button_BlackRemoveButton.AddListenerAsync(self.OnButton_BlackRemove);
+            self.View.E_Button_BlackAddButton.AddListenerAsync(self.OnButton_BlackAdd);
+            self.View.E_Button_UnionTransferButton.AddListener(self.OnButton_UnionTransfer);
+            self.View.E_Button_UnionAiderButton.AddListener(() => { self.OnButton_UnionOperate(2).Coroutine(); });
+            self.View.E_Button_UnionElderButton.AddListener(() => { self.OnButton_UnionOperate(3).Coroutine(); });
+            self.View.E_Button_UnionDismissButton.AddListener(() => { self.OnButton_UnionOperate(0).Coroutine(); });
+            self.View.E_Button_OneChallengeButton.AddListenerAsync(self.OnButton_OneChallenge);
+            self.View.E_Button_ServerBlackButton.AddListenerAsync(self.OnButton_ServerBlack);
+            self.View.E_Button_JinYanButton.AddListenerAsync(self.OnButton_JinYan);
         }
 
         public static void ShowWindow(this DlgWatchMenu self, Entity contextData = null)
@@ -365,49 +382,48 @@ namespace ET.Client
                 self.View.EG_PositionSetRectTransform.transform.GetChild(i).gameObject.SetActive(false);
             }
 
-            // C2F_WatchPlayerRequest c2M_SkillSet = new C2F_WatchPlayerRequest() { UserId = self.UserId, WatchType = 2 };
-            // F2C_WatchPlayerResponse m2C_SkillSet =
-            //         (F2C_WatchPlayerResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_SkillSet);
+            // C2F_WatchPlayerRequest c2FWatchPlayerRequest = new() { UserId = self.UserId, WatchType = 2 };
+            // F2C_WatchPlayerResponse f2CWatchPlayerResponse =
+            //         (F2C_WatchPlayerResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(c2FWatchPlayerRequest);
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             Unit watchUnit = unit.GetParent<UnitComponent>().Get(userId);
             long myunionid = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
             long wathunion = watchUnit != null? watchUnit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0) : 0;
 
-            // self.TeamId = m2C_SkillSet.TeamId;
-            // int friendType = self.ZoneScene().GetComponent<FriendComponent>().GetFriendType(userId);
+            // self.TeamId = f2CWatchPlayerResponse.TeamId;
+            int friendType = self.Root().GetComponent<FriendComponent>().GetFriendType(userId);
             // TeamInfo teamInfo = self.ZoneScene().GetComponent<TeamComponent>().GetSelfTeam();
-            // long myUserId = self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo.UserId;
+            // long myUserId = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
             // bool isLeader = teamInfo != null && teamInfo.PlayerList[0].UserID == myUserId;
 
-            //self.Button_ApplyTeam.SetActive(false); 申请入队
-            //self.Button_Leave.SetActive(false);     离开队伍
-            //self.Button_KickOut.SetActive(false);   踢出队伍
-            //self.Button_AddFriend.SetActive(false); 添加好友
-            //self.Button_InviteTeam.SetActive(false);邀请组队
-            //self.Button_Watch.SetActive(false);     观察
+            self.View.E_Button_ApplyTeamButton.gameObject.SetActive(false); // 申请入队
+            self.View.E_Button_LeaveTeamButton.gameObject.SetActive(false); // 离开队伍
+            self.View.E_Button_KickTeamButton.gameObject.SetActive(false); // 踢出队伍
+            self.View.E_Button_AddFriendButton.gameObject.SetActive(false); // 添加好友
+            self.View.E_Button_InviteTeamButton.gameObject.SetActive(false); // 邀请组队
+            self.View.E_Button_WatchButton.gameObject.SetActive(false); // 观察
 
-            // self.View.E_Button_ApplyTeamButton.gameObject.SetActive(teamInfo == null && userId != myUserId && m2C_SkillSet.TeamId != 0);
+            // self.View.E_Button_ApplyTeamButton.gameObject.SetActive(teamInfo == null && userId != myUserId && f2CWatchPlayerResponse.TeamId != 0);
             // self.View.E_Button_LeaveTeamButton.gameObject.SetActive(teamInfo != null && userId == myUserId);
-            // self.View.E_Button_KickTeamButton.gameObject.SetActive(isLeader && userId != myUserId && m2C_SkillSet.TeamId == myUserId);
-            // self.View.E_Button_AddFriendButton.gameObject.SetActive(friendType == 0);
-            // self.View.E_Button_BlackAddButton.gameObject.SetActive(friendType == 0);
-            // self.View.E_Button_BlackRemoveButton.gameObject.SetActive(friendType == 2);
-            // self.View.E_Button_InviteTeamButton.gameObject.SetActive(userId != myUserId && (isLeader || teamInfo == null) &&
-            //     m2C_SkillSet.TeamId == 0);
-            // self.View.E_Button_WatchButton.gameObject.SetActive(true);
-            // self.View.E_Button_KickUnionButton.gameObject.SetActive(false);
-            // self.View.E_Button_InviteUnionButton.gameObject.SetActive(myunionid > 0 && wathunion == 0);
+            // self.View.E_Button_KickTeamButton.gameObject.SetActive(isLeader && userId != myUserId && f2CWatchPlayerResponse.TeamId == myUserId);
+            self.View.E_Button_AddFriendButton.gameObject.SetActive(friendType == 0);
+            self.View.E_Button_BlackAddButton.gameObject.SetActive(friendType == 0);
+            self.View.E_Button_BlackRemoveButton.gameObject.SetActive(friendType == 2);
+            // self.View.E_Button_InviteTeamButton.gameObject.SetActive(userId != myUserId && (isLeader || teamInfo == null) && f2CWatchPlayerResponse.TeamId == 0);
+            self.View.E_Button_WatchButton.gameObject.SetActive(true);
+            self.View.E_Button_KickUnionButton.gameObject.SetActive(false);
+            self.View.E_Button_InviteUnionButton.gameObject.SetActive(myunionid > 0 && wathunion == 0);
 
             switch (menuEnumType)
             {
                 case MenuEnumType.Main:
                 case MenuEnumType.Chat:
-                    // AccountInfoComponent accountInfoComponent = self.ZoneScene().GetComponent<AccountInfoComponent>();
-                    // MapComponent mapComponent = self.ZoneScene().GetComponent<MapComponent>();
-                    // self.View.E_Button_OneChallengeButton.gameObject.SetActive(mapComponent.SceneTypeEnum == SceneTypeEnum.MainCityScene);
-                    // self.View.E_Button_ServerBlackButton.gameObject.SetActive(GMHelp.GmAccount.Contains(accountInfoComponent.Account));
-                    // self.View.E_Button_JinYanButton.gameObject.SetActive(jinyan);
+                    PlayerComponent accountInfoComponent = self.Root().GetComponent<PlayerComponent>();
+                    MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+                    self.View.E_Button_OneChallengeButton.gameObject.SetActive(mapComponent.SceneType == SceneTypeEnum.MainCityScene);
+                    self.View.E_Button_ServerBlackButton.gameObject.SetActive(GMData.GmAccount.Contains(accountInfoComponent.Account));
+                    self.View.E_Button_JinYanButton.gameObject.SetActive(jinyan);
                     break;
                 case MenuEnumType.Team:
                     break;
