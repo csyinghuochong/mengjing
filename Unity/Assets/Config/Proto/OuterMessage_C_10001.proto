@@ -3243,3 +3243,18 @@ message M2C_TurtleRewardMessage // IMessage
 	int64 UnitID = 1;
 	repeated string PlayerName = 2;		//获奖玩家名字
 }
+
+//ResponseType M2C_BloodstoneQiangHuaResponse
+message C2M_BloodstoneQiangHuaRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_BloodstoneQiangHuaResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	int32 Level = 1;
+}
+

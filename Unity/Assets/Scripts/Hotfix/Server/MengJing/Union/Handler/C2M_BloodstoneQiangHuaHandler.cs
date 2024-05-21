@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_BloodstoneQiangHuaHandler: AMActorLocationRpcHandler<Unit, C2M_BloodstoneQiangHuaRequest, M2C_BloodstoneQiangHuaResponse>
+    [MessageLocationHandler(SceneType.Map)]
+    public class C2M_BloodstoneQiangHuaHandler: MessageLocationHandler<Unit, C2M_BloodstoneQiangHuaRequest, M2C_BloodstoneQiangHuaResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_BloodstoneQiangHuaRequest request, M2C_BloodstoneQiangHuaResponse response, Action reply)
         {
