@@ -234,53 +234,22 @@ namespace ET.Client
 
         public static async ETTask OnButton_AddFriend(this DlgWatchMenu self)
         {
-            // UserInfoComponent userInfoComponent = self.ZoneScene().GetComponent<UserInfoComponent>();
-            // C2F_FriendApplyRequest c2F_FriendApplyReplyRequest = new C2F_FriendApplyRequest()
-            // {
-            //     UserID = self.UserId,
-            //     RoleInfo = new FriendInfo()
-            //     {
-            //         UserId = userInfoComponent.UserInfo.UserId,
-            //         PlayerName = userInfoComponent.UserInfo.Name,
-            //         PlayerLevel = userInfoComponent.UserInfo.Lv,
-            //         Occ = userInfoComponent.UserInfo.Occ,
-            //     }
-            // };
-            // F2C_FriendApplyResponse f2C_FriendApplyResponse =
-            //         (F2C_FriendApplyResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2F_FriendApplyReplyRequest);
+            await FriendNetHelper.RequestFriendApply(self.Root(), self.UserId);
             self.OnClickImageBg();
-
-            await ETTask.CompletedTask;
         }
 
         public static async ETTask OnButton_BlackAdd(this DlgWatchMenu self)
         {
-            // UserInfoComponent userInfoComponent = self.ZoneScene().GetComponent<UserInfoComponent>();
-            // C2F_FriendBlacklistRequest c2F_FriendApplyReplyRequest = new C2F_FriendBlacklistRequest()
-            // {
-            //     OperateType = 1, UserID = userInfoComponent.UserInfo.UserId, FriendId = self.UserId,
-            // };
-            // F2C_FriendBlacklistResponse f2C_FriendApplyResponse =
-            //         (F2C_FriendBlacklistResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2F_FriendApplyReplyRequest);
-            // NetHelper.RequestFriendInfo(self.ZoneScene()).Coroutine();
+            await FriendNetHelper.RequestAddBlack(self.Root(), self.UserId);
+            await FriendNetHelper.RequestFriendInfo(self.Root());
             self.OnClickImageBg();
-
-            await ETTask.CompletedTask;
         }
 
         public static async ETTask OnButton_BlackRemove(this DlgWatchMenu self)
         {
-            // UserInfoComponent userInfoComponent = self.ZoneScene().GetComponent<UserInfoComponent>();
-            // C2F_FriendBlacklistRequest c2F_FriendApplyReplyRequest = new C2F_FriendBlacklistRequest()
-            // {
-            //     OperateType = 2, UserID = userInfoComponent.UserInfo.UserId, FriendId = self.UserId,
-            // };
-            // F2C_FriendBlacklistResponse f2C_FriendApplyResponse =
-            //         (F2C_FriendBlacklistResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2F_FriendApplyReplyRequest);
-            // NetHelper.RequestFriendInfo(self.ZoneScene()).Coroutine();
+            await FriendNetHelper.RequestRemoveBlack(self.Root(), self.UserId);
+            await FriendNetHelper.RequestFriendInfo(self.Root());
             self.OnClickImageBg();
-
-            await ETTask.CompletedTask;
         }
 
         public static async ETTask OnButton_InviteTeam(this DlgWatchMenu self)

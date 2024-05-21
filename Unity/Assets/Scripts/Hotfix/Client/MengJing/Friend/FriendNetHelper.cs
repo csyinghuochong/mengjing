@@ -8,10 +8,7 @@ namespace ET.Client
     {
         public static async ETTask<int> RequestFriendInfo(Scene root)
         {
-            C2F_FriendInfoRequest request = new C2F_FriendInfoRequest()
-            {
-                UnitId = root.GetComponent<PlayerComponent>().CurrentRoleId
-            };
+            C2F_FriendInfoRequest request = new C2F_FriendInfoRequest() { UnitId = root.GetComponent<PlayerComponent>().CurrentRoleId };
             F2C_FriendInfoResponse response = (F2C_FriendInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             FriendComponent friendComponent = root.GetComponent<FriendComponent>();
@@ -55,11 +52,18 @@ namespace ET.Client
 
         public static async ETTask<int> RequestRemoveBlack(Scene root, long friendId)
         {
-            C2F_FriendBlacklistRequest request = new()
-            {
-                OperateType = 2, UnitId = UnitHelper.GetMyUnitFromClientScene(root).Id, FriendId = friendId
-            };
+            UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
+            C2F_FriendBlacklistRequest request = new() { OperateType = 2, UnitId = userInfoComponent.UserInfo.UserId, FriendId = friendId };
             F2C_FriendBlacklistResponse response = (F2C_FriendBlacklistResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
+        public static async ETTask<int> RequestAddBlack(Scene root, long friendId)
+        {
+            UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
+            C2F_FriendBlacklistRequest request = new() { OperateType = 1, UnitId = userInfoComponent.UserInfo.UserId, FriendId = friendId };
+            F2C_FriendBlacklistResponse response =
+                    (F2C_FriendBlacklistResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
 
@@ -91,6 +95,25 @@ namespace ET.Client
                 EventSystem.Instance.Publish(root, new DataUpdate_FriendUpdate());
             }
 
+            return response.Error;
+        }
+
+        public static async ETTask<int> RequestFriendApply(Scene root, long unitId)
+        {
+            UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
+            C2F_FriendApplyRequest c2F_FriendApplyReplyRequest = new()
+            {
+                UnitId = unitId,
+                FriendInfo = new FriendInfo()
+                {
+                    UserId = userInfoComponent.UserInfo.UserId,
+                    PlayerName = userInfoComponent.UserInfo.Name,
+                    PlayerLevel = userInfoComponent.UserInfo.Lv,
+                    Occ = userInfoComponent.UserInfo.Occ,
+                }
+            };
+            F2C_FriendApplyResponse response =
+                    (F2C_FriendApplyResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2F_FriendApplyReplyRequest);
             return response.Error;
         }
     }
