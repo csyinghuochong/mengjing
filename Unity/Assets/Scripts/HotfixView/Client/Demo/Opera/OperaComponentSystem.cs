@@ -27,28 +27,43 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this OperaComponent self)
         {
-            self.mapMask = LayerMask.GetMask("Map");
+            self.MapMask = (1 << LayerMask.NameToLayer(LayerEnum.Terrain.ToString())) | (1 << LayerMask.NameToLayer(LayerEnum.Map.ToString()));
+            self.NpcMask = 1 << LayerMask.NameToLayer(LayerEnum.NPC.ToString());
+            self.BoxMask = 1 << LayerMask.NameToLayer(LayerEnum.Box.ToString());
+            self.PlayerMask = 1 << LayerMask.NameToLayer(LayerEnum.Player.ToString());
+            self.MonsterMask = 1 << LayerMask.NameToLayer(LayerEnum.Monster.ToString());
+            self.BuildingMask = 1 << LayerMask.NameToLayer(LayerEnum.Building.ToString());
+            self.EditorMode = true;
+            self.ClickMode = true;
+            self.MainCamera = Camera.main;
         }
 
         [EntitySystem]
         private static void Update(this OperaComponent self)
         {
+            if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
+            {
+                self.OnGetMouseButtonDown_0();
+            }
+
             if (Input.GetMouseButtonDown(1))
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 1000, self.mapMask))
-                {
-                    C2M_PathfindingResult c2MPathfindingResult = new C2M_PathfindingResult();
-                    c2MPathfindingResult.Position = hit.point;
-                    self.Root().GetComponent<ClientSenderCompnent>().Send(c2MPathfindingResult);
-                }
+                // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                // RaycastHit hit;
+                // if (Physics.Raycast(ray, out hit, 1000, self.mapMask))
+                // {
+                //     C2M_PathfindingResult c2MPathfindingResult = new C2M_PathfindingResult();
+                //     c2MPathfindingResult.Position = hit.point;
+                //     self.Root().GetComponent<ClientSenderCompnent>().Send(c2MPathfindingResult);
+                // }
+
+                self.OnGetMouseButtonDown_1();
             }
 
             if (Input.GetKeyDown(KeyCode.W))
             {
                 Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-                
+
                 float float3 = MathHelper.QuaternionToEulerAngle_Y(unit.Rotation);
 
                 C2M_SkillCmd c2MSkillCmd = C2M_SkillCmd.Create();
@@ -201,9 +216,9 @@ namespace ET.Client
 
         public static bool CheckMove(this OperaComponent self)
         {
-            Ray ray = self.mainCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = self.MainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 1000, self.mapMask))
+            if (Physics.Raycast(ray, out hit, 1000, self.MapMask))
             {
                 self.MoveToPosition(hit.point, true).Coroutine();
                 return true;
@@ -217,8 +232,8 @@ namespace ET.Client
         public static bool CheckBox(this OperaComponent self)
         {
             RaycastHit Hit;
-            Ray Ray = self.mainCamera.ScreenPointToRay(Input.mousePosition);
-            bool hit = Physics.Raycast(Ray, out Hit, 100, self.boxMask);
+            Ray Ray = self.MainCamera.ScreenPointToRay(Input.mousePosition);
+            bool hit = Physics.Raycast(Ray, out Hit, 100, self.BoxMask);
             if (!hit)
                 return false;
             try
@@ -303,8 +318,8 @@ namespace ET.Client
         public static bool CheckPlayer(this OperaComponent self)
         {
             RaycastHit Hit;
-            Ray Ray = self.mainCamera.ScreenPointToRay(Input.mousePosition);
-            bool hit = Physics.Raycast(Ray, out Hit, 100, self.playerMask);
+            Ray Ray = self.MainCamera.ScreenPointToRay(Input.mousePosition);
+            bool hit = Physics.Raycast(Ray, out Hit, 100, self.PlayerMask);
             if (!hit)
                 return false;
             string obname = Hit.collider.gameObject.name;
@@ -324,37 +339,33 @@ namespace ET.Client
 
         public static async ETTask OnClickUnitItem(this OperaComponent self, long unitid)
         {
-            // AccountInfoComponent accountInfoComponent = self.ZoneScene().GetComponent<AccountInfoComponent>();
-            // if (unitid == accountInfoComponent.MyId)
+            // PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            // if (unitid == playerComponent.MyId)
             // {
-            //     if (!GMHelp.GmAccount.Contains(accountInfoComponent.Account))
-            //     {
-            //         return;
-            //     }
+            //     return;
             // }
-            //
-            // Unit unit = self.DomainScene().GetComponent<UnitComponent>().Get(unitid);
+
+            Unit unit = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(unitid);
             // if (unit.Type == UnitType.Stall)
             // {
             //     UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIPaiMaiStall);
             //     uI.GetComponent<UIPaiMaiStallComponent>().OnUpdateUI(unit);
             // }
-            //
-            // if (unit.Type == UnitType.Player)
-            // {
-            //     UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIWatchMenu);
-            //     UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
-            //     uI.GetComponent<UIWatchMenuComponent>().OnUpdateUI_1(MenuEnumType.Main, unit.Id, unitInfoComponent.UnitName, true).Coroutine();
-            // }
 
-            await ETTask.CompletedTask;
+            if (unit.Type == UnitType.Player)
+            {
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_WatchMenu);
+                DlgWatchMenu dlgWatchMenu = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgWatchMenu>();
+                UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
+                await dlgWatchMenu.OnUpdateUI_1(MenuEnumType.Main, unit.Id, unitInfoComponent.UnitName, true);
+            }
         }
 
         public static bool CheckMonster(this OperaComponent self)
         {
             RaycastHit Hit;
-            Ray Ray = self.mainCamera.ScreenPointToRay(Input.mousePosition);
-            bool hit = Physics.Raycast(Ray, out Hit, 100, self.monsterMask);
+            Ray Ray = self.MainCamera.ScreenPointToRay(Input.mousePosition);
+            bool hit = Physics.Raycast(Ray, out Hit, 100, self.MonsterMask);
             if (!hit)
                 return false;
             string obname = Hit.collider.gameObject.name;
@@ -375,8 +386,8 @@ namespace ET.Client
         public static bool CheckBuilding(this OperaComponent self)
         {
             RaycastHit Hit;
-            Ray Ray = self.mainCamera.ScreenPointToRay(Input.mousePosition);
-            bool hit = Physics.Raycast(Ray, out Hit, 100, self.buildingMask);
+            Ray Ray = self.MainCamera.ScreenPointToRay(Input.mousePosition);
+            bool hit = Physics.Raycast(Ray, out Hit, 100, self.BuildingMask);
             if (!hit)
             {
                 return false;
@@ -444,8 +455,8 @@ namespace ET.Client
         public static bool CheckNpc(this OperaComponent self)
         {
             RaycastHit Hit;
-            Ray Ray = self.mainCamera.ScreenPointToRay(Input.mousePosition);
-            bool hit = Physics.Raycast(Ray, out Hit, 100, self.npcMask);
+            Ray Ray = self.MainCamera.ScreenPointToRay(Input.mousePosition);
+            bool hit = Physics.Raycast(Ray, out Hit, 100, self.NpcMask);
             if (!hit)
                 return false;
             string obname = Hit.collider.gameObject.name;
