@@ -1,5 +1,3 @@
-using ET.Server;
-using NLog;
 using UnityEngine;
 
 namespace ET.Client
