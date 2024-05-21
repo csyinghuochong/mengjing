@@ -12,9 +12,9 @@ namespace ET.Client
         public GameObject DialogText;
         public GameObject Lal_Name;
         public GameObject Img_HpValue;
-        public GameObject GameObject;
+        public GameObject GameObject { get; set; }
         public GameObject UIPlayerHpText;
-        public GameObject BuffShieldValue;
+        public GameObject BuffShieldValue{ get; set; }
         public GameObject Img_ChengHao;
         public Image Img_AngleValue;
         public GameObject Img_AngleValueDi;

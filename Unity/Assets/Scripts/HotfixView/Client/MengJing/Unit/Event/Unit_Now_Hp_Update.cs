@@ -59,6 +59,16 @@ namespace ET.Client
                         heroHeadBarComponent.UpdateBlood();
                     }
                     break;
+                case UnitType.Monster:
+                    UIMonsterHpComponent monsterHpComponent = unitDefend.GetComponent<UIMonsterHpComponent>();
+                    if (monsterHpComponent != null)
+                    {
+                        HpGameObject = monsterHpComponent.GameObject;
+                        monsterHpComponent.UpdateBlood();
+                    }
+                    break;
+                default:
+                    break;
             }
            
             bool showfloattext = unitAttack != null && UnitHelper.GetMasterId(unitAttack) == myunitid;
