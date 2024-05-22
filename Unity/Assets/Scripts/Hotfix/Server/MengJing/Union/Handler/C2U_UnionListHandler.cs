@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
+    [MessageHandler(SceneType.Union)]
     public class C2U_UnionListHandler : AMActorRpcHandler<Scene, C2U_UnionListRequest, U2C_UnionListResponse>
     {
         protected override async ETTask Run(Scene scene, C2U_UnionListRequest request, U2C_UnionListResponse response, Action reply)
