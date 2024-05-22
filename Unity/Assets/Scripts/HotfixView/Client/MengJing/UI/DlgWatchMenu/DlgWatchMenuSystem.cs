@@ -275,16 +275,12 @@ namespace ET.Client
 
         public static async ETTask OnClickButton_Watch(this DlgWatchMenu self)
         {
-            // C2F_WatchPlayerRequest c2M_SkillSet = new C2F_WatchPlayerRequest() { UserId = self.UserId, WatchType = 0 };
-            // F2C_WatchPlayerResponse m2C_SkillSet =
-            //         (F2C_WatchPlayerResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_SkillSet);
-            //
-            // UI uI = await UIHelper.Create(self.DomainScene(), UIType.UIWatch);
-            // uI.GetComponent<UIWatchComponent>().OnUpdateUI(m2C_SkillSet);
+            F2C_WatchPlayerResponse response = await FriendNetHelper.RequestWatchPlayer(self.Root(), self.UserId, 0);
 
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Watch);
+            DlgWatch dlgWatch = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgWatch>();
+            dlgWatch.OnUpdateUI(response);
             self.OnClickImageBg();
-
-            await ETTask.CompletedTask;
         }
 
         /// <summary>

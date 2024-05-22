@@ -34,10 +34,10 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<F2C_FriendDeleteResponse> RequestWatchPlayer(Scene root, long friendId)
+        public static async ETTask<F2C_WatchPlayerResponse> RequestWatchPlayer(Scene root, long userId, int watchType)
         {
-            C2F_FriendDeleteRequest request = new() { UnitId = UnitHelper.GetMyUnitFromClientScene(root).Id, FriendID = friendId };
-            F2C_FriendDeleteResponse response = (F2C_FriendDeleteResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            C2F_WatchPlayerRequest request = new() { UserId = userId, WatchType = watchType };
+            F2C_WatchPlayerResponse response = (F2C_WatchPlayerResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response;
         }
