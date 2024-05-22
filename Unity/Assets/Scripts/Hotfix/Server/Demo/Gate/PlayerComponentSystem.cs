@@ -8,11 +8,13 @@ namespace ET.Server
         public static void Add(this PlayerComponent self, Player player)
         {
             self.dictionary.Add(player.Account, player);
+            self.idPlayers.Add(player.AccountId, player);
         }
         
         public static void Remove(this PlayerComponent self, Player player)
         {
             self.dictionary.Remove(player.Account);
+            self.idPlayers.Remove(player.AccountId);
             player.Dispose();
         }
         
@@ -20,6 +22,18 @@ namespace ET.Server
         {
             self.dictionary.TryGetValue(account, out Player player);
             return player;
+        }
+        
+        public static Player GetByUserId(this PlayerComponent self, long id)
+        {
+            foreach (var player in self.idPlayers.Values)
+            {
+                if (player.UnitId == id)
+                {
+                    return player;
+                }
+            }
+            return null;
         }
     }
 }
