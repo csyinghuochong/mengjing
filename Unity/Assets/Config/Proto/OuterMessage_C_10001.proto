@@ -3726,3 +3726,20 @@ message U2C_UnionRaceInfoResponse // IUnionActorResponse
 	repeated UnionListItem UnionInfoList = 1;
 	int64 TotalDonation = 2;
 }
+
+//捐献记录
+//ResponseType U2C_UnionRecordResponse
+message C2U_UnionRecordRequest // IUnionActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnionId = 1;
+}
+
+message U2C_UnionRecordResponse // IUnionActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated DonationRecord DonationRecords = 11;
+}
