@@ -3467,6 +3467,32 @@ message M2C_HorseNoticeInfo // ILocationMessage
 	int32 NoticeType = 2;
 }
 
+message UnionListItem
+{
+	string UnionName = 1;
+	int64 UnionId = 2;
+	int32 PlayerNumber = 3;
+	int32 LevelLimit = 4;
+	int32 UnionLevel = 5;
+	string UnionLeader = 6;
+}
+
+//公会列表
+//ResponseType U2C_UnionListResponse
+message C2U_UnionListRequest // IUnionActorRequest
+{    
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message U2C_UnionListResponse // IUnionActorResponse
+{    
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated UnionListItem UnionList = 1;
+}
+
 //申请入会
 //ResponseType U2C_UnionApplyResponse
 message C2U_UnionApplyRequest // IUnionActorRequest

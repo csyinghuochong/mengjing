@@ -6,8 +6,11 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_UnionShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_UnionShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public Dictionary<int, Scroll_Item_UnionListItem> ScrollItemUnionListItems;
+		public List<UnionListItem> ShowUnionListItems;
+		
 		public UnityEngine.RectTransform EG_UIUnionCreateRectTransform
      	{
      		get

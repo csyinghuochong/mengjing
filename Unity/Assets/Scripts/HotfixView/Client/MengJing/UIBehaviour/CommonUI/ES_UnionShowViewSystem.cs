@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -36,6 +38,8 @@ namespace ET.Client
                 self.CheckSensitiveWords(self.E_InputFieldPurposeInputField.gameObject);
             });
 
+            self.E_UnionListItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnUnionListItemsRefresh);
+
             self.OnInitUI();
         }
 
@@ -43,6 +47,12 @@ namespace ET.Client
         private static void Destroy(this ES_UnionShow self)
         {
             self.DestroyWidget();
+        }
+
+        private static void OnUnionListItemsRefresh(this ES_UnionShow self, Transform transform, int index)
+        {
+            Scroll_Item_UnionListItem scrollItemUnionListItem = self.ScrollItemUnionListItems[index].BindTrans(transform);
+            scrollItemUnionListItem.Refresh(self.ShowUnionListItems[index]);
         }
 
         public static void OnCreateUnion(this ES_UnionShow self)
@@ -63,64 +73,39 @@ namespace ET.Client
 
         public static async ETTask OnUpdateListUI(this ES_UnionShow self)
         {
-            // if (self.UnionList == null)
-            // {
-            //     long instanceid = self.InstanceId;
-            //     C2U_UnionListRequest c2M_ItemHuiShouRequest = new C2U_UnionListRequest() { };
-            //     U2C_UnionListResponse r2c_roleEquip =
-            //             (U2C_UnionListResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_ItemHuiShouRequest);
-            //     if (instanceid != self.InstanceId)
-            //     {
-            //         return;
-            //     }
-            //
-            //     if (r2c_roleEquip.Error != ErrorCode.ERR_Success)
-            //     {
-            //         return;
-            //     }
-            //
-            //     self.UnionList = r2c_roleEquip.UnionList;
-            // }
-            //
-            // self.UnionList.Sort(delegate(UnionListItem a, UnionListItem b)
-            // {
-            //     int unionlevela = a.UnionLevel;
-            //     int unionlevelb = b.UnionLevel;
-            //     int numbera = a.PlayerNumber;
-            //     int numberb = b.PlayerNumber;
-            //
-            //     if (numbera == numberb)
-            //     {
-            //         return unionlevelb - unionlevela;
-            //     }
-            //     else
-            //     {
-            //         return numberb - numbera;
-            //     }
-            // });
-            //
-            // List<Entity> childs = self.Children.Values.ToList();
-            // for (int i = 0; i < self.UnionList.Count; i++)
-            // {
-            //     if (i < childs.Count)
-            //     {
-            //         (childs[i] as UIUnionListItemComponent).OnUpdateUI(self.UnionList[i]);
-            //     }
-            //     else
-            //     {
-            //         GameObject go = GameObject.Instantiate(self.UIUnionListItem);
-            //         go.SetActive(true);
-            //         UICommonHelper.SetParent(go, self.UnionListNode);
-            //         self.AddChild<UIUnionListItemComponent, GameObject>(go).OnUpdateUI(self.UnionList[i]);
-            //     }
-            // }
-            //
-            // for (int i = self.UnionList.Count; i < childs.Count; i++)
-            // {
-            //     (childs[i] as UIUnionListItemComponent).GameObject.SetActive(false);
-            // }
+            if (self.ShowUnionListItems == null)
+            {
+                C2U_UnionListRequest c2M_ItemHuiShouRequest = new();
+                U2C_UnionListResponse r2c_roleEquip =
+                        (U2C_UnionListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(c2M_ItemHuiShouRequest);
 
-            await ETTask.CompletedTask;
+                if (r2c_roleEquip.Error != ErrorCode.ERR_Success)
+                {
+                    return;
+                }
+
+                self.ShowUnionListItems = r2c_roleEquip.UnionList;
+            }
+
+            self.ShowUnionListItems.Sort(delegate(UnionListItem a, UnionListItem b)
+            {
+                int unionlevela = a.UnionLevel;
+                int unionlevelb = b.UnionLevel;
+                int numbera = a.PlayerNumber;
+                int numberb = b.PlayerNumber;
+
+                if (numbera == numberb)
+                {
+                    return unionlevelb - unionlevela;
+                }
+                else
+                {
+                    return numberb - numbera;
+                }
+            });
+
+            self.AddUIScrollItems(ref self.ScrollItemUnionListItems, self.ShowUnionListItems.Count);
+            self.E_UnionListItemsLoopVerticalScrollRect.SetVisible(true, self.ShowUnionListItems.Count);
         }
 
         public static void ResetUI(this ES_UnionShow self)
