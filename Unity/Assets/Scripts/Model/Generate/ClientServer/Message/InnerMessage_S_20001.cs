@@ -2802,6 +2802,84 @@ namespace ET
 
 	}
 
+//家族操作  1增加经验  2获取等级
+	[ResponseType(nameof(U2M_UnionOperationResponse))]
+	[Message(InnerMessage.M2U_UnionOperationRequest)]
+	[MemoryPackable]
+	public partial class M2U_UnionOperationRequest: MessageObject, IRequest
+	{
+		public static M2U_UnionOperationRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2U_UnionOperationRequest), isFromPool) as M2U_UnionOperationRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnionId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int OperateType { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string Par { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long UnitId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnionId = default;
+			this.OperateType = default;
+			this.Par = default;
+			this.UnitId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.U2M_UnionOperationResponse)]
+	[MemoryPackable]
+	public partial class U2M_UnionOperationResponse: MessageObject, IResponse
+	{
+		public static U2M_UnionOperationResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(U2M_UnionOperationResponse), isFromPool) as U2M_UnionOperationResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string Par { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.Par = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -2887,5 +2965,7 @@ namespace ET
 		 public const ushort U2M_UnionCreateResponse = 20082;
 		 public const ushort M2Chat_UpdateUnion = 20083;
 		 public const ushort Chat2M_UpdateUnion = 20084;
+		 public const ushort M2U_UnionOperationRequest = 20085;
+		 public const ushort U2M_UnionOperationResponse = 20086;
 	}
 }

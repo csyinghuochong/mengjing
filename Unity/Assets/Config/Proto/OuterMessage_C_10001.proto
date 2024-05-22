@@ -3294,3 +3294,19 @@ message M2C_UnionCreateResponse // ILocationResponse
 	int64 UnionId = 1;
 }
 
+//ResponseType M2C_UnionDonationResponse
+message C2M_UnionDonationRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 Price = 1;
+	int32 Type = 2;
+}
+
+message M2C_UnionDonationResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

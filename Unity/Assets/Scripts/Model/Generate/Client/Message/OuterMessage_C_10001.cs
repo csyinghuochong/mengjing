@@ -12837,6 +12837,71 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_UnionDonationResponse))]
+	[Message(OuterMessage.C2M_UnionDonationRequest)]
+	[MemoryPackable]
+	public partial class C2M_UnionDonationRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_UnionDonationRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_UnionDonationRequest), isFromPool) as C2M_UnionDonationRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long Price { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Type { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Price = default;
+			this.Type = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_UnionDonationResponse)]
+	[MemoryPackable]
+	public partial class M2C_UnionDonationResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_UnionDonationResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_UnionDonationResponse), isFromPool) as M2C_UnionDonationResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -13205,5 +13270,7 @@ namespace ET
 		 public const ushort M2C_DonationResponse = 10365;
 		 public const ushort C2M_UnionCreateRequest = 10366;
 		 public const ushort M2C_UnionCreateResponse = 10367;
+		 public const ushort C2M_UnionDonationRequest = 10368;
+		 public const ushort M2C_UnionDonationResponse = 10369;
 	}
 }

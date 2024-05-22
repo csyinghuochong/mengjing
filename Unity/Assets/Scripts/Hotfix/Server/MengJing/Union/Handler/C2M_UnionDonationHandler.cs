@@ -1,48 +1,46 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2M_UnionDonationHandler : AMActorLocationRpcHandler<Unit, C2M_UnionDonationRequest, M2C_UnionDonationResponse>
+    [MessageLocationHandler(SceneType.Map)]
+    public class C2M_UnionDonationHandler : MessageLocationHandler<Unit, C2M_UnionDonationRequest, M2C_UnionDonationResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_UnionDonationRequest request, M2C_UnionDonationResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_UnionDonationRequest request, M2C_UnionDonationResponse response)
         {
             //获取家族等级
-            long unionid = unit.GetComponent<NumericComponent>().GetAsLong(NumericType.UnionId_0);
+            long unionid = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.UnionId_0);
             if (unionid == 0)
             {
                 return;
             }
 
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.Donation, unit.Id))
+            using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Donation, unit.Id))
             {
                 if (request.Type == 0) // 金币捐献
                 {
-                    if (unit.GetComponent<NumericComponent>().GetAsInt(NumericType.UnionDonationNumber) >= 5)
+                    if (unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.UnionDonationNumber) >= 5)
                     {
                         response.Error = ErrorCode.ERR_TimesIsNot;
-                        reply();
                         return;
                     }
 
-                    long selfgold = unit.GetComponent<UserInfoComponent>().UserInfo.Gold;
-                    U2M_UnionOperationResponse responseUnionEnter = (U2M_UnionOperationResponse)await ActorMessageSenderComponent.Instance.Call(
-                        DBHelper.GetUnionServerId(unit.DomainZone()),
+                    long selfgold = unit.GetComponent<UserInfoComponentS>().UserInfo.Gold;
+                    U2M_UnionOperationResponse responseUnionEnter = (U2M_UnionOperationResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                        UnitCacheHelper.GetUnionServerId(unit.Zone()),
                         new M2U_UnionOperationRequest() { OperateType = 3, UnitId = unit.Id, UnionId = unionid, Par = selfgold.ToString() });
-
 
                     if (responseUnionEnter.Error != ErrorCode.ERR_Success)
                     {
                         response.Error = responseUnionEnter.Error;
-                        reply();
                         return;
                     }
 
                     int unionID = int.Parse(responseUnionEnter.Par);
                     UnionConfig unionCof = UnionConfigCategory.Instance.Get(unionID);
-                    unit.GetComponent<NumericComponent>().ApplyChange(unit, NumericType.UnionDonationNumber, 1, 0);
-                    UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
+                    unit.GetComponent<NumericComponentS>().ApplyChange(unit, NumericType.UnionDonationNumber, 1, 0);
+                    UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
 
                     userInfoComponent.UpdateRoleMoneySub(UserDataType.Gold, (unionCof.DonateGold * -1).ToString(), true, ItemGetWay.Donation);
                     int randNumExp = RandomHelper.RandomNumber(unionCof.DonateExp[0], unionCof.DonateExp[1] + 1);
@@ -54,30 +52,28 @@ namespace ET
                 }
                 else if (request.Type == 1) // 钻石捐献
                 {
-                    if (unit.GetComponent<NumericComponent>().GetAsInt(NumericType.UnionDiamondDonationNumber) >= 10)
+                    if (unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.UnionDiamondDonationNumber) >= 10)
                     {
                         response.Error = ErrorCode.ERR_TimesIsNot;
-                        reply();
                         return;
                     }
 
-                    long selfDiamond = unit.GetComponent<UserInfoComponent>().UserInfo.Diamond;
-                    U2M_UnionOperationResponse responseUnionEnter = (U2M_UnionOperationResponse)await ActorMessageSenderComponent.Instance.Call(
-                        DBHelper.GetUnionServerId(unit.DomainZone()),
+                    long selfDiamond = unit.GetComponent<UserInfoComponentS>().UserInfo.Diamond;
+                    U2M_UnionOperationResponse responseUnionEnter = (U2M_UnionOperationResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                        UnitCacheHelper.GetUnionServerId(unit.Zone()),
                         new M2U_UnionOperationRequest() { OperateType = 4, UnitId = unit.Id, UnionId = unionid, Par = selfDiamond.ToString() });
 
                     if (responseUnionEnter.Error != ErrorCode.ERR_Success)
                     {
                         response.Error = responseUnionEnter.Error;
-                        reply();
                         return;
                     }
 
                     int unionID = int.Parse(responseUnionEnter.Par);
                     UnionConfig unionCof = UnionConfigCategory.Instance.Get(unionID);
-                    unit.GetComponent<NumericComponent>().ApplyChange(unit, NumericType.UnionDiamondDonationNumber, 1, 0);
+                    unit.GetComponent<NumericComponentS>().ApplyChange(unit, NumericType.UnionDiamondDonationNumber, 1, 0);
                     // 花费250钻石，暂时写死，M2U_UnionOperationRequest也是
-                    UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
+                    UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
 
                     userInfoComponent.UpdateRoleMoneySub(UserDataType.Diamond, (unionCof.DonateDiamond * -1).ToString(), true, ItemGetWay.Donation);
                     int randNumExp = RandomHelper.RandomNumber(unionCof.DonateExp[0], unionCof.DonateExp[1] + 1);
@@ -90,8 +86,6 @@ namespace ET
             }
 
 
-
-            reply();
             await ETTask.CompletedTask;
         }
     }
