@@ -897,7 +897,7 @@ namespace ET.Server
             bool isRobot = unit.GetComponent<UserInfoComponentS>().UserInfo.RobotId > 0;
             if (isRobot)
             {
-                UnitCacheHelper.SaveComponentCache(unit.Zone(), unit.Id, bagComponent).Coroutine();
+                UnitCacheHelper.SaveComponentCache(unit.Root(), bagComponent).Coroutine();
             }
 
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
