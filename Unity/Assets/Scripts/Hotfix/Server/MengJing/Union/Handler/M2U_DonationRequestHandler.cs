@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class M2U_DonationRequestHandler : AMActorRpcHandler<Scene, M2U_DonationRequest, U2M_DonationResponse>
+    [MessageHandler(SceneType.Union)]
+    public class M2U_DonationRequestHandler : MessageHandler<Scene, M2U_DonationRequest, U2M_DonationResponse>
     {
-        protected override async ETTask Run(Scene scene, M2U_DonationRequest request, U2M_DonationResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2U_DonationRequest request, U2M_DonationResponse response)
         {
          
             UnionSceneComponent rankSceneComponent = scene.GetComponent<UnionSceneComponent>();
@@ -54,10 +53,10 @@ namespace ET
                     userlist.Add(dBRankInfo.rankingDonation[i].UserId);
                 }
 
-                long gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(scene.DomainZone(), "Gate1").InstanceId;
+                ActorId gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(scene.Zone(), "Gate1").ActorId;
                 for (int i = 0; i < userlist.Count; i++)
                 {
-                    G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await ActorMessageSenderComponent.Instance.Call
+                    G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
                         (gateServerId, new T2G_GateUnitInfoRequest()
                         {
                             UserID = userlist[i]
@@ -68,13 +67,12 @@ namespace ET
                         R2M_RankUpdateMessage r2M_RankUpdateMessage = new R2M_RankUpdateMessage();
                         r2M_RankUpdateMessage.RankType = 3;
                         r2M_RankUpdateMessage.RankId = rankSceneComponent.GetDonationRank(userlist[i]);
-                        MessageHelper.SendToLocationActor(userlist[i], r2M_RankUpdateMessage);
+                        scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(userlist[i], r2M_RankUpdateMessage);
                     }
                 }
             }
 
             response.RankId = newrank;
-            reply();
             await ETTask.CompletedTask;
         }
     }

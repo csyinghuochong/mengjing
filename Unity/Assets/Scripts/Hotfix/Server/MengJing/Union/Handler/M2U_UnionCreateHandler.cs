@@ -1,41 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class M2U_UnionCreateHandler : AMActorRpcHandler<Scene, M2U_UnionCreateRequest, U2M_UnionCreateResponse>
+    [MessageHandler(SceneType.Union)]
+    public class M2U_UnionCreateHandler : MessageHandler<Scene, M2U_UnionCreateRequest, U2M_UnionCreateResponse>
     {
-        protected override async ETTask Run(Scene scene, M2U_UnionCreateRequest request, U2M_UnionCreateResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2U_UnionCreateRequest request, U2M_UnionCreateResponse response)
         {
             Log.Warning($"M2U_UnionCreateRequest:{request.UserID}");
             if (request.UnionName.Length > 7 || !StringHelper.IsSpecialChar(request.UnionName))
             {
                 response.Error = ErrorCode.ERR_Union_Same_Name;
-                reply();
-                return;
-            }
-            List<DBUnionInfo> result = await Game.Scene.GetComponent<DBComponent>().Query<DBUnionInfo>(scene.DomainZone(), _unionifo => _unionifo.UnionInfo.UnionName == request.UnionName);
-            if (result.Count > 0)
-            {
-                response.Error = ErrorCode.ERR_Union_Same_Name;
-                reply();
                 return;
             }
 
-            long dbCacheId = DBHelper.GetDbCacheId(scene.DomainZone());
+            DBManagerComponent dbManagerComponent = scene.Root().GetComponent<DBManagerComponent>();
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB(scene.Zone());
+            List<DBUnionInfo> result = await dbComponent.Query<DBUnionInfo>(scene.Zone(), _unionifo => _unionifo.UnionInfo.UnionName == request.UnionName);
+            if (result.Count > 0)
+            {
+                response.Error = ErrorCode.ERR_Union_Same_Name;
+                return;
+            }
+
+           
             long unionId = IdGenerater.Instance.GenerateId();
-            DBUnionInfo unionInfo = new DBUnionInfo();
-            unionInfo.Id = unionId;
+            DBUnionInfo unionInfo = scene.AddChildWithId<DBUnionInfo>(unionId);
+
             unionInfo.UnionInfo.Level = 1;
             unionInfo.UnionInfo.UnionId = unionId;
             unionInfo.UnionInfo.LeaderId = request.UserID;       
             unionInfo.UnionInfo.UnionName = request.UnionName;
             unionInfo.UnionInfo.UnionPurpose = request.UnionPurpose;
 
-            D2G_GetComponent d2G_GetComponent = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = request.UserID, Component = DBHelper.UserInfoComponent });
-            UserInfoComponent userInfoComponent = d2G_GetComponent.Component as UserInfoComponent;
+            UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), request.UserID);
             unionInfo.UnionInfo.LeaderName = userInfoComponent.UserInfo.Name;
             unionInfo.UnionInfo.UnionPlayerList.Add(new UnionPlayerInfo()
             {
@@ -43,9 +42,10 @@ namespace ET
                  PlayerName = userInfoComponent.UserInfo.Name,
                  UserID = request.UserID,
             });
-            DBHelper.SaveComponentCache(scene.DomainZone(), unionId, unionInfo).Coroutine();
+            UnitCacheHelper.SaveComponentCache(scene.Root(), unionInfo).Coroutine();
             response.UnionId = unionId;
-            reply();
+            
+            unionInfo.Dispose();
             await ETTask.CompletedTask;
         }
     }

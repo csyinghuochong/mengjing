@@ -5,8 +5,9 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 
+    [ChildOf]
     [BsonIgnoreExtraElements]
-    public class DBUnionInfo : Entity
+    public class DBUnionInfo : Entity, IAwake
     {
         public UnionInfo UnionInfo { get; set; } = new UnionInfo();
 

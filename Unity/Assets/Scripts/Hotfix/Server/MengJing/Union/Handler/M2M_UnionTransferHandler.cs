@@ -1,14 +1,13 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class M2M_UnionTransferHandler : AMActorLocationHandler<Unit, M2M_UnionTransferMessage>
+    [MessageHandler(SceneType.Union)]
+    public class M2M_UnionTransferHandler : MessageHandler<Unit, M2M_UnionTransferMessage>
     {
         protected override async ETTask Run(Unit unit, M2M_UnionTransferMessage message)
         {
-            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             numericComponent.ApplyValue( NumericType.UnionLeader, message.UnionLeader, true );
             await ETTask.CompletedTask;
         }

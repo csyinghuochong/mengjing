@@ -14653,6 +14653,45 @@ namespace ET
 
 	}
 
+//排行榜刷新
+	[Message(OuterMessage.R2M_RankUpdateMessage)]
+	[MemoryPackable]
+	public partial class R2M_RankUpdateMessage: MessageObject, IMessage
+	{
+		public static R2M_RankUpdateMessage Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2M_RankUpdateMessage), isFromPool) as R2M_RankUpdateMessage; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RankType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int RankId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int OccRankId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.RankType = default;
+			this.RankId = default;
+			this.OccRankId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -15075,5 +15114,6 @@ namespace ET
 		 public const ushort U2C_UnionRecordResponse = 10419;
 		 public const ushort C2U_UnionSignUpRequest = 10420;
 		 public const ushort U2C_UnionSignUpResponse = 10421;
+		 public const ushort R2M_RankUpdateMessage = 10422;
 	}
 }
