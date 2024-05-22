@@ -66,7 +66,8 @@ namespace ET.Client
             self.GetComponent<ChangeEquipComponent>().ChangeWeapon(self.GetWeaponId(bagInfo, occ));
         }
 
-        public static void ShowPlayerModel(this ES_ModelShow self, BagInfo bagInfo, int occ, int equipIndex, bool canDrag = true)
+        public static void ShowPlayerModel(this ES_ModelShow self, BagInfo bagInfo, int occ, int equipIndex, List<int> fashionids,
+        bool canDrag = true)
         {
             self.E_RenderEventTrigger.triggers.Clear();
             if (canDrag)
@@ -88,7 +89,7 @@ namespace ET.Client
             changeEquipComponent.WeaponId = self.GetWeaponId(bagInfo, occ);
             changeEquipComponent.EquipIndex = equipIndex;
             changeEquipComponent.UseLayer = true;
-            changeEquipComponent.LoadEquipment(go, new List<int>(), occ);
+            changeEquipComponent.LoadEquipment(go, fashionids, occ);
             self.UnitModel = go;
             Animator animator = self.UnitModel.GetComponentInChildren<Animator>();
             if (animator != null)

@@ -44,12 +44,12 @@ namespace ET.Client
 
         private static void OnAddGoldButton(this DlgHuoBiSet self)
         {
-            self.Root().GetComponent<FlyTipComponent>().SpawnFlyTipDi("氪金界面暂未开放");
+            FlyTipComponent.Instance.SpawnFlyTipDi("氪金界面暂未开放");
         }
 
         private static void OnAddZuanShiButton(this DlgHuoBiSet self)
         {
-            self.Root().GetComponent<FlyTipComponent>().SpawnFlyTipDi("氪金界面暂未开放");
+            FlyTipComponent.Instance.SpawnFlyTipDi("氪金界面暂未开放");
         }
 
         public static void Refresh(this DlgHuoBiSet self)

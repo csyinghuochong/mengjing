@@ -37,22 +37,25 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void RefreshPlayerInfo(this ES_EquipSet self)
+        public static void PlayerLv(this ES_EquipSet self, int lv)
         {
-            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-
-            self.E_RoseLvText.text = userInfo.Lv.ToString();
-            self.E_RoseNameText.text = userInfo.Name;
-
-            self.ES_ModelShow.SetPosition(Vector3.zero, new Vector3(0f, 70f, 150f));
-            self.ES_ModelShow.ShowPlayerModel(new BagInfo(), userInfo.Occ, 0);
+            self.E_RoseLvText.text = lv.ToString();
         }
 
-        public static void RefreshEquip(this ES_EquipSet self)
+        public static void PlayerName(this ES_EquipSet self, string playerName)
         {
-            BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
-            UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
+            self.E_RoseNameText.text = playerName;
+        }
 
+        public static void ShowPlayerModel(this ES_EquipSet self, BagInfo bagInfo, int occ, int equipIndex, List<int> fashonids, int position = 0)
+        {
+            self.ES_ModelShow.SetPosition(new Vector3(position * 2000, 2000, 0), new Vector3(0f, 70f, 150f));
+            self.ES_ModelShow.ShowPlayerModel(bagInfo, occ, equipIndex, fashonids);
+        }
+
+        public static void RefreshEquip(this ES_EquipSet self, List<BagInfo> equiplist_1, List<BagInfo> equiplist_2, int occ,
+        ItemOperateEnum itemOperateEnum)
+        {
             for (int i = 0; i < self.ESEquipItems_1.Count; i++)
             {
                 self.ESEquipItems_1[i].InitUI(FunctionUI.GetItemSubtypeByWeizhi(i));
@@ -63,11 +66,8 @@ namespace ET.Client
                 self.ESEquipItems_2[i].InitUI(FunctionUI.GetItemSubtypeByWeizhi(i));
             }
 
-            self.RefreshEquip_1(bagComponentC.GetItemsByLoc(ItemLocType.ItemLocEquip), userInfoComponentC.UserInfo.Occ,
-                ItemOperateEnum.Juese);
-
-            self.RefreshEquip_2(bagComponentC.GetItemsByLoc(ItemLocType.ItemLocEquip_2), userInfoComponentC.UserInfo.Occ,
-                ItemOperateEnum.Juese);
+            self.RefreshEquip_1(equiplist_1, occ, itemOperateEnum);
+            self.RefreshEquip_2(equiplist_2, occ, itemOperateEnum);
         }
 
         public static void EquipSetHide(this ES_EquipSet self, bool value)

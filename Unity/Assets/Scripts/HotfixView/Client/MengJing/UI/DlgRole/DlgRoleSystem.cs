@@ -145,8 +145,15 @@ namespace ET.Client
 
         public static void Refresh(this DlgRole self)
         {
-            self.View.ES_EquipSet.RefreshPlayerInfo();
-            self.View.ES_EquipSet.RefreshEquip();
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            self.View.ES_EquipSet.PlayerLv(userInfo.Lv);
+            self.View.ES_EquipSet.PlayerName(userInfo.Name);
+            self.View.ES_EquipSet.ShowPlayerModel(new BagInfo(), userInfo.Occ, 0, new List<int>());
+
+            BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
+            UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
+            self.View.ES_EquipSet.RefreshEquip(bagComponentC.GetItemsByLoc(ItemLocType.ItemLocEquip),
+                bagComponentC.GetItemsByLoc(ItemLocType.ItemLocEquip_2), userInfoComponentC.UserInfo.Occ, ItemOperateEnum.Juese);
         }
 
         private static void OnCloseButton(this DlgRole self)
