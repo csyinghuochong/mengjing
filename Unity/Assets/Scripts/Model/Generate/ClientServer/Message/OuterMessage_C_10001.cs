@@ -14212,6 +14212,72 @@ namespace ET
 
 	}
 
+//家族神秘商店道具
+	[ResponseType(nameof(U2C_UnionMysteryListResponse))]
+	[Message(OuterMessage.C2U_UnionMysteryListRequest)]
+	[MemoryPackable]
+	public partial class C2U_UnionMysteryListRequest: MessageObject, IUnionActorRequest
+	{
+		public static C2U_UnionMysteryListRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2U_UnionMysteryListRequest), isFromPool) as C2U_UnionMysteryListRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnionId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnionId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.U2C_UnionMysteryListResponse)]
+	[MemoryPackable]
+	public partial class U2C_UnionMysteryListResponse: MessageObject, IUnionActorResponse
+	{
+		public static U2C_UnionMysteryListResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(U2C_UnionMysteryListResponse), isFromPool) as U2C_UnionMysteryListResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<MysteryItemInfo> MysteryItemInfos { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.MysteryItemInfos.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -14621,5 +14687,7 @@ namespace ET
 		 public const ushort U2C_UnionListResponse = 10406;
 		 public const ushort C2U_UnionMyInfoRequest = 10407;
 		 public const ushort U2C_UnionMyInfoResponse = 10408;
+		 public const ushort C2U_UnionMysteryListRequest = 10409;
+		 public const ushort U2C_UnionMysteryListResponse = 10410;
 	}
 }

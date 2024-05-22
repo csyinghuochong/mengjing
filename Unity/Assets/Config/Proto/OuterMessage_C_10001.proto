@@ -3646,3 +3646,20 @@ message U2C_UnionMyInfoResponse // IUnionActorResponse
 	UnionInfo UnionMyInfo = 1;
 	repeated int64 OnLinePlayer = 2;
 }
+
+//家族神秘商店道具
+//ResponseType U2C_UnionMysteryListResponse
+message C2U_UnionMysteryListRequest // IUnionActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnionId = 1;				//家族ID
+}
+
+message U2C_UnionMysteryListResponse // IUnionActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated MysteryItemInfo MysteryItemInfos = 1;
+}

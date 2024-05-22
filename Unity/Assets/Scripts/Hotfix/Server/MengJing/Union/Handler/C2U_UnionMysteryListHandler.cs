@@ -1,31 +1,28 @@
 ﻿using System;
 
-
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2U_UnionMysteryListHandler : AMActorRpcHandler<Scene, C2U_UnionMysteryListRequest, U2C_UnionMysteryListResponse>
+    [MessageHandler(SceneType.Union)]
+    public class C2U_UnionMysteryListHandler : MessageHandler<Scene, C2U_UnionMysteryListRequest, U2C_UnionMysteryListResponse>
     {
-        protected override async ETTask Run(Scene scene, C2U_UnionMysteryListRequest request, U2C_UnionMysteryListResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2U_UnionMysteryListRequest request, U2C_UnionMysteryListResponse response)
         {
             DBUnionInfo dBUnionInfo = await scene.GetComponent<UnionSceneComponent>().GetDBUnionInfo(request.UnionId);
             if (dBUnionInfo == null)
             {
                 response.Error = ErrorCode.ERR_Union_Not_Exist;
-                reply();
                 return;
             }
 
             if (ComHelp.GetDayByTime(dBUnionInfo.MysteryFreshTime) != ComHelp.GetDayByTime(TimeHelper.ServerNow()))
             {
-                int openDay = ServerHelper.GetOpenServerDay(false, scene.DomainZone());
-                dBUnionInfo.MysteryItemInfos = UnionHelper.InitMysteryItemInfos(openDay);
+                int openDay = ServerHelper.GetOpenServerDay(false, scene.Zone());
+                dBUnionInfo.MysteryItemInfos = MysteryShopHelper.InitUnionMysteryItemInfos(openDay); 
                 dBUnionInfo.MysteryFreshTime = TimeHelper.ServerNow();
-                DBHelper.SaveComponentCache(scene.DomainZone(), request.UnionId, dBUnionInfo).Coroutine();
+                UnitCacheHelper.SaveComponentCache(scene.Root(), dBUnionInfo).Coroutine();
             }
 
             response.MysteryItemInfos = dBUnionInfo.MysteryItemInfos;
-            reply();
         }
     }
 }
