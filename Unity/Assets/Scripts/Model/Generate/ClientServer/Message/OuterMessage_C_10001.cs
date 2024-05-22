@@ -14592,6 +14592,90 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.RankingTrialInfo)]
+	[MemoryPackable]
+	public partial class RankingTrialInfo: MessageObject
+	{
+		public static RankingTrialInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(RankingTrialInfo), isFromPool) as RankingTrialInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long UserId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int PlayerLv { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long Hurt { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int Occ { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int FubenId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UserId = default;
+			this.PlayerName = default;
+			this.PlayerLv = default;
+			this.Hurt = default;
+			this.Occ = default;
+			this.FubenId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.RankSeasonTowerInfo)]
+	[MemoryPackable]
+	public partial class RankSeasonTowerInfo: MessageObject
+	{
+		public static RankSeasonTowerInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(RankSeasonTowerInfo), isFromPool) as RankSeasonTowerInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long UserId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Occ { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int PlayerLv { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int FubenId { get; set; }
+
+		[MemoryPackOrder(5)]
+		public long TotalTime { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UserId = default;
+			this.PlayerName = default;
+			this.Occ = default;
+			this.PlayerLv = default;
+			this.FubenId = default;
+			this.TotalTime = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -15012,5 +15096,7 @@ namespace ET
 		 public const ushort C2U_UnionSignUpRequest = 10417;
 		 public const ushort U2C_UnionSignUpResponse = 10418;
 		 public const ushort R2M_RankUpdateMessage = 10419;
+		 public const ushort RankingTrialInfo = 10420;
+		 public const ushort RankSeasonTowerInfo = 10421;
 	}
 }

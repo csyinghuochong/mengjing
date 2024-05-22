@@ -3744,8 +3744,25 @@ message R2M_RankUpdateMessage // IMessage
 	int32 OccRankId = 3;   //目前只有战力有职业排行
 }
 
+message RankingTrialInfo
+{
+	int64 UserId = 1;
+	string PlayerName = 2;
+	int32 PlayerLv = 3;
+	int64 Hurt  = 4;
+	int32 Occ = 5;
+	int32 FubenId = 6;
+}
 
-
+message RankSeasonTowerInfo
+{
+	int64 UserId = 1;
+	string PlayerName = 2;
+	int32 Occ = 3;
+	int32 PlayerLv = 4;
+	int32 FubenId = 5;		//显示时候需要转换层数
+	int64 TotalTime = 6;		//总通关时间
+}
 
 
 
