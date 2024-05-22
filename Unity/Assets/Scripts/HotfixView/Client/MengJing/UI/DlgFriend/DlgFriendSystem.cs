@@ -29,15 +29,41 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgFriend self, Entity contextData = null)
         {
-            self.View.E_Button_0Toggle.IsSelected(true);
+            self.RequestFriendInfo().Coroutine();
 
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
             uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
             uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
         }
 
+        public static async ETTask RequestFriendInfo(this DlgFriend self)
+        {
+            await FriendNetHelper.RequestFriendInfo(self.Root());
+            if (self.IsDisposed)
+            {
+                return;
+            }
+
+            self.ClickEnabled = true;
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            long unionId = (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0));
+            if (unionId > 0)
+            {
+                self.View.E_Button_4Toggle.IsSelected(true);
+            }
+            else
+            {
+                self.View.E_Button_3Toggle.IsSelected(true);
+            }
+        }
+
         private static void OnFunctionSetBtn(this DlgFriend self, int index)
         {
+            if (!self.ClickEnabled)
+            {
+                return;
+            }
+
             UICommonHelper.SetToggleShow(self.View.E_Button_0Toggle.gameObject, index == 0);
             UICommonHelper.SetToggleShow(self.View.E_Button_1Toggle.gameObject, index == 1);
             UICommonHelper.SetToggleShow(self.View.E_Button_2Toggle.gameObject, index == 2);
@@ -62,6 +88,14 @@ namespace ET.Client
                     self.View.ES_UnionShow.OnUpdateUI();
                     break;
                 case 4:
+                    Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                    long unionId = (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0));
+                    if (unionId == 0)
+                    {
+                        FlyTipComponent.Instance.SpawnFlyTipDi("请先创建或者加入一个家族");
+                        return;
+                    }
+
                     self.View.ES_UnionMy.uiTransform.gameObject.SetActive(true);
                     self.View.ES_UnionMy.OnUpdateUI().Coroutine();
                     break;
