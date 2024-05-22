@@ -64,10 +64,9 @@ namespace ET.Client
 
         public static async ETTask UnionRecordsBtn(this ES_UnionMy self)
         {
-            FlyTipComponent.Instance.SpawnFlyTipDi("UIUnionRecords 暂未开放");
-            await ETTask.CompletedTask;
-            // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIUnionRecords);
-            // ui.GetComponent<UIUnionRecordsComponent>().UpdateInfo(self.UnionInfo);
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_UnionRecords);
+            DlgUnionRecords dlgUnionRecords = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgUnionRecords>();
+            dlgUnionRecords.Refresh(self.UnionInfo);
         }
 
         public static void OnShowModify(this ES_UnionMy self, bool val)
@@ -105,12 +104,9 @@ namespace ET.Client
                 return;
             }
 
-            // C2U_UnionOperatateRequest c2M_ItemHuiShouRequest = new C2U_UnionOperatateRequest()
-            // {
-            //     UnionId = self.UnionInfo.UnionId, Operatate = 2, Value = text
-            // };
-            // U2C_UnionOperatateResponse r2c_roleEquip =
-            //         (U2C_UnionOperatateResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_ItemHuiShouRequest);
+            C2U_UnionOperatateRequest c2M_ItemHuiShouRequest = new() { UnionId = self.UnionInfo.UnionId, Operatate = 2, Value = text };
+            U2C_UnionOperatateResponse r2c_roleEquip =
+                    (U2C_UnionOperatateResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(c2M_ItemHuiShouRequest);
             self.UnionInfo.UnionPurpose = text;
             self.E_Text_PurposeText.text = text;
             self.OnShowModify(false);
@@ -150,12 +146,9 @@ namespace ET.Client
                 return;
             }
 
-            // C2U_UnionOperatateRequest c2M_ItemHuiShouRequest = new C2U_UnionOperatateRequest()
-            // {
-            //     UnionId = self.UnionInfo.UnionId, Operatate = 1, Value = text
-            // };
-            // U2C_UnionOperatateResponse r2c_roleEquip =
-            //         (U2C_UnionOperatateResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_ItemHuiShouRequest);
+            C2U_UnionOperatateRequest c2M_ItemHuiShouRequest = new() { UnionId = self.UnionInfo.UnionId, Operatate = 1, Value = text };
+            U2C_UnionOperatateResponse r2c_roleEquip =
+                    (U2C_UnionOperatateResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(c2M_ItemHuiShouRequest);
             self.UnionInfo.UnionName = text;
             self.E_Text_UnionNameText.text = self.UnionInfo.UnionName;
 
@@ -182,9 +175,9 @@ namespace ET.Client
 
         public static async ETTask RequestLevelUnion(this ES_UnionMy self)
         {
-            // C2M_UnionLeaveRequest c2M_ItemHuiShouRequest = new C2M_UnionLeaveRequest() { };
-            // M2C_UnionLeaveResponse r2c_roleEquip =
-            //         (M2C_UnionLeaveResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_ItemHuiShouRequest);
+            C2M_UnionLeaveRequest c2M_ItemHuiShouRequest = new();
+            M2C_UnionLeaveResponse r2c_roleEquip =
+                    (M2C_UnionLeaveResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(c2M_ItemHuiShouRequest);
 
             await ETTask.CompletedTask;
         }
@@ -220,48 +213,37 @@ namespace ET.Client
 
         public static async ETTask OnUpdateUI(this ES_UnionMy self)
         {
-            // Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            // long unionId = (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0));
-            // C2U_UnionMyInfoRequest c2M_ItemHuiShouRequest = new C2U_UnionMyInfoRequest() { UnionId = unionId };
-            // U2C_UnionMyInfoResponse r2c_roleEquip =
-            //         (U2C_UnionMyInfoResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_ItemHuiShouRequest);
-            // if (r2c_roleEquip.Error != ErrorCode.ERR_Success)
-            // {
-            //     return;
-            // }
-            //
-            // if (self.IsDisposed)
-            // {
-            //     return;
-            // }
-            //
-            // self.UnionInfo = r2c_roleEquip.UnionMyInfo;
-            // self.OnLinePlayer = r2c_roleEquip.OnLinePlayer;
-            // self.E_Text_LevelText.text = $"{r2c_roleEquip.UnionMyInfo.Level}";
-            // if (UnionConfigCategory.Instance.Contain(r2c_roleEquip.UnionMyInfo.Level))
-            // {
-            //     UnionConfig unionConfig = UnionConfigCategory.Instance.Get(r2c_roleEquip.UnionMyInfo.Level);
-            //     self.E_Text_ExpText.text = $"{r2c_roleEquip.UnionMyInfo.Exp}/{unionConfig.Exp}";
-            //     if (r2c_roleEquip.UnionMyInfo.UnionGold <= unionConfig.UnionGoldLimit)
-            //     {
-            //         self.E_Text_UnionGoldText.text =
-            //                 $"{r2c_roleEquip.UnionMyInfo.UnionGold / 10000f:0.#}万/{unionConfig.UnionGoldLimit / 10000f:0.#}万";
-            //     }
-            //     else
-            //     {
-            //         self.E_Text_UnionGoldText.text =
-            //                 $"{unionConfig.UnionGoldLimit / 10000f:0.#}万/{unionConfig.UnionGoldLimit / 10000f:0.#}万";
-            //     }
-            // }
-            // else
-            // {
-            //     self.E_Text_ExpText.text = String.Empty;
-            //     self.E_Text_UnionGoldText.text = string.Empty;
-            // }
-            //
-            // self.UpdateMyUnion(self.UnionInfo);
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            long unionId = (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0));
+            C2U_UnionMyInfoRequest c2M_ItemHuiShouRequest = new() { UnionId = unionId };
+            U2C_UnionMyInfoResponse r2c_roleEquip =
+                    (U2C_UnionMyInfoResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(c2M_ItemHuiShouRequest);
 
-            await ETTask.CompletedTask;
+            self.UnionInfo = r2c_roleEquip.UnionMyInfo;
+            self.OnLinePlayer = r2c_roleEquip.OnLinePlayer;
+            self.E_Text_LevelText.text = $"{r2c_roleEquip.UnionMyInfo.Level}";
+            if (UnionConfigCategory.Instance.Contain(r2c_roleEquip.UnionMyInfo.Level))
+            {
+                UnionConfig unionConfig = UnionConfigCategory.Instance.Get(r2c_roleEquip.UnionMyInfo.Level);
+                self.E_Text_ExpText.text = $"{r2c_roleEquip.UnionMyInfo.Exp}/{unionConfig.Exp}";
+                if (r2c_roleEquip.UnionMyInfo.UnionGold <= unionConfig.UnionGoldLimit)
+                {
+                    self.E_Text_UnionGoldText.text =
+                            $"{r2c_roleEquip.UnionMyInfo.UnionGold / 10000f:0.#}万/{unionConfig.UnionGoldLimit / 10000f:0.#}万";
+                }
+                else
+                {
+                    self.E_Text_UnionGoldText.text =
+                            $"{unionConfig.UnionGoldLimit / 10000f:0.#}万/{unionConfig.UnionGoldLimit / 10000f:0.#}万";
+                }
+            }
+            else
+            {
+                self.E_Text_ExpText.text = String.Empty;
+                self.E_Text_UnionGoldText.text = string.Empty;
+            }
+
+            await self.UpdateMyUnion(self.UnionInfo);
         }
 
         public static void OnUnionJingXuanTimer(this ES_UnionMy self)
@@ -276,27 +258,22 @@ namespace ET.Client
             self.E_TextJingXuanEndTimeText.text = TimeHelper.ShowLeftTime(lastTime);
         }
 
-        public static void UpdateMyUnion(this ES_UnionMy self, UnionInfo unionInfo)
+        public static async ETTask UpdateMyUnion(this ES_UnionMy self, UnionInfo unionInfo)
         {
             //客户端获取家族等级
-            //Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
-            //long unionId = (unit.GetComponent<NumericComponent>().GetAsLong(NumericType.UnionId_0));
-            //C2U_UnionMyInfoRequest request = new C2U_UnionMyInfoRequest()
-            //{
-            //    UnionId = unionId
-            //};
-            //U2C_UnionMyInfoResponse respose = (U2C_UnionMyInfoResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(request);
-            //if (respose.Error != ErrorCode.ERR_Success)
-            //{
-            //    return;
-            //}
-            //if (self.IsDisposed)
-            //{
-            //    return;
-            //}
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            long unionId = (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0));
+            C2U_UnionMyInfoRequest request = new() { UnionId = unionId };
+            U2C_UnionMyInfoResponse respose =
+                    (U2C_UnionMyInfoResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            if (respose.Error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             UnionPlayerInfo mainPlayerInfo = UnionHelper.GetUnionPlayerInfo(self.UnionInfo.UnionPlayerList, userInfoComponent.UserInfo.UserId);
-            UnionConfig unionCof = UnionConfigCategory.Instance.Get((int)unionInfo.Level);
+            UnionConfig unionCof = UnionConfigCategory.Instance.Get(unionInfo.Level);
             bool leader = userInfoComponent.UserInfo.UserId == self.UnionInfo.LeaderId;
             self.E_Text_OnLineText.text = $"在线人数 {self.OnLinePlayer.Count}";
             self.E_Text_PurposeText.text = self.UnionInfo.UnionPurpose;

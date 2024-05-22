@@ -43,5 +43,6 @@ namespace ET.Client
 		WindowID_MapBig,
 		WindowID_RoleZodiac,
 		WindowID_Watch,
+		WindowID_UnionRecords,
 	}
 }

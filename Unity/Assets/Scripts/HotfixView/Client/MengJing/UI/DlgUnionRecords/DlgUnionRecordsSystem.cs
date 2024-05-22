@@ -1,0 +1,42 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace ET.Client
+{
+    [FriendOf(typeof (DlgUnionRecords))]
+    public static class DlgUnionRecordsSystem
+    {
+        public static void RegisterUIEvent(this DlgUnionRecords self)
+        {
+            self.View.E_ButtonCloseButton.AddListener(self.OnButtonClose);
+            self.View.E_UnionRecordsItemLoopVerticalScrollRect.AddItemRefreshListener(self.OnUnionRecordsItemsRefresh);
+        }
+
+        public static void ShowWindow(this DlgUnionRecords self, Entity contextData = null)
+        {
+        }
+
+        public static void Refresh(this DlgUnionRecords self, UnionInfo unionInfo)
+        {
+            self.ShowInfo.Clear();
+            self.ShowInfo.AddRange(unionInfo.ActiveRecord);
+
+            self.AddUIScrollItems(ref self.ScrollItemUnionRecordsItems, self.ShowInfo.Count);
+            self.View.E_UnionRecordsItemLoopVerticalScrollRect.SetVisible(true, self.ShowInfo.Count);
+        }
+
+        private static void OnUnionRecordsItemsRefresh(this DlgUnionRecords self, Transform transform, int index)
+        {
+            Scroll_Item_UnionRecordsItem scrollItemChatItem = self.ScrollItemUnionRecordsItems[index].BindTrans(transform);
+            scrollItemChatItem.Refresh(self.ShowInfo[index]);
+        }
+
+        public static void OnButtonClose(this DlgUnionRecords self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_UnionRecords);
+        }
+    }
+}

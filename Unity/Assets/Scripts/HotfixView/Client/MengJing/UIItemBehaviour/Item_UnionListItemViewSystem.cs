@@ -51,6 +51,8 @@ namespace ET.Client
 
         public static void Refresh(this Scroll_Item_UnionListItem self, UnionListItem unionListItem)
         {
+            self.E_ButtonApplyButton.AddListenerAsync(self.OnButtonApply);
+
             self.UnionListItem = unionListItem;
             unionListItem.UnionLevel = Math.Max(unionListItem.UnionLevel, 1);
             int peopleMax = UnionConfigCategory.Instance.Get(unionListItem.UnionLevel).PeopleNum;
