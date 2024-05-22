@@ -3641,6 +3641,109 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(A2A_ActivityUpdateResponse))]
+	[Message(InnerMessage.A2A_ActivityUpdateRequest)]
+	[MemoryPackable]
+	public partial class A2A_ActivityUpdateRequest: MessageObject, IRequest
+	{
+		public static A2A_ActivityUpdateRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2A_ActivityUpdateRequest), isFromPool) as A2A_ActivityUpdateRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int Hour { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int OpenDay { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int FunctionId { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int FunctionType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Hour = default;
+			this.OpenDay = default;
+			this.FunctionId = default;
+			this.FunctionType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.A2A_ActivityUpdateResponse)]
+	[MemoryPackable]
+	public partial class A2A_ActivityUpdateResponse: MessageObject, IResponse
+	{
+		public static A2A_ActivityUpdateResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2A_ActivityUpdateResponse), isFromPool) as A2A_ActivityUpdateResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.G2M_ActivityUpdate)]
+	[MemoryPackable]
+	public partial class G2M_ActivityUpdate: MessageObject, IMessage
+	{
+		public static G2M_ActivityUpdate Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(G2M_ActivityUpdate), isFromPool) as G2M_ActivityUpdate; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ActivityType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ActivityType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -3750,5 +3853,8 @@ namespace ET
 		 public const ushort Union2G_EnterUnion = 20106;
 		 public const ushort M2U_UnionEnterRequest = 20107;
 		 public const ushort U2M_UnionEnterResponse = 20108;
+		 public const ushort A2A_ActivityUpdateRequest = 20109;
+		 public const ushort A2A_ActivityUpdateResponse = 20110;
+		 public const ushort G2M_ActivityUpdate = 20111;
 	}
 }

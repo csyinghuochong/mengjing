@@ -926,3 +926,28 @@ message U2M_UnionEnterResponse // IResponse
 	int32 FubenId = 1;
 	int64 FubenInstanceId = 2;
 }
+
+//ResponseType A2A_ActivityUpdateResponse
+message A2A_ActivityUpdateRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 Hour = 1;
+	int32 OpenDay  = 2;
+	int32 FunctionId = 3;
+	int32 FunctionType = 4;
+}
+
+message A2A_ActivityUpdateResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+message G2M_ActivityUpdate // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 ActivityType = 1;
+}

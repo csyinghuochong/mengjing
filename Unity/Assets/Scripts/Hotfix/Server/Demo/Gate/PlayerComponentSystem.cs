@@ -24,6 +24,11 @@ namespace ET.Server
             return player;
         }
         
+        public static Player[] GetAll(this PlayerComponent self)
+        {
+            return self.idPlayers.Values.ToArray();
+        }
+        
         public static Player GetByUserId(this PlayerComponent self, long id)
         {
             foreach (var player in self.idPlayers.Values)

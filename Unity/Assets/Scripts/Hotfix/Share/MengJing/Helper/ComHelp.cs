@@ -116,28 +116,6 @@ namespace  ET
             return pro;
         }
 
-#if NOT_UNITY
-        public static bool IsInnerNet()
-        {
-            if (StartMachineConfigCategory.Instance.Get(1).OuterIP.Contains("127.0.0.1")
-               || StartMachineConfigCategory.Instance.Get(1).OuterIP.Contains("192.168"))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public static bool IsBanHaoZone()
-        {
-            //////20201是版号区的
-            if (StartMachineConfigCategory.Instance.Get(1).WatcherPort.Equals("20201") )
-            {
-                return true;
-            }
-            return false;
-        }
-#endif
-
         public static int GetPlayerLimit(int sceneId)
         {
             return SceneConfigCategory.Instance.Get(sceneId).PlayerLimit;

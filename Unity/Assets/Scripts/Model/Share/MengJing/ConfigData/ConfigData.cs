@@ -990,6 +990,13 @@ namespace ET
             { 3, "长老"},
         };
 
+        
+        /// <summary>
+        /// 0 无日志 1 info  2debug  3 waring 4 error
+        /// </summary>
+        [StaticField]
+        public static int LogLevel = 0;
+
 
         /// <summary>
         /// 一键出售材料
