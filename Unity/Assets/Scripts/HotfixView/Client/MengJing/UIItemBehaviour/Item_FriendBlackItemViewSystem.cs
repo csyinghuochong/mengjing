@@ -33,12 +33,10 @@ namespace ET.Client
 
             self.E_WatchButton.AddListenerAsync(async () =>
             {
-                FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
-                flyTipComponent.SpawnFlyTipDi("功能暂未开放");
-                // F2C_FriendDeleteResponse response = await FriendNetHelper.RequestWatchPlayer(self.Root(), self.FriendInfo.UserId);
-                // UI uI = await UIHelper.Create(self.DomainScene(), UIType.UIWatch);
-                // uI.GetComponent<UIWatchComponent>().OnUpdateUI(m2C_SkillSet);
-                await ETTask.CompletedTask;
+                F2C_WatchPlayerResponse response = await FriendNetHelper.RequestWatchPlayer(self.Root(), self.FriendInfo.UserId, 0);
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Watch);
+                DlgWatch dlgWatch = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgWatch>();
+                dlgWatch.OnUpdateUI(response);
             });
 
             self.E_RemoveButton.AddListenerAsync(async () =>
