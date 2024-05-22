@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2U_UnionInviteReplyHandler : AMActorHandler<Scene, M2U_UnionInviteReplyMessage>
+    [MessageHandler(SceneType.Union)]
+    public class M2U_UnionInviteReplyHandler : MessageHandler<Scene, M2U_UnionInviteReplyMessage>
     {
         protected override async ETTask Run(Scene scene, M2U_UnionInviteReplyMessage request)
         {
             Log.Debug($"M2U_UnionInviteReplyMessage : {request}");
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.UnionOperate, request.UnionId))
+            using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.UnionOperate, request.UnionId))
             {
                 await scene.GetComponent<UnionSceneComponent>().OnJoinUinon(request.UnionId, request.UnitID, 1);
             }

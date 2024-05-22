@@ -1,25 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2U_UnionKeJiLearnHandler : AMActorRpcHandler<Scene, M2U_UnionKeJiLearnRequest, U2M_UnionKeJiLearnResponse>
+    [MessageHandler(SceneType.Union)]
+    public class M2U_UnionKeJiLearnHandler : MessageHandler<Scene, M2U_UnionKeJiLearnRequest, U2M_UnionKeJiLearnResponse>
     {
-        protected override async ETTask Run(Scene scene, M2U_UnionKeJiLearnRequest request, U2M_UnionKeJiLearnResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2U_UnionKeJiLearnRequest request, U2M_UnionKeJiLearnResponse response)
         {
             DBUnionInfo dBUnionInfo = await scene.GetComponent<UnionSceneComponent>().GetDBUnionInfo(request.UnionId);
             if (dBUnionInfo == null)
             {
                 response.Error = ErrorCode.ERR_Union_Not_Exist;
-                reply();
                 return;
             }
 
             if (request.KeJiId > dBUnionInfo.UnionInfo.UnionKeJiList[request.Position])
             {
                 response.Error = ErrorCode.ERR_LevelIsNot;
-                reply();
                 return;
             }
 
@@ -27,11 +24,9 @@ namespace ET
             if (unionKeJiConfig.NeedUnionLv > dBUnionInfo.UnionInfo.Level)
             {
                 response.Error = ErrorCode.ERR_LevelIsNot;
-                reply();
                 return;
             }
-
-            reply();
+            
             await ETTask.CompletedTask;
         }
     }
