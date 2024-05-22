@@ -3310,3 +3310,19 @@ message M2C_UnionDonationResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//邀请玩家加入家族
+message C2M_UnionInviteRequest // ILocationMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 InviteId = 1;
+}
+
+message M2C_UnionInviteMessage // IMessage
+{
+	string UnionName = 1;
+	string PlayerName = 2;
+	string Message = 3;
+	int64 UnionId = 4;
+}

@@ -12902,6 +12902,71 @@ namespace ET
 
 	}
 
+//邀请玩家加入家族
+	[Message(OuterMessage.C2M_UnionInviteRequest)]
+	[MemoryPackable]
+	public partial class C2M_UnionInviteRequest: MessageObject, ILocationMessage
+	{
+		public static C2M_UnionInviteRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_UnionInviteRequest), isFromPool) as C2M_UnionInviteRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long InviteId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.InviteId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_UnionInviteMessage)]
+	[MemoryPackable]
+	public partial class M2C_UnionInviteMessage: MessageObject, IMessage
+	{
+		public static M2C_UnionInviteMessage Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_UnionInviteMessage), isFromPool) as M2C_UnionInviteMessage; 
+		}
+
+		[MemoryPackOrder(0)]
+		public string UnionName { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long UnionId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UnionName = default;
+			this.PlayerName = default;
+			this.Message = default;
+			this.UnionId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -13272,5 +13337,7 @@ namespace ET
 		 public const ushort M2C_UnionCreateResponse = 10367;
 		 public const ushort C2M_UnionDonationRequest = 10368;
 		 public const ushort M2C_UnionDonationResponse = 10369;
+		 public const ushort C2M_UnionInviteRequest = 10370;
+		 public const ushort M2C_UnionInviteMessage = 10371;
 	}
 }
