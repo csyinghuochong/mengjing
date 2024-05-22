@@ -2922,6 +2922,75 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(U2M_UnionKeJiLearnResponse))]
+	[Message(InnerMessage.M2U_UnionKeJiLearnRequest)]
+	[MemoryPackable]
+	public partial class M2U_UnionKeJiLearnRequest: MessageObject, IRequest
+	{
+		public static M2U_UnionKeJiLearnRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2U_UnionKeJiLearnRequest), isFromPool) as M2U_UnionKeJiLearnRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnionId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int KeJiId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Position { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnionId = default;
+			this.KeJiId = default;
+			this.Position = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.U2M_UnionKeJiLearnResponse)]
+	[MemoryPackable]
+	public partial class U2M_UnionKeJiLearnResponse: MessageObject, IResponse
+	{
+		public static U2M_UnionKeJiLearnResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(U2M_UnionKeJiLearnResponse), isFromPool) as U2M_UnionKeJiLearnResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -3010,5 +3079,7 @@ namespace ET
 		 public const ushort M2U_UnionOperationRequest = 20085;
 		 public const ushort U2M_UnionOperationResponse = 20086;
 		 public const ushort M2U_UnionInviteReplyMessage = 20087;
+		 public const ushort M2U_UnionKeJiLearnRequest = 20088;
+		 public const ushort U2M_UnionKeJiLearnResponse = 20089;
 	}
 }
