@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2U_UnionEnterHandler : AMActorRpcHandler<Scene, M2U_UnionEnterRequest, U2M_UnionEnterResponse>
+    [MessageHandler(SceneType.Union)]
+    public class M2U_UnionEnterHandler : MessageHandler<Scene, M2U_UnionEnterRequest, U2M_UnionEnterResponse>
     {
-        protected override async ETTask Run(Scene scene, M2U_UnionEnterRequest request, U2M_UnionEnterResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2U_UnionEnterRequest request, U2M_UnionEnterResponse response)
         {
             UnionSceneComponent unionSceneComponent = scene.GetComponent<UnionSceneComponent>();
             if (request.OperateType == 1)
@@ -18,7 +18,6 @@ namespace ET
                 response.FubenInstanceId = unionSceneComponent.GetUnionFubenId(request.UnionId, request.UnitId);
             }
             
-            reply();
             await ETTask.CompletedTask;
         }
     }

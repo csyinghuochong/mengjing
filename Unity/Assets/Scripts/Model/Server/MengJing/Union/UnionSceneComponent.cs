@@ -11,7 +11,7 @@ namespace ET.Server
         public long WinUnionId;
 
         public long UnionRaceSceneId;
-        public long UnionRaceSceneInstanceId;
+        public long UnionRaceSceneInstanceId{ get; set; } 
 
         public DBUnionManager DBUnionManager { get; set; } = new DBUnionManager();
 
