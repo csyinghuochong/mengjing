@@ -184,13 +184,13 @@ namespace ET.Client
                 return;
             }
 
-            // C2M_UnionCreateRequest c2M_ItemHuiShouRequest = new C2M_UnionCreateRequest() { UnionName = unionName, UnionPurpose = purpose };
-            // M2C_UnionCreateResponse r2c_roleEquip =
-            //         (M2C_UnionCreateResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_ItemHuiShouRequest);
-            // if (r2c_roleEquip.Error != ErrorCode.ERR_Success)
-            // {
-            //     return;
-            // }
+            C2M_UnionCreateRequest c2M_ItemHuiShouRequest = new() { UnionName = unionName, UnionPurpose = purpose };
+            M2C_UnionCreateResponse r2c_roleEquip =
+                    (M2C_UnionCreateResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(c2M_ItemHuiShouRequest);
+            if (r2c_roleEquip.Error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
 
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgFriend>().View.E_Button_4Toggle.IsSelected(true);
 
