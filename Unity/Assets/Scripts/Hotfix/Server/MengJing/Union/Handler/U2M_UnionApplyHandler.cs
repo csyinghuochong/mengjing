@@ -1,21 +1,20 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class U2M_UnionApplyHandler : AMActorRpcHandler<Unit, U2M_UnionApplyRequest, M2U_UnionApplyResponse>
+    [MessageHandler(SceneType.Union)]
+    public class U2M_UnionApplyHandler : MessageHandler<Unit, U2M_UnionApplyRequest, M2U_UnionApplyResponse>
     {
-        protected override async ETTask Run(Unit unit, U2M_UnionApplyRequest request, M2U_UnionApplyResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, U2M_UnionApplyRequest request, M2U_UnionApplyResponse response)
         {
-            unit.GetComponent<NumericComponent>().ApplyValue(NumericType.UnionLeader, 0);
-            unit.GetComponent<NumericComponent>().ApplyValue(NumericType.UnionId_0, request.UnionId);
-            unit.GetComponent<UserInfoComponent>().UpdateRoleData(UserDataType.UnionName, request.UnionName);
-            unit.GetComponent<UserInfoComponent>().UpdateRoleDataBroadcast(UserDataType.UnionName, request.UnionName);
-            unit.GetComponent<TaskComponent>().TriggerTaskEvent(TaskTargetType.JoinUnion_9, 0, 1);
-            unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.JoinUnion_9, 0, 1);
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.UnionLeader, 0);
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.UnionId_0, request.UnionId);
+            unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.UnionName, request.UnionName);
+            unit.GetComponent<UserInfoComponentS>().UpdateRoleDataBroadcast(UserDataType.UnionName, request.UnionName);
+            unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JoinUnion_9, 0, 1);
+            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JoinUnion_9, 0, 1);
             unit.UpdateUnionToChat().Coroutine();
-            reply();
+
             await ETTask.CompletedTask;
         }
     }

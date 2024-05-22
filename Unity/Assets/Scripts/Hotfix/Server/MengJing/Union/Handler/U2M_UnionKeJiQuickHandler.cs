@@ -1,22 +1,22 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class U2M_UnionKeJiQuickHandler : AMActorRpcHandler<Unit, U2M_UnionKeJiQuickRequest, M2U_UnionKeJiQuickResponse>
+    [MessageHandler(SceneType.Union)]
+    public class U2M_UnionKeJiQuickHandler : MessageHandler<Unit, U2M_UnionKeJiQuickRequest, M2U_UnionKeJiQuickResponse>
     {
-        protected override async ETTask Run(Unit unit, U2M_UnionKeJiQuickRequest request, M2U_UnionKeJiQuickResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, U2M_UnionKeJiQuickRequest request, M2U_UnionKeJiQuickResponse response)
         {
-            if (unit.GetComponent<UserInfoComponent>().UserInfo.Diamond <= request.Cost)
+            if (unit.GetComponent<UserInfoComponentS>().UserInfo.Diamond <= request.Cost)
             {
                 response.Error = ErrorCode.ERR_DiamondNotEnoughError;
-                reply();
+
                 return;
             }
 
-            unit.GetComponent<UserInfoComponent>().UpdateRoleMoneySub(UserDataType.Diamond, $"-{request.Cost}", true, ItemGetWay.UnionXiuLian);
+            unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneySub(UserDataType.Diamond, $"-{request.Cost}", true, ItemGetWay.UnionXiuLian);
 
-            reply();
+
             await ETTask.CompletedTask;
         }
     }
