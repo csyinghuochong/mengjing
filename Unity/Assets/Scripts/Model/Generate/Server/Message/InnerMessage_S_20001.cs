@@ -3196,6 +3196,72 @@ namespace ET
 
 	}
 
+//入会通知
+	[ResponseType(nameof(M2U_UnionApplyResponse))]
+	[Message(InnerMessage.U2M_UnionApplyRequest)]
+	[MemoryPackable]
+	public partial class U2M_UnionApplyRequest: MessageObject, IRequest
+	{
+		public static U2M_UnionApplyRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(U2M_UnionApplyRequest), isFromPool) as U2M_UnionApplyRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnionId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string UnionName { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnionId = default;
+			this.UnionName = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.M2U_UnionApplyResponse)]
+	[MemoryPackable]
+	public partial class M2U_UnionApplyResponse: MessageObject, IResponse
+	{
+		public static M2U_UnionApplyResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2U_UnionApplyResponse), isFromPool) as M2U_UnionApplyResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -3292,5 +3358,7 @@ namespace ET
 		 public const ushort U2M_UnionMysteryBuyResponse = 20093;
 		 public const ushort M2U_UnionTransferRequest = 20094;
 		 public const ushort U2M_UnionTransferResponse = 20095;
+		 public const ushort U2M_UnionApplyRequest = 20096;
+		 public const ushort M2U_UnionApplyResponse = 20097;
 	}
 }
