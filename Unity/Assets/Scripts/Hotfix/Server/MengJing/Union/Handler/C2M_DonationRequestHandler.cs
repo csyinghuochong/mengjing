@@ -1,23 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2M_DonationRequestHandler : AMActorLocationRpcHandler<Unit, C2M_DonationRequest, M2C_DonationResponse>
+    [MessageLocationHandler(SceneType.Map)]
+    public class C2M_DonationRequestHandler : MessageLocationHandler<Unit, C2M_DonationRequest, M2C_DonationResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_DonationRequest request, M2C_DonationResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_DonationRequest request, M2C_DonationResponse response)
         {
-         
             if (request.Price < 100000)
             {
-                reply();
                 return;
             }
-            if (unit.GetComponent<UserInfoComponent>().UserInfo.Gold < request.Price)
+            if (unit.GetComponent<UserInfoComponentS>().UserInfo.Gold < request.Price)
             {
                 response.Error = ErrorCode.ERR_GoldNotEnoughError;
-                reply();
                 return;
             }
 
@@ -26,8 +24,8 @@ namespace ET
 
             //}
             request.UnitId = unit.Id;
-            long serverid = DBHelper.GetUnionServerId(unit.DomainZone());
-            UserInfo userInfo = unit.GetComponent<UserInfoComponent>().UserInfo;
+            ActorId serverid = UnitCacheHelper.GetUnionServerId(unit.Zone());
+            UserInfo userInfo = unit.GetComponent<UserInfoComponentS>().UserInfo;
             RankingInfo rankingInfo = new RankingInfo()
             {
                 Combat = request.Price,
@@ -36,19 +34,18 @@ namespace ET
                 PlayerName = userInfo.Name, 
                 Occ = userInfo.Occ, 
             };
-            U2M_DonationResponse d2GGetUnit = (U2M_DonationResponse)await ActorMessageSenderComponent.Instance.Call(serverid,
+            U2M_DonationResponse d2GGetUnit = (U2M_DonationResponse)await unit.Root().GetComponent<MessageSender>().Call(serverid,
                 new M2U_DonationRequest() { RankingInfo = rankingInfo }
                 );
 
             if (d2GGetUnit.Error != ErrorCode.ERR_Success)
             {
                 response.Error = d2GGetUnit.Error;
-                reply();
                 return;
             }
-            unit.GetComponent<NumericComponent>().ApplyChange(unit, NumericType.RaceDonationNumber, request.Price, 0);
-            unit.GetComponent<UserInfoComponent>().UpdateRoleMoneySub( UserDataType.Gold,  (request.Price * -1).ToString(),true, ItemGetWay.Donation );
-            reply();
+            unit.GetComponent<NumericComponentS>().ApplyChange(unit, NumericType.RaceDonationNumber, request.Price, 0);
+            unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneySub( UserDataType.Gold,  (request.Price * -1).ToString(),true, ItemGetWay.Donation );
+
             await ETTask.CompletedTask;
         }
     }

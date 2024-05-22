@@ -2602,6 +2602,72 @@ namespace ET
 
 	}
 
+//捐献
+	[ResponseType(nameof(U2M_DonationResponse))]
+	[Message(InnerMessage.M2U_DonationRequest)]
+	[MemoryPackable]
+	public partial class M2U_DonationRequest: MessageObject, IRequest
+	{
+		public static M2U_DonationRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2U_DonationRequest), isFromPool) as M2U_DonationRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public RankingInfo RankingInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.RankingInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.U2M_DonationResponse)]
+	[MemoryPackable]
+	public partial class U2M_DonationResponse: MessageObject, IResponse
+	{
+		public static U2M_DonationResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(U2M_DonationResponse), isFromPool) as U2M_DonationResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RankId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RankId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -2681,5 +2747,7 @@ namespace ET
 		 public const ushort Mail2M_SendServerMailItem = 20076;
 		 public const ushort A2A_ServerMessageRequest = 20077;
 		 public const ushort A2A_ServerMessageRResponse = 20078;
+		 public const ushort M2U_DonationRequest = 20079;
+		 public const ushort U2M_DonationResponse = 20080;
 	}
 }

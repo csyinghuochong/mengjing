@@ -657,3 +657,23 @@ message A2A_ServerMessageRResponse // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+
+//捐献
+//ResponseType U2M_DonationResponse
+message M2U_DonationRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	RankingInfo RankingInfo = 3;
+}
+
+message U2M_DonationResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	int32 RankId = 1;
+}

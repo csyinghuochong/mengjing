@@ -12701,6 +12701,72 @@ namespace ET
 
 	}
 
+//家族争霸赛捐献
+	[ResponseType(nameof(M2C_DonationResponse))]
+	[Message(OuterMessage.C2M_DonationRequest)]
+	[MemoryPackable]
+	public partial class C2M_DonationRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_DonationRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_DonationRequest), isFromPool) as C2M_DonationRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long Price { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Price = default;
+			this.UnitId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_DonationResponse)]
+	[MemoryPackable]
+	public partial class M2C_DonationResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_DonationResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_DonationResponse), isFromPool) as M2C_DonationResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -13065,5 +13131,7 @@ namespace ET
 		 public const ushort M2C_TurtleRewardMessage = 10361;
 		 public const ushort C2M_BloodstoneQiangHuaRequest = 10362;
 		 public const ushort M2C_BloodstoneQiangHuaResponse = 10363;
+		 public const ushort C2M_DonationRequest = 10364;
+		 public const ushort M2C_DonationResponse = 10365;
 	}
 }
