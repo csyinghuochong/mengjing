@@ -111,23 +111,20 @@ namespace ET.Server
             return null;
         }
         
-        public static async ETTask SaveComponentCache(int zone, long unitId, Entity entity)
+        public static async ETTask SaveComponentCache(Scene root,  Entity entity)
         {
-            await ETTask.CompletedTask;
-        }
-
-        public static async ETTask<T> GetComponentBD<T>(Scene root, long unitId) where T : Entity
-        {
-            DBComponent dbComponent = root.GetComponent<DBManagerComponent>().GetZoneDB(root.Zone());
-            List<T> resulets = await dbComponent.Query<T>(root.Zone(), d => d.Id == unitId);
-            if (resulets == null || resulets.Count == 0)
+            Other2UnitCache_AddOrUpdateUnit addOrUpdateUnit = new Other2UnitCache_AddOrUpdateUnit()
             {
-                return null;
-            }
 
-            return resulets[0];
+            };
+            addOrUpdateUnit.UnitId = entity.Id;
+            addOrUpdateUnit.EntityTypes.Add(entity.GetType().FullName);
+            addOrUpdateUnit.EntityBytes.Add(entity.ToBson());
+
+            StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(root.Zone());
+            await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, addOrUpdateUnit);
         }
-        
+                
         public static async ETTask<T> GetComponent<T>(Scene root, long unitId) where T : Entity
         {
             DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
@@ -148,11 +145,6 @@ namespace ET.Server
             await dbComponent.Save(root.Zone(), entity);
         }
         
-        public static async ETTask SaveComponentDB(Scene root, long unitId, Entity entity)
-        {
-            DBComponent dbComponent = root.GetComponent<DBManagerComponent>().GetZoneDB(root.Zone());
-            await dbComponent.Save(root.Zone(), entity);
-        }
 
         /// <summary>
         /// 删除玩家缓存

@@ -124,7 +124,7 @@ namespace ET.Server
         //指定玩家发送邮件
         public static async ETTask<int> SendUserMail(Scene root, long userID, MailInfo mailInfo)
         {
-            DBMailInfo dBMainInfo = await UnitCacheHelper.GetComponentBD<DBMailInfo>(root, userID);
+            DBMailInfo dBMainInfo = await UnitCacheHelper.GetComponent<DBMailInfo>(root, userID);
             if (dBMainInfo == null)
             {
                 return ErrorCode.ERR_NotFindAccount;
@@ -164,7 +164,7 @@ namespace ET.Server
             }
 
             mailinfolist.Add(mailInfo);
-            await UnitCacheHelper.SaveComponentDB(root, userID ,dBMainInfo);
+            await UnitCacheHelper.SaveComponent(root, userID ,dBMainInfo);
             return ErrorCode.ERR_Success;
         }
     }

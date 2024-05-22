@@ -498,6 +498,20 @@ namespace ET.Server
             return chat2G_EnterChat.Error;
         }
         
+        public static List<Unit> GetAliveUnitList(Scene scene, int unitType)
+        {
+            List<Unit> units = new List<Unit>();
+            List<Unit> allunits = scene.GetComponent<UnitComponent>().GetAll();
+            for (int i = 0; i < allunits.Count; i++)
+            {
+                if (allunits[i].Type == unitType && allunits[i].GetComponent<NumericComponentS>().GetAsInt(NumericType.Now_Dead) == 0)
+                {
+                    units.Add(allunits[i]);
+                }
+            }
+            return units;
+        }
+        
         public static List<Unit> GetUnitList(Scene scene, float3 position, int unitType, float distance)
         {
             List<Unit> units = new List<Unit>();

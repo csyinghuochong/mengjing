@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -113,26 +114,24 @@ namespace ET.Server
             ////通知玩家
 
             U2M_UnionApplyRequest r2M_RechargeRequest = new U2M_UnionApplyRequest() { UnionId = unionid, UnionName = dBUnionInfo.UnionInfo.UnionName };
-            M2U_UnionApplyResponse m2G_RechargeResponse = (M2U_UnionApplyResponse)await ActorLocationSenderComponent.Instance.Call(unitid, r2M_RechargeRequest);
+            M2U_UnionApplyResponse m2G_RechargeResponse = (M2U_UnionApplyResponse) await self.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(unitid, r2M_RechargeRequest);
             if (m2G_RechargeResponse.Error == ErrorCode.ERR_Success)
             {
                 operateSucess = true;
             }
             else
             {
-                Log.Warning($"加入帮会不在线: {unitid}: {self.DomainZone()} {unitid}");
+                Log.Warning($"加入帮会不在线: {unitid}: {self.Zone()} {unitid}");
 
                 operateSucess = true;
-                long dbCacheId = DBHelper.GetDbCacheId(self.DomainZone());
-                D2G_GetComponent d2GGet = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = unitid, Component = DBHelper.NumericComponent });
-                NumericComponent numericComponent = d2GGet.Component as NumericComponent;
-                numericComponent.Set(NumericType.UnionId_0, unionid, false);
-                D2M_SaveComponent d2GSave = (D2M_SaveComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new M2D_SaveComponent() { UnitId = unitid, EntityByte = MongoHelper.ToBson(numericComponent), ComponentType = DBHelper.NumericComponent });
-
-                d2GGet = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = unitid, Component = DBHelper.UserInfoComponent });
-                UserInfoComponent userInfoComponent = d2GGet.Component as UserInfoComponent;
+               
+                NumericComponentS numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentS>(self.Root(), unitid);
+                numericComponent.ApplyValue(NumericType.UnionId_0, unionid, false);
+                await UnitCacheHelper.SaveComponentCache(self.Root(), numericComponent);
+                
+                UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(self.Root(), unitid);
                 userInfoComponent.UserInfo.UnionName = dBUnionInfo.UnionInfo.UnionName;
-                d2GSave = (D2M_SaveComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new M2D_SaveComponent() { UnitId = unitid, EntityByte = MongoHelper.ToBson(userInfoComponent), ComponentType = DBHelper.UserInfoComponent });
+                await UnitCacheHelper.SaveComponentCache(self.Root(), userInfoComponent);
             }
 
             if (operateSucess)
@@ -144,7 +143,7 @@ namespace ET.Server
             }
         }
 
-        DBHelper.SaveComponentCache(self.DomainZone(), unionid, dBUnionInfo).Coroutine();
+        UnitCacheHelper.SaveComponentCache(self.Root(), dBUnionInfo).Coroutine();
         return ErrorCode.ERR_Success;
     }
 
@@ -161,7 +160,7 @@ namespace ET.Server
             Scene scene = self.GetChild<Scene>(unionid);
             if (scene == null)
             {
-                Log.Debug($"{self.DomainZone()} {unionid} scene == null");
+                Log.Debug($"{self.Zone()} {unionid} scene == null");
                 continue;
             }
 
@@ -171,14 +170,13 @@ namespace ET.Server
 
     public static async ETTask CheckWinUnion(this UnionSceneComponent self, Scene fubnescene, int minite)
     {
-        Vector3 initPosi = new Vector3(-68.62f, 0f, -3.05f);
+        float3 initPosi = new float3(-68.62f, 0f, -3.05f);
         Dictionary<long, int> map = new Dictionary<long, int>();
-
-
+        
         List<Unit> units = UnitHelper.GetAliveUnitList(fubnescene, UnitType.Player);
         for (int i = 0; i < units.Count; i++)
         {
-            if (Vector3.Distance(initPosi, units[i].Position) > 20)
+            if (math.distance(initPosi, units[i].Position) > 20)
             {
                 continue;
             }
@@ -193,7 +191,7 @@ namespace ET.Server
 
         long winunionid = 0;
         int playernumber = 0;
-        string unionplayerNumber = $"{self.DomainZone()} 占领区人数: ";
+        string unionplayerNumber = $"{self.Zone()} 占领区人数: ";
         foreach ((long unioid, int number) in map)
         {
             if (number > playernumber)
@@ -209,11 +207,11 @@ namespace ET.Server
         {
             if (winunionid == units[i].GetUnionId() && winunionid != 0)
             {
-                units[i].GetComponent<NumericComponent>().ApplyValue(NumericType.UnionRaceWin, 1, true, false);
+                units[i].GetComponent<NumericComponentS>().ApplyValue(NumericType.UnionRaceWin, 1, true, false);
             }
             else
             {
-                units[i].GetComponent<NumericComponent>().ApplyValue(NumericType.UnionRaceWin, 0, true, false);
+                units[i].GetComponent<NumericComponentS>().ApplyValue(NumericType.UnionRaceWin, 0, true, false);
             }
         }
         self.WinUnionId = winunionid;
@@ -221,13 +219,13 @@ namespace ET.Server
         if (minite == 0)
         {
             Log.Warning(unionplayerNumber);
-            Log.Warning($"胜利家族:  {self.DomainZone()} {winunionid}");
+            Log.Warning($"胜利家族:  {self.Zone()} {winunionid}");
         }
 
         DBUnionInfo dBUnionInfo = await self.GetDBUnionInfo(winunionid);
         if (dBUnionInfo != null)
         {
-            ServerMessageHelper.SendBroadMessage(self.DomainZone(), NoticeType.Notice, $"恭喜 <color=#{ComHelp.QualityReturnColor(2)}>{dBUnionInfo.UnionInfo.UnionName}</color>家族占领了家族争霸赛地图!");
+            BroadMessageHelper.SendBroadMessage(self.Root(), NoticeType.Notice, $"恭喜 <color=#{ComHelp.QualityReturnColor(2)}>{dBUnionInfo.UnionInfo.UnionName}</color>家族占领了家族争霸赛地图!");
         }
     }
 
@@ -250,12 +248,12 @@ namespace ET.Server
     {
         int minite = (int)((FunctionHelp.GetCloseTime(1044) - FunctionHelp.GetOpenTime(1044)) / 60);
         /////进程9
-        Log.Console($"家族争霸赛开始！！:{self.DomainZone()}  {minite}");
-        Log.Warning($"家族争霸赛开始！！:{self.DomainZone()}  {minite}");
+        Log.Console($"家族争霸赛开始！！:{self.Zone()}  {minite}");
+        Log.Warning($"家族争霸赛开始！！:{self.Zone()}  {minite}");
         for (int i = minite - 1; i >= 0; i--)
         {
-            await TimerComponent.Instance.WaitAsync(60 * 1000);
-            Log.Console($"家族争霸赛检测！！: {self.DomainZone()}  {i}");
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(60 * 1000);
+            Log.Console($"家族争霸赛检测！！: {self.Zone()}  {i}");
 
             Scene fubnescene = self.GetChild<Scene>(self.UnionRaceSceneId);
             if (fubnescene == null)
@@ -272,8 +270,8 @@ namespace ET.Server
     {
         long serverTime = TimeHelper.ServerNow();
        
-        Log.Console($"家族争霸赛结束！！:{self.DomainZone()}");
-        Log.Warning($"家族争霸赛结束！！: {self.DomainZone()}");
+        Log.Console($"家族争霸赛结束！！:{self.Zone()}");
+        Log.Warning($"家族争霸赛结束！！: {self.Zone()}");
         int allwinunits = 0;
         int allfailunits = 0;
         foreach ((long unionid, List<long> unitids) in self.UnionRaceUnits)
@@ -292,8 +290,8 @@ namespace ET.Server
         }
 
         long allJiangjin =(long) (0.8f * (self.DBUnionManager.TotalDonation + self.GetBaseJiangJin()));
-        allwinunits = Math.Max(allwinunits, 10);
-        allfailunits = Math.Max(allfailunits, 10);
+        allwinunits = math.max(allwinunits, 10);
+        allfailunits = math.max(allfailunits, 10);
 
         int winJingJin = (int)(allJiangjin * 0.6f / allwinunits);
         int failJiangJin = (int)(allJiangjin * 0.4f / allfailunits);
@@ -301,8 +299,8 @@ namespace ET.Server
         Log.Console("家族战发放奖励");
         Log.Warning($"allwinunits: {allwinunits}   allfailunits: {allfailunits}  winJingJin: {winJingJin} failJiangJin:{failJiangJin} winunionid: {self.WinUnionId} allJiangjin:{allJiangjin}");
 
-        
-        long mailServerId = DBHelper.GetMailServerId(self.DomainZone());
+
+        ActorId mailServerId = UnitCacheHelper.GetMailServerId(self.Zone());
         foreach (( long unionid, List<long> unitids ) in self.UnionRaceUnits )
         {
             for (int i = 0; i < unitids.Count; i++)
@@ -315,18 +313,18 @@ namespace ET.Server
                 if (unionid == self.WinUnionId)
                 {
                     mailInfo.Context = "发送家族争霸赛胜利奖励";
-                    Log.Warning($"发送奖励胜利！！: {self.DomainZone()} {unitids[i]}");
+                    Log.Warning($"发送奖励胜利！！: {self.Zone()} {unitids[i]}");
                     mailInfo.ItemList.Add(new BagInfo() { ItemID = 1, ItemNum = winJingJin,  GetWay = $"{ItemGetWay.UnionRace}_{serverTime}" });
                 }
                 else
                 {
                     mailInfo.Context = "发送家族争霸赛失败奖励";
-                    Log.Warning($"发送奖励失败！！: {self.DomainZone()} {unitids[i]}");
+                    Log.Warning($"发送奖励失败！！: {self.Zone()} {unitids[i]}");
                     mailInfo.ItemList.Add(new BagInfo() { ItemID = 1, ItemNum = failJiangJin, GetWay = $"{ItemGetWay.UnionRace}_{serverTime}" });
                 }
 
                 //MailHelp.SendUserMail(self.DomainZone(), unitids[i], mailInfo).Coroutine();
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await ActorMessageSenderComponent.Instance.Call
+                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call
                                      (mailServerId, new M2E_EMailSendRequest()
                                      {
                                          Id = unitids[i],
@@ -340,7 +338,7 @@ namespace ET.Server
             }
         }
 
-        await TimerComponent.Instance.WaitAsync(1000);
+        await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
 
         Scene fubnescene = self.GetChild<Scene>(self.UnionRaceSceneId);
         if (fubnescene != null)

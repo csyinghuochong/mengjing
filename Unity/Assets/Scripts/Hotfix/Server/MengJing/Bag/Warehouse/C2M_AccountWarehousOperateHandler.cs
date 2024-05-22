@@ -10,7 +10,7 @@ namespace ET.Server
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Buy, unit.Id))
             {
                 long accountId = unit.GetComponent<UserInfoComponentS>().UserInfo.AccInfoID;
-                DBAccountInfo dBAccountWarehouse = await UnitCacheHelper.GetComponentBD<DBAccountInfo>(unit.Root(), accountId);
+                DBAccountInfo dBAccountWarehouse = await UnitCacheHelper.GetComponent<DBAccountInfo>(unit.Root(), accountId);
                 
                 if(dBAccountWarehouse == null)
                 {
@@ -83,8 +83,8 @@ namespace ET.Server
                         break;
                 }
 
-                UnitCacheHelper.SaveComponentCache(unit.Zone(), unit.Id, bagComponent).Coroutine();
-                UnitCacheHelper.SaveComponentDB(unit.Root(), accountId, dBAccountWarehouse).Coroutine();
+                UnitCacheHelper.SaveComponentCache(unit.Root(),  bagComponent).Coroutine();
+                UnitCacheHelper.SaveComponent(unit.Root(), accountId, dBAccountWarehouse).Coroutine();
             }
 
             await ETTask.CompletedTask;
