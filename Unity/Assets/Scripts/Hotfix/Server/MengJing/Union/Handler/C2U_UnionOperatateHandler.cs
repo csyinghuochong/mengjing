@@ -1,23 +1,21 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class C2U_UnionOperatateHandler : AMActorRpcHandler<Scene, C2U_UnionOperatateRequest, U2C_UnionOperatateResponse>
+    [MessageHandler(SceneType.Union)]
+    public class C2U_UnionOperatateHandler : MessageHandler<Scene, C2U_UnionOperatateRequest, U2C_UnionOperatateResponse>
     {
-        protected override async ETTask Run(Scene scene, C2U_UnionOperatateRequest request, U2C_UnionOperatateResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2U_UnionOperatateRequest request, U2C_UnionOperatateResponse response)
         {
             UnionSceneComponent unionSceneComponent = scene.GetComponent<UnionSceneComponent>();
             DBUnionInfo dBUnionInfo = await unionSceneComponent.GetDBUnionInfo(request.UnionId);
             if (dBUnionInfo == null)
             {
                 response.Error = ErrorCode.ERR_Union_Not_Exist;
-                reply();
                 return;
             }
 
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.UnionOperate, request.UnionId))
+            using (await scene.Root().GetComponent<CoroutineLockComponent>() .Wait(CoroutineLockType.UnionOperate, request.UnionId))
             {
                 //1改名  2改宣言 3任职 
                 switch (request.Operatate)
@@ -33,7 +31,6 @@ namespace ET
                         if (operatevalue.Length != 2)
                         {
                             response.Error = ErrorCode.ERR_ModifyData;
-                            reply();
                             return;
                         }
                         long operateid  = long.Parse(operatevalue[0]);
@@ -43,14 +40,12 @@ namespace ET
                         if (unionPlayerInfo_1 == null)
                         {
                             response.Error = ErrorCode.ERR_Union_NoPlayer;
-                            reply();
                             return;
                         }
                         ///1族长 2副族长  ///3长老
                         if (unionPlayerInfo_1.Position == 0 || (unionPlayerInfo_1.Position >= position && position != 0 ))
                         {
                             response.Error = ErrorCode.ERR_Union_NoLimits;
-                            reply();
                             return;
                         }
 
@@ -58,13 +53,11 @@ namespace ET
                         if (unionPlayerInfo_2 == null)
                         {
                             response.Error = ErrorCode.ERR_Union_NoPlayer;
-                            reply();
                             return;
                         }
                         if (unionPlayerInfo_2.Position != 0 && unionPlayerInfo_2.Position <= unionPlayerInfo_1.Position)
                         {
                             response.Error = ErrorCode.ERR_Union_NoLimits;
-                            reply();
                             return;
                         }
 
@@ -74,9 +67,9 @@ namespace ET
                         break;
                 }
 
-                DBHelper.SaveComponentCache(scene.DomainZone(), request.UnionId, dBUnionInfo).Coroutine();
+                UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo).Coroutine();
             }
-            reply();
+
             await ETTask.CompletedTask;
         }
     }

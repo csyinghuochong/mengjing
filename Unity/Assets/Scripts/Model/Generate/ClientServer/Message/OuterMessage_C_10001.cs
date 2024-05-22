@@ -14278,6 +14278,149 @@ namespace ET
 
 	}
 
+//公会操作
+	[ResponseType(nameof(U2C_UnionOperatateResponse))]
+	[Message(OuterMessage.C2U_UnionOperatateRequest)]
+	[MemoryPackable]
+	public partial class C2U_UnionOperatateRequest: MessageObject, IUnionActorRequest
+	{
+		public static C2U_UnionOperatateRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2U_UnionOperatateRequest), isFromPool) as C2U_UnionOperatateRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnionId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Operatate { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string Value { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.UnionId = default;
+			this.Operatate = default;
+			this.Value = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.U2C_UnionOperatateResponse)]
+	[MemoryPackable]
+	public partial class U2C_UnionOperatateResponse: MessageObject, IUnionActorResponse
+	{
+		public static U2C_UnionOperatateResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(U2C_UnionOperatateResponse), isFromPool) as U2C_UnionOperatateResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(U2C_UnionRaceInfoResponse))]
+	[Message(OuterMessage.C2U_UnionRaceInfoRequest)]
+	[MemoryPackable]
+	public partial class C2U_UnionRaceInfoRequest: MessageObject, IUnionActorRequest
+	{
+		public static C2U_UnionRaceInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2U_UnionRaceInfoRequest), isFromPool) as C2U_UnionRaceInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RankType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.RankType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.U2C_UnionRaceInfoResponse)]
+	[MemoryPackable]
+	public partial class U2C_UnionRaceInfoResponse: MessageObject, IUnionActorResponse
+	{
+		public static U2C_UnionRaceInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(U2C_UnionRaceInfoResponse), isFromPool) as U2C_UnionRaceInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<UnionListItem> UnionInfoList { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public long TotalDonation { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.UnionInfoList.Clear();
+			this.TotalDonation = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -14689,5 +14832,9 @@ namespace ET
 		 public const ushort U2C_UnionMyInfoResponse = 10408;
 		 public const ushort C2U_UnionMysteryListRequest = 10409;
 		 public const ushort U2C_UnionMysteryListResponse = 10410;
+		 public const ushort C2U_UnionOperatateRequest = 10411;
+		 public const ushort U2C_UnionOperatateResponse = 10412;
+		 public const ushort C2U_UnionRaceInfoRequest = 10413;
+		 public const ushort U2C_UnionRaceInfoResponse = 10414;
 	}
 }

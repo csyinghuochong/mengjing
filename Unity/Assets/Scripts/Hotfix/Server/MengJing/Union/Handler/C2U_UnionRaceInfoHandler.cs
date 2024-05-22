@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2U_UnionRaceInfoHandler : AMActorRpcHandler<Scene, C2U_UnionRaceInfoRequest, U2C_UnionRaceInfoResponse>
+    [MessageHandler(SceneType.Union)]
+    public class C2U_UnionRaceInfoHandler : MessageHandler<Scene, C2U_UnionRaceInfoRequest, U2C_UnionRaceInfoResponse>
     {
-        protected override async ETTask Run(Scene scene, C2U_UnionRaceInfoRequest request, U2C_UnionRaceInfoResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2U_UnionRaceInfoRequest request, U2C_UnionRaceInfoResponse response)
         {
             Log.Warning($"C2U_UnionRaceInfoRequest:{request.ActorId}");
             
@@ -14,9 +14,12 @@ namespace ET
             
             response.TotalDonation = unionSceneComponent.GetBaseJiangJin() + (int)(unionSceneComponent.DBUnionManager.TotalDonation);
 
+            DBManagerComponent dbManagerComponent = scene.GetComponent<DBManagerComponent>();
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB(scene.Zone());
+            
             for (int i = 0; i < unionSceneComponent.DBUnionManager.SignupUnions.Count; i++)
             {
-                List<DBUnionInfo> result = await Game.Scene.GetComponent<DBComponent>().Query<DBUnionInfo>(scene.DomainZone(), _account => _account.UnionInfo.UnionId == unionSceneComponent.DBUnionManager.SignupUnions[i]);
+                List<DBUnionInfo> result = await dbComponent.Query<DBUnionInfo>(scene.Zone(), _account => _account.UnionInfo.UnionId == unionSceneComponent.DBUnionManager.SignupUnions[i]);
                 if (result.Count == 0)
                 {
                     continue;
@@ -28,8 +31,7 @@ namespace ET
                 unionListItem.UnionId = dBUnionInfo.UnionInfo.UnionId;
                 response.UnionInfoList.Add(unionListItem);
             }
-
-            reply();
+            
             await ETTask.CompletedTask;
         }
     }

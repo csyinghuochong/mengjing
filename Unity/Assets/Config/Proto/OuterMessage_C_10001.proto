@@ -3689,3 +3689,40 @@ message U2C_UnionMysteryListResponse // IUnionActorResponse
 	string Message = 92;
 	repeated MysteryItemInfo MysteryItemInfos = 1;
 }
+
+//公会操作
+//ResponseType U2C_UnionOperatateResponse
+message C2U_UnionOperatateRequest // IUnionActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 UnitId = 1;
+	int64 UnionId = 2;
+	int32 Operatate = 3;
+	string Value = 4;
+}
+
+message U2C_UnionOperatateResponse // IUnionActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType U2C_UnionRaceInfoResponse
+message C2U_UnionRaceInfoRequest // IUnionActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 RankType = 1;
+}
+
+message U2C_UnionRaceInfoResponse // IUnionActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated UnionListItem UnionInfoList = 1;
+	int64 TotalDonation = 2;
+}
