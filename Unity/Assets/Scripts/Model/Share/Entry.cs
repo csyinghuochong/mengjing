@@ -16,6 +16,11 @@ namespace ET
     {
     }
     
+    public struct GMCommonRequest
+    {
+        public string Context;
+    }
+    
     public static class Entry
     {
         public static void Init()

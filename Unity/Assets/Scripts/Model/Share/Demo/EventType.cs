@@ -46,9 +46,5 @@ namespace ET.Client
     {
         public Unit Unit;
     }
-    
-    public struct GMCommonRequest
-    {
-        public string Context;
-    }
+
 }

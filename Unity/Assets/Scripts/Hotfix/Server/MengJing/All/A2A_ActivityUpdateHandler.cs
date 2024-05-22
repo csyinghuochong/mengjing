@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using ET.Client;
 
 namespace ET.Server
 {
@@ -78,7 +78,7 @@ namespace ET.Server
 
                         for (int i = 0; i < ConfigData.TurtleList.Count; i++)
                         {
-                            UnitFactory.CreateNpc(scene, ConfigHelper.ConfigData[i]);
+                            UnitFactory.CreateNpc(scene, ConfigData.TurtleList[i]);
                         }
                     }
                     break;
