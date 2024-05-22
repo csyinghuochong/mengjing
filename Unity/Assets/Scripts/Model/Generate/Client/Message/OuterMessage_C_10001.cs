@@ -13126,6 +13126,134 @@ namespace ET
 
 	}
 
+//家族神秘商店道具
+	[ResponseType(nameof(M2C_UnionMysteryBuyResponse))]
+	[Message(OuterMessage.C2M_UnionMysteryBuyRequest)]
+	[MemoryPackable]
+	public partial class C2M_UnionMysteryBuyRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_UnionMysteryBuyRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_UnionMysteryBuyRequest), isFromPool) as C2M_UnionMysteryBuyRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int MysteryId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int BuyNumber { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.MysteryId = default;
+			this.BuyNumber = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_UnionMysteryBuyResponse)]
+	[MemoryPackable]
+	public partial class M2C_UnionMysteryBuyResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_UnionMysteryBuyResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_UnionMysteryBuyResponse), isFromPool) as M2C_UnionMysteryBuyResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//转让族长
+	[ResponseType(nameof(M2C_UnionTransferResponse))]
+	[Message(OuterMessage.C2M_UnionTransferRequest)]
+	[MemoryPackable]
+	public partial class C2M_UnionTransferRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_UnionTransferRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_UnionTransferRequest), isFromPool) as C2M_UnionTransferRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long NewLeader { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.NewLeader = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_UnionTransferResponse)]
+	[MemoryPackable]
+	public partial class M2C_UnionTransferResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_UnionTransferResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_UnionTransferResponse), isFromPool) as M2C_UnionTransferResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -13503,5 +13631,9 @@ namespace ET
 		 public const ushort M2C_UnionKeJiLearnResponse = 10374;
 		 public const ushort C2M_UnionLeaveRequest = 10375;
 		 public const ushort M2C_UnionLeaveResponse = 10376;
+		 public const ushort C2M_UnionMysteryBuyRequest = 10377;
+		 public const ushort M2C_UnionMysteryBuyResponse = 10378;
+		 public const ushort C2M_UnionTransferRequest = 10379;
+		 public const ushort M2C_UnionTransferResponse = 10380;
 	}
 }

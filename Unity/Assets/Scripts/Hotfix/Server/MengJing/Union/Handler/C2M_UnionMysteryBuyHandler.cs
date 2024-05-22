@@ -1,20 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_UnionMysteryBuyHandler : AMActorLocationRpcHandler<Unit, C2M_UnionMysteryBuyRequest, M2C_UnionMysteryBuyResponse>
+    [MessageLocationHandler(SceneType.Map)]
+    public class C2M_UnionMysteryBuyHandler : MessageLocationHandler<Unit, C2M_UnionMysteryBuyRequest, M2C_UnionMysteryBuyResponse>
     {
 
-        protected override async ETTask Run(Unit unit, C2M_UnionMysteryBuyRequest request, M2C_UnionMysteryBuyResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_UnionMysteryBuyRequest request, M2C_UnionMysteryBuyResponse response)
         {
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.Buy, unit.Id))
+            using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Buy, unit.Id))
             {
-                long unionid = unit.GetComponent<NumericComponent>().GetAsLong(NumericType.UnionId_0);
+                long unionid = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.UnionId_0);
                 if (unionid == 0)
                 {
                     response.Error = ErrorCode.ERR_NetWorkError;
-                    reply();
                     return;
                 }
 
@@ -23,7 +23,6 @@ namespace ET
                 {
                     Log.Error($"C2M_UnionMysteryBuyRequest 1");
                     response.Error = ErrorCode.ERR_ModifyData;
-                    reply();
                     return;
                 }
 
@@ -31,24 +30,21 @@ namespace ET
                 if (mysteryConfig == null)
                 {
                     response.Error = ErrorCode.ERR_NetWorkError;
-                    reply();
                     return;
                 }
-                if (unit.GetComponent<UserInfoComponent>().GetMysteryBuy(mysteryId) >= mysteryConfig.BuyNumMax)
+                if (unit.GetComponent<UserInfoComponentS>().GetMysteryBuy(mysteryId) >= mysteryConfig.BuyNumMax)
                 {
                     response.Error = ErrorCode.ERR_MysteryItem_Max;
-                    reply();
                     return;
                 }
-                if (!unit.GetComponent<BagComponent>().CheckCostItem($"{mysteryConfig.SellType};{mysteryConfig.SellValue}"))
+                if (!unit.GetComponent<BagComponentS>().CheckCostItem($"{mysteryConfig.SellType};{mysteryConfig.SellValue}"))
                 {
                     response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                    reply();
                     return;
                 }
                 request.BuyNumber = 1;
-                long unionServerId = DBHelper.GetUnionServerId(unit.DomainZone());
-                U2M_UnionMysteryBuyResponse r_GameStatusResponse = (U2M_UnionMysteryBuyResponse)await ActorMessageSenderComponent.Instance.Call
+                ActorId unionServerId = UnitCacheHelper.GetUnionServerId(unit.Zone());
+                U2M_UnionMysteryBuyResponse r_GameStatusResponse = (U2M_UnionMysteryBuyResponse)await unit.Root().GetComponent<MessageSender>().Call
                     (unionServerId, new M2U_UnionMysteryBuyRequest()
                     {
                         MysteryId = mysteryId,  
@@ -59,16 +55,14 @@ namespace ET
                 if (r_GameStatusResponse.Error != ErrorCode.ERR_Success)
                 {
                     response.Error = r_GameStatusResponse.Error;
-                    reply();
                     return;
                 }
 
-                LogHelper.LogWarning($"家族神秘商人购买道具: {unit.DomainZone()} {unit.Id} {mysteryId}");
-                unit.GetComponent<UserInfoComponent>().OnMysteryBuy(mysteryId);
-                unit.GetComponent<BagComponent>().OnCostItemData($"{mysteryConfig.SellType};{mysteryConfig.SellValue}");
-                unit.GetComponent<BagComponent>().OnAddItemData($"{mysteryConfig.SellItemID};{1}",
+                Log.Warning($"家族神秘商人购买道具: {unit.Zone()} {unit.Id} {mysteryId}");
+                unit.GetComponent<UserInfoComponentS>().OnMysteryBuy(mysteryId);
+                unit.GetComponent<BagComponentS>().OnCostItemData($"{mysteryConfig.SellType};{mysteryConfig.SellValue}");
+                unit.GetComponent<BagComponentS>().OnAddItemData($"{mysteryConfig.SellItemID};{1}",
                     $"{ItemGetWay.UnionMysteryBuy}_{TimeHelper.ServerNow()}");
-                reply();
             }
         }
     }

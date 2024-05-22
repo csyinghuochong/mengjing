@@ -3057,6 +3057,145 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(U2M_UnionMysteryBuyResponse))]
+	[Message(InnerMessage.M2U_UnionMysteryBuyRequest)]
+	[MemoryPackable]
+	public partial class M2U_UnionMysteryBuyRequest: MessageObject, IRequest
+	{
+		public static M2U_UnionMysteryBuyRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2U_UnionMysteryBuyRequest), isFromPool) as M2U_UnionMysteryBuyRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnionId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int MysteryId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int BuyNumber { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnionId = default;
+			this.MysteryId = default;
+			this.BuyNumber = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.U2M_UnionMysteryBuyResponse)]
+	[MemoryPackable]
+	public partial class U2M_UnionMysteryBuyResponse: MessageObject, IResponse
+	{
+		public static U2M_UnionMysteryBuyResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(U2M_UnionMysteryBuyResponse), isFromPool) as U2M_UnionMysteryBuyResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//转让族长
+	[ResponseType(nameof(U2M_UnionTransferResponse))]
+	[Message(InnerMessage.M2U_UnionTransferRequest)]
+	[MemoryPackable]
+	public partial class M2U_UnionTransferRequest: MessageObject, IRequest
+	{
+		public static M2U_UnionTransferRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2U_UnionTransferRequest), isFromPool) as M2U_UnionTransferRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long NewLeader { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitID { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UnionId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.NewLeader = default;
+			this.UnitID = default;
+			this.UnionId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.U2M_UnionTransferResponse)]
+	[MemoryPackable]
+	public partial class U2M_UnionTransferResponse: MessageObject, IResponse
+	{
+		public static U2M_UnionTransferResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(U2M_UnionTransferResponse), isFromPool) as U2M_UnionTransferResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -3149,5 +3288,9 @@ namespace ET
 		 public const ushort U2M_UnionKeJiLearnResponse = 20089;
 		 public const ushort M2U_UnionLeaveRequest = 20090;
 		 public const ushort U2M_UnionLeaveResponse = 20091;
+		 public const ushort M2U_UnionMysteryBuyRequest = 20092;
+		 public const ushort U2M_UnionMysteryBuyResponse = 20093;
+		 public const ushort M2U_UnionTransferRequest = 20094;
+		 public const ushort U2M_UnionTransferResponse = 20095;
 	}
 }

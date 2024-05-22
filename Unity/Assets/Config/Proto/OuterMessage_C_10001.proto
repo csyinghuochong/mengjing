@@ -3367,3 +3367,36 @@ message M2C_UnionLeaveResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//家族神秘商店道具
+//ResponseType M2C_UnionMysteryBuyResponse
+message C2M_UnionMysteryBuyRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 MysteryId = 1;			//商品ID MonsterConfig
+	int32 BuyNumber = 3;			//购买数量 默认为1
+}
+
+message M2C_UnionMysteryBuyResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//转让族长
+//ResponseType M2C_UnionTransferResponse
+message C2M_UnionTransferRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 NewLeader = 1;
+}
+
+message M2C_UnionTransferResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

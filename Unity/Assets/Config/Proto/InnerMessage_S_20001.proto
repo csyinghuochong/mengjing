@@ -775,3 +775,39 @@ message U2M_UnionLeaveResponse // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType U2M_UnionMysteryBuyResponse
+message M2U_UnionMysteryBuyRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnionId = 1;
+	int32 MysteryId = 2;
+	int32 BuyNumber = 3;
+}
+
+message U2M_UnionMysteryBuyResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//转让族长
+//ResponseType U2M_UnionTransferResponse
+message M2U_UnionTransferRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 NewLeader = 1;
+	int64 UnitID = 2;
+	int64 UnionId = 3;
+}
+
+message U2M_UnionTransferResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+

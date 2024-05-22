@@ -672,6 +672,31 @@ namespace ET.Server
              }
          }
          
+         public static int GetMysteryBuy(this UserInfoComponentS self, int mysteryId)
+         {
+             for (int i = 0; i < self.UserInfo.MysteryItems.Count; i++)
+             {
+                 if (self.UserInfo.MysteryItems[i].KeyId == mysteryId)
+                 {
+                     return (int)self.UserInfo.MysteryItems[i].Value;
+                 }
+             }
+             return 0;
+         }
+
+         public static void OnMysteryBuy(this UserInfoComponentS self, int mysteryId)
+         {
+             for (int i = 0; i < self.UserInfo.MysteryItems.Count; i++)
+             {
+                 if (self.UserInfo.MysteryItems[i].KeyId == mysteryId)
+                 {
+                     self.UserInfo.MysteryItems[i].Value += 1;
+                     return;
+                 }
+             }
+             self.UserInfo.MysteryItems.Add(new KeyValuePairInt() { KeyId = mysteryId, Value = 1 });
+         }
+         
          public static int GetStoreBuy(this UserInfoComponentS self, int mysteryId)
          {
              for (int i = 0; i < self.UserInfo.BuyStoreItems.Count; i++)
