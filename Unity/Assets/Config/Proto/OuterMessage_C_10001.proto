@@ -3583,3 +3583,21 @@ message U2C_UnionKeJiQuickResponse // IUnionActorResponse
 	string Message = 92;
 	UnionInfo UnionInfo = 1;
 }
+
+//公会踢人
+//ResponseType U2C_UnionKickOutResponse
+message C2U_UnionKickOutRequest // IUnionActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 UnionId = 1;
+	int64 UserId = 2;
+}
+
+message U2C_UnionKickOutResponse // IUnionActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

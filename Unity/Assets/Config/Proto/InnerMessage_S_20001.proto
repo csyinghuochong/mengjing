@@ -863,3 +863,19 @@ message M2U_UnionKeJiQuickResponse // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//公会踢人
+//ResponseType M2U_UnionKickOutResponse
+message U2M_UnionKickOutRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UserId = 1;
+}
+
+message M2U_UnionKickOutResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
