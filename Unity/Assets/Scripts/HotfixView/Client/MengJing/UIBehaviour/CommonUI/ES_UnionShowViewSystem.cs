@@ -87,6 +87,10 @@ namespace ET.Client
                 self.ShowUnionListItems = r2c_roleEquip.UnionList;
             }
 
+            // 测试数据
+            self.ShowUnionListItems.Add(new UnionListItem() { UnionName = "测试家族1" });
+            self.ShowUnionListItems.Add(new UnionListItem() { UnionName = "测试家族2" });
+
             self.ShowUnionListItems.Sort(delegate(UnionListItem a, UnionListItem b)
             {
                 int unionlevela = a.UnionLevel;
@@ -144,45 +148,45 @@ namespace ET.Client
             }
 
             string purpose = self.E_InputFieldPurposeInputField.text;
-            mask = MaskWordComponent.Instance.IsContainSensitiveWords(purpose);
+            // mask = MaskWordComponent.Instance.IsContainSensitiveWords(purpose);
             //if (mask || !StringHelper.IsSpecialChar(purpose) || purpose.Length >= 200)
             //{
             //    FloatTipManager.Instance.ShowFloatTip("请重新输入！");
             //    return;
             //}
-            if (mask)
-            {
-                FlyTipComponent.Instance.SpawnFlyTipDi("宣言有特殊字符！");
-                return;
-            }
+            // if (mask)
+            // {
+            //     FlyTipComponent.Instance.SpawnFlyTipDi("宣言有特殊字符！");
+            //     return;
+            // }
+            //
+            // if (purpose.Length >= 200)
+            // {
+            //     FlyTipComponent.Instance.SpawnFlyTipDi("宣言内容过长！");
+            //     return;
+            // }
+            //
+            // Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            // if (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0) != 0)
+            // {
+            //     FlyTipComponent.Instance.SpawnFlyTipDi("请先退出公会！");
+            //     return;
+            // }
 
-            if (purpose.Length >= 200)
-            {
-                FlyTipComponent.Instance.SpawnFlyTipDi("宣言内容过长！");
-                return;
-            }
-
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            if (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0) != 0)
-            {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请先退出公会！");
-                return;
-            }
-
-            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-            int needLevel = int.Parse(GlobalValueConfigCategory.Instance.Get(21).Value);
-            int needDiamond = int.Parse(GlobalValueConfigCategory.Instance.Get(22).Value);
-            if (userInfo.Lv < needLevel)
-            {
-                FlyTipComponent.Instance.SpawnFlyTipDi("等级不足！");
-                return;
-            }
-
-            if (userInfo.Diamond < needDiamond)
-            {
-                FlyTipComponent.Instance.SpawnFlyTipDi("钻石不足！");
-                return;
-            }
+            // UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            // int needLevel = int.Parse(GlobalValueConfigCategory.Instance.Get(21).Value);
+            // int needDiamond = int.Parse(GlobalValueConfigCategory.Instance.Get(22).Value);
+            // if (userInfo.Lv < needLevel)
+            // {
+            //     FlyTipComponent.Instance.SpawnFlyTipDi("等级不足！");
+            //     return;
+            // }
+            //
+            // if (userInfo.Diamond < needDiamond)
+            // {
+            //     FlyTipComponent.Instance.SpawnFlyTipDi("钻石不足！");
+            //     return;
+            // }
 
             C2M_UnionCreateRequest c2M_ItemHuiShouRequest = new() { UnionName = unionName, UnionPurpose = purpose };
             M2C_UnionCreateResponse r2c_roleEquip =

@@ -33,16 +33,9 @@ namespace ET.Client
             self.E_PlayerLevelText.text = $"等级:{friendInfo.PlayerLevel}";
             self.E_PlayerNameText.text = friendInfo.PlayerName;
             self.E_PlayerOccText.text = OccupationConfigCategory.Instance.Get(friendInfo.Occ).OccupationName;
-            
-            self.E_AgreeButton.AddListenerAsync(async () =>
-            {
-                await FriendNetHelper.RequestFriendApplyReply(self.Root(), self.FriendInfo, 1);
-            });
-            
-            self.E_RefuseButton.AddListenerAsync(async () =>
-            {
-                await FriendNetHelper.RequestFriendApplyReply(self.Root(), self.FriendInfo, 2);
-            });
+
+            self.E_AgreeButton.AddListener(() => { FriendNetHelper.RequestFriendApplyReply(self.Root(), self.FriendInfo, 1).Coroutine(); });
+            self.E_RefuseButton.AddListener(() => { FriendNetHelper.RequestFriendApplyReply(self.Root(), self.FriendInfo, 2).Coroutine(); });
         }
     }
 }
