@@ -7,6 +7,8 @@
     {
         protected override async ETTask Run(ChatInfoUnit chatInfoUnit, C2C_SendChatRequest request, C2C_SendChatResponse response)
         {
+            Scene root = chatInfoUnit.Root();
+
             if (string.IsNullOrEmpty(request.ChatInfo.ChatMsg))
             {
                 return;
@@ -26,9 +28,9 @@
             {
                 case (int)ChannelEnum.PaiMai:
                 case (int)ChannelEnum.Word:
+                {
                     ChatServerComponent chatInfoUnitsComponent = chatInfoUnit.Root().GetComponent<ChatServerComponent>();
-                    MessageLocationSenderComponent messageLocationSenderComponent =
-                            chatInfoUnit.Root().GetComponent<MessageLocationSenderComponent>();
+                    MessageLocationSenderComponent messageLocationSenderComponent = root.GetComponent<MessageLocationSenderComponent>();
 
                     foreach (var otherUnit in chatInfoUnitsComponent.ChatInfoUnitsDict.Values)
                     {
@@ -63,6 +65,7 @@
                     }
 
                     break;
+                }
                 case (int)ChannelEnum.Team:
                     // long teamServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.DomainZone(), Enum.GetName(SceneType.Team))
                     //         .InstanceId;
@@ -107,15 +110,19 @@
                     break;
 
                 case (int)ChannelEnum.Friend:
-                    // gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.DomainZone(), "Gate1").InstanceId;
-                    // g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await ActorMessageSenderComponent.Instance.Call(gateServerId,
-                    //     new T2G_GateUnitInfoRequest() { UserID = request.ChatInfo.ParamId });
-                    //
-                    // //发给好友()
-                    // if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
-                    // {
-                    //     MessageHelper.SendActor(g2M_UpdateUnitResponse.SessionInstanceId, m2C_SyncChatInfo);
-                    // }
+                {
+                    ActorId gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.Zone(), "Gate1").ActorId;
+                    G2T_GateUnitInfoResponse g2TGateUnitInfoResponse = (G2T_GateUnitInfoResponse)await root.GetComponent<MessageSender>().Call(
+                        gateServerId,
+                        new T2G_GateUnitInfoRequest() { UserID = request.ChatInfo.ParamId });
+
+                    MessageLocationSenderComponent messageLocationSenderComponent = root.GetComponent<MessageLocationSenderComponent>();
+                    //发给好友
+                    if (g2TGateUnitInfoResponse.PlayerState == (int)PlayerState.Game && g2TGateUnitInfoResponse.SessionInstanceId > 0)
+                    {
+                        messageLocationSenderComponent.Get(LocationType.GateSession)
+                                .Send(g2TGateUnitInfoResponse.SessionInstanceId, m2C_SyncChatInfo);
+                    }
                     // else
                     // {
                     //     //存入到离线消息
@@ -128,12 +135,13 @@
                     //         DBHelper.SaveComponent(chatInfoUnit.DomainZone(), request.ChatInfo.ParamId, dBFriendInfo).Coroutine();
                     //     }
                     // }
-                    //
-                    // //发给自己
-                    // g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await ActorMessageSenderComponent.Instance.Call(gateServerId,
-                    //     new T2G_GateUnitInfoRequest() { UserID = request.ChatInfo.UserId });
-                    // MessageHelper.SendActor(g2M_UpdateUnitResponse.SessionInstanceId, m2C_SyncChatInfo);
+
+                    //发给自己
+                    g2TGateUnitInfoResponse = (G2T_GateUnitInfoResponse)await root.GetComponent<MessageSender>().Call(gateServerId,
+                        new T2G_GateUnitInfoRequest() { UserID = request.ChatInfo.UserId });
+                    messageLocationSenderComponent.Get(LocationType.GateSession).Send(g2TGateUnitInfoResponse.SessionInstanceId, m2C_SyncChatInfo);
                     break;
+                }
             }
 
             await ETTask.CompletedTask;

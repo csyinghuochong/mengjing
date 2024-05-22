@@ -7,5 +7,6 @@ namespace ET.Server
 	public class PlayerComponent : Entity, IAwake, IDestroy
 	{
 		public Dictionary<string, Player> dictionary = new Dictionary<string, Player>();
+		public Dictionary<long, Player> idPlayers = new Dictionary<long, Player>();
 	}
 }
