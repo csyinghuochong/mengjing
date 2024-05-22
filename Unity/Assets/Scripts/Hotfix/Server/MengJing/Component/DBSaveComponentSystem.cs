@@ -43,6 +43,10 @@ namespace ET.Server
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.DBSaveTimer, self);
         }
 
+        public static void UpdateCacheDB(this DBSaveComponent self)
+        {
+            UnitCacheHelper.AddOrUpdateUnitAllCache(self.GetParent<Unit>());
+        }
 
         public static void Check(this DBSaveComponent self)
         {

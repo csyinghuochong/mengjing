@@ -1,17 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_UnionHandler : AMActorLocationRpcHandler<Unit, C2M_UnionLeaveRequest, M2C_UnionLeaveResponse>
+    [MessageLocationHandler(SceneType.Map)]
+    public class C2M_UnionHandler : MessageLocationHandler<Unit, C2M_UnionLeaveRequest, M2C_UnionLeaveResponse>
     {
 
-        protected override async ETTask Run(Unit unit, C2M_UnionLeaveRequest request, M2C_UnionLeaveResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_UnionLeaveRequest request, M2C_UnionLeaveResponse response)
         {
-            long dbCacheId = DBHelper.GetUnionServerId(unit.DomainZone());
-            UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
-            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();  
-            U2M_UnionLeaveResponse d2GGetUnit = (U2M_UnionLeaveResponse)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new M2U_UnionLeaveRequest()
+            ActorId dbCacheId = UnitCacheHelper.GetUnionServerId(unit.Zone());
+            UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();  
+            U2M_UnionLeaveResponse d2GGetUnit = (U2M_UnionLeaveResponse)await unit.Root().GetComponent<MessageSender>().Call(dbCacheId, new M2U_UnionLeaveRequest()
             {
                 UnionId = numericComponent.GetAsLong(NumericType.UnionId_0),
                 UserId = userInfoComponent.UserInfo.UserId,
@@ -20,20 +21,18 @@ namespace ET
             if (d2GGetUnit.Error != ErrorCode.ERR_Success)
             {
                 response.Error = d2GGetUnit.Error;
-                reply();
                 return;
             }
 
-            unit.GetComponent<NumericComponent>().ApplyValue(NumericType.UnionLeader, 0);
-            unit.GetComponent<NumericComponent>().ApplyValue(NumericType.UnionId_0, 0);
-            unit.GetComponent<NumericComponent>().ApplyValue(NumericType.UnionIdLeaveTime, TimeHelper.ServerNow());
-            unit.GetComponent<UserInfoComponent>().UpdateRoleData(UserDataType.UnionName, "");
-            unit.GetComponent<UserInfoComponent>().UpdateRoleDataBroadcast(UserDataType.UnionName, "");
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.UnionLeader, 0);
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.UnionId_0, 0);
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.UnionIdLeaveTime, TimeHelper.ServerNow());
+            unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.UnionName, "");
+            unit.GetComponent<UserInfoComponentS>().UpdateRoleDataBroadcast(UserDataType.UnionName, "");
             unit.GetComponent<DBSaveComponent>().UpdateCacheDB();
 
             unit.UpdateUnionToChat().Coroutine();
 
-            reply();
             await ETTask.CompletedTask;
         }
     }

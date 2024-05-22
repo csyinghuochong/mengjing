@@ -758,3 +758,20 @@ message U2M_UnionKeJiLearnResponse // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//离开公会
+//ResponseType U2M_UnionLeaveResponse
+message M2U_UnionLeaveRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnionId = 1;
+	int64 UserId = 2;
+}
+
+message U2M_UnionLeaveResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

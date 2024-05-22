@@ -13068,6 +13068,64 @@ namespace ET
 
 	}
 
+//离开公会
+	[ResponseType(nameof(M2C_UnionLeaveResponse))]
+	[Message(OuterMessage.C2M_UnionLeaveRequest)]
+	[MemoryPackable]
+	public partial class C2M_UnionLeaveRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_UnionLeaveRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_UnionLeaveRequest), isFromPool) as C2M_UnionLeaveRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_UnionLeaveResponse)]
+	[MemoryPackable]
+	public partial class M2C_UnionLeaveResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_UnionLeaveResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_UnionLeaveResponse), isFromPool) as M2C_UnionLeaveResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -13443,5 +13501,7 @@ namespace ET
 		 public const ushort C2M_UnionInviteReplyRequest = 10372;
 		 public const ushort C2M_UnionKeJiLearnRequest = 10373;
 		 public const ushort M2C_UnionKeJiLearnResponse = 10374;
+		 public const ushort C2M_UnionLeaveRequest = 10375;
+		 public const ushort M2C_UnionLeaveResponse = 10376;
 	}
 }

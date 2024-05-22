@@ -3352,3 +3352,18 @@ message M2C_UnionKeJiLearnResponse // ILocationResponse
 	string Message = 92;
 	repeated int32 UnionKeJiList = 1;   //UserInfo.UnionKeJiList
 }
+
+//离开公会
+//ResponseType M2C_UnionLeaveResponse
+message C2M_UnionLeaveRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_UnionLeaveResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
