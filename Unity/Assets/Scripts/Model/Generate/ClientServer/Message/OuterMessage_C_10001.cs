@@ -12644,6 +12644,63 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_BloodstoneQiangHuaResponse))]
+	[Message(OuterMessage.C2M_BloodstoneQiangHuaRequest)]
+	[MemoryPackable]
+	public partial class C2M_BloodstoneQiangHuaRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_BloodstoneQiangHuaRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_BloodstoneQiangHuaRequest), isFromPool) as C2M_BloodstoneQiangHuaRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_BloodstoneQiangHuaResponse)]
+	[MemoryPackable]
+	public partial class M2C_BloodstoneQiangHuaResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_BloodstoneQiangHuaResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_BloodstoneQiangHuaResponse), isFromPool) as M2C_BloodstoneQiangHuaResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int Level { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.Level = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -13006,5 +13063,7 @@ namespace ET
 		 public const ushort C2M_MakeEquipRequest = 10359;
 		 public const ushort M2C_MakeEquipResponse = 10360;
 		 public const ushort M2C_TurtleRewardMessage = 10361;
+		 public const ushort C2M_BloodstoneQiangHuaRequest = 10362;
+		 public const ushort M2C_BloodstoneQiangHuaResponse = 10363;
 	}
 }

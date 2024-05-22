@@ -6,32 +6,29 @@ namespace ET.Server
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_BloodstoneQiangHuaHandler: MessageLocationHandler<Unit, C2M_BloodstoneQiangHuaRequest, M2C_BloodstoneQiangHuaResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_BloodstoneQiangHuaRequest request, M2C_BloodstoneQiangHuaResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_BloodstoneQiangHuaRequest request, M2C_BloodstoneQiangHuaResponse response)
         {
-            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             PublicQiangHuaConfig publicQiangHuaConfig = PublicQiangHuaConfigCategory.Instance.Get(numericComponent.GetAsInt(NumericType.Bloodstone));
 
             if (publicQiangHuaConfig.NextID == 0)
             {
                 response.Error = ErrorCode.ERR_UnionXiuLianMax;
-                reply();
                 return;
             }
 
-            if (unit.GetComponent<UserInfoComponent>().UserInfo.Lv < publicQiangHuaConfig.UpLvLimit)
+            if (unit.GetComponent<UserInfoComponentS>().UserInfo.Lv < publicQiangHuaConfig.UpLvLimit)
             {
                 response.Error = ErrorCode.ERR_LvNoHigh;
-                reply();
                 return;
             }
 
-            BagComponent bagComponent = unit.GetComponent<BagComponent>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             string costItems = publicQiangHuaConfig.CostItem;
             costItems += $"@1;{publicQiangHuaConfig.CostGold}";
             if (!bagComponent.OnCostItemData(costItems))
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                reply();
                 return;
             }
 
@@ -50,9 +47,8 @@ namespace ET.Server
             }
 
             response.Level = level;
-            Function_Fight.GetInstance().UnitUpdateProperty_Base(unit, true, true);
-
-            reply();
+            Function_Fight.UnitUpdateProperty_Base(unit, true, true);
+            
             await ETTask.CompletedTask;
         }
     }
