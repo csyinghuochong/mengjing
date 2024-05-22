@@ -347,9 +347,7 @@ namespace ET.Client
                 self.View.EG_PositionSetRectTransform.transform.GetChild(i).gameObject.SetActive(false);
             }
 
-            // C2F_WatchPlayerRequest c2FWatchPlayerRequest = new() { UserId = self.UserId, WatchType = 2 };
-            // F2C_WatchPlayerResponse f2CWatchPlayerResponse =
-            //         (F2C_WatchPlayerResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(c2FWatchPlayerRequest);
+            F2C_WatchPlayerResponse f2CWatchPlayerResponse = await FriendNetHelper.RequestWatchPlayer(self.Root(), self.UserId, 2);
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             Unit watchUnit = unit.GetParent<UnitComponent>().Get(userId);
