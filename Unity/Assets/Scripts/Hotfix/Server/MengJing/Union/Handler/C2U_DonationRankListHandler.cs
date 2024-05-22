@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2U_DonationRankListHandler : AMActorRpcHandler<Scene, C2U_DonationRankListRequest, U2C_DonationRankListResponse>
+    [MessageLocationHandler(SceneType.Map)]
+    public class C2U_DonationRankListHandler : MessageLocationHandler<Scene, C2U_DonationRankListRequest, U2C_DonationRankListResponse>
     {
-        protected override async ETTask Run(Scene scene, C2U_DonationRankListRequest request, U2C_DonationRankListResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2U_DonationRankListRequest request, U2C_DonationRankListResponse response)
         {
             UnionSceneComponent rankComponent = scene.GetComponent<UnionSceneComponent>();
 
@@ -14,8 +14,7 @@ namespace ET
             List<RankingInfo> list = all.GetRange(0, Math.Min( 10, all.Count ));
 
             response.RankList = list;
-
-            reply();
+            
             await ETTask.CompletedTask;
         }
     }

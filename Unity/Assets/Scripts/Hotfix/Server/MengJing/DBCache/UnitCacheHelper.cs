@@ -128,6 +128,26 @@ namespace ET.Server
             return resulets[0];
         }
         
+        public static async ETTask<T> GetComponent<T>(Scene root, long unitId) where T : Entity
+        {
+            DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB(root.Zone());
+            List<T> resulets = await dbComponent.Query<T>(root.Zone(), d => d.Id == unitId);
+            if (resulets == null || resulets.Count == 0)
+            {
+                return null;
+            }
+
+            return resulets[0];
+        }
+
+        public static async ETTask SaveComponent(Scene root, long unitId, Entity entity)
+        {
+            DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB(root.Zone());
+            await dbComponent.Save(root.Zone(), entity);
+        }
+        
         public static async ETTask SaveComponentDB(Scene root, long unitId, Entity entity)
         {
             DBComponent dbComponent = root.GetComponent<DBManagerComponent>().GetZoneDB(root.Zone());
@@ -259,5 +279,6 @@ namespace ET.Server
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.JiaYuan.ToString()).ActorId;
         }
+        
     }
 }

@@ -811,3 +811,20 @@ message U2M_UnionTransferResponse // IResponse
 	string Message = 92;
 }
 
+//入会通知
+//ResponseType M2U_UnionApplyResponse
+message U2M_UnionApplyRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnionId = 1;
+	string UnionName = 2;
+}
+
+message M2U_UnionApplyResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+

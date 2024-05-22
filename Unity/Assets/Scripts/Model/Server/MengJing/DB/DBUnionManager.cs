@@ -5,12 +5,13 @@ namespace ET.Server
 {
 
     [BsonIgnoreExtraElements]
+    [ChildOf]
     public class DBUnionManager : Entity, IAwake
     {
         /// <summary>
         /// 捐献榜
         /// </summary>
-        public List<RankingInfo> rankingDonation = new List<RankingInfo>();   
+        public List<RankingInfo> rankingDonation { get; set; } = new List<RankingInfo>();
 
         /// <summary>
         /// 报名家族

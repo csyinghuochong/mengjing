@@ -13320,6 +13320,71 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(U2C_DonationRankListResponse))]
+	[Message(OuterMessage.C2U_DonationRankListRequest)]
+	[MemoryPackable]
+	public partial class C2U_DonationRankListRequest: MessageObject, ILocationRequest
+	{
+		public static C2U_DonationRankListRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2U_DonationRankListRequest), isFromPool) as C2U_DonationRankListRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RankType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.RankType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.U2C_DonationRankListResponse)]
+	[MemoryPackable]
+	public partial class U2C_DonationRankListResponse: MessageObject, ILocationResponse
+	{
+		public static U2C_DonationRankListResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(U2C_DonationRankListResponse), isFromPool) as U2C_DonationRankListResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<RankingInfo> RankList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RankList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -13703,5 +13768,7 @@ namespace ET
 		 public const ushort M2C_UnionTransferResponse = 10380;
 		 public const ushort C2M_UnionXiuLianRequest = 10381;
 		 public const ushort M2C_UnionXiuLianResponse = 10382;
+		 public const ushort C2U_DonationRankListRequest = 10383;
+		 public const ushort U2C_DonationRankListResponse = 10384;
 	}
 }

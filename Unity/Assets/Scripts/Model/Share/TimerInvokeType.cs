@@ -25,6 +25,7 @@
         public const int PlayerSingingTimer = 213;
         public const int AutoAttackGridTimer = 214;
         public const int RoleBullet1Timer = 215;
+        public const int UnionTimer = 216;
         
         public const int RoomUpdate = 301;
         public const int JoystickTimer = 302;

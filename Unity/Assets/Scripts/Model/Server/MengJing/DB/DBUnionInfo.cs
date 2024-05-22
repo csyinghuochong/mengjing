@@ -8,7 +8,7 @@ namespace ET.Server
     [BsonIgnoreExtraElements]
     public class DBUnionInfo : Entity
     {
-        public UnionInfo UnionInfo = new UnionInfo();
+        public UnionInfo UnionInfo { get; set; } = new UnionInfo();
 
         public List<MysteryItemInfo> MysteryItemInfos = new List<MysteryItemInfo>();
 
