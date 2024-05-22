@@ -11,7 +11,7 @@ namespace ET.Server
         {
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.LoginAccount, request.AccInfoID))
             {
-                DBAccountInfo dBAccountWarehouse = await UnitCacheHelper.GetComponentBD<DBAccountInfo>(unit.Root(), request.AccInfoID);
+                DBAccountInfo dBAccountWarehouse = await UnitCacheHelper.GetComponent<DBAccountInfo>(unit.Root(), request.AccInfoID);
                 if (dBAccountWarehouse != null)
                 {
                     response.BagInfos = dBAccountWarehouse.BagInfoList;

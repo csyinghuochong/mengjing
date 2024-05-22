@@ -85,15 +85,15 @@ namespace ET.Server
                     ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(scene.Zone());
                     PetComponentS petComponent = await UnitCacheHelper.GetComponentCache<PetComponentS>(scene.Root(), oldUnitid);
                     petComponent.OnPetMingRecord(petMingRecord);
-                    await UnitCacheHelper.SaveComponentCache(scene.Zone(),oldUnitid, petComponent);
+                    await UnitCacheHelper.SaveComponentCache(scene.Root(), petComponent);
                     
                     ReddotComponentS roReddotComponentS = await UnitCacheHelper.GetComponentCache<ReddotComponentS>(scene.Root(), oldUnitid);
                     roReddotComponentS.AddReddont((int)ReddotType.PetMine);
-                    await UnitCacheHelper.SaveComponentCache(scene.Zone(),oldUnitid, roReddotComponentS);
+                    await UnitCacheHelper.SaveComponentCache(scene.Root(), roReddotComponentS);
                     
                     NumericComponentS numericComponentS = await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene.Root(), oldUnitid);
                     numericComponentS.ApplyValue( NumericType.PetMineCDTime, 0, false );
-                    await UnitCacheHelper.SaveComponentCache(scene.Zone(),oldUnitid, numericComponentS);
+                    await UnitCacheHelper.SaveComponentCache(scene.Root(), numericComponentS);
                 }
             }
             

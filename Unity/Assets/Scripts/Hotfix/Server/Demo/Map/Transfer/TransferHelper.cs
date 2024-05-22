@@ -65,7 +65,7 @@ namespace ET.Server
                         long fubenid = IdGenerater.Instance.GenerateId();
                         long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
                  
-                        Scene fubnescene = await GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "PetFuben" + fubenid.ToString());
+                        Scene fubnescene =  GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "PetFuben" + fubenid.ToString());
                         fubnescene.AddComponent<PetFubenComponent>();
                         fubnescene.GetComponent<MapComponent>().SetMapInfo((int)SceneTypeEnum.PetDungeon, request.SceneId, int.Parse(request.paramInfo));
                         TransferHelper.BeforeTransfer(unit);
@@ -80,7 +80,7 @@ namespace ET.Server
                     case (int)SceneTypeEnum.TrialDungeon:
                         fubenid = IdGenerater.Instance.GenerateId();
                         fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-                        fubnescene = await GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,  "TrialDungeon" + fubenid.ToString());
+                        fubnescene =  GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,  "TrialDungeon" + fubenid.ToString());
                         fubnescene.AddComponent<TrialDungeonComponent>();
                         mapComponent = fubnescene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo((int)SceneTypeEnum.TrialDungeon, request.SceneId, int.Parse(request.paramInfo));
@@ -107,7 +107,7 @@ namespace ET.Server
 
                         fubenid = IdGenerater.Instance.GenerateId();
                         fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-                        fubnescene = await GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,  "SeasonTower" + fubenid.ToString());
+                        fubnescene =  GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,  "SeasonTower" + fubenid.ToString());
                         fubnescene.AddComponent<SeasonTowerComponent>();
                         mapComponent = fubnescene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo((int)SceneTypeEnum.SeasonTower, request.SceneId, int.Parse(request.paramInfo));
@@ -126,7 +126,7 @@ namespace ET.Server
 
                         fubenid = IdGenerater.Instance.GenerateId();
                         fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-                        fubnescene =  await GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,"TowerOfSeal" + fubenid.ToString());
+                        fubnescene =   GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,"TowerOfSeal" + fubenid.ToString());
                         fubnescene.AddComponent<TowerOfSealComponent>();
                         mapComponent = fubnescene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo((int)SceneTypeEnum.TowerOfSeal, request.SceneId, int.Parse(request.paramInfo));
@@ -139,7 +139,7 @@ namespace ET.Server
                         //2200001
                         fubenid = IdGenerater.Instance.GenerateId();
                         fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-                        fubnescene = await GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,  "RandomTower" + fubenid.ToString());
+                        fubnescene =  GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,  "RandomTower" + fubenid.ToString());
                         fubnescene.AddComponent<RandomTowerComponent>();
                         mapComponent = fubnescene.GetComponent<MapComponent>();
                         mapComponent.SetMapInfo((int)SceneTypeEnum.RandomTower, request.SceneId, 0);

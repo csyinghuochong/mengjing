@@ -13394,7 +13394,10 @@ namespace ET
 			return ObjectPool.Instance.Fetch(typeof(M2C_UnionRaceInfoResult), isFromPool) as M2C_UnionRaceInfoResult; 
 		}
 
-		[MemoryPackOrder(0)]
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
 		public long ActorId { get; set; }
 
 		[MemoryPackOrder(1)]
@@ -13406,6 +13409,7 @@ namespace ET
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
+			this.RpcId = default;
 			this.ActorId = default;
 			this.UnitId = default;
 			this.SceneType = default;
@@ -14136,110 +14140,6 @@ namespace ET
 			this.RpcId = default;
 			this.Error = default;
 			this.Message = default;
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
-
-	}
-
-	[Message(OuterMessage.UnionListItem)]
-	[MemoryPackable]
-	public partial class UnionListItem: MessageObject
-	{
-		public static UnionListItem Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(UnionListItem), isFromPool) as UnionListItem; 
-		}
-
-		[MemoryPackOrder(0)]
-		public string UnionName { get; set; }
-
-		[MemoryPackOrder(1)]
-		public long UnionId { get; set; }
-
-		[MemoryPackOrder(2)]
-		public int PlayerNumber { get; set; }
-
-		[MemoryPackOrder(3)]
-		public int LevelLimit { get; set; }
-
-		[MemoryPackOrder(4)]
-		public int UnionLevel { get; set; }
-
-		[MemoryPackOrder(5)]
-		public string UnionLeader { get; set; }
-
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.UnionName = default;
-			this.UnionId = default;
-			this.PlayerNumber = default;
-			this.LevelLimit = default;
-			this.UnionLevel = default;
-			this.UnionLeader = default;
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
-
-	}
-
-//公会列表
-	[ResponseType(nameof(U2C_UnionListResponse))]
-	[Message(OuterMessage.C2U_UnionListRequest)]
-	[MemoryPackable]
-	public partial class C2U_UnionListRequest: MessageObject, IUnionActorRequest
-	{
-		public static C2U_UnionListRequest Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(C2U_UnionListRequest), isFromPool) as C2U_UnionListRequest; 
-		}
-
-		[MemoryPackOrder(89)]
-		public int RpcId { get; set; }
-
-		[MemoryPackOrder(92)]
-		public long ActorId { get; set; }
-
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.ActorId = default;
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
-
-	}
-
-	[Message(OuterMessage.U2C_UnionListResponse)]
-	[MemoryPackable]
-	public partial class U2C_UnionListResponse: MessageObject, IUnionActorResponse
-	{
-		public static U2C_UnionListResponse Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(U2C_UnionListResponse), isFromPool) as U2C_UnionListResponse; 
-		}
-
-		[MemoryPackOrder(89)]
-		public int RpcId { get; set; }
-
-		[MemoryPackOrder(90)]
-		public int Error { get; set; }
-
-		[MemoryPackOrder(91)]
-		public string Message { get; set; }
-
-		[MemoryPackOrder(0)]
-		public List<UnionListItem> UnionList { get; set; } = new();
-
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.Error = default;
-			this.Message = default;
-			this.UnionList.Clear();
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -15099,21 +14999,18 @@ namespace ET
 		 public const ushort U2C_UnionKeJiQuickResponse = 10404;
 		 public const ushort C2U_UnionKickOutRequest = 10405;
 		 public const ushort U2C_UnionKickOutResponse = 10406;
-		 public const ushort UnionListItem = 10407;
-		 public const ushort C2U_UnionListRequest = 10408;
-		 public const ushort U2C_UnionListResponse = 10409;
-		 public const ushort C2U_UnionMyInfoRequest = 10410;
-		 public const ushort U2C_UnionMyInfoResponse = 10411;
-		 public const ushort C2U_UnionMysteryListRequest = 10412;
-		 public const ushort U2C_UnionMysteryListResponse = 10413;
-		 public const ushort C2U_UnionOperatateRequest = 10414;
-		 public const ushort U2C_UnionOperatateResponse = 10415;
-		 public const ushort C2U_UnionRaceInfoRequest = 10416;
-		 public const ushort U2C_UnionRaceInfoResponse = 10417;
-		 public const ushort C2U_UnionRecordRequest = 10418;
-		 public const ushort U2C_UnionRecordResponse = 10419;
-		 public const ushort C2U_UnionSignUpRequest = 10420;
-		 public const ushort U2C_UnionSignUpResponse = 10421;
-		 public const ushort R2M_RankUpdateMessage = 10422;
+		 public const ushort C2U_UnionMyInfoRequest = 10407;
+		 public const ushort U2C_UnionMyInfoResponse = 10408;
+		 public const ushort C2U_UnionMysteryListRequest = 10409;
+		 public const ushort U2C_UnionMysteryListResponse = 10410;
+		 public const ushort C2U_UnionOperatateRequest = 10411;
+		 public const ushort U2C_UnionOperatateResponse = 10412;
+		 public const ushort C2U_UnionRaceInfoRequest = 10413;
+		 public const ushort U2C_UnionRaceInfoResponse = 10414;
+		 public const ushort C2U_UnionRecordRequest = 10415;
+		 public const ushort U2C_UnionRecordResponse = 10416;
+		 public const ushort C2U_UnionSignUpRequest = 10417;
+		 public const ushort U2C_UnionSignUpResponse = 10418;
+		 public const ushort R2M_RankUpdateMessage = 10419;
 	}
 }
