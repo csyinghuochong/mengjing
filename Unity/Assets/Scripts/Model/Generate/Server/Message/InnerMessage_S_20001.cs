@@ -3335,6 +3335,68 @@ namespace ET
 
 	}
 
+//加速完成
+	[ResponseType(nameof(M2U_UnionKeJiQuickResponse))]
+	[Message(InnerMessage.U2M_UnionKeJiQuickRequest)]
+	[MemoryPackable]
+	public partial class U2M_UnionKeJiQuickRequest: MessageObject, IRequest
+	{
+		public static U2M_UnionKeJiQuickRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(U2M_UnionKeJiQuickRequest), isFromPool) as U2M_UnionKeJiQuickRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int Cost { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Cost = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.M2U_UnionKeJiQuickResponse)]
+	[MemoryPackable]
+	public partial class M2U_UnionKeJiQuickResponse: MessageObject, IResponse
+	{
+		public static M2U_UnionKeJiQuickResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2U_UnionKeJiQuickResponse), isFromPool) as M2U_UnionKeJiQuickResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -3435,5 +3497,7 @@ namespace ET
 		 public const ushort M2U_UnionApplyResponse = 20097;
 		 public const ushort T2G_GateUnitInfoRequest = 20098;
 		 public const ushort G2T_GateUnitInfoResponse = 20099;
+		 public const ushort U2M_UnionKeJiQuickRequest = 20100;
+		 public const ushort M2U_UnionKeJiQuickResponse = 20101;
 	}
 }
