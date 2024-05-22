@@ -980,6 +980,16 @@ namespace ET
             new float3(-7.5f, 0f, -37.58f - 0.5f),
         };
 
+        
+        [StaticField]
+        public static Dictionary<int, string> UnionPosition = new Dictionary<int, string>
+        {
+            { 0, "族员"},
+            { 1, "族长"},
+            { 2, "副族长"},
+            { 3, "长老"},
+        };
+
 
         /// <summary>
         /// 一键出售材料

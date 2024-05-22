@@ -13254,6 +13254,72 @@ namespace ET
 
 	}
 
+//家族修炼
+	[ResponseType(nameof(M2C_UnionXiuLianResponse))]
+	[Message(OuterMessage.C2M_UnionXiuLianRequest)]
+	[MemoryPackable]
+	public partial class C2M_UnionXiuLianRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_UnionXiuLianRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_UnionXiuLianRequest), isFromPool) as C2M_UnionXiuLianRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int Position { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Type { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Position = default;
+			this.Type = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_UnionXiuLianResponse)]
+	[MemoryPackable]
+	public partial class M2C_UnionXiuLianResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_UnionXiuLianResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_UnionXiuLianResponse), isFromPool) as M2C_UnionXiuLianResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -13635,5 +13701,7 @@ namespace ET
 		 public const ushort M2C_UnionMysteryBuyResponse = 10378;
 		 public const ushort C2M_UnionTransferRequest = 10379;
 		 public const ushort M2C_UnionTransferResponse = 10380;
+		 public const ushort C2M_UnionXiuLianRequest = 10381;
+		 public const ushort M2C_UnionXiuLianResponse = 10382;
 	}
 }

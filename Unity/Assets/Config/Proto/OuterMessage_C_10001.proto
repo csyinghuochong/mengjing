@@ -3400,3 +3400,20 @@ message M2C_UnionTransferResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//家族修炼
+//ResponseType M2C_UnionXiuLianResponse
+message C2M_UnionXiuLianRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 Position = 1;
+	int32 Type = 2;
+}
+
+message M2C_UnionXiuLianResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
