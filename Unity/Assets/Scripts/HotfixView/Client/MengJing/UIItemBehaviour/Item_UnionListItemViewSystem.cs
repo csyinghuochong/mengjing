@@ -38,9 +38,8 @@ namespace ET.Client
                 return;
             }
 
-            C2U_UnionApplyRequest c2M_ItemHuiShouRequest = new() { UnionId = self.UnionListItem.UnionId, UserId = unit.Id };
-            U2C_UnionApplyResponse r2c_roleEquip =
-                    (U2C_UnionApplyResponse)await self.Root().GetComponent<SessionComponent>().Session.Call(c2M_ItemHuiShouRequest);
+            C2U_UnionApplyRequest request = new() { UnionId = self.UnionListItem.UnionId, UserId = unit.Id };
+            U2C_UnionApplyResponse response = (U2C_UnionApplyResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
             if (self.IsDisposed)
             {
                 return;
