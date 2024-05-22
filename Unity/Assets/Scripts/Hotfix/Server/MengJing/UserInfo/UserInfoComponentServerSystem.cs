@@ -138,6 +138,16 @@ namespace ET.Server
             self.UpdateRoleData(Type, value, notice);
         }
 
+        public static void UpdateRoleDataBroadcast(this UserInfoComponentS self, int Type, string value)
+        {
+            Unit unit = self.GetParent<Unit>();
+            M2C_RoleDataBroadcast m2C_BroadcastRoleData = self.m2C_RoleDataBroadcast;
+            m2C_BroadcastRoleData.UnitId = unit.Id;
+            m2C_BroadcastRoleData.UpdateType = (int)Type;
+            m2C_BroadcastRoleData.UpdateTypeValue = value;
+            MapMessageHelper.Broadcast(unit, m2C_BroadcastRoleData);
+        }
+        
         public static void UpdateRoleData(this UserInfoComponentS self, int Type, string value, bool notice = true)
         {
             Unit unit = self.GetParent<Unit>();

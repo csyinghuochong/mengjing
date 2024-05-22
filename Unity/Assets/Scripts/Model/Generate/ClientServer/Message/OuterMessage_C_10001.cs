@@ -12767,6 +12767,76 @@ namespace ET
 
 	}
 
+//创建公会
+	[ResponseType(nameof(M2C_UnionCreateResponse))]
+	[Message(OuterMessage.C2M_UnionCreateRequest)]
+	[MemoryPackable]
+	public partial class C2M_UnionCreateRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_UnionCreateRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_UnionCreateRequest), isFromPool) as C2M_UnionCreateRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string UnionName { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string UnionPurpose { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnionName = default;
+			this.UnionPurpose = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_UnionCreateResponse)]
+	[MemoryPackable]
+	public partial class M2C_UnionCreateResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_UnionCreateResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_UnionCreateResponse), isFromPool) as M2C_UnionCreateResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnionId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.UnionId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -13133,5 +13203,7 @@ namespace ET
 		 public const ushort M2C_BloodstoneQiangHuaResponse = 10363;
 		 public const ushort C2M_DonationRequest = 10364;
 		 public const ushort M2C_DonationResponse = 10365;
+		 public const ushort C2M_UnionCreateRequest = 10366;
+		 public const ushort M2C_UnionCreateResponse = 10367;
 	}
 }

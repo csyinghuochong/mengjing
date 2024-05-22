@@ -2668,6 +2668,140 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(U2M_UnionCreateResponse))]
+	[Message(InnerMessage.M2U_UnionCreateRequest)]
+	[MemoryPackable]
+	public partial class M2U_UnionCreateRequest: MessageObject, IRequest
+	{
+		public static M2U_UnionCreateRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2U_UnionCreateRequest), isFromPool) as M2U_UnionCreateRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string UnionName { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string UnionPurpose { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long UserID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnionName = default;
+			this.UnionPurpose = default;
+			this.UserID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.U2M_UnionCreateResponse)]
+	[MemoryPackable]
+	public partial class U2M_UnionCreateResponse: MessageObject, IResponse
+	{
+		public static U2M_UnionCreateResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(U2M_UnionCreateResponse), isFromPool) as U2M_UnionCreateResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnionId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.UnionId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(Chat2M_UpdateUnion))]
+	[Message(InnerMessage.M2Chat_UpdateUnion)]
+	[MemoryPackable]
+	public partial class M2Chat_UpdateUnion: MessageObject, IRequest
+	{
+		public static M2Chat_UpdateUnion Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2Chat_UpdateUnion), isFromPool) as M2Chat_UpdateUnion; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long UnionId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.UnitId = default;
+			this.UnionId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.Chat2M_UpdateUnion)]
+	[MemoryPackable]
+	public partial class Chat2M_UpdateUnion: MessageObject, IResponse
+	{
+		public static Chat2M_UpdateUnion Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Chat2M_UpdateUnion), isFromPool) as Chat2M_UpdateUnion; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -2749,5 +2883,9 @@ namespace ET
 		 public const ushort A2A_ServerMessageRResponse = 20078;
 		 public const ushort M2U_DonationRequest = 20079;
 		 public const ushort U2M_DonationResponse = 20080;
+		 public const ushort M2U_UnionCreateRequest = 20081;
+		 public const ushort U2M_UnionCreateResponse = 20082;
+		 public const ushort M2Chat_UpdateUnion = 20083;
+		 public const ushort Chat2M_UpdateUnion = 20084;
 	}
 }

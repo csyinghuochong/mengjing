@@ -3276,3 +3276,21 @@ message M2C_DonationResponse // ILocationResponse
 	string Message = 92;
 }
 
+//创建公会
+//ResponseType M2C_UnionCreateResponse
+message C2M_UnionCreateRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	string UnionName = 1;
+	string UnionPurpose = 2;	//公会宣言
+}
+
+message M2C_UnionCreateResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 UnionId = 1;
+}
+

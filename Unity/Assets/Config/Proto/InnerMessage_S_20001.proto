@@ -677,3 +677,37 @@ message U2M_DonationResponse // IResponse
 
 	int32 RankId = 1;
 }
+
+//ResponseType U2M_UnionCreateResponse
+message M2U_UnionCreateRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	string UnionName = 1;
+	string UnionPurpose = 2;	//公会宣言
+	int64 UserID = 4;
+}
+
+message U2M_UnionCreateResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 UnionId = 1;
+}
+
+//ResponseType Chat2M_UpdateUnion
+message M2Chat_UpdateUnion //IRequest
+{
+	int32 RpcId = 90;
+
+	int64 UnitId = 2;
+	int64 UnionId = 4;
+}
+
+message Chat2M_UpdateUnion //IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

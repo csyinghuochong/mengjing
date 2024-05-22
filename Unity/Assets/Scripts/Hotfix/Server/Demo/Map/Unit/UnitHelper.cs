@@ -485,7 +485,19 @@ namespace ET.Server
             bool result = camp_1!= camp_2 && !self.IsSameTeam(defend);
             return result;
         }
-
+        
+        public static async ETTask<int> UpdateUnionToChat(this Unit self)
+        {
+            ActorId chatServerId = UnitCacheHelper.GetChatServerId( self.Zone() );
+ 
+            Chat2M_UpdateUnion chat2G_EnterChat = (Chat2M_UpdateUnion)await self.Root().GetComponent<MessageSender>().Call(chatServerId, new M2Chat_UpdateUnion()
+            {
+                UnitId = self.Id,
+                UnionId = self.GetComponent<NumericComponentS>().GetAsLong(NumericType.UnionId_0),
+            });
+            return chat2G_EnterChat.Error;
+        }
+        
         public static List<Unit> GetUnitList(Scene scene, float3 position, int unitType, float distance)
         {
             List<Unit> units = new List<Unit>();
