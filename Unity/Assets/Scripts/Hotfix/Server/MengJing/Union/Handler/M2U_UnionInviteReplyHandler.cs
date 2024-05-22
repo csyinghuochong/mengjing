@@ -3,7 +3,7 @@
 namespace ET.Server
 {
     [MessageHandler(SceneType.Union)]
-    public class M2U_UnionInviteReplyHandler : MessageHandler<Scene, M2U_UnionInviteReplyMessage>
+    public class M2U_UnionInviteReplyHandler : MessageLocationHandler<Scene, M2U_UnionInviteReplyMessage>
     {
         protected override async ETTask Run(Scene scene, M2U_UnionInviteReplyMessage request)
         {
