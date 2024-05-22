@@ -3627,3 +3627,22 @@ message U2C_UnionListResponse // IUnionActorResponse
 	string Message = 92;
 	repeated UnionListItem UnionList = 1;
 }
+
+
+//我的公会
+//ResponseType U2C_UnionMyInfoResponse
+message C2U_UnionMyInfoRequest // IUnionActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnionId = 1;
+}
+
+message U2C_UnionMyInfoResponse // IUnionActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	UnionInfo UnionMyInfo = 1;
+	repeated int64 OnLinePlayer = 2;
+}

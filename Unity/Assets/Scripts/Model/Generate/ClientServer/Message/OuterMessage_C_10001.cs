@@ -14142,6 +14142,76 @@ namespace ET
 
 	}
 
+//我的公会
+	[ResponseType(nameof(U2C_UnionMyInfoResponse))]
+	[Message(OuterMessage.C2U_UnionMyInfoRequest)]
+	[MemoryPackable]
+	public partial class C2U_UnionMyInfoRequest: MessageObject, IUnionActorRequest
+	{
+		public static C2U_UnionMyInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2U_UnionMyInfoRequest), isFromPool) as C2U_UnionMyInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnionId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnionId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.U2C_UnionMyInfoResponse)]
+	[MemoryPackable]
+	public partial class U2C_UnionMyInfoResponse: MessageObject, IUnionActorResponse
+	{
+		public static U2C_UnionMyInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(U2C_UnionMyInfoResponse), isFromPool) as U2C_UnionMyInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public UnionInfo UnionMyInfo { get; set; }
+
+		[MemoryPackOrder(1)]
+		public List<long> OnLinePlayer { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.UnionMyInfo = default;
+			this.OnLinePlayer.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -14549,5 +14619,7 @@ namespace ET
 		 public const ushort UnionListItem = 10404;
 		 public const ushort C2U_UnionListRequest = 10405;
 		 public const ushort U2C_UnionListResponse = 10406;
+		 public const ushort C2U_UnionMyInfoRequest = 10407;
+		 public const ushort U2C_UnionMyInfoResponse = 10408;
 	}
 }

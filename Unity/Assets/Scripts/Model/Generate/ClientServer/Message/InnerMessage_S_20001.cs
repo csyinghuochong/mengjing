@@ -3459,6 +3459,33 @@ namespace ET
 
 	}
 
+///转让族长
+	[Message(InnerMessage.M2M_UnionTransferMessage)]
+	[MemoryPackable]
+	public partial class M2M_UnionTransferMessage: MessageObject, IMessage
+	{
+		public static M2M_UnionTransferMessage Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2M_UnionTransferMessage), isFromPool) as M2M_UnionTransferMessage; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int UnionLeader { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.UnionLeader = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -3563,5 +3590,6 @@ namespace ET
 		 public const ushort M2U_UnionKeJiQuickResponse = 20101;
 		 public const ushort U2M_UnionKickOutRequest = 20102;
 		 public const ushort M2U_UnionKickOutResponse = 20103;
+		 public const ushort M2M_UnionTransferMessage = 20104;
 	}
 }

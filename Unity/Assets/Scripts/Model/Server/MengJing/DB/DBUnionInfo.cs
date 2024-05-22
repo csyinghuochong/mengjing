@@ -10,8 +10,8 @@ namespace ET.Server
     {
         public UnionInfo UnionInfo { get; set; } = new UnionInfo();
 
-        public List<MysteryItemInfo> MysteryItemInfos = new List<MysteryItemInfo>();
+        public List<MysteryItemInfo> MysteryItemInfos{ get; set; } = new List<MysteryItemInfo>();
 
-        public long MysteryFreshTime = 0;
+        public long MysteryFreshTime { get; set; }= 0;
     }
 }

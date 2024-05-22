@@ -879,3 +879,10 @@ message M2U_UnionKickOutResponse // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+///转让族长
+message M2M_UnionTransferMessage // IMessage
+{
+	int32 RpcId = 90;
+	int32 UnionLeader = 1;
+}

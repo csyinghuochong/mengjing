@@ -1,31 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2U_UnionMyInfoHandler : AMActorRpcHandler<Scene, C2U_UnionMyInfoRequest, U2C_UnionMyInfoResponse>
+    [MessageHandler(SceneType.Union)]
+    public class C2U_UnionMyInfoHandler : MessageHandler<Scene, C2U_UnionMyInfoRequest, U2C_UnionMyInfoResponse>
     {
-        protected override async ETTask Run(Scene scene, C2U_UnionMyInfoRequest request, U2C_UnionMyInfoResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2U_UnionMyInfoRequest request, U2C_UnionMyInfoResponse response)
         {
-            long dbCacheId = DBHelper.GetDbCacheId(scene.DomainZone());
             DBUnionInfo dBUnionInfo =await scene.GetComponent<UnionSceneComponent>().GetDBUnionInfo(request.UnionId);
             if (dBUnionInfo == null)
             {
                 response.Error = ErrorCode.ERR_Union_Not_Exist;
-                reply();
                 return;
             }
 
             ///1族长 2副族长  ///3长老
-            long gateServerId = DBHelper.GetGateServerId(scene.DomainZone());
+            ActorId gateServerId = UnitCacheHelper.GetGateServerId(scene.Zone());
             for (int i = dBUnionInfo.UnionInfo.UnionPlayerList.Count - 1; i >= 0; i--)
             {
                 UnionPlayerInfo unionPlayerInfo = dBUnionInfo.UnionInfo.UnionPlayerList[i];
                 long userId = unionPlayerInfo.UserID;
-
-                D2G_GetComponent  d2GSave = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = userId, Component = DBHelper.UserInfoComponent });
-                UserInfoComponent userInfoComponent = d2GSave.Component as UserInfoComponent;
+                
+                UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), userId);
                 if (userInfoComponent == null)
                 {
                     dBUnionInfo.UnionInfo.UnionPlayerList.RemoveAt(i);
@@ -45,7 +42,7 @@ namespace ET
                 unionPlayerInfo.PlayerName = userInfoComponent.UserInfo.Name;
                 unionPlayerInfo.Combat = userInfoComponent.UserInfo.Combat;
 
-                G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await ActorMessageSenderComponent.Instance.Call
+                G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
                     (gateServerId, new T2G_GateUnitInfoRequest()
                     {
                         UserID = userId
@@ -95,8 +92,8 @@ namespace ET
             }
 
             ///判断族长离线时间
-            D2G_GetComponent d2GSave_2 = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = dBUnionInfo.UnionInfo.LeaderId, Component = DBHelper.NumericComponent });
-            NumericComponent numericComponent = d2GSave_2.Component as NumericComponent;
+            NumericComponentS numericComponent =
+                    await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene.Root(), dBUnionInfo.UnionInfo.LeaderId);
 
             if (dBUnionInfo.UnionInfo.JingXuanEndTime == 0 && numericComponent != null && timeNow - numericComponent.GetAsLong(NumericType.LastGameTime) > TimeHelper.OneDay * 5)
             {
@@ -153,17 +150,17 @@ namespace ET
                         unionPlayerInfo_new.Position = 1;
                         unionPlayerInfo_old.Position = 0;
                         dBUnionInfo.UnionInfo.LeaderName = unionPlayerInfo_new.PlayerName;
-                        UnionHelper.NoticeUnionLeader(scene.DomainZone(), newLeaderId, 1).Coroutine();
+                        BroadMessageHelper.NoticeUnionLeader(scene.Root(), newLeaderId, 1).Coroutine();
 
                         //通知旧族长
-                        UnionHelper.NoticeUnionLeader(scene.DomainZone(), oldLeaderid, 0).Coroutine();
+                        BroadMessageHelper.NoticeUnionLeader(scene.Root(), oldLeaderid, 0).Coroutine();
                     }
                 }
             }
            
             response.UnionMyInfo = dBUnionInfo.UnionInfo;
-            DBHelper.SaveComponentCache(scene.DomainZone(), request.UnionId, dBUnionInfo).Coroutine();
-            reply();
+            UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo).Coroutine();
+
         }
     }
 }

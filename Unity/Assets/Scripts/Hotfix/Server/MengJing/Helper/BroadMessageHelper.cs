@@ -45,6 +45,28 @@ namespace ET.Server
             }
             return zoneList;
         }
+        
+        public static async ETTask NoticeUnionLeader(Scene root, long unitid, int leader)
+        {
+            ActorId gateServerId = UnitCacheHelper.GetGateServerId(root.Zone());
+            G2T_GateUnitInfoResponse g2M_UpdateUnitResponse_3 = (G2T_GateUnitInfoResponse)await root.GetComponent<MessageSender>().Call
+            (gateServerId, new T2G_GateUnitInfoRequest()
+            {
+                UserID = unitid
+            });
+            if (g2M_UpdateUnitResponse_3.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse_3.SessionInstanceId > 0)
+            {
+                root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(unitid, new M2M_UnionTransferMessage() { UnionLeader = leader });
+            }
+            else
+            {
+                NumericComponentS numericComponent_3 = await UnitCacheHelper.GetComponentCache<NumericComponentS>(root, unitid);
+                numericComponent_3.ApplyValue(NumericType.UnionLeader, leader, false);
+                UnitCacheHelper.SaveComponentCache(root, numericComponent_3).Coroutine();
+            }
+
+        }
+        
     }
     
 }
