@@ -828,3 +828,22 @@ message M2U_UnionApplyResponse // IResponse
 	string Message = 92;
 }
 
+//ResponseType G2T_GateUnitInfoResponse
+message T2G_GateUnitInfoRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 UserID = 1;
+}
+
+message G2T_GateUnitInfoResponse // IResponse
+{
+    int32 RpcId = 90;
+    int32 Error = 91;
+    string Message = 92;
+
+    int64 SessionInstanceId = 1;
+    int32 PlayerState = 2;
+    int64 UnitId = 3;
+}

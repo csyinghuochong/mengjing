@@ -3262,6 +3262,79 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(G2T_GateUnitInfoResponse))]
+	[Message(InnerMessage.T2G_GateUnitInfoRequest)]
+	[MemoryPackable]
+	public partial class T2G_GateUnitInfoRequest: MessageObject, IRequest
+	{
+		public static T2G_GateUnitInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(T2G_GateUnitInfoRequest), isFromPool) as T2G_GateUnitInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UserID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UserID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.G2T_GateUnitInfoResponse)]
+	[MemoryPackable]
+	public partial class G2T_GateUnitInfoResponse: MessageObject, IResponse
+	{
+		public static G2T_GateUnitInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(G2T_GateUnitInfoResponse), isFromPool) as G2T_GateUnitInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long SessionInstanceId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int PlayerState { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UnitId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.SessionInstanceId = default;
+			this.PlayerState = default;
+			this.UnitId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -3360,5 +3433,7 @@ namespace ET
 		 public const ushort U2M_UnionTransferResponse = 20095;
 		 public const ushort U2M_UnionApplyRequest = 20096;
 		 public const ushort M2U_UnionApplyResponse = 20097;
+		 public const ushort T2G_GateUnitInfoRequest = 20098;
+		 public const ushort G2T_GateUnitInfoResponse = 20099;
 	}
 }
