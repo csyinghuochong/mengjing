@@ -3547,3 +3547,21 @@ message U2C_UnionJingXuanResponse // IUnionActorResponse
 	repeated int64 JingXuanList = 12;
 	int64 JingXuanEndTime = 13;
 }
+
+//科技升级
+//ResponseType U2C_UnionKeJiActiteResponse
+message C2U_UnionKeJiActiteRequest // IUnionActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnionId = 1;
+	int32 Position = 2;
+}
+
+message U2C_UnionKeJiActiteResponse // IUnionActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	UnionInfo UnionInfo = 1;
+}

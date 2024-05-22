@@ -1,17 +1,16 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2U_UnionKeJiActiteHandler : AMActorRpcHandler<Scene, C2U_UnionKeJiActiteRequest, U2C_UnionKeJiActiteResponse>
+    [MessageHandler(SceneType.Union)]
+    public class C2U_UnionKeJiActiteHandler : MessageHandler<Scene, C2U_UnionKeJiActiteRequest, U2C_UnionKeJiActiteResponse>
     {
-        protected override async ETTask Run(Scene scene, C2U_UnionKeJiActiteRequest request, U2C_UnionKeJiActiteResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2U_UnionKeJiActiteRequest request, U2C_UnionKeJiActiteResponse response)
         {
-            DBUnionInfo dBUnionInfo = await scene.GetComponent<UnionSceneComponent>().GetDBUnionInfo(request.UnionId);
+            DBUnionInfo dBUnionInfo = await UnitCacheHelper.GetComponent<DBUnionInfo>(scene.Root(),  request.UnionId);
             if (dBUnionInfo == null)
             {
                 response.Error = ErrorCode.ERR_Union_Not_Exist;
-                reply();
                 return;
             }
 
@@ -20,13 +19,11 @@ namespace ET
             if (unionKeJiConfig.NextID == 0)
             {
                 response.Error = ErrorCode.ERR_Union_NotActive;
-                reply();
                 return;
             }
             if(dBUnionInfo.UnionInfo.UnionGold < unionKeJiConfig.CostUnionGold)
             {
                 response.Error = ErrorCode.ERR_GoldNotEnoughError;
-                reply();
                 return;
             }
 
@@ -34,15 +31,13 @@ namespace ET
             {
                 response.UnionInfo = dBUnionInfo.UnionInfo;
                 response.Error = ErrorCode.ERR_Union_HavActive;
-                reply();
                 return;
             }
             dBUnionInfo.UnionInfo.UnionGold -= unionKeJiConfig.CostUnionGold;
             dBUnionInfo.UnionInfo.KeJiActitePos = request.Position;
             dBUnionInfo.UnionInfo.KeJiActiteTime = TimeHelper.ServerNow();
             response.UnionInfo = dBUnionInfo.UnionInfo;
-            DBHelper.SaveComponentCache(scene.DomainZone(), request.UnionId, dBUnionInfo).Coroutine();
-            reply();
+            UnitCacheHelper.SaveComponentCache(scene.Root(), dBUnionInfo).Coroutine(); ;
         }
     }
 }

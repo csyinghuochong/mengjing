@@ -13832,6 +13832,76 @@ namespace ET
 
 	}
 
+//科技升级
+	[ResponseType(nameof(U2C_UnionKeJiActiteResponse))]
+	[Message(OuterMessage.C2U_UnionKeJiActiteRequest)]
+	[MemoryPackable]
+	public partial class C2U_UnionKeJiActiteRequest: MessageObject, IUnionActorRequest
+	{
+		public static C2U_UnionKeJiActiteRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2U_UnionKeJiActiteRequest), isFromPool) as C2U_UnionKeJiActiteRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnionId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Position { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnionId = default;
+			this.Position = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.U2C_UnionKeJiActiteResponse)]
+	[MemoryPackable]
+	public partial class U2C_UnionKeJiActiteResponse: MessageObject, IUnionActorResponse
+	{
+		public static U2C_UnionKeJiActiteResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(U2C_UnionKeJiActiteResponse), isFromPool) as U2C_UnionKeJiActiteResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public UnionInfo UnionInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.UnionInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -14230,5 +14300,7 @@ namespace ET
 		 public const ushort U2C_UnionApplyReplyResponse = 10395;
 		 public const ushort C2U_UnionJingXuanRequest = 10396;
 		 public const ushort U2C_UnionJingXuanResponse = 10397;
+		 public const ushort C2U_UnionKeJiActiteRequest = 10398;
+		 public const ushort U2C_UnionKeJiActiteResponse = 10399;
 	}
 }
