@@ -76,6 +76,15 @@ namespace ET.Server
             unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(unit.GateSessionActorId, message);
         }
         
+        public static void SendToClient(List<Unit> units, IMessage message)
+        {
+            for (int i = 0; i < units.Count;i++)
+            {
+                Unit unit = units[i];
+                unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(unit.GateSessionActorId, message);
+            }
+        }
+        
         public static void SendToClient(Scene root, long GateSessionId, IMessage message)
         {
             root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(GateSessionId, message);

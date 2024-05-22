@@ -1,0 +1,23 @@
+namespace ET.Server
+{
+
+    [EntitySystemOf(typeof(DropComponentS))]
+    [FriendOf(typeof(DropComponentS))]
+    public static partial class DropComponentSSystem
+    {
+        [EntitySystem]
+        private static void Awake(this ET.Server.DropComponentS self)
+        {
+            self.OwnerId = 0;   
+            self.ProtectTime = 0;
+            self.BeAttackPlayerList.Clear();
+        }
+        
+        public static void SetItemInfo(this DropComponentS self, int itemid, int itemnum)
+        {
+            self.ItemID = itemid;
+            self.ItemNum = itemnum;
+        }
+    }
+
+}

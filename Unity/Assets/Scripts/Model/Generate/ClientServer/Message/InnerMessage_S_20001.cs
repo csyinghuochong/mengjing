@@ -3744,6 +3744,36 @@ namespace ET
 
 	}
 
+	[Message(InnerMessage.M2C_HappyInfoResult)]
+	[MemoryPackable]
+	public partial class M2C_HappyInfoResult: MessageObject, IMessage
+	{
+		public static M2C_HappyInfoResult Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_HappyInfoResult), isFromPool) as M2C_HappyInfoResult; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long NextRefreshTime { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.NextRefreshTime = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -3856,5 +3886,6 @@ namespace ET
 		 public const ushort A2A_ActivityUpdateRequest = 20109;
 		 public const ushort A2A_ActivityUpdateResponse = 20110;
 		 public const ushort G2M_ActivityUpdate = 20111;
+		 public const ushort M2C_HappyInfoResult = 20112;
 	}
 }
