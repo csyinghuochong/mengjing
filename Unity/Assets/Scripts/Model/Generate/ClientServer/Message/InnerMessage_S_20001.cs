@@ -3486,6 +3486,79 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Union2G_EnterUnion))]
+	[Message(InnerMessage.G2Union_EnterUnion)]
+	[MemoryPackable]
+	public partial class G2Union_EnterUnion: MessageObject, IRequest
+	{
+		public static G2Union_EnterUnion Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(G2Union_EnterUnion), isFromPool) as G2Union_EnterUnion; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string Name { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Name = default;
+			this.UnitId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.Union2G_EnterUnion)]
+	[MemoryPackable]
+	public partial class Union2G_EnterUnion: MessageObject, IResponse
+	{
+		public static Union2G_EnterUnion Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Union2G_EnterUnion), isFromPool) as Union2G_EnterUnion; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long WinUnionId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int DonationRankId { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long LeaderId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.WinUnionId = default;
+			this.DonationRankId = default;
+			this.LeaderId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -3591,5 +3664,7 @@ namespace ET
 		 public const ushort U2M_UnionKickOutRequest = 20102;
 		 public const ushort M2U_UnionKickOutResponse = 20103;
 		 public const ushort M2M_UnionTransferMessage = 20104;
+		 public const ushort G2Union_EnterUnion = 20105;
+		 public const ushort Union2G_EnterUnion = 20106;
 	}
 }

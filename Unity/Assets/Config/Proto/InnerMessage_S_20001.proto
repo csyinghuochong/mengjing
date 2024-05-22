@@ -886,3 +886,21 @@ message M2M_UnionTransferMessage // IMessage
 	int32 RpcId = 90;
 	int32 UnionLeader = 1;
 }
+
+//ResponseType Union2G_EnterUnion
+message G2Union_EnterUnion //IRequest
+{
+	int32 RpcId = 90;
+	string Name = 1;
+	int64 UnitId = 2;
+}
+
+message Union2G_EnterUnion //IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 WinUnionId = 2;
+	int32 DonationRankId = 3;
+	int64 LeaderId = 4;
+}
