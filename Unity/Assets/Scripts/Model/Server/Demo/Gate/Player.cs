@@ -3,6 +3,7 @@
 
     public enum PlayerState
     {
+        None,
         Disconnect,
         Gate,
         Game,

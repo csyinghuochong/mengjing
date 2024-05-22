@@ -3466,3 +3466,64 @@ message M2C_HorseNoticeInfo // ILocationMessage
 	string NoticeText = 1;
 	int32 NoticeType = 2;
 }
+
+//申请入会
+//ResponseType U2C_UnionApplyResponse
+message C2U_UnionApplyRequest // IUnionActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnionId = 1;
+	int64 UserId = 2;
+}
+
+message U2C_UnionApplyResponse // IUnionActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+message M2C_UnionApplyResult // ILocationMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//申请列表
+//ResponseType U2C_UnionApplyListResponse
+message C2U_UnionApplyListRequest // IUnionActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnionId = 1;
+}
+
+message U2C_UnionApplyListResponse // IUnionActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	repeated UnionPlayerInfo UnionPlayerList = 10;
+}
+
+//申请回复
+//ResponseType U2C_UnionApplyReplyResponse
+message C2U_UnionApplyReplyRequest // IUnionActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 UserId = 1;
+	int32 ReplyCode = 2; //0拒绝 1同意
+	int64 UnionId = 3;
+}
+
+message U2C_UnionApplyReplyResponse // IUnionActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

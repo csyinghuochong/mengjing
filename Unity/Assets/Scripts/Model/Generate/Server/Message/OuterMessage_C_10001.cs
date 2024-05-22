@@ -13522,6 +13522,238 @@ namespace ET
 
 	}
 
+//申请入会
+	[ResponseType(nameof(U2C_UnionApplyResponse))]
+	[Message(OuterMessage.C2U_UnionApplyRequest)]
+	[MemoryPackable]
+	public partial class C2U_UnionApplyRequest: MessageObject, IUnionActorRequest
+	{
+		public static C2U_UnionApplyRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2U_UnionApplyRequest), isFromPool) as C2U_UnionApplyRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnionId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UserId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnionId = default;
+			this.UserId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.U2C_UnionApplyResponse)]
+	[MemoryPackable]
+	public partial class U2C_UnionApplyResponse: MessageObject, IUnionActorResponse
+	{
+		public static U2C_UnionApplyResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(U2C_UnionApplyResponse), isFromPool) as U2C_UnionApplyResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_UnionApplyResult)]
+	[MemoryPackable]
+	public partial class M2C_UnionApplyResult: MessageObject, ILocationMessage
+	{
+		public static M2C_UnionApplyResult Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_UnionApplyResult), isFromPool) as M2C_UnionApplyResult; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//申请列表
+	[ResponseType(nameof(U2C_UnionApplyListResponse))]
+	[Message(OuterMessage.C2U_UnionApplyListRequest)]
+	[MemoryPackable]
+	public partial class C2U_UnionApplyListRequest: MessageObject, IUnionActorRequest
+	{
+		public static C2U_UnionApplyListRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2U_UnionApplyListRequest), isFromPool) as C2U_UnionApplyListRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnionId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnionId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.U2C_UnionApplyListResponse)]
+	[MemoryPackable]
+	public partial class U2C_UnionApplyListResponse: MessageObject, IUnionActorResponse
+	{
+		public static U2C_UnionApplyListResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(U2C_UnionApplyListResponse), isFromPool) as U2C_UnionApplyListResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(9)]
+		public List<UnionPlayerInfo> UnionPlayerList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.UnionPlayerList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//申请回复
+	[ResponseType(nameof(U2C_UnionApplyReplyResponse))]
+	[Message(OuterMessage.C2U_UnionApplyReplyRequest)]
+	[MemoryPackable]
+	public partial class C2U_UnionApplyReplyRequest: MessageObject, IUnionActorRequest
+	{
+		public static C2U_UnionApplyReplyRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2U_UnionApplyReplyRequest), isFromPool) as C2U_UnionApplyReplyRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UserId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ReplyCode { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UnionId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UserId = default;
+			this.ReplyCode = default;
+			this.UnionId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.U2C_UnionApplyReplyResponse)]
+	[MemoryPackable]
+	public partial class U2C_UnionApplyReplyResponse: MessageObject, IUnionActorResponse
+	{
+		public static U2C_UnionApplyReplyResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(U2C_UnionApplyReplyResponse), isFromPool) as U2C_UnionApplyReplyResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -13911,5 +14143,12 @@ namespace ET
 		 public const ushort Actor_TransferRequest = 10386;
 		 public const ushort Actor_TransferResponse = 10387;
 		 public const ushort M2C_HorseNoticeInfo = 10388;
+		 public const ushort C2U_UnionApplyRequest = 10389;
+		 public const ushort U2C_UnionApplyResponse = 10390;
+		 public const ushort M2C_UnionApplyResult = 10391;
+		 public const ushort C2U_UnionApplyListRequest = 10392;
+		 public const ushort U2C_UnionApplyListResponse = 10393;
+		 public const ushort C2U_UnionApplyReplyRequest = 10394;
+		 public const ushort U2C_UnionApplyReplyResponse = 10395;
 	}
 }

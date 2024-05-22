@@ -30,6 +30,15 @@
         
     }
     
+    public interface IUnionActorRequest : IRequest
+    {
+    }
+
+    public interface IUnionActorResponse : IResponse
+    {
+
+    }
+    
     public interface IChatActorRequest: ILocationRequest
     {
         
