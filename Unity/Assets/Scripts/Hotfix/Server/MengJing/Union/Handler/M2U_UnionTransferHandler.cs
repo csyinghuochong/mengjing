@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
+    [MessageHandler(SceneType.Union)]
     public class M2U_UnionTransferHandler : AMActorRpcHandler<Scene, M2U_UnionTransferRequest, U2M_UnionTransferResponse>
     {
         protected override async ETTask Run(Scene scene, M2U_UnionTransferRequest request, U2M_UnionTransferResponse response, Action reply)

@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class M2U_UnionMysteryBuyHandler : AMActorRpcHandler<Scene, M2U_UnionMysteryBuyRequest, U2M_UnionMysteryBuyResponse>
+    [MessageHandler(SceneType.Union)]
+    public class M2U_UnionMysteryBuyHandler : MessageHandler<Scene, M2U_UnionMysteryBuyRequest, U2M_UnionMysteryBuyResponse>
     {
-        protected override async ETTask Run(Scene scene, M2U_UnionMysteryBuyRequest request, U2M_UnionMysteryBuyResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2U_UnionMysteryBuyRequest request, U2M_UnionMysteryBuyResponse response)
         {
 
             DBUnionInfo dBUnionInfo = await scene.GetComponent<UnionSceneComponent>().GetDBUnionInfo(request.UnionId);
             if (dBUnionInfo == null)
             {
                 response.Error = ErrorCode.ERR_Union_Not_Exist;
-                reply();
                 return;
             }
 
@@ -38,8 +36,8 @@ namespace ET
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
             }
-            DBHelper.SaveComponentCache(scene.DomainZone(), request.UnionId, dBUnionInfo).Coroutine();
-            reply();
+            UnitCacheHelper.SaveComponentCache(scene.Root(), dBUnionInfo).Coroutine();
+
             await ETTask.CompletedTask;
         }
     }

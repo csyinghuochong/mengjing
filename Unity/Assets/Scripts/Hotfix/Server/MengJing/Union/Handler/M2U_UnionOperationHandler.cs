@@ -1,21 +1,19 @@
 ﻿using System;
 
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class M2U_UnionOperationHandler : AMActorRpcHandler<Scene, M2U_UnionOperationRequest, U2M_UnionOperationResponse>
+    [MessageHandler(SceneType.Union)]
+    public class M2U_UnionOperationHandler : MessageHandler<Scene, M2U_UnionOperationRequest, U2M_UnionOperationResponse>
     {
-        protected override async ETTask Run(Scene scene, M2U_UnionOperationRequest request, U2M_UnionOperationResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2U_UnionOperationRequest request, U2M_UnionOperationResponse response)
         {
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.UnionOperate, request.UnionId))
+            using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.UnionOperate, request.UnionId))
             {
                 DBUnionInfo dBUnionInfo = await scene.GetComponent<UnionSceneComponent>().GetDBUnionInfo(request.UnionId);
                 if (dBUnionInfo == null)
                 {
                     response.Error = ErrorCode.ERR_Union_Not_Exist;
-                    reply();
                     return;
                 }
                
@@ -57,12 +55,11 @@ namespace ET
 
                                 for (int i = 0; i < dBUnionInfo.UnionInfo.UnionPlayerList.Count; i++)
                                 {
-                                    MailHelp.SendUserMail(scene.DomainZone(), dBUnionInfo.UnionInfo.UnionPlayerList[i].UserID, mailInfo).Coroutine();
+                                    MailHelp.SendUserMail(scene.Root(), dBUnionInfo.UnionInfo.UnionPlayerList[i].UserID, mailInfo).Coroutine();
                                 }
 
                                 string noticeContent = $"恭喜 <color=#{ComHelp.QualityReturnColor(5)}>{dBUnionInfo.UnionInfo.UnionName}</color> 家族等级提升至{dBUnionInfo.UnionInfo.Level}级";
-                                ServerMessageHelper.SendBroadMessage(scene.DomainZone(), NoticeType.Notice, noticeContent);
-
+                                BroadMessageHelper.SendBroadMessage(scene.Root(), NoticeType.Notice, noticeContent);
                             }
                         }
                         else if (valuePararm[2] == "35") //UserDataType.UnionGold
@@ -76,7 +73,6 @@ namespace ET
                         }
                         else
                         {
-                            reply();
                             return;
                         }
 
@@ -86,7 +82,7 @@ namespace ET
                             dBUnionInfo.UnionInfo.ActiveRecord.RemoveAt(0);
                         }
 
-                        DBHelper.SaveComponentCache(scene.DomainZone(), request.UnionId, dBUnionInfo).Coroutine();
+                        UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo).Coroutine();
                         break;
                     case 2:  //获取等级
                         response.Par = dBUnionInfo.UnionInfo.Level.ToString();
@@ -99,7 +95,6 @@ namespace ET
                         if (selfgold < unionConfig.DonateGold)
                         {
                             response.Error = ErrorCode.ERR_GoldNotEnoughError;
-                            reply();
                             return;
                         }
                         if (dBUnionInfo.UnionInfo.DonationRecords.Count >= 100)
@@ -112,7 +107,7 @@ namespace ET
                             Time = TimeHelper.ServerNow(),
                             UnitId = request.UnitId
                         });
-                        DBHelper.SaveComponentCache(scene.DomainZone(), request.UnionId, dBUnionInfo).Coroutine();
+                        UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo).Coroutine();
                         break;
                     case 4: //钻石捐献
                         dBUnionInfo.UnionInfo.Level = Math.Max(dBUnionInfo.UnionInfo.Level, 1);
@@ -122,7 +117,7 @@ namespace ET
                         if (selfDiamond < unionConfig.DonateDiamond)
                         {
                             response.Error = ErrorCode.ERR_DiamondNotEnoughError;
-                            reply();
+
                             return;
                         }
                         if (dBUnionInfo.UnionInfo.DonationRecords.Count >= 100)
@@ -135,18 +130,17 @@ namespace ET
                             Time = TimeHelper.ServerNow(),
                             UnitId = request.UnitId
                         });
-                        DBHelper.SaveComponentCache(scene.DomainZone(), request.UnionId, dBUnionInfo).Coroutine();
+                        UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo).Coroutine();
                         break;
                     case 5: //增加金币
                         dBUnionInfo.UnionInfo.UnionGold += int.Parse(request.Par);
-                        DBHelper.SaveComponentCache(scene.DomainZone(), request.UnionId, dBUnionInfo).Coroutine();
+                        UnitCacheHelper.SaveComponentCache(scene.Root(), dBUnionInfo).Coroutine();
                         break;
                     default:
                         break;
                 }
             }
-
-            reply();
+            
             await ETTask.CompletedTask;
         }
     }
