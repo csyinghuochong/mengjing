@@ -49,7 +49,7 @@ namespace ET.Server
         
         public static void LogWarning(string msg, bool log = false)
         {
-            if (LogLevel >= 3 && log)
+            if (ConfigData.LogLevel >= 3 && log)
             {
                 Log.Warning(msg);
             }
@@ -57,40 +57,41 @@ namespace ET.Server
 
         public static void LogDebug(string msg)
         {
-            if (LogLevel >= 2)
+            if (ConfigData.LogLevel >= 2)
             {
                 Log.Debug(msg);
             }
         }
 
-        public static List<string> KillInfoList = new List<string>();
+
         public static void KillPlayerInfo(Unit attack, Unit defend)
         {
-            if (LogLevel == 0)
+            if (ConfigData.LogLevel == 0)
             {
                 return;
             }
+            
             if (attack.IsRobot() || defend.IsRobot())
             {
                 return;
             }
-            int zone = attack.DomainZone();
+            int zone = attack.Zone();
             ServerItem serverItem  = ServerHelper.GetGetServerItem(false, zone);
             if (serverItem == null)
             {
                 return;
             }
             
-            MapComponent mapComponent = attack.DomainScene().GetComponent<MapComponent>();
-            if (!SceneConfigHelper.UseSceneConfig(mapComponent.SceneTypeEnum))
+            MapComponent mapComponent = attack.Scene().GetComponent<MapComponent>();
+            if (!SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
             {
                 return;
             }
             string serverName = serverItem.ServerName;
             string sceneName = SceneConfigCategory.Instance.Get(mapComponent.SceneId).Name;
 
-            UserInfoComponent attackUserinfo = attack.GetComponent<UserInfoComponent>();
-            UserInfoComponent defendUserinfo = defend.GetComponent<UserInfoComponent>();
+            UserInfoComponentS attackUserinfo = attack.GetComponent<UserInfoComponentS>();
+            UserInfoComponentS defendUserinfo = defend.GetComponent<UserInfoComponentS>();
             string attackName = attackUserinfo.UserInfo.Name;
             string defendName = defendUserinfo.UserInfo.Name;
             attackName = attack.IsRobot() ? $"{attackName}（人机）" : attackName;
@@ -99,12 +100,12 @@ namespace ET.Server
             int defendOcc = defendUserinfo.UserInfo.OccTwo > 0 ? defendUserinfo.UserInfo.OccTwo : defendUserinfo.UserInfo.Occ;
 
             string log = $"{TimeHelper.DateTimeNow().ToString()}:  {serverName}：{sceneName}： {attackName} 等级({attackUserinfo.UserInfo.Lv}) 职业:({attackOcc}) 战力:({attackUserinfo.UserInfo.Combat}) 击杀了： {defendName} 等级({defendUserinfo.UserInfo.Lv}) 职业:({defendOcc}) 战力:({defendUserinfo.UserInfo.Combat})";
-            KillInfoList.Add(log);
-            if (KillInfoList.Count >= 10)
+            ConfigData.KillInfoList.Add(log);
+            if (ConfigData.KillInfoList.Count >= 10)
             {
                 string filePath = "../Logs/WJ_KillPlayer.txt";
-                WriteLogList(KillInfoList, filePath);
-                KillInfoList.Clear();
+                WriteLogList(ConfigData.KillInfoList, filePath);
+                ConfigData.KillInfoList.Clear();
             }
         }
 
@@ -117,12 +118,12 @@ namespace ET.Server
             }
 
             string log = $"{TimeHelper.DateTimeNow().ToString()}: {serverItem.ServerName} {loginfo}";
-            KillInfoList.Add(log);
-            if (KillInfoList.Count >= 10)
+            ConfigData.KillInfoList.Add(log);
+            if (ConfigData.KillInfoList.Count >= 10)
             {
                 string filePath = "../Logs/WJ_KillPlayer.txt";
-                WriteLogList(KillInfoList, filePath);
-                KillInfoList.Clear();
+                WriteLogList(ConfigData.KillInfoList, filePath);
+                ConfigData.KillInfoList.Clear();
             }
         }
 
@@ -135,24 +136,23 @@ namespace ET.Server
             }
 
             string log = $"{TimeHelper.DateTimeNow().ToString()}: {serverItem.ServerName} {loginfo}";
-            KillInfoList.Add(log);
-            if (KillInfoList.Count >= 10)
+            ConfigData.KillInfoList.Add(log);
+            if (ConfigData.KillInfoList.Count >= 10)
             {
                 string filePath = "../Logs/WJ_KillPlayer.txt";
-                WriteLogList(KillInfoList, filePath);
-                KillInfoList.Clear();
+                WriteLogList(ConfigData.KillInfoList, filePath);
+                ConfigData.KillInfoList.Clear();
             }
         }
 
-        public static string NoticeLastContent = string.Empty;
-        public static long NoticeLastGetTime = 0;
+        
         public static string GetNoticeNew()
         {
             long serverTime = TimeHelper.ServerNow();
-            if (serverTime - NoticeLastGetTime < TimeHelper.Minute * 10
-                && !string.IsNullOrEmpty(NoticeLastContent))
+            if (serverTime - ConfigData.NoticeLastGetTime < TimeHelper.Minute * 10
+                && !string.IsNullOrEmpty(ConfigData.NoticeLastContent))
             {
-                return NoticeLastContent;
+                return ConfigData.NoticeLastContent;
             }
 
 
@@ -179,15 +179,15 @@ namespace ET.Server
                     }
                     index++;
                 }
-                NoticeLastContent = notice;
+                ConfigData.NoticeLastContent = notice;
             }
             else
             {
-                NoticeLastContent = string.Empty;
+                ConfigData.NoticeLastContent = string.Empty;
             }
 
-            NoticeLastGetTime = serverTime;
-            return NoticeLastContent;
+            ConfigData.NoticeLastGetTime = serverTime;
+            return ConfigData.NoticeLastContent;
         }
 
         public static string GetNotice()
@@ -226,16 +226,16 @@ namespace ET.Server
         public static void OnStopServer()
         {
             string filePath = "../Logs/WJ_login.txt";
-            WriteLogList(LoginInfoList, filePath);
-            LoginInfoList.Clear();
+            WriteLogList(ConfigData.LoginInfoList, filePath);
+            ConfigData.LoginInfoList.Clear();
 
             filePath = "../Logs/WJ_ZuoBi.txt";
-            WriteLogList(ZuobiInfoList, filePath);
-            ZuobiInfoList.Clear();
+            WriteLogList(ConfigData.ZuobiInfoList, filePath);
+            ConfigData.ZuobiInfoList.Clear();
             
             filePath = "../Logs/WJ_KillPlayer.txt";
-            WriteLogList(KillInfoList, filePath);
-            KillInfoList.Clear();
+            WriteLogList(ConfigData.KillInfoList, filePath);
+            ConfigData.KillInfoList.Clear();
         }
 
         public static void WriteLogList(List<string> infolist, string filePath, bool add = true)
@@ -273,25 +273,25 @@ namespace ET.Server
             }
         }
 
-        public static List<string> LoginInfoList = new List<string>();
+     
         public static void LoginInfo(string log)
         {
-            if (LogLevel == 0)
+            if (ConfigData.LogLevel == 0)
             {
                 return;
             }
             log = TimeHelper.DateTimeNow().ToString() + " " + log;
-            LoginInfoList.Add(log);
-            if (LoginInfoList.Count >= 100)
+            ConfigData.LoginInfoList.Add(log);
+            if (ConfigData.LoginInfoList.Count >= 100)
             {
                 string filePath = "../Logs/WJ_login.txt";
-                WriteLogList(LoginInfoList, filePath);
+                WriteLogList(ConfigData.LoginInfoList, filePath);
 
-                LoginInfoList.Clear();
+                ConfigData.LoginInfoList.Clear();
             }
         }
 
-        public static List<string> ZuobiInfoList  = new List<string>(); 
+     
         public static void ZuobiInfo(string log)
         {
             //if (LogLevel == 0)
@@ -299,24 +299,24 @@ namespace ET.Server
             //    return;
             //}
             log = TimeHelper.DateTimeNow().ToString() + " " + log;
-            ZuobiInfoList.Add(log);
-            if (ZuobiInfoList.Count >= 10)
+            ConfigData.ZuobiInfoList.Add(log);
+            if (ConfigData.ZuobiInfoList.Count >= 10)
             {
                 string filePath = "../Logs/WJ_ZuoBi.txt";
-                WriteLogList(ZuobiInfoList, filePath);
-                ZuobiInfoList.Clear();
+                WriteLogList(ConfigData.ZuobiInfoList, filePath);
+                ConfigData.ZuobiInfoList.Clear();
             }
         }
 
         public static void OnLineInfo(string log)
         {
             log = TimeHelper.DateTimeNow().ToString() + " " + log;
-            ZuobiInfoList.Add(log);
-            if (ZuobiInfoList.Count >= 10)
+            ConfigData.ZuobiInfoList.Add(log);
+            if (ConfigData.ZuobiInfoList.Count >= 10)
             {
                 string filePath = "../Logs/WJ_ZuoBi.txt";
-                WriteLogList(ZuobiInfoList, filePath);
-                ZuobiInfoList.Clear();
+                WriteLogList(ConfigData.ZuobiInfoList, filePath);
+                ConfigData.ZuobiInfoList.Clear();
             }
         }
 
@@ -365,10 +365,7 @@ namespace ET.Server
         public static void CheckBlackRoom(Unit unit)
         {
             bool black = false;
-            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();  
-
-
-
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();  
             if (black)
             {
                 numericComponent.ApplyValue( NumericType.BlackRoom, 1 );
@@ -385,60 +382,60 @@ namespace ET.Server
             //{
             //    return;
             //}
-            UserInfoComponent userInfo = unit.GetComponent<UserInfoComponent>();
+            UserInfoComponentS userInfo = unit.GetComponent<UserInfoComponentS>();
 
-            long rechargeValue = unit.GetComponent<NumericComponent>().GetAsLong(NumericType.RechargeNumber);
+            long rechargeValue = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber);
 
             //GM账号免于检测
-            if (GMHelp.GmAccount.Contains(userInfo.Account)) {
+            if (GMData.GmAccount.Contains(userInfo.Account)) {
                 return;
             }
 
-            int openDay = DBHelper.GetOpenServerDay(unit.DomainZone());
+            int openDay = ServerHelper.GetOpenServerDay(false, unit.Zone());
             //钻石线
-            if (userInfo.UserInfo.Diamond >= unit.GetComponent<NumericComponent>().GetAsLong(NumericType.RechargeNumber) * 150 + 50000)
+            if (userInfo.UserInfo.Diamond >= unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber) * 150 + 50000)
             {
-                LogHelper.ZuobiInfo("钻石作弊:" + userInfo.UserInfo.Diamond + " 服务器:" + unit.DomainZone() + " 名字:" + userInfo.UserName + " 等级:" + userInfo.UserInfo.Lv + " 充值:" + unit.GetComponent<NumericComponent>().GetAsLong(NumericType.RechargeNumber));
+                LogHelper.ZuobiInfo("钻石作弊:" + userInfo.UserInfo.Diamond + " 服务器:" + unit.Zone() + " 名字:" + userInfo.UserName + " 等级:" + userInfo.UserInfo.Lv + " 充值:" + unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber));
             }
 
             //等级线
-            ServerInfo serverInfo = unit.DomainScene().GetComponent<ServerInfoComponent>().ServerInfo;
+            ServerInfo serverInfo = unit.Scene().GetComponent<ServerInfoComponent>().ServerInfo;
             if (userInfo.UserInfo.Lv > serverInfo.WorldLv) 
             {
-                LogHelper.ZuobiInfo("玩家等级超过服务器等级限制:" + userInfo.UserInfo.Lv + " 服务器:" + unit.DomainZone() + " 名字:" + userInfo.UserName + " 等级:" + userInfo.UserInfo.Lv + " 充值:" + unit.GetComponent<NumericComponent>().GetAsLong(NumericType.RechargeNumber));
+                LogHelper.ZuobiInfo("玩家等级超过服务器等级限制:" + userInfo.UserInfo.Lv + " 服务器:" + unit.Zone() + " 名字:" + userInfo.UserName + " 等级:" + userInfo.UserInfo.Lv + " 充值:" + unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber));
             }
 
             if (openDay <= 180 || userInfo.UserInfo.Lv < 60)
             {
                 //金币线
-                if (userInfo.UserInfo.Gold >= unit.GetComponent<NumericComponent>().GetAsLong(NumericType.RechargeNumber) * 300000 + 5000000 + userInfo.UserInfo.Lv * 500000)
+                if (userInfo.UserInfo.Gold >= unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber) * 300000 + 5000000 + userInfo.UserInfo.Lv * 500000)
                 {
-                    LogHelper.ZuobiInfo("金币作弊:" + userInfo.UserInfo.Gold + " 服务器:" + unit.DomainZone() + " 名字:" + userInfo.UserName + " 等级:" + userInfo.UserInfo.Lv + " 充值:" + unit.GetComponent<NumericComponent>().GetAsLong(NumericType.RechargeNumber));
+                    LogHelper.ZuobiInfo("金币作弊:" + userInfo.UserInfo.Gold + " 服务器:" + unit.Zone() + " 名字:" + userInfo.UserName + " 等级:" + userInfo.UserInfo.Lv + " 充值:" + unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber));
                 }
 
                 //道具线
-                if (unit.GetComponent<BagComponent>().GetItemNumber(10010083) > 1000 + unit.GetComponent<NumericComponent>().GetAsLong(NumericType.RechargeNumber) * 10) {
-                    LogHelper.ZuobiInfo("洗练石作弊:" + unit.GetComponent<BagComponent>().GetItemNumber(10010083) + " 服务器:" + unit.DomainZone() + " 名字:" + userInfo.UserName + " 等级:" + userInfo.UserInfo.Lv + " 充值:" + unit.GetComponent<NumericComponent>().GetAsLong(NumericType.RechargeNumber));
+                if (unit.GetComponent<BagComponentS>().GetItemNumber(10010083) > 1000 + unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber) * 10) {
+                    LogHelper.ZuobiInfo("洗练石作弊:" + unit.GetComponent<BagComponentS>().GetItemNumber(10010083) + " 服务器:" + unit.Zone() + " 名字:" + userInfo.UserName + " 等级:" + userInfo.UserInfo.Lv + " 充值:" + unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber));
                 }
             }
 
             //查找神兽
-            int  shenshouNumber = unit.GetComponent<PetComponent>().GetShenShouNumber();    
+            int  shenshouNumber = unit.GetComponent<PetComponentS>().GetShenShouNumber();    
             if (shenshouNumber > 0 && shenshouNumber * 4000 > rechargeValue)
             {
                 //if (PetHelper.IsHaveShenShou(unit.GetComponent<PetComponent>().GetAllPets()))
                 {
-                    LogHelper.ZuobiInfo("低充值有神兽需核查! " + " 服务器:" + unit.DomainZone() + " 名字:" + userInfo.UserName + " 充值:" + rechargeValue);
+                    LogHelper.ZuobiInfo("低充值有神兽需核查! " + " 服务器:" + unit.Zone() + " 名字:" + userInfo.UserName + " 充值:" + rechargeValue);
                 }
             }
 
-            BagComponent bagComponent = unit.GetComponent<BagComponent>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             List<BagInfo> bagInfos =  bagComponent.GetAllItems();
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 if (bagInfos[i].ItemID > 100 && bagInfos[i].ItemNum >= 10000)
                 {
-                    LogHelper.ZuobiInfo($"道具数量异常： {unit.DomainZone()} {unit.Id} {bagInfos[i].ItemID} {bagInfos[i].ItemNum} ");
+                    LogHelper.ZuobiInfo($"道具数量异常： {unit.Zone()} {unit.Id} {bagInfos[i].ItemID} {bagInfos[i].ItemNum} ");
                 }
             }
         }

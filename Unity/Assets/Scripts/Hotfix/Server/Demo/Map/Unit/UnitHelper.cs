@@ -533,5 +533,11 @@ namespace ET.Server
 
             return units;
         }
+        
+        public static bool IsRobot(this Unit self)
+        {
+            return self.Type == UnitType.Player && self.GetComponent<UserInfoComponentS>().UserInfo.RobotId > 0;
+        }
+        
     }
 }

@@ -996,8 +996,17 @@ namespace ET
         /// </summary>
         [StaticField]
         public static int LogLevel = 0;
-
-
+        [StaticField]
+        public static List<string> KillInfoList = new List<string>();
+        [StaticField]
+        public static string NoticeLastContent = string.Empty;
+        [StaticField]
+        public static long NoticeLastGetTime = 0;
+        [StaticField]
+        public static List<string> LoginInfoList = new List<string>();
+        [StaticField]
+        public static List<string> ZuobiInfoList  = new List<string>(); 
+        
         /// <summary>
         /// 一键出售材料
         /// </summary>
