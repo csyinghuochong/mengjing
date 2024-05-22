@@ -12967,6 +12967,41 @@ namespace ET
 
 	}
 
+//邀请回复
+	[Message(OuterMessage.C2M_UnionInviteReplyRequest)]
+	[MemoryPackable]
+	public partial class C2M_UnionInviteReplyRequest: MessageObject, ILocationMessage
+	{
+		public static C2M_UnionInviteReplyRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_UnionInviteReplyRequest), isFromPool) as C2M_UnionInviteReplyRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnionId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ReplyCode { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnionId = default;
+			this.ReplyCode = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -13339,5 +13374,6 @@ namespace ET
 		 public const ushort M2C_UnionDonationResponse = 10369;
 		 public const ushort C2M_UnionInviteRequest = 10370;
 		 public const ushort M2C_UnionInviteMessage = 10371;
+		 public const ushort C2M_UnionInviteReplyRequest = 10372;
 	}
 }

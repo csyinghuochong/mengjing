@@ -2880,6 +2880,48 @@ namespace ET
 
 	}
 
+	[Message(InnerMessage.M2U_UnionInviteReplyMessage)]
+	[MemoryPackable]
+	public partial class M2U_UnionInviteReplyMessage: MessageObject, ILocationMessage
+	{
+		public static M2U_UnionInviteReplyMessage Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2U_UnionInviteReplyMessage), isFromPool) as M2U_UnionInviteReplyMessage; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnionId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ReplyCode { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UnitID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.UnionId = default;
+			this.ReplyCode = default;
+			this.UnitID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -2967,5 +3009,6 @@ namespace ET
 		 public const ushort Chat2M_UpdateUnion = 20084;
 		 public const ushort M2U_UnionOperationRequest = 20085;
 		 public const ushort U2M_UnionOperationResponse = 20086;
+		 public const ushort M2U_UnionInviteReplyMessage = 20087;
 	}
 }

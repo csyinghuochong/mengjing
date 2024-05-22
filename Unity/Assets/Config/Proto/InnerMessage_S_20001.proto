@@ -731,3 +731,13 @@ message U2M_UnionOperationResponse // IResponse
 	string Message = 92;
 	string Par = 1;          //返回值
 }
+
+message M2U_UnionInviteReplyMessage // ILocationMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 UnionId = 1;
+	int32 ReplyCode = 2; //0拒绝 1同意
+	int64 UnitID = 3;
+}
