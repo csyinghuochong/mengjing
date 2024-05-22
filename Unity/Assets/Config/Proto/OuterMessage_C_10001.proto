@@ -3433,3 +3433,36 @@ message U2C_DonationRankListResponse // ILocationResponse
 	string Message = 92;
 	repeated RankingInfo RankList = 1;		//排行榜列表
 }
+
+message M2C_UnionRaceInfoResult // ILocationMessage
+{
+	int64 ActorId = 1;
+	int64 UnitId = 2;
+	int32 SceneType  = 5;
+}
+
+//ResponseType Actor_TransferResponse
+message Actor_TransferRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 SceneType = 1;
+	int32 SceneId = 2;
+	int32 Difficulty = 5;
+	string paramInfo = 6;
+}
+
+message Actor_TransferResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+message M2C_HorseNoticeInfo // ILocationMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	string NoticeText = 1;
+	int32 NoticeType = 2;
+}

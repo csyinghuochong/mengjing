@@ -15,7 +15,7 @@ namespace ET.Server
                  case SceneTypeEnum.LocalDungeon:
                      long fubenid = IdGenerater.Instance.GenerateId();
                      long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-                     Scene fubnescene = await GateMapFactory.Create(scene.Root(), fubenid, fubenInstanceId, "LocalDungeon" + fubenid.ToString());
+                     Scene fubnescene =  GateMapFactory.Create(scene.Root(), fubenid, fubenInstanceId, "LocalDungeon" + fubenid.ToString());
                      //fubnescene.AddComponent<YeWaiRefreshComponent>();
                      LocalDungeonComponent localDungeon = fubnescene.AddComponent<LocalDungeonComponent>();
                      localDungeon.FubenDifficulty = request.Difficulty;

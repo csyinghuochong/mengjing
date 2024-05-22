@@ -13385,6 +13385,143 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.M2C_UnionRaceInfoResult)]
+	[MemoryPackable]
+	public partial class M2C_UnionRaceInfoResult: MessageObject, ILocationMessage
+	{
+		public static M2C_UnionRaceInfoResult Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_UnionRaceInfoResult), isFromPool) as M2C_UnionRaceInfoResult; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int SceneType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.SceneType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(Actor_TransferResponse))]
+	[Message(OuterMessage.Actor_TransferRequest)]
+	[MemoryPackable]
+	public partial class Actor_TransferRequest: MessageObject, ILocationRequest
+	{
+		public static Actor_TransferRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Actor_TransferRequest), isFromPool) as Actor_TransferRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int SceneType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int SceneId { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int Difficulty { get; set; }
+
+		[MemoryPackOrder(5)]
+		public string paramInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.SceneType = default;
+			this.SceneId = default;
+			this.Difficulty = default;
+			this.paramInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.Actor_TransferResponse)]
+	[MemoryPackable]
+	public partial class Actor_TransferResponse: MessageObject, ILocationResponse
+	{
+		public static Actor_TransferResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Actor_TransferResponse), isFromPool) as Actor_TransferResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_HorseNoticeInfo)]
+	[MemoryPackable]
+	public partial class M2C_HorseNoticeInfo: MessageObject, ILocationMessage
+	{
+		public static M2C_HorseNoticeInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_HorseNoticeInfo), isFromPool) as M2C_HorseNoticeInfo; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string NoticeText { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int NoticeType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.NoticeText = default;
+			this.NoticeType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -13770,5 +13907,9 @@ namespace ET
 		 public const ushort M2C_UnionXiuLianResponse = 10382;
 		 public const ushort C2U_DonationRankListRequest = 10383;
 		 public const ushort U2C_DonationRankListResponse = 10384;
+		 public const ushort M2C_UnionRaceInfoResult = 10385;
+		 public const ushort Actor_TransferRequest = 10386;
+		 public const ushort Actor_TransferResponse = 10387;
+		 public const ushort M2C_HorseNoticeInfo = 10388;
 	}
 }
