@@ -1,24 +1,21 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2U_UnionJingXuanHandler : AMActorRpcHandler<Scene, C2U_UnionJingXuanRequest, U2C_UnionJingXuanResponse>
+    [MessageHandler(SceneType.Union)]
+    public class C2U_UnionJingXuanHandler : MessageHandler<Scene, C2U_UnionJingXuanRequest, U2C_UnionJingXuanResponse>
     {
-        protected override async ETTask Run(Scene scene, C2U_UnionJingXuanRequest request, U2C_UnionJingXuanResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2U_UnionJingXuanRequest request, U2C_UnionJingXuanResponse response)
         {
-            long dbCacheId = DBHelper.GetDbCacheId(scene.DomainZone());
-            DBUnionInfo dBUnionInfo = await scene.GetComponent<UnionSceneComponent>().GetDBUnionInfo(request.UnionId);
+            DBUnionInfo dBUnionInfo = await UnitCacheHelper.GetComponent<DBUnionInfo>(scene.Root(), request.UnionId);
             if (dBUnionInfo == null)
             {
                 response.Error = ErrorCode.ERR_Union_Not_Exist;
-                reply();
                 return;
             }
             if (dBUnionInfo.UnionInfo.JingXuanEndTime == 0)
             {
                 response.Error = ErrorCode.ERR_AlreadyFinish;
-                reply();
                 return;
             }
 
@@ -38,8 +35,7 @@ namespace ET
             }
             response.JingXuanList = dBUnionInfo.UnionInfo.JingXuanList;
             response.JingXuanEndTime = dBUnionInfo.UnionInfo.JingXuanEndTime;
-            DBHelper.SaveComponentCache(scene.DomainZone(), request.UnionId, dBUnionInfo).Coroutine();
-            reply();
+            UnitCacheHelper.SaveComponentCache(scene.Root(), dBUnionInfo).Coroutine();
             await ETTask.CompletedTask;
         }
     }
