@@ -15002,6 +15002,106 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.TeamPlayerInfo)]
+	[MemoryPackable]
+	public partial class TeamPlayerInfo: MessageObject
+	{
+		public static TeamPlayerInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(TeamPlayerInfo), isFromPool) as TeamPlayerInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int HeadId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int PlayerLv { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int WeaponId { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(4)]
+		public long UserID { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int Damage { get; set; }
+
+		[MemoryPackOrder(6)]
+		public long Combat { get; set; }
+
+		[MemoryPackOrder(7)]
+		public int Occ { get; set; }
+
+		[MemoryPackOrder(8)]
+		public int InFuben { get; set; }
+
+		[MemoryPackOrder(9)]
+		public int RobotId { get; set; }
+
+		[MemoryPackOrder(10)]
+		public int OccTwo { get; set; }
+
+		[MemoryPackOrder(11)]
+		public int Prepare { get; set; }
+
+		[MemoryPackOrder(12)]
+		public List<int> FashionIds { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.HeadId = default;
+			this.PlayerLv = default;
+			this.WeaponId = default;
+			this.PlayerName = default;
+			this.UserID = default;
+			this.Damage = default;
+			this.Combat = default;
+			this.Occ = default;
+			this.InFuben = default;
+			this.RobotId = default;
+			this.OccTwo = default;
+			this.Prepare = default;
+			this.FashionIds.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_SyncMiJingDamage)]
+	[MemoryPackable]
+	public partial class M2C_SyncMiJingDamage: MessageObject, IMessage
+	{
+		public static M2C_SyncMiJingDamage Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SyncMiJingDamage), isFromPool) as M2C_SyncMiJingDamage; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<TeamPlayerInfo> DamageList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.DamageList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -15433,5 +15533,7 @@ namespace ET
 		 public const ushort M2C_SoloMatchResult = 10428;
 		 public const ushort SoloPlayerResultInfo = 10429;
 		 public const ushort M2C_SoloDungeon = 10430;
+		 public const ushort TeamPlayerInfo = 10431;
+		 public const ushort M2C_SyncMiJingDamage = 10432;
 	}
 }

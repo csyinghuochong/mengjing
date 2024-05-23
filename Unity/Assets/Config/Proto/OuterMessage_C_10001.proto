@@ -3843,7 +3843,29 @@ message M2C_SoloDungeon // IMessage
 	int32 SoloResult = 2;					// 0 失败  1 获胜
 }
 
+message TeamPlayerInfo
+{
+	int32 HeadId = 1;
+	int32 PlayerLv = 2;
+	int32 WeaponId = 3;
+	string PlayerName = 4;
+	int64 UserID = 5;
+	int32 Damage = 6;
+	int64 Combat = 7;
+	int32 Occ = 8;
+	int32 InFuben = 9;
+	int32 RobotId = 10;
+	int32 OccTwo = 11;
+	int32 Prepare = 12;
+	repeated int32 FashionIds = 13;
+}
 
+message M2C_SyncMiJingDamage // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	repeated TeamPlayerInfo DamageList = 1;
+}
 
 
 
