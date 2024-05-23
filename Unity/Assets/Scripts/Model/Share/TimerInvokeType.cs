@@ -30,6 +30,7 @@
         public const int RankeTimer = 218;
         public const int ArenaSceneTimer = 219;
         public const int PaiMaiTimer = 220;
+        public const int SoloDungeonTimer = 221;
         
         public const int RoomUpdate = 301;
         public const int JoystickTimer = 302;

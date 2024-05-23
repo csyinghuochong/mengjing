@@ -189,11 +189,11 @@ namespace ET.Server
             if (rankingInfo != null)
             {
                 ActorId mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "Rank").ActorId;
-                R2S_SoloResultResponse Response = (R2S_SoloResultResponse)await ActorMessageSenderComponent.Instance.Call(mapInstanceId,
+                R2S_SoloResultResponse Response = (R2S_SoloResultResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,
                     new S2R_SoloResultRequest() { CampId = -3, RankingInfo = rankingInfo });
             }
 
-            long gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.DomainZone(), "Gate1").InstanceId;
+            ActorId gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "Gate1").ActorId;
             if (rankingInfo != null)
             {
                 self.UpdateSoloRank(rankingInfo.UserId, 1).Coroutine();
@@ -217,7 +217,7 @@ namespace ET.Server
                 }
 
                 scene.GetComponent<SoloDungeonComponent>().KickOutPlayer();
-                await TimerComponent.Instance.WaitAsync(60000 + RandomHelper.RandomNumber(0, 1000));
+                await self.Root().GetComponent<TimerComponent>().WaitAsync(60000 + RandomHelper.RandomNumber(0, 1000));
                 TransferHelper.NoticeFubenCenter(scene, 2).Coroutine();
                 scene.Dispose();
             }
@@ -308,7 +308,7 @@ namespace ET.Server
             Dictionary<long, long> fubenids = new Dictionary<long, long>();
 
             //通知玩家
-            long gateServerId = DBHelper.GetGateServerId(self.DomainZone());
+            ActorId gateServerId = UnitCacheHelper.GetGateServerId(self.Zone());
             List<SoloPlayerInfo> playerlist = new List<SoloPlayerInfo>();
             for (int i = self.MatchList.Count - 1; i >= 0; i--)
             {
@@ -376,13 +376,13 @@ namespace ET.Server
                 //循环给每个要进入的玩家发送进入副本的消息
                 //发送消息获取对应的玩家数据
                 G2T_GateUnitInfoResponse g2M_UpdateUnitResponse =
-                        (G2T_GateUnitInfoResponse)await ActorMessageSenderComponent.Instance.Call(gateServerId,
+                        (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>().Call(gateServerId,
                             new T2G_GateUnitInfoRequest() { UserID = playerlist[i].UnitId });
                 //判断目标是玩家且当前是在线的
                 if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
                 {
                     //给对应玩家发送进入地图的消息
-                    MessageHelper.SendActor(g2M_UpdateUnitResponse.SessionInstanceId, self.m2C_SoloMatchResult);
+                    MapMessageHelper.SendToClient(self.Root(), g2M_UpdateUnitResponse.SessionInstanceId, self.m2C_SoloMatchResult);
 
                     //匹配成功的要移除匹配列表
                     if (self.MatchList.Contains(playerlist[i]))
@@ -400,13 +400,13 @@ namespace ET.Server
             long fubenid = IdGenerater.Instance.GenerateId();
             long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
             //创建新的副本场景,并给副本场景附加对应组件
-            Scene fubnescene = SceneFactory.Create(self, fubenid, fubenInstanceId, self.DomainZone(), "Solo" + unitID_1.ToString(), SceneType.Fuben);
+            Scene fubnescene = GateMapFactory.Create(self, fubenid, fubenInstanceId, "Solo" + unitID_1.ToString());
             fubnescene.AddComponent<SoloDungeonComponent>();
             TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
             MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
             mapComponent.SetMapInfo((int)SceneTypeEnum.Solo, sceneId, 0);
             mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(sceneId).MapID;
-            Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);
+            //Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);
             return fubenid;
         }
 
