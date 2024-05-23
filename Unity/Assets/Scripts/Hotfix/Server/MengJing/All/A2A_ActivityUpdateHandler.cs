@@ -187,7 +187,7 @@ namespace ET.Server
                 case SceneType.DBCache:
                     if (!ComHelperS.IsInnerNet())
                     {
-                        scene.GetComponent<DBCacheComponent>().CheckUnitCacheList();
+                        scene.GetComponent<UnitCacheComponent>().CheckUnitCacheList();
                     }
                     break;
                 case SceneType.Solo:
@@ -205,7 +205,7 @@ namespace ET.Server
                     if (hour == 0)
                     {
                         //Log.Console($"FubenCenter定时刷新: {scene.DomainZone()} {hour}");
-                        LogHelper.LogWarning($"FubenCenter定时刷新: {scene.DomainZone()} {hour}", true);
+                        LogHelper.LogWarning($"FubenCenter定时刷新: {scene.Zone()} {hour}", true);
                         FubenCenterComponent fubenCenter = scene.GetComponent<FubenCenterComponent>();
                         foreach (var item in fubenCenter.Children)
                         {
@@ -228,7 +228,7 @@ namespace ET.Server
                 case SceneType.AccountCenter:
                     if (hour == 0)
                     {
-                        scene.GetComponent<FangChenMiComponent>().CheckHoliday().Coroutine();
+                        scene.GetComponent<FangChenMiComponentS>().CheckHoliday().Coroutine();
                     }
 
                     LogHelper.CheckLogSize();

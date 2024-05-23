@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [FriendOf(typeof(DBCenterAccountInfo))]
-    [FriendOf(typeof(FangChenMiComponent))]
+    [FriendOf(typeof(FangChenMiComponentS))]
     [MessageHandler(SceneType.AccountCenter)]
     public class A2Center_CheckAccountHandler : MessageHandler<Scene, A2Center_CheckAccount, Center2A_CheckAccount>
     {
@@ -15,13 +15,13 @@ namespace ET.Server
             DBComponent dBComponent = scene.Root().GetComponent<DBManagerComponent>().GetZoneDB(scene.Zone());
             List<DBCenterAccountInfo> centerAccountInfoList = await dBComponent.Query<DBCenterAccountInfo>(scene.Zone(), d => d.Account == request.AccountName && d.Password == request.Password);
 
-            //ÊÖ»úºÅÅÐ¶Ï3/4
+            //ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½3/4
             if (centerAccountInfoList.Count == 0 && (request.ThirdLogin == "3" || request.ThirdLogin == "4"))
             {
                 string Password = request.Password == "3" ? "4" : "3";
                 centerAccountInfoList = await dBComponent.Query<DBCenterAccountInfo>(scene.Zone(), d => d.Account == request.AccountName && d.Password == Password);
             }
-            //°ó¶¨ÊÖ»úºÅµÄÕËºÅ
+            //ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Åµï¿½ï¿½Ëºï¿½
             if (centerAccountInfoList.Count == 0 && (request.ThirdLogin == "3" || request.ThirdLogin == "4"))
             {
                 centerAccountInfoList = await dBComponent.Query<DBCenterAccountInfo>(scene.Zone(),
@@ -42,8 +42,8 @@ namespace ET.Server
                     response.PlayerInfo.RechargeInfos[i].OrderInfo = string.Empty;
                 }
             }
-            response.IsHoliday = scene.GetComponent<FangChenMiComponent>().IsHoliday;
-            response.StopServer = scene.GetComponent<FangChenMiComponent>().StopServer;
+            response.IsHoliday = scene.GetComponent<FangChenMiComponentS>().IsHoliday;
+            response.StopServer = scene.GetComponent<FangChenMiComponentS>().StopServer;
 
             await ETTask.CompletedTask;
         }

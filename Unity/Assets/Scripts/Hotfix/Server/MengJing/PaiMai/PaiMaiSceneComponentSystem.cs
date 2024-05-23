@@ -704,7 +704,7 @@ namespace ET.Server
                 {
                     ActorId emaiId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "EMail").ActorId;
                     E2P_PaiMaiOverTimeResponse g_SendChatRequest =
-                            (E2P_PaiMaiOverTimeResponse)await ActorMessageSenderComponent.Instance.Call(emaiId,
+                            (E2P_PaiMaiOverTimeResponse)await self.Root().GetComponent<MessageSender>().Call(emaiId,
                                 new P2E_PaiMaiOverTimeRequest() { PaiMaiItemInfo = paiMaiItemInfo });
                     dBPaiMainInfo.PaiMaiItemInfos.RemoveAt(i);
                 }

@@ -5,7 +5,7 @@ namespace ET.Server
 {
 
     [FriendOf(typeof(DBCenterAccountInfo))]
-    [FriendOf(typeof(FangChenMiComponent))]
+    [FriendOf(typeof(FangChenMiComponentS))]
     [MessageHandler(SceneType.AccountCenter)]
     public class A2Center_RegisterAccountHandler : MessageHandler<Scene, A2Center_RegisterAccount, Center2A_RegisterAccount>
     {

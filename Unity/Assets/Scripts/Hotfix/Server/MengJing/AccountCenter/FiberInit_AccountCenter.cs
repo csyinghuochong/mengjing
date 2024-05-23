@@ -14,7 +14,7 @@ namespace ET.Server
             root.AddComponent<ProcessInnerSender>();
             root.AddComponent<MessageSender>();
             root.AddComponent<LocationManagerComoponent>();
-            root.AddComponent<FangChenMiComponent>();
+            root.AddComponent<FangChenMiComponentS>();
             root.AddComponent<TokenComponent>();
             root.AddComponent<DBManagerComponent>();
             await ETTask.CompletedTask;

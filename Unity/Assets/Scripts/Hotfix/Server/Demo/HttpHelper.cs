@@ -3,7 +3,7 @@ using System.Text;
 
 namespace ET.Server
 {
-    public static partial class HttpHelper
+    public static partial class HttpHelper2
     {
         public static void Response(HttpListenerContext context, object response)
         {

@@ -105,5 +105,45 @@ namespace ET.Server
                 cache.Delete(unitId);
             }
         }
+        
+        public static void CheckUnitCacheList(this UnitCacheComponent self)
+        {
+            self.WaitDeletUnit.Clear();
+            long serverTime = TimeHelper.ServerNow();
+            int zone = self.Zone();
+
+            foreach ((long unitid, long lasttime) in self.UnitCachesTime)
+            {
+                if (lasttime != 0 && serverTime - lasttime > TimeHelper.Hour * 4)
+                {
+                    if (!self.WaitDeletUnit.Contains(unitid))
+                    {
+                        self.WaitDeletUnit.Add(unitid);
+                    }
+                }
+            }
+
+            int removeNumber = 200;
+            Log.Warning($"待移除缓存玩家: {self.Zone()} {self.WaitDeletUnit.Count}");
+            for (int i = self.WaitDeletUnit.Count - 1; i >= 0; i--)
+            {
+                //Log.Console($"长期离线，移除玩家11: {zone}  {self.WaitDeletUnit[i]}");
+                self.DeleteRole(self.WaitDeletUnit[i]);
+                removeNumber--;
+                if (removeNumber <= 0)
+                {
+                    break;
+                }
+            }
+            self.WaitDeletUnit.Clear();
+            self.CurHourTime = TimeHelper.ServerNow();
+        }
+        
+        public static void DeleteRole(this UnitCacheComponent self, long unitId)
+        {
+            self.Delete(unitId);
+
+           
+        }
     }
 }
