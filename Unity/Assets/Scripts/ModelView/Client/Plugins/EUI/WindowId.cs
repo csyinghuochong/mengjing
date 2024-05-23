@@ -47,5 +47,6 @@ namespace ET.Client
 		WindowID_Watch,
 		WindowID_UnionRecords,
 		WindowID_TaskGet,
+		WindowID_Warehouse,
 	}
 }
