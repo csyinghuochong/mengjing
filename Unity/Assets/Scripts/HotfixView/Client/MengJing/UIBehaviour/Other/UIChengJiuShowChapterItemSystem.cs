@@ -7,7 +7,7 @@ namespace ET.Client
 {
     [FriendOf(typeof (UIChengJiuShowChapterItem))]
     [EntitySystemOf(typeof (UIChengJiuShowChapterItem))]
-    public static class UIChengJiuShowChapterItemSystem
+    public static partial class UIChengJiuShowChapterItemSystem
     {
         [EntitySystem]
         private static void Awake(this UIChengJiuShowChapterItem self, GameObject gameObject)

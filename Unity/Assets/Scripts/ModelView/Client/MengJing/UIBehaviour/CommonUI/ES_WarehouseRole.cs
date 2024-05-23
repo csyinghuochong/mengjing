@@ -1,12 +1,21 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_WarehouseRole : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_WarehouseRole : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public int CurrentItemType;
+		public List<GameObject> LockList = new();
+		public List<GameObject> NoLockList = new();
+		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemHouseItems;
+		public List<BagInfo> ShowHouseBagInfos = new();
+		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemBagItems;
+		public List<BagInfo> ShowBagBagInfos = new();
+		
 		public UnityEngine.UI.LoopVerticalScrollRect E_BagItems2LoopVerticalScrollRect
      	{
      		get

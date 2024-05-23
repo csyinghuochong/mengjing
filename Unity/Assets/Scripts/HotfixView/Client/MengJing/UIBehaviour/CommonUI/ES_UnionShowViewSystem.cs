@@ -111,6 +111,8 @@ namespace ET.Client
 
             self.AddUIScrollItems(ref self.ScrollItemUnionListItems, self.ShowUnionListItems.Count);
             self.E_UnionListItemsLoopVerticalScrollRect.SetVisible(true, self.ShowUnionListItems.Count);
+
+            await ETTask.CompletedTask;
         }
 
         public static void ResetUI(this ES_UnionShow self)

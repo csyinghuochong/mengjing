@@ -8,7 +8,7 @@ namespace ET.Client
     [FriendOf(typeof (UIChengJiuShowChapterItem))]
     [FriendOf(typeof (UIChengJiuShowType))]
     [EntitySystemOf(typeof (UIChengJiuShowType))]
-    public static class UIChengJiuShowTypeSystem
+    public static partial class UIChengJiuShowTypeSystem
     {
         [EntitySystem]
         private static void Awake(this UIChengJiuShowType self, GameObject gameObject1, GameObject gameObject2)
@@ -39,7 +39,7 @@ namespace ET.Client
         {
             foreach (UIChengJiuShowChapterItem item in self.UIChengJiuShowChapterItems)
             {
-                item.SetSelected(type);
+                item.SetSelected(chapter);
             }
 
             self.OnChapterAction?.Invoke(type, chapter);
@@ -64,7 +64,8 @@ namespace ET.Client
                     UIChengJiuShowChapterItem item = null;
                     if (i < self.UIChengJiuShowChapterItems.Count)
                     {
-                        self.UIChengJiuShowChapterItems[i].Init(self.ChengJiuType, showChapter[i], self.OnChapter);
+                        item = self.UIChengJiuShowChapterItems[i];
+                        item.Init(self.ChengJiuType, showChapter[i], self.OnChapter);
                     }
                     else
                     {

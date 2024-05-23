@@ -196,6 +196,7 @@ namespace ET.Client
             // }
             //
             // self.ZoneScene().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.OpenUI, UIType.UITaskGet);
+            await ETTask.CompletedTask;
         }
 
         public static void OnButtonWeeklyCommit(this DlgTaskGet self)
@@ -532,6 +533,8 @@ namespace ET.Client
                 // ui.GetComponent<UIGiveTaskComponent>().InitTask(self.TaskId);
                 // UIHelper.Remove(self.ZoneScene(), UIType.UITaskGet);
             }
+
+            await ETTask.CompletedTask;
         }
 
         public static void OnButtonGetTask(this DlgTaskGet self)
