@@ -939,8 +939,8 @@ namespace ET.Server
 
         public static async ETTask SendSeasonTowerReward(this RankSceneComponent self)
         {
-            int zone = self.DomainZone();
-            await TimerComponent.Instance.WaitAsync(RandomHelper.RandomNumber(5000, 10000));
+            int zone = self.Zone();
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(5000, 10000));
             DateTime dateTime = TimeHelper.DateTimeNow();
             if (dateTime.DayOfWeek != DayOfWeek.Monday)
             {
@@ -952,7 +952,7 @@ namespace ET.Server
 
             long serverTime = TimeHelper.ServerNow();
             List<KeyValuePairLong> rankingInfos = self.DBRankInfo.rankSeasonTower;
-            long mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.DomainZone(), Enum.GetName(SceneType.EMail)).InstanceId;
+            ActorId mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "EMail").ActorId;
             for (int i = 0; i < rankingInfos.Count; i++)
             {
                 RankRewardConfig rankRewardConfig = RankHelper.GetRankReward(i + 1, 7);
@@ -970,7 +970,7 @@ namespace ET.Server
 
                 if (i <= 10)
                 {
-                    Log.Warning($"赛季之塔奖励: {self.DomainZone()} {rankingInfos[i].KeyId}");
+                    Log.Warning($"赛季之塔奖励: {self.Zone()} {rankingInfos[i].KeyId}");
                 }
 
                 string[] needList = rankRewardConfig.RewardItems.Split('@');
@@ -987,7 +987,7 @@ namespace ET.Server
                     mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.RankReward}_{serverTime}" });
                 }
 
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await ActorMessageSenderComponent.Instance.Call(mailServerId,
+                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,
                     new M2E_EMailSendRequest() { Id = rankingInfos[i].KeyId, MailInfo = mailInfo });
             }
 
@@ -1002,8 +1002,8 @@ namespace ET.Server
         /// <returns></returns>
         public static async ETTask SendCombatReward(this RankSceneComponent self)
         {
-            int zone = self.DomainZone();
-            await TimerComponent.Instance.WaitAsync(RandomHelper.RandomNumber(5000, 10000));
+            int zone = self.Zone();
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(5000, 10000));
             DateTime dateTime = TimeHelper.DateTimeNow();
             if (!RankHelper.HaveReward(1, (int)dateTime.DayOfWeek))
             {
@@ -1013,7 +1013,7 @@ namespace ET.Server
             Log.Debug($"发放战力排行榜奖励： {zone}");
             long serverTime = TimeHelper.ServerNow();
             List<RankingInfo> rankingInfos = self.DBRankInfo.rankingInfos;
-            long mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.DomainZone(), Enum.GetName(SceneType.EMail)).InstanceId;
+            ActorId mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "EMail").ActorId;
             for (int i = 0; i < rankingInfos.Count; i++)
             {
                 RankRewardConfig rankRewardConfig = RankHelper.GetRankReward(i + 1, 1);
@@ -1031,7 +1031,7 @@ namespace ET.Server
 
                 if (i <= 10)
                 {
-                    Log.Warning($"战力奖励: {self.DomainZone()} {rankingInfos[i].UserId}");
+                    Log.Warning($"战力奖励: {self.Zone()} {rankingInfos[i].UserId}");
                 }
 
                 string[] needList = rankRewardConfig.RewardItems.Split('@');
@@ -1048,15 +1048,15 @@ namespace ET.Server
                     mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.RankReward}_{serverTime}" });
                 }
 
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await ActorMessageSenderComponent.Instance.Call(mailServerId,
+                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,
                     new M2E_EMailSendRequest() { Id = rankingInfos[i].UserId, MailInfo = mailInfo });
             }
         }
 
         public static async ETTask SendPetReward(this RankSceneComponent self)
         {
-            int zone = self.DomainZone();
-            await TimerComponent.Instance.WaitAsync(RandomHelper.RandomNumber(1000, 10000));
+            int zone = self.Zone();
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(1000, 10000));
             DateTime dateTime = TimeHelper.DateTimeNow();
             if (!RankHelper.HaveReward(2, (int)dateTime.DayOfWeek))
             {
@@ -1066,7 +1066,7 @@ namespace ET.Server
             Log.Debug($"发放宠物排行榜奖励： {zone}");
             long serverTime = TimeHelper.ServerNow();
             List<RankPetInfo> rankingInfos = self.DBRankInfo.rankingPets;
-            long mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.DomainZone(), Enum.GetName(SceneType.EMail)).InstanceId;
+            ActorId mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "EMail").ActorId;
             for (int i = 0; i < rankingInfos.Count; i++)
             {
                 bool havePetUId = false;
@@ -1111,7 +1111,7 @@ namespace ET.Server
                     mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.RankReward}_{serverTime}" });
                 }
 
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await ActorMessageSenderComponent.Instance.Call(mailServerId,
+                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,
                     new M2E_EMailSendRequest() { Id = rankingInfos[i].UserId, MailInfo = mailInfo });
             }
         }
