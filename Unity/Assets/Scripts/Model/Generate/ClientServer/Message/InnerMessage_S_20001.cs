@@ -3902,6 +3902,45 @@ namespace ET
 
 	}
 
+//通知机器人进程
+	[Message(InnerMessage.G2Robot_MessageRequest)]
+	[MemoryPackable]
+	public partial class G2Robot_MessageRequest: MessageObject, IMessage
+	{
+		public static G2Robot_MessageRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(G2Robot_MessageRequest), isFromPool) as G2Robot_MessageRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int Zone { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int MessageType { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Zone = default;
+			this.MessageType = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -4019,5 +4058,6 @@ namespace ET
 		 public const ushort F2R_WorldLvUpdateResponse = 20114;
 		 public const ushort R2A_Broadcast = 20115;
 		 public const ushort A2R_Broadcast = 20116;
+		 public const ushort G2Robot_MessageRequest = 20117;
 	}
 }

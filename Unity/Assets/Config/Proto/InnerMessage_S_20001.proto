@@ -993,3 +993,14 @@ message A2R_Broadcast // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//通知机器人进程
+message G2Robot_MessageRequest // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int32 Zone = 1;
+	int32 MessageType = 2;
+	string Message = 3;
+}
