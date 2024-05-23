@@ -3932,7 +3932,7 @@ message M2C_CreateDropItems // IMessage
 }
 
 //组队副本结算
-message M2C_TeamDungeonSettlement // IActorMessage
+message M2C_TeamDungeonSettlement // IMessage
 {
 	int32 RpcId = 90;
 	int32 Error = 92;

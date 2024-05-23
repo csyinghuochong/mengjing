@@ -15361,7 +15361,7 @@ namespace ET
 //组队副本结算
 	[Message(OuterMessage.M2C_TeamDungeonSettlement)]
 	[MemoryPackable]
-	public partial class M2C_TeamDungeonSettlement: MessageObject, IActorMessage
+	public partial class M2C_TeamDungeonSettlement: MessageObject, IMessage
 	{
 		public static M2C_TeamDungeonSettlement Create(bool isFromPool = false) 
 		{ 
