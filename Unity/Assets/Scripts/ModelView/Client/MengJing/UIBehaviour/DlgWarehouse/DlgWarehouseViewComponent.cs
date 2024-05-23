@@ -92,7 +92,7 @@ namespace ET.Client
      		}
      	}
 
-		public ES_RoleBag ES_RoleBag
+		public ES_WarehouseRole ES_WarehouseRole
      	{
      		get
      		{
@@ -101,16 +101,16 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolebag == null )
+     			if( this.m_es_warehouserole == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleBag");
-		    	   this.m_es_rolebag = this.AddChild<ES_RoleBag,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WarehouseRole");
+		    	   this.m_es_warehouserole = this.AddChild<ES_WarehouseRole,Transform>(subTrans);
      			}
-     			return this.m_es_rolebag;
+     			return this.m_es_warehouserole;
      		}
      	}
 
-		public ES_RoleProperty ES_RoleProperty
+		public ES_WarehouseAccount ES_WarehouseAccount
      	{
      		get
      		{
@@ -119,16 +119,16 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_roleproperty == null )
+     			if( this.m_es_warehouseaccount == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleProperty");
-		    	   this.m_es_roleproperty = this.AddChild<ES_RoleProperty,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WarehouseAccount");
+		    	   this.m_es_warehouseaccount = this.AddChild<ES_WarehouseAccount,Transform>(subTrans);
      			}
-     			return this.m_es_roleproperty;
+     			return this.m_es_warehouseaccount;
      		}
      	}
 
-		public ES_RoleGem ES_RoleGem
+		public ES_WarehouseGem ES_WarehouseGem
      	{
      		get
      		{
@@ -137,48 +137,12 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolegem == null )
+     			if( this.m_es_warehousegem == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleGem");
-		    	   this.m_es_rolegem = this.AddChild<ES_RoleGem,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WarehouseGem");
+		    	   this.m_es_warehousegem = this.AddChild<ES_WarehouseGem,Transform>(subTrans);
      			}
-     			return this.m_es_rolegem;
-     		}
-     	}
-
-		public ES_RoleHuiShou ES_RoleHuiShou
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_es_rolehuishou == null )
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleHuiShou");
-		    	   this.m_es_rolehuishou = this.AddChild<ES_RoleHuiShou,Transform>(subTrans);
-     			}
-     			return this.m_es_rolehuishou;
-     		}
-     	}
-
-		public ES_RoleQiangHua ES_RoleQiangHua
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_es_roleqianghua == null )
-     			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleQiangHua");
-		    	   this.m_es_roleqianghua = this.AddChild<ES_RoleQiangHua,Transform>(subTrans);
-     			}
-     			return this.m_es_roleqianghua;
+     			return this.m_es_warehousegem;
      		}
      	}
 
@@ -189,11 +153,9 @@ namespace ET.Client
 			this.m_E_2Toggle = null;
 			this.m_E_3Toggle = null;
 			this.m_EG_SubViewRectTransform = null;
-			this.m_es_rolebag = null;
-			this.m_es_roleproperty = null;
-			this.m_es_rolegem = null;
-			this.m_es_rolehuishou = null;
-			this.m_es_roleqianghua = null;
+			this.m_es_warehouserole = null;
+			this.m_es_warehouseaccount = null;
+			this.m_es_warehousegem = null;
 			this.uiTransform = null;
 		}
 
@@ -202,11 +164,9 @@ namespace ET.Client
 		private UnityEngine.UI.Toggle m_E_2Toggle = null;
 		private UnityEngine.UI.Toggle m_E_3Toggle = null;
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
-		private EntityRef<ES_RoleBag> m_es_rolebag = null;
-		private EntityRef<ES_RoleProperty> m_es_roleproperty = null;
-		private EntityRef<ES_RoleGem> m_es_rolegem = null;
-		private EntityRef<ES_RoleHuiShou> m_es_rolehuishou = null;
-		private EntityRef<ES_RoleQiangHua> m_es_roleqianghua = null;
+		private EntityRef<ES_WarehouseRole> m_es_warehouserole = null;
+		private EntityRef<ES_WarehouseAccount> m_es_warehouseaccount = null;
+		private EntityRef<ES_WarehouseGem> m_es_warehousegem = null;
 		public Transform uiTransform = null;
 	}
 }

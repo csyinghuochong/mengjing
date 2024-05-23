@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_WarehouseRole))]
+    [FriendOf(typeof (ES_WarehouseAccount))]
+    [FriendOf(typeof (ES_WarehouseGem))]
     [FriendOf(typeof (DlgWarehouse))]
     public static class DlgWarehouseSystem
     {
@@ -33,10 +36,13 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
+                    self.View.ES_WarehouseRole.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
+                    self.View.ES_WarehouseAccount.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
+                    self.View.ES_WarehouseGem.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
