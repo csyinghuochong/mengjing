@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
     //服务器之间通用通信协议
-    [ActorMessageHandler]
-    public class A2A_ServerMessageHandler : AMActorRpcHandler<Scene, A2A_ServerMessageRequest, A2A_ServerMessageRResponse>
+    [MessageHandler(SceneType.Map)]
+    public class A2A_ServerMessageHandler : MessageHandler<Scene, A2A_ServerMessageRequest, A2A_ServerMessageRResponse>
     {
 
-        protected override async ETTask Run(Scene scene, A2A_ServerMessageRequest request, A2A_ServerMessageRResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, A2A_ServerMessageRequest request, A2A_ServerMessageRResponse response)
         {
             try
             {
@@ -36,21 +37,21 @@ namespace ET
                         if (request.MessageType == NoticeType.StopSever)
                         {
                             scene.GetComponent<RankSceneComponent>().SaveDB().Coroutine();
-                            Log.Debug($"数据落地:  Rank: {scene.DomainZone()}");
+                            Log.Debug($"数据落地:  Rank: {scene.Zone()}");
                         }
                         break;
                     case SceneType.PaiMai:
                         if (request.MessageType == NoticeType.StopSever)
                         {
                             scene.GetComponent<PaiMaiSceneComponent>().SaveDB(0).Coroutine();
-                            Log.Debug($"数据落地:  PaiMai: {scene.DomainZone()}");
+                            Log.Debug($"数据落地:  PaiMai: {scene.Zone()}");
                         }
                         break;
                     case SceneType.Union:
                         if (request.MessageType == NoticeType.StopSever)
                         {
                             scene.GetComponent<UnionSceneComponent>().SaveDB();
-                            Log.Debug($"数据落地:  Union: {scene.DomainZone()}");
+                            Log.Debug($"数据落地:  Union: {scene.Zone()}");
                         }
                         break;
                     case SceneType.Chat:
@@ -125,8 +126,7 @@ namespace ET
                     default:
                         break;
                 }
-
-                reply();
+                
                 await ETTask.CompletedTask;
             }
             catch (Exception e)
