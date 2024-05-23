@@ -58,12 +58,12 @@ namespace ET.Client
 
         public static WindowID GetUIPath(string uitype)
         {
-            if (uitype == "DlgTaskGet")
+            return uitype switch
             {
-                return WindowID.WindowID_TaskGet;
-            }
-
-            return WindowID.WindowID_Invaild;
+                "UITaskGet" => WindowID.WindowID_TaskGet,
+                "UIWarehouse" => WindowID.WindowID_Warehouse,
+                _ => WindowID.WindowID_Invaild
+            };
         }
 
         public static Color QualityReturnColorDi(int ItenQuality)
