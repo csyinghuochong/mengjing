@@ -15124,6 +15124,58 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.M2C_RankRunRaceMessage)]
+	[MemoryPackable]
+	public partial class M2C_RankRunRaceMessage: MessageObject, IMessage
+	{
+		public static M2C_RankRunRaceMessage Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RankRunRaceMessage), isFromPool) as M2C_RankRunRaceMessage; 
+		}
+
+		[MemoryPackOrder(0)]
+		public List<RankingInfo> RankList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RankList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RankRunRaceReward)]
+	[MemoryPackable]
+	public partial class M2C_RankRunRaceReward: MessageObject, IMessage
+	{
+		public static M2C_RankRunRaceReward Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RankRunRaceReward), isFromPool) as M2C_RankRunRaceReward; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int RankId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ByMail { get; set; }
+
+		[MemoryPackOrder(2)]
+		public List<RewardItem> RewardList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RankId = default;
+			this.ByMail = default;
+			this.RewardList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -15558,5 +15610,7 @@ namespace ET
 		 public const ushort TeamPlayerInfo = 10431;
 		 public const ushort M2C_SyncMiJingDamage = 10432;
 		 public const ushort M2C_RunRaceBattleInfo = 10433;
+		 public const ushort M2C_RankRunRaceMessage = 10434;
+		 public const ushort M2C_RankRunRaceReward = 10435;
 	}
 }

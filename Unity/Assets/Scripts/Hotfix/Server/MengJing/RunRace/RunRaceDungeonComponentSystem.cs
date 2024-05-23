@@ -158,7 +158,7 @@ namespace ET.Server
                 rankPetInfo.Combat = TimeHelper.ServerNow();
                 rankPetInfo.Occ = userInfoComponent.UserInfo.Occ;
                 R2M_RankRunRaceResponse Response =
-                        (R2M_RankRunRaceResponse)await ActorMessageSenderComponent.Instance.Call(mapInstanceId,
+                        (R2M_RankRunRaceResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,
                             new M2R_RankRunRaceRequest() { RankingInfo = rankPetInfo });
                 if (Response.Error != ErrorCode.ERR_Success)
                 {
@@ -168,10 +168,10 @@ namespace ET.Server
                 if (Response.RankId <= 3)
                 {
                     string messagecontent = $"恭喜{userInfoComponent.UserInfo.Name} 获得奔跑大赛第{Response.RankId}名";
-                    ServerMessageHelper.SendBroadMessage(self.DomainZone(), NoticeType.Notice, messagecontent);
+                    BroadMessageHelper.SendBroadMessage(self.Root(), NoticeType.Notice, messagecontent);
                 }
 
-                List<Unit> unitlist = UnitHelper.GetUnitList(self.DomainScene(), UnitType.Player);
+                List<Unit> unitlist = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
                 M2C_RankRunRaceMessage m2C_RankRun = new M2C_RankRunRaceMessage() { RankList = Response.RankList };
                 MessageHelper.SendToClient(unitlist, m2C_RankRun);
 
