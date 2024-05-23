@@ -1059,3 +1059,21 @@ message E2P_PaiMaiOverTimeResponse // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType R2S_SoloResultResponse
+message S2R_SoloResultRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 CampId = 1;
+	RankingInfo RankingInfo = 2;
+}
+
+message R2S_SoloResultResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 RankId = 1; //战力排行
+	int32 PetRankId = 2;
+}

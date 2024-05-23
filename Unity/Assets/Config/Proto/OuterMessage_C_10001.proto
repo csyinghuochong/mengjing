@@ -3792,11 +3792,56 @@ message PaiMaiAuctionRecord
 	int64 Time = 5;
 }
 
+message SoloPlayerInfo
+{
+	int64 MatchTime = 1;
+	int64 UnitId = 2;
+	int64 Combat = 3;
+	string Name = 4;
+	int Occ = 5;
+	int WinNum = 6;
+	int FailNum = 7;
+}
 
+message SoloResultInfo
+{
+	int32 WinTime = 3;
+	int32 FailTime = 4;
+}
 
+message SoloMatchInfo
+{
+	int64 UnitId_1 = 1;
+	int64 UnitId_2 = 2;
+	int64 FubenId = 3;
+}
 
+message M2C_SoloMatchResult // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 Result = 1;
+	int64 FubenId = 2;
+}
 
+message SoloPlayerResultInfo
+{
+	int64 MatchTime = 1;
+	int64 UnitId = 2;
+	int64 Combat = 3;
+	string Name = 4;
+	int32 Occ = 5;
+	int32 WinNum = 6;
+	int32 FailNum = 7;
+}
 
+message M2C_SoloDungeon // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	repeated RewardItem RewardItem = 1;			//solo奖励
+	int32 SoloResult = 2;					// 0 失败  1 获胜
+}
 
 
 

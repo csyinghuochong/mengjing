@@ -14786,6 +14786,222 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.SoloPlayerInfo)]
+	[MemoryPackable]
+	public partial class SoloPlayerInfo: MessageObject
+	{
+		public static SoloPlayerInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(SoloPlayerInfo), isFromPool) as SoloPlayerInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long MatchTime { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long Combat { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string Name { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int Occ { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int WinNum { get; set; }
+
+		[MemoryPackOrder(6)]
+		public int FailNum { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.MatchTime = default;
+			this.UnitId = default;
+			this.Combat = default;
+			this.Name = default;
+			this.Occ = default;
+			this.WinNum = default;
+			this.FailNum = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.SoloResultInfo)]
+	[MemoryPackable]
+	public partial class SoloResultInfo: MessageObject
+	{
+		public static SoloResultInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(SoloResultInfo), isFromPool) as SoloResultInfo; 
+		}
+
+		[MemoryPackOrder(2)]
+		public int WinTime { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int FailTime { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.WinTime = default;
+			this.FailTime = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.SoloMatchInfo)]
+	[MemoryPackable]
+	public partial class SoloMatchInfo: MessageObject
+	{
+		public static SoloMatchInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(SoloMatchInfo), isFromPool) as SoloMatchInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long UnitId_1 { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitId_2 { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long FubenId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UnitId_1 = default;
+			this.UnitId_2 = default;
+			this.FubenId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_SoloMatchResult)]
+	[MemoryPackable]
+	public partial class M2C_SoloMatchResult: MessageObject, IMessage
+	{
+		public static M2C_SoloMatchResult Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SoloMatchResult), isFromPool) as M2C_SoloMatchResult; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int Result { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long FubenId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Result = default;
+			this.FubenId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.SoloPlayerResultInfo)]
+	[MemoryPackable]
+	public partial class SoloPlayerResultInfo: MessageObject
+	{
+		public static SoloPlayerResultInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(SoloPlayerResultInfo), isFromPool) as SoloPlayerResultInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long MatchTime { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long Combat { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string Name { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int Occ { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int WinNum { get; set; }
+
+		[MemoryPackOrder(6)]
+		public int FailNum { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.MatchTime = default;
+			this.UnitId = default;
+			this.Combat = default;
+			this.Name = default;
+			this.Occ = default;
+			this.WinNum = default;
+			this.FailNum = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_SoloDungeon)]
+	[MemoryPackable]
+	public partial class M2C_SoloDungeon: MessageObject, IMessage
+	{
+		public static M2C_SoloDungeon Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SoloDungeon), isFromPool) as M2C_SoloDungeon; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<RewardItem> RewardItem { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public int SoloResult { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.RewardItem.Clear();
+			this.SoloResult = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -15211,5 +15427,11 @@ namespace ET
 		 public const ushort M2C_AreneInfoResult = 10422;
 		 public const ushort M2C_BattleInfoResult = 10423;
 		 public const ushort PaiMaiAuctionRecord = 10424;
+		 public const ushort SoloPlayerInfo = 10425;
+		 public const ushort SoloResultInfo = 10426;
+		 public const ushort SoloMatchInfo = 10427;
+		 public const ushort M2C_SoloMatchResult = 10428;
+		 public const ushort SoloPlayerResultInfo = 10429;
+		 public const ushort M2C_SoloDungeon = 10430;
 	}
 }
