@@ -1121,3 +1121,23 @@ message T2M_TeamUpdateRequest // IMessage
 	int64 UnitId = 2;
 	int64 TeamId = 3;
 }
+
+//进入角斗场
+//ResponseType Arena2M_ArenaEnterResponse
+message M2Arena_ArenaEnterRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 UserID = 1;
+	int32 SceneId = 2;
+}
+
+message Arena2M_ArenaEnterResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	int64 FubenInstanceId = 2;
+}

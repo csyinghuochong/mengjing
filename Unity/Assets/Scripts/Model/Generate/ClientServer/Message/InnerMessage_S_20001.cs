@@ -4398,6 +4398,76 @@ namespace ET
 
 	}
 
+//进入角斗场
+	[ResponseType(nameof(Arena2M_ArenaEnterResponse))]
+	[Message(InnerMessage.M2Arena_ArenaEnterRequest)]
+	[MemoryPackable]
+	public partial class M2Arena_ArenaEnterRequest: MessageObject, IRequest
+	{
+		public static M2Arena_ArenaEnterRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2Arena_ArenaEnterRequest), isFromPool) as M2Arena_ArenaEnterRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UserID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int SceneId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UserID = default;
+			this.SceneId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.Arena2M_ArenaEnterResponse)]
+	[MemoryPackable]
+	public partial class Arena2M_ArenaEnterResponse: MessageObject, IResponse
+	{
+		public static Arena2M_ArenaEnterResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Arena2M_ArenaEnterResponse), isFromPool) as Arena2M_ArenaEnterResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long FubenInstanceId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.FubenInstanceId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -4529,5 +4599,7 @@ namespace ET
 		 public const ushort M2R_RankDemonRequest = 20128;
 		 public const ushort R2M_RankDemonResponse = 20129;
 		 public const ushort T2M_TeamUpdateRequest = 20130;
+		 public const ushort M2Arena_ArenaEnterRequest = 20131;
+		 public const ushort Arena2M_ArenaEnterResponse = 20132;
 	}
 }
