@@ -3913,9 +3913,23 @@ message M2C_TeamDungeonQuitMessage // IActorMessage
 }
 
 
+//紫色道具判断是否需要拾取
+message M2C_TeamPickMessage // IMessage
+{
+	int64 ActorId = 1;
+	int64 UnitId = 2;
 
+	repeated DropInfo DropItems = 3;
+}
 
+message M2C_CreateDropItems // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitId = 94;
 
+	repeated DropInfo Drops = 1;
+}
 
 
 

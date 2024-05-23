@@ -12,20 +12,21 @@ namespace ET.Server
         /// <summary>
         /// 好友列表
         /// </summary>
-        public List<long> FriendList = new List<long>();
+        public List<long> FriendList { get; set; } = new List<long>();
+
         /// <summary>
         /// 申请列表
         /// </summary>
-        public List<long> ApplyList = new List<long>();
+        public List<long> ApplyList  { get; set; }= new List<long>();
 
         /// <summary>
         /// 黑名单
         /// </summary>
-        public List<long> Blacklist = new List<long>();
+        public List<long> Blacklist  { get; set; }= new List<long>();
 
         /// <summary>
         /// 好友私聊
         /// </summary>
-        public List<ChatInfo> FriendChats = new List<ChatInfo>();   
+        public List<ChatInfo> FriendChats  { get; set; }= new List<ChatInfo>();   
     }
 }

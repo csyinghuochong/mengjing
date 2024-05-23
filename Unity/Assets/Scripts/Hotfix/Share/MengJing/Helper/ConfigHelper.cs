@@ -465,21 +465,6 @@ namespace ET
             };
         }
 
-       
-
-        //副本深渊模式创建怪物   参数：场景ID,MonsterPositionConfigID
-        public static Dictionary<int, int> ShenYuanCreateConfig()
-        {
-            return new Dictionary<int, int>()
-            {
-                {110001,90011},
-                {110002,90012},
-                {110003,90013},
-                {110004,90014},
-                {110005,90015},
-            };
-        }
-
         /// <summary>
         /// 宠物守护队伍开启等级
         /// </summary>

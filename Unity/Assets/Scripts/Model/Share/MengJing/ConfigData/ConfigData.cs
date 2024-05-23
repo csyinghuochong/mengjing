@@ -9,6 +9,18 @@ namespace ET
         [StaticField]
         public static int GMDungeonId = 1060003;
 
+        
+        //副本深渊模式创建怪物   参数：场景ID,MonsterPositionConfigID
+        [StaticField]
+        public static Dictionary<int, int> ShenYuanCreateConfig =new Dictionary<int, int>()
+        {
+            {110001,90011},
+            {110002,90012},
+            {110003,90013},
+            {110004,90014},
+            {110005,90015},
+        };
+        
         //购买背包
         [StaticField]
         public static List<BuyCellCost> BuyBagCellCosts = new List<BuyCellCost>
