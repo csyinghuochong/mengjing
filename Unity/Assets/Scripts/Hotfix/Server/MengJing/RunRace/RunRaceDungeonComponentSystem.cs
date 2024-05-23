@@ -130,27 +130,27 @@ namespace ET.Server
                 self.OnTransform();
             }
 
-            Vector3 vector3 = new Vector3(-11.36f, 0.98f, 45.02f);
-            List<Unit> units = UnitHelper.GetUnitList(self.DomainScene(), UnitType.Player);
+            float3 vector3 = new float3(-11.36f, 0.98f, 45.02f);
+            List<Unit> units = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
             for (int i = 0; i < units.Count; i++)
             {
                 Unit unit = units[i];
-                NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
+                NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
                 if (numericComponent.GetAsInt(NumericType.RunRaceRankId) != 0)
                 {
                     continue;
                 }
 
-                if (Vector3.Distance(units[i].Position, vector3) > 2f)
+                if (math.distance(units[i].Position, vector3) > 2f)
                 {
                     continue;
                 }
 
                 self.HaveArrived = true;
 
-                long mapInstanceId = DBHelper.GetRankServerId(self.DomainZone());
+                ActorId mapInstanceId = UnitCacheHelper.GetRankServerId(self.Zone());
                 RankingInfo rankPetInfo = new RankingInfo();
-                UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
+                UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                 rankPetInfo.UserId = userInfoComponent.UserInfo.UserId;
                 rankPetInfo.PlayerName = userInfoComponent.UserInfo.Name;
                 rankPetInfo.PlayerLv = userInfoComponent.UserInfo.Lv;

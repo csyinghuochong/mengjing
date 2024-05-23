@@ -1077,3 +1077,21 @@ message R2S_SoloResultResponse // IResponse
 	int32 RankId = 1; //战力排行
 	int32 PetRankId = 2;
 }
+
+//ResponseType R2M_RankRunRaceResponse
+message M2R_RankRunRaceRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	RankingInfo RankingInfo = 2;
+}
+
+message R2M_RankRunRaceResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 RankId = 1;
+	repeated RankingInfo RankList = 2;		//排行榜列表
+}
