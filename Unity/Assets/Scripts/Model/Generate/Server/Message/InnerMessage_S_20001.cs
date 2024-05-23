@@ -4810,6 +4810,137 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Center2M_SerialReardResponse))]
+//序列号奖励
+	[Message(InnerMessage.M2Center_SerialReardRequest)]
+	[MemoryPackable]
+	public partial class M2Center_SerialReardRequest: MessageObject, IRequest
+	{
+		public static M2Center_SerialReardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2Center_SerialReardRequest), isFromPool) as M2Center_SerialReardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string SerialNumber { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.SerialNumber = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.Center2M_SerialReardResponse)]
+	[MemoryPackable]
+	public partial class Center2M_SerialReardResponse: MessageObject, IResponse
+	{
+		public static Center2M_SerialReardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Center2M_SerialReardResponse), isFromPool) as Center2M_SerialReardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(Center2M_ShareSucessResponse))]
+	[Message(InnerMessage.M2Center_ShareSucessRequest)]
+	[MemoryPackable]
+	public partial class M2Center_ShareSucessRequest: MessageObject, IRequest
+	{
+		public static M2Center_ShareSucessRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2Center_ShareSucessRequest), isFromPool) as M2Center_ShareSucessRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ShareType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long AccountId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ShareType = default;
+			this.UnitId = default;
+			this.AccountId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.Center2M_ShareSucessResponse)]
+	[MemoryPackable]
+	public partial class Center2M_ShareSucessResponse: MessageObject, IResponse
+	{
+		public static Center2M_ShareSucessResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Center2M_ShareSucessResponse), isFromPool) as Center2M_ShareSucessResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -4953,5 +5084,9 @@ namespace ET
 		 public const ushort C2C_CenterServerInfoRespone = 20140;
 		 public const ushort C2Center_DeleteAccountRequest = 20141;
 		 public const ushort Center2C_DeleteAccountResponse = 20142;
+		 public const ushort M2Center_SerialReardRequest = 20143;
+		 public const ushort Center2M_SerialReardResponse = 20144;
+		 public const ushort M2Center_ShareSucessRequest = 20145;
+		 public const ushort Center2M_ShareSucessResponse = 20146;
 	}
 }

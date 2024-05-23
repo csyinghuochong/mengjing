@@ -2,20 +2,22 @@
 using System.Collections.Generic;
 
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2Center_ShareSucessHandler : AMActorRpcHandler<Scene, M2Center_ShareSucessRequest, Center2M_ShareSucessResponse>
+    [MessageHandler(SceneType.Center)]
+    public class M2Center_ShareSucessHandler : MessageHandler<Scene, M2Center_ShareSucessRequest, Center2M_ShareSucessResponse>
     {
-        protected override async ETTask Run(Scene scene, M2Center_ShareSucessRequest request, Center2M_ShareSucessResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2Center_ShareSucessRequest request, Center2M_ShareSucessResponse response)
         {
             Log.Warning($"M2Center_ShareSucessRequest:{request.AccountId}");
-            List<DBCenterAccountInfo> centerAccountInfoList = await Game.Scene.GetComponent<DBComponent>().Query<DBCenterAccountInfo>(scene.DomainZone(), d => d.Id == request.AccountId);
+            DBManagerComponent dbManagerComponent = scene.Root().GetComponent<DBManagerComponent>();
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB(scene.Zone());
+            
+            List<DBCenterAccountInfo> centerAccountInfoList = await dbComponent.Query<DBCenterAccountInfo>(scene.Zone(), d => d.Id == request.AccountId);
             //await Game.Scene.GetComponent<DBComponent>().Query<DBCenterAccountInfo>(202, d => d.Id == userInfo.AccInfoID);
             if (centerAccountInfoList == null || centerAccountInfoList.Count == 0)
             {
                 response.Error = ErrorCode.ERR_NotFindAccount;
-                reply();
                 return;
             }
             int totalTimes = 0;
@@ -32,13 +34,11 @@ namespace ET
             if (totalTimes >= 6)
             {
                 response.Error = ErrorCode.ERR_FenXiangMaxNum;
-                reply();
                 return;
             }
 
             dBAccountInfos.PlayerInfo.ShareTimes.Add(serverNow);
-            Game.Scene.GetComponent<DBComponent>().Save<DBCenterAccountInfo>(scene.DomainZone(), dBAccountInfos).Coroutine();
-            reply();
+            dbComponent.Save<DBCenterAccountInfo>(scene.Zone(), dBAccountInfos).Coroutine();
             await ETTask.CompletedTask;
         }
     }

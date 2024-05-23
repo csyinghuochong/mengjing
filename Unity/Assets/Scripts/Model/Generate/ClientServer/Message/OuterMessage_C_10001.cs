@@ -657,16 +657,16 @@ namespace ET
 		[MemoryPackOrder(2)]
 		public string Password { get; set; }
 
-		[MemoryPackOrder(2)]
+		[MemoryPackOrder(3)]
 		public string Token { get; set; }
 
-		[MemoryPackOrder(2)]
+		[MemoryPackOrder(4)]
 		public string ThirdLogin { get; set; }
 
-		[MemoryPackOrder(4)]
+		[MemoryPackOrder(5)]
 		public bool Relink { get; set; }
 
-		[MemoryPackOrder(5)]
+		[MemoryPackOrder(6)]
 		public int age_type { get; set; }
 
 		public override void Dispose() 

@@ -1229,3 +1229,39 @@ message Center2C_DeleteAccountResponse // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+
+//ResponseType Center2M_SerialReardResponse
+//序列号奖励
+message M2Center_SerialReardRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	string SerialNumber = 1;
+}
+
+message Center2M_SerialReardResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+
+//ResponseType Center2M_ShareSucessResponse
+message M2Center_ShareSucessRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 ShareType = 1;
+	int64 UnitId = 2;
+	int64 AccountId = 3;
+}
+
+message Center2M_ShareSucessResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
