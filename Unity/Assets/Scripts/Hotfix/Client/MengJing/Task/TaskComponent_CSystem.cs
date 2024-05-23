@@ -3,20 +3,20 @@ using System.Linq;
 
 namespace ET.Client
 {
-    [FriendOf(typeof(TaskComponentC))]
-    [EntitySystemOf(typeof(TaskComponentC))]
+    [FriendOf(typeof (TaskComponentC))]
+    [EntitySystemOf(typeof (TaskComponentC))]
     public static partial class TaskComponent_CSystem
     {
         [EntitySystem]
         private static void Awake(this TaskComponentC self)
         {
-
         }
+
         [EntitySystem]
         private static void Destroy(this TaskComponentC self)
         {
-
         }
+
         public static List<TaskPro> GetAllTrackList(this TaskComponentC self)
         {
             List<TaskPro> taskPros = new List<TaskPro>();
@@ -26,11 +26,13 @@ namespace ET.Client
                 {
                     continue;
                 }
+
                 taskPros.Add(self.RoleTaskList[i]);
             }
+
             return taskPros;
         }
-        
+
         public static List<TaskPro> GetTaskTypeList(this TaskComponentC self, int taskTypeEnum)
         {
             List<TaskPro> taskPros = new List<TaskPro>();
@@ -41,11 +43,13 @@ namespace ET.Client
                 {
                     continue;
                 }
+
                 taskPros.Add(self.RoleTaskList[i]);
             }
+
             return taskPros;
         }
-        
+
         public static TaskPro GetTaskById(this TaskComponentC self, int taskId)
         {
             for (int i = 0; i < self.RoleTaskList.Count; i++)
@@ -53,9 +57,10 @@ namespace ET.Client
                 if (self.RoleTaskList[i].taskID == taskId)
                     return self.RoleTaskList[i];
             }
+
             return null;
         }
-        
+
         public static int GetNextMainTask(this TaskComponentC self)
         {
             int maxTask = 0;
@@ -68,11 +73,13 @@ namespace ET.Client
                 {
                     continue;
                 }
+
                 if (taskConfig.Id > maxTask)
                 {
                     maxTask = taskConfig.Id;
                 }
             }
+
             List<TaskConfig> taskConfigs = TaskConfigCategory.Instance.GetAll().Values.ToList();
             for (int i = 0; i < taskConfigs.Count; i++)
             {
@@ -80,16 +87,91 @@ namespace ET.Client
                 {
                     continue;
                 }
+
                 if (taskConfigs[i].Id > maxTask)
                 {
                     nextTask = taskConfigs[i].Id;
                     break;
                 }
             }
+
             return nextTask;
         }
 
-        
+        public static List<TaskPro> GetCompltedTaskByNpc(this TaskComponentC self, int npc)
+        {
+            List<TaskPro> taskPros = new List<TaskPro>();
+            for (int k = 0; k < self.RoleTaskList.Count; k++)
+            {
+                if (!TaskConfigCategory.Instance.Contain(self.RoleTaskList[k].taskID))
+                {
+                    Log.Debug($"无效的任务ID {self.RoleTaskList[k].taskID}");
+                    continue;
+                }
+
+                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.RoleTaskList[k].taskID);
+                if (taskConfig.CompleteNpcID == npc && self.RoleTaskList[k].taskStatus == (int)TaskStatuEnum.Completed)
+                {
+                    taskPros.Add(self.RoleTaskList[k]);
+                }
+            }
+
+            return taskPros;
+        }
+
+        public static List<int> GetOpenTaskIds(this TaskComponentC self, int npcid)
+        {
+            List<int> openTaskids = new List<int>();
+            NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcid);
+            if (npcConfig == null)
+            {
+                return openTaskids;
+            }
+
+            int[] taskid = npcConfig.TaskID;
+            if (taskid == null)
+            {
+                return openTaskids;
+            }
+
+            Scene root = self.Root();
+            for (int i = 0; i < taskid.Length; i++)
+            {
+                if (taskid[i] == 0)
+                    continue;
+                if (self.GetTaskById(taskid[i]) != null)
+                    continue;
+                if (self.IsTaskFinished(taskid[i]))
+                    continue;
+                if (!TaskConfigCategory.Instance.Contain(taskid[i]))
+                {
+                    Log.Debug($"无效的任务ID {taskid[i]}");
+                    continue;
+                }
+
+                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskid[i]);
+                if (taskConfig.TaskType == TaskTypeEnum.Treasure)
+                {
+                    Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+                    int treasureTask = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.TreasureTask);
+                    if (treasureTask >= 10)
+                    {
+                        continue;
+                    }
+                }
+
+                if (FunctionHelp.CheckTaskOn(taskConfig.TriggerType, taskConfig.TriggerValue))
+                {
+                    openTaskids.Add(taskid[i]);
+                }
+            }
+
+            return openTaskids;
+        }
+
+        public static bool IsTaskFinished(this TaskComponentC self, int taskId)
+        {
+            return self.RoleComoleteTaskList.Contains(taskId);
+        }
     }
 }
-

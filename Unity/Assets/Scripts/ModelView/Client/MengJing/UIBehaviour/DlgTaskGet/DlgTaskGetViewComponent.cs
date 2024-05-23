@@ -109,125 +109,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ImageButtonButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageButtonButton == null )
-     			{
-		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_TaskGetItems/Content/Item_TaskGetItem/E_ImageButton");
-     			}
-     			return this.m_E_ImageButtonButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ImageButtonImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageButtonImage == null )
-     			{
-		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_TaskGetItems/Content/Item_TaskGetItem/E_ImageButton");
-     			}
-     			return this.m_E_ImageButtonImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ImageDiImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageDiImage == null )
-     			{
-		    		this.m_E_ImageDiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_TaskGetItems/Content/Item_TaskGetItem/E_ImageDi");
-     			}
-     			return this.m_E_ImageDiImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ImageSelectImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageSelectImage == null )
-     			{
-		    		this.m_E_ImageSelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_TaskGetItems/Content/Item_TaskGetItem/E_ImageSelect");
-     			}
-     			return this.m_E_ImageSelectImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ImageCompleteImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageCompleteImage == null )
-     			{
-		    		this.m_E_ImageCompleteImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_TaskGetItems/Content/Item_TaskGetItem/E_ImageComplete");
-     			}
-     			return this.m_E_ImageCompleteImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ImageNotRecvImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ImageNotRecvImage == null )
-     			{
-		    		this.m_E_ImageNotRecvImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_TaskGetItems/Content/Item_TaskGetItem/E_ImageNotRecv");
-     			}
-     			return this.m_E_ImageNotRecvImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_TextTaskNameText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_TextTaskNameText == null )
-     			{
-		    		this.m_E_TextTaskNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TaskGetItems/Content/Item_TaskGetItem/E_TextTaskName");
-     			}
-     			return this.m_E_TextTaskNameText;
-     		}
-     	}
-
 		public UnityEngine.UI.Button E_ButtonGetButton
      	{
      		get
@@ -327,6 +208,91 @@ namespace ET.Client
 		    		this.m_E_ButtonGiveTaskImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_TaskGetItems/E_ButtonGiveTask");
      			}
      			return this.m_E_ButtonGiveTaskImage;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_EnergySkillRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_EnergySkillRectTransform == null )
+     			{
+		    		this.m_EG_EnergySkillRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_EnergySkill");
+     			}
+     			return this.m_EG_EnergySkillRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_EnergyDuihuanButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_EnergyDuihuanButton == null )
+     			{
+		    		this.m_E_Btn_EnergyDuihuanButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_EnergySkill/E_Btn_EnergyDuihuan");
+     			}
+     			return this.m_E_Btn_EnergyDuihuanButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_EnergyDuihuanImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_EnergyDuihuanImage == null )
+     			{
+		    		this.m_E_Btn_EnergyDuihuanImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_EnergySkill/E_Btn_EnergyDuihuan");
+     			}
+     			return this.m_E_Btn_EnergyDuihuanImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_Lab_MoNnengHintText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Lab_MoNnengHintText == null )
+     			{
+		    		this.m_E_Lab_MoNnengHintText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_EnergySkill/E_Lab_MoNnengHint");
+     			}
+     			return this.m_E_Lab_MoNnengHintText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_Lab_HuoBiNameText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Lab_HuoBiNameText == null )
+     			{
+		    		this.m_E_Lab_HuoBiNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_EnergySkill/E_Lab_HuoBiName");
+     			}
+     			return this.m_E_Lab_HuoBiNameText;
      		}
      	}
 
@@ -466,6 +432,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_TaskFubenItemsImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TaskFubenItemsImage == null )
+     			{
+		    		this.m_E_TaskFubenItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_TaskFubenItems");
+     			}
+     			return this.m_E_TaskFubenItemsImage;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopVerticalScrollRect E_TaskFubenItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TaskFubenItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_TaskFubenItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_TaskFubenItems");
+     			}
+     			return this.m_E_TaskFubenItemsLoopVerticalScrollRect;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_Img_buttonButton = null;
@@ -474,19 +474,17 @@ namespace ET.Client
 			this.m_E_Lab_NpcSpeakText = null;
 			this.m_E_TaskGetItemsImage = null;
 			this.m_E_TaskGetItemsLoopVerticalScrollRect = null;
-			this.m_E_ImageButtonButton = null;
-			this.m_E_ImageButtonImage = null;
-			this.m_E_ImageDiImage = null;
-			this.m_E_ImageSelectImage = null;
-			this.m_E_ImageCompleteImage = null;
-			this.m_E_ImageNotRecvImage = null;
-			this.m_E_TextTaskNameText = null;
 			this.m_E_ButtonGetButton = null;
 			this.m_E_ButtonGetImage = null;
 			this.m_E_BtnCommitTask1Button = null;
 			this.m_E_BtnCommitTask1Image = null;
 			this.m_E_ButtonGiveTaskButton = null;
 			this.m_E_ButtonGiveTaskImage = null;
+			this.m_EG_EnergySkillRectTransform = null;
+			this.m_E_Btn_EnergyDuihuanButton = null;
+			this.m_E_Btn_EnergyDuihuanImage = null;
+			this.m_E_Lab_MoNnengHintText = null;
+			this.m_E_Lab_HuoBiNameText = null;
 			this.m_E_ButtonJieRiRewardButton = null;
 			this.m_E_ButtonJieRiRewardImage = null;
 			this.m_E_ButtonExpDuiHuanButton = null;
@@ -495,6 +493,8 @@ namespace ET.Client
 			this.m_E_ButtonPetFragmentImage = null;
 			this.m_E_ButtonMysteryButton = null;
 			this.m_E_ButtonMysteryImage = null;
+			this.m_E_TaskFubenItemsImage = null;
+			this.m_E_TaskFubenItemsLoopVerticalScrollRect = null;
 			this.uiTransform = null;
 		}
 
@@ -504,19 +504,17 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_Lab_NpcSpeakText = null;
 		private UnityEngine.UI.Image m_E_TaskGetItemsImage = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_TaskGetItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Button m_E_ImageButtonButton = null;
-		private UnityEngine.UI.Image m_E_ImageButtonImage = null;
-		private UnityEngine.UI.Image m_E_ImageDiImage = null;
-		private UnityEngine.UI.Image m_E_ImageSelectImage = null;
-		private UnityEngine.UI.Image m_E_ImageCompleteImage = null;
-		private UnityEngine.UI.Image m_E_ImageNotRecvImage = null;
-		private UnityEngine.UI.Text m_E_TextTaskNameText = null;
 		private UnityEngine.UI.Button m_E_ButtonGetButton = null;
 		private UnityEngine.UI.Image m_E_ButtonGetImage = null;
 		private UnityEngine.UI.Button m_E_BtnCommitTask1Button = null;
 		private UnityEngine.UI.Image m_E_BtnCommitTask1Image = null;
 		private UnityEngine.UI.Button m_E_ButtonGiveTaskButton = null;
 		private UnityEngine.UI.Image m_E_ButtonGiveTaskImage = null;
+		private UnityEngine.RectTransform m_EG_EnergySkillRectTransform = null;
+		private UnityEngine.UI.Button m_E_Btn_EnergyDuihuanButton = null;
+		private UnityEngine.UI.Image m_E_Btn_EnergyDuihuanImage = null;
+		private UnityEngine.UI.Text m_E_Lab_MoNnengHintText = null;
+		private UnityEngine.UI.Text m_E_Lab_HuoBiNameText = null;
 		private UnityEngine.UI.Button m_E_ButtonJieRiRewardButton = null;
 		private UnityEngine.UI.Image m_E_ButtonJieRiRewardImage = null;
 		private UnityEngine.UI.Button m_E_ButtonExpDuiHuanButton = null;
@@ -525,6 +523,8 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_ButtonPetFragmentImage = null;
 		private UnityEngine.UI.Button m_E_ButtonMysteryButton = null;
 		private UnityEngine.UI.Image m_E_ButtonMysteryImage = null;
+		private UnityEngine.UI.Image m_E_TaskFubenItemsImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_TaskFubenItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

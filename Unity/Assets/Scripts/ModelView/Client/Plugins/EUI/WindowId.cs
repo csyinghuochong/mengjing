@@ -44,5 +44,6 @@ namespace ET.Client
 		WindowID_RoleZodiac,
 		WindowID_Watch,
 		WindowID_UnionRecords,
+		WindowID_TaskGet,
 	}
 }
