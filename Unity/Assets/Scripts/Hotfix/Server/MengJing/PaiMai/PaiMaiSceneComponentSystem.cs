@@ -403,8 +403,7 @@ namespace ET.Server
             if (paimaiList == null || paimaiList.Count == 0)
             {
                 //初始摆摊数据
-                DBPaiMainInfo dBPaiMainInfo = new DBPaiMainInfo();
-                dBPaiMainInfo.Id = unitid;
+                DBPaiMainInfo dBPaiMainInfo = self.AddChildWithId<DBPaiMainInfo>(unitid);
                 dBPaiMainInfo.PaiMaiItemInfos = self.GetItemListByType(itemType, oldPaiMaiAll);
                 self.UpdatePaiMaiDBByType(itemType, dBPaiMainInfo);
                 //存储摆摊数据

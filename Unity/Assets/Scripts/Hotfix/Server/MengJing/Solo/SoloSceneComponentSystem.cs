@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -339,8 +340,8 @@ namespace ET.Server
                 }
                 //这里还需要添加判断2个目标是否掉线
 
-                float maxValue = Mathf.Max((float)soloPlayerInfo_i.Combat, (float)soloPlayerInfo_t.Combat);
-                float minValue = Mathf.Min((float)soloPlayerInfo_i.Combat, (float)soloPlayerInfo_t.Combat);
+                float maxValue = math.max((float)soloPlayerInfo_i.Combat, (float)soloPlayerInfo_t.Combat);
+                float minValue = math.min((float)soloPlayerInfo_i.Combat, (float)soloPlayerInfo_t.Combat);
 
                 //获取双方战力进行匹配
                 if (minValue / maxValue >= range)

@@ -4,6 +4,7 @@ using Unity.Mathematics;
 namespace ET.Server
 {
     
+    [ChildOf]
     public class TeamDropItem : Entity, IAwake
     {
         public long EndTime{ get; set; } = 0;   //-1已分配好
@@ -16,7 +17,7 @@ namespace ET.Server
     [ComponentOf(typeof(Scene))]
     public class TeamDungeonComponent : Entity, IAwake, IDestroy
     {
-        public long Timer { get; set; }
+        public long Timer;
         public int FubenType { get; set; }
         public long EnterTime { get; set; }
         public TeamInfo TeamInfo { get; set; }

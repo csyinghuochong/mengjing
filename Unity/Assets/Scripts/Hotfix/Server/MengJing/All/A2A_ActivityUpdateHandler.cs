@@ -208,7 +208,8 @@ namespace ET.Server
                         FubenCenterComponent fubenCenter = scene.GetComponent<FubenCenterComponent>();
                         foreach (var item in fubenCenter.Children)
                         {
-                            item.Value.GetComponent<YeWaiRefreshComponent>().OnZeroClockUpdate(request.OpenDay);
+                            Scene fubenScene = item.Value as Scene;
+                            fubenScene.GetComponent<YeWaiRefreshComponent>().OnZeroClockUpdate(request.OpenDay);
                         }
                     }
                     if (request.FunctionId > 0 && request.FunctionType == 1)

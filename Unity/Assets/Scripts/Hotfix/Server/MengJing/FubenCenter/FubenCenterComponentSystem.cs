@@ -245,34 +245,34 @@ namespace ET.Server
 
             await self.Root().GetComponent<TimerComponent>().WaitAsync(waitDisposeTime);
 
-            foreach ((long id, Entity Entity) in self.Children)
+            foreach ((long id, Entity entity) in self.Children)
             {
-                if (Entity.GetComponent<MapComponent>() == null)
+                Scene fubenScene = entity as Scene;
+                if (fubenScene.GetComponent<MapComponent>() == null)
                 {
                     continue;
                 }
 
-                if (!playerList.ContainsKey(Entity.Id))
+                if (!playerList.ContainsKey(fubenScene.Id))
                 {
                     continue;
                 }
 
-                if (playerList.ContainsKey(Entity.Id))
+                if (playerList.ContainsKey(fubenScene.Id))
                 {
-                    playerList.Remove(Entity.Id);
-                    Log.Warning($"DisposeFubenId; {functionId} {Entity.Id}");
+                    playerList.Remove(fubenScene.Id);
+                    Log.Warning($"DisposeFubenId; {functionId} {fubenScene.Id}");
                 }
 
-                long instanceid = Entity.InstanceId;
+                long instanceid = fubenScene.InstanceId;
                 if (self.FubenInstanceList.Contains(instanceid))
                 {
                     self.FubenInstanceList.Remove(instanceid);
                     Log.Warning($"DisposeFubenInstance; {functionId}  {instanceid}");
                 }
-
-                Scene scene = Entity as Scene;
-                Actor_TransferRequest actor_Transfer = new Actor_TransferRequest() { SceneType = SceneTypeEnum.MainCityScene, };
-                List<Unit> units = scene.GetComponent<UnitComponent>().GetAll();
+                
+                C2M_TransferMap actor_Transfer = new C2M_TransferMap() { SceneType = SceneTypeEnum.MainCityScene, };
+                List<Unit> units = fubenScene.GetComponent<UnitComponent>().GetAll();
                 for (int i = 0; i < units.Count; i++)
                 {
                     if (units[i].Type != UnitType.Player)
@@ -289,7 +289,7 @@ namespace ET.Server
                 }
 
                 await self.Root().GetComponent<TimerComponent>().WaitAsync(60000 + RandomHelper.RandomNumber(0, 1000));
-                scene.Dispose();
+                fubenScene.Dispose();
                 break;
             }
         }

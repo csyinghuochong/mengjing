@@ -7,7 +7,7 @@ namespace ET.Server
     {
         public long LastSendChat;
 
-        public long GateSessionActorId; //player.InstanceId
+        public long GateSessionActorId { get; set; } //player.InstanceId
 
         public long UnionId;
 

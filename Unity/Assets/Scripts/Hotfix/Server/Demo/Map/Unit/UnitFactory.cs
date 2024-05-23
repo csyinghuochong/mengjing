@@ -433,7 +433,7 @@ namespace ET.Server
                     float dropX = beKill.Position.x + RandomHelper.RandomNumberFloat(-1f, 1f);
                     float dropY = beKill.Position.y;
                     float dropZ = beKill.Position.z + RandomHelper.RandomNumberFloat(-1f, 1f);
-                    dropitem.Position = new UnityEngine.Vector3(dropX, dropY, dropZ);
+                    dropitem.Position = new float3(dropX, dropY, dropZ);
                     dropitem.AddComponent<AOIEntity, int, float3>(9 * 1000, dropitem.Position);
                     dropComponent.DropType = dropType;
                     dropComponent.BeKillId = beKill.Id;

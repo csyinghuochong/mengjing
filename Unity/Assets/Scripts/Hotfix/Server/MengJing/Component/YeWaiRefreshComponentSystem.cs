@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using MongoDB.Driver.Core.Servers;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -197,7 +198,7 @@ namespace ET.Server
 
         public static void OnAddRefreshList(this YeWaiRefreshComponent self, Unit unit, long reTime)
         {
-            Vector3 vector3 = unit.GetBornPostion();
+            float3 vector3 = unit.GetBornPostion();
             self.RefreshMonsters.Add(new RefreshMonster()
             {
                 MonsterId = unit.ConfigId,
@@ -455,7 +456,7 @@ namespace ET.Server
         public static async ETTask CreateMonsters(this YeWaiRefreshComponent self, RefreshMonster refreshMonster)
         {
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(refreshMonster.MonsterId);
-            Vector3 form = new Vector3(refreshMonster.PositionX, refreshMonster.PositionY, refreshMonster.PositionZ);
+            float3 form = new float3(refreshMonster.PositionX, refreshMonster.PositionY, refreshMonster.PositionZ);
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
 
             if (mapComponent.SceneType == SceneTypeEnum.UnionRace)
@@ -514,7 +515,7 @@ namespace ET.Server
             for (int i = 0; i < refreshMonster.Number; i++)
             {
                 float range = refreshMonster.Range;
-                Vector3 vector3 = new Vector3(form.x + RandomHelper.RandomNumberFloat(-1 * range, range), form.y,
+                float3 vector3 = new float3(form.x + RandomHelper.RandomNumberFloat(-1 * range, range), form.y,
                     form.z + RandomHelper.RandomNumberFloat(-1 * range, range));
                 UnitFactory.CreateMonster(self.GetParent<Scene>(), refreshMonster.MonsterId, vector3,
                     new CreateMonsterInfo() { Camp = monsterConfig.MonsterCamp, Rotation = refreshMonster.Rotation, });
