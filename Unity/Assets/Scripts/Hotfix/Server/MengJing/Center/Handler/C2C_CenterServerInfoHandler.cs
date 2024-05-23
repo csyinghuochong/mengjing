@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2C_CenterServerInfoHandler : AMActorRpcHandler<Scene, C2C_CenterServerInfoReuest, C2C_CenterServerInfoRespone>
+    [MessageHandler(SceneType.Center)]
+    public class C2C_CenterServerInfoHandler : MessageHandler<Scene, C2C_CenterServerInfoReuest, C2C_CenterServerInfoRespone>
     {
 
-        protected override async ETTask Run(Scene scene, C2C_CenterServerInfoReuest request, C2C_CenterServerInfoRespone response, Action reply)
+        protected override async ETTask Run(Scene scene, C2C_CenterServerInfoReuest request, C2C_CenterServerInfoRespone response)
         {
             Log.Warning($"C2C_CenterServerInfoReuest:{request.Zone}");
-            List<DBCenterServerInfo> result = await Game.Scene.GetComponent<DBComponent>().Query<DBCenterServerInfo>(scene.DomainZone(), d => d.Id == scene.DomainZone());
+            DBManagerComponent dbManagerComponent = scene.Root().GetComponent<DBManagerComponent>();
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB(scene.Zone());
+            
+            List<DBCenterServerInfo> result = await dbComponent.Query<DBCenterServerInfo>(scene.Zone(), d => d.Id == scene.Zone());
             DBCenterServerInfo dBServerInfo = result[0];
             switch (request.infoType)
             {
@@ -25,8 +28,7 @@ namespace ET
                     }
                     break;
             }
-
-            reply();
+            
             await ETTask.CompletedTask;
         }
     }

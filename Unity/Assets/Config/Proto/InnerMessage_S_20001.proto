@@ -1197,3 +1197,20 @@ message Center2A_SaveAccount // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType C2C_CenterServerInfoRespone
+message C2C_CenterServerInfoReuest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int infoType = 1;
+	int Zone = 2;
+}
+
+message C2C_CenterServerInfoRespone // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	string Value = 1;
+}

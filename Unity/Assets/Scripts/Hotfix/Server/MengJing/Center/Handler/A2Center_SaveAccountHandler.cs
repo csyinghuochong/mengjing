@@ -7,10 +7,13 @@ namespace ET.Server
     [MessageHandler(SceneType.Center)]
     public class A2Center_SaveAccountHandler : MessageHandler<Scene, A2Center_SaveAccount, Center2A_SaveAccount>
     {
-        protected override async ETTask Run(Scene scene, A2Center_SaveAccount request, Center2A_SaveAccount response, Action reply)
+        protected override async ETTask Run(Scene scene, A2Center_SaveAccount request, Center2A_SaveAccount response)
         { 
-            Log.Warning($"Save<DBCenterAccountInfo>3333: { scene.DomainZone()}");
-            List<DBCenterAccountInfo> resulets = await Game.Scene.GetComponent<DBComponent>().Query<DBCenterAccountInfo>(scene.DomainZone(), d => d.Id == request.AccountId);
+            Log.Warning($"Save<DBCenterAccountInfo>3333: { scene.Zone()}");
+            DBManagerComponent dbManagerComponent = scene.Root().GetComponent<DBManagerComponent>();
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB(scene.Zone());
+            
+            List<DBCenterAccountInfo> resulets = await dbComponent.Query<DBCenterAccountInfo>(scene.Zone(), d => d.Id == request.AccountId);
 
             DBCenterAccountInfo dBCenterAccountInfo = null;
             if (resulets != null && resulets.Count > 0)
@@ -25,10 +28,8 @@ namespace ET.Server
             dBCenterAccountInfo.Password = request.Password;
             dBCenterAccountInfo.PlayerInfo = request.PlayerInfo;
            
-            await Game.Scene.GetComponent<DBComponent>().Save(scene.DomainZone(), dBCenterAccountInfo);
+            await dbComponent.Save(scene.Zone(), dBCenterAccountInfo);
             dBCenterAccountInfo.Dispose();
-
-            reply();
             await ETTask.CompletedTask;
         }
     }

@@ -4680,6 +4680,75 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(C2C_CenterServerInfoRespone))]
+	[Message(InnerMessage.C2C_CenterServerInfoReuest)]
+	[MemoryPackable]
+	public partial class C2C_CenterServerInfoReuest: MessageObject, IRequest
+	{
+		public static C2C_CenterServerInfoReuest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2C_CenterServerInfoReuest), isFromPool) as C2C_CenterServerInfoReuest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int infoType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Zone { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.infoType = default;
+			this.Zone = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.C2C_CenterServerInfoRespone)]
+	[MemoryPackable]
+	public partial class C2C_CenterServerInfoRespone: MessageObject, IResponse
+	{
+		public static C2C_CenterServerInfoRespone Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2C_CenterServerInfoRespone), isFromPool) as C2C_CenterServerInfoRespone; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string Value { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.Value = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -4819,5 +4888,7 @@ namespace ET
 		 public const ushort Center2A_RechargeResponse = 20136;
 		 public const ushort A2Center_SaveAccount = 20137;
 		 public const ushort Center2A_SaveAccount = 20138;
+		 public const ushort C2C_CenterServerInfoReuest = 20139;
+		 public const ushort C2C_CenterServerInfoRespone = 20140;
 	}
 }
