@@ -15469,6 +15469,9 @@ namespace ET
 		[MemoryPackOrder(3)]
 		public string Password { get; set; }
 
+		[MemoryPackOrder(4)]
+		public string xx { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -15477,6 +15480,7 @@ namespace ET
 			this.AccountId = default;
 			this.Account = default;
 			this.Password = default;
+			this.xx = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
