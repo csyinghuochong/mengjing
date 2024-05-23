@@ -4542,6 +4542,71 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Center2A_RechargeResponse))]
+	[Message(InnerMessage.A2Center_RechargeRequest)]
+	[MemoryPackable]
+	public partial class A2Center_RechargeRequest: MessageObject, IRequest
+	{
+		public static A2Center_RechargeRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2Center_RechargeRequest), isFromPool) as A2Center_RechargeRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long AccountId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public RechargeInfo RechargeInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.AccountId = default;
+			this.RechargeInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.Center2A_RechargeResponse)]
+	[MemoryPackable]
+	public partial class Center2A_RechargeResponse: MessageObject, IResponse
+	{
+		public static Center2A_RechargeResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Center2A_RechargeResponse), isFromPool) as Center2A_RechargeResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -4677,5 +4742,7 @@ namespace ET
 		 public const ushort Arena2M_ArenaEnterResponse = 20132;
 		 public const ushort M2B_BattleEnterRequest = 20133;
 		 public const ushort B2M_BattleEnterResponse = 20134;
+		 public const ushort A2Center_RechargeRequest = 20135;
+		 public const ushort Center2A_RechargeResponse = 20136;
 	}
 }

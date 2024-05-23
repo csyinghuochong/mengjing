@@ -1162,3 +1162,19 @@ message B2M_BattleEnterResponse // IResponse
 	int64 FubenInstanceId = 2;
 	int32 Camp = 3;
 }
+
+//ResponseType Center2A_RechargeResponse
+message A2Center_RechargeRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 AccountId = 1;
+	RechargeInfo RechargeInfo = 2;
+}
+
+message Center2A_RechargeResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
