@@ -1,0 +1,43 @@
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace ET.Client
+{
+    [FriendOf(typeof (Scroll_Item_TaskFubenItem))]
+    [EntitySystemOf(typeof (Scroll_Item_TaskFubenItem))]
+    public static partial class Scroll_Item_TaskFubenItemSystem
+    {
+        [EntitySystem]
+        private static void Awake(this Scroll_Item_TaskFubenItem self)
+        {
+        }
+
+        [EntitySystem]
+        private static void Destroy(this Scroll_Item_TaskFubenItem self)
+        {
+            self.DestroyWidget();
+        }
+
+        public static void OnInitData(this Scroll_Item_TaskFubenItem self, Action<int, int> action, int npcType, int fubenId)
+        {
+            switch (npcType)
+            {
+                case 1:
+                    self.E_TextFubenNameText.text = ItemViewHelp.ShowDuiHuanPet(fubenId);
+                    break;
+                case 2:
+                    self.E_TextFubenNameText.text = SceneConfigCategory.Instance.Get(fubenId).Name;
+                    break;
+                default:
+                    break;
+            }
+
+            self.ClickHandler = action;
+            self.NpcType = npcType;
+            self.FubenId = fubenId;
+
+            self.E_ImageButtonButton.AddListener(() => { self.ClickHandler(self.NpcType, self.FubenId); });
+        }
+    }
+}
