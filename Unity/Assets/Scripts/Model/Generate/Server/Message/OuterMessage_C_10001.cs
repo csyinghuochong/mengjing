@@ -15358,6 +15358,61 @@ namespace ET
 
 	}
 
+//组队副本结算
+	[Message(OuterMessage.M2C_TeamDungeonSettlement)]
+	[MemoryPackable]
+	public partial class M2C_TeamDungeonSettlement: MessageObject, IActorMessage
+	{
+		public static M2C_TeamDungeonSettlement Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TeamDungeonSettlement), isFromPool) as M2C_TeamDungeonSettlement; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PassTime { get; set; }
+
+		[MemoryPackOrder(1)]
+		public List<TeamPlayerInfo> PlayerList { get; set; } = new();
+
+		[MemoryPackOrder(3)]
+		public List<RewardItem> RewardExtraItem { get; set; } = new();
+
+		[MemoryPackOrder(4)]
+		public List<RewardItem> ReardList { get; set; } = new();
+
+		[MemoryPackOrder(5)]
+		public List<RewardItem> ReardListExcess { get; set; } = new();
+
+		[MemoryPackOrder(6)]
+		public int Star { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.ActorId = default;
+			this.PassTime = default;
+			this.PlayerList.Clear();
+			this.RewardExtraItem.Clear();
+			this.ReardList.Clear();
+			this.ReardListExcess.Clear();
+			this.Star = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -15800,5 +15855,6 @@ namespace ET
 		 public const ushort M2C_TeamDungeonQuitMessage = 10439;
 		 public const ushort M2C_TeamPickMessage = 10440;
 		 public const ushort M2C_CreateDropItems = 10441;
+		 public const ushort M2C_TeamDungeonSettlement = 10442;
 	}
 }

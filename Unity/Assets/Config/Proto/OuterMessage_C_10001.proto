@@ -3931,5 +3931,20 @@ message M2C_CreateDropItems // IMessage
 	repeated DropInfo Drops = 1;
 }
 
+//组队副本结算
+message M2C_TeamDungeonSettlement // IActorMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 92;
+	int64 ActorId = 93;
+
+	int64 PassTime = 1;
+	repeated TeamPlayerInfo PlayerList = 2;
+	repeated RewardItem RewardExtraItem = 4;			//额外奖励
+	repeated RewardItem ReardList = 5;		//奖励列表
+	repeated RewardItem ReardListExcess = 6;	//冒险家额外奖励
+	int32 Star = 7;
+}
+
 
 

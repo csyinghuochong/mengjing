@@ -368,23 +368,23 @@ namespace ET.Server
                 int hurtvalue = 0;
                 hurtList.TryGetValue(unititem.Id, out hurtvalue);
                 int hurtRate = (int)(hurtvalue * 100f / damageTotal);
-                unititem.GetComponent<TaskComponent>().TriggerTaskEvent(TaskTargetType.TeamDungeonHurt_136, self.TeamInfo.SceneId, hurtRate);
-                unititem.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.TeamDungeonHurt_136, self.TeamInfo.SceneId, hurtRate);
+                unititem.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.TeamDungeonHurt_136, self.TeamInfo.SceneId, hurtRate);
+                unititem.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.TeamDungeonHurt_136, self.TeamInfo.SceneId, hurtRate);
 
-                unititem.GetComponent<TaskComponent>().OnPassTeamFuben();
-                unititem.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.PassTeamFubenNumber_20, 0, 1);
+                unititem.GetComponent<TaskComponentS>().OnPassTeamFuben();
+                unititem.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.PassTeamFubenNumber_20, 0, 1);
                 if (self.FubenType == TeamFubenType.ShenYuan)
                 {
-                    unititem.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.PassTeamShenYuanNumber_21, 0, 1);
+                    unititem.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.PassTeamShenYuanNumber_21, 0, 1);
                 }
 
-                if (unititem.GetComponent<UserInfoComponent>().UserInfo.UserId == idExtra)
+                if (unititem.GetComponent<UserInfoComponentS>().UserInfo.UserId == idExtra)
                 {
-                    unititem.GetComponent<BagComponent>().OnAddItemData(m2C_FubenSettlement.RewardExtraItem, string.Empty,
+                    unititem.GetComponent<BagComponentS>().OnAddItemData(m2C_FubenSettlement.RewardExtraItem, string.Empty,
                         $"{ItemGetWay.FubenGetReward}_{TimeHelper.ServerNow()}");
                 }
 
-                MessageHelper.SendToClient(unititem, m2C_FubenSettlement);
+                MapMessageHelper.SendToClient(unititem, m2C_FubenSettlement);
             }
 
             (self.Parent.Parent as TeamSceneComponent).OnDungeonOver(self.TeamInfo.TeamId);
