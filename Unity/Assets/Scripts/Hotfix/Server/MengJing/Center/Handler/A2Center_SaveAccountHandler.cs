@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class A2Center_SaveAccountHandler : AMActorRpcHandler<Scene, A2Center_SaveAccount, Center2A_SaveAccount>
+    [MessageHandler(SceneType.Center)]
+    public class A2Center_SaveAccountHandler : MessageHandler<Scene, A2Center_SaveAccount, Center2A_SaveAccount>
     {
         protected override async ETTask Run(Scene scene, A2Center_SaveAccount request, Center2A_SaveAccount response, Action reply)
         { 

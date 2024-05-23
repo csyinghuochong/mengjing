@@ -15443,44 +15443,6 @@ namespace ET
 
 	}
 
-	[Message(OuterMessage.RechargeInfo)]
-	[MemoryPackable]
-	public partial class RechargeInfo: MessageObject
-	{
-		public static RechargeInfo Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(RechargeInfo), isFromPool) as RechargeInfo; 
-		}
-
-		[MemoryPackOrder(0)]
-		public int Amount { get; set; }
-
-		[MemoryPackOrder(1)]
-		public long Time { get; set; }
-
-		[MemoryPackOrder(2)]
-		public long UserId { get; set; }
-
-		[MemoryPackOrder(3)]
-		public string OrderInfo { get; set; }
-
-		[MemoryPackOrder(4)]
-		public int RechargeType { get; set; }
-
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.Amount = default;
-			this.Time = default;
-			this.UserId = default;
-			this.OrderInfo = default;
-			this.RechargeType = default;
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
-
-	}
-
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -15925,6 +15887,5 @@ namespace ET
 		 public const ushort M2C_CreateDropItems = 10441;
 		 public const ushort M2C_TeamDungeonSettlement = 10442;
 		 public const ushort M2C_SyncChatInfo = 10443;
-		 public const ushort RechargeInfo = 10444;
 	}
 }

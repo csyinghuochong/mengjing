@@ -1178,3 +1178,22 @@ message Center2A_RechargeResponse // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+
+//ResponseType Center2A_SaveAccount
+message A2Center_SaveAccount // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	string AccountName = 1;
+	string Password = 2;
+	PlayerInfo PlayerInfo = 3;
+	int64 AccountId = 4;
+}
+
+message Center2A_SaveAccount // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

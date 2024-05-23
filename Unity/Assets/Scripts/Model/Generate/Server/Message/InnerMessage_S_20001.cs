@@ -4607,6 +4607,79 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Center2A_SaveAccount))]
+	[Message(InnerMessage.A2Center_SaveAccount)]
+	[MemoryPackable]
+	public partial class A2Center_SaveAccount: MessageObject, IRequest
+	{
+		public static A2Center_SaveAccount Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2Center_SaveAccount), isFromPool) as A2Center_SaveAccount; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string AccountName { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string Password { get; set; }
+
+		[MemoryPackOrder(2)]
+		public PlayerInfo PlayerInfo { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long AccountId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.AccountName = default;
+			this.Password = default;
+			this.PlayerInfo = default;
+			this.AccountId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.Center2A_SaveAccount)]
+	[MemoryPackable]
+	public partial class Center2A_SaveAccount: MessageObject, IResponse
+	{
+		public static Center2A_SaveAccount Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Center2A_SaveAccount), isFromPool) as Center2A_SaveAccount; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -4744,5 +4817,7 @@ namespace ET
 		 public const ushort B2M_BattleEnterResponse = 20134;
 		 public const ushort A2Center_RechargeRequest = 20135;
 		 public const ushort Center2A_RechargeResponse = 20136;
+		 public const ushort A2Center_SaveAccount = 20137;
+		 public const ushort Center2A_SaveAccount = 20138;
 	}
 }
