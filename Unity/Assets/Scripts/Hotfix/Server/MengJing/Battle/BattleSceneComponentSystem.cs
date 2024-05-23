@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace ET.Server
 {
     [EntitySystemOf(typeof (BattleSceneComponent))]
@@ -38,15 +41,15 @@ namespace ET.Server
             LogHelper.LogDebug($"OnBattleOver : {self.Zone()}");
             //Console.WriteLine($"OnBattleOver : {self.DomainZone()}");
             ActorId robotSceneId = StartSceneConfigCategory.Instance.GetBySceneName(203, "Robot01").ActorId;
-            self.Root().GetComponent<MessageSender>().Send(robotSceneId, new G2Robot_MessageRequest() { Zone = self.DomainZone(), MessageType = NoticeType.BattleOver });
+            self.Root().GetComponent<MessageSender>().Send(robotSceneId, new G2Robot_MessageRequest() { Zone = self.Zone(), MessageType = NoticeType.BattleOver });
 
             await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(10000, 20000));
             for (int i = 0; i < self.BattleInfos.Count; i++)
             {
                 try
                 {
-                    LocalDungeon2M_ExitResponse createUnit = (LocalDungeon2M_ExitResponse)await ActorMessageSenderComponent.Instance.Call(
-                        self.BattleInfos[i].ProgressId, new M2LocalDungeon_ExitRequest()
+                    LocalDungeon2M_ExitResponse createUnit = (LocalDungeon2M_ExitResponse)await self.Root().GetComponent<MessageSender>().Call(
+                        self.BattleInfos[i].ActorId, new M2LocalDungeon_ExitRequest()
                         {
                             SceneType = SceneTypeEnum.Battle,
                             FubenId = self.BattleInfos[i].FubenId,
@@ -55,7 +58,7 @@ namespace ET.Server
                         });
                     if (createUnit.Error != ErrorCode.ERR_Success)
                     {
-                        Console.WriteLine($"createUnit.Error: {self.BattleInfos[i].FubenId} {createUnit.Error}");
+                        Log.Error($"createUnit.Error: {self.BattleInfos[i].FubenId} {createUnit.Error}");
                     }
                 }
                 catch (Exception ex)
@@ -126,12 +129,12 @@ namespace ET.Server
         public static async ETTask<KeyValuePairInt> GenerateBattleInstanceId(this BattleSceneComponent self, long unitid, int sceneId)
         {
             //动态创建副本
-            List<StartSceneConfig> zonelocaldungeons = StartSceneConfigCategory.Instance.LocalDungeons[self.DomainZone()];
+            List<StartSceneConfig> zonelocaldungeons = StartSceneConfigCategory.Instance.LocalDungeons[self.Zone()];
             int n = RandomHelper.RandomNumber(0, zonelocaldungeons.Count);
             StartSceneConfig startSceneConfig = zonelocaldungeons[n];
 
-            LocalDungeon2M_EnterResponse createUnit = (LocalDungeon2M_EnterResponse)await ActorMessageSenderComponent.Instance.Call(
-                startSceneConfig.InstanceId,
+            LocalDungeon2M_EnterResponse createUnit = (LocalDungeon2M_EnterResponse)await self.Root().GetComponent<MessageSender>().Call(
+                startSceneConfig.ActorId,
                 new M2LocalDungeon_EnterRequest()
                 {
                     UserID = unitid,
@@ -147,7 +150,8 @@ namespace ET.Server
             }
 
             BattleInfo battleInfo = self.AddChild<BattleInfo>();
-            battleInfo.ProgressId = startSceneConfig.InstanceId;
+            battleInfo.ProgressId = startSceneConfig.Process;
+            battleInfo.ActorId = startSceneConfig.ActorId;
             battleInfo.FubenId = createUnit.FubenId;
             battleInfo.PlayerNumber = 0;
             battleInfo.FubenInstanceId = createUnit.FubenInstanceId;
