@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -48,8 +49,22 @@ namespace ET.Client
             self.RefreshHouseItems();
         }
 
+        public static void Refresh(this ES_WarehouseRole self)
+        {
+            self.RefreshHouseItems();
+            self.RefreshBagItems();
+        }
+
         private static void RefreshHouseItems(this ES_WarehouseRole self)
         {
+            BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
+
+            self.ShowHouseBagInfos.Clear();
+            self.ShowHouseBagInfos.AddRange(bagComponentC.GetItemsByLoc((ItemLocType)(self.CurrentItemType + 5)));
+
+            int allNumber = bagComponentC.GetHouseShowCell(self.CurrentItemType + 5);
+            self.AddUIScrollItems(ref self.ScrollItemBagItems, allNumber);
+            self.E_BagItems2LoopVerticalScrollRect.SetVisible(true, allNumber);
         }
 
         private static void RefreshBagItems(this ES_WarehouseRole self)
@@ -67,22 +82,60 @@ namespace ET.Client
         private static void OnHouseItemsRefresh(this ES_WarehouseRole self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count? self.ShowBagBagInfos[index] : null, ItemOperateEnum.CangkuBag,
-                self.UpdateSelect);
+
+            BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
+            int openell = bagComponentC.GetHouseTotalCell(self.CurrentItemType + 5);
+            int allNumber = bagComponentC.GetHouseShowCell(self.CurrentItemType + 5);
+
+            if (index < self.ShowHouseBagInfos.Count)
+            {
+                scrollItemCommonItem.Refresh(self.ShowHouseBagInfos[index], ItemOperateEnum.Cangku, self.UpdateHouseSelect);
+            }
+            else
+            {
+                scrollItemCommonItem.Refresh(null, ItemOperateEnum.None);
+            }
+
+            if (index < openell)
+            {
+                scrollItemCommonItem.ES_CommonItem.UpdateUnLock(true);
+            }
+            else
+            {
+                int addcell = bagComponentC.WarehouseAddedCell[self.CurrentItemType + 5] + (index - openell);
+                BuyCellCost buyCellCost = ConfigData.BuyStoreCellCosts[self.CurrentItemType * 10 + addcell];
+                int itemid = int.Parse(buyCellCost.Get.Split(';')[0]);
+                int itemnum = int.Parse(buyCellCost.Get.Split(';')[1]);
+                scrollItemCommonItem.Refresh(new BagInfo() { ItemID = itemid, ItemNum = itemnum }, ItemOperateEnum.None);
+                scrollItemCommonItem.ES_CommonItem.UpdateUnLock(false);
+            }
         }
 
         private static void OnBagItemsRefresh(this ES_WarehouseRole self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemBagItems[index].BindTrans(transform);
+            scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count? self.ShowBagBagInfos[index] : null, ItemOperateEnum.CangkuBag,
+                self.UpdateBagSelect);
         }
 
-        private static void UpdateSelect(this ES_WarehouseRole self, BagInfo bagInfo)
+        private static void UpdateHouseSelect(this ES_WarehouseRole self, BagInfo bagInfo)
         {
             for (int i = 0; i < self.ScrollItemHouseItems.Keys.Count - 1; i++)
             {
                 if (self.ScrollItemHouseItems[i].uiTransform != null)
                 {
                     self.ScrollItemHouseItems[i].UpdateSelectStatus(bagInfo);
+                }
+            }
+        }
+
+        private static void UpdateBagSelect(this ES_WarehouseRole self, BagInfo bagInfo)
+        {
+            for (int i = 0; i < self.ScrollItemBagItems.Keys.Count - 1; i++)
+            {
+                if (self.ScrollItemBagItems[i].uiTransform != null)
+                {
+                    self.ScrollItemBagItems[i].UpdateSelectStatus(bagInfo);
                 }
             }
         }

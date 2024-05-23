@@ -360,5 +360,16 @@ namespace ET.Client
         {
             return self.AllItemList[(int)ItemLocType.ItemLocEquip];
         }
+
+        public static int GetHouseTotalCell(this BagComponentC self, int houseId)
+        {
+            return self.WarehouseAddedCell[houseId] + self.AdditionalCellNum[houseId] + GlobalValueConfigCategory.Instance.HourseInitCapacity;
+        }
+
+        public static int GetHouseShowCell(this BagComponentC self, int houseId)
+        {
+            return self.AdditionalCellNum[houseId] + GlobalValueConfigCategory.Instance.HourseInitCapacity +
+                    GlobalValueConfigCategory.Instance.Get(85).Value2;
+        }
     }
 }

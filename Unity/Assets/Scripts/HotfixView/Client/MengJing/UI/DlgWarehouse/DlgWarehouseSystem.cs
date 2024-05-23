@@ -6,6 +6,16 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class BagItemUpdate_DlgWarehouseRefresh: AEvent<Scene, BagItemUpdate>
+    {
+        protected override async ETTask Run(Scene scene, BagItemUpdate args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgWarehouse>()?.View.ES_WarehouseRole?.Refresh();
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof (ES_WarehouseRole))]
     [FriendOf(typeof (ES_WarehouseAccount))]
     [FriendOf(typeof (ES_WarehouseGem))]

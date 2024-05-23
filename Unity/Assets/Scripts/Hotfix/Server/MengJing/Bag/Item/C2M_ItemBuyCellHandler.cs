@@ -61,7 +61,7 @@ namespace ET.Server
                 }
 
                 int addcell = bagComponent.WarehouseAddedCell[storeindex];
-                BuyCellCost buyCellCost = ConfigHelper.BuyStoreCellCosts()[(storeindex - 5) * 10 + addcell];
+                BuyCellCost buyCellCost = ConfigData.BuyStoreCellCosts[(storeindex - 5) * 10 + addcell];
                 if (!bagComponent.OnCostItemData(buyCellCost.Cost))
                 {
                     response.Error = ErrorCode.ERR_ItemNotEnoughError;
