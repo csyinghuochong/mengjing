@@ -4,13 +4,72 @@ namespace ET.Client
 {
     public static class FunctionUI
     {
+        public static bool OpenFunctionUI(Scene root, int npcid, int functionid)
+        {
+            if (functionid < 10)
+            {
+                return false;
+            }
+
+            FuntionConfig funtionOpenConfig = FuntionConfigCategory.Instance.Get(functionid);
+            bool functionOn = FunctionHelp.CheckFuncitonOn(root, funtionOpenConfig);
+            if (!functionOn)
+            {
+                // FlyTipComponent.Instance.SpawnFlyTipDi(FunctionHelp.GetFunctionContion(zoneScene, funtionOpenConfig));
+                return false;
+            }
+
+            bool gm = GMData.GmAccount.Contains(root.GetComponent<PlayerComponent>().Account);
+            if (!gm && functionid == 1048)
+            {
+                return false;
+            }
+
+            string uipath = GetUIPath(funtionOpenConfig.Name);
+            if (uipath == "")
+            {
+                return false;
+            }
+
+            //if (functionid != 1003 && functionid != 1004)
+            //{
+            //    await UIHelper.Create(zoneScene, uipath);
+            //    return true;
+            //}
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
+            System.Numerics.Vector3 unitPosi = new(unit.Position.x, unit.Position.y, unit.Position.z);
+            Unit npc = TaskHelper.GetNpcByConfigId(root, unitPosi, npcid);
+            if (npc == null)
+            {
+                return false;
+            }
+
+
+            root.GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_TaskGet);
+            // UIHelper.CurrentNpcId = npcid;
+            // UIHelper.CurrentNpcUI = GetUIPath(funtionOpenConfig.Name);
+            // DlgMain dlgMain = root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
+            // dlgMain.View.EG_JoystickMoveRectTransform.gameObject.SetActive(false);
+            //
+            // MJCameraComponent cameraComponent = root.CurrentScene().GetComponent<MJCameraComponent>();
+            // cameraComponent.SetBuildEnter(npc, () => { OnBuildEnter(npcid); });
+            return true;
+        }
+
+        public static string GetUIPath(string uitype)
+        {
+            string uipath = string.Empty;
+
+            return uipath;
+        }
+
         public static Color QualityReturnColorDi(int ItenQuality)
         {
             Color color = new Color(1, 1, 1);
             switch (ItenQuality)
             {
                 case 1:
-                    color = new Color(70f / 255f, 70f/255f, 70f / 255f);
+                    color = new Color(70f / 255f, 70f / 255f, 70f / 255f);
                     break;
                 case 2:
                     color = new Color(0, 110f / 255f, 0);
@@ -29,9 +88,10 @@ namespace ET.Client
                     color = new Color(245f / 255f, 43f / 255f, 96f / 255f);
                     break;
             }
+
             return color;
         }
-        
+
         //传入值获取属性名称
         public static string ReturnEquipNeedPropertyName(string proprety)
         {
@@ -149,6 +209,5 @@ namespace ET.Client
 
             return weizhi;
         }
-
     }
 }

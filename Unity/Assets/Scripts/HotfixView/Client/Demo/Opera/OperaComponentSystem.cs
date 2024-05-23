@@ -477,11 +477,11 @@ namespace ET.Client
         public static async ETTask OnClickNpc(this OperaComponent self, int npcid, string operatetype = "0")
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            System.Numerics.Vector3 unitPosi = new System.Numerics.Vector3(unit.Position.x, unit.Position.y, unit.Position.z);
+            System.Numerics.Vector3 unitPosi = new(unit.Position.x, unit.Position.y, unit.Position.z);
             Unit npc = TaskHelper.GetNpcByConfigId(self.Root(), unitPosi, npcid);
 
             NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcid);
-            Vector3 newTarget = new Vector3(npcConfig.Position[0] * 0.01f, npcConfig.Position[1] * 0.01f, npcConfig.Position[2] * 0.01f);
+            Vector3 newTarget = new(npcConfig.Position[0] * 0.01f, npcConfig.Position[1] * 0.01f, npcConfig.Position[2] * 0.01f);
             if (npcConfig.MovePosition.Length == 0 && npc != null && npc.GetComponent<AnimatorComponent>() != null)
             {
                 npc.GetComponent<AnimatorComponent>().Play(MotionType.SelectNpc);
@@ -580,18 +580,15 @@ namespace ET.Client
             }
             else
             {
-                // FunctionUI.GetInstance().OpenFunctionUI(self.ZoneScene(), self.NpcId, functionId);
+                FunctionUI.OpenFunctionUI(self.Root(), self.NpcId, functionId);
             }
         }
 
         public static async ETTask OpenNpcTaskUI(this OperaComponent self, int npcid)
         {
-            // UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UITaskGet);
-            // if (uI == null)
-            //     return;
-            // uI.GetComponent<UITaskGetComponent>().InitData(npcid);
-
-            await ETTask.CompletedTask;
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TaskGet);
+            DlgTaskGet dlgTaskGet = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgTaskGet>();
+            dlgTaskGet.InitData(npcid);
         }
 
         public static void OnUnitToSpeak(this OperaComponent self, Vector3 vector3)
