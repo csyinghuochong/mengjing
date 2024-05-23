@@ -539,5 +539,18 @@ namespace ET.Server
             return self.Type == UnitType.Player && self.GetComponent<UserInfoComponentS>().UserInfo.RobotId > 0;
         }
         
+        public static List<Unit> GetUnitListByCamp(Scene scene, int unitType, int camp)
+        {
+            List<Unit> units = new List<Unit>();
+            List<Unit> allunits = scene.GetComponent<UnitComponent>().GetAll();
+            for (int i = 0; i < allunits.Count; i++)
+            {
+                if (allunits[i].Type == unitType && allunits[i].GetBattleCamp() == camp)
+                {
+                    units.Add(allunits[i]);
+                }
+            }
+            return units;
+        }
     }
 }
