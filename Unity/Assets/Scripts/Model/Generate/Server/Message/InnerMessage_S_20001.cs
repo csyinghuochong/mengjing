@@ -4468,6 +4468,80 @@ namespace ET
 
 	}
 
+//进入战场
+	[ResponseType(nameof(B2M_BattleEnterResponse))]
+	[Message(InnerMessage.M2B_BattleEnterRequest)]
+	[MemoryPackable]
+	public partial class M2B_BattleEnterRequest: MessageObject, IRequest
+	{
+		public static M2B_BattleEnterRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2B_BattleEnterRequest), isFromPool) as M2B_BattleEnterRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UserID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int SceneId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UserID = default;
+			this.SceneId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.B2M_BattleEnterResponse)]
+	[MemoryPackable]
+	public partial class B2M_BattleEnterResponse: MessageObject, IResponse
+	{
+		public static B2M_BattleEnterResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(B2M_BattleEnterResponse), isFromPool) as B2M_BattleEnterResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long FubenInstanceId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Camp { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.FubenInstanceId = default;
+			this.Camp = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -4601,5 +4675,7 @@ namespace ET
 		 public const ushort T2M_TeamUpdateRequest = 20130;
 		 public const ushort M2Arena_ArenaEnterRequest = 20131;
 		 public const ushort Arena2M_ArenaEnterResponse = 20132;
+		 public const ushort M2B_BattleEnterRequest = 20133;
+		 public const ushort B2M_BattleEnterResponse = 20134;
 	}
 }

@@ -36,6 +36,7 @@ namespace ET
         public const int Donation = 35;  //捐献
         public const int PetMine = 36;
         public const int LoginAccount = 37;
+        public const int Battle = 38;
 
 
         public const int BeiYong = 99;

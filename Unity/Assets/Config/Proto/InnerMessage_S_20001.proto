@@ -1141,3 +1141,24 @@ message Arena2M_ArenaEnterResponse // IResponse
 
 	int64 FubenInstanceId = 2;
 }
+
+//进入战场
+//ResponseType B2M_BattleEnterResponse
+message M2B_BattleEnterRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 UserID = 1;
+	int32 SceneId = 2;
+}
+
+message B2M_BattleEnterResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	int64 FubenInstanceId = 2;
+	int32 Camp = 3;
+}
