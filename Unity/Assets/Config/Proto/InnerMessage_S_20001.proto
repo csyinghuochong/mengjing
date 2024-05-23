@@ -1214,3 +1214,18 @@ message C2C_CenterServerInfoRespone // IResponse
 	string Message = 92;
 	string Value = 1;
 }
+
+//ResponseType Center2C_DeleteAccountResponse
+message C2Center_DeleteAccountRequest // IRequest
+{
+	int32 RpcId = 90;
+	string Account = 1;
+	string Password = 2;
+}
+
+message Center2C_DeleteAccountResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

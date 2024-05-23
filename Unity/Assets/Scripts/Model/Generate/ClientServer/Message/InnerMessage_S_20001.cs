@@ -4749,6 +4749,67 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Center2C_DeleteAccountResponse))]
+	[Message(InnerMessage.C2Center_DeleteAccountRequest)]
+	[MemoryPackable]
+	public partial class C2Center_DeleteAccountRequest: MessageObject, IRequest
+	{
+		public static C2Center_DeleteAccountRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2Center_DeleteAccountRequest), isFromPool) as C2Center_DeleteAccountRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string Account { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string Password { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Account = default;
+			this.Password = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.Center2C_DeleteAccountResponse)]
+	[MemoryPackable]
+	public partial class Center2C_DeleteAccountResponse: MessageObject, IResponse
+	{
+		public static Center2C_DeleteAccountResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Center2C_DeleteAccountResponse), isFromPool) as Center2C_DeleteAccountResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -4890,5 +4951,7 @@ namespace ET
 		 public const ushort Center2A_SaveAccount = 20138;
 		 public const ushort C2C_CenterServerInfoReuest = 20139;
 		 public const ushort C2C_CenterServerInfoRespone = 20140;
+		 public const ushort C2Center_DeleteAccountRequest = 20141;
+		 public const ushort Center2C_DeleteAccountResponse = 20142;
 	}
 }
