@@ -580,7 +580,7 @@ namespace ET.Client
             }
             else
             {
-                FunctionUI.OpenFunctionUI(self.Root(), self.NpcId, functionId);
+                FunctionUI.OpenFunctionUI(self.Root(), self.NpcId, functionId).Coroutine();
             }
         }
 

@@ -4,11 +4,11 @@ namespace ET.Client
 {
     public static class FunctionUI
     {
-        public static bool OpenFunctionUI(Scene root, int npcid, int functionid)
+        public static async ETTask OpenFunctionUI(Scene root, int npcid, int functionid)
         {
             if (functionid < 10)
             {
-                return false;
+                return;
             }
 
             FuntionConfig funtionOpenConfig = FuntionConfigCategory.Instance.Get(functionid);
@@ -16,19 +16,13 @@ namespace ET.Client
             if (!functionOn)
             {
                 // FlyTipComponent.Instance.SpawnFlyTipDi(FunctionHelp.GetFunctionContion(zoneScene, funtionOpenConfig));
-                return false;
+                return;
             }
 
             bool gm = GMData.GmAccount.Contains(root.GetComponent<PlayerComponent>().Account);
             if (!gm && functionid == 1048)
             {
-                return false;
-            }
-
-            string uipath = GetUIPath(funtionOpenConfig.Name);
-            if (uipath == "")
-            {
-                return false;
+                return;
             }
 
             //if (functionid != 1003 && functionid != 1004)
@@ -41,26 +35,34 @@ namespace ET.Client
             Unit npc = TaskHelper.GetNpcByConfigId(root, unitPosi, npcid);
             if (npc == null)
             {
-                return false;
+                return;
             }
 
-
-            root.GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_TaskGet);
             // UIHelper.CurrentNpcId = npcid;
             // UIHelper.CurrentNpcUI = GetUIPath(funtionOpenConfig.Name);
+
+            WindowID windowID = GetUIPath(funtionOpenConfig.Name);
+            if (windowID == WindowID.WindowID_Invaild)
+            {
+                return;
+            }
+
+            await root.GetComponent<UIComponent>().ShowWindowAsync(windowID);
             // DlgMain dlgMain = root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
             // dlgMain.View.EG_JoystickMoveRectTransform.gameObject.SetActive(false);
             //
             // MJCameraComponent cameraComponent = root.CurrentScene().GetComponent<MJCameraComponent>();
             // cameraComponent.SetBuildEnter(npc, () => { OnBuildEnter(npcid); });
-            return true;
         }
 
-        public static string GetUIPath(string uitype)
+        public static WindowID GetUIPath(string uitype)
         {
-            string uipath = string.Empty;
+            if (uitype == "DlgTaskGet")
+            {
+                return WindowID.WindowID_TaskGet;
+            }
 
-            return uipath;
+            return WindowID.WindowID_Invaild;
         }
 
         public static Color QualityReturnColorDi(int ItenQuality)

@@ -28,7 +28,7 @@ namespace ET.Server
         }
 
         // <summary>
-        /// AccountCheckOutTimeComponent Ê®·ÖÖÓºó
+        /// AccountCheckOutTimeComponent ååˆ†é’Ÿå
         /// DisconnectHelper.KickPlayer
         /// G2A_ExitGame
         /// </summary>
