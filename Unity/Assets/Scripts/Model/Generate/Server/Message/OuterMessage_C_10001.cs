@@ -14748,6 +14748,44 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.PaiMaiAuctionRecord)]
+	[MemoryPackable]
+	public partial class PaiMaiAuctionRecord: MessageObject
+	{
+		public static PaiMaiAuctionRecord Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(PaiMaiAuctionRecord), isFromPool) as PaiMaiAuctionRecord; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long UnionId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Occ { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string PlayerName { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long Price { get; set; }
+
+		[MemoryPackOrder(4)]
+		public long Time { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.UnionId = default;
+			this.Occ = default;
+			this.PlayerName = default;
+			this.Price = default;
+			this.Time = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -15172,5 +15210,6 @@ namespace ET
 		 public const ushort RankSeasonTowerInfo = 10421;
 		 public const ushort M2C_AreneInfoResult = 10422;
 		 public const ushort M2C_BattleInfoResult = 10423;
+		 public const ushort PaiMaiAuctionRecord = 10424;
 	}
 }

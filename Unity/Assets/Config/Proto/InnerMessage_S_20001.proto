@@ -1025,3 +1025,21 @@ message LocalDungeon2M_ExitResponse // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType M2P_PaiMaiAuctionOverResponse
+message P2M_PaiMaiAuctionOverRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 Price = 1;
+	int64 UnitID = 2;
+	int32 ItemID = 3;
+	int32 ItemNumber = 4;
+}
+
+message M2P_PaiMaiAuctionOverResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

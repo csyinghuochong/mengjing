@@ -3783,6 +3783,14 @@ message M2C_BattleInfoResult // IMessage
 	int32 SceneType  = 5;
 }
 
+message PaiMaiAuctionRecord
+{
+	int64 UnionId = 1;
+	int32 Occ = 2;
+	string PlayerName = 3;
+	int64 Price = 4;
+	int64 Time = 5;
+}
 
 
 

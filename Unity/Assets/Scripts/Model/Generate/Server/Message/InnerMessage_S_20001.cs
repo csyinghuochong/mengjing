@@ -4019,6 +4019,79 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2P_PaiMaiAuctionOverResponse))]
+	[Message(InnerMessage.P2M_PaiMaiAuctionOverRequest)]
+	[MemoryPackable]
+	public partial class P2M_PaiMaiAuctionOverRequest: MessageObject, IRequest
+	{
+		public static P2M_PaiMaiAuctionOverRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(P2M_PaiMaiAuctionOverRequest), isFromPool) as P2M_PaiMaiAuctionOverRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long Price { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitID { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int ItemID { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int ItemNumber { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Price = default;
+			this.UnitID = default;
+			this.ItemID = default;
+			this.ItemNumber = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.M2P_PaiMaiAuctionOverResponse)]
+	[MemoryPackable]
+	public partial class M2P_PaiMaiAuctionOverResponse: MessageObject, IResponse
+	{
+		public static M2P_PaiMaiAuctionOverResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2P_PaiMaiAuctionOverResponse), isFromPool) as M2P_PaiMaiAuctionOverResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -4139,5 +4212,7 @@ namespace ET
 		 public const ushort G2Robot_MessageRequest = 20117;
 		 public const ushort M2LocalDungeon_ExitRequest = 20118;
 		 public const ushort LocalDungeon2M_ExitResponse = 20119;
+		 public const ushort P2M_PaiMaiAuctionOverRequest = 20120;
+		 public const ushort M2P_PaiMaiAuctionOverResponse = 20121;
 	}
 }
