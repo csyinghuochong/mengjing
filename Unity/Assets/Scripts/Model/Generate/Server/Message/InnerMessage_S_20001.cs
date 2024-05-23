@@ -3941,6 +3941,84 @@ namespace ET
 
 	}
 
+//退出副本
+	[ResponseType(nameof(LocalDungeon2M_ExitResponse))]
+	[Message(InnerMessage.M2LocalDungeon_ExitRequest)]
+	[MemoryPackable]
+	public partial class M2LocalDungeon_ExitRequest: MessageObject, IRequest
+	{
+		public static M2LocalDungeon_ExitRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2LocalDungeon_ExitRequest), isFromPool) as M2LocalDungeon_ExitRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int SceneType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long FubenInstanceId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long FubenId { get; set; }
+
+		[MemoryPackOrder(3)]
+		public List<long> Camp1Player { get; set; } = new();
+
+		[MemoryPackOrder(4)]
+		public List<long> Camp2Player { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.SceneType = default;
+			this.FubenInstanceId = default;
+			this.FubenId = default;
+			this.Camp1Player.Clear();
+			this.Camp2Player.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.LocalDungeon2M_ExitResponse)]
+	[MemoryPackable]
+	public partial class LocalDungeon2M_ExitResponse: MessageObject, IResponse
+	{
+		public static LocalDungeon2M_ExitResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(LocalDungeon2M_ExitResponse), isFromPool) as LocalDungeon2M_ExitResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -4059,5 +4137,7 @@ namespace ET
 		 public const ushort R2A_Broadcast = 20115;
 		 public const ushort A2R_Broadcast = 20116;
 		 public const ushort G2Robot_MessageRequest = 20117;
+		 public const ushort M2LocalDungeon_ExitRequest = 20118;
+		 public const ushort LocalDungeon2M_ExitResponse = 20119;
 	}
 }

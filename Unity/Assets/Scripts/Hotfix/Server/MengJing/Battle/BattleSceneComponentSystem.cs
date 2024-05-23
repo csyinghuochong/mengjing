@@ -28,19 +28,19 @@ namespace ET.Server
             if (ServerHelper.GetOpenServerDay(self.Zone()) > 0 && !ComHelperS.IsInnerNet())
             {
                 ActorId robotSceneId = StartSceneConfigCategory.Instance.GetBySceneName(203, "Robot01").ActorId;
-                MessageHelper.SendActor(robotSceneId, new G2Robot_MessageRequest() { Zone = self.DomainZone(), MessageType = NoticeType.BattleOpen });
+                self.Root().GetComponent<MessageSender>().Send(robotSceneId, new G2Robot_MessageRequest() { Zone = self.Zone(), MessageType = NoticeType.BattleOpen });
             }
         }
 
         public static async ETTask OnBattleOver(this BattleSceneComponent self)
         {
             self.BattleOpen = false;
-            LogHelper.LogDebug($"OnBattleOver : {self.DomainZone()}");
+            LogHelper.LogDebug($"OnBattleOver : {self.Zone()}");
             //Console.WriteLine($"OnBattleOver : {self.DomainZone()}");
-            long robotSceneId = StartSceneConfigCategory.Instance.GetBySceneName(203, "Robot01").InstanceId;
-            MessageHelper.SendActor(robotSceneId, new G2Robot_MessageRequest() { Zone = self.DomainZone(), MessageType = NoticeType.BattleOver });
+            ActorId robotSceneId = StartSceneConfigCategory.Instance.GetBySceneName(203, "Robot01").ActorId;
+            self.Root().GetComponent<MessageSender>().Send(robotSceneId, new G2Robot_MessageRequest() { Zone = self.DomainZone(), MessageType = NoticeType.BattleOver });
 
-            await TimerComponent.Instance.WaitAsync(RandomHelper.RandomNumber(10000, 20000));
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(10000, 20000));
             for (int i = 0; i < self.BattleInfos.Count; i++)
             {
                 try
