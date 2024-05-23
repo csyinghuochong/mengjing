@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace ET.Server
 {
@@ -247,13 +248,13 @@ namespace ET.Server
         /// <returns></returns>
         public static async ETTask InitPaiMainShop(this PaiMaiSceneComponent self, int itemType, List<PaiMaiShopItemInfo> oldPaiMaiShop)
         {
-            int zone = self.DomainZone();
-            long unitid = PaiMaiHelper.Instance.GetPaiMaiId(itemType);
-            long dbCacheId = DBHelper.GetDbCacheId(zone);
+            int zone = self.Zone();
+            long unitid = PaiMaiHelper.GetPaiMaiId(itemType);
 
-            //D2G_GetComponent d2GGetUnit = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = unitid, Component = DBHelper.DBPaiMainInfo });
+            DBManagerComponent dbManagerComponent = self.Root().GetComponent<DBManagerComponent>();
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB(self.Zone());
             List<DBPaiMainInfo> paimaiList =
-                    await Game.Scene.GetComponent<DBComponent>().Query<DBPaiMainInfo>(self.DomainZone(), d => d.Id == unitid);
+                    await dbComponent.Query<DBPaiMainInfo>(self.Zone(), d => d.Id == unitid);
             if (zone == 66)
             {
                 Log.Console("zone == 66");
@@ -262,12 +263,11 @@ namespace ET.Server
             if (paimaiList == null || paimaiList.Count == 0)
             {
                 //初始拍卖行商店
-                DBPaiMainInfo dBPaiMainInfo = new DBPaiMainInfo();
-                dBPaiMainInfo.Id = unitid;
+                DBPaiMainInfo dBPaiMainInfo = self.AddChildWithId<DBPaiMainInfo>(unitid);
                 self.dBPaiMainInfo_Shop = dBPaiMainInfo;
                 //存储拍卖行商店
                 //D2M_SaveComponent d2GSave = (D2M_SaveComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new M2D_SaveComponent() { UnitId = unitid, EntityByte = MongoHelper.ToBson(dBPaiMainInfo), ComponentType = DBHelper.DBPaiMainInfo });
-                await Game.Scene.GetComponent<DBComponent>().Save<DBPaiMainInfo>(self.DomainZone(), dBPaiMainInfo);
+                await dbComponent.Save<DBPaiMainInfo>(self.Zone(), dBPaiMainInfo);
             }
             else
             {
@@ -280,13 +280,13 @@ namespace ET.Server
 
         public static async ETTask InitPaiMainStall(this PaiMaiSceneComponent self, int itemType, List<PaiMaiItemInfo> oldPaiMaiStall)
         {
-            int zone = self.DomainZone();
-            long unitid = PaiMaiHelper.Instance.GetPaiMaiId(itemType);
-            long dbCacheId = DBHelper.GetDbCacheId(zone);
+            int zone = self.Zone();
+            long unitid = PaiMaiHelper.GetPaiMaiId(itemType);
 
-            // D2G_GetComponent d2GGetUnit = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = unitid, Component = DBHelper.DBPaiMainInfo });
+            DBManagerComponent dbManagerComponent = self.Root().GetComponent<DBManagerComponent>();
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB(self.Zone());
             List<DBPaiMainInfo> paimaiList =
-                    await Game.Scene.GetComponent<DBComponent>().Query<DBPaiMainInfo>(self.DomainZone(), d => d.Id == unitid);
+                    await dbComponent.Query<DBPaiMainInfo>(self.Zone(), d => d.Id == unitid);
             if (zone == 66)
             {
                 Log.Console("zone == 66");
@@ -295,13 +295,12 @@ namespace ET.Server
             if (paimaiList == null || paimaiList.Count == 0)
             {
                 //初始摆摊数据
-                DBPaiMainInfo dBPaiMainInfo = new DBPaiMainInfo();
-                dBPaiMainInfo.Id = unitid;
+                DBPaiMainInfo dBPaiMainInfo = self.AddChildWithId<DBPaiMainInfo>(unitid);
                 self.dBPaiMainInfo_Stall = dBPaiMainInfo;
                 self.dBPaiMainInfo_Stall.PaiMaiItemInfos = oldPaiMaiStall;
                 //存储摆摊数据
                 //D2M_SaveComponent d2GSave = (D2M_SaveComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new M2D_SaveComponent() { UnitId = unitid, EntityByte = MongoHelper.ToBson(dBPaiMainInfo), ComponentType = DBHelper.DBPaiMainInfo });
-                await Game.Scene.GetComponent<DBComponent>().Save<DBPaiMainInfo>(self.DomainZone(), dBPaiMainInfo);
+                await dbComponent.Save<DBPaiMainInfo>(self.Zone(), dBPaiMainInfo);
             }
             else
             {
@@ -389,13 +388,13 @@ namespace ET.Server
 
         public static async ETTask InitPaiMaiShangJia(this PaiMaiSceneComponent self, int itemType, List<PaiMaiItemInfo> oldPaiMaiAll)
         {
-            int zone = self.DomainZone();
-            long unitid = PaiMaiHelper.Instance.GetPaiMaiId(itemType);
-            long dbCacheId = DBHelper.GetDbCacheId(zone);
+            int zone = self.Zone();
+            long unitid = PaiMaiHelper.GetPaiMaiId(itemType);
 
-            //D2G_GetComponent d2GGetUnit = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = unitid, Component = DBHelper.DBPaiMainInfo });
+            DBManagerComponent dbManagerComponent = self.Root().GetComponent<DBManagerComponent>();
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB(self.Zone());
             List<DBPaiMainInfo> paimaiList =
-                    await Game.Scene.GetComponent<DBComponent>().Query<DBPaiMainInfo>(self.DomainZone(), d => d.Id == unitid);
+                    await dbComponent.Query<DBPaiMainInfo>(self.Zone(), d => d.Id == unitid);
             if (zone == 66)
             {
                 Log.Console("zone == 66");
@@ -410,7 +409,7 @@ namespace ET.Server
                 self.UpdatePaiMaiDBByType(itemType, dBPaiMainInfo);
                 //存储摆摊数据
                 //D2M_SaveComponent d2GSave = (D2M_SaveComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new M2D_SaveComponent() { UnitId = unitid, EntityByte = MongoHelper.ToBson(dBPaiMainInfo), ComponentType = DBHelper.DBPaiMainInfo });
-                await Game.Scene.GetComponent<DBComponent>().Save<DBPaiMainInfo>(self.DomainZone(), dBPaiMainInfo);
+                await dbComponent.Save<DBPaiMainInfo>(self.Zone(), dBPaiMainInfo);
             }
             else
             {
@@ -420,16 +419,16 @@ namespace ET.Server
 
         public static async ETTask InitDBData(this PaiMaiSceneComponent self)
         {
-            int zone = self.DomainZone();
-            long dbCacheId = DBHelper.GetDbCacheId(zone);
-            await TimerComponent.Instance.WaitAsync(RandomHelper.RandomNumber(5000, 10000));
+            int zone = self.Zone();
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(5000, 10000));
 
             List<PaiMaiShopItemInfo> oldPaiMaiShop = new List<PaiMaiShopItemInfo>();
             List<PaiMaiItemInfo> oldPaiMaiAll = new List<PaiMaiItemInfo>();
             List<PaiMaiItemInfo> oldPaiMaiStall = new List<PaiMaiItemInfo>();
 
-            //D2G_GetComponent d2GGetUnit = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = zone, Component = DBHelper.DBPaiMainInfo });
-            List<DBPaiMainInfo> paimaiList = await Game.Scene.GetComponent<DBComponent>().Query<DBPaiMainInfo>(self.DomainZone(), d => d.Id == zone);
+            DBManagerComponent dbManagerComponent = self.Root().GetComponent<DBManagerComponent>();
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB(self.Zone());
+            List<DBPaiMainInfo> paimaiList = await dbComponent.Query<DBPaiMainInfo>(self.Zone(), d => d.Id == zone);
 
             if (paimaiList != null && paimaiList.Count > 0)
             {
@@ -458,15 +457,15 @@ namespace ET.Server
             await self.InitPaiMainShop(11, oldPaiMaiShop);
             await self.InitPaiMainStall(12, oldPaiMaiStall);
 
-            self.Timer = TimerComponent.Instance.NewRepeatedTimer(TimeHelper.Minute * 30 + RandomHelper.RandomNumber(1000, 10000),
-                TimerType.PaiMaiTimer, self);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Minute * 30 + RandomHelper.RandomNumber(1000, 10000),
+                TimerInvokeType.PaiMaiTimer, self);
             self.OnZeroClockUpdate();
         }
 
         //更新快捷购买列表
         public static void UpdatePaiMaiShopItemList(this PaiMaiSceneComponent self)
         {
-            self.dBPaiMainInfo_Shop.PaiMaiShopItemInfos = PaiMaiHelper.Instance.InitPaiMaiShopItemList(self.dBPaiMainInfo_Shop.PaiMaiShopItemInfos);
+            self.dBPaiMainInfo_Shop.PaiMaiShopItemInfos = PaiMaiHelper.InitPaiMaiShopItemList(self.dBPaiMainInfo_Shop.PaiMaiShopItemInfos);
         }
 
         //零点刷新
@@ -483,9 +482,9 @@ namespace ET.Server
         //每天更新道具物品价格
         public static void UpdatePaiMaiShopItemPrice(this PaiMaiSceneComponent self)
         {
-            int curzone = ServerHelper.GetOldServerId(self.DomainZone());
-            int openserverDay = DBHelper.GetOpenServerDay(curzone);
-            Log.Info($"curzone = {curzone} openserverDay = {openserverDay} PaiMaiScene开服天数 {self.DomainZone()} {openserverDay}");
+            int curzone = ServerHelper.GetOldServerId(self.Zone());
+            int openserverDay = ServerHelper.GetOpenServerDay(false, curzone);
+            Log.Info($"curzone = {curzone} openserverDay = {openserverDay} PaiMaiScene开服天数 {self.Zone()} {openserverDay}");
             if (openserverDay == 0)
             {
                 return;
@@ -496,7 +495,7 @@ namespace ET.Server
             {
                 float upPrice = RandomHelper.RandomNumberFloat(0.03f, 0.06f);
                 PaiMaiShopItemInfo info = paiMaiShopItemInfos[i];
-                int sellid = PaiMaiHelper.Instance.GetPaiMaiSellId((int)info.Id);
+                int sellid = PaiMaiHelper.GetPaiMaiSellId((int)info.Id);
                 if (sellid == 0)
                 {
                     continue;
@@ -550,7 +549,7 @@ namespace ET.Server
 
         public static void UpdateShangJiaItems_ByType(this PaiMaiSceneComponent self, DBPaiMainInfo dBPaiMainInfo)
         {
-            int AAA = self.DomainZone();
+            int AAA = self.Zone();
             List<PaiMaiItemInfo> paimaiItems = dBPaiMainInfo.PaiMaiItemInfos;
 
             for (int i = 0; i < paimaiItems.Count; i++)
@@ -617,7 +616,7 @@ namespace ET.Server
                         {
                             Log.Info("拍卖行系统购买 概率:" + buyPro + "出售价格:" + paiMaiItem.Price * costNum + "玩家名称:" + paiMaiItem.PlayerName + "出售道具:" +
                                 paiMaiItem.BagInfo.ItemID + "出售单价:" + paiMaiItem.Price + "道具拥有数量:" + paiMaiItem.BagInfo.ItemNum);
-                            MailHelp.SendPaiMaiEmail(self.DomainZone(), paiMaiItem, costNum, 0).Coroutine();
+                            MailHelp.SendPaiMaiEmail(self.Root(), paiMaiItem, costNum, 0).Coroutine();
                         }
                     }
                 }
@@ -661,32 +660,30 @@ namespace ET.Server
             //    }
             //}
 
-            int zone = self.DomainZone();
+            int zone = self.Zone();
             await self.CheckOverTime(self.dBPaiMainInfo_Consume);
             await self.CheckOverTime(self.dBPaiMainInfo_Material);
             await self.CheckOverTime(self.dBPaiMainInfo_Equipment);
             await self.CheckOverTime(self.dBPaiMainInfo_Gemstone);
             await self.CheckOverTime(self.dBPaiMainInfo_Stall);
 
-            await self.SavePaiMaiData(PaiMaiHelper.Instance.GetPaiMaiId(1), self.dBPaiMainInfo_Consume);
-            await TimerComponent.Instance.WaitAsync(RandomHelper.RandomNumber(1000, 5000));
-            await self.SavePaiMaiData(PaiMaiHelper.Instance.GetPaiMaiId(2), self.dBPaiMainInfo_Material);
-            await TimerComponent.Instance.WaitAsync(RandomHelper.RandomNumber(1000, 5000));
-            await self.SavePaiMaiData(PaiMaiHelper.Instance.GetPaiMaiId(3), self.dBPaiMainInfo_Equipment);
-            await TimerComponent.Instance.WaitAsync(RandomHelper.RandomNumber(1000, 5000));
-            await self.SavePaiMaiData(PaiMaiHelper.Instance.GetPaiMaiId(4), self.dBPaiMainInfo_Gemstone);
+            await self.SavePaiMaiData(PaiMaiHelper.GetPaiMaiId(1), self.dBPaiMainInfo_Consume);
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(1000, 5000));
+            await self.SavePaiMaiData(PaiMaiHelper.GetPaiMaiId(2), self.dBPaiMainInfo_Material);
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(1000, 5000));
+            await self.SavePaiMaiData(PaiMaiHelper.GetPaiMaiId(3), self.dBPaiMainInfo_Equipment);
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(1000, 5000));
+            await self.SavePaiMaiData(PaiMaiHelper.GetPaiMaiId(4), self.dBPaiMainInfo_Gemstone);
 
-            await self.SavePaiMaiData(PaiMaiHelper.Instance.GetPaiMaiId(11), self.dBPaiMainInfo_Shop);
-            await self.SavePaiMaiData(PaiMaiHelper.Instance.GetPaiMaiId(12), self.dBPaiMainInfo_Stall);
+            await self.SavePaiMaiData(PaiMaiHelper.GetPaiMaiId(11), self.dBPaiMainInfo_Shop);
+            await self.SavePaiMaiData(PaiMaiHelper.GetPaiMaiId(12), self.dBPaiMainInfo_Stall);
         }
 
         public static async ETTask SavePaiMaiData(this PaiMaiSceneComponent self, long unitId, DBPaiMainInfo dBPaiMainInfo)
         {
-            Log.Warning($"PaiMaiSceneComponent.SaveDB:  zone:{self.DomainZone()}  id:{unitId}  {dBPaiMainInfo.PaiMaiItemInfos.Count}");
+            Log.Warning($"PaiMaiSceneComponent.SaveDB:  zone:{self.Zone()}  id:{unitId}  {dBPaiMainInfo.PaiMaiItemInfos.Count}");
 
-            //long dbCacheId = DBHelper.GetDbCacheId(self.DomainZone());
-            //D2M_SaveComponent d2GSave = (D2M_SaveComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new M2D_SaveComponent() { UnitId = unitId, EntityByte = MongoHelper.ToBson(dBPaiMainInfo), ComponentType = DBHelper.DBPaiMainInfo });
-            await Game.Scene.GetComponent<DBComponent>().Save<DBPaiMainInfo>(self.DomainZone(), dBPaiMainInfo);
+            await UnitCacheHelper.SaveComponent(self.Root(), self.Zone(), dBPaiMainInfo);
         }
 
         public static async ETTask CheckOverTime(this PaiMaiSceneComponent self, DBPaiMainInfo dBPaiMainInfo)
@@ -705,7 +702,7 @@ namespace ET.Server
                 PaiMaiItemInfo paiMaiItemInfo = dBPaiMainInfo.PaiMaiItemInfos[i];
                 if (currentTime - paiMaiItemInfo.SellTime >= TimeHelper.OneDay || removeIds.Contains(dBPaiMainInfo.PaiMaiItemInfos[i].Id))
                 {
-                    long emaiId = StartSceneConfigCategory.Instance.GetBySceneName(self.DomainZone(), Enum.GetName(SceneType.EMail)).InstanceId;
+                    ActorId emaiId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "EMail").ActorId;
                     E2P_PaiMaiOverTimeResponse g_SendChatRequest =
                             (E2P_PaiMaiOverTimeResponse)await ActorMessageSenderComponent.Instance.Call(emaiId,
                                 new P2E_PaiMaiOverTimeRequest() { PaiMaiItemInfo = paiMaiItemInfo });

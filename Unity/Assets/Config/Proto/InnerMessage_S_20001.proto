@@ -1043,3 +1043,19 @@ message M2P_PaiMaiAuctionOverResponse // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType E2P_PaiMaiOverTimeResponse
+message P2E_PaiMaiOverTimeRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	PaiMaiItemInfo PaiMaiItemInfo = 2;
+}
+
+message E2P_PaiMaiOverTimeResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

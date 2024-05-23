@@ -4092,6 +4092,67 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(E2P_PaiMaiOverTimeResponse))]
+	[Message(InnerMessage.P2E_PaiMaiOverTimeRequest)]
+	[MemoryPackable]
+	public partial class P2E_PaiMaiOverTimeRequest: MessageObject, IRequest
+	{
+		public static P2E_PaiMaiOverTimeRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(P2E_PaiMaiOverTimeRequest), isFromPool) as P2E_PaiMaiOverTimeRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public PaiMaiItemInfo PaiMaiItemInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.PaiMaiItemInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.E2P_PaiMaiOverTimeResponse)]
+	[MemoryPackable]
+	public partial class E2P_PaiMaiOverTimeResponse: MessageObject, IResponse
+	{
+		public static E2P_PaiMaiOverTimeResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(E2P_PaiMaiOverTimeResponse), isFromPool) as E2P_PaiMaiOverTimeResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -4214,5 +4275,7 @@ namespace ET
 		 public const ushort LocalDungeon2M_ExitResponse = 20119;
 		 public const ushort P2M_PaiMaiAuctionOverRequest = 20120;
 		 public const ushort M2P_PaiMaiAuctionOverResponse = 20121;
+		 public const ushort P2E_PaiMaiOverTimeRequest = 20122;
+		 public const ushort E2P_PaiMaiOverTimeResponse = 20123;
 	}
 }
