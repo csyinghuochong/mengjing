@@ -4295,6 +4295,75 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(R2M_RankDemonResponse))]
+	[Message(InnerMessage.M2R_RankDemonRequest)]
+	[MemoryPackable]
+	public partial class M2R_RankDemonRequest: MessageObject, IRequest
+	{
+		public static M2R_RankDemonRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2R_RankDemonRequest), isFromPool) as M2R_RankDemonRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public RankingInfo RankingInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.RankingInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.R2M_RankDemonResponse)]
+	[MemoryPackable]
+	public partial class R2M_RankDemonResponse: MessageObject, IResponse
+	{
+		public static R2M_RankDemonResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2M_RankDemonResponse), isFromPool) as R2M_RankDemonResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RankId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public List<RankingInfo> RankList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RankId = default;
+			this.RankList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -4423,5 +4492,7 @@ namespace ET
 		 public const ushort R2S_SoloResultResponse = 20125;
 		 public const ushort M2R_RankRunRaceRequest = 20126;
 		 public const ushort R2M_RankRunRaceResponse = 20127;
+		 public const ushort M2R_RankDemonRequest = 20128;
+		 public const ushort R2M_RankDemonResponse = 20129;
 	}
 }

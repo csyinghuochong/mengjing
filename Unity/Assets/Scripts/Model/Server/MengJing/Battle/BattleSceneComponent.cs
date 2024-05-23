@@ -12,7 +12,7 @@ namespace ET.Server
         public long ProgressId { get; set; }= 0;
         public long FubenInstanceId { get; set; }= 0;
         
-        public ActorId ActorId { get; set; };
+        public ActorId ActorId { get; set; }
 
         public List<long> Camp1Player{ get; set; } = new List<long>();
         public List<long> Camp2Player{ get; set; } = new List<long>();

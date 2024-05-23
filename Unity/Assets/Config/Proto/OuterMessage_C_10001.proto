@@ -3884,7 +3884,10 @@ message M2C_RankRunRaceReward // IMessage
 	repeated RewardItem RewardList = 3;		//奖励列表
 }
 
-
+message M2C_RankDemonMessage // IMessage
+{
+	repeated RankingInfo RankList = 1;		//排行榜列表
+}
 
 
 

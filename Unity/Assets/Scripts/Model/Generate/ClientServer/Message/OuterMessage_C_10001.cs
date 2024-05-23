@@ -15176,6 +15176,28 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.M2C_RankDemonMessage)]
+	[MemoryPackable]
+	public partial class M2C_RankDemonMessage: MessageObject, IMessage
+	{
+		public static M2C_RankDemonMessage Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RankDemonMessage), isFromPool) as M2C_RankDemonMessage; 
+		}
+
+		[MemoryPackOrder(0)]
+		public List<RankingInfo> RankList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RankList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -15612,5 +15634,6 @@ namespace ET
 		 public const ushort M2C_RunRaceBattleInfo = 10433;
 		 public const ushort M2C_RankRunRaceMessage = 10434;
 		 public const ushort M2C_RankRunRaceReward = 10435;
+		 public const ushort M2C_RankDemonMessage = 10436;
 	}
 }
