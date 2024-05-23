@@ -16,7 +16,7 @@ namespace ET.Server
             root.AddComponent<LocationManagerComoponent>();
             root.AddComponent<LocationProxyComponent>();
             root.AddComponent<MessageLocationSenderComponent>();
-            root.AddComponent<ChatServerComponent>();
+            root.AddComponent<ChatSceneComponent>();
 
             await ETTask.CompletedTask;
         }

@@ -73,7 +73,7 @@ namespace ET.Server
                             m2C_SyncChatInfo.ChatInfo.Time = TimeHelper.ServerNow();
                             foreach (var otherUnit in chatInfoUnitsComponent.ChatInfoUnitsDict.Values)
                             {
-                                MessageHelper.SendActor(otherUnit.GateSessionActorId, m2C_SyncChatInfo);
+                                MapMessageHelper.SendToClient(scene.Root(), otherUnit.GateSessionActorId, m2C_SyncChatInfo);
                             }
                         }
                         else
@@ -85,34 +85,28 @@ namespace ET.Server
                             };
                             foreach (var otherUnit in chatInfoUnitsComponent.ChatInfoUnitsDict.Values)
                             {
-                                MessageHelper.SendActor(otherUnit.GateSessionActorId, m2C_HorseNoticeInfo);
+                                MapMessageHelper.SendToClient(scene.Root(), otherUnit.GateSessionActorId, m2C_HorseNoticeInfo);
                             }
                         }
-                        reply();
+  
                         break;
                     case SceneType.AccountCenter:
                         string[] messagevalue = request.MessageValue.Split('_');
-                        if (!messagevalue[1].Equals(DllHelper.Admin))
-                        {
-                            Log.Warning($"AccountCenter = a: {messagevalue[1]}   b: {DllHelper.Admin}");
-                            reply();
-                            return;
-                        }
                         
                         if (messagevalue[0] == "0")
                         {
-                            scene.GetComponent<FangChenMiComponent>().StopServer = true;
+                            scene.GetComponent<FangChenMiComponentS>().StopServer = true;
                             LogHelper.OnStopServer();
                             Log.Warning("StopServer = true");
                         }
                         if(messagevalue[0] == "1")
                         {
-                            scene.GetComponent<FangChenMiComponent>().StopServer = false;
+                            scene.GetComponent<FangChenMiComponentS>().StopServer = false;
                             Log.Warning("StopServer = false");
                         }
                         if (messagevalue[0] == "2")
                         {
-                            Game.EventSystem.Publish(new EventType.GenerateSerials() { AccountCenterScene = scene });
+                            //EventSystem.Publish(GenerateSerials() { AccountCenterScene = scene });
                         }
                         //if (yeardate == 20230412 && hour == 13 && self.DomainZone() == 3)
                         //{

@@ -7,9 +7,9 @@ namespace ET.Server
     public class FangChenMiComponentS : Entity, IAwake 
     {
 
-        public bool IsHoliday;
+        public bool IsHoliday{ get; set; }
 
-        public bool StopServer;
+        public bool StopServer { get; set; }
     }
 
 }

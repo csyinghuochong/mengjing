@@ -3899,13 +3899,13 @@ message TeamInfo
 	int32 FubenType = 6;
 }
 
-message M2C_TeamUpdateResult // IActorMessage
+message M2C_TeamUpdateResult // IMessage
 {
 	TeamInfo TeamInfo = 1;
 }
 
 //退出组队广播
-message M2C_TeamDungeonQuitMessage // IActorMessage
+message M2C_TeamDungeonQuitMessage // IMessage
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
@@ -3946,5 +3946,12 @@ message M2C_TeamDungeonSettlement // IMessage
 	int32 Star = 7;
 }
 
+message M2C_SyncChatInfo // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	ChatInfo ChatInfo = 1;
+}
 
 

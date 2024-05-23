@@ -1,6 +1,6 @@
 ﻿namespace ET.Server
 {
-    [FriendOf(typeof (ChatServerComponent))]
+    [FriendOf(typeof (ChatSceneComponent))]
     [FriendOf(typeof (ChatInfoUnit))]
     [MessageHandler(SceneType.Chat)]
     public class C2C_SendChatHandler: MessageLocationHandler<ChatInfoUnit, C2C_SendChatRequest, C2C_SendChatResponse>
@@ -29,7 +29,7 @@
                 case (int)ChannelEnum.PaiMai:
                 case (int)ChannelEnum.Word:
                 {
-                    ChatServerComponent chatInfoUnitsComponent = chatInfoUnit.Root().GetComponent<ChatServerComponent>();
+                    ChatSceneComponent chatInfoUnitsComponent = chatInfoUnit.Root().GetComponent<ChatSceneComponent>();
                     MessageLocationSenderComponent messageLocationSenderComponent = root.GetComponent<MessageLocationSenderComponent>();
 
                     foreach (var otherUnit in chatInfoUnitsComponent.ChatInfoUnitsDict.Values)

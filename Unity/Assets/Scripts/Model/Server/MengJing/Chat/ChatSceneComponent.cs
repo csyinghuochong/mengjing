@@ -2,7 +2,7 @@
 
 namespace ET.Server
 {
-    [ChildOf(typeof (ChatServerComponent))]
+    [ChildOf(typeof (ChatSceneComponent))]
     public class ChatInfoUnit: Entity, IAwake, IDestroy
     {
         public long LastSendChat;
@@ -15,16 +15,16 @@ namespace ET.Server
     }
 
     [ComponentOf(typeof (Scene))]
-    public class ChatServerComponent: Entity, IAwake, IDestroy
+    public class ChatSceneComponent: Entity, IAwake, IDestroy
     {
         public long Timer;
 
-        public List<WorldSayConfig> WordSayList = new();
+        public List<WorldSayConfig> WordSayList  { get; set; } = new();
 
         //全服玩家GateSessionActorId
-        public Dictionary<long, ChatInfoUnit> ChatInfoUnitsDict = new();
+        public Dictionary<long, ChatInfoUnit> ChatInfoUnitsDict { get; set; } = new();
 
         //世界列表记录
-        public List<ChatInfo> WordChatInfos = new();
+        public List<ChatInfo> WordChatInfos  { get; set; } = new();
     }
 }

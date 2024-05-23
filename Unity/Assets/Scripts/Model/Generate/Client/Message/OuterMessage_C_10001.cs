@@ -15242,7 +15242,7 @@ namespace ET
 
 	[Message(OuterMessage.M2C_TeamUpdateResult)]
 	[MemoryPackable]
-	public partial class M2C_TeamUpdateResult: MessageObject, IActorMessage
+	public partial class M2C_TeamUpdateResult: MessageObject, IMessage
 	{
 		public static M2C_TeamUpdateResult Create(bool isFromPool = false) 
 		{ 
@@ -15265,7 +15265,7 @@ namespace ET
 //退出组队广播
 	[Message(OuterMessage.M2C_TeamDungeonQuitMessage)]
 	[MemoryPackable]
-	public partial class M2C_TeamDungeonQuitMessage: MessageObject, IActorMessage
+	public partial class M2C_TeamDungeonQuitMessage: MessageObject, IMessage
 	{
 		public static M2C_TeamDungeonQuitMessage Create(bool isFromPool = false) 
 		{ 
@@ -15407,6 +15407,36 @@ namespace ET
 			this.ReardList.Clear();
 			this.ReardListExcess.Clear();
 			this.Star = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_SyncChatInfo)]
+	[MemoryPackable]
+	public partial class M2C_SyncChatInfo: MessageObject, IMessage
+	{
+		public static M2C_SyncChatInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SyncChatInfo), isFromPool) as M2C_SyncChatInfo; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public ChatInfo ChatInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ChatInfo = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -15856,5 +15886,6 @@ namespace ET
 		 public const ushort M2C_TeamPickMessage = 10440;
 		 public const ushort M2C_CreateDropItems = 10441;
 		 public const ushort M2C_TeamDungeonSettlement = 10442;
+		 public const ushort M2C_SyncChatInfo = 10443;
 	}
 }
