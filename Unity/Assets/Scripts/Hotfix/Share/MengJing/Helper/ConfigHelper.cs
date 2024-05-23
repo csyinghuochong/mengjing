@@ -10,24 +10,6 @@ namespace ET
         {
             return 10000152;
         }
-
-       
-        /// <summary>
-        /// 奔跑大赛随机怪
-        /// </summary>
-        public static List<int> RunRaceMonsterList()
-        {
-            return new List<int>()
-            {
-                90000021,
-                90000022,
-                90000023,
-                90000024,
-                90000025,
-                90000026,
-                90000027
-            };
-        }
         
         /// <summary>
         /// 小龟说话

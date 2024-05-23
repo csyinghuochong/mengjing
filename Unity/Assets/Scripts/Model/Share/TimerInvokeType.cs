@@ -32,6 +32,7 @@
         public const int PaiMaiTimer = 220;
         public const int SoloDungeonTimer = 221;
         public const int RefreshMonsterTimer = 222;
+        public const int RunRaceDungeonTimer = 223;
         
         public const int RoomUpdate = 301;
         public const int JoystickTimer = 302;

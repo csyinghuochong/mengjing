@@ -25,6 +25,23 @@ namespace ET
             new BuyCellCost { Cost = "10000156;1", Get = "10010026;1" },
         };
 
+         
+        /// <summary>
+        /// 奔跑大赛随机怪
+        /// </summary>
+        [StaticField]
+        public static List<int> RunRaceMonsterList =
+                new List<int>()
+                {
+                    90000021,
+                    90000022,
+                    90000023,
+                    90000024,
+                    90000025,
+                    90000026,
+                    90000027
+                };
+        
         ///当饱食度达到一定值时,会为每位贡献者赠送一个礼包哦
         [StaticField]
         public static Dictionary<int, string> Feed1RewardList=new Dictionary<int, string>()

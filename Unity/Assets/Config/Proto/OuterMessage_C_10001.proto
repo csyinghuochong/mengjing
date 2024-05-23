@@ -3867,7 +3867,10 @@ message M2C_SyncMiJingDamage // IMessage
 	repeated TeamPlayerInfo DamageList = 1;
 }
 
-
+message M2C_RunRaceBattleInfo // IMessage
+{
+	int64 NextTransforTime = 1;
+}
 
 
 
