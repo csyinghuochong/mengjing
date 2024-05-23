@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_CommonItem))]
     [EntitySystemOf(typeof (ES_WarehouseRole))]
     [FriendOfAttribute(typeof (ES_WarehouseRole))]
     public static partial class ES_WarehouseRoleSystem
@@ -56,9 +57,9 @@ namespace ET.Client
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
 
             self.ShowBagBagInfos.Clear();
-
-            int allNumber = bagComponentC.GetBagShowCell();
             self.ShowBagBagInfos.AddRange(bagComponentC.GetItemsByType((int)ItemLocType.ItemLocBag));
+            int allNumber = bagComponentC.GetBagShowCell();
+
             self.AddUIScrollItems(ref self.ScrollItemBagItems, allNumber);
             self.E_BagItems2LoopVerticalScrollRect.SetVisible(true, allNumber);
         }
@@ -66,11 +67,24 @@ namespace ET.Client
         private static void OnHouseItemsRefresh(this ES_WarehouseRole self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[index].BindTrans(transform);
+            scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count? self.ShowBagBagInfos[index] : null, ItemOperateEnum.CangkuBag,
+                self.UpdateSelect);
         }
 
         private static void OnBagItemsRefresh(this ES_WarehouseRole self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemBagItems[index].BindTrans(transform);
+        }
+
+        private static void UpdateSelect(this ES_WarehouseRole self, BagInfo bagInfo)
+        {
+            for (int i = 0; i < self.ScrollItemHouseItems.Keys.Count - 1; i++)
+            {
+                if (self.ScrollItemHouseItems[i].uiTransform != null)
+                {
+                    self.ScrollItemHouseItems[i].UpdateSelectStatus(bagInfo);
+                }
+            }
         }
     }
 }
