@@ -13,7 +13,7 @@ namespace ET.Server
     }
 
 
-    [ChildOf(typeof(Scene))]
+    [ChildOf]
     [BsonIgnoreExtraElements]
     public class DBCenterAccountInfo : Entity, IAwake
     {

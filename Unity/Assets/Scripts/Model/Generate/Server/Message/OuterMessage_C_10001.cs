@@ -15469,9 +15469,6 @@ namespace ET
 		[MemoryPackOrder(3)]
 		public string Password { get; set; }
 
-		[MemoryPackOrder(4)]
-		public string xx { get; set; }
-
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -15480,7 +15477,6 @@ namespace ET
 			this.AccountId = default;
 			this.Account = default;
 			this.Password = default;
-			this.xx = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -15494,6 +15490,71 @@ namespace ET
 		public static Center2C_PhoneBinging Create(bool isFromPool = false) 
 		{ 
 			return ObjectPool.Instance.Fetch(typeof(Center2C_PhoneBinging), isFromPool) as Center2C_PhoneBinging; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(Center2C_Register))]
+	[Message(OuterMessage.C2Center_Register)]
+	[MemoryPackable]
+	public partial class C2Center_Register: MessageObject, IRequest
+	{
+		public static C2Center_Register Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2Center_Register), isFromPool) as C2Center_Register; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string Account { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string Password { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Account = default;
+			this.Password = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.Center2C_Register)]
+	[MemoryPackable]
+	public partial class Center2C_Register: MessageObject, IResponse
+	{
+		public static Center2C_Register Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Center2C_Register), isFromPool) as Center2C_Register; 
 		}
 
 		[MemoryPackOrder(89)]
@@ -15963,5 +16024,7 @@ namespace ET
 		 public const ushort M2C_SyncChatInfo = 10443;
 		 public const ushort C2Center_PhoneBinging = 10444;
 		 public const ushort Center2C_PhoneBinging = 10445;
+		 public const ushort C2Center_Register = 10446;
+		 public const ushort Center2C_Register = 10447;
 	}
 }

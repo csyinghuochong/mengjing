@@ -118,5 +118,15 @@ namespace ET
 			l_bFlag = Regex.Matches(str, "^[\u4e00-\u9fa5a-zA-Z-z0-9]+$").Count > 0;
 			return l_bFlag;
 		}
+		
+		/// <summary>
+		/// 检测是否有Sql危险字符
+		/// </summary>
+		/// <param name="str">要判断字符串</param>
+		/// <returns>判断结果</returns>
+		public static bool IsSafeSqlString(string str)
+		{
+			return !Regex.IsMatch(str, @"[-|;|,|\/|\(|\)|\[|\]|\}|\{|%|@|\*|!|\']"); 
+		}
 	}
 }

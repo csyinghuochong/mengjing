@@ -3972,3 +3972,19 @@ message Center2C_PhoneBinging // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType Center2C_Register
+message C2Center_Register // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	string Account = 1;
+	string Password = 2;
+}
+
+message Center2C_Register // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

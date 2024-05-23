@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [MessageHandler]
-    public class C2Center_RegisterHandler : AMRpcHandler<C2Center_Register, Center2C_Register>
+    [MessageHandler(SceneType.Center)]
+    public class C2Center_RegisterHandler : MessageHandler<Session, C2Center_Register, Center2C_Register>
     {
 
-        protected override async ETTask Run(Session session, C2Center_Register request, Center2C_Register response, Action reply)
+        protected override async ETTask Run(Session session, C2Center_Register request, Center2C_Register response)
         {
             Log.Warning($"C2Center_Register:{request.Account}");
-            if (session.DomainScene().SceneType != SceneType.AccountCenter)
+            if (session.Scene().SceneType != SceneType.AccountCenter)
             {
-                Log.Warning($"请求的Scene错误2，当前Scene为：{session.DomainScene().SceneType}");
+                Log.Warning($"请求的Scene错误2，当前Scene为：{session.Scene().SceneType}");
                 session.Dispose();
                 return;
             }
@@ -21,7 +21,7 @@ namespace ET
             if (session.GetComponent<SessionLockingComponent>() != null)
             {
                 response.Error = ErrorCode.ERR_RequestRepeatedly;
-                reply();
+
                 session.Disconnect().Coroutine();
                 return;
             }
@@ -29,22 +29,23 @@ namespace ET
             if (string.IsNullOrEmpty(request.Account) || !StringHelper.IsSafeSqlString(request.Account))
             {
                 response.Error = ErrorCode.ERR_UnSafeSqlString;
-                reply();
                 session.Disconnect().Coroutine();
                 return;
             }
 
             using (session.AddComponent<SessionLockingComponent>())
             {
-                using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.Register, request.Account.Trim().GetHashCode()))
+                using (await session.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Register, request.Account.Trim().GetHashCode()))
                 {
-                    List<DBCenterAccountInfo> result = await Game.Scene.GetComponent<DBComponent>().Query<DBCenterAccountInfo>(session.DomainZone(), _account => _account.Account == request.Account);
+                    DBManagerComponent dbManagerComponent = session.Root().GetComponent<DBManagerComponent>();
+                    DBComponent dbComponent = dbManagerComponent.GetZoneDB(session.Zone());
+                    
+                    List<DBCenterAccountInfo> result = await dbComponent.Query<DBCenterAccountInfo>(session.Zone(), _account => _account.Account == request.Account);
 
                     //如果查询数据不为空,表示当前账号已经被注册
                     if (result.Count > 0)
                     {
                         response.Error = ErrorCode.ERR_AccountAlreadyRegister;
-                        reply();
                         session.Disconnect().Coroutine();
                         return;
                     }
@@ -62,9 +63,8 @@ namespace ET
                         newAccount.PlayerInfo.IdCardNo = "429001198010232399";
                     }
  
-                    await Game.Scene.GetComponent<DBComponent>().Save(session.DomainZone(), newAccount);
+                    await dbComponent.Save(session.Zone(), newAccount);
                     //发送创建回执
-                    reply();
                 }
             }
         }
