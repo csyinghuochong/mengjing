@@ -23,6 +23,22 @@ namespace ET.Server
             }
             return false;
         }
+        
+        public static int GetWorldLv(int openserverDay)
+        {
+            int worldLv = 0;
+            string[] lvlist = GlobalValueConfigCategory.Instance.Get(42).Value.Split('@');
+            for (int i = 0; i < lvlist.Length; i++)
+            {
+                string[] levelinfo = lvlist[i].Split(';');
+                worldLv = int.Parse(levelinfo[1]);
+                if (openserverDay <= int.Parse(levelinfo[0]))
+                {
+                    return worldLv;
+                }
+            }
+            return worldLv;
+        }
 
     }
     

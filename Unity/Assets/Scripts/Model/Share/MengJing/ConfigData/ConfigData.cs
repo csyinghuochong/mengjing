@@ -1054,5 +1054,9 @@ namespace ET
             10025007,
             10025010
         };
+
+
+        [StaticField]
+        public static List<ServerItem> ServerItems = new List<ServerItem>();
     }
 }

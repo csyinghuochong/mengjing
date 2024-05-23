@@ -3774,6 +3774,134 @@ namespace ET
 
 	}
 
+//通知其他服务进程刷新肝帝
+	[ResponseType(nameof(F2R_WorldLvUpdateResponse))]
+	[Message(InnerMessage.R2F_WorldLvUpdateRequest)]
+	[MemoryPackable]
+	public partial class R2F_WorldLvUpdateRequest: MessageObject, IRequest
+	{
+		public static R2F_WorldLvUpdateRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2F_WorldLvUpdateRequest), isFromPool) as R2F_WorldLvUpdateRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public ServerInfo ServerInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ServerInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.F2R_WorldLvUpdateResponse)]
+	[MemoryPackable]
+	public partial class F2R_WorldLvUpdateResponse: MessageObject, IResponse
+	{
+		public static F2R_WorldLvUpdateResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(F2R_WorldLvUpdateResponse), isFromPool) as F2R_WorldLvUpdateResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//广播
+	[ResponseType(nameof(A2R_Broadcast))]
+	[Message(InnerMessage.R2A_Broadcast)]
+	[MemoryPackable]
+	public partial class R2A_Broadcast: MessageObject, IRequest
+	{
+		public static R2A_Broadcast Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2A_Broadcast), isFromPool) as R2A_Broadcast; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int LoadType { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string LoadValue { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.LoadType = default;
+			this.LoadValue = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.A2R_Broadcast)]
+	[MemoryPackable]
+	public partial class A2R_Broadcast: MessageObject, IResponse
+	{
+		public static A2R_Broadcast Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2R_Broadcast), isFromPool) as A2R_Broadcast; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -3887,5 +4015,9 @@ namespace ET
 		 public const ushort A2A_ActivityUpdateResponse = 20110;
 		 public const ushort G2M_ActivityUpdate = 20111;
 		 public const ushort M2C_HappyInfoResult = 20112;
+		 public const ushort R2F_WorldLvUpdateRequest = 20113;
+		 public const ushort F2R_WorldLvUpdateResponse = 20114;
+		 public const ushort R2A_Broadcast = 20115;
+		 public const ushort A2R_Broadcast = 20116;
 	}
 }

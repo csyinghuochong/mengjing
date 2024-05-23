@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEditor.VersionControl;
+
 namespace ET.Server
 {
     [EntitySystemOf(typeof (RankSceneComponent))]
@@ -22,25 +27,17 @@ namespace ET.Server
 
         public static async ETTask InitServerInfo(this RankSceneComponent self)
         {
-            DBServerInfo dBServerInfo = null;
-           
             await self.Root().GetComponent<TimerComponent>().WaitAsync(TimeHelper.Second);
-            D2G_GetComponent d2GGetUnit = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId,
-                new G2D_GetComponent() { UnitId = self.DomainZone(), Component = DBHelper.DBServerInfo });
-            if (d2GGetUnit.Component != null)
-            {
-                dBServerInfo = d2GGetUnit.Component as DBServerInfo;
-            }
-
+            DBServerInfo dBServerInfo = await UnitCacheHelper.GetComponent<DBServerInfo>(self.Root(), self.Zone());
+            
             if (dBServerInfo == null)
             {
-                dBServerInfo = new DBServerInfo();
-                dBServerInfo.Id = self.DomainZone();
+                dBServerInfo = self.AddChildWithId<DBServerInfo>(self.Zone());
             }
 
             //初始化参数
             self.DBServerInfo = dBServerInfo;
-            self.UpdateExchangeGold(DBHelper.GetOpenServerDay(self.DomainZone()));
+            self.UpdateExchangeGold(ServerHelper.GetOpenServerDay( false, self.Zone()));
             //上午重启不刷新世界等级
             DateTime dateTime = TimeHelper.DateTimeNow();
             if (self.DBServerInfo.ServerInfo.WorldLv == 0 || dateTime.Hour >= 12)
@@ -51,28 +48,29 @@ namespace ET.Server
             self.BroadcastWorldLv().Coroutine();
         }
 
+
         public static void UpdateWorldLv(this RankSceneComponent self)
         {
             //第二天并且超过12点才刷新
-            int openserverDay = DBHelper.GetOpenServerDay(self.DomainZone());
-            int worldLv = WorldLvHelper.GetWorldLv(openserverDay);
+            int openserverDay = ServerHelper.GetOpenServerDay(false, self.Zone());
+            int worldLv = ComHelperS.GetWorldLv(openserverDay);
             self.DBServerInfo.ServerInfo.WorldLv = worldLv;
-            Log.Debug($"UpdateWorldLv: {self.DomainZone()} {worldLv}");
+            Log.Debug($"UpdateWorldLv: {self.Zone()} {worldLv}");
         }
 
         public static async ETTask BroadcastWorldLv(this RankSceneComponent self)
         {
             //延迟刷新，以免有些服务器还没启动
-            await TimerComponent.Instance.WaitAsync(RandomHelper.RandomNumber(5000, 10000));
-            long fubenCenterId = DBHelper.GetFubenCenterId(self.DomainZone());
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(5000, 10000));
+            ActorId fubenCenterId = UnitCacheHelper.GetFubenCenterId(self.Zone());
             R2F_WorldLvUpdateRequest request = new R2F_WorldLvUpdateRequest() { ServerInfo = self.DBServerInfo.ServerInfo };
-            F2R_WorldLvUpdateResponse response = (F2R_WorldLvUpdateResponse)await ActorMessageSenderComponent.Instance.Call(fubenCenterId, request);
+            F2R_WorldLvUpdateResponse response = (F2R_WorldLvUpdateResponse)await self.Root().GetComponent<MessageSender>().Call(fubenCenterId, request);
         }
 
         public static void ClearRankingTrial(this RankSceneComponent self)
         {
             DateTime dateTime = TimeHelper.DateTimeNow();
-            if (self.DomainZone() == 1 && dateTime.Year == 2023 && dateTime.Month == 12 && dateTime.Day == 30)
+            if (self.Zone() == 1 && dateTime.Year == 2023 && dateTime.Month == 12 && dateTime.Day == 30)
             {
                 self.DBRankInfo.rankingTrial.Clear();
                 Log.Warning("self.DBRankInfo.rankingTrial.Clear");
@@ -91,7 +89,7 @@ namespace ET.Server
         {
             //更新服务器拍卖行数据
             //TimeHelper. self.OpenServiceTime
-            self.UpdateExchangeGold(DBHelper.GetOpenServerDay(self.DomainZone()));
+            self.UpdateExchangeGold(ServerHelper.GetOpenServerDay(false, self.Zone()));
             self.SendCombatReward().Coroutine();
             self.SendPetReward().Coroutine();
             self.SendTrialReward().Coroutine();
@@ -174,20 +172,18 @@ namespace ET.Server
 
         public static async ETTask InitDBRankInfo(this RankSceneComponent self)
         {
-            long dbCacheId = DBHelper.GetDbCacheId(self.DomainZone());
-            await TimerComponent.Instance.WaitAsync(TimeHelper.Second);
-            D2G_GetComponent d2GGetUnit = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId,
-                new G2D_GetComponent() { UnitId = self.DomainZone(), Component = DBHelper.DBRankInfo });
-
-            if (d2GGetUnit.Component == null)
+           
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(TimeHelper.Second);
+            DBRankInfo dBRankInfo = await UnitCacheHelper.GetComponent<DBRankInfo>( self.Root(), self.Zone() )
+                    
+            if (dBRankInfo == null)
             {
-                DBRankInfo dBRankInfo = new DBRankInfo();
-                dBRankInfo.Id = self.DomainZone();
+                dBRankInfo = self.AddChildWithId<DBRankInfo>(self.Zone());
                 self.DBRankInfo = dBRankInfo;
             }
             else
             {
-                self.DBRankInfo = d2GGetUnit.Component as DBRankInfo;
+                self.DBRankInfo = dBRankInfo;
             }
 
             self.DBRankInfo.rankRunRace.Clear();
@@ -197,9 +193,9 @@ namespace ET.Server
 
         public static async ETTask UpdateCombat(this RankSceneComponent self)
         {
-            Log.Debug($"UpdateCombatUpdateCombat: {self.DomainZone()}");
-            self.DomainScene().RemoveComponent<UnitComponent>();
-            self.DomainScene().AddComponent<UnitComponent>();
+            Log.Debug($"UpdateCombatUpdateCombat: {self.Zone()}");
+            self.Scene().RemoveComponent<UnitComponent>();
+            self.Scene().AddComponent<UnitComponent>();
             List<RankingInfo> rankingInfoList = new List<RankingInfo>();
             for (int i = self.DBRankInfo.rankingInfos.Count - 1; i >= 0; i--)
             {
@@ -209,51 +205,26 @@ namespace ET.Server
             for (int i = rankingInfoList.Count - 1; i >= 0; i--)
             {
                 RankingInfo rankingInfo = rankingInfoList[i];
-
-                Unit unit = UnitFactory.Create(self.DomainScene(), rankingInfo.UserId, UnitType.Player);
-                await DBHelper.AddDataComponent<UserInfoComponent>(unit, rankingInfo.UserId, DBHelper.UserInfoComponent);
-                await DBHelper.AddDataComponent<NumericComponent>(unit, rankingInfo.UserId, DBHelper.NumericComponent);
-                await DBHelper.AddDataComponent<TaskComponent>(unit, rankingInfo.UserId, DBHelper.TaskComponent);
-                await DBHelper.AddDataComponent<ShoujiComponent>(unit, rankingInfo.UserId, DBHelper.ShoujiComponent);
-                await DBHelper.AddDataComponent<BagComponent>(unit, rankingInfo.UserId, DBHelper.BagComponent);
-                await DBHelper.AddDataComponent<ChengJiuComponent>(unit, rankingInfo.UserId, DBHelper.ChengJiuComponent);
-                await DBHelper.AddDataComponent<PetComponent>(unit, rankingInfo.UserId, DBHelper.PetComponent);
-                await DBHelper.AddDataComponent<SkillSetComponent>(unit, rankingInfo.UserId, DBHelper.SkillSetComponent);
-                await DBHelper.AddDataComponent<EnergyComponent>(unit, rankingInfo.UserId, DBHelper.EnergyComponent);
-                await DBHelper.AddDataComponent<ActivityComponent>(unit, rankingInfo.UserId, DBHelper.ActivityComponent);
-                await DBHelper.AddDataComponent<RechargeComponent>(unit, rankingInfo.UserId, DBHelper.RechargeComponent);
-                await DBHelper.AddDataComponent<ReddotComponent>(unit, rankingInfo.UserId, DBHelper.ReddotComponent);
-                await DBHelper.AddDataComponent<TitleComponent>(unit, rankingInfo.UserId, DBHelper.TitleComponent);
-                await DBHelper.AddDataComponent<JiaYuanComponent>(unit, rankingInfo.UserId, DBHelper.JiaYuanComponent);
-                Function_Fight.GetInstance().UnitUpdateProperty_Base(unit, false, false);
+                Unit unit = await UnitCacheHelper.GetUnitCache(self.Scene(), rankingInfo.UserId);
+                Function_Fight.UnitUpdateProperty_Base(unit, false, false);
 
                 RankingInfo rankPetInfo = new RankingInfo();
-                UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
+                UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                 rankPetInfo.UserId = userInfoComponent.UserInfo.UserId;
                 rankPetInfo.PlayerName = userInfoComponent.UserInfo.Name;
                 rankPetInfo.PlayerLv = userInfoComponent.UserInfo.Lv;
                 rankPetInfo.Combat = userInfoComponent.UserInfo.Combat;
                 rankPetInfo.Occ = userInfoComponent.UserInfo.Occ;
 
-                self.OnRecvRankUpdate(unit.GetComponent<NumericComponent>().GetAsInt(NumericType.AcvitiyCamp), rankPetInfo);
+                self.OnRecvRankUpdate(unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.AcvitiyCamp), rankPetInfo);
                 unit.GetParent<UnitComponent>().Remove(unit.Id);
             }
         }
 
         public static async ETTask SaveDB(this RankSceneComponent self)
         {
-            long dbCacheId = DBHelper.GetDbCacheId(self.DomainZone());
-
-            await ActorMessageSenderComponent.Instance.Call(dbCacheId,
-                new M2D_SaveComponent()
-                {
-                    UnitId = self.DomainZone(), EntityByte = MongoHelper.ToBson(self.DBRankInfo), ComponentType = DBHelper.DBRankInfo
-                });
-            await ActorMessageSenderComponent.Instance.Call(dbCacheId,
-                new M2D_SaveComponent()
-                {
-                    UnitId = self.DomainZone(), EntityByte = MongoHelper.ToBson(self.DBServerInfo), ComponentType = DBHelper.DBServerInfo
-                });
+            await UnitCacheHelper.SaveComponent(self.Root(), self.Zone(), self.DBRankInfo);
+            await UnitCacheHelper.SaveComponent(self.Root(), self.Zone(), self.DBServerInfo);
         }
 
         /// <summary>
@@ -377,8 +348,8 @@ namespace ET.Server
         /// </summary>
         public static async ETTask UpdateRankNo1(this RankSceneComponent self, long userId, int occ)
         {
-            int zone = self.DomainZone();
-            if (DBHelper.GetOpenServerDay(zone) < 3)
+            int zone = self.Zone();
+            if (ServerHelper.GetOpenServerDay(false, zone) < 3)
             {
                 return;
             }
@@ -390,9 +361,9 @@ namespace ET.Server
             }
 
             //通知玩家
-            long gateServerId = DBHelper.GetGateServerId(zone);
+            ActorId gateServerId = UnitCacheHelper.GetGateServerId(zone);
             G2T_GateUnitInfoResponse g2M_UpdateUnitResponse =
-                    (G2T_GateUnitInfoResponse)await ActorMessageSenderComponent.Instance.Call(gateServerId,
+                    (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>().Call(gateServerId,
                         new T2G_GateUnitInfoRequest() { UserID = userId });
             if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
             {
@@ -400,8 +371,7 @@ namespace ET.Server
                 r2M_RankUpdateMessage.RankType = 1;
                 r2M_RankUpdateMessage.RankId = rankId;
                 r2M_RankUpdateMessage.OccRankId = self.GetOccCombatRank(userId, occ);
-                //MessageHelper.SendToLocationActor(g2M_UpdateUnitResponse.UnitId, r2M_RankUpdateMessage);
-                MessageHelper.SendToLocationActor(userId, r2M_RankUpdateMessage);
+                self.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(userId, r2M_RankUpdateMessage);
             }
         }
 
@@ -738,22 +708,22 @@ namespace ET.Server
 
         public static async ETTask BroadcastShowLie(this RankSceneComponent self, string loadvalue)
         {
-            ServerHelper.GetServerList(ComHelp.IsInnerNet());
+            ServerHelper.GetServerList(ComHelperS.IsInnerNet(), self.Zone());
 
             int firstserver = 0;
-            for (int i = 0; i < ServerHelper.ServerItems.Count; i++)
+            for (int i = 0; i < ConfigData.ServerItems.Count; i++)
             {
-                if (ServerHelper.ServerItems[i].Show == 1)
+                if (ConfigData.ServerItems[i].Show == 1)
                 {
-                    firstserver = ServerHelper.ServerItems[i].ServerId;
+                    firstserver = ConfigData.ServerItems[i].ServerId;
                     break;
                 }
             }
 
-            if (firstserver == self.DomainZone())
+            if (firstserver == self.Zone())
             {
-                Log.Debug($"BroadcastShowLie:  {self.DomainZone()}");
-                Log.Console($"BroadcastShowLie:  {self.DomainZone()} {loadvalue}");
+                Log.Debug($"BroadcastShowLie:  {self.Zone()}");
+                Log.Console($"BroadcastShowLie:  {self.Zone()} {loadvalue}");
                 List<StartProcessConfig> listprogress = StartProcessConfigCategory.Instance.GetAll().Values.ToList();
                 for (int i = 0; i < listprogress.Count; i++)
                 {
@@ -764,8 +734,8 @@ namespace ET.Server
                     }
 
                     StartSceneConfig startSceneConfig = processScenes[0];
-                    long mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(startSceneConfig.Zone, startSceneConfig.Name).InstanceId;
-                    A2R_Broadcast createUnit = (A2R_Broadcast)await ActorMessageSenderComponent.Instance.Call(mapInstanceId,
+                    ActorId mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(startSceneConfig.Zone, startSceneConfig.Name).ActorId;
+                    A2R_Broadcast createUnit = (A2R_Broadcast)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,
                         new R2A_Broadcast() { LoadType = 1, LoadValue = loadvalue });
                 }
             }
@@ -773,12 +743,12 @@ namespace ET.Server
 
         public static async ETTask OnDemonOver(this RankSceneComponent self)
         {
-            int zone = self.DomainZone();
+            int zone = self.Zone();
 
             Log.Warning($"发放恶魔排行榜奖励： {zone}");
             long serverTime = TimeHelper.ServerNow();
             List<RankingInfo> rankingInfos = self.DBRankInfo.rankingDemon;
-            long mailServerId = DBHelper.GetMailServerId(self.DomainZone());
+            ActorId mailServerId = UnitCacheHelper.GetMailServerId(self.Zone());
             for (int i = 0; i < rankingInfos.Count; i++)
             {
                 RankRewardConfig rankRewardConfig = RankHelper.GetRankReward(i + 1, 5);
@@ -810,7 +780,7 @@ namespace ET.Server
                     mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.Demon}_{serverTime}" });
                 }
 
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await ActorMessageSenderComponent.Instance.Call(mailServerId,
+                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,
                     new M2E_EMailSendRequest() { Id = rankingInfos[i].UserId, MailInfo = mailInfo });
             }
         }
@@ -818,12 +788,12 @@ namespace ET.Server
         //家族战结束
         public static async ETTask OnUnionRaceOver(this RankSceneComponent self)
         {
-            int zone = self.DomainZone();
+            int zone = self.Zone();
 
             Log.Warning($"发放家族战排行榜奖励： {zone}");
             long serverTime = TimeHelper.ServerNow();
             List<RankShouLieInfo> rankingInfos = self.DBRankInfo.rankUnionRace;
-            long mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.DomainZone(), Enum.GetName(SceneType.EMail)).InstanceId;
+            ActorId mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "EMail").ActorId;
             for (int i = 0; i < rankingInfos.Count; i++)
             {
                 RankRewardConfig rankRewardConfig = RankHelper.GetRankReward(i + 1, 4);
@@ -855,7 +825,7 @@ namespace ET.Server
                     mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.ShowLie}_{serverTime}" });
                 }
 
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await ActorMessageSenderComponent.Instance.Call(mailServerId,
+                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,
                     new M2E_EMailSendRequest() { Id = rankingInfos[i].UnitID, MailInfo = mailInfo });
             }
         }
@@ -863,14 +833,14 @@ namespace ET.Server
         //发送狩猎排行奖励
         public static async ETTask OnShowLieOver(this RankSceneComponent self)
         {
-            int zone = self.DomainZone();
+            int zone = self.Zone();
             self.BroadcastShowLie("0").Coroutine();
 
             Log.Console($"发放狩猎排行榜奖励： {zone}");
             Log.Debug($"发放狩猎排行榜奖励： {zone}");
             long serverTime = TimeHelper.ServerNow();
             List<RankShouLieInfo> rankingInfos = self.DBRankInfo.rankShowLie;
-            long mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.DomainZone(), Enum.GetName(SceneType.EMail)).InstanceId;
+            ActorId mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "EMail").ActorId;
             for (int i = 0; i < rankingInfos.Count; i++)
             {
                 RankRewardConfig rankRewardConfig = RankHelper.GetRankReward(i + 1, 3);
@@ -901,7 +871,7 @@ namespace ET.Server
                     mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.RankReward}_{serverTime}" });
                 }
 
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await ActorMessageSenderComponent.Instance.Call(mailServerId,
+                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,
                     new M2E_EMailSendRequest() { Id = rankingInfos[i].UnitID, MailInfo = mailInfo });
             }
         }
@@ -913,8 +883,8 @@ namespace ET.Server
         /// <returns></returns>
         public static async ETTask SendTrialReward(this RankSceneComponent self)
         {
-            int zone = self.DomainZone();
-            await TimerComponent.Instance.WaitAsync(TimeHelper.Second * 10);
+            int zone = self.Zone();
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(TimeHelper.Second * 10);
             DateTime dateTime = TimeHelper.DateTimeNow();
             if ((int)dateTime.DayOfWeek != 1)
             {
@@ -925,7 +895,7 @@ namespace ET.Server
             Log.Console($"发放试炼排行榜奖励： {zone}");
             long serverTime = TimeHelper.ServerNow();
             List<KeyValuePairLong> rankingInfos = self.DBRankInfo.rankingTrial;
-            long mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.DomainZone(), Enum.GetName(SceneType.EMail)).InstanceId;
+            ActorId mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "EMail").ActorId;
             for (int i = 0; i < rankingInfos.Count; i++)
             {
                 RankRewardConfig rankRewardConfig = RankHelper.GetRankReward(i + 1, 6);
@@ -943,7 +913,7 @@ namespace ET.Server
 
                 if (i <= 10)
                 {
-                    Log.Warning($"试炼奖励: {self.DomainZone()} {rankingInfos[i].KeyId}");
+                    Log.Warning($"试炼奖励: {self.Zone()} {rankingInfos[i].KeyId}");
                 }
 
                 string[] needList = rankRewardConfig.RewardItems.Split('@');
@@ -960,7 +930,7 @@ namespace ET.Server
                     mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.RankReward}_{serverTime}" });
                 }
 
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await ActorMessageSenderComponent.Instance.Call(mailServerId,
+                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,
                     new M2E_EMailSendRequest() { Id = rankingInfos[i].KeyId, MailInfo = mailInfo });
             }
 

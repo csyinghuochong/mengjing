@@ -188,7 +188,7 @@ namespace ET
 
         public static List<ServerItem> GetServerList(bool innerNet, int zone)
         {
-            List<ServerItem> ServerItems = new List<ServerItem>();
+            List<ServerItem> ServerItems = ConfigData.ServerItems;
             if (ServerItems.Count > 0 )
             { 
                 return ServerItems;

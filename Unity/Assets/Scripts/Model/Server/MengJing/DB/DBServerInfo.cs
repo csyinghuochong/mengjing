@@ -5,10 +5,11 @@ namespace ET.Server
 {
 
 	//RankServer
+	[ChildOf]
     [BsonIgnoreExtraElements]
-	public class DBServerInfo : Entity
+	public class DBServerInfo : Entity, IAwake
 	{
-		public ServerInfo ServerInfo = new ServerInfo();
+		public ServerInfo ServerInfo { get; set; } = new ServerInfo();
 	}
 
 }
