@@ -167,14 +167,14 @@ namespace ET.Server
             }
 
             self.DBServerInfo.ServerInfo.ChouKaDropId =
-                    ActivityConfigHelper.ChouKaDropId[RandomHelper.RandomNumber(0, ActivityConfigHelper.ChouKaDropId.Count)];
+                    ConfigData.ChouKaDropId[RandomHelper.RandomNumber(0, ConfigData.ChouKaDropId.Count)];
         }
 
         public static async ETTask InitDBRankInfo(this RankSceneComponent self)
         {
            
             await self.Root().GetComponent<TimerComponent>().WaitAsync(TimeHelper.Second);
-            DBRankInfo dBRankInfo = await UnitCacheHelper.GetComponent<DBRankInfo>( self.Root(), self.Zone() )
+            DBRankInfo dBRankInfo = await UnitCacheHelper.GetComponent<DBRankInfo>(self.Root(), self.Zone());
                     
             if (dBRankInfo == null)
             {

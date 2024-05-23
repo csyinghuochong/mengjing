@@ -25,6 +25,12 @@ namespace ET
             new BuyCellCost { Cost = "10000156;1", Get = "10010026;1" },
         };
 
+        
+        /// <summary>
+        /// 抽奖奖励，每个区每天随机一个掉落ID
+        /// </summary>
+        [StaticField]
+        public static List<int> ChouKaDropId =new List<int> { 601901001 };
          
         /// <summary>
         /// 奔跑大赛随机怪

@@ -32,14 +32,7 @@ namespace ET
                 ActivityV1_DuiHuanWord, ActivityV1_ChouKa2, ActivityV1_Task,ActivityV1_LiBao, ActivityV1_Feed };  
         }
 
-        /// <summary>
-        /// 抽奖奖励，每个区每天随机一个掉落ID
-        /// </summary>
-        public static List<int> ChouKaDropId()
-        {
-            return new List<int> { 601901001 };
-        }
-
+       
         /// <summary>
         /// 抽奖消耗道具
         /// </summary>
