@@ -63,8 +63,8 @@ namespace ET.Client
             self.ShowHouseBagInfos.AddRange(bagComponentC.GetItemsByLoc((ItemLocType)(self.CurrentItemType + 5)));
 
             int allNumber = bagComponentC.GetHouseShowCell(self.CurrentItemType + 5);
-            self.AddUIScrollItems(ref self.ScrollItemBagItems, allNumber);
-            self.E_BagItems2LoopVerticalScrollRect.SetVisible(true, allNumber);
+            self.AddUIScrollItems(ref self.ScrollItemHouseItems, allNumber);
+            self.E_BagItems1LoopVerticalScrollRect.SetVisible(true, allNumber);
         }
 
         private static void RefreshBagItems(this ES_WarehouseRole self)
