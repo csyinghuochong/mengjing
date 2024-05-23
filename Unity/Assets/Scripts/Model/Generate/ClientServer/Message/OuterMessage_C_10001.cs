@@ -14676,6 +14676,40 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.M2C_AreneInfoResult)]
+	[MemoryPackable]
+	public partial class M2C_AreneInfoResult: MessageObject, IMessage
+	{
+		public static M2C_AreneInfoResult Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_AreneInfoResult), isFromPool) as M2C_AreneInfoResult; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int LeftPlayer { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.LeftPlayer = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -15098,5 +15132,6 @@ namespace ET
 		 public const ushort R2M_RankUpdateMessage = 10419;
 		 public const ushort RankingTrialInfo = 10420;
 		 public const ushort RankSeasonTowerInfo = 10421;
+		 public const ushort M2C_AreneInfoResult = 10422;
 	}
 }

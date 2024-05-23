@@ -3764,7 +3764,14 @@ message RankSeasonTowerInfo
 	int64 TotalTime = 6;		//总通关时间
 }
 
+message M2C_AreneInfoResult // IMessage
+{
+	int64 ActorId = 1;
+	int64 UnitId = 2;
 
+	int32 LeftPlayer = 3;
+	string Message = 4;
+}
 
 
 

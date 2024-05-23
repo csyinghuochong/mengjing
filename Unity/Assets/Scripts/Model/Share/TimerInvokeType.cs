@@ -28,6 +28,7 @@
         public const int UnionTimer = 216;
         public const int HappyDungeonTimer = 217;
         public const int RankeTimer = 218;
+        public const int ArenaSceneTimer = 219;
         
         public const int RoomUpdate = 301;
         public const int JoystickTimer = 302;
