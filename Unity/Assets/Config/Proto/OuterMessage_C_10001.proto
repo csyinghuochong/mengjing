@@ -3773,6 +3773,15 @@ message M2C_AreneInfoResult // IMessage
 	string Message = 4;
 }
 
+message M2C_BattleInfoResult // IMessage
+{
+	int64 ActorId = 1;
+	int64 UnitId = 2;
+
+	int32 CampKill_1 = 3;
+	int32 CampKill_2 = 4;
+	int32 SceneType  = 5;
+}
 
 
 

@@ -14710,6 +14710,44 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.M2C_BattleInfoResult)]
+	[MemoryPackable]
+	public partial class M2C_BattleInfoResult: MessageObject, IMessage
+	{
+		public static M2C_BattleInfoResult Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_BattleInfoResult), isFromPool) as M2C_BattleInfoResult; 
+		}
+
+		[MemoryPackOrder(0)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int CampKill_1 { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int CampKill_2 { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int SceneType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.CampKill_1 = default;
+			this.CampKill_2 = default;
+			this.SceneType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -15133,5 +15171,6 @@ namespace ET
 		 public const ushort RankingTrialInfo = 10420;
 		 public const ushort RankSeasonTowerInfo = 10421;
 		 public const ushort M2C_AreneInfoResult = 10422;
+		 public const ushort M2C_BattleInfoResult = 10423;
 	}
 }
