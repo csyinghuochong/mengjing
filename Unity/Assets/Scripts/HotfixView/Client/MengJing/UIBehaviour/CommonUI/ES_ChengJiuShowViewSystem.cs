@@ -15,7 +15,14 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_ChengJiuTypeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChengJiuTypeItemsRefresh);
+            ReferenceCollector rc = transform.GetComponent<ReferenceCollector>();
+            self.LeftContent = rc.Get<GameObject>("LeftContent");
+            self.UIChengJiuShowType = rc.Get<GameObject>("UIChengJiuShowType");
+            self.UIChengJiuShowChapterItemListNode = rc.Get<GameObject>("UIChengJiuShowChapterItemListNode");
+
+            self.UIChengJiuShowType.SetActive(false);
+            self.UIChengJiuShowChapterItemListNode.SetActive(false);
+
             self.E_ChengJiuShowItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChengJiuShowItemsRefresh);
 
             self.InitChengJiuList();
@@ -27,63 +34,45 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        private static void OnChengJiuTypeItemsRefresh(this ES_ChengJiuShow self, Transform transform, int index)
-        {
-            Scroll_Item_ChengJiuTypeItem scrollItemChengJiuTypeItem = self.ScrollItemChengJiuTypeItems[index].BindTrans(transform);
-
-            scrollItemChengJiuTypeItem.OnUpdateData(self.ShowType[index]);
-            scrollItemChengJiuTypeItem.SetClickSubTypeHandler((int typeid, int chapterId) => { self.OnClickTypeItem(typeid, chapterId); });
-        }
-
         private static void OnChengJiuShowItemsRefresh(this ES_ChengJiuShow self, Transform transform, int index)
         {
             Scroll_Item_ChengJiuShowItem scrollItemChengJiuShowItem = self.ScrollItemChengJiuShowItems[index].BindTrans(transform);
-
             scrollItemChengJiuShowItem.OnUpdateData(self.ShowTask[index]);
         }
 
         public static void InitChengJiuList(this ES_ChengJiuShow self)
         {
-            self.ShowType.Clear();
-            self.ShowType.Add((int)ChengJiuTypeEnum.GuanKa);
-            self.ShowType.Add((int)ChengJiuTypeEnum.TanSuo);
-            self.ShowType.Add((int)ChengJiuTypeEnum.ShouJi);
+            List<int> showType = new List<int>();
+            showType.Add((int)ChengJiuTypeEnum.GuanKa);
+            showType.Add((int)ChengJiuTypeEnum.TanSuo);
+            showType.Add((int)ChengJiuTypeEnum.ShouJi);
 
-            self.AddUIScrollItems(ref self.ScrollItemChengJiuTypeItems, self.ShowType.Count);
-            self.E_ChengJiuTypeItemsLoopVerticalScrollRect.SetVisible(true, self.ShowType.Count);
-
-            if (self.ScrollItemChengJiuTypeItems.Count > 0)
+            foreach (int type in showType)
             {
-                self.ScrollItemChengJiuTypeItems[0].OnClickTypeButton();
+                GameObject go1 = UnityEngine.Object.Instantiate(self.UIChengJiuShowType, self.LeftContent.transform);
+                GameObject go2 = UnityEngine.Object.Instantiate(self.UIChengJiuShowChapterItemListNode, self.LeftContent.transform);
+                UIChengJiuShowType uiChengJiuShowType = self.AddChild<UIChengJiuShowType, GameObject, GameObject>(go1, go2);
+                go1.SetActive(true);
+                uiChengJiuShowType.Init(type, self.OnType, self.OnChapter);
+
+                self.UIChengJiuShowTypes.Add(uiChengJiuShowType);
             }
+
+            self.UIChengJiuShowTypes[0].OnImageButton();
         }
 
-        public static void OnClickTypeItem(this ES_ChengJiuShow self, int typeid, int chapterId)
+        public static void OnType(this ES_ChengJiuShow self, int type)
         {
-            self.ChengTypeId = typeid;
-
-            for (int i = 0; i < self.ScrollItemChengJiuTypeItems.Count; i++)
+            foreach (UIChengJiuShowType uiChengJiuShowType in self.UIChengJiuShowTypes)
             {
-                if (self.ScrollItemChengJiuTypeItems[i].uiTransform == null)
-                {
-                    continue;
-                }
-
-                if (self.ChengTypeId == self.ScrollItemChengJiuTypeItems[i].ChengJiuTypeId)
-                {
-                    continue;
-                }
-
-                self.ScrollItemChengJiuTypeItems[i].UnSelectedAll();
+                uiChengJiuShowType.SetSelected(type);
             }
-
-            self.OnUpdateChapterTask(self.ChengTypeId, chapterId);
         }
 
-        public static void OnUpdateChapterTask(this ES_ChengJiuShow self, int typeid, int chapterId)
+        public static void OnChapter(this ES_ChengJiuShow self, int type, int chapter)
         {
             self.ShowTask.Clear();
-            self.ShowTask.AddRange(self.Root().GetComponent<ChengJiuComponentC>().GetTasksByChapter(typeid, chapterId));
+            self.ShowTask.AddRange(self.Root().GetComponent<ChengJiuComponentC>().GetTasksByChapter(type, chapter));
 
             self.AddUIScrollItems(ref self.ScrollItemChengJiuShowItems, self.ShowTask.Count);
             self.E_ChengJiuShowItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTask.Count);
