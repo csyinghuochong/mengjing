@@ -86,6 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9209930811380787207}
   - component: {fileID: 8069225991064551613}
+  - component: {fileID: 8346045861898359819}
   m_Layer: 0
   m_Name: Item_ChengJiuShowItem
   m_TagString: Untagged
@@ -148,6 +149,26 @@ MonoBehaviour:
     gameObject: {fileID: 8991912497585596141}
   - key: Lab_ChengJiuNum
     gameObject: {fileID: 8992393585381273273}
+--- !u!114 &8346045861898359819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8991558928764284491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 1010
+  m_PreferredHeight: 200
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &8991592220092965347
 GameObject:
   m_ObjectHideFlags: 0
