@@ -15198,6 +15198,101 @@ namespace ET
 
 	}
 
+	[Message(OuterMessage.TeamInfo)]
+	[MemoryPackable]
+	public partial class TeamInfo: MessageObject
+	{
+		public static TeamInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(TeamInfo), isFromPool) as TeamInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int SceneId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public List<TeamPlayerInfo> PlayerList { get; set; } = new();
+
+		[MemoryPackOrder(2)]
+		public long TeamId { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long FubenInstanceId { get; set; }
+
+		[MemoryPackOrder(4)]
+		public long FubenUUId { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int FubenType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.SceneId = default;
+			this.PlayerList.Clear();
+			this.TeamId = default;
+			this.FubenInstanceId = default;
+			this.FubenUUId = default;
+			this.FubenType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TeamUpdateResult)]
+	[MemoryPackable]
+	public partial class M2C_TeamUpdateResult: MessageObject, IActorMessage
+	{
+		public static M2C_TeamUpdateResult Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TeamUpdateResult), isFromPool) as M2C_TeamUpdateResult; 
+		}
+
+		[MemoryPackOrder(0)]
+		public TeamInfo TeamInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.TeamInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//退出组队广播
+	[Message(OuterMessage.M2C_TeamDungeonQuitMessage)]
+	[MemoryPackable]
+	public partial class M2C_TeamDungeonQuitMessage: MessageObject, IActorMessage
+	{
+		public static M2C_TeamDungeonQuitMessage Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TeamDungeonQuitMessage), isFromPool) as M2C_TeamDungeonQuitMessage; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -15635,5 +15730,8 @@ namespace ET
 		 public const ushort M2C_RankRunRaceMessage = 10434;
 		 public const ushort M2C_RankRunRaceReward = 10435;
 		 public const ushort M2C_RankDemonMessage = 10436;
+		 public const ushort TeamInfo = 10437;
+		 public const ushort M2C_TeamUpdateResult = 10438;
+		 public const ushort M2C_TeamDungeonQuitMessage = 10439;
 	}
 }

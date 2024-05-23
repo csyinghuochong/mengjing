@@ -3889,6 +3889,29 @@ message M2C_RankDemonMessage // IMessage
 	repeated RankingInfo RankList = 1;		//排行榜列表
 }
 
+message TeamInfo
+{
+	int32 SceneId = 1;
+	repeated TeamPlayerInfo PlayerList = 2;
+	int64 TeamId = 3;
+	int64 FubenInstanceId = 4;
+	int64 FubenUUId = 5;
+	int32 FubenType = 6;
+}
+
+message M2C_TeamUpdateResult // IActorMessage
+{
+	TeamInfo TeamInfo = 1;
+}
+
+//退出组队广播
+message M2C_TeamDungeonQuitMessage // IActorMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
 
 
 

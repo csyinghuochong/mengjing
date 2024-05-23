@@ -1113,3 +1113,11 @@ message R2M_RankDemonResponse // IResponse
 	int32 RankId = 1;
 	repeated RankingInfo RankList = 2;		//排行榜列表
 }
+
+message T2M_TeamUpdateRequest // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitId = 2;
+	int64 TeamId = 3;
+}

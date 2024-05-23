@@ -4364,6 +4364,40 @@ namespace ET
 
 	}
 
+	[Message(InnerMessage.T2M_TeamUpdateRequest)]
+	[MemoryPackable]
+	public partial class T2M_TeamUpdateRequest: MessageObject, IMessage
+	{
+		public static T2M_TeamUpdateRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(T2M_TeamUpdateRequest), isFromPool) as T2M_TeamUpdateRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long TeamId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.TeamId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -4494,5 +4528,6 @@ namespace ET
 		 public const ushort R2M_RankRunRaceResponse = 20127;
 		 public const ushort M2R_RankDemonRequest = 20128;
 		 public const ushort R2M_RankDemonResponse = 20129;
+		 public const ushort T2M_TeamUpdateRequest = 20130;
 	}
 }
