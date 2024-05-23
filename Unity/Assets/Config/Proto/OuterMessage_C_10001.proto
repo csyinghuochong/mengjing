@@ -3953,3 +3953,22 @@ message M2C_SyncChatInfo // IMessage
 
 	ChatInfo ChatInfo = 1;
 }
+
+
+//ResponseType Center2C_PhoneBinging
+//手机号绑定
+message C2Center_PhoneBinging // IRequest
+{
+	int32 RpcId = 90;
+	string PhoneNumber = 1;
+	int64 AccountId  = 2;	// 帐号Id
+	string Account  = 3;	// 帐号
+	string  Password = 4;	// 密码
+}
+
+message Center2C_PhoneBinging // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

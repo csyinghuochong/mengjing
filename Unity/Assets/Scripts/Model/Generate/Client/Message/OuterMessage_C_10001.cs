@@ -15443,6 +15443,76 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Center2C_PhoneBinging))]
+//手机号绑定
+	[Message(OuterMessage.C2Center_PhoneBinging)]
+	[MemoryPackable]
+	public partial class C2Center_PhoneBinging: MessageObject, IRequest
+	{
+		public static C2Center_PhoneBinging Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2Center_PhoneBinging), isFromPool) as C2Center_PhoneBinging; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string PhoneNumber { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long AccountId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string Account { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string Password { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.PhoneNumber = default;
+			this.AccountId = default;
+			this.Account = default;
+			this.Password = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.Center2C_PhoneBinging)]
+	[MemoryPackable]
+	public partial class Center2C_PhoneBinging: MessageObject, IResponse
+	{
+		public static Center2C_PhoneBinging Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Center2C_PhoneBinging), isFromPool) as Center2C_PhoneBinging; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -15887,5 +15957,7 @@ namespace ET
 		 public const ushort M2C_CreateDropItems = 10441;
 		 public const ushort M2C_TeamDungeonSettlement = 10442;
 		 public const ushort M2C_SyncChatInfo = 10443;
+		 public const ushort C2Center_PhoneBinging = 10444;
+		 public const ushort Center2C_PhoneBinging = 10445;
 	}
 }

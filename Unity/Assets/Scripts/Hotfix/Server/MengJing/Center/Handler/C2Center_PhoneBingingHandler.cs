@@ -2,47 +2,46 @@
 using System.Collections.Generic;
 
 
-namespace ET
+namespace ET.Server
 {
 
-    [MessageHandler]
-    public class C2Center_PhoneBingingHandler : AMRpcHandler<C2Center_PhoneBinging, Center2C_PhoneBinging>
+    [MessageHandler(SceneType.Center)]
+    public class C2Center_PhoneBingingHandler : MessageHandler<Session, C2Center_PhoneBinging, Center2C_PhoneBinging>
     {
-        protected override async ETTask Run(Session session, C2Center_PhoneBinging request, Center2C_PhoneBinging response, Action reply)
+        protected override async ETTask Run(Session session, C2Center_PhoneBinging request, Center2C_PhoneBinging response)
         {
             Log.Warning($"C2Center_PhoneBinging:{request.Account}");
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.Register, request.Account.Trim().GetHashCode()))
+            using (await session.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Register, request.Account.Trim().GetHashCode()))
             {
                 if (request.AccountId == 0 || string.IsNullOrEmpty(request.Account) || string.IsNullOrEmpty(request.PhoneNumber))
                 {
                     response.Error = ErrorCode.ERR_NetWorkError;
-                    reply();
                     return;
                 }
 
-                List<DBCenterAccountInfo> resultAccounts = await Game.Scene.GetComponent<DBComponent>().Query<DBCenterAccountInfo>(session.DomainZone(),
+                DBManagerComponent dbManagerComponent = session.Root().GetComponent<DBManagerComponent>();
+                DBComponent dbComponent = dbManagerComponent.GetZoneDB(session.Zone());
+                
+                List<DBCenterAccountInfo> resultAccounts = await dbComponent.Query<DBCenterAccountInfo>(session.Zone(),
                     _account => _account.Account.Equals(request.PhoneNumber));
                 if (resultAccounts.Count > 0)
                 {
                     response.Error = ErrorCode.ERR_BingPhoneError_1;
-                    reply();
                     return;
                 }
 
-                resultAccounts = await Game.Scene.GetComponent<DBComponent>().Query<DBCenterAccountInfo>(session.DomainZone(), 
+                resultAccounts = await dbComponent.Query<DBCenterAccountInfo>(session.Zone(), 
                     _account => _account.PlayerInfo!=null && _account.PlayerInfo.PhoneNumber.Equals(request.PhoneNumber));
                 if (resultAccounts.Count > 0)
                 {
                     response.Error = ErrorCode.ERR_BingPhoneError_2;
-                    reply();
                     return;
                 }
 
-                resultAccounts = await Game.Scene.GetComponent<DBComponent>().Query<DBCenterAccountInfo>(session.DomainZone(), _account => _account.Id == request.AccountId);
+                resultAccounts = await dbComponent.Query<DBCenterAccountInfo>(session.Zone(), _account => _account.Id == request.AccountId);
                 if (resultAccounts.Count == 0)
                 {
                     Log.Error($"PhoneBinging: resultAccounts.Count");
-                    reply();
                     return;
                 }
                 DBCenterAccountInfo dBCenterAccountInfo = resultAccounts[0];
@@ -51,16 +50,14 @@ namespace ET
                 {
                     Log.Error($"PhoneBinging: resultAccounts.Count");
                     response.Error = ErrorCode.ERR_BingPhoneError_2;
-                    reply();
                     return;
                 }
 
                 dBCenterAccountInfo.PlayerInfo.PhoneNumber = request.PhoneNumber;
                 
-                await Game.Scene.GetComponent<DBComponent>().Save<DBCenterAccountInfo>(session.DomainZone(), dBCenterAccountInfo);
+                await dbComponent.Save<DBCenterAccountInfo>(session.Zone(), dBCenterAccountInfo);
             }
-
-            reply();
+            
             await ETTask.CompletedTask;
         }
     }
