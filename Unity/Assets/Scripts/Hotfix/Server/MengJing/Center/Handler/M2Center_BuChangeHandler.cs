@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class M2Center_BuChangeHandler : AMActorRpcHandler<Scene, M2Center_BuChangeRequest, Center2M_BuChangeResponse>
+    [MessageHandler(SceneType.Center)]
+    public class M2Center_BuChangeHandler : MessageHandler<Scene, M2Center_BuChangeRequest, Center2M_BuChangeResponse>
     {
 
-        protected override async ETTask Run(Scene scene, M2Center_BuChangeRequest request, Center2M_BuChangeResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2Center_BuChangeRequest request, Center2M_BuChangeResponse response)
         {
             Log.Warning($"M2Center_BuChangeRequest:{request.AccountId}");
-            List<DBCenterAccountInfo> centerAccountInfoList = await Game.Scene.GetComponent<DBComponent>().Query<DBCenterAccountInfo>(scene.DomainZone(), d => d.Id == request.AccountId);
+            DBManagerComponent dbManagerComponent = scene.Root().GetComponent<DBManagerComponent>();
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB( scene.Zone() );
+            
+            List<DBCenterAccountInfo> centerAccountInfoList = await dbComponent.Query<DBCenterAccountInfo>(scene.Zone(), d => d.Id == request.AccountId);
             PlayerInfo playerInfo = centerAccountInfoList[0].PlayerInfo;
 
             //指定某个角色
@@ -21,7 +24,7 @@ namespace ET
                 for (int i = 0; i < playerInfo.RechargeInfos.Count; i++)
                 {
                     RechargeInfo rechargeInfo = playerInfo.RechargeInfos[i];
-                    if (rechargeInfo.UserId == request.BuChangId)
+                    if (rechargeInfo.UnitId == request.BuChangId)
                     {
                         response.BuChangRecharge += rechargeInfo.Amount;
                         response.BuChangDiamond += ConfigHelper.GetDiamondNumber(rechargeInfo.Amount);
@@ -37,9 +40,9 @@ namespace ET
                 playerInfo.BuChangZone.Add(UnitIdStruct.GetUnitZone(request.UserId));
             }
 
-            Game.Scene.GetComponent<DBComponent>().Save<DBCenterAccountInfo>(scene.DomainZone(), centerAccountInfoList[0]).Coroutine();
+            dbComponent.Save<DBCenterAccountInfo>(scene.Zone(), centerAccountInfoList[0]).Coroutine();
             response.PlayerInfo = playerInfo;
-            reply();
+
             await ETTask.CompletedTask;
         }
     }

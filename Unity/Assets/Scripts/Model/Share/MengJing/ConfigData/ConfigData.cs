@@ -10,6 +10,13 @@ namespace ET
         public static int GMDungeonId = 1060003;
 
         
+        [StaticField]
+        public static int BuChangZone = 5;
+
+        [StaticField]
+        public static int BuChangEnd = 20221130;
+
+        
         //副本深渊模式创建怪物   参数：场景ID,MonsterPositionConfigID
         [StaticField]
         public static Dictionary<int, int> ShenYuanCreateConfig =new Dictionary<int, int>()

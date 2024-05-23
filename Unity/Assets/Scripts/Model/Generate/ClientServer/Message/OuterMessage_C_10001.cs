@@ -15578,6 +15578,148 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Center2C_BlackAccountResponse))]
+	[Message(OuterMessage.C2Center_BlackAccountRequest)]
+	[MemoryPackable]
+	public partial class C2Center_BlackAccountRequest: MessageObject, IRequest
+	{
+		public static C2Center_BlackAccountRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2Center_BlackAccountRequest), isFromPool) as C2Center_BlackAccountRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string Account { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string Password { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Account = default;
+			this.Password = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.Center2C_BlackAccountResponse)]
+	[MemoryPackable]
+	public partial class Center2C_BlackAccountResponse: MessageObject, IResponse
+	{
+		public static Center2C_BlackAccountResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Center2C_BlackAccountResponse), isFromPool) as Center2C_BlackAccountResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(Center2M_BuChangeResponse))]
+	[Message(OuterMessage.M2Center_BuChangeRequest)]
+	[MemoryPackable]
+	public partial class M2Center_BuChangeRequest: MessageObject, IRequest
+	{
+		public static M2Center_BuChangeRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2Center_BuChangeRequest), isFromPool) as M2Center_BuChangeRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long BuChangId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UserId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long AccountId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.BuChangId = default;
+			this.UserId = default;
+			this.AccountId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.Center2M_BuChangeResponse)]
+	[MemoryPackable]
+	public partial class Center2M_BuChangeResponse: MessageObject, IResponse
+	{
+		public static Center2M_BuChangeResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Center2M_BuChangeResponse), isFromPool) as Center2M_BuChangeResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public PlayerInfo PlayerInfo { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int BuChangRecharge { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int BuChangDiamond { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PlayerInfo = default;
+			this.BuChangRecharge = default;
+			this.BuChangDiamond = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -16026,5 +16168,9 @@ namespace ET
 		 public const ushort Center2C_PhoneBinging = 10445;
 		 public const ushort C2Center_Register = 10446;
 		 public const ushort Center2C_Register = 10447;
+		 public const ushort C2Center_BlackAccountRequest = 10448;
+		 public const ushort Center2C_BlackAccountResponse = 10449;
+		 public const ushort M2Center_BuChangeRequest = 10450;
+		 public const ushort Center2M_BuChangeResponse = 10451;
 	}
 }

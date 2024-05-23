@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [MessageHandler]
-    public class Center2C_BlackAccountHandler : AMRpcHandler<C2Center_BlackAccountRequest, Center2C_BlackAccountResponse>
+    [MessageHandler(SceneType.Center)]
+    public class Center2C_BlackAccountHandler : MessageHandler<Session, C2Center_BlackAccountRequest, Center2C_BlackAccountResponse>
     {
-        protected override async ETTask Run(Session session, C2Center_BlackAccountRequest request, Center2C_BlackAccountResponse response, Action reply)
+        protected override async ETTask Run(Session session, C2Center_BlackAccountRequest request, Center2C_BlackAccountResponse response)
         {
-            List<DBCenterAccountInfo> centerAccountInfoList = await Game.Scene.GetComponent<DBComponent>().Query<DBCenterAccountInfo>(session.DomainZone(), d => d.Account == request.Account && d.Password == request.Password);
+            DBManagerComponent dbManagerComponent = session.Root().GetComponent<DBManagerComponent>();
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB(session.Zone());
+            List<DBCenterAccountInfo> centerAccountInfoList = await dbComponent.Query<DBCenterAccountInfo>(session.Zone(), d => d.Account == request.Account && d.Password == request.Password);
             DBCenterAccountInfo dBCenterAccountInfo = centerAccountInfoList != null && centerAccountInfoList.Count > 0 ? centerAccountInfoList[0] : null;
             if (dBCenterAccountInfo != null)
             {
                 ///确认要不要删除所有区服的账号数据
                 dBCenterAccountInfo.AccountType = 2;////(int)AccountType.Delete;
-                await Game.Scene.GetComponent<DBComponent>().Save<DBCenterAccountInfo>(session.DomainZone(), dBCenterAccountInfo); 
+                await dbComponent.Save<DBCenterAccountInfo>(session.Zone(), dBCenterAccountInfo); 
             }
         }
     }

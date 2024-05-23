@@ -25,7 +25,7 @@ namespace ET.Server
 
         public PlayerInfo PlayerInfo { get; set; }
 
-        public int AccountType; //账号类型
+        public int AccountType{ get; set; } //账号类型
 
         public long CreateTime; //创建时间
     }

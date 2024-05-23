@@ -32,15 +32,8 @@ namespace ET.Server
             else
             {
             }
-
-
-
-
             //response.PlayerInfo = dBCenterAccountInfo != null ? dBCenterAccountInfo.PlayerInfo : null;
             //response.AccountId = dBCenterAccountInfo != null ? dBCenterAccountInfo.Id : 0;
-            
-            
-            reply();
             await ETTask.CompletedTask;
         }
     }

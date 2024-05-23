@@ -3988,3 +3988,39 @@ message Center2C_Register // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType Center2C_BlackAccountResponse
+message C2Center_BlackAccountRequest // IRequest
+{
+	int32 RpcId = 90;
+	string Account = 1;
+	string Password = 2;
+}
+
+message Center2C_BlackAccountResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType Center2M_BuChangeResponse
+message M2Center_BuChangeRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 BuChangId = 1;
+	int64 UserId = 2;
+	int64 AccountId = 3;
+}
+
+message Center2M_BuChangeResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	PlayerInfo PlayerInfo = 1;
+	int32 BuChangRecharge = 2;
+	int32 BuChangDiamond = 3;
+}
