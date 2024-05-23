@@ -173,7 +173,7 @@ namespace ET.Server
 
                 List<Unit> unitlist = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
                 M2C_RankRunRaceMessage m2C_RankRun = new M2C_RankRunRaceMessage() { RankList = Response.RankList };
-                MessageHelper.SendToClient(unitlist, m2C_RankRun);
+                MapMessageHelper.SendToClient(unitlist, m2C_RankRun);
 
                 if (!unit.IsDisposed)
                 {
@@ -186,7 +186,7 @@ namespace ET.Server
                         continue;
                     }
 
-                    BagComponent bagComponent = unit.GetComponent<BagComponent>();
+                    BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
 
                     string[] itemList = rankRewardConfig.RewardItems.Split('@');
                     List<RewardItem> rewardItems = new List<RewardItem>();
@@ -212,38 +212,38 @@ namespace ET.Server
                     else
                     {
                         // 发送邮箱
-                        int zone = self.DomainZone();
+                        int zone = self.Zone();
                         Log.Console($"发放赛跑大赛排行榜奖励： {zone}");
                         Log.Warning($"发放赛跑大赛排行榜奖励： {zone}");
-                        long mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.DomainZone(), Enum.GetName(SceneType.EMail))
-                                .InstanceId;
+                        ActorId mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "EMail")
+                                .ActorId;
 
                         mailInfo.Status = 0;
                         mailInfo.Context = $"恭喜您获得赛跑大赛排行榜第{Response.RankId}名奖励";
                         mailInfo.Title = "赛跑大赛排行榜奖励";
                         mailInfo.MailId = IdGenerater.Instance.GenerateId();
-                        E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await ActorMessageSenderComponent.Instance.Call(
+                        E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(
                             mailServerId,
                             new M2E_EMailSendRequest() { Id = userInfoComponent.UserInfo.UserId, MailInfo = mailInfo });
                     }
 
                     M2C_RankRunRaceReward m2C_RankRunRace = new M2C_RankRunRaceReward() { RewardList = rewardItems };
-                    MessageHelper.SendToClient(unit, m2C_RankRunRace);
+                    MapMessageHelper.SendToClient(unit, m2C_RankRunRace);
                 }
             }
 
             if (!self.HaveArrived)
             {
-                units = UnitHelper.GetUnitList(self.DomainScene(), UnitType.Player);
+                units = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
 
                 List<RankingInfo> rankList = new List<RankingInfo>();
                 for (int i = 0; i < units.Count; i++)
                 {
                     Unit unit = units[i];
-                    float distance = Vector3.Distance(units[i].Position, vector3);
+                    float distance = math.distance(units[i].Position, vector3);
 
                     RankingInfo rankPetInfo = new RankingInfo();
-                    UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
+                    UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                     rankPetInfo.UserId = userInfoComponent.UserInfo.UserId;
                     rankPetInfo.PlayerName = userInfoComponent.UserInfo.Name;
                     rankPetInfo.PlayerLv = -1;
@@ -253,10 +253,10 @@ namespace ET.Server
                 }
 
                 rankList.Sort(delegate(RankingInfo a, RankingInfo b) { return (int)(b.Combat - a.Combat); });
-                int number = Math.Min(10, rankList.Count);
+                int number = math.min(10, rankList.Count);
                 rankList = rankList.GetRange(0, number);
                 M2C_RankRunRaceMessage m2C_RankRun = new M2C_RankRunRaceMessage() { RankList = rankList };
-                MessageHelper.SendToClient(units, m2C_RankRun);
+                MapMessageHelper.SendToClient(units, m2C_RankRun);
             }
         }
     }
