@@ -5,7 +5,7 @@ namespace ET.Server
     [ChildOf(typeof (ChatSceneComponent))]
     public class ChatInfoUnit: Entity, IAwake, IDestroy
     {
-        public long LastSendChat;
+        public long LastSendChat{ get; set; }
 
         public long GateSessionActorId { get; set; } //player.InstanceId
 

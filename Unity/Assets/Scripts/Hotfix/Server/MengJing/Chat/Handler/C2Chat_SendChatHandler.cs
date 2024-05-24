@@ -1,21 +1,20 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2Chat_SendChatHandler : AMActorRpcHandler<ChatInfoUnit, C2C_SendChatRequest, C2C_SendChatResponse>
+    [MessageHandler(SceneType.Chat)]
+    public class C2Chat_SendChatHandler : MessageHandler<ChatInfoUnit, C2C_SendChatRequest, C2C_SendChatResponse>
     {
 
-        protected override async ETTask Run(ChatInfoUnit chatInfoUnit, C2C_SendChatRequest request, C2C_SendChatResponse response, Action reply)
+        protected override async ETTask Run(ChatInfoUnit chatInfoUnit, C2C_SendChatRequest request, C2C_SendChatResponse response)
         {
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.Chat, chatInfoUnit.Id))
+            using (await chatInfoUnit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Chat, chatInfoUnit.Id))
             {
                 if (string.IsNullOrEmpty(request.ChatInfo.ChatMsg))
                 {
                     Log.Error($"C2Chat_SendChatHandler.1");
                     response.Error = ErrorCode.ERR_ModifyData;
-                    reply();
                     return;
                 }
 
@@ -23,11 +22,10 @@ namespace ET
                 if (serverTime - chatInfoUnit.LastSendChat < TimeHelper.Second * 10)
                 {
                     response.Error = ErrorCode.ERR_WordChat;
-                    reply();
                     return;
                 }
 
-                if (!ComHelp.IsBanHaoZone(chatInfoUnit.DomainZone()) && chatInfoUnit.Level < 20)
+                if (!ComHelp.IsBanHaoZone(chatInfoUnit.Zone()) && chatInfoUnit.Level < 20)
                 {
                     response.Error = ErrorCode.ERR_LevelIsNot;
                     reply();

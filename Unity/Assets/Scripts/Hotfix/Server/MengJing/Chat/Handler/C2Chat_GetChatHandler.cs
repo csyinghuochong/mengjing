@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2Chat_GetChatHandler : AMActorRpcHandler<ChatInfoUnit, C2Chat_GetChatRequest, Chat2C_GetChatResponse>
+    [MessageHandler(SceneType.Chat)]
+    public class C2Chat_GetChatHandler : MessageHandler<ChatInfoUnit, C2Chat_GetChatRequest, Chat2C_GetChatResponse>
     {
-        protected override async ETTask Run(ChatInfoUnit chatInfoUnit, C2Chat_GetChatRequest request, Chat2C_GetChatResponse response, Action reply)
+        protected override async ETTask Run(ChatInfoUnit chatInfoUnit, C2Chat_GetChatRequest request, Chat2C_GetChatResponse response)
         {
             long serverTime = TimeHelper.ServerNow();
-            ChatSceneComponent chatInfoUnitsComponent = chatInfoUnit.DomainScene().GetComponent<ChatSceneComponent>();
+            ChatSceneComponent chatInfoUnitsComponent = chatInfoUnit.Scene().GetComponent<ChatSceneComponent>();
 
             for (int i = 0; i < chatInfoUnitsComponent.WordChatInfos.Count; i++)
             {
@@ -20,8 +20,6 @@ namespace ET
                 }
             }
             
-
-            reply();
             await ETTask.CompletedTask;
         }
     }
