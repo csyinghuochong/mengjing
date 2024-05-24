@@ -16564,6 +16564,67 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_StallBuyResponse))]
+	[Message(OuterMessage.C2M_StallBuyRequest)]
+	[MemoryPackable]
+	public partial class C2M_StallBuyRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_StallBuyRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_StallBuyRequest), isFromPool) as C2M_StallBuyRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public PaiMaiItemInfo PaiMaiItemInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.PaiMaiItemInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_StallBuyResponse)]
+	[MemoryPackable]
+	public partial class M2C_StallBuyResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_StallBuyResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_StallBuyResponse), isFromPool) as M2C_StallBuyResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -17042,5 +17103,7 @@ namespace ET
 		 public const ushort M2C_PaiMaiShopResponse = 10475;
 		 public const ushort C2M_PaiMaiXiaJiaRequest = 10476;
 		 public const ushort M2C_PaiMaiXiaJiaResponse = 10477;
+		 public const ushort C2M_StallBuyRequest = 10478;
+		 public const ushort M2C_StallBuyResponse = 10479;
 	}
 }
