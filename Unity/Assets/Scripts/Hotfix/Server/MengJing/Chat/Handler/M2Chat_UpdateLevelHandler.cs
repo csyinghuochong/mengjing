@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2Chat_UpdateLevelHandler : AMActorRpcHandler<Scene, M2Chat_UpdateLevel, Chat2M_UpdateLevel>
+    [MessageHandler(SceneType.Chat)]
+    public class M2Chat_UpdateLevelHandler : MessageHandler<Scene, M2Chat_UpdateLevel, Chat2M_UpdateLevel>
     {
-        protected override async ETTask Run(Scene scene, M2Chat_UpdateLevel request, Chat2M_UpdateLevel response, Action reply)
+        protected override async ETTask Run(Scene scene, M2Chat_UpdateLevel request, Chat2M_UpdateLevel response)
         {
             ChatSceneComponent chatInfoUnitsComponent = scene.GetComponent<ChatSceneComponent>();
             ChatInfoUnit chatInfoUnit = chatInfoUnitsComponent.Get(request.UnitId);
@@ -13,7 +13,7 @@ namespace ET
             {
                 chatInfoUnit.Level = request.Level;
             }
-            reply();
+
             await ETTask.CompletedTask;
         }
     }

@@ -4037,3 +4037,22 @@ message Center2M_BuChangeResponse // IResponse
 	int32 BuChangRecharge = 2;
 	int32 BuChangDiamond = 3;
 }
+
+//ResponseType C2C_ChatJinYanResponse
+message C2C_ChatJinYanRequest // IChatActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 UnitId = 1;
+	int64 JinYanId = 2;
+	string JinYanPlayer = 3;
+}
+
+message C2C_ChatJinYanResponse // IChatActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+

@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2Chat_SendJinYanHandler : AMActorRpcHandler<ChatInfoUnit, C2C_ChatJinYanRequest, C2C_ChatJinYanResponse>
+    [MessageHandler(SceneType.Chat)]
+    public class C2Chat_SendJinYanHandler : MessageLocationHandler<ChatInfoUnit, C2C_ChatJinYanRequest, C2C_ChatJinYanResponse>
     {
 
-        protected override async ETTask Run(ChatInfoUnit chatInfoUnit, C2C_ChatJinYanRequest request, C2C_ChatJinYanResponse response, Action reply)
+        protected override async ETTask Run(ChatInfoUnit chatInfoUnit, C2C_ChatJinYanRequest request, C2C_ChatJinYanResponse response)
         {
 
-            ChatSceneComponent chatInfoUnitsComponent = chatInfoUnit.DomainScene().GetComponent<ChatSceneComponent>();
+            ChatSceneComponent chatInfoUnitsComponent = chatInfoUnit.Scene().GetComponent<ChatSceneComponent>();
 
             BeReportedInfo bePortedNumber;
             chatInfoUnitsComponent.BeReportedNumber.TryGetValue(request.JinYanId, out bePortedNumber);
@@ -27,12 +27,10 @@ namespace ET
 
             if (bePortedNumber.ReportedList.Contains(request.UnitId))
             {
-                reply();
                 return;
             }
             if (bePortedNumber.ReportedList.Count >= 5)
             {
-                reply();
                 return;
             }
 
@@ -49,8 +47,7 @@ namespace ET
 
                 bePortedNumber.JinYanTime = TimeHelper.ServerNow() + TimeHelper.OneDay;
             }
-            Log.Warning($"{chatInfoUnit.DomainZone()}   {request.JinYanId}  {request.JinYanPlayer} 被举报");
-            reply();
+            Log.Warning($"{chatInfoUnit.Zone()}   {request.JinYanId}  {request.JinYanPlayer} 被举报");
             await ETTask.CompletedTask;
         }
     }

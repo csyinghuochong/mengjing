@@ -15773,6 +15773,75 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(C2C_ChatJinYanResponse))]
+	[Message(OuterMessage.C2C_ChatJinYanRequest)]
+	[MemoryPackable]
+	public partial class C2C_ChatJinYanRequest: MessageObject, IChatActorRequest
+	{
+		public static C2C_ChatJinYanRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2C_ChatJinYanRequest), isFromPool) as C2C_ChatJinYanRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long JinYanId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string JinYanPlayer { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.JinYanId = default;
+			this.JinYanPlayer = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.C2C_ChatJinYanResponse)]
+	[MemoryPackable]
+	public partial class C2C_ChatJinYanResponse: MessageObject, IChatActorResponse
+	{
+		public static C2C_ChatJinYanResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2C_ChatJinYanResponse), isFromPool) as C2C_ChatJinYanResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -16227,5 +16296,7 @@ namespace ET
 		 public const ushort Center2C_BlackAccountResponse = 10451;
 		 public const ushort M2Center_BuChangeRequest = 10452;
 		 public const ushort Center2M_BuChangeResponse = 10453;
+		 public const ushort C2C_ChatJinYanRequest = 10454;
+		 public const ushort C2C_ChatJinYanResponse = 10455;
 	}
 }

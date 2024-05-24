@@ -5006,6 +5006,124 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Chat2M_UpdateLevel))]
+	[Message(InnerMessage.M2Chat_UpdateLevel)]
+	[MemoryPackable]
+	public partial class M2Chat_UpdateLevel: MessageObject, IRequest
+	{
+		public static M2Chat_UpdateLevel Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2Chat_UpdateLevel), isFromPool) as M2Chat_UpdateLevel; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int Level { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.UnitId = default;
+			this.Level = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.Chat2M_UpdateLevel)]
+	[MemoryPackable]
+	public partial class Chat2M_UpdateLevel: MessageObject, IResponse
+	{
+		public static Chat2M_UpdateLevel Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Chat2M_UpdateLevel), isFromPool) as Chat2M_UpdateLevel; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(Chat2Mail_GetUnitList))]
+	[Message(InnerMessage.Mail2Chat_GetUnitList)]
+	[MemoryPackable]
+	public partial class Mail2Chat_GetUnitList: MessageObject, IRequest
+	{
+		public static Mail2Chat_GetUnitList Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Mail2Chat_GetUnitList), isFromPool) as Mail2Chat_GetUnitList; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.Chat2Mail_GetUnitList)]
+	[MemoryPackable]
+	public partial class Chat2Mail_GetUnitList: MessageObject, IResponse
+	{
+		public static Chat2Mail_GetUnitList Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Chat2Mail_GetUnitList), isFromPool) as Chat2Mail_GetUnitList; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<long> OnlineUnitIdList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.OnlineUnitIdList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -5155,5 +5273,9 @@ namespace ET
 		 public const ushort Center2M_ShareSucessResponse = 20146;
 		 public const ushort C2T_GetTeamInfoRequest = 20147;
 		 public const ushort T2C_GetTeamInfoResponse = 20148;
+		 public const ushort M2Chat_UpdateLevel = 20149;
+		 public const ushort Chat2M_UpdateLevel = 20150;
+		 public const ushort Mail2Chat_GetUnitList = 20151;
+		 public const ushort Chat2Mail_GetUnitList = 20152;
 	}
 }

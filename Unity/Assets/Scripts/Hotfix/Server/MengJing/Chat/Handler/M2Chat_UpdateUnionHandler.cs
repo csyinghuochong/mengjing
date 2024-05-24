@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2Chat_UpdateUnionHandler : AMActorRpcHandler<Scene, M2Chat_UpdateUnion, Chat2M_UpdateUnion>
+    [MessageHandler(SceneType.Chat)]
+    public class M2Chat_UpdateUnionHandler : MessageHandler<Scene, M2Chat_UpdateUnion, Chat2M_UpdateUnion>
     {
-        protected override async ETTask Run(Scene scene, M2Chat_UpdateUnion request, Chat2M_UpdateUnion response, Action reply)
+        protected override async ETTask Run(Scene scene, M2Chat_UpdateUnion request, Chat2M_UpdateUnion response)
         {
           
             ChatSceneComponent chatInfoUnitsComponent = scene.GetComponent<ChatSceneComponent>();
@@ -13,12 +13,11 @@ namespace ET
             if (chatInfoUnit == null)
             {
                 Log.Warning($"chatInfoUnit == null; {request.UnitId}");
-                reply();
+
                 return;
             }
 
             chatInfoUnit.UnionId = request.UnionId;
-            reply();
             await ETTask.CompletedTask;
         }
     }

@@ -1283,3 +1283,33 @@ message T2C_GetTeamInfoResponse // IResponse
 
 	TeamInfo TeamInfo = 1;
 }
+
+//ResponseType Chat2M_UpdateLevel
+message M2Chat_UpdateLevel //IRequest
+{
+	int32 RpcId = 90;
+	int64 UnitId = 2;
+	int32 Level = 5;
+}
+
+message Chat2M_UpdateLevel //IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+
+//ResponseType Chat2Mail_GetUnitList
+message Mail2Chat_GetUnitList //IRequest
+{
+	int32 RpcId = 90;
+}
+
+message Chat2Mail_GetUnitList //IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated int64 OnlineUnitIdList = 1;
+}
