@@ -146,5 +146,15 @@ namespace ET.Server
         public int IsRoot;
 
         public string DeviceID;
+        
+        
+        /// <summary>
+        /// 购买自己的玩家列表
+        /// </summary>
+        public List<KeyValuePairLong> BuySelfPlayerList = new List<KeyValuePairLong>();
+
+        
+        //今日拍卖花费金币
+        public long PaiMaiCostGoldToday { get; set; }
     }
 }

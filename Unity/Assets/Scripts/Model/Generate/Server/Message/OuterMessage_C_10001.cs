@@ -1840,6 +1840,9 @@ namespace ET
 		[MemoryPackOrder(6)]
 		public long SellTime { get; set; }
 
+		[MemoryPackOrder(7)]
+		public string Account { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -1849,6 +1852,7 @@ namespace ET
 			this.Price = default;
 			this.PlayerName = default;
 			this.SellTime = default;
+			this.Account = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -16231,6 +16235,75 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_PaiMaiBuyResponse))]
+	[Message(OuterMessage.C2M_PaiMaiBuyRequest)]
+	[MemoryPackable]
+	public partial class C2M_PaiMaiBuyRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PaiMaiBuyRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PaiMaiBuyRequest), isFromPool) as C2M_PaiMaiBuyRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public PaiMaiItemInfo PaiMaiItemInfo { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int BuyNum { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int IsRecharge { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.PaiMaiItemInfo = default;
+			this.BuyNum = default;
+			this.IsRecharge = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PaiMaiBuyResponse)]
+	[MemoryPackable]
+	public partial class M2C_PaiMaiBuyResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PaiMaiBuyResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PaiMaiBuyResponse), isFromPool) as M2C_PaiMaiBuyResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -16699,5 +16772,7 @@ namespace ET
 		 public const ushort M2C_PaiMaiAuctionJoinResponse = 10465;
 		 public const ushort C2M_PaiMaiAuctionPriceRequest = 10466;
 		 public const ushort M2C_PaiMaiAuctionPriceResponse = 10467;
+		 public const ushort C2M_PaiMaiBuyRequest = 10468;
+		 public const ushort M2C_PaiMaiBuyResponse = 10469;
 	}
 }

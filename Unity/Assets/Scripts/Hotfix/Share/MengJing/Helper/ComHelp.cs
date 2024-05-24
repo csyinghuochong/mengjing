@@ -49,6 +49,147 @@ namespace  ET
             return 120;
         }
         
+        public static bool IsCanPaiMai_KillBoss(List<KeyValuePair> monsterlist, int lv)
+        {
+            int number = 0;
+
+            for (int i = 0; i < monsterlist.Count; i++)
+            {
+                if (monsterlist[i].KeyId == 70001004)
+                {
+                    continue;
+                }
+
+                MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterlist[i].KeyId);
+                if (monsterConfig.Lv >= (lv - 5))
+                {
+                    number++;
+                }
+            }
+            return number >= 3;
+        }
+
+        public static int KillBoss_Lv_Number(List<KeyValuePair> monsterlist, int lv)
+        {
+            int number = 0;
+
+            for (int i = 0; i < monsterlist.Count; i++)
+            {
+                if (monsterlist[i].KeyId == 70001004)
+                {
+                    continue;
+                }
+
+                MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterlist[i].KeyId);
+                if (monsterConfig.Lv >= (lv - 5))
+                {
+                    number++;
+                }
+            }
+            return number;
+        }
+
+        public static bool IsCanChat_KillBoss(List<KeyValuePair> monsterlist, int lv)
+        {
+            if (lv >= 30)
+            {
+                return true;
+            }
+
+            int number = 0;
+            for (int i = 0; i < monsterlist.Count; i++)
+            {
+                if (monsterlist[i].KeyId == 70001004)
+                {
+                    continue;
+                }
+
+                MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterlist[i].KeyId);
+                if (monsterConfig.Lv >= (lv - 5))
+                {
+                    number++;
+                }
+            }
+            return number >= 3;
+        }
+        
+        //第一天达到10级以上或第二天进行等级限制
+        //1-10级默认开启（只有第一天,确保开始的时候是开启的）
+        //以下三个条件满足任意一个
+        //拍卖行购买功能限制
+        //1. 充值任意金额
+        //2. 或者击败2个以上的同级别（等级不低于玩家等级5级）的BOSS(狼王不算)
+        //3.
+        //1. 14  （24小时内)
+        //2. 16
+        //3. 18
+        //4. 19
+        //5. 20
+        //6. 21
+        //7. 22
+        //以上开启一次就不会进行二次限制。
+        //未开启统一提示:等级需达到X级或赞助任意金额开启拍卖行购买功能！
+        public static int IsCanPaiMai_Level(int createDay, int lv)
+        {
+            if(createDay == 1)
+            {
+                if(lv <= 20)
+                {
+                    return 20;
+                }
+                return 0;
+            }
+            if (createDay <= 2)
+            {
+                if (lv <= 22)
+                {
+                    return 22;
+                }
+                return 0;
+            }
+            if (createDay <= 3)
+            {
+                if (lv <= 24)
+                {
+                    return 24;
+                }
+                return 0;
+            }
+            if (createDay <= 4)
+            {
+                if (lv <= 26)
+                {
+                    return 26;
+                }
+                return 0;
+            }
+            if (createDay <= 5)
+            {
+                if (lv <= 28)
+                {
+                    return 28;
+                }
+                return 0;
+            }
+            if (createDay <= 6)
+            {
+                if (lv <= 28)
+                {
+                    return 28;
+                }
+                return 0;
+            }
+            if (createDay <= 7)
+            {
+                if (lv <= 28)
+                {
+                    return 28;
+                }
+                return 0;
+            }
+            return 0;    
+        }
+        
         //宠物魔法技能
         public static List<int> PetMagicSkill()
         {

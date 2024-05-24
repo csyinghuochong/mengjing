@@ -74,6 +74,31 @@ namespace ET.Server
             }
         }
 
+        public static void UpdateBuySelfPlayerList(this DataCollationComponent self, long addgold, long unitid, bool notice)
+        {
+            if (unitid == 0)
+            {
+                return;
+            }
+
+            self.PaiMaiGold += addgold;
+
+            for (int i = self.BuySelfPlayerList.Count - 1; i >= 0 ; i--)
+            {
+                if (self.BuySelfPlayerList[i].KeyId == unitid)
+                {
+                    self.BuySelfPlayerList[i].Value += addgold;
+                    return;
+                }
+            }
+
+            self.BuySelfPlayerList.Add( new KeyValuePairLong()
+            { 
+                KeyId = unitid,
+                Value = addgold
+            });
+        }
+        
         public static void UpdateRoleMoneyAdd(this DataCollationComponent self, int Type, int getWay, long value)
         {
             if (value < 0)

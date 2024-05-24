@@ -5780,6 +5780,144 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(P2M_PaiMaiBuyResponse))]
+	[Message(InnerMessage.M2P_PaiMaiBuyRequest)]
+	[MemoryPackable]
+	public partial class M2P_PaiMaiBuyRequest: MessageObject, IRequest
+	{
+		public static M2P_PaiMaiBuyRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2P_PaiMaiBuyRequest), isFromPool) as M2P_PaiMaiBuyRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public PaiMaiItemInfo PaiMaiItemInfo { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long Gold { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int BuyNum { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.PaiMaiItemInfo = default;
+			this.Gold = default;
+			this.BuyNum = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.P2M_PaiMaiBuyResponse)]
+	[MemoryPackable]
+	public partial class P2M_PaiMaiBuyResponse: MessageObject, IResponse
+	{
+		public static P2M_PaiMaiBuyResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(P2M_PaiMaiBuyResponse), isFromPool) as P2M_PaiMaiBuyResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public PaiMaiItemInfo PaiMaiItemInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PaiMaiItemInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2M_PaiMaiBuyInfoResponse))]
+	[Message(InnerMessage.M2M_PaiMaiBuyInfoRequest)]
+	[MemoryPackable]
+	public partial class M2M_PaiMaiBuyInfoRequest: MessageObject, IRequest
+	{
+		public static M2M_PaiMaiBuyInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2M_PaiMaiBuyInfoRequest), isFromPool) as M2M_PaiMaiBuyInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PlayerId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long CostGold { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.PlayerId = default;
+			this.CostGold = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.M2M_PaiMaiBuyInfoResponse)]
+	[MemoryPackable]
+	public partial class M2M_PaiMaiBuyInfoResponse: MessageObject, IResponse
+	{
+		public static M2M_PaiMaiBuyInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2M_PaiMaiBuyInfoResponse), isFromPool) as M2M_PaiMaiBuyInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -5952,5 +6090,9 @@ namespace ET
 		 public const ushort P2M_PaiMaiAuctionJoinResponse = 20169;
 		 public const ushort M2P_PaiMaiAuctionPriceRequest = 20170;
 		 public const ushort P2M_PaiMaiAuctionPriceResponse = 20171;
+		 public const ushort M2P_PaiMaiBuyRequest = 20172;
+		 public const ushort P2M_PaiMaiBuyResponse = 20173;
+		 public const ushort M2M_PaiMaiBuyInfoRequest = 20174;
+		 public const ushort M2M_PaiMaiBuyInfoResponse = 20175;
 	}
 }
