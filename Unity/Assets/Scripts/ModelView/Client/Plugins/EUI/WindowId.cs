@@ -48,5 +48,6 @@ namespace ET.Client
 		WindowID_UnionRecords,
 		WindowID_TaskGet,
 		WindowID_Warehouse,
+		WindowID_Mail,
 	}
 }
