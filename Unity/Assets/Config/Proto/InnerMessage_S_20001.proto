@@ -1265,3 +1265,21 @@ message Center2M_ShareSucessResponse // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType T2C_GetTeamInfoResponse
+message C2T_GetTeamInfoRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 UserID = 1;
+}
+
+message T2C_GetTeamInfoResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	TeamInfo TeamInfo = 1;
+}

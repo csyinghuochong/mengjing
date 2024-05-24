@@ -9,11 +9,20 @@ namespace ET.Server
 
         public long GateSessionActorId { get; set; } //player.InstanceId
 
-        public long UnionId;
+        public long UnionId{ get; set; }
 
-        public string Name;
+        public string Name{ get; set; }
+        
+        public int Level { get; set; }
     }
 
+    public class BeReportedInfo
+    {
+        public long JinYanTime;
+        public List<long> ReportedList = new List<long>();
+    }
+    
+    
     [ComponentOf(typeof (Scene))]
     public class ChatSceneComponent: Entity, IAwake, IDestroy
     {
@@ -26,5 +35,8 @@ namespace ET.Server
 
         //世界列表记录
         public List<ChatInfo> WordChatInfos  { get; set; } = new();
+        
+        
+        public Dictionary<long, BeReportedInfo> BeReportedNumber { get; set; } = new Dictionary<long, BeReportedInfo> ();   
     }
 }

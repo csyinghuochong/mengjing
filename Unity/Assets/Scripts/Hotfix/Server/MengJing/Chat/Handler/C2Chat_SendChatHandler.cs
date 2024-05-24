@@ -28,7 +28,6 @@ namespace ET.Server
                 if (!ComHelp.IsBanHaoZone(chatInfoUnit.Zone()) && chatInfoUnit.Level < 20)
                 {
                     response.Error = ErrorCode.ERR_LevelIsNot;
-                    reply();
                     return;
                 }
 
@@ -41,7 +40,7 @@ namespace ET.Server
                 {
                     case (int)ChannelEnum.PaiMai:
                     case (int)ChannelEnum.Word:
-                        ChatSceneComponent chatInfoUnitsComponent = chatInfoUnit.DomainScene().GetComponent<ChatSceneComponent>();
+                        ChatSceneComponent chatInfoUnitsComponent = chatInfoUnit.Scene().GetComponent<ChatSceneComponent>();
 
                         if (request.ChatInfo.ChannelId == ChannelEnum.Word)
                         {
@@ -50,7 +49,6 @@ namespace ET.Server
                             if (bePortedNumber != null && bePortedNumber.JinYanTime > TimeHelper.ServerNow())
                             {
                                 response.Error = ErrorCode.ERR_Chat_JinYan;
-                                reply();
                                 return;
                             }
                             if (bePortedNumber != null && bePortedNumber.JinYanTime != 0 && bePortedNumber.JinYanTime <= TimeHelper.ServerNow())
@@ -58,12 +56,12 @@ namespace ET.Server
                                 chatInfoUnitsComponent.BeReportedNumber.Remove(request.ChatInfo.UserId);
                             }
 
-                            LogHelper.ChatInfo( $"区:{chatInfoUnit.DomainZone()}    {request.ChatInfo.PlayerName}:  {request.ChatInfo.ChatMsg} ");
+                            LogHelper.ChatInfo( $"区:{chatInfoUnit.Zone()}    {request.ChatInfo.PlayerName}:  {request.ChatInfo.ChatMsg} ");
                         }
 
                         foreach (var otherUnit in chatInfoUnitsComponent.ChatInfoUnitsDict.Values)
                         {
-                            MessageHelper.SendActor(otherUnit.GateSessionActorId, m2C_SyncChatInfo);
+                            MapMessageHelper.SendToClient(chatInfoUnit.Root(), otherUnit.GateSessionActorId, m2C_SyncChatInfo);
                         }
 
                         if (request.ChatInfo.ChannelId == (int)ChannelEnum.Word)
@@ -74,36 +72,20 @@ namespace ET.Server
                                 chatInfoUnitsComponent.WordChatInfos.RemoveAt(chatInfoUnitsComponent.WordChatInfos.Count - 1);
                             }
                         }
-
-                        //if (chatInfoUnit.DomainZone() == 5)
-                        //{
-                        //    bool havegm = false;
-                        //    for (int i = 0; i < chatInfoUnitsComponent.WordChatInfos.Count; i++)
-                        //    {
-                        //        if (chatInfoUnitsComponent.WordChatInfos[i].ChatMsg.Contains("mail"))
-                        //        {
-                        //            havegm = true; 
-                        //            break;
-                        //        }
-                        //    }
-                        //    if (havegm)
-                        //    {
-                        //        chatInfoUnitsComponent.WordChatInfos.Clear();   
-                        //    }
-                        //}
+                        
                         break;
                     case (int)ChannelEnum.Team:
-                        long teamServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.DomainZone(), Enum.GetName(SceneType.Team)).InstanceId;
-                        T2C_GetTeamInfoResponse g_SendChatRequest1 = (T2C_GetTeamInfoResponse)await ActorMessageSenderComponent.Instance.Call
+                        ActorId teamServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.Zone(), "Team").ActorId;
+                        T2C_GetTeamInfoResponse g_SendChatRequest1 = (T2C_GetTeamInfoResponse)await chatInfoUnit.Root().GetComponent<MessageSender>().Call
                             (teamServerId, new C2T_GetTeamInfoRequest() { UserID = request.ChatInfo.UserId });
 
-                        long gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.DomainZone(), "Gate1").InstanceId;
+                        ActorId gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.Zone(), "Gate1").ActorId;
                         G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = null;
                         if (g_SendChatRequest1.Error == 0 && g_SendChatRequest1.TeamInfo != null)
                         {
                             for (int i = 0; i < g_SendChatRequest1.TeamInfo.PlayerList.Count; i++)
                             {
-                                g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await ActorMessageSenderComponent.Instance.Call
+                                g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse) await chatInfoUnit.Root().GetComponent<MessageSender>().Call
                                 (gateServerId, new T2G_GateUnitInfoRequest()
                                 {
                                     UserID = g_SendChatRequest1.TeamInfo.PlayerList[i].UserID
@@ -111,7 +93,7 @@ namespace ET.Server
 
                                 if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
                                 {
-                                    MessageHelper.SendActor(g2M_UpdateUnitResponse.SessionInstanceId, m2C_SyncChatInfo);
+                                    MapMessageHelper.SendToClient(chatInfoUnit.Root(), g2M_UpdateUnitResponse.SessionInstanceId, m2C_SyncChatInfo);
                                 }
                             }
                         }
@@ -120,23 +102,21 @@ namespace ET.Server
                         long unionid = request.ChatInfo.ParamId;
                         if (unionid == 0)
                         {
-                            response.Error = ErrorCode.ERR_Union_Not_Exist;
-                            reply();
                             return;
                         }
-                        chatInfoUnitsComponent = chatInfoUnit.DomainScene().GetComponent<ChatSceneComponent>();
+                        chatInfoUnitsComponent = chatInfoUnit.Scene().GetComponent<ChatSceneComponent>();
                         foreach (var otherUnit in chatInfoUnitsComponent.ChatInfoUnitsDict.Values)
                         {
                             if (otherUnit.UnionId == unionid)
                             {
-                                MessageHelper.SendActor(otherUnit.GateSessionActorId, m2C_SyncChatInfo);
+                                MapMessageHelper.SendToClient( chatInfoUnit.Root(), otherUnit.GateSessionActorId, m2C_SyncChatInfo);
                             }
                         }
                         break;
 
                     case (int)ChannelEnum.Friend:
-                        gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.DomainZone(), "Gate1").InstanceId;
-                        g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await ActorMessageSenderComponent.Instance.Call
+                        gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.Zone(), "Gate1").ActorId;
+                        g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await chatInfoUnit.Root().GetComponent<MessageSender>().Call
                               (gateServerId, new T2G_GateUnitInfoRequest()
                               {
                                   UserID = request.ChatInfo.ParamId
@@ -145,31 +125,30 @@ namespace ET.Server
                         //发给好友()
                         if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
                         {
-                            MessageHelper.SendActor(g2M_UpdateUnitResponse.SessionInstanceId, m2C_SyncChatInfo);
+                            MapMessageHelper.SendToClient(chatInfoUnit.Root(), g2M_UpdateUnitResponse.SessionInstanceId, m2C_SyncChatInfo);
                         }
                         else
                         {
                             //存入到离线消息
-                            long dbCacheId = DBHelper.GetDbCacheId(chatInfoUnit.DomainZone());
-                            DBFriendInfo dBFriendInfo = await DBHelper.GetComponentCache<DBFriendInfo>(chatInfoUnit.DomainZone(), request.ChatInfo.ParamId);
+                           
+                            DBFriendInfo dBFriendInfo = await UnitCacheHelper.GetComponentCache<DBFriendInfo>(chatInfoUnit.Root(), request.ChatInfo.ParamId);
                             if (dBFriendInfo != null && dBFriendInfo.FriendChats.Count < 10)
                             {
                                 dBFriendInfo.FriendChats.Add(request.ChatInfo);
-                                DBHelper.SaveComponentCache(chatInfoUnit.DomainZone(), request.ChatInfo.ParamId, dBFriendInfo).Coroutine();
+                                UnitCacheHelper.SaveComponentCache(chatInfoUnit.Root(),  dBFriendInfo).Coroutine();
                             }
                         }
 
                         //发给自己
-                        g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await ActorMessageSenderComponent.Instance.Call
+                        g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await chatInfoUnit.Root().GetComponent<MessageSender>().Call
                               (gateServerId, new T2G_GateUnitInfoRequest()
                               {
                                   UserID = request.ChatInfo.UserId
                               });
-                        MessageHelper.SendActor(g2M_UpdateUnitResponse.SessionInstanceId, m2C_SyncChatInfo);
+                        MapMessageHelper.SendToClient(chatInfoUnit.Root(), g2M_UpdateUnitResponse.SessionInstanceId, m2C_SyncChatInfo);
                         break;
                 }
-
-                reply();
+                
             }
         }
     }

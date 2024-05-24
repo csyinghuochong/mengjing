@@ -706,9 +706,6 @@ namespace ET
 		[MemoryPackOrder(3)]
 		public string OrderInfo { get; set; }
 
-		[MemoryPackOrder(4)]
-		public int Level { get; set; }
-
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -716,7 +713,6 @@ namespace ET
 			this.Time = default;
 			this.UnitId = default;
 			this.OrderInfo = default;
-			this.Level = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}

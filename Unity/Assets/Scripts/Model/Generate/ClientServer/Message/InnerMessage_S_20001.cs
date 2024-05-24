@@ -4941,6 +4941,71 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(T2C_GetTeamInfoResponse))]
+	[Message(InnerMessage.C2T_GetTeamInfoRequest)]
+	[MemoryPackable]
+	public partial class C2T_GetTeamInfoRequest: MessageObject, IRequest
+	{
+		public static C2T_GetTeamInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2T_GetTeamInfoRequest), isFromPool) as C2T_GetTeamInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UserID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UserID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.T2C_GetTeamInfoResponse)]
+	[MemoryPackable]
+	public partial class T2C_GetTeamInfoResponse: MessageObject, IResponse
+	{
+		public static T2C_GetTeamInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(T2C_GetTeamInfoResponse), isFromPool) as T2C_GetTeamInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public TeamInfo TeamInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.TeamInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -5088,5 +5153,7 @@ namespace ET
 		 public const ushort Center2M_SerialReardResponse = 20144;
 		 public const ushort M2Center_ShareSucessRequest = 20145;
 		 public const ushort Center2M_ShareSucessResponse = 20146;
+		 public const ushort C2T_GetTeamInfoRequest = 20147;
+		 public const ushort T2C_GetTeamInfoResponse = 20148;
 	}
 }
