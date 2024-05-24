@@ -49,21 +49,18 @@ namespace ET.Server
                 if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
                 {
                     M2C_UpdateMailInfo m2C_HorseNoticeInfo = new M2C_UpdateMailInfo();
-                    MessageHelper.SendActor(g2M_UpdateUnitResponse.SessionInstanceId, m2C_HorseNoticeInfo);
+                    MapMessageHelper.SendToClient( scene.Root(), g2M_UpdateUnitResponse.SessionInstanceId, m2C_HorseNoticeInfo);
                 }
                 if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.None)
                 {
-                    long dbCacheId = DBHelper.GetDbCacheId(scene.DomainZone());
-                    D2G_GetComponent d2GGetUnit = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = request.Id, Component = DBHelper.ReddotComponent });
-                    if (d2GGetUnit.Component != null)
+                    ReddotComponentS reddotComponent = await UnitCacheHelper.GetComponentCache<ReddotComponentS>(scene.Root(), request.Id);
+                    if (reddotComponent != null)
                     {
-                        ReddotComponent reddotComponent = d2GGetUnit.Component as ReddotComponent;
                         reddotComponent.AddReddont((int)ReddotType.Email);
-                        D2M_SaveComponent d2M_SaveComponent = (D2M_SaveComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new M2D_SaveComponent() { UnitId = request.Id, EntityByte = MongoHelper.ToBson(reddotComponent), ComponentType = DBHelper.ReddotComponent });
+                        await UnitCacheHelper.SaveComponentCache(scene.Root(), reddotComponent);
                     }
                 }
-
-                reply();
+                
             }
         }
 
