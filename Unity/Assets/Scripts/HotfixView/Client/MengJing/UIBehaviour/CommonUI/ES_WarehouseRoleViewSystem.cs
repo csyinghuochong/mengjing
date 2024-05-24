@@ -43,11 +43,6 @@ namespace ET.Client
 
         private static void OnItemTypeSet(this ES_WarehouseRole self, int index)
         {
-            if (!self.ClickEnabled)
-            {
-                return;
-            }
-
             if (!self.CheckPageButton_1(index))
             {
                 return;

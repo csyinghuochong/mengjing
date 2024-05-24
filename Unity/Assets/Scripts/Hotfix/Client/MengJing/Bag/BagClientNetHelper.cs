@@ -347,7 +347,7 @@ namespace ET.Client
             int houseId = root.GetComponent<BagComponentC>().CurrentHouse;
             C2M_ItemOperateRequest request = new() { OperateType = 6, OperateBagID = bagInfo.BagInfoID, OperatePar = houseId.ToString() };
             M2C_ItemOperateResponse response =
-                    (M2C_ItemOperateResponse)await root.GetComponent<SessionComponent>().Session.Call(request);
+                    (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             CheckSameId(root);
             return response.Error;
         }

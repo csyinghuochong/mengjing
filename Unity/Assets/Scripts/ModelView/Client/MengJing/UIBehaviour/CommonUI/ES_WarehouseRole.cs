@@ -8,7 +8,6 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_WarehouseRole : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
-		public bool ClickEnabled;
 		public int CurrentItemType;
 		public List<GameObject> LockList = new();
 		public List<GameObject> NoLockList = new();
