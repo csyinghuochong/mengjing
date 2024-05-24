@@ -81,19 +81,11 @@ namespace ET.Client
 
         private static async ETTask RequestOpenCangKu(this ES_WarehouseRole self)
         {
-            C2M_RoleOpenCangKuRequest request = new C2M_RoleOpenCangKuRequest();
-            M2C_RoleOpenCangKuResponse response =
-                    (M2C_RoleOpenCangKuResponse)await self.Root().GetComponent<SessionComponent>().Session.Call(request);
-            if (response.Error != ErrorCode.ERR_Success)
-            {
-                return;
-            }
-
+            await BagClientNetHelper.RquestOpenCangKu(self.Root());
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int cangkuNumber = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.CangKuNumber);
             self.UpdateLockList(cangkuNumber - 1);
             self.OnItemTypeSet(cangkuNumber - 1);
-            await ETTask.CompletedTask;
         }
 
         private static async ETTask OnButtonQuick(this ES_WarehouseRole self)

@@ -403,5 +403,14 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<int> RquestOpenCangKu(Scene root)
+        {
+            C2M_RoleOpenCangKuRequest request = new();
+            M2C_RoleOpenCangKuResponse response =
+                    (M2C_RoleOpenCangKuResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
 }
