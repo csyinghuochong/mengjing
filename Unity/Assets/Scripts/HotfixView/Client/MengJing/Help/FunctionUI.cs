@@ -63,6 +63,7 @@ namespace ET.Client
                 "UITaskGet" => WindowID.WindowID_TaskGet,
                 "UIWarehouse" => WindowID.WindowID_Warehouse,
                 "UIMail" => WindowID.WindowID_Mail,
+                "UIRoleXiLian" => WindowID.WindowID_RoleXiLian,
                 _ => WindowID.WindowID_Invaild
             };
         }
