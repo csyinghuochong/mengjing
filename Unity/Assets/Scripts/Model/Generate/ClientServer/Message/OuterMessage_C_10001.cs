@@ -16166,6 +16166,71 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_PaiMaiAuctionPriceResponse))]
+	[Message(OuterMessage.C2M_PaiMaiAuctionPriceRequest)]
+	[MemoryPackable]
+	public partial class C2M_PaiMaiAuctionPriceRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PaiMaiAuctionPriceRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PaiMaiAuctionPriceRequest), isFromPool) as C2M_PaiMaiAuctionPriceRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long Price { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string AuctionPlayer { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Price = default;
+			this.AuctionPlayer = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PaiMaiAuctionPriceResponse)]
+	[MemoryPackable]
+	public partial class M2C_PaiMaiAuctionPriceResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PaiMaiAuctionPriceResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PaiMaiAuctionPriceResponse), isFromPool) as M2C_PaiMaiAuctionPriceResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -16632,5 +16697,7 @@ namespace ET
 		 public const ushort M2C_HongBaoOpenResponse = 10463;
 		 public const ushort C2M_PaiMaiAuctionJoinRequest = 10464;
 		 public const ushort M2C_PaiMaiAuctionJoinResponse = 10465;
+		 public const ushort C2M_PaiMaiAuctionPriceRequest = 10466;
+		 public const ushort M2C_PaiMaiAuctionPriceResponse = 10467;
 	}
 }
