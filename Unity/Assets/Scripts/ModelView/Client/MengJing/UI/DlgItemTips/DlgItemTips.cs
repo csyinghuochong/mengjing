@@ -13,5 +13,6 @@ namespace ET.Client
         public BagInfo BagInfo;
         public Vector2 Img_backVector2;
         public float Lab_ItemNameWidth;
+        public ItemOperateEnum ItemOperateEnum;
     }
 }

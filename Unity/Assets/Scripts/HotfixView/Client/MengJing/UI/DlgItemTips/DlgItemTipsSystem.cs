@@ -40,6 +40,7 @@ namespace ET.Client
         public static void RefreshInfo(this DlgItemTips self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum)
         {
             self.BagInfo = bagInfo;
+            self.ItemOperateEnum = itemOperateEnum;
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             int itemType = itemConfig.ItemType;
             int itemSubType = itemConfig.ItemSubType;
@@ -578,6 +579,22 @@ namespace ET.Client
 
         private static void OnStoreHouseButton(this DlgItemTips self)
         {
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
+            if (self.ItemOperateEnum == ItemOperateEnum.GemBag && itemConfig.ItemType != ItemTypeEnum.Gemstone)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("只能放入宝石！");
+                return;
+            }
+
+            if (self.ItemOperateEnum == ItemOperateEnum.AccountBag)
+            {
+                //ItemViewHelp.AccountCangkuPutIn( self.ZoneScene(), self.BagInfo );
+            }
+            else
+            {
+                BagClientNetHelper.RquestPutStoreHouse(self.Root(), self.BagInfo).Coroutine();
+            }
+
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
         }
 
@@ -613,6 +630,15 @@ namespace ET.Client
 
         private static void OnPutBagButton(this DlgItemTips self)
         {
+            if (self.ItemOperateEnum == ItemOperateEnum.AccountCangku)
+            {
+                BagClientNetHelper.RequestAccountWarehousOperate(self.Root(), 2, self.BagInfo.BagInfoID).Coroutine();
+            }
+            else
+            {
+                BagClientNetHelper.RquestPutBag(self.Root(), self.BagInfo).Coroutine();
+            }
+
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
         }
     }

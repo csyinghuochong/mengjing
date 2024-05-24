@@ -20,7 +20,8 @@ namespace ET.Client
             self.E_SellButton.AddListenerAsync(self.OnSellButton);
             self.E_HuiShouFangZhiButton.AddListenerAsync(self.OnHuiShouFangZhiButton);
             self.E_TakeButton.AddListenerAsync(self.OnTakeButton);
-            self.E_SaveStoreHouseButton.AddListenerAsync(self.OnSaveStoreHouseButton);
+            self.E_SaveStoreHouseButton.AddListener(self.OnSaveStoreHouseButton);
+            self.E_StoreHouseSetButton.AddListener(self.OnBtn_PutBag);
 
             self.TitleBigHeight_160 = 160f; //标题底框高度
             self.TitleMiniHeight_50 = 50; //条目标题高度
@@ -799,11 +800,33 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
 
-        private static async ETTask OnSaveStoreHouseButton(this ES_EquipTips self)
+        private static void OnSaveStoreHouseButton(this ES_EquipTips self)
         {
-            await ETTask.CompletedTask;
+            if (self.ItemOpetateType == ItemOperateEnum.AccountBag)
+            {
+                // ItemViewHelp.AccountCangkuPutIn(self.ZoneScene(), self.BagInfo);
+            }
+            else
+            {
+                BagClientNetHelper.RquestPutStoreHouse(self.Root(),self.BagInfo).Coroutine();
+            }
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
         }
 
+        public static void OnBtn_PutBag(this ES_EquipTips self)
+        {
+            if (self.ItemOpetateType == ItemOperateEnum.AccountCangku)
+            {
+                BagClientNetHelper.RequestAccountWarehousOperate(self.Root(), 2, self.BagInfo.BagInfoID).Coroutine();
+            }
+            else
+            {
+                BagClientNetHelper.RquestPutBag(self.Root(), self.BagInfo).Coroutine();
+            }
+
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
+        }
+        
         private static async ETTask OnHuiShouFangZhiButton(this ES_EquipTips self)
         {
             EventSystem.Instance.Publish(self.Root(),new DataUpdate_HuiShouSelect(){DataParamString = $"1_{self.BagInfo.BagInfoID}"});

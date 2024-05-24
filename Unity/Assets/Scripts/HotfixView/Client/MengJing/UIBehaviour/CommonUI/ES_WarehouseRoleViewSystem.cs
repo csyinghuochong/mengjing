@@ -100,9 +100,7 @@ namespace ET.Client
         private static async ETTask OnButtonQuick(this ES_WarehouseRole self)
         {
             int currentHouse = self.CurrentItemType + (int)ItemLocType.ItemWareHouse1;
-            C2M_ItemQuickPutRequest request = new() { HorseId = currentHouse };
-            M2C_ItemQuickPutResponse response =
-                    (M2C_ItemQuickPutResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            await BagClientNetHelper.RquestQuickPut(self.Root(), currentHouse);
         }
 
         private static void OnBtn_ZhengLi(this ES_WarehouseRole self)
@@ -114,7 +112,6 @@ namespace ET.Client
         public static void OnBuyBagCell(this ES_WarehouseRole self, string dataparams)
         {
             self.RefreshHouseItems();
-
             FlyTipComponent.Instance.SpawnFlyTipDi($"获得道具: {UICommonHelper.GetNeedItemDesc(dataparams)}");
         }
 
@@ -125,7 +122,7 @@ namespace ET.Client
             BuyCellCost buyCellCost = ConfigData.BuyStoreCellCosts[self.CurrentItemType * 10 + addcell];
             PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
                 $"是否花费{UICommonHelper.GetNeedItemDesc(buyCellCost.Cost)}购买一个背包格子?",
-                () => { BagClientNetHelper.RequestBuyBagCell(self.Root(),self.CurrentItemType + 5).Coroutine(); }, null).Coroutine();
+                () => { BagClientNetHelper.RequestBuyBagCell(self.Root(), self.CurrentItemType + 5).Coroutine(); }, null).Coroutine();
         }
 
         public static void Refresh(this ES_WarehouseRole self)

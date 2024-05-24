@@ -348,6 +348,59 @@ namespace ET.Client
             C2M_ItemOperateRequest request = new() { OperateType = 6, OperateBagID = bagInfo.BagInfoID, OperatePar = houseId.ToString() };
             M2C_ItemOperateResponse response =
                     (M2C_ItemOperateResponse)await root.GetComponent<SessionComponent>().Session.Call(request);
+            CheckSameId(root);
+            return response.Error;
+        }
+
+        public static async ETTask<int> RquestPutBag(Scene root, BagInfo bagInfo)
+        {
+            C2M_ItemOperateRequest request = new() { OperateType = 7, OperateBagID = bagInfo.BagInfoID, OperatePar = bagInfo.Loc.ToString() };
+            M2C_ItemOperateResponse response = (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            CheckSameId(root);
+            return response.Error;
+        }
+
+        public static void CheckSameId(Scene root)
+        {
+            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
+            List<long> idlist = new List<long>();
+
+            for (int i = 0; i < bagComponent.AllItemList.Length; i++)
+            {
+                List<BagInfo> baglist = bagComponent.AllItemList[i];
+                for (int k = 0; k < baglist.Count; k++)
+                {
+                    if (idlist.Contains(baglist[k].BagInfoID))
+                    {
+                        // EventType.ReturnLogin.Instance.ZoneScene = self.DomainScene();
+                        // EventType.ReturnLogin.Instance.ErrorCode = ErrorCode.ERR_ModifyData;
+                        // Game.EventSystem.PublishClass(EventType.ReturnLogin.Instance);
+                        return;
+                    }
+
+                    idlist.Add(baglist[k].BagInfoID);
+                }
+            }
+        }
+
+        public static async ETTask<int> RquestQuickPut(Scene root, int hourseId)
+        {
+            C2M_ItemQuickPutRequest request = new() { HorseId = hourseId };
+            M2C_ItemQuickPutResponse response =
+                    (M2C_ItemQuickPutResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
+        public static async ETTask<int> RequestAccountWarehousOperate(Scene root, int operateType, long operateId)
+        {
+            C2M_AccountWarehousOperateRequest request = new() { OperatateType = operateType, OperateBagID = operateId };
+            M2C_AccountWarehousOperateResponse response =
+                    (M2C_AccountWarehousOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                // HintHelp.GetInstance().DataUpdate(DataType.AccountWarehous, operateType.ToString(), operateId);
+            }
+
             return response.Error;
         }
     }
