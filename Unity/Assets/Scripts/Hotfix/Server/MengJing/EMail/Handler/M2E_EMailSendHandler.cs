@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2E_EMailSendHandler: AMActorRpcHandler<Scene, M2E_EMailSendRequest, E2M_EMailSendResponse>
+    [MessageHandler(SceneType.EMail)]
+    public class M2E_EMailSendHandler: MessageHandler<Scene, M2E_EMailSendRequest, E2M_EMailSendResponse>
     {
-        protected override async ETTask Run(Scene scene, M2E_EMailSendRequest request, E2M_EMailSendResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2E_EMailSendRequest request, E2M_EMailSendResponse response)
         {
    
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.EMail, request.Id))
+            using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.EMail, request.Id))
             {
 
                 //存储邮件
@@ -20,7 +20,7 @@ namespace ET
                 {
                     Log.Warning($"世界BOSS邮件1: {request.Id}");
                 }
-                response.Error = await MailHelp.SendUserMail(scene.DomainZone(), request.Id, request.MailInfo);
+                response.Error = await MailHelp.SendUserMail(scene.Root(), request.Id, request.MailInfo);
 
                 if (request.GetWay == ItemGetWay.RunRace)
                 {
@@ -34,12 +34,12 @@ namespace ET
                 if (response.Error != ErrorCode.ERR_Success)
                 {
                     response.Error = response.Error;
-                    reply();
+
                     return;
                 }
 
-                long gateServerId = DBHelper.GetGateServerId(scene.DomainZone());
-                G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await ActorMessageSenderComponent.Instance.Call
+                ActorId gateServerId = UnitCacheHelper.GetGateServerId(scene.Zone());
+                G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
                       (gateServerId, new T2G_GateUnitInfoRequest()
                       {
                           UserID = request.Id

@@ -5189,6 +5189,105 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(E2M_EMailReceiveResponse))]
+	[Message(InnerMessage.M2E_EMailReceiveRequest)]
+	[MemoryPackable]
+	public partial class M2E_EMailReceiveRequest: MessageObject, IRequest
+	{
+		public static M2E_EMailReceiveRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2E_EMailReceiveRequest), isFromPool) as M2E_EMailReceiveRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long Id { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long MailId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Id = default;
+			this.MailId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.E2M_EMailReceiveResponse)]
+	[MemoryPackable]
+	public partial class E2M_EMailReceiveResponse: MessageObject, IResponse
+	{
+		public static E2M_EMailReceiveResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(E2M_EMailReceiveResponse), isFromPool) as E2M_EMailReceiveResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(3)]
+		public MailInfo MailInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.MailInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.M2C_UpdateMailInfo)]
+	[MemoryPackable]
+	public partial class M2C_UpdateMailInfo: MessageObject, IMessage
+	{
+		public static M2C_UpdateMailInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_UpdateMailInfo), isFromPool) as M2C_UpdateMailInfo; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<MailInfo> MailInfos { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.MailInfos.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -5344,5 +5443,8 @@ namespace ET
 		 public const ushort Chat2Mail_GetUnitList = 20152;
 		 public const ushort G2Mail_EnterMail = 20153;
 		 public const ushort Mail2G_EnterMail = 20154;
+		 public const ushort M2E_EMailReceiveRequest = 20155;
+		 public const ushort E2M_EMailReceiveResponse = 20156;
+		 public const ushort M2C_UpdateMailInfo = 20157;
 	}
 }

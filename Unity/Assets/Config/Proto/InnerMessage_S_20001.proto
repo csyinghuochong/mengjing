@@ -1329,3 +1329,27 @@ message Mail2G_EnterMail //IResponse
 	string Message = 92;
 	int32 ServerMailIdMax = 3;
 }
+
+//ResponseType E2M_EMailReceiveResponse
+message M2E_EMailReceiveRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 Id = 1;
+	int64 MailId = 2;
+}
+
+message E2M_EMailReceiveResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	MailInfo MailInfo = 4;
+}
+
+message M2C_UpdateMailInfo // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	repeated MailInfo MailInfos = 1;
+}
