@@ -1094,6 +1094,19 @@ message M2C_ItemBuyCellResponse // ILocationResponse
 	string GetItem = 3;
 }
 
+//ResponseType M2C_RoleOpenCangKuResponse
+message C2M_RoleOpenCangKuRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_RoleOpenCangKuResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
 //销毁装备
 //ResponseType M2C_ItemDestoryResponse
 message C2M_ItemDestoryRequest // ILocationRequest

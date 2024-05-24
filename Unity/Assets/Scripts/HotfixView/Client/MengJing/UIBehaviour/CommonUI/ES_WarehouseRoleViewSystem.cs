@@ -71,8 +71,7 @@ namespace ET.Client
             if (cangkuNumber <= page)
             {
                 string costItems = GlobalValueConfigCategory.Instance.Get(38).Value;
-                PopupTipHelp.OpenPopupTip(self.Root(), "开启仓库",
-                    $"是否消耗{UICommonHelper.GetNeedItemDesc(costItems)}开启一个仓库",
+                PopupTipHelp.OpenPopupTip(self.Root(), "开启仓库", $"是否消耗{UICommonHelper.GetNeedItemDesc(costItems)}开启一个仓库",
                     () => { self.RequestOpenCangKu().Coroutine(); }, null).Coroutine();
                 return false;
             }
@@ -82,18 +81,18 @@ namespace ET.Client
 
         private static async ETTask RequestOpenCangKu(this ES_WarehouseRole self)
         {
-            // C2M_RoleOpenCangKuRequest request = new C2M_RoleOpenCangKuRequest();
-            // M2C_RoleOpenCangKuResponse response =
-            //         (M2C_RoleOpenCangKuResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(request);
-            // if (response.Error != ErrorCode.ERR_Success)
-            // {
-            //     return;
-            // }
-            //
-            // Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
-            // int cangkuNumber = unit.GetComponent<NumericComponent>().GetAsInt(NumericType.CangKuNumber);
-            // self.UpdateLockList(cangkuNumber - 1);
-            // self.UIPageComponent.OnSelectIndex(cangkuNumber - 1);
+            C2M_RoleOpenCangKuRequest request = new C2M_RoleOpenCangKuRequest();
+            M2C_RoleOpenCangKuResponse response =
+                    (M2C_RoleOpenCangKuResponse)await self.Root().GetComponent<SessionComponent>().Session.Call(request);
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int cangkuNumber = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.CangKuNumber);
+            self.UpdateLockList(cangkuNumber - 1);
+            self.OnItemTypeSet(cangkuNumber - 1);
             await ETTask.CompletedTask;
         }
 
