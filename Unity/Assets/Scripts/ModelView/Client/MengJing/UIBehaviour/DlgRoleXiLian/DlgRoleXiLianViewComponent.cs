@@ -131,6 +131,91 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Toggle E_XiLianToggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_XiLianToggle == null )
+     			{
+		    		this.m_E_XiLianToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_XiLian");
+     			}
+     			return this.m_E_XiLianToggle;
+     		}
+     	}
+
+		public UnityEngine.UI.Toggle E_DaShiToggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_DaShiToggle == null )
+     			{
+		    		this.m_E_DaShiToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_DaShi");
+     			}
+     			return this.m_E_DaShiToggle;
+     		}
+     	}
+
+		public UnityEngine.UI.Toggle E_SkillToggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SkillToggle == null )
+     			{
+		    		this.m_E_SkillToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Skill");
+     			}
+     			return this.m_E_SkillToggle;
+     		}
+     	}
+
+		public UnityEngine.UI.Toggle E_TransferToggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TransferToggle == null )
+     			{
+		    		this.m_E_TransferToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Transfer");
+     			}
+     			return this.m_E_TransferToggle;
+     		}
+     	}
+
+		public UnityEngine.UI.Toggle E_InheritToggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_InheritToggle == null )
+     			{
+		    		this.m_E_InheritToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Inherit");
+     			}
+     			return this.m_E_InheritToggle;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
@@ -140,6 +225,11 @@ namespace ET.Client
 			this.m_es_rolehuishou = null;
 			this.m_es_roleqianghua = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
+			this.m_E_XiLianToggle = null;
+			this.m_E_DaShiToggle = null;
+			this.m_E_SkillToggle = null;
+			this.m_E_TransferToggle = null;
+			this.m_E_InheritToggle = null;
 			this.uiTransform = null;
 		}
 
@@ -150,6 +240,11 @@ namespace ET.Client
 		private EntityRef<ES_RoleHuiShou> m_es_rolehuishou = null;
 		private EntityRef<ES_RoleQiangHua> m_es_roleqianghua = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private UnityEngine.UI.Toggle m_E_XiLianToggle = null;
+		private UnityEngine.UI.Toggle m_E_DaShiToggle = null;
+		private UnityEngine.UI.Toggle m_E_SkillToggle = null;
+		private UnityEngine.UI.Toggle m_E_TransferToggle = null;
+		private UnityEngine.UI.Toggle m_E_InheritToggle = null;
 		public Transform uiTransform = null;
 	}
 }

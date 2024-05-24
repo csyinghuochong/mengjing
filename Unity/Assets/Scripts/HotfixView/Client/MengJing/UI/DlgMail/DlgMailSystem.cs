@@ -15,6 +15,16 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgMail self, Entity contextData = null)
         {
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
+            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
+        }
+
+        private static void OnCloseButton(this DlgMail self)
+        {
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+
+            uiComponent.CloseWindow(WindowID.WindowID_Mail);
         }
     }
 }
