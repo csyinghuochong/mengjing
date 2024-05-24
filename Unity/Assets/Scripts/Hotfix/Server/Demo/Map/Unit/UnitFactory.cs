@@ -368,6 +368,25 @@ namespace ET.Server
             return unit;
         }
 
+        public static Unit CreateStall(Scene scene, Unit master)
+        {
+            Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), 1);
+            scene.GetComponent<UnitComponent>().Add(unit);
+            unit.AddComponent<ObjectWait>();
+            unit.AddComponent<StateComponentS>();            //添加状态组件
+            unit.AddComponent<HeroDataComponentS>();
+            NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
+            UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
+            unitInfoComponent.UnitName = master.GetComponent<UserInfoComponentS>().UserInfo.StallName;
+            unit.GetComponent<NumericComponentS>().Set(NumericType.MasterId, master.Id);
+            unit.MasterId = master.Id;
+            unit.Type = UnitType.Stall;
+            unit.Position = master.Position;
+            //unit.AddComponent<DeathTimeComponent, long>(TimeHelper.Hour * 6);
+            unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
+            return unit;
+        }
+        
         public static Unit CreateNpcByPosition(Scene scene, int npcId, float3 vector3)
         {
             NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcId);

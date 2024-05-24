@@ -7,6 +7,35 @@ namespace ET.Server
     public static partial class TransferHelper
     {
 
+        public static void RemoveStall(Unit unit)
+        {
+            List<Unit> stallList = UnitHelper.GetUnitList( unit.Scene(), UnitType.Stall );
+            for (int i = stallList.Count - 1; i>= 0; i--)
+            {
+                if (stallList[i].MasterId == unit.Id)
+                {
+                    unit.GetParent<UnitComponent>().Remove(stallList[i].Id);
+                }
+            }
+        }
+        
+        public static void RemovePetAndJingLing(Unit unit)
+        {
+            UnitComponent unitComponent = unit.Scene().GetComponent<UnitComponent>();
+            RolePetInfo fightId = unit.GetComponent<PetComponentS>().GetFightPet();
+            if (fightId != null)
+            {
+                unitComponent.Remove(fightId.Id);
+            }
+            long jinglingUnitId = unit.GetComponent<ChengJiuComponentS>().JingLingUnitId;
+            if (jinglingUnitId != 0 && unitComponent.Get(jinglingUnitId) != null)
+            {
+                unitComponent.Remove(jinglingUnitId);
+            }
+            unit.GetComponent<ChengJiuComponentS>().JingLingUnitId = 0;
+        }
+
+        
         public static async ETTask<int> TransferUnit(Unit unit, C2M_TransferMap request)
         {
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Transfer, unit.Id))

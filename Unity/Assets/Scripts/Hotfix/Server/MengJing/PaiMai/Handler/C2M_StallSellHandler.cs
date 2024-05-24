@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_StallSellHandler: AMActorLocationRpcHandler<Unit, C2M_StallSellRequest, M2C_StallSellResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_StallSellHandler: MessageHandler<Unit, C2M_StallSellRequest, M2C_StallSellResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_StallSellRequest request, M2C_StallSellResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_StallSellRequest request, M2C_StallSellResponse response)
         {
-            if (unit.DomainZone() != 3)
+            if (unit.Zone() != 3)
             {
                 reply();
                 return;

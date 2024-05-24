@@ -4256,3 +4256,35 @@ message M2C_StallBuyResponse // ILocationResponse
 	string Message = 92;
 }
 
+//摆摊
+//ResponseType M2C_StallOperationResponse
+message C2M_StallOperationRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 StallType = 1; //0收摊 //1摆摊  //2改名
+	string Value = 2;
+}
+
+message M2C_StallOperationResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_StallSellResponse
+message C2M_StallSellRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	PaiMaiItemInfo PaiMaiItemInfo = 1;
+}
+
+message M2C_StallSellResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	PaiMaiItemInfo PaiMaiItemInfo = 1;
+}
