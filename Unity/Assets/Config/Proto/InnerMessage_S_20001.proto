@@ -1604,3 +1604,18 @@ message P2M_StallBuyResponse // IResponse
 	string Message = 92;
 	PaiMaiItemInfo PaiMaiItemInfo = 1;
 }
+
+//ResponseType P2M_StallSellResponse
+message M2P_StallSellRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	PaiMaiItemInfo PaiMaiItemInfo = 2;
+}
+
+message P2M_StallSellResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
