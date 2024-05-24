@@ -8,7 +8,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, P2M_PaiMaiAuctionOverRequest request, M2P_PaiMaiAuctionOverResponse response)
         {
-            Log.Warning($"PaiMaiAuctionOver:  {unit.DomainZone()} {unit.Id}");
+            Log.Warning($"PaiMaiAuctionOver:  {unit.Zone()} {unit.Id}");
             
             UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
             if (userInfoComponent.UserInfo.Gold < request.Price)

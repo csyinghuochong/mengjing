@@ -50,7 +50,7 @@ namespace ET.Server
 					ActorId = unit.GetComponent<UserInfoComponentS>().UserInfo.Gold,
 				};
 
-				ActorId paimaiServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.DomainZone(), "PaiMai").ActorId;
+				ActorId paimaiServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.Zone(), "PaiMai").ActorId;
 				P2M_PaiMaiShopResponse r_PaiMaiShopResponse = (P2M_PaiMaiShopResponse)await unit.Root().GetComponent<MessageSender>().Call(paimaiServerId, m2P_PaiMaiShopRequest);
 
 				if (r_PaiMaiShopResponse.Error != ErrorCode.ERR_Success)
