@@ -49,5 +49,6 @@ namespace ET.Client
 		WindowID_TaskGet,
 		WindowID_Warehouse,
 		WindowID_Mail,
+		WindowID_RoleXiLian,
 	}
 }
