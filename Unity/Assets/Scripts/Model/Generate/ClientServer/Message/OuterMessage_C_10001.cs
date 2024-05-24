@@ -16108,6 +16108,64 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_PaiMaiAuctionJoinResponse))]
+//参入竞拍
+	[Message(OuterMessage.C2M_PaiMaiAuctionJoinRequest)]
+	[MemoryPackable]
+	public partial class C2M_PaiMaiAuctionJoinRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PaiMaiAuctionJoinRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PaiMaiAuctionJoinRequest), isFromPool) as C2M_PaiMaiAuctionJoinRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PaiMaiAuctionJoinResponse)]
+	[MemoryPackable]
+	public partial class M2C_PaiMaiAuctionJoinResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PaiMaiAuctionJoinResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PaiMaiAuctionJoinResponse), isFromPool) as M2C_PaiMaiAuctionJoinResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -16572,5 +16630,7 @@ namespace ET
 		 public const ushort M2C_HappyMoveResponse = 10461;
 		 public const ushort C2M_HongBaoOpenRequest = 10462;
 		 public const ushort M2C_HongBaoOpenResponse = 10463;
+		 public const ushort C2M_PaiMaiAuctionJoinRequest = 10464;
+		 public const ushort M2C_PaiMaiAuctionJoinResponse = 10465;
 	}
 }

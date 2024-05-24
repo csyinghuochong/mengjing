@@ -5637,6 +5637,76 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(P2M_PaiMaiAuctionJoinResponse))]
+//参入竞拍
+	[Message(InnerMessage.M2P_PaiMaiAuctionJoinRequest)]
+	[MemoryPackable]
+	public partial class M2P_PaiMaiAuctionJoinRequest: MessageObject, IRequest
+	{
+		public static M2P_PaiMaiAuctionJoinRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2P_PaiMaiAuctionJoinRequest), isFromPool) as M2P_PaiMaiAuctionJoinRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long Gold { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Gold = default;
+			this.UnitID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.P2M_PaiMaiAuctionJoinResponse)]
+	[MemoryPackable]
+	public partial class P2M_PaiMaiAuctionJoinResponse: MessageObject, IResponse
+	{
+		public static P2M_PaiMaiAuctionJoinResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(P2M_PaiMaiAuctionJoinResponse), isFromPool) as P2M_PaiMaiAuctionJoinResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long CostGold { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.CostGold = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -5805,5 +5875,7 @@ namespace ET
 		 public const ushort M2F_ServerInfoUpdateResponse = 20165;
 		 public const ushort M2H_HapplyEnterRequest = 20166;
 		 public const ushort H2M_HapplyEnterResponse = 20167;
+		 public const ushort M2P_PaiMaiAuctionJoinRequest = 20168;
+		 public const ushort P2M_PaiMaiAuctionJoinResponse = 20169;
 	}
 }
