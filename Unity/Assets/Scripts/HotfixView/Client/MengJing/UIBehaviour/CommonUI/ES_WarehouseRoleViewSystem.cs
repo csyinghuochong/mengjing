@@ -24,12 +24,15 @@ namespace ET.Client
             self.NoLockList.Add(self.E_NoLock_4Image.gameObject);
 
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
+            self.E_ButtonPackButton.AddListener(self.OnBtn_ZhengLi);
+            self.E_ButtonQuickButton.AddListenerAsync(self.OnButtonQuick);
 
             self.E_BagItems1LoopVerticalScrollRect.AddItemRefreshListener(self.OnHouseItemsRefresh);
             self.E_BagItems2LoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
 
             self.RefreshBagItems();
             self.E_1Toggle.IsSelected(true);
+            self.UpdateLockList(0);
         }
 
         [EntitySystem]
@@ -40,13 +43,89 @@ namespace ET.Client
 
         private static void OnItemTypeSet(this ES_WarehouseRole self, int index)
         {
+            if (!self.ClickEnabled)
+            {
+                return;
+            }
+
+            if (!self.CheckPageButton_1(index))
+            {
+                return;
+            }
+
             UICommonHelper.SetToggleShow(self.E_1Toggle.gameObject, index == 0);
             UICommonHelper.SetToggleShow(self.E_2Toggle.gameObject, index == 1);
             UICommonHelper.SetToggleShow(self.E_3Toggle.gameObject, index == 2);
             UICommonHelper.SetToggleShow(self.E_4Toggle.gameObject, index == 3);
 
             self.CurrentItemType = index;
+            self.Root().GetComponent<BagComponentC>().CurrentHouse = self.CurrentItemType + (int)ItemLocType.ItemWareHouse1;
             self.RefreshHouseItems();
+            self.UpdateLockList(index);
+        }
+
+        private static bool CheckPageButton_1(this ES_WarehouseRole self, int page)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int cangkuNumber = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.CangKuNumber);
+            if (cangkuNumber <= page)
+            {
+                string costItems = GlobalValueConfigCategory.Instance.Get(38).Value;
+                PopupTipHelp.OpenPopupTip(self.Root(), "开启仓库",
+                    $"是否消耗{UICommonHelper.GetNeedItemDesc(costItems)}开启一个仓库",
+                    () => { self.RequestOpenCangKu().Coroutine(); }, null).Coroutine();
+                return false;
+            }
+
+            return true;
+        }
+
+        private static async ETTask RequestOpenCangKu(this ES_WarehouseRole self)
+        {
+            // C2M_RoleOpenCangKuRequest request = new C2M_RoleOpenCangKuRequest();
+            // M2C_RoleOpenCangKuResponse response =
+            //         (M2C_RoleOpenCangKuResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(request);
+            // if (response.Error != ErrorCode.ERR_Success)
+            // {
+            //     return;
+            // }
+            //
+            // Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
+            // int cangkuNumber = unit.GetComponent<NumericComponent>().GetAsInt(NumericType.CangKuNumber);
+            // self.UpdateLockList(cangkuNumber - 1);
+            // self.UIPageComponent.OnSelectIndex(cangkuNumber - 1);
+            await ETTask.CompletedTask;
+        }
+
+        private static async ETTask OnButtonQuick(this ES_WarehouseRole self)
+        {
+            int currentHouse = self.CurrentItemType + (int)ItemLocType.ItemWareHouse1;
+            C2M_ItemQuickPutRequest request = new() { HorseId = currentHouse };
+            M2C_ItemQuickPutResponse response =
+                    (M2C_ItemQuickPutResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+        }
+
+        private static void OnBtn_ZhengLi(this ES_WarehouseRole self)
+        {
+            int currentHouse = self.CurrentItemType + (int)ItemLocType.ItemWareHouse1;
+            BagClientNetHelper.RequestSortByLoc(self.Root(), (ItemLocType)currentHouse).Coroutine();
+        }
+
+        public static void OnBuyBagCell(this ES_WarehouseRole self, string dataparams)
+        {
+            self.RefreshHouseItems();
+
+            FlyTipComponent.Instance.SpawnFlyTipDi($"获得道具: {UICommonHelper.GetNeedItemDesc(dataparams)}");
+        }
+
+        private static void OnClickImage_Lock(this ES_WarehouseRole self)
+        {
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            int addcell = bagComponent.WarehouseAddedCell[self.CurrentItemType];
+            BuyCellCost buyCellCost = ConfigData.BuyStoreCellCosts[self.CurrentItemType * 10 + addcell];
+            PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
+                $"是否花费{UICommonHelper.GetNeedItemDesc(buyCellCost.Cost)}购买一个背包格子?",
+                () => { BagClientNetHelper.RequestBuyBagCell(self.Root(),self.CurrentItemType + 5).Coroutine(); }, null).Coroutine();
         }
 
         public static void Refresh(this ES_WarehouseRole self)
@@ -108,6 +187,7 @@ namespace ET.Client
                 int itemnum = int.Parse(buyCellCost.Get.Split(';')[1]);
                 scrollItemCommonItem.Refresh(new BagInfo() { ItemID = itemid, ItemNum = itemnum }, ItemOperateEnum.None);
                 scrollItemCommonItem.ES_CommonItem.UpdateUnLock(false);
+                scrollItemCommonItem.ES_CommonItem.E_LockButton.AddListener(self.OnClickImage_Lock);
             }
         }
 
@@ -137,6 +217,17 @@ namespace ET.Client
                 {
                     self.ScrollItemBagItems[i].UpdateSelectStatus(bagInfo);
                 }
+            }
+        }
+
+        public static void UpdateLockList(this ES_WarehouseRole self, int page)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int cangkuNumber = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.CangKuNumber);
+            for (int i = 0; i < self.LockList.Count; i++)
+            {
+                self.LockList[i].SetActive(cangkuNumber - 1 < i);
+                self.NoLockList[i].SetActive(cangkuNumber - 1 >= i && i != page);
             }
         }
     }

@@ -341,5 +341,14 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<int> RquestPutStoreHouse(Scene root, BagInfo bagInfo)
+        {
+            int houseId = root.GetComponent<BagComponentC>().CurrentHouse;
+            C2M_ItemOperateRequest request = new() { OperateType = 6, OperateBagID = bagInfo.BagInfoID, OperatePar = houseId.ToString() };
+            M2C_ItemOperateResponse response =
+                    (M2C_ItemOperateResponse)await root.GetComponent<SessionComponent>().Session.Call(request);
+            return response.Error;
+        }
     }
 }

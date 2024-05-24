@@ -127,6 +127,10 @@ namespace ET.Client
     {
     }
 
+    public struct DataUpdate_BuyBagCell
+    {
+    }
+
     public struct TaskNpcDialog
     {
         public int NpcId;
@@ -250,7 +254,7 @@ namespace ET.Client
         public Scene ZoneScene;
         public Unit Unit;
     }
-    
+
     //更新血量
     public struct Now_Hp_Update
     {
@@ -260,7 +264,7 @@ namespace ET.Client
         public int DamgeType;
         public long ChangeHpValue;
     }
-    
+
     public struct BeforeSkill
     {
     }
