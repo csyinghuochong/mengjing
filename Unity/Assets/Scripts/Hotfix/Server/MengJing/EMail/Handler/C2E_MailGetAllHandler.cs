@@ -9,12 +9,9 @@ namespace ET.Server
     {
         protected override async ETTask Run(Scene scene, C2E_GetAllMailRequest request, E2C_GetAllMailResponse response )
         {
-            long dbCacheId = DBHelper.GetDbCacheId(scene.DomainZone());
-            D2G_GetComponent d2GGetUnit = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = request.ActorId, Component = DBHelper.DBMailInfo });
-            if (d2GGetUnit.Component != null)
+            DBMailInfo dBMailInfo = await UnitCacheHelper.GetComponentCache<DBMailInfo>(scene.Root(), request.ActorId);
+            if (dBMailInfo != null)
             {
-                DBMailInfo dBMailInfo = d2GGetUnit.Component as DBMailInfo;
-
                 for(int i = 0; i < dBMailInfo.MailInfoList.Count; i++)
                 {
                     for (int item = 0; item < dBMailInfo.MailInfoList[i].ItemList.Count; item++)
@@ -28,8 +25,6 @@ namespace ET.Server
                 
                 response.MailInfos = dBMailInfo.MailInfoList;
             }
-            reply();
         }
-
     }
 }

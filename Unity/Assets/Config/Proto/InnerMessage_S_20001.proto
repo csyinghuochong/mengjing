@@ -1313,3 +1313,19 @@ message Chat2Mail_GetUnitList //IResponse
 	string Message = 92;
 	repeated int64 OnlineUnitIdList = 1;
 }
+
+//ResponseType Mail2G_EnterMail
+message G2Mail_EnterMail //IRequest
+{
+	int32 RpcId = 90;
+	int64 UnitId = 1;
+	int32 ServerMailIdCur = 3;
+}
+
+message Mail2G_EnterMail //IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 ServerMailIdMax = 3;
+}

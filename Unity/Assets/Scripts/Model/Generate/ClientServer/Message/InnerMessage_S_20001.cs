@@ -5124,6 +5124,71 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Mail2G_EnterMail))]
+	[Message(InnerMessage.G2Mail_EnterMail)]
+	[MemoryPackable]
+	public partial class G2Mail_EnterMail: MessageObject, IRequest
+	{
+		public static G2Mail_EnterMail Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(G2Mail_EnterMail), isFromPool) as G2Mail_EnterMail; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int ServerMailIdCur { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.UnitId = default;
+			this.ServerMailIdCur = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.Mail2G_EnterMail)]
+	[MemoryPackable]
+	public partial class Mail2G_EnterMail: MessageObject, IResponse
+	{
+		public static Mail2G_EnterMail Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Mail2G_EnterMail), isFromPool) as Mail2G_EnterMail; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int ServerMailIdMax { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.ServerMailIdMax = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -5277,5 +5342,7 @@ namespace ET
 		 public const ushort Chat2M_UpdateLevel = 20150;
 		 public const ushort Mail2Chat_GetUnitList = 20151;
 		 public const ushort Chat2Mail_GetUnitList = 20152;
+		 public const ushort G2Mail_EnterMail = 20153;
+		 public const ushort Mail2G_EnterMail = 20154;
 	}
 }
