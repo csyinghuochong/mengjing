@@ -15984,6 +15984,68 @@ namespace ET
 
 	}
 
+//喜从天降刷新
+	[ResponseType(nameof(M2C_HappyMoveResponse))]
+	[Message(OuterMessage.C2M_HappyMoveRequest)]
+	[MemoryPackable]
+	public partial class C2M_HappyMoveRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_HappyMoveRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_HappyMoveRequest), isFromPool) as C2M_HappyMoveRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int OperatateType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.OperatateType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_HappyMoveResponse)]
+	[MemoryPackable]
+	public partial class M2C_HappyMoveResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_HappyMoveResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_HappyMoveResponse), isFromPool) as M2C_HappyMoveResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -16444,5 +16506,7 @@ namespace ET
 		 public const ushort E2C_GetAllMailResponse = 10457;
 		 public const ushort C2F_WatchPetRequest = 10458;
 		 public const ushort F2C_WatchPetResponse = 10459;
+		 public const ushort C2M_HappyMoveRequest = 10460;
+		 public const ushort M2C_HappyMoveResponse = 10461;
 	}
 }

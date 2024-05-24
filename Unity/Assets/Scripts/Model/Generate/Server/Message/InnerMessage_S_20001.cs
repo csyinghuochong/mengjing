@@ -5563,6 +5563,80 @@ namespace ET
 
 	}
 
+//进入喜从天降
+	[ResponseType(nameof(H2M_HapplyEnterResponse))]
+	[Message(InnerMessage.M2H_HapplyEnterRequest)]
+	[MemoryPackable]
+	public partial class M2H_HapplyEnterRequest: MessageObject, IRequest
+	{
+		public static M2H_HapplyEnterRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2H_HapplyEnterRequest), isFromPool) as M2H_HapplyEnterRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int SceneId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.SceneId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.H2M_HapplyEnterResponse)]
+	[MemoryPackable]
+	public partial class H2M_HapplyEnterResponse: MessageObject, IResponse
+	{
+		public static H2M_HapplyEnterResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(H2M_HapplyEnterResponse), isFromPool) as H2M_HapplyEnterResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long FubenInstanceId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Position { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.FubenInstanceId = default;
+			this.Position = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -5729,5 +5803,7 @@ namespace ET
 		 public const ushort F2M_YeWaiSceneIdResponse = 20163;
 		 public const ushort F2M_ServerInfoUpdateRequest = 20164;
 		 public const ushort M2F_ServerInfoUpdateResponse = 20165;
+		 public const ushort M2H_HapplyEnterRequest = 20166;
+		 public const ushort H2M_HapplyEnterResponse = 20167;
 	}
 }

@@ -6,7 +6,7 @@ namespace ET.Server
     [ComponentOf(typeof(Unit))]
     public class DropComponentS : Entity, IAwake
     {
-        public int ItemID;
+        public int ItemID { get; set; }
         public int ItemNum;
         public int DropType{ get; set; } //0 公共掉落    1私人掉落 2 保护掉落 3 归属掉落
 
