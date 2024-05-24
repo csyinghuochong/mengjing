@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
-    public class C2M_StallXiaJiaHandler: MessageHandler<Unit, C2M_StallXiaJiaRequest, M2C_StallXiaJiaResponse>
+    public class C2M_StallXiaJiaHandler: MessageLocationHandler<Unit, C2M_StallXiaJiaRequest, M2C_StallXiaJiaResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_StallXiaJiaRequest request, M2C_StallXiaJiaResponse response)
         {

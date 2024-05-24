@@ -3,7 +3,7 @@
 namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
-    public class C2M_StallSellHandler: MessageHandler<Unit, C2M_StallSellRequest, M2C_StallSellResponse>
+    public class C2M_StallSellHandler: MessageLocationHandler<Unit, C2M_StallSellRequest, M2C_StallSellResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_StallSellRequest request, M2C_StallSellResponse response)
         {

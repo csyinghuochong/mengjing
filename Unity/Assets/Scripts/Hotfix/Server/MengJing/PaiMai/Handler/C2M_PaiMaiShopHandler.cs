@@ -6,7 +6,7 @@ namespace ET.Server
 {
 
     [MessageHandler(SceneType.Map)]
-    public  class C2M_PaiMaiShopHandler : MessageHandler<Unit, C2M_PaiMaiShopRequest, M2C_PaiMaiShopResponse>
+    public  class C2M_PaiMaiShopHandler : MessageLocationHandler<Unit, C2M_PaiMaiShopRequest, M2C_PaiMaiShopResponse>
     {
 		//拍卖快捷列表购买道具
 		protected override async ETTask Run(Unit unit, C2M_PaiMaiShopRequest request, M2C_PaiMaiShopResponse response)

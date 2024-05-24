@@ -4,7 +4,7 @@ using Unity.Mathematics;
 namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
-    public class C2M_StallBuyHandler: MessageHandler<Unit, C2M_StallBuyRequest, M2C_StallBuyResponse>
+    public class C2M_StallBuyHandler: MessageLocationHandler<Unit, C2M_StallBuyRequest, M2C_StallBuyResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_StallBuyRequest request, M2C_StallBuyResponse response)
         {

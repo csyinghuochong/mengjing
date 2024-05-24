@@ -4,7 +4,7 @@ namespace ET.Server
 {
 
     [MessageHandler(SceneType.Map)]
-    public class C2M_StallOperationHandler : MessageHandler<Unit, C2M_StallOperationRequest, M2C_StallOperationResponse>
+    public class C2M_StallOperationHandler : MessageLocationHandler<Unit, C2M_StallOperationRequest, M2C_StallOperationResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_StallOperationRequest request, M2C_StallOperationResponse response)
         {

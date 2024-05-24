@@ -3,7 +3,7 @@
 namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
-    public class C2M_PaiMaiSellHandler : MessageHandler<Unit, C2M_PaiMaiSellRequest, M2C_PaiMaiSellResponse>
+    public class C2M_PaiMaiSellHandler : MessageLocationHandler<Unit, C2M_PaiMaiSellRequest, M2C_PaiMaiSellResponse>
     {
 
 		protected override async ETTask Run(Unit unit, C2M_PaiMaiSellRequest request, M2C_PaiMaiSellResponse response)

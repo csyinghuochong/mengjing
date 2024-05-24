@@ -6,7 +6,7 @@ namespace ET.Server
 {
     
     [MessageHandler(SceneType.Map)]
-    public class C2M_HongBaoOpenRequestHandler: MessageHandler<Unit, C2M_HongBaoOpenRequest, M2C_HongBaoOpenResponse>
+    public class C2M_HongBaoOpenRequestHandler: MessageLocationHandler<Unit, C2M_HongBaoOpenRequest, M2C_HongBaoOpenResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_HongBaoOpenRequest request, M2C_HongBaoOpenResponse response)
         {

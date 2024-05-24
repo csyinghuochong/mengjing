@@ -5,7 +5,7 @@ using Unity.Mathematics;
 namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
-    public class C2M_PaiMaiBuyHandler : MessageHandler<Unit, C2M_PaiMaiBuyRequest, M2C_PaiMaiBuyResponse>
+    public class C2M_PaiMaiBuyHandler : MessageLocationHandler<Unit, C2M_PaiMaiBuyRequest, M2C_PaiMaiBuyResponse>
     {
         //拍卖行购买道具
         protected override async ETTask Run(Unit unit, C2M_PaiMaiBuyRequest request, M2C_PaiMaiBuyResponse response)

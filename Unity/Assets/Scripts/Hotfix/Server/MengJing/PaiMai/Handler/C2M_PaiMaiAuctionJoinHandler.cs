@@ -3,7 +3,7 @@
 namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
-    public class C2M_PaiMaiAuctionJoinHandler : MessageHandler<Unit, C2M_PaiMaiAuctionJoinRequest, M2C_PaiMaiAuctionJoinResponse>
+    public class C2M_PaiMaiAuctionJoinHandler : MessageLocationHandler<Unit, C2M_PaiMaiAuctionJoinRequest, M2C_PaiMaiAuctionJoinResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_PaiMaiAuctionJoinRequest request, M2C_PaiMaiAuctionJoinResponse response)
         {
