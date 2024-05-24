@@ -4207,3 +4207,20 @@ message M2C_PaiMaiSellResponse // ILocationResponse
 	string Message = 92;
 	PaiMaiItemInfo PaiMaiItemInfo = 1;
 }
+
+//ResponseType M2C_PaiMaiShopResponse
+message C2M_PaiMaiShopRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 PaiMaiId = 1;
+	int32 BuyNum = 2;
+}
+
+message M2C_PaiMaiShopResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+

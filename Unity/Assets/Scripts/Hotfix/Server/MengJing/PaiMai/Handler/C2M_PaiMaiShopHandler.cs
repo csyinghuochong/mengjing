@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
+using Unity.Mathematics;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public  class C2M_PaiMaiShopHandler : AMActorLocationRpcHandler<Unit, C2M_PaiMaiShopRequest, M2C_PaiMaiShopResponse>
+    [MessageHandler(SceneType.Map)]
+    public  class C2M_PaiMaiShopHandler : MessageHandler<Unit, C2M_PaiMaiShopRequest, M2C_PaiMaiShopResponse>
     {
 		//拍卖快捷列表购买道具
-		protected override async ETTask Run(Unit unit, C2M_PaiMaiShopRequest request, M2C_PaiMaiShopResponse response, Action reply)
+		protected override async ETTask Run(Unit unit, C2M_PaiMaiShopRequest request, M2C_PaiMaiShopResponse response)
 		{
 			if(!PaiMaiSellConfigCategory.Instance.Contain(request.PaiMaiId))
 			{
                 response.Error = ErrorCode.ERR_ItemNotExist;
-                reply();
                 return;
             }
 
@@ -22,28 +21,25 @@ namespace ET
 			if (paiMaiSellConfig == null)
 			{
 				response.Error = ErrorCode.ERR_NetWorkError;
-				reply();
 				return;
 			}
 
 			ItemConfig itemConfig = ItemConfigCategory.Instance.Get(paiMaiSellConfig.ItemID);
-			int cell = Mathf.CeilToInt(request.BuyNum * 1f / itemConfig.ItemPileSum);
-			if (unit.GetComponent<BagComponent>().GetBagLeftCell() < cell)
+			int cell = (int)math.ceil(request.BuyNum * 1f / itemConfig.ItemPileSum);
+			if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < cell)
 			{
 				response.Error = ErrorCode.ERR_BagIsFull;
-				reply();
 				return;
 			}
 			if (request.BuyNum < 0 || request.BuyNum > 1000)
 			{
 				response.Error = ErrorCode.ERR_MysteryItem_Max;
-				reply();
 				return;
 			}
 
             Log.Warning($"拍卖行购买请求 : {unit.Id}  {paiMaiSellConfig.ItemID}  {request.BuyNum}  {cell}");
 
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.Buy, unit.Id))
+            using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Buy, unit.Id))
 			{
 
 				M2P_PaiMaiShopRequest m2P_PaiMaiShopRequest = new M2P_PaiMaiShopRequest()

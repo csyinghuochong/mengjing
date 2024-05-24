@@ -84,13 +84,12 @@ namespace ET.Server
 				if (r_GameStatusResponse.Error == ErrorCode.ERR_Success)
 				{
 					//扣除对应道具
-					unit.GetComponent<BagComponent>().OnCostItemData(request.PaiMaiItemInfo.BagInfo.BagInfoID, request.PaiMaiItemInfo.BagInfo.ItemNum);
-					unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.PaiMaiSell_1015, 0, 1);
+					unit.GetComponent<BagComponentS>().OnCostItemData(request.PaiMaiItemInfo.BagInfo.BagInfoID, request.PaiMaiItemInfo.BagInfo.ItemNum);
+					unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.PaiMaiSell_1015, 0, 1);
 					response.PaiMaiItemInfo = request.PaiMaiItemInfo;
 					LogHelper.LogWarning(response.PaiMaiItemInfo.PlayerName + "上架道具：" + request.PaiMaiItemInfo.BagInfo.ItemID + "数量" + request.PaiMaiItemInfo.BagInfo.ItemNum + "时间戳:" + currentTime.ToString(), true);
                 }
                 response.Error = r_GameStatusResponse.Error;
-				reply();
 				await ETTask.CompletedTask;
 			}
 		}

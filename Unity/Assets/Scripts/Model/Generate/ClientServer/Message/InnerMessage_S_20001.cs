@@ -6048,6 +6048,79 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(P2M_PaiMaiShopResponse))]
+	[Message(InnerMessage.M2P_PaiMaiShopRequest)]
+	[MemoryPackable]
+	public partial class M2P_PaiMaiShopRequest: MessageObject, IRequest
+	{
+		public static M2P_PaiMaiShopRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2P_PaiMaiShopRequest), isFromPool) as M2P_PaiMaiShopRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ItemID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int BuyNum { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Price { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ItemID = default;
+			this.BuyNum = default;
+			this.Price = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.P2M_PaiMaiShopResponse)]
+	[MemoryPackable]
+	public partial class P2M_PaiMaiShopResponse: MessageObject, IResponse
+	{
+		public static P2M_PaiMaiShopResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(P2M_PaiMaiShopResponse), isFromPool) as P2M_PaiMaiShopResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public PaiMaiShopItemInfo PaiMaiShopItemInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PaiMaiShopItemInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -6228,5 +6301,7 @@ namespace ET
 		 public const ushort R2M_DBServerInfoResponse = 20177;
 		 public const ushort M2P_PaiMaiSellRequest = 20178;
 		 public const ushort P2M_PaiMaiSellResponse = 20179;
+		 public const ushort M2P_PaiMaiShopRequest = 20180;
+		 public const ushort P2M_PaiMaiShopResponse = 20181;
 	}
 }
