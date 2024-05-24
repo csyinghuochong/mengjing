@@ -1,20 +1,19 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_PaiMaiSellHandler : AMActorLocationRpcHandler<Unit, C2M_PaiMaiSellRequest, M2C_PaiMaiSellResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_PaiMaiSellHandler : MessageHandler<Unit, C2M_PaiMaiSellRequest, M2C_PaiMaiSellResponse>
     {
 
-		protected override async ETTask Run(Unit unit, C2M_PaiMaiSellRequest request, M2C_PaiMaiSellResponse response, Action reply)
+		protected override async ETTask Run(Unit unit, C2M_PaiMaiSellRequest request, M2C_PaiMaiSellResponse response)
 		{
-			using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.Sell, unit.Id))
+			using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Sell, unit.Id))
 			{
 				if (request.PaiMaiItemInfo.BagInfo.ItemNum <= 0)
                 {
                     Log.Error($"C2M_PaiMaiSellRequest 1");
                     response.Error = ErrorCode.ERR_ModifyData;
-                    reply();
 					return;
 				}
 				long allprice = request.PaiMaiItemInfo.BagInfo.ItemNum * request.PaiMaiItemInfo.Price;
@@ -22,16 +21,8 @@ namespace ET
                 {
                     Log.Error($"C2M_PaiMaiSellRequest 2");
                     response.Error = ErrorCode.ERR_ModifyData;
-                    reply();
                     return;
                 }
-
-				//if (allprice + unit.GetComponent<DataCollationComponent>().PaiMaiTodayGold >= 50000000)
-				//{
-    //                response.Error = ErrorCode.ERR_PaiMaiSellLimit;
-    //                reply();
-    //                return;
-    //            }
 
                 //获取时间戳
                 long currentTime = TimeHelper.ServerNow();
@@ -40,24 +31,22 @@ namespace ET
                 long paimaiItemId = IdGenerater.Instance.GenerateId();
 				request.PaiMaiItemInfo.Id = paimaiItemId;
 
-                request.PaiMaiItemInfo.PlayerName = unit.GetComponent<UserInfoComponent>().UserInfo.Name;
-				request.PaiMaiItemInfo.UserId = unit.GetComponent<UserInfoComponent>().UserInfo.UserId;
-                request.PaiMaiItemInfo.Account = unit.GetComponent<UserInfoComponent>().Account;
+                request.PaiMaiItemInfo.PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
+				request.PaiMaiItemInfo.UserId = unit.GetComponent<UserInfoComponentS>().UserInfo.UserId;
+                request.PaiMaiItemInfo.Account = unit.GetComponent<UserInfoComponentS>().Account;
 				request.PaiMaiItemInfo.SellTime = currentTime;
 
 				//对比出售数量和道具是否匹配
 				long bagInfoId = request.PaiMaiItemInfo.BagInfo.BagInfoID;
-				BagInfo bagInfo = unit.GetComponent<BagComponent>().GetItemByLoc(ItemLocType.ItemLocBag, bagInfoId);
+				BagInfo bagInfo = unit.GetComponent<BagComponentS>().GetItemByLoc(ItemLocType.ItemLocBag, bagInfoId);
 				if (bagInfo == null)
 				{
 					response.Error = ErrorCode.ERR_ItemNotEnoughError;      //道具不足
-					reply();
 					return;
 				}
 				if (bagInfo.ItemNum < request.PaiMaiItemInfo.BagInfo.ItemNum)
 				{
 					response.Error = ErrorCode.ERR_ItemNotEnoughError;      //道具不足
-					reply();
 					return;
 				}
 
@@ -66,13 +55,11 @@ namespace ET
 				if (itemConfig.IfStopPaiMai == 1) 
 				{
 					response.Error = ErrorCode.Err_StopPaiMai;      //道具无法上架
-					reply();
 					return;
 				}
 				if (bagInfo.isBinging) 
 				{
 					response.Error = ErrorCode.ERR_ItemBing;      //道具绑定
-					reply();
 					return;
 				}
 
@@ -81,12 +68,11 @@ namespace ET
                 {
                     Log.Error($"C2M_PaiMaiSellRequest 3");
                     response.Error = ErrorCode.ERR_ModifyData;
-                    reply();
 					return;
 				}
 
 				//发送对应拍卖行信息
-				long paimaiServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.DomainZone(), Enum.GetName(SceneType.PaiMai)).InstanceId;
+				ActorId paimaiServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.Zone(), "PaiMai").ActorId;
 				P2M_PaiMaiSellResponse r_GameStatusResponse = (P2M_PaiMaiSellResponse)await ActorMessageSenderComponent.Instance.Call
 					(paimaiServerId, new M2P_PaiMaiSellRequest()
 					{

@@ -16365,6 +16365,75 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_PaiMaiSellResponse))]
+	[Message(OuterMessage.C2M_PaiMaiSellRequest)]
+	[MemoryPackable]
+	public partial class C2M_PaiMaiSellRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PaiMaiSellRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PaiMaiSellRequest), isFromPool) as C2M_PaiMaiSellRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public PaiMaiItemInfo PaiMaiItemInfo { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int IsRecharge { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.PaiMaiItemInfo = default;
+			this.IsRecharge = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PaiMaiSellResponse)]
+	[MemoryPackable]
+	public partial class M2C_PaiMaiSellResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PaiMaiSellResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PaiMaiSellResponse), isFromPool) as M2C_PaiMaiSellResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public PaiMaiItemInfo PaiMaiItemInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PaiMaiItemInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -16837,5 +16906,7 @@ namespace ET
 		 public const ushort M2C_PaiMaiBuyResponse = 10469;
 		 public const ushort C2M_PaiMaiDuiHuanRequest = 10470;
 		 public const ushort M2C_PaiMaiDuiHuanResponse = 10471;
+		 public const ushort C2M_PaiMaiSellRequest = 10472;
+		 public const ushort M2C_PaiMaiSellResponse = 10473;
 	}
 }

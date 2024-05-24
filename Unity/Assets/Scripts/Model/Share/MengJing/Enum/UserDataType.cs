@@ -22,7 +22,7 @@ namespace ET
         public const int UnionContri = 16;            //家族贡献
         public const int UnionExp = 17;              //家族经验
         public const int JueXingExp = 18;
-
+        
         public const int Lv = 19;                     //等级       
         public const int JiaYuanLv = 20;              //家园等级
         public const int Combat = 21;                 //zhanli战力  
@@ -42,7 +42,7 @@ namespace ET
 
         public const int InvestMent = 34;                       //投资资金
         public const int UnionGold = 35;                        //家族金币
-        public const int FirstUnionName = 36;                  //
+        public const int WeiJingGold = 36;                  //
 
         public const int Max = 100;
     }

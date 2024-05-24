@@ -1517,3 +1517,36 @@ message M2M_PaiMaiBuyInfoResponse // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType R2M_DBServerInfoResponse
+message M2R_DBServerInfoRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message R2M_DBServerInfoResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	ServerInfo ServerInfo  = 1;
+}
+
+
+//ResponseType P2M_PaiMaiSellResponse
+message M2P_PaiMaiSellRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	PaiMaiItemInfo PaiMaiItemInfo = 2;
+	int64 UnitID = 3;
+	int64 PaiMaiTodayGold = 4;
+}
+
+message P2M_PaiMaiSellResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

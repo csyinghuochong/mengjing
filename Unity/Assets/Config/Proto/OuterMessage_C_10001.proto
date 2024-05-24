@@ -4191,3 +4191,19 @@ message M2C_PaiMaiDuiHuanResponse // ILocationResponse
 	string Message = 92;
 }
 
+//ResponseType M2C_PaiMaiSellResponse
+message C2M_PaiMaiSellRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	PaiMaiItemInfo PaiMaiItemInfo = 1;
+	int32 IsRecharge = 3;
+}
+
+message M2C_PaiMaiSellResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	PaiMaiItemInfo PaiMaiItemInfo = 1;
+}
