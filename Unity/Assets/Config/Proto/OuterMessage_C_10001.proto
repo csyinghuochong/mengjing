@@ -4108,3 +4108,19 @@ message M2C_HappyMoveResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType M2C_HongBaoOpenResponse
+//开启红包
+message C2M_HongBaoOpenRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_HongBaoOpenResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 HongbaoAmount = 1;
+}
