@@ -60,5 +60,13 @@ namespace ET.Client
         {
             self.Refresh();
         }
+        
+        public static void OnFriendChat(this ES_FriendList self)
+        {
+            if (!self.ES_ChatView.uiTransform.gameObject.activeSelf)
+                return;
+
+            self.ES_ChatView.RefreshFriendChatItems();
+        }
     }
 }

@@ -38,7 +38,7 @@ namespace ET.Client
             self.RefreshFriendChatItems();
         }
 
-        private static void RefreshFriendChatItems(this ES_ChatView self)
+        public static void RefreshFriendChatItems(this ES_ChatView self)
         {
             FriendComponent friendComponent = self.Root().GetComponent<FriendComponent>();
             List<ChatInfo> chatInfos = null;
@@ -76,6 +76,7 @@ namespace ET.Client
             if (string.IsNullOrEmpty(text) || text.Length == 0)
             {
                 flyTipComponent.SpawnFlyTipDi("请输入聊天内容！");
+                return;
             }
 
             int error = await ChatNetHelper.RequestSendChat(self.Root(), ChannelEnum.Friend, text, self.FriendInfo.UserId);

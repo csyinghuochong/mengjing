@@ -22,6 +22,16 @@ namespace ET.Client
             }
         }
 
+        [Event(SceneType.Demo)]
+        public class DataUpdate_FriendChat_Refresh: AEvent<Scene, DataUpdate_FriendChat>
+        {
+            protected override async ETTask Run(Scene root, DataUpdate_FriendChat args)
+            {
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgFriend>()?.View.ES_FriendList.OnFriendChat();
+                await ETTask.CompletedTask;
+            }
+        }
+
         public static void RegisterUIEvent(this DlgFriend self)
         {
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
