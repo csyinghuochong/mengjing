@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class M2P_PaiMaiSellHandler : AMActorRpcHandler<Scene, M2P_PaiMaiSellRequest, P2M_PaiMaiSellResponse>
+    [MessageHandler(SceneType.PaiMai)]
+    public class M2P_PaiMaiSellHandler : MessageHandler<Scene, M2P_PaiMaiSellRequest, P2M_PaiMaiSellResponse>
     {
 
-        protected override async ETTask Run(Scene scene, M2P_PaiMaiSellRequest request, P2M_PaiMaiSellResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2P_PaiMaiSellRequest request, P2M_PaiMaiSellResponse response)
         {
             if (!ItemConfigCategory.Instance.Contain(request.PaiMaiItemInfo.BagInfo.ItemID))
             {
                 response.Error = ErrorCode.ERR_ItemNotExist;
-                reply();
                 return;
             }
 
@@ -30,13 +29,12 @@ namespace ET
                 paimaiingGold += (paiMaiItemsTo[i].Price * paiMaiItemsTo[i].BagInfo.ItemNum);
             }
 
-            int openday = ServerHelper.GetOpenServerDay(false, scene.DomainZone());
+            int openday = ServerHelper.GetOpenServerDay(false, scene.Zone());
             long todayGold = ConfigHelper.GetPaiMaiTodayGold(openday);
             long sellGold = request.PaiMaiItemInfo.BagInfo.ItemNum * request.PaiMaiItemInfo.Price;
             if (paimaiingGold + request.PaiMaiTodayGold + sellGold >= todayGold)
             {
                 response.Error = ErrorCode.ERR_PaiMaiSellLimit;
-                reply();
                 return;
             }
 
@@ -48,7 +46,6 @@ namespace ET
                 if (nowPrice < shopinfo.Price * 0.5f)
                 {
                     response.Error = ErrorCode.Err_PaiMaiPriceLow;
-                    reply();
                     return;
                 }
             }
@@ -58,12 +55,10 @@ namespace ET
             if (dBPaiMainInfo == null)
             {
                 response.Error = ErrorCode.ERR_ItemNotExist;
-                reply();
                 return;
             }
 
             dBPaiMainInfo.PaiMaiItemInfos.Add(request.PaiMaiItemInfo);
-            reply();
             await ETTask.CompletedTask;
         }
     }

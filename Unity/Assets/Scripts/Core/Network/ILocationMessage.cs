@@ -48,6 +48,15 @@
 
     }
     
+    public interface IPaiMaiListRequest : IRequest
+    {
+    }
+
+    public interface IPaiMaiListResponse : IResponse
+    {
+
+    }
+    
     public interface IChatActorRequest: ILocationRequest
     {
         

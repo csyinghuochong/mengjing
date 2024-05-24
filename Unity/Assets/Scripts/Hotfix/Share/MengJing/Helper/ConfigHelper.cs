@@ -12,6 +12,33 @@ namespace ET
         }
         
         /// <summary>
+        /// 开服天数金币限制
+        /// </summary>
+        /// <param name="openDay"></param>
+        /// <returns></returns>
+        public static long GetPaiMaiTodayGold(int openDay)
+        {
+            //新区1天 1000万 2天2000万…… 5天5000万
+            if (openDay <= 1)
+            {
+                return 10000000;
+            }
+            if (openDay <= 2)
+            {
+                return 15000000;
+            }
+            if (openDay <= 3)
+            {
+                return 20000000;
+            }
+            if (openDay <= 4)
+            {
+                return 25000000;
+            }
+            return 30000000;
+        }
+        
+        /// <summary>
         /// 小龟说话
         /// </summary>
         //1移动 2停止

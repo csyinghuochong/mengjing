@@ -16939,6 +16939,509 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(P2C_PaiMaiAuctionInfoResponse))]
+	[Message(OuterMessage.C2P_PaiMaiAuctionInfoRequest)]
+	[MemoryPackable]
+	public partial class C2P_PaiMaiAuctionInfoRequest: MessageObject, IPaiMaiListRequest
+	{
+		public static C2P_PaiMaiAuctionInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2P_PaiMaiAuctionInfoRequest), isFromPool) as C2P_PaiMaiAuctionInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.P2C_PaiMaiAuctionInfoResponse)]
+	[MemoryPackable]
+	public partial class P2C_PaiMaiAuctionInfoResponse: MessageObject, IPaiMaiListResponse
+	{
+		public static P2C_PaiMaiAuctionInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(P2C_PaiMaiAuctionInfoResponse), isFromPool) as P2C_PaiMaiAuctionInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int AuctionItem { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long AuctionPrice { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int AuctionStatus { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int AuctionNumber { get; set; }
+
+		[MemoryPackOrder(4)]
+		public string AuctionPlayer { get; set; }
+
+		[MemoryPackOrder(5)]
+		public long AuctionStart { get; set; }
+
+		[MemoryPackOrder(6)]
+		public bool AuctionJoin { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.AuctionItem = default;
+			this.AuctionPrice = default;
+			this.AuctionStatus = default;
+			this.AuctionNumber = default;
+			this.AuctionPlayer = default;
+			this.AuctionStart = default;
+			this.AuctionJoin = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(P2C_PaiMaiAuctionRecordResponse))]
+	[Message(OuterMessage.C2P_PaiMaiAuctionRecordRequest)]
+	[MemoryPackable]
+	public partial class C2P_PaiMaiAuctionRecordRequest: MessageObject, IPaiMaiListRequest
+	{
+		public static C2P_PaiMaiAuctionRecordRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2P_PaiMaiAuctionRecordRequest), isFromPool) as C2P_PaiMaiAuctionRecordRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.P2C_PaiMaiAuctionRecordResponse)]
+	[MemoryPackable]
+	public partial class P2C_PaiMaiAuctionRecordResponse: MessageObject, IPaiMaiListResponse
+	{
+		public static P2C_PaiMaiAuctionRecordResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(P2C_PaiMaiAuctionRecordResponse), isFromPool) as P2C_PaiMaiAuctionRecordResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<PaiMaiAuctionRecord> RecordList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RecordList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(P2C_PaiMaiFindResponse))]
+	[Message(OuterMessage.C2P_PaiMaiFindRequest)]
+	[MemoryPackable]
+	public partial class C2P_PaiMaiFindRequest: MessageObject, IPaiMaiListRequest
+	{
+		public static C2P_PaiMaiFindRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2P_PaiMaiFindRequest), isFromPool) as C2P_PaiMaiFindRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ItemType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long PaiMaiItemInfoId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ItemType = default;
+			this.PaiMaiItemInfoId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.P2C_PaiMaiFindResponse)]
+	[MemoryPackable]
+	public partial class P2C_PaiMaiFindResponse: MessageObject, IPaiMaiListResponse
+	{
+		public static P2C_PaiMaiFindResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(P2C_PaiMaiFindResponse), isFromPool) as P2C_PaiMaiFindResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int Page { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.Page = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(P2C_PaiMaiListResponse))]
+	[Message(OuterMessage.C2P_PaiMaiListRequest)]
+	[MemoryPackable]
+	public partial class C2P_PaiMaiListRequest: MessageObject, IPaiMaiListRequest
+	{
+		public static C2P_PaiMaiListRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2P_PaiMaiListRequest), isFromPool) as C2P_PaiMaiListRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UserId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int PaiMaiType { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Page { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int PaiMaiShowType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UserId = default;
+			this.PaiMaiType = default;
+			this.Page = default;
+			this.PaiMaiShowType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.P2C_PaiMaiListResponse)]
+	[MemoryPackable]
+	public partial class P2C_PaiMaiListResponse: MessageObject, IPaiMaiListResponse
+	{
+		public static P2C_PaiMaiListResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(P2C_PaiMaiListResponse), isFromPool) as P2C_PaiMaiListResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<PaiMaiItemInfo> PaiMaiItemInfos { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public int NextPage { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long PaiMaiCostGoldToday { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PaiMaiItemInfos.Clear();
+			this.NextPage = default;
+			this.PaiMaiCostGoldToday = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(P2C_PaiMaiSearchResponse))]
+	[Message(OuterMessage.C2P_PaiMaiSearchRequest)]
+	[MemoryPackable]
+	public partial class C2P_PaiMaiSearchRequest: MessageObject, IPaiMaiListRequest
+	{
+		public static C2P_PaiMaiSearchRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2P_PaiMaiSearchRequest), isFromPool) as C2P_PaiMaiSearchRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<int> FindItemIdList { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public List<int> FindTypeList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.FindItemIdList.Clear();
+			this.FindTypeList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.P2C_PaiMaiSearchResponse)]
+	[MemoryPackable]
+	public partial class P2C_PaiMaiSearchResponse: MessageObject, IPaiMaiListResponse
+	{
+		public static P2C_PaiMaiSearchResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(P2C_PaiMaiSearchResponse), isFromPool) as P2C_PaiMaiSearchResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<PaiMaiItemInfo> PaiMaiItemInfos { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PaiMaiItemInfos.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(P2C_PaiMaiShopShowListResponse))]
+	[Message(OuterMessage.C2P_PaiMaiShopShowListRequest)]
+	[MemoryPackable]
+	public partial class C2P_PaiMaiShopShowListRequest: MessageObject, IPaiMaiListRequest
+	{
+		public static C2P_PaiMaiShopShowListRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2P_PaiMaiShopShowListRequest), isFromPool) as C2P_PaiMaiShopShowListRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.P2C_PaiMaiShopShowListResponse)]
+	[MemoryPackable]
+	public partial class P2C_PaiMaiShopShowListResponse: MessageObject, IPaiMaiListResponse
+	{
+		public static P2C_PaiMaiShopShowListResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(P2C_PaiMaiShopShowListResponse), isFromPool) as P2C_PaiMaiShopShowListResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<PaiMaiShopItemInfo> PaiMaiShopItemInfos { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PaiMaiShopItemInfos.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(P2C_StallListResponse))]
+	[Message(OuterMessage.C2P_StallListRequest)]
+	[MemoryPackable]
+	public partial class C2P_StallListRequest: MessageObject, IPaiMaiListRequest
+	{
+		public static C2P_StallListRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2P_StallListRequest), isFromPool) as C2P_StallListRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UserId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UserId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.P2C_StallListResponse)]
+	[MemoryPackable]
+	public partial class P2C_StallListResponse: MessageObject, IPaiMaiListResponse
+	{
+		public static P2C_StallListResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(P2C_StallListResponse), isFromPool) as P2C_StallListResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<PaiMaiItemInfo> PaiMaiItemInfos { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PaiMaiItemInfos.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -17429,5 +17932,19 @@ namespace ET
 		 public const ushort M2C_StallSellResponse = 10487;
 		 public const ushort C2M_StallXiaJiaRequest = 10488;
 		 public const ushort M2C_StallXiaJiaResponse = 10489;
+		 public const ushort C2P_PaiMaiAuctionInfoRequest = 10490;
+		 public const ushort P2C_PaiMaiAuctionInfoResponse = 10491;
+		 public const ushort C2P_PaiMaiAuctionRecordRequest = 10492;
+		 public const ushort P2C_PaiMaiAuctionRecordResponse = 10493;
+		 public const ushort C2P_PaiMaiFindRequest = 10494;
+		 public const ushort P2C_PaiMaiFindResponse = 10495;
+		 public const ushort C2P_PaiMaiListRequest = 10496;
+		 public const ushort P2C_PaiMaiListResponse = 10497;
+		 public const ushort C2P_PaiMaiSearchRequest = 10498;
+		 public const ushort P2C_PaiMaiSearchResponse = 10499;
+		 public const ushort C2P_PaiMaiShopShowListRequest = 10500;
+		 public const ushort P2C_PaiMaiShopShowListResponse = 10501;
+		 public const ushort C2P_StallListRequest = 10502;
+		 public const ushort P2C_StallListResponse = 10503;
 	}
 }

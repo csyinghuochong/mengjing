@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2P_StallBuyHandler: AMActorRpcHandler<Scene, M2P_StallBuyRequest, P2M_StallBuyResponse>
+    [MessageHandler(SceneType.PaiMai)]
+    public class M2P_StallBuyHandler: MessageHandler<Scene, M2P_StallBuyRequest, P2M_StallBuyResponse>
     {
-        protected override async ETTask Run(Scene scene, M2P_StallBuyRequest request, P2M_StallBuyResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2P_StallBuyRequest request, P2M_StallBuyResponse response)
         {
             long needGold = 0;
             PaiMaiItemInfo paiMaiItemInfo = null;
@@ -22,7 +22,6 @@ namespace ET
 
             if (paiMaiItemInfo == null)
             {
-                reply();
                 return;
             }
 
@@ -30,13 +29,11 @@ namespace ET
             if (request.ActorId < needGold)
             {
                 response.Error = ErrorCode.ERR_GoldNotEnoughError;
-                reply();
                 return;
             }
 
             response.PaiMaiItemInfo = paiMaiItemInfo;
             stallItemInfos.Remove(paiMaiItemInfo);
-            reply();
             await ETTask.CompletedTask;
         }
     }

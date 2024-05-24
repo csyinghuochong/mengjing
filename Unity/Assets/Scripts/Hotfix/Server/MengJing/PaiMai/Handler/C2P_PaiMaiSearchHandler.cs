@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2P_PaiMaiSearchHandler: AMActorRpcHandler<Scene, C2P_PaiMaiSearchRequest, P2C_PaiMaiSearchResponse>
+    [MessageHandler(SceneType.PaiMai)]
+    public class C2P_PaiMaiSearchHandler: MessageHandler<Scene, C2P_PaiMaiSearchRequest, P2C_PaiMaiSearchResponse>
     {
-        protected override async ETTask Run(Scene scene, C2P_PaiMaiSearchRequest request, P2C_PaiMaiSearchResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2P_PaiMaiSearchRequest request, P2C_PaiMaiSearchResponse response)
         {
             if (request.FindTypeList.Count <= 0)
             {
-                reply();
                 return;
             }
 
             if (request.FindItemIdList.Count <= 0)
             {
-                reply();
                 return;
             }
 
@@ -26,7 +24,6 @@ namespace ET
                 DBPaiMainInfo dBPaiMainInfo = paiMaiComponent.GetPaiMaiDBByType(type);
                 if (dBPaiMainInfo == null)
                 {
-                    reply();
                     return;
                 }
 
@@ -43,8 +40,7 @@ namespace ET
                     }
                 }
             }
-
-            reply();
+            
             await ETTask.CompletedTask;
         }
     }

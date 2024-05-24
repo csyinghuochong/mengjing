@@ -10,18 +10,20 @@ namespace ET.Server
         /// <summary>
         /// 拍卖会
         /// </summary>
-        public int AuctionItem;
+        public int AuctionItem{ get; set; }
+
         /// <summary>
         /// 0没开始 1开始 2结束
         /// </summary>
-        public int AuctionStatus;  
-        public long AuctionPrice;
-        public long AuctionStart;  //起拍价
-        public long AuctioUnitId;
-        public int AuctionItemNum;
-        public string AuctionPlayer;
+        public int AuctionStatus { get; set; }
 
-        public List<long> AuctionJoinList = new List<long>();
+        public long AuctionPrice{ get; set; }
+        public long AuctionStart { get; set; } //起拍价
+        public long AuctioUnitId{ get; set; }
+        public int AuctionItemNum{ get; set; }
+        public string AuctionPlayer{ get; set; }
+
+        public List<long> AuctionJoinList  { get; set; } = new List<long>();
 
         //拍卖行存储列表
         public DBPaiMainInfo dBPaiMainInfo { get; set; } = new DBPaiMainInfo(); //废弃掉， 里面的数据分散到以下几个列表

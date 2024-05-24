@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2P_StallXiaJiaHandler: AMActorRpcHandler<Scene, M2P_StallXiaJiaRequest, P2M_StallXiaJiaResponse>
+    [MessageHandler(SceneType.PaiMai)]
+    public class M2P_StallXiaJiaHandler: MessageHandler<Scene, M2P_StallXiaJiaRequest, P2M_StallXiaJiaResponse>
     {
-        protected override async ETTask Run(Scene scene, M2P_StallXiaJiaRequest request, P2M_StallXiaJiaResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2P_StallXiaJiaRequest request, P2M_StallXiaJiaResponse response)
         {
             List<PaiMaiItemInfo> StallItemInfos = scene.GetComponent<PaiMaiSceneComponent>().dBPaiMainInfo_Stall.StallItemInfos;
             for (int i = StallItemInfos.Count - 1; i >= 0; i--)
@@ -19,8 +19,6 @@ namespace ET
                     break;
                 }
             }
-
-            reply();
             await ETTask.CompletedTask;
         }
     }

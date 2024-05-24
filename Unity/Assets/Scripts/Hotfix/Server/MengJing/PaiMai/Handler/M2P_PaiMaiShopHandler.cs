@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class M2P_PaiMaiShopHandler : AMActorRpcHandler<Scene, M2P_PaiMaiShopRequest, P2M_PaiMaiShopResponse>
+    [MessageHandler(SceneType.PaiMai)]
+    public class M2P_PaiMaiShopHandler : MessageHandler<Scene, M2P_PaiMaiShopRequest, P2M_PaiMaiShopResponse>
     {
 
-        protected override async ETTask Run(Scene scene, M2P_PaiMaiShopRequest request, P2M_PaiMaiShopResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2P_PaiMaiShopRequest request, P2M_PaiMaiShopResponse response)
         {
             try
             {
@@ -20,7 +20,6 @@ namespace ET
                 if (request.ActorId < costGold || costGold < 0)
                 {
                     response.Error = ErrorCode.ERR_GoldNotEnoughError;
-                    reply();
                     return;
                 }
 
@@ -74,7 +73,6 @@ namespace ET
                 */
               
                 //返回消息
-                reply();
                 await ETTask.CompletedTask;
             }
             catch (Exception ex)

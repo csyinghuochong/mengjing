@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2P_StallListHandler: AMActorRpcHandler<Scene, C2P_StallListRequest, P2C_StallListResponse>
+    [MessageHandler(SceneType.PaiMai)]
+    public class C2P_StallListHandler: MessageHandler<Scene, C2P_StallListRequest, P2C_StallListResponse>
     {
-        protected override async ETTask Run(Scene scene, C2P_StallListRequest request, P2C_StallListResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2P_StallListRequest request, P2C_StallListResponse response)
         {
             PaiMaiSceneComponent paiMaiComponent = scene.GetComponent<PaiMaiSceneComponent>();
             List<PaiMaiItemInfo> StallItemInfos = paiMaiComponent.dBPaiMainInfo_Stall.StallItemInfos;
@@ -21,7 +21,6 @@ namespace ET
             }
 
             response.PaiMaiItemInfos = paiMaiItemInfos;
-            reply();
             await ETTask.CompletedTask;
         }
     }

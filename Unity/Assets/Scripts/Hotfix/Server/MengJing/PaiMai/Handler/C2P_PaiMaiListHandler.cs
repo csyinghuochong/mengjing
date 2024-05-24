@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2P_PaiMaiListHandler: AMActorRpcHandler<Scene, C2P_PaiMaiListRequest, P2C_PaiMaiListResponse>
+    [MessageHandler(SceneType.PaiMai)]
+    public class C2P_PaiMaiListHandler: MessageHandler<Scene, C2P_PaiMaiListRequest, P2C_PaiMaiListResponse>
     {
-        protected override async ETTask Run(Scene scene, C2P_PaiMaiListRequest request, P2C_PaiMaiListResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2P_PaiMaiListRequest request, P2C_PaiMaiListResponse response )
         {
             PaiMaiSceneComponent paiMaiComponent = scene.GetComponent<PaiMaiSceneComponent>();
             
@@ -19,7 +19,6 @@ namespace ET
                 paiMaiItemsTo.AddRange(paiMaiComponent.GetItemListByUser(request.UserId, paiMaiComponent.dBPaiMainInfo_Equipment.PaiMaiItemInfos));
                 paiMaiItemsTo.AddRange(paiMaiComponent.GetItemListByUser(request.UserId, paiMaiComponent.dBPaiMainInfo_Gemstone.PaiMaiItemInfos));
                 response.PaiMaiItemInfos = paiMaiItemsTo;
-                reply();
                 return;
             }
             else // 1-4道具
@@ -27,7 +26,6 @@ namespace ET
                 DBPaiMainInfo dBPaiMainInfo = paiMaiComponent.GetPaiMaiDBByType(request.PaiMaiType);
                 if (dBPaiMainInfo == null)
                 {
-                    reply();
                     return;
                 }
 
@@ -80,8 +78,7 @@ namespace ET
                     response.NextPage = maxpage;
                 }
             }
-
-            reply();
+            
             await ETTask.CompletedTask;
         }
     }

@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
     /// <summary>
     /// 查找装备所在拍卖行那一页(待实现)
     /// </summary>
-    [ActorMessageHandler]
-    public class C2P_PaiMaiFindHandler: AMActorRpcHandler<Scene, C2P_PaiMaiFindRequest, P2C_PaiMaiFindResponse>
+    [MessageHandler(SceneType.PaiMai)]
+    public class C2P_PaiMaiFindHandler: MessageHandler<Scene, C2P_PaiMaiFindRequest, P2C_PaiMaiFindResponse>
     {
-        protected override async ETTask Run(Scene scene, C2P_PaiMaiFindRequest request, P2C_PaiMaiFindResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2P_PaiMaiFindRequest request, P2C_PaiMaiFindResponse response)
         {
             if (request.ItemType == 0)
             {
                 response.Page = 0;
-                reply();
                 return;
             }
             PaiMaiSceneComponent paiMaiComponent = scene.GetComponent<PaiMaiSceneComponent>();
@@ -22,7 +21,6 @@ namespace ET
             if (dBPaiMainInfo == null)
             {
                 response.Page = 0;
-                reply();
                 return;
             }
 
@@ -41,7 +39,6 @@ namespace ET
             if (paiMaiItemInfo == null)
             {
                 response.Page = 0;
-                reply();
                 return;
             }
 
@@ -52,12 +49,10 @@ namespace ET
                 if (PaiMaiItemInfo[i].Id == paiMaiItemInfo.Id)
                 {
                     response.Page = i / pagenum + 1;
-                    reply();
                     return;
                 }
             }
             response.Page = 0;
-            reply();
             await ETTask.CompletedTask;
         }
     }

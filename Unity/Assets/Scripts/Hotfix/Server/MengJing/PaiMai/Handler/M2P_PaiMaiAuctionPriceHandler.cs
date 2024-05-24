@@ -1,23 +1,21 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2P_PaiMaiAuctionPriceHandler : AMActorRpcHandler<Scene, M2P_PaiMaiAuctionPriceRequest, P2M_PaiMaiAuctionPriceResponse>
+    [MessageHandler(SceneType.PaiMai)]
+    public class M2P_PaiMaiAuctionPriceHandler : MessageHandler<Scene, M2P_PaiMaiAuctionPriceRequest, P2M_PaiMaiAuctionPriceResponse>
     {
-        protected override async ETTask Run(Scene scene, M2P_PaiMaiAuctionPriceRequest message, P2M_PaiMaiAuctionPriceResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2P_PaiMaiAuctionPriceRequest message, P2M_PaiMaiAuctionPriceResponse response)
         {
             PaiMaiSceneComponent paiMaiSceneComponent = scene.GetComponent<PaiMaiSceneComponent>();
             if (paiMaiSceneComponent.AuctionStatus != 1)
             {
                 response.Error = ErrorCode.Err_Auction_Finish;
-                reply();
                 return;
             }
             if (paiMaiSceneComponent.AuctionPrice >= message.Price)
             {
                 response.Error = ErrorCode.Err_Auction_Low;
-                reply();
                 return;
             }
 
@@ -32,9 +30,9 @@ namespace ET
             keyValuePair.Occ = message.Occ;
             keyValuePair.PlayerName = message.AuctionPlayer;
             paiMaiSceneComponent.AuctionRecords.Add(keyValuePair);
-            ServerMessageHelper.SendServerMessage(DBHelper.GetChatServerId(scene.DomainZone()), NoticeType.PaiMaiAuction,
+            BroadMessageHelper.SendServerMessage(scene.Root(), UnitCacheHelper.GetChatServerId(scene.Zone()), NoticeType.PaiMaiAuction,
                 $"{paiMaiSceneComponent.AuctionItem}_{paiMaiSceneComponent.AuctionItemNum}_{message.Price}_{paiMaiSceneComponent.AuctionPlayer}_1").Coroutine();
-            reply();
+
             await ETTask.CompletedTask;
         }
     }

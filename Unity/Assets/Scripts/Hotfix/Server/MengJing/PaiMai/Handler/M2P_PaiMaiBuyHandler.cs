@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2P_PaiMaiBuyHandler : AMActorRpcHandler<Scene, M2P_PaiMaiBuyRequest, P2M_PaiMaiBuyResponse>
+    [MessageHandler(SceneType.PaiMai)]
+    public class M2P_PaiMaiBuyHandler : MessageHandler<Scene, M2P_PaiMaiBuyRequest, P2M_PaiMaiBuyResponse>
     {
 
-        protected override async ETTask Run(Scene scene, M2P_PaiMaiBuyRequest request, P2M_PaiMaiBuyResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2P_PaiMaiBuyRequest request, P2M_PaiMaiBuyResponse response)
         {
             //获取列表,对应的缓存进行清空
             if (!ItemConfigCategory.Instance.Contain(request.PaiMaiItemInfo.BagInfo.ItemID))
             {
                 response.Error = ErrorCode.ERR_ItemNotExist;
-                reply();
                 return;
             }
             ItemConfig itemCof = ItemConfigCategory.Instance.Get(request.PaiMaiItemInfo.BagInfo.ItemID);
@@ -22,7 +21,6 @@ namespace ET
             if (dBPaiMainInfo == null)
             {
                 response.Error = ErrorCode.ERR_ItemNotExist;
-                reply();
                 return;
             }
 
@@ -41,14 +39,12 @@ namespace ET
             if (paiMaiItemInfo == null)
             {
                 response.Error = ErrorCode.ERR_ItemNotExist;
-                reply();
                 return;
             }
             
             if (request.BuyNum < 0 || request.BuyNum > paiMaiItemInfo.BagInfo.ItemNum)
             {
                 response.Error = ErrorCode.ERR_Parameter;
-                reply();
                 return;
             }
             
@@ -56,7 +52,6 @@ namespace ET
             if (request.Gold < needGold)
             {
                 response.Error = ErrorCode.ERR_GoldNotEnoughError;
-                reply();
                 return;
             }
 
@@ -76,8 +71,8 @@ namespace ET
                 useBagInfo.ItemNum = request.BuyNum;
                 useBagInfo.Loc = itemCof.ItemType == (int)ItemTypeEnum.PetHeXin ? (int)ItemLocType.ItemPetHeXinBag : (int)ItemLocType.ItemLocBag;
                 useBagInfo.BagInfoID = IdGenerater.Instance.GenerateId();
-                useBagInfo.GemHole = ItemHelper.DefaultGem;
-                useBagInfo.GemIDNew = ItemHelper.DefaultGem;
+                useBagInfo.GemHole = ConfigData.DefaultGem;
+                useBagInfo.GemIDNew = ConfigData.DefaultGem;
                 useBagInfo.GetWay = bagInfo.GetWay;
                 useBagInfo.isBinging = bagInfo.isBinging;
                 
@@ -90,7 +85,7 @@ namespace ET
                 
                 response.PaiMaiItemInfo = paiMaiItemInfo2;
             }
-            reply();
+
             await ETTask.CompletedTask;
         }
     }

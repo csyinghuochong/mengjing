@@ -1,12 +1,13 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2P_PaiMaiAuctionInfoHandler : AMActorRpcHandler<Scene, C2P_PaiMaiAuctionInfoRequest, P2C_PaiMaiAuctionInfoResponse>
+    [MessageHandler(SceneType.PaiMai)]
+    [FriendOf(typeof(PaiMaiSceneComponent))]
+    public class C2P_PaiMaiAuctionInfoHandler : MessageHandler<Scene, C2P_PaiMaiAuctionInfoRequest, P2C_PaiMaiAuctionInfoResponse>
     {
-        protected override async ETTask Run(Scene scene, C2P_PaiMaiAuctionInfoRequest request, P2C_PaiMaiAuctionInfoResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2P_PaiMaiAuctionInfoRequest request, P2C_PaiMaiAuctionInfoResponse response)
         {
             PaiMaiSceneComponent paiMaiSceneComponent = scene.GetComponent<PaiMaiSceneComponent>();
             response.AuctionStatus  = paiMaiSceneComponent.AuctionStatus;
@@ -16,8 +17,7 @@ namespace ET
             response.AuctionPlayer = paiMaiSceneComponent.AuctionPlayer;
             response.AuctionStart = paiMaiSceneComponent.AuctionStart;
             response.AuctionJoin = paiMaiSceneComponent.AuctionJoinList.Contains(request.UnitId);
-
-            reply();
+            
             await ETTask.CompletedTask;
         }
     }
