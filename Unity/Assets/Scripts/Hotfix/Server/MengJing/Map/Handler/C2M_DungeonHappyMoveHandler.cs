@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ET
+namespace ET.Server
 {
     [ActorMessageHandler]
     public class C2M_DungeonHappyMoveHandler : AMActorLocationRpcHandler<Unit, C2M_DungeonHappyMoveRequest, M2C_DungeonHappyMoveResponse>

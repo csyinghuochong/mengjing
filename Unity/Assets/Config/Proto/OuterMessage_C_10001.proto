@@ -4457,3 +4457,33 @@ message P2C_StallListResponse // IPaiMaiListResponse
 	string Message = 92;
 	repeated PaiMaiItemInfo PaiMaiItemInfos = 1;
 }
+
+//ResponseType M2C_BuChangeResponse
+message C2M_BuChangeRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 BuChangId = 1;
+}
+
+message M2C_BuChangeResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	PlayerInfo PlayerInfo = 1;
+	int32 BuChangRecharge = 2;
+	int32 BuChangDiamond = 3;
+}
+
+message C2M_CreateSpiling // ILocationMessage
+{
+	float X = 2;
+	float Y = 3;
+	float Z = 4;
+	//所归属的父实体id
+	int64 ParentUnitId = 5;
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 Id = 94;
+}

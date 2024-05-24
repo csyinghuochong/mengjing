@@ -1,15 +1,15 @@
 ﻿
 using UnityEngine;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2M_CreateSpilingHandler : AMActorLocationHandler<Unit, C2M_CreateSpiling>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_CreateSpilingHandler : MessageLocationHandler<Unit, C2M_CreateSpiling>
     {
         protected override async ETTask Run(Unit entity, C2M_CreateSpiling message)
         {
-            Unit unit = UnitFactory.CreateMonster(entity.DomainScene(), 70001960, Vector3.zero, new CreateMonsterInfo() 
+            Unit unit = UnitFactory.CreateMonster(entity.Scene(), 70001960, Vector3.zero, new CreateMonsterInfo() 
             {
                 Camp =CampEnum.CampMonster1
             });

@@ -17442,6 +17442,126 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_BuChangeResponse))]
+	[Message(OuterMessage.C2M_BuChangeRequest)]
+	[MemoryPackable]
+	public partial class C2M_BuChangeRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_BuChangeRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_BuChangeRequest), isFromPool) as C2M_BuChangeRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long BuChangId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.BuChangId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_BuChangeResponse)]
+	[MemoryPackable]
+	public partial class M2C_BuChangeResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_BuChangeResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_BuChangeResponse), isFromPool) as M2C_BuChangeResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public PlayerInfo PlayerInfo { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int BuChangRecharge { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int BuChangDiamond { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PlayerInfo = default;
+			this.BuChangRecharge = default;
+			this.BuChangDiamond = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.C2M_CreateSpiling)]
+	[MemoryPackable]
+	public partial class C2M_CreateSpiling: MessageObject, ILocationMessage
+	{
+		public static C2M_CreateSpiling Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_CreateSpiling), isFromPool) as C2M_CreateSpiling; 
+		}
+
+		[MemoryPackOrder(1)]
+		public float X { get; set; }
+
+		[MemoryPackOrder(2)]
+		public float Y { get; set; }
+
+		[MemoryPackOrder(3)]
+		public float Z { get; set; }
+
+//所归属的父实体id
+		[MemoryPackOrder(4)]
+		public long ParentUnitId { get; set; }
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(93)]
+		public long Id { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.X = default;
+			this.Y = default;
+			this.Z = default;
+			this.ParentUnitId = default;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Id = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -17946,5 +18066,8 @@ namespace ET
 		 public const ushort P2C_PaiMaiShopShowListResponse = 10501;
 		 public const ushort C2P_StallListRequest = 10502;
 		 public const ushort P2C_StallListResponse = 10503;
+		 public const ushort C2M_BuChangeRequest = 10504;
+		 public const ushort M2C_BuChangeResponse = 10505;
+		 public const ushort C2M_CreateSpiling = 10506;
 	}
 }

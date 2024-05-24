@@ -9,6 +9,11 @@ namespace ET.Server
     public static class UnitCacheHelper
     {
         
+        public static ActorId GetAccountCenter()
+        {
+            return StartSceneConfigCategory.Instance.AccountCenterConfig.ActorId;
+        }
+        
         /// <summary>
         /// 保存或者更新玩家缓存
         /// </summary>
