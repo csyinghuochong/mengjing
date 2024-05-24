@@ -4630,3 +4630,49 @@ message M2C_GuideUpdateResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType M2C_KillMonsterRewardResponse
+message C2M_KillMonsterRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 Key = 1;
+	int32 Index = 2;
+}
+
+message M2C_KillMonsterRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+
+//ResponseType M2C_LeavlRewardResponse
+message C2M_LeavlRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 LvKey = 1;
+	int32 Index = 2;
+}
+
+message M2C_LeavlRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_ModifyNameResponse
+//改游戏名
+message C2M_ModifyNameRequest		// ILocationRequest
+{
+	int32 RpcId = 90;
+	string NewName = 1;
+}
+
+message M2C_ModifyNameResponse	// ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}

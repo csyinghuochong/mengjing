@@ -2,38 +2,37 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
+    [MessageHandler(SceneType.Map)]
     public class C2M_KillMonsterRewardHandler: MessageLocationHandler<Unit, C2M_KillMonsterRewardRequest, M2C_KillMonsterRewardResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_KillMonsterRewardRequest request, M2C_KillMonsterRewardResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_KillMonsterRewardRequest request, M2C_KillMonsterRewardResponse response)
         {
-            if (!ConfigHelper.KillMonsterReward.Keys.Contains(request.Key))
+            if (!ConfigData.KillMonsterReward.Keys.Contains(request.Key))
             {
                 Log.Error($"C2M_KillMonsterRewardRequest 1");
                 response.Error = ErrorCode.ERR_ModifyData;
-                reply();
+
                 return;
             }
 
-            if (unit.GetComponent<NumericComponent>().GetAsInt(NumericType.KillMonsterReward) >= request.Key)
+            if (unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.KillMonsterReward) >= request.Key)
             {
                 response.Error = ErrorCode.ERR_Parameter;
-                reply();
                 return;
             }
 
-            if (unit.GetComponent<NumericComponent>().GetAsInt(NumericType.KillMonsterNumber) < request.Key)
+            if (unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.KillMonsterNumber) < request.Key)
             {
                 Log.Error($"C2M_KillMonsterRewardRequest 3");
                 response.Error = ErrorCode.ERR_ModifyData;
-                reply();
+ 
                 return;
             }
 
-            UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
-            string[] occItems = ConfigHelper.KillMonsterReward[request.Key].Split('&');
+            UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
+            string[] occItems = ConfigData.KillMonsterReward[request.Key].Split('&');
             string[] items;
             if (occItems.Length == 3)
             {
@@ -48,14 +47,12 @@ namespace ET
             {
                 Log.Error($"C2M_KillMonsterRewardRequest 4");
                 response.Error = ErrorCode.ERR_ModifyData;
-                reply();
                 return;
             }
 
             string item = items[request.Index];
-            unit.GetComponent<NumericComponent>().ApplyValue(NumericType.KillMonsterReward, request.Key);
-            unit.GetComponent<BagComponent>().OnAddItemData(item, $"{ItemGetWay.KillMonsterReward}_{TimeHelper.ServerNow()}");
-            reply();
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.KillMonsterReward, request.Key);
+            unit.GetComponent<BagComponentS>().OnAddItemData(item, $"{ItemGetWay.KillMonsterReward}_{TimeHelper.ServerNow()}");
             await ETTask.CompletedTask;
         }
     }
