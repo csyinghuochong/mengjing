@@ -1568,3 +1568,23 @@ message P2M_PaiMaiShopResponse // IResponse
 	PaiMaiShopItemInfo PaiMaiShopItemInfo = 1;
 }
 
+
+//ResponseType P2M_PaiMaiXiaJiaResponse
+message M2P_PaiMaiXiaJiaRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int32 ItemType = 1;
+	int64 PaiMaiItemInfoId = 2;
+	int64 UnitID = 3;
+
+}
+
+message P2M_PaiMaiXiaJiaResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	PaiMaiItemInfo PaiMaiItemInfo = 2;
+}

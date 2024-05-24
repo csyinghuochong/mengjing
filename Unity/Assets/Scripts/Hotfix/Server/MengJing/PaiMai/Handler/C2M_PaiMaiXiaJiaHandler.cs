@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2M_PaiMaiXiaJiaHandler : AMActorLocationRpcHandler<Unit, C2M_PaiMaiXiaJiaRequest, M2C_PaiMaiXiaJiaResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_PaiMaiXiaJiaHandler : MessageHandler<Unit, C2M_PaiMaiXiaJiaRequest, M2C_PaiMaiXiaJiaResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_PaiMaiXiaJiaRequest request, M2C_PaiMaiXiaJiaResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_PaiMaiXiaJiaRequest request, M2C_PaiMaiXiaJiaResponse response)
         {
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.XiaJia, unit.Id))
+            using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.XiaJia, unit.Id))
             {
-                if (unit.GetComponent<BagComponent>().GetBagLeftCell() < 1)
+                if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < 1)
                 {
-                    reply();
                     return;
                 }
 
-                long chargeServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.DomainZone(), Enum.GetName(SceneType.PaiMai)).InstanceId;
-                P2M_PaiMaiXiaJiaResponse r_GameStatusResponse = (P2M_PaiMaiXiaJiaResponse)await ActorMessageSenderComponent.Instance.Call
+                ActorId chargeServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.Zone(), "PaiMai").ActorId;
+                P2M_PaiMaiXiaJiaResponse r_GameStatusResponse = (P2M_PaiMaiXiaJiaResponse)await unit.Root().GetComponent<MessageSender>().Call
                     (chargeServerId, new M2P_PaiMaiXiaJiaRequest()
                     {
                         ItemType = request.ItemType,    
@@ -27,14 +26,13 @@ namespace ET
 
                 if (r_GameStatusResponse.Error == ErrorCode.ERR_Success && r_GameStatusResponse.PaiMaiItemInfo != null)
                 {
-                    unit.GetComponent<BagComponent>().OnAddItemData(r_GameStatusResponse.PaiMaiItemInfo.BagInfo, $"{ItemGetWay.XiaJia}_{TimeHelper.ServerNow()}");
+                    unit.GetComponent<BagComponentS>().OnAddItemData(r_GameStatusResponse.PaiMaiItemInfo.BagInfo, $"{ItemGetWay.XiaJia}_{TimeHelper.ServerNow()}");
                 }
                 else
                 {
                     LogHelper.LogWarning($"C2M_PaiMaiXiaJiaHandler==null  {unit.Id} {request.PaiMaiItemInfoId}");
                 }
-
-                reply();
+                
                 await ETTask.CompletedTask;
             }
         }

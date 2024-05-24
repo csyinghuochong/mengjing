@@ -16499,6 +16499,71 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_PaiMaiXiaJiaResponse))]
+	[Message(OuterMessage.C2M_PaiMaiXiaJiaRequest)]
+	[MemoryPackable]
+	public partial class C2M_PaiMaiXiaJiaRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PaiMaiXiaJiaRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PaiMaiXiaJiaRequest), isFromPool) as C2M_PaiMaiXiaJiaRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ItemType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long PaiMaiItemInfoId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ItemType = default;
+			this.PaiMaiItemInfoId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PaiMaiXiaJiaResponse)]
+	[MemoryPackable]
+	public partial class M2C_PaiMaiXiaJiaResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PaiMaiXiaJiaResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PaiMaiXiaJiaResponse), isFromPool) as M2C_PaiMaiXiaJiaResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -16975,5 +17040,7 @@ namespace ET
 		 public const ushort M2C_PaiMaiSellResponse = 10473;
 		 public const ushort C2M_PaiMaiShopRequest = 10474;
 		 public const ushort M2C_PaiMaiShopResponse = 10475;
+		 public const ushort C2M_PaiMaiXiaJiaRequest = 10476;
+		 public const ushort M2C_PaiMaiXiaJiaResponse = 10477;
 	}
 }

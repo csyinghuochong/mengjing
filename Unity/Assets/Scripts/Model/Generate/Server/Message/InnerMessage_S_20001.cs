@@ -6121,6 +6121,79 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(P2M_PaiMaiXiaJiaResponse))]
+	[Message(InnerMessage.M2P_PaiMaiXiaJiaRequest)]
+	[MemoryPackable]
+	public partial class M2P_PaiMaiXiaJiaRequest: MessageObject, IRequest
+	{
+		public static M2P_PaiMaiXiaJiaRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2P_PaiMaiXiaJiaRequest), isFromPool) as M2P_PaiMaiXiaJiaRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ItemType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long PaiMaiItemInfoId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UnitID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ItemType = default;
+			this.PaiMaiItemInfoId = default;
+			this.UnitID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.P2M_PaiMaiXiaJiaResponse)]
+	[MemoryPackable]
+	public partial class P2M_PaiMaiXiaJiaResponse: MessageObject, IResponse
+	{
+		public static P2M_PaiMaiXiaJiaResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(P2M_PaiMaiXiaJiaResponse), isFromPool) as P2M_PaiMaiXiaJiaResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(1)]
+		public PaiMaiItemInfo PaiMaiItemInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PaiMaiItemInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -6303,5 +6376,7 @@ namespace ET
 		 public const ushort P2M_PaiMaiSellResponse = 20179;
 		 public const ushort M2P_PaiMaiShopRequest = 20180;
 		 public const ushort P2M_PaiMaiShopResponse = 20181;
+		 public const ushort M2P_PaiMaiXiaJiaRequest = 20182;
+		 public const ushort P2M_PaiMaiXiaJiaResponse = 20183;
 	}
 }

@@ -4224,3 +4224,19 @@ message M2C_PaiMaiShopResponse // ILocationResponse
 	string Message = 92;
 }
 
+//ResponseType M2C_PaiMaiXiaJiaResponse
+message C2M_PaiMaiXiaJiaRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 ItemType = 1;
+	int64 PaiMaiItemInfoId = 2;
+}
+
+message M2C_PaiMaiXiaJiaResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
