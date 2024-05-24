@@ -6,6 +6,16 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class DataUpdate_OnMailUpdate_DlgMailRefresh: AEvent<Scene, DataUpdate_OnMailUpdate>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_OnMailUpdate args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMail>()?.OnMailUpdate();
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof (DlgMail))]
     public static class DlgMailSystem
     {
