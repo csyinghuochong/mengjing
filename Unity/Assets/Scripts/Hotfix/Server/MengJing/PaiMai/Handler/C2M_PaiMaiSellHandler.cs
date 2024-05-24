@@ -73,12 +73,12 @@ namespace ET.Server
 
 				//发送对应拍卖行信息
 				ActorId paimaiServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.Zone(), "PaiMai").ActorId;
-				P2M_PaiMaiSellResponse r_GameStatusResponse = (P2M_PaiMaiSellResponse)await ActorMessageSenderComponent.Instance.Call
+				P2M_PaiMaiSellResponse r_GameStatusResponse = (P2M_PaiMaiSellResponse)await unit.Root().GetComponent<MessageSender>().Call
 					(paimaiServerId, new M2P_PaiMaiSellRequest()
 					{
 						UnitID = unit.Id,
 						PaiMaiItemInfo = request.PaiMaiItemInfo,
-						PaiMaiTodayGold = unit.GetComponent<NumericComponent>().GetAsLong(NumericType.PaiMaiTodayGold),
+						PaiMaiTodayGold = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.PaiMaiTodayGold),
 					});
 
 				if (r_GameStatusResponse.Error == ErrorCode.ERR_Success)
