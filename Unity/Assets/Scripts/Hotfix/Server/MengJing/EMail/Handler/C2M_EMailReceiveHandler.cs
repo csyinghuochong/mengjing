@@ -2,26 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 
-
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2M_EMailReceiveHandler : AMActorLocationRpcHandler<Unit, C2M_ReceiveMailRequest, M2C_ReceiveMailResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_EMailReceiveHandler : MessageLocationHandler<Unit, C2M_ReceiveMailRequest, M2C_ReceiveMailResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_ReceiveMailRequest request, M2C_ReceiveMailResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_ReceiveMailRequest request, M2C_ReceiveMailResponse response)
         {
             //领取邮件
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.Received, unit.Id))
+            using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Received, unit.Id))
             {
-                long mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.DomainZone(), Enum.GetName(SceneType.EMail)).InstanceId;
-                E2M_EMailReceiveResponse g_SendChatRequest = (E2M_EMailReceiveResponse)await ActorMessageSenderComponent.Instance.Call
-                    (mailServerId, new M2E_EMailReceiveRequest() { Id = unit.GetComponent<UserInfoComponent>().UserInfo.UserId, MailId = request.MailId });
+                ActorId mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.Zone(), "EMail").ActorId;
+                E2M_EMailReceiveResponse g_SendChatRequest = (E2M_EMailReceiveResponse)await unit.Root().GetComponent<MessageSender>().Call
+                    (mailServerId, new M2E_EMailReceiveRequest() { Id = unit.GetComponent<UserInfoComponentS>().UserInfo.UserId, MailId = request.MailId });
 
                 MailInfo mailInfo = g_SendChatRequest.MailInfo;
                 if (mailInfo == null)
                 {
-                    reply();
                     return;
                 }
 
@@ -34,7 +32,7 @@ namespace ET
                     }
                     if (!string.IsNullOrEmpty(mailInfo.ItemList[i].GetWay))
                     {
-                        unit.GetComponent<BagComponent>().OnAddItemData(mailInfo.ItemList[i], mailInfo.ItemList[i].GetWay);
+                        unit.GetComponent<BagComponentS>().OnAddItemData(mailInfo.ItemList[i], mailInfo.ItemList[i].GetWay);
                         //string[] getwayInfo = mailInfo.ItemList[i].GetWay.Split('_');
                         //if (getwayInfo.Length >= 2 && mailInfo.ItemList[i].ItemID == 1 && int.Parse(getwayInfo[0]) == ItemGetWay.PaiMaiSell)
                         //{
@@ -43,7 +41,7 @@ namespace ET
                     }
                     else
                     {
-                        unit.GetComponent<BagComponent>().OnAddItemData(mailInfo.ItemList[i], $"{ItemGetWay.ReceieMail}_{TimeHelper.ServerNow()}");
+                        unit.GetComponent<BagComponentS>().OnAddItemData(mailInfo.ItemList[i], $"{ItemGetWay.ReceieMail}_{TimeHelper.ServerNow()}");
                     }
                 }
                 
@@ -52,12 +50,11 @@ namespace ET
                     ItemConfig itemConfig = ItemConfigCategory.Instance.Get(mailInfo.ItemSell.ItemID);
                     if (itemConfig.ItemType == 3)
                     {
-                        unit.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.PaiMaiSellNumber_218, 0, 1);
+                        unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.PaiMaiSellNumber_218, 0, 1);
                     }
                 }
             }
-
-            reply();
+            
             await ETTask.CompletedTask;
         }
     }

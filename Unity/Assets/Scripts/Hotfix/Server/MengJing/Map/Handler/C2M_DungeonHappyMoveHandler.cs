@@ -44,7 +44,6 @@ namespace ET.Server
                 if (userInfoComponent.UserInfo.Gold < globalValueConfig.Value2)
                 {
                     response.Error = ErrorCode.ERR_GoldNotEnoughError;
-                    reply();
                     return;
                 }
                 userInfoComponent.UpdateRoleMoneySub(UserDataType.Gold, (globalValueConfig.Value2 * -1).ToString(), true, ItemGetWay.HappyMove);
@@ -55,7 +54,6 @@ namespace ET.Server
                 if (userInfoComponent.UserInfo.Diamond < globalValueConfig.Value2)
                 {
                     response.Error = ErrorCode.ERR_DiamondNotEnoughError;
-                    reply();
                     return;
                 }
                 userInfoComponent.UpdateRoleMoneySub(UserDataType.Diamond, (globalValueConfig.Value2 * -1).ToString(), true, ItemGetWay.HappyMove);
@@ -63,13 +61,13 @@ namespace ET.Server
 
             for (int r = 10; r > 0; r--)
             {
-                int newCell = RandomHelper.RandomNumber(0, HappyHelper.PositionList.Count);
+                int newCell = RandomHelper.RandomNumber(0, HappyData.PositionList.Count);
 
                 bool haveorange = false;
-                List<Unit> droplist = UnitHelper.GetUnitList(unit.DomainScene(), UnitType.DropItem);
+                List<Unit> droplist = UnitHelper.GetUnitList(unit.Scene(), UnitType.DropItem);
                 for (int i = 0; i < droplist.Count; i++)
                 {
-                    int itemid = droplist[i].GetComponent<DropComponent>().ItemID;
+                    int itemid = droplist[i].GetComponent<DropComponentS>().ItemID;
                     if (ItemConfigCategory.Instance.Get(itemid).ItemQuality >= 5)
                     {
                         haveorange = true;
@@ -83,14 +81,13 @@ namespace ET.Server
                     continue;
                 }
 
-                unit.GetComponent<NumericComponent>().ApplyValue(NumericType.HappyCellIndex, newCell + 1);
-                Vector3 vector3 = HappyHelper.PositionList[newCell];
+                unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.HappyCellIndex, newCell + 1);
+                Vector3 vector3 = HappyData.PositionList[newCell];
                 unit.Position = vector3;
                 break;
             }
 
             unit.Stop(-2);
-            reply();
             await ETTask.CompletedTask;
         }
     }
