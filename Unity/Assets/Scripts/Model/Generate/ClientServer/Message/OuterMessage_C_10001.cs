@@ -18248,6 +18248,232 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_ModifyNameResponse))]
+//改游戏名
+	[Message(OuterMessage.C2M_ModifyNameRequest)]
+	[MemoryPackable]
+	public partial class C2M_ModifyNameRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ModifyNameRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ModifyNameRequest), isFromPool) as C2M_ModifyNameRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string NewName { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.NewName = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ModifyNameResponse)]
+	[MemoryPackable]
+	public partial class M2C_ModifyNameResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ModifyNameResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ModifyNameResponse), isFromPool) as M2C_ModifyNameResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_MysteryBuyResponse))]
+	[Message(OuterMessage.C2M_MysteryBuyRequest)]
+	[MemoryPackable]
+	public partial class C2M_MysteryBuyRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_MysteryBuyRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_MysteryBuyRequest), isFromPool) as C2M_MysteryBuyRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public MysteryItemInfo MysteryItemInfo { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int NpcId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.MysteryItemInfo = default;
+			this.NpcId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_MysteryBuyResponse)]
+	[MemoryPackable]
+	public partial class M2C_MysteryBuyResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_MysteryBuyResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_MysteryBuyResponse), isFromPool) as M2C_MysteryBuyResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_OneChallengeResponse))]
+	[Message(OuterMessage.C2M_OneChallengeRequest)]
+	[MemoryPackable]
+	public partial class C2M_OneChallengeRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_OneChallengeRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_OneChallengeRequest), isFromPool) as C2M_OneChallengeRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long OtherId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Operatate { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.OtherId = default;
+			this.Operatate = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_OneChallengeResponse)]
+	[MemoryPackable]
+	public partial class M2C_OneChallengeResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_OneChallengeResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_OneChallengeResponse), isFromPool) as M2C_OneChallengeResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int Operatate { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.Operatate = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_OneChallenge)]
+	[MemoryPackable]
+	public partial class M2C_OneChallenge: MessageObject, IMessage
+	{
+		public static M2C_OneChallenge Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_OneChallenge), isFromPool) as M2C_OneChallenge; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int Operatate { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long OtherId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string OtherName { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Operatate = default;
+			this.OtherId = default;
+			this.OtherName = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -18777,5 +19003,12 @@ namespace ET
 		 public const ushort M2C_KillMonsterRewardResponse = 10526;
 		 public const ushort C2M_LeavlRewardRequest = 10527;
 		 public const ushort M2C_LeavlRewardResponse = 10528;
+		 public const ushort C2M_ModifyNameRequest = 10529;
+		 public const ushort M2C_ModifyNameResponse = 10530;
+		 public const ushort C2M_MysteryBuyRequest = 10531;
+		 public const ushort M2C_MysteryBuyResponse = 10532;
+		 public const ushort C2M_OneChallengeRequest = 10533;
+		 public const ushort M2C_OneChallengeResponse = 10534;
+		 public const ushort M2C_OneChallenge = 10535;
 	}
 }

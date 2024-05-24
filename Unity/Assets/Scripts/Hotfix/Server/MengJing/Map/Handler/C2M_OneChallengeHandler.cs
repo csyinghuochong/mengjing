@@ -1,25 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
+    [MessageHandler(SceneType.Map)]
     public class C2M_OneChallengeHandler : MessageLocationHandler<Unit, C2M_OneChallengeRequest, M2C_OneChallengeResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_OneChallengeRequest request, M2C_OneChallengeResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_OneChallengeRequest request, M2C_OneChallengeResponse response)
         {
             Unit other = unit.GetParent<UnitComponent>().Get(request.OtherId);
             if (other == null)
             {
                 response.Error = ErrorCode.ERR_OtherNotExist;
-                reply();
+
                 return;
             }
-            if (unit.DomainScene().GetComponent<MapComponent>().SceneTypeEnum != SceneTypeEnum.MainCityScene)
+            if (unit.Scene().GetComponent<MapComponent>().SceneType != SceneTypeEnum.MainCityScene)
             {
                 response.Error = ErrorCode.ERR_OtherNotExist;
-                reply();
                 return;
             }
 
@@ -28,8 +27,8 @@ namespace ET
                 M2C_OneChallenge m2CCreateUnits = new M2C_OneChallenge();
                 m2CCreateUnits.Operatate = 1;
                 m2CCreateUnits.OtherId = unit.Id;
-                m2CCreateUnits.OtherName = unit.GetComponent<UserInfoComponent>().UserName;
-                MessageHelper.SendToClient(other, m2CCreateUnits);
+                m2CCreateUnits.OtherName = unit.GetComponent<UserInfoComponentS>().UserName;
+                MapMessageHelper.SendToClient(other, m2CCreateUnits);
             }
             if (request.Operatate == 2) //迎接挑战
             {
@@ -38,10 +37,9 @@ namespace ET
                 M2C_OneChallenge m2CCreateUnits = new M2C_OneChallenge();
                 m2CCreateUnits.Operatate = 2;
                 m2CCreateUnits.OtherId = fubenid;
-                MessageHelper.SendToClient(allUnits, m2CCreateUnits);
+                MapMessageHelper.SendToClient(allUnits, m2CCreateUnits);
             }
-
-            reply();
+            
             await ETTask.CompletedTask;
         }
     }

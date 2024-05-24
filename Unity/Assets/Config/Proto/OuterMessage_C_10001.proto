@@ -4676,3 +4676,46 @@ message M2C_ModifyNameResponse	// ILocationResponse
 	string Message = 91;
 	int32 Error = 92;
 }
+
+//ResponseType M2C_MysteryBuyResponse
+message C2M_MysteryBuyRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	MysteryItemInfo MysteryItemInfo = 1;
+	int32 NpcId = 2;
+}
+
+message M2C_MysteryBuyResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+
+//ResponseType M2C_OneChallengeResponse 
+message C2M_OneChallengeRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 OtherId = 1;
+	int32 Operatate = 2;    //1放弃挑战  2接受挑战
+}
+
+message M2C_OneChallengeResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	int32 Operatate = 1;
+}
+
+message M2C_OneChallenge // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int32 Operatate = 1;   //1收到挑战 2开始挑战
+	int64 OtherId = 2;
+	string OtherName = 3;
+}
