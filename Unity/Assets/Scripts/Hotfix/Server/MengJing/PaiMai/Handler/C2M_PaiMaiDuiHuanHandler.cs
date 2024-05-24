@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2M_PaiMaiDuiHuanHandler : AMActorLocationRpcHandler<Unit, C2M_PaiMaiDuiHuanRequest, M2C_PaiMaiDuiHuanResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_PaiMaiDuiHuanHandler : MessageHandler<Unit, C2M_PaiMaiDuiHuanRequest, M2C_PaiMaiDuiHuanResponse>
     {
 
         protected override async ETTask Run(Unit unit, C2M_PaiMaiDuiHuanRequest request, M2C_PaiMaiDuiHuanResponse response, Action reply)

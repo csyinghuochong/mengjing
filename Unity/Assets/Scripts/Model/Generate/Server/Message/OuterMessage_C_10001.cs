@@ -16304,6 +16304,67 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_PaiMaiDuiHuanResponse))]
+	[Message(OuterMessage.C2M_PaiMaiDuiHuanRequest)]
+	[MemoryPackable]
+	public partial class C2M_PaiMaiDuiHuanRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_PaiMaiDuiHuanRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_PaiMaiDuiHuanRequest), isFromPool) as C2M_PaiMaiDuiHuanRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long DiamondsNumber { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.DiamondsNumber = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_PaiMaiDuiHuanResponse)]
+	[MemoryPackable]
+	public partial class M2C_PaiMaiDuiHuanResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_PaiMaiDuiHuanResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_PaiMaiDuiHuanResponse), isFromPool) as M2C_PaiMaiDuiHuanResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -16774,5 +16835,7 @@ namespace ET
 		 public const ushort M2C_PaiMaiAuctionPriceResponse = 10467;
 		 public const ushort C2M_PaiMaiBuyRequest = 10468;
 		 public const ushort M2C_PaiMaiBuyResponse = 10469;
+		 public const ushort C2M_PaiMaiDuiHuanRequest = 10470;
+		 public const ushort M2C_PaiMaiDuiHuanResponse = 10471;
 	}
 }

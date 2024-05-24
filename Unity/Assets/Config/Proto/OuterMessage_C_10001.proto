@@ -4176,3 +4176,18 @@ message M2C_PaiMaiBuyResponse // ILocationResponse
 	string Message = 92;
 }
 
+//ResponseType M2C_PaiMaiDuiHuanResponse
+message C2M_PaiMaiDuiHuanRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 DiamondsNumber = 1;
+}
+
+message M2C_PaiMaiDuiHuanResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
