@@ -5,7 +5,7 @@ using MongoDB.Bson.Serialization.Options;
 namespace ET.Server
 {
 	[FriendOf(typeof (NumericComponentS))]
-	public static class NumericComponentServerSystem
+	public static class NumericComponentSSystem
 	{
 
 		//重置所有属性

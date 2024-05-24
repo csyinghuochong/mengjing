@@ -17562,6 +17562,68 @@ namespace ET
 
 	}
 
+//个人副本喜从天降移动
+	[ResponseType(nameof(M2C_DungeonHappyMoveResponse))]
+	[Message(OuterMessage.C2M_DungeonHappyMoveRequest)]
+	[MemoryPackable]
+	public partial class C2M_DungeonHappyMoveRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_DungeonHappyMoveRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_DungeonHappyMoveRequest), isFromPool) as C2M_DungeonHappyMoveRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int OperatateType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.OperatateType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_DungeonHappyMoveResponse)]
+	[MemoryPackable]
+	public partial class M2C_DungeonHappyMoveResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_DungeonHappyMoveResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_DungeonHappyMoveResponse), isFromPool) as M2C_DungeonHappyMoveResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -18069,5 +18131,7 @@ namespace ET
 		 public const ushort C2M_BuChangeRequest = 10504;
 		 public const ushort M2C_BuChangeResponse = 10505;
 		 public const ushort C2M_CreateSpiling = 10506;
+		 public const ushort C2M_DungeonHappyMoveRequest = 10507;
+		 public const ushort M2C_DungeonHappyMoveResponse = 10508;
 	}
 }

@@ -4,42 +4,39 @@ using UnityEngine;
 
 namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_DungeonHappyMoveHandler : AMActorLocationRpcHandler<Unit, C2M_DungeonHappyMoveRequest, M2C_DungeonHappyMoveResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_DungeonHappyMoveHandler : MessageHandler<Unit, C2M_DungeonHappyMoveRequest, M2C_DungeonHappyMoveResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_DungeonHappyMoveRequest request, M2C_DungeonHappyMoveResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_DungeonHappyMoveRequest request, M2C_DungeonHappyMoveResponse response)
         {
-            UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
+            UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
 
             if (request.OperatateType != 1 && request.OperatateType != 2 && request.OperatateType != 3)
             {
                 Log.Error($"C2M_DungeonHappyMoveRequest.1");
                 response.Error = ErrorCode.ERR_ModifyData;
-                reply();
                 return;
             }
 
             if (request.OperatateType == 1)
             {
-                if (unit.GetComponent<NumericComponent>().GetAsInt(NumericType.HappyMoveNumber) >= 5)
+                if (unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.HappyMoveNumber) >= 5)
                 {
                     response.Error = ErrorCode.ERR_TimesIsNot;
-                    reply();
                     return;
                 }
 
                 //非免费时间则返回
-                long happmoveTime = unit.GetComponent<NumericComponent>().GetAsLong(NumericType.HappyMoveTime);
+                long happmoveTime = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.HappyMoveTime);
                 if (TimeHelper.ServerNow() < happmoveTime)
                 {
                     response.Error = ErrorCode.ERR_HappyMove_CD;
-                    reply();
                     return;
                 }
 
                 long mianfeicd = TimeHelper.Second * 5 ;
-                unit.GetComponent<NumericComponent>().ApplyValue(NumericType.HappyMoveTime, TimeHelper.ServerNow() + mianfeicd);
-                unit.GetComponent<NumericComponent>().ApplyChange(null, NumericType.HappyMoveNumber,1, 0);
+                unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.HappyMoveTime, TimeHelper.ServerNow() + mianfeicd);
+                unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.HappyMoveNumber,1, 0);
             }
             if (request.OperatateType == 2)
             {
