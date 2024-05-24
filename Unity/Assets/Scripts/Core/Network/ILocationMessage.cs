@@ -39,6 +39,15 @@
 
     }
     
+    public interface IMailActorRequest : IRequest
+    {
+    }
+
+    public interface IMailActorResponse : IResponse
+    {
+
+    }
+    
     public interface IChatActorRequest: ILocationRequest
     {
         

@@ -4056,3 +4056,18 @@ message C2C_ChatJinYanResponse // IChatActorResponse
 	string Message = 92;
 }
 
+//ResponseType E2C_GetAllMailResponse
+message C2E_GetAllMailRequest // IMailActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message E2C_GetAllMailResponse // IMailActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated MailInfo MailInfos = 1;
+}
+

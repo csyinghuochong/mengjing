@@ -15842,6 +15842,67 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(E2C_GetAllMailResponse))]
+	[Message(OuterMessage.C2E_GetAllMailRequest)]
+	[MemoryPackable]
+	public partial class C2E_GetAllMailRequest: MessageObject, IMailActorRequest
+	{
+		public static C2E_GetAllMailRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2E_GetAllMailRequest), isFromPool) as C2E_GetAllMailRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.E2C_GetAllMailResponse)]
+	[MemoryPackable]
+	public partial class E2C_GetAllMailResponse: MessageObject, IMailActorResponse
+	{
+		public static E2C_GetAllMailResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(E2C_GetAllMailResponse), isFromPool) as E2C_GetAllMailResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<MailInfo> MailInfos { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.MailInfos.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -16298,5 +16359,7 @@ namespace ET
 		 public const ushort Center2M_BuChangeResponse = 10453;
 		 public const ushort C2C_ChatJinYanRequest = 10454;
 		 public const ushort C2C_ChatJinYanResponse = 10455;
+		 public const ushort C2E_GetAllMailRequest = 10456;
+		 public const ushort E2C_GetAllMailResponse = 10457;
 	}
 }
