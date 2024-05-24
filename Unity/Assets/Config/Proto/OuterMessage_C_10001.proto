@@ -4288,3 +4288,18 @@ message M2C_StallSellResponse // ILocationResponse
 	string Message = 92;
 	PaiMaiItemInfo PaiMaiItemInfo = 1;
 }
+
+//ResponseType M2C_StallXiaJiaResponse
+message C2M_StallXiaJiaRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 PaiMaiItemInfoId = 1;
+}
+
+message M2C_StallXiaJiaResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

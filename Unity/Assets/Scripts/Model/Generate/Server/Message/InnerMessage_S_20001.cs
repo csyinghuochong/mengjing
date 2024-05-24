@@ -6320,6 +6320,75 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(P2M_StallXiaJiaResponse))]
+	[Message(InnerMessage.M2P_StallXiaJiaRequest)]
+	[MemoryPackable]
+	public partial class M2P_StallXiaJiaRequest: MessageObject, IRequest
+	{
+		public static M2P_StallXiaJiaRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2P_StallXiaJiaRequest), isFromPool) as M2P_StallXiaJiaRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long PaiMaiItemInfoId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UnitID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.PaiMaiItemInfoId = default;
+			this.UnitID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.P2M_StallXiaJiaResponse)]
+	[MemoryPackable]
+	public partial class P2M_StallXiaJiaResponse: MessageObject, IResponse
+	{
+		public static P2M_StallXiaJiaResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(P2M_StallXiaJiaResponse), isFromPool) as P2M_StallXiaJiaResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(1)]
+		public PaiMaiItemInfo PaiMaiItemInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PaiMaiItemInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -6508,5 +6577,7 @@ namespace ET
 		 public const ushort P2M_StallBuyResponse = 20185;
 		 public const ushort M2P_StallSellRequest = 20186;
 		 public const ushort P2M_StallSellResponse = 20187;
+		 public const ushort M2P_StallXiaJiaRequest = 20188;
+		 public const ushort P2M_StallXiaJiaResponse = 20189;
 	}
 }

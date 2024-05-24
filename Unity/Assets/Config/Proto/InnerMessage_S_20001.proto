@@ -1619,3 +1619,20 @@ message P2M_StallSellResponse // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType P2M_StallXiaJiaResponse
+message M2P_StallXiaJiaRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 PaiMaiItemInfoId = 2;
+	int64 UnitID = 3;
+}
+
+message P2M_StallXiaJiaResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	PaiMaiItemInfo PaiMaiItemInfo = 2;
+}
