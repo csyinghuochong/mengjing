@@ -130,8 +130,14 @@ namespace ET.Client
     public struct DataUpdate_BuyBagCell
     {
     }
-    
+
     public struct DataUpdate_OnAccountWarehous
+    {
+        public string DataParamString;
+        public long baginfoId;
+    }
+
+    public struct DataUpdate_OnMailUpdate
     {
         public string DataParamString;
         public long baginfoId;

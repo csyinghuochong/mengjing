@@ -6,7 +6,7 @@ namespace ET.Client
 {
     [FriendOf(typeof (Scroll_Item_CommonItem))]
     [EntitySystemOf(typeof (ES_WarehouseAccount))]
-    [FriendOfAttribute(typeof (ES_WarehouseAccount))]
+    [FriendOf(typeof (ES_WarehouseAccount))]
     public static partial class ES_WarehouseAccountSystem
     {
         [EntitySystem]
@@ -89,10 +89,6 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
 
-        /// <summary>
-        /// 刷新仓库
-        /// </summary>
-        /// <param name="self"></param>
         public static void RefreshHouseItems(this ES_WarehouseAccount self)
         {
             int hourseNumber = GlobalValueConfigCategory.Instance.AccountBagMax;
@@ -102,10 +98,6 @@ namespace ET.Client
             self.E_BagItems1LoopVerticalScrollRect.SetVisible(true, hourseNumber);
         }
 
-        /// <summary>
-        /// 刷新背包
-        /// </summary>
-        /// <param name="self"></param>
         public static void RefreshBagItems(this ES_WarehouseAccount self)
         {
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();

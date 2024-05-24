@@ -34,6 +34,7 @@ namespace ET.Client
             root.AddComponent<LockTargetComponent>();
             root.AddComponent<FallingFontComponent>();
             root.AddComponent<SkillIndicatorComponent>();
+            root.AddComponent<MailComponentC>();
             
             // 根据配置修改掉Main Fiber的SceneType
             SceneType sceneType = EnumHelper.FromString<SceneType>(globalComponent.GlobalConfig.AppType.ToString());

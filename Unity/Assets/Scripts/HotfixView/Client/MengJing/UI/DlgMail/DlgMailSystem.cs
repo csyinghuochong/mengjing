@@ -11,6 +11,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgMail self)
         {
+            self.View.E_MailItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMailItemsRefresh);
         }
 
         public static void ShowWindow(this DlgMail self, Entity contextData = null)
@@ -18,6 +19,8 @@ namespace ET.Client
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
             uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
             uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
+
+            self.RequestMaiList();
         }
 
         private static void OnCloseButton(this DlgMail self)
@@ -25,6 +28,131 @@ namespace ET.Client
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
 
             uiComponent.CloseWindow(WindowID.WindowID_Mail);
+        }
+
+        public static void RequestMaiList(this DlgMail self)
+        {
+            MailNetHelper.SendGetMailList(self.Root()).Coroutine();
+            // NetHelper.SendReddotRead(self.ZoneScene(), ReddotType.Email).Coroutine();
+        }
+
+        public static void OnButtonGet(this DlgMail self)
+        {
+            MailNetHelper.SendReceiveMail(self.Root()).Coroutine();
+        }
+
+        public static async ETTask OnButtonOneKey(this DlgMail self)
+        {
+            long instanceid = self.InstanceId;
+            MailComponentC mailComponent = self.Root().GetComponent<MailComponentC>();
+
+            TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
+            while (mailComponent.MailInfoList.Count > 0)
+            {
+                int errorCode = await MailNetHelper.SendReceiveMail(self.Root());
+                if (errorCode != 0)
+                {
+                    break;
+                }
+
+                if (instanceid != self.InstanceId)
+                {
+                    break;
+                }
+
+                await timerComponent.WaitAsync(200);
+            }
+        }
+
+        public static void OnSelectMail(this DlgMail self)
+        {
+            self.UpdateMailSelected();
+            self.UpdateMailContent();
+        }
+
+        public static void UpdateMailSelected(this DlgMail self)
+        {
+            MailComponentC mailComponent = self.Root().GetComponent<MailComponentC>();
+            if (mailComponent.SelectMail == null)
+            {
+                self.View.EG_MailContentRectTransform.gameObject.SetActive(false);
+                self.View.E_NoMailText.gameObject.SetActive(true);
+                return;
+            }
+
+            self.View.EG_MailContentRectTransform.gameObject.SetActive(true);
+            self.View.E_NoMailText.gameObject.SetActive(false);
+
+            if (self.ScrollItemMailItems != null)
+            {
+                foreach (Scroll_Item_MailItem scrollItemMailItem in self.ScrollItemMailItems.Values)
+                {
+                    if (scrollItemMailItem == null)
+                    {
+                        continue;
+                    }
+
+                    scrollItemMailItem.SetSelected(mailComponent.SelectMail);
+                }
+            }
+        }
+
+        public static void UpdateMailContent(this DlgMail self)
+        {
+            MailComponentC mailComponent = self.Root().GetComponent<MailComponentC>();
+            MailInfo mailInfos = mailComponent.SelectMail;
+            self.View.E_TextMailTitleText.text = mailInfos.Title;
+            self.View.E_TextMailContentText.text = mailInfos.Context;
+
+            List<RewardItem> rewardItems = new();
+            foreach (BagInfo bagInfo in mailInfos.ItemList)
+            {
+                rewardItems.Add(new RewardItem() { ItemID = bagInfo.ItemID, ItemNum = bagInfo.ItemNum });
+            }
+
+            self.View.ES_RewardList.Refresh(rewardItems);
+        }
+
+        public static void OnMailUpdate(this DlgMail self)
+        {
+            MailComponentC mailComponent = self.Root().GetComponent<MailComponentC>();
+            self.View.E_NumTextText.text = $"{mailComponent.MailInfoList.Count}/100";
+
+            //增删改
+            List<MailInfo> mailInfos = mailComponent.MailInfoList;
+            if (mailInfos.Count == 0)
+            {
+                mailComponent.SelectMail = null;
+                self.View.EG_MailContentRectTransform.gameObject.SetActive(false);
+                self.View.E_NoMailText.gameObject.SetActive(true);
+                return;
+            }
+
+            self.View.EG_MailContentRectTransform.gameObject.SetActive(true);
+            self.View.E_NoMailText.gameObject.SetActive(false);
+
+            if (self.Reverse > 0)
+            {
+                mailInfos.Reverse();
+            }
+
+            self.Reverse -= 1;
+
+            self.AddUIScrollItems(ref self.ScrollItemMailItems, mailInfos.Count);
+            self.View.E_MailItemsLoopVerticalScrollRect.SetVisible(true, mailInfos.Count);
+
+            mailComponent.SelectMail = mailInfos[0];
+            self.OnSelectMail();
+        }
+
+        private static void OnMailItemsRefresh(this DlgMail self, Transform transform, int index)
+        {
+            Scroll_Item_MailItem scrollItemMailItem = self.ScrollItemMailItems[index].BindTrans(transform);
+
+            MailComponentC mailComponent = self.Root().GetComponent<MailComponentC>();
+
+            scrollItemMailItem.OnUpdateUI(mailComponent.MailInfoList[index]);
+            scrollItemMailItem.SetClickHandler(() => { self.OnSelectMail(); });
         }
     }
 }
