@@ -15903,6 +15903,87 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(F2C_WatchPetResponse))]
+	[Message(OuterMessage.C2F_WatchPetRequest)]
+	[MemoryPackable]
+	public partial class C2F_WatchPetRequest: MessageObject, IFriendActorRequest
+	{
+		public static C2F_WatchPetRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2F_WatchPetRequest), isFromPool) as C2F_WatchPetRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitID { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long PetId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitID = default;
+			this.PetId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.F2C_WatchPetResponse)]
+	[MemoryPackable]
+	public partial class F2C_WatchPetResponse: MessageObject, IFriendActorResponse
+	{
+		public static F2C_WatchPetResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(F2C_WatchPetResponse), isFromPool) as F2C_WatchPetResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(6)]
+		public RolePetInfo RolePetInfos { get; set; }
+
+		[MemoryPackOrder(7)]
+		public List<BagInfo> PetHeXinList { get; set; } = new();
+
+		[MemoryPackOrder(8)]
+		public List<int> Ks { get; set; } = new();
+
+		[MemoryPackOrder(9)]
+		public List<long> Vs { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RolePetInfos = default;
+			this.PetHeXinList.Clear();
+			this.Ks.Clear();
+			this.Vs.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -16361,5 +16442,7 @@ namespace ET
 		 public const ushort C2C_ChatJinYanResponse = 10455;
 		 public const ushort C2E_GetAllMailRequest = 10456;
 		 public const ushort E2C_GetAllMailResponse = 10457;
+		 public const ushort C2F_WatchPetRequest = 10458;
+		 public const ushort F2C_WatchPetResponse = 10459;
 	}
 }
