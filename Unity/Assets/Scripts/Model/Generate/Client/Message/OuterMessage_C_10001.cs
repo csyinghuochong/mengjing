@@ -15846,6 +15846,128 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_ReceiveMailResponse))]
+	[Message(OuterMessage.C2M_ReceiveMailRequest)]
+	[MemoryPackable]
+	public partial class C2M_ReceiveMailRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ReceiveMailRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ReceiveMailRequest), isFromPool) as C2M_ReceiveMailRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long MailId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.MailId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ReceiveMailResponse)]
+	[MemoryPackable]
+	public partial class M2C_ReceiveMailResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ReceiveMailResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ReceiveMailResponse), isFromPool) as M2C_ReceiveMailResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(E2C_ReceiveMailResponse))]
+	[Message(OuterMessage.C2E_ReceiveMailRequest)]
+	[MemoryPackable]
+	public partial class C2E_ReceiveMailRequest: MessageObject, IMailActorRequest
+	{
+		public static C2E_ReceiveMailRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2E_ReceiveMailRequest), isFromPool) as C2E_ReceiveMailRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long MailId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.MailId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.E2C_ReceiveMailResponse)]
+	[MemoryPackable]
+	public partial class E2C_ReceiveMailResponse: MessageObject, IMailActorResponse
+	{
+		public static E2C_ReceiveMailResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(E2C_ReceiveMailResponse), isFromPool) as E2C_ReceiveMailResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	[ResponseType(nameof(E2C_GetAllMailResponse))]
 	[Message(OuterMessage.C2E_GetAllMailRequest)]
 	[MemoryPackable]
@@ -17273,35 +17395,39 @@ namespace ET
 		 public const ushort Center2M_BuChangeResponse = 10453;
 		 public const ushort C2C_ChatJinYanRequest = 10454;
 		 public const ushort C2C_ChatJinYanResponse = 10455;
-		 public const ushort C2E_GetAllMailRequest = 10456;
-		 public const ushort E2C_GetAllMailResponse = 10457;
-		 public const ushort C2F_WatchPetRequest = 10458;
-		 public const ushort F2C_WatchPetResponse = 10459;
-		 public const ushort C2M_HappyMoveRequest = 10460;
-		 public const ushort M2C_HappyMoveResponse = 10461;
-		 public const ushort C2M_HongBaoOpenRequest = 10462;
-		 public const ushort M2C_HongBaoOpenResponse = 10463;
-		 public const ushort C2M_PaiMaiAuctionJoinRequest = 10464;
-		 public const ushort M2C_PaiMaiAuctionJoinResponse = 10465;
-		 public const ushort C2M_PaiMaiAuctionPriceRequest = 10466;
-		 public const ushort M2C_PaiMaiAuctionPriceResponse = 10467;
-		 public const ushort C2M_PaiMaiBuyRequest = 10468;
-		 public const ushort M2C_PaiMaiBuyResponse = 10469;
-		 public const ushort C2M_PaiMaiDuiHuanRequest = 10470;
-		 public const ushort M2C_PaiMaiDuiHuanResponse = 10471;
-		 public const ushort C2M_PaiMaiSellRequest = 10472;
-		 public const ushort M2C_PaiMaiSellResponse = 10473;
-		 public const ushort C2M_PaiMaiShopRequest = 10474;
-		 public const ushort M2C_PaiMaiShopResponse = 10475;
-		 public const ushort C2M_PaiMaiXiaJiaRequest = 10476;
-		 public const ushort M2C_PaiMaiXiaJiaResponse = 10477;
-		 public const ushort C2M_StallBuyRequest = 10478;
-		 public const ushort M2C_StallBuyResponse = 10479;
-		 public const ushort C2M_StallOperationRequest = 10480;
-		 public const ushort M2C_StallOperationResponse = 10481;
-		 public const ushort C2M_StallSellRequest = 10482;
-		 public const ushort M2C_StallSellResponse = 10483;
-		 public const ushort C2M_StallXiaJiaRequest = 10484;
-		 public const ushort M2C_StallXiaJiaResponse = 10485;
+		 public const ushort C2M_ReceiveMailRequest = 10456;
+		 public const ushort M2C_ReceiveMailResponse = 10457;
+		 public const ushort C2E_ReceiveMailRequest = 10458;
+		 public const ushort E2C_ReceiveMailResponse = 10459;
+		 public const ushort C2E_GetAllMailRequest = 10460;
+		 public const ushort E2C_GetAllMailResponse = 10461;
+		 public const ushort C2F_WatchPetRequest = 10462;
+		 public const ushort F2C_WatchPetResponse = 10463;
+		 public const ushort C2M_HappyMoveRequest = 10464;
+		 public const ushort M2C_HappyMoveResponse = 10465;
+		 public const ushort C2M_HongBaoOpenRequest = 10466;
+		 public const ushort M2C_HongBaoOpenResponse = 10467;
+		 public const ushort C2M_PaiMaiAuctionJoinRequest = 10468;
+		 public const ushort M2C_PaiMaiAuctionJoinResponse = 10469;
+		 public const ushort C2M_PaiMaiAuctionPriceRequest = 10470;
+		 public const ushort M2C_PaiMaiAuctionPriceResponse = 10471;
+		 public const ushort C2M_PaiMaiBuyRequest = 10472;
+		 public const ushort M2C_PaiMaiBuyResponse = 10473;
+		 public const ushort C2M_PaiMaiDuiHuanRequest = 10474;
+		 public const ushort M2C_PaiMaiDuiHuanResponse = 10475;
+		 public const ushort C2M_PaiMaiSellRequest = 10476;
+		 public const ushort M2C_PaiMaiSellResponse = 10477;
+		 public const ushort C2M_PaiMaiShopRequest = 10478;
+		 public const ushort M2C_PaiMaiShopResponse = 10479;
+		 public const ushort C2M_PaiMaiXiaJiaRequest = 10480;
+		 public const ushort M2C_PaiMaiXiaJiaResponse = 10481;
+		 public const ushort C2M_StallBuyRequest = 10482;
+		 public const ushort M2C_StallBuyResponse = 10483;
+		 public const ushort C2M_StallOperationRequest = 10484;
+		 public const ushort M2C_StallOperationResponse = 10485;
+		 public const ushort C2M_StallSellRequest = 10486;
+		 public const ushort M2C_StallSellResponse = 10487;
+		 public const ushort C2M_StallXiaJiaRequest = 10488;
+		 public const ushort M2C_StallXiaJiaResponse = 10489;
 	}
 }

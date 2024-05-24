@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using System;
 
 namespace ET.Client
 {
@@ -35,7 +34,7 @@ namespace ET.Client
                     continue;
                 }
 
-                needcell += Mathf.CeilToInt(bagInfo.ItemNum * 1f / itemConfig.ItemPileSum);
+                needcell += (int)Math.Ceiling(bagInfo.ItemNum * 1f / itemConfig.ItemPileSum);
             }
 
             if (root.GetComponent<BagComponentC>().GetBagLeftCell() < needcell)
@@ -43,13 +42,12 @@ namespace ET.Client
                 return ErrorCode.ERR_BagIsFull;
             }
 
-            // C2M_ReceiveMailRequest request = new C2M_ReceiveMailRequest() { MailId = mailComponent.SelectMail.MailId };
-            // M2C_ReceiveMailResponse response =
-            //         (M2C_ReceiveMailResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
-            // if (response.Error != 0)
-            // {
-            //     return response.Error;
-            // }
+            C2M_ReceiveMailRequest request = new() { MailId = mailComponent.SelectMail.MailId };
+            M2C_ReceiveMailResponse response = (M2C_ReceiveMailResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            if (response.Error != 0)
+            {
+                return response.Error;
+            }
 
             for (int i = mailComponent.MailInfoList.Count - 1; i >= 0; i--)
             {

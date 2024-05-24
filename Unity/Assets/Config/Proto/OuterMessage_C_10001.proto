@@ -4057,6 +4057,36 @@ message C2C_ChatJinYanResponse // IChatActorResponse
 	string Message = 92;
 }
 
+//ResponseType M2C_ReceiveMailResponse
+message C2M_ReceiveMailRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 MailId = 1;
+}
+
+message M2C_ReceiveMailResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType E2C_ReceiveMailResponse
+message C2E_ReceiveMailRequest // IMailActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 MailId = 1;
+}
+
+message E2C_ReceiveMailResponse // IMailActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
 //ResponseType E2C_GetAllMailResponse
 message C2E_GetAllMailRequest // IMailActorRequest
 {
