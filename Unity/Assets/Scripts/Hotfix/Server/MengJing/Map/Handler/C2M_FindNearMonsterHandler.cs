@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_FindNearMonsterHandler : AMActorLocationRpcHandler<Unit, C2M_FindNearMonsterRequest, M2C_FindNearMonsterResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_FindNearMonsterHandler : MessageLocationHandler<Unit, C2M_FindNearMonsterRequest, M2C_FindNearMonsterResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_FindNearMonsterRequest request, M2C_FindNearMonsterResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_FindNearMonsterRequest request, M2C_FindNearMonsterResponse response)
         {
-            Unit listUnit = AIHelp.GetNearestEnemy(unit,  50f, true);
+            Unit listUnit = GetTargetHelp.GetNearestEnemy(unit,  50f, true);
             if (listUnit !=null)
             {
                 response.IfFindStatus = true;
@@ -20,8 +20,7 @@ namespace ET
             {
                 response.IfFindStatus = false;
             }
-
-            reply();
+            
             await ETTask.CompletedTask;
 
         }

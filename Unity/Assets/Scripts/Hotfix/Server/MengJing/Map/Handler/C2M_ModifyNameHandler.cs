@@ -5,7 +5,7 @@ namespace ET
 {
     //修改名字
     [ActorMessageHandler]
-    public class C2M_ModifyNameHandler : AMActorLocationRpcHandler<Unit, C2M_ModifyNameRequest, M2C_ModifyNameResponse>
+    public class C2M_ModifyNameHandler : MessageLocationHandler<Unit, C2M_ModifyNameRequest, M2C_ModifyNameResponse>
     {
 
         protected override async ETTask Run(Unit unit, C2M_ModifyNameRequest request, M2C_ModifyNameResponse response, Action reply)

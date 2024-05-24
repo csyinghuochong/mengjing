@@ -3,7 +3,7 @@
 namespace ET
 {
     [ActorMessageHandler]
-    public class C2M_UserInfoRequestHandler : AMActorLocationRpcHandler<Unit, C2M_UserInfoRequest, M2C_UserInfoInitResponse>
+    public class C2M_UserInfoRequestHandler : MessageLocationHandler<Unit, C2M_UserInfoRequest, M2C_UserInfoInitResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_UserInfoRequest request, M2C_UserInfoInitResponse response, Action reply)
         {

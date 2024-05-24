@@ -5,7 +5,7 @@ namespace ET
 {
 
     [ActorMessageHandler]
-    public class C2M_OneChallengeHandler : AMActorLocationRpcHandler<Unit, C2M_OneChallengeRequest, M2C_OneChallengeResponse>
+    public class C2M_OneChallengeHandler : MessageLocationHandler<Unit, C2M_OneChallengeRequest, M2C_OneChallengeResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_OneChallengeRequest request, M2C_OneChallengeResponse response, Action reply)
         {

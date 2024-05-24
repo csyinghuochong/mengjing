@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ET
 {
     [ActorMessageHandler]
-    public class C2M_RefreshUnitHandler : AMActorLocationHandler<Unit, C2M_RefreshUnitRequest>
+    public class C2M_RefreshUnitHandler : MessageLocationHandler<Unit, C2M_RefreshUnitRequest>
     {
         protected override async ETTask Run(Unit unit, C2M_RefreshUnitRequest request)
         {

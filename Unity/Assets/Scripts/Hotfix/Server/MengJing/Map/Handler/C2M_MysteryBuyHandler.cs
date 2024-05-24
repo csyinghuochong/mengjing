@@ -4,7 +4,7 @@ namespace ET
 {
 
     [ActorMessageHandler]
-    public class C2M_MysteryBuyHandler : AMActorLocationRpcHandler<Unit, C2M_MysteryBuyRequest, M2C_MysteryBuyResponse>
+    public class C2M_MysteryBuyHandler : MessageLocationHandler<Unit, C2M_MysteryBuyRequest, M2C_MysteryBuyResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_MysteryBuyRequest request, M2C_MysteryBuyResponse response, Action reply)
         {

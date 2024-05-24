@@ -4504,3 +4504,129 @@ message M2C_DungeonHappyMoveResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType M2C_FindJingLingResponse
+message C2M_FindJingLingRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_FindJingLingResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	int32 MonsterID = 5;
+}
+
+//ResponseType M2C_FindNearMonsterResponse
+message C2M_FindNearMonsterRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_FindNearMonsterResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	float x = 1;
+	float y = 2;
+	float z = 3;
+	bool IfFindStatus = 4;
+	int64 MonsterID = 5;
+}
+
+//ResponseType M2C_FirstWinSelfRewardResponse
+message C2M_FirstWinSelfRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 FirstWinId = 1;
+	int32 Difficulty = 2;
+}
+
+message M2C_FirstWinSelfRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated KeyValuePair FirstWinInfos = 1;
+}
+
+//通用协议 应急用
+//ResponseType M2C_FubenMessageResponse
+message C2M_FubenMessageRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 SceneType = 1;
+	int32 MessageType = 2;
+}
+
+message M2C_FubenMessageResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	string MessageValue = 1;
+}
+
+//ResponseType M2C_FubenTimesResetResponse
+message C2M_FubenTimesResetRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 SceneType = 1;
+}
+
+message M2C_FubenTimesResetResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_GameSettingResponse
+//游戏设置
+message C2M_GameSettingRequest		// ILocationRequest
+{
+	int32 RpcId = 90;
+	repeated KeyValuePair GameSettingInfos = 1;
+}
+
+message M2C_GameSettingResponse	// ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_GMCustomResponse
+message C2M_GMCustomRequest //ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_GMCustomResponse //ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+
+//ResponseType M2C_GuideUpdateResponse
+message C2M_GuideUpdateRequest // ILocationRequest
+{
+	int32 RpcId = 1;
+	int32 GuideId = 2;
+	int32 GuideStep = 3;
+}
+
+message M2C_GuideUpdateResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

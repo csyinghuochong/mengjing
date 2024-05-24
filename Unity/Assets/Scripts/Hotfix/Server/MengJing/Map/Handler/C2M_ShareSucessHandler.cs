@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ET
 {
     [ActorMessageHandler]
-    public class C2M_ShareSucessHandler : AMActorLocationRpcHandler<Unit, C2M_ShareSucessRequest, M2C_ShareSucessResponse>
+    public class C2M_ShareSucessHandler : MessageLocationHandler<Unit, C2M_ShareSucessRequest, M2C_ShareSucessResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_ShareSucessRequest request, M2C_ShareSucessResponse response, Action reply)
         {

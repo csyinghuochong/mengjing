@@ -5,7 +5,7 @@ using System.Linq;
 namespace ET
 {
     [ActorMessageHandler]
-    public class C2M_LeavlRewardHandler: AMActorLocationRpcHandler<Unit, C2M_LeavlRewardRequest, M2C_LeavlRewardResponse>
+    public class C2M_LeavlRewardHandler: MessageLocationHandler<Unit, C2M_LeavlRewardRequest, M2C_LeavlRewardResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_LeavlRewardRequest request, M2C_LeavlRewardResponse response, Action reply)
         {

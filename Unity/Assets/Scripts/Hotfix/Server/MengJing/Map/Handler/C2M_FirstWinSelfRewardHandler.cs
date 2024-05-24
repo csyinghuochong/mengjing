@@ -4,18 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2M_FirstWinSelfRewardHandler : AMActorLocationRpcHandler<Unit, C2M_FirstWinSelfRewardRequest, M2C_FirstWinSelfRewardResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_FirstWinSelfRewardHandler : MessageLocationHandler<Unit, C2M_FirstWinSelfRewardRequest, M2C_FirstWinSelfRewardResponse>
     {
-		protected override async ETTask Run(Unit unit, C2M_FirstWinSelfRewardRequest request, M2C_FirstWinSelfRewardResponse response, Action reply)
+		protected override async ETTask Run(Unit unit, C2M_FirstWinSelfRewardRequest request, M2C_FirstWinSelfRewardResponse response)
 		{
 			if (!FirstWinConfigCategory.Instance.Contain(request.FirstWinId))
 			{
 				response.Error = ErrorCode.ERR_NetWorkError;
-				reply();
 				return;
 			}
 
@@ -38,24 +37,22 @@ namespace ET
 					break;
 			}
 			string[] rewarditemlist = rewardlist.Split('@');
-			if (unit.GetComponent<BagComponent>().GetBagLeftCell() < rewarditemlist.Length)
+			if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < rewarditemlist.Length)
 			{
 				response.Error = ErrorCode.ERR_BagIsFull;
-				reply();
 				return;
 			}
 
-			int errorcode = unit.GetComponent<UserInfoComponent>().OnGetFirstWinSelf(request.FirstWinId, request.Difficulty);
+			int errorcode = unit.GetComponent<UserInfoComponentS>().OnGetFirstWinSelf(request.FirstWinId, request.Difficulty);
 			if (errorcode != ErrorCode.ERR_Success)
 			{
 				response.Error = errorcode;
-				reply();
 				return;
 			}
 
-			unit.GetComponent<BagComponent>().OnAddItemData(rewardlist, $"{ItemGetWay.FirstWin}_{TimeHelper.ServerNow()}");
-			response.FirstWinInfos = unit.GetComponent<UserInfoComponent>().UserInfo.FirstWinSelf;
-			reply();
+			unit.GetComponent<BagComponentS>().OnAddItemData(rewardlist, $"{ItemGetWay.FirstWin}_{TimeHelper.ServerNow()}");
+			response.FirstWinInfos = unit.GetComponent<UserInfoComponentS>().UserInfo.FirstWinSelf;
+
 			await ETTask.CompletedTask;
 		}
 	}

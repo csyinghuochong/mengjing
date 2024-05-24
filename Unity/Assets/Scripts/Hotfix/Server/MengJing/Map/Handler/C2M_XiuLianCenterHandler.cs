@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ET
 {
     [ActorMessageHandler]
-    public class C2M_XiuLianCenterHandler : AMActorLocationRpcHandler<Unit, C2M_XiuLianCenterRequest, M2C_XiuLianCenterResponse>
+    public class C2M_XiuLianCenterHandler : MessageLocationHandler<Unit, C2M_XiuLianCenterRequest, M2C_XiuLianCenterResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_XiuLianCenterRequest request, M2C_XiuLianCenterResponse response, Action reply)
         {

@@ -8,7 +8,7 @@ namespace ET
 {
 
     [ActorMessageHandler]
-    public class C2M_SerialReardHandler : AMActorLocationRpcHandler<Unit, C2M_SerialReardRequest, M2C_SerialReardResponse>
+    public class C2M_SerialReardHandler : MessageLocationHandler<Unit, C2M_SerialReardRequest, M2C_SerialReardResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_SerialReardRequest request, M2C_SerialReardResponse response, Action reply)
         {

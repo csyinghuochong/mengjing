@@ -420,6 +420,18 @@ namespace ET.Server
             return self.UserInfo.Occ;
         }
         
+        public static void ClearFubenTimes(this UserInfoComponentS self, int sceneId)
+        {
+            for (int i = 0; i < self.UserInfo.DayFubenTimes.Count; i++)
+            {
+                if (self.UserInfo.DayFubenTimes[i].KeyId == sceneId)
+                {
+                    self.UserInfo.DayFubenTimes[i].Value = 0;
+                    break;
+                }
+            }
+        }
+        
         public static int GetRobotId(this UserInfoComponentS self)
         {
             return self.UserInfo.RobotId;
@@ -512,6 +524,37 @@ namespace ET.Server
                 }
             }
             self.UserInfo.DayFubenTimes.Add(new KeyValuePairInt() { KeyId = sceneId, Value = 1 });
+        }
+        
+        public static int OnGetFirstWinSelf(this UserInfoComponentS self, int firstwinid, int difficulty)
+        {
+            KeyValuePair keyValuePair1 = null;
+            for (int i = 0; i < self.UserInfo.FirstWinSelf.Count; i++)
+            {
+                if (self.UserInfo.FirstWinSelf[i].KeyId != firstwinid)
+                {
+                    continue;
+                }
+                keyValuePair1 = self.UserInfo.FirstWinSelf[i];
+                break;
+            }
+            if (keyValuePair1 == null)
+            {
+                return ErrorCode.ERR_NetWorkError;
+            }
+            if (keyValuePair1.Value2.Contains(difficulty.ToString()))
+            {
+                return ErrorCode.ERR_AlreadyReceived;
+            }
+            if (string.IsNullOrEmpty(keyValuePair1.Value2))
+            {
+                keyValuePair1.Value2 = difficulty.ToString();
+            }
+            else
+            {
+                keyValuePair1.Value2 += $"_{difficulty}";
+            }
+            return ErrorCode.ERR_Success;
         }
         
         public static int GetMonsterKillNumber(this UserInfoComponentS self, int monsterId)

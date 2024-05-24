@@ -2,7 +2,7 @@
 {
 
 	[ActorMessageHandler]
-    public class C2M_UnitStateUpdateHandler : AMActorLocationHandler<Unit, C2M_UnitStateUpdate>
+    public class C2M_UnitStateUpdateHandler : MessageLocationHandler<Unit, C2M_UnitStateUpdate>
     {
 		protected override async ETTask Run(Unit unit, C2M_UnitStateUpdate message)
 		{
