@@ -1353,3 +1353,75 @@ message M2C_UpdateMailInfo // IMessage
 	int64 ActorId = 93;
 	repeated MailInfo MailInfos = 1;
 }
+
+//ResponseType F2M_FubenCenterListResponse
+message M2F_FubenCenterListRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message F2M_FubenCenterListResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated int64 FubenInstanceList = 1;
+}
+
+//副本分配中心服
+//ResponseType F2M_FubenCenterOpenResponse
+message M2F_FubenCenterOperateRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 OperateType = 1; //1开启 2关闭
+	int64 FubenInstanceId = 2;
+	int32 SceneType = 3;
+}
+
+message F2M_FubenCenterOpenResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	ServerInfo ServerInfo = 1;
+}
+
+//野外副本Id
+//ResponseType F2M_YeWaiSceneIdResponse
+message M2F_YeWaiSceneIdRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 SceneId = 2;
+	int64 UnitId = 3;
+}
+
+message F2M_YeWaiSceneIdResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 FubenInstanceId = 2;
+}
+
+
+//通知其他服务进程刷新肝帝
+//ResponseType M2F_ServerInfoUpdateResponse
+message F2M_ServerInfoUpdateRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	ServerInfo ServerInfo = 1;
+
+	int32 operareType = 2;
+	string operateValue = 3;
+}
+
+message M2F_ServerInfoUpdateResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

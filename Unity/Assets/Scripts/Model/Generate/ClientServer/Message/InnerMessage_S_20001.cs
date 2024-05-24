@@ -5288,6 +5288,281 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(F2M_FubenCenterListResponse))]
+	[Message(InnerMessage.M2F_FubenCenterListRequest)]
+	[MemoryPackable]
+	public partial class M2F_FubenCenterListRequest: MessageObject, IRequest
+	{
+		public static M2F_FubenCenterListRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2F_FubenCenterListRequest), isFromPool) as M2F_FubenCenterListRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.F2M_FubenCenterListResponse)]
+	[MemoryPackable]
+	public partial class F2M_FubenCenterListResponse: MessageObject, IResponse
+	{
+		public static F2M_FubenCenterListResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(F2M_FubenCenterListResponse), isFromPool) as F2M_FubenCenterListResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<long> FubenInstanceList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.FubenInstanceList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//副本分配中心服
+	[ResponseType(nameof(F2M_FubenCenterOpenResponse))]
+	[Message(InnerMessage.M2F_FubenCenterOperateRequest)]
+	[MemoryPackable]
+	public partial class M2F_FubenCenterOperateRequest: MessageObject, IRequest
+	{
+		public static M2F_FubenCenterOperateRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2F_FubenCenterOperateRequest), isFromPool) as M2F_FubenCenterOperateRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int OperateType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long FubenInstanceId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int SceneType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.OperateType = default;
+			this.FubenInstanceId = default;
+			this.SceneType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.F2M_FubenCenterOpenResponse)]
+	[MemoryPackable]
+	public partial class F2M_FubenCenterOpenResponse: MessageObject, IResponse
+	{
+		public static F2M_FubenCenterOpenResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(F2M_FubenCenterOpenResponse), isFromPool) as F2M_FubenCenterOpenResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public ServerInfo ServerInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.ServerInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//野外副本Id
+	[ResponseType(nameof(F2M_YeWaiSceneIdResponse))]
+	[Message(InnerMessage.M2F_YeWaiSceneIdRequest)]
+	[MemoryPackable]
+	public partial class M2F_YeWaiSceneIdRequest: MessageObject, IRequest
+	{
+		public static M2F_YeWaiSceneIdRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2F_YeWaiSceneIdRequest), isFromPool) as M2F_YeWaiSceneIdRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int SceneId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UnitId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.SceneId = default;
+			this.UnitId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.F2M_YeWaiSceneIdResponse)]
+	[MemoryPackable]
+	public partial class F2M_YeWaiSceneIdResponse: MessageObject, IResponse
+	{
+		public static F2M_YeWaiSceneIdResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(F2M_YeWaiSceneIdResponse), isFromPool) as F2M_YeWaiSceneIdResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long FubenInstanceId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.FubenInstanceId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//通知其他服务进程刷新肝帝
+	[ResponseType(nameof(M2F_ServerInfoUpdateResponse))]
+	[Message(InnerMessage.F2M_ServerInfoUpdateRequest)]
+	[MemoryPackable]
+	public partial class F2M_ServerInfoUpdateRequest: MessageObject, IRequest
+	{
+		public static F2M_ServerInfoUpdateRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(F2M_ServerInfoUpdateRequest), isFromPool) as F2M_ServerInfoUpdateRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public ServerInfo ServerInfo { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int operareType { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string operateValue { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ServerInfo = default;
+			this.operareType = default;
+			this.operateValue = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.M2F_ServerInfoUpdateResponse)]
+	[MemoryPackable]
+	public partial class M2F_ServerInfoUpdateResponse: MessageObject, IResponse
+	{
+		public static M2F_ServerInfoUpdateResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2F_ServerInfoUpdateResponse), isFromPool) as M2F_ServerInfoUpdateResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -5446,5 +5721,13 @@ namespace ET
 		 public const ushort M2E_EMailReceiveRequest = 20155;
 		 public const ushort E2M_EMailReceiveResponse = 20156;
 		 public const ushort M2C_UpdateMailInfo = 20157;
+		 public const ushort M2F_FubenCenterListRequest = 20158;
+		 public const ushort F2M_FubenCenterListResponse = 20159;
+		 public const ushort M2F_FubenCenterOperateRequest = 20160;
+		 public const ushort F2M_FubenCenterOpenResponse = 20161;
+		 public const ushort M2F_YeWaiSceneIdRequest = 20162;
+		 public const ushort F2M_YeWaiSceneIdResponse = 20163;
+		 public const ushort F2M_ServerInfoUpdateRequest = 20164;
+		 public const ushort M2F_ServerInfoUpdateResponse = 20165;
 	}
 }

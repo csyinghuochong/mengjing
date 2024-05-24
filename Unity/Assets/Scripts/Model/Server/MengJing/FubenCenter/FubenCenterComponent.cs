@@ -7,9 +7,11 @@ namespace ET.Server
     [ComponentOf(typeof(Scene))]
     public class FubenCenterComponent: Entity, IAwake
     {
-        public List<long> FubenInstanceList = new List<long>();
-        public Dictionary<int, long> YeWaiFubenList = new Dictionary<int, long>();
-        public ServerInfo ServerInfo;
+        public List<long> FubenInstanceList { get; set; } = new List<long>();
+        
+        public List<ActorId> FubenActorIdList { get; set; } = new List<ActorId>();
+        public Dictionary<int, long> YeWaiFubenList { get; set; } = new Dictionary<int, long>();
+        public ServerInfo ServerInfo { get; set; }
 
         /// <summary>
         /// 奔跑大赛
