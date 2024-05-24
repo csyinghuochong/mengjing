@@ -16,6 +16,17 @@ namespace ET.Client
         }
     }
 
+    [Event(SceneType.Demo)]
+    public class DataUpdate_OnAccountWarehous_DlgWarehouseRefresh: AEvent<Scene, DataUpdate_OnAccountWarehous>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_OnAccountWarehous args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgWarehouse>()?.View.ES_WarehouseAccount
+                    ?.OnAccountWarehous(args.DataParamString, args.baginfoId);
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof (ES_WarehouseRole))]
     [FriendOf(typeof (ES_WarehouseAccount))]
     [FriendOf(typeof (ES_WarehouseGem))]
@@ -47,9 +58,11 @@ namespace ET.Client
             {
                 case 0:
                     self.View.ES_WarehouseRole.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_WarehouseRole.Refresh();
                     break;
                 case 1:
                     self.View.ES_WarehouseAccount.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_WarehouseAccount.RefreshBagItems();
                     break;
                 case 2:
                     self.View.ES_WarehouseGem.uiTransform.gameObject.SetActive(true);
