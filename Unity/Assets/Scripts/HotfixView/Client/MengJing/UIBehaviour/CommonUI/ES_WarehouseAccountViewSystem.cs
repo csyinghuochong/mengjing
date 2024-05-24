@@ -81,9 +81,9 @@ namespace ET.Client
         public static async ETTask Init(this ES_WarehouseAccount self)
         {
             long accountId = self.Root().GetComponent<PlayerComponent>().AccountId;
-            // C2E_AccountWarehousInfoRequest reuqest = new C2E_AccountWarehousInfoRequest() { AccInfoID = accountId };
-            // E2C_AccountWarehousInfoResponse response =
-            //         (E2C_AccountWarehousInfoResponse)await self.ZoneScene().GetComponent<ClientSenderCompnent>().Call(reuqest);
+            C2M_AccountWarehousInfoRequest reuqest = new() { AccInfoID = accountId };
+            M2C_AccountWarehousInfoResponse response =
+                    (M2C_AccountWarehousInfoResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(reuqest);
 
             self.RefreshHouseItems();
             await ETTask.CompletedTask;
