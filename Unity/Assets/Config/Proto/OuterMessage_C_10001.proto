@@ -5302,3 +5302,19 @@ message T2C_TeamRobotResponse // ITeamActorResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//副本开启
+message M2C_TeamDungeonOpenResult // IMessage
+{
+	TeamInfo TeamInfo = 1;
+}
+
+//玩家准备
+message M2C_TeamDungeonPrepareResult // IMessage
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	TeamInfo TeamInfo = 1;   //TeamInfo == null 超时
+	int32 ErrorCode = 2;
+}

@@ -20738,6 +20738,68 @@ namespace ET
 
 	}
 
+//副本开启
+	[Message(OuterMessage.M2C_TeamDungeonOpenResult)]
+	[MemoryPackable]
+	public partial class M2C_TeamDungeonOpenResult: MessageObject, IMessage
+	{
+		public static M2C_TeamDungeonOpenResult Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TeamDungeonOpenResult), isFromPool) as M2C_TeamDungeonOpenResult; 
+		}
+
+		[MemoryPackOrder(0)]
+		public TeamInfo TeamInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.TeamInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//玩家准备
+	[Message(OuterMessage.M2C_TeamDungeonPrepareResult)]
+	[MemoryPackable]
+	public partial class M2C_TeamDungeonPrepareResult: MessageObject, IMessage
+	{
+		public static M2C_TeamDungeonPrepareResult Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TeamDungeonPrepareResult), isFromPool) as M2C_TeamDungeonPrepareResult; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public TeamInfo TeamInfo { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ErrorCode { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.TeamInfo = default;
+			this.ErrorCode = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -21345,5 +21407,7 @@ namespace ET
 		 public const ushort T2C_TeamLeaveResponse = 10604;
 		 public const ushort C2T_TeamRobotRequest = 10605;
 		 public const ushort T2C_TeamRobotResponse = 10606;
+		 public const ushort M2C_TeamDungeonOpenResult = 10607;
+		 public const ushort M2C_TeamDungeonPrepareResult = 10608;
 	}
 }
