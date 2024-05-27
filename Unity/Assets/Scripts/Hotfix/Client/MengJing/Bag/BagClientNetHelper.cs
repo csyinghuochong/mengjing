@@ -404,6 +404,20 @@ namespace ET.Client
             return response.Error;
         }
 
+        public static async ETTask<int> RequestAccountWarehousInfo(Scene root)
+        {
+            long accountId = root.GetComponent<PlayerComponent>().AccountId;
+            C2M_AccountWarehousInfoRequest reuqest = new() { AccInfoID = accountId };
+            M2C_AccountWarehousInfoResponse response =
+                    (M2C_AccountWarehousInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(reuqest);
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                // HintHelp.GetInstance().DataUpdate(DataType.AccountWarehous, operateType.ToString(), operateId);
+            }
+
+            return response.Error;
+        }
+
         public static async ETTask<int> RquestOpenCangKu(Scene root)
         {
             C2M_RoleOpenCangKuRequest request = new();

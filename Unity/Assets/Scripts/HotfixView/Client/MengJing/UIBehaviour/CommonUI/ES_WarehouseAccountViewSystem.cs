@@ -29,16 +29,9 @@ namespace ET.Client
 
         public static async ETTask OnBtn_ZhengLi(this ES_WarehouseAccount self)
         {
-            await self.SendAccountWarehousOperate(3, 0);
+            await BagClientNetHelper.RequestAccountWarehousOperate(self.Root(), 3, 0);
             ItemHelper.ItemLitSort(self.AccountBagInfos);
             self.RefreshHouseItems();
-        }
-
-        public static async ETTask SendAccountWarehousOperate(this ES_WarehouseAccount self, int operateType, long operateId)
-        {
-            C2M_AccountWarehousOperateRequest request = new() { OperatateType = operateType, OperateBagID = operateId };
-            M2C_AccountWarehousOperateResponse response =
-                    (M2C_AccountWarehousOperateResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
         }
 
         public static void OnAccountWarehous(this ES_WarehouseAccount self, string paramstr, long baginfoId)
@@ -78,18 +71,13 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask Init(this ES_WarehouseAccount self)
+        private static async ETTask Init(this ES_WarehouseAccount self)
         {
-            long accountId = self.Root().GetComponent<PlayerComponent>().AccountId;
-            C2M_AccountWarehousInfoRequest reuqest = new() { AccInfoID = accountId };
-            M2C_AccountWarehousInfoResponse response =
-                    (M2C_AccountWarehousInfoResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(reuqest);
-
+            await BagClientNetHelper.RequestAccountWarehousInfo(self.Root());
             self.RefreshHouseItems();
-            await ETTask.CompletedTask;
         }
 
-        public static void RefreshHouseItems(this ES_WarehouseAccount self)
+        private static void RefreshHouseItems(this ES_WarehouseAccount self)
         {
             int hourseNumber = GlobalValueConfigCategory.Instance.AccountBagMax;
             hourseNumber = self.AccountBagInfos.Count > hourseNumber? self.AccountBagInfos.Count : hourseNumber;
