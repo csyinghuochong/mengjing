@@ -9,14 +9,13 @@ namespace ET.Server
     [MessageLocationHandler(SceneType.Map)]
     public class C2Popularize_RewardHandler : MessageHandler<Scene, C2Popularize_RewardRequest, Popularize2C_RewardResponse>
     {
-        protected override async ETTask Run(Scene scene, C2Popularize_RewardRequest request, Popularize2C_RewardResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2Popularize_RewardRequest request, Popularize2C_RewardResponse response)
         {
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.Popularize, request.ActorId))
+            using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Popularize, request.ActorId))
             {
-                DBPopularizeInfo dBPopularizeInfo = await DBHelper.GetComponentCache<DBPopularizeInfo>(scene.DomainZone(), request.ActorId);
+                DBPopularizeInfo dBPopularizeInfo = await UnitCacheHelper.GetComponent<DBPopularizeInfo>(scene.Root(), request.ActorId);
                 if (dBPopularizeInfo == null)
                 {
-                    reply();
                     return;
                 }
 
@@ -29,7 +28,7 @@ namespace ET.Server
                     {
                         continue;
                     }
-                    UserInfoComponent userInfoComponent = await DBHelper.GetComponentCache<UserInfoComponent>(newZone, unitid);
+                    UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponent<UserInfoComponentS>(scene.Root(), unitid);
                     if (userInfoComponent == null)
                     {
                         continue;
@@ -44,11 +43,11 @@ namespace ET.Server
                 Log.Warning($"推广奖励: {request.ActorId}  {rewardItems.Count}");
 
                 Popularize2M_RewardRequest rewardRequest = new Popularize2M_RewardRequest() { ReardList = rewardItems };
-                M2Popularize_RewardResponse reqEnter = (M2Popularize_RewardResponse)await ActorLocationSenderComponent.Instance.Call(request.ActorId, rewardRequest);
+                M2Popularize_RewardResponse reqEnter = (M2Popularize_RewardResponse)await scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(request.ActorId, rewardRequest);
                 //(M2Popularize_RewardResponse)await MessageHelper.CallLocationActor(request.ActorId, rewardRequest);
                 if (reqEnter.Error == ErrorCode.ERR_Success)
                 {
-                    await DBHelper.SaveComponentCache(scene.DomainZone(), request.ActorId, dBPopularizeInfo);
+                    await UnitCacheHelper.SaveComponent(scene.Root(), request.ActorId, dBPopularizeInfo);
                 }
 
             }

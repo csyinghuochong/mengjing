@@ -861,7 +861,7 @@ namespace  ET
             retunrnValue = (float)(System.Math.Round(retunrnValue, 3));
             return retunrnValue;
         }
-
+        
         //宠物守护
         public static float GetPetShouHuPro(int mainValue, int fightValue)
         {
