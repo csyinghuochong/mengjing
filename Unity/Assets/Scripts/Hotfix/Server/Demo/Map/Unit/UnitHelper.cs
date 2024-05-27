@@ -539,6 +539,16 @@ namespace ET.Server
             return self.Type == UnitType.Player && self.GetComponent<UserInfoComponentS>().UserInfo.RobotId > 0;
         }
         
+        public static bool IsJingLingMonster(this Unit self)
+        {
+            if (self.Type != UnitType.Monster)
+            {
+                return false;
+            }
+            int sonType = MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterSonType;
+            return sonType == 58 || sonType == 59;
+        }
+        
         public static List<Unit> GetUnitListByCamp(Scene scene, int unitType, int camp)
         {
             List<Unit> units = new List<Unit>();
