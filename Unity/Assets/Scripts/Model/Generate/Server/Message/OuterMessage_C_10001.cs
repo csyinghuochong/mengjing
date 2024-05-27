@@ -18474,6 +18474,63 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_ReddotReadResponse))]
+	[Message(OuterMessage.C2M_ReddotReadRequest)]
+	[MemoryPackable]
+	public partial class C2M_ReddotReadRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ReddotReadRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ReddotReadRequest), isFromPool) as C2M_ReddotReadRequest; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ReddotType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ReddotType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ReddotReadResponse)]
+	[MemoryPackable]
+	public partial class M2C_ReddotReadResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ReddotReadResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ReddotReadResponse), isFromPool) as M2C_ReddotReadResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -19010,5 +19067,7 @@ namespace ET
 		 public const ushort C2M_OneChallengeRequest = 10533;
 		 public const ushort M2C_OneChallengeResponse = 10534;
 		 public const ushort M2C_OneChallenge = 10535;
+		 public const ushort C2M_ReddotReadRequest = 10536;
+		 public const ushort M2C_ReddotReadResponse = 10537;
 	}
 }

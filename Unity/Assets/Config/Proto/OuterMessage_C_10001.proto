@@ -4719,3 +4719,17 @@ message M2C_OneChallenge // IMessage
 	int64 OtherId = 2;
 	string OtherName = 3;
 }
+
+//ResponseType M2C_ReddotReadResponse
+message C2M_ReddotReadRequest // ILocationRequest
+{
+	int32 RpcId = 1;
+	int32 ReddotType = 2;
+}
+
+message M2C_ReddotReadResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
