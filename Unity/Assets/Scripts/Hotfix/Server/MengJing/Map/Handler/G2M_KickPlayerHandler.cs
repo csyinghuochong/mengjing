@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class G2M_KickPlayerHandler : AMActorLocationHandler<Scene, G2M_KickPlayerRequest>
+    [MessageLocationHandler(SceneType.Map)]
+    public class G2M_KickPlayerHandler : MessageHandler<Scene, G2M_KickPlayerRequest>
     {
         protected override async ETTask Run(Scene scene, G2M_KickPlayerRequest request)
         {
@@ -26,7 +25,7 @@ namespace ET
                 //    Console.WriteLine($"G2M_KickPlayerRequest: dBSaveComponent == null");
                 //    unit.GetParent<UnitComponent>().Remove(unit.Id);
                 //}
-                unit.OnKickPlayer(false).Coroutine();
+                //unit.OnKickPlayer(false).Coroutine();
             }
             else
             {

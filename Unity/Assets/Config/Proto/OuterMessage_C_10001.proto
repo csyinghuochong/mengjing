@@ -4793,3 +4793,18 @@ message M2C_UnitInfoResponse // ILocationResponse
 	repeated int32 Ks = 6;
 	repeated int64 Vs = 7;
 }
+
+//ResponseType M2C_XiuLianCenterResponse
+message C2M_XiuLianCenterRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 XiuLianType = 1;
+}
+
+message M2C_XiuLianCenterResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

@@ -18766,6 +18766,67 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_XiuLianCenterResponse))]
+	[Message(OuterMessage.C2M_XiuLianCenterRequest)]
+	[MemoryPackable]
+	public partial class C2M_XiuLianCenterRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_XiuLianCenterRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_XiuLianCenterRequest), isFromPool) as C2M_XiuLianCenterRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int XiuLianType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.XiuLianType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_XiuLianCenterResponse)]
+	[MemoryPackable]
+	public partial class M2C_XiuLianCenterResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_XiuLianCenterResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_XiuLianCenterResponse), isFromPool) as M2C_XiuLianCenterResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -19311,5 +19372,7 @@ namespace ET
 		 public const ushort M2C_ShareSucessResponse = 10542;
 		 public const ushort C2M_UnitInfoRequest = 10543;
 		 public const ushort M2C_UnitInfoResponse = 10544;
+		 public const ushort C2M_XiuLianCenterRequest = 10545;
+		 public const ushort M2C_XiuLianCenterResponse = 10546;
 	}
 }

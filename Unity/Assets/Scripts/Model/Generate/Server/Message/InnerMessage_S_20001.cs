@@ -6389,6 +6389,171 @@ namespace ET
 
 	}
 
+//踢出掉线玩家
+	[Message(InnerMessage.G2M_KickPlayerRequest)]
+	[MemoryPackable]
+	public partial class G2M_KickPlayerRequest: MessageObject, IMessage
+	{
+		public static G2M_KickPlayerRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(G2M_KickPlayerRequest), isFromPool) as G2M_KickPlayerRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long SceneId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.SceneId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2G_RechargeResultResponse))]
+	[Message(InnerMessage.G2M_RechargeResultRequest)]
+	[MemoryPackable]
+	public partial class G2M_RechargeResultRequest: MessageObject, IRequest
+	{
+		public static G2M_RechargeResultRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(G2M_RechargeResultRequest), isFromPool) as G2M_RechargeResultRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long Id { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int RechargeNumber { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string OrderInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Id = default;
+			this.RechargeNumber = default;
+			this.OrderInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.M2G_RechargeResultResponse)]
+	[MemoryPackable]
+	public partial class M2G_RechargeResultResponse: MessageObject, IResponse
+	{
+		public static M2G_RechargeResultResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2G_RechargeResultResponse), isFromPool) as M2G_RechargeResultResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2M_AllPlayerListResponse))]
+	[Message(InnerMessage.M2M_AllPlayerListRequest)]
+	[MemoryPackable]
+	public partial class M2M_AllPlayerListRequest: MessageObject, IRequest
+	{
+		public static M2M_AllPlayerListRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2M_AllPlayerListRequest), isFromPool) as M2M_AllPlayerListRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.M2M_AllPlayerListResponse)]
+	[MemoryPackable]
+	public partial class M2M_AllPlayerListResponse: MessageObject, IResponse
+	{
+		public static M2M_AllPlayerListResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2M_AllPlayerListResponse), isFromPool) as M2M_AllPlayerListResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<long> AllPlayers { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.AllPlayers.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -6579,5 +6744,10 @@ namespace ET
 		 public const ushort P2M_StallSellResponse = 20187;
 		 public const ushort M2P_StallXiaJiaRequest = 20188;
 		 public const ushort P2M_StallXiaJiaResponse = 20189;
+		 public const ushort G2M_KickPlayerRequest = 20190;
+		 public const ushort G2M_RechargeResultRequest = 20191;
+		 public const ushort M2G_RechargeResultResponse = 20192;
+		 public const ushort M2M_AllPlayerListRequest = 20193;
+		 public const ushort M2M_AllPlayerListResponse = 20194;
 	}
 }

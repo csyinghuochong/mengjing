@@ -1636,3 +1636,59 @@ message P2M_StallXiaJiaResponse // IResponse
 	string Message = 92;
 	PaiMaiItemInfo PaiMaiItemInfo = 2;
 }
+
+//踢出掉线玩家
+message G2M_KickPlayerRequest // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitId = 2;
+	int64 SceneId = 3;
+}
+
+//ResponseType M2G_RechargeResultResponse
+message G2M_RechargeResultRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 Id = 1;
+	int32 RechargeNumber = 2;
+	string OrderInfo = 4;
+}
+
+message M2G_RechargeResultResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2M_AllPlayerListResponse
+message M2M_AllPlayerListRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2M_AllPlayerListResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated int64 AllPlayers = 1;
+}
+
+//ResponseType M2Popularize_RewardResponse
+message Popularize2M_RewardRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	repeated RewardItem ReardList = 5;		//奖励列表
+}
+
+message M2Popularize_RewardResponse // IResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}

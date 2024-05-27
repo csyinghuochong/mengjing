@@ -1,15 +1,13 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class G2M_RechargeRequestHandler : AMActorRpcHandler<Unit, G2M_RechargeResultRequest, M2G_RechargeResultResponse>
+    [MessageLocationHandler(SceneType.Map)]
+    public class G2M_RechargeRequestHandler : MessageHandler<Unit, G2M_RechargeResultRequest, M2G_RechargeResultResponse>
     {
-        protected override async ETTask Run(Unit unit, G2M_RechargeResultRequest request, M2G_RechargeResultResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, G2M_RechargeResultRequest request, M2G_RechargeResultResponse response)
         {
-            RechargeHelp.SendDiamondToUnit(unit, request.RechargeNumber, request.OrderInfo);
-            reply();
+            //RechargeHelp.SendDiamondToUnit(unit, request.RechargeNumber, request.OrderInfo);
             await ETTask.CompletedTask;
         }
     }

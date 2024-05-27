@@ -28,5 +28,11 @@ namespace ET
         {
             return self.Units;
         }
+        
+        public static List<long> GetAllIds(this UnitComponent self)
+        {
+            List<long> ids = new List<long>();
+            return ids;
+        }
     }
 }
