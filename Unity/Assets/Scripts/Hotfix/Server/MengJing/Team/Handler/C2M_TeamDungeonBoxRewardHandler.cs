@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2M_TeamDungeonBoxRewardHandler : AMActorLocationRpcHandler<Unit, C2M_TeamDungeonBoxRewardRequest, M2C_TeamDungeonBoxRewardResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_TeamDungeonBoxRewardHandler : MessageLocationHandler<Unit, C2M_TeamDungeonBoxRewardRequest, M2C_TeamDungeonBoxRewardResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_TeamDungeonBoxRewardRequest request, M2C_TeamDungeonBoxRewardResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_TeamDungeonBoxRewardRequest request, M2C_TeamDungeonBoxRewardResponse response)
         {
-            Scene scene = unit.DomainScene();
+            Scene scene = unit.Scene();
             if (scene.InstanceId == 0 || scene.IsDisposed)
             {
                 LogHelper.LogDebug($"TeamDungeonBoxReward scene.InstanceId == 0 {unit.Id}");
-                reply();
                 return;
             }
 
@@ -21,7 +20,6 @@ namespace ET
             if (teamDungeonComponent == null)
             {
                 LogHelper.LogDebug($"TeamDungeonBoxReward scene.InstanceId == 0 {unit.Id}");
-                reply();
                 return;
             }
 
@@ -29,7 +27,6 @@ namespace ET
             {
                 LogHelper.LogDebug($"TeamDungeonBoxReward[已翻牌]: {unit.Id} {request.BoxIndex}");
                 response.Error = ErrorCode.ERR_AlreadyReceived;
-                reply();
                 return;
             }
 
@@ -37,7 +34,7 @@ namespace ET
             teamDungeonComponent.BoxReward.Add(request.BoxIndex);
 
             ////背包已经直接发邮件，response加一个状态。 客户端弹窗提示“由于您背包已满通关宝箱的奖励已经自动发放进您的邮箱中,请注意查收”
-            if (unit.GetComponent<BagComponent>().GetBagLeftCell() < 1)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < 1)
             {
                 response.Mail = 1;
                 List<BagInfo> bagInfos = new List<BagInfo>();
@@ -49,25 +46,24 @@ namespace ET
                 mailInfo.MailId = IdGenerater.Instance.GenerateId();
                 mailInfo.ItemList.AddRange(bagInfos);
 
-                MailHelp.SendUserMail( unit.DomainZone(), unit.Id, mailInfo).Coroutine();
+                MailHelp.SendUserMail( unit.Root(), unit.Id, mailInfo).Coroutine();
             }
             else
             {
                 List<RewardItem> rewardItems = new List<RewardItem>() { request.RewardItem };
-                unit.GetComponent<BagComponent>().OnAddItemData(rewardItems, "", $"{ItemGetWay.FubenGetReward}_{TimeHelper.ServerNow()}");
+                unit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, "", $"{ItemGetWay.FubenGetReward}_{TimeHelper.ServerNow()}");
             }
 
-            UserInfo userInfo = unit.GetComponent<UserInfoComponent>().UserInfo;
+            UserInfo userInfo = unit.GetComponent<UserInfoComponentS>().UserInfo;
             M2C_TeamDungeonBoxRewardResult m2C_HorseNoticeInfo = new M2C_TeamDungeonBoxRewardResult()
             { 
                 UserId = userInfo.UserId,
                 BoxIndex = request.BoxIndex,
                 PlayerName = userInfo.Name
             };
-            List<Unit> allPlayer = UnitHelper.GetUnitList(unit.DomainScene(), UnitType.Player);
-            MessageHelper.SendToClient(allPlayer, m2C_HorseNoticeInfo);
-
-            reply();
+            List<Unit> allPlayer = UnitHelper.GetUnitList(unit.Scene(), UnitType.Player);
+            MapMessageHelper.SendToClient(allPlayer, m2C_HorseNoticeInfo);
+            
             await ETTask.CompletedTask;
         }
     }

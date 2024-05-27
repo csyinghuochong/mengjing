@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_TeamPickHandlerr : AMActorLocationHandler<Unit, C2M_TeamPickRequest>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_TeamPickHandlerr : MessageLocationHandler<Unit, C2M_TeamPickRequest>
     {
         protected override async ETTask Run(Unit unit, C2M_TeamPickRequest request)
         {
-            TeamDungeonComponent teamDungeonComponent = unit.DomainScene().GetComponent<TeamDungeonComponent>();
+            TeamDungeonComponent teamDungeonComponent = unit.Scene().GetComponent<TeamDungeonComponent>();
             if (teamDungeonComponent == null)
             {
                 return;

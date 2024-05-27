@@ -5049,3 +5049,108 @@ message S2C_SoloMyInfoResponse // ISoloActorResponse
 	int32 FailTime = 3;
 	repeated SoloPlayerResultInfo SoloPlayerResultInfoList = 4;
 }
+
+//副本选择奖励
+//ResponseType M2C_TeamDungeonBoxRewardResponse
+message C2M_TeamDungeonBoxRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int32 BoxIndex = 1;
+	RewardItem RewardItem = 2;
+}
+
+message M2C_TeamDungeonBoxRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 Mail = 1;
+}
+
+//创建组队副本
+//ResponseType M2C_TeamDungeonCreateResponse
+message C2M_TeamDungeonCreateRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int32 FubenId = 1;
+	TeamPlayerInfo TeamPlayerInfo = 2;
+	int32 FubenType = 3;
+}
+
+message M2C_TeamDungeonCreateResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	TeamInfo TeamInfo = 1;
+	int32 FubenType = 3;
+}
+
+//开启组队副本
+//ResponseType M2C_TeamDungeonOpenResponse
+message C2M_TeamDungeonOpenRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 UserID = 1;
+	int32 FubenType = 2;
+}
+
+message M2C_TeamDungeonOpenResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 FubenType = 3;
+}
+
+//请求准备
+//ResponseType M2C_TeamDungeonPrepareResponse
+message C2M_TeamDungeonPrepareRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	TeamInfo TeamInfo = 1;
+	int32 Prepare = 2;   //0未选择 1同意 2拒绝
+}
+
+message M2C_TeamDungeonPrepareResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_TeamerPositionResponse
+message C2M_TeamerPositionRequest //ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_TeamerPositionResponse //ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated UnitInfo UnitList = 1;
+}
+
+message C2M_TeamPickRequest    // ILocationMessage
+{
+	int32 RpcId = 90;
+	DropInfo DropItem = 1;
+	int32 Need = 2;      //1需求 2丢弃
+}
+
+message M2C_TeamDungeonBoxRewardResult // IMessage
+{
+	int64 UserId = 1;
+	int32 BoxIndex = 2;
+	string PlayerName =     3;
+}

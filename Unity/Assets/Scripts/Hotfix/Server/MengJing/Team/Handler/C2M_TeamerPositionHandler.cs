@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 
 
-namespace ET
+namespace ET.Server
 {
 
     [ActorMessageHandler]
-    public class C2M_TeamerPositionHandler : AMActorLocationRpcHandler<Unit, C2M_TeamerPositionRequest, M2C_TeamerPositionResponse>
+    public class C2M_TeamerPositionHandler : MessageLocationHandler<Unit, C2M_TeamerPositionRequest, M2C_TeamerPositionResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_TeamerPositionRequest request, M2C_TeamerPositionResponse response, Action reply)
         {

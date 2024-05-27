@@ -7293,6 +7293,228 @@ namespace ET
 
 	}
 
+//创建组队副本
+	[ResponseType(nameof(T2M_TeamDungeonCreateResponse))]
+	[Message(InnerMessage.M2T_TeamDungeonCreateRequest)]
+	[MemoryPackable]
+	public partial class M2T_TeamDungeonCreateRequest: MessageObject, IRequest
+	{
+		public static M2T_TeamDungeonCreateRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2T_TeamDungeonCreateRequest), isFromPool) as M2T_TeamDungeonCreateRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int FubenId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public TeamPlayerInfo TeamPlayerInfo { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int FubenType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.FubenId = default;
+			this.TeamPlayerInfo = default;
+			this.FubenType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.T2M_TeamDungeonCreateResponse)]
+	[MemoryPackable]
+	public partial class T2M_TeamDungeonCreateResponse: MessageObject, IResponse
+	{
+		public static T2M_TeamDungeonCreateResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(T2M_TeamDungeonCreateResponse), isFromPool) as T2M_TeamDungeonCreateResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public TeamInfo TeamInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.TeamInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//开启组队副本
+	[ResponseType(nameof(T2M_TeamDungeonOpenResponse))]
+	[Message(InnerMessage.M2T_TeamDungeonOpenRequest)]
+	[MemoryPackable]
+	public partial class M2T_TeamDungeonOpenRequest: MessageObject, IRequest
+	{
+		public static M2T_TeamDungeonOpenRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2T_TeamDungeonOpenRequest), isFromPool) as M2T_TeamDungeonOpenRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UserID { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int FubenType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UserID = default;
+			this.FubenType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.T2M_TeamDungeonOpenResponse)]
+	[MemoryPackable]
+	public partial class T2M_TeamDungeonOpenResponse: MessageObject, IResponse
+	{
+		public static T2M_TeamDungeonOpenResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(T2M_TeamDungeonOpenResponse), isFromPool) as T2M_TeamDungeonOpenResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int FubenType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.FubenType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//请求准备
+	[ResponseType(nameof(T2M_TeamDungeonPrepareResponse))]
+	[Message(InnerMessage.M2T_TeamDungeonPrepareRequest)]
+	[MemoryPackable]
+	public partial class M2T_TeamDungeonPrepareRequest: MessageObject, IRequest
+	{
+		public static M2T_TeamDungeonPrepareRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2T_TeamDungeonPrepareRequest), isFromPool) as M2T_TeamDungeonPrepareRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long TeamId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitID { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Prepare { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int ErrorCode { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.TeamId = default;
+			this.UnitID = default;
+			this.Prepare = default;
+			this.ErrorCode = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.T2M_TeamDungeonPrepareResponse)]
+	[MemoryPackable]
+	public partial class T2M_TeamDungeonPrepareResponse: MessageObject, IResponse
+	{
+		public static T2M_TeamDungeonPrepareResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(T2M_TeamDungeonPrepareResponse), isFromPool) as T2M_TeamDungeonPrepareResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public TeamInfo TeamInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.TeamInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -7510,5 +7732,11 @@ namespace ET
 		 public const ushort S2M_SoloMatchResponse = 20214;
 		 public const ushort M2S_SoloEnterRequest = 20215;
 		 public const ushort S2M_SoloEnterResponse = 20216;
+		 public const ushort M2T_TeamDungeonCreateRequest = 20217;
+		 public const ushort T2M_TeamDungeonCreateResponse = 20218;
+		 public const ushort M2T_TeamDungeonOpenRequest = 20219;
+		 public const ushort T2M_TeamDungeonOpenResponse = 20220;
+		 public const ushort M2T_TeamDungeonPrepareRequest = 20221;
+		 public const ushort T2M_TeamDungeonPrepareResponse = 20222;
 	}
 }

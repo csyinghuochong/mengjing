@@ -1862,3 +1862,64 @@ message S2M_SoloEnterResponse // IResponse
 	string Message = 92;
 	int64 FubenInstanceId = 1;
 }
+
+
+//创建组队副本
+//ResponseType T2M_TeamDungeonCreateResponse
+message M2T_TeamDungeonCreateRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int32 FubenId = 1;
+	TeamPlayerInfo TeamPlayerInfo = 2;
+	int32 FubenType = 3;
+}
+
+message T2M_TeamDungeonCreateResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	TeamInfo TeamInfo = 1;
+}
+
+//开启组队副本
+//ResponseType T2M_TeamDungeonOpenResponse
+message M2T_TeamDungeonOpenRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 UserID = 1;
+	int32 FubenType = 3;
+}
+
+message T2M_TeamDungeonOpenResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 FubenType = 3;
+}
+
+//请求准备
+//ResponseType T2M_TeamDungeonPrepareResponse
+message M2T_TeamDungeonPrepareRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 TeamId = 1;
+	int64 UnitID = 2;
+	int32 Prepare = 3;
+	int32 ErrorCode = 4;
+}
+
+message T2M_TeamDungeonPrepareResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	TeamInfo TeamInfo = 1;
+}

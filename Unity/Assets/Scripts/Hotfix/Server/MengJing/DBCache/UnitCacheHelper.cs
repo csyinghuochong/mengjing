@@ -207,6 +207,11 @@ namespace ET.Server
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Activity.ToString()).ActorId;
         }
 
+        public static ActorId GetTeamServerId(int zone)
+        { 
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Team.ToString()).ActorId;
+        }
+
         public static ActorId GetFriendId(int zone)
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Friend.ToString()).ActorId;

@@ -1,26 +1,24 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2M_TeamDungeonPrepareHandler : AMActorLocationRpcHandler<Unit, C2M_TeamDungeonPrepareRequest, M2C_TeamDungeonPrepareResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_TeamDungeonPrepareHandler : MessageLocationHandler<Unit, C2M_TeamDungeonPrepareRequest, M2C_TeamDungeonPrepareResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_TeamDungeonPrepareRequest request, M2C_TeamDungeonPrepareResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_TeamDungeonPrepareRequest request, M2C_TeamDungeonPrepareResponse response)
         {
 			int sceneid = request.TeamInfo.SceneId;
 			if (sceneid == 0)
 			{
-				reply();
 				return;
 			}
 
-			UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
+			UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
 			SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
 			if (sceneConfig.DayEnterNum > 0 && sceneConfig.DayEnterNum <= userInfoComponent.GetSceneFubenTimes(sceneid))
 			{
 				response.Error = ErrorCode.ERR_TimesIsNot;
-				reply();
 				return;
 			}
 
@@ -29,7 +27,7 @@ namespace ET
 			Unit leader = unit.GetParent<UnitComponent>().Get(request.TeamInfo.TeamId);
 			if (leader != null)
 			{
-				BagComponent bagComponent = leader.GetComponent<BagComponent>();
+				BagComponentS bagComponent = leader.GetComponent<BagComponentS>();
 				if (request.TeamInfo.FubenType == TeamFubenType.ShenYuan && bagComponent.GetItemNumber(ComHelp.ShenYuanCostId) < 1)
 				{
 					errorcode = ErrorCode.Err_ShenYuanItemError;
@@ -45,8 +43,8 @@ namespace ET
             }
 
 			//判断副本次数
-			long teamServerId = DBHelper.GetTeamServerId(unit.DomainZone());
-			T2M_TeamDungeonPrepareResponse createResponse = (T2M_TeamDungeonPrepareResponse)await MessageHelper.CallActor(teamServerId, new M2T_TeamDungeonPrepareRequest()
+			ActorId teamServerId = UnitCacheHelper.GetTeamServerId(unit.Zone());
+			T2M_TeamDungeonPrepareResponse createResponse = (T2M_TeamDungeonPrepareResponse)await unit.Root().GetComponent<MessageSender>().Call(teamServerId, new M2T_TeamDungeonPrepareRequest()
 			{
 				TeamId = request.TeamInfo.TeamId,
 				UnitID = unit.Id,
@@ -54,7 +52,6 @@ namespace ET
 				ErrorCode = errorcode
 			});
 
-			reply();
 			await ETTask.CompletedTask;
         }
     }
