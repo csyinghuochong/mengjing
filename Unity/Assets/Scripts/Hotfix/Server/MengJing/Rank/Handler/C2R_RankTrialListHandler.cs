@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2R_RankTrialListHandler : AMActorRpcHandler<Scene, C2R_RankTrialListRequest, R2C_RankTrialListResponse>
+    [MessageHandler(SceneType.Rank)]
+    public class C2R_RankTrialListHandler : MessageHandler<Scene, C2R_RankTrialListRequest, R2C_RankTrialListResponse>
     {
 
-        protected override async ETTask Run(Scene scene, C2R_RankTrialListRequest request, R2C_RankTrialListResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2R_RankTrialListRequest request, R2C_RankTrialListResponse response)
         {
             long timeNow = TimeHelper.ServerNow();
             RankSceneComponent rankComponent = scene.GetComponent<RankSceneComponent>();
@@ -19,7 +19,6 @@ namespace ET
             }
             else
             {
-                long dbCacheId = DBHelper.GetDbCacheId(scene.DomainZone());
                 List<KeyValuePairLong> ranklist = rankComponent.DBRankInfo.rankingTrial;
               
                 List<long> idlist = new List<long>();
@@ -34,12 +33,9 @@ namespace ET
                     }
 
                     idlist.Add(ranklist[i].KeyId);
-                    D2G_GetComponent d2GGetUnit = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = ranklist[i].KeyId, Component = DBHelper.UserInfoComponent });
-                    if (d2GGetUnit.Component == null)
-                    {
-                        continue;
-                    }
-                    UserInfoComponent userinfoComponent = (d2GGetUnit.Component as UserInfoComponent);
+
+                    UserInfoComponentS userinfoComponent =
+                            await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), ranklist[i].KeyId);
                     response.RankList.Add(new RankingTrialInfo()
                     { 
                         UserId = ranklist[i].KeyId,
@@ -65,8 +61,7 @@ namespace ET
                     }
                 }
             }
-
-            reply();
+            
             await ETTask.CompletedTask;
         }
     }

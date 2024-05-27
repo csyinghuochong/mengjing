@@ -1,17 +1,15 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2R_WorldLvHandler : AMActorRpcHandler<Scene, C2R_WorldLvRequest, R2C_WorldLvResponse>
+    [MessageHandler(SceneType.Rank)]
+    public class C2R_WorldLvHandler : MessageHandler<Scene, C2R_WorldLvRequest, R2C_WorldLvResponse>
     {
-        protected override async ETTask Run(Scene scene, C2R_WorldLvRequest request, R2C_WorldLvResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2R_WorldLvRequest request, R2C_WorldLvResponse response)
         {
             RankSceneComponent rankComponent = scene.GetComponent<RankSceneComponent>();
             response.ServerInfo = rankComponent.DBServerInfo.ServerInfo;
-
-            reply();
             await ETTask.CompletedTask;
         }
     }

@@ -1,14 +1,13 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2R_RankUnionRaceHandler : AMActorRpcHandler<Scene, C2R_RankUnionRaceRequest, R2C_RankUnionRaceResponse>
+    [MessageHandler( SceneType.Rank)]
+    public class C2R_RankUnionRaceHandler : MessageHandler<Scene, C2R_RankUnionRaceRequest, R2C_RankUnionRaceResponse>
     {
-        protected override async ETTask Run(Scene scene, C2R_RankUnionRaceRequest request, R2C_RankUnionRaceResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2R_RankUnionRaceRequest request, R2C_RankUnionRaceResponse response)
         {
             response.RankList = scene.GetComponent<RankSceneComponent>().DBRankInfo.rankUnionRace;
-            reply();
             await ETTask.CompletedTask;
         }
     }
