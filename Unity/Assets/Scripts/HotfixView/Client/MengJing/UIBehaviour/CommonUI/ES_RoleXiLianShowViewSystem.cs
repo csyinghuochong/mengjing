@@ -183,7 +183,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnXiLianButton(this ES_RoleXiLianShow self, int times)
+        private static async ETTask OnXiLianButton(this ES_RoleXiLianShow self, int times)
         {
             if (self.XilianBagInfo == null)
             {
@@ -234,10 +234,8 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int oldXiLianDu = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemXiLianDu);
 
-            C2M_ItemXiLianRequest c2M_ItemHuiShouRequest = new() { OperateBagID = bagInfo.BagInfoID, Times = times };
-            M2C_ItemXiLianResponse r2c_roleEquip =
-                    (M2C_ItemXiLianResponse)await self.Root().GetComponent<SessionComponent>().Session.Call(c2M_ItemHuiShouRequest);
-            if (r2c_roleEquip.Error != 0)
+            int error = await BagClientNetHelper.RquestItemXiLian(self.Root(), bagInfo.BagInfoID, times);
+            if (error != 0)
             {
                 return;
             }
