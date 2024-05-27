@@ -1739,3 +1739,24 @@ message R2A_DeleteRoleData // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType Rank2G_EnterRank
+message G2Rank_EnterRank //IRequest
+{
+	int32 RpcId = 90;
+	string Name = 1;
+	int64 UnitId = 2;
+	int32 Occ = 3;
+}
+
+message Rank2G_EnterRank //IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 RankId = 1;
+	int32 PetRankId = 2;
+	int32 SoloRankId = 3;
+	int32 TrialRankId = 4;
+	int32 OccRankId = 5;
+}

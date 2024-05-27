@@ -1,16 +1,14 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2R_DBServerInfoHandler : AMActorRpcHandler<Scene, M2R_DBServerInfoRequest, R2M_DBServerInfoResponse>
+    [MessageHandler(SceneType.Rank)]
+    public class M2R_DBServerInfoHandler : MessageHandler<Scene, M2R_DBServerInfoRequest, R2M_DBServerInfoResponse>
     {
-        protected override async ETTask Run(Scene scene, M2R_DBServerInfoRequest request, R2M_DBServerInfoResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2R_DBServerInfoRequest request, R2M_DBServerInfoResponse response)
         {
             DBServerInfo dBServerInfo = scene.GetComponent<RankSceneComponent>().DBServerInfo;
             response.ServerInfo = dBServerInfo.ServerInfo;
-           
-            reply();
             await ETTask.CompletedTask;
         }
     }

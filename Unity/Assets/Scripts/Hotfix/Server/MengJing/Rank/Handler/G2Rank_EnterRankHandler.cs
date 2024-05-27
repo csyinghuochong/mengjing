@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class G2Rank_EnterRankHandler : AMActorRpcHandler<Scene, G2Rank_EnterRank, Rank2G_EnterRank>
+    [MessageHandler(SceneType.Rank)]
+    public class G2Rank_EnterRankHandler : MessageHandler<Scene, G2Rank_EnterRank, Rank2G_EnterRank>
     {
-        protected override async ETTask Run(Scene scene, G2Rank_EnterRank request, Rank2G_EnterRank response, Action reply)
+        protected override async ETTask Run(Scene scene, G2Rank_EnterRank request, Rank2G_EnterRank response)
         {
             RankSceneComponent rankSceneComponent = scene.GetComponent<RankSceneComponent>();
             response.RankId = rankSceneComponent.GetCombatRank(request.UnitId);
@@ -23,7 +23,7 @@ namespace ET
             {
                 response.SoloRankId = 0;
             }
-            reply();
+
             await ETTask.CompletedTask;
         }
     }

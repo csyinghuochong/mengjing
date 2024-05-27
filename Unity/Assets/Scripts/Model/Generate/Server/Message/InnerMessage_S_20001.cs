@@ -6800,6 +6800,91 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Rank2G_EnterRank))]
+	[Message(InnerMessage.G2Rank_EnterRank)]
+	[MemoryPackable]
+	public partial class G2Rank_EnterRank: MessageObject, IRequest
+	{
+		public static G2Rank_EnterRank Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(G2Rank_EnterRank), isFromPool) as G2Rank_EnterRank; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string Name { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Occ { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Name = default;
+			this.UnitId = default;
+			this.Occ = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.Rank2G_EnterRank)]
+	[MemoryPackable]
+	public partial class Rank2G_EnterRank: MessageObject, IResponse
+	{
+		public static Rank2G_EnterRank Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Rank2G_EnterRank), isFromPool) as Rank2G_EnterRank; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RankId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int PetRankId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int SoloRankId { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int TrialRankId { get; set; }
+
+		[MemoryPackOrder(4)]
+		public int OccRankId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RankId = default;
+			this.PetRankId = default;
+			this.SoloRankId = default;
+			this.TrialRankId = default;
+			this.OccRankId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -7003,5 +7088,7 @@ namespace ET
 		 public const ushort Popularize2C_UploadResponse = 20200;
 		 public const ushort A2R_DeleteRoleData = 20201;
 		 public const ushort R2A_DeleteRoleData = 20202;
+		 public const ushort G2Rank_EnterRank = 20203;
+		 public const ushort Rank2G_EnterRank = 20204;
 	}
 }

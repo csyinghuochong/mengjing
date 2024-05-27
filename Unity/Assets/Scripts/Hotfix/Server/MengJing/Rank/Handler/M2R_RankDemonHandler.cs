@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2R_RankDemonHandler : AMActorRpcHandler<Scene, M2R_RankDemonRequest, R2M_RankDemonResponse>
+    [MessageHandler(SceneType.Rank)]
+    public class M2R_RankDemonHandler : MessageHandler<Scene, M2R_RankDemonRequest, R2M_RankDemonResponse>
     {
-        protected override async ETTask Run(Scene scene, M2R_RankDemonRequest request, R2M_RankDemonResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2R_RankDemonRequest request, R2M_RankDemonResponse response)
         {
 
             RankSceneComponent rankSceneComponent = scene.GetComponent<RankSceneComponent>();
@@ -44,7 +44,6 @@ namespace ET
                 }
             }
             response.RankList = rankDemonList;
-            reply();
             await ETTask.CompletedTask;
         }
     }

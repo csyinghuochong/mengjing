@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class M2R_PetRankUpdateHandler : AMActorRpcHandler<Scene, M2R_PetRankUpdateRequest, R2M_PetRankUpdateResponse>
+    [MessageHandler(SceneType.Rank)]
+    public class M2R_PetRankUpdateHandler : MessageHandler<Scene, M2R_PetRankUpdateRequest, R2M_PetRankUpdateResponse>
     {
 
-        protected override async ETTask Run(Scene scene, M2R_PetRankUpdateRequest request, R2M_PetRankUpdateResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2R_PetRankUpdateRequest request, R2M_PetRankUpdateResponse response)
         {
             if (request.Win == CombatResultEnum.Win)
             {
@@ -15,8 +15,6 @@ namespace ET
             }
            
             response.SelfRank = scene.GetComponent<RankSceneComponent>().GetPetRank(request.RankPetInfo.UserId);
-
-            reply();
             await ETTask.CompletedTask;
         }
 
