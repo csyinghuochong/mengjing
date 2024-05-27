@@ -30,6 +30,15 @@
         
     }
     
+    public interface ITeamActorRequest: IRequest
+    {
+        
+    }
+    
+    public interface ITeamActorResponse: IResponse
+    {
+        
+    }
     
     public interface ISoloActorRequest: IRequest
     {

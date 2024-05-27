@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
     /// <summary>
     /// 同意组队邀请
     /// </summary>
-    [ActorMessageHandler]
-    public class C2T_TeamAgreeHandler : AMActorRpcHandler<Scene, C2T_TeamAgreeRequest, T2C_TeamAgreeResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2T_TeamAgreeHandler : MessageHandler<Scene, C2T_TeamAgreeRequest, T2C_TeamAgreeResponse>
     {
 
-        protected override async ETTask Run(Scene scene, C2T_TeamAgreeRequest request, T2C_TeamAgreeResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2T_TeamAgreeRequest request, T2C_TeamAgreeResponse response)
         {
             TeamSceneComponent teamSceneComponent = scene.GetComponent<TeamSceneComponent>();
             TeamInfo teamInfo = teamSceneComponent.GetTeamInfo(request.TeamPlayerInfo_1.UserID);
@@ -18,7 +18,6 @@ namespace ET
             //不是队长。无法开组
             if (teamInfo != null && teamInfo.TeamId != request.TeamPlayerInfo_1.UserID)
             {
-                reply();
                 return;
             }
             if (teamInfo == null)
@@ -40,7 +39,6 @@ namespace ET
             }
 
             teamSceneComponent.SyncTeamInfo(teamInfo, teamInfo.PlayerList).Coroutine();
-            reply();
             await ETTask.CompletedTask;
         }
     }

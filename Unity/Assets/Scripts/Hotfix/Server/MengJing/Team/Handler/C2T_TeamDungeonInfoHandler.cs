@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2T_TeamDungeonInfoHandler : AMActorRpcHandler<Scene, C2T_TeamDungeonInfoRequest, T2C_TeamDungeonInfoResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2T_TeamDungeonInfoHandler : MessageHandler<Scene, C2T_TeamDungeonInfoRequest, T2C_TeamDungeonInfoResponse>
     {
 
-        protected override async ETTask Run(Scene scene, C2T_TeamDungeonInfoRequest request, T2C_TeamDungeonInfoResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2T_TeamDungeonInfoRequest request, T2C_TeamDungeonInfoResponse response)
         {
             List<TeamInfo> teamInfos = new List<TeamInfo>();
             List<TeamInfo> teamList = scene.GetComponent<TeamSceneComponent>().TeamList;
@@ -37,7 +37,6 @@ namespace ET
             }
             response.TeamList = teamInfos;
 
-            reply();
             await ETTask.CompletedTask;
         }
 

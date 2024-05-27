@@ -7515,6 +7515,84 @@ namespace ET
 
 	}
 
+//进入组队副本
+	[ResponseType(nameof(T2M_TeamDungeonEnterResponse))]
+	[Message(InnerMessage.M2T_TeamDungeonEnterRequest)]
+	[MemoryPackable]
+	public partial class M2T_TeamDungeonEnterRequest: MessageObject, IRequest
+	{
+		public static M2T_TeamDungeonEnterRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2T_TeamDungeonEnterRequest), isFromPool) as M2T_TeamDungeonEnterRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long TeamId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UserID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.TeamId = default;
+			this.UserID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.T2M_TeamDungeonEnterResponse)]
+	[MemoryPackable]
+	public partial class T2M_TeamDungeonEnterResponse: MessageObject, IResponse
+	{
+		public static T2M_TeamDungeonEnterResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(T2M_TeamDungeonEnterResponse), isFromPool) as T2M_TeamDungeonEnterResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int FubenId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long FubenInstanceId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int FubenType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.FubenId = default;
+			this.FubenInstanceId = default;
+			this.FubenType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -7738,5 +7816,7 @@ namespace ET
 		 public const ushort T2M_TeamDungeonOpenResponse = 20220;
 		 public const ushort M2T_TeamDungeonPrepareRequest = 20221;
 		 public const ushort T2M_TeamDungeonPrepareResponse = 20222;
+		 public const ushort M2T_TeamDungeonEnterRequest = 20223;
+		 public const ushort T2M_TeamDungeonEnterResponse = 20224;
 	}
 }

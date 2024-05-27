@@ -276,6 +276,12 @@ namespace ET.Server
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.EMail.ToString()).ActorId;
         }
+        
+        public static ActorId GetRobotServerId()
+        {
+            ActorId robotSceneId = StartSceneConfigCategory.Instance.GetBySceneName(203, "Robot01").ActorId;
+            return robotSceneId;
+        }
 
         public static ActorId GetJiaYuanServerId(int zone)
         {

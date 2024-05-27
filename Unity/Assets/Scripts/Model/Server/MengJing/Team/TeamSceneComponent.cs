@@ -6,7 +6,7 @@ namespace ET.Server
     [ComponentOf(typeof(Scene))]
     public class TeamSceneComponent : Entity, IAwake
     {
-        public List<TeamInfo> TeamList = new List<TeamInfo>();
+        public List<TeamInfo> TeamList { get; set; } = new List<TeamInfo>();
 
         public M2C_TeamUpdateResult m2C_TeamUpdateResult = new M2C_TeamUpdateResult();  
 

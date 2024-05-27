@@ -5154,3 +5154,151 @@ message M2C_TeamDungeonBoxRewardResult // IMessage
 	int32 BoxIndex = 2;
 	string PlayerName =     3;
 }
+
+//同意组队
+//ResponseType T2C_TeamAgreeResponse
+message C2T_TeamAgreeRequest // ITeamActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	TeamPlayerInfo TeamPlayerInfo_1 = 1;	//邀请者
+	TeamPlayerInfo TeamPlayerInfo_2 = 2;	//自己
+}
+
+message T2C_TeamAgreeResponse // ITeamActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//同意组队副本申请
+//ResponseType T2C_TeamDungeonAgreeResponse
+message C2T_TeamDungeonAgreeRequest // ITeamActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 TeamId = 1;
+	TeamPlayerInfo TeamPlayerInfo = 2;
+}
+
+message T2C_TeamDungeonAgreeResponse // ITeamActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//组队副本申请
+//ResponseType T2C_TeamDungeonApplyResponse
+message C2T_TeamDungeonApplyRequest // ITeamActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int64 TeamId = 1;
+	TeamPlayerInfo TeamPlayerInfo = 2;
+}
+
+message T2C_TeamDungeonApplyResponse // ITeamActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+message M2C_TeamDungeonApplyResult // IMessage
+{
+	TeamPlayerInfo TeamPlayerInfo = 1;
+}
+
+
+//组队副本
+//ResponseType T2C_TeamDungeonInfoResponse
+message C2T_TeamDungeonInfoRequest // ITeamActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UserId = 1;
+}
+
+message T2C_TeamDungeonInfoResponse // ITeamActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	repeated TeamInfo TeamList = 1;
+}
+
+//邀请组队
+//ResponseType T2C_TeamInviteResponse
+message C2T_TeamInviteRequest // ITeamActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UserID = 1;
+	TeamPlayerInfo TeamPlayerInfo = 2;
+}
+
+message T2C_TeamInviteResponse // ITeamActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+message M2C_TeamInviteResult // IMessage
+{
+	TeamPlayerInfo TeamPlayerInfo = 1;
+}
+
+//踢出队伍
+//ResponseType T2C_TeamKickOutResponse
+message C2T_TeamKickOutRequest // ITeamActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UserId = 1;
+}
+
+message T2C_TeamKickOutResponse // ITeamActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//离开组队
+//ResponseType T2C_TeamLeaveResponse
+message C2T_TeamLeaveRequest // ITeamActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UserId = 1;
+}
+
+message T2C_TeamLeaveResponse // ITeamActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//邀请组队
+//ResponseType T2C_TeamRobotResponse
+message C2T_TeamRobotRequest // ITeamActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitId = 1;
+}
+
+message T2C_TeamRobotResponse // ITeamActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

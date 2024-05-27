@@ -1,16 +1,15 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2T_GetTeamInfoHandler : AMActorRpcHandler<Scene, C2T_GetTeamInfoRequest, T2C_GetTeamInfoResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2T_GetTeamInfoHandler : MessageHandler<Scene, C2T_GetTeamInfoRequest, T2C_GetTeamInfoResponse>
     {
-        protected override async ETTask Run(Scene scene, C2T_GetTeamInfoRequest request, T2C_GetTeamInfoResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2T_GetTeamInfoRequest request, T2C_GetTeamInfoResponse response)
         {
             TeamSceneComponent teamSceneComponent = scene.GetComponent<TeamSceneComponent>();
             response.TeamInfo = teamSceneComponent.GetTeamInfo(request.UserID); 
-            reply();
             await ETTask.CompletedTask;
 
         }
