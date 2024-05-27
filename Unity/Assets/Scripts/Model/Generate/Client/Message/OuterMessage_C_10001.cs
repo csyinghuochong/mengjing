@@ -5588,6 +5588,18 @@ namespace ET
 		[MemoryPackOrder(0)]
 		public UserInfo UserInfo { get; set; }
 
+		[MemoryPackOrder(2)]
+		public List<KeyValuePair> ReddontList { get; set; } = new();
+
+		[MemoryPackOrder(3)]
+		public List<KeyValuePairInt> TreasureInfo { get; set; } = new();
+
+		[MemoryPackOrder(4)]
+		public List<ShouJiChapterInfo> ShouJiChapterInfos { get; set; } = new();
+
+		[MemoryPackOrder(5)]
+		public List<KeyValuePairInt> TitleList { get; set; } = new();
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -5595,6 +5607,10 @@ namespace ET
 			this.Message = default;
 			this.Error = default;
 			this.UserInfo = default;
+			this.ReddontList.Clear();
+			this.TreasureInfo.Clear();
+			this.ShouJiChapterInfos.Clear();
+			this.TitleList.Clear();
 			
 			ObjectPool.Instance.Recycle(this); 
 		}

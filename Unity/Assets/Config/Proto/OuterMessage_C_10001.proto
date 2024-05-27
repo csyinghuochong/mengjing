@@ -1450,6 +1450,10 @@ message M2C_UserInfoInitResponse  // ILocationResponse
 	string Message = 91;
 	int32 Error = 92;
 	UserInfo UserInfo = 1;
+	repeated KeyValuePair ReddontList = 3;
+	repeated KeyValuePairInt TreasureInfo = 4;
+	repeated ShouJiChapterInfo ShouJiChapterInfos = 5;
+	repeated KeyValuePairInt TitleList = 6;
 }
 
 message FriendInfo

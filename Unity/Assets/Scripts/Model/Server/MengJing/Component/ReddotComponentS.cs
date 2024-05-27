@@ -7,6 +7,6 @@ namespace ET.Server
     [ComponentOf(typeof(Unit))]
     public class ReddotComponentS:         Entity, IAwake, IDestroy, ITransfer, IUnitCache
     {
-        public List<KeyValuePair> ReddontList = new List<KeyValuePair>();
+        public List<KeyValuePair> ReddontList { get; set; } = new List<KeyValuePair>();
     }
 }

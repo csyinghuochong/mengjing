@@ -1,21 +1,19 @@
 ﻿using System;
-
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_UserInfoRequestHandler : MessageLocationHandler<Unit, C2M_UserInfoRequest, M2C_UserInfoInitResponse>
+    [MessageLocationHandler(SceneType.Map)]
+    public class C2M_UserInfoRequestHandler : MessageLocationHandler<Unit, C2M_UserInfoInitRequest, M2C_UserInfoInitResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_UserInfoRequest request, M2C_UserInfoInitResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_UserInfoInitRequest request, M2C_UserInfoInitResponse response)
         {
-            unit.GetComponent<ShoujiComponent>().UpdateShouJIStar();
+            unit.GetComponent<ShoujiComponentS>().UpdateShouJIStar();
 
-            response.UserInfo = unit.GetComponent<UserInfoComponent>().UserInfo;
-            response.ReddontList =  unit.GetComponent<ReddotComponent>().ReddontList;
-            response.TreasureInfo = unit.GetComponent<ShoujiComponent>().TreasureInfo;
-            response.ShouJiChapterInfos = unit.GetComponent<ShoujiComponent>().ShouJiChapterInfos;
-            response.TitleList = unit.GetComponent<TitleComponent>().TitleList;
-
-            reply();
+            response.UserInfo = unit.GetComponent<UserInfoComponentS>().UserInfo;
+            response.ReddontList =  unit.GetComponent<ReddotComponentS>().ReddontList;
+            response.TreasureInfo = unit.GetComponent<ShoujiComponentS>().TreasureInfo;
+            response.ShouJiChapterInfos = unit.GetComponent<ShoujiComponentS>().ShouJiChapterInfos;
+            response.TitleList = unit.GetComponent<TitleComponentS>().TitleList;
+            
             await ETTask.CompletedTask;
         }
     }

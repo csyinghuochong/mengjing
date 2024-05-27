@@ -9,7 +9,7 @@ namespace ET.Server
     public class TitleComponentS:         Entity, IAwake, IDestroy, ITransfer, IUnitCache
     {
         //称号
-        public List<KeyValuePairInt> TitleList = new List<KeyValuePairInt>();
+        public List<KeyValuePairInt> TitleList{ get; set; }  = new List<KeyValuePairInt>();
 
         //public M2C_TitleUpdateResult TitleUpdateResult = new M2C_TitleUpdateResult();
     }

@@ -10,12 +10,12 @@ namespace ET.Server
         /// <summary>
         /// 收集大厅
         /// </summary>
-        public List<ShouJiChapterInfo> ShouJiChapterInfos = new List<ShouJiChapterInfo>();
+        public List<ShouJiChapterInfo> ShouJiChapterInfos { get; set; } = new List<ShouJiChapterInfo>();
 
         /// <summary>
         /// 珍宝
         /// </summary>
-        public List<KeyValuePairInt> TreasureInfo = new List<KeyValuePairInt>();
+        public List<KeyValuePairInt> TreasureInfo{ get; set; }  = new List<KeyValuePairInt>();
 
 
         [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
