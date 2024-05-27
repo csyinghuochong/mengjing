@@ -7167,6 +7167,132 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(S2M_SoloMatchResponse))]
+	[Message(InnerMessage.M2S_SoloMatchRequest)]
+	[MemoryPackable]
+	public partial class M2S_SoloMatchRequest: MessageObject, IRequest
+	{
+		public static M2S_SoloMatchRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2S_SoloMatchRequest), isFromPool) as M2S_SoloMatchRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public SoloPlayerInfo SoloPlayerInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.SoloPlayerInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.S2M_SoloMatchResponse)]
+	[MemoryPackable]
+	public partial class S2M_SoloMatchResponse: MessageObject, IResponse
+	{
+		public static S2M_SoloMatchResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(S2M_SoloMatchResponse), isFromPool) as S2M_SoloMatchResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(S2M_SoloEnterResponse))]
+	[Message(InnerMessage.M2S_SoloEnterRequest)]
+	[MemoryPackable]
+	public partial class M2S_SoloEnterRequest: MessageObject, IRequest
+	{
+		public static M2S_SoloEnterRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2S_SoloEnterRequest), isFromPool) as M2S_SoloEnterRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long FubenId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.FubenId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.S2M_SoloEnterResponse)]
+	[MemoryPackable]
+	public partial class S2M_SoloEnterResponse: MessageObject, IResponse
+	{
+		public static S2M_SoloEnterResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(S2M_SoloEnterResponse), isFromPool) as S2M_SoloEnterResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long FubenInstanceId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.FubenInstanceId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -7380,5 +7506,9 @@ namespace ET
 		 public const ushort R2M_RankTrialResponse = 20210;
 		 public const ushort M2R_RankUpdateRequest = 20211;
 		 public const ushort R2M_RankUpdateResponse = 20212;
+		 public const ushort M2S_SoloMatchRequest = 20213;
+		 public const ushort S2M_SoloMatchResponse = 20214;
+		 public const ushort M2S_SoloEnterRequest = 20215;
+		 public const ushort S2M_SoloEnterResponse = 20216;
 	}
 }

@@ -5016,3 +5016,36 @@ message R2C_WorldLvResponse // IRankActorResponse
 	string Message = 92;
 	ServerInfo ServerInfo = 1;		//世界等级
 }
+
+//ResponseType M2C_SoloMatchResponse
+message C2M_SoloMatchRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_SoloMatchResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//solo战绩
+//ResponseType S2C_SoloMyInfoResponse
+message C2S_SoloMyInfoRequest // ISoloActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message S2C_SoloMyInfoResponse // ISoloActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 MathTime = 1;
+	int32 WinTime = 2;
+	int32 FailTime = 3;
+	repeated SoloPlayerResultInfo SoloPlayerResultInfoList = 4;
+}

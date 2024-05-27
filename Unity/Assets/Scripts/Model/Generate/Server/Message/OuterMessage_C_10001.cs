@@ -19646,6 +19646,137 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_SoloMatchResponse))]
+	[Message(OuterMessage.C2M_SoloMatchRequest)]
+	[MemoryPackable]
+	public partial class C2M_SoloMatchRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_SoloMatchRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_SoloMatchRequest), isFromPool) as C2M_SoloMatchRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_SoloMatchResponse)]
+	[MemoryPackable]
+	public partial class M2C_SoloMatchResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_SoloMatchResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SoloMatchResponse), isFromPool) as M2C_SoloMatchResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//solo战绩
+	[ResponseType(nameof(S2C_SoloMyInfoResponse))]
+	[Message(OuterMessage.C2S_SoloMyInfoRequest)]
+	[MemoryPackable]
+	public partial class C2S_SoloMyInfoRequest: MessageObject, ISoloActorRequest
+	{
+		public static C2S_SoloMyInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2S_SoloMyInfoRequest), isFromPool) as C2S_SoloMyInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.S2C_SoloMyInfoResponse)]
+	[MemoryPackable]
+	public partial class S2C_SoloMyInfoResponse: MessageObject, ISoloActorResponse
+	{
+		public static S2C_SoloMyInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(S2C_SoloMyInfoResponse), isFromPool) as S2C_SoloMyInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long MathTime { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int WinTime { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int FailTime { get; set; }
+
+		[MemoryPackOrder(3)]
+		public List<SoloPlayerResultInfo> SoloPlayerResultInfoList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.MathTime = default;
+			this.WinTime = default;
+			this.FailTime = default;
+			this.SoloPlayerResultInfoList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -20219,5 +20350,9 @@ namespace ET
 		 public const ushort R2C_RankUnionRaceResponse = 10570;
 		 public const ushort C2R_WorldLvRequest = 10571;
 		 public const ushort R2C_WorldLvResponse = 10572;
+		 public const ushort C2M_SoloMatchRequest = 10573;
+		 public const ushort M2C_SoloMatchResponse = 10574;
+		 public const ushort C2S_SoloMyInfoRequest = 10575;
+		 public const ushort S2C_SoloMyInfoResponse = 10576;
 	}
 }

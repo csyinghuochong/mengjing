@@ -30,6 +30,17 @@
         
     }
     
+    
+    public interface ISoloActorRequest: IRequest
+    {
+        
+    }
+    
+    public interface ISoloActorResponse: IResponse
+    {
+        
+    }
+    
     public interface IPopularizeActorRequest: IRequest
     {
         

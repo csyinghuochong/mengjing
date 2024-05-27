@@ -1831,3 +1831,34 @@ message R2M_RankUpdateResponse // IResponse
 	int32 SoloRankId = 3;
 	int32 OccRankId = 4; //战力职业排行
 }
+
+//ResponseType S2M_SoloMatchResponse
+message M2S_SoloMatchRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	SoloPlayerInfo SoloPlayerInfo = 1;
+}
+
+message S2M_SoloMatchResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType S2M_SoloEnterResponse
+message M2S_SoloEnterRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 FubenId = 1;
+}
+
+message S2M_SoloEnterResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 FubenInstanceId = 1;
+}

@@ -7,7 +7,7 @@ namespace ET.Server
     {
         public long Timer;
         public long TimerNum;
-        public bool SendReward;
+        public bool SendReward { get; set; }
     }
     
 }
