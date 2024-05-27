@@ -18827,6 +18827,76 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Popularize2C_ListResponse))]
+//我的推广列表
+	[Message(OuterMessage.C2Popularize_ListRequest)]
+	[MemoryPackable]
+	public partial class C2Popularize_ListRequest: MessageObject, IPopularizeActorRequest
+	{
+		public static C2Popularize_ListRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2Popularize_ListRequest), isFromPool) as C2Popularize_ListRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.Popularize2C_ListResponse)]
+	[MemoryPackable]
+	public partial class Popularize2C_ListResponse: MessageObject, IPopularizeActorResponse
+	{
+		public static Popularize2C_ListResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Popularize2C_ListResponse), isFromPool) as Popularize2C_ListResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long PopularizeCode { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long BePopularizeId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public List<PopularizeInfo> MyPopularizeList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.PopularizeCode = default;
+			this.BePopularizeId = default;
+			this.MyPopularizeList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -19374,5 +19444,7 @@ namespace ET
 		 public const ushort M2C_UnitInfoResponse = 10544;
 		 public const ushort C2M_XiuLianCenterRequest = 10545;
 		 public const ushort M2C_XiuLianCenterResponse = 10546;
+		 public const ushort C2Popularize_ListRequest = 10547;
+		 public const ushort Popularize2C_ListResponse = 10548;
 	}
 }

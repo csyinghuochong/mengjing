@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 
+    [ChildOf]
     [BsonIgnoreExtraElements]
     public class DBPopularizeInfo : Entity, IAwake
     {
@@ -11,16 +12,16 @@ namespace ET.Server
         /// <summary>
         /// 我的推广码  前两位为区服 后六位为序号
         /// </summary>
-        public long PopularizeCode;
+        public long PopularizeCode { get; set; }
 
         /// <summary>
         /// 我推广的人
         /// </summary>
-        public long BePopularizeId;
+        public long BePopularizeId{ get; set; };
 
         /// <summary>
         /// 我的推广人
         /// </summary>
-        public List<PopularizeInfo> MyPopularizeList = new List<PopularizeInfo> { };
+        public List<PopularizeInfo> MyPopularizeList{ get; set; } = new List<PopularizeInfo> { };
     }
 }

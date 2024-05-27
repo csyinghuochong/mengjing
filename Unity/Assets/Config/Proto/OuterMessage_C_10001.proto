@@ -4808,3 +4808,22 @@ message M2C_XiuLianCenterResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+
+//ResponseType Popularize2C_ListResponse
+//我的推广列表
+message C2Popularize_ListRequest // IPopularizeActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message Popularize2C_ListResponse // IPopularizeActorResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	int64 PopularizeCode = 1;
+	int64 BePopularizeId = 2;
+	repeated PopularizeInfo MyPopularizeList = 3;
+}

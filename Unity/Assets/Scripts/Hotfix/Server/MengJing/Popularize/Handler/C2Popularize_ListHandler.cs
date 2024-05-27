@@ -1,37 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class C2Popularize_ListHandler : AMActorRpcHandler<Scene, C2Popularize_ListRequest, Popularize2C_ListResponse>
+    [MessageLocationHandler(SceneType.Map)]
+    public class C2Popularize_ListHandler : MessageHandler<Scene, C2Popularize_ListRequest, Popularize2C_ListResponse>
     {
-        protected override async ETTask Run(Scene scene, C2Popularize_ListRequest request, Popularize2C_ListResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2Popularize_ListRequest request, Popularize2C_ListResponse response)
         {
             Log.Warning($"C2Popularize_ListRequest:{request.ActorId}");
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.Popularize, scene.DomainZone()))
+            using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Popularize, scene.Zone()))
             {
                 
-                DBPopularizeInfo dBPopularizeInfo = await DBHelper.GetComponentCache<DBPopularizeInfo>(scene.DomainZone(), request.ActorId);
+                DBPopularizeInfo dBPopularizeInfo = await UnitCacheHelper.GetComponent<DBPopularizeInfo>(scene.Root(), request.ActorId);
                 if (dBPopularizeInfo == null)
                 {
                     if (scene.GetChild<DBPopularizeInfo>(request.ActorId) != null)
                     {
-                        reply();
                         return;
                     }
 
                     dBPopularizeInfo = scene.AddChildWithId<DBPopularizeInfo>(request.ActorId);
 
-                    int newzone = scene.DomainZone();
-                    List<DBPopularizeInfo> dBPopularizeInfoList = await Game.Scene.GetComponent<DBComponent>().Query<DBPopularizeInfo>(newzone, d => d.Id > 0);
+                    int newzone = scene.Zone();
+
+                    DBManagerComponent dbManagerComponent = scene.Root().GetComponent<DBManagerComponent>();
+                    DBComponent dbComponent = dbManagerComponent.GetZoneDB(scene.Zone());
+                    
+                    List<DBPopularizeInfo> dBPopularizeInfoList = await dbComponent.Query<DBPopularizeInfo>(newzone, d => d.Id > 0);
                     int xuindex = dBPopularizeInfoList.Count + 1;
 
                     //推广码生成规则
                     dBPopularizeInfo.PopularizeCode = newzone * 1000000 + xuindex;
 
-                    await DBHelper.SaveComponentCache(scene.DomainZone(), request.ActorId, dBPopularizeInfo);
+                    await UnitCacheHelper.SaveComponent(scene.Root(), request.ActorId, dBPopularizeInfo);
                     dBPopularizeInfo.Dispose();
                 }
 
@@ -45,7 +47,7 @@ namespace ET
                         continue;
                     }
 
-                    UserInfoComponent userInfoComponent = await DBHelper.GetComponentCache<UserInfoComponent>(newZone, unitid);
+                    UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), unitid);
                     if (userInfoComponent == null)
                     {
                         continue;
@@ -62,8 +64,6 @@ namespace ET
                 response.MyPopularizeList = dBPopularizeInfo.MyPopularizeList;
 
             }
-
-            reply();
             await ETTask.CompletedTask;
         }
     }

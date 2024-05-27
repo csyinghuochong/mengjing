@@ -30,6 +30,16 @@
         
     }
     
+    public interface IPopularizeActorRequest: IRequest
+    {
+        
+    }
+    
+    public interface IPopularizeActorResponse: IResponse
+    {
+        
+    }
+
     public interface IUnionActorRequest : IRequest
     {
     }
