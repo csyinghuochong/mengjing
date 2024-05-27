@@ -1,7 +1,7 @@
-﻿namespace ET
+﻿namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class R2M_RankUpdateHandler : AMActorLocationHandler<Unit, R2M_RankUpdateMessage>
+    [MessageHandler(SceneType.Rank)]
+    public class R2M_RankUpdateHandler : MessageHandler<Unit, R2M_RankUpdateMessage>
     {
         protected override async ETTask Run(Unit unit, R2M_RankUpdateMessage message)
         {
@@ -9,20 +9,20 @@
             switch (message.RankType)
             {
                 case 1:
-                    unit.GetComponent<NumericComponent>().ApplyValue(NumericType.CombatRankID, message.RankId);
-                    unit.GetComponent<TaskComponent>().TriggerTaskEvent( TaskTargetType.CombatRank_83, message.RankId, 1);
-                    unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.CombatRank_83, message.RankId, 1);
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.CombatRankID, message.RankId);
+                    unit.GetComponent<TaskComponentS>().TriggerTaskEvent( TaskTargetType.CombatRank_83, message.RankId, 1);
+                    unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.CombatRank_83, message.RankId, 1);
                     break;
                 case 2:
-                    unit.GetComponent<NumericComponent>().ApplyValue(NumericType.PetTianTiRankID, message.RankId);
-                    unit.GetComponent<TaskComponent>().TriggerTaskEvent(TaskTargetType.PetTianTiRank_82, message.RankId, 1);
-                    unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.PetTianTiRank_82, message.RankId, 1);
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.PetTianTiRankID, message.RankId);
+                    unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.PetTianTiRank_82, message.RankId, 1);
+                    unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.PetTianTiRank_82, message.RankId, 1);
                     break;
                 case 3:
-                    unit.GetComponent<NumericComponent>().ApplyValue(NumericType.RaceDonationRankID, message.RankId);
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.RaceDonationRankID, message.RankId);
                     break;
                 case 4:
-                    unit.GetComponent<NumericComponent>().ApplyValue(NumericType.SoloRankId, message.RankId);
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SoloRankId, message.RankId);
                     break;
                 default:
                     break;

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2R_RankTrialHandler : AMActorRpcHandler<Scene, M2R_RankTrialRequest, R2M_RankTrialResponse>
+    [MessageHandler(SceneType.Rank)]
+    public class M2R_RankTrialHandler : MessageHandler<Scene, M2R_RankTrialRequest, R2M_RankTrialResponse>
     {
-        protected override async ETTask Run(Scene scene, M2R_RankTrialRequest request, R2M_RankTrialResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2R_RankTrialRequest request, R2M_RankTrialResponse response)
         {
             RankSceneComponent rankSceneComponent = scene.GetComponent<RankSceneComponent>();
             List<KeyValuePairLong> rankRunRace = rankSceneComponent.DBRankInfo.rankingTrial;
@@ -56,7 +56,6 @@ namespace ET
             int maxnumber = Math.Min(rankRunRace.Count, ComHelp.RankNumber);
             rankSceneComponent.DBRankInfo.rankingTrial = rankRunRace.GetRange(0, maxnumber);
             response.RankId = rankSceneComponent.GetTrialRank(request.RankingInfo.KeyId);
-            reply();
             await ETTask.CompletedTask;
         }
     }

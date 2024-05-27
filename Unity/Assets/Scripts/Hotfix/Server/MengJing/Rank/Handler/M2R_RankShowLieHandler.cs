@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class M2R_RankShowLieHandler : AMActorRpcHandler<Scene, M2R_RankShowLieRequest, R2M_RankShowLieResponse>
+    [MessageHandler(SceneType.Rank)]
+    public class M2R_RankShowLieHandler : MessageHandler<Scene, M2R_RankShowLieRequest, R2M_RankShowLieResponse>
     {
-        protected override async ETTask Run(Scene scene, M2R_RankShowLieRequest request, R2M_RankShowLieResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2R_RankShowLieRequest request, R2M_RankShowLieResponse response)
         {
             RankSceneComponent rankSceneComponent = scene.GetComponent<RankSceneComponent>();
             DBRankInfo dBRankInfo = rankSceneComponent.DBRankInfo;
@@ -37,7 +37,6 @@ namespace ET
             int maxnumber = Math.Min(rankShowLie.Count, 10 );
             dBRankInfo.rankShowLie = rankShowLie.GetRange( 0, maxnumber );
 
-            reply();
             await ETTask.CompletedTask;
         }
     }
