@@ -17,7 +17,7 @@ namespace ET.Server
         /// <summary>
         /// 我推广的人
         /// </summary>
-        public long BePopularizeId{ get; set; };
+        public long BePopularizeId{ get; set; }
 
         /// <summary>
         /// 我的推广人

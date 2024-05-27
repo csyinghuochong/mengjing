@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -82,7 +82,7 @@ namespace ET.Server
                 }
 
                 unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.HappyCellIndex, newCell + 1);
-                Vector3 vector3 = HappyData.PositionList[newCell];
+                float3 vector3 = HappyData.PositionList[newCell];
                 unit.Position = vector3;
                 break;
             }

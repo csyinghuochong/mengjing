@@ -1,5 +1,5 @@
 ﻿
-using UnityEngine;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -9,7 +9,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit entity, C2M_CreateSpiling message)
         {
-            Unit unit = UnitFactory.CreateMonster(entity.Scene(), 70001960, Vector3.zero, new CreateMonsterInfo() 
+            Unit unit = UnitFactory.CreateMonster(entity.Scene(), 70001960, float3.zero, new CreateMonsterInfo() 
             {
                 Camp =CampEnum.CampMonster1
             });

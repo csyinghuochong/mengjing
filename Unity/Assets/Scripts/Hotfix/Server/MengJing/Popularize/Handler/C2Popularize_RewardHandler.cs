@@ -52,7 +52,6 @@ namespace ET.Server
 
             }
 
-            reply();
             await ETTask.CompletedTask;
         }
     }
