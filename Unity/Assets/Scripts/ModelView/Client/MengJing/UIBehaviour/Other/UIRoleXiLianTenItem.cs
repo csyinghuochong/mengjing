@@ -2,6 +2,7 @@
 
 namespace ET.Client
 {
+    [ChildOf]
     public class UIRoleXiLianTenItem: Entity, IAwake<GameObject>
     {
         public GameObject GameObject;

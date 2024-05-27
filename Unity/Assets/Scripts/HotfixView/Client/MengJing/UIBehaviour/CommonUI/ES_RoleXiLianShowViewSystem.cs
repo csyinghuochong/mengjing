@@ -19,8 +19,16 @@ namespace ET.Client
             self.E_EquipItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
             self.E_XiLianButtonButton.AddListener(() => { self.OnXiLianButton(1).Coroutine(); });
             self.E_XiLianTenButton.AddListener(() => { self.OnXiLianButton(5).Coroutine(); });
-            // self.E_Btn_XiLianNumRewardButton.AddListener(() => { UIHelper.Create(self.ZoneScene(), UIType.UIRoleXiLianNumReward).Coroutine(); });
-            // self.E_Btn_XiLianExplainButton.AddListener(() => { UIHelper.Create(self.ZoneScene(), UIType.UIRoleXiLianExplain).Coroutine(); });
+            self.E_Btn_XiLianNumRewardButton.AddListener(() =>
+            {
+                FlyTipComponent.Instance.SpawnFlyTip("界面暂未开放");
+                // UIHelper.Create(self.ZoneScene(), UIType.UIRoleXiLianNumReward).Coroutine();
+            });
+            self.E_Btn_XiLianExplainButton.AddListener(() =>
+            {
+                FlyTipComponent.Instance.SpawnFlyTip("界面暂未开放");
+                // UIHelper.Create(self.ZoneScene(), UIType.UIRoleXiLianExplain).Coroutine();
+            });
 
             self.E_NeedDiamondText.text = GlobalValueConfigCategory.Instance.Get(73).Value;
 
@@ -234,8 +242,8 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int oldXiLianDu = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemXiLianDu);
 
-            int error = await BagClientNetHelper.RquestItemXiLian(self.Root(), bagInfo.BagInfoID, times);
-            if (error != 0)
+            M2C_ItemXiLianResponse response = await BagClientNetHelper.RquestItemXiLian(self.Root(), bagInfo.BagInfoID, times);
+            if (response.Error != 0)
             {
                 return;
             }
@@ -252,9 +260,10 @@ namespace ET.Client
                 int newXiLianDu = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemXiLianDu);
                 FlyTipComponent.Instance.SpawnFlyTipDi($"获得{newXiLianDu - oldXiLianDu}洗炼经验");
 
-                // UI uitex = await UIHelper.Create(self.ZoneScene(), UIType.UIRoleXiLianTen);
-                // uitex.GetComponent<UIRoleXiLianTenComponent>().OnInitUI(bagInfo, r2c_roleEquip.ItemXiLianResults);
-                // self.OnXiLianReturn();
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RoleXiLianTen);
+                DlgRoleXiLianTen dlgRoleXiLianTen = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRoleXiLianTen>();
+                dlgRoleXiLianTen.OnInitUI(bagInfo, response.ItemXiLianResults);
+                self.OnXiLianReturn();
             }
 
             //记录tap数据

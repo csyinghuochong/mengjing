@@ -6,15 +6,35 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (DlgRoleXiLianTenViewComponent))]
     [FriendOf(typeof (DlgRoleXiLianTen))]
     public static class DlgRoleXiLianTenSystem
     {
         public static void RegisterUIEvent(this DlgRoleXiLianTen self)
         {
+            ReferenceCollector rc = self.View.uiTransform.GetComponent<ReferenceCollector>();
+            self.UIRoleXiLianTenItem = rc.Get<GameObject>("UIRoleXiLianTenItem");
         }
 
         public static void ShowWindow(this DlgRoleXiLianTen self, Entity contextData = null)
         {
+            self.UIRoleXiLianTenItem.SetActive(false);
+        }
+
+        public static void OnInitUI(this DlgRoleXiLianTen self, BagInfo bagInfo, List<ItemXiLianResult> itemXiLians)
+        {
+            for (int i = 0; i < itemXiLians.Count; i++)
+            {
+                BagInfo bagInfoTemp = ComHelp.DeepCopy(bagInfo);
+                bagInfoTemp.XiLianHideTeShuProLists = itemXiLians[i].XiLianHideTeShuProLists;
+                bagInfoTemp.XiLianHideProLists = itemXiLians[i].XiLianHideProLists;
+                bagInfoTemp.HideSkillLists = itemXiLians[i].HideSkillLists;
+
+                GameObject itemGo = UnityEngine.Object.Instantiate(self.UIRoleXiLianTenItem);
+                UICommonHelper.SetParent(itemGo, self.View.EG_ItemListNodeRectTransform.gameObject);
+                itemGo.SetActive(true);
+                self.AddChild<UIRoleXiLianTenItem, GameObject>(itemGo).OnInitUI(bagInfoTemp, itemXiLians[i]);
+            }
         }
     }
 }

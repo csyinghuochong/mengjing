@@ -427,12 +427,12 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RquestItemXiLian(Scene root, long bagInfoID, int times)
+        public static async ETTask<M2C_ItemXiLianResponse> RquestItemXiLian(Scene root, long bagInfoID, int times)
         {
             C2M_ItemXiLianRequest request = new() { OperateBagID = bagInfoID, Times = times };
             M2C_ItemXiLianResponse response = (M2C_ItemXiLianResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
-            return response.Error;
+            return response;
         }
 
         public static async ETTask<int> RquestItemXiLianSelect(Scene root, long bagInfoID, ItemXiLianResult itemXiLianResult)
