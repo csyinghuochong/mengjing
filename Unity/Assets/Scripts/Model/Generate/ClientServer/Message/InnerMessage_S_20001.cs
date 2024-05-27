@@ -6735,6 +6735,71 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(R2A_DeleteRoleData))]
+	[Message(InnerMessage.A2R_DeleteRoleData)]
+	[MemoryPackable]
+	public partial class A2R_DeleteRoleData: MessageObject, IRequest
+	{
+		public static A2R_DeleteRoleData Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2R_DeleteRoleData), isFromPool) as A2R_DeleteRoleData; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int DeleXuhaoID { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long DeleUserID { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long AccountId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.DeleXuhaoID = default;
+			this.DeleUserID = default;
+			this.AccountId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.R2A_DeleteRoleData)]
+	[MemoryPackable]
+	public partial class R2A_DeleteRoleData: MessageObject, IResponse
+	{
+		public static R2A_DeleteRoleData Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2A_DeleteRoleData), isFromPool) as R2A_DeleteRoleData; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -6936,5 +7001,7 @@ namespace ET
 		 public const ushort Popularize2C_RewardResponse = 20198;
 		 public const ushort C2Popularize_UploadRequest = 20199;
 		 public const ushort Popularize2C_UploadResponse = 20200;
+		 public const ushort A2R_DeleteRoleData = 20201;
+		 public const ushort R2A_DeleteRoleData = 20202;
 	}
 }

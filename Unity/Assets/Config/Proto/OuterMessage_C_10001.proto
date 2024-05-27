@@ -4905,3 +4905,114 @@ message R2C_RankListResponse // IRankActorResponse
 	string Message = 92;
 	repeated RankingInfo RankList = 1;		//排行榜列表
 }
+
+//ResponseType R2C_RankPetListResponse
+message C2R_RankPetListRequest // IRankActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UserId = 94;
+}
+
+message R2C_RankPetListResponse // IRankActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 LeftCombatTime = 1;
+	repeated RankPetInfo RankPetList = 2;		//宠物天梯列表
+	int64 RankNumber = 3;
+}
+
+//ResponseType R2C_RankRunRaceResponse
+message C2R_RankRunRaceRequest // IRankActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message R2C_RankRunRaceResponse // IRankActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	repeated RankingInfo RankList = 1;		//排行榜列表
+}
+
+//ResponseType R2C_RankSeasonTowerResponse
+message C2R_RankSeasonTowerRequest // IRankActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message R2C_RankSeasonTowerResponse // IRankActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated RankSeasonTowerInfo RankList = 1;		//排行榜列表
+}
+
+//ResponseType R2C_RankShowLieResponse
+message C2R_RankShowLieRequest // IRankActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message R2C_RankShowLieResponse // IRankActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated RankShouLieInfo RankList = 1;		//排行榜列表
+}
+
+
+//ResponseType R2C_RankTrialListResponse
+message C2R_RankTrialListRequest // IRankActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message R2C_RankTrialListResponse // IRankActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated RankingTrialInfo RankList = 1;		//排行榜列表
+}
+
+//ResponseType R2C_RankUnionRaceResponse
+message C2R_RankUnionRaceRequest // IRankActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message R2C_RankUnionRaceResponse // IRankActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated RankShouLieInfo RankList = 1;		//排行榜列表
+}
+
+//ResponseType R2C_WorldLvResponse
+message C2R_WorldLvRequest // IRankActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 RankType = 1;
+}
+
+message R2C_WorldLvResponse // IRankActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	ServerInfo ServerInfo = 1;		//世界等级
+}

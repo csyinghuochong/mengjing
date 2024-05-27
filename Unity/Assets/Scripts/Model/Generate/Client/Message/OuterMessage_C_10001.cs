@@ -18959,6 +18959,693 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(R2C_CampRankListResponse))]
+	[Message(OuterMessage.C2R_CampRankListRequest)]
+	[MemoryPackable]
+	public partial class C2R_CampRankListRequest: MessageObject, IRankActorRequest
+	{
+		public static C2R_CampRankListRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2R_CampRankListRequest), isFromPool) as C2R_CampRankListRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.R2C_CampRankListResponse)]
+	[MemoryPackable]
+	public partial class R2C_CampRankListResponse: MessageObject, IRankActorResponse
+	{
+		public static R2C_CampRankListResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2C_CampRankListResponse), isFromPool) as R2C_CampRankListResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<RankingInfo> RankList_1 { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public List<RankingInfo> RankList_2 { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.RankList_1.Clear();
+			this.RankList_2.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(R2C_DBServerInfoResponse))]
+	[Message(OuterMessage.C2R_DBServerInfoRequest)]
+	[MemoryPackable]
+	public partial class C2R_DBServerInfoRequest: MessageObject, IRankActorRequest
+	{
+		public static C2R_DBServerInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2R_DBServerInfoRequest), isFromPool) as C2R_DBServerInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.R2C_DBServerInfoResponse)]
+	[MemoryPackable]
+	public partial class R2C_DBServerInfoResponse: MessageObject, IRankActorResponse
+	{
+		public static R2C_DBServerInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2C_DBServerInfoResponse), isFromPool) as R2C_DBServerInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public ServerInfo ServerInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.ServerInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(R2C_RankDemonResponse))]
+	[Message(OuterMessage.C2R_RankDemonRequest)]
+	[MemoryPackable]
+	public partial class C2R_RankDemonRequest: MessageObject, IRankActorRequest
+	{
+		public static C2R_RankDemonRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2R_RankDemonRequest), isFromPool) as C2R_RankDemonRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.R2C_RankDemonResponse)]
+	[MemoryPackable]
+	public partial class R2C_RankDemonResponse: MessageObject, IRankActorResponse
+	{
+		public static R2C_RankDemonResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2C_RankDemonResponse), isFromPool) as R2C_RankDemonResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<RankingInfo> RankList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RankList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(R2C_RankListResponse))]
+	[Message(OuterMessage.C2R_RankListRequest)]
+	[MemoryPackable]
+	public partial class C2R_RankListRequest: MessageObject, IRankActorRequest
+	{
+		public static C2R_RankListRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2R_RankListRequest), isFromPool) as C2R_RankListRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.R2C_RankListResponse)]
+	[MemoryPackable]
+	public partial class R2C_RankListResponse: MessageObject, IRankActorResponse
+	{
+		public static R2C_RankListResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2C_RankListResponse), isFromPool) as R2C_RankListResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<RankingInfo> RankList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RankList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(R2C_RankPetListResponse))]
+	[Message(OuterMessage.C2R_RankPetListRequest)]
+	[MemoryPackable]
+	public partial class C2R_RankPetListRequest: MessageObject, IRankActorRequest
+	{
+		public static C2R_RankPetListRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2R_RankPetListRequest), isFromPool) as C2R_RankPetListRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(93)]
+		public long UserId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UserId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.R2C_RankPetListResponse)]
+	[MemoryPackable]
+	public partial class R2C_RankPetListResponse: MessageObject, IRankActorResponse
+	{
+		public static R2C_RankPetListResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2C_RankPetListResponse), isFromPool) as R2C_RankPetListResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int LeftCombatTime { get; set; }
+
+		[MemoryPackOrder(1)]
+		public List<RankPetInfo> RankPetList { get; set; } = new();
+
+		[MemoryPackOrder(2)]
+		public long RankNumber { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.LeftCombatTime = default;
+			this.RankPetList.Clear();
+			this.RankNumber = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(R2C_RankRunRaceResponse))]
+	[Message(OuterMessage.C2R_RankRunRaceRequest)]
+	[MemoryPackable]
+	public partial class C2R_RankRunRaceRequest: MessageObject, IRankActorRequest
+	{
+		public static C2R_RankRunRaceRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2R_RankRunRaceRequest), isFromPool) as C2R_RankRunRaceRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.R2C_RankRunRaceResponse)]
+	[MemoryPackable]
+	public partial class R2C_RankRunRaceResponse: MessageObject, IRankActorResponse
+	{
+		public static R2C_RankRunRaceResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2C_RankRunRaceResponse), isFromPool) as R2C_RankRunRaceResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<RankingInfo> RankList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RankList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(R2C_RankSeasonTowerResponse))]
+	[Message(OuterMessage.C2R_RankSeasonTowerRequest)]
+	[MemoryPackable]
+	public partial class C2R_RankSeasonTowerRequest: MessageObject, IRankActorRequest
+	{
+		public static C2R_RankSeasonTowerRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2R_RankSeasonTowerRequest), isFromPool) as C2R_RankSeasonTowerRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.R2C_RankSeasonTowerResponse)]
+	[MemoryPackable]
+	public partial class R2C_RankSeasonTowerResponse: MessageObject, IRankActorResponse
+	{
+		public static R2C_RankSeasonTowerResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2C_RankSeasonTowerResponse), isFromPool) as R2C_RankSeasonTowerResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<RankSeasonTowerInfo> RankList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RankList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(R2C_RankShowLieResponse))]
+	[Message(OuterMessage.C2R_RankShowLieRequest)]
+	[MemoryPackable]
+	public partial class C2R_RankShowLieRequest: MessageObject, IRankActorRequest
+	{
+		public static C2R_RankShowLieRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2R_RankShowLieRequest), isFromPool) as C2R_RankShowLieRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.R2C_RankShowLieResponse)]
+	[MemoryPackable]
+	public partial class R2C_RankShowLieResponse: MessageObject, IRankActorResponse
+	{
+		public static R2C_RankShowLieResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2C_RankShowLieResponse), isFromPool) as R2C_RankShowLieResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<RankShouLieInfo> RankList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RankList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(R2C_RankTrialListResponse))]
+	[Message(OuterMessage.C2R_RankTrialListRequest)]
+	[MemoryPackable]
+	public partial class C2R_RankTrialListRequest: MessageObject, IRankActorRequest
+	{
+		public static C2R_RankTrialListRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2R_RankTrialListRequest), isFromPool) as C2R_RankTrialListRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.R2C_RankTrialListResponse)]
+	[MemoryPackable]
+	public partial class R2C_RankTrialListResponse: MessageObject, IRankActorResponse
+	{
+		public static R2C_RankTrialListResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2C_RankTrialListResponse), isFromPool) as R2C_RankTrialListResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<RankingTrialInfo> RankList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RankList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(R2C_RankUnionRaceResponse))]
+	[Message(OuterMessage.C2R_RankUnionRaceRequest)]
+	[MemoryPackable]
+	public partial class C2R_RankUnionRaceRequest: MessageObject, IRankActorRequest
+	{
+		public static C2R_RankUnionRaceRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2R_RankUnionRaceRequest), isFromPool) as C2R_RankUnionRaceRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.R2C_RankUnionRaceResponse)]
+	[MemoryPackable]
+	public partial class R2C_RankUnionRaceResponse: MessageObject, IRankActorResponse
+	{
+		public static R2C_RankUnionRaceResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2C_RankUnionRaceResponse), isFromPool) as R2C_RankUnionRaceResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<RankShouLieInfo> RankList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RankList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(R2C_WorldLvResponse))]
+	[Message(OuterMessage.C2R_WorldLvRequest)]
+	[MemoryPackable]
+	public partial class C2R_WorldLvRequest: MessageObject, IRankActorRequest
+	{
+		public static C2R_WorldLvRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2R_WorldLvRequest), isFromPool) as C2R_WorldLvRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RankType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.RankType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.R2C_WorldLvResponse)]
+	[MemoryPackable]
+	public partial class R2C_WorldLvResponse: MessageObject, IRankActorResponse
+	{
+		public static R2C_WorldLvResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2C_WorldLvResponse), isFromPool) as R2C_WorldLvResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public ServerInfo ServerInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.ServerInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -19510,5 +20197,27 @@ namespace ET
 		 public const ushort Popularize2C_ListResponse = 10548;
 		 public const ushort C2Popularize_PlayerRequest = 10549;
 		 public const ushort Popularize2C_PlayerResponse = 10550;
+		 public const ushort C2R_CampRankListRequest = 10551;
+		 public const ushort R2C_CampRankListResponse = 10552;
+		 public const ushort C2R_DBServerInfoRequest = 10553;
+		 public const ushort R2C_DBServerInfoResponse = 10554;
+		 public const ushort C2R_RankDemonRequest = 10555;
+		 public const ushort R2C_RankDemonResponse = 10556;
+		 public const ushort C2R_RankListRequest = 10557;
+		 public const ushort R2C_RankListResponse = 10558;
+		 public const ushort C2R_RankPetListRequest = 10559;
+		 public const ushort R2C_RankPetListResponse = 10560;
+		 public const ushort C2R_RankRunRaceRequest = 10561;
+		 public const ushort R2C_RankRunRaceResponse = 10562;
+		 public const ushort C2R_RankSeasonTowerRequest = 10563;
+		 public const ushort R2C_RankSeasonTowerResponse = 10564;
+		 public const ushort C2R_RankShowLieRequest = 10565;
+		 public const ushort R2C_RankShowLieResponse = 10566;
+		 public const ushort C2R_RankTrialListRequest = 10567;
+		 public const ushort R2C_RankTrialListResponse = 10568;
+		 public const ushort C2R_RankUnionRaceRequest = 10569;
+		 public const ushort R2C_RankUnionRaceResponse = 10570;
+		 public const ushort C2R_WorldLvRequest = 10571;
+		 public const ushort R2C_WorldLvResponse = 10572;
 	}
 }
