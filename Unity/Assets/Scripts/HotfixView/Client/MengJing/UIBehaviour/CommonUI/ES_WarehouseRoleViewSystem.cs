@@ -108,11 +108,13 @@ namespace ET.Client
             BuyCellCost buyCellCost = ConfigData.BuyStoreCellCosts[self.CurrentItemType * 10 + addcell];
             PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
                 $"是否花费{UICommonHelper.GetNeedItemDesc(buyCellCost.Cost)}购买一个背包格子?",
-                () => { BagClientNetHelper.RequestBuyBagCell(self.Root(), self.CurrentItemType + 5).Coroutine(); }, null).Coroutine();
+                () => { BagClientNetHelper.RequestBuyBagCell(self.Root(), self.CurrentItemType + (int)ItemLocType.ItemWareHouse1).Coroutine(); },
+                null).Coroutine();
         }
 
         public static void Refresh(this ES_WarehouseRole self)
         {
+            self.Root().GetComponent<BagComponentC>().CurrentHouse = self.CurrentItemType + (int)ItemLocType.ItemWareHouse1;
             self.RefreshHouseItems();
             self.RefreshBagItems();
         }
@@ -122,9 +124,9 @@ namespace ET.Client
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
 
             self.ShowHouseBagInfos.Clear();
-            self.ShowHouseBagInfos.AddRange(bagComponentC.GetItemsByLoc((ItemLocType)(self.CurrentItemType + 5)));
+            self.ShowHouseBagInfos.AddRange(bagComponentC.GetItemsByLoc((ItemLocType)(self.CurrentItemType + (int)ItemLocType.ItemWareHouse1)));
 
-            int allNumber = bagComponentC.GetHouseShowCell(self.CurrentItemType + 5);
+            int allNumber = bagComponentC.GetHouseShowCell(self.CurrentItemType + (int)ItemLocType.ItemWareHouse1);
             self.AddUIScrollItems(ref self.ScrollItemHouseItems, allNumber);
             self.E_BagItems1LoopVerticalScrollRect.SetVisible(true, allNumber);
         }
@@ -146,8 +148,8 @@ namespace ET.Client
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[index].BindTrans(transform);
 
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
-            int openell = bagComponentC.GetHouseTotalCell(self.CurrentItemType + 5);
-            int allNumber = bagComponentC.GetHouseShowCell(self.CurrentItemType + 5);
+            int openell = bagComponentC.GetHouseTotalCell(self.CurrentItemType + (int)ItemLocType.ItemWareHouse1);
+            int allNumber = bagComponentC.GetHouseShowCell(self.CurrentItemType + (int)ItemLocType.ItemWareHouse1);
 
             if (index < self.ShowHouseBagInfos.Count)
             {
@@ -164,7 +166,7 @@ namespace ET.Client
             }
             else
             {
-                int addcell = bagComponentC.WarehouseAddedCell[self.CurrentItemType + 5] + (index - openell);
+                int addcell = bagComponentC.WarehouseAddedCell[self.CurrentItemType + (int)ItemLocType.ItemWareHouse1] + (index - openell);
                 BuyCellCost buyCellCost = ConfigData.BuyStoreCellCosts[self.CurrentItemType * 10 + addcell];
                 int itemid = int.Parse(buyCellCost.Get.Split(';')[0]);
                 int itemnum = int.Parse(buyCellCost.Get.Split(';')[1]);
