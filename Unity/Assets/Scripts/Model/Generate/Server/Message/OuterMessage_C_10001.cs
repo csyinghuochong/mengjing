@@ -18562,6 +18562,64 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_SerialReardResponse))]
+//序列号奖励
+	[Message(OuterMessage.C2M_SerialReardRequest)]
+	[MemoryPackable]
+	public partial class C2M_SerialReardRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_SerialReardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_SerialReardRequest), isFromPool) as C2M_SerialReardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string SerialNumber { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.SerialNumber = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_SerialReardResponse)]
+	[MemoryPackable]
+	public partial class M2C_SerialReardResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_SerialReardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SerialReardResponse), isFromPool) as M2C_SerialReardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -19101,5 +19159,7 @@ namespace ET
 		 public const ushort C2M_ReddotReadRequest = 10536;
 		 public const ushort M2C_ReddotReadResponse = 10537;
 		 public const ushort C2M_RefreshUnitRequest = 10538;
+		 public const ushort C2M_SerialReardRequest = 10539;
+		 public const ushort M2C_SerialReardResponse = 10540;
 	}
 }

@@ -9,40 +9,36 @@ namespace ET.Server
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_SerialReardHandler : MessageLocationHandler<Unit, C2M_SerialReardRequest, M2C_SerialReardResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_SerialReardRequest request, M2C_SerialReardResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_SerialReardRequest request, M2C_SerialReardResponse response )
         {
-            if (unit.GetComponent<BagComponent>().GetBagLeftCell() < 5)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < 5)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
-                reply();
                 return;
             }
-            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             if (numericComponent.GetAsInt(NumericType.SerialNumber) >= 5)
             {
                 response.Error = ErrorCode.ERR_TimesIsNot;
-                reply();
                 return;
             }
 
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.Received, unit.Id))
+            using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Received, unit.Id))
             {
                 M2Center_SerialReardRequest m2Center_Serial = new M2Center_SerialReardRequest() { SerialNumber = request.SerialNumber };
-                long centerid = DBHelper.GetAccountCenter();
-                Center2M_SerialReardResponse m2m_TrasferUnitResponse = (Center2M_SerialReardResponse)await ActorMessageSenderComponent.Instance.Call
+                ActorId centerid = UnitCacheHelper.GetAccountCenter();
+                Center2M_SerialReardResponse m2m_TrasferUnitResponse = (Center2M_SerialReardResponse)await unit.Root().GetComponent<MessageSender>().Call
                           (centerid, m2Center_Serial);
 
                 response.Error = m2m_TrasferUnitResponse.Error;
                 if (m2m_TrasferUnitResponse.Error == ErrorCode.ERR_Success)
                 {
                     int serialIndex = int.Parse(m2m_TrasferUnitResponse.Message);
-                    string reward = ConfigHelper.SerialReward[serialIndex];
-                    unit.GetComponent<BagComponent>().OnAddItemData(reward, $"{ItemGetWay.Serial}_{TimeHelper.ServerNow()}");
+                    string reward = ConfigData.SerialReward[serialIndex];
+                    unit.GetComponent<BagComponentS>().OnAddItemData(reward, $"{ItemGetWay.Serial}_{TimeHelper.ServerNow()}");
                     numericComponent.ApplyChange( null, NumericType.SerialNumber,  1, 0);
                 }
             }
-
-            reply();
             await ETTask.CompletedTask;
         }
     }

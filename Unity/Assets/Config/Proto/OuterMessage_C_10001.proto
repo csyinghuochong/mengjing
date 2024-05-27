@@ -4741,3 +4741,18 @@ message C2M_RefreshUnitRequest // ILocationMessage
 	int32 RpcId = 90;
 	int64 ActorId = 93;
 }
+
+//ResponseType M2C_SerialReardResponse
+//序列号奖励
+message C2M_SerialReardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	string SerialNumber = 1;
+}
+
+message M2C_SerialReardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
