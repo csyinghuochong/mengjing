@@ -18681,6 +18681,75 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_UnitInfoResponse))]
+	[Message(OuterMessage.C2M_UnitInfoRequest)]
+	[MemoryPackable]
+	public partial class C2M_UnitInfoRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_UnitInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_UnitInfoRequest), isFromPool) as C2M_UnitInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_UnitInfoResponse)]
+	[MemoryPackable]
+	public partial class M2C_UnitInfoResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_UnitInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_UnitInfoResponse), isFromPool) as M2C_UnitInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(5)]
+		public List<int> Ks { get; set; } = new();
+
+		[MemoryPackOrder(6)]
+		public List<long> Vs { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.Ks.Clear();
+			this.Vs.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -19224,5 +19293,7 @@ namespace ET
 		 public const ushort M2C_SerialReardResponse = 10540;
 		 public const ushort C2M_ShareSucessRequest = 10541;
 		 public const ushort M2C_ShareSucessResponse = 10542;
+		 public const ushort C2M_UnitInfoRequest = 10543;
+		 public const ushort M2C_UnitInfoResponse = 10544;
 	}
 }

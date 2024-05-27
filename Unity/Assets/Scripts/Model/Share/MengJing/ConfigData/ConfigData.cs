@@ -30,6 +30,21 @@ namespace ET
         
        
         /// <summary>
+        /// 施法前吟唱时给自己添加一个buff
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, int> SingingBuffList = 
+                new Dictionary<int, int>
+                {
+                    //驭剑士光能击吟唱为霸体状态
+                    { 61022102, 80001033 },
+                    { 61022103, 80001033 },
+                    { 61022104, 80001033 },
+                    { 61022105, 80001033 },
+                    { 61022106, 80001033 },
+                };
+        
+        /// <summary>
         /// 序列号奖励 奖励最多不超过五个格子 
         /// </summary>
         [StaticField]

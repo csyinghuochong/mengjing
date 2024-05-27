@@ -692,22 +692,6 @@ namespace ET
 
 
         /// <summary>
-        /// 施法前吟唱时给自己添加一个buff
-        /// </summary>
-        public static Dictionary<int, int> SingingBuffList()
-        {
-            return new Dictionary<int, int>
-            {
-                //驭剑士光能击吟唱为霸体状态
-                { 61022102, 80001033 },
-                { 61022103, 80001033 },
-                { 61022104, 80001033 },
-                { 61022105, 80001033 },
-                { 61022106, 80001033 },
-            };
-        }
-
-        /// <summary>
         /// 支持批量使用的道具.  目前服务器只支持ItemSubType = 111 的道具批量使用
         /// 支持批量使用的道具客户端点击使用的时候二次弹框，输入使用数量。
         /// self.ZoneScene().GetComponent<BagComponent>().SendUseItem(self.BagInfo, 使用数量).Coroutine();

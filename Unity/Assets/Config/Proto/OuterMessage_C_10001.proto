@@ -4771,3 +4771,21 @@ message M2C_ShareSucessResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType M2C_UnitInfoResponse
+message C2M_UnitInfoRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitID = 1;
+}
+
+message M2C_UnitInfoResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	repeated int32 Ks = 6;
+	repeated int64 Vs = 7;
+}

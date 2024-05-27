@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    /// <summary>
-    /// 获取玩家数值
-    /// </summary>
-    [ActorMessageHandler]
+    [MessageLocationHandler(SceneType.Map)]
+    [FriendOf(typeof(NumericComponentS))]
     public class C2M_UnitInfoHandler : MessageLocationHandler<Unit, C2M_UnitInfoRequest, M2C_UnitInfoResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_UnitInfoRequest request, M2C_UnitInfoResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_UnitInfoRequest request, M2C_UnitInfoResponse response)
         {
 
             Unit watchUnit = unit;
@@ -20,7 +18,7 @@ namespace ET
 
             if (watchUnit != null)
             {
-                Dictionary<int, long> numericlist = watchUnit.GetComponent<NumericComponent>().NumericDic;
+                Dictionary<int, long> numericlist = watchUnit.GetComponent<NumericComponentS>().NumericDic;
                 foreach ((int key, long value) in numericlist )
                 {
                     if (key >= (int)NumericType.Max)
@@ -32,7 +30,6 @@ namespace ET
                 }
             }
 
-            reply();
             await ETTask.CompletedTask;
         }
     }
