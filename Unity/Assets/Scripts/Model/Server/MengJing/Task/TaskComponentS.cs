@@ -7,7 +7,7 @@ namespace ET.Server
     [ComponentOf(typeof(Unit))]
     public class TaskComponentS : Entity, IAwake, ITransfer, IDestroy, IUnitCache, IDeserialize
     {
-        public int OnLineTime = 0;
+        public int OnLineTime { get; set; } = 0;
         public List<int> ReceiveHuoYueIds = new List<int>();
         public List<TaskPro> TaskCountryList = new List<TaskPro>();
         public List<TaskPro> RoleTaskList = new List<TaskPro>();

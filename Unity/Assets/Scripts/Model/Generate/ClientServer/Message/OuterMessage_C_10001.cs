@@ -18620,6 +18620,67 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_ShareSucessResponse))]
+	[Message(OuterMessage.C2M_ShareSucessRequest)]
+	[MemoryPackable]
+	public partial class C2M_ShareSucessRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ShareSucessRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ShareSucessRequest), isFromPool) as C2M_ShareSucessRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ShareType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ShareType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ShareSucessResponse)]
+	[MemoryPackable]
+	public partial class M2C_ShareSucessResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ShareSucessResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ShareSucessResponse), isFromPool) as M2C_ShareSucessResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -19161,5 +19222,7 @@ namespace ET
 		 public const ushort C2M_RefreshUnitRequest = 10538;
 		 public const ushort C2M_SerialReardRequest = 10539;
 		 public const ushort M2C_SerialReardResponse = 10540;
+		 public const ushort C2M_ShareSucessRequest = 10541;
+		 public const ushort M2C_ShareSucessResponse = 10542;
 	}
 }
