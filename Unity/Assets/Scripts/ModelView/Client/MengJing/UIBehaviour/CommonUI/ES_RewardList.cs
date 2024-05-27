@@ -28,6 +28,18 @@ namespace ET.Client
      		}
      	}
 
+		    public Transform UITransform
+         {
+     	    get
+     	    {
+     		    return this.uiTransform;
+     	    }
+     	    set
+     	    {
+     		    this.uiTransform = value;
+     	    }
+         }
+
 		public void DestroyWidget()
 		{
 			this.m_E_BagItemsLoopVerticalScrollRect = null;
