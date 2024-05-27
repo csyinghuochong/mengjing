@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_CostList))]
     [FriendOf(typeof (ES_EquipSet))]
     [EntitySystemOf(typeof (ES_RoleXiLianShow))]
     [FriendOfAttribute(typeof (ES_RoleXiLianShow))]
@@ -76,8 +77,14 @@ namespace ET.Client
             self.OnUpdateXinLian();
         }
 
+        public static void UpdateAttribute(this ES_RoleXiLianShow self, BagInfo bagInfo)
+        {
+        }
+
         private static void OnUpdateXinLian(this ES_RoleXiLianShow self)
         {
+            BagInfo bagInfo = self.XilianBagInfo;
+            self.ES_CostList.uiTransform.gameObject.SetActive(bagInfo != null);
         }
     }
 }
