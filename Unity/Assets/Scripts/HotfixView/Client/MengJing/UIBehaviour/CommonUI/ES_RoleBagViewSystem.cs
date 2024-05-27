@@ -246,7 +246,7 @@ namespace ET.Client
             }
 
             PopupTipHelp.OpenPopupTip(self.Root(), "合成宝石", $"一键合成消耗{costgold}金币",
-                        () => { BagClientNetHelper.RquestGemHeCheng(self.Root()).Coroutine(); }, null)
+                        () => { BagClientNetHelper.RquestGemHeCheng(self.Root(), 0).Coroutine(); }, null)
                     .Coroutine();
         }
 

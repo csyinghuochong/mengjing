@@ -51,5 +51,7 @@ namespace ET.Client
 		WindowID_Mail,
 		WindowID_RoleXiLian,
 		WindowID_RoleXiLianTen,
+		WindowID_RoleXiLianExplain,
+		WindowID_RoleXiLianNumReward,
 	}
 }

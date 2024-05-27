@@ -21,13 +21,11 @@ namespace ET.Client
             self.E_XiLianTenButton.AddListener(() => { self.OnXiLianButton(5).Coroutine(); });
             self.E_Btn_XiLianNumRewardButton.AddListener(() =>
             {
-                FlyTipComponent.Instance.SpawnFlyTip("界面暂未开放");
-                // UIHelper.Create(self.ZoneScene(), UIType.UIRoleXiLianNumReward).Coroutine();
+                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RoleXiLianNumReward).Coroutine();
             });
             self.E_Btn_XiLianExplainButton.AddListener(() =>
             {
-                FlyTipComponent.Instance.SpawnFlyTip("界面暂未开放");
-                // UIHelper.Create(self.ZoneScene(), UIType.UIRoleXiLianExplain).Coroutine();
+                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RoleXiLianExplain).Coroutine();
             });
 
             self.E_NeedDiamondText.text = GlobalValueConfigCategory.Instance.Get(73).Value;

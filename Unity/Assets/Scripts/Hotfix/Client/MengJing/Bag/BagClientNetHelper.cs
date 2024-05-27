@@ -333,9 +333,9 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RquestGemHeCheng(Scene root)
+        public static async ETTask<int> RquestGemHeCheng(Scene root, int locType)
         {
-            C2M_GemHeChengQuickRequest request = new();
+            C2M_GemHeChengQuickRequest request = new() { LocType = locType };
             M2C_GemHeChengQuickResponse response =
                     (M2C_GemHeChengQuickResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
@@ -398,7 +398,8 @@ namespace ET.Client
                     (M2C_AccountWarehousOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             if (response.Error == ErrorCode.ERR_Success)
             {
-                // HintHelp.GetInstance().DataUpdate(DataType.AccountWarehous, operateType.ToString(), operateId);
+                EventSystem.Instance.Publish(root,
+                    new DataUpdate_OnAccountWarehous() { DataParamString = operateType.ToString(), baginfoId = operateId });
             }
 
             return response.Error;
@@ -410,10 +411,6 @@ namespace ET.Client
             C2M_AccountWarehousInfoRequest reuqest = new() { AccInfoID = accountId };
             M2C_AccountWarehousInfoResponse response =
                     (M2C_AccountWarehousInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(reuqest);
-            if (response.Error == ErrorCode.ERR_Success)
-            {
-                // HintHelp.GetInstance().DataUpdate(DataType.AccountWarehous, operateType.ToString(), operateId);
-            }
 
             return response.Error;
         }

@@ -36,10 +36,8 @@ namespace ET.Client
                 return;
             }
 
-            C2M_GemHeChengQuickRequest request = new() { LocType = 19 };
-            M2C_GemHeChengQuickResponse response =
-                    (M2C_GemHeChengQuickResponse)await self.Root().GetComponent<SessionComponent>().Session.Call(request);
-            if (response.Error == 0)
+            int error = await BagClientNetHelper.RquestGemHeCheng(self.Root(), 19);
+            if (error == 0)
             {
                 FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("宝石合成成功！"));
             }
