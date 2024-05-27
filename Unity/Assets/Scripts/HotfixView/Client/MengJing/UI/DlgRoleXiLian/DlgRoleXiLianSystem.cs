@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_RoleXiLianShow))]
     [FriendOf(typeof (DlgRoleXiLian))]
     public static class DlgRoleXiLianSystem
     {
@@ -35,6 +36,8 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
+                    self.View.ES_RoleXiLianShow.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_RoleXiLianShow.OnUpdateUI();
                     break;
                 case 1:
                     break;

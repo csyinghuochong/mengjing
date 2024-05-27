@@ -12,6 +12,7 @@ namespace ET.Client
 		public BagInfo XilianBagInfo;
 		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
+		public ETCancellationToken ETCancellationToken;
 		
 		public UnityEngine.UI.Button E_ImageButtonButton
      	{

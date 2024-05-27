@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_CommonItem))]
     [FriendOf(typeof (ES_CommonItem))]
     [FriendOf(typeof (ES_EquipSet))]
     [EntitySystemOf(typeof (ES_RoleXiLianShow))]
@@ -14,6 +16,13 @@ namespace ET.Client
         {
             self.uiTransform = transform;
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
+            self.E_EquipItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
+            self.E_XiLianButtonButton.AddListener(() => { self.OnXiLianButton(1).Coroutine(); });
+            self.E_XiLianTenButton.AddListener(() => { self.OnXiLianButton(5).Coroutine(); });
+            // self.E_Btn_XiLianNumRewardButton.AddListener(() => { UIHelper.Create(self.ZoneScene(), UIType.UIRoleXiLianNumReward).Coroutine(); });
+            // self.E_Btn_XiLianExplainButton.AddListener(() => { UIHelper.Create(self.ZoneScene(), UIType.UIRoleXiLianExplain).Coroutine(); });
+
+            self.E_NeedDiamondText.text = GlobalValueConfigCategory.Instance.Get(73).Value;
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
@@ -48,16 +57,60 @@ namespace ET.Client
                     self.ES_EquipSet.RefreshEquip(bagComponent.GetItemsByLoc(ItemLocType.ItemLocEquip),
                         bagComponent.GetItemsByLoc(ItemLocType.ItemLocEquip_2), userInfoComponent.UserInfo.Occ, ItemOperateEnum.Juese);
                     self.ES_EquipSet.SetCallBack(self.OnSelectItem);
-
                     break;
                 case 1:
                     self.ES_EquipSet.uiTransform.gameObject.SetActive(false);
                     self.E_EquipItemsLoopVerticalScrollRect.gameObject.SetActive(true);
 
+                    self.ShowBagInfos.Clear();
+                    List<BagInfo> equipInfos = bagComponent.GetItemsByType(ItemTypeEnum.Equipment);
+                    for (int i = 0; i < equipInfos.Count; i++)
+                    {
+                        if (equipInfos[i].IfJianDing)
+                        {
+                            continue;
+                        }
+
+                        ItemConfig itemConfig = ItemConfigCategory.Instance.Get(equipInfos[i].ItemID);
+                        if (itemConfig.EquipType == 101 || itemConfig.EquipType == 201)
+                        {
+                            continue;
+                        }
+
+                        self.ShowBagInfos.Add(equipInfos[i]);
+                    }
+
+                    self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
+                    self.E_EquipItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
+
+                    if (self.XilianBagInfo != null)
+                    {
+                        self.OnSelectItem(self.XilianBagInfo);
+                    }
+                    else if (self.ShowBagInfos.Count > 0)
+                    {
+                        if (self.ScrollItemCommonItems[0].uiTransform != null)
+                        {
+                            self.ScrollItemCommonItems[0].ES_CommonItem.OnClickUIItem();
+                        }
+                    }
+
                     break;
             }
 
             self.CurrentItemType = index;
+        }
+
+        public static void OnUpdateUI(this ES_RoleXiLianShow self)
+        {
+            self.XilianBagInfo = null;
+            self.OnItemTypeSet(0);
+        }
+
+        private static void OnBagItemsRefresh(this ES_RoleXiLianShow self, Transform transform, int index)
+        {
+            Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
+            scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.ItemXiLian, self.OnSelectItem);
         }
 
         private static void OnSelectItem(this ES_RoleXiLianShow self, BagInfo bagInfo)
@@ -128,6 +181,115 @@ namespace ET.Client
             {
                 self.E_Text_CostValueText.color = Color.green;
             }
+        }
+
+        public static async ETTask OnXiLianButton(this ES_RoleXiLianShow self, int times)
+        {
+            if (self.XilianBagInfo == null)
+            {
+                return;
+            }
+
+            BagInfo bagInfo = self.XilianBagInfo;
+            if (times == 1)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+                List<RewardItem> costItems = new List<RewardItem>();
+                int[] itemCost = itemConfig.XiLianStone;
+                if (itemCost != null && itemCost.Length >= 2)
+                {
+                    costItems.Add(new RewardItem() { ItemID = itemCost[0], ItemNum = itemCost[1] * times });
+                }
+
+                if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem(costItems))
+                {
+                    FlyTipComponent.Instance.SpawnFlyTipDi("材料不足！");
+                    return;
+                }
+            }
+
+            if (times > 1)
+            {
+                int needDimanond = int.Parse(GlobalValueConfigCategory.Instance.Get(73).Value.Split('@')[0]);
+                int itemXiLianNumber = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>()
+                        .GetAsInt(NumericType.ItemXiLianNumber);
+                string[] set = GlobalValueConfigCategory.Instance.Get(116).Value.Split(';');
+                float discount;
+                if (itemXiLianNumber < int.Parse(set[0]))
+                {
+                    discount = 1;
+                }
+                else
+                {
+                    discount = float.Parse(set[1]);
+                }
+
+                if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.Diamond < (int)(needDimanond * discount))
+                {
+                    ErrorViewHelp.ShowErrorHint(ErrorCode.ERR_DiamondNotEnoughError);
+                    return;
+                }
+            }
+
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int oldXiLianDu = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemXiLianDu);
+
+            C2M_ItemXiLianRequest c2M_ItemHuiShouRequest = new() { OperateBagID = bagInfo.BagInfoID, Times = times };
+            M2C_ItemXiLianResponse r2c_roleEquip =
+                    (M2C_ItemXiLianResponse)await self.Root().GetComponent<SessionComponent>().Session.Call(c2M_ItemHuiShouRequest);
+            if (r2c_roleEquip.Error != 0)
+            {
+                return;
+            }
+
+            if (times == 1)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("洗炼道具成功");
+                self.OnXiLianReturn();
+                self.ShowXiLianEffect().Coroutine();
+            }
+
+            if (times > 1)
+            {
+                int newXiLianDu = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemXiLianDu);
+                FlyTipComponent.Instance.SpawnFlyTipDi($"获得{newXiLianDu - oldXiLianDu}洗炼经验");
+
+                // UI uitex = await UIHelper.Create(self.ZoneScene(), UIType.UIRoleXiLianTen);
+                // uitex.GetComponent<UIRoleXiLianTenComponent>().OnInitUI(bagInfo, r2c_roleEquip.ItemXiLianResults);
+                // self.OnXiLianReturn();
+            }
+
+            //记录tap数据
+            //             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            //             string serverName = playerComponent.ServerName;
+            //             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            // #if UNITY_ANDROID
+            //             TapSDKHelper.UpLoadPlayEvent(userInfo.Name, serverName, userInfo.Lv, 2, times);
+            // #endif
+        }
+
+        private static void OnXiLianReturn(this ES_RoleXiLianShow self)
+        {
+            self.XilianBagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(self.XilianBagInfo.BagInfoID);
+            self.OnUpdateXinLian();
+            self.OnItemTypeSet(self.CurrentItemType);
+        }
+
+        private static async ETTask ShowXiLianEffect(this ES_RoleXiLianShow self)
+        {
+            self.ETCancellationToken?.Cancel();
+            self.ETCancellationToken = null;
+            self.ETCancellationToken = new ETCancellationToken();
+            long instance = self.InstanceId;
+            self.EG_XiLianEffectRectTransform.gameObject.SetActive(false);
+            self.EG_XiLianEffectRectTransform.gameObject.SetActive(true);
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(2000, self.ETCancellationToken);
+            if (instance != self.InstanceId)
+            {
+                return;
+            }
+
+            self.EG_XiLianEffectRectTransform.gameObject.SetActive(false);
         }
     }
 }
