@@ -6615,6 +6615,126 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Popularize2C_RewardResponse))]
+//我的推广奖励
+	[Message(InnerMessage.C2Popularize_RewardRequest)]
+	[MemoryPackable]
+	public partial class C2Popularize_RewardRequest: MessageObject, IPopularizeActorRequest
+	{
+		public static C2Popularize_RewardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2Popularize_RewardRequest), isFromPool) as C2Popularize_RewardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.Popularize2C_RewardResponse)]
+	[MemoryPackable]
+	public partial class Popularize2C_RewardResponse: MessageObject, IPopularizeActorResponse
+	{
+		public static Popularize2C_RewardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Popularize2C_RewardResponse), isFromPool) as Popularize2C_RewardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(Popularize2C_UploadResponse))]
+//内存占用
+	[Message(InnerMessage.C2Popularize_UploadRequest)]
+	[MemoryPackable]
+	public partial class C2Popularize_UploadRequest: MessageObject, IPopularizeActorRequest
+	{
+		public static C2Popularize_UploadRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2Popularize_UploadRequest), isFromPool) as C2Popularize_UploadRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string MemoryInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.MemoryInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.Popularize2C_UploadResponse)]
+	[MemoryPackable]
+	public partial class Popularize2C_UploadResponse: MessageObject, IPopularizeActorResponse
+	{
+		public static Popularize2C_UploadResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Popularize2C_UploadResponse), isFromPool) as Popularize2C_UploadResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -6812,5 +6932,9 @@ namespace ET
 		 public const ushort M2M_AllPlayerListResponse = 20194;
 		 public const ushort Popularize2M_RewardRequest = 20195;
 		 public const ushort M2Popularize_RewardResponse = 20196;
+		 public const ushort C2Popularize_RewardRequest = 20197;
+		 public const ushort Popularize2C_RewardResponse = 20198;
+		 public const ushort C2Popularize_UploadRequest = 20199;
+		 public const ushort Popularize2C_UploadResponse = 20200;
 	}
 }

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class C2Popularize_RewardHandler : AMActorRpcHandler<Scene, C2Popularize_RewardRequest, Popularize2C_RewardResponse>
+    [MessageLocationHandler(SceneType.Map)]
+    public class C2Popularize_RewardHandler : MessageHandler<Scene, C2Popularize_RewardRequest, Popularize2C_RewardResponse>
     {
         protected override async ETTask Run(Scene scene, C2Popularize_RewardRequest request, Popularize2C_RewardResponse response, Action reply)
         {

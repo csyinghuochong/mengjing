@@ -4827,3 +4827,19 @@ message Popularize2C_ListResponse // IPopularizeActorResponse
 	int64 BePopularizeId = 2;
 	repeated PopularizeInfo MyPopularizeList = 3;
 }
+
+//ResponseType Popularize2C_PlayerResponse
+//我推广的玩家
+message C2Popularize_PlayerRequest // IPopularizeActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 PopularizeId = 1;
+}
+
+message Popularize2C_PlayerResponse // IPopularizeActorResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
