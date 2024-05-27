@@ -42,6 +42,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_RoleXiLianLevel ES_RoleXiLianLevel
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_rolexilianlevel == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleXiLianLevel");
+		    	   this.m_es_rolexilianlevel = this.AddChild<ES_RoleXiLianLevel,Transform>(subTrans);
+     			}
+     			return this.m_es_rolexilianlevel;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -148,6 +166,7 @@ namespace ET.Client
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_rolexilianshow = null;
+			this.m_es_rolexilianlevel = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_XiLianToggle = null;
 			this.m_E_DaShiToggle = null;
@@ -159,6 +178,7 @@ namespace ET.Client
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_RoleXiLianShow> m_es_rolexilianshow = null;
+		private EntityRef<ES_RoleXiLianLevel> m_es_rolexilianlevel = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_XiLianToggle = null;
 		private UnityEngine.UI.Toggle m_E_DaShiToggle = null;

@@ -8,6 +8,31 @@ namespace ET.Client
 {
     public static class ItemViewHelp
     {
+        public static string XiLianWeiZhiTip(int hideId)
+        {
+            string tip = string.Empty;
+            HideProListConfig hideProListConfig = HideProListConfigCategory.Instance.Get(hideId);
+            int[] spaces = hideProListConfig.EquipSpace;
+            if (spaces == null)
+            {
+                return tip;
+            }
+
+            tip += "\n\r";
+            tip += "<color=#ACFF23FF>此属性可出现的装备部位：\n";
+
+
+            for (int i = 0; i < spaces.Length; i++)
+            {
+                tip += GetItemSubType3Name(spaces[i]) + "、";
+            }
+
+            tip = tip.Substring(0, tip.Length - 1);
+
+            tip += "</color>";
+            return tip;
+        }
+
         public static string ShowDuiHuanPet(int configId)
         {
             GlobalValueConfig globalValue = GlobalValueConfigCategory.Instance.Get(configId);

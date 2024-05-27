@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_RoleXiLianShow))]
+    [FriendOf(typeof (ES_RoleXiLianLevel))]
     [FriendOf(typeof (DlgRoleXiLian))]
     public static class DlgRoleXiLianSystem
     {
@@ -40,6 +41,8 @@ namespace ET.Client
                     self.View.ES_RoleXiLianShow.OnUpdateUI();
                     break;
                 case 1:
+                    self.View.ES_RoleXiLianLevel.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_RoleXiLianLevel.OnUpdateUI();
                     break;
                 case 2:
                     break;
@@ -56,7 +59,7 @@ namespace ET.Client
 
             uiComponent.CloseWindow(WindowID.WindowID_RoleXiLian);
         }
-        
+
         public static void OnXiLianReturn(this DlgRoleXiLian self)
         {
             self.View.ES_RoleXiLianShow.OnXiLianReturn();
