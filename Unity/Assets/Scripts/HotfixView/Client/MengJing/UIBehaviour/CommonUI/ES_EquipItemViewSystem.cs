@@ -73,6 +73,12 @@ namespace ET.Client
                 return;
             }
 
+            if (self.OnClickAction != null)
+            {
+                self.OnClickAction.Invoke(self.BagInfo);
+                return;
+            }
+
             EventSystem.Instance.Publish(self.Root(),
                 new ShowItemTips()
                 {

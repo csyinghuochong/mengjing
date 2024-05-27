@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_EquipItem))]
     [FriendOf(typeof (UserInfoComponentC))]
     [EntitySystemOf(typeof (ES_EquipSet))]
     [FriendOfAttribute(typeof (ES_EquipSet))]
@@ -35,6 +37,19 @@ namespace ET.Client
         private static void Destroy(this ES_EquipSet self)
         {
             self.DestroyWidget();
+        }
+
+        public static void SetCallBack(this ES_EquipSet self, Action<BagInfo> action)
+        {
+            foreach (ES_EquipItem item in self.ESEquipItems_1)
+            {
+                item.OnClickAction = action;
+            }
+
+            foreach (ES_EquipItem item in self.ESEquipItems_2)
+            {
+                item.OnClickAction = action;
+            }
         }
 
         public static void PlayerLv(this ES_EquipSet self, int lv)

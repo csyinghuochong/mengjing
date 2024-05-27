@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ namespace ET.Client
 		public BagInfo BagInfo;
 		public ItemOperateEnum ItemOperateEnum;
 		public List<BagInfo> EquipList = new();
+		public Action<BagInfo> OnClickAction;
 		
 		public UnityEngine.UI.Image E_EquipBackImage
      	{
