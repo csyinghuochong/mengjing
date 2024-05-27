@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ET.Danger.Handler.Solo
+namespace ET
 {
-    internal class M2S_SoloResultHandle
-    {
-    }
+    // public class M2S_SoloResultHandle
+    // {
+    // }
 }
