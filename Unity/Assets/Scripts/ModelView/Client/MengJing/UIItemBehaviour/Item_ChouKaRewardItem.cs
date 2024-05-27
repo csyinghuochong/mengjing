@@ -6,6 +6,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_ChouKaRewardItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
+		public int RewardKey;
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)

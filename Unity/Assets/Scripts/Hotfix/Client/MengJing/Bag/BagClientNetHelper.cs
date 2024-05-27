@@ -440,5 +440,14 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<int> RquestItemXiLianNumReward(Scene root, int rewardId)
+        {
+            C2M_ItemXiLianNumReward request = new() { RewardId = rewardId };
+            M2C_ItemXiLianNumReward response =
+                    (M2C_ItemXiLianNumReward)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
 }
