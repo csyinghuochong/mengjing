@@ -40,6 +40,9 @@ namespace ET.Client
             self.ES_EquipSet.PlayerName(userInfo.Name);
             self.ES_EquipSet.ShowPlayerModel(bagInfo, userInfo.Occ, unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.EquipIndex),
                 bagComponent.FashionEquipList);
+
+            self.ES_CommonItem.uiTransform.gameObject.SetActive(false);
+            self.ES_CommonItem_Cost.uiTransform.gameObject.SetActive(false);
         }
 
         [EntitySystem]
@@ -125,14 +128,17 @@ namespace ET.Client
         {
             self.XilianBagInfo = bagInfo;
 
-            foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
+            if (self.ScrollItemCommonItems != null)
             {
-                if (item == null)
+                foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
                 {
-                    continue;
-                }
+                    if (item.uiTransform == null)
+                    {
+                        continue;
+                    }
 
-                item.UpdateSelectStatus(bagInfo);
+                    item.UpdateSelectStatus(bagInfo);
+                }
             }
 
             self.OnUpdateXinLian();
@@ -162,10 +168,10 @@ namespace ET.Client
             }
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
-            if (self.ES_CommonItem != null)
-            {
-                self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
-            }
+            self.ES_CommonItem.uiTransform.gameObject.SetActive(true);
+            self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
+            self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
+            self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
 
             //洗炼消耗
             int[] itemCost = itemConfig.XiLianStone;

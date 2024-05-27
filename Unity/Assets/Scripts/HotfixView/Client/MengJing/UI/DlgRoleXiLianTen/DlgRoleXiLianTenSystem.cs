@@ -14,6 +14,8 @@ namespace ET.Client
         {
             ReferenceCollector rc = self.View.uiTransform.GetComponent<ReferenceCollector>();
             self.UIRoleXiLianTenItem = rc.Get<GameObject>("UIRoleXiLianTenItem");
+
+            self.View.E_ImageButtonCloseButton.AddListener(self.OnClose);
         }
 
         public static void ShowWindow(this DlgRoleXiLianTen self, Entity contextData = null)
@@ -35,6 +37,11 @@ namespace ET.Client
                 itemGo.SetActive(true);
                 self.AddChild<UIRoleXiLianTenItem, GameObject>(itemGo).OnInitUI(bagInfoTemp, itemXiLians[i]);
             }
+        }
+
+        private static void OnClose(this DlgRoleXiLianTen self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_RoleXiLianTen);
         }
     }
 }
