@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_CostList))]
+    [FriendOf(typeof (ES_CommonItem))]
     [FriendOf(typeof (ES_EquipSet))]
     [EntitySystemOf(typeof (ES_RoleXiLianShow))]
     [FriendOfAttribute(typeof (ES_RoleXiLianShow))]
@@ -93,7 +93,7 @@ namespace ET.Client
         private static void OnUpdateXinLian(this ES_RoleXiLianShow self)
         {
             BagInfo bagInfo = self.XilianBagInfo;
-            self.ES_CostList.uiTransform.gameObject.SetActive(bagInfo != null);
+            self.ES_CommonItem_Cost.uiTransform.gameObject.SetActive(bagInfo != null);
             self.UpdateAttribute(bagInfo);
             if (bagInfo == null)
             {
@@ -110,14 +110,14 @@ namespace ET.Client
             int[] itemCost = itemConfig.XiLianStone;
             if (itemCost == null || itemCost.Length < 2)
             {
-                self.ES_CostList.uiTransform.gameObject.SetActive(false);
+                self.ES_CommonItem_Cost.uiTransform.gameObject.SetActive(false);
                 return;
             }
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             BagInfo bagInfoNeed = new BagInfo() { ItemID = itemCost[0], ItemNum = itemCost[1] };
-            // self.CostItemUI.UpdateItem(bagInfoNeed, ItemOperateEnum.None);
-            // self.CostItemUI.Label_ItemNum.SetActive(false);
+            self.ES_CommonItem_Cost.UpdateItem(bagInfoNeed, ItemOperateEnum.None);
+            self.ES_CommonItem_Cost.E_ItemNumText.gameObject.SetActive(false);
 
             self.E_Text_CostValueText.text = $"{bagComponent.GetItemNumber(itemCost[0])}/{itemCost[1]}";
             self.E_Text_CostValueText.color = bagComponent.GetItemNumber(itemCost[0]) >= itemCost[1]? Color.green : Color.red;

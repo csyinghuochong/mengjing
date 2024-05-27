@@ -185,7 +185,7 @@ namespace ET.Client
      		}
      	}
 
-		public ES_CostList ES_CostList
+		public ES_CommonItem ES_CommonItem_Cost
      	{
      		get
      		{
@@ -194,12 +194,12 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_costlist == null )
+     			if( this.m_es_commonitem_cost == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_CostList");
-		    	   this.m_es_costlist = this.AddChild<ES_CostList,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_CommonItem_Cost");
+		    	   this.m_es_commonitem_cost = this.AddChild<ES_CommonItem,Transform>(subTrans);
      			}
-     			return this.m_es_costlist;
+     			return this.m_es_commonitem_cost;
      		}
      	}
 
@@ -465,7 +465,7 @@ namespace ET.Client
 			this.m_E_Obj_EquipPropertyTextText = null;
 			this.m_EG_EquipBaseSetListRectTransform = null;
 			this.m_es_commonitem = null;
-			this.m_es_costlist = null;
+			this.m_es_commonitem_cost = null;
 			this.m_E_Text_CostNameText = null;
 			this.m_E_Text_CostValueText = null;
 			this.m_E_XiLianButtonButton = null;
@@ -493,7 +493,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_Obj_EquipPropertyTextText = null;
 		private UnityEngine.RectTransform m_EG_EquipBaseSetListRectTransform = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
-		private EntityRef<ES_CostList> m_es_costlist = null;
+		private EntityRef<ES_CommonItem> m_es_commonitem_cost = null;
 		private UnityEngine.UI.Text m_E_Text_CostNameText = null;
 		private UnityEngine.UI.Text m_E_Text_CostValueText = null;
 		private UnityEngine.UI.Button m_E_XiLianButtonButton = null;
