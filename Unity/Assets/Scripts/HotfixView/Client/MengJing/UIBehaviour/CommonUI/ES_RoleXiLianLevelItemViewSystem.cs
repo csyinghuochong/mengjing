@@ -32,10 +32,8 @@ namespace ET.Client
 
         public static async ETTask OnButtonGet(this ES_RoleXiLianLevelItem self)
         {
-            C2M_ItemXiLianRewardRequest request = new() { XiLianId = self.XiLianLevelId };
-            M2C_ItemXiLianRewardResponse response =
-                    (M2C_ItemXiLianRewardResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
-            if (response.Error != ErrorCode.ERR_Success)
+            int error = await BagClientNetHelper.RquestItemXiLianReward(self.Root(), self.XiLianLevelId);
+            if (error != ErrorCode.ERR_Success)
             {
                 return;
             }
