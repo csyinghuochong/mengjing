@@ -1683,7 +1683,7 @@ message Popularize2M_RewardRequest // IRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
-	repeated RewardItem ReardList = 5;		//奖励列表
+	repeated RewardItem ReardList = 1;		//奖励列表
 }
 
 message M2Popularize_RewardResponse // IResponse

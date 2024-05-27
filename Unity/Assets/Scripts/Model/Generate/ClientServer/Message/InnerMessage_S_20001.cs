@@ -6554,6 +6554,67 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2Popularize_RewardResponse))]
+	[Message(InnerMessage.Popularize2M_RewardRequest)]
+	[MemoryPackable]
+	public partial class Popularize2M_RewardRequest: MessageObject, IRequest
+	{
+		public static Popularize2M_RewardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Popularize2M_RewardRequest), isFromPool) as Popularize2M_RewardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<RewardItem> ReardList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ReardList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.M2Popularize_RewardResponse)]
+	[MemoryPackable]
+	public partial class M2Popularize_RewardResponse: MessageObject, IResponse
+	{
+		public static M2Popularize_RewardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2Popularize_RewardResponse), isFromPool) as M2Popularize_RewardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -6749,5 +6810,7 @@ namespace ET
 		 public const ushort M2G_RechargeResultResponse = 20192;
 		 public const ushort M2M_AllPlayerListRequest = 20193;
 		 public const ushort M2M_AllPlayerListResponse = 20194;
+		 public const ushort Popularize2M_RewardRequest = 20195;
+		 public const ushort M2Popularize_RewardResponse = 20196;
 	}
 }
