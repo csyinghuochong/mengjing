@@ -266,7 +266,7 @@ namespace ET.Client
             // #endif
         }
 
-        private static void OnXiLianReturn(this ES_RoleXiLianShow self)
+        public static void OnXiLianReturn(this ES_RoleXiLianShow self)
         {
             self.XilianBagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(self.XilianBagInfo.BagInfoID);
             self.OnUpdateXinLian();

@@ -56,5 +56,10 @@ namespace ET.Client
 
             uiComponent.CloseWindow(WindowID.WindowID_RoleXiLian);
         }
+        
+        public static void OnXiLianReturn(this DlgRoleXiLian self)
+        {
+            self.View.ES_RoleXiLianShow.OnXiLianReturn();
+        }
     }
 }

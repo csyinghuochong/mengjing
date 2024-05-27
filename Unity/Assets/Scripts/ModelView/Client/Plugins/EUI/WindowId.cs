@@ -50,5 +50,6 @@ namespace ET.Client
 		WindowID_Warehouse,
 		WindowID_Mail,
 		WindowID_RoleXiLian,
+		WindowID_RoleXiLianTen,
 	}
 }
