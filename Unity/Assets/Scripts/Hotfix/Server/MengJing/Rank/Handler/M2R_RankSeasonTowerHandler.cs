@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2R_RankSeasonTowerHandler : AMActorRpcHandler<Scene, M2R_RankSeasonTowerRequest, R2M_RankSeasonTowerResponse>
+    [MessageHandler(SceneType.Rank)]
+    public class M2R_RankSeasonTowerHandler : MessageHandler<Scene, M2R_RankSeasonTowerRequest, R2M_RankSeasonTowerResponse>
     {
-        protected override async ETTask Run(Scene scene, M2R_RankSeasonTowerRequest request, R2M_RankSeasonTowerResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2R_RankSeasonTowerRequest request, R2M_RankSeasonTowerResponse response)
         {
             RankSceneComponent rankSceneComponent = scene.GetComponent<RankSceneComponent>();
             List<KeyValuePairLong> rankSeasonTower = rankSceneComponent.DBRankInfo.rankSeasonTower;
@@ -59,7 +59,6 @@ namespace ET
             int maxnumber = Math.Min(rankSeasonTower.Count, ComHelp.RankNumber);
             rankSceneComponent.DBRankInfo.rankSeasonTower = rankSeasonTower.GetRange(0, maxnumber);
             response.RankId = rankSceneComponent.GetSeasonTowerRank(request.RankingInfo.KeyId);
-            reply();
             await ETTask.CompletedTask;
         }
     }

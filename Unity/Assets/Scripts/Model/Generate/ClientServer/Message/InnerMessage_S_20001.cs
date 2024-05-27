@@ -6885,6 +6885,288 @@ namespace ET
 
 	}
 
+//赛季副本
+	[ResponseType(nameof(R2M_RankSeasonTowerResponse))]
+	[Message(InnerMessage.M2R_RankSeasonTowerRequest)]
+	[MemoryPackable]
+	public partial class M2R_RankSeasonTowerRequest: MessageObject, IRequest
+	{
+		public static M2R_RankSeasonTowerRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2R_RankSeasonTowerRequest), isFromPool) as M2R_RankSeasonTowerRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public KeyValuePairLong RankingInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.RankingInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.R2M_RankSeasonTowerResponse)]
+	[MemoryPackable]
+	public partial class R2M_RankSeasonTowerResponse: MessageObject, IResponse
+	{
+		public static R2M_RankSeasonTowerResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2M_RankSeasonTowerResponse), isFromPool) as R2M_RankSeasonTowerResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RankId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RankId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(R2M_RankShowLieResponse))]
+	[Message(InnerMessage.M2R_RankShowLieRequest)]
+	[MemoryPackable]
+	public partial class M2R_RankShowLieRequest: MessageObject, IRequest
+	{
+		public static M2R_RankShowLieRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2R_RankShowLieRequest), isFromPool) as M2R_RankShowLieRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int CampId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public RankShouLieInfo RankingInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.CampId = default;
+			this.RankingInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.R2M_RankShowLieResponse)]
+	[MemoryPackable]
+	public partial class R2M_RankShowLieResponse: MessageObject, IResponse
+	{
+		public static R2M_RankShowLieResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2M_RankShowLieResponse), isFromPool) as R2M_RankShowLieResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//试炼副本伤害
+	[ResponseType(nameof(R2M_RankTrialResponse))]
+	[Message(InnerMessage.M2R_RankTrialRequest)]
+	[MemoryPackable]
+	public partial class M2R_RankTrialRequest: MessageObject, IRequest
+	{
+		public static M2R_RankTrialRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2R_RankTrialRequest), isFromPool) as M2R_RankTrialRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int CampId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public KeyValuePairLong RankingInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.CampId = default;
+			this.RankingInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.R2M_RankTrialResponse)]
+	[MemoryPackable]
+	public partial class R2M_RankTrialResponse: MessageObject, IResponse
+	{
+		public static R2M_RankTrialResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2M_RankTrialResponse), isFromPool) as R2M_RankTrialResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RankId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RankId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(R2M_RankUpdateResponse))]
+	[Message(InnerMessage.M2R_RankUpdateRequest)]
+	[MemoryPackable]
+	public partial class M2R_RankUpdateRequest: MessageObject, IRequest
+	{
+		public static M2R_RankUpdateRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2R_RankUpdateRequest), isFromPool) as M2R_RankUpdateRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int CampId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public RankingInfo RankingInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.CampId = default;
+			this.RankingInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.R2M_RankUpdateResponse)]
+	[MemoryPackable]
+	public partial class R2M_RankUpdateResponse: MessageObject, IResponse
+	{
+		public static R2M_RankUpdateResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2M_RankUpdateResponse), isFromPool) as R2M_RankUpdateResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RankId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int PetRankId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int SoloRankId { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int OccRankId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RankId = default;
+			this.PetRankId = default;
+			this.SoloRankId = default;
+			this.OccRankId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -7090,5 +7372,13 @@ namespace ET
 		 public const ushort R2A_DeleteRoleData = 20202;
 		 public const ushort G2Rank_EnterRank = 20203;
 		 public const ushort Rank2G_EnterRank = 20204;
+		 public const ushort M2R_RankSeasonTowerRequest = 20205;
+		 public const ushort R2M_RankSeasonTowerResponse = 20206;
+		 public const ushort M2R_RankShowLieRequest = 20207;
+		 public const ushort R2M_RankShowLieResponse = 20208;
+		 public const ushort M2R_RankTrialRequest = 20209;
+		 public const ushort R2M_RankTrialResponse = 20210;
+		 public const ushort M2R_RankUpdateRequest = 20211;
+		 public const ushort R2M_RankUpdateResponse = 20212;
 	}
 }

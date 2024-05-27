@@ -1760,3 +1760,74 @@ message Rank2G_EnterRank //IResponse
 	int32 TrialRankId = 4;
 	int32 OccRankId = 5;
 }
+
+//赛季副本
+//ResponseType R2M_RankSeasonTowerResponse
+message M2R_RankSeasonTowerRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	KeyValuePairLong RankingInfo = 2;
+}
+
+message R2M_RankSeasonTowerResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 RankId = 1;
+}
+
+//ResponseType R2M_RankShowLieResponse
+message M2R_RankShowLieRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 CampId = 1;
+	RankShouLieInfo RankingInfo = 2;
+}
+
+message R2M_RankShowLieResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//试炼副本伤害
+//ResponseType R2M_RankTrialResponse
+message M2R_RankTrialRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 CampId = 1;
+	KeyValuePairLong RankingInfo = 2;
+}
+
+message R2M_RankTrialResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 RankId = 1;
+}
+
+//ResponseType R2M_RankUpdateResponse
+message M2R_RankUpdateRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 CampId = 1;
+	RankingInfo RankingInfo = 2;
+}
+
+message R2M_RankUpdateResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 RankId = 1; //战力排行
+	int32 PetRankId = 2;
+	int32 SoloRankId = 3;
+	int32 OccRankId = 4; //战力职业排行
+}
