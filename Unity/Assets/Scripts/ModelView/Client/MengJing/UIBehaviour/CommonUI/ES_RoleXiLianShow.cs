@@ -150,6 +150,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_EquipBaseSetListRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_EquipBaseSetListRectTransform == null )
+     			{
+		    		this.m_EG_EquipBaseSetListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_EquipBaseSetList");
+     			}
+     			return this.m_EG_EquipBaseSetListRectTransform;
+     		}
+     	}
+
 		public ES_CommonItem ES_CommonItem
      	{
      		get
@@ -446,6 +463,7 @@ namespace ET.Client
 			this.m_E_EquipItemsLoopVerticalScrollRect = null;
 			this.m_es_equipset = null;
 			this.m_E_Obj_EquipPropertyTextText = null;
+			this.m_EG_EquipBaseSetListRectTransform = null;
 			this.m_es_commonitem = null;
 			this.m_es_costlist = null;
 			this.m_E_Text_CostNameText = null;
@@ -473,6 +491,7 @@ namespace ET.Client
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_EquipItemsLoopVerticalScrollRect = null;
 		private EntityRef<ES_EquipSet> m_es_equipset = null;
 		private UnityEngine.UI.Text m_E_Obj_EquipPropertyTextText = null;
+		private UnityEngine.RectTransform m_EG_EquipBaseSetListRectTransform = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
 		private EntityRef<ES_CostList> m_es_costlist = null;
 		private UnityEngine.UI.Text m_E_Text_CostNameText = null;

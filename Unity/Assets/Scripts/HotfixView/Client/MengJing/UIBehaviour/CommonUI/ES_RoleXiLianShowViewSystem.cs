@@ -79,12 +79,55 @@ namespace ET.Client
 
         public static void UpdateAttribute(this ES_RoleXiLianShow self, BagInfo bagInfo)
         {
+            UICommonHelper.DestoryChild(self.EG_EquipBaseSetListRectTransform.gameObject);
+            if (bagInfo == null)
+            {
+                return;
+            }
+
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            ItemViewHelp.ShowBaseAttribute(bagComponent.GetEquipList(), bagInfo, self.E_Obj_EquipPropertyTextText.gameObject,
+                self.EG_EquipBaseSetListRectTransform.gameObject);
         }
 
         private static void OnUpdateXinLian(this ES_RoleXiLianShow self)
         {
             BagInfo bagInfo = self.XilianBagInfo;
             self.ES_CostList.uiTransform.gameObject.SetActive(bagInfo != null);
+            self.UpdateAttribute(bagInfo);
+            if (bagInfo == null)
+            {
+                return;
+            }
+
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+            if (self.ES_CommonItem != null)
+            {
+                self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
+            }
+
+            //洗炼消耗
+            int[] itemCost = itemConfig.XiLianStone;
+            if (itemCost == null || itemCost.Length < 2)
+            {
+                self.ES_CostList.uiTransform.gameObject.SetActive(false);
+                return;
+            }
+
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            BagInfo bagInfoNeed = new BagInfo() { ItemID = itemCost[0], ItemNum = itemCost[1] };
+            // self.CostItemUI.UpdateItem(bagInfoNeed, ItemOperateEnum.None);
+            // self.CostItemUI.Label_ItemNum.SetActive(false);
+
+            self.E_Text_CostValueText.text = $"{bagComponent.GetItemNumber(itemCost[0])}/{itemCost[1]}";
+            self.E_Text_CostValueText.color = bagComponent.GetItemNumber(itemCost[0]) >= itemCost[1]? Color.green : Color.red;
+
+            self.E_Text_CostNameText.text = ItemConfigCategory.Instance.Get(bagInfoNeed.ItemID).ItemName;
+            self.E_Text_CostNameText.color = FunctionUI.QualityReturnColorDi((int)ItemConfigCategory.Instance.Get(bagInfoNeed.ItemID).ItemQuality);
+            if (bagComponent.GetItemNumber(itemCost[0]) >= itemCost[1])
+            {
+                self.E_Text_CostValueText.color = Color.green;
+            }
         }
     }
 }
