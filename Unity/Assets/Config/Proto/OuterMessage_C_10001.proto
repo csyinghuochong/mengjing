@@ -4843,3 +4843,65 @@ message Popularize2C_PlayerResponse // IPopularizeActorResponse
 	string Message = 91;
 	int32 Error = 92;
 }
+
+//ResponseType R2C_CampRankListResponse
+message C2R_CampRankListRequest // IRankActorRequest
+{
+	int32 RpcId = 90;
+}
+
+message R2C_CampRankListResponse // IRankActorResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	repeated RankingInfo RankList_1 = 1;		//排行榜列表
+	repeated RankingInfo RankList_2 = 2;		//排行榜列表
+}
+
+//ResponseType R2C_DBServerInfoResponse
+message C2R_DBServerInfoRequest // IRankActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message R2C_DBServerInfoResponse // IRankActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	ServerInfo ServerInfo = 1;
+}
+
+
+//ResponseType R2C_RankDemonResponse
+message C2R_RankDemonRequest // IRankActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message R2C_RankDemonResponse // IRankActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	repeated RankingInfo RankList = 1;		//排行榜列表
+}
+
+//ResponseType R2C_RankListResponse
+message C2R_RankListRequest // IRankActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message R2C_RankListResponse // IRankActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated RankingInfo RankList = 1;		//排行榜列表
+}

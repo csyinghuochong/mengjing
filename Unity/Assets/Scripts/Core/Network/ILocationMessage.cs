@@ -58,6 +58,15 @@
 
     }
     
+    public interface IRankActorRequest : IRequest
+    {
+    }
+
+    public interface IRankActorResponse : IResponse
+    {
+
+    }
+    
     public interface IPaiMaiListRequest : IRequest
     {
     }

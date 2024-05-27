@@ -1724,3 +1724,18 @@ message Popularize2C_UploadResponse // IPopularizeActorResponse
 	int32 Error = 92;
 }
 
+//ResponseType R2A_DeleteRoleData
+message A2R_DeleteRoleData // IRequest
+{
+	int32 RpcId = 90;
+	int32 DeleXuhaoID = 2;
+	int64 DeleUserID = 3;
+	int64 AccountId = 4;
+}
+
+message R2A_DeleteRoleData // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
