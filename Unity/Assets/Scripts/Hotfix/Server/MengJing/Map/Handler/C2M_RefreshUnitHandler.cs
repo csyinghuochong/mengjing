@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
+    [MessageLocationHandler(SceneType.Map)]
     public class C2M_RefreshUnitHandler : MessageLocationHandler<Unit, C2M_RefreshUnitRequest>
     {
         protected override async ETTask Run(Unit unit, C2M_RefreshUnitRequest request)
@@ -12,10 +12,10 @@ namespace ET
             Dictionary<long, AOIEntity> dict = unit.GetBeSeePlayers();
             foreach (AOIEntity u in dict.Values)
             {
-                UnitHelper.GetUnitInfo(u.Unit, createUnits);
+                createUnits.Units.Add( UnitHelper.CreateUnitInfo(u.Unit) ); 
             }
             createUnits.UpdateAll = 1;
-            MessageHelper.SendToClient(unit, createUnits);
+            MapMessageHelper.SendToClient(unit, createUnits);
             await ETTask.CompletedTask;
         }
     }

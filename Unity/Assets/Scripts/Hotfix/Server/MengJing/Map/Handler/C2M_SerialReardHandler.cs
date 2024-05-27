@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
+    [MessageLocationHandler(SceneType.Map)]
     public class C2M_SerialReardHandler : MessageLocationHandler<Unit, C2M_SerialReardRequest, M2C_SerialReardResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_SerialReardRequest request, M2C_SerialReardResponse response, Action reply)

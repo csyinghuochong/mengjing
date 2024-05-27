@@ -298,10 +298,14 @@ namespace ET
 		[MemoryPackOrder(0)]
 		public List<UnitInfo> Units { get; set; } = new();
 
+		[MemoryPackOrder(7)]
+		public int UpdateAll { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
 			this.Units.Clear();
+			this.UpdateAll = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -18531,6 +18535,33 @@ namespace ET
 
 	}
 
+//重连成功刷新Unit
+	[Message(OuterMessage.C2M_RefreshUnitRequest)]
+	[MemoryPackable]
+	public partial class C2M_RefreshUnitRequest: MessageObject, ILocationMessage
+	{
+		public static C2M_RefreshUnitRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RefreshUnitRequest), isFromPool) as C2M_RefreshUnitRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -19069,5 +19100,6 @@ namespace ET
 		 public const ushort M2C_OneChallenge = 10535;
 		 public const ushort C2M_ReddotReadRequest = 10536;
 		 public const ushort M2C_ReddotReadResponse = 10537;
+		 public const ushort C2M_RefreshUnitRequest = 10538;
 	}
 }
