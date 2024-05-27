@@ -12,6 +12,7 @@ namespace ET.Client
         protected override async ETTask Run(Scene scene, BagItemUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgWarehouse>()?.View.ES_WarehouseRole?.Refresh();
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgWarehouse>()?.View.ES_WarehouseGem?.Refresh();
             await ETTask.CompletedTask;
         }
     }
@@ -66,6 +67,7 @@ namespace ET.Client
                     break;
                 case 2:
                     self.View.ES_WarehouseGem.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_WarehouseGem.Refresh();
                     break;
             }
         }
