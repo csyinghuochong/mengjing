@@ -21459,7 +21459,7 @@ namespace ET
 		[MemoryPackOrder(0)]
 		public List<int> ReceiveIds { get; set; } = new();
 
-		[MemoryPackOrder(1)]
+		[MemoryPackOrder(2)]
 		public List<ZhanQuReceiveNumber> ReceiveNum { get; set; } = new();
 
 		public override void Dispose() 

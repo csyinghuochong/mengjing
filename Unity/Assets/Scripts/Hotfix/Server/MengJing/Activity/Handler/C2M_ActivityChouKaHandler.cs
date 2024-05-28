@@ -7,34 +7,31 @@ namespace ET.Server
     [MessageHandler(SceneType.Map)]
     public class C2M_ActivityChouKaHandler : MessageLocationHandler<Unit, C2M_ActivityChouKaRequest, M2C_ActivityChouKaResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_ActivityChouKaRequest request, M2C_ActivityChouKaResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_ActivityChouKaRequest request, M2C_ActivityChouKaResponse response)
         {
-            Log.Error($"C2M_ActivityChouKaRequest活动作弊:{unit.DomainZone()}  {unit.Id}");
-            if (unit.DomainZone()!=0)
+            Log.Error($"C2M_ActivityChouKaRequest活动作弊:{unit.Zone()}  {unit.Id}");
+            if (unit.Zone()!=0)
             {
                 response.Error = ErrorCode.ERR_ModifyData;
-                reply();
                 return;
             }
 
-            BagComponent bagComponent = unit.GetComponent<BagComponent>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             if (bagComponent.GetBagLeftCell() < 1)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
-                reply();
                 return;
             }
-            if (!bagComponent.CheckCostItem(ActivityConfigHelper.ChouKaCostItem))
+            if (!bagComponent.CheckCostItem(ConfigData.ChouKaCostItem))
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                reply();
                 return;
             }
 
-            unit.GetComponent<NumericComponent>().ApplyChange( null,NumericType.V1ChouKaNumber, 1, 0 );
+            unit.GetComponent<NumericComponentS>().ApplyChange( null,NumericType.V1ChouKaNumber, 1, 0 );
 
-            int dropId = ActivityConfigHelper.ChouKaDropId[0];
-            ServerInfoComponent serverInfoComponent = unit.DomainScene().GetComponent<ServerInfoComponent>();
+            int dropId = ConfigData.ChouKaDropId[0];
+            ServerInfoComponent serverInfoComponent = unit.Scene().GetComponent<ServerInfoComponent>();
             if (serverInfoComponent != null)
             {
                 dropId = serverInfoComponent.ServerInfo.ChouKaDropId;
@@ -42,10 +39,9 @@ namespace ET.Server
 
             List<RewardItem> rewardItems = new List<RewardItem>();  
             DropHelper.DropIDToDropItem_2(dropId, rewardItems);
-            bagComponent.OnCostItemData(ActivityConfigHelper.ChouKaCostItem);
+            bagComponent.OnCostItemData(ConfigData.ChouKaCostItem);
             bagComponent.OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.ActivityChouKa}_{TimeHelper.ServerNow()}");
 
-            reply();
             await ETTask.CompletedTask;
         }
     }

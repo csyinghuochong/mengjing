@@ -112,6 +112,11 @@ namespace ET.Server
             }
         }
 
+        public static void OnZeroClockUpdate(this DataCollationComponent self, bool notice)
+        {
+            self.PaiMaiCostGoldToday = 0;
+        }
+        
         public static long GetCostByType(this DataCollationComponent self, int getWay)
         {
             if (string.IsNullOrEmpty(self.GoldCost))

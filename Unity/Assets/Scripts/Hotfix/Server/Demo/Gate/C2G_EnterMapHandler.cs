@@ -45,7 +45,7 @@ namespace ET.Server
 			Scene scene = gateMapComponent.Scene;
 			
             player.UnitId = request.UnitId;
-            player.ActivityServerId = UnitCacheHelper.GetActivityId(session.Zone());
+            player.ActivityServerId = UnitCacheHelper.GetActivityServerId(session.Zone());
             player.FriendServerId = UnitCacheHelper.GetFriendId(session.Zone());
 
             Unit unit = await UnitHelper.LoadUnit(player, scene, createRoleInfo, newAccountList[0].Account, request.AccountId); 

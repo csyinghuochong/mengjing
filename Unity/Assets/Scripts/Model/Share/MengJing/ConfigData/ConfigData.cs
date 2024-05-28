@@ -27,8 +27,120 @@ namespace ET
             {110004,90014},
             {110005,90015},
         };
+
         
+        
+        /// <summary>
+        /// 消费钻石奖励
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, string> ConsumeDiamondReward =
+                new Dictionary<int, string>()
+                {
+                    {  100, "1;1000" },
+                    {  200, "1;1000" }
+                };
+
+
+        /// <summary>
+        /// 红包奖励
+        /// </summary>
+        [StaticField]
+        public static int HongBaoDropId = 601901001;
+        
+        /// <summary>
+        /// 抽奖次数奖励
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, string> ChouKaNumberReward =  new Dictionary<int, string>()
+        {
+            {  1,   "1;1" },
+            {  3,   "1;3" },
+            {  10,  "1;10" },
+        };
+
+        /// <summary>
+        /// 单个兑换奖励. 单个字可以兑换10万金币
+
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, string> DuiHuanWordReward = new Dictionary<int, string>()
+        {
+            {  10030013,"1;100000" },
+            {  10030014,"1;100000" },
+            {  10030015,"1;100000" },
+            {  10030016,"1;100000" },
+        };
+
+        /// <summary>
+        /// 抽卡消耗道具(幸运卷轴)
+        /// </summary>
+        [StaticField]
+        public static int Chou2CostItem = 10030013;
+        
+        //一套字可以兑换一个金条.  DuiHuanWordReward.keys
+        [StaticField]
+        public static string GroupsWordReward = "10010045;1";
+        
+        [StaticField]
+        public static List<string> WelfareChouKaList = new List<string>()
+        {
+            "15305001;1@10024002;1",
+            "15305001;1@15305002;1",
+            "15305001;1",
+            "10045105;1",
+            "15305001;1@10024002;1",
+            "15305001;1@15305002;1",
+            "15305001;1",
+            "10045105;1",
+        };
+
+        
+        
+        /// <summary>
+        /// 单笔充值奖励
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, string> SingleRechargeReward =new Dictionary<int, string>()
+        {
+            { 6, "1;100000@10000122;1@10010086;1" },
+            { 30, "10000141;1@10000164;1@10000158;1" }, 
+            { 50, "10010045;1@10000164;1@10000158;2@10010079;1" }, 
+            { 98, "10000135;1@10000164;1@10010086;2@10010079;1" },
+            { 198, "10000134;1@10000150;1@10010026;1@10000137;1@10010053;1" },
+            { 298, "10000134;1@10000150;1@10010026;1@10000138;1@10010094;1" },
+            { 488, "10049101;1@10000150;1@10010026;1@10000137;2@10000143;5" },
+            { 648, "10000134;1@10049101;1@10000150;1@10010026;1@10000138;2@10000143;10" }
+        };
        
+        /// <summary>
+        /// 每日礼包
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, KeyValuePair> LiBaoList = 
+                new Dictionary<int, KeyValuePair>()
+                {
+                    { 1,  new KeyValuePair(){ Value = "3;900", Value2 = "10030013;1@10030013;1" } }, //Value消耗钻石Value2道具
+                    { 2,  new KeyValuePair(){ Value = "3;900", Value2 = "10030013;1@10030013;1" }},
+                    { 3,  new KeyValuePair(){ Value = "3;900", Value2 = "10030013;1@10030013;1" }},
+                };
+        
+        /// <summary>
+        /// 在野外击败怪物时会掉落元宵和饺子, 喂食道具会获得奖励哦
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, string> FeedItemReward = new Dictionary<int, string>()
+        {
+            {  10030013,"1;100000" },
+            {  10030014,"1;100000" },
+        };
+        
+        /// <summary>
+        /// 抽奖消耗道具
+        /// </summary>
+        [StaticField]
+        public static string ChouKaCostItem = "1;100";
+                
         /// <summary>
         /// 施法前吟唱时给自己添加一个buff
         /// </summary>

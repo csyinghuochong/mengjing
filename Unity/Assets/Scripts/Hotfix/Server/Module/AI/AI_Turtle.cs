@@ -55,7 +55,7 @@ namespace ET.Server
            
             //上报胜利
             Unit unit = aiComponent.GetParent<Unit>();
-            ActorId activtiyserverid = UnitCacheHelper.GetActivityId(unit.Zone());
+            ActorId activtiyserverid = UnitCacheHelper.GetActivityServerId(unit.Zone());
             M2A_TurtleReportRequest request = new M2A_TurtleReportRequest() { TurtleId = unit.ConfigId };
             A2M_TurtleReportResponse a2M_TurtleSupport = (A2M_TurtleReportResponse)await aiComponent.Root().GetComponent<MessageSender>().Call
                     (activtiyserverid, request);

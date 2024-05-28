@@ -1,55 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_SingleRechargeRewardHandler: AMActorLocationRpcHandler<Unit, C2M_SingleRechargeRewardRequest, M2C_SingleRechargeRewardResponse>
+
+    [MessageHandler(SceneType.Map)]
+    public class C2M_SingleRechargeRewardHandler: MessageLocationHandler<Unit, C2M_SingleRechargeRewardRequest, M2C_SingleRechargeRewardResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_SingleRechargeRewardRequest request, M2C_SingleRechargeRewardResponse response,
-        Action reply)
+        protected override async ETTask Run(Unit unit, C2M_SingleRechargeRewardRequest request, M2C_SingleRechargeRewardResponse response
+         )
         {
-            UserInfo userInfo = unit.GetComponent<UserInfoComponent>().UserInfo;
+            UserInfo userInfo = unit.GetComponent<UserInfoComponentS>().UserInfo;
             if (request.RewardId == 0)
             {
                 response.RewardIds = userInfo.SingleRechargeIds;
-                reply();
                 return;
             }
 
-            if (!ConfigHelper.SingleRechargeReward.ContainsKey(request.RewardId))
+            if (!ConfigData.SingleRechargeReward.ContainsKey(request.RewardId))
             {
                 Log.Error($"C2M_SingleRechargeRewardRequest 1");
                 response.Error = ErrorCode.ERR_ModifyData;
-                reply();
                 return;
             }
 
             if (!userInfo.SingleRechargeIds.Contains(request.RewardId))
             {
                 response.Error = ErrorCode.Pre_Condition_Error;
-                reply();
                 return;
             }
 
             if (userInfo.SingleRewardIds.Contains(request.RewardId))
             {
                 response.Error = ErrorCode.ERR_AlreadyReceived;
-                reply();
                 return;
             }
 
-            string[] rewarditemlist = ConfigHelper.SingleRechargeReward[request.RewardId].Split('@');
-            BagComponent bagComponent = unit.GetComponent<BagComponent>();
+            string[] rewarditemlist = ConfigData.SingleRechargeReward[request.RewardId].Split('@');
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             if (bagComponent.GetBagLeftCell() < rewarditemlist.Length)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
-                reply();
                 return;
             }
 
             
-            bool ret = unit.GetComponent<BagComponent>().OnAddItemData(ConfigHelper.SingleRechargeReward[request.RewardId],
+            bool ret = unit.GetComponent<BagComponentS>().OnAddItemData(ConfigData.SingleRechargeReward[request.RewardId],
                 $"{ItemGetWay.ActivityChouKa}_{TimeHelper.ServerNow()}");
 
             if (ret)
@@ -61,8 +57,6 @@ namespace ET
             {
                 Log.Error($"领取失败: {bagComponent.GetBagLeftCell()} {request.RewardId}");
             }
-           
-            reply();
             await ETTask.CompletedTask;
         }
     }

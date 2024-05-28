@@ -27,7 +27,7 @@ namespace ET.Server
                  MineBattleConfig mineBattleConfig = MineBattleConfigCategory.Instance.Get(self.MineType);
                  logInfo = $"玩家 {unitName} 队伍{self.TeamId + 1} 占领了第{self.Position+1} {mineBattleConfig.Name}";
                  
-                 ActorId chargeServerId = UnitCacheHelper.GetActivityId(self.Zone());
+                 ActorId chargeServerId = UnitCacheHelper.GetActivityServerId(self.Zone());
                  A2M_PetMingBattleWinResponse r_GameStatusResponse = (A2M_PetMingBattleWinResponse)await self.Root().GetComponent<MessageSender>().Call
                      (chargeServerId, new M2A_PetMingBattleWinRequest()
                      {
@@ -110,7 +110,7 @@ namespace ET.Server
 
              public static async ETTask GeneratePetFuben(this PetMingDungeonComponent self)
              {
-                 ActorId chargeServerId = UnitCacheHelper.GetActivityId(self.Zone());
+                 ActorId chargeServerId = UnitCacheHelper.GetActivityServerId(self.Zone());
                  A2M_PetMingPlayerInfoResponse r_GameStatusResponse = (A2M_PetMingPlayerInfoResponse)await self.Root().GetComponent<MessageSender>().Call
                      (chargeServerId, new M2A_PetMingPlayerInfoRequest()
                      {

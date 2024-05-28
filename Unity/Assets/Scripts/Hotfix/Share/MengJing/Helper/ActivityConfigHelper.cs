@@ -32,28 +32,7 @@ namespace ET
                 ActivityV1_DuiHuanWord, ActivityV1_ChouKa2, ActivityV1_Task,ActivityV1_LiBao, ActivityV1_Feed };  
         }
 
-       
-        /// <summary>
-        /// 抽奖消耗道具
-        /// </summary>
-        public static string ChouKaCostItem()
-        {
-            return "1;100";
-        }
-
-        /// <summary>
-        /// 抽奖次数奖励
-        /// </summary>
-        public static Dictionary<int, string> ChouKaNumberReward ()
-        {
-            return new Dictionary<int, string>()
-            {
-                {  1,   "1;1" },
-                {  3,   "1;3" },
-                {  10,  "1;10" },
-            };
-        }
-
+      
         ///可供竞猜的数量。（数量6对应对个字）
         public static int GuessNumber()
         {
@@ -101,58 +80,8 @@ namespace ET
             }
             return costitem[index - 1]; 
         }
-
-        /// <summary>
-        /// 消费钻石奖励
-        /// </summary>
-        public static Dictionary<int, string> ConsumeDiamondReward()
-        {
-            return new Dictionary<int, string>()
-            {
-                {  100, "1;1000" },
-                {  200, "1;1000" }
-            };
-        }
-
-        /// <summary>
-        /// 红包奖励
-        /// </summary>
-        public static int HongBaoDropId()
-        {
-            return 601901001;
-        }
-
-        /// <summary>
-        /// 单个兑换奖励. 单个字可以兑换10万金币
-
-        /// </summary>
-
-        public static Dictionary<int, string> DuiHuanWordReward()
-        {
-            return new Dictionary<int, string>()
-            {
-                {  10030013,"1;100000" },
-                {  10030014,"1;100000" },
-                {  10030015,"1;100000" },
-                {  10030016,"1;100000" },
-            };
-        }
-
-        //一套字可以兑换一个金条.  DuiHuanWordReward.keys
-        public static string GroupsWordReward()
-        {
-            return "10010045;1";
-        }
-
-
-        /// <summary>
-        /// 抽卡消耗道具(幸运卷轴)
-        /// </summary>
-        public static int Chou2CostItem ()
-        {
-            return 10030013;
-        }
-
+       
+      
         /// <summary>
         /// 每档随机取几个。抽满一半可以刷新
         /// </summary>
@@ -216,33 +145,6 @@ namespace ET
                 return -1;
             }
             return leftIds[ RandomHelper.RandomNumber(0, leftIds.Count) ];
-        }
-
-        /// <summary>
-        /// 在野外击败怪物时会掉落元宵和饺子, 喂食道具会获得奖励哦
-        /// </summary>
-
-        public static Dictionary<int, string> FeedItemReward()
-        {
-            return new Dictionary<int, string>()
-            {
-                {  10030013,"1;100000" },
-                {  10030014,"1;100000" },
-            };
-        }
-
-      
-        /// <summary>
-        /// 每日礼包
-        /// </summary>
-        public static Dictionary<int, KeyValuePair> LiBaoList()
-        {
-            return new Dictionary<int, KeyValuePair>()
-            {
-                { 1,  new KeyValuePair(){ Value = "3;900", Value2 = "10030013;1@10030013;1" } }, //Value消耗钻石Value2道具
-                { 2,  new KeyValuePair(){ Value = "3;900", Value2 = "10030013;1@10030013;1" }},
-                { 3,  new KeyValuePair(){ Value = "3;900", Value2 = "10030013;1@10030013;1" }},
-            };
         }
 
         public static List<int> GetLiBaoList()

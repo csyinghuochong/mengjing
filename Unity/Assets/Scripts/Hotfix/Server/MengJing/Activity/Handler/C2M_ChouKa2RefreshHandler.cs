@@ -2,21 +2,19 @@
 using System.Collections.Generic;
 
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2M_ChouKa2RefreshHandler : AMActorLocationRpcHandler<Unit, C2M_ChouKa2RefreshRequest, M2C_ChouKa2RefreshResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_ChouKa2RefreshHandler : MessageLocationHandler<Unit, C2M_ChouKa2RefreshRequest, M2C_ChouKa2RefreshResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_ChouKa2RefreshRequest request, M2C_ChouKa2RefreshResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_ChouKa2RefreshRequest request, M2C_ChouKa2RefreshResponse response)
         {
-            ActivityComponent activityComponent = unit.GetComponent <ActivityComponent>();
+            ActivityComponentS activityComponent = unit.GetComponent <ActivityComponentS>();
 
             activityComponent.ActivityV1Info.ChouKa2ItemList = ActivityConfigHelper.GetChouKa2RewardList();
             activityComponent.ActivityV1Info.ChouKa2RewardIds.Clear();
             response.ActivityV1Info = activityComponent.ActivityV1Info;
-
-            reply();
             await ETTask.CompletedTask;
         }
     }

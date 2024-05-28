@@ -1,27 +1,26 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2M_ZhanQuInfoHandler : AMActorLocationRpcHandler<Unit, C2M_ZhanQuInfoRequest, M2C_ZhanQuInfoResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_ZhanQuInfoHandler : MessageLocationHandler<Unit, C2M_ZhanQuInfoRequest, M2C_ZhanQuInfoResponse>
     {
 
-        protected override async ETTask Run(Unit unit, C2M_ZhanQuInfoRequest request, M2C_ZhanQuInfoResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_ZhanQuInfoRequest request, M2C_ZhanQuInfoResponse response)
         {
 
-            long paimaiServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.DomainZone(), Enum.GetName(SceneType.Activity)).InstanceId;
-            A2M_ZhanQuInfoResponse r_GameStatusResponse = (A2M_ZhanQuInfoResponse)await ActorMessageSenderComponent.Instance.Call
+            ActorId paimaiServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.Zone(), "Activity").ActorId;
+            A2M_ZhanQuInfoResponse r_GameStatusResponse = (A2M_ZhanQuInfoResponse)await unit.Root().GetComponent<MessageSender>().Call
                 (paimaiServerId, new M2A_ZhanQuInfoRequest()
                 {
-                    UserId = unit.GetComponent<UserInfoComponent>().UserInfo.UserId
+                    UserId = unit.GetComponent<UserInfoComponentS>().UserInfo.UserId
                 });
 
-            ActivityComponent activityComponent = unit.GetComponent<ActivityComponent>();
+            ActivityComponentS activityComponent = unit.GetComponent<ActivityComponentS>();
             response.ReceiveNum = r_GameStatusResponse.ReceiveNum;
             response.ReceiveIds = activityComponent.ZhanQuReceiveIds;
-           
-            reply();
+
             await ETTask.CompletedTask;
         }
     }

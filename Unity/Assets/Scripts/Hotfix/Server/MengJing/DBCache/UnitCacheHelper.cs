@@ -202,7 +202,7 @@ namespace ET.Server
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, "Chat").ActorId;
         }
 
-        public static ActorId GetActivityId(int zone)
+        public static ActorId GetActivityServerId(int zone)
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Activity.ToString()).ActorId;
         }

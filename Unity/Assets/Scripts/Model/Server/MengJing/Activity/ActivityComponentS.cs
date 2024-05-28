@@ -10,25 +10,25 @@ namespace ET.Server
         /// <summary>
         /// 上次签到时间
         /// </summary>
-        public long LastSignTime = 0;
+        public long LastSignTime { get; set; }= 0;
         /// <summary>
         /// 已经签到次数
         /// </summary>
-        public int TotalSignNumber = 0;
+        public int TotalSignNumber { get; set; }= 0;
 
-        public long LastLoginTime = 0;
+        public long LastLoginTime { get; set; }= 0;
 
         //每日特惠
-        public List<int> DayTeHui = new List<int>();
+        public List<int> DayTeHui { get; set; }= new List<int>();
 
-        public List<int> ActivityReceiveIds = new List<int>();
+        public List<int> ActivityReceiveIds { get; set; }= new List<int>();
         /// <summary>
         /// 令牌领取
         /// </summary>
-        public List<TokenRecvive> QuTokenRecvive = new List<TokenRecvive>();
+        public List<TokenRecvive> QuTokenRecvive { get; set; }= new List<TokenRecvive>();
 
-        public List<int> ZhanQuReceiveIds = new List<int>();
+        public List<int> ZhanQuReceiveIds { get; set; }= new List<int>();
 
-        public ActivityV1Info ActivityV1Info = new ActivityV1Info();
+        public ActivityV1Info ActivityV1Info { get; set; } = new ActivityV1Info();
     }
 }

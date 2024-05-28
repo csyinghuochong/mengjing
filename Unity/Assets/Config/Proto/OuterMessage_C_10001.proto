@@ -5335,7 +5335,6 @@ message M2C_ActivityChouKaResponse // ILocationResponse
 	string Message = 92;
 }
 
-
 //喂食物
 //ResponseType M2C_ActivityFeedResponse
 message C2M_ActivityFeedRequest // ILocationRequest
@@ -5493,7 +5492,7 @@ message M2C_ZhanQuInfoResponse // ILocationResponse
 	string Message = 92;
 
 	repeated int32 ReceiveIds = 1;
-	repeated ZhanQuReceiveNumber ReceiveNum = 2;
+	repeated ZhanQuReceiveNumber ReceiveNum = 3;
 }
 
 //战区活动

@@ -379,7 +379,95 @@ namespace ET.Server
         {
             self.UserInfo.Lv = lv;
         }
+        
+        /// <summary>
+        /// 0 6 12 20点各刷新30点体力
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="notice"></param>
+        public static void OnHourUpdate(this UserInfoComponentS self, int hour, bool notice)
+        {
+            if (hour == 0 )
+            {
+                self.RecoverPiLao(30 + self.GetAddPiLao(self.UserInfo.MakeList.Count), notice);
+            }
+            if (hour == 12)
+            {
+                self.RecoverPiLao(30, notice);
+            }
 
+            if (hour == 6 ||  hour == 20)
+            {
+                self.RecoverPiLao(50, notice);
+            }
+
+            self.GetParent<Unit>().GetComponent<JiaYuanComponentS>().OnHourUpdate(hour, notice);
+            LogHelper.CheckZuoBi(self.GetParent<Unit>());
+            //LogHelper.CheckBlackRoom(self.GetParent<Unit>());
+        }
+        
+        public static void OnZeroClockUpdate(this UserInfoComponentS self, bool notice)
+        {
+            Unit unit = self.GetParent<Unit>();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            int skillNumber = 1 + numericComponent.GetAsInt(NumericType.MakeType_2) > 0 ? 1 : 0;
+            int updatevalue = unit.GetMaxHuoLi(skillNumber) - self.UserInfo.Vitality;
+            self.UpdateRoleData(UserDataType.Vitality, updatevalue.ToString(), notice);
+            //updatevalue = ComHelp.GetMaxBaoShiDu() - self.UserInfo.BaoShiDu;
+            //self.UpdateRoleData(UserDataType.BaoShiDu, updatevalue.ToString(), notice);
+            numericComponent.ApplyValue(NumericType.ZeroClock, 1, notice);
+            self.ClearDayData();
+            self.LastLoginTime = TimeHelper.ServerNow();
+            self.TodayOnLine = 0;
+            self.ShouLieKill = 0;
+        }
+        
+        public static void ClearDayData(this UserInfoComponentS self)
+        {
+            self.UserInfo.DayFubenTimes.Clear();
+            self.UserInfo.ChouKaRewardIds.Clear();
+            self.UserInfo.MysteryItems.Clear();
+            self.UserInfo.DayItemUse.Clear();
+            self.UserInfo.DayMonsters.Clear();
+            self.UserInfo.DayJingLing.Clear();
+            self.UserInfo.PetExploreRewardIds.Clear();  
+            self.UserInfo.PetHeXinExploreRewardIds.Clear();
+            self.UserInfo.ItemXiLianNumRewardIds.Clear();
+        }
+        
+        /// <summary>
+        /// 体力
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="skillNumber"></param>
+        /// <returns></returns>
+        public static int GetAddPiLao(this UserInfoComponentS self, int skillNumber)
+        {
+            return 0;
+        }
+
+        public static void RecoverPiLao(this UserInfoComponentS self, int addValue, bool notice)
+        {
+            Unit unit = self.GetParent<Unit>();
+            long recoverPiLao = self.GetParent<Unit>().GetMaxPiLao() - self.UserInfo.PiLao;
+            recoverPiLao = Math.Min(recoverPiLao, addValue);
+
+            //Log.Warning($"[增加疲劳] {unit.DomainZone()}  {unit.Id}   {0}  {recoverPiLao}");
+            self.UpdateRoleData(UserDataType.PiLao, recoverPiLao.ToString(), notice);
+            self.LastLoginTime = TimeHelper.ServerNow();
+        }
+        
+        
+        public static int GetMaxPiLao(this Unit self)
+        {
+            return int.Parse(GlobalValueConfigCategory.Instance.Get(self.IsYueKaStates() ? 26 : 10).Value);
+        }
+        
+        public static bool IsYueKaStates(this Unit self)
+        { 
+            return self.GetComponent<NumericComponentS>().GetAsInt(NumericType.YueKaRemainTimes) > 0;
+        }
+        
         public static long GetPiLao(this UserInfoComponentS self)
         {
             return self.UserInfo.PiLao;
