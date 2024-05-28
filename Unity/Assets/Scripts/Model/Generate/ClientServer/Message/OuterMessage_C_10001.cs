@@ -20800,6 +20800,752 @@ namespace ET
 
 	}
 
+//v1活动.抽奖
+	[ResponseType(nameof(M2C_ActivityChouKaResponse))]
+	[Message(OuterMessage.C2M_ActivityChouKaRequest)]
+	[MemoryPackable]
+	public partial class C2M_ActivityChouKaRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ActivityChouKaRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ActivityChouKaRequest), isFromPool) as C2M_ActivityChouKaRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ActivityChouKaResponse)]
+	[MemoryPackable]
+	public partial class M2C_ActivityChouKaResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ActivityChouKaResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ActivityChouKaResponse), isFromPool) as M2C_ActivityChouKaResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//喂食物
+	[ResponseType(nameof(M2C_ActivityFeedResponse))]
+	[Message(OuterMessage.C2M_ActivityFeedRequest)]
+	[MemoryPackable]
+	public partial class C2M_ActivityFeedRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ActivityFeedRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ActivityFeedRequest), isFromPool) as C2M_ActivityFeedRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ItemID { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ItemID = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ActivityFeedResponse)]
+	[MemoryPackable]
+	public partial class M2C_ActivityFeedResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ActivityFeedResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ActivityFeedResponse), isFromPool) as M2C_ActivityFeedResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public ActivityV1Info ActivityV1Info { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.ActivityV1Info = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_ActivityGuessResponse))]
+	[Message(OuterMessage.C2M_ActivityGuessRequest)]
+	[MemoryPackable]
+	public partial class C2M_ActivityGuessRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ActivityGuessRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ActivityGuessRequest), isFromPool) as C2M_ActivityGuessRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int GuessId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.GuessId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ActivityGuessResponse)]
+	[MemoryPackable]
+	public partial class M2C_ActivityGuessResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ActivityGuessResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ActivityGuessResponse), isFromPool) as M2C_ActivityGuessResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//活动信息
+	[ResponseType(nameof(M2C_ActivityInfoResponse))]
+	[Message(OuterMessage.C2M_ActivityInfoRequest)]
+	[MemoryPackable]
+	public partial class C2M_ActivityInfoRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ActivityInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ActivityInfoRequest), isFromPool) as C2M_ActivityInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ActivityType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ActivityId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ActivityType = default;
+			this.ActivityId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ActivityInfoResponse)]
+	[MemoryPackable]
+	public partial class M2C_ActivityInfoResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ActivityInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ActivityInfoResponse), isFromPool) as M2C_ActivityInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<int> ReceiveIds { get; set; } = new();
+
+		[MemoryPackOrder(2)]
+		public long LastSignTime { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int TotalSignNumber { get; set; }
+
+		[MemoryPackOrder(4)]
+		public List<TokenRecvive> QuTokenRecvive { get; set; } = new();
+
+		[MemoryPackOrder(5)]
+		public long LastLoginTime { get; set; }
+
+		[MemoryPackOrder(6)]
+		public List<int> DayTeHui { get; set; } = new();
+
+		[MemoryPackOrder(7)]
+		public ActivityV1Info ActivityV1Info { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.ReceiveIds.Clear();
+			this.LastSignTime = default;
+			this.TotalSignNumber = default;
+			this.QuTokenRecvive.Clear();
+			this.LastLoginTime = default;
+			this.DayTeHui.Clear();
+			this.ActivityV1Info = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//领取奖励
+	[ResponseType(nameof(M2C_ActivityReceiveResponse))]
+	[Message(OuterMessage.C2M_ActivityReceiveRequest)]
+	[MemoryPackable]
+	public partial class C2M_ActivityReceiveRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ActivityReceiveRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ActivityReceiveRequest), isFromPool) as C2M_ActivityReceiveRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ActivityType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ActivityId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int ReceiveIndex { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ActivityType = default;
+			this.ActivityId = default;
+			this.ReceiveIndex = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ActivityReceiveResponse)]
+	[MemoryPackable]
+	public partial class M2C_ActivityReceiveResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ActivityReceiveResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ActivityReceiveResponse), isFromPool) as M2C_ActivityReceiveResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//领取充值签到奖励
+	[ResponseType(nameof(M2C_ActivityRechargeSignResponse))]
+	[Message(OuterMessage.C2M_ActivityRechargeSignRequest)]
+	[MemoryPackable]
+	public partial class C2M_ActivityRechargeSignRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ActivityRechargeSignRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ActivityRechargeSignRequest), isFromPool) as C2M_ActivityRechargeSignRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ActivityType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ActivityId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ActivityType = default;
+			this.ActivityId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ActivityRechargeSignResponse)]
+	[MemoryPackable]
+	public partial class M2C_ActivityRechargeSignResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ActivityRechargeSignResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ActivityRechargeSignResponse), isFromPool) as M2C_ActivityRechargeSignResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_ActivityRewardResponse))]
+	[Message(OuterMessage.C2M_ActivityRewardRequest)]
+	[MemoryPackable]
+	public partial class C2M_ActivityRewardRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ActivityRewardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ActivityRewardRequest), isFromPool) as C2M_ActivityRewardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ActivityType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int RewardId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ActivityType = default;
+			this.RewardId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ActivityRewardResponse)]
+	[MemoryPackable]
+	public partial class M2C_ActivityRewardResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ActivityRewardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ActivityRewardResponse), isFromPool) as M2C_ActivityRewardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public ActivityV1Info ActivityV1Info { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.ActivityV1Info = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//刷新奖励
+	[ResponseType(nameof(M2C_ChouKa2RefreshResponse))]
+	[Message(OuterMessage.C2M_ChouKa2RefreshRequest)]
+	[MemoryPackable]
+	public partial class C2M_ChouKa2RefreshRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ChouKa2RefreshRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ChouKa2RefreshRequest), isFromPool) as C2M_ChouKa2RefreshRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ChouKa2RefreshResponse)]
+	[MemoryPackable]
+	public partial class M2C_ChouKa2RefreshResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ChouKa2RefreshResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ChouKa2RefreshResponse), isFromPool) as M2C_ChouKa2RefreshResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public ActivityV1Info ActivityV1Info { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.ActivityV1Info = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_SingleRechargeRewardResponse))]
+	[Message(OuterMessage.C2M_SingleRechargeRewardRequest)]
+	[MemoryPackable]
+	public partial class C2M_SingleRechargeRewardRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_SingleRechargeRewardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_SingleRechargeRewardRequest), isFromPool) as C2M_SingleRechargeRewardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RewardId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.RewardId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_SingleRechargeRewardResponse)]
+	[MemoryPackable]
+	public partial class M2C_SingleRechargeRewardResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_SingleRechargeRewardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SingleRechargeRewardResponse), isFromPool) as M2C_SingleRechargeRewardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<int> RewardIds { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RewardIds.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_ZhanQuInfoResponse))]
+	[Message(OuterMessage.C2M_ZhanQuInfoRequest)]
+	[MemoryPackable]
+	public partial class C2M_ZhanQuInfoRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ZhanQuInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ZhanQuInfoRequest), isFromPool) as C2M_ZhanQuInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ZhanQuInfoResponse)]
+	[MemoryPackable]
+	public partial class M2C_ZhanQuInfoResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ZhanQuInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ZhanQuInfoResponse), isFromPool) as M2C_ZhanQuInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<int> ReceiveIds { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public List<ZhanQuReceiveNumber> ReceiveNum { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.ReceiveIds.Clear();
+			this.ReceiveNum.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//战区活动
+	[ResponseType(nameof(M2C_ZhanQuReceiveResponse))]
+	[Message(OuterMessage.C2M_ZhanQuReceiveRequest)]
+	[MemoryPackable]
+	public partial class C2M_ZhanQuReceiveRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ZhanQuReceiveRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ZhanQuReceiveRequest), isFromPool) as C2M_ZhanQuReceiveRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ActivityType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ActivityId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int ReceiveIndex { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ActivityType = default;
+			this.ActivityId = default;
+			this.ReceiveIndex = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ZhanQuReceiveResponse)]
+	[MemoryPackable]
+	public partial class M2C_ZhanQuReceiveResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ZhanQuReceiveResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ZhanQuReceiveResponse), isFromPool) as M2C_ZhanQuReceiveResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -21409,5 +22155,27 @@ namespace ET
 		 public const ushort T2C_TeamRobotResponse = 10606;
 		 public const ushort M2C_TeamDungeonOpenResult = 10607;
 		 public const ushort M2C_TeamDungeonPrepareResult = 10608;
+		 public const ushort C2M_ActivityChouKaRequest = 10609;
+		 public const ushort M2C_ActivityChouKaResponse = 10610;
+		 public const ushort C2M_ActivityFeedRequest = 10611;
+		 public const ushort M2C_ActivityFeedResponse = 10612;
+		 public const ushort C2M_ActivityGuessRequest = 10613;
+		 public const ushort M2C_ActivityGuessResponse = 10614;
+		 public const ushort C2M_ActivityInfoRequest = 10615;
+		 public const ushort M2C_ActivityInfoResponse = 10616;
+		 public const ushort C2M_ActivityReceiveRequest = 10617;
+		 public const ushort M2C_ActivityReceiveResponse = 10618;
+		 public const ushort C2M_ActivityRechargeSignRequest = 10619;
+		 public const ushort M2C_ActivityRechargeSignResponse = 10620;
+		 public const ushort C2M_ActivityRewardRequest = 10621;
+		 public const ushort M2C_ActivityRewardResponse = 10622;
+		 public const ushort C2M_ChouKa2RefreshRequest = 10623;
+		 public const ushort M2C_ChouKa2RefreshResponse = 10624;
+		 public const ushort C2M_SingleRechargeRewardRequest = 10625;
+		 public const ushort M2C_SingleRechargeRewardResponse = 10626;
+		 public const ushort C2M_ZhanQuInfoRequest = 10627;
+		 public const ushort M2C_ZhanQuInfoResponse = 10628;
+		 public const ushort C2M_ZhanQuReceiveRequest = 10629;
+		 public const ushort M2C_ZhanQuReceiveResponse = 10630;
 	}
 }

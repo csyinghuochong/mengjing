@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2M_ActivityChouKaHandler : AMActorLocationRpcHandler<Unit, C2M_ActivityChouKaRequest, M2C_ActivityChouKaResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_ActivityChouKaHandler : MessageLocationHandler<Unit, C2M_ActivityChouKaRequest, M2C_ActivityChouKaResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_ActivityChouKaRequest request, M2C_ActivityChouKaResponse response, Action reply)
         {
