@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -22,7 +22,6 @@ namespace ET.Server
 				long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
 				Scene fubnescene = GateMapFactory.Create(unit.Scene(), fubenid, fubenInstanceId,  "Fuben" + fubenid.ToString());
 				fubenComponent = fubnescene.AddComponent<CellDungeonComponent>();
-				fubenComponent.MainUnit = unit;
 				fubenComponent.FubenDifficulty = request.Difficulty;
 				fubenComponent.InitFubenCell(request.ChapterId);
 				curCell = fubenComponent.CurrentFubenCell;
@@ -36,8 +35,7 @@ namespace ET.Server
 			}
 			else
 			{
-				fubenComponent = unit.Scene<>().GetComponent<CellDungeonComponent>();
-				fubenComponent.MainUnit = unit;
+				fubenComponent = unit.Scene().GetComponent<CellDungeonComponent>();
 				CellDungeonComponentSystem.RemoveAllNoSelf(unit);
 				fubenComponent.InitFubenCell(request.ChapterId);
 				curCell = fubenComponent.CurrentFubenCell;
@@ -46,8 +44,8 @@ namespace ET.Server
 				mapComponent.SonSceneId = (curCell.sonid);
 				mapComponent.NavMeshId = ChapterSonConfigCategory.Instance.Get(curCell.sonid).MapID;
 
-				unit.Position = new Vector3(chapterSon.BornPosLeft[0] * 0.01f, chapterSon.BornPosLeft[1] * 0.01f, chapterSon.BornPosLeft[2] * 0.01f);
-				unit.Rotation = Quaternion.identity;
+				unit.Position = new float3(chapterSon.BornPosLeft[0] * 0.01f, chapterSon.BornPosLeft[1] * 0.01f, chapterSon.BornPosLeft[2] * 0.01f);
+				unit.Rotation = quaternion.identity;
 				fubenComponent.GenerateFubenScene( false);
 				RolePetInfo fightId = unit.GetComponent<PetComponentS>().GetFightPet();
 				if (fightId != null)

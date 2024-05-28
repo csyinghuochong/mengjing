@@ -1,5 +1,5 @@
 ﻿using System;
-using UnityEngine;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -46,8 +46,8 @@ namespace ET.Server
             else
                 borpos = chapterSon.BornPosLeft;
 
-            unit.Position = new Vector3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
-            unit.Rotation = Quaternion.identity;
+            unit.Position = new float3(borpos[0] * 0.01f, borpos[1] * 0.01f, borpos[2] * 0.01f);
+            unit.Rotation = quaternion.identity;
 
             CellDungeonComponentSystem.RemoveAllNoSelf(unit);
 
