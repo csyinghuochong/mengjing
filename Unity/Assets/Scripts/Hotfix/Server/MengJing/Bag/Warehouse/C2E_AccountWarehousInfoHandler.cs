@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2E_AccountWarehousInfoHandler : AMActorRpcHandler<Scene, C2E_AccountWarehousInfoRequest, E2C_AccountWarehousInfoResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2E_AccountWarehousInfoHandler : MessageHandler<Scene, C2E_AccountWarehousInfoRequest, E2C_AccountWarehousInfoResponse>
     {
-        protected override async ETTask Run(Scene scene, C2E_AccountWarehousInfoRequest request, E2C_AccountWarehousInfoResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, C2E_AccountWarehousInfoRequest request, E2C_AccountWarehousInfoResponse response)
         {
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.LoginAccount, request.AccInfoID))
+            using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.LoginAccount, request.AccInfoID))
             {
-                DBAccountInfo dBAccountWarehouse = await DBHelper.GetComponentCache<DBAccountInfo>(scene.DomainZone(), request.AccInfoID);
+                DBAccountInfo dBAccountWarehouse = await UnitCacheHelper.GetComponent<DBAccountInfo>(scene.Root(), request.AccInfoID);
                 if (dBAccountWarehouse != null)
                 {
                     response.BagInfos = dBAccountWarehouse.BagInfoList;
                 }
 
-                reply();
             }
             await ETTask.CompletedTask;
         }
