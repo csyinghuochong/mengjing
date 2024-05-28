@@ -6,11 +6,10 @@ namespace ET.Server
     [MessageHandler(SceneType.Map)]
     public class C2M_JiaYuanPetPositionHandler : MessageLocationHandler<Unit, C2M_JiaYuanPetPositionRequest, M2C_JiaYuanPetPositionResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_JiaYuanPetPositionRequest request, M2C_JiaYuanPetPositionResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_JiaYuanPetPositionRequest request, M2C_JiaYuanPetPositionResponse response)
         {
-            if (unit.DomainScene().GetComponent<MapComponent>().SceneTypeEnum != SceneTypeEnum.JiaYuan)
+            if (unit.Scene().GetComponent<MapComponent>().SceneType != SceneTypeEnum.JiaYuan)
             {
-                reply();
                 return;
             }
 
@@ -25,35 +24,29 @@ namespace ET.Server
                     }
                     response.PetList.Add(new UnitInfo()
                     {
-                        UnitType = UnitType.Pet,
+                        Type = UnitType.Pet,
                         UnitId = units[i].Id,
                         ConfigId = units[i].ConfigId,
-                        X = units[i].Position.x,
-                        Y = units[i].Position.y,
-                        Z = units[i].Position.z,
+                        Position = units[i].Position,
                     });
                     continue;
                 }
                 if (units[i].Type == UnitType.Monster)
                 {
-                    if (!ConfigHelper.JiaYuanMonster.ContainsKey(  units[i].ConfigId))
+                    if (!ConfigData.JiaYuanMonster.ContainsKey(  units[i].ConfigId))
                     {
                         continue;
                     }
                     response.PetList.Add(new UnitInfo()
                     {
-                        UnitType = UnitType.Monster,
+                        Type = UnitType.Monster,
                         UnitId = units[i].Id,
                         ConfigId = units[i].ConfigId,
-                        X = units[i].Position.x,
-                        Y = units[i].Position.y,
-                        Z = units[i].Position.z,
+                        Position = units[i].Position
                     });
                     continue;
                 }
             }
-
-            reply();
             await ETTask.CompletedTask;
         }
     }

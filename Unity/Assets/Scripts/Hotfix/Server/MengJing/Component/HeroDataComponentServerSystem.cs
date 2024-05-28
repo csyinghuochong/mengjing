@@ -501,14 +501,14 @@ namespace ET.Server
              }
          }
 
-         // public static void InitPlan(this HeroDataComponentServer self, JiaYuanPlant jiaYuanPlant, bool notice)
-         // {
-         //     NumericComponentServer numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentServer>();
-         //     numericComponent.Set(NumericType.StartTime, jiaYuanPlant.StartTime);
-         //     numericComponent.Set(NumericType.GatherNumber, jiaYuanPlant.GatherNumber);
-         //     numericComponent.Set(NumericType.GatherLastTime, jiaYuanPlant.GatherLastTime);
-         //     numericComponent.Set(NumericType.GatherCellIndex, jiaYuanPlant.CellIndex);
-         // }
+         public static void InitPlan(this HeroDataComponentS self, JiaYuanPlant jiaYuanPlant, bool notice)
+         {
+             NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
+             numericComponent.SetNoEvent(NumericType.StartTime, jiaYuanPlant.StartTime);
+             numericComponent.SetNoEvent(NumericType.GatherNumber, jiaYuanPlant.GatherNumber);
+             numericComponent.SetNoEvent(NumericType.GatherLastTime, jiaYuanPlant.GatherLastTime);
+             numericComponent.SetNoEvent(NumericType.GatherCellIndex, jiaYuanPlant.CellIndex);
+         }
 
          public static void InitPasture(this HeroDataComponentS self, JiaYuanPastures jiaYuanPlant, bool notice)
          {

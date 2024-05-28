@@ -6,9 +6,9 @@ namespace ET.Server
     [MessageHandler(SceneType.Map)]
     public class C2M_JiaYuanPurchaseHandler : MessageLocationHandler<Unit, C2M_JiaYuanPurchaseRequest, M2C_JiaYuanPurchaseResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_JiaYuanPurchaseRequest request, M2C_JiaYuanPurchaseResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_JiaYuanPurchaseRequest request, M2C_JiaYuanPurchaseResponse response )
         {
-            JiaYuanComponent jiaYuanComponent = unit.GetComponent<JiaYuanComponent>();
+            JiaYuanComponentS jiaYuanComponent = unit.GetComponent<JiaYuanComponentS>();
             List<JiaYuanPurchaseItem> purchaselist = jiaYuanComponent.PurchaseItemList_7;
             JiaYuanPurchaseItem jiaYuanPurchaseItem = null;
             long serverTime = TimeHelper.ServerNow();
@@ -28,21 +28,18 @@ namespace ET.Server
             if (jiaYuanPurchaseItem == null)
             {
                 response.Error = ErrorCode.ERR_NetWorkError;
-                reply();
                 return;
             }
-            if (unit.GetComponent<BagComponent>().GetItemNumber(request.ItemId) < 1)
+            if (unit.GetComponent<BagComponentS>().GetItemNumber(request.ItemId) < 1)
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                reply();
                 return;
             }
 
-            unit.GetComponent<UserInfoComponent>().UpdateRoleData(UserDataType.JiaYuanFund, jiaYuanPurchaseItem.BuyZiJin.ToString());
-            unit.GetComponent<BagComponent>().OnCostItemData($"{request.ItemId};1");
+            unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.JiaYuanFund, jiaYuanPurchaseItem.BuyZiJin.ToString());
+            unit.GetComponent<BagComponentS>().OnCostItemData($"{request.ItemId};1");
             response.PurchaseItemList = jiaYuanComponent.PurchaseItemList_7;
-            DBHelper.SaveComponentCache( unit.DomainZone(), unit.Id, jiaYuanComponent).Coroutine();
-            reply();
+            UnitCacheHelper.SaveComponentCache( unit.Root(), jiaYuanComponent).Coroutine();
             await ETTask.CompletedTask;
         }
     }

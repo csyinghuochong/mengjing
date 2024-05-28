@@ -5,14 +5,13 @@ namespace ET.Server
     [MessageHandler(SceneType.Map)]
     public class C2M_TakeOutAllHandler: MessageLocationHandler<Unit, C2M_TakeOutAllRequest, M2C_TakeOutAllResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_TakeOutAllRequest request, M2C_TakeOutAllResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_TakeOutAllRequest request, M2C_TakeOutAllResponse response)
         {
             int hourseId = request.HorseId;
-            int leftBagSpace = unit.GetComponent<BagComponent>().GetBagLeftCell();
+            int leftBagSpace = unit.GetComponent<BagComponentS>().GetBagLeftCell();
             if (leftBagSpace <= 0)
             {
                 response.Error = ErrorCode.ERR_BagIsFull; //错误码:仓库已满
-                reply();
                 return;
             }
 
@@ -20,11 +19,11 @@ namespace ET.Server
             M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
 
             // 要值传递!!!，上课教的都忘了
-            storeLists.AddRange(unit.GetComponent<BagComponent>().GetItemByLoc((ItemLocType)hourseId));
+            storeLists.AddRange(unit.GetComponent<BagComponentS>().GetItemByLoc((ItemLocType)hourseId));
 
             for (int i = 0; i < storeLists.Count; i++)
             {
-                unit.GetComponent<BagComponent>().OnChangeItemLoc(storeLists[i], ItemLocType.ItemLocBag, (ItemLocType)hourseId);
+                unit.GetComponent<BagComponentS>().OnChangeItemLoc(storeLists[i], ItemLocType.ItemLocBag, (ItemLocType)hourseId);
                 m2c_bagUpdate.BagInfoUpdate.Add(storeLists[i]);
                 leftBagSpace--;
                 if (leftBagSpace <= 0)
@@ -33,8 +32,7 @@ namespace ET.Server
                 }
             }
 
-            MessageHelper.SendToClient(unit, m2c_bagUpdate);
-            reply();
+            MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
             await ETTask.CompletedTask;
         }
     }

@@ -58,7 +58,7 @@ namespace ET.Server
                     });
                     break;
                 case JiaYuanOperateType.Pick:
-                    unit.GetComponent<JiaYuanComponent>().OnRemoveUnit(jiaYuanOperate.UnitId);
+                    unit.GetComponent<JiaYuanComponentS>().OnRemoveUnit(jiaYuanOperate.UnitId);
                     jiaYuanComponent.AddJiaYuanRecord(new JiaYuanRecord()
                     {
                         OperateType = JiaYuanOperateType.Pick,
@@ -69,7 +69,7 @@ namespace ET.Server
                     break;
             }
 
-            await  DBHelper.SaveComponentCache( unit.DomainZone(), unit.Id, jiaYuanComponent );
+            await  UnitCacheHelper.SaveComponentCache( unit.Root(), jiaYuanComponent );
         }
     }
 }

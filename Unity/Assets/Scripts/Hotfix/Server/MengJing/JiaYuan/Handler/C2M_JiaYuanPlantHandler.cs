@@ -5,20 +5,18 @@ namespace ET.Server
     [MessageHandler(SceneType.Map)]
     public class C2M_JiaYuanPlantHandler : MessageLocationHandler<Unit, C2M_JiaYuanPlantRequest, M2C_JiaYuanPlantResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_JiaYuanPlantRequest request, M2C_JiaYuanPlantResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_JiaYuanPlantRequest request, M2C_JiaYuanPlantResponse response)
         {
-            JiaYuanComponent jianYuanComponent = unit.GetComponent<JiaYuanComponent>();
+            JiaYuanComponentS jianYuanComponent = unit.GetComponent<JiaYuanComponentS>();
             if (jianYuanComponent.GetCellPlant(request.CellIndex)!=null)
             {
                 response.Error = ErrorCode.ERR_AlreadyPlant;
-                reply();
                 return;
             }
-            BagComponent bagComponent = unit.GetComponent<BagComponent>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             if (bagComponent.GetItemNumber(request.ItemId) < 1)
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                reply();
                 return;
             }
 
@@ -32,14 +30,13 @@ namespace ET.Server
                 UnitId = IdGenerater.Instance.GenerateId(),
             };
 
-            unit.GetComponent<TaskComponent>().TriggerTaskEvent(TaskTargetType.JiaYuanPlantNumber_92, 0, 1);
-            unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanPlantNumber_92, 0, 1);
+            unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JiaYuanPlantNumber_92, 0, 1);
+            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanPlantNumber_92, 0, 1);
 
             jianYuanComponent.JianYuanPlantList_7.Add(jiaYuanPlant);
-            Unit plan = UnitFactory.CreatePlan( unit.DomainScene(), jiaYuanPlant, unit.Id);
+            Unit plan = UnitFactory.CreatePlan( unit.Scene(), jiaYuanPlant, unit.Id);
             jiaYuanPlant.UnitId = plan.Id;
-            DBHelper.SaveComponentCache(unit.DomainZone(), unit.Id, unit.GetComponent<JiaYuanComponent>()).Coroutine();
-            reply();
+            UnitCacheHelper.SaveComponentCache(unit.Root(),  unit.GetComponent<JiaYuanComponentS>()).Coroutine();
             await ETTask.CompletedTask;
         }
     }

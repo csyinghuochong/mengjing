@@ -6,26 +6,24 @@ namespace ET.Server
     [MessageHandler(SceneType.Map)]
     public  class C2M_JiaYuanStoreHandler : MessageLocationHandler<Unit, C2M_JiaYuanStoreRequest, M2C_JiaYuanStoreResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_JiaYuanStoreRequest request, M2C_JiaYuanStoreResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_JiaYuanStoreRequest request, M2C_JiaYuanStoreResponse response)
         {
             int hourseId = request.HorseId;
             if (hourseId >= (int)ItemLocType.ItemLocMax)
             {
                 Log.Error($"C2M_JiaYuanStoreRequest 1");
                 response.Error = ErrorCode.ERR_ModifyData;    
-                reply();
                 return;
             }
-            int leftCell = unit.GetComponent<BagComponent>().GetHourseLeftCell(hourseId);
+            int leftCell = unit.GetComponent<BagComponentS>().GetHourseLeftCell(hourseId);
             if (leftCell<= 0)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;     //错误码:仓库已满
-                reply();
                 return;
             }
             M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
 
-            List <BagInfo> bagInfos = unit.GetComponent<BagComponent>().BagItemList;
+            List <BagInfo> bagInfos = unit.GetComponent<BagComponentS>().BagItemList;
 
             List<BagInfo> itemList = new List<BagInfo>();
             
@@ -47,7 +45,7 @@ namespace ET.Server
             
             for (int i = 0; i < itemList.Count; i++)
             {
-                unit.GetComponent<BagComponent>().OnChangeItemLoc(itemList[i], (ItemLocType)hourseId, ItemLocType.ItemLocBag);
+                unit.GetComponent<BagComponentS>().OnChangeItemLoc(itemList[i], (ItemLocType)hourseId, ItemLocType.ItemLocBag);
                 m2c_bagUpdate.BagInfoUpdate.Add(itemList[i]);
                 leftCell--;
                 if (leftCell <= 0)
@@ -55,9 +53,7 @@ namespace ET.Server
                     break;
                 }
             }
-            MessageHelper.SendToClient(unit, m2c_bagUpdate);
-
-            reply();
+            MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
             await ETTask.CompletedTask;
         }
     }

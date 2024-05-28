@@ -10,15 +10,18 @@ namespace ET.Server
     public class C2M_JiaYuanVisitListHandler : MessageLocationHandler<Unit, C2M_JiaYuanVisitListRequest, M2C_JiaYuanVisitListResponse>
     {
 
-        private async ETTask<JiaYuanVisit> GetJiaYuanVisit(int zone, long id)
+        private async ETTask<JiaYuanVisit> GetJiaYuanVisit(Scene root, long id)
         {
-            List<JiaYuanComponent> resultJiaYuan = await Game.Scene.GetComponent<DBComponent>().Query<JiaYuanComponent>(zone, _account => _account.Id == id);
+            DBManagerComponent dbManagerComponent = root.GetComponent<DBManagerComponent>();
+            DBComponent dbComponent = dbManagerComponent.GetZoneDB(root.Zone());
+            
+            List<JiaYuanComponentS> resultJiaYuan = await dbComponent.Query<JiaYuanComponentS>(root.Zone(), _account => _account.Id == id);
             if (resultJiaYuan == null || resultJiaYuan.Count == 0)
             {
                 return null;
             }
 
-            List<UserInfoComponent> resultUser = await Game.Scene.GetComponent<DBComponent>().Query<UserInfoComponent>(zone, _account => _account.Id == id);
+            List<UserInfoComponentS> resultUser = await dbComponent.Query<UserInfoComponentS>(root.Zone(), _account => _account.Id == id);
             if (resultUser[0].UserInfo.Lv < 10)
             {
                 return null;
@@ -33,25 +36,24 @@ namespace ET.Server
             return jiaYuanVisit;
         }
 
-        protected override async ETTask Run(Unit unit, C2M_JiaYuanVisitListRequest request, M2C_JiaYuanVisitListResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_JiaYuanVisitListRequest request, M2C_JiaYuanVisitListResponse response)
         {
             Log.Warning($"C2M_JiaYuanVisitListRequest:{request.ActorId}");
-            using (await CoroutineLockComponent.Instance.Wait(CoroutineLockType.JiaYuan, unit.Id))
+            using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.JiaYuan, unit.Id))
             {
-                JiaYuanComponent jiaYuanComponent = unit.GetComponent<JiaYuanComponent>();
+                JiaYuanComponentS jiaYuanComponent = unit.GetComponent<JiaYuanComponentS>();
                 if (request.OperateType == 1)
                 {
-                    if (unit.GetComponent<NumericComponent>().GetAsInt(NumericType.JiaYuanVisitRefresh) >= 3)
+                    if (unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.JiaYuanVisitRefresh) >= 3)
                     {
                         return;
                     }
-                    unit.GetComponent<NumericComponent>().ApplyChange(null, NumericType.JiaYuanVisitRefresh, 1, 0);
+                    unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.JiaYuanVisitRefresh, 1, 0);
                     jiaYuanComponent.JiaYuanFuJinTime_3 = 0;
                 }
 
-                long dbCacheId = StartSceneConfigCategory.Instance.GetBySceneName(unit.DomainZone(), Enum.GetName(SceneType.DBCache)).InstanceId;
-                D2G_GetComponent d2GGetUnit = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = unit.Id, Component = DBHelper.DBFriendInfo });
-                DBFriendInfo dBFriendInfo = d2GGetUnit.Component as DBFriendInfo;
+
+                DBFriendInfo dBFriendInfo = await UnitCacheHelper.GetComponent<DBFriendInfo>(unit.Root(), unit.Id);
 
                 List<long> friendList = new List<long>();
                 if (dBFriendInfo != null)
@@ -63,7 +65,7 @@ namespace ET.Server
                         {
                             continue;
                         }
-                        JiaYuanVisit jiaYuanVisit = await GetJiaYuanVisit(unit.DomainZone(), friendList[i]);
+                        JiaYuanVisit jiaYuanVisit = await GetJiaYuanVisit(unit.Root(), friendList[i]);
                         if (jiaYuanVisit != null)
                         {
                             response.JiaYuanVisit_1.Add(jiaYuanVisit);
@@ -75,8 +77,8 @@ namespace ET.Server
                 {
                     jiaYuanComponent.JiaYuanFuJins_3.Clear();
 
-                    long mapInstanceId = DBHelper.GetMainCityServerId(unit.DomainZone());
-                    M2M_AllPlayerListResponse reqEnter = (M2M_AllPlayerListResponse)await ActorMessageSenderComponent.Instance.Call(mapInstanceId, new M2M_AllPlayerListRequest()
+                    ActorId mapInstanceId = UnitCacheHelper.GetMailServerId(unit.Zone());
+                    M2M_AllPlayerListResponse reqEnter = (M2M_AllPlayerListResponse)await  unit.Root().GetComponent<MessageSender>().Call(mapInstanceId, new M2M_AllPlayerListRequest()
                     {
                     });
                     List<long> allPlayers = new List<long>();
@@ -107,14 +109,13 @@ namespace ET.Server
 
                 for (int i = 0; i < jiaYuanComponent.JiaYuanFuJins_3.Count; i++)
                 {
-                    JiaYuanVisit jiaYuanVisit = await GetJiaYuanVisit(unit.DomainZone(), jiaYuanComponent.JiaYuanFuJins_3[i]);
+                    JiaYuanVisit jiaYuanVisit = await GetJiaYuanVisit(unit.Root(), jiaYuanComponent.JiaYuanFuJins_3[i]);
                     if (jiaYuanVisit != null)
                     {
                         response.JiaYuanVisit_2.Add(jiaYuanVisit);
                     }
                 }
             }    
-            reply();
             await ETTask.CompletedTask;
         }
     }

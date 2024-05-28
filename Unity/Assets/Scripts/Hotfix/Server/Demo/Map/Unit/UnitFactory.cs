@@ -448,6 +448,63 @@ namespace ET.Server
             return unit;
         }
 
+        public static Unit CreateJiaYuanPet(Scene scene, long masterid, JiaYuanPet jiaYuanPet)
+        {
+            Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(jiaYuanPet.unitId, 1);
+            scene.GetComponent<UnitComponent>().Add(unit);
+            unit.AddComponent<ObjectWait>();
+            NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
+            UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
+            unit.AddComponent<MoveComponent>();
+            unit.AddComponent<SkillManagerComponentS>();
+            unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
+            unit.AddComponent<AttackRecordComponent>();
+            unitInfoComponent.MasterName = jiaYuanPet.PlayerName;
+            unitInfoComponent.UnitName = jiaYuanPet.PetName;
+            unit.ConfigId = jiaYuanPet.ConfigId;
+            unit.AddComponent<StateComponentS>();         //添加状态组件
+            unit.AddComponent<BuffManagerComponentS>();      //添加
+            unit.Position = ConfigData.JiaYuanPetPosition[1];
+            unit.Type = UnitType.Pet;
+            numericComponent.SetNoEvent(NumericType.MasterId, masterid);
+            numericComponent.SetNoEvent(NumericType.Base_Speed_Base, 10000);
+            AIComponent aIComponent = unit.AddComponent<AIComponent, int>(11);     //AI行为树序号
+            aIComponent.InitJiaYuanPet( );
+            aIComponent.Begin();
+            //添加其他组件
+            unit.AddComponent<HeroDataComponentS>().InitJiaYuanPet(false);
+            unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
+
+            return unit;
+        }
+        
+        public static Unit CreatePlan(Scene scene, JiaYuanPlant jiaYuanPlant, long unitid)
+        {
+            Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(jiaYuanPlant.UnitId, jiaYuanPlant.ItemId);
+            scene.GetComponent<UnitComponent>().Add(unit);
+            unit.AddComponent<ObjectWait>();
+            NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
+            UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
+            unit.AddComponent<MoveComponent>();
+            unit.AddComponent<SkillManagerComponentS>();
+            unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
+            unit.AddComponent<AttackRecordComponent>();
+
+            unitInfoComponent.UnitName = JiaYuanFarmConfigCategory.Instance.Get(jiaYuanPlant.ItemId).Name;
+
+            unit.ConfigId = jiaYuanPlant.ItemId;
+            unit.AddComponent<StateComponentS>();         //添加状态组件
+            unit.AddComponent<BuffManagerComponentS>();      //添加
+            unit.Position = ConfigData.PlanPositionList[jiaYuanPlant.CellIndex];
+            unit.Type = UnitType.Plant;
+
+            //添加其他组件
+            unit.AddComponent<HeroDataComponentS>().InitPlan(jiaYuanPlant,false);
+            numericComponent.SetNoEvent(NumericType.MasterId, unitid);
+            unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
+            return unit;
+        }
+        
         public static void CreateDropItems(Unit main, Unit beKill, int dropType, int dropId, string par)
         {
             Scene domainScene = beKill.Scene();

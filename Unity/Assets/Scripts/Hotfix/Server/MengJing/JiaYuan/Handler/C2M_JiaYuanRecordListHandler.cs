@@ -7,11 +7,10 @@ namespace ET.Server
 
     public class C2M_JiaYuanRecordListHandler : MessageLocationHandler<Unit, C2M_JiaYuanRecordListRequest, M2C_JiaYuanRecordListResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_JiaYuanRecordListRequest request, M2C_JiaYuanRecordListResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_JiaYuanRecordListRequest request, M2C_JiaYuanRecordListResponse response)
         {
-            JiaYuanComponent jiaYuanComponent = unit.GetComponent<JiaYuanComponent>();
+            JiaYuanComponentS jiaYuanComponent = unit.GetComponent<JiaYuanComponentS>();
             response.JiaYuanRecordList = jiaYuanComponent.JiaYuanRecordList_1;
-            reply();
             await ETTask.CompletedTask;
         }
     }

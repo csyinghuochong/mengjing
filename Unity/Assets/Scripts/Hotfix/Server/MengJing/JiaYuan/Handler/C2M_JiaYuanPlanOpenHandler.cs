@@ -6,39 +6,35 @@ namespace ET.Server
     [MessageHandler(SceneType.Map)]
     public class C2M_JiaYuanPlanOpenHandler : MessageLocationHandler<Unit, C2M_JiaYuanPlanOpenRequest, M2C_JiaYuanPlanOpenResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_JiaYuanPlanOpenRequest request, M2C_JiaYuanPlanOpenResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_JiaYuanPlanOpenRequest request, M2C_JiaYuanPlanOpenResponse response)
         {
-            JiaYuanComponent jiaYuanComponent = unit.GetComponent<JiaYuanComponent>();
+            JiaYuanComponentS jiaYuanComponent = unit.GetComponent<JiaYuanComponentS>();
             List<int> PlanOpenList_2 = jiaYuanComponent.PlanOpenList_7;
             if (PlanOpenList_2.Contains(request.CellIndex))
             {
                 response.PlanOpenList = PlanOpenList_2; 
-                reply();
                 return;
             }
-            UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
+            UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
             JiaYuanConfig jiaYuanConfig = JiaYuanConfigCategory.Instance.Get(userInfoComponent.UserInfo.JiaYuanLv);
             if (jiaYuanComponent.GetOpenPlanNumber() >= jiaYuanConfig.FarmNumMax)
             {
                 response.Error = ErrorCode.ERR_JiaYuanLevel;
-                reply();
                 return;
             }
 
-            int costNumber = ConfigHelper.JiaYuanFarmOpen[request.CellIndex];
-            if (!unit.GetComponent<BagComponent>().CheckCostItem($"13;{costNumber}"))
+            int costNumber = ConfigData.JiaYuanFarmOpen[request.CellIndex];
+            if (!unit.GetComponent<BagComponentS>().CheckCostItem($"13;{costNumber}"))
             {
                 response.PlanOpenList = PlanOpenList_2;
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                reply();
                 return;
             }
 
             PlanOpenList_2.Add(request.CellIndex);
             response.PlanOpenList = PlanOpenList_2;
-            unit.GetComponent<BagComponent>().OnCostItemData($"13;{costNumber}");
-            DBHelper.SaveComponentCache(unit.DomainZone(), unit.Id, unit.GetComponent<JiaYuanComponent>()).Coroutine();
-            reply();
+            unit.GetComponent<BagComponentS>().OnCostItemData($"13;{costNumber}");
+            UnitCacheHelper.SaveComponentCache(unit.Root(), unit.GetComponent<JiaYuanComponentS>()).Coroutine();
             await ETTask.CompletedTask;
         }
     }
