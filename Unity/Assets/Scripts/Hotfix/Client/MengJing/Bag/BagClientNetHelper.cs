@@ -498,5 +498,30 @@ namespace ET.Client
                 root.GetComponent<UserInfoComponentC>().OnStoreBuy(storeSellConfig.Id);
             }
         }
+
+        public static async ETTask<int> RquestMysteryBuy(Scene root, MysteryItemInfo mysteryItemInfo, int npdId)
+        {
+            C2M_MysteryBuyRequest request = new() { MysteryItemInfo = mysteryItemInfo, NpcId = npdId };
+            M2C_MysteryBuyResponse response =
+                    (M2C_MysteryBuyResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
+
+        public static async ETTask<A2C_MysteryListResponse> RquestMysteryList(Scene root, long userId)
+        {
+            C2A_MysteryListRequest request = new() { UserId = userId };
+            A2C_MysteryListResponse response = (A2C_MysteryListResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
+
+        public static async ETTask<Actor_FubenMoNengResponse> RquestFubenMoNeng(Scene root)
+        {
+            Actor_FubenMoNengRequest request = new();
+            Actor_FubenMoNengResponse response = (Actor_FubenMoNengResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
     }
 }

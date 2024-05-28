@@ -1,0 +1,77 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+
+namespace ET.Client
+{
+    [FriendOf(typeof (Scroll_Item_MysteryItem))]
+    [EntitySystemOf(typeof (Scroll_Item_MysteryItem))]
+    public static partial class Scroll_Item_MysteryItemSystem
+    {
+        [EntitySystem]
+        private static void Awake(this Scroll_Item_MysteryItem self)
+        {
+            self.E_ButtonBuyButton.AddListenerAsync(self.OnButtonBuy);
+        }
+
+        [EntitySystem]
+        private static void Destroy(this Scroll_Item_MysteryItem self)
+        {
+            self.DestroyWidget();
+        }
+
+        public static async ETTask OnButtonBuy(this Scroll_Item_MysteryItem self)
+        {
+            int leftSpace = self.Root().GetComponent<BagComponentC>().GetBagLeftCell();
+            if (leftSpace < 1)
+            {
+                ErrorViewHelp.ShowErrorHint(ErrorCode.ERR_BagIsFull);
+                return;
+            }
+
+            MysteryConfig mysteryConfig = MysteryConfigCategory.Instance.Get(self.MysteryItemInfo.MysteryId);
+            int sellValue = mysteryConfig.SellValue;
+
+            if (mysteryConfig.SellType == 1 && self.Root().GetComponent<UserInfoComponentC>().UserInfo.Gold < sellValue)
+            {
+                ErrorViewHelp.ShowErrorHint(ErrorCode.ERR_GoldNotEnoughError);
+                return;
+            }
+
+            if (mysteryConfig.SellType == 3 && self.Root().GetComponent<UserInfoComponentC>().UserInfo.Diamond < sellValue)
+            {
+                ErrorViewHelp.ShowErrorHint(ErrorCode.ERR_DiamondNotEnoughError);
+                return;
+            }
+
+            if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem($"{mysteryConfig.SellType};{mysteryConfig.SellValue}"))
+            {
+                ErrorViewHelp.ShowErrorHint(ErrorCode.ERR_ItemNotEnoughError);
+                return;
+            }
+
+            MysteryItemInfo mysteryItemInfo = new() { MysteryId = self.MysteryItemInfo.MysteryId };
+
+            await BagClientNetHelper.RquestMysteryBuy(self.Root(), mysteryItemInfo, self.NpcId);
+
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMystery>().RequestMystery().Coroutine();
+        }
+
+        public static void OnUpdateUI(this Scroll_Item_MysteryItem self, MysteryItemInfo mysteryItemInfo, int npcId)
+        {
+            self.NpcId = npcId;
+
+            MysteryConfig mysteryConfig = MysteryConfigCategory.Instance.Get(mysteryItemInfo.MysteryId);
+            self.MysteryItemInfo = mysteryItemInfo;
+            self.E_Text_NumberText.text = $"剩余 {mysteryItemInfo.ItemNumber}件";
+            self.E_Text_valueText.text = mysteryConfig.SellValue.ToString();
+
+            self.ES_CommonItem.UpdateItem(new BagInfo() { ItemID = self.MysteryItemInfo.ItemID }, ItemOperateEnum.None);
+            self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
+
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(mysteryConfig.SellType);
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            self.E_Image_goldImage.sprite = sp;
+        }
+    }
+}

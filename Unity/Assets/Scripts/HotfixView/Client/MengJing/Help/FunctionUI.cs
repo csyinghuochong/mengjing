@@ -68,6 +68,7 @@ namespace ET.Client
                 "UIMail" => WindowID.WindowID_Mail,
                 "UIRoleXiLian" => WindowID.WindowID_RoleXiLian,
                 "UIStore" => WindowID.WindowID_Store,
+                "UIMystery" => WindowID.WindowID_Mystery,
                 _ => WindowID.WindowID_Invaild
             };
         }
