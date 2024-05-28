@@ -5609,3 +5609,37 @@ message E2C_AccountWarehousInfoResponse // IMailActorResponse
 	string Message = 92;
 	repeated BagInfo BagInfos = 1;
 }
+
+//ResponseType M2C_BattleSummonRecord
+//战场召唤记录
+message C2M_BattleSummonRecord // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_BattleSummonRecord // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+
+	repeated BattleSummonInfo BattleSummonList = 2;		//召唤记录. 召唤人口数量自己计算
+}
+
+//ResponseType M2C_BattleSummonResponse
+//战场召唤士兵
+message C2M_BattleSummonRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+
+	int32 SummonId = 1;
+}
+
+message M2C_BattleSummonResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+
+	repeated BattleSummonInfo BattleSummonList = 2;		//召唤记录. 召唤人口数量自己计算
+}

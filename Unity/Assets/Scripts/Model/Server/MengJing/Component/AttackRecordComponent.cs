@@ -24,10 +24,10 @@ namespace ET.Server
         /// 玩家ID
         /// </summary>
         public Dictionary<long, long> BeAttackPlayerList = new Dictionary<long, long>();
-        
+
         /// <summary>
         /// 战场召唤记录
         /// </summary>
-        public List<BattleSummonInfo> BattleSummonList = new List<BattleSummonInfo>();  
+        public List<BattleSummonInfo> BattleSummonList { get; set; } = new List<BattleSummonInfo>();
     }
 }

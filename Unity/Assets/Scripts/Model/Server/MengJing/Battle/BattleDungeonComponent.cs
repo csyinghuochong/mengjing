@@ -9,8 +9,8 @@ namespace ET.Server
         public int CampKillNumber_2;
         public bool SendReward;
 
-        public long BattleOpenTime = 0;
-        public M2C_BattleInfoResult m2C_BattleInfoResult = new M2C_BattleInfoResult();  
+        public long BattleOpenTime { get; set; } = 0;
+        public M2C_BattleInfoResult m2C_BattleInfoResult  { get; set; }= new M2C_BattleInfoResult();  
     }
     
 }

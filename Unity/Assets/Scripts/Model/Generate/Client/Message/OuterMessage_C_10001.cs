@@ -21931,6 +21931,126 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_BattleSummonRecord))]
+//战场召唤记录
+	[Message(OuterMessage.C2M_BattleSummonRecord)]
+	[MemoryPackable]
+	public partial class C2M_BattleSummonRecord: MessageObject, ILocationRequest
+	{
+		public static C2M_BattleSummonRecord Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_BattleSummonRecord), isFromPool) as C2M_BattleSummonRecord; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_BattleSummonRecord)]
+	[MemoryPackable]
+	public partial class M2C_BattleSummonRecord: MessageObject, ILocationResponse
+	{
+		public static M2C_BattleSummonRecord Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_BattleSummonRecord), isFromPool) as M2C_BattleSummonRecord; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(1)]
+		public List<BattleSummonInfo> BattleSummonList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.BattleSummonList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_BattleSummonResponse))]
+//战场召唤士兵
+	[Message(OuterMessage.C2M_BattleSummonRequest)]
+	[MemoryPackable]
+	public partial class C2M_BattleSummonRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_BattleSummonRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_BattleSummonRequest), isFromPool) as C2M_BattleSummonRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int SummonId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.SummonId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_BattleSummonResponse)]
+	[MemoryPackable]
+	public partial class M2C_BattleSummonResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_BattleSummonResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_BattleSummonResponse), isFromPool) as M2C_BattleSummonResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(1)]
+		public List<BattleSummonInfo> BattleSummonList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.BattleSummonList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -22574,5 +22694,9 @@ namespace ET
 		 public const ushort M2C_MakeLearnResponse = 10640;
 		 public const ushort C2E_AccountWarehousInfoRequest = 10641;
 		 public const ushort E2C_AccountWarehousInfoResponse = 10642;
+		 public const ushort C2M_BattleSummonRecord = 10643;
+		 public const ushort M2C_BattleSummonRecord = 10644;
+		 public const ushort C2M_BattleSummonRequest = 10645;
+		 public const ushort M2C_BattleSummonResponse = 10646;
 	}
 }
