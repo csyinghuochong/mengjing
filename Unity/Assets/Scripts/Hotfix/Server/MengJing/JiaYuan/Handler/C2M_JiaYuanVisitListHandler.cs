@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_JiaYuanVisitListHandler : AMActorLocationRpcHandler<Unit, C2M_JiaYuanVisitListRequest, M2C_JiaYuanVisitListResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_JiaYuanVisitListHandler : MessageLocationHandler<Unit, C2M_JiaYuanVisitListRequest, M2C_JiaYuanVisitListResponse>
     {
 
         private async ETTask<JiaYuanVisit> GetJiaYuanVisit(int zone, long id)

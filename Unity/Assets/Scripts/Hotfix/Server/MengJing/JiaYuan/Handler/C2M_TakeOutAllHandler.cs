@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_TakeOutAllHandler: AMActorLocationRpcHandler<Unit, C2M_TakeOutAllRequest, M2C_TakeOutAllResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_TakeOutAllHandler: MessageLocationHandler<Unit, C2M_TakeOutAllRequest, M2C_TakeOutAllResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_TakeOutAllRequest request, M2C_TakeOutAllResponse response, Action reply)
         {

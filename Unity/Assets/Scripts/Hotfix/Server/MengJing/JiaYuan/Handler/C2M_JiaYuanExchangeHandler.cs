@@ -1,15 +1,14 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class C2M_JiaYuanExchangeHandler : AMActorLocationRpcHandler<Unit, C2M_JiaYuanExchangeRequest, M2C_JiaYuanExchangeResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_JiaYuanExchangeHandler : MessageLocationHandler<Unit, C2M_JiaYuanExchangeRequest, M2C_JiaYuanExchangeResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_JiaYuanExchangeRequest request, M2C_JiaYuanExchangeResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_JiaYuanExchangeRequest request, M2C_JiaYuanExchangeResponse response)
         {
-            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
-            UserInfoComponent userInfoComponent=unit.GetComponent<UserInfoComponent>();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            UserInfoComponentS userInfoComponent=unit.GetComponent<UserInfoComponentS>();
             UserInfo userInfo = userInfoComponent.UserInfo;
             JiaYuanConfig jiaYuanConfig = JiaYuanConfigCategory.Instance.Get(userInfo.JiaYuanLv);
             switch (request.ExchangeType)
@@ -18,14 +17,12 @@ namespace ET
                     if (numericComponent.GetAsInt(NumericType.JiaYuanExchangeZiJin) >= 10)
                     {
                         response.Error = ErrorCode.ERR_TimesIsNot;
-                        reply();
                         return;
                     }
                    
                     if (userInfo.Gold < jiaYuanConfig.ExchangeZiJinCostGold)
                     {
                         response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                        reply();
                         return;
                     }
 
@@ -37,14 +34,12 @@ namespace ET
                     if (numericComponent.GetAsInt(NumericType.JiaYuanExchangeExp) >= 10)
                     {
                         response.Error = ErrorCode.ERR_TimesIsNot;
-                        reply();
                         return;
                     }
                    
                     if (userInfo.JiaYuanFund < jiaYuanConfig.ExchangeExpCostZiJin)
                     {
                         response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                        reply();
                         return;
                     }
 
@@ -56,7 +51,6 @@ namespace ET
                     break;
             }
 
-            reply();
             await ETTask.CompletedTask;
         }
     }

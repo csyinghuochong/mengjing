@@ -6,7 +6,7 @@ namespace ET.Server
 
     [EntitySystemOf(typeof(TaskComponentS))]
     [FriendOf(typeof(TaskComponentS))]
-    public static partial class TaskComponentServerSystem
+    public static partial class TaskComponentSSystem
     {
         [EntitySystem]
         private static void Awake(this ET.Server.TaskComponentS self)

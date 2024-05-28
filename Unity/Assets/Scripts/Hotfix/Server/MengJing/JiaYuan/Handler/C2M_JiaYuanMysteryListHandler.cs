@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_JiaYuanMysteryListHandler : AMActorLocationRpcHandler<Unit, C2M_JiaYuanMysteryListRequest, M2C_JiaYuanMysteryListResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_JiaYuanMysteryListHandler : MessageLocationHandler<Unit, C2M_JiaYuanMysteryListRequest, M2C_JiaYuanMysteryListResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_JiaYuanMysteryListRequest request, M2C_JiaYuanMysteryListResponse response, Action reply)
         {

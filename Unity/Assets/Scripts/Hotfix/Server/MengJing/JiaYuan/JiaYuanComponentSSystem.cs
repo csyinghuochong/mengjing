@@ -7,7 +7,7 @@ namespace ET.Server
 
     [EntitySystemOf(typeof(JiaYuanComponentS))]
     [FriendOf(typeof(JiaYuanComponentS))]
-    public static partial class JiaYuanComponentServerSystem
+    public static partial class JiaYuanComponentSSystem
     {
         [EntitySystem]
         private static void Awake(this ET.Server.JiaYuanComponentS self)

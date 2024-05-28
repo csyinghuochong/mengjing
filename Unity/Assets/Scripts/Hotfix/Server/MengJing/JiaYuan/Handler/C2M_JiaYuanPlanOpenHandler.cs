@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_JiaYuanPlanOpenHandler : AMActorLocationRpcHandler<Unit, C2M_JiaYuanPlanOpenRequest, M2C_JiaYuanPlanOpenResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_JiaYuanPlanOpenHandler : MessageLocationHandler<Unit, C2M_JiaYuanPlanOpenRequest, M2C_JiaYuanPlanOpenResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_JiaYuanPlanOpenRequest request, M2C_JiaYuanPlanOpenResponse response, Action reply)
         {

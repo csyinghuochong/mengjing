@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class C2M_JiaYuanPickHandler : AMActorLocationRpcHandler<Unit, C2M_JiaYuanPickRequest, M2C_JiaYuanPickResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_JiaYuanPickHandler : MessageLocationHandler<Unit, C2M_JiaYuanPickRequest, M2C_JiaYuanPickResponse>
     {
-        protected override async ETTask Run(Unit unit, Actor_JiaYuanPickRequest request, Actor_JiaYuanPickResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_JiaYuanPickRequest request, M2C_JiaYuanPickResponse response, Action reply)
         {
             Unit boxUnit = unit.GetParent<UnitComponent>().Get(request.UnitId);
             if (boxUnit == null)

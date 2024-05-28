@@ -2,27 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class C2M_JiaYuanCookHandler : AMActorLocationRpcHandler<Unit, C2M_JiaYuanCookRequest, M2C_JiaYuanCookResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_JiaYuanCookHandler : MessageLocationHandler<Unit, C2M_JiaYuanCookRequest, M2C_JiaYuanCookResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_JiaYuanCookRequest request, M2C_JiaYuanCookResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_JiaYuanCookRequest request, M2C_JiaYuanCookResponse response)
         {
             List<long> huishouList = request.BagInfoIds;
-            BagComponent bagComponent = unit.GetComponent<BagComponent>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             if (bagComponent.GetBagLeftCell() < 1)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
-                reply();
                 return;
             }
 
             if (huishouList.Count < 2)
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                reply();
                 return;
             }
 
@@ -54,14 +51,12 @@ namespace ET
                 if (bagComponent.GetItemNumber(itemid) < itemnum)
                 {
                     response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                    reply();
                     return;
                 }
             }
 
             if (response.Error != ErrorCode.ERR_Success)
             {
-                reply();
                 return;
             }
 
@@ -69,7 +64,7 @@ namespace ET
             int getItemid = 0;
             bool ifActiveMake = false;
             int makeid = EquipMakeConfigCategory.Instance.GetCanMakeId(itemIdList);
-            JiaYuanComponent jiaYuanComponent = unit.GetComponent<JiaYuanComponent>();
+            JiaYuanComponentS jiaYuanComponent = unit.GetComponent<JiaYuanComponentS>();
             if (makeid > 0 )
             {
                 /*
@@ -109,7 +104,6 @@ namespace ET
                     getItemid = ItemConfigCategory.Instance.GetFoodId(randLv);
                     if (getItemid == 0)
                     {
-                        reply();
                         return;
                     }
                 }
@@ -126,12 +120,12 @@ namespace ET
             bagComponent.OnAddItemData($"{getItemid};1", $"{ItemGetWay.JiaYuanCook}_{TimeHelper.ServerNow()}");
             response.LearnMakeIds = jiaYuanComponent.LearnMakeIds_7;
             response.ItemId = getItemid;
-            DBHelper.SaveComponentCache(unit.DomainZone(), unit.Id, jiaYuanComponent).Coroutine();
-            unit.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.JiaYuanCooking_403, 0, 1);
-            unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanCook_1018, 0, 1);
-            unit.GetComponent<TaskComponent>().TriggerTaskEvent(TaskTargetType.JiaYuanCookNumber_91, 0, 1);
-            unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanCookNumber_91, 0, 1);
-            reply();
+            UnitCacheHelper.SaveComponentCache(unit.Root(), jiaYuanComponent).Coroutine();
+            unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.JiaYuanCooking_403, 0, 1);
+            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanCook_1018, 0, 1);
+            unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JiaYuanCookNumber_91, 0, 1);
+            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanCookNumber_91, 0, 1);
+
             await ETTask.CompletedTask;
         }
     }

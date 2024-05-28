@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_JiaYuanPetFeedHandler : AMActorLocationRpcHandler<Unit, C2M_JiaYuanPetFeedRequest, M2C_JiaYuanPetFeedResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_JiaYuanPetFeedHandler : MessageLocationHandler<Unit, C2M_JiaYuanPetFeedRequest, M2C_JiaYuanPetFeedResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_JiaYuanPetFeedRequest request, M2C_JiaYuanPetFeedResponse response, Action reply)
         {

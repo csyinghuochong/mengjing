@@ -1,32 +1,29 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class C2M_JiaYuanDaShiHandler : AMActorLocationRpcHandler<Unit, C2M_JiaYuanDaShiRequest, M2C_JiaYuanDaShiResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_JiaYuanDaShiHandler : MessageLocationHandler<Unit, C2M_JiaYuanDaShiRequest, M2C_JiaYuanDaShiResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_JiaYuanDaShiRequest request, M2C_JiaYuanDaShiResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_JiaYuanDaShiRequest request, M2C_JiaYuanDaShiResponse response)
         {
             if (request.BagInfoIDs.Count < 1)
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                reply();
                 return;
             }
-            BagComponent bagComponent = unit.GetComponent<BagComponent>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             BagInfo useBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoIDs[0]);
             if (useBagInfo == null)
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                reply();
                 return;
             }
 
             bagComponent.OnCostItemData(request.BagInfoIDs[0], 1);
 
-            int jiayuanlv = unit.GetComponent<UserInfoComponent>().UserInfo.JiaYuanLv;
-            JiaYuanComponent jiaYuanComponent = unit.GetComponent<JiaYuanComponent>();  
+            int jiayuanlv = unit.GetComponent<UserInfoComponentS>().UserInfo.JiaYuanLv;
+            JiaYuanComponentS jiaYuanComponent = unit.GetComponent<JiaYuanComponentS>();  
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(useBagInfo.ItemID);
             //7,15;100403,1,5;119203,1,5
             string[] itemUsePars = itemConfig.ItemUsePar.Split(';');
@@ -71,12 +68,11 @@ namespace ET
             response.JiaYuanDaShiTime = jiaYuanComponent.JiaYuanDaShiTime_1;
             response.JiaYuanProList = jiaYuanComponent.JiaYuanProList_7;
 
-            unit.GetComponent<TaskComponent>().TriggerTaskEvent(TaskTargetType.JiaYuanDashiNumber_96, 0, 1);
-            unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanDashiNumber_96, 0, 1);
+            unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JiaYuanDashiNumber_96, 0, 1);
+            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanDashiNumber_96, 0, 1);
 
-            DBHelper.SaveComponentCache( unit.DomainZone(), unit.Id, jiaYuanComponent).Coroutine();
-            Function_Fight.GetInstance().UnitUpdateProperty_Base(unit, true, true);
-            reply();
+            UnitCacheHelper.SaveComponentCache( unit.Root(), jiaYuanComponent).Coroutine();
+            Function_Fight.UnitUpdateProperty_Base(unit, true, true);
             await ETTask.CompletedTask;
         }
     }

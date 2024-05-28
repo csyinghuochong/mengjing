@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class M2M_JiaYuanOperateHandler : AMActorLocationHandler<Unit, M2M_JiaYuanOperateMessage>
+    [MessageHandler(SceneType.JiaYuan)]
+    public class M2M_JiaYuanOperateHandler : MessageHandler<Unit, M2M_JiaYuanOperateMessage>
     {
         protected override async ETTask Run(Unit unit, M2M_JiaYuanOperateMessage message)
         {
-            JiaYuanComponent jiaYuanComponent = unit.GetComponent<JiaYuanComponent>();
+            JiaYuanComponentS jiaYuanComponent = unit.GetComponent<JiaYuanComponentS>();
             JiaYuanOperate jiaYuanOperate = message.JiaYuanOperate;
             switch (jiaYuanOperate.OperateType)
             {

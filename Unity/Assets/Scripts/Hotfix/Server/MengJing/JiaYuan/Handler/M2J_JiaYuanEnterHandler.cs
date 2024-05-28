@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class M2J_JiaYuanEnterHandler : AMActorRpcHandler<Scene, M2J_JiaYuanEnterRequest, J2M_JiaYuanEnterResponse>
+    [MessageHandler(SceneType.JiaYuan)]
+    public class M2J_JiaYuanEnterHandler : MessageHandler<Scene, M2J_JiaYuanEnterRequest, J2M_JiaYuanEnterResponse>
     {
         protected override async ETTask Run(Scene scene, M2J_JiaYuanEnterRequest request, J2M_JiaYuanEnterResponse response, Action reply)
         {

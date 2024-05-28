@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-
-    [ActorMessageHandler]
-    public class C2M_JiaYuanPurchaseRefreshHandler : AMActorLocationRpcHandler<Unit, C2M_JiaYuanPurchaseRefresh, M2C_JiaYuanPurchaseRefresh>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_JiaYuanPurchaseRefreshHandler : MessageLocationHandler<Unit, C2M_JiaYuanPurchaseRefresh, M2C_JiaYuanPurchaseRefresh>
     {
         protected override async ETTask Run(Unit unit, C2M_JiaYuanPurchaseRefresh request, M2C_JiaYuanPurchaseRefresh response, Action reply)
         {

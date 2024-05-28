@@ -1,30 +1,27 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_JiaYuanCangKuOpenHandler : AMActorLocationRpcHandler<Unit, C2M_JiaYuanCangKuOpenRequest, M2C_JiaYuanCangKuOpenResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_JiaYuanCangKuOpenHandler : MessageLocationHandler<Unit, C2M_JiaYuanCangKuOpenRequest, M2C_JiaYuanCangKuOpenResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_JiaYuanCangKuOpenRequest request, M2C_JiaYuanCangKuOpenResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_JiaYuanCangKuOpenRequest request, M2C_JiaYuanCangKuOpenResponse response)
         {
-            int cangkuNumber = unit.GetComponent<NumericComponent>().GetAsInt(NumericType.JianYuanCangKu);
+            int cangkuNumber = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.JianYuanCangKu);
             if (cangkuNumber >= 4)
             {
                 response.Error = ErrorCode.ERR_Error;
-                reply();
                 return;
             }
 
             string costItems = JiaYuanHelper.GetOpenJiaYuanWarehouse(cangkuNumber);
-            if (!unit.GetComponent<BagComponent>().OnCostItemData(costItems))
+            if (!unit.GetComponent<BagComponentS>().OnCostItemData(costItems))
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                reply();
                 return;
             }
 
-            unit.GetComponent<NumericComponent>().ApplyValue(NumericType.JianYuanCangKu, cangkuNumber + 1);
-            reply();
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.JianYuanCangKu, cangkuNumber + 1);
             await ETTask.CompletedTask;
         }
     }
