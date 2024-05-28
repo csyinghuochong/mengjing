@@ -375,6 +375,30 @@ namespace ET.Server
             return self.UserInfo.Sp;
         }
 
+        public static string GetGameSettingValue(this UserInfoComponentS self, GameSettingEnum gameSettingEnum)
+        {
+            for (int i = 0; i < self.UserInfo.GameSettingInfos.Count; i++)
+            {
+                if (self.UserInfo.GameSettingInfos[i].KeyId == (int)gameSettingEnum)
+                    return self.UserInfo.GameSettingInfos[i].Value;
+            }
+            switch (gameSettingEnum)
+            {
+                case GameSettingEnum.Music:
+                    return "1";
+                case GameSettingEnum.Sound:
+                    return "0";
+                // 0 固定 1移动
+                case GameSettingEnum.YanGan:
+                    return "0";
+                case GameSettingEnum.FenBianlLv:
+                    return "1";
+                default:
+                    return "0";
+            }
+        }
+
+        
         public static void  UpdateRankInfo(this UserInfoComponentS self)
         {
             Unit unit = self.GetParent<Unit>();

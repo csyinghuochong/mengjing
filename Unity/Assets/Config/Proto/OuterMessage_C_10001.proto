@@ -5870,3 +5870,35 @@ message M2C_EnergyReceiveResponse // ILocationResponse
 }
 
 
+//上下马
+//ResponseType M2C_HorseRideResponse
+message C2M_HorseRideRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 HorseId = 1;
+	int32 OperateType = 2; //1上马  0下马
+}
+
+message M2C_HorseRideResponse    // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//坐骑出战
+//ResponseType M2C_HorseFightResponse
+message C2M_HorseFightRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 HorseId = 1;
+	int32 OperateType = 2; //1上马  0下马
+}
+
+message M2C_HorseFightResponse    // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+

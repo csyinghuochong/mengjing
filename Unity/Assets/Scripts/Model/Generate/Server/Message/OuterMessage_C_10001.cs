@@ -22949,6 +22949,130 @@ namespace ET
 
 	}
 
+//上下马
+	[ResponseType(nameof(M2C_HorseRideResponse))]
+	[Message(OuterMessage.C2M_HorseRideRequest)]
+	[MemoryPackable]
+	public partial class C2M_HorseRideRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_HorseRideRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_HorseRideRequest), isFromPool) as C2M_HorseRideRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int HorseId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int OperateType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.HorseId = default;
+			this.OperateType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_HorseRideResponse)]
+	[MemoryPackable]
+	public partial class M2C_HorseRideResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_HorseRideResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_HorseRideResponse), isFromPool) as M2C_HorseRideResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//坐骑出战
+	[ResponseType(nameof(M2C_HorseFightResponse))]
+	[Message(OuterMessage.C2M_HorseFightRequest)]
+	[MemoryPackable]
+	public partial class C2M_HorseFightRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_HorseFightRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_HorseFightRequest), isFromPool) as C2M_HorseFightRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int HorseId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int OperateType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.HorseId = default;
+			this.OperateType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_HorseFightResponse)]
+	[MemoryPackable]
+	public partial class M2C_HorseFightResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_HorseFightResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_HorseFightResponse), isFromPool) as M2C_HorseFightResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -23624,5 +23748,9 @@ namespace ET
 		 public const ushort M2C_EnergyInfoResponse = 10672;
 		 public const ushort C2M_EnergyReceiveRequest = 10673;
 		 public const ushort M2C_EnergyReceiveResponse = 10674;
+		 public const ushort C2M_HorseRideRequest = 10675;
+		 public const ushort M2C_HorseRideResponse = 10676;
+		 public const ushort C2M_HorseFightRequest = 10677;
+		 public const ushort M2C_HorseFightResponse = 10678;
 	}
 }
