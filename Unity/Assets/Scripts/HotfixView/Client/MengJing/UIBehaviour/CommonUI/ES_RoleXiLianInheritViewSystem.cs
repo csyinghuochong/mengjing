@@ -15,6 +15,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
+            self.E_XiLianButtonButton.AddListener(() => { self.OnXiLianButton(1).Coroutine(); });
 
             self.ES_CommonItem_Cost.uiTransform.gameObject.SetActive(false);
             self.InitSubItemUI();
@@ -29,6 +30,7 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this ES_RoleXiLianInherit self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
+            scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.ItemXiLian, self.OnSelectItem);
         }
 
         public static void OnUpdateUI(this ES_RoleXiLianInherit self)
@@ -61,6 +63,7 @@ namespace ET.Client
             }
 
             self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
+            self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
 
             //洗炼消耗
             string[] costitem = ItemHelper.GetInheritCost(bagInfo.InheritTimes).Split(';');
@@ -149,6 +152,11 @@ namespace ET.Client
             {
                 foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
                 {
+                    if (item.uiTransform == null)
+                    {
+                        continue;
+                    }
+
                     item.ES_CommonItem.SetSelected(bagInfo);
                 }
             }
@@ -194,7 +202,7 @@ namespace ET.Client
             }
 
             C2M_ItemInheritRequest request = new() { OperateBagID = bagInfo.BagInfoID };
-            M2C_ItemInheritResponse response = (M2C_ItemInheritResponse)await self.Root().GetComponent<SessionComponent>().Session.Call(request);
+            M2C_ItemInheritResponse response = (M2C_ItemInheritResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
             if (response.Error != 0)
             {
                 return;
