@@ -207,17 +207,13 @@ namespace ET.Client
         public static void BeginDrag(this ES_RoleXiLianTransfer self, BagInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = false;
-            self.UICommonItem_Copy = GameObject.Instantiate(self.UICommonItem_1);
+            self.UICommonItem_Copy = UnityEngine.Object.Instantiate(self.ES_CommonItem_1.uiTransform.gameObject);
             self.UICommonItem_Copy.SetActive(true);
-            UICommonHelper.SetParent(self.UICommonItem_Copy, UIEventComponent.Instance.UILayers[(int)UILayer.Low].gameObject);
+            UICommonHelper.SetParent(self.UICommonItem_Copy, self.uiTransform.gameObject);
 
             ItemConfig itemconfig = ItemConfigCategory.Instance.Get(binfo.ItemID);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemconfig.Icon);
-            Sprite sp = ResourcesComponent.Instance.LoadAsset<Sprite>(path);
-            if (!self.AssetPath.Contains(path))
-            {
-                self.AssetPath.Add(path);
-            }
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
             self.UICommonItem_Copy.transform.Find("Image_ItemIcon").GetComponent<Image>().sprite = sp;
             self.UICommonItem_Copy.transform.Find("Image_ItemQuality").gameObject.SetActive(false);

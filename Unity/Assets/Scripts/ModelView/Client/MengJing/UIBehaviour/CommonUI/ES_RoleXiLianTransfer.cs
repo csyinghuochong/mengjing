@@ -8,6 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_RoleXiLianTransfer : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public GameObject UICommonItem_Copy;
 		public BagInfo[] BagInfo_Transfer;
 		public ES_CommonItem[] UIItem_Transfer;
 		public Vector2 localPoint;
