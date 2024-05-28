@@ -1977,3 +1977,31 @@ message M2A_PetMingLoginResponse // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//进入家园
+//ResponseType J2M_JiaYuanEnterResponse
+message M2J_JiaYuanEnterRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 MasterId = 1;
+	int64 UnitId = 2;
+	int32 SceneId = 3;
+}
+
+message J2M_JiaYuanEnterResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	int32 FubenId = 1;
+	int64 FubenInstanceId = 2;
+}
+
+message M2M_JiaYuanOperateMessage // IMessage
+{
+	int32 RpcId = 90;
+	JiaYuanOperate  JiaYuanOperate = 1;
+}
+

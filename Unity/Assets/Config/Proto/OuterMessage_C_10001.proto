@@ -5902,3 +5902,499 @@ message M2C_HorseFightResponse    // ILocationResponse
 	string Message = 92;
 }
 
+//开启宝箱
+//ResponseType M2C_JiaYuanPickResponse
+message C2M_JiaYuanPickRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitId = 1;
+	int64 MasterId = 2;
+}
+
+message M2C_JiaYuanPickResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_JiaYuanCangKuOpenResponse
+message C2M_JiaYuanCangKuOpenRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_JiaYuanCangKuOpenResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_JiaYuanCookBookOpen
+//学习菜单
+message C2M_JiaYuanCookBookOpen	// ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 LearnMakeId = 1;
+}
+
+message M2C_JiaYuanCookBookOpen // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	repeated int32 LearnMakeIds = 2;
+}
+
+//ResponseType M2C_JiaYuanCookResponse
+//制作菜肴
+message C2M_JiaYuanCookRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 OperateType = 1;
+	repeated int64 BagInfoIds = 2;
+}
+
+message M2C_JiaYuanCookResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	int32 ItemId = 1;
+	repeated int32 LearnMakeIds = 2;
+	int32 LearnId = 3;
+}
+
+
+//ResponseType M2C_JiaYuanDaShiResponse
+//家园大师
+message C2M_JiaYuanDaShiRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	repeated int64 BagInfoIDs = 1;
+}
+
+message M2C_JiaYuanDaShiResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+
+	int64 JiaYuanDaShiTime = 1;
+	repeated KeyValuePairInt JiaYuanProAdd = 2;
+	repeated KeyValuePair JiaYuanProList = 7;
+}
+
+//ResponseType M2C_JiaYuanExchangeResponse
+//家园兑换
+message C2M_JiaYuanExchangeRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 ExchangeType = 1;
+}
+
+message M2C_JiaYuanExchangeResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_JiaYuanGatherResponse
+message C2M_JiaYuanGatherRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 CellIndex = 2;
+	int64 UnitId = 3;
+	int32 OperateType = 4; //1植物 2动物
+}
+
+message M2C_JiaYuanGatherResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+
+//ResponseType M2C_JiaYuanGatherOtherResponse
+message C2M_JiaYuanGatherOtherRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 CellIndex = 2;
+	int64 UnitId = 3;
+	int64 MasterId = 4;
+	int32 OperateType = 5; //1植物 2动物
+}
+
+message M2C_JiaYuanGatherOtherResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_JiaYuanInitResponse
+message C2M_JiaYuanInitRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+
+	int64 MasterId = 1;
+}
+
+message M2C_JiaYuanInitResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+
+	int32 JiaYuanLv = 3;
+	string MasterName = 4;
+	int64 JiaYuanDaShiTime = 5;
+	repeated int32 LearnMakeIds = 6;
+
+	repeated int32 PlanOpenList = 10;
+	repeated JiaYuanPet JiaYuanPetList = 11;
+	repeated KeyValuePair JiaYuanProList = 12;
+	repeated JiaYuanRecord JiaYuanRecordList = 13;
+	repeated JiaYuanPastures JiaYuanPastureList = 14;
+	repeated JiaYuanPurchaseItem PurchaseItemList = 15;
+}
+
+//ResponseType M2C_JiaYuanMysteryBuyResponse
+message C2M_JiaYuanMysteryBuyRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 ProductId = 1;
+	int32 MysteryId = 2;
+}
+
+message M2C_JiaYuanMysteryBuyResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	repeated MysteryItemInfo MysteryItemInfos = 1;
+}
+
+//ResponseType M2C_JiaYuanMysteryListResponse
+message C2M_JiaYuanMysteryListRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 NpcID = 1;
+}
+
+message M2C_JiaYuanMysteryListResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	repeated MysteryItemInfo MysteryItemInfos = 1;
+}
+
+//ResponseType M2C_JiaYuanPastureBuyResponse
+message C2M_JiaYuanPastureBuyRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 ProductId = 1;
+	int32 MysteryId = 2;
+}
+
+message M2C_JiaYuanPastureBuyResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	repeated MysteryItemInfo MysteryItemInfos = 1;
+	repeated JiaYuanPastures JiaYuanPastureList = 4;
+}
+
+//ResponseType M2C_JiaYuanPastureListResponse
+message C2M_JiaYuanPastureListRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_JiaYuanPastureListResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	repeated MysteryItemInfo MysteryItemInfos = 1;
+}
+
+
+//宠物喂食
+//ResponseType M2C_JiaYuanPetFeedResponse
+message C2M_JiaYuanPetFeedRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitId = 1;
+	int64 PetId = 2;
+	repeated int64 BagInfoIDs = 3;
+}
+
+message M2C_JiaYuanPetFeedResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	int32 MoodAdd = 1;
+	repeated JiaYuanPet JiaYuanPetList = 2;
+}
+
+
+//ResponseType M2C_JiaYuanPetOperateResponse
+message C2M_JiaYuanPetOperateRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 PetInfoId = 1;
+	int32 Operate = 2; //0 停止AI  1启动AI 
+	int64 MasterId = 4;
+}
+
+message M2C_JiaYuanPetOperateResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	repeated UnitInfo PetList = 5;
+}
+
+//ResponseType M2C_JiaYuanPetPositionResponse
+message C2M_JiaYuanPetPositionRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 UnitId = 3;
+	int64 MasterId = 4;
+}
+
+message M2C_JiaYuanPetPositionResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	repeated UnitInfo PetList = 5;
+}
+
+//宠物散步
+//ResponseType M2C_JiaYuanPetWalkResponse
+message C2M_JiaYuanPetWalkRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitId = 1;
+	int64 PetId = 2;
+	int32 PetStatus = 3;    //0停止散步 1出战 2开始散步
+	int32 Position = 4;
+}
+
+message M2C_JiaYuanPetWalkResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated JiaYuanPet JiaYuanPetList = 11;
+}
+
+//ResponseType M2C_JiaYuanPlanOpenResponse
+message C2M_JiaYuanPlanOpenRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+
+	int32 CellIndex = 1;
+}
+
+message M2C_JiaYuanPlanOpenResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+
+	repeated int32 PlanOpenList = 1;
+}
+
+//ResponseType M2C_JiaYuanPlantResponse
+message C2M_JiaYuanPlantRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 CellIndex = 1;
+	int32 ItemId = 2;
+	int64 OperateBagID = 3;
+}
+
+message M2C_JiaYuanPlantResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+
+//ResponseType M2C_JiaYuanPurchaseResponse
+//家园收购
+message C2M_JiaYuanPurchaseRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 OperateType = 1;
+	int32 ItemId = 2;
+	int32 PurchaseId = 5;
+}
+
+message M2C_JiaYuanPurchaseResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	repeated JiaYuanPurchaseItem PurchaseItemList = 2;
+}
+
+
+//ResponseType M2C_JiaYuanPurchaseRefresh
+//家园收购刷新
+message C2M_JiaYuanPurchaseRefresh // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 OperateType = 1;
+	int32 ItemId = 2;
+	int32 PurchaseId = 5;
+}
+
+message M2C_JiaYuanPurchaseRefresh // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	repeated JiaYuanPurchaseItem PurchaseItemList = 2;
+}
+
+//ResponseType M2C_JiaYuanRecordListResponse
+message C2M_JiaYuanRecordListRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_JiaYuanRecordListResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	repeated JiaYuanRecord JiaYuanRecordList = 5;
+}
+
+
+//一键放入
+//ResponseType M2C_JiaYuanStoreResponse
+message C2M_JiaYuanStoreRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 HorseId = 1;
+}
+
+message M2C_JiaYuanStoreResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_JiaYuanUpLvResponse
+//家园升级
+message C2M_JiaYuanUpLvRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_JiaYuanUpLvResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType M2C_JiaYuanUprootResponse
+message C2M_JiaYuanUprootRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 CellIndex = 2;
+	int64 UnitId = 3;
+	int32 OperateType = 4; //1植物 2动物
+}
+
+message M2C_JiaYuanUprootResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	int32 CellIndex = 2;
+
+	repeated JiaYuanPastures JiaYuanPastureList = 4;
+}
+
+//好友家园
+//ResponseType M2C_JiaYuanVisitListResponse
+message C2M_JiaYuanVisitListRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitId = 1;
+	int64 MasterId = 2;
+	int32 OperateType = 3; //0默认 1换一批
+}
+
+message JiaYuanVisit
+{
+	int64 UnitId = 1;
+	int32 Occ = 2;
+	int32 OccTwo = 3;
+	int32 Rubbish = 4;
+	int32 Gather = 5;
+	string PlayerName = 6;
+}
+
+
+message M2C_JiaYuanVisitListResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated JiaYuanVisit JiaYuanVisit_1 = 1;
+	repeated JiaYuanVisit JiaYuanVisit_2 = 2;
+}
+
+//ResponseType M2C_JiaYuanWatchResponse
+message C2M_JiaYuanWatchRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 MasterId = 1;
+	int32 OperateType = 3;
+	int64 OperateId = 4;
+}
+
+message M2C_JiaYuanWatchResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+
+	repeated JiaYuanRecord JiaYuanRecord = 1;
+}
+
+//一键取出
+//ResponseType M2C_TakeOutAllResponse
+message C2M_TakeOutAllRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 HorseId = 1;
+}
+
+message M2C_TakeOutAllResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}

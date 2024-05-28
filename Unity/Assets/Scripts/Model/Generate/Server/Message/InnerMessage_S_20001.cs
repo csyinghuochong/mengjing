@@ -7727,6 +7727,110 @@ namespace ET
 
 	}
 
+//进入家园
+	[ResponseType(nameof(J2M_JiaYuanEnterResponse))]
+	[Message(InnerMessage.M2J_JiaYuanEnterRequest)]
+	[MemoryPackable]
+	public partial class M2J_JiaYuanEnterRequest: MessageObject, IRequest
+	{
+		public static M2J_JiaYuanEnterRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2J_JiaYuanEnterRequest), isFromPool) as M2J_JiaYuanEnterRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long MasterId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int SceneId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.MasterId = default;
+			this.UnitId = default;
+			this.SceneId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.J2M_JiaYuanEnterResponse)]
+	[MemoryPackable]
+	public partial class J2M_JiaYuanEnterResponse: MessageObject, IResponse
+	{
+		public static J2M_JiaYuanEnterResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(J2M_JiaYuanEnterResponse), isFromPool) as J2M_JiaYuanEnterResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int FubenId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long FubenInstanceId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.FubenId = default;
+			this.FubenInstanceId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.M2M_JiaYuanOperateMessage)]
+	[MemoryPackable]
+	public partial class M2M_JiaYuanOperateMessage: MessageObject, IMessage
+	{
+		public static M2M_JiaYuanOperateMessage Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2M_JiaYuanOperateMessage), isFromPool) as M2M_JiaYuanOperateMessage; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public JiaYuanOperate JiaYuanOperate { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.JiaYuanOperate = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -7956,5 +8060,8 @@ namespace ET
 		 public const ushort M2A_PetMingChanChuResponse = 20226;
 		 public const ushort A2M_PetMingLoginRequest = 20227;
 		 public const ushort M2A_PetMingLoginResponse = 20228;
+		 public const ushort M2J_JiaYuanEnterRequest = 20229;
+		 public const ushort J2M_JiaYuanEnterResponse = 20230;
+		 public const ushort M2M_JiaYuanOperateMessage = 20231;
 	}
 }
