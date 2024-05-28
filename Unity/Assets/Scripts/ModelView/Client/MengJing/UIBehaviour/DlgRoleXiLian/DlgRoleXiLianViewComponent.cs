@@ -96,6 +96,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_RoleXiLianInherit ES_RoleXiLianInherit
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_rolexilianinherit == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleXiLianInherit");
+		    	   this.m_es_rolexilianinherit = this.AddChild<ES_RoleXiLianInherit,Transform>(subTrans);
+     			}
+     			return this.m_es_rolexilianinherit;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -205,6 +223,7 @@ namespace ET.Client
 			this.m_es_rolexilianlevel = null;
 			this.m_es_rolexilianskill = null;
 			this.m_es_rolexiliantransfer = null;
+			this.m_es_rolexilianinherit = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_XiLianToggle = null;
 			this.m_E_DaShiToggle = null;
@@ -219,6 +238,7 @@ namespace ET.Client
 		private EntityRef<ES_RoleXiLianLevel> m_es_rolexilianlevel = null;
 		private EntityRef<ES_RoleXiLianSkill> m_es_rolexilianskill = null;
 		private EntityRef<ES_RoleXiLianTransfer> m_es_rolexiliantransfer = null;
+		private EntityRef<ES_RoleXiLianInherit> m_es_rolexilianinherit = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_XiLianToggle = null;
 		private UnityEngine.UI.Toggle m_E_DaShiToggle = null;

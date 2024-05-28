@@ -6,6 +6,16 @@ namespace ET
     [FriendOf(typeof(RewardItem))]
     public static class ItemHelper
     {
+        public static string GetInheritCost(int number)
+        {
+            string[] costitem = GlobalValueConfigCategory.Instance.Get(88).Value.Split('@');
+            if (number >= costitem.Length)
+            {
+                return costitem[costitem.Length - 1];
+            }
+
+            return costitem[number];
+        }
 
         /// <summary>
         /// 晶核增加品质
