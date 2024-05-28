@@ -22051,6 +22051,63 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_CampRankSelectResponse))]
+	[Message(OuterMessage.C2M_CampRankSelectRequest)]
+	[MemoryPackable]
+	public partial class C2M_CampRankSelectRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_CampRankSelectRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_CampRankSelectRequest), isFromPool) as C2M_CampRankSelectRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int CampId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.CampId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_CampRankSelectResponse)]
+	[MemoryPackable]
+	public partial class M2C_CampRankSelectResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_CampRankSelectResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_CampRankSelectResponse), isFromPool) as M2C_CampRankSelectResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -22698,5 +22755,7 @@ namespace ET
 		 public const ushort M2C_BattleSummonRecord = 10644;
 		 public const ushort C2M_BattleSummonRequest = 10645;
 		 public const ushort M2C_BattleSummonResponse = 10646;
+		 public const ushort C2M_CampRankSelectRequest = 10647;
+		 public const ushort M2C_CampRankSelectResponse = 10648;
 	}
 }

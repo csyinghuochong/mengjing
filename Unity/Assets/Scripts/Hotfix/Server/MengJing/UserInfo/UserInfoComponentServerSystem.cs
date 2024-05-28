@@ -375,6 +375,16 @@ namespace ET.Server
             return self.UserInfo.Sp;
         }
 
+        public static void  UpdateRankInfo(this UserInfoComponentS self)
+        {
+            Unit unit = self.GetParent<Unit>();
+            if (unit.IsRobot())
+            {
+                return;
+            }
+            self.UpdateRankTime = TimeHelper.ServerNow();
+        }
+        
         public static void SetUserLv(this UserInfoComponentS self, int lv)
         {
             self.UserInfo.Lv = lv;

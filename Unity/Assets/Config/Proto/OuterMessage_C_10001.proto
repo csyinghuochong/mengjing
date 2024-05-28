@@ -5643,3 +5643,17 @@ message M2C_BattleSummonResponse // ILocationResponse
 
 	repeated BattleSummonInfo BattleSummonList = 2;		//召唤记录. 召唤人口数量自己计算
 }
+
+//ResponseType M2C_CampRankSelectResponse
+message C2M_CampRankSelectRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 CampId = 1; //1正派 2邪派
+}
+
+message M2C_CampRankSelectResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
