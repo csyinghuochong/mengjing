@@ -45,6 +45,7 @@ namespace ET.Client
                     self.View.ES_RoleXiLianLevel.OnUpdateUI();
                     break;
                 case 2:
+                    
                     break;
                 case 3:
                     break;
