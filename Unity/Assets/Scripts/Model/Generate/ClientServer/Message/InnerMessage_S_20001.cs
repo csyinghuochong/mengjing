@@ -7593,6 +7593,140 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2A_PetMingChanChuResponse))]
+	[Message(InnerMessage.A2M_PetMingChanChuRequest)]
+	[MemoryPackable]
+	public partial class A2M_PetMingChanChuRequest: MessageObject, IRequest
+	{
+		public static A2M_PetMingChanChuRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2M_PetMingChanChuRequest), isFromPool) as A2M_PetMingChanChuRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UnitID { get; set; }
+
+		[MemoryPackOrder(3)]
+		public long ChanChu { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitID = default;
+			this.ChanChu = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.M2A_PetMingChanChuResponse)]
+	[MemoryPackable]
+	public partial class M2A_PetMingChanChuResponse: MessageObject, IResponse
+	{
+		public static M2A_PetMingChanChuResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2A_PetMingChanChuResponse), isFromPool) as M2A_PetMingChanChuResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2A_PetMingLoginResponse))]
+	[Message(InnerMessage.A2M_PetMingLoginRequest)]
+	[MemoryPackable]
+	public partial class A2M_PetMingLoginRequest: MessageObject, IRequest
+	{
+		public static A2M_PetMingLoginRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(A2M_PetMingLoginRequest), isFromPool) as A2M_PetMingLoginRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UnitID { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<PetMingPlayerInfo> PetMineList { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public List<KeyValuePairInt> PetMingExtend { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.UnitID = default;
+			this.PetMineList.Clear();
+			this.PetMingExtend.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.M2A_PetMingLoginResponse)]
+	[MemoryPackable]
+	public partial class M2A_PetMingLoginResponse: MessageObject, IResponse
+	{
+		public static M2A_PetMingLoginResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2A_PetMingLoginResponse), isFromPool) as M2A_PetMingLoginResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -7818,5 +7952,9 @@ namespace ET
 		 public const ushort T2M_TeamDungeonPrepareResponse = 20222;
 		 public const ushort M2T_TeamDungeonEnterRequest = 20223;
 		 public const ushort T2M_TeamDungeonEnterResponse = 20224;
+		 public const ushort A2M_PetMingChanChuRequest = 20225;
+		 public const ushort M2A_PetMingChanChuResponse = 20226;
+		 public const ushort A2M_PetMingLoginRequest = 20227;
+		 public const ushort M2A_PetMingLoginResponse = 20228;
 	}
 }
