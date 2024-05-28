@@ -1,5 +1,4 @@
 ﻿
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -21,6 +20,30 @@ namespace ET.Client
 			this.uiTransform = trans;
 			return this;
 		}
+
+		public UnityEngine.UI.Image E_Image_goldImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_Image_goldImage == null )
+     				{
+		    			this.m_E_Image_goldImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Image_gold");
+     				}
+     				return this.m_E_Image_goldImage;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Image_gold");
+     			}
+     		}
+     	}
 
 		public UnityEngine.UI.Text E_Label_ItemNumText
      	{
@@ -161,6 +184,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_Image_goldImage = null;
 			this.m_E_Label_ItemNumText = null;
 			this.m_es_commonitem = null;
 			this.m_E_ButtonBuyButton = null;
@@ -170,6 +194,7 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
+		private UnityEngine.UI.Image m_E_Image_goldImage = null;
 		private UnityEngine.UI.Text m_E_Label_ItemNumText = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
 		private UnityEngine.UI.Button m_E_ButtonBuyButton = null;

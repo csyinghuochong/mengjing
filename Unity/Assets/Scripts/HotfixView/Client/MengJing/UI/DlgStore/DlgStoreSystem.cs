@@ -17,6 +17,10 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgStore self, Entity contextData = null)
         {
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
+            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
+
             self.InitModelShowView();
             self.InitData(self.Root().GetComponent<UIComponent>().CurrentNpcId);
         }
@@ -65,6 +69,13 @@ namespace ET.Client
             Scroll_Item_StoreItem scrollItemStoreItem = self.ScrollItemStoreItems[index].BindTrans(transform);
             StoreSellConfig storeSellConfig = StoreSellConfigCategory.Instance.Get(self.ShowStores[index]);
             scrollItemStoreItem.OnUpdateData(storeSellConfig);
+        }
+
+        private static void OnCloseButton(this DlgStore self)
+        {
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+
+            uiComponent.CloseWindow(WindowID.WindowID_Store);
         }
     }
 }

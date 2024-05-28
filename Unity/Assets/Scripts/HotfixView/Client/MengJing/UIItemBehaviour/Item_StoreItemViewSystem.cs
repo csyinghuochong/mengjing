@@ -19,20 +19,18 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void OnClickBuyButton(this Scroll_Item_StoreItem self)
+        public static async ETTask OnClickBuyButton(this Scroll_Item_StoreItem self)
         {
-            BagClientNetHelper.RquestStoreBuy(self.Root(), self.StoreSellConfig.Id, 1).Coroutine();
+            await BagClientNetHelper.RquestStoreBuy(self.Root(), self.StoreSellConfig.Id, 1);
         }
 
         public static void OnUpdateData(this Scroll_Item_StoreItem self, StoreSellConfig storeSellConfig)
         {
             self.StoreSellConfig = storeSellConfig;
             int costType = self.StoreSellConfig.SellType;
-            //ItemConfig itemConfig = ItemConfigCategory.Instance.Get(costType);
-            //self.Image_gold.GetComponent<Image>().sprite = ABAtlasHelp.GetIconSprite(ABAtlasTypes.ItemIcon, itemConfig.Icon);
-            self.Image_gold.UpdateItem(new BagInfo() { ItemID = costType }, ItemOperateEnum.None);
-            self.Image_gold.Label_ItemNum.SetActive(false);
-            self.Image_gold.Image_ItemQuality.SetActive(false);
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(costType);
+            self.E_Image_goldImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
+                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
 
             BagInfo bagInfo = new BagInfo();
             bagInfo.ItemNum = storeSellConfig.SellItemNum;
@@ -43,6 +41,10 @@ namespace ET.Client
             {
                 self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
             }
+
+            self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
+
+            self.E_ButtonBuyButton.AddListenerAsync(self.OnClickBuyButton);
         }
     }
 }
