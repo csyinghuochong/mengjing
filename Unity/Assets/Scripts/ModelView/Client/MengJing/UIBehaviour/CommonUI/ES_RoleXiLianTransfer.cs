@@ -8,14 +8,13 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_RoleXiLianTransfer : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
-		public GameObject UICommonItem_Copy;
 		public BagInfo[] BagInfo_Transfer;
 		public ES_CommonItem[] UIItem_Transfer;
 		public Vector2 localPoint;
 		public bool IsHoldDown;
 		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
-		
+
 		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{
      		get
@@ -66,6 +65,24 @@ namespace ET.Client
 		    	   this.m_es_commonitem_2 = this.AddChild<ES_CommonItem,Transform>(subTrans);
      			}
      			return this.m_es_commonitem_2;
+     		}
+     	}
+
+		public ES_CommonItem ES_CommonItem_Copy
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_commonitem_copy == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem_Copy");
+		    	   this.m_es_commonitem_copy = this.AddChild<ES_CommonItem,Transform>(subTrans);
+     			}
+     			return this.m_es_commonitem_copy;
      		}
      	}
 
@@ -138,6 +155,7 @@ namespace ET.Client
 			this.m_E_BagItemsLoopVerticalScrollRect = null;
 			this.m_es_commonitem_1 = null;
 			this.m_es_commonitem_2 = null;
+			this.m_es_commonitem_copy = null;
 			this.m_es_costitem = null;
 			this.m_E_ButtonTransferButton = null;
 			this.m_E_ButtonTransferImage = null;
@@ -147,6 +165,7 @@ namespace ET.Client
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem_1 = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem_2 = null;
+		private EntityRef<ES_CommonItem> m_es_commonitem_copy = null;
 		private EntityRef<ES_CostItem> m_es_costitem = null;
 		private UnityEngine.UI.Button m_E_ButtonTransferButton = null;
 		private UnityEngine.UI.Image m_E_ButtonTransferImage = null;

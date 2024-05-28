@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_CommonItem))]
     [FriendOf(typeof (ES_CommonItem))]
     [EntitySystemOf(typeof (ES_RoleXiLianTransfer))]
     [FriendOfAttribute(typeof (ES_RoleXiLianTransfer))]
@@ -207,27 +208,25 @@ namespace ET.Client
         public static void BeginDrag(this ES_RoleXiLianTransfer self, BagInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = false;
-            self.UICommonItem_Copy = UnityEngine.Object.Instantiate(self.ES_CommonItem_1.uiTransform.gameObject);
-            self.UICommonItem_Copy.SetActive(true);
-            UICommonHelper.SetParent(self.UICommonItem_Copy, self.uiTransform.gameObject);
+            self.ES_CommonItem_Copy.uiTransform.gameObject.SetActive(true);
 
             ItemConfig itemconfig = ItemConfigCategory.Instance.Get(binfo.ItemID);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemconfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
-            self.UICommonItem_Copy.transform.Find("Image_ItemIcon").GetComponent<Image>().sprite = sp;
-            self.UICommonItem_Copy.transform.Find("Image_ItemQuality").gameObject.SetActive(false);
-            self.UICommonItem_Copy.transform.Find("Image_Binding").gameObject.SetActive(false);
+            self.ES_CommonItem_Copy.E_ItemIconImage.sprite = sp;
+            self.ES_CommonItem_Copy.E_ItemQualityImage.gameObject.SetActive(false);
+            self.ES_CommonItem_Copy.E_BindingImage.gameObject.SetActive(false);
         }
 
         public static void Draging(this ES_RoleXiLianTransfer self, BagInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = false;
-            RectTransform canvas = self.UICommonItem_Copy.transform.parent.GetComponent<RectTransform>();
-            Camera uiCamera = self.DomainScene().GetComponent<UIComponent>().UICamera;
+            RectTransform canvas = self.ES_CommonItem_Copy.uiTransform.parent.GetComponent<RectTransform>();
+            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out self.localPoint);
 
-            self.UICommonItem_Copy.transform.localPosition = new Vector3(self.localPoint.x, self.localPoint.y, 0f);
+            self.ES_CommonItem_Copy.uiTransform.localPosition = new Vector3(self.localPoint.x, self.localPoint.y, 0f);
         }
 
         public static bool IsSelcted(this ES_RoleXiLianTransfer self, long baginfoId)
@@ -239,17 +238,25 @@ namespace ET.Client
 
         public static void UpdateSelected(this ES_RoleXiLianTransfer self)
         {
-            for (int i = 0; i < self.UIEquipList.Count; i++)
+            if (self.ScrollItemCommonItems != null)
             {
-                long bagInfoId = self.UIEquipList[i].Baginfo.BagInfoID;
-                bool selected = self.IsSelcted(bagInfoId);
-                self.UIEquipList[i].Image_XuanZhong.SetActive(selected);
+                foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
+                {
+                    if (item.uiTransform == null)
+                    {
+                        continue;
+                    }
+
+                    long bagInfoId = item.ES_CommonItem.Baginfo.BagInfoID;
+                    bool selected = self.IsSelcted(bagInfoId);
+                    item.ES_CommonItem.E_XuanZhongImage.gameObject.SetActive(selected);
+                }
             }
         }
 
         public static void EndDrag(this ES_RoleXiLianTransfer self, BagInfo binfo, PointerEventData pdata)
         {
-            RectTransform canvas = self.UICommonItem_Copy.transform.parent.GetComponent<RectTransform>();
+            RectTransform canvas = self.ES_CommonItem_Copy.uiTransform.parent.GetComponent<RectTransform>();
             GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();
             List<RaycastResult> results = new List<RaycastResult>();
             gr.Raycast(pdata, results);
@@ -269,16 +276,12 @@ namespace ET.Client
 
                 int index = int.Parse(name.Split('_')[1]);
                 self.BagInfo_Transfer[index] = binfo;
-                self.UIItem_Transfer[index].GameObject.SetActive(true);
+                self.UIItem_Transfer[index].uiTransform.gameObject.SetActive(true);
                 self.UIItem_Transfer[index].UpdateItem(binfo, ItemOperateEnum.None);
                 break;
             }
 
-            if (self.UICommonItem_Copy != null)
-            {
-                GameObject.Destroy(self.UICommonItem_Copy);
-                self.UICommonItem_Copy = null;
-            }
+            self.ES_CommonItem_Copy.uiTransform.gameObject.SetActive(false);
 
             self.UpdateSelected();
         }
