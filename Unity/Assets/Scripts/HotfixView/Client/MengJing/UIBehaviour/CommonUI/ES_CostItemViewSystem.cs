@@ -1,0 +1,45 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+
+namespace ET.Client
+{
+    [EntitySystemOf(typeof (ES_CostItem))]
+    [FriendOfAttribute(typeof (ES_CostItem))]
+    public static partial class ES_CostItemSystem
+    {
+        [EntitySystem]
+        private static void Awake(this ES_CostItem self, Transform transform)
+        {
+            self.uiTransform = transform;
+        }
+
+        [EntitySystem]
+        private static void Destroy(this ES_CostItem self)
+        {
+            self.DestroyWidget();
+        }
+
+        public static void UpdateItem(this ES_CostItem self, int itemId, int itemNum)
+        {
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemId);
+
+            self.E_ItemNameText.text = itemConfig.ItemName;
+
+            //显示字
+            self.E_ItemNumText.text = $"{UICommonHelper.NumToWString(bagComponent.GetItemNumber(itemId))}/{UICommonHelper.NumToWString(itemNum)}";
+            //显示颜色
+            self.E_ItemNumText.color = (itemNum < bagComponent.GetItemNumber(itemId))? Color.green : Color.red;
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+            self.E_ItemIconImage.sprite = sp;
+
+            string qualityiconStr = FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality);
+            string path2 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
+            Sprite sp2 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path2);
+
+            self.E_ItemQualityImage.sprite = sp2;
+        }
+    }
+}
