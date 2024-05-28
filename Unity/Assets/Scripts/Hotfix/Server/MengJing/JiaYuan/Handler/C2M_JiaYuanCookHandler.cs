@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -96,7 +96,7 @@ namespace ET.Server
             {
                 if (RandomHelper.RandFloat01() >= 0.5f)
                 {
-                    int randLvMax = Mathf.CeilToInt(totallv * 1f / 4);
+                    int randLvMax = (int)math.ceil(totallv * 1f / 4);
                     int randLv = RandomHelper.RandomNumber((int)(randLvMax * 0.5f), randLvMax + 1);
                     if (randLv < 1) {
                         randLv = 1;
