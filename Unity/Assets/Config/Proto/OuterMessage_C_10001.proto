@@ -5787,3 +5787,36 @@ message Actor_SendReviveResponse // ILocationResponse
 }
 
 
+//ResponseType M2C_ChouKaResponse
+message C2M_ChouKaRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 ChouKaType = 1; //1 单抽  10 十连抽
+	int32 ChapterId = 2;
+}
+
+message M2C_ChouKaResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated RewardItem RewardList = 1;		//奖励列表
+}
+
+//ResponseType M2C_ChouKaRewardResponse
+message C2M_ChouKaRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 RewardId = 1;
+}
+
+message M2C_ChouKaRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+

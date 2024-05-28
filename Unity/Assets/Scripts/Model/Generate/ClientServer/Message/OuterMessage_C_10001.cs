@@ -22623,6 +22623,136 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_ChouKaResponse))]
+	[Message(OuterMessage.C2M_ChouKaRequest)]
+	[MemoryPackable]
+	public partial class C2M_ChouKaRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ChouKaRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ChouKaRequest), isFromPool) as C2M_ChouKaRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ChouKaType { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int ChapterId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ChouKaType = default;
+			this.ChapterId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ChouKaResponse)]
+	[MemoryPackable]
+	public partial class M2C_ChouKaResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ChouKaResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ChouKaResponse), isFromPool) as M2C_ChouKaResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<RewardItem> RewardList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.RewardList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_ChouKaRewardResponse))]
+	[Message(OuterMessage.C2M_ChouKaRewardRequest)]
+	[MemoryPackable]
+	public partial class C2M_ChouKaRewardRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ChouKaRewardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ChouKaRewardRequest), isFromPool) as C2M_ChouKaRewardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RewardId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.RewardId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ChouKaRewardResponse)]
+	[MemoryPackable]
+	public partial class M2C_ChouKaRewardResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ChouKaRewardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ChouKaRewardResponse), isFromPool) as M2C_ChouKaRewardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -23288,5 +23418,9 @@ namespace ET
 		 public const ushort Actor_FubenMoNengResponse = 10662;
 		 public const ushort Actor_SendReviveRequest = 10663;
 		 public const ushort Actor_SendReviveResponse = 10664;
+		 public const ushort C2M_ChouKaRequest = 10665;
+		 public const ushort M2C_ChouKaResponse = 10666;
+		 public const ushort C2M_ChouKaRewardRequest = 10667;
+		 public const ushort M2C_ChouKaRewardResponse = 10668;
 	}
 }
