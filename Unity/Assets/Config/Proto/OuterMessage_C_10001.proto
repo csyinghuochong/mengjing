@@ -5512,3 +5512,100 @@ message M2C_ZhanQuReceiveResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//晶核激活
+//ResponseType M2C_JingHeActivateResponse
+message C2M_JingHeActivateRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 BagInfoId = 1;   //激活的晶核ID
+}
+
+message M2C_JingHeActivateResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//晶核使用方案
+//ResponseType M2C_JingHePlanResponse
+message C2M_JingHePlanRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 JingHePlan = 1;   //
+}
+
+message M2C_JingHePlanResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_JingHeWearResponse
+message C2M_JingHeWearRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 OperateType = 1;				//操作类型 1 穿戴 2卸下
+	int64 OperateBagID = 2;
+	string OperatePar = 3;				// 类型参数
+}
+
+message M2C_JingHeWearResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//晶核注入
+//ResponseType M2C_JingHeZhuruResponse
+message C2M_JingHeZhuruRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 BagInfoId = 1;				//操作的晶核
+	repeated int64 OperateBagID = 2;   //消耗的晶核列表
+}
+
+message M2C_JingHeZhuruResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_MakeLearnResponse
+message C2M_MakeLearnRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 MakeId = 1;
+	int32 Plan = 2;
+}
+
+message M2C_MakeLearnResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType E2C_AccountWarehousInfoResponse
+message C2E_AccountWarehousInfoRequest // IMailActorRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 AccInfoID = 1;
+}
+
+message E2C_AccountWarehousInfoResponse // IMailActorResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated BagInfo BagInfos = 1;
+}
