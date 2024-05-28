@@ -22753,6 +22753,202 @@ namespace ET
 
 	}
 
+//答题
+	[ResponseType(nameof(M2C_EnergyAnswerResponse))]
+	[Message(OuterMessage.C2M_EnergyAnswerRequest)]
+	[MemoryPackable]
+	public partial class C2M_EnergyAnswerRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_EnergyAnswerRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_EnergyAnswerRequest), isFromPool) as C2M_EnergyAnswerRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int AnswerIndex { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int QuestionId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.AnswerIndex = default;
+			this.QuestionId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_EnergyAnswerResponse)]
+	[MemoryPackable]
+	public partial class M2C_EnergyAnswerResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_EnergyAnswerResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_EnergyAnswerResponse), isFromPool) as M2C_EnergyAnswerResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_EnergyInfoResponse))]
+	[Message(OuterMessage.C2M_EnergyInfoRequest)]
+	[MemoryPackable]
+	public partial class C2M_EnergyInfoRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_EnergyInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_EnergyInfoRequest), isFromPool) as C2M_EnergyInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_EnergyInfoResponse)]
+	[MemoryPackable]
+	public partial class M2C_EnergyInfoResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_EnergyInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_EnergyInfoResponse), isFromPool) as M2C_EnergyInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<int> GetRewards { get; set; } = new();
+
+		[MemoryPackOrder(1)]
+		public List<int> QuestionList { get; set; } = new();
+
+		[MemoryPackOrder(2)]
+		public int QuestionIndex { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.GetRewards.Clear();
+			this.QuestionList.Clear();
+			this.QuestionIndex = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_EnergyReceiveResponse))]
+	[Message(OuterMessage.C2M_EnergyReceiveRequest)]
+	[MemoryPackable]
+	public partial class C2M_EnergyReceiveRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_EnergyReceiveRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_EnergyReceiveRequest), isFromPool) as C2M_EnergyReceiveRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RewardType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.RewardType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_EnergyReceiveResponse)]
+	[MemoryPackable]
+	public partial class M2C_EnergyReceiveResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_EnergyReceiveResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_EnergyReceiveResponse), isFromPool) as M2C_EnergyReceiveResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -23422,5 +23618,11 @@ namespace ET
 		 public const ushort M2C_ChouKaResponse = 10666;
 		 public const ushort C2M_ChouKaRewardRequest = 10667;
 		 public const ushort M2C_ChouKaRewardResponse = 10668;
+		 public const ushort C2M_EnergyAnswerRequest = 10669;
+		 public const ushort M2C_EnergyAnswerResponse = 10670;
+		 public const ushort C2M_EnergyInfoRequest = 10671;
+		 public const ushort M2C_EnergyInfoResponse = 10672;
+		 public const ushort C2M_EnergyReceiveRequest = 10673;
+		 public const ushort M2C_EnergyReceiveResponse = 10674;
 	}
 }

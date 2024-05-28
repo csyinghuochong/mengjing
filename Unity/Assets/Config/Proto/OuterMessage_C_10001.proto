@@ -5820,3 +5820,53 @@ message M2C_ChouKaRewardResponse // ILocationResponse
 }
 
 
+//答题
+//ResponseType M2C_EnergyAnswerResponse
+message C2M_EnergyAnswerRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 AnswerIndex = 1; //
+	int32 QuestionId = 2;
+}
+
+message M2C_EnergyAnswerResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_EnergyInfoResponse
+message C2M_EnergyInfoRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_EnergyInfoResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated int32 GetRewards = 1;	//是否领取过奖励 
+	repeated int32 QuestionList = 2; //答题列表
+	int32 QuestionIndex = 3;
+}
+
+//ResponseType M2C_EnergyReceiveResponse
+message C2M_EnergyReceiveRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 RewardType = 1; //0 早起  1早睡 2 答题
+}
+
+message M2C_EnergyReceiveResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+

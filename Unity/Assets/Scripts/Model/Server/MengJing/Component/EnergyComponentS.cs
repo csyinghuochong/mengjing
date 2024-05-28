@@ -8,14 +8,14 @@ namespace ET.Server
     public class EnergyComponentS: Entity, IAwake<long>, IDestroy
     {
         //可否领取早睡奖励
-        public bool EarlySleepReward = true;
+        public bool EarlySleepReward{ get; set; } = true;
 
         //领取过奖励的记录
-        public List<int> GetRewards = new List<int>() { 0, 0, 0};
+        public List<int> GetRewards { get; set; }= new List<int>() { 0, 0, 0};
 
         //答题列表
-        public List<int> QuestionList = new List<int>();
+        public List<int> QuestionList { get; set; } = new List<int>();
 
-        public int QuestionIndex = 0;
+        public int QuestionIndex { get; set; } = 0;
     }
 }
