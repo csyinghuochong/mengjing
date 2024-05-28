@@ -279,6 +279,39 @@ namespace ET.Server
             return unit;
         }
 
+        public static Unit CreatePasture(Scene scene, JiaYuanPastures jiaYuanPastures, long unitid)
+        {
+            Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(jiaYuanPastures.UnitId, jiaYuanPastures.ConfigId);
+            scene.GetComponent<UnitComponent>().Add(unit);
+            unit.AddComponent<ObjectWait>();
+            NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
+            UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
+            unit.AddComponent<MoveComponent>();
+            unit.AddComponent<SkillManagerComponentS>();
+            unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
+            unit.AddComponent<AttackRecordComponent>();
+            //unitInfoComponent.MasterName = userInfoComponent.UserInfo.Name;
+            unitInfoComponent.UnitName = JiaYuanPastureConfigCategory.Instance.Get(jiaYuanPastures.ConfigId).Name;
+
+            unit.ConfigId = jiaYuanPastures.ConfigId;
+            unit.AddComponent<StateComponentS>();         //添加状态组件
+            unit.AddComponent<BuffManagerComponentS>();      //添加
+            unit.Position = ConfigData.PastureInitPos;
+            unit.Type = UnitType.Pasture;
+
+            AIComponent aIComponent = unit.AddComponent<AIComponent, int>(11);     //AI行为树序号
+            aIComponent.InitPasture();
+            aIComponent.Begin();
+
+            //添加其他组件
+            unit.AddComponent<HeroDataComponentS>().InitPasture(jiaYuanPastures, false);
+            numericComponent.SetNoEvent(NumericType.MasterId, unitid);
+            numericComponent.SetNoEvent(NumericType.Base_Speed_Base, 30000);
+            unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
+            return unit;
+        }
+
+        
         public static Unit CreateTianTiPet(Scene scene, long masterId, int roleCamp, RolePetInfo petinfo, float3 postion, float rotation, int cell)
         {
             Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(petinfo.Id, 1);

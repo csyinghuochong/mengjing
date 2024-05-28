@@ -5,12 +5,11 @@ namespace ET.Server
     [MessageHandler(SceneType.Map)]
     public class C2M_JiaYuanPetOperateHandler : MessageLocationHandler<Unit, C2M_JiaYuanPetOperateRequest, M2C_JiaYuanPetOperateResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_JiaYuanPetOperateRequest request, M2C_JiaYuanPetOperateResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_JiaYuanPetOperateRequest request, M2C_JiaYuanPetOperateResponse response)
         {
             Unit pet = unit.GetParent<UnitComponent>().Get(request.PetInfoId);
             if (pet == null)
             {
-                reply();
                 return;
             }
 
@@ -24,8 +23,7 @@ namespace ET.Server
             {
                 pet.GetComponent<AIComponent>().Begin();
             }
-
-            reply();
+            
             await ETTask.CompletedTask;
         }
     }

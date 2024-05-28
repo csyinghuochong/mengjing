@@ -6,10 +6,9 @@ namespace ET.Server
     [MessageHandler(SceneType.Map)]
     public class C2M_JiaYuanPastureListHandler : MessageLocationHandler<Unit, C2M_JiaYuanPastureListRequest, M2C_JiaYuanPastureListResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_JiaYuanPastureListRequest request, M2C_JiaYuanPastureListResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_JiaYuanPastureListRequest request, M2C_JiaYuanPastureListResponse response)
         {
-            response.MysteryItemInfos = unit.GetComponent<JiaYuanComponent>().PastureGoods_7;
-            reply();
+            response.MysteryItemInfos = unit.GetComponent<JiaYuanComponentS>().PastureGoods_7;
             await ETTask.CompletedTask;
         }
     }

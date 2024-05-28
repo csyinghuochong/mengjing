@@ -510,13 +510,13 @@ namespace ET.Server
          //     numericComponent.Set(NumericType.GatherCellIndex, jiaYuanPlant.CellIndex);
          // }
 
-         // public static void InitPasture(this HeroDataComponentServer self, JiaYuanPastures jiaYuanPlant, bool notice)
-         // {
-         //     NumericComponent numericComponent = self.GetParent<Unit>().GetComponent<NumericComponent>();
-         //     numericComponent.Set(NumericType.StartTime, jiaYuanPlant.StartTime);
-         //     numericComponent.Set(NumericType.GatherNumber, jiaYuanPlant.GatherNumber);
-         //     numericComponent.Set(NumericType.GatherLastTime, jiaYuanPlant.GatherLastTime);
-         // }
+         public static void InitPasture(this HeroDataComponentS self, JiaYuanPastures jiaYuanPlant, bool notice)
+         {
+             NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
+             numericComponent.SetNoEvent(NumericType.StartTime, jiaYuanPlant.StartTime);
+             numericComponent.SetNoEvent(NumericType.GatherNumber, jiaYuanPlant.GatherNumber);
+             numericComponent.SetNoEvent(NumericType.GatherLastTime, jiaYuanPlant.GatherLastTime);
+         }
 
          public static void InitJingLing(this HeroDataComponentS self, Unit master, int jinglingid, bool notice)
          {

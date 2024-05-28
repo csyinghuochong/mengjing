@@ -9,17 +9,16 @@ namespace ET.Server
     [MessageHandler(SceneType.Map)]
     public class C2M_JiaYuanPetFeedHandler : MessageLocationHandler<Unit, C2M_JiaYuanPetFeedRequest, M2C_JiaYuanPetFeedResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_JiaYuanPetFeedRequest request, M2C_JiaYuanPetFeedResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_JiaYuanPetFeedRequest request, M2C_JiaYuanPetFeedResponse response)
         {
             if (request.BagInfoIDs.Count < 1)
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                reply();
                 return;
             }
 
             List<int> ItemIdList = new List<int> ();
-            BagComponent bagComponent = unit.GetComponent<BagComponent>();
+            BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             for (int i = request.BagInfoIDs.Count - 1; i >= 0; i--)
             {
                 BagInfo useBagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, request.BagInfoIDs[i]);
@@ -34,7 +33,6 @@ namespace ET.Server
             if (ItemIdList.Count == 0)
             {
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                reply();
                 return;
             }
 
@@ -58,7 +56,7 @@ namespace ET.Server
                     moodvalue += RandomHelper.RandomNumber(5, 15);
                 }
             }
-            unit.GetComponent<JiaYuanComponent>().UpdatePetMood(request.PetId, moodvalue);
+            unit.GetComponent<JiaYuanComponentS>().UpdatePetMood(request.PetId, moodvalue);
 
             //消耗道具
             for (int i = request.BagInfoIDs.Count - 1; i >= 0; i--)
@@ -66,8 +64,7 @@ namespace ET.Server
                 bagComponent.OnCostItemData(request.BagInfoIDs[i], 1);
             }
             response.MoodAdd = moodvalue;
-            response.JiaYuanPetList = unit.GetComponent<JiaYuanComponent>().JiaYuanPetList_2;
-            reply();
+            response.JiaYuanPetList = unit.GetComponent<JiaYuanComponentS>().JiaYuanPetList_2;
             await ETTask.CompletedTask;
         }
     }
