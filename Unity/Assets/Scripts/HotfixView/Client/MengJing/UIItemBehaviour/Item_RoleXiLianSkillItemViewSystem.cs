@@ -12,7 +12,6 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this Scroll_Item_RoleXiLianSkillItem self)
         {
-            self.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
         }
 
         [EntitySystem]
@@ -23,6 +22,8 @@ namespace ET.Client
 
         public static void OnInitUI(this Scroll_Item_RoleXiLianSkillItem self, EquipXiLianConfig equipXiLianConfig)
         {
+            self.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
+
             self.EquipXiLianConfig = equipXiLianConfig;
             self.E_Text_XiLianNameText.text = equipXiLianConfig.Title + GameSettingLanguge.LoadLocalization("额外增加概率出现的特殊属性");
             self.XilianSkill = XiLianHelper.GetLevelSkill(equipXiLianConfig.XiLianLevel);
