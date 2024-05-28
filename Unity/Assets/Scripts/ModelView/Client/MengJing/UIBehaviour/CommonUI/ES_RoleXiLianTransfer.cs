@@ -68,7 +68,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_ItemIcon_CostImage
+		public ES_CostItem ES_CostItem
      	{
      		get
      		{
@@ -77,45 +77,12 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_ItemIcon_CostImage == null )
+     			if( this.m_es_costitem == null )
      			{
-		    		this.m_E_ItemIcon_CostImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ItemIcon_Cost");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CostItem");
+		    	   this.m_es_costitem = this.AddChild<ES_CostItem,Transform>(subTrans);
      			}
-     			return this.m_E_ItemIcon_CostImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_ItemName_CostText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ItemName_CostText == null )
-     			{
-		    		this.m_E_ItemName_CostText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_ItemName_Cost");
-     			}
-     			return this.m_E_ItemName_CostText;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_ItemNum_CostText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ItemNum_CostText == null )
-     			{
-		    		this.m_E_ItemNum_CostText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_ItemNum_Cost");
-     			}
-     			return this.m_E_ItemNum_CostText;
+     			return this.m_es_costitem;
      		}
      	}
 
@@ -170,9 +137,7 @@ namespace ET.Client
 			this.m_E_BagItemsLoopVerticalScrollRect = null;
 			this.m_es_commonitem_1 = null;
 			this.m_es_commonitem_2 = null;
-			this.m_E_ItemIcon_CostImage = null;
-			this.m_E_ItemName_CostText = null;
-			this.m_E_ItemNum_CostText = null;
+			this.m_es_costitem = null;
 			this.m_E_ButtonTransferButton = null;
 			this.m_E_ButtonTransferImage = null;
 			this.uiTransform = null;
@@ -181,9 +146,7 @@ namespace ET.Client
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem_1 = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem_2 = null;
-		private UnityEngine.UI.Image m_E_ItemIcon_CostImage = null;
-		private UnityEngine.UI.Text m_E_ItemName_CostText = null;
-		private UnityEngine.UI.Text m_E_ItemNum_CostText = null;
+		private EntityRef<ES_CostItem> m_es_costitem = null;
 		private UnityEngine.UI.Button m_E_ButtonTransferButton = null;
 		private UnityEngine.UI.Image m_E_ButtonTransferImage = null;
 		public Transform uiTransform = null;

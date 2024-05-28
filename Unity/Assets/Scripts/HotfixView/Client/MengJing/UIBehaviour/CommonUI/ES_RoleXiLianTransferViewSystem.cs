@@ -34,6 +34,16 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this ES_RoleXiLianTransfer self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
+            scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.SkillSet);
+            scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
+            scrollItemCommonItem.ES_CommonItem.BeginDragHandler = (BagInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.DragingHandler = (BagInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.EndDragHandler = (BagInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (BagInfo binfo, PointerEventData pdata) =>
+            {
+                self.OnPointerDown(binfo, pdata).Coroutine();
+            };
+            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (BagInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
         }
 
         public static async ETTask OnButtonTransfer(this ES_RoleXiLianTransfer self)
@@ -113,13 +123,13 @@ namespace ET.Client
             self.UpdateCost();
             self.ResetSelect();
             self.UpdateSelected();
-            self.UpdateEquipItemUI().Coroutine();
+            self.UpdateEquipItemUI();
         }
 
         public static void UpdateCost(this ES_RoleXiLianTransfer self)
         {
             string[] costItem = GlobalValueConfigCategory.Instance.Get(51).Value.Split(';');
-            self.ES_CommonItem_Cost.UpdateItem(int.Parse(costItem[0]), int.Parse(costItem[1]));
+            self.ES_CostItem.UpdateItem(int.Parse(costItem[0]), int.Parse(costItem[1]));
         }
 
         public static void ResetSelect(this ES_RoleXiLianTransfer self)
@@ -139,17 +149,9 @@ namespace ET.Client
             self.UIItem_Transfer[1].UpdateItem(bagInfo_2, ItemOperateEnum.None);
         }
 
-        public static async ETTask UpdateEquipItemUI(this ES_RoleXiLianTransfer self)
+        public static void UpdateEquipItemUI(this ES_RoleXiLianTransfer self)
         {
-            long instanceid = self.InstanceId;
-            string path = ABPathHelper.GetUGUIPath("Main/Common/UICommonItem");
-            GameObject bundleObj = await ResourcesComponent.Instance.LoadAssetAsync<GameObject>(path);
-            if (instanceid != self.InstanceId)
-            {
-                return;
-            }
-
-            int number = 0;
+            self.ShowBagInfos.Clear();
             List<BagInfo> bagInfos = self.Root().GetComponent<BagComponentC>().GetBagList();
             for (int i = 0; i < bagInfos.Count; i++)
             {
@@ -170,56 +172,36 @@ namespace ET.Client
                     continue;
                 }
 
-                UIItemComponent uIItemComponent = null;
-                if (number < self.UIEquipList.Count)
-                {
-                    uIItemComponent = self.UIEquipList[number];
-                    uIItemComponent.GameObject.SetActive(true);
-                }
-                else
-                {
-                    GameObject skillItem = GameObject.Instantiate(bundleObj);
-                    UICommonHelper.SetParent(skillItem, self.ItemListNode);
-                    uIItemComponent = self.AddChild<UIItemComponent, GameObject>(skillItem);
-                    self.UIEquipList.Add(uIItemComponent);
-                    uIItemComponent.SetEventTrigger(true);
-                    uIItemComponent.BeginDragHandler = (BagInfo binfo, PointerEventData pdata) => { self.BeginDrag(binfo, pdata); };
-                    uIItemComponent.DragingHandler = (BagInfo binfo, PointerEventData pdata) => { self.Draging(binfo, pdata); };
-                    uIItemComponent.EndDragHandler = (BagInfo binfo, PointerEventData pdata) => { self.EndDrag(binfo, pdata); };
-                    uIItemComponent.PointerDownHandler = (BagInfo binfo, PointerEventData pdata) => { self.OnPointerDown(binfo, pdata).Coroutine(); };
-                    uIItemComponent.PointerUpHandler = (BagInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
-                }
-
-                uIItemComponent.UpdateItem(bagInfos[i], ItemOperateEnum.SkillSet);
-                uIItemComponent.Image_XuanZhong.SetActive(false);
-                number++;
+                self.ShowBagInfos.Add(bagInfos[i]);
             }
 
-            for (int i = number; i < self.UIEquipList.Count; i++)
-            {
-                self.UIEquipList[i].GameObject.SetActive(false);
-            }
+            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
+            self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
         public static async ETTask OnPointerDown(this ES_RoleXiLianTransfer self, BagInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = true;
-            HintHelp.GetInstance().DataUpdate(LightingExplorerTableColumn.DataType.HuiShouSelect, $"1_{binfo.BagInfoID}");
-            await TimerComponent.Instance.WaitAsync(400);
+            EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(400);
             if (!self.IsHoldDown)
                 return;
-            EventType.ShowItemTips.Instance.ZoneScene = self.DomainScene();
-            EventType.ShowItemTips.Instance.bagInfo = binfo;
-            EventType.ShowItemTips.Instance.itemOperateEnum = ItemOperateEnum.None;
-            EventType.ShowItemTips.Instance.inputPoint = Input.mousePosition;
-            EventType.ShowItemTips.Instance.Occ = self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo.Occ;
-            Game.EventSystem.PublishClass(EventType.ShowItemTips.Instance);
+
+            EventSystem.Instance.Publish(self.Root(),
+                new ShowItemTips()
+                {
+                    BagInfo = binfo,
+                    ItemOperateEnum = ItemOperateEnum.None,
+                    InputPoint = Input.mousePosition,
+                    Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
+                    EquipList = new List<BagInfo>()
+                });
         }
 
         public static void OnPointerUp(this ES_RoleXiLianTransfer self, BagInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = false;
-            UIHelper.Remove(self.DomainScene(), UIType.UIEquipDuiBiTips);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
         }
 
         public static void BeginDrag(this ES_RoleXiLianTransfer self, BagInfo binfo, PointerEventData pdata)
