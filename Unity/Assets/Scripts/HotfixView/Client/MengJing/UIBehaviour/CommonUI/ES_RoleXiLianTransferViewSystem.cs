@@ -222,7 +222,7 @@ namespace ET.Client
         public static void Draging(this ES_RoleXiLianTransfer self, BagInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = false;
-            RectTransform canvas = self.ES_CommonItem_Copy.uiTransform.parent.GetComponent<RectTransform>();
+            RectTransform canvas = self.ES_CommonItem_Copy.uiTransform.parent.parent.parent.GetComponent<RectTransform>();
             Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out self.localPoint);
 
@@ -256,7 +256,7 @@ namespace ET.Client
 
         public static void EndDrag(this ES_RoleXiLianTransfer self, BagInfo binfo, PointerEventData pdata)
         {
-            RectTransform canvas = self.ES_CommonItem_Copy.uiTransform.parent.GetComponent<RectTransform>();
+            RectTransform canvas = self.ES_CommonItem_Copy.uiTransform.parent.parent.parent.GetComponent<RectTransform>();
             GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();
             List<RaycastResult> results = new List<RaycastResult>();
             gr.Raycast(pdata, results);
