@@ -9,6 +9,7 @@ namespace ET.Client
     [FriendOf(typeof (ES_RoleXiLianShow))]
     [FriendOf(typeof (ES_RoleXiLianLevel))]
     [FriendOf(typeof (ES_RoleXiLianSkill))]
+    [FriendOf(typeof (ES_RoleXiLianTransfer))]
     [FriendOf(typeof (DlgRoleXiLian))]
     public static class DlgRoleXiLianSystem
     {
@@ -50,6 +51,8 @@ namespace ET.Client
                     self.View.ES_RoleXiLianSkill.OnUpdateUI();
                     break;
                 case 3:
+                    self.View.ES_RoleXiLianTransfer.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_RoleXiLianTransfer.OnUpdateUI();
                     break;
                 case 4:
                     break;
