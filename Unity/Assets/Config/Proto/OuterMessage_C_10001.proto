@@ -5657,3 +5657,133 @@ message M2C_CampRankSelectResponse // ILocationResponse
 	string Message = 91;
 	int32 Error = 92;
 }
+
+
+//ResponseType Actor_FubenEnergySkillResponse
+message Actor_FubenEnergySkillRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 SkillId = 1;
+}
+
+message Actor_FubenEnergySkillResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+
+message FubenInfo
+{
+	int32 StartCell = 2;			//需要自己转换成对应的行列
+	int32 EndCell = 3;
+	repeated KeyValuePair FubenCellNpcs = 4;
+}
+
+message SonFubenInfo
+{
+	int32 SonSceneId = 1;			//子场景格子的ID
+	int32 CurrentCell = 2;
+	repeated int32 PassableFlag = 3;	//判断上下左右四个方位是否可以通行
+}
+
+//ResponseType Actor_EnterFubenResponse
+message Actor_EnterFubenRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 ChapterId = 1;
+	int32 Difficulty = 2;	//1 difficulty普通 2 挑战  3困难
+	int32 RepeatEnter = 3;	//重复进入 0 首次进入  1 重复进入
+}
+
+message Actor_EnterFubenResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	FubenInfo FubenInfo = 1;
+	SonFubenInfo SonFubenInfo = 2;
+}
+
+//ResponseType Actor_EnterSonFubenResponse
+message Actor_EnterSonFubenRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 CurrentCell = 2;
+	int32 DirectionType = 3;
+	int32 ChuansongId = 4;
+}
+
+message Actor_EnterSonFubenResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	SonFubenInfo SonFubenInfo = 1;
+}
+
+//ResponseType Actor_GetFubenInfoResponse
+message Actor_GetFubenInfoRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message Actor_GetFubenInfoResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated FubenPassInfo FubenPassInfos = 1;
+}
+
+//ResponseType Actor_GetFubenRewardReponse
+message Actor_GetFubenRewardRequest	// ILocationRequest
+{
+	int32 RpcId = 90;
+	RewardItem RewardItem = 1;
+}
+
+message Actor_GetFubenRewardReponse	// ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//ResponseType Actor_FubenMoNengResponse
+message Actor_FubenMoNengRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message Actor_FubenMoNengResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated MysteryItemInfo MysteryItemInfos = 1;
+}
+
+//ResponseType Actor_SendReviveResponse
+message Actor_SendReviveRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 MapIndex = 1;
+	bool Revive = 2;     //
+}
+
+message Actor_SendReviveResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+

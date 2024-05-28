@@ -22108,6 +22108,521 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Actor_FubenEnergySkillResponse))]
+	[Message(OuterMessage.Actor_FubenEnergySkillRequest)]
+	[MemoryPackable]
+	public partial class Actor_FubenEnergySkillRequest: MessageObject, ILocationRequest
+	{
+		public static Actor_FubenEnergySkillRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Actor_FubenEnergySkillRequest), isFromPool) as Actor_FubenEnergySkillRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int SkillId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.SkillId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.Actor_FubenEnergySkillResponse)]
+	[MemoryPackable]
+	public partial class Actor_FubenEnergySkillResponse: MessageObject, ILocationResponse
+	{
+		public static Actor_FubenEnergySkillResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Actor_FubenEnergySkillResponse), isFromPool) as Actor_FubenEnergySkillResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.FubenInfo)]
+	[MemoryPackable]
+	public partial class FubenInfo: MessageObject
+	{
+		public static FubenInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(FubenInfo), isFromPool) as FubenInfo; 
+		}
+
+		[MemoryPackOrder(1)]
+		public int StartCell { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int EndCell { get; set; }
+
+		[MemoryPackOrder(3)]
+		public List<KeyValuePair> FubenCellNpcs { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.StartCell = default;
+			this.EndCell = default;
+			this.FubenCellNpcs.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.SonFubenInfo)]
+	[MemoryPackable]
+	public partial class SonFubenInfo: MessageObject
+	{
+		public static SonFubenInfo Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(SonFubenInfo), isFromPool) as SonFubenInfo; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int SonSceneId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int CurrentCell { get; set; }
+
+		[MemoryPackOrder(2)]
+		public List<int> PassableFlag { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.SonSceneId = default;
+			this.CurrentCell = default;
+			this.PassableFlag.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(Actor_EnterFubenResponse))]
+	[Message(OuterMessage.Actor_EnterFubenRequest)]
+	[MemoryPackable]
+	public partial class Actor_EnterFubenRequest: MessageObject, ILocationRequest
+	{
+		public static Actor_EnterFubenRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Actor_EnterFubenRequest), isFromPool) as Actor_EnterFubenRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ChapterId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Difficulty { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int RepeatEnter { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ChapterId = default;
+			this.Difficulty = default;
+			this.RepeatEnter = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.Actor_EnterFubenResponse)]
+	[MemoryPackable]
+	public partial class Actor_EnterFubenResponse: MessageObject, ILocationResponse
+	{
+		public static Actor_EnterFubenResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Actor_EnterFubenResponse), isFromPool) as Actor_EnterFubenResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public FubenInfo FubenInfo { get; set; }
+
+		[MemoryPackOrder(1)]
+		public SonFubenInfo SonFubenInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.FubenInfo = default;
+			this.SonFubenInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(Actor_EnterSonFubenResponse))]
+	[Message(OuterMessage.Actor_EnterSonFubenRequest)]
+	[MemoryPackable]
+	public partial class Actor_EnterSonFubenRequest: MessageObject, ILocationRequest
+	{
+		public static Actor_EnterSonFubenRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Actor_EnterSonFubenRequest), isFromPool) as Actor_EnterSonFubenRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int CurrentCell { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int DirectionType { get; set; }
+
+		[MemoryPackOrder(3)]
+		public int ChuansongId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.CurrentCell = default;
+			this.DirectionType = default;
+			this.ChuansongId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.Actor_EnterSonFubenResponse)]
+	[MemoryPackable]
+	public partial class Actor_EnterSonFubenResponse: MessageObject, ILocationResponse
+	{
+		public static Actor_EnterSonFubenResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Actor_EnterSonFubenResponse), isFromPool) as Actor_EnterSonFubenResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public SonFubenInfo SonFubenInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.SonFubenInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(Actor_GetFubenInfoResponse))]
+	[Message(OuterMessage.Actor_GetFubenInfoRequest)]
+	[MemoryPackable]
+	public partial class Actor_GetFubenInfoRequest: MessageObject, ILocationRequest
+	{
+		public static Actor_GetFubenInfoRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Actor_GetFubenInfoRequest), isFromPool) as Actor_GetFubenInfoRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.Actor_GetFubenInfoResponse)]
+	[MemoryPackable]
+	public partial class Actor_GetFubenInfoResponse: MessageObject, ILocationResponse
+	{
+		public static Actor_GetFubenInfoResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Actor_GetFubenInfoResponse), isFromPool) as Actor_GetFubenInfoResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<FubenPassInfo> FubenPassInfos { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.FubenPassInfos.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(Actor_GetFubenRewardReponse))]
+	[Message(OuterMessage.Actor_GetFubenRewardRequest)]
+	[MemoryPackable]
+	public partial class Actor_GetFubenRewardRequest: MessageObject, ILocationRequest
+	{
+		public static Actor_GetFubenRewardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Actor_GetFubenRewardRequest), isFromPool) as Actor_GetFubenRewardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public RewardItem RewardItem { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.RewardItem = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.Actor_GetFubenRewardReponse)]
+	[MemoryPackable]
+	public partial class Actor_GetFubenRewardReponse: MessageObject, ILocationResponse
+	{
+		public static Actor_GetFubenRewardReponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Actor_GetFubenRewardReponse), isFromPool) as Actor_GetFubenRewardReponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(Actor_FubenMoNengResponse))]
+	[Message(OuterMessage.Actor_FubenMoNengRequest)]
+	[MemoryPackable]
+	public partial class Actor_FubenMoNengRequest: MessageObject, ILocationRequest
+	{
+		public static Actor_FubenMoNengRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Actor_FubenMoNengRequest), isFromPool) as Actor_FubenMoNengRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.Actor_FubenMoNengResponse)]
+	[MemoryPackable]
+	public partial class Actor_FubenMoNengResponse: MessageObject, ILocationResponse
+	{
+		public static Actor_FubenMoNengResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Actor_FubenMoNengResponse), isFromPool) as Actor_FubenMoNengResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<MysteryItemInfo> MysteryItemInfos { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.MysteryItemInfos.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(Actor_SendReviveResponse))]
+	[Message(OuterMessage.Actor_SendReviveRequest)]
+	[MemoryPackable]
+	public partial class Actor_SendReviveRequest: MessageObject, ILocationRequest
+	{
+		public static Actor_SendReviveRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Actor_SendReviveRequest), isFromPool) as Actor_SendReviveRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int MapIndex { get; set; }
+
+		[MemoryPackOrder(1)]
+		public bool Revive { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.MapIndex = default;
+			this.Revive = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.Actor_SendReviveResponse)]
+	[MemoryPackable]
+	public partial class Actor_SendReviveResponse: MessageObject, ILocationResponse
+	{
+		public static Actor_SendReviveResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Actor_SendReviveResponse), isFromPool) as Actor_SendReviveResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -22757,5 +23272,21 @@ namespace ET
 		 public const ushort M2C_BattleSummonResponse = 10646;
 		 public const ushort C2M_CampRankSelectRequest = 10647;
 		 public const ushort M2C_CampRankSelectResponse = 10648;
+		 public const ushort Actor_FubenEnergySkillRequest = 10649;
+		 public const ushort Actor_FubenEnergySkillResponse = 10650;
+		 public const ushort FubenInfo = 10651;
+		 public const ushort SonFubenInfo = 10652;
+		 public const ushort Actor_EnterFubenRequest = 10653;
+		 public const ushort Actor_EnterFubenResponse = 10654;
+		 public const ushort Actor_EnterSonFubenRequest = 10655;
+		 public const ushort Actor_EnterSonFubenResponse = 10656;
+		 public const ushort Actor_GetFubenInfoRequest = 10657;
+		 public const ushort Actor_GetFubenInfoResponse = 10658;
+		 public const ushort Actor_GetFubenRewardRequest = 10659;
+		 public const ushort Actor_GetFubenRewardReponse = 10660;
+		 public const ushort Actor_FubenMoNengRequest = 10661;
+		 public const ushort Actor_FubenMoNengResponse = 10662;
+		 public const ushort Actor_SendReviveRequest = 10663;
+		 public const ushort Actor_SendReviveResponse = 10664;
 	}
 }
