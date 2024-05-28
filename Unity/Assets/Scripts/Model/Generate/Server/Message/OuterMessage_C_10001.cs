@@ -24984,6 +24984,124 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_LingDiRewardResponse))]
+	[Message(OuterMessage.C2M_LingDiRewardRequest)]
+	[MemoryPackable]
+	public partial class C2M_LingDiRewardRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_LingDiRewardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_LingDiRewardRequest), isFromPool) as C2M_LingDiRewardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RewardId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.RewardId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_LingDiRewardResponse)]
+	[MemoryPackable]
+	public partial class M2C_LingDiRewardResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_LingDiRewardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_LingDiRewardResponse), isFromPool) as M2C_LingDiRewardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_LingDiUpResponse))]
+	[Message(OuterMessage.C2M_LingDiUpRequest)]
+	[MemoryPackable]
+	public partial class C2M_LingDiUpRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_LingDiUpRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_LingDiUpRequest), isFromPool) as C2M_LingDiUpRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_LingDiUpResponse)]
+	[MemoryPackable]
+	public partial class M2C_LingDiUpResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_LingDiUpResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_LingDiUpResponse), isFromPool) as M2C_LingDiUpResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -25720,5 +25838,9 @@ namespace ET
 		 public const ushort M2C_JiaYuanWatchResponse = 10733;
 		 public const ushort C2M_TakeOutAllRequest = 10734;
 		 public const ushort M2C_TakeOutAllResponse = 10735;
+		 public const ushort C2M_LingDiRewardRequest = 10736;
+		 public const ushort M2C_LingDiRewardResponse = 10737;
+		 public const ushort C2M_LingDiUpRequest = 10738;
+		 public const ushort M2C_LingDiUpResponse = 10739;
 	}
 }

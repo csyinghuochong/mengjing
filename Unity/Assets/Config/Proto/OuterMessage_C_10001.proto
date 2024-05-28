@@ -6398,3 +6398,33 @@ message M2C_TakeOutAllResponse // ILocationResponse
 	string Message = 91;
 	int32 Error = 92;
 }
+
+
+//ResponseType M2C_LingDiRewardResponse
+message C2M_LingDiRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 RewardId = 1;
+}
+
+message M2C_LingDiRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_LingDiUpResponse
+message C2M_LingDiUpRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_LingDiUpResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
