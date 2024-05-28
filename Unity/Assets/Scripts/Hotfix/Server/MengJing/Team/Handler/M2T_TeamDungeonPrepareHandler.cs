@@ -1,19 +1,18 @@
 ﻿using System;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class M2T_TeamDungeonPrepareHandler : AMActorRpcHandler<Scene, M2T_TeamDungeonPrepareRequest, T2M_TeamDungeonPrepareResponse>
+    [MessageHandler(SceneType.Team)]
+    public class M2T_TeamDungeonPrepareHandler : MessageHandler<Scene, M2T_TeamDungeonPrepareRequest, T2M_TeamDungeonPrepareResponse>
     {
-        protected override async ETTask Run(Scene scene, M2T_TeamDungeonPrepareRequest request, T2M_TeamDungeonPrepareResponse response, Action reply)
+        protected override async ETTask Run(Scene scene, M2T_TeamDungeonPrepareRequest request, T2M_TeamDungeonPrepareResponse response)
         {
             TeamInfo teamInfo = scene.GetComponent<TeamSceneComponent>().GetTeamInfo(request.TeamId);
             if (teamInfo == null)
             {
                 Log.Debug($"M2T_TeamDungeonPrepare: teamInfo == null");
                 response.Error = ErrorCode.Err_TeamIsNull;
-                reply();
                 return;
             }
             
@@ -45,10 +44,10 @@ namespace ET
                 TeamInfo = teamInfo,
                 ErrorCode = errorCode,
             };
-            long gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(scene.DomainZone(), "Gate1").InstanceId;
+            ActorId gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(scene.Zone(), "Gate1").ActorId;
             for (int i = 0; i < teamInfo.PlayerList.Count; i++)
             {
-                G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await ActorMessageSenderComponent.Instance.Call
+                G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
                     (gateServerId, new T2G_GateUnitInfoRequest()
                     {
                         UserID = teamInfo.PlayerList[i].UserID
@@ -56,11 +55,11 @@ namespace ET
 
                 if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
                 {
-                    MessageHelper.SendActor(g2M_UpdateUnitResponse.SessionInstanceId, m2C_HorseNoticeInfo);
+                    
+                    MapMessageHelper.SendToClient(scene.Root(), g2M_UpdateUnitResponse.SessionInstanceId, m2C_HorseNoticeInfo);
                 }
             }
             response.TeamInfo = teamInfo;
-            reply();
             await ETTask.CompletedTask;
         }
     }
