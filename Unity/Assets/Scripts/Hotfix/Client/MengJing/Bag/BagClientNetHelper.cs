@@ -458,5 +458,45 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask RquestStoreBuy(Scene root, int sellId, int buyNum)
+        {
+            BagComponentC bagComponent = root.GetComponent<BagComponentC>();
+            UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
+            StoreSellConfig storeSellConfig = StoreSellConfigCategory.Instance.Get(sellId);
+            int needCell = ItemHelper.GetNeedCell($"{storeSellConfig.SellItemID};{storeSellConfig.SellItemNum * buyNum}");
+            if (bagComponent.GetBagLeftCell() < needCell)
+            {
+                EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = "背包已经满" });
+                return;
+            }
+
+            int costType = storeSellConfig.SellType;
+            if (costType == 1 && userInfo.Gold < storeSellConfig.SellValue)
+            {
+                EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = "金币不足" });
+                return;
+            }
+
+            if (costType == 3 && userInfo.Diamond < storeSellConfig.SellValue)
+            {
+                EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = "钻石不足" });
+                return;
+            }
+
+            if (bagComponent.GetItemNumber(costType) < storeSellConfig.SellValue)
+            {
+                EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = "道具不足" });
+                return;
+            }
+
+            C2M_StoreBuyRequest c2M_StoreBuyRequest = new() { SellItemID = sellId, SellItemNum = buyNum };
+            M2C_StoreBuyResponse r2c_roleEquip =
+                    (M2C_StoreBuyResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2M_StoreBuyRequest);
+            if (r2c_roleEquip.Error == ErrorCode.ERR_Success)
+            {
+                root.GetComponent<UserInfoComponentC>().OnStoreBuy(storeSellConfig.Id);
+            }
+        }
     }
 }

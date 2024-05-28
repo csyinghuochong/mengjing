@@ -53,5 +53,6 @@ namespace ET.Client
 		WindowID_RoleXiLianTen,
 		WindowID_RoleXiLianExplain,
 		WindowID_RoleXiLianNumReward,
+		WindowID_Store,
 	}
 }

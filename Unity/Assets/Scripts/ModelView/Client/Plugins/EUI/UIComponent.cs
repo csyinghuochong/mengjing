@@ -21,6 +21,7 @@ namespace ET.Client
         public Dictionary<int, UIBaseWindow> VisibleWindowsDic = new Dictionary<int, UIBaseWindow>();
         public Queue<WindowID> StackWindowsQueue               = new Queue<WindowID>();
         public bool IsPopStackWndStatus                        = false;
-
+        public int CurrentNpcId { get; set; }
+        public WindowID CurrentNpcUI { get; set; }
     }
 }

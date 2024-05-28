@@ -48,6 +48,9 @@ namespace ET.Client
                 return;
             }
 
+            UIComponent uiComponent = root.GetComponent<UIComponent>();
+            uiComponent.CurrentNpcId = npcid;
+            uiComponent.CurrentNpcUI = windowID;
             await root.GetComponent<UIComponent>().ShowWindowAsync(windowID);
             // DlgMain dlgMain = root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
             // dlgMain.View.EG_JoystickMoveRectTransform.gameObject.SetActive(false);
@@ -64,6 +67,7 @@ namespace ET.Client
                 "UIWarehouse" => WindowID.WindowID_Warehouse,
                 "UIMail" => WindowID.WindowID_Mail,
                 "UIRoleXiLian" => WindowID.WindowID_RoleXiLian,
+                "UIStore" => WindowID.WindowID_Store,
                 _ => WindowID.WindowID_Invaild
             };
         }

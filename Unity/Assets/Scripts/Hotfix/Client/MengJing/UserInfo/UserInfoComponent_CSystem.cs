@@ -144,5 +144,19 @@ namespace ET.Client
                     return "0";
             }
         }
+
+        public static void OnStoreBuy(this UserInfoComponentC self, int mysteryId)
+        {
+            for (int i = 0; i < self.UserInfo.BuyStoreItems.Count; i++)
+            {
+                if (self.UserInfo.BuyStoreItems[i].KeyId == mysteryId)
+                {
+                    self.UserInfo.BuyStoreItems[i].Value += 1;
+                    return;
+                }
+            }
+
+            self.UserInfo.BuyStoreItems.Add(new KeyValuePairInt() { KeyId = mysteryId, Value = 1 });
+        }
     }
 }
