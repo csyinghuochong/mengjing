@@ -408,9 +408,9 @@ namespace ET.Client
         public static async ETTask<int> RequestAccountWarehousInfo(Scene root)
         {
             long accountId = root.GetComponent<PlayerComponent>().AccountId;
-            C2M_AccountWarehousInfoRequest reuqest = new() { AccInfoID = accountId };
-            M2C_AccountWarehousInfoResponse response =
-                    (M2C_AccountWarehousInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(reuqest);
+            C2E_AccountWarehousInfoRequest reuqest = new() { AccInfoID = accountId };
+            E2C_AccountWarehousInfoResponse response =
+                    (E2C_AccountWarehousInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(reuqest);
 
             return response.Error;
         }
