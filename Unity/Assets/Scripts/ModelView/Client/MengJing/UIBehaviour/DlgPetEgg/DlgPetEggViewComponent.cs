@@ -60,6 +60,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_PetEggChouKa ES_PetEggChouKa
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_peteggchouka == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetEggChouKa");
+		    	   this.m_es_peteggchouka = this.AddChild<ES_PetEggChouKa,Transform>(subTrans);
+     			}
+     			return this.m_es_peteggchouka;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -150,6 +168,7 @@ namespace ET.Client
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_petegglist = null;
 			this.m_es_peteggduihuan = null;
+			this.m_es_peteggchouka = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_1Toggle = null;
 			this.m_E_2Toggle = null;
@@ -161,6 +180,7 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_PetEggList> m_es_petegglist = null;
 		private EntityRef<ES_PetEggDuiHuan> m_es_peteggduihuan = null;
+		private EntityRef<ES_PetEggChouKa> m_es_peteggchouka = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_1Toggle = null;
 		private UnityEngine.UI.Toggle m_E_2Toggle = null;

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_CommonItem))]
     [EntitySystemOf(typeof (ES_RewardList))]
     [FriendOf(typeof (ES_RewardList))]
     public static partial class ES_RewardListSystem
@@ -29,10 +30,13 @@ namespace ET.Client
 
             scrollItemCommonItem.ES_CommonItem.E_ItemNumText.gameObject.SetActive(self.ShowNum);
             scrollItemCommonItem.ES_CommonItem.E_ItemNameText.gameObject.SetActive(self.ShowName);
+            scrollItemCommonItem.uiTransform.localScale = Vector3.one * self.Scale;
         }
 
-        public static void Refresh(this ES_RewardList self, List<RewardItem> rewardItems, bool showNumber = true, bool showName = false)
+        public static void Refresh(this ES_RewardList self, List<RewardItem> rewardItems, float scale = 1f, bool showNumber = true,
+        bool showName = false)
         {
+            self.Scale = scale;
             self.ShowNum = showNumber;
             self.ShowName = showName;
 
@@ -46,8 +50,9 @@ namespace ET.Client
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
-        public static void Refresh(this ES_RewardList self, string rewarfItems, bool showNumber = true, bool showName = false)
+        public static void Refresh(this ES_RewardList self, string rewarfItems, float scale = 1f, bool showNumber = true, bool showName = false)
         {
+            self.Scale = scale;
             self.ShowNum = showNumber;
             self.ShowName = showName;
 

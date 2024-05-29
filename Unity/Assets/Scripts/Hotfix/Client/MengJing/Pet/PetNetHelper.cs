@@ -261,5 +261,13 @@ namespace ET.Client
 
             return response;
         }
+
+        public static async ETTask<M2C_PetEggChouKaResponse> RequestPetEggChouKa(Scene root, int chouKaType)
+        {
+            C2M_PetEggChouKaRequest request = new() { ChouKaType = chouKaType };
+            M2C_PetEggChouKaResponse response = (M2C_PetEggChouKaResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
     }
 }

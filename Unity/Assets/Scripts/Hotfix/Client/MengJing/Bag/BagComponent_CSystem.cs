@@ -371,5 +371,10 @@ namespace ET.Client
             return self.AdditionalCellNum[houseId] + GlobalValueConfigCategory.Instance.HourseInitCapacity +
                     GlobalValueConfigCategory.Instance.Get(85).Value2;
         }
+
+        public static int GetPetHeXinLeftSpace(this BagComponentC self)
+        {
+            return ComHelp.PetHeXinMax - self.GetItemsByLoc(ItemLocType.ItemPetHeXinBag).Count;
+        }
     }
 }

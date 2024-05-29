@@ -25,7 +25,7 @@ namespace ET.Client
 
         public static void OnUpdateUI(this DlgCommonReward self, List<RewardItem> rewardItems)
         {
-            self.View.ES_RewardList.Refresh(rewardItems, true, true);
+            self.View.ES_RewardList.Refresh(rewardItems, showName: true);
         }
     }
 }

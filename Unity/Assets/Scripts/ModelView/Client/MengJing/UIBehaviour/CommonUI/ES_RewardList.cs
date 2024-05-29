@@ -10,6 +10,7 @@ namespace ET.Client
 	{
 		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
+		public float Scale;
 		public bool ShowNum;
 		public bool ShowName;
 		
