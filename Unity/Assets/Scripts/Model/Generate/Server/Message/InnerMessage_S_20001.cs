@@ -3627,6 +3627,9 @@ namespace ET
 		[MemoryPackOrder(1)]
 		public long FubenInstanceId { get; set; }
 
+		[MemoryPackOrder(2)]
+		public ActorId FubenActorId { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -3635,6 +3638,7 @@ namespace ET
 			this.Message = default;
 			this.FubenId = default;
 			this.FubenInstanceId = default;
+			this.FubenActorId = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}

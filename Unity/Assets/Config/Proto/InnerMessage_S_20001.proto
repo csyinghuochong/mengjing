@@ -925,6 +925,7 @@ message U2M_UnionEnterResponse // IResponse
 
 	int32 FubenId = 1;
 	int64 FubenInstanceId = 2;
+	ActorId FubenActorId = 3;
 }
 
 //ResponseType A2A_ActivityUpdateResponse

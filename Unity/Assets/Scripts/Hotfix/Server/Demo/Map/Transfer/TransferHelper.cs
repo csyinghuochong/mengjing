@@ -107,6 +107,30 @@ namespace ET.Server
                         }
                         break;
                     case (int)SceneTypeEnum.TrialDungeon:
+                        int requestTowerId = int.Parse(request.paramInfo);
+                        int passId = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.TrialDungeonId);
+                        if (!TowerConfigCategory.Instance.Contain(requestTowerId))
+                        {
+                            Log.Error($"试炼之地作弊1:{unit.Zone()} {unit.Id} {requestTowerId}   {passId}");
+                            return ErrorCode.ERR_ModifyData;
+                        }
+                        if (TowerConfigCategory.Instance.Get(requestTowerId).MapType!= SceneTypeEnum.TrialDungeon)
+                        {
+                            Log.Error($"试炼之地作弊2:{unit.Zone()} {unit.Id} {requestTowerId}   {passId}");
+                            return ErrorCode.ERR_ModifyData;
+                        }
+                        
+                        if (passId == 0 && requestTowerId != 20001)
+                        {
+                            Log.Error($"试炼之地作弊3:{unit.Zone()} {unit.Id} {requestTowerId}   {passId}");
+                            return ErrorCode.ERR_ModifyData;
+                        }
+                        if (passId != 0 && requestTowerId > passId + 1 )
+                        {
+                            Log.Error($"试炼之地作弊4:{unit.Zone()} {unit.Id} {requestTowerId}   {passId}");
+                            return ErrorCode.ERR_ModifyData;
+                        }
+                        
                         fubenid = IdGenerater.Instance.GenerateId();
                         fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
                         fubnescene =  GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,  "TrialDungeon" + fubenid.ToString());
@@ -184,10 +208,10 @@ namespace ET.Server
                             return ErrorCode.ERR_Union_Not_Exist;
                         }
                         ActorId mapInstanceId = UnitCacheHelper.GetUnionServerId(unit.Zone());
-                        // U2M_UnionEnterResponse responseUnionEnter = (U2M_UnionEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                        // mapInstanceId, new M2U_UnionEnterRequest() { UnionId = unionid, UnitId = unit.Id, SceneId = request.SceneId });
-                        //TransferHelper.BeforeTransfer(unit);
-                        //await TransferHelper.Transfer(unit, responseUnionEnter.FubenInstanceId, (int)SceneTypeEnum.Union, request.SceneId, request.Difficulty, "0");
+                         U2M_UnionEnterResponse responseUnionEnter = (U2M_UnionEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                         mapInstanceId, new M2U_UnionEnterRequest() { UnionId = unionid, UnitId = unit.Id, SceneId = request.SceneId });
+                        TransferHelper.BeforeTransfer(unit);
+                        await TransferHelper.Transfer(unit, responseUnionEnter.FubenActorId, (int)SceneTypeEnum.Union, request.SceneId, request.Difficulty, "0");
                         break;
                     case (int)SceneTypeEnum.JiaYuan:
                         //动态创建副本
