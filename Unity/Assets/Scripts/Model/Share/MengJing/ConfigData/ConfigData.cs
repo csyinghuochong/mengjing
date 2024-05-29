@@ -16,6 +16,8 @@ namespace ET
         [StaticField]
         public static int BuChangEnd = 20221130;
 
+        [StaticField]
+        public static bool NetVersion = true;
         
         //副本深渊模式创建怪物   参数：场景ID,MonsterPositionConfigID
         [StaticField]

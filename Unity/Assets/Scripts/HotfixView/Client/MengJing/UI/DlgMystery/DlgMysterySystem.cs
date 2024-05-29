@@ -78,7 +78,7 @@ namespace ET.Client
         {
             NpcConfig npcConfig = NpcConfigCategory.Instance.Get(self.Root().GetComponent<UIComponent>().CurrentNpcId);
             if (npcConfig.NpcType == 1012)
-            {
+            { 
                 A2C_MysteryListResponse response =
                         await BagClientNetHelper.RquestMysteryList(self.Root(), self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId);
 
