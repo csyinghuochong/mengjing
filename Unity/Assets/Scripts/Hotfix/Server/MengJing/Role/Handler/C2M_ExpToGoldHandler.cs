@@ -2,27 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_ExpToGoldHandler : AMActorLocationRpcHandler<Unit, C2M_ExpToGoldRequest, M2C_ExpToGoldResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_ExpToGoldHandler : MessageLocationHandler<Unit, C2M_ExpToGoldRequest, M2C_ExpToGoldResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_ExpToGoldRequest request, M2C_ExpToGoldResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_ExpToGoldRequest request, M2C_ExpToGoldResponse response)
         {
-            UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
+            UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
             UserInfo userInfo = userInfoComponent.UserInfo;
-            ServerInfo serverInfo = unit.DomainScene().GetComponent<ServerInfoComponent>().ServerInfo;
+            ServerInfo serverInfo = unit.Scene().GetComponent<ServerInfoComponent>().ServerInfo;
             if (userInfo.Lv < serverInfo.WorldLv)
             {
                 response.Error = ErrorCode.ERR_LevelNoEnough;
-                reply();
                 return;
             }
 
             //背包已满
-            if (unit.GetComponent<BagComponent>().IsBagFull()) {
+            if (unit.GetComponent<BagComponentS>().IsBagFull()) {
                 response.Error = ErrorCode.ERR_BagIsFull;
-                reply();
                 return;
             }
 
@@ -31,7 +29,6 @@ namespace ET
             if (request.OperateType == 2) {
                 if (userInfo.Lv < globalCof.Value2) {
                     response.Error = ErrorCode.ERR_ExpNoEnough;
-                    reply();
                     return;
                 }
             }
@@ -46,7 +43,6 @@ namespace ET
             if (userInfo.Exp < costExp||costExp <= 0)
             {
                 response.Error = ErrorCode.ERR_ExpNoEnough;
-                reply();
                 return;
             }
 
@@ -63,23 +59,22 @@ namespace ET
                     int dropid = int.Parse(droplist[0]);
                     List<RewardItem> rewardItems = new List<RewardItem>();
                     DropHelper.DropIDToDropItem_2(dropid, rewardItems);
-                    unit.GetComponent<BagComponent>().OnAddItemData(rewardItems, String.Empty, $"{ItemGetWay.DuiHuan}_{TimeHelper.ServerNow()}");
+                    unit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, String.Empty, $"{ItemGetWay.DuiHuan}_{TimeHelper.ServerNow()}");
                     break;
                 case 0:
                     List<int> weights = ListComponent<int>.Create();
-                    for (int i = 0; i < ConfigHelper.ExpToItemList.Count; i++)
+                    for (int i = 0; i < ConfigData.ExpToItemList.Count; i++)
                     {
-                        weights.Add(ConfigHelper.ExpToItemList[i].KeyId);
+                        weights.Add(ConfigData.ExpToItemList[i].KeyId);
                     }
                     int index = RandomHelper.RandomByWeight(weights);
-                    unit.GetComponent<BagComponent>().OnAddItemData(ConfigHelper.ExpToItemList[index].Value,  $"{ItemGetWay.DuiHuan}_{TimeHelper.ServerNow()}");
+                    unit.GetComponent<BagComponentS>().OnAddItemData(ConfigData.ExpToItemList[index].Value,  $"{ItemGetWay.DuiHuan}_{TimeHelper.ServerNow()}");
                     break;
                 default:
                     break;
             }
             userInfoComponent.UpdateRoleData(UserDataType.Exp, (costExp * -1).ToString());
-            unit.GetComponent<NumericComponent>().ApplyChange(null, NumericType.ExpToGoldTimes, 1, 0);
-            reply();
+            unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.ExpToGoldTimes, 1, 0);
             await ETTask.CompletedTask;
         }
     }

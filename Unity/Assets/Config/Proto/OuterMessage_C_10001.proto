@@ -6509,3 +6509,50 @@ message M2C_RechargeRewardResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType M2C_ExpToGoldResponse
+message C2M_ExpToGoldRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int32 OperateType = 1;  //1 兑换金币  2 兑换道具
+}
+
+message M2C_ExpToGoldResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+
+//ResponseType M2C_RealNameRewardResponse
+message C2M_RealNameRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_RealNameRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_RolePetChouKaResponse
+message C2M_RolePetChouKaRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 ChouKaType = 1; //1 金币抽卡  2 钻石抽卡
+}
+
+message M2C_RolePetChouKaResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	RolePetInfo RolePetInfo = 1;
+}

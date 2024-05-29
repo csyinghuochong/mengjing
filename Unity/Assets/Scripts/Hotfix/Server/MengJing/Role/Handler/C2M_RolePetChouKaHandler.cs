@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2M_RolePetChouKaHandler : AMActorLocationRpcHandler<Unit, C2M_RolePetChouKaRequest, M2C_RolePetChouKaResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_RolePetChouKaHandler : MessageLocationHandler<Unit, C2M_RolePetChouKaRequest, M2C_RolePetChouKaResponse>
     {
 
-        protected override async ETTask Run(Unit unit, C2M_RolePetChouKaRequest request, M2C_RolePetChouKaResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_RolePetChouKaRequest request, M2C_RolePetChouKaResponse response)
         {
             if (request.ChouKaType == 1)
             {
                 string needItems = GlobalValueConfigCategory.Instance.Get(16).Value;
-                bool  sucess = unit.GetComponent<BagComponent>().OnCostItemData(needItems);
+                bool  sucess = unit.GetComponent<BagComponentS>().OnCostItemData(needItems);
                 if (!sucess)
                 {
                     response.Error = ErrorCode.ERR_ItemNotEnoughError;
-                    reply();
                     return;
                 }
             }
@@ -31,16 +30,15 @@ namespace ET
                     return;
                 }
                 */
-                UserInfo userInfo = unit.GetComponent<UserInfoComponent>().UserInfo;
+                UserInfo userInfo = unit.GetComponent<UserInfoComponentS>().UserInfo;
                 int needDimanond = int.Parse(GlobalValueConfigCategory.Instance.Get(17).Value);
                 if (userInfo.Diamond < needDimanond)
                 {
                     response.Error = ErrorCode.ERR_DiamondNotEnoughError;
-                    reply();
                     return;
                 }
-                unit.GetComponent<UserInfoComponent>().UpdateRoleMoneySub(UserDataType.Diamond, (-1 * needDimanond).ToString(), true,ItemGetWay.PetChouKa);
-                unit.GetComponent<NumericComponent>().ApplyChange(null, NumericType.PetChouKa, 1, 0);
+                unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneySub(UserDataType.Diamond, (-1 * needDimanond).ToString(), true,ItemGetWay.PetChouKa);
+                unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.PetChouKa, 1, 0);
                 unit.GetComponent<DataCollationComponent>().OnPetChouKa(1);
             }
 
@@ -79,8 +77,7 @@ namespace ET
             List<int> weight = new List<int>(petConfig.SkinPro);
             int index = RandomHelper.RandomByWeight(weight);
             int skinId = petConfig.Skin[index];
-            response.RolePetInfo = unit.GetComponent<PetComponent>().OnAddPet(ItemGetWay.PetExplore, petId, skinId);
-            reply();
+            response.RolePetInfo = unit.GetComponent<PetComponentS>().OnAddPet(ItemGetWay.PetExplore, petId, skinId);
             await ETTask.CompletedTask;
         }
     }

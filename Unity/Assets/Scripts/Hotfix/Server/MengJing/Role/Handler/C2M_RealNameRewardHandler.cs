@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_RealNameRewardHandler : AMActorLocationRpcHandler<Unit, C2M_RealNameRewardRequest, M2C_RealNameRewardResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_RealNameRewardHandler : MessageLocationHandler<Unit, C2M_RealNameRewardRequest, M2C_RealNameRewardResponse>
     {
 
-        protected override async ETTask Run(Unit unit, C2M_RealNameRewardRequest request, M2C_RealNameRewardResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_RealNameRewardRequest request, M2C_RealNameRewardResponse response)
         {
-            long accid = unit.GetComponent<UserInfoComponent>().UserInfo.AccInfoID;
-            long dbCacheId = DBHelper.GetDbCacheId(unit.DomainZone());
-
+            long accid = unit.GetComponent<UserInfoComponentS>().UserInfo.AccInfoID;
+           
             string globalValueConfig = GlobalValueConfigCategory.Instance.Get(6).Value;
             string[] itemCost = globalValueConfig.Split('@');
             List<RewardItem> rewardItems = new List<RewardItem>();
@@ -23,10 +22,9 @@ namespace ET
                 rewardItems.Add(new RewardItem() { ItemID = itemId, ItemNum = itemNum });
             }
 
-            bool sucess = unit.GetComponent<BagComponent>().OnAddItemData(rewardItems, string.Empty, string.Empty);
+            bool sucess = unit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, string.Empty, string.Empty);
             response.Error = sucess ? ErrorCode.ERR_Success : ErrorCode.ERR_BagIsFull;
 
-            reply();
             await ETTask.CompletedTask;
         }
     }
