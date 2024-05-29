@@ -63,11 +63,8 @@ namespace ET.Client
         public static void OnUpdateUI(this Scroll_Item_ChouKaRewardItem self, TakeCardRewardConfig takeCardRewardConfig)
         {
             self.E_Btn_RewardButton.AddListenerAsync(self.OnBtn_Reward);
-
             self.TakeCardRewardConfig = takeCardRewardConfig;
-            UIItemComponent uIItemComponent = self.AddChild<UIItemComponent, GameObject>(self.UICommonItem);
-            string[] iteminfo = takeCardRewardConfig.RewardItems.Split(';');
-            uIItemComponent.UpdateItem(new BagInfo() { ItemID = int.Parse(iteminfo[0]), ItemNum = int.Parse(iteminfo[1]), }, ItemOperateEnum.None);
+            self.ES_RewardList.Refresh(takeCardRewardConfig.RewardItems, 0.8f);
 
             self.E_TextZuanshiText.text = $"{takeCardRewardConfig.RewardDiamond[0]}-{takeCardRewardConfig.RewardDiamond[1]}";
             self.E_TextNeedTimesText.text = $"抽卡次数达到{takeCardRewardConfig.RoseLvLimit}次";
