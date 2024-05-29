@@ -234,7 +234,7 @@ namespace ET.Server
         
         public static ActorId GetGateServerId(int zone)
         {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Gate.ToString()).ActorId;
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, "Gate1").ActorId;
         }
 
         public static ActorId GetPaiMaiServerId(int zone)
