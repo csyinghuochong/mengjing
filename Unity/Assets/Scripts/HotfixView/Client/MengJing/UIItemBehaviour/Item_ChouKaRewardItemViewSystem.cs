@@ -22,31 +22,32 @@ namespace ET.Client
         public static async ETTask OnBtn_Reward(this Scroll_Item_ChouKaRewardItem self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            bool received = userInfoComponent.UserInfo.ItemXiLianNumRewardIds.Contains(self.RewardKey);
+            bool received = userInfoComponent.UserInfo.ChouKaRewardIds.Contains(self.TakeCardRewardConfig.Id);
             if (received)
             {
                 return;
             }
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemXiLianNumber) < self.RewardKey)
+            if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ChouKa) < self.TakeCardRewardConfig.RoseLvLimit)
             {
                 FlyTipComponent.Instance.SpawnFlyTipDi("条件未达到！");
                 return;
             }
 
-            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() <
-                ConfigData.ItemXiLianNumReward[self.RewardKey].Split('@').Length - 1)
+            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < self.TakeCardRewardConfig.RewardItems.Split('@').Length)
             {
                 FlyTipComponent.Instance.SpawnFlyTipDi("背包空间不足！");
                 return;
             }
 
-            int error = await BagClientNetHelper.RquestItemXiLianNumReward(self.Root(), self.RewardKey);
+            C2M_ChouKaRewardRequest request = new() { RewardId = self.TakeCardRewardConfig.Id };
+            M2C_ChouKaRewardResponse response =
+                    (M2C_ChouKaRewardResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
 
-            if (error == ErrorCode.ERR_Success)
+            if (response.Error == ErrorCode.ERR_Success)
             {
-                userInfoComponent.UserInfo.ItemXiLianNumRewardIds.Add(self.RewardKey);
+                userInfoComponent.UserInfo.ChouKaRewardIds.Add(self.TakeCardRewardConfig.Id);
             }
 
             self.UpdateButton();
@@ -55,28 +56,21 @@ namespace ET.Client
         public static void UpdateButton(this Scroll_Item_ChouKaRewardItem self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            bool received = userInfoComponent.UserInfo.ItemXiLianNumRewardIds.Contains(self.RewardKey);
+            bool received = userInfoComponent.UserInfo.ChouKaRewardIds.Contains(self.TakeCardRewardConfig.Id);
             self.E_Btn_RewardButton.gameObject.SetActive(!received);
         }
 
-        public static void OnUpdateUI(this Scroll_Item_ChouKaRewardItem self, int key)
+        public static void OnUpdateUI(this Scroll_Item_ChouKaRewardItem self, TakeCardRewardConfig takeCardRewardConfig)
         {
             self.E_Btn_RewardButton.AddListenerAsync(self.OnBtn_Reward);
 
-            self.RewardKey = key;
-            string[] reward = ConfigData.ItemXiLianNumReward[key].Split('$');
-            string[] items = reward[0].Split('@');
-            List<RewardItem> rewardItems = new List<RewardItem>();
-            foreach (string item in items)
-            {
-                string[] it = item.Split(';');
-                rewardItems.Add(new RewardItem() { ItemID = int.Parse(it[0]), ItemNum = int.Parse(it[1]) });
-            }
+            self.TakeCardRewardConfig = takeCardRewardConfig;
+            UIItemComponent uIItemComponent = self.AddChild<UIItemComponent, GameObject>(self.UICommonItem);
+            string[] iteminfo = takeCardRewardConfig.RewardItems.Split(';');
+            uIItemComponent.UpdateItem(new BagInfo() { ItemID = int.Parse(iteminfo[0]), ItemNum = int.Parse(iteminfo[1]), }, ItemOperateEnum.None);
 
-            self.ES_RewardList.Refresh(rewardItems, 0.8f);
-            string[] diamond = reward[1].Split(';')[1].Split(',');
-            self.E_TextZuanshiText.text = $"{diamond[0]}-{diamond[1]}";
-            self.E_TextNeedTimesText.text = $"洗练次数达到{key}次";
+            self.E_TextZuanshiText.text = $"{takeCardRewardConfig.RewardDiamond[0]}-{takeCardRewardConfig.RewardDiamond[1]}";
+            self.E_TextNeedTimesText.text = $"抽卡次数达到{takeCardRewardConfig.RoseLvLimit}次";
 
             self.UpdateButton();
         }

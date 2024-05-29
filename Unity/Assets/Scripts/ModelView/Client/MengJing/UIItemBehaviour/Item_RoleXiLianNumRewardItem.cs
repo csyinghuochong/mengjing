@@ -4,10 +4,9 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_ChouKaRewardItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_RoleXiLianNumRewardItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
 		public int RewardKey;
-		public TakeCardRewardConfig TakeCardRewardConfig;
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
@@ -16,7 +15,7 @@ namespace ET.Client
 			this.isCacheNode = isCache;
 		}
 
-		public Scroll_Item_ChouKaRewardItem BindTrans(Transform trans)
+		public Scroll_Item_RoleXiLianNumRewardItem BindTrans(Transform trans)
 		{
 			this.uiTransform = trans;
 			return this;

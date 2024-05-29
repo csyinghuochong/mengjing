@@ -214,10 +214,6 @@ namespace ET.Client
             self.OnUpdateMianFeiTime();
         }
 
-        public static void OnBtn_AddZuanShi(this DlgChouKa self)
-        {
-        }
-
         public static void SetRedDot(this DlgChouKa self, bool show)
         {
             self.View.E_Btn_WarehouseButton.transform.Find("RedDot").gameObject.SetActive(show);
