@@ -1,0 +1,31 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace ET.Client
+{
+    [FriendOf(typeof (DlgCommonReward))]
+    public static class DlgCommonRewardSystem
+    {
+        public static void RegisterUIEvent(this DlgCommonReward self)
+        {
+            self.View.E_ImageButtonButton.AddListener(self.OnImageButton);
+        }
+
+        public static void ShowWindow(this DlgCommonReward self, Entity contextData = null)
+        {
+        }
+
+        public static void OnImageButton(this DlgCommonReward self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_CommonReward);
+        }
+
+        public static void OnUpdateUI(this DlgCommonReward self, List<RewardItem> rewardItems)
+        {
+            self.View.ES_RewardList.Refresh(rewardItems, true, true);
+        }
+    }
+}

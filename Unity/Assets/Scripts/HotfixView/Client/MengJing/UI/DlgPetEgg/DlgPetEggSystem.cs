@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_PetEggList))]
+    [FriendOf(typeof (ES_PetEggDuiHuan))]
     [FriendOf(typeof (DlgPetEgg))]
     public static class DlgPetEggSystem
     {
@@ -39,6 +40,8 @@ namespace ET.Client
                     self.View.ES_PetEggList.OnUpdateUI();
                     break;
                 case 1:
+                    self.View.ES_PetEggDuiHuan.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PetEggDuiHuan.OnUpdateUI();
                     break;
                 case 2:
                     break;
