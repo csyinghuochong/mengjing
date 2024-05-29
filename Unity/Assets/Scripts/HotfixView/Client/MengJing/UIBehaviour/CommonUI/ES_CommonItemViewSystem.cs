@@ -62,6 +62,7 @@ namespace ET.Client
         {
             self.E_ItemDragEventTrigger.gameObject.SetActive(value);
 
+            self.E_ItemDragEventTrigger.triggers.Clear();
             self.E_ItemDragEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.BeginDrag(pdata as PointerEventData); });
             self.E_ItemDragEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Draging(pdata as PointerEventData); });
             self.E_ItemDragEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.EndDrag(pdata as PointerEventData); });

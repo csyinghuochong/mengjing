@@ -29,6 +29,20 @@ namespace ET.Client
         private static void Awake(this ES_PetEggListItem self, Transform transform)
         {
             self.uiTransform = transform;
+
+            self.E_Text_TimeText.text = "";
+
+            self.E_ButtonOpenButton.gameObject.SetActive(false);
+            self.E_ButtonGetButton.gameObject.SetActive(false);
+            self.E_ButtonFuHuaButton.gameObject.SetActive(false);
+
+            self.E_PetEggIconEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.BeginDrag(pdata as PointerEventData); });
+            self.E_PetEggIconEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Draging(pdata as PointerEventData); });
+            self.E_PetEggIconEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.EndDrag(pdata as PointerEventData); });
+
+            self.E_ButtonOpenButton.AddListener(self.OnButtonOpen);
+            self.E_ButtonGetButton.AddListenerAsync(self.OnButtonGet);
+            self.E_ButtonFuHuaButton.AddListenerAsync(self.OnButtonFuHua);
         }
 
         [EntitySystem]

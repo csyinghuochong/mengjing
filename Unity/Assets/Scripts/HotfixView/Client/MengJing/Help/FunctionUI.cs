@@ -69,7 +69,7 @@ namespace ET.Client
                 "UIRoleXiLian" => WindowID.WindowID_RoleXiLian,
                 "UIStore" => WindowID.WindowID_Store,
                 "UIMystery" => WindowID.WindowID_Mystery,
-                "UI" => WindowID.WindowID_PetEgg,
+                "UIPetEgg" => WindowID.WindowID_PetEgg,
                 _ => WindowID.WindowID_Invaild
             };
         }

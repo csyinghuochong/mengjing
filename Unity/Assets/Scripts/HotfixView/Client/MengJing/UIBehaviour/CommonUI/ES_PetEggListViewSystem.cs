@@ -15,6 +15,15 @@ namespace ET.Client
         {
             self.uiTransform = transform;
             self.E_BagItemsLoopHorizontalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
+            self.PetList.Add(self.ES_PetEggListItem_0);
+            self.PetList.Add(self.ES_PetEggListItem_1);
+            self.PetList.Add(self.ES_PetEggListItem_2);
+            foreach (ES_PetEggListItem item in self.PetList)
+            {
+                item.BeginDragHandler = (binfo, pdata) => { self.PetEggBeginDrag(binfo, pdata); };
+                item.DragingHandler = (binfo, pdata) => { self.PetEggDraging(binfo, pdata); };
+                item.EndDragHandler = (binfo, pdata) => { self.PetEggEndDrag(binfo, pdata); };
+            }
 
             self.EG_IconItemDargRectTransform.gameObject.SetActive(false);
         }
@@ -82,7 +91,7 @@ namespace ET.Client
         public static void Draging(this ES_PetEggList self, BagInfo binfo, PointerEventData pdata)
         {
             Vector2 localPoint;
-            RectTransform canvas = self.EG_IconItemDargRectTransform.parent.GetComponent<RectTransform>();
+            RectTransform canvas = self.uiTransform.parent.parent.GetComponent<RectTransform>();
             Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, uiCamera, out localPoint);
 
@@ -109,7 +118,7 @@ namespace ET.Client
 
         public static void EndDrag(this ES_PetEggList self, BagInfo binfo, PointerEventData pdata)
         {
-            RectTransform canvas = self.EG_IconItemDargRectTransform.parent.GetComponent<RectTransform>();
+            RectTransform canvas = self.uiTransform.parent.parent.GetComponent<RectTransform>();
             GraphicRaycaster gr = canvas.GetComponent<GraphicRaycaster>();
             List<RaycastResult> results = new List<RaycastResult>();
             gr.Raycast(pdata, results);
@@ -117,7 +126,7 @@ namespace ET.Client
             for (int i = 0; i < results.Count; i++)
             {
                 string name = results[i].gameObject.name;
-                if (!name.Contains("UIPetEggListItem"))
+                if (!name.Contains("ES_PetEggListItem"))
                 {
                     continue;
                 }
