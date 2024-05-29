@@ -390,7 +390,7 @@ namespace ET.Server
                      continue;
                  }
                  
-                 //zhaohuan.GetComponent<HeroDataComponentServer>().OnDead(attack!=null ? attack : zhaohuan);
+                 //zhaohuan.GetComponent<HeroDataComponentServer>().OnDeadOnDead(attack!=null ? attack : zhaohuan);
              }
              zhaohuanids.Clear();
          }
@@ -836,13 +836,12 @@ namespace ET.Server
              int waitRevive = self.OnWaitRevive();
              numericComponent.Set(NumericType.Now_Dead, 1);
              
-             //EventSystem.Instance.Publish();
-             // Game.EventSystem.Publish(new EventType.KillEvent()
-             // {
-             //     WaitRevive = waitRevive,
-             //     UnitAttack = attack,
-             //     UnitDefend = unit,
-             // });
+             EventSystem.Instance.Publish( self.Root(), new UnitKillEvent()
+             {
+                 WaitRevive = waitRevive,
+                 UnitAttack = attack,
+                 UnitDefend = unit,
+             });
             }
     }
 }
