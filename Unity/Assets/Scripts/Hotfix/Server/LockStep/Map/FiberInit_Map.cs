@@ -17,6 +17,7 @@ namespace ET.Server
             root.AddComponent<AOIManagerComponent>();
             root.AddComponent<RoomManagerComponent>();
             root.AddComponent<LocationProxyComponent>();
+            root.AddComponent<DBManagerComponent>();
             root.AddComponent<MessageLocationSenderComponent>();
             MapComponent mapComponent =  root.AddComponent<MapComponent>();
             mapComponent.NavMeshId = 101;

@@ -5,7 +5,7 @@ namespace ET.Server
 {
 
     [BsonIgnoreExtraElements]
-    [ComponentOf(typeof(Unit))]
+    [ChildOf]
     public class DBFriendInfo : Entity, IAwake
     {
 

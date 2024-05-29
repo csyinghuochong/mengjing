@@ -71,11 +71,6 @@ namespace ET.Server
 			        List<DBAccountInfo> newAccountList = await dbComponent.Query<DBAccountInfo>(session.Zone(), d => d.Id == request.AccountId);
 			        DBAccountInfo newAccount = newAccountList[0];
 
-					//创建角色组件
-					// await DBHelper.AddDataComponent<NumericComponentServer>(zone, userId, UnitCacheHelper.NumericComponent);
-					// await DBHelper.AddDataComponent<DBFriendInfo>(zone, userId, UnitCacheHelper.DBFriendInfo);
-					// await DBHelper.AddDataComponent<DBMailInfo>(zone, userId, UnitCacheHelper.DBMailInfo);
-
 					int robotId = 0;
 					if (newAccount.Password == ComHelp.RobotPassWord)
 					{

@@ -54,9 +54,16 @@ namespace ET.Server
                     List<DBFriendInfo> dbFriendInfos = await dbComponent.Query<DBFriendInfo>(scene.Zone(), d => d.Id == id);
                     if (dbFriendInfos == null || dbFriendInfos.Count == 0)
                     {
-                        DBFriendInfo dbFriendInfo = unit.AddComponent<DBFriendInfo>();
+                        DBFriendInfo dbFriendInfo = scene.AddChild<DBFriendInfo>();
                         await dbComponent.Save(scene.Zone(), dbFriendInfo);
                         dbFriendInfo.Dispose();
+                    }
+                    List<DBMailInfo> dbMailInfos = await dbComponent.Query<DBMailInfo>(scene.Zone(), d => d.Id == id);
+                    if (dbMailInfos == null || dbMailInfos.Count == 0)
+                    {
+                        DBMailInfo dbMailInfo = scene.AddChild<DBMailInfo>();
+                        await dbComponent.Save(scene.Zone(), dbMailInfo);
+                        dbMailInfo.Dispose();
                     }
 
                     //unitComponent.Add(unit);

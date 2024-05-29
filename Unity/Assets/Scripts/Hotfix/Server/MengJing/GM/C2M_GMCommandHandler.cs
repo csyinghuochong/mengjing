@@ -118,6 +118,17 @@ namespace ET.Server
                             }
                         }
 						break;
+                    case 15:
+                        List<BagInfo> itemList = new List<BagInfo>();
+                        itemList.Add(new BagInfo() { ItemID = 1, ItemNum = 100});
+                        itemList.Add(new BagInfo() { ItemID = 3, ItemNum = 100});
+                        MailInfo mailInfo = new MailInfo();
+                        mailInfo.Status = 0;
+                        mailInfo.Title = "测试邮件";
+                        mailInfo.MailId = IdGenerater.Instance.GenerateId();
+                        mailInfo.ItemList.AddRange(itemList);
+                        MailHelp.SendUserMail( unit.Root(), unit.Id, mailInfo).Coroutine();
+                        break;
                     default:
                         break;
                 }
