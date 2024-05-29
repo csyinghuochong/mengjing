@@ -4459,6 +4459,9 @@ namespace ET
 		[MemoryPackOrder(1)]
 		public long FubenInstanceId { get; set; }
 
+		[MemoryPackOrder(2)]
+		public ActorId FubenActorId { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -4466,6 +4469,7 @@ namespace ET
 			this.Error = default;
 			this.Message = default;
 			this.FubenInstanceId = default;
+			this.FubenActorId = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -4532,6 +4536,9 @@ namespace ET
 		[MemoryPackOrder(2)]
 		public int Camp { get; set; }
 
+		[MemoryPackOrder(3)]
+		public ActorId FubenActorId { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -4540,6 +4547,7 @@ namespace ET
 			this.Message = default;
 			this.FubenInstanceId = default;
 			this.Camp = default;
+			this.FubenActorId = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -5484,6 +5492,9 @@ namespace ET
 		[MemoryPackOrder(1)]
 		public long FubenInstanceId { get; set; }
 
+		[MemoryPackOrder(2)]
+		public ActorId FubenActorId { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -5491,6 +5502,7 @@ namespace ET
 			this.Error = default;
 			this.Message = default;
 			this.FubenInstanceId = default;
+			this.FubenActorId = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -5627,6 +5639,9 @@ namespace ET
 		[MemoryPackOrder(2)]
 		public int Position { get; set; }
 
+		[MemoryPackOrder(3)]
+		public ActorId FubenActorId { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -5635,6 +5650,7 @@ namespace ET
 			this.Message = default;
 			this.FubenInstanceId = default;
 			this.Position = default;
+			this.FubenActorId = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -7284,6 +7300,9 @@ namespace ET
 		[MemoryPackOrder(0)]
 		public long FubenInstanceId { get; set; }
 
+		[MemoryPackOrder(1)]
+		public ActorId FubenActorId { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -7291,6 +7310,7 @@ namespace ET
 			this.Error = default;
 			this.Message = default;
 			this.FubenInstanceId = default;
+			this.FubenActorId = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -7582,6 +7602,9 @@ namespace ET
 		[MemoryPackOrder(2)]
 		public int FubenType { get; set; }
 
+		[MemoryPackOrder(3)]
+		public ActorId FubenActorId { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -7591,6 +7614,7 @@ namespace ET
 			this.FubenId = default;
 			this.FubenInstanceId = default;
 			this.FubenType = default;
+			this.FubenActorId = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -7795,6 +7819,9 @@ namespace ET
 		[MemoryPackOrder(1)]
 		public long FubenInstanceId { get; set; }
 
+		[MemoryPackOrder(2)]
+		public ActorId FubenActorId { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -7803,6 +7830,7 @@ namespace ET
 			this.Message = default;
 			this.FubenId = default;
 			this.FubenInstanceId = default;
+			this.FubenActorId = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}

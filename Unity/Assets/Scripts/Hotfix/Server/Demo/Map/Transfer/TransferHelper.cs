@@ -218,57 +218,57 @@ namespace ET.Server
                         Scene scene = unit.Root();
                         mapInstanceId = UnitCacheHelper.GetJiaYuanServerId(unit.Zone());
                         ///进入之前先刷新一下
-                        // if (long.Parse(request.paramInfo) == unit.Id)
-                        // {
-                        //     JiaYuanComponent jiaYuanComponent = unit.GetComponent<JiaYuanComponent>();
-                        //     jiaYuanComponent.OnBeforEnter();
-                        //     await DBHelper.SaveComponent(unit.DomainZone(), unit.Id, jiaYuanComponent);
-                        // }
-                        // J2M_JiaYuanEnterResponse j2M_JianYuanEnterResponse = (J2M_JiaYuanEnterResponse)await ActorMessageSenderComponent.Instance.Call(
-                        // mapInstanceId, new M2J_JiaYuanEnterRequest() { MasterId = long.Parse(request.paramInfo), UnitId = unit.Id, SceneId = request.SceneId });
-                        // TransferHelper.BeforeTransfer(unit);
-                        // await TransferHelper.Transfer(unit, j2M_JianYuanEnterResponse.FubenInstanceId, (int)SceneTypeEnum.JiaYuan, request.SceneId, request.Difficulty, "0");
-                        //
-                        // if (oldScene == SceneTypeEnum.JiaYuan)
-                        // {
-                        //     JiaYuanSceneComponent jiayuanSceneComponent = scene.GetParent<JiaYuanSceneComponent>();
-                        //     jiayuanSceneComponent.OnUnitLeave(scene);
-                        // }
+                        if (long.Parse(request.paramInfo) == unit.Id)
+                        {
+                            JiaYuanComponentS jiaYuanComponent = unit.GetComponent<JiaYuanComponentS>();
+                            jiaYuanComponent.OnBeforEnter();
+                            await UnitCacheHelper.SaveComponentCache(unit.Root(), jiaYuanComponent);
+                        }
+                        J2M_JiaYuanEnterResponse j2M_JianYuanEnterResponse = (J2M_JiaYuanEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                        mapInstanceId, new M2J_JiaYuanEnterRequest() { MasterId = long.Parse(request.paramInfo), UnitId = unit.Id, SceneId = request.SceneId });
+                        TransferHelper.BeforeTransfer(unit);
+                        await TransferHelper.Transfer(unit, j2M_JianYuanEnterResponse.FubenActorId, (int)SceneTypeEnum.JiaYuan, request.SceneId, request.Difficulty, "0");
+                        
+                        if (oldScene == SceneTypeEnum.JiaYuan)
+                        {
+                            JiaYuanSceneComponent jiayuanSceneComponent = scene.GetParent<JiaYuanSceneComponent>();
+                            jiayuanSceneComponent.OnUnitLeave(scene);
+                        }
                         break;
                     case (int)SceneTypeEnum.Tower:
                         //动态创建副本
                         fubenid = IdGenerater.Instance.GenerateId();
                         fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-                        // fubnescene = SceneFactory.Create(Game.Scene, fubenid, fubenInstanceId, unit.DomainZone(), "Tower" + fubenid.ToString(), SceneType.Fuben);
-                        // fubnescene.AddComponent<TowerComponent>().FubenDifficulty = request.Difficulty;
-                        // mapComponent = fubnescene.GetComponent<MapComponent>();
-                        // mapComponent.SetMapInfo((int)SceneTypeEnum.Tower, request.SceneId, 0);
-                        // mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(request.SceneId).MapID;
-                        // TransferHelper.BeforeTransfer(unit);
-                        // await TransferHelper.Transfer(unit, fubenInstanceId, (int)SceneTypeEnum.Tower, request.SceneId, request.Difficulty, "0");
-                        // TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
+                        fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "Tower" + fubenid.ToString());
+                        fubnescene.AddComponent<TowerComponent>().FubenDifficulty = request.Difficulty;
+                        mapComponent = fubnescene.GetComponent<MapComponent>();
+                        mapComponent.SetMapInfo((int)SceneTypeEnum.Tower, request.SceneId, 0);
+                        mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(request.SceneId).MapID;
+                        TransferHelper.BeforeTransfer(unit);
+                        await TransferHelper.Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.Tower, request.SceneId, request.Difficulty, "0");
+                        TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
                         break;
                     case SceneTypeEnum.OneChallenge:
                         fubenid = long.Parse(request.paramInfo);
-                        // fubnescene = Game.Scene.Get(fubenid);
-                        // bool newdungeon = false;
-                        // if (fubnescene == null)
-                        // {
-                        //     newdungeon = true;
-                        //     fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-                        //     fubnescene = SceneFactory.Create(Game.Scene, fubenid, fubenInstanceId, unit.DomainZone(), "OneChallenge" + fubenid.ToString(), SceneType.Fuben);
-                        //     mapComponent = fubnescene.GetComponent<MapComponent>();
-                        //     mapComponent.SetMapInfo((int)SceneTypeEnum.OneChallenge, request.SceneId, 0);
-                        //     mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(request.SceneId).MapID;
-                        //     Game.Scene.GetComponent<RecastPathComponent>().Update(fubnescene.GetComponent<MapComponent>().NavMeshId);
-                        // }
-                        // fubenInstanceId = fubnescene.InstanceId;
-                        // TransferHelper.BeforeTransfer(unit);
-                        // await TransferHelper.Transfer(unit, fubenInstanceId, (int)SceneTypeEnum.OneChallenge, request.SceneId, request.Difficulty, "0");
-                        // if (newdungeon)
-                        // {
-                        //     TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
-                        // }
+                        fubnescene = unit.Root().GetChild<Scene>(fubenid);
+                        bool newdungeon = false;
+                        if (fubnescene == null)
+                        {
+                            newdungeon = true;
+                            fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
+                            fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,  "OneChallenge" + fubenid.ToString());
+                            mapComponent = fubnescene.GetComponent<MapComponent>();
+                            mapComponent.SetMapInfo((int)SceneTypeEnum.OneChallenge, request.SceneId, 0);
+                            mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(request.SceneId).MapID;
+                            //Game.Scene.GetComponent<RecastPathComponent>().Update(fubnescene.GetComponent<MapComponent>().NavMeshId);
+                        }
+                        fubenInstanceId = fubnescene.InstanceId;
+                        TransferHelper.BeforeTransfer(unit);
+                        await TransferHelper.Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.OneChallenge, request.SceneId, request.Difficulty, "0");
+                        if (newdungeon)
+                        {
+                            TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
+                        }
                         break;
                     case (int)SceneTypeEnum.PetMing:
                         long cdTime = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.PetMineCDTime);
@@ -278,29 +278,29 @@ namespace ET.Server
                         }
 
                         string[] praminfos = request.paramInfo.Split('_');
-                        // fubenid = IdGenerater.Instance.GenerateId();
-                        // fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-                        // fubnescene = SceneFactory.Create(Game.Scene, fubenid, fubenInstanceId, unit.DomainZone(), "Fuben" + fubenid.ToString(), SceneType.Fuben);
-                        // PetMingDungeonComponent petMingDungeon = fubnescene.AddComponent<PetMingDungeonComponent>();
-                        // petMingDungeon.MineType = request.Difficulty;
-                        // petMingDungeon.Position = int.Parse(praminfos[0]);
-                        // petMingDungeon.TeamId = int.Parse(praminfos[1]);
-                        // fubnescene.GetComponent<MapComponent>().SetMapInfo((int)SceneTypeEnum.PetMing, request.SceneId, 0);
-                        // TransferHelper.BeforeTransfer(unit);
-                        // await TransferHelper.Transfer(unit, fubenInstanceId, (int)SceneTypeEnum.PetMing, request.SceneId, request.Difficulty, praminfos[0]);
-                        // TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
+                        fubenid = IdGenerater.Instance.GenerateId();
+                        fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
+                        fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "Fuben" + fubenid.ToString());
+                        PetMingDungeonComponent petMingDungeon = fubnescene.AddComponent<PetMingDungeonComponent>();
+                        petMingDungeon.MineType = request.Difficulty;
+                        petMingDungeon.Position = int.Parse(praminfos[0]);
+                        petMingDungeon.TeamId = int.Parse(praminfos[1]);
+                        fubnescene.GetComponent<MapComponent>().SetMapInfo((int)SceneTypeEnum.PetMing, request.SceneId, 0);
+                        TransferHelper.BeforeTransfer(unit);
+                        await TransferHelper.Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.PetMing, request.SceneId, request.Difficulty, praminfos[0]);
+                        TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
                         break;
                     case (int)SceneTypeEnum.PetTianTi:
                         ////动态创建副本
                         long enemyId = long.Parse(request.paramInfo);
                         fubenid = IdGenerater.Instance.GenerateId();
                         fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
-                        // fubnescene = SceneFactory.Create(Game.Scene, fubenid, fubenInstanceId, unit.DomainZone(), "Fuben" + fubenid.ToString(), SceneType.Fuben);
-                        // fubnescene.AddComponent<PetTianTiComponent>().EnemyId = enemyId;
-                        // fubnescene.GetComponent<MapComponent>().SetMapInfo((int)SceneTypeEnum.PetTianTi, request.SceneId, 0);
-                        // TransferHelper.BeforeTransfer(unit);
-                        // await TransferHelper.Transfer(unit, fubenInstanceId, (int)SceneTypeEnum.PetTianTi, request.SceneId, 0, "0");
-                        // TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
+                        fubnescene = GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,  "Fuben" + fubenid.ToString());
+                        fubnescene.AddComponent<PetTianTiComponent>().EnemyId = enemyId;
+                        fubnescene.GetComponent<MapComponent>().SetMapInfo((int)SceneTypeEnum.PetTianTi, request.SceneId, 0);
+                        TransferHelper.BeforeTransfer(unit);
+                        await TransferHelper.Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.PetTianTi, request.SceneId, 0, "0");
+                        TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
                         break;
                     case (int)SceneTypeEnum.LocalDungeon:
                         if (request.Difficulty < 1 || request.Difficulty > 3)
@@ -337,63 +337,63 @@ namespace ET.Server
                         break;
                     case SceneTypeEnum.BaoZang:
                     case SceneTypeEnum.MiJing:
-                        // F2M_YeWaiSceneIdResponse f2M_YeWaiSceneIdResponse = (F2M_YeWaiSceneIdResponse)await ActorMessageSenderComponent.Instance.Call(
-                        // DBHelper.GetFubenCenterId(unit.DomainZone()), new M2F_YeWaiSceneIdRequest() { SceneId = request.SceneId });
-                        // if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
-                        // {
-                        //     return ErrorCode.ERR_MapLimit;
-                        // }
-                        //
-                        // SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
-                        // int curPlayerNum = int.Parse(f2M_YeWaiSceneIdResponse.Message); // UnitHelper.GetUnitList(unit.DomainScene(), UnitType.Player).Count;
-                        // if (sceneConfig.PlayerLimit > 0 && sceneConfig.PlayerLimit <= curPlayerNum)
-                        // {
-                        //     return ErrorCode.ERR_MapLimit;
-                        // }
-                        // TransferHelper.BeforeTransfer(unit);
-                        // await TransferHelper.Transfer(unit, f2M_YeWaiSceneIdResponse.FubenInstanceId, sceneConfig.MapType, request.SceneId, 0, "0");
+                        F2M_YeWaiSceneIdResponse f2M_YeWaiSceneIdResponse = (F2M_YeWaiSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                        UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_YeWaiSceneIdRequest() { SceneId = request.SceneId });
+                        if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
+                        {
+                            return ErrorCode.ERR_MapLimit;
+                        }
+                        
+                        SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
+                        int curPlayerNum = int.Parse(f2M_YeWaiSceneIdResponse.Message); // UnitHelper.GetUnitList(unit.DomainScene(), UnitType.Player).Count;
+                        if (sceneConfig.PlayerLimit > 0 && sceneConfig.PlayerLimit <= curPlayerNum)
+                        {
+                            return ErrorCode.ERR_MapLimit;
+                        }
+                        TransferHelper.BeforeTransfer(unit);
+                        await TransferHelper.Transfer(unit, f2M_YeWaiSceneIdResponse.FubenActorId, sceneConfig.MapType, request.SceneId, 0, "0");
                         break;
                     case SceneTypeEnum.RunRace:
                     case SceneTypeEnum.Demon:
-                        // f2M_YeWaiSceneIdResponse = (F2M_YeWaiSceneIdResponse)await ActorMessageSenderComponent.Instance.Call(
-                        // DBHelper.GetFubenCenterId(unit.DomainZone()), new M2F_YeWaiSceneIdRequest() { SceneId = request.SceneId,UnitId = unit.Id  });
-                        // if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
-                        // {
-                        //     return ErrorCode.ERR_AlreadyFinish;
-                        // }
-                        // sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
-                        // TransferHelper.BeforeTransfer(unit);
-                        // await TransferHelper.Transfer(unit, f2M_YeWaiSceneIdResponse.FubenInstanceId, sceneConfig.MapType, request.SceneId, 0, "0");
+                        f2M_YeWaiSceneIdResponse = (F2M_YeWaiSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                        UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_YeWaiSceneIdRequest() { SceneId = request.SceneId,UnitId = unit.Id  });
+                        if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
+                        {
+                            return ErrorCode.ERR_AlreadyFinish;
+                        }
+                        sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
+                        TransferHelper.BeforeTransfer(unit);
+                        await TransferHelper.Transfer(unit, f2M_YeWaiSceneIdResponse.FubenActorId, sceneConfig.MapType, request.SceneId, 0, "0");
                         break;
                     case SceneTypeEnum.Solo:
-                        // long soloServerId = DBHelper.GetSoloServerId(unit.DomainZone());
-                        // S2M_SoloEnterResponse d2GGetUnit = (S2M_SoloEnterResponse)await ActorMessageSenderComponent.Instance.Call(soloServerId, new M2S_SoloEnterRequest()
-                        // {
-                        //     FubenId = long.Parse(request.paramInfo)
-                        // });
-                        //
-                        // if (d2GGetUnit.Error != ErrorCode.ERR_Success)
-                        // {
-                        //     return d2GGetUnit.Error;
-                        // }
-                        // if (d2GGetUnit.FubenInstanceId == 0)
-                        // {
-                        //     return ErrorCode.ERR_ModifyData;
-                        // }
-                        // if ( !FunctionHelp.IsInTime(1045))
-                        // {
-                        //     return ErrorCode.ERR_AlreadyFinish;
-                        // }
-                        // oldscene = unit.DomainScene();
-                        // mapComponent = oldscene.GetComponent<MapComponent>();
-                        // sceneTypeEnum = mapComponent.SceneTypeEnum;
-                        // TransferHelper.BeforeTransfer(unit);
-                        // await TransferHelper.Transfer(unit, d2GGetUnit.FubenInstanceId, SceneTypeEnum.Solo, request.SceneId, 0, "0");
-                        // if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
-                        // {
-                        //     TransferHelper.NoticeFubenCenter(oldscene, 2).Coroutine();
-                        //     oldscene.Dispose();
-                        // }
+                        ActorId soloServerId = UnitCacheHelper.GetSoloServerId(unit.Zone());
+                        S2M_SoloEnterResponse d2GGetUnit = (S2M_SoloEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(soloServerId, new M2S_SoloEnterRequest()
+                        {
+                            FubenId = long.Parse(request.paramInfo)
+                        });
+                        
+                        if (d2GGetUnit.Error != ErrorCode.ERR_Success)
+                        {
+                            return d2GGetUnit.Error;
+                        }
+                        if (d2GGetUnit.FubenInstanceId == 0)
+                        {
+                            return ErrorCode.ERR_ModifyData;
+                        }
+                        if ( !FunctionHelp.IsInTime(1045))
+                        {
+                            return ErrorCode.ERR_AlreadyFinish;
+                        }
+                        oldscene = unit.Scene();
+                        mapComponent = oldscene.GetComponent<MapComponent>();
+                        sceneTypeEnum = mapComponent.SceneType;
+                        TransferHelper.BeforeTransfer(unit);
+                        await TransferHelper.Transfer(unit, d2GGetUnit.FubenActorId, SceneTypeEnum.Solo, request.SceneId, 0, "0");
+                        if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
+                        {
+                            TransferHelper.NoticeFubenCenter(oldscene, 2).Coroutine();
+                            oldscene.Dispose();
+                        }
                         break;
                     case SceneTypeEnum.UnionRace:
                         unionid = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.UnionId_0);
@@ -405,76 +405,74 @@ namespace ET.Server
                         {
                             return ErrorCode.ERR_AlreadyFinish;
                         }
-                        // mapInstanceId = DBHelper.GetUnionServerId(unit.DomainZone());
-                        // responseUnionEnter = (U2M_UnionEnterResponse)await ActorMessageSenderComponent.Instance.Call(
-                        // mapInstanceId, new M2U_UnionEnterRequest() { OperateType = 1, UnionId = unionid, UnitId = unit.Id, SceneId = request.SceneId });
-                        // if (responseUnionEnter.FubenInstanceId == 0)
-                        // {
-                        //     return ErrorCode.ERR_AlreadyFinish;
-                        // }
-                        // TransferHelper.BeforeTransfer(unit);
-                        // await TransferHelper.Transfer(unit, responseUnionEnter.FubenInstanceId, SceneTypeEnum.UnionRace, request.SceneId, 0, "0");
+                        mapInstanceId = UnitCacheHelper.GetUnionServerId(unit.Zone());
+                        responseUnionEnter = (U2M_UnionEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                        mapInstanceId, new M2U_UnionEnterRequest() { OperateType = 1, UnionId = unionid, UnitId = unit.Id, SceneId = request.SceneId });
+                        if (responseUnionEnter.FubenInstanceId == 0)
+                        {
+                            return ErrorCode.ERR_AlreadyFinish;
+                        }
+                        TransferHelper.BeforeTransfer(unit);
+                        await TransferHelper.Transfer(unit, responseUnionEnter.FubenActorId, SceneTypeEnum.UnionRace, request.SceneId, 0, "0");
                         break;
                     case SceneTypeEnum.Happy:
-                        // mapInstanceId = DBHelper.GetHappyServerId(unit.DomainZone());
-                        // H2M_HapplyEnterResponse happyEnter = (H2M_HapplyEnterResponse)await ActorMessageSenderComponent.Instance.Call(
-                        // mapInstanceId, new M2H_HapplyEnterRequest() { UnitId = unit.Id, SceneId = request.SceneId });
-                        // if (happyEnter.FubenInstanceId == 0)
-                        // {
-                        //     return ErrorCode.ERR_AlreadyFinish;
-                        // }
+                        mapInstanceId = UnitCacheHelper.GetHappyServerId(unit.Zone());
+                        H2M_HapplyEnterResponse happyEnter = (H2M_HapplyEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                        mapInstanceId, new M2H_HapplyEnterRequest() { UnitId = unit.Id, SceneId = request.SceneId }); if (happyEnter.FubenInstanceId == 0)
+                        {
+                             return ErrorCode.ERR_AlreadyFinish;
+                         }
                         TransferHelper.BeforeTransfer(unit);
-                        //await TransferHelper.Transfer(unit, happyEnter.FubenInstanceId, (int)SceneTypeEnum.Happy, request.SceneId, FubenDifficulty.Normal, happyEnter.Position.ToString());
+                        await TransferHelper.Transfer(unit, happyEnter.FubenActorId, (int)SceneTypeEnum.Happy, request.SceneId, FubenDifficulty.Normal, happyEnter.Position.ToString());
                         break;
                     case SceneTypeEnum.Battle:
-                        // mapInstanceId = DBHelper.GetBattleServerId(unit.DomainZone());
-                        // B2M_BattleEnterResponse battleEnter = (B2M_BattleEnterResponse)await ActorMessageSenderComponent.Instance.Call(
-                        // mapInstanceId, new M2B_BattleEnterRequest() { UserID = unit.Id, SceneId = request.SceneId });
-                        // if (battleEnter.FubenInstanceId == 0)
-                        // {
-                        //     return ErrorCode.ERR_AlreadyFinish;
-                        // }
-
+                        mapInstanceId = UnitCacheHelper.GetBattleServerId(unit.Zone());
+                        B2M_BattleEnterResponse battleEnter = (B2M_BattleEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(mapInstanceId, new M2B_BattleEnterRequest() { UserID = unit.Id, SceneId = request.SceneId });
+                         if (battleEnter.FubenInstanceId == 0)
+                         {
+                             return ErrorCode.ERR_AlreadyFinish;
+                         }
+                        
                         TransferHelper.BeforeTransfer(unit);
-                        //await TransferHelper.Transfer(unit, battleEnter.FubenInstanceId, (int)SceneTypeEnum.Battle, request.SceneId, FubenDifficulty.Normal, battleEnter.Camp.ToString());
+                        await TransferHelper.Transfer(unit, battleEnter.FubenActorId, (int)SceneTypeEnum.Battle, request.SceneId, FubenDifficulty.Normal, battleEnter.Camp.ToString());
                         break;
                     case SceneTypeEnum.Arena:
-                        // userInfoComponent = unit.GetComponent<UserInfoComponent>();
-                        // sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
-                        // if (userInfoComponent.UserInfo.Lv < sceneConfig.EnterLv)
-                        // {
-                        //     return ErrorCode.ERR_LevelIsNot;
-                        // }
-                        //
-                        // mapInstanceId = DBHelper.GetArenaServerId(unit.DomainZone());
-                        // Arena2M_ArenaEnterResponse areneEnter = (Arena2M_ArenaEnterResponse)await ActorMessageSenderComponent.Instance.Call(
-                        // mapInstanceId, new M2Arena_ArenaEnterRequest() { UserID = unit.Id, SceneId = request.SceneId });
-                        // if (areneEnter.Error != ErrorCode.ERR_Success || areneEnter.FubenInstanceId == 0)
-                        // {
-                        //     return ErrorCode.ERR_AlreadyFinish;
-                        // }
-                        // TransferHelper.BeforeTransfer(unit);
-                        // await TransferHelper.Transfer(unit, areneEnter.FubenInstanceId, (int)SceneTypeEnum.Arena, request.SceneId, FubenDifficulty.Normal, "0");
+                        userInfoComponent = unit.GetComponent<UserInfoComponentS>();
+                        sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
+                        if (userInfoComponent.UserInfo.Lv < sceneConfig.EnterLv)
+                        {
+                            return ErrorCode.ERR_LevelIsNot;
+                        }
+                        
+                        mapInstanceId = UnitCacheHelper.GetArenaServerId(unit.Zone());
+                        Arena2M_ArenaEnterResponse areneEnter = (Arena2M_ArenaEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                        mapInstanceId, new M2Arena_ArenaEnterRequest() { UserID = unit.Id, SceneId = request.SceneId });
+                        if (areneEnter.Error != ErrorCode.ERR_Success || areneEnter.FubenInstanceId == 0)
+                        {
+                            return ErrorCode.ERR_AlreadyFinish;
+                        }
+                        TransferHelper.BeforeTransfer(unit);
+                        await TransferHelper.Transfer(unit, areneEnter.FubenActorId, (int)SceneTypeEnum.Arena, request.SceneId, FubenDifficulty.Normal, "0");
                         break;
                     case (int)SceneTypeEnum.TeamDungeon:
-                        // oldscene = unit.DomainScene();
-                        // mapComponent = oldscene.GetComponent<MapComponent>();
-                        // sceneTypeEnum = mapComponent.SceneTypeEnum;
-                        // mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(unit.DomainZone(), Enum.GetName(SceneType.Team)).InstanceId;
-                        // //[创建副本Scene]
-                        // T2M_TeamDungeonEnterResponse createUnit = (T2M_TeamDungeonEnterResponse)await ActorMessageSenderComponent.Instance.Call(
-                        // mapInstanceId, new M2T_TeamDungeonEnterRequest() { UserID = unit.GetComponent<UserInfoComponent>().UserInfo.UserId });
-                        // if (createUnit.Error != ErrorCode.ERR_Success)
-                        // {
-                        //     return ErrorCode.ERR_TransferFailError;
-                        // }
-                        // TransferHelper.BeforeTransfer(unit);
-                        // await TransferHelper.Transfer(unit, createUnit.FubenInstanceId, (int)SceneTypeEnum.TeamDungeon, createUnit.FubenId, createUnit.FubenType, "0");
-                        // if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
-                        // {
-                        //     TransferHelper.NoticeFubenCenter(oldscene, 2).Coroutine();
-                        //     oldscene.Dispose();
-                        // }
+                        oldscene = unit.Scene();
+                        mapComponent = oldscene.GetComponent<MapComponent>();
+                        sceneTypeEnum = mapComponent.SceneType;
+                        mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(unit.Zone(), "Team").ActorId;
+                        //[创建副本Scene]
+                        T2M_TeamDungeonEnterResponse createUnit = (T2M_TeamDungeonEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                        mapInstanceId, new M2T_TeamDungeonEnterRequest() { UserID = unit.GetComponent<UserInfoComponentS>().UserInfo.UserId });
+                        if (createUnit.Error != ErrorCode.ERR_Success)
+                        {
+                            return ErrorCode.ERR_TransferFailError;
+                        }
+                        TransferHelper.BeforeTransfer(unit);
+                        await TransferHelper.Transfer(unit, createUnit.FubenInstanceId, (int)SceneTypeEnum.TeamDungeon, createUnit.FubenId, createUnit.FubenType, "0");
+                        if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
+                        {
+                            TransferHelper.NoticeFubenCenter(oldscene, 2).Coroutine();
+                            oldscene.Dispose();
+                        }
                         break;
                     default:
                         break;
