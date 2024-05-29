@@ -6,7 +6,7 @@ namespace ET.Server
 
     [EntitySystemOf(typeof(HeroDataComponentS))]
     [FriendOf(typeof(HeroDataComponentS))]
-    public static partial class HeroDataComponentServerSystem
+    public static partial class HeroDataComponentSSystem
     {
         [EntitySystem]
         private static void Awake(this ET.Server.HeroDataComponentS self)
@@ -777,8 +777,8 @@ namespace ET.Server
 
              unit.GetComponent<AIComponent>()?.Stop();
              unit.GetComponent<SkillPassiveComponent>()?.Stop();
-             //unit.GetComponent<SkillManagerComponent>()?.OnFinish(false);
-             //unit.GetComponent<BuffManagerComponent>()?.OnDead(attack);
+             unit.GetComponent<SkillManagerComponentS>()?.OnFinish(false);
+             unit.GetComponent<BuffManagerComponentS>()?.OnDead(attack);
              NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
              if (unit.Type == UnitType.Player)
              {
@@ -802,7 +802,7 @@ namespace ET.Server
                  if (nearest == null)
                  {
                      attack.GetComponent<AIComponent>().ChangeTarget(0);
-                     //ttack.GetComponent<SkillManagerComponent>().OnFinish(true);
+                     attack.GetComponent<SkillManagerComponentS>().OnFinish(true);
                  }
                  
                  List<Unit> units = FubenHelp.GetUnitList(unit.Root(), UnitType.Monster);
