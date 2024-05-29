@@ -10,7 +10,6 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this Scroll_Item_MysteryItem self)
         {
-            self.E_ButtonBuyButton.AddListenerAsync(self.OnButtonBuy);
         }
 
         [EntitySystem]
@@ -58,6 +57,8 @@ namespace ET.Client
 
         public static void OnUpdateUI(this Scroll_Item_MysteryItem self, MysteryItemInfo mysteryItemInfo, int npcId)
         {
+            self.E_ButtonBuyButton.AddListenerAsync(self.OnButtonBuy);
+
             self.NpcId = npcId;
 
             MysteryConfig mysteryConfig = MysteryConfigCategory.Instance.Get(mysteryItemInfo.MysteryId);
