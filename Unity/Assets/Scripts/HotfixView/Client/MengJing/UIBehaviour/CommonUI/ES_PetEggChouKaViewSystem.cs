@@ -48,7 +48,7 @@ namespace ET.Client
 
         public static void OnPetEggLucklyExplainBtn(this ES_PetEggChouKa self)
         {
-            // UIHelper.Create(self.ZoneScene(), UIType.UIPetEggLucklyExplain).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetEggLucklyExplain).Coroutine();
         }
 
         public static void OnBtn_ChouKaNumReward(this ES_PetEggChouKa self)
