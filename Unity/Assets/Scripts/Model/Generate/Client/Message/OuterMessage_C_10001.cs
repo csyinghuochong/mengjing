@@ -25922,6 +25922,213 @@ namespace ET
 
 	}
 
+//激活称号
+	[ResponseType(nameof(M2C_TitleUseResponse))]
+	[Message(OuterMessage.C2M_TitleUseRequest)]
+	[MemoryPackable]
+	public partial class C2M_TitleUseRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TitleUseRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TitleUseRequest), isFromPool) as C2M_TitleUseRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int TitleId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int OperateType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.TitleId = default;
+			this.OperateType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TitleUseResponse)]
+	[MemoryPackable]
+	public partial class M2C_TitleUseResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TitleUseResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TitleUseResponse), isFromPool) as M2C_TitleUseResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TitleUpdateResult)]
+	[MemoryPackable]
+	public partial class M2C_TitleUpdateResult: MessageObject, IMessage
+	{
+		public static M2C_TitleUpdateResult Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TitleUpdateResult), isFromPool) as M2C_TitleUpdateResult; 
+		}
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(5)]
+		public List<KeyValuePairInt> TitleList { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.ActorId = default;
+			this.UnitId = default;
+			this.TitleList.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_TowerFightBeginResponse))]
+//挑战之地开始战斗
+	[Message(OuterMessage.C2M_TowerFightBeginRequest)]
+	[MemoryPackable]
+	public partial class C2M_TowerFightBeginRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TowerFightBeginRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TowerFightBeginRequest), isFromPool) as C2M_TowerFightBeginRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TowerFightBeginResponse)]
+	[MemoryPackable]
+	public partial class M2C_TowerFightBeginResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TowerFightBeginResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TowerFightBeginResponse), isFromPool) as M2C_TowerFightBeginResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_TowerExitResponse))]
+	[Message(OuterMessage.C2M_TowerExitRequest)]
+	[MemoryPackable]
+	public partial class C2M_TowerExitRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TowerExitRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TowerExitRequest), isFromPool) as C2M_TowerExitRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TowerExitResponse)]
+	[MemoryPackable]
+	public partial class M2C_TowerExitResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TowerExitResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TowerExitResponse), isFromPool) as M2C_TowerExitResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -26688,5 +26895,12 @@ namespace ET
 		 public const ushort M2C_ShoujiRewardResponse = 10763;
 		 public const ushort C2M_ShouJiTreasureRequest = 10764;
 		 public const ushort M2C_ShouJiTreasureResponse = 10765;
+		 public const ushort C2M_TitleUseRequest = 10766;
+		 public const ushort M2C_TitleUseResponse = 10767;
+		 public const ushort M2C_TitleUpdateResult = 10768;
+		 public const ushort C2M_TowerFightBeginRequest = 10769;
+		 public const ushort M2C_TowerFightBeginResponse = 10770;
+		 public const ushort C2M_TowerExitRequest = 10771;
+		 public const ushort M2C_TowerExitResponse = 10772;
 	}
 }

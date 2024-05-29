@@ -6627,7 +6627,7 @@ message M2C_ShoujiRewardResponse // ILocationResponse
 message C2M_ShouJiTreasureRequest  // ILocationRequest
 {
 	int32 RpcId = 90;
-	int ShouJiId = 1;
+	int32 ShouJiId = 1;
 	repeated int64 ItemIds = 2;
 }
 
@@ -6637,4 +6637,56 @@ message M2C_ShouJiTreasureResponse // ILocationResponse
 	string Message = 91;
 	int32 Error = 92;
 	int32 ActiveNum = 1;
+}
+
+//激活称号
+//ResponseType M2C_TitleUseResponse
+message C2M_TitleUseRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 TitleId = 1;
+	int32 OperateType = 2; //
+}
+
+message M2C_TitleUseResponse    // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+message M2C_TitleUpdateResult // IMessage
+{
+	int64 ActorId = 93;
+	int64 UnitId = 1;
+	repeated KeyValuePairInt TitleList = 6;
+}
+
+//ResponseType M2C_TowerFightBeginResponse
+//挑战之地开始战斗
+message C2M_TowerFightBeginRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_TowerFightBeginResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_TowerExitResponse
+message C2M_TowerExitRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_TowerExitResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
 }
