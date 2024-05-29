@@ -12,13 +12,13 @@ namespace ET.Server
 
         public int CellIndex { get; set; } //喜从天降格子位
 
-        public long OwnerId;
-        public long ProtectTime;
+        public long OwnerId{ get; set; }
+        public long ProtectTime{ get; set; }
 
         public long BeKillId{ get; set; }
         
-        public int IfDamgeDrop;
-        public List<long> BeAttackPlayerList = new List<long>();
+        public int IfDamgeDrop{ get; set; }
+        public List<long> BeAttackPlayerList{ get; set; } = new List<long>();
         
         public DropInfo DropInfo;
     }

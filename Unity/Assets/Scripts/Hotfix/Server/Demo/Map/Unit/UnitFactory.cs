@@ -776,7 +776,7 @@ namespace ET.Server
                     float dropX = bekill.Position.x + RandomHelper.RandomNumberFloat(-1f, 1f);
                     float dropY = bekill.Position.y;
                     float dropZ = bekill.Position.z + RandomHelper.RandomNumberFloat(-1f, 1f);
-                    dropitem.Position = new UnityEngine.Vector3(dropX, dropY, dropZ);
+                    dropitem.Position = new float3(dropX, dropY, dropZ);
                     dropitem.AddComponent<AOIEntity, int, float3>(9 * 1000, dropitem.Position);
                 }
 

@@ -18,6 +18,30 @@ namespace ET
             return serverTime >= ConfigData.SeasonOpenTime && serverTime <= ConfigData.SeasonCloseTime;
         }
 
+        /// <summary>
+        /// 第几赛季
+        /// </summary>
+        /// <param name="userLv"></param>
+        /// <returns></returns>
+        public static KeyValuePairLong GetOpenSeason(int userLv)
+        {
+            if (userLv < 55)
+            {
+                return null;
+            }
+            long serverTime = TimeHelper.ServerNow();
+            //return SeasonOpenTime > 0 && serverTime >= SeasonOpenTime && serverTime <= SeasonCloseTime;
+            for (int i = 0; i < ConfigData.SeasonTimeList.Count; i++)
+            {
+                if (serverTime > ConfigData. SeasonTimeList[i].Value && serverTime <= ConfigData.SeasonTimeList[i].Value2)
+                {
+                    return ConfigData.SeasonTimeList[i];
+                }
+            }
+
+            return null;
+        }
+        
         public static int GetFubenId(int lv)
         {
             List<int> canEnterIds = new List<int>();

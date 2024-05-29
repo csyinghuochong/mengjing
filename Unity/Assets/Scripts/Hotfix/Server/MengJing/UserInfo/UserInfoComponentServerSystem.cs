@@ -19,8 +19,8 @@ namespace ET.Server
 
         public static void OnInit(this UserInfoComponentS self, string account, long id, long accountId, CreateRoleInfo createRoleInfo)
         {
-             self.Account = account;
-             self.UserInfo = new UserInfo();
+            self.Account = account;
+            self.UserInfo = new UserInfo();
             UserInfo userInfo = self.UserInfo;
             userInfo.Sp = 1;
             userInfo.UserId = id;
@@ -30,7 +30,7 @@ namespace ET.Server
             userInfo.AccInfoID = accountId;
             userInfo.Name = "";
             userInfo.ServerMailIdCur = -1;
-            userInfo.PiLao = int.Parse(GlobalValueConfigCategory.Instance.Get(10).Value);        //初始化疲劳
+            userInfo.PiLao = int.Parse(GlobalValueConfigCategory.Instance.Get(10).Value); //初始化疲劳
             userInfo.Vitality = int.Parse(GlobalValueConfigCategory.Instance.Get(10).Value);
             userInfo.MakeList.AddRange(ComHelp.StringArrToIntList(GlobalValueConfigCategory.Instance.Get(18).Value.Split(';')));
             userInfo.CreateTime = TimeHelper.ServerNow();
@@ -40,8 +40,8 @@ namespace ET.Server
             {
                 int robotId = createRoleInfo.RobotId;
                 RobotConfig robotConfig = RobotConfigCategory.Instance.Get(robotId);
-                userInfo.Lv = robotConfig.Behaviour == 1 ?  RandomHelper.RandomNumber(10, 19) : robotConfig.Level;
-                userInfo.Occ = robotConfig.Behaviour == 1 ?  RandomHelper.RandomNumber(1, 3) : robotConfig.Occ;
+                userInfo.Lv = robotConfig.Behaviour == 1? RandomHelper.RandomNumber(10, 19) : robotConfig.Level;
+                userInfo.Occ = robotConfig.Behaviour == 1? RandomHelper.RandomNumber(1, 3) : robotConfig.Occ;
                 userInfo.Gold = 100000;
                 userInfo.RobotId = robotId;
                 //userInfo.OccTwo = robotConfig.OccTwo;
@@ -147,7 +147,7 @@ namespace ET.Server
             m2C_BroadcastRoleData.UpdateTypeValue = value;
             MapMessageHelper.Broadcast(unit, m2C_BroadcastRoleData);
         }
-        
+
         public static void UpdateRoleData(this UserInfoComponentS self, int Type, string value, bool notice = true)
         {
             Unit unit = self.GetParent<Unit>();
@@ -342,7 +342,7 @@ namespace ET.Server
                 MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_RoleDataUpdate1);
             }
         }
-        
+
         public static int GetDayItemUse(this UserInfoComponentS self, int mysteryId)
         {
             for (int i = 0; i < self.UserInfo.DayItemUse.Count; i++)
@@ -352,6 +352,7 @@ namespace ET.Server
                     return (int)self.UserInfo.DayItemUse[i].Value;
                 }
             }
+
             return 0;
         }
 
@@ -382,6 +383,7 @@ namespace ET.Server
                 if (self.UserInfo.GameSettingInfos[i].KeyId == (int)gameSettingEnum)
                     return self.UserInfo.GameSettingInfos[i].Value;
             }
+
             switch (gameSettingEnum)
             {
                 case GameSettingEnum.Music:
@@ -398,22 +400,22 @@ namespace ET.Server
             }
         }
 
-        
-        public static void  UpdateRankInfo(this UserInfoComponentS self)
+        public static void UpdateRankInfo(this UserInfoComponentS self)
         {
             Unit unit = self.GetParent<Unit>();
             if (unit.IsRobot())
             {
                 return;
             }
+
             self.UpdateRankTime = TimeHelper.ServerNow();
         }
-        
+
         public static void SetUserLv(this UserInfoComponentS self, int lv)
         {
             self.UserInfo.Lv = lv;
         }
-        
+
         /// <summary>
         /// 0 6 12 20点各刷新30点体力
         /// </summary>
@@ -421,16 +423,17 @@ namespace ET.Server
         /// <param name="notice"></param>
         public static void OnHourUpdate(this UserInfoComponentS self, int hour, bool notice)
         {
-            if (hour == 0 )
+            if (hour == 0)
             {
                 self.RecoverPiLao(30 + self.GetAddPiLao(self.UserInfo.MakeList.Count), notice);
             }
+
             if (hour == 12)
             {
                 self.RecoverPiLao(30, notice);
             }
 
-            if (hour == 6 ||  hour == 20)
+            if (hour == 6 || hour == 20)
             {
                 self.RecoverPiLao(50, notice);
             }
@@ -439,12 +442,12 @@ namespace ET.Server
             LogHelper.CheckZuoBi(self.GetParent<Unit>());
             //LogHelper.CheckBlackRoom(self.GetParent<Unit>());
         }
-        
+
         public static void OnZeroClockUpdate(this UserInfoComponentS self, bool notice)
         {
             Unit unit = self.GetParent<Unit>();
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-            int skillNumber = 1 + numericComponent.GetAsInt(NumericType.MakeType_2) > 0 ? 1 : 0;
+            int skillNumber = 1 + numericComponent.GetAsInt(NumericType.MakeType_2) > 0? 1 : 0;
             int updatevalue = unit.GetMaxHuoLi(skillNumber) - self.UserInfo.Vitality;
             self.UpdateRoleData(UserDataType.Vitality, updatevalue.ToString(), notice);
             //updatevalue = ComHelp.GetMaxBaoShiDu() - self.UserInfo.BaoShiDu;
@@ -455,7 +458,7 @@ namespace ET.Server
             self.TodayOnLine = 0;
             self.ShouLieKill = 0;
         }
-        
+
         public static void ClearDayData(this UserInfoComponentS self)
         {
             self.UserInfo.DayFubenTimes.Clear();
@@ -464,11 +467,11 @@ namespace ET.Server
             self.UserInfo.DayItemUse.Clear();
             self.UserInfo.DayMonsters.Clear();
             self.UserInfo.DayJingLing.Clear();
-            self.UserInfo.PetExploreRewardIds.Clear();  
+            self.UserInfo.PetExploreRewardIds.Clear();
             self.UserInfo.PetHeXinExploreRewardIds.Clear();
             self.UserInfo.ItemXiLianNumRewardIds.Clear();
         }
-        
+
         /// <summary>
         /// 体力
         /// </summary>
@@ -490,18 +493,17 @@ namespace ET.Server
             self.UpdateRoleData(UserDataType.PiLao, recoverPiLao.ToString(), notice);
             self.LastLoginTime = TimeHelper.ServerNow();
         }
-        
-        
+
         public static int GetMaxPiLao(this Unit self)
         {
-            return int.Parse(GlobalValueConfigCategory.Instance.Get(self.IsYueKaStates() ? 26 : 10).Value);
+            return int.Parse(GlobalValueConfigCategory.Instance.Get(self.IsYueKaStates()? 26 : 10).Value);
         }
-        
+
         public static bool IsYueKaStates(this Unit self)
-        { 
+        {
             return self.GetComponent<NumericComponentS>().GetAsInt(NumericType.YueKaRemainTimes) > 0;
         }
-        
+
         public static long GetPiLao(this UserInfoComponentS self)
         {
             return self.UserInfo.PiLao;
@@ -521,17 +523,17 @@ namespace ET.Server
         {
             return self.UserInfo.UnionName;
         }
-        
+
         public static int GetVitality(this UserInfoComponentS self)
         {
             return self.UserInfo.Vitality;
         }
-        
+
         public static long GetJiaYuanFund(this UserInfoComponentS self)
         {
             return self.UserInfo.JiaYuanFund;
         }
-        
+
         public static int GetCombat(this UserInfoComponentS self)
         {
             return self.UserInfo.Combat;
@@ -541,7 +543,7 @@ namespace ET.Server
         {
             return self.UserInfo.Occ;
         }
-        
+
         public static void ClearFubenTimes(this UserInfoComponentS self, int sceneId)
         {
             for (int i = 0; i < self.UserInfo.DayFubenTimes.Count; i++)
@@ -553,7 +555,7 @@ namespace ET.Server
                 }
             }
         }
-        
+
         public static int GetRobotId(this UserInfoComponentS self)
         {
             return self.UserInfo.RobotId;
@@ -569,7 +571,7 @@ namespace ET.Server
             return self.UserInfo.OccTwo;
         }
 
-        public static void SetOccTwo(this UserInfoComponentS self, int  occTwo)
+        public static void SetOccTwo(this UserInfoComponentS self, int occTwo)
         {
             self.UserInfo.OccTwo = 0;
         }
@@ -586,13 +588,14 @@ namespace ET.Server
                 self.UserInfo.MonsterRevives[i].Value = "0";
             }
         }
-        
+
         public static void OnHorseActive(this UserInfoComponentS self, int horseId, bool active)
         {
             if (active && !self.UserInfo.HorseIds.Contains(horseId))
             {
                 self.UserInfo.HorseIds.Add(horseId);
             }
+
             if (!active && self.UserInfo.HorseIds.Contains(horseId))
             {
                 self.UserInfo.HorseIds.Remove(horseId);
@@ -607,7 +610,6 @@ namespace ET.Server
         public static long GetReviveTime(this UserInfoComponentS self, int monsterId)
         {
             return 0;
-
         }
 
         public static void OnDayItemUse(this UserInfoComponentS self, int itemId)
@@ -620,9 +622,10 @@ namespace ET.Server
                     return;
                 }
             }
+
             self.UserInfo.DayItemUse.Add(new KeyValuePairInt() { KeyId = itemId, Value = 1 });
         }
-        
+
         public static long GetSceneFubenTimes(this UserInfoComponentS self, int sceneId)
         {
             for (int i = 0; i < self.UserInfo.DayFubenTimes.Count; i++)
@@ -632,9 +635,10 @@ namespace ET.Server
                     return self.UserInfo.DayFubenTimes[i].Value;
                 }
             }
+
             return 0;
         }
-        
+
         public static void AddSceneFubenTimes(this UserInfoComponentS self, int sceneId)
         {
             for (int i = 0; i < self.UserInfo.DayFubenTimes.Count; i++)
@@ -645,9 +649,10 @@ namespace ET.Server
                     return;
                 }
             }
+
             self.UserInfo.DayFubenTimes.Add(new KeyValuePairInt() { KeyId = sceneId, Value = 1 });
         }
-        
+
         public static int OnGetFirstWinSelf(this UserInfoComponentS self, int firstwinid, int difficulty)
         {
             KeyValuePair keyValuePair1 = null;
@@ -657,17 +662,21 @@ namespace ET.Server
                 {
                     continue;
                 }
+
                 keyValuePair1 = self.UserInfo.FirstWinSelf[i];
                 break;
             }
+
             if (keyValuePair1 == null)
             {
                 return ErrorCode.ERR_NetWorkError;
             }
+
             if (keyValuePair1.Value2.Contains(difficulty.ToString()))
             {
                 return ErrorCode.ERR_AlreadyReceived;
             }
+
             if (string.IsNullOrEmpty(keyValuePair1.Value2))
             {
                 keyValuePair1.Value2 = difficulty.ToString();
@@ -676,9 +685,10 @@ namespace ET.Server
             {
                 keyValuePair1.Value2 += $"_{difficulty}";
             }
+
             return ErrorCode.ERR_Success;
         }
-        
+
         public static int GetMonsterKillNumber(this UserInfoComponentS self, int monsterId)
         {
             for (int i = 0; i < self.UserInfo.MonsterRevives.Count; i++)
@@ -688,6 +698,7 @@ namespace ET.Server
                 {
                     continue;
                 }
+
                 if (!string.IsNullOrEmpty(keyValuePair.Value2))
                 {
                     return int.Parse(keyValuePair.Value2);
@@ -697,12 +708,13 @@ namespace ET.Server
                     return 1;
                 }
             }
+
             return 0;
         }
-        
+
         public static void OnAddRevive(this UserInfoComponentS self, int monsterId, long reviveTime)
         {
-            bool have = false;  
+            bool have = false;
             for (int i = 0; i < self.UserInfo.MonsterRevives.Count; i++)
             {
                 KeyValuePair keyValuePair = self.UserInfo.MonsterRevives[i];
@@ -710,16 +722,18 @@ namespace ET.Server
                 {
                     continue;
                 }
+
                 if (string.IsNullOrEmpty(keyValuePair.Value2))
                 {
                     keyValuePair.Value2 = "1";
                 }
 
                 keyValuePair.Value = reviveTime.ToString();
-                keyValuePair.Value2 = (int.Parse(keyValuePair.Value2) + 1).ToString();  
+                keyValuePair.Value2 = (int.Parse(keyValuePair.Value2) + 1).ToString();
                 have = true;
                 break;
             }
+
             if (!have)
             {
                 self.UserInfo.MonsterRevives.Add(new KeyValuePair() { KeyId = monsterId, Value = reviveTime.ToString(), Value2 = "1" });
@@ -736,6 +750,7 @@ namespace ET.Server
             {
                 difficulty = 1;
             }
+
             int firstwinid = FirstWinHelper.GetFirstWinID(boss.ConfigId, difficulty);
             if (firstwinid == 0)
             {
@@ -750,6 +765,7 @@ namespace ET.Server
                 {
                     continue;
                 }
+
                 //keyValuePair.Value  击杀难度
                 //keyValuePair.Value2 领取难度
                 if (keyValuePair.Value.Contains(difficulty.ToString()))
@@ -761,206 +777,364 @@ namespace ET.Server
                 have = true;
                 break;
             }
+
             if (!have)
             {
-                self.UserInfo.FirstWinSelf.Add( new KeyValuePair() {  KeyId = firstwinid, Value = difficulty.ToString(), Value2 = "" } );
+                self.UserInfo.FirstWinSelf.Add(new KeyValuePair() { KeyId = firstwinid, Value = difficulty.ToString(), Value2 = "" });
             }
 
             //M2C_FirstWinSelfUpdateMessage m2C_FirstWinSelfUpdateMessage = new M2C_FirstWinSelfUpdateMessage() { FirstWinInfos = self.UserInfo.FirstWinSelf  };
             //MessageHelper.SendToClient( self.GetParent<Unit>(), m2C_FirstWinSelfUpdateMessage);
         }
 
+        public static int GetRandomMonsterId(this UserInfoComponentS self)
+        {
+            List<KeyValuePairInt> dayMonster = self.UserInfo.DayMonsters;
+            List<DayMonsters> dayMonsterConfig = GlobalValueConfigCategory.Instance.DayMonsterList;
 
-         public static int GetRandomMonsterId(this UserInfoComponentS self)
-         {
-             List<KeyValuePairInt> dayMonster = self.UserInfo.DayMonsters;
-             List<DayMonsters> dayMonsterConfig = GlobalValueConfigCategory.Instance.DayMonsterList;
+            for (int i = 0; i < dayMonsterConfig.Count; i++)
+            {
+                if (RandomHelper.RandFloat01() > dayMonsterConfig[i].GaiLv)
+                {
+                    continue;
+                }
 
-             for (int i = 0; i < dayMonsterConfig.Count; i++)
-             {
-                 if (RandomHelper.RandFloat01() > dayMonsterConfig[i].GaiLv)
-                 {
-                     continue;
-                 }
+                KeyValuePairInt keyValuePairInt = null;
+                for (int d = 0; d < dayMonster.Count; d++)
+                {
+                    if (dayMonster[d].KeyId != dayMonsterConfig[i].MonsterId)
+                    {
+                        continue;
+                    }
 
-                 KeyValuePairInt keyValuePairInt = null;
-                 for (int d = 0; d < dayMonster.Count; d++)
-                 {
-                     if (dayMonster[d].KeyId != dayMonsterConfig[i].MonsterId)
-                     {
-                         continue;
-                     }
-                     keyValuePairInt = dayMonster[d];
-                 }
-                 if (keyValuePairInt == null)
-                 {
-                     keyValuePairInt = new KeyValuePairInt() { KeyId = dayMonsterConfig[i].MonsterId, Value = 0 };
-                     dayMonster.Add(keyValuePairInt);
-                 }
-                 if (keyValuePairInt.Value < dayMonsterConfig[i].TotalNumber)
-                 {
-                     keyValuePairInt.Value++;
-                     return dayMonsterConfig[i].MonsterId;
-                 }
-             }
+                    keyValuePairInt = dayMonster[d];
+                }
 
-             return 0;
-         }
+                if (keyValuePairInt == null)
+                {
+                    keyValuePairInt = new KeyValuePairInt() { KeyId = dayMonsterConfig[i].MonsterId, Value = 0 };
+                    dayMonster.Add(keyValuePairInt);
+                }
 
-         public static bool IsCheskOpen(this UserInfoComponentS self, int fubenId, int monsterId)
-         {
-             List<KeyValuePair> chestList = self.UserInfo.OpenChestList;
-             for (int i = 0; i < chestList.Count; i++)
-             {
-                 if (chestList[i].KeyId == fubenId)
-                 {
-                     return chestList[i].Value.Contains(monsterId.ToString());
-                 }
-             }
-             return false;
-         }
-         
-         public static void AddFubenTimes(this UserInfoComponentS self, int sceneId, int times)
-         {
-             for (int i = 0; i < self.UserInfo.DayFubenTimes.Count; i++)
-             {
-                 if (self.UserInfo.DayFubenTimes[i].KeyId == sceneId)
-                 {
-                     long curTimes = self.UserInfo.DayFubenTimes[i].Value -= times;
-                     if (curTimes < 0)
-                     {
-                         curTimes = 0;
-                     }
-                     self.UserInfo.DayFubenTimes[i].Value = curTimes;
-                     break;
-                 }
-             }
-         }
-         
-         public static int GetMysteryBuy(this UserInfoComponentS self, int mysteryId)
-         {
-             for (int i = 0; i < self.UserInfo.MysteryItems.Count; i++)
-             {
-                 if (self.UserInfo.MysteryItems[i].KeyId == mysteryId)
-                 {
-                     return (int)self.UserInfo.MysteryItems[i].Value;
-                 }
-             }
-             return 0;
-         }
+                if (keyValuePairInt.Value < dayMonsterConfig[i].TotalNumber)
+                {
+                    keyValuePairInt.Value++;
+                    return dayMonsterConfig[i].MonsterId;
+                }
+            }
 
-         public static void OnMysteryBuy(this UserInfoComponentS self, int mysteryId)
-         {
-             for (int i = 0; i < self.UserInfo.MysteryItems.Count; i++)
-             {
-                 if (self.UserInfo.MysteryItems[i].KeyId == mysteryId)
-                 {
-                     self.UserInfo.MysteryItems[i].Value += 1;
-                     return;
-                 }
-             }
-             self.UserInfo.MysteryItems.Add(new KeyValuePairInt() { KeyId = mysteryId, Value = 1 });
-         }
-         
-         public static int GetStoreBuy(this UserInfoComponentS self, int mysteryId)
-         {
-             for (int i = 0; i < self.UserInfo.BuyStoreItems.Count; i++)
-             {
-                 if (self.UserInfo.BuyStoreItems[i].KeyId == mysteryId)
-                 {
-                     return (int)self.UserInfo.BuyStoreItems[i].Value;
-                 }
-             }
-             return 0;
-         }
+            return 0;
+        }
 
-         public static void OnStoreBuy(this UserInfoComponentS self, int mysteryId)
-         {
-             for (int i = 0; i < self.UserInfo.BuyStoreItems.Count; i++)
-             {
-                 if (self.UserInfo.BuyStoreItems[i].KeyId == mysteryId)
-                 {
-                     self.UserInfo.BuyStoreItems[i].Value += 1;
-                     return;
-                 }
-             }
-             self.UserInfo.BuyStoreItems.Add(new KeyValuePairInt() { KeyId = mysteryId, Value = 1 });
-         }
-         
-         public static int GetRandomJingLingId(this UserInfoComponentS self)
-         {
-             List<DayJingLing> dayMonsterConfig = GlobalValueConfigCategory.Instance.DayJingLingList;
-             List<int> dayMonster = self.UserInfo.DayJingLing;
-             for(int i = 0; i < dayMonsterConfig.Count; i++)
-             {
-                 if (RandomHelper.RandFloat01() > dayMonsterConfig[i].GaiLv)
-                 {
-                     continue;
-                 }
-                 if (dayMonster.Count <= i)
-                 {
-                     for (int d = dayMonster.Count; d < i+1; d++)
-                     {
-                         dayMonster.Add(0);
-                     }
-                 }
-                 if (dayMonster[i] >= dayMonsterConfig[i].TotalNumber)
-                 {
-                     continue;
-                 }
+        public static bool IsCheskOpen(this UserInfoComponentS self, int fubenId, int monsterId)
+        {
+            List<KeyValuePair> chestList = self.UserInfo.OpenChestList;
+            for (int i = 0; i < chestList.Count; i++)
+            {
+                if (chestList[i].KeyId == fubenId)
+                {
+                    return chestList[i].Value.Contains(monsterId.ToString());
+                }
+            }
 
-                 dayMonster[i]++;
-                 int randomIndex = RandomHelper.RandomByWeight(dayMonsterConfig[i].Weights);
-                 return dayMonsterConfig[i].MonsterId[randomIndex];
-             }
+            return false;
+        }
 
-             return 0;
-         }
+        public static void AddFubenTimes(this UserInfoComponentS self, int sceneId, int times)
+        {
+            for (int i = 0; i < self.UserInfo.DayFubenTimes.Count; i++)
+            {
+                if (self.UserInfo.DayFubenTimes[i].KeyId == sceneId)
+                {
+                    long curTimes = self.UserInfo.DayFubenTimes[i].Value -= times;
+                    if (curTimes < 0)
+                    {
+                        curTimes = 0;
+                    }
 
-         public static void ClearMakeListByType(this UserInfoComponentS self, int makeType)
-         {
-             if (makeType == 0)
-             {
-                 return;
-             }
+                    self.UserInfo.DayFubenTimes[i].Value = curTimes;
+                    break;
+                }
+            }
+        }
 
-             for (int i = self.UserInfo.MakeList.Count - 1; i >= 0; i--)
-             {
-                 int makeId = self.UserInfo.MakeList[i];
-                 if (makeId == 0)
-                 {
-                     self.UserInfo.MakeList.RemoveAt(i);
-                     continue;
-                 }
+        public static int GetMysteryBuy(this UserInfoComponentS self, int mysteryId)
+        {
+            for (int i = 0; i < self.UserInfo.MysteryItems.Count; i++)
+            {
+                if (self.UserInfo.MysteryItems[i].KeyId == mysteryId)
+                {
+                    return (int)self.UserInfo.MysteryItems[i].Value;
+                }
+            }
 
-                 EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(makeId);
-                 if (equipMakeConfig.ProficiencyType == makeType)
-                 {
-                     self.UserInfo.MakeList.RemoveAt(i);
-                 }
-             }
-         }
+            return 0;
+        }
 
-         public static void OnMakeItem(this UserInfoComponentS self, int makeId)
-         {
-             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(makeId);
-             List<KeyValuePairInt> makeList = self.UserInfo.MakeIdList;
+        public static void OnMysteryBuy(this UserInfoComponentS self, int mysteryId)
+        {
+            for (int i = 0; i < self.UserInfo.MysteryItems.Count; i++)
+            {
+                if (self.UserInfo.MysteryItems[i].KeyId == mysteryId)
+                {
+                    self.UserInfo.MysteryItems[i].Value += 1;
+                    return;
+                }
+            }
 
-             bool have = false;
-             long endTime = TimeHelper.ServerNow() + equipMakeConfig.MakeTime * 1000;
-             for (int i = 0; i < makeList.Count; i++)
-             {
-                 if (makeList[i].KeyId == makeId)
-                 {
-                     makeList[i].Value = endTime;
-                     have = true;
-                 }
-             }
+            self.UserInfo.MysteryItems.Add(new KeyValuePairInt() { KeyId = mysteryId, Value = 1 });
+        }
 
-             if (!have)
-             {
-                 self.UserInfo.MakeIdList.Add(new KeyValuePairInt() { KeyId = makeId, Value = endTime });
-             }
-         }
+        public static int GetStoreBuy(this UserInfoComponentS self, int mysteryId)
+        {
+            for (int i = 0; i < self.UserInfo.BuyStoreItems.Count; i++)
+            {
+                if (self.UserInfo.BuyStoreItems[i].KeyId == mysteryId)
+                {
+                    return (int)self.UserInfo.BuyStoreItems[i].Value;
+                }
+            }
+
+            return 0;
+        }
+
+        public static void OnStoreBuy(this UserInfoComponentS self, int mysteryId)
+        {
+            for (int i = 0; i < self.UserInfo.BuyStoreItems.Count; i++)
+            {
+                if (self.UserInfo.BuyStoreItems[i].KeyId == mysteryId)
+                {
+                    self.UserInfo.BuyStoreItems[i].Value += 1;
+                    return;
+                }
+            }
+
+            self.UserInfo.BuyStoreItems.Add(new KeyValuePairInt() { KeyId = mysteryId, Value = 1 });
+        }
+
+        public static int GetRandomJingLingId(this UserInfoComponentS self)
+        {
+            List<DayJingLing> dayMonsterConfig = GlobalValueConfigCategory.Instance.DayJingLingList;
+            List<int> dayMonster = self.UserInfo.DayJingLing;
+            for (int i = 0; i < dayMonsterConfig.Count; i++)
+            {
+                if (RandomHelper.RandFloat01() > dayMonsterConfig[i].GaiLv)
+                {
+                    continue;
+                }
+
+                if (dayMonster.Count <= i)
+                {
+                    for (int d = dayMonster.Count; d < i + 1; d++)
+                    {
+                        dayMonster.Add(0);
+                    }
+                }
+
+                if (dayMonster[i] >= dayMonsterConfig[i].TotalNumber)
+                {
+                    continue;
+                }
+
+                dayMonster[i]++;
+                int randomIndex = RandomHelper.RandomByWeight(dayMonsterConfig[i].Weights);
+                return dayMonsterConfig[i].MonsterId[randomIndex];
+            }
+
+            return 0;
+        }
+
+        public static void ClearMakeListByType(this UserInfoComponentS self, int makeType)
+        {
+            if (makeType == 0)
+            {
+                return;
+            }
+
+            for (int i = self.UserInfo.MakeList.Count - 1; i >= 0; i--)
+            {
+                int makeId = self.UserInfo.MakeList[i];
+                if (makeId == 0)
+                {
+                    self.UserInfo.MakeList.RemoveAt(i);
+                    continue;
+                }
+
+                EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(makeId);
+                if (equipMakeConfig.ProficiencyType == makeType)
+                {
+                    self.UserInfo.MakeList.RemoveAt(i);
+                }
+            }
+        }
+        
+        public static void OnShowLieKill(this UserInfoComponentS self)
+        {
+            self.ShouLieKill++;
+
+            if (self.ShouLieUpLoadTimer == 0)
+            {
+                self.ShouLieUpLoadTimer = self.Root().GetComponent<TimerComponent>().NewOnceTimer(TimeHelper.ServerNow() + 5 * TimeHelper.Second, TimerInvokeType.ShouLieUpLoadTimer, self);
+            }
+            else
+            {
+                self.UpdateShowLie().Coroutine();
+            }
+        }
+
+        public static async ETTask UpdateShowLie(this UserInfoComponentS self)
+        {
+            Unit unit = self.GetParent<Unit>();
+            if (!ConfigData.IsShowLieOpen || unit.IsRobot())
+            {
+                return;
+            }
+            self.ShouLieSendTime = TimeHelper.ServerNow();
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.ShouLieUpLoadTimer);
+            RankShouLieInfo rankPetInfo = new RankShouLieInfo();
+            UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
+            rankPetInfo.UnitID = userInfoComponent.UserInfo.UserId;
+            rankPetInfo.PlayerName = userInfoComponent.UserInfo.Name;
+            rankPetInfo.Occ = userInfoComponent.UserInfo.Occ;
+            rankPetInfo.KillNumber = self.ShouLieKill;
+            ActorId mapInstanceId = UnitCacheHelper.GetRankServerId(self.Zone());
+            R2M_RankShowLieResponse Response = (R2M_RankShowLieResponse)await self.Root().GetComponent<MessageSender>().Call
+            (mapInstanceId, new M2R_RankShowLieRequest()
+            {
+                RankingInfo = rankPetInfo
+            });
+        }
+
+        public static void OnAddChests(this UserInfoComponentS self, int fubenId, int monsterId)
+        {
+            bool have = false;
+            List<KeyValuePair> chestList = self.UserInfo.OpenChestList;
+            for (int i = 0; i < chestList.Count; i++)
+            {
+                if (chestList[i].KeyId == fubenId)
+                {
+                    chestList[i].Value += ($"_{monsterId}");
+                    have = true;
+                }
+            }
+            if (!have)
+            {
+                self.UserInfo.OpenChestList.Add(new KeyValuePair() { KeyId = fubenId, Value = monsterId.ToString() });
+            }
+        }
+        
+        /// <summary>
+        /// 杀怪经验
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="beKill"></param>
+        public static void OnKillUnit(this UserInfoComponentS self, Unit beKill, int sceneType, int sceneId)
+        {
+            Unit main = self.GetParent<Unit>();
+            if (beKill.Type != UnitType.Monster)
+            {
+                return;
+            }
+
+            bool showlieopen = ConfigData.IsShowLieOpen;
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(beKill.ConfigId);
+            if (showlieopen && (monsterConfig.Lv >= 60 || Math.Abs(self.UserInfo.Lv - monsterConfig.Lv) <= 9))
+            {
+                self.OnShowLieKill();
+                main.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.ShowLieMonster_1201, 0, 1);
+            }
+
+            if (sceneType == SceneTypeEnum.LocalDungeon && monsterConfig.MonsterSonType == 55)
+            {
+                self.OnAddChests(sceneId, beKill.ConfigId);
+            }
+
+            if (SeasonHelper.GetOpenSeason(self.UserInfo.Lv) != null && beKill.IsBoss() && monsterConfig.Lv >= 40)
+            {
+                int seasonExp = RandomHelper.RandomNumber(1, 6);
+                self.UpdateRoleData(UserDataType.SeasonExp, seasonExp.ToString());
+            }
+
+            NumericComponentS numericComponent = main.GetComponent<NumericComponentS>();
+            numericComponent.ApplyChange(null, NumericType.KillMonsterNumber, 1, 0);
+
+            int tiliKillNumber = numericComponent.GetAsInt(NumericType.TiLiKillNumber);
+            if (sceneType == SceneTypeEnum.LocalDungeon && !showlieopen && self.UserInfo.PiLao > 0)
+            {
+                if (tiliKillNumber >= 4)
+                {
+                    numericComponent.ApplyValue(NumericType.TiLiKillNumber, 0, false);
+
+                    numericComponent.ApplyChange(null, NumericType.CostTiLi, 1, 0);
+                    self.UpdateRoleData(UserDataType.PiLao, "-1", true);
+                }
+                else
+                {
+                    numericComponent.ApplyChange(null, NumericType.TiLiKillNumber, 1, 0);
+                }
+            }
+
+            bool drop = true;
+            if (SceneConfigHelper.IsSingleFuben(sceneType))
+            {
+                drop = self.UserInfo.PiLao > 0 || beKill.IsBoss() || showlieopen;
+            }
+
+            if (drop)
+            {
+                MonsterConfig mCof = MonsterConfigCategory.Instance.Get(beKill.ConfigId);
+                float expcoefficient = 1f;
+                if (sceneType == SceneTypeEnum.LocalDungeon && beKill.IsBoss())
+                {
+                    int killNumber = main.GetComponent<UserInfoComponentS>().GetMonsterKillNumber(mCof.Id);
+                    int chpaterid = DungeonConfigCategory.Instance.GetChapterByDungeon(sceneId);
+                    BossDevelopment bossDevelopment = ConfigHelper.GetBossDevelopmentByKill(chpaterid, killNumber);
+                    expcoefficient *= bossDevelopment.ExpAdd;
+                }
+
+                if ((sceneType == SceneTypeEnum.LocalDungeon && self.UserInfo.PiLao > 0)
+                    || sceneType != SceneTypeEnum.LocalDungeon)
+                {
+                    if (numericComponent.GetAsInt(NumericType.JueXingExp) < 5000)
+                    {
+                        numericComponent.ApplyChange(null, NumericType.JueXingExp, 1, 0);
+                    }
+                }
+
+                int addexp = (int)(expcoefficient * mCof.Exp);
+                self.UpdateRoleData(UserDataType.Exp, addexp.ToString());
+            }
+
+            // 纪录击败的Boss
+            if (beKill.IsBoss() && ConfigData.DefeatedBossIds.ContainsKey(beKill.ConfigId))
+            {
+                if (!self.UserInfo.DefeatedBossIds.Contains(beKill.ConfigId))
+                {
+                    self.UserInfo.DefeatedBossIds.Add(beKill.ConfigId);
+                }
+            }
+        }
+
+        public static void OnMakeItem(this UserInfoComponentS self, int makeId)
+        {
+            EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(makeId);
+            List<KeyValuePairInt> makeList = self.UserInfo.MakeIdList;
+
+            bool have = false;
+            long endTime = TimeHelper.ServerNow() + equipMakeConfig.MakeTime * 1000;
+            for (int i = 0; i < makeList.Count; i++)
+            {
+                if (makeList[i].KeyId == makeId)
+                {
+                    makeList[i].Value = endTime;
+                    have = true;
+                }
+            }
+
+            if (!have)
+            {
+                self.UserInfo.MakeIdList.Add(new KeyValuePairInt() { KeyId = makeId, Value = endTime });
+            }
+        }
     }
 }

@@ -33,6 +33,25 @@ namespace ET
         [StaticField]
         public static bool IsShowLieOpen = false;
         
+        
+        /// <summary>
+        /// 赛季开始时间 . 已废弃
+        /// </summary>
+        //public static long SeasonOpenTime = 1701360000000;
+
+        //赛季结束时间 . 已废弃
+        //public static long SeasonCloseTime = 1713715200000;
+
+        /// <summary>
+        /// 赛季开时间
+        /// </summary>
+        [StaticField]
+        public static List<KeyValuePairLong> SeasonTimeList = new List<KeyValuePairLong>()
+        {
+            new KeyValuePairLong(){ KeyId = 0, Value = 1701360000000, Value2 = 1713715200000 },
+            new KeyValuePairLong(){ KeyId = 1, Value = 1713715200001, Value2 = 1721577600000 }
+        };
+        
         /// <summary>
         /// 新人抽奖 //KeyId权重 value道具..     第七天是武器ComHelp.GetWelfareWeapon
         /// </summary>
