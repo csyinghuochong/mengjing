@@ -62,5 +62,6 @@ namespace ET.Client
 		WindowID_PetEggLucklyExplain,
 		WindowID_PetEggChouKaReward,
 		WindowID_ChouKa,
+		WindowID_ChouKaReward,
 	}
 }

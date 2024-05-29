@@ -134,7 +134,7 @@ namespace ET.Client
 
         public static void OnBtn_ChouKaNumReward(this DlgChouKa self)
         {
-            // UIHelper.Create(self.ZoneScene(), UIType.UIChouKaReward).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ChouKaReward).Coroutine();
         }
 
         public static async ETTask ShowRewardView(this DlgChouKa self, List<RewardItem> rewardItems)

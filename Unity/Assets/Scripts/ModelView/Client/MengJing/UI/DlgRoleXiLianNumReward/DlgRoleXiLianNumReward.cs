@@ -10,7 +10,7 @@ namespace ET.Client
             get => this.GetComponent<DlgRoleXiLianNumRewardViewComponent>();
         }
 
-        public Dictionary<int, Scroll_Item_ChouKaRewardItem> ScrollItemChouKaRewardItems;
+        public Dictionary<int, Scroll_Item_RoleXiLianNumRewardItem> ScrollItemRoleXiLianNumRewardItems;
         public List<int> ShowInfo = new();
     }
 }

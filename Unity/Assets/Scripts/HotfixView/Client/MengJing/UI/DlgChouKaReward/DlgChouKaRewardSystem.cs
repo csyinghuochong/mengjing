@@ -1,0 +1,46 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace ET.Client
+{
+    [FriendOf(typeof (DlgChouKaReward))]
+    public static class DlgChouKaRewardSystem
+    {
+        public static void RegisterUIEvent(this DlgChouKaReward self)
+        {
+            self.View.E_ChouKaRewardItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChouKaRewardItemsRefresh);
+            self.View.E_Btn_CloseButton.AddListener(self.OnClose);
+        }
+
+        public static void ShowWindow(this DlgChouKaReward self, Entity contextData = null)
+        {
+            self.OnInitUI();
+        }
+
+        public static void OnInitUI(this DlgChouKaReward self)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            self.View.E_TextTitleText.text = $"今日探宝次数:{unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ChouKa)}";
+
+            self.TakeCardRewardConfigs = TakeCardRewardConfigCategory.Instance.GetAll().Values.ToList();
+
+            self.AddUIScrollItems(ref self.ScrollItemChouKaRewardItems, self.TakeCardRewardConfigs.Count);
+            self.View.E_ChouKaRewardItemsLoopVerticalScrollRect.SetVisible(true, self.TakeCardRewardConfigs.Count);
+        }
+
+        private static void OnChouKaRewardItemsRefresh(this DlgChouKaReward self, Transform transform, int index)
+        {
+            Scroll_Item_ChouKaRewardItem scrollItemRoleXiLianNumRewardItem = self.ScrollItemChouKaRewardItems[index].BindTrans(transform);
+            scrollItemRoleXiLianNumRewardItem.OnUpdateUI(self.TakeCardRewardConfigs[index]);
+        }
+
+        private static void OnClose(this DlgChouKaReward self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ChouKaReward);
+        }
+    }
+}

@@ -11,7 +11,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgRoleXiLianNumReward self)
         {
-            self.View.E_ChouKaRewardItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnChouKaRewardItemsRefresh);
+            self.View.E_RoleXiLianNumRewardItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRoleXiLianNumRewardItemsRefresh);
             self.View.E_Btn_CloseButton.AddListener(self.OnClose);
         }
 
@@ -31,14 +31,14 @@ namespace ET.Client
                 self.ShowInfo.Add(keyValuePair.Key);
             }
 
-            self.AddUIScrollItems(ref self.ScrollItemChouKaRewardItems, self.ShowInfo.Count);
-            self.View.E_ChouKaRewardItemsLoopVerticalScrollRect.SetVisible(true, self.ShowInfo.Count);
+            self.AddUIScrollItems(ref self.ScrollItemRoleXiLianNumRewardItems, self.ShowInfo.Count);
+            self.View.E_RoleXiLianNumRewardItemsLoopVerticalScrollRect.SetVisible(true, self.ShowInfo.Count);
         }
 
-        private static void OnChouKaRewardItemsRefresh(this DlgRoleXiLianNumReward self, Transform transform, int index)
+        private static void OnRoleXiLianNumRewardItemsRefresh(this DlgRoleXiLianNumReward self, Transform transform, int index)
         {
-            Scroll_Item_ChouKaRewardItem scrollItemChouKaRewardItem = self.ScrollItemChouKaRewardItems[index].BindTrans(transform);
-            scrollItemChouKaRewardItem.OnUpdateUI(self.ShowInfo[index]);
+            Scroll_Item_RoleXiLianNumRewardItem scrollItemRoleXiLianNumRewardItem = self.ScrollItemRoleXiLianNumRewardItems[index].BindTrans(transform);
+            scrollItemRoleXiLianNumRewardItem.OnUpdateUI(self.ShowInfo[index]);
         }
 
         private static void OnClose(this DlgRoleXiLianNumReward self)

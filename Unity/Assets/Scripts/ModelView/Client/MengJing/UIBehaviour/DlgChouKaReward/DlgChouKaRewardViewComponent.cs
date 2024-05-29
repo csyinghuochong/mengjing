@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
-	[ComponentOf(typeof(DlgRoleXiLianNumReward))]
+	[ComponentOf(typeof(DlgChouKaReward))]
 	[EnableMethod]
-	public  class DlgRoleXiLianNumRewardViewComponent : Entity,IAwake,IDestroy 
+	public  class DlgChouKaRewardViewComponent : Entity,IAwake,IDestroy 
 	{
 		public UnityEngine.UI.Text E_TextTitleText
      	{
@@ -58,7 +58,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_RoleXiLianNumRewardItemsLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_ChouKaRewardItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -67,11 +67,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_RoleXiLianNumRewardItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_ChouKaRewardItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_RoleXiLianNumRewardItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RoleXiLianNumRewardItems");
+		    		this.m_E_ChouKaRewardItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_ChouKaRewardItems");
      			}
-     			return this.m_E_RoleXiLianNumRewardItemsLoopVerticalScrollRect;
+     			return this.m_E_ChouKaRewardItemsLoopVerticalScrollRect;
      		}
      	}
 
@@ -80,14 +80,14 @@ namespace ET.Client
 			this.m_E_TextTitleText = null;
 			this.m_E_Btn_CloseButton = null;
 			this.m_E_Btn_CloseImage = null;
-			this.m_E_RoleXiLianNumRewardItemsLoopVerticalScrollRect = null;
+			this.m_E_ChouKaRewardItemsLoopVerticalScrollRect = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.UI.Text m_E_TextTitleText = null;
 		private UnityEngine.UI.Button m_E_Btn_CloseButton = null;
 		private UnityEngine.UI.Image m_E_Btn_CloseImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_RoleXiLianNumRewardItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_ChouKaRewardItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }
