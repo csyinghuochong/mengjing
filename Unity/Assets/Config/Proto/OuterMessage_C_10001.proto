@@ -6428,3 +6428,36 @@ message M2C_LingDiUpResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType M2C_RandomTowerBeginResponse
+//随机副本开始战斗
+message C2M_RandomTowerBeginRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 RandomNumber = 1;
+}
+
+message M2C_RandomTowerBeginResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_RandomTowerRewardResponse
+//随机副本领取奖励
+message C2M_RandomTowerRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 RewardId = 1;
+	int32 SceneType = 2;
+}
+
+message M2C_RandomTowerRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

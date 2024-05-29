@@ -25102,6 +25102,134 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_RandomTowerBeginResponse))]
+//随机副本开始战斗
+	[Message(OuterMessage.C2M_RandomTowerBeginRequest)]
+	[MemoryPackable]
+	public partial class C2M_RandomTowerBeginRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_RandomTowerBeginRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RandomTowerBeginRequest), isFromPool) as C2M_RandomTowerBeginRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RandomNumber { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.RandomNumber = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RandomTowerBeginResponse)]
+	[MemoryPackable]
+	public partial class M2C_RandomTowerBeginResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_RandomTowerBeginResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RandomTowerBeginResponse), isFromPool) as M2C_RandomTowerBeginResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_RandomTowerRewardResponse))]
+//随机副本领取奖励
+	[Message(OuterMessage.C2M_RandomTowerRewardRequest)]
+	[MemoryPackable]
+	public partial class C2M_RandomTowerRewardRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_RandomTowerRewardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RandomTowerRewardRequest), isFromPool) as C2M_RandomTowerRewardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RewardId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int SceneType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.RewardId = default;
+			this.SceneType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RandomTowerRewardResponse)]
+	[MemoryPackable]
+	public partial class M2C_RandomTowerRewardResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_RandomTowerRewardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RandomTowerRewardResponse), isFromPool) as M2C_RandomTowerRewardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -25842,5 +25970,9 @@ namespace ET
 		 public const ushort M2C_LingDiRewardResponse = 10737;
 		 public const ushort C2M_LingDiUpRequest = 10738;
 		 public const ushort M2C_LingDiUpResponse = 10739;
+		 public const ushort C2M_RandomTowerBeginRequest = 10740;
+		 public const ushort M2C_RandomTowerBeginResponse = 10741;
+		 public const ushort C2M_RandomTowerRewardRequest = 10742;
+		 public const ushort M2C_RandomTowerRewardResponse = 10743;
 	}
 }
