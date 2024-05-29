@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 302728245068580508}
   - component: {fileID: 4949913788308335898}
   m_Layer: 5
-  m_Name: Item_ChouKaRewardItem
+  m_Name: Item_PetEggChouKaRewardItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -873,7 +873,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6D17\u7EC3\u6B21\u6570\u8FBE\u523011111\u6B21"
+  m_Text: "\u62BD\u5361\u6B21\u6570\u8FBE\u523011111\u6B21"
 --- !u!114 &322239316199052227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -939,7 +939,7 @@ PrefabInstance:
     - target: {fileID: 1533868578429457377, guid: a20fb4adacedfcb4492d8340073f2ee6,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 120.5
       objectReference: {fileID: 0}
     - target: {fileID: 1533868578429457377, guid: a20fb4adacedfcb4492d8340073f2ee6,
         type: 3}
@@ -984,7 +984,7 @@ PrefabInstance:
     - target: {fileID: 1533868578429457377, guid: a20fb4adacedfcb4492d8340073f2ee6,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0000095367
+      value: -0.25001
       objectReference: {fileID: 0}
     - target: {fileID: 1533868578429457377, guid: a20fb4adacedfcb4492d8340073f2ee6,
         type: 3}
@@ -1005,6 +1005,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ES_RewardList
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017763047295380651, guid: a20fb4adacedfcb4492d8340073f2ee6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a20fb4adacedfcb4492d8340073f2ee6, type: 3}

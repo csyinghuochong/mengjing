@@ -53,7 +53,7 @@ namespace ET.Client
 
         public static void OnBtn_ChouKaNumReward(this ES_PetEggChouKa self)
         {
-            // UIHelper.Create(self.ZoneScene(), UIType.UIPetEggChouKaReward).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetEggChouKaReward).Coroutine();
         }
 
         public static void OnUpdateInfo(this ES_PetEggChouKa self)

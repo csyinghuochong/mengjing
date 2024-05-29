@@ -450,6 +450,15 @@ namespace ET.Client
             return response.Error;
         }
 
+        public static async ETTask<int> RquestPetExploreReward(Scene root, int rewardId)
+        {
+            C2M_PetExploreReward request = new() { RewardId = rewardId };
+            M2C_PetExploreReward response =
+                    (M2C_PetExploreReward)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
+
         public static async ETTask<int> RquestItemXiLianReward(Scene root, int xiLianId)
         {
             C2M_ItemXiLianRewardRequest request = new() { XiLianId = xiLianId };

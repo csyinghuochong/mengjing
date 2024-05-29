@@ -1,0 +1,16 @@
+﻿using System.Collections.Generic;
+
+namespace ET.Client
+{
+    [ComponentOf(typeof (UIBaseWindow))]
+    public class DlgPetEggChouKaReward: Entity, IAwake, IUILogic
+    {
+        public DlgPetEggChouKaRewardViewComponent View
+        {
+            get => this.GetComponent<DlgPetEggChouKaRewardViewComponent>();
+        }
+
+        public Dictionary<int, Scroll_Item_PetEggChouKaRewardItem> ScrollItemPetEggChouKaRewardItems;
+        public List<int> ShowInfo = new();
+    }
+}
