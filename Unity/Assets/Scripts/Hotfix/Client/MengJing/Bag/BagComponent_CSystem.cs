@@ -55,7 +55,7 @@ namespace ET.Client
 
                     if (newInfo.Loc == (int)ItemLocType.ChouKaWarehouse)
                     {
-                        // HintHelp.GetInstance().DataUpdate(DataType.ChouKaWarehouseAddItem);
+                        EventSystem.Instance.Publish(self.Root(), new DataUpdate_ChouKaWarehouseAddItem());
                     }
 
                     if (oldInfo.Loc != newInfo.Loc)
@@ -100,7 +100,7 @@ namespace ET.Client
 
                     if (bagInfo.Loc == (int)ItemLocType.ChouKaWarehouse)
                     {
-                        // HintHelp.GetInstance().DataUpdate(DataType.ChouKaWarehouseAddItem);
+                        EventSystem.Instance.Publish(self.Root(), new DataUpdate_ChouKaWarehouseAddItem());
                     }
 
                     List<BagInfo> temp = self.GetItemsByLoc(bagInfo.Loc);
@@ -125,7 +125,6 @@ namespace ET.Client
             }
 
             EventSystem.Instance.Publish(self.Root(), new BagItemUpdate());
-            // HintHelp.GetInstance().DataUpdate(DataType.BagItemUpdate);
         }
 
         private static void ShowGetItemTip(this BagComponentC self, BagInfo bagInfo, int addNum)

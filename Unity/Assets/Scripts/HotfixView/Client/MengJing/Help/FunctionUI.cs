@@ -70,6 +70,7 @@ namespace ET.Client
                 "UIStore" => WindowID.WindowID_Store,
                 "UIMystery" => WindowID.WindowID_Mystery,
                 "UIPetEgg" => WindowID.WindowID_PetEgg,
+                "UIChouKa" => WindowID.WindowID_ChouKa,
                 _ => WindowID.WindowID_Invaild
             };
         }

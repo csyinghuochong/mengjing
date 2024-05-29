@@ -143,6 +143,10 @@ namespace ET.Client
         public long baginfoId;
     }
 
+    public struct DataUpdate_ChouKaWarehouseAddItem
+    {
+    }
+
     public struct TaskNpcDialog
     {
         public int NpcId;
