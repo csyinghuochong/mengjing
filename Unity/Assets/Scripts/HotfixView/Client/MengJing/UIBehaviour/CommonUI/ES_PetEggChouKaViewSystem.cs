@@ -14,7 +14,7 @@ namespace ET.Client
 
             self.E_Btn_PetEggLucklyExplainButton.AddListener(() =>
             {
-                // self.Root().GetComponent<UIComponent>().ShowWindow(UIType.UIPetEggChouKaProbExplain);
+                self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_PetEggChouKaProbExplain);
             });
             self.E_Btn_RolePetBagButton.AddListener(self.OnBtn_RolePetBag);
             self.E_PetEggLucklyExplainBtnButton.AddListener(self.OnPetEggLucklyExplainBtn);

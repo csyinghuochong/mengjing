@@ -57,5 +57,6 @@ namespace ET.Client
 		WindowID_Mystery,
 		WindowID_PetEgg,
 		WindowID_CommonReward,
+		WindowID_PetEggChouKaProbExplain,
 	}
 }
