@@ -9,6 +9,7 @@ namespace ET.Client
     [FriendOf(typeof (ES_PetEggList))]
     [FriendOf(typeof (ES_PetEggDuiHuan))]
     [FriendOf(typeof (ES_PetEggChouKa))]
+    [FriendOf(typeof (ES_PetHeXinChouKa))]
     [FriendOf(typeof (DlgPetEgg))]
     public static class DlgPetEggSystem
     {
@@ -48,8 +49,7 @@ namespace ET.Client
                     self.View.ES_PetEggChouKa.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
-                    break;
-                case 4:
+                    self.View.ES_PetHeXinChouKa.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }

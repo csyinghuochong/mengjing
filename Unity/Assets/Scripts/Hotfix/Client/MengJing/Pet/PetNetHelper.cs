@@ -270,6 +270,15 @@ namespace ET.Client
             return response;
         }
 
+        public static async ETTask<M2C_PetHeXinChouKaResponse> RequestPetHeXinChouKa(Scene root, int chouKaType)
+        {
+            C2M_PetHeXinChouKaRequest request = new() { ChouKaType = chouKaType };
+            M2C_PetHeXinChouKaResponse response =
+                    (M2C_PetHeXinChouKaResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
+
         public static async ETTask<int> RequestPetTakeOutBag(Scene root, long id)
         {
             C2M_PetTakeOutBag request = new() { PetInfoId = id };
