@@ -188,5 +188,70 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<int> RequestPetEggPut(Scene root, int index, long bagInfoID)
+        {
+            C2M_RolePetEggPut request = new() { Index = index, BagInfoId = bagInfoID };
+            M2C_RolePetEggPut response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_RolePetEggPut;
+
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return response.Error;
+            }
+
+            PetComponentC petComponent = root.GetComponent<PetComponentC>();
+            petComponent.RolePetEggs[index] = response.RolePetEgg;
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> RequestPetEggPutOut(Scene root, int index)
+        {
+            C2M_RolePetEggPutOut request = new() { Index = index };
+            M2C_RolePetEggPutOut response = (M2C_RolePetEggPutOut)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return response.Error;
+            }
+
+            PetComponentC petComponent = root.GetComponent<PetComponentC>();
+            petComponent.RolePetEggs[index] = response.RolePetEgg;
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> RequestPetEggHatch(Scene root, int index)
+        {
+            C2M_RolePetEggHatch request = new() { Index = index };
+            M2C_RolePetEggHatch response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_RolePetEggHatch;
+
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return response.Error;
+            }
+
+            PetComponentC petComponent = root.GetComponent<PetComponentC>();
+            petComponent.RolePetEggs[index] = response.RolePetEgg;
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> RequestPetEggOpen(Scene root, int index)
+        {
+            C2M_RolePetEggOpen request = new() { Index = index };
+            M2C_RolePetEggOpen response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_RolePetEggOpen;
+
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return response.Error;
+            }
+
+            PetComponentC petComponent = root.GetComponent<PetComponentC>();
+            petComponent.RolePetEggs[index].KeyId = 0;
+            petComponent.RolePetEggs[index].Value = 0;
+
+            return response.Error;
+        }
     }
 }

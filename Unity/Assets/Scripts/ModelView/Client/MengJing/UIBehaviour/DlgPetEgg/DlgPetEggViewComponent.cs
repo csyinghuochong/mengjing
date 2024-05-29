@@ -7,7 +7,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgPetEggViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.RectTransform EG_SubViewNodeRectTransform
+		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
      		get
      		{
@@ -16,11 +16,29 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_SubViewNodeRectTransform == null )
+     			if( this.m_EG_SubViewRectTransform == null )
      			{
-		    		this.m_EG_SubViewNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SubViewNode");
+		    		this.m_EG_SubViewRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SubView");
      			}
-     			return this.m_EG_SubViewNodeRectTransform;
+     			return this.m_EG_SubViewRectTransform;
+     		}
+     	}
+
+		public ES_PetEggList ES_PetEggList
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_petegglist == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetEggList");
+		    	   this.m_es_petegglist = this.AddChild<ES_PetEggList,Transform>(subTrans);
+     			}
+     			return this.m_es_petegglist;
      		}
      	}
 
@@ -111,7 +129,8 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_EG_SubViewNodeRectTransform = null;
+			this.m_EG_SubViewRectTransform = null;
+			this.m_es_petegglist = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_1Toggle = null;
 			this.m_E_2Toggle = null;
@@ -120,7 +139,8 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EG_SubViewNodeRectTransform = null;
+		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
+		private EntityRef<ES_PetEggList> m_es_petegglist = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_1Toggle = null;
 		private UnityEngine.UI.Toggle m_E_2Toggle = null;

@@ -8,17 +8,17 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_CommonItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		public BagInfo Baginfo;
-		public string ItemNum;
-		public int ItemID;
-		public bool ShowTip;
-		public ItemOperateEnum ItemOperateEnum;
-		public Action<BagInfo> ClickItemHandler;
-		public Action<BagInfo, PointerEventData> BeginDragHandler;
-		public Action<BagInfo, PointerEventData> DragingHandler;
-		public Action<BagInfo, PointerEventData> EndDragHandler;
-		public Action<BagInfo, PointerEventData> PointerDownHandler;
-		public Action<BagInfo, PointerEventData> PointerUpHandler;
+		public BagInfo Baginfo { get; set; }
+		public string ItemNum { get; set; }
+		public int ItemID { get; set; }
+		public bool ShowTip { get; set; }
+		public ItemOperateEnum ItemOperateEnum { get; set; }
+		public Action<BagInfo> ClickItemHandler { get; set; }
+		public Action<BagInfo, PointerEventData> BeginDragHandler { get; set; }
+		public Action<BagInfo, PointerEventData> DragingHandler { get; set; }
+		public Action<BagInfo, PointerEventData> EndDragHandler { get; set; }
+		public Action<BagInfo, PointerEventData> PointerDownHandler { get; set; }
+		public Action<BagInfo, PointerEventData> PointerUpHandler { get; set; }
 		
 		public UnityEngine.UI.Button E_ItemDiButton
      	{

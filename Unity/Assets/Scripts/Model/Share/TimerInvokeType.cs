@@ -55,5 +55,6 @@
         public const int FallingFont = 317;
         public const int SkillInfoShowTimer = 318;
         public const int RoleXiLianLevel = 319;
+        public const int PetEggListItemTimer = 320;
     }
 }
