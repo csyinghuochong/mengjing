@@ -836,7 +836,7 @@ namespace ET.Server
              int waitRevive = self.OnWaitRevive();
              numericComponent.Set(NumericType.Now_Dead, 1);
              
-             EventSystem.Instance.Publish();
+             //EventSystem.Instance.Publish();
              // Game.EventSystem.Publish(new EventType.KillEvent()
              // {
              //     WaitRevive = waitRevive,
