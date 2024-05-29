@@ -573,6 +573,16 @@ namespace ET.Server
             return realPlayer;
         }
         
+        public static bool IsChest(this Unit self)
+        {
+            if (self.Type != UnitType.Monster)
+            {
+                return false;
+            }
+            int sonType = MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterSonType;
+            return sonType == 55 || sonType == 56 || sonType == 57;
+        }
+        
         public static List<Unit> GetUnitListByCamp(Scene scene, int unitType, int camp)
         {
             List<Unit> units = new List<Unit>();
