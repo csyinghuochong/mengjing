@@ -16,6 +16,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof (Scroll_Item_MailItem))]
     [FriendOf(typeof (DlgMail))]
     public static class DlgMailSystem
     {
@@ -100,7 +101,7 @@ namespace ET.Client
             {
                 foreach (Scroll_Item_MailItem scrollItemMailItem in self.ScrollItemMailItems.Values)
                 {
-                    if (scrollItemMailItem == null)
+                    if (scrollItemMailItem.uiTransform == null)
                     {
                         continue;
                     }
