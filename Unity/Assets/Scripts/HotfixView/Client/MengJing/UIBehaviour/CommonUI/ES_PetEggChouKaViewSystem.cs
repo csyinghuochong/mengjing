@@ -43,7 +43,7 @@ namespace ET.Client
 
         public static void OnBtn_RolePetBag(this ES_PetEggChouKa self)
         {
-            // UIHelper.Create(self.ZoneScene(), UIType.UIRolePetBag).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RolePetBag).Coroutine();
         }
 
         public static void OnPetEggLucklyExplainBtn(this ES_PetEggChouKa self)

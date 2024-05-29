@@ -11,7 +11,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgRolePetBag self)
         {
-            self.View.E_PetTuJianItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetTuJianItemsRefresh);
+            self.View.E_RolePetBagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnRolePetBagItemsRefresh);
             self.View.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
         }
 
@@ -39,15 +39,15 @@ namespace ET.Client
         private static void OnCommonSkillItemsRefresh(this DlgRolePetBag self, Transform transform, int index)
         {
             Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
-            scrollItemCommonSkillItem.OnUpdateUI(self.ShowSkill[index], ABAtlasTypes.PetSkillIcon);
+            scrollItemCommonSkillItem.OnUpdateUI(self.ShowSkills[index], ABAtlasTypes.PetSkillIcon,
+                self.RolePetInfo.LockSkill.Contains(self.ShowSkills[index]));
         }
 
-        private static void OnPetTuJianItemsRefresh(this DlgRolePetBag self, Transform transform, int index)
+        private static void OnRolePetBagItemsRefresh(this DlgRolePetBag self, Transform transform, int index)
         {
-            Scroll_Item_PetTuJianItem scrollItemPetTuJianItem = self.ScrollItemPetTuJianItems[index].BindTrans(transform);
-            scrollItemPetTuJianItem.OnUpdateUI(self.ShowSkill[index], ABAtlasTypes.PetSkillIcon);
-            scrollItemPetTuJianItem.OnInitUI(self.ShowRolePetInfos[index]);
-            scrollItemPetTuJianItem.SetClickHandler((petId) => { self.OnClickPetHandler(petId); });
+            Scroll_Item_RolePetBagItem scrollItemRolePetBagItem = self.ScrollItemRolePetBagItems[index].BindTrans(transform);
+            scrollItemRolePetBagItem.OnInitUI(self.ShowRolePetInfos[index]);
+            scrollItemRolePetBagItem.SetClickHandler((petId) => { self.OnClickPetHandler(petId); });
         }
 
         public static async ETTask OnTakeOutBagBtn(this DlgRolePetBag self)
@@ -105,43 +105,18 @@ namespace ET.Client
 
             self.ShowRolePetInfos.Clear();
             self.ShowRolePetInfos.AddRange(rolePetInfos);
-            int num = 0;
-            for (int i = 0; i < rolePetInfos.Count; i++)
-            {
-                UIRolePetBagItemComponent itemComponent = null;
 
-                if (i < self.UIRolePetBagItemComponents.Count)
-                {
-                    itemComponent = self.UIRolePetBagItemComponents[i];
-                    itemComponent.GameObject.SetActive(true);
-                }
-                else
-                {
-                    GameObject go = UnityEngine.Object.Instantiate(self.UIRolePetBagItem);
-                    itemComponent = self.AddChild<UIRolePetBagItemComponent, GameObject>(go);
-                    self.UIRolePetBagItemComponents.Add(itemComponent);
-                    UICommonHelper.SetParent(go, self.PetListNode);
-                    go.SetActive(true);
-                }
+            self.AddUIScrollItems(ref self.ScrollItemRolePetBagItems, self.ShowRolePetInfos.Count);
+            self.View.E_RolePetBagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowRolePetInfos.Count);
 
-                itemComponent.OnInitUI(rolePetInfos[i]);
-                itemComponent.SetClickHandler((petId) => { self.OnClickPetHandler(petId); });
-                num++;
-            }
-
-            for (int i = num; i < self.UIRolePetBagItemComponents.Count; i++)
-            {
-                self.UIRolePetBagItemComponents[i].GameObject.SetActive(false);
-            }
-
-            if (num > 0)
+            if (self.ShowRolePetInfos.Count > 0)
             {
                 foreach (GameObject go in self.PetZiZhiItemList)
                 {
                     go.SetActive(true);
                 }
 
-                self.UIRolePetBagItemComponents[0].OnImage_ItemButton();
+                self.ScrollItemRolePetBagItems[0].OnImage_ItemButton();
             }
 
             self.View.E_TextNumberText.text = $"宠物数量： {rolePetInfos.Count}/{GlobalValueConfigCategory.Instance.Get(119).Value2}";
@@ -151,9 +126,12 @@ namespace ET.Client
         {
             self.RolePetInfo = rolePetInfo;
 
-            for (int i = 0; i < self.UIRolePetBagItemComponents.Count; i++)
+            if (self.ScrollItemRolePetBagItems != null)
             {
-                self.UIRolePetBagItemComponents[i].SetSelected(rolePetInfo.Id);
+                foreach (Scroll_Item_RolePetBagItem item in self.ScrollItemRolePetBagItems.Values)
+                {
+                    item.SetSelected(rolePetInfo.Id);
+                }
             }
 
             self.UpdatePetZizhi(rolePetInfo);
@@ -213,9 +191,6 @@ namespace ET.Client
 
         public static void UpdateSkillList(this DlgRolePetBag self, RolePetInfo rolePetInfo)
         {
-            var path = ABPathHelper.GetUGUIPath("Main/Common/UICommonSkillItem");
-            var bundleGameObject = ResourcesComponent.Instance.LoadAsset<GameObject>(path);
-
             PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
             List<int> zhuanzhuids = new List<int>();
             string[] zhuanzhuskills = petConfig.ZhuanZhuSkillID.Split(';');
@@ -240,29 +215,11 @@ namespace ET.Client
                 }
             }
 
-            for (int i = 0; i < skills.Count; i++)
-            {
-                UICommonSkillItemComponent ui_item = null;
-                if (i < self.UICommonSkillItemComponents.Count)
-                {
-                    ui_item = self.UICommonSkillItemComponents[i];
-                    ui_item.GameObject.SetActive(true);
-                }
-                else
-                {
-                    GameObject bagSpace = GameObject.Instantiate(bundleGameObject);
-                    UICommonHelper.SetParent(bagSpace, self.PetSkillListNode);
-                    ui_item = self.AddChild<UICommonSkillItemComponent, GameObject>(bagSpace);
-                    self.UICommonSkillItemComponents.Add(ui_item);
-                }
+            self.ShowSkills.Clear();
+            self.ShowSkills.AddRange(skills);
 
-                ui_item.OnUpdateUI(skills[i], ABAtlasTypes.PetSkillIcon, rolePetInfo.LockSkill.Contains(skills[i]));
-            }
-
-            for (int i = skills.Count; i < self.UICommonSkillItemComponents.Count; i++)
-            {
-                self.UICommonSkillItemComponents[i].GameObject.SetActive(false);
-            }
+            self.AddUIScrollItems(ref self.ScrollItemCommonSkillItems, self.ShowSkills.Count);
+            self.View.E_CommonSkillItemsLoopVerticalScrollRect.SetVisible(true, self.ShowSkills.Count);
         }
     }
 }

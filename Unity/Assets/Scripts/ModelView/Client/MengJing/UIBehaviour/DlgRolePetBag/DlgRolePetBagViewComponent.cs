@@ -41,7 +41,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_PetTuJianItemsLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_RolePetBagItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -50,11 +50,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_PetTuJianItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_RolePetBagItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_PetTuJianItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_PetTuJianItems");
+		    		this.m_E_RolePetBagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RolePetBagItems");
      			}
-     			return this.m_E_PetTuJianItemsLoopVerticalScrollRect;
+     			return this.m_E_RolePetBagItemsLoopVerticalScrollRect;
      		}
      	}
 
@@ -266,7 +266,7 @@ namespace ET.Client
 		{
 			this.m_E_Btn_CloseButton = null;
 			this.m_E_Btn_CloseImage = null;
-			this.m_E_PetTuJianItemsLoopVerticalScrollRect = null;
+			this.m_E_RolePetBagItemsLoopVerticalScrollRect = null;
 			this.m_EG_PetZiZhiItem1RectTransform = null;
 			this.m_EG_PetZiZhiItem2RectTransform = null;
 			this.m_EG_PetZiZhiItem3RectTransform = null;
@@ -284,7 +284,7 @@ namespace ET.Client
 
 		private UnityEngine.UI.Button m_E_Btn_CloseButton = null;
 		private UnityEngine.UI.Image m_E_Btn_CloseImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetTuJianItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_RolePetBagItemsLoopVerticalScrollRect = null;
 		private UnityEngine.RectTransform m_EG_PetZiZhiItem1RectTransform = null;
 		private UnityEngine.RectTransform m_EG_PetZiZhiItem2RectTransform = null;
 		private UnityEngine.RectTransform m_EG_PetZiZhiItem3RectTransform = null;
