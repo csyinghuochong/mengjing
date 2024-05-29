@@ -547,19 +547,6 @@ namespace ET
         }
 
         /// <summary>
-        /// 累充奖励
-        /// </summary>
-        public static Dictionary<int, string> RechargeReward()
-        {
-            return new Dictionary<int, string>()
-            {
-                { 50, "10031014;1@10000143;5@10010045;1@10010086;2@10000141;1"  },
-                { 98, "10000202;1@10000143;12@10010045;2@10010086;3@10000150;1" }
-            };
-        }
-
-
-        /// <summary>
         /// 角色属性推荐加点,按比例加点
         /// </summary>
         public static Dictionary<int, string> RecommendAddPoint()

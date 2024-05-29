@@ -29,6 +29,18 @@ namespace ET
         };
 
         
+        /// <summary>
+        /// 累充奖励
+        /// </summary>
+        [StaticField]
+        public static Dictionary<int, string> RechargeReward = 
+                new Dictionary<int, string>()
+                {
+                    { 50, "10031014;1@10000143;5@10010045;1@10010086;2@10000141;1"  },
+                    { 98, "10000202;1@10000143;12@10010045;2@10010086;3@10000150;1" }
+                };
+        
+        
         //家园相关
         //开启牧场地块花费 0开始
         [StaticField]

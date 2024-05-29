@@ -7831,6 +7831,176 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(R2M_RechargeResponse))]
+	[Message(InnerMessage.M2R_RechargeRequest)]
+	[MemoryPackable]
+	public partial class M2R_RechargeRequest: MessageObject, IRequest
+	{
+		public static M2R_RechargeRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2R_RechargeRequest), isFromPool) as M2R_RechargeRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long UnitId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RechargeNumber { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long PayType { get; set; }
+
+		[MemoryPackOrder(2)]
+		public int Zone { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string payMessage { get; set; }
+
+		[MemoryPackOrder(4)]
+		public string UnitName { get; set; }
+
+		[MemoryPackOrder(5)]
+		public string Account { get; set; }
+
+		[MemoryPackOrder(6)]
+		public string ClientIp { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.UnitId = default;
+			this.RechargeNumber = default;
+			this.PayType = default;
+			this.Zone = default;
+			this.payMessage = default;
+			this.UnitName = default;
+			this.Account = default;
+			this.ClientIp = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.R2M_RechargeResponse)]
+	[MemoryPackable]
+	public partial class R2M_RechargeResponse: MessageObject, IResponse
+	{
+		public static R2M_RechargeResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2M_RechargeResponse), isFromPool) as R2M_RechargeResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string PayMessage { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PayMessage = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(G2R_RechargeResultResponse))]
+	[Message(InnerMessage.R2G_RechargeResultRequest)]
+	[MemoryPackable]
+	public partial class R2G_RechargeResultRequest: MessageObject, IRequest
+	{
+		public static R2G_RechargeResultRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2G_RechargeResultRequest), isFromPool) as R2G_RechargeResultRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long Id { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int RechargeNumber { get; set; }
+
+		[MemoryPackOrder(2)]
+		public long UserID { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string OrderInfo { get; set; }
+
+		[MemoryPackOrder(4)]
+		public string CpOrder { get; set; }
+
+		[MemoryPackOrder(5)]
+		public int RechargetType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.Id = default;
+			this.RechargeNumber = default;
+			this.UserID = default;
+			this.OrderInfo = default;
+			this.CpOrder = default;
+			this.RechargetType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(InnerMessage.G2R_RechargeResultResponse)]
+	[MemoryPackable]
+	public partial class G2R_RechargeResultResponse: MessageObject, IResponse
+	{
+		public static G2R_RechargeResultResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(G2R_RechargeResultResponse), isFromPool) as G2R_RechargeResultResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class InnerMessage
 	{
 		 public const ushort ObjectQueryRequest = 20002;
@@ -8063,5 +8233,9 @@ namespace ET
 		 public const ushort M2J_JiaYuanEnterRequest = 20229;
 		 public const ushort J2M_JiaYuanEnterResponse = 20230;
 		 public const ushort M2M_JiaYuanOperateMessage = 20231;
+		 public const ushort M2R_RechargeRequest = 20232;
+		 public const ushort R2M_RechargeResponse = 20233;
+		 public const ushort R2G_RechargeResultRequest = 20234;
+		 public const ushort G2R_RechargeResultResponse = 20235;
 	}
 }

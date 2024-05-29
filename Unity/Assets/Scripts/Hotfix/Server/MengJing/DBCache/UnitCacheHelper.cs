@@ -14,6 +14,16 @@ namespace ET.Server
             return StartSceneConfigCategory.Instance.AccountCenterConfig.ActorId;
         }
         
+        public static ActorId GetRechargeCenter()
+        {
+            return StartSceneConfigCategory.Instance.RechargeConfig.ActorId;
+        }
+        
+        public static ActorId GetCenterServerId()
+        {
+            return StartSceneConfigCategory.Instance.CenterConfig.ActorId;
+        }
+        
         /// <summary>
         /// 保存或者更新玩家缓存
         /// </summary>

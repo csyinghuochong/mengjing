@@ -26,7 +26,7 @@ namespace ET.Server
         public long TodayOnLine { get; set; }
 
         public long LastJiaYuanExpTime = 0;
-        public string RemoteAddress;
+        public string RemoteAddress { get; set; }
         public string DeviceName;
         public string UserName  { get; set; }
 

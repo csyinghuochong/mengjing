@@ -6461,3 +6461,51 @@ message M2C_RandomTowerRewardResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType M2C_IOSPayVerifyResponse
+message C2M_IOSPayVerifyRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	string payMessage = 2;
+}
+
+message M2C_IOSPayVerifyResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType M2C_RechargeResponse
+message C2M_RechargeRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 RechargeNumber = 1;
+	int64 PayType = 2;
+	string RiskControlInfo = 3;
+}
+
+message M2C_RechargeResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	string PayMessage = 1;
+}
+
+//累计充值奖励
+//ResponseType M2C_RechargeRewardResponse
+message C2M_RechargeRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 RechargeNumber = 1;
+}
+
+message M2C_RechargeRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

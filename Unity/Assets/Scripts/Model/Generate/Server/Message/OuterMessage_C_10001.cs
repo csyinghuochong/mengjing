@@ -25230,6 +25230,198 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_IOSPayVerifyResponse))]
+	[Message(OuterMessage.C2M_IOSPayVerifyRequest)]
+	[MemoryPackable]
+	public partial class C2M_IOSPayVerifyRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_IOSPayVerifyRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_IOSPayVerifyRequest), isFromPool) as C2M_IOSPayVerifyRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public string payMessage { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.payMessage = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_IOSPayVerifyResponse)]
+	[MemoryPackable]
+	public partial class M2C_IOSPayVerifyResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_IOSPayVerifyResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_IOSPayVerifyResponse), isFromPool) as M2C_IOSPayVerifyResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_RechargeResponse))]
+	[Message(OuterMessage.C2M_RechargeRequest)]
+	[MemoryPackable]
+	public partial class C2M_RechargeRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_RechargeRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RechargeRequest), isFromPool) as C2M_RechargeRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RechargeNumber { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long PayType { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string RiskControlInfo { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.RechargeNumber = default;
+			this.PayType = default;
+			this.RiskControlInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RechargeResponse)]
+	[MemoryPackable]
+	public partial class M2C_RechargeResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_RechargeResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RechargeResponse), isFromPool) as M2C_RechargeResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public string PayMessage { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.PayMessage = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//累计充值奖励
+	[ResponseType(nameof(M2C_RechargeRewardResponse))]
+	[Message(OuterMessage.C2M_RechargeRewardRequest)]
+	[MemoryPackable]
+	public partial class C2M_RechargeRewardRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_RechargeRewardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_RechargeRewardRequest), isFromPool) as C2M_RechargeRewardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int RechargeNumber { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.RechargeNumber = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_RechargeRewardResponse)]
+	[MemoryPackable]
+	public partial class M2C_RechargeRewardResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_RechargeRewardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_RechargeRewardResponse), isFromPool) as M2C_RechargeRewardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -25974,5 +26166,11 @@ namespace ET
 		 public const ushort M2C_RandomTowerBeginResponse = 10741;
 		 public const ushort C2M_RandomTowerRewardRequest = 10742;
 		 public const ushort M2C_RandomTowerRewardResponse = 10743;
+		 public const ushort C2M_IOSPayVerifyRequest = 10744;
+		 public const ushort M2C_IOSPayVerifyResponse = 10745;
+		 public const ushort C2M_RechargeRequest = 10746;
+		 public const ushort M2C_RechargeResponse = 10747;
+		 public const ushort C2M_RechargeRewardRequest = 10748;
+		 public const ushort M2C_RechargeRewardResponse = 10749;
 	}
 }

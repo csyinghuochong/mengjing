@@ -2005,3 +2005,47 @@ message M2M_JiaYuanOperateMessage // IMessage
 	JiaYuanOperate  JiaYuanOperate = 1;
 }
 
+
+//ResponseType R2M_RechargeResponse
+message M2R_RechargeRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 UnitId = 93;
+	int32 RechargeNumber = 1;
+	int64 PayType = 2;
+	int32 Zone = 3;
+	string payMessage = 4;
+	string UnitName = 5;
+	string Account = 6;
+	string ClientIp = 7;
+}
+
+message R2M_RechargeResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	string PayMessage = 1;
+}
+
+//ResponseType G2R_RechargeResultResponse
+message R2G_RechargeResultRequest // IRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 Id = 1;
+	int32 RechargeNumber = 2;
+	int64 UserID = 3;
+	string OrderInfo = 4;
+	string CpOrder = 5;
+	int32 RechargetType = 6;
+}
+
+message G2R_RechargeResultResponse // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+
