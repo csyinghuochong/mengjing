@@ -808,7 +808,7 @@ namespace ET.Server
                  List<Unit> units = FubenHelp.GetUnitList(unit.Root(), UnitType.Monster);
                  for (int i = 0; i < units.Count; i++)
                  {
-                     //units[i].GetComponent<AttackRecordComponent>()?.OnRemoveAttackByUnit(unit.Id);
+                     units[i].GetComponent<AttackRecordComponent>()?.OnRemoveAttackByUnit(unit.Id);
                  }
              }
              if (unit.Type == UnitType.Pet)
@@ -830,11 +830,13 @@ namespace ET.Server
                  List<Unit> units = FubenHelp.GetUnitList(unit.Root(), UnitType.Player);
                  for (int i = 0; i < units.Count; i++)
                  {
-                     //units[i].GetComponent<BuffManagerComponent>().OnDeadRemoveBuffBy(unit.Id);
+                     units[i].GetComponent<BuffManagerComponentS>().OnDeadRemoveBuffBy(unit.Id);
                  }
              }
              int waitRevive = self.OnWaitRevive();
              numericComponent.Set(NumericType.Now_Dead, 1);
+             
+             EventSystem.Instance.Publish();
              // Game.EventSystem.Publish(new EventType.KillEvent()
              // {
              //     WaitRevive = waitRevive,
