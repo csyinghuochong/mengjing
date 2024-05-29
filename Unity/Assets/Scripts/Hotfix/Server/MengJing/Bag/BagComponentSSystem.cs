@@ -1372,43 +1372,40 @@ namespace ET.Server
            if (itemID == (int)UserDataType.Gold)
            {
                itemNum = -1 * itemNum;
-               //unit.GetComponent<UserInfoComponentServer>().UpdateRoleMoneySub(UserDataType.Gold, itemNum.ToString(), true, ItemGetWay.CostItem);
+               unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneySub(UserDataType.Gold, itemNum.ToString(), true, ItemGetWay.CostItem);
                continue;
            }
            if (itemID == (int)UserDataType.Diamond)
            {
                itemNum = -1 * itemNum;
-               //unit.GetComponent<UserInfoComponentServer>().UpdateRoleMoneySub(UserDataType.Diamond, itemNum.ToString(), true, ItemGetWay.CostItem);
+               unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneySub(UserDataType.Diamond, itemNum.ToString(), true, ItemGetWay.CostItem);
                continue;
            }
            if (itemID == (int)UserDataType.RongYu)
            {
                itemNum = -1 * itemNum;
-               //unit.GetComponent<UserInfoComponent>().UpdateRoleData(UserDataType.RongYu, itemNum.ToString());
+               unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.RongYu, itemNum.ToString());
                continue;
            }
            if (itemID == (int)UserDataType.JiaYuanFund)
            {
                itemNum = -1 * itemNum;
-               //unit.GetComponent<UserInfoComponent>().UpdateRoleData(UserDataType.JiaYuanFund, itemNum.ToString());
+               unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.JiaYuanFund, itemNum.ToString());
                continue;
            }
            if (itemID == (int)UserDataType.SeasonCoin)
            {
                itemNum = -1 * itemNum;
-               //unit.GetComponent<UserInfoComponent>().UpdateRoleData(UserDataType.SeasonCoin, itemNum.ToString());
+               unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.SeasonCoin, itemNum.ToString());
                continue;
            }
            if (itemID == (int)UserDataType.UnionContri)
            {
                itemNum = -1 * itemNum;
-               //unit.GetComponent<UserInfoComponent>().UpdateRoleData(UserDataType.UnionContri, itemNum.ToString());
+               unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.UnionContri, itemNum.ToString());
                continue;
            }
-           //if (!DllHelper.CheckItem)
-           //{
-           //    continue;
-           //}
+           
            Log.Warning($"消耗道具: {unit.Id} {itemID} {itemNum}");
            List<BagInfo> bagInfos = self.GetItemByLoc(itemLocType);
            for (int k = bagInfos.Count - 1; k >= 0; k--)
