@@ -25605,6 +25605,192 @@ namespace ET
 
 	}
 
+//赛季等级奖励
+	[ResponseType(nameof(M2C_SeasonLevelRewardResponse))]
+	[Message(OuterMessage.C2M_SeasonLevelRewardRequest)]
+	[MemoryPackable]
+	public partial class C2M_SeasonLevelRewardRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_SeasonLevelRewardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_SeasonLevelRewardRequest), isFromPool) as C2M_SeasonLevelRewardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int SeasonLevel { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.SeasonLevel = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_SeasonLevelRewardResponse)]
+	[MemoryPackable]
+	public partial class M2C_SeasonLevelRewardResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_SeasonLevelRewardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SeasonLevelRewardResponse), isFromPool) as M2C_SeasonLevelRewardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//开启晶核
+	[ResponseType(nameof(M2C_SeasonOpenJingHeResponse))]
+	[Message(OuterMessage.C2M_SeasonOpenJingHeRequest)]
+	[MemoryPackable]
+	public partial class C2M_SeasonOpenJingHeRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_SeasonOpenJingHeRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_SeasonOpenJingHeRequest), isFromPool) as C2M_SeasonOpenJingHeRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int JingHeId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.JingHeId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_SeasonOpenJingHeResponse)]
+	[MemoryPackable]
+	public partial class M2C_SeasonOpenJingHeResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_SeasonOpenJingHeResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SeasonOpenJingHeResponse), isFromPool) as M2C_SeasonOpenJingHeResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//使用赛季果实， 更新boss刷新时间
+	[ResponseType(nameof(M2C_SeasonUseFruitResponse))]
+	[Message(OuterMessage.C2M_SeasonUseFruitRequest)]
+	[MemoryPackable]
+	public partial class C2M_SeasonUseFruitRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_SeasonUseFruitRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_SeasonUseFruitRequest), isFromPool) as C2M_SeasonUseFruitRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public List<long> BagInfoIDs { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.BagInfoIDs.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_SeasonUseFruitResponse)]
+	[MemoryPackable]
+	public partial class M2C_SeasonUseFruitResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_SeasonUseFruitResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_SeasonUseFruitResponse), isFromPool) as M2C_SeasonUseFruitResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -26361,5 +26547,11 @@ namespace ET
 		 public const ushort M2C_RealNameRewardResponse = 10753;
 		 public const ushort C2M_RolePetChouKaRequest = 10754;
 		 public const ushort M2C_RolePetChouKaResponse = 10755;
+		 public const ushort C2M_SeasonLevelRewardRequest = 10756;
+		 public const ushort M2C_SeasonLevelRewardResponse = 10757;
+		 public const ushort C2M_SeasonOpenJingHeRequest = 10758;
+		 public const ushort M2C_SeasonOpenJingHeResponse = 10759;
+		 public const ushort C2M_SeasonUseFruitRequest = 10760;
+		 public const ushort M2C_SeasonUseFruitResponse = 10761;
 	}
 }

@@ -6556,3 +6556,51 @@ message M2C_RolePetChouKaResponse // ILocationResponse
 	string Message = 92;
 	RolePetInfo RolePetInfo = 1;
 }
+
+//赛季等级奖励
+//ResponseType M2C_SeasonLevelRewardResponse
+message C2M_SeasonLevelRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 SeasonLevel = 1;
+}
+
+message M2C_SeasonLevelRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//开启晶核
+//ResponseType M2C_SeasonOpenJingHeResponse
+message C2M_SeasonOpenJingHeRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 JingHeId = 1;				//SeasonJingHeProto.Id
+}
+
+message M2C_SeasonOpenJingHeResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//使用赛季果实， 更新boss刷新时间
+//ResponseType M2C_SeasonUseFruitResponse
+message C2M_SeasonUseFruitRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	repeated int64 BagInfoIDs = 1;
+}
+
+message M2C_SeasonUseFruitResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
