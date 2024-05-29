@@ -1,22 +1,203 @@
+using System.Collections.Generic;
+
 namespace ET.Client
 {
-
-    [EntitySystemOf(typeof(BuffManagerComponentC))]
-    [FriendOf(typeof(BuffManagerComponentC))]
+    [EntitySystemOf(typeof (BuffManagerComponentC))]
+    [FriendOf(typeof (BuffManagerComponentC))]
     public static partial class BuffManagerComponentCSystem
     {
         [EntitySystem]
         private static void Awake(this ET.Client.BuffManagerComponentC self)
         {
-
+            self.t_Buffs.Clear();
+            self.m_Buffs.Clear();
         }
+
         [EntitySystem]
         private static void Destroy(this ET.Client.BuffManagerComponentC self)
         {
-
+            self.OnFinish();
         }
 
-       
-    }
+        public static void OnFinish(this BuffManagerComponentC self)
+        {
+            for (int i = self.m_Buffs.Count - 1; i >= 0; i--)
+            {
+                BuffC buffHandler = self.m_Buffs[i];
+                
+                BuffHandlerC aaiHandler = BuffDispatcherComponentC.Instance.Get(buffHandler.mSkillBuffConf.BuffScript);
+                aaiHandler.OnFinished(buffHandler);
+                buffHandler.Clear();
+                self.m_Buffs.RemoveAt(i);
+                ObjectPool.Instance.Recycle(buffHandler);
+            }
 
+            self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+        }
+
+        //DeadNoRemove 0移除   1 不移除
+        public static void OnDead(this BuffManagerComponentC self, Unit attack)
+        {
+            for (int i = self.m_Buffs.Count - 1; i >= 0; i--)
+            {
+                BuffC buffHandler = self.m_Buffs[i];
+                if (buffHandler.mSkillBuffConf.DeadNoRemove == 1)
+                {
+                    continue;
+                }
+                BuffHandlerC aaiHandler = BuffDispatcherComponentC.Instance.Get(buffHandler.mSkillBuffConf.BuffScript);
+                aaiHandler.OnFinished(buffHandler);
+                buffHandler.Clear();
+                self.m_Buffs.RemoveAt(i);
+                ObjectPool.Instance.Recycle(buffHandler);
+            }
+
+            if (self.m_Buffs.Count == 0)
+            {
+                self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+            }
+        }
+
+        public static void OnUpdate(this BuffManagerComponentC self)
+        {
+            int buffcnt = self.m_Buffs.Count;
+            for (int i = buffcnt - 1; i >= 0; i--)
+            {
+                BuffC buffHandler = self.m_Buffs[i];
+               
+                BuffHandlerC aaiHandler = BuffDispatcherComponentC.Instance.Get(buffHandler.mSkillBuffConf.BuffScript);
+                aaiHandler.OnUpdate(buffHandler);
+                
+                if (buffHandler.BuffState == BuffState.Finished)
+                {
+                    aaiHandler.OnFinished(buffHandler);
+                    buffHandler.Clear();
+                    self.m_Buffs.RemoveAt(i);
+                    ObjectPool.Instance.Recycle(buffHandler);
+                    continue;
+                }
+            }
+
+            if (self.m_Buffs.Count == 0)
+            {
+                self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
+            }
+        }
+
+        #region 添加，移除Buff
+
+        public static void InitBuff(this BuffManagerComponentC self)
+        {
+            List<KeyValuePair> buffs = self.t_Buffs;
+            long timeNow = TimeHelper.ClientNow();
+            for (int i = 0; i < buffs.Count; i++)
+            {
+                long buffEndTime = long.Parse(buffs[i].Value2);
+                if (buffEndTime <= timeNow)
+                {
+                    continue;
+                }
+
+                // $"{buffHandler.BuffData.SkillId}_{buffHandler.BuffData.Spellcaster}"
+                BuffData buffData = new BuffData();
+                string[] buffinfo = buffs[i].Value.Split('_');
+                buffData.TargetAngle = 0;
+                buffData.BuffId = buffs[i].KeyId;
+                buffData.SkillId = int.Parse(buffinfo[0]);
+                buffData.Spellcaster = buffinfo[1];
+                buffData.BuffEndTime = buffEndTime;
+                self.BuffFactory(buffData);
+            }
+
+            self.t_Buffs.Clear();
+        }
+
+        public static void BuffFactory(this BuffManagerComponentC self, BuffData buffData)
+        {
+            SkillBuffConfig skillBuffConfig = SkillBuffConfigCategory.Instance.Get(buffData.BuffId);
+            string BuffClassScript = skillBuffConfig.BuffScript;
+            BuffC buffHandler = self.AddChild<BuffC>();
+            self.m_Buffs.Add(buffHandler); //给buff目标添加buff管理器
+            
+            BuffHandlerC aaiHandler = BuffDispatcherComponentC.Instance.Get(skillBuffConfig.BuffScript);
+            aaiHandler.OnInit(buffHandler, buffData, self.GetParent<Unit>());
+
+            if (self.Timer == 0)
+            {
+                //self.Timer = TimerComponent.Instance.NewFrameTimer(TimerType.BuffTimer, self);
+                self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(500, TimerInvokeType.BuffTimerC, self);
+            }
+        }
+
+        /// <summary>
+        /// 移除Buff(下一帧才真正移除)
+        /// </summary>
+        /// <param name="buffId">要移除的BuffId</param>
+        public static void RemoveBuff(this BuffManagerComponentC self, long buffId)
+        {
+            int buffcnt = self.m_Buffs.Count;
+            for (int i = buffcnt - 1; i >= 0; i--)
+            {
+                BuffC buffHandler = self.m_Buffs[i];
+                if (buffHandler.mSkillBuffConf == null)
+                {
+                    continue;
+                }
+
+                if (buffHandler.mSkillBuffConf.Id == buffId)
+                {
+                    BuffHandlerC aaiHandler = BuffDispatcherComponentC.Instance.Get(buffHandler.mSkillBuffConf.BuffScript);
+                    aaiHandler.OnFinished(buffHandler);
+                    buffHandler.Clear();
+                    self.m_Buffs.RemoveAt(i);
+                    buffHandler.Dispose();
+                }
+            }
+        }
+
+        #endregion
+
+        #region 获取BuffSystem
+
+        public static int GetBuffNumber(this BuffManagerComponentC self, int buffId)
+        {
+            int number = 0;
+            int buffcnt = self.m_Buffs.Count;
+            for (int i = buffcnt - 1; i >= 0; i--)
+            {
+                if (self.m_Buffs[i].BuffData.BuffId == buffId)
+                {
+                    number++;
+                }
+            }
+
+            return number;
+        }
+
+        /// <summary>
+        /// 通过标识ID获得Buff
+        /// </summary>
+        /// <param name="buffId">BuffData的标识ID</param>
+        public static List<BuffC> GetBuffByConfigId(this BuffManagerComponentC self, int buffId)
+        {
+            List<BuffC> list = new List<BuffC>();
+            int buffcnt = self.m_Buffs.Count;
+            for (int i = buffcnt - 1; i >= 0; i--)
+            {
+                if (self.m_Buffs[i].mSkillBuffConf == null)
+                {
+                    continue;
+                }
+
+                if (self.m_Buffs[i].mSkillBuffConf.Id == buffId)
+                {
+                    list.Add(self.m_Buffs[i]);
+                }
+            }
+
+            return list;
+        }
+
+        #endregion
+    }
 }

@@ -50,7 +50,7 @@ namespace ET.Client
             self.TheUnitBelongto = null;
             //self.BuffState = BuffState.Waiting;
         }
-
+        
         //播放特效
         public static long PlayBuffEffects(this BuffC self)
         {
