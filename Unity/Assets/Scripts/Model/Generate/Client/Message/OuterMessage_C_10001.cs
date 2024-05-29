@@ -26129,6 +26129,312 @@ namespace ET
 
 	}
 
+// 封印之塔继续挑战
+	[ResponseType(nameof(M2C_TowerOfSealNextResponse))]
+	[Message(OuterMessage.C2M_TowerOfSealNextRequest)]
+	[MemoryPackable]
+	public partial class C2M_TowerOfSealNextRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TowerOfSealNextRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TowerOfSealNextRequest), isFromPool) as C2M_TowerOfSealNextRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int DiceResult { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int CostType { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.DiceResult = default;
+			this.CostType = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TowerOfSealNextResponse)]
+	[MemoryPackable]
+	public partial class M2C_TowerOfSealNextResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TowerOfSealNextResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TowerOfSealNextResponse), isFromPool) as M2C_TowerOfSealNextResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//试炼副本开始
+	[ResponseType(nameof(M2C_TrialDungeonBeginResponse))]
+	[Message(OuterMessage.C2M_TrialDungeonBeginRequest)]
+	[MemoryPackable]
+	public partial class C2M_TrialDungeonBeginRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TrialDungeonBeginRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TrialDungeonBeginRequest), isFromPool) as C2M_TrialDungeonBeginRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TrialDungeonBeginResponse)]
+	[MemoryPackable]
+	public partial class M2C_TrialDungeonBeginResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TrialDungeonBeginResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TrialDungeonBeginResponse), isFromPool) as M2C_TrialDungeonBeginResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//试炼副本结束
+	[ResponseType(nameof(M2C_TrialDungeonFinishResponse))]
+	[Message(OuterMessage.C2M_TrialDungeonFinishRequest)]
+	[MemoryPackable]
+	public partial class C2M_TrialDungeonFinishRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TrialDungeonFinishRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TrialDungeonFinishRequest), isFromPool) as C2M_TrialDungeonFinishRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TrialDungeonFinishResponse)]
+	[MemoryPackable]
+	public partial class M2C_TrialDungeonFinishResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TrialDungeonFinishResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TrialDungeonFinishResponse), isFromPool) as M2C_TrialDungeonFinishResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int CombatResult { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.CombatResult = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//小龟大赛记录
+	[ResponseType(nameof(M2C_TurtleRecordResponse))]
+	[Message(OuterMessage.C2M_TurtleRecordRequest)]
+	[MemoryPackable]
+	public partial class C2M_TurtleRecordRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TurtleRecordRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TurtleRecordRequest), isFromPool) as C2M_TurtleRecordRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TurtleRecordResponse)]
+	[MemoryPackable]
+	public partial class M2C_TurtleRecordResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TurtleRecordResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TurtleRecordResponse), isFromPool) as M2C_TurtleRecordResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int SupportId { get; set; }
+
+		[MemoryPackOrder(2)]
+		public List<int> WinTimes { get; set; } = new();
+
+		[MemoryPackOrder(3)]
+		public List<int> SupportTimes { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.SupportId = default;
+			this.WinTimes.Clear();
+			this.SupportTimes.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+//小龟大赛支持
+	[ResponseType(nameof(M2C_TurtleSupportResponse))]
+	[Message(OuterMessage.C2M_TurtleSupportRequest)]
+	[MemoryPackable]
+	public partial class C2M_TurtleSupportRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_TurtleSupportRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_TurtleSupportRequest), isFromPool) as C2M_TurtleSupportRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int SupportId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.SupportId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_TurtleSupportResponse)]
+	[MemoryPackable]
+	public partial class M2C_TurtleSupportResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_TurtleSupportResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_TurtleSupportResponse), isFromPool) as M2C_TurtleSupportResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -26902,5 +27208,15 @@ namespace ET
 		 public const ushort M2C_TowerFightBeginResponse = 10770;
 		 public const ushort C2M_TowerExitRequest = 10771;
 		 public const ushort M2C_TowerExitResponse = 10772;
+		 public const ushort C2M_TowerOfSealNextRequest = 10773;
+		 public const ushort M2C_TowerOfSealNextResponse = 10774;
+		 public const ushort C2M_TrialDungeonBeginRequest = 10775;
+		 public const ushort M2C_TrialDungeonBeginResponse = 10776;
+		 public const ushort C2M_TrialDungeonFinishRequest = 10777;
+		 public const ushort M2C_TrialDungeonFinishResponse = 10778;
+		 public const ushort C2M_TurtleRecordRequest = 10779;
+		 public const ushort M2C_TurtleRecordResponse = 10780;
+		 public const ushort C2M_TurtleSupportRequest = 10781;
+		 public const ushort M2C_TurtleSupportResponse = 10782;
 	}
 }

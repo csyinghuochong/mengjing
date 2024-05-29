@@ -6690,3 +6690,85 @@ message M2C_TowerExitResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+// 封印之塔继续挑战
+//ResponseType M2C_TowerOfSealNextResponse
+message C2M_TowerOfSealNextRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int32 DiceResult = 1; // 骰子的点数
+	int32 CostType = 2;   // 消耗道具的类型 0钻石 1凭证
+}
+
+message M2C_TowerOfSealNextResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+}
+
+//试炼副本开始
+//ResponseType M2C_TrialDungeonBeginResponse
+message C2M_TrialDungeonBeginRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_TrialDungeonBeginResponse    // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//试炼副本结束
+//ResponseType M2C_TrialDungeonFinishResponse
+message C2M_TrialDungeonFinishRequest    // ILocationRequest
+{
+	int32 RpcId = 90;
+}
+
+message M2C_TrialDungeonFinishResponse    // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int32 CombatResult = 1;
+}
+
+
+//小龟大赛记录
+//ResponseType M2C_TurtleRecordResponse
+message C2M_TurtleRecordRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+}
+
+message M2C_TurtleRecordResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	int32 SupportId = 2;				//支持的id // ConfigHelper.TurtleList
+	repeated int32 WinTimes = 3;		//胜利次数
+	repeated int32  SupportTimes = 4;   //支持次数
+}
+
+//小龟大赛支持
+//ResponseType M2C_TurtleSupportResponse
+message C2M_TurtleSupportRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+
+	int32 SupportId = 1;   //该账号支持的小龟. ConfigHelper.TurtleList
+}
+
+message M2C_TurtleSupportResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}

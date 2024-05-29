@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    public class C2M_TowerOfSealNextHandler: AMActorLocationRpcHandler<Unit, C2M_TowerOfSealNextRequest, M2C_TowerOfSealNextResponse>
+    public class C2M_TowerOfSealNextHandler: MessageLocationHandler<Unit, C2M_TowerOfSealNextRequest, M2C_TowerOfSealNextResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_TowerOfSealNextRequest request, M2C_TowerOfSealNextResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_TowerOfSealNextRequest request, M2C_TowerOfSealNextResponse response)
         {
-            Scene domainScene = unit.DomainScene();
+            Scene domainScene = unit.Scene();
             TowerOfSealComponent towerOfSealComponent = domainScene.GetComponent<TowerOfSealComponent>();
             if (towerOfSealComponent == null)
             {
-                reply();
                 return;
             }
 
-            UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
-            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
+            UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
             int oldArrived = numericComponent.GetAsInt(NumericType.TowerOfSealArrived);
             int oldFinished = numericComponent.GetAsInt(NumericType.TowerOfSealFinished);
@@ -24,14 +23,12 @@ namespace ET
             // 判断是否已经通关顶层
             if (oldFinished >= 100)
             {
-                reply();
                 return;
             }
 
             // 判断该层是否已经通关
             if (oldFinished != oldArrived)
             {
-                reply();
                 return;
             }
 
@@ -42,7 +39,6 @@ namespace ET
                 int needGold = int.Parse(globalValueConfig.Value);
                 if (userInfoComponent.UserInfo.Diamond < needGold)
                 {
-                    reply();
                     return;
                 }
 
@@ -51,12 +47,11 @@ namespace ET
             }
             else if(request.CostType == 1)//花费凭证
             {
-                BagComponent bagComponent = unit.GetComponent<BagComponent>();
+                BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
                 GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(90);
                 int itemConfigID = int.Parse(globalValueConfig.Value);
                 if (bagComponent.GetItemNumber(itemConfigID) <= 0)
                 {
-                    reply();
                     return;
                 }
                 
@@ -75,7 +70,6 @@ namespace ET
                 int needGold = int.Parse(globalValueConfig.Value) + 350;
                 if (userInfoComponent.UserInfo.Diamond < needGold )
                 {
-                    reply();
                     return;
                 }
 
@@ -87,19 +81,17 @@ namespace ET
                 int needGold = 350;
                 if (userInfoComponent.UserInfo.Diamond < needGold)
                 {
-                    reply();
                     return;
                 }
 
                 // 消耗钻石
                 userInfoComponent.UpdateRoleMoneySub(UserDataType.Diamond, (-1 * needGold).ToString(), true, ItemGetWay.TowerOfSealCost);
 
-                BagComponent bagComponent = unit.GetComponent<BagComponent>();
+                BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
                 GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(90);
                 int itemConfigID = int.Parse(globalValueConfig.Value);
                 if (bagComponent.GetItemNumber(itemConfigID) <= 0)
                 {
-                    reply();
                     return;
                 }
 
@@ -123,22 +115,21 @@ namespace ET
             numericComponent.ApplyValue(NumericType.TowerOfSealArrived, nextArrived);
 
             // 清空关卡怪物
-            List<Unit> monsterList = UnitHelper.GetUnitList(unit.DomainScene(), UnitType.Monster);
+            List<Unit> monsterList = UnitHelper.GetUnitList(unit.Scene(), UnitType.Monster);
             for (int i = monsterList.Count - 1; i >= 0; i--)
             {
                 domainScene.GetComponent<UnitComponent>().Remove(monsterList[i].Id);
             }
 
-            await TimerComponent.Instance.WaitAsync(1000);
+            await unit.Root().GetComponent<TimerComponent>().WaitAsync(1000);
 
             // 重置关卡
             towerOfSealComponent.GenerateFuben(numericComponent.GetAsInt(NumericType.TowerOfSealArrived),
                 numericComponent.GetAsInt(NumericType.TowerOfSealFinished));
 
-            unit.GetComponent<TaskComponent>().TriggerTaskEvent(TaskTargetType.TowerOfSeal_28, 0, 1);
-            unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.TowerOfSeal_28, 0, 1);
-
-            reply();
+            unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.TowerOfSeal_28, 0, 1);
+            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.TowerOfSeal_28, 0, 1);
+            
             await ETTask.CompletedTask;
         }
     }
