@@ -92,6 +92,11 @@ namespace ET.Server
                         response = await root.GetComponent<MessageSender>().Call(friendServerId, iFriendActorRequest);
                     }
                     
+                    if (actorRequest is IMailActorRequest iMailActorRequest)
+                    {
+                        ActorId friendServerId = player.MailServerID;
+                        response = await root.GetComponent<MessageSender>().Call(friendServerId, iMailActorRequest);
+                    }
                     
                     if (response == null)
                     {

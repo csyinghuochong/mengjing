@@ -46,7 +46,8 @@ namespace ET.Server
 			
             player.UnitId = request.UnitId;
             player.ActivityServerId = UnitCacheHelper.GetActivityServerId(session.Zone());
-            player.FriendServerId = UnitCacheHelper.GetFriendId(session.Zone());
+            player.FriendServerId = UnitCacheHelper.GetFriendServerId(session.Zone());
+            player.MailServerID = UnitCacheHelper.GetMailServerId(session.Zone());
 
             Unit unit = await UnitHelper.LoadUnit(player, scene, createRoleInfo, newAccountList[0].Account, request.AccountId); 
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map101");

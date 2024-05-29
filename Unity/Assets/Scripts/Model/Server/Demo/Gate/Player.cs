@@ -27,5 +27,7 @@
         public ActorId ActivityServerId { get; set; }
         
         public ActorId FriendServerId { get; set; }
+        
+        public ActorId MailServerID { get; set; }
     }
 }

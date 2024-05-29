@@ -3109,22 +3109,6 @@ message M2C_StoreBuyResponse	// ILocationResponse
 	int32 Error = 92;
 }
 
-//ResponseType M2C_AccountWarehousInfoResponse
-message C2M_AccountWarehousInfoRequest // ILocationRequest
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-	int64 AccInfoID = 1;
-}
-
-message M2C_AccountWarehousInfoResponse // ILocationResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-	repeated BagInfo BagInfos = 1;
-}
-
 //ResponseType M2C_AccountWarehousOperateResponse
 message C2M_AccountWarehousOperateRequest // ILocationRequest
 {
