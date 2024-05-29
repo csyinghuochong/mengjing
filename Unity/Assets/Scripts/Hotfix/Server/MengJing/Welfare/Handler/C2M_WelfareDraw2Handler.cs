@@ -1,40 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_WelfareDraw2Handler : AMActorLocationRpcHandler<Unit, C2M_WelfareDraw2Request, M2C_WelfareDraw2Response>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_WelfareDraw2Handler : MessageLocationHandler<Unit, C2M_WelfareDraw2Request, M2C_WelfareDraw2Response>
     {
-        protected override async ETTask Run(Unit unit, C2M_WelfareDraw2Request request, M2C_WelfareDraw2Response response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_WelfareDraw2Request request, M2C_WelfareDraw2Response response)
         {
-            if (unit.GetComponent<BagComponent>().GetBagLeftCell() < 1)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < 1)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
-                reply();
                 return;
             }
 
-            NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
             //已经生成了奖励格子
             if (numericComponent.GetAsInt(NumericType.DrawIndex2) > 0)
             {
-                reply();
                 return;
             }
 
             if (numericComponent.GetAsLong(NumericType.RechargeNumber) / 50 - numericComponent.GetAsLong(NumericType.WelfareChouKaNumber) <= 0)
             {
-                reply();
                 return;
             }
 
-            int index = RandomHelper.RandomNumber(0, ActivityHelper.WelfareChouKaList.Count) + 1;
+            int index = RandomHelper.RandomNumber(0, ConfigData.WelfareChouKaList.Count) + 1;
 
-            unit.GetComponent<NumericComponent>().ApplyValue(NumericType.DrawIndex2, index);
-            unit.GetComponent<NumericComponent>().ApplyChange(null, NumericType.WelfareChouKaNumber, 1, 0);
-            reply();
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.DrawIndex2, index);
+            unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.WelfareChouKaNumber, 1, 0);
             await ETTask.CompletedTask;
         }
     }

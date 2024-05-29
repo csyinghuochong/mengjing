@@ -539,6 +539,12 @@ namespace ET.Server
             return self.Type == UnitType.Player && self.GetComponent<UserInfoComponentS>().UserInfo.RobotId > 0;
         }
         
+        public static void UpdateYueKaTimes(this Unit self)
+        {
+            NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
+            numericComponent.ApplyValue(NumericType.YueKaRemainTimes, 7);
+        }
+        
         public static bool IsJingLingMonster(this Unit self)
         {
             if (self.Type != UnitType.Monster)

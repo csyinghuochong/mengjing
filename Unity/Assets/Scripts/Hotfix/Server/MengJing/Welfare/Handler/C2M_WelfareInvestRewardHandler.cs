@@ -1,26 +1,23 @@
 ﻿using System;
 
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2M_WelfareInvestRewardHandler : AMActorLocationRpcHandler<Unit, C2M_WelfareInvestRewardRequest, M2C_WelfareInvestRewardResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_WelfareInvestRewardHandler : MessageLocationHandler<Unit, C2M_WelfareInvestRewardRequest, M2C_WelfareInvestRewardResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_WelfareInvestRewardRequest request, M2C_WelfareInvestRewardResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_WelfareInvestRewardRequest request, M2C_WelfareInvestRewardResponse response)
         {
-            if (unit.GetComponent<NumericComponent>().GetAsInt(NumericType.InvestReward) == 1)
+            if (unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.InvestReward) == 1)
             {
                 response.Error = ErrorCode.ERR_AlreadyReceived;
-                reply();
                 return;
             }
 
-            int total = unit.GetComponent<NumericComponent>().GetAsInt(NumericType.InvestTotal);
-          
-            unit.GetComponent<UserInfoComponent>().UpdateRoleMoneyAdd(UserDataType.Gold, total.ToString(), true, ItemGetWay.Welfare);
-            unit.GetComponent<NumericComponent>().ApplyValue(null, NumericType.InvestReward, 1, 0);
-            reply();
+            int total = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.InvestTotal);
+            unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneyAdd(UserDataType.Gold, total.ToString(), true, ItemGetWay.Welfare);
+            unit.GetComponent<NumericComponentS>().ApplyValue(null, NumericType.InvestReward, 1, 0);
             await ETTask.CompletedTask;
         }
     }

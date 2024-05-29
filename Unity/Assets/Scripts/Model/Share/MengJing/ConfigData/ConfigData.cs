@@ -28,6 +28,50 @@ namespace ET
             {110005,90015},
         };
 
+        
+        
+        /// <summary>
+        /// 新人抽奖 //KeyId权重 value道具..     第七天是武器ComHelp.GetWelfareWeapon
+        /// </summary>
+        [StaticField]
+        public static List<KeyValuePair> WelfareDrawList = new List<KeyValuePair>
+        {
+            //第一天
+            new KeyValuePair(){ KeyId = 10, Value = "10000161;2" },  
+            //第二天
+            new KeyValuePair(){ KeyId = 10,  Value = "11200000;1" },
+            //第三天
+            new KeyValuePair(){ KeyId = 0,  Value = "10010072;1" },
+            //第四天
+            new KeyValuePair(){ KeyId = 10,  Value = "10010033;1" },
+            //第五天
+            new KeyValuePair(){ KeyId = 0,  Value = "10010093;1" },
+            //第六天
+            new KeyValuePair(){ KeyId = 10,  Value = "10010073;1" },
+            //第七天
+            new KeyValuePair(){ KeyId = 0,  Value = "1;1" },
+        };
+        
+        
+        /// <summary>
+        /// 投资金额, 只可以投六天，第七天领取奖励。  投资金额-》礼包
+        /// </summary>
+        [StaticField]
+        public static List<KeyValuePair> WelfareInvestList =  new List<KeyValuePair>()
+        { 
+            new KeyValuePair(){ KeyId = 50000, Value = "10000122;1" },
+            new KeyValuePair(){ KeyId = 100000, Value = "10010088;1" },
+            new KeyValuePair(){ KeyId = 150000, Value = "10010083;5" },
+            new KeyValuePair(){ KeyId = 200000, Value = "10010033;1" },
+            new KeyValuePair(){ KeyId = 250000, Value = "10000158;1" },
+            new KeyValuePair(){ KeyId = 300000, Value = "10010046;1" },
+        };
+        /// <summary>
+        /// 完成每天目标任务的奖励
+        /// </summary>
+        [StaticField]
+        public static List<string> WelfareTaskReward = new List<string>() { "10000161;1@10010033;1@10010092;1", "10000161;1@10010051;1@10010093;1", "10000161;1@10000158;1@10010046;1", "10000161;1@10010033;1@10010086;1", "10000161;1@10010040;1@10000158;1", "10000161;1@10000143;3@10010086;1", "10000161;1@10049003;1@10010052;1" };
+        
         /// <summary>
         /// key权重  value道具
         /// </summary>

@@ -1,47 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
-    [ActorMessageHandler]
-    public class C2M_WelfareInvestHandler : AMActorLocationRpcHandler<Unit, C2M_WelfareInvestRequest, M2C_WelfareInvestResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_WelfareInvestHandler : MessageLocationHandler<Unit, C2M_WelfareInvestRequest, M2C_WelfareInvestResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_WelfareInvestRequest request, M2C_WelfareInvestResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_WelfareInvestRequest request, M2C_WelfareInvestResponse response)
         {
-            if (unit.GetComponent<BagComponent>().GetBagLeftCell() < 1)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < 1)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
-                reply();
                 return;
             }
-            if (request.Index < 0 || request.Index >= ConfigHelper.WelfareInvestList.Count)
+            if (request.Index < 0 || request.Index >= ConfigData.WelfareInvestList.Count)
             {
                 Log.Error($"C2M_WelfareInvestRequest 1");
                 response.Error = ErrorCode.ERR_ModifyData;
-                reply();
                 return;
             }
-            if (unit.GetComponent<UserInfoComponent>().UserInfo.WelfareInvestList.Contains(request.Index))
+            if (unit.GetComponent<UserInfoComponentS>().UserInfo.WelfareInvestList.Contains(request.Index))
             {
                 response.Error = ErrorCode.ERR_AlreadyReceived;
-                reply();
                 return;
             }
 
-            int ment = ConfigHelper.WelfareInvestList[request.Index].KeyId;
-            if (unit.GetComponent<UserInfoComponent>().UserInfo.Gold <= ment)
+            int ment = ConfigData.WelfareInvestList[request.Index].KeyId;
+            if (unit.GetComponent<UserInfoComponentS>().UserInfo.Gold <= ment)
             {
                 response.Error = ErrorCode.ERR_GoldNotEnoughError;
-                reply();
                 return;
             }
-            string reward = ConfigHelper.WelfareInvestList[request.Index].Value;
-            unit.GetComponent<BagComponent>().OnAddItemData(reward, $"{ItemGetWay.Welfare}_{TimeHelper.ServerNow()}");
-            unit.GetComponent<UserInfoComponent>().UpdateRoleMoneySub( UserDataType.Gold,(ment * -1).ToString(), true, ItemGetWay.Welfare );
-            unit.GetComponent<NumericComponent>().ApplyChange(null, NumericType.InvestMent, ment, 0);
-            unit.GetComponent<NumericComponent>().ApplyChange(null, NumericType.InvestTotal, ment, 0);
-            unit.GetComponent<UserInfoComponent>().UserInfo.WelfareInvestList.Add(request.Index);
-            reply();
+            string reward = ConfigData.WelfareInvestList[request.Index].Value;
+            unit.GetComponent<BagComponentS>().OnAddItemData(reward, $"{ItemGetWay.Welfare}_{TimeHelper.ServerNow()}");
+            unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneySub( UserDataType.Gold,(ment * -1).ToString(), true, ItemGetWay.Welfare );
+            unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.InvestMent, ment, 0);
+            unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.InvestTotal, ment, 0);
+            unit.GetComponent<UserInfoComponentS>().UserInfo.WelfareInvestList.Add(request.Index);
             await ETTask.CompletedTask;
         }
     }

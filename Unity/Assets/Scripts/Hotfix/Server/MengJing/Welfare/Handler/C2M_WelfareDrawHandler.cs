@@ -1,51 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ET
+namespace ET.Server
 {
 
-    [ActorMessageHandler]
-    public class C2M_WelfareDrawHandler : AMActorLocationRpcHandler<Unit, C2M_WelfareDrawRequest, M2C_WelfareDrawResponse>
+    [MessageHandler(SceneType.Map)]
+    public class C2M_WelfareDrawHandler : MessageLocationHandler<Unit, C2M_WelfareDrawRequest, M2C_WelfareDrawResponse>
     {
-        protected override async ETTask Run(Unit unit, C2M_WelfareDrawRequest request, M2C_WelfareDrawResponse response, Action reply)
+        protected override async ETTask Run(Unit unit, C2M_WelfareDrawRequest request, M2C_WelfareDrawResponse response)
         {
-            if (unit.GetComponent<BagComponent>().GetBagLeftCell() < 1)
+            if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < 1)
             {
                 response.Error = ErrorCode.ERR_BagIsFull;
-                reply();
                 return;
             }
 
             //已经领取过抽奖奖励
-            if (unit.GetComponent<NumericComponent>().GetAsInt(NumericType.DrawReward) == 1)
+            if (unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.DrawReward) == 1)
             {
-                reply();
                 return;
             }
 
             //已经生成了奖励格子
-            if (unit.GetComponent<NumericComponent>().GetAsInt(NumericType.DrawIndex) > 0)
+            if (unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.DrawIndex) > 0)
             {
-                reply();
                 return;
             }          
            
-            int openDay = unit.GetComponent<UserInfoComponent>().GetCrateDay();
+            int openDay = unit.GetComponent<UserInfoComponentS>().GetCrateDay();
             int index = ComHelp.GetWelfareDrawIndex( openDay );
 
             if (index == -1)
             {
                 List<int> weights = new List<int>();
 
-                List<KeyValuePair> drawlist = ConfigHelper.WelfareDrawList;
+                List<KeyValuePair> drawlist = ConfigData.WelfareDrawList;
                 for (int i = 0; i < drawlist.Count; i++)
                 {
                     weights.Add(drawlist[i].KeyId);
                 }
                 index = RandomHelper.RandomByWeight(weights) + 1;
             }
-            unit.GetComponent<NumericComponent>().ApplyValue(NumericType.DrawIndex, index);
-            reply();
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.DrawIndex, index);
             await ETTask.CompletedTask;
         }
     }
