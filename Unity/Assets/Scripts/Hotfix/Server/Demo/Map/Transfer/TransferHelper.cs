@@ -467,7 +467,7 @@ namespace ET.Server
                             return ErrorCode.ERR_TransferFailError;
                         }
                         TransferHelper.BeforeTransfer(unit);
-                        await TransferHelper.Transfer(unit, createUnit.FubenInstanceId, (int)SceneTypeEnum.TeamDungeon, createUnit.FubenId, createUnit.FubenType, "0");
+                        await TransferHelper.Transfer(unit, createUnit.FubenActorId, (int)SceneTypeEnum.TeamDungeon, createUnit.FubenId, createUnit.FubenType, "0");
                         if (SceneConfigHelper.IsSingleFuben(sceneTypeEnum))
                         {
                             TransferHelper.NoticeFubenCenter(oldscene, 2).Coroutine();
