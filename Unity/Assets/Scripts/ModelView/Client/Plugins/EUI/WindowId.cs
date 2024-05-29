@@ -55,5 +55,6 @@ namespace ET.Client
 		WindowID_RoleXiLianNumReward,
 		WindowID_Store,
 		WindowID_Mystery,
+		WindowID_PetEgg,
 	}
 }
