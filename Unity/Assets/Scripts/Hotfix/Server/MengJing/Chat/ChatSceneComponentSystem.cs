@@ -2,10 +2,12 @@
 
 namespace ET.Server
 {
+    
     [FriendOf(typeof (ChatSceneComponent))]
     [EntitySystemOf(typeof (ChatSceneComponent))]
     public static partial class ChatSceneComponentSystem
     {
+        
         [Invoke(TimerInvokeType.ChatSceneTimer)]
         public class ChatSceneTimer: ATimer<ChatSceneComponent>
         {
@@ -82,7 +84,8 @@ namespace ET.Server
             if (self.WordSayList.Count > 0)
             {
                 timerComponent.Remove(ref self.Timer);
-                self.Timer = timerComponent.NewOnceTimer(self.WordSayList[0].ServerTime, TimerInvokeType.ChatSceneTimer, self);
+                long ServerTime = Math.Max(TimeHelper.ServerNow(), self.WordSayList[0].ServerTime);
+                self.Timer = timerComponent.NewOnceTimer(ServerTime, TimerInvokeType.ChatSceneTimer, self);
             }
             else
             {
@@ -97,8 +100,8 @@ namespace ET.Server
                 WorldSayConfig worldSayConfig = self.WordSayList[0];
                 self.WordSayList.RemoveAt(0);
 
-                // ServerMessageHelper.SendServerMessage(DBHelper.GetChatServerId(self.DomainZone()),
-                //     NoticeType.Notice, worldSayConfig.Conent).Coroutine();
+                BroadMessageHelper.SendServerMessage(self.Root(),  UnitCacheHelper.GetChatServerId(self.Zone()),
+                    NoticeType.Notice, worldSayConfig.Conent).Coroutine();
             }
 
             self.StartTimer();
