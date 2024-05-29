@@ -6604,3 +6604,37 @@ message M2C_SeasonUseFruitResponse // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType M2C_ShoujiRewardResponse
+message C2M_ShoujiRewardRequest // ILocationRequest
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 ChapterId = 1;
+	int32 RewardIndex = 2;
+}
+
+message M2C_ShoujiRewardResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+
+//ResponseType M2C_ShouJiTreasureResponse
+//收集珍宝
+message C2M_ShouJiTreasureRequest  // ILocationRequest
+{
+	int32 RpcId = 90;
+	int ShouJiId = 1;
+	repeated int64 ItemIds = 2;
+}
+
+message M2C_ShouJiTreasureResponse // ILocationResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	int32 ActiveNum = 1;
+}

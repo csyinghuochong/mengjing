@@ -25791,6 +25791,137 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(M2C_ShoujiRewardResponse))]
+	[Message(OuterMessage.C2M_ShoujiRewardRequest)]
+	[MemoryPackable]
+	public partial class C2M_ShoujiRewardRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ShoujiRewardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ShoujiRewardRequest), isFromPool) as C2M_ShoujiRewardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ChapterId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int RewardIndex { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			this.ChapterId = default;
+			this.RewardIndex = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ShoujiRewardResponse)]
+	[MemoryPackable]
+	public partial class M2C_ShoujiRewardResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ShoujiRewardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ShoujiRewardResponse), isFromPool) as M2C_ShoujiRewardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(M2C_ShouJiTreasureResponse))]
+//收集珍宝
+	[Message(OuterMessage.C2M_ShouJiTreasureRequest)]
+	[MemoryPackable]
+	public partial class C2M_ShouJiTreasureRequest: MessageObject, ILocationRequest
+	{
+		public static C2M_ShouJiTreasureRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2M_ShouJiTreasureRequest), isFromPool) as C2M_ShouJiTreasureRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ShouJiId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public List<long> ItemIds { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ShouJiId = default;
+			this.ItemIds.Clear();
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.M2C_ShouJiTreasureResponse)]
+	[MemoryPackable]
+	public partial class M2C_ShouJiTreasureResponse: MessageObject, ILocationResponse
+	{
+		public static M2C_ShouJiTreasureResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(M2C_ShouJiTreasureResponse), isFromPool) as M2C_ShouJiTreasureResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(0)]
+		public int ActiveNum { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			this.ActiveNum = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -26553,5 +26684,9 @@ namespace ET
 		 public const ushort M2C_SeasonOpenJingHeResponse = 10759;
 		 public const ushort C2M_SeasonUseFruitRequest = 10760;
 		 public const ushort M2C_SeasonUseFruitResponse = 10761;
+		 public const ushort C2M_ShoujiRewardRequest = 10762;
+		 public const ushort M2C_ShoujiRewardResponse = 10763;
+		 public const ushort C2M_ShouJiTreasureRequest = 10764;
+		 public const ushort M2C_ShouJiTreasureResponse = 10765;
 	}
 }
