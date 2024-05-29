@@ -269,5 +269,21 @@ namespace ET.Client
 
             return response;
         }
+
+        public static async ETTask<int> RequestPetTakeOutBag(Scene root, long id)
+        {
+            C2M_PetTakeOutBag request = new() { PetInfoId = id };
+            M2C_PetTakeOutBag response = (M2C_PetTakeOutBag)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> RequestRolePetFenjie(Scene root, long id)
+        {
+            C2M_RolePetFenjie request = new() { PetInfoId = id };
+            M2C_RolePetFenjie response = (M2C_RolePetFenjie)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
 }

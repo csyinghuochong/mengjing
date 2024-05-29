@@ -58,5 +58,6 @@ namespace ET.Client
 		WindowID_PetEgg,
 		WindowID_CommonReward,
 		WindowID_PetEggChouKaProbExplain,
+		WindowID_RolePetBag,
 	}
 }
