@@ -29,7 +29,11 @@ namespace ET
         public StartSceneConfig LoginCenterConfig;
 
         public StartSceneConfig ChatConfig;
+        
+        public StartSceneConfig RechargeConfig;
 
+        public StartSceneConfig CenterConfig;
+        
         public Dictionary<int, StartSceneConfig> UnitCaches = new Dictionary<int, StartSceneConfig>();
         
         public MultiMap<int, StartSceneConfig> LocalDungeons = new MultiMap<int, StartSceneConfig>();
