@@ -5,12 +5,12 @@ namespace ET.Server
 {
 
     [MessageHandler(SceneType.Activity)]
-    [FriendOf(typeof(ActivityServerComponent))]
+    [FriendOf(typeof(ActivitySceneComponent))]
     public class M2A_TurtleRecordHandler : MessageHandler<Scene, M2A_TurtleRecordRequest, A2M_TurtleRecordResponse>
     {
         protected override async ETTask Run(Scene scene, M2A_TurtleRecordRequest request, A2M_TurtleRecordResponse response)
         {
-            ActivityServerComponent activitySceneComponent= scene.GetComponent<ActivityServerComponent>();
+            ActivitySceneComponent activitySceneComponent= scene.GetComponent<ActivitySceneComponent>();
             DBDayActivityInfo dBDayActivityInfo = activitySceneComponent.DBDayActivityInfo;
             if (dBDayActivityInfo.TurtleWinTimes.Count < 3)
             {

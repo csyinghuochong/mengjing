@@ -5,12 +5,12 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [MessageHandler(SceneType.Activity)]
-    [FriendOf(typeof(ActivityServerComponent))]
+    [FriendOf(typeof(ActivitySceneComponent))]
     public class M2A_TurtleReportHandler : MessageHandler<Scene, M2A_TurtleReportRequest, A2M_TurtleReportResponse>
     {
         protected override async ETTask Run(Scene scene, M2A_TurtleReportRequest request, A2M_TurtleReportResponse response)
         {
-            DBDayActivityInfo dBDayActivityInfo = scene.GetComponent<ActivityServerComponent>().DBDayActivityInfo;
+            DBDayActivityInfo dBDayActivityInfo = scene.GetComponent<ActivitySceneComponent>().DBDayActivityInfo;
             if (dBDayActivityInfo.TurtleWinTimes.Count < 3)
             {
                 dBDayActivityInfo.TurtleWinTimes = new List<int> { 0,0,0 };
@@ -24,7 +24,7 @@ namespace ET.Server
 
             //发竞猜邮件
             List<KeyValuePair<long, long>>  playerids = null;
-            scene.GetComponent<ActivityServerComponent>().TurtleSupportList.TryGetValue(request.TurtleId, out playerids);
+            scene.GetComponent<ActivitySceneComponent>().TurtleSupportList.TryGetValue(request.TurtleId, out playerids);
             if (playerids != null)
             {
                 MailInfo mailInfo = new MailInfo();

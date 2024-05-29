@@ -5,7 +5,7 @@ namespace ET.Server
 {
     
     [MessageHandler(SceneType.Activity)]
-    [FriendOf(typeof(ActivityServerComponent))]
+    [FriendOf(typeof(ActivitySceneComponent))]
     public class M2A_PetMingBattleWinHandler : MessageHandler<Scene, M2A_PetMingBattleWinRequest, A2M_PetMingBattleWinResponse>
     {
         protected override async ETTask Run(Scene scene, M2A_PetMingBattleWinRequest request, A2M_PetMingBattleWinResponse response)
@@ -13,7 +13,7 @@ namespace ET.Server
             long oldUnitid = 0;
             long serverTime = TimeHelper.ServerNow();
 
-            List<PetMingPlayerInfo> petMingPlayerInfos = scene.GetComponent<ActivityServerComponent>().DBDayActivityInfo.PetMingList;
+            List<PetMingPlayerInfo> petMingPlayerInfos = scene.GetComponent<ActivitySceneComponent>().DBDayActivityInfo.PetMingList;
 
             //移除改队伍之前占领
             for (int i = petMingPlayerInfos.Count - 1; i >= 0; i--)

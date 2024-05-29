@@ -510,7 +510,8 @@ namespace ET.Client
 
         public static async ETTask<A2C_MysteryListResponse> RquestMysteryList(Scene root, long userId)
         {
-            C2A_MysteryListRequest request = new() { UserId = userId };
+            C2A_MysteryListRequest request = C2A_MysteryListRequest.Create();
+            request.UserId = userId;
             A2C_MysteryListResponse response = (A2C_MysteryListResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response;

@@ -4,12 +4,12 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [MessageHandler(SceneType.Activity)]
-    [FriendOf(typeof(ActivityServerComponent))]
+    [FriendOf(typeof(ActivitySceneComponent))]
     public class M2A_TurtleSupportHandler : MessageHandler<Scene, M2A_TurtleSupportRequest, A2M_TurtleSupportResponse>
     {
         protected override async ETTask Run(Scene scene, M2A_TurtleSupportRequest request, A2M_TurtleSupportResponse response)
         {
-            ActivityServerComponent activitySceneComponent = scene.GetComponent<ActivityServerComponent>();
+            ActivitySceneComponent activitySceneComponent = scene.GetComponent<ActivitySceneComponent>();
             if (!activitySceneComponent.TurtleSupportList.ContainsKey(request.SupportId))
             {
                 activitySceneComponent.TurtleSupportList.Add(request.SupportId, new List<KeyValuePair<long, long>>());

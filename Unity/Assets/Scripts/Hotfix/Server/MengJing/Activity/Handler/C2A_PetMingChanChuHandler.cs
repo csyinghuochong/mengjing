@@ -2,13 +2,13 @@
 namespace ET.Server
 { 
     [MessageHandler(SceneType.Activity)]
-    [FriendOf(typeof(ActivityServerComponent))]
+    [FriendOf(typeof(ActivitySceneComponent))]
     [FriendOf(typeof(DBDayActivityInfo))]
     public class C2A_PetMingChanChuHandler : MessageHandler<Scene, C2A_PetMingChanChuRequest, A2C_PetMingChanChuResponse>
     {
         protected override async ETTask Run(Scene scene, C2A_PetMingChanChuRequest request, A2C_PetMingChanChuResponse response)
         {
-            ActivityServerComponent activitySceneComponent = scene.GetComponent<ActivityServerComponent>();
+            ActivitySceneComponent activitySceneComponent = scene.GetComponent<ActivitySceneComponent>();
 
             long chanchu = 0;
             if (activitySceneComponent.DBDayActivityInfo.PetMingChanChu.ContainsKey(request.ActorId))

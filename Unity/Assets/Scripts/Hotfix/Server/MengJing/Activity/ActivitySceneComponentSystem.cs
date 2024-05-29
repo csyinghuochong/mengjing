@@ -6,9 +6,9 @@ namespace ET.Server
 {
     
     [Invoke(TimerInvokeType.ActivityServerTimer)]
-    public class ActivityServerTimer: ATimer<ActivityServerComponent>
+    public class ActivityServerTimer: ATimer<ActivitySceneComponent>
     {
-        protected override void Run(ActivityServerComponent self)
+        protected override void Run(ActivitySceneComponent self)
         {
             try
             {
@@ -21,13 +21,13 @@ namespace ET.Server
         }
     }
 
-    [EntitySystemOf(typeof(ActivityServerComponent))]
-    [FriendOf(typeof(ActivityServerComponent))]
+    [EntitySystemOf(typeof(ActivitySceneComponent))]
+    [FriendOf(typeof(ActivitySceneComponent))]
     [FriendOf(typeof(DBDayActivityInfo))]
-    public static partial class ActivityServerComponentSystem
+    public static partial class ActivitySceneComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.ActivityServerComponent self)
+        private static void Awake(this ET.Server.ActivitySceneComponent self)
         {
             self.MapIdList.Clear();
             Log.Debug($"self.Zone:  {self.Zone()}");
@@ -46,12 +46,12 @@ namespace ET.Server
         }
         
         [EntitySystem]
-        private static void Destroy(this ET.Server.ActivityServerComponent self)
+        private static void Destroy(this ET.Server.ActivitySceneComponent self)
         {
 
         }
         
-        public static void OnCheck(this ActivityServerComponent self)
+        public static void OnCheck(this ActivitySceneComponent self)
         {
             DateTime dateTime = TimeHelper.DateTimeNow();
   
@@ -65,7 +65,7 @@ namespace ET.Server
             self.CheckPetMine();
         }
 
-        public static async ETTask NoticeActivityUpdate_Hour(this ActivityServerComponent self, DateTime dateTime)
+        public static async ETTask NoticeActivityUpdate_Hour(this ActivitySceneComponent self, DateTime dateTime)
         {
             await ETTask.CompletedTask;
             DayOfWeek dayOfWeek = dateTime.DayOfWeek;
@@ -159,7 +159,7 @@ namespace ET.Server
             }
         }
 
-        public static void InitPetMineExtend(this ActivityServerComponent self)
+        public static void InitPetMineExtend(this ActivitySceneComponent self)
         {
             List<MineBattleConfig> mineBattleConfig = MineBattleConfigCategory.Instance.GetAll().Values.ToList();
             for (int i = 0; i < mineBattleConfig.Count; i++)
@@ -196,7 +196,7 @@ namespace ET.Server
         }
         
         
-        public static void CheckPetMine(this ActivityServerComponent self)
+        public static void CheckPetMine(this ActivitySceneComponent self)
         {
             self.CheckIndex++;
             if (self.CheckIndex >= 1)
@@ -245,7 +245,7 @@ namespace ET.Server
         }
         
         
-        public static async ETTask InitDayActivity(this ActivityServerComponent self)
+        public static async ETTask InitDayActivity(this ActivitySceneComponent self)
         {
             int zone = self.Zone();
             ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(zone);
@@ -275,7 +275,7 @@ namespace ET.Server
             self.Timer =  self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Minute, TimerInvokeType.ActivityServerTimer, self);
         }
         
-         public static async ETTask OnCheckFuntionButton(this ActivityServerComponent self)
+         public static async ETTask OnCheckFuntionButton(this ActivitySceneComponent self)
          {
              await ETTask.CompletedTask;
              long serverTime = TimeHelper.ServerNow();
@@ -345,7 +345,7 @@ namespace ET.Server
              }
          }
 
-         public static  void InitFunctionButton(this ActivityServerComponent self)
+         public static  void InitFunctionButton(this ActivitySceneComponent self)
          {
              self.ActivityTimerList.Clear();
              Log.Warning("InitFunctionButton");
@@ -389,12 +389,12 @@ namespace ET.Server
              }
          }
 
-     public static  void SaveDB(this ActivityServerComponent self)
+     public static  void SaveDB(this ActivitySceneComponent self)
      {
          self.Root().GetComponent<DBManagerComponent>().GetZoneDB(self.Zone()).Save(self.DBDayActivityInfo).Coroutine();
      }
 
-     public static int OnMysteryBuyRequest(this ActivityServerComponent self, MysteryItemInfo mysteryInfo)
+     public static int OnMysteryBuyRequest(this ActivitySceneComponent self, MysteryItemInfo mysteryInfo)
      {
              for (int i = 0; i < self.DBDayActivityInfo.MysteryItemInfos.Count; i++)
              {

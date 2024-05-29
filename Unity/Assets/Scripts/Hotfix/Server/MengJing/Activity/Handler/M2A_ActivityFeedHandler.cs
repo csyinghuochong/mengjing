@@ -4,13 +4,13 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [MessageHandler(SceneType.Activity)]
-    [FriendOf(typeof(ActivityServerComponent))]
+    [FriendOf(typeof(ActivitySceneComponent))]
     public class M2A_ActivityFeedHandler : MessageHandler<Scene, M2A_ActivityFeedRequest, A2M_ActivityFeedResponse>
     {
         protected override async ETTask Run(Scene scene, M2A_ActivityFeedRequest request, A2M_ActivityFeedResponse response)
         {
             
-            ActivityServerComponent activitySceneComponent = scene.GetComponent<ActivityServerComponent>();
+            ActivitySceneComponent activitySceneComponent = scene.GetComponent<ActivitySceneComponent>();
             if (!activitySceneComponent.DBDayActivityInfo.FeedPlayerList.ContainsKey(request.UnitID))
             {
                 activitySceneComponent.DBDayActivityInfo.FeedPlayerList.Add( request.UnitID, 0 );

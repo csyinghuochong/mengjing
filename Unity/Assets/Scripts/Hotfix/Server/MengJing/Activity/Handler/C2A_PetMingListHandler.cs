@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [MessageHandler(SceneType.Activity)]
-    [FriendOf(typeof(ActivityServerComponent))]
+    [FriendOf(typeof(ActivitySceneComponent))]
     [FriendOf(typeof(DBDayActivityInfo))]
     [FriendOf(typeof(PetComponentS))]
     [FriendOf(typeof(UserInfoComponentS))]
@@ -16,7 +16,7 @@ namespace ET.Server
               {
                   List<PetMingPlayerInfo> selfMinelist = new List<PetMingPlayerInfo>();
 
-                  ActivityServerComponent activitySceneComponent = scene.GetComponent<ActivityServerComponent>();
+                  ActivitySceneComponent activitySceneComponent = scene.GetComponent<ActivitySceneComponent>();
                   List<PetMingPlayerInfo> minglist = activitySceneComponent.DBDayActivityInfo.PetMingList;
 
                   if (TimeHelper.ServerNow() - activitySceneComponent.PetMingLastTime < TimeHelper.Minute)

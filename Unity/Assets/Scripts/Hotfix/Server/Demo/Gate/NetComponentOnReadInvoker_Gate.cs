@@ -91,7 +91,8 @@ namespace ET.Server
                         ActorId friendServerId = player.FriendServerId;
                         response = await root.GetComponent<MessageSender>().Call(friendServerId, iFriendActorRequest);
                     }
-
+                    
+                    
                     if (response == null)
                     {
                         break;

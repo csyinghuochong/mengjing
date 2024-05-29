@@ -6,13 +6,13 @@ namespace ET
 {
 
     [MessageHandler(SceneType.Activity)]
-    [FriendOf(typeof(ActivityServerComponent))]
+    [FriendOf(typeof(ActivitySceneComponent))]
     public class M2A_ZhanQuReceiveHandler : MessageHandler<Scene, M2A_ZhanQuReceiveRequest, A2M_ZhanQuReceiveResponse>
     {
 
         protected override async ETTask Run(Scene scene, M2A_ZhanQuReceiveRequest request, A2M_ZhanQuReceiveResponse response)
         {
-            List<ZhanQuReceiveNumber> zhanQuReceiveNumbers =  scene.GetComponent<ActivityServerComponent>().DBDayActivityInfo.ZhanQuReveives;
+            List<ZhanQuReceiveNumber> zhanQuReceiveNumbers =  scene.GetComponent<ActivitySceneComponent>().DBDayActivityInfo.ZhanQuReveives;
 
             int receiveNum = 0;
             for (int i = 0; i < zhanQuReceiveNumbers.Count; i++)

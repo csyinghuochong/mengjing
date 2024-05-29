@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 
-	[ChildOf(typeof(ActivityServerComponent))]
+	[ChildOf(typeof(ActivitySceneComponent))]
     [BsonIgnoreExtraElements]
 	public class DBDayActivityInfo : Entity, IAwake
 	{

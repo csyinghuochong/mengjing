@@ -3,12 +3,12 @@
 namespace ET.Server
 {
     [MessageHandler(SceneType.Activity)]
-    [FriendOf(typeof(ActivityServerComponent))]
+    [FriendOf(typeof(ActivitySceneComponent))]
     public class M2A_FirstWinInfoHandler : MessageHandler<Scene, M2A_FirstWinInfoMessage>
     {
         protected override async ETTask Run(Scene scene, M2A_FirstWinInfoMessage message)
         {
-            DBDayActivityInfo dBFirstWinInfo = scene.GetComponent<ActivityServerComponent>().DBDayActivityInfo;
+            DBDayActivityInfo dBFirstWinInfo = scene.GetComponent<ActivitySceneComponent>().DBDayActivityInfo;
             for (int i= 0; i < dBFirstWinInfo.FirstWinInfos.Count; i++)
             {
                 FirstWinInfo firstWinInfo = dBFirstWinInfo.FirstWinInfos[i];
