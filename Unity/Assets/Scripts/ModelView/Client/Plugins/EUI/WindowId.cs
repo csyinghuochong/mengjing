@@ -56,5 +56,6 @@ namespace ET.Client
 		WindowID_Store,
 		WindowID_Mystery,
 		WindowID_PetEgg,
+		WindowID_CommonReward,
 	}
 }

@@ -26,10 +26,16 @@ namespace ET.Client
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.None);
+
+            scrollItemCommonItem.ES_CommonItem.E_ItemNumText.gameObject.SetActive(self.ShowNum);
+            scrollItemCommonItem.ES_CommonItem.E_ItemNameText.gameObject.SetActive(self.ShowName);
         }
 
-        public static void Refresh(this ES_RewardList self, List<RewardItem> rewardItems)
+        public static void Refresh(this ES_RewardList self, List<RewardItem> rewardItems, bool showNumber = true, bool showName = false)
         {
+            self.ShowNum = showNumber;
+            self.ShowName = showName;
+
             self.ShowBagInfos.Clear();
             foreach (RewardItem item in rewardItems)
             {
@@ -40,8 +46,11 @@ namespace ET.Client
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
-        public static void Refresh(this ES_RewardList self, string rewarfItems)
+        public static void Refresh(this ES_RewardList self, string rewarfItems, bool showNumber = true, bool showName = false)
         {
+            self.ShowNum = showNumber;
+            self.ShowName = showName;
+
             self.ShowBagInfos.Clear();
             string[] items = rewarfItems.Split('@');
             foreach (string item in items)

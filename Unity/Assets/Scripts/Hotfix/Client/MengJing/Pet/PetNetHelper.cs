@@ -253,5 +253,13 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<M2C_PetEggDuiHuanResponse> RequestPetEggDuiHuan(Scene root, int index)
+        {
+            C2M_PetEggDuiHuanRequest request = new() { ChouKaId = index };
+            M2C_PetEggDuiHuanResponse response = (M2C_PetEggDuiHuanResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
     }
 }

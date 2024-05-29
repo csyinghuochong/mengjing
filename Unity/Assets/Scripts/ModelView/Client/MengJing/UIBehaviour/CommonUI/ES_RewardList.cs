@@ -10,6 +10,8 @@ namespace ET.Client
 	{
 		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
+		public bool ShowNum;
+		public bool ShowName;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{
