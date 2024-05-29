@@ -16,10 +16,7 @@ namespace ET.Client
 
         }
 
-        public static void InitBuff(this ET.Client.BuffManagerComponentC self)
-        {
-            
-        }
+       
     }
 
 }
