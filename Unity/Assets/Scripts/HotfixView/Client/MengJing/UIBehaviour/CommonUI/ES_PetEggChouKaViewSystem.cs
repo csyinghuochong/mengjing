@@ -95,7 +95,7 @@ namespace ET.Client
 
         public static void OnBtn_RolePetHeXin(this ES_PetEggChouKa self)
         {
-            // UIHelper.Create(self.ZoneScene(), UIType.UIPetHeXinHeCheng).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetHeXinHeCheng).Coroutine();
         }
 
         public static async ETTask OnBtn_ChouKa(this ES_PetEggChouKa self, int choukaType)
