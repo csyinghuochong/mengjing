@@ -294,12 +294,12 @@ namespace ET.Server
             unitInfoComponent.UnitName = JiaYuanPastureConfigCategory.Instance.Get(jiaYuanPastures.ConfigId).Name;
 
             unit.ConfigId = jiaYuanPastures.ConfigId;
-            unit.AddComponent<StateComponentS>();         //添加状态组件
-            unit.AddComponent<BuffManagerComponentS>();      //添加
+            unit.AddComponent<StateComponentS>(); //添加状态组件
+            unit.AddComponent<BuffManagerComponentS>(); //添加
             unit.Position = ConfigData.PastureInitPos;
             unit.Type = UnitType.Pasture;
 
-            AIComponent aIComponent = unit.AddComponent<AIComponent, int>(11);     //AI行为树序号
+            AIComponent aIComponent = unit.AddComponent<AIComponent, int>(11); //AI行为树序号
             aIComponent.InitPasture();
             aIComponent.Begin();
 
@@ -311,7 +311,6 @@ namespace ET.Server
             return unit;
         }
 
-        
         public static Unit CreateTianTiPet(Scene scene, long masterId, int roleCamp, RolePetInfo petinfo, float3 postion, float rotation, int cell)
         {
             Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(petinfo.Id, 1);
@@ -406,7 +405,7 @@ namespace ET.Server
             Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), 1);
             scene.GetComponent<UnitComponent>().Add(unit);
             unit.AddComponent<ObjectWait>();
-            unit.AddComponent<StateComponentS>();            //添加状态组件
+            unit.AddComponent<StateComponentS>(); //添加状态组件
             unit.AddComponent<HeroDataComponentS>();
             NumericComponentS numericComponent = unit.AddComponent<NumericComponentS>();
             UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>();
@@ -419,7 +418,7 @@ namespace ET.Server
             unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
             return unit;
         }
-        
+
         public static Unit CreateNpcByPosition(Scene scene, int npcId, float3 vector3)
         {
             NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcId);
@@ -462,14 +461,14 @@ namespace ET.Server
             unitInfoComponent.MasterName = jiaYuanPet.PlayerName;
             unitInfoComponent.UnitName = jiaYuanPet.PetName;
             unit.ConfigId = jiaYuanPet.ConfigId;
-            unit.AddComponent<StateComponentS>();         //添加状态组件
-            unit.AddComponent<BuffManagerComponentS>();      //添加
+            unit.AddComponent<StateComponentS>(); //添加状态组件
+            unit.AddComponent<BuffManagerComponentS>(); //添加
             unit.Position = ConfigData.JiaYuanPetPosition[1];
             unit.Type = UnitType.Pet;
             numericComponent.SetNoEvent(NumericType.MasterId, masterid);
             numericComponent.SetNoEvent(NumericType.Base_Speed_Base, 10000);
-            AIComponent aIComponent = unit.AddComponent<AIComponent, int>(11);     //AI行为树序号
-            aIComponent.InitJiaYuanPet( );
+            AIComponent aIComponent = unit.AddComponent<AIComponent, int>(11); //AI行为树序号
+            aIComponent.InitJiaYuanPet();
             aIComponent.Begin();
             //添加其他组件
             unit.AddComponent<HeroDataComponentS>().InitJiaYuanPet(false);
@@ -477,7 +476,7 @@ namespace ET.Server
 
             return unit;
         }
-        
+
         public static Unit CreatePlan(Scene scene, JiaYuanPlant jiaYuanPlant, long unitid)
         {
             Unit unit = scene.GetComponent<UnitComponent>().AddChildWithId<Unit, int>(jiaYuanPlant.UnitId, jiaYuanPlant.ItemId);
@@ -493,18 +492,368 @@ namespace ET.Server
             unitInfoComponent.UnitName = JiaYuanFarmConfigCategory.Instance.Get(jiaYuanPlant.ItemId).Name;
 
             unit.ConfigId = jiaYuanPlant.ItemId;
-            unit.AddComponent<StateComponentS>();         //添加状态组件
-            unit.AddComponent<BuffManagerComponentS>();      //添加
+            unit.AddComponent<StateComponentS>(); //添加状态组件
+            unit.AddComponent<BuffManagerComponentS>(); //添加
             unit.Position = ConfigData.PlanPositionList[jiaYuanPlant.CellIndex];
             unit.Type = UnitType.Plant;
 
             //添加其他组件
-            unit.AddComponent<HeroDataComponentS>().InitPlan(jiaYuanPlant,false);
+            unit.AddComponent<HeroDataComponentS>().InitPlan(jiaYuanPlant, false);
             numericComponent.SetNoEvent(NumericType.MasterId, unitid);
             unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
             return unit;
         }
+
         
+        public static List<RewardItem> AI_MonsterDrop(Unit unit, int monsterID, float dropProValue, bool all)
+        {
+            //根据怪物ID获得掉落ID
+            MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(monsterID);
+            List<RewardItem> dropItemList = new List<RewardItem>();
+            int[] dropID = monsterCof.DropID;
+
+            if (dropID != null)
+            {
+                for (int i = 0; i < dropID.Length; i++)
+                {
+                    if (dropID[i] == 0)
+                        continue;
+
+                    DropConfig dropConfig = DropConfigCategory.Instance.Get(dropID[i]);
+                    List<RewardItem> dropItemList_2 = new List<RewardItem>();
+                    DropHelper.DropIDToDropItem(dropID[i], dropItemList_2, monsterID, dropProValue, all);
+                    if (dropConfig.ifEnterBag == 1)
+                    {
+                        unit.GetComponent<BagComponentS>().OnAddItemData(dropItemList_2, string.Empty, $"{ItemGetWay.PickItem}_{TimeHelper.ServerNow()}");
+                    }
+                    else
+                    {
+                        dropItemList.AddRange(dropItemList_2);
+                    }
+                }
+            }
+            return dropItemList;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bekill"></param>
+        /// <param name="main"></param>
+        /// <param name="sceneType"></param>
+        /// <param name="playerNumer"></param>
+        public static void CreateDropItems(Unit bekill, Unit main, int sceneType, int scenid, int playerNumer)
+        {
+            if (bekill.Type != UnitType.Monster || main.Type != UnitType.Player)
+            {
+                return;
+            }
+
+            bool drop = true;
+            MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(bekill.ConfigId);
+            if (SceneConfigHelper.IsSingleFuben(sceneType))
+            {
+                drop = main.GetComponent<UserInfoComponentS>().UserInfo.PiLao > 0 || bekill.IsBoss();
+
+                //场景宝箱掉落和体力无关
+                if (monsterCof.MonsterType == 5 &&
+                    (monsterCof.MonsterSonType == 55 || monsterCof.MonsterSonType == 57))
+                {
+                    drop = true;
+                }
+
+                if (monsterCof.MonsterType == 1 && monsterCof.MonsterSonType == 3)
+                {
+                    drop = true;
+                }
+
+                if (main.IsRobot())
+                {
+                    drop = false;
+                }
+            }
+
+            if (ConfigData.IsShowLieOpen && !drop && !main.IsRobot())
+            {
+                MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(bekill.ConfigId);
+                int userlv = main.GetComponent<UserInfoComponentS>().UserInfo.Lv;
+                if (monsterConfig.Lv >= 60 || math.abs(userlv - monsterConfig.Lv) <= 9)
+                {
+                    drop = true;
+                }
+            }
+
+            if (!drop)
+            {
+                return;
+            }
+
+            float dropAdd_Pro = 1;
+            if (bekill.IsBoss() && main != null && bekill.ConfigId != SeasonHelper.SeasonBossId)
+            {
+                int fubenDifficulty = FubenDifficulty.None;
+                dropAdd_Pro += main.GetComponent<NumericComponentS>().GetAsFloat(NumericType.Base_DropAdd_Pro_Add);
+                if (sceneType == (int)SceneTypeEnum.CellDungeon)
+                {
+                    fubenDifficulty = bekill.Scene().GetComponent<CellDungeonComponent>().FubenDifficulty;
+                }
+
+                if (sceneType == (int)SceneTypeEnum.LocalDungeon)
+                {
+                    fubenDifficulty = bekill.Scene().GetComponent<LocalDungeonComponent>().FubenDifficulty;
+                }
+
+                switch (fubenDifficulty)
+                {
+                    case FubenDifficulty.TiaoZhan:
+                        dropAdd_Pro += 0.2f;
+                        break;
+                    case FubenDifficulty.DiYu:
+                        dropAdd_Pro += 0.5f;
+                        break;
+                }
+            }
+
+            if (!bekill.IsBoss() && ConfigData.IsShowLieOpen)
+            {
+                dropAdd_Pro += 1f;
+            }
+
+            //1个人掉率降低
+            if (sceneType == SceneTypeEnum.TeamDungeon)
+            {
+                if (playerNumer == 1)
+                {
+                    dropAdd_Pro -= 0.25f;
+                }
+
+                if (playerNumer == 2)
+                {
+                    dropAdd_Pro += 0.8f;
+                }
+
+                if (playerNumer == 3)
+                {
+                    dropAdd_Pro += 1.5f;
+                }
+
+                MapComponent mapComponent = bekill.Scene().GetComponent<MapComponent>();
+                if (mapComponent.FubenDifficulty == TeamFubenType.ShenYuan)
+                {
+                    dropAdd_Pro += 1.5f;
+                }
+            }
+
+            // 封印之塔提升爆率
+            if (sceneType == SceneTypeEnum.TowerOfSeal)
+            {
+                dropAdd_Pro += 1f;
+            }
+
+            //个人副本根据成长来
+            if (sceneType == SceneTypeEnum.LocalDungeon && bekill.IsBoss() && bekill.ConfigId != SeasonHelper.SeasonBossId)
+            {
+                int killNumber = main.GetComponent<UserInfoComponentS>().GetMonsterKillNumber(monsterCof.Id);
+                int chpaterid = DungeonConfigCategory.Instance.GetChapterByDungeon(scenid);
+                BossDevelopment bossDevelopment = ConfigHelper.GetBossDevelopmentByKill(chpaterid, killNumber);
+                dropAdd_Pro += bossDevelopment.DropAdd;
+            }
+
+            //创建掉落
+            if (main != null && monsterCof.MonsterSonType == 1)
+            {
+                int nowUserLv = main.GetComponent<UserInfoComponentS>().UserInfo.Lv;
+                for (int i = 0; i < monsterCof.Parameter.Length; i++)
+                {
+                    MonsterConfig nowmonsterCof = MonsterConfigCategory.Instance.Get(monsterCof.Parameter[i]);
+                    if (nowUserLv >= nowmonsterCof.Lv)
+                    {
+                        //指定等级对应属性
+                        monsterCof = nowmonsterCof;
+                    }
+                }
+            }
+
+            List<RewardItem> droplist = AI_MonsterDrop(main, monsterCof.Id, dropAdd_Pro, false);
+
+            List<RewardItem> droplist_2 = null;
+            if (main != null && !main.IsDisposed)
+            {
+                int playerLv = main.GetComponent<UserInfoComponentS>().UserInfo.Lv;
+                droplist_2 = DropHelper.AI_DropByPlayerLv(monsterCof.Id, playerLv, dropAdd_Pro, false);
+            }
+
+            if (droplist_2 != null)
+            {
+                droplist.AddRange(droplist_2);
+            }
+
+            if ((monsterCof.MonsterSonType == 55 || monsterCof.MonsterSonType == 56) && droplist.Count == 0)
+            {
+                Log.Warning($"宝箱掉落为空{monsterCof.Id} {main.Id}");
+            }
+
+            if (monsterCof.MonsterType == (int)MonsterTypeEnum.Boss && droplist.Count == 0)
+            {
+                Log.Warning($"BOSS掉落为空{monsterCof.Id}  {main.Id}");
+            }
+
+            if (monsterCof.Id == 72006013)
+            {
+                Log.Warning($"BOSS掉落数量[72006013]： {monsterCof.Id}  {droplist.Count}");
+            }
+
+            if (droplist.Count > 100)
+            {
+                Log.Error($"掉落道具数量异常： {monsterCof.Id}  {droplist.Count}");
+                Log.Warning($"掉落道具数量异常： {monsterCof.Id}  {droplist.Count}");
+                return;
+            }
+
+            List<long> beattackIds = bekill.GetComponent<AttackRecordComponent>().GetBeAttackPlayerList();
+            if (main != null && !beattackIds.Contains(main.Id))
+            {
+                beattackIds.Add(main.Id);
+            }
+
+            //1只要造成伤害就有 2是保护掉落 最后一刀 3是那个按照伤害统计
+            // 0 公共掉落 2保护掉落   1私有掉落 3 归属掉落
+            if (monsterCof.DropType == 0
+                || monsterCof.DropType == 2
+                || monsterCof.DropType == 3)
+            {
+                long serverTime = TimeHelper.ServerNow();
+                Scene DomainScene = main != null? main.Scene() : bekill.Scene();
+                for (int i = 0; i < droplist.Count; i++)
+                {
+                    if (sceneType == SceneTypeEnum.TeamDungeon && (droplist[i].ItemID >= 10030011 && droplist[i].ItemID <= 10030019))
+                    {
+                        Log.Error($"掉落装备.字: {droplist[i].ItemID}   {sceneType}");
+                    }
+
+                    UnitComponent unitComponent = DomainScene.GetComponent<UnitComponent>();
+                    Unit dropitem = unitComponent.AddChildWithId<Unit, int>(IdGenerater.Instance.GenerateId(), 1);
+                    dropitem.AddComponent<UnitInfoComponent>();
+                    dropitem.Type = UnitType.DropItem;
+                    DropComponentS dropComponent = dropitem.AddComponent<DropComponentS>();
+                    dropComponent.SetItemInfo(droplist[i].ItemID, droplist[i].ItemNum);
+                    dropComponent.IfDamgeDrop = monsterCof.IfDamgeDrop;
+                    dropComponent.BeAttackPlayerList = beattackIds;
+                    dropComponent.DropType = monsterCof.DropType;
+                    dropComponent.BeKillId = bekill.Id;
+                    //掉落归属问题 掉落类型为2 原来为： 最后一刀 修改为 第一拾取权限为优先攻击他的人,如果这个人死了，那么拾取权限清空，下一次伤害是谁归属权就是谁。
+
+                    long ownderId = main != null? main.Id : 0;
+                    switch (monsterCof.DropType)
+                    {
+                        case 2:
+                            if (beattackIds.Count > 0 && unitComponent.Get(beattackIds[0]) != null)
+                            {
+                                ownderId = beattackIds[0];
+                            }
+
+                            dropComponent.OwnerId = monsterCof.DropType == 0? 0 : ownderId;
+                            dropComponent.ProtectTime = monsterCof.DropType == 0? 0 : serverTime + 30000;
+                            break;
+                        case 3:
+                            long belongid = bekill.GetComponent<NumericComponentS>().GetAsLong(NumericType.BossBelongID);
+                            if (belongid > 0)
+                            {
+                                ownderId = belongid;
+                            }
+
+                            dropComponent.OwnerId = ownderId;
+                            dropComponent.ProtectTime = monsterCof.DropType == 0? 0 : serverTime + 30000;
+                            break;
+                    }
+
+                    //单人副本不要搞归属掉落，以免出问题
+                    if (SceneConfigHelper.IsSingleFuben(sceneType))
+                    {
+                        dropComponent.OwnerId = 0;
+                    }
+
+                    float dropX = bekill.Position.x + RandomHelper.RandomNumberFloat(-1f, 1f);
+                    float dropY = bekill.Position.y;
+                    float dropZ = bekill.Position.z + RandomHelper.RandomNumberFloat(-1f, 1f);
+                    dropitem.Position = new UnityEngine.Vector3(dropX, dropY, dropZ);
+                    dropitem.AddComponent<AOIEntity, int, float3>(9 * 1000, dropitem.Position);
+                }
+
+                if (monsterCof.DropType == 3)
+                {
+                    long belongid = bekill.GetComponent<NumericComponentS>().GetAsLong(NumericType.BossBelongID);
+                    LogHelper.LogWarning($"BOSS归属掉落日志：{monsterCof.MonsterName}");
+                    LogHelper.LogWarning($"BOSS归属者ID: {bekill.Zone()} {belongid}");
+                    LogHelper.LogWarning("BOSS伤害日志：");
+                    Dictionary<long, long> keyValuePairsHurt = bekill.GetComponent<AttackRecordComponent>().BeAttackPlayerList;
+                    foreach ((long uid, long hurt) in keyValuePairsHurt)
+                    {
+                        LogHelper.LogWarning($"{uid} {hurt}");
+                    }
+                }
+            }
+
+            if (monsterCof.DropType == 1)
+            {
+                for (int i = 0; i < beattackIds.Count; i++)
+                {
+                    Unit beAttack = bekill.Scene().GetComponent<UnitComponent>().Get(beattackIds[i]);
+                    if (beAttack == null || beAttack.Type != UnitType.Player)
+                    {
+                        continue;
+                    }
+
+                    if (i >= 20)
+                    {
+                        break;
+                    }
+
+                    M2C_CreateDropItems m2C_CreateDropItems = new M2C_CreateDropItems();
+                    for (int k = 0; k < droplist.Count; k++)
+                    {
+                        //if (sceneType == SceneTypeEnum.TeamDungeon && (droplist[k].ItemID >= 10030011 && droplist[k].ItemID <= 10030019))
+                        //{
+                        //    Log.Error($"掉落装备.字: {droplist[k].ItemID}   {sceneType}");
+                        //}
+
+                        //宠物蛋直接进背包
+                        if (monsterCof.MonsterSonType == 57)
+                        {
+                            beAttack.GetComponent<BagComponentS>().OnAddItemData($"{droplist[k].ItemID};{droplist[k].ItemNum}",
+                                $"{ItemGetWay.PickItem}_{TimeHelper.ServerNow()}");
+                            continue;
+                        }
+
+                        DropInfo dropInfo = new DropInfo()
+                        {
+                            DropType = 1,
+                            ItemID = droplist[k].ItemID,
+                            ItemNum = droplist[k].ItemNum,
+                            X = bekill.Position.x + RandomHelper.RandomNumberFloat(-1f, 1f),
+                            Y = bekill.Position.y,
+                            Z = bekill.Position.z + RandomHelper.RandomNumberFloat(-1f, 1f),
+                            UnitId = IdGenerater.Instance.GenerateId(),
+                        };
+                        m2C_CreateDropItems.Drops.Add(dropInfo);
+                        beAttack.GetComponent<UnitInfoComponent>().Drops.Add(dropInfo);
+
+                        if (monsterCof.Id == 70003003)
+                        {
+                            Log.Warning($"BOSS掉落道具位置:  {main.Position.x}  {main.Position.z}  {bekill.Position.x} {bekill.Position.z}");
+                        }
+
+                        if (math.distance(main.Position, new float3(dropInfo.X, dropInfo.Y, dropInfo.Z)) > 10f)
+                        {
+                            Log.Warning($"BOSS掉落道具位置过远:  {main.Position.x}  {main.Position.z}  {bekill.Position.x} {bekill.Position.z}");
+                        }
+                    }
+
+                    MapMessageHelper.SendToClient(beAttack, m2C_CreateDropItems);
+                }
+            }
+        }
+
         public static void CreateDropItems(Unit main, Unit beKill, int dropType, int dropId, string par)
         {
             Scene domainScene = beKill.Scene();

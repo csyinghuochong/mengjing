@@ -30,7 +30,8 @@ namespace ET
             {110005,90015},
         };
 
-        
+        [StaticField]
+        public static bool IsShowLieOpen = false;
         
         /// <summary>
         /// 新人抽奖 //KeyId权重 value道具..     第七天是武器ComHelp.GetWelfareWeapon

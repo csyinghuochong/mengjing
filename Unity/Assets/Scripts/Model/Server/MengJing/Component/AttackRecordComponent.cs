@@ -23,7 +23,7 @@ namespace ET.Server
         /// <summary>
         /// 玩家ID
         /// </summary>
-        public Dictionary<long, long> BeAttackPlayerList = new Dictionary<long, long>();
+        public Dictionary<long, long> BeAttackPlayerList{ get; set; } = new Dictionary<long, long>();
 
         /// <summary>
         /// 战场召唤记录

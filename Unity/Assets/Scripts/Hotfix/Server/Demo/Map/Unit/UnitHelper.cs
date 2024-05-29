@@ -555,6 +555,24 @@ namespace ET.Server
             return sonType == 58 || sonType == 59;
         }
         
+        public static int GetRealPlayer(Scene scene)
+        {
+            int realPlayer = 0;
+            List<Unit> allunits = scene.GetComponent<UnitComponent>().GetAll();
+            for (int i = 0; i < allunits.Count; i++)
+            {
+                if (allunits[i].Type != UnitType.Player)
+                {
+                    continue;
+                }
+                if (allunits[i].GetComponent<UserInfoComponentS>().UserInfo.RobotId == 0)
+                {
+                    realPlayer++;
+                }
+            }
+            return realPlayer;
+        }
+        
         public static List<Unit> GetUnitListByCamp(Scene scene, int unitType, int camp)
         {
             List<Unit> units = new List<Unit>();
