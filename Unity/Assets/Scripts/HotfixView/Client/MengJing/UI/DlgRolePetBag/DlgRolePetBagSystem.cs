@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_RolePetBagItem))]
     [FriendOf(typeof (DlgRolePetBag))]
     public static class DlgRolePetBagSystem
     {
@@ -130,6 +131,11 @@ namespace ET.Client
             {
                 foreach (Scroll_Item_RolePetBagItem item in self.ScrollItemRolePetBagItems.Values)
                 {
+                    if (item.uiTransform == null)
+                    {
+                        continue;
+                    }
+
                     item.SetSelected(rolePetInfo.Id);
                 }
             }
