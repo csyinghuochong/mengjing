@@ -66,5 +66,6 @@ namespace ET.Client
 		WindowID_ChouKaProbExplain,
 		WindowID_ChouKaWarehouse,
 		WindowID_Rank,
+		WindowID_PetFormation,
 	}
 }

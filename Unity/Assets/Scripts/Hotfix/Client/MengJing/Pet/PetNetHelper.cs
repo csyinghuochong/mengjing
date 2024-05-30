@@ -294,5 +294,20 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<int> RequestRolePetFormationSet(Scene root, int sceneType, List<long> petList, List<long> positionList)
+        {
+            C2M_RolePetFormationSet request = new() { SceneType = sceneType, PetFormat = petList, PetPosition = positionList };
+            M2C_RolePetFormationSet response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_RolePetFormationSet;
+
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return response.Error;
+            }
+            
+            root.GetComponent<PetComponentC>().RequestPetFormationSet(sceneType, petList, null);
+            
+            return response.Error;
+        }
     }
 }
