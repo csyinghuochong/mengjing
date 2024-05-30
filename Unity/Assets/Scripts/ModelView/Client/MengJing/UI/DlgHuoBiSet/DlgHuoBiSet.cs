@@ -1,12 +1,16 @@
-﻿namespace ET.Client
+﻿using System;
+using System.Collections.Generic;
+
+namespace ET.Client
 {
-	 [ComponentOf(typeof(UIBaseWindow))]
-	public  class DlgHuoBiSet :Entity,IAwake,IUILogic
-	{
+    [ComponentOf(typeof (UIBaseWindow))]
+    public class DlgHuoBiSet: Entity, IAwake, IUILogic
+    {
+        public DlgHuoBiSetViewComponent View
+        {
+            get => this.GetComponent<DlgHuoBiSetViewComponent>();
+        }
 
-		public DlgHuoBiSetViewComponent View { get => this.GetComponent<DlgHuoBiSetViewComponent>();} 
-
-		 
-
-	}
+        public List<Action> CloseActions = new();
+    }
 }

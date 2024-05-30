@@ -97,7 +97,7 @@ namespace ET.Client
         public static void OnBtn_Warehouse(this DlgChouKa self)
         {
             self.SetRedDot(false);
-            // UIHelper.Create(self.ZoneScene(), UIType.UIChouKaWarehouse).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ChouKaWarehouse).Coroutine();
         }
 
         public static void OnSelectChapterID(this DlgChouKa self, int chapterid)

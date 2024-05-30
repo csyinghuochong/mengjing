@@ -35,6 +35,9 @@ namespace ET.Client
         {
             self.View.E_AddGoldButton.AddListener(self.OnAddGoldButton);
             self.View.E_AddZuanShiButton.AddListener(self.OnAddZuanShiButton);
+
+            self.View.E_CloseButton.AddListener(self.OnClose);
+            self.View.E_Close2Button.AddListener(self.OnClose);
         }
 
         public static void ShowWindow(this DlgHuoBiSet self, Entity contextData = null)
@@ -59,19 +62,26 @@ namespace ET.Client
             self.View.E_ZuanShiText.text = userInfo.Diamond.ToString();
         }
 
-        public static void AddCloseEvent(this DlgHuoBiSet self, UnityAction clickEventHandler)
+        public static void AddCloseEvent(this DlgHuoBiSet self, Action closeAction)
         {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            self.View.E_CloseButton.AddListener(() =>
+            self.CloseActions.Add(closeAction);
+        }
+
+        private static void OnClose(this DlgHuoBiSet self)
+        {
+            if (self.CloseActions.Count > 0)
             {
-                clickEventHandler?.Invoke();
-                uiComponent.HideWindow(WindowID.WindowID_HuoBiSet);
-            });
-            self.View.E_Close2Button.AddListener(() =>
+                Action lastCallback = self.CloseActions[^1];
+
+                lastCallback.Invoke();
+
+                self.CloseActions.RemoveAt(self.CloseActions.Count - 1);
+            }
+
+            if (self.CloseActions.Count == 0)
             {
-                clickEventHandler?.Invoke();
-                uiComponent.HideWindow(WindowID.WindowID_HuoBiSet);
-            });
+                self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_HuoBiSet);
+            }
         }
     }
 }
