@@ -47,6 +47,18 @@ namespace ET.Server
 
             switch (request.SceneType)
             {
+                case SceneTypeEnum.CellDungeon:
+                    int sonid = scene.GetComponent<CellDungeonComponent>().CurrentFubenCell.sonid;
+                    ChapterSonConfig chapterSon = ChapterSonConfigCategory.Instance.Get(sonid);
+                    unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
+                    //Game.Scene.GetComponent<RecastPathComponent>().Update(scene.GetComponent<MapComponent>().NavMeshId);
+                    //更新unit坐标
+                    unit.Position = new float3(chapterSon.BornPosLeft[0] * 0.01f, chapterSon.BornPosLeft[1] * 0.01f, chapterSon.BornPosLeft[2] * 0.01f);
+                    unit.Rotation = quaternion.identity;
+                    scene.GetComponent<CellDungeonComponent>().GenerateFubenScene(false);
+                    TransferHelper.AfterTransfer(unit);
+                    break;
+                
                 case SceneTypeEnum.MainCityScene:
                     unit.Position = new float3(-10, 0, -10);
                     unit.AddComponent<PathfindingComponent, int>(101);

@@ -7778,7 +7778,7 @@ namespace ET
 		[MemoryPackOrder(1)]
 		public long UnitId { get; set; }
 
-		[MemoryPackOrder(2)]
+		[MemoryPackOrder(3)]
 		public int SceneId { get; set; }
 
 		public override void Dispose() 

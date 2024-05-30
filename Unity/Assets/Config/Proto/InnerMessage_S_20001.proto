@@ -1993,7 +1993,7 @@ message M2J_JiaYuanEnterRequest // IRequest
 	int64 ActorId = 93;
 	int64 MasterId = 1;
 	int64 UnitId = 2;
-	int32 SceneId = 3;
+	int32 SceneId = 4;
 }
 
 message J2M_JiaYuanEnterResponse // IResponse
@@ -2004,7 +2004,7 @@ message J2M_JiaYuanEnterResponse // IResponse
 
 	int32 FubenId = 1;
 	int64 FubenInstanceId = 2;
-		ActorId FubenActorId = 3;
+	ActorId FubenActorId = 3;
 }
 
 message M2M_JiaYuanOperateMessage // IMessage

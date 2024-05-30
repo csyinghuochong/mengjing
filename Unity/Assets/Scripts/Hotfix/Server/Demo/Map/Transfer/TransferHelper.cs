@@ -224,6 +224,7 @@ namespace ET.Server
                             jiaYuanComponent.OnBeforEnter();
                             await UnitCacheHelper.SaveComponentCache(unit.Root(), jiaYuanComponent);
                         }
+                        
                         J2M_JiaYuanEnterResponse j2M_JianYuanEnterResponse = (J2M_JiaYuanEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
                         mapInstanceId, new M2J_JiaYuanEnterRequest() { MasterId = long.Parse(request.paramInfo), UnitId = unit.Id, SceneId = request.SceneId });
                         TransferHelper.BeforeTransfer(unit);
