@@ -11,9 +11,6 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this Scroll_Item_PetFormationItem self)
         {
-            self.E_ImageIconEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.BeginDrag(pdata as PointerEventData); });
-            self.E_ImageIconEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Draging(pdata as PointerEventData); });
-            self.E_ImageIconEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.EndDrag(pdata as PointerEventData); });
         }
 
         [EntitySystem]
@@ -65,6 +62,11 @@ namespace ET.Client
 
         public static void OnInitUI(this Scroll_Item_PetFormationItem self, RolePetInfo rolePetInfo, bool fighting = false)
         {
+            self.E_ImageIconEventTrigger.triggers.Clear();
+            self.E_ImageIconEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.BeginDrag(pdata as PointerEventData); });
+            self.E_ImageIconEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Draging(pdata as PointerEventData); });
+            self.E_ImageIconEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.EndDrag(pdata as PointerEventData); });
+
             self.RolePetInfo = rolePetInfo;
             PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petConfig.HeadIcon);

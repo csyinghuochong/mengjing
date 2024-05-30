@@ -102,9 +102,9 @@ namespace ET.Client
 
         public static async ETTask OnButton_Team(this ES_RankPet self)
         {
-            // Scene scene = self.DomainScene();
-            // UI ui = await UIHelper.Create(scene, UIType.UIPetFormation);
-            // ui.GetComponent<UIPetFormationComponent>().OnInitUI(SceneTypeEnum.PetTianTi, null);
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetFormation);
+            DlgPetFormation dlgPetFormation = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetFormation>();
+            dlgPetFormation.OnInitUI(SceneTypeEnum.PetTianTi, null);
         }
     }
 }

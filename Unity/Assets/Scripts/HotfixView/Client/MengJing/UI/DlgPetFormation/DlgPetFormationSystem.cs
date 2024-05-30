@@ -45,15 +45,18 @@ namespace ET.Client
         {
             List<long> pets = self.PetTeamList;
 
-            foreach (Scroll_Item_PetFormationItem item in self.ScrollItemPetFormationItems.Values)
+            if (self.ScrollItemPetFormationItems != null)
             {
-                if (item.uiTransform == null)
+                foreach (Scroll_Item_PetFormationItem item in self.ScrollItemPetFormationItems.Values)
                 {
-                    continue;
-                }
+                    if (item.uiTransform == null)
+                    {
+                        continue;
+                    }
 
-                long petId = item.RolePetInfo.Id;
-                item.SetFighting(pets.Contains(petId));
+                    long petId = item.RolePetInfo.Id;
+                    item.SetFighting(pets.Contains(petId));
+                }
             }
         }
 
@@ -72,6 +75,7 @@ namespace ET.Client
 
         public static void OnButtonChallenge(this DlgPetFormation self)
         {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetFormation);
             if (self.SceneTypeEnum == SceneTypeEnum.PetDungeon)
             {
                 // UIHelper.Create(scene, UIType.UIPetSet).Coroutine();
@@ -82,8 +86,6 @@ namespace ET.Client
             {
                 return;
             }
-
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetFormation);
         }
 
         public static void RequestFormationSet(this DlgPetFormation self, long rolePetInfoId, int index, int operateType)

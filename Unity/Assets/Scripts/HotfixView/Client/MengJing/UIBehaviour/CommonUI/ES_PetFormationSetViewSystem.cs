@@ -26,8 +26,8 @@ namespace ET.Client
 
         public static void OnUpdateFormation(this ES_PetFormationSet self, int sceneType, List<long> teamPets, bool drag = false)
         {
-            var path = ABPathHelper.GetUGUIPath("Assets/Bundles/UI/Item/Item_PetFormationItem.prefab");
-            var bundleGameObject = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+            var bundleGameObject = self.Root().GetComponent<ResourcesLoaderComponent>()
+                    .LoadAssetSync<GameObject>("Assets/Bundles/UI/Item/Item_PetFormationItem.prefab");
 
             Transform transform = self.uiTransform.Find("FormationNode");
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
@@ -72,7 +72,7 @@ namespace ET.Client
 
             GameObject icon = self.E_IconItemDragImage.transform.Find("ImageIcon").gameObject;
             icon.GetComponent<Image>().sprite = sp;
-            UICommonHelper.SetParent(self.E_IconItemDragImage.gameObject, self.uiTransform.parent.parent.parent.gameObject);
+            UICommonHelper.SetParent(self.E_IconItemDragImage.gameObject, self.uiTransform.parent.parent.gameObject);
         }
 
         public static void Draging(this ES_PetFormationSet self, RolePetInfo binfo, PointerEventData pdata)
