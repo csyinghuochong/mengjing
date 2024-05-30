@@ -42,6 +42,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_RankReward ES_RankReward
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_rankreward == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RankReward");
+		    	   this.m_es_rankreward = this.AddChild<ES_RankReward,Transform>(subTrans);
+     			}
+     			return this.m_es_rankreward;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -131,6 +149,7 @@ namespace ET.Client
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_rankshow = null;
+			this.m_es_rankreward = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_1Toggle = null;
 			this.m_E_2Toggle = null;
@@ -141,6 +160,7 @@ namespace ET.Client
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_RankShow> m_es_rankshow = null;
+		private EntityRef<ES_RankReward> m_es_rankreward = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_1Toggle = null;
 		private UnityEngine.UI.Toggle m_E_2Toggle = null;
