@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_RankShow))]
     [FriendOf(typeof (DlgRank))]
     public static class DlgRankSystem
     {
@@ -34,6 +35,7 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
+                    self.View.ES_RankShow.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
                     break;
