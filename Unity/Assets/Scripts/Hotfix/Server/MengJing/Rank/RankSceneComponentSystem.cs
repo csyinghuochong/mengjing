@@ -45,7 +45,7 @@ namespace ET.Server
         public static async ETTask InitServerInfo(this RankSceneComponent self)
         {
             await self.Root().GetComponent<TimerComponent>().WaitAsync(TimeHelper.Second);
-            DBServerInfo dBServerInfo = await UnitCacheHelper.GetComponent<DBServerInfo>(self.Root(), self.Zone());
+            DBServerInfo dBServerInfo = await UnitCacheHelper.GetComponent<DBServerInfo>(self.Root(), self.Id);
             
             if (dBServerInfo == null)
             {
@@ -191,7 +191,7 @@ namespace ET.Server
         {
            
             await self.Root().GetComponent<TimerComponent>().WaitAsync(TimeHelper.Second);
-            DBRankInfo dBRankInfo = await UnitCacheHelper.GetComponent<DBRankInfo>(self.Root(), self.Zone());
+            DBRankInfo dBRankInfo = await UnitCacheHelper.GetComponent<DBRankInfo>(self.Root(), self.Id);
                     
             if (dBRankInfo == null)
             {
@@ -296,6 +296,9 @@ namespace ET.Server
             {
                 self.UpdateRankNo1(updateRankList[i], rankingInfo.Occ).Coroutine();
             }
+            
+            
+            self.SaveDB().Coroutine();
         }
 
         /// <summary>
