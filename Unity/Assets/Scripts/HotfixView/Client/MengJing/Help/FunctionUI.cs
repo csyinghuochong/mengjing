@@ -71,6 +71,7 @@ namespace ET.Client
                 "UIMystery" => WindowID.WindowID_Mystery,
                 "UIPetEgg" => WindowID.WindowID_PetEgg,
                 "UIChouKa" => WindowID.WindowID_ChouKa,
+                "UIRank" => WindowID.WindowID_Rank,
                 _ => WindowID.WindowID_Invaild
             };
         }
