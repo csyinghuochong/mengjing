@@ -10,7 +10,6 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this Scroll_Item_RankShowItem self)
         {
-            self.E_Button_WatchEquipButton.AddListenerAsync(self.OnButtonWatch);
         }
 
         [EntitySystem]
@@ -30,6 +29,8 @@ namespace ET.Client
 
         public static void Refresh(this Scroll_Item_RankShowItem self, int rank, RankingInfo rankingInfo)
         {
+            self.E_Button_WatchEquipButton.AddListenerAsync(self.OnButtonWatch);
+
             self.RankingInfo = rankingInfo;
 
             self.E_Text_CombatText.text = rankingInfo.Combat.ToString();
@@ -47,6 +48,7 @@ namespace ET.Client
             else
             {
                 self.EG_RankShowSetRectTransform.gameObject.SetActive(true);
+                UICommonHelper.HideChildren(self.EG_RankShowSetRectTransform);
                 self.E_Text_RankText.gameObject.SetActive(false);
                 switch (rank)
                 {
@@ -55,11 +57,11 @@ namespace ET.Client
                         break;
 
                     case 2:
-                        self.E_Rank_1Image.gameObject.SetActive(true);
+                        self.E_Rank_2Image.gameObject.SetActive(true);
                         break;
 
                     case 3:
-                        self.E_Rank_1Image.gameObject.SetActive(true);
+                        self.E_Rank_3Image.gameObject.SetActive(true);
                         break;
                 }
             }
