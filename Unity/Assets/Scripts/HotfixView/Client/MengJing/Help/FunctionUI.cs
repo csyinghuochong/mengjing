@@ -12,12 +12,12 @@ namespace ET.Client
             }
 
             FuntionConfig funtionOpenConfig = FuntionConfigCategory.Instance.Get(functionid);
-            bool functionOn = FunctionHelp.CheckFuncitonOn(root, funtionOpenConfig);
-            if (!functionOn)
-            {
-                // FlyTipComponent.Instance.SpawnFlyTipDi(FunctionHelp.GetFunctionContion(zoneScene, funtionOpenConfig));
-                return;
-            }
+            // bool functionOn = FunctionHelp.CheckFuncitonOn(root, funtionOpenConfig);
+            // if (!functionOn)
+            // {
+            //     FlyTipComponent.Instance.SpawnFlyTipDi(FunctionHelp.GetFunctionContion(root, funtionOpenConfig));
+            //     return;
+            // }
 
             bool gm = GMData.GmAccount.Contains(root.GetComponent<PlayerComponent>().Account);
             if (!gm && functionid == 1048)
