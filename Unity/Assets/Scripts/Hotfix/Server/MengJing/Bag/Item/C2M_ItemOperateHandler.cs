@@ -271,7 +271,7 @@ namespace ET.Server
                         case 15: //附魔道具
                             List<HideProList> hideProLists = XiLianHelper.GetItemFumoPro(itemConfig.Id);
                             bagComponent.OnEquipFuMo(itemConfig.Id, hideProLists, int.Parse(request.OperatePar));
-                            //unit.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.FoMoNumber_213, 0, 1);
+                            unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.FoMoNumber_213, 0, 1);
                             break;
                         case 16: //附魔技能
                             userInfoComponent.UserInfo.MakeList.Add(int.Parse(itemConfig.ItemUsePar));
@@ -324,7 +324,7 @@ namespace ET.Server
                                 }
                             }
 
-                            //unit.GetComponent<SkillSetComponent>().OnAddSkillBook(SkillSourceEnum.Book, int.Parse(itemConfig.SkillID));
+                            unit.GetComponent<SkillSetComponentS>().OnAddSkillBook(SkillSourceEnum.Book, int.Parse(itemConfig.SkillID));
                             break;
                         case 108: //宠物经验骨头
                         case 109: //宠物经验牛奶
@@ -710,26 +710,25 @@ namespace ET.Server
                     bagComponent.OnChangeItemLoc(beforeequip, ItemLocType.ItemLocBag, ItemLocType.ItemLocEquip);
                     bagComponent.OnChangeItemLoc(useBagInfo, ItemLocType.ItemLocEquip, ItemLocType.ItemLocBag);
 
-                    //unit.GetComponent<SkillSetComponent>().OnTakeOffEquip(ItemLocType.ItemLocEquip, beforeequip);
-                    //unit.GetComponent<SkillSetComponent>().OnWearEquip(useBagInfo);
+                    unit.GetComponent<SkillSetComponentS>().OnTakeOffEquip(ItemLocType.ItemLocEquip, beforeequip);
+                    unit.GetComponent<SkillSetComponentS>().OnWearEquip(useBagInfo);
                     m2c_bagUpdate.BagInfoUpdate.Add(beforeequip);
                 }
                 else
                 {
                     bagComponent.OnChangeItemLoc(useBagInfo, ItemLocType.ItemLocEquip, ItemLocType.ItemLocBag);
-                    //unit.GetComponent<SkillSetComponent>().OnWearEquip(useBagInfo);
+                    unit.GetComponent<SkillSetComponentS>().OnWearEquip(useBagInfo);
                 }
 
                 int zodiacnumber = bagComponent.GetZodiacnumber();
-                //unit.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.ZodiacEquipNumber_215, 0, zodiacnumber);
-
-                // Function_Fight.UnitUpdateProperty_Base(unit, true, true);
+                unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.ZodiacEquipNumber_215, 0, zodiacnumber);
+                Function_Fight.UnitUpdateProperty_Base(unit, true, true);
                 useBagInfo.isBinging = true;
                 m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
 
                 if (weizhi == (int) ItemSubTypeEnum.Wuqi)
                 {
-                    //unit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.WandBuff_8, useBagInfo.ItemID);
+                    unit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.WandBuff_8, useBagInfo.ItemID);
                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Now_Weapon, useBagInfo.ItemID, true);
                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.WearWeaponFisrt, 1, true);
                 }
@@ -752,12 +751,12 @@ namespace ET.Server
                 }
 
                 bagComponent.OnChangeItemLoc(useBagInfo, ItemLocType.ItemLocBag, ItemLocType.ItemLocEquip);
-                //unit.GetComponent<SkillSetComponent>().OnTakeOffEquip(ItemLocType.ItemLocEquip, useBagInfo);
-                // Function_Fight.UnitUpdateProperty_Base(unit, true, true);
+                unit.GetComponent<SkillSetComponentS>().OnTakeOffEquip(ItemLocType.ItemLocEquip, useBagInfo);
+                Function_Fight.UnitUpdateProperty_Base(unit, true, true);
                 m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
                 if (weizhi == (int) ItemSubTypeEnum.Wuqi)
                 {
-                    //unit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.WandBuff_8, 0);
+                    unit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.WandBuff_8, 0);
                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Now_Weapon, 0, true);
                 }
             }
@@ -787,9 +786,9 @@ namespace ET.Server
                         qulitylv = string.IsNullOrEmpty(qulitylv)? "0" : qulitylv;
                         ItemConfig costitemconfig = ItemConfigCategory.Instance.Get(baginfoCost.ItemID);
 
-                        //unit.GetComponent<TaskComponent>().TriggerTaskEvent(TaskTargetType.JianDingQulity_42, int.Parse(qulitylv), 1);
-                        //unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.JianDingQulity_42, int.Parse(qulitylv), 1);
-                        //unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.JianDing_1017, 0, 1);
+                        unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JianDingQulity_42, int.Parse(qulitylv), 1);
+                        unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JianDingQulity_42, int.Parse(qulitylv), 1);
+                        unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JianDing_1017, 0, 1);
 
                         ifSell = bagComponent.OnCostItemData(baginfoId, 1);
                         ifItem = true;
@@ -821,15 +820,15 @@ namespace ET.Server
                             //unit.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.EquipActiveSkillId_222, useBagInfo.HideSkillLists[i], 1);
                         }
 
-                        //string noticeContent = $"恭喜玩家<color=#B6FF00>{userInfoComponent.UserName}</color>在拾取装备时,意外在装备上发现了隐藏技能:<color=#FFA313>{skillName}</color>";
-                        //ServerMessageHelper.SendBroadMessage(unit.Zone(), NoticeType.Notice, noticeContent);
+                        string noticeContent = $"恭喜玩家<color=#B6FF00>{userInfoComponent.UserName}</color>在拾取装备时,意外在装备上发现了隐藏技能:<color=#FFA313>{skillName}</color>";
+                        BroadMessageHelper.SendBroadMessage(unit.Root(), NoticeType.Notice, noticeContent);
                     }
 
                     long totalValue = 0;
                     if (useBagInfo.HideProLists != null && useBagInfo.HideProLists.Count > 0)
                     {
-                        //unit.GetComponent<TaskComponent>().TriggerTaskEvent(TaskTargetType.JianDingAttrNumber_43, useBagInfo.HideProLists.Count, 1);
-                        //unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.JianDingAttrNumber_43, useBagInfo.HideProLists.Count, 1);
+                        unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JianDingAttrNumber_43, useBagInfo.HideProLists.Count, 1);
+                        unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JianDingAttrNumber_43, useBagInfo.HideProLists.Count, 1);
 
                         for (int pro = 0; pro < useBagInfo.HideProLists.Count; pro++)
                         {
@@ -837,9 +836,9 @@ namespace ET.Server
                         }
                     }
 
-                    //unit.GetComponent<TaskComponent>().TriggerTaskEvent(TaskTargetType.JianDingValue_140, (int)totalValue, 1);
-                    //unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.JianDingValue_140, (int)totalValue, 1);
-                    //unit.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.JianDingEqipNumber_212, int.Parse(qulitylv), 1);
+                    unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JianDingValue_140, (int)totalValue, 1);
+                    unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JianDingValue_140, (int)totalValue, 1);
+                    unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.JianDingEqipNumber_212, int.Parse(qulitylv), 1);
                 }
                 else
                 {
@@ -885,7 +884,7 @@ namespace ET.Server
                 }
 
                 bagComponent.OnChangeItemLoc(useBagInfo, ItemLocType.ItemLocBag, (ItemLocType) hourseId);
-                //unit.GetComponent<TaskComponent>().OnGetItemForWarehouse(useBagInfo.ItemID);
+                unit.GetComponent<TaskComponentS>().OnGetItemForWarehouse(useBagInfo.ItemID);
                 m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
             }
 
