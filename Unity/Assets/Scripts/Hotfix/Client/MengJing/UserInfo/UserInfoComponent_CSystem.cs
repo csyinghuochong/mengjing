@@ -158,5 +158,17 @@ namespace ET.Client
 
             self.UserInfo.BuyStoreItems.Add(new KeyValuePairInt() { KeyId = mysteryId, Value = 1 });
         }
+
+        public static void ClearFubenTimes(this UserInfoComponentC self, int sceneId)
+        {
+            for (int i = 0; i < self.UserInfo.DayFubenTimes.Count; i++)
+            {
+                if (self.UserInfo.DayFubenTimes[i].KeyId == sceneId)
+                {
+                    self.UserInfo.DayFubenTimes[i].Value = 0;
+                    break;
+                }
+            }
+        }
     }
 }
