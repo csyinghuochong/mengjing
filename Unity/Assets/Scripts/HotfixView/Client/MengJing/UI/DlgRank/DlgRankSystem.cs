@@ -9,6 +9,7 @@ namespace ET.Client
     [FriendOf(typeof (ES_RankShow))]
     [FriendOf(typeof (ES_RankPet))]
     [FriendOf(typeof (ES_RankReward))]
+    [FriendOf(typeof (ES_RankPetReward))]
     [FriendOf(typeof (DlgRank))]
     public static class DlgRankSystem
     {
@@ -46,6 +47,7 @@ namespace ET.Client
                     self.View.ES_RankReward.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
+                    self.View.ES_RankPetReward.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
