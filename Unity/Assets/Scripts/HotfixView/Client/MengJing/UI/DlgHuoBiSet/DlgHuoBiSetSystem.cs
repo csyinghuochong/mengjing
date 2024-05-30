@@ -67,7 +67,7 @@ namespace ET.Client
             self.CloseActions.Add(closeAction);
         }
 
-        private static void OnClose(this DlgHuoBiSet self)
+        public static void OnClose(this DlgHuoBiSet self)
         {
             if (self.CloseActions.Count > 0)
             {

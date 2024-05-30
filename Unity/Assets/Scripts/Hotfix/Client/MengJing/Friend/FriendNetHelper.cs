@@ -116,5 +116,12 @@ namespace ET.Client
                     (F2C_FriendApplyResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2F_FriendApplyReplyRequest);
             return response.Error;
         }
+
+        public static async ETTask<F2C_WatchPetResponse> RequestWatchPet(Scene root, long unitID, long petId)
+        {
+            C2F_WatchPetRequest request = new() { UnitID = unitID, PetId = petId };
+            F2C_WatchPetResponse response = (F2C_WatchPetResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }
