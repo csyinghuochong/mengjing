@@ -315,8 +315,6 @@ namespace ET.Server
                 self.YeWaiFubenList.Add(sceneConfigs[i].Id, fubenInstanceId);
 
                 Scene fubnescene = GateMapFactory.Create(self, fubenid, fubenInstanceId,  "YeWai" + sceneConfigs[i].Id.ToString());
-                fubnescene.AddComponent<MapComponent>();
-                fubnescene.AddComponent<ServerInfoComponent>();
                 MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
                 mapComponent.SetMapInfo(sceneConfigs[i].MapType, sceneConfigs[i].Id, 0);
                 mapComponent.NavMeshId = sceneConfigs[i].MapID;

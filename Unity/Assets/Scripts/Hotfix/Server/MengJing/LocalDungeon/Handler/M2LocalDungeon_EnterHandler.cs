@@ -19,7 +19,7 @@ namespace ET.Server
                      //fubnescene.AddComponent<YeWaiRefreshComponent>();
                      LocalDungeonComponent localDungeon = fubnescene.AddComponent<LocalDungeonComponent>();
                      localDungeon.FubenDifficulty = request.Difficulty;
-                     MapComponent mapComponent = fubnescene.AddComponent<MapComponent>();
+                     MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
                      mapComponent.SetMapInfo((int)SceneTypeEnum.LocalDungeon, request.SceneId, 0);
                      mapComponent.NavMeshId = DungeonConfigCategory.Instance.Get(request.SceneId).MapID;
                      response.FubenInstanceId = fubenInstanceId;
