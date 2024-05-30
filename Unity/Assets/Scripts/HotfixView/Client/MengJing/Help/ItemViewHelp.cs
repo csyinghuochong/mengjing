@@ -8,6 +8,21 @@ namespace ET.Client
 {
     public static class ItemViewHelp
     {
+        public static void AccountCangkuPutIn(Scene root, BagInfo bagInfo)
+        {
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
+            if (itemConfig.ItemType == 3 && itemConfig.EquipType < 100 && !bagInfo.isBinging)
+            {
+                DlgWarehouse dlgWarehouse = root.GetComponent<UIComponent>().GetDlgLogic<DlgWarehouse>();
+                dlgWarehouse.View.ES_WarehouseAccount.BagInfoPutIn = bagInfo;
+                BagClientNetHelper.RequestAccountWarehousOperate(root, 1, bagInfo.BagInfoID).Coroutine();
+            }
+            else
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("只能存放非绑定的角色装备！");
+            }
+        }
+
         public static string XiLianWeiZhiTip(int hideId)
         {
             string tip = string.Empty;
@@ -20,7 +35,6 @@ namespace ET.Client
 
             tip += "\n\r";
             tip += "<color=#ACFF23FF>此属性可出现的装备部位：\n";
-
 
             for (int i = 0; i < spaces.Length; i++)
             {

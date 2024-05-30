@@ -588,7 +588,7 @@ namespace ET.Client
 
             if (self.ItemOperateEnum == ItemOperateEnum.AccountBag)
             {
-                //ItemViewHelp.AccountCangkuPutIn( self.ZoneScene(), self.BagInfo );
+                ItemViewHelp.AccountCangkuPutIn(self.Root(), self.BagInfo);
             }
             else
             {

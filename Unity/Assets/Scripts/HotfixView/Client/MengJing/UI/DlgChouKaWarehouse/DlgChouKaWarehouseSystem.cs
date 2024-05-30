@@ -101,6 +101,7 @@ namespace ET.Client
 
         public static void Refresh(this DlgChouKaWarehouse self)
         {
+            self.Root().GetComponent<BagComponentC>().CurrentHouse = (int)ItemLocType.ChouKaWarehouse;
             self.RefreshHouse();
             self.RefreshBag();
         }

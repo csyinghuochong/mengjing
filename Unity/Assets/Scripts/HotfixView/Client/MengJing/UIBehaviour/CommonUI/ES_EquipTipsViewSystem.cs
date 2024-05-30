@@ -804,12 +804,13 @@ namespace ET.Client
         {
             if (self.ItemOpetateType == ItemOperateEnum.AccountBag)
             {
-                // ItemViewHelp.AccountCangkuPutIn(self.ZoneScene(), self.BagInfo);
+                ItemViewHelp.AccountCangkuPutIn(self.Root(), self.BagInfo);
             }
             else
             {
-                BagClientNetHelper.RquestPutStoreHouse(self.Root(),self.BagInfo).Coroutine();
+                BagClientNetHelper.RquestPutStoreHouse(self.Root(), self.BagInfo).Coroutine();
             }
+
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
         }
 
@@ -826,17 +827,17 @@ namespace ET.Client
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
         }
-        
+
         private static async ETTask OnHuiShouFangZhiButton(this ES_EquipTips self)
         {
-            EventSystem.Instance.Publish(self.Root(),new DataUpdate_HuiShouSelect(){DataParamString = $"1_{self.BagInfo.BagInfoID}"});
+            EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"1_{self.BagInfo.BagInfoID}" });
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
             await ETTask.CompletedTask;
         }
 
         private static async ETTask OnTakeButton(this ES_EquipTips self)
         {
-            EventSystem.Instance.Publish(self.Root(),new DataUpdate_HuiShouSelect(){DataParamString = $"0_{self.BagInfo.BagInfoID}"});
+            EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"0_{self.BagInfo.BagInfoID}" });
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
             await ETTask.CompletedTask;
         }
