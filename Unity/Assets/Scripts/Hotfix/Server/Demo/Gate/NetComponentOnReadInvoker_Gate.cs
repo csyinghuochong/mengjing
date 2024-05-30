@@ -94,8 +94,14 @@ namespace ET.Server
                     
                     if (actorRequest is IMailActorRequest iMailActorRequest)
                     {
-                        ActorId friendServerId = player.MailServerID;
-                        response = await root.GetComponent<MessageSender>().Call(friendServerId, iMailActorRequest);
+                        ActorId mailServerID = player.MailServerID;
+                        response = await root.GetComponent<MessageSender>().Call(mailServerID, iMailActorRequest);
+                    }
+                    
+                    if (actorRequest is IRankActorRequest iRankActorRequest)
+                    {
+                        ActorId rankServerID = player.RankServerID;
+                        response = await root.GetComponent<MessageSender>().Call(rankServerID, iRankActorRequest);
                     }
                     
                     if (response == null)

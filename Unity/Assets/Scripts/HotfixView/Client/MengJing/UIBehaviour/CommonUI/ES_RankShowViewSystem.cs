@@ -50,15 +50,8 @@ namespace ET.Client
         private static async ETTask OnUpdateUI(this ES_RankShow self, int type = 0)
         {
             long instanceid = self.InstanceId;
-            // C2R_RankListRequest request = new();
-            // R2C_RankListResponse response = (R2C_RankListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
-            // 测试数据
-            R2C_RankListResponse response = new();
-            response.RankList.Add(new RankingInfo() { Combat = 1000, Occ = 1, PlayerName = "排行榜测试角色1", PlayerLv = 10 });
-            response.RankList.Add(new RankingInfo() { Combat = 2000, Occ = 2, PlayerName = "排行榜测试角色2", PlayerLv = 20 });
-            response.RankList.Add(new RankingInfo() { Combat = 3000, Occ = 3, PlayerName = "排行榜测试角色3", PlayerLv = 30 });
-            response.RankList.Add(new RankingInfo() { Combat = 4000, Occ = 1, PlayerName = "排行榜测试角色4", PlayerLv = 40 });
-            response.RankList.Add(new RankingInfo() { Combat = 5000, Occ = 2, PlayerName = "排行榜测试角色5", PlayerLv = 50 });
+            C2R_RankListRequest request = new();
+            R2C_RankListResponse response = (R2C_RankListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
 
             if (instanceid != self.InstanceId)
             {
