@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Options;
 
@@ -37,7 +38,8 @@ namespace ET.Server
 		{
 			//重置所有属性
 			long max = (int)NumericType.Max;
-			foreach (int key in self.NumericDic.Keys)
+			List<int> keys = self.NumericDic.Keys.ToList();
+			foreach (int key in keys)
 			{
 				//这个范围内的属性为特殊属性不进行重置
 				if (key < max)
