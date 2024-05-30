@@ -8,6 +8,16 @@ namespace ET.Client
 {
     public static class ItemViewHelp
     {
+        public static string ReturnNumStr(long num)
+        {
+            if (num < 10000)
+            {
+                return num.ToString();
+            }
+
+            return (num / 10000.0f).ToString("0.##") + "万";
+        }
+
         public static void AccountCangkuPutIn(Scene root, BagInfo bagInfo)
         {
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);

@@ -151,11 +151,11 @@ namespace ET.Client
                         resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon));
 
                 self.E_ItemNumText.gameObject.SetActive(true);
-                self.E_ItemNumText.text = bagInfo.ItemNum.ToString();
+                self.E_ItemNumText.text = ItemViewHelp.ReturnNumStr(bagInfo.ItemNum);
 
                 self.E_ItemClickButton.gameObject.SetActive(true);
                 self.E_ItemClickButton.AddListener(self.OnClickUIItem);
-                
+
                 self.E_ItemNameText.text = itemConfig.ItemName;
                 self.E_ItemNameText.color = FunctionUI.QualityReturnColorDi(itemConfig.ItemQuality);
 
