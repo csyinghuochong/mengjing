@@ -22,44 +22,38 @@ namespace ET.Client
 
         public static void OnInitUI(this Scroll_Item_RoleXiLianSkillItem self, EquipXiLianConfig equipXiLianConfig)
         {
-            self.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
-
             self.EquipXiLianConfig = equipXiLianConfig;
+            var path = ABPathHelper.GetUGUIPath("Assets/Bundles/UI/Item/Item_CommonSkillItem.prefab");
+            var bundleGameObject = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
             self.E_Text_XiLianNameText.text = equipXiLianConfig.Title + GameSettingLanguge.LoadLocalization("额外增加概率出现的特殊属性");
-            self.XilianSkill = XiLianHelper.GetLevelSkill(equipXiLianConfig.XiLianLevel);
+            List<KeyValuePairInt> xilianSkill = XiLianHelper.GetLevelSkill(equipXiLianConfig.XiLianLevel);
 
-            int row = (self.XilianSkill.Count / 8);
-            row += (self.XilianSkill.Count % 8 > 0? 1 : 0);
+            int row = (xilianSkill.Count / 8);
+            row += (xilianSkill.Count % 8 > 0? 1 : 0);
             self.uiTransform.GetComponent<RectTransform>().sizeDelta = new Vector2(1400f, 100f + row * 170f);
 
-            self.AddUIScrollItems(ref self.ScrollItemCommonSkillItems, self.XilianSkill.Count);
-            self.E_CommonSkillItemsLoopVerticalScrollRect.SetVisible(true, self.XilianSkill.Count);
-        }
+            for (int i = 0; i < xilianSkill.Count; i++)
+            {
+                GameObject bagSpace = UnityEngine.Object.Instantiate(bundleGameObject);
+                UICommonHelper.SetParent(bagSpace, self.EG_ItemNodeRectTransform.gameObject);
+                Scroll_Item_CommonSkillItem ui_item = self.AddChild<Scroll_Item_CommonSkillItem>();
+                ui_item.uiTransform = bagSpace.transform;
+                ui_item.OnUpdateUI((int)xilianSkill[i].Value, ABAtlasTypes.RoleSkillIcon, false, ItemViewHelp.XiLianWeiZhiTip(xilianSkill[i].KeyId));
 
-        private static void OnCommonSkillItemsRefresh(this Scroll_Item_RoleXiLianSkillItem self, Transform transform, int index)
-        {
-            Scroll_Item_CommonSkillItem scrollItemCommonSkillItem = self.ScrollItemCommonSkillItems[index].BindTrans(transform);
-            scrollItemCommonSkillItem.OnUpdateUI((int)self.XilianSkill[index].Value, ABAtlasTypes.RoleSkillIcon, false,
-                ItemViewHelp.XiLianWeiZhiTip(self.XilianSkill[index].KeyId));
-            SkillConfig skillcof = SkillConfigCategory.Instance.Get((int)self.XilianSkill[index].Value);
-            scrollItemCommonSkillItem.E_TextSkillNameText.text = skillcof.SkillName;
-            scrollItemCommonSkillItem.E_TextSkillNameText.gameObject.SetActive(true);
+                Log.Info("xilianSkill[i] = " + xilianSkill[i]);
+                SkillConfig skillcof = SkillConfigCategory.Instance.Get((int)xilianSkill[i].Value);
+                ui_item.E_TextSkillNameText.text = skillcof.SkillName;
+                ui_item.E_TextSkillNameText.gameObject.SetActive(true);
+                self.uIItems.Add(ui_item);
+            }
         }
 
         public static void OnUpdateUI(this Scroll_Item_RoleXiLianSkillItem self, int xilianlv)
         {
             bool gray = xilianlv < self.EquipXiLianConfig.XiLianLevel;
-            if (self.ScrollItemCommonSkillItems != null)
+            for (int i = 0; i < self.uIItems.Count; i++)
             {
-                foreach (Scroll_Item_CommonSkillItem item in self.ScrollItemCommonSkillItems.Values)
-                {
-                    if (item.uiTransform == null)
-                    {
-                        continue;
-                    }
-
-                    UICommonHelper.SetImageGray(self.Root(), item.E_ImageIconImage.gameObject, gray);
-                }
+                UICommonHelper.SetImageGray(self.Root(), self.uIItems[i].E_ImageIconImage.gameObject, gray);
             }
 
             if (gray)

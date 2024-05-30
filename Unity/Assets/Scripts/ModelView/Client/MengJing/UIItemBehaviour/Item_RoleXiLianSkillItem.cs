@@ -5,11 +5,10 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_RoleXiLianSkillItem : Entity,IAwake,IDestroy,IUIScrollItem,IUILogic
+	public  class Scroll_Item_RoleXiLianSkillItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
-		public List<KeyValuePairInt> XilianSkill;
 		public EquipXiLianConfig EquipXiLianConfig;
-		public Dictionary<int, Scroll_Item_CommonSkillItem> ScrollItemCommonSkillItems;
+		public List<Scroll_Item_CommonSkillItem> uIItems = new();
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
@@ -96,11 +95,36 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_ItemNodeRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_EG_ItemNodeRectTransform == null )
+     				{
+		    			this.m_EG_ItemNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_ItemNode");
+     				}
+     				return this.m_EG_ItemNodeRectTransform;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_ItemNode");
+     			}
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_Text_XiLianNameText = null;
 			this.m_EG_JiHuoSetRectTransform = null;
 			this.m_E_CommonSkillItemsLoopVerticalScrollRect = null;
+			this.m_EG_ItemNodeRectTransform = null;
 			this.uiTransform = null;
 			this.DataId = 0;
 		}
@@ -108,6 +132,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_Text_XiLianNameText = null;
 		private UnityEngine.RectTransform m_EG_JiHuoSetRectTransform = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_CommonSkillItemsLoopVerticalScrollRect = null;
+		private UnityEngine.RectTransform m_EG_ItemNodeRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }
