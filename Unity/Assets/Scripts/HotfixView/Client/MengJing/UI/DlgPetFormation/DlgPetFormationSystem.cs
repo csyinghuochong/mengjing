@@ -27,6 +27,7 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgPetFormation self, Entity contextData = null)
         {
+            self.View.E_IconItemDragImage.gameObject.SetActive(false);
         }
 
         public static void OnUpdateNumber(this DlgPetFormation self, int sceneType)
