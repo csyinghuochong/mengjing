@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-    [ChildOf]
+    [ComponentOf(typeof(RankSceneComponent))]
     [BsonIgnoreExtraElements]
     public class DBRankInfo : Entity, IAwake
     {

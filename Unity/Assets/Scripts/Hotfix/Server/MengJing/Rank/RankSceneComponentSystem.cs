@@ -49,7 +49,7 @@ namespace ET.Server
             
             if (dBServerInfo == null)
             {
-                dBServerInfo = self.AddChildWithId<DBServerInfo>(self.Zone());
+                dBServerInfo = self.AddComponent<DBServerInfo>();
             }
 
             //初始化参数
@@ -195,14 +195,9 @@ namespace ET.Server
                     
             if (dBRankInfo == null)
             {
-                dBRankInfo = self.AddChildWithId<DBRankInfo>(self.Zone());
-                self.DBRankInfo = dBRankInfo;
+                dBRankInfo = self.AddComponent<DBRankInfo>();
             }
-            else
-            {
-                self.DBRankInfo = dBRankInfo;
-            }
-
+            self.DBRankInfo = dBRankInfo;
             self.DBRankInfo.rankRunRace.Clear();
             self.DBRankInfo.rankingDemon.Clear();
             self.UpdateRankPetList();

@@ -5,7 +5,7 @@ namespace ET.Server
 {
 
 	//RankServer
-	[ChildOf]
+	[ComponentOf()]
     [BsonIgnoreExtraElements]
 	public class DBServerInfo : Entity, IAwake
 	{
