@@ -71,30 +71,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_CommonSkillItemsLoopVerticalScrollRect
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_E_CommonSkillItemsLoopVerticalScrollRect == null )
-     				{
-		    			this.m_E_CommonSkillItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_CommonSkillItems");
-     				}
-     				return this.m_E_CommonSkillItemsLoopVerticalScrollRect;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_CommonSkillItems");
-     			}
-     		}
-     	}
-
 		public UnityEngine.RectTransform EG_ItemNodeRectTransform
      	{
      		get
@@ -123,7 +99,6 @@ namespace ET.Client
 		{
 			this.m_E_Text_XiLianNameText = null;
 			this.m_EG_JiHuoSetRectTransform = null;
-			this.m_E_CommonSkillItemsLoopVerticalScrollRect = null;
 			this.m_EG_ItemNodeRectTransform = null;
 			this.uiTransform = null;
 			this.DataId = 0;
@@ -131,7 +106,6 @@ namespace ET.Client
 
 		private UnityEngine.UI.Text m_E_Text_XiLianNameText = null;
 		private UnityEngine.RectTransform m_EG_JiHuoSetRectTransform = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_CommonSkillItemsLoopVerticalScrollRect = null;
 		private UnityEngine.RectTransform m_EG_ItemNodeRectTransform = null;
 		public Transform uiTransform = null;
 	}

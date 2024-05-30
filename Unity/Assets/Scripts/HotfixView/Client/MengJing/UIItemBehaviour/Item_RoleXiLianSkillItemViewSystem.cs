@@ -23,8 +23,9 @@ namespace ET.Client
         public static void OnInitUI(this Scroll_Item_RoleXiLianSkillItem self, EquipXiLianConfig equipXiLianConfig)
         {
             self.EquipXiLianConfig = equipXiLianConfig;
-            var path = ABPathHelper.GetUGUIPath("Assets/Bundles/UI/Item/Item_CommonSkillItem.prefab");
-            var bundleGameObject = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+
+            var bundleGameObject = self.Root().GetComponent<ResourcesLoaderComponent>()
+                    .LoadAssetSync<GameObject>("Assets/Bundles/UI/Item/Item_CommonSkillItem.prefab");
             self.E_Text_XiLianNameText.text = equipXiLianConfig.Title + GameSettingLanguge.LoadLocalization("额外增加概率出现的特殊属性");
             List<KeyValuePairInt> xilianSkill = XiLianHelper.GetLevelSkill(equipXiLianConfig.XiLianLevel);
 
