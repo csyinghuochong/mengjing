@@ -11,11 +11,6 @@ namespace ET.Client
             C2E_GetAllMailRequest request = new() { ActorId = userInfo.UserId };
             E2C_GetAllMailResponse response =
                     (E2C_GetAllMailResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
-            // 测试
-            response.MailInfos.Add(new MailInfo()
-            {
-                Title = "测试邮件", Context = "测试内容", ItemList = new List<BagInfo>() { new BagInfo() { ItemID = 1, ItemNum = 10 } }
-            });
 
             root.GetComponent<MailComponentC>().MailInfoList = response.MailInfos;
 
