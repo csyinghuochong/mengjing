@@ -10,6 +10,23 @@ namespace ET.Server
     [FriendOf(typeof (YeWaiRefreshComponent))]
     public static partial class YeWaiRefreshComponentSystem
     {
+        
+        [Invoke(TimerInvokeType.RefreshMonsterTimer)]
+        public class RefreshMonsterTimer: ATimer<YeWaiRefreshComponent>
+        {
+            protected override void Run(YeWaiRefreshComponent self)
+            {
+                try
+                {
+                    self.OnTimer();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+        
         [EntitySystem]
         private static void Awake(this ET.Server.YeWaiRefreshComponent self)
         {
