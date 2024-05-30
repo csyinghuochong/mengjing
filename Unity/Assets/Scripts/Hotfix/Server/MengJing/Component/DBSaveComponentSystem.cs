@@ -50,6 +50,8 @@ namespace ET.Server
 
         public static void Check(this DBSaveComponent self)
         {
+            self.GetParent<Unit>().GetComponent<UserInfoComponentS>().Check();
+            
             UnitCacheHelper.AddOrUpdateUnitAllCache(self.GetParent<Unit>());
         }
         

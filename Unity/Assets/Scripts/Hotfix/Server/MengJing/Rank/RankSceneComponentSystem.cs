@@ -9,6 +9,23 @@ namespace ET.Server
     [FriendOf(typeof (RankSceneComponent))]
     public static partial class RankSceneComponentSystem
     {
+        
+        [Invoke(TimerInvokeType.RankeTimer)]
+        public class RankeTimer: ATimer<RankSceneComponent>
+        {
+            protected override void Run(RankSceneComponent self)
+            {
+                try
+                {
+                    self.SaveDB().Coroutine();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+        
         [EntitySystem]
         private static void Awake(this ET.Server.RankSceneComponent self)
         {

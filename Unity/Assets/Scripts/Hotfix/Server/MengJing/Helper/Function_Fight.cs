@@ -1852,130 +1852,130 @@ namespace ET.Server
             }
 
             //生命护盾
-            // List<PropertyValue> lifeShieldList = unit.GetComponent<SkillSetComponent>().GetShieldProLists();
-            // for (int i = 0; i < lifeShieldList.Count; i++)
-            // {
-            //     AddUpdateProDicList(lifeShieldList[i].HideID, lifeShieldList[i].HideValue, UpdateProDicList);
-            // }
-            //
-            // //称号属性
-            // List<PropertyValue> titlePros = unit.GetComponent<TitleComponent>().GetTitlePro();
-            // for (int i = 0; i < titlePros.Count; i++)
-            // {
-            //     AddUpdateProDicList(titlePros[i].HideID, titlePros[i].HideValue, UpdateProDicList);
-            // }
-            //
-            // //家园属性
-            // List<PropertyValue> jiayuanPros = unit.GetComponent<JiaYuanComponent>().GetJianYuanPro();
-            // for (int i = 0; i < jiayuanPros.Count; i++)
-            // {
-            //     AddUpdateProDicList(jiayuanPros[i].HideID, jiayuanPros[i].HideValue, UpdateProDicList);
-            // }
-            //
-            // //技能属性
-            // List<PropertyValue> skillProList = unit.GetComponent<SkillSetComponent>().GetSkillRoleProLists();
-            // for (int i = 0; i < skillProList.Count; i++)
-            // {
-            //     //Log.Info("隐藏:" + skillProList[i].HideID + "skillProList[i].HideValue = " + skillProList[i].HideValue);
-            //     AddUpdateProDicList(skillProList[i].HideID, skillProList[i].HideValue, UpdateProDicList);
-            // }
-            //
-            // //坐骑属性
-            // List<PropertyValue> zuoqiPros = unit.GetComponent<UserInfoComponent>().GetZuoQiPro();
-            // for (int i = 0; i < zuoqiPros.Count; i++)
-            // {
-            //     AddUpdateProDicList(zuoqiPros[i].HideID, zuoqiPros[i].HideValue, UpdateProDicList);
-            // }
-            //
-            // //收集属性
-            // List<PropertyValue> shoujiProList = unit.GetComponent<ShoujiComponent>().GetProList();
-            // for (int i = 0; i < shoujiProList.Count; i++)
-            // {
-            //     AddUpdateProDicList(shoujiProList[i].HideID, shoujiProList[i].HideValue, UpdateProDicList);
-            // }
-            //
-            // //精灵属性
-            // List<PropertyValue> jinglingProList = unit.GetComponent<ChengJiuComponent>().GetJingLingProLists();
-            // for (int i = 0; i < jinglingProList.Count; i++)
-            // {
-            //     AddUpdateProDicList(jinglingProList[i].HideID, jinglingProList[i].HideValue, UpdateProDicList);
-            // }
+             List<PropertyValue> lifeShieldList = unit.GetComponent<SkillSetComponentS>().GetShieldProLists();
+             for (int i = 0; i < lifeShieldList.Count; i++)
+             {
+                 AddUpdateProDicList(lifeShieldList[i].HideID, lifeShieldList[i].HideValue, UpdateProDicList);
+             }
+            
+             //称号属性
+             List<PropertyValue> titlePros = unit.GetComponent<TitleComponentS>().GetTitlePro();
+             for (int i = 0; i < titlePros.Count; i++)
+             {
+                 AddUpdateProDicList(titlePros[i].HideID, titlePros[i].HideValue, UpdateProDicList);
+             }
+            
+             //家园属性
+             List<PropertyValue> jiayuanPros = unit.GetComponent<JiaYuanComponentS>().GetJianYuanPro();
+             for (int i = 0; i < jiayuanPros.Count; i++)
+             {
+                 AddUpdateProDicList(jiayuanPros[i].HideID, jiayuanPros[i].HideValue, UpdateProDicList);
+             }
+            
+             //技能属性
+             List<PropertyValue> skillProList = unit.GetComponent<SkillSetComponentS>().GetSkillRoleProLists();
+             for (int i = 0; i < skillProList.Count; i++)
+             {
+                 //Log.Info("隐藏:" + skillProList[i].HideID + "skillProList[i].HideValue = " + skillProList[i].HideValue);
+                 AddUpdateProDicList(skillProList[i].HideID, skillProList[i].HideValue, UpdateProDicList);
+             }
+            
+             //坐骑属性
+             List<PropertyValue> zuoqiPros = unit.GetComponent<UserInfoComponentS>().GetZuoQiPro();
+             for (int i = 0; i < zuoqiPros.Count; i++)
+             {
+                 AddUpdateProDicList(zuoqiPros[i].HideID, zuoqiPros[i].HideValue, UpdateProDicList);
+             }
+            
+             //收集属性
+             List<PropertyValue> shoujiProList = unit.GetComponent<ShoujiComponentS>().GetProList();
+             for (int i = 0; i < shoujiProList.Count; i++)
+             {
+                 AddUpdateProDicList(shoujiProList[i].HideID, shoujiProList[i].HideValue, UpdateProDicList);
+             }
+            
+             //精灵属性
+             List<PropertyValue> jinglingProList = unit.GetComponent<ChengJiuComponentS>().GetJingLingProLists();
+             for (int i = 0; i < jinglingProList.Count; i++)
+             {
+                 AddUpdateProDicList(jinglingProList[i].HideID, jinglingProList[i].HideValue, UpdateProDicList);
+             }
 
-            //家族修炼属性
-            // int xiuLian_0 = numericComponent.GetAsInt(NumericType.UnionXiuLian_0);
-            // int xiuLian_1 = numericComponent.GetAsInt(NumericType.UnionXiuLian_1);
-            // int xiuLian_2 = numericComponent.GetAsInt(NumericType.UnionXiuLian_2);
-            // int xiuLian_3 = numericComponent.GetAsInt(NumericType.UnionXiuLian_3);
-            // List<int> unionXiuLianids = new List<int>() { xiuLian_0, xiuLian_1, xiuLian_2, xiuLian_3 };
-            // for (int i = 0; i < unionXiuLianids.Count; i++)
-            // {
-            //     UnionQiangHuaConfig unionQiangHuaCof = UnionQiangHuaConfigCategory.Instance.Get(unionXiuLianids[i]);
-            //     List<PropertyValue> jiazuProList = new List<PropertyValue>();
-            //     NumericHelp.GetProList(unionQiangHuaCof.EquipPropreAdd, jiazuProList);
-            //     for (int pro = 0; pro < jiazuProList.Count; pro++)
-            //     {
-            //         AddUpdateProDicList(jiazuProList[pro].HideID, jiazuProList[pro].HideValue, UpdateProDicList);
-            //     }
-            // }
+             //家族修炼属性
+             int xiuLian_0 = numericComponent.GetAsInt(NumericType.UnionXiuLian_0);
+             int xiuLian_1 = numericComponent.GetAsInt(NumericType.UnionXiuLian_1);
+             int xiuLian_2 = numericComponent.GetAsInt(NumericType.UnionXiuLian_2);
+             int xiuLian_3 = numericComponent.GetAsInt(NumericType.UnionXiuLian_3);
+             List<int> unionXiuLianids = new List<int>() { xiuLian_0, xiuLian_1, xiuLian_2, xiuLian_3 };
+             for (int i = 0; i < unionXiuLianids.Count; i++)
+             {
+                 UnionQiangHuaConfig unionQiangHuaCof = UnionQiangHuaConfigCategory.Instance.Get(unionXiuLianids[i]);
+                 List<PropertyValue> jiazuProList = new List<PropertyValue>();
+                 NumericHelp.GetProList(unionQiangHuaCof.EquipPropreAdd, jiazuProList);
+                 for (int pro = 0; pro < jiazuProList.Count; pro++)
+                 {
+                     AddUpdateProDicList(jiazuProList[pro].HideID, jiazuProList[pro].HideValue, UpdateProDicList);
+                 }
+             }
 
-            //血石
-            // int bloodstone = numericComponent.GetAsInt(NumericType.Bloodstone);
-            // PublicQiangHuaConfig publicQiangHuaConfig = PublicQiangHuaConfigCategory.Instance.Get(bloodstone);
-            // List<PropertyValue> publicqianghuaProList = new List<PropertyValue>();
-            // NumericHelp.GetProList(publicQiangHuaConfig.EquipPropreAdd, publicqianghuaProList);
-            // for (int pro = 0; pro < publicqianghuaProList.Count; pro++)
-            // {
-            //     AddUpdateProDicList(publicqianghuaProList[pro].HideID, publicqianghuaProList[pro].HideValue, UpdateProDicList);
-            // }
+             //血石
+             int bloodstone = numericComponent.GetAsInt(NumericType.Bloodstone);
+             PublicQiangHuaConfig publicQiangHuaConfig = PublicQiangHuaConfigCategory.Instance.Get(bloodstone);
+             List<PropertyValue> publicqianghuaProList = new List<PropertyValue>();
+             NumericHelp.GetProList(publicQiangHuaConfig.EquipPropreAdd, publicqianghuaProList);
+             for (int pro = 0; pro < publicqianghuaProList.Count; pro++)
+             {
+                 AddUpdateProDicList(publicqianghuaProList[pro].HideID, publicqianghuaProList[pro].HideValue, UpdateProDicList);
+             }
 
-            //宠物修炼属性。 玩家数值
-            // int pet_xiuLian_0 = numericComponent.GetAsInt(NumericType.UnionPetXiuLian_0);
-            // int pet_xiuLian_1 = numericComponent.GetAsInt(NumericType.UnionPetXiuLian_1);
-            // int pet_xiuLian_2 = numericComponent.GetAsInt(NumericType.UnionPetXiuLian_2);
-            // int pet_xiuLian_3 = numericComponent.GetAsInt(NumericType.UnionPetXiuLian_3);
-            // List<int> petUnionXiuLianids = new List<int>() { pet_xiuLian_0, pet_xiuLian_1, pet_xiuLian_2, pet_xiuLian_3 };
-            // for (int i = 0; i < petUnionXiuLianids.Count; i++)
-            // {
-            //     if (petUnionXiuLianids[i] == 0)
-            //     {
-            //         continue;
-            //     }
-            //     UnionQiangHuaConfig unionQiangHuaCof = UnionQiangHuaConfigCategory.Instance.Get(petUnionXiuLianids[i]);
-            //     List<PropertyValue> jiazuProList = new List<PropertyValue>();
-            //     NumericHelp.GetProList(unionQiangHuaCof.EquipPropreAdd, jiazuProList);
-            //     for (int pro = 0; pro < jiazuProList.Count; pro++)
-            //     {
-            //         AddUpdateProDicList(jiazuProList[pro].HideID, jiazuProList[pro].HideValue, UpdateProDicList);
-            //     }
-            // }
+             //宠物修炼属性。 玩家数值
+             int pet_xiuLian_0 = numericComponent.GetAsInt(NumericType.UnionPetXiuLian_0);
+             int pet_xiuLian_1 = numericComponent.GetAsInt(NumericType.UnionPetXiuLian_1);
+             int pet_xiuLian_2 = numericComponent.GetAsInt(NumericType.UnionPetXiuLian_2);
+             int pet_xiuLian_3 = numericComponent.GetAsInt(NumericType.UnionPetXiuLian_3);
+             List<int> petUnionXiuLianids = new List<int>() { pet_xiuLian_0, pet_xiuLian_1, pet_xiuLian_2, pet_xiuLian_3 };
+             for (int i = 0; i < petUnionXiuLianids.Count; i++)
+             {
+                 if (petUnionXiuLianids[i] == 0)
+                 {
+                     continue;
+                 }
+                 UnionQiangHuaConfig unionQiangHuaCof = UnionQiangHuaConfigCategory.Instance.Get(petUnionXiuLianids[i]);
+                 List<PropertyValue> jiazuProList = new List<PropertyValue>();
+                 NumericHelp.GetProList(unionQiangHuaCof.EquipPropreAdd, jiazuProList);
+                 for (int pro = 0; pro < jiazuProList.Count; pro++)
+                 {
+                     AddUpdateProDicList(jiazuProList[pro].HideID, jiazuProList[pro].HideValue, UpdateProDicList);
+                 }
+             }
 
-            // List<int> unionKejiIds = userInfo.UnionKeJiList;
-            // for (int i = 0; i < unionKejiIds.Count; i++)
-            // {
-            //     UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(unionKejiIds[i]);
-            //     List<PropertyValue> jiazuProList = new List<PropertyValue>();
-            //     NumericHelp.GetProList(unionKeJiConfig.EquipPropreAdd, jiazuProList);
-            //     for (int pro = 0; pro < jiazuProList.Count; pro++)
-            //     {
-            //         AddUpdateProDicList(jiazuProList[pro].HideID, jiazuProList[pro].HideValue, UpdateProDicList);
-            //     }
-            // }
+             List<int> unionKejiIds = userInfo.UnionKeJiList;
+             for (int i = 0; i < unionKejiIds.Count; i++)
+             {
+                 UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(unionKejiIds[i]);
+                 List<PropertyValue> jiazuProList = new List<PropertyValue>();
+                 NumericHelp.GetProList(unionKeJiConfig.EquipPropreAdd, jiazuProList);
+                 for (int pro = 0; pro < jiazuProList.Count; pro++)
+                 {
+                     AddUpdateProDicList(jiazuProList[pro].HideID, jiazuProList[pro].HideValue, UpdateProDicList);
+                 }
+             }
 
-            //神兽羁绊属性
-            // int shenshouNumber = unit.GetComponent<PetComponentServer>().GetShenShouNumber();
-            // List<PropertyValue> shenshoujiban = new List<PropertyValue>();
-            // foreach ((int petnumber, List<PropertyValue> prolist) in ConfigHelper.ShenShouJiBan())
-            // {
-            //     if (shenshouNumber >= petnumber)
-            //     {
-            //         shenshoujiban.AddRange(prolist);
-            //     }
-            // }
-            //
-            // for (int i = 0; i < shenshoujiban.Count; i++)
-            // {
-            //     AddUpdateProDicList(shenshoujiban[i].HideID, shenshoujiban[i].HideValue, UpdateProDicList);
-            // }
+             // 神兽羁绊属性
+             int shenshouNumber = unit.GetComponent<PetComponentS>().GetShenShouNumber();
+             List<PropertyValue> shenshoujiban = new List<PropertyValue>();
+             foreach ((int petnumber, List<PropertyValue> prolist) in ConfigHelper.ShenShouJiBan())
+             {
+                 if (shenshouNumber >= petnumber)
+                 {
+                     shenshoujiban.AddRange(prolist);
+                 }
+             }
+            
+             for (int i = 0; i < shenshoujiban.Count; i++)
+             {
+                 AddUpdateProDicList(shenshoujiban[i].HideID, shenshoujiban[i].HideValue, UpdateProDicList);
+             }
 
             
             //汇总属性
@@ -2107,39 +2107,37 @@ namespace ET.Server
             }
 
             //天赋系统
-            // List<PropertyValue> tianfuProList = unit.GetComponent<SkillSetComponent>().GetTianfuRoleProLists();
-            // for (int i = 0; i < tianfuProList.Count; i++)
-            // {
-            //     AddUpdateProDicList(tianfuProList[i].HideID, tianfuProList[i].HideValue, UpdateProDicListCopy);
-            // }
+            List<PropertyValue> tianfuProList = unit.GetComponent<SkillSetComponentS>().GetTianfuRoleProLists();
+            for (int i = 0; i < tianfuProList.Count; i++)
+            {
+                AddUpdateProDicList(tianfuProList[i].HideID, tianfuProList[i].HideValue, UpdateProDicListCopy);
+            }
 
-            // List<PropertyValue> skillProList_8 = null;/// unit.GetComponent<SkillSetComponent>().GetSkillRoleProLists_8();
-            // for (int i = 0; i < skillProList_8.Count; i++)
-            // {
-            //     switch (skillProList_8[i].HideID)
-            //     {
-            //         case NumericType.Base_Power_Add:
-            //             Power_value_add += skillProList_8[i].HideValue;
-            //             break;
-            //         case NumericType.Base_Intellect_Add:
-            //             Intellect_value_add += skillProList_8[i].HideValue;
-            //             break;
-            //         case NumericType.Base_Agility_Add:
-            //             Agility_value_add += skillProList_8[i].HideValue;
-            //             break;
-            //         case NumericType.Base_Stamina_Add:
-            //             Stamina_value_add += skillProList_8[i].HideValue;
-            //             break;
-            //         case NumericType.Base_Constitution_Add:
-            //             Constitution_value_add += skillProList_8[i].HideValue;
-            //             break;
-            //         default:
-            //             AddUpdateProDicList(skillProList_8[i].HideID, skillProList_8[i].HideValue, UpdateProDicListCopy);
-            //             break;
-            //     }
-            // }
-
-
+            List<PropertyValue> skillProList_8 = unit.GetComponent<SkillSetComponentS>().GetSkillRoleProLists_8();
+            for (int i = 0; i < skillProList_8.Count; i++)
+            {
+                switch (skillProList_8[i].HideID)
+                {
+                    case NumericType.Base_Power_Add:
+                        Power_value_add += skillProList_8[i].HideValue;
+                        break;
+                    case NumericType.Base_Intellect_Add:
+                        Intellect_value_add += skillProList_8[i].HideValue;
+                        break;
+                    case NumericType.Base_Agility_Add:
+                        Agility_value_add += skillProList_8[i].HideValue;
+                        break;
+                    case NumericType.Base_Stamina_Add:
+                        Stamina_value_add += skillProList_8[i].HideValue;
+                        break;
+                    case NumericType.Base_Constitution_Add:
+                        Constitution_value_add += skillProList_8[i].HideValue;
+                        break;
+                    default:
+                        AddUpdateProDicList(skillProList_8[i].HideID, skillProList_8[i].HideValue, UpdateProDicListCopy);
+                        break;
+                }
+            }
 
             //缓存一级属性
             Power_value = GetOnePro(NumericType.Now_Power, UpdateProDicListCopy);
@@ -2460,7 +2458,7 @@ namespace ET.Server
             int zhanliValue = (int)(ShiLi_Act * (1 + ShiLi_ActPro) + ShiLi_Def * (1 + ShiLi_DefPro) + (ShiLi_Hp * 0.1f) * (1 + ShiLi_HpPro)) + roleLv * 60 + (int)proLvAdd + addZhanLi + addShouHuFight + chuanchengProAdd + skillPointFight;
 
             //更新战力
-            //unit.GetComponent<UserInfoComponentServer>().UpdateRoleData(UserDataType.Combat, zhanliValue.ToString(), notice);
+            unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.Combat, zhanliValue.ToString(), notice);
 
             if (notice)
             {
@@ -2487,7 +2485,7 @@ namespace ET.Server
             //排行榜
             if (rank)
             {
-                //unit.GetComponent<UserInfoComponentServer>().UpdateRankInfo();
+                unit.GetComponent<UserInfoComponentS>().UpdateRankInfo();
             }
 
             numericComponent_1 = null;

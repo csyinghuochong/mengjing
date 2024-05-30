@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
     [FriendOf(typeof (UserInfoComponentS))]
     [EntitySystemOf(typeof (UserInfoComponentS))]
-    public static partial class UserInfoComponentServerSystem
+    public static partial class UserInfoComponentSSystem
     {
         [EntitySystem]
         private static void Awake(this UserInfoComponentS self)
@@ -17,6 +18,34 @@ namespace ET.Server
         {
         }
 
+        public static void Check(this UserInfoComponentS self)
+        {
+            self.TodayOnLine++;
+            self.LingDiOnLine++;
+
+            //领地和家园都是一小时刷新一次经验
+            if (self.LingDiOnLine > 60)
+            {
+                self.LingDiOnLine = 0;
+                //self.OnRongyuChanChu(1, true);
+                self.OnJiaYuanExp(1f);
+            }
+
+            if (self.UpdateRankTime > 0)
+            {
+                self.UpdateRankTime = 0;
+                self.UploadCombat().Coroutine();
+            }
+        }
+        
+        public static void OnJiaYuanExp(this UserInfoComponentS self, float hour)
+        {
+            JiaYuanConfig jiaYuanConfig = JiaYuanConfigCategory.Instance.Get(self.UserInfo.JiaYuanLv);
+            //self.UserInfo.JiaYuanExp += jiaYuanConfig.JiaYuanAddExp;
+            int addexp = (int)math.floor(hour * jiaYuanConfig.JiaYuanAddExp);
+            self.UpdateRoleMoneyAdd(UserDataType.JiaYuanExp, $"{addexp}", true, ItemGetWay.JiaYuanExchange);
+        }
+        
         public static void OnInit(this UserInfoComponentS self, string account, long id, long accountId, CreateRoleInfo createRoleInfo)
         {
             self.Account = account;
@@ -311,8 +340,8 @@ namespace ET.Server
                 case UserDataType.Combat:
                     self.UserInfo.Combat = int.Parse(value);
                     saveValue = self.UserInfo.Combat.ToString();
-                    // unit.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.CombatToValue_211, 0, self.UserInfo.Combat);
-                    // unit.GetComponent<TaskComponent>().TriggerTaskEvent(TaskTargetType.CombatToValue_133, 0, self.UserInfo.Combat);
+                    unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.CombatToValue_211, 0, self.UserInfo.Combat);
+                    unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.CombatToValue_133, 0, self.UserInfo.Combat);
                     break;
                 case UserDataType.Vitality:
                     // NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
@@ -1115,6 +1144,36 @@ namespace ET.Server
             }
         }
 
+        public static async ETTask UploadCombat(this UserInfoComponentS self)
+        {
+            Unit unit = self.GetParent<Unit>();
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            ActorId mapInstanceId = UnitCacheHelper.GetRankServerId(self.Zone());
+            RankingInfo rankPetInfo = new RankingInfo();
+   
+            rankPetInfo.UserId = self.UserInfo.UserId;
+            rankPetInfo.PlayerName = self.UserInfo.Name;
+            rankPetInfo.PlayerLv = self.UserInfo.Lv;
+            rankPetInfo.Combat = self.UserInfo.Combat;
+            rankPetInfo.Occ = self.UserInfo.Occ;
+            R2M_RankUpdateResponse Response = (R2M_RankUpdateResponse)await unit.Root().GetComponent<MessageSender>().Call
+            (mapInstanceId, new M2R_RankUpdateRequest()
+            {
+                CampId = numericComponent.GetAsInt(NumericType.AcvitiyCamp),
+                RankingInfo = rankPetInfo
+            });
+            if (unit.IsDisposed)
+            {
+                return;
+            }
+            numericComponent.ApplyValue(NumericType.CombatRankID, Response.RankId);
+            numericComponent.ApplyValue(NumericType.OccCombatRankID, Response.OccRankId);
+            numericComponent.ApplyValue(NumericType.PetTianTiRankID, Response.PetRankId);
+            numericComponent.ApplyValue(NumericType.SoloRankId, Response.SoloRankId);
+        }
+
+        
+        
         public static void OnMakeItem(this UserInfoComponentS self, int makeId)
         {
             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(makeId);
