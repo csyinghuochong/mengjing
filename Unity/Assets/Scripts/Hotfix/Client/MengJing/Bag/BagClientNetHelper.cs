@@ -533,5 +533,13 @@ namespace ET.Client
 
             return response;
         }
+
+        public static async ETTask<int> RquestTakeOutAll(Scene root, int horseId)
+        {
+            C2M_TakeOutAllRequest request = new() { HorseId = horseId };
+            M2C_TakeOutAllResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_TakeOutAllResponse;
+
+            return response.Error;
+        }
     }
 }
