@@ -84,6 +84,30 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_RankShowSetRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_EG_RankShowSetRectTransform == null )
+     				{
+		    			this.m_EG_RankShowSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_RankShowSet");
+     				}
+     				return this.m_EG_RankShowSetRectTransform;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_RankShowSet");
+     			}
+     		}
+     	}
+
 		public UnityEngine.UI.Image E_Rank_1Image
      	{
      		get
@@ -97,13 +121,13 @@ namespace ET.Client
      			{
      				if( this.m_E_Rank_1Image == null )
      				{
-		    			this.m_E_Rank_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RankShowSet/E_Rank_1");
+		    			this.m_E_Rank_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RankShowSet/E_Rank_1");
      				}
      				return this.m_E_Rank_1Image;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RankShowSet/E_Rank_1");
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RankShowSet/E_Rank_1");
      			}
      		}
      	}
@@ -121,13 +145,13 @@ namespace ET.Client
      			{
      				if( this.m_E_Rank_2Image == null )
      				{
-		    			this.m_E_Rank_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RankShowSet/E_Rank_2");
+		    			this.m_E_Rank_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RankShowSet/E_Rank_2");
      				}
      				return this.m_E_Rank_2Image;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RankShowSet/E_Rank_2");
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RankShowSet/E_Rank_2");
      			}
      		}
      	}
@@ -145,13 +169,13 @@ namespace ET.Client
      			{
      				if( this.m_E_Rank_3Image == null )
      				{
-		    			this.m_E_Rank_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RankShowSet/E_Rank_3");
+		    			this.m_E_Rank_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RankShowSet/E_Rank_3");
      				}
      				return this.m_E_Rank_3Image;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"RankShowSet/E_Rank_3");
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RankShowSet/E_Rank_3");
      			}
      		}
      	}
@@ -160,6 +184,7 @@ namespace ET.Client
 		{
 			this.m_E_Text_RankText = null;
 			this.m_es_rewardlist = null;
+			this.m_EG_RankShowSetRectTransform = null;
 			this.m_E_Rank_1Image = null;
 			this.m_E_Rank_2Image = null;
 			this.m_E_Rank_3Image = null;
@@ -169,6 +194,7 @@ namespace ET.Client
 
 		private UnityEngine.UI.Text m_E_Text_RankText = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
+		private UnityEngine.RectTransform m_EG_RankShowSetRectTransform = null;
 		private UnityEngine.UI.Image m_E_Rank_1Image = null;
 		private UnityEngine.UI.Image m_E_Rank_2Image = null;
 		private UnityEngine.UI.Image m_E_Rank_3Image = null;

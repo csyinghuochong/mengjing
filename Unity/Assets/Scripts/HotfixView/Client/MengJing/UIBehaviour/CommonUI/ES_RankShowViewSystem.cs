@@ -91,6 +91,8 @@ namespace ET.Client
 
             self.AddUIScrollItems(ref self.ScrollItemRankShowItems, self.ShowRankingInfos.Count);
             self.E_RankShowItemsLoopVerticalScrollRect.SetVisible(true, self.ShowRankingInfos.Count);
+
+            await ETTask.CompletedTask;
         }
     }
 }

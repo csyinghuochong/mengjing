@@ -22,23 +22,23 @@ namespace ET.Client
             self.E_Text_RankText.text = $"{rankRewardConfig.NeedPoint[0]}-{rankRewardConfig.NeedPoint[1]}名";
             self.ES_RewardList.Refresh(rankRewardConfig.RewardItems, 0.9f);
 
-            UICommonHelper.HideChildren();
+            UICommonHelper.HideChildren(self.EG_RankShowSetRectTransform);
             if (rankRewardConfig.NeedPoint[0] == 1)
             {
-                self.Rank_1.SetActive(true);
-                self.Text_Rank.SetActive(false);
+                self.E_Rank_1Image.gameObject.SetActive(true);
+                self.E_Text_RankText.gameObject.SetActive(false);
             }
 
             if (rankRewardConfig.NeedPoint[0] == 2)
             {
-                self.Rank_2.SetActive(true);
-                self.Text_Rank.SetActive(false);
+                self.E_Rank_2Image.gameObject.SetActive(true);
+                self.E_Text_RankText.gameObject.SetActive(false);
             }
 
             if (rankRewardConfig.NeedPoint[0] == 3)
             {
-                self.Rank_3.SetActive(true);
-                self.Text_Rank.SetActive(false);
+                self.E_Rank_3Image.gameObject.SetActive(true);
+                self.E_Text_RankText.gameObject.SetActive(false);
             }
         }
     }

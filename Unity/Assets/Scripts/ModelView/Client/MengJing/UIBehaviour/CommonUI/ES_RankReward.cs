@@ -6,8 +6,9 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RankReward : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_RankReward : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public List<RankRewardConfig> ShowRankRewardConfigs;
 		public Dictionary<int, Scroll_Item_RankRewardItem> ScrollItemRankRewardItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_RankRewardItemsLoopVerticalScrollRect
