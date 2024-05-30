@@ -15,6 +15,7 @@ namespace ET.Server
             root.AddComponent<MessageSender>();
             root.AddComponent<LocationManagerComoponent>();
             root.AddComponent<RankSceneComponent>();
+            root.AddComponent<DBManagerComponent>();
 
             await ETTask.CompletedTask;
         }
