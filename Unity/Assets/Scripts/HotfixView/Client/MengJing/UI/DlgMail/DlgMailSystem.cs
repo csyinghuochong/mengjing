@@ -139,6 +139,9 @@ namespace ET.Client
                 mailComponent.SelectMail = null;
                 self.View.EG_MailContentRectTransform.gameObject.SetActive(false);
                 self.View.E_NoMailText.gameObject.SetActive(true);
+
+                self.AddUIScrollItems(ref self.ScrollItemMailItems, 0);
+                self.View.E_MailItemsLoopVerticalScrollRect.SetVisible(true, 0);
                 return;
             }
 
