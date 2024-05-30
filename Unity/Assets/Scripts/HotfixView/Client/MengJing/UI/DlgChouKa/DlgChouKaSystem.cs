@@ -43,7 +43,7 @@ namespace ET.Client
         {
             self.View.E_Btn_ChouKaProbExplainButton.AddListener(() =>
             {
-                // self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ChouKaProbExplain).Coroutine();
+                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ChouKaProbExplain).Coroutine();
             });
             self.View.E_Btn_WarehouseButton.AddListener(self.OnBtn_Warehouse);
             self.View.E_Btn_ZhangJieXuanZeButton.AddListener(self.OnBtn_ZhangJieXuanZe);
