@@ -8,12 +8,12 @@ namespace ET
     {
         public static List<int> GetChaptersByType(PaiMaiTypeEnum pype)
         {
-            return PaiMainData.PaiMaiTypeData[(int)pype].PaiMaiIDItemList.Keys.ToList();
+            return PaiMaiData.PaiMaiTypeData[(int)pype].PaiMaiIDItemList.Keys.ToList();
         }
 
         public static List<int> GetItemsByChapter(int typeid, int chapterId)
         {
-            return PaiMainData.PaiMaiTypeData[typeid].PaiMaiIDItemList[chapterId];
+            return PaiMaiData.PaiMaiTypeData[typeid].PaiMaiIDItemList[chapterId];
         }
 
         public static long GetPaiMaiId(int itemType)
@@ -25,7 +25,7 @@ namespace ET
         {
             for (int i = 0; i < (int)PaiMaiTypeEnum.Number + 1; i++)
             {
-                PaiMainData.PaiMaiTypeData.Add(new PaiMaiTypeData());
+                PaiMaiData.PaiMaiTypeData.Add(new PaiMaiTypeData());
             }
 
             Dictionary<int, PaiMaiSellConfig> allPaiMaiData = PaiMaiSellConfigCategory.Instance.GetAll();
@@ -34,7 +34,7 @@ namespace ET
                 PaiMaiSellConfig paiMaiSellConfig = item.Value;
                 int paiMaiType = paiMaiSellConfig.PaiMaiType;
                 int chapterId = paiMaiSellConfig.ChapterId;
-                PaiMaiTypeData paiMaiTypeDatas = PaiMainData.PaiMaiTypeData[paiMaiType];
+                PaiMaiTypeData paiMaiTypeDatas = PaiMaiData.PaiMaiTypeData[paiMaiType];
                 if (!paiMaiTypeDatas.PaiMaiIDItemList.ContainsKey(chapterId))
                 {
                     paiMaiTypeDatas.PaiMaiIDItemList.Add(chapterId, new List<int>());

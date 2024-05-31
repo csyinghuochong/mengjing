@@ -19,7 +19,7 @@ public enum PaiMaiTypeEnum : int
 }
 
 
-public static class PaiMainData
+public static class PaiMaiData
 {
     
     //每个章节对应的拍卖道具
