@@ -58,7 +58,37 @@ namespace ET.Server
                     scene.GetComponent<CellDungeonComponent>().GenerateFubenScene(false);
                     TransferHelper.AfterTransfer(unit);
                     break;
-                
+                case (int)SceneTypeEnum.PetMing:
+                case (int)SceneTypeEnum.PetDungeon:
+                case (int)SceneTypeEnum.PetTianTi:
+                    SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
+                    scene.GetComponent<MapComponent>().NavMeshId = sceneConfig.MapID;
+                    unit.AddComponent<PathfindingComponent, int>(sceneConfig.MapID);
+                    
+                    //更新unit坐标
+                    unit.Position = new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f);
+                    unit.Rotation = quaternion.identity;
+
+                    // 加入aoi
+                    unit.AddComponent<AOIEntity, int, float3>(40 * 1000, unit.Position);
+                    if (request.SceneType == (int)SceneTypeEnum.PetDungeon)
+                    {
+                        scene.GetComponent<PetFubenComponent>().GeneratePetFuben(unit, int.Parse(request.ParamInfo));
+                    }
+                    if (request.SceneType == (int)SceneTypeEnum.PetTianTi)
+                    {
+                        scene.GetComponent<PetTianTiComponent>().MainUnit = unit;
+                        scene.GetComponent<PetTianTiComponent>().GeneratePetFuben().Coroutine();
+                        unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.PetTianTiNumber_14,0, 1 );
+                        unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.PetTianTiNumber_14, 0, 1);
+                        unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.PetTianTiNumber_310, 0, 1);
+                    }
+                    if (request.SceneType == (int)SceneTypeEnum.PetMing)
+                    {
+                        scene.GetComponent<PetMingDungeonComponent>().MainUnit = unit;
+                        scene.GetComponent<PetMingDungeonComponent>().GeneratePetFuben().Coroutine();
+                    }
+                    break;
                 case SceneTypeEnum.MainCityScene:
                     unit.Position = new float3(-10, 0, -10);
                     unit.AddComponent<PathfindingComponent, int>(101);
