@@ -9,13 +9,19 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [Event(SceneType.Demo)]
-    public class DataUpdate_MainHeroMove_Refresh: AEvent<Scene, DataUpdate_MainHeroMove>
+    [Invoke(TimerInvokeType.UIMapBigTimer)]
+    public class UIMapBigTimer: ATimer<DlgMapBig>
     {
-        protected override async ETTask Run(Scene root, DataUpdate_MainHeroMove args)
+        protected override void Run(DlgMapBig self)
         {
-            root.GetComponent<UIComponent>().GetDlgLogic<DlgMapBig>()?.OnMainHeroMove();
-            await ETTask.CompletedTask;
+            try
+            {
+                self.OnMainHeroMove();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"move timer error: {self.Id}\n{e}");
+            }
         }
     }
 
@@ -49,6 +55,11 @@ namespace ET.Client
 
             self.OnAwake().Coroutine();
             self.InitNpcList();
+        }
+
+        public static void BeforeUnload(this DlgMapBig self)
+        {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
         public static async ETTask OnAwake(this DlgMapBig self)
@@ -92,6 +103,7 @@ namespace ET.Client
             self.ScaleRateY = self.View.E_RawImageEventTrigger.transform.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
 
             self.OnMainHeroMove();
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(500, TimerInvokeType.UIMapBigTimer, self);
             self.View.E_TextText.text = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Name;
 
             await self.Root().GetComponent<TimerComponent>().WaitAsync(200);

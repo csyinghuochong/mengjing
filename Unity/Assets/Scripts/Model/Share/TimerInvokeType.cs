@@ -58,5 +58,6 @@
         public const int RoleXiLianLevel = 319;
         public const int PetEggListItemTimer = 320;
         public const int UIChouKaTimer = 321;
+        public const int UIMapBigTimer = 322;
     }
 }

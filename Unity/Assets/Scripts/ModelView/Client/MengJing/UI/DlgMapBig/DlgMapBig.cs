@@ -11,6 +11,8 @@ namespace ET.Client
             get => this.GetComponent<DlgMapBigViewComponent>();
         }
 
+        public long Timer;
+        
         public int SceneId = 1;
         public float ScaleRateX = 1f;
         public float ScaleRateY = 1f;
