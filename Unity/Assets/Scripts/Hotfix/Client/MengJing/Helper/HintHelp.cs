@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    public static class ErrorViewHelp
+    public static class HintHelp
     {
         public static string GetErrorHint(int code)
         {
@@ -14,7 +14,7 @@
             return hintStr;
         }
 
-        public static void ShowErrorHint(int code)
+        public static void ShowErrorHint(Scene root, int code)
         {
             if (code == 0)
             {
@@ -23,7 +23,12 @@
 
             string hintStr = code.ToString();
             ErrorViewData.ErrorHints.TryGetValue(code, out hintStr);
-            FlyTipComponent.Instance.SpawnFlyTipDi(string.IsNullOrEmpty(hintStr)? code.ToString() : hintStr);
+            EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = string.IsNullOrEmpty(hintStr)? code.ToString() : hintStr });
+        }
+
+        public static void ShowHint(Scene root, string str)
+        {
+            EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = str });
         }
     }
 }

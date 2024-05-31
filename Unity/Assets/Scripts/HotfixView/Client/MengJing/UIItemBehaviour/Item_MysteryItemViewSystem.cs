@@ -23,7 +23,7 @@ namespace ET.Client
             int leftSpace = self.Root().GetComponent<BagComponentC>().GetBagLeftCell();
             if (leftSpace < 1)
             {
-                ErrorViewHelp.ShowErrorHint(ErrorCode.ERR_BagIsFull);
+                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_BagIsFull);
                 return;
             }
 
@@ -32,19 +32,19 @@ namespace ET.Client
 
             if (mysteryConfig.SellType == 1 && self.Root().GetComponent<UserInfoComponentC>().UserInfo.Gold < sellValue)
             {
-                ErrorViewHelp.ShowErrorHint(ErrorCode.ERR_GoldNotEnoughError);
+                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_GoldNotEnoughError);
                 return;
             }
 
             if (mysteryConfig.SellType == 3 && self.Root().GetComponent<UserInfoComponentC>().UserInfo.Diamond < sellValue)
             {
-                ErrorViewHelp.ShowErrorHint(ErrorCode.ERR_DiamondNotEnoughError);
+                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_DiamondNotEnoughError);
                 return;
             }
 
             if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem($"{mysteryConfig.SellType};{mysteryConfig.SellValue}"))
             {
-                ErrorViewHelp.ShowErrorHint(ErrorCode.ERR_ItemNotEnoughError);
+                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_ItemNotEnoughError);
                 return;
             }
 

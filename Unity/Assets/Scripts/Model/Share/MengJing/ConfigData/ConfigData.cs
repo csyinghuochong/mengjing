@@ -9,7 +9,9 @@ namespace ET
         [StaticField]
         public static int GMDungeonId = 1060003;
 
-        
+        [StaticField]
+        public static string ChangeOccItem = "10000178;1";
+
         [StaticField]
         public static int BuChangZone = 5;
 
@@ -18,22 +20,21 @@ namespace ET
 
         [StaticField]
         public static bool NetVersion = true;
-        
+
         //副本深渊模式创建怪物   参数：场景ID,MonsterPositionConfigID
         [StaticField]
-        public static Dictionary<int, int> ShenYuanCreateConfig =new Dictionary<int, int>()
+        public static Dictionary<int, int> ShenYuanCreateConfig = new Dictionary<int, int>()
         {
-            {110001,90011},
-            {110002,90012},
-            {110003,90013},
-            {110004,90014},
-            {110005,90015},
+            { 110001, 90011 },
+            { 110002, 90012 },
+            { 110003, 90013 },
+            { 110004, 90014 },
+            { 110005, 90015 },
         };
 
         [StaticField]
         public static bool IsShowLieOpen = false;
-        
-        
+
         /// <summary>
         /// 赛季开始时间 . 已废弃
         /// </summary>
@@ -48,10 +49,10 @@ namespace ET
         [StaticField]
         public static List<KeyValuePairLong> SeasonTimeList = new List<KeyValuePairLong>()
         {
-            new KeyValuePairLong(){ KeyId = 0, Value = 1701360000000, Value2 = 1713715200000 },
-            new KeyValuePairLong(){ KeyId = 1, Value = 1713715200001, Value2 = 1721577600000 }
+            new KeyValuePairLong() { KeyId = 0, Value = 1701360000000, Value2 = 1713715200000 },
+            new KeyValuePairLong() { KeyId = 1, Value = 1713715200001, Value2 = 1721577600000 }
         };
-        
+
         /// <summary>
         /// 新人抽奖 //KeyId权重 value道具..     第七天是武器ComHelp.GetWelfareWeapon
         /// </summary>
@@ -59,135 +60,129 @@ namespace ET
         public static List<KeyValuePair> WelfareDrawList = new List<KeyValuePair>
         {
             //第一天
-            new KeyValuePair(){ KeyId = 10, Value = "10000161;2" },  
+            new KeyValuePair() { KeyId = 10, Value = "10000161;2" },
             //第二天
-            new KeyValuePair(){ KeyId = 10,  Value = "11200000;1" },
+            new KeyValuePair() { KeyId = 10, Value = "11200000;1" },
             //第三天
-            new KeyValuePair(){ KeyId = 0,  Value = "10010072;1" },
+            new KeyValuePair() { KeyId = 0, Value = "10010072;1" },
             //第四天
-            new KeyValuePair(){ KeyId = 10,  Value = "10010033;1" },
+            new KeyValuePair() { KeyId = 10, Value = "10010033;1" },
             //第五天
-            new KeyValuePair(){ KeyId = 0,  Value = "10010093;1" },
+            new KeyValuePair() { KeyId = 0, Value = "10010093;1" },
             //第六天
-            new KeyValuePair(){ KeyId = 10,  Value = "10010073;1" },
+            new KeyValuePair() { KeyId = 10, Value = "10010073;1" },
             //第七天
-            new KeyValuePair(){ KeyId = 0,  Value = "1;1" },
+            new KeyValuePair() { KeyId = 0, Value = "1;1" },
         };
-        
-        
+
         /// <summary>
         /// 投资金额, 只可以投六天，第七天领取奖励。  投资金额-》礼包
         /// </summary>
         [StaticField]
-        public static List<KeyValuePair> WelfareInvestList =  new List<KeyValuePair>()
-        { 
-            new KeyValuePair(){ KeyId = 50000, Value = "10000122;1" },
-            new KeyValuePair(){ KeyId = 100000, Value = "10010088;1" },
-            new KeyValuePair(){ KeyId = 150000, Value = "10010083;5" },
-            new KeyValuePair(){ KeyId = 200000, Value = "10010033;1" },
-            new KeyValuePair(){ KeyId = 250000, Value = "10000158;1" },
-            new KeyValuePair(){ KeyId = 300000, Value = "10010046;1" },
+        public static List<KeyValuePair> WelfareInvestList = new List<KeyValuePair>()
+        {
+            new KeyValuePair() { KeyId = 50000, Value = "10000122;1" },
+            new KeyValuePair() { KeyId = 100000, Value = "10010088;1" },
+            new KeyValuePair() { KeyId = 150000, Value = "10010083;5" },
+            new KeyValuePair() { KeyId = 200000, Value = "10010033;1" },
+            new KeyValuePair() { KeyId = 250000, Value = "10000158;1" },
+            new KeyValuePair() { KeyId = 300000, Value = "10010046;1" },
         };
+
         /// <summary>
         /// 完成每天目标任务的奖励
         /// </summary>
         [StaticField]
-        public static List<string> WelfareTaskReward = new List<string>() { "10000161;1@10010033;1@10010092;1", "10000161;1@10010051;1@10010093;1", "10000161;1@10000158;1@10010046;1", "10000161;1@10010033;1@10010086;1", "10000161;1@10010040;1@10000158;1", "10000161;1@10000143;3@10010086;1", "10000161;1@10049003;1@10010052;1" };
-        
+        public static List<string> WelfareTaskReward = new List<string>()
+        {
+            "10000161;1@10010033;1@10010092;1",
+            "10000161;1@10010051;1@10010093;1",
+            "10000161;1@10000158;1@10010046;1",
+            "10000161;1@10010033;1@10010086;1",
+            "10000161;1@10010040;1@10000158;1",
+            "10000161;1@10000143;3@10010086;1",
+            "10000161;1@10049003;1@10010052;1"
+        };
+
         /// <summary>
         /// key权重  value道具
         /// </summary>
         [StaticField]
         public static List<KeyValuePair> ExpToItemList = new List<KeyValuePair>()
         {
-            new KeyValuePair(){  KeyId = 100, Value =  "10010040;1" },      //高级藏宝图
-            new KeyValuePair(){  KeyId = 100, Value =  "10000141;1" },      //洗炼袋子
-            new KeyValuePair(){  KeyId = 100, Value =  "10000152;1" },      //璀璨传承
-            new KeyValuePair(){  KeyId = 50, Value =  "10000165;1" },      //神话之灵
-            new KeyValuePair(){  KeyId = 200, Value =  "10010045;1" },      //金条
-            new KeyValuePair(){  KeyId = 100, Value =  "10010094;1" },      //超级宠物蛋
-            new KeyValuePair(){  KeyId = 100, Value =  "10010093;1" },      //珍贵宠物蛋
-            new KeyValuePair(){  KeyId = 50,  Value =  "10010096;1" },      //超级宠之晶
-            new KeyValuePair(){  KeyId = 50,  Value =  "10000150;1" },      //深渊凭证
-            new KeyValuePair(){  KeyId = 50,  Value =  "10000135;1" },      //金盒
+            new KeyValuePair() { KeyId = 100, Value = "10010040;1" }, //高级藏宝图
+            new KeyValuePair() { KeyId = 100, Value = "10000141;1" }, //洗炼袋子
+            new KeyValuePair() { KeyId = 100, Value = "10000152;1" }, //璀璨传承
+            new KeyValuePair() { KeyId = 50, Value = "10000165;1" }, //神话之灵
+            new KeyValuePair() { KeyId = 200, Value = "10010045;1" }, //金条
+            new KeyValuePair() { KeyId = 100, Value = "10010094;1" }, //超级宠物蛋
+            new KeyValuePair() { KeyId = 100, Value = "10010093;1" }, //珍贵宠物蛋
+            new KeyValuePair() { KeyId = 50, Value = "10010096;1" }, //超级宠之晶
+            new KeyValuePair() { KeyId = 50, Value = "10000150;1" }, //深渊凭证
+            new KeyValuePair() { KeyId = 50, Value = "10000135;1" }, //金盒
         };
-        
+
         /// <summary>
         /// 累充奖励
         /// </summary>
         [StaticField]
-        public static Dictionary<int, string> RechargeReward = 
+        public static Dictionary<int, string> RechargeReward =
                 new Dictionary<int, string>()
                 {
-                    { 50, "10031014;1@10000143;5@10010045;1@10010086;2@10000141;1"  },
+                    { 50, "10031014;1@10000143;5@10010045;1@10010086;2@10000141;1" },
                     { 98, "10000202;1@10000143;12@10010045;2@10010086;3@10000150;1" }
                 };
-        
-        
+
         //家园相关
         //开启牧场地块花费 0开始
         [StaticField]
         public static Dictionary<int, int> JiaYuanFarmOpen =
                 new Dictionary<int, int>()
                 {
-                    {4,5000},
-                    {5,10000},
-                    {6,20000},
-                    {7,30000},
-                    {8,40000},
-                    {9,55000},
-                    {10,70000},
-                    {11,85000},
-                    {12,100000},
-                    {13,120000},
-                    {14,150000},
-                    {15,180000},
-                    {16,210000},
-                    {17,250000},
-                    {18,300000},
-                    {19,400000}
+                    { 4, 5000 },
+                    { 5, 10000 },
+                    { 6, 20000 },
+                    { 7, 30000 },
+                    { 8, 40000 },
+                    { 9, 55000 },
+                    { 10, 70000 },
+                    { 11, 85000 },
+                    { 12, 100000 },
+                    { 13, 120000 },
+                    { 14, 150000 },
+                    { 15, 180000 },
+                    { 16, 210000 },
+                    { 17, 250000 },
+                    { 18, 300000 },
+                    { 19, 400000 }
                 };
-        
+
         /// <summary>
         /// 消费钻石奖励
         /// </summary>
         [StaticField]
         public static Dictionary<int, string> ConsumeDiamondReward =
-                new Dictionary<int, string>()
-                {
-                    {  100, "1;1000" },
-                    {  200, "1;1000" }
-                };
-
+                new Dictionary<int, string>() { { 100, "1;1000" }, { 200, "1;1000" } };
 
         /// <summary>
         /// 红包奖励
         /// </summary>
         [StaticField]
         public static int HongBaoDropId = 601901001;
-        
+
         /// <summary>
         /// 抽奖次数奖励
         /// </summary>
         [StaticField]
-        public static Dictionary<int, string> ChouKaNumberReward =  new Dictionary<int, string>()
-        {
-            {  1,   "1;1" },
-            {  3,   "1;3" },
-            {  10,  "1;10" },
-        };
+        public static Dictionary<int, string> ChouKaNumberReward = new Dictionary<int, string>() { { 1, "1;1" }, { 3, "1;3" }, { 10, "1;10" }, };
 
         /// <summary>
         /// 单个兑换奖励. 单个字可以兑换10万金币
-
         /// </summary>
         [StaticField]
         public static Dictionary<int, string> DuiHuanWordReward = new Dictionary<int, string>()
         {
-            {  10030013,"1;100000" },
-            {  10030014,"1;100000" },
-            {  10030015,"1;100000" },
-            {  10030016,"1;100000" },
+            { 10030013, "1;100000" }, { 10030014, "1;100000" }, { 10030015, "1;100000" }, { 10030016, "1;100000" },
         };
 
         /// <summary>
@@ -195,11 +190,11 @@ namespace ET
         /// </summary>
         [StaticField]
         public static int Chou2CostItem = 10030013;
-        
+
         //一套字可以兑换一个金条.  DuiHuanWordReward.keys
         [StaticField]
         public static string GroupsWordReward = "10010045;1";
-        
+
         [StaticField]
         public static List<string> WelfareChouKaList = new List<string>()
         {
@@ -213,57 +208,51 @@ namespace ET
             "10045105;1",
         };
 
-        
-        
         /// <summary>
         /// 单笔充值奖励
         /// </summary>
         [StaticField]
-        public static Dictionary<int, string> SingleRechargeReward =new Dictionary<int, string>()
+        public static Dictionary<int, string> SingleRechargeReward = new Dictionary<int, string>()
         {
             { 6, "1;100000@10000122;1@10010086;1" },
-            { 30, "10000141;1@10000164;1@10000158;1" }, 
-            { 50, "10010045;1@10000164;1@10000158;2@10010079;1" }, 
+            { 30, "10000141;1@10000164;1@10000158;1" },
+            { 50, "10010045;1@10000164;1@10000158;2@10010079;1" },
             { 98, "10000135;1@10000164;1@10010086;2@10010079;1" },
             { 198, "10000134;1@10000150;1@10010026;1@10000137;1@10010053;1" },
             { 298, "10000134;1@10000150;1@10010026;1@10000138;1@10010094;1" },
             { 488, "10049101;1@10000150;1@10010026;1@10000137;2@10000143;5" },
             { 648, "10000134;1@10049101;1@10000150;1@10010026;1@10000138;2@10000143;10" }
         };
-       
+
         /// <summary>
         /// 每日礼包
         /// </summary>
         [StaticField]
-        public static Dictionary<int, KeyValuePair> LiBaoList = 
+        public static Dictionary<int, KeyValuePair> LiBaoList =
                 new Dictionary<int, KeyValuePair>()
                 {
-                    { 1,  new KeyValuePair(){ Value = "3;900", Value2 = "10030013;1@10030013;1" } }, //Value消耗钻石Value2道具
-                    { 2,  new KeyValuePair(){ Value = "3;900", Value2 = "10030013;1@10030013;1" }},
-                    { 3,  new KeyValuePair(){ Value = "3;900", Value2 = "10030013;1@10030013;1" }},
+                    { 1, new KeyValuePair() { Value = "3;900", Value2 = "10030013;1@10030013;1" } }, //Value消耗钻石Value2道具
+                    { 2, new KeyValuePair() { Value = "3;900", Value2 = "10030013;1@10030013;1" } },
+                    { 3, new KeyValuePair() { Value = "3;900", Value2 = "10030013;1@10030013;1" } },
                 };
-        
+
         /// <summary>
         /// 在野外击败怪物时会掉落元宵和饺子, 喂食道具会获得奖励哦
         /// </summary>
         [StaticField]
-        public static Dictionary<int, string> FeedItemReward = new Dictionary<int, string>()
-        {
-            {  10030013,"1;100000" },
-            {  10030014,"1;100000" },
-        };
-        
+        public static Dictionary<int, string> FeedItemReward = new Dictionary<int, string>() { { 10030013, "1;100000" }, { 10030014, "1;100000" }, };
+
         /// <summary>
         /// 抽奖消耗道具
         /// </summary>
         [StaticField]
         public static string ChouKaCostItem = "1;100";
-                
+
         /// <summary>
         /// 施法前吟唱时给自己添加一个buff
         /// </summary>
         [StaticField]
-        public static Dictionary<int, int> SingingBuffList = 
+        public static Dictionary<int, int> SingingBuffList =
                 new Dictionary<int, int>
                 {
                     //驭剑士光能击吟唱为霸体状态
@@ -273,12 +262,12 @@ namespace ET
                     { 61022105, 80001033 },
                     { 61022106, 80001033 },
                 };
-        
+
         /// <summary>
         /// 序列号奖励 奖励最多不超过五个格子 
         /// </summary>
         [StaticField]
-        public static Dictionary<long, string> SerialReward = 
+        public static Dictionary<long, string> SerialReward =
                 new Dictionary<long, string>()
                 {
                     //评论奖励   金币100000  钻石 500    藏宝图 * 1   领主刷新券 * 1
@@ -290,7 +279,7 @@ namespace ET
                     { 6, "1;100000@3;500@10010039;1@10010046;1" },
                     { 7, "1;100000@3;500@10010039;1@10010046;1" },
                 };
-        
+
         //购买背包
         [StaticField]
         public static List<BuyCellCost> BuyBagCellCosts = new List<BuyCellCost>
@@ -307,69 +296,65 @@ namespace ET
             new BuyCellCost { Cost = "10000156;1", Get = "10010026;1" },
         };
 
-        
         //购买仓库
         [StaticField]
         public static List<BuyCellCost> BuyStoreCellCosts = new List<BuyCellCost>()
         {
-        
             //仓库1
-            new BuyCellCost{ Cost = "3;360",Get = "10010083;5"},
-            new BuyCellCost{ Cost = "3;360",Get = "10010085;200"},
-            new BuyCellCost{ Cost = "3;360",Get = "10010039;1"},
-            new BuyCellCost{ Cost = "3;360",Get = "10010046;1"},
-            new BuyCellCost{ Cost = "3;360",Get = "10000143;2"},
-            new BuyCellCost{ Cost = "3;360",Get = "10010041;1"},
-            new BuyCellCost{ Cost = "3;360",Get = "10000101;1"},
-            new BuyCellCost{ Cost = "3;360",Get = "10000122;1"},
-            new BuyCellCost{ Cost = "3;360",Get = "10000132;10"},
-            new BuyCellCost{ Cost = "3;360",Get = "10000143;2"},
+            new BuyCellCost { Cost = "3;360", Get = "10010083;5" },
+            new BuyCellCost { Cost = "3;360", Get = "10010085;200" },
+            new BuyCellCost { Cost = "3;360", Get = "10010039;1" },
+            new BuyCellCost { Cost = "3;360", Get = "10010046;1" },
+            new BuyCellCost { Cost = "3;360", Get = "10000143;2" },
+            new BuyCellCost { Cost = "3;360", Get = "10010041;1" },
+            new BuyCellCost { Cost = "3;360", Get = "10000101;1" },
+            new BuyCellCost { Cost = "3;360", Get = "10000122;1" },
+            new BuyCellCost { Cost = "3;360", Get = "10000132;10" },
+            new BuyCellCost { Cost = "3;360", Get = "10000143;2" },
 
             //仓库2
-            new BuyCellCost{ Cost = "3;480",Get = "10010042;5"},
-            new BuyCellCost{ Cost = "3;480",Get = "10000102;1"},
-            new BuyCellCost{ Cost = "3;480",Get = "10010092;1"},
-            new BuyCellCost{ Cost = "3;480",Get = "10010098;10"},
-            new BuyCellCost{ Cost = "3;480",Get = "10000155;1"},
-            new BuyCellCost{ Cost = "3;480",Get = "10010052;1"},
-            new BuyCellCost{ Cost = "3;480",Get = "10010088;2"},
-            new BuyCellCost{ Cost = "3;480",Get = "10000123;1"},
-            new BuyCellCost{ Cost = "3;480",Get = "10010046;1"},
-            new BuyCellCost{ Cost = "3;480",Get = "10000143;5"},
+            new BuyCellCost { Cost = "3;480", Get = "10010042;5" },
+            new BuyCellCost { Cost = "3;480", Get = "10000102;1" },
+            new BuyCellCost { Cost = "3;480", Get = "10010092;1" },
+            new BuyCellCost { Cost = "3;480", Get = "10010098;10" },
+            new BuyCellCost { Cost = "3;480", Get = "10000155;1" },
+            new BuyCellCost { Cost = "3;480", Get = "10010052;1" },
+            new BuyCellCost { Cost = "3;480", Get = "10010088;2" },
+            new BuyCellCost { Cost = "3;480", Get = "10000123;1" },
+            new BuyCellCost { Cost = "3;480", Get = "10010046;1" },
+            new BuyCellCost { Cost = "3;480", Get = "10000143;5" },
 
             //仓库3
-            new BuyCellCost{ Cost = "3;600",Get = "10010083;10"},
-            new BuyCellCost{ Cost = "3;600",Get = "10000131;10"},
-            new BuyCellCost{ Cost = "3;600",Get = "10010083;10"},
-            new BuyCellCost{ Cost = "3;600",Get = "10010046;1"},
-            new BuyCellCost{ Cost = "3;600",Get = "10000143;5"},
-            new BuyCellCost{ Cost = "3;600",Get = "10010039;1"},
-            new BuyCellCost{ Cost = "3;600",Get = "10010088;2"},
-            new BuyCellCost{ Cost = "3;600",Get = "10010043;5"},
-            new BuyCellCost{ Cost = "3;600",Get = "10010099;1"},
-            new BuyCellCost{ Cost = "3;600",Get = "10010026;1"},
+            new BuyCellCost { Cost = "3;600", Get = "10010083;10" },
+            new BuyCellCost { Cost = "3;600", Get = "10000131;10" },
+            new BuyCellCost { Cost = "3;600", Get = "10010083;10" },
+            new BuyCellCost { Cost = "3;600", Get = "10010046;1" },
+            new BuyCellCost { Cost = "3;600", Get = "10000143;5" },
+            new BuyCellCost { Cost = "3;600", Get = "10010039;1" },
+            new BuyCellCost { Cost = "3;600", Get = "10010088;2" },
+            new BuyCellCost { Cost = "3;600", Get = "10010043;5" },
+            new BuyCellCost { Cost = "3;600", Get = "10010099;1" },
+            new BuyCellCost { Cost = "3;600", Get = "10010026;1" },
 
             //仓库4
-            new BuyCellCost{ Cost = "3;720",Get = "10010046;1"},
-            new BuyCellCost{ Cost = "3;720",Get = "10010083;10"},
-            new BuyCellCost{ Cost = "3;720",Get = "10010043;5"},
-            new BuyCellCost{ Cost = "3;720",Get = "10010083;10"},
-            new BuyCellCost{ Cost = "3;720",Get = "10010093;1"},
-            new BuyCellCost{ Cost = "3;720",Get = "10000104;1"},
-            new BuyCellCost{ Cost = "3;720",Get = "10010083;10"},
-            new BuyCellCost{ Cost = "3;720",Get = "10010039;1"},
-            new BuyCellCost{ Cost = "3;720",Get = "10000143;2"},
-            new BuyCellCost{ Cost = "3;720",Get = "10000105;1"},
-
+            new BuyCellCost { Cost = "3;720", Get = "10010046;1" },
+            new BuyCellCost { Cost = "3;720", Get = "10010083;10" },
+            new BuyCellCost { Cost = "3;720", Get = "10010043;5" },
+            new BuyCellCost { Cost = "3;720", Get = "10010083;10" },
+            new BuyCellCost { Cost = "3;720", Get = "10010093;1" },
+            new BuyCellCost { Cost = "3;720", Get = "10000104;1" },
+            new BuyCellCost { Cost = "3;720", Get = "10010083;10" },
+            new BuyCellCost { Cost = "3;720", Get = "10010039;1" },
+            new BuyCellCost { Cost = "3;720", Get = "10000143;2" },
+            new BuyCellCost { Cost = "3;720", Get = "10000105;1" },
         };
-        
-        
+
         /// <summary>
         /// 抽奖奖励，每个区每天随机一个掉落ID
         /// </summary>
         [StaticField]
-        public static List<int> ChouKaDropId =new List<int> { 601901001 };
-         
+        public static List<int> ChouKaDropId = new List<int> { 601901001 };
+
         /// <summary>
         /// 奔跑大赛随机怪
         /// </summary>
@@ -385,18 +370,14 @@ namespace ET
                     90000026,
                     90000027
                 };
-        
+
         ///当饱食度达到一定值时,会为每位贡献者赠送一个礼包哦
         [StaticField]
-        public static Dictionary<int, string> Feed1RewardList=new Dictionary<int, string>()
-        {
-            { 10, "10010045;1"},
-            { 2000, "10010045;1"},
-        };
+        public static Dictionary<int, string> Feed1RewardList = new Dictionary<int, string>() { { 10, "10010045;1" }, { 2000, "10010045;1" }, };
 
         [StaticField]
         public static List<string> NotCombatSkill = new List<string>() { "Act_11", "Act_12", "Act_13" };
-        
+
         /// <summary>
         /// 洗练次数奖励
         /// </summary>
@@ -409,19 +390,18 @@ namespace ET
             { 300, "1;1000000@10000151;1@11200000;1$1;0,0" },
         };
 
-
         /// <summary>
         /// 猎人切换状态CD
         /// </summary>
         [StaticField]
         public static long HunterSwichCD = TimeHelper.Second * 10;
-        
+
         /// <summary>
         /// 小龟选手 npcconfig
         /// </summary>
         [StaticField]
         public static List<int> TurtleList = new List<int>() { 20099011, 20099012, 20099013 };
-        
+
         /// <summary>
         /// 击败过的BossId,包含在这个列表的才记录
         /// BossId -> BossId(召唤)
@@ -429,12 +409,13 @@ namespace ET
         /// 与上面的召唤物配置差不多
         /// </summary>
         [StaticField]
-        public static Dictionary<int, int> DefeatedBossIds = new Dictionary<int, int>() {
+        public static Dictionary<int, int> DefeatedBossIds = new Dictionary<int, int>()
+        {
             { 70001004, 90000201 },
             { 70001011, 90000202 },
-            { 70001104, 90000203 }, 
+            { 70001104, 90000203 },
             { 70001206, 90000204 },
-            { 70001209, 90000205 }, 
+            { 70001209, 90000205 },
             { 70002003, 90000206 },
             { 70002007, 90000207 },
             { 70002012, 90000208 },
@@ -452,27 +433,27 @@ namespace ET
             { 70005013, 90000220 },
             { 70006011, 90000221 },
             { 70006012, 90000222 },
-            { 70006013, 90000223 }        
+            { 70006013, 90000223 }
         };
 
-        
         /// <summary>
         /// 200内部区 201版号区 202中心区 203机器人
         /// </summary>
         [StaticField]
-        public  static  List<int> InnerZoneList = new List<int>(4) { 200, 201, 202, 203 };
-        
+        public static List<int> InnerZoneList = new List<int>(4) { 200, 201, 202, 203 };
+
         /// <summary>
         /// 竞技场buff
         /// </summary>
         [StaticField]
         public static List<int> SoloBuffIds = new List<int>() { 99004006 };
 
-        
         [StaticField]
         public static string ChongJiSkill = "Skill_Other_ChongJi_1";
+
         [StaticField]
-        public static string Skill_Halo_2 = "Skill_Halo_2";  
+        public static string Skill_Halo_2 = "Skill_Halo_2";
+
         /// <summary>
         /// 三个对应等级套装属性
         /// </summary>
@@ -1341,33 +1322,33 @@ namespace ET
             new float3(-7.5f, 0f, -37.58f - 0.5f),
         };
 
-        
         [StaticField]
         public static Dictionary<int, string> UnionPosition = new Dictionary<int, string>
         {
-            { 0, "族员"},
-            { 1, "族长"},
-            { 2, "副族长"},
-            { 3, "长老"},
+            { 0, "族员" }, { 1, "族长" }, { 2, "副族长" }, { 3, "长老" },
         };
 
-        
         /// <summary>
         /// 0 无日志 1 info  2debug  3 waring 4 error
         /// </summary>
         [StaticField]
         public static int LogLevel = 0;
+
         [StaticField]
         public static List<string> KillInfoList = new List<string>();
+
         [StaticField]
         public static string NoticeLastContent = string.Empty;
+
         [StaticField]
         public static long NoticeLastGetTime = 0;
+
         [StaticField]
         public static List<string> LoginInfoList = new List<string>();
+
         [StaticField]
-        public static List<string> ZuobiInfoList  = new List<string>(); 
-        
+        public static List<string> ZuobiInfoList = new List<string>();
+
         /// <summary>
         /// 一键出售材料
         /// </summary>
@@ -1415,7 +1396,6 @@ namespace ET
             10025007,
             10025010
         };
-
 
         [StaticField]
         public static List<ServerItem> ServerItems = new List<ServerItem>();

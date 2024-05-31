@@ -238,7 +238,7 @@ namespace ET.Client
 
                 if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.Diamond < (int)(needDimanond * discount))
                 {
-                    ErrorViewHelp.ShowErrorHint(ErrorCode.ERR_DiamondNotEnoughError);
+                    HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_DiamondNotEnoughError);
                     return;
                 }
             }

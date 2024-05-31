@@ -68,5 +68,6 @@ namespace ET.Client
 		WindowID_Rank,
 		WindowID_PetFormation,
 		WindowID_MakeLearn,
+		WindowID_OccTwo,
 	}
 }

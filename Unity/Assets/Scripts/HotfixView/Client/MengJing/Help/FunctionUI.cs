@@ -73,6 +73,7 @@ namespace ET.Client
                 "UIChouKa" => WindowID.WindowID_ChouKa,
                 "UIRank" => WindowID.WindowID_Rank,
                 "UIMakeLearn" => WindowID.WindowID_MakeLearn,
+                "UIOccTwo" => WindowID.WindowID_OccTwo,
                 _ => WindowID.WindowID_Invaild
             };
         }

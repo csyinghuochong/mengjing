@@ -122,7 +122,7 @@ namespace ET.Client
             string needItems = GlobalValueConfigCategory.Instance.Get(39).Value.Split('@')[0];
             if (choukaType == 1 && !self.Root().GetComponent<BagComponentC>().CheckNeedItem(needItems))
             {
-                ErrorViewHelp.ShowErrorHint(ErrorCode.ERR_ItemNotEnoughError);
+                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_ItemNotEnoughError);
                 return;
             }
 
@@ -143,7 +143,7 @@ namespace ET.Client
 
             if (choukaType == 10 && userInfo.Diamond < (int)(needDimanond * discount))
             {
-                ErrorViewHelp.ShowErrorHint(ErrorCode.ERR_DiamondNotEnoughError);
+                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_DiamondNotEnoughError);
                 return;
             }
 

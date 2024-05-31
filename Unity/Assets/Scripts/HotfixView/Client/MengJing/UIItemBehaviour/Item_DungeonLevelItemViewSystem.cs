@@ -54,7 +54,7 @@ namespace ET.Client
 
                 if (errorCode != ErrorCode.ERR_Success)
                 {
-                    ErrorViewHelp.ShowErrorHint(errorCode);
+                    HintHelp.ShowErrorHint(self.Root(), errorCode);
                     return;
                 }
 

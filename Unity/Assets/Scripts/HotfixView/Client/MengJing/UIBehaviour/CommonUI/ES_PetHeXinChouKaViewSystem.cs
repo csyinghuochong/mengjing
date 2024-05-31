@@ -83,7 +83,7 @@ namespace ET.Client
             string needItems = GlobalValueConfigCategory.Instance.Get(110).Value.Split('@')[0];
             if (choukaType == 1 && !self.Root().GetComponent<BagComponentC>().CheckNeedItem(needItems))
             {
-                ErrorViewHelp.ShowErrorHint(ErrorCode.ERR_ItemNotEnoughError);
+                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_ItemNotEnoughError);
                 return;
             }
 
@@ -104,7 +104,7 @@ namespace ET.Client
             long haveNumber10 = self.Root().GetComponent<BagComponentC>().GetItemNumber(int.Parse(itemInfo10[0]));
             if (choukaType == 10 && haveNumber10 < (int)(int.Parse(itemInfo10[1]) * discount))
             {
-                ErrorViewHelp.ShowErrorHint(ErrorCode.ERR_ItemNotEnoughError);
+                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_ItemNotEnoughError);
                 return;
             }
 

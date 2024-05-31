@@ -564,7 +564,7 @@ namespace ET.Client
             }
             else
             {
-                ErrorViewHelp.ShowErrorHint(errorCode);
+                HintHelp.ShowErrorHint(self.Root(), errorCode);
             }
 
             self.OnTaskGet();

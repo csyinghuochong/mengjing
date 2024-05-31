@@ -51,22 +51,20 @@ namespace ET.Client
         public static async ETTask<bool> ChangeOccTwoRequest(Scene root, int occTwoID)
         {
             UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
-            C2M_ChangeOccTwoRequest c2M_ChangeOccTwoRequest = new C2M_ChangeOccTwoRequest() { OccTwoID = occTwoID };
-            M2C_ChangeOccTwoResponse m2C_SkillSet =
-                    (M2C_ChangeOccTwoResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2M_ChangeOccTwoRequest);
+            C2M_ChangeOccTwoRequest request = new() { OccTwoID = occTwoID };
+            M2C_ChangeOccTwoResponse response = (M2C_ChangeOccTwoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
-            if (m2C_SkillSet.Error == 0)
+            if (response.Error == 0)
             {
                 UserInfo userInfo = userInfoComponent.UserInfo;
                 userInfo.OccTwo = occTwoID;
 
-                //飘字
-                //HintHelp.GetInstance().ShowHint("恭喜你!转职成功");
+                HintHelp.ShowHint(root, "恭喜你!转职成功");
                 return true;
             }
             else
             {
-                //HintHelp.GetInstance().ShowErrHint(m2C_SkillSet.Error);
+                HintHelp.ShowErrorHint(root, response.Error);
                 return false;
             }
         }

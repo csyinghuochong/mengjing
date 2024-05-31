@@ -54,7 +54,7 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.Gold < needGold)
             {
-                ErrorViewHelp.ShowErrorHint(ErrorCode.ERR_GoldNotEnoughError);
+                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_GoldNotEnoughError);
                 return;
             }
 

@@ -233,7 +233,7 @@ namespace ET.Client
             long cdEndTime = userInfoComponent.GetMakeTime(self.MakeId);
             if (cdEndTime > TimeHelper.ServerNow())
             {
-                ErrorViewHelp.ShowErrorHint(ErrorCode.ERR_InMakeCD);
+                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_InMakeCD);
                 return;
             }
 
