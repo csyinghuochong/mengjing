@@ -78,7 +78,8 @@ namespace ET.Client
             if (!string.IsNullOrEmpty(self.UnitAssetsPath))
             {
                 self.OnRevive();
-                GameObjectPoolHelper.ReturnObjectToPool(self.GameObject);
+                //GameObjectPoolHelper.ReturnObjectToPool(self.GameObject);
+                GameObjectPoolComponent.Instance.RecoverGameObject(self.UnitAssetsPath, self.GameObject);
             }
             self.GameObject = null;
         }

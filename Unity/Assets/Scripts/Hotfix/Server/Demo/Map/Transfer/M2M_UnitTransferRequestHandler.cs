@@ -45,6 +45,14 @@ namespace ET.Server
             unit.GetComponent<HeroDataComponentS>().CheckNumeric();
             Function_Fight.UnitUpdateProperty_Base(unit, false, false);
 
+              
+            Log.Debug($"M2M_UnitTransferRequest:3");
+            // 通知客户端开始切场景
+            M2C_StartSceneChange m2CStartSceneChange = new() { SceneInstanceId = scene.InstanceId, SceneId = request.SceneId, SceneType = request.SceneType, Difficulty = request.Difficulty, ParamInfo = request.ParamInfo };
+            MapMessageHelper.SendToClient(unit, m2CStartSceneChange);
+
+            
+            int aoivalue = 9;
             switch (request.SceneType)
             {
                 case SceneTypeEnum.CellDungeon:
@@ -64,19 +72,24 @@ namespace ET.Server
                     SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
                     scene.GetComponent<MapComponent>().NavMeshId = sceneConfig.MapID;
                     unit.AddComponent<PathfindingComponent, int>(sceneConfig.MapID);
+
+                    float posx = sceneConfig.InitPos[0] * 0.01f;
+                    float posy = sceneConfig.InitPos[1] * 0.01f;
+                    float posz = sceneConfig.InitPos[2] * 0.01f;
                     
                     //更新unit坐标
-                    unit.Position = new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f);
+                    unit.Position = new float3(posx, posy, posz);
                     unit.Rotation = quaternion.identity;
 
                     // 加入aoi
-                    unit.AddComponent<AOIEntity, int, float3>(40 * 1000, unit.Position);
                     if (request.SceneType == (int)SceneTypeEnum.PetDungeon)
                     {
                         scene.GetComponent<PetFubenComponent>().GeneratePetFuben(unit, int.Parse(request.ParamInfo));
                     }
                     if (request.SceneType == (int)SceneTypeEnum.PetTianTi)
                     {
+                        aoivalue = 40;
+                        
                         scene.GetComponent<PetTianTiComponent>().MainUnit = unit;
                         scene.GetComponent<PetTianTiComponent>().GeneratePetFuben().Coroutine();
                         unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.PetTianTiNumber_14,0, 1 );
@@ -103,13 +116,6 @@ namespace ET.Server
             }
             
             //TransferHelper.AfterTransfer();
-            
-            
-            Log.Debug($"M2M_UnitTransferRequest:3");
-            // 通知客户端开始切场景
-            M2C_StartSceneChange m2CStartSceneChange = new() { SceneInstanceId = scene.InstanceId, SceneId = request.SceneId, SceneType = request.SceneType, Difficulty = request.Difficulty, ParamInfo = request.ParamInfo };
-            MapMessageHelper.SendToClient(unit, m2CStartSceneChange);
-
             Log.Debug($"M2M_UnitTransferRequest:4");
             
             // 通知客户端创建My Unit
@@ -118,7 +124,7 @@ namespace ET.Server
             MapMessageHelper.SendToClient(unit, m2CCreateUnits);
             Log.Debug($"M2M_UnitTransferRequest:5");
             // 加入aoi
-            unit.AddComponent<AOIEntity, int, float3>(9 * 1000, unit.Position);
+            unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
 
             // 解锁location，可以接收发给Unit的消息
             await scene.Root().GetComponent<LocationProxyComponent>().UnLock(LocationType.Unit, unit.Id, request.OldActorId, unit.GetActorId());

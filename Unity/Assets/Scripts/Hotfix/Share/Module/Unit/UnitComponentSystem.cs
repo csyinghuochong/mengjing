@@ -3,7 +3,8 @@ using System.Linq;
 
 namespace ET
 {
-    [FriendOf(typeof (UnitComponent))]
+    [EntitySystemOf(typeof(UnitComponent))]
+    [FriendOf(typeof(UnitComponent))]
     public static partial class UnitComponentSystem
     {
         public static void Add(this UnitComponent self, Unit unit)
@@ -28,11 +29,21 @@ namespace ET
         {
             return self.Units;
         }
-        
+
         public static List<long> GetAllIds(this UnitComponent self)
         {
             List<long> ids = new List<long>();
             return ids;
+        }
+        [EntitySystem]
+        private static void Awake(this ET.UnitComponent self)
+        {
+
+        }
+        [EntitySystem]
+        private static void Destroy(this ET.UnitComponent self)
+        {
+
         }
     }
 }

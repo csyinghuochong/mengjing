@@ -586,9 +586,9 @@ namespace ET.Server
             // 删除Mailbox,让发给Unit的ActorLocation消息重发
             unit.RemoveComponent<MailBoxComponent>();
             unit.GetComponent<SkillPassiveComponent>()?.Stop();
-            //unit.GetComponent<BuffManagerComponentServer>().BeforeTransfer();
-            //unit.GetComponent<HeroDataComponentServer>().OnKillZhaoHuan(null);
-            //RemovePetAndJingLing(unit);
+            unit.GetComponent<BuffManagerComponentS>().BeforeTransfer();
+            unit.GetComponent<HeroDataComponentS>().OnKillZhaoHuan(null);
+            RemovePetAndJingLing(unit);
         }
 
         public static void AfterTransfer(Unit unit)
@@ -650,17 +650,17 @@ namespace ET.Server
             {
                 sceneType = scene.GetComponent<MapComponent>().SceneType;
             }
-            // M2F_FubenCenterOperateRequest request = new M2F_FubenCenterOperateRequest()
-            // {
-            //     SceneType = sceneType,
-            //     OperateType = operateType,
-            //     FubenInstanceId = scene.InstanceId
-            // };
-            // F2M_FubenCenterOpenResponse response = (F2M_FubenCenterOpenResponse)await ActorMessageSenderComponent.Instance.Call(fubencenterId, request);
-            // if (operateType == 1)
-            // { 
-            //     scene.GetComponent<ServerInfoComponent>().ServerInfo = response.ServerInfo;
-            // }
+            M2F_FubenCenterOperateRequest request = new M2F_FubenCenterOperateRequest()
+            {
+                SceneType = sceneType,
+                OperateType = operateType,
+                FubenInstanceId = scene.InstanceId
+            };
+            F2M_FubenCenterOpenResponse response = (F2M_FubenCenterOpenResponse)await scene.Root().GetComponent<MessageSender>().Call(fubencenterId, request);
+            if (operateType == 1)
+            { 
+                scene.GetComponent<ServerInfoComponent>().ServerInfo = response.ServerInfo;
+            }
             await ETTask.CompletedTask;
         }
     }

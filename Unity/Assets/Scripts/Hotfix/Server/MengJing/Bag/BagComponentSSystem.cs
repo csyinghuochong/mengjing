@@ -352,19 +352,19 @@ namespace ET.Server
                number = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetGold();
                break;
            case UserDataType.Diamond:
-               //number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.Diamond;
+               number = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().UserInfo.Diamond;
                break;
            case UserDataType.RongYu:
-               //number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.RongYu;
+               number = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().UserInfo.RongYu;
                break;
            case UserDataType.JiaYuanFund:
-               //number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.JiaYuanFund;
+               number = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().UserInfo.JiaYuanFund;
                break;
            case UserDataType.UnionContri:
-               //number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.UnionZiJin;
+               number = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().UserInfo.UnionZiJin;
                break;
            case UserDataType.SeasonCoin:
-               //number = self.GetParent<Unit>().GetComponent<UserInfoComponentServer>().UserInfo.SeasonCoin;
+               number = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().UserInfo.SeasonCoin;
                break;
            default:
                break;
