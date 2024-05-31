@@ -72,6 +72,7 @@ namespace ET.Client
                 "UIPetEgg" => WindowID.WindowID_PetEgg,
                 "UIChouKa" => WindowID.WindowID_ChouKa,
                 "UIRank" => WindowID.WindowID_Rank,
+                "UIMakeLearn" => WindowID.WindowID_MakeLearn,
                 _ => WindowID.WindowID_Invaild
             };
         }
