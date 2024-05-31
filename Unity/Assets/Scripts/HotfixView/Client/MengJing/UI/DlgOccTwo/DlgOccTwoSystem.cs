@@ -55,7 +55,7 @@ namespace ET.Client
             bool ifChange = await SkillNetHelper.ChangeOccTwoRequest(self.Root(), self.OccTwoId);
             if (ifChange)
             {
-                // self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_OccTwoShow).Coroutine();
+                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_OccTwoShow).Coroutine();
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_OccTwo);
             }
         }
