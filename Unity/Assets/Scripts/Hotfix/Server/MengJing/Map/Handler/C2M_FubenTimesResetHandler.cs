@@ -14,7 +14,7 @@ namespace ET.Server
             }
 
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-            if (numericComponent.GetAsInt(NumericType.FubenTimesReset) >= 3)
+            if (numericComponent.GetAsInt(NumericType.FubenTimesReset) >= 10)
             {
                 response.Error = ErrorCode.ERR_RequestRepeatedly;
                 return;

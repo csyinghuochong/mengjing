@@ -71,9 +71,9 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             long resetValue = numericComponent.GetAsLong(NumericType.FubenTimesReset);
-            if (resetValue >= 3)
+            if (resetValue >= 10)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("每天只能重置三次");
+                FlyTipComponent.Instance.SpawnFlyTipDi("每天只能重置十次");
                 return;
             }
 

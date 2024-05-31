@@ -57,7 +57,7 @@ namespace ET.Server
         {
             if (aiComponent.TargetID != 0 || aiComponent.IsRetreat)
             {
-                return 0;
+                return 1;
             }
             Unit unit = aiComponent.GetParent<Unit>();
             Unit nearestEnemy = null;
