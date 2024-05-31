@@ -1,0 +1,66 @@
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections.Generic;
+
+namespace ET
+{
+    public struct TypeButtonItem
+    {
+        public int SubTypeId;
+        public string ItemName;
+    }
+
+    public class TypeButtonInfo
+    {
+        public int TypeId;
+        public string TypeName;
+        public List<TypeButtonItem> typeButtonItems = new();
+    }
+
+    [ChildOf]
+    public class UITypeViewComponent: Entity, IAwake<GameObject>
+    {
+        public GameObject GameObject;
+        public string TypeButtonItemAsset;
+        public string TypeButtonAsset;
+
+        public Action<int, int> ClickTypeItemHandler;
+        public List<TypeButtonInfo> TypeButtonInfos = new();
+        public List<UITypeButtonComponent> TypeButtonComponents = new();
+    }
+
+    [ChildOf]
+    public class UITypeButtonComponent: Entity, IAwake<GameObject>
+    {
+        public string TypeItemAsset;
+        public TypeButtonInfo TypeButtonInfo;
+        public GameObject ImageButton;
+        public GameObject UIPointTaskDate;
+        public GameObject TaskTypeName;
+        public GameObject GameObject;
+
+        public List<UITypeButtonItemComponent> TypeItemUIList = new();
+        public Action<int, int> ClickTypeItemHandler;
+        public Action<int> ClickTypeHandler;
+
+        public float Height = 500f;
+        public float Spacing = 80f;
+        public bool bSelected = false;
+        public int TypeId;
+
+        public int SubPage = 0;
+    }
+
+    [ChildOf]
+    public class UITypeButtonItemComponent: Entity, IAwake<GameObject>
+    {
+        public GameObject Lab_TaskName;
+        public GameObject Ima_SelectStatus;
+        public GameObject Ima_Di;
+        public GameObject GameObject;
+
+        public Action<int> ClickHandler;
+        public int SubTypeId;
+    }
+}

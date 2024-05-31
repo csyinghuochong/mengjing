@@ -1,12 +1,35 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PaiMaiBuy : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_PaiMaiBuy : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
+		public int PageIndex = 1;
+		public int ItemType;
+		public int ItemSubType;
+		public Dictionary<int, Scroll_Item_PaiMaiBuyItem> ScrollItemPaiMaiBuyItems;
+		public UITypeViewComponent UITypeViewComponent { get; set; }
+		//当前用到的显示用的
+		public List<PaiMaiItemInfo> PaiMaiIteminfos_Now = new();
+
+		//-----------拍卖行缓存----------
+		public Dictionary<int, List<PaiMaiItemInfo>> PaiMaiItemInfos_Consume = new();
+		public Dictionary<int, List<PaiMaiItemInfo>> PaiMaiItemInfos_Material = new();
+		public Dictionary<int, List<PaiMaiItemInfo>> PaiMaiItemInfos_Equipment = new();
+		public Dictionary<int, List<PaiMaiItemInfo>> PaiMaiItemInfos_Gemstone = new();
+
+		//记录下一页index
+		public int MaxPage_Consume = 1;
+		public int MaxPage_Material = 1;
+		public int MaxPage_Equipment = 1;
+		public int MaxPage_Gemstone = 1;
+
+		public long SearchTime;
+		
 		public UnityEngine.UI.LoopVerticalScrollRect E_PaiMaiBuyItemsLoopVerticalScrollRect
      	{
      		get
