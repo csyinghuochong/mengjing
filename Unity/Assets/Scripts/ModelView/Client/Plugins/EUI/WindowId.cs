@@ -70,5 +70,6 @@ namespace ET.Client
 		WindowID_MakeLearn,
 		WindowID_OccTwo,
 		WindowID_OccTwoShow,
+		WindowID_PaiMai,
 	}
 }

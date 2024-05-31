@@ -74,6 +74,7 @@ namespace ET.Client
                 "UIRank" => WindowID.WindowID_Rank,
                 "UIMakeLearn" => WindowID.WindowID_MakeLearn,
                 "UIOccTwo" => WindowID.WindowID_OccTwo,
+                "UIPaiMai" => WindowID.WindowID_PaiMai,
                 _ => WindowID.WindowID_Invaild
             };
         }
