@@ -18,19 +18,16 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        /// <summary>
-        /// 打开下拉列表
-        /// </summary>
-        /// <param name="self"></param>
         public static async ETTask OnOpenPDList(this Scroll_Item_PaiMaiBuyItem self)
         {
-            // UI uI = await UIHelper.Create(self.DomainScene(), UIType.UIWatchPaiMai);
-            // uI.GetComponent<UIWatchPaiMaiComponent>().OnUpdateUI(self.FastSeach);
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_WatchPaiMai);
+            DlgWatchPaiMai dlgWatchPaiMai = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgWatchPaiMai>();
+            dlgWatchPaiMai.OnUpdateUI(self.FastSeach);
         }
 
         public static void FastSeach(this Scroll_Item_PaiMaiBuyItem self)
         {
-            // self.GetParent<UIPaiMaiBuyComponent>().InputField.GetComponent<InputField>().text = self.Text_Name.GetComponent<Text>().text;
+            self.GetParent<ES_PaiMaiBuy>().E_InputFieldInputField.text = self.E_Text_NameText.text;
         }
 
         public static async ETTask RequestBuy(this Scroll_Item_PaiMaiBuyItem self)
@@ -48,8 +45,6 @@ namespace ET.Client
             {
                 return;
             }
-
-            //隐藏显示
 
             if (response.Error == 0)
             {
@@ -70,7 +65,7 @@ namespace ET.Client
         public static async ETTask OnClickButtonBuy(this Scroll_Item_PaiMaiBuyItem self)
         {
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.PaiMaiItemInfo.BagInfo.ItemID);
-            // 橙色装备不能购买
+
             if (itemConfig.ItemQuality >= 5 && itemConfig.ItemType == 3)
             {
                 FlyTipComponent.Instance.SpawnFlyTipDi("橙色品质及以上的装备不能购买！");
@@ -119,25 +114,25 @@ namespace ET.Client
 
             if (self.PaiMaiItemInfo.BagInfo.ItemNum > 1)
             {
-                // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIPaiMaiBuyTip);
-                // ui.GetComponent<UIPaiMaiBuyTipComponent>()?.InitInfo(self.PaiMaiItemInfo, (int buyNum) =>
-                // {
-                //     if (buyNum < self.PaiMaiItemInfo.BagInfo.ItemNum)
-                //     {
-                //         self.PaiMaiItemInfo.BagInfo.ItemNum -= buyNum;
-                //         self.OnUpdateItem(self.PaiMaiItemInfo);
-                //     }
-                //     else
-                //     {
-                //         if (self.GameObject != null)
-                //         {
-                //             self.GameObject.SetActive(false);
-                //         }
-                //
-                //         ItemConfig itemConfig1 = ItemConfigCategory.Instance.Get(self.PaiMaiItemInfo.BagInfo.ItemID);
-                //         self.GetParent<UIPaiMaiBuyComponent>().RemoveItem(itemConfig1.ItemType, self.PaiMaiItemInfo);
-                //     }
-                // });
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PaiMaiBuyTip);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPaiMaiBuyTip>().InitInfo(self.PaiMaiItemInfo, (int buyNum) =>
+                {
+                    if (buyNum < self.PaiMaiItemInfo.BagInfo.ItemNum)
+                    {
+                        self.PaiMaiItemInfo.BagInfo.ItemNum -= buyNum;
+                        self.OnUpdateItem(self.PaiMaiItemInfo);
+                    }
+                    else
+                    {
+                        if (self.uiTransform.gameObject != null)
+                        {
+                            self.uiTransform.gameObject.SetActive(false);
+                        }
+
+                        ItemConfig itemConfig1 = ItemConfigCategory.Instance.Get(self.PaiMaiItemInfo.BagInfo.ItemID);
+                        self.GetParent<ES_PaiMaiBuy>().RemoveItem(itemConfig1.ItemType, self.PaiMaiItemInfo);
+                    }
+                });
             }
             else
             {
@@ -167,17 +162,13 @@ namespace ET.Client
             self.ES_CommonItem.UpdateItem(paiMaiItemInfo.BagInfo, ItemOperateEnum.PaiMaiBuy);
             self.E_Text_OwnerText.text = paiMaiItemInfo.PlayerName;
 
-            //显示名称
             FunctionUI.ItemObjShowName(self.E_Text_NameText.gameObject, self.PaiMaiItemInfo.BagInfo.ItemID);
 
-            //显示价格
             int sumPrice = paiMaiItemInfo.Price * paiMaiItemInfo.BagInfo.ItemNum;
             self.E_Text_PriceText.text = sumPrice.ToString();
 
-            //显示时间
             self.E_Text_LeftTimeText.text = TimeHelper.TimeToShowCostTimeStr(paiMaiItemInfo.SellTime, 48);
 
-            //装备显示等级
             ItemConfig itemCof = ItemConfigCategory.Instance.Get(self.PaiMaiItemInfo.BagInfo.ItemID);
             if (itemCof.ItemType == 3)
             {

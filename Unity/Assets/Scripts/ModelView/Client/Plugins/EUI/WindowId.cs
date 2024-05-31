@@ -71,5 +71,7 @@ namespace ET.Client
 		WindowID_OccTwo,
 		WindowID_OccTwoShow,
 		WindowID_PaiMai,
+		WindowID_WatchPaiMai,
+		WindowID_PaiMaiBuyTip,
 	}
 }

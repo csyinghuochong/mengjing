@@ -40,12 +40,6 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        /// <summary>
-        /// 定位对应的切页和某个道具所在的位置
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="itemType"></param>
-        /// <param name="paimaiItemId"></param>
         public static async ETTask OnClickGoToPaiMai(this ES_PaiMaiBuy self, int itemType, long paimaiItemId)
         {
             if (itemType != 1)
@@ -83,7 +77,6 @@ namespace ET.Client
                 return;
             }
 
-            // 移动到指定位置
             for (int i = 0; i < self.PaiMaiIteminfos_Now.Count; i++)
             {
                 if (self.PaiMaiIteminfos_Now[i].Id == paimaiItemId)
@@ -94,14 +87,8 @@ namespace ET.Client
             }
         }
 
-        /// <summary>
-        /// 初始化切页
-        /// </summary>
-        /// <param name="self"></param>
-        /// <returns></returns>
         public static List<TypeButtonInfo> InitTypeButtonInfos(this ES_PaiMaiBuy self)
         {
-            //显示列表
             TypeButtonInfo typeButtonInfo = new TypeButtonInfo();
             List<TypeButtonInfo> typeButtonInfos = new List<TypeButtonInfo>();
             typeButtonInfo = new TypeButtonInfo();
@@ -147,12 +134,6 @@ namespace ET.Client
             return typeButtonInfos;
         }
 
-        /// <summary>
-        /// 移除拍卖物品数据(本地)
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="type"></param>
-        /// <param name="paiMaiItemInfo"></param>
         public static void RemoveItem(this ES_PaiMaiBuy self, int type, PaiMaiItemInfo paiMaiItemInfo)
         {
             long infoId = paiMaiItemInfo.Id;
@@ -217,45 +198,27 @@ namespace ET.Client
             }
         }
 
-        /// <summary>
-        /// 点击切页
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="itemType"></param>
-        /// <param name="itemSubType"></param>
-        /// <param name="page"></param>
         public static async ETTask OnClickTypeItem(this ES_PaiMaiBuy self, int itemType, int itemSubType, int page = 1)
         {
-            Log.Debug($"-------点击切页 ItemType:{itemType} ItemSubType:{itemSubType} Page:{page}--------");
             self.PaiMaiIteminfos_Now.Clear();
 
             self.ItemType = itemType;
             self.ItemSubType = itemSubType;
             self.PageIndex = page;
 
-            // 先尝试从缓存获取
             self.PaiMaiIteminfos_Now.AddRange(self.GetInfoLocal(self.ItemType, self.ItemSubType));
 
             if (self.PaiMaiIteminfos_Now == null || self.PaiMaiIteminfos_Now.Count <= 0)
             {
-                // 从服务端获取
                 await self.UpdatePaiMaiData(itemType);
                 self.PaiMaiIteminfos_Now.AddRange(self.GetInfoLocal(self.ItemType, self.ItemSubType));
             }
 
-            // 展示拍卖物品
             self.ShowPaiMaiList();
 
             self.E_Text_PageShowText.text = self.PageIndex.ToString();
         }
 
-        /// <summary>
-        /// 从本地缓存获取数据
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="itemType"></param>
-        /// <param name="itemSubType"></param>
-        /// <returns></returns>
         public static List<PaiMaiItemInfo> GetInfoLocal(this ES_PaiMaiBuy self, int itemType, int itemSubType)
         {
             List<PaiMaiItemInfo> paiMaiItemInfos = new List<PaiMaiItemInfo>();
@@ -313,10 +276,6 @@ namespace ET.Client
             return paiMaiItemInfos;
         }
 
-        /// <summary>
-        /// 上一页
-        /// </summary>
-        /// <param name="self"></param>
         public static void OnPrePageBtn(this ES_PaiMaiBuy self)
         {
             if (self.PageIndex <= 1)
@@ -328,10 +287,6 @@ namespace ET.Client
             self.OnClickTypeItem(self.ItemType, self.ItemSubType, self.PageIndex).Coroutine();
         }
 
-        /// <summary>
-        /// 下一页
-        /// </summary>
-        /// <param name="self"></param>
         public static void OnNextPageBtn(this ES_PaiMaiBuy self)
         {
             switch (self.ItemType)
@@ -377,10 +332,6 @@ namespace ET.Client
             self.OnClickTypeItem(self.ItemType, self.ItemSubType, self.PageIndex).Coroutine();
         }
 
-        /// <summary>
-        /// 查询
-        /// </summary>
-        /// <param name="self"></param>
         public static async ETTask OnClickBtn_Search(this ES_PaiMaiBuy self)
         {
             string text = self.E_InputFieldInputField.text;
@@ -438,11 +389,6 @@ namespace ET.Client
             }
         }
 
-        /// <summary>
-        /// 更新拍卖数据,同时更新self.PaiMaiIteminfos_Now(此作法会错过一些道具)
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="itemType"></param>
         public static async ETTask UpdatePaiMaiData(this ES_PaiMaiBuy self, int itemType)
         {
             long instanceId = self.InstanceId;
@@ -453,7 +399,6 @@ namespace ET.Client
             };
             P2C_PaiMaiListResponse response = (P2C_PaiMaiListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
 
-            //因为是异步不加这里,消息来了玩家关闭界面会报错
             if (instanceId != self.InstanceId)
             {
                 return;
@@ -487,10 +432,6 @@ namespace ET.Client
             }
         }
 
-        /// <summary>
-        /// 展示拍卖物品
-        /// </summary>
-        /// <param name="self"></param>
         public static void ShowPaiMaiList(this ES_PaiMaiBuy self)
         {
             self.ShowPaiMaiIteminfos.Clear();
