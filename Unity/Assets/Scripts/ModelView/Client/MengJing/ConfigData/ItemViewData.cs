@@ -11,6 +11,38 @@ namespace ET.Client
 
     public static class ItemViewData
     {
+        //消耗品
+        [StaticField]
+        public static Dictionary<int, string> ItemSubType1Name = new()
+        {
+            { 0, GameSettingLanguge.LoadLocalization("全部") },
+            { 101, GameSettingLanguge.LoadLocalization("药剂") },
+            { 15, GameSettingLanguge.LoadLocalization("附魔") },
+            { 127, GameSettingLanguge.LoadLocalization("藏宝图") },
+        };
+        
+        //材料
+        [StaticField]
+        public static Dictionary<int, string> ItemSubType2Name = new()
+        {
+            { 0, GameSettingLanguge.LoadLocalization("全部") },
+            { 1, GameSettingLanguge.LoadLocalization("材料") },
+            { 121, GameSettingLanguge.LoadLocalization("鉴定符") },
+            { 122, GameSettingLanguge.LoadLocalization("宠物技能") },
+        };
+        
+        //材料
+        [StaticField]
+        public static Dictionary<int, string> ItemSubType4Name = new()
+        {
+            { 0, GameSettingLanguge.LoadLocalization("全部") },
+            { 101, GameSettingLanguge.LoadLocalization("黄色插槽") },
+            { 102, GameSettingLanguge.LoadLocalization("紫色插槽") },
+            { 103, GameSettingLanguge.LoadLocalization("蓝色插槽") },
+            { 104, GameSettingLanguge.LoadLocalization("绿色插槽") },
+            { 105, GameSettingLanguge.LoadLocalization("橙色插槽") },
+        };
+        
         [StaticField]
         public static Dictionary<int, List<int>> OccWeaponList = new()
         {

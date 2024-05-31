@@ -6,11 +6,12 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PaiMaiBuy : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_PaiMaiBuy : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public int PageIndex = 1;
 		public int ItemType;
 		public int ItemSubType;
+		public List<PaiMaiItemInfo> ShowPaiMaiIteminfos = new();
 		public Dictionary<int, Scroll_Item_PaiMaiBuyItem> ScrollItemPaiMaiBuyItems;
 		public UITypeViewComponent UITypeViewComponent { get; set; }
 		//当前用到的显示用的
@@ -29,7 +30,7 @@ namespace ET.Client
 		public int MaxPage_Gemstone = 1;
 
 		public long SearchTime;
-		
+
 		public UnityEngine.UI.LoopVerticalScrollRect E_PaiMaiBuyItemsLoopVerticalScrollRect
      	{
      		get
@@ -44,6 +45,23 @@ namespace ET.Client
 		    		this.m_E_PaiMaiBuyItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_PaiMaiBuyItems");
      			}
      			return this.m_E_PaiMaiBuyItemsLoopVerticalScrollRect;
+     		}
+     	}
+
+		public UnityEngine.RectTransform EG_ItemListNodeRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_ItemListNodeRectTransform == null )
+     			{
+		    		this.m_EG_ItemListNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"E_PaiMaiBuyItems/EG_ItemListNode");
+     			}
+     			return this.m_EG_ItemListNodeRectTransform;
      		}
      	}
 
@@ -249,6 +267,7 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_PaiMaiBuyItemsLoopVerticalScrollRect = null;
+			this.m_EG_ItemListNodeRectTransform = null;
 			this.m_EG_TypeListNodeRectTransform = null;
 			this.m_E_Btn_SearchButton = null;
 			this.m_E_Btn_SearchImage = null;
@@ -264,6 +283,7 @@ namespace ET.Client
 		}
 
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_PaiMaiBuyItemsLoopVerticalScrollRect = null;
+		private UnityEngine.RectTransform m_EG_ItemListNodeRectTransform = null;
 		private UnityEngine.RectTransform m_EG_TypeListNodeRectTransform = null;
 		private UnityEngine.UI.Button m_E_Btn_SearchButton = null;
 		private UnityEngine.UI.Image m_E_Btn_SearchImage = null;

@@ -170,5 +170,10 @@ namespace ET.Client
                 }
             }
         }
+
+        public static int GetCreateDay(this UserInfoComponentC self)
+        {
+            return ServerHelper.DateDiff_Time(TimeHelper.ServerNow(), self.UserInfo.CreateTime);
+        }
     }
 }

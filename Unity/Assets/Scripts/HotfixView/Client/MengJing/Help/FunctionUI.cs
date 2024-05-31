@@ -1,9 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
     public static class FunctionUI
     {
+        //传入道具ID显示名称及品质颜色
+        public static void ItemObjShowName(GameObject itemObj, int itemID)
+        {
+            ItemConfig itemCof = ItemConfigCategory.Instance.Get(itemID);
+            itemObj.GetComponent<Text>().text = itemCof.ItemName;
+            itemObj.GetComponent<Text>().color = QualityReturnColor(itemCof.ItemQuality);
+        }
+        
         public static async ETTask OpenFunctionUI(Scene root, int npcid, int functionid)
         {
             if (functionid < 10)

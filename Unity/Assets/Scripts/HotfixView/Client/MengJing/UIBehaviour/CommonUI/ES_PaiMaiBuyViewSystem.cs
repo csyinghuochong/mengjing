@@ -15,6 +15,12 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
+            self.E_Btn_SearchButton.AddListenerAsync(self.OnClickBtn_Search);
+            self.E_NextPageBtnButton.AddListener(self.OnNextPageBtn);
+            self.E_PrePageBtnButton.AddListener(self.OnPrePageBtn);
+
+            self.E_PaiMaiBuyItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPaiMaiBuyItemsRefresh);
+
             self.UITypeViewComponent = self.AddChild<UITypeViewComponent, GameObject>(self.EG_TypeListNodeRectTransform.gameObject);
             self.UITypeViewComponent.TypeButtonItemAsset = ABPathHelper.GetUGUIPath("Common/UITypeItem");
             self.UITypeViewComponent.TypeButtonAsset = ABPathHelper.GetUGUIPath("Common/UITypeButton");
@@ -82,7 +88,7 @@ namespace ET.Client
             {
                 if (self.PaiMaiIteminfos_Now[i].Id == paimaiItemId)
                 {
-                    self.ItemListNode.GetComponent<RectTransform>().localPosition = new Vector3(0, i * 124f, 0);
+                    self.EG_ItemListNodeRectTransform.localPosition = new Vector3(0, i * 124f, 0);
                     break;
                 }
             }
@@ -99,43 +105,43 @@ namespace ET.Client
             TypeButtonInfo typeButtonInfo = new TypeButtonInfo();
             List<TypeButtonInfo> typeButtonInfos = new List<TypeButtonInfo>();
             typeButtonInfo = new TypeButtonInfo();
-            foreach (int key in ItemViewHelp.ItemSubType1Name.Keys)
+            foreach (int key in ItemViewData.ItemSubType1Name.Keys)
             {
-                typeButtonInfo.typeButtonItems.Add(new TypeButtonItem() { SubTypeId = key, ItemName = ItemViewHelp.ItemSubType1Name[key] });
+                typeButtonInfo.typeButtonItems.Add(new TypeButtonItem() { SubTypeId = key, ItemName = ItemViewData.ItemSubType1Name[key] });
             }
 
             typeButtonInfo.TypeId = 1;
-            typeButtonInfo.TypeName = ItemViewHelp.ItemTypeName[ItemTypeEnum.Consume];
+            typeButtonInfo.TypeName = ItemViewData.ItemTypeName[ItemTypeEnum.Consume];
             typeButtonInfos.Add(typeButtonInfo);
 
             typeButtonInfo = new TypeButtonInfo();
-            foreach (int key in ItemViewHelp.ItemSubType2Name.Keys)
+            foreach (int key in ItemViewData.ItemSubType2Name.Keys)
             {
-                typeButtonInfo.typeButtonItems.Add(new TypeButtonItem() { SubTypeId = key, ItemName = ItemViewHelp.ItemSubType2Name[key] });
+                typeButtonInfo.typeButtonItems.Add(new TypeButtonItem() { SubTypeId = key, ItemName = ItemViewData.ItemSubType2Name[key] });
             }
 
             typeButtonInfo.TypeId = 2;
-            typeButtonInfo.TypeName = ItemViewHelp.ItemTypeName[ItemTypeEnum.Material];
+            typeButtonInfo.TypeName = ItemViewData.ItemTypeName[ItemTypeEnum.Material];
             typeButtonInfos.Add(typeButtonInfo);
 
             typeButtonInfo = new TypeButtonInfo();
-            foreach (int key in ItemViewHelp.ItemSubType3Name.Keys)
+            foreach (int key in ItemViewData.ItemSubType3Name.Keys)
             {
-                typeButtonInfo.typeButtonItems.Add(new TypeButtonItem() { SubTypeId = key, ItemName = ItemViewHelp.ItemSubType3Name[key] });
+                typeButtonInfo.typeButtonItems.Add(new TypeButtonItem() { SubTypeId = key, ItemName = ItemViewData.ItemSubType3Name[key] });
             }
 
             typeButtonInfo.TypeId = 3;
-            typeButtonInfo.TypeName = ItemViewHelp.ItemTypeName[ItemTypeEnum.Equipment];
+            typeButtonInfo.TypeName = ItemViewData.ItemTypeName[ItemTypeEnum.Equipment];
             typeButtonInfos.Add(typeButtonInfo);
 
             typeButtonInfo = new TypeButtonInfo();
-            foreach (int key in ItemViewHelp.ItemSubType4Name.Keys)
+            foreach (int key in ItemViewData.ItemSubType4Name.Keys)
             {
-                typeButtonInfo.typeButtonItems.Add(new TypeButtonItem() { SubTypeId = key, ItemName = ItemViewHelp.ItemSubType4Name[key] });
+                typeButtonInfo.typeButtonItems.Add(new TypeButtonItem() { SubTypeId = key, ItemName = ItemViewData.ItemSubType4Name[key] });
             }
 
             typeButtonInfo.TypeId = 4;
-            typeButtonInfo.TypeName = ItemViewHelp.ItemTypeName[ItemTypeEnum.Gemstone];
+            typeButtonInfo.TypeName = ItemViewData.ItemTypeName[ItemTypeEnum.Gemstone];
             typeButtonInfos.Add(typeButtonInfo);
 
             return typeButtonInfos;
@@ -240,7 +246,7 @@ namespace ET.Client
             // 展示拍卖物品
             self.ShowPaiMaiList();
 
-            self.Text_PageShow.GetComponent<Text>().text = self.PageIndex.ToString();
+            self.E_Text_PageShowText.text = self.PageIndex.ToString();
         }
 
         /// <summary>
@@ -333,7 +339,7 @@ namespace ET.Client
                 case 1:
                     if (self.PageIndex >= self.MaxPage_Consume)
                     {
-                        FloatTipManager.Instance.ShowFloatTipDi("已达最后一页");
+                        FlyTipComponent.Instance.SpawnFlyTipDi("已达最后一页");
                         return;
                     }
 
@@ -342,7 +348,7 @@ namespace ET.Client
                 case 2:
                     if (self.PageIndex >= self.MaxPage_Material)
                     {
-                        FloatTipManager.Instance.ShowFloatTipDi("已达最后一页");
+                        FlyTipComponent.Instance.SpawnFlyTipDi("已达最后一页");
                         return;
                     }
 
@@ -351,7 +357,7 @@ namespace ET.Client
                 case 3:
                     if (self.PageIndex >= self.MaxPage_Equipment)
                     {
-                        FloatTipManager.Instance.ShowFloatTipDi("已达最后一页");
+                        FlyTipComponent.Instance.SpawnFlyTipDi("已达最后一页");
                         return;
                     }
 
@@ -360,7 +366,7 @@ namespace ET.Client
                 case 4:
                     if (self.PageIndex >= self.MaxPage_Gemstone)
                     {
-                        FloatTipManager.Instance.ShowFloatTipDi("已达最后一页");
+                        FlyTipComponent.Instance.SpawnFlyTipDi("已达最后一页");
                         return;
                     }
 
@@ -377,11 +383,11 @@ namespace ET.Client
         /// <param name="self"></param>
         public static async ETTask OnClickBtn_Search(this ES_PaiMaiBuy self)
         {
-            string text = self.InputField.GetComponent<InputField>().text;
+            string text = self.E_InputFieldInputField.text;
 
             if (string.IsNullOrEmpty(text))
             {
-                FloatTipManager.Instance.ShowFloatTipDi("请输入道具名字！！！");
+                FlyTipComponent.Instance.SpawnFlyTipDi("请输入道具名字！！！");
                 return;
             }
 
@@ -406,14 +412,14 @@ namespace ET.Client
 
             if (findTypeList.Count <= 0 || findItemIdList.Count <= 0)
             {
-                FloatTipManager.Instance.ShowFloatTipDi("不存在该名称的道具，请输入正确的道具名！！！");
+                FlyTipComponent.Instance.SpawnFlyTipDi("不存在该名称的道具，请输入正确的道具名！！！");
                 return;
             }
 
             long timeNow = TimeHelper.ServerNow();
             if (timeNow - self.SearchTime <= 3000)
             {
-                FloatTipManager.Instance.ShowFloatTipDi("搜索过于频繁！！！");
+                FlyTipComponent.Instance.SpawnFlyTipDi("搜索过于频繁！！！");
                 return;
             }
 
@@ -421,15 +427,14 @@ namespace ET.Client
 
             self.PaiMaiIteminfos_Now.Clear();
 
-            C2P_PaiMaiSearchRequest reuqest = new C2P_PaiMaiSearchRequest() { FindTypeList = findTypeList, FindItemIdList = findItemIdList };
-            P2C_PaiMaiSearchResponse response =
-                    (P2C_PaiMaiSearchResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(reuqest);
+            C2P_PaiMaiSearchRequest reuqest = new() { FindTypeList = findTypeList, FindItemIdList = findItemIdList };
+            P2C_PaiMaiSearchResponse response = (P2C_PaiMaiSearchResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(reuqest);
             self.PaiMaiIteminfos_Now.AddRange(response.PaiMaiItemInfos);
 
             self.ShowPaiMaiList();
             if (self.PaiMaiIteminfos_Now.Count <= 0)
             {
-                FloatTipManager.Instance.ShowFloatTipDi("未找到对应拍卖行道具");
+                FlyTipComponent.Instance.SpawnFlyTipDi("未找到对应拍卖行道具");
             }
         }
 
@@ -442,12 +447,11 @@ namespace ET.Client
         {
             long instanceId = self.InstanceId;
 
-            C2P_PaiMaiListRequest c2M_PaiMaiBuyRequest = new C2P_PaiMaiListRequest()
+            C2P_PaiMaiListRequest request = new()
             {
-                Page = self.PageIndex, PaiMaiType = itemType, UserId = UnitHelper.GetMyUnitId(self.ZoneScene()),
+                Page = self.PageIndex, PaiMaiType = itemType, UserId = UnitHelper.GetMyUnitFromClientScene(self.Root()).Id
             };
-            P2C_PaiMaiListResponse m2C_PaiMaiBuyResponse =
-                    (P2C_PaiMaiListResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_PaiMaiBuyRequest);
+            P2C_PaiMaiListResponse response = (P2C_PaiMaiListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
 
             //因为是异步不加这里,消息来了玩家关闭界面会报错
             if (instanceId != self.InstanceId)
@@ -459,26 +463,26 @@ namespace ET.Client
             {
                 case 1:
                     self.PaiMaiItemInfos_Consume[self.PageIndex].Clear();
-                    self.PaiMaiItemInfos_Consume[self.PageIndex].AddRange(m2C_PaiMaiBuyResponse.PaiMaiItemInfos);
-                    self.MaxPage_Consume = m2C_PaiMaiBuyResponse.NextPage;
+                    self.PaiMaiItemInfos_Consume[self.PageIndex].AddRange(response.PaiMaiItemInfos);
+                    self.MaxPage_Consume = response.NextPage;
                     break;
 
                 case 2:
                     self.PaiMaiItemInfos_Material[self.PageIndex].Clear();
-                    self.PaiMaiItemInfos_Material[self.PageIndex].AddRange(m2C_PaiMaiBuyResponse.PaiMaiItemInfos);
-                    self.MaxPage_Material = m2C_PaiMaiBuyResponse.NextPage;
+                    self.PaiMaiItemInfos_Material[self.PageIndex].AddRange(response.PaiMaiItemInfos);
+                    self.MaxPage_Material = response.NextPage;
                     break;
 
                 case 3:
                     self.PaiMaiItemInfos_Equipment[self.PageIndex].Clear();
-                    self.PaiMaiItemInfos_Equipment[self.PageIndex].AddRange(m2C_PaiMaiBuyResponse.PaiMaiItemInfos);
-                    self.MaxPage_Equipment = m2C_PaiMaiBuyResponse.NextPage;
+                    self.PaiMaiItemInfos_Equipment[self.PageIndex].AddRange(response.PaiMaiItemInfos);
+                    self.MaxPage_Equipment = response.NextPage;
                     break;
 
                 case 4:
                     self.PaiMaiItemInfos_Gemstone[self.PageIndex].Clear();
-                    self.PaiMaiItemInfos_Gemstone[self.PageIndex].AddRange(m2C_PaiMaiBuyResponse.PaiMaiItemInfos);
-                    self.MaxPage_Gemstone = m2C_PaiMaiBuyResponse.NextPage;
+                    self.PaiMaiItemInfos_Gemstone[self.PageIndex].AddRange(response.PaiMaiItemInfos);
+                    self.MaxPage_Gemstone = response.NextPage;
                     break;
             }
         }
@@ -489,7 +493,7 @@ namespace ET.Client
         /// <param name="self"></param>
         public static void ShowPaiMaiList(this ES_PaiMaiBuy self)
         {
-            int number = 0;
+            self.ShowPaiMaiIteminfos.Clear();
             for (int i = 0; i < self.PaiMaiIteminfos_Now.Count; i++)
             {
                 PaiMaiItemInfo paiMaiItemInfo = self.PaiMaiIteminfos_Now[i];
@@ -499,31 +503,17 @@ namespace ET.Client
                     continue;
                 }
 
-                UIPaiMaiBuyItemComponent uI = null;
-
-                if (number < self.PaiMaiList.Count)
-                {
-                    uI = self.PaiMaiList[number];
-                    uI.GameObject.SetActive(true);
-                }
-                else
-                {
-                    GameObject go = UnityEngine.Object.Instantiate(self.UIPaiMaiBuyItem);
-                    go.SetActive(true);
-                    UICommonHelper.SetParent(go, self.ItemListNode);
-                    go.transform.localScale = Vector3.one * 1f;
-                    uI = self.AddChild<UIPaiMaiBuyItemComponent, GameObject>(go);
-                    self.PaiMaiList.Add(uI);
-                }
-
-                uI.OnUpdateItem(paiMaiItemInfo);
-                number++;
+                self.ShowPaiMaiIteminfos.Add(paiMaiItemInfo);
             }
 
-            for (int i = number; i < self.PaiMaiList.Count; i++)
-            {
-                self.PaiMaiList[i].GameObject.SetActive(false);
-            }
+            self.AddUIScrollItems(ref self.ScrollItemPaiMaiBuyItems, self.ShowPaiMaiIteminfos.Count);
+            self.E_PaiMaiBuyItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPaiMaiIteminfos.Count);
+        }
+
+        private static void OnPaiMaiBuyItemsRefresh(this ES_PaiMaiBuy self, Transform transform, int index)
+        {
+            Scroll_Item_PaiMaiBuyItem scrollItemPaiMaiBuyItem = self.ScrollItemPaiMaiBuyItems[index].BindTrans(transform);
+            scrollItemPaiMaiBuyItem.OnUpdateItem(self.PaiMaiIteminfos_Now[index]);
         }
     }
 }
