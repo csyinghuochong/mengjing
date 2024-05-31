@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_PaiMaiShop))]
+    [FriendOf(typeof (ES_PaiMaiBuy))]
     [FriendOf(typeof (DlgPaiMai))]
     public static class DlgPaiMaiSystem
     {
@@ -46,6 +47,7 @@ namespace ET.Client
                     self.View.ES_PaiMaiShop.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
+                    self.View.ES_PaiMaiBuy.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
                     break;
