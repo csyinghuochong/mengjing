@@ -19,7 +19,7 @@ namespace ET.Client
             self.Button_ZhiYe_List.Add(self.View.E_Button_ZhiYe_2Button.gameObject);
             self.Button_ZhiYe_List.Add(self.View.E_Button_ZhiYe_3Button.gameObject);
             self.View.E_ButtonOccTwoButton.AddListener(self.OnClickOccTwo);
-            self.View.E_ButtonOccResetButton.AddListenerAsync(self.OnButtonOccReset);
+            self.View.E_ButtonOccResetButton.AddListener(self.OnButtonOccReset);
 
             self.OnInitUI();
         }
@@ -192,7 +192,7 @@ namespace ET.Client
             }
         }
 
-        public static async ETTask OnButtonOccReset(this DlgOccTwo self)
+        public static void OnButtonOccReset(this DlgOccTwo self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.OccTwo == 0)
@@ -203,8 +203,6 @@ namespace ET.Client
 
             string costitem = UICommonHelper.GetNeedItemDesc(ConfigData.ChangeOccItem);
             PopupTipHelp.OpenPopupTip(self.Root(), "技能点重置", $"是否花费{costitem}重置技能点", () => { self.RequestReset(2).Coroutine(); }).Coroutine();
-
-            await ETTask.CompletedTask;
         }
 
         public static async ETTask RequestReset(this DlgOccTwo self, int operation)
@@ -217,9 +215,9 @@ namespace ET.Client
             }
 
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            C2M_SkillOperation request = new() { OperationType = operation };
-            M2C_SkillOperation response = (M2C_SkillOperation)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
-            if (response.Error != 0)
+
+            int error = await SkillNetHelper.SkillOperation(self.Root(), operation);
+            if (error != 0)
             {
                 return;
             }
