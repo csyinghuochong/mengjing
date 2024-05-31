@@ -618,10 +618,10 @@ namespace ET.Client
                 return;
             }
 
-            OccupationTwoConfig occupationConfigCategory = OccupationTwoConfigCategory.Instance.Get(occTwo);
-            int juexingid = occupationConfigCategory.JueXingSkill[7];
-            self.SkillGridJueXing.UpdateSkillInfo(skillSetComponent.GetSkillPro(juexingid));
-            self.JueXingSkillId = juexingid;
+            // OccupationTwoConfig occupationConfigCategory = OccupationTwoConfigCategory.Instance.Get(occTwo);
+            // int juexingid = occupationConfigCategory.JueXingSkill[7];
+            // self.SkillGridJueXing.UpdateSkillInfo(skillSetComponent.GetSkillPro(juexingid));
+            // self.JueXingSkillId = juexingid;
         }
     }
 }

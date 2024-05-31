@@ -5,8 +5,9 @@ namespace ET.Client
 {
     [FriendOf(typeof (TaskComponentC))]
     [EntitySystemOf(typeof (TaskComponentC))]
-    public static partial class TaskComponent_CSystem
+    public static partial class TaskComponentCSystem
     {
+        
         [EntitySystem]
         private static void Awake(this TaskComponentC self)
         {
@@ -169,6 +170,12 @@ namespace ET.Client
             return openTaskids;
         }
 
+        public static void OnRecvTaskUpdate(this TaskComponentC self, M2C_TaskUpdate message)
+        {
+            self.RoleTaskList = message.RoleTaskList;
+            //HintHelp.GetInstance().DataUpdate(DataType.TaskUpdate);
+        }
+        
         public static bool IsTaskFinished(this TaskComponentC self, int taskId)
         {
             return self.RoleComoleteTaskList.Contains(taskId);

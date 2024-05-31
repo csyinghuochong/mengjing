@@ -599,15 +599,8 @@ namespace ET.Server
                 return;
             }
             Unit unit = self.GetParent<Unit>();
-            occTwo = unit.GetComponent<UserInfoComponentS>().GetOccTwo();
-            if (occTwo != 0)
-            {
-                //useInfo.OccTwo = occTwo;
-                return;
-            }
-
-            //useInfo.OccTwo = occTwo;
-            //��������
+         
+            unit.GetComponent<UserInfoComponentS>().UserInfo.OccTwo = occTwo;
             OccupationTwoConfig occupationTwoConfig = OccupationTwoConfigCategory.Instance.Get(occTwo);
             int[] addSkills = occupationTwoConfig.SkillID;
             for (int i = 0; i < addSkills.Length; i++)

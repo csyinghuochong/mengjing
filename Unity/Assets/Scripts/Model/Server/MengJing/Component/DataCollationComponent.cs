@@ -81,7 +81,7 @@ namespace ET.Server
         public int TrialFubenId;
 
         //(幸运探宝)抽奖次数
-        public int ChouKaTimes;
+        public int ChouKaTimes { get; set; }
 
         //宠物探索次数
         public int PetChouKaTimes;

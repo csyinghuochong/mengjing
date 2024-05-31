@@ -36,6 +36,24 @@ namespace ET.Server
 
 
         }
+        
+        public static void OnLogin(this DBSaveComponent self)
+        {
+            Unit unit = self.GetParent<Unit>();
+            string offLineInfo = $"{unit.Zone()}区： " +
+                    $"unit.id: {unit.GetComponent<UserInfoComponentS>().Id} : " +
+                    $" {unit.GetComponent<UserInfoComponentS>().UserInfo.Name} : " +
+                    $"{  TimeHelper.DateTimeNow().ToString()}   登录";
+            if (!unit.IsRobot())
+            {
+                LogHelper.LoginInfo(offLineInfo);
+                Log.Debug(offLineInfo);
+            }
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+           
+            numericComponent.ApplyValue(NumericType.LastGameTime, TimeHelper.ServerNow(), false);
+            //unit.GetComponent<UnitGateComponent>().PlayerState = PlayerState.Game;
+        }
 
         public static void Activeted(this DBSaveComponent self)
         {

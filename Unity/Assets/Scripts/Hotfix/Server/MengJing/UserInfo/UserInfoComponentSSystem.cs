@@ -37,7 +37,7 @@ namespace ET.Server
                 self.UploadCombat().Coroutine();
             }
         }
-        
+
         public static void OnJiaYuanExp(this UserInfoComponentS self, float hour)
         {
             JiaYuanConfig jiaYuanConfig = JiaYuanConfigCategory.Instance.Get(self.UserInfo.JiaYuanLv);
@@ -45,7 +45,7 @@ namespace ET.Server
             int addexp = (int)math.floor(hour * jiaYuanConfig.JiaYuanAddExp);
             self.UpdateRoleMoneyAdd(UserDataType.JiaYuanExp, $"{addexp}", true, ItemGetWay.JiaYuanExchange);
         }
-        
+
         public static void OnInit(this UserInfoComponentS self, string account, long id, long accountId, CreateRoleInfo createRoleInfo)
         {
             self.Account = account;
@@ -83,6 +83,181 @@ namespace ET.Server
                 userInfo.Occ = createRoleInfo.PlayerOcc;
                 userInfo.Name = createRoleInfo.PlayerName;
             }
+        }
+
+        public static void CheckData(this UserInfoComponentS self)
+        {
+            if (self.UserInfo.JiaYuanLv <= 0)
+            {
+                self.UserInfo.JiaYuanLv = 10001;
+            }
+
+            if (self.UserInfo.SeasonLevel == 0)
+            {
+                self.UserInfo.SeasonLevel = 1;
+            }
+
+            if (self.UserInfo.CreateTime == 0)
+            {
+                self.UserInfo.CreateTime = TimeHelper.ServerNow();
+            }
+
+            if (self.UserInfo.Lv < 20 && self.UserInfo.BaoShiDu < 100)
+            {
+                self.UserInfo.BaoShiDu = 100;
+            }
+
+            int maxTowerId = 0;
+            if (self.UserInfo.TowerRewardIds.Count > 0)
+            {
+                maxTowerId = self.UserInfo.TowerRewardIds[self.UserInfo.TowerRewardIds.Count - 1];
+            }
+
+            NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
+            if (numericComponent.GetAsInt(NumericType.TrialDungeonId) < maxTowerId)
+            {
+                numericComponent.SetNoEvent(NumericType.TrialDungeonId, maxTowerId);
+            }
+
+            if (numericComponent.GetAsInt(NumericType.UpdateActivty) == 0)
+            {
+                self.GetParent<Unit>().GetComponent<ActivityComponentS>().ClearJieRiActivty();
+                numericComponent.SetNoEvent(NumericType.UpdateActivty, 1);
+            }
+
+            DataCollationComponent dataCollationComponent = self.GetParent<Unit>().GetComponent<DataCollationComponent>();
+            int recharge = numericComponent.GetAsInt(NumericType.RechargeNumber);
+            if (recharge != 0 && dataCollationComponent.ChouKaTimes > (recharge * 2) && dataCollationComponent.ChouKaTimes > 100)
+            {
+                Log.Warning(
+                    $"抽卡次数异常:{self.Zone()} {self.UserInfo.Name}   充值:{numericComponent.GetAsInt(NumericType.RechargeNumber)}  抽卡:{dataCollationComponent.ChouKaTimes}");
+            }
+
+            if (self.UserInfo.UserId == 2308831070960812032)
+            {
+                //self.UserInfo.UnionName = "";
+                //self.GetParent<Unit>().GetComponent<NumericComponent>().ApplyValue(NumericType.UnionLeader, 0, false);
+                //self.GetParent<Unit>().GetComponent<NumericComponent>().ApplyValue(NumericType.UnionId_0, 0, false);
+            }
+
+            if (self.UserInfo.UnionKeJiList.Count < UnionKeJiConfigCategory.Instance.UnionQiangHuaList.Count)
+            {
+                int curNumber = self.UserInfo.UnionKeJiList.Count;
+                int maxNumber = UnionKeJiConfigCategory.Instance.UnionQiangHuaList.Count;
+                for (int keji = curNumber; keji < maxNumber; keji++)
+                {
+                    self.UserInfo.UnionKeJiList.Add(UnionKeJiConfigCategory.Instance.GetFristId(keji));
+                }
+            }
+        }
+
+        public static int GetTiLiIndex(this UserInfoComponentS self, int hour_1)
+        {
+            if (hour_1 < 6)
+            {
+                return 1;
+            }
+            if (hour_1 < 12)
+            {
+                return 2;
+            }
+            if (hour_1 < 20)
+            {
+                return 3;
+            }
+            if (hour_1 < 24)
+            {
+                return 4;
+            }
+            return 5;
+        }
+        
+        public static int GetTiLiTimes(this UserInfoComponentS self, int hour_1, int hour_2)
+        {
+            int index_1 = self.GetTiLiIndex(hour_1);
+            int index_2 = self.GetTiLiIndex(hour_2);
+            if (index_1 > index_2)
+            {
+                return 0;
+            }
+            return index_2 - index_1;
+        }
+        
+        public static void OnLogin(this UserInfoComponentS self, string remoteIp, string deviceName)
+        {
+            self.CheckData();
+            self.RemoteAddress = remoteIp;
+            self.DeviceName = deviceName;
+            Unit unit = self.GetParent<Unit>();
+            long currentTime = TimeHelper.ServerNow();
+
+            DateTime dateTime = TimeInfo.Instance.ToDateTime(currentTime);
+            long lastLoginTime = self.LastLoginTime;
+            if (lastLoginTime != 0)
+            {
+                DateTime lastdateTime = TimeInfo.Instance.ToDateTime(lastLoginTime);
+                if (dateTime.Day != lastdateTime.Day)
+                {
+                    Log.Debug($"OnZeroClockUpdate [登录刷新]: {unit.Id}");
+                    float passhour = ((currentTime - lastLoginTime) * 1f / TimeHelper.Hour);
+                    if (passhour >= 24f)
+                    {
+                        self.RecoverPiLao(120, false);
+                    }
+                    else
+                    {
+                        int tiliTimes = self.GetTiLiTimes(lastdateTime.Hour, 24) + self.GetTiLiTimes(0, dateTime.Hour);
+                        tiliTimes = Math.Min(tiliTimes, 4);
+                        self.RecoverPiLao(tiliTimes * 30 + self.GetAddPiLao(self.UserInfo.MakeList.Count), false);
+                    }
+
+                    self.OnZeroClockUpdate(false);
+                    unit.GetComponent<TaskComponentS>().CheckWeeklyUpdate(lastLoginTime, currentTime);
+                    unit.GetComponent<TaskComponentS>().OnZeroClockUpdate(false);
+                    unit.GetComponent<EnergyComponentS>().OnResetEnergyInfo();
+                    unit.GetComponent<HeroDataComponentS>().OnZeroClockUpdate(false);
+                    unit.GetComponent<ActivityComponentS>().OnZeroClockUpdate(self.UserInfo.Lv);
+                    unit.GetComponent<ChengJiuComponentS>().OnZeroClockUpdate();
+                    unit.GetComponent<JiaYuanComponentS>().OnZeroClockUpdate(false);
+                    unit.GetComponent<DataCollationComponent>().OnZeroClockUpdate(false);
+                    self.OnJiaYuanExp(Math.Min(passhour, 12f));
+                }
+                else
+                {
+                    int hour_1, hour_2 = 0;
+                    hour_1 = lastdateTime.Hour;
+                    hour_2 = dateTime.Hour;
+
+                    int tiliTimes = self.GetTiLiTimes(hour_1, hour_2);
+                    tiliTimes = Math.Min(tiliTimes, 4);
+                    self.RecoverPiLao(tiliTimes * 30, false);
+                    unit.GetComponent<JiaYuanComponentS>().OnLoginCheck(hour_1, hour_2);
+
+                    float passhour = ((currentTime - lastLoginTime) * 1f / TimeHelper.Hour);
+                    self.OnJiaYuanExp(Math.Min(passhour, 12f));
+                }
+            }
+            else
+            {
+                Log.Debug($"OnZeroClockUpdate [数据初始化]: {unit.Id}");
+                unit.GetComponent<TaskComponentS>().OnZeroClockUpdate(false);
+            }
+
+            unit.GetComponent<BagComponentS>().OnLogin(self.UserInfo.RobotId);
+            unit.GetComponent<TaskComponentS>().OnLogin();
+            unit.GetComponent<HeroDataComponentS>().OnLogin(self.UserInfo.RobotId);
+            unit.GetComponent<DBSaveComponent>().OnLogin();
+            unit.GetComponent<RechargeComponent>().OnLogin();
+            unit.GetComponent<PetComponentS>().OnLogin();
+            unit.GetComponent<ActivityComponentS>().OnLogin(self.UserInfo.Lv);
+            unit.GetComponent<TitleComponentS>().OnCheckTitle(false);
+            unit.GetComponent<ChengJiuComponentS>().OnLogin();
+            unit.GetComponent<JiaYuanComponentS>().OnLogin();
+            unit.GetComponent<SkillSetComponentS>().OnLogin(self.UserInfo.Occ);
+
+            self.LastLoginTime = currentTime;
+            self.UserName = self.UserInfo.Name;
+            self.ShouLieSendTime = 0;
         }
 
         public static void UpdateRoleMoneyAdd(this UserInfoComponentS self, int Type, string value, bool notice, int getWay,
@@ -996,14 +1171,15 @@ namespace ET.Server
                 }
             }
         }
-        
+
         public static void OnShowLieKill(this UserInfoComponentS self)
         {
             self.ShouLieKill++;
 
             if (self.ShouLieUpLoadTimer == 0)
             {
-                self.ShouLieUpLoadTimer = self.Root().GetComponent<TimerComponent>().NewOnceTimer(TimeHelper.ServerNow() + 5 * TimeHelper.Second, TimerInvokeType.ShouLieUpLoadTimer, self);
+                self.ShouLieUpLoadTimer = self.Root().GetComponent<TimerComponent>()
+                        .NewOnceTimer(TimeHelper.ServerNow() + 5 * TimeHelper.Second, TimerInvokeType.ShouLieUpLoadTimer, self);
             }
             else
             {
@@ -1018,6 +1194,7 @@ namespace ET.Server
             {
                 return;
             }
+
             self.ShouLieSendTime = TimeHelper.ServerNow();
             self.Root().GetComponent<TimerComponent>().Remove(ref self.ShouLieUpLoadTimer);
             RankShouLieInfo rankPetInfo = new RankShouLieInfo();
@@ -1027,11 +1204,8 @@ namespace ET.Server
             rankPetInfo.Occ = userInfoComponent.UserInfo.Occ;
             rankPetInfo.KillNumber = self.ShouLieKill;
             ActorId mapInstanceId = UnitCacheHelper.GetRankServerId(self.Zone());
-            R2M_RankShowLieResponse Response = (R2M_RankShowLieResponse)await self.Root().GetComponent<MessageSender>().Call
-            (mapInstanceId, new M2R_RankShowLieRequest()
-            {
-                RankingInfo = rankPetInfo
-            });
+            R2M_RankShowLieResponse Response = (R2M_RankShowLieResponse)await self.Root().GetComponent<MessageSender>()
+                    .Call(mapInstanceId, new M2R_RankShowLieRequest() { RankingInfo = rankPetInfo });
         }
 
         public static void OnAddChests(this UserInfoComponentS self, int fubenId, int monsterId)
@@ -1046,12 +1220,13 @@ namespace ET.Server
                     have = true;
                 }
             }
+
             if (!have)
             {
                 self.UserInfo.OpenChestList.Add(new KeyValuePair() { KeyId = fubenId, Value = monsterId.ToString() });
             }
         }
-        
+
         /// <summary>
         /// 杀怪经验
         /// </summary>
@@ -1150,30 +1325,25 @@ namespace ET.Server
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             ActorId mapInstanceId = UnitCacheHelper.GetRankServerId(self.Zone());
             RankingInfo rankPetInfo = new RankingInfo();
-   
+
             rankPetInfo.UserId = self.UserInfo.UserId;
             rankPetInfo.PlayerName = self.UserInfo.Name;
             rankPetInfo.PlayerLv = self.UserInfo.Lv;
             rankPetInfo.Combat = self.UserInfo.Combat;
             rankPetInfo.Occ = self.UserInfo.Occ;
-            R2M_RankUpdateResponse Response = (R2M_RankUpdateResponse)await unit.Root().GetComponent<MessageSender>().Call
-            (mapInstanceId, new M2R_RankUpdateRequest()
-            {
-                CampId = numericComponent.GetAsInt(NumericType.AcvitiyCamp),
-                RankingInfo = rankPetInfo
-            });
+            R2M_RankUpdateResponse Response = (R2M_RankUpdateResponse)await unit.Root().GetComponent<MessageSender>().Call(mapInstanceId,
+                new M2R_RankUpdateRequest() { CampId = numericComponent.GetAsInt(NumericType.AcvitiyCamp), RankingInfo = rankPetInfo });
             if (unit.IsDisposed)
             {
                 return;
             }
+
             numericComponent.ApplyValue(NumericType.CombatRankID, Response.RankId);
             numericComponent.ApplyValue(NumericType.OccCombatRankID, Response.OccRankId);
             numericComponent.ApplyValue(NumericType.PetTianTiRankID, Response.PetRankId);
             numericComponent.ApplyValue(NumericType.SoloRankId, Response.SoloRankId);
         }
 
-        
-        
         public static void OnMakeItem(this UserInfoComponentS self, int makeId)
         {
             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(makeId);

@@ -44,7 +44,7 @@ namespace ET.Server
                     unit.AddDataComponent<TitleComponentS>();
                     unit.AddDataComponent<JiaYuanComponentS>();
                     unit.AddDataComponent<DataCollationComponent>();
-
+                    unit.AddDataComponent<ActivityComponentS>();
                     unit.AddDataComponent<StateComponentS>();
                     unit.AddDataComponent<DBSaveComponent>();
                     unit.AddDataComponent<HeroDataComponentS>();

@@ -58,6 +58,8 @@ namespace ET.Server
 			player.ChatInfoInstanceId = await EnterWorldChatServer(unit);   //登录聊天服
 			Log.Debug($"M2M_UnitTransferRequest_b:{unit.Components.Count}");
 			// 等到一帧的最后面再传送，先让G2C_EnterMap返回，否则传送消息可能比G2C_EnterMap还早
+			unit.GetComponent<UserInfoComponentS>().OnLogin(session.RemoteAddress.ToString(), "");
+			
 			TransferHelper.TransferAtFrameFinish(unit, startSceneConfig.ActorId, startSceneConfig.Name).Coroutine();
 		}
 		

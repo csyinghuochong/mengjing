@@ -120,6 +120,8 @@ namespace ET.Server
              numericComponent.ApplyValue(NumericType.JueXingAnger, 0, false);
              numericComponent.ApplyValue(NumericType.RunRaceRankId, 0, false);
              numericComponent.ApplyValue(NumericType.ZeroClock, 0, false);
+             numericComponent.ApplyValue(NumericType.MakeShuLianDu_1, 50, false);
+             numericComponent.ApplyValue(NumericType.MakeShuLianDu_2, 50, false);
 
              if (robotId != 0)
              {
