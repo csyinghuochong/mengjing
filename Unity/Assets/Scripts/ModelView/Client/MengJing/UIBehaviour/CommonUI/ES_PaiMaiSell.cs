@@ -1,12 +1,24 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PaiMaiSell : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_PaiMaiSell : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public List<BagInfo> ShowBagInfos = new();
+		public Dictionary<int, Scroll_Item_PaiMaiSellItem> ScrollItemPaiMaiSellItems;
+		public List<PaiMaiItemInfo> ShowPaiMaiItemInfos = new();
+		public int CurrentItemType;
+
+		public List<PaiMaiItemInfo> PaiMaiItemInfos = new();
+		public long PaiMaiItemInfoId;
+		public BagInfo BagInfo;
+		public bool IsHoldDown;
+		
 		public UnityEngine.UI.ToggleGroup E_ItemTypeSetToggleGroup
      	{
      		get

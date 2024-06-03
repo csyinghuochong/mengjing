@@ -73,5 +73,6 @@ namespace ET.Client
 		WindowID_PaiMai,
 		WindowID_WatchPaiMai,
 		WindowID_PaiMaiBuyTip,
+		WindowID_PaiMaiSellPrice,
 	}
 }

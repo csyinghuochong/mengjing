@@ -52,6 +52,7 @@ namespace ET.Client
                     break;
                 case 2:
                     self.View.ES_PaiMaiSell.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PaiMaiSell.OnUpdateUI();
                     break;
                 case 3:
                     break;

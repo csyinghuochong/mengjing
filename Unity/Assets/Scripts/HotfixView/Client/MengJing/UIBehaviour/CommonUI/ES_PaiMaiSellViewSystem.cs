@@ -1,8 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using ET.Server;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_PaiMaiSellItem))]
+    [FriendOf(typeof (Scroll_Item_CommonItem))]
     [EntitySystemOf(typeof (ES_PaiMaiSell))]
     [FriendOfAttribute(typeof (ES_PaiMaiSell))]
     public static partial class ES_PaiMaiSellSystem
@@ -11,12 +16,255 @@ namespace ET.Client
         private static void Awake(this ES_PaiMaiSell self, Transform transform)
         {
             self.uiTransform = transform;
+            self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
+            self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
+            self.E_PaiMaiSellItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPaiMaiSellItemsRefresh);
+
+            self.E_Btn_XiaJiaButton.AddListenerAsync(self.OnBtn_XiaJia);
+            self.E_Btn_ShangJiaButton.AddListenerAsync(self.OnBtn_ShangJia);
         }
 
         [EntitySystem]
         private static void Destroy(this ES_PaiMaiSell self)
         {
             self.DestroyWidget();
+        }
+
+        private static void OnItemTypeSet(this ES_PaiMaiSell self, int index)
+        {
+            UICommonHelper.SetToggleShow(self.E_ItemTypeAllSetToggle.gameObject, index == 0);
+            UICommonHelper.SetToggleShow(self.E_ItemTypeEquipSetToggle.gameObject, index == 1);
+            UICommonHelper.SetToggleShow(self.E_ItemTypeCostSetToggle.gameObject, index == 2);
+
+            self.CurrentItemType = index;
+            self.OnClickPageButton(index);
+        }
+
+        private static void OnBagItemsRefresh(this ES_PaiMaiSell self, Transform transform, int index)
+        {
+            Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
+            scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.PaiMaiSell, self.OnSelectItem);
+        }
+
+        private static void OnPaiMaiSellItemsRefresh(this ES_PaiMaiSell self, Transform transform, int index)
+        {
+            Scroll_Item_PaiMaiSellItem scrollItemPaiMaiSellItem = self.ScrollItemPaiMaiSellItems[index].BindTrans(transform);
+            scrollItemPaiMaiSellItem.SetClickHandler((bagInfo) => { self.OnSelectSellItem(bagInfo); });
+            scrollItemPaiMaiSellItem.OnUpdateUI(self.ShowPaiMaiItemInfos[index]);
+        }
+
+        private static async ETTask RequestSelfPaiMaiList(this ES_PaiMaiSell self)
+        {
+            long instanceid = self.InstanceId;
+            C2P_PaiMaiListRequest request = new() { PaiMaiType = 0, UserId = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId };
+            P2C_PaiMaiListResponse response = (P2C_PaiMaiListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            if (self.IsDisposed || instanceid != self.InstanceId)
+            {
+                return;
+            }
+
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            int zone = self.Root().GetComponent<PlayerComponent>().ServerId;
+            int openday = ServerHelper.GetOpenServerDay(false, zone);
+
+            self.PaiMaiItemInfos = response.PaiMaiItemInfos;
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
+            long sellgold = numericComponent.GetAsLong(NumericType.PaiMaiTodayGold);
+            long todayGold = ConfigHelper.GetPaiMaiTodayGold(openday);
+
+            float sellgold_1 = sellgold * 0.0001f;
+            float todayGold_1 = todayGold * 0.0001f;
+
+            self.E_PaiMaiGoldTextText.text = $"今日获利:{UICommonHelper.ShowFloatValue(sellgold_1)}万/{UICommonHelper.ShowFloatValue(todayGold_1)}万";
+            self.UpdateSellItemUILIist(self.CurrentItemType);
+        }
+
+        public static void OnUpdateUI(this ES_PaiMaiSell self)
+        {
+            self.UpdateBagItemUIList();
+            self.E_ItemTypeAllSetToggle.IsSelected(true);
+            self.RequestSelfPaiMaiList().Coroutine();
+        }
+
+        public static void OnClickPageButton(this ES_PaiMaiSell self, int page)
+        {
+            self.UpdateSellItemUILIist(page);
+        }
+
+        private static async ETTask OnBtn_XiaJia(this ES_PaiMaiSell self)
+        {
+            if (self.PaiMaiItemInfoId == 0)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("请选中道具");
+                return;
+            }
+
+            int itemType = 0;
+            for (int i = self.PaiMaiItemInfos.Count - 1; i >= 0; i--)
+            {
+                if (self.PaiMaiItemInfos[i].Id == self.PaiMaiItemInfoId)
+                {
+                    if (self.PaiMaiItemInfos[i].UserId != self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId)
+                    {
+                        FlyTipComponent.Instance.SpawnFlyTipDi("数据错误!");
+                        return;
+                    }
+
+                    itemType = ItemConfigCategory.Instance.Get(self.PaiMaiItemInfos[i].BagInfo.ItemID).ItemType;
+                }
+            }
+
+            C2M_PaiMaiXiaJiaRequest request = new() { ItemType = itemType, PaiMaiItemInfoId = self.PaiMaiItemInfoId };
+            M2C_PaiMaiXiaJiaResponse response = (M2C_PaiMaiXiaJiaResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            if (self.IsDisposed)
+            {
+                return;
+            }
+
+            for (int i = self.PaiMaiItemInfos.Count - 1; i >= 0; i--)
+            {
+                if (self.PaiMaiItemInfos[i].Id == self.PaiMaiItemInfoId)
+                {
+                    self.PaiMaiItemInfos.RemoveAt(i);
+                }
+            }
+
+            self.PaiMaiItemInfoId = 0;
+
+            self.UpdateBagItemUIList();
+            self.UpdateSellItemUILIist(self.CurrentItemType);
+        }
+
+        public static async ETTask OnBtn_ShangJia(this ES_PaiMaiSell self)
+        {
+            if (self.BagInfo == null)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("请选中道具！");
+                return;
+            }
+
+            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
+            if (itemConfig.IfStopPaiMai == 1)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("此道具禁止上架！");
+                return;
+            }
+
+            if (!ComHelp.IsShowPaiMai(itemConfig.ItemType, itemConfig.ItemSubType))
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("此道具不能上架！");
+                return;
+            }
+
+            if (self.PaiMaiItemInfos.Count >= GlobalValueConfigCategory.Instance.Get(50).Value2)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("已经达到最大上架数量！");
+                return;
+            }
+
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PaiMaiSellPrice);
+            DlgPaiMaiSellPrice dlgPaiMaiSellPrice = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPaiMaiSellPrice>();
+            dlgPaiMaiSellPrice.InitPriceUI(self.BagInfo);
+        }
+
+        private static void UpdateBagItemUIList(this ES_PaiMaiSell self)
+        {
+            List<BagInfo> equipInfos = self.Root().GetComponent<BagComponentC>().GetBagList();
+            self.ShowBagInfos.Clear();
+            for (int i = 0; i < equipInfos.Count; i++)
+            {
+                if (equipInfos[i].isBinging || equipInfos[i].IsProtect)
+                {
+                    continue;
+                }
+
+                self.ShowBagInfos.Add(equipInfos[i]);
+            }
+
+            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
+            self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
+        }
+
+        public static void OnPaiBuyShangJia(this ES_PaiMaiSell self, PaiMaiItemInfo paiMaiItemInfo)
+        {
+            self.BagInfo = null;
+            self.PaiMaiItemInfos.Add(paiMaiItemInfo);
+
+            self.UpdateBagItemUIList();
+            self.UpdateSellItemUILIist(self.CurrentItemType);
+        }
+
+        public static void OnSelectItem(this ES_PaiMaiSell self, BagInfo bagInfo)
+        {
+            self.BagInfo = bagInfo;
+
+            if (self.ScrollItemCommonItems != null)
+            {
+                foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
+                {
+                    if (item.uiTransform == null)
+                    {
+                        continue;
+                    }
+
+                    item.ES_CommonItem.SetSelected(bagInfo);
+                }
+            }
+        }
+
+        private static void OnSelectSellItem(this ES_PaiMaiSell self, PaiMaiItemInfo paiMaiItemInfo)
+        {
+            self.PaiMaiItemInfoId = paiMaiItemInfo.Id;
+
+            if (self.ScrollItemPaiMaiSellItems != null)
+            {
+                foreach (Scroll_Item_PaiMaiSellItem item in self.ScrollItemPaiMaiSellItems.Values)
+                {
+                    if (item.uiTransform == null)
+                    {
+                        continue;
+                    }
+
+                    item.SetSelected(paiMaiItemInfo.Id);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="subType">0 装备   1其他</param>
+        private static void UpdateSellItemUILIist(this ES_PaiMaiSell self, int subType)
+        {
+            self.ShowPaiMaiItemInfos.Clear();
+            for (int i = 0; i < self.PaiMaiItemInfos.Count; i++)
+            {
+                PaiMaiItemInfo paiMaiItemInfo = self.PaiMaiItemInfos[i];
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(paiMaiItemInfo.BagInfo.ItemID);
+                if (subType == 1 && itemConfig.ItemType != ItemTypeEnum.Equipment)
+                {
+                    continue;
+                }
+
+                if (subType == 2 && itemConfig.ItemType == ItemTypeEnum.Equipment)
+                {
+                    continue;
+                }
+
+                self.ShowPaiMaiItemInfos.Add(paiMaiItemInfo);
+            }
+
+            self.AddUIScrollItems(ref self.ScrollItemPaiMaiSellItems, self.ShowPaiMaiItemInfos.Count);
+            self.E_PaiMaiSellItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPaiMaiItemInfos.Count);
+
+            int maxNum = GlobalValueConfigCategory.Instance.Get(50).Value2;
+            self.E_Text_SellTimeText.text = "已上架:" + $"{self.PaiMaiItemInfos.Count}/{maxNum}";
         }
     }
 }
