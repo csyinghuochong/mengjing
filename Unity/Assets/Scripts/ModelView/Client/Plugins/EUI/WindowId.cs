@@ -75,5 +75,6 @@ namespace ET.Client
 		WindowID_PaiMaiBuyTip,
 		WindowID_PaiMaiSellPrice,
 		WindowID_WeiJingShop,
+		WindowID_GemMake,
 	}
 }

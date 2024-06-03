@@ -540,5 +540,30 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<int> RequestEquipMake(Scene root, long baginfoId, int makeId, int plan)
+        {
+            C2M_MakeEquipRequest request = new() { BagInfoID = baginfoId, MakeId = makeId, Plan = plan };
+            M2C_MakeEquipResponse response = (M2C_MakeEquipResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            if (response.ItemId == 0)
+            {
+                HintHelp.ShowHint(root, "制作失败!");
+            }
+
+            if (response.NewMakeId != 0)
+            {
+                EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(response.NewMakeId);
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(equipMakeConfig.MakeItemID);
+                HintHelp.ShowHint(root, $"恭喜你领悟到新的制作技能 {itemConfig.ItemName}");
+                root.GetComponent<UserInfoComponentC>().UserInfo.MakeList.Add(response.NewMakeId);
+            }
+
+            if (baginfoId == 0)
+            {
+                root.GetComponent<UserInfoComponentC>().OnMakeItem(makeId);
+            }
+
+            return response.Error;
+        }
     }
 }

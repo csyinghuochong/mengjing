@@ -12,7 +12,7 @@ namespace ET.Client
             itemObj.GetComponent<Text>().text = itemCof.ItemName;
             itemObj.GetComponent<Text>().color = QualityReturnColor(itemCof.ItemQuality);
         }
-        
+
         public static async ETTask OpenFunctionUI(Scene root, int npcid, int functionid)
         {
             if (functionid < 10)
@@ -84,6 +84,7 @@ namespace ET.Client
                 "UIMakeLearn" => WindowID.WindowID_MakeLearn,
                 "UIOccTwo" => WindowID.WindowID_OccTwo,
                 "UIPaiMai" => WindowID.WindowID_PaiMai,
+                "UIGemMake" => WindowID.WindowID_GemMake,
                 _ => WindowID.WindowID_Invaild
             };
         }
