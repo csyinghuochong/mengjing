@@ -41,8 +41,6 @@ namespace ET.Server
 
         [BsonIgnore]
         public readonly M2C_RoleDataBroadcast m2C_RoleDataBroadcast  = new M2C_RoleDataBroadcast();
-        [BsonIgnore]
-        public readonly M2C_RoleDataUpdate m2C_RoleDataUpdate = new M2C_RoleDataUpdate();
 
         [BsonIgnore]
         public long ShouLieUpLoadTimer;

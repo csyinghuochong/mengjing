@@ -587,7 +587,7 @@ namespace ET.Server
             //发送更新值
             if (notice)
             {
-                M2C_RoleDataUpdate m2C_RoleDataUpdate1 = self.m2C_RoleDataUpdate;
+                M2C_RoleDataUpdate m2C_RoleDataUpdate1 = M2C_RoleDataUpdate.Create();
                 m2C_RoleDataUpdate1.UpdateType = (int)Type;
                 m2C_RoleDataUpdate1.UpdateTypeValue = saveValue;
                 m2C_RoleDataUpdate1.UpdateValueLong = longValue;
