@@ -401,8 +401,14 @@ namespace ET.Client
 
             // 测试数据
             P2C_PaiMaiListResponse response = new();
-            response.PaiMaiItemInfos.Add(new PaiMaiItemInfo() { BagInfo = new BagInfo() { ItemID = 10021001, ItemNum = 10 }, PlayerName = "测试数据1" });
-            response.PaiMaiItemInfos.Add(new PaiMaiItemInfo() { BagInfo = new BagInfo() { ItemID = 10021001, ItemNum = 20 }, PlayerName = "测试数据2" });
+            response.PaiMaiItemInfos.Add(new PaiMaiItemInfo()
+            {
+                BagInfo = new BagInfo() { ItemID = 10021001, ItemNum = 10 }, PlayerName = "测试数据1", Price = 10
+            });
+            response.PaiMaiItemInfos.Add(new PaiMaiItemInfo()
+            {
+                BagInfo = new BagInfo() { ItemID = 10021001, ItemNum = 20 }, PlayerName = "测试数据2", Price = 20
+            });
             response.NextPage = 1;
             await ETTask.CompletedTask;
 
