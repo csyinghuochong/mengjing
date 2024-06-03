@@ -8,6 +8,7 @@ namespace ET.Client
 {
     [FriendOf(typeof (ES_PaiMaiShop))]
     [FriendOf(typeof (ES_PaiMaiBuy))]
+    [FriendOf(typeof (ES_PaiMaiSell))]
     [FriendOf(typeof (DlgPaiMai))]
     public static class DlgPaiMaiSystem
     {
@@ -50,6 +51,7 @@ namespace ET.Client
                     self.View.ES_PaiMaiBuy.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
+                    self.View.ES_PaiMaiSell.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
                     break;
