@@ -77,5 +77,6 @@ namespace ET.Client
 		WindowID_WeiJingShop,
 		WindowID_GemMake,
 		WindowID_ShenQiMake,
+		WindowID_ShouJi,
 	}
 }
