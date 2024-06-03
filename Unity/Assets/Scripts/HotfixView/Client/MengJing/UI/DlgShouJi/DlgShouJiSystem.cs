@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_ShouJiList))]
     [FriendOf(typeof (DlgShouJi))]
     public static class DlgShouJiSystem
     {
@@ -19,6 +20,8 @@ namespace ET.Client
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
             uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
             uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
+
+            self.View.E_1Toggle.IsSelected(true);
         }
 
         private static void OnCloseButton(this DlgShouJi self)
@@ -37,6 +40,7 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
+                    self.View.ES_ShouJiList.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
                     break;

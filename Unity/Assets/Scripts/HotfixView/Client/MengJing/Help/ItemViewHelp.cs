@@ -8,6 +8,17 @@ namespace ET.Client
 {
     public static class ItemViewHelp
     {
+        public static string GetAttributeDesc(List<PropertyValue> hideProLists)
+        {
+            string desc = "";
+            for (int i = 0; i < hideProLists.Count; i++)
+            {
+                desc += $"{hideProLists[i].HideID} {hideProLists[i].HideValue}  ";
+            }
+
+            return desc;
+        }
+
         public static string ReturnNumStr(long num)
         {
             if (num < 10000)
