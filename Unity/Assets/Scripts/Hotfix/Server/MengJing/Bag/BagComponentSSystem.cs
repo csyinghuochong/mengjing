@@ -737,7 +737,7 @@ namespace ET.Server
            MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2c_bagUpdate);
 
            //检测任务需求道具
-           //ItemAddHelper.OnGetItem(self.GetParent<Unit>(), int.Parse(getType.Split('_')[0]), bagInfo.ItemID, bagInfo.ItemNum);
+           self.GetParent<Unit>().OnGetItem( int.Parse(getType.Split('_')[0]), bagInfo.ItemID, bagInfo.ItemNum);
        }
    }
 

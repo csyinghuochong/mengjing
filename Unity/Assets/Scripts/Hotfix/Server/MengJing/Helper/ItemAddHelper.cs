@@ -23,7 +23,7 @@ namespace ET.Server
         {
             self.GetComponent<TaskComponentS>().OnGetItem_2(itemId);
             self.GetComponent<TaskComponentS>().OnGetItemNumber(getWay, itemId, itemNum);
-            //self.GetComponent<ShoujiComponentServer>().OnGetItem(itemId);
+            self.GetComponent<ShoujiComponentS>().OnGetItem(itemId);
         }
 
         /// <summary>
