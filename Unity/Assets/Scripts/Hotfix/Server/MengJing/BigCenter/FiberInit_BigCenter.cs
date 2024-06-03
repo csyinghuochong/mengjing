@@ -3,7 +3,7 @@ using System.Net;
 namespace ET.Server
 {
     [Invoke((long)SceneType.BigCenter)]
-    public class FiberInit_Center : AInvokeHandler<FiberInit, ETTask>
+    public class FiberInit_BigCenter : AInvokeHandler<FiberInit, ETTask>
     {
         public override async ETTask Handle(FiberInit fiberInit)
         {
@@ -14,6 +14,7 @@ namespace ET.Server
             root.AddComponent<ProcessInnerSender>();
             root.AddComponent<MessageSender>();
             root.AddComponent<LocationManagerComoponent>();
+            root.AddComponent<DBManagerComponent>();
 
             await ETTask.CompletedTask;
         }

@@ -41,15 +41,13 @@ namespace ET.Server
 
         public static async ETTask SendToAccountCenter(Scene root, long accountId, long userId, int rechargeNumber, string ordinfo)
         {
-            A2Center_RechargeRequest rechargeRequest = new A2Center_RechargeRequest()
+            A2Center_RechargeRequest rechargeRequest = A2Center_RechargeRequest.Create();
+            rechargeRequest.AccountId = accountId;
+            rechargeRequest.RechargeInfo = new RechargeInfo()
             {
-                AccountId = accountId,
-                RechargeInfo = new RechargeInfo()
-                {
-                    Amount = rechargeNumber, Time = TimeHelper.ServerNow(), UnitId = userId, OrderInfo = ordinfo
-                }
+                Amount = rechargeNumber, Time = TimeHelper.ServerNow(), UnitId = userId, OrderInfo = ordinfo
             };
-            ActorId accountZone = UnitCacheHelper.GetAccountCenter();
+            ActorId accountZone = UnitCacheHelper.GetCenterServerId();
             Center2A_RechargeResponse saveAccount =
                     (Center2A_RechargeResponse)await root.GetComponent<MessageSender>().Call(accountZone, rechargeRequest);
         }
