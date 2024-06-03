@@ -50,8 +50,7 @@ namespace ET.Client
 
         public static async ETTask OnBtn_Shop(this ES_PaiMaiDuiHuan self)
         {
-            // await UIHelper.Create(self.ZoneScene(), UIType.UIWeiJingShop);
-            await ETTask.CompletedTask;
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_WeiJingShop);
         }
 
         public static void OnBtn_BuyNum_jia(this ES_PaiMaiDuiHuan self, int num)

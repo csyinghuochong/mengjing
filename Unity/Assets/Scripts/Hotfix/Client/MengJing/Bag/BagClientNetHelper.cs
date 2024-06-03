@@ -499,10 +499,9 @@ namespace ET.Client
                 return;
             }
 
-            C2M_StoreBuyRequest c2M_StoreBuyRequest = new() { SellItemID = sellId, SellItemNum = buyNum };
-            M2C_StoreBuyResponse r2c_roleEquip =
-                    (M2C_StoreBuyResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2M_StoreBuyRequest);
-            if (r2c_roleEquip.Error == ErrorCode.ERR_Success)
+            C2M_StoreBuyRequest request = new() { SellItemID = sellId, SellItemNum = buyNum };
+            M2C_StoreBuyResponse response = (M2C_StoreBuyResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            if (response.Error == ErrorCode.ERR_Success)
             {
                 root.GetComponent<UserInfoComponentC>().OnStoreBuy(storeSellConfig.Id);
             }
