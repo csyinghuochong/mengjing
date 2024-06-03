@@ -10,7 +10,7 @@ namespace ET.Server
     public static partial class EnergyComponentSSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.EnergyComponentS self, long args2)
+        private static void Awake(this ET.Server.EnergyComponentS self)
         {
 
         }

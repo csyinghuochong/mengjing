@@ -47,8 +47,10 @@ namespace ET.Server
                     unit.AddDataComponent<ActivityComponentS>();
                     unit.AddDataComponent<StateComponentS>();
                     unit.AddDataComponent<DBSaveComponent>();
+                    unit.AddDataComponent<EnergyComponentS>();
                     unit.AddDataComponent<HeroDataComponentS>();
                     unit.AddDataComponent<SkillPassiveComponent>();
+                    
 
                     DBComponent dbComponent = scene.Root().GetComponent<DBManagerComponent>().GetZoneDB(scene.Zone());
                     List<DBFriendInfo> dbFriendInfos = await dbComponent.Query<DBFriendInfo>(scene.Zone(), d => d.Id == id);

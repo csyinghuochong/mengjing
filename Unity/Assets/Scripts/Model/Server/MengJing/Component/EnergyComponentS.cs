@@ -5,7 +5,7 @@ namespace ET.Server
     
     
     [ComponentOf(typeof(Unit))]
-    public class EnergyComponentS: Entity, IAwake<long>, IDestroy
+    public class EnergyComponentS: Entity, IAwake, IDestroy
     {
         //可否领取早睡奖励
         public bool EarlySleepReward{ get; set; } = true;
