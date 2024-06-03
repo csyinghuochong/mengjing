@@ -393,25 +393,11 @@ namespace ET.Client
         {
             long instanceId = self.InstanceId;
 
-            // C2P_PaiMaiListRequest request = new()
-            // {
-            //     Page = self.PageIndex, PaiMaiType = itemType, UserId = UnitHelper.GetMyUnitFromClientScene(self.Root()).Id
-            // };
-            // P2C_PaiMaiListResponse response = (P2C_PaiMaiListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
-
-            // 测试数据
-            P2C_PaiMaiListResponse response = new();
-            response.PaiMaiItemInfos.Add(new PaiMaiItemInfo()
+            C2P_PaiMaiListRequest request = new()
             {
-                BagInfo = new BagInfo() { ItemID = 10021001, ItemNum = 10 }, PlayerName = "测试数据1", Price = 10
-            });
-            response.PaiMaiItemInfos.Add(new PaiMaiItemInfo()
-            {
-                BagInfo = new BagInfo() { ItemID = 10021001, ItemNum = 20 }, PlayerName = "测试数据2", Price = 20
-            });
-            response.NextPage = 1;
-            await ETTask.CompletedTask;
-
+                Page = self.PageIndex, PaiMaiType = itemType, UserId = UnitHelper.GetMyUnitFromClientScene(self.Root()).Id
+            };
+            P2C_PaiMaiListResponse response = (P2C_PaiMaiListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
             if (instanceId != self.InstanceId)
             {
                 return;
