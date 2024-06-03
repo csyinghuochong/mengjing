@@ -7,6 +7,24 @@ namespace ET.Server
     [FriendOf(typeof (PaiMaiSceneComponent))]
     public static partial class PaiMaiSceneComponentSystem
     {
+        
+        [Invoke(TimerInvokeType.PaiMaiTimer)]
+        public class PaiMaiTimer: ATimer<PaiMaiSceneComponent>
+        {
+            protected override void Run(PaiMaiSceneComponent self)
+            {
+                try
+                {
+                    self.SaveDB(1).Coroutine();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+
+        
         [EntitySystem]
         private static void Awake(this ET.Server.PaiMaiSceneComponent self)
         {

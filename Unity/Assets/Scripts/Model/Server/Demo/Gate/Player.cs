@@ -31,5 +31,7 @@
         public ActorId MailServerID { get; set; }
         
         public ActorId RankServerID { get; set; }
+        
+        public ActorId PaiMaiServerID { get; set; }
     }
 }

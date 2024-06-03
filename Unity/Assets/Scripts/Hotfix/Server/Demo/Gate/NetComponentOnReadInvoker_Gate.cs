@@ -104,6 +104,12 @@ namespace ET.Server
                         response = await root.GetComponent<MessageSender>().Call(rankServerID, iRankActorRequest);
                     }
                     
+                    if (actorRequest is IPaiMaiListRequest iPaiMaiListRequest)
+                    {
+                        ActorId paiMaiServerID = player.PaiMaiServerID;
+                        response = await root.GetComponent<MessageSender>().Call(paiMaiServerID, iPaiMaiListRequest);
+                    }
+                    
                     if (response == null)
                     {
                         break;
