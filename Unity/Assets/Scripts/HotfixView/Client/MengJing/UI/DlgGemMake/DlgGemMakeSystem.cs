@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [Invoke(TimerInvokeType.MakeCDTimer)]
-    public class MakeCDTimer: ATimer<DlgGemMake>
+    [Invoke(TimerInvokeType.GemMakeCDTimer)]
+    public class GemMakeCDTimer: ATimer<DlgGemMake>
     {
         protected override void Run(DlgGemMake self)
         {
@@ -152,7 +152,7 @@ namespace ET.Client
             }
 
             self.View.E_Lab_MakeCDTimeText.gameObject.SetActive(true);
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.MakeCDTimer, self);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.GemMakeCDTimer, self);
             self.OnUpdate();
         }
 

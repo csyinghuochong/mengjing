@@ -59,5 +59,6 @@
         public const int PetEggListItemTimer = 320;
         public const int UIChouKaTimer = 321;
         public const int UIMapBigTimer = 322;
+        public const int GemMakeCDTimer = 323;
     }
 }
