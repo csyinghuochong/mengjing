@@ -1994,6 +1994,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1464215600748852172}
     m_Modifications:
+    - target: {fileID: 3420183334752444734, guid: 8638676caa60d054984b5d6415ac0248,
+        type: 3}
+      propertyPath: m_CellSize.x
+      value: 280
+      objectReference: {fileID: 0}
+    - target: {fileID: 3420183334752444734, guid: 8638676caa60d054984b5d6415ac0248,
+        type: 3}
+      propertyPath: m_CellSize.y
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 3420183334752444734, guid: 8638676caa60d054984b5d6415ac0248,
+        type: 3}
+      propertyPath: m_ConstraintCount
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6322477047894325148, guid: 8638676caa60d054984b5d6415ac0248,
         type: 3}
       propertyPath: m_Name
