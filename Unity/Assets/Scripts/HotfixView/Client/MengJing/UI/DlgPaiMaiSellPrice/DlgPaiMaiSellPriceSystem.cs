@@ -153,6 +153,7 @@ namespace ET.Client
         {
             self.BagInfo = bagInfo;
 
+            self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             FunctionUI.ItemObjShowName(self.View.E_Lab_NameText.gameObject, bagInfo.ItemID);
 
             //设置价格

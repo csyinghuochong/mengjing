@@ -27,6 +27,7 @@ namespace ET.Client
         public static void OnUpdateUI(this Scroll_Item_PaiMaiSellItem self, PaiMaiItemInfo paiMaiItemInfo)
         {
             self.E_ImageButtonButton.AddListener(self.OnImageButton);
+            self.E_Img_XuanZhongImage.gameObject.SetActive(false);
 
             self.PaiMaiItemInfo = paiMaiItemInfo;
 
