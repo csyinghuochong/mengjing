@@ -32,7 +32,9 @@ namespace ET.Server
             self.InitServerInfo().Coroutine();
             self.InitDBRankInfo().Coroutine();
 
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Minute * 30 + RandomHelper.RandomNumber(1000, 10000),
+            //self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Minute * 30 + RandomHelper.RandomNumber(1000, 10000),
+           //     TimerInvokeType.RankeTimer, self);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(RandomHelper.RandomNumber(1000, 10000),
                 TimerInvokeType.RankeTimer, self);
         }
 

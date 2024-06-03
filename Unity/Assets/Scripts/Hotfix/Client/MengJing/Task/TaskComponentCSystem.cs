@@ -176,6 +176,26 @@ namespace ET.Client
             //HintHelp.GetInstance().DataUpdate(DataType.TaskUpdate);
         }
         
+        public static void OnRecvTaskCountryUpdate(this TaskComponentC self, M2C_TaskCountryUpdate message)
+        {
+            //1增量更新   2全量更新
+            if (message.UpdateMode == 2)
+            {
+                self.TaskCountryList = message.TaskCountryList;
+                return;
+            }
+            for (int i = 0; i < message.TaskCountryList.Count; i++)
+            {
+                for (int k = 0; k < self.TaskCountryList.Count; k++)
+                {
+                    if (message.TaskCountryList[i].taskID == self.TaskCountryList[k].taskID)
+                    {
+                        self.TaskCountryList[k] = message.TaskCountryList[i];
+                    }
+                }
+            }
+        }
+        
         public static bool IsTaskFinished(this TaskComponentC self, int taskId)
         {
             return self.RoleComoleteTaskList.Contains(taskId);
