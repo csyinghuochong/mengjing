@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
+	[ChildOf]
 	[EnableMethod]
 	public  class Scroll_Item_MakeItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{

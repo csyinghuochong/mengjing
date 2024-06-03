@@ -85,6 +85,7 @@ namespace ET.Client
                 "UIOccTwo" => WindowID.WindowID_OccTwo,
                 "UIPaiMai" => WindowID.WindowID_PaiMai,
                 "UIGemMake" => WindowID.WindowID_GemMake,
+                "UIShenQiMake" => WindowID.WindowID_ShenQiMake,
                 _ => WindowID.WindowID_Invaild
             };
         }
