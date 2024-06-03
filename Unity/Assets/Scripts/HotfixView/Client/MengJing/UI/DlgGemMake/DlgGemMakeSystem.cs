@@ -32,6 +32,10 @@ namespace ET.Client
         {
             self.View.E_Btn_MakeButton.AddListenerAsync(self.OnBtn_Make);
             self.View.E_MakeItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMakeItemsRefresh);
+            
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
+            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
         }
 
         public static void ShowWindow(this DlgGemMake self, Entity contextData = null)
@@ -44,6 +48,13 @@ namespace ET.Client
         public static void BeforeUnload(this DlgGemMake self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+        }
+
+        private static void OnCloseButton(this DlgGemMake self)
+        {
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+
+            uiComponent.CloseWindow(WindowID.WindowID_GemMake);
         }
 
         public static void OnInitUI(this DlgGemMake self)
@@ -198,7 +209,7 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemMakeItems, self.ShowMake.Count);
             self.View.E_MakeItemsLoopVerticalScrollRect.SetVisible(true, self.ShowMake.Count);
 
-            self.OnSelectMakeItem(self.ShowMake.Count > 0? 0 : self.ShowMake[0]);
+            self.OnSelectMakeItem(self.ShowMake.Count == 0? 0 : self.ShowMake[0]);
         }
 
         private static void OnMakeItemsRefresh(this DlgGemMake self, Transform transform, int index)
