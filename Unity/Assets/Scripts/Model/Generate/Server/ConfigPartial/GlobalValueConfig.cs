@@ -38,7 +38,7 @@ namespace ET
         public int OnLineLimit = 0;
 
         public int AccountBagMax = 0;
-
+        public int MaxLevel = 70;
         public List<DayMonsters> DayMonsterList = new List<DayMonsters>();
 
         public List<DayJingLing> DayJingLingList = new List<DayJingLing>();

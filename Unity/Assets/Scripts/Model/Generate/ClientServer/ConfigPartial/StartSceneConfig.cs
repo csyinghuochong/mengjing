@@ -30,7 +30,7 @@ namespace ET
 
         public StartSceneConfig RechargeConfig;
 
-        public StartSceneConfig CenterConfig;
+        public StartSceneConfig BigCenterConfig;
         
         public Dictionary<int, StartSceneConfig> UnitCaches = new Dictionary<int, StartSceneConfig>();
         
@@ -94,6 +94,9 @@ namespace ET
                         break;
                     case SceneType.AccountCenter:
                         this.AccountCenterConfig = startSceneConfig;
+                        break;
+                    case SceneType.BigCenter:
+                        this.BigCenterConfig = startSceneConfig;
                         break;
                     case SceneType.LoginCenter:
                         this.LoginCenterConfig = startSceneConfig;

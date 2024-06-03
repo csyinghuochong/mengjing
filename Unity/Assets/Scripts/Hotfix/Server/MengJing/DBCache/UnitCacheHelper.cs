@@ -21,7 +21,7 @@ namespace ET.Server
         
         public static ActorId GetCenterServerId()
         {
-            return StartSceneConfigCategory.Instance.CenterConfig.ActorId;
+            return StartSceneConfigCategory.Instance.BigCenterConfig.ActorId;
         }
         
         /// <summary>

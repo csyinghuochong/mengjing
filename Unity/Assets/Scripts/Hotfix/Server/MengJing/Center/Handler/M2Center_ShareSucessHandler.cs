@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-    [MessageHandler(SceneType.Center)]
+    [MessageHandler(SceneType.BigCenter)]
     public class M2Center_ShareSucessHandler : MessageHandler<Scene, M2Center_ShareSucessRequest, Center2M_ShareSucessResponse>
     {
         protected override async ETTask Run(Scene scene, M2Center_ShareSucessRequest request, Center2M_ShareSucessResponse response)

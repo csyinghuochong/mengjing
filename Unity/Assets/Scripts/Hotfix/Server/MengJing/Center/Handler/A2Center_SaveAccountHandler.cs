@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 
-    [MessageHandler(SceneType.Center)]
+    [MessageHandler(SceneType.BigCenter)]
     public class A2Center_SaveAccountHandler : MessageHandler<Scene, A2Center_SaveAccount, Center2A_SaveAccount>
     {
         protected override async ETTask Run(Scene scene, A2Center_SaveAccount request, Center2A_SaveAccount response)

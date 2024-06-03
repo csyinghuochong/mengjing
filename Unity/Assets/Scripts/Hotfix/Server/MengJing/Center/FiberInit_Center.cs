@@ -2,7 +2,7 @@ using System.Net;
 
 namespace ET.Server
 {
-    [Invoke((long)SceneType.Center)]
+    [Invoke((long)SceneType.BigCenter)]
     public class FiberInit_Center : AInvokeHandler<FiberInit, ETTask>
     {
         public override async ETTask Handle(FiberInit fiberInit)

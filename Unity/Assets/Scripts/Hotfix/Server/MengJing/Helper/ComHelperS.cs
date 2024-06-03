@@ -4,6 +4,27 @@ namespace ET.Server
     public static class ComHelperS
     {
     
+        public static void OnAddLingDiExp(Unit unit, int addExp, bool notice)
+        {
+            int lingdiLv = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.Ling_DiLv);
+            int lingdiExp = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.Ling_DiExp);
+            LingDiConfig lingDiConfig = LingDiConfigCategory.Instance.Get(lingdiLv);
+    
+            int maxLevel = LingDiConfigCategory.Instance.GetAll().Values.Count;
+            if (lingdiLv >= maxLevel && lingdiExp >= lingDiConfig.UpExp)
+            {
+                return;
+            }
+
+            int needCoin = lingDiConfig.GoldUp;
+            if (addExp + lingdiExp >= lingDiConfig.UpExp && lingdiLv < maxLevel)
+            {
+                unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Ling_DiLv, lingdiLv + 1, notice);
+                addExp = addExp + lingdiExp - lingDiConfig.UpExp;
+            }
+            unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.Ling_DiExp, addExp + lingdiExp, notice);
+        }
+        
         public static bool IsInnerNet()
         {
             if (StartMachineConfigCategory.Instance.Get(1).OuterIP.Contains("127.0.0.1")

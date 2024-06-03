@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 
-    [MessageHandler(SceneType.Center)]
+    [MessageHandler(SceneType.BigCenter)]
     public class M2Center_BuChangeHandler : MessageHandler<Scene, M2Center_BuChangeRequest, Center2M_BuChangeResponse>
     {
 

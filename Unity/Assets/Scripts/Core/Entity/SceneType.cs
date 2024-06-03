@@ -43,7 +43,7 @@ namespace ET
         Solo = 1L << 36,
         Team = 1L << 37,
         Union = 1L << 38,
-        Center = 1L << 39,
+        BigCenter = 1L << 39,
         LoginCenter = 1L << 40,
         AccountCenter = 1L << 41,
         ReCharge = 1L << 42,

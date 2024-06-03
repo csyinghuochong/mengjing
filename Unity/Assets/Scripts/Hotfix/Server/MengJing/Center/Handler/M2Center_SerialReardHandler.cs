@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 
-    [MessageHandler(SceneType.Center)]
+    [MessageHandler(SceneType.BigCenter)]
     public class M2Center_SerialReardHandler : MessageHandler<Scene, M2Center_SerialReardRequest, Center2M_SerialReardResponse>
     {
         protected override async ETTask Run(Scene scene, M2Center_SerialReardRequest request, Center2M_SerialReardResponse response)

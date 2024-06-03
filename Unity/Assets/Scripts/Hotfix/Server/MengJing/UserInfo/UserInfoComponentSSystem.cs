@@ -352,6 +352,54 @@ namespace ET.Server
             MapMessageHelper.Broadcast(unit, m2C_BroadcastRoleData);
         }
 
+        //增加经验
+        public static void Role_AddExp(this UserInfoComponentS self, long addValue, bool notice)
+        {
+            Scene scene = self.Scene();
+            ServerInfoComponent serverInfoComponent = scene.GetComponent<ServerInfoComponent>();
+            if (serverInfoComponent == null)
+            {
+                Log.Warning($"ServerInfo==null: {scene.GetComponent<MapComponent>().SceneType} {self.Id}");
+                return;
+            }
+            if (serverInfoComponent.ServerInfo == null)
+            {
+                Log.Warning($"ServerInfo==null: {scene.GetComponent<MapComponent>().SceneType} {self.Id}");
+                return;
+            }
+            ServerInfo serverInfo = serverInfoComponent.ServerInfo;
+
+            float expAdd = ComHelp.GetExpAdd(self.UserInfo.Lv, serverInfo);
+
+            ExpConfig xiulianconf1 = ExpConfigCategory.Instance.Get(self.UserInfo.Lv);
+            long upNeedExp = xiulianconf1.UpExp;
+
+            //等级达到上限,则无法获得经验. 经验最多200%
+            if (addValue > 0 &&self.UserInfo.Lv >= GlobalValueConfigCategory.Instance.MaxLevel)
+            {
+                long maxExp = upNeedExp * 2;
+                if (self.UserInfo.Exp > maxExp) 
+                {
+                    self.UpdateRoleData(UserDataType.Message, "当前经验超过200%，请前往主城经验老头处用多余的经验兑换奖励喔!");
+                    return;
+                }
+            }
+
+            self.UserInfo.Exp = self.UserInfo.Exp + (int)(addValue * (1.0f + expAdd));
+
+            //判定是否升级
+            if (self.UserInfo.Lv >= serverInfo.WorldLv)
+            {
+                return;
+            }
+
+            if (self.UserInfo.Exp >= upNeedExp)
+            {
+                self.UserInfo.Exp -= upNeedExp;
+                self.UpdateRoleData(UserDataType.Lv, "1", notice);
+            }
+        }
+        
         public static void UpdateRoleData(this UserInfoComponentS self, int Type, string value, bool notice = true)
         {
             Unit unit = self.GetParent<Unit>();
@@ -402,12 +450,12 @@ namespace ET.Server
                 case UserDataType.JiaYuanLv:
                     self.UserInfo.JiaYuanLv += int.Parse(value);
                     saveValue = self.UserInfo.JiaYuanLv.ToString();
-                    // unit.GetComponent<TaskComponent>().TriggerTaskEvent(TaskTargetType.JiaYuanLevel_22, 0, self.UserInfo.JiaYuanLv - 10000);
-                    // unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanLevel_22, 0, self.UserInfo.JiaYuanLv - 10000);
-                    // unit.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.JiaYuanLevel_404, 0, self.UserInfo.JiaYuanLv - 10000);
+                    unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JiaYuanLevel_22, 0, self.UserInfo.JiaYuanLv - 10000);
+                    unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanLevel_22, 0, self.UserInfo.JiaYuanLv - 10000);
+                    unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.JiaYuanLevel_404, 0, self.UserInfo.JiaYuanLv - 10000);
                     break;
                 case UserDataType.FangRong:
-                    // LingDiHelp.OnAddLingDiExp(unit, int.Parse(value), notice);
+                    ComHelperS.OnAddLingDiExp(unit, int.Parse(value), notice);
                     break;
                 //名字应该在改名的协议处理
                 case UserDataType.Name:
@@ -415,8 +463,8 @@ namespace ET.Server
                     saveValue = self.UserInfo.Name;
                     break;
                 case UserDataType.Exp:
-                    // self.Role_AddExp(long.Parse(value), notice);
-                    //saveValue = self.UserInfo.Exp.ToString();
+                    self.Role_AddExp(long.Parse(value), notice);
+                    saveValue = self.UserInfo.Exp.ToString();
                     longValue = self.UserInfo.Exp;
                     break;
                 case UserDataType.Lv:
@@ -425,11 +473,11 @@ namespace ET.Server
                     long maxHp = unit.GetComponent<NumericComponentS>().GetAsLong((int)NumericType.Now_MaxHp);
                     unit.GetComponent<NumericComponentS>().Set(NumericType.Now_Hp, maxHp);
                     unit.GetComponent<NumericComponentS>().Set(NumericType.PointRemain, int.Parse(value) * 10);
-                    // unit.GetComponent<TaskComponent>().OnUpdateLevel(self.UserInfo.Lv);
-                    // unit.GetComponent<ChengJiuComponent>().OnUpdateLevel(self.UserInfo.Lv);
-                    // unit.GetComponent<HeroDataComponent>().CheckSeasonOpen(true);
+                    unit.GetComponent<TaskComponentS>().OnUpdateLevel(self.UserInfo.Lv);
+                    unit.GetComponent<ChengJiuComponentS>().OnUpdateLevel(self.UserInfo.Lv);
+                    unit.GetComponent<HeroDataComponentS>().CheckSeasonOpen(true);
                     self.UpdateRoleData(UserDataType.Sp, value, notice);
-                    // Function_Fight.UnitUpdateProperty_Base(unit, true, true);
+                    Function_Fight.UnitUpdateProperty_Base(unit, true, true);
                     break;
                 case UserDataType.Sp:
                     self.UserInfo.Sp += int.Parse(value);
@@ -438,8 +486,8 @@ namespace ET.Server
                 case UserDataType.Gold:
                     self.UserInfo.Gold += long.Parse(value);
                     saveValue = self.UserInfo.Gold.ToString();
-                    // unit.GetComponent<ChengJiuComponent>().OnGetGold(int.Parse(value));
-                    // unit.GetComponent<TaskComponent>().OnCostCoin(int.Parse(value));
+                    unit.GetComponent<ChengJiuComponentS>().OnGetGold(int.Parse(value));
+                    unit.GetComponent<TaskComponentS>().OnCostCoin(int.Parse(value));
                     break;
                 case UserDataType.RongYu:
                     self.UserInfo.RongYu += long.Parse(value);
@@ -452,25 +500,25 @@ namespace ET.Server
                     saveValue = self.UserInfo.Diamond.ToString();
                     if (addDiamond < 0)
                     {
-                        // unit.GetComponent<ChengJiuComponent>().OnCostDiamond(addDiamond);
-                        // unit.GetComponent<NumericComponent>().ApplyChange(null, NumericType.V1DayCostDiamond, addDiamond * -1, 0);
+                        unit.GetComponent<ChengJiuComponentS>().OnCostDiamond(addDiamond);
+                        unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.V1DayCostDiamond, addDiamond * -1, 0);
                     }
 
                     break;
                 case UserDataType.Occ:
                     break;
                 case UserDataType.InvestMent:
-                    // unit.GetComponent<NumericComponent>().ApplyChange(null, NumericType.InvestMent, long.Parse(value), 0);
-                    // unit.GetComponent<NumericComponent>().ApplyChange(null, NumericType.InvestTotal, long.Parse(value), 0);
+                    unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.InvestMent, long.Parse(value), 0);
+                    unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.InvestTotal, long.Parse(value), 0);
                     break;
                 case UserDataType.JueXingExp:
-                    // unit.GetComponent<NumericComponent>().ApplyChange(null, NumericType.JueXingExp, long.Parse(value), 0);
+                    unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.JueXingExp, long.Parse(value), 0);
                     break;
                 case UserDataType.MaoXianExp:
-                    // unit.GetComponent<NumericComponent>().ApplyChange(null, NumericType.MaoXianExp, long.Parse(value), 0);
+                    unit.GetComponent<NumericComponentS>().ApplyChange(null, NumericType.MaoXianExp, long.Parse(value), 0);
                     break;
                 case UserDataType.Recharge:
-                    // RechargeHelp.SendDiamondToUnit(unit, int.Parse(value), "道具");
+                    RechargeHelp.SendDiamondToUnit(unit, int.Parse(value), "道具");
                     break;
                 case UserDataType.PiLao:
                     if (value == "0")
@@ -478,26 +526,26 @@ namespace ET.Server
                         return;
                     }
 
-                    // int maxValue = unit.IsYueKaStates()? int.Parse(GlobalValueConfigCategory.Instance.Get(26).Value)
-                    //         : int.Parse(GlobalValueConfigCategory.Instance.Get(10).Value);
-                    // long newValue = long.Parse(value) + self.UserInfo.PiLao;
-                    // newValue = Math.Min(Math.Max(0, newValue), maxValue);
-                    // self.UserInfo.PiLao = newValue;
-                    // saveValue = self.UserInfo.PiLao.ToString();
+                    int maxValue = unit.IsYueKaStates()? int.Parse(GlobalValueConfigCategory.Instance.Get(26).Value)
+                            : int.Parse(GlobalValueConfigCategory.Instance.Get(10).Value);
+                    long newValue = long.Parse(value) + self.UserInfo.PiLao;
+                    newValue = Math.Min(Math.Max(0, newValue), maxValue);
+                    self.UserInfo.PiLao = newValue;
+                    saveValue = self.UserInfo.PiLao.ToString();
                     break;
                 case UserDataType.BaoShiDu:
                     long addValue = long.Parse(value);
-                    // newValue = self.UserInfo.BaoShiDu + (int)addValue;
-                    // newValue = Math.Min(Math.Max(0, newValue), ComHelp.GetMaxBaoShiDu());
-                    // self.UserInfo.BaoShiDu = (int)newValue;
-                    // saveValue = self.UserInfo.BaoShiDu.ToString();
-                    // unit.GetComponent<BuffManagerComponent>()?.InitBaoShiBuff();
+                    newValue = self.UserInfo.BaoShiDu + (int)addValue;
+                    newValue = Math.Min(Math.Max(0, newValue), ComHelp.GetMaxBaoShiDu());
+                    self.UserInfo.BaoShiDu = (int)newValue;
+                    saveValue = self.UserInfo.BaoShiDu.ToString();
+                    unit.GetComponent<BuffManagerComponentS>()?.InitBaoShiBuff();
                     break;
                 case UserDataType.HuoYue:
                     break;
                 case UserDataType.DungeonTimes:
-                    // unit.GetComponent<NumericComponent>().ApplyValue(NumericType.TeamDungeonTimes, unit.GetTeamDungeonTimes() - 1);
-                    // unit.GetComponent<NumericComponent>().ApplyValue(NumericType.TeamDungeonXieZhu, unit.GetTeamDungeonXieZhu() - 1);
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.TeamDungeonTimes, unit.GetTeamDungeonTimes() - 1);
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.TeamDungeonXieZhu, unit.GetTeamDungeonXieZhu() - 1);
                     self.UserInfo.DayFubenTimes.Clear();
                     break;
                 case UserDataType.UnionName:
@@ -519,13 +567,13 @@ namespace ET.Server
                     unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.CombatToValue_133, 0, self.UserInfo.Combat);
                     break;
                 case UserDataType.Vitality:
-                    // NumericComponent numericComponent = unit.GetComponent<NumericComponent>();
-                    // int skillNumber = 1 + numericComponent.GetAsInt(NumericType.MakeType_2) > 0? 1 : 0;
-                    // maxValue = unit.GetMaxHuoLi(skillNumber);
-                    // addValue = long.Parse(value);
-                    // newValue = self.UserInfo.Vitality + (int)addValue;
-                    // newValue = Math.Min(Math.Max(0, newValue), maxValue);
-                    // self.UserInfo.Vitality = (int)newValue;
+                    NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+                    int skillNumber = 1 + numericComponent.GetAsInt(NumericType.MakeType_2) > 0? 1 : 0;
+                    maxValue = unit.GetMaxHuoLi(skillNumber);
+                    addValue = long.Parse(value);
+                    newValue = self.UserInfo.Vitality + (int)addValue;
+                    newValue = Math.Min(Math.Max(0, newValue), maxValue);
+                    self.UserInfo.Vitality = (int)newValue;
                     saveValue = self.UserInfo.Vitality.ToString();
                     break;
                 case UserDataType.BuffSkill:

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-    [MessageHandler(SceneType.Center)]
+    [MessageHandler(SceneType.BigCenter)]
     public class C2Center_RegisterHandler : MessageHandler<Session, C2Center_Register, Center2C_Register>
     {
 

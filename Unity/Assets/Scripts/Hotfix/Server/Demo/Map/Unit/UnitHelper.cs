@@ -583,6 +583,19 @@ namespace ET.Server
             return sonType == 55 || sonType == 56 || sonType == 57;
         }
         
+        public static int GetTeamDungeonTimes(this Unit self)
+        {
+            NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
+            return numericComponent.GetAsInt(NumericType.TeamDungeonTimes);
+        }
+
+        public static int GetTeamDungeonXieZhu(this Unit self)
+        {
+            NumericComponentS numericComponent = self.GetComponent<NumericComponentS>();
+            return numericComponent.GetAsInt(NumericType.TeamDungeonXieZhu);
+        }
+
+        
         public static List<Unit> GetUnitListByCamp(Scene scene, int unitType, int camp)
         {
             List<Unit> units = new List<Unit>();

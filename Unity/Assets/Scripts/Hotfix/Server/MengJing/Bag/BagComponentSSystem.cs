@@ -867,7 +867,7 @@ namespace ET.Server
            }
 
            ItemConfig itemCof = ItemConfigCategory.Instance.Get(rewardItems[i].ItemID);
-           int userDataType = 0;//ItemHelper.GetItemToUserDataType(rewardItems[i].ItemID);
+           int userDataType = ItemHelper.GetItemToUserDataType(rewardItems[i].ItemID);
            if (userDataType != UserDataType.None)
            {
                continue;

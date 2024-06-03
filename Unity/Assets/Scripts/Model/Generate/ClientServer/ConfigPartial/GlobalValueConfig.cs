@@ -36,7 +36,7 @@ namespace ET
         public int GemStoreMaxCapacity = 0;
 
         public int OnLineLimit = 0;
-
+        public int MaxLevel = 70;
         public int AccountBagMax = 0;
 
         public List<DayMonsters> DayMonsterList = new List<DayMonsters>();

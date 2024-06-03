@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 
-    [MessageHandler(SceneType.Center)]
+    [MessageHandler(SceneType.BigCenter)]
     public class A2Center_RechargeRequestHandler : MessageHandler<Scene, A2Center_RechargeRequest, Center2A_RechargeResponse>
     {
         protected override async ETTask Run(Scene scene, A2Center_RechargeRequest request, Center2A_RechargeResponse response)
