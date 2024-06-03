@@ -38,25 +38,9 @@ namespace ET.Client
         {
             long instanceId = self.InstanceId;
 
-            // C2P_PaiMaiShopShowListRequest request = new();
-            // P2C_PaiMaiShopShowListResponse response =
-            //         (P2C_PaiMaiShopShowListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
-
-            // 测试数据
-            P2C_PaiMaiShopShowListResponse response = new();
-            Dictionary<int, PaiMaiSellConfig> allPaiMaiData = PaiMaiSellConfigCategory.Instance.GetAll();
-            foreach (var item in allPaiMaiData.Values)
-            {
-                response.PaiMaiShopItemInfos.Add(new PaiMaiShopItemInfo()
-                {
-                    Id = item.ItemID,
-                    BuyNum = 10,
-                    ItemNumber = 1,
-                    Price = 100,
-                    PriceType = 1
-                });
-            }
-            await ETTask.CompletedTask;
+            C2P_PaiMaiShopShowListRequest request = new();
+            P2C_PaiMaiShopShowListResponse response =
+                    (P2C_PaiMaiShopShowListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
 
             if (instanceId != self.InstanceId)
             {
