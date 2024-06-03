@@ -73,24 +73,19 @@ namespace ET.Client
 
         public static async ETTask OnUpdateListUI(this ES_UnionShow self)
         {
-            // if (self.ShowUnionListItems == null)
-            // {
-            //     C2U_UnionListRequest c2M_ItemHuiShouRequest = new();
-            //     U2C_UnionListResponse r2c_roleEquip =
-            //             (U2C_UnionListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(c2M_ItemHuiShouRequest);
-            //
-            //     if (r2c_roleEquip.Error != ErrorCode.ERR_Success)
-            //     {
-            //         return;
-            //     }
-            //
-            //     self.ShowUnionListItems = r2c_roleEquip.UnionList;
-            // }
-
-            // 测试数据
-            self.ShowUnionListItems = new List<UnionListItem>();
-            self.ShowUnionListItems.Add(new UnionListItem() { UnionName = "测试家族1" });
-            self.ShowUnionListItems.Add(new UnionListItem() { UnionName = "测试家族2" });
+            if (self.ShowUnionListItems == null)
+            {
+                C2U_UnionListRequest c2M_ItemHuiShouRequest = new();
+                U2C_UnionListResponse r2c_roleEquip =
+                        (U2C_UnionListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(c2M_ItemHuiShouRequest);
+            
+                if (r2c_roleEquip.Error != ErrorCode.ERR_Success)
+                {
+                    return;
+                }
+            
+                self.ShowUnionListItems = r2c_roleEquip.UnionList;
+            }
 
             self.ShowUnionListItems.Sort(delegate(UnionListItem a, UnionListItem b)
             {

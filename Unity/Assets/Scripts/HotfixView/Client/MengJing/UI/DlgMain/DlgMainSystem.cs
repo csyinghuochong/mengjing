@@ -303,7 +303,8 @@ namespace ET.Client
 
         private static void OnSetButton(this DlgMain self)
         {
-            self.Root().GetComponent<FlyTipComponent>().SpawnFlyTipDi("打开设置界面");
+            
+            //self.Root().GetComponent<FlyTipComponent>().SpawnFlyTipDi("打开设置界面");
         }
 
         private static void RefreshLeftUp(this DlgMain self)

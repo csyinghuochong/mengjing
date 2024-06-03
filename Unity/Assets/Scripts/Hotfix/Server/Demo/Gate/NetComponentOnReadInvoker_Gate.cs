@@ -109,7 +109,13 @@ namespace ET.Server
                         ActorId paiMaiServerID = player.PaiMaiServerID;
                         response = await root.GetComponent<MessageSender>().Call(paiMaiServerID, iPaiMaiListRequest);
                     }
-                    
+
+                    if (actorRequest is IUnionActorRequest iUnionActorRequest)
+                    {
+                        ActorId unionServerID = player.UnionServerID;
+                        response = await root.GetComponent<MessageSender>().Call(unionServerID, iUnionActorRequest);
+                    }
+
                     if (response == null)
                     {
                         break;

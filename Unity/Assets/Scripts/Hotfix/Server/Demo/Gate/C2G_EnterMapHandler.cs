@@ -50,7 +50,8 @@ namespace ET.Server
             player.MailServerID = UnitCacheHelper.GetMailServerId(session.Zone());
             player.RankServerID = UnitCacheHelper.GetRankServerId(session.Zone());
             player.PaiMaiServerID =  UnitCacheHelper.GetPaiMaiServerId(session.Zone());
-
+            player.UnionServerID = UnitCacheHelper.GetUnionServerId(session.Zone());
+            
             Unit unit = await UnitHelper.LoadUnit(player, scene, createRoleInfo, newAccountList[0].Account, request.AccountId); 
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map101");
 			response.MyId = request.UnitId;
