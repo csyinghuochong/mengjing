@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_TowerDungeon))]
+    [FriendOf(typeof (ES_TowerShop))]
     [FriendOf(typeof (DlgTower))]
     public static class DlgTowerSystem
     {
@@ -43,6 +44,7 @@ namespace ET.Client
                     self.View.ES_TowerDungeon.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
+                    self.View.ES_TowerShop.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }

@@ -11,6 +11,18 @@ namespace ET.Client
         private static void Awake(this ES_TowerDungeon self, Transform transform)
         {
             self.uiTransform = transform;
+            self.E_ButtonSelect_3Button.AddListener(() => { self.OnButtonSelect(FubenDifficulty.DiYu); });
+            self.E_ButtonSelect_2Button.AddListener(() => { self.OnButtonSelect(FubenDifficulty.TiaoZhan); });
+            self.E_ButtonSelect_1Button.AddListener(() => { self.OnButtonSelect(FubenDifficulty.Normal); });
+            self.E_Btn_EnterButton.AddListenerAsync(self.OnBtn_Enter);
+            GlobalValueConfig globalValueConfig = GlobalValueConfigCategory.Instance.Get(63);
+            string[] jianyiLevel = globalValueConfig.Value.Split(';');
+            self.E_TextLevelJianyi_1Text.text = $"建议等级达到{jianyiLevel[0]}级后进行挑战";
+            self.E_TextLevelJianyi_2Text.text = $"建议等级达到{jianyiLevel[1]}级后进行挑战";
+            self.E_TextLevelJianyi_3Text.text = $"建议等级达到{jianyiLevel[2]}级后进行挑战";
+            globalValueConfig = GlobalValueConfigCategory.Instance.Get(61);
+            self.ES_RewardList.Refresh(globalValueConfig.Value);
+            self.OnButtonSelect(FubenDifficulty.Normal);
         }
 
         [EntitySystem]
@@ -44,7 +56,7 @@ namespace ET.Client
             int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.Tower, sceneId, self.FubenDifficulty);
             if (errorCode == ErrorCode.ERR_Success)
             {
-                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Tower);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgHuoBiSet>().OnClose();
             }
         }
     }
