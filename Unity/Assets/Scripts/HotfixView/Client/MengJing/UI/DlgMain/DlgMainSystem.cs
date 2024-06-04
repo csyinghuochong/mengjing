@@ -303,7 +303,6 @@ namespace ET.Client
 
         private static void OnSetButton(this DlgMain self)
         {
-            
             //self.Root().GetComponent<FlyTipComponent>().SpawnFlyTipDi("打开设置界面");
         }
 
@@ -571,7 +570,7 @@ namespace ET.Client
                 return;
             }
 
-            self.Root().GetComponent<ClientSenderCompnent>().Send(new C2M_Stop());
+            MoveHelper.Stop(self.Root());
         }
 
         private static void SendMove(this DlgMain self, int direction)
@@ -623,9 +622,7 @@ namespace ET.Client
 
             //MapHelper.LogMoveInfo($"移动发送请求: {TimeHelper.ServerNow()}");
 
-            C2M_PathfindingResult c2MPathfindingResult = new();
-            c2MPathfindingResult.Position = newv3;
-            self.Root().GetComponent<ClientSenderCompnent>().Send(c2MPathfindingResult);
+            self.MainUnit.MoveToAsync(newv3).Coroutine();
             // unit.MoveByYaoGan(newv3, direction, distance, null).Coroutine();
 
             self.lastSendTime = clientNow;
@@ -768,7 +765,7 @@ namespace ET.Client
             // }
 
             //MapHelper.LogMoveInfo($"移动摇杆停止: {TimeHelper.ServerNow()}");
-            self.Root().GetComponent<ClientSenderCompnent>().Send(new C2M_Stop());
+            MoveHelper.Stop(self.Root());
         }
 
         private static void EndDrag_Old(this DlgMain self, PointerEventData pdata)
@@ -879,7 +876,7 @@ namespace ET.Client
             {
                 return;
             }
-            
+
             List<Unit> allUnit = main.GetParent<UnitComponent>().GetAll();
 
             int teamNumber = 0;
