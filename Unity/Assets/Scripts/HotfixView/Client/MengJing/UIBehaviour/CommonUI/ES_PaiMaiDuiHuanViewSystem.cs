@@ -32,8 +32,7 @@ namespace ET.Client
         public static async ETTask Init(this ES_PaiMaiDuiHuan self)
         {
             //初始化兑换值
-            C2R_DBServerInfoRequest request = new();
-            R2C_DBServerInfoResponse response = (R2C_DBServerInfoResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            R2C_DBServerInfoResponse response = await PaiMaiNetHelper.DBServerInfo(self.Root());
             if (self.IsDisposed)
             {
                 return;

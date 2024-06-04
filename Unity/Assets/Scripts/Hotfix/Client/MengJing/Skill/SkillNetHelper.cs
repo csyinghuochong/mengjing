@@ -153,5 +153,18 @@ namespace ET.Client
 
             return response;
         }
+
+        public static async ETTask<M2C_MakeLearnResponse> MakeLearn(Scene root, int makeId, int plan)
+        {
+            C2M_MakeLearnRequest request = new() { MakeId = makeId, Plan = plan };
+            M2C_MakeLearnResponse response =
+                    (M2C_MakeLearnResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            if (response.Error == 0)
+            {
+                root.GetComponent<UserInfoComponentC>().UserInfo.MakeList.Add(makeId);
+            }
+
+            return response;
+        }
     }
 }

@@ -565,5 +565,12 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<M2C_ChouKaResponse> ChouKa(Scene root, int chapterId, int chouKaType)
+        {
+            C2M_ChouKaRequest request = new() { ChapterId = chapterId, ChouKaType = chouKaType };
+            M2C_ChouKaResponse response = (M2C_ChouKaResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

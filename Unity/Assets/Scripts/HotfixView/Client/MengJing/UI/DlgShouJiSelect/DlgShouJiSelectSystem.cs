@@ -72,8 +72,7 @@ namespace ET.Client
             }
 
             long instanceId = self.InstanceId;
-            C2M_ShouJiTreasureRequest request = new() { ItemIds = selects, ShouJiId = self.ShouJIId };
-            M2C_ShouJiTreasureResponse response = (M2C_ShouJiTreasureResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_ShouJiTreasureResponse response = await ShoujiNetHelper.ShouJiTreasure(self.Root(), selects, self.ShouJIId);
 
             if (instanceId != self.InstanceId)
             {

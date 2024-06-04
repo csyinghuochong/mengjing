@@ -146,9 +146,7 @@ namespace ET.Client
 
         public static async ETTask OnBtn_ChouKaOne(this DlgChouKa self, int times)
         {
-            C2M_ChouKaRequest request = new() { ChapterId = self.TakeCardId, ChouKaType = times };
-            M2C_ChouKaResponse response =
-                    (M2C_ChouKaResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_ChouKaResponse response = await BagClientNetHelper.ChouKa(self.Root(), self.TakeCardId, times);
             if (response.Error != 0)
             {
                 return;

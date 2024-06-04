@@ -34,8 +34,8 @@ namespace ET.Client
         public static async ETTask OnUpdateUI(this ES_RankPet self)
         {
             long instacnid = self.InstanceId;
-            C2R_RankPetListRequest request = new() { UserId = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId };
-            R2C_RankPetListResponse response = (R2C_RankPetListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            R2C_RankPetListResponse response =
+                    await RankNetHelper.RankPetList(self.Root(), self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId);
             if (instacnid != self.InstanceId)
             {
                 return;
@@ -77,9 +77,7 @@ namespace ET.Client
                 return;
             }
 
-            C2M_FubenTimesResetRequest request = new() { SceneType = SceneTypeEnum.PetTianTi };
-            M2C_FubenTimesResetResponse response =
-                    (M2C_FubenTimesResetResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_FubenTimesResetResponse response = await RankNetHelper.FubenTimesReset(self.Root(), SceneTypeEnum.PetTianTi);
             if (response.Error != 0)
             {
                 return;

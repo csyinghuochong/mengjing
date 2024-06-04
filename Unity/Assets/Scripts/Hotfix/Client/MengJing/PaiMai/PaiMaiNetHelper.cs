@@ -60,5 +60,29 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<M2C_PaiMaiBuyResponse> PaiMaiBuy(Scene root, PaiMaiItemInfo paiMaiItemInfo, int buyNum)
+        {
+            C2M_PaiMaiBuyRequest request = new() { PaiMaiItemInfo = paiMaiItemInfo, BuyNum = buyNum };
+            M2C_PaiMaiBuyResponse response = (M2C_PaiMaiBuyResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
+
+        public static async ETTask<R2C_DBServerInfoResponse> DBServerInfo(Scene root)
+        {
+            C2R_DBServerInfoRequest request = new();
+            R2C_DBServerInfoResponse response = (R2C_DBServerInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
+
+        public static async ETTask<M2C_PaiMaiSellResponse> PaiMaiSell(Scene root, PaiMaiItemInfo paiMaiItemInfo)
+        {
+            C2M_PaiMaiSellRequest request = new() { PaiMaiItemInfo = paiMaiItemInfo };
+            M2C_PaiMaiSellResponse response = (M2C_PaiMaiSellResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
     }
 }

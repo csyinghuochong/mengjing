@@ -129,8 +129,7 @@ namespace ET.Client
             }
 
             long instanceid = self.InstanceId;
-            C2M_PaiMaiSellRequest request = new() { PaiMaiItemInfo = paiMaiItemInfo };
-            M2C_PaiMaiSellResponse response = (M2C_PaiMaiSellResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_PaiMaiSellResponse response = await PaiMaiNetHelper.PaiMaiSell(self.Root(), paiMaiItemInfo);
             if (instanceid != self.InstanceId || response.Error != ErrorCode.ERR_Success)
             {
                 return;

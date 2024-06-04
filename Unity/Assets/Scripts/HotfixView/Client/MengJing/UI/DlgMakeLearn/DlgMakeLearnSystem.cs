@@ -25,7 +25,7 @@ namespace ET.Client
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
             uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
             uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
-            
+
             self.MakeId = 0;
             self.MakeType = 1;
             self.OnBtn_Plan(1);
@@ -84,10 +84,7 @@ namespace ET.Client
                 return;
             }
 
-            C2M_MakeSelectRequest request = new() { MakeType = makeId, Plan = self.Plan == -1? 1 : self.Plan };
-            M2C_MakeSelectResponse response = (M2C_MakeSelectResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
-            self.Root().GetComponent<UserInfoComponentC>().UserInfo.MakeList.Clear();
-            self.Root().GetComponent<UserInfoComponentC>().UserInfo.MakeList = response.MakeList;
+            await SkillNetHelper.MakeSelect(self.Root(), makeId, self.Plan == -1? 1 : self.Plan);
             self.CheckMakeType();
         }
 
@@ -253,12 +250,9 @@ namespace ET.Client
                 return;
             }
 
-            C2M_MakeLearnRequest request = new() { MakeId = self.MakeId, Plan = self.Plan };
-            M2C_MakeLearnResponse response =
-                    (M2C_MakeLearnResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_MakeLearnResponse response = await SkillNetHelper.MakeLearn(self.Root(), self.MakeId, self.Plan);
             if (response.Error == 0)
             {
-                userInfoComponent.UserInfo.MakeList.Add(self.MakeId);
                 self.InitData(self.MakeType);
                 FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("学习配方成功!"));
             }

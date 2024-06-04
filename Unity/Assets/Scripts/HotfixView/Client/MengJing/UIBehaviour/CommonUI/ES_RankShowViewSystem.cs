@@ -50,9 +50,8 @@ namespace ET.Client
         private static async ETTask OnUpdateUI(this ES_RankShow self, int type = 0)
         {
             long instanceid = self.InstanceId;
-            C2R_RankListRequest request = new();
-            R2C_RankListResponse response = (R2C_RankListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
 
+            R2C_RankListResponse response = await RankNetHelper.RankList(self.Root());
             if (instanceid != self.InstanceId)
             {
                 return;

@@ -60,8 +60,7 @@ namespace ET.Client
                 return;
             }
 
-            C2M_PaiMaiBuyRequest request = new() { PaiMaiItemInfo = self.PaiMaiItemInfo, BuyNum = self.BuyNum };
-            M2C_PaiMaiBuyResponse response = (M2C_PaiMaiBuyResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_PaiMaiBuyResponse response = await PaiMaiNetHelper.PaiMaiBuy(self.Root(), self.PaiMaiItemInfo, self.BuyNum);
 
             if (response.Error != ErrorCode.ERR_Success)
             {
