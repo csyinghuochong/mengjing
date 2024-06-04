@@ -60,7 +60,7 @@ namespace ET.Client
                 return;
             }
 
-            M2C_PaiMaiBuyResponse response = await PaiMaiNetHelper.PaiMaiBuy(self.Root(), self.PaiMaiItemInfo, self.BuyNum);
+            M2C_PaiMaiBuyResponse response = await PaiMaiNetHelper.PaiMaiBuy(self.Root(), self.PaiMaiItemInfo, self.BuyNum, 0);
 
             if (response.Error != ErrorCode.ERR_Success)
             {
