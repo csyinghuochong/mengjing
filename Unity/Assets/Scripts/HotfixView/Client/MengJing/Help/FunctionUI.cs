@@ -87,7 +87,7 @@ namespace ET.Client
                 "UIGemMake" => WindowID.WindowID_GemMake,
                 "UIShenQiMake" => WindowID.WindowID_ShenQiMake,
                 "UIShouJi" => WindowID.WindowID_ShouJi,
-                "UITower" => WindowID.WindowID_Tower,
+                "UITowerDungeon" => WindowID.WindowID_Tower,
                 _ => WindowID.WindowID_Invaild
             };
         }

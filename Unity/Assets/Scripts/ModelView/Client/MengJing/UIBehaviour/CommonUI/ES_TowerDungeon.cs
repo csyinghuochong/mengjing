@@ -7,6 +7,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_TowerDungeon : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public int FubenDifficulty;
+		
 		public UnityEngine.UI.Button E_Btn_EnterButton
      	{
      		get
