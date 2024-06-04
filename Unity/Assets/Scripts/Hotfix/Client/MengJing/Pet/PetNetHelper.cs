@@ -304,9 +304,17 @@ namespace ET.Client
             {
                 return response.Error;
             }
-            
+
             root.GetComponent<PetComponentC>().RequestPetFormationSet(sceneType, petList, null);
-            
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> PetFragmentDuiHuan(Scene root)
+        {
+            C2M_PetFragmentDuiHuan request = new();
+            M2C_PetFragmentDuiHuan response = (M2C_PetFragmentDuiHuan)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
             return response.Error;
         }
     }

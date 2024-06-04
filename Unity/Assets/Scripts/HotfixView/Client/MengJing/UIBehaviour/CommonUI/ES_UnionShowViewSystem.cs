@@ -75,16 +75,14 @@ namespace ET.Client
         {
             if (self.ShowUnionListItems == null)
             {
-                C2U_UnionListRequest c2M_ItemHuiShouRequest = new();
-                U2C_UnionListResponse r2c_roleEquip =
-                        (U2C_UnionListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(c2M_ItemHuiShouRequest);
-            
-                if (r2c_roleEquip.Error != ErrorCode.ERR_Success)
+                U2C_UnionListResponse response = await UnionNetHelper.UnionList(self.Root());
+
+                if (response.Error != ErrorCode.ERR_Success)
                 {
                     return;
                 }
-            
-                self.ShowUnionListItems = r2c_roleEquip.UnionList;
+
+                self.ShowUnionListItems = response.UnionList;
             }
 
             self.ShowUnionListItems.Sort(delegate(UnionListItem a, UnionListItem b)

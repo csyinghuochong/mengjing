@@ -572,5 +572,34 @@ namespace ET.Client
             M2C_ChouKaResponse response = (M2C_ChouKaResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_ItemXiLianTransferResponse> ItemXiLianTransfer(Scene root, long operateBagID_1, long operateBagID_2)
+        {
+            C2M_ItemXiLianTransferRequest request = new() { OperateBagID_1 = operateBagID_1, OperateBagID_2 = operateBagID_2 };
+            M2C_ItemXiLianTransferResponse response =
+                    (M2C_ItemXiLianTransferResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<M2C_ChouKaRewardResponse> ChouKaReward(Scene root, int rewardId)
+        {
+            C2M_ChouKaRewardRequest request = new() { RewardId = rewardId };
+            M2C_ChouKaRewardResponse response =
+                    (M2C_ChouKaRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                root.GetComponent<UserInfoComponentC>().UserInfo.ChouKaRewardIds.Add(rewardId);
+            }
+
+            return response;
+        }
+
+        public static async ETTask<M2C_RoleAddPointResponse> RoleAddPoint(Scene root, List<int> pointList)
+        {
+            C2M_RoleAddPointRequest request = new() { PointList = pointList };
+            M2C_RoleAddPointResponse response = (M2C_RoleAddPointResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

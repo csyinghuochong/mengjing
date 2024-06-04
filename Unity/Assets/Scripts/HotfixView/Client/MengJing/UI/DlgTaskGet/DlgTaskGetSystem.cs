@@ -230,8 +230,7 @@ namespace ET.Client
 
         public static async ETTask RequestFramegeDuiHuan(this DlgTaskGet self)
         {
-            C2M_PetFragmentDuiHuan c2M_PetDui = new();
-            M2C_PetFragmentDuiHuan m2C_PetDui = (M2C_PetFragmentDuiHuan)await self.Root().GetComponent<ClientSenderCompnent>().Call(c2M_PetDui);
+            await PetNetHelper.PetFragmentDuiHuan(self.Root());
         }
 
         public static void OnClickBuChangItem(this DlgTaskGet self, long userid)

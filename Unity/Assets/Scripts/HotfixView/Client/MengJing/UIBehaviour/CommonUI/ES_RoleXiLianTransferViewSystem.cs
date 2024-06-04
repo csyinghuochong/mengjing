@@ -94,12 +94,8 @@ namespace ET.Client
                 return;
             }
 
-            C2M_ItemXiLianTransferRequest request = new()
-            {
-                OperateBagID_1 = self.BagInfo_Transfer[0].BagInfoID, OperateBagID_2 = self.BagInfo_Transfer[1].BagInfoID
-            };
             M2C_ItemXiLianTransferResponse response =
-                    (M2C_ItemXiLianTransferResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+                    await BagClientNetHelper.ItemXiLianTransfer(self.Root(), self.BagInfo_Transfer[0].BagInfoID, self.BagInfo_Transfer[1].BagInfoID);
             if (response.Error != ErrorCode.ERR_Success)
             {
                 return;

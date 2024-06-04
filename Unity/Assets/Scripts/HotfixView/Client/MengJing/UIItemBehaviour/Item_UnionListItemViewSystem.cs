@@ -38,8 +38,7 @@ namespace ET.Client
                 return;
             }
 
-            C2U_UnionApplyRequest request = new() { UnionId = self.UnionListItem.UnionId, UserId = unit.Id };
-            U2C_UnionApplyResponse response = (U2C_UnionApplyResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            await UnionNetHelper.UnionApply(self.Root(), self.UnionListItem.UnionId, unit.Id);
             if (self.IsDisposed)
             {
                 return;

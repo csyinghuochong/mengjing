@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    
     [FriendOf(typeof (UserInfoComponentC))]
     [EntitySystemOf(typeof (ES_RoleProperty))]
     [FriendOfAttribute(typeof (ES_RoleProperty))]
@@ -270,9 +269,7 @@ namespace ET.Client
         {
             self.Root().GetComponent<FlyTipComponent>().SpawnFlyTipDi("确认加点");
             long instanceId = self.InstanceId;
-            C2M_RoleAddPointRequest request = new() { PointList = self.PointList };
-            M2C_RoleAddPointResponse response =
-                    (M2C_RoleAddPointResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            await BagClientNetHelper.RoleAddPoint(self.Root(), self.PointList);
             if (instanceId != self.InstanceId)
             {
                 return;

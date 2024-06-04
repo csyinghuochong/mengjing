@@ -41,14 +41,7 @@ namespace ET.Client
                 return;
             }
 
-            C2M_ChouKaRewardRequest request = new() { RewardId = self.TakeCardRewardConfig.Id };
-            M2C_ChouKaRewardResponse response =
-                    (M2C_ChouKaRewardResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
-
-            if (response.Error == ErrorCode.ERR_Success)
-            {
-                userInfoComponent.UserInfo.ChouKaRewardIds.Add(self.TakeCardRewardConfig.Id);
-            }
+            await BagClientNetHelper.ChouKaReward(self.Root(), self.TakeCardRewardConfig.Id);
 
             self.UpdateButton();
         }

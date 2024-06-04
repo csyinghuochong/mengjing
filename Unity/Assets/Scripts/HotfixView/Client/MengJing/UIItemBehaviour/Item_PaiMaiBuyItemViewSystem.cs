@@ -35,12 +35,9 @@ namespace ET.Client
             long instanceId = self.InstanceId;
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
-            C2M_PaiMaiBuyRequest request = new()
-            {
-                PaiMaiItemInfo = self.PaiMaiItemInfo, IsRecharge = numericComponent.GetAsInt(NumericType.RechargeNumber)
-            };
+
             M2C_PaiMaiBuyResponse response =
-                    (M2C_PaiMaiBuyResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+                    await PaiMaiNetHelper.PaiMaiBuy(self.Root(), self.PaiMaiItemInfo, 0, numericComponent.GetAsInt(NumericType.RechargeNumber));
             if (instanceId != self.InstanceId)
             {
                 return;
