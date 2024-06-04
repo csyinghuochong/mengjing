@@ -24,6 +24,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_TrialDungeon ES_TrialDungeon
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_trialdungeon == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_TrialDungeon");
+		    	   this.m_es_trialdungeon = this.AddChild<ES_TrialDungeon,Transform>(subTrans);
+     			}
+     			return this.m_es_trialdungeon;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -78,6 +96,7 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
+			this.m_es_trialdungeon = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_0Toggle = null;
 			this.m_E_1Toggle = null;
@@ -85,6 +104,7 @@ namespace ET.Client
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
+		private EntityRef<ES_TrialDungeon> m_es_trialdungeon = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_0Toggle = null;
 		private UnityEngine.UI.Toggle m_E_1Toggle = null;
