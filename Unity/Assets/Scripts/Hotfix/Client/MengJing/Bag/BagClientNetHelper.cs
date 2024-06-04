@@ -601,5 +601,40 @@ namespace ET.Client
             M2C_RoleAddPointResponse response = (M2C_RoleAddPointResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_ItemInheritResponse> ItemInherit(Scene root, long operateBagID)
+        {
+            C2M_ItemInheritRequest request = new() { OperateBagID = operateBagID };
+            M2C_ItemInheritResponse response = (M2C_ItemInheritResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<M2C_ItemInheritSelectResponse> ItemInheritSelect(Scene root, long operateBagID, List<int> inheritSkills)
+        {
+            C2M_ItemInheritSelectRequest request = new() { OperateBagID = operateBagID, InheritSkills = inheritSkills };
+            M2C_ItemInheritSelectResponse response = (M2C_ItemInheritSelectResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<M2C_PetTargetLockResponse> PetTargetLock(Scene root, long targetId)
+        {
+            C2M_PetTargetLockRequest request = new() { TargetId = targetId };
+            M2C_PetTargetLockResponse response = (M2C_PetTargetLockResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<M2C_ItemEquipIndexResponse> ItemEquipIndex(Scene root, int equipIndex)
+        {
+            C2M_ItemEquipIndexRequest request = new() { EquipIndex = equipIndex };
+            M2C_ItemEquipIndexResponse response = (M2C_ItemEquipIndexResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<M2C_JingLingDropResponse> JingLingDrop(Scene root)
+        {
+            C2M_JingLingDropRequest request = new();
+            M2C_JingLingDropResponse response = (M2C_JingLingDropResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

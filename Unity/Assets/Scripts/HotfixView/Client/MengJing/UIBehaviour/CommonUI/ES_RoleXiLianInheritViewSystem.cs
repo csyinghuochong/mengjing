@@ -201,8 +201,7 @@ namespace ET.Client
                 return;
             }
 
-            C2M_ItemInheritRequest request = new() { OperateBagID = bagInfo.BagInfoID };
-            M2C_ItemInheritResponse response = (M2C_ItemInheritResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_ItemInheritResponse response = await BagClientNetHelper.ItemInherit(self.Root(), bagInfo.BagInfoID);
             if (response.Error != 0)
             {
                 return;
@@ -225,9 +224,7 @@ namespace ET.Client
                 return;
             }
 
-            C2M_ItemInheritSelectRequest request = new() { OperateBagID = bagInfo.BagInfoID, InheritSkills = self.InheritSkills };
-            M2C_ItemInheritSelectResponse response =
-                    (M2C_ItemInheritSelectResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            await BagClientNetHelper.ItemInheritSelect(self.Root(), bagInfo.BagInfoID, self.InheritSkills);
 
             self.OnXiLianReturn();
         }

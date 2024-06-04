@@ -104,9 +104,7 @@ namespace ET.Client
                 return;
             }
 
-            C2U_UnionOperatateRequest c2M_ItemHuiShouRequest = new() { UnionId = self.UnionInfo.UnionId, Operatate = 2, Value = text };
-            U2C_UnionOperatateResponse r2c_roleEquip =
-                    (U2C_UnionOperatateResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(c2M_ItemHuiShouRequest);
+            await UnionNetHelper.UnionOperatate(self.Root(), self.UnionInfo.UnionId, 2, text);
             self.UnionInfo.UnionPurpose = text;
             self.E_Text_PurposeText.text = text;
             self.OnShowModify(false);
@@ -146,13 +144,9 @@ namespace ET.Client
                 return;
             }
 
-            C2U_UnionOperatateRequest c2M_ItemHuiShouRequest = new() { UnionId = self.UnionInfo.UnionId, Operatate = 1, Value = text };
-            U2C_UnionOperatateResponse r2c_roleEquip =
-                    (U2C_UnionOperatateResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(c2M_ItemHuiShouRequest);
+            await UnionNetHelper.UnionOperatate(self.Root(), self.UnionInfo.UnionId, 1, text);
             self.UnionInfo.UnionName = text;
             self.E_Text_UnionNameText.text = self.UnionInfo.UnionName;
-
-            await ETTask.CompletedTask;
         }
 
         public static void OnButtonLeave(this ES_UnionMy self)
@@ -175,11 +169,7 @@ namespace ET.Client
 
         public static async ETTask RequestLevelUnion(this ES_UnionMy self)
         {
-            C2M_UnionLeaveRequest c2M_ItemHuiShouRequest = new();
-            M2C_UnionLeaveResponse r2c_roleEquip =
-                    (M2C_UnionLeaveResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(c2M_ItemHuiShouRequest);
-
-            await ETTask.CompletedTask;
+            await UnionNetHelper.UnionLeave(self.Root());
         }
 
         public static async ETTask OnButtonApplyList(this ES_UnionMy self)
@@ -215,21 +205,20 @@ namespace ET.Client
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             long unionId = (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0));
-            C2U_UnionMyInfoRequest c2M_ItemHuiShouRequest = new() { UnionId = unionId };
-            U2C_UnionMyInfoResponse r2c_roleEquip =
-                    (U2C_UnionMyInfoResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(c2M_ItemHuiShouRequest);
 
-            self.UnionInfo = r2c_roleEquip.UnionMyInfo;
-            self.OnLinePlayer = r2c_roleEquip.OnLinePlayer;
-            self.E_Text_LevelText.text = $"{r2c_roleEquip.UnionMyInfo.Level}";
-            if (UnionConfigCategory.Instance.Contain(r2c_roleEquip.UnionMyInfo.Level))
+            U2C_UnionMyInfoResponse response = await UnionNetHelper.UnionMyInfo(self.Root(), unionId);
+
+            self.UnionInfo = response.UnionMyInfo;
+            self.OnLinePlayer = response.OnLinePlayer;
+            self.E_Text_LevelText.text = $"{response.UnionMyInfo.Level}";
+            if (UnionConfigCategory.Instance.Contain(response.UnionMyInfo.Level))
             {
-                UnionConfig unionConfig = UnionConfigCategory.Instance.Get(r2c_roleEquip.UnionMyInfo.Level);
-                self.E_Text_ExpText.text = $"{r2c_roleEquip.UnionMyInfo.Exp}/{unionConfig.Exp}";
-                if (r2c_roleEquip.UnionMyInfo.UnionGold <= unionConfig.UnionGoldLimit)
+                UnionConfig unionConfig = UnionConfigCategory.Instance.Get(response.UnionMyInfo.Level);
+                self.E_Text_ExpText.text = $"{response.UnionMyInfo.Exp}/{unionConfig.Exp}";
+                if (response.UnionMyInfo.UnionGold <= unionConfig.UnionGoldLimit)
                 {
                     self.E_Text_UnionGoldText.text =
-                            $"{r2c_roleEquip.UnionMyInfo.UnionGold / 10000f:0.#}万/{unionConfig.UnionGoldLimit / 10000f:0.#}万";
+                            $"{response.UnionMyInfo.UnionGold / 10000f:0.#}万/{unionConfig.UnionGoldLimit / 10000f:0.#}万";
                 }
                 else
                 {
@@ -263,10 +252,8 @@ namespace ET.Client
             //客户端获取家族等级
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             long unionId = (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0));
-            C2U_UnionMyInfoRequest request = new() { UnionId = unionId };
-            U2C_UnionMyInfoResponse respose =
-                    (U2C_UnionMyInfoResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
-            if (respose.Error != ErrorCode.ERR_Success)
+            U2C_UnionMyInfoResponse response = await UnionNetHelper.UnionMyInfo(self.Root(), unionId);
+            if (response.Error != ErrorCode.ERR_Success)
             {
                 return;
             }

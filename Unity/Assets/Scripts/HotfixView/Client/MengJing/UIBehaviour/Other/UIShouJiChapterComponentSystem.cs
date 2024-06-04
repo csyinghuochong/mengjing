@@ -107,31 +107,7 @@ namespace ET.Client
                 return;
             }
 
-            self.ReqestShoujiReward(self.ChapterId, index).Coroutine();
-        }
-
-        public static async ETTask<int> ReqestShoujiReward(this UIShouJiChapterComponent self, int chapterId, int index)
-        {
-            try
-            {
-                C2M_ShoujiRewardRequest request = new() { ChapterId = chapterId, RewardIndex = index };
-                M2C_ShoujiRewardResponse response = (M2C_ShoujiRewardResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
-
-                if (response.Error == ErrorCode.ERR_Success)
-                {
-                    ShoujiComponentC shoujiComponent = self.Root().GetComponent<ShoujiComponentC>();
-                    ShouJiChapterInfo shouJiChapterInfo = shoujiComponent.GetShouJiChapterInfo(chapterId);
-                    shouJiChapterInfo.RewardInfo |= (1 << index);
-                }
-
-                return response.Error;
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex.ToString());
-            }
-
-            return ErrorCode.ERR_NetWorkError;
+            ShoujiNetHelper.ShoujiReward(self.Root(), self.ChapterId, index).Coroutine();
         }
 
         public static void UpdateStarInfo(this UIShouJiChapterComponent self, ShouJiConfig shouJiConfig)

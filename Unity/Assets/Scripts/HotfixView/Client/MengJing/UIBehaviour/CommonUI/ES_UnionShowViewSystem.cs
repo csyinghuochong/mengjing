@@ -184,10 +184,8 @@ namespace ET.Client
             //     return;
             // }
 
-            C2M_UnionCreateRequest c2M_ItemHuiShouRequest = new() { UnionName = unionName, UnionPurpose = purpose };
-            M2C_UnionCreateResponse r2c_roleEquip =
-                    (M2C_UnionCreateResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(c2M_ItemHuiShouRequest);
-            if (r2c_roleEquip.Error != ErrorCode.ERR_Success)
+            M2C_UnionCreateResponse response = await UnionNetHelper.UnionCreate(self.Root(), unionName, purpose);
+            if (response.Error != ErrorCode.ERR_Success)
             {
                 return;
             }

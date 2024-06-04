@@ -17,5 +17,33 @@ namespace ET.Client
             U2C_UnionListResponse response = (U2C_UnionListResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_UnionCreateResponse> UnionCreate(Scene root, string unionName, string unionPurpose)
+        {
+            C2M_UnionCreateRequest request = new() { UnionName = unionName, UnionPurpose = unionPurpose };
+            M2C_UnionCreateResponse response = (M2C_UnionCreateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<U2C_UnionOperatateResponse> UnionOperatate(Scene root, long unionId, int operatate, string value)
+        {
+            C2U_UnionOperatateRequest request = new() { UnionId = unionId, Operatate = operatate, Value = value };
+            U2C_UnionOperatateResponse response = (U2C_UnionOperatateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<M2C_UnionLeaveResponse> UnionLeave(Scene root)
+        {
+            C2M_UnionLeaveRequest request = new();
+            M2C_UnionLeaveResponse response = (M2C_UnionLeaveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<U2C_UnionMyInfoResponse> UnionMyInfo(Scene root, long unionId)
+        {
+            C2U_UnionMyInfoRequest request = new() { UnionId = unionId };
+            U2C_UnionMyInfoResponse response = (U2C_UnionMyInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

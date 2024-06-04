@@ -11,5 +11,20 @@ namespace ET.Client
 
             return response;
         }
+
+        public static async ETTask<M2C_ShoujiRewardResponse> ShoujiReward(Scene root, int chapterId, int rewardIndex)
+        {
+            C2M_ShoujiRewardRequest request = new() { ChapterId = chapterId, RewardIndex = rewardIndex };
+            M2C_ShoujiRewardResponse response = (M2C_ShoujiRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                ShoujiComponentC shoujiComponent = root.GetComponent<ShoujiComponentC>();
+                ShouJiChapterInfo shouJiChapterInfo = shoujiComponent.GetShouJiChapterInfo(chapterId);
+                shouJiChapterInfo.RewardInfo |= (1 << rewardIndex);
+            }
+
+            return response;
+        }
     }
 }

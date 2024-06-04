@@ -72,8 +72,7 @@ namespace ET.Client
                 return;
             }
 
-            C2M_PetTargetLockRequest request = new C2M_PetTargetLockRequest() { TargetId = lockId };
-            M2C_PetTargetLockResponse response = (M2C_PetTargetLockResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            await BagClientNetHelper.PetTargetLock(self.Root(), lockId);
         }
 
         public static async ETTask OnButton_Switch(this ES_MainSkill self)
@@ -95,10 +94,9 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             int equipIndex = numericComponent.GetAsInt(NumericType.EquipIndex);
-            C2M_ItemEquipIndexRequest m_ItemOperateWear = new C2M_ItemEquipIndexRequest() { EquipIndex = equipIndex == 0? 1 : 0 };
-            M2C_ItemEquipIndexResponse r2c_roleEquip =
-                    (M2C_ItemEquipIndexResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(m_ItemOperateWear);
-            if (self.IsDisposed || r2c_roleEquip.Error > 0)
+
+            M2C_ItemEquipIndexResponse response = await BagClientNetHelper.ItemEquipIndex(self.Root(), equipIndex == 0? 1 : 0);
+            if (self.IsDisposed || response.Error > 0)
             {
                 return;
             }
@@ -241,9 +239,7 @@ namespace ET.Client
                         return;
                     }
 
-                    C2M_JingLingDropRequest request = new C2M_JingLingDropRequest();
-                    M2C_JingLingDropResponse response =
-                            (M2C_JingLingDropResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+                    await BagClientNetHelper.JingLingDrop(self.Root());
                     chengJiuComponent.RandomDrop = 1;
                     self.CheckJingLingFunction();
                     break;
