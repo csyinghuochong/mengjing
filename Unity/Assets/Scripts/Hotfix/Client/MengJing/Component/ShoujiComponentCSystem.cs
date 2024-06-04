@@ -72,5 +72,19 @@ namespace ET.Client
 
             return shouJiChapterInfo.ShouJiItemList.Contains(itemId);
         }
+
+        public static KeyValuePairInt GetTreasureInfo(this ShoujiComponentC self, int shoujiId)
+        {
+            KeyValuePairInt keyValuePairInt = null;
+            for (int i = 0; i < self.TreasureInfo.Count; i++)
+            {
+                if (self.TreasureInfo[i].KeyId == shoujiId)
+                {
+                    keyValuePairInt = self.TreasureInfo[i];
+                }
+            }
+
+            return keyValuePairInt;
+        }
     }
 }
