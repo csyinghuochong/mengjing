@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_TrialDungeon))]
+    [FriendOf(typeof (ES_TrialRank))]
     [FriendOf(typeof (DlgTrial))]
     public static class DlgTrialSystem
     {
@@ -43,6 +44,7 @@ namespace ET.Client
                     self.View.ES_TrialDungeon.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
+                    self.View.ES_TrialRank.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
