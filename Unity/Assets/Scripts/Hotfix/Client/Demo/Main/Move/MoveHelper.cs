@@ -13,24 +13,30 @@ namespace ET.Client
             unit.Root().GetComponent<ClientSenderCompnent>().Send(msg);
 
             ObjectWait objectWait = unit.GetComponent<ObjectWait>();
-            
+
             // 要取消上一次的移动协程
             objectWait.Notify(new Wait_UnitStop() { Error = WaitTypeError.Cancel });
-            
+
             // 一直等到unit发送stop
             Wait_UnitStop waitUnitStop = await objectWait.Wait<Wait_UnitStop>(cancellationToken);
             if (cancellationToken.IsCancel())
             {
                 return WaitTypeError.Cancel;
             }
+
             return waitUnitStop.Error;
         }
-        
+
         public static async ETTask MoveToAsync(this Unit unit, List<float3> path)
         {
             float speed = unit.GetComponent<NumericComponentC>().GetAsFloat(NumericType.Now_Speed);
             MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
             await moveComponent.MoveToAsync(path, speed);
+        }
+
+        public static void Stop(Scene root)
+        {
+            root.GetComponent<ClientSenderCompnent>().Send(new C2M_Stop());
         }
     }
 }

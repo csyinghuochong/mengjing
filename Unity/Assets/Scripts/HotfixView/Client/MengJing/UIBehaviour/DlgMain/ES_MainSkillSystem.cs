@@ -430,7 +430,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
             if (!unit.GetComponent<MoveComponent>().IsArrived())
             {
-                self.Root().GetComponent<ClientSenderCompnent>().Send(new C2M_Stop());
+                MoveHelper.Stop(self.Root());
             }
 
             unit.GetComponent<FsmComponent>().ChangeState(FsmStateEnum.FsmShiQuItem);
