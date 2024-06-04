@@ -28,17 +28,19 @@ namespace ET
 
         public static int GetFirstTowerIdByScene(int sceneType)
         {
-            int towerId = 0;    
+            int towerId = 0;
             List<TowerConfig> towerConfigs = TowerConfigCategory.Instance.GetAll().Values.ToList();
             for (int i = 0; i < towerConfigs.Count; i++)
             {
-                if (towerConfigs[i].MapType!=sceneType)
+                if (towerConfigs[i].MapType != sceneType)
                 {
                     continue;
                 }
+
                 towerId = towerConfigs[i].Id;
                 break;
             }
+
             return towerId;
         }
 
@@ -52,8 +54,10 @@ namespace ET
                 {
                     continue;
                 }
-                towerList.Add( towerConfigs[i] );
+
+                towerList.Add(towerConfigs[i]);
             }
+
             return towerList;
         }
 
@@ -73,10 +77,11 @@ namespace ET
                 {
                     continue;
                 }
+
                 towerId = towerConfigs[i].Id;
             }
+
             return towerId;
         }
-
     }
 }

@@ -173,5 +173,18 @@ namespace ET.Client
                 Log.Error(ex.ToString());
             }
         }
+
+        public static async ETTask<int> RequestTowerReward(Scene root, int towerid, int sceneType)
+        {
+            C2M_RandomTowerRewardRequest request = new() { RewardId = towerid, SceneType = sceneType };
+            M2C_RandomTowerRewardResponse respone = (M2C_RandomTowerRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            if (respone.Error == ErrorCode.ERR_Success)
+            {
+                UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
+                userInfoComponent.UserInfo.TowerRewardIds.Add(towerid);
+            }
+
+            return respone.Error;
+        }
     }
 }

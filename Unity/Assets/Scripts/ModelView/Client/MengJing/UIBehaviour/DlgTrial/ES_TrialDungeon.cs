@@ -1,12 +1,17 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_TrialDungeon : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_TrialDungeon : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public int TowerId;
+		public Dictionary<int, Scroll_Item_TrialDungeonItem> ScrollItemTrialDungeonItems;
+		public List<TowerConfig> ShowTowerConfigs = new();
+		
 		public UnityEngine.UI.Button E_Btn_EnterButton
      	{
      		get
