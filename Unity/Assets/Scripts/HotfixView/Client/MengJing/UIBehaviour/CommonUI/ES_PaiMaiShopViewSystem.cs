@@ -38,9 +38,7 @@ namespace ET.Client
         {
             long instanceId = self.InstanceId;
 
-            C2P_PaiMaiShopShowListRequest request = new();
-            P2C_PaiMaiShopShowListResponse response =
-                    (P2C_PaiMaiShopShowListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            P2C_PaiMaiShopShowListResponse response = await PaiMaiNetHelper.PaiMaiShopShowList(self.Root());
 
             if (instanceId != self.InstanceId)
             {
@@ -105,8 +103,7 @@ namespace ET.Client
                 return;
             }
 
-            C2M_PaiMaiShopRequest request = new() { PaiMaiId = self.PaiMaiSellId, BuyNum = self.BuyNum };
-            M2C_PaiMaiShopResponse response = (M2C_PaiMaiShopResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            await PaiMaiNetHelper.PaiMaiShop(self.Root(), self.PaiMaiSellId, self.BuyNum);
         }
 
         public static void OnClickType(this ES_PaiMaiShop self, int typeid)

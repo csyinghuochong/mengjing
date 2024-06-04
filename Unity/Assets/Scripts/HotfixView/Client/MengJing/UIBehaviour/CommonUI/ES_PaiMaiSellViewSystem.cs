@@ -56,8 +56,8 @@ namespace ET.Client
         private static async ETTask RequestSelfPaiMaiList(this ES_PaiMaiSell self)
         {
             long instanceid = self.InstanceId;
-            C2P_PaiMaiListRequest request = new() { PaiMaiType = 0, UserId = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId };
-            P2C_PaiMaiListResponse response = (P2C_PaiMaiListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            P2C_PaiMaiListResponse response =
+                    await PaiMaiNetHelper.PaiMaiList(self.Root(), 0, 0, self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId);
             if (self.IsDisposed || instanceid != self.InstanceId)
             {
                 return;
@@ -119,8 +119,7 @@ namespace ET.Client
                 }
             }
 
-            C2M_PaiMaiXiaJiaRequest request = new() { ItemType = itemType, PaiMaiItemInfoId = self.PaiMaiItemInfoId };
-            M2C_PaiMaiXiaJiaResponse response = (M2C_PaiMaiXiaJiaResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            await PaiMaiNetHelper.PaiMaiXiaJia(self.Root(), itemType, self.PaiMaiItemInfoId);
             if (self.IsDisposed)
             {
                 return;

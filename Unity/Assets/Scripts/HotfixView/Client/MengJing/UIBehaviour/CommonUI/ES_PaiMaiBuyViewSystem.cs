@@ -56,8 +56,7 @@ namespace ET.Client
 
             long instanceid = self.InstanceId;
 
-            C2P_PaiMaiFindRequest reuqest = new() { ItemType = itemType, PaiMaiItemInfoId = paimaiItemId };
-            P2C_PaiMaiFindResponse response = (P2C_PaiMaiFindResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(reuqest);
+            P2C_PaiMaiFindResponse response = await PaiMaiNetHelper.PaiMaiFind(self.Root(), itemType, paimaiItemId);
             if (response.Page == 0)
             {
                 FlyTipComponent.Instance.SpawnFlyTipDi("道具已经被买走了!");
@@ -378,8 +377,7 @@ namespace ET.Client
 
             self.PaiMaiIteminfos_Now.Clear();
 
-            C2P_PaiMaiSearchRequest reuqest = new() { FindTypeList = findTypeList, FindItemIdList = findItemIdList };
-            P2C_PaiMaiSearchResponse response = (P2C_PaiMaiSearchResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(reuqest);
+            P2C_PaiMaiSearchResponse response = await PaiMaiNetHelper.PaiMaiSearch(self.Root(), findTypeList, findItemIdList);
             self.PaiMaiIteminfos_Now.AddRange(response.PaiMaiItemInfos);
 
             self.ShowPaiMaiList();
@@ -393,11 +391,8 @@ namespace ET.Client
         {
             long instanceId = self.InstanceId;
 
-            C2P_PaiMaiListRequest request = new()
-            {
-                Page = self.PageIndex, PaiMaiType = itemType, UserId = UnitHelper.GetMyUnitFromClientScene(self.Root()).Id
-            };
-            P2C_PaiMaiListResponse response = (P2C_PaiMaiListResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            P2C_PaiMaiListResponse response =
+                    await PaiMaiNetHelper.PaiMaiList(self.Root(), self.PageIndex, itemType, UnitHelper.GetMyUnitFromClientScene(self.Root()).Id);
             if (instanceId != self.InstanceId)
             {
                 return;

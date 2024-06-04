@@ -96,8 +96,7 @@ namespace ET.Client
                 return;
             }
 
-            C2M_PaiMaiDuiHuanRequest request = new() { DiamondsNumber = diamondsNumber };
-            M2C_PaiMaiDuiHuanResponse response = (M2C_PaiMaiDuiHuanResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            await PaiMaiNetHelper.PaiMaiDuiHuan(self.Root(), diamondsNumber);
         }
     }
 }
