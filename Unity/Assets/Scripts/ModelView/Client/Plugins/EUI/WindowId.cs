@@ -81,5 +81,6 @@ namespace ET.Client
 		WindowID_CountryTips,
 		WindowID_ShouJiSelect,
 		WindowID_Tower,
+		WindowID_Trial,
 	}
 }
