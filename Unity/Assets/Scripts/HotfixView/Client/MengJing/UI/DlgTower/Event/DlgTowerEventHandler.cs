@@ -1,28 +1,28 @@
 ﻿namespace ET.Client
 {
 	[FriendOf(typeof(UIBaseWindow))]
-	[AUIEvent(WindowID.WindowID_ShouJiSelect)]
-	public  class DlgShouJiSelectEventHandler : IAUIEventHandler
+	[AUIEvent(WindowID.WindowID_Tower)]
+	public  class DlgTowerEventHandler : IAUIEventHandler
 	{
 
 		public void OnInitWindowCoreData(UIBaseWindow uiBaseWindow)
 		{
-		  uiBaseWindow.windowType = UIWindowType.PopUp; 
+		  uiBaseWindow.windowType = UIWindowType.Normal; 
 		}
 
 		public void OnInitComponent(UIBaseWindow uiBaseWindow)
 		{
-		  uiBaseWindow.AddComponent<DlgShouJiSelect>().AddComponent<DlgShouJiSelectViewComponent>();
+		  uiBaseWindow.AddComponent<DlgTower>().AddComponent<DlgTowerViewComponent>();
 		}
 
 		public void OnRegisterUIEvent(UIBaseWindow uiBaseWindow)
 		{
-		  uiBaseWindow.GetComponent<DlgShouJiSelect>().RegisterUIEvent(); 
+		  uiBaseWindow.GetComponent<DlgTower>().RegisterUIEvent(); 
 		}
 
 		public void OnShowWindow(UIBaseWindow uiBaseWindow, Entity contextData = null)
 		{
-		  uiBaseWindow.GetComponent<DlgShouJiSelect>().ShowWindow(contextData); 
+		  uiBaseWindow.GetComponent<DlgTower>().ShowWindow(contextData); 
 		}
 
 		public void OnHideWindow(UIBaseWindow uiBaseWindow)
