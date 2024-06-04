@@ -28,8 +28,9 @@ namespace ET.Client
 
         public static async ETTask OnButtonActive(this UIShouJiTreasureItemComponent self)
         {
-            // UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIShouJiSelect);
-            // uI.GetComponent<UIShouJiSelectComponent>().OnInitUI(self.ShoujiId, self.UpdateRedDotState);
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ShouJiSelect);
+            DlgShouJiSelect dlgShouJiSelect = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgShouJiSelect>();
+            dlgShouJiSelect.OnInitUI(self.ShoujiId, self.UpdateRedDotState);
         }
 
         /// <summary>

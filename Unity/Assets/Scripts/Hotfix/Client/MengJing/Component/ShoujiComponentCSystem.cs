@@ -86,5 +86,24 @@ namespace ET.Client
 
             return keyValuePairInt;
         }
+
+        public static void OnShouJiTreasure(this ShoujiComponentC self, int shoujiId, int itemNum)
+        {
+            KeyValuePairInt keyValuePairInt = null;
+            for (int i = 0; i < self.TreasureInfo.Count; i++)
+            {
+                if (self.TreasureInfo[i].KeyId == shoujiId)
+                {
+                    keyValuePairInt = self.TreasureInfo[i];
+                    keyValuePairInt.Value = itemNum;
+                }
+            }
+
+            if (keyValuePairInt == null)
+            {
+                keyValuePairInt = new KeyValuePairInt() { KeyId = shoujiId, Value = itemNum };
+                self.TreasureInfo.Add(keyValuePairInt);
+            }
+        }
     }
 }

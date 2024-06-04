@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_ShouJiList))]
+    [FriendOf(typeof (ES_ShouJiTreasure))]
     [FriendOf(typeof (DlgShouJi))]
     public static class DlgShouJiSystem
     {
@@ -43,8 +44,14 @@ namespace ET.Client
                     self.View.ES_ShouJiList.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
+                    self.View.ES_ShouJiTreasure.uiTransform.gameObject.SetActive(true);
                     break;
             }
+        }
+
+        public static void OnShouJiTreasure(this DlgShouJi self)
+        {
+            self.View.ES_ShouJiTreasure.OnShouJiTreasure();
         }
     }
 }

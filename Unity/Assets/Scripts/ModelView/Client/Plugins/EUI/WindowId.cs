@@ -79,5 +79,6 @@ namespace ET.Client
 		WindowID_ShenQiMake,
 		WindowID_ShouJi,
 		WindowID_CountryTips,
+		WindowID_ShouJiSelect,
 	}
 }
