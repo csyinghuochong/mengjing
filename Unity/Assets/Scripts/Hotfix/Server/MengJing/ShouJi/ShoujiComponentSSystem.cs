@@ -7,7 +7,7 @@ namespace ET.Server
 {
     [EntitySystemOf(typeof(ShoujiComponentS))]
     [FriendOf(typeof(ShoujiComponentS))]
-    public static partial class ShoujiComponentServerSystem
+    public static partial class ShoujiComponentSSystem
     {
         [EntitySystem]
         private static void Awake(this ET.Server.ShoujiComponentS self)
