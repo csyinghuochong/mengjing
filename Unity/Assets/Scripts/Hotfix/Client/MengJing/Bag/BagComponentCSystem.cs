@@ -5,7 +5,7 @@ namespace ET.Client
     [FriendOf(typeof (UserInfoComponentC))]
     [FriendOf(typeof (BagComponentC))]
     [EntitySystemOf(typeof (BagComponentC))]
-    public static partial class BagComponent_CSystem
+    public static partial class BagComponentCSystem
     {
         [EntitySystem]
         private static void Awake(this BagComponentC self)

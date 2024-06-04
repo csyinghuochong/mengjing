@@ -4,7 +4,7 @@ namespace ET.Client
 {
     [FriendOf(typeof (UserInfoComponentC))]
     [EntitySystemOf(typeof (UserInfoComponentC))]
-    public static partial class UserInfoComponent_CSystem
+    public static partial class UserInfoComponentCSystem
     {
         [EntitySystem]
         private static void Awake(this UserInfoComponentC self)
