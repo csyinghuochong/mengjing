@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_TowerDungeon))]
     [FriendOf(typeof (DlgTower))]
     public static class DlgTowerSystem
     {
@@ -39,6 +40,7 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
+                    self.View.ES_TowerDungeon.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
                     break;
