@@ -89,6 +89,7 @@ namespace ET.Client
                 "UIShouJi" => WindowID.WindowID_ShouJi,
                 "UITowerDungeon" => WindowID.WindowID_Tower,
                 "UITrial" => WindowID.WindowID_Trial,
+                "UIZuoQi" => WindowID.WindowID_ZuoQi,
                 _ => WindowID.WindowID_Invaild
             };
         }

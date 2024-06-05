@@ -636,5 +636,12 @@ namespace ET.Client
             M2C_JingLingDropResponse response = (M2C_JingLingDropResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_HorseFightResponse> HorseFight(Scene root, int horseId)
+        {
+            C2M_HorseFightRequest request = new() { HorseId = horseId };
+            M2C_HorseFightResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_HorseFightResponse;
+            return response;
+        }
     }
 }

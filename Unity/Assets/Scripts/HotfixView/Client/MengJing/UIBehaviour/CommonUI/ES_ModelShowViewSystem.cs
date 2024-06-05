@@ -61,6 +61,21 @@ namespace ET.Client
             self.EG_RootRectTransform.transform.Find("Camera").localPosition = cameraPos;
         }
 
+        public static void SetModelPosition(this ES_ModelShow self, Vector3 vector3)
+        {
+            self.EG_RootRectTransform.transform.Find("ModelParent").localPosition = vector3;
+        }
+
+        public static void SetModelRotation(this ES_ModelShow self, Quaternion quaternion)
+        {
+            self.EG_RootRectTransform.transform.Find("ModelParent").localRotation = quaternion;
+        }
+
+        public static void SetCameraPosition(this ES_ModelShow self, Vector3 vector3)
+        {
+            self.EG_RootRectTransform.transform.Find("Camera").localPosition = vector3;
+        }
+
         public static void ChangeWeapon(this ES_ModelShow self, BagInfo bagInfo, int occ)
         {
             self.GetComponent<ChangeEquipComponent>().ChangeWeapon(self.GetWeaponId(bagInfo, occ));

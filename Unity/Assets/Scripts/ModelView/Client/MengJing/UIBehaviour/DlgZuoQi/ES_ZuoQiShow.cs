@@ -1,12 +1,16 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ZuoQiShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_ZuoQiShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public Dictionary<int, Scroll_Item_ZuoQiShowItem> ScrollItemZuoQiShowItems;
+		public List<ZuoQiShowConfig> ShowZuoQiShowConfigs = new();
+		
 		public UnityEngine.UI.LoopHorizontalScrollRect E_ZuoQiShowItemsLoopHorizontalScrollRect
      	{
      		get
