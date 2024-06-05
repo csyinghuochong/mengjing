@@ -85,5 +85,6 @@ namespace ET.Client
 		WindowID_TrialReward,
 		WindowID_ZuoQi,
 		WindowID_Protect,
+		WindowID_Setting,
 	}
 }
