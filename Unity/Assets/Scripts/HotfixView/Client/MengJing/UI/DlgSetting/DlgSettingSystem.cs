@@ -28,8 +28,8 @@ namespace ET.Client
         {
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
 
-            uiComponent.CloseWindow(WindowID.WindowID_Setting);
             self.View.ES_SettingGame.OnBeforeClose();
+            uiComponent.CloseWindow(WindowID.WindowID_Setting);
         }
 
         private static void OnFunctionSetBtn(this DlgSetting self, int index)
