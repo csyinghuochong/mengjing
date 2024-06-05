@@ -83,5 +83,6 @@ namespace ET.Client
 		WindowID_Tower,
 		WindowID_Trial,
 		WindowID_TrialReward,
+		WindowID_ZuoQi,
 	}
 }
