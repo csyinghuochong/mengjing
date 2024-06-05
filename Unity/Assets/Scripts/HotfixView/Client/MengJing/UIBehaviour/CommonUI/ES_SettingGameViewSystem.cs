@@ -141,7 +141,7 @@ namespace ET.Client
             // }
 
             // dlgMain.UIMainButtonPositionComponent.ShowSkillPositionSet();
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Setting);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgHuoBiSet>().OnClose();
         }
 
         public static void OnBtn_Click(this ES_SettingGame self)
