@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_SettingGame))]
     [FriendOf(typeof (DlgSetting))]
     public static class DlgSettingSystem
     {
@@ -41,6 +42,7 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
+                    self.View.ES_SettingGame.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
                     break;
