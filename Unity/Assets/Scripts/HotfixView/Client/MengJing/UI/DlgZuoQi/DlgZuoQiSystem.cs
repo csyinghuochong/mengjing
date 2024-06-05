@@ -28,7 +28,7 @@ namespace ET.Client
         {
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
 
-            uiComponent.CloseWindow(WindowID.WindowID_Trial);
+            uiComponent.CloseWindow(WindowID.WindowID_ZuoQi);
         }
 
         private static void OnFunctionSetBtn(this DlgZuoQi self, int index)

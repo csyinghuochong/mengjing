@@ -61,9 +61,9 @@ namespace ET.Client
             self.EG_RootRectTransform.transform.Find("Camera").localPosition = cameraPos;
         }
 
-        public static void SetModelPosition(this ES_ModelShow self, Vector3 vector3)
+        public static void SetRootPosition(this ES_ModelShow self, Vector3 vector3)
         {
-            self.EG_RootRectTransform.transform.Find("ModelParent").localPosition = vector3;
+            self.EG_RootRectTransform.transform.localPosition = vector3;
         }
 
         public static void SetModelRotation(this ES_ModelShow self, Quaternion quaternion)
