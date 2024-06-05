@@ -166,8 +166,6 @@ namespace ET.Client
 
         public static void InitSubItemUI(this ES_RoleXiLianInherit self)
         {
-            self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
-
             self.ES_CommonItem_Cost.E_ItemNumText.gameObject.SetActive(false);
             self.ES_CommonItem_Cost.E_ItemNameText.gameObject.SetActive(false);
 
@@ -176,6 +174,7 @@ namespace ET.Client
             if (bagInfo != null)
             {
                 self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
+                self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
             }
         }
 
