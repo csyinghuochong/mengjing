@@ -10,6 +10,23 @@ namespace ET.Client
 	{
 		public UserInfoComponentC UserInfoComponent { get; set; }
 		public List<KeyValuePair> GameSettingInfos = new();
+		
+		public UnityEngine.UI.Image E_HideDiImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_HideDiImage == null )
+     			{
+		    		this.m_E_HideDiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_HideDi");
+     			}
+     			return this.m_E_HideDiImage;
+     		}
+     	}
 
 		public UnityEngine.UI.Button E_ButtonSkillSetButton
      	{
@@ -1045,6 +1062,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_HideDiImage = null;
 			this.m_E_ButtonSkillSetButton = null;
 			this.m_E_ButtonSkillSetImage = null;
 			this.m_E_Btn_CloseGameButton = null;
@@ -1108,6 +1126,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.UI.Image m_E_HideDiImage = null;
 		private UnityEngine.UI.Button m_E_ButtonSkillSetButton = null;
 		private UnityEngine.UI.Image m_E_ButtonSkillSetImage = null;
 		private UnityEngine.UI.Button m_E_Btn_CloseGameButton = null;

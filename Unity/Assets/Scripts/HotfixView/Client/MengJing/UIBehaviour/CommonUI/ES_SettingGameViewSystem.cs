@@ -43,7 +43,7 @@ namespace ET.Client
 
             self.E_NoMovingButton.AddListener(self.OnBtn_NoMoving);
 
-            // self.EG_HideNodeRectTransform.gameObject.SetActive(GlobalHelp.GetPlatform() != 5 && GlobalHelp.GetPlatform() != 6);
+            self.EG_HideNodeRectTransform.gameObject.SetActive(GlobalHelp.GetPlatform() != 5 && GlobalHelp.GetPlatform() != 6);
 
             self.EG_OneSellSetRectTransform.Find("Btn_Click_0").GetComponent<Button>().AddListener(() => { self.OnBtn_OneSellSet(0); });
             self.EG_OneSellSetRectTransform.Find("Btn_Click_1").GetComponent<Button>().AddListener(() => { self.OnBtn_OneSellSet(1); });
@@ -411,7 +411,7 @@ namespace ET.Client
 
         public static void OnReturnLogin(this ES_SettingGame self)
         {
-            // self.HideDi.SetActive(true);
+            self.E_HideDiImage.gameObject.SetActive(true);
             //加载登录场景
             EventSystem.Instance.Publish(self.Root(), new ReturnLogin());
         }

@@ -24,6 +24,26 @@ namespace ET.Client
             return shader;
         }
 
+        public static int GetPlatform()
+        {
+            // #if UNITY_IPHONE || UNITY_IOS
+            //             return 20001;
+            // #else
+            //             if (GetBigVersion() < 15)
+            //             {
+            //                 return 0;
+            //             }
+            //
+            //             if (GetBigVersion() > 18)
+            //             {
+            //             }
+            //
+            //             return GameObject.Find("Global").GetComponent<Init>().Platform;
+            // #endif
+
+            return 0;
+        }
+
         public static int GetBigVersion()
         {
             //             if (BigVersion != -1)
