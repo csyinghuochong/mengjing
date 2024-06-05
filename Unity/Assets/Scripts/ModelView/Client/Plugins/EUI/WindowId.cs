@@ -82,5 +82,6 @@ namespace ET.Client
 		WindowID_ShouJiSelect,
 		WindowID_Tower,
 		WindowID_Trial,
+		WindowID_TrialReward,
 	}
 }

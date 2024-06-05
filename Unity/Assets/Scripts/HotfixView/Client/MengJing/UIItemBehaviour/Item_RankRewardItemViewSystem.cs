@@ -20,6 +20,7 @@ namespace ET.Client
         public static void OnUpdateUI(this Scroll_Item_RankRewardItem self, RankRewardConfig rankRewardConfig)
         {
             self.E_Text_RankText.text = $"{rankRewardConfig.NeedPoint[0]}-{rankRewardConfig.NeedPoint[1]}名";
+            self.E_Text_RankText.gameObject.SetActive(true);
             self.ES_RewardList.Refresh(rankRewardConfig.RewardItems, 0.9f);
 
             UICommonHelper.HideChildren(self.EG_RankShowSetRectTransform);

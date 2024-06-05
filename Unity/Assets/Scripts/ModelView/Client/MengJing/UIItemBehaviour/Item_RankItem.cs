@@ -6,6 +6,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_RankItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
+		public RankingTrialInfo RankingInfo;
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)

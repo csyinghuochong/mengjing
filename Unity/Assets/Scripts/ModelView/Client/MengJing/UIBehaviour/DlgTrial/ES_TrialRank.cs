@@ -1,12 +1,18 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_TrialRank : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_TrialRank : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public int Page;
+		public Dictionary<int, Scroll_Item_RankItem> ScrollItemRankItems;
+		public List<RankingTrialInfo> ShowRankingTrialInfos = new();
+		public int CurrentItemType;
+		
 		public UnityEngine.RectTransform EG_UISetRectTransform
      	{
      		get

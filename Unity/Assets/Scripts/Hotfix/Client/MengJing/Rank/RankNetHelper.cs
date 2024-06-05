@@ -25,5 +25,13 @@
 
             return response;
         }
+
+        public static async ETTask<R2C_RankTrialListResponse> RankTrialList(Scene root)
+        {
+            C2R_RankTrialListRequest request = new();
+            R2C_RankTrialListResponse response = (R2C_RankTrialListResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
     }
 }
