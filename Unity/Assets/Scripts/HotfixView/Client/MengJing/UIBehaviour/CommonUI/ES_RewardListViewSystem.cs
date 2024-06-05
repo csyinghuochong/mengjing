@@ -20,6 +20,9 @@ namespace ET.Client
         [EntitySystem]
         private static void Destroy(this ES_RewardList self)
         {
+            // ！！！
+            self.E_BagItemsLoopVerticalScrollRect.dataSource.scrollMoveEvent = null;
+
             self.DestroyWidget();
         }
 
