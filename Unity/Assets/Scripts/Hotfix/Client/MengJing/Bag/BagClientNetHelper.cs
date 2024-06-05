@@ -643,5 +643,28 @@ namespace ET.Client
             M2C_HorseFightResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_HorseFightResponse;
             return response;
         }
+
+        public static async ETTask<M2C_GameSettingResponse> GameSetting(Scene root, List<KeyValuePair> gameSettingInfos)
+        {
+            root.GetComponent<UserInfoComponentC>().UpdateGameSetting(gameSettingInfos);
+            EventSystem.Instance.Publish(root, new DataUpdate_SettingUpdate());
+            C2M_GameSettingRequest request = new() { GameSettingInfos = gameSettingInfos };
+            M2C_GameSettingResponse response = (M2C_GameSettingResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<Popularize2C_UploadResponse> Upload(Scene root, string memoryInfo)
+        {
+            C2Popularize_UploadRequest request = new() { MemoryInfo = memoryInfo };
+            Popularize2C_UploadResponse response = (Popularize2C_UploadResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<M2C_ModifyNameResponse> ModifyName(Scene root, string newName)
+        {
+            C2M_ModifyNameRequest request = new() { NewName = newName };
+            M2C_ModifyNameResponse response = (M2C_ModifyNameResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

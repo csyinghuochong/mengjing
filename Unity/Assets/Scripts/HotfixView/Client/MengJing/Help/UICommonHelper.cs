@@ -6,6 +6,11 @@ namespace ET.Client
 {
     public static class UICommonHelper
     {
+        public static void TargetFrameRate(int frame)
+        {
+            Application.targetFrameRate = frame;
+        }
+
         public static string GetNeedItemDesc(string needitems)
         {
             string itemDesc = "";

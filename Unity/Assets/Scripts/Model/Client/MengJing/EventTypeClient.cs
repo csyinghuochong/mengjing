@@ -147,6 +147,14 @@ namespace ET.Client
     {
     }
 
+    public struct DataUpdate_SettingUpdate
+    {
+    }
+
+    public struct ReturnLogin
+    {
+    }
+
     public struct TaskNpcDialog
     {
         public int NpcId;

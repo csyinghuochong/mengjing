@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
 
-
 namespace ET.Client
 {
-    [ComponentOf(typeof(Scene))]
+    [ComponentOf(typeof (Scene))]
     public class PlayerComponent: Entity, IAwake
     {
         public long MyId { get; set; }
-        
-        public List<ServerItem> AllServerList = new List<ServerItem>();         //服务器列表存内容
+
+        public List<ServerItem> AllServerList = new(); //服务器列表存内容
 
         //当前角色列表数据
-        public List<CreateRoleInfo> CreateRoleList = new List<CreateRoleInfo>();
+        public List<CreateRoleInfo> CreateRoleList = new();
 
-        public PlayerInfo PlayerInfo;
+        public PlayerInfo PlayerInfo { get; set; }
 
         public int Age_Type = -1;
 

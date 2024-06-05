@@ -23,5 +23,7 @@ namespace ET.Client
         public bool IsPopStackWndStatus                        = false;
         public int CurrentNpcId { get; set; }
         public WindowID CurrentNpcUI { get; set; }
+        public int ResolutionWidth { get; set; }
+        public int ResolutionHeight { get; set; }
     }
 }

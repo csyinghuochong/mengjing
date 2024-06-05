@@ -4,9 +4,8 @@ using ET.Client;
 
 namespace ET
 {
-
-    [ComponentOf(typeof(Scene))]
-    public class BattleMessageComponent : Entity, IAwake
+    [ComponentOf(typeof (Scene))]
+    public class BattleMessageComponent: Entity, IAwake
     {
         //public M2C_HappyInfoResult M2C_HappyInfoResult;
         //public M2C_BattleInfoResult M2C_BattleInfoResult;
@@ -16,6 +15,7 @@ namespace ET
 
         //竞技场开始匹配时间戳
         public long SoloPiPeiStartTime;
+
         //竞技场胜负记录
         public int SoloNum_Win;
         public int SoloNum_Fail;
@@ -30,8 +30,7 @@ namespace ET
 
         public long RideTargetUnit;
 
-
-        public long UploadMemoryTime;
+        public long UploadMemoryTime { get; set; }
 
         public int LastDungeonId { get; set; }
 
@@ -46,8 +45,8 @@ namespace ET
         public List<RolePetAdd> RolePetAdds { get; set; } = new List<RolePetAdd>();
         public Dictionary<long, long> OneChallengeTime = new Dictionary<long, long>();
 
-        public List<long> AttackSelfPlayer  { get; set; }= new List<long>();
-        
+        public List<long> AttackSelfPlayer { get; set; } = new List<long>();
+
         public long LastPopularize_ListTime = 0;
     }
 }

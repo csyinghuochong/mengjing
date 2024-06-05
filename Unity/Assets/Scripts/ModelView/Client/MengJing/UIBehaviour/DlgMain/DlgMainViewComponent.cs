@@ -7,6 +7,23 @@ namespace ET.Client
 	[EnableMethod]
 	public  class DlgMainViewComponent : Entity,IAwake,IDestroy 
 	{
+		public UnityEngine.UI.Image E_DragPanelImage
+		{
+			get
+			{
+				if (this.uiTransform == null)
+				{
+					Log.Error("uiTransform is null.");
+					return null;
+				}
+				if( this.m_E_DragPanelImage == null )
+				{
+					this.m_E_DragPanelImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_DragPanel");
+				}
+				return this.m_E_DragPanelImage;
+			}
+		}
+		
 		public UnityEngine.RectTransform EG_JoystickMoveRectTransform
      	{
      		get
@@ -1650,6 +1667,7 @@ namespace ET.Client
 			this.m_e_HomeButton = null;
 		}
 
+		private UnityEngine.UI.Image m_E_DragPanelImage = null;
 		private UnityEngine.RectTransform m_EG_JoystickMoveRectTransform = null;
 		private UnityEngine.UI.Image m_E_YaoGanDiMoveImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_YaoGanDiMoveEventTrigger = null;

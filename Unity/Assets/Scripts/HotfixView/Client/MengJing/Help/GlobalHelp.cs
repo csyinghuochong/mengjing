@@ -23,5 +23,22 @@ namespace ET.Client
 
             return shader;
         }
+
+        public static int GetBigVersion()
+        {
+            //             if (BigVersion != -1)
+            //             {
+            //                 return BigVersion;
+            //             }
+            //
+            // #if UNITY_IPHONE || UNITY_IOS
+            //             BigVersion =  GameObject.Find("Global").GetComponent<Init>().BigVersionIOS;
+            //             return BigVersion;
+            // #else
+            //             BigVersion =  GameObject.Find("Global").GetComponent<Init>().BigVersion;
+            //             return BigVersion;
+            // #endif
+            return 1;
+        }
     }
 }

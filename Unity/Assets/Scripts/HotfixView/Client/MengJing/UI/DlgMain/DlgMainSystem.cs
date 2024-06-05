@@ -1257,5 +1257,50 @@ namespace ET.Client
             self.View.ES_MainSkill.OnSkillSetUpdate();
             self.OnEnterScene();
         }
+
+        public static void SetFenBianLv1(this DlgMain self)
+        {
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+            Screen.SetResolution(uiComponent.ResolutionWidth, uiComponent.ResolutionHeight, true);
+        }
+
+        public static void SetFenBianLv2(this DlgMain self)
+        {
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+            Screen.SetResolution((int)(uiComponent.ResolutionWidth * 0.8f), (int)(uiComponent.ResolutionHeight * 0.8f), true);
+        }
+
+        public static void UpdateShadow(this DlgMain self, string usevalue = "")
+        {
+            GameObject gameObject = GameObject.Find("Directional Light");
+            if (gameObject == null)
+            {
+                return;
+            }
+
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            string value = usevalue != ""? usevalue : userInfoComponent.GetGameSettingValue(GameSettingEnum.Shadow);
+            Light light = gameObject.GetComponent<Light>();
+            light.shadows = value == "0"? LightShadows.None : LightShadows.Soft;
+        }
+
+        public static void ShowPing(this DlgMain self)
+        {
+            // if (self.View.EG_FpsRectTransform.gameObject.activeSelf)
+            // {
+            //     self.View.EG_FpsRectTransform.gameObject.SetActive(false);
+            //     OpcodeHelper.ShowMessage = false;
+            //     TimerComponent.Instance?.Remove(ref self.TimerPing);
+            // }
+            // else
+            // {
+            //     self.View.EG_FpsRectTransform.gameObject.SetActive(true);
+            //     self.TextMessage.text = string.Empty;
+            //     OpcodeHelper.ShowMessage = true;
+            //     OpcodeHelper.OneTotalNumber = 0;
+            //     TimerComponent.Instance?.Remove(ref self.TimerPing);
+            //     self.TimerPing = TimerComponent.Instance.NewRepeatedTimer(5000, TimerType.UIMainFPSTimer, self);
+            // }
+        }
     }
 }

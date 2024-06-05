@@ -1,4 +1,4 @@
-
+﻿
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +10,7 @@ namespace ET.Client
 	{
 		public UserInfoComponentC UserInfoComponent { get; set; }
 		public List<KeyValuePair> GameSettingInfos = new();
-		
+
 		public UnityEngine.UI.Button E_ButtonSkillSetButton
      	{
      		get
@@ -215,7 +215,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_ButtonPhoneRectTransform
+		public UnityEngine.UI.Button E_ButtonPhoneButton
      	{
      		get
      		{
@@ -224,11 +224,28 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_ButtonPhoneRectTransform == null )
+     			if( this.m_E_ButtonPhoneButton == null )
      			{
-		    		this.m_EG_ButtonPhoneRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"ScrollView/Viewport/Content/UIGameSetting/EG_ButtonPhone");
+		    		this.m_E_ButtonPhoneButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"ScrollView/Viewport/Content/UIGameSetting/E_ButtonPhone");
      			}
-     			return this.m_EG_ButtonPhoneRectTransform;
+     			return this.m_E_ButtonPhoneButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ButtonPhoneImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ButtonPhoneImage == null )
+     			{
+		    		this.m_E_ButtonPhoneImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ScrollView/Viewport/Content/UIGameSetting/E_ButtonPhone");
+     			}
+     			return this.m_E_ButtonPhoneImage;
      		}
      	}
 
@@ -1040,7 +1057,8 @@ namespace ET.Client
 			this.m_E_InputFieldCNameImage = null;
 			this.m_E_ButtonRnameButton = null;
 			this.m_E_ButtonRnameImage = null;
-			this.m_EG_ButtonPhoneRectTransform = null;
+			this.m_E_ButtonPhoneButton = null;
+			this.m_E_ButtonPhoneImage = null;
 			this.m_E_Btn_FixedButton = null;
 			this.m_E_Btn_FixedImage = null;
 			this.m_E_Image_FixedImage = null;
@@ -1102,7 +1120,8 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_InputFieldCNameImage = null;
 		private UnityEngine.UI.Button m_E_ButtonRnameButton = null;
 		private UnityEngine.UI.Image m_E_ButtonRnameImage = null;
-		private UnityEngine.RectTransform m_EG_ButtonPhoneRectTransform = null;
+		private UnityEngine.UI.Button m_E_ButtonPhoneButton = null;
+		private UnityEngine.UI.Image m_E_ButtonPhoneImage = null;
 		private UnityEngine.UI.Button m_E_Btn_FixedButton = null;
 		private UnityEngine.UI.Image m_E_Btn_FixedImage = null;
 		private UnityEngine.UI.Image m_E_Image_FixedImage = null;

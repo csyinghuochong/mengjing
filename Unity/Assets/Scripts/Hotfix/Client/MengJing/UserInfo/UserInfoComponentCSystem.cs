@@ -175,5 +175,27 @@ namespace ET.Client
         {
             return ServerHelper.DateDiff_Time(TimeHelper.ServerNow(), self.UserInfo.CreateTime);
         }
+
+        public static void UpdateGameSetting(this UserInfoComponentC self, List<KeyValuePair> gameSettingInfos)
+        {
+            for (int i = 0; i < gameSettingInfos.Count; i++)
+            {
+                bool exist = false;
+                for (int k = 0; k < self.UserInfo.GameSettingInfos.Count; k++)
+                {
+                    if (self.UserInfo.GameSettingInfos[k].KeyId == gameSettingInfos[i].KeyId)
+                    {
+                        exist = true;
+                        self.UserInfo.GameSettingInfos[k].Value = gameSettingInfos[i].Value;
+                        break;
+                    }
+                }
+
+                if (!exist)
+                {
+                    self.UserInfo.GameSettingInfos.Add(gameSettingInfos[i]);
+                }
+            }
+        }
     }
 }

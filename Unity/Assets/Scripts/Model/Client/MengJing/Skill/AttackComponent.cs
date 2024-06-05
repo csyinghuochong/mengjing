@@ -2,8 +2,7 @@ using System.Collections.Generic;
 
 namespace ET.Client
 {
-    
-    [ComponentOf(typeof(Unit))]
+    [ComponentOf(typeof (Unit))]
     public class AttackComponent: Entity, IAwake, IDestroy
     {
         public int SkillId;
@@ -12,12 +11,12 @@ namespace ET.Client
         public long ComboStartTime;
         public long CombatEndTime;
 
-        public bool AutoAttack  = true;
+        public bool AutoAttack { get; set; } = true;
         public float AttackDistance;
-        public List<int> Weights = new List<int>();
-        public List<int> SkillList = new List<int> { };
-        public List<int> SkillCDs = new List<int>();
-        public readonly C2M_SkillCmd c2mSkillCmd = new C2M_SkillCmd();
+        public List<int> Weights = new();
+        public List<int> SkillList = new();
+        public List<int> SkillCDs = new();
+        public readonly C2M_SkillCmd c2mSkillCmd = new();
         public long CDTime = 800;
         public long CDEndTime;
 
