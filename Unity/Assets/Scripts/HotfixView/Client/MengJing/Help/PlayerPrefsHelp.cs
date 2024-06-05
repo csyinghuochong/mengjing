@@ -5,30 +5,30 @@ namespace ET.Client
 {
     public static class PlayerPrefsHelp
     {
-        public const string MyServerID = "WJa_MyServerID";
-        public const string LastUserID = "WJa_LastUserID";
-        public const string LastGuide = "WJa_LastGuide_0";
-        public const string LastFrame = "WJa_LastFrame_0";
-        public const string MusicVolume = "MusicVolume";
-        public const string SoundVolume = "SoundVolume";
-        public const string SkillPostion = "WJa_SkillPostion";
-        public const string WJa_LastNotice = "WJa_LastNotice";
-        public const string MyOldServerID = "WJa_MyOldServerID";
-        public const string LastLoginType = "WJa_LastLoginType";
-        public const string LoginErrorTime = "WJa_LoginErrorTime";
-        public const string ChapterDifficulty = "WJa_ChapterDifficulty";
-        public const string LenDepth = "WJa_LenDepth";
-        public const string RotaAngle = "WJa_RotaAngle";
-        public const string ZhuBo = "WJa_ZhuBo";
+        public const string MyServerID = "MJ_MyServerID";
+        public const string LastUserID = "MJ_LastUserID";
+        public const string LastGuide = "MJ_LastGuide_0";
+        public const string LastFrame = "MJ_LastFrame_0";
+        public const string MusicVolume = "MJ_MusicVolume";
+        public const string SoundVolume = "MJ_SoundVolume";
+        public const string SkillPostion = "MJ_SkillPostion";
+        public const string WJa_LastNotice = "MJ_LastNotice";
+        public const string MyOldServerID = "MJ_MyOldServerID";
+        public const string LastLoginType = "MJ_LastLoginType";
+        public const string LoginErrorTime = "MJ_LoginErrorTime";
+        public const string ChapterDifficulty = "MJ_ChapterDifficulty";
+        public const string LenDepth = "MJ_LenDepth";
+        public const string RotaAngle = "MJ_RotaAngle";
+        public const string ZhuBo = "MJ_ZhuBo";
 
         public static string LastAccount(string loginType)
         {
-            return $"WJa_LastAccount_{loginType}";
+            return $"MJ_LastAccount_{loginType}";
         }
 
         public static string LastPassword(string loginType)
         {
-            return $"WJa_LastPassword_{loginType}";
+            return $"MJ_LastPassword_{loginType}";
         }
 
         public static void SetInt(string key, int value)
