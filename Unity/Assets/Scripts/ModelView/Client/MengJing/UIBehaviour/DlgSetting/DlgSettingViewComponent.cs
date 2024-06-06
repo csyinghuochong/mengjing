@@ -60,6 +60,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_SettingGuaJi ES_SettingGuaJi
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_settingguaji == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_SettingGuaJi");
+		    	   this.m_es_settingguaji = this.AddChild<ES_SettingGuaJi,Transform>(subTrans);
+     			}
+     			return this.m_es_settingguaji;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -150,6 +168,7 @@ namespace ET.Client
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_settinggame = null;
 			this.m_es_settingtitle = null;
+			this.m_es_settingguaji = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_1Toggle = null;
 			this.m_E_2Toggle = null;
@@ -161,6 +180,7 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_SettingGame> m_es_settinggame = null;
 		private EntityRef<ES_SettingTitle> m_es_settingtitle = null;
+		private EntityRef<ES_SettingGuaJi> m_es_settingguaji = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_1Toggle = null;
 		private UnityEngine.UI.Toggle m_E_2Toggle = null;

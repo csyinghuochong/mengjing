@@ -166,5 +166,13 @@ namespace ET.Client
 
             return response;
         }
+
+        public static async ETTask<M2C_FindNearMonsterResponse> FindNearMonster(Scene root)
+        {
+            C2M_FindNearMonsterRequest request = new();
+            M2C_FindNearMonsterResponse response = (M2C_FindNearMonsterResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
     }
 }

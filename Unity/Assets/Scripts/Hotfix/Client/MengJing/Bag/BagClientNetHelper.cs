@@ -45,7 +45,7 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RequestUseItem(Scene root, BagInfo bagInfo, string parinfo)
+        public static async ETTask<int> RequestUseItem(Scene root, BagInfo bagInfo, string parinfo = "")
         {
             UserInfoComponentC infoComponent = root.GetComponent<UserInfoComponentC>();
 

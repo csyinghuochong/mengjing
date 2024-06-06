@@ -8,6 +8,7 @@ namespace ET.Client
 {
     [FriendOf(typeof (ES_SettingGame))]
     [FriendOf(typeof (ES_SettingTitle))]
+    [FriendOf(typeof (ES_SettingGuaJi))]
     [FriendOf(typeof (DlgSetting))]
     public static class DlgSettingSystem
     {
@@ -51,6 +52,7 @@ namespace ET.Client
                     self.View.ES_SettingTitle.OnUpdateUI();
                     break;
                 case 2:
+                    self.View.ES_SettingGuaJi.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
                     break;
