@@ -1,9 +1,26 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Invoke(TimerInvokeType.SkillInfoShowTimer)]
+    public class SkillInfoShowTimer: ATimer<ES_SkillGrid>
+    {
+        protected override void Run(ES_SkillGrid self)
+        {
+            try
+            {
+                self.SkillInfoShow().Coroutine();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"move timer error: {self.Id}\n{e}");
+            }
+        }
+    }
+
     [EntitySystemOf(typeof (ES_SkillGrid))]
     [FriendOfAttribute(typeof (ES_SkillGrid))]
     public static partial class ES_SkillGridSystem
