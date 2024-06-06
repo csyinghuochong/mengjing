@@ -5,6 +5,13 @@ namespace ET.Client
 {
     public static partial class UnitHelper
     {
+        public static int GetWuqiItemID(Scene root)
+        {
+            Unit unit = GetMyUnitFromClientScene(root);
+            int itemId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Weapon);
+            return itemId;
+        }
+
         public static List<Unit> GetUnitList(Scene currentScene, int unitType)
         {
             List<Unit> list = new List<Unit>();

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_FashionShowItem))]
     [EntitySystemOf(typeof (ES_FashionShow))]
     [FriendOfAttribute(typeof (ES_FashionShow))]
     public static partial class ES_FashionShowSystem
@@ -48,30 +49,42 @@ namespace ET.Client
         private static void OnFashionShowItemsRefresh(this ES_FashionShow self, Transform transform, int index)
         {
             Scroll_Item_FashionShowItem scrollItemFashionShowItem = self.ScrollItemFashionShowItems[index].BindTrans(transform);
+            scrollItemFashionShowItem.Position = index + 2;
+            scrollItemFashionShowItem.OnUpdateUI(self.ShowFashion[index]);
+            scrollItemFashionShowItem.FashionWearHandler = self.OnFashionWear;
+            scrollItemFashionShowItem.PreviewHandler = self.OnFashionPreview;
         }
 
         public static void OnFashionWear(this ES_FashionShow self)
         {
-            int occ = self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo.Occ;
-            List<int> fashionids = self.ZoneScene().GetComponent<BagComponent>().FashionEquipList;
+            int occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ;
+            List<int> fashionids = self.Root().GetComponent<BagComponentC>().FashionEquipList;
 
             ////////把拼装后的模型显示在RawImages
-            BagInfo bagInfo = new BagInfo() { ItemID = UnitHelper.GetWuqiItemID(self.ZoneScene()) };
-            self.UIModelShowComponent.ShowPlayerPreviewModel(bagInfo, fashionids, occ);
+            BagInfo bagInfo = new() { ItemID = UnitHelper.GetWuqiItemID(self.Root()) };
+            self.ES_ModelShow.ShowPlayerPreviewModel(bagInfo, fashionids, occ);
 
-            for (int i = 0; i < self.FashionItemList.Count; i++)
+            if (self.ScrollItemFashionShowItems != null)
             {
-                self.FashionItemList[i].Position = i + 2;
-                self.FashionItemList[i].OnUpdateUI(self.FashionItemList[i].FashionId);
+                for (int i = 0; i < self.ScrollItemFashionShowItems.Count; i++)
+                {
+                    if (self.ScrollItemFashionShowItems[i].uiTransform == null)
+                    {
+                        continue;
+                    }
+
+                    self.ScrollItemFashionShowItems[i].Position = i + 2;
+                    self.ScrollItemFashionShowItems[i].OnUpdateUI(self.ScrollItemFashionShowItems[i].FashionId);
+                }
             }
         }
 
         public static void OnFashionPreview(this ES_FashionShow self, int fashionid)
         {
-            int occ = self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo.Occ;
-            List<int> equipids = self.ZoneScene().GetComponent<BagComponent>().FashionEquipList;
+            int occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ;
+            List<int> equipids = self.Root().GetComponent<BagComponentC>().FashionEquipList;
 
-            List<int> fashionids = new List<int>() { };
+            List<int> fashionids = new List<int>();
             fashionids.AddRange(equipids);
 
             bool have = false;
@@ -93,14 +106,14 @@ namespace ET.Client
             }
 
             ////////把拼装后的模型显示在RawImages
-            BagInfo bagInfo = new BagInfo() { ItemID = UnitHelper.GetWuqiItemID(self.ZoneScene()) };
-            self.UIModelShowComponent.ShowPlayerPreviewModel(bagInfo, fashionids, occ);
+            BagInfo bagInfo = new() { ItemID = UnitHelper.GetWuqiItemID(self.Root()) };
+            self.ES_ModelShow.ShowPlayerPreviewModel(bagInfo, fashionids, occ);
         }
 
         public static void OnClickSubButton(this ES_FashionShow self, int subType)
         {
-            UICommonHelper.SetParent(self.Image_Select, self.ButtonList[subType]);
-            self.Image_Select.transform.SetAsFirstSibling();
+            UICommonHelper.SetParent(self.E_Image_SelectImage.gameObject, self.ButtonList[subType]);
+            self.E_Image_SelectImage.transform.SetAsFirstSibling();
 
             self.OnUpdateFashionList(subType);
 
@@ -109,36 +122,13 @@ namespace ET.Client
 
         public static void OnUpdateFashionList(this ES_FashionShow self, int subType)
         {
-            int occ = self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo.Occ;
-            List<int> occfashionids = FashionConfigCategory.Instance.GetOccFashionList(occ, subType);
+            int occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ;
 
-            for (int i = 0; i < occfashionids.Count; i++)
-            {
-                UIFashionShowItemComponent uiitem = null;
-                if (i < self.FashionItemList.Count)
-                {
-                    uiitem = self.FashionItemList[i];
-                    uiitem.GameObject.SetActive(true);
-                }
-                else
-                {
-                    GameObject go = GameObject.Instantiate(self.UIFashionShowItem);
-                    go.SetActive(true);
-                    UICommonHelper.SetParent(go, self.BuildingList);
-                    uiitem = self.AddChild<UIFashionShowItemComponent, GameObject>(go);
-                    self.FashionItemList.Add(uiitem);
-                }
+            self.ShowFashion.Clear();
+            self.ShowFashion.AddRange(FashionConfigCategory.Instance.GetOccFashionList(occ, subType));
 
-                self.FashionItemList[i].Position = i + 2;
-                uiitem.OnUpdateUI(occfashionids[i]);
-                uiitem.FashionWearHandler = self.OnFashionWear;
-                uiitem.PreviewHandler = self.OnFashionPreview;
-            }
-
-            for (int i = occfashionids.Count; i < self.FashionItemList.Count; i++)
-            {
-                self.FashionItemList[i].GameObject.SetActive(false);
-            }
+            self.AddUIScrollItems(ref self.ScrollItemFashionShowItems, self.ShowFashion.Count);
+            self.E_FashionShowItemsLoopVerticalScrollRect.SetVisible(true, self.ShowFashion.Count);
         }
     }
 }

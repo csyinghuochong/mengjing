@@ -673,5 +673,19 @@ namespace ET.Client
             M2C_TitleUseResponse response = (M2C_TitleUseResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_FashionActiveResponse> FashionActive(Scene root, int fashionId)
+        {
+            C2M_FashionActiveRequest request = new() { FashionId = fashionId };
+            M2C_FashionActiveResponse response = (M2C_FashionActiveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<M2C_FashionWearResponse> FashionWear(Scene root, int fashionId, int operatateType)
+        {
+            C2M_FashionWearRequest request = new() { FashionId = fashionId, OperatateType = operatateType };
+            M2C_FashionWearResponse response = (M2C_FashionWearResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

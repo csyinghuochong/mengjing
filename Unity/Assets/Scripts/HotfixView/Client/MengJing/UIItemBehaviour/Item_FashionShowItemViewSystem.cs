@@ -50,9 +50,7 @@ namespace ET.Client
                         return;
                     }
 
-                    C2M_FashionActiveRequest request = new() { FashionId = self.FashionId };
-                    M2C_FashionActiveResponse response =
-                            (M2C_FashionActiveResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+                    M2C_FashionActiveResponse response = await BagClientNetHelper.FashionActive(self.Root(), self.FashionId);
                     if (instanceid != self.InstanceId)
                     {
                         return;
@@ -69,8 +67,7 @@ namespace ET.Client
                 case 1:
                 case 2:
                 {
-                    C2M_FashionWearRequest request = new() { FashionId = self.FashionId, OperatateType = self.Status };
-                    M2C_FashionWearResponse response = (M2C_FashionWearResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+                    M2C_FashionWearResponse response = await BagClientNetHelper.FashionWear(self.Root(), self.FashionId, self.Status);
                     if (instanceid != self.InstanceId)
                     {
                         return;

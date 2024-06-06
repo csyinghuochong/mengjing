@@ -132,6 +132,43 @@ namespace ET.Client
             self.Model.Add(go);
         }
 
+        public static void ShowPlayerPreviewModel(this ES_ModelShow self, BagInfo bagInfo, List<int> fashionids, int occ, bool canDrag = true)
+        {
+            self.RemoveModel();
+
+            self.E_RenderEventTrigger.triggers.Clear();
+            if (canDrag)
+            {
+                self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown(pdata as PointerEventData); });
+                self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
+                self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(pdata as PointerEventData); });
+            }
+
+            self.ReSetTexture();
+
+            var path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(occ).ModelAsset}");
+            GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+            GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
+            ChangeEquipComponent changeEquipComponent = self.GetComponent<ChangeEquipComponent>();
+            changeEquipComponent.WeaponId = self.GetWeaponId(bagInfo, occ);
+            changeEquipComponent.EquipIndex = 0;
+            changeEquipComponent.UseLayer = true;
+            changeEquipComponent.LoadEquipment(go, fashionids, occ);
+
+            Animator animator = go.GetComponentInChildren<Animator>();
+            if (animator != null)
+            {
+                animator.Play("ShowIdel");
+            }
+
+            LayerHelp.ChangeLayerAll(go.transform, LayerEnum.RenderTexture);
+            go.transform.localScale = Vector3.one;
+            go.transform.localPosition = Vector3.zero;
+            go.transform.localEulerAngles = Vector3.zero;
+
+            self.Model.Add(go);
+        }
+
         private static int GetWeaponId(this ES_ModelShow self, BagInfo bagInfo, int occ)
         {
             int weaponId = 0;
