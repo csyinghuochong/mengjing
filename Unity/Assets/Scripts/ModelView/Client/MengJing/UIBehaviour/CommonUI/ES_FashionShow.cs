@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,10 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_FashionShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public Dictionary<int, GameObject> ButtonList = new();
+		public Dictionary<int, Scroll_Item_FashionShowItem> ScrollItemFashionShowItems;
+		public List<int> ShowFashion = new();
+		
 		public ES_ModelShow ES_ModelShow
      	{
      		get

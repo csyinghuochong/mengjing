@@ -87,5 +87,6 @@ namespace ET.Client
 		WindowID_Protect,
 		WindowID_Setting,
 		WindowID_SettingSkill,
+		WindowID_FashionExplain,
 	}
 }

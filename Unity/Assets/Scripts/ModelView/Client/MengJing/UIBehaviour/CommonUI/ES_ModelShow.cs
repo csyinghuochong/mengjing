@@ -8,8 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_ModelShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
-		public Transform Camera;
-		public Transform ModelParent;
+		public Transform Camera { get; set; }
+		public Transform ModelParent { get; set; }
 		public List<GameObject> Model = new();
 		
 		public Vector2 StartPosition;

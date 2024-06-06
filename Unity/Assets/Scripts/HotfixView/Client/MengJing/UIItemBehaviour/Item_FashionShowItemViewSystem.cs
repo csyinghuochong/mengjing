@@ -31,8 +31,8 @@ namespace ET.Client
 
         public static async ETTask OnBtn_Desc(this Scroll_Item_FashionShowItem self)
         {
-            // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIFashionExplain);
-            // ui.GetComponent<UIFashionExplainComponent>().OnInitData(self.FashionId);
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_FashionExplain);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgFashionExplain>().OnInitData(self.FashionId);
         }
 
         public static async ETTask OnBtn_Active(this Scroll_Item_FashionShowItem self)
