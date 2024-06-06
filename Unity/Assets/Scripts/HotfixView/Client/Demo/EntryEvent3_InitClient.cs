@@ -37,6 +37,7 @@ namespace ET.Client
             root.AddComponent<MailComponentC>();
             root.AddComponent<ShoujiComponentC>();
             root.AddComponent<SoundComponent>();
+            root.AddComponent<TitleComponentC>();
             
             // 根据配置修改掉Main Fiber的SceneType
             SceneType sceneType = EnumHelper.FromString<SceneType>(globalComponent.GlobalConfig.AppType.ToString());

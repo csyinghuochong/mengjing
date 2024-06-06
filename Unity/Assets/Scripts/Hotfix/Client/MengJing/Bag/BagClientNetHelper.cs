@@ -666,5 +666,12 @@ namespace ET.Client
             M2C_ModifyNameResponse response = (M2C_ModifyNameResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_TitleUseResponse> TitleUse(Scene root, int titleId)
+        {
+            C2M_TitleUseRequest request = new() { TitleId = titleId };
+            M2C_TitleUseResponse response = (M2C_TitleUseResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

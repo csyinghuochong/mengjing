@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    
-    [ChildOf(typeof(UIPlayerHpComponent))]
+    [ChildOf]
     public class UIXuLieZhenComponent: Entity, IAwake<GameObject>, IDestroy
     {
         public GameObject GameObject;

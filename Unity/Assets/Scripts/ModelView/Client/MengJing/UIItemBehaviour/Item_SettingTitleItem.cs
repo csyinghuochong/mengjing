@@ -6,6 +6,9 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_SettingTitleItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
+		public int Title;
+		public UIXuLieZhenComponent UIXuLieZhenComponent { get; set; }
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)

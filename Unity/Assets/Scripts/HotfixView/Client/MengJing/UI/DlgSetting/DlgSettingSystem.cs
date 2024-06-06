@@ -48,12 +48,18 @@ namespace ET.Client
                     break;
                 case 1:
                     self.View.ES_SettingTitle.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_SettingTitle.OnUpdateUI();
                     break;
                 case 2:
                     break;
                 case 3:
                     break;
             }
+        }
+
+        public static void OnTitleUse(this DlgSetting self)
+        {
+            self.View.ES_SettingTitle.OnUpdateUI();
         }
     }
 }
