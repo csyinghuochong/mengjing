@@ -40,7 +40,7 @@ namespace ET.Server
     public static void OnGetItem(this ShoujiComponentS self, int itemId)
     {
         ItemStarInfo itemStarInfo = null;
-        List<ItemStarInfo> itemStars = ShouJiConfigCategory.Instance.ItemStarInfos;
+        List<ItemStarInfo> itemStars = ShouJiConfigCategory.Instance.GetItemStarInfos();
         for (int i = 0; i < itemStars.Count; i++)
         {
             if (itemStars[i].ItemId == itemId)

@@ -6,6 +6,6 @@ namespace ET.Client
     public class TitleComponentC: Entity, IAwake
     {
         // 称号
-        public List<KeyValuePairInt> TitleList = new();
+        public List<KeyValuePairInt> TitleList { get; set; } = new();
     }
 }

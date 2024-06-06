@@ -1164,7 +1164,7 @@ namespace ET.Server
                    }
                    int shulianduNumeric = makePlan == 1 ? NumericType.MakeShuLianDu_1 : NumericType.MakeShuLianDu_2;
                    int shuliandu = unit.GetComponent<NumericComponentS>().GetAsInt(shulianduNumeric);
-                   //ItemAddHelper.JianDingFuItem(useBagInfo, shuliandu, getType);
+                   ItemAddHelper.JianDingFuItem(useBagInfo, shuliandu, getType);
                }
                //食物
                if (itemCof.ItemType == 1 && itemCof.ItemSubType == 131)
@@ -1181,7 +1181,7 @@ namespace ET.Server
                {
                    string name = unit.GetComponent<UserInfoComponentS>().GetName();
                    string noticeContent = $"恭喜玩家 {name} 获得装备: <color=#{ComHelp.QualityReturnColor(5)}>{itemCof.ItemName}</color>";
-                   //ServerMessageHelper.SendBroadMessage(self.Zone(), NoticeType.Notice, noticeContent);
+                   BroadMessageHelper.SendBroadMessage(self.Root(), NoticeType.Notice, noticeContent);
                }
 
                //刷新传承属性
@@ -1190,7 +1190,7 @@ namespace ET.Server
                {
                    int occ = unit.GetComponent<UserInfoComponentS>().GetOcc();
                    int occTwo = unit.GetComponent<UserInfoComponentS>().GetOccTwo();
-                   int skillid = 0;// XiLianHelper.XiLianChuanChengJianDing(itemCof, occ, occTwo);
+                   int skillid =  XiLianHelper.XiLianChuanChengJianDing(itemCof, occ, occTwo);
                    if (skillid != 0)
                    {
                        useBagInfo.InheritSkills.Add(skillid);
@@ -1201,18 +1201,18 @@ namespace ET.Server
                if (itemCof.ItemType == ItemTypeEnum.Consume && itemCof.ItemSubType == 17)
                {
                    // 属性
-                   //useBagInfo.IncreaseProLists.AddRange(XiLianHelper.GetHidePro(useBagInfo.ItemID));
+                   useBagInfo.IncreaseProLists.AddRange(XiLianHelper.GetHidePro(useBagInfo.ItemID));
                    // 技能
-                   //useBagInfo.IncreaseSkillLists.AddRange(XiLianHelper.GetHideSkill(useBagInfo.ItemID));
+                   useBagInfo.IncreaseSkillLists.AddRange(XiLianHelper.GetHideSkill(useBagInfo.ItemID));
                }
 
                // 赛季晶核
                if (itemCof.ItemType == ItemTypeEnum.Equipment && itemCof.EquipType == 201)
                {
-                   //useBagInfo.ItemPar = ItemHelper.GetJingHeInitQulity(useBagInfo.ItemID).ToString();
+                   useBagInfo.ItemPar = ItemHelper.GetJingHeInitQulity(useBagInfo.ItemID).ToString();
 
                    //增加技能的晶核无须鉴定
-                   int jingheSkill = 0;// ItemHelper.GetJingHeSkillId(useBagInfo.ItemID);
+                   int jingheSkill = ItemHelper.GetJingHeSkillId(useBagInfo.ItemID);
                    if (jingheSkill > 0)
                    {
                        useBagInfo.IfJianDing = false;
@@ -1228,7 +1228,7 @@ namespace ET.Server
                m2c_bagUpdate.BagInfoAdd.Add(useBagInfo);
            }
            //检测任务需求道具
-           //ItemAddHelper.OnGetItem(unit, getType, itemID, leftNum);
+           ItemAddHelper.OnGetItem(unit, getType, itemID, leftNum);
        }
 
        //通知客户端背包道具发生改变
