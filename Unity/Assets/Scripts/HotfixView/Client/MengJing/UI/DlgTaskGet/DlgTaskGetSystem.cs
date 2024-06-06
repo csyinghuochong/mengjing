@@ -299,29 +299,29 @@ namespace ET.Client
 
         public static async ETTask RequestEnterFuben(this DlgTaskGet self, int sceneId)
         {
-            // SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
-            // int sceneType = sceneConfig.MapType;
-            // if (sceneType == SceneTypeEnum.Arena)
-            // {
-            //     Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            //     if (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.ArenaNumber) > 0)
-            //     {
-            //         FlyTipComponent.Instance.SpawnFlyTipDi("次数不足！");
-            //         return;
-            //     }
-            //
-            //     if (!FunctionHelp.IsInTime(1031))
-            //     {
-            //         FlyTipComponent.Instance.SpawnFlyTipDi("不在活动时间内！");
-            //         return;
-            //     }
-            // }
-            //
-            // int errorCode = await EnterFubenHelp.RequestTransfer(self.ZoneScene(), sceneType, sceneId);
-            // if (errorCode == ErrorCode.ERR_Success && !self.IsDisposed)
-            // {
-            //     self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TaskGet);
-            // }
+            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
+            int sceneType = sceneConfig.MapType;
+            if (sceneType == SceneTypeEnum.Arena)
+            {
+                Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                if (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.ArenaNumber) > 0)
+                {
+                    FlyTipComponent.Instance.SpawnFlyTipDi("次数不足！");
+                    return;
+                }
+            
+                if (!FunctionHelp.IsInTime(1031))
+                {
+                    FlyTipComponent.Instance.SpawnFlyTipDi("不在活动时间内！");
+                    return;
+                }
+            }
+            
+            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), sceneType, sceneId);
+            if (errorCode == ErrorCode.ERR_Success && !self.IsDisposed)
+            {
+                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TaskGet);
+            }
 
             await ETTask.CompletedTask;
         }

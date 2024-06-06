@@ -346,7 +346,7 @@ namespace ET.Server
                         }
                         
                         SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
-                        int curPlayerNum = int.Parse(f2M_YeWaiSceneIdResponse.Message); // UnitHelper.GetUnitList(unit.DomainScene(), UnitType.Player).Count;
+                        int curPlayerNum = int.Parse(f2M_YeWaiSceneIdResponse.Message);
                         if (sceneConfig.PlayerLimit > 0 && sceneConfig.PlayerLimit <= curPlayerNum)
                         {
                             return ErrorCode.ERR_MapLimit;
