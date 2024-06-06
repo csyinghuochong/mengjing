@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,9 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_MainSkill : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public ES_FangunSkill UIFangunComponet { get; set; }
+		public List<ES_SkillGrid> UISkillGirdList = new();
+		public SkillManagerComponentC SkillManagerComponent { get; set; }
 		public float LastLockTime;
 		public float LastPickTime;
 		public long SwitchCDEndTime;

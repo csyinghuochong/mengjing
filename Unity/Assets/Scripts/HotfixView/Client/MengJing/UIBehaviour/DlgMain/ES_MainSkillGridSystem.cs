@@ -10,7 +10,7 @@ namespace ET.Client
     public static partial class ES_MainSkillGridSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.ES_MainSkillGrid self, UnityEngine.Transform transform)
+        private static void Awake(this ES_MainSkillGrid self, Transform transform)
         {
             self.uiTransform = transform;
 
@@ -33,16 +33,16 @@ namespace ET.Client
             Scene scene = self.Scene();
             Scene root = self.Root();
             Scene fibir = self.Fiber().Root;
-            
+
             self.LockTargetComponent = self.Scene().GetComponent<LockTargetComponent>();
-            self.SkillIndicatorComponent =  self.Scene().GetComponent<SkillIndicatorComponent>();
+            self.SkillIndicatorComponent = self.Scene().GetComponent<SkillIndicatorComponent>();
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Client.ES_MainSkillGrid self)
+        private static void Destroy(this ES_MainSkillGrid self)
         {
         }
-        
+
         public static void RemoveEventTriggers(this ES_MainSkillGrid self)
         {
             EventTrigger eventTrigger = self.E_Btn_SkillStart.GetComponent<EventTrigger>();
@@ -270,7 +270,8 @@ namespace ET.Client
             }
 
             self.RemoveSkillInfoShow();
-            self.SkillInfoShowTimer = self.Root().GetComponent<TimerComponent>().NewOnceTimer(TimeHelper.ServerNow() + 2000, TimerInvokeType.SkillInfoShowTimer, self);
+            self.SkillInfoShowTimer = self.Root().GetComponent<TimerComponent>()
+                    .NewOnceTimer(TimeHelper.ServerNow() + 2000, TimerInvokeType.SkillInfoShowTimer, self);
             if (self.SkillWuqiConfig.SkillZhishiType == 1)
             {
                 self.E_SkillYanGan.gameObject.SetActive(true);
@@ -345,7 +346,7 @@ namespace ET.Client
             self.E_Text_SkillItemNum.GetComponent<Text>().text = number.ToString();
 
             UICommonHelper.SetImageGray(self.Root(), self.E_SkillDi.gameObject, number == 0);
-            UICommonHelper.SetImageGray(self.Root(),self.E_Img_SkillIcon.gameObject, number == 0);
+            UICommonHelper.SetImageGray(self.Root(), self.E_Img_SkillIcon.gameObject, number == 0);
         }
 
         public static void SendCancleSkill(this ES_MainSkillGrid self)
@@ -428,7 +429,7 @@ namespace ET.Client
                 }
 
                 self.E_SkillSecondCD.fillAmount = 1f * (allTime - passTime) / allTime;
-                await  self.Root().GetComponent<TimerComponent>().WaitAsync(100);
+                await self.Root().GetComponent<TimerComponent>().WaitAsync(100);
                 passTime += 100;
             }
         }
@@ -461,7 +462,7 @@ namespace ET.Client
 
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.RoleSkillIcon, skillConfig.SkillIcon);
-                Sprite sp =   self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
                 if (!self.AssetPath.Contains(path))
                 {
                     self.AssetPath.Add(path);
