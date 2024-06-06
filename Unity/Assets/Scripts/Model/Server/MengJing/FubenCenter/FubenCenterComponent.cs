@@ -9,7 +9,7 @@ namespace ET.Server
     {
         public List<long> FubenInstanceList { get; set; } = new List<long>();
         
-        public List<ActorId> FubenActorIdList { get; set; } = new List<ActorId>();
+        public Dictionary<int, ActorId> FubenActorIdList { get; set; } = new Dictionary<int, ActorId>();
         public Dictionary<int, long> YeWaiFubenList { get; set; } = new Dictionary<int, long>();
         public ServerInfo ServerInfo { get; set; }
 

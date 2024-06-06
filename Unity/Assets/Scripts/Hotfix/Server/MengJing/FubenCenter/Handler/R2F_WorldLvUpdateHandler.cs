@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ET.Server
 {
@@ -12,7 +13,7 @@ namespace ET.Server
             List<ActorId> mapIdList = new List<ActorId>();
             FubenCenterComponent fubenCenterComponent = scene.GetComponent<FubenCenterComponent>();
             mapIdList.Add(StartSceneConfigCategory.Instance.GetBySceneName(scene.Zone(), $"Map{ComHelp.MainCityID()}").ActorId);
-            mapIdList.AddRange(fubenCenterComponent.FubenActorIdList );
+            mapIdList.AddRange(fubenCenterComponent.FubenActorIdList.Values.ToList() );
             for (int i = mapIdList.Count - 1; i >= 0; i--)
             {
                 try

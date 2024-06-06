@@ -313,6 +313,7 @@ namespace ET.Server
 
                 self.FubenInstanceList.Add(fubenInstanceId);
                 self.YeWaiFubenList.Add(sceneConfigs[i].Id, fubenInstanceId);
+                self.FubenActorIdList.Add( sceneConfigs[i].Id, new ActorId( self.Fiber().Process, self.Fiber().Id, fubenInstanceId ) );
 
                 Scene fubnescene = GateMapFactory.Create(self, fubenid, fubenInstanceId,  "YeWai" + sceneConfigs[i].Id.ToString());
                 MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();

@@ -16,7 +16,7 @@ namespace ET.Client
 
                 string sceneName = currentScene.Name;
                 MapComponent mapComponent = root.GetComponent<MapComponent>();
-                if (mapComponent.SceneType == SceneTypeEnum.PetTianTi)
+                if (SceneConfigHelper.UseSceneConfig( args.SceneType ))
                 {
                     sceneName = SceneConfigCategory.Instance.Get(mapComponent.SceneId).MapID.ToString();
                 }
