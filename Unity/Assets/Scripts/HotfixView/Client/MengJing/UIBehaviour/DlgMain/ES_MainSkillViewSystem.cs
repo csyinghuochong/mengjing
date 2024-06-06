@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -13,6 +14,52 @@ namespace ET.Client
         private static void Awake(this ES_MainSkill self, Transform transform)
         {
             self.uiTransform = transform;
+
+            self.E_Btn_TargetButton.AddListener(self.OnLockTargetUnit);
+
+            self.E_Btn_ShiQuButton.AddListener(() => { self.OnShiquItem(3f); });
+
+            self.E_Btn_NpcDuiHuaButton.AddListener(self.OnBtn_NpcDuiHua);
+
+            self.E_Button_ZhuaPuButton.AddListener(self.OnButton_ZhuaPu);
+            self.E_Button_ZhuaPuButton.gameObject.SetActive(false);
+
+            self.E_Btn_PetTargetButton.AddListenerAsync(self.OnBtn_PetTarget);
+
+            self.E_Btn_CancleSkillEventTrigger.RegisterEvent(EventTriggerType.PointerEnter, (pdata) => { self.OnEnterCancelButton(); });
+            self.E_Btn_CancleSkillEventTrigger.gameObject.SetActive(false);
+
+            self.E_Btn_JingLingButton.AddListenerAsync(self.OnBtn_JingLing);
+
+            self.E_Button_Switch_0Button.AddListenerAsync(self.OnButton_Switch);
+
+            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_0);
+            self.ES_SkillGrid_Normal_0.SkillCancelHandler = self.ShowCancelButton;
+            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_1);
+            self.ES_SkillGrid_Normal_1.SkillCancelHandler = self.ShowCancelButton;
+            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_2);
+            self.ES_SkillGrid_Normal_2.SkillCancelHandler = self.ShowCancelButton;
+            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_3);
+            self.ES_SkillGrid_Normal_3.SkillCancelHandler = self.ShowCancelButton;
+            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_4);
+            self.ES_SkillGrid_Normal_4.SkillCancelHandler = self.ShowCancelButton;
+            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_5);
+            self.ES_SkillGrid_Normal_5.SkillCancelHandler = self.ShowCancelButton;
+            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_6);
+            self.ES_SkillGrid_Normal_6.SkillCancelHandler = self.ShowCancelButton;
+            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_7);
+            self.ES_SkillGrid_Normal_7.SkillCancelHandler = self.ShowCancelButton;
+            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_8);
+            self.ES_SkillGrid_Normal_8.SkillCancelHandler = self.ShowCancelButton;
+            self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_9);
+            self.ES_SkillGrid_Normal_9.SkillCancelHandler = self.ShowCancelButton;
+
+            self.ES_SkillGrid_Normal_juexing.uiTransform.gameObject.SetActive(false);
+
+            // DataUpdateComponent.Instance.AddListener(DataType.SkillCDUpdate, self);
+            // DataUpdateComponent.Instance.AddListener(DataType.SkillBeging, self);
+            // DataUpdateComponent.Instance.AddListener(DataType.SkillFinish, self);
+            // DataUpdateComponent.Instance.AddListener(DataType.JingLingButton, self);
         }
 
         [EntitySystem]

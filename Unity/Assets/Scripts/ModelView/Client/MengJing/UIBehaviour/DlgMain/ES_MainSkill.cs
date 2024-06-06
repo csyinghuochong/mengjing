@@ -320,7 +320,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_UI_MainRose_attackRectTransform
+		public ES_AttackGrid ES_AttackGrid
      	{
      		get
      		{
@@ -329,11 +329,12 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_UI_MainRose_attackRectTransform == null )
+     			if( this.m_es_attackgrid == null )
      			{
-		    		this.m_EG_UI_MainRose_attackRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_UI_MainRose_attack");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_AttackGrid");
+		    	   this.m_es_attackgrid = this.AddChild<ES_AttackGrid,Transform>(subTrans);
      			}
-     			return this.m_EG_UI_MainRose_attackRectTransform;
+     			return this.m_es_attackgrid;
      		}
      	}
 
@@ -708,7 +709,7 @@ namespace ET.Client
 			this.m_es_skillgrid_transforms_0 = null;
 			this.m_es_skillgrid_transforms_1 = null;
 			this.m_es_skillgrid_transforms_2 = null;
-			this.m_EG_UI_MainRose_attackRectTransform = null;
+			this.m_es_attackgrid = null;
 			this.m_E_Btn_CancleSkillButton = null;
 			this.m_E_Btn_CancleSkillImage = null;
 			this.m_E_Btn_CancleSkillEventTrigger = null;
@@ -749,7 +750,7 @@ namespace ET.Client
 		private EntityRef<ES_SkillGrid> m_es_skillgrid_transforms_0 = null;
 		private EntityRef<ES_SkillGrid> m_es_skillgrid_transforms_1 = null;
 		private EntityRef<ES_SkillGrid> m_es_skillgrid_transforms_2 = null;
-		private UnityEngine.RectTransform m_EG_UI_MainRose_attackRectTransform = null;
+		private EntityRef<ES_AttackGrid> m_es_attackgrid = null;
 		private UnityEngine.UI.Button m_E_Btn_CancleSkillButton = null;
 		private UnityEngine.UI.Image m_E_Btn_CancleSkillImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_Btn_CancleSkillEventTrigger = null;

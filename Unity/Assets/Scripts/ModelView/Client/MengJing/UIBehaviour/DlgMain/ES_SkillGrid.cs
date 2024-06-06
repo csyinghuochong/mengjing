@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,20 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_SkillGrid : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public SkillConfig SkillWuqiConfig;
+		public SkillConfig SkillBaseConfig;
+
+		public bool UseSkill;
+		public bool CancelSkill;
+		public SkillPro SkillPro;
+		public Action<bool> SkillCancelHandler;
+
+		public LockTargetComponent LockTargetComponent { get; set; }
+		public SkillIndicatorComponent SkillIndicatorComponent { get; set; }
+		public long SkillInfoShowTimer;
+		public int Index;
+		public Action<int> UseSkillHandler;
+		
 		public UnityEngine.UI.Image E_E_SkillDiImage
      	{
      		get
