@@ -61,6 +61,23 @@ namespace ET.Client
             }
         }
 
+        [Invoke(TimerInvokeType.UIMainFPSTimer)]
+        public class UIMainFPSTimer: ATimer<DlgMain>
+        {
+            protected override void Run(DlgMain self)
+            {
+                try
+                {
+                    self.UpdatePing();
+                    self.UpdateMessage();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+
         [Invoke(TimerInvokeType.JoystickTimer)]
         public class JoystickTimer: ATimer<DlgMain>
         {
@@ -1287,21 +1304,59 @@ namespace ET.Client
 
         public static void ShowPing(this DlgMain self)
         {
-            // if (self.View.EG_FpsRectTransform.gameObject.activeSelf)
+            TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
+            if (self.View.EG_FpsRectTransform.gameObject.activeSelf)
+            {
+                self.View.EG_FpsRectTransform.gameObject.SetActive(false);
+                // OpcodeHelper.ShowMessage = false;
+                timerComponent.Remove(ref self.TimerPing);
+            }
+            else
+            {
+                self.View.EG_FpsRectTransform.gameObject.SetActive(true);
+                // self.TextMessage.text = string.Empty;
+                // OpcodeHelper.ShowMessage = true;
+                // OpcodeHelper.OneTotalNumber = 0;
+                timerComponent.Remove(ref self.TimerPing);
+                self.TimerPing = timerComponent.NewRepeatedTimer(5000, TimerInvokeType.UIMainFPSTimer, self);
+            }
+        }
+
+        public static void UpdatePing(this DlgMain self)
+        {
+            // SessionComponent sessionComponent = self.Root()?.GetComponent<SessionComponent>();
+            // if (sessionComponent == null || sessionComponent.Session == null)
             // {
-            //     self.View.EG_FpsRectTransform.gameObject.SetActive(false);
-            //     OpcodeHelper.ShowMessage = false;
-            //     TimerComponent.Instance?.Remove(ref self.TimerPing);
+            //     return;
             // }
-            // else
+            //
+            // PingComponent pingComponent = sessionComponent.Session.GetComponent<PingComponent>();
+            // if (pingComponent == null)
             // {
-            //     self.View.EG_FpsRectTransform.gameObject.SetActive(true);
-            //     self.TextMessage.text = string.Empty;
-            //     OpcodeHelper.ShowMessage = true;
-            //     OpcodeHelper.OneTotalNumber = 0;
-            //     TimerComponent.Instance?.Remove(ref self.TimerPing);
-            //     self.TimerPing = TimerComponent.Instance.NewRepeatedTimer(5000, TimerType.UIMainFPSTimer, self);
+            //     return;
             // }
+            //
+            // long ping = pingComponent.Ping;
+            // self.TextPing.text = StringBuilderHelper.GetPing(ping);
+            // if (ping <= 200)
+            // {
+            //     self.TextPing.color = Color.green;
+            //     return;
+            // }
+            //
+            // if (ping <= 500)
+            // {
+            //     self.TextPing.color = Color.yellow;
+            //     return;
+            // }
+            //
+            // self.TextPing.color = Color.red;
+        }
+
+        public static void UpdateMessage(this DlgMain self)
+        {
+            // self.TextMessage.text = StringBuilderHelper.GetMessageCnt(OpcodeHelper.OneTotalNumber);
+            // OpcodeHelper.OneTotalNumber = 0;
         }
     }
 }
