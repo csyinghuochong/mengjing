@@ -312,7 +312,7 @@ namespace ET.Client
                 }
             }
 
-            self.E_Btn_Click_0Button.gameObject.SetActive(value != "0");
+            self.E_Image_Click_0Image.gameObject.gameObject.SetActive(value != "0");
         }
 
         public static void UpdateGuaJiRange(this ES_SettingGuaJi self)
