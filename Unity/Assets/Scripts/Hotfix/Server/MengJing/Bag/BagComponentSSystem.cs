@@ -266,6 +266,11 @@ namespace ET.Server
            {
                bagInfos[i].InheritSkills.Clear();
            }
+
+           if ((itemConfig.EquipType == 113 || itemConfig.EquipType == 127) && string.IsNullOrEmpty((bagInfos[i].ItemPar)) )
+           {
+               ItemAddHelper.TreasureItem( unit,  bagInfos[i]);
+           }
        }
    }
 
@@ -946,7 +951,7 @@ namespace ET.Server
            {
                //检测任务需求道具
                unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneyAdd(userDataType, leftNum.ToString(), true, getType);
-               // ItemAddHelper.OnGetItem(unit, getType, itemID, leftNum);
+               ItemAddHelper.OnGetItem(unit, getType, itemID, leftNum);
                continue;
            }
 
@@ -1143,7 +1148,7 @@ namespace ET.Server
                //藏宝图
                if (itemCof.ItemSubType == 113 || itemCof.ItemSubType == 127)
                {
-                   //ItemAddHelper.TreasureItem(unit, useBagInfo);
+                   ItemAddHelper.TreasureItem(unit, useBagInfo);
                }
                //鉴定符
                if (itemCof.ItemSubType == 121)
