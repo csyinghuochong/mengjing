@@ -78,6 +78,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_FashionShow ES_FashionShow
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_fashionshow == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_FashionShow");
+		    	   this.m_es_fashionshow = this.AddChild<ES_FashionShow,Transform>(subTrans);
+     			}
+     			return this.m_es_fashionshow;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -169,6 +187,7 @@ namespace ET.Client
 			this.m_es_settinggame = null;
 			this.m_es_settingtitle = null;
 			this.m_es_settingguaji = null;
+			this.m_es_fashionshow = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_1Toggle = null;
 			this.m_E_2Toggle = null;
@@ -181,6 +200,7 @@ namespace ET.Client
 		private EntityRef<ES_SettingGame> m_es_settinggame = null;
 		private EntityRef<ES_SettingTitle> m_es_settingtitle = null;
 		private EntityRef<ES_SettingGuaJi> m_es_settingguaji = null;
+		private EntityRef<ES_FashionShow> m_es_fashionshow = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_1Toggle = null;
 		private UnityEngine.UI.Toggle m_E_2Toggle = null;
