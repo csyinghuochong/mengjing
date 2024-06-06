@@ -15,6 +15,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
+            self.Camera = self.EG_RootRectTransform.transform.Find("Camera");
             self.ModelParent = self.EG_RootRectTransform.Find("ModelParent");
 
             self.AddComponent<ChangeEquipComponent>();
@@ -76,6 +77,19 @@ namespace ET.Client
             self.EG_RootRectTransform.transform.Find("Camera").localPosition = vector3;
         }
 
+        public static void RemoveModel(this ES_ModelShow self)
+        {
+            if (self.Model != null)
+            {
+                for (int i = 0; i < self.Model.Count; i++)
+                {
+                    UnityEngine.Object.Destroy(self.Model[i]);
+                }
+            }
+
+            self.Model.Clear();
+        }
+
         public static void ChangeWeapon(this ES_ModelShow self, BagInfo bagInfo, int occ)
         {
             self.GetComponent<ChangeEquipComponent>().ChangeWeapon(self.GetWeaponId(bagInfo, occ));
@@ -84,6 +98,8 @@ namespace ET.Client
         public static void ShowPlayerModel(this ES_ModelShow self, BagInfo bagInfo, int occ, int equipIndex, List<int> fashionids,
         bool canDrag = true)
         {
+            self.RemoveModel();
+
             self.E_RenderEventTrigger.triggers.Clear();
             if (canDrag)
             {
@@ -91,9 +107,6 @@ namespace ET.Client
                 self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
                 self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(pdata as PointerEventData); });
             }
-
-            UICommonHelper.DestoryChild(self.ModelParent.gameObject);
-            self.UnitModel = null;
 
             self.ReSetTexture();
 
@@ -105,8 +118,7 @@ namespace ET.Client
             changeEquipComponent.EquipIndex = equipIndex;
             changeEquipComponent.UseLayer = true;
             changeEquipComponent.LoadEquipment(go, fashionids, occ);
-            self.UnitModel = go;
-            Animator animator = self.UnitModel.GetComponentInChildren<Animator>();
+            Animator animator = go.GetComponentInChildren<Animator>();
             if (animator != null)
             {
                 animator.Play("ShowIdel");
@@ -116,6 +128,8 @@ namespace ET.Client
             go.transform.localScale = Vector3.one;
             go.transform.localPosition = Vector3.zero;
             go.transform.localEulerAngles = Vector3.zero;
+
+            self.Model.Add(go);
         }
 
         private static int GetWeaponId(this ES_ModelShow self, BagInfo bagInfo, int occ)
@@ -129,45 +143,10 @@ namespace ET.Client
             return weaponId;
         }
 
-        public static void ShowPlayerPreviewModel(this ES_ModelShow self, BagInfo bagInfo, List<int> fashionids, int occ, bool canDrag = true)
-        {
-            self.E_RenderEventTrigger.triggers.Clear();
-            if (canDrag)
-            {
-                self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown(pdata as PointerEventData); });
-                self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
-                self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(pdata as PointerEventData); });
-            }
-
-            UICommonHelper.DestoryChild(self.ModelParent.gameObject);
-            self.UnitModel = null;
-
-            self.ReSetTexture();
-
-            var path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(occ).ModelAsset}");
-            GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-            GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
-            ChangeEquipComponent changeEquipComponent = self.GetComponent<ChangeEquipComponent>();
-            changeEquipComponent.WeaponId = self.GetWeaponId(bagInfo, occ);
-            changeEquipComponent.EquipIndex = 0;
-            changeEquipComponent.UseLayer = true;
-            changeEquipComponent.LoadEquipment(go, fashionids, occ);
-
-            self.UnitModel = go;
-            Animator animator = self.UnitModel.GetComponentInChildren<Animator>();
-            if (animator != null)
-            {
-                animator.Play("ShowIdel");
-            }
-
-            LayerHelp.ChangeLayerAll(go.transform, LayerEnum.RenderTexture);
-            go.transform.localScale = Vector3.one;
-            go.transform.localPosition = Vector3.zero;
-            go.transform.localEulerAngles = Vector3.zero;
-        }
-
         public static async ETTask ShowOtherModel(this ES_ModelShow self, string assetPath, bool isPet = false, bool canDrag = true)
         {
+            self.RemoveModel();
+
             self.E_RenderEventTrigger.triggers.Clear();
             if (canDrag)
             {
@@ -175,9 +154,6 @@ namespace ET.Client
                 self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
                 self.E_RenderEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(pdata as PointerEventData); });
             }
-
-            UICommonHelper.DestoryChild(self.ModelParent.gameObject);
-            self.UnitModel = null;
 
             self.ReSetTexture();
 
@@ -191,7 +167,6 @@ namespace ET.Client
             GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
             LayerHelp.ChangeLayerAll(go.transform, LayerEnum.RenderTexture);
 
-            self.UnitModel = go;
             go.transform.localScale = Vector3.one;
             go.transform.localPosition = Vector3.zero;
             go.transform.localEulerAngles = Vector3.zero;
@@ -200,6 +175,34 @@ namespace ET.Client
             {
                 Animator animator = go.GetComponentInChildren<Animator>();
                 animator.Play(RandomHelper.RandFloat01() >= 0.5? "Skill_1" : "Skill_2");
+            }
+
+            self.Model.Add(go);
+        }
+
+        public static async ETTask ShowModelList(this ES_ModelShow self, string initpath, List<string> assetPath)
+        {
+            self.RemoveModel();
+            long instanceId = self.InstanceId;
+
+            ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+            for (int i = 0; i < assetPath.Count; i++)
+            {
+                var path = ABPathHelper.GetUnitPath(initpath + assetPath[i]);
+                GameObject prefab = await resourcesLoaderComponent.LoadAssetAsync<GameObject>(path);
+                if (instanceId != self.InstanceId)
+                {
+                    return;
+                }
+
+                GameObject go = UnityEngine.Object.Instantiate(prefab, self.ModelParent, true);
+                LayerHelp.ChangeLayerAll(go.transform, LayerEnum.RenderTexture);
+                go.transform.SetParent(self.ModelParent);
+                go.transform.localScale = Vector3.one;
+                go.transform.localPosition = Vector3.zero;
+                go.transform.localEulerAngles = Vector3.zero;
+
+                self.Model.Add(go);
             }
         }
 
@@ -213,9 +216,12 @@ namespace ET.Client
 
         public static void PlayShowIdelAnimate(this ES_ModelShow self)
         {
-            if (self.UnitModel == null)
+            if (self.Model.Count == 0)
+            {
                 return;
-            Animator animator = self.UnitModel.GetComponentInChildren<Animator>();
+            }
+
+            Animator animator = self.Model[0].GetComponentInChildren<Animator>();
             if (animator != null)
             {
                 animator.Play("ShowIdel");

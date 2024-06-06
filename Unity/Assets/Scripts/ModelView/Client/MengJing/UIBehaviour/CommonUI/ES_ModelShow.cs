@@ -1,14 +1,17 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ModelShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_ModelShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
-		public GameObject UnitModel;
+		public Transform Camera;
 		public Transform ModelParent;
+		public List<GameObject> Model = new();
+		
 		public Vector2 StartPosition;
 		public bool Draged = false;
 		private ChangeEquipComponent ChangeEquipComponent { get; set; }

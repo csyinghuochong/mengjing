@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -6,6 +7,12 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_FashionShowItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
+		public Action<int> PreviewHandler;
+		public Action FashionWearHandler;
+		public int FashionId;
+		public int Status;
+		public int Position;
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
