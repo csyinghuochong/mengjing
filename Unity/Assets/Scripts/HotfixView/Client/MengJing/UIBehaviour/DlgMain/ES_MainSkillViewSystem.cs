@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_FangunSkill))]
     [FriendOf(typeof (ES_SkillGrid))]
     [EntitySystemOf(typeof (ES_MainSkill))]
     [FriendOfAttribute(typeof (ES_MainSkill))]
@@ -153,23 +154,16 @@ namespace ET.Client
             //切换技能按钮。。 变身后只有一个技能按钮，读取monsterconfig.ActSkillID.. 
             if (runraceid > 0)
             {
-                // if (self.SkillBianSheng == null)
-                // {
-                //     ReferenceCollector rc = self.Transforms.GetComponent<ReferenceCollector>();
-                //     GameObject go = rc.Get<GameObject>("UI_MainRoseSkill_item_0");
-                //     UISkillGridComponent uiSkillGridComponent = self.AddChild<UISkillGridComponent, GameObject>(go);
-                //     uiSkillGridComponent.SkillCancelHandler = self.ShowCancelButton;
-                //     self.UISkillBianSheng = uiSkillGridComponent;
-                // }
-                //
-                // MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(runraceid);
-                // if (monsterConfig.SkillID != null && monsterConfig.SkillID.Length > 0)
-                // {
-                //     SkillPro skillPro = new SkillPro();
-                //     skillPro.SkillID = monsterConfig.SkillID[0];
-                //     skillPro.SkillSetType = (int)SkillSetEnum.Skill;
-                //     self.UISkillBianSheng.UpdateSkillInfo(skillPro);
-                // }
+                self.ES_SkillGrid_Transforms_0.SkillCancelHandler = self.ShowCancelButton;
+
+                MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(runraceid);
+                if (monsterConfig.SkillID != null && monsterConfig.SkillID.Length > 0)
+                {
+                    SkillPro skillPro = new();
+                    skillPro.SkillID = monsterConfig.SkillID[0];
+                    skillPro.SkillSetType = SkillSetEnum.Skill;
+                    self.ES_SkillGrid_Transforms_0.UpdateSkillInfo(skillPro);
+                }
 
                 self.EG_NormalRectTransform.gameObject.SetActive(false);
                 self.EG_TransformsRectTransform.gameObject.SetActive(true);
@@ -190,7 +184,7 @@ namespace ET.Client
             self.ES_SkillGrid_Normal_juexing.uiTransform.gameObject.SetActive(show_new);
             if (!show_old && show_new)
             {
-                // self.ES_SkillGrid_Normal_juexing.RemoveSkillInfoShow();
+                self.ES_SkillGrid_Normal_juexing.RemoveSkillInfoShow();
             }
 
             if (show_old && !show_new)
@@ -246,7 +240,7 @@ namespace ET.Client
 
                     C2M_JingLingDropRequest request = new();
                     M2C_JingLingDropResponse response =
-                            (M2C_JingLingDropResponse)await self.Root().GetComponent<SessionComponent>().Session.Call(request);
+                            (M2C_JingLingDropResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
                     chengJiuComponent.RandomDrop = 1;
                     self.CheckJingLingFunction();
                     break;
@@ -473,106 +467,107 @@ namespace ET.Client
 
         public static void OnSkillSecond(this ES_MainSkill self, M2C_SkillSecondResult message)
         {
-            // for (int i = 0; i < self.UISkillGirdList.Count; i++)
-            // {
-            //     if (self.UISkillGirdList[i].SkillPro == null)
-            //     {
-            //         continue;
-            //     }
-            //
-            //     if (self.UISkillGirdList[i].SkillPro.SkillID == message.SkillId)
-            //     {
-            //         self.UISkillGirdList[i].OnSkillSecondResult(message);
-            //     }
-            // }
+            for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            {
+                if (self.UISkillGirdList[i].SkillPro == null)
+                {
+                    continue;
+                }
+
+                if (self.UISkillGirdList[i].SkillPro.SkillID == message.SkillId)
+                {
+                    self.UISkillGirdList[i].OnSkillSecondResult(message);
+                }
+            }
         }
 
         public static void OnSkillBeging(this ES_MainSkill self, string dataParams)
         {
-            // int skillId = int.Parse(dataParams);
-            // for (int i = 0; i < self.UISkillGirdList.Count; i++)
-            // {
-            //     if (self.UISkillGirdList[i].SkillPro == null)
-            //     {
-            //         continue;
-            //     }
-            //
-            //     if (self.UISkillGirdList[i].SkillPro.SkillID == skillId)
-            //     {
-            //         self.UISkillGirdList[i].Button_Cancle.SetActive(true);
-            //     }
-            // }
+            int skillId = int.Parse(dataParams);
+            for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            {
+                if (self.UISkillGirdList[i].SkillPro == null)
+                {
+                    continue;
+                }
+
+                if (self.UISkillGirdList[i].SkillPro.SkillID == skillId)
+                {
+                    self.UISkillGirdList[i].E_Button_CancleButton.gameObject.SetActive(true);
+                }
+            }
         }
 
         public static void OnSkillFinish(this ES_MainSkill self, string dataParams)
         {
-            // int skillId = int.Parse(dataParams);
-            // for (int i = 0; i < self.UISkillGirdList.Count; i++)
-            // {
-            //     if (self.UISkillGirdList[i].SkillPro == null)
-            //     {
-            //         continue;
-            //     }
-            //
-            //     if (self.UISkillGirdList[i].SkillPro.SkillID == skillId)
-            //     {
-            //         self.UISkillGirdList[i].Button_Cancle.SetActive(false);
-            //     }
-            // }
+            int skillId = int.Parse(dataParams);
+            for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            {
+                if (self.UISkillGirdList[i].SkillPro == null)
+                {
+                    continue;
+                }
+
+                if (self.UISkillGirdList[i].SkillPro.SkillID == skillId)
+                {
+                    self.UISkillGirdList[i].E_Button_CancleButton.gameObject.SetActive(false);
+                }
+            }
         }
 
         public static void OnSkillCDUpdate(this ES_MainSkill self)
         {
-            // if (self.SkillManagerComponent == null)
-            // {
-            //     Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
-            //     self.SkillManagerComponent = unit.GetComponent<SkillManagerComponent>();
-            // }
-            //
-            // long serverTime = TimeHelper.ServerNow();
-            // long pulicCd = self.SkillManagerComponent.SkillPublicCDTime - serverTime;
-            // for (int i = 0; i < self.UISkillGirdList.Count; i++)
-            // {
-            //     UISkillGridComponent uISkillGridComponent = self.UISkillGirdList[i];
-            //     uISkillGridComponent.OnUpdate(self.SkillManagerComponent.GetCdTime(uISkillGridComponent.GetSkillId(), serverTime),
-            //         i < 8? pulicCd : 0);
-            // }
-            //
-            // if (self.JueXingSkillId > 0)
-            // {
-            //     self.UISkillJueXing.OnUpdate(self.SkillManagerComponent.GetCdTime(self.JueXingSkillId, serverTime), pulicCd);
-            // }
-            //
-            // self.UISkillBianSheng?.OnUpdate(self.SkillManagerComponent.GetCdTime(self.UISkillBianSheng.GetSkillId(), serverTime), pulicCd);
-            // self.UIFangunComponet.OnUpdate(self.SkillManagerComponent.GetCdTime(self.UIFangunComponet.SkillId, serverTime));
+            if (self.SkillManagerComponent == null)
+            {
+                Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                self.SkillManagerComponent = unit.GetComponent<SkillManagerComponentC>();
+            }
+
+            long serverTime = TimeHelper.ServerNow();
+            long pulicCd = self.SkillManagerComponent.SkillPublicCDTime - serverTime;
+            for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            {
+                ES_SkillGrid uISkillGridComponent = self.UISkillGirdList[i];
+                uISkillGridComponent.OnUpdate(self.SkillManagerComponent.GetCdTime(uISkillGridComponent.GetSkillId(), serverTime),
+                    i < 8? pulicCd : 0);
+            }
+
+            if (self.JueXingSkillId > 0)
+            {
+                self.ES_SkillGrid_Normal_juexing.OnUpdate(self.SkillManagerComponent.GetCdTime(self.JueXingSkillId, serverTime), pulicCd);
+            }
+
+            self.ES_SkillGrid_Transforms_0?.OnUpdate(self.SkillManagerComponent.GetCdTime(self.ES_SkillGrid_Transforms_0.GetSkillId(), serverTime),
+                pulicCd);
+            self.ES_FangunSkill.OnUpdate(self.SkillManagerComponent.GetCdTime(self.ES_FangunSkill.SkillId, serverTime));
         }
 
         public static void OnEnterScene(this ES_MainSkill self, Unit unit, int sceneType)
         {
-            // self.SkillManagerComponent = unit.GetComponent<SkillManagerComponent>();
-            // self.OnSkillCDUpdate();
-            // self.CheckJingLingFunction();
-            // self.OnUpdateButton();
-            // for (int i = 0; i < self.UISkillGirdList.Count; i++)
-            // {
-            //     self.UISkillGirdList[i].RemoveSkillInfoShow();
-            // }
-            //
-            // self.UISkillJueXing.RemoveSkillInfoShow();
+            self.SkillManagerComponent = unit.GetComponent<SkillManagerComponentC>();
+            self.OnSkillCDUpdate();
+            self.CheckJingLingFunction();
+            self.OnUpdateButton();
+            for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            {
+                self.UISkillGirdList[i].RemoveSkillInfoShow();
+            }
+
+            self.ES_SkillGrid_Normal_juexing.RemoveSkillInfoShow();
         }
 
         public static void ResetUI(this ES_MainSkill self)
         {
-            // for (int i = 0; i < self.UISkillGirdList.Count; i++)
-            // {
-            //     UISkillGridComponent uISkillGridComponent = self.UISkillGirdList[i];
-            //     uISkillGridComponent.RemoveSkillInfoShow();
-            //     uISkillGridComponent.OnUpdate(0, 0);
-            //     uISkillGridComponent.UseSkill = false;
-            //     uISkillGridComponent.SkillSecond = 0;
-            // }
-            //
-            // self.UIFangunComponet.OnUpdate(0);
+            for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            {
+                ES_SkillGrid uISkillGridComponent = self.UISkillGirdList[i];
+                uISkillGridComponent.RemoveSkillInfoShow();
+                uISkillGridComponent.OnUpdate(0, 0);
+                uISkillGridComponent.UseSkill = false;
+                uISkillGridComponent.SkillSecond = 0;
+            }
+
+            self.ES_FangunSkill.OnUpdate(0);
         }
 
         public static void OnLockTargetUnit(this ES_MainSkill self)
@@ -597,44 +592,44 @@ namespace ET.Client
 
         public static void OnEnterCancelButton(this ES_MainSkill self)
         {
-            // FloatTipManager.Instance.ShowFloatTip("取消技能施法");
-            //
-            // for (int i = 0; i < self.UISkillGirdList.Count; i++)
-            // {
-            //     self.UISkillGirdList[i].OnEnterCancelButton();
-            // }
-            //
-            // self.UISkillJueXing.OnEnterCancelButton();
+            FlyTipComponent.Instance.SpawnFlyTipDi("取消技能施法");
+
+            for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            {
+                self.UISkillGirdList[i].OnEnterCancelButton();
+            }
+
+            self.ES_SkillGrid_Normal_juexing.OnEnterCancelButton();
         }
 
         public static void OnBagItemUpdate(this ES_MainSkill self)
         {
-            // for (int i = 0; i < self.UISkillGirdList.Count; i++)
-            // {
-            //     self.UISkillGirdList[i].UpdateItemNumber();
-            // }
+            for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            {
+                self.UISkillGirdList[i].UpdateItemNumber();
+            }
         }
 
         public static void OnSkillSetUpdate(this ES_MainSkill self)
         {
-            // SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
-            // for (int i = 0; i < 10; i++)
-            // {
-            //     UISkillGridComponent skillgrid = self.UISkillGirdList[i];
-            //     SkillPro skillid = skillSetComponent.GetByPosition(i + 1);
-            //     skillgrid.UpdateSkillInfo(skillid);
-            // }
-            //
-            // int occTwo = self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo.OccTwo;
-            // if (occTwo == 0)
-            // {
-            //     return;
-            // }
-            //
-            // OccupationTwoConfig occupationConfigCategory = OccupationTwoConfigCategory.Instance.Get(occTwo);
-            // int juexingid = occupationConfigCategory.JueXingSkill[7];
-            // self.UISkillJueXing.UpdateSkillInfo(skillSetComponent.GetSkillPro(juexingid));
-            // self.JueXingSkillId = juexingid;
+            SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
+            for (int i = 0; i < 10; i++)
+            {
+                ES_SkillGrid skillgrid = self.UISkillGirdList[i];
+                SkillPro skillid = skillSetComponent.GetByPosition(i + 1);
+                skillgrid.UpdateSkillInfo(skillid);
+            }
+
+            int occTwo = self.Root().GetComponent<UserInfoComponentC>().UserInfo.OccTwo;
+            if (occTwo == 0)
+            {
+                return;
+            }
+
+            OccupationTwoConfig occupationConfigCategory = OccupationTwoConfigCategory.Instance.Get(occTwo);
+            int juexingid = occupationConfigCategory.JueXingSkill[7];
+            self.ES_SkillGrid_Normal_juexing.UpdateSkillInfo(skillSetComponent.GetSkillPro(juexingid));
+            self.JueXingSkillId = juexingid;
         }
     }
 }

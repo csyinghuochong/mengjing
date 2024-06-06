@@ -7,6 +7,9 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_FangunSkill : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public float LastSkillTime;
+		public int SkillId;
+		
 		public UnityEngine.UI.Image E_Img_SkillCDImage
      	{
      		get

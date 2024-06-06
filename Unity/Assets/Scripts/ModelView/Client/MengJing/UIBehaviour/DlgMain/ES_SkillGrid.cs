@@ -21,6 +21,7 @@ namespace ET.Client
 		public long SkillInfoShowTimer;
 		public int Index;
 		public Action<int> UseSkillHandler;
+		public int SkillSecond = 0;    //1 可以二段 
 		
 		public UnityEngine.UI.Image E_E_SkillDiImage
      	{
