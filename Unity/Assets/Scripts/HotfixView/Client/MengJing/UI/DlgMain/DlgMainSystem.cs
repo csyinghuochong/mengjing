@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_MainSkill))]
     [FriendOf(typeof (Scroll_Item_MainChatItem))]
     [FriendOf(typeof (ChatComponent))]
     [FriendOf(typeof (TaskComponentC))]
@@ -110,8 +111,8 @@ namespace ET.Client
             self.View.E_NpcDuiHuaButton.AddListener(self.OnNpcDuiHuaButton);
             self.View.E_UnionButton.AddListener(self.OnUnionButton);
             self.View.E_OpenChatButton.AddListener(self.OnOpenChat);
-            self.View.E_Button_ZhanKai.AddListener(self.OnButtonZhanKai);
-            self.View.E_Btn_RerurnBuilding.AddListener(self.OnClickReturnButton);
+            self.View.E_Button_ZhanKaiButton.AddListener(self.OnButtonZhanKai);
+            self.View.E_Btn_RerurnBuildingButton.AddListener(self.OnClickReturnButton);
 
             self.View.E_YaoGanDiMoveEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
                 (pdata) => { self.PointerDown_Move(pdata as PointerEventData); });
@@ -1124,12 +1125,12 @@ namespace ET.Client
 
         private static void OnButtonZhanKai(this DlgMain self)
         {
-            bool active = self.View.E_Btn_TopRight_1.gameObject.activeSelf;
-            self.View.E_Btn_TopRight_1.gameObject.SetActive(!active);
-            self.View.E_Btn_TopRight_2.gameObject.SetActive(!active);
-            self.View.E_Btn_TopRight_3.gameObject.SetActive(!active);
+            bool active = self.View.EG_Btn_TopRight_1RectTransform.gameObject.activeSelf;
+            self.View.EG_Btn_TopRight_1RectTransform.gameObject.SetActive(!active);
+            self.View.EG_Btn_TopRight_2RectTransform.gameObject.SetActive(!active);
+            self.View.EG_Btn_TopRight_3RectTransform.gameObject.SetActive(!active);
 
-            self.View.E_Button_ZhanKai.transform.localScale = active? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
+            self.View.E_Button_ZhanKaiButton.transform.localScale = active? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
         }
 
         public static void OnClickReturnButton(this DlgMain self)
@@ -1228,7 +1229,7 @@ namespace ET.Client
         {
             Log.Debug("BeginEnterScene");
 
-            self.View.ES_MainTeam.ResetUI();
+            // self.View.ES_MainTeam.ResetUI();
             self.View.ES_MainSkill.ResetUI();
             // self.UIMainBuffComponent.ResetUI();
             // self.UIJoystickMoveComponent.ResetUI();
@@ -1251,8 +1252,8 @@ namespace ET.Client
         {
             //
             self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
-            self.View.E_UIMainSkill.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.MainCityScene);
-            self.View.E_HomeButton.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.MainCityScene);
+            self.View.ES_MainSkill.uiTransform.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.MainCityScene);
+            self.View.EG_HomeButtonRectTransform.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.MainCityScene);
 
             self.View.ES_MainSkill.OnSkillSetUpdate();
             self.OnEnterScene();

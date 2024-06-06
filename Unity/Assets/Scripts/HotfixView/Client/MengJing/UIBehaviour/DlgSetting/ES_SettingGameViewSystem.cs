@@ -67,7 +67,8 @@ namespace ET.Client
 
             self.E_Btn_FpsButton.AddListener(self.OnBtn_Fps);
 
-            // self.E_Image_fpsImage.gameObject.SetActive(self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.E_fp);
+            self.E_Image_fpsImage.gameObject.SetActive(self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.EG_FpsRectTransform
+                    .gameObject.activeSelf);
 
             self.E_InputFieldCNameInputField.onValueChanged.AddListener((text) => { self.CheckSensitiveWords(); });
 
@@ -134,11 +135,11 @@ namespace ET.Client
         public static void OnButtonSkillSet(this ES_SettingGame self)
         {
             DlgMain dlgMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
-            // if (!dlgMain.View.ES_MainSkill.uiTransform.gameObject.activeSelf)
-            // {
-            //     FlyTipComponent.Instance.SpawnFlyTipDi("请移动至有技能框的区域,比如探险地区进行更改");
-            //     return;
-            // }
+            if (!dlgMain.View.ES_MainSkill.uiTransform.gameObject.activeSelf)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("请移动至有技能框的区域,比如探险地区进行更改");
+                return;
+            }
 
             // dlgMain.UIMainButtonPositionComponent.ShowSkillPositionSet();
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgHuoBiSet>().OnClose();

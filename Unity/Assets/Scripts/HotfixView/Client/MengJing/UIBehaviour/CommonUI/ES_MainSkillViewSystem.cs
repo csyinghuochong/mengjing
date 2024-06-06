@@ -1,78 +1,36 @@
-using System.Collections.Generic;
-using Unity.Mathematics;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_SkillGrid))]
     [EntitySystemOf(typeof (ES_MainSkill))]
     [FriendOfAttribute(typeof (ES_MainSkill))]
     public static partial class ES_MainSkillSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.ES_MainSkill self, UnityEngine.Transform transform)
+        private static void Awake(this ES_MainSkill self, Transform transform)
         {
             self.uiTransform = transform;
-
-            self.E_Btn_Target.GetComponent<Button>().onClick.AddListener(self.OnLockTargetUnit);
-            self.E_shiquButton.GetComponent<Button>().onClick.AddListener(() => { self.OnShiquItem(3f); });
-            self.E_Btn_NpcDuiHua.GetComponent<Button>().onClick.AddListener(self.OnBtn_NpcDuiHua);
-            self.E_Button_ZhuaPu.GetComponent<Button>().onClick.AddListener(self.OnButton_ZhuaPu);
-            self.E_Btn_PetTarget.GetComponent<Button>().onClick.AddListener(() => { self.OnBtn_PetTarget().Coroutine(); });
-
-            EventTrigger eventTrigger = self.E_Btn_CancleSkill.GetComponent<EventTrigger>();
-            eventTrigger.RegisterEvent(EventTriggerType.PointerEnter, (pdata) => { self.OnEnterCancelButton(); });
-
-            self.E_Btn_JingLing.onClick.AddListener(() => { self.OnBtn_JingLing().Coroutine(); });
-            self.E_Button_Switch_0.onClick.AddListener(() => { self.OnButton_Switch().Coroutine(); });
-
-            self.OnInitUI();
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Client.ES_MainSkill self)
+        private static void Destroy(this ES_MainSkill self)
         {
             self.DestroyWidget();
         }
 
-        private static void OnInitUI(this ET.Client.ES_MainSkill self)
-        {
-            List<Vector3> positionList = new List<Vector3>()
-            {
-                new Vector3(-148.7f, 302.2f, 0f),
-                new Vector3(-306.2f, 271.9f, 0f),
-                new Vector3(-382.7f, 153.4f, 0f),
-                new Vector3(-112.2f, 434.5f, 0f),
-                new Vector3(-253.6f, 425.5f, 0f),
-                new Vector3(-407.7f, 367.8f, 0f),
-                new Vector3(-493.7f, 236.71f, 0f),
-                new Vector3(-506.5f, 90.7f, 0f),
-                new Vector3(-326.6f, 61.7f, 0f),
-                new Vector3(-68.7f, 226.2f, 0f),
-            };
-
-            for (int i = 0; i < 10; i++)
-            {
-                GameObject go = GameObject.Instantiate(self.E_MainRoseSkill_item);
-                go.SetActive(true);
-                ES_MainSkillGrid skillgrid = self.AddChild<ES_MainSkillGrid, Transform>(go.transform);
-                skillgrid.SkillCancelHandler = self.ShowCancelButton;
-                self.MainSkillGridList.Add(skillgrid);
-                UICommonHelper.SetParent(go, self.E_MainRoseSkill_item.transform.parent.gameObject);
-                go.transform.localPosition = positionList[i];
-            }
-        }
-
         public static async ETTask OnBtn_PetTarget(this ES_MainSkill self)
         {
-            long lockId = self.Scene().GetComponent<LockTargetComponent>().LastLockId;
+            long lockId = self.Root().GetComponent<LockTargetComponent>().LastLockId;
             if (lockId == 0)
             {
                 return;
             }
 
-            await BagClientNetHelper.PetTargetLock(self.Root(), lockId);
+            C2M_PetTargetLockRequest request = new() { TargetId = lockId };
+            M2C_PetTargetLockResponse response = (M2C_PetTargetLockResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
         }
 
         public static async ETTask OnButton_Switch(this ES_MainSkill self)
@@ -87,15 +45,15 @@ namespace ET.Client
             BagInfo equip_2 = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip_2, (int)ItemSubTypeEnum.Wuqi);
             if (equip_1 == null || equip_2 == null)
             {
-                FlyTipComponent.Instance.SpawnFlyTip("请先在对应位置装备武器！");
+                FlyTipComponent.Instance.SpawnFlyTipDi("请先在对应位置装备武器！");
                 return;
             }
 
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             int equipIndex = numericComponent.GetAsInt(NumericType.EquipIndex);
-
-            M2C_ItemEquipIndexResponse response = await BagClientNetHelper.ItemEquipIndex(self.Root(), equipIndex == 0? 1 : 0);
+            C2M_ItemEquipIndexRequest request = new() { EquipIndex = equipIndex == 0? 1 : 0 };
+            M2C_ItemEquipIndexResponse response = (M2C_ItemEquipIndexResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
             if (self.IsDisposed || response.Error > 0)
             {
                 return;
@@ -105,12 +63,13 @@ namespace ET.Client
 
             self.OnUpdateButton();
             self.ShowSwitchCD().Coroutine();
-            unit.GetComponent<AttackComponent>().UpdateComboTime();
+            UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<AttackComponent>().UpdateComboTime();
             EventSystem.Instance.Publish(self.Root(), new DataUpdate_EquipWear());
         }
 
         public static async ETTask ShowSwitchCD(this ES_MainSkill self)
         {
+            TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
             while (self.SwitchCDEndTime > 0)
             {
                 long passTime = self.SwitchCDEndTime - TimeHelper.ServerNow();
@@ -121,8 +80,8 @@ namespace ET.Client
                 }
 
                 float rate = passTime * 1f / ConfigData.HunterSwichCD;
-                self.E_Button_Switch_CD.fillAmount = rate;
-                await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
+                self.E_Button_Switch_CDImage.fillAmount = rate;
+                await timerComponent.WaitFrameAsync();
                 if (self.IsDisposed)
                 {
                     break;
@@ -132,71 +91,70 @@ namespace ET.Client
 
         public static void OnUpdateButton(this ES_MainSkill self)
         {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             int equipIndex = numericComponent.GetAsInt(NumericType.EquipIndex);
             int occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ;
-            self.E_Button_Switch_0.gameObject.SetActive(occ == 3);
+            self.E_Button_Switch_0Button.gameObject.SetActive(occ == 3);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, equipIndex == 0? "c12" : "c11");
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-            self.E_Button_Switch_0.GetComponent<Image>().sprite = sp;
+            self.E_Button_Switch_0Image.sprite = sp;
         }
 
         public static void OnTransform(this ES_MainSkill self, int runraceid, int cardmonsterid)
         {
             //切换技能按钮。。 变身后只有一个技能按钮，读取monsterconfig.ActSkillID.. 
-            //Normal / Transforms
             if (runraceid > 0)
             {
-                if (self.SkillGridBianSheng == null)
-                {
-                    ReferenceCollector rc = self.E_Transforms.GetComponent<ReferenceCollector>();
-                    GameObject go = rc.Get<GameObject>("UI_MainRoseSkill_item_0");
-                    ES_MainSkillGrid uiSkillGridComponent = self.AddChild<ES_MainSkillGrid, Transform>(go.transform);
-                    uiSkillGridComponent.SkillCancelHandler = self.ShowCancelButton;
-                    self.SkillGridBianSheng = uiSkillGridComponent;
-                }
+                // if (self.SkillBianSheng == null)
+                // {
+                //     ReferenceCollector rc = self.Transforms.GetComponent<ReferenceCollector>();
+                //     GameObject go = rc.Get<GameObject>("UI_MainRoseSkill_item_0");
+                //     UISkillGridComponent uiSkillGridComponent = self.AddChild<UISkillGridComponent, GameObject>(go);
+                //     uiSkillGridComponent.SkillCancelHandler = self.ShowCancelButton;
+                //     self.UISkillBianSheng = uiSkillGridComponent;
+                // }
+                //
+                // MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(runraceid);
+                // if (monsterConfig.SkillID != null && monsterConfig.SkillID.Length > 0)
+                // {
+                //     SkillPro skillPro = new SkillPro();
+                //     skillPro.SkillID = monsterConfig.SkillID[0];
+                //     skillPro.SkillSetType = (int)SkillSetEnum.Skill;
+                //     self.UISkillBianSheng.UpdateSkillInfo(skillPro);
+                // }
 
-                MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(runraceid);
-                if (monsterConfig.SkillID != null && monsterConfig.SkillID.Length > 0)
-                {
-                    SkillPro skillPro = new SkillPro();
-                    skillPro.SkillID = monsterConfig.SkillID[0];
-                    skillPro.SkillSetType = (int)SkillSetEnum.Skill;
-                    self.SkillGridBianSheng.UpdateSkillInfo(skillPro);
-                }
-
-                self.E_Normal.gameObject.SetActive(false);
-                self.E_Transforms.gameObject.SetActive(true);
+                self.EG_NormalRectTransform.gameObject.SetActive(false);
+                self.EG_TransformsRectTransform.gameObject.SetActive(true);
             }
             else
             {
-                self.E_Normal.gameObject.SetActive(true);
-                self.E_Transforms.gameObject.SetActive(false);
+                self.EG_NormalRectTransform.gameObject.SetActive(true);
+                self.EG_TransformsRectTransform.gameObject.SetActive(false);
             }
         }
 
         public static void OnUpdateAngle(this ES_MainSkill self)
         {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
-            bool show_old = self.SkillGridJueXing.UITransform.gameObject.activeSelf;
+            bool show_old = self.ES_SkillGrid_Normal_juexing.uiTransform.gameObject.activeSelf;
             bool show_new = numericComponent.GetAsInt(NumericType.JueXingAnger) >= 500;
-            self.SkillGridJueXing.UITransform.gameObject.SetActive(show_new);
+            self.ES_SkillGrid_Normal_juexing.uiTransform.gameObject.SetActive(show_new);
             if (!show_old && show_new)
             {
-                self.SkillGridJueXing.RemoveSkillInfoShow();
+                // self.ES_SkillGrid_Normal_juexing.RemoveSkillInfoShow();
             }
 
             if (show_old && !show_new)
             {
-                self.Scene().GetComponent<SkillIndicatorComponent>().RecoveryEffect();
+                self.Root().GetComponent<SkillIndicatorComponent>().RecoveryEffect();
             }
         }
 
         public static void CheckJingLingFunction(this ES_MainSkill self)
         {
-            self.E_Btn_JingLing.gameObject.SetActive(false);
+            self.E_Btn_JingLingButton.gameObject.SetActive(false);
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
             if (chengJiuComponent.JingLingId == 0)
             {
@@ -218,7 +176,7 @@ namespace ET.Client
                     break;
             }
 
-            self.E_Btn_JingLing.gameObject.SetActive(showButton);
+            self.E_Btn_JingLingButton.gameObject.SetActive(showButton);
         }
 
         public static async ETTask OnBtn_JingLing(this ES_MainSkill self)
@@ -239,15 +197,17 @@ namespace ET.Client
                         return;
                     }
 
-                    await BagClientNetHelper.JingLingDrop(self.Root());
+                    C2M_JingLingDropRequest request = new();
+                    M2C_JingLingDropResponse response =
+                            (M2C_JingLingDropResponse)await self.Root().GetComponent<SessionComponent>().Session.Call(request);
                     chengJiuComponent.RandomDrop = 1;
                     self.CheckJingLingFunction();
                     break;
                 case 7:
                     int functionId = int.Parse(jingLingConfig.FunctionValue);
                     FuntionConfig funtionConfig = FuntionConfigCategory.Instance.Get(functionId);
-                    //string uipath = FunctionUI.GetUIPath(funtionConfig.Name);
-                    //UIHelper.Create(self.ZoneScene(), uipath).Coroutine();
+                    WindowID uipath = FunctionUI.GetUIPath(funtionConfig.Name);
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(uipath).Coroutine();
                     break;
                 default:
                     break;
@@ -258,23 +218,23 @@ namespace ET.Client
         {
             if (unitlock == null || unitlock.Type != UnitType.Monster)
             {
-                self.E_Button_ZhuaPu.gameObject.SetActive(false);
+                self.E_Button_ZhuaPuButton.gameObject.SetActive(false);
                 return;
             }
 
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitlock.ConfigId);
-            self.E_Button_ZhuaPu.gameObject.SetActive(monsterConfig.MonsterSonType == 58 || monsterConfig.MonsterSonType == 59);
+            self.E_Button_ZhuaPuButton.gameObject.SetActive(monsterConfig.MonsterSonType == 58 || monsterConfig.MonsterSonType == 59);
         }
 
         public static void OnButton_ZhuaPu(this ES_MainSkill self)
         {
-            long lockTargetId = self.Scene().GetComponent<LockTargetComponent>().LastLockId;
+            long lockTargetId = self.Root().GetComponent<LockTargetComponent>().LastLockId;
             if (lockTargetId == 0)
             {
                 return;
             }
 
-            Unit main = UnitHelper.GetMyUnitFromClientScene(self.Scene());
+            Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
             Unit target = main.GetParent<UnitComponent>().Get(lockTargetId);
             if (target == null)
             {
@@ -287,8 +247,10 @@ namespace ET.Client
                 return;
             }
 
-            float3 dir = math.normalize(main.Position - target.Position);
-            float3 position = target.Position + dir * 2f;
+            Vector3 unitPos = main.Position;
+            Vector3 targetPos = target.Position;
+            Vector3 dir = (unitPos - targetPos).normalized;
+            Vector3 position = targetPos + dir * 2f;
             self.MoveToNpc(target, position).Coroutine();
         }
 
@@ -299,8 +261,9 @@ namespace ET.Client
                 return;
             }
 
-            // UIHelper.CurrentNpcId = target.ConfigId;
-            // UIHelper.CurrentNpcUI = UIType.UIZhuaPu;
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+            uiComponent.CurrentNpcId = target.ConfigId;
+            // uiComponent.CurrentNpcUI = WindowID.WindowID_ZhuaPu;
             // UI uimain = UIHelper.GetUI(self.ZoneScene(), UIType.UIMain);
             // uimain.GetComponent<UIMainComponent>().UIJoystickMoveComponent.GameObject.SetActive(false);
             // CameraComponent cameraComponent = self.ZoneScene().CurrentScene().GetComponent<CameraComponent>();
@@ -309,7 +272,7 @@ namespace ET.Client
 
         public static async ETTask MoveToNpc(this ES_MainSkill self, Unit target, Vector3 position)
         {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (ErrorCode.ERR_Success != unit.GetComponent<StateComponentC>().CanMove())
                 return;
 
@@ -329,16 +292,16 @@ namespace ET.Client
 
         public static async ETTask OnBuildEnter(this ES_MainSkill self)
         {
-            await ETTask.CompletedTask;
             // UI uimain = UIHelper.GetUI(self.ZoneScene(), UIType.UIMain);
             // uimain.GetComponent<UIMainComponent>().UIJoystickMoveComponent.GameObject.SetActive(true);
-            // long lockTargetId = self.ZoneScene().GetComponent<LockTargetComponent>().LastLockId;
+            // long lockTargetId = self.Root().GetComponent<LockTargetComponent>().LastLockId;
             // if (lockTargetId == 0)
             // {
             //     return;
             // }
-            // Unit unit = self.ZoneScene().CurrentScene().GetComponent<UnitComponent>().Get(lockTargetId);
-            // if (unit == null || unit.Type!=UnitType.Monster)
+            //
+            // Unit unit = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(lockTargetId);
+            // if (unit == null || unit.Type != UnitType.Monster)
             // {
             //     return;
             // }
@@ -346,28 +309,29 @@ namespace ET.Client
             // //创建UI
             // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIZhuaPu);
             // ui.GetComponent<UIZhuaPuComponent>().OnInitUI(unit);
+            await ETTask.CompletedTask;
         }
 
         public static void OnBtn_NpcDuiHua(this ES_MainSkill self)
         {
-            //DuiHuaHelper.MoveToNpcDialog(self.ZoneScene());
+            // DuiHuaHelper.MoveToNpcDialog(self.ZoneScene());
         }
 
         public static void OnShiquItem(this ES_MainSkill self, float distance)
         {
             if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() <= 0)
             {
-                EventSystem.Instance.Publish(self.Root(), new ShowFlyTip() { Str = "背包已满!" });
+                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_BagIsFull);
                 return;
             }
 
-            Unit main = UnitHelper.GetMyUnitFromClientScene(self.Scene());
+            Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (main.GetComponent<SkillManagerComponentC>().IsSkillMoveTime())
             {
                 return;
             }
 
-            List<DropInfo> ids = MapHelper.GetCanShiQu(self.Scene(), distance);
+            List<DropInfo> ids = MapHelper.GetCanShiQu(self.Root(), distance);
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (ids.Count > 0)
             {
@@ -397,44 +361,46 @@ namespace ET.Client
                 self.RequestShiQu(ids).Coroutine();
 
                 //播放音效
-                //UIHelper.PlayUIMusic("10004");
+                // UIHelper.PlayUIMusic("10004");
                 return;
             }
             else
             {
-                Unit unit = MapHelper.GetNearItem(self.Scene());
+                Unit unit = MapHelper.GetNearItem(self.Root());
                 if (unit != null)
                 {
-                    float3 dir = math.normalize(main.Position - unit.Position);
-                    float3 tar = unit.Position + (dir * 1f);
+                    Vector3 mainPos = main.Position;
+                    Vector3 unitPos = unit.Position;
+                    Vector3 dir = (mainPos - unitPos).normalized;
+                    Vector3 tar = unitPos + dir * 1f;
                     self.MoveToShiQu(tar).Coroutine();
                     return;
                 }
             }
 
-            long chestId = MapHelper.GetChestBox(self.Scene());
+            long chestId = MapHelper.GetChestBox(self.Root());
             if (chestId != 0)
             {
-                self.Scene().CurrentScene().GetComponent<OperaComponent>().OnClickChest(chestId);
+                self.Root().CurrentScene().GetComponent<OperaComponent>().OnClickChest(chestId);
             }
         }
 
         public static async ETTask RequestShiQu(this ES_MainSkill self, List<DropInfo> ids)
         {
-            if (TimeHelper.ServerNow() - self.LastPickTime < 1000)
+            if (Time.time - self.LastPickTime < 1f)
             {
                 return;
             }
 
-            self.LastPickTime = TimeHelper.ServerNow();
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
+            self.LastPickTime = Time.time;
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (!unit.GetComponent<MoveComponent>().IsArrived())
             {
-                MoveHelper.Stop(self.Root());
+                self.Root().GetComponent<ClientSenderCompnent>().Send(new C2M_Stop());
             }
 
             unit.GetComponent<FsmComponent>().ChangeState(FsmStateEnum.FsmShiQuItem);
-            MapHelper.SendShiquItem(self.Scene(), ids).Coroutine();
+            MapHelper.SendShiquItem(self.Root(), ids).Coroutine();
 
             unit.GetComponent<StateComponentC>().SetNetWaitEndTime(TimeHelper.ClientNow() + 200);
             long instancId = self.InstanceId;
@@ -449,9 +415,9 @@ namespace ET.Client
 
         public static async ETTask MoveToShiQu(this ES_MainSkill self, Vector3 position)
         {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int value = await unit.MoveToAsync(position);
-            List<DropInfo> ids = MapHelper.GetCanShiQu(self.Scene(), 3f);
+            List<DropInfo> ids = MapHelper.GetCanShiQu(self.Root(), 3f);
             if (value == 0 && ids.Count > 0)
             {
                 self.RequestShiQu(ids).Coroutine();
@@ -460,112 +426,116 @@ namespace ET.Client
 
         public static void OnSkillSecond(this ES_MainSkill self, M2C_SkillSecondResult message)
         {
-            for (int i = 0; i < self.MainSkillGridList.Count; i++)
-            {
-                if (self.MainSkillGridList[i].SkillPro == null)
-                {
-                    continue;
-                }
-
-                if (self.MainSkillGridList[i].SkillPro.SkillID == message.SkillId)
-                {
-                    self.MainSkillGridList[i].OnSkillSecondResult(message);
-                }
-            }
+            // for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            // {
+            //     if (self.UISkillGirdList[i].SkillPro == null)
+            //     {
+            //         continue;
+            //     }
+            //
+            //     if (self.UISkillGirdList[i].SkillPro.SkillID == message.SkillId)
+            //     {
+            //         self.UISkillGirdList[i].OnSkillSecondResult(message);
+            //     }
+            // }
         }
 
         public static void OnSkillBeging(this ES_MainSkill self, string dataParams)
         {
-            int skillId = int.Parse(dataParams);
-            for (int i = 0; i < self.MainSkillGridList.Count; i++)
-            {
-                if (self.MainSkillGridList[i].SkillPro == null)
-                {
-                    continue;
-                }
-
-                if (self.MainSkillGridList[i].SkillPro.SkillID == skillId)
-                {
-                    self.MainSkillGridList[i].E_Button_Cancle.gameObject.SetActive(true);
-                }
-            }
+            // int skillId = int.Parse(dataParams);
+            // for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            // {
+            //     if (self.UISkillGirdList[i].SkillPro == null)
+            //     {
+            //         continue;
+            //     }
+            //
+            //     if (self.UISkillGirdList[i].SkillPro.SkillID == skillId)
+            //     {
+            //         self.UISkillGirdList[i].Button_Cancle.SetActive(true);
+            //     }
+            // }
         }
 
         public static void OnSkillFinish(this ES_MainSkill self, string dataParams)
         {
-            int skillId = int.Parse(dataParams);
-            for (int i = 0; i < self.MainSkillGridList.Count; i++)
-            {
-                if (self.MainSkillGridList[i].SkillPro == null)
-                {
-                    continue;
-                }
-
-                if (self.MainSkillGridList[i].SkillPro.SkillID == skillId)
-                {
-                    self.MainSkillGridList[i].E_Button_Cancle.gameObject.SetActive(false);
-                }
-            }
+            // int skillId = int.Parse(dataParams);
+            // for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            // {
+            //     if (self.UISkillGirdList[i].SkillPro == null)
+            //     {
+            //         continue;
+            //     }
+            //
+            //     if (self.UISkillGirdList[i].SkillPro.SkillID == skillId)
+            //     {
+            //         self.UISkillGirdList[i].Button_Cancle.SetActive(false);
+            //     }
+            // }
         }
 
         public static void OnSkillCDUpdate(this ES_MainSkill self)
         {
-            Unit main = UnitHelper.GetMyUnitFromClientScene(self.Scene());
-            SkillManagerComponentC skillManagerComponentC = main.GetComponent<SkillManagerComponentC>();
-            long serverTime = TimeHelper.ServerNow();
-            long pulicCd = skillManagerComponentC.SkillPublicCDTime - serverTime;
-            for (int i = 0; i < self.MainSkillGridList.Count; i++)
-            {
-                ES_MainSkillGrid uISkillGridComponent = self.MainSkillGridList[i];
-                uISkillGridComponent.OnUpdate(skillManagerComponentC.GetCdTime(uISkillGridComponent.GetSkillId(), serverTime),
-                    i < 8? pulicCd : 0);
-            }
-
-            if (self.JueXingSkillId > 0)
-            {
-                self.SkillGridJueXing?.OnUpdate(skillManagerComponentC.GetCdTime(self.JueXingSkillId, serverTime), pulicCd);
-            }
-
-            self.SkillGridBianSheng?.OnUpdate(skillManagerComponentC.GetCdTime(self.SkillGridBianSheng.GetSkillId(), serverTime), pulicCd);
-            self.MainSkillFungun?.OnUpdate(skillManagerComponentC.GetCdTime(self.MainSkillFungun.SkillId, serverTime));
+            // if (self.SkillManagerComponent == null)
+            // {
+            //     Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
+            //     self.SkillManagerComponent = unit.GetComponent<SkillManagerComponent>();
+            // }
+            //
+            // long serverTime = TimeHelper.ServerNow();
+            // long pulicCd = self.SkillManagerComponent.SkillPublicCDTime - serverTime;
+            // for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            // {
+            //     UISkillGridComponent uISkillGridComponent = self.UISkillGirdList[i];
+            //     uISkillGridComponent.OnUpdate(self.SkillManagerComponent.GetCdTime(uISkillGridComponent.GetSkillId(), serverTime),
+            //         i < 8? pulicCd : 0);
+            // }
+            //
+            // if (self.JueXingSkillId > 0)
+            // {
+            //     self.UISkillJueXing.OnUpdate(self.SkillManagerComponent.GetCdTime(self.JueXingSkillId, serverTime), pulicCd);
+            // }
+            //
+            // self.UISkillBianSheng?.OnUpdate(self.SkillManagerComponent.GetCdTime(self.UISkillBianSheng.GetSkillId(), serverTime), pulicCd);
+            // self.UIFangunComponet.OnUpdate(self.SkillManagerComponent.GetCdTime(self.UIFangunComponet.SkillId, serverTime));
         }
 
         public static void OnEnterScene(this ES_MainSkill self, Unit unit, int sceneType)
         {
-            SkillManagerComponentC skillManagerComponent = unit.GetComponent<SkillManagerComponentC>();
-            self.OnSkillCDUpdate();
-            self.CheckJingLingFunction();
-            self.OnUpdateButton();
-            for (int i = 0; i < self.MainSkillGridList.Count; i++)
-            {
-                self.MainSkillGridList[i].RemoveSkillInfoShow();
-            }
-
-            self.SkillGridJueXing.RemoveSkillInfoShow();
+            // self.SkillManagerComponent = unit.GetComponent<SkillManagerComponent>();
+            // self.OnSkillCDUpdate();
+            // self.CheckJingLingFunction();
+            // self.OnUpdateButton();
+            // for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            // {
+            //     self.UISkillGirdList[i].RemoveSkillInfoShow();
+            // }
+            //
+            // self.UISkillJueXing.RemoveSkillInfoShow();
         }
 
         public static void ResetUI(this ES_MainSkill self)
         {
-            for (int i = 0; i < self.MainSkillGridList.Count; i++)
-            {
-                ES_MainSkillGrid uISkillGridComponent = self.MainSkillGridList[i];
-                uISkillGridComponent.RemoveSkillInfoShow();
-                uISkillGridComponent.OnUpdate(0, 0);
-                uISkillGridComponent.UseSkill = false;
-                uISkillGridComponent.SkillSecond = 0;
-            }
-
-            self.MainSkillFungun?.OnUpdate(0);
+            // for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            // {
+            //     UISkillGridComponent uISkillGridComponent = self.UISkillGirdList[i];
+            //     uISkillGridComponent.RemoveSkillInfoShow();
+            //     uISkillGridComponent.OnUpdate(0, 0);
+            //     uISkillGridComponent.UseSkill = false;
+            //     uISkillGridComponent.SkillSecond = 0;
+            // }
+            //
+            // self.UIFangunComponet.OnUpdate(0);
         }
 
         public static void OnLockTargetUnit(this ES_MainSkill self)
         {
-            LockTargetComponent lockTargetComponent = self.Scene().GetComponent<LockTargetComponent>();
-            if (TimeHelper.ServerNow() - self.LastLockTime > 5000)
+            LockTargetComponent lockTargetComponent = self.Root().GetComponent<LockTargetComponent>();
+            if (Time.time - self.LastLockTime > 5)
             {
                 lockTargetComponent.LastLockId = 0;
                 lockTargetComponent.LockTargetUnit();
-                self.LastLockTime = TimeHelper.ServerNow();
+                self.LastLockTime = Time.time;
             }
             else
             {
@@ -575,48 +545,48 @@ namespace ET.Client
 
         public static void ShowCancelButton(this ES_MainSkill self, bool show)
         {
-            self.E_Btn_CancleSkill.gameObject.SetActive(show);
+            self.E_Btn_CancleSkillButton.gameObject.SetActive(show);
         }
 
         public static void OnEnterCancelButton(this ES_MainSkill self)
         {
-            FlyTipComponent.Instance.SpawnFlyTip("取消技能施法");
-
-            for (int i = 0; i < self.MainSkillGridList.Count; i++)
-            {
-                self.MainSkillGridList[i].OnEnterCancelButton();
-            }
-
-            self.SkillGridJueXing?.OnEnterCancelButton();
+            // FloatTipManager.Instance.ShowFloatTip("取消技能施法");
+            //
+            // for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            // {
+            //     self.UISkillGirdList[i].OnEnterCancelButton();
+            // }
+            //
+            // self.UISkillJueXing.OnEnterCancelButton();
         }
 
         public static void OnBagItemUpdate(this ES_MainSkill self)
         {
-            for (int i = 0; i < self.MainSkillGridList.Count; i++)
-            {
-                self.MainSkillGridList[i].UpdateItemNumber();
-            }
+            // for (int i = 0; i < self.UISkillGirdList.Count; i++)
+            // {
+            //     self.UISkillGirdList[i].UpdateItemNumber();
+            // }
         }
 
         public static void OnSkillSetUpdate(this ES_MainSkill self)
         {
-            SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
-            for (int i = 0; i < 10; i++)
-            {
-                ES_MainSkillGrid skillgrid = self.MainSkillGridList[i];
-                SkillPro skillid = skillSetComponent.GetByPosition(i + 1);
-                skillgrid.UpdateSkillInfo(skillid);
-            }
-
-            int occTwo = self.Root().GetComponent<UserInfoComponentC>().UserInfo.OccTwo;
-            if (occTwo == 0)
-            {
-                return;
-            }
-
+            // SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
+            // for (int i = 0; i < 10; i++)
+            // {
+            //     UISkillGridComponent skillgrid = self.UISkillGirdList[i];
+            //     SkillPro skillid = skillSetComponent.GetByPosition(i + 1);
+            //     skillgrid.UpdateSkillInfo(skillid);
+            // }
+            //
+            // int occTwo = self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo.OccTwo;
+            // if (occTwo == 0)
+            // {
+            //     return;
+            // }
+            //
             // OccupationTwoConfig occupationConfigCategory = OccupationTwoConfigCategory.Instance.Get(occTwo);
             // int juexingid = occupationConfigCategory.JueXingSkill[7];
-            // self.SkillGridJueXing.UpdateSkillInfo(skillSetComponent.GetSkillPro(juexingid));
+            // self.UISkillJueXing.UpdateSkillInfo(skillSetComponent.GetSkillPro(juexingid));
             // self.JueXingSkillId = juexingid;
         }
     }
