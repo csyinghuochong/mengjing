@@ -105,8 +105,8 @@ namespace ET.Client
 
         public static async ETTask OnBtn_EditSkill(this ES_SettingGuaJi self)
         {
-            // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UISettingSkill);
-            // ui.GetComponent<UISettingSkillComponent>().CloseAction = self.UpdataSkillSet;
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SettingSkill);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgSettingSkill>().CloseAction = self.UpdataSkillSet;
         }
 
         public static void UpdataSkillSet(this ES_SettingGuaJi self)

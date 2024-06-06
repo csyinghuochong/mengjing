@@ -86,5 +86,6 @@ namespace ET.Client
 		WindowID_ZuoQi,
 		WindowID_Protect,
 		WindowID_Setting,
+		WindowID_SettingSkill,
 	}
 }
