@@ -589,7 +589,7 @@ namespace ET.Client
                 return;
             }
 
-            // UIHelper.Create(self.ZoneScene(), UIType.UIPhoneCode).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PhoneCode).Coroutine();
         }
 
         public static async ETTask OnButtonRname(this ES_SettingGame self)

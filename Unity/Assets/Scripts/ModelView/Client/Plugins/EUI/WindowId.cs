@@ -88,5 +88,6 @@ namespace ET.Client
 		WindowID_Setting,
 		WindowID_SettingSkill,
 		WindowID_FashionExplain,
+		WindowID_PhoneCode,
 	}
 }
