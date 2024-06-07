@@ -27,15 +27,17 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this OperaComponent self)
         {
+            self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
             self.MapMask = (1 << LayerMask.NameToLayer(LayerEnum.Terrain.ToString())) | (1 << LayerMask.NameToLayer(LayerEnum.Map.ToString()));
             self.NpcMask = 1 << LayerMask.NameToLayer(LayerEnum.NPC.ToString());
             self.BoxMask = 1 << LayerMask.NameToLayer(LayerEnum.Box.ToString());
             self.PlayerMask = 1 << LayerMask.NameToLayer(LayerEnum.Player.ToString());
             self.MonsterMask = 1 << LayerMask.NameToLayer(LayerEnum.Monster.ToString());
             self.BuildingMask = 1 << LayerMask.NameToLayer(LayerEnum.Building.ToString());
-            self.EditorMode = true;
-            self.ClickMode = true;
-            self.MainCamera = Camera.main;
+
+            Init init = GameObject.Find("Global").GetComponent<Init>();
+            self.EditorMode = init.EditorMode;
+            self.UpdateClickMode();
         }
 
         [EntitySystem]
@@ -48,15 +50,6 @@ namespace ET.Client
 
             if (Input.GetMouseButtonDown(1))
             {
-                // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                // RaycastHit hit;
-                // if (Physics.Raycast(ray, out hit, 1000, self.mapMask))
-                // {
-                //     C2M_PathfindingResult c2MPathfindingResult = new C2M_PathfindingResult();
-                //     c2MPathfindingResult.Position = hit.point;
-                //     self.Root().GetComponent<ClientSenderCompnent>().Send(c2MPathfindingResult);
-                // }
-
                 self.OnGetMouseButtonDown_1();
             }
 
@@ -87,7 +80,7 @@ namespace ET.Client
 
         public static void UpdateClickMode(this OperaComponent self)
         {
-            // self.ClickMode = self.Root().GetComponent<UserInfoComponentC>().GetGameSettingValue(GameSettingEnum.Click) == "1";
+            self.ClickMode = self.Root().GetComponent<UserInfoComponentC>().GetGameSettingValue(GameSettingEnum.Click) == "1";
         }
 
         public static void OnGetKeyHandler(this OperaComponent self, int keyCode)

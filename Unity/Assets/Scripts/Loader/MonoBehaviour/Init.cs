@@ -6,6 +6,8 @@ namespace ET
 {
 	public class Init: MonoBehaviour
 	{
+		public bool EditorMode;
+		
 		private void Start()
 		{
 			this.StartAsync().Coroutine();
