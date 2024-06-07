@@ -1,0 +1,356 @@
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace ET.Client
+{
+    [Invoke(TimerInvokeType.MapMiniTimer)]
+    public class MapMiniTimer: ATimer<ES_MapMini>
+    {
+        protected override void Run(ES_MapMini self)
+        {
+            try
+            {
+                self.OnUpdateMiniMap();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"move timer error: {self.Id}\n{e}");
+            }
+        }
+    }
+
+    [EntitySystemOf(typeof (ES_MapMini))]
+    [FriendOfAttribute(typeof (ES_MapMini))]
+    public static partial class ES_MapMiniSystem
+    {
+        [EntitySystem]
+        private static void Awake(this ES_MapMini self, Transform transform)
+        {
+            self.uiTransform = transform;
+
+            self.E_MiniMapButtonButton.AddListener(self.OnOpenMap);
+        }
+
+        [EntitySystem]
+        private static void Destroy(this ES_MapMini self)
+        {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
+            self.DestroyWidget();
+        }
+
+        public static void OnOpenMap(this ES_MapMini self)
+        {
+            // 测试
+            self.Root().GetComponent<MapComponent>().SceneType = (int)SceneTypeEnum.MainCityScene;
+            self.Root().GetComponent<MapComponent>().SceneId = 101;
+
+            int sceneType = self.Root().GetComponent<MapComponent>().SceneType;
+            int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
+            switch (sceneType)
+            {
+                case (int)SceneTypeEnum.MainCityScene:
+                case (int)SceneTypeEnum.LocalDungeon:
+                    self.OnOpenBigMap(); //打开主城
+                    break;
+                case (int)SceneTypeEnum.CellDungeon:
+                    // self.OnShowFubenIndex(); //打开副本小地图
+                    break;
+                default:
+                    SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
+                    if (sceneConfig.ifShowMinMap == 0)
+                    {
+                        FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("当前场景不支持查看小地图"));
+                    }
+                    else
+                    {
+                        self.OnOpenBigMap(); //打开主城
+                    }
+
+                    break;
+            }
+        }
+
+        public static void OnOpenBigMap(this ES_MapMini self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_MapBig);
+        }
+
+        private static void UpdateTianQi(this ES_MapMini self, string tianqi)
+        {
+            switch (tianqi)
+            {
+                case "1":
+                    self.E_TianQiText.text = "晴天";
+                    break;
+                case "2":
+                    self.E_TianQiText.text = "雨天";
+                    break;
+                default:
+                    self.E_TianQiText.text = "晴天";
+                    break;
+            }
+        }
+
+        public static void OnMainHeroMove(this ES_MapMini self)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            if (unit == null || self.MapCamera == null)
+            {
+                return;
+            }
+
+            Vector3 vector3 = unit.Position;
+            Vector3 vector31 = new Vector3(vector3.x, vector3.z, 0f);
+            Vector2 localPosition = self.GetWordToUIPositon(vector31);
+            self.E_RawImageRawImage.transform.localPosition = new Vector2(localPosition.x * -1, localPosition.y * -1);
+            self.EG_HeadListRectTransform.localPosition = new Vector2(localPosition.x * -1, localPosition.y * -1);
+        }
+
+        public static void OnUpdateMiniMap(this ES_MapMini self)
+        {
+            Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
+
+            if (main == null)
+            {
+                return;
+            }
+
+            List<Unit> allUnit = main.GetParent<UnitComponent>().GetAll();
+
+            int teamNumber = 0;
+            // int selfCamp_1 = main.GetBattleCamp();
+            for (int i = 0; i < allUnit.Count; i++)
+            {
+                Unit unit = allUnit[i];
+                if (unit.Type != UnitType.Player && unit.Type != UnitType.Monster)
+                {
+                    continue;
+                }
+
+                Vector3 vector31 = new Vector3(unit.Position.x, unit.Position.z, 0f);
+                Vector3 vector32 = self.GetWordToUIPositon(vector31);
+                GameObject headItem = self.GetTeamPointObj(teamNumber);
+
+                //1自己 2敌对 3队友  4主城
+                string showType = "4";
+                // if (self.SceneTypeEnum != SceneTypeEnum.MainCityScene && main.IsCanAttackUnit(unit))
+                // {
+                //     showType = "2";
+                // }
+                //
+                // if (main.IsSameTeam(unit))
+                // {
+                //     showType = "3";
+                // }
+                //
+                // if (unit.MainHero)
+                // {
+                //     showType = "1";
+                // }
+
+                if (unit.Type == UnitType.Monster)
+                {
+                    if (unit.ConfigId > 0)
+                    {
+                        MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(unit.ConfigId);
+                        if (monsterCof.MonsterType == 5)
+                        {
+                            //6 宝箱
+                            if (monsterCof.MonsterSonType == 55)
+                            {
+                                showType = "6";
+                            }
+
+                            //5 精灵 宠物 宠灵书
+                            if (monsterCof.MonsterSonType == 57 || monsterCof.MonsterSonType == 58 || monsterCof.MonsterSonType == 59)
+                            {
+                                showType = "5";
+                            }
+                        }
+                    }
+                }
+
+                teamNumber++;
+                headItem.transform.Find("1").gameObject.SetActive(showType == "1");
+                headItem.transform.Find("2").gameObject.SetActive(showType == "2");
+                headItem.transform.Find("3").gameObject.SetActive(showType == "3");
+                headItem.transform.Find("4").gameObject.SetActive(showType == "4");
+                headItem.transform.Find("5").gameObject.SetActive(showType == "5");
+                headItem.transform.Find("6").gameObject.SetActive(showType == "6");
+                headItem.transform.localPosition = new Vector2(vector32.x, vector32.y);
+            }
+
+            for (int i = teamNumber; i < self.AllPointList.Count; i++)
+            {
+                self.AllPointList[i].transform.localPosition = self.NoVector3;
+            }
+
+            self.Lab_TimeIndex++;
+            if (self.Lab_TimeIndex >= 300)
+            {
+                self.Lab_TimeIndex = 0;
+                DateTime serverTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+                self.E_TimeText.text = $"{serverTime.Hour}:{serverTime.Minute}";
+            }
+        }
+
+        private static GameObject GetTeamPointObj(this ES_MapMini self, int index)
+        {
+            if (self.AllPointList.Count > index)
+            {
+                return self.AllPointList[index];
+            }
+
+            GameObject go = UnityEngine.Object.Instantiate(self.EG_HeadItemRectTransform.gameObject, self.EG_HeadItemRectTransform.parent,
+                true);
+            go.transform.localScale = Vector3.one;
+            go.SetActive(true);
+            self.AllPointList.Add(go);
+            return go;
+        }
+
+        private static Vector3 GetWordToUIPositon(this ES_MapMini self, Vector3 vector3)
+        {
+            GameObject mapCamera = self.MapCamera;
+            vector3.x -= mapCamera.transform.position.x;
+            vector3.y -= mapCamera.transform.position.z;
+
+            Quaternion rotation = Quaternion.Euler(0, 0, 1 * mapCamera.transform.eulerAngles.y);
+            vector3 = rotation * vector3;
+
+            vector3.x *= self.ScaleRateX;
+            vector3.y *= self.ScaleRateY;
+            return vector3;
+        }
+
+        private static async ETTask LoadMapCamera(this ES_MapMini self)
+        {
+            GameObject mapCamera = GameObject.Find("Global/MapCamera");
+            if (mapCamera == null)
+            {
+                var path = ABPathHelper.GetUnitPath("Component/MapCamera");
+                GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
+                mapCamera = UnityEngine.Object.Instantiate(prefab, GameObject.Find("Global").transform);
+                mapCamera.name = "MapCamera";
+            }
+
+            Camera camera = mapCamera.GetComponent<Camera>();
+            camera.enabled = true;
+
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
+            {
+                DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(mapComponent.SceneId);
+                mapCamera.transform.position = new Vector3((float)dungeonConfig.CameraPos[0], (float)dungeonConfig.CameraPos[1],
+                    (float)dungeonConfig.CameraPos[2]);
+                mapCamera.transform.eulerAngles = new Vector3(90, 0, (float)dungeonConfig.CameraPos[3]);
+                camera.orthographicSize = (float)dungeonConfig.CameraPos[4];
+            }
+
+            if (SceneConfigHelper.UseSceneConfig(mapComponent.SceneType)
+                && SceneConfigHelper.ShowMiniMap(mapComponent.SceneType, mapComponent.SceneId))
+            {
+                SceneConfig dungeonConfig = SceneConfigCategory.Instance.Get(mapComponent.SceneId);
+                mapCamera.transform.position = new Vector3((float)dungeonConfig.CameraPos[0], (float)dungeonConfig.CameraPos[1],
+                    (float)dungeonConfig.CameraPos[2]);
+                mapCamera.transform.eulerAngles = new Vector3(90, 0, (float)dungeonConfig.CameraPos[3]);
+                camera.orthographicSize = (float)dungeonConfig.CameraPos[4];
+            }
+
+            self.MapCamera = mapCamera;
+
+            self.SceneTypeEnum = self.Root().GetComponent<MapComponent>().SceneType;
+            self.ScaleRateX = self.E_RawImageRawImage.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
+            self.ScaleRateY = self.E_RawImageRawImage.GetComponent<RectTransform>().rect.height / (camera.orthographicSize * 2);
+            self.E_RawImageRawImage.transform.localPosition = Vector2.zero;
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
+            camera.enabled = false;
+
+            self.OnMainHeroMove();
+            await ETTask.CompletedTask;
+        }
+
+        private static void BeginChangeScene(this ES_MapMini self, int lastScene)
+        {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
+        }
+
+        private static void ShowMapName(this ES_MapMini self, string mapname)
+        {
+            self.E_MapNameText.text = mapname;
+        }
+
+        public static void OnEnterScene(this ES_MapMini self)
+        {
+            self.LoadMapCamera().Coroutine();
+
+            int sceneTypeEnum = self.Root().GetComponent<MapComponent>().SceneType;
+            int difficulty = self.Root().GetComponent<MapComponent>().FubenDifficulty;
+            int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
+            self.E_MainCityShowImage.gameObject.SetActive(true);
+
+            //显示地图名称
+            switch (sceneTypeEnum)
+            {
+                case (int)SceneTypeEnum.CellDungeon:
+                    self.E_MapNameText.text = ChapterConfigCategory.Instance.Get(sceneId).ChapterName;
+                    break;
+                case (int)SceneTypeEnum.LocalDungeon:
+                    string str = string.Empty;
+                    if (difficulty == FubenDifficulty.Normal)
+                    {
+                        str = "(普通)";
+                    }
+
+                    if (difficulty == FubenDifficulty.TiaoZhan)
+                    {
+                        str = "(挑战)";
+                    }
+
+                    if (difficulty == FubenDifficulty.DiYu)
+                    {
+                        str = "(地狱)";
+                    }
+
+                    if (DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(sceneId))
+                    {
+                        str = string.Empty;
+                    }
+
+                    self.E_MapNameText.text = DungeonConfigCategory.Instance.Get(sceneId).ChapterName + str;
+                    break;
+                case (int)SceneTypeEnum.TeamDungeon:
+                    str = "";
+                    if (difficulty == TeamFubenType.XieZhu)
+                    {
+                        str = "(协助)";
+                    }
+
+                    if (difficulty == TeamFubenType.ShenYuan)
+                    {
+                        str = "(深渊)";
+                    }
+
+                    self.E_MapNameText.text = SceneConfigCategory.Instance.Get(sceneId).Name + str;
+                    break;
+                case SceneTypeEnum.Union:
+                    UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+                    self.E_MapNameText.text = $"{userInfoComponent.UserInfo.UnionName} 家族地图";
+                    break;
+                default:
+                    //显示地图名称
+                    self.E_MapNameText.text = SceneConfigCategory.Instance.Get(sceneId).Name;
+                    break;
+            }
+
+            self.EG_HeadListRectTransform.gameObject.SetActive(true);
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
+            self.MapMiniTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(200, TimerInvokeType.MapMiniTimer, self);
+
+            DateTime serverTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+            self.E_TimeText.text = $"{serverTime.Hour}:{serverTime.Minute}";
+        }
+    }
+}

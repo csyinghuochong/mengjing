@@ -21,15 +21,6 @@ namespace ET.Client
 
         public Unit MainUnit { get; set; }
 
-        public int Lab_TimeIndex = 0;
-        public GameObject MapCamera;
-        public float ScaleRateX;
-        public float ScaleRateY;
-        public int SceneTypeEnum;
-        public long MapMiniTimer;
-        public List<GameObject> AllPointList = new();
-        public Vector3 NoVector3 = new(-10000, -10000, 0);
-
         public List<TaskPro> ShowTaskPros = new();
         public Dictionary<int, Scroll_Item_MainTask> ScrollItemMainTasks;
         public List<ChatInfo> ShowChatInfos = new();

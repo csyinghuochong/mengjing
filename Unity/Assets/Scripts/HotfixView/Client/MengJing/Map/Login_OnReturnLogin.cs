@@ -29,6 +29,8 @@ namespace ET.Client
             {
                 RunAsync2(scene, args, 100).Coroutine();
             }
+
+            await ETTask.CompletedTask;
         }
 
         private async ETTask RunAsync2(Scene scene, ReturnLogin args, long waitTime)

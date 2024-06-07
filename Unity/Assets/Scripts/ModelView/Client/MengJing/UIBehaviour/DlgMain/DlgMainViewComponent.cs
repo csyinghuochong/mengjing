@@ -910,7 +910,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_MainCityShowImage
+		public ES_MapMini ES_MapMini
      	{
      		get
      		{
@@ -919,147 +919,12 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_MainCityShowImage == null )
+     			if( this.m_es_mapmini == null )
      			{
-		    		this.m_E_MainCityShowImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/UIMapMini/E_MainCityShow");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_RightSet/ES_MapMini");
+		    	   this.m_es_mapmini = this.AddChild<ES_MapMini,Transform>(subTrans);
      			}
-     			return this.m_E_MainCityShowImage;
-     		}
-     	}
-
-		public UnityEngine.UI.RawImage E_RawImageRawImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_RawImageRawImage == null )
-     			{
-		    		this.m_E_RawImageRawImage = UIFindHelper.FindDeepChild<UnityEngine.UI.RawImage>(this.uiTransform.gameObject,"EG_RightSet/UIMapMini/E_MainCityShow/ImageDi_1/E_RawImage");
-     			}
-     			return this.m_E_RawImageRawImage;
-     		}
-     	}
-
-		public UnityEngine.RectTransform EG_HeadListRectTransform
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_EG_HeadListRectTransform == null )
-     			{
-		    		this.m_EG_HeadListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_RightSet/UIMapMini/E_MainCityShow/ImageDi_1/EG_HeadList");
-     			}
-     			return this.m_EG_HeadListRectTransform;
-     		}
-     	}
-
-		public UnityEngine.RectTransform EG_HeadItemRectTransform
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_EG_HeadItemRectTransform == null )
-     			{
-		    		this.m_EG_HeadItemRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_RightSet/UIMapMini/E_MainCityShow/ImageDi_1/EG_HeadList/EG_HeadItem");
-     			}
-     			return this.m_EG_HeadItemRectTransform;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_MapNameText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_MapNameText == null )
-     			{
-		    		this.m_E_MapNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_RightSet/UIMapMini/E_MapName");
-     			}
-     			return this.m_E_MapNameText;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_TianQiText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_TianQiText == null )
-     			{
-		    		this.m_E_TianQiText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_RightSet/UIMapMini/E_TianQi");
-     			}
-     			return this.m_E_TianQiText;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_TimeText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_TimeText == null )
-     			{
-		    		this.m_E_TimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_RightSet/UIMapMini/E_Time");
-     			}
-     			return this.m_E_TimeText;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_MiniMapButtonButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_MiniMapButtonButton == null )
-     			{
-		    		this.m_E_MiniMapButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/UIMapMini/E_MiniMapButton");
-     			}
-     			return this.m_E_MiniMapButtonButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_MiniMapButtonImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_MiniMapButtonImage == null )
-     			{
-		    		this.m_E_MiniMapButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/UIMapMini/E_MiniMapButton");
-     			}
-     			return this.m_E_MiniMapButtonImage;
+     			return this.m_es_mapmini;
      		}
      	}
 
@@ -1697,15 +1562,7 @@ namespace ET.Client
 			this.m_E_OpenChatButton = null;
 			this.m_E_OpenChatImage = null;
 			this.m_EG_RightSetRectTransform = null;
-			this.m_E_MainCityShowImage = null;
-			this.m_E_RawImageRawImage = null;
-			this.m_EG_HeadListRectTransform = null;
-			this.m_EG_HeadItemRectTransform = null;
-			this.m_E_MapNameText = null;
-			this.m_E_TianQiText = null;
-			this.m_E_TimeText = null;
-			this.m_E_MiniMapButtonButton = null;
-			this.m_E_MiniMapButtonImage = null;
+			this.m_es_mapmini = null;
 			this.m_E_Button_ZhanKaiButton = null;
 			this.m_E_Button_ZhanKaiImage = null;
 			this.m_EG_Btn_TopRight_1RectTransform = null;
@@ -1796,15 +1653,7 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_OpenChatButton = null;
 		private UnityEngine.UI.Image m_E_OpenChatImage = null;
 		private UnityEngine.RectTransform m_EG_RightSetRectTransform = null;
-		private UnityEngine.UI.Image m_E_MainCityShowImage = null;
-		private UnityEngine.UI.RawImage m_E_RawImageRawImage = null;
-		private UnityEngine.RectTransform m_EG_HeadListRectTransform = null;
-		private UnityEngine.RectTransform m_EG_HeadItemRectTransform = null;
-		private UnityEngine.UI.Text m_E_MapNameText = null;
-		private UnityEngine.UI.Text m_E_TianQiText = null;
-		private UnityEngine.UI.Text m_E_TimeText = null;
-		private UnityEngine.UI.Button m_E_MiniMapButtonButton = null;
-		private UnityEngine.UI.Image m_E_MiniMapButtonImage = null;
+		private EntityRef<ES_MapMini> m_es_mapmini = null;
 		private UnityEngine.UI.Button m_E_Button_ZhanKaiButton = null;
 		private UnityEngine.UI.Image m_E_Button_ZhanKaiImage = null;
 		private UnityEngine.RectTransform m_EG_Btn_TopRight_1RectTransform = null;
