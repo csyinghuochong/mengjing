@@ -907,13 +907,26 @@ namespace ET.Client
         /// <param name="sceneTypeEnum"></param>
         public static void AfterEnterScene(this DlgMain self, int sceneTypeEnum)
         {
-            //
             self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
             self.View.ES_MainSkill.uiTransform.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.MainCityScene);
             self.View.EG_HomeButtonRectTransform.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.MainCityScene);
 
-            self.View.ES_MainSkill.OnSkillSetUpdate();
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            string value = userInfoComponent.GetGameSettingValue(GameSettingEnum.HideLeftBottom);
+            if (value == "1")
+            {
+                self.View.EG_LeftBottomBtnsRectTransform.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.MainCityScene);
+            }
+            else
+            {
+                self.View.EG_LeftBottomBtnsRectTransform.gameObject.SetActive(self.View.EG_LeftBottomBtnsRectTransform.gameObject.activeSelf &&
+                    sceneTypeEnum != SceneTypeEnum.RunRace && sceneTypeEnum != SceneTypeEnum.Demon);
+            }
+
             self.View.ES_JoystickMove.AfterEnterScene();
+
+            self.View.ES_MainSkill.OnSkillSetUpdate();
+
             self.OnEnterScene();
         }
 
