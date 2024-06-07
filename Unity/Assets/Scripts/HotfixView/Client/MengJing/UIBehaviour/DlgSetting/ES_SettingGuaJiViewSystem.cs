@@ -218,7 +218,7 @@ namespace ET.Client
                 FlyTipComponent.Instance.SpawnFlyTipDi("取消挂机!");
             }
 
-            // self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().UGuaJiSet.SetActive(false);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.EG_GuaJiSetRectTransform.gameObject.SetActive(false);
         }
 
         public static void ClickSell(this ES_SettingGuaJi self)

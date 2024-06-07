@@ -8,7 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_MainSkill : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		public List<ES_SkillGrid> UISkillGirdList = new();
+		public List<ES_SkillGrid> UISkillGirdList { get; set; } = new();
 		public SkillManagerComponentC SkillManagerComponent { get; set; }
 		public float LastLockTime;
 		public float LastPickTime;

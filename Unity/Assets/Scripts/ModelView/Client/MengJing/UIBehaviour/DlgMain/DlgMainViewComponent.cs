@@ -1573,6 +1573,57 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_GuaJiSetRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_GuaJiSetRectTransform == null )
+     			{
+		    		this.m_EG_GuaJiSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_GuaJiSet");
+     			}
+     			return this.m_EG_GuaJiSetRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_StopGuaJiButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_StopGuaJiButton == null )
+     			{
+		    		this.m_E_Btn_StopGuaJiButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_GuaJiSet/E_Btn_StopGuaJi");
+     			}
+     			return this.m_E_Btn_StopGuaJiButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_StopGuaJiImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_StopGuaJiImage == null )
+     			{
+		    		this.m_E_Btn_StopGuaJiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_GuaJiSet/E_Btn_StopGuaJi");
+     			}
+     			return this.m_E_Btn_StopGuaJiImage;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_E_DragPanelImage = null;
@@ -1667,6 +1718,9 @@ namespace ET.Client
 			this.m_E_UnionEventTrigger = null;
 			this.m_es_mainskill = null;
 			this.m_EG_FpsRectTransform = null;
+			this.m_EG_GuaJiSetRectTransform = null;
+			this.m_E_Btn_StopGuaJiButton = null;
+			this.m_E_Btn_StopGuaJiImage = null;
 			this.uiTransform = null;
 		}
 
@@ -1762,6 +1816,9 @@ namespace ET.Client
 		private UnityEngine.EventSystems.EventTrigger m_E_UnionEventTrigger = null;
 		private EntityRef<ES_MainSkill> m_es_mainskill = null;
 		private UnityEngine.RectTransform m_EG_FpsRectTransform = null;
+		private UnityEngine.RectTransform m_EG_GuaJiSetRectTransform = null;
+		private UnityEngine.UI.Button m_E_Btn_StopGuaJiButton = null;
+		private UnityEngine.UI.Image m_E_Btn_StopGuaJiImage = null;
 		public Transform uiTransform = null;
 	}
 }

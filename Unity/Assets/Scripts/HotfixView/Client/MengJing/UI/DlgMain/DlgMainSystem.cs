@@ -118,6 +118,8 @@ namespace ET.Client
 
             self.View.E_SetButton.AddListener(self.OnSetButton);
 
+            self.View.E_Btn_StopGuaJiButton.AddListener(self.OnStopGuaJi);
+
             self.View.E_MainTaskItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainTaskItemsRefresh);
             self.View.E_MainChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainChatItemsRefresh);
             self.View.E_RoseTaskButton.AddListener(self.OnRoseTaskButton);
@@ -961,6 +963,18 @@ namespace ET.Client
         {
             // self.TextMessage.text = StringBuilderHelper.GetMessageCnt(OpcodeHelper.OneTotalNumber);
             // OpcodeHelper.OneTotalNumber = 0;
+        }
+
+        public static void OnStopGuaJi(this DlgMain self)
+        {
+            if (self.Root().GetComponent<UnitGuaJiComponent>() != null)
+            {
+                //移除挂机组件
+                self.Root().RemoveComponent<UnitGuaJiComponent>();
+                FlyTipComponent.Instance.SpawnFlyTip("取消挂机!");
+            }
+
+            self.View.EG_GuaJiSetRectTransform.gameObject.SetActive(false);
         }
     }
 }

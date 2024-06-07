@@ -11,7 +11,7 @@ namespace ET.Client
         private static void Awake(this UnitGuaJiComponent self)
         {
             DlgMain dlgMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
-            // dlgMain.UGuaJiSet.SetActive(true);
+            dlgMain.View.EG_GuaJiSetRectTransform.gameObject.SetActive(true);
             self.UIMain = dlgMain;
 
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
@@ -65,11 +65,11 @@ namespace ET.Client
                         continue;
                     }
 
-                    // int skillid = self.UIMain.UIMainSkillComponent.UISkillGirdList[index].GetSkillId();
-                    // if (skillid != 0)
-                    // {
-                    //     self.skillXuHaoList.Add(index);
-                    // }
+                    int skillid = self.UIMain.View.ES_MainSkill.UISkillGirdList[index].GetSkillId();
+                    if (skillid != 0)
+                    {
+                        self.skillXuHaoList.Add(index);
+                    }
                 }
             }
         }
@@ -95,7 +95,7 @@ namespace ET.Client
                 return false;
             }
 
-            // self.UIMain.UIMainSkillComponent.UIAttackGrid.PointerUp(null);
+            self.UIMain.View.ES_MainSkill.ES_AttackGrid.PointerUp(null);
 
             self.forNum = 0;
 
@@ -285,98 +285,98 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             float nowHp = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.Now_Hp);
             float maxHp = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.Now_MaxHp);
-            // if (self.IfGuaJiAutoUseItem)
-            // {
-            //     if (nowHp / maxHp <= 0.3f) // 血量低于30%,俩个道具一起用
-            //     {
-            //         //使用第8格
-            //         int useSkillID = self.UIMain.UIMainSkillComponent.UISkillGirdList[8].GetSkillId();
-            //         if (self.ifBaseHpSkill(useSkillID))
-            //         {
-            //             UISkillGridComponent uiSkillGridComponent = self.UIMain.UIMainSkillComponent.UISkillGirdList[8];
-            //             uiSkillGridComponent.OnPointDown(null);
-            //             uiSkillGridComponent.PointerUp(null);
-            //         }
-            //
-            //         //使用第9格
-            //         useSkillID = self.UIMain.UIMainSkillComponent.UISkillGirdList[9].GetSkillId();
-            //         if (self.ifBaseHpSkill(useSkillID))
-            //         {
-            //             UISkillGridComponent uiSkillGridComponent = self.UIMain.UIMainSkillComponent.UISkillGirdList[9];
-            //             uiSkillGridComponent.OnPointDown(null);
-            //             uiSkillGridComponent.PointerUp(null);
-            //         }
-            //     }
-            //     else if (nowHp / maxHp <= 0.6f) // 血量低于60%,使用第一个道具,如果道具用完，就用第二个
-            //     {
-            //         bool ifUse = false;
-            //
-            //         //使用第8格
-            //         int useSkillID = self.UIMain.UIMainSkillComponent.UISkillGirdList[8].GetSkillId();
-            //         if (self.ifBaseHpSkill(useSkillID))
-            //         {
-            //             UISkillGridComponent uiSkillGridComponent = self.UIMain.UIMainSkillComponent.UISkillGirdList[8];
-            //             int itemId = uiSkillGridComponent.SkillPro?.SkillID ?? 0;
-            //             BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(itemId);
-            //             if (bagInfo != null)
-            //             {
-            //                 uiSkillGridComponent.OnPointDown(null);
-            //                 uiSkillGridComponent.PointerUp(null);
-            //                 ifUse = true;
-            //             }
-            //         }
-            //
-            //         //使用第9格
-            //         useSkillID = self.UIMain.UIMainSkillComponent.UISkillGirdList[9].GetSkillId();
-            //         if (ifUse == false && self.ifBaseHpSkill(useSkillID))
-            //         {
-            //             UISkillGridComponent uiSkillGridComponent = uimain.GetComponent<UIMainComponent>().UIMainSkillComponent.UISkillGirdList[9];
-            //             uiSkillGridComponent.OnPointDown(null);
-            //             uiSkillGridComponent.PointerUp(null);
-            //         }
-            //     }
-            // }
-            //
-            // if (self.FightStatus)
-            // {
-            //     UIMainSkillComponent uIMainSkillComponent = self.UIMain.GetComponent<UIMainComponent>().UIMainSkillComponent;
-            //     SkillManagerComponent skillManagerComponent = unit.GetComponent<SkillManagerComponent>();
-            //
-            //     int grid = -1;
-            //     int count = 0;
-            //     int useSkillID = 0;
-            //     while (count < self.skillXuHaoList.Count)
-            //     {
-            //         grid = self.skillXuHaoList[self.XuHaoNum];
-            //         useSkillID = uIMainSkillComponent.UISkillGirdList[grid].GetSkillId();
-            //         if (skillManagerComponent.CanUseSkill(0, useSkillID) == 0)
-            //         {
-            //             break;
-            //         }
-            //
-            //         self.XuHaoNum++;
-            //         if (self.XuHaoNum >= self.skillXuHaoList.Count)
-            //         {
-            //             self.XuHaoNum = 0;
-            //         }
-            //
-            //         useSkillID = 0;
-            //         count++;
-            //     }
-            //
-            //     if (useSkillID != 0)
-            //     {
-            //         uIMainSkillComponent.UISkillGirdList[grid].OnPointDown(null);
-            //         await self.Root().GetComponent<TimerComponent>().WaitAsync(100);
-            //         uIMainSkillComponent.UISkillGirdList[grid].PointerUp(null);
-            //     }
-            //
-            //     self.XuHaoNum++;
-            //     if (self.XuHaoNum >= self.skillXuHaoList.Count)
-            //     {
-            //         self.XuHaoNum = 0;
-            //     }
-            // }
+            if (self.IfGuaJiAutoUseItem)
+            {
+                if (nowHp / maxHp <= 0.3f) // 血量低于30%,俩个道具一起用
+                {
+                    //使用第8格
+                    int useSkillID = self.UIMain.View.ES_MainSkill.UISkillGirdList[8].GetSkillId();
+                    if (self.ifBaseHpSkill(useSkillID))
+                    {
+                        ES_SkillGrid uiSkillGridComponent = self.UIMain.View.ES_MainSkill.UISkillGirdList[8];
+                        uiSkillGridComponent.OnPointDown(null);
+                        uiSkillGridComponent.PointerUp(null);
+                    }
+
+                    //使用第9格
+                    useSkillID = self.UIMain.View.ES_MainSkill.UISkillGirdList[9].GetSkillId();
+                    if (self.ifBaseHpSkill(useSkillID))
+                    {
+                        ES_SkillGrid uiSkillGridComponent = self.UIMain.View.ES_MainSkill.UISkillGirdList[9];
+                        uiSkillGridComponent.OnPointDown(null);
+                        uiSkillGridComponent.PointerUp(null);
+                    }
+                }
+                else if (nowHp / maxHp <= 0.6f) // 血量低于60%,使用第一个道具,如果道具用完，就用第二个
+                {
+                    bool ifUse = false;
+
+                    //使用第8格
+                    int useSkillID = self.UIMain.View.ES_MainSkill.UISkillGirdList[8].GetSkillId();
+                    if (self.ifBaseHpSkill(useSkillID))
+                    {
+                        ES_SkillGrid uiSkillGridComponent = self.UIMain.View.ES_MainSkill.UISkillGirdList[8];
+                        int itemId = uiSkillGridComponent.SkillPro?.SkillID ?? 0;
+                        BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(itemId);
+                        if (bagInfo != null)
+                        {
+                            uiSkillGridComponent.OnPointDown(null);
+                            uiSkillGridComponent.PointerUp(null);
+                            ifUse = true;
+                        }
+                    }
+
+                    //使用第9格
+                    useSkillID = self.UIMain.View.ES_MainSkill.UISkillGirdList[9].GetSkillId();
+                    if (ifUse == false && self.ifBaseHpSkill(useSkillID))
+                    {
+                        ES_SkillGrid uiSkillGridComponent = self.UIMain.View.ES_MainSkill.UISkillGirdList[9];
+                        uiSkillGridComponent.OnPointDown(null);
+                        uiSkillGridComponent.PointerUp(null);
+                    }
+                }
+            }
+
+            if (self.FightStatus)
+            {
+                SkillManagerComponentC skillManagerComponent = unit.GetComponent<SkillManagerComponentC>();
+
+                int grid = -1;
+                int count = 0;
+                int useSkillID = 0;
+                while (count < self.skillXuHaoList.Count)
+                {
+                    grid = self.skillXuHaoList[self.XuHaoNum];
+                    useSkillID = self.UIMain.View.ES_MainSkill.UISkillGirdList[grid].GetSkillId();
+                    if (skillManagerComponent.CanUseSkill(0, useSkillID) == 0)
+                    {
+                        break;
+                    }
+
+                    self.XuHaoNum++;
+                    if (self.XuHaoNum >= self.skillXuHaoList.Count)
+                    {
+                        self.XuHaoNum = 0;
+                    }
+
+                    useSkillID = 0;
+                    count++;
+                }
+
+                if (useSkillID != 0)
+                {
+                    self.UIMain.View.ES_MainSkill.UISkillGirdList[grid].OnPointDown(null);
+                    await self.Root().GetComponent<TimerComponent>().WaitAsync(100);
+                    self.UIMain.View.ES_MainSkill.UISkillGirdList[grid].PointerUp(null);
+                }
+
+                self.XuHaoNum++;
+                if (self.XuHaoNum >= self.skillXuHaoList.Count)
+                {
+                    self.XuHaoNum = 0;
+                }
+            }
+
             await ETTask.CompletedTask;
         }
     }
