@@ -96,6 +96,8 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof (ES_ButtonPositionSet))]
+    [FriendOf(typeof (DlgMainViewComponent))]
     [FriendOf(typeof (ES_JoystickMove))]
     [FriendOf(typeof (ES_MainSkill))]
     [FriendOf(typeof (Scroll_Item_MainChatItem))]
@@ -107,6 +109,9 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgMain self)
         {
+            self.View.ES_ButtonPositionSet.InitButtons(self.View.uiTransform.gameObject);
+            self.View.ES_ButtonPositionSet.uiTransform.gameObject.SetActive(false);
+
             self.View.E_DragPanelEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.BeginDrag(pdata as PointerEventData); });
             self.View.E_DragPanelEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
             self.View.E_DragPanelEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.EndDrag(pdata as PointerEventData); });

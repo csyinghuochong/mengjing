@@ -41,6 +41,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_ButtonPositionSet ES_ButtonPositionSet
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_buttonpositionset == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ButtonPositionSet");
+		    	   this.m_es_buttonpositionset = this.AddChild<ES_ButtonPositionSet,Transform>(subTrans);
+     			}
+     			return this.m_es_buttonpositionset;
+     		}
+     	}
+
 		public ES_JoystickMove ES_JoystickMove
      	{
      		get
@@ -1628,6 +1646,7 @@ namespace ET.Client
 		{
 			this.m_E_DragPanelImage = null;
 			this.m_E_DragPanelEventTrigger = null;
+			this.m_es_buttonpositionset = null;
 			this.m_es_joystickmove = null;
 			this.m_EG_LeftUpSetRectTransform = null;
 			this.m_E_RolePiLaoImgImage = null;
@@ -1726,6 +1745,7 @@ namespace ET.Client
 
 		private UnityEngine.UI.Image m_E_DragPanelImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_DragPanelEventTrigger = null;
+		private EntityRef<ES_ButtonPositionSet> m_es_buttonpositionset = null;
 		private EntityRef<ES_JoystickMove> m_es_joystickmove = null;
 		private UnityEngine.RectTransform m_EG_LeftUpSetRectTransform = null;
 		private UnityEngine.UI.Image m_E_RolePiLaoImgImage = null;

@@ -141,7 +141,7 @@ namespace ET.Client
                 return;
             }
 
-            // dlgMain.UIMainButtonPositionComponent.ShowSkillPositionSet();
+            dlgMain.View.ES_ButtonPositionSet.ShowSkillPositionSet();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Setting);
         }
 
