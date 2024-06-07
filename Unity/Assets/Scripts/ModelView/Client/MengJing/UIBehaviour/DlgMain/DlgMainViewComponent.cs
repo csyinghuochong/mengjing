@@ -979,6 +979,516 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Button E_Button_RunRaceButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_RunRaceButton == null )
+     			{
+		    		this.m_E_Button_RunRaceButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_RunRace");
+     			}
+     			return this.m_E_Button_RunRaceButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_RunRaceImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_RunRaceImage == null )
+     			{
+		    		this.m_E_Button_RunRaceImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_RunRace");
+     			}
+     			return this.m_E_Button_RunRaceImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_HappyButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_HappyButton == null )
+     			{
+		    		this.m_E_Button_HappyButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Happy");
+     			}
+     			return this.m_E_Button_HappyButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_HappyImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_HappyImage == null )
+     			{
+		    		this.m_E_Button_HappyImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Happy");
+     			}
+     			return this.m_E_Button_HappyImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_HuntButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_HuntButton == null )
+     			{
+		    		this.m_E_Button_HuntButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Hunt");
+     			}
+     			return this.m_E_Button_HuntButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_HuntImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_HuntImage == null )
+     			{
+		    		this.m_E_Button_HuntImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Hunt");
+     			}
+     			return this.m_E_Button_HuntImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_SoloButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_SoloButton == null )
+     			{
+		    		this.m_E_Button_SoloButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Solo");
+     			}
+     			return this.m_E_Button_SoloButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_SoloImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_SoloImage == null )
+     			{
+		    		this.m_E_Button_SoloImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Solo");
+     			}
+     			return this.m_E_Button_SoloImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_BattleButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_BattleButton == null )
+     			{
+		    		this.m_E_Btn_BattleButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Btn_Battle");
+     			}
+     			return this.m_E_Btn_BattleButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_BattleImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_BattleImage == null )
+     			{
+		    		this.m_E_Btn_BattleImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Btn_Battle");
+     			}
+     			return this.m_E_Btn_BattleImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_DonationButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_DonationButton == null )
+     			{
+		    		this.m_E_Button_DonationButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Donation");
+     			}
+     			return this.m_E_Button_DonationButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_DonationImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_DonationImage == null )
+     			{
+		    		this.m_E_Button_DonationImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Donation");
+     			}
+     			return this.m_E_Button_DonationImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_FenXiangButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_FenXiangButton == null )
+     			{
+		    		this.m_E_Button_FenXiangButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_FenXiang");
+     			}
+     			return this.m_E_Button_FenXiangButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_FenXiangImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_FenXiangImage == null )
+     			{
+		    		this.m_E_Button_FenXiangImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_FenXiang");
+     			}
+     			return this.m_E_Button_FenXiangImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_EveryTaskButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_EveryTaskButton == null )
+     			{
+		    		this.m_E_Btn_EveryTaskButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Btn_EveryTask");
+     			}
+     			return this.m_E_Btn_EveryTaskButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_EveryTaskImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_EveryTaskImage == null )
+     			{
+		    		this.m_E_Btn_EveryTaskImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Btn_EveryTask");
+     			}
+     			return this.m_E_Btn_EveryTaskImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_RechargeButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_RechargeButton == null )
+     			{
+		    		this.m_E_Button_RechargeButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Recharge");
+     			}
+     			return this.m_E_Button_RechargeButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_RechargeImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_RechargeImage == null )
+     			{
+		    		this.m_E_Button_RechargeImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Recharge");
+     			}
+     			return this.m_E_Button_RechargeImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_HuoDongButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_HuoDongButton == null )
+     			{
+		    		this.m_E_Btn_HuoDongButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Btn_HuoDong");
+     			}
+     			return this.m_E_Btn_HuoDongButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_HuoDongImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_HuoDongImage == null )
+     			{
+		    		this.m_E_Btn_HuoDongImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Btn_HuoDong");
+     			}
+     			return this.m_E_Btn_HuoDongImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_ZhenYingButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_ZhenYingButton == null )
+     			{
+		    		this.m_E_Button_ZhenYingButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_ZhenYing");
+     			}
+     			return this.m_E_Button_ZhenYingButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_ZhenYingImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_ZhenYingImage == null )
+     			{
+		    		this.m_E_Button_ZhenYingImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_ZhenYing");
+     			}
+     			return this.m_E_Button_ZhenYingImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_EnergyButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_EnergyButton == null )
+     			{
+		    		this.m_E_Button_EnergyButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Energy");
+     			}
+     			return this.m_E_Button_EnergyButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_EnergyImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_EnergyImage == null )
+     			{
+		    		this.m_E_Button_EnergyImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Energy");
+     			}
+     			return this.m_E_Button_EnergyImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_FashionButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_FashionButton == null )
+     			{
+		    		this.m_E_Button_FashionButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Fashion");
+     			}
+     			return this.m_E_Button_FashionButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_FashionImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_FashionImage == null )
+     			{
+		    		this.m_E_Button_FashionImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Fashion");
+     			}
+     			return this.m_E_Button_FashionImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_DemonButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_DemonButton == null )
+     			{
+		    		this.m_E_Button_DemonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Demon");
+     			}
+     			return this.m_E_Button_DemonButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_DemonImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_DemonImage == null )
+     			{
+		    		this.m_E_Button_DemonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Demon");
+     			}
+     			return this.m_E_Button_DemonImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_SeasonButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_SeasonButton == null )
+     			{
+		    		this.m_E_Button_SeasonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Season");
+     			}
+     			return this.m_E_Button_SeasonButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_SeasonImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_SeasonImage == null )
+     			{
+		    		this.m_E_Button_SeasonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_1/E_Button_Season");
+     			}
+     			return this.m_E_Button_SeasonImage;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_Btn_TopRight_2RectTransform
      	{
      		get
@@ -993,6 +1503,346 @@ namespace ET.Client
 		    		this.m_EG_Btn_TopRight_2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2");
      			}
      			return this.m_EG_Btn_TopRight_2RectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_ActivityV1Button
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_ActivityV1Button == null )
+     			{
+		    		this.m_E_Button_ActivityV1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Button_ActivityV1");
+     			}
+     			return this.m_E_Button_ActivityV1Button;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_ActivityV1Image
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_ActivityV1Image == null )
+     			{
+		    		this.m_E_Button_ActivityV1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Button_ActivityV1");
+     			}
+     			return this.m_E_Button_ActivityV1Image;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_AuctionButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_AuctionButton == null )
+     			{
+		    		this.m_E_Btn_AuctionButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Btn_Auction");
+     			}
+     			return this.m_E_Btn_AuctionButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_AuctionImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_AuctionImage == null )
+     			{
+		    		this.m_E_Btn_AuctionImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Btn_Auction");
+     			}
+     			return this.m_E_Btn_AuctionImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_HongBaoButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_HongBaoButton == null )
+     			{
+		    		this.m_E_Button_HongBaoButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Button_HongBao");
+     			}
+     			return this.m_E_Button_HongBaoButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_HongBaoImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_HongBaoImage == null )
+     			{
+		    		this.m_E_Button_HongBaoImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Button_HongBao");
+     			}
+     			return this.m_E_Button_HongBaoImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_ZhanQuButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_ZhanQuButton == null )
+     			{
+		    		this.m_E_Button_ZhanQuButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Button_ZhanQu");
+     			}
+     			return this.m_E_Button_ZhanQuButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_ZhanQuImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_ZhanQuImage == null )
+     			{
+		    		this.m_E_Button_ZhanQuImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Button_ZhanQu");
+     			}
+     			return this.m_E_Button_ZhanQuImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_NewYearButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_NewYearButton == null )
+     			{
+		    		this.m_E_Button_NewYearButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Button_NewYear");
+     			}
+     			return this.m_E_Button_NewYearButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_NewYearImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_NewYearImage == null )
+     			{
+		    		this.m_E_Button_NewYearImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Button_NewYear");
+     			}
+     			return this.m_E_Button_NewYearImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_RechargeRewardButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_RechargeRewardButton == null )
+     			{
+		    		this.m_E_Button_RechargeRewardButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Button_RechargeReward");
+     			}
+     			return this.m_E_Button_RechargeRewardButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_RechargeRewardImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_RechargeRewardImage == null )
+     			{
+		    		this.m_E_Button_RechargeRewardImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Button_RechargeReward");
+     			}
+     			return this.m_E_Button_RechargeRewardImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_WelfareButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_WelfareButton == null )
+     			{
+		    		this.m_E_Button_WelfareButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Button_Welfare");
+     			}
+     			return this.m_E_Button_WelfareButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_WelfareImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_WelfareImage == null )
+     			{
+		    		this.m_E_Button_WelfareImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Button_Welfare");
+     			}
+     			return this.m_E_Button_WelfareImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_GMButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_GMButton == null )
+     			{
+		    		this.m_E_Btn_GMButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Btn_GM");
+     			}
+     			return this.m_E_Btn_GMButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_GMImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_GMImage == null )
+     			{
+		    		this.m_E_Btn_GMImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Btn_GM");
+     			}
+     			return this.m_E_Btn_GMImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_RankButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_RankButton == null )
+     			{
+		    		this.m_E_Btn_RankButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Btn_Rank");
+     			}
+     			return this.m_E_Btn_RankButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Btn_RankImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_RankImage == null )
+     			{
+		    		this.m_E_Btn_RankImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Btn_Rank");
+     			}
+     			return this.m_E_Btn_RankImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Button_WorldLvButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_WorldLvButton == null )
+     			{
+		    		this.m_E_Button_WorldLvButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Button_WorldLv");
+     			}
+     			return this.m_E_Button_WorldLvButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_Btn_PaiMaiHangButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Btn_PaiMaiHangButton == null )
+     			{
+		    		this.m_E_Btn_PaiMaiHangButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_2/E_Btn_PaiMaiHang");
+     			}
+     			return this.m_E_Btn_PaiMaiHangButton;
      		}
      	}
 
@@ -1013,7 +1863,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_MapTransferButton
+		public UnityEngine.RectTransform EG_Btn_KillMonsterRewardRectTransform
      	{
      		get
      		{
@@ -1022,15 +1872,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_Btn_MapTransferButton == null )
+     			if( this.m_EG_Btn_KillMonsterRewardRectTransform == null )
      			{
-		    		this.m_E_Btn_MapTransferButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_3/E_Btn_MapTransfer");
+		    		this.m_EG_Btn_KillMonsterRewardRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_3/EG_Btn_KillMonsterReward");
      			}
-     			return this.m_E_Btn_MapTransferButton;
+     			return this.m_EG_Btn_KillMonsterRewardRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_MapTransferImage
+		public UnityEngine.RectTransform EG_Btn_LvRewardRectTransform
      	{
      		get
      		{
@@ -1039,11 +1889,79 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_Btn_MapTransferImage == null )
+     			if( this.m_EG_Btn_LvRewardRectTransform == null )
      			{
-		    		this.m_E_Btn_MapTransferImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_3/E_Btn_MapTransfer");
+		    		this.m_EG_Btn_LvRewardRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_3/EG_Btn_LvReward");
      			}
-     			return this.m_E_Btn_MapTransferImage;
+     			return this.m_EG_Btn_LvRewardRectTransform;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_MailHintTipButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MailHintTipButton == null )
+     			{
+		    		this.m_E_MailHintTipButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_3/E_MailHintTip");
+     			}
+     			return this.m_E_MailHintTipButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_MailHintTipImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MailHintTipImage == null )
+     			{
+		    		this.m_E_MailHintTipImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_3/E_MailHintTip");
+     			}
+     			return this.m_E_MailHintTipImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_E_Btn_MapTransferButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_E_Btn_MapTransferButton == null )
+     			{
+		    		this.m_E_E_Btn_MapTransferButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_3/E_E_Btn_MapTransfer");
+     			}
+     			return this.m_E_E_Btn_MapTransferButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_E_Btn_MapTransferImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_E_Btn_MapTransferImage == null )
+     			{
+		    		this.m_E_E_Btn_MapTransferImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_RightSet/EG_Btn_TopRight_3/E_E_Btn_MapTransfer");
+     			}
+     			return this.m_E_E_Btn_MapTransferImage;
      		}
      	}
 
@@ -1566,10 +2484,64 @@ namespace ET.Client
 			this.m_E_Button_ZhanKaiButton = null;
 			this.m_E_Button_ZhanKaiImage = null;
 			this.m_EG_Btn_TopRight_1RectTransform = null;
+			this.m_E_Button_RunRaceButton = null;
+			this.m_E_Button_RunRaceImage = null;
+			this.m_E_Button_HappyButton = null;
+			this.m_E_Button_HappyImage = null;
+			this.m_E_Button_HuntButton = null;
+			this.m_E_Button_HuntImage = null;
+			this.m_E_Button_SoloButton = null;
+			this.m_E_Button_SoloImage = null;
+			this.m_E_Btn_BattleButton = null;
+			this.m_E_Btn_BattleImage = null;
+			this.m_E_Button_DonationButton = null;
+			this.m_E_Button_DonationImage = null;
+			this.m_E_Button_FenXiangButton = null;
+			this.m_E_Button_FenXiangImage = null;
+			this.m_E_Btn_EveryTaskButton = null;
+			this.m_E_Btn_EveryTaskImage = null;
+			this.m_E_Button_RechargeButton = null;
+			this.m_E_Button_RechargeImage = null;
+			this.m_E_Btn_HuoDongButton = null;
+			this.m_E_Btn_HuoDongImage = null;
+			this.m_E_Button_ZhenYingButton = null;
+			this.m_E_Button_ZhenYingImage = null;
+			this.m_E_Button_EnergyButton = null;
+			this.m_E_Button_EnergyImage = null;
+			this.m_E_Button_FashionButton = null;
+			this.m_E_Button_FashionImage = null;
+			this.m_E_Button_DemonButton = null;
+			this.m_E_Button_DemonImage = null;
+			this.m_E_Button_SeasonButton = null;
+			this.m_E_Button_SeasonImage = null;
 			this.m_EG_Btn_TopRight_2RectTransform = null;
+			this.m_E_Button_ActivityV1Button = null;
+			this.m_E_Button_ActivityV1Image = null;
+			this.m_E_Btn_AuctionButton = null;
+			this.m_E_Btn_AuctionImage = null;
+			this.m_E_Button_HongBaoButton = null;
+			this.m_E_Button_HongBaoImage = null;
+			this.m_E_Button_ZhanQuButton = null;
+			this.m_E_Button_ZhanQuImage = null;
+			this.m_E_Button_NewYearButton = null;
+			this.m_E_Button_NewYearImage = null;
+			this.m_E_Button_RechargeRewardButton = null;
+			this.m_E_Button_RechargeRewardImage = null;
+			this.m_E_Button_WelfareButton = null;
+			this.m_E_Button_WelfareImage = null;
+			this.m_E_Btn_GMButton = null;
+			this.m_E_Btn_GMImage = null;
+			this.m_E_Btn_RankButton = null;
+			this.m_E_Btn_RankImage = null;
+			this.m_E_Button_WorldLvButton = null;
+			this.m_E_Btn_PaiMaiHangButton = null;
 			this.m_EG_Btn_TopRight_3RectTransform = null;
-			this.m_E_Btn_MapTransferButton = null;
-			this.m_E_Btn_MapTransferImage = null;
+			this.m_EG_Btn_KillMonsterRewardRectTransform = null;
+			this.m_EG_Btn_LvRewardRectTransform = null;
+			this.m_E_MailHintTipButton = null;
+			this.m_E_MailHintTipImage = null;
+			this.m_E_E_Btn_MapTransferButton = null;
+			this.m_E_E_Btn_MapTransferImage = null;
 			this.m_E_Btn_RerurnDungeonButton = null;
 			this.m_E_Btn_RerurnDungeonImage = null;
 			this.m_E_Btn_RerurnBuildingButton = null;
@@ -1657,10 +2629,64 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_Button_ZhanKaiButton = null;
 		private UnityEngine.UI.Image m_E_Button_ZhanKaiImage = null;
 		private UnityEngine.RectTransform m_EG_Btn_TopRight_1RectTransform = null;
+		private UnityEngine.UI.Button m_E_Button_RunRaceButton = null;
+		private UnityEngine.UI.Image m_E_Button_RunRaceImage = null;
+		private UnityEngine.UI.Button m_E_Button_HappyButton = null;
+		private UnityEngine.UI.Image m_E_Button_HappyImage = null;
+		private UnityEngine.UI.Button m_E_Button_HuntButton = null;
+		private UnityEngine.UI.Image m_E_Button_HuntImage = null;
+		private UnityEngine.UI.Button m_E_Button_SoloButton = null;
+		private UnityEngine.UI.Image m_E_Button_SoloImage = null;
+		private UnityEngine.UI.Button m_E_Btn_BattleButton = null;
+		private UnityEngine.UI.Image m_E_Btn_BattleImage = null;
+		private UnityEngine.UI.Button m_E_Button_DonationButton = null;
+		private UnityEngine.UI.Image m_E_Button_DonationImage = null;
+		private UnityEngine.UI.Button m_E_Button_FenXiangButton = null;
+		private UnityEngine.UI.Image m_E_Button_FenXiangImage = null;
+		private UnityEngine.UI.Button m_E_Btn_EveryTaskButton = null;
+		private UnityEngine.UI.Image m_E_Btn_EveryTaskImage = null;
+		private UnityEngine.UI.Button m_E_Button_RechargeButton = null;
+		private UnityEngine.UI.Image m_E_Button_RechargeImage = null;
+		private UnityEngine.UI.Button m_E_Btn_HuoDongButton = null;
+		private UnityEngine.UI.Image m_E_Btn_HuoDongImage = null;
+		private UnityEngine.UI.Button m_E_Button_ZhenYingButton = null;
+		private UnityEngine.UI.Image m_E_Button_ZhenYingImage = null;
+		private UnityEngine.UI.Button m_E_Button_EnergyButton = null;
+		private UnityEngine.UI.Image m_E_Button_EnergyImage = null;
+		private UnityEngine.UI.Button m_E_Button_FashionButton = null;
+		private UnityEngine.UI.Image m_E_Button_FashionImage = null;
+		private UnityEngine.UI.Button m_E_Button_DemonButton = null;
+		private UnityEngine.UI.Image m_E_Button_DemonImage = null;
+		private UnityEngine.UI.Button m_E_Button_SeasonButton = null;
+		private UnityEngine.UI.Image m_E_Button_SeasonImage = null;
 		private UnityEngine.RectTransform m_EG_Btn_TopRight_2RectTransform = null;
+		private UnityEngine.UI.Button m_E_Button_ActivityV1Button = null;
+		private UnityEngine.UI.Image m_E_Button_ActivityV1Image = null;
+		private UnityEngine.UI.Button m_E_Btn_AuctionButton = null;
+		private UnityEngine.UI.Image m_E_Btn_AuctionImage = null;
+		private UnityEngine.UI.Button m_E_Button_HongBaoButton = null;
+		private UnityEngine.UI.Image m_E_Button_HongBaoImage = null;
+		private UnityEngine.UI.Button m_E_Button_ZhanQuButton = null;
+		private UnityEngine.UI.Image m_E_Button_ZhanQuImage = null;
+		private UnityEngine.UI.Button m_E_Button_NewYearButton = null;
+		private UnityEngine.UI.Image m_E_Button_NewYearImage = null;
+		private UnityEngine.UI.Button m_E_Button_RechargeRewardButton = null;
+		private UnityEngine.UI.Image m_E_Button_RechargeRewardImage = null;
+		private UnityEngine.UI.Button m_E_Button_WelfareButton = null;
+		private UnityEngine.UI.Image m_E_Button_WelfareImage = null;
+		private UnityEngine.UI.Button m_E_Btn_GMButton = null;
+		private UnityEngine.UI.Image m_E_Btn_GMImage = null;
+		private UnityEngine.UI.Button m_E_Btn_RankButton = null;
+		private UnityEngine.UI.Image m_E_Btn_RankImage = null;
+		private UnityEngine.UI.Button m_E_Button_WorldLvButton = null;
+		private UnityEngine.UI.Button m_E_Btn_PaiMaiHangButton = null;
 		private UnityEngine.RectTransform m_EG_Btn_TopRight_3RectTransform = null;
-		private UnityEngine.UI.Button m_E_Btn_MapTransferButton = null;
-		private UnityEngine.UI.Image m_E_Btn_MapTransferImage = null;
+		private UnityEngine.RectTransform m_EG_Btn_KillMonsterRewardRectTransform = null;
+		private UnityEngine.RectTransform m_EG_Btn_LvRewardRectTransform = null;
+		private UnityEngine.UI.Button m_E_MailHintTipButton = null;
+		private UnityEngine.UI.Image m_E_MailHintTipImage = null;
+		private UnityEngine.UI.Button m_E_E_Btn_MapTransferButton = null;
+		private UnityEngine.UI.Image m_E_E_Btn_MapTransferImage = null;
 		private UnityEngine.UI.Button m_E_Btn_RerurnDungeonButton = null;
 		private UnityEngine.UI.Image m_E_Btn_RerurnDungeonImage = null;
 		private UnityEngine.UI.Button m_E_Btn_RerurnBuildingButton = null;

@@ -115,8 +115,44 @@ namespace ET.Client
             self.View.E_JiaYuanButton.AddListener(self.OnJiaYuanButton);
             self.View.E_NpcDuiHuaButton.AddListener(self.OnNpcDuiHuaButton);
             self.View.E_UnionButton.AddListener(self.OnUnionButton);
+
             self.View.E_OpenChatButton.AddListener(self.OnOpenChat);
+
             self.View.E_Button_ZhanKaiButton.AddListener(self.OnButtonZhanKai);
+
+            // self.View.E_Button_RunRaceButton.AddListener();
+            // self.View.E_Button_HappyButton.AddListener();
+            // self.View.E_Button_HuntButton.AddListener();
+            // self.View.E_Button_SoloButton.AddListener();
+            // self.View.E_Btn_BattleButton.AddListener();
+            // self.View.E_Button_DonationButton.AddListener();
+            // self.View.E_Button_FenXiangButton.AddListener();
+            // self.View.E_Btn_EveryTaskButton.AddListener();
+            // self.View.E_Button_RechargeButton.AddListener();
+            // self.View.E_Btn_HuoDongButton.AddListener();
+            // self.View.E_Button_ZhenYingButton.AddListener();
+            // self.View.E_Button_EnergyButton.AddListener();
+            // self.View.E_Button_FashionButton.AddListener();
+            // self.View.E_Button_DemonButton.AddListener();
+            // self.View.E_Button_SeasonButton.AddListener();
+
+            // self.View.E_Button_ActivityV1Button.AddListener();
+            // self.View.E_Btn_AuctionButton.AddListener();
+            // self.View.E_Button_HongBaoButton.AddListener();
+            // self.View.E_Button_ZhanQuButton.AddListener();
+            // self.View.E_Button_NewYearButton.AddListener();
+            // self.View.E_Button_RechargeRewardButton.AddListener();
+            // self.View.E_Button_WelfareButton.AddListener();
+            // self.View.E_Btn_GMButton.AddListener();
+            // self.View.E_Btn_RankButton.AddListener();
+            // self.View.E_Button_WorldLvButton.AddListener();
+            // self.View.E_Btn_PaiMaiHangButton.AddListener();
+
+            // self.View.EG_Btn_KillMonsterRewardRectTransform
+            // self.View.EG_Btn_LvRewardRectTransform
+            // self.View.E_MailHintTipButton.AddListener();
+            // self.View.E_E_Btn_MapTransferButton.AddListener();
+            // self.View.E_Btn_RerurnDungeonButton.AddListener();
             self.View.E_Btn_RerurnBuildingButton.AddListener(self.OnClickReturnButton);
 
             self.View.E_SetButton.AddListener(self.OnSetButton);
