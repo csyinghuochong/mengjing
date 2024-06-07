@@ -41,7 +41,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_JoystickMoveRectTransform
+		public ES_JoystickMove ES_JoystickMove
      	{
      		get
      		{
@@ -50,113 +50,12 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_JoystickMoveRectTransform == null )
+     			if( this.m_es_joystickmove == null )
      			{
-		    		this.m_EG_JoystickMoveRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_JoystickMove");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_JoystickMove");
+		    	   this.m_es_joystickmove = this.AddChild<ES_JoystickMove,Transform>(subTrans);
      			}
-     			return this.m_EG_JoystickMoveRectTransform;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_YaoGanDiMoveImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_YaoGanDiMoveImage == null )
-     			{
-		    		this.m_E_YaoGanDiMoveImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_JoystickMove/E_YaoGanDiMove");
-     			}
-     			return this.m_E_YaoGanDiMoveImage;
-     		}
-     	}
-
-		public UnityEngine.EventSystems.EventTrigger E_YaoGanDiMoveEventTrigger
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_YaoGanDiMoveEventTrigger == null )
-     			{
-		    		this.m_E_YaoGanDiMoveEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"EG_JoystickMove/E_YaoGanDiMove");
-     			}
-     			return this.m_E_YaoGanDiMoveEventTrigger;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_YaoGanDiFixImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_YaoGanDiFixImage == null )
-     			{
-		    		this.m_E_YaoGanDiFixImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_JoystickMove/E_YaoGanDiFix");
-     			}
-     			return this.m_E_YaoGanDiFixImage;
-     		}
-     	}
-
-		public UnityEngine.EventSystems.EventTrigger E_YaoGanDiFixEventTrigger
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_YaoGanDiFixEventTrigger == null )
-     			{
-		    		this.m_E_YaoGanDiFixEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"EG_JoystickMove/E_YaoGanDiFix");
-     			}
-     			return this.m_E_YaoGanDiFixEventTrigger;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_CenterShowImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_CenterShowImage == null )
-     			{
-		    		this.m_E_CenterShowImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_JoystickMove/E_YaoGanDiFix/E_CenterShow");
-     			}
-     			return this.m_E_CenterShowImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_ThumbImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ThumbImage == null )
-     			{
-		    		this.m_E_ThumbImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_JoystickMove/E_YaoGanDiFix/E_Thumb");
-     			}
-     			return this.m_E_ThumbImage;
+     			return this.m_es_joystickmove;
      		}
      	}
 
@@ -1678,13 +1577,7 @@ namespace ET.Client
 		{
 			this.m_E_DragPanelImage = null;
 			this.m_E_DragPanelEventTrigger = null;
-			this.m_EG_JoystickMoveRectTransform = null;
-			this.m_E_YaoGanDiMoveImage = null;
-			this.m_E_YaoGanDiMoveEventTrigger = null;
-			this.m_E_YaoGanDiFixImage = null;
-			this.m_E_YaoGanDiFixEventTrigger = null;
-			this.m_E_CenterShowImage = null;
-			this.m_E_ThumbImage = null;
+			this.m_es_joystickmove = null;
 			this.m_EG_LeftUpSetRectTransform = null;
 			this.m_E_RolePiLaoImgImage = null;
 			this.m_E_RoleHuoLiImgImage = null;
@@ -1779,13 +1672,7 @@ namespace ET.Client
 
 		private UnityEngine.UI.Image m_E_DragPanelImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_DragPanelEventTrigger = null;
-		private UnityEngine.RectTransform m_EG_JoystickMoveRectTransform = null;
-		private UnityEngine.UI.Image m_E_YaoGanDiMoveImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_YaoGanDiMoveEventTrigger = null;
-		private UnityEngine.UI.Image m_E_YaoGanDiFixImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_YaoGanDiFixEventTrigger = null;
-		private UnityEngine.UI.Image m_E_CenterShowImage = null;
-		private UnityEngine.UI.Image m_E_ThumbImage = null;
+		private EntityRef<ES_JoystickMove> m_es_joystickmove = null;
 		private UnityEngine.RectTransform m_EG_LeftUpSetRectTransform = null;
 		private UnityEngine.UI.Image m_E_RolePiLaoImgImage = null;
 		private UnityEngine.UI.Image m_E_RoleHuoLiImgImage = null;

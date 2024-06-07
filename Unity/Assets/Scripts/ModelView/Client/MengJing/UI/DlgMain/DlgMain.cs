@@ -14,21 +14,7 @@ namespace ET.Client
             get => this.GetComponent<DlgMainViewComponent>();
         }
 
-        public Vector2 OldPoint;
-        public Vector2 NewPoint;
-        public float Distance = 110;
-        public long lastSendTime;
-        public long checkTime;
-        public int direction;
-        public int lastDirection;
-        public Camera UICamera;
-        public Camera MainCamera;
-        public float LastShowTip;
         public Unit MainUnit { get; set; }
-        public int ObstructLayer;
-        public int BuildingLayer;
-        public long JoystickTimer;
-        public int OperateMode;
 
         public int Lab_TimeIndex = 0;
         public GameObject MapCamera;
@@ -36,14 +22,14 @@ namespace ET.Client
         public float ScaleRateY;
         public int SceneTypeEnum;
         public long MapMiniTimer;
-        public List<GameObject> AllPointList = new ();
-        public Vector3 NoVector3 = new (-10000, -10000, 0);
+        public List<GameObject> AllPointList = new();
+        public Vector3 NoVector3 = new(-10000, -10000, 0);
 
         public List<TaskPro> ShowTaskPros = new();
         public Dictionary<int, Scroll_Item_MainTask> ScrollItemMainTasks;
         public List<ChatInfo> ShowChatInfos = new();
         public Dictionary<int, Scroll_Item_MainChatItem> ScrollItemMainChatItems;
-        
+
         public long TimerPing;
     }
 }
