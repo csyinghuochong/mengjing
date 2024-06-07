@@ -292,4 +292,11 @@ namespace ET.Client
     public struct BeforeSkill
     {
     }
+
+    public struct RoleDataBroadcase
+    {
+        public int UserDataType;
+        public string UserDataValue;
+        public Unit Unit;
+    }
 }
