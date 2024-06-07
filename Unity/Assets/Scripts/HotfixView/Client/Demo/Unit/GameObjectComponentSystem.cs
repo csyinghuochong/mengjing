@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.HighLightTimer)]
-    public class HighLightTimer : ATimer<GameObjectComponent>
+    public class HighLightTimer: ATimer<GameObjectComponent>
     {
         protected override void Run(GameObjectComponent self)
         {
@@ -21,7 +21,7 @@ namespace ET.Client
     }
 
     [Invoke(TimerInvokeType.DelayShowTimer)]
-    public class DelayShowTimer : ATimer<GameObjectComponent>
+    public class DelayShowTimer: ATimer<GameObjectComponent>
     {
         protected override void Run(GameObjectComponent self)
         {
@@ -31,6 +31,7 @@ namespace ET.Client
                 {
                     return;
                 }
+
                 self.ShowGameObject();
             }
             catch (Exception e)
@@ -39,8 +40,9 @@ namespace ET.Client
             }
         }
     }
-    [FriendOf(typeof(GameObjectComponent))]
-    [EntitySystemOf(typeof(GameObjectComponent))]
+
+    [FriendOf(typeof (GameObjectComponent))]
+    [EntitySystemOf(typeof (GameObjectComponent))]
     public static partial class GameObjectComponentSystem
     {
         [EntitySystem]
@@ -52,35 +54,38 @@ namespace ET.Client
             self.Root().GetComponent<TimerComponent>().Remove(ref self.HighLightTimer);
             self.Root().GetComponent<TimerComponent>().Remove(ref self.DelayShowTimer);
         }
-        
+
         [EntitySystem]
         private static void Awake(this GameObjectComponent self)
         {
             self.GameObject = null;
             self.Material = null;
-            self.OldShader = null;  
+            self.OldShader = null;
             self.UnitAssetsPath = string.Empty;
             self.DelayShow = 0;
             self.BianShenEffect = false;
             self.LoadGameObject();
         }
-        
+
         public static void RecoverGameObject(this GameObjectComponent self)
         {
             if (self.GameObject != null)
-            { 
-                self.GameObject.transform.localScale = Vector3.one; 
+            {
+                self.GameObject.transform.localScale = Vector3.one;
             }
+
             if (string.IsNullOrEmpty(self.UnitAssetsPath) && self.GameObject != null)
             {
                 UnityEngine.Object.Destroy(self.GameObject);
             }
+
             if (!string.IsNullOrEmpty(self.UnitAssetsPath))
             {
                 self.OnRevive();
                 //GameObjectPoolHelper.ReturnObjectToPool(self.GameObject);
                 GameObjectPoolComponent.Instance.RecoverGameObject(self.UnitAssetsPath, self.GameObject);
             }
+
             self.GameObject = null;
         }
 
@@ -94,11 +99,12 @@ namespace ET.Client
                     MapComponent mapComponent = unit.Root().GetComponent<MapComponent>();
                     //宠物副本不显示玩家
                     if (unit.MainHero && (mapComponent.SceneType == (int)SceneTypeEnum.PetDungeon
-                        || mapComponent.SceneType == (int)SceneTypeEnum.PetTianTi
-                        || mapComponent.SceneType == (int)SceneTypeEnum.PetMing) )
+                            || mapComponent.SceneType == (int)SceneTypeEnum.PetTianTi
+                            || mapComponent.SceneType == (int)SceneTypeEnum.PetMing))
                     {
                         return;
                     }
+
                     var path = string.Empty;
 
                     NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
@@ -107,7 +113,7 @@ namespace ET.Client
                     self.OnRunRaceMonster(runmonsterId, cardtransform, false);
                     if (runmonsterId > 0)
                     {
-                        self.OnRunRaceMonster(0, runmonsterId, false );  
+                        self.OnRunRaceMonster(0, runmonsterId, false);
                     }
                     else
                     {
@@ -115,6 +121,7 @@ namespace ET.Client
                         GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
                         self.UnitAssetsPath = string.Empty;
                     }
+
                     break;
                 case UnitType.Stall:
                     path = ABPathHelper.GetUnitPath("Player/BaiTan");
@@ -127,7 +134,7 @@ namespace ET.Client
                     int userMaterModel = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.UseMasterModel);
                     long masterId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.MasterId);
                     Unit master = unit.GetParent<UnitComponent>().Get(masterId);
-                
+
                     if (userMaterModel == 1 && master != null
                         && master.GetComponent<GameObjectComponent>() != null
                         && master.GetComponent<GameObjectComponent>().GameObject != null)
@@ -157,6 +164,7 @@ namespace ET.Client
                         GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
                         self.UnitAssetsPath = path;
                     }
+
                     break;
                 case UnitType.Pet:
                     int skinId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetSkin);
@@ -166,16 +174,17 @@ namespace ET.Client
                     {
                         skinId = petConfig.Skin[0];
                     }
+
                     PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(skinId);
                     path = ABPathHelper.GetUnitPath("Pet/" + petSkinConfig.SkinID.ToString());
                     GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
                     self.UnitAssetsPath = path;
                     break;
-                case UnitType.Bullet:   //从特效里面加载
+                case UnitType.Bullet: //从特效里面加载
                     int skillid = unit.ConfigId;
                     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
                     EffectConfig effectConfig = EffectConfigCategory.Instance.Get(skillConfig.SkillEffectID[0]);
-                    self.DelayShow =  (long)(1000 * effectConfig.SkillEffectDelayTime);
+                    self.DelayShow = (long)(1000 * effectConfig.SkillEffectDelayTime);
                     path = ABPathHelper.GetEffetPath("SkillEffect/" + effectConfig.EffectName);
                     GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
                     self.UnitAssetsPath = path;
@@ -248,6 +257,7 @@ namespace ET.Client
                 self.ObjectHorse.transform.rotation = quaternion;
                 return;
             }
+
             if (self.GameObject != null)
             {
                 self.GameObject.transform.rotation = quaternion;
@@ -261,7 +271,8 @@ namespace ET.Client
                 self.ObjectHorse.transform.position = vector;
                 return;
             }
-            if (self.GameObject!=null)
+
+            if (self.GameObject != null)
             {
                 self.GameObject.transform.position = vector;
             }
@@ -274,6 +285,7 @@ namespace ET.Client
                 GameObject.Destroy(go);
                 return;
             }
+
             if (go == null)
             {
                 return;
@@ -287,6 +299,7 @@ namespace ET.Client
             {
                 return;
             }
+
             int horseRide = numericComponent.GetAsInt(NumericType.HorseRide);
             if (horseRide != 0)
             {
@@ -302,8 +315,6 @@ namespace ET.Client
         {
             GameObject di = self.GameObject.transform.Find("fake shadow (5)").gameObject;
             di.SetActive(show);
-
-         
         }
 
         public static void CheckRunState(this GameObjectComponent self)
@@ -422,7 +433,8 @@ namespace ET.Client
                 self.GameObject.SetActive(true);
                 return;
             }
-            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);    
+
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
             if (monsterConfig.IfHide != 1)
             {
                 self.GameObject.SetActive(true);
@@ -440,23 +452,27 @@ namespace ET.Client
                 GameObject.Destroy(go);
                 return;
             }
-            if ( self.GameObject !=null)
+
+            if (self.GameObject != null)
             {
                 Log.Error(" self.GameObject !=null");
                 return;
             }
+
             self.GameObject = go;
             self.InitMaterial();
             if (self.DelayShow > 0)
             {
                 go.SetActive(false);
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.DelayShowTimer);
-                self.DelayShowTimer = self.Root().GetComponent<TimerComponent>().NewOnceTimer (TimeHelper.ServerNow() + self.DelayShow, TimerInvokeType.DelayShowTimer, self);
+                self.DelayShowTimer = self.Root().GetComponent<TimerComponent>()
+                        .NewOnceTimer(TimeHelper.ServerNow() + self.DelayShow, TimerInvokeType.DelayShowTimer, self);
             }
             else
             {
                 self.ShowGameObject();
             }
+
             Unit unit = self.GetParent<Unit>();
             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
             switch (unit.Type)
@@ -472,48 +488,53 @@ namespace ET.Client
                     int weaponid = numericComponent.GetAsInt(NumericType.Now_Weapon);
                     List<int> fashionids = unit.GetComponent<UnitInfoComponent>().FashionEquipList;
                     go.transform.name = unit.Id.ToString();
-                    
+
                     unit.AddComponent<AnimatorComponent>();
-                    unit.AddComponent<FsmComponent>();                         //当前状态组建
-                    unit.AddComponent<HeroTransformComponent>();              //获取角色绑点组件
-                    unit.AddComponent<EffectViewComponent>();               //添加特效组建
+                    unit.AddComponent<FsmComponent>(); //当前状态组建
+                    unit.AddComponent<HeroTransformComponent>(); //获取角色绑点组件
+                    unit.AddComponent<EffectViewComponent>(); //添加特效组建
                     unit.AddComponent<SkillYujingComponent>();
                     unit.AddComponent<UIPlayerHpComponent>();
                     unit.GetComponent<BuffManagerComponentC>()?.InitBuff();
                     unit.GetComponent<SkillManagerComponentC>()?.InitSkill();
                     self.OnUpdateHorse();
-            
+
                     if (numericComponent.GetAsInt(NumericType.RunRaceTransform) == 0
                         && numericComponent.GetAsInt(NumericType.CardTransform) == 0)
                     {
                         //unit.AddComponent<ChangeEquipComponent>().InitWeapon(fashionids, unit.ConfigId, weaponid);
                         //self.OnUnitStallUpdate(numericComponent.GetAsLong(NumericType.Now_Stall));
                     }
-                    
-                    StateComponentC stateComponent = unit.GetComponent<StateComponentC>();    
+
+                    StateComponentC stateComponent = unit.GetComponent<StateComponentC>();
                     if (stateComponent.StateTypeGet(StateTypeEnum.Stealth))
-                    { 
-                        self.EnterStealth(); 
+                    {
+                        self.EnterStealth();
                     }
+
                     if (stateComponent.StateTypeGet(StateTypeEnum.Hide))
                     {
                         self.EnterHide();
                     }
+
                     if (numericComponent.GetAsInt(NumericType.Now_Dead) == 1)
                     {
                         //EventType.UnitDead.Instance.Unit = unit;
                         //Game.EventSystem.PublishClass(EventType.UnitDead.Instance);
                     }
+
                     if (unit.MainHero)
                     {
                         Transform topTf = unit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head).transform;
                         UIMapHelper.OnMainHeroInit(unit.Root(), topTf, go.transform, mapComponent.SceneType);
                     }
+
                     if (self.BianShenEffect)
                     {
                         self.BianShenEffect = false;
                         FunctionEffect.PlaySelfEffect(unit, 30000002);
                     }
+
                     break;
                 case UnitType.Stall:
                     UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
@@ -536,20 +557,21 @@ namespace ET.Client
                     {
                         LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
                         self.OnAddCollider(go);
-                        unit.AddComponent<EffectViewComponent>(true);            //添加特效组建
+                        unit.AddComponent<EffectViewComponent>(true); //添加特效组建
                         unit.AddComponent<AnimatorComponent>(true);
-                        unit.AddComponent<FsmComponent>(true);                 //当前状态组建
+                        unit.AddComponent<FsmComponent>(true); //当前状态组建
                         unit.AddComponent<SkillYujingComponent>(true);
                     }
+
                     if (monsterCof.MonsterType == (int)MonsterTypeEnum.Boss)
                     {
-                        unit.AddComponent<MonsterActRangeComponent, int>(monsterCof.Id, true);         //血条UI组件
-            
+                        unit.AddComponent<MonsterActRangeComponent, int>(monsterCof.Id, true); //血条UI组件
+
                         mapComponent = self.Root().GetComponent<MapComponent>();
                         bool shenYuan = mapComponent.SceneType == SceneTypeEnum.TeamDungeon && mapComponent.FubenDifficulty == TeamFubenType.ShenYuan;
-                        go.transform.localScale = shenYuan ? Vector3.one * 1.3f : Vector3.one;
+                        go.transform.localScale = shenYuan? Vector3.one * 1.3f : Vector3.one;
                     }
-            
+
                     //51 场景怪 有AI 不显示名称
                     //52 能量台子 无AI
                     //54 场景怪 有AI 显示名称
@@ -559,10 +581,9 @@ namespace ET.Client
                     //58 宠物实体
                     //59 精灵实体
                     //60 家园物品
-            
+
                     if (monsterCof.MonsterSonType == 51)
                     {
-                       
                     }
                     else if (monsterCof.MonsterSonType == 52 || monsterCof.MonsterSonType == 54)
                     {
@@ -572,15 +593,15 @@ namespace ET.Client
                     else if (monsterCof.MonsterSonType == 58 || monsterCof.MonsterSonType == 59)
                     {
                         self.OnAddCollider(go);
-                        unit.AddComponent<UISceneItemComponent>(true);         //血条UI组件
+                        unit.AddComponent<UISceneItemComponent>(true); //血条UI组件
                         LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
-            
+
                         if (monsterCof.MonsterSonType == 58)
                         {
                             //实例化特效
                             FunctionEffect.PlaySelfEffect(unit, 91000106);
                         }
-            
+
                         if (monsterCof.MonsterSonType == 59)
                         {
                             //实例化特效
@@ -589,41 +610,42 @@ namespace ET.Client
                     }
                     else if (unit.IsChest() || monsterCof.MonsterSonType == 60)
                     {
-                        unit.AddComponent<UISceneItemComponent>(true);         //血条UI组件
+                        unit.AddComponent<UISceneItemComponent>(true); //血条UI组件
                         LayerHelp.ChangeLayer(go.transform, LayerEnum.Box);
                     }
                     else if (monsterCof.MonsterSonType == 61)
                     {
                         self.OnAddCollider(go);
-                        unit.AddComponent<UISceneItemComponent>(true);         //血条UI组件
+                        unit.AddComponent<UISceneItemComponent>(true); //血条UI组件
                         LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
                     }
                     else if (monsterCof.MonsterType != (int)MonsterTypeEnum.SceneItem)
                     {
-                        unit.AddComponent<HeroTransformComponent>(true);       //获取角色绑点组件
-                        unit.AddComponent<UIMonsterHpComponent>(true);         //血条UI组件
+                        unit.AddComponent<HeroTransformComponent>(true); //获取角色绑点组件
+                        unit.AddComponent<UIMonsterHpComponent>(true); //血条UI组件
                     }
-            
+
                     if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Dead) == 1)
                     {
-                        EventSystem.Instance.Publish(self.Root(), new UnitDead(){ Unit =  unit});
+                        EventSystem.Instance.Publish(self.Root(), new UnitDead() { Unit = unit });
                     }
                     else
                     {
                         unit.GetComponent<BuffManagerComponentC>()?.InitBuff();
                         unit.GetComponent<SkillManagerComponentC>()?.InitSkill();
                     }
+
                     break;
                 case UnitType.Pet:
                     UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.transform.name = unit.Id.ToString();
-                    unit.AddComponent<EffectViewComponent>();            //添加特效组建
+                    unit.AddComponent<EffectViewComponent>(); //添加特效组建
                     unit.AddComponent<AnimatorComponent>();
-                    unit.AddComponent<HeroTransformComponent>();       //获取角色绑点组件
-                    unit.AddComponent<FsmComponent>();                 //当前状态组建
-                    unit.AddComponent<UIPetHpComponent>();         //血条UI组件
+                    unit.AddComponent<HeroTransformComponent>(); //获取角色绑点组件
+                    unit.AddComponent<FsmComponent>(); //当前状态组建
+                    unit.AddComponent<UIPetHpComponent>(); //血条UI组件
                     self.OnAddCollider(go);
                     LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
                     break;
@@ -657,20 +679,21 @@ namespace ET.Client
                     switch (unit.GetComponent<UnitInfoComponent>().DirectionType)
                     {
                         case 1: //上
-                            go.transform.localRotation = Quaternion.Euler(-90, 0, 180);         //设置旋转
+                            go.transform.localRotation = Quaternion.Euler(-90, 0, 180); //设置旋转
                             break;
                         case 2: //左
-                            go.transform.localRotation = Quaternion.Euler(-90, 0, 90);         //设置旋转
+                            go.transform.localRotation = Quaternion.Euler(-90, 0, 90); //设置旋转
                             break;
                         case 3: //下
-                            go.transform.localRotation = Quaternion.Euler(-90, 0, 0);         //设置旋转
+                            go.transform.localRotation = Quaternion.Euler(-90, 0, 0); //设置旋转
                             break;
                         case 4: //右
-                            go.transform.localRotation = Quaternion.Euler(-90, 0, -90);         //设置旋转
+                            go.transform.localRotation = Quaternion.Euler(-90, 0, -90); //设置旋转
                             break;
                         default:
                             break;
                     }
+
                     unit.AddComponent<UITransferHpComponent>().OnInitUI(unit.ConfigId).Coroutine();
                     break;
                 case UnitType.JingLing:
@@ -678,11 +701,11 @@ namespace ET.Client
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.transform.name = unit.Id.ToString();
-                    unit.AddComponent<EffectViewComponent>();            //添加特效组建
+                    unit.AddComponent<EffectViewComponent>(); //添加特效组建
                     unit.AddComponent<AnimatorComponent>();
-                    unit.AddComponent<HeroTransformComponent>();       //获取角色绑点组件
-                    unit.AddComponent<FsmComponent>();                 //当前状态组建
-                    unit.AddComponent<UIJingLingHpComponent>();         //血条UI组件
+                    unit.AddComponent<HeroTransformComponent>(); //获取角色绑点组件
+                    unit.AddComponent<FsmComponent>(); //当前状态组建
+                    unit.AddComponent<UIJingLingHpComponent>(); //血条UI组件
                     break;
                 case UnitType.Pasture:
                     UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
@@ -691,11 +714,11 @@ namespace ET.Client
                     LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
                     self.OnAddCollider(go);
                     go.transform.name = unit.Id.ToString();
-                    unit.AddComponent<EffectViewComponent>();            //添加特效组建
+                    unit.AddComponent<EffectViewComponent>(); //添加特效组建
                     unit.AddComponent<AnimatorComponent>();
-                    unit.AddComponent<HeroTransformComponent>();       //获取角色绑点组件
-                    unit.AddComponent<FsmComponent>();                 //当前状态组建
-                    unit.AddComponent<UIJiaYuanPastureComponent>();         //血条UI组件
+                    unit.AddComponent<HeroTransformComponent>(); //获取角色绑点组件
+                    unit.AddComponent<FsmComponent>(); //当前状态组建
+                    unit.AddComponent<UIJiaYuanPastureComponent>(); //血条UI组件
                     break;
                 case UnitType.Plant:
                     UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
@@ -715,7 +738,7 @@ namespace ET.Client
                 default:
                     break;
             }
-            
+
             if (unit.Type == UnitType.Bullet)
             {
                 // SkillConfig skillConfig = SkillConfigCategory.Instance.Get(unit.ConfigId);
@@ -735,6 +758,7 @@ namespace ET.Client
                 {
                     return;
                 }
+
                 Material[] materials = skinnedMeshRenderer.materials;
                 // for (int i = 0; i < materials.Length; i++)
                 // {
@@ -824,6 +848,7 @@ namespace ET.Client
             {
                 self.GameObject.SetActive(false);
             }
+
             if (self.ObjectHorse != null)
             {
                 self.ObjectHorse.SetActive(false);
@@ -870,17 +895,18 @@ namespace ET.Client
             // }
         }
 
-
         public static void ExitHide(this GameObjectComponent self)
         {
             if (self.GameObject != null)
             {
                 self.GameObject.SetActive(true);
             }
+
             if (self.ObjectHorse != null)
             {
                 self.ObjectHorse.SetActive(true);
             }
+
             self.CheckRunState();
             // self.GetParent<Unit>().GetComponent<UIUnitHpComponent>().ExitHide();
         }
@@ -989,7 +1015,6 @@ namespace ET.Client
             // unit.GetComponent<UIUnitHpComponent>().ExitStealth();
         }
 
-
         public static void OnHui(this GameObjectComponent self)
         {
             // Transform transform = self.GameObject.transform;
@@ -1009,6 +1034,7 @@ namespace ET.Client
             {
                 return;
             }
+
             Transform transform = self.GameObject.transform;
             for (int i = 0; i < transform.childCount; i++)
             {
@@ -1016,11 +1042,12 @@ namespace ET.Client
                 {
                     continue;
                 }
+
                 transform.GetChild(i).gameObject.SetActive(true);
             }
         }
 
-        public static void OnRunRaceMonster(this GameObjectComponent self, int runraceid, int cardmonsterid,  bool remove)
+        public static void OnRunRaceMonster(this GameObjectComponent self, int runraceid, int cardmonsterid, bool remove)
         {
             self.RecoverGameObject();
             self.Material = null;
@@ -1050,15 +1077,14 @@ namespace ET.Client
             //     GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
             //     self.UnitAssetsPath = string.Empty;
             // }
-            // if (unit.MainHero)
-            // {
-            //     UI uI = UIHelper.GetUI(self.ZoneScene(), UIType.UIMain);
-            //     uI?.GetComponent<UIMainComponent>()?.UIMainSkillComponent.OnTransform(runraceid, cardmonsterid);
-            // }
+            if (unit.MainHero)
+            {
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnTransform(runraceid, cardmonsterid);
+            }
             // self.BianShenEffect = unit.MainHero && remove;
         }
 
-        public static void  OnUnitStallUpdate(this GameObjectComponent self,long stallType)
+        public static void OnUnitStallUpdate(this GameObjectComponent self, long stallType)
         {
             if (stallType > 0)
             {
