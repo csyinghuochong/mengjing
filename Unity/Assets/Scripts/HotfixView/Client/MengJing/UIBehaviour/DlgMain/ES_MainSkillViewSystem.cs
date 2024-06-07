@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_AttackGrid))]
     [FriendOf(typeof (ES_FangunSkill))]
     [FriendOf(typeof (ES_SkillGrid))]
     [EntitySystemOf(typeof (ES_MainSkill))]
@@ -55,7 +56,12 @@ namespace ET.Client
             self.UISkillGirdList.Add(self.ES_SkillGrid_Normal_9);
             self.ES_SkillGrid_Normal_9.SkillCancelHandler = self.ShowCancelButton;
 
+            self.ES_SkillGrid_Normal_juexing.SkillCancelHandler = self.ShowCancelButton;
             self.ES_SkillGrid_Normal_juexing.uiTransform.gameObject.SetActive(false);
+
+            self.ES_AttackGrid.uiTransform.gameObject.SetActive(true);
+
+            self.ES_FangunSkill.uiTransform.gameObject.SetActive(true);
 
             // DataUpdateComponent.Instance.AddListener(DataType.SkillCDUpdate, self);
             // DataUpdateComponent.Instance.AddListener(DataType.SkillBeging, self);
@@ -111,7 +117,7 @@ namespace ET.Client
 
             self.OnUpdateButton();
             self.ShowSwitchCD().Coroutine();
-            UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<AttackComponent>().UpdateComboTime();
+            self.Root().GetComponent<AttackComponent>().UpdateComboTime();
             EventSystem.Instance.Publish(self.Root(), new DataUpdate_EquipWear());
         }
 

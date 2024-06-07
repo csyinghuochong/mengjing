@@ -1,7 +1,24 @@
+using System;
 using System.Collections.Generic;
 
 namespace ET.Client
 {
+    [Invoke(TimerInvokeType.AutoAttackGridTimer)]
+    public class AutoAttackGridTimer: ATimer<AttackComponent>
+    {
+        protected override void Run(AttackComponent self)
+        {
+            try
+            {
+                self.OnUpdate();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"move timer error: {self.Id}\n{e}");
+            }
+        }
+    }
+
     [EntitySystemOf(typeof (AttackComponent))]
     [FriendOf(typeof (AttackComponent))]
     public static partial class AttackComponentSystem
@@ -22,7 +39,7 @@ namespace ET.Client
         {
             self.RemoveTimer();
             self.MoveAttackId = moveTargetId;
-            self.Timer = self.Root().GetComponent<TimerComponent>() .NewRepeatedTimer(200, TimerInvokeType.AutoAttackGridTimer, self);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(200, TimerInvokeType.AutoAttackGridTimer, self);
             self.OnUpdate();
         }
 
@@ -178,11 +195,10 @@ namespace ET.Client
             }
             else
             {
-                
                 // Vector3 direction = taretUnit.Position - unit.Position;
                 // float ange = Mathf.Rad2Deg * Mathf.Atan2(direction.x, direction.z);
                 // return Mathf.FloorToInt(ange);
-                
+
                 return 0;
             }
         }
@@ -206,8 +222,7 @@ namespace ET.Client
 
         public static void UpdateAttackDis(this AttackComponent self, int skillid)
         {
-            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(
-                SkillHelp.GetWeaponSkill(skillid, UnitHelper.GetEquipType(self.Root()), null));
+            SkillConfig skillConfig = SkillConfigCategory.Instance.Get(SkillHelp.GetWeaponSkill(skillid, UnitHelper.GetEquipType(self.Root()), null));
             self.AttackDistance = (float)skillConfig.SkillRangeSize;
         }
 

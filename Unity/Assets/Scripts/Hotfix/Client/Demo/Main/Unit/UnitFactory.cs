@@ -84,7 +84,7 @@ namespace ET.Client
             if (mainHero)
             {
                 int runraceMonster = numericComponentC.GetAsInt(NumericType.RunRaceTransform);
-                // unit.ZoneScene().GetComponent<AttackComponent>().OnTransformId(unit.ConfigId, runraceMonster);
+                unit.Root().GetComponent<AttackComponent>().OnTransformId(unit.ConfigId, runraceMonster);
             }
 
             EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });

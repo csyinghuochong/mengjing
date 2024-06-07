@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (Unit))]
+    [ComponentOf(typeof (Scene))]
     public class AttackComponent: Entity, IAwake, IDestroy
     {
         public int SkillId;
@@ -20,8 +20,8 @@ namespace ET.Client
         public long CDTime = 800;
         public long CDEndTime;
 
-        public long MoveAttackTime = 0;
-        public long MoveAttackId = 0;
+        public long MoveAttackTime { get; set; } = 0;
+        public long MoveAttackId { get; set; } = 0;
         public long Timer;
 
         public BagComponentC BagComponent { get; set; }

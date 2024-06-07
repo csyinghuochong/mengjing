@@ -194,7 +194,7 @@ namespace ET.Client
                 if (checksing && skillConfig.SkillFrontSingTime > 0 && !skillSetComponent.IsSkillSingingCancel(skillConfig.Id))
                 {
                     unit.GetComponent<SingingComponent>().BeforeSkillSing(skillCmd);
-                    unit.GetComponent<AttackComponent>().RemoveTimer();
+                    self.Root().GetComponent<AttackComponent>().RemoveTimer();
                     errorCode = ErrorCode.ERR_Success;
                 }
                 else
@@ -260,7 +260,7 @@ namespace ET.Client
             catch (Exception ex)
             {
                 Log.Debug(ex.ToString());
-                unit.GetComponent<AttackComponent>()?.RemoveTimer();
+                self.Root().GetComponent<AttackComponent>()?.RemoveTimer();
                 return ErrorCode.ERR_NetWorkError;
             }
         }

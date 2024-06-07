@@ -292,7 +292,7 @@ namespace ET.Client
             self.EG_AutoAttackRectTransform.Find("Image_Click").gameObject.SetActive(value == "0");
             self.SaveSettings(GameSettingEnum.AutoAttack, value == "0"? "1" : "0");
 
-            AttackComponent attackComponent = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<AttackComponent>();
+            AttackComponent attackComponent = self.Root().GetComponent<AttackComponent>();
             attackComponent.AutoAttack = value == "0";
         }
 

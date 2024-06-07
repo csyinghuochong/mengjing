@@ -7,6 +7,9 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_AttackGrid : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public bool InitEffect;
+		public long MoveAttackId;
+		
 		public UnityEngine.UI.Button E_Btn_SkillStartButton
      	{
      		get

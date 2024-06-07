@@ -124,7 +124,7 @@ namespace ET.Client
             }
 
             MoveHelper.Stop(self.Root());
-            UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<AttackComponent>().BeginAutoAttack(unit.Id);
+            self.Root().GetComponent<AttackComponent>().BeginAutoAttack(unit.Id);
         }
 
         public static async ETTask KillMonster(this UnitGuaJiComponent self)
