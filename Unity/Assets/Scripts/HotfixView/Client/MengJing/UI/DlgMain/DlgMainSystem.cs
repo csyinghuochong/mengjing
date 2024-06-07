@@ -97,6 +97,10 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgMain self)
         {
+            self.View.E_DragPanelEventTrigger.RegisterEvent(EventTriggerType.BeginDrag, (pdata) => { self.BeginDrag(pdata as PointerEventData); });
+            self.View.E_DragPanelEventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Drag(pdata as PointerEventData); });
+            self.View.E_DragPanelEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.EndDrag(pdata as PointerEventData); });
+
             self.View.E_ShrinkButton.AddListener(self.OnShrinkButton);
             self.View.E_RoseEquipButton.AddListenerAsync(self.OnRoseEquipButton);
             self.View.E_PetButton.AddListenerAsync(self.OnPetButton);
@@ -143,6 +147,25 @@ namespace ET.Client
         {
             Log.Debug("DlgMain.BeforeUnload");
             self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
+        }
+
+        public static void BeginDrag(this DlgMain self, PointerEventData pdata)
+        {
+            self.PreviousPressPosition = pdata.position;
+            self.Root().CurrentScene().GetComponent<MJCameraComponent>().StartRotate();
+        }
+
+        public static void Drag(this DlgMain self, PointerEventData pdata)
+        {
+            self.AngleX = (pdata.position.x - self.PreviousPressPosition.x) * self.DRAG_TO_ANGLE;
+            self.AngleY = (pdata.position.y - self.PreviousPressPosition.y) * self.DRAG_TO_ANGLE;
+            self.Root().CurrentScene().GetComponent<MJCameraComponent>().Rotate(-self.AngleX, -self.AngleY);
+            self.PreviousPressPosition = pdata.position;
+        }
+
+        public static void EndDrag(this DlgMain self, PointerEventData pdata)
+        {
+            self.Root().CurrentScene().GetComponent<MJCameraComponent>().EndRotate();
         }
 
         public static void ShowMainUI(this DlgMain self, bool show)

@@ -14,6 +14,11 @@ namespace ET.Client
             get => this.GetComponent<DlgMainViewComponent>();
         }
 
+        public float DRAG_TO_ANGLE = 0.5f;
+        public Vector2 PreviousPressPosition;
+        public float AngleX;
+        public float AngleY;
+
         public Unit MainUnit { get; set; }
 
         public int Lab_TimeIndex = 0;

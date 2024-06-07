@@ -3,13 +3,12 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof(MJCameraComponent))]
-    [FriendOf(typeof(MJCameraComponent))]
-
+    [EntitySystemOf(typeof (MJCameraComponent))]
+    [FriendOf(typeof (MJCameraComponent))]
     public static partial class MJCameraComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.MJCameraComponent self)
+        private static void Awake(this MJCameraComponent self)
         {
             self.MainCamera = Camera.main;
             //GameObject.Find("Global/MainCamera").GetComponent<Camera>();
@@ -20,27 +19,30 @@ namespace ET.Client
 
             self.OnEnterScene(SceneTypeEnum.MainCityScene);
         }
-        
+
         [EntitySystem]
-        private static void LateUpdate(this ET.Client.MJCameraComponent self)
+        private static void LateUpdate(this MJCameraComponent self)
         {
             if (self.CameraMoveType == CameraMoveType.PetFuben)
             {
                 return;
             }
+
             if (self.CameraMoveType == CameraMoveType.NpcEnter)
             {
                 self.CameraMoveTime += Time.deltaTime * 2f;
                 self.BuildEnterMove();
                 return;
             }
+
             if (self.CameraMoveType == CameraMoveType.NpcExit)
             {
                 self.CameraMoveTime += Time.deltaTime * 2f;
                 self.BuildExitMove();
                 return;
             }
-            if(self.CameraMoveType == CameraMoveType.Pull)
+
+            if (self.CameraMoveType == CameraMoveType.Pull)
             {
                 self.PullCameraMove();
                 return;
@@ -51,6 +53,7 @@ namespace ET.Client
                 self.RollbackCamera();
                 return;
             }
+
             //if (self.MainCamera.GetComponent<CameraFollow>() != null)
             //{
             //	self.OffsetPostion = self.MainCamera.GetComponent<CameraFollow>().OffsetPostion;
@@ -61,16 +64,9 @@ namespace ET.Client
             }
 
             self.MainCamera.transform.position = self.MainUnit.Position + self.OffsetPostion * self.LenDepth;
-            self.MainCamera.transform.LookAt(self.MainUnit.Position); 
+            self.MainCamera.transform.LookAt(self.MainUnit.Position);
         }
-        
-        public static void CalculateOffset(this MJCameraComponent self)
-        {
-            self.OffsetPostion.y = self.Distance * Mathf.Sin(self.OffsetAngleY * self.ANGLE_CONVERTER);
-            float newRadius = self.Distance * Mathf.Cos(self.OffsetAngleY * self.ANGLE_CONVERTER);
-            self.OffsetPostion.x = newRadius * Mathf.Sin(self.OffsetAngleX * self.ANGLE_CONVERTER);
-            self.OffsetPostion.z = -newRadius * Mathf.Cos(self.OffsetAngleX * self.ANGLE_CONVERTER);
-        }
+
         public static void BuildEnterMove(this MJCameraComponent self)
         {
             if (self.CameraMoveTime > 0.8f && self.OnBuildEnter)
@@ -78,6 +74,7 @@ namespace ET.Client
                 self.OnBuildEnter = false;
                 //抛出实践
             }
+
             if (self.CameraMoveTime > 1f)
             {
                 return;
@@ -88,14 +85,14 @@ namespace ET.Client
 
             if (self.NpcUnit.Type == UnitType.Monster)
             {
-                self.MainCamera.transform.LookAt(self.NpcUnit.Position + new float3(0,0.5f,0));
+                self.MainCamera.transform.LookAt(self.NpcUnit.Position + new float3(0, 0.5f, 0));
             }
             else
             {
-                self.MainCamera.transform.LookAt(self.NpcUnit.Position + new float3(0,1f,0));
+                self.MainCamera.transform.LookAt(self.NpcUnit.Position + new float3(0, 1f, 0));
             }
         }
-        
+
         public static void BuildExitMove(this MJCameraComponent self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
@@ -103,18 +100,20 @@ namespace ET.Client
             {
                 return;
             }
+
             if (self.CameraMoveTime > 1f)
             {
                 self.CameraMoveType = CameraMoveType.Normal;
                 //unit.GetComponent<UIUnitHpComponent>()?.ShowHearBar(true);
                 return;
             }
+
             Vector3 chaV3 = self.OldCameraPostion + (self.TargetPosition - self.OldCameraPostion) * self.CameraMoveTime;
             self.MainCamera.transform.position = chaV3;
             Vector3 lookPosition = self.NpcUnit.Position + (unit.Position - self.NpcUnit.Position) * self.CameraMoveTime;
             self.MainCamera.transform.LookAt(lookPosition);
         }
-        
+
         public static void PullCameraMove(this MJCameraComponent self)
         {
             if (self.PullRate >= 1.5f) // 最大距离
@@ -124,7 +123,7 @@ namespace ET.Client
 
             self.PullRate += Time.deltaTime * 0.08f; // 速度
             self.MainCamera.transform.position = self.MainUnit.Position + self.OffsetPostion * self.PullRate;
-            self.MainCamera.transform.LookAt(self.MainUnit.Position); 
+            self.MainCamera.transform.LookAt(self.MainUnit.Position);
         }
 
         /// <summary>
@@ -143,13 +142,14 @@ namespace ET.Client
                 self.CameraMoveType = CameraMoveType.Normal;
                 return;
             }
+
             self.PullRate -= Time.deltaTime * 0.3f;
             self.MainCamera.transform.position = self.MainUnit.Position + self.OffsetPostion * self.PullRate;
-            self.MainCamera.transform.LookAt(self.MainUnit.Position); 
+            self.MainCamera.transform.LookAt(self.MainUnit.Position);
         }
-        
+
         //== SceneTypeEnum.MainCityScene
-        public static  void OnEnterScene(this MJCameraComponent self, int sceneTypeEnum)
+        public static void OnEnterScene(this MJCameraComponent self, int sceneTypeEnum)
         {
             switch (sceneTypeEnum)
             {
@@ -174,5 +174,50 @@ namespace ET.Client
             }
         }
 
+        public static void CalculateOffset(this MJCameraComponent self)
+        {
+            self.OffsetPostion.y = self.Distance * Mathf.Sin(self.OffsetAngleY * self.ANGLE_CONVERTER);
+            float newRadius = self.Distance * Mathf.Cos(self.OffsetAngleY * self.ANGLE_CONVERTER);
+            self.OffsetPostion.x = newRadius * Mathf.Sin(self.OffsetAngleX * self.ANGLE_CONVERTER);
+            self.OffsetPostion.z = -newRadius * Mathf.Cos(self.OffsetAngleX * self.ANGLE_CONVERTER);
+        }
+
+        //开始旋转，纪录当前偏移角度，用于复原
+        public static void StartRotate(this MJCameraComponent self)
+        {
+            self.IsRotateing = true;
+
+            self.RecordAngleX = self.OffsetAngleX;
+            self.RecordAngleY = self.OffsetAngleY;
+        }
+
+        //旋转，修改偏移角度的值，屏幕左右滑动即修改m_offsetAngleX，上下滑动修改m_offsetAngleY
+        public static void Rotate(this MJCameraComponent self, float x, float y)
+        {
+            if (x != 0)
+            {
+                self.OffsetAngleX += x;
+            }
+
+            if (y != 0)
+            {
+                self.OffsetAngleY += y;
+                self.OffsetAngleY = self.OffsetAngleY > self.MAX_ANGLE_Y? self.MAX_ANGLE_Y : self.OffsetAngleY;
+                self.OffsetAngleY = self.OffsetAngleY < self.MIN_ANGLE_Y? self.MIN_ANGLE_Y : self.OffsetAngleY;
+            }
+        }
+
+        //旋转结束，如需要复原镜头则，偏移角度还原并计算偏移坐标
+        public static void EndRotate(this MJCameraComponent self, bool isNeedReset = false)
+        {
+            self.IsRotateing = false;
+
+            if (isNeedReset)
+            {
+                self.OffsetAngleY = self.RecordAngleY;
+                self.OffsetAngleX = self.RecordAngleX;
+                self.CalculateOffset();
+            }
+        }
     }
 }
