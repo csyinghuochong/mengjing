@@ -68,15 +68,13 @@ namespace ET.Client
             self.NumericComponent = self.MainUnit.GetComponent<NumericComponentC>();
         }
 
-        private static void UpdateOperateMode(this ES_JoystickMove self, int operateMode)
+        public static void UpdateOperateMode(this ES_JoystickMove self, int operateMode)
         {
             self.OperateMode = operateMode;
 
             // 0固定 1移动
             self.E_YaoGanDiFixImage.gameObject.SetActive(operateMode == 0);
             self.E_YaoGanDiMoveImage.gameObject.SetActive(operateMode == 1);
-
-            //self.YaoGanDiFix.transform.localPosition = new Vector3 (434, 376, 0 );
 
             self.E_CenterShowImage.transform.SetParent(operateMode == 0? self.E_YaoGanDiFixImage.transform
                     : self.E_YaoGanDiMoveImage.transform);
@@ -120,15 +118,8 @@ namespace ET.Client
                 self.E_CenterShowImage.transform.localPosition = new Vector3(self.OldPoint.x, self.OldPoint.y, 0f);
                 self.E_ThumbImage.transform.localPosition = new Vector3(self.OldPoint.x, self.OldPoint.y, 0f);
             }
-
-            //MapHelper.LogMoveInfo($"移动摇杆按下: {TimeHelper.ServerNow()}");
         }
 
-        /// <summary>
-        /// 按下就移动
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="pdata"></param>
         private static void PointerDown_Fix(this ES_JoystickMove self, PointerEventData pdata)
         {
             RectTransform canvas = self.GetYaoGanDi().GetComponent<RectTransform>();
@@ -150,7 +141,6 @@ namespace ET.Client
                 self.E_ThumbImage.transform.localPosition = new Vector3(self.OldPoint.x, self.OldPoint.y, 0f);
             }
 
-            //MapHelper.LogMoveInfo($"移动摇杆按下: {TimeHelper.ServerNow()}");
             self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
             self.BeginDrag(pdata);
         }
@@ -163,7 +153,6 @@ namespace ET.Client
                 return;
             }
 
-            //MapHelper.LogMoveInfo($"移动摇杆拖动: {TimeHelper.ServerNow()}");
             self.lastSendTime = 0;
             self.direction = self.GetDirection(pdata);
             self.SendMove(self.direction);
@@ -181,7 +170,7 @@ namespace ET.Client
             RectTransform canvas = self.GetYaoGanDi().GetComponent<RectTransform>();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, pdata.position, self.UICamera, out self.NewPoint);
 
-            Vector3 vector3 = new Vector3(self.NewPoint.x, self.NewPoint.y, 0f);
+            Vector3 vector3 = new(self.NewPoint.x, self.NewPoint.y, 0f);
             float maxDistance = Vector2.Distance(self.OldPoint, self.NewPoint);
             if (maxDistance < self.Distance)
             {
@@ -210,26 +199,6 @@ namespace ET.Client
             self.SendMove(self.direction);
         }
 
-        private static void OnMainHeroMoveYaoGan(this ES_JoystickMove self)
-        {
-            Unit unit = self.MainUnit;
-            Vector3 unitPosition = unit.Position;
-            Quaternion unitQuaternion = unit.Rotation;
-            Vector3 newv3 = unitPosition + unitQuaternion * Vector3.forward * 3f;
-            int obstruct = self.CheckObstruct(unit, newv3);
-            if (obstruct == 0)
-            {
-                return;
-            }
-
-            if (unit.GetComponent<MoveComponent>().IsArrived())
-            {
-                return;
-            }
-
-            MoveHelper.Stop(self.Root());
-        }
-
         private static void SendMove(this ES_JoystickMove self, int direction)
         {
             long clientNow = TimeHelper.ClientNow();
@@ -239,10 +208,10 @@ namespace ET.Client
                 return;
             }
 
-            // if (clientNow - self.AttackComponent.MoveAttackTime < 200)
-            // {
-            //     return;
-            // }
+            if (clientNow - self.AttackComponent.MoveAttackTime < 200)
+            {
+                return;
+            }
 
             if (self.lastDirection == direction && clientNow - self.lastSendTime < self.checkTime)
             {
@@ -258,29 +227,21 @@ namespace ET.Client
             float needTime = distance / speed;
             self.checkTime = (int)(1000 * needTime) - 200;
 
-            //Debug.Log("checkTime..." + distance / speed + " distance:" + distance + " speed:" + speed + " checkTime:" + self.checkTime);
-            //移动速度最低发送间隔
-
             Vector3 unitPosition = unit.Position;
 
-            //检测光墙
             int obstruct = self.CheckObstruct(unit, unitPosition + rotation * Vector3.forward * 2f);
             if (obstruct != 0)
             {
-                // unit.GetComponent<StateComponent>().ObstructStatus = 1;
+                unit.GetComponent<StateComponentC>().ObstructStatus = 1;
                 self.ShowObstructTip(obstruct);
                 return;
             }
 
-            // EventType.DataUpdate.Instance.DataType = DataType.BeforeMove;
-            // EventType.DataUpdate.Instance.DataParamString = string.Empty;
-            // Game.EventSystem.PublishClass(EventType.DataUpdate.Instance);
+            EventSystem.Instance.Publish(self.Root(), new DataUpdate_BeforeMove() { DataParamString = string.Empty });
+
             Vector3 newv3 = unitPosition + rotation * Vector3.forward * distance;
 
-            //MapHelper.LogMoveInfo($"移动发送请求: {TimeHelper.ServerNow()}");
-
             self.MainUnit.MoveToAsync(newv3).Coroutine();
-            // unit.MoveByYaoGan(newv3, direction, distance, null).Coroutine();
 
             self.lastSendTime = clientNow;
             self.lastDirection = direction;
@@ -295,15 +256,9 @@ namespace ET.Client
 
             self.LastShowTip = Time.time;
             string monsterName = MonsterConfigCategory.Instance.Get(monsterId).MonsterName;
-            // FloatTipManager.Instance.ShowFloatTip($"请先消灭{monsterName}");
+            FlyTipComponent.Instance.SpawnFlyTipDi($"请先消灭{monsterName}");
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="unit"></param>
-        /// <param name="direction"></param>
-        /// <returns></returns>
         private static float CanMoveDistance(this ES_JoystickMove self, Unit unit, Quaternion rotation)
         {
             float intveral = 1f; //每次寻的长度
@@ -314,11 +269,7 @@ namespace ET.Client
                 Vector3 unitPosi = unit.Position;
                 Vector3 target = unitPosi + rotation * Vector3.forward * i * intveral;
                 RaycastHit hit;
-                //Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.ObstructLayer);
-                //if (mapComponent.SceneTypeEnum == SceneTypeEnum.TeamDungeon && i <= 3 && hit.collider != null)
-                //{
-                //    return -1;
-                //}
+
                 distance = i;
                 Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.BuildingLayer);
                 if (hit.collider != null)
@@ -353,32 +304,6 @@ namespace ET.Client
             return 0;
         }
 
-        private static Vector3 GetCanReachPath(this ES_JoystickMove self, Vector3 start, Vector3 target)
-        {
-            Vector3 dir = (target - start).normalized;
-
-            while (true)
-            {
-                RaycastHit hit;
-                int mapMask = (1 << LayerMask.NameToLayer(LayerEnum.Map.ToString()));
-                Physics.Raycast(start + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, mapMask);
-
-                if (hit.collider == null)
-                {
-                    break;
-                }
-
-                if (Vector3.Distance(start, target) < 0.2f)
-                {
-                    break;
-                }
-
-                start = start + (0.2f * dir);
-            }
-
-            return start;
-        }
-
         private static void ResetJoystick(this ES_JoystickMove self)
         {
             self.SetAlpha(0.3f);
@@ -397,10 +322,6 @@ namespace ET.Client
             self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
         }
 
-        private static void ShowUI(this ES_JoystickMove self)
-        {
-        }
-
         private static void EndDrag(this ES_JoystickMove self, PointerEventData pdata)
         {
             long lastTimer = self.JoystickTimer;
@@ -416,41 +337,12 @@ namespace ET.Client
                 return;
             }
 
-            // if (ErrorCode.ERR_Success != unit.GetComponent<StateComponent>().CanMove())
-            // {
-            //     return;
-            // }
+            if (ErrorCode.ERR_Success != unit.GetComponent<StateComponentC>().CanMove())
+            {
+                return;
+            }
 
-            //MapHelper.LogMoveInfo($"移动摇杆停止: {TimeHelper.ServerNow()}");
             MoveHelper.Stop(self.Root());
-        }
-
-        private static void EndDrag_Old(this ES_JoystickMove self, PointerEventData pdata)
-        {
-            if (!self.E_YaoGanDiFixImage.gameObject.activeSelf)
-            {
-                return;
-            }
-
-            self.ResetJoystick();
-            Unit unit = self.MainUnit;
-            if (unit == null || unit.IsDisposed)
-            {
-                return;
-            }
-
-            // if (ErrorCode.ERR_Success != unit.GetComponent<StateComponent>().CanMove())
-            // {
-            //     return;
-            // }
-
-            // if (unit.GetComponent<MoveComponent>().IsArrived())
-            // {
-            //     return;
-            // }
-
-            //MapHelper.LogMoveInfo($"移动摇杆停止: {TimeHelper.ServerNow()}");
-            // self.ZoneScene().GetComponent<SessionComponent>().Session.Send(new C2M_Stop());
         }
     }
 }

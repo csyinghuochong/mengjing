@@ -8,6 +8,16 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
+    public class DataUpdate_SettingUpdate_Refresh: AEvent<Scene, DataUpdate_SettingUpdate>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_SettingUpdate args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnSettingUpdate();
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
     public class DataUpdate_TaskTrace_Refresh: AEvent<Scene, DataUpdate_TaskTrace>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_TaskTrace args)
@@ -135,6 +145,8 @@ namespace ET.Client
         public static void ShowWindow(this DlgMain self, Entity contextData = null)
         {
             self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
+
+            self.OnSettingUpdate();
 
             self.RefreshLeftUp();
             self.AfterEnterScene(SceneTypeEnum.MainCityScene);
@@ -998,6 +1010,23 @@ namespace ET.Client
             }
 
             self.View.EG_GuaJiSetRectTransform.gameObject.SetActive(false);
+        }
+
+        public static void OnSettingUpdate(this DlgMain self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            int operatMode = int.Parse(userInfoComponent.GetGameSettingValue(GameSettingEnum.YanGan));
+            self.View.ES_JoystickMove.UpdateOperateMode(operatMode);
+
+            string oldValue = userInfoComponent.GetGameSettingValue(GameSettingEnum.Smooth);
+            SettingHelper.OnSmooth(oldValue);
+
+            oldValue = userInfoComponent.GetGameSettingValue(GameSettingEnum.NoShowOther);
+            SettingHelper.OnShowOther(oldValue);
+
+            string value = userInfoComponent.GetGameSettingValue(GameSettingEnum.AutoAttack);
+            AttackComponent attackComponent = self.Root().GetComponent<AttackComponent>();
+            attackComponent.AutoAttack = value == "1";
         }
     }
 }
