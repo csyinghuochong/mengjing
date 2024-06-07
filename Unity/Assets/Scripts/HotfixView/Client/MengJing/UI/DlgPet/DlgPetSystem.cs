@@ -51,10 +51,6 @@ namespace ET.Client
         public static void ShowWindow(this DlgPet self, Entity contextData = null)
         {
             self.View.E_PetToggle.IsSelected(true);
-
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
         }
 
         private static void OnFunctionSetBtn(this DlgPet self, int index)
@@ -115,13 +111,6 @@ namespace ET.Client
             {
                 self.View.ES_PetHeCheng.OnHeChengReturn();
             }
-        }
-
-        private static void OnCloseButton(this DlgPet self)
-        {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
-            uiComponent.CloseWindow(WindowID.WindowID_Pet);
         }
 
         public static async ETTask RequestPetHeXinSelect(this DlgPet self)

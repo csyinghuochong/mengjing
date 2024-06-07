@@ -73,6 +73,7 @@ namespace ET.Client
             // Camera uiCamera = self.DomainScene().GetComponent<UIComponent>().UICamera;
             // RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, Input.mousePosition, uiCamera, out localPoint);
             // skillTips.GetComponent<UISkillTipsComponent>().OnUpdateData(self.SkillPro.SkillID, new Vector3(localPoint.x, localPoint.y, 0f));
+            await ETTask.CompletedTask;
         }
 
         public static void OnCancel(this ES_SkillGrid self, PointerEventData eventData)

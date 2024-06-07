@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: 2144419299949677748}
   - component: {fileID: 8806827100905435752}
   - component: {fileID: 4677723818153701918}
+  - component: {fileID: 3138601106422633893}
   m_Layer: 5
   m_Name: DlgPetEggLucklyExplain
   m_TagString: Untagged
@@ -402,6 +403,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3138601106422633893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475185903792331067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6aa26d60e5214fb91a8adc33aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIType: 0
+  HideMainUI: 0
+  ShowHuoBi: 0
 --- !u!1 &3475767071964412947
 GameObject:
   m_ObjectHideFlags: 0

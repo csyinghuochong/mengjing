@@ -128,7 +128,7 @@ namespace ET.Client
 
             EnterMapHelper.RequestTransfer(self.Root(), (int)SceneTypeEnum.PetTianTi, BattleHelper.GetPetTianTiId(), 0,
                 self.RankPetInfo.UserId.ToString()).Coroutine();
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgHuoBiSet>().OnClose();
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Rank);
         }
     }
 }

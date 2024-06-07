@@ -40,10 +40,6 @@ namespace ET.Client
         public static void ShowWindow(this DlgFriend self, Entity contextData = null)
         {
             self.RequestFriendInfo().Coroutine();
-
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
         }
 
         public static async ETTask RequestFriendInfo(this DlgFriend self)
@@ -110,13 +106,6 @@ namespace ET.Client
                     self.View.ES_UnionMy.OnUpdateUI().Coroutine();
                     break;
             }
-        }
-
-        private static void OnCloseButton(this DlgFriend self)
-        {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
-            uiComponent.CloseWindow(WindowID.WindowID_Friend);
         }
     }
 }

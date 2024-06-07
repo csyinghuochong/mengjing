@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 2879555833111800484}
   - component: {fileID: 7513595095781557272}
   - component: {fileID: 3886600566886223269}
+  - component: {fileID: 7516012623031523588}
   m_Layer: 5
   m_Name: DlgChouKaProbExplain
   m_TagString: Untagged
@@ -314,6 +315,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7516012623031523588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724773949233889067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6aa26d60e5214fb91a8adc33aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIType: 0
+  HideMainUI: 0
+  ShowHuoBi: 0
 --- !u!1 &1205118309182254069
 GameObject:
   m_ObjectHideFlags: 0

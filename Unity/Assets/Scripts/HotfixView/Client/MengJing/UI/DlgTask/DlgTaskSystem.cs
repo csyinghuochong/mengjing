@@ -29,10 +29,6 @@ namespace ET.Client
         public static void ShowWindow(this DlgTask self, Entity contextData = null)
         {
             self.View.E_TaskDetailToggle.IsSelected(true);
-
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
         }
 
         private static void OnFunctionSetBtn(this DlgTask self, int index)
@@ -50,13 +46,6 @@ namespace ET.Client
                     self.View.ES_TaskGrowUp.uiTransform.gameObject.SetActive(true);
                     break;
             }
-        }
-
-        private static void OnCloseButton(this DlgTask self)
-        {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
-            uiComponent.CloseWindow(WindowID.WindowID_Task);
         }
     }
 }

@@ -2,15 +2,6 @@
 
 namespace ET
 {
-    public enum UILayer
-    {
-        Hidden = 0,
-        Blood = 10,
-        Low = 20,
-        Mid = 30,
-        High = 40,
-    }
-
     public enum UIEnum
     {
         FullScreen = 0,
@@ -19,7 +10,6 @@ namespace ET
 
     public class UILayerScript: MonoBehaviour
     {
-        public UILayer UILayer;
         public UIEnum UIType;
         public bool HideMainUI;
         public bool ShowHuoBi;

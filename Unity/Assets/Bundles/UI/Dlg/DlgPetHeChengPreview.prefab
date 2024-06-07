@@ -365,6 +365,7 @@ GameObject:
   - component: {fileID: 150130617458680449}
   - component: {fileID: 657030439697668016}
   - component: {fileID: 3868834843788438106}
+  - component: {fileID: 6688714196342179844}
   m_Layer: 5
   m_Name: DlgPetHeChengPreview
   m_TagString: Untagged
@@ -463,6 +464,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6688714196342179844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150130617447196343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6aa26d60e5214fb91a8adc33aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIType: 0
+  HideMainUI: 0
+  ShowHuoBi: 0
 --- !u!1 &150308627547779733
 GameObject:
   m_ObjectHideFlags: 0

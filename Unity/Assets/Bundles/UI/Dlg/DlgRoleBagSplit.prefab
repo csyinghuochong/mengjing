@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 3449621505677508150}
   - component: {fileID: 7581022847000799016}
   - component: {fileID: 7588922743326248914}
+  - component: {fileID: 4065265425000959798}
   m_Layer: 5
   m_Name: DlgRoleBagSplit
   m_TagString: Untagged
@@ -228,6 +229,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4065265425000959798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3225910114860896296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6aa26d60e5214fb91a8adc33aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIType: 0
+  HideMainUI: 0
+  ShowHuoBi: 0
 --- !u!1 &3756962737325223102
 GameObject:
   m_ObjectHideFlags: 0

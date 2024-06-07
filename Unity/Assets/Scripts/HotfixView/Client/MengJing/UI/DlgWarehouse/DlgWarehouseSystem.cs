@@ -42,10 +42,6 @@ namespace ET.Client
         public static void ShowWindow(this DlgWarehouse self, Entity contextData = null)
         {
             self.View.E_1Toggle.IsSelected(true);
-
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
         }
 
         private static void OnFunctionSetBtn(this DlgWarehouse self, int index)
@@ -70,14 +66,6 @@ namespace ET.Client
                     self.View.ES_WarehouseGem.Refresh();
                     break;
             }
-        }
-
-        private static void OnCloseButton(this DlgWarehouse self)
-        {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
-            uiComponent.CloseWindow(WindowID.WindowID_Warehouse);
-            uiComponent.CloseWindow(WindowID.WindowID_RoleZodiac);
         }
     }
 }

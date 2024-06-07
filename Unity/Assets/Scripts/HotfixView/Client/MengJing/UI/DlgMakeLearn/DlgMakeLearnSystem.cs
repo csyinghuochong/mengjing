@@ -22,10 +22,6 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgMakeLearn self, Entity contextData = null)
         {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
-
             self.MakeId = 0;
             self.MakeType = 1;
             self.OnBtn_Plan(1);
@@ -124,11 +120,6 @@ namespace ET.Client
             self.View.E_Select_6Image.gameObject.SetActive(showValue == 6);
 
             self.InitData(self.MakeType);
-        }
-
-        public static void OnCloseButton(this DlgMakeLearn self)
-        {
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MakeLearn);
         }
 
         public static void InitData(this DlgMakeLearn self, int makeType)

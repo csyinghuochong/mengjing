@@ -56,7 +56,7 @@ namespace ET.Client
             int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.Tower, sceneId, self.FubenDifficulty);
             if (errorCode == ErrorCode.ERR_Success)
             {
-                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgHuoBiSet>().OnClose();
+                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Tower);
             }
         }
     }

@@ -10,7 +10,5 @@ namespace ET.Client
         {
             get => this.GetComponent<DlgHuoBiSetViewComponent>();
         }
-
-        public List<Action> CloseActions = new();
     }
 }

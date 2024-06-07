@@ -32,18 +32,7 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgChouKaWarehouse self, Entity contextData = null)
         {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
-
             self.Refresh();
-        }
-
-        private static void OnCloseButton(this DlgChouKaWarehouse self)
-        {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
-            uiComponent.CloseWindow(WindowID.WindowID_ChouKaWarehouse);
         }
 
         private static void OnHouseItemsRefresh(this DlgChouKaWarehouse self, Transform transform, int index)

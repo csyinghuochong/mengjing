@@ -21,10 +21,6 @@ namespace ET.Client
         public static void ShowWindow(this DlgChengJiu self, Entity contextData = null)
         {
             self.View.E_RewardToggle.IsSelected(true);
-
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
         }
 
         private static void OnFunctionSetBtn(this DlgChengJiu self, int index)
@@ -53,13 +49,6 @@ namespace ET.Client
                     self.View.ES_PetTuJian.OnUpdateUI();
                     break;
             }
-        }
-
-        private static void OnCloseButton(this DlgChengJiu self)
-        {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
-            uiComponent.CloseWindow(WindowID.WindowID_ChengJiu);
         }
     }
 }

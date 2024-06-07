@@ -1728,6 +1728,7 @@ GameObject:
   - component: {fileID: 5677850008022291226}
   - component: {fileID: 7370501105799456638}
   - component: {fileID: 8180795367977225110}
+  - component: {fileID: 7716916885657366469}
   m_Layer: 5
   m_Name: DlgPetHeXinSuit
   m_TagString: Untagged
@@ -1826,6 +1827,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7716916885657366469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7148075351151511189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6aa26d60e5214fb91a8adc33aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIType: 0
+  HideMainUI: 0
+  ShowHuoBi: 0
 --- !u!1 &7148655436874392509
 GameObject:
   m_ObjectHideFlags: 0

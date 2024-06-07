@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 22406470}
   - component: {fileID: 1191219393715825152}
   - component: {fileID: -2259146918673270978}
+  - component: {fileID: 3110262432480479474}
   m_Layer: 5
   m_Name: DlgAppraisalSelect
   m_TagString: Untagged
@@ -99,6 +100,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3110262432480479474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6aa26d60e5214fb91a8adc33aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIType: 0
+  HideMainUI: 0
+  ShowHuoBi: 0
 --- !u!1 &1218955027207150759
 GameObject:
   m_ObjectHideFlags: 0

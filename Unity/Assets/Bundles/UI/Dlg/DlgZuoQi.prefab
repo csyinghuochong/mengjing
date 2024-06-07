@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2583878526597329322}
   - component: {fileID: 5231782321087963667}
   - component: {fileID: 7479109431517653228}
+  - component: {fileID: 4848593713584024974}
   m_Layer: 5
   m_Name: DlgZuoQi
   m_TagString: Untagged
@@ -100,6 +101,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4848593713584024974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6aa26d60e5214fb91a8adc33aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIType: 0
+  HideMainUI: 0
+  ShowHuoBi: 1
 --- !u!1 &1540529850370136
 GameObject:
   m_ObjectHideFlags: 0

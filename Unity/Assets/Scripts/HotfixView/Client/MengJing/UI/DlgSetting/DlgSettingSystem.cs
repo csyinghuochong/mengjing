@@ -20,19 +20,12 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgSetting self, Entity contextData = null)
         {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
-
             self.View.E_1Toggle.IsSelected(true);
         }
 
-        private static void OnCloseButton(this DlgSetting self)
+        public static void OnBeforeClose(this DlgSetting self)
         {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
             self.View.ES_SettingGame.OnBeforeClose();
-            uiComponent.CloseWindow(WindowID.WindowID_Setting);
         }
 
         private static void OnFunctionSetBtn(this DlgSetting self, int index)

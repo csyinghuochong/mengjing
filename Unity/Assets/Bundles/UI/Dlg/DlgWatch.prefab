@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7749482078737219905}
   - component: {fileID: 4615438290130177326}
   - component: {fileID: 3079677495103928538}
+  - component: {fileID: 8941845015903441091}
   m_Layer: 5
   m_Name: DlgWatch
   m_TagString: Untagged
@@ -99,6 +100,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8941845015903441091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6aa26d60e5214fb91a8adc33aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIType: 0
+  HideMainUI: 0
+  ShowHuoBi: 1
 --- !u!1 &1158009361988640
 GameObject:
   m_ObjectHideFlags: 0

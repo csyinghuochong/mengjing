@@ -72,10 +72,6 @@ namespace ET.Client
         public static void ShowWindow(this DlgSkill self, Entity contextData = null)
         {
             self.View.E_Button_0Toggle.IsSelected(true);
-
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
         }
 
         private static void OnFunctionSetBtn(this DlgSkill self, int index)
@@ -109,13 +105,6 @@ namespace ET.Client
                     self.View.ES_SkillLifeShield.OnUpdateUI();
                     break;
             }
-        }
-
-        private static void OnCloseButton(this DlgSkill self)
-        {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
-            uiComponent.CloseWindow(WindowID.WindowID_Skill);
         }
 
         public static void Reddot_SkillUp(this DlgSkill self, int num)

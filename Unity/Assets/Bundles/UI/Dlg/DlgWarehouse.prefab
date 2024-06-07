@@ -701,6 +701,7 @@ GameObject:
   - component: {fileID: 1419454654951146956}
   - component: {fileID: 134670703546866803}
   - component: {fileID: 2074701218723655752}
+  - component: {fileID: 1107327961673796031}
   m_Layer: 5
   m_Name: DlgWarehouse
   m_TagString: Untagged
@@ -791,6 +792,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1107327961673796031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4361102610783877238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6aa26d60e5214fb91a8adc33aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIType: 0
+  HideMainUI: 0
+  ShowHuoBi: 1
 --- !u!1 &4370012047758412196
 GameObject:
   m_ObjectHideFlags: 0

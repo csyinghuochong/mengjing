@@ -30,10 +30,6 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgShenQiMake self)
         {
             self.View.E_Btn_MakeButton.AddListenerAsync(self.OnBtn_Make);
-
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
         }
 
         public static void ShowWindow(this DlgShenQiMake self, Entity contextData = null)
@@ -46,13 +42,6 @@ namespace ET.Client
         public static void BeforeUnload(this DlgShenQiMake self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-        }
-
-        private static void OnCloseButton(this DlgShenQiMake self)
-        {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
-            uiComponent.CloseWindow(WindowID.WindowID_ShenQiMake);
         }
 
         public static void OnInitUI(this DlgShenQiMake self)

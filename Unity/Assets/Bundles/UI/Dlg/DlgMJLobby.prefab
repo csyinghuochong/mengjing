@@ -1132,6 +1132,7 @@ GameObject:
   - component: {fileID: 6116095217413575755}
   - component: {fileID: 4250341508656270202}
   - component: {fileID: 8240776532921765533}
+  - component: {fileID: 490733032849896504}
   m_Layer: 5
   m_Name: DlgMJLobby
   m_TagString: Untagged
@@ -1211,6 +1212,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &490733032849896504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5746630924207445555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6aa26d60e5214fb91a8adc33aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIType: 0
+  HideMainUI: 0
+  ShowHuoBi: 0
 --- !u!1 &5908877557534203287
 GameObject:
   m_ObjectHideFlags: 0

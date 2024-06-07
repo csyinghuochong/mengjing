@@ -21,10 +21,6 @@ namespace ET.Client
         public static void ShowWindow(this DlgRank self, Entity contextData = null)
         {
             self.View.E_1Toggle.IsSelected(true);
-
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
         }
 
         private static void OnFunctionSetBtn(this DlgRank self, int index)
@@ -50,13 +46,6 @@ namespace ET.Client
                     self.View.ES_RankPetReward.uiTransform.gameObject.SetActive(true);
                     break;
             }
-        }
-
-        private static void OnCloseButton(this DlgRank self)
-        {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
-            uiComponent.CloseWindow(WindowID.WindowID_Rank);
         }
     }
 }

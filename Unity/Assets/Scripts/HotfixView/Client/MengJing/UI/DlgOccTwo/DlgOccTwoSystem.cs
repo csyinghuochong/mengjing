@@ -20,20 +20,11 @@ namespace ET.Client
             self.Button_ZhiYe_List.Add(self.View.E_Button_ZhiYe_3Button.gameObject);
             self.View.E_ButtonOccTwoButton.AddListener(self.OnClickOccTwo);
             self.View.E_ButtonOccResetButton.AddListener(self.OnButtonOccReset);
-
-            self.OnInitUI();
         }
 
         public static void ShowWindow(this DlgOccTwo self, Entity contextData = null)
         {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
-        }
-
-        public static void OnCloseButton(this DlgOccTwo self)
-        {
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_OccTwo);
+            self.OnInitUI();
         }
 
         public static void OnClickOccTwo(this DlgOccTwo self)

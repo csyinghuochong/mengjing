@@ -21,10 +21,6 @@ namespace ET.Client
         public static void ShowWindow(this DlgPetEgg self, Entity contextData = null)
         {
             self.View.E_1Toggle.IsSelected(true);
-
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
         }
 
         private static void OnFunctionSetBtn(this DlgPetEgg self, int index)
@@ -52,13 +48,6 @@ namespace ET.Client
                     self.View.ES_PetHeXinChouKa.uiTransform.gameObject.SetActive(true);
                     break;
             }
-        }
-
-        private static void OnCloseButton(this DlgPetEgg self)
-        {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
-            uiComponent.CloseWindow(WindowID.WindowID_PetEgg);
         }
 
         public static void OnRolePetEggOpen(this DlgPetEgg self)

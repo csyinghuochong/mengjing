@@ -23,25 +23,13 @@ namespace ET.Client
         public static void RegisterUIEvent(this DlgMail self)
         {
             self.View.E_MailItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMailItemsRefresh);
-            self.View.E_Btn_CloseButton.AddListener(self.OnCloseButton);
             self.View.E_ButtonGetButton.AddListener(self.OnButtonGet);
             self.View.E_ButtonOneKeyButton.AddListenerAsync(self.OnButtonOneKey);
         }
 
         public static void ShowWindow(this DlgMail self, Entity contextData = null)
         {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
-
             self.RequestMaiList();
-        }
-
-        private static void OnCloseButton(this DlgMail self)
-        {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
-            uiComponent.CloseWindow(WindowID.WindowID_Mail);
         }
 
         public static void RequestMaiList(this DlgMail self)

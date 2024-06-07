@@ -565,6 +565,7 @@ GameObject:
   - component: {fileID: 878907994533994299}
   - component: {fileID: 9110923173699355910}
   - component: {fileID: 7413315927756125751}
+  - component: {fileID: 3063381764176630280}
   m_Layer: 5
   m_Name: DlgChouKaReward
   m_TagString: Untagged
@@ -659,6 +660,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3063381764176630280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6752940111815448192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6aa26d60e5214fb91a8adc33aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIType: 0
+  HideMainUI: 0
+  ShowHuoBi: 0
 --- !u!1 &6753017590460658244
 GameObject:
   m_ObjectHideFlags: 0

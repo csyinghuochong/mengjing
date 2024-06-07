@@ -17,18 +17,7 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgZuoQi self, Entity contextData = null)
         {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
-
             self.View.E_1Toggle.IsSelected(true);
-        }
-
-        private static void OnCloseButton(this DlgZuoQi self)
-        {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
-            uiComponent.CloseWindow(WindowID.WindowID_ZuoQi);
         }
 
         private static void OnFunctionSetBtn(this DlgZuoQi self, int index)

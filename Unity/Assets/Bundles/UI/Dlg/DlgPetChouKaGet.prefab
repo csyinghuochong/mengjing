@@ -1456,6 +1456,7 @@ GameObject:
   - component: {fileID: 4355092733446324256}
   - component: {fileID: 5554512896418659807}
   - component: {fileID: 9059138128265544900}
+  - component: {fileID: 1217284982728368859}
   m_Layer: 5
   m_Name: DlgPetChouKaGet
   m_TagString: Untagged
@@ -1586,6 +1587,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1217284982728368859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125686102249131938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6aa26d60e5214fb91a8adc33aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIType: 0
+  HideMainUI: 0
+  ShowHuoBi: 0
 --- !u!1 &2243521520907332727
 GameObject:
   m_ObjectHideFlags: 0

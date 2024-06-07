@@ -1763,6 +1763,7 @@ GameObject:
   - component: {fileID: 344040920544871284}
   - component: {fileID: 9174816622395535056}
   - component: {fileID: 2420958699079265770}
+  - component: {fileID: 6865629416693025700}
   m_Layer: 5
   m_Name: DlgDungeonLevel
   m_TagString: Untagged
@@ -1872,6 +1873,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6865629416693025700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5355075777743436109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6aa26d60e5214fb91a8adc33aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIType: 0
+  HideMainUI: 0
+  ShowHuoBi: 0
 --- !u!1 &5355075777829220866
 GameObject:
   m_ObjectHideFlags: 0

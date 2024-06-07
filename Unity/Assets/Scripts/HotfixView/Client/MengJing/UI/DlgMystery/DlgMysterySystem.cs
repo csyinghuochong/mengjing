@@ -16,10 +16,6 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgMystery self, Entity contextData = null)
         {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
-
             self.InitModelShowView();
             self.RequestMystery().Coroutine();
         }
@@ -78,7 +74,7 @@ namespace ET.Client
         {
             NpcConfig npcConfig = NpcConfigCategory.Instance.Get(self.Root().GetComponent<UIComponent>().CurrentNpcId);
             if (npcConfig.NpcType == 1012)
-            { 
+            {
                 A2C_MysteryListResponse response =
                         await BagClientNetHelper.RquestMysteryList(self.Root(), self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId);
 
@@ -89,13 +85,6 @@ namespace ET.Client
                 Actor_FubenMoNengResponse response = await BagClientNetHelper.RquestFubenMoNeng(self.Root());
                 self.UpdateMysteryItem(npcConfig.Id, response.MysteryItemInfos);
             }
-        }
-
-        private static void OnCloseButton(this DlgMystery self)
-        {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
-            uiComponent.CloseWindow(WindowID.WindowID_Mystery);
         }
     }
 }

@@ -18,9 +18,6 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgWatch self, Entity contextData = null)
         {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
         }
 
         private static void OnFunctionSetBtn(this DlgWatch self, int index)
@@ -50,13 +47,6 @@ namespace ET.Client
             self.F2C_WatchPlayerResponse = m2C_WatchPlayerResponse;
             self.CanClick = true;
             self.View.E_1Toggle.IsSelected(true);
-        }
-
-        private static void OnCloseButton(this DlgWatch self)
-        {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
-            uiComponent.CloseWindow(WindowID.WindowID_WatchMenu);
         }
     }
 }

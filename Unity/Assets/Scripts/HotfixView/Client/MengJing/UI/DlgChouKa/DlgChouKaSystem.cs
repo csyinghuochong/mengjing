@@ -63,19 +63,11 @@ namespace ET.Client
         {
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
             uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
         }
 
         public static void BeforeUnload(this DlgChouKa self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-        }
-
-        private static void OnCloseButton(this DlgChouKa self)
-        {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
-            uiComponent.CloseWindow(WindowID.WindowID_ChouKa);
         }
 
         public static int GetChouKaId(this DlgChouKa self)

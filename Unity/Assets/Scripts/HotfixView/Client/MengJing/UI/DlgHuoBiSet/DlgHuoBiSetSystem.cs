@@ -62,26 +62,47 @@ namespace ET.Client
             self.View.E_ZuanShiText.text = userInfo.Diamond.ToString();
         }
 
-        public static void AddCloseEvent(this DlgHuoBiSet self, Action closeAction)
+        private static void OnClose(this DlgHuoBiSet self)
         {
-            self.CloseActions.Add(closeAction);
+            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+
+            uiComponent.CloseWindow(WindowID.WindowID_ItemTips);
+            uiComponent.CloseWindow(WindowID.WindowID_EquipDuiBiTips);
+
+            if (uiComponent.OpenUIList.Count > 0)
+            {
+                if (uiComponent.OpenUIList[0] == WindowID.WindowID_Setting)
+                {
+                    DlgSetting dlgSetting = uiComponent.GetDlgLogic<DlgSetting>();
+                    dlgSetting.OnBeforeClose();
+                }
+
+                if (uiComponent.OpenUIList[0] == WindowID.WindowID_Role)
+                {
+                    uiComponent.CloseWindow(WindowID.WindowID_RoleZodiac);
+                }
+
+                uiComponent.CloseWindow(uiComponent.OpenUIList[0]);
+            }
         }
 
-        public static void OnClose(this DlgHuoBiSet self)
+        public static void OnUpdateTitle(this DlgHuoBiSet self, WindowID windowID)
         {
-            if (self.CloseActions.Count > 0)
-            {
-                Action lastCallback = self.CloseActions[^1];
-
-                lastCallback.Invoke();
-
-                self.CloseActions.RemoveAt(self.CloseActions.Count - 1);
-            }
-
-            if (self.CloseActions.Count == 0)
-            {
-                self.Root().GetComponent<UIComponent>().HideWindow(WindowID.WindowID_HuoBiSet);
-            }
+            // string[] paths = uiType.Split('/');
+            // string titlePath = paths[paths.Length - 1];
+            // if (uiType.Contains("UITeamDungeon"))
+            // {
+            //     titlePath = "UITeamDungeon";
+            // }
+            //
+            // string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TiTleIcon, "Img_" + titlePath);
+            // Sprite sp = ResourcesComponent.Instance.LoadAsset<Sprite>(path);
+            // if (!self.AssetPath.Contains(path))
+            // {
+            //     self.AssetPath.Add(path);
+            // }
+            //
+            // self.Img_Back_Title.GetComponent<Image>().sprite = sp;
         }
     }
 }

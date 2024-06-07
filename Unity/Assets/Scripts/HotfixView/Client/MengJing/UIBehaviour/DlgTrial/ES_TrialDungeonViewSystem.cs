@@ -234,7 +234,7 @@ namespace ET.Client
                 BattleHelper.GetSceneIdByType(SceneTypeEnum.TrialDungeon), 0, self.TowerId.ToString());
             if (errorCode == ErrorCode.ERR_Success)
             {
-                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgHuoBiSet>().OnClose();
+                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Trial);
             }
         }
     }

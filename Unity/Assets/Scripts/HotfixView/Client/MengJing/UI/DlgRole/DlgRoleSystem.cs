@@ -77,10 +77,6 @@ namespace ET.Client
         public static void ShowWindow(this DlgRole self, Entity contextData = null)
         {
             self.View.E_BagToggle.IsSelected(true);
-
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-            uiComponent.ShowWindow(WindowID.WindowID_HuoBiSet);
-            uiComponent.GetDlgLogic<DlgHuoBiSet>().AddCloseEvent(self.OnCloseButton);
         }
 
         private static void OnFunctionSetBtn(this DlgRole self, int index)
@@ -154,14 +150,6 @@ namespace ET.Client
             UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
             self.View.ES_EquipSet.RefreshEquip(bagComponentC.GetItemsByLoc(ItemLocType.ItemLocEquip),
                 bagComponentC.GetItemsByLoc(ItemLocType.ItemLocEquip_2), userInfoComponentC.UserInfo.Occ, ItemOperateEnum.Juese);
-        }
-
-        private static void OnCloseButton(this DlgRole self)
-        {
-            UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
-
-            uiComponent.CloseWindow(WindowID.WindowID_Role);
-            uiComponent.CloseWindow(WindowID.WindowID_RoleZodiac);
         }
 
         public static bool OnClickXiangQianItem(this DlgRole self, BagInfo bagInfo)

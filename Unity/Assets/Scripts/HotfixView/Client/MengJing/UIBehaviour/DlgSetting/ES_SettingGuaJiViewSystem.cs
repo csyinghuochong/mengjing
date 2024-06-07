@@ -207,7 +207,7 @@ namespace ET.Client
                 FlyTipComponent.Instance.SpawnFlyTipDi("当前正在挂机,请确保周围是怪物刷新点!");
             }
 
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgHuoBiSet>().OnClose();
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Setting);
         }
 
         public static void StopGuaJi(this ES_SettingGuaJi self)

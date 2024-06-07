@@ -343,19 +343,41 @@ namespace ET.Client
                 coroutineLock?.Dispose();
             }
         }
-        
-        
-        private static void RealShowWindow(this UIComponent self,UIBaseWindow baseWindow, WindowID id, Entity showData = null)
+
+
+        private static void RealShowWindow(this UIComponent self, UIBaseWindow baseWindow, WindowID id, Entity showData = null)
         {
-            Entity contextData = showData == null ? null : showData;
+            Entity contextData = showData == null? null : showData;
             baseWindow.UIPrefabGameObject?.SetActive(true);
-            UIEventComponent.Instance.GetUIEventHandler(id).OnShowWindow(baseWindow,contextData);
-            
+
+            UIEventComponent.Instance.GetUIEventHandler(id).OnShowWindow(baseWindow, contextData);
+
+            UILayerScript uILayerScript = baseWindow.UIPrefabGameObject.GetComponent<UILayerScript>();
+            if (uILayerScript.ShowHuoBi)
+            {
+                self.OpenUIList.Insert(0, id);
+                DlgHuoBiSet dlgHuoBiSet = self.GetDlgLogic<DlgHuoBiSet>();
+                if (dlgHuoBiSet != null)
+                {
+                    dlgHuoBiSet.OnUpdateTitle(self.OpenUIList[0]);
+                }
+                else
+                {
+                    self.ShowWindowAsync(WindowID.WindowID_HuoBiSet).Coroutine();
+                }
+            }
+
+            if (uILayerScript.HideMainUI)
+            {
+                DlgMain dlgMain = self.GetDlgLogic<DlgMain>();
+                dlgMain?.ShowMainUI(false);
+            }
+
             self.VisibleWindowsDic[(int)id] = baseWindow;
             Debug.Log("<color=magenta>### current Navigation window </color>" + baseWindow.WindowID.ToString());
         }
-        
-      
+
+
         /// <summary>
         /// 根据窗口Id获取UIBaseWindow
         /// </summary>
@@ -383,6 +405,38 @@ namespace ET.Client
             {
                 return;
             }
+
+            if (self.CurrentNpcUI == windowId)
+            {
+                self.CurrentNpcId = 0;
+                self.CurrentNpcUI = 0;
+            }
+            
+            UIBaseWindow baseWindow = self.VisibleWindowsDic[(int)windowId];
+            UILayerScript uILayerScript = baseWindow.UIPrefabGameObject.GetComponent<UILayerScript>();
+            if (uILayerScript.ShowHuoBi)
+            {
+                self.OpenUIList.Remove(windowId);
+                bool haveView = self.OpenUIList.Count > 0;
+                DlgHuoBiSet dlgHuoBiSet = self.GetDlgLogic<DlgHuoBiSet>();
+                if (dlgHuoBiSet != null && haveView)
+                {
+                    dlgHuoBiSet.OnUpdateTitle(self.OpenUIList[0]);
+                }
+
+                if (dlgHuoBiSet != null && !haveView)
+                {
+                    self.CloseWindow(WindowID.WindowID_HuoBiSet);
+                }
+            }
+
+            if (uILayerScript.HideMainUI)
+            {
+                DlgMain dlgMain = self.GetDlgLogic<DlgMain>();
+                dlgMain?.ShowMainUI(true);
+            }
+            
+
             self.HideWindow(windowId);
             self.UnLoadWindow(windowId);
             Debug.Log("<color=magenta>## close window without PopNavigationWindow() ##</color>");

@@ -280,6 +280,7 @@ GameObject:
   - component: {fileID: 8301627079514670431}
   - component: {fileID: 4508548191609674206}
   - component: {fileID: 7303564950350313160}
+  - component: {fileID: 8623904937321618906}
   m_Layer: 5
   m_Name: DlgTaskGet
   m_TagString: Untagged
@@ -412,6 +413,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8623904937321618906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6aa26d60e5214fb91a8adc33aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIType: 0
+  HideMainUI: 0
+  ShowHuoBi: 0
 --- !u!1 &191170
 GameObject:
   m_ObjectHideFlags: 0

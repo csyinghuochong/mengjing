@@ -427,6 +427,7 @@ GameObject:
   - component: {fileID: 1772834833816451352}
   - component: {fileID: 906188891862127580}
   - component: {fileID: 6313629475977348133}
+  - component: {fileID: 2634547461273676110}
   m_Layer: 5
   m_Name: DlgWatchPaiMai
   m_TagString: Untagged
@@ -518,6 +519,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2634547461273676110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6740811104353284556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc6aa26d60e5214fb91a8adc33aa272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIType: 0
+  HideMainUI: 0
+  ShowHuoBi: 0
 --- !u!1 &7981564896521565004
 GameObject:
   m_ObjectHideFlags: 0
