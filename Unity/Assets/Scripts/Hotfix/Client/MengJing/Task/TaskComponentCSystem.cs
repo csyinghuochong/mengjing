@@ -7,7 +7,6 @@ namespace ET.Client
     [EntitySystemOf(typeof (TaskComponentC))]
     public static partial class TaskComponentCSystem
     {
-        
         [EntitySystem]
         private static void Awake(this TaskComponentC self)
         {
@@ -175,7 +174,7 @@ namespace ET.Client
             self.RoleTaskList = message.RoleTaskList;
             //HintHelp.GetInstance().DataUpdate(DataType.TaskUpdate);
         }
-        
+
         public static void OnRecvTaskCountryUpdate(this TaskComponentC self, M2C_TaskCountryUpdate message)
         {
             //1增量更新   2全量更新
@@ -184,6 +183,7 @@ namespace ET.Client
                 self.TaskCountryList = message.TaskCountryList;
                 return;
             }
+
             for (int i = 0; i < message.TaskCountryList.Count; i++)
             {
                 for (int k = 0; k < self.TaskCountryList.Count; k++)
@@ -195,10 +195,27 @@ namespace ET.Client
                 }
             }
         }
-        
+
         public static bool IsTaskFinished(this TaskComponentC self, int taskId)
         {
             return self.RoleComoleteTaskList.Contains(taskId);
+        }
+
+        public static int GetHuoYueDu(this TaskComponentC self)
+        {
+            int huoYueDu = 0;
+            for (int i = 0; i < self.TaskCountryList.Count; i++)
+            {
+                if (self.TaskCountryList[i].taskStatus != (int)TaskStatuEnum.Commited)
+                {
+                    continue;
+                }
+
+                TaskCountryConfig taskCountryConfig = TaskCountryConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
+                huoYueDu += taskCountryConfig.EveryTaskRewardNum;
+            }
+
+            return huoYueDu;
         }
     }
 }

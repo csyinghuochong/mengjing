@@ -31,5 +31,13 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<M2C_WelfareDrawResponse> WelfareDraw(Scene root)
+        {
+            C2M_WelfareDrawRequest request = new();
+            M2C_WelfareDrawResponse response = (M2C_WelfareDrawResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
     }
 }
