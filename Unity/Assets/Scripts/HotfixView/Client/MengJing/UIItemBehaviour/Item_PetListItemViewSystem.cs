@@ -67,6 +67,8 @@ namespace ET.Client
 
         public static void OnInitData(this Scroll_Item_PetListItem self, RolePetInfo rolePetInfo, int nextLv)
         {
+            self.E_ImageDiButtonButton.AddListener(self.OnClickPetItem);
+
             if (rolePetInfo != null)
             {
                 self.PetId = rolePetInfo.Id;
