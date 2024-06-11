@@ -90,5 +90,6 @@ namespace ET.Client
 		WindowID_FashionExplain,
 		WindowID_PhoneCode,
 		WindowID_DungeonMapTransfer,
+		WindowID_TowerOfSeal,
 	}
 }

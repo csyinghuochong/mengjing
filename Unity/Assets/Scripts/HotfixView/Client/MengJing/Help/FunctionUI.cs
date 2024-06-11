@@ -91,6 +91,7 @@ namespace ET.Client
                 "UITrial" => WindowID.WindowID_Trial,
                 "UIZuoQi" => WindowID.WindowID_ZuoQi,
                 "UIProtect" => WindowID.WindowID_Protect,
+                "UITowerOfSeal" => WindowID.WindowID_TowerOfSeal,
                 _ => WindowID.WindowID_Invaild
             };
         }
