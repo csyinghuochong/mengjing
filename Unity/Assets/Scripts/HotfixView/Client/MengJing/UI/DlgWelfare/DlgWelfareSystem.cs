@@ -17,6 +17,7 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgWelfare self, Entity contextData = null)
         {
+            self.View.E_0Toggle.IsSelected(true);
         }
 
         private static void OnFunctionSetBtn(this DlgWelfare self, int index)
@@ -25,6 +26,7 @@ namespace ET.Client
             UICommonHelper.SetToggleShow(self.View.E_1Toggle.gameObject, index == 1);
             UICommonHelper.SetToggleShow(self.View.E_2Toggle.gameObject, index == 2);
             UICommonHelper.SetToggleShow(self.View.E_3Toggle.gameObject, index == 3);
+            UICommonHelper.SetToggleShow(self.View.E_4Toggle.gameObject, index == 4);
 
             UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)

@@ -86,15 +86,14 @@ namespace ET.Client
 
             self.ActivityConfig = activityConfig;
 
-            self.E_Lab_Name.GetComponent<Text>().text = activityConfig.Par_4;
-            UICommonHelper.DestoryChild(self.ItemNodeList);
-            UICommonHelper.ShowItemList(activityConfig.Par_3, self.ItemNodeList, self, 0.8f);
+            self.E_Lab_NameText.text = activityConfig.Par_4;
+            self.ES_RewardList.Refresh(activityConfig.Par_3, 0.8f);
         }
 
         public static void SetReceived(this Scroll_Item_ActivityLoginItem self, bool received)
         {
-            self.Btn_Receive.SetActive(!received);
-            self.ImageReceived.SetActive(received);
+            self.E_Btn_ReceiveButton.gameObject.SetActive(!received);
+            self.E_ImageReceivedImage.gameObject.SetActive(received);
         }
     }
 }

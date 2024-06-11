@@ -7,7 +7,7 @@ namespace ET.Client
 	public  class Scroll_Item_ActivityLoginItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
 		public ActivityConfig ActivityConfig;
-		
+
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
@@ -20,6 +20,30 @@ namespace ET.Client
 			this.uiTransform = trans;
 			return this;
 		}
+
+		public UnityEngine.UI.Text E_Lab_NameText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_Lab_NameText == null )
+     				{
+		    			this.m_E_Lab_NameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_Name");
+     				}
+     				return this.m_E_Lab_NameText;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_Name");
+     			}
+     		}
+     	}
 
 		public ES_RewardList ES_RewardList
      	{
@@ -136,6 +160,7 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_Lab_NameText = null;
 			this.m_es_rewardlist = null;
 			this.m_E_Btn_ReceiveButton = null;
 			this.m_E_Btn_ReceiveImage = null;
@@ -144,6 +169,7 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
+		private UnityEngine.UI.Text m_E_Lab_NameText = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
 		private UnityEngine.UI.Button m_E_Btn_ReceiveButton = null;
 		private UnityEngine.UI.Image m_E_Btn_ReceiveImage = null;

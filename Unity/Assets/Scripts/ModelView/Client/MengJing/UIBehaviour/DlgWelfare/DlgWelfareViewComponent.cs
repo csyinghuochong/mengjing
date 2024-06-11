@@ -127,6 +127,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Toggle E_4Toggle
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_4Toggle == null )
+     			{
+		    		this.m_E_4Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_4");
+     			}
+     			return this.m_E_4Toggle;
+     		}
+     	}
+
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
@@ -136,6 +153,7 @@ namespace ET.Client
 			this.m_E_1Toggle = null;
 			this.m_E_2Toggle = null;
 			this.m_E_3Toggle = null;
+			this.m_E_4Toggle = null;
 			this.uiTransform = null;
 		}
 
@@ -146,6 +164,7 @@ namespace ET.Client
 		private UnityEngine.UI.Toggle m_E_1Toggle = null;
 		private UnityEngine.UI.Toggle m_E_2Toggle = null;
 		private UnityEngine.UI.Toggle m_E_3Toggle = null;
+		private UnityEngine.UI.Toggle m_E_4Toggle = null;
 		public Transform uiTransform = null;
 	}
 }
