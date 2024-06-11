@@ -93,5 +93,6 @@ namespace ET.Client
 		WindowID_TowerOfSeal,
 		WindowID_WorldLv,
 		WindowID_GM,
+		WindowID_Welfare,
 	}
 }
