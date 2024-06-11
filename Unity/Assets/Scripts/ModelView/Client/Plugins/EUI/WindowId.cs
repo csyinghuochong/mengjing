@@ -95,5 +95,6 @@ namespace ET.Client
 		WindowID_GM,
 		WindowID_Welfare,
 		WindowID_RechargeReward,
+		WindowID_NewYear,
 	}
 }

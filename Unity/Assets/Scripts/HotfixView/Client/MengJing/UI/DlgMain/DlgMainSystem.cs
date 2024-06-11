@@ -140,7 +140,7 @@ namespace ET.Client
             // self.View.E_Btn_AuctionButton.AddListener();
             // self.View.E_Button_HongBaoButton.AddListener();
             // self.View.E_Button_ZhanQuButton.AddListener();
-            // self.View.E_Button_NewYearButton.AddListener();
+            self.View.E_Button_NewYearButton.AddListener(self.OnButton_NewYear);
             self.View.E_Button_RechargeRewardButton.AddListener(self.OnButton_RechargeReward);
             self.View.E_Button_WelfareButton.AddListener(self.OnButton_Welfare);
             self.View.E_Btn_GMButton.AddListener(self.OnBtn_GM);
@@ -553,6 +553,11 @@ namespace ET.Client
             self.View.EG_Btn_TopRight_3RectTransform.gameObject.SetActive(!active);
 
             self.View.E_Button_ZhanKaiButton.transform.localScale = active? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
+        }
+
+        private static void OnButton_NewYear(this DlgMain self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_NewYear).Coroutine();
         }
 
         private static void OnButton_RechargeReward(this DlgMain self)
