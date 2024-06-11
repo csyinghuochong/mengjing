@@ -131,8 +131,8 @@ namespace ET.Client
                 return;
             }
 
-            C2M_ItemProtectRequest request = new() { OperateBagID = bagInfo.BagInfoID, IsProtect = isprotectd };
-            M2C_ItemProtectResponse response = (M2C_ItemProtectResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            await BagClientNetHelper.ItemProtect(self.Root(), bagInfo.BagInfoID, isprotectd);
+
             if (self.IsDisposed)
             {
                 return;

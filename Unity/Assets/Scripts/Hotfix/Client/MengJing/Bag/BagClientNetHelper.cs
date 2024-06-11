@@ -687,5 +687,12 @@ namespace ET.Client
             M2C_FashionWearResponse response = (M2C_FashionWearResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_ItemProtectResponse> ItemProtect(Scene root, long operateBagID, bool isProtect)
+        {
+            C2M_ItemProtectRequest request = new() { OperateBagID = operateBagID, IsProtect = isProtect };
+            M2C_ItemProtectResponse response = (M2C_ItemProtectResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

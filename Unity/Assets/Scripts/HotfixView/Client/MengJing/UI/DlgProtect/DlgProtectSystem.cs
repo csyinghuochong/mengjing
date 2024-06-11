@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_ProtectEquip))]
     [FriendOf(typeof (DlgProtect))]
     public static class DlgProtectSystem
     {
@@ -28,6 +29,8 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
+                    self.View.ES_ProtectEquip.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_ProtectEquip.OnUpdateUI();
                     break;
                 case 1:
                     break;
