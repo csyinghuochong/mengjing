@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_ActivityLogin))]
+    [FriendOf(typeof (ES_WelfareTask))]
     [FriendOf(typeof (DlgWelfare))]
     public static class DlgWelfareSystem
     {
@@ -34,6 +35,9 @@ namespace ET.Client
                 case 0:
                     self.View.ES_ActivityLogin.uiTransform.gameObject.SetActive(true);
                     self.View.ES_ActivityLogin.OnUpdateUI();
+                    break;
+                case 1:
+                    self.View.ES_WelfareTask.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }

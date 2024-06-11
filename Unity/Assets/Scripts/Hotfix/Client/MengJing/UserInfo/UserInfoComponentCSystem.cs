@@ -197,5 +197,15 @@ namespace ET.Client
                 }
             }
         }
+
+        /// <summary>
+        /// 角色创建天数  从1 开始
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        public static int GetCrateDay(this UserInfoComponentC self)
+        {
+            return ServerHelper.DateDiff_Time(TimeHelper.ServerNow(), self.UserInfo.CreateTime);
+        }
     }
 }
