@@ -560,6 +560,23 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RechargeReward).Coroutine();
         }
 
+        public static void CheckRechargeRewardButton(this DlgMain self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+
+            bool showButton = false;
+            foreach (var item in ConfigData.RechargeReward)
+            {
+                if (!userInfoComponent.UserInfo.RechargeReward.Contains(item.Key))
+                {
+                    showButton = true;
+                    break;
+                }
+            }
+
+            self.View.E_Button_RechargeRewardButton.gameObject.SetActive(showButton);
+        }
+
         private static void OnButton_Welfare(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Welfare).Coroutine();

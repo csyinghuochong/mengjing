@@ -74,5 +74,12 @@ namespace ET.Client
             M2C_WelfareDraw2RewardResponse response = (M2C_WelfareDraw2RewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(reques);
             return response;
         }
+
+        public static async ETTask<M2C_RechargeRewardResponse> RechargeReward(Scene root, int rechargeNumber)
+        {
+            C2M_RechargeRewardRequest request = new() { RechargeNumber = rechargeNumber };
+            M2C_RechargeRewardResponse response = (M2C_RechargeRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }
