@@ -1,0 +1,112 @@
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace ET.Client
+{
+    [EntitySystemOf(typeof (ES_WelfareInvest))]
+    [FriendOfAttribute(typeof (ES_WelfareInvest))]
+    public static partial class ES_WelfareInvestSystem
+    {
+        [EntitySystem]
+        private static void Awake(this ES_WelfareInvest self, Transform transform)
+        {
+            self.uiTransform = transform;
+
+            self.E_ReceiveBtnButton.AddListenerAsync(self.OnReceiveBtn);
+            self.EndTime = TimeInfo.Instance.ToDateTime(self.Root().GetComponent<UserInfoComponentC>().UserInfo.CreateTime).AddDays(6);
+            self.E_WelfareInvestItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnWelfareInvestItemsRefresh);
+
+            self.InitTask();
+            self.UpdateInfo();
+            self.UpdateTime().Coroutine();
+        }
+
+        [EntitySystem]
+        private static void Destroy(this ES_WelfareInvest self)
+        {
+            self.DestroyWidget();
+        }
+
+        private static void OnWelfareInvestItemsRefresh(this ES_WelfareInvest self, Transform transform, int index)
+        {
+            Scroll_Item_WelfareInvestItem scrollItemWelfareInvestItem = self.ScrollItemWelfareInvestItems[index].BindTrans(transform);
+            scrollItemWelfareInvestItem.OnUpdateData(index);
+        }
+
+        public static void InitTask(this ES_WelfareInvest self)
+        {
+            self.AddUIScrollItems(ref self.ScrollItemWelfareInvestItems, 6);
+            self.E_WelfareInvestItemsLoopVerticalScrollRect.SetVisible(true, 6);
+        }
+
+        public static void UpdateInfo(this ES_WelfareInvest self)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int touzi = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.InvestMent);
+            self.E_InvestNumTextText.text = touzi.ToString();
+
+            int total = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.InvestTotal);
+            int lirun = ComHelp.GetWelfareTotalLiRun(total, touzi);
+            self.E_ProfitNumTextText.text = lirun.ToString();
+
+            self.E_TotalReturnNumTextText.text = total.ToString();
+
+            // 是否领过
+            if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.InvestReward) == 1)
+            {
+                self.E_ReceiveBtnButton.gameObject.SetActive(false);
+                self.E_ReceivedImgImage.gameObject.SetActive(true);
+            }
+            else
+            {
+                self.E_ReceiveBtnButton.gameObject.SetActive(true);
+                self.E_ReceivedImgImage.gameObject.SetActive(false);
+            }
+        }
+
+        public static async ETTask OnReceiveBtn(this ES_WelfareInvest self)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.InvestReward) == 1)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("已经领取!");
+                return;
+            }
+
+            if (self.Root().GetComponent<UserInfoComponentC>().GetCrateDay() - 1 < 6)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("今天还不能领取!");
+                return;
+            }
+
+            // 投资奖励. 第七天领取奖励
+            await ActivityNetHelper.WelfareInvestReward(self.Root());
+            self.UpdateInfo();
+        }
+
+        public static async ETTask UpdateTime(this ES_WelfareInvest self)
+        {
+            TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
+            while (!self.IsDisposed)
+            {
+                DateTime nowTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+                TimeSpan ts = self.EndTime - nowTime;
+                if (ts.TotalMinutes > 0)
+                {
+                    self.E_TimeTextText.text = $"{ts.Days}天{ts.Hours}小时{ts.Minutes}分";
+                }
+                else
+                {
+                    self.E_TimeTextText.text = "赶快领取!!";
+                }
+
+                await timerComponent.WaitAsync(60000);
+                if (self.IsDisposed)
+                {
+                    break;
+                }
+            }
+        }
+    }
+}

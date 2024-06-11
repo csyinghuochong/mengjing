@@ -9,6 +9,7 @@ namespace ET.Client
     [FriendOf(typeof (ES_ActivityLogin))]
     [FriendOf(typeof (ES_WelfareTask))]
     [FriendOf(typeof (ES_WelfareDraw))]
+    [FriendOf(typeof (ES_WelfareInvest))]
     [FriendOf(typeof (DlgWelfare))]
     public static class DlgWelfareSystem
     {
@@ -42,6 +43,9 @@ namespace ET.Client
                     break;
                 case 2:
                     self.View.ES_WelfareDraw.uiTransform.gameObject.SetActive(true);
+                    break;
+                case 3:
+                    self.View.ES_WelfareInvest.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }

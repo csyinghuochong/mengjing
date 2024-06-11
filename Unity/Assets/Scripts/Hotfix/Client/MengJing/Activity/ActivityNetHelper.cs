@@ -39,5 +39,25 @@ namespace ET.Client
 
             return response;
         }
+
+        public static async ETTask<M2C_WelfareInvestResponse> WelfareInvest(Scene root, int day)
+        {
+            C2M_WelfareInvestRequest reuqest = new() { Index = day };
+            M2C_WelfareInvestResponse response = (M2C_WelfareInvestResponse)await root.GetComponent<ClientSenderCompnent>().Call(reuqest);
+
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                root.GetComponent<UserInfoComponentC>().UserInfo.WelfareInvestList.Add(day);
+            }
+
+            return response;
+        }
+
+        public static async ETTask<M2C_WelfareInvestRewardResponse> WelfareInvestReward(Scene root)
+        {
+            C2M_WelfareInvestRewardRequest request = new();
+            M2C_WelfareInvestRewardResponse response = (M2C_WelfareInvestRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }
