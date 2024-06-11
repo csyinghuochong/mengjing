@@ -94,5 +94,6 @@ namespace ET.Client
 		WindowID_WorldLv,
 		WindowID_GM,
 		WindowID_Welfare,
+		WindowID_RechargeReward,
 	}
 }
