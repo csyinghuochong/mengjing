@@ -50,5 +50,13 @@
 
             return response.Error;
         }
+
+        public static async ETTask<int> SendBroadcast(Scene root, int zoneType, ChatInfo chatInfo)
+        {
+            C2C_SendBroadcastRequest request = new() { ZoneType = zoneType };
+            request.ChatInfo = chatInfo;
+            C2C_SendBroadcastResponse response = (C2C_SendBroadcastResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }

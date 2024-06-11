@@ -29,5 +29,26 @@
             M2C_ExpToGoldResponse response = (M2C_ExpToGoldResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<C2C_GMCommonResponse> GMCommon(Scene root, string context)
+        {
+            C2C_GMCommonRequest request = new() { Account = root.GetComponent<PlayerComponent>().Account, Context = context };
+            C2C_GMCommonResponse response = (C2C_GMCommonResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<C2C_GMInfoResponse> GMInfo(Scene root)
+        {
+            C2C_GMInfoRequest request = new() { Account = root.GetComponent<PlayerComponent>().Account };
+            C2C_GMInfoResponse response = (C2C_GMInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<G2C_Reload> Reload(Scene root, string loadValue)
+        {
+            C2G_Reload request = new() { Account = root.GetComponent<PlayerComponent>().Account, LoadValue = loadValue };
+            G2C_Reload response = await root.GetComponent<ClientSenderCompnent>().Call(request) as G2C_Reload;
+            return response;
+        }
     }
 }

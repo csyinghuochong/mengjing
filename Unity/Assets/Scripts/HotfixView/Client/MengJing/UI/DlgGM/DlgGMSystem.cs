@@ -1,0 +1,110 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace ET.Client
+{
+    [FriendOf(typeof (DlgGM))]
+    public static class DlgGMSystem
+    {
+        public static void RegisterUIEvent(this DlgGM self)
+        {
+            self.View.E_Button_Broadcast_1Button.AddListener(() => { self.OnButton_Broadcast_1(0).Coroutine(); });
+            self.View.E_Button_Broadcast_2Button.AddListener(() => { self.OnButton_Broadcast_1(1).Coroutine(); });
+
+            self.View.E_Button_EmailButton.AddListenerAsync(self.OnButton_Email);
+            self.View.E_Button_CloseButton.AddListener(self.OnButton_Close);
+            self.View.E_Button_ReLoadButton.AddListenerAsync(self.OnButton_ReLoad);
+            self.View.E_Button_CommonButton.AddListenerAsync(self.OnButton_Common);
+        }
+
+        public static void ShowWindow(this DlgGM self, Entity contextData = null)
+        {
+            self.View.E_Text_OnLineNumberText.text = string.Empty;
+            self.RequestGMInfo().Coroutine();
+        }
+
+        /// <summary>
+        /// boradType 0全服广播  1本服广播
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="boradType"></param>
+        /// <returns></returns>
+        public static async ETTask OnButton_Broadcast_1(this DlgGM self, int boradType)
+        {
+            if (self.View.E_InputField_BroadcastInputField.text.Length == 0)
+            {
+                return;
+            }
+
+            ChatInfo chatInfo = new();
+            chatInfo.ChatMsg = self.View.E_InputField_BroadcastInputField.text;
+            await ChatNetHelper.SendBroadcast(self.Root(), boradType, chatInfo);
+        }
+
+        public static async ETTask OnButton_Email(this DlgGM self)
+        {
+            string itemlist = self.View.E_InputField_EmailItemInputField.text;
+            if (string.IsNullOrEmpty(itemlist))
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("输入不能为空！");
+                return;
+            }
+
+            E2C_GMEMailResponse response = await MailNetHelper.GMEMail(self.Root(), itemlist);
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("邮件发送成功！");
+            }
+        }
+
+        public static void OnButton_Close(this DlgGM self)
+        {
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_GM);
+        }
+
+        public static async ETTask OnButton_Common(this DlgGM self)
+        {
+            string content = self.View.E_InputField_CommonInputField.text;
+            if (content.Length < 1)
+            {
+                return;
+            }
+
+            await UserInfoNetHelper.GMCommon(self.Root(), content);
+        }
+
+        public static async ETTask OnButton_ReLoad(this DlgGM self)
+        {
+            string reload = self.View.E_InputField_ReLoadValueInputField.text;
+            if (reload.Length < 1)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("请输入热重载类型！");
+                return;
+            }
+
+            await UserInfoNetHelper.Reload(self.Root(), reload);
+        }
+
+        public static async ETTask RequestGMInfo(this DlgGM self)
+        {
+            long instanceid = self.InstanceId;
+            C2C_GMInfoResponse response = await UserInfoNetHelper.GMInfo(self.Root());
+            if (instanceid != self.InstanceId)
+            {
+                return;
+            }
+
+            if (response.Error == 0)
+            {
+                self.View.E_Text_OnLineNumberText.text = $"玩家:{response.OnLineNumber}机器人:{response.OnLineRobot}";
+            }
+            else
+            {
+                self.OnButton_Close();
+            }
+        }
+    }
+}

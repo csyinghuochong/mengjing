@@ -61,5 +61,12 @@ namespace ET.Client
             EventSystem.Instance.Publish(root, new DataUpdate_OnMailUpdate());
             return ErrorCode.ERR_Success;
         }
+
+        public static async ETTask<E2C_GMEMailResponse> GMEMail(Scene root, string mailInfo)
+        {
+            C2E_GMEMailRequest request = new() { MailInfo = mailInfo };
+            E2C_GMEMailResponse response = (E2C_GMEMailResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

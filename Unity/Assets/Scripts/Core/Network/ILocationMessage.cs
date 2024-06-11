@@ -105,4 +105,14 @@
     {
         
     }
+
+    public interface ICenterActorRequest: IRequest
+    {
+        
+    }
+    
+    public interface ICenterActorResponse: IResponse
+    {
+        
+    }
 }
