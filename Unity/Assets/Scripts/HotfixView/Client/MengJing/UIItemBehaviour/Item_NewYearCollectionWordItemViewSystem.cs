@@ -1,20 +1,20 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
-	[EntitySystemOf(typeof(Scroll_Item_NewYearCollectionWordItem))]
-	public static partial class Scroll_Item_NewYearCollectionWordItemSystem 
-	{
-		[EntitySystem]
-		private static void Awake(this Scroll_Item_NewYearCollectionWordItem self )
-		{
-		}
+    [EntitySystemOf(typeof (Scroll_Item_NewYearCollectionWordItem))]
+    public static partial class Scroll_Item_NewYearCollectionWordItemSystem
+    {
+        [EntitySystem]
+        private static void Awake(this Scroll_Item_NewYearCollectionWordItem self)
+        {
+        }
 
-		[EntitySystem]
-		private static void Destroy(this Scroll_Item_NewYearCollectionWordItem self )
-		{
-			self.DestroyWidget();
-		}
-	}
+        [EntitySystem]
+        private static void Destroy(this Scroll_Item_NewYearCollectionWordItem self)
+        {
+            self.DestroyWidget();
+        }
+    }
 }
