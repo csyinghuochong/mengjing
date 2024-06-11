@@ -5,17 +5,16 @@ namespace ET.Client
 {
     public static class MailNetHelper
     {
-        public static async ETTask<int> SendGetMailList(Scene root)
+        public static async ETTask<E2C_GetAllMailResponse> SendGetMailList(Scene root)
         {
             UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
             C2E_GetAllMailRequest request = new() { ActorId = userInfo.UserId };
-            E2C_GetAllMailResponse response =
-                    (E2C_GetAllMailResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            E2C_GetAllMailResponse response = (E2C_GetAllMailResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             root.GetComponent<MailComponentC>().MailInfoList = response.MailInfos;
 
             EventSystem.Instance.Publish(root, new DataUpdate_OnMailUpdate());
-            return response.Error;
+            return response;
         }
 
         public static async ETTask<int> SendReceiveMail(Scene root)

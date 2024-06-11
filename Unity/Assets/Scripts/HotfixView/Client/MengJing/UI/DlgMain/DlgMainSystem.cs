@@ -150,7 +150,7 @@ namespace ET.Client
 
             // self.View.EG_Btn_KillMonsterRewardRectTransform
             // self.View.EG_Btn_LvRewardRectTransform
-            // self.View.E_MailHintTipButton.AddListener();
+            self.View.E_MailHintTipButton.AddListener(self.OnMailHintTip);
             self.View.E_E_Btn_MapTransferButton.AddListener(() => { self.OnBtn_MapTransfer().Coroutine(); });
             self.View.E_Btn_RerurnDungeonButton.AddListener(self.OnBtn_RerurnDungeon);
             self.View.E_Btn_RerurnBuildingButton.AddListener(self.OnClickReturnButton);
@@ -485,56 +485,6 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Chat).Coroutine();
         }
 
-        private static void OnButtonZhanKai(this DlgMain self)
-        {
-            bool active = self.View.EG_Btn_TopRight_1RectTransform.gameObject.activeSelf;
-            self.View.EG_Btn_TopRight_1RectTransform.gameObject.SetActive(!active);
-            self.View.EG_Btn_TopRight_2RectTransform.gameObject.SetActive(!active);
-            self.View.EG_Btn_TopRight_3RectTransform.gameObject.SetActive(!active);
-
-            self.View.E_Button_ZhanKaiButton.transform.localScale = active? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
-        }
-
-        private static async ETTask OnBtn_MapTransfer(this DlgMain self)
-        {
-            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_DungeonMapTransfer);
-            DlgDungeonMapTransfer dlgDungeonMapTransfer = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgDungeonMapTransfer>();
-        }
-
-        private static void OnBtn_RerurnDungeon(this DlgMain self)
-        {
-            PopupTipHelp.OpenPopupTip(self.Root(), "返回副本", GameSettingLanguge.LoadLocalization("移动次数消耗完毕,请返回副本!"),
-                () =>
-                {
-                    int sceneid = self.Root().GetComponent<BattleMessageComponent>().LastDungeonId;
-                    if (sceneid == 0)
-                    {
-                        EnterMapHelper.RequestQuitFuben(self.Root());
-                    }
-                    else
-                    {
-                        EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, sceneid, 0, "0").Coroutine();
-                    }
-                },
-                null).Coroutine();
-        }
-
-        private static void OnClickReturnButton(this DlgMain self)
-        {
-            Scene zoneScene = self.Root();
-            MapComponent mapComponent = zoneScene.GetComponent<MapComponent>();
-
-            string tipStr = "确定返回主城？";
-            if (mapComponent.SceneType == SceneTypeEnum.Battle)
-            {
-                tipStr = "现在离开战场,将不会获得战场胜利的奖励哦";
-            }
-
-            PopupTipHelp.OpenPopupTip(self.Root(), "", GameSettingLanguge.LoadLocalization(tipStr),
-                () => { EnterMapHelper.RequestQuitFuben(self.Root()); },
-                null).Coroutine();
-        }
-
         public static void OnRecvChat(this DlgMain self)
         {
             self.RefreshMainChatItems();
@@ -589,6 +539,72 @@ namespace ET.Client
 
             // 无效。。。
             self.View.E_MainChatItemsLoopVerticalScrollRect.verticalNormalizedPosition = 0f;
+        }
+
+        #endregion
+
+        # region 右上角按钮
+
+        private static void OnButtonZhanKai(this DlgMain self)
+        {
+            bool active = self.View.EG_Btn_TopRight_1RectTransform.gameObject.activeSelf;
+            self.View.EG_Btn_TopRight_1RectTransform.gameObject.SetActive(!active);
+            self.View.EG_Btn_TopRight_2RectTransform.gameObject.SetActive(!active);
+            self.View.EG_Btn_TopRight_3RectTransform.gameObject.SetActive(!active);
+
+            self.View.E_Button_ZhanKaiButton.transform.localScale = active? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
+        }
+
+        private static void OnMailHintTip(this DlgMain self)
+        {
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            if (mapComponent.SceneType != (int)SceneTypeEnum.MainCityScene)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("请前往主城!");
+                return;
+            }
+
+            self.Root().CurrentScene().GetComponent<OperaComponent>().OnClickNpc(20000006).Coroutine();
+        }
+
+        private static async ETTask OnBtn_MapTransfer(this DlgMain self)
+        {
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_DungeonMapTransfer);
+            DlgDungeonMapTransfer dlgDungeonMapTransfer = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgDungeonMapTransfer>();
+        }
+
+        private static void OnBtn_RerurnDungeon(this DlgMain self)
+        {
+            PopupTipHelp.OpenPopupTip(self.Root(), "返回副本", GameSettingLanguge.LoadLocalization("移动次数消耗完毕,请返回副本!"),
+                () =>
+                {
+                    int sceneid = self.Root().GetComponent<BattleMessageComponent>().LastDungeonId;
+                    if (sceneid == 0)
+                    {
+                        EnterMapHelper.RequestQuitFuben(self.Root());
+                    }
+                    else
+                    {
+                        EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, sceneid, 0, "0").Coroutine();
+                    }
+                },
+                null).Coroutine();
+        }
+
+        private static void OnClickReturnButton(this DlgMain self)
+        {
+            Scene zoneScene = self.Root();
+            MapComponent mapComponent = zoneScene.GetComponent<MapComponent>();
+
+            string tipStr = "确定返回主城？";
+            if (mapComponent.SceneType == SceneTypeEnum.Battle)
+            {
+                tipStr = "现在离开战场,将不会获得战场胜利的奖励哦";
+            }
+
+            PopupTipHelp.OpenPopupTip(self.Root(), "", GameSettingLanguge.LoadLocalization(tipStr),
+                () => { EnterMapHelper.RequestQuitFuben(self.Root()); },
+                null).Coroutine();
         }
 
         #endregion
@@ -657,6 +673,22 @@ namespace ET.Client
             self.View.ES_MainSkill.OnSkillSetUpdate();
 
             self.View.ES_MapMini.OnEnterScene();
+
+            self.CheckMailReddot().Coroutine();
+        }
+
+        private static async ETTask CheckMailReddot(this DlgMain self)
+        {
+            if (!self.View.E_MailHintTipButton.gameObject.activeSelf)
+            {
+                return;
+            }
+
+            E2C_GetAllMailResponse response = await MailNetHelper.SendGetMailList(self.Root());
+            if (response.MailInfos.Count == 0)
+            {
+                self.View.E_MailHintTipButton.gameObject.SetActive(false);
+            }
         }
 
         public static void SetFenBianLv1(this DlgMain self)
