@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_ProtectEquip))]
+    [FriendOf(typeof (ES_ProtectPet))]
     [FriendOf(typeof (DlgProtect))]
     public static class DlgProtectSystem
     {
@@ -33,6 +34,8 @@ namespace ET.Client
                     self.View.ES_ProtectEquip.OnUpdateUI();
                     break;
                 case 1:
+                    self.View.ES_ProtectPet.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_ProtectPet.OnUpdateUI();
                     break;
             }
         }

@@ -42,6 +42,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_ProtectPet ES_ProtectPet
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_protectpet == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ProtectPet");
+		    	   this.m_es_protectpet = this.AddChild<ES_ProtectPet,Transform>(subTrans);
+     			}
+     			return this.m_es_protectpet;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -97,6 +115,7 @@ namespace ET.Client
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_protectequip = null;
+			this.m_es_protectpet = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_0Toggle = null;
 			this.m_E_1Toggle = null;
@@ -105,6 +124,7 @@ namespace ET.Client
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_ProtectEquip> m_es_protectequip = null;
+		private EntityRef<ES_ProtectPet> m_es_protectpet = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_0Toggle = null;
 		private UnityEngine.UI.Toggle m_E_1Toggle = null;

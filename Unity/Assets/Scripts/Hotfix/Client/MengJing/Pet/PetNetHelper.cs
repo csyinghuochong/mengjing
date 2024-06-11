@@ -317,5 +317,13 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<int> RolePetProtect(Scene root, long petInfoId, bool isProtect)
+        {
+            C2M_RolePetProtect request = new() { PetInfoId = petInfoId, IsProtect = isProtect };
+            M2C_RolePetProtect response = (M2C_RolePetProtect)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
 }
