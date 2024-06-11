@@ -145,7 +145,7 @@ namespace ET.Client
             // self.View.E_Button_WelfareButton.AddListener();
             // self.View.E_Btn_GMButton.AddListener();
             // self.View.E_Btn_RankButton.AddListener();
-            // self.View.E_Button_WorldLvButton.AddListener();
+            self.View.E_Button_WorldLvButton.AddListener(self.OnButton_WorldLv);
             self.View.E_Btn_PaiMaiHangButton.AddListener(self.OnBtn_PaiMaiHang);
 
             // self.View.EG_Btn_KillMonsterRewardRectTransform
@@ -553,6 +553,11 @@ namespace ET.Client
             self.View.EG_Btn_TopRight_3RectTransform.gameObject.SetActive(!active);
 
             self.View.E_Button_ZhanKaiButton.transform.localScale = active? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
+        }
+
+        private static void OnButton_WorldLv(this DlgMain self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_WorldLv).Coroutine();
         }
 
         private static void OnBtn_PaiMaiHang(this DlgMain self)

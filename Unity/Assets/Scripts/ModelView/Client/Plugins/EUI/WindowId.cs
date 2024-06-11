@@ -91,5 +91,6 @@ namespace ET.Client
 		WindowID_PhoneCode,
 		WindowID_DungeonMapTransfer,
 		WindowID_TowerOfSeal,
+		WindowID_WorldLv,
 	}
 }
