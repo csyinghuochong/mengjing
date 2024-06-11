@@ -1,0 +1,194 @@
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
+{
+	[EnableMethod]
+	public  class Scroll_Item_NewYearCollectionWordItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	{
+		public long DataId {get;set;}
+		private bool isCacheNode = false;
+		public void SetCacheMode(bool isCache)
+		{
+			this.isCacheNode = isCache;
+		}
+
+		public Scroll_Item_NewYearCollectionWordItem BindTrans(Transform trans)
+		{
+			this.uiTransform = trans;
+			return this;
+		}
+
+		public ES_RewardList ES_RewardList_Word
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_es_rewardlist_word == null )
+     				{
+		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList_Word");
+		    			this.m_es_rewardlist_word = this.AddChild<ES_RewardList,Transform>(subTrans);
+     				}
+     				return this.m_es_rewardlist_word;
+     			}
+     			else
+     			{
+     				if( this.m_es_rewardlist_word != null )
+     				{
+		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList_Word");
+		    			ES_RewardList es = this.m_es_rewardlist_word;
+     					if( es.UITransform != subTrans )
+     					{
+     						es.Dispose();
+		    				this.m_es_rewardlist_word = null;
+		    				this.m_es_rewardlist_word = this.AddChild<ES_RewardList,Transform>(subTrans);
+     					}
+     				}
+     				else
+     				{
+		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList_Word");
+		    			this.m_es_rewardlist_word = this.AddChild<ES_RewardList,Transform>(subTrans);
+     				}
+     				return this.m_es_rewardlist_word;
+     			}
+     		}
+     	}
+
+		public ES_RewardList ES_RewardList_Reward
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_es_rewardlist_reward == null )
+     				{
+		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList_Reward");
+		    			this.m_es_rewardlist_reward = this.AddChild<ES_RewardList,Transform>(subTrans);
+     				}
+     				return this.m_es_rewardlist_reward;
+     			}
+     			else
+     			{
+     				if( this.m_es_rewardlist_reward != null )
+     				{
+		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList_Reward");
+		    			ES_RewardList es = this.m_es_rewardlist_reward;
+     					if( es.UITransform != subTrans )
+     					{
+     						es.Dispose();
+		    				this.m_es_rewardlist_reward = null;
+		    				this.m_es_rewardlist_reward = this.AddChild<ES_RewardList,Transform>(subTrans);
+     					}
+     				}
+     				else
+     				{
+		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList_Reward");
+		    			this.m_es_rewardlist_reward = this.AddChild<ES_RewardList,Transform>(subTrans);
+     				}
+     				return this.m_es_rewardlist_reward;
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_ButtonDuiHuanButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_ButtonDuiHuanButton == null )
+     				{
+		    			this.m_E_ButtonDuiHuanButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonDuiHuan");
+     				}
+     				return this.m_E_ButtonDuiHuanButton;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonDuiHuan");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_ButtonDuiHuanImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_ButtonDuiHuanImage == null )
+     				{
+		    			this.m_E_ButtonDuiHuanImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonDuiHuan");
+     				}
+     				return this.m_E_ButtonDuiHuanImage;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonDuiHuan");
+     			}
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_LabDuiHuanText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_E_LabDuiHuanText == null )
+     				{
+		    			this.m_E_LabDuiHuanText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_LabDuiHuan");
+     				}
+     				return this.m_E_LabDuiHuanText;
+     			}
+     			else
+     			{
+		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_LabDuiHuan");
+     			}
+     		}
+     	}
+
+		public void DestroyWidget()
+		{
+			this.m_es_rewardlist_word = null;
+			this.m_es_rewardlist_reward = null;
+			this.m_E_ButtonDuiHuanButton = null;
+			this.m_E_ButtonDuiHuanImage = null;
+			this.m_E_LabDuiHuanText = null;
+			this.uiTransform = null;
+			this.DataId = 0;
+		}
+
+		private EntityRef<ES_RewardList> m_es_rewardlist_word = null;
+		private EntityRef<ES_RewardList> m_es_rewardlist_reward = null;
+		private UnityEngine.UI.Button m_E_ButtonDuiHuanButton = null;
+		private UnityEngine.UI.Image m_E_ButtonDuiHuanImage = null;
+		private UnityEngine.UI.Text m_E_LabDuiHuanText = null;
+		public Transform uiTransform = null;
+	}
+}

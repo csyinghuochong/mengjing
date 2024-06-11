@@ -1,0 +1,51 @@
+﻿
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
+{
+	[ChildOf]
+	[EnableMethod]
+	public  class ES_NewYearCollectionWord : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	{
+		public Dictionary<int, Scroll_Item_NewYearCollectionWordItem> ScrollItemNewYearCollectionWordItems;
+		
+		public UnityEngine.UI.LoopVerticalScrollRect E_NewYearCollectionWordItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_NewYearCollectionWordItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_NewYearCollectionWordItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_NewYearCollectionWordItems");
+     			}
+     			return this.m_E_NewYearCollectionWordItemsLoopVerticalScrollRect;
+     		}
+     	}
+
+		    public Transform UITransform
+         {
+     	    get
+     	    {
+     		    return this.uiTransform;
+     	    }
+     	    set
+     	    {
+     		    this.uiTransform = value;
+     	    }
+         }
+
+		public void DestroyWidget()
+		{
+			this.m_E_NewYearCollectionWordItemsLoopVerticalScrollRect = null;
+			this.uiTransform = null;
+		}
+
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_NewYearCollectionWordItemsLoopVerticalScrollRect = null;
+		public Transform uiTransform = null;
+	}
+}
