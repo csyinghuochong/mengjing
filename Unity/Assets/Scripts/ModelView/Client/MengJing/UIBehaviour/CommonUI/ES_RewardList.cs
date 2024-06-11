@@ -13,6 +13,7 @@ namespace ET.Client
 		public float Scale;
 		public bool ShowNum;
 		public bool ShowName;
+		public int GetWay;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{

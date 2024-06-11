@@ -30,9 +30,9 @@ namespace ET.Client
             {
                 case 0:
                     self.View.ES_NewYearCollectionWord.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_NewYearCollectionWord.OnUpdateUI();
                     break;
                 case 1:
-
                     break;
             }
         }

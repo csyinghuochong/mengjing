@@ -34,14 +34,16 @@ namespace ET.Client
             scrollItemCommonItem.ES_CommonItem.E_ItemNumText.gameObject.SetActive(self.ShowNum);
             scrollItemCommonItem.ES_CommonItem.E_ItemNameText.gameObject.SetActive(self.ShowName);
             scrollItemCommonItem.uiTransform.localScale = Vector3.one * self.Scale;
+            scrollItemCommonItem.ES_CommonItem.E_BindingImage.gameObject.SetActive(self.GetWay == ItemGetWay.Activity_DayTeHui || self.GetWay == ItemGetWay.ActivityNewYear);
         }
 
         public static void Refresh(this ES_RewardList self, List<RewardItem> rewardItems, float scale = 1f, bool showNumber = true,
-        bool showName = false)
+        bool showName = false, int getWay = 0)
         {
             self.Scale = scale;
             self.ShowNum = showNumber;
             self.ShowName = showName;
+            self.GetWay = getWay;
 
             self.ShowBagInfos.Clear();
             foreach (RewardItem item in rewardItems)
@@ -53,11 +55,13 @@ namespace ET.Client
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
-        public static void Refresh(this ES_RewardList self, string rewarfItems, float scale = 1f, bool showNumber = true, bool showName = false)
+        public static void Refresh(this ES_RewardList self, string rewarfItems, float scale = 1f, bool showNumber = true, bool showName = false,
+        int getWay = 0)
         {
             self.Scale = scale;
             self.ShowNum = showNumber;
             self.ShowName = showName;
+            self.GetWay = getWay;
 
             self.ShowBagInfos.Clear();
             string[] items = rewarfItems.Split('@');

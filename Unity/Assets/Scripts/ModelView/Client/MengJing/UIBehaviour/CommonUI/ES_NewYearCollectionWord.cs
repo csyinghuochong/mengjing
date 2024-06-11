@@ -6,8 +6,9 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_NewYearCollectionWord : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_NewYearCollectionWord : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public List<ActivityConfig> ShowActivityConfigs = new();
 		public Dictionary<int, Scroll_Item_NewYearCollectionWordItem> ScrollItemNewYearCollectionWordItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_NewYearCollectionWordItemsLoopVerticalScrollRect
