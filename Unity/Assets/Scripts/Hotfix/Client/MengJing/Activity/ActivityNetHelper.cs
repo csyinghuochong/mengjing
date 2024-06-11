@@ -59,5 +59,20 @@ namespace ET.Client
             M2C_WelfareInvestRewardResponse response = (M2C_WelfareInvestRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_WelfareDraw2Response> WelfareDraw2(Scene root)
+        {
+            C2M_WelfareDraw2Request request = new();
+            M2C_WelfareDraw2Response response = (M2C_WelfareDraw2Response)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
+
+        public static async ETTask<M2C_WelfareDraw2RewardResponse> WelfareDraw2Reward(Scene root)
+        {
+            C2M_WelfareDraw2RewardRequest reques = new();
+            M2C_WelfareDraw2RewardResponse response = (M2C_WelfareDraw2RewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(reques);
+            return response;
+        }
     }
 }

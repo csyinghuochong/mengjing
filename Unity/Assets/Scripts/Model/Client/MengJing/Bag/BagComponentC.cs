@@ -7,11 +7,11 @@ namespace ET.Client
     public class BagComponentC: Entity, IAwake, IDestroy
     {
         public int SeasonJingHePlan { get; set; }
-        
+
         public List<int> QiangHuaLevel = new List<int>();
-        
+
         public List<int> QiangHuaFails = new List<int>();
-        
+
         /// <summary>
         /// ItemLocType.ItemWareHouse1 之后的所有仓库（购买格子数量）
         /// </summary>
@@ -31,12 +31,11 @@ namespace ET.Client
         /// 穿戴的时装
         /// </summary>
         public List<int> FashionEquipList { get; set; } = new();
-        
-        
-        public List<BagInfo>[] AllItemList;
-        
+
+        public List<BagInfo>[] AllItemList { get; set; }
+
         public bool RealAddItem;
-        
+
         /// <summary>
         /// 当前选择的仓库
         /// </summary>

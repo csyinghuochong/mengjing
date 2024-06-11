@@ -96,6 +96,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_WelfareDraw2 ES_WelfareDraw2
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_welfaredraw2 == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WelfareDraw2");
+		    	   this.m_es_welfaredraw2 = this.AddChild<ES_WelfareDraw2,Transform>(subTrans);
+     			}
+     			return this.m_es_welfaredraw2;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -205,6 +223,7 @@ namespace ET.Client
 			this.m_es_welfaretask = null;
 			this.m_es_welfaredraw = null;
 			this.m_es_welfareinvest = null;
+			this.m_es_welfaredraw2 = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_0Toggle = null;
 			this.m_E_1Toggle = null;
@@ -219,6 +238,7 @@ namespace ET.Client
 		private EntityRef<ES_WelfareTask> m_es_welfaretask = null;
 		private EntityRef<ES_WelfareDraw> m_es_welfaredraw = null;
 		private EntityRef<ES_WelfareInvest> m_es_welfareinvest = null;
+		private EntityRef<ES_WelfareDraw2> m_es_welfaredraw2 = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_0Toggle = null;
 		private UnityEngine.UI.Toggle m_E_1Toggle = null;
