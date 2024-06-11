@@ -62,5 +62,6 @@
         public const int GemMakeCDTimer = 323;
         public const int ShenQiMakeTimer = 324;
         public const int UIMainFPSTimer = 325;
+        public const int MapTransferBossRefreshTimer = 326;
     }
 }

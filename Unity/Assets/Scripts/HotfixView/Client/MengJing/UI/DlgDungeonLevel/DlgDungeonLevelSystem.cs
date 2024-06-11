@@ -78,7 +78,7 @@ namespace ET.Client
         private static void OnDungeonLevelItemsRefresh(this DlgDungeonLevel self, Transform transform, int index)
         {
             Scroll_Item_DungeonLevelItem scrollItemDungeonLevelItem = self.ScrollItemDungeonLevelItems[index].BindTrans(transform);
-            scrollItemDungeonLevelItem.OnInitData(self.ChapterId, self.ShowLevel[index], self.DungeonSectionConfig.RandomArea[self.ShowLevel[index]]);
+            scrollItemDungeonLevelItem.OnInitData(0, self.ShowLevel[index], self.DungeonSectionConfig.RandomArea[self.ShowLevel[index]]);
         }
 
         public static async ETTask UpdateLevelList(this DlgDungeonLevel self, int chapterid)

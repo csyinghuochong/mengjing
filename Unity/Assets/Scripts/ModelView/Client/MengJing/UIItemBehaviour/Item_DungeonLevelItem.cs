@@ -5,8 +5,9 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_DungeonLevelItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_DungeonLevelItem : Entity,IAwake,IDestroy,IUIScrollItem
 	{
+		public int Type;
 		public int LevelIndex;
 		public int ChapterId;
 		public float StartPosX;

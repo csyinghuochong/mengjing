@@ -89,5 +89,6 @@ namespace ET.Client
 		WindowID_SettingSkill,
 		WindowID_FashionExplain,
 		WindowID_PhoneCode,
+		WindowID_DungeonMapTransfer,
 	}
 }

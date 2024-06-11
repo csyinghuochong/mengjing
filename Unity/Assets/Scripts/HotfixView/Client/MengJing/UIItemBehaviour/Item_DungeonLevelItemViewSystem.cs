@@ -45,12 +45,31 @@ namespace ET.Client
                 }
 
                 self.SendTime = Time.time;
-                DlgDungeonLevel uIDungeonLevel = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgDungeonLevel>();
 
-                FlyTipComponent.Instance.SpawnFlyTipDi($"请求传送 副本Id:{self.ChapterId} 副本难度：{uIDungeonLevel.Difficulty}");
+                UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
+                int errorCode = 0;
+                if (self.Type == 0)
+                {
+                    DlgDungeonLevel uIDungeonLevel = uiComponent.GetDlgLogic<DlgDungeonLevel>();
 
-                int errorCode =
-                        await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, self.ChapterId, uIDungeonLevel.Difficulty);
+                    FlyTipComponent.Instance.SpawnFlyTipDi($"请求传送 副本Id:{self.ChapterId} 副本难度：{uIDungeonLevel.Difficulty}");
+
+                    errorCode =
+                            await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, self.ChapterId, uIDungeonLevel.Difficulty);
+                }
+
+                if (self.Type == 1)
+                {
+                    if (self.Root().GetComponent<LockTargetComponent>().LastLockId != 0)
+                    {
+                        FlyTipComponent.Instance.SpawnFlyTipDi("战斗状态不能传送地图!");
+                        return;
+                    }
+
+                    errorCode =
+                            await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, self.ChapterId,
+                                self.Root().GetComponent<MapComponent>().FubenDifficulty);
+                }
 
                 if (errorCode != ErrorCode.ERR_Success)
                 {
@@ -63,7 +82,8 @@ namespace ET.Client
                     return;
                 }
 
-                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DungeonLevel);
+                uiComponent.CloseWindow(WindowID.WindowID_DungeonLevel);
+                uiComponent.CloseWindow(WindowID.WindowID_DungeonMapTransfer);
             }
             catch (Exception ex)
             {
@@ -71,18 +91,15 @@ namespace ET.Client
             }
         }
 
-        public static void OnInitData(this Scroll_Item_DungeonLevelItem self, int ChapterIndex, int levelIndex, int levelId)
+        public static void OnInitData(this Scroll_Item_DungeonLevelItem self, int type, int levelIndex, int levelId)
         {
+            self.Type = type;
             self.LevelIndex = levelIndex;
             self.ChapterId = levelId;
             DungeonConfig chapterConfig = DungeonConfigCategory.Instance.Get(levelId);
             self.E_Lab_ChapSonNameOutText.text = chapterConfig.ChapterName;
-            //self.Lab_ChapIndex.GetComponent<Text>().text = $"第{ChapterIndex}章 第{levelIndex+1}关";
             self.E_Lab_ChapIndexText.text = $"第{levelIndex + 1}关";
             self.E_Lab_EnterLevelText.text = "挑战等级:" + chapterConfig.EnterLv;
-
-            //Sprite sp = ABAtlasHelp.GetIconSprite(ABAtlasTypes.MonsterIcon, chapterConfig.BossIcon.ToString());
-            //self.ImageBossIcon.GetComponent<Image>().sprite = sp;
 
             self.E_ButtonEnterButton.AddListenerAsync(self.OnEnterChapter);
         }

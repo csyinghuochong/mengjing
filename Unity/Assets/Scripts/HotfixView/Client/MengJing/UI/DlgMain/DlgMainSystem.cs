@@ -151,8 +151,8 @@ namespace ET.Client
             // self.View.EG_Btn_KillMonsterRewardRectTransform
             // self.View.EG_Btn_LvRewardRectTransform
             // self.View.E_MailHintTipButton.AddListener();
-            // self.View.E_E_Btn_MapTransferButton.AddListener();
-            // self.View.E_Btn_RerurnDungeonButton.AddListener();
+            self.View.E_E_Btn_MapTransferButton.AddListener(() => { self.OnBtn_MapTransfer().Coroutine(); });
+            self.View.E_Btn_RerurnDungeonButton.AddListener(self.OnBtn_RerurnDungeon);
             self.View.E_Btn_RerurnBuildingButton.AddListener(self.OnClickReturnButton);
 
             self.View.E_SetButton.AddListener(self.OnSetButton);
@@ -495,7 +495,31 @@ namespace ET.Client
             self.View.E_Button_ZhanKaiButton.transform.localScale = active? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
         }
 
-        public static void OnClickReturnButton(this DlgMain self)
+        private static async ETTask OnBtn_MapTransfer(this DlgMain self)
+        {
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_DungeonMapTransfer);
+            DlgDungeonMapTransfer dlgDungeonMapTransfer = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgDungeonMapTransfer>();
+        }
+
+        private static void OnBtn_RerurnDungeon(this DlgMain self)
+        {
+            PopupTipHelp.OpenPopupTip(self.Root(), "返回副本", GameSettingLanguge.LoadLocalization("移动次数消耗完毕,请返回副本!"),
+                () =>
+                {
+                    int sceneid = self.Root().GetComponent<BattleMessageComponent>().LastDungeonId;
+                    if (sceneid == 0)
+                    {
+                        EnterMapHelper.RequestQuitFuben(self.Root());
+                    }
+                    else
+                    {
+                        EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, sceneid, 0, "0").Coroutine();
+                    }
+                },
+                null).Coroutine();
+        }
+
+        private static void OnClickReturnButton(this DlgMain self)
         {
             Scene zoneScene = self.Root();
             MapComponent mapComponent = zoneScene.GetComponent<MapComponent>();
