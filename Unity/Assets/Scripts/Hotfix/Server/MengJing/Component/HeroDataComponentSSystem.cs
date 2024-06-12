@@ -311,7 +311,7 @@ namespace ET.Server
 
              MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
              int resurrection = (int)monsterConfig.ReviveTime;
-             MapComponent mapComponent = unit.Root().GetComponent<MapComponent>();
+             MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
              if (ConfigData.SeasonBossId == unit.ConfigId && mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
              {
                  LocalDungeonComponent localDungeon = unit.Root().GetComponent<LocalDungeonComponent>();
@@ -829,7 +829,7 @@ namespace ET.Server
              //怪物死亡， 清除玩家BUFF
              if (unit.Type == UnitType.Monster && MonsterConfigCategory.Instance.Get(unit.ConfigId).RemoveBuff == 0)
              {
-                 List<Unit> units = FubenHelp.GetUnitList(unit.Root(), UnitType.Player);
+                 List<Unit> units = FubenHelp.GetUnitList(unit.Scene(), UnitType.Player);
                  for (int i = 0; i < units.Count; i++)
                  {
                      units[i].GetComponent<BuffManagerComponentS>().OnDeadRemoveBuffBy(unit.Id);
