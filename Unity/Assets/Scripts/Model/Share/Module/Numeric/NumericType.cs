@@ -119,8 +119,8 @@
         public const int SoloRankId = 3119;
         public const int StartAngle = 3120;
         public const int JiaYuanPurchaseRefresh = 3121;
-        public const int TowerOfSealArrived = 3122;                              // 今日封印之塔已经到达的层数
-        public const int TowerOfSealFinished = 3123;                             // 今日封印之塔已经通关的层数
+        public const int SealTowerArrived = 3122;                              // 今日封印之塔已经到达的层数
+        public const int SealTowerFinished = 3123;                             // 今日封印之塔已经通关的层数
         public const int JueXingExp = 3124;                                         //觉醒经验
         public const int JueXingAnger = 3125;                                       //觉醒怒气
         public const int HappyCellIndex = 3126;                                           //格子位置，

@@ -275,7 +275,7 @@ namespace ET.Server
 
             self.XiLianExp = numericComponent.GetAsInt(NumericType.ItemXiLianDu);
 
-            self.LastSealTowerId = numericComponent.GetAsInt(NumericType.TowerOfSealArrived);
+            self.LastSealTowerId = numericComponent.GetAsInt(NumericType.SealTowerArrived);
 
             self.SetAllCostList(self.GoldCostList, self.GoldCost);
             self.GoldCost = self.CostListToString(self.GoldCostList);

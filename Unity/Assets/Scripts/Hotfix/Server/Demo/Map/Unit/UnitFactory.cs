@@ -654,7 +654,7 @@ namespace ET.Server
             }
 
             // 封印之塔提升爆率
-            if (sceneType == SceneTypeEnum.TowerOfSeal)
+            if (sceneType == SceneTypeEnum.SealTower)
             {
                 dropAdd_Pro += 1f;
             }

@@ -8,8 +8,8 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_TowerOfSealNextRequest request, M2C_TowerOfSealNextResponse response)
         {
             Scene domainScene = unit.Scene();
-            TowerOfSealComponent towerOfSealComponent = domainScene.GetComponent<TowerOfSealComponent>();
-            if (towerOfSealComponent == null)
+            SealTowerComponent sealTowerComponent = domainScene.GetComponent<SealTowerComponent>();
+            if (sealTowerComponent == null)
             {
                 return;
             }
@@ -17,8 +17,8 @@ namespace ET.Server
             UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
 
-            int oldArrived = numericComponent.GetAsInt(NumericType.TowerOfSealArrived);
-            int oldFinished = numericComponent.GetAsInt(NumericType.TowerOfSealFinished);
+            int oldArrived = numericComponent.GetAsInt(NumericType.SealTowerArrived);
+            int oldFinished = numericComponent.GetAsInt(NumericType.SealTowerFinished);
 
             // 判断是否已经通关顶层
             if (oldFinished >= 100)
@@ -112,7 +112,7 @@ namespace ET.Server
                 nextArrived = 100;
             }
 
-            numericComponent.ApplyValue(NumericType.TowerOfSealArrived, nextArrived);
+            numericComponent.ApplyValue(NumericType.SealTowerArrived, nextArrived);
 
             // 清空关卡怪物
             List<Unit> monsterList = UnitHelper.GetUnitList(unit.Scene(), UnitType.Monster);
@@ -124,8 +124,8 @@ namespace ET.Server
             await unit.Root().GetComponent<TimerComponent>().WaitAsync(1000);
 
             // 重置关卡
-            towerOfSealComponent.GenerateFuben(numericComponent.GetAsInt(NumericType.TowerOfSealArrived),
-                numericComponent.GetAsInt(NumericType.TowerOfSealFinished));
+            sealTowerComponent.GenerateFuben(numericComponent.GetAsInt(NumericType.SealTowerArrived),
+                numericComponent.GetAsInt(NumericType.SealTowerFinished));
 
             unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.TowerOfSeal_28, 0, 1);
             unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.TowerOfSeal_28, 0, 1);

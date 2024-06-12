@@ -213,8 +213,8 @@ namespace ET.Server
                 case SceneTypeEnum.SeasonTower:
                     domainScene.GetComponent<SeasonTowerComponent>().OnKillEvent(defendUnit);
                     break;
-                case SceneTypeEnum.TowerOfSeal:
-                    domainScene.GetComponent<TowerOfSealComponent>().OnKillEvent(defendUnit);
+                case SceneTypeEnum.SealTower:
+                    domainScene.GetComponent<SealTowerComponent>().OnKillEvent(defendUnit);
                     break;
                 case SceneTypeEnum.Demon:
                     domainScene.GetComponent<DemonDungeonComponent>().OnKillEvent(defendUnit, mainAttack).Coroutine();

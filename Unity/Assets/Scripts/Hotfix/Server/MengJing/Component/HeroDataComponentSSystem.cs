@@ -236,8 +236,8 @@ namespace ET.Server
              numericComponent.ApplyValue(NumericType.RaceDonationNumber, 0, notice);
              // 重置封印之塔数据
              numericComponent.ApplyValue(NumericType.JiaYuanPurchaseRefresh, 0, notice);
-             numericComponent.ApplyValue(NumericType.TowerOfSealArrived, 0, notice);
-             numericComponent.ApplyValue(NumericType.TowerOfSealFinished, 0, notice);
+             numericComponent.ApplyValue(NumericType.SealTowerArrived, 0, notice);
+             numericComponent.ApplyValue(NumericType.SealTowerFinished, 0, notice);
 
              numericComponent.ApplyValue(NumericType.RunRaceRankId, 0, notice);
              numericComponent.ApplyValue(NumericType.HappyCellIndex, 0, notice);

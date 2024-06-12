@@ -2,7 +2,7 @@ namespace ET.Server
 {
     
     [ComponentOf(typeof(Scene))]
-    public class TowerOfSealComponent : Entity, IAwake
+    public class SealTowerComponent : Entity, IAwake
     {
     
     }

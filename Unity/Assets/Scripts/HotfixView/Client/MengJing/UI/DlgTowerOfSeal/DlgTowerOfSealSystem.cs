@@ -22,7 +22,7 @@ namespace ET.Client
         {
             Unit myUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             // 获取今日已经到达的封印之地的层数，如果没有则重置为0
-            int finished = myUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.TowerOfSealFinished);
+            int finished = myUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.SealTowerFinished);
             // 判断是否到达100层
             if (finished >= 100)
             {
@@ -31,8 +31,8 @@ namespace ET.Client
             }
 
             // 还未到达100层，可以继续闯塔
-            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.TowerOfSeal,
-                BattleHelper.GetSceneIdByType(SceneTypeEnum.TowerOfSeal), 0, "0");
+            int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.SealTower,
+                BattleHelper.GetSceneIdByType(SceneTypeEnum.SealTower), 0, "0");
             if (errorCode == ErrorCode.ERR_Success)
             {
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TowerOfSeal);

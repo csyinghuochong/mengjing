@@ -1,4 +1,5 @@
 ﻿using System;
+using ET.Client;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -50,9 +51,8 @@ namespace ET.Server
             // 通知客户端开始切场景
             M2C_StartSceneChange m2CStartSceneChange = new() { SceneInstanceId = scene.InstanceId, SceneId = request.SceneId, SceneType = request.SceneType, Difficulty = request.Difficulty, ParamInfo = request.ParamInfo };
             MapMessageHelper.SendToClient(unit, m2CStartSceneChange);
-
             
-            int aoivalue = 9;
+            int aoivalue = 5;
             switch (request.SceneType)
             {
                 case SceneTypeEnum.CellDungeon:
@@ -102,9 +102,13 @@ namespace ET.Server
                         scene.GetComponent<PetMingDungeonComponent>().GeneratePetFuben().Coroutine();
                     }
                     break;
-                
-                
-                 case SceneTypeEnum.JiaYuan:
+                case  SceneTypeEnum.LocalDungeon:
+                    unit.Position = new float3(-0.72f, 0, -2.57f);
+                    unit.AddComponent<PathfindingComponent, int>(10001);
+                    scene.GetComponent<LocalDungeonComponent>().MainUnit = unit;
+                    scene.GetComponent<LocalDungeonComponent>().GenerateFubenScene(request.SceneId);
+                    break;
+                case SceneTypeEnum.JiaYuan:
                 case SceneTypeEnum.Union:
                 case SceneTypeEnum.BaoZang:
                 case SceneTypeEnum.MiJing:
@@ -181,16 +185,28 @@ namespace ET.Server
                         scene.GetComponent<SeasonTowerComponent>().GenerateFuben(int.Parse(request.ParamInfo));
                     }
                     break;
+                case SceneTypeEnum.SealTower:
+                    unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
+                    sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
+
+                    float pos_x = sceneConfig.InitPos[0] * 0.01f;
+                    float pos_y = sceneConfig.InitPos[1] * 0.01f;
+                    float pos_z = sceneConfig.InitPos[2] * 0.01f;
+                    unit.Position = new float3(pos_x, pos_y, pos_z);
+                    unit.Rotation = quaternion.identity;
+
+                    //Game.Scene.GetComponent<RecastPathComponent>().Update(scene.GetComponent<MapComponent>().NavMeshId);
+                    int towerarrived = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.SealTowerArrived);
+                    int towerfinished = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.SealTowerFinished);
+                    scene.GetComponent<SealTowerComponent>().GenerateFuben(towerarrived,towerfinished);
+
+                    TransferHelper.AfterTransfer(unit);
+                    break;
+                
                 case SceneTypeEnum.MainCityScene:
                     unit.Position = new float3(-10, 0, -10);
                     unit.AddComponent<PathfindingComponent, int>(101);
                     unit.GetComponent<HeroDataComponentS>().OnReturn();
-                    break;
-                case  SceneTypeEnum.LocalDungeon:
-                    unit.Position = new float3(-0.72f, 0, -2.57f);
-                    unit.AddComponent<PathfindingComponent, int>(10001);
-                    scene.GetComponent<LocalDungeonComponent>().MainUnit = unit;
-                    scene.GetComponent<LocalDungeonComponent>().GenerateFubenScene(request.SceneId);
                     break;
             }
             

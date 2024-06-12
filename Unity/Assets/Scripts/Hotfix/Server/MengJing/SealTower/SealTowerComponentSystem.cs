@@ -5,16 +5,16 @@ namespace ET.Server
     /// <summary>
     /// 封印之塔管理
     /// </summary>
-    [EntitySystemOf(typeof(TowerOfSealComponent))]
-    [FriendOf(typeof(TowerOfSealComponent))]
-    public static partial class TowerOfSealComponentSystem
+    [EntitySystemOf(typeof(SealTowerComponent))]
+    [FriendOf(typeof(SealTowerComponent))]
+    public static partial class SealTowerComponentSystem
     {
         /// <summary>
         /// 怪物被击杀时触发
         /// </summary>
         /// <param name="self"></param>
         /// <param name="defend"></param>
-        public static void OnKillEvent(this TowerOfSealComponent self, Unit defend)
+        public static void OnKillEvent(this SealTowerComponent self, Unit defend)
         {
             List<Unit> players = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
             if (defend.GetComponent<NumericComponentS>().GetAsLong(NumericType.MasterId) == players[0].Id)
@@ -33,8 +33,8 @@ namespace ET.Server
             m2C_FubenSettlement.BattleResult = CombatResultEnum.Win;
 
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
-            int arrived = players[0].GetComponent<NumericComponentS>().GetAsInt(NumericType.TowerOfSealArrived);
-            players[0].GetComponent<NumericComponentS>().ApplyValue(NumericType.TowerOfSealFinished, arrived);
+            int arrived = players[0].GetComponent<NumericComponentS>().GetAsInt(NumericType.SealTowerArrived);
+            players[0].GetComponent<NumericComponentS>().ApplyValue(NumericType.SealTowerFinished, arrived);
             MapMessageHelper.SendToClient(players[0], m2C_FubenSettlement);
         }
 
@@ -44,7 +44,7 @@ namespace ET.Server
         /// <param name="self"></param>
         /// <param name="arrivedConfigId">到达的层数</param>
         /// <param name="finishedConfigId">完成的层数</param>
-        public static void GenerateFuben(this TowerOfSealComponent self, int arrivedConfigId, int finishedConfigId)
+        public static void GenerateFuben(this SealTowerComponent self, int arrivedConfigId, int finishedConfigId)
         {
             List<Unit> players = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
             
@@ -91,7 +91,7 @@ namespace ET.Server
             }
         }
         [EntitySystem]
-        private static void Awake(this ET.Server.TowerOfSealComponent self)
+        private static void Awake(this ET.Server.SealTowerComponent self)
         {
 
         }

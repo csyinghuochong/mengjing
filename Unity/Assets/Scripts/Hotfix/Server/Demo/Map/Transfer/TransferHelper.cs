@@ -169,8 +169,8 @@ namespace ET.Server
                         await TransferHelper.Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.SeasonTower, request.SceneId, FubenDifficulty.None, request.paramInfo);
                         TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
                         break;
-                    case SceneTypeEnum.TowerOfSeal:
-                        int finished = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.TowerOfSealFinished);
+                    case SceneTypeEnum.SealTower:
+                        int finished = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.SealTowerFinished);
                         // 服务端再判断是否已经通关塔顶
                         if (finished >= 100)
                         {
@@ -180,12 +180,12 @@ namespace ET.Server
                         fubenid = IdGenerater.Instance.GenerateId();
                         fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
                         fubnescene =   GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId,"TowerOfSeal" + fubenid.ToString());
-                        fubnescene.AddComponent<TowerOfSealComponent>();
+                        fubnescene.AddComponent<SealTowerComponent>();
                         mapComponent = fubnescene.GetComponent<MapComponent>();
-                        mapComponent.SetMapInfo((int)SceneTypeEnum.TowerOfSeal, request.SceneId, int.Parse(request.paramInfo));
+                        mapComponent.SetMapInfo((int)SceneTypeEnum.SealTower, request.SceneId, int.Parse(request.paramInfo));
                         mapComponent.NavMeshId = SceneConfigCategory.Instance.Get(request.SceneId).MapID;
                         TransferHelper.BeforeTransfer(unit);
-                        await TransferHelper.Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.TowerOfSeal, request.SceneId, FubenDifficulty.None, request.paramInfo);
+                        await TransferHelper.Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.SealTower, request.SceneId, FubenDifficulty.None, request.paramInfo);
                         TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
                         break;
                     case (int)SceneTypeEnum.RandomTower:
