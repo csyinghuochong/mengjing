@@ -591,7 +591,7 @@ namespace ET.Server
             RemovePetAndJingLing(unit);
         }
 
-        public static void AfterTransfer(Unit unit)
+        public static void AfterTransfer(Unit unit, int sceneType)
         {
             RolePetInfo fightId = unit.GetComponent<PetComponentS>().GetFightPet();
             if (fightId != null)

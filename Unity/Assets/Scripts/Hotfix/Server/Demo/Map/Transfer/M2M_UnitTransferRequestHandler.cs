@@ -64,7 +64,6 @@ namespace ET.Server
                     unit.Position = new float3(chapterSon.BornPosLeft[0] * 0.01f, chapterSon.BornPosLeft[1] * 0.01f, chapterSon.BornPosLeft[2] * 0.01f);
                     unit.Rotation = quaternion.identity;
                     scene.GetComponent<CellDungeonComponent>().GenerateFubenScene(false);
-                    TransferHelper.AfterTransfer(unit);
                     break;
                 case (int)SceneTypeEnum.PetMing:
                 case (int)SceneTypeEnum.PetDungeon:
@@ -199,8 +198,6 @@ namespace ET.Server
                     int towerarrived = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.SealTowerArrived);
                     int towerfinished = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.SealTowerFinished);
                     scene.GetComponent<SealTowerComponent>().GenerateFuben(towerarrived,towerfinished);
-
-                    TransferHelper.AfterTransfer(unit);
                     break;
                 
                 case SceneTypeEnum.MainCityScene:
@@ -210,7 +207,7 @@ namespace ET.Server
                     break;
             }
             
-            TransferHelper.AfterTransfer(unit);
+            TransferHelper.AfterTransfer(unit, request.SceneType);
             Log.Debug($"M2M_UnitTransferRequest:4");
             
             // 通知客户端创建My Unit
