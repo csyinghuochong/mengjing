@@ -448,7 +448,7 @@ namespace ET.Client
 
         private static void OnPetFormationButton(this DlgMain self)
         {
-            Log.Debug("进入宠物探险！！！");
+            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_PetSet);
         }
 
         private static void OnCityHorseButton(this DlgMain self)

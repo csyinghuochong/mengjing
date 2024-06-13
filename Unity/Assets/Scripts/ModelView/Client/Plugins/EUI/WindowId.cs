@@ -96,5 +96,6 @@ namespace ET.Client
 		WindowID_Welfare,
 		WindowID_RechargeReward,
 		WindowID_NewYear,
+		WindowID_PetSet,
 	}
 }
