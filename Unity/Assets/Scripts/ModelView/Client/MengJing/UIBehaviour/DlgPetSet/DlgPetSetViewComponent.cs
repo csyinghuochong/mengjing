@@ -77,6 +77,42 @@ namespace ET.Client
      		}
      	}
         
+        public ES_PetMining ES_PetMining
+        {
+	        get
+	        {
+		        if (this.uiTransform == null)
+		        {
+			        Log.Error("uiTransform is null.");
+			        return null;
+		        }
+		        if( this.m_es_petming == null )
+		        {
+			        Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetMining");
+			        this.m_es_petming = this.AddChild<ES_PetMining,Transform>(subTrans);
+		        }
+		        return this.m_es_petming;
+	        }
+        }
+		
+        public ES_PetChallenge ES_PetChallenge
+        {
+	        get
+	        {
+		        if (this.uiTransform == null)
+		        {
+			        Log.Error("uiTransform is null.");
+			        return null;
+		        }
+		        if( this.m_es_petming == null )
+		        {
+			        Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetChallenge");
+			        this.m_es_petchallenge = this.AddChild<ES_PetChallenge,Transform>(subTrans);
+		        }
+		        return this.m_es_petchallenge;
+	        }
+        }
+        
         public void DestroyWidget()
         {
             this.m_EG_SubViewRectTransform = null;
@@ -90,6 +126,9 @@ namespace ET.Client
         private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
         private UnityEngine.UI.Toggle m_E_Type1Toggle = null;
         private UnityEngine.UI.Toggle m_E_Type2Toggle = null;
+        
+        private EntityRef<ES_PetMining> m_es_petming = null;
+        private EntityRef<ES_PetChallenge> m_es_petchallenge = null;
         public Transform uiTransform = null;
     }
 }
