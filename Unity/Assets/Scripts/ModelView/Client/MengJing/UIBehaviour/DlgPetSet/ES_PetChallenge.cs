@@ -49,6 +49,9 @@ namespace ET.Client
         public Dictionary<int, Scroll_Item_PetChallengeItem> ScrollItemPetChallengeItems;
         private UnityEngine.UI.LoopVerticalScrollRect m_E_PetChallengeItemsLoopVerticalScrollRect = null;
         public Transform uiTransform = null;
+        
+        public int PetFubenId;
+        public int ShowReward;
     }
 }
 

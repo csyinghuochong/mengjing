@@ -38,12 +38,13 @@ namespace ET.Client
             
             bool locked = index > 0 && self.ShowPetFubenConfig[index].Id - petfubenId >= 2;
             scrollItemNPetChallengeItem.OnUpdateUI(self.ShowPetFubenConfig[index], index,  petComponentC.GetFubenStar(self.ShowPetFubenConfig[index].Id), locked).Coroutine();
-            scrollItemNPetChallengeItem.SetAction(self.OnClickChallengeItem);
+            scrollItemNPetChallengeItem.SetClickHandler(self.OnClickChallengeItem);
         }
         
         public static void OnClickChallengeItem(this ES_PetChallenge self, int petfubenId)
         {
-            Log.Debug("ES_PetChallenge.OnClickChallengeItem");
+            self.PetFubenId = petfubenId;
+            Log.Debug($"ES_PetChallenge.OnClickChallengeItem:{petfubenId}");
             // self.PetFubenId = petfubenId;
             // for (int i = 0; i < self.ChallengeItemList.Count; i++)
             // {

@@ -13,16 +13,34 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this ET.Client.Scroll_Item_PetChallengeItem self)
         {
-
+            self.uiTransform.GetComponent<Button>().AddListener(self.OnClickChallengeItem);
         }
+        
         [EntitySystem]
         private static void Destroy(this ET.Client.Scroll_Item_PetChallengeItem self)
         {
             self.DestroyWidget();
         }
         
-        public static void SetAction(this Scroll_Item_PetChallengeItem self, Action<int> action)
+        public static void OnClickChallengeItem(this Scroll_Item_PetChallengeItem self)
         {
+            self.ClickHandler(self.PetFubenId );
+        }
+
+        public static void SetSelected(this Scroll_Item_PetChallengeItem self, int petfubenId)
+        { 
+            self.E_ImageSelect.gameObject.SetActive(self.PetFubenId == petfubenId);
+        }
+
+        public static void SetClickHandler(this Scroll_Item_PetChallengeItem self, Action<int> action)
+        {
+            self.ClickHandler = action;
+        }
+
+        public static void HideLines(this Scroll_Item_PetChallengeItem self)
+        {
+            self.E_ImageLine_1.gameObject.SetActive(false);
+            self.E_ImageLine_2.gameObject.SetActive(false);
         }
         
         public static async ETTask OnUpdateUI(this Scroll_Item_PetChallengeItem self, PetFubenConfig petfubenConf, int index, int star, bool locked)
