@@ -29,15 +29,21 @@ namespace ET.Client
         
         private static void OnPetChallengeItemsRefresh(this ES_PetChallenge self, Transform transform, int index)
         {
+            PetComponentC petComponentC = self.Root().GetComponent<PetComponentC>();
+            int petfubenId = petComponentC.GetPetFuben();
+            
+            Log.Debug($"ES_PetChallenge.OnPetChallengeItemsRefresh:  {index}");
             Scroll_Item_PetChallengeItem scrollItemNPetChallengeItem=
                     self.ScrollItemPetChallengeItems[index].BindTrans(transform);
-
-            scrollItemNPetChallengeItem.OnInitUI(self.ShowPetFubenConfig[index]);
+            
+            bool locked = index > 0 && self.ShowPetFubenConfig[index].Id - petfubenId >= 2;
+            scrollItemNPetChallengeItem.OnUpdateUI(self.ShowPetFubenConfig[index], index,  petComponentC.GetFubenStar(self.ShowPetFubenConfig[index].Id), locked).Coroutine();
             scrollItemNPetChallengeItem.SetAction(self.OnClickChallengeItem);
         }
         
         public static void OnClickChallengeItem(this ES_PetChallenge self, int petfubenId)
         {
+            Log.Debug("ES_PetChallenge.OnClickChallengeItem");
             // self.PetFubenId = petfubenId;
             // for (int i = 0; i < self.ChallengeItemList.Count; i++)
             // {
@@ -47,17 +53,16 @@ namespace ET.Client
         
         public static void OnInitUI(this ES_PetChallenge self)
         {
+            Log.Debug("ES_PetChallenge.OnInitUI");
             self.ShowPetFubenConfig.Clear();
-            
             List<PetFubenConfig> petFubenConfigs = PetFubenConfigCategory.Instance.GetAll().Values.ToList();
-            
             for (int i = 0; i < petFubenConfigs.Count; i++)
             {
                 self.ShowPetFubenConfig.Add( petFubenConfigs[i] );
             }
 
-            self.AddUIScrollItems(ref self.ScrollItemPetChallengeItems, self.ShowPetFubenConfig.Count);
-            self.E_PetChallengeItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPetFubenConfig.Count);
+            self.AddUIScrollItems(ref self.ScrollItemPetChallengeItems, petFubenConfigs.Count);
+            self.E_PetChallengeItemsLoopVerticalScrollRect.SetVisible(true, petFubenConfigs.Count);
         }
     }
 

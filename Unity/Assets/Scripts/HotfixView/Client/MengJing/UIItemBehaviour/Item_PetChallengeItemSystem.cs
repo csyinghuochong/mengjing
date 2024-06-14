@@ -20,15 +20,31 @@ namespace ET.Client
         {
             self.DestroyWidget();
         }
-
-        public static void OnInitUI(this Scroll_Item_PetChallengeItem self, PetFubenConfig activityConfig)
-        {
-            
-            
-        }
         
         public static void SetAction(this Scroll_Item_PetChallengeItem self, Action<int> action)
         {
+        }
+        
+        public static async ETTask OnUpdateUI(this Scroll_Item_PetChallengeItem self, PetFubenConfig petfubenConf, int index, int star, bool locked)
+        {
+            self.PetFubenId = petfubenConf.Id;
+            self.E_Node_1.transform.localPosition = new Vector3( index % 2 == 0 ? -105f : -280f, 30f, 0f );
+            self.E_ImageLine_1.gameObject.SetActive(index % 2 == 0);
+            self.E_ImageLine_2.gameObject.SetActive(index % 2 != 0);
+            self.E_TextLevel.text = petfubenConf.Name;
+            self.E_TextCombat.text = $"建议最低队伍等级： {petfubenConf.Lv}级";
+            self.E_Node_2.gameObject.SetActive(locked);
+            self.E_StartNode.gameObject.SetActive(!locked);
+            self.E_Start_2.gameObject.SetActive(star >= 3);
+            self.E_Start_1.gameObject.SetActive(star >= 2);
+            self.E_Start_0.gameObject.SetActive(star >= 1);
+
+            string path =ABPathHelper.GetAtlasPath_2(ABAtlasTypes.MonsterIcon, petfubenConf.ShowIcon);
+            Sprite sp =await ResourcesComponent.Instance.LoadAssetAsync<Sprite>(path);
+            self.E_ImageIcon.sprite = sp;
+
+            UICommonHelper.SetImageGray(self.Root(), self.E_ImageDi.gameObject, locked);
+            UICommonHelper.SetImageGray(self.Root(),self.E_ImageIcon.gameObject, locked);
         }
     }
 
