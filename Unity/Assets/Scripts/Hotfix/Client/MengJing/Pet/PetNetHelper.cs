@@ -14,6 +14,20 @@ namespace ET.Client
             root.GetComponent<PetComponentC>().RequestAllPets(response);
         }
 
+        public static async ETTask<int> RequestPetMingChanChu(Scene root)
+        {
+            C2A_PetMingChanChuRequest   request = new C2A_PetMingChanChuRequest();
+            A2C_PetMingChanChuResponse respone = (A2C_PetMingChanChuResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return respone.Error;
+        }
+
+        public static async ETTask<A2C_PetMingListResponse> RequestPetMingList(Scene root)
+        {
+            C2A_PetMingListRequest request = new C2A_PetMingListRequest() { };
+            A2C_PetMingListResponse response = (A2C_PetMingListResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
         public static async ETTask<int> RequestPetFubenReward(Scene root)
         {
             C2M_PetFubenRewardRequest request = C2M_PetFubenRewardRequest.Create();

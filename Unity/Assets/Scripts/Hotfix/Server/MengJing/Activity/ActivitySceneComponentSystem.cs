@@ -164,7 +164,7 @@ namespace ET.Server
             List<MineBattleConfig> mineBattleConfig = MineBattleConfigCategory.Instance.GetAll().Values.ToList();
             for (int i = 0; i < mineBattleConfig.Count; i++)
             {
-                int totalNumber = ConfigHelper.PetMiningList()[mineBattleConfig[i].Id].Count;
+                int totalNumber = ConfigData.PetMiningList[mineBattleConfig[i].Id].Count;
 
                 int hexinNumber = 1;
 

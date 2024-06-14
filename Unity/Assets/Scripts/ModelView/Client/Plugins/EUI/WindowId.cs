@@ -97,5 +97,8 @@ namespace ET.Client
 		WindowID_RechargeReward,
 		WindowID_NewYear,
 		WindowID_PetSet,
+		WindowID_PetMiningRecord,
+		WindowID_PetMiningTeam,
+		WindowID_PetMiningReward,
 	}
 }
