@@ -40,8 +40,141 @@ namespace ET.Client
             }
         }
         
+        public Text E_TextTimes
+        {
+            get
+            {
+                if (this.uiTransform == null)
+                {
+                    Log.Error("uiTransform is null.");
+                    return null;
+                }
+                
+                if( this.m_es_TextTimes == null )
+                {
+                    this.m_es_TextTimes = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"TextTimes");
+                }
+                return this.m_es_TextTimes;
+            }
+        }
+
+        public Text E_TextStar
+        {
+            get
+            {
+                if (this.uiTransform == null)
+                {
+                    Log.Error("uiTransform is null.");
+                    return null;
+                }
+                
+                if( this.m_es_TextStar == null )
+                {
+                    this.m_es_TextStar = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"TextStar");
+                }
+                return this.m_es_TextStar;
+            }
+        }
+        
+        public EventTrigger E_ButtonReward
+        {
+            get
+            {
+                if (this.uiTransform == null)
+                {
+                    Log.Error("uiTransform is null.");
+                    return null;
+                }
+                
+                if( this.m_es_ButtonReward == null )
+                {
+                    this.m_es_ButtonReward = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"StartChestSet/ButtonReward");
+                }
+                return this.m_es_ButtonReward;
+            }
+        }
+        
+        public Button E_ButtonSet
+        {
+            get
+            {
+                if (this.uiTransform == null)
+                {
+                    Log.Error("uiTransform is null.");
+                    return null;
+                }
+                
+                if( this.m_es_ButtonSet == null )
+                {
+                    this.m_es_ButtonSet = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"ButtonSet");
+                }
+                return this.m_es_ButtonSet;
+            }
+        }
+        
+        public Button E_ButtonChallenge
+        {
+            get
+            {
+                if (this.uiTransform == null)
+                {
+                    Log.Error("uiTransform is null.");
+                    return null;
+                }
+                
+                if( this.m_es_ButtonChallenge == null )
+                {
+                    this.m_es_ButtonChallenge = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"ButtonChallenge");
+                }
+                return this.m_es_ButtonChallenge;
+            }
+        }
+        
+        public Transform E_FormationNode
+        {
+            get
+            {
+                if (this.uiTransform == null)
+                {
+                    Log.Error("uiTransform is null.");
+                    return null;
+                }
+                
+                if( this.m_es_FormationNode == null )
+                {
+                    this.m_es_FormationNode = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"FormationNode");
+                }
+                return this.m_es_FormationNode;
+            }
+        }
+        
+        public ES_PetFormationSet ES_PetFormationSet
+        {
+            get
+            {
+                if (this.uiTransform == null)
+                {
+                    Log.Error("uiTransform is null.");
+                    return null;
+                }
+                if( this.m_es_petformationset == null )
+                {
+                    Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"FormationNode/ES_PetFormationSet");
+                    this.m_es_petformationset = this.AddChild<ES_PetFormationSet,Transform>(subTrans);
+                }
+                return this.m_es_petformationset;
+            }
+        }
+        
         public void DestroyWidget()
         {
+            this.m_es_TextTimes = null;
+            this.m_es_TextStar = null;
+            this.m_es_ButtonReward = null;
+            this.m_es_ButtonSet = null;
+            this.m_es_ButtonChallenge = null;
+            this.m_es_FormationNode = null;
+            this.m_es_petformationset = null;
             this.m_E_PetChallengeItemsLoopVerticalScrollRect = null;
             this.uiTransform = null;
         }
@@ -49,12 +182,10 @@ namespace ET.Client
         private Text m_es_TextTimes;
         private Text m_es_TextStar;
         private EventTrigger m_es_ButtonReward;
-        private ScrollRect m_es_ScrollRect;
-        private RectTransform m_es_ChallengeListNode;
         private Button m_es_ButtonSet;
         private Button m_es_ButtonChallenge;
         private Transform m_es_FormationNode;
-        public EntityRef<ES_PetFormationSet> m_E_PetFormationSet = null;
+        private EntityRef<ES_PetFormationSet> m_es_petformationset = null;
 
         public List<PetFubenConfig> ShowPetFubenConfig = new List<PetFubenConfig>();
         public Dictionary<int, Scroll_Item_PetChallengeItem> ScrollItemPetChallengeItems = new Dictionary<int, Scroll_Item_PetChallengeItem>();

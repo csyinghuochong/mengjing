@@ -14,6 +14,13 @@ namespace ET.Client
             root.GetComponent<PetComponentC>().RequestAllPets(response);
         }
 
+        public static async ETTask<int> RequestPetFubenReward(Scene root)
+        {
+            C2M_PetFubenRewardRequest request = C2M_PetFubenRewardRequest.Create();
+            M2C_PetFubenRewardResponse response = (M2C_PetFubenRewardResponse) await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+        
         public static async ETTask<int> RequestPetSet(Scene root, int sceneType, List<long> petList, List<long> positionList)
         {
             C2M_RolePetFormationSet c2M_RolePetFormationSet = new C2M_RolePetFormationSet()
