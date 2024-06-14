@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -45,8 +46,18 @@ namespace ET.Client
             this.uiTransform = null;
         }
 
+        private Text m_es_TextTimes;
+        private Text m_es_TextStar;
+        private EventTrigger m_es_ButtonReward;
+        private ScrollRect m_es_ScrollRect;
+        private RectTransform m_es_ChallengeListNode;
+        private Button m_es_ButtonSet;
+        private Button m_es_ButtonChallenge;
+        private Transform m_es_FormationNode;
+        public EntityRef<ES_PetFormationSet> m_E_PetFormationSet = null;
+
         public List<PetFubenConfig> ShowPetFubenConfig = new List<PetFubenConfig>();
-        public Dictionary<int, Scroll_Item_PetChallengeItem> ScrollItemPetChallengeItems;
+        public Dictionary<int, Scroll_Item_PetChallengeItem> ScrollItemPetChallengeItems = new Dictionary<int, Scroll_Item_PetChallengeItem>();
         private UnityEngine.UI.LoopVerticalScrollRect m_E_PetChallengeItemsLoopVerticalScrollRect = null;
         public Transform uiTransform = null;
         

@@ -28,7 +28,12 @@ namespace ET.Client
         }
 
         public static void SetSelected(this Scroll_Item_PetChallengeItem self, int petfubenId)
-        { 
+        {
+            if (self.uiTransform == null)
+            {
+                Log.Debug($"self.uiTransform == null:   {self.PetFubenId}");
+            }
+
             self.E_ImageSelect.gameObject.SetActive(self.PetFubenId == petfubenId);
         }
 
