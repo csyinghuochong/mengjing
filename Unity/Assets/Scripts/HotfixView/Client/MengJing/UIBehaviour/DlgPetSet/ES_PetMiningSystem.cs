@@ -262,7 +262,7 @@ namespace ET.Client
                 self.PetMiningItemList[i].uiTransform.gameObject.SetActive(false);
             }
 
-            List<string> baginfs = new List<string>() { "Back_22", "Back_23", "Back_24" };
+            List<string> baginfs = new List<string>() { "Back_22", "Back_22", "Back_22" };
             var path = ABPathHelper.GetJpgPath(baginfs[page]);
             Sprite atlas =  self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_ImageMineDi.sprite = atlas;

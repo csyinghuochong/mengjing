@@ -85,7 +85,7 @@ namespace ET.Client
                 }
                 if( this.m_es_ImageMineDi == null )
                 {
-                    this.m_es_ImageMineDi = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"m_es_ImageMineDi");
+                    this.m_es_ImageMineDi = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"ImageMineDi");
                 }
                 return this.m_es_ImageMineDi;
             }
