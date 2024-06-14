@@ -13,7 +13,7 @@ namespace ET.Client
         [EntitySystem]
         private static void Awake(this ET.Client.Scroll_Item_PetChallengeItem self)
         {
-            self.uiTransform.GetComponent<Button>().AddListener(self.OnClickChallengeItem);
+           
         }
         
         [EntitySystem]
@@ -45,6 +45,9 @@ namespace ET.Client
         
         public static async ETTask OnUpdateUI(this Scroll_Item_PetChallengeItem self, PetFubenConfig petfubenConf, int index, int star, bool locked)
         {
+            Button button = self.uiTransform.GetComponent<Button>();
+            button.AddListener(self.OnClickChallengeItem);
+            
             self.PetFubenId = petfubenConf.Id;
             self.E_Node_1.transform.localPosition = new Vector3( index % 2 == 0 ? -105f : -280f, 30f, 0f );
             self.E_ImageLine_1.gameObject.SetActive(index % 2 == 0);

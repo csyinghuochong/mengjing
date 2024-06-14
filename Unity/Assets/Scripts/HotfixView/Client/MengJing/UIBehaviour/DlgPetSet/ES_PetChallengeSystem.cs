@@ -43,13 +43,12 @@ namespace ET.Client
         
         public static void OnClickChallengeItem(this ES_PetChallenge self, int petfubenId)
         {
-            self.PetFubenId = petfubenId;
             Log.Debug($"ES_PetChallenge.OnClickChallengeItem:{petfubenId}");
-            // self.PetFubenId = petfubenId;
-            // for (int i = 0; i < self.ChallengeItemList.Count; i++)
-            // {
-            //     self.ChallengeItemList[i].SetSelected(petfubenId);
-            // }
+            self.PetFubenId = petfubenId;
+            foreach (var item in self.ScrollItemPetChallengeItems)
+            {
+                item.Value.SetSelected(petfubenId);
+            }
         }
         
         public static void OnInitUI(this ES_PetChallenge self)
