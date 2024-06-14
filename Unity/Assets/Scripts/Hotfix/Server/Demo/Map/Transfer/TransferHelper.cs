@@ -593,6 +593,13 @@ namespace ET.Server
 
         public static void AfterTransfer(Unit unit, int sceneType)
         {
+            if (sceneType == SceneTypeEnum.PetDungeon
+                || sceneType == SceneTypeEnum.PetTianTi
+                || sceneType == SceneTypeEnum.PetMing)
+            {
+             return;   
+            }
+
             RolePetInfo fightId = unit.GetComponent<PetComponentS>().GetFightPet();
             if (fightId != null)
             {

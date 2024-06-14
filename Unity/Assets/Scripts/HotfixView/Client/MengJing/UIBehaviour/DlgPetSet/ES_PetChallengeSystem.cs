@@ -122,6 +122,11 @@ namespace ET.Client
             bool locked = false;
             foreach (var item in self.ScrollItemPetChallengeItems)
             {
+                if (item.Value.uiTransform == null)
+                {
+                    continue;
+                }
+
                 if (item.Value.PetFubenId == self.PetFubenId)
                 {
                     locked = item.Value.E_Node_2.gameObject.activeSelf;
