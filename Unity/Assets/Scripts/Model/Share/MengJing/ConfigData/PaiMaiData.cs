@@ -1,32 +1,33 @@
-namespace ET;
-
-using System.Linq;
-using System.Collections.Generic;
-
-//成就类型数据
-public class PaiMaiTypeData
+namespace ET
 {
-    //每个章节对应的拍卖道具
-    public Dictionary<int, List<int>> PaiMaiIDItemList = new Dictionary<int, List<int>>();
-}
 
-public enum PaiMaiTypeEnum: int
-{
-    None = 0,
-    CaiLiao = 1,
-    CostItem = 2,
-    PetItem = 3,
-    Number = 4,
-}
+    using System.Linq;
+    using System.Collections.Generic;
 
-public static class PaiMaiData
-{
-    
-    [StaticField]
-    public static List<string> PaiMaiTypeText = new List<string>() { "", "材料", "消耗品", "宠物" };
+    //成就类型数据
+    public class PaiMaiTypeData
+    {
+        //每个章节对应的拍卖道具
+        public Dictionary<int, List<int>> PaiMaiIDItemList = new Dictionary<int, List<int>>();
+    }
 
-    [StaticField]
-    public static Dictionary<int, string> PaiMaiIndexText = new Dictionary<int, string>()
+    public enum PaiMaiTypeEnum : int
+    {
+        None = 0,
+        CaiLiao = 1,
+        CostItem = 2,
+        PetItem = 3,
+        Number = 4,
+    }
+
+    public static class PaiMaiData
+    {
+
+        [StaticField]
+        public static List<string> PaiMaiTypeText = new List<string>() { "", "材料", "消耗品", "宠物" };
+
+        [StaticField]
+        public static Dictionary<int, string> PaiMaiIndexText = new Dictionary<int, string>()
     {
         { 1, "第一章" },
         { 2, "第二章" },
@@ -46,48 +47,49 @@ public static class PaiMaiData
         {36,  "抗性宝石" },
         */
     };
-    
-    [StaticField]
-    public static Dictionary<int, List<int>> PaiMaiIDItemList = new Dictionary<int, List<int>>();
 
-    [StaticField]
-    private static List<PaiMaiTypeData> paiMaiTypeData;
-    
+        [StaticField]
+        public static Dictionary<int, List<int>> PaiMaiIDItemList = new Dictionary<int, List<int>>();
 
-    [StaticField]
-    public static List<PaiMaiTypeData> PaiMaiTypeData
-    {
-        get
+        [StaticField]
+        private static List<PaiMaiTypeData> paiMaiTypeData;
+
+
+        [StaticField]
+        public static List<PaiMaiTypeData> PaiMaiTypeData
         {
-            if (paiMaiTypeData == null)
+            get
             {
-                paiMaiTypeData = new();
-                for (int i = 0; i < (int)PaiMaiTypeEnum.Number + 1; i++)
+                if (paiMaiTypeData == null)
                 {
-                    paiMaiTypeData.Add(new PaiMaiTypeData());
-                }
-
-                Dictionary<int, PaiMaiSellConfig> allPaiMaiData = PaiMaiSellConfigCategory.Instance.GetAll();
-                foreach (var item in allPaiMaiData)
-                {
-                    PaiMaiSellConfig paiMaiSellConfig = item.Value;
-                    int paiMaiType = paiMaiSellConfig.PaiMaiType;
-                    int chapterId = paiMaiSellConfig.ChapterId;
-                    PaiMaiTypeData paiMaiTypeDatas = paiMaiTypeData[paiMaiType];
-                    if (!paiMaiTypeDatas.PaiMaiIDItemList.ContainsKey(chapterId))
+                    paiMaiTypeData = new();
+                    for (int i = 0; i < (int)PaiMaiTypeEnum.Number + 1; i++)
                     {
-                        paiMaiTypeDatas.PaiMaiIDItemList.Add(chapterId, new List<int>());
+                        paiMaiTypeData.Add(new PaiMaiTypeData());
                     }
 
-                    paiMaiTypeDatas.PaiMaiIDItemList[chapterId].Add(item.Key);
-                }
-            }
+                    Dictionary<int, PaiMaiSellConfig> allPaiMaiData = PaiMaiSellConfigCategory.Instance.GetAll();
+                    foreach (var item in allPaiMaiData)
+                    {
+                        PaiMaiSellConfig paiMaiSellConfig = item.Value;
+                        int paiMaiType = paiMaiSellConfig.PaiMaiType;
+                        int chapterId = paiMaiSellConfig.ChapterId;
+                        PaiMaiTypeData paiMaiTypeDatas = paiMaiTypeData[paiMaiType];
+                        if (!paiMaiTypeDatas.PaiMaiIDItemList.ContainsKey(chapterId))
+                        {
+                            paiMaiTypeDatas.PaiMaiIDItemList.Add(chapterId, new List<int>());
+                        }
 
-            return paiMaiTypeData;
-        }
-        set
-        {
-            paiMaiTypeData = value;
+                        paiMaiTypeDatas.PaiMaiIDItemList[chapterId].Add(item.Key);
+                    }
+                }
+
+                return paiMaiTypeData;
+            }
+            set
+            {
+                paiMaiTypeData = value;
+            }
         }
     }
 }

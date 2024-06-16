@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿namespace ET.Client
 
-namespace ET.Client;
-
-public class ChengJiuData
 {
-    [StaticField]
-    public static List<string> ChengJiuTypeText = new() { "", "关卡成就", "探索成就", "收集成就" };
 
-    [StaticField]
-    public static Dictionary<int, string> ChapterIndexText = new()
+    using System.Collections.Generic;
+    public class ChengJiuData
+    {
+        [StaticField]
+        public static List<string> ChengJiuTypeText = new() { "", "关卡成就", "探索成就", "收集成就" };
+
+        [StaticField]
+        public static Dictionary<int, string> ChapterIndexText = new()
     {
         { 0, "通用" },
         { 1, "第一章" },
@@ -21,4 +22,5 @@ public class ChengJiuData
         { 12, "积累成就" },
         { 21, "宠物成就" },
     };
+    }
 }
