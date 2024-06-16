@@ -103,6 +103,7 @@ namespace ET.Client
         public static async ETTask RequestCreateRole(Scene root, long accountId, int occ, string name)
         {
             Log.Debug("C2A_CreateRoleData.client0");
+            
             C2A_CreateRoleData c2ACreateRoleData = new C2A_CreateRoleData() { AccountId = accountId, CreateOcc = occ, CreateName = name };
             A2C_CreateRoleData a2CCreateRoleData = await root.GetComponent<ClientSenderCompnent>().Call(c2ACreateRoleData) as A2C_CreateRoleData;
             root.GetComponent<PlayerComponent>().CreateRoleList.Add(a2CCreateRoleData.createRoleInfo);
