@@ -28,7 +28,21 @@ namespace ET.Client
         }
         
         
+        private GameObject TextChanChu;
+        private GameObject ImHeXinShow;
+        private GameObject PetList;
+        private GameObject GameObject;
+        private GameObject TextMine;
+        private GameObject ImageIcon;
+        private GameObject TextPlayer;
+        private Image[] PetIconList = new Image[5];
+        private GameObject[] PetDiList = new GameObject[5];
+
+        public PetMingPlayerInfo PetMingPlayerInfo;
         public Transform uiTransform = null;
+        
+        public int MineType;
+        public int Position;
     }
     
     

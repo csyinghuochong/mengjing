@@ -61,6 +61,7 @@ namespace ET
         public void Awake()
         {
             YooAssets.Initialize();
+            //YooAssets.SetOperationSystemMaxTimeSlice(30);
             BetterStreamingAssets.Initialize();
         }
 
