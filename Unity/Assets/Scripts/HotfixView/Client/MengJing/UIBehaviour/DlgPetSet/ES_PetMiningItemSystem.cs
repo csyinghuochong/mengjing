@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using ET.Server;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -22,20 +24,20 @@ namespace ET.Client
         {
             self.MineType = mingType;
             self.Position = index;
-            self.ImHeXinShow.SetActive(hexin);
+            self.E_ImageIcon.gameObject.SetActive(hexin);
             MineBattleConfig mineBattleConfig = MineBattleConfigCategory.Instance.Get(mingType);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, mineBattleConfig.Icon);
-            Sprite sp = ResourcesComponent.Instance.LoadAsset<Sprite>(path);
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             
-            self.ImageIcon.GetComponent<Image>().sprite = sp;
+            self.E_ImageIcon.sprite = sp;
             
-            self.TextMine.GetComponent<Text>().text = mineBattleConfig.Name + (hexin? "(核心矿)" : string.Empty);
+            self.E_TextMine.text = mineBattleConfig.Name + (hexin? "(核心矿)" : string.Empty);
             
-            int zone = self.ZoneScene().GetComponent<AccountInfoComponent>().ServerId;
+            int zone = self.Root().GetComponent<PlayerComponent>().ServerId;
             int openDay = ServerHelper.GetOpenServerDay(false, zone);
             float coffi = ComHelp.GetMineCoefficient(openDay, mingType, index, petMineExtend);
             int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi);
-            self.TextChanChu.GetComponent<Text>().text = $"{chanchu}/小时";
+            self.E_TextChanChu.text = $"{chanchu}/小时";
         }
 
         /// <summary>
@@ -57,37 +59,33 @@ namespace ET.Client
                 playerName = "拥有者：" + petMingPlayerInfo.PlayerName;
                 confids = petMingPlayerInfo.PetConfig;
             
-                for (int i = 0; i < self.PetIconList.Length; i++)
+                for (int i = 0; i < self.E_PetIconList.Length; i++)
                 {
                     if (confids[i] == 0)
                     {
-                        self.PetIconList[i].gameObject.SetActive(false);
+                        self.E_PetIconList[i].gameObject.SetActive(false);
                     }
                     else
                     {
-                        self.PetIconList[i].gameObject.SetActive(true);
+                        self.E_PetIconList[i].gameObject.SetActive(true);
                         PetConfig petConfig = PetConfigCategory.Instance.Get(confids[i]);
                         string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petConfig.HeadIcon);
-                        Sprite sp = ResourcesComponent.Instance.LoadAsset<Sprite>(path);
-                        if (!self.AssetPath.Contains(path))
-                        {
-                            self.AssetPath.Add(path);
-                        }
-            
-                        self.PetIconList[i].sprite = sp;
+                        Sprite sp =  self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                     
+                        self.E_PetIconList[i].sprite = sp;
                     }
                 }
             }
             else
             {
                 playerName = "占领者：无";
-                for (int i = 0; i < self.PetIconList.Length; i++)
+                for (int i = 0; i < self.E_PetIconList.Length; i++)
                 {
-                    self.PetIconList[i].gameObject.SetActive(false);
+                    self.E_PetIconList[i].gameObject.SetActive(false);
                 }
             }
             
-            self.TextPlayer.GetComponent<Text>().text = playerName;
+            self.E_TextPlayer.text = playerName;
         }
     }
 }
