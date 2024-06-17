@@ -58,6 +58,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.LoopVerticalScrollRect E_SeasonDayTaskItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SeasonDayTaskItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_SeasonDayTaskItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_SeasonDayTaskItems");
+     			}
+     			return this.m_E_SeasonDayTaskItemsLoopVerticalScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopVerticalScrollRect E_SeasonTaskItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SeasonTaskItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_SeasonTaskItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_SeasonTaskItems");
+     			}
+     			return this.m_E_SeasonTaskItemsLoopVerticalScrollRect;
+     		}
+     	}
+
 		public UnityEngine.UI.Text E_TaskNameTextText
      	{
      		get
@@ -229,6 +263,8 @@ namespace ET.Client
 			this.m_E_ItemTypeSetToggleGroup = null;
 			this.m_E_ItemTypeAllSetToggle = null;
 			this.m_E_ItemTypeEquipSetToggle = null;
+			this.m_E_SeasonDayTaskItemsLoopVerticalScrollRect = null;
+			this.m_E_SeasonTaskItemsLoopVerticalScrollRect = null;
 			this.m_E_TaskNameTextText = null;
 			this.m_E_ProgressTextText = null;
 			this.m_E_TaskDescTextText = null;
@@ -244,6 +280,8 @@ namespace ET.Client
 		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_ItemTypeAllSetToggle = null;
 		private UnityEngine.UI.Toggle m_E_ItemTypeEquipSetToggle = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_SeasonDayTaskItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_SeasonTaskItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Text m_E_TaskNameTextText = null;
 		private UnityEngine.UI.Text m_E_ProgressTextText = null;
 		private UnityEngine.UI.Text m_E_TaskDescTextText = null;

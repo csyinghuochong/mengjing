@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_SeasonHome))]
+    [FriendOf(typeof (ES_SeasonTask))]
     [FriendOf(typeof (DlgSeason))]
     public static class DlgSeasonSystem
     {
@@ -35,6 +36,7 @@ namespace ET.Client
                     self.View.ES_SeasonHome.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
+                    self.View.ES_SeasonTask.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
                     break;
