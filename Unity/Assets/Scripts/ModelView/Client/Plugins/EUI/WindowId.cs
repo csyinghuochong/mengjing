@@ -103,5 +103,6 @@ namespace ET.Client
 		WindowID_ZhanQu,
 		WindowID_FirstWinReward,
 		WindowID_HongBao,
+		WindowID_PaiMaiAuction,
 	}
 }

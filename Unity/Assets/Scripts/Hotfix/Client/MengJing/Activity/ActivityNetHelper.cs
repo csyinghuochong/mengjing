@@ -132,5 +132,26 @@ namespace ET.Client
             A2C_FirstWinInfoResponse response = (A2C_FirstWinInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<int> PaiMaiAuctionPrice(Scene root, long price)
+        {
+            C2M_PaiMaiAuctionPriceRequest request = new() { Price = price };
+            M2C_PaiMaiAuctionPriceResponse response = (M2C_PaiMaiAuctionPriceResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
+        public static async ETTask<int> PaiMaiAuctionJoin(Scene root)
+        {
+            C2M_PaiMaiAuctionJoinRequest request = new();
+            M2C_PaiMaiAuctionJoinResponse response = (M2C_PaiMaiAuctionJoinResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
+        public static async ETTask<P2C_PaiMaiAuctionInfoResponse> PaiMaiAuctionInfo(Scene root, long unitId)
+        {
+            C2P_PaiMaiAuctionInfoRequest request = new() { UnitId = unitId };
+            P2C_PaiMaiAuctionInfoResponse response = (P2C_PaiMaiAuctionInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

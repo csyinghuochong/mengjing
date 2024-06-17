@@ -137,7 +137,7 @@ namespace ET.Client
             // self.View.E_Button_SeasonButton.AddListener();
 
             // self.View.E_Button_ActivityV1Button.AddListener();
-            // self.View.E_Btn_AuctionButton.AddListener();
+            self.View.E_Btn_AuctionButton.AddListener(self.OnButton_PaiMaiAuction);
             self.View.E_Button_HongBaoButton.AddListener(self.OnButton_HongBao);
             self.View.E_Button_ZhanQuButton.AddListener(self.OnButton_ZhanQu);
             self.View.E_Button_NewYearButton.AddListener(self.OnButton_NewYear);
@@ -553,6 +553,11 @@ namespace ET.Client
             self.View.EG_Btn_TopRight_3RectTransform.gameObject.SetActive(!active);
 
             self.View.E_Button_ZhanKaiButton.transform.localScale = active? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
+        }
+
+        private static void OnButton_PaiMaiAuction(this DlgMain self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PaiMaiAuction).Coroutine();
         }
 
         private static void OnButton_HongBao(this DlgMain self)
