@@ -33,7 +33,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolexilianshow .Equals(null) )
+     			if( this.m_es_rolexilianshow ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleXiLianShow");
 		    	   this.m_es_rolexilianshow = this.AddChild<ES_RoleXiLianShow,Transform>(subTrans);
@@ -51,7 +51,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolexilianlevel .Equals(null) )
+     			if( this.m_es_rolexilianlevel ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleXiLianLevel");
 		    	   this.m_es_rolexilianlevel = this.AddChild<ES_RoleXiLianLevel,Transform>(subTrans);
@@ -69,7 +69,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolexilianskill .Equals(null) )
+     			if( this.m_es_rolexilianskill ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleXiLianSkill");
 		    	   this.m_es_rolexilianskill = this.AddChild<ES_RoleXiLianSkill,Transform>(subTrans);
@@ -87,7 +87,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolexiliantransfer .Equals(null)  )
+     			if( this.m_es_rolexiliantransfer ==null  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleXiLianTransfer");
 		    	   this.m_es_rolexiliantransfer = this.AddChild<ES_RoleXiLianTransfer,Transform>(subTrans);
@@ -105,7 +105,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolexilianinherit.Equals(null) )
+     			if( this.m_es_rolexilianinherit==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleXiLianInherit");
 		    	   this.m_es_rolexilianinherit = this.AddChild<ES_RoleXiLianInherit,Transform>(subTrans);

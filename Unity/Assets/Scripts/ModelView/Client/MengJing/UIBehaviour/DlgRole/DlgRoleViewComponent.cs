@@ -16,7 +16,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipset.Equals(null) )
+     			if( this.m_es_equipset==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_EquipSet");
 		    	   this.m_es_equipset = this.AddChild<ES_EquipSet,Transform>(subTrans);
@@ -187,7 +187,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolebag.Equals(null) )
+     			if( this.m_es_rolebag==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleBag");
 		    	   this.m_es_rolebag = this.AddChild<ES_RoleBag,Transform>(subTrans);
@@ -205,7 +205,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_roleproperty .Equals(null)  )
+     			if( this.m_es_roleproperty ==null  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleProperty");
 		    	   this.m_es_roleproperty = this.AddChild<ES_RoleProperty,Transform>(subTrans);
@@ -223,7 +223,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolegem .Equals(null)  )
+     			if( this.m_es_rolegem ==null  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleGem");
 		    	   this.m_es_rolegem = this.AddChild<ES_RoleGem,Transform>(subTrans);
@@ -241,7 +241,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolehuishou .Equals(null))
+     			if( this.m_es_rolehuishou ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleHuiShou");
 		    	   this.m_es_rolehuishou = this.AddChild<ES_RoleHuiShou,Transform>(subTrans);
@@ -259,7 +259,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_roleqianghua .Equals(null)  )
+     			if( this.m_es_roleqianghua ==null  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RoleQiangHua");
 		    	   this.m_es_roleqianghua = this.AddChild<ES_RoleQiangHua,Transform>(subTrans);

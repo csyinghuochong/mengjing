@@ -33,7 +33,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_settinggame .Equals(null)  )
+     			if( this.m_es_settinggame ==null  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_SettingGame");
 		    	   this.m_es_settinggame = this.AddChild<ES_SettingGame,Transform>(subTrans);
@@ -51,7 +51,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_settingtitle .Equals(null))
+     			if( this.m_es_settingtitle ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_SettingTitle");
 		    	   this.m_es_settingtitle = this.AddChild<ES_SettingTitle,Transform>(subTrans);
@@ -69,7 +69,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_settingguaji .Equals(null))
+     			if( this.m_es_settingguaji ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_SettingGuaJi");
 		    	   this.m_es_settingguaji = this.AddChild<ES_SettingGuaJi,Transform>(subTrans);
@@ -87,7 +87,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_fashionshow.Equals(null)  )
+     			if( this.m_es_fashionshow==null  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_FashionShow");
 		    	   this.m_es_fashionshow = this.AddChild<ES_FashionShow,Transform>(subTrans);

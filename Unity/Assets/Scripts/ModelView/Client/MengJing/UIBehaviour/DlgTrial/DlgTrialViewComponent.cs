@@ -33,7 +33,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_trialdungeon .Equals(null) )
+     			if( this.m_es_trialdungeon ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_TrialDungeon");
 		    	   this.m_es_trialdungeon = this.AddChild<ES_TrialDungeon,Transform>(subTrans);
@@ -51,7 +51,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_trialrank.Equals(null) )
+     			if( this.m_es_trialrank==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_TrialRank");
 		    	   this.m_es_trialrank = this.AddChild<ES_TrialRank,Transform>(subTrans);

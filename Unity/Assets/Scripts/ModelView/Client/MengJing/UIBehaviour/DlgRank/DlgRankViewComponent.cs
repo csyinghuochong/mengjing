@@ -33,7 +33,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rankshow .Equals(null)  )
+     			if( this.m_es_rankshow ==null  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RankShow");
 		    	   this.m_es_rankshow = this.AddChild<ES_RankShow,Transform>(subTrans);
@@ -51,7 +51,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rankpet .Equals(null))
+     			if( this.m_es_rankpet ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RankPet");
 		    	   this.m_es_rankpet = this.AddChild<ES_RankPet,Transform>(subTrans);
@@ -69,7 +69,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rankreward .Equals(null) )
+     			if( this.m_es_rankreward ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RankReward");
 		    	   this.m_es_rankreward = this.AddChild<ES_RankReward,Transform>(subTrans);
@@ -87,7 +87,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rankpetreward.Equals(null) )
+     			if( this.m_es_rankpetreward==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RankPetReward");
 		    	   this.m_es_rankpetreward = this.AddChild<ES_RankPetReward,Transform>(subTrans);

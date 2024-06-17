@@ -33,7 +33,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_petegglist.Equals(null))
+     			if( this.m_es_petegglist==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetEggList");
 		    	   this.m_es_petegglist = this.AddChild<ES_PetEggList,Transform>(subTrans);
@@ -51,7 +51,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_peteggduihuan .Equals(null))
+     			if( this.m_es_peteggduihuan ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetEggDuiHuan");
 		    	   this.m_es_peteggduihuan = this.AddChild<ES_PetEggDuiHuan,Transform>(subTrans);
@@ -69,7 +69,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_peteggchouka .Equals(null))
+     			if( this.m_es_peteggchouka ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetEggChouKa");
 		    	   this.m_es_peteggchouka = this.AddChild<ES_PetEggChouKa,Transform>(subTrans);
@@ -87,7 +87,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_pethexinchouka .Equals(null) )
+     			if( this.m_es_pethexinchouka ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetHeXinChouKa");
 		    	   this.m_es_pethexinchouka = this.AddChild<ES_PetHeXinChouKa,Transform>(subTrans);

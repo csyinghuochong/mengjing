@@ -33,7 +33,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_shoujilist .Equals(null)  )
+     			if( this.m_es_shoujilist ==null  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ShouJiList");
 		    	   this.m_es_shoujilist = this.AddChild<ES_ShouJiList,Transform>(subTrans);
@@ -51,7 +51,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_shoujitreasure .Equals(null)  )
+     			if( this.m_es_shoujitreasure ==null  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ShouJiTreasure");
 		    	   this.m_es_shoujitreasure = this.AddChild<ES_ShouJiTreasure,Transform>(subTrans);

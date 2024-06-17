@@ -33,7 +33,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_activitylogin.Equals(null)  )
+     			if( this.m_es_activitylogin==null  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ActivityLogin");
 		    	   this.m_es_activitylogin = this.AddChild<ES_ActivityLogin,Transform>(subTrans);
@@ -51,7 +51,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_welfaretask .Equals(null) )
+     			if( this.m_es_welfaretask ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WelfareTask");
 		    	   this.m_es_welfaretask = this.AddChild<ES_WelfareTask,Transform>(subTrans);
@@ -69,7 +69,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_welfaredraw .Equals(null) )
+     			if( this.m_es_welfaredraw ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WelfareDraw");
 		    	   this.m_es_welfaredraw = this.AddChild<ES_WelfareDraw,Transform>(subTrans);
@@ -87,7 +87,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_welfareinvest .Equals(null)  )
+     			if( this.m_es_welfareinvest ==null  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WelfareInvest");
 		    	   this.m_es_welfareinvest = this.AddChild<ES_WelfareInvest,Transform>(subTrans);
@@ -105,7 +105,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_welfaredraw2 .Equals(null))
+     			if( this.m_es_welfaredraw2 ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WelfareDraw2");
 		    	   this.m_es_welfaredraw2 = this.AddChild<ES_WelfareDraw2,Transform>(subTrans);
