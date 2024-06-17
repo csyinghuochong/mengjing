@@ -66,8 +66,10 @@ namespace ET.Client
                 {
                     if (item.uiTransform == null)
                     {
-                        item.OnUpdateUI();
+                        continue;
                     }
+
+                    item.OnUpdateUI();
                 }
             }
         }

@@ -24,6 +24,13 @@ namespace ET.Client
         {
             self.E_ButtonDuiHuanButton.AddListenerAsync(self.OnButtonDuiHuan);
 
+            UICommonHelper.DestoryChild(self.EG_WordListRectTransform.gameObject);
+            for (int i = self.WordItems.Count - 1; i >= 0; i--)
+            {
+                self.WordItems[i].Dispose();
+                self.WordItems.RemoveAt(i);
+            }
+
             self.ActivityConfig = activityConfig;
             string[] wordItems = activityConfig.Par_2.Split('@');
             var path = ABPathHelper.GetUGUIPath("Item/Item_CommonItem");
