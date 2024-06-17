@@ -105,5 +105,6 @@ namespace ET.Client
 		WindowID_HongBao,
 		WindowID_PaiMaiAuction,
 		WindowID_AuctionRecord,
+		WindowID_Season,
 	}
 }

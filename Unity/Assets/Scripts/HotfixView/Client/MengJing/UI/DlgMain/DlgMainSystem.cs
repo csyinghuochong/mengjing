@@ -134,7 +134,7 @@ namespace ET.Client
             // self.View.E_Button_EnergyButton.AddListener();
             // self.View.E_Button_FashionButton.AddListener();
             // self.View.E_Button_DemonButton.AddListener();
-            // self.View.E_Button_SeasonButton.AddListener();
+            self.View.E_Button_SeasonButton.AddListener(self.OnButton_Season);
 
             // self.View.E_Button_ActivityV1Button.AddListener();
             self.View.E_Btn_AuctionButton.AddListener(self.OnButton_PaiMaiAuction);
@@ -553,6 +553,11 @@ namespace ET.Client
             self.View.EG_Btn_TopRight_3RectTransform.gameObject.SetActive(!active);
 
             self.View.E_Button_ZhanKaiButton.transform.localScale = active? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
+        }
+
+        private static void OnButton_Season(this DlgMain self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Season).Coroutine();
         }
 
         private static void OnButton_PaiMaiAuction(this DlgMain self)
