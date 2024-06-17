@@ -36,6 +36,8 @@ namespace ET.Client
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);
             
+            Log.Debug("LoginAsync");
+            
             NetClient2Main_Login response = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, new Main2NetClient_Login()
             {
                 OwnerFiberId = self.Fiber().Id, Account = account, Password = password

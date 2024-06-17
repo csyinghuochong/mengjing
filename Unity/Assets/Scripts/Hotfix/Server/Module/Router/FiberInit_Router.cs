@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 
 namespace ET.Server
 {
@@ -13,6 +14,7 @@ namespace ET.Server
             // 开发期间使用OuterIPPort，云服务器因为本机没有OuterIP，所以要改成InnerIPPort，然后在云防火墙中端口映射到InnerIPPort
             root.AddComponent<RouterComponent, IPEndPoint, string>(startSceneConfig.OuterIPPort, startSceneConfig.StartProcessConfig.InnerIP);
             Log.Console($"Router create: {root.Fiber.Id}");
+            Console.WriteLine($"Router create: {root.Fiber.Id}   {startSceneConfig.OuterIPPort}   {startSceneConfig.StartProcessConfig.InnerIP}");
             await ETTask.CompletedTask;
         }
     }

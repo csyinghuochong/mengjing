@@ -10,6 +10,9 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene root, Main2NetClient_Login request, NetClient2Main_Login response)
         {
+            Log.Debug("Main2NetClient_LoginHandler.");
+            Console.WriteLine("Main2NetClient_LoginHandler.");
+            
             string account = request.Account;
             string password = request.Password;
             

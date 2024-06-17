@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 
 namespace ET.Server
@@ -7,6 +8,7 @@ namespace ET.Server
     {
         public override async ETTask Handle(FiberInit fiberInit)
         {
+            Console.WriteLine("FiberInit_Account");
             Scene root = fiberInit.Fiber.Root;
             root.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.UnOrderedMessage);
             root.AddComponent<TimerComponent>();
