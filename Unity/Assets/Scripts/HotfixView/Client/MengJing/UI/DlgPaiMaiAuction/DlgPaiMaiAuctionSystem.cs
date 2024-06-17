@@ -31,7 +31,7 @@ namespace ET.Client
             self.View.E_Btn_CanYuButton.AddListener(self.OnBtn_CanYu);
             self.View.E_Btn_RecordButton.AddListener(() =>
             {
-                // self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_AuctionRecode).Coroutine();
+                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_AuctionRecord).Coroutine();
             });
             self.View.E_Btn_BuyNum_jian1Button.AddListener(() => { self.Btn_BuyNum_jia(-1); });
             self.View.E_Btn_BuyNum_jia1Button.AddListener(() => { self.Btn_BuyNum_jia(1); });

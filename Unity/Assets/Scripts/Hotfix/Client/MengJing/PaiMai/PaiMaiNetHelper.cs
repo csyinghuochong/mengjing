@@ -84,5 +84,13 @@ namespace ET.Client
 
             return response;
         }
+
+        public static async ETTask<P2C_PaiMaiAuctionRecordResponse> PaiMaiAuctionRecord(Scene root)
+        {
+            C2P_PaiMaiAuctionRecordRequest request = new();
+            P2C_PaiMaiAuctionRecordResponse response = (P2C_PaiMaiAuctionRecordResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response;
+        }
     }
 }
