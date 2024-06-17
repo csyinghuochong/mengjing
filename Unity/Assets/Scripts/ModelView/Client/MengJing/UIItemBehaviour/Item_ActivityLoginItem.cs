@@ -65,7 +65,7 @@ namespace ET.Client
      			}
      			else
      			{
-     				if( !this.m_es_rewardlist ==null  )
+     				if( this.m_es_rewardlist !=null  )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList");
 		    			ES_RewardList es = this.m_es_rewardlist;

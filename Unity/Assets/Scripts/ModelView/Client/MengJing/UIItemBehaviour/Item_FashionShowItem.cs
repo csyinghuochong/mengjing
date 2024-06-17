@@ -94,7 +94,7 @@ namespace ET.Client
      			}
      			else
      			{
-     				if( !this.m_es_modelshow ==null )
+     				if( this.m_es_modelshow !=null )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ModelShow");
 		    			ES_ModelShow es = this.m_es_modelshow;
@@ -135,7 +135,7 @@ namespace ET.Client
      			}
      			else
      			{
-     				if( !this.m_es_commonitem ==null)
+     				if( this.m_es_commonitem !=null)
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem");
 		    			ES_CommonItem es = this.m_es_commonitem;
