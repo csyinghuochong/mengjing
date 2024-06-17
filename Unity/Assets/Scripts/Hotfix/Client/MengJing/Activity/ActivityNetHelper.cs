@@ -81,5 +81,35 @@ namespace ET.Client
             M2C_RechargeRewardResponse response = (M2C_RechargeRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<int> ZhanQuReceive(Scene root, int activityType, int activityId)
+        {
+            if (activityType != 21 && activityType != 22)
+            {
+                return ErrorCode.ERR_Error;
+            }
+
+            C2M_ZhanQuReceiveRequest request = new() { ActivityType = activityType, ActivityId = activityId };
+            M2C_ZhanQuReceiveResponse response = (M2C_ZhanQuReceiveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            bool have = false;
+            ActivityComponentC activityComponent = root.GetComponent<ActivityComponentC>();
+            activityComponent.ZhanQuReceiveIds.Add(activityId);
+            for (int i = 0; i < activityComponent.ZhanQuReceiveNumbers.Count; i++)
+            {
+                if (activityComponent.ZhanQuReceiveNumbers[i].ActivityId == activityId)
+                {
+                    have = true;
+                    activityComponent.ZhanQuReceiveNumbers[i].ReceiveNum++;
+                }
+            }
+
+            if (!have)
+            {
+                activityComponent.ZhanQuReceiveNumbers.Add(new ZhanQuReceiveNumber() { ActivityId = activityId, ReceiveNum = 1 });
+            }
+
+            return response.Error;
+        }
     }
 }

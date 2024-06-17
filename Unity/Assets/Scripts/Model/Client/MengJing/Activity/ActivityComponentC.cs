@@ -30,5 +30,7 @@ namespace ET.Client
         public List<int> ZhanQuReceiveIds { get; set; } = new();
 
         public ActivityV1Info ActivityV1Info { get; set; } = new();
+
+        public List<ZhanQuReceiveNumber> ZhanQuReceiveNumbers { get; set; } = new();
     }
 }

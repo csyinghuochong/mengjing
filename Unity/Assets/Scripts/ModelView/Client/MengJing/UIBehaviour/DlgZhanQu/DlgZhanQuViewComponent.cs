@@ -24,6 +24,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_ZhanQuLevel ES_ZhanQuLevel
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_zhanqulevel == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ZhanQuLevel");
+		    	   this.m_es_zhanqulevel = this.AddChild<ES_ZhanQuLevel,Transform>(subTrans);
+     			}
+     			return this.m_es_zhanqulevel;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -95,6 +113,7 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
+			this.m_es_zhanqulevel = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_1Toggle = null;
 			this.m_E_2Toggle = null;
@@ -103,6 +122,7 @@ namespace ET.Client
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
+		private EntityRef<ES_ZhanQuLevel> m_es_zhanqulevel = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_1Toggle = null;
 		private UnityEngine.UI.Toggle m_E_2Toggle = null;
