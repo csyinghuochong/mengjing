@@ -102,5 +102,7 @@ namespace ET.Client
 		WindowID_PetMiningReward,
 		WindowID_ZhanQu,
 		WindowID_FirstWinReward,
+		WindowID_HongBao,
+		WindowID_PaiMaiAuction,
 	}
 }
