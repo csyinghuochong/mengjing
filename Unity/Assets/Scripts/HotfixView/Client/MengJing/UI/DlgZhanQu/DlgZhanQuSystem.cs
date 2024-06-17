@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_ZhanQuLevel))]
+    [FriendOf(typeof (ES_ZhanQuCombat))]
     [FriendOf(typeof (DlgZhanQu))]
     public static class DlgZhanQuSystem
     {
@@ -32,6 +33,7 @@ namespace ET.Client
                     self.View.ES_ZhanQuLevel.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
+                    self.View.ES_ZhanQuCombat.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }

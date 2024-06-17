@@ -17,8 +17,7 @@ namespace ET.Server
 
             List<BagInfo> storeLists = new List<BagInfo>();
             M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
-
-            // 要值传递!!!，上课教的都忘了
+            
             storeLists.AddRange(unit.GetComponent<BagComponentS>().GetItemByLoc((ItemLocType)hourseId));
 
             for (int i = 0; i < storeLists.Count; i++)
