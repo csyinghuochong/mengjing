@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_NewYearCollectionWord))]
+    [FriendOf(typeof (ES_NewYearMonster))]
     [FriendOf(typeof (DlgNewYear))]
     public static class DlgNewYearSystem
     {
@@ -33,6 +34,7 @@ namespace ET.Client
                     self.View.ES_NewYearCollectionWord.OnUpdateUI();
                     break;
                 case 1:
+                    self.View.ES_NewYearMonster.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
