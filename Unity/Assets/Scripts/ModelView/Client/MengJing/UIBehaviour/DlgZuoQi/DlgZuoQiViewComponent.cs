@@ -33,7 +33,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_zuoqishow == null )
+     			if( this.m_es_zuoqishow .Equals(null)  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ZuoQiShow");
 		    	   this.m_es_zuoqishow = this.AddChild<ES_ZuoQiShow,Transform>(subTrans);

@@ -135,7 +135,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skilllearn == null )
+     			if( this.m_es_skilllearn .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubViewNode/ES_SkillLearn");
 		    	   this.m_es_skilllearn = this.AddChild<ES_SkillLearn,Transform>(subTrans);
@@ -153,7 +153,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skillset == null )
+     			if( this.m_es_skillset .Equals(null)  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubViewNode/ES_SkillSet");
 		    	   this.m_es_skillset = this.AddChild<ES_SkillSet,Transform>(subTrans);
@@ -171,7 +171,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skilltianfu == null )
+     			if( this.m_es_skilltianfu .Equals(null)  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubViewNode/ES_SkillTianFu");
 		    	   this.m_es_skilltianfu = this.AddChild<ES_SkillTianFu,Transform>(subTrans);
@@ -189,7 +189,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skillmake == null )
+     			if( this.m_es_skillmake .Equals(null)  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubViewNode/ES_SkillMake");
 		    	   this.m_es_skillmake = this.AddChild<ES_SkillMake,Transform>(subTrans);
@@ -207,7 +207,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skilllifeshield == null )
+     			if( this.m_es_skilllifeshield .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubViewNode/ES_SkillLifeShield");
 		    	   this.m_es_skilllifeshield = this.AddChild<ES_SkillLifeShield,Transform>(subTrans);

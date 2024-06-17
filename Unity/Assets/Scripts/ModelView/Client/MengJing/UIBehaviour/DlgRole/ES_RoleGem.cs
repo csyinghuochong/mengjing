@@ -24,7 +24,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolegemhole_0 == null )
+     			if( this.m_es_rolegemhole_0 .Equals(null))
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_RoleGemHole_0");
 		    	   this.m_es_rolegemhole_0 = this.AddChild<ES_RoleGemHole,Transform>(subTrans);
@@ -42,7 +42,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolegemhole_1 == null )
+     			if( this.m_es_rolegemhole_1 .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_RoleGemHole_1");
 		    	   this.m_es_rolegemhole_1 = this.AddChild<ES_RoleGemHole,Transform>(subTrans);
@@ -60,7 +60,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolegemhole_2 == null )
+     			if( this.m_es_rolegemhole_2 .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_RoleGemHole_2");
 		    	   this.m_es_rolegemhole_2 = this.AddChild<ES_RoleGemHole,Transform>(subTrans);
@@ -78,7 +78,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolegemhole_3 == null )
+     			if( this.m_es_rolegemhole_3 .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_RoleGemHole_3");
 		    	   this.m_es_rolegemhole_3 = this.AddChild<ES_RoleGemHole,Transform>(subTrans);
@@ -96,7 +96,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_commonitem == null )
+     			if( this.m_es_commonitem .Equals(null))
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_CommonItem");
 		    	   this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);

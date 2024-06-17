@@ -37,7 +37,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_chatview == null )
+     			if( this.m_es_chatview .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ChatView");
 		    	   this.m_es_chatview = this.AddChild<ES_ChatView,Transform>(subTrans);

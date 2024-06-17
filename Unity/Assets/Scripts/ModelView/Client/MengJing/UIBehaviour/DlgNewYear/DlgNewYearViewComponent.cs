@@ -33,7 +33,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_newyearcollectionword == null )
+     			if( this.m_es_newyearcollectionword .Equals(null))
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_NewYearCollectionWord");
 		    	   this.m_es_newyearcollectionword = this.AddChild<ES_NewYearCollectionWord,Transform>(subTrans);
@@ -51,7 +51,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_newyearmonster == null )
+     			if( this.m_es_newyearmonster .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_NewYearMonster");
 		    	   this.m_es_newyearmonster = this.AddChild<ES_NewYearMonster,Transform>(subTrans);

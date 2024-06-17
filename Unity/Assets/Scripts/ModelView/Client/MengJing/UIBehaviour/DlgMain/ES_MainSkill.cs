@@ -41,7 +41,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skillgrid_normal_0 == null )
+     			if( this.m_es_skillgrid_normal_0.Equals(null))
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_0");
 		    	   this.m_es_skillgrid_normal_0 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -59,7 +59,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skillgrid_normal_1 == null )
+     			if( this.m_es_skillgrid_normal_1 .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_1");
 		    	   this.m_es_skillgrid_normal_1 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -72,12 +72,12 @@ namespace ET.Client
      	{
      		get
      		{
-     			if (this.uiTransform == null)
+     			if (this.uiTransform.Equals(null))
      			{
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skillgrid_normal_2 == null )
+     			if( this.m_es_skillgrid_normal_2.Equals(null))
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_2");
 		    	   this.m_es_skillgrid_normal_2 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -95,7 +95,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skillgrid_normal_3 == null )
+     			if( this.m_es_skillgrid_normal_3.Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_3");
 		    	   this.m_es_skillgrid_normal_3 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -113,7 +113,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skillgrid_normal_4 == null )
+     			if( this.m_es_skillgrid_normal_4.Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_4");
 		    	   this.m_es_skillgrid_normal_4 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -131,7 +131,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skillgrid_normal_5 == null )
+     			if( this.m_es_skillgrid_normal_5 .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_5");
 		    	   this.m_es_skillgrid_normal_5 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -149,7 +149,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skillgrid_normal_6 == null )
+     			if( this.m_es_skillgrid_normal_6 .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_6");
 		    	   this.m_es_skillgrid_normal_6 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -167,7 +167,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skillgrid_normal_7 == null )
+     			if( this.m_es_skillgrid_normal_7 .Equals(null))
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_7");
 		    	   this.m_es_skillgrid_normal_7 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -185,7 +185,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skillgrid_normal_8 == null )
+     			if( this.m_es_skillgrid_normal_8 .Equals(null))
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_8");
 		    	   this.m_es_skillgrid_normal_8 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -203,7 +203,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skillgrid_normal_9 == null )
+     			if( this.m_es_skillgrid_normal_9 .Equals(null))
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_9");
 		    	   this.m_es_skillgrid_normal_9 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -221,7 +221,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skillgrid_normal_juexing == null )
+     			if( this.m_es_skillgrid_normal_juexing .Equals(null))
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_SkillGrid_Normal_juexing");
 		    	   this.m_es_skillgrid_normal_juexing = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -239,7 +239,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_fangunskill == null )
+     			if( this.m_es_fangunskill .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Normal/ES_FangunSkill");
 		    	   this.m_es_fangunskill = this.AddChild<ES_FangunSkill,Transform>(subTrans);
@@ -274,7 +274,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skillgrid_transforms_0 == null )
+     			if( this.m_es_skillgrid_transforms_0 .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Transforms/ES_SkillGrid_Transforms_0");
 		    	   this.m_es_skillgrid_transforms_0 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -292,7 +292,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skillgrid_transforms_1 == null )
+     			if( this.m_es_skillgrid_transforms_1 .Equals(null))
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Transforms/ES_SkillGrid_Transforms_1");
 		    	   this.m_es_skillgrid_transforms_1 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -310,7 +310,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_skillgrid_transforms_2 == null )
+     			if( this.m_es_skillgrid_transforms_2.Equals(null))
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Transforms/ES_SkillGrid_Transforms_2");
 		    	   this.m_es_skillgrid_transforms_2 = this.AddChild<ES_SkillGrid,Transform>(subTrans);
@@ -328,7 +328,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_attackgrid == null )
+     			if( this.m_es_attackgrid .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_AttackGrid");
 		    	   this.m_es_attackgrid = this.AddChild<ES_AttackGrid,Transform>(subTrans);

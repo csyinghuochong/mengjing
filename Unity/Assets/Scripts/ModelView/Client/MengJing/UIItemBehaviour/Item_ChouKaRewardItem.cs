@@ -129,7 +129,7 @@ namespace ET.Client
      			}
      			if (this.isCacheNode)
      			{
-     				if( this.m_es_rewardlist == null )
+     				if( this.m_es_rewardlist .Equals(null)  )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList");
 		    			this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
@@ -138,7 +138,7 @@ namespace ET.Client
      			}
      			else
      			{
-     				if( this.m_es_rewardlist != null )
+     				if( !this.m_es_rewardlist .Equals(null)  )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList");
 		    			ES_RewardList es = this.m_es_rewardlist;

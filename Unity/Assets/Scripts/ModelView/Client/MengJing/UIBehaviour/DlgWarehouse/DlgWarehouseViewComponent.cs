@@ -101,7 +101,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_warehouserole == null )
+     			if( this.m_es_warehouserole .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WarehouseRole");
 		    	   this.m_es_warehouserole = this.AddChild<ES_WarehouseRole,Transform>(subTrans);
@@ -119,7 +119,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_warehouseaccount == null )
+     			if( this.m_es_warehouseaccount .Equals(null))
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WarehouseAccount");
 		    	   this.m_es_warehouseaccount = this.AddChild<ES_WarehouseAccount,Transform>(subTrans);
@@ -137,7 +137,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_warehousegem == null )
+     			if( this.m_es_warehousegem .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WarehouseGem");
 		    	   this.m_es_warehousegem = this.AddChild<ES_WarehouseGem,Transform>(subTrans);

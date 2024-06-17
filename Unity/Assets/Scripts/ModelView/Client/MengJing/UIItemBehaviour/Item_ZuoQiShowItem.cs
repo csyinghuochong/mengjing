@@ -32,7 +32,7 @@ namespace ET.Client
      			}
      			if (this.isCacheNode)
      			{
-     				if( this.m_es_modelshow == null )
+     				if( this.m_es_modelshow .Equals(null) )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ModelShow");
 		    			this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
@@ -41,7 +41,7 @@ namespace ET.Client
      			}
      			else
      			{
-     				if( this.m_es_modelshow != null )
+     				if( !this.m_es_modelshow .Equals(null) )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ModelShow");
 		    			ES_ModelShow es = this.m_es_modelshow;

@@ -39,7 +39,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_shouhuinfo2 == null )
+     			if( this.m_es_shouhuinfo2 .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_ShouhuInfo2");
 		    	   this.m_es_shouhuinfo2 = this.AddChild<ES_ShouhuInfo,Transform>(subTrans);
@@ -57,7 +57,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_shouhuinfo3 == null )
+     			if( this.m_es_shouhuinfo3 .Equals(null))
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_ShouhuInfo3");
 		    	   this.m_es_shouhuinfo3 = this.AddChild<ES_ShouhuInfo,Transform>(subTrans);
@@ -75,7 +75,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_shouhuinfo1 == null )
+     			if( this.m_es_shouhuinfo1 .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_ShouhuInfo1");
 		    	   this.m_es_shouhuinfo1 = this.AddChild<ES_ShouhuInfo,Transform>(subTrans);
@@ -93,7 +93,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_shouhuinfo0 == null )
+     			if( this.m_es_shouhuinfo0 .Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_ShouhuInfo0");
 		    	   this.m_es_shouhuinfo0 = this.AddChild<ES_ShouhuInfo,Transform>(subTrans);

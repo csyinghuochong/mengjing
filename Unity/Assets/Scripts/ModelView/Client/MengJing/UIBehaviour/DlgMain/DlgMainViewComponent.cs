@@ -50,7 +50,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_buttonpositionset == null )
+     			if( this.m_es_buttonpositionset .Equals(null))
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ButtonPositionSet");
 		    	   this.m_es_buttonpositionset = this.AddChild<ES_ButtonPositionSet,Transform>(subTrans);
@@ -68,7 +68,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_joystickmove == null )
+     			if( this.m_es_joystickmove .Equals(null))
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_JoystickMove");
 		    	   this.m_es_joystickmove = this.AddChild<ES_JoystickMove,Transform>(subTrans);
@@ -919,7 +919,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_mapmini == null )
+     			if( this.m_es_mapmini.Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_RightSet/ES_MapMini");
 		    	   this.m_es_mapmini = this.AddChild<ES_MapMini,Transform>(subTrans);
@@ -2348,7 +2348,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_mainskill == null )
+     			if( this.m_es_mainskill.Equals(null) )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_RightSet/ES_MainSkill");
 		    	   this.m_es_mainskill = this.AddChild<ES_MainSkill,Transform>(subTrans);
