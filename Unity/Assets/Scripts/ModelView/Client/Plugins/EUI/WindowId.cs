@@ -100,5 +100,6 @@ namespace ET.Client
 		WindowID_PetMiningRecord,
 		WindowID_PetMiningTeam,
 		WindowID_PetMiningReward,
+		WindowID_ZhanQu,
 	}
 }
