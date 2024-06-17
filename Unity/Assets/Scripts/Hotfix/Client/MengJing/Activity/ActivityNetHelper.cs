@@ -160,5 +160,12 @@ namespace ET.Client
             M2C_HongBaoOpenResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_HongBaoOpenResponse;
             return response;
         }
+
+        public static async ETTask<int> SeasonLevelReward(Scene root, int seasonLevel)
+        {
+            C2M_SeasonLevelRewardRequest request = new() { SeasonLevel = seasonLevel };
+            M2C_SeasonLevelRewardResponse response = (M2C_SeasonLevelRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }

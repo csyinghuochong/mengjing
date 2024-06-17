@@ -1,8 +1,8 @@
 ﻿namespace ET.Client
 {
 	[FriendOf(typeof(UIBaseWindow))]
-	[AUIEvent(WindowID.WindowID_AuctionRecord)]
-	public  class DlgAuctionRecordEventHandler : IAUIEventHandler
+	[AUIEvent(WindowID.WindowID_SeasonLordDetail)]
+	public  class DlgSeasonLordDetailEventHandler : IAUIEventHandler
 	{
 
 		public void OnInitWindowCoreData(UIBaseWindow uiBaseWindow)
@@ -12,17 +12,17 @@
 
 		public void OnInitComponent(UIBaseWindow uiBaseWindow)
 		{
-		  uiBaseWindow.AddComponent<DlgAuctionRecord>().AddComponent<DlgAuctionRecordViewComponent>();
+		  uiBaseWindow.AddComponent<DlgSeasonLordDetail>().AddComponent<DlgSeasonLordDetailViewComponent>();
 		}
 
 		public void OnRegisterUIEvent(UIBaseWindow uiBaseWindow)
 		{
-		  uiBaseWindow.GetComponent<DlgAuctionRecord>().RegisterUIEvent(); 
+		  uiBaseWindow.GetComponent<DlgSeasonLordDetail>().RegisterUIEvent(); 
 		}
 
 		public void OnShowWindow(UIBaseWindow uiBaseWindow, Entity contextData = null)
 		{
-		  uiBaseWindow.GetComponent<DlgAuctionRecord>().ShowWindow(contextData); 
+		  uiBaseWindow.GetComponent<DlgSeasonLordDetail>().ShowWindow(contextData); 
 		}
 
 		public void OnHideWindow(UIBaseWindow uiBaseWindow)

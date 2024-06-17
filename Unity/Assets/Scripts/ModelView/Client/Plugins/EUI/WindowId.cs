@@ -106,5 +106,6 @@ namespace ET.Client
 		WindowID_PaiMaiAuction,
 		WindowID_AuctionRecord,
 		WindowID_Season,
+		WindowID_SeasonLordDetail,
 	}
 }
