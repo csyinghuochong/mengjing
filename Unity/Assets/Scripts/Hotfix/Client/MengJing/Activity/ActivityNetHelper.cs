@@ -153,5 +153,12 @@ namespace ET.Client
             P2C_PaiMaiAuctionInfoResponse response = (P2C_PaiMaiAuctionInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_HongBaoOpenResponse> HongBaoOpen(Scene root)
+        {
+            C2M_HongBaoOpenRequest request = new();
+            M2C_HongBaoOpenResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_HongBaoOpenResponse;
+            return response;
+        }
     }
 }
