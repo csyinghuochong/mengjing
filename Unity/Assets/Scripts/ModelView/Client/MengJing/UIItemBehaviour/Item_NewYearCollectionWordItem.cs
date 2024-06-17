@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +9,6 @@ namespace ET.Client
 	{
 		public Action ReceiveHandler;
 		public ActivityConfig ActivityConfig;
-		public List<Scroll_Item_CommonItem> WordItems = new();
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
@@ -25,30 +23,6 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.RectTransform EG_WordListRectTransform
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if (this.isCacheNode)
-     			{
-     				if( this.m_EG_WordListRectTransform == null )
-     				{
-		    			this.m_EG_WordListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_WordList");
-     				}
-     				return this.m_EG_WordListRectTransform;
-     			}
-     			else
-     			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_WordList");
-     			}
-     		}
-     	}
-
 		public ES_RewardList ES_RewardList
      	{
      		get
@@ -60,7 +34,7 @@ namespace ET.Client
      			}
      			if (this.isCacheNode)
      			{
-     				if( this.m_es_rewardlist==null  )
+     				if( this.m_es_rewardlist == null )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList");
 		    			this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
@@ -69,7 +43,7 @@ namespace ET.Client
      			}
      			else
      			{
-     				if( this.m_es_rewardlist!=null  )
+     				if( this.m_es_rewardlist != null )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList");
 		    			ES_RewardList es = this.m_es_rewardlist;
@@ -86,6 +60,47 @@ namespace ET.Client
 		    			this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
      				}
      				return this.m_es_rewardlist;
+     			}
+     		}
+     	}
+
+		public ES_RewardList ES_RewardList_Word
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if (this.isCacheNode)
+     			{
+     				if( this.m_es_rewardlist_word == null )
+     				{
+		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList_Word");
+		    			this.m_es_rewardlist_word = this.AddChild<ES_RewardList,Transform>(subTrans);
+     				}
+     				return this.m_es_rewardlist_word;
+     			}
+     			else
+     			{
+     				if( this.m_es_rewardlist_word != null )
+     				{
+		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList_Word");
+		    			ES_RewardList es = this.m_es_rewardlist_word;
+     					if( es.UITransform != subTrans )
+     					{
+     						es.Dispose();
+		    				this.m_es_rewardlist_word = null;
+		    				this.m_es_rewardlist_word = this.AddChild<ES_RewardList,Transform>(subTrans);
+     					}
+     				}
+     				else
+     				{
+		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList_Word");
+		    			this.m_es_rewardlist_word = this.AddChild<ES_RewardList,Transform>(subTrans);
+     				}
+     				return this.m_es_rewardlist_word;
      			}
      		}
      	}
@@ -164,8 +179,8 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
-			this.m_EG_WordListRectTransform = null;
 			this.m_es_rewardlist = null;
+			this.m_es_rewardlist_word = null;
 			this.m_E_ButtonDuiHuanButton = null;
 			this.m_E_ButtonDuiHuanImage = null;
 			this.m_E_LabDuiHuanText = null;
@@ -173,8 +188,8 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.RectTransform m_EG_WordListRectTransform = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
+		private EntityRef<ES_RewardList> m_es_rewardlist_word = null;
 		private UnityEngine.UI.Button m_E_ButtonDuiHuanButton = null;
 		private UnityEngine.UI.Image m_E_ButtonDuiHuanImage = null;
 		private UnityEngine.UI.Text m_E_LabDuiHuanText = null;

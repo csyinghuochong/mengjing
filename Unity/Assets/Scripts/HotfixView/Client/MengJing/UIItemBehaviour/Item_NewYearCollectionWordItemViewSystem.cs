@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_RewardList))]
     [FriendOf(typeof (Scroll_Item_CommonItem))]
     [FriendOf(typeof (Scroll_Item_NewYearCollectionWordItem))]
     [EntitySystemOf(typeof (Scroll_Item_NewYearCollectionWordItem))]
@@ -24,30 +25,9 @@ namespace ET.Client
         {
             self.E_ButtonDuiHuanButton.AddListenerAsync(self.OnButtonDuiHuan);
 
-            UICommonHelper.DestoryChild(self.EG_WordListRectTransform.gameObject);
-            for (int i = self.WordItems.Count - 1; i >= 0; i--)
-            {
-                self.WordItems[i].Dispose();
-                self.WordItems.RemoveAt(i);
-            }
-
             self.ActivityConfig = activityConfig;
-            string[] wordItems = activityConfig.Par_2.Split('@');
-            var path = ABPathHelper.GetUGUIPath("Item/Item_CommonItem");
-            var bundleGameObject = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-            for (int i = 0; i < wordItems.Length; i++)
-            {
-                string[] itemInfo = wordItems[i].Split(';');
-                int itemId = int.Parse(itemInfo[0]);
-                GameObject itemObject = UnityEngine.Object.Instantiate(bundleGameObject);
-                Scroll_Item_CommonItem uIItemComponent = self.AddChild<Scroll_Item_CommonItem>();
-                uIItemComponent.uiTransform = itemObject.transform;
-                uIItemComponent.Refresh(new BagInfo() { ItemID = itemId }, ItemOperateEnum.None);
-                uIItemComponent.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
-                uIItemComponent.ES_CommonItem.E_ItemNameText.gameObject.SetActive(false);
-                self.WordItems.Add(uIItemComponent);
-                UICommonHelper.SetParent(itemObject, self.EG_WordListRectTransform.gameObject);
-            }
+
+            self.ES_RewardList_Word.Refresh(activityConfig.Par_2, showNumber: false, showName: false);
 
             self.ES_RewardList.Refresh(activityConfig.Par_3, getWay: ItemGetWay.ActivityNewYear);
         }
@@ -55,11 +35,17 @@ namespace ET.Client
         public static void OnUpdateUI(this Scroll_Item_NewYearCollectionWordItem self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            for (int i = 0; i < self.WordItems.Count; i++)
+
+            foreach (Scroll_Item_CommonItem item in self.ES_RewardList_Word.ScrollItemCommonItems.Values)
             {
-                bool gray = bagComponent.GetItemNumber(self.WordItems[i].ES_CommonItem.Baginfo.ItemID) <= 0;
-                UICommonHelper.SetImageGray(self.Root(), self.WordItems[i].ES_CommonItem.E_ItemIconImage.gameObject, gray);
-                UICommonHelper.SetImageGray(self.Root(), self.WordItems[i].ES_CommonItem.E_ItemQualityImage.gameObject, gray);
+                if (item.uiTransform == null)
+                {
+                    continue;
+                }
+
+                bool gray = bagComponent.GetItemNumber(item.ES_CommonItem.Baginfo.ItemID) <= 0;
+                UICommonHelper.SetImageGray(self.Root(), item.ES_CommonItem.E_ItemIconImage.gameObject, gray);
+                UICommonHelper.SetImageGray(self.Root(), item.ES_CommonItem.E_ItemQualityImage.gameObject, gray);
             }
 
             ActivityConfig activityConfig = self.ActivityConfig;
