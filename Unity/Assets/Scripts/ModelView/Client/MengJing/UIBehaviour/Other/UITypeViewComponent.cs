@@ -21,13 +21,13 @@ namespace ET
     [ChildOf]
     public class UITypeViewComponent: Entity, IAwake<GameObject>
     {
-        public GameObject GameObject;
-        public string TypeButtonItemAsset;
-        public string TypeButtonAsset;
+        public GameObject GameObject { get; set; }
+        public string TypeButtonItemAsset { get; set; }
+        public string TypeButtonAsset { get; set; }
 
-        public Action<int, int> ClickTypeItemHandler;
-        public List<TypeButtonInfo> TypeButtonInfos = new();
-        public List<UITypeButtonComponent> TypeButtonComponents = new();
+        public Action<int, int> ClickTypeItemHandler { get; set; }
+        public List<TypeButtonInfo> TypeButtonInfos { get; set; } = new();
+        public List<UITypeButtonComponent> TypeButtonComponents { get; set; } = new();
     }
 
     [ChildOf]

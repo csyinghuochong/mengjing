@@ -207,5 +207,72 @@ namespace ET.Client
         {
             return ServerHelper.DateDiff_Time(TimeHelper.ServerNow(), self.UserInfo.CreateTime);
         }
+
+        public static bool IsHaveFristWinReward(this UserInfoComponentC self, int firstwinid, int difficulty)
+        {
+            for (int i = 0; i < self.UserInfo.FirstWinSelf.Count; i++)
+            {
+                KeyValuePair keyValuePair = self.UserInfo.FirstWinSelf[i];
+                if (keyValuePair.KeyId != firstwinid)
+                {
+                    continue;
+                }
+
+                return keyValuePair.Value.Contains(difficulty.ToString()) && !keyValuePair.Value2.Contains(difficulty.ToString());
+            }
+
+            return false;
+        }
+
+        public static bool IsReceivedFristWinReward(this UserInfoComponentC self, int firstwinid, int difficulty)
+        {
+            for (int i = 0; i < self.UserInfo.FirstWinSelf.Count; i++)
+            {
+                if (self.UserInfo.FirstWinSelf[i].KeyId != firstwinid)
+                {
+                    continue;
+                }
+
+                return self.UserInfo.FirstWinSelf[i].Value2.Contains(difficulty.ToString());
+            }
+
+            return false;
+        }
+
+        public static long GetReviveTime(this UserInfoComponentC self, int monsterId)
+        {
+            for (int i = 0; i < self.UserInfo.MonsterRevives.Count; i++)
+            {
+                if (self.UserInfo.MonsterRevives[i].KeyId == monsterId)
+                {
+                    return long.Parse(self.UserInfo.MonsterRevives[i].Value);
+                }
+            }
+
+            return 0;
+        }
+
+        public static int GetMonsterKillNumber(this UserInfoComponentC self, int monsterId)
+        {
+            for (int i = 0; i < self.UserInfo.MonsterRevives.Count; i++)
+            {
+                KeyValuePair keyValuePair = self.UserInfo.MonsterRevives[i];
+                if (keyValuePair.KeyId != monsterId)
+                {
+                    continue;
+                }
+
+                if (!string.IsNullOrEmpty(keyValuePair.Value2))
+                {
+                    return int.Parse(keyValuePair.Value2);
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+
+            return 0;
+        }
     }
 }

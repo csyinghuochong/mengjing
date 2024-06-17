@@ -111,5 +111,26 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask FirstWinSelfReward(Scene root, int firstWinId, int difficulty)
+        {
+            C2M_FirstWinSelfRewardRequest request = new() { FirstWinId = firstWinId, Difficulty = difficulty };
+            M2C_FirstWinSelfRewardResponse response =
+                    (M2C_FirstWinSelfRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            root.GetComponent<UserInfoComponentC>().UserInfo.FirstWinSelf = response.FirstWinInfos;
+        }
+
+        public static async ETTask<A2C_FirstWinInfoResponse> FirstWinInfo(Scene root)
+        {
+            C2A_FirstWinInfoRequest request = new();
+            A2C_FirstWinInfoResponse response = (A2C_FirstWinInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

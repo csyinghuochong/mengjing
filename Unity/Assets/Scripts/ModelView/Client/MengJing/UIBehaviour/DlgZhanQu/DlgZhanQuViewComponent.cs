@@ -60,6 +60,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_FirstWin ES_FirstWin
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_firstwin == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_FirstWin");
+		    	   this.m_es_firstwin = this.AddChild<ES_FirstWin,Transform>(subTrans);
+     			}
+     			return this.m_es_firstwin;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -133,6 +151,7 @@ namespace ET.Client
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_zhanqulevel = null;
 			this.m_es_zhanqucombat = null;
+			this.m_es_firstwin = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_1Toggle = null;
 			this.m_E_2Toggle = null;
@@ -143,6 +162,7 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_ZhanQuLevel> m_es_zhanqulevel = null;
 		private EntityRef<ES_ZhanQuCombat> m_es_zhanqucombat = null;
+		private EntityRef<ES_FirstWin> m_es_firstwin = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_1Toggle = null;
 		private UnityEngine.UI.Toggle m_E_2Toggle = null;
