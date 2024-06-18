@@ -77,7 +77,7 @@ namespace ET
                 if (GetNumericValueType(numericType) == 2)
                 {
                     float fvalue = float.Parse(attributeInfo[1]);
-                    proList.Add(new PropertyValue() { HideID = numericType, HideValue = (long) (fvalue * 10000) });
+                    proList.Add(new PropertyValue() { HideID = numericType, HideValue = (long)(fvalue * 10000) });
                 }
                 else
                 {
@@ -99,16 +99,14 @@ namespace ET
         //传入值和类型返回对应值
         public static int NumericValueSaveType(int key, float value)
         {
-
             if (GetNumericValueType(key) == 2)
             {
-                return (int) (value * 10000);
+                return (int)(value * 10000);
             }
             else
             {
-                return (int) (value);
+                return (int)(value);
             }
-
         }
 
         /// <summary>
@@ -122,7 +120,7 @@ namespace ET
             //开启双职业活力恢复增强
             if (skillNumber >= 2)
             {
-                return (int) (GlobalValueConfigCategory.Instance.Get(72).Value2 * 1.5f);
+                return (int)(GlobalValueConfigCategory.Instance.Get(72).Value2 * 1.5f);
             }
 
             return GlobalValueConfigCategory.Instance.Get(72).Value2;
@@ -146,10 +144,7 @@ namespace ET
         //传入子值返回母值
         public static int ReturnNumParValue(int sonValue)
         {
-
-            return (int) (sonValue / 100);
-
+            return (int)(sonValue / 100);
         }
     }
 }
-

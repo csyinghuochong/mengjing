@@ -31,96 +31,90 @@ namespace ET.Client
             if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaRemainTimes) > 0)
             {
                 self.E_Img_JiHuoImage.gameObject.SetActive(true);
-                self.E_BtnBtnOpenYueKaSet.SetActive(false);
-                self.Btn_GetReward.SetActive(true);
-                self.Btn_GoPay.SetActive(true);
-                self.Btn_OpenYueKa.SetActive(false);
+                self.EG_BtnOpenYueKaSetRectTransform.gameObject.SetActive(false);
+                self.E_Btn_GetRewardButton.gameObject.SetActive(true);
+                self.E_Btn_GoPayButton.gameObject.SetActive(true);
+                self.E_Btn_OpenYueKaButton.gameObject.SetActive(false);
 
                 int leftDay = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaRemainTimes);
-                self.Text_Remainingtimes.GetComponent<Text>().text = $"{leftDay}/7";
+                self.E_Text_RemainingtimesText.text = $"{leftDay}/7";
             }
             else
             {
-                self.Img_JiHuo.SetActive(false);
-                self.BtnOpenYueKaSet.SetActive(true);
-                self.Btn_GetReward.SetActive(false);
-                self.Btn_GoPay.SetActive(false);
-                self.Btn_OpenYueKa.SetActive(true);
-                self.Text_Remainingtimes.GetComponent<Text>().text = $"0/7";
+                self.E_Img_JiHuoImage.gameObject.SetActive(false);
+                self.EG_BtnOpenYueKaSetRectTransform.gameObject.SetActive(true);
+                self.E_Btn_GetRewardButton.gameObject.SetActive(false);
+                self.E_Btn_GoPayButton.gameObject.SetActive(false);
+                self.E_Btn_OpenYueKaButton.gameObject.SetActive(true);
+                self.E_Text_RemainingtimesText.text = $"0/7";
             }
         }
 
         public static void InitReward(this ES_ActivityYueKa self)
         {
             string reward = GlobalValueConfigCategory.Instance.Get(28).Value;
-            UICommonHelper.ShowItemList(reward, self.ItemListNode, self, 1f);
+            self.ES_RewardList.Refresh(reward);
 
-            self.TextYueKaCost.GetComponent<Text>().text = GlobalValueConfigCategory.Instance.Get(37).Value;
+            self.E_TextYueKaCostText.text = GlobalValueConfigCategory.Instance.Get(37).Value;
         }
 
         public static async ETTask ReceiveReward(this ES_ActivityYueKa self)
         {
-            Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
-            if (!unit.IsYueKaStates())
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaRemainTimes) == 0)
             {
-                FloatTipManager.Instance.ShowFloatTip("请先开启月卡！");
+                FlyTipComponent.Instance.SpawnFlyTipDi("请先开启月卡！");
                 return;
             }
 
-            if (unit.GetComponent<NumericComponent>().GetAsInt(NumericType.YueKaAward) == 1)
+            if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaAward) == 1)
             {
                 //当天已领取
-                FloatTipManager.Instance.ShowFloatTip("当天奖励已领取！");
+                FlyTipComponent.Instance.SpawnFlyTipDi("当天奖励已领取！");
                 return;
             }
 
-            int maxPiLao = unit.GetMaxPiLao();
-            long nowPiLao = self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo.PiLao;
+            int maxPiLao = int.Parse(GlobalValueConfigCategory.Instance
+                    .Get(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaRemainTimes) > 0? 26 : 10).Value);
+            long nowPiLao = self.Root().GetComponent<UserInfoComponentC>().UserInfo.PiLao;
 
             if (maxPiLao < nowPiLao + 20)
             {
-                PopupTipHelp.OpenPopupTip(self.ZoneScene(), "领取", "是否领取?\n领取后会有体力溢出!", async () =>
+                PopupTipHelp.OpenPopupTip(self.Root(), "领取", "是否领取?\n领取后会有体力溢出!", async () =>
                 {
-                    C2M_YueKaRewardRequest c2M_RoleYueKaRequest = new C2M_YueKaRewardRequest() { };
-                    M2C_YueKaRewardResponse m2C_RoleYueKaResponse =
-                            (M2C_YueKaRewardResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_RoleYueKaRequest);
+                    await ActivityNetHelper.YueKaReward(self.Root());
                     self.OnUpdateUI();
                 }).Coroutine();
             }
             else
             {
-                C2M_YueKaRewardRequest c2M_RoleYueKaRequest = new C2M_YueKaRewardRequest() { };
-                M2C_YueKaRewardResponse m2C_RoleYueKaResponse =
-                        (M2C_YueKaRewardResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_RoleYueKaRequest);
+                await ActivityNetHelper.YueKaReward(self.Root());
                 self.OnUpdateUI();
             }
         }
 
         public static async ETTask ReqestOpenYueKa(this ES_ActivityYueKa self)
         {
-            C2M_YueKaOpenRequest c2M_RoleYueKaRequest = new C2M_YueKaOpenRequest() { };
-            M2C_YueKaOpenResponse m2C_RoleYueKaResponse =
-                    (M2C_YueKaOpenResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_RoleYueKaRequest);
-            if (m2C_RoleYueKaResponse.Error == 0)
+            int error = await ActivityNetHelper.YueKaOpen(self.Root());
+            if (error == 0)
             {
-                //月卡开启成功
-                FloatTipManager.Instance.ShowFloatTipDi(GameSettingLanguge.LoadLocalization("月卡开启成功"));
-                self.Img_JiHuo.SetActive(true);
-                self.BtnOpenYueKaSet.SetActive(false);
-                self.Btn_GetReward.SetActive(true);
-                self.Btn_OpenYueKa.SetActive(true);
-                self.Btn_GoPay.SetActive(true);
+                // 月卡开启成功
+                FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("月卡开启成功"));
+                self.E_Img_JiHuoImage.gameObject.SetActive(true);
+                self.EG_BtnOpenYueKaSetRectTransform.gameObject.SetActive(false);
+                self.E_Btn_GetRewardButton.gameObject.SetActive(true);
+                self.E_Btn_OpenYueKaButton.gameObject.SetActive(true);
+                self.E_Btn_GoPayButton.gameObject.SetActive(true);
                 self.OnUpdateUI();
             }
         }
 
-        //开启月卡
+        // 开启月卡
         public static void OpenYueKa(this ES_ActivityYueKa self)
         {
-            //判断自身是否有钻石
+            // 判断自身是否有钻石
             string cost = GlobalValueConfigCategory.Instance.Get(37).Value;
-            PopupTipHelp.OpenPopupTip(self.ZoneScene(), "开启月卡", $"是否花费{cost}钻石开启月卡?", () => { self.ReqestOpenYueKa().Coroutine(); }, null)
-                    .Coroutine();
+            PopupTipHelp.OpenPopupTip(self.Root(), "开启月卡", $"是否花费{cost}钻石开启月卡?", () => { self.ReqestOpenYueKa().Coroutine(); }, null).Coroutine();
         }
     }
 }

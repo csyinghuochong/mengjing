@@ -167,5 +167,19 @@ namespace ET.Client
             M2C_SeasonLevelRewardResponse response = (M2C_SeasonLevelRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<int> YueKaReward(Scene root)
+        {
+            C2M_YueKaRewardRequest request = new();
+            M2C_YueKaRewardResponse response = (M2C_YueKaRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
+        public static async ETTask<int> YueKaOpen(Scene root)
+        {
+            C2M_YueKaOpenRequest request = new();
+            M2C_YueKaOpenResponse response = (M2C_YueKaOpenResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }
