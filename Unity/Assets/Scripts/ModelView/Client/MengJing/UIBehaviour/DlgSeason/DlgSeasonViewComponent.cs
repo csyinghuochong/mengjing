@@ -78,6 +78,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_SeasonStore ES_SeasonStore
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_seasonstore == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_SeasonStore");
+		    	   this.m_es_seasonstore = this.AddChild<ES_SeasonStore,Transform>(subTrans);
+     			}
+     			return this.m_es_seasonstore;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -186,6 +204,7 @@ namespace ET.Client
 			this.m_es_seasonhome = null;
 			this.m_es_seasontask = null;
 			this.m_es_seasonjinghe = null;
+			this.m_es_seasonstore = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_HomeToggle = null;
 			this.m_E_TaskToggle = null;
@@ -199,6 +218,7 @@ namespace ET.Client
 		private EntityRef<ES_SeasonHome> m_es_seasonhome = null;
 		private EntityRef<ES_SeasonTask> m_es_seasontask = null;
 		private EntityRef<ES_SeasonJingHe> m_es_seasonjinghe = null;
+		private EntityRef<ES_SeasonStore> m_es_seasonstore = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_HomeToggle = null;
 		private UnityEngine.UI.Toggle m_E_TaskToggle = null;
