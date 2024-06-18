@@ -475,6 +475,8 @@ namespace ET.Client
                     // ui.GetComponent<UIGivePetComponent>().OnGiveAction = self.UpdateSeasonDayTask;
                 }
             }
+
+            await ETTask.CompletedTask;
         }
 
         public static void UpdateSeasonTask(this ES_SeasonTask self)

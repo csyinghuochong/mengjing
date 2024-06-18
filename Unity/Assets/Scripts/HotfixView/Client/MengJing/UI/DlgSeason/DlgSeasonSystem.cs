@@ -8,6 +8,7 @@ namespace ET.Client
 {
     [FriendOf(typeof (ES_SeasonHome))]
     [FriendOf(typeof (ES_SeasonTask))]
+    [FriendOf(typeof (ES_SeasonJingHe))]
     [FriendOf(typeof (DlgSeason))]
     public static class DlgSeasonSystem
     {
@@ -39,6 +40,7 @@ namespace ET.Client
                     self.View.ES_SeasonTask.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
+                    self.View.ES_SeasonJingHe.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
                     break;

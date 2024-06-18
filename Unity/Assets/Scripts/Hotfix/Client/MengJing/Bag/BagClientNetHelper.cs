@@ -694,5 +694,26 @@ namespace ET.Client
             M2C_ItemProtectResponse response = (M2C_ItemProtectResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_JingHePlanResponse> JingHePlan(Scene root, int jingHePlan)
+        {
+            C2M_JingHePlanRequest request = new() { JingHePlan = jingHePlan };
+            M2C_JingHePlanResponse response = (M2C_JingHePlanResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<M2C_SeasonOpenJingHeResponse> SeasonOpenJingHe(Scene root, int jingHeId)
+        {
+            C2M_SeasonOpenJingHeRequest request = new() { JingHeId = jingHeId };
+            M2C_SeasonOpenJingHeResponse response = (M2C_SeasonOpenJingHeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<M2C_JingHeWearResponse> JingHeWear(Scene root, long operateBagID, int operateType, string operatePar)
+        {
+            C2M_JingHeWearRequest request = new() { OperateBagID = operateBagID, OperateType = operateType, OperatePar = operatePar };
+            M2C_JingHeWearResponse response = (M2C_JingHeWearResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

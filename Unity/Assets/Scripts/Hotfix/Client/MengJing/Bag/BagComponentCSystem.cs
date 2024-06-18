@@ -24,6 +24,35 @@ namespace ET.Client
         {
         }
 
+        public static List<BagInfo> GetCurJingHeList(this BagComponentC self)
+        {
+            List<BagInfo> bagInfos = new List<BagInfo>();
+            List<BagInfo> jingheList = self.GetItemsByLoc(ItemLocType.SeasonJingHe);
+            for (int i = 0; i < jingheList.Count; i++)
+            {
+                if (jingheList[i].EquipPlan == self.SeasonJingHePlan)
+                {
+                    bagInfos.Add(jingheList[i]);
+                }
+            }
+
+            return bagInfos;
+        }
+
+        public static BagInfo GetJingHeByWeiZhi(this BagComponentC self, int subType)
+        {
+            List<BagInfo> bagInfos = self.GetCurJingHeList();
+            for (int i = 0; i < bagInfos.Count; i++)
+            {
+                if (bagInfos[i].EquipIndex == subType)
+                {
+                    return bagInfos[i];
+                }
+            }
+
+            return null;
+        }
+
         public static void OnRecvItemSort(this BagComponentC self, ItemLocType itemEquipType)
         {
             List<BagInfo> ItemTypeList = self.GetItemsByLoc(itemEquipType);
