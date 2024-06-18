@@ -129,7 +129,7 @@ namespace ET.Client
             // self.View.E_Button_FenXiangButton.AddListener();
             // self.View.E_Btn_EveryTaskButton.AddListener();
             // self.View.E_Button_RechargeButton.AddListener();
-            // self.View.E_Btn_HuoDongButton.AddListener();
+            self.View.E_Btn_HuoDongButton.AddListener(self.OnButton_HuoDong);
             // self.View.E_Button_ZhenYingButton.AddListener();
             // self.View.E_Button_EnergyButton.AddListener();
             // self.View.E_Button_FashionButton.AddListener();
@@ -553,6 +553,11 @@ namespace ET.Client
             self.View.EG_Btn_TopRight_3RectTransform.gameObject.SetActive(!active);
 
             self.View.E_Button_ZhanKaiButton.transform.localScale = active? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
+        }
+
+        private static void OnButton_HuoDong(this DlgMain self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Activity).Coroutine();
         }
 
         private static void OnButton_Season(this DlgMain self)
