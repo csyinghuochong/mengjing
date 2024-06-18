@@ -42,6 +42,42 @@ namespace ET.Client
      		}
      	}
 
+		public ES_ActivityMaoXian ES_ActivityMaoXian
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_activitymaoxian == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ActivityMaoXian");
+		    	   this.m_es_activitymaoxian = this.AddChild<ES_ActivityMaoXian,Transform>(subTrans);
+     			}
+     			return this.m_es_activitymaoxian;
+     		}
+     	}
+
+		public ES_ActivityToken ES_ActivityToken
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_activitytoken == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ActivityToken");
+		    	   this.m_es_activitytoken = this.AddChild<ES_ActivityToken,Transform>(subTrans);
+     			}
+     			return this.m_es_activitytoken;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -148,6 +184,8 @@ namespace ET.Client
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_activityyueka = null;
+			this.m_es_activitymaoxian = null;
+			this.m_es_activitytoken = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_1Toggle = null;
 			this.m_E_2Toggle = null;
@@ -159,6 +197,8 @@ namespace ET.Client
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_ActivityYueKa> m_es_activityyueka = null;
+		private EntityRef<ES_ActivityMaoXian> m_es_activitymaoxian = null;
+		private EntityRef<ES_ActivityToken> m_es_activitytoken = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_1Toggle = null;
 		private UnityEngine.UI.Toggle m_E_2Toggle = null;

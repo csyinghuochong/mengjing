@@ -7,6 +7,8 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_ActivityYueKa))]
+    [FriendOf(typeof (ES_ActivityMaoXian))]
+    [FriendOf(typeof (ES_ActivityToken))]
     [FriendOf(typeof (DlgActivity))]
     public static class DlgActivitySystem
     {
@@ -35,10 +37,10 @@ namespace ET.Client
                     self.View.ES_ActivityYueKa.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-
+                    self.View.ES_ActivityMaoXian.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-
+                    self.View.ES_ActivityToken.uiTransform.gameObject.SetActive(true);
                     break;
                 case 3:
 

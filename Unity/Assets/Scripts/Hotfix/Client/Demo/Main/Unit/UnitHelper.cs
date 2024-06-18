@@ -5,6 +5,18 @@ namespace ET.Client
 {
     public static partial class UnitHelper
     {
+        public static int GetMaoXianExp(this Unit self)
+        {
+            int rechargeNum = self.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber);
+            rechargeNum *= 10;
+            rechargeNum += self.GetComponent<NumericComponentC>().GetAsInt(NumericType.MaoXianExp);
+
+            Log.Info(
+                $" GetMaoXianExp:  {self.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber)}   {self.GetComponent<NumericComponentC>().GetAsInt(NumericType.MaoXianExp)}");
+
+            return rechargeNum;
+        }
+
         public static int GetWuqiItemID(Scene root)
         {
             Unit unit = GetMyUnitFromClientScene(root);
@@ -223,7 +235,7 @@ namespace ET.Client
 
             return nearest;
         }
-        
+
         public static bool IsCanAttackUnit(this Unit self, Unit defend, bool checkdead = true)
         {
             if (self.Id == defend.Id)
