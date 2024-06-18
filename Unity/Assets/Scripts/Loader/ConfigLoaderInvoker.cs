@@ -44,6 +44,10 @@ namespace ET
                     string configFilePath;
                     if (startConfigs.Contains(configType.Name))
                     {
+                        if (ct == "c")
+                        {
+                            continue;
+                        }
                         configFilePath = $"../Config/Excel/{ct}/{Options.Instance.StartConfig}/{configType.Name}.bytes";    
                     }
                     else
