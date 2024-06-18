@@ -13,8 +13,6 @@ namespace ET.Client
         private static void Awake(this ES_RewardList self, Transform transform)
         {
             self.uiTransform = transform;
-
-            self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
         }
 
         [EntitySystem]
@@ -28,13 +26,20 @@ namespace ET.Client
 
         private static void OnBagItemsRefresh(this ES_RewardList self, Transform transform, int index)
         {
+            if (index < 0 || index >= self.ShowBagInfos.Count)
+            {
+                Log.Error($"index超了 {index} {self.ShowBagInfos.Count}");
+                return;
+            }
+
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.None);
 
             scrollItemCommonItem.ES_CommonItem.E_ItemNumText.gameObject.SetActive(self.ShowNum);
             scrollItemCommonItem.ES_CommonItem.E_ItemNameText.gameObject.SetActive(self.ShowName);
             scrollItemCommonItem.uiTransform.localScale = Vector3.one * self.Scale;
-            scrollItemCommonItem.ES_CommonItem.E_BindingImage.gameObject.SetActive(self.GetWay == ItemGetWay.Activity_DayTeHui || self.GetWay == ItemGetWay.ActivityNewYear);
+            scrollItemCommonItem.ES_CommonItem.E_BindingImage.gameObject.SetActive(self.GetWay == ItemGetWay.Activity_DayTeHui ||
+                self.GetWay == ItemGetWay.ActivityNewYear);
         }
 
         public static void Refresh(this ES_RewardList self, List<RewardItem> rewardItems, float scale = 1f, bool showNumber = true,
@@ -51,6 +56,7 @@ namespace ET.Client
                 self.ShowBagInfos.Add(new BagInfo() { ItemID = item.ItemID, ItemNum = item.ItemNum });
             }
 
+            self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
             self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
@@ -71,6 +77,7 @@ namespace ET.Client
                 self.ShowBagInfos.Add(new BagInfo() { ItemID = int.Parse(it[0]), ItemNum = int.Parse(it[1]) });
             }
 
+            self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
             self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
             self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }

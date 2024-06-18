@@ -34,9 +34,8 @@ namespace ET.Client
 
         public static async ETTask OnRewardShowBtn(this ES_SeasonTower self)
         {
-            // UI uiHelp = await UIHelper.Create(self.ZoneScene(), UIType.UISeasonTowerReward);
-            // uiHelp.GetComponent<UISeasonTowerRewardComponent>().OnInitUI(7);
-            await ETTask.CompletedTask;
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SeasonTowerReward);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgSeasonTowerReward>().OnInitUI(7);
         }
 
         public static void OnEnterBtn(this ES_SeasonTower self)
