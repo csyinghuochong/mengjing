@@ -78,6 +78,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_ActivityTeHui ES_ActivityTeHui
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_activitytehui == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ActivityTeHui");
+		    	   this.m_es_activitytehui = this.AddChild<ES_ActivityTeHui,Transform>(subTrans);
+     			}
+     			return this.m_es_activitytehui;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -186,6 +204,7 @@ namespace ET.Client
 			this.m_es_activityyueka = null;
 			this.m_es_activitymaoxian = null;
 			this.m_es_activitytoken = null;
+			this.m_es_activitytehui = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.m_E_1Toggle = null;
 			this.m_E_2Toggle = null;
@@ -199,6 +218,7 @@ namespace ET.Client
 		private EntityRef<ES_ActivityYueKa> m_es_activityyueka = null;
 		private EntityRef<ES_ActivityMaoXian> m_es_activitymaoxian = null;
 		private EntityRef<ES_ActivityToken> m_es_activitytoken = null;
+		private EntityRef<ES_ActivityTeHui> m_es_activitytehui = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		private UnityEngine.UI.Toggle m_E_1Toggle = null;
 		private UnityEngine.UI.Toggle m_E_2Toggle = null;
