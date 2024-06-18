@@ -1,24 +1,65 @@
-﻿
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
-	[EntitySystemOf(typeof(ES_ActivityToken))]
-	[FriendOfAttribute(typeof(ES_ActivityToken))]
-	public static partial class ES_ActivityTokenSystem 
-	{
-		[EntitySystem]
-		private static void Awake(this ES_ActivityToken self,Transform transform)
-		{
-			self.uiTransform = transform;
-		}
+    [EntitySystemOf(typeof (ES_ActivityToken))]
+    [FriendOfAttribute(typeof (ES_ActivityToken))]
+    public static partial class ES_ActivityTokenSystem
+    {
+        [EntitySystem]
+        private static void Awake(this ES_ActivityToken self, Transform transform)
+        {
+            self.uiTransform = transform;
 
-		[EntitySystem]
-		private static void Destroy(this ES_ActivityToken self)
-		{
-			self.DestroyWidget();
-		}
-	}
+            self.E_Btn_GoPayButton.AddListener(self.OnBtn_GoPay);
+            self.E_ActivityTokenItemsLoopHorizontalScrollRect.AddItemRefreshListener(self.OnActivityTokenItemsRefresh);
 
+            self.OnInitUI();
+        }
 
+        [EntitySystem]
+        private static void Destroy(this ES_ActivityToken self)
+        {
+            self.DestroyWidget();
+        }
+
+        private static void OnActivityTokenItemsRefresh(this ES_ActivityToken self, Transform transform, int index)
+        {
+            Scroll_Item_ActivityTokenItem scrollItemActivityTokenItem = self.ScrollItemActivityTokenItems[index].BindTrans(transform);
+            scrollItemActivityTokenItem.OnInitUI(self.ShowActivityConfigs[index]);
+        }
+
+        public static void OnBtn_GoPay(this ES_ActivityToken self)
+        {
+            FlyTipComponent.Instance.SpawnFlyTipDi("氪金界面暂未开放");
+            // UIHelper.Create(self.ZoneScene(), UIType.UIRecharge).Coroutine();
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Activity);
+        }
+
+        public static void OnInitUI(this ES_ActivityToken self)
+        {
+            self.ShowActivityConfigs.Clear();
+            List<ActivityConfig> activityConfigs = ActivityConfigCategory.Instance.GetAll().Values.ToList();
+            for (int i = 0; i < activityConfigs.Count; i++)
+            {
+                if (activityConfigs[i].ActivityType != 24)
+                {
+                    continue;
+                }
+
+                self.ShowActivityConfigs.Add(activityConfigs[i]);
+            }
+
+            self.AddUIScrollItems(ref self.ScrollItemActivityTokenItems, self.ShowActivityConfigs.Count);
+            self.E_ActivityTokenItemsLoopHorizontalScrollRect.SetVisible(true, self.ShowActivityConfigs.Count);
+
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int selfRechage = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber);
+            self.E_TextRechargeText.text = $"当前额度：{selfRechage}/298";
+            self.E_TextRechargeText.gameObject.SetActive(selfRechage < 298);
+        }
+    }
 }

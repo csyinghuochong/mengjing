@@ -12,9 +12,9 @@ namespace ET.Client
             return ErrorCode.ERR_Success;
         }
 
-        public static async ETTask<int> ActivityReceive(Scene root, int activityType, int activityId)
+        public static async ETTask<int> ActivityReceive(Scene root, int activityType, int activityId, int index = 0)
         {
-            C2M_ActivityReceiveRequest request = new() { ActivityType = activityType, ActivityId = activityId };
+            C2M_ActivityReceiveRequest request = new() { ActivityType = activityType, ActivityId = activityId, ReceiveIndex = index };
             M2C_ActivityReceiveResponse response = (M2C_ActivityReceiveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             ActivityComponentC activityComponent = root.GetComponent<ActivityComponentC>();

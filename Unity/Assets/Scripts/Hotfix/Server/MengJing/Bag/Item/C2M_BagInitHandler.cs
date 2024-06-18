@@ -21,12 +21,17 @@ namespace ET.Server
                     bagComponentS.QiangHuaFails.Add(0);
                 }
             }
+
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             if (numericComponent.GetAsInt(NumericType.CangKuNumber) == 0)
             {
                 numericComponent.Set(NumericType.CangKuNumber, 1);
             }
-            
+            if (numericComponent.GetAsInt(NumericType.RechargeNumber) == 0)
+            {
+                numericComponent.Set(NumericType.RechargeNumber, 648);
+            }
+
             for (int i = bagComponentS.WarehouseAddedCell.Count; i < (int)ItemLocType.ItemLocMax; i++)
             {
                 bagComponentS.WarehouseAddedCell.Add(0);
