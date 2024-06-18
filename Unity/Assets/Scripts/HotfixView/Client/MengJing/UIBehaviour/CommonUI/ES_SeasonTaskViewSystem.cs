@@ -70,16 +70,16 @@ namespace ET.Client
             if (dre == 1)
             {
                 scrollItemSeasonTaskItem.E_Img_lineImage.transform.GetComponent<RectTransform>().localPosition = new Vector3(87, -42, 0);
-                scrollItemSeasonTaskItem.E_Img_lineImage.transform.GetComponent<RectTransform>().transform.Rotate(0, 0, 150);
+                scrollItemSeasonTaskItem.E_Img_lineImage.transform.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 150);
                 scrollItemSeasonTaskItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().localPosition = new Vector3(87, -42, 0);
-                scrollItemSeasonTaskItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().transform.Rotate(0, 0, 150);
+                scrollItemSeasonTaskItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 150);
             }
             else
             {
                 scrollItemSeasonTaskItem.E_Img_lineImage.transform.GetComponent<RectTransform>().localPosition = new Vector3(-124, -64, 0);
-                scrollItemSeasonTaskItem.E_Img_lineImage.transform.GetComponent<RectTransform>().transform.Rotate(0, 0, -150);
+                scrollItemSeasonTaskItem.E_Img_lineImage.transform.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -150);
                 scrollItemSeasonTaskItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().localPosition = new Vector3(-124, -64, 0);
-                scrollItemSeasonTaskItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().transform.Rotate(0, 0, -150);
+                scrollItemSeasonTaskItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -150);
             }
 
             scrollItemSeasonTaskItem.OnUpdateData(self.ShowTaskIds[index]);
@@ -125,8 +125,10 @@ namespace ET.Client
 
                 //赛季任务。  主任务面板要屏蔽赛季任务
                 //服务器只记录当前的赛季任务。 小于此任务id的为已完成任务, 客户端需要显示所有的赛季任务
-                self.CompeletTaskId =
-                        (int)UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>()[NumericType.SeasonTask];
+                // self.CompeletTaskId =
+                //         (int)UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<NumericComponentC>()[NumericType.SeasonTask];
+                self.CompeletTaskId = 81000006;
+
                 List<TaskPro> taskPros = self.Root().GetComponent<TaskComponentC>().RoleTaskList;
                 for (int i = 0; i < taskPros.Count; i++)
                 {
@@ -152,7 +154,7 @@ namespace ET.Client
                     {
                         self.ShowTaskIds.Add(taskConfig.Id);
 
-                        if (taskConfig.Id == self.TaskPro.taskID)
+                        if (self.TaskPro != null && taskConfig.Id == self.TaskPro.taskID)
                         {
                             index = self.ShowTaskIds.Count;
                         }
@@ -177,7 +179,12 @@ namespace ET.Client
                 self.E_SeasonDayTaskItemsLoopVerticalScrollRect.gameObject.SetActive(true);
 
                 // 赛季每日任务
-                List<TaskPro> taskPros = self.Root().GetComponent<TaskComponentC>().TaskCountryList;
+                // List<TaskPro> taskPros = self.Root().GetComponent<TaskComponentC>().TaskCountryList;
+
+                List<TaskPro> taskPros = new();
+                taskPros.Add(new TaskPro() { taskID = 600101, taskStatus = (int)TaskStatuEnum.Accepted });
+                taskPros.Add(new TaskPro() { taskID = 600102, taskStatus = (int)TaskStatuEnum.Accepted });
+
                 taskPros.Sort(delegate(TaskPro a, TaskPro b)
                 {
                     int commita = a.taskStatus == (int)TaskStatuEnum.Commited? 1 : 0;
@@ -208,6 +215,9 @@ namespace ET.Client
 
                     self.ShowTaskPros.Add(taskPros[i]);
                 }
+
+                self.AddUIScrollItems(ref self.ScrollItemSeasonDayTaskItems, self.ShowTaskPros.Count);
+                self.E_SeasonDayTaskItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskPros.Count);
 
                 if (self.ScrollItemSeasonDayTaskItems != null)
                 {

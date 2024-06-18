@@ -58,16 +58,16 @@ namespace ET.Client
             if (dre == 1)
             {
                 scrollItemTaskGrowUpItem.E_Img_lineImage.transform.GetComponent<RectTransform>().localPosition = new Vector3(87, -42, 0);
-                scrollItemTaskGrowUpItem.E_Img_lineImage.transform.GetComponent<RectTransform>().transform.Rotate(0, 0, 150);
+                scrollItemTaskGrowUpItem.E_Img_lineImage.transform.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 150);
                 scrollItemTaskGrowUpItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().localPosition = new Vector3(87, -42, 0);
-                scrollItemTaskGrowUpItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().transform.Rotate(0, 0, 150);
+                scrollItemTaskGrowUpItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, 150);
             }
             else
             {
                 scrollItemTaskGrowUpItem.E_Img_lineImage.transform.GetComponent<RectTransform>().localPosition = new Vector3(-124, -64, 0);
-                scrollItemTaskGrowUpItem.E_Img_lineImage.transform.GetComponent<RectTransform>().transform.Rotate(0, 0, -150);
+                scrollItemTaskGrowUpItem.E_Img_lineImage.transform.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -150);
                 scrollItemTaskGrowUpItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().localPosition = new Vector3(-124, -64, 0);
-                scrollItemTaskGrowUpItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().transform.Rotate(0, 0, -150);
+                scrollItemTaskGrowUpItem.E_Img_lineDiImage.transform.GetComponent<RectTransform>().localRotation = Quaternion.Euler(0, 0, -150);
             }
 
             scrollItemTaskGrowUpItem.OnUpdateData(self.ShowTaskConfigIds[index]);
