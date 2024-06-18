@@ -1,12 +1,21 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_SeasonTask : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_SeasonTask : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public TaskPro TaskPro; // 进行中的赛季任务 或 选中的每日任务
+		public int TaskType;
+		public int CompeletTaskId;
+		public List<int> ShowTaskIds = new();
+		public Dictionary<int, Scroll_Item_SeasonTaskItem> ScrollItemSeasonTaskItems;
+		public List<TaskPro> ShowTaskPros = new();
+		public Dictionary<int, Scroll_Item_SeasonDayTaskItem> ScrollItemSeasonDayTaskItems;
+		
 		public UnityEngine.UI.ToggleGroup E_ItemTypeSetToggleGroup
      	{
      		get

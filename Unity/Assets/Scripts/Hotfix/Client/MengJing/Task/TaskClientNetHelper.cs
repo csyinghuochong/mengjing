@@ -72,6 +72,27 @@ namespace ET.Client
             return response.Error;
         }
 
+        public static async ETTask<int> SendCommitTaskCountry(Scene root, int taskId, long baginfoId = 0)
+        {
+            C2M_CommitTaskCountryRequest request = new() { TaskId = taskId, BagInfoID = baginfoId };
+            M2C_CommitTaskCountryResponse response =
+                    (M2C_CommitTaskCountryResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            TaskComponentC taskComponentC = root.GetComponent<TaskComponentC>();
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                for (int i = 0; i < taskComponentC.TaskCountryList.Count; i++)
+                {
+                    if (taskComponentC.TaskCountryList[i].taskID == taskId)
+                    {
+                        taskComponentC.TaskCountryList[i].taskStatus = (int)TaskStatuEnum.Commited;
+                    }
+                }
+            }
+
+            return response.Error;
+        }
+
         public static async ETTask<int> RequestGetTask(Scene root, int taskId)
         {
             C2M_TaskGetRequest request = new() { TaskId = taskId };
