@@ -107,5 +107,6 @@ namespace ET.Client
 		WindowID_AuctionRecord,
 		WindowID_Season,
 		WindowID_SeasonLordDetail,
+		WindowID_SeasonJingHeZhuru,
 	}
 }

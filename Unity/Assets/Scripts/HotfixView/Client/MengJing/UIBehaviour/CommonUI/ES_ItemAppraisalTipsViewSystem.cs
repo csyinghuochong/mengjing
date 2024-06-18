@@ -428,21 +428,45 @@ namespace ET.Client
 
         private static async ETTask OnJingHeAddQualityButton(this ES_ItemAppraisalTips self)
         {
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SeasonJingHeZhuru);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgSeasonJingHeZhuru>().InitInfo(self.BagInfo);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
             await ETTask.CompletedTask;
         }
 
         private static async ETTask OnJingHeActivateButton(this ES_ItemAppraisalTips self)
         {
-            await ETTask.CompletedTask;
+            await BagClientNetHelper.JingHeActivate(self.Root(), self.BagInfo.BagInfoID);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
         }
 
         private static async ETTask OnSaveStoreHouseButton(this ES_ItemAppraisalTips self)
         {
+            if (self.ItemOpetateType == ItemOperateEnum.AccountBag)
+            {
+                ItemViewHelp.AccountCangkuPutIn(self.Root(), self.BagInfo);
+            }
+            else
+            {
+                BagClientNetHelper.RquestPutStoreHouse(self.Root(), self.BagInfo).Coroutine();
+            }
+
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
             await ETTask.CompletedTask;
         }
 
         private static async ETTask OnTakeStoreHouseButton(this ES_ItemAppraisalTips self)
         {
+            if (self.ItemOpetateType == ItemOperateEnum.AccountCangku)
+            {
+                BagClientNetHelper.RequestAccountWarehousOperate(self.Root(), 2, self.BagInfo.BagInfoID).Coroutine();
+            }
+            else
+            {
+                BagClientNetHelper.RquestPutBag(self.Root(), self.BagInfo).Coroutine();
+            }
+
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
             await ETTask.CompletedTask;
         }
     }

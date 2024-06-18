@@ -715,5 +715,19 @@ namespace ET.Client
             M2C_JingHeWearResponse response = (M2C_JingHeWearResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_JingHeActivateResponse> JingHeActivate(Scene root, long bagInfoId)
+        {
+            C2M_JingHeActivateRequest request = new() { BagInfoId = bagInfoId };
+            M2C_JingHeActivateResponse response = (M2C_JingHeActivateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<M2C_JingHeZhuruResponse> JingHeZhuru(Scene root, long bagInfoId, List<long> operateBagID)
+        {
+            C2M_JingHeZhuruRequest request = new() { BagInfoId = bagInfoId, OperateBagID = operateBagID };
+            M2C_JingHeZhuruResponse response = (M2C_JingHeZhuruResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }
