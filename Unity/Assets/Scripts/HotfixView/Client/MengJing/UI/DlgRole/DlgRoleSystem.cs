@@ -76,17 +76,11 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgRole self, Entity contextData = null)
         {
-            self.View.E_BagToggle.IsSelected(true);
+            self.View.E_FunctionSetBtnToggleGroup.Select(0);
         }
 
         private static void OnFunctionSetBtn(this DlgRole self, int index)
         {
-            UICommonHelper.SetToggleShow(self.View.E_BagToggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.View.E_PropertyToggle.gameObject, index == 1);
-            UICommonHelper.SetToggleShow(self.View.E_GemToggle.gameObject, index == 2);
-            UICommonHelper.SetToggleShow(self.View.E_HuiShowToggle.gameObject, index == 3);
-            UICommonHelper.SetToggleShow(self.View.E_QiangHuaToggle.gameObject, index == 4);
-
             UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
             {
