@@ -203,5 +203,23 @@ namespace ET.Client
             S2C_SoloMyInfoResponse response = (S2C_SoloMyInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<int> RequstBattleEnter(Scene root)
+        {
+            int sceneId = BattleHelper.GetBattFubenId(root.GetComponent<UserInfoComponentC>().UserInfo.Lv);
+            if (sceneId == 0)
+            {
+                return ErrorCode.ERR_LevelNoEnough;
+            }
+
+            bool intime = FunctionHelp.IsInTime(1025);
+            if (!intime)
+            {
+                return ErrorCode.ERR_AlreadyFinish;
+            }
+
+            int errorCode = await EnterMapHelper.RequestTransfer(root, SceneTypeEnum.Battle, sceneId);
+            return errorCode;
+        }
     }
 }
