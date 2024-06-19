@@ -55,11 +55,11 @@ namespace ET.Client
             long unionId = (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0));
             if (unionId > 0)
             {
-                self.View.E_Button_4Toggle.IsSelected(true);
+                self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(4);
             }
             else
             {
-                self.View.E_Button_3Toggle.IsSelected(true);
+                self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(3);
             }
         }
 
@@ -69,12 +69,6 @@ namespace ET.Client
             {
                 return;
             }
-
-            UICommonHelper.SetToggleShow(self.View.E_Button_0Toggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.View.E_Button_1Toggle.gameObject, index == 1);
-            UICommonHelper.SetToggleShow(self.View.E_Button_2Toggle.gameObject, index == 2);
-            UICommonHelper.SetToggleShow(self.View.E_Button_3Toggle.gameObject, index == 3);
-            UICommonHelper.SetToggleShow(self.View.E_Button_4Toggle.gameObject, index == 4);
 
             UICommonHelper.HideChildren(self.View.EG_SubViewNodeRectTransform);
 

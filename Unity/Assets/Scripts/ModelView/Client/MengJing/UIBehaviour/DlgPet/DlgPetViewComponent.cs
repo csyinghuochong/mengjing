@@ -24,74 +24,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_PetToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_PetToggle == null )
-     			{
-		    		this.m_E_PetToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Pet");
-     			}
-     			return this.m_E_PetToggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_HeChengToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_HeChengToggle == null )
-     			{
-		    		this.m_E_HeChengToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_HeCheng");
-     			}
-     			return this.m_E_HeChengToggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_XiLianToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_XiLianToggle == null )
-     			{
-		    		this.m_E_XiLianToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_XiLian");
-     			}
-     			return this.m_E_XiLianToggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_ShouHuToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ShouHuToggle == null )
-     			{
-		    		this.m_E_ShouHuToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_ShouHu");
-     			}
-     			return this.m_E_ShouHuToggle;
-     		}
-     	}
-
 		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
      		get
@@ -118,7 +50,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_petlist ==null )
+     			if( this.m_es_petlist == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetList");
 		    	   this.m_es_petlist = this.AddChild<ES_PetList,Transform>(subTrans);
@@ -136,7 +68,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_pethecheng ==null )
+     			if( this.m_es_pethecheng == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetHeCheng");
 		    	   this.m_es_pethecheng = this.AddChild<ES_PetHeCheng,Transform>(subTrans);
@@ -154,7 +86,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_petxilian ==null )
+     			if( this.m_es_petxilian == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetXiLian");
 		    	   this.m_es_petxilian = this.AddChild<ES_PetXiLian,Transform>(subTrans);
@@ -172,7 +104,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_petshouhu ==null )
+     			if( this.m_es_petshouhu == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetShouHu");
 		    	   this.m_es_petshouhu = this.AddChild<ES_PetShouHu,Transform>(subTrans);
@@ -184,10 +116,6 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_FunctionSetBtnToggleGroup = null;
-			this.m_E_PetToggle = null;
-			this.m_E_HeChengToggle = null;
-			this.m_E_XiLianToggle = null;
-			this.m_E_ShouHuToggle = null;
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_petlist = null;
 			this.m_es_pethecheng = null;
@@ -197,10 +125,6 @@ namespace ET.Client
 		}
 
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_PetToggle = null;
-		private UnityEngine.UI.Toggle m_E_HeChengToggle = null;
-		private UnityEngine.UI.Toggle m_E_XiLianToggle = null;
-		private UnityEngine.UI.Toggle m_E_ShouHuToggle = null;
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_PetList> m_es_petlist = null;
 		private EntityRef<ES_PetHeCheng> m_es_pethecheng = null;

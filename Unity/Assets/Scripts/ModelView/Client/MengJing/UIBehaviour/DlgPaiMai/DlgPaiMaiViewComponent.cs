@@ -33,7 +33,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_paimaishop ==null)
+     			if( this.m_es_paimaishop == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PaiMaiShop");
 		    	   this.m_es_paimaishop = this.AddChild<ES_PaiMaiShop,Transform>(subTrans);
@@ -51,7 +51,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_paimaibuy ==null )
+     			if( this.m_es_paimaibuy == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PaiMaiBuy");
 		    	   this.m_es_paimaibuy = this.AddChild<ES_PaiMaiBuy,Transform>(subTrans);
@@ -69,7 +69,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_paimaisell ==null )
+     			if( this.m_es_paimaisell == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PaiMaiSell");
 		    	   this.m_es_paimaisell = this.AddChild<ES_PaiMaiSell,Transform>(subTrans);
@@ -87,7 +87,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_paimaiduihuan ==null )
+     			if( this.m_es_paimaiduihuan == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PaiMaiDuiHuan");
 		    	   this.m_es_paimaiduihuan = this.AddChild<ES_PaiMaiDuiHuan,Transform>(subTrans);
@@ -113,91 +113,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_1Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_1Toggle == null )
-     			{
-		    		this.m_E_1Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_1");
-     			}
-     			return this.m_E_1Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_2Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_2Toggle == null )
-     			{
-		    		this.m_E_2Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_2");
-     			}
-     			return this.m_E_2Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_3Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_3Toggle == null )
-     			{
-		    		this.m_E_3Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_3");
-     			}
-     			return this.m_E_3Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_4Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_4Toggle == null )
-     			{
-		    		this.m_E_4Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_4");
-     			}
-     			return this.m_E_4Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_5Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_5Toggle == null )
-     			{
-		    		this.m_E_5Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_5");
-     			}
-     			return this.m_E_5Toggle;
-     		}
-     	}
-
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
@@ -206,11 +121,6 @@ namespace ET.Client
 			this.m_es_paimaisell = null;
 			this.m_es_paimaiduihuan = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
-			this.m_E_1Toggle = null;
-			this.m_E_2Toggle = null;
-			this.m_E_3Toggle = null;
-			this.m_E_4Toggle = null;
-			this.m_E_5Toggle = null;
 			this.uiTransform = null;
 		}
 
@@ -220,11 +130,6 @@ namespace ET.Client
 		private EntityRef<ES_PaiMaiSell> m_es_paimaisell = null;
 		private EntityRef<ES_PaiMaiDuiHuan> m_es_paimaiduihuan = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_1Toggle = null;
-		private UnityEngine.UI.Toggle m_E_2Toggle = null;
-		private UnityEngine.UI.Toggle m_E_3Toggle = null;
-		private UnityEngine.UI.Toggle m_E_4Toggle = null;
-		private UnityEngine.UI.Toggle m_E_5Toggle = null;
 		public Transform uiTransform = null;
 	}
 }

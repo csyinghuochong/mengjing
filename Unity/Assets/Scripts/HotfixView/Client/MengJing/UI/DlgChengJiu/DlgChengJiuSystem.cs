@@ -20,16 +20,11 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgChengJiu self, Entity contextData = null)
         {
-            self.View.E_RewardToggle.IsSelected(true);
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
 
         private static void OnFunctionSetBtn(this DlgChengJiu self, int index)
         {
-            UICommonHelper.SetToggleShow(self.View.E_RewardToggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.View.E_ListToggle.gameObject, index == 1);
-            UICommonHelper.SetToggleShow(self.View.E_JingLingToggle.gameObject, index == 2);
-            UICommonHelper.SetToggleShow(self.View.E_TuJianToggle.gameObject, index == 3);
-
             UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
             {

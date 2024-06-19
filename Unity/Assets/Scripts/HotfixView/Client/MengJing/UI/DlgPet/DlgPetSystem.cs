@@ -50,16 +50,11 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgPet self, Entity contextData = null)
         {
-            self.View.E_PetToggle.IsSelected(true);
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
 
         private static void OnFunctionSetBtn(this DlgPet self, int index)
         {
-            UICommonHelper.SetToggleShow(self.View.E_PetToggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.View.E_HeChengToggle.gameObject, index == 1);
-            UICommonHelper.SetToggleShow(self.View.E_XiLianToggle.gameObject, index == 2);
-            UICommonHelper.SetToggleShow(self.View.E_ShouHuToggle.gameObject, index == 3);
-
             UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
             {

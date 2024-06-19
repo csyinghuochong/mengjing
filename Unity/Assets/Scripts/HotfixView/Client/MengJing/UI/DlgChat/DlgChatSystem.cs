@@ -31,7 +31,7 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgChat self, Entity contextData = null)
         {
-            self.View.E_WordToggle.IsSelected(true);
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
 
         private static void OnCloseButton(this DlgChat self)
@@ -197,16 +197,6 @@ namespace ET.Client
 
         private static void OnFunctionSetBtn(this DlgChat self, int index)
         {
-            Log.Debug($"按下Toggle：{index}");
-
-            UICommonHelper.SetToggleShow(self.View.E_WordToggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.View.E_TeamToggle.gameObject, index == 1);
-            UICommonHelper.SetToggleShow(self.View.E_UnionToggle.gameObject, index == 2);
-            UICommonHelper.SetToggleShow(self.View.E_SystemToggle.gameObject, index == 3);
-            UICommonHelper.SetToggleShow(self.View.E_FriendToggle.gameObject, index == 4);
-            UICommonHelper.SetToggleShow(self.View.E_PickToggle.gameObject, index == 5);
-            UICommonHelper.SetToggleShow(self.View.E_PaiMaiToggle.gameObject, index == 6);
-
             self.CurrentChatType = index;
             self.Refresh();
         }
@@ -227,7 +217,7 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemChatItems, self.ShowChatInfos.Count);
             self.View.E_ChatItemsLoopVerticalScrollRect.SetVisible(true, self.ShowChatInfos.Count);
             self.View.E_ChatItemsLoopVerticalScrollRect.RefillCellsFromEnd();
-            
+
             Vector3 vector3 = self.View.E_ChatItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>().localPosition;
             vector3.y = self.ShowChatInfos.Count * 200;
             self.View.E_ChatItemsLoopVerticalScrollRect.transform.Find("Content").GetComponent<RectTransform>().localPosition = vector3;

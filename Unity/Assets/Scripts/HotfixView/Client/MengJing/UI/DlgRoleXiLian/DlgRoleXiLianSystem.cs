@@ -21,17 +21,11 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgRoleXiLian self, Entity contextData = null)
         {
-            self.View.E_XiLianToggle.IsSelected(true);
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
 
         private static void OnFunctionSetBtn(this DlgRoleXiLian self, int index)
         {
-            UICommonHelper.SetToggleShow(self.View.E_XiLianToggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.View.E_DaShiToggle.gameObject, index == 1);
-            UICommonHelper.SetToggleShow(self.View.E_SkillToggle.gameObject, index == 2);
-            UICommonHelper.SetToggleShow(self.View.E_TransferToggle.gameObject, index == 3);
-            UICommonHelper.SetToggleShow(self.View.E_InheritToggle.gameObject, index == 4);
-
             UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
             {
