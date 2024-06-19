@@ -128,6 +128,15 @@ namespace ET.Client
         
         public void DestroyWidget()
         {
+
+            this.m_es_TextChanChu = null;
+            this.m_es_ImHeXinShow = null;
+            this.m_es_PetList = null;
+            this.m_es_TextMine = null;
+            this.m_es_ImageIcon = null;
+            this.m_es_TextPlayer = null;
+            this.E_PetIconList = null;
+            this.PetMingPlayerInfo = null;
             this.uiTransform = null;
         }
         
@@ -138,9 +147,7 @@ namespace ET.Client
         private Text m_es_TextMine;
         private Image m_es_ImageIcon;
         private Text m_es_TextPlayer;
-        
         public Image[] E_PetIconList = new Image[5];
-        public GameObject[] E_PetDiList = new GameObject[5];
         public PetMingPlayerInfo PetMingPlayerInfo;
         public Transform uiTransform = null;
         

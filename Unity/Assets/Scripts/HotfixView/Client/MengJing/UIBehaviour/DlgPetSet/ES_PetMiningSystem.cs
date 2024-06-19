@@ -7,7 +7,7 @@ namespace ET.Client
 {
     [EntitySystemOf(typeof (ES_PetMining))]
     [FriendOfAttribute(typeof (ES_PetMining))]
-    [FriendOf(typeof(ES_PetMiningItem))]
+    [FriendOf(typeof (ES_PetMiningItem))]
     public static partial class ES_PetMiningSystem
     {
         [EntitySystem]
@@ -21,8 +21,10 @@ namespace ET.Client
             self.E_ButtonReward.AddListener(() => { self.OnButtonReward().Coroutine(); });
             self.E_ButtonTeamToggle.AddListener(() => { self.OnButtonTeamToggle(); });
             self.E_ButtonEditorTeam.AddListener(() => { self.OnPetMiningTeamButton().Coroutine(); });
-            
+
             self.E_FunctionSetBtnToggleGroup.AddListener(self.OnClickPageButton);
+
+            self.E_PetMiningItem.gameObject.SetActive(false);
         }
 
         [EntitySystem]
@@ -110,6 +112,11 @@ namespace ET.Client
         public static void OnButtonReward_2(this ES_PetMining self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMiningReward).Coroutine();
+        }
+
+        public static void OnUpdateUI(this ES_PetMining self)
+        {
+            self.RequestMingList().Coroutine();;
         }
 
         public static async ETTask RequestMingList(this ES_PetMining self)

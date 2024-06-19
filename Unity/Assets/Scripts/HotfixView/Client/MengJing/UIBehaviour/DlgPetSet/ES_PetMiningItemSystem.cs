@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -11,6 +12,12 @@ namespace ET.Client
         private static void Awake(this ET.Client.ES_PetMiningItem self, UnityEngine.Transform args2)
         {
             self.uiTransform = args2;
+            
+            for (int i = 0; i < self.E_PetIconList.Length; i++)
+            {
+                self.E_PetIconList[i] = self.E_PetList.transform.GetChild(i).Find("Icon").GetComponent<Image>();
+            }
+            
         }
 
         [EntitySystem]

@@ -31,6 +31,7 @@ namespace ET.Client
                     break;
                 case 1:
                     self.View.ES_PetMining.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_PetMining.OnUpdateUI();
                     break;
             }
         }
