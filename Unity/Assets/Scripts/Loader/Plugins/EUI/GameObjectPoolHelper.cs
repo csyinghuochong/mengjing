@@ -8,7 +8,12 @@ namespace ET.Client
     public static class GameObjectPoolHelper
     {
         private static Dictionary<string, GameObjectPool> poolDict = new Dictionary<string, GameObjectPool>();
-        
+
+        public static bool HaveObject(string poolName)
+        {
+            return poolDict.ContainsKey(poolName);
+        }
+
         public static void InitPool( string poolName, int size, PoolInflationType type = PoolInflationType.DOUBLE)
         {
             if (poolDict.ContainsKey(poolName))
@@ -36,9 +41,8 @@ namespace ET.Client
             }
         }
         
-        public static async ETTask InitPoolFormGamObjectAsync(  GameObject pb, int size, PoolInflationType type = PoolInflationType.DOUBLE)
+        public static async ETTask InitPoolFormGamObjectAsync(string poolName,  GameObject pb, int size, PoolInflationType type = PoolInflationType.DOUBLE)
         {
-            string poolName = pb.name;
             if (poolDict.ContainsKey(poolName))
             {
                 return;
@@ -148,7 +152,7 @@ namespace ET.Client
 
         public static GameObject GetGameObjectByResType( string poolName)
         {
-            GameObject pb = ResourcesComponent.Instance.LoadAssetSync<GameObject>( $"Assets/Bundles/UI/Item/{poolName}.prefab");
+            GameObject pb = ResourcesComponent.Instance.LoadAssetSync<GameObject>(poolName);
             return pb;
         }
     }

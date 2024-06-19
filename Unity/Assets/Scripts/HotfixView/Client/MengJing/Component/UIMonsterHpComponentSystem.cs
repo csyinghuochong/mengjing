@@ -22,7 +22,7 @@ namespace ET.Client
             self.HeadBarPath = "";
             self.LastTime = 0f;
             self.HeadBarPath = ABPathHelper.GetUGUIPath("Blood/UIMonsterHp");
-            GameObjectPoolComponent.Instance.AddLoadQueue(self.HeadBarPath, self.InstanceId, self.OnLoadGameObject);
+            GameObjectLoadHelper.AddLoadQueue(self.Root(), self.HeadBarPath, self.InstanceId, self.OnLoadGameObject);
         }
         [EntitySystem]
         private static void Destroy(this ET.Client.UIMonsterHpComponent self)
@@ -386,7 +386,7 @@ namespace ET.Client
                      self.UIPlayerHpText.transform.SetParent(gameobject.transform);
                  }
                     
-                 GameObjectPoolComponent.Instance?.RecoverGameObject(self.HeadBarPath, gameobject);
+                 GameObjectLoadHelper.RecoverGameObject(self.HeadBarPath, gameobject);
                  self.GameObject = null;
              }
          }

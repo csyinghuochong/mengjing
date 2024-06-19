@@ -35,7 +35,7 @@ namespace ET.Client
 
             if (!string.IsNullOrEmpty(self.WeaponAsset) && self.WeaponObject != null)
             {
-                GameObjectPoolComponent.Instance.RecoverGameObject(self.WeaponAsset, self.WeaponObject);
+                GameObjectLoadHelper.RecoverGameObject(self.WeaponAsset, self.WeaponObject);
             }
 
             self.WeaponAsset = null;
@@ -229,7 +229,7 @@ namespace ET.Client
 
         public static void LoadPrefab(this ChangeEquipComponent self, string asset)
         {
-            GameObjectPoolComponent.Instance.AddLoadQueue(asset, self.InstanceId, self.OnLoadGameObject);
+            GameObjectLoadHelper.AddLoadQueue(self.Root(), asset, self.InstanceId, self.OnLoadGameObject);
         }
 
         public static void RecoverGameObject(this ChangeEquipComponent self)
@@ -256,7 +256,7 @@ namespace ET.Client
                 fashionmap.TryGetValue(assets, out assetpath);
                 if (!string.IsNullOrEmpty(assetpath))
                 {
-                    GameObjectPoolComponent.Instance.RecoverGameObject(assetpath, self.gameObjects[i]);
+                    GameObjectLoadHelper.RecoverGameObject(assetpath, self.gameObjects[i]);
                 }
                 else
                 {
@@ -370,7 +370,7 @@ namespace ET.Client
 
             if (!string.IsNullOrEmpty(self.WeaponAsset) && self.WeaponObject != null)
             {
-                GameObjectPoolComponent.Instance.RecoverGameObject(self.WeaponAsset, self.WeaponObject);
+                GameObjectLoadHelper.RecoverGameObject(self.WeaponAsset, self.WeaponObject);
             }
 
             string weaponPath = "";
@@ -424,7 +424,7 @@ namespace ET.Client
             self.WeaponObject = null;
             self.WeaponParent = weaponParent;
             self.RimLight = rimLight;
-            GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject_Weapon);
+            GameObjectLoadHelper.AddLoadQueue(self.Root(), path, self.InstanceId, self.OnLoadGameObject_Weapon);
         }
 
         public static void LoadEquipment(this ChangeEquipComponent self, GameObject target, List<int> fashionids, int occ)

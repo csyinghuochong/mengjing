@@ -38,17 +38,17 @@ namespace ET.Client
         {
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
 
-            GameObject flyTip = await resourcesLoaderComponent.LoadAssetAsync<GameObject>($"Assets/Bundles/UI/Other/FlyTip.prefab");
-            await GameObjectPoolHelper.InitPoolFormGamObjectAsync(flyTip, 3);
+            GameObject flyTip = await resourcesLoaderComponent.LoadAssetAsync<GameObject>("Assets/Bundles/UI/Other/FlyTip.prefab");
+            await GameObjectPoolHelper.InitPoolFormGamObjectAsync("Assets/Bundles/UI/Other/FlyTip.prefab", flyTip, 3);
 
-            GameObject flyTipDi = await resourcesLoaderComponent.LoadAssetAsync<GameObject>($"Assets/Bundles/UI/Other/FlyTipDi.prefab");
-            await GameObjectPoolHelper.InitPoolFormGamObjectAsync(flyTipDi, 3);
+            GameObject flyTipDi = await resourcesLoaderComponent.LoadAssetAsync<GameObject>("Assets/Bundles/UI/Other/FlyTipDi.prefab");
+            await GameObjectPoolHelper.InitPoolFormGamObjectAsync("Assets/Bundles/UI/Other/FlyTipDi.prefab", flyTipDi, 3);
         }
 
         public static void SpawnFlyTip(this FlyTipComponent self, string str)
         {
             Vector3 startPos = new(0, -100, 0);
-            GameObject FlyTipGO = GameObjectPoolHelper.GetObjectFromPool("FlyTip");
+            GameObject FlyTipGO = GameObjectPoolHelper.GetObjectFromPool("Assets/Bundles/UI/Other/FlyTip.prefab");
             FlyTipGO.transform.SetParent(self.Root().GetComponent<GlobalComponent>().PopUpRoot);
             self.FlyTips.Add(FlyTipGO);
             FlyTipGO.SetActive(true);
@@ -72,7 +72,7 @@ namespace ET.Client
         public static void SpawnFlyTipDi(this FlyTipComponent self, string str)
         {
             Vector3 startPos = new(0, -100, 0);
-            GameObject FlyTipDiGO = GameObjectPoolHelper.GetObjectFromPool("FlyTipDi");
+            GameObject FlyTipDiGO = GameObjectPoolHelper.GetObjectFromPool("Assets/Bundles/UI/Other/FlyTipDi.prefab");
             FlyTipDiGO.transform.SetParent(self.Root().GetComponent<GlobalComponent>().PopUpRoot);
             self.FlyTipDis.Add(FlyTipDiGO);
             FlyTipDiGO.SetActive(true);

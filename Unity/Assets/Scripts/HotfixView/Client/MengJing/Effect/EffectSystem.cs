@@ -188,7 +188,7 @@ namespace ET.Client
             
             Log.Debug($"effectNamePath:  {effectNamePath}");
             
-            GameObjectPoolComponent.Instance.AddLoadQueue(self.EffectPath, self.InstanceId, self.OnLoadGameObject);
+            GameObjectLoadHelper.AddLoadQueue(self.Root(), self.EffectPath, self.InstanceId, self.OnLoadGameObject);
         }
 
         public static void OnUpdate(this Effect self)
@@ -287,7 +287,7 @@ namespace ET.Client
         
         public static void OnFinished(this Effect self)
         {
-            GameObjectPoolComponent.Instance?.RecoverGameObject(self.EffectPath, self.EffectObj);
+            GameObjectLoadHelper.RecoverGameObject(self.EffectPath, self.EffectObj);
             self.EffectState = BuffState.Finished;
             self.TheUnitBelongto = null;
             self.EffectObj = null;

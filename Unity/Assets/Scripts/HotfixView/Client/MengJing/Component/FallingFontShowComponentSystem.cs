@@ -38,7 +38,7 @@ namespace ET.Client
             }
 
             string uIBattleFly = StringBuilderData.UIBattleFly;
-            GameObjectPoolComponent.Instance.RecoverGameObject(uIBattleFly, FlyFontObj, true);
+            GameObjectLoadHelper.RecoverGameObject(uIBattleFly, FlyFontObj, true);
             FlyFontObj.transform.localPosition = new Vector2(-2000f, -2000f);
         }
 
@@ -122,7 +122,7 @@ namespace ET.Client
             self.TargetValue = targetValue;
             self.HeadBar = HeadBar;
             string uIBattleFly = StringBuilderData.UIBattleFly;
-            GameObjectPoolComponent.Instance.AddLoadQueue(uIBattleFly, self.InstanceId, self.OnLoadGameObject);
+            GameObjectLoadHelper.AddLoadQueue(self.Root(), uIBattleFly, self.InstanceId, self.OnLoadGameObject);
         }
 
         public static bool LateUpdate(this FallingFontShowComponent self)

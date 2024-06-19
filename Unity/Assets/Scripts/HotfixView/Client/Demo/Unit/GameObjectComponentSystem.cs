@@ -83,7 +83,7 @@ namespace ET.Client
             {
                 self.OnRevive();
                 //GameObjectPoolHelper.ReturnObjectToPool(self.GameObject);
-                GameObjectPoolComponent.Instance.RecoverGameObject(self.UnitAssetsPath, self.GameObject);
+                GameObjectLoadHelper.RecoverGameObject(self.UnitAssetsPath, self.GameObject);
             }
 
             self.GameObject = null;
@@ -93,6 +93,8 @@ namespace ET.Client
         {
             Unit unit = self.GetParent<Unit>();
             int unitType = unit.Type;
+            var path = string.Empty;
+
             switch (unitType)
             {
                 case UnitType.Player:
@@ -105,8 +107,7 @@ namespace ET.Client
                         return;
                     }
 
-                    var path = string.Empty;
-
+                    
                     NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
                     int runmonsterId = numericComponent.GetAsInt(NumericType.RunRaceTransform);
                     int cardtransform = numericComponent.GetAsInt(NumericType.CardTransform);
@@ -118,7 +119,6 @@ namespace ET.Client
                     else
                     {
                         path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(unit.ConfigId).ModelAsset}");
-                        GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
                         self.UnitAssetsPath = string.Empty;
                     }
 
@@ -149,19 +149,16 @@ namespace ET.Client
                         ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemid);
                         int petskinId = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetSkin);
                         path = ABPathHelper.GetUnitPath("Pet/" + PetSkinConfigCategory.Instance.Get(petskinId).SkinID);
-                        GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
                         self.UnitAssetsPath = path;
                     }
                     else if (monsterCof.MonsterSonType == 59)
                     {
                         path = ABPathHelper.GetUnitPath("JingLing/" + monsterCof.MonsterModelID);
-                        GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
                         self.UnitAssetsPath = path;
                     }
                     else
                     {
                         path = StringBuilderHelper.GetMonsterUnitPath(monsterCof.MonsterModelID);
-                        GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
                         self.UnitAssetsPath = path;
                     }
 
@@ -177,7 +174,6 @@ namespace ET.Client
 
                     PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(skinId);
                     path = ABPathHelper.GetUnitPath("Pet/" + petSkinConfig.SkinID.ToString());
-                    GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
                     self.UnitAssetsPath = path;
                     break;
                 case UnitType.Bullet: //从特效里面加载
@@ -186,31 +182,26 @@ namespace ET.Client
                     EffectConfig effectConfig = EffectConfigCategory.Instance.Get(skillConfig.SkillEffectID[0]);
                     self.DelayShow = (long)(1000 * effectConfig.SkillEffectDelayTime);
                     path = ABPathHelper.GetEffetPath("SkillEffect/" + effectConfig.EffectName);
-                    GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
                     self.UnitAssetsPath = path;
                     break;
                 case UnitType.Npc:
                     int npcId = unit.ConfigId;
                     NpcConfig config = NpcConfigCategory.Instance.Get(npcId);
                     path = ABPathHelper.GetUnitPath("Npc/" + config.Asset);
-                    GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
                     self.UnitAssetsPath = path;
                     break;
                 case UnitType.DropItem:
                     // DropComponent dropComponent = unit.GetComponent<DropComponent>();
                     // string assetPath = dropComponent.DropInfo.ItemID == 1 ? "DropICoin" : "DropItem";
                     // path = ABPathHelper.GetUnitPath($"Player/{assetPath}");
-                    // GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
                     // self.UnitAssetsPath = path;
                     break;
                 case UnitType.Chuansong:
                     path = ABPathHelper.GetUnitPath("Monster/DorrWay_1");
-                    GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
                     break;
                 case UnitType.JingLing:
                     JingLingConfig jingLing = JingLingConfigCategory.Instance.Get(unit.ConfigId);
                     path = ABPathHelper.GetUnitPath("JingLing/" + jingLing.Assets);
-                    GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
                     self.UnitAssetsPath = path;
                     break;
                 case UnitType.Plant:
@@ -219,10 +210,14 @@ namespace ET.Client
                 case UnitType.Pasture:
                     JiaYuanPastureConfig jiaYuanPastureConfig = JiaYuanPastureConfigCategory.Instance.Get(unit.ConfigId);
                     path = ABPathHelper.GetUnitPath("Pasture/" + jiaYuanPastureConfig.Assets);
-                    GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
                     break;
                 default:
                     break;
+            }
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                GameObjectLoadHelper.AddLoadQueue(self.Root(), path, self.InstanceId, self.OnLoadGameObject);
             }
         }
 

@@ -26,12 +26,13 @@ namespace UnityEngine.UI
         {
             try
             {
+                string poolName = $"Assets/Bundles/UI/Item/{prefabName}.prefab";
                 if(!inited)
                 {
-                    GameObjectPoolHelper.InitPool(prefabName, poolSize);
+                    GameObjectPoolHelper.InitPool(poolName, poolSize);
                     inited = true;
                 }
-                return GameObjectPoolHelper.GetObjectFromPool(prefabName);
+                return GameObjectPoolHelper.GetObjectFromPool(poolName);
             }
             catch (Exception e)
             {

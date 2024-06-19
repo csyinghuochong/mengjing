@@ -23,7 +23,7 @@ namespace ET.Client
             self.LastTime = 0f;
             self.HeadBarPath = ABPathHelper.GetUGUIPath("Blood/UIPlayerHp");
 
-            GameObjectPoolComponent.Instance.AddLoadQueue(self.HeadBarPath, self.InstanceId, self.OnLoadGameObject);
+            GameObjectLoadHelper.AddLoadQueue(self.Root(), self.HeadBarPath, self.InstanceId, self.OnLoadGameObject);
         }
 
         [EntitySystem]
@@ -579,7 +579,7 @@ namespace ET.Client
                     self.UIPlayerHpText.transform.SetParent(gameobject.transform);
                 }
 
-                GameObjectPoolComponent.Instance?.RecoverGameObject(self.HeadBarPath, gameobject);
+                GameObjectLoadHelper.RecoverGameObject(self.HeadBarPath, gameobject);
                 self.GameObject = null;
             }
         }

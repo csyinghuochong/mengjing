@@ -528,8 +528,7 @@ namespace ET.Client
             // stringBuilder.Append(MonoPool.Instance.ToString());
             stringBuilder.Append("GameObjectPool:");
             stringBuilder.AppendLine();
-            stringBuilder.Append(GameObjectPoolComponent.Instance.ToString2());
-
+          
             battleMessage.UploadMemoryTime = TimeHelper.ServerNow();
 
             Popularize2C_UploadResponse response = await BagClientNetHelper.Upload(self.Root(), stringBuilder.ToString());
