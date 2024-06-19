@@ -8,6 +8,7 @@ namespace ET.Client
 {
     [FriendOf(typeof (ES_BattleEnter))]
     [FriendOf(typeof (ES_BattleTask))]
+    [FriendOf(typeof (ES_BattleShop))]
     [FriendOf(typeof (DlgBattle))]
     public static class DlgBattleSystem
     {
@@ -32,6 +33,10 @@ namespace ET.Client
                 case 1:
                     self.View.ES_BattleTask.uiTransform.gameObject.SetActive(true);
                     self.View.ES_BattleTask.OnUpdateUI();
+                    break;
+                case 2:
+                    self.View.ES_BattleShop.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_BattleShop.OnUpdateUI();
                     break;
             }
         }

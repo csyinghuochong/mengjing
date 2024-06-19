@@ -60,6 +60,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_BattleShop ES_BattleShop
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_battleshop == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_BattleShop");
+		    	   this.m_es_battleshop = this.AddChild<ES_BattleShop,Transform>(subTrans);
+     			}
+     			return this.m_es_battleshop;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -82,6 +100,7 @@ namespace ET.Client
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_battleenter = null;
 			this.m_es_battletask = null;
+			this.m_es_battleshop = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.uiTransform = null;
 		}
@@ -89,6 +108,7 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_BattleEnter> m_es_battleenter = null;
 		private EntityRef<ES_BattleTask> m_es_battletask = null;
+		private EntityRef<ES_BattleShop> m_es_battleshop = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}
