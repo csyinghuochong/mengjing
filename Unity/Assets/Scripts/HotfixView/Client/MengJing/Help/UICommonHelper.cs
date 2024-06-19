@@ -130,12 +130,6 @@ namespace ET.Client
             }
         }
 
-        public static void SetToggleShow(GameObject gameObject, bool isShow)
-        {
-            gameObject.transform.Find("Background/XuanZhong").gameObject.SetActive(isShow);
-            gameObject.transform.Find("Background/WeiXuanZhong").gameObject.SetActive(!isShow);
-        }
-
         public static void HideChildren(Transform transform)
         {
             for (int i = 0; i < transform.childCount; i++)

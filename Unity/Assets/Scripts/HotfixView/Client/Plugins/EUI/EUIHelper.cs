@@ -291,18 +291,19 @@ namespace ET.Client
                     if (isOn)
                     {
                         selectEventHandler(index);
-                        OnSelect(togglesList[index].gameObject);
+                        OnSelect(togglesList[index].transform);
                     }
                 });
             }
 
             return;
 
-            void OnSelect(GameObject gameObject)
+            void OnSelect(Transform transform)
             {
                 foreach (Toggle toggle in togglesList)
                 {
-                    UICommonHelper.SetToggleShow(toggle.gameObject, toggle.gameObject == gameObject);
+                    toggle.transform.Find("Background/XuanZhong").gameObject.SetActive(toggle.transform == transform);
+                    toggle.transform.Find("Background/WeiXuanZhong").gameObject.SetActive(toggle.transform != transform);
                 }
             }
         }
