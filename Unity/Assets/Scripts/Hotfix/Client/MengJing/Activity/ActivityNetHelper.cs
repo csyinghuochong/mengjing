@@ -181,5 +181,13 @@ namespace ET.Client
             M2C_YueKaOpenResponse response = (M2C_YueKaOpenResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<M2C_SingleRechargeRewardResponse> SingleRechargeReward(Scene root, int rewardId)
+        {
+            C2M_SingleRechargeRewardRequest request = new() { RewardId = rewardId };
+            M2C_SingleRechargeRewardResponse response =
+                    (M2C_SingleRechargeRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

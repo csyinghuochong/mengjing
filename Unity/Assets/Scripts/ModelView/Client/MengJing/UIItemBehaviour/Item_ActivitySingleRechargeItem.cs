@@ -6,6 +6,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_ActivitySingleRechargeItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
+		public int Key;
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)

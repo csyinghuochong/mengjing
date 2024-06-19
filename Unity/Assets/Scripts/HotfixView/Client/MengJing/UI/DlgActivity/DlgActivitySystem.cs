@@ -10,6 +10,7 @@ namespace ET.Client
     [FriendOf(typeof (ES_ActivityMaoXian))]
     [FriendOf(typeof (ES_ActivityToken))]
     [FriendOf(typeof (ES_ActivityTeHui))]
+    [FriendOf(typeof (ES_ActivitySingleRecharge))]
     [FriendOf(typeof (DlgActivity))]
     public static class DlgActivitySystem
     {
@@ -48,7 +49,7 @@ namespace ET.Client
                     self.View.ES_ActivityTeHui.OnUpdateUI();
                     break;
                 case 4:
-
+                    self.View.ES_ActivitySingleRecharge.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
