@@ -33,5 +33,13 @@
 
             return response;
         }
+
+        public static async ETTask<R2C_RankShowLieResponse> RankShowLie(Scene root)
+        {
+            C2R_RankShowLieRequest request = new();
+            R2C_RankShowLieResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as R2C_RankShowLieResponse;
+
+            return response;
+        }
     }
 }

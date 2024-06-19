@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_HuntRanking))]
     [FriendOf(typeof (DlgHunt))]
     public static class DlgHuntSystem
     {
@@ -25,7 +26,7 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-
+                    self.View.ES_HuntRanking.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
 
