@@ -13,7 +13,7 @@ namespace ET.Client
 		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
 		public ETCancellationToken ETCancellationToken;
-		
+
 		public UnityEngine.UI.Button E_ImageButtonButton
      	{
      		get
@@ -65,40 +65,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_1Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_1Toggle == null )
-     			{
-		    		this.m_E_1Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Left/E_ItemTypeSet/E_1");
-     			}
-     			return this.m_E_1Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_2Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_2Toggle == null )
-     			{
-		    		this.m_E_2Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Left/E_ItemTypeSet/E_2");
-     			}
-     			return this.m_E_2Toggle;
-     		}
-     	}
-
 		public UnityEngine.UI.LoopVerticalScrollRect E_EquipItemsLoopVerticalScrollRect
      	{
      		get
@@ -125,7 +91,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipset==null )
+     			if( this.m_es_equipset == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ES_EquipSet");
 		    	   this.m_es_equipset = this.AddChild<ES_EquipSet,Transform>(subTrans);
@@ -177,7 +143,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_commonitem ==null )
+     			if( this.m_es_commonitem == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_CommonItem");
 		    	   this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
@@ -195,7 +161,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_commonitem_cost ==null  )
+     			if( this.m_es_commonitem_cost == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_CommonItem_Cost");
 		    	   this.m_es_commonitem_cost = this.AddChild<ES_CommonItem,Transform>(subTrans);
@@ -459,8 +425,6 @@ namespace ET.Client
 			this.m_E_ImageButtonButton = null;
 			this.m_E_ImageButtonImage = null;
 			this.m_E_ItemTypeSetToggleGroup = null;
-			this.m_E_1Toggle = null;
-			this.m_E_2Toggle = null;
 			this.m_E_EquipItemsLoopVerticalScrollRect = null;
 			this.m_es_equipset = null;
 			this.m_E_Obj_EquipPropertyTextText = null;
@@ -487,8 +451,6 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_ImageButtonButton = null;
 		private UnityEngine.UI.Image m_E_ImageButtonImage = null;
 		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_1Toggle = null;
-		private UnityEngine.UI.Toggle m_E_2Toggle = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_EquipItemsLoopVerticalScrollRect = null;
 		private EntityRef<ES_EquipSet> m_es_equipset = null;
 		private UnityEngine.UI.Text m_E_Obj_EquipPropertyTextText = null;

@@ -51,9 +51,6 @@ namespace ET.Client
 
         private static void OnItemTypeSet(this ES_RoleXiLianShow self, int index)
         {
-            UICommonHelper.SetToggleShow(self.E_1Toggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.E_2Toggle.gameObject, index == 1);
-
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             switch (index)
