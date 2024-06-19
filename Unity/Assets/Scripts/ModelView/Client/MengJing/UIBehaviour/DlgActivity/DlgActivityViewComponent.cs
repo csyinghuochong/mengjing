@@ -131,91 +131,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_1Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_1Toggle == null )
-     			{
-		    		this.m_E_1Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_1");
-     			}
-     			return this.m_E_1Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_2Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_2Toggle == null )
-     			{
-		    		this.m_E_2Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_2");
-     			}
-     			return this.m_E_2Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_3Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_3Toggle == null )
-     			{
-		    		this.m_E_3Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_3");
-     			}
-     			return this.m_E_3Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_4Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_4Toggle == null )
-     			{
-		    		this.m_E_4Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_4");
-     			}
-     			return this.m_E_4Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_5Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_5Toggle == null )
-     			{
-		    		this.m_E_5Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_5");
-     			}
-     			return this.m_E_5Toggle;
-     		}
-     	}
-
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
@@ -225,11 +140,6 @@ namespace ET.Client
 			this.m_es_activitytehui = null;
 			this.m_es_activitysinglerecharge = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
-			this.m_E_1Toggle = null;
-			this.m_E_2Toggle = null;
-			this.m_E_3Toggle = null;
-			this.m_E_4Toggle = null;
-			this.m_E_5Toggle = null;
 			this.uiTransform = null;
 		}
 
@@ -240,11 +150,6 @@ namespace ET.Client
 		private EntityRef<ES_ActivityTeHui> m_es_activitytehui = null;
 		private EntityRef<ES_ActivitySingleRecharge> m_es_activitysinglerecharge = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_1Toggle = null;
-		private UnityEngine.UI.Toggle m_E_2Toggle = null;
-		private UnityEngine.UI.Toggle m_E_3Toggle = null;
-		private UnityEngine.UI.Toggle m_E_4Toggle = null;
-		private UnityEngine.UI.Toggle m_E_5Toggle = null;
 		public Transform uiTransform = null;
 	}
 }

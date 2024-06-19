@@ -280,23 +280,40 @@ namespace ET.Client
         }
 
 
-       public static void AddListener(this ToggleGroup toggleGroup, UnityAction<int> selectEventHandler)
-       {
-           var togglesList = toggleGroup.GetComponentsInChildren<Toggle>();
-           for (int i = 0; i < togglesList.Length; i++)
-           {
-               int index = i;
-               togglesList[i].AddListener((isOn) => 
-               {
-                   if (isOn)
-                   {
-                       selectEventHandler(index);
-                   }
-               });
-           }
-       }
+        public static void AddListener(this ToggleGroup toggleGroup, UnityAction<int> selectEventHandler)
+        {
+            var togglesList = toggleGroup.GetComponentsInChildren<Toggle>();
+            for (int i = 0; i < togglesList.Length; i++)
+            {
+                int index = i;
+                togglesList[i].AddListener((isOn) =>
+                {
+                    if (isOn)
+                    {
+                        selectEventHandler(index);
+                        OnSelect(togglesList[index].gameObject);
+                    }
+                });
+            }
 
-        
+            return;
+
+            void OnSelect(GameObject gameObject)
+            {
+                foreach (Toggle toggle in togglesList)
+                {
+                    UICommonHelper.SetToggleShow(toggle.gameObject, toggle.gameObject == gameObject);
+                }
+            }
+        }
+
+        public static void Select(this ToggleGroup toggleGroup, int index)
+        {
+            var togglesList = toggleGroup.GetComponentsInChildren<Toggle>();
+            togglesList[index].IsSelected(true);
+        }
+
+
         /// <summary>
         /// 注册窗口关闭事件
         /// </summary>
