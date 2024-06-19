@@ -33,10 +33,6 @@ namespace ET.Client
 
         private static void OnItemTypeSet(this ES_RankShow self, int index)
         {
-            UICommonHelper.SetToggleShow(self.E_TypeWarriorToggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.E_TypeMagicianToggle.gameObject, index == 1);
-            UICommonHelper.SetToggleShow(self.E_TypeHunterToggle.gameObject, index == 2);
-
             self.CurrentItemType = index;
             self.OnUpdateUI(index + 1).Coroutine();
         }
