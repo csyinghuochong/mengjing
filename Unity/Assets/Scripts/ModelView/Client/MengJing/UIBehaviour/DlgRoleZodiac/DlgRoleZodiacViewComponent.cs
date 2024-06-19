@@ -75,74 +75,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_1Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_1Toggle == null )
-     			{
-		    		this.m_E_1Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_ItemTypeSet/E_1");
-     			}
-     			return this.m_E_1Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_2Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_2Toggle == null )
-     			{
-		    		this.m_E_2Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_ItemTypeSet/E_2");
-     			}
-     			return this.m_E_2Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_3Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_3Toggle == null )
-     			{
-		    		this.m_E_3Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_ItemTypeSet/E_3");
-     			}
-     			return this.m_E_3Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_4Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_4Toggle == null )
-     			{
-		    		this.m_E_4Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_ItemTypeSet/E_4");
-     			}
-     			return this.m_E_4Toggle;
-     		}
-     	}
-
 		public UnityEngine.RectTransform EG_ZodiacListRectTransform
      	{
      		get
@@ -169,7 +101,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_0 ==null )
+     			if( this.m_es_equipitem_0 == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_0");
 		    	   this.m_es_equipitem_0 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -187,7 +119,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_1 ==null)
+     			if( this.m_es_equipitem_1 == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_1");
 		    	   this.m_es_equipitem_1 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -205,7 +137,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_2 ==null )
+     			if( this.m_es_equipitem_2 == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_2");
 		    	   this.m_es_equipitem_2 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -223,7 +155,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_3 ==null )
+     			if( this.m_es_equipitem_3 == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_3");
 		    	   this.m_es_equipitem_3 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -241,7 +173,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_4 ==null)
+     			if( this.m_es_equipitem_4 == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_4");
 		    	   this.m_es_equipitem_4 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -259,7 +191,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_5 ==null )
+     			if( this.m_es_equipitem_5 == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_5");
 		    	   this.m_es_equipitem_5 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -277,7 +209,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_6 ==null  )
+     			if( this.m_es_equipitem_6 == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_6");
 		    	   this.m_es_equipitem_6 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -295,7 +227,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_7 ==null  )
+     			if( this.m_es_equipitem_7 == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_7");
 		    	   this.m_es_equipitem_7 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -313,7 +245,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_8 ==null )
+     			if( this.m_es_equipitem_8 == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_8");
 		    	   this.m_es_equipitem_8 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -331,7 +263,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_9 ==null )
+     			if( this.m_es_equipitem_9 == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_9");
 		    	   this.m_es_equipitem_9 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -349,7 +281,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_10 ==null )
+     			if( this.m_es_equipitem_10 == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_10");
 		    	   this.m_es_equipitem_10 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -367,7 +299,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_11 ==null  )
+     			if( this.m_es_equipitem_11 == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_11");
 		    	   this.m_es_equipitem_11 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -382,10 +314,6 @@ namespace ET.Client
 			this.m_E_ButtonColseImage = null;
 			this.m_EG_LinkShowSetRectTransform = null;
 			this.m_E_ItemTypeSetToggleGroup = null;
-			this.m_E_1Toggle = null;
-			this.m_E_2Toggle = null;
-			this.m_E_3Toggle = null;
-			this.m_E_4Toggle = null;
 			this.m_EG_ZodiacListRectTransform = null;
 			this.m_es_equipitem_0 = null;
 			this.m_es_equipitem_1 = null;
@@ -406,10 +334,6 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_ButtonColseImage = null;
 		private UnityEngine.RectTransform m_EG_LinkShowSetRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_1Toggle = null;
-		private UnityEngine.UI.Toggle m_E_2Toggle = null;
-		private UnityEngine.UI.Toggle m_E_3Toggle = null;
-		private UnityEngine.UI.Toggle m_E_4Toggle = null;
 		private UnityEngine.RectTransform m_EG_ZodiacListRectTransform = null;
 		private EntityRef<ES_EquipItem> m_es_equipitem_0 = null;
 		private EntityRef<ES_EquipItem> m_es_equipitem_1 = null;

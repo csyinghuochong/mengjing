@@ -34,7 +34,7 @@ namespace ET.Client
             self.View.E_Icon_3_2Image.sprite =
                     resourcesLoaderComponent.LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, "3"));
 
-            self.View.E_Occ1Toggle.IsSelected(true);
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
 
         private static void OnRandomNameButton(this DlgCreateRole self)
@@ -73,12 +73,6 @@ namespace ET.Client
 
         private static void OnFunctionSetBtn(this DlgCreateRole self, int index)
         {
-            Log.Debug($"按下Toggle：{index}");
-
-            UICommonHelper.SetToggleShow(self.View.E_Occ1Toggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.View.E_Occ2Toggle.gameObject, index == 1);
-            UICommonHelper.SetToggleShow(self.View.E_Occ3Toggle.gameObject, index == 2);
-
             self.View.EG_OccShow_ZhanShiRectTransform.gameObject.SetActive(false);
             self.View.EG_OccShow_FaShiRectTransform.gameObject.SetActive(false);
             self.View.EG_OccShow_LieRenRectTransform.gameObject.SetActive(false);

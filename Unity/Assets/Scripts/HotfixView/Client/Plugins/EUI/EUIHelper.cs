@@ -307,12 +307,11 @@ namespace ET.Client
             }
         }
 
-        public static void Select(this ToggleGroup toggleGroup, int index)
+        public static void OnSelectIndex(this ToggleGroup toggleGroup, int index)
         {
             var togglesList = toggleGroup.GetComponentsInChildren<Toggle>();
             togglesList[index].IsSelected(true);
         }
-
 
         /// <summary>
         /// 注册窗口关闭事件

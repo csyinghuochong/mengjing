@@ -19,15 +19,11 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgZhanQu self, Entity contextData = null)
         {
-            self.View.E_1Toggle.IsSelected(true);
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
 
         private static void OnFunctionSetBtn(this DlgZhanQu self, int index)
         {
-            UICommonHelper.SetToggleShow(self.View.E_1Toggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.View.E_2Toggle.gameObject, index == 1);
-            UICommonHelper.SetToggleShow(self.View.E_3Toggle.gameObject, index == 2);
-
             UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
             {

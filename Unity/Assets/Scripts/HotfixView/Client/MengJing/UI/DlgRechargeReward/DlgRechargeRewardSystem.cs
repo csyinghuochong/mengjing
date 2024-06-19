@@ -19,14 +19,11 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgRechargeReward self, Entity contextData = null)
         {
-            self.View.E_ItemType_0Toggle.IsSelected(true);
+            self.View.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
         }
 
         private static void OnItemTypeSet(this DlgRechargeReward self, int index)
         {
-            UICommonHelper.SetToggleShow(self.View.E_ItemType_0Toggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.View.E_ItemType_1Toggle.gameObject, index == 1);
-
             self.CurrentIndex = index;
 
             self.UpdateUI(index);

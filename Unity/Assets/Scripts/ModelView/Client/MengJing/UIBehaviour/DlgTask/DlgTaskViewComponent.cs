@@ -24,40 +24,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_TaskDetailToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_TaskDetailToggle == null )
-     			{
-		    		this.m_E_TaskDetailToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_TaskDetail");
-     			}
-     			return this.m_E_TaskDetailToggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_TaskGrowUpToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_TaskGrowUpToggle == null )
-     			{
-		    		this.m_E_TaskGrowUpToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_TaskGrowUp");
-     			}
-     			return this.m_E_TaskGrowUpToggle;
-     		}
-     	}
-
 		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
      		get
@@ -84,7 +50,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_taskdetail ==null)
+     			if( this.m_es_taskdetail == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_TaskDetail");
 		    	   this.m_es_taskdetail = this.AddChild<ES_TaskDetail,Transform>(subTrans);
@@ -102,7 +68,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_taskgrowup ==null )
+     			if( this.m_es_taskgrowup == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_TaskGrowUp");
 		    	   this.m_es_taskgrowup = this.AddChild<ES_TaskGrowUp,Transform>(subTrans);
@@ -114,8 +80,6 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_FunctionSetBtnToggleGroup = null;
-			this.m_E_TaskDetailToggle = null;
-			this.m_E_TaskGrowUpToggle = null;
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_taskdetail = null;
 			this.m_es_taskgrowup = null;
@@ -123,8 +87,6 @@ namespace ET.Client
 		}
 
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_TaskDetailToggle = null;
-		private UnityEngine.UI.Toggle m_E_TaskGrowUpToggle = null;
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_TaskDetail> m_es_taskdetail = null;
 		private EntityRef<ES_TaskGrowUp> m_es_taskgrowup = null;

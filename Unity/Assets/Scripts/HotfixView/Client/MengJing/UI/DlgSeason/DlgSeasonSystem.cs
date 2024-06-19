@@ -21,17 +21,11 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgSeason self, Entity contextData = null)
         {
-            self.View.E_HomeToggle.IsSelected(true);
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
 
         private static void OnFunctionSetBtn(this DlgSeason self, int index)
         {
-            UICommonHelper.SetToggleShow(self.View.E_HomeToggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.View.E_TaskToggle.gameObject, index == 1);
-            UICommonHelper.SetToggleShow(self.View.E_JingHeToggle.gameObject, index == 2);
-            UICommonHelper.SetToggleShow(self.View.E_ShopToggle.gameObject, index == 3);
-            UICommonHelper.SetToggleShow(self.View.E_TowerToggle.gameObject, index == 4);
-
             UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
             {

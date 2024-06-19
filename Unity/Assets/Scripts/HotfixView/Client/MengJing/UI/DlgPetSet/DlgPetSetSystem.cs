@@ -4,8 +4,8 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (DlgPetSet))]
-    [FriendOf(typeof(ES_PetMining))]
-    [FriendOf(typeof(ES_PetChallenge))]
+    [FriendOf(typeof (ES_PetMining))]
+    [FriendOf(typeof (ES_PetChallenge))]
     public static class DlgPetSetSystem
     {
         public static void RegisterUIEvent(this DlgPetSet self)
@@ -15,14 +15,11 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgPetSet self, Entity contextData = null)
         {
-            self.View.E_Type1Toggle.IsSelected(true);
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
 
         private static void OnFunctionSetBtn(this DlgPetSet self, int index)
         {
-            UICommonHelper.SetToggleShow(self.View.E_Type1Toggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.View.E_Type2Toggle.gameObject, index == 1);
-
             UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
             {

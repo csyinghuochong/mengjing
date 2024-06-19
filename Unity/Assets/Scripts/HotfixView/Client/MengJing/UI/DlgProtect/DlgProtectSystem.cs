@@ -18,14 +18,11 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgProtect self, Entity contextData = null)
         {
-            self.View.E_0Toggle.IsSelected(true);
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
 
         private static void OnFunctionSetBtn(this DlgProtect self, int index)
         {
-            UICommonHelper.SetToggleShow(self.View.E_0Toggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.View.E_1Toggle.gameObject, index == 1);
-
             UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
             {

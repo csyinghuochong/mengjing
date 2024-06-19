@@ -17,13 +17,11 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgZuoQi self, Entity contextData = null)
         {
-            self.View.E_1Toggle.IsSelected(true);
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
 
         private static void OnFunctionSetBtn(this DlgZuoQi self, int index)
         {
-            UICommonHelper.SetToggleShow(self.View.E_1Toggle.gameObject, index == 1);
-
             UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
             {

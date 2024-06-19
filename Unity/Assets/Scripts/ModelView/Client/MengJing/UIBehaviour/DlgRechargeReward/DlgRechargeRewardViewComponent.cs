@@ -24,40 +24,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_ItemType_0Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ItemType_0Toggle == null )
-     			{
-		    		this.m_E_ItemType_0Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_ItemTypeSet/E_ItemType_0");
-     			}
-     			return this.m_E_ItemType_0Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_ItemType_1Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ItemType_1Toggle == null )
-     			{
-		    		this.m_E_ItemType_1Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_ItemTypeSet/E_ItemType_1");
-     			}
-     			return this.m_E_ItemType_1Toggle;
-     		}
-     	}
-
 		public UnityEngine.UI.Button E_ButtonCloseButton
      	{
      		get
@@ -101,7 +67,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rewardlist ==null)
+     			if( this.m_es_rewardlist == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList");
 		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
@@ -215,8 +181,6 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_ItemTypeSetToggleGroup = null;
-			this.m_E_ItemType_0Toggle = null;
-			this.m_E_ItemType_1Toggle = null;
 			this.m_E_ButtonCloseButton = null;
 			this.m_E_ButtonCloseImage = null;
 			this.m_es_rewardlist = null;
@@ -230,8 +194,6 @@ namespace ET.Client
 		}
 
 		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_ItemType_0Toggle = null;
-		private UnityEngine.UI.Toggle m_E_ItemType_1Toggle = null;
 		private UnityEngine.UI.Button m_E_ButtonCloseButton = null;
 		private UnityEngine.UI.Image m_E_ButtonCloseImage = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;

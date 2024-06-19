@@ -27,9 +27,6 @@ namespace ET.Client
                 return;
             }
 
-            UICommonHelper.SetToggleShow(self.View.E_1Toggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.View.E_2Toggle.gameObject, index == 1);
-
             UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
             {
@@ -46,7 +43,7 @@ namespace ET.Client
         {
             self.F2C_WatchPlayerResponse = m2C_WatchPlayerResponse;
             self.CanClick = true;
-            self.View.E_1Toggle.IsSelected(true);
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
     }
 }

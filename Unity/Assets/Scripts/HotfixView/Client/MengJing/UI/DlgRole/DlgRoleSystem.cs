@@ -76,7 +76,7 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgRole self, Entity contextData = null)
         {
-            self.View.E_FunctionSetBtnToggleGroup.Select(0);
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
 
         private static void OnFunctionSetBtn(this DlgRole self, int index)

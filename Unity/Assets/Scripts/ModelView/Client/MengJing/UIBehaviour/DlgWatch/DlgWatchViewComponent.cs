@@ -24,40 +24,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_1Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_1Toggle == null )
-     			{
-		    		this.m_E_1Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_1");
-     			}
-     			return this.m_E_1Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_2Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_2Toggle == null )
-     			{
-		    		this.m_E_2Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_2");
-     			}
-     			return this.m_E_2Toggle;
-     		}
-     	}
-
 		public UnityEngine.RectTransform EG_SubViewRectTransform
      	{
      		get
@@ -84,7 +50,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_watchequip ==null )
+     			if( this.m_es_watchequip == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WatchEquip");
 		    	   this.m_es_watchequip = this.AddChild<ES_WatchEquip,Transform>(subTrans);
@@ -102,7 +68,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_petlist ==null )
+     			if( this.m_es_petlist == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetList");
 		    	   this.m_es_petlist = this.AddChild<ES_PetList,Transform>(subTrans);
@@ -114,8 +80,6 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_FunctionSetBtnToggleGroup = null;
-			this.m_E_1Toggle = null;
-			this.m_E_2Toggle = null;
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_watchequip = null;
 			this.m_es_petlist = null;
@@ -123,8 +87,6 @@ namespace ET.Client
 		}
 
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_1Toggle = null;
-		private UnityEngine.UI.Toggle m_E_2Toggle = null;
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_WatchEquip> m_es_watchequip = null;
 		private EntityRef<ES_PetList> m_es_petlist = null;

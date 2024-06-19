@@ -33,7 +33,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_newyearcollectionword ==null)
+     			if( this.m_es_newyearcollectionword == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_NewYearCollectionWord");
 		    	   this.m_es_newyearcollectionword = this.AddChild<ES_NewYearCollectionWord,Transform>(subTrans);
@@ -51,7 +51,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_newyearmonster ==null )
+     			if( this.m_es_newyearmonster == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_NewYearMonster");
 		    	   this.m_es_newyearmonster = this.AddChild<ES_NewYearMonster,Transform>(subTrans);
@@ -77,48 +77,12 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_Type1Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Type1Toggle == null )
-     			{
-		    		this.m_E_Type1Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type1");
-     			}
-     			return this.m_E_Type1Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_Type2Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Type2Toggle == null )
-     			{
-		    		this.m_E_Type2Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type2");
-     			}
-     			return this.m_E_Type2Toggle;
-     		}
-     	}
-
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_newyearcollectionword = null;
 			this.m_es_newyearmonster = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
-			this.m_E_Type1Toggle = null;
-			this.m_E_Type2Toggle = null;
 			this.uiTransform = null;
 		}
 
@@ -126,8 +90,6 @@ namespace ET.Client
 		private EntityRef<ES_NewYearCollectionWord> m_es_newyearcollectionword = null;
 		private EntityRef<ES_NewYearMonster> m_es_newyearmonster = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_Type1Toggle = null;
-		private UnityEngine.UI.Toggle m_E_Type2Toggle = null;
 		public Transform uiTransform = null;
 	}
 }

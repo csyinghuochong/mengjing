@@ -33,7 +33,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_towerdungeon ==null )
+     			if( this.m_es_towerdungeon == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_TowerDungeon");
 		    	   this.m_es_towerdungeon = this.AddChild<ES_TowerDungeon,Transform>(subTrans);
@@ -51,7 +51,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_towershop ==null  )
+     			if( this.m_es_towershop == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_TowerShop");
 		    	   this.m_es_towershop = this.AddChild<ES_TowerShop,Transform>(subTrans);
@@ -77,48 +77,12 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_Type_1Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Type_1Toggle == null )
-     			{
-		    		this.m_E_Type_1Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"ScrollView/Viewport/E_FunctionSetBtn/E_Type_1");
-     			}
-     			return this.m_E_Type_1Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_Type_2Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Type_2Toggle == null )
-     			{
-		    		this.m_E_Type_2Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"ScrollView/Viewport/E_FunctionSetBtn/E_Type_2");
-     			}
-     			return this.m_E_Type_2Toggle;
-     		}
-     	}
-
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_towerdungeon = null;
 			this.m_es_towershop = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
-			this.m_E_Type_1Toggle = null;
-			this.m_E_Type_2Toggle = null;
 			this.uiTransform = null;
 		}
 
@@ -126,8 +90,6 @@ namespace ET.Client
 		private EntityRef<ES_TowerDungeon> m_es_towerdungeon = null;
 		private EntityRef<ES_TowerShop> m_es_towershop = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_Type_1Toggle = null;
-		private UnityEngine.UI.Toggle m_E_Type_2Toggle = null;
 		public Transform uiTransform = null;
 	}
 }

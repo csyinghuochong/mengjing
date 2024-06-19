@@ -36,16 +36,11 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgRoleZodiac self, Entity contextData = null)
         {
-            self.View.E_1Toggle.IsSelected(true);
+            self.View.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
         }
 
         private static void OnItemTypeSet(this DlgRoleZodiac self, int index)
         {
-            UICommonHelper.SetToggleShow(self.View.E_1Toggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.View.E_2Toggle.gameObject, index == 1);
-            UICommonHelper.SetToggleShow(self.View.E_3Toggle.gameObject, index == 2);
-            UICommonHelper.SetToggleShow(self.View.E_4Toggle.gameObject, index == 3);
-
             self.CurrentItemType = index;
             self.OnClickPageButton(index);
         }
@@ -172,7 +167,7 @@ namespace ET.Client
             self.ItemOperateEnum = itemOperateEnum;
             self.Occ = occ;
 
-            self.View.E_1Toggle.IsSelected(true);
+            self.View.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
         }
 
         public static void UpdateBagUI(this DlgRoleZodiac self, List<BagInfo> equiplist, int occ, ItemOperateEnum itemOperateEnum)

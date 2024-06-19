@@ -33,7 +33,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_zuoqishow ==null  )
+     			if( this.m_es_zuoqishow == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ZuoQiShow");
 		    	   this.m_es_zuoqishow = this.AddChild<ES_ZuoQiShow,Transform>(subTrans);
@@ -59,36 +59,17 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_1Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_1Toggle == null )
-     			{
-		    		this.m_E_1Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_1");
-     			}
-     			return this.m_E_1Toggle;
-     		}
-     	}
-
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_zuoqishow = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
-			this.m_E_1Toggle = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_ZuoQiShow> m_es_zuoqishow = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_1Toggle = null;
 		public Transform uiTransform = null;
 	}
 }

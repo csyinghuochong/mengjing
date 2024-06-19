@@ -28,14 +28,11 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgTask self, Entity contextData = null)
         {
-            self.View.E_TaskDetailToggle.IsSelected(true);
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
 
         private static void OnFunctionSetBtn(this DlgTask self, int index)
         {
-            UICommonHelper.SetToggleShow(self.View.E_TaskDetailToggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.View.E_TaskGrowUpToggle.gameObject, index == 1);
-
             UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
             {
