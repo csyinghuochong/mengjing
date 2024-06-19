@@ -113,5 +113,6 @@ namespace ET.Client
 		WindowID_RunRace,
 		WindowID_Hunt,
 		WindowID_Solo,
+		WindowID_Battle,
 	}
 }

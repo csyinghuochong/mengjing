@@ -124,7 +124,7 @@ namespace ET.Client
             self.View.E_Button_HappyButton.AddListener(self.OnButton_Happy);
             self.View.E_Button_HuntButton.AddListener(self.OnButton_Hunt);
             self.View.E_Button_SoloButton.AddListener(self.OnButton_Solo);
-            // self.View.E_Btn_BattleButton.AddListener();
+            self.View.E_Btn_BattleButton.AddListener(self.OnButton_Battle);
             // self.View.E_Button_DonationButton.AddListener();
             // self.View.E_Button_FenXiangButton.AddListener();
             // self.View.E_Btn_EveryTaskButton.AddListener();
@@ -573,6 +573,11 @@ namespace ET.Client
         private static void OnButton_Solo(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Solo).Coroutine();
+        }
+
+        private static void OnButton_Battle(this DlgMain self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Battle).Coroutine();
         }
 
         private static void OnButton_HuoDong(this DlgMain self)
