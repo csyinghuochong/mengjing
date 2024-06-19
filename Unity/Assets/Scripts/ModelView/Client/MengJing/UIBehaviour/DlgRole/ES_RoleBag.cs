@@ -11,7 +11,7 @@ namespace ET.Client
 		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
 		public int CurrentItemType;
-		
+
 		public UnityEngine.UI.ToggleGroup E_ItemTypeSetToggleGroup
      	{
      		get
@@ -26,74 +26,6 @@ namespace ET.Client
 		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Right/E_ItemTypeSet");
      			}
      			return this.m_E_ItemTypeSetToggleGroup;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_AllToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_AllToggle == null )
-     			{
-		    		this.m_E_AllToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Right/E_ItemTypeSet/E_All");
-     			}
-     			return this.m_E_AllToggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_EquipToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_EquipToggle == null )
-     			{
-		    		this.m_E_EquipToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Right/E_ItemTypeSet/E_Equip");
-     			}
-     			return this.m_E_EquipToggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_CaiLiaoToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_CaiLiaoToggle == null )
-     			{
-		    		this.m_E_CaiLiaoToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Right/E_ItemTypeSet/E_CaiLiao");
-     			}
-     			return this.m_E_CaiLiaoToggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_XiaoHaoToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_XiaoHaoToggle == null )
-     			{
-		    		this.m_E_XiaoHaoToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Right/E_ItemTypeSet/E_XiaoHao");
-     			}
-     			return this.m_E_XiaoHaoToggle;
      		}
      	}
 
@@ -250,13 +182,21 @@ namespace ET.Client
      		}
      	}
 
+		    public Transform UITransform
+         {
+     	    get
+     	    {
+     		    return this.uiTransform;
+     	    }
+     	    set
+     	    {
+     		    this.uiTransform = value;
+     	    }
+         }
+
 		public void DestroyWidget()
 		{
 			this.m_E_ItemTypeSetToggleGroup = null;
-			this.m_E_AllToggle = null;
-			this.m_E_EquipToggle = null;
-			this.m_E_CaiLiaoToggle = null;
-			this.m_E_XiaoHaoToggle = null;
 			this.m_E_ZhengLiButton = null;
 			this.m_E_ZhengLiImage = null;
 			this.m_E_OneSellButton = null;
@@ -270,10 +210,6 @@ namespace ET.Client
 		}
 
 		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_AllToggle = null;
-		private UnityEngine.UI.Toggle m_E_EquipToggle = null;
-		private UnityEngine.UI.Toggle m_E_CaiLiaoToggle = null;
-		private UnityEngine.UI.Toggle m_E_XiaoHaoToggle = null;
 		private UnityEngine.UI.Button m_E_ZhengLiButton = null;
 		private UnityEngine.UI.Image m_E_ZhengLiImage = null;
 		private UnityEngine.UI.Button m_E_OneSellButton = null;

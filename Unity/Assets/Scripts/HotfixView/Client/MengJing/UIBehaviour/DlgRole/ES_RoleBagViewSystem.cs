@@ -20,7 +20,7 @@ namespace ET.Client
             self.E_OneGemButton.AddListener(self.OnOneGemButton);
             self.E_ZhengLiButton.AddListenerAsync(self.OnZhengLiButton);
             self.E_OneSellButton.AddListener(self.OnOneSellButton);
-            self.E_AllToggle.IsSelected(true);
+            self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
         }
 
         [EntitySystem]
@@ -148,11 +148,6 @@ namespace ET.Client
 
         private static void OnItemTypeSet(this ES_RoleBag self, int index)
         {
-            UICommonHelper.SetToggleShow(self.E_AllToggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.E_EquipToggle.gameObject, index == 1);
-            UICommonHelper.SetToggleShow(self.E_CaiLiaoToggle.gameObject, index == 2);
-            UICommonHelper.SetToggleShow(self.E_XiaoHaoToggle.gameObject, index == 3);
-
             self.CurrentItemType = index;
             self.RefreshBagItems();
         }
