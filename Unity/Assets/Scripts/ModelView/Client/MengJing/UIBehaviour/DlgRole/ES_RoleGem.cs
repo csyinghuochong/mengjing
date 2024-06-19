@@ -14,7 +14,7 @@ namespace ET.Client
 		public List<ES_RoleGemHole> GemHoleList = new();
 		public BagInfo XiangQianItem;
 		public int XiangQianIndex;
-		
+
 		public ES_RoleGemHole ES_RoleGemHole_0
      	{
      		get
@@ -24,7 +24,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolegemhole_0 ==null)
+     			if( this.m_es_rolegemhole_0 == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_RoleGemHole_0");
 		    	   this.m_es_rolegemhole_0 = this.AddChild<ES_RoleGemHole,Transform>(subTrans);
@@ -42,7 +42,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolegemhole_1 ==null )
+     			if( this.m_es_rolegemhole_1 == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_RoleGemHole_1");
 		    	   this.m_es_rolegemhole_1 = this.AddChild<ES_RoleGemHole,Transform>(subTrans);
@@ -60,7 +60,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolegemhole_2 ==null )
+     			if( this.m_es_rolegemhole_2 == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_RoleGemHole_2");
 		    	   this.m_es_rolegemhole_2 = this.AddChild<ES_RoleGemHole,Transform>(subTrans);
@@ -78,7 +78,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolegemhole_3 ==null )
+     			if( this.m_es_rolegemhole_3 == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_RoleGemHole_3");
 		    	   this.m_es_rolegemhole_3 = this.AddChild<ES_RoleGemHole,Transform>(subTrans);
@@ -96,7 +96,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_commonitem ==null)
+     			if( this.m_es_commonitem == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_CommonItem");
 		    	   this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
@@ -122,74 +122,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_AllToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_AllToggle == null )
-     			{
-		    		this.m_E_AllToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Right/E_ItemTypeSet/E_All");
-     			}
-     			return this.m_E_AllToggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_EquipToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_EquipToggle == null )
-     			{
-		    		this.m_E_EquipToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Right/E_ItemTypeSet/E_Equip");
-     			}
-     			return this.m_E_EquipToggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_CaiLiaoToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_CaiLiaoToggle == null )
-     			{
-		    		this.m_E_CaiLiaoToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Right/E_ItemTypeSet/E_CaiLiao");
-     			}
-     			return this.m_E_CaiLiaoToggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_XiaoHaoToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_XiaoHaoToggle == null )
-     			{
-		    		this.m_E_XiaoHaoToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Right/E_ItemTypeSet/E_XiaoHao");
-     			}
-     			return this.m_E_XiaoHaoToggle;
-     		}
-     	}
-
 		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{
      		get
@@ -207,6 +139,18 @@ namespace ET.Client
      		}
      	}
 
+		    public Transform UITransform
+         {
+     	    get
+     	    {
+     		    return this.uiTransform;
+     	    }
+     	    set
+     	    {
+     		    this.uiTransform = value;
+     	    }
+         }
+
 		public void DestroyWidget()
 		{
 			this.m_es_rolegemhole_0 = null;
@@ -215,10 +159,6 @@ namespace ET.Client
 			this.m_es_rolegemhole_3 = null;
 			this.m_es_commonitem = null;
 			this.m_E_ItemTypeSetToggleGroup = null;
-			this.m_E_AllToggle = null;
-			this.m_E_EquipToggle = null;
-			this.m_E_CaiLiaoToggle = null;
-			this.m_E_XiaoHaoToggle = null;
 			this.m_E_BagItemsLoopVerticalScrollRect = null;
 			this.uiTransform = null;
 		}
@@ -229,10 +169,6 @@ namespace ET.Client
 		private EntityRef<ES_RoleGemHole> m_es_rolegemhole_3 = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
 		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_AllToggle = null;
-		private UnityEngine.UI.Toggle m_E_EquipToggle = null;
-		private UnityEngine.UI.Toggle m_E_CaiLiaoToggle = null;
-		private UnityEngine.UI.Toggle m_E_XiaoHaoToggle = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
