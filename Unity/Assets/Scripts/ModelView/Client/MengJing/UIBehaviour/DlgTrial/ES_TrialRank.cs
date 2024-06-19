@@ -12,7 +12,7 @@ namespace ET.Client
 		public Dictionary<int, Scroll_Item_RankItem> ScrollItemRankItems;
 		public List<RankingTrialInfo> ShowRankingTrialInfos = new();
 		public int CurrentItemType;
-		
+
 		public UnityEngine.RectTransform EG_UISetRectTransform
      	{
      		get
@@ -132,23 +132,6 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Toggle E_TypeWarriorToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_TypeWarriorToggle == null )
-     			{
-		    		this.m_E_TypeWarriorToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"EG_UISet/E_ItemTypeSet/E_TypeWarrior");
-     			}
-     			return this.m_E_TypeWarriorToggle;
-     		}
-     	}
-
 		public UnityEngine.UI.Image E_HeadIcomImage1Image
      	{
      		get
@@ -160,26 +143,9 @@ namespace ET.Client
      			}
      			if( this.m_E_HeadIcomImage1Image == null )
      			{
-		    		this.m_E_HeadIcomImage1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_UISet/E_ItemTypeSet/E_TypeWarrior/E_HeadIcomImage1");
+		    		this.m_E_HeadIcomImage1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_UISet/E_ItemTypeSet/Type_0/E_HeadIcomImage1");
      			}
      			return this.m_E_HeadIcomImage1Image;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_TypeMagicianToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_TypeMagicianToggle == null )
-     			{
-		    		this.m_E_TypeMagicianToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"EG_UISet/E_ItemTypeSet/E_TypeMagician");
-     			}
-     			return this.m_E_TypeMagicianToggle;
      		}
      	}
 
@@ -194,26 +160,9 @@ namespace ET.Client
      			}
      			if( this.m_E_HeadIcomImage2Image == null )
      			{
-		    		this.m_E_HeadIcomImage2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_UISet/E_ItemTypeSet/E_TypeMagician/E_HeadIcomImage2");
+		    		this.m_E_HeadIcomImage2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_UISet/E_ItemTypeSet/Type_1/E_HeadIcomImage2");
      			}
      			return this.m_E_HeadIcomImage2Image;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_TypeHunterToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_TypeHunterToggle == null )
-     			{
-		    		this.m_E_TypeHunterToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"EG_UISet/E_ItemTypeSet/E_TypeHunter");
-     			}
-     			return this.m_E_TypeHunterToggle;
      		}
      	}
 
@@ -228,7 +177,7 @@ namespace ET.Client
      			}
      			if( this.m_E_HeadIcomImage3Image == null )
      			{
-		    		this.m_E_HeadIcomImage3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_UISet/E_ItemTypeSet/E_TypeHunter/E_HeadIcomImage3");
+		    		this.m_E_HeadIcomImage3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_UISet/E_ItemTypeSet/Type_2/E_HeadIcomImage3");
      			}
      			return this.m_E_HeadIcomImage3Image;
      		}
@@ -255,11 +204,8 @@ namespace ET.Client
 			this.m_E_Button_RewardButton = null;
 			this.m_E_Button_RewardImage = null;
 			this.m_E_ItemTypeSetToggleGroup = null;
-			this.m_E_TypeWarriorToggle = null;
 			this.m_E_HeadIcomImage1Image = null;
-			this.m_E_TypeMagicianToggle = null;
 			this.m_E_HeadIcomImage2Image = null;
-			this.m_E_TypeHunterToggle = null;
 			this.m_E_HeadIcomImage3Image = null;
 			this.uiTransform = null;
 		}
@@ -271,11 +217,8 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_Button_RewardButton = null;
 		private UnityEngine.UI.Image m_E_Button_RewardImage = null;
 		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_TypeWarriorToggle = null;
 		private UnityEngine.UI.Image m_E_HeadIcomImage1Image = null;
-		private UnityEngine.UI.Toggle m_E_TypeMagicianToggle = null;
 		private UnityEngine.UI.Image m_E_HeadIcomImage2Image = null;
-		private UnityEngine.UI.Toggle m_E_TypeHunterToggle = null;
 		private UnityEngine.UI.Image m_E_HeadIcomImage3Image = null;
 		public Transform uiTransform = null;
 	}

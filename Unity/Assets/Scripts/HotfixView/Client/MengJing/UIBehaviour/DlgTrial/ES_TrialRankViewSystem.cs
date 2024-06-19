@@ -37,10 +37,6 @@ namespace ET.Client
 
         private static void OnItemTypeSet(this ES_TrialRank self, int index)
         {
-            UICommonHelper.SetToggleShow(self.E_TypeWarriorToggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.E_TypeMagicianToggle.gameObject, index == 1);
-            UICommonHelper.SetToggleShow(self.E_TypeHunterToggle.gameObject, index == 2);
-
             self.CurrentItemType = index;
             self.OnUpdateUI(index + 1).Coroutine();
         }
@@ -108,13 +104,41 @@ namespace ET.Client
         {
             long instanceid = self.InstanceId;
             R2C_RankTrialListResponse response = await RankNetHelper.RankTrialList(self.Root());
-            
+
             // 测试数据
-            response.RankList.Add(new RankingTrialInfo(){FubenId = 1,Hurt = 1000,Occ = 1,PlayerLv = 10,PlayerName = "测试玩家1"});
-            response.RankList.Add(new RankingTrialInfo(){FubenId = 1,Hurt = 2000,Occ = 1,PlayerLv = 10,PlayerName = "测试玩家2"});
-            response.RankList.Add(new RankingTrialInfo(){FubenId = 1,Hurt = 1000,Occ = 2,PlayerLv = 10,PlayerName = "测试玩家3"});
-            response.RankList.Add(new RankingTrialInfo(){FubenId = 1,Hurt = 4000,Occ = 3,PlayerLv = 40,PlayerName = "测试玩家4"});
-            
+            response.RankList.Add(new RankingTrialInfo()
+            {
+                FubenId = 1,
+                Hurt = 1000,
+                Occ = 1,
+                PlayerLv = 10,
+                PlayerName = "测试玩家1"
+            });
+            response.RankList.Add(new RankingTrialInfo()
+            {
+                FubenId = 1,
+                Hurt = 2000,
+                Occ = 1,
+                PlayerLv = 10,
+                PlayerName = "测试玩家2"
+            });
+            response.RankList.Add(new RankingTrialInfo()
+            {
+                FubenId = 1,
+                Hurt = 1000,
+                Occ = 2,
+                PlayerLv = 10,
+                PlayerName = "测试玩家3"
+            });
+            response.RankList.Add(new RankingTrialInfo()
+            {
+                FubenId = 1,
+                Hurt = 4000,
+                Occ = 3,
+                PlayerLv = 40,
+                PlayerName = "测试玩家4"
+            });
+
             if (instanceid != self.InstanceId)
             {
                 return;
