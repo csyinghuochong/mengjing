@@ -31,10 +31,6 @@ namespace ET.Client
 
         private static void OnItemTypeSet(this ES_PaiMaiSell self, int index)
         {
-            UICommonHelper.SetToggleShow(self.E_ItemTypeAllSetToggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.E_ItemTypeEquipSetToggle.gameObject, index == 1);
-            UICommonHelper.SetToggleShow(self.E_ItemTypeCostSetToggle.gameObject, index == 2);
-
             self.CurrentItemType = index;
             self.OnClickPageButton(index);
         }
@@ -86,7 +82,7 @@ namespace ET.Client
         public static void OnUpdateUI(this ES_PaiMaiSell self)
         {
             self.UpdateBagItemUIList();
-            self.E_ItemTypeAllSetToggle.IsSelected(true);
+            self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
             self.RequestSelfPaiMaiList().Coroutine();
         }
 
