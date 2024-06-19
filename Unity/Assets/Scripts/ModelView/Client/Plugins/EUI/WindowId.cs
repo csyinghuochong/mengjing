@@ -112,5 +112,6 @@ namespace ET.Client
 		WindowID_Activity,
 		WindowID_RunRace,
 		WindowID_Hunt,
+		WindowID_Solo,
 	}
 }

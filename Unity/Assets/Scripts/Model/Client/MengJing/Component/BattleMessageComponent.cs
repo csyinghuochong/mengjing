@@ -14,7 +14,7 @@ namespace ET
         //public M2C_RunRaceBattleInfo M2C_RunRaceBattleInfo;
 
         //竞技场开始匹配时间戳
-        public long SoloPiPeiStartTime;
+        public long SoloPiPeiStartTime { get; set; }
 
         //竞技场胜负记录
         public int SoloNum_Win;

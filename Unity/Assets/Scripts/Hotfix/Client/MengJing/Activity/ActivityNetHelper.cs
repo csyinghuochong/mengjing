@@ -189,5 +189,19 @@ namespace ET.Client
                     (M2C_SingleRechargeRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<int> SoloMatch(Scene root)
+        {
+            C2M_SoloMatchRequest request = new();
+            M2C_SoloMatchResponse response = (M2C_SoloMatchResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
+        public static async ETTask<S2C_SoloMyInfoResponse> SoloMyInfo(Scene root)
+        {
+            C2S_SoloMyInfoRequest request = new();
+            S2C_SoloMyInfoResponse response = (S2C_SoloMyInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }
