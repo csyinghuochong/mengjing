@@ -120,7 +120,7 @@ namespace ET.Client
 
             self.View.E_Button_ZhanKaiButton.AddListener(self.OnButtonZhanKai);
 
-            // self.View.E_Button_RunRaceButton.AddListener();
+            self.View.E_Button_RunRaceButton.AddListener(self.OnButton_RunRace);
             // self.View.E_Button_HappyButton.AddListener();
             // self.View.E_Button_HuntButton.AddListener();
             // self.View.E_Button_SoloButton.AddListener();
@@ -553,6 +553,11 @@ namespace ET.Client
             self.View.EG_Btn_TopRight_3RectTransform.gameObject.SetActive(!active);
 
             self.View.E_Button_ZhanKaiButton.transform.localScale = active? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
+        }
+
+        private static void OnButton_RunRace(this DlgMain self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RunRace).Coroutine();
         }
 
         private static void OnButton_HuoDong(this DlgMain self)

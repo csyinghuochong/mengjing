@@ -110,5 +110,6 @@ namespace ET.Client
 		WindowID_SeasonJingHeZhuru,
 		WindowID_SeasonTowerReward,
 		WindowID_Activity,
+		WindowID_RunRace,
 	}
 }
