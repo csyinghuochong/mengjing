@@ -15,7 +15,7 @@ namespace ET.Client
 		public Dictionary<int, Scroll_Item_SkillLearnItem> ScrollItemSkillLearnItems;
 		public List<SkillPro> ShowLearnSkillSkillPros = new();
 		public Dictionary<int, Scroll_Item_SkillLearnSkillItem> ScrollItemSkillLearnSkillItems;
-		
+
 		public UnityEngine.UI.Button E_ButtonResetButton
      	{
      		get
@@ -64,57 +64,6 @@ namespace ET.Client
 		    		this.m_E_BtnItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Right/E_BtnItemTypeSet");
      			}
      			return this.m_E_BtnItemTypeSetToggleGroup;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_ItemTypeAllSetToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ItemTypeAllSetToggle == null )
-     			{
-		    		this.m_E_ItemTypeAllSetToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Right/E_BtnItemTypeSet/E_ItemTypeAllSet");
-     			}
-     			return this.m_E_ItemTypeAllSetToggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_ItemTypeEquipSetToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ItemTypeEquipSetToggle == null )
-     			{
-		    		this.m_E_ItemTypeEquipSetToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Right/E_BtnItemTypeSet/E_ItemTypeEquipSet");
-     			}
-     			return this.m_E_ItemTypeEquipSetToggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_ItemTypeStrengthenSetToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ItemTypeStrengthenSetToggle == null )
-     			{
-		    		this.m_E_ItemTypeStrengthenSetToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Right/E_BtnItemTypeSet/E_ItemTypeStrengthenSet");
-     			}
-     			return this.m_E_ItemTypeStrengthenSetToggle;
      		}
      	}
 
@@ -390,9 +339,6 @@ namespace ET.Client
 			this.m_E_ButtonResetButton = null;
 			this.m_E_ButtonResetImage = null;
 			this.m_E_BtnItemTypeSetToggleGroup = null;
-			this.m_E_ItemTypeAllSetToggle = null;
-			this.m_E_ItemTypeEquipSetToggle = null;
-			this.m_E_ItemTypeStrengthenSetToggle = null;
 			this.m_EG_SkillInfoPanelRectTransform = null;
 			this.m_E_SkillInfoconImgButton = null;
 			this.m_E_SkillInfoconImgImage = null;
@@ -414,9 +360,6 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_ButtonResetButton = null;
 		private UnityEngine.UI.Image m_E_ButtonResetImage = null;
 		private UnityEngine.UI.ToggleGroup m_E_BtnItemTypeSetToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_ItemTypeAllSetToggle = null;
-		private UnityEngine.UI.Toggle m_E_ItemTypeEquipSetToggle = null;
-		private UnityEngine.UI.Toggle m_E_ItemTypeStrengthenSetToggle = null;
 		private UnityEngine.RectTransform m_EG_SkillInfoPanelRectTransform = null;
 		private UnityEngine.UI.Button m_E_SkillInfoconImgButton = null;
 		private UnityEngine.UI.Image m_E_SkillInfoconImgImage = null;

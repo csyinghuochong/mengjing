@@ -22,7 +22,7 @@ namespace ET.Client
             self.E_SkillLearnItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSkillLearnItemsRefresh);
             self.E_SkillLearnSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnSkillLearnSkillItemsRefresh);
 
-            self.E_ItemTypeAllSetToggle.IsSelected(true);
+            self.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
         }
 
         [EntitySystem]
@@ -33,10 +33,6 @@ namespace ET.Client
 
         private static void OnItemTypeSet(this ES_SkillLearn self, int index)
         {
-            UICommonHelper.SetToggleShow(self.E_ItemTypeAllSetToggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.E_ItemTypeEquipSetToggle.gameObject, index == 1);
-            UICommonHelper.SetToggleShow(self.E_ItemTypeStrengthenSetToggle.gameObject, index == 2);
-
             self.CurrentItemType = index;
 
             self.OnClickPageButton(index);
@@ -88,7 +84,7 @@ namespace ET.Client
 
         public static void OnUpdateUI(this ES_SkillLearn self)
         {
-            self.E_ItemTypeAllSetToggle.IsSelected(true);
+            self.E_BtnItemTypeSetToggleGroup.OnSelectIndex(0);
             self.UpdateLeftSp();
         }
 
