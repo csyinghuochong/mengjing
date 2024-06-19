@@ -15,7 +15,7 @@ namespace ET.Client
 		public Dictionary<int, Scroll_Item_SeasonTaskItem> ScrollItemSeasonTaskItems;
 		public List<TaskPro> ShowTaskPros = new();
 		public Dictionary<int, Scroll_Item_SeasonDayTaskItem> ScrollItemSeasonDayTaskItems;
-		
+
 		public UnityEngine.UI.ToggleGroup E_ItemTypeSetToggleGroup
      	{
      		get
@@ -30,40 +30,6 @@ namespace ET.Client
 		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_ItemTypeSet");
      			}
      			return this.m_E_ItemTypeSetToggleGroup;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_ItemTypeAllSetToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ItemTypeAllSetToggle == null )
-     			{
-		    		this.m_E_ItemTypeAllSetToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_ItemTypeSet/E_ItemTypeAllSet");
-     			}
-     			return this.m_E_ItemTypeAllSetToggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_ItemTypeEquipSetToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ItemTypeEquipSetToggle == null )
-     			{
-		    		this.m_E_ItemTypeEquipSetToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_ItemTypeSet/E_ItemTypeEquipSet");
-     			}
-     			return this.m_E_ItemTypeEquipSetToggle;
      		}
      	}
 
@@ -270,8 +236,6 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_E_ItemTypeSetToggleGroup = null;
-			this.m_E_ItemTypeAllSetToggle = null;
-			this.m_E_ItemTypeEquipSetToggle = null;
 			this.m_E_SeasonDayTaskItemsLoopVerticalScrollRect = null;
 			this.m_E_SeasonTaskItemsLoopVerticalScrollRect = null;
 			this.m_E_TaskNameTextText = null;
@@ -287,8 +251,6 @@ namespace ET.Client
 		}
 
 		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_ItemTypeAllSetToggle = null;
-		private UnityEngine.UI.Toggle m_E_ItemTypeEquipSetToggle = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_SeasonDayTaskItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_SeasonTaskItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Text m_E_TaskNameTextText = null;

@@ -22,7 +22,7 @@ namespace ET.Client
             self.E_GetBtnButton.AddListenerAsync(self.OnGetBtn);
             self.E_GiveBtnButton.AddListenerAsync(self.OnGiveBtn);
 
-            self.E_ItemTypeAllSetToggle.IsSelected(true);
+            self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
         }
 
         [EntitySystem]
@@ -33,9 +33,6 @@ namespace ET.Client
 
         private static void OnFunctionSetBtn(this ES_SeasonTask self, int index)
         {
-            UICommonHelper.SetToggleShow(self.E_ItemTypeAllSetToggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.E_ItemTypeEquipSetToggle.gameObject, index == 1);
-
             self.OnClickPageButton(index);
         }
 
