@@ -62,6 +62,7 @@ namespace ET.Client
                 self.ShowTaskPro.Add(taskPros[i]);
             }
 
+            // 测试数据
             self.ShowTaskPro.Add(new TaskPro() { taskID = 300001, taskStatus = (int)TaskStatuEnum.Completed });
             self.ShowTaskPro.Add(new TaskPro() { taskID = 300002, taskStatus = (int)TaskStatuEnum.Accepted });
 

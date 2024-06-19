@@ -1,12 +1,16 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_BattleTask : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_BattleTask : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public List<TaskPro> ShowTaskPro = new();
+		public Dictionary<int, Scroll_Item_BattleTaskItem> ScrollItemBattleTaskItems;
+		
 		public UnityEngine.UI.LoopVerticalScrollRect E_BattleTaskItemsLoopVerticalScrollRect
      	{
      		get
