@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_BattleEnter))]
+    [FriendOf(typeof (ES_BattleTask))]
     [FriendOf(typeof (DlgBattle))]
     public static class DlgBattleSystem
     {
@@ -29,6 +30,7 @@ namespace ET.Client
                     self.View.ES_BattleEnter.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
+                    self.View.ES_BattleTask.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
