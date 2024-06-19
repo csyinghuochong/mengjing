@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -30,8 +31,8 @@ namespace ET.Client
 		public List<BagInfo> ShowBagInfos = new();
 		
 		public bool IsHoldDown;
-		public List<int> PointList = new List<int>();
-		public List<int> PointInit = new List<int>();
+		public List<int> PointList = new();
+		public List<int> PointInit = new();
 		public int PointRemain = 0;
 
 		public UnityEngine.RectTransform EG_MaskRectTransform
@@ -94,7 +95,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_modelshow ==null )
+     			if( this.m_es_modelshow == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Right/ES_ModelShow");
 		    	   this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
@@ -423,57 +424,6 @@ namespace ET.Client
 		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"EG_Right/EG_AttributeNode/E_ItemTypeSet");
      			}
      			return this.m_E_ItemTypeSetToggleGroup;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_ZiZhiToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ZiZhiToggle == null )
-     			{
-		    		this.m_E_ZiZhiToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"EG_Right/EG_AttributeNode/E_ItemTypeSet/E_ZiZhi");
-     			}
-     			return this.m_E_ZiZhiToggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_ProToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ProToggle == null )
-     			{
-		    		this.m_E_ProToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"EG_Right/EG_AttributeNode/E_ItemTypeSet/E_Pro");
-     			}
-     			return this.m_E_ProToggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_VariantToggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_VariantToggle == null )
-     			{
-		    		this.m_E_VariantToggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"EG_Right/EG_AttributeNode/E_ItemTypeSet/E_Variant");
-     			}
-     			return this.m_E_VariantToggle;
      		}
      	}
 
@@ -1636,9 +1586,6 @@ namespace ET.Client
 			this.m_E_Btn_FangShengImage = null;
 			this.m_EG_AttributeNodeRectTransform = null;
 			this.m_E_ItemTypeSetToggleGroup = null;
-			this.m_E_ZiZhiToggle = null;
-			this.m_E_ProToggle = null;
-			this.m_E_VariantToggle = null;
 			this.m_EG_PetZiZhiSetRectTransform = null;
 			this.m_EG_PetZiZhiItem1RectTransform = null;
 			this.m_EG_PetZiZhiItem2RectTransform = null;
@@ -1731,9 +1678,6 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_Btn_FangShengImage = null;
 		private UnityEngine.RectTransform m_EG_AttributeNodeRectTransform = null;
 		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_ZiZhiToggle = null;
-		private UnityEngine.UI.Toggle m_E_ProToggle = null;
-		private UnityEngine.UI.Toggle m_E_VariantToggle = null;
 		private UnityEngine.RectTransform m_EG_PetZiZhiSetRectTransform = null;
 		private UnityEngine.RectTransform m_EG_PetZiZhiItem1RectTransform = null;
 		private UnityEngine.RectTransform m_EG_PetZiZhiItem2RectTransform = null;

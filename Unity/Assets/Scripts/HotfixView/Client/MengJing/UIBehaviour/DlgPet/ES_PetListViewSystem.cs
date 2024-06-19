@@ -113,10 +113,6 @@ namespace ET.Client
 
         private static void OnItemTypeSet(this ES_PetList self, int index)
         {
-            UICommonHelper.SetToggleShow(self.E_ZiZhiToggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.E_ProToggle.gameObject, index == 1);
-            UICommonHelper.SetToggleShow(self.E_VariantToggle.gameObject, index == 2);
-
             self.EG_PetZiZhiSetRectTransform.gameObject.SetActive(index == 0);
             self.E_PetProSetNodeImage.gameObject.SetActive(index == 1);
             self.EG_PetPiFuSetRectTransform.gameObject.SetActive(index == 2);
@@ -415,7 +411,7 @@ namespace ET.Client
 
             self.PetSkinId = 0;
             self.LastSelectItem = self.Root().GetComponent<PetComponentC>().GetPetInfoByID(petId);
-            self.E_ZiZhiToggle.IsSelected(true);
+            self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
             self.OnChangeNode(1);
             self.OnUpdatePetInfo(self.LastSelectItem);
             self.UpdatePetSelected(self.LastSelectItem);
@@ -614,7 +610,7 @@ namespace ET.Client
                 string icon = ItemViewHelp.GetAttributeIcon(numberType);
 
                 icon = "PetPro_2";
-                
+
                 if (!string.IsNullOrEmpty(icon))
                 {
                     string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PropertyIcon, icon);
@@ -978,8 +974,10 @@ namespace ET.Client
             self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
                     $"{rolePetInfo.ZiZhi_MageAct}/{petConfig.ZiZhi_MageAct_Max}";
 
-            Sprite sprite16 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Img_hole_102.png");
-            Sprite sprite17 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Img_hole_102.png");
+            Sprite sprite16 = self.Root().GetComponent<ResourcesLoaderComponent>()
+                    .LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Img_hole_102.png");
+            Sprite sprite17 = self.Root().GetComponent<ResourcesLoaderComponent>()
+                    .LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Img_hole_102.png");
 
             self.PetZiZhiItemList[0].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
                     rolePetInfo.ZiZhi_Hp >= petConfig.ZiZhi_Hp_Max? sprite16 : sprite17;
