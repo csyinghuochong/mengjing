@@ -15,7 +15,7 @@ namespace ET.Client
 		public List<BagInfo> ShowHouseBagInfos = new();
 		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemBagItems;
 		public List<BagInfo> ShowBagBagInfos = new();
-		
+
 		public UnityEngine.UI.LoopVerticalScrollRect E_BagItems2LoopVerticalScrollRect
      	{
      		get
@@ -132,74 +132,6 @@ namespace ET.Client
 		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Left/E_ItemTypeSet");
      			}
      			return this.m_E_ItemTypeSetToggleGroup;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_1Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_1Toggle == null )
-     			{
-		    		this.m_E_1Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Left/E_ItemTypeSet/E_1");
-     			}
-     			return this.m_E_1Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_2Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_2Toggle == null )
-     			{
-		    		this.m_E_2Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Left/E_ItemTypeSet/E_2");
-     			}
-     			return this.m_E_2Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_3Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_3Toggle == null )
-     			{
-		    		this.m_E_3Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Left/E_ItemTypeSet/E_3");
-     			}
-     			return this.m_E_3Toggle;
-     		}
-     	}
-
-		public UnityEngine.UI.Toggle E_4Toggle
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_4Toggle == null )
-     			{
-		    		this.m_E_4Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"Left/E_ItemTypeSet/E_4");
-     			}
-     			return this.m_E_4Toggle;
      		}
      	}
 
@@ -360,10 +292,6 @@ namespace ET.Client
 			this.m_E_ButtonQuickImage = null;
 			this.m_E_BagItems1LoopVerticalScrollRect = null;
 			this.m_E_ItemTypeSetToggleGroup = null;
-			this.m_E_1Toggle = null;
-			this.m_E_2Toggle = null;
-			this.m_E_3Toggle = null;
-			this.m_E_4Toggle = null;
 			this.m_E_NoLock_1Image = null;
 			this.m_E_NoLock_2Image = null;
 			this.m_E_NoLock_3Image = null;
@@ -382,10 +310,6 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_ButtonQuickImage = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItems1LoopVerticalScrollRect = null;
 		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
-		private UnityEngine.UI.Toggle m_E_1Toggle = null;
-		private UnityEngine.UI.Toggle m_E_2Toggle = null;
-		private UnityEngine.UI.Toggle m_E_3Toggle = null;
-		private UnityEngine.UI.Toggle m_E_4Toggle = null;
 		private UnityEngine.UI.Image m_E_NoLock_1Image = null;
 		private UnityEngine.UI.Image m_E_NoLock_2Image = null;
 		private UnityEngine.UI.Image m_E_NoLock_3Image = null;

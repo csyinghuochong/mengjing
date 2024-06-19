@@ -31,7 +31,7 @@ namespace ET.Client
             self.E_BagItems2LoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
 
             self.RefreshBagItems();
-            self.E_1Toggle.IsSelected(true);
+            self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
             self.UpdateLockList(0);
         }
 
@@ -47,11 +47,6 @@ namespace ET.Client
             {
                 return;
             }
-
-            UICommonHelper.SetToggleShow(self.E_1Toggle.gameObject, index == 0);
-            UICommonHelper.SetToggleShow(self.E_2Toggle.gameObject, index == 1);
-            UICommonHelper.SetToggleShow(self.E_3Toggle.gameObject, index == 2);
-            UICommonHelper.SetToggleShow(self.E_4Toggle.gameObject, index == 3);
 
             self.CurrentItemType = index;
             self.Root().GetComponent<BagComponentC>().CurrentHouse = self.CurrentItemType + (int)ItemLocType.ItemWareHouse1;
