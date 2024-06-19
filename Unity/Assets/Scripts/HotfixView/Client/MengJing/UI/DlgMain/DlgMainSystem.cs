@@ -121,8 +121,8 @@ namespace ET.Client
             self.View.E_Button_ZhanKaiButton.AddListener(self.OnButtonZhanKai);
 
             self.View.E_Button_RunRaceButton.AddListener(self.OnButton_RunRace);
-            // self.View.E_Button_HappyButton.AddListener();
-            // self.View.E_Button_HuntButton.AddListener();
+            self.View.E_Button_HappyButton.AddListener(self.OnButton_Happy);
+            self.View.E_Button_HuntButton.AddListener(self.OnButton_Hunt);
             // self.View.E_Button_SoloButton.AddListener();
             // self.View.E_Btn_BattleButton.AddListener();
             // self.View.E_Button_DonationButton.AddListener();
@@ -558,6 +558,16 @@ namespace ET.Client
         private static void OnButton_RunRace(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RunRace).Coroutine();
+        }
+
+        private static void OnButton_Happy(this DlgMain self)
+        {
+            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.Happy, BattleHelper.GetSceneIdByType(SceneTypeEnum.Happy)).Coroutine();
+        }
+
+        private static void OnButton_Hunt(this DlgMain self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Hunt).Coroutine();
         }
 
         private static void OnButton_HuoDong(this DlgMain self)
