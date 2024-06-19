@@ -42,6 +42,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_HuntTask ES_HuntTask
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_hunttask == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_HuntTask");
+		    	   this.m_es_hunttask = this.AddChild<ES_HuntTask,Transform>(subTrans);
+     			}
+     			return this.m_es_hunttask;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -63,12 +81,14 @@ namespace ET.Client
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_huntranking = null;
+			this.m_es_hunttask = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_HuntRanking> m_es_huntranking = null;
+		private EntityRef<ES_HuntTask> m_es_hunttask = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}
