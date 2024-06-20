@@ -101,12 +101,7 @@
         {
             return $"Assets/Bundles/Atlas/{path}.prefab";
         }
-
-        /* 加载Loding图
-         var path = ABPathHelper.GetJpgPath(loadResName);
-         Sprite atlas =ResourcesComponent.Instance.LoadAsset<Sprite>(path);
-         self.Img_BackIcon.GetComponent<Image>().sprite = atlas;
-         */
+        
         //Png
         public static string GetJpgPath(string path)
         {

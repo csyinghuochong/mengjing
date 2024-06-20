@@ -27,7 +27,7 @@ namespace ET.Client
         private static async ETTask InitMaskWordText(this MaskWordComponent self, string maskword, string split)
         {
             var path_1 = ABPathHelper.GetTextPath(maskword);
-            TextAsset textAsset3 = await ResourcesComponent.Instance.LoadAssetAsync<TextAsset>(path_1);
+            TextAsset textAsset3 = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<TextAsset>(path_1);
             self.MaskWord = textAsset3.text;
             self.sensitiveWordsArray = Regex.Split(self.MaskWord, split, RegexOptions.IgnoreCase);
 

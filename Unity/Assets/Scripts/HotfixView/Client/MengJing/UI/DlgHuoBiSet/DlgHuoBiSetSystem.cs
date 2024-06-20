@@ -88,6 +88,7 @@ namespace ET.Client
 
         public static void OnUpdateTitle(this DlgHuoBiSet self, WindowID windowID)
         {
+            
             // string[] paths = uiType.Split('/');
             // string titlePath = paths[paths.Length - 1];
             // if (uiType.Contains("UITeamDungeon"))
@@ -96,7 +97,7 @@ namespace ET.Client
             // }
             //
             // string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TiTleIcon, "Img_" + titlePath);
-            // Sprite sp = ResourcesComponent.Instance.LoadAsset<Sprite>(path);
+            // Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAsset<Sprite>(path);
             // if (!self.AssetPath.Contains(path))
             // {
             //     self.AssetPath.Add(path);

@@ -315,8 +315,7 @@ namespace ET.Client
                 return;
             }
 
-            //GameObject prefab = ResourcesComponent.Instance.LoadAsset<GameObject>(path);
-            //GameObject go = UnityEngine.Object.Instantiate(prefab, GlobalComponent.Instance.Unit, true);
+
             go.SetActive(true);
             go.transform.parent = self.WeaponParent;
             go.transform.localRotation = Quaternion.Euler(-180, 90, 90);

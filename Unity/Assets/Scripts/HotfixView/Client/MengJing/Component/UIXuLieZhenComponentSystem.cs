@@ -41,9 +41,8 @@ namespace ET.Client
             List<Sprite> Sprites = new List<Sprite>();
             for (int i = 0; i < titleConfig.AnimatorNumber; i++)
             {
-                // var path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ChengHaoIcon, $"{titleConfig.AnimatorAsset}/{i + 1}");
                 var path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ChengHaoIcon, $"{10001}/{i + 1}");
-                Sprite sprite = await ResourcesComponent.Instance.LoadAssetAsync<Sprite>(path);
+                Sprite sprite = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
                 if (instanceId != self.InstanceId)
                 {
                     return;

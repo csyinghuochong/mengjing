@@ -179,7 +179,7 @@ namespace ET.Client
         {
             long instanceid = self.InstanceId;
             var path = ABPathHelper.GetUGUIPath("Common/UIShenQiChapter");
-            var bundleGameObject = await ResourcesComponent.Instance.LoadAssetAsync<GameObject>(path);
+            var bundleGameObject = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(path);
             if (instanceid != self.InstanceId)
             {
                 return;

@@ -219,7 +219,7 @@ namespace ET.Client
 
             string assetpath = ABPathHelper.GetSoundPath(clipName);
             self.m_assetlist.Add(assetpath);
-            GameObject bundleGameObject = await ResourcesComponent.Instance.LoadAssetAsync<GameObject>(assetpath);
+            GameObject bundleGameObject = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<GameObject>(assetpath);
             GameObject prefab = UnityEngine.Object.Instantiate(bundleGameObject);
             SoundData soundData = prefab.GetComponent<SoundData>();
             prefab.transform.SetParent(self.root);

@@ -66,7 +66,7 @@ namespace ET.Client
             self.E_Start_0.gameObject.SetActive(star >= 1);
 
             string path =ABPathHelper.GetAtlasPath_2(ABAtlasTypes.MonsterIcon, petfubenConf.ShowIcon);
-            Sprite sp =await ResourcesComponent.Instance.LoadAssetAsync<Sprite>(path);
+            Sprite sp =await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
             self.E_ImageIcon.sprite = sp;
 
             UICommonHelper.SetImageGray(self.Root(), self.E_ImageDi.gameObject, locked);
