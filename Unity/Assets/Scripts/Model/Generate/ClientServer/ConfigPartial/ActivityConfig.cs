@@ -7,7 +7,7 @@ namespace ET
     public partial class ActivityConfigCategory
     {
         public Dictionary<int, List<int>> MaoXianJiaBuffs = new Dictionary<int, List<int>>();
-
+        public Dictionary<string, int> PulicSerialList = new Dictionary<string, int>();
 
         public override void EndInit()
         {
@@ -38,6 +38,14 @@ namespace ET
 
                 MaoXianJiaBuffs.Add(activityConfig.Id, buffids);
             }
+            
+            foreach (ActivityConfig functionConfig in this.GetAll().Values)
+            {
+                if (functionConfig.ActivityType == 34)
+                {
+                    PulicSerialList.Add(functionConfig.Par_2, functionConfig.Id);
+                }
+            }
         }
 
         public List<int> GetBuffIds(int activityid)
@@ -52,5 +60,11 @@ namespace ET
             return buffids; 
         }
 
+        public int GetPulicSerial(string serial)
+        { 
+            int activityid = 0;
+            PulicSerialList.TryGetValue(serial, out activityid);
+            return activityid;
+        }
     }
 }

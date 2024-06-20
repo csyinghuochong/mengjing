@@ -259,5 +259,19 @@ namespace ET.Client
             Popularize2C_PlayerResponse response = (Popularize2C_PlayerResponse)await root.GetComponent<SessionComponent>().Session.Call(request);
             return response.Error;
         }
+
+        public static async ETTask<int> ActivityReceiveRequest(Scene root, int activityType, int activityId)
+        {
+            C2M_ActivityReceiveRequest request = new() { ActivityType = activityType, ActivityId = activityId };
+            M2C_ActivityReceiveResponse response = (M2C_ActivityReceiveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
+        public static async ETTask<M2C_SerialReardResponse> SerialReardRequest(Scene root, string serialNumber)
+        {
+            C2M_SerialReardRequest request = new() { SerialNumber = serialNumber };
+            M2C_SerialReardResponse response = (M2C_SerialReardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

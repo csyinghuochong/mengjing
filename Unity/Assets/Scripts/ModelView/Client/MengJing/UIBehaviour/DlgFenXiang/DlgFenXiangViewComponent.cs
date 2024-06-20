@@ -60,6 +60,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_Serial ES_Serial
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_serial == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_Serial");
+		    	   this.m_es_serial = this.AddChild<ES_Serial,Transform>(subTrans);
+     			}
+     			return this.m_es_serial;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -82,6 +100,7 @@ namespace ET.Client
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_fenxiangset = null;
 			this.m_es_popularize = null;
+			this.m_es_serial = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.uiTransform = null;
 		}
@@ -89,6 +108,7 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_FenXiangSet> m_es_fenxiangset = null;
 		private EntityRef<ES_Popularize> m_es_popularize = null;
+		private EntityRef<ES_Serial> m_es_serial = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}

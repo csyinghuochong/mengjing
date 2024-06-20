@@ -8,6 +8,7 @@ namespace ET.Client
 {
     [FriendOf(typeof (ES_FenXiangSet))]
     [FriendOf(typeof (ES_Popularize))]
+    [FriendOf(typeof (ES_Serial))]
     [FriendOf(typeof (DlgFenXiang))]
     public static class DlgFenXiangSystem
     {
@@ -33,6 +34,7 @@ namespace ET.Client
                     self.View.ES_Popularize.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
+                    self.View.ES_Serial.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
