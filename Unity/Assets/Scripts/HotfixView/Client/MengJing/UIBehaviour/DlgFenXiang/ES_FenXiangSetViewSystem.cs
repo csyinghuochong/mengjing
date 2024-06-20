@@ -127,14 +127,14 @@ namespace ET.Client
 
         public static void FenXiangByType(this ES_FenXiangSet self, int shareType)
         {
-            string title = "危境";
-            string text = "暗黑系列ARPG探索类手游《危境》系列正式开启！";
-
-            if (shareType == 4 || shareType == 5)
-            {
-                title = "快来和我一起玩危境吧!";
-                text = "一把木剑，一件布衣,点击这个链接开始你的探险吧!";
-            }
+            // string title = "危境";
+            // string text = "暗黑系列ARPG探索类手游《危境》系列正式开启！";
+            //
+            // if (shareType == 4 || shareType == 5)
+            // {
+            //     title = "快来和我一起玩危境吧!";
+            //     text = "一把木剑，一件布衣,点击这个链接开始你的探险吧!";
+            // }
 
             // FenXiangContent fenXiangContent = new FenXiangContent();
             // fenXiangContent.FenXiang_Title = title;

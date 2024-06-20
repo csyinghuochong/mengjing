@@ -24,6 +24,41 @@ namespace ET.Client
         {
         }
 
+        public static bool CheckAddItemData(this BagComponentC self, string rewardItems)
+        {
+            int cellNumber = 0;
+            string[] needList = rewardItems.Split('@');
+            for (int i = 0; i < needList.Length; i++)
+            {
+                string[] itemInfo = needList[i].Split(';');
+                if (itemInfo.Length < 2)
+                {
+                    continue;
+                }
+
+                int itemId = int.Parse(itemInfo[0]);
+                int itemNum = int.Parse(itemInfo[1]);
+
+                if (itemId <= (int)UserDataType.Max)
+                {
+                    continue;
+                }
+
+                int ItemPileSum = ItemConfigCategory.Instance.Get(itemId).ItemPileSum;
+                if (ItemPileSum == 1)
+                {
+                    cellNumber += itemNum;
+                }
+                else
+                {
+                    cellNumber += (int)(1f * itemNum / ItemPileSum);
+                    cellNumber += (itemNum % ItemPileSum > 0? 1 : 0);
+                }
+            }
+
+            return self.GetBagLeftCell() >= cellNumber;
+        }
+
         public static List<BagInfo> GetCurJingHeList(this BagComponentC self)
         {
             List<BagInfo> bagInfos = new List<BagInfo>();

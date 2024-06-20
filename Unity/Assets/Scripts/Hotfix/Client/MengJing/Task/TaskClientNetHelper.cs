@@ -139,5 +139,19 @@ namespace ET.Client
 
             return response;
         }
+
+        public static async ETTask<int> TaskHuoYueRewardRequest(Scene root, int huoYueId)
+        {
+            C2M_TaskHuoYueRewardRequest request = new() { HuoYueId = huoYueId };
+            M2C_TaskHuoYueRewardResponse response = (M2C_TaskHuoYueRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                TaskComponentC taskComponent = root.GetComponent<TaskComponentC>();
+                taskComponent.ReceiveHuoYueIds.Add(huoYueId);
+            }
+
+            return response.Error;
+        }
     }
 }

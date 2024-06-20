@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_CountryTask))]
     [FriendOf(typeof (DlgCountry))]
     public static class DlgCountrySystem
     {
@@ -25,7 +26,8 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-
+                    self.View.ES_CountryTask.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_CountryTask.OnUpdateUI();
                     break;
                 case 1:
 
@@ -34,6 +36,11 @@ namespace ET.Client
 
                     break;
             }
+        }
+
+        public static void OnUpdateRoleData(this DlgCountry self)
+        {
+            self.View.ES_CountryTask.OnTaskCountryUpdate();
         }
     }
 }
