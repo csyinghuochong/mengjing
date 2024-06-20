@@ -8,6 +8,7 @@ namespace ET
 {
 	public class Init: MonoBehaviour
 	{
+		public bool OueNetMode;
 		public bool EditorMode;
 		public VersionMode VersionMode = VersionMode.Alpha;
 		

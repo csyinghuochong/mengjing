@@ -117,5 +117,6 @@ namespace ET.Client
 		WindowID_Donation,
 		WindowID_FenXiang,
 		WindowID_Country,
+		WindowID_CountryHuoDongJieShao,
 	}
 }

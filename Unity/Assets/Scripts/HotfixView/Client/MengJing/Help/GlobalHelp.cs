@@ -9,6 +9,11 @@ namespace ET.Client
             return GameObject.Find("Global").GetComponent<Init>().VersionMode == VersionMode.BanHao;
         }
 
+        public static bool IsOutNetMode()
+        {
+            return GameObject.Find("Global").GetComponent<Init>().OueNetMode;
+        }
+
         public static Shader Find(string path)
         {
             Shader shader = null;

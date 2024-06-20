@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_CountryTask))]
+    [FriendOf(typeof (ES_CountryHuoDong))]
     [FriendOf(typeof (DlgCountry))]
     public static class DlgCountrySystem
     {
@@ -30,7 +31,7 @@ namespace ET.Client
                     self.View.ES_CountryTask.OnUpdateUI();
                     break;
                 case 1:
-
+                    self.View.ES_CountryHuoDong.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
 

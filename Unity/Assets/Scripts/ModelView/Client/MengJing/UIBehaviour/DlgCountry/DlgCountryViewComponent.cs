@@ -24,7 +24,7 @@ namespace ET.Client
      		}
      	}
 
-		public ES_CountryTask ES_CountryTask
+		public ES_CountryHuoDong ES_CountryHuoDong
      	{
      		get
      		{
@@ -33,12 +33,12 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_countrytask == null )
+     			if( this.m_es_countryhuodong == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_CountryTask");
-		    	   this.m_es_countrytask = this.AddChild<ES_CountryTask,Transform>(subTrans);
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_CountryHuoDong");
+		    	   this.m_es_countryhuodong = this.AddChild<ES_CountryHuoDong,Transform>(subTrans);
      			}
-     			return this.m_es_countrytask;
+     			return this.m_es_countryhuodong;
      		}
      	}
 
@@ -62,13 +62,13 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
-			this.m_es_countrytask = null;
+			this.m_es_countryhuodong = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
-		private EntityRef<ES_CountryTask> m_es_countrytask = null;
+		private EntityRef<ES_CountryHuoDong> m_es_countryhuodong = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}

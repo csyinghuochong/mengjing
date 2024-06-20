@@ -16,7 +16,8 @@ namespace ET
 
             string rewardStr = $"1;{gold}@2;{exp}";
 
-            if (Lv >= 20) {
+            if (Lv >= 20)
+            {
                 rewardStr = $"1;{gold}@2;{exp}@10010039;1@10010088;2@10010046;1";
             }
 
@@ -35,6 +36,7 @@ namespace ET
                 {
                     continue;
                 }
+
                 string[] dayInfo = activityConfigs[i].Par_1.Split(';');
                 if (dateTime.Month == int.Parse(dayInfo[0]) && dateTime.Day == int.Parse(dayInfo[1]))
                 {
@@ -42,6 +44,7 @@ namespace ET
                     break;
                 }
             }
+
             return activityId;
         }
 
@@ -59,16 +62,16 @@ namespace ET
                 {
                     continue;
                 }
+
                 string[] dayInfo = activityConfigs[i].Par_1.Split(';');
-                KeyValuePairInt keyValuePair = new KeyValuePairInt() { KeyId = activityConfigs[i].Id, Value = int.Parse(dayInfo[0]) * 100 + int.Parse(dayInfo[1]) };
+                KeyValuePairInt keyValuePair =
+                        new KeyValuePairInt() { KeyId = activityConfigs[i].Id, Value = int.Parse(dayInfo[0]) * 100 + int.Parse(dayInfo[1]) };
                 jirRiList.Add(keyValuePair);
             }
-            jirRiList.Sort(delegate (KeyValuePairInt a, KeyValuePairInt b)
-            {
-                return (int)a.Value - (int)b.Value;
-            });
 
-            for (int i = 0; i < jirRiList.Count;i++)
+            jirRiList.Sort(delegate(KeyValuePairInt a, KeyValuePairInt b) { return (int)a.Value - (int)b.Value; });
+
+            for (int i = 0; i < jirRiList.Count; i++)
             {
                 if (jirRiList[i].Value >= curDay)
                 {
@@ -92,9 +95,10 @@ namespace ET
         {
             ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(receiveId);
             if (activityConfig.ActivityType != 32)
-            { 
+            {
                 return !receiveIds.Contains(receiveId);
             }
+
             int receiveNumber = 0;
             for (int i = 0; i < receiveIds.Count; i++)
             {
@@ -103,6 +107,7 @@ namespace ET
                     receiveNumber++;
                 }
             }
+
             return receiveNumber < int.Parse(activityConfig.Par_1);
         }
 
@@ -116,8 +121,10 @@ namespace ET
                 {
                     continue;
                 }
+
                 activityId = activityConfigs[i].Id;
             }
+
             return activityId;
         }
 
@@ -131,12 +138,13 @@ namespace ET
                 {
                     continue;
                 }
+
                 activityId = activityConfigs[i].Id;
                 break;
             }
+
             return activityId;
         }
-
 
         /// <summary>
         /// 每个格子对应一个列表。 如果是装备该格子会有多个道具，非装备该格子只有一个道具
@@ -146,13 +154,13 @@ namespace ET
         /// NumericType.WelfareChouKaNumber 
         public static List<string> GetWelfareChouKaReward(List<BagInfo> bagInfos)
         {
-            List<string> rewardList = new   List<string>();
+            List<string> rewardList = new List<string>();
 
             List<int> haveItems = new List<int>();
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
-                if (itemConfig.ItemType ==3 && !haveItems.Contains(bagInfos[i].ItemID))
+                if (itemConfig.ItemType == 3 && !haveItems.Contains(bagInfos[i].ItemID))
                 {
                     haveItems.Add(bagInfos[i].ItemID);
                 }
@@ -178,6 +186,7 @@ namespace ET
                             rewardList.Add(rewardItem[reward]);
                         }
                     }
+
                     if (rewardList.Count <= i)
                     {
                         rewardList.Add(rewardItem[0]);
@@ -185,8 +194,7 @@ namespace ET
                 }
             }
 
-            return  rewardList;
+            return rewardList;
         }
-
     }
 }
