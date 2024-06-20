@@ -114,5 +114,6 @@ namespace ET.Client
 		WindowID_Hunt,
 		WindowID_Solo,
 		WindowID_Battle,
+		WindowID_Donation,
 	}
 }
