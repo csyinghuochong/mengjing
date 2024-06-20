@@ -15,6 +15,7 @@ public class PatchOperation : GameAsyncOperation
         Done,
     }
 
+    public Action UpdateDownHandler;
     private readonly EventGroup _eventGroup = new EventGroup();
     private readonly StateMachine _machine;
     private ESteps _steps = ESteps.None;
@@ -60,6 +61,8 @@ public class PatchOperation : GameAsyncOperation
                 _eventGroup.RemoveAllListener();
                 Status = EOperationStatus.Succeed;
                 _steps = ESteps.Done;
+                
+                UpdateDownHandler?.Invoke();
             }
         }
     }

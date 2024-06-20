@@ -42,23 +42,25 @@ namespace ET
 			EPlayMode ePlayMode = globalConfig.EPlayMode;
 			await World.Instance.AddSingleton<ResourcesComponent>().CreatePackageAsync("DefaultPackage",ePlayMode, true);
 			
-			//GameObject.Find("Global/UI/PopUpRoot/PatchWindow").gameObject.SetActive(true);
+			// 游戏管理器
+			GameManager.Instance.Behaviour = this;
+			GameObject.Find("Global/UI/PopUpRoot/PatchWindow").gameObject.SetActive(true);
 			// 开始补丁更新流程
-			//StartCoroutine(StartUpdate(ePlayMode));
-			
-			OnUpdaterDone().Coroutine();
+			StartCoroutine(StartUpdate(ePlayMode));
 		}
 
 		IEnumerator StartUpdate(EPlayMode ePlayMode)
 		{
 			// 开始补丁更新流程
 			PatchOperation operation = new PatchOperation("DefaultPackage", EDefaultBuildPipeline.BuiltinBuildPipeline.ToString(), ePlayMode);
+			operation.UpdateDownHandler = () => { OnUpdaterDone().Coroutine(); };
 			YooAssets.StartOperation(operation);
 			yield return operation;
 		}
 
 		public static async ETTask OnUpdaterDone()
 		{
+			GameObject.Find("Global/UI/PopUpRoot/PatchWindow").gameObject.SetActive(false);
 			CodeLoader codeLoader = World.Instance.AddSingleton<CodeLoader>();
 			await codeLoader.DownloadAsync();
 
