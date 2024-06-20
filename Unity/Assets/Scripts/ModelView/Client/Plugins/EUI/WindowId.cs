@@ -115,5 +115,6 @@ namespace ET.Client
 		WindowID_Solo,
 		WindowID_Battle,
 		WindowID_Donation,
+		WindowID_FenXiang,
 	}
 }
