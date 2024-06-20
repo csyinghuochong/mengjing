@@ -273,5 +273,13 @@ namespace ET.Client
             M2C_SerialReardResponse response = (M2C_SerialReardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<int> ActivityRechargeSignRequest(Scene root, int activityType, int activityId)
+        {
+            C2M_ActivityRechargeSignRequest request = new() { ActivityType = 23, ActivityId = activityId };
+            M2C_ActivityRechargeSignResponse response =
+                    (M2C_ActivityRechargeSignResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }

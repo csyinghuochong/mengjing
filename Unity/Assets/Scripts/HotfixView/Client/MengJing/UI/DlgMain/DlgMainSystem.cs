@@ -582,12 +582,12 @@ namespace ET.Client
 
         private static void OnButton_Donation(this DlgMain self)
         {
-            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Donation).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_FenXiang).Coroutine();
         }
 
         private static void OnButton_FenXiang(this DlgMain self)
         {
-            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_FenXiang).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Donation).Coroutine();
         }
 
         private static void OnButton_EveryTask(this DlgMain self)

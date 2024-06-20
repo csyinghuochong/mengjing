@@ -42,6 +42,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_ActivitySingIn ES_ActivitySingIn
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_activitysingin == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ActivitySingIn");
+		    	   this.m_es_activitysingin = this.AddChild<ES_ActivitySingIn,Transform>(subTrans);
+     			}
+     			return this.m_es_activitysingin;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -63,12 +81,14 @@ namespace ET.Client
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_countryhuodong = null;
+			this.m_es_activitysingin = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_CountryHuoDong> m_es_countryhuodong = null;
+		private EntityRef<ES_ActivitySingIn> m_es_activitysingin = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}
