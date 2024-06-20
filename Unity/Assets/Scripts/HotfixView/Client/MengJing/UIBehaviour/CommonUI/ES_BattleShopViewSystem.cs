@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_BattleShopItem))]
     [EntitySystemOf(typeof (ES_BattleShop))]
     [FriendOfAttribute(typeof (ES_BattleShop))]
     public static partial class ES_BattleShopSystem
@@ -61,7 +62,7 @@ namespace ET.Client
             {
                 foreach (Scroll_Item_BattleShopItem item in self.ScrollItemBattleShopItems.Values)
                 {
-                    if (item == null)
+                    if (item.uiTransform == null)
                     {
                         continue;
                     }

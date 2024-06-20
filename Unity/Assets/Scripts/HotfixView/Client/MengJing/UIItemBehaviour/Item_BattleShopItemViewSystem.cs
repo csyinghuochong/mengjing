@@ -19,6 +19,11 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
+        public static void OnClickImageBg(this Scroll_Item_BattleShopItem self)
+        {
+            self.ClickHandle(self.StoreSellConfig.Id);
+        }
+
         public static void SetClickHandler(this Scroll_Item_BattleShopItem self, Action<int> action)
         {
             self.ClickHandle = action;
@@ -31,6 +36,9 @@ namespace ET.Client
 
         public static void OnUpdateData(this Scroll_Item_BattleShopItem self, StoreSellConfig storeSellConfig)
         {
+            self.E_Image_bgButton.AddListener(self.OnClickImageBg);
+            self.E_ImageSelectImage.gameObject.SetActive(false);
+
             self.StoreSellConfig = storeSellConfig;
             int costType = self.StoreSellConfig.SellType;
 
