@@ -1,6 +1,28 @@
 ﻿
 namespace YooAsset
 {
+	
+	/// <summary>
+	/// 默认的构建管线
+	/// </summary>
+	public enum EDefaultBuildPipeline
+	{
+		/// <summary>
+		/// 内置构建管线
+		/// </summary>
+		BuiltinBuildPipeline,
+
+		/// <summary>
+		/// 可编程构建管线
+		/// </summary>
+		ScriptableBuildPipeline,
+
+		/// <summary>
+		/// 原生文件构建管线
+		/// </summary>
+		RawFileBuildPipeline,
+	}
+	
 	/// <summary>
 	/// 运行模式
 	/// </summary>
@@ -20,8 +42,6 @@ namespace YooAsset
 		/// 联机运行模式
 		/// </summary>
 		HostPlayMode,
-		
-		WebPlayMode,
 	}
 
 	/// <summary>

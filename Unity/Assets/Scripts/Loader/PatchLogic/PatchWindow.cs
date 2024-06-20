@@ -64,10 +64,10 @@ public class PatchWindow : MonoBehaviour
 
     void Awake()
     {
-        _slider = transform.Find("UIWindow/Slider").GetComponent<Slider>();
-        _tips = transform.Find("UIWindow/Slider/txt_tips").GetComponent<Text>();
+        _slider = transform.Find("Slider").GetComponent<Slider>();
+        _tips = transform.Find("Slider/txt_tips").GetComponent<Text>();
         _tips.text = "Initializing the game world !";
-        _messageBoxObj = transform.Find("UIWindow/MessgeBox").gameObject;
+        _messageBoxObj = transform.Find("MessgeBox").gameObject;
         _messageBoxObj.SetActive(false);
 
         _eventGroup.AddListener<PatchEventDefine.InitializeFailed>(OnHandleEventMessage);

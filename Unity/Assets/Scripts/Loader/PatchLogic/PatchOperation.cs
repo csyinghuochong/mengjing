@@ -30,7 +30,6 @@ public class PatchOperation : GameAsyncOperation
 
         // 创建状态机
         _machine = new StateMachine(this);
-        _machine.AddNode<FsmInitializePackage>();
         _machine.AddNode<FsmUpdatePackageVersion>();
         _machine.AddNode<FsmUpdatePackageManifest>();
         _machine.AddNode<FsmCreatePackageDownloader>();
@@ -46,7 +45,7 @@ public class PatchOperation : GameAsyncOperation
     protected override void OnStart()
     {
         _steps = ESteps.Update;
-        _machine.Run<FsmInitializePackage>();
+        _machine.Run<FsmUpdatePackageVersion>();
     }
     protected override void OnUpdate()
     {
@@ -74,11 +73,11 @@ public class PatchOperation : GameAsyncOperation
     /// </summary>
     private void OnHandleEventMessage(IEventMessage message)
     {
-        if (message is UserEventDefine.UserTryInitialize)
-        {
-            _machine.ChangeState<FsmInitializePackage>();
-        }
-        else if (message is UserEventDefine.UserBeginDownloadWebFiles)
+        // if (message is UserEventDefine.UserTryInitialize)
+        // {
+        //     _machine.ChangeState<FsmInitializePackage>();
+        // }
+        if (message is UserEventDefine.UserBeginDownloadWebFiles)
         {
             _machine.ChangeState<FsmDownloadPackageFiles>();
         }

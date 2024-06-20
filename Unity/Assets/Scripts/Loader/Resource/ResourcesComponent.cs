@@ -70,7 +70,7 @@ namespace ET
             YooAssets.Destroy();
         }
 
-        public async ETTask CreatePackageAsync(string packageName, bool isDefault = false)
+        public async ETTask CreatePackageAsync(string packageName, EPlayMode ePlayMode, bool isDefault = false)
         {
             ResourcePackage package = YooAssets.CreatePackage(packageName);
             if (isDefault)
@@ -78,9 +78,6 @@ namespace ET
                 YooAssets.SetDefaultPackage(package);
             }
 
-            GlobalConfig globalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
-            EPlayMode ePlayMode = globalConfig.EPlayMode;
-            
             // 编辑器下的模拟模式
             switch (ePlayMode)
             {
@@ -116,27 +113,27 @@ namespace ET
             string GetHostServerURL()
             {
                 //string hostServerIP = "http://10.0.2.2"; //安卓模拟器地址
-                string hostServerIP = "http://127.0.0.1";
-                string appVersion = "v1.0";
+                string hostServerIP = "http://47.94.107.92";
+                string appVersion = "2024-06-19-1038";
 
 #if UNITY_EDITOR
                 if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.Android)
-                    return $"{hostServerIP}/CDN/Android/{appVersion}";
+                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/Android/{appVersion}";
                 else if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.iOS)
-                    return $"{hostServerIP}/CDN/IPhone/{appVersion}";
+                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/IPhone/{appVersion}";
                 else if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.WebGL)
-                    return $"{hostServerIP}/CDN/WebGL/{appVersion}";
+                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/WebGL/{appVersion}";
                 else
-                    return $"{hostServerIP}/CDN/PC/{appVersion}";
+                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/PC/{appVersion}";
 #else
 		        if (Application.platform == RuntimePlatform.Android)
-		        	return $"{hostServerIP}/CDN/Android/{appVersion}";
+		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/Android/{appVersion}";
 		        else if (Application.platform == RuntimePlatform.IPhonePlayer)
-		        	return $"{hostServerIP}/CDN/IPhone/{appVersion}";
+		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/IPhone/{appVersion}";
 		        else if (Application.platform == RuntimePlatform.WebGLPlayer)
-		        	return $"{hostServerIP}/CDN/WebGL/{appVersion}";
+		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/WebGL/{appVersion}";
 		        else
-		        	return $"{hostServerIP}/CDN/PC/{appVersion}";
+		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/PC/{appVersion}";
 #endif
             }
         }

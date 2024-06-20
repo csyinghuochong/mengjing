@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using CommandLine;
 using UnityEngine;
+using YooAsset;
 
 namespace ET
 {
@@ -35,12 +37,31 @@ namespace ET
 			
 			World.Instance.AddSingleton<TimeInfo>();
 			World.Instance.AddSingleton<FiberManager>();
-
-			await World.Instance.AddSingleton<ResourcesComponent>().CreatePackageAsync("DefaultPackage", true);
 			
+			GlobalConfig globalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
+			EPlayMode ePlayMode = globalConfig.EPlayMode;
+			await World.Instance.AddSingleton<ResourcesComponent>().CreatePackageAsync("DefaultPackage",ePlayMode, true);
+			
+			//GameObject.Find("Global/UI/PopUpRoot/PatchWindow").gameObject.SetActive(true);
+			// 开始补丁更新流程
+			//StartCoroutine(StartUpdate(ePlayMode));
+			
+			OnUpdaterDone().Coroutine();
+		}
+
+		IEnumerator StartUpdate(EPlayMode ePlayMode)
+		{
+			// 开始补丁更新流程
+			PatchOperation operation = new PatchOperation("DefaultPackage", EDefaultBuildPipeline.BuiltinBuildPipeline.ToString(), ePlayMode);
+			YooAssets.StartOperation(operation);
+			yield return operation;
+		}
+
+		public static async ETTask OnUpdaterDone()
+		{
 			CodeLoader codeLoader = World.Instance.AddSingleton<CodeLoader>();
 			await codeLoader.DownloadAsync();
-			
+
 			codeLoader.Start();
 		}
 
