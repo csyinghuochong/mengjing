@@ -42,6 +42,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_DonationUnion ES_DonationUnion
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_donationunion == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_DonationUnion");
+		    	   this.m_es_donationunion = this.AddChild<ES_DonationUnion,Transform>(subTrans);
+     			}
+     			return this.m_es_donationunion;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -63,12 +81,14 @@ namespace ET.Client
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_donationshow = null;
+			this.m_es_donationunion = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_DonationShow> m_es_donationshow = null;
+		private EntityRef<ES_DonationUnion> m_es_donationunion = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}

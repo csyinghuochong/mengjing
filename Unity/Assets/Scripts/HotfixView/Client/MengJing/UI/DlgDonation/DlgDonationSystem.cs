@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_DonationShow))]
+    [FriendOf(typeof (ES_DonationUnion))]
     [FriendOf(typeof (DlgDonation))]
     public static class DlgDonationSystem
     {
@@ -29,7 +30,9 @@ namespace ET.Client
                     self.View.ES_DonationShow.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-
+                    self.View.ES_DonationUnion.uiTransform.gameObject.SetActive(true);
+                    break;
+                case 2:
                     break;
             }
         }
