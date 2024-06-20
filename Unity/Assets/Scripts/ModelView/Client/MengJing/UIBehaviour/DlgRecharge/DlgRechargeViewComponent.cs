@@ -160,7 +160,7 @@ namespace ET.Client
      		}
      	}
 
-		public ES_Loading ES_Loading
+		public UnityEngine.RectTransform EG_LoadingRectTransform
      	{
      		get
      		{
@@ -169,12 +169,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_loading == null )
+     			if( this.m_EG_LoadingRectTransform == null )
      			{
-		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_Loading");
-		    	   this.m_es_loading = this.AddChild<ES_Loading,Transform>(subTrans);
+		    		this.m_EG_LoadingRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Loading");
      			}
-     			return this.m_es_loading;
+     			return this.m_EG_LoadingRectTransform;
      		}
      	}
 
@@ -189,7 +188,7 @@ namespace ET.Client
 			this.m_E_ButtonAliPayImage = null;
 			this.m_E_ImageSelect2Image = null;
 			this.m_E_ImageSelect1Image = null;
-			this.m_es_loading = null;
+			this.m_EG_LoadingRectTransform = null;
 			this.uiTransform = null;
 		}
 
@@ -202,7 +201,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_ButtonAliPayImage = null;
 		private UnityEngine.UI.Image m_E_ImageSelect2Image = null;
 		private UnityEngine.UI.Image m_E_ImageSelect1Image = null;
-		private EntityRef<ES_Loading> m_es_loading = null;
+		private UnityEngine.RectTransform m_EG_LoadingRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

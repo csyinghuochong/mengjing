@@ -34,6 +34,7 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgRecharge self, Entity contextData = null)
         {
+            self.View.EG_LoadingRectTransform.gameObject.SetActive(false);
             self.PayType = PayTypeEnum.AliPay;
 
             self.InitRechargeList();
@@ -52,7 +53,6 @@ namespace ET.Client
                 self.View.E_ButtonAliPayButton.gameObject.SetActive(false);
                 self.View.E_ButtonWeiXinButton.gameObject.SetActive(false);
 #endif
-            self.View.ES_Loading.Start = true;
         }
 
         private static void OnRechargeItemsRefresh(this DlgRecharge self, Transform transform, int index)
