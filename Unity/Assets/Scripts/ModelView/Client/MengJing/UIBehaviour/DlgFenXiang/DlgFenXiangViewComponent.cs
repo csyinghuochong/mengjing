@@ -96,6 +96,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_FenXiangQQAddSet ES_FenXiangQQAddSet
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_fenxiangqqaddset == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_FenXiangQQAddSet");
+		    	   this.m_es_fenxiangqqaddset = this.AddChild<ES_FenXiangQQAddSet,Transform>(subTrans);
+     			}
+     			return this.m_es_fenxiangqqaddset;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -120,6 +138,7 @@ namespace ET.Client
 			this.m_es_popularize = null;
 			this.m_es_serial = null;
 			this.m_es_luntan = null;
+			this.m_es_fenxiangqqaddset = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.uiTransform = null;
 		}
@@ -129,6 +148,7 @@ namespace ET.Client
 		private EntityRef<ES_Popularize> m_es_popularize = null;
 		private EntityRef<ES_Serial> m_es_serial = null;
 		private EntityRef<ES_LunTan> m_es_luntan = null;
+		private EntityRef<ES_FenXiangQQAddSet> m_es_fenxiangqqaddset = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}

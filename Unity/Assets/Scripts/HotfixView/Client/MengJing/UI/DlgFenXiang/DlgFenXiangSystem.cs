@@ -10,6 +10,7 @@ namespace ET.Client
     [FriendOf(typeof (ES_Popularize))]
     [FriendOf(typeof (ES_Serial))]
     [FriendOf(typeof (ES_LunTan))]
+    [FriendOf(typeof (ES_FenXiangQQAddSet))]
     [FriendOf(typeof (DlgFenXiang))]
     public static class DlgFenXiangSystem
     {
@@ -39,6 +40,9 @@ namespace ET.Client
                     break;
                 case 3:
                     self.View.ES_LunTan.uiTransform.gameObject.SetActive(true);
+                    break;
+                case 4:
+                    self.View.ES_FenXiangQQAddSet.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
