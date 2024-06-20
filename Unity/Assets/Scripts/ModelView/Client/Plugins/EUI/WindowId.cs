@@ -118,5 +118,6 @@ namespace ET.Client
 		WindowID_FenXiang,
 		WindowID_Country,
 		WindowID_CountryHuoDongJieShao,
+		WindowID_Recharge,
 	}
 }

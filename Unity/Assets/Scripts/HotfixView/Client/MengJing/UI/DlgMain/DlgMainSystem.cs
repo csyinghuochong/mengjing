@@ -128,7 +128,7 @@ namespace ET.Client
             self.View.E_Button_DonationButton.AddListener(self.OnButton_Donation);
             self.View.E_Button_FenXiangButton.AddListener(self.OnButton_FenXiang);
             self.View.E_Btn_EveryTaskButton.AddListener(self.OnButton_EveryTask);
-            // self.View.E_Button_RechargeButton.AddListener();
+            self.View.E_Button_RechargeButton.AddListener(self.OnButton_Recharge);
             self.View.E_Btn_HuoDongButton.AddListener(self.OnButton_HuoDong);
             // self.View.E_Button_ZhenYingButton.AddListener();
             // self.View.E_Button_EnergyButton.AddListener();
@@ -587,12 +587,17 @@ namespace ET.Client
 
         private static void OnButton_FenXiang(this DlgMain self)
         {
-            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Donation).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Country).Coroutine();
         }
 
         private static void OnButton_EveryTask(this DlgMain self)
         {
-            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Country).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Donation).Coroutine();
+        }
+
+        private static void OnButton_Recharge(this DlgMain self)
+        {
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Recharge).Coroutine();
         }
 
         private static void OnButton_HuoDong(this DlgMain self)
