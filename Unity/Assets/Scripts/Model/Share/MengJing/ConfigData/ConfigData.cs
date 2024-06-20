@@ -21,6 +21,20 @@ namespace ET
         [StaticField]
         public static bool NetVersion = true;
 
+        //赠送钻石数量
+        [StaticField]
+        public static Dictionary<int, int> RechargeGive = new(8)
+        {
+            { 6, 0 },
+            { 30, 300 },
+            { 50, 600 },
+            { 98, 1200 },
+            { 198, 2888 },
+            { 298, 4888 },
+            { 488, 8888 },
+            { 648, 12888 },
+        };
+        
         //副本深渊模式创建怪物   参数：场景ID,MonsterPositionConfigID
         [StaticField]
         public static Dictionary<int, int> ShenYuanCreateConfig = new Dictionary<int, int>()

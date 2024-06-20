@@ -160,7 +160,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_LoadingRectTransform
+		public ES_Loading ES_Loading
      	{
      		get
      		{
@@ -169,28 +169,12 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_LoadingRectTransform == null )
+     			if( this.m_es_loading == null )
      			{
-		    		this.m_EG_LoadingRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Loading");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_Loading");
+		    	   this.m_es_loading = this.AddChild<ES_Loading,Transform>(subTrans);
      			}
-     			return this.m_EG_LoadingRectTransform;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_Img_LoadingImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Img_LoadingImage == null )
-     			{
-		    		this.m_E_Img_LoadingImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Loading/E_Img_Loading");
-     			}
-     			return this.m_E_Img_LoadingImage;
+     			return this.m_es_loading;
      		}
      	}
 
@@ -205,8 +189,7 @@ namespace ET.Client
 			this.m_E_ButtonAliPayImage = null;
 			this.m_E_ImageSelect2Image = null;
 			this.m_E_ImageSelect1Image = null;
-			this.m_EG_LoadingRectTransform = null;
-			this.m_E_Img_LoadingImage = null;
+			this.m_es_loading = null;
 			this.uiTransform = null;
 		}
 
@@ -219,8 +202,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_ButtonAliPayImage = null;
 		private UnityEngine.UI.Image m_E_ImageSelect2Image = null;
 		private UnityEngine.UI.Image m_E_ImageSelect1Image = null;
-		private UnityEngine.RectTransform m_EG_LoadingRectTransform = null;
-		private UnityEngine.UI.Image m_E_Img_LoadingImage = null;
+		private EntityRef<ES_Loading> m_es_loading = null;
 		public Transform uiTransform = null;
 	}
 }
