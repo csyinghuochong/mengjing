@@ -87,6 +87,8 @@ namespace ET.Client
                     $"我已捐献{unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.RaceDonationNumber)}金币";
             self.E_TextMyDonationText.text =
                     $"我已捐献{unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.RaceDonationNumber)}金币";
+
+            await ETTask.CompletedTask;
         }
     }
 }

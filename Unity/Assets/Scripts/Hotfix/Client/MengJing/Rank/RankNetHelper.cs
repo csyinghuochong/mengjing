@@ -41,5 +41,13 @@
 
             return response;
         }
+
+        public static async ETTask<R2C_RankUnionRaceResponse> RankUnionRaceRequest(Scene root)
+        {
+            C2R_RankUnionRaceRequest request = new();
+            R2C_RankUnionRaceResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as R2C_RankUnionRaceResponse;
+
+            return response;
+        }
     }
 }
