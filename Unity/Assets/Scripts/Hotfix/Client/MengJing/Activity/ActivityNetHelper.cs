@@ -221,5 +221,12 @@ namespace ET.Client
             int errorCode = await EnterMapHelper.RequestTransfer(root, SceneTypeEnum.Battle, sceneId);
             return errorCode;
         }
+
+        public static async ETTask<int> DonationRequest(Scene root, int price)
+        {
+            C2M_DonationRequest request = new() { Price = price };
+            M2C_DonationResponse response = (M2C_DonationResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }

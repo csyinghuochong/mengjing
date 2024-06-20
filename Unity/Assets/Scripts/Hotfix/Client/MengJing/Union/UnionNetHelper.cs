@@ -45,5 +45,12 @@ namespace ET.Client
             U2C_UnionMyInfoResponse response = (U2C_UnionMyInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<U2C_DonationRankListResponse> DonationRankListRequest(Scene root)
+        {
+            C2U_DonationRankListRequest request = new();
+            U2C_DonationRankListResponse response = (U2C_DonationRankListResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }
