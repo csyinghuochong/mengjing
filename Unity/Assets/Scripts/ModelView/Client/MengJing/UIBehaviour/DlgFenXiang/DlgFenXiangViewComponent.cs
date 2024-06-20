@@ -78,6 +78,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_LunTan ES_LunTan
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_luntan == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_LunTan");
+		    	   this.m_es_luntan = this.AddChild<ES_LunTan,Transform>(subTrans);
+     			}
+     			return this.m_es_luntan;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -101,6 +119,7 @@ namespace ET.Client
 			this.m_es_fenxiangset = null;
 			this.m_es_popularize = null;
 			this.m_es_serial = null;
+			this.m_es_luntan = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.uiTransform = null;
 		}
@@ -109,6 +128,7 @@ namespace ET.Client
 		private EntityRef<ES_FenXiangSet> m_es_fenxiangset = null;
 		private EntityRef<ES_Popularize> m_es_popularize = null;
 		private EntityRef<ES_Serial> m_es_serial = null;
+		private EntityRef<ES_LunTan> m_es_luntan = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}
