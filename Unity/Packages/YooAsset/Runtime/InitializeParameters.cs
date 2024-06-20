@@ -20,6 +20,8 @@ namespace YooAsset
 		/// 联机运行模式
 		/// </summary>
 		HostPlayMode,
+		
+		WebPlayMode,
 	}
 
 	/// <summary>
