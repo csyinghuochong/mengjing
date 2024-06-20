@@ -47,6 +47,6 @@ namespace ET
 
         public List<long> AttackSelfPlayer { get; set; } = new List<long>();
 
-        public long LastPopularize_ListTime = 0;
+        public long LastPopularize_ListTime { get; set; } = 0;
     }
 }

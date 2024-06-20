@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_FenXiangSet))]
     [FriendOf(typeof (DlgFenXiang))]
     public static class DlgFenXiangSystem
     {
@@ -25,6 +26,7 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
+                    self.View.ES_FenXiangSet.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
                     break;

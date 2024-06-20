@@ -7,6 +7,7 @@ namespace ET
 	public class Init: MonoBehaviour
 	{
 		public bool EditorMode;
+		public VersionMode VersionMode = VersionMode.Alpha;
 		
 		private void Start()
 		{

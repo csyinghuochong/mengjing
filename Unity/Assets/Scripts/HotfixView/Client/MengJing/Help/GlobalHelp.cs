@@ -4,6 +4,11 @@ namespace ET.Client
 {
     public static class GlobalHelp
     {
+        public static bool IsBanHaoMode()
+        {
+            return GameObject.Find("Global").GetComponent<Init>().VersionMode == VersionMode.BanHao;
+        }
+
         public static Shader Find(string path)
         {
             Shader shader = null;
