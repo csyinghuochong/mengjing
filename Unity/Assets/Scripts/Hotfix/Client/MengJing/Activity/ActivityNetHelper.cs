@@ -243,5 +243,21 @@ namespace ET.Client
             M2C_ShareSucessResponse response = (M2C_ShareSucessResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<int> Popularize_RewardRequest(Scene root)
+        {
+            UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
+            C2Popularize_RewardRequest request = new() { ActorId = userInfoComponent.UserInfo.UserId };
+            Popularize2C_RewardResponse response = (Popularize2C_RewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
+        public static async ETTask<int> Popularize_PlayerRequest(Scene root, long popularizeId)
+        {
+            UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
+            C2Popularize_PlayerRequest request = new() { ActorId = userInfoComponent.UserInfo.UserId, PopularizeId = popularizeId };
+            Popularize2C_PlayerResponse response = (Popularize2C_PlayerResponse)await root.GetComponent<SessionComponent>().Session.Call(request);
+            return response.Error;
+        }
     }
 }

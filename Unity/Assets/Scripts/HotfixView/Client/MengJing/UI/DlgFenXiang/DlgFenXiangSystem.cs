@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_FenXiangSet))]
+    [FriendOf(typeof (ES_Popularize))]
     [FriendOf(typeof (DlgFenXiang))]
     public static class DlgFenXiangSystem
     {
@@ -29,6 +30,7 @@ namespace ET.Client
                     self.View.ES_FenXiangSet.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
+                    self.View.ES_Popularize.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
                     break;

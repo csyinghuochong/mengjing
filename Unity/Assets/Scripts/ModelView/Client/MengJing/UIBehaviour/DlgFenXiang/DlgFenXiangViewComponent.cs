@@ -42,6 +42,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_Popularize ES_Popularize
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_popularize == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_Popularize");
+		    	   this.m_es_popularize = this.AddChild<ES_Popularize,Transform>(subTrans);
+     			}
+     			return this.m_es_popularize;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -63,12 +81,14 @@ namespace ET.Client
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_fenxiangset = null;
+			this.m_es_popularize = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_FenXiangSet> m_es_fenxiangset = null;
+		private EntityRef<ES_Popularize> m_es_popularize = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}
