@@ -7,6 +7,7 @@ using System.IO;
 using UnityEditor.Build.Reporting;
 using System.Reflection;
 using ET;
+using YooAsset;
 
 //监听Unity启动，一启动就执行
 [InitializeOnLoad]
@@ -203,6 +204,11 @@ public class MyEditorScript
 	
 	static void BulidTarget(string name, string target)
 	{
+		// 生成热更dll
+		var g = Resources.Load<GlobalConfig>("GlobalConfig");
+		g.CodeMode = CodeMode.Client;
+		g.EPlayMode = EPlayMode.HostPlayMode;
+		
 		if (Directory.Exists(targetPath))
 		{
 			CleanDirectory(targetPath);
@@ -228,9 +234,6 @@ public class MyEditorScript
             CopyLibs("guanfang"); 
 			app_name = "梦境";
 		}
-
-		
-		
 		int version = GetVersion();
 		app_name = app_name + ((VersionMode)version).ToString() + name;
 		string target_dir = Application.dataPath + "/TargetAndroid";
@@ -252,8 +255,6 @@ public class MyEditorScript
 			targetGroup = BuildTargetGroup.iOS;
 			buildTarget = BuildTarget.iOS;
 		}
-
-
 		if (Directory.Exists(target_dir))
 		{
 			if (File.Exists(target_name))
