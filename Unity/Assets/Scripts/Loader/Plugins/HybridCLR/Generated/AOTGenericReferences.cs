@@ -12,7 +12,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		"System.Runtime.CompilerServices.Unsafe.dll",
 		"System.dll",
 		"Unity.Core.dll",
-		"Unity.Loader.dll",
 		"Unity.ThirdParty.dll",
 		"UnityEngine.AndroidJNIModule.dll",
 		"UnityEngine.CoreModule.dll",
@@ -32,11 +31,11 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.AEvent<object,ET.Client.AfterCreateCurrentScene>
 	// ET.AEvent<object,ET.Client.AfterUnitCreate>
 	// ET.AEvent<object,ET.Client.AppStartInitFinish>
-	// ET.AEvent<object,ET.Client.BagItemUpdate>
 	// ET.AEvent<object,ET.Client.BeforeSkill>
 	// ET.AEvent<object,ET.Client.BuffScale>
 	// ET.AEvent<object,ET.Client.BuffUpdate>
 	// ET.AEvent<object,ET.Client.ChangeCameraMoveType>
+	// ET.AEvent<object,ET.Client.DataUpdate_BagItemUpdate>
 	// ET.AEvent<object,ET.Client.DataUpdate_BeforeMove>
 	// ET.AEvent<object,ET.Client.DataUpdate_ChouKaWarehouseAddItem>
 	// ET.AEvent<object,ET.Client.DataUpdate_EquipHuiShow>
@@ -61,6 +60,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.AEvent<object,ET.Client.DataUpdate_TaskGet>
 	// ET.AEvent<object,ET.Client.DataUpdate_TaskTrace>
 	// ET.AEvent<object,ET.Client.DataUpdate_UpdateRoleProper>
+	// ET.AEvent<object,ET.Client.DataUpdate_UpdateUserData>
 	// ET.AEvent<object,ET.Client.EnterMapFinish>
 	// ET.AEvent<object,ET.Client.FsmChange>
 	// ET.AEvent<object,ET.Client.LSSceneChangeStart>
@@ -69,6 +69,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.AEvent<object,ET.Client.Now_Hp_Update>
 	// ET.AEvent<object,ET.Client.OnSkillUse>
 	// ET.AEvent<object,ET.Client.PlayAnimator>
+	// ET.AEvent<object,ET.Client.ReddotChange>
 	// ET.AEvent<object,ET.Client.ReturnLogin>
 	// ET.AEvent<object,ET.Client.RoleDataBroadcase>
 	// ET.AEvent<object,ET.Client.RolePetAdd>
@@ -949,7 +950,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<byte>.Start<object>(object&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.Start<object>(object&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<long>.Start<object>(object&)
-		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.ResourcesComponent.<LoadAssetAsync>d__5<object>>(ET.ResourcesComponent.<LoadAssetAsync>d__5<object>&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<object>(object&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<uint>.Start<object>(object&)
 		// object ET.Entity.AddChild<object,int,object>(int,object,bool)
@@ -990,11 +990,11 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.EventSystem.Publish<object,ET.ChangeRotation>(object,ET.ChangeRotation)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.AfterCreateCurrentScene>(object,ET.Client.AfterCreateCurrentScene)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.AfterUnitCreate>(object,ET.Client.AfterUnitCreate)
-		// System.Void ET.EventSystem.Publish<object,ET.Client.BagItemUpdate>(object,ET.Client.BagItemUpdate)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.BeforeSkill>(object,ET.Client.BeforeSkill)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.BuffScale>(object,ET.Client.BuffScale)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.BuffUpdate>(object,ET.Client.BuffUpdate)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.ChangeCameraMoveType>(object,ET.Client.ChangeCameraMoveType)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_BagItemUpdate>(object,ET.Client.DataUpdate_BagItemUpdate)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_BeforeMove>(object,ET.Client.DataUpdate_BeforeMove)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_ChouKaWarehouseAddItem>(object,ET.Client.DataUpdate_ChouKaWarehouseAddItem)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_EquipHuiShow>(object,ET.Client.DataUpdate_EquipHuiShow)
@@ -1019,12 +1019,14 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_TaskGet>(object,ET.Client.DataUpdate_TaskGet)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_TaskTrace>(object,ET.Client.DataUpdate_TaskTrace)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_UpdateRoleProper>(object,ET.Client.DataUpdate_UpdateRoleProper)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_UpdateUserData>(object,ET.Client.DataUpdate_UpdateUserData)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.EnterMapFinish>(object,ET.Client.EnterMapFinish)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.FsmChange>(object,ET.Client.FsmChange)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.LSSceneInitFinish>(object,ET.Client.LSSceneInitFinish)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.Now_Hp_Update>(object,ET.Client.Now_Hp_Update)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.OnSkillUse>(object,ET.Client.OnSkillUse)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.PlayAnimator>(object,ET.Client.PlayAnimator)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.ReddotChange>(object,ET.Client.ReddotChange)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.ReturnLogin>(object,ET.Client.ReturnLogin)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.RoleDataBroadcase>(object,ET.Client.RoleDataBroadcase)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.RolePetAdd>(object,ET.Client.RolePetAdd)
@@ -1061,7 +1063,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ObjectHelper.Swap<object>(object&,object&)
 		// System.Void ET.RandomGenerator.BreakRank<object>(System.Collections.Generic.List<object>)
 		// bool ET.RandomHelper.GetRandListByCount<int>(System.Collections.Generic.List<int>,System.Collections.Generic.List<int>,int)
-		// ET.ETTask<object> ET.ResourcesComponent.LoadAssetAsync<object>(string)
 		// object ET.World.AddSingleton<object>()
 		// System.Collections.Generic.List<object> MemoryPack.Formatters.ListFormatter.DeserializePackable<object>(MemoryPack.MemoryPackReader&)
 		// System.Void MemoryPack.Formatters.ListFormatter.DeserializePackable<object>(MemoryPack.MemoryPackReader&,System.Collections.Generic.List<object>&)
@@ -1306,6 +1307,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// bool System.Linq.Enumerable.Contains<int>(System.Collections.Generic.IEnumerable<int>,int,System.Collections.Generic.IEqualityComparer<int>)
 		// ET.RpcInfo[] System.Linq.Enumerable.ToArray<ET.RpcInfo>(System.Collections.Generic.IEnumerable<ET.RpcInfo>)
 		// object[] System.Linq.Enumerable.ToArray<object>(System.Collections.Generic.IEnumerable<object>)
+		// System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<int,int>> System.Linq.Enumerable.ToList<System.Collections.Generic.KeyValuePair<int,int>>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<int,int>>)
 		// System.Collections.Generic.List<int> System.Linq.Enumerable.ToList<int>(System.Collections.Generic.IEnumerable<int>)
 		// System.Collections.Generic.List<object> System.Linq.Enumerable.ToList<object>(System.Collections.Generic.IEnumerable<object>)
 		// System.Span<byte> System.MemoryExtensions.AsSpan<byte>(byte[])
