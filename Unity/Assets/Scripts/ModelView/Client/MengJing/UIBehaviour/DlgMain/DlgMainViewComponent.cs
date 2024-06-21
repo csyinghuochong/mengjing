@@ -622,6 +622,40 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Image E_ExpProImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ExpProImage == null )
+     			{
+		    		this.m_E_ExpProImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LeftBottomSet/EG_RoseExp/E_ExpPro");
+     			}
+     			return this.m_E_ExpProImage;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_ExpValueText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_ExpValueText == null )
+     			{
+		    		this.m_E_ExpValueText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LeftBottomSet/EG_RoseExp/E_ExpValue");
+     			}
+     			return this.m_E_ExpValueText;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_MainChatRectTransform
      	{
      		get
@@ -2260,6 +2294,8 @@ namespace ET.Client
 			this.m_E_ChengJiuButton = null;
 			this.m_E_ChengJiuImage = null;
 			this.m_EG_RoseExpRectTransform = null;
+			this.m_E_ExpProImage = null;
+			this.m_E_ExpValueText = null;
 			this.m_EG_MainChatRectTransform = null;
 			this.m_E_MainChatItemsLoopVerticalScrollRect = null;
 			this.m_E_OpenChatButton = null;
@@ -2393,6 +2429,8 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_ChengJiuButton = null;
 		private UnityEngine.UI.Image m_E_ChengJiuImage = null;
 		private UnityEngine.RectTransform m_EG_RoseExpRectTransform = null;
+		private UnityEngine.UI.Image m_E_ExpProImage = null;
+		private UnityEngine.UI.Text m_E_ExpValueText = null;
 		private UnityEngine.RectTransform m_EG_MainChatRectTransform = null;
 		private UnityEngine.UI.LoopVerticalScrollRect m_E_MainChatItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_OpenChatButton = null;

@@ -462,6 +462,19 @@ namespace ET.Client
             Log.Debug("家族！！！");
         }
 
+        private static void UpdateShowRoleExp(this DlgMain self)
+        {
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            if (!ExpConfigCategory.Instance.Contain(userInfo.Lv))
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi("非法修改数据！");
+                return;
+            }
+
+            self.View.E_ExpValueText.text = userInfo.Exp + "/" + ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp;
+            self.View.E_ExpProImage.fillAmount = (float)userInfo.Exp / (float)ExpConfigCategory.Instance.Get(userInfo.Lv).UpExp;
+        }
+
         #endregion
 
         #region 聊天
@@ -1031,12 +1044,12 @@ namespace ET.Client
                     self.View.ES_RoleHead.UpdateShowRolePiLao();
                     break;
                 case UserDataType.Lv:
-                    // self.UpdateShowRoleExp();
+                    self.UpdateShowRoleExp();
                     self.View.ES_RoleHead.UpdateShowRoleExp();
                     // self.CheckFuntionButtonByLv(int.Parse(updateValue));
-                    // FunctionEffect.PlaySelfEffect(self.MainUnit, 60000002);
+                    FunctionEffect.PlaySelfEffect(self.MainUnit, 60000002);
                     // self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.LevelUp, userInfo.Lv.ToString());
-                    // FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("恭喜你!等级提升至:") + userInfo.Lv);
+                    FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("恭喜你!等级提升至:") + userInfo.Lv);
                     self.UpdateLvReward();
                     // self.CheckCanEquip().Coroutine();
                     // if (int.Parse(updateValue) > 30)
@@ -1088,52 +1101,46 @@ namespace ET.Client
 
                     break;
                 case UserDataType.WeiJingGold:
-                    // if (int.Parse(updateValue) > 0)
-                    // {
-                    //     FloatTipManager.Instance.ShowFloatTip($"获得{updateValue} 兑换币");
-                    // }
-                    //
-                    // if (int.Parse(updateValue) < 0)
-                    // {
-                    //     FloatTipManager.Instance.ShowFloatTip($"消耗{int.Parse(updateValue) * -1} 兑换币");
-                    // }
+                    if (int.Parse(updateValue) > 0)
+                    {
+                        FlyTipComponent.Instance.SpawnFlyTipDi($"获得{updateValue} 兑换币");
+                    }
+
+                    if (int.Parse(updateValue) < 0)
+                    {
+                        FlyTipComponent.Instance.SpawnFlyTipDi($"消耗{int.Parse(updateValue) * -1} 兑换币");
+                    }
 
                     break;
                 case UserDataType.RongYu:
-                    // if (int.Parse(updateValue) > 0)
-                    // {
-                    //     FloatTipManager.Instance.ShowFloatTip($"获得{updateValue} 荣誉");
-                    // }
-                    //
-                    // if (int.Parse(updateValue) < 0)
-                    // {
-                    //     FloatTipManager.Instance.ShowFloatTip($"消耗{int.Parse(updateValue) * -1} 荣誉");
-                    // }
+                    if (int.Parse(updateValue) > 0)
+                    {
+                        FlyTipComponent.Instance.SpawnFlyTipDi($"获得{updateValue} 荣誉");
+                    }
+
+                    if (int.Parse(updateValue) < 0)
+                    {
+                        FlyTipComponent.Instance.SpawnFlyTipDi($"消耗{int.Parse(updateValue) * -1} 荣誉");
+                    }
 
                     break;
                 case UserDataType.JiaYuanFund:
-                    // if (int.Parse(updateValue) > 0)
-                    // {
-                    //     FloatTipManager.Instance.ShowFloatTip($"获得{updateValue} 家园资金");
-                    // }
+                    if (int.Parse(updateValue) > 0)
+                    {
+                        FlyTipComponent.Instance.SpawnFlyTipDi($"获得{updateValue} 家园资金");
+                    }
 
                     break;
                 case UserDataType.BaoShiDu:
-                    // if (int.Parse(updateValue) > 0)
-                    // {
-                    //     FloatTipManager.Instance.ShowFloatTip($"获得{updateValue} 饱食度");
-                    // }
+                    if (int.Parse(updateValue) > 0)
+                    {
+                        FlyTipComponent.Instance.SpawnFlyTipDi($"获得{updateValue} 饱食度");
+                    }
 
                     break;
 
                 case UserDataType.Combat:
                     self.View.ES_RoleHead.OnUpdateCombat();
-                    //
-                    // UI ui = UIHelper.GetUI(self.ZoneScene(), UIType.UIRole);
-                    // if (ui != null)
-                    // {
-                    //     ui.GetComponent<UIRoleComponent>().UpdateShowComBat();
-                    // }
 
                     break;
                 case UserDataType.Sp:
@@ -1141,11 +1148,11 @@ namespace ET.Client
                     // reddotComponent.UpdateReddont(ReddotType.SkillUp);
                     break;
                 case UserDataType.Message:
-                    // PopupTipHelp.OpenPopupTip_2(self.ZoneScene(), "系统消息", updateValue, null).Coroutine();
+                    PopupTipHelp.OpenPopupTip_2(self.Root(), "系统消息", updateValue, null).Coroutine();
                     break;
                 case UserDataType.PullBack:
-                    // FloatTipManager.Instance.ShowFloatTip("所有人不要乱跑哦");
-                    // FunctionEffect.GetInstance().PlaySelfEffect(self.MainUnit, 30000002);
+                    FlyTipComponent.Instance.SpawnFlyTipDi("所有人不要乱跑哦");
+                    FunctionEffect.PlaySelfEffect(self.MainUnit, 30000002);
                     break;
                 default:
                     break;
