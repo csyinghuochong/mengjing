@@ -37,11 +37,51 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
+    public class DataUpdate_TaskUpdate_Refresh: AEvent<Scene, DataUpdate_TaskUpdate>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_TaskUpdate args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.RefreshMainTaskItems();
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
     public class DataUpdate_TaskTrace_Refresh: AEvent<Scene, DataUpdate_TaskTrace>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_TaskTrace args)
         {
-            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnRecvTaskTrace();
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.RefreshMainTaskItems();
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
+    public class DataUpdate_TaskGet_DlgMainRefresh: AEvent<Scene, DataUpdate_TaskGet>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_TaskGet args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnRecvTaskUpdate();
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
+    public class DataUpdate_TaskComplete_DlgMainRefresh: AEvent<Scene, DataUpdate_TaskComplete>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_TaskComplete args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnRecvTaskUpdate();
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
+    public class DataUpdate_TaskGiveUp_DlgMainRefresh: AEvent<Scene, DataUpdate_TaskGiveUp>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_TaskGiveUp args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnRecvTaskUpdate();
             await ETTask.CompletedTask;
         }
     }
@@ -187,7 +227,6 @@ namespace ET.Client
 
             self.View.E_MainChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainChatItemsRefresh);
             self.View.E_RoseTaskButton.AddListener(self.OnRoseTaskButton);
-            self.RefreshMainTaskItems();
         }
 
         public static void ShowWindow(this DlgMain self, Entity contextData = null)
@@ -197,6 +236,7 @@ namespace ET.Client
             self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
 
             self.View.E_LeftTypeSetToggleGroup.OnSelectIndex(0);
+            self.RefreshMainTaskItems();
 
             self.OnSettingUpdate();
 
@@ -322,9 +362,34 @@ namespace ET.Client
 
         #region 左边
 
-        public static void OnRecvTaskTrace(this DlgMain self)
+        public static void OnRecvTaskUpdate(this DlgMain self)
         {
             self.RefreshMainTaskItems();
+            self.UpdateNpcTaskUI();
+            self.Root().GetComponent<ReddotComponentC>().UpdateReddont(ReddotType.WelfareTask);
+        }
+
+        private static void UpdateNpcTaskUI(this DlgMain self)
+        {
+            List<Unit> allunit = self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll();
+            for (int i = 0; i < allunit.Count; i++)
+            {
+                Unit unit = allunit[i];
+                if (unit.InstanceId == 0 || unit.IsDisposed)
+                {
+                    continue;
+                }
+
+                if (unit.Type != UnitType.Npc)
+                {
+                    continue;
+                }
+
+                // if (unit.GetComponent<NpcHeadBarComponent>() != null)
+                // {
+                //     unit.GetComponent<NpcHeadBarComponent>().OnRecvTaskUpdate();
+                // }
+            }
         }
 
         private static void OnLeftTypeSet(this DlgMain self, int index)
@@ -348,7 +413,7 @@ namespace ET.Client
             scrollItemMainTask.Refresh(self.ShowTaskPros[index]);
         }
 
-        private static void RefreshMainTaskItems(this DlgMain self)
+        public static void RefreshMainTaskItems(this DlgMain self)
         {
             self.ShowTaskPros.Clear();
             foreach (TaskPro taskPro in self.Root().GetComponent<TaskComponentC>().RoleTaskList)

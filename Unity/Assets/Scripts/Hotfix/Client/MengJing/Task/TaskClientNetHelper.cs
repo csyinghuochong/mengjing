@@ -153,5 +153,24 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        //对话完成
+        public static async ETTask SendTaskNotice(Scene root, int taskId)
+        {
+            TaskComponentC taskComponent = root.GetComponent<TaskComponentC>();
+            for (int k = 0; k < taskComponent.RoleTaskList.Count; k++)
+            {
+                if (taskComponent.RoleTaskList[k].taskID == taskId)
+                {
+                    taskComponent.RoleTaskList[k].taskTargetNum_1 = 1;
+                    taskComponent.RoleTaskList[k].taskStatus = (int)TaskStatuEnum.Completed;
+                }
+            }
+
+            C2M_TaskNoticeRequest request = new() { TaskId = taskId };
+            M2C_TaskNoticeResponse response = (M2C_TaskNoticeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            EventSystem.Instance.Publish(root, new DataUpdate_TaskUpdate());
+        }
     }
 }

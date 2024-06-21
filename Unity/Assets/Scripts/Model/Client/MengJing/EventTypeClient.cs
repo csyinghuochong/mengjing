@@ -62,11 +62,7 @@ namespace ET.Client
     {
     }
 
-    public struct DataUpdate_TaskGet
-    {
-    }
-
-    public struct DataUpdate_TaskGiveUp
+    public struct DataUpdate_TaskUpdate
     {
     }
 
@@ -74,7 +70,15 @@ namespace ET.Client
     {
     }
 
+    public struct DataUpdate_TaskGet
+    {
+    }
+
     public struct DataUpdate_TaskComplete
+    {
+    }
+
+    public struct DataUpdate_TaskGiveUp
     {
     }
 

@@ -172,7 +172,7 @@ namespace ET.Client
         public static void OnRecvTaskUpdate(this TaskComponentC self, M2C_TaskUpdate message)
         {
             self.RoleTaskList = message.RoleTaskList;
-            //HintHelp.GetInstance().DataUpdate(DataType.TaskUpdate);
+            EventSystem.Instance.Publish(self.Root(), new DataUpdate_TaskUpdate());
         }
 
         public static void OnRecvTaskCountryUpdate(this TaskComponentC self, M2C_TaskCountryUpdate message)
