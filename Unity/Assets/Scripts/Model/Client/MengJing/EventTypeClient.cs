@@ -23,6 +23,12 @@ namespace ET.Client
         public TaskPro TaskPro;
     }
 
+    public struct ReddotChange
+    {
+        public int ReddotType;
+        public int Number;
+    }
+
     public struct DataUpdate_UpdateUserData
     {
         public string DataParamString;

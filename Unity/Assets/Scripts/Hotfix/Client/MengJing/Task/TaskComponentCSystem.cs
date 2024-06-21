@@ -217,5 +217,25 @@ namespace ET.Client
 
             return huoYueDu;
         }
+
+        public static bool HaveWelfareReward(this TaskComponentC self)
+        {
+            for (int i = 0; i < ConfigData.WelfareTaskList.Count; i++)
+            {
+                List<int> taskList = ConfigData.WelfareTaskList[i];
+
+                for (int task = 0; task < taskList.Count; task++)
+                {
+                    TaskPro taskPro = self.GetTaskById(taskList[task]);
+
+                    if (taskPro != null && taskPro.taskStatus == (int)TaskStatuEnum.Completed)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 }

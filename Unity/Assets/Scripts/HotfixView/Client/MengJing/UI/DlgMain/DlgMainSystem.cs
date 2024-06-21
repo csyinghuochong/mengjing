@@ -1144,8 +1144,8 @@ namespace ET.Client
 
                     break;
                 case UserDataType.Sp:
-                    // ReddotComponent reddotComponent = self.ZoneScene().GetComponent<ReddotComponent>();
-                    // reddotComponent.UpdateReddont(ReddotType.SkillUp);
+                    ReddotComponentC reddotComponent = self.Root().GetComponent<ReddotComponentC>();
+                    reddotComponent.UpdateReddont(ReddotType.SkillUp);
                     break;
                 case UserDataType.Message:
                     PopupTipHelp.OpenPopupTip_2(self.Root(), "系统消息", updateValue, null).Coroutine();

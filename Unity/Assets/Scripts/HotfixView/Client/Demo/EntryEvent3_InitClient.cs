@@ -40,6 +40,7 @@ namespace ET.Client
             root.AddComponent<ReddotComponentC>();
             root.AddComponent<AttackComponent>();
             root.AddComponent<ActivityComponentC>();
+            root.AddComponent<ReddotViewComponent>();
             
             // 根据配置修改掉Main Fiber的SceneType
             SceneType sceneType = EnumHelper.FromString<SceneType>(globalComponent.GlobalConfig.AppType.ToString());

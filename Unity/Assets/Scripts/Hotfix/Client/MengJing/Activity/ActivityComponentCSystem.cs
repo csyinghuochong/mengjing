@@ -38,5 +38,37 @@ namespace ET.Client
 
             return activityId;
         }
+
+        public static bool HaveLoginReward(this ActivityComponentC self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            if (userInfoComponent.UserInfo.Lv < 10)
+            {
+                return false;
+            }
+
+            int unGetId = 0;
+            List<ActivityConfig> activityConfigs = ActivityConfigCategory.Instance.GetAll().Values.ToList();
+            for (int i = 0; i < activityConfigs.Count; i++)
+            {
+                if (activityConfigs[i].ActivityType != 31)
+                {
+                    continue;
+                }
+
+                if (!self.ActivityReceiveIds.Contains(activityConfigs[i].Id))
+                {
+                    unGetId = activityConfigs[i].Id;
+                    break;
+                }
+            }
+
+            if (unGetId == 0)
+            {
+                return false;
+            }
+
+            return ComHelp.GetDayByTime(TimeHelper.ServerNow()) != ComHelp.GetDayByTime(self.LastLoginTime);
+        }
     }
 }
