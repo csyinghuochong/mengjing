@@ -111,7 +111,7 @@ public class PatchWindow : MonoBehaviour
             float sizeMB = msg.TotalSizeBytes / 1048576f;
             sizeMB = Mathf.Clamp(sizeMB, 0.1f, float.MaxValue);
             string totalSizeMB = sizeMB.ToString("f1");
-            ShowMessageBox($"Found update patch files, Total count {msg.TotalCount} Total szie {totalSizeMB}MB", callback);
+            ShowMessageBox($"发现需要更新的资源, 资源数量 {msg.TotalCount} 资源大小 {totalSizeMB}MB", callback);
         }
         else if (message is PatchEventDefine.DownloadProgressUpdate)
         {
