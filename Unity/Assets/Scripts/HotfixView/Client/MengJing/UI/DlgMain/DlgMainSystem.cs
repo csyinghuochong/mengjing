@@ -179,7 +179,12 @@ namespace ET.Client
 
             self.View.E_Btn_StopGuaJiButton.AddListener(self.OnStopGuaJi);
 
+            self.View.E_LeftTypeSetToggleGroup.AddListener(self.OnLeftTypeSet);
             self.View.E_MainTaskItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainTaskItemsRefresh);
+            self.View.E_RoseTaskButton.AddListener(self.OnOpenTask);
+            self.View.E_MainTeamItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainTeamItemsRefresh);
+            self.View.E_RoseTeamButton.AddListener(self.OnBtn_RoseTeam);
+
             self.View.E_MainChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainChatItemsRefresh);
             self.View.E_RoseTaskButton.AddListener(self.OnRoseTaskButton);
             self.RefreshMainTaskItems();
@@ -190,6 +195,8 @@ namespace ET.Client
             self.View.ES_RoleHead.uiTransform.gameObject.SetActive(true);
 
             self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
+
+            self.View.E_LeftTypeSetToggleGroup.OnSelectIndex(0);
 
             self.OnSettingUpdate();
 
@@ -320,6 +327,21 @@ namespace ET.Client
             self.RefreshMainTaskItems();
         }
 
+        private static void OnLeftTypeSet(this DlgMain self, int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    self.View.EG_MainTaskRectTransform.gameObject.SetActive(true);
+                    self.View.EG_MainTeamRectTransform.gameObject.SetActive(false);
+                    break;
+                case 1:
+                    self.View.EG_MainTaskRectTransform.gameObject.SetActive(false);
+                    self.View.EG_MainTeamRectTransform.gameObject.SetActive(true);
+                    break;
+            }
+        }
+
         private static void OnMainTaskItemsRefresh(this DlgMain self, Transform transform, int index)
         {
             Scroll_Item_MainTask scrollItemMainTask = self.ScrollItemMainTasks[index].BindTrans(transform);
@@ -343,6 +365,84 @@ namespace ET.Client
 
             self.AddUIScrollItems(ref self.ScrollItemMainTasks, self.ShowTaskPros.Count);
             self.View.E_MainTaskItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskPros.Count);
+        }
+
+        private static void OnOpenTask(this DlgMain self)
+        {
+            TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
+
+            int nextTask = taskComponent.GetNextMainTask();
+            if (nextTask == 0)
+            {
+                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Task).Coroutine();
+                return;
+            }
+
+            int getNpc = TaskConfigCategory.Instance.Get(nextTask).GetNpcID;
+            int fubenId = TaskViewHelp.GetFubenByNpc(getNpc);
+            if (fubenId == 0)
+            {
+                return;
+            }
+
+            string fubenName = $"请前往{DungeonConfigCategory.Instance.Get(fubenId).ChapterName} {NpcConfigCategory.Instance.Get(getNpc).Name} 出接取任务";
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            if (mapComponent.SceneType != SceneTypeEnum.LocalDungeon)
+            {
+                FlyTipComponent.Instance.SpawnFlyTipDi(fubenName);
+                return;
+            }
+
+            int curdungeonid = mapComponent.SceneId;
+            if (curdungeonid == fubenId)
+            {
+                TaskViewHelp.MoveToNpc(self.Root(), getNpc).Coroutine();
+                return;
+            }
+
+            if (TaskViewHelp.GeToOtherFuben(self.Root(), fubenId, mapComponent.SceneId))
+            {
+                return;
+            }
+
+            FlyTipComponent.Instance.SpawnFlyTipDi(fubenName);
+        }
+
+        private static void OnMainTeamItemsRefresh(this DlgMain self, Transform transform, int index)
+        {
+            Scroll_Item_MainTeamItem scrollItemMainTeamItem = self.ScrollItemMainTeamItems[index].BindTrans(transform);
+            // scrollItemMainTeamItem.Refresh(self.ShowTaskPros[index]);
+        }
+
+        private static void RefreshMainTeamItems(this DlgMain self)
+        {
+            self.ShowTaskPros.Clear();
+            foreach (TaskPro taskPro in self.Root().GetComponent<TaskComponentC>().RoleTaskList)
+            {
+                if (taskPro.TrackStatus == 0)
+                {
+                    continue;
+                }
+
+                self.ShowTaskPros.Add(taskPro);
+            }
+
+            self.View.E_RoseTaskButton.gameObject.SetActive(self.ShowTaskPros.Count == 0);
+
+            self.AddUIScrollItems(ref self.ScrollItemMainTasks, self.ShowTaskPros.Count);
+            self.View.E_MainTaskItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskPros.Count);
+        }
+
+        public static void OnBtn_RoseTeam(this DlgMain self)
+        {
+            // TeamInfo teamInfo = self.Root().GetComponent<TeamComponent>().GetSelfTeam();
+            // if (teamInfo == null || teamInfo.PlayerList.Count == 0)
+            // {
+            //     FloatTipManager.Instance.ShowFloatTip("没有队伍！");
+            //     return;
+            // }
+            //
+            // UIHelper.Create(self.DomainScene(), UIType.UITeam).Coroutine();
         }
 
         private static void OnRoseTaskButton(this DlgMain self)

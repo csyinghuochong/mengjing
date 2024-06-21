@@ -9,7 +9,7 @@ namespace ET.Client
     public class ES_MainTeam: Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
     {
         
-        public Dictionary<int, Item_MainTeamItem> ScrollItemMainTeamItems;
+        public Dictionary<int, Scroll_Item_MainTeamItem> ScrollItemMainTeamItems;
         
         public Transform E_TeamNodeList
         {

@@ -5,7 +5,7 @@ namespace ET.Client
 {
     [FriendOf(typeof (ReddotViewComponent))]
     [EntitySystemOf(typeof (ReddotViewComponent))]
-    public static class ReddotViewComponentSystem
+    public static partial class ReddotViewComponentSystem
     {
         [EntitySystem]
         private static void Awake(this ReddotViewComponent self)

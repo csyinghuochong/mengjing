@@ -231,6 +231,57 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.LoopVerticalScrollRect E_MainTeamItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_MainTeamItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_MainTeamItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_PhoneLeft/EG_MainTeam/E_MainTeamItems");
+     			}
+     			return this.m_E_MainTeamItemsLoopVerticalScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_RoseTeamButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RoseTeamButton == null )
+     			{
+		    		this.m_E_RoseTeamButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_PhoneLeft/EG_MainTeam/E_RoseTeam");
+     			}
+     			return this.m_E_RoseTeamButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_RoseTeamImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_RoseTeamImage == null )
+     			{
+		    		this.m_E_RoseTeamImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PhoneLeft/EG_MainTeam/E_RoseTeam");
+     			}
+     			return this.m_E_RoseTeamImage;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_LeftSetRectTransform
      	{
      		get
@@ -2271,6 +2322,9 @@ namespace ET.Client
 			this.m_E_LeftTypeSetToggleGroup = null;
 			this.m_E_LeftTypeSetImage = null;
 			this.m_EG_MainTeamRectTransform = null;
+			this.m_E_MainTeamItemsLoopVerticalScrollRect = null;
+			this.m_E_RoseTeamButton = null;
+			this.m_E_RoseTeamImage = null;
 			this.m_EG_LeftSetRectTransform = null;
 			this.m_EG_LeftBottomSetRectTransform = null;
 			this.m_E_ShrinkButton = null;
@@ -2406,6 +2460,9 @@ namespace ET.Client
 		private UnityEngine.UI.ToggleGroup m_E_LeftTypeSetToggleGroup = null;
 		private UnityEngine.UI.Image m_E_LeftTypeSetImage = null;
 		private UnityEngine.RectTransform m_EG_MainTeamRectTransform = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_MainTeamItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Button m_E_RoseTeamButton = null;
+		private UnityEngine.UI.Image m_E_RoseTeamImage = null;
 		private UnityEngine.RectTransform m_EG_LeftSetRectTransform = null;
 		private UnityEngine.RectTransform m_EG_LeftBottomSetRectTransform = null;
 		private UnityEngine.UI.Button m_E_ShrinkButton = null;

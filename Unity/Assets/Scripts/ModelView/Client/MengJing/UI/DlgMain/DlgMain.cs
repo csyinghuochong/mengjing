@@ -23,6 +23,8 @@ namespace ET.Client
 
         public List<TaskPro> ShowTaskPros = new();
         public Dictionary<int, Scroll_Item_MainTask> ScrollItemMainTasks;
+        public Dictionary<int, Scroll_Item_MainTeamItem> ScrollItemMainTeamItems;
+        
         public List<ChatInfo> ShowChatInfos = new();
         public Dictionary<int, Scroll_Item_MainChatItem> ScrollItemMainChatItems;
 
