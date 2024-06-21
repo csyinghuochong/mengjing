@@ -107,11 +107,11 @@ namespace ET.Client
                 if (GlobalHelp.GetBigVersion() >= 17 && GlobalHelp.GetPlatform() == 5)
                 {
 #if UNITY_ANDROID
-                    Log.ILog.Debug($"M2C_RechargeResponse: {sendChatResponse.Message}");
-                    EventType.TikTokPayRequest.Instance.ZoneScene = self.ZoneScene();
-                    EventType.TikTokPayRequest.Instance.PayMessage = sendChatResponse.Message;
-                    EventType.TikTokPayRequest.Instance.RechargeNumber = self.ReChargeNumber;
-                    EventSystem.Instance.PublishClass(EventType.TikTokPayRequest.Instance);
+                    // Log.ILog.Debug($"M2C_RechargeResponse: {sendChatResponse.Message}");
+                    // EventType.TikTokPayRequest.Instance.ZoneScene = self.ZoneScene();
+                    // EventType.TikTokPayRequest.Instance.PayMessage = sendChatResponse.Message;
+                    // EventType.TikTokPayRequest.Instance.RechargeNumber = self.ReChargeNumber;
+                    // EventSystem.Instance.PublishClass(EventType.TikTokPayRequest.Instance);
 #endif
                 }
             }
@@ -151,9 +151,9 @@ namespace ET.Client
                 if (GlobalHelp.GetBigVersion() >= 17 && GlobalHelp.GetPlatform() == 5)
                 {
 #if UNITY_ANDROID
-                    EventType.TikTokRiskControlInfo.Instance.ZoneScene = self.ZoneScene();
-                    EventType.TikTokRiskControlInfo.Instance.RiskControlInfoHandler = (string text) => { self.OnGetRiskControlInfo(text); };
-                    EventSystem.Instance.PublishClass(EventType.TikTokRiskControlInfo.Instance);
+                    // EventType.TikTokRiskControlInfo.Instance.ZoneScene = self.ZoneScene();
+                    // EventType.TikTokRiskControlInfo.Instance.RiskControlInfoHandler = (string text) => { self.OnGetRiskControlInfo(text); };
+                    // EventSystem.Instance.PublishClass(EventType.TikTokRiskControlInfo.Instance);
 #endif
                 }
             }
