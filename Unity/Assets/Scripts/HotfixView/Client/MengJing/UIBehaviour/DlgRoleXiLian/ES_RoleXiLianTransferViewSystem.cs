@@ -52,13 +52,13 @@ namespace ET.Client
             string costItem = GlobalValueConfigCategory.Instance.Get(51).Value;
             if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem(costItem))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("材料不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("材料不足！");
                 return;
             }
 
             if (self.BagInfo_Transfer[0] == null || self.BagInfo_Transfer[1] == null)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请选择合适的装备转移！");
+                FlyTipComponent.Instance.ShowFlyTipDi("请选择合适的装备转移！");
                 return;
             }
 
@@ -70,27 +70,27 @@ namespace ET.Client
 
             if (itemConfig_0.EquipType != itemConfig_1.EquipType)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("只有护甲类型相同的装备才能转移！");
+                FlyTipComponent.Instance.ShowFlyTipDi("只有护甲类型相同的装备才能转移！");
                 return;
             }
 
             if (itemConfig_0.ItemSubType != itemConfig_1.ItemSubType)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("只有相同部位的装备才能转移！");
+                FlyTipComponent.Instance.ShowFlyTipDi("只有相同部位的装备才能转移！");
                 return;
             }
 
             //紫色品质以上才可以转移
             if (itemConfig_0.ItemQuality < 4 || itemConfig_1.ItemQuality < 4)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("只有紫色及以上品质的装备才能转移！");
+                FlyTipComponent.Instance.ShowFlyTipDi("只有紫色及以上品质的装备才能转移！");
                 return;
             }
 
             //绑定装备无法转移
             if (self.BagInfo_Transfer[0].isBinging && self.BagInfo_Transfer[1].isBinging == false && itemConfig_1.ItemQuality == 4)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("绑定装备的洗炼属性无法转移至未绑定的装备！");
+                FlyTipComponent.Instance.ShowFlyTipDi("绑定装备的洗炼属性无法转移至未绑定的装备！");
                 return;
             }
 
@@ -101,7 +101,7 @@ namespace ET.Client
                 return;
             }
 
-            FlyTipComponent.Instance.SpawnFlyTipDi("装备属性转移成功！");
+            FlyTipComponent.Instance.ShowFlyTipDi("装备属性转移成功！");
             self.OnUpdateUI();
         }
 

@@ -93,7 +93,7 @@ namespace ET.Client
         public static void OnBuyBagCell(this ES_WarehouseRole self, string dataparams)
         {
             self.RefreshHouseItems();
-            FlyTipComponent.Instance.SpawnFlyTipDi($"获得道具: {UICommonHelper.GetNeedItemDesc(dataparams)}");
+            FlyTipComponent.Instance.ShowFlyTipDi($"获得道具: {UICommonHelper.GetNeedItemDesc(dataparams)}");
         }
 
         private static void OnClickImage_Lock(this ES_WarehouseRole self)

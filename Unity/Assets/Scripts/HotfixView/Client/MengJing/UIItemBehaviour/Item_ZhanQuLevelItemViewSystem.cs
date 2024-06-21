@@ -58,14 +58,14 @@ namespace ET.Client
         {
             if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv < int.Parse(self.ActivityConfig.Par_1))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("等级不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("等级不足！");
                 return;
             }
 
             ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
             if (activityComponent.ZhanQuReceiveIds.Contains(self.ActivityConfig.Id))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("已经领取过该奖励！");
+                FlyTipComponent.Instance.ShowFlyTipDi("已经领取过该奖励！");
                 return;
             }
 

@@ -73,7 +73,7 @@ namespace ET.Client
             long resetValue = numericComponent.GetAsLong(NumericType.FubenTimesReset);
             if (resetValue >= 10)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("每天只能重置十次");
+                FlyTipComponent.Instance.ShowFlyTipDi("每天只能重置十次");
                 return;
             }
 

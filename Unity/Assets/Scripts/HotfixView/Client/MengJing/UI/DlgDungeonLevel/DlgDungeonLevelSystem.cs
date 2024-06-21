@@ -31,7 +31,7 @@ namespace ET.Client
             if (userInfo.Lv < openLv)
             {
                 self.Difficulty = 1;
-                FlyTipComponent.Instance.SpawnFlyTipDi($"{openLv}级开启");
+                FlyTipComponent.Instance.ShowFlyTipDi($"{openLv}级开启");
                 return;
             }
 

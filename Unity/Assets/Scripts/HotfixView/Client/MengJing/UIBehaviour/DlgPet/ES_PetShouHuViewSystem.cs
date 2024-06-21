@@ -46,7 +46,7 @@ namespace ET.Client
             }
 
             self.SetShouHuActive(petComponent.PetShouHuActive - 1);
-            FlyTipComponent.Instance.SpawnFlyTipDi($"激活: {ConfigData.PetShouHuAttri[petComponent.PetShouHuActive - 1].Value}");
+            FlyTipComponent.Instance.ShowFlyTipDi($"激活: {ConfigData.PetShouHuAttri[petComponent.PetShouHuActive - 1].Value}");
         }
 
         public static async ETTask OnButtonShouHuHandler(this ES_PetShouHu self, long petid)

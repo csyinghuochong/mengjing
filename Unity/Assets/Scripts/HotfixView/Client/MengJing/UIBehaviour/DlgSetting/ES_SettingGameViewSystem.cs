@@ -136,7 +136,7 @@ namespace ET.Client
             DlgMain dlgMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
             if (!dlgMain.View.ES_MainSkill.uiTransform.gameObject.activeSelf)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请移动至有技能框的区域,比如探险地区进行更改");
+                FlyTipComponent.Instance.ShowFlyTipDi("请移动至有技能框的区域,比如探险地区进行更改");
                 return;
             }
 
@@ -502,7 +502,7 @@ namespace ET.Client
             BattleMessageComponent battleMessage = self.Root().GetComponent<BattleMessageComponent>();
             if (TimeHelper.ServerNow() - battleMessage.UploadMemoryTime < TimeHelper.Minute)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请不要频繁操作！");
+                FlyTipComponent.Instance.ShowFlyTipDi("请不要频繁操作！");
                 return;
             }
 
@@ -583,7 +583,7 @@ namespace ET.Client
             PlayerInfo playerInfo = self.Root().GetComponent<PlayerComponent>().PlayerInfo;
             if (!string.IsNullOrEmpty(playerInfo.PhoneNumber))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi($"已绑定手机号:{playerInfo.PhoneNumber}");
+                FlyTipComponent.Instance.ShowFlyTipDi($"已绑定手机号:{playerInfo.PhoneNumber}");
                 return;
             }
 
@@ -596,19 +596,19 @@ namespace ET.Client
 
             if (string.IsNullOrEmpty(text))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("名字不合法，请重新输入！");
+                FlyTipComponent.Instance.ShowFlyTipDi("名字不合法，请重新输入！");
                 return;
             }
 
             if (text.Length >= 8)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("角色名字过长，请重新输入！");
+                FlyTipComponent.Instance.ShowFlyTipDi("角色名字过长，请重新输入！");
                 return;
             }
 
             if (text.Contains("*") || !StringHelper.IsSpecialChar(text))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("名字不合法，请重新输入！");
+                FlyTipComponent.Instance.ShowFlyTipDi("名字不合法，请重新输入！");
                 return;
             }
 
@@ -617,7 +617,7 @@ namespace ET.Client
             if (!bagComponent.CheckNeedItem(globalValueConfig.Value))
             {
                 string needItem = UICommonHelper.GetNeedItemDesc(globalValueConfig.Value);
-                FlyTipComponent.Instance.SpawnFlyTipDi($"需要 {needItem}");
+                FlyTipComponent.Instance.ShowFlyTipDi($"需要 {needItem}");
                 return;
             }
 
@@ -625,7 +625,7 @@ namespace ET.Client
 
             if (response.Error == ErrorCode.ERR_Success)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("修改名称成功！");
+                FlyTipComponent.Instance.ShowFlyTipDi("修改名称成功！");
             }
         }
     }

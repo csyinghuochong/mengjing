@@ -87,19 +87,19 @@ namespace ET.Client
             TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
             if (haveHuoyue < huoYueRewardConfig.NeedPoint)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("活跃度不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("活跃度不足！");
                 return;
             }
 
             if (taskComponent.ReceiveHuoYueIds.Contains(index))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("已经领取过该奖励！");
+                FlyTipComponent.Instance.ShowFlyTipDi("已经领取过该奖励！");
                 return;
             }
 
             if (!self.Root().GetComponent<BagComponentC>().CheckAddItemData(huoYueRewardConfig.RewardItems))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("背包空间不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("背包空间不足！");
                 return;
             }
 

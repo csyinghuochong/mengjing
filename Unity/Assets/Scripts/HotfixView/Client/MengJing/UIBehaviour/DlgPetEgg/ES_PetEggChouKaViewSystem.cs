@@ -103,19 +103,19 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetBagLeftCell() < choukaType)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请预留足够的背包空间！");
+                FlyTipComponent.Instance.ShowFlyTipDi("请预留足够的背包空间！");
                 return;
             }
 
             if (bagComponent.GetPetHeXinLeftSpace() < choukaType)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请清理一下宠物之核背包！");
+                FlyTipComponent.Instance.ShowFlyTipDi("请清理一下宠物之核背包！");
                 return;
             }
 
             if (self.Root().GetComponent<PetComponentC>().RolePetBag.Count >= GlobalValueConfigCategory.Instance.Get(119).Value2)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请及时清理探索宠物仓库！");
+                FlyTipComponent.Instance.ShowFlyTipDi("请及时清理探索宠物仓库！");
                 return;
             }
 

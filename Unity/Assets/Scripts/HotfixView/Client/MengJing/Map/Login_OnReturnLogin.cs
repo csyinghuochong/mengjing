@@ -14,7 +14,7 @@ namespace ET.Client
 
             if (args.ErrorCode == ErrorCode.ERR_OtherAccountLogin)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("账号异地登录");
+                FlyTipComponent.Instance.ShowFlyTipDi("账号异地登录");
                 RunAsync2(scene, args, 100).Coroutine();
             }
             else if (args.ErrorCode == ErrorCode.ERR_KickOutPlayer)
@@ -45,7 +45,7 @@ namespace ET.Client
                 return;
             }
 
-            FlyTipComponent.Instance.SpawnFlyTipDi("功能暂未开放");
+            FlyTipComponent.Instance.ShowFlyTipDi("功能暂未开放");
 
             // Camera camera = UIComponent.Instance.MainCamera.gameObject.GetComponent<Camera>();
             // camera.GetComponent<MyCamera_1>().enabled = false;

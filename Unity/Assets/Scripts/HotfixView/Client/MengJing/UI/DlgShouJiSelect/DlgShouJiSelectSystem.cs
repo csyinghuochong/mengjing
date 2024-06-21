@@ -61,13 +61,13 @@ namespace ET.Client
 
             if (selects.Count == 0)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请选择道具！");
+                FlyTipComponent.Instance.ShowFlyTipDi("请选择道具！");
                 return;
             }
 
             if (number + selects.Count > shouJiItemConfig.AcitveNum)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("吞噬数量超出！");
+                FlyTipComponent.Instance.ShowFlyTipDi("吞噬数量超出！");
                 return;
             }
 
@@ -90,7 +90,7 @@ namespace ET.Client
             // 更新被选择道具的红点
             self.UpdateRedDotAction.Invoke();
 
-            FlyTipComponent.Instance.SpawnFlyTipDi("吞噬道具完成。");
+            FlyTipComponent.Instance.ShowFlyTipDi("吞噬道具完成。");
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ShouJiSelect);
         }

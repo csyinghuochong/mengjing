@@ -454,7 +454,7 @@ namespace ET.Client
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             if (mapComponent.SceneType != SceneTypeEnum.LocalDungeon)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi(fubenName);
+                FlyTipComponent.Instance.ShowFlyTipDi(fubenName);
                 return;
             }
 
@@ -470,7 +470,7 @@ namespace ET.Client
                 return;
             }
 
-            FlyTipComponent.Instance.SpawnFlyTipDi(fubenName);
+            FlyTipComponent.Instance.ShowFlyTipDi(fubenName);
         }
 
         private static void OnMainTeamItemsRefresh(this DlgMain self, Transform transform, int index)
@@ -533,7 +533,7 @@ namespace ET.Client
             FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
             if (mapComponent.SceneType != SceneTypeEnum.LocalDungeon)
             {
-                flyTipComponent.SpawnFlyTipDi(fubenName);
+                flyTipComponent.ShowFlyTipDi(fubenName);
                 return;
             }
 
@@ -549,7 +549,7 @@ namespace ET.Client
                 return;
             }
 
-            flyTipComponent.SpawnFlyTipDi(fubenName);
+            flyTipComponent.ShowFlyTipDi(fubenName);
         }
 
         #endregion
@@ -614,7 +614,7 @@ namespace ET.Client
 
         private static void OnJiaYuanButton(this DlgMain self)
         {
-            Log.Debug("家园！！！");
+            FlyTipComponent.Instance.ShowFlyTipDi("家园！！！");
         }
 
         private static void OnNpcDuiHuaButton(this DlgMain self)
@@ -632,7 +632,7 @@ namespace ET.Client
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             if (!ExpConfigCategory.Instance.Contain(userInfo.Lv))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("非法修改数据！");
+                FlyTipComponent.Instance.ShowFlyTipDi("非法修改数据！");
                 return;
             }
 
@@ -1073,7 +1073,7 @@ namespace ET.Client
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             if (mapComponent.SceneType != (int)SceneTypeEnum.MainCityScene)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请前往主城!");
+                FlyTipComponent.Instance.ShowFlyTipDi("请前往主城!");
                 return;
             }
 
@@ -1214,7 +1214,7 @@ namespace ET.Client
                     // self.CheckFuntionButtonByLv(int.Parse(updateValue));
                     FunctionEffect.PlaySelfEffect(self.MainUnit, 60000002);
                     // self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.LevelUp, userInfo.Lv.ToString());
-                    FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("恭喜你!等级提升至:") + userInfo.Lv);
+                    FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.LoadLocalization("恭喜你!等级提升至:") + userInfo.Lv);
                     self.UpdateLvReward();
                     // self.CheckCanEquip().Coroutine();
                     // if (int.Parse(updateValue) > 30)
@@ -1268,38 +1268,38 @@ namespace ET.Client
                 case UserDataType.WeiJingGold:
                     if (int.Parse(updateValue) > 0)
                     {
-                        FlyTipComponent.Instance.SpawnFlyTipDi($"获得{updateValue} 兑换币");
+                        FlyTipComponent.Instance.ShowFlyTipDi($"获得{updateValue} 兑换币");
                     }
 
                     if (int.Parse(updateValue) < 0)
                     {
-                        FlyTipComponent.Instance.SpawnFlyTipDi($"消耗{int.Parse(updateValue) * -1} 兑换币");
+                        FlyTipComponent.Instance.ShowFlyTipDi($"消耗{int.Parse(updateValue) * -1} 兑换币");
                     }
 
                     break;
                 case UserDataType.RongYu:
                     if (int.Parse(updateValue) > 0)
                     {
-                        FlyTipComponent.Instance.SpawnFlyTipDi($"获得{updateValue} 荣誉");
+                        FlyTipComponent.Instance.ShowFlyTipDi($"获得{updateValue} 荣誉");
                     }
 
                     if (int.Parse(updateValue) < 0)
                     {
-                        FlyTipComponent.Instance.SpawnFlyTipDi($"消耗{int.Parse(updateValue) * -1} 荣誉");
+                        FlyTipComponent.Instance.ShowFlyTipDi($"消耗{int.Parse(updateValue) * -1} 荣誉");
                     }
 
                     break;
                 case UserDataType.JiaYuanFund:
                     if (int.Parse(updateValue) > 0)
                     {
-                        FlyTipComponent.Instance.SpawnFlyTipDi($"获得{updateValue} 家园资金");
+                        FlyTipComponent.Instance.ShowFlyTipDi($"获得{updateValue} 家园资金");
                     }
 
                     break;
                 case UserDataType.BaoShiDu:
                     if (int.Parse(updateValue) > 0)
                     {
-                        FlyTipComponent.Instance.SpawnFlyTipDi($"获得{updateValue} 饱食度");
+                        FlyTipComponent.Instance.ShowFlyTipDi($"获得{updateValue} 饱食度");
                     }
 
                     break;
@@ -1316,7 +1316,7 @@ namespace ET.Client
                     PopupTipHelp.OpenPopupTip_2(self.Root(), "系统消息", updateValue, null).Coroutine();
                     break;
                 case UserDataType.PullBack:
-                    FlyTipComponent.Instance.SpawnFlyTipDi("所有人不要乱跑哦");
+                    FlyTipComponent.Instance.ShowFlyTipDi("所有人不要乱跑哦");
                     FunctionEffect.PlaySelfEffect(self.MainUnit, 30000002);
                     break;
                 default:
@@ -1427,7 +1427,7 @@ namespace ET.Client
             {
                 //移除挂机组件
                 self.Root().RemoveComponent<UnitGuaJiComponent>();
-                FlyTipComponent.Instance.SpawnFlyTip("取消挂机!");
+                FlyTipComponent.Instance.ShowFlyTip("取消挂机!");
             }
 
             self.View.EG_GuaJiSetRectTransform.gameObject.SetActive(false);

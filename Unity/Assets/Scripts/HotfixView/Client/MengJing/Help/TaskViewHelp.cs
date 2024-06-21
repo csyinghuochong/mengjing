@@ -12,7 +12,7 @@ namespace ET.Client
             MapComponent mapComponent = scene.GetComponent<MapComponent>();
             if (mapComponent.SceneType != SceneTypeEnum.MainCityScene)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请前往主城!");
+                FlyTipComponent.Instance.ShowFlyTipDi("请前往主城!");
                 return;
             }
 
@@ -214,11 +214,11 @@ namespace ET.Client
                         fubenname = DungeonConfigCategory.Instance.Get(fubenId).ChapterName;
                     }
 
-                    flyTipComponent.SpawnFlyTipDi($"请前往{fubenname}");
+                    flyTipComponent.ShowFlyTipDi($"请前往{fubenname}");
                     return true;
                 }
 
-                flyTipComponent.SpawnFlyTipDi("正在前往任务目标点");
+                flyTipComponent.ShowFlyTipDi("正在前往任务目标点");
                 TaskViewHelp.MoveToNpc(root, npcid).Coroutine();
                 return false;
             }
@@ -228,7 +228,7 @@ namespace ET.Client
                 bool excuteVAlue = TaskViewHelp.MoveToTask(root, taskConfig.TargetPosition);
                 if (excuteVAlue)
                 {
-                    flyTipComponent.SpawnFlyTipDi("正在前往任务目标点");
+                    flyTipComponent.ShowFlyTipDi("正在前往任务目标点");
                     return true;
                 }
             }

@@ -42,14 +42,14 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.RechargeReward.Contains(rechargeNumber))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("当前奖励已领取");
+                FlyTipComponent.Instance.ShowFlyTipDi("当前奖励已领取");
                 return;
             }
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber) < rechargeNumber)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi($"充值金额不足 {rechargeNumber}元");
+                FlyTipComponent.Instance.ShowFlyTipDi($"充值金额不足 {rechargeNumber}元");
                 return;
             }
 

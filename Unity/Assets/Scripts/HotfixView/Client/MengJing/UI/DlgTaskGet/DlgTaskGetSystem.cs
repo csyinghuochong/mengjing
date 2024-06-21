@@ -213,13 +213,13 @@ namespace ET.Client
         {
             if (!PetHelper.IsShenShouFull(self.Root().GetComponent<PetComponentC>().RolePetInfos))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("神兽未满不能对话！");
+                FlyTipComponent.Instance.ShowFlyTipDi("神兽未满不能对话！");
                 return;
             }
 
             if (self.Root().GetComponent<BagComponentC>().GetItemNumber(10000136) < 1)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("神兽碎片不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("神兽碎片不足！");
                 return;
             }
 
@@ -285,7 +285,7 @@ namespace ET.Client
             if (PetHelper.GetBagPetNum(petComponent.RolePetInfos) >=
                 PetHelper.GetPetMaxNumber(self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv, lv))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("已达到最大宠物数量！");
+                FlyTipComponent.Instance.ShowFlyTipDi("已达到最大宠物数量！");
                 return;
             }
 
@@ -306,13 +306,13 @@ namespace ET.Client
                 Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
                 if (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.ArenaNumber) > 0)
                 {
-                    FlyTipComponent.Instance.SpawnFlyTipDi("次数不足！");
+                    FlyTipComponent.Instance.ShowFlyTipDi("次数不足！");
                     return;
                 }
             
                 if (!FunctionHelp.IsInTime(1031))
                 {
-                    FlyTipComponent.Instance.SpawnFlyTipDi("不在活动时间内！");
+                    FlyTipComponent.Instance.ShowFlyTipDi("不在活动时间内！");
                     return;
                 }
             }
@@ -540,7 +540,7 @@ namespace ET.Client
         {
             if (self.TaskId == 0)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请选择一个任务");
+                FlyTipComponent.Instance.ShowFlyTipDi("请选择一个任务");
                 return;
             }
 

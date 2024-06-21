@@ -42,13 +42,13 @@ namespace ET.Client
             int needNumber = int.Parse(activityConfig.Par_2);
             if (rechargeNum < needNumber)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("冒险家积分不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("冒险家积分不足！");
                 return;
             }
 
             if (activityComponent.ActivityReceiveIds.Contains(self.CurActivityId))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("当前奖励已领取！");
+                FlyTipComponent.Instance.ShowFlyTipDi("当前奖励已领取！");
                 return;
             }
 

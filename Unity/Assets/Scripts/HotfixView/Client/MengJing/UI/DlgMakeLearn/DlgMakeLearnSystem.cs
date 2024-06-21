@@ -76,7 +76,7 @@ namespace ET.Client
             int makeType_2 = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.MakeType_2);
             if (makeType_1 == makeId || makeType_2 == makeId)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("该生活技能已学习！");
+                FlyTipComponent.Instance.ShowFlyTipDi("该生活技能已学习！");
                 return;
             }
 
@@ -237,7 +237,7 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.MakeList.Contains(self.MakeId))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("已经学习过该道具!"));
+                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.LoadLocalization("已经学习过该道具!"));
                 return;
             }
 
@@ -245,7 +245,7 @@ namespace ET.Client
             if (response.Error == 0)
             {
                 self.InitData(self.MakeType);
-                FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("学习配方成功!"));
+                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.LoadLocalization("学习配方成功!"));
             }
         }
     }

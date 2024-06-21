@@ -163,13 +163,13 @@ namespace ET.Client
             FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
             if (taskConfig.TaskType == (int)TaskTypeEnum.Main)
             {
-                flyTipComponent.SpawnFlyTipDi("主线任务不能放弃");
+                flyTipComponent.ShowFlyTipDi("主线任务不能放弃");
                 return;
             }
 
             if (taskConfig.TaskType == TaskTypeEnum.Ring)
             {
-                flyTipComponent.SpawnFlyTipDi("跑环任务不能放弃");
+                flyTipComponent.ShowFlyTipDi("跑环任务不能放弃");
                 return;
             }
 
@@ -220,7 +220,7 @@ namespace ET.Client
             FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
             if (self.Root().GetComponent<TaskComponentC>().GetAllTrackList().Count >= 3 && track)
             {
-                flyTipComponent.SpawnFlyTipDi("追踪数量不能超过三个!");
+                flyTipComponent.ShowFlyTipDi("追踪数量不能超过三个!");
                 return;
             }
 
@@ -230,7 +230,7 @@ namespace ET.Client
             self.E_CancelZhuizongButton.gameObject.SetActive(!self.E_CancelZhuizongButton.gameObject.activeSelf);
 
             // 提示
-            flyTipComponent.SpawnFlyTipDi(self.E_ZhuizongButton.gameObject.activeSelf == false? "任务开启追踪!" : "任务取消追踪!");
+            flyTipComponent.ShowFlyTipDi(self.E_ZhuizongButton.gameObject.activeSelf == false? "任务开启追踪!" : "任务取消追踪!");
         }
     }
 }

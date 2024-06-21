@@ -74,7 +74,7 @@ namespace ET.Client
             int maxNum = PetHelper.GetPetMaxNumber(self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv, userInfo.Lv);
             if (maxNum <= PetHelper.GetCangKuPetNum(petComponent.RolePetInfos))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("已达到最大宠物数量");
+                FlyTipComponent.Instance.ShowFlyTipDi("已达到最大宠物数量");
                 return;
             }
 
@@ -102,7 +102,7 @@ namespace ET.Client
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
             if (maxNum <= PetHelper.GetBagPetNum(petComponent.RolePetInfos))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("已达到最大宠物数量");
+                FlyTipComponent.Instance.ShowFlyTipDi("已达到最大宠物数量");
                 return;
             }
 
@@ -120,7 +120,7 @@ namespace ET.Client
 
             if (userInfo.Diamond < needCost)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("钻石不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("钻石不足！");
                 return;
             }
 

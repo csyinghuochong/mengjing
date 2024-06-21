@@ -23,7 +23,7 @@ namespace ET.Client
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
             if (!chengJiuComponent.JingLingList.Contains(self.JingLingId))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请先激活此精灵！");
+                FlyTipComponent.Instance.ShowFlyTipDi("请先激活此精灵！");
                 return;
             }
 

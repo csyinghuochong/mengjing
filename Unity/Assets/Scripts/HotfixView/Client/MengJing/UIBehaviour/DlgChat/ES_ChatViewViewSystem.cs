@@ -75,7 +75,7 @@ namespace ET.Client
             string text = self.E_InputInputField.text;
             if (string.IsNullOrEmpty(text) || text.Length == 0)
             {
-                flyTipComponent.SpawnFlyTipDi("请输入聊天内容！");
+                flyTipComponent.ShowFlyTipDi("请输入聊天内容！");
                 return;
             }
 

@@ -133,13 +133,13 @@ namespace ET.Client
             bool mask = MaskWordComponent.Instance.IsContainSensitiveWords(unionName);
             if (mask || !StringHelper.IsSpecialChar(unionName))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("家族名字有特殊字符！");
+                FlyTipComponent.Instance.ShowFlyTipDi("家族名字有特殊字符！");
                 return;
             }
 
             if (unionName.Length > 7)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("家族名字最多七个字！");
+                FlyTipComponent.Instance.ShowFlyTipDi("家族名字最多七个字！");
                 return;
             }
 

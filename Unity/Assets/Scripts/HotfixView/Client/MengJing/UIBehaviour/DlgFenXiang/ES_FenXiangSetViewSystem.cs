@@ -98,7 +98,7 @@ namespace ET.Client
             TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
             if (taskComponent.GetHuoYueDu() < 30)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("活跃度低于30没有奖励！");
+                FlyTipComponent.Instance.ShowFlyTipDi("活跃度低于30没有奖励！");
                 return;
             }
 

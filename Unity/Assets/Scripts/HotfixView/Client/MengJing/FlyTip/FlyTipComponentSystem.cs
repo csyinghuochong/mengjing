@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,6 +35,30 @@ namespace ET.Client
             self.FlyTipDis.Clear();
         }
 
+        [EntitySystem]
+        private static void Update(this FlyTipComponent self)
+        {
+            long time = TimeInfo.Instance.ClientNow();
+
+            if (self.FlyTipQueue.Count > 0)
+            {
+                if (time - self.LastSpawnFlyTipTime >= self.Interval)
+                {
+                    self.LastSpawnFlyTipTime = time;
+                    self.SpawnFlyTip(self.FlyTipQueue.Dequeue());
+                }
+            }
+
+            if (self.FlyTipDiQueue.Count > 0)
+            {
+                if (time - self.LastSpawnFlyTipDiTime >= self.Interval)
+                {
+                    self.LastSpawnFlyTipDiTime = time;
+                    self.SpawnFlyTipDi(self.FlyTipDiQueue.Dequeue());
+                }
+            }
+        }
+
         private static async ETTask OnAwake(this FlyTipComponent self)
         {
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
@@ -45,9 +70,14 @@ namespace ET.Client
             await GameObjectPoolHelper.InitPoolFormGamObjectAsync("Assets/Bundles/UI/Other/FlyTipDi.prefab", flyTipDi, 3);
         }
 
-        public static void SpawnFlyTip(this FlyTipComponent self, string str)
+        public static void ShowFlyTip(this FlyTipComponent self, string str)
         {
-            Vector3 startPos = new(0, -100, 0);
+            self.FlyTipQueue.Enqueue(str);
+        }
+
+        private static void SpawnFlyTip(this FlyTipComponent self, string str)
+        {
+            Vector3 startPos = new(0, -200, 0);
             GameObject FlyTipGO = GameObjectPoolHelper.GetObjectFromPool("Assets/Bundles/UI/Other/FlyTip.prefab");
             FlyTipGO.transform.SetParent(self.Root().GetComponent<GlobalComponent>().PopUpRoot);
             self.FlyTips.Add(FlyTipGO);
@@ -69,9 +99,14 @@ namespace ET.Client
             text.DOColor(new Color(255, 255, 255, 0), 2f).SetEase(Ease.OutQuad);
         }
 
-        public static void SpawnFlyTipDi(this FlyTipComponent self, string str)
+        public static void ShowFlyTipDi(this FlyTipComponent self, string str)
         {
-            Vector3 startPos = new(0, -100, 0);
+            self.FlyTipDiQueue.Enqueue(str);
+        }
+
+        private static void SpawnFlyTipDi(this FlyTipComponent self, string str)
+        {
+            Vector3 startPos = new(0, -200, 0);
             GameObject FlyTipDiGO = GameObjectPoolHelper.GetObjectFromPool("Assets/Bundles/UI/Other/FlyTipDi.prefab");
             FlyTipDiGO.transform.SetParent(self.Root().GetComponent<GlobalComponent>().PopUpRoot);
             self.FlyTipDis.Add(FlyTipDiGO);

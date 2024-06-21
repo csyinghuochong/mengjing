@@ -277,7 +277,7 @@ namespace ET.Client
             // 增幅卷轴
             if (itemConfig.ItemSubType == 17)
             {
-                self.Root().GetComponent<FlyTipComponent>().SpawnFlyTip("请前往家园装备增幅系统");
+                self.Root().GetComponent<FlyTipComponent>().ShowFlyTip("请前往家园装备增幅系统");
                 return;
             }
 
@@ -303,28 +303,28 @@ namespace ET.Client
 
                 if (dlgRole.View.ES_RoleGem.XiangQianItem == null)
                 {
-                    FlyTipComponent.Instance.SpawnFlyTipDi("请选择装备！");
+                    FlyTipComponent.Instance.ShowFlyTipDi("请选择装备！");
                     return;
                 }
 
                 string gemHole = dlgRole.View.ES_RoleGem.XiangQianItem.GemHole;
                 if (dlgRole.View.ES_RoleGem.XiangQianIndex == -1)
                 {
-                    FlyTipComponent.Instance.SpawnFlyTipDi("请选择孔位！");
+                    FlyTipComponent.Instance.ShowFlyTipDi("请选择孔位！");
                     return;
                 }
 
                 string[] gemHolelist = gemHole.Split('_');
                 if (gemHolelist.Length <= dlgRole.View.ES_RoleGem.XiangQianIndex)
                 {
-                    FlyTipComponent.Instance.SpawnFlyTipDi("请选择孔位！");
+                    FlyTipComponent.Instance.ShowFlyTipDi("请选择孔位！");
                     return;
                 }
 
                 string itemgem = gemHolelist[dlgRole.View.ES_RoleGem.XiangQianIndex];
                 if (itemgem != itemConfig.ItemSubType.ToString() && itemConfig.ItemSubType != 110 && itemConfig.ItemSubType != 111)
                 {
-                    FlyTipComponent.Instance.SpawnFlyTipDi("宝石与孔位不符！");
+                    FlyTipComponent.Instance.ShowFlyTipDi("宝石与孔位不符！");
                     return;
                 }
 
@@ -582,7 +582,7 @@ namespace ET.Client
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
             if (self.ItemOperateEnum == ItemOperateEnum.GemBag && itemConfig.ItemType != ItemTypeEnum.Gemstone)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("只能放入宝石！");
+                FlyTipComponent.Instance.ShowFlyTipDi("只能放入宝石！");
                 return;
             }
 

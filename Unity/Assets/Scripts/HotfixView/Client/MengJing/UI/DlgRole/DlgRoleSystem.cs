@@ -180,7 +180,7 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.Lv < 30)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("30级开启生肖系统喔！");
+                FlyTipComponent.Instance.ShowFlyTipDi("30级开启生肖系统喔！");
                 return;
             }
 

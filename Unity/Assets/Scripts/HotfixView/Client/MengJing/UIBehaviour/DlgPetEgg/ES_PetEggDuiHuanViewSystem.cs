@@ -44,13 +44,13 @@ namespace ET.Client
             PetEggDuiHuanConfig cofig0 = PetEggDuiHuanConfigCategory.Instance.Get(index);
             if (!bagComponent.CheckNeedItem(cofig0.CostItems))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("道具不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("道具不足！");
                 return;
             }
 
             if (bagComponent.GetBagLeftCell() <= 1)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("背包空间不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("背包空间不足！");
                 return;
             }
 

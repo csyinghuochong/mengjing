@@ -33,7 +33,7 @@ namespace ET.Client
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             if (userInfo.Lv < 12)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("捐献等级不得小于12级");
+                FlyTipComponent.Instance.ShowFlyTipDi("捐献等级不得小于12级");
                 return;
             }
 
@@ -46,7 +46,7 @@ namespace ET.Client
             int number = int.Parse(text);
             if (number < 100000)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("最低捐献10万金币！");
+                FlyTipComponent.Instance.ShowFlyTipDi("最低捐献10万金币！");
                 return;
             }
 

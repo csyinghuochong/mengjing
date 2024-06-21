@@ -40,7 +40,7 @@ namespace ET.Client
 
             if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv < 35)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("35级开启天赋方案,可自由切换天赋!");
+                FlyTipComponent.Instance.ShowFlyTipDi("35级开启天赋方案,可自由切换天赋!");
                 return;
             }
 
@@ -50,7 +50,7 @@ namespace ET.Client
             self.OnActiveTianFu();
             self.UpdatePlanButton();
 
-            FlyTipComponent.Instance.SpawnFlyTipDi("已切换为当前天赋!");
+            FlyTipComponent.Instance.ShowFlyTipDi("已切换为当前天赋!");
         }
 
         public static void UpdatePlanButton(this ES_SkillTianFu self)
@@ -184,7 +184,7 @@ namespace ET.Client
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(self.TianFuId);
             if (playerLv < talentConfig.LearnRoseLv)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("等级不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("等级不足！");
                 return;
             }
 

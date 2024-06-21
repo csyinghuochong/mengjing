@@ -99,7 +99,7 @@ namespace ET.Client
             BagInfo equip_2 = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip_2, (int)ItemSubTypeEnum.Wuqi);
             if (equip_1 == null || equip_2 == null)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请先在对应位置装备武器！");
+                FlyTipComponent.Instance.ShowFlyTipDi("请先在对应位置装备武器！");
                 return;
             }
 
@@ -240,7 +240,7 @@ namespace ET.Client
                 case 1:
                     if (chengJiuComponent.RandomDrop == 1)
                     {
-                        FlyTipComponent.Instance.SpawnFlyTipDi("每日只能获取一次奖励！");
+                        FlyTipComponent.Instance.ShowFlyTipDi("每日只能获取一次奖励！");
                         return;
                     }
 
@@ -598,7 +598,7 @@ namespace ET.Client
 
         public static void OnEnterCancelButton(this ES_MainSkill self)
         {
-            FlyTipComponent.Instance.SpawnFlyTipDi("取消技能施法");
+            FlyTipComponent.Instance.ShowFlyTipDi("取消技能施法");
 
             for (int i = 0; i < self.UISkillGirdList.Count; i++)
             {

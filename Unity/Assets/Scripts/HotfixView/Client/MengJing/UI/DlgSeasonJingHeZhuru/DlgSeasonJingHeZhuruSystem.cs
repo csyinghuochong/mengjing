@@ -26,7 +26,7 @@ namespace ET.Client
         {
             if (self.CostIds.Count <= 0)
             {
-                FlyTipComponent.Instance.SpawnFlyTip("未选择道具！");
+                FlyTipComponent.Instance.ShowFlyTip("未选择道具！");
                 return;
             }
 

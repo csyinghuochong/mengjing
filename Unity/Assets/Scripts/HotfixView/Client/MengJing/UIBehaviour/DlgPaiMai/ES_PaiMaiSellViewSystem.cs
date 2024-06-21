@@ -95,7 +95,7 @@ namespace ET.Client
         {
             if (self.PaiMaiItemInfoId == 0)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请选中道具");
+                FlyTipComponent.Instance.ShowFlyTipDi("请选中道具");
                 return;
             }
 
@@ -106,7 +106,7 @@ namespace ET.Client
                 {
                     if (self.PaiMaiItemInfos[i].UserId != self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId)
                     {
-                        FlyTipComponent.Instance.SpawnFlyTipDi("数据错误!");
+                        FlyTipComponent.Instance.ShowFlyTipDi("数据错误!");
                         return;
                     }
 
@@ -138,26 +138,26 @@ namespace ET.Client
         {
             if (self.BagInfo == null)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请选中道具！");
+                FlyTipComponent.Instance.ShowFlyTipDi("请选中道具！");
                 return;
             }
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
             if (itemConfig.IfStopPaiMai == 1)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("此道具禁止上架！");
+                FlyTipComponent.Instance.ShowFlyTipDi("此道具禁止上架！");
                 return;
             }
 
             if (!ComHelp.IsShowPaiMai(itemConfig.ItemType, itemConfig.ItemSubType))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("此道具不能上架！");
+                FlyTipComponent.Instance.ShowFlyTipDi("此道具不能上架！");
                 return;
             }
 
             if (self.PaiMaiItemInfos.Count >= GlobalValueConfigCategory.Instance.Get(50).Value2)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("已经达到最大上架数量！");
+                FlyTipComponent.Instance.ShowFlyTipDi("已经达到最大上架数量！");
                 return;
             }
 

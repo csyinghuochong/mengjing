@@ -185,7 +185,7 @@ namespace ET.Client
             FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
             if (self.BagInfo_Appri == null)
             {
-                flyTipComponent.SpawnFlyTipDi("请选择鉴定符！");
+                flyTipComponent.ShowFlyTipDi("请选择鉴定符！");
                 return;
             }
 
@@ -196,7 +196,7 @@ namespace ET.Client
 
             BagClientNetHelper.RequestAppraisalItem(self.Root(), self.BagInfo_Equip, self.BagInfo_Appri.BagInfoID).Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_AppraisalSelect);
-            flyTipComponent.SpawnFlyTipDi("恭喜您！道具发挥了作用,鉴定成功!");
+            flyTipComponent.ShowFlyTipDi("恭喜您！道具发挥了作用,鉴定成功!");
         }
     }
 }

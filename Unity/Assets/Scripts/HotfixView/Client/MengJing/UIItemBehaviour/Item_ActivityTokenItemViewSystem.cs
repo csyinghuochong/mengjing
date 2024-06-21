@@ -24,13 +24,13 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.Lv < int.Parse(self.ActivityConfig.Par_1))
             {
-                FlyTipComponent.Instance.SpawnFlyTip("等级不足！");
+                FlyTipComponent.Instance.ShowFlyTip("等级不足！");
                 return;
             }
 
             if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < 1)
             {
-                FlyTipComponent.Instance.SpawnFlyTip("背包已满！");
+                FlyTipComponent.Instance.ShowFlyTip("背包已满！");
                 return;
             }
 
@@ -38,13 +38,13 @@ namespace ET.Client
             int selfRechage = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber);
             if (index == 3 && selfRechage < 298)
             {
-                FlyTipComponent.Instance.SpawnFlyTip("未达到领取条件！");
+                FlyTipComponent.Instance.ShowFlyTip("未达到领取条件！");
                 return;
             }
 
             if (index == 2 && selfRechage < 98)
             {
-                FlyTipComponent.Instance.SpawnFlyTip("未达到领取条件！");
+                FlyTipComponent.Instance.ShowFlyTip("未达到领取条件！");
                 return;
             }
 

@@ -256,7 +256,7 @@ namespace ET.Client
 
             self.LastShowTip = Time.time;
             string monsterName = MonsterConfigCategory.Instance.Get(monsterId).MonsterName;
-            FlyTipComponent.Instance.SpawnFlyTipDi($"请先消灭{monsterName}");
+            FlyTipComponent.Instance.ShowFlyTipDi($"请先消灭{monsterName}");
         }
 
         private static float CanMoveDistance(this ES_JoystickMove self, Unit unit, Quaternion rotation)

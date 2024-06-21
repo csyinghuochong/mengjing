@@ -52,7 +52,7 @@ namespace ET.Client
                 {
                     DlgDungeonLevel uIDungeonLevel = uiComponent.GetDlgLogic<DlgDungeonLevel>();
 
-                    FlyTipComponent.Instance.SpawnFlyTipDi($"请求传送 副本Id:{self.ChapterId} 副本难度：{uIDungeonLevel.Difficulty}");
+                    FlyTipComponent.Instance.ShowFlyTipDi($"请求传送 副本Id:{self.ChapterId} 副本难度：{uIDungeonLevel.Difficulty}");
 
                     errorCode =
                             await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, self.ChapterId, uIDungeonLevel.Difficulty);
@@ -62,7 +62,7 @@ namespace ET.Client
                 {
                     if (self.Root().GetComponent<LockTargetComponent>().LastLockId != 0)
                     {
-                        FlyTipComponent.Instance.SpawnFlyTipDi("战斗状态不能传送地图!");
+                        FlyTipComponent.Instance.ShowFlyTipDi("战斗状态不能传送地图!");
                         return;
                     }
 

@@ -38,7 +38,7 @@ namespace ET.Client
 
             if (error == 0)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("宠物之核合成成功！"));
+                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.LoadLocalization("宠物之核合成成功！"));
             }
 
             self.OnUpdateItemList();
@@ -175,7 +175,7 @@ namespace ET.Client
 
             if (bagInfo1.ItemID != bagInfo2.ItemID)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("同类型和同等级的宠物之核才能合成！"));
+                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.LoadLocalization("同类型和同等级的宠物之核才能合成！"));
                 return;
             }
 
@@ -183,7 +183,7 @@ namespace ET.Client
 
             if (error == 0)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("宠物之核合成成功！"));
+                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.LoadLocalization("宠物之核合成成功！"));
             }
 
             self.OnUpdateItemList();

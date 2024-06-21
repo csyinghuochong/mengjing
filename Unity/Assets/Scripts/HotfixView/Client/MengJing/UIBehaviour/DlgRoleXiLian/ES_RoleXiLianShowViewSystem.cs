@@ -212,7 +212,7 @@ namespace ET.Client
 
                 if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem(costItems))
                 {
-                    FlyTipComponent.Instance.SpawnFlyTipDi("材料不足！");
+                    FlyTipComponent.Instance.ShowFlyTipDi("材料不足！");
                     return;
                 }
             }
@@ -251,7 +251,7 @@ namespace ET.Client
 
             if (times == 1)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("洗炼道具成功");
+                FlyTipComponent.Instance.ShowFlyTipDi("洗炼道具成功");
                 self.OnXiLianReturn();
                 self.ShowXiLianEffect().Coroutine();
             }
@@ -259,7 +259,7 @@ namespace ET.Client
             if (times > 1)
             {
                 int newXiLianDu = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemXiLianDu);
-                FlyTipComponent.Instance.SpawnFlyTipDi($"获得{newXiLianDu - oldXiLianDu}洗炼经验");
+                FlyTipComponent.Instance.ShowFlyTipDi($"获得{newXiLianDu - oldXiLianDu}洗炼经验");
 
                 await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RoleXiLianTen);
                 DlgRoleXiLianTen dlgRoleXiLianTen = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRoleXiLianTen>();

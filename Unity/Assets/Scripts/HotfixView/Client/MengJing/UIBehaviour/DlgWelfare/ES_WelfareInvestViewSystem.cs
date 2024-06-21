@@ -70,13 +70,13 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.InvestReward) == 1)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("已经领取!");
+                FlyTipComponent.Instance.ShowFlyTipDi("已经领取!");
                 return;
             }
 
             if (self.Root().GetComponent<UserInfoComponentC>().GetCrateDay() - 1 < 6)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("今天还不能领取!");
+                FlyTipComponent.Instance.ShowFlyTipDi("今天还不能领取!");
                 return;
             }
 

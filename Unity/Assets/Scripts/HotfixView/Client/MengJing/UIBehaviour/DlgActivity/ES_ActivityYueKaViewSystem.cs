@@ -63,14 +63,14 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaRemainTimes) == 0)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请先开启月卡！");
+                FlyTipComponent.Instance.ShowFlyTipDi("请先开启月卡！");
                 return;
             }
 
             if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaAward) == 1)
             {
                 //当天已领取
-                FlyTipComponent.Instance.SpawnFlyTipDi("当天奖励已领取！");
+                FlyTipComponent.Instance.ShowFlyTipDi("当天奖励已领取！");
                 return;
             }
 
@@ -99,7 +99,7 @@ namespace ET.Client
             if (error == 0)
             {
                 // 月卡开启成功
-                FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("月卡开启成功"));
+                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.LoadLocalization("月卡开启成功"));
                 self.E_Img_JiHuoImage.gameObject.SetActive(true);
                 self.EG_BtnOpenYueKaSetRectTransform.gameObject.SetActive(false);
                 self.E_Btn_GetRewardButton.gameObject.SetActive(true);

@@ -85,25 +85,25 @@ namespace ET.Client
 
             if ((shouJiChapterInfo.RewardInfo & 1 << index) > 0)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("奖励已领取！");
+                FlyTipComponent.Instance.ShowFlyTipDi("奖励已领取！");
                 return;
             }
 
             if (index == 1 && shouJiChapterInfo.StarNum < shouJiConfig.ProList1_StartNum)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("条件不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("条件不足！");
                 return;
             }
 
             if (index == 2 && shouJiChapterInfo.StarNum < shouJiConfig.ProList2_StartNum)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("条件不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("条件不足！");
                 return;
             }
 
             if (index == 3 && shouJiChapterInfo.StarNum < shouJiConfig.ProList3_StartNum)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("条件不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("条件不足！");
                 return;
             }
 

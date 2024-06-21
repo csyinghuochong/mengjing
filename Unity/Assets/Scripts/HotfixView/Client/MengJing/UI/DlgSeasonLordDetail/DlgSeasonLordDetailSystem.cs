@@ -33,7 +33,7 @@ namespace ET.Client
         {
             if (self.BagInfo == null)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("未选择道具！");
+                FlyTipComponent.Instance.ShowFlyTipDi("未选择道具！");
                 return;
             }
 
@@ -43,7 +43,7 @@ namespace ET.Client
             long end = numericComponent.GetAsLong(NumericType.SeasonBossRefreshTime);
             if (end - now <= 0)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("赛季首领已经出现！");
+                FlyTipComponent.Instance.ShowFlyTipDi("赛季首领已经出现！");
                 return;
             }
 
@@ -54,7 +54,7 @@ namespace ET.Client
 
             if (response.Error == ErrorCode.ERR_Success)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("使用成功！");
+                FlyTipComponent.Instance.ShowFlyTipDi("使用成功！");
                 self.BagInfo = null;
                 self.View.ES_CommonItem.uiTransform.gameObject.SetActive(false);
                 self.View.E_ItemNameTextText.text = string.Empty;

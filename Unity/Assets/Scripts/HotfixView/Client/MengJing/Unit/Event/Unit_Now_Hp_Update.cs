@@ -100,7 +100,7 @@ namespace ET.Client
                 if (attackMode == 3 && !root.GetComponent<BattleMessageComponent>().AttackSelfPlayer.Contains(unitAttack.Id))
                 {
                     root.GetComponent<BattleMessageComponent>().AttackSelfPlayer.Add(unitAttack.Id);
-                    FlyTipComponent.Instance.SpawnFlyTip($"{unitAttack.GetComponent<UnitInfoComponent>().UnitName} 攻击了你");
+                    FlyTipComponent.Instance.ShowFlyTip($"{unitAttack.GetComponent<UnitInfoComponent>().UnitName} 攻击了你");
                 }
             }
 

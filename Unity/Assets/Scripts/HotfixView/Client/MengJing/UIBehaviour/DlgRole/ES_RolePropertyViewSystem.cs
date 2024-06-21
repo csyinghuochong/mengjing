@@ -267,7 +267,7 @@ namespace ET.Client
 
         private static async ETTask OnAddPointConfirmButton(this ES_RoleProperty self)
         {
-            self.Root().GetComponent<FlyTipComponent>().SpawnFlyTipDi("确认加点");
+            self.Root().GetComponent<FlyTipComponent>().ShowFlyTipDi("确认加点");
             long instanceId = self.InstanceId;
             await BagClientNetHelper.RoleAddPoint(self.Root(), self.PointList);
             if (instanceId != self.InstanceId)
@@ -280,7 +280,7 @@ namespace ET.Client
 
         private static void OnRecommendAddPointButton(this ES_RoleProperty self)
         {
-            self.Root().GetComponent<FlyTipComponent>().SpawnFlyTipDi("推荐加点");
+            self.Root().GetComponent<FlyTipComponent>().ShowFlyTipDi("推荐加点");
         }
 
         #endregion

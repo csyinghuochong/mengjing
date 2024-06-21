@@ -84,7 +84,7 @@ namespace ET.Client
             }
 
             string tip = isprotectd? "锁定" : "解锁";
-            FlyTipComponent.Instance.SpawnFlyTipDi($"宠物{tip}成功");
+            FlyTipComponent.Instance.ShowFlyTipDi($"宠物{tip}成功");
             self.Root().GetComponent<PetComponentC>().OnPetProtect(self.PetInfoId, isprotectd);
             self.OnInitPetList();
             self.OnClickPetHandler(self.PetInfoId);

@@ -31,13 +31,13 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ChouKa) < self.TakeCardRewardConfig.RoseLvLimit)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("条件未达到！");
+                FlyTipComponent.Instance.ShowFlyTipDi("条件未达到！");
                 return;
             }
 
             if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < self.TakeCardRewardConfig.RewardItems.Split('@').Length)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("背包空间不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("背包空间不足！");
                 return;
             }
 

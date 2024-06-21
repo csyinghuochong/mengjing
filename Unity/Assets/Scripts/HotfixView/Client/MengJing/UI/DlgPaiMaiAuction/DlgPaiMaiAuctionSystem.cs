@@ -101,7 +101,7 @@ namespace ET.Client
 
             if (curprice < paiprice)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("不能小于竞拍价！");
+                FlyTipComponent.Instance.ShowFlyTipDi("不能小于竞拍价！");
                 return;
             }
 
@@ -125,7 +125,7 @@ namespace ET.Client
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             if (userInfo.Gold < price)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("金币不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("金币不足！");
                 return;
             }
 

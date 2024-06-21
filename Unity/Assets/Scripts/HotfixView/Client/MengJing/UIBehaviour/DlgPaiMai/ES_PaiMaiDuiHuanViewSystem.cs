@@ -59,7 +59,7 @@ namespace ET.Client
 
             if (num > 0 && diamondsNumber >= 10000)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("兑换单次最多兑换10000钻石哦！");
+                FlyTipComponent.Instance.ShowFlyTipDi("兑换单次最多兑换10000钻石哦！");
                 return;
             }
 
@@ -84,14 +84,14 @@ namespace ET.Client
             long diamondsNumber = long.Parse(self.E_Lab_RmbNumInputField.text);
             if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.Diamond < diamondsNumber)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("钻石不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("钻石不足！");
                 return;
             }
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber) <= 0)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("为保证游戏内金币保值，充值任意额度后激活此功能！");
+                FlyTipComponent.Instance.ShowFlyTipDi("为保证游戏内金币保值，充值任意额度后激活此功能！");
                 return;
             }
 

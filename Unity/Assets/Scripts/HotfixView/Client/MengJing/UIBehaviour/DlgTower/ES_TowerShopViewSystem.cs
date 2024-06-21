@@ -45,7 +45,7 @@ namespace ET.Client
         {
             if (self.SellId == 0)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请选择道具！");
+                FlyTipComponent.Instance.ShowFlyTipDi("请选择道具！");
                 return;
             }
 
@@ -113,7 +113,7 @@ namespace ET.Client
 
             if (num > 0 && diamondsNumber >= 100)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("购买最多100个！");
+                FlyTipComponent.Instance.ShowFlyTipDi("购买最多100个！");
                 return;
             }
 

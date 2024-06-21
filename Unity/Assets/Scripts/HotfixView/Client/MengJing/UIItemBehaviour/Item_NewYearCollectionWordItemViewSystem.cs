@@ -74,13 +74,13 @@ namespace ET.Client
             bool receiveMax = ActivityHelper.HaveReceiveTimes(activityComponent.ActivityReceiveIds, self.ActivityConfig.Id);
             if (!receiveMax)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("已达到最大领取上限！");
+                FlyTipComponent.Instance.ShowFlyTipDi("已达到最大领取上限！");
                 return;
             }
 
             if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem(self.ActivityConfig.Par_2))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("道具不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("道具不足！");
                 return;
             }
 

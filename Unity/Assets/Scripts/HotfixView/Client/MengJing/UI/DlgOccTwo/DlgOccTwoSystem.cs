@@ -32,7 +32,7 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.OccTwo != 0)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("不能重复转职!");
+                FlyTipComponent.Instance.ShowFlyTipDi("不能重复转职!");
                 return;
             }
 
@@ -188,7 +188,7 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.OccTwo == 0)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请先选择一个职业！");
+                FlyTipComponent.Instance.ShowFlyTipDi("请先选择一个职业！");
                 return;
             }
 

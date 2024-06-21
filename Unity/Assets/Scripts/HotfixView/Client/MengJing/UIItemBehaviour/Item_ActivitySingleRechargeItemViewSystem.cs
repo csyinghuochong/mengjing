@@ -43,20 +43,20 @@ namespace ET.Client
             string[] rewarditemlist = ConfigData.SingleRechargeReward[self.Key].Split('@');
             if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < rewarditemlist.Length)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("背包空间不足");
+                FlyTipComponent.Instance.ShowFlyTipDi("背包空间不足");
                 return;
             }
 
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             if (!userInfo.SingleRechargeIds.Contains(self.Key))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("未达条件");
+                FlyTipComponent.Instance.ShowFlyTipDi("未达条件");
                 return;
             }
 
             if (userInfo.SingleRewardIds.Contains(self.Key))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("已经领取");
+                FlyTipComponent.Instance.ShowFlyTipDi("已经领取");
                 return;
             }
 

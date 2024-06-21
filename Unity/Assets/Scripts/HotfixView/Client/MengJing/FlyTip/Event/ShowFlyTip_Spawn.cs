@@ -8,11 +8,11 @@
         {
             if (args.Type == 0)
             {
-                scene.GetComponent<FlyTipComponent>().SpawnFlyTip(args.Str);
+                scene.GetComponent<FlyTipComponent>().ShowFlyTip(args.Str);
             }
             else
             {
-                scene.GetComponent<FlyTipComponent>().SpawnFlyTipDi(args.Str);
+                scene.GetComponent<FlyTipComponent>().ShowFlyTipDi(args.Str);
             }
 
             await ETTask.CompletedTask;

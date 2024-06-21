@@ -30,14 +30,14 @@ namespace ET.Client
         {
             if (self.PipeiStatus && self.Root().GetComponent<BattleMessageComponent>().SoloPiPeiStartTime > 0)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("已经匹配，请耐心等候...");
+                FlyTipComponent.Instance.ShowFlyTipDi("已经匹配，请耐心等候...");
                 return;
             }
 
             int errorCode = await ActivityNetHelper.SoloMatch(self.Root());
             if (errorCode == 0)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("开始匹配，请耐心等候...");
+                FlyTipComponent.Instance.ShowFlyTipDi("开始匹配，请耐心等候...");
                 self.PipeiStatus = true;
             }
 

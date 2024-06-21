@@ -23,7 +23,7 @@ namespace ET.Client
             ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
             if (activityComponent.ActivityReceiveIds.Contains(self.ActivityConfig.Id))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("已经购买过该礼包！");
+                FlyTipComponent.Instance.ShowFlyTipDi("已经购买过该礼包！");
                 return;
             }
 

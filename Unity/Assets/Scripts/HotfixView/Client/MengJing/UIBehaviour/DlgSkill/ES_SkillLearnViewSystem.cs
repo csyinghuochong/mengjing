@@ -313,19 +313,19 @@ namespace ET.Client
             int playerLv = userInfo.Lv;
             if (userInfo.Sp < skillConfig.CostSPValue)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("技能点不足！!");
+                FlyTipComponent.Instance.ShowFlyTipDi("技能点不足！!");
                 return;
             }
 
             if (playerLv < skillConfig.LearnRoseLv)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("等级不足！!");
+                FlyTipComponent.Instance.ShowFlyTipDi("等级不足！!");
                 return;
             }
 
             if (skillConfig.NextSkillID == 0)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("已满级！!");
+                FlyTipComponent.Instance.ShowFlyTipDi("已满级！!");
                 return;
             }
 

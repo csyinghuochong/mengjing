@@ -217,13 +217,13 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.OpenJingHeIds.Contains(self.JingHeId))
             {
-                FlyTipComponent.Instance.SpawnFlyTip("孔位已开启！");
+                FlyTipComponent.Instance.ShowFlyTip("孔位已开启！");
                 return;
             }
 
             if (!SeasonJingHeConfigCategory.Instance.Contain(self.JingHeId))
             {
-                FlyTipComponent.Instance.SpawnFlyTip("无效孔位！");
+                FlyTipComponent.Instance.ShowFlyTip("无效孔位！");
                 return;
             }
 
@@ -233,7 +233,7 @@ namespace ET.Client
             long havedNum = self.Root().GetComponent<BagComponentC>().GetItemNumber(costItemId);
             if (havedNum < cosrItemNum)
             {
-                FlyTipComponent.Instance.SpawnFlyTip("道具数量不足！");
+                FlyTipComponent.Instance.ShowFlyTip("道具数量不足！");
                 return;
             }
 
@@ -278,7 +278,7 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (self.BagInfo == null || self.JingHeId == 0)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("未选择道具！");
+                FlyTipComponent.Instance.ShowFlyTipDi("未选择道具！");
                 return;
             }
 

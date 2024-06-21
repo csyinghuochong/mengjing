@@ -133,7 +133,7 @@ namespace ET.Client
             }
             if (locked)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("关卡未解锁！");
+                FlyTipComponent.Instance.ShowFlyTipDi("关卡未解锁！");
                 return;
             }
             bool havepet = false;
@@ -148,7 +148,7 @@ namespace ET.Client
             }
             if (!havepet)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("请设置上阵宠物！");
+                FlyTipComponent.Instance.ShowFlyTipDi("请设置上阵宠物！");
                 return;
             }
 

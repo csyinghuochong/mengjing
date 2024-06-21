@@ -139,7 +139,7 @@ namespace ET.Client
             }
 
             string tip = isprotectd? "锁定" : "解锁";
-            FlyTipComponent.Instance.SpawnFlyTipDi($"装备{tip}成功");
+            FlyTipComponent.Instance.ShowFlyTipDi($"装备{tip}成功");
             self.XilianBagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(self.XilianBagInfo.BagInfoID);
             self.OnXiLianReturn();
         }

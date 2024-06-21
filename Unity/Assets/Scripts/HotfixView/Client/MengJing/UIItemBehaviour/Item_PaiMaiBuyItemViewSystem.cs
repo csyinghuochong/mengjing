@@ -55,7 +55,7 @@ namespace ET.Client
             }
             else
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("道具已经被买走了！");
+                FlyTipComponent.Instance.ShowFlyTipDi("道具已经被买走了！");
             }
         }
 
@@ -65,14 +65,14 @@ namespace ET.Client
 
             if (itemConfig.ItemQuality >= 5 && itemConfig.ItemType == 3)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("橙色品质及以上的装备不能购买！");
+                FlyTipComponent.Instance.ShowFlyTipDi("橙色品质及以上的装备不能购买！");
                 return;
             }
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetBagLeftCell() < 1)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("背包空间不足");
+                FlyTipComponent.Instance.ShowFlyTipDi("背包空间不足");
                 return;
             }
 
@@ -105,7 +105,7 @@ namespace ET.Client
 
             if (!canBuy)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi($"等级需达到{needLv}级或赞助任意金额开启拍卖行购买功能！");
+                FlyTipComponent.Instance.ShowFlyTipDi($"等级需达到{needLv}级或赞助任意金额开启拍卖行购买功能！");
                 return;
             }
 

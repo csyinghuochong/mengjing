@@ -48,13 +48,13 @@ namespace ET.Client
         {
             if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.WelfareInvestList.Contains(self.Day))
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("已经进行了投资!");
+                FlyTipComponent.Instance.ShowFlyTipDi("已经进行了投资!");
                 return;
             }
 
             if (self.Root().GetComponent<UserInfoComponentC>().GetCrateDay() - 1 < self.Day)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("今天还不能进行该项投资!");
+                FlyTipComponent.Instance.ShowFlyTipDi("今天还不能进行该项投资!");
                 return;
             }
 

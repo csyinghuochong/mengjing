@@ -53,7 +53,7 @@ namespace ET.Client
             WindowID windowID = GetUIPath(funtionOpenConfig.Name);
             if (windowID == WindowID.WindowID_Invaild)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("该NPC没有要打开的UI");
+                FlyTipComponent.Instance.ShowFlyTipDi("该NPC没有要打开的UI");
                 return;
             }
 

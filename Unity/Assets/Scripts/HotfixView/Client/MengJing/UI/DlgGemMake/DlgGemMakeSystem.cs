@@ -69,14 +69,14 @@ namespace ET.Client
             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(self.MakeId);
             if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.Gold < equipMakeConfig.MakeNeedGold)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("金币不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("金币不足！");
                 return;
             }
 
             bool success = self.Root().GetComponent<BagComponentC>().CheckNeedItem(equipMakeConfig.NeedItems);
             if (!success)
             {
-                FlyTipComponent.Instance.SpawnFlyTipDi("材料不足！");
+                FlyTipComponent.Instance.ShowFlyTipDi("材料不足！");
                 return;
             }
 

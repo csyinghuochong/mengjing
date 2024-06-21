@@ -629,7 +629,7 @@ namespace ET.Client
             if (obstruct != 0)
             {
                 string monsterName = MonsterConfigCategory.Instance.Get(obstruct).MonsterName;
-                FlyTipComponent.Instance.SpawnFlyTipDi($"请先消灭{monsterName}");
+                FlyTipComponent.Instance.ShowFlyTipDi($"请先消灭{monsterName}");
                 return -1;
             }
 

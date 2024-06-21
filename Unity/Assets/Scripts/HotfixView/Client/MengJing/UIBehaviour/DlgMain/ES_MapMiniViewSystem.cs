@@ -61,7 +61,7 @@ namespace ET.Client
                     SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
                     if (sceneConfig.ifShowMinMap == 0)
                     {
-                        FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("当前场景不支持查看小地图"));
+                        FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.LoadLocalization("当前场景不支持查看小地图"));
                     }
                     else
                     {
