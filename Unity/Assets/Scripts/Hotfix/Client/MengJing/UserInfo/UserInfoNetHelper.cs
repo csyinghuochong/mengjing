@@ -50,5 +50,19 @@
             G2C_Reload response = await root.GetComponent<ClientSenderCompnent>().Call(request) as G2C_Reload;
             return response;
         }
+
+        public static async ETTask<int> ExpToGoldRequest(Scene root, int operateType)
+        {
+            C2M_ExpToGoldRequest request = new() { OperateType = 2 };
+            M2C_ExpToGoldResponse response = (M2C_ExpToGoldResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
+        public static async ETTask<M2C_BuChangeResponse> BuChangeRequest(Scene root, long buChangId)
+        {
+            C2M_BuChangeRequest request = new() { BuChangId = buChangId };
+            M2C_BuChangeResponse response = (M2C_BuChangeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

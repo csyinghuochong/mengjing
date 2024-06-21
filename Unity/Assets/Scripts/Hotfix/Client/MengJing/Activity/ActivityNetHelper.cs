@@ -260,13 +260,6 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> ActivityReceiveRequest(Scene root, int activityType, int activityId)
-        {
-            C2M_ActivityReceiveRequest request = new() { ActivityType = activityType, ActivityId = activityId };
-            M2C_ActivityReceiveResponse response = (M2C_ActivityReceiveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
-            return response.Error;
-        }
-
         public static async ETTask<M2C_SerialReardResponse> SerialReardRequest(Scene root, string serialNumber)
         {
             C2M_SerialReardRequest request = new() { SerialNumber = serialNumber };
@@ -276,7 +269,7 @@ namespace ET.Client
 
         public static async ETTask<int> ActivityRechargeSignRequest(Scene root, int activityType, int activityId)
         {
-            C2M_ActivityRechargeSignRequest request = new() { ActivityType = 23, ActivityId = activityId };
+            C2M_ActivityRechargeSignRequest request = new() { ActivityType = activityType, ActivityId = activityId };
             M2C_ActivityRechargeSignResponse response =
                     (M2C_ActivityRechargeSignResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;

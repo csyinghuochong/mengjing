@@ -57,7 +57,7 @@ namespace ET.Client
             int publicserial = ActivityConfigCategory.Instance.GetPulicSerial(serial);
             if (publicserial > 0)
             {
-                await ActivityNetHelper.ActivityReceiveRequest(self.Root(), 34, publicserial);
+                await ActivityNetHelper.ActivityReceive(self.Root(), 34, publicserial);
             }
             else
             {

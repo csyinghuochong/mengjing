@@ -63,28 +63,27 @@ namespace ET.Client
 
         public static async ETTask OnButtonExpDuiHuan(this DlgTaskGet self)
         {
-            // C2M_ExpToGoldRequest request = new C2M_ExpToGoldRequest() { OperateType = 2 };
-            // M2C_ExpToGoldResponse response = (M2C_ExpToGoldResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(request);
+            await UserInfoNetHelper.ExpToGoldRequest(self.Root(), 2);
             await ETTask.CompletedTask;
         }
 
         public static void OnButtonJieRiReward(this DlgTaskGet self)
         {
-            // int activityId = ActivityHelper.GetJieRiActivityId();
-            // ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(activityId);
-            // if (activityConfig == null)
-            // {
-            //     return;
-            // }
-            //
-            // ActivityComponent activityComponent = self.ZoneScene().GetComponent<ActivityComponent>();
-            // if (activityComponent.ActivityReceiveIds.Contains(activityId))
-            // {
-            //     FloatTipManager.Instance.ShowFloatTip("已经领取过奖励！");
-            // }
-            //
-            // activityComponent.GetActivityReward(activityConfig.ActivityType, activityId).Coroutine();
-            // self.ButtonJieRiReward.SetActive(false);
+            int activityId = ActivityHelper.GetJieRiActivityId();
+            ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(activityId);
+            if (activityConfig == null)
+            {
+                return;
+            }
+
+            ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
+            if (activityComponent.ActivityReceiveIds.Contains(activityId))
+            {
+                FlyTipComponent.Instance.ShowFlyTipDi("已经领取过奖励！");
+            }
+
+            ActivityNetHelper.ActivityReceive(self.Root(), activityConfig.ActivityType, activityId).Coroutine();
+            self.View.E_ButtonJieRiRewardButton.gameObject.SetActive(false);
         }
 
         public static void InitData(this DlgTaskGet self, int npcID)
@@ -155,18 +154,19 @@ namespace ET.Client
 
                     break;
                 case 6: //节日使者
-                    // int activityId = ActivityHelper.GetJieRiActivityId();
-                    // ActivityComponent activityComponent = self.ZoneScene().GetComponent<ActivityComponent>();
-                    // self.ButtonJieRiReward.SetActive(activityId > 0 && !activityComponent.ActivityReceiveIds.Contains(activityId));
-                    //
-                    // if (activityId == 0)
-                    // {
-                    //     int nextid = ActivityHelper.GetNextRiActivityId();
-                    //     ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(nextid);
-                    //     string[] riqi = activityConfig.Par_1.Split(';');
-                    //     string speek = self.Lab_NpcSpeak.GetComponent<Text>().text;
-                    //     self.Lab_NpcSpeak.GetComponent<Text>().text = $"{speek} 下次领取时间:{riqi[0]}月{riqi[1]}日 {activityConfig.Par_4}";
-                    // }
+                    int activityId = ActivityHelper.GetJieRiActivityId();
+                    ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
+                    self.View.E_ButtonJieRiRewardButton.gameObject.SetActive(activityId > 0 &&
+                        !activityComponent.ActivityReceiveIds.Contains(activityId));
+
+                    if (activityId == 0)
+                    {
+                        int nextid = ActivityHelper.GetNextRiActivityId();
+                        ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(nextid);
+                        string[] riqi = activityConfig.Par_1.Split(';');
+                        string speek = self.View.E_Lab_NpcSpeakText.text;
+                        self.View.E_Lab_NpcSpeakText.text = $"{speek} 下次领取时间:{riqi[0]}月{riqi[1]}日 {activityConfig.Par_4}";
+                    }
 
                     break;
                 case 8: //经验兑换
@@ -240,10 +240,9 @@ namespace ET.Client
 
         public static async ETTask RequestBuChangItem(this DlgTaskGet self, long userid)
         {
-            // C2M_BuChangeRequest request = new C2M_BuChangeRequest() { BuChangId = userid };
-            // M2C_BuChangeResponse response = (M2C_BuChangeResponse)await self.ZoneScene().GetComponent<SessionComponent>().Session.Call(request);
-            // AccountInfoComponent accountInfoComponent = self.ZoneScene().GetComponent<AccountInfoComponent>();
-            // accountInfoComponent.PlayerInfo = response.PlayerInfo;
+            M2C_BuChangeResponse response = await UserInfoNetHelper.BuChangeRequest(self.Root(), userid);
+            PlayerComponent accountInfoComponent = self.Root().GetComponent<PlayerComponent>();
+            accountInfoComponent.PlayerInfo = response.PlayerInfo;
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TaskGet);
             await ETTask.CompletedTask;
@@ -309,14 +308,14 @@ namespace ET.Client
                     FlyTipComponent.Instance.ShowFlyTipDi("次数不足！");
                     return;
                 }
-            
+
                 if (!FunctionHelp.IsInTime(1031))
                 {
                     FlyTipComponent.Instance.ShowFlyTipDi("不在活动时间内！");
                     return;
                 }
             }
-            
+
             int errorCode = await EnterMapHelper.RequestTransfer(self.Root(), sceneType, sceneId);
             if (errorCode == ErrorCode.ERR_Success && !self.IsDisposed)
             {
@@ -328,18 +327,18 @@ namespace ET.Client
 
         public static async ETTask RequestEnergySkill(this DlgTaskGet self)
         {
-            // Actor_FubenEnergySkillRequest c2M_PaiMaiBuyRequest = new Actor_FubenEnergySkillRequest() { };
-            // Actor_FubenEnergySkillResponse m2C_PaiMaiBuyResponse =
-            //         (Actor_FubenEnergySkillResponse)await self.DomainScene().GetComponent<SessionComponent>().Session.Call(c2M_PaiMaiBuyRequest);
-            //
-            // if (m2C_PaiMaiBuyResponse.Error == 0)
-            // {
-            //     UIHelper.Remove(self.DomainScene(), UIType.UITaskGet);
-            // }
-            // else
-            // {
-            //     ErrorHelp.Instance.ErrorHint(ErrorCode.ERR_ItemNotEnoughError);
-            // }
+            Actor_FubenEnergySkillRequest request = new();
+            Actor_FubenEnergySkillResponse response =
+                    (Actor_FubenEnergySkillResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+
+            if (response.Error == 0)
+            {
+                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TaskGet);
+            }
+            else
+            {
+                HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_ItemNotEnoughError);
+            }
 
             await ETTask.CompletedTask;
         }
@@ -399,21 +398,6 @@ namespace ET.Client
 
             taskids.AddRange(taskComponent.GetOpenTaskIds(self.NpcID));
             taskids.AddRange(self.GetAddtionTaskId(self.NpcID));
-
-            //bool haveloopids = false;
-            //for (int i = 0; i < taskids.Count; i++)
-            //{
-            //    if (TaskConfigCategory.Instance.Get(taskids[i]).TaskType == TaskTypeEnum.EveryDay)
-            //    {
-            //        haveloopids = true;
-            //        break;
-            //    }
-            //}
-            //Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());    
-            //if (taskComponent.IsHaveTaskCountryLoop() && taskComponent.GetTaskTypeList(TaskTypeEnum.EveryDay).Count == 0 && !haveloopids)
-            //{
-            //    FloatTipManager.Instance.ShowFloatTip("获取赏金任务失败，请重新登录！");
-            //}
 
             //给予任务
             List<TaskPro> taskPros = taskComponent.RoleTaskList;
@@ -486,11 +470,11 @@ namespace ET.Client
 
         public static void OnButtonMystery(this DlgTaskGet self)
         {
-            // int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
-            // int chapterid = DungeonConfigCategory.Instance.DungeonToChapter[sceneId];
-            // int mysterDungeonid = DungeonSectionConfigCategory.Instance.GetMysteryDungeon(chapterid);
-            // EnterFubenHelp.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, mysterDungeonid, 0, "0").Coroutine();
-            // self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TaskGet);
+            int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
+            int chapterid = DungeonConfigCategory.Instance.DungeonToChapter[sceneId];
+            int mysterDungeonid = DungeonSectionConfigCategory.Instance.GetMysteryDungeon(chapterid);
+            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, mysterDungeonid, 0, "0").Coroutine();
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TaskGet);
         }
 
         /// <summary>
@@ -511,20 +495,6 @@ namespace ET.Client
                 // ui.GetComponent<UIGivePetComponent>().InitTask(self.TaskId);
                 // ui.GetComponent<UIGivePetComponent>().OnUpdateUI();
                 // UIHelper.Remove(self.ZoneScene(), UIType.UITaskGet);
-                ////TaskHelper.IsTaskGivePet();
-
-                //PetComponent petComponent = self.ZoneScene().GetComponent<PetComponent>();
-                //TaskPro taskPro = self.ZoneScene().GetComponent<TaskComponent>().GetTaskById(self.TaskId);
-                //for ( int i = 0; i < petComponent.RolePetInfos.Count; i++ )
-                //{
-                //    bool give = TaskHelper.IsTaskGivePet( self.TaskId, petComponent.RolePetInfos[i] );
-                //    if (give)
-                //    {
-                //        taskPro.taskStatus = (int)TaskStatuEnum.Completed;
-                //        self.ZoneScene().GetComponent<TaskComponent>().SendCommitTask(self.TaskId, petComponent.RolePetInfos[i].Id).Coroutine();
-                //        break;
-                //    }
-                //}
             }
             else
             {
