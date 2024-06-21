@@ -5,6 +5,16 @@ namespace ET.Client
 {
     public static partial class UnitHelper
     {
+        public static int GetMaxPiLao(this Unit self)
+        {
+            return int.Parse(GlobalValueConfigCategory.Instance.Get(self.IsYueKaStates()? 26 : 10).Value);
+        }
+
+        public static bool IsYueKaStates(this Unit self)
+        {
+            return self.GetComponent<NumericComponentC>().GetAsInt(NumericType.YueKaRemainTimes) > 0;
+        }
+
         public static int GetMaoXianExp(this Unit self)
         {
             int rechargeNum = self.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber);

@@ -99,6 +99,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof (ES_RoleHead))]
     [FriendOf(typeof (ES_ButtonPositionSet))]
     [FriendOf(typeof (DlgMainViewComponent))]
     [FriendOf(typeof (ES_JoystickMove))]
@@ -176,8 +177,6 @@ namespace ET.Client
             self.View.E_Btn_RerurnDungeonButton.AddListener(self.OnBtn_RerurnDungeon);
             self.View.E_Btn_RerurnBuildingButton.AddListener(self.OnClickReturnButton);
 
-            self.View.E_SetButton.AddListener(self.OnSetButton);
-
             self.View.E_Btn_StopGuaJiButton.AddListener(self.OnStopGuaJi);
 
             self.View.E_MainTaskItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainTaskItemsRefresh);
@@ -188,11 +187,12 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgMain self, Entity contextData = null)
         {
+            self.View.ES_RoleHead.uiTransform.gameObject.SetActive(true);
+
             self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
 
             self.OnSettingUpdate();
 
-            self.RefreshLeftUp();
             self.AfterEnterScene(SceneTypeEnum.MainCityScene);
 
             // IOS适配
@@ -385,41 +385,6 @@ namespace ET.Client
             }
 
             flyTipComponent.SpawnFlyTipDi(fubenName);
-        }
-
-        #endregion
-
-        #region 左上角信息
-
-        private static void OnSetButton(this DlgMain self)
-        {
-            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Setting).Coroutine();
-        }
-
-        private static void RefreshLeftUp(this DlgMain self)
-        {
-            UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            NumericComponentC numericComponentC = unit.GetComponent<NumericComponentC>();
-
-            self.View.E_PlayerHeadIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
-                    .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, userInfoComponentC.UserInfo.Occ.ToString()));
-
-            self.View.E_RoleNameText.text = userInfoComponentC.UserInfo.Name;
-            self.View.E_RoleLvText.text = "等级:" + userInfoComponentC.UserInfo.Lv;
-
-            int maxPiLao = int.Parse(GlobalValueConfigCategory.Instance
-                    .Get(numericComponentC.GetAsInt(NumericType.YueKaRemainTimes) > 0? 26 : 10).Value);
-            self.View.E_RolePiLaoText.text = "体力:" + userInfoComponentC.UserInfo.PiLao + "/" + maxPiLao;
-            self.View.E_RolePiLaoImgImage.fillAmount = 1f * userInfoComponentC.UserInfo.PiLao / maxPiLao;
-
-            int skillNumber = 1 + numericComponentC.GetAsInt(NumericType.MakeType_2) > 0? 1 : 0;
-            int maxHuoLi = unit.GetMaxHuoLi(skillNumber);
-            self.View.E_RoleHuoLiText.text = "活力:" + userInfoComponentC.UserInfo.Vitality + "/" + maxHuoLi;
-            self.View.E_RoleHuoLiImgImage.fillAmount = 1f * userInfoComponentC.UserInfo.Vitality / maxHuoLi;
-
-            // self.View.E_ServerNameText.text = ServerHelper.GetGetServerItem(!GlobalHelp.IsOutNetMode, accountInfoComponent.ServerId).ServerName;
-            self.View.E_CombatText.text = $"战力: {userInfoComponentC.UserInfo.Combat}";
         }
 
         #endregion
@@ -1060,12 +1025,14 @@ namespace ET.Client
             switch (userDataType)
             {
                 case UserDataType.Exp:
+                    self.View.ES_RoleHead.UpdateShowRoleExp();
                     break;
                 case UserDataType.PiLao:
+                    self.View.ES_RoleHead.UpdateShowRolePiLao();
                     break;
                 case UserDataType.Lv:
                     // self.UpdateShowRoleExp();
-                    // self.UIRoleHead.UpdateShowRoleExp();
+                    self.View.ES_RoleHead.UpdateShowRoleExp();
                     // self.CheckFuntionButtonByLv(int.Parse(updateValue));
                     // FunctionEffect.PlaySelfEffect(self.MainUnit, 60000002);
                     // self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.LevelUp, userInfo.Lv.ToString());
@@ -1079,10 +1046,10 @@ namespace ET.Client
 
                     break;
                 case UserDataType.Name:
-                    // self.UIRoleHead.UpdateShowRoleName();
+                    self.View.ES_RoleHead.UpdateShowRoleName();
                     break;
                 case UserDataType.Vitality:
-                    // self.UIRoleHead.UpdateShowRoleHuoLi();
+                    self.View.ES_RoleHead.UpdateShowRoleHuoLi();
                     break;
 
                 case UserDataType.UnionContri:
@@ -1160,7 +1127,7 @@ namespace ET.Client
                     break;
 
                 case UserDataType.Combat:
-                    // self.OnUpdateCombat();
+                    self.View.ES_RoleHead.OnUpdateCombat();
                     //
                     // UI ui = UIHelper.GetUI(self.ZoneScene(), UIType.UIRole);
                     // if (ui != null)

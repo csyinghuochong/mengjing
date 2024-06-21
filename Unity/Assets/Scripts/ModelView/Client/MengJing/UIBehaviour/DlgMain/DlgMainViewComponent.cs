@@ -50,7 +50,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_buttonpositionset ==null)
+     			if( this.m_es_buttonpositionset == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ButtonPositionSet");
 		    	   this.m_es_buttonpositionset = this.AddChild<ES_ButtonPositionSet,Transform>(subTrans);
@@ -68,7 +68,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_joystickmove ==null)
+     			if( this.m_es_joystickmove == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_JoystickMove");
 		    	   this.m_es_joystickmove = this.AddChild<ES_JoystickMove,Transform>(subTrans);
@@ -77,7 +77,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_LeftUpSetRectTransform
+		public ES_RoleHead ES_RoleHead
      	{
      		get
      		{
@@ -86,215 +86,12 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_EG_LeftUpSetRectTransform == null )
+     			if( this.m_es_rolehead == null )
      			{
-		    		this.m_EG_LeftUpSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_LeftUpSet");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RoleHead");
+		    	   this.m_es_rolehead = this.AddChild<ES_RoleHead,Transform>(subTrans);
      			}
-     			return this.m_EG_LeftUpSetRectTransform;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_RolePiLaoImgImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_RolePiLaoImgImage == null )
-     			{
-		    		this.m_E_RolePiLaoImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LeftUpSet/E_RolePiLaoImg");
-     			}
-     			return this.m_E_RolePiLaoImgImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_RoleHuoLiImgImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_RoleHuoLiImgImage == null )
-     			{
-		    		this.m_E_RoleHuoLiImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LeftUpSet/E_RoleHuoLiImg");
-     			}
-     			return this.m_E_RoleHuoLiImgImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_PlayerHeadIconImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_PlayerHeadIconImage == null )
-     			{
-		    		this.m_E_PlayerHeadIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LeftUpSet/E_PlayerHeadIcon");
-     			}
-     			return this.m_E_PlayerHeadIconImage;
-     		}
-     	}
-
-		public UnityEngine.UI.Button E_SetButton
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_SetButton == null )
-     			{
-		    		this.m_E_SetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_LeftUpSet/E_Set");
-     			}
-     			return this.m_E_SetButton;
-     		}
-     	}
-
-		public UnityEngine.UI.Image E_SetImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_SetImage == null )
-     			{
-		    		this.m_E_SetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_LeftUpSet/E_Set");
-     			}
-     			return this.m_E_SetImage;
-     		}
-     	}
-
-		public UnityEngine.RectTransform EG_PetIconSetRectTransform
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_EG_PetIconSetRectTransform == null )
-     			{
-		    		this.m_EG_PetIconSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_LeftUpSet/EG_PetIconSet");
-     			}
-     			return this.m_EG_PetIconSetRectTransform;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_RoleHuoLiText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_RoleHuoLiText == null )
-     			{
-		    		this.m_E_RoleHuoLiText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LeftUpSet/E_RoleHuoLi");
-     			}
-     			return this.m_E_RoleHuoLiText;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_ServerNameText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_ServerNameText == null )
-     			{
-		    		this.m_E_ServerNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LeftUpSet/E_ServerName");
-     			}
-     			return this.m_E_ServerNameText;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_RoleLvText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_RoleLvText == null )
-     			{
-		    		this.m_E_RoleLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LeftUpSet/E_RoleLv");
-     			}
-     			return this.m_E_RoleLvText;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_RoleNameText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_RoleNameText == null )
-     			{
-		    		this.m_E_RoleNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LeftUpSet/E_RoleName");
-     			}
-     			return this.m_E_RoleNameText;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_RolePiLaoText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_RolePiLaoText == null )
-     			{
-		    		this.m_E_RolePiLaoText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LeftUpSet/E_RolePiLao");
-     			}
-     			return this.m_E_RolePiLaoText;
-     		}
-     	}
-
-		public UnityEngine.UI.Text E_CombatText
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_CombatText == null )
-     			{
-		    		this.m_E_CombatText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_LeftUpSet/E_Combat");
-     			}
-     			return this.m_E_CombatText;
+     			return this.m_es_rolehead;
      		}
      	}
 
@@ -919,7 +716,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_mapmini==null )
+     			if( this.m_es_mapmini == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_RightSet/ES_MapMini");
 		    	   this.m_es_mapmini = this.AddChild<ES_MapMini,Transform>(subTrans);
@@ -2348,7 +2145,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_mainskill==null )
+     			if( this.m_es_mainskill == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_RightSet/ES_MainSkill");
 		    	   this.m_es_mainskill = this.AddChild<ES_MainSkill,Transform>(subTrans);
@@ -2431,19 +2228,7 @@ namespace ET.Client
 			this.m_E_DragPanelEventTrigger = null;
 			this.m_es_buttonpositionset = null;
 			this.m_es_joystickmove = null;
-			this.m_EG_LeftUpSetRectTransform = null;
-			this.m_E_RolePiLaoImgImage = null;
-			this.m_E_RoleHuoLiImgImage = null;
-			this.m_E_PlayerHeadIconImage = null;
-			this.m_E_SetButton = null;
-			this.m_E_SetImage = null;
-			this.m_EG_PetIconSetRectTransform = null;
-			this.m_E_RoleHuoLiText = null;
-			this.m_E_ServerNameText = null;
-			this.m_E_RoleLvText = null;
-			this.m_E_RoleNameText = null;
-			this.m_E_RolePiLaoText = null;
-			this.m_E_CombatText = null;
+			this.m_es_rolehead = null;
 			this.m_EG_PhoneLeftRectTransform = null;
 			this.m_EG_MainTaskRectTransform = null;
 			this.m_E_RoseTaskButton = null;
@@ -2576,19 +2361,7 @@ namespace ET.Client
 		private UnityEngine.EventSystems.EventTrigger m_E_DragPanelEventTrigger = null;
 		private EntityRef<ES_ButtonPositionSet> m_es_buttonpositionset = null;
 		private EntityRef<ES_JoystickMove> m_es_joystickmove = null;
-		private UnityEngine.RectTransform m_EG_LeftUpSetRectTransform = null;
-		private UnityEngine.UI.Image m_E_RolePiLaoImgImage = null;
-		private UnityEngine.UI.Image m_E_RoleHuoLiImgImage = null;
-		private UnityEngine.UI.Image m_E_PlayerHeadIconImage = null;
-		private UnityEngine.UI.Button m_E_SetButton = null;
-		private UnityEngine.UI.Image m_E_SetImage = null;
-		private UnityEngine.RectTransform m_EG_PetIconSetRectTransform = null;
-		private UnityEngine.UI.Text m_E_RoleHuoLiText = null;
-		private UnityEngine.UI.Text m_E_ServerNameText = null;
-		private UnityEngine.UI.Text m_E_RoleLvText = null;
-		private UnityEngine.UI.Text m_E_RoleNameText = null;
-		private UnityEngine.UI.Text m_E_RolePiLaoText = null;
-		private UnityEngine.UI.Text m_E_CombatText = null;
+		private EntityRef<ES_RoleHead> m_es_rolehead = null;
 		private UnityEngine.RectTransform m_EG_PhoneLeftRectTransform = null;
 		private UnityEngine.RectTransform m_EG_MainTaskRectTransform = null;
 		private UnityEngine.UI.Button m_E_RoseTaskButton = null;
