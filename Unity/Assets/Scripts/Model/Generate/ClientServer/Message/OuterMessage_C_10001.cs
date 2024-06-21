@@ -27282,6 +27282,64 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(Popularize2C_RewardResponse))]
+//我的推广奖励
+	[Message(OuterMessage.C2Popularize_RewardRequest)]
+	[MemoryPackable]
+	public partial class C2Popularize_RewardRequest: MessageObject, IPopularizeActorRequest
+	{
+		public static C2Popularize_RewardRequest Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2Popularize_RewardRequest), isFromPool) as C2Popularize_RewardRequest; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(92)]
+		public long ActorId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.ActorId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.Popularize2C_RewardResponse)]
+	[MemoryPackable]
+	public partial class Popularize2C_RewardResponse: MessageObject, IPopularizeActorResponse
+	{
+		public static Popularize2C_RewardResponse Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(Popularize2C_RewardResponse), isFromPool) as Popularize2C_RewardResponse; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(91)]
+		public int Error { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Message = default;
+			this.Error = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -28093,5 +28151,7 @@ namespace ET
 		 public const ushort M2C_YueKaRewardResponse = 10808;
 		 public const ushort C2Popularize_UploadRequest = 10809;
 		 public const ushort Popularize2C_UploadResponse = 10810;
+		 public const ushort C2Popularize_RewardRequest = 10811;
+		 public const ushort Popularize2C_RewardResponse = 10812;
 	}
 }

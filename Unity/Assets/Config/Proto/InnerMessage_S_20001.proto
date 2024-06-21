@@ -1698,21 +1698,6 @@ message M2Popularize_RewardResponse // IResponse
 	int32 Error = 92;
 }
 
-//ResponseType Popularize2C_RewardResponse
-//我的推广奖励
-message C2Popularize_RewardRequest // IPopularizeActorRequest
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-}
-
-message Popularize2C_RewardResponse // IPopularizeActorResponse
-{
-	int32 RpcId = 90;
-	string Message = 91;
-	int32 Error = 92;
-}
-
 //ResponseType R2A_DeleteRoleData
 message A2R_DeleteRoleData // IRequest
 {
