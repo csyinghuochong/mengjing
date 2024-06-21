@@ -114,17 +114,17 @@ namespace ET
             {
                 //string hostServerIP = "http://10.0.2.2"; //安卓模拟器地址
                 string hostServerIP = "http://47.94.107.92";
-                string appVersion = "2024-06-19-1038";
+                //string appVersion = "2024-06-21-682";
 
 #if UNITY_EDITOR
                 if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.Android)
-                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/Android/{appVersion}";
+                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/Android";
                 else if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.iOS)
-                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/IPhone/{appVersion}";
+                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/IPhone";
                 else if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.WebGL)
-                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/WebGL/{appVersion}";
+                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/WebGL";
                 else
-                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/PC/{appVersion}";
+                    return $"{hostServerIP}/weijing1/DLCBeta/MJ/PC";
 #else
 		        if (Application.platform == RuntimePlatform.Android)
 		        	return $"{hostServerIP}/weijing1/DLCBeta/MJ/Android/{appVersion}";
