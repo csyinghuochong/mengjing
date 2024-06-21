@@ -12,14 +12,6 @@ namespace ET.Client
         public int Occ;
     }
 
-    public struct BagItemUpdate
-    {
-    }
-
-    public struct BagItemItemAdd
-    {
-    }
-
     public struct ShowFlyTip
     {
         public int Type;
@@ -31,11 +23,24 @@ namespace ET.Client
         public TaskPro TaskPro;
     }
 
+    public struct DataUpdate_UpdateUserData
+    {
+        public string DataParamString;
+    }
+
     public struct UserDataTypeUpdate_Gold
     {
     }
 
     public struct UserDataTypeUpdate_Diamond
+    {
+    }
+
+    public struct DataUpdate_BagItemUpdate
+    {
+    }
+
+    public struct DataUpdate_BagItemItemAdd
     {
     }
 

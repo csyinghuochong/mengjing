@@ -281,5 +281,19 @@ namespace ET.Client
                     (M2C_ActivityRechargeSignResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<int> LeavlRewardRequest(Scene root, int lvKey, int index)
+        {
+            C2M_LeavlRewardRequest request = new() { LvKey = lvKey, Index = index };
+            M2C_LeavlRewardResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_LeavlRewardResponse;
+            return response.Error;
+        }
+
+        public static async ETTask<int> KillMonsterRewardRequest(Scene root, int key, int index)
+        {
+            C2M_KillMonsterRewardRequest request = new() { Key = key, Index = index };
+            M2C_KillMonsterRewardResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_KillMonsterRewardResponse;
+            return response.Error;
+        }
     }
 }

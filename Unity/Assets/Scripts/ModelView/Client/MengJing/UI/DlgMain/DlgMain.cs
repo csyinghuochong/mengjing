@@ -27,5 +27,7 @@ namespace ET.Client
         public Dictionary<int, Scroll_Item_MainChatItem> ScrollItemMainChatItems;
 
         public long TimerPing;
+        public int KillMonsterRewardKey;
+        public int LevelRewardKey;
     }
 }

@@ -12,28 +12,22 @@
 
             switch (message.UpdateType)
             {
-                //更新角色名称
                 case (int)UserDataType.Name:
                     userInfo.Name = message.UpdateTypeValue;
                     updateValue = message.UpdateTypeValue;
                     break;
-                //一次性技能
                 case UserDataType.BuffSkill:
                     // HintHelp.GetInstance().DataUpdate(DataType.UpdateUserBuffSkill, "", message.UpdateValueLong);
                     updateValue = string.Empty;
                     break;
-                //更新经验值
                 case (int)UserDataType.Exp:
-                    //updateValue = (long.Parse(message.UpdateTypeValue) - userInfo.Exp).ToString();
                     long curExp = message.UpdateValueLong;
                     longValue = curExp - userInfo.Exp;
                     userInfo.Exp = curExp;
                     // HintHelp.GetInstance().DataUpdate(DataType.UpdateUserDataExp, "", longValue);
                     updateValue = string.Empty;
                     break;
-                //更新疲劳
                 case (int)UserDataType.PiLao:
-                    //updateValue = (long.Parse(message.UpdateTypeValue) - userInfo.PiLao).ToString();
                     long curpilao = long.Parse(message.UpdateTypeValue);
                     longValue = curpilao - userInfo.PiLao;
                     userInfo.PiLao = curpilao;
@@ -50,11 +44,9 @@
                 case (int)UserDataType.SeasonCoin:
                     userInfo.SeasonCoin = int.Parse(message.UpdateTypeValue);
                     break;
-                //更新等级
                 case (int)UserDataType.Lv:
                     userInfo.Lv = int.Parse(message.UpdateTypeValue);
                     break;
-                //更新金币
                 case (int)UserDataType.Gold:
                     updateValue = (long.Parse(message.UpdateTypeValue) - userInfo.Gold).ToString();
                     userInfo.Gold = long.Parse(message.UpdateTypeValue);
@@ -65,7 +57,6 @@
                     updateValue = (long.Parse(message.UpdateTypeValue) - userInfo.RongYu).ToString();
                     userInfo.RongYu = long.Parse(message.UpdateTypeValue);
                     break;
-                //更新钻石
                 case (int)UserDataType.Diamond:
                     updateValue = (long.Parse(message.UpdateTypeValue) - userInfo.Diamond).ToString();
                     userInfo.Diamond = long.Parse(message.UpdateTypeValue);
@@ -126,7 +117,7 @@
             //更新比较频繁的单独处理
             if (!string.IsNullOrEmpty(updateValue))
             {
-                // HintHelp.GetInstance().DataUpdate(DataType.UpdateUserData, $"{message.UpdateType}_{updateValue}");
+                EventSystem.Instance.Publish(root, new DataUpdate_UpdateUserData() { DataParamString = $"{message.UpdateType}_{updateValue}" });
             }
 
             await ETTask.CompletedTask;

@@ -7,9 +7,9 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class BagItemUpdate_DlgWarehouseRefresh: AEvent<Scene, BagItemUpdate>
+    public class BagItemUpdate_DlgWarehouseRefresh: AEvent<Scene, DataUpdate_BagItemUpdate>
     {
-        protected override async ETTask Run(Scene scene, BagItemUpdate args)
+        protected override async ETTask Run(Scene scene, DataUpdate_BagItemUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgWarehouse>()?.View.ES_WarehouseRole?.Refresh();
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgWarehouse>()?.View.ES_WarehouseGem?.Refresh();

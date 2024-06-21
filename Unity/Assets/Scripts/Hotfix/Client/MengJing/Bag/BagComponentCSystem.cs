@@ -92,7 +92,7 @@ namespace ET.Client
         {
             List<BagInfo> ItemTypeList = self.GetItemsByLoc(itemEquipType);
             ItemHelper.ItemLitSort(ItemTypeList);
-            EventSystem.Instance.Publish(self.Root(), new BagItemUpdate());
+            EventSystem.Instance.Publish(self.Root(), new DataUpdate_BagItemUpdate());
         }
 
         public static void OnRecvBagUpdate(this BagComponentC self, M2C_RoleBagUpdate message)
@@ -188,7 +188,7 @@ namespace ET.Client
                 }
             }
 
-            EventSystem.Instance.Publish(self.Root(), new BagItemUpdate());
+            EventSystem.Instance.Publish(self.Root(), new DataUpdate_BagItemUpdate());
         }
 
         private static void ShowGetItemTip(this BagComponentC self, BagInfo bagInfo, int addNum)

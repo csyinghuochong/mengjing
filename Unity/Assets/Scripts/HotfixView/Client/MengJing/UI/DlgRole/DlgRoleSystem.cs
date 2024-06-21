@@ -7,9 +7,9 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class BagItemUpdate_DlgRoleAndBagRefresh: AEvent<Scene, BagItemUpdate>
+    public class BagItemUpdate_DlgRoleAndBagRefresh: AEvent<Scene, DataUpdate_BagItemUpdate>
     {
-        protected override async ETTask Run(Scene scene, BagItemUpdate args)
+        protected override async ETTask Run(Scene scene, DataUpdate_BagItemUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.Refresh();
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleBag?.RefreshBagItems();

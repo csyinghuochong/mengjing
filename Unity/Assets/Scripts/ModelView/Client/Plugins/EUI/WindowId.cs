@@ -119,5 +119,6 @@ namespace ET.Client
 		WindowID_Country,
 		WindowID_CountryHuoDongJieShao,
 		WindowID_Recharge,
+		WindowID_SelectReward,
 	}
 }

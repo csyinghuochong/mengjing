@@ -7,6 +7,25 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [NumericWatcher(SceneType.Demo, NumericType.KillMonsterNumber)]
+    public class NumericWatcher_KillMonsterNumber_UpdateDlgMain: INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+            unit.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.UpdateKillMonsterReward();
+        }
+    }
+
+    [Event(SceneType.Demo)]
+    public class DataUpdate_UpdateUserData_Refresh: AEvent<Scene, DataUpdate_UpdateUserData>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_UpdateUserData args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnUpdateUserData(args.DataParamString);
+            await ETTask.CompletedTask;
+        }
+    }
+
     [Event(SceneType.Demo)]
     public class DataUpdate_SettingUpdate_Refresh: AEvent<Scene, DataUpdate_SettingUpdate>
     {
@@ -148,8 +167,10 @@ namespace ET.Client
             self.View.E_Button_WorldLvButton.AddListener(self.OnButton_WorldLv);
             self.View.E_Btn_PaiMaiHangButton.AddListener(self.OnBtn_PaiMaiHang);
 
-            // self.View.EG_Btn_KillMonsterRewardRectTransform
-            // self.View.EG_Btn_LvRewardRectTransform
+            self.View.EG_Btn_KillMonsterRewardRectTransform.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemButton")
+                    .GetComponent<Button>().AddListenerAsync(self.OnBtn_KillMonsterReward);
+            self.View.EG_Btn_LvRewardRectTransform.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemButton")
+                    .GetComponent<Button>().AddListenerAsync(self.OnBtn_LvReward);
             self.View.E_MailHintTipButton.AddListener(self.OnMailHintTip);
             self.View.E_E_Btn_MapTransferButton.AddListener(() => { self.OnBtn_MapTransfer().Coroutine(); });
             self.View.E_Btn_RerurnDungeonButton.AddListener(self.OnBtn_RerurnDungeon);
@@ -677,6 +698,233 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PaiMai).Coroutine();
         }
 
+        public static void UpdateKillMonsterReward(this DlgMain self)
+        {
+            if (self.MainUnit == null)
+            {
+                return;
+            }
+
+            NumericComponentC numericComponent = self.MainUnit.GetComponent<NumericComponentC>();
+            int oldNum = numericComponent.GetAsInt(NumericType.KillMonsterReward);
+            int newNum = int.MaxValue;
+            bool flag = false;
+            foreach (int key in ConfigData.KillMonsterReward.Keys)
+            {
+                if (key > oldNum)
+                {
+                    newNum = Math.Min(key, newNum);
+                    flag = true;
+                }
+            }
+
+            if (flag)
+            {
+                self.KillMonsterRewardKey = newNum;
+
+                string[] occItems = ConfigData.KillMonsterReward[self.KillMonsterRewardKey].Split('&');
+                string[] items;
+                if (occItems.Length == 3)
+                {
+                    UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+                    items = occItems[userInfoComponent.UserInfo.Occ - 1].Split('@');
+                }
+                else
+                {
+                    items = occItems[0].Split('@');
+                }
+
+                string[] item = items[0].Split(';');
+
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(int.Parse(item[0]));
+                ReferenceCollector rc = self.View.EG_Btn_KillMonsterRewardRectTransform.GetComponent<ReferenceCollector>();
+
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+                rc.Get<GameObject>("Image_ItemIcon").GetComponent<Image>().sprite = sp;
+
+                string qualityiconStr = FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality);
+                string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
+                Sprite sp1 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path1);
+
+                rc.Get<GameObject>("Image_ItemQuality").GetComponent<Image>().sprite = sp1;
+                rc.Get<GameObject>("Label_ItemNum").GetComponent<Text>().text = item[1];
+
+                string color = "FFFFFF";
+                if (numericComponent.GetAsInt(NumericType.KillMonsterNumber) >= newNum)
+                {
+                    color = "C4FF00";
+                }
+
+                rc.Get<GameObject>("LvText (1)").GetComponent<Text>().text = $"<color=#{color}>击败怪物</color>";
+                rc.Get<GameObject>("LvText").GetComponent<Text>().text =
+                        $"<color=#{color}>{numericComponent.GetAsInt(NumericType.KillMonsterNumber)}/{newNum}</color>";
+                self.View.EG_Btn_KillMonsterRewardRectTransform.gameObject.SetActive(true);
+            }
+            else
+            {
+                self.View.EG_Btn_KillMonsterRewardRectTransform.gameObject.SetActive(false);
+            }
+        }
+
+        private static async ETTask OnBtn_KillMonsterReward(this DlgMain self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            NumericComponentC numericComponent = self.MainUnit.GetComponent<NumericComponentC>();
+            string[] occItems = ConfigData.KillMonsterReward[self.KillMonsterRewardKey].Split('&');
+            string[] items;
+            if (occItems.Length == 3)
+            {
+                items = occItems[userInfoComponent.UserInfo.Occ - 1].Split('@');
+            }
+            else
+            {
+                items = occItems[0].Split('@');
+            }
+
+            string[] item = items[0].Split(';');
+            if (numericComponent.GetAsInt(NumericType.KillMonsterNumber) < self.KillMonsterRewardKey)
+            {
+                ShowItemTips showItemTips = new()
+                {
+                    BagInfo = new BagInfo() { ItemID = int.Parse(item[0]), ItemNum = int.Parse(item[1]) },
+                    ItemOperateEnum = ItemOperateEnum.None,
+                    InputPoint = Input.mousePosition,
+                    Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
+                    EquipList = new()
+                };
+                EventSystem.Instance.Publish(self.Root(), showItemTips);
+            }
+            else
+            {
+                if (items.Length > 1)
+                {
+                    await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SelectReward);
+                    self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgSelectReward>().UpdateInfo(self.KillMonsterRewardKey, 1);
+                }
+                else
+                {
+                    // 一个道具直接领取
+                    await ActivityNetHelper.KillMonsterRewardRequest(self.Root(), self.KillMonsterRewardKey, 0);
+
+                    if (!self.IsDisposed)
+                    {
+                        self.UpdateKillMonsterReward();
+                    }
+                }
+            }
+        }
+
+        public static void UpdateLvReward(this DlgMain self)
+        {
+            NumericComponentC numericComponent = self.MainUnit.GetComponent<NumericComponentC>();
+            int oldLv = numericComponent.GetAsInt(NumericType.LeavlReward);
+
+            int newLv = int.MaxValue;
+            bool flag = false;
+            foreach (int key in ConfigData.LeavlRewardItem.Keys)
+            {
+                if (key > oldLv)
+                {
+                    newLv = Math.Min(key, newLv);
+                    flag = true;
+                }
+            }
+
+            if (flag)
+            {
+                self.LevelRewardKey = newLv;
+
+                string[] occItems = ConfigData.LeavlRewardItem[self.LevelRewardKey].Split('&');
+                string[] items;
+                UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+                if (occItems.Length == 3)
+                {
+                    items = occItems[userInfoComponent.UserInfo.Occ - 1].Split('@');
+                }
+                else
+                {
+                    items = occItems[0].Split('@');
+                }
+
+                string[] item = items[0].Split(';');
+
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(int.Parse(item[0]));
+                ReferenceCollector rc = self.View.EG_Btn_LvRewardRectTransform.GetComponent<ReferenceCollector>();
+
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+                rc.Get<GameObject>("Image_ItemIcon").GetComponent<Image>().sprite = sp;
+
+                string qualityiconStr = FunctionUI.ItemQualiytoPath(itemConfig.ItemQuality);
+                string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, qualityiconStr);
+                Sprite sp1 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path1);
+
+                rc.Get<GameObject>("Image_ItemQuality").GetComponent<Image>().sprite = sp1;
+
+                rc.Get<GameObject>("Label_ItemNum").GetComponent<Text>().text = item[1];
+
+                string color = "FFFFFF";
+                if (userInfoComponent.UserInfo.Lv >= newLv)
+                {
+                    color = "C4FF00";
+                }
+
+                rc.Get<GameObject>("LvText (1)").GetComponent<Text>().text = $"<color=#{color}>等级奖励</color>";
+                rc.Get<GameObject>("LvText").GetComponent<Text>().text = $"<color=#{color}>{newLv}级领取</color>";
+                self.View.EG_Btn_LvRewardRectTransform.gameObject.SetActive(true);
+            }
+            else
+            {
+                self.View.EG_Btn_LvRewardRectTransform.gameObject.SetActive(false);
+            }
+        }
+
+        private static async ETTask OnBtn_LvReward(this DlgMain self)
+        {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            string[] occItems = ConfigData.LeavlRewardItem[self.LevelRewardKey].Split('&');
+            string[] items;
+            if (occItems.Length == 3)
+            {
+                items = occItems[userInfoComponent.UserInfo.Occ - 1].Split('@');
+            }
+            else
+            {
+                items = occItems[0].Split('@');
+            }
+
+            string[] item = items[0].Split(';');
+            if (userInfoComponent.UserInfo.Lv < self.LevelRewardKey)
+            {
+                ShowItemTips showItemTips = new()
+                {
+                    BagInfo = new BagInfo() { ItemID = int.Parse(item[0]), ItemNum = int.Parse(item[1]) },
+                    ItemOperateEnum = ItemOperateEnum.None,
+                    InputPoint = Input.mousePosition,
+                    Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
+                    EquipList = new()
+                };
+                EventSystem.Instance.Publish(self.Root(), showItemTips);
+            }
+            else
+            {
+                if (items.Length > 1)
+                {
+                    await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SelectReward);
+                    self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgSelectReward>().UpdateInfo(self.LevelRewardKey, 0);
+                }
+                else
+                {
+                    // 一个道具直接领取
+                    await ActivityNetHelper.LeavlRewardRequest(self.Root(), self.LevelRewardKey, 0);
+                    self.UpdateLvReward();
+                }
+            }
+        }
+
         private static void OnMailHintTip(this DlgMain self)
         {
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
@@ -796,7 +1044,145 @@ namespace ET.Client
 
             self.View.ES_MapMini.OnEnterScene();
 
+            self.UpdateKillMonsterReward();
+            self.UpdateLvReward();
+
             self.CheckMailReddot().Coroutine();
+        }
+
+        public static void OnUpdateUserData(this DlgMain self, string updateType)
+        {
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            int userDataType = int.Parse(updateType.Split('_')[0]);
+
+            string updateValue = updateType.Split('_')[1];
+
+            switch (userDataType)
+            {
+                case UserDataType.Exp:
+                    break;
+                case UserDataType.PiLao:
+                    break;
+                case UserDataType.Lv:
+                    // self.UpdateShowRoleExp();
+                    // self.UIRoleHead.UpdateShowRoleExp();
+                    // self.CheckFuntionButtonByLv(int.Parse(updateValue));
+                    // FunctionEffect.PlaySelfEffect(self.MainUnit, 60000002);
+                    // self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.LevelUp, userInfo.Lv.ToString());
+                    // FlyTipComponent.Instance.SpawnFlyTipDi(GameSettingLanguge.LoadLocalization("恭喜你!等级提升至:") + userInfo.Lv);
+                    self.UpdateLvReward();
+                    // self.CheckCanEquip().Coroutine();
+                    // if (int.Parse(updateValue) > 30)
+                    // {
+                    //     self.UpdateTaskList().Coroutine();
+                    // }
+
+                    break;
+                case UserDataType.Name:
+                    // self.UIRoleHead.UpdateShowRoleName();
+                    break;
+                case UserDataType.Vitality:
+                    // self.UIRoleHead.UpdateShowRoleHuoLi();
+                    break;
+
+                case UserDataType.UnionContri:
+                    // if (UIHelper.GetUI(self.ZoneScene(), UIType.UITreasureOpen) != null)
+                    // {
+                    //     return;
+                    // }
+                    //
+                    // if (int.Parse(updateValue) > 0)
+                    // {
+                    //     FloatTipManager.Instance.ShowFloatTip($"获得{updateValue} 家族捐献");
+                    // }
+                    //
+                    // if (int.Parse(updateValue) < 0)
+                    // {
+                    //     FloatTipManager.Instance.ShowFloatTip($"消耗{int.Parse(updateValue) * -1} 家族捐献");
+                    // }
+
+                    break;
+
+                case UserDataType.Gold:
+                    // if (UIHelper.GetUI(self.ZoneScene(), UIType.UITreasureOpen) != null)
+                    // {
+                    //     return;
+                    // }
+                    //
+                    // if (int.Parse(updateValue) > 0)
+                    // {
+                    //     FloatTipManager.Instance.ShowFloatTip($"获得{updateValue} 金币");
+                    // }
+                    //
+                    // if (int.Parse(updateValue) < 0)
+                    // {
+                    //     FloatTipManager.Instance.ShowFloatTip($"消耗{int.Parse(updateValue) * -1} 金币");
+                    // }
+
+                    break;
+                case UserDataType.WeiJingGold:
+                    // if (int.Parse(updateValue) > 0)
+                    // {
+                    //     FloatTipManager.Instance.ShowFloatTip($"获得{updateValue} 兑换币");
+                    // }
+                    //
+                    // if (int.Parse(updateValue) < 0)
+                    // {
+                    //     FloatTipManager.Instance.ShowFloatTip($"消耗{int.Parse(updateValue) * -1} 兑换币");
+                    // }
+
+                    break;
+                case UserDataType.RongYu:
+                    // if (int.Parse(updateValue) > 0)
+                    // {
+                    //     FloatTipManager.Instance.ShowFloatTip($"获得{updateValue} 荣誉");
+                    // }
+                    //
+                    // if (int.Parse(updateValue) < 0)
+                    // {
+                    //     FloatTipManager.Instance.ShowFloatTip($"消耗{int.Parse(updateValue) * -1} 荣誉");
+                    // }
+
+                    break;
+                case UserDataType.JiaYuanFund:
+                    // if (int.Parse(updateValue) > 0)
+                    // {
+                    //     FloatTipManager.Instance.ShowFloatTip($"获得{updateValue} 家园资金");
+                    // }
+
+                    break;
+                case UserDataType.BaoShiDu:
+                    // if (int.Parse(updateValue) > 0)
+                    // {
+                    //     FloatTipManager.Instance.ShowFloatTip($"获得{updateValue} 饱食度");
+                    // }
+
+                    break;
+
+                case UserDataType.Combat:
+                    // self.OnUpdateCombat();
+                    //
+                    // UI ui = UIHelper.GetUI(self.ZoneScene(), UIType.UIRole);
+                    // if (ui != null)
+                    // {
+                    //     ui.GetComponent<UIRoleComponent>().UpdateShowComBat();
+                    // }
+
+                    break;
+                case UserDataType.Sp:
+                    // ReddotComponent reddotComponent = self.ZoneScene().GetComponent<ReddotComponent>();
+                    // reddotComponent.UpdateReddont(ReddotType.SkillUp);
+                    break;
+                case UserDataType.Message:
+                    // PopupTipHelp.OpenPopupTip_2(self.ZoneScene(), "系统消息", updateValue, null).Coroutine();
+                    break;
+                case UserDataType.PullBack:
+                    // FloatTipManager.Instance.ShowFloatTip("所有人不要乱跑哦");
+                    // FunctionEffect.GetInstance().PlaySelfEffect(self.MainUnit, 30000002);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private static async ETTask CheckMailReddot(this DlgMain self)
