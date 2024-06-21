@@ -71,8 +71,7 @@ namespace ET.Client
 
         public static void OnButtonGoToPay(this DlgRechargeReward self)
         {
-            FlyTipComponent.Instance.SpawnFlyTip("氪金界面暂未开放");
-            // self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Recharge).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Recharge).Coroutine();
         }
 
         public static void UpdateUI(this DlgRechargeReward self, int page)

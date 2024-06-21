@@ -34,8 +34,7 @@ namespace ET.Client
 
         public static void OnBtn_GoPay(this ES_ActivityToken self)
         {
-            FlyTipComponent.Instance.SpawnFlyTipDi("氪金界面暂未开放");
-            // UIHelper.Create(self.ZoneScene(), UIType.UIRecharge).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Recharge).Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Activity);
         }
 

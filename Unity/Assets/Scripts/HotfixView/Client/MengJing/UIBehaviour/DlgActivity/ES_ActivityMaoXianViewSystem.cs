@@ -29,8 +29,7 @@ namespace ET.Client
 
         public static void OnBtn_GoToSupport(this ES_ActivityMaoXian self)
         {
-            FlyTipComponent.Instance.SpawnFlyTipDi("氪金界面暂未开放");
-            // UIHelper.Create(self.ZoneScene(), UIType.UIRecharge).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Recharge).Coroutine();
         }
 
         public static async ETTask OnBtn_GetReward(this ES_ActivityMaoXian self)

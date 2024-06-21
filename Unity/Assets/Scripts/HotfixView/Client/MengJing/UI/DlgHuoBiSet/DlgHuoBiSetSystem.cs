@@ -47,12 +47,22 @@ namespace ET.Client
 
         private static void OnAddGoldButton(this DlgHuoBiSet self)
         {
-            FlyTipComponent.Instance.SpawnFlyTipDi("氪金界面暂未开放");
+            if (self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRecharge>() != null)
+            {
+                return;
+            }
+
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Recharge).Coroutine();
         }
 
         private static void OnAddZuanShiButton(this DlgHuoBiSet self)
         {
-            FlyTipComponent.Instance.SpawnFlyTipDi("氪金界面暂未开放");
+            if (self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPaiMai>() != null)
+            {
+                return;
+            }
+
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Recharge).Coroutine();
         }
 
         public static void Refresh(this DlgHuoBiSet self)
@@ -88,7 +98,6 @@ namespace ET.Client
 
         public static void OnUpdateTitle(this DlgHuoBiSet self, WindowID windowID)
         {
-            
             // string[] paths = uiType.Split('/');
             // string titlePath = paths[paths.Length - 1];
             // if (uiType.Contains("UITeamDungeon"))
