@@ -1047,36 +1047,36 @@ namespace ET.Client
             self.RecoverGameObject();
             self.Material = null;
             Unit unit = self.GetParent<Unit>();
-            // if (remove)
-            // {
-            //     unit.RemoveComponent<ChangeEquipComponent>();
-            //     unit.RemoveComponent<HeroTransformComponent>();              //获取角色绑点组件
-            //     unit.RemoveComponent<AnimatorComponent>();
-            //     unit.RemoveComponent<FsmComponent>();                         //当前状态组建
-            //     unit.RemoveComponent<EffectViewComponent>();               //添加特效组建
-            //     unit.RemoveComponent<SkillYujingComponent>();
-            //     unit.RemoveComponent<UIUnitHpComponent>();
-            // }
-            //
-            // if (runraceid > 0 || cardmonsterid > 0)
-            // {
-            //     int monsterid = runraceid > 0 ? runraceid : cardmonsterid;  
-            //     MonsterConfig runmonsterCof = MonsterConfigCategory.Instance.Get(monsterid);
-            //     string path = ABPathHelper.GetUnitPath("Monster/" + runmonsterCof.MonsterModelID);
-            //     GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
-            //     self.UnitAssetsPath = path;
-            // }
-            // else
-            // {
-            //     string path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(self.GetParent<Unit>().ConfigId).ModelAsset}");
-            //     GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
-            //     self.UnitAssetsPath = string.Empty;
-            // }
+            if (remove)
+            {
+                unit.RemoveComponent<ChangeEquipComponent>();
+                unit.RemoveComponent<HeroTransformComponent>();              //获取角色绑点组件
+                unit.RemoveComponent<AnimatorComponent>();
+                unit.RemoveComponent<FsmComponent>();                         //当前状态组建
+                unit.RemoveComponent<EffectViewComponent>();               //添加特效组建
+                unit.RemoveComponent<SkillYujingComponent>();
+                unit.RemoveComponent<UIPlayerHpComponent>();
+            }
+            
+            if (runraceid > 0 || cardmonsterid > 0)
+            {
+                int monsterid = runraceid > 0 ? runraceid : cardmonsterid;  
+                MonsterConfig runmonsterCof = MonsterConfigCategory.Instance.Get(monsterid);
+                string path = ABPathHelper.GetUnitPath("Monster/" + runmonsterCof.MonsterModelID);
+                GameObjectLoadHelper.AddLoadQueue(self.Root(), path, self.InstanceId, self.OnLoadGameObject);
+                self.UnitAssetsPath = path;
+            }
+            else
+            {
+                string path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(self.GetParent<Unit>().ConfigId).ModelAsset}");
+                GameObjectLoadHelper.AddLoadQueue(self.Root(), path, self.InstanceId, self.OnLoadGameObject);
+                self.UnitAssetsPath = string.Empty;
+            }
             if (unit.MainHero)
             {
                 self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnTransform(runraceid, cardmonsterid);
             }
-            // self.BianShenEffect = unit.MainHero && remove;
+            self.BianShenEffect = unit.MainHero && remove;
         }
 
         public static void OnUnitStallUpdate(this GameObjectComponent self, long stallType)
