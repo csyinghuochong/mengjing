@@ -15,6 +15,8 @@ namespace ET.Server
             root.AddComponent<MessageSender>();
             root.AddComponent<LocationManagerComoponent>();
 
+            root.AddComponent<JiaYuanSceneComponent>();
+
             await ETTask.CompletedTask;
         }
     }
