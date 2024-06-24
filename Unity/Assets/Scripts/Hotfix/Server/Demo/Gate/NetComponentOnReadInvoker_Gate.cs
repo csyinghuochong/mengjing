@@ -116,6 +116,12 @@ namespace ET.Server
                         response = await root.GetComponent<MessageSender>().Call(unionServerID, iUnionActorRequest);
                     }
 
+                    if (actorRequest is ISoloActorRequest iSoloActorRequest)
+                    {
+                        ActorId soloServerID = player.SoloServerID;
+                        response = await root.GetComponent<MessageSender>().Call(soloServerID, iSoloActorRequest);
+                    }
+
                     if (response == null)
                     {
                         break;

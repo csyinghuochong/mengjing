@@ -35,5 +35,7 @@
         public ActorId PaiMaiServerID { get; set; }
         
         public ActorId UnionServerID { get; set; }
+
+        public ActorId SoloServerID { get; set; }
     }
 }

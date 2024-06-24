@@ -69,14 +69,8 @@ namespace ET.Client
 
         public static async ETTask OnUpdateUI(this ES_DonationShow self)
         {
-            // U2C_DonationRankListResponse response = await UnionNetHelper.DonationRankListRequest(self.Root());
-
-            // 测试数据
-            U2C_DonationRankListResponse response = new();
-            response.RankList.Add(new RankingInfo() { Combat = 300, PlayerLv = 40, PlayerName = "测试角色1", Occ = 1 });
-            response.RankList.Add(new RankingInfo() { Combat = 200, PlayerLv = 40, PlayerName = "测试角色2", Occ = 2 });
-            response.RankList.Add(new RankingInfo() { Combat = 100, PlayerLv = 40, PlayerName = "测试角色3", Occ = 1 });
-
+            U2C_DonationRankListResponse response = await UnionNetHelper.DonationRankListRequest(self.Root());
+            
             self.ShowRankingInfos = response.RankList;
 
             self.AddUIScrollItems(ref self.ScrollItemDonationShowItems, self.ShowRankingInfos.Count);
