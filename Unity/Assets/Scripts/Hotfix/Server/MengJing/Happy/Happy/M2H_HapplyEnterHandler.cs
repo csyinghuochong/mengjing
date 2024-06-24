@@ -11,6 +11,7 @@ namespace ET.Server
             HappySceneComponent happySceneComponent = scene.GetComponent<HappySceneComponent>();
            
             response.FubenInstanceId = happySceneComponent.GetFubenInstanceId(request.UnitId);
+            response.FubenActorId = new ActorId(scene.Fiber().Process, scene.Fiber().Id, response.FubenInstanceId);
 
             await ETTask.CompletedTask;
         }

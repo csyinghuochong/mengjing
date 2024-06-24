@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
+using System;
 
 namespace ET.Server
 {
@@ -7,6 +8,23 @@ namespace ET.Server
     [FriendOf(typeof (HappyDungeonComponent))]
     public static partial class HappyDungeonComponentSystem
     {
+        
+        [Invoke(TimerInvokeType.HappyDungeonTimer)]
+        public class BuffTimer: ATimer<HappyDungeonComponent>
+        {
+            protected override void Run(HappyDungeonComponent self)
+            {
+                try
+                {
+                    self.OnTimer();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+        
         [EntitySystem]
         private static void Awake(this ET.Server.HappyDungeonComponent self)
         {

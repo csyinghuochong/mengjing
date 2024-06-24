@@ -45,8 +45,7 @@ namespace ET.Server
             numericComponent.ApplyValue(NumericType.CardTransform, 0, false);
             unit.GetComponent<HeroDataComponentS>().CheckNumeric();
             Function_Fight.UnitUpdateProperty_Base(unit, false, false);
-
-              
+            
             Log.Debug($"M2M_UnitTransferRequest:3");
             // 通知客户端开始切场景
             M2C_StartSceneChange m2CStartSceneChange = new() { SceneInstanceId = scene.InstanceId, SceneId = request.SceneId, SceneType = request.SceneType, Difficulty = request.Difficulty, ParamInfo = request.ParamInfo };
@@ -210,6 +209,23 @@ namespace ET.Server
                     numericComponent.ApplyValue(NumericType.RunRaceTransform, runracemonster, false);
                     Function_Fight.UnitUpdateProperty_RunRace(unit, false);
                     unit.Scene().GetComponent<RunRaceDungeonComponent>().OnEnter(unit);
+                    break;
+                case SceneTypeEnum.Happy:
+                    unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
+                    sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
+
+                    int happcellIndex = numericComponent.GetAsInt(NumericType.HappyCellIndex);
+                    if (happcellIndex > 0)
+                    {
+                        unit.Position = HappyData.PositionList[happcellIndex - 1];
+                    }
+                    else
+                    {
+                        int randomPosition = RandomHelper.RandomNumber(0, HappyData.PositionList.Count);
+                        numericComponent.ApplyValue(NumericType.HappyCellIndex, randomPosition + 1, false);
+                        unit.Position = HappyData.PositionList[randomPosition];
+                    }
+                    unit.Scene().GetComponent<HappyDungeonComponent>().NoticeRefreshTime(unit);
                     break;
                 case SceneTypeEnum.MainCityScene:
                     unit.Position = new float3(-10, 0, -10);

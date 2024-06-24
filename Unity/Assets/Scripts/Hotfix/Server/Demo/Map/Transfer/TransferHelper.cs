@@ -422,7 +422,7 @@ namespace ET.Server
                         mapInstanceId, new M2H_HapplyEnterRequest() { UnitId = unit.Id, SceneId = request.SceneId }); if (happyEnter.FubenInstanceId == 0)
                         {
                              return ErrorCode.ERR_AlreadyFinish;
-                         }
+                        }
                         TransferHelper.BeforeTransfer(unit);
                         await TransferHelper.Transfer(unit, happyEnter.FubenActorId, (int)SceneTypeEnum.Happy, request.SceneId, FubenDifficulty.Normal, happyEnter.Position.ToString());
                         break;
