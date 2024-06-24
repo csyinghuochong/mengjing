@@ -109,6 +109,23 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.RectTransform EG_TeamListNodeRectTransform
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_EG_TeamListNodeRectTransform == null )
+     			{
+		    		this.m_EG_TeamListNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_TeamListNode");
+     			}
+     			return this.m_EG_TeamListNodeRectTransform;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_DefendTeamRectTransform
      	{
      		get
@@ -236,6 +253,7 @@ namespace ET.Client
 			this.m_E_ButtonConfirmImage = null;
 			this.m_E_ButtonResetButton = null;
 			this.m_E_ButtonResetImage = null;
+			this.m_EG_TeamListNodeRectTransform = null;
 			this.m_EG_DefendTeamRectTransform = null;
 			this.m_E_RawImageImage = null;
 			this.m_E_Text_mingText = null;
@@ -252,6 +270,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_ButtonConfirmImage = null;
 		private UnityEngine.UI.Button m_E_ButtonResetButton = null;
 		private UnityEngine.UI.Image m_E_ButtonResetImage = null;
+		private UnityEngine.RectTransform m_EG_TeamListNodeRectTransform = null;
 		private UnityEngine.RectTransform m_EG_DefendTeamRectTransform = null;
 		private UnityEngine.UI.Image m_E_RawImageImage = null;
 		private UnityEngine.UI.Text m_E_Text_mingText = null;
