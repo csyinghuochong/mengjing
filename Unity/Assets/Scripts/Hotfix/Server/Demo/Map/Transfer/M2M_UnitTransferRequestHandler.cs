@@ -199,7 +199,18 @@ namespace ET.Server
                     int towerfinished = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.SealTowerFinished);
                     scene.GetComponent<SealTowerComponent>().GenerateFuben(towerarrived,towerfinished);
                     break;
-                
+                case SceneTypeEnum.RunRace:
+                    unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
+                    sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
+                    unit.Position = new float3(sceneConfig.InitPos[0] * 0.01f + RandomHelper.RandomNumberFloat(-1f, 1f), sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f + RandomHelper.RandomNumberFloat(-1f, 1f));
+                    unit.Rotation = quaternion.identity;
+
+                    unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.HorseRide, 0, false);
+                    int runracemonster = ConfigData.RunRaceMonsterList[RandomHelper.RandomNumber(0, ConfigData.RunRaceMonsterList.Count)];
+                    numericComponent.ApplyValue(NumericType.RunRaceTransform, runracemonster, false);
+                    Function_Fight.UnitUpdateProperty_RunRace(unit, false);
+                    unit.Scene().GetComponent<RunRaceDungeonComponent>().OnEnter(unit);
+                    break;
                 case SceneTypeEnum.MainCityScene:
                     unit.Position = new float3(-10, 0, -10);
                     unit.AddComponent<PathfindingComponent, int>(101);

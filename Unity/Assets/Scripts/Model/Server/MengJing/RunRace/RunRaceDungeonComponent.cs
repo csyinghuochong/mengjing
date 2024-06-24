@@ -1,3 +1,5 @@
+using Unity.Mathematics;
+
 namespace ET.Server
 {
     
@@ -14,6 +16,8 @@ namespace ET.Server
         public int CheckTime;
 
         public bool HaveArrived;
+
+        public float3 EndPosition = new float3(-25.59f, 0f, -7.07f);
     }
     
 }

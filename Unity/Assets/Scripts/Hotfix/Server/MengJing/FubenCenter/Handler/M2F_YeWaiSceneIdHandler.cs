@@ -15,6 +15,7 @@ namespace ET.Server
                 }
                 int functionId = request.SceneId == 6000002 ? 1058 : 1059;
                 response.FubenInstanceId = scene.GetComponent<FubenCenterComponent>().GetFunctionFubenId(functionId, request.UnitId);
+                response.FubenActorId = new ActorId(scene.Fiber().Process, scene.Fiber().Id, response.FubenInstanceId);
                 response.Message = "0";
             }
             else if (scene.GetComponent<FubenCenterComponent>().YeWaiFubenList.ContainsKey(request.SceneId))

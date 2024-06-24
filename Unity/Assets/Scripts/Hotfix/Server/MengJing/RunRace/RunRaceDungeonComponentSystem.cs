@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
+using System;
 
 namespace ET.Server
 {
@@ -7,6 +8,23 @@ namespace ET.Server
     [FriendOf(typeof (RunRaceDungeonComponent))]
     public static partial class RunRaceDungeonComponentSystem
     {
+        
+        [Invoke(TimerInvokeType.RunRaceDungeonTimer)]
+        public class RunRaceDungeonTimer: ATimer<RunRaceDungeonComponent>
+        {
+            protected override void Run(RunRaceDungeonComponent self)
+            {
+                try
+                {
+                    self.Check().Coroutine();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+        
         [EntitySystem]
         private static void Awake(this ET.Server.RunRaceDungeonComponent self)
         {
@@ -56,12 +74,6 @@ namespace ET.Server
             self.OnTransform();
 
             self.OnPullBack();
-
-            //生成怪物
-            //int sceneid = self.DomainScene().GetComponent<MapComponent>().SceneId;
-            //SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
-            //FubenHelp.CreateMonsterList(self.DomainScene(), sceneConfig.CreateMonster);
-            //FubenHelp.CreateMonsterList(self.DomainScene(), sceneConfig.CreateMonsterPosi);
         }
 
         /// <summary>
@@ -77,7 +89,10 @@ namespace ET.Server
             {
                 Unit unit = unitlist[i];
 
-                if (unit.Position.z >= -38.36f)
+                if (math.distance(unit.Position, self.EndPosition) < 1f)
+                {
+                    continue;
+                }
                 {
                     unit.GetComponent<MoveComponent>().Stop(false);
                     unit.Position = new float3(sceneConfig.InitPos[0] * 0.01f + RandomHelper.RandomNumberFloat(-1, 1),
@@ -130,7 +145,7 @@ namespace ET.Server
                 self.OnTransform();
             }
 
-            float3 vector3 = new float3(-11.36f, 0.98f, 45.02f);
+            float3 vector3 = self.EndPosition;
             List<Unit> units = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
             for (int i = 0; i < units.Count; i++)
             {
