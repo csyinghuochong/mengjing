@@ -13667,7 +13667,7 @@ namespace ET
 	[ResponseType(nameof(U2C_DonationRankListResponse))]
 	[Message(OuterMessage.C2U_DonationRankListRequest)]
 	[MemoryPackable]
-	public partial class C2U_DonationRankListRequest: MessageObject, ILocationRequest
+	public partial class C2U_DonationRankListRequest: MessageObject, IUnionActorRequest
 	{
 		public static C2U_DonationRankListRequest Create(bool isFromPool = false) 
 		{ 
@@ -13697,7 +13697,7 @@ namespace ET
 
 	[Message(OuterMessage.U2C_DonationRankListResponse)]
 	[MemoryPackable]
-	public partial class U2C_DonationRankListResponse: MessageObject, ILocationResponse
+	public partial class U2C_DonationRankListResponse: MessageObject, IUnionActorResponse
 	{
 		public static U2C_DonationRankListResponse Create(bool isFromPool = false) 
 		{ 

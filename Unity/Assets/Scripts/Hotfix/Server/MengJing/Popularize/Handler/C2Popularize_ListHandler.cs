@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-    [MessageLocationHandler(SceneType.Map)]
+    [MessageLocationHandler(SceneType.Popularize)]
     public class C2Popularize_ListHandler : MessageHandler<Scene, C2Popularize_ListRequest, Popularize2C_ListResponse>
     {
         protected override async ETTask Run(Scene scene, C2Popularize_ListRequest request, Popularize2C_ListResponse response)
