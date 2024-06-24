@@ -4,12 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
+	[ChildOf]
 	[EnableMethod]
 	public  class Scroll_Item_TaskFubenItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
 		public Action<int, int> ClickHandler;
 		public int NpcType;
 		public int FubenId;
+		
+		public Action<long> ClickHandler2;
+		public long UserId;
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;

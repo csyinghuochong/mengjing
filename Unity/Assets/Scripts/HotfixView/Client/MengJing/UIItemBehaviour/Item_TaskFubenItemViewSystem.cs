@@ -39,5 +39,23 @@ namespace ET.Client
 
             self.E_ImageButtonButton.AddListener(() => { self.ClickHandler(self.NpcType, self.FubenId); });
         }
+
+        public static void OnInitUI(this Scroll_Item_TaskFubenItem self, Action<long> action, KeyValuePair keyValuePair)
+        {
+            self.ClickHandler2 = action;
+            self.UserId = long.Parse(keyValuePair.Value);
+            self.E_TextFubenNameText.text = keyValuePair.Value2;
+
+            self.E_ImageButtonButton.AddListener(() => { self.ClickHandler2(self.UserId); });
+        }
+
+        public static void OnInitUI_2(this Scroll_Item_TaskFubenItem self, Action<long> action, int number)
+        {
+            self.ClickHandler2 = action;
+            self.UserId = 0;
+            self.E_TextFubenNameText.text = $"补偿金额:{number}";
+
+            self.E_ImageButtonButton.AddListener(() => { self.ClickHandler2(self.UserId); });
+        }
     }
 }

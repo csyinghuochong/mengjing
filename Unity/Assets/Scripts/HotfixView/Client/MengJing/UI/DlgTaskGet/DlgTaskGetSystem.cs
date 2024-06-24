@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_TaskFubenItem))]
     [FriendOf(typeof (Scroll_Item_TaskGetItem))]
     [FriendOf(typeof (DlgTaskGet))]
     public static class DlgTaskGetSystem
@@ -128,29 +129,32 @@ namespace ET.Client
                     self.View.E_Lab_MoNnengHintText.text = ItemConfigCategory.Instance.Get(costItemID).ItemName + "  " + itemNum + "/" + 5;
                     break;
                 case 5: //补偿大师
-                    // self.View.E_TaskFubenItemsLoopVerticalScrollRect.gameObject.SetActive(true);
-                    // UICommonHelper.DestoryChild(self.TaskFubenList);
-                    // AccountInfoComponent accountInfo = self.ZoneScene().GetComponent<AccountInfoComponent>();
-                    // int buchangNumber = BuChangHelper.ShowNewBuChang(accountInfo.PlayerInfo, accountInfo.MyId);
-                    // if (buchangNumber > 0)
-                    // {
-                    //     GameObject goitem = GameObject.Instantiate(self.UITaskFubenItem);
-                    //     goitem.SetActive(true);
-                    //     UICommonHelper.SetParent(goitem, self.TaskFubenList);
-                    //     UIBuChangItemComponent uIBuChangItem = self.AddChild<UIBuChangItemComponent, GameObject>(goitem);
-                    //     uIBuChangItem.OnInitUI_2((long userid) => { self.OnClickBuChangItem(userid); }, buchangNumber);
-                    // }
-                    // else
-                    // {
-                    //     for (int i = 0; i < accountInfo.PlayerInfo.DeleteUserList.Count; i++)
-                    //     {
-                    //         GameObject goitem = GameObject.Instantiate(self.UITaskFubenItem);
-                    //         goitem.SetActive(true);
-                    //         UICommonHelper.SetParent(goitem, self.TaskFubenList);
-                    //         UIBuChangItemComponent uIBuChangItem = self.AddChild<UIBuChangItemComponent, GameObject>(goitem);
-                    //         uIBuChangItem.OnInitUI((long userid) => { self.OnClickBuChangItem(userid); }, accountInfo.PlayerInfo.DeleteUserList[i]);
-                    //     }
-                    // }
+                    self.View.E_TaskFubenItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+                    PlayerComponent accountInfo = self.Root().GetComponent<PlayerComponent>();
+                    int buchangNumber = BuChangHelper.ShowNewBuChang(accountInfo.PlayerInfo, accountInfo.MyId);
+                    GameObject go = self.Root().GetComponent<ResourcesLoaderComponent>()
+                            .LoadAssetSync<GameObject>("Assets/Bundles/UI/Item/Item_TaskFubenItem.prefab");
+                    if (buchangNumber > 0)
+                    {
+                        GameObject goitem = UnityEngine.Object.Instantiate(go);
+                        goitem.SetActive(true);
+                        UICommonHelper.SetParent(goitem, self.View.E_TaskFubenItemsLoopVerticalScrollRect.transform.Find("Content").gameObject);
+                        Scroll_Item_TaskFubenItem uIBuChangItem = self.AddChild<Scroll_Item_TaskFubenItem>();
+                        uIBuChangItem.uiTransform = goitem.transform;
+                        uIBuChangItem.OnInitUI_2((long userid) => { self.OnClickBuChangItem(userid); }, buchangNumber);
+                    }
+                    else
+                    {
+                        for (int i = 0; i < accountInfo.PlayerInfo.DeleteUserList.Count; i++)
+                        {
+                            GameObject goitem = UnityEngine.Object.Instantiate(go);
+                            goitem.SetActive(true);
+                            UICommonHelper.SetParent(goitem, self.View.E_TaskFubenItemsLoopVerticalScrollRect.transform.Find("Content").gameObject);
+                            Scroll_Item_TaskFubenItem uIBuChangItem = self.AddChild<Scroll_Item_TaskFubenItem>();
+                            uIBuChangItem.uiTransform = goitem.transform;
+                            uIBuChangItem.OnInitUI((long userid) => { self.OnClickBuChangItem(userid); }, accountInfo.PlayerInfo.DeleteUserList[i]);
+                        }
+                    }
 
                     break;
                 case 6: //节日使者
