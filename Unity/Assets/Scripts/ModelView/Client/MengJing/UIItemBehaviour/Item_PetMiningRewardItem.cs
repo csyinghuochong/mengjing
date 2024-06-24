@@ -6,6 +6,9 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_PetMiningRewardItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
+		public TaskPro TaskPro;
+		public int Number;
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
