@@ -52,6 +52,7 @@ namespace ET.Server
             player.PaiMaiServerID =  UnitCacheHelper.GetPaiMaiServerId(session.Zone());
             player.UnionServerID = UnitCacheHelper.GetUnionServerId(session.Zone());
             player.SoloServerID = UnitCacheHelper.GetSoloServerId(session.Zone());
+            player.PopularizeServerID = UnitCacheHelper.GetPopularizeServerId(session.Zone());
             
             Unit unit = await UnitHelper.LoadUnit(player, scene, createRoleInfo, newAccountList[0].Account, request.AccountId); 
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map101");

@@ -271,7 +271,12 @@ namespace ET.Server
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Solo.ToString()).ActorId;
         }
-        
+
+        public static ActorId GetPopularizeServerId(int zone)
+        {
+            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Popularize.ToString()).ActorId;
+        }
+
         public static ActorId GetHappyServerId(int zone)
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Happy.ToString()).ActorId;

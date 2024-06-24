@@ -37,5 +37,7 @@
         public ActorId UnionServerID { get; set; }
 
         public ActorId SoloServerID { get; set; }
+
+        public ActorId PopularizeServerID { get; set; }
     }
 }
