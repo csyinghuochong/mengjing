@@ -79,20 +79,7 @@ namespace ET.Client
                         break;
                 }
 
-                ResourcesLoaderComponent resourcesLoaderComponent = currentScene.GetComponent<ResourcesLoaderComponent>();
-
-                string sceneName = currentScene.Name;
-                MapComponent mapComponent = root.GetComponent<MapComponent>();
-                if (SceneConfigHelper.UseSceneConfig(args.SceneType))
-                {
-                    sceneName = SceneConfigCategory.Instance.Get(mapComponent.SceneId).MapID.ToString();
-                }
-
-                // 加载场景资源
-                await resourcesLoaderComponent.LoadSceneAsync($"Assets/Bundles/Scenes/{sceneName}.unity", LoadSceneMode.Single);
-                // 切换到map场景
-
-                //await SceneManager.LoadSceneAsync(currentScene.Name);
+                await root.GetComponent<SceneManagerComponent>().ChangeScene(args.SceneType, args.LastSceneType, args.ChapterId);
 
                 currentScene.AddComponent<OperaComponent>();
             }

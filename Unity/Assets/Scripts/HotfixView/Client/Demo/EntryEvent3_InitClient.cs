@@ -14,7 +14,7 @@ namespace ET.Client
             root.AddComponent<UIPathComponent>();
             root.AddComponent<UIEventComponent>();
             root.AddComponent<UIComponent>();
-            
+
             root.AddComponent<ResourcesLoaderComponent>();
             root.AddComponent<PlayerComponent>();
             root.AddComponent<CurrentScenesComponent>();
@@ -41,11 +41,12 @@ namespace ET.Client
             root.AddComponent<AttackComponent>();
             root.AddComponent<ActivityComponentC>();
             root.AddComponent<ReddotViewComponent>();
-            
+            root.AddComponent<SceneManagerComponent>();
+
             // 根据配置修改掉Main Fiber的SceneType
             SceneType sceneType = EnumHelper.FromString<SceneType>(globalComponent.GlobalConfig.AppType.ToString());
             root.SceneType = sceneType;
-            
+
             await EventSystem.Instance.PublishAsync(root, new AppStartInitFinish());
         }
     }

@@ -24,7 +24,7 @@ namespace ET.Client
         private Stack<PoolObject> availableObjStack = new Stack<PoolObject>();
 
         //the root obj for unused obj
-        private GameObject rootObj;
+        public GameObject rootObj;
         private PoolInflationType inflationType;
         private string poolName;
         private int objectsInUse = 0;

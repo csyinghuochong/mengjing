@@ -56,7 +56,7 @@
 
         public static string GetScenePath(string fileName)
         {
-            return $"Assets/Scenes/{fileName}.unity";
+            return $"Assets/Bundles/Scenes/{fileName}.unity";
         }
 
         public static string GetEffetPath(string fileName)
