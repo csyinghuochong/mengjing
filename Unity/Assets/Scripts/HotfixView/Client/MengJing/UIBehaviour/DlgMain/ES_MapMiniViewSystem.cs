@@ -272,7 +272,7 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
 
-        private static void BeginChangeScene(this ES_MapMini self, int lastScene)
+        public static void BeginChangeScene(this ES_MapMini self, int lastScene)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
         }

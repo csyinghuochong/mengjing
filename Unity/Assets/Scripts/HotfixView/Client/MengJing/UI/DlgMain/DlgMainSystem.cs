@@ -1147,15 +1147,15 @@ namespace ET.Client
             // self.View.ES_MainTeam.ResetUI();
             self.View.ES_MainSkill.ResetUI();
             // self.UIMainBuffComponent.ResetUI();
-            // self.UIJoystickMoveComponent.ResetUI();
+            self.View.ES_JoystickMove.ResetUI();
 
-            // self.UIMapMini.BeginChangeScene(lastScene);
+            self.View.ES_MapMini.BeginChangeScene(lastScene);
             // self.UISingingComponent.GameObject.SetActive(false);
             // self.UIMainHpBar.BeginEnterScene();
-            // self.ZoneScene().GetComponent<SkillIndicatorComponent>().BeginEnterScene();
-            // self.ZoneScene().GetComponent<LockTargetComponent>().BeginEnterScene();
-            // self.ZoneScene().GetComponent<BattleMessageComponent>().CancelRideTargetUnit(0);
-            // self.ZoneScene().GetComponent<BattleMessageComponent>().AttackSelfPlayer.Clear();
+            self.Root().GetComponent<SkillIndicatorComponent>().BeginEnterScene();
+            self.Root().GetComponent<LockTargetComponent>().BeginEnterScene();
+            self.Root().GetComponent<BattleMessageComponent>().CancelRideTargetUnit(0);
+            self.Root().GetComponent<BattleMessageComponent>().AttackSelfPlayer.Clear();
         }
 
         /// <summary>

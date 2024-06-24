@@ -12,11 +12,78 @@ namespace ET.Client
             {
                 Scene currentScene = root.CurrentScene();
 
+                UIComponent uiComponent = root.GetComponent<UIComponent>();
+                DlgMain dlgMain = uiComponent.GetDlgLogic<DlgMain>();
+                if (dlgMain != null)
+                {
+                    uiComponent.CloseWindow(WindowID.WindowID_MapBig);
+                    dlgMain.BeginEnterScene(args.LastSceneType);
+                }
+
+                switch (args.LastSceneType)
+                {
+                    case SceneTypeEnum.PetTianTi:
+                    case SceneTypeEnum.PetDungeon:
+                    case SceneTypeEnum.PetMing:
+                        // UIHelper.Remove(args.ZoneScene, UIType.UIPetMain);
+                        break;
+                    case SceneTypeEnum.LocalDungeon:
+                        DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(args.LastChapterId);
+                        switch (dungeonConfig.MapType)
+                        {
+                            case SceneSubTypeEnum.LocalDungeon_1:
+                                // UIHelper.Remove(args.ZoneScene, UIType.UIDungeonHappyMain);
+                                break;
+                            default:
+                                break;
+                        }
+
+                        break;
+                    case SceneTypeEnum.Tower:
+                        // UIHelper.Remove(args.ZoneScene, UIType.UITowerOpen);
+                        break;
+                    case SceneTypeEnum.Happy:
+                        // UIHelper.Remove(args.ZoneScene, UIType.UIHappyMain);
+                        break;
+                    case SceneTypeEnum.Battle:
+                        // UIHelper.Remove(args.ZoneScene, UIType.UIBattleMain);
+                        break;
+                    case SceneTypeEnum.Arena:
+                        // UIHelper.Remove(args.ZoneScene, UIType.UIArenaMain);
+                        break;
+                    case SceneTypeEnum.TeamDungeon:
+                        // UIHelper.Remove(args.ZoneScene, UIType.UITeamMain);
+                        break;
+                    case SceneTypeEnum.TrialDungeon:
+                        // UIHelper.Remove(args.ZoneScene, UIType.UITrialMain);
+                        break;
+                    // case SceneTypeEnum.TowerOfSeal:
+                    //     UIHelper.Remove(args.ZoneScene, UIType.UITowerOfSealMain);
+                    //     break;
+                    case SceneTypeEnum.JiaYuan:
+                        // UIHelper.Remove(args.ZoneScene, UIType.UIJiaYuanMain);
+                        break;
+                    case SceneTypeEnum.RunRace:
+                        // UIHelper.Remove(args.ZoneScene, UIType.UIRunRaceMain);
+                        break;
+                    case SceneTypeEnum.Demon:
+                        // UIHelper.Remove(args.ZoneScene, UIType.UIDemonMain);
+                        break;
+                    case SceneTypeEnum.MiJing:
+                        // UIHelper.Remove(args.ZoneScene, UIType.UIMiJingMain);
+                        break;
+                    case SceneTypeEnum.SeasonTower:
+                        // UIHelper.Remove(args.ZoneScene, UIType.UISeasonMain);
+                        break;
+                    default:
+                        break;
+                }
+
                 ResourcesLoaderComponent resourcesLoaderComponent = currentScene.GetComponent<ResourcesLoaderComponent>();
 
                 string sceneName = currentScene.Name;
                 MapComponent mapComponent = root.GetComponent<MapComponent>();
-                if (SceneConfigHelper.UseSceneConfig( args.SceneType ))
+                if (SceneConfigHelper.UseSceneConfig(args.SceneType))
                 {
                     sceneName = SceneConfigCategory.Instance.Get(mapComponent.SceneId).MapID.ToString();
                 }
@@ -26,7 +93,6 @@ namespace ET.Client
                 // 切换到map场景
 
                 //await SceneManager.LoadSceneAsync(currentScene.Name);
-                root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.BeginEnterScene(args.LastSceneType);
 
                 currentScene.AddComponent<OperaComponent>();
             }
@@ -34,7 +100,6 @@ namespace ET.Client
             {
                 Log.Error(e);
             }
-
         }
     }
 }

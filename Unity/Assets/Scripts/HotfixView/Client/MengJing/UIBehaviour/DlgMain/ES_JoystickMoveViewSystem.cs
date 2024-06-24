@@ -62,6 +62,24 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
+        public static void ResetUI(this ES_JoystickMove self)
+        {
+            self.SetAlpha(0.3f);
+            if (self.OperateMode == 0)
+            {
+                self.E_CenterShowImage.transform.localPosition = Vector3.zero;
+                self.E_ThumbImage.transform.localPosition = Vector3.zero;
+            }
+            else
+            {
+                self.E_CenterShowImage.gameObject.SetActive(false);
+                self.E_ThumbImage.gameObject.SetActive(false);
+                self.E_YaoGanDiFixEventTrigger.gameObject.SetActive(false);
+            }
+
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.JoystickTimer);
+        }
+
         public static void AfterEnterScene(this ES_JoystickMove self)
         {
             self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Root());
