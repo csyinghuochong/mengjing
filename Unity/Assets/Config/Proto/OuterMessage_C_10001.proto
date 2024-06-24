@@ -3509,14 +3509,14 @@ message M2C_UnionXiuLianResponse // ILocationResponse
 }
 
 //ResponseType U2C_DonationRankListResponse
-message C2U_DonationRankListRequest // ILocationRequest
+message C2U_DonationRankListRequest // IUnionActorRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
 	int32 RankType = 1;
 }
 
-message U2C_DonationRankListResponse // ILocationResponse
+message U2C_DonationRankListResponse // IUnionActorResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
