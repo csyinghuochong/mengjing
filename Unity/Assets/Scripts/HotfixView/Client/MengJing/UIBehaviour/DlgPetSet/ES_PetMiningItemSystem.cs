@@ -12,18 +12,25 @@ namespace ET.Client
         private static void Awake(this ET.Client.ES_PetMiningItem self, UnityEngine.Transform args2)
         {
             self.uiTransform = args2;
-            
+
+            self.E_ImageIcon.GetComponent<Button>().AddListenerAsync(self.OnImageIcon);
             for (int i = 0; i < self.E_PetIconList.Length; i++)
             {
                 self.E_PetIconList[i] = self.E_PetList.transform.GetChild(i).Find("Icon").GetComponent<Image>();
             }
-            
         }
 
         [EntitySystem]
         private static void Destroy(this ET.Client.ES_PetMiningItem self)
         {
             self.DestroyWidget();
+        }
+
+        public static async ETTask OnImageIcon(this ES_PetMiningItem self)
+        {
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMiningChallenge);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMiningChallenge>()
+                    .OnInitUI(self.MineType, self.Position, self.PetMingPlayerInfo);
         }
 
         public static void OnInitUI(this ES_PetMiningItem self, int mingType, int index, bool hexin, List<KeyValuePairInt> petMineExtend)
@@ -34,11 +41,11 @@ namespace ET.Client
             MineBattleConfig mineBattleConfig = MineBattleConfigCategory.Instance.Get(mingType);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, mineBattleConfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-            
+
             self.E_ImageIcon.sprite = sp;
-            
+
             self.E_TextMine.text = mineBattleConfig.Name + (hexin? "(核心矿)" : string.Empty);
-            
+
             int zone = self.Root().GetComponent<PlayerComponent>().ServerId;
             int openDay = ServerHelper.GetOpenServerDay(false, zone);
             float coffi = ComHelp.GetMineCoefficient(openDay, mingType, index, petMineExtend);
@@ -56,15 +63,15 @@ namespace ET.Client
         public static void OnUpdateUI(this ES_PetMiningItem self, PetMingPlayerInfo petMingPlayerInfo)
         {
             self.PetMingPlayerInfo = petMingPlayerInfo;
-            
+
             string playerName = string.Empty;
             List<int> confids = new List<int>();
-            
+
             if (petMingPlayerInfo != null)
             {
                 playerName = "拥有者：" + petMingPlayerInfo.PlayerName;
                 confids = petMingPlayerInfo.PetConfig;
-            
+
                 for (int i = 0; i < self.E_PetIconList.Length; i++)
                 {
                     if (confids[i] == 0)
@@ -76,8 +83,8 @@ namespace ET.Client
                         self.E_PetIconList[i].gameObject.SetActive(true);
                         PetConfig petConfig = PetConfigCategory.Instance.Get(confids[i]);
                         string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petConfig.HeadIcon);
-                        Sprite sp =  self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-                     
+                        Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
                         self.E_PetIconList[i].sprite = sp;
                     }
                 }
@@ -90,7 +97,7 @@ namespace ET.Client
                     self.E_PetIconList[i].gameObject.SetActive(false);
                 }
             }
-            
+
             self.E_TextPlayer.text = playerName;
         }
     }

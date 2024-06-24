@@ -122,5 +122,6 @@ namespace ET.Client
 		WindowID_SelectReward,
 		WindowID_Loading,
 		WindowID_PetMiningFormation,
+		WindowID_PetMiningChallenge,
 	}
 }
