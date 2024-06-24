@@ -92,6 +92,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_PetFormationSet ES_PetFormationSet
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_petformationset == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"FormationNode/ES_PetFormationSet");
+		    	   this.m_es_petformationset = this.AddChild<ES_PetFormationSet,Transform>(subTrans);
+     			}
+     			return this.m_es_petformationset;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_CloseButtonButton
      	{
      		get
@@ -150,6 +168,7 @@ namespace ET.Client
 			this.m_E_ButtonChallengeButton = null;
 			this.m_E_ButtonChallengeImage = null;
 			this.m_E_IconItemDragImage = null;
+			this.m_es_petformationset = null;
 			this.m_E_CloseButtonButton = null;
 			this.m_E_CloseButtonImage = null;
 			this.m_E_TextNumberText = null;
@@ -161,6 +180,7 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_ButtonChallengeButton = null;
 		private UnityEngine.UI.Image m_E_ButtonChallengeImage = null;
 		private UnityEngine.UI.Image m_E_IconItemDragImage = null;
+		private EntityRef<ES_PetFormationSet> m_es_petformationset = null;
 		private UnityEngine.UI.Button m_E_CloseButtonButton = null;
 		private UnityEngine.UI.Image m_E_CloseButtonImage = null;
 		private UnityEngine.UI.Text m_E_TextNumberText = null;

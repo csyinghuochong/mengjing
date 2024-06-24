@@ -8,7 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetFormationSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
-		public Action<long, int, int> DragEndHandler = null;
+		public Action<long, int, int> DragEndHandler { get; set; } = null;
 		public Scroll_Item_PetFormationItem[] FormationItemComponents = new Scroll_Item_PetFormationItem[9];
 		
 		public UnityEngine.UI.Image E_IconItemDragImage
