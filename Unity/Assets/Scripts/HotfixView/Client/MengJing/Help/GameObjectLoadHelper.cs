@@ -3,11 +3,9 @@ using UnityEngine;
 
 namespace ET.Client
 {
-
-    public static  class GameObjectLoadHelper
+    public static class GameObjectLoadHelper
     {
-        
-        public static void AddLoadQueue(Scene root,  string path, long formId, Action<GameObject, long> action)
+        public static void AddLoadQueue(Scene root, string path, long formId, Action<GameObject, long> action)
         {
             if (string.IsNullOrEmpty(path))
             {
@@ -20,7 +18,7 @@ namespace ET.Client
                 action(gameObject, formId);
                 return;
             }
-            
+
             LoadAssetSync(root, path, formId, action).Coroutine();
         }
 
@@ -30,14 +28,14 @@ namespace ET.Client
             GameObject prefab = await resourcesLoaderComponent.LoadAssetAsync<GameObject>(path);
             await GameObjectPoolHelper.InitPoolFormGamObjectAsync(path, prefab, 3);
             GameObject gameObject = GameObjectPoolHelper.GetObjectFromPool(path);
-            if (gameObject!=null)
+            if (gameObject != null)
             {
                 action(gameObject, formId);
                 return;
             }
         }
-        
-        public static void RecoverGameObject( string path, GameObject gameObject, bool active = false)
+
+        public static void RecoverGameObject(string path, GameObject gameObject, bool active = false)
         {
             if (string.IsNullOrEmpty(path) || gameObject == null)
             {
@@ -47,12 +45,12 @@ namespace ET.Client
             GameObjectPoolHelper.ReturnObjectToPool(gameObject);
         }
 
-      
         public static void DisposeAll()
         {
             Log.Warning($"DisposeAll: {Time.time}");
 
-            
+            // GameObjectPoolHelper.DisposeAll();
+
             Resources.UnloadUnusedAssets();
             GC.Collect();
         }

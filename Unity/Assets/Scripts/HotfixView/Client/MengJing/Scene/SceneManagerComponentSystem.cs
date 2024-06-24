@@ -90,7 +90,7 @@ namespace ET.Client
             }
 
             int sousceneid = self.Root().GetComponent<MapComponent>().SonSceneId;
-            GameObjectPoolHelper.DisposeAll();
+            GameObjectLoadHelper.DisposeAll();
 
             await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(ABPathHelper.GetScenePath("Empty"), LoadSceneMode.Single);
             await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
