@@ -592,6 +592,10 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_ChengJiu);
         }
 
+        #endregion
+
+        #region 右下角
+
         private static void OnAdventureButton(this DlgMain self)
         {
             self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_Dungeon);
@@ -614,6 +618,9 @@ namespace ET.Client
 
         private static void OnJiaYuanButton(this DlgMain self)
         {
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            self.Root().GetComponent<JiaYuanComponent>().MasterId = userInfoComponent.UserInfo.UserId;
+            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.JiaYuan, 2000011, 1, userInfoComponent.UserInfo.UserId.ToString()).Coroutine();
             FlyTipComponent.Instance.ShowFlyTipDi("家园！！！");
         }
 
@@ -624,7 +631,7 @@ namespace ET.Client
 
         private static void OnUnionButton(this DlgMain self)
         {
-            Log.Debug("家族！！！");
+            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.Union, 2000009).Coroutine();
         }
 
         private static void UpdateShowRoleExp(this DlgMain self)
