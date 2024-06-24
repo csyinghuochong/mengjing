@@ -121,5 +121,6 @@ namespace ET.Client
 		WindowID_Recharge,
 		WindowID_SelectReward,
 		WindowID_Loading,
+		WindowID_PetMiningFormation,
 	}
 }
