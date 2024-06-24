@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
-    public class C2U_DonationRankListHandler : MessageLocationHandler<Scene, C2U_DonationRankListRequest, U2C_DonationRankListResponse>
+    public class C2U_DonationRankListHandler : MessageHandler<Scene, C2U_DonationRankListRequest, U2C_DonationRankListResponse>
     {
         protected override async ETTask Run(Scene scene, C2U_DonationRankListRequest request, U2C_DonationRankListResponse response)
         {
