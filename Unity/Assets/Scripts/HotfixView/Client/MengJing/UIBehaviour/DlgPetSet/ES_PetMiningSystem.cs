@@ -61,9 +61,8 @@ namespace ET.Client
 
         public static async ETTask OnPetMiningTeamButton(this ES_PetMining self)
         {
-            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMiningTeam, null);
-            //ES_PetMiningTeam petMiningTeam = self.Root().GetComponent<UIComponent>().GetDlgLogic<ES_PetMiningTeam>();
-            //petMiningTeam.UpdateTeam = self.OnUpdateTeam;
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMiningTeam);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetMiningTeam>().UpdateTeam = self.OnUpdateTeam;
         }
 
         public static void OnUpdateTeam(this ES_PetMining self)
@@ -116,7 +115,8 @@ namespace ET.Client
 
         public static void OnUpdateUI(this ES_PetMining self)
         {
-            self.RequestMingList().Coroutine();;
+            self.RequestMingList().Coroutine();
+            ;
         }
 
         public static async ETTask RequestMingList(this ES_PetMining self)
@@ -184,7 +184,7 @@ namespace ET.Client
                 MineBattleConfig mineBattleConfig = MineBattleConfigCategory.Instance.Get(petMingPlayers[i].MineType);
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, mineBattleConfig.Icon);
                 Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-                
+
                 Image_ItemIcon.sprite = sp;
 
                 float coffi = ComHelp.GetMineCoefficient(openDay, petMingPlayers[i].MineType, petMingPlayers[i].Postion, self.PetMineExtend);
@@ -202,7 +202,7 @@ namespace ET.Client
         {
             long unitid = self.Root().GetComponent<PlayerComponent>().CurrentRoleId;
             List<PetMingPlayerInfo> petMingPlayers = new List<PetMingPlayerInfo>();
-            
+
             List<PetMingPlayerInfo> allMingList = self.PetMingPlayers;
             for (int i = 0; i < allMingList.Count; i++)
             {
@@ -271,10 +271,10 @@ namespace ET.Client
 
             List<string> baginfs = new List<string>() { "Back_22", "Back_22", "Back_22" };
             var path = ABPathHelper.GetJpgPath(baginfs[page]);
-            Sprite atlas =  self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            Sprite atlas = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_ImageMineDi.sprite = atlas;
             self.E_Text_OccNumber.text = $"当前占领{occNumber}/{ConfigData.PetMiningList[mineType].Count}";
-            
+
             //self.PetMiningNode.GetComponent<RectTransform>().sizeDelta = new Vector2(maxWidth, self.PetMiningNode.GetComponent<RectTransform>().sizeDelta.y);
         }
     }

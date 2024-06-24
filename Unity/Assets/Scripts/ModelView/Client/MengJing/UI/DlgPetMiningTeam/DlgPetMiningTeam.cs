@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using LZ4;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ET.Client
 {
@@ -17,6 +17,6 @@ namespace ET.Client
         public List<long> PetTeamList = new();
         public List<long> PetMingPosition = new();
 
-        public LZ4Codec.Action UpdateTeam;
+        public Action UpdateTeam { get; set; }
     }
 }
