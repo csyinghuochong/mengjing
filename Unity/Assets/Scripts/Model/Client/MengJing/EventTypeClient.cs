@@ -315,4 +315,10 @@ namespace ET.Client
         public string UserDataValue;
         public Unit Unit;
     }
+
+    //副本结算
+    public struct FubenSettlement
+    {
+        public M2C_FubenSettlement m2C_FubenSettlement;
+    }
 }
