@@ -7,6 +7,91 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_TeamDungeonList : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public UnityEngine.UI.Button E_Button_CreateButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_CreateButton == null )
+     			{
+		    		this.m_E_Button_CreateButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Button_Create");
+     			}
+     			return this.m_E_Button_CreateButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_Button_CreateImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Button_CreateImage == null )
+     			{
+		    		this.m_E_Button_CreateImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Button_Create");
+     			}
+     			return this.m_E_Button_CreateImage;
+     		}
+     	}
+
+		public UnityEngine.UI.LoopVerticalScrollRect E_TeamDungeonItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TeamDungeonItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_TeamDungeonItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_TeamDungeonItems");
+     			}
+     			return this.m_E_TeamDungeonItemsLoopVerticalScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_Text_LeftTimeText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Text_LeftTimeText == null )
+     			{
+		    		this.m_E_Text_LeftTimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_LeftTime");
+     			}
+     			return this.m_E_Text_LeftTimeText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_Text_XieZhuNumText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Text_XieZhuNumText == null )
+     			{
+		    		this.m_E_Text_XieZhuNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_XieZhuNum");
+     			}
+     			return this.m_E_Text_XieZhuNumText;
+     		}
+     	}
+
 		    public Transform UITransform
          {
      	    get
@@ -21,9 +106,19 @@ namespace ET.Client
 
 		public void DestroyWidget()
 		{
+			this.m_E_Button_CreateButton = null;
+			this.m_E_Button_CreateImage = null;
+			this.m_E_TeamDungeonItemsLoopVerticalScrollRect = null;
+			this.m_E_Text_LeftTimeText = null;
+			this.m_E_Text_XieZhuNumText = null;
 			this.uiTransform = null;
 		}
 
+		private UnityEngine.UI.Button m_E_Button_CreateButton = null;
+		private UnityEngine.UI.Image m_E_Button_CreateImage = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_TeamDungeonItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Text m_E_Text_LeftTimeText = null;
+		private UnityEngine.UI.Text m_E_Text_XieZhuNumText = null;
 		public Transform uiTransform = null;
 	}
 }
