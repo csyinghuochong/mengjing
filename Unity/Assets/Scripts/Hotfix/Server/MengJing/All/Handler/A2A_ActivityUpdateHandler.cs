@@ -156,10 +156,6 @@ namespace ET.Server
                         //scene.GetComponent<UnionSceneComponent>().OnUnionRaceOver().Coroutine();
                     }
                     break;
-                case SceneType.Battle:
-                    //Log.Console($"Battle定时刷新: {scene.DomainZone()} {hour}");
-                    Log.Warning($"Battle定时刷新: {scene.Zone()} {hour}");
-                    break;
                 case SceneType.PaiMai:
                     //更新快捷购买列表价格
                     //Log.Console($"PaiMai定时刷新: {scene.DomainZone()} {hour}");

@@ -102,7 +102,6 @@ namespace ET.Client
                 // {
                 //     return;
                 // }
-
                 // 测试技能
                 List<int> skillids = new List<int>() { 62000503 };
                 Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());

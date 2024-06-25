@@ -257,11 +257,6 @@ namespace ET.Server
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Arena.ToString()).ActorId;
         }
         
-        public static ActorId GetBattleServerId(int zone)
-        {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Battle.ToString()).ActorId;
-        }
-        
         public static ActorId GetUnionServerId(int zone)
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Union.ToString()).ActorId;

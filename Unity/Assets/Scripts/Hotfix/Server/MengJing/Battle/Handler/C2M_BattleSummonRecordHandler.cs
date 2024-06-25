@@ -7,7 +7,7 @@ namespace ET.Server
     /// <summary>
     /// 战场召唤记录
     /// </summary>
-    [MessageHandler(SceneType.Battle)]
+    [MessageHandler(SceneType.Map)]
     public class C2M_BattleSummonRecordHandler : MessageLocationHandler<Unit, C2M_BattleSummonRecord, M2C_BattleSummonRecord>
     {
         protected override async ETTask Run(Unit unit, C2M_BattleSummonRecord request, M2C_BattleSummonRecord response)

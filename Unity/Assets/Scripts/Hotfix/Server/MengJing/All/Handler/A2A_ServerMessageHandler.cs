@@ -27,8 +27,6 @@ namespace ET.Server
                             scene.GetComponent<SoloSceneComponent>().OnRecvUnitLeave(long.Parse(request.MessageValue));
                         }
                         break;
-                    case SceneType.Battle:
-                        break;
                     case SceneType.Rank:
                         if (request.MessageType == NoticeType.RankRefresh)
                         {
