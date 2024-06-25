@@ -16,6 +16,16 @@ namespace ET.Client
         }
     }
 
+    [Event(SceneType.Demo)]
+    public class DataUpdate_BagItemUpdate_DlgTeamDungeonRefresh: AEvent<Scene, DataUpdate_BagItemUpdate>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_BagItemUpdate args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTeamDungeon>()?.View.ES_TeamDungeonShop.OnUpdateUI();
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof (ES_TeamDungeonList))]
     [FriendOf(typeof (ES_TeamDungeonMy))]
     [FriendOf(typeof (ES_TeamDungeonShop))]
@@ -47,11 +57,11 @@ namespace ET.Client
                     break;
                 case 1:
                     self.View.ES_TeamDungeonMy.uiTransform.gameObject.SetActive(true);
-                    // self.View.ES_TeamDungeonMy.OnUpdateUI();
+                    self.View.ES_TeamDungeonMy.OnUpdateUI();
                     break;
                 case 2:
                     self.View.ES_TeamDungeonShop.uiTransform.gameObject.SetActive(true);
-                    // self.View.ES_TeamDungeonShop.OnUpdateUI();
+                    self.View.ES_TeamDungeonShop.OnUpdateUI();
                     break;
             }
         }
@@ -80,7 +90,7 @@ namespace ET.Client
 
         public static void OnTeamUpdate(this DlgTeamDungeon self)
         {
-            // self.View.ES_TeamDungeonMy.OnUpdateUI();
+            self.View.ES_TeamDungeonMy.OnUpdateUI();
 
             TeamInfo teamInfo = self.Root().GetComponent<TeamComponentC>().GetSelfTeam();
             if (teamInfo == null && self.View.E_FunctionSetBtnToggleGroup.GetCurrentIndex() != 0)
