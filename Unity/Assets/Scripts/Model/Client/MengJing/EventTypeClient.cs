@@ -146,6 +146,10 @@ namespace ET.Client
     {
     }
 
+    public struct DataUpdate_TeamUpdate
+    {
+    }
+
     public struct DataUpdate_OnAccountWarehous
     {
         public string DataParamString;

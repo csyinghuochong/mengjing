@@ -614,6 +614,7 @@ namespace ET.Client
         private static void OnTeamDungeonButton(this DlgMain self)
         {
             Log.Debug("组队副本！！！");
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TeamDungeon).Coroutine();
         }
 
         private static void OnJiaYuanButton(this DlgMain self)
@@ -621,7 +622,6 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             self.Root().GetComponent<JiaYuanComponent>().MasterId = userInfoComponent.UserInfo.UserId;
             EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.JiaYuan, 2000011, 1, userInfoComponent.UserInfo.UserId.ToString()).Coroutine();
-            FlyTipComponent.Instance.ShowFlyTipDi("家园！！！");
         }
 
         private static void OnNpcDuiHuaButton(this DlgMain self)
