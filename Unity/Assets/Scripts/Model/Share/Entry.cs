@@ -44,6 +44,7 @@ namespace ET
             World.Instance.AddSingleton<NavmeshComponent>();
             World.Instance.AddSingleton<LogMsg>();
             
+            TimeInfo.Instance.TimeZone = 8;
             // 创建需要reload的code singleton
             CodeTypes.Instance.CreateCode();
             
