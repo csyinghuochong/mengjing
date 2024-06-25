@@ -976,9 +976,9 @@ namespace ET.Client
                     $"{rolePetInfo.ZiZhi_MageAct}/{petConfig.ZiZhi_MageAct_Max}";
 
             Sprite sprite16 = self.Root().GetComponent<ResourcesLoaderComponent>()
-                    .LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Img_hole_102.png");
+                    .LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Pro_16.png");
             Sprite sprite17 = self.Root().GetComponent<ResourcesLoaderComponent>()
-                    .LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Img_hole_102.png");
+                    .LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Pro_17.png");
 
             self.PetZiZhiItemList[0].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
                     rolePetInfo.ZiZhi_Hp >= petConfig.ZiZhi_Hp_Max? sprite16 : sprite17;
