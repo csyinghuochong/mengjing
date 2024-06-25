@@ -29,7 +29,8 @@ namespace ET.Client
         private static void Awake(this ES_MainBuff self, Transform transform)
         {
             self.uiTransform = transform;
-
+            ReferenceCollector rc = transform.GetComponent<ReferenceCollector>();
+            self.UIMainBuffItem = rc.Get<GameObject>("UIMainBuffItem");
             self.UIMainBuffItem.SetActive(false);
         }
 
