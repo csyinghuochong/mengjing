@@ -9,6 +9,7 @@ namespace ET.Server
         {
             response.FubenInstanceId = await scene.GetComponent<JiaYuanSceneComponent>().GetJiaYuanFubenId(request.MasterId, request.UnitId);
             response.FubenActorId = new ActorId(scene.Fiber().Process, scene.Fiber().Id, response.FubenInstanceId);
+            response.Error = ErrorCode.ERR_Success;
         }
     }
 }

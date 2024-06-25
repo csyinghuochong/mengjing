@@ -336,8 +336,13 @@ namespace ET.Server
                          break;
                  }
 
-                 if (todayopen )
+                 if (todayopen && sceneserverid.Process != 0 )
                  {
+                     if (sceneserverid.Equals(new ActorId()))
+                     {
+                         Log.Error(("sceneserverid == null"));
+                     }
+
                      A2A_ActivityUpdateResponse m2m_TrasferUnitResponse = (A2A_ActivityUpdateResponse)await self.Root().GetComponent<MessageSender>().Call
                                      (sceneserverid, new A2A_ActivityUpdateRequest() { Hour = -1, FunctionId = functionId, FunctionType = self.ActivityTimerList[0].FunctionType });
                  }
