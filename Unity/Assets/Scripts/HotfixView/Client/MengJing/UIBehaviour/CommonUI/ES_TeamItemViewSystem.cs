@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.ComponentModel;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -35,6 +36,7 @@ namespace ET.Client
 
         public static async ETTask OnClickTeamItem(this ES_TeamItem self)
         {
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_WatchMenu);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgWatchMenu>()
                     .OnUpdateUI_1(MenuEnumType.Team, self.TeamPlayerInfo.UserID, string.Empty, true).Coroutine();
         }
