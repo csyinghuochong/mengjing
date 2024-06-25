@@ -20,6 +20,22 @@ namespace ET.Server
             }
         }
     }
+    
+    [Invoke(TimerInvokeType.ActivityTipTimer)]
+    public class ActivityTipTimer: ATimer<ActivitySceneComponent>
+    {
+        protected override void Run(ActivitySceneComponent self)
+        {
+            try
+            {
+                self.OnCheckFuntionButton().Coroutine();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"move timer error: {self.Id}\n{e}");
+            }
+        }
+    }
 
     [EntitySystemOf(typeof(ActivitySceneComponent))]
     [FriendOf(typeof(ActivitySceneComponent))]
