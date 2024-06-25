@@ -101,5 +101,57 @@
             teamComponent.ApplyList.Clear();
             return response.Error;
         }
+
+        public static async ETTask<int> TeamRobotRequest(Scene root)
+        {
+            C2T_TeamRobotRequest request = new() { UnitId = UnitHelper.GetMyUnitFromClientScene(root).Id };
+            T2C_TeamRobotResponse response = (T2C_TeamRobotResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
+
+        public static async ETTask SendLeaveRequest(Scene root)
+        {
+            MapComponent mapComponent = root.GetComponent<MapComponent>();
+            if (mapComponent.SceneType == (int)SceneTypeEnum.TeamDungeon)
+            {
+                HintHelp.ShowHint(root, "副本中不能离开队伍");
+                return;
+            }
+
+            C2T_TeamLeaveRequest request = new() { UserId = root.GetComponent<UserInfoComponentC>().UserInfo.UserId };
+            T2C_TeamLeaveResponse response = (T2C_TeamLeaveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+        }
+
+        public static async ETTask<int> RequestTeamDungeonOpen(Scene root)
+        {
+            TeamComponentC teamComponent = root.GetComponent<TeamComponentC>();
+            UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
+            TeamInfo teamInfo = teamComponent.GetSelfTeam();
+
+            int errorCode = TeamHelper.CheckTimesAndLevel(UnitHelper.GetMyUnitFromClientScene(root), teamInfo);
+            if (errorCode != ErrorCode.ERR_Success)
+            {
+                return errorCode;
+            }
+
+            errorCode = TeamHelper.CheckCanOpenFuben(root, teamInfo.SceneId, teamInfo.FubenType);
+            if (errorCode != ErrorCode.ERR_Success)
+            {
+                return errorCode;
+            }
+
+            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(teamInfo.SceneId);
+            if (teamInfo.PlayerList.Count < sceneConfig.PlayerLimit)
+            {
+                return ErrorCode.ERR_PlayerIsNot;
+            }
+
+            C2M_TeamDungeonOpenRequest request = new() { UserID = userInfoComponent.UserInfo.UserId, FubenType = teamComponent.FubenType };
+            M2C_TeamDungeonOpenResponse response = (M2C_TeamDungeonOpenResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            teamInfo.FubenType = response.FubenType;
+            teamComponent.ApplyList.Clear();
+            return response.Error;
+        }
     }
 }

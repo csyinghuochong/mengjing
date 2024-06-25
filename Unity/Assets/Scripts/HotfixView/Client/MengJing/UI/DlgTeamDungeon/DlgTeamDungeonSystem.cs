@@ -43,7 +43,7 @@ namespace ET.Client
             {
                 case 0:
                     self.View.ES_TeamDungeonList.uiTransform.gameObject.SetActive(true);
-                    // self.View.ES_TeamDungeonList.OnUpdateUI();
+                    self.View.ES_TeamDungeonList.OnUpdateUI();
                     break;
                 case 1:
                     self.View.ES_TeamDungeonMy.uiTransform.gameObject.SetActive(true);

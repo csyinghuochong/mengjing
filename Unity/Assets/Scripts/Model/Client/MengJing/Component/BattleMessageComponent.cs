@@ -21,7 +21,7 @@ namespace ET
         public int SoloNum_Fail;
 
         //召唤机器人时间戳
-        public long CallTeamRobotTime;
+        public long CallTeamRobotTime { get; set; }
 
         /// <summary>
         /// 骑乘状态
