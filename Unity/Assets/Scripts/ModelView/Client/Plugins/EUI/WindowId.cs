@@ -123,5 +123,6 @@ namespace ET.Client
 		WindowID_Loading,
 		WindowID_PetMiningFormation,
 		WindowID_PetMiningChallenge,
+		WindowID_PetInfo,
 	}
 }
