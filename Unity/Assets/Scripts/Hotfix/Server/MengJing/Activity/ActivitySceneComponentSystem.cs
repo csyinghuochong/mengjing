@@ -303,8 +303,7 @@ namespace ET.Server
                  bool todayopen = FunctionHelp.IsFunctionDayOpen((int)dateTime.DayOfWeek, functionId);
                  Log.Warning($"OnCheckFuntionButton: {functionId} {self.ActivityTimerList[0].FunctionType}");
 
-                 ActorId sceneserverid;
-
+                 ActorId sceneserverid = new ActorId();
                  switch (functionId)
                  {
                      case 1025://战场
@@ -337,18 +336,18 @@ namespace ET.Server
                          break;
                  }
 
-                 if (todayopen)
+                 if (todayopen )
                  {
-                     // A2A_ActivityUpdateResponse m2m_TrasferUnitResponse = (A2A_ActivityUpdateResponse)await ActorMessageSenderComponent.Instance.Call
-                     //                 (sceneserverid, new A2A_ActivityUpdateRequest() { Hour = -1, FunctionId = functionId, FunctionType = self.ActivityTimerList[0].FunctionType });
+                     A2A_ActivityUpdateResponse m2m_TrasferUnitResponse = (A2A_ActivityUpdateResponse)await self.Root().GetComponent<MessageSender>().Call
+                                     (sceneserverid, new A2A_ActivityUpdateRequest() { Hour = -1, FunctionId = functionId, FunctionType = self.ActivityTimerList[0].FunctionType });
                  }
                  if (todayopen && functionId == 1044 && self.ActivityTimerList[0].FunctionType == 2)
                  {
                      //1044
-                     // long rankserverid = UnitCacheHelper.GetRankServerId(self.Zone());
-                     // ////家族战结束. 发送奖励
-                     // A2A_ActivityUpdateResponse m2m_TrasferUnitResponse = (A2A_ActivityUpdateResponse)await ActorMessageSenderComponent.Instance.Call
-                     //              (rankserverid, new A2A_ActivityUpdateRequest() { Hour = -1, FunctionId = functionId, FunctionType = 2 });
+                     ActorId rankserverid = UnitCacheHelper.GetRankServerId(self.Zone());
+                      ////家族战结束. 发送奖励
+                      A2A_ActivityUpdateResponse m2m_TrasferUnitResponse = (A2A_ActivityUpdateResponse)await self.Root().GetComponent<MessageSender>().Call
+                                   (rankserverid, new A2A_ActivityUpdateRequest() { Hour = -1, FunctionId = functionId, FunctionType = 2 });
                  }
 
                  self.ActivityTimerList.RemoveAt(0);
