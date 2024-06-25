@@ -64,5 +64,12 @@
             M2C_BuChangeResponse response = (M2C_BuChangeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<int> HorseRideRequest(Scene root)
+        {
+            C2M_HorseRideRequest request = new();
+            M2C_HorseRideResponse response = (M2C_HorseRideResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }

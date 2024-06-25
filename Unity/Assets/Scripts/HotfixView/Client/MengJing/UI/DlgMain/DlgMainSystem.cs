@@ -205,7 +205,7 @@ namespace ET.Client
 
             self.View.E_AdventureButton.AddListener(self.OnAdventureButton);
             self.View.E_PetFormationButton.AddListener(self.OnPetFormationButton);
-            self.View.E_CityHorseButton.AddListener(self.OnCityHorseButton);
+            self.View.E_CityHorseButton.AddListener(() => { self.OnCityHorseButton(true); });
             self.View.E_TeamDungeonButton.AddListener(self.OnTeamDungeonButton);
             self.View.E_JiaYuanButton.AddListener(self.OnJiaYuanButton);
             self.View.E_NpcDuiHuaButton.AddListener(self.OnNpcDuiHuaButton);
@@ -644,9 +644,33 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_PetSet);
         }
 
-        private static void OnCityHorseButton(this DlgMain self)
+        private static void OnCityHorseButton(this DlgMain self, bool showtip)
         {
-            Log.Debug("骑乘！！！");
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int now_horse = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HorseRide);
+            if (now_horse == 0 && !self.Root().GetComponent<BattleMessageComponent>().IsCanRideHorse())
+            {
+                FlyTipComponent.Instance.ShowFlyTipDi("战斗状态不能骑马!");
+                return;
+            }
+
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            if (SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
+            {
+                int sceneid = mapComponent.SceneId;
+                SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
+                if (sceneConfig.IfMount == 1)
+                {
+                    if (showtip)
+                    {
+                        FlyTipComponent.Instance.ShowFlyTipDi("该场景不能骑马!");
+                    }
+
+                    return;
+                }
+            }
+
+            UserInfoNetHelper.HorseRideRequest(self.Root()).Coroutine();
         }
 
         private static void OnTeamDungeonButton(this DlgMain self)
