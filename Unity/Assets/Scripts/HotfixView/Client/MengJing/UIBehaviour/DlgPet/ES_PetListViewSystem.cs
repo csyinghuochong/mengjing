@@ -51,6 +51,7 @@ namespace ET.Client
             self.PetHeXinItemList[1] = self.E_PetHeXinItem1Image.gameObject;
             self.PetHeXinItemList[2] = self.E_PetHeXinItem2Image.gameObject;
 
+            self.E_Btn_XiuXiButton.AddListener(self.OnClickChuZhan);
             self.E_Btn_FangShengButton.AddListener(self.OnBtn_FangSheng);
             self.E_Btn_ChuZhanButton.AddListener(self.OnClickChuZhan);
             self.E_InputFieldNameInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords(); });

@@ -63,16 +63,16 @@ namespace ET.Client
             //    }
             //}
 
-            C2M_RolePetFight c2M_RolePetFight = new C2M_RolePetFight() { PetInfoId = petId, PetStatus = fight };
-            M2C_RolePetFight m2C_RolePetFight =
-                    (M2C_RolePetFight)await root.GetComponent<ClientSenderCompnent>().Call(c2M_RolePetFight);
+            C2M_RolePetFight request = new() { PetInfoId = petId, PetStatus = fight };
+            M2C_RolePetFight response = (M2C_RolePetFight)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
-            if (m2C_RolePetFight.Error == ErrorCode.ERR_Success)
+            if (response.Error == ErrorCode.ERR_Success)
             {
                 root.GetComponent<PetComponentC>().RequestPetFight(petId, fight);
             }
 
-            return m2C_RolePetFight.Error;
+            EventSystem.Instance.Publish(root, new DataUpdate_OnPetFightSet());
+            return response.Error;
         }
 
         public static async ETTask<int> RequestUpStar(Scene root, long mainId, List<long> costIds)

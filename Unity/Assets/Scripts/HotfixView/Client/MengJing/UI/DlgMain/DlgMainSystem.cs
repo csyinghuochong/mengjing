@@ -17,6 +17,16 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
+    public class DataUpdate_OnPetFightSet_Refresh: AEvent<Scene, DataUpdate_OnPetFightSet>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_OnPetFightSet args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_RoleHead.OnPetFightSet();
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
     public class BuffUpdate_DlgMainRefresh: AEvent<Scene, BuffUpdate>
     {
         protected override async ETTask Run(Scene scene, BuffUpdate args)

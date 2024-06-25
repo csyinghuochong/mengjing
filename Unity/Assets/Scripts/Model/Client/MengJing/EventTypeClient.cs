@@ -170,6 +170,10 @@ namespace ET.Client
     {
     }
 
+    public struct DataUpdate_OnPetFightSet
+    {
+    }
+
     public struct ReturnLogin
     {
         public int ErrorCode;
