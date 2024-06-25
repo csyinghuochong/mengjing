@@ -227,6 +227,19 @@ namespace ET.Server
                     }
                     unit.Scene().GetComponent<HappyDungeonComponent>().NoticeRefreshTime(unit);
                     break;
+                case SceneTypeEnum.Battle:
+                    //int todayCamp = numericComponent.GetAsInt(NumericType.BattleTodayCamp);
+                    //todayCamp = todayCamp > 0 ? todayCamp : int.Parse(request.ParamInfo);
+                    int todayCamp = int.Parse(request.ParamInfo);
+                    numericComponent.Set(NumericType.BattleCamp, todayCamp); //1 2
+                    //numericComponent.Set(NumericType.BattleTodayCamp, todayCamp); //1 2
+                    unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
+                    sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
+                    int startIndex = todayCamp == 1 ? 0 : 3;
+                    unit.Position = new float3(sceneConfig.InitPos[startIndex+0] * 0.01f, sceneConfig.InitPos[startIndex + 1] * 0.01f, sceneConfig.InitPos[startIndex + 2] * 0.01f);
+                    unit.Rotation = quaternion.identity;
+
+                    break;
                 case SceneTypeEnum.MainCityScene:
                     unit.Position = new float3(-10, 0, -10);
                     unit.AddComponent<PathfindingComponent, int>(101);

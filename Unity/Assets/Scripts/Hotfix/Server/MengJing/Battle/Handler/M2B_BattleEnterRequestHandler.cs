@@ -25,7 +25,8 @@ namespace ET.Server
                     }
                 }
             }
-           
+
+            response.FubenActorId = new ActorId(scene.Fiber().Process, scene.Fiber().Id, response.FubenInstanceId);
             await ETTask.CompletedTask;
         }
     }
