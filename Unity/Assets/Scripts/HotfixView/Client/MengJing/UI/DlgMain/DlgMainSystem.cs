@@ -664,7 +664,7 @@ namespace ET.Client
 
         private static void OnNpcDuiHuaButton(this DlgMain self)
         {
-            Log.Debug("对话！！！");
+            DuiHuaHelper.MoveToNpcDialog(self.Root());
         }
 
         private static void OnUnionButton(this DlgMain self)
