@@ -72,7 +72,7 @@ namespace ET.Client
 
         public static void OnButton_Leave(this ES_TeamDungeonMy self)
         {
-            bool isLeader = TeamHelper.IsTeamLeader(self.Root());
+            bool isLeader = self.Root().GetComponent<TeamComponentC>().IsTeamLeader();
 
             PopupTipHelp.OpenPopupTip(self.Root(), "我的队伍", isLeader? "是否离开队伍" : "是否离开队伍？",
                 () => { TeamNetHelper.SendLeaveRequest(self.Root()).Coroutine(); }).Coroutine();

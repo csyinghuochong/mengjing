@@ -69,6 +69,10 @@ namespace ET.Client
         public static async ETTask RequestTeamDungeonInfo(this DlgTeamDungeon self)
         {
             // await TeamNetHelper.RequestTeamDungeonList(self.Root());
+            // 测试数据
+            long userId = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
+            self.Root().GetComponent<TeamComponentC>().TeamList
+                    .Add(new() { PlayerList = new() { new() { UserID = userId, Occ = 1, Combat = 999, PlayerName = "测试角色" } }, SceneId = 110001 });
             await ETTask.CompletedTask;
             if (self.IsDisposed)
             {

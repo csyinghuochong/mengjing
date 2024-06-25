@@ -69,7 +69,7 @@ namespace ET.Client
             int index = self.ButtonList.IndexOf(transform);
             for (int i = 0; i < self.ButtonList.Count; i++)
             {
-                self.ButtonList[i].Find("ImageSelect").gameObject.SetActive(i == index);
+                self.ButtonList[i].Find("E_ImageSelect").gameObject.SetActive(i == index);
             }
 
             self.OnUpdatUI(self.FubenIdList[index]);

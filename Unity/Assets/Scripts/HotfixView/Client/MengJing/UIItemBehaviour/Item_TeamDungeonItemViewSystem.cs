@@ -28,10 +28,12 @@ namespace ET.Client
         {
             self.E_Button_ApplyButton.AddListener(self.OnButton_Apply);
 
+            self.ImagePlayerList = new GameObject[3];
             self.ImagePlayerList[0] = self.EG_ImagePlayer1RectTransform.gameObject;
             self.ImagePlayerList[1] = self.EG_ImagePlayer2RectTransform.gameObject;
             self.ImagePlayerList[2] = self.EG_ImagePlayer3RectTransform.gameObject;
 
+            self.ImagePlayerNullList = new GameObject[3];
             self.ImagePlayerNullList[0] = self.EG_ImagePlayerNull_1RectTransform.gameObject;
             self.ImagePlayerNullList[1] = self.EG_ImagePlayerNull_2RectTransform.gameObject;
             self.ImagePlayerNullList[2] = self.EG_ImagePlayerNull_3RectTransform.gameObject;

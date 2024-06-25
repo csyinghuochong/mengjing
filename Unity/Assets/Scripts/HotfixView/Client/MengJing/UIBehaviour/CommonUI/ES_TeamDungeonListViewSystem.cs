@@ -15,6 +15,7 @@ namespace ET.Client
             self.uiTransform = transform;
 
             self.E_TeamDungeonItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTeamDungeonItemsRefresh);
+            self.E_Button_CreateButton.AddListener(self.OnButton_Create);
         }
 
         [EntitySystem]

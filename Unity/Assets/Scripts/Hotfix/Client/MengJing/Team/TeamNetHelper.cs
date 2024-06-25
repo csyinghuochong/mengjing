@@ -80,7 +80,7 @@
                 return ErrorCode.Err_TeamDungeonXieZhu;
             }
 
-            errorCode = TeamHelper.CheckCanOpenFuben(root, fubenId, fubenType);
+            errorCode = teamComponent.CheckCanOpenFuben(fubenId, fubenType);
             if (errorCode != ErrorCode.ERR_Success)
             {
                 return errorCode;
@@ -135,7 +135,7 @@
                 return errorCode;
             }
 
-            errorCode = TeamHelper.CheckCanOpenFuben(root, teamInfo.SceneId, teamInfo.FubenType);
+            errorCode = teamComponent.CheckCanOpenFuben(teamInfo.SceneId, teamInfo.FubenType);
             if (errorCode != ErrorCode.ERR_Success)
             {
                 return errorCode;

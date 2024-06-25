@@ -27,5 +27,37 @@
 
             return null;
         }
+
+        public static bool IsTeamLeader(this TeamComponentC self)
+        {
+            TeamInfo teamInfo = self.GetSelfTeam();
+            long myUserId = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
+            return teamInfo != null && teamInfo.PlayerList[0].UserID == myUserId;
+        }
+
+        public static int CheckCanOpenFuben(this TeamComponentC self, int fubenId, int fubenType)
+        {
+            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(fubenId);
+            //有队伍非队长返回
+            TeamInfo teamInfo = self.GetSelfTeam();
+            UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+            if (teamInfo != null)
+            {
+                if (teamInfo != null && teamInfo.PlayerList[0].UserID != userInfo.UserId)
+                {
+                    return ErrorCode.ERR_IsNotLeader;
+                }
+
+                for (int i = 0; i < teamInfo.PlayerList.Count; i++)
+                {
+                    if (teamInfo.PlayerList[i].PlayerLv < sceneConfig.EnterLv)
+                    {
+                        return ErrorCode.ERR_TeamerLevelIsNot;
+                    }
+                }
+            }
+
+            return ErrorCode.ERR_Success;
+        }
     }
 }
