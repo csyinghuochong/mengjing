@@ -8,6 +8,7 @@ namespace ET.Server
         protected override async ETTask Run(Scene scene, M2J_JiaYuanEnterRequest request, J2M_JiaYuanEnterResponse response)
         {
             response.FubenInstanceId = await scene.GetComponent<JiaYuanSceneComponent>().GetJiaYuanFubenId(request.MasterId, request.UnitId);
+            response.FubenActorId = new ActorId(scene.Fiber().Process, scene.Fiber().Id, response.FubenInstanceId);
         }
     }
 }
