@@ -427,15 +427,15 @@ namespace ET.Server
                         await TransferHelper.Transfer(unit, happyEnter.FubenActorId, (int)SceneTypeEnum.Happy, request.SceneId, FubenDifficulty.Normal, happyEnter.Position.ToString());
                         break;
                     case SceneTypeEnum.Battle:
-                        mapInstanceId = UnitCacheHelper.GetBattleServerId(unit.Zone());
-                        B2M_BattleEnterResponse battleEnter = (B2M_BattleEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(mapInstanceId, new M2B_BattleEnterRequest() { UserID = unit.Id, SceneId = request.SceneId });
-                         if (battleEnter.FubenInstanceId == 0)
-                         {
-                             return ErrorCode.ERR_AlreadyFinish;
-                         }
+                        f2M_YeWaiSceneIdResponse = (F2M_YeWaiSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                            UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_YeWaiSceneIdRequest() { SceneId = request.SceneId,UnitId = unit.Id  });
+                        if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
+                        {
+                            return ErrorCode.ERR_AlreadyFinish;
+                        }
                         
                         TransferHelper.BeforeTransfer(unit);
-                        await TransferHelper.Transfer(unit, battleEnter.FubenActorId, (int)SceneTypeEnum.Battle, request.SceneId, FubenDifficulty.Normal, battleEnter.Camp.ToString());
+                        await TransferHelper.Transfer(unit, f2M_YeWaiSceneIdResponse.FubenActorId, (int)SceneTypeEnum.Battle, request.SceneId, FubenDifficulty.Normal, f2M_YeWaiSceneIdResponse.Camp.ToString());
                         break;
                     case SceneTypeEnum.Arena:
                         userInfoComponent = unit.GetComponent<UserInfoComponentS>();

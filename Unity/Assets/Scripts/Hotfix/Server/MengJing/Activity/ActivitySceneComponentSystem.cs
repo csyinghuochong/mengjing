@@ -53,7 +53,6 @@ namespace ET.Server
             self.MapIdList.Add(UnitCacheHelper.GetRankServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetFubenCenterId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetArenaServerId(self.Zone()));
-            self.MapIdList.Add(UnitCacheHelper.GetBattleServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetUnionServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetSoloServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetDbCacheId(self.Zone()));
