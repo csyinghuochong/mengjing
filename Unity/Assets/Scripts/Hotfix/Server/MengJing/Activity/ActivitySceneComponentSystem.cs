@@ -306,9 +306,6 @@ namespace ET.Server
                  ActorId sceneserverid = new ActorId();
                  switch (functionId)
                  {
-                     case 1025://战场
-                         sceneserverid = UnitCacheHelper.GetBattleServerId(self.Zone());
-                         break;
                      case 1043: //家族Boss
                          sceneserverid = UnitCacheHelper.GetUnionServerId(self.Zone());
                          break;
@@ -328,6 +325,7 @@ namespace ET.Server
                      case 1057: //小龟大赛
                          sceneserverid = UnitCacheHelper.MainCityServerId(self.Zone());
                          break;
+                     case 1025://战场
                      case 1058://奔跑比赛
                      case 1059://恶魔活动
                          sceneserverid = UnitCacheHelper.GetFubenCenterId(self.Zone());
@@ -336,15 +334,18 @@ namespace ET.Server
                          break;
                  }
 
-                 if (todayopen && sceneserverid.Process != 0 )
+                 if (todayopen )
                  {
                      if (sceneserverid.Equals(new ActorId()))
                      {
                          Log.Error(("sceneserverid == null"));
                      }
+                     else
+                     {
+                         A2A_ActivityUpdateResponse m2m_TrasferUnitResponse = (A2A_ActivityUpdateResponse)await self.Root().GetComponent<MessageSender>().Call
+                             (sceneserverid, new A2A_ActivityUpdateRequest() { Hour = -1, FunctionId = functionId, FunctionType = self.ActivityTimerList[0].FunctionType });
+                     }
 
-                     A2A_ActivityUpdateResponse m2m_TrasferUnitResponse = (A2A_ActivityUpdateResponse)await self.Root().GetComponent<MessageSender>().Call
-                                     (sceneserverid, new A2A_ActivityUpdateRequest() { Hour = -1, FunctionId = functionId, FunctionType = self.ActivityTimerList[0].FunctionType });
                  }
                  if (todayopen && functionId == 1044 && self.ActivityTimerList[0].FunctionType == 2)
                  {

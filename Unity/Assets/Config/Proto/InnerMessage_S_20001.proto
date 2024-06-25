@@ -1407,7 +1407,8 @@ message F2M_YeWaiSceneIdResponse // IResponse
 	int32 Error = 91;
 	string Message = 92;
 	int64 FubenInstanceId = 2;
-		ActorId FubenActorId = 3;
+	ActorId FubenActorId = 3;
+	int32 Camp = 4;
 }
 
 

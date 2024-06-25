@@ -159,20 +159,6 @@ namespace ET.Server
                 case SceneType.Battle:
                     //Log.Console($"Battle定时刷新: {scene.DomainZone()} {hour}");
                     Log.Warning($"Battle定时刷新: {scene.Zone()} {hour}");
-                    if (hour == 0)
-                    {
-                        scene.GetComponent<BattleSceneComponent>().OnZeroClockUpdate();
-                    }
-                    if (request.FunctionId == 1025 && request.FunctionType == 1)
-                    {
-                        //Log.Console("OnBattleOpen");
-                        scene.GetComponent<BattleSceneComponent>().OnBattleOpen();
-                    }
-                    if (request.FunctionId == 1025 && request.FunctionType == 2)
-                    {
-                        // Log.Console("OnBattleOver");
-                        scene.GetComponent<BattleSceneComponent>().OnBattleOver().Coroutine();
-                    }
                     break;
                 case SceneType.PaiMai:
                     //更新快捷购买列表价格
