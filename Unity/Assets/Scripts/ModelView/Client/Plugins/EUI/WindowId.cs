@@ -124,5 +124,6 @@ namespace ET.Client
 		WindowID_PetMiningFormation,
 		WindowID_PetMiningChallenge,
 		WindowID_PetInfo,
+		WindowID_TeamDungeon,
 	}
 }
