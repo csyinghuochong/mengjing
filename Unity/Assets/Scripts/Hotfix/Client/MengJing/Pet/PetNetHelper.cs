@@ -16,7 +16,7 @@ namespace ET.Client
 
         public static async ETTask<int> RequestPetMingChanChu(Scene root)
         {
-            C2A_PetMingChanChuRequest   request = new C2A_PetMingChanChuRequest();
+            C2A_PetMingChanChuRequest request = new C2A_PetMingChanChuRequest();
             A2C_PetMingChanChuResponse respone = (A2C_PetMingChanChuResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return respone.Error;
         }
@@ -31,10 +31,10 @@ namespace ET.Client
         public static async ETTask<int> RequestPetFubenReward(Scene root)
         {
             C2M_PetFubenRewardRequest request = C2M_PetFubenRewardRequest.Create();
-            M2C_PetFubenRewardResponse response = (M2C_PetFubenRewardResponse) await root.GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_PetFubenRewardResponse response = (M2C_PetFubenRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
-        
+
         public static async ETTask<int> RequestPetSet(Scene root, int sceneType, List<long> petList, List<long> positionList)
         {
             C2M_RolePetFormationSet c2M_RolePetFormationSet = new C2M_RolePetFormationSet()
@@ -343,6 +343,19 @@ namespace ET.Client
         {
             C2M_RolePetProtect request = new() { PetInfoId = petInfoId, IsProtect = isProtect };
             M2C_RolePetProtect response = (M2C_RolePetProtect)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
+
+        public static async ETTask<int> RequestPetMingReset(Scene root)
+        {
+            C2M_PetMingResetRequest reuqest = new();
+            M2C_PetMingResetResponse response = (M2C_PetMingResetResponse)await root.GetComponent<ClientSenderCompnent>().Call(reuqest);
+            if (response.Error == ErrorCode.ERR_Success)
+            {
+                int sceneid = BattleHelper.GetSceneIdByType(SceneTypeEnum.PetMing);
+                root.GetComponent<UserInfoComponentC>().AddFubenTimes(sceneid, 5);
+            }
 
             return response.Error;
         }

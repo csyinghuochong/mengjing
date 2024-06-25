@@ -389,7 +389,7 @@ namespace ET.Client
         private Button    m_es_PetMiningTeamButton;
 
         public List<PetMingPlayerInfo> PetMingPlayers = new List<PetMingPlayerInfo>();
-        public List<KeyValuePairInt> PetMineExtend = new List<KeyValuePairInt>();
+        public List<KeyValuePairInt> PetMineExtend { get; set; }= new List<KeyValuePairInt>();
         public List<ES_PetMiningItem> PetMiningItemList = new List<ES_PetMiningItem>();
 
         
