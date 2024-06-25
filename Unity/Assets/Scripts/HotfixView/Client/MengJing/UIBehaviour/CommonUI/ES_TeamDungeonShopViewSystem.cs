@@ -93,7 +93,7 @@ namespace ET.Client
             self.E_ItemIconShowImage.sprite = sp;
             self.E_ItemNumText.text = self.Root().GetComponent<BagComponentC>().GetItemNumber(itemShowID).ToString();
 
-            if (self.ScrollItemBattleShopItems.Count > 0)
+            if (self.ScrollItemBattleShopItems != null && self.ScrollItemBattleShopItems.Count > 0)
             {
                 return;
             }
