@@ -274,6 +274,8 @@ namespace ET.Client
             self.View.E_LeftTypeSetToggleGroup.OnSelectIndex(0);
             self.RefreshMainTaskItems();
 
+            //初始化基础属性
+            self.InitShow();
             self.OnSettingUpdate();
 
             self.AfterEnterScene(SceneTypeEnum.MainCityScene);
@@ -1247,6 +1249,7 @@ namespace ET.Client
             {
                 case UserDataType.Exp:
                     self.View.ES_RoleHead.UpdateShowRoleExp();
+                    self.UpdateShowRoleExp();
                     break;
                 case UserDataType.PiLao:
                     self.View.ES_RoleHead.UpdateShowRolePiLao();
@@ -1474,6 +1477,15 @@ namespace ET.Client
             }
 
             self.View.EG_GuaJiSetRectTransform.gameObject.SetActive(false);
+        }
+
+        public static void InitShow(this DlgMain self)
+        {
+            self.UpdateShowRoleExp();
+
+            // Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            // self.ShowUIStall(unit.GetComponent<NumericComponent>().GetAsLong((int)NumericType.Now_Stall));
+            // self.OnTianQiChange(self.ZoneScene().GetComponent<AccountInfoComponent>().TianQiValue);
         }
 
         public static void OnSettingUpdate(this DlgMain self)
