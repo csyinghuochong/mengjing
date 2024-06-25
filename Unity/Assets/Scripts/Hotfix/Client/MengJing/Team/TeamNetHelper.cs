@@ -153,5 +153,31 @@
             teamComponent.ApplyList.Clear();
             return response.Error;
         }
+
+        public static async ETTask<int> AgreeTeamApply(Scene root, TeamPlayerInfo m2C_Team, int code)
+        {
+            TeamComponentC teamComponent = root.GetComponent<TeamComponentC>();
+
+            for (int i = teamComponent.ApplyList.Count - 1; i >= 0; i--)
+            {
+                if (teamComponent.ApplyList[i].UserID == m2C_Team.UserID)
+                {
+                    teamComponent.ApplyList.RemoveAt(i);
+                    break;
+                }
+            }
+
+            if (code == 0)
+            {
+                return ErrorCode.ERR_Success;
+            }
+
+            C2T_TeamDungeonAgreeRequest request = new()
+            {
+                TeamId = root.GetComponent<UserInfoComponentC>().UserInfo.UserId, TeamPlayerInfo = m2C_Team
+            };
+            T2C_TeamDungeonAgreeResponse repose = (T2C_TeamDungeonAgreeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return repose.Error;
+        }
     }
 }

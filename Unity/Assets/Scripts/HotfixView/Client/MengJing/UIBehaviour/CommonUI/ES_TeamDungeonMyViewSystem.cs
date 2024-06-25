@@ -67,7 +67,7 @@ namespace ET.Client
             ReddotComponentC redPointComponent = self.Root().GetComponent<ReddotComponentC>();
             redPointComponent.RemoveReddont(ReddotType.TeamApply);
 
-            // self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TeamApplyList).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TeamApplyList).Coroutine();
         }
 
         public static void OnButton_Leave(this ES_TeamDungeonMy self)

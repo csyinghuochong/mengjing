@@ -126,5 +126,6 @@ namespace ET.Client
 		WindowID_PetInfo,
 		WindowID_TeamDungeon,
 		WindowID_TeamDungeonCreate,
+		WindowID_TeamApplyList,
 	}
 }
