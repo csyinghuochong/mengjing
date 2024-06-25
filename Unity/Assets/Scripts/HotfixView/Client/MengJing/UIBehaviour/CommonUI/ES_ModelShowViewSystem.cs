@@ -53,7 +53,7 @@ namespace ET.Client
         {
             if (self.Draged)
                 return;
-            // self.ClickHandler?.Invoke();
+            self.ClickHandler?.Invoke();
         }
 
         public static void SetPosition(this ES_ModelShow self, Vector3 rootPos, Vector3 cameraPos)

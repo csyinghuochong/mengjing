@@ -2,6 +2,13 @@
 {
     public static class TeamHelper
     {
+        public static bool IsTeamLeader(Scene root)
+        {
+            TeamInfo teamInfo = root.GetComponent<TeamComponentC>().GetSelfTeam();
+            long myUserId = root.GetComponent<UserInfoComponentC>().UserInfo.UserId;
+            return teamInfo != null && teamInfo.PlayerList[0].UserID == myUserId;
+        }
+
         public static int CheckCanOpenFuben(Scene root, int fubenId, int fubenType)
         {
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(fubenId);
@@ -25,6 +32,11 @@
             }
 
             return ErrorCode.ERR_Success;
+        }
+
+        public static int CheckTimesAndLevel(Unit unit, TeamInfo teamInfo)
+        {
+            return CheckTimesAndLevel(unit, teamInfo.FubenType, teamInfo.SceneId, teamInfo.TeamId);
         }
 
         public static int CheckTimesAndLevel(Unit unit, int fubenType, int fubenid, long teamid)

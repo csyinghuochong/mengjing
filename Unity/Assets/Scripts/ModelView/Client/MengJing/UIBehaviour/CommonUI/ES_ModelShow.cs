@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ namespace ET.Client
 		
 		public Vector2 StartPosition;
 		public bool Draged = false;
+		public Action ClickHandler { get; set; }
 		private ChangeEquipComponent ChangeEquipComponent { get; set; }
 		
 		public UnityEngine.UI.Button E_RenderButton
