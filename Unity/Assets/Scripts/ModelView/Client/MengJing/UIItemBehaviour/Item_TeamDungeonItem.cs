@@ -4,8 +4,12 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_TeamDungeonItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_TeamDungeonItem : Entity,IAwake,IDestroy,IUIScrollItem
 	{
+		public GameObject[] ImagePlayerList;
+		public GameObject[] ImagePlayerNullList;
+		public TeamInfo TeamInfo;
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)

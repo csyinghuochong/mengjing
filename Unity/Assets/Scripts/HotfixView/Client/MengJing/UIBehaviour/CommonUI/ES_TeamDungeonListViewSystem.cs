@@ -1,24 +1,73 @@
-﻿
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
-	[EntitySystemOf(typeof(ES_TeamDungeonList))]
-	[FriendOfAttribute(typeof(ES_TeamDungeonList))]
-	public static partial class ES_TeamDungeonListSystem 
-	{
-		[EntitySystem]
-		private static void Awake(this ES_TeamDungeonList self,Transform transform)
-		{
-			self.uiTransform = transform;
-		}
+    [EntitySystemOf(typeof (ES_TeamDungeonList))]
+    [FriendOfAttribute(typeof (ES_TeamDungeonList))]
+    public static partial class ES_TeamDungeonListSystem
+    {
+        [EntitySystem]
+        private static void Awake(this ES_TeamDungeonList self, Transform transform)
+        {
+            self.uiTransform = transform;
 
-		[EntitySystem]
-		private static void Destroy(this ES_TeamDungeonList self)
-		{
-			self.DestroyWidget();
-		}
-	}
+            self.E_TeamDungeonItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTeamDungeonItemsRefresh);
+        }
 
+        [EntitySystem]
+        private static void Destroy(this ES_TeamDungeonList self)
+        {
+            self.DestroyWidget();
+        }
 
+        public static void OnButton_Create(this ES_TeamDungeonList self)
+        {
+            TeamInfo teamInfo = self.Root().GetComponent<TeamComponentC>().GetSelfTeam();
+            if (teamInfo != null && teamInfo.SceneId != 0)
+            {
+                FlyTipComponent.Instance.ShowFlyTipDi("已经有队伍了");
+                return;
+            }
+
+            // self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TeamDungeonCreate).Coroutine();
+        }
+
+        private static void OnTeamDungeonItemsRefresh(this ES_TeamDungeonList self, Transform transform, int index)
+        {
+            Scroll_Item_TeamDungeonItem scrollItemTeamDungeonItem = self.ScrollItemTeamDungeonItems[index].BindTrans(transform);
+            scrollItemTeamDungeonItem.OnUpdateUI(self.ShowTeamInfos[index]);
+        }
+
+        public static void OnUpdateUI(this ES_TeamDungeonList self)
+        {
+            TeamComponentC teamComponent = self.Root().GetComponent<TeamComponentC>();
+            List<TeamInfo> teamList = teamComponent.TeamList;
+
+            self.ShowTeamInfos.Clear();
+            for (int i = 0; i < teamList.Count; i++)
+            {
+                if (teamList[i].SceneId == 0)
+                {
+                    continue;
+                }
+
+                self.ShowTeamInfos.Add(teamList[i]);
+            }
+
+            self.AddUIScrollItems(ref self.ScrollItemTeamDungeonItems, self.ShowTeamInfos.Count);
+            self.E_TeamDungeonItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTeamInfos.Count);
+
+            int totalTimes = int.Parse(GlobalValueConfigCategory.Instance.Get(19).Value);
+            int times = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetTeamDungeonTimes();
+            self.E_Text_LeftTimeText.gameObject.SetActive(true);
+            self.E_Text_LeftTimeText.text = $"副本次数：{totalTimes - times}/{totalTimes}";
+
+            totalTimes = int.Parse(GlobalValueConfigCategory.Instance.Get(74).Value);
+            times = UnitHelper.GetMyUnitFromClientScene(self.Root()).GetTeamDungeonXieZhu();
+            self.E_Text_XieZhuNumText.text = $"帮助次数：{totalTimes - times}/{totalTimes}";
+        }
+    }
 }

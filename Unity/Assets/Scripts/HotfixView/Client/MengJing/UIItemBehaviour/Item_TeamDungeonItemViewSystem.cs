@@ -1,20 +1,82 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
-	[EntitySystemOf(typeof(Scroll_Item_TeamDungeonItem))]
-	public static partial class Scroll_Item_TeamDungeonItemSystem 
-	{
-		[EntitySystem]
-		private static void Awake(this Scroll_Item_TeamDungeonItem self )
-		{
-		}
+    [FriendOf(typeof (Scroll_Item_TeamDungeonItem))]
+    [EntitySystemOf(typeof (Scroll_Item_TeamDungeonItem))]
+    public static partial class Scroll_Item_TeamDungeonItemSystem
+    {
+        [EntitySystem]
+        private static void Awake(this Scroll_Item_TeamDungeonItem self)
+        {
+        }
 
-		[EntitySystem]
-		private static void Destroy(this Scroll_Item_TeamDungeonItem self )
-		{
-			self.DestroyWidget();
-		}
-	}
+        [EntitySystem]
+        private static void Destroy(this Scroll_Item_TeamDungeonItem self)
+        {
+            self.DestroyWidget();
+        }
+
+        public static void OnButton_Apply(this Scroll_Item_TeamDungeonItem self)
+        {
+            TeamNetHelper.SendTeamApply(self.Root(), self.TeamInfo.TeamId, self.TeamInfo.SceneId, self.TeamInfo.FubenType,
+                self.TeamInfo.PlayerList[0].PlayerLv, true).Coroutine();
+        }
+
+        public static void OnUpdateUI(this Scroll_Item_TeamDungeonItem self, TeamInfo teamInfo)
+        {
+            self.E_Button_ApplyButton.AddListener(self.OnButton_Apply);
+
+            self.ImagePlayerList[0] = self.EG_ImagePlayer1RectTransform.gameObject;
+            self.ImagePlayerList[1] = self.EG_ImagePlayer2RectTransform.gameObject;
+            self.ImagePlayerList[2] = self.EG_ImagePlayer3RectTransform.gameObject;
+
+            self.ImagePlayerNullList[0] = self.EG_ImagePlayerNull_1RectTransform.gameObject;
+            self.ImagePlayerNullList[1] = self.EG_ImagePlayerNull_2RectTransform.gameObject;
+            self.ImagePlayerNullList[2] = self.EG_ImagePlayerNull_3RectTransform.gameObject;
+            self.TeamInfo = teamInfo;
+            for (int i = 0; i < self.ImagePlayerList.Length; i++)
+            {
+                if (i >= teamInfo.PlayerList.Count)
+                {
+                    self.ImagePlayerList[i].SetActive(false);
+                    self.ImagePlayerNullList[i].SetActive(true);
+
+                    continue;
+                }
+
+                TeamPlayerInfo teamPlayerInfo = teamInfo.PlayerList[i];
+                self.ImagePlayerList[i].SetActive(true);
+                self.ImagePlayerNullList[i].SetActive(false);
+                self.ImagePlayerList[i].transform.Find("Text_Level").GetComponent<Text>().text = $"{teamPlayerInfo.PlayerLv}级";
+                self.ImagePlayerList[i].transform.Find("ImageMask/ImageHead").GetComponent<Image>().sprite = self.Root()
+                        .GetComponent<ResourcesLoaderComponent>()
+                        .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, teamPlayerInfo.Occ.ToString()));
+            }
+
+            SceneConfig teamDungeonConfig = SceneConfigCategory.Instance.Get(teamInfo.SceneId);
+            self.E_Text_ConditionText.text = $"进入条件: {teamDungeonConfig.EnterLv}级";
+
+            string addStr = "";
+
+            if (teamInfo.FubenType == TeamFubenType.XieZhu)
+            {
+                int lvCha = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv - teamDungeonConfig.EnterLv;
+                if (lvCha >= 10)
+                {
+                    addStr = "(帮助模式)";
+                }
+            }
+
+            if (teamInfo.FubenType == TeamFubenType.ShenYuan)
+            {
+                addStr = "(深渊模式)";
+            }
+
+            self.E_Text_NameText.text = teamDungeonConfig.Name + addStr;
+
+            self.E_Text_TuijianText.text = $"推荐等级： {teamDungeonConfig.TuiJianLv[0]}-{teamDungeonConfig.TuiJianLv[1]}级";
+        }
+    }
 }

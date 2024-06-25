@@ -5,6 +5,37 @@ namespace ET.Client
 {
     public static partial class UnitHelper
     {
+        public static int GetTeamDungeonXieZhu(this Unit self)
+        {
+            NumericComponentC numericComponent = self.GetComponent<NumericComponentC>();
+            return numericComponent.GetAsInt(NumericType.TeamDungeonXieZhu);
+        }
+
+        public static int GetTeamDungeonTimes(this Unit self)
+        {
+            NumericComponentC numericComponent = self.GetComponent<NumericComponentC>();
+            return numericComponent.GetAsInt(NumericType.TeamDungeonTimes);
+        }
+
+        public static TeamPlayerInfo GetSelfTeamPlayerInfo(Scene root)
+        {
+            UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
+            BagInfo bagInfo = root.GetComponent<BagComponentC>().GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
+
+            return new TeamPlayerInfo()
+            {
+                UserID = userInfoComponent.UserInfo.UserId,
+                PlayerLv = userInfoComponent.UserInfo.Lv,
+                PlayerName = userInfoComponent.UserInfo.Name,
+                WeaponId = bagInfo != null? bagInfo.ItemID : 0,
+                Occ = userInfoComponent.UserInfo.Occ,
+                Combat = userInfoComponent.UserInfo.Combat,
+                RobotId = userInfoComponent.UserInfo.RobotId,
+                OccTwo = userInfoComponent.UserInfo.OccTwo,
+                FashionIds = root.GetComponent<BagComponentC>().FashionEquipList,
+            };
+        }
+
         public static int GetMaxPiLao(this Unit self)
         {
             return int.Parse(GlobalValueConfigCategory.Instance.Get(self.IsYueKaStates()? 26 : 10).Value);
