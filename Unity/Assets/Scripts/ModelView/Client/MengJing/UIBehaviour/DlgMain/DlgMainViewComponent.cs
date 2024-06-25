@@ -299,6 +299,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_MainBuff ES_MainBuff
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_mainbuff == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_LeftSet/ES_MainBuff");
+		    	   this.m_es_mainbuff = this.AddChild<ES_MainBuff,Transform>(subTrans);
+     			}
+     			return this.m_es_mainbuff;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_LeftBottomSetRectTransform
      	{
      		get
@@ -2326,6 +2344,7 @@ namespace ET.Client
 			this.m_E_RoseTeamButton = null;
 			this.m_E_RoseTeamImage = null;
 			this.m_EG_LeftSetRectTransform = null;
+			this.m_es_mainbuff = null;
 			this.m_EG_LeftBottomSetRectTransform = null;
 			this.m_E_ShrinkButton = null;
 			this.m_E_ShrinkImage = null;
@@ -2464,6 +2483,7 @@ namespace ET.Client
 		private UnityEngine.UI.Button m_E_RoseTeamButton = null;
 		private UnityEngine.UI.Image m_E_RoseTeamImage = null;
 		private UnityEngine.RectTransform m_EG_LeftSetRectTransform = null;
+		private EntityRef<ES_MainBuff> m_es_mainbuff = null;
 		private UnityEngine.RectTransform m_EG_LeftBottomSetRectTransform = null;
 		private UnityEngine.UI.Button m_E_ShrinkButton = null;
 		private UnityEngine.UI.Image m_E_ShrinkImage = null;

@@ -127,5 +127,6 @@ namespace ET.Client
 		WindowID_TeamDungeon,
 		WindowID_TeamDungeonCreate,
 		WindowID_TeamApplyList,
+		WindowID_BuffTips,
 	}
 }

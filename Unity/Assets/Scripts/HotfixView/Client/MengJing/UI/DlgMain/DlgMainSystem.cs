@@ -17,6 +17,30 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
+    public class BuffUpdate_DlgMainRefresh: AEvent<Scene, BuffUpdate>
+    {
+        protected override async ETTask Run(Scene scene, BuffUpdate args)
+        {
+            DlgMain dlgMain = scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
+            if (dlgMain == null)
+            {
+                return;
+            }
+
+            if (args.Unit.MainHero)
+            {
+                dlgMain.View.ES_MainBuff.OnBuffUpdate(args.ABuffHandler, args.OperateType);
+            }
+            else
+            {
+                dlgMain.View.ES_MainBuff.OnBuffUpdate(args.ABuffHandler, args.OperateType);
+            }
+
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
     public class DataUpdate_UpdateUserData_Refresh: AEvent<Scene, DataUpdate_UpdateUserData>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_UpdateUserData args)
@@ -140,6 +164,7 @@ namespace ET.Client
     }
 
     [FriendOf(typeof (ES_RoleHead))]
+    [FriendOf(typeof (ES_MainBuff))]
     [FriendOf(typeof (ES_ButtonPositionSet))]
     [FriendOf(typeof (DlgMainViewComponent))]
     [FriendOf(typeof (ES_JoystickMove))]
@@ -232,6 +257,7 @@ namespace ET.Client
         public static void ShowWindow(this DlgMain self, Entity contextData = null)
         {
             self.View.ES_RoleHead.uiTransform.gameObject.SetActive(true);
+            self.View.ES_MainBuff.uiTransform.gameObject.SetActive(true);
 
             self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
 
