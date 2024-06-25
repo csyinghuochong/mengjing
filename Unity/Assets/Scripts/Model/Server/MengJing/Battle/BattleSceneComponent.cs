@@ -21,7 +21,7 @@ namespace ET.Server
     [ComponentOf(typeof(Scene))]
     public class BattleSceneComponent: Entity, IAwake, IDestroy
     {
-        public bool BattleOpen;
+        public bool BattleOpen = true;
         public List<BattleInfo> BattleInfos { get; set; } = new List<BattleInfo>();
     }
     
