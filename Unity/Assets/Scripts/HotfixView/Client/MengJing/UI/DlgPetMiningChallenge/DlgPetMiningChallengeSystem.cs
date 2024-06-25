@@ -123,14 +123,13 @@ namespace ET.Client
                 return;
             }
 
-            // UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIPetInfo);
-            // if (instanceid != self.InstanceId)
-            // {
-            //     return;
-            // }
-            //
-            // uI.GetComponent<DlgPetInfo>().OnUpdateUI(response.RolePetInfos, response.PetHeXinList, response.Ks, response.Vs);
-            FlyTipComponent.Instance.ShowFlyTipDi("宠物信息界面暂未开放");
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetInfo);
+            if (instanceid != self.InstanceId)
+            {
+                return;
+            }
+
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetInfo>().OnUpdateUI(response.RolePetInfos, response.PetHeXinList, response.Ks, response.Vs);
         }
 
         public static void OnSelectTeam(this DlgPetMiningChallenge self, int teamid)

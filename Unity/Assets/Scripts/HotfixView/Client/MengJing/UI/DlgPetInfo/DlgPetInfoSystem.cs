@@ -17,5 +17,9 @@ namespace ET.Client
         public static void ShowWindow(this DlgPetInfo self, Entity contextData = null)
         {
         }
+
+        public static void OnUpdateUI(this DlgPetInfo self, RolePetInfo rolePetInfo, List<BagInfo> bagInfos, List<int> keys, List<long> values)
+        {
+        }
     }
 }
