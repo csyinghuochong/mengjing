@@ -2,6 +2,31 @@
 {
     public static class TeamHelper
     {
+        public static int CheckCanOpenFuben(Scene root, int fubenId, int fubenType)
+        {
+            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(fubenId);
+            //有队伍非队长返回
+            TeamInfo teamInfo = root.GetComponent<TeamComponentC>().GetSelfTeam();
+            UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
+            if (teamInfo != null)
+            {
+                if (teamInfo != null && teamInfo.PlayerList[0].UserID != userInfo.UserId)
+                {
+                    return ErrorCode.ERR_IsNotLeader;
+                }
+
+                for (int i = 0; i < teamInfo.PlayerList.Count; i++)
+                {
+                    if (teamInfo.PlayerList[i].PlayerLv < sceneConfig.EnterLv)
+                    {
+                        return ErrorCode.ERR_TeamerLevelIsNot;
+                    }
+                }
+            }
+
+            return ErrorCode.ERR_Success;
+        }
+
         public static int CheckTimesAndLevel(Unit unit, int fubenType, int fubenid, long teamid)
         {
             UserInfoComponentC userInfoComponent = null;

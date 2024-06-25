@@ -9,6 +9,12 @@ namespace ET
         [StaticField]
         public static int GMDungeonId = 1060003;
 
+        /// <summary>
+        /// 组队副本  gm账号显示副本和新地图,大于等于指定副本id不显示
+        /// </summary>
+        [StaticField]
+        public static int GmTeamdungeonId = 10110006;
+
         [StaticField]
         public static string ChangeOccItem = "10000178;1";
 
@@ -34,7 +40,7 @@ namespace ET
             { 488, 8888 },
             { 648, 12888 },
         };
-        
+
         //副本深渊模式创建怪物   参数：场景ID,MonsterPositionConfigID
         [StaticField]
         public static Dictionary<int, int> ShenYuanCreateConfig = new Dictionary<int, int>()
@@ -50,24 +56,75 @@ namespace ET
         /// 目标任务 TaskConfig
         /// </summary>
         [StaticField]
-        public static List<List<int>> WelfareTaskList = new ()
+        public static List<List<int>> WelfareTaskList = new()
         {
             //第一天
-            new List<int>{ 71001001,71001002,71001003,71001004,71001005,71001006 },          
+            new List<int>
+            {
+                71001001,
+                71001002,
+                71001003,
+                71001004,
+                71001005,
+                71001006
+            },
             //第二天
-            new List<int>{ 71002001,71002002,71002003,71002004,71002005,71002006 },
+            new List<int>
+            {
+                71002001,
+                71002002,
+                71002003,
+                71002004,
+                71002005,
+                71002006
+            },
             //第三天
-            new List<int>{ 71003001,71003002,71003003,71003004,71003005 },
+            new List<int>
+            {
+                71003001,
+                71003002,
+                71003003,
+                71003004,
+                71003005
+            },
             //第四天
-            new List<int>{ 71004001,71004002,71004003,71004004,71004005 },
+            new List<int>
+            {
+                71004001,
+                71004002,
+                71004003,
+                71004004,
+                71004005
+            },
             //第五天
-            new List<int>{ 71005001,71005002,71005003,71005004,71005005 },
+            new List<int>
+            {
+                71005001,
+                71005002,
+                71005003,
+                71005004,
+                71005005
+            },
             //第六天
-            new List<int>{ 71006001,71006002,71006003,71006004,71006005 },
+            new List<int>
+            {
+                71006001,
+                71006002,
+                71006003,
+                71006004,
+                71006005
+            },
             //第七天
-            new List<int>{ 71007001,71007002,71007003,71007004,71007005 },
+            new List<int>
+            {
+                71007001,
+                71007002,
+                71007003,
+                71007004,
+                71007005
+            },
         };
-        
+
         [StaticField]
         public static bool IsShowLieOpen = false;
 
@@ -158,66 +215,70 @@ namespace ET
             new KeyValuePair() { KeyId = 50, Value = "10000135;1" }, //金盒
         };
 
-        
         /// <summary>
         /// 宠物守护队伍开启等级
         /// </summary>
         [StaticField]
         public static List<int> PetMiningTeamOpenLevel = new List<int>() { 1, 30, 40 };
-        
-        
-        
+
         /// <summary>
         /// 宠物矿场
         /// </summary>
-         [StaticField]
-        public static Dictionary<int, List<PetMiningItem>> PetMiningList = new  Dictionary<int, List<PetMiningItem>>()
+        [StaticField]
+        public static Dictionary<int, List<PetMiningItem>> PetMiningList = new Dictionary<int, List<PetMiningItem>>()
         {
-            { 10001, new List<PetMiningItem>(){ 
-                new PetMiningItem() { X = 266, Y = -118 },  
-                new PetMiningItem() { X= 653, Y = 2 }, 
-                new PetMiningItem { X = 1017, Y = -118  }, 
-                new PetMiningItem { X = 1672, Y = -38 },
-                new PetMiningItem { X = 2277, Y = -88 },
-            } },
-            { 10002, new List<PetMiningItem>(){ 
-                new PetMiningItem() { X = 201, Y = -42 },  
-                new PetMiningItem() { X= 501, Y = -159 },
-                new PetMiningItem { X = 990, Y = -164  }, 
-                new PetMiningItem { X = 1260, Y = 106 },
-                new PetMiningItem { X = 751, Y = 53 },
-                new PetMiningItem() { X = 1673, Y = -109 },
-                new PetMiningItem() { X= 2196, Y = -109 },
-                new PetMiningItem { X = 2637, Y = -109  },
-                new PetMiningItem { X = 2466, Y = 24 },
-                new PetMiningItem { X = 1918, Y = 24 },
-            } },
-            { 10003, new List<PetMiningItem>(){ 
-                new PetMiningItem() { X = 201, Y = 189 },  
-                new PetMiningItem() { X= 208, Y = -197 }, 
-                new PetMiningItem { X = 500, Y = -164  }, 
-                new PetMiningItem { X = 496, Y = 152 }, 
-                new PetMiningItem { X = 795, Y = 179 }, 
-                new PetMiningItem { X = 798, Y = -197 },
-                new PetMiningItem { X = 1082, Y = -176 },
-                new PetMiningItem { X = 1084, Y = 155 },
-                new PetMiningItem { X = 1367, Y = 168 },
-                new PetMiningItem { X = 1359, Y = -174 },
-                new PetMiningItem() { X = 2403, Y = 155 },
-                new PetMiningItem() { X= 1618, Y = -189 },
-                new PetMiningItem { X = 2141, Y = -197  },
-                new PetMiningItem { X = 1625, Y = 160 },
-                new PetMiningItem { X = 1882, Y = -164 },
-                new PetMiningItem { X = 1876, Y = 152 },
-                new PetMiningItem { X = 2138, Y = 179 },
-                new PetMiningItem { X = 2401, Y = -176 },
-                new PetMiningItem { X = 2673, Y = 168 },
-                new PetMiningItem { X = 2671, Y = -174 },
-            } },
+            {
+                10001, new List<PetMiningItem>()
+                {
+                    new PetMiningItem() { X = 266, Y = -118 },
+                    new PetMiningItem() { X = 653, Y = 2 },
+                    new PetMiningItem { X = 1017, Y = -118 },
+                    new PetMiningItem { X = 1672, Y = -38 },
+                    new PetMiningItem { X = 2277, Y = -88 },
+                }
+            },
+            {
+                10002, new List<PetMiningItem>()
+                {
+                    new PetMiningItem() { X = 201, Y = -42 },
+                    new PetMiningItem() { X = 501, Y = -159 },
+                    new PetMiningItem { X = 990, Y = -164 },
+                    new PetMiningItem { X = 1260, Y = 106 },
+                    new PetMiningItem { X = 751, Y = 53 },
+                    new PetMiningItem() { X = 1673, Y = -109 },
+                    new PetMiningItem() { X = 2196, Y = -109 },
+                    new PetMiningItem { X = 2637, Y = -109 },
+                    new PetMiningItem { X = 2466, Y = 24 },
+                    new PetMiningItem { X = 1918, Y = 24 },
+                }
+            },
+            {
+                10003, new List<PetMiningItem>()
+                {
+                    new PetMiningItem() { X = 201, Y = 189 },
+                    new PetMiningItem() { X = 208, Y = -197 },
+                    new PetMiningItem { X = 500, Y = -164 },
+                    new PetMiningItem { X = 496, Y = 152 },
+                    new PetMiningItem { X = 795, Y = 179 },
+                    new PetMiningItem { X = 798, Y = -197 },
+                    new PetMiningItem { X = 1082, Y = -176 },
+                    new PetMiningItem { X = 1084, Y = 155 },
+                    new PetMiningItem { X = 1367, Y = 168 },
+                    new PetMiningItem { X = 1359, Y = -174 },
+                    new PetMiningItem() { X = 2403, Y = 155 },
+                    new PetMiningItem() { X = 1618, Y = -189 },
+                    new PetMiningItem { X = 2141, Y = -197 },
+                    new PetMiningItem { X = 1625, Y = 160 },
+                    new PetMiningItem { X = 1882, Y = -164 },
+                    new PetMiningItem { X = 1876, Y = 152 },
+                    new PetMiningItem { X = 2138, Y = 179 },
+                    new PetMiningItem { X = 2401, Y = -176 },
+                    new PetMiningItem { X = 2673, Y = 168 },
+                    new PetMiningItem { X = 2671, Y = -174 },
+                }
+            },
         };
-       
-        
-        
+
         /// <summary>
         /// 累充奖励
         /// </summary>

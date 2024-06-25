@@ -50,5 +50,56 @@
             T2C_TeamDungeonApplyResponse response = (T2C_TeamDungeonApplyResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<int> RequestTeamDungeonCreate(Scene root, int fubenId, int fubenType)
+        {
+            TeamComponentC teamComponent = root.GetComponent<TeamComponentC>();
+
+            TeamInfo teamInfo = teamComponent.GetSelfTeam();
+            UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
+            if (teamInfo != null && teamInfo.SceneId != 0)
+            {
+                return ErrorCode.ERR_IsNotLeader;
+            }
+
+            if (teamInfo != null && teamInfo.TeamId != userInfo.UserId)
+            {
+                return ErrorCode.ERR_IsNotLeader;
+            }
+
+            int errorCode =
+                    TeamHelper.CheckTimesAndLevel(UnitHelper.GetMyUnitFromClientScene(root), fubenType, fubenId, userInfo.UserId);
+            if (errorCode != ErrorCode.ERR_Success)
+            {
+                return errorCode;
+            }
+
+            SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(fubenId);
+            if (fubenType == TeamFubenType.XieZhu && sceneConfig.EnterLv > userInfo.Lv - 10)
+            {
+                return ErrorCode.Err_TeamDungeonXieZhu;
+            }
+
+            errorCode = TeamHelper.CheckCanOpenFuben(root, fubenId, fubenType);
+            if (errorCode != ErrorCode.ERR_Success)
+            {
+                return errorCode;
+            }
+
+            C2M_TeamDungeonCreateRequest request = new()
+            {
+                FubenId = fubenId, FubenType = fubenType, TeamPlayerInfo = UnitHelper.GetSelfTeamPlayerInfo(root)
+            };
+            //创建队伍
+            M2C_TeamDungeonCreateResponse response = (M2C_TeamDungeonCreateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            teamComponent.FubenType = response.FubenType;
+            if (teamInfo != null)
+            {
+                teamInfo.FubenType = response.FubenType;
+            }
+
+            teamComponent.ApplyList.Clear();
+            return response.Error;
+        }
     }
 }

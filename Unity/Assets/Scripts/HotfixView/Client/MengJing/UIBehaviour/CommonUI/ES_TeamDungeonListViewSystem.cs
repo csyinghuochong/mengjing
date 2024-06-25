@@ -32,7 +32,7 @@ namespace ET.Client
                 return;
             }
 
-            // self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TeamDungeonCreate).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TeamDungeonCreate).Coroutine();
         }
 
         private static void OnTeamDungeonItemsRefresh(this ES_TeamDungeonList self, Transform transform, int index)
