@@ -83,10 +83,6 @@ namespace ET
 		/// <summary>NPC</summary>
 		public int[] NpcList { get; set; }
 		/// <summary>野怪</summary>
-		public string CreateMonster { get; set; }
-		/// <summary>野怪</summary>
-		public int MonsterGroup { get; set; }
-		/// <summary>野怪</summary>
 		public int MonsterPosition { get; set; }
 		/// <summary>对应章节</summary>
 		public int ChapterId { get; set; }

@@ -186,23 +186,6 @@ namespace ET
 
             DungeonConfig chapterSonConfig = DungeonConfigCategory.Instance.Get(mapid);
             string allmonster = string.Empty;
-            if (!ComHelp.IfNull(chapterSonConfig.CreateMonster))
-            {
-                allmonster = chapterSonConfig.CreateMonster;
-            }
-            if (chapterSonConfig.MonsterGroup != 0)
-            {
-                MonsterGroupConfig monsterGroupConfig = MonsterGroupConfigCategory.Instance.Get(chapterSonConfig.MonsterGroup);
-                if (allmonster != null && allmonster.Length > 1)
-                {
-                    allmonster = allmonster + "@" + monsterGroupConfig.CreateMonster;
-                }
-                else
-                {
-                    allmonster = monsterGroupConfig.CreateMonster;
-                }
-                //FubenHelp.CreateMonsterList(self.DomainScene(), monsterGroupConfig.CreateMonster);
-            }
             if (chapterSonConfig.MonsterPosition != 0)
             {
                 int posid = chapterSonConfig.MonsterPosition;
