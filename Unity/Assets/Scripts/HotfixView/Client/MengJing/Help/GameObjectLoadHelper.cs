@@ -50,9 +50,8 @@ namespace ET.Client
             Log.Warning($"DisposeAll: {Time.time}");
 
             // GameObjectPoolHelper.DisposeAll();
-
-            Resources.UnloadUnusedAssets();
-            GC.Collect();
+            //Resources.UnloadUnusedAssets();
+            //GC.Collect();
         }
     }
 }

@@ -75,7 +75,7 @@ namespace ET.Client
                     break;
                 case (int)SceneTypeEnum.MainCityScene:
                     PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
-                    string scenepath = playerComponent.Account == "tcg01"? "101_test" : chapterId.ToString();
+                    string scenepath =  chapterId.ToString();
                     paramss = scenepath;
                     break;
                 case (int)SceneTypeEnum.CellDungeon:

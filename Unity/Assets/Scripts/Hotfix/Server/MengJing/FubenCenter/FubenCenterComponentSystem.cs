@@ -64,23 +64,24 @@ namespace ET.Server
 
         public static void OnActivityClose(this FubenCenterComponent self, int functionId)
         {
-            
             if (functionId == 1025)
             {
                 self.BattleOpen = false;
+                self.OnBattleOver().Coroutine();
             }
             
             if (functionId == 1058)
             {
                 self.RunRaceOpen = false;
+                self.DisposeFuben(functionId).Coroutine();
             }
 
             if (functionId == 1059)
             {
                 self.DemonOpen = false;
+                self.DisposeFuben(functionId).Coroutine();
             }
 
-            self.DisposeFuben(functionId).Coroutine();
             //Log.Console($"OnActivityClose: {functionId}");
         }
 
