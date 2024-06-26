@@ -37,7 +37,7 @@ namespace ET.Client
 
             self.E_ImageNotRecvImage.gameObject.SetActive(!isCompleted);
             self.E_ImageCompleteImage.gameObject.SetActive(isCompleted);
-            self.E_ImageButtonButton.onClick.AddListener(() => { self.OnClickSelectTask(); });
+            self.E_ImageButtonButton.AddListener(self.OnClickSelectTask);
         }
 
         public static void SetSelected(this Scroll_Item_TaskGetItem self, int taskId)

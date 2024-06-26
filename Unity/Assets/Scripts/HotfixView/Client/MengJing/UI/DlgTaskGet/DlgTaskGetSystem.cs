@@ -95,6 +95,8 @@ namespace ET.Client
             //显示Npc对话   
             self.View.E_Lab_NpcSpeakText.text = "   " + npcConfig.SpeakText;
             self.View.E_Lab_NpcNameText.text = npcConfig.Name;
+            self.View.E_BtnCommitTask1Button.gameObject.SetActive(false);
+            self.View.E_ButtonGetButton.gameObject.SetActive(false);
             self.View.E_TaskFubenItemsLoopVerticalScrollRect.gameObject.SetActive(false);
             self.View.E_TaskGetItemsLoopVerticalScrollRect.gameObject.SetActive(false);
             self.View.EG_EnergySkillRectTransform.gameObject.SetActive(false);
@@ -466,6 +468,7 @@ namespace ET.Client
             else
             {
                 bool isCompleted = taskPro != null && taskPro.taskStatus == (int)TaskStatuEnum.Completed;
+                Log.Info($"是否完成 {isCompleted}");
                 self.View.E_BtnCommitTask1Button.gameObject.SetActive(isCompleted);
                 self.View.E_ButtonGiveTaskButton.gameObject.SetActive(false);
                 self.View.E_ButtonGetButton.gameObject.SetActive(!isCompleted);
