@@ -306,7 +306,7 @@ namespace ET.Client
                 return -1;
             }
 
-            EventSystem.Instance.Publish(root, new TaskNpcDialog() { NpcId = npcid, ErrorCode = ret });
+            EventSystem.Instance.Publish(unit.Scene(), new TaskNpcDialog() { NpcId = npcid, ErrorCode = ret });
             return ret;
         }
 
