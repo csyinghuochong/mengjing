@@ -65,5 +65,6 @@
         public const int MapTransferBossRefreshTimer = 326;
         public const int AuctionTimer = 327;
         public const int MainBuffTimer = 328;
+        public const int TurtleSpeak = 329;
     }
 }
