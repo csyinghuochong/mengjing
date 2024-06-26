@@ -3,9 +3,9 @@
 namespace ET.Server
 {
     [MessageHandler(SceneType.FubenCenter)]
-    public class M2F_YeWaiSceneIdHandler : MessageHandler<Scene, M2F_YeWaiSceneIdRequest, F2M_YeWaiSceneIdResponse>
+    public class M2F_YeWaiSceneIdHandler : MessageHandler<Scene, M2F_FubenSceneIdRequest, F2M_FubenSceneIdResponse>
     {
-        protected override async ETTask Run(Scene scene, M2F_YeWaiSceneIdRequest request, F2M_YeWaiSceneIdResponse response)
+        protected override async ETTask Run(Scene scene, M2F_FubenSceneIdRequest request, F2M_FubenSceneIdResponse response)
         {
             if (scene.GetComponent<FubenCenterComponent>().YeWaiFubenList.ContainsKey(request.SceneId))
             {

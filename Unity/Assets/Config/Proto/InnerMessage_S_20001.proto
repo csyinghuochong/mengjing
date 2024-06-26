@@ -1323,8 +1323,8 @@ message F2M_FubenCenterOpenResponse // IResponse
 }
 
 //野外副本Id
-//ResponseType F2M_YeWaiSceneIdResponse
-message M2F_YeWaiSceneIdRequest // IRequest
+//ResponseType F2M_FubenSceneIdResponse
+message M2F_FubenSceneIdRequest // IRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
@@ -1332,7 +1332,7 @@ message M2F_YeWaiSceneIdRequest // IRequest
 	int64 UnitId = 3;
 }
 
-message F2M_YeWaiSceneIdResponse // IResponse
+message F2M_FubenSceneIdResponse // IResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;

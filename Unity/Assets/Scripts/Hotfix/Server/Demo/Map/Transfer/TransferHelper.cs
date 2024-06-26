@@ -338,8 +338,8 @@ namespace ET.Server
                         break;
                     case SceneTypeEnum.BaoZang:
                     case SceneTypeEnum.MiJing:
-                        F2M_YeWaiSceneIdResponse f2M_YeWaiSceneIdResponse = (F2M_YeWaiSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                        UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_YeWaiSceneIdRequest() { SceneId = request.SceneId });
+                        F2M_FubenSceneIdResponse f2M_YeWaiSceneIdResponse = (F2M_FubenSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                        UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_FubenSceneIdRequest() { SceneId = request.SceneId });
                         if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
                         {
                             return ErrorCode.ERR_MapLimit;
@@ -356,8 +356,8 @@ namespace ET.Server
                         break;
                     case SceneTypeEnum.RunRace:
                     case SceneTypeEnum.Demon:
-                        f2M_YeWaiSceneIdResponse = (F2M_YeWaiSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                        UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_YeWaiSceneIdRequest() { SceneId = request.SceneId,UnitId = unit.Id  });
+                        f2M_YeWaiSceneIdResponse = (F2M_FubenSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                        UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_FubenSceneIdRequest() { SceneId = request.SceneId,UnitId = unit.Id  });
                         if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
                         {
                             return ErrorCode.ERR_AlreadyFinish;
@@ -417,8 +417,8 @@ namespace ET.Server
                         await TransferHelper.Transfer(unit, responseUnionEnter.FubenActorId, SceneTypeEnum.UnionRace, request.SceneId, 0, "0");
                         break;
                     case SceneTypeEnum.Happy:
-                        f2M_YeWaiSceneIdResponse = (F2M_YeWaiSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                            UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_YeWaiSceneIdRequest() { SceneId = request.SceneId,UnitId = unit.Id  });
+                        f2M_YeWaiSceneIdResponse = (F2M_FubenSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                            UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_FubenSceneIdRequest() { SceneId = request.SceneId,UnitId = unit.Id  });
                         if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
                         {
                             return ErrorCode.ERR_AlreadyFinish;
@@ -427,8 +427,8 @@ namespace ET.Server
                         await TransferHelper.Transfer(unit, f2M_YeWaiSceneIdResponse.FubenActorId, (int)SceneTypeEnum.Happy, request.SceneId, FubenDifficulty.Normal, f2M_YeWaiSceneIdResponse.Position.ToString());
                         break;
                     case SceneTypeEnum.Battle:
-                        f2M_YeWaiSceneIdResponse = (F2M_YeWaiSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                            UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_YeWaiSceneIdRequest() { SceneId = request.SceneId,UnitId = unit.Id  });
+                        f2M_YeWaiSceneIdResponse = (F2M_FubenSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                            UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_FubenSceneIdRequest() { SceneId = request.SceneId,UnitId = unit.Id  });
                         if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
                         {
                             return ErrorCode.ERR_AlreadyFinish;
@@ -445,8 +445,8 @@ namespace ET.Server
                             return ErrorCode.ERR_LevelIsNot;
                         }
                         
-                        f2M_YeWaiSceneIdResponse = (F2M_YeWaiSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                            UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_YeWaiSceneIdRequest() { SceneId = request.SceneId,UnitId = unit.Id  });
+                        f2M_YeWaiSceneIdResponse = (F2M_FubenSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
+                            UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_FubenSceneIdRequest() { SceneId = request.SceneId,UnitId = unit.Id  });
                         if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
                         {
                             return ErrorCode.ERR_AlreadyFinish;
