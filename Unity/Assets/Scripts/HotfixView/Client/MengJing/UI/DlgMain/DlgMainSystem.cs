@@ -51,6 +51,17 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
+    public class DataUpdate_SkillSetting_DlgMainRefresh: AEvent<Scene, DataUpdate_SkillSetting>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_SkillSetting args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnSkillSetUpdate();
+
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
     public class DataUpdate_UpdateUserData_Refresh: AEvent<Scene, DataUpdate_UpdateUserData>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_UpdateUserData args)
