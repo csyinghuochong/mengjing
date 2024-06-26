@@ -5,6 +5,10 @@ namespace ET
 {
     public static class ConfigData
     {
+
+        [StaticField]
+        public static bool ShowLieOpen = false;
+        
         // 个人副本  gm账号显示副本和新地图,大于等于指定副本id不显示
         [StaticField]
         public static int GMDungeonId = 1060003;

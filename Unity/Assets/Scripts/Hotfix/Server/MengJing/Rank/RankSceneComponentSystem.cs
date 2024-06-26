@@ -752,8 +752,8 @@ namespace ET.Server
 
                     StartSceneConfig startSceneConfig = processScenes[0];
                     ActorId mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(startSceneConfig.Zone, startSceneConfig.Name).ActorId;
-                    A2R_Broadcast createUnit = (A2R_Broadcast)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,
-                        new R2A_Broadcast() { LoadType = 1, LoadValue = loadvalue });
+                    A2A_BroadcastResponse createUnit = (A2A_BroadcastResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,
+                        new A2A_BroadcastRequest() { LoadType = 1, LoadValue = loadvalue });
                 }
             }
         }

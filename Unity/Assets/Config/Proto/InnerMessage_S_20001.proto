@@ -952,8 +952,8 @@ message F2R_WorldLvUpdateResponse // IResponse
 }
 
 //广播
-//ResponseType A2R_Broadcast
-message R2A_Broadcast // IRequest
+//ResponseType A2A_BroadcastResponse
+message A2A_BroadcastRequest // IRequest
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
@@ -962,7 +962,7 @@ message R2A_Broadcast // IRequest
 	string LoadValue = 4;
 }
 
-message A2R_Broadcast // IResponse
+message A2A_BroadcastResponse // IResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;

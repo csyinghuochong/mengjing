@@ -3747,14 +3747,14 @@ namespace ET
 	}
 
 //广播
-	[ResponseType(nameof(A2R_Broadcast))]
-	[Message(InnerMessage.R2A_Broadcast)]
+	[ResponseType(nameof(A2A_BroadcastResponse))]
+	[Message(InnerMessage.A2A_BroadcastRequest)]
 	[MemoryPackable]
-	public partial class R2A_Broadcast: MessageObject, IRequest
+	public partial class A2A_BroadcastRequest: MessageObject, IRequest
 	{
-		public static R2A_Broadcast Create(bool isFromPool = false) 
+		public static A2A_BroadcastRequest Create(bool isFromPool = false) 
 		{ 
-			return ObjectPool.Instance.Fetch(typeof(R2A_Broadcast), isFromPool) as R2A_Broadcast; 
+			return ObjectPool.Instance.Fetch(typeof(A2A_BroadcastRequest), isFromPool) as A2A_BroadcastRequest; 
 		}
 
 		[MemoryPackOrder(89)]
@@ -3782,13 +3782,13 @@ namespace ET
 
 	}
 
-	[Message(InnerMessage.A2R_Broadcast)]
+	[Message(InnerMessage.A2A_BroadcastResponse)]
 	[MemoryPackable]
-	public partial class A2R_Broadcast: MessageObject, IResponse
+	public partial class A2A_BroadcastResponse: MessageObject, IResponse
 	{
-		public static A2R_Broadcast Create(bool isFromPool = false) 
+		public static A2A_BroadcastResponse Create(bool isFromPool = false) 
 		{ 
-			return ObjectPool.Instance.Fetch(typeof(A2R_Broadcast), isFromPool) as A2R_Broadcast; 
+			return ObjectPool.Instance.Fetch(typeof(A2A_BroadcastResponse), isFromPool) as A2A_BroadcastResponse; 
 		}
 
 		[MemoryPackOrder(89)]
@@ -7710,8 +7710,8 @@ namespace ET
 		 public const ushort M2C_HappyInfoResult = 20110;
 		 public const ushort R2F_WorldLvUpdateRequest = 20111;
 		 public const ushort F2R_WorldLvUpdateResponse = 20112;
-		 public const ushort R2A_Broadcast = 20113;
-		 public const ushort A2R_Broadcast = 20114;
+		 public const ushort A2A_BroadcastRequest = 20113;
+		 public const ushort A2A_BroadcastResponse = 20114;
 		 public const ushort G2Robot_MessageRequest = 20115;
 		 public const ushort M2LocalDungeon_ExitRequest = 20116;
 		 public const ushort LocalDungeon2M_ExitResponse = 20117;
