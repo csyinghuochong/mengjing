@@ -81,16 +81,6 @@ namespace ET.Server
                         }
                     }
                     break;
-                case SceneType.Happy:
-                    if (request.FunctionId == 1055 && request.FunctionType == 1)
-                    {
-                        scene.GetComponent<HappySceneComponent>().OnHappyBegin();
-                    }
-                    if (request.FunctionId == 1055 && request.FunctionType == 2)
-                    {
-                        scene.GetComponent<HappySceneComponent>().OnHappyOver();
-                    }
-                    break;
                 case SceneType.Rank:
                     //Log.Console($"排行榜定时刷新: {scene.DomainZone()} {hour}");
                     Log.Warning($"排行榜定时刷新: {scene.Zone()} {hour}");
@@ -123,14 +113,6 @@ namespace ET.Server
                     {
                         Log.Warning("RankSceneComponent.OnDemonOver");
                         scene.GetComponent<RankSceneComponent>().OnDemonOver().Coroutine();
-                    }
-                    break;
-                case SceneType.Arena:
-                    //Log.Console($"Arena定时刷新: {scene.DomainZone()} {hour}");
-                    Log.Warning($"Arena定时刷新: {scene.Zone()} {hour}");
-                    if (hour == 0)
-                    {
-                        scene.GetComponent<ArenaSceneComponent>().OnZeroClockUpdate();
                     }
                     break;
                 case SceneType.Union:
@@ -169,17 +151,6 @@ namespace ET.Server
                     if (!ComHelperS.IsInnerNet())
                     {
                         scene.GetComponent<UnitCacheComponent>().CheckUnitCacheList();
-                    }
-                    break;
-                case SceneType.Solo:
-
-                    if (request.FunctionId == 1045 && request.FunctionType == 1)
-                    {
-                        scene.GetComponent<SoloSceneComponent>().OnSoloBegin().Coroutine();
-                    }
-                    if (request.FunctionId == 1045 && request.FunctionType == 2)
-                    {
-                        scene.GetComponent<SoloSceneComponent>().OnSoloOver().Coroutine();
                     }
                     break;
                 case SceneType.FubenCenter:

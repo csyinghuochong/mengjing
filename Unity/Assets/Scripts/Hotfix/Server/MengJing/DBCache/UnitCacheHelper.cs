@@ -252,11 +252,6 @@ namespace ET.Server
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.FubenCenter.ToString()).ActorId;
         }
         
-        public static ActorId GetArenaServerId(int zone)
-        {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Arena.ToString()).ActorId;
-        }
-        
         public static ActorId GetUnionServerId(int zone)
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Union.ToString()).ActorId;
@@ -270,11 +265,6 @@ namespace ET.Server
         public static ActorId GetPopularizeServerId(int zone)
         {
             return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Popularize.ToString()).ActorId;
-        }
-
-        public static ActorId GetHappyServerId(int zone)
-        {
-            return StartSceneConfigCategory.Instance.GetBySceneName(zone, SceneType.Happy.ToString()).ActorId;
         }
         
         public static ActorId MainCityServerId(int zone)

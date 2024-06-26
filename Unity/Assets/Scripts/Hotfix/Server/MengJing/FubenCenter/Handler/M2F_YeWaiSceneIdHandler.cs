@@ -21,6 +21,19 @@ namespace ET.Server
                 response.Camp = iteminfo.Item1;
                 response.Message = "0";
             }
+            else if (request.SceneId == 1111211)
+            {
+                //response.FubenInstanceId = scene.GetComponent<ArenaSceneComponent>().GetArenaInstanceId(request.UserID, request.SceneId);
+            }
+            else if (request.SceneId == 2222222)
+            {
+
+                // HappySceneComponent happySceneComponent = scene.GetComponent<HappySceneComponent>();
+                //
+                // response.FubenInstanceId = happySceneComponent.GetFubenInstanceId(request.UnitId);
+                // response.FubenActorId = new ActorId(scene.Fiber().Process, scene.Fiber().Id, response.FubenInstanceId);
+
+            }
             else 
             {
                 if (request.UnitId == 0)

@@ -32,9 +32,26 @@ namespace ET.Server
 
             return 0;
         }
-
+        
         public static void OnActivityOpen(this FubenCenterComponent self, int functionId)
         {
+            // if (request.FunctionId == 1055 && request.FunctionType == 1)
+            // {
+            //     scene.GetComponent<HappySceneComponent>().OnHappyBegin();
+            // }
+            // if (request.FunctionId == 1055 && request.FunctionType == 2)
+            // {
+            //     scene.GetComponent<HappySceneComponent>().OnHappyOver();
+            // }
+            // if (request.FunctionId == 1045 && request.FunctionType == 1)
+            // {
+            //     scene.GetComponent<SoloSceneComponent>().OnSoloBegin().Coroutine();
+            // }
+            // if (request.FunctionId == 1045 && request.FunctionType == 2)
+            // {
+            //     scene.GetComponent<SoloSceneComponent>().OnSoloOver().Coroutine();
+            // }
+            
             if (functionId == 1025)
             {
                 self.BattleOpen = true;

@@ -1123,27 +1123,6 @@ message T2M_TeamUpdateRequest // IMessage
 	int64 TeamId = 3;
 }
 
-//进入角斗场
-//ResponseType Arena2M_ArenaEnterResponse
-message M2Arena_ArenaEnterRequest // IRequest
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-
-	int64 UserID = 1;
-	int32 SceneId = 2;
-}
-
-message Arena2M_ArenaEnterResponse // IResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-
-	int64 FubenInstanceId = 2;
-	ActorId FubenActorId = 3;
-}
-
 //ResponseType Center2A_RechargeResponse
 message A2Center_RechargeRequest // IRequest
 {
@@ -1387,6 +1366,7 @@ message F2M_YeWaiSceneIdResponse // IResponse
 	int64 FubenInstanceId = 2;
 	ActorId FubenActorId = 3;
 	int32 Camp = 4;
+	int32 Position = 5;
 }
 
 
@@ -1408,29 +1388,6 @@ message M2F_ServerInfoUpdateResponse // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
-
-//进入喜从天降
-//ResponseType H2M_HapplyEnterResponse
-message M2H_HapplyEnterRequest // IRequest
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-
-	int64 UnitId = 1;
-	int32 SceneId = 2;
-}
-
-message H2M_HapplyEnterResponse // IResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-
-	int64 FubenInstanceId = 2;
-	int32 Position = 3;
-	ActorId FubenActorId = 4;
-}
-
 
 //ResponseType P2M_PaiMaiAuctionJoinResponse
 //参入竞拍

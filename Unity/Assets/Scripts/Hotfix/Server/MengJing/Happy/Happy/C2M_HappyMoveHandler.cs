@@ -4,7 +4,7 @@ using Unity.Mathematics;
 
 namespace ET.Server
 {
-    [MessageHandler(SceneType.FubenCenter)]
+    [MessageHandler(SceneType.Map)]
     public class C2M_HappyMoveHandler : MessageLocationHandler<Unit, C2M_HappyMoveRequest, M2C_HappyMoveResponse>
     {
         protected override async ETTask Run(Unit unit, C2M_HappyMoveRequest request, M2C_HappyMoveResponse response)

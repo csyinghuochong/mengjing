@@ -52,7 +52,6 @@ namespace ET.Server
             self.MapIdList.Add(UnitCacheHelper.GetPaiMaiServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetRankServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetFubenCenterId(self.Zone()));
-            self.MapIdList.Add(UnitCacheHelper.GetArenaServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetUnionServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetSoloServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetDbCacheId(self.Zone()));
@@ -317,16 +316,14 @@ namespace ET.Server
                      case 1052://狩猎活动
                          sceneserverid = UnitCacheHelper.GetRankServerId(self.Zone());
                          break;
-                     case 1055:
-                         //喜从天降
-                         sceneserverid = UnitCacheHelper.GetHappyServerId(self.Zone());
-                         break;
                      case 1057: //小龟大赛
                          sceneserverid = UnitCacheHelper.MainCityServerId(self.Zone());
                          break;
-                     case 1025://战场
+                     case 1031://勇士角斗
+                     case 1025://战场活动
                      case 1058://奔跑比赛
                      case 1059://恶魔活动
+                     case 1055://喜从天降
                          sceneserverid = UnitCacheHelper.GetFubenCenterId(self.Zone());
                          break;
                      default:
@@ -373,8 +370,8 @@ namespace ET.Server
              DateTime dateTime = TimeInfo.Instance.ToDateTime(serverTime);
              long curTime = (dateTime.Hour * 60 + dateTime.Minute) * 60 + dateTime.Second;
              self.Root().GetComponent<TimerComponent>().Remove(ref self.ActivityTimer);
-             ///1025 战场 1043家族boss 1044家族争霸  1045竞技 1052狩猎活动  1055喜从天降  1057小龟大赛  1058奔跑比赛 1059恶魔活动
-             List<int> functonIds = new List<int>() { 1025, 1043, 1044, 1045, 1052, 1055, 1057, 1058, 1059 };
+             ///1025 战场 1031勇士角斗 1043家族boss 1044家族争霸  1045竞技 1052狩猎活动  1055喜从天降  1057小龟大赛  1058奔跑比赛 1059恶魔活动
+             List<int> functonIds = new List<int>() { 1025,1031, 1043, 1044, 1045, 1052, 1055, 1057, 1058, 1059 };
              for (int i = 0; i < functonIds.Count; i++)
              {
                  long startTime = FunctionHelp.GetOpenTime(functonIds[i]);
