@@ -105,7 +105,6 @@ namespace ET.Server
          public static (int, BattleInfo) GenerateBattleInstanceId(this FubenCenterComponent self, long unitid, int sceneId)
         {
             //动态创建副本
-
             long  fubenid = IdGenerater.Instance.GenerateId();
             long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
             Scene fubnescene = GateMapFactory.Create(self, fubenid, fubenInstanceId,  "Battle" + fubenid.ToString());
@@ -144,6 +143,7 @@ namespace ET.Server
             self.BattleInfos.Add(battleInfo);
             return (camp, battleInfo);
         }
+        
         
         public static (int , BattleInfo) GetBattleInstanceId(this FubenCenterComponent self, long unitid, int sceneId)
         {
@@ -203,9 +203,9 @@ namespace ET.Server
         public static BattleInfo GetFunctionFubenId(this FubenCenterComponent self, int functionId, long unitId)
         {
             List<BattleInfo> battleInfos = null;
-            if (functionId == 1025)
+            if (functionId == 1055)
             {
-                battleInfos = self.BattleInfos;
+                battleInfos = self.HappyInfos;
             }
             if (functionId == 1058)
             {
@@ -245,11 +245,14 @@ namespace ET.Server
 
             //动态创建副本.....RecastPathComponent.awake寻路
             int sceneid = 0;
+            if (functionId == 1055)
+            {
+                sceneid = BattleHelper.GetSceneIdByType(SceneTypeEnum.Happy);
+            }
             if (functionId == 1058)
             {
                 sceneid = BattleHelper.GetSceneIdByType(SceneTypeEnum.RunRace);
             }
-
             if (functionId == 1059)
             {
                 sceneid = BattleHelper.GetSceneIdByType(SceneTypeEnum.Demon);
@@ -279,6 +282,10 @@ namespace ET.Server
 
             switch (sceneConfig.MapType)
             {
+                case SceneTypeEnum.Happy:
+                    fubnescene.AddComponent<HappyDungeonComponent>();
+                    fubnescene.GetComponent<HappyDungeonComponent>().OnHappyBegin();;
+                    break;
                 case SceneTypeEnum.RunRace:
                     fubnescene.AddComponent<RunRaceDungeonComponent>();
                     fubnescene.GetComponent<RunRaceDungeonComponent>().OnBegin();
@@ -290,7 +297,8 @@ namespace ET.Server
                 default:
                     break;
             }
-
+            
+            FubenHelp.CreateNpc(fubnescene, sceneid);
             FubenHelp.CreateMonsterList(fubnescene, sceneConfig.CreateMonster);
             FubenHelp.CreateMonsterList(fubnescene, sceneConfig.CreateMonsterPosi);
 
@@ -316,6 +324,10 @@ namespace ET.Server
             {
                 battleInfos = self.BattleInfos;
             }
+            if (functionId == 1055)
+            {
+                battleInfos = self.HappyInfos;
+            }
             if (functionId == 1058)
             {
                 battleInfos = self.RunRaceInfos;
@@ -329,6 +341,20 @@ namespace ET.Server
             {
                 case 1025:
                     
+                    break;
+                case 1055:
+                    for(int i = 0; i < battleInfos.Count; i++)
+                    {
+                        Scene scene = self.GetChild<Scene>(battleInfos[i].FubenId);
+                        if (scene == null)
+                        {
+                            Log.Error($"scene == null");
+                            break;
+                        }
+
+                        scene.GetComponent<HappyDungeonComponent>().OnHappyOver().Coroutine();
+                        waitDisposeTime = 60;
+                    }
                     break;
                 case 1058:
                     for(int i = 0; i < battleInfos.Count; i++)

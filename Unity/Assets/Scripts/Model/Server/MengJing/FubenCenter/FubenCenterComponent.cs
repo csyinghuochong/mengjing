@@ -46,6 +46,13 @@ namespace ET.Server
         /// </summary>
         public bool BattleOpen = true;
         public List<BattleInfo> BattleInfos { get; set; } = new List<BattleInfo>();
+        
+        
+        /// <summary>
+        /// 喜从天降
+        /// </summary>
+        public bool HappyOpen = false;
+        public List<BattleInfo> HappyInfos { get; set; } = new List<BattleInfo>();
     }
     
 }

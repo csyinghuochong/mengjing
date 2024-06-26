@@ -25,22 +25,26 @@ namespace ET.Server
             {
                 //response.FubenInstanceId = scene.GetComponent<ArenaSceneComponent>().GetArenaInstanceId(request.UserID, request.SceneId);
             }
-            else if (request.SceneId == 2222222)
-            {
-
-                // HappySceneComponent happySceneComponent = scene.GetComponent<HappySceneComponent>();
-                //
-                // response.FubenInstanceId = happySceneComponent.GetFubenInstanceId(request.UnitId);
-                // response.FubenActorId = new ActorId(scene.Fiber().Process, scene.Fiber().Id, response.FubenInstanceId);
-
-            }
             else 
             {
                 if (request.UnitId == 0)
                 {
                     return;
                 }
-                int functionId = request.SceneId == 6000002 ? 1058 : 1059;
+
+                int functionId = 0;
+                if (request.SceneId == 8000001)
+                {
+                    functionId = 1055;
+                }
+                if (request.SceneId == 6000002)
+                {
+                    functionId = 1058;
+                }
+                if (request.SceneId == 6000003)
+                {
+                    functionId = 1059;
+                }
                 BattleInfo battleInfo = scene.GetComponent<FubenCenterComponent>().GetFunctionFubenId(functionId, request.UnitId);
                 response.FubenInstanceId = battleInfo.FubenInstanceId;
                 response.FubenActorId = battleInfo.ActorId;
