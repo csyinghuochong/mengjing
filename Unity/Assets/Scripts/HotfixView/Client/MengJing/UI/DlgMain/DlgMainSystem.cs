@@ -1226,7 +1226,7 @@ namespace ET.Client
 
             // self.View.ES_MainTeam.ResetUI();
             self.View.ES_MainSkill.ResetUI();
-            // self.UIMainBuffComponent.ResetUI();
+            self.View.ES_MainBuff.ResetUI();
             self.View.ES_JoystickMove.ResetUI();
 
             self.View.ES_MapMini.BeginChangeScene(lastScene);
@@ -1236,6 +1236,7 @@ namespace ET.Client
             self.Root().GetComponent<LockTargetComponent>().BeginEnterScene();
             self.Root().GetComponent<BattleMessageComponent>().CancelRideTargetUnit(0);
             self.Root().GetComponent<BattleMessageComponent>().AttackSelfPlayer.Clear();
+            // self.Root().RemoveComponent<UnitGuaJiComponen>();
         }
 
         /// <summary>
@@ -1245,10 +1246,17 @@ namespace ET.Client
         /// <param name="sceneTypeEnum"></param>
         public static void AfterEnterScene(this DlgMain self, int sceneTypeEnum)
         {
+            bool zhankai = self.View.E_Button_ZhanKaiButton.transform.localScale == new Vector3(-1f, 1f, 1f);
             self.MainUnit = UnitHelper.GetMyUnitFromClientScene(self.Scene());
-            self.View.ES_MainSkill.uiTransform.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.MainCityScene);
-            self.View.EG_HomeButtonRectTransform.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.MainCityScene);
 
+            self.View.EG_Btn_TopRight_1RectTransform.gameObject.SetActive(zhankai && SceneConfigHelper.ShowRightTopButton(sceneTypeEnum));
+            self.View.EG_Btn_TopRight_2RectTransform.gameObject.SetActive(zhankai && SceneConfigHelper.ShowRightTopButton(sceneTypeEnum));
+            self.View.E_Btn_RerurnBuildingButton.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.MainCityScene &&
+                sceneTypeEnum != SceneTypeEnum.JiaYuan);
+            self.View.E_E_Btn_MapTransferButton.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.LocalDungeon);
+            // self.LevelGuideMini.SetActive(sceneTypeEnum == SceneTypeEnum.CellDungeon);
+            self.View.E_NpcDuiHuaButton.gameObject.SetActive(sceneTypeEnum == SceneTypeEnum.MainCityScene);
+            self.View.E_ShrinkButton.gameObject.SetActive(sceneTypeEnum != SceneTypeEnum.RunRace && sceneTypeEnum != SceneTypeEnum.Demon);
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             string value = userInfoComponent.GetGameSettingValue(GameSettingEnum.HideLeftBottom);
             if (value == "1")
@@ -1263,12 +1271,116 @@ namespace ET.Client
 
             self.View.ES_JoystickMove.AfterEnterScene();
 
-            self.View.ES_MainSkill.OnSkillSetUpdate();
+            if (!SceneConfigHelper.ShowLeftButton(sceneTypeEnum))
+            {
+                self.View.E_LeftTypeSetToggleGroup.gameObject.SetActive(false);
+                // self.OnClickPageButton(-1);
+            }
+            else
+            {
+                self.View.E_LeftTypeSetToggleGroup.gameObject.SetActive(true);
+                self.View.E_LeftTypeSetToggleGroup.OnSelectIndex(sceneTypeEnum == SceneTypeEnum.TeamDungeon? 1 : 0);
+            }
 
+            int sceneid = self.Root().GetComponent<MapComponent>().SceneId;
+            switch (sceneTypeEnum)
+            {
+                case SceneTypeEnum.CellDungeon:
+                    // self.UILevelGuideMini.GetComponent<UICellDungeonCellMiniComponent>().OnUpdateUI();
+                    break;
+                case SceneTypeEnum.MainCityScene:
+                    // self.UIMainHpBar.MonsterNode.SetActive(false);
+                    // self.UIMainHpBar.BossNode.SetActive(false);
+                    self.View.EG_HomeButtonRectTransform.gameObject.SetActive(true);
+                    self.View.ES_MainSkill.uiTransform.gameObject.SetActive(false);
+                    self.View.E_MainTaskItemsLoopVerticalScrollRect.gameObject.SetActive(true);
+                    self.View.E_LeftTypeSetToggleGroup.gameObject.SetActive(true);
+                    self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
+                    break;
+                case SceneTypeEnum.Happy:
+                    self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
+                    self.View.ES_MainSkill.uiTransform.gameObject.SetActive(false);
+                    self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(false);
+                    break;
+                case SceneTypeEnum.RunRace:
+                    self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
+                    self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
+                    break;
+                case SceneTypeEnum.Demon:
+                    self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
+                    self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
+                    break;
+                case SceneTypeEnum.JiaYuan:
+                    self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
+                    self.View.ES_MainSkill.uiTransform.gameObject.SetActive(false);
+                    self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
+                    break;
+                // case SceneTypeEnum.TowerOfSeal:
+                //     self.UIMainTask.GameObject.SetActive(false);
+                //     self.FunctionSetBtn.SetActive(false);
+                //     self.HomeButton.SetActive(false);
+                //     self.UIMainSkill.SetActive(true);
+                //     self.UIJoystickMoveComponent.GameObject.SetActive(true);
+                //     break;
+                case SceneTypeEnum.LocalDungeon:
+                    DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(sceneid);
+                    switch (dungeonConfig.MapType)
+                    {
+                        case SceneSubTypeEnum.LocalDungeon_1:
+                            self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
+                            self.View.ES_MainSkill.uiTransform.gameObject.SetActive(false);
+                            self.View.EG_Btn_TopRight_1RectTransform.gameObject.SetActive(false);
+                            self.View.EG_Btn_TopRight_2RectTransform.gameObject.SetActive(false);
+                            self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(false);
+                            break;
+                        default:
+                            self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
+                            self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
+                            self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
+                            break;
+                    }
+
+                    break;
+                default:
+                    self.View.EG_HomeButtonRectTransform.gameObject.SetActive(false);
+                    self.View.ES_MainSkill.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
+                    break;
+            }
+
+            // self.OnHorseRide();
+            self.UpdateShadow();
+            self.UpdateNpcTaskUI();
             self.View.ES_MapMini.OnEnterScene();
+            self.View.ES_MainSkill.OnEnterScene(self.MainUnit, sceneTypeEnum);
+            self.View.ES_MainSkill.OnSkillSetUpdate();
+            self.View.ES_RoleHead.OnEnterScene(sceneTypeEnum);
+            // self.ZoneScene().GetComponent<RelinkComponent>().OnApplicationFocusHandler(true);
 
-            self.UpdateKillMonsterReward();
+            self.View.E_UnionButton.gameObject.SetActive(self.MainUnit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0) > 0);
+            if (sceneTypeEnum == SceneTypeEnum.LocalDungeon)
+            {
+                // self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.EnterFuben, sceneid.ToString());
+                bool shenmizhimen =
+                        DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(self.Root().GetComponent<MapComponent>().SceneId);
+                self.View.E_Btn_RerurnDungeonButton.gameObject.SetActive(shenmizhimen);
+                self.View.E_E_Btn_MapTransferButton.gameObject.SetActive(!shenmizhimen);
+                self.View.E_Btn_RerurnBuildingButton.gameObject.SetActive(!shenmizhimen);
+            }
+
+            if (!self.View.ES_JoystickMove.uiTransform.gameObject.activeSelf
+                || sceneTypeEnum == SceneTypeEnum.PetDungeon
+                || sceneTypeEnum == SceneTypeEnum.PetTianTi
+                || sceneTypeEnum == SceneTypeEnum.PetMing)
+            {
+                self.MainUnit.GetComponent<StateComponentC>().StateTypeAdd(StateTypeEnum.NoMove);
+            }
+
+            self.Root().RemoveComponent<UnitGuaJiComponent>();
+            self.View.EG_GuaJiSetRectTransform.gameObject.SetActive(false);
+
             self.UpdateLvReward();
+            self.UpdateKillMonsterReward();
 
             self.CheckMailReddot().Coroutine();
         }
