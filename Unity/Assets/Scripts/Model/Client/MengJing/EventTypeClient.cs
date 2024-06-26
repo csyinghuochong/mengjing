@@ -42,6 +42,11 @@ namespace ET.Client
     {
     }
 
+    public struct UserDataTypeUpdate_HorseNotice
+    {
+        public M2C_HorseNoticeInfo M2C_HorseNoticeInfo;
+    }
+
     public struct DataUpdate_BagItemUpdate
     {
     }

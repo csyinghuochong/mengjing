@@ -3550,7 +3550,7 @@ message Actor_TransferResponse // ILocationResponse
 	string Message = 92;
 }
 
-message M2C_HorseNoticeInfo // ILocationMessage
+message M2C_HorseNoticeInfo // IMessage
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
