@@ -13838,7 +13838,7 @@ namespace ET
 
 	[Message(OuterMessage.M2C_HorseNoticeInfo)]
 	[MemoryPackable]
-	public partial class M2C_HorseNoticeInfo: MessageObject, ILocationMessage
+	public partial class M2C_HorseNoticeInfo: MessageObject, IMessage
 	{
 		public static M2C_HorseNoticeInfo Create(bool isFromPool = false) 
 		{ 
