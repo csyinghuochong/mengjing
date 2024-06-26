@@ -18,7 +18,7 @@ namespace ET.Server
             root.AddComponent<DBManagerComponent>();
             root.AddComponent<MessageLocationSenderComponent>();
             root.AddComponent<FubenCenterComponent>();
-            
+            Log.Debug("FiberInit_FubenCenter");
             await ETTask.CompletedTask;
         }
     }

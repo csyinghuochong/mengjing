@@ -55,7 +55,7 @@ namespace ET.Server
             self.MapIdList.Add(UnitCacheHelper.GetSoloServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetDbCacheId(self.Zone()));
             self.InitDayActivity().Coroutine();
-            self.InitFunctionButton();
+            self.InitFunctionButton().Coroutine();
         }
 
         [EntitySystem]
@@ -99,7 +99,7 @@ namespace ET.Server
                 self.DBDayActivityInfo.PetMingHexinList.Clear();
 
                 self.InitPetMineExtend();
-                self.InitFunctionButton();
+                self.InitFunctionButton().Coroutine();
             }
 
             if (hour == 0 && self.Zone() == 3) //通知中心服
@@ -361,8 +361,9 @@ namespace ET.Server
             self.StartActivityTipTimer();
         }
 
-        public static void InitFunctionButton(this ActivitySceneComponent self)
+        public static async ETTask InitFunctionButton(this ActivitySceneComponent self)
         {
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(2000);
             self.ActivityTimerList.Clear();
             Log.Warning("InitFunctionButton");
             long serverTime = TimeHelper.ServerNow();
