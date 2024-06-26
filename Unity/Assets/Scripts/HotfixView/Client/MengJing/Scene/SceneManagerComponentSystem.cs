@@ -75,7 +75,7 @@ namespace ET.Client
                     break;
                 case (int)SceneTypeEnum.MainCityScene:
                     PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
-                    string scenepath =  chapterId.ToString();
+                    string scenepath = chapterId.ToString();
                     paramss = scenepath;
                     break;
                 case (int)SceneTypeEnum.CellDungeon:
@@ -96,6 +96,8 @@ namespace ET.Client
             await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
             var path = ABPathHelper.GetScenePath(paramss);
             await self.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(path, LoadSceneMode.Single);
+            EventSystem.Instance.Publish(self.Root(), new LoadSceneFinished());
+
             self.UpdateChuanSong(sceneTypeEnum);
 
             self.Root().GetComponent<SoundComponent>().PlayBgmSound(sceneTypeEnum, chapterId, sousceneid);

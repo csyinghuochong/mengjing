@@ -339,4 +339,8 @@ namespace ET.Client
     {
         public M2C_RunRaceBattleInfo M2C_RunRaceBattleInfo;
     }
+
+    public struct LoadSceneFinished
+    {
+    }
 }
