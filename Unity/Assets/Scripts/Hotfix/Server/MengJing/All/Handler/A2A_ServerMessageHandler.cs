@@ -5,7 +5,7 @@ namespace ET.Server
 {
 
     //服务器之间通用通信协议
-    [MessageHandler(SceneType.Map)]
+    [MessageHandler(SceneType.All)]
     public class A2A_ServerMessageHandler : MessageHandler<Scene, A2A_ServerMessageRequest, A2A_ServerMessageRResponse>
     {
 

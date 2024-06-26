@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 
-    [MessageHandler(SceneType.Map)]
+    [MessageHandler(SceneType.All)]
     public  class A2A_ActivityUpdateHandler : MessageHandler<Scene, A2A_ActivityUpdateRequest, A2A_ActivityUpdateResponse>
     {
         protected override async ETTask Run(Scene scene, A2A_ActivityUpdateRequest request, A2A_ActivityUpdateResponse response)
@@ -162,7 +162,7 @@ namespace ET.Server
                         foreach (var item in fubenCenter.Children)
                         {
                             Scene fubenScene = item.Value as Scene;
-                            fubenScene.GetComponent<YeWaiRefreshComponent>().OnZeroClockUpdate(request.OpenDay);
+                            fubenScene.GetComponent<YeWaiRefreshComponent>()?.OnZeroClockUpdate(request.OpenDay);
                         }
                     }
                     if (request.FunctionId > 0 && request.FunctionType == 1)

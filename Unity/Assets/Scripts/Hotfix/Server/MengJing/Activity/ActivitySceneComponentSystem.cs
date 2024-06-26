@@ -87,9 +87,9 @@ namespace ET.Server
             Log.Warning($"NoticeActivityUpdate_Hour: zone: {self.Zone()} openday: {openServerDay}  {hour}");
             for (int i = 0; i < self.MapIdList.Count; i++)
             {
-                // A2A_ActivityUpdateResponse m2m_TrasferUnitResponse =
-                //         (A2A_ActivityUpdateResponse) await self.Root().GetComponent<MessageSender>().Call(self.MapIdList[i],
-                //             new A2A_ActivityUpdateRequest() { Hour = hour, OpenDay = openServerDay });
+                A2A_ActivityUpdateResponse m2m_TrasferUnitResponse =
+                        (A2A_ActivityUpdateResponse) await self.Root().GetComponent<MessageSender>().Call(self.MapIdList[i],
+                            new A2A_ActivityUpdateRequest() { Hour = hour, OpenDay = openServerDay });
             }
 
             if (hour == 0)
