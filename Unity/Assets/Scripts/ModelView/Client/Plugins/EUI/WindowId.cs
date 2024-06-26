@@ -128,5 +128,6 @@ namespace ET.Client
 		WindowID_TeamDungeonCreate,
 		WindowID_TeamApplyList,
 		WindowID_BuffTips,
+		WindowID_JiaYuanMain,
 	}
 }

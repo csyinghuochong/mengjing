@@ -349,10 +349,10 @@ namespace ET.Client
                 //     UIHelper.Create(zoneScene, UIType.UITowerOfSealMain).Coroutine();
                 //     uimain.GameObject.transform.localScale = Vector3.one;
                 //     break;
-                // case SceneTypeEnum.JiaYuan:
-                //     UIHelper.Create(zoneScene, UIType.UIJiaYuanMain).Coroutine();
-                //     uimain.GameObject.transform.localScale = Vector3.one;
-                //     break;
+                case SceneTypeEnum.JiaYuan:
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanMain).Coroutine();
+                    dlgMain.View.uiTransform.localScale = Vector3.one;
+                    break;
                 // case SceneTypeEnum.RunRace:
                 //     UIHelper.Create(zoneScene, UIType.UIRunRaceMain).Coroutine();
                 //     uimain.GameObject.transform.localScale = Vector3.one;
