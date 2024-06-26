@@ -124,15 +124,15 @@ namespace ET.Client
             using CoroutineLock coroutineLock = await self.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.ResourcesLoader, location.GetHashCode());
 
             OperationHandleBase handler;
-            if (self.handlers.TryGetValue(location, out handler))
-            {
-                return;
-            }
+            // if (self.handlers.TryGetValue(location, out handler))
+            // {
+            //     return;
+            // }
 
             handler = self.package.LoadSceneAsync(location);
 
             await handler.Task;
-            self.handlers.Add(location, handler);
+            // self.handlers.Add(location, handler);
         }
     }
     
