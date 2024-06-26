@@ -67,6 +67,14 @@ namespace ET.Client
                         monsterHpComponent.UpdateBlood();
                     }
                     break;
+                case UnitType.Pet:
+                    UIPetHpComponent petHpComponent = unitDefend.GetComponent<UIPetHpComponent>();
+                    if (petHpComponent != null)
+                    {
+                        HpGameObject = petHpComponent.GameObject;
+                        petHpComponent.UpdateBlood();
+                    }
+                    break;
                 default:
                     break;
             }
