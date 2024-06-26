@@ -484,7 +484,6 @@ namespace ET.Server
         
          public static async ETTask<int> LocalDungeonTransfer(Unit unit, int sceneId, int transferId, int difficulty)
          {
-             
              Log.Debug("M2LocalDungeon_EnterRequest_1");
              if (transferId != 0 && !DungeonTransferConfigCategory.Instance.Contain(transferId))
              {
@@ -499,36 +498,28 @@ namespace ET.Server
              }
 
              long oldsceneid = unit.Root().Id;
-             List<StartSceneConfig> zonelocaldungeons = StartSceneConfigCategory.Instance.LocalDungeons[unit.Zone()];
-             int n = (int)( (unit.Id / 99) % zonelocaldungeons.Count);
-             
-             StartSceneConfig startSceneConfig =  zonelocaldungeons[n];
              sceneId = transferId != 0 ? DungeonTransferConfigCategory.Instance.Get(transferId).MapID : sceneId;
              if (sceneId == 0)
              {
-                 Log.Error($"zonelocaldungeonsb:  unitid: {unit.Id}  n: {n}  transferId: {transferId} sceneId: {sceneId} ");
+                 Log.Error($"zonelocaldungeonsb:  unitid: {unit.Id}  transferId: {transferId} sceneId: {sceneId} ");
                  return ErrorCode.ERR_NotFindLevel;
              }
              
              Log.Debug("M2LocalDungeon_EnterRequest_2");
              
-             LocalDungeon2M_EnterResponse createUnit = (LocalDungeon2M_EnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                         startSceneConfig.ActorId, new M2LocalDungeon_EnterRequest()
-                         { 
-                             UserID = unit.Id, SceneType = SceneTypeEnum.LocalDungeon, SceneId = sceneId, TransferId = transferId, Difficulty = difficulty
-                         });
+             long fubenid = IdGenerater.Instance.GenerateId();
+             long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
+             Scene fubnescene =  GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "LocalDungeon" + fubenid.ToString());
+             //fubnescene.AddComponent<YeWaiRefreshComponent>();
+             LocalDungeonComponent localDungeon = fubnescene.AddComponent<LocalDungeonComponent>();
+             localDungeon.FubenDifficulty = difficulty;
+             MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
+             mapComponent.SetMapInfo((int)SceneTypeEnum.LocalDungeon, sceneId, 0);
+             mapComponent.NavMeshId = DungeonConfigCategory.Instance.Get(sceneId).MapID;
 
-             if (createUnit.Error != ErrorCode.ERR_Success)
-             {
-                 return createUnit.Error;
-             }
-
+             TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
              TransferHelper.BeforeTransfer(unit);
-             
-             Log.Debug($"M2LocalDungeon_EnterRequest_2:{createUnit.Process} {createUnit.RootId} {createUnit.FubenInstanceId}");
-             
-             ActorId FubenInstanceId =  new ActorId(createUnit.Process, createUnit.RootId, createUnit.FubenInstanceId);
-             await TransferHelper.Transfer(unit, FubenInstanceId, (int)SceneTypeEnum.LocalDungeon, sceneId, difficulty, transferId.ToString());
+             await TransferHelper.Transfer(unit, fubnescene.GetActorId(), (int)SceneTypeEnum.LocalDungeon, sceneId, difficulty, transferId.ToString());
 
              //移除旧scene
              // Scene scene = unit.Root().GetChild<Scene>(oldsceneid);

@@ -411,32 +411,6 @@ message A2M_PetMingPlayerInfoResponse // IResponse
 	PetMingPlayerInfo PetMingPlayerInfo = 1;
 }
 
-//进入副本
-//ResponseType LocalDungeon2M_EnterResponse
-message M2LocalDungeon_EnterRequest // IRequest
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-
-	int64 UserID = 1;
-	int32 SceneId = 2;
-	int32 TransferId = 3;
-	int32 Difficulty = 4;
-	int32 SceneType = 5;
-}
-
-message LocalDungeon2M_EnterResponse // IResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-	
-	int64 FubenId = 3;
-	int64 FubenInstanceId = 4;
-	int32 RootId = 5;
-	int32 Process = 6;
-}
-
 //喂食物
 //ResponseType A2M_ActivityFeedResponse
 message M2A_ActivityFeedRequest // IRequest

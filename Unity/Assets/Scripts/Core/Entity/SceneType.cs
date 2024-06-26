@@ -33,7 +33,6 @@ namespace ET
         Friend = 1 << 25,
         FubenCenter = 1 << 26,
         JiaYuan = 1 << 27,
-        LocalDungeon = 1L << 28,
         PaiMai = 1L << 29,
         Popularize = 1L << 30,
         Queue = 1L << 31,
