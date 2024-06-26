@@ -7,6 +7,8 @@ namespace ET.Client
     {
         public static void AddLoadQueue(Scene root, string path, long formId, Action<GameObject, long> action)
         {
+            Log.Debug($"self.GameObject !=null:  {path}  {formId}");
+            
             if (string.IsNullOrEmpty(path))
             {
                 return;

@@ -111,12 +111,16 @@ namespace ET.Client
                     NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
                     int runmonsterId = numericComponent.GetAsInt(NumericType.RunRaceTransform);
                     int cardtransform = numericComponent.GetAsInt(NumericType.CardTransform);
-                    self.OnRunRaceMonster(runmonsterId, cardtransform, false);
+                    
                     if (runmonsterId > 0)
                     {
                         self.OnRunRaceMonster(0, runmonsterId, false);
                     }
                     else
+                    {
+                        self.OnRunRaceMonster(runmonsterId, cardtransform, false);
+                    }
+                    if(string.IsNullOrEmpty(self.UnitAssetsPath))
                     {
                         path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(unit.ConfigId).ModelAsset}");
                         self.UnitAssetsPath = string.Empty;
@@ -450,7 +454,7 @@ namespace ET.Client
 
             if (self.GameObject != null)
             {
-                Log.Error(" self.GameObject !=null");
+                Log.Error($" self.GameObject !=null:   {self.GameObject.name}    {go.name}   {self.InstanceId}   {formId}" );
                 return;
             }
 
@@ -1063,13 +1067,11 @@ namespace ET.Client
                 int monsterid = runraceid > 0 ? runraceid : cardmonsterid;  
                 MonsterConfig runmonsterCof = MonsterConfigCategory.Instance.Get(monsterid);
                 string path = ABPathHelper.GetUnitPath("Monster/" + runmonsterCof.MonsterModelID);
-                GameObjectLoadHelper.AddLoadQueue(self.Root(), path, self.InstanceId, self.OnLoadGameObject);
                 self.UnitAssetsPath = path;
             }
             else
             {
-                string path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(self.GetParent<Unit>().ConfigId).ModelAsset}");
-                GameObjectLoadHelper.AddLoadQueue(self.Root(), path, self.InstanceId, self.OnLoadGameObject);
+                //string path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(self.GetParent<Unit>().ConfigId).ModelAsset}");
                 self.UnitAssetsPath = string.Empty;
             }
             if (unit.MainHero)

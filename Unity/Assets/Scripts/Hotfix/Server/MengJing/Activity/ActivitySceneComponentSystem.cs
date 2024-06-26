@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-    
     [Invoke(TimerInvokeType.ActivityServerTimer)]
     public class ActivityServerTimer: ATimer<ActivitySceneComponent>
     {
@@ -20,7 +19,7 @@ namespace ET.Server
             }
         }
     }
-    
+
     [Invoke(TimerInvokeType.ActivityTipTimer)]
     public class ActivityTipTimer: ATimer<ActivitySceneComponent>
     {
@@ -37,9 +36,9 @@ namespace ET.Server
         }
     }
 
-    [EntitySystemOf(typeof(ActivitySceneComponent))]
-    [FriendOf(typeof(ActivitySceneComponent))]
-    [FriendOf(typeof(DBDayActivityInfo))]
+    [EntitySystemOf(typeof (ActivitySceneComponent))]
+    [FriendOf(typeof (ActivitySceneComponent))]
+    [FriendOf(typeof (DBDayActivityInfo))]
     public static partial class ActivitySceneComponentSystem
     {
         [EntitySystem]
@@ -47,7 +46,7 @@ namespace ET.Server
         {
             self.MapIdList.Clear();
             Log.Debug($"self.Zone:  {self.Zone()}");
-            
+
             self.MapIdList.Add(UnitCacheHelper.GetGateServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetPaiMaiServerId(self.Zone()));
             self.MapIdList.Add(UnitCacheHelper.GetRankServerId(self.Zone()));
@@ -58,17 +57,16 @@ namespace ET.Server
             self.InitDayActivity().Coroutine();
             self.InitFunctionButton();
         }
-        
+
         [EntitySystem]
         private static void Destroy(this ET.Server.ActivitySceneComponent self)
         {
-
         }
-        
+
         public static void OnCheck(this ActivitySceneComponent self)
         {
             DateTime dateTime = TimeHelper.DateTimeNow();
-  
+
             if (self.DBDayActivityInfo.LastHour != dateTime.Hour)
             {
                 self.DBDayActivityInfo.LastHour = dateTime.Hour;
@@ -186,10 +184,12 @@ namespace ET.Server
                 {
                     hexinNumber = 1;
                 }
+
                 if (mineBattleConfig[i].Id == 10002)
                 {
                     hexinNumber = 2;
                 }
+
                 if (mineBattleConfig[i].Id == 10003)
                 {
                     hexinNumber = 5;
@@ -200,22 +200,17 @@ namespace ET.Server
 
                 for (int hexin = 0; hexin < hexinlist.Count; hexin++)
                 {
-                    self.DBDayActivityInfo.PetMingHexinList.Add(new KeyValuePairInt() 
-                    {
-                        KeyId = mineBattleConfig[i].Id,
-                        Value = hexinlist[hexin]
-                    });
+                    self.DBDayActivityInfo.PetMingHexinList.Add(new KeyValuePairInt() { KeyId = mineBattleConfig[i].Id, Value = hexinlist[hexin] });
                 }
             }
         }
-        
-        
+
         public static void CheckPetMine(this ActivitySceneComponent self)
         {
             self.CheckIndex++;
             if (self.CheckIndex >= 1)
             {
-                int openDay = ServerHelper.GetOpenServerDay( false, self.Zone() );
+                int openDay = ServerHelper.GetOpenServerDay(false, self.Zone());
 
                 List<PetMingPlayerInfo> petMingPlayers = self.DBDayActivityInfo.PetMingList;
 
@@ -229,6 +224,7 @@ namespace ET.Server
                     {
                         playerLimitList.Add(petMingPlayers[i].UnitId, 0);
                     }
+
                     playerLimitList[petMingPlayers[i].UnitId] += chanchu;
                 }
 
@@ -236,7 +232,8 @@ namespace ET.Server
                 {
                     long playerLimit = playerLimitList[petMingPlayers[i].UnitId];
 
-                    float coffi = ComHelp.GetMineCoefficient(openDay, petMingPlayers[i].MineType, petMingPlayers[i].Postion, self.DBDayActivityInfo.PetMingHexinList);
+                    float coffi = ComHelp.GetMineCoefficient(openDay, petMingPlayers[i].MineType, petMingPlayers[i].Postion,
+                        self.DBDayActivityInfo.PetMingHexinList);
 
                     MineBattleConfig mineBattleConfig = MineBattleConfigCategory.Instance.Get(petMingPlayers[i].MineType);
                     int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi * (self.CheckIndex / 60f));
@@ -250,22 +247,22 @@ namespace ET.Server
                         long oldValue = self.DBDayActivityInfo.PetMingChanChu[petMingPlayers[i].UnitId];
                         oldValue += chanchu;
                         oldValue = Math.Min(oldValue, playerLimit);
-                
+
                         self.DBDayActivityInfo.PetMingChanChu[petMingPlayers[i].UnitId] = oldValue;
                     }
                 }
+
                 self.CheckIndex = 0;
             }
         }
-        
-        
+
         public static async ETTask InitDayActivity(this ActivitySceneComponent self)
         {
             int zone = self.Zone();
             ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(zone);
-            await  self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(1000,2000));
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(1000, 2000));
             DBComponent dbComponent = self.Root().GetComponent<DBManagerComponent>().GetZoneDB(zone);
-            
+
             List<DBDayActivityInfo> dbDayActivityInfos = await dbComponent.Query<DBDayActivityInfo>(zone, d => d.Id == zone);
             if (dbDayActivityInfos == null || dbDayActivityInfos.Count == 0)
             {
@@ -275,161 +272,191 @@ namespace ET.Server
             {
                 self.DBDayActivityInfo = dbDayActivityInfos[0];
             }
+
             int openServerDay = ServerHelper.GetOpenServerDay(false, zone);
             Log.Debug($"InitDayActivity: {zone}  {openServerDay}");
-            self.DBDayActivityInfo.MysteryItemInfos =  MysteryShopHelper.InitMysteryItemInfos( openServerDay);
+            self.DBDayActivityInfo.MysteryItemInfos = MysteryShopHelper.InitMysteryItemInfos(openServerDay);
 
             if (self.DBDayActivityInfo.PetMingHexinList.Count == 0)
             {
                 self.InitPetMineExtend();
             }
+
             self.SaveDB();
 
             //每日活动
-            self.Timer =  self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Minute, TimerInvokeType.ActivityServerTimer, self);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Minute, TimerInvokeType.ActivityServerTimer, self);
         }
-        
-         public static async ETTask OnCheckFuntionButton(this ActivitySceneComponent self)
-         {
-             await ETTask.CompletedTask;
-             long serverTime = TimeHelper.ServerNow();
-             DateTime dateTime = TimeInfo.Instance.ToDateTime(serverTime);
 
-             if (self.ActivityTimerList.Count > 0)
-             {
-                 int functionId = self.ActivityTimerList[0].FunctionId;
-                 bool todayopen = FunctionHelp.IsFunctionDayOpen((int)dateTime.DayOfWeek, functionId);
-                 Log.Warning($"OnCheckFuntionButton: {functionId} {self.ActivityTimerList[0].FunctionType}");
+        public static async ETTask OnCheckFuntionButton(this ActivitySceneComponent self)
+        {
+            await ETTask.CompletedTask;
+            long serverTime = TimeHelper.ServerNow();
+            DateTime dateTime = TimeInfo.Instance.ToDateTime(serverTime);
 
-                 ActorId sceneserverid = new ActorId();
-                 switch (functionId)
-                 {
-                     case 1043: //家族Boss
-                         sceneserverid = UnitCacheHelper.GetUnionServerId(self.Zone());
-                         break;
-                     case 1044:  //家族争霸
-                         sceneserverid = UnitCacheHelper.GetUnionServerId(self.Zone());
-                         break;
-                     case 1045:
-                         sceneserverid = UnitCacheHelper.GetSoloServerId(self.Zone());    
-                         break;
-                     case 1052://狩猎活动
-                         sceneserverid = UnitCacheHelper.GetRankServerId(self.Zone());
-                         break;
-                     case 1057: //小龟大赛
-                         sceneserverid = UnitCacheHelper.MainCityServerId(self.Zone());
-                         break;
-                     case 1031://勇士角斗
-                     case 1025://战场活动
-                     case 1058://奔跑比赛
-                     case 1059://恶魔活动
-                     case 1055://喜从天降
-                         sceneserverid = UnitCacheHelper.GetFubenCenterId(self.Zone());
-                         break;
-                     default:
-                         break;
-                 }
+            if (self.ActivityTimerList.Count > 0)
+            {
+                int functionId = self.ActivityTimerList[0].FunctionId;
+                bool todayopen = FunctionHelp.IsFunctionDayOpen((int)dateTime.DayOfWeek, functionId);
+                Log.Warning($"OnCheckFuntionButton: {functionId} {self.ActivityTimerList[0].FunctionType}");
 
-                 if (todayopen )
-                 {
-                     if (sceneserverid.Equals(new ActorId()))
-                     {
-                         Log.Error(("sceneserverid == null"));
-                     }
-                     else
-                     {
-                         A2A_ActivityUpdateResponse m2m_TrasferUnitResponse = (A2A_ActivityUpdateResponse)await self.Root().GetComponent<MessageSender>().Call
-                             (sceneserverid, new A2A_ActivityUpdateRequest() { Hour = -1, FunctionId = functionId, FunctionType = self.ActivityTimerList[0].FunctionType });
-                     }
+                ActorId sceneserverid = new ActorId();
+                switch (functionId)
+                {
+                    case 1043: //家族Boss
+                        sceneserverid = UnitCacheHelper.GetUnionServerId(self.Zone());
+                        break;
+                    case 1044: //家族争霸
+                        sceneserverid = UnitCacheHelper.GetUnionServerId(self.Zone());
+                        break;
+                    case 1045:
+                        sceneserverid = UnitCacheHelper.GetSoloServerId(self.Zone());
+                        break;
+                    case 1052: //狩猎活动
+                        sceneserverid = UnitCacheHelper.GetRankServerId(self.Zone());
+                        break;
+                    case 1057: //小龟大赛
+                        sceneserverid = UnitCacheHelper.MainCityServerId(self.Zone());
+                        break;
+                    case 1031: //勇士角斗
+                    case 1025: //战场活动
+                    case 1058: //奔跑比赛
+                    case 1059: //恶魔活动
+                    case 1055: //喜从天降
+                        sceneserverid = UnitCacheHelper.GetFubenCenterId(self.Zone());
+                        break;
+                    default:
+                        break;
+                }
 
-                 }
-                 if (todayopen && functionId == 1044 && self.ActivityTimerList[0].FunctionType == 2)
-                 {
-                     //1044
-                     ActorId rankserverid = UnitCacheHelper.GetRankServerId(self.Zone());
-                      ////家族战结束. 发送奖励
-                      A2A_ActivityUpdateResponse m2m_TrasferUnitResponse = (A2A_ActivityUpdateResponse)await self.Root().GetComponent<MessageSender>().Call
-                                   (rankserverid, new A2A_ActivityUpdateRequest() { Hour = -1, FunctionId = functionId, FunctionType = 2 });
-                 }
+                if (todayopen)
+                {
+                    if (sceneserverid.Equals(new ActorId()))
+                    {
+                        Log.Error(("sceneserverid == null"));
+                    }
+                    else
+                    {
+                        A2A_ActivityUpdateResponse m2m_TrasferUnitResponse = (A2A_ActivityUpdateResponse)await self.Root()
+                                .GetComponent<MessageSender>().Call(sceneserverid,
+                                    new A2A_ActivityUpdateRequest()
+                                    {
+                                        Hour = -1, FunctionId = functionId, FunctionType = self.ActivityTimerList[0].FunctionType
+                                    });
+                    }
+                }
 
-                 self.ActivityTimerList.RemoveAt(0);
-             }
+                if (todayopen && functionId == 1044 && self.ActivityTimerList[0].FunctionType == 2)
+                {
+                    //1044
+                    ActorId rankserverid = UnitCacheHelper.GetRankServerId(self.Zone());
+                    ////家族战结束. 发送奖励
+                    A2A_ActivityUpdateResponse m2m_TrasferUnitResponse = (A2A_ActivityUpdateResponse)await self.Root().GetComponent<MessageSender>()
+                            .Call(rankserverid, new A2A_ActivityUpdateRequest() { Hour = -1, FunctionId = functionId, FunctionType = 2 });
+                }
 
-             self.Root().GetComponent<TimerComponent>().Remove(ref self.ActivityTimer);
-             if (self.ActivityTimerList.Count > 0)
-             {
-                 self.ActivityTimer = self.Root().GetComponent<TimerComponent>().NewOnceTimer(self.ActivityTimerList[0].BeginTime, TimerInvokeType.ActivityTipTimer, self);
-             }
-         }
+                self.ActivityTimerList.RemoveAt(0);
+            }
+            
+            self.StartActivityTipTimer();
+        }
 
-         public static  void InitFunctionButton(this ActivitySceneComponent self)
-         {
-             self.ActivityTimerList.Clear();
-             Log.Warning("InitFunctionButton");
-             long serverTime = TimeHelper.ServerNow();
-             DateTime dateTime = TimeInfo.Instance.ToDateTime(serverTime);
-             long curTime = (dateTime.Hour * 60 + dateTime.Minute) * 60 + dateTime.Second;
-             self.Root().GetComponent<TimerComponent>().Remove(ref self.ActivityTimer);
-             ///1025 战场 1031勇士角斗 1043家族boss 1044家族争霸  1045竞技 1052狩猎活动  1055喜从天降  1057小龟大赛  1058奔跑比赛 1059恶魔活动
-             List<int> functonIds = new List<int>() { 1025,1031, 1043, 1044, 1045, 1052, 1055, 1057, 1058, 1059 };
-             for (int i = 0; i < functonIds.Count; i++)
-             {
-                 long startTime = FunctionHelp.GetOpenTime(functonIds[i]);
-                 long endTime = FunctionHelp.GetCloseTime(functonIds[i]);
-                 bool functionopne = FunctionHelp.IsFunctionDayOpen((int)dateTime.DayOfWeek, functonIds[i]);
-                 //Log.Console($"InitFunctionButton: {functonIds[i]} {functionopne}");
-                 if (curTime < startTime)
-                 {
-                     long sTime = serverTime + (startTime - curTime) * 1000;
-                     self.ActivityTimerList.Add(new ActivityTimer() { FunctionId = functonIds[i], BeginTime = sTime, FunctionType = 1 });
-                 }
-                 if (curTime < endTime)
-                 {
-                     long sTime = serverTime + (endTime - curTime) * 1000;
-                     self.ActivityTimerList.Add(new ActivityTimer() { FunctionId = functonIds[i], BeginTime = sTime, FunctionType = 2 });
-                 }
-                 bool inTime = functionopne && curTime >= startTime && curTime <= endTime;
-                 if (inTime )
-                 {
-                     self.ActivityTimerList.Add(new ActivityTimer() { FunctionId = functonIds[i], BeginTime = serverTime, FunctionType = 1 });
-                 }
-             }
+        public static void InitFunctionButton(this ActivitySceneComponent self)
+        {
+            self.ActivityTimerList.Clear();
+            Log.Warning("InitFunctionButton");
+            long serverTime = TimeHelper.ServerNow();
+            DateTime dateTime = TimeInfo.Instance.ToDateTime(serverTime);
+            long curTime = (dateTime.Hour * 60 + dateTime.Minute) * 60 + dateTime.Second;
+           
+            ///1025 战场 1031勇士角斗 1043家族boss 1044家族争霸  1045竞技 1052狩猎活动  1055喜从天降  1057小龟大赛  1058奔跑比赛 1059恶魔活动
+            List<int> functonIds = new List<int>()
+            {
+                1025,
+                1031,
+                1043,
+                1044,
+                1045,
+                1052,
+                1055,
+                1057,
+                1058,
+                1059
+            };
+            for (int i = 0; i < functonIds.Count; i++)
+            {
+                long startTime = FunctionHelp.GetOpenTime(functonIds[i]);
+                long endTime = FunctionHelp.GetCloseTime(functonIds[i]);
+                bool functionopne = FunctionHelp.IsFunctionDayOpen((int)dateTime.DayOfWeek, functonIds[i]);
+                //Log.Console($"InitFunctionButton: {functonIds[i]} {functionopne}");
+                if (curTime < startTime)
+                {
+                    long sTime = serverTime + (startTime - curTime) * 1000;
+                    self.ActivityTimerList.Add(new ActivityTimer() { FunctionId = functonIds[i], BeginTime = sTime, FunctionType = 1 });
+                }
 
-             if (self.ActivityTimerList.Count > 0)
-             {
-                 self.ActivityTimerList.Sort(delegate (ActivityTimer a, ActivityTimer b)
-                 {
-                     return (int)(a.BeginTime - b.BeginTime);
-                 });
+                if (curTime < endTime)
+                {
+                    long sTime = serverTime + (endTime - curTime) * 1000;
+                    self.ActivityTimerList.Add(new ActivityTimer() { FunctionId = functonIds[i], BeginTime = sTime, FunctionType = 2 });
+                }
 
-                 self.ActivityTimer = self.Root().GetComponent<TimerComponent>().NewOnceTimer(self.ActivityTimerList[0].BeginTime, TimerInvokeType.ActivityTipTimer, self);
-             }
-         }
+                bool inTime = functionopne && curTime >= startTime && curTime <= endTime;
+                if (inTime)
+                {
+                    self.ActivityTimerList.Add(new ActivityTimer() { FunctionId = functonIds[i], BeginTime = serverTime, FunctionType = 1 });
+                }
+            }
 
-     public static  void SaveDB(this ActivitySceneComponent self)
-     {
-         self.Root().GetComponent<DBManagerComponent>().GetZoneDB(self.Zone()).Save(self.DBDayActivityInfo).Coroutine();
-     }
+            self.ActivityTimerList.Sort(delegate(ActivityTimer a, ActivityTimer b) { return (int)(a.BeginTime - b.BeginTime); });
+            self.StartActivityTipTimer();
+        }
 
-     public static int OnMysteryBuyRequest(this ActivitySceneComponent self, MysteryItemInfo mysteryInfo)
-     {
-             for (int i = 0; i < self.DBDayActivityInfo.MysteryItemInfos.Count; i++)
-             {
-                 MysteryItemInfo mysteryItemInfo1 = self.DBDayActivityInfo.MysteryItemInfos[i];
+        public static void StartActivityTipTimer(this ActivitySceneComponent self)
+        {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.ActivityTimer);
+            if (self.ActivityTimerList.Count <= 0)
+            {
+               return;
+            }
 
-                 if (mysteryItemInfo1.ItemID != mysteryInfo.ItemID)
-                 {
-                     continue;
-                 }
-                 if (mysteryItemInfo1.ItemNumber < mysteryInfo.ItemNumber)
-                 {
-                     return ErrorCode.ERR_ItemNotEnoughError;
-                 }
+            if (self.ActivityTimerList[0].BeginTime <= TimeHelper.ServerNow())
+            {
+                self.OnCheckFuntionButton().Coroutine();
+            }
+            else
+            {
+                self.ActivityTimer = self.Root().GetComponent<TimerComponent>()
+                        .NewOnceTimer(self.ActivityTimerList[0].BeginTime, TimerInvokeType.ActivityTipTimer, self);
+            }
+        }
 
-                 mysteryItemInfo1.ItemNumber -= mysteryInfo.ItemNumber;
-                 return ErrorCode.ERR_Success;
-             }
-             return ErrorCode.ERR_ItemNotEnoughError;
-         }
+        public static void SaveDB(this ActivitySceneComponent self)
+        {
+            self.Root().GetComponent<DBManagerComponent>().GetZoneDB(self.Zone()).Save(self.DBDayActivityInfo).Coroutine();
+        }
+
+        public static int OnMysteryBuyRequest(this ActivitySceneComponent self, MysteryItemInfo mysteryInfo)
+        {
+            for (int i = 0; i < self.DBDayActivityInfo.MysteryItemInfos.Count; i++)
+            {
+                MysteryItemInfo mysteryItemInfo1 = self.DBDayActivityInfo.MysteryItemInfos[i];
+
+                if (mysteryItemInfo1.ItemID != mysteryInfo.ItemID)
+                {
+                    continue;
+                }
+
+                if (mysteryItemInfo1.ItemNumber < mysteryInfo.ItemNumber)
+                {
+                    return ErrorCode.ERR_ItemNotEnoughError;
+                }
+
+                mysteryItemInfo1.ItemNumber -= mysteryInfo.ItemNumber;
+                return ErrorCode.ERR_Success;
+            }
+
+            return ErrorCode.ERR_ItemNotEnoughError;
+        }
     }
 }
