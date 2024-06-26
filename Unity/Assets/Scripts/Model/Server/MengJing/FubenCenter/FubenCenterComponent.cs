@@ -3,6 +3,14 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
+    public struct ArenaPlayerStatu
+    {
+        public int States;   //0关闭之后离开  1关闭之后离开  2 结束时还在
+        public int KillNumber;
+        public int RankId;
+        public long UnitId;
+    }
+    
     [ChildOf]
     public class BattleInfo : Entity, IAwake
     {
@@ -16,6 +24,8 @@ namespace ET.Server
 
         public List<long> Camp1Player{ get; set; } = new List<long>();
         public List<long> Camp2Player{ get; set; } = new List<long>();
+        
+        public Dictionary<long, ArenaPlayerStatu> PlayerList { get; set; } = new Dictionary<long, ArenaPlayerStatu>();
     }
     
     
@@ -44,7 +54,7 @@ namespace ET.Server
         /// <summary>
         /// 战场
         /// </summary>
-        public bool BattleOpen = true;
+        public bool BattleOpen = false;
         public List<BattleInfo> BattleInfos { get; set; } = new List<BattleInfo>();
         
         
@@ -53,6 +63,13 @@ namespace ET.Server
         /// </summary>
         public bool HappyOpen = false;
         public List<BattleInfo> HappyInfos { get; set; } = new List<BattleInfo>();
+
+        
+        /// <summary>
+        /// 勇士角斗
+        /// </summary>
+        public bool ArenaOpen = false;
+        public List<BattleInfo> ArenaInfos { get; set; } = new List<BattleInfo>();
     }
     
 }

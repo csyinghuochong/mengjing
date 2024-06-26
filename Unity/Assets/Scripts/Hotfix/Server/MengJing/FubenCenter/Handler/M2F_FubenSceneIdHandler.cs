@@ -13,17 +13,13 @@ namespace ET.Server
                 response.FubenActorId = scene.GetComponent<FubenCenterComponent>().FubenActorIdList[request.SceneId];
                 response.Message = scene.GetComponent<FubenCenterComponent>().GetScenePlayer(response.FubenInstanceId).ToString();
             }
-            else if (request.SceneId == 3000001 || request.SceneId == 3000002)
+            else if (request.SceneId == 3000001 || request.SceneId == 3000002)  //战场
             {
                 (int, BattleInfo) iteminfo = scene.GetComponent<FubenCenterComponent>().GetBattleInstanceId(request.UnitId, request.SceneId);
                 response.FubenInstanceId = iteminfo.Item2.FubenInstanceId;
                 response.FubenActorId = iteminfo.Item2.ActorId;
                 response.Camp = iteminfo.Item1;
                 response.Message = "0";
-            }
-            else if (request.SceneId == 1111211)
-            {
-                //response.FubenInstanceId = scene.GetComponent<ArenaSceneComponent>().GetArenaInstanceId(request.UserID, request.SceneId);
             }
             else 
             {
@@ -36,6 +32,10 @@ namespace ET.Server
                 if (request.SceneId == 8000001)
                 {
                     functionId = 1055;
+                }
+                if (request.SceneId == 6000001)
+                {
+                    functionId = 1031;
                 }
                 if (request.SceneId == 6000002)
                 {

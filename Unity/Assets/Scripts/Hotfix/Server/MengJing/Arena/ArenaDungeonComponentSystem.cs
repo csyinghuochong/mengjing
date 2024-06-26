@@ -47,7 +47,7 @@ namespace ET.Server
         {
             await self.Root().GetComponent<TimerComponent>().WaitAsync(TimeHelper.Minute);
             List<Unit> unitlist = UnitHelper.GetAliveUnitList(self.Scene(), UnitType.Player);
-            ArenaInfo arenaInfo = self.Scene().GetComponent<ArenaInfo>();
+            BattleInfo arenaInfo = self.GetParent<FubenCenterComponent>().GetArenaInfo(self.Scene().Id);
             for (int i = 0; i < unitlist.Count; i++)
             {
                 ArenaPlayerStatu arenaPlayerStatu = arenaInfo.PlayerList[unitlist[i].Id];
@@ -105,7 +105,7 @@ namespace ET.Server
 
             if (self.ArenaClose)
             {
-                ArenaInfo arenaInfo = self.Scene().GetComponent<ArenaInfo>();
+                BattleInfo arenaInfo = self.GetParent<FubenCenterComponent>().GetArenaInfo(self.Scene().Id);
                 for (int i = 0; i < unitlist.Count; i++)
                 {
                     ArenaPlayerStatu arenaPlayerStatu = arenaInfo.PlayerList[unitlist[i].Id];
@@ -172,7 +172,7 @@ namespace ET.Server
         public static List<ArenaPlayerStatu> GetNoRankPlayers(this ArenaDungeonComponent self)
         {
             List<ArenaPlayerStatu> arenaPlayerStatus = new List<ArenaPlayerStatu>();
-            ArenaInfo arenaInfo = self.Scene().GetComponent<ArenaInfo>();
+            BattleInfo arenaInfo = self.GetParent<FubenCenterComponent>().GetArenaInfo(self.Scene().Id);
             foreach (var item in arenaInfo.PlayerList)
             {
                 if (item.Value.RankId == 0)
@@ -187,7 +187,7 @@ namespace ET.Server
         public static List<ArenaPlayerStatu> GetRankPlayers(this ArenaDungeonComponent self, int start, int end)
         {
             List<ArenaPlayerStatu> arenaPlayerStatus = new List<ArenaPlayerStatu>();
-            ArenaInfo arenaInfo = self.Scene().GetComponent<ArenaInfo>();
+            BattleInfo arenaInfo = self.GetParent<FubenCenterComponent>().GetArenaInfo(self.Scene().Id);
             foreach (var item in arenaInfo.PlayerList)
             {
                 if (item.Value.RankId == 0)
@@ -236,7 +236,7 @@ namespace ET.Server
         /// <returns></returns>
         public static async ETTask OnArenaOver(this ArenaDungeonComponent self)
         {
-            ArenaInfo arenaInfo = self.Scene().GetComponent<ArenaInfo>();
+            BattleInfo arenaInfo = self.GetParent<FubenCenterComponent>().GetArenaInfo(self.Scene().Id);
             foreach ((long unitid, ArenaPlayerStatu ArenaPlayerStatu) in arenaInfo.PlayerList)
             {
                 LogHelper.LogDebug($"OnArenaOver: {self.Zone()} {unitid} {ArenaPlayerStatu.RankId}");
@@ -275,7 +275,7 @@ namespace ET.Server
                 return;
             }
 
-            ArenaInfo arenaInfo = self.Scene().GetComponent<ArenaInfo>();
+            BattleInfo arenaInfo = self.GetParent<FubenCenterComponent>().GetArenaInfo(self.Scene().Id);
             if (!arenaInfo.PlayerList.ContainsKey(attack.Id))
             {
                 LogHelper.LogDebug($"ArenaDungeon:  {attack.Id}not found");
