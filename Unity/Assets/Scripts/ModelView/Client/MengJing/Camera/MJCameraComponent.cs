@@ -65,6 +65,6 @@ namespace ET.Client
 
         public Unit NpcUnit { get; set; }
 
-        public bool OnBuildEnter { get; set; }
+        public Action OnBuildEnter { get; set; }
     }
 }

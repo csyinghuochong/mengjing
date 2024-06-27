@@ -79,8 +79,7 @@ namespace ET.Client
                 return;
             }
 
-            C2M_PetTargetLockRequest request = new() { TargetId = lockId };
-            M2C_PetTargetLockResponse response = (M2C_PetTargetLockResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            await BagClientNetHelper.PetTargetLock(self.Root(), lockId);
         }
 
         public static async ETTask OnButton_Switch(this ES_MainSkill self)
@@ -102,8 +101,8 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             int equipIndex = numericComponent.GetAsInt(NumericType.EquipIndex);
-            C2M_ItemEquipIndexRequest request = new() { EquipIndex = equipIndex == 0? 1 : 0 };
-            M2C_ItemEquipIndexResponse response = (M2C_ItemEquipIndexResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+
+            M2C_ItemEquipIndexResponse response = await BagClientNetHelper.ItemEquipIndex(self.Root(), equipIndex == 0? 1 : 0);
             if (self.IsDisposed || response.Error > 0)
             {
                 return;
@@ -240,9 +239,7 @@ namespace ET.Client
                         return;
                     }
 
-                    C2M_JingLingDropRequest request = new();
-                    M2C_JingLingDropResponse response =
-                            (M2C_JingLingDropResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+                    await BagClientNetHelper.JingLingDrop(self.Root());
                     chengJiuComponent.RandomDrop = 1;
                     self.CheckJingLingFunction();
                     break;
@@ -309,7 +306,7 @@ namespace ET.Client
             uiComponent.CurrentNpcUI = WindowID.WindowID_ZhuaPu;
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_JoystickMove.uiTransform.gameObject.SetActive(false);
             MJCameraComponent cameraComponent = self.Root().CurrentScene().GetComponent<MJCameraComponent>();
-            // cameraComponent.SetBuildEnter(target, () => { self.OnBuildEnter().Coroutine(); });
+            cameraComponent.SetBuildEnter(target, () => { self.OnBuildEnter().Coroutine(); });
         }
 
         public static async ETTask MoveToNpc(this ES_MainSkill self, Unit target, Vector3 position)

@@ -1,3 +1,4 @@
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -69,9 +70,10 @@ namespace ET.Client
 
         public static void BuildEnterMove(this MJCameraComponent self)
         {
-            if (self.CameraMoveTime > 0.8f && self.OnBuildEnter)
+            if (self.CameraMoveTime > 0.8f && self.OnBuildEnter!= null)
             {
-                self.OnBuildEnter = false;
+                self.OnBuildEnter();
+                self.OnBuildEnter = null;
                 //抛出实践
             }
 
@@ -148,7 +150,21 @@ namespace ET.Client
             self.MainCamera.transform.LookAt(self.MainUnit.Position);
         }
 
-        //== SceneTypeEnum.MainCityScene
+        public static void SetBuildEnter(this MJCameraComponent self, Unit npc, Action action)
+        {
+            self.NpcUnit = npc;
+            self.CameraMoveTime = 0f;
+            self.CameraMoveType = (npc != null)? CameraMoveType.NpcEnter : CameraMoveType.Normal;
+
+            self.TargetPosition = npc.Position + npc.Forward * 4f;
+            self.TargetPosition.y += 2f;
+
+            self.OldCameraPostion = self.MainCamera.transform.position;
+            self.OnBuildEnter = action;
+
+            UnitHelper.GetMyUnitFromClientScene(self.Root()).GetComponent<UIPlayerHpComponent>()?.ShowHearBar(false);
+        }
+
         public static void OnEnterScene(this MJCameraComponent self, int sceneTypeEnum)
         {
             switch (sceneTypeEnum)
