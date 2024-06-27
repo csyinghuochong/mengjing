@@ -53,8 +53,7 @@ namespace ET.Client
                     }
                 }
 
-                // UI uimain = UIHelper.GetUI(self.ZoneScene(), UIType.UIMain);
-                // uimain.GetComponent<UIMainComponent>().UIMainHpBar.ShowBossHPBar(haveBoss);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_MainHpBar.ShowBossHPBar(haveBoss);
             }
             else
             {
@@ -75,9 +74,7 @@ namespace ET.Client
             }
 
             self.LastLockId = 0;
-
-            // UI uimain = UIHelper.GetUI(self.ZoneScene(), UIType.UIMain);
-            // uimain.GetComponent<UIMainComponent>().UIMainHpBar.OnCancelLock();
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_MainHpBar.OnCancelLock();
         }
 
         public static void OnSelfDead(this LockTargetComponent self)
@@ -129,9 +126,11 @@ namespace ET.Client
             if (unitTarget.Type == UnitType.Monster)
             {
                 MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unitTarget.ConfigId);
-                // UI uimain = UIHelper.GetUI(self.ZoneScene(), UIType.UIMain);
-                // uimain.GetComponent<UIMainComponent>().UIMainHpBar.OnLockUnit(unitTarget);
-                // uimain.GetComponent<UIMainComponent>().UIMainSkillComponent.OnLockUnit(unitTarget);
+
+                DlgMain dlgMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
+                dlgMain.View.ES_MainHpBar.OnLockUnit(unitTarget);
+                dlgMain.View.ES_MainSkill.OnLockUnit(unitTarget);
+
                 self.SetEffectSize((float)monsterConfig.SelectSize);
             }
         }

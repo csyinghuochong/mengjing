@@ -16,6 +16,15 @@ namespace ET.Client
         }
     }
 
+    [NumericWatcher(SceneType.Demo, NumericType.BossBelongID)]
+    public class NumericWatcher_BossBelongID_UpdateDlgMain: INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+            unit.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainHpBar.OnUpdateBelongID(args.Defend.Id, args.NewValue);
+        }
+    }
+
     [Event(SceneType.Demo)]
     public class DataUpdate_OnPetFightSet_Refresh: AEvent<Scene, DataUpdate_OnPetFightSet>
     {
@@ -43,7 +52,7 @@ namespace ET.Client
             }
             else
             {
-                dlgMain.View.ES_MainBuff.OnBuffUpdate(args.ABuffHandler, args.OperateType);
+                dlgMain.View.ES_MainHpBar.ES_MainBuff.OnBuffUpdate(args.ABuffHandler, args.OperateType);
             }
 
             await ETTask.CompletedTask;
@@ -367,7 +376,7 @@ namespace ET.Client
 
             self.View.ES_RoleHead.uiTransform.gameObject.SetActive(true);
             self.View.ES_MainBuff.uiTransform.gameObject.SetActive(true);
-            self.View.ES_MainHpBar.uiTransform.gameObject.SetActive(false);
+            self.View.ES_MainHpBar.uiTransform.gameObject.SetActive(true);
             self.View.ES_OpenBox.uiTransform.gameObject.SetActive(false);
             self.View.ES_Singing.uiTransform.gameObject.SetActive(false);
 
