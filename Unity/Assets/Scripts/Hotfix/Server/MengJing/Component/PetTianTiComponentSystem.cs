@@ -157,7 +157,7 @@ namespace ET.Server
                      rankPetInfo.PetConfigId.Add(rolePetInfo!=null ? rolePetInfo.ConfigId :0);
                  }
                  R2M_PetRankUpdateResponse m2m_TrasferUnitResponse = (R2M_PetRankUpdateResponse)await self.Root().GetComponent<MessageSender>().Call
-                          (mapInstanceId, new M2R_PetRankUpdateRequest() {  RankPetInfo = rankPetInfo, Win = result, EnemyId = self.Root().GetComponent<PetTianTiComponent>().EnemyId });
+                          (mapInstanceId, new M2R_PetRankUpdateRequest() {  RankPetInfo = rankPetInfo, Win = result, EnemyId = self.EnemyId });
 
                  return m2m_TrasferUnitResponse.SelfRank;
              }

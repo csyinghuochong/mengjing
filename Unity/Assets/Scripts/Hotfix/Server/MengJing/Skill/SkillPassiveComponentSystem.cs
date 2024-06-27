@@ -28,7 +28,22 @@ namespace ET.Server
             }
         }
 
-
+        [Invoke(TimerInvokeType.MonsterSingingTimer)]
+        public class MonsterSingingTimer: ATimer<SkillPassiveComponent>
+        {
+            protected override void Run(SkillPassiveComponent self)
+            {
+                try
+                {
+                    self.OnSingOver();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+           
         
         [EntitySystem]
         private static void Awake(this ET.Server.SkillPassiveComponent self)

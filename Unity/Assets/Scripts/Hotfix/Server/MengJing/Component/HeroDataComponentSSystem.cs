@@ -807,7 +807,7 @@ namespace ET.Server
                      attack.GetComponent<SkillManagerComponentS>().OnFinish(true);
                  }
                  
-                 List<Unit> units = FubenHelp.GetUnitList(unit.Root(), UnitType.Monster);
+                 List<Unit> units = FubenHelp.GetUnitList(unit.Scene(), UnitType.Monster);
                  for (int i = 0; i < units.Count; i++)
                  {
                      units[i].GetComponent<AttackRecordComponent>()?.OnRemoveAttackByUnit(unit.Id);
@@ -815,7 +815,7 @@ namespace ET.Server
              }
              if (unit.Type == UnitType.Pet)
              {
-                 int sceneTypeEnum = unit.Root().GetComponent<MapComponent>().SceneType;
+                 int sceneTypeEnum = unit.Scene().GetComponent<MapComponent>().SceneType;
                  if (sceneTypeEnum != (int)SceneTypeEnum.PetTianTi
                   && sceneTypeEnum != (int)SceneTypeEnum.PetDungeon
                   && sceneTypeEnum != (int)SceneTypeEnum.PetMing)

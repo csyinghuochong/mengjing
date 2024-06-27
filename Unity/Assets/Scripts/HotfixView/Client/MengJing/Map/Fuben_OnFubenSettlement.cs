@@ -51,6 +51,8 @@ namespace ET.Client
                     // ui.GetComponent<UIPetFubenResultComponent>().OnUpdateUI(args.m2C_FubenSettlement);
                     break;
                 case SceneTypeEnum.PetTianTi:
+                    FlyTipComponent.Instance.ShowFlyTip("宠物天梯对战结束！！！");
+                    
                     // UIHelper.GetUI(args.Scene, UIType.UIPetMain).GetComponent<UIPetMainComponent>().OnFubenResult(args.m2C_FubenSettlement);
                     // ui = await UIHelper.Create(args.Scene, UIType.UIPetFubenResult);
                     // ui.GetComponent<UIPetFubenResultComponent>().OnUpdateUI(args.m2C_FubenSettlement);
