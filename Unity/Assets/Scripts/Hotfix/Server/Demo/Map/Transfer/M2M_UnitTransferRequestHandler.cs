@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ET.Client;
 using Unity.Mathematics;
 
@@ -197,6 +198,25 @@ namespace ET.Server
                     int towerarrived = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.SealTowerArrived);
                     int towerfinished = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.SealTowerFinished);
                     scene.GetComponent<SealTowerComponent>().GenerateFuben(towerarrived,towerfinished);
+                    break;
+                case SceneTypeEnum.Solo:
+                    numericComponent.ApplyValue(NumericType.JueXingAnger, 0, false);
+                    unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
+                    sceneConfig = SceneConfigCategory.Instance.Get(request.SceneId);
+                    List<Unit> units =  UnitHelper.GetUnitList(unit.Scene(), UnitType.Player );
+                    if (units.Count == 1)
+                    {
+                        //第1个人
+                        unit.Position = new float3(sceneConfig.InitPos[0] * 0.01f, sceneConfig.InitPos[1] * 0.01f, sceneConfig.InitPos[2] * 0.01f);
+                    }
+
+                    if (units.Count == 2)
+                    {
+                        //第2个人
+                        unit.Position = new float3(10.07f, 0f, 0.27f);
+                    }
+
+                    unit.Rotation = quaternion.identity;
                     break;
                 case SceneTypeEnum.RunRace:
                     unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);

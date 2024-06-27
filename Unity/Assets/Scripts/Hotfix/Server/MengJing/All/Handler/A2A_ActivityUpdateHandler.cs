@@ -153,6 +153,16 @@ namespace ET.Server
                         scene.GetComponent<UnitCacheComponent>().CheckUnitCacheList();
                     }
                     break;
+                case SceneType.Solo:
+                    if (request.FunctionId == 1045 && request.FunctionType == 1)
+                    {
+                        scene.GetComponent<SoloSceneComponent>().OnSoloBegin().Coroutine();
+                    }
+                    if (request.FunctionId == 1045 && request.FunctionType == 2)
+                    {
+                        scene.GetComponent<SoloSceneComponent>().OnSoloOver().Coroutine();
+                    }
+                    break;
                 case SceneType.FubenCenter:
                     if (hour == 0)
                     {

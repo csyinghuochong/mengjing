@@ -20,6 +20,7 @@ namespace ET.Server
             }
 
             response.FubenInstanceId = soloscene.InstanceId;
+            response.FubenActorId = soloscene.GetActorId();
             await ETTask.CompletedTask;
         }
     }

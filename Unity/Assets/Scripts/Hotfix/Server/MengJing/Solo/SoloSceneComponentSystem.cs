@@ -45,7 +45,7 @@ namespace ET.Server
                 MessageHelper.SendActor(robotSceneId, new G2Robot_MessageRequest() { Zone = self.DomainZone(), MessageType = NoticeType.SoloBegin });
             }
             */
-            Log.Warning($"OnSoloBegin: {self.Zone()}");
+            Console.WriteLine($"OnSoloBegin: {self.Zone()}");
 
             //清除之前的排名坐骑
             DBRankInfo dBRankInfo = await UnitCacheHelper.GetComponent<DBRankInfo>(self.Root(), self.Zone());

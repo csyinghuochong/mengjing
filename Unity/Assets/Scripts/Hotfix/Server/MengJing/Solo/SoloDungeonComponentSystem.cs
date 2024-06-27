@@ -7,6 +7,23 @@ namespace ET.Server
     [FriendOf(typeof (SoloDungeonComponent))]
     public static partial class SoloDungeonComponentSystem
     {
+        
+        [Invoke(TimerInvokeType.SoloDungeonTimer)]
+        public class SoloDungeonTimer: ATimer<SoloDungeonComponent>
+        {
+            protected override void Run(SoloDungeonComponent self)
+            {
+                try
+                {
+                    self.PlayerCheck();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+        
         [EntitySystem]
         private static void Awake(this ET.Server.SoloDungeonComponent self)
         {

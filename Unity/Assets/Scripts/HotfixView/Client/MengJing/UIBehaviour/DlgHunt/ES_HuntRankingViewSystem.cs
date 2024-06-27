@@ -45,11 +45,6 @@ namespace ET.Client
             long instacnid = self.InstanceId;
 
             R2C_RankShowLieResponse response = await RankNetHelper.RankShowLie(self.Root());
-            // 测试数据
-            response.RankList.Add(new RankShouLieInfo() { PlayerName = "测试角色1", Occ = 1, KillNumber = 300 });
-            response.RankList.Add(new RankShouLieInfo() { PlayerName = "测试角色2", Occ = 2, KillNumber = 200 });
-            response.RankList.Add(new RankShouLieInfo() { PlayerName = "测试角色3", Occ = 1, KillNumber = 100 });
-
             if (response.RankList == null || response.RankList.Count < 1)
             {
                 return;
