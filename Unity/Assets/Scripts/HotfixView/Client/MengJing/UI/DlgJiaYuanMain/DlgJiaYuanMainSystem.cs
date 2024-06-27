@@ -148,6 +148,7 @@ namespace ET.Client
             FlyTipComponent.Instance.ShowFlyTipDi("UIJiaYuanPetFeed暂未开放");
             // UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIJiaYuanPetFeed);
             // uI.GetComponent<UIJiaYuanPetFeedComponent>().OnInitUI(jiaYuanPet);
+            await ETTask.CompletedTask;
         }
 
         public static async ETTask OnInit(this DlgJiaYuanMain self)
@@ -471,6 +472,7 @@ namespace ET.Client
             Unit targetUnit = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(UnitLockRanges[self.LastPasureIndex].Id);
             self.Root().GetComponent<LockTargetComponent>().LockTargetUnitId(targetUnit.Id);
             // uI.GetComponent<UIJiaYuanMenuComponent>().OnUpdatePasture(targetUnit);
+            await ETTask.CompletedTask;
             return self.LastPasureIndex;
         }
 
@@ -510,6 +512,7 @@ namespace ET.Client
             }
 
             self.OnClickPlanItem((int)UnitLockRanges[self.LastCellIndex].Id).Coroutine();
+            await ETTask.CompletedTask;
         }
 
         public static async ETTask RequestPlanOpen(this DlgJiaYuanMain self, int index)
@@ -523,6 +526,7 @@ namespace ET.Client
             self.Root().GetComponent<JiaYuanComponent>().PlanOpenList_7 = response.PlanOpenList;
 
             self.OnOpenPlan(index);
+            await ETTask.CompletedTask;
         }
 
         public static async ETTask OnClickPlanItem(this DlgJiaYuanMain self, int index)

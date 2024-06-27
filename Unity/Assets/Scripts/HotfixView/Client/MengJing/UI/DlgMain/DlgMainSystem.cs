@@ -186,6 +186,7 @@ namespace ET.Client
 
     [FriendOf(typeof (ES_RoleHead))]
     [FriendOf(typeof (ES_MainBuff))]
+    [FriendOf(typeof (ES_MainHpBar))]
     [FriendOf(typeof (ES_ButtonPositionSet))]
     [FriendOf(typeof (DlgMainViewComponent))]
     [FriendOf(typeof (ES_JoystickMove))]
@@ -279,6 +280,7 @@ namespace ET.Client
         {
             self.View.ES_RoleHead.uiTransform.gameObject.SetActive(true);
             self.View.ES_MainBuff.uiTransform.gameObject.SetActive(true);
+            self.View.ES_MainHpBar.uiTransform.gameObject.SetActive(false);
 
             self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
 
