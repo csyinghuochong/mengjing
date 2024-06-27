@@ -285,10 +285,10 @@ namespace ET.Client
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
-            int lv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
-
+            int petexpendNumber = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetExtendNumber);
+            
             if (PetHelper.GetBagPetNum(petComponent.RolePetInfos) >=
-                PetHelper.GetPetMaxNumber(self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv, lv))
+                PetHelper.GetPetMaxNumber(self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv, petexpendNumber))
             {
                 FlyTipComponent.Instance.ShowFlyTipDi("已达到最大宠物数量！");
                 return;

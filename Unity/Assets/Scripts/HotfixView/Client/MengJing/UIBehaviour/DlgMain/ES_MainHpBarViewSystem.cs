@@ -82,7 +82,7 @@ namespace ET.Client
             self.E_Lab_OwnerText.text = string.Empty;
             self.PetHurt = 0;
             self.PlayerHurt = 0;
-            //self.MyUnitId = UnitHelper.GetMyUnitFromClientScene(self.Root()).Id;  进宝藏之地报错。。。
+            self.MyUnitId = UnitHelper.GetMyUnitId(self.Root());
             self.UpdateHurtText();
             self.EG_BossNodeRectTransform.gameObject.SetActive(false);
         }

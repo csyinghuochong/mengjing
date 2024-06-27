@@ -5,6 +5,12 @@ namespace ET.Client
 {
     public static partial class UnitHelper
     {
+        public static long GetMyUnitId(Scene zoneScene)
+        {
+            PlayerComponent playerComponent = zoneScene.GetComponent<PlayerComponent>();
+            return playerComponent.MyId;
+        }
+
         public static int GetTeamDungeonXieZhu(this Unit self)
         {
             NumericComponentC numericComponent = self.GetComponent<NumericComponentC>();

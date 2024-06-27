@@ -359,5 +359,13 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<int> OpenBoxRequest(Scene root, long unitId)
+        {
+            C2M_OpenBoxRequest request = new() { UnitId = unitId };
+            M2C_OpenBoxResponse response = (M2C_OpenBoxResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
 }

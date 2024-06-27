@@ -46,5 +46,12 @@
             M2C_JiaYuanPlanOpenResponse response = (M2C_JiaYuanPlanOpenResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<int> JiaYuanPickRequest(Scene root, long unitId, long masterId)
+        {
+            C2M_JiaYuanPickRequest request = new() { UnitId = unitId, MasterId = masterId };
+            M2C_JiaYuanPickResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_JiaYuanPickResponse;
+            return response.Error;
+        }
     }
 }

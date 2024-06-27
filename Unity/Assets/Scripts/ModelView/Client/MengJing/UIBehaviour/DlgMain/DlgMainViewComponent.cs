@@ -2275,6 +2275,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_OpenBox ES_OpenBox
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_openbox == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_OpenBox");
+		    	   this.m_es_openbox = this.AddChild<ES_OpenBox,Transform>(subTrans);
+     			}
+     			return this.m_es_openbox;
+     		}
+     	}
+
 		public ES_Singing ES_Singing
      	{
      		get
@@ -2496,6 +2514,7 @@ namespace ET.Client
 			this.m_E_UnionImage = null;
 			this.m_E_UnionEventTrigger = null;
 			this.m_es_mainskill = null;
+			this.m_es_openbox = null;
 			this.m_es_singing = null;
 			this.m_EG_FpsRectTransform = null;
 			this.m_EG_GuaJiSetRectTransform = null;
@@ -2637,6 +2656,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_UnionImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_UnionEventTrigger = null;
 		private EntityRef<ES_MainSkill> m_es_mainskill = null;
+		private EntityRef<ES_OpenBox> m_es_openbox = null;
 		private EntityRef<ES_Singing> m_es_singing = null;
 		private UnityEngine.RectTransform m_EG_FpsRectTransform = null;
 		private UnityEngine.RectTransform m_EG_GuaJiSetRectTransform = null;
