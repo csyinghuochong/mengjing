@@ -8,6 +8,23 @@ namespace ET.Server
     [FriendOf(typeof (UnionSceneComponent))]
     public static partial class UnionSceneComponentSystem
     {
+        
+        [Invoke(TimerInvokeType.UnionTimer)]
+        public class UnionTimer: ATimer<UnionSceneComponent>
+        {
+            protected override void Run(UnionSceneComponent self)
+            {
+                try
+                {
+                    self.SaveDB();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"move timer error: {self.Id}\n{e}");
+                }
+            }
+        }
+        
         [EntitySystem]
         private static void Awake(this ET.Server.UnionSceneComponent self)
         {
