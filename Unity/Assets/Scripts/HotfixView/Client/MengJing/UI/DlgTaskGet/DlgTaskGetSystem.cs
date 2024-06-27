@@ -6,6 +6,16 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class DataUpdate_TaskGet_DlgTaskGetRefresh: AEvent<Scene, DataUpdate_TaskGet>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_TaskGet args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTaskGet>()?.OnTaskGet();
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof (Scroll_Item_TaskFubenItem))]
     [FriendOf(typeof (Scroll_Item_TaskGetItem))]
     [FriendOf(typeof (DlgTaskGet))]
