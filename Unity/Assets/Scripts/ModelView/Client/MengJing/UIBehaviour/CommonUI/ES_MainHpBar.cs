@@ -7,6 +7,22 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_MainHpBar : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public int BossConfiId;
+		public long LockBossId;
+		public Vector3 Vector3 = new(1, 1, 1);
+		public LockTargetComponent LockTargetComponent { get; set; }
+
+		public long SingTimer;
+		public long SingEndTime;
+		public long SingTotalTime;
+
+		public long PlayerHurt;
+		public long PetHurt;
+
+		public string DefaultString = "0";
+
+		public long MyUnitId = 0;
+		
 		public UnityEngine.RectTransform EG_BossNodeRectTransform
      	{
      		get
