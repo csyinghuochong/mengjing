@@ -171,7 +171,7 @@ namespace ET.Server
              {
                  int number_self = 0;
                  int number_enemy = 0;
-                 List<Unit> unitList = self.Root().GetComponent<UnitComponent>().GetAll();
+                 List<Unit> unitList = self.Scene().GetComponent<UnitComponent>().GetAll();
                  for(int i = 0; i < unitList.Count; i++)
                  {
                      Unit unit = unitList[i];    

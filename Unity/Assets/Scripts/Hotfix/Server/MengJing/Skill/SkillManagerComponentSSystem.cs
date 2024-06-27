@@ -322,10 +322,9 @@ namespace ET.Server
               for (int i = skillcnt - 1; i >= 0; i--)
               {
                   SkillS skillHandler = self.Skills[i];
-                  self.Skills.RemoveAt(i);
-                  
                   SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(self.Skills[i].SkillConf.GameObjectName);
                   aaiHandler.OnFinished( skillHandler );
+                  self.Skills.RemoveAt(i);
                   ObjectPool.Instance.Recycle(skillHandler);
               }
 

@@ -392,7 +392,7 @@ namespace ET.Server
                      continue;
                  }
                  
-                 //zhaohuan.GetComponent<HeroDataComponentServer>().OnDeadOnDead(attack!=null ? attack : zhaohuan);
+                 zhaohuan.GetComponent<HeroDataComponentS>().OnDead(attack!=null ? attack : zhaohuan);
              }
              zhaohuanids.Clear();
          }
@@ -410,10 +410,10 @@ namespace ET.Server
                  MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
                  if (monsterConfig.DeathSkillId != 0)
                  {
-                     // unit.GetComponent<SkillManagerComponent>().OnUseSkill(new C2M_SkillCmd()
-                     // {
-                     //     SkillID = monsterConfig.DeathSkillId,
-                     // }, false);
+                     unit.GetComponent<SkillManagerComponentS>().OnUseSkill(new C2M_SkillCmd()
+                     {
+                         SkillID = monsterConfig.DeathSkillId,
+                     }, false);
                  }
              }
              if (unit.Type == UnitType.Pet )
