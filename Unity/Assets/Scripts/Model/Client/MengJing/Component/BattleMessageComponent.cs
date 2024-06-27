@@ -7,10 +7,11 @@ namespace ET
     [ComponentOf(typeof (Scene))]
     public class BattleMessageComponent: Entity, IAwake
     {
-        //public M2C_HappyInfoResult M2C_HappyInfoResult;
+       
         //public M2C_BattleInfoResult M2C_BattleInfoResult;
         //public M2C_AreneInfoResult M2C_AreneInfoResult;
         //public M2C_RankRunRaceMessage M2C_RankRunRaceMessage;
+        public M2C_HappyInfoResult M2C_HappyInfoResult{ get; set; } = null;
         public M2C_RunRaceBattleInfo M2C_RunRaceBattleInfo { get; set; } = null;
 
         //竞技场开始匹配时间戳

@@ -629,7 +629,8 @@ namespace ET.Server
                 {
                 }
             }
-            unit.Dispose();
+            //unit.Dispose();
+            unit.GetParent<UnitComponent>().Remove(unit.Id);
             
             await root.GetComponent<LocationProxyComponent>().Lock(LocationType.Unit, unitId, request.OldActorId);
             await root.GetComponent<MessageSender>().Call(sceneInstanceId, request);
