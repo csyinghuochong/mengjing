@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Sockets;
 using ET.Client;
 
@@ -20,6 +21,8 @@ namespace ET.Server
             //root.AddComponent<ActorLocationSenderComponent>();
             root.AddComponent<NetComponent, AddressFamily, NetworkProtocol>(AddressFamily.InterNetwork, NetworkProtocol.UDP);
             root.AddComponent<BenchmarkClientComponent>();
+
+            Console.WriteLine("FiberInit_BenchmarkClient");
             await ETTask.CompletedTask;
         }
     }

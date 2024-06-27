@@ -32,11 +32,7 @@ namespace ET.Client
         {
             self.ShowFriendInfos.Clear();
             self.ShowFriendInfos.AddRange(self.Root().GetComponent<FriendComponent>().Blacklist);
-
-            // 测试数据
-            self.ShowFriendInfos.Add(new FriendInfo() { PlayerName = "测试3", Occ = 1 });
-            self.ShowFriendInfos.Add(new FriendInfo() { PlayerName = "测试4", Occ = 1 });
-
+            
             self.AddUIScrollItems(ref self.ScrollItemFriendBlackItems, self.ShowFriendInfos.Count);
             self.E_FriendBlackItemsLoopVerticalScrollRect.SetVisible(true, self.ShowFriendInfos.Count);
         }
