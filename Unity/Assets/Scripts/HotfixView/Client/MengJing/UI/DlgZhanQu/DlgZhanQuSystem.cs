@@ -38,5 +38,11 @@ namespace ET.Client
                     break;
             }
         }
+
+        public static void OnClickGoToFirstWin(this DlgZhanQu self, int bossId)
+        {
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(2);
+            self.View.ES_FirstWin.BossId = bossId;
+        }
     }
 }

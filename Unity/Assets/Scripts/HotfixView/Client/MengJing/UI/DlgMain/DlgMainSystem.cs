@@ -167,6 +167,17 @@ namespace ET.Client
         }
     }
 
+    [Event(SceneType.Demo)]
+    public class DataUpdate_UpdateSing_DlgMainRefresh: AEvent<Scene, DataUpdate_UpdateSing>
+    {
+        protected override async ETTask Run(Scene root, DataUpdate_UpdateSing args)
+        {
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainHpBar.OnUpdateSing(args.DataParamString);
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [Invoke(TimerInvokeType.UIMainFPSTimer)]
     public class UIMainFPSTimer: ATimer<DlgMain>
     {

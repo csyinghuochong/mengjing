@@ -22,7 +22,7 @@ namespace ET.Client
 		public string DefaultString = "0";
 
 		public long MyUnitId = 0;
-		
+
 		public UnityEngine.RectTransform EG_BossNodeRectTransform
      	{
      		get
@@ -75,7 +75,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_Img_BossIconButton
+		public ES_ModelShow ES_ModelShow
      	{
      		get
      		{
@@ -84,28 +84,12 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_Img_BossIconButton == null )
+     			if( this.m_es_modelshow == null )
      			{
-		    		this.m_E_Img_BossIconButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_BossNode/E_Img_BossIcon");
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_BossNode/ES_ModelShow");
+		    	   this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
      			}
-     			return this.m_E_Img_BossIconButton;
-     		}
-     	}
-
-		public UnityEngine.UI.RawImage E_Img_BossIconRawImage
-     	{
-     		get
-     		{
-     			if (this.uiTransform == null)
-     			{
-     				Log.Error("uiTransform is null.");
-     				return null;
-     			}
-     			if( this.m_E_Img_BossIconRawImage == null )
-     			{
-		    		this.m_E_Img_BossIconRawImage = UIFindHelper.FindDeepChild<UnityEngine.UI.RawImage>(this.uiTransform.gameObject,"EG_BossNode/E_Img_BossIcon");
-     			}
-     			return this.m_E_Img_BossIconRawImage;
+     			return this.m_es_modelshow;
      		}
      	}
 
@@ -364,8 +348,7 @@ namespace ET.Client
 			this.m_EG_BossNodeRectTransform = null;
 			this.m_es_mainbuff = null;
 			this.m_E_Img_BossHpImage = null;
-			this.m_E_Img_BossIconButton = null;
-			this.m_E_Img_BossIconRawImage = null;
+			this.m_es_modelshow = null;
 			this.m_EG_SingNodeRectTransform = null;
 			this.m_E_Img_SingValueImage = null;
 			this.m_E_Img_SingDiImage = null;
@@ -386,8 +369,7 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_BossNodeRectTransform = null;
 		private EntityRef<ES_MainBuff> m_es_mainbuff = null;
 		private UnityEngine.UI.Image m_E_Img_BossHpImage = null;
-		private UnityEngine.UI.Button m_E_Img_BossIconButton = null;
-		private UnityEngine.UI.RawImage m_E_Img_BossIconRawImage = null;
+		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		private UnityEngine.RectTransform m_EG_SingNodeRectTransform = null;
 		private UnityEngine.UI.Image m_E_Img_SingValueImage = null;
 		private UnityEngine.UI.Image m_E_Img_SingDiImage = null;

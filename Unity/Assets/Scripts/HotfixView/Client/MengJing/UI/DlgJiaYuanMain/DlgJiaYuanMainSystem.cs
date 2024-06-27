@@ -537,6 +537,7 @@ namespace ET.Client
                 self.OnSelectCell(index);
                 // UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIJiaYuanMenu);
                 // uI.GetComponent<UIJiaYuanMenuComponent>().OnUpdatePlan();
+                await ETTask.CompletedTask;
                 return;
             }
 

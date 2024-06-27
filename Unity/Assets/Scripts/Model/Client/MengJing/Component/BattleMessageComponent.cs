@@ -39,7 +39,7 @@ namespace ET
         // 组队喊话频率
         public long ShoutInterval;
 
-        public int FirstWinBossId;
+        public int FirstWinBossId { get; set; }
 
         public bool ShowPetChouKaGet { get; set; } = false;
         public List<RolePetAdd> RolePetAdds { get; set; } = new List<RolePetAdd>();

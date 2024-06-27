@@ -179,6 +179,11 @@ namespace ET.Client
     {
     }
 
+    public struct DataUpdate_UpdateSing
+    {
+        public string DataParamString;
+    }
+
     public struct ReturnLogin
     {
         public int ErrorCode;
