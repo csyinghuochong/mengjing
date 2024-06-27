@@ -6,20 +6,15 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-	[FriendOf(typeof(DlgJiaYuanMain))]
-	public static  class DlgJiaYuanMainSystem
-	{
+    [FriendOf(typeof (DlgJiaYuanMain))]
+    public static class DlgJiaYuanMainSystem
+    {
+        public static void RegisterUIEvent(this DlgJiaYuanMain self)
+        {
+        }
 
-		public static void RegisterUIEvent(this DlgJiaYuanMain self)
-		{
-		 
-		}
-
-		public static void ShowWindow(this DlgJiaYuanMain self, Entity contextData = null)
-		{
-		}
-
-		 
-
-	}
+        public static void ShowWindow(this DlgJiaYuanMain self, Entity contextData = null)
+        {
+        }
+    }
 }
