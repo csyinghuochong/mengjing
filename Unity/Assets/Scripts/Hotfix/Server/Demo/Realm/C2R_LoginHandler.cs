@@ -8,7 +8,7 @@ namespace ET.Server
     [FriendOf(typeof(UserInfoComponentS))]
     [FriendOf(typeof(GlobalValueConfigCategory))]
     [MessageSessionHandler(SceneType.Realm)]
-	public class C2R_LoginHandler : MessageSessionHandler<C2R_Login, R2C_Login>
+	public class C2R_LoginHandler : MessageSessionHandler<C2R_LoginAccount, R2C_LoginAccount>
 	{
 
         public int CanLogin(string identityCard, bool isHoliday, int age_type)
@@ -40,7 +40,7 @@ namespace ET.Server
             }
         }
 
-        protected override async ETTask Run(Session session, C2R_Login request, R2C_Login response)
+        protected override async ETTask Run(Session session, C2R_LoginAccount request, R2C_LoginAccount response)
 		{
 
             //if (session.Root().SceneType != SceneType.Account)
@@ -234,7 +234,7 @@ namespace ET.Server
                         account?.Dispose();
                         return;
                     }
-
+                    
                     //请求登录中心服查询有没有同账号玩家登录[uwa]
                     //StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.DomainZone(), "LoginCenter");
                     //long loginCenterInstanceId = startSceneConfig.InstanceId;

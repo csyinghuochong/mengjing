@@ -974,14 +974,14 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(R2C_Login))]
-	[Message(OuterMessage.C2R_Login)]
+	[ResponseType(nameof(R2C_LoginAccount))]
+	[Message(OuterMessage.C2R_LoginAccount)]
 	[MemoryPackable]
-	public partial class C2R_Login: MessageObject, ISessionRequest
+	public partial class C2R_LoginAccount: MessageObject, ISessionRequest
 	{
-		public static C2R_Login Create(bool isFromPool = false) 
+		public static C2R_LoginAccount Create(bool isFromPool = false) 
 		{ 
-			return ObjectPool.Instance.Fetch(typeof(C2R_Login), isFromPool) as C2R_Login; 
+			return ObjectPool.Instance.Fetch(typeof(C2R_LoginAccount), isFromPool) as C2R_LoginAccount; 
 		}
 
 		[MemoryPackOrder(0)]
@@ -1015,6 +1015,72 @@ namespace ET
 			this.ThirdLogin = default;
 			this.Relink = default;
 			this.age_type = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.R2C_LoginAccount)]
+	[MemoryPackable]
+	public partial class R2C_LoginAccount: MessageObject, ISessionResponse
+	{
+		public static R2C_LoginAccount Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(R2C_LoginAccount), isFromPool) as R2C_LoginAccount; 
+		}
+
+		[MemoryPackOrder(0)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(2)]
+		public string Message { get; set; }
+
+		[MemoryPackOrder(3)]
+		public string Address { get; set; }
+
+		[MemoryPackOrder(4)]
+		public long Key { get; set; }
+
+		[MemoryPackOrder(5)]
+		public long GateId { get; set; }
+
+		[MemoryPackOrder(6)]
+		public string Token { get; set; }
+
+		[MemoryPackOrder(7)]
+		public long AccountId { get; set; }
+
+		[MemoryPackOrder(8)]
+		public int QueueNumber { get; set; }
+
+		[MemoryPackOrder(9)]
+		public string QueueAddres { get; set; }
+
+		[MemoryPackOrder(10)]
+		public PlayerInfo PlayerInfo { get; set; }
+
+		[MemoryPackOrder(11)]
+		public List<CreateRoleInfo> RoleLists { get; set; } = new();
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
+			this.Address = default;
+			this.Key = default;
+			this.GateId = default;
+			this.Token = default;
+			this.AccountId = default;
+			this.QueueNumber = default;
+			this.QueueAddres = default;
+			this.PlayerInfo = default;
+			this.RoleLists.Clear();
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -1239,72 +1305,6 @@ namespace ET
 			this.OccTwo = default;
 			this.EquipIndex = default;
 			this.RobotId = default;
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
-
-	}
-
-	[Message(OuterMessage.R2C_Login)]
-	[MemoryPackable]
-	public partial class R2C_Login: MessageObject, ISessionResponse
-	{
-		public static R2C_Login Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(R2C_Login), isFromPool) as R2C_Login; 
-		}
-
-		[MemoryPackOrder(0)]
-		public int RpcId { get; set; }
-
-		[MemoryPackOrder(1)]
-		public int Error { get; set; }
-
-		[MemoryPackOrder(2)]
-		public string Message { get; set; }
-
-		[MemoryPackOrder(3)]
-		public string Address { get; set; }
-
-		[MemoryPackOrder(4)]
-		public long Key { get; set; }
-
-		[MemoryPackOrder(5)]
-		public long GateId { get; set; }
-
-		[MemoryPackOrder(6)]
-		public string Token { get; set; }
-
-		[MemoryPackOrder(7)]
-		public long AccountId { get; set; }
-
-		[MemoryPackOrder(8)]
-		public int QueueNumber { get; set; }
-
-		[MemoryPackOrder(9)]
-		public string QueueAddres { get; set; }
-
-		[MemoryPackOrder(10)]
-		public PlayerInfo PlayerInfo { get; set; }
-
-		[MemoryPackOrder(11)]
-		public List<CreateRoleInfo> RoleLists { get; set; } = new();
-
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.Error = default;
-			this.Message = default;
-			this.Address = default;
-			this.Key = default;
-			this.GateId = default;
-			this.Token = default;
-			this.AccountId = default;
-			this.QueueNumber = default;
-			this.QueueAddres = default;
-			this.PlayerInfo = default;
-			this.RoleLists.Clear();
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -27373,14 +27373,14 @@ namespace ET
 		 public const ushort G2C_Test = 10030;
 		 public const ushort C2M_Reload = 10031;
 		 public const ushort M2C_Reload = 10032;
-		 public const ushort C2R_Login = 10033;
-		 public const ushort RechargeInfo = 10034;
-		 public const ushort KeyValuePair = 10035;
-		 public const ushort KeyValuePairInt = 10036;
-		 public const ushort KeyValuePairLong = 10037;
-		 public const ushort PlayerInfo = 10038;
-		 public const ushort CreateRoleInfo = 10039;
-		 public const ushort R2C_Login = 10040;
+		 public const ushort C2R_LoginAccount = 10033;
+		 public const ushort R2C_LoginAccount = 10034;
+		 public const ushort RechargeInfo = 10035;
+		 public const ushort KeyValuePair = 10036;
+		 public const ushort KeyValuePairInt = 10037;
+		 public const ushort KeyValuePairLong = 10038;
+		 public const ushort PlayerInfo = 10039;
+		 public const ushort CreateRoleInfo = 10040;
 		 public const ushort C2G_LoginGate = 10041;
 		 public const ushort G2C_LoginGate = 10042;
 		 public const ushort ServerItem = 10043;

@@ -161,6 +161,102 @@ message ObjectQueryResponse // IResponse
 	bytes Entity = 4;
 }
 
+
+// ResponseType L2R_LoginAccountRequest
+message R2L_LoginAccountRequest // IRequest
+{
+	int32 RpcId = 1;
+	string AccountName = 2;
+}
+
+message L2R_LoginAccountRequest // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+// ResponseType G2L_DisconnectGateUnit
+message L2G_DisconnectGateUnit // IRequest
+{
+	int32 RpcId = 1;
+	string AccountName = 2;
+}
+
+message G2L_DisconnectGateUnit // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+
+// ResponseType L2G_AddLoginRecord
+message G2L_AddLoginRecord // IRequest
+{
+	int32 RpcId = 1;
+	string AccountName = 2;
+	int32 ServerId = 3;
+}
+
+
+message L2G_AddLoginRecord // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+
+// ResponseType L2G_RemoveLoginRecord
+message G2L_RemoveLoginRecord // IRequest
+{
+	int32 RpcId = 1;
+	string AccountName = 2;
+	int32 ServerId = 3;
+}
+
+
+message L2G_RemoveLoginRecord // IResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+
+
+
+// ResponseType M2G_SecondLogin
+message G2M_SecondLogin // ILocationRequest
+{
+	int32 RpcId = 1;
+}
+
+
+message M2G_SecondLogin // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
+
+
+// ResponseType M2G_RequestExitGame
+message G2M_RequestExitGame // ILocationRequest
+{
+	int32 RpcId = 1;
+}
+
+
+message M2G_RequestExitGame // ILocationResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+}
+
 //ResponseType M2M_UnitTransferResponse
 message M2M_UnitTransferRequest // IRequest
 {

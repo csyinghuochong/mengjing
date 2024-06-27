@@ -246,8 +246,8 @@ message M2C_Reload // ISessionResponse
 	string Message = 3;
 }
 
-//ResponseType R2C_Login
-message C2R_Login // ISessionRequest
+//ResponseType R2C_LoginAccount
+message C2R_LoginAccount // ISessionRequest
 {
 	int32 RpcId = 1;
 	string  Account = 2;  // 帐号
@@ -256,6 +256,22 @@ message C2R_Login // ISessionRequest
 	string  ThirdLogin = 5;  
 	bool Relink = 6;
 	int32 age_type = 7;
+}
+
+message R2C_LoginAccount // ISessionResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	string Address = 4;
+	int64 Key = 5;
+	int64 GateId = 6;
+	string Token = 7;
+	int64 AccountId = 8;
+	int32 QueueNumber = 9;
+	string QueueAddres = 10;
+	PlayerInfo PlayerInfo = 11;
+	repeated CreateRoleInfo RoleLists = 12;
 }
 
 message RechargeInfo
@@ -310,22 +326,6 @@ message CreateRoleInfo
 	int32 OccTwo = 6;
 	int32 EquipIndex = 7;
 	int32 RobotId = 8;
-}
-
-message R2C_Login // ISessionResponse
-{
-	int32 RpcId = 1;
-	int32 Error = 2;
-	string Message = 3;
-	string Address = 4;
-	int64 Key = 5;
-	int64 GateId = 6;
-	string Token = 7;
-	int64 AccountId = 8;
-	int32 QueueNumber = 9;
-	string QueueAddres = 10;
-	PlayerInfo PlayerInfo = 11;
-	repeated CreateRoleInfo RoleLists = 12;
 }
 
 //ResponseType G2C_LoginGate

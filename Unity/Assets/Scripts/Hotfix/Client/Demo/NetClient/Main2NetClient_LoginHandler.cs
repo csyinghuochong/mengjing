@@ -27,10 +27,10 @@ namespace ET.Client
             
             IPEndPoint realmAddress = routerAddressComponent.GetRealmAddress(account);
 
-            R2C_Login r2CLogin;
+            R2C_LoginAccount r2CLogin;
             using (Session session = await netComponent.CreateRouterSession(realmAddress, account, password))
             {
-                r2CLogin = (R2C_Login)await session.Call(new C2R_Login() { Account = account, Password = password });
+                r2CLogin = (R2C_LoginAccount)await session.Call(new C2R_LoginAccount() { Account = account, Password = password });
             }
             
             // 创建一个gate Session,并且保存到SessionComponent中
