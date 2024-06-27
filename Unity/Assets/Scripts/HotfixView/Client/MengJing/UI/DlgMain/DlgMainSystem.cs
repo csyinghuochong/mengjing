@@ -152,7 +152,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_BeforeMove_Refresh: AEvent<Scene, DataUpdate_BeforeMove>
+    public class DataUpdate_BeforeMove_DlgMainRefresh: AEvent<Scene, DataUpdate_BeforeMove>
     {
         protected override async ETTask Run(Scene root, DataUpdate_BeforeMove args)
         {

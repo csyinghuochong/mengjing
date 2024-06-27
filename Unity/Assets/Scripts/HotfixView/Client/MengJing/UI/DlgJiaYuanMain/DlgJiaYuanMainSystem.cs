@@ -6,15 +6,47 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class DataUpdate_BeforeMove_DlgJiaYuanMainRefesh: AEvent<Scene, DataUpdate_BeforeMove>
+    {
+        protected override async ETTask Run(Scene root, DataUpdate_BeforeMove args)
+        {
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>()?.OnSelectCancel();
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof (DlgJiaYuanMain))]
     public static class DlgJiaYuanMainSystem
     {
         public static void RegisterUIEvent(this DlgJiaYuanMain self)
         {
+            self.View.E_ButtonWarehouseButton.AddListener(() =>
+            {
+                // UIHelper.Create(self.ZoneScene(), UIType.UIJiaYuanWarehouse).Coroutine();
+            });
+
+            self.View.E_ButtonReturnButton.AddListener(() => { self.OnButtonReturn().Coroutine(); });
+
+            self.View.E_ButtonMyJiaYuanButton.gameObject.SetActive(false);
+            self.View.E_ButtonMyJiaYuanButton.AddListener(self.OnButtonMyJiaYuan);
+
+            self.View.EG_RightRectTransform.gameObject.SetActive(false);
+
+            self.View.E_Btn_ShouSuoButton.AddListener(self.OnBtn_ShouSuo);
+
+            self.View.E_ButtonOneKeyPlantButton.AddListener(() =>
+            {
+                // UIHelper.Create(self.DomainScene(), UIType.UIJiaYuanOneKeyPlant).Coroutine();
+            });
+            self.View.E_ButtonGatherButton.AddListener(() => { self.OnButtonGather(); });
+            self.View.E_ButtonTalkButton.AddListener(() => { self.OnButtonTalk(); });
+            self.View.E_ButtonTargetButton.AddListener(() => { self.OnButtonTarget(); });
         }
 
         public static void ShowWindow(this DlgJiaYuanMain self, Entity contextData = null)
         {
+            self.OnInit().Coroutine();
         }
 
         public static void WaitPetWalk(this DlgJiaYuanMain self, JiaYuanPet jiaYuanPet)
