@@ -55,7 +55,7 @@ namespace ET.Server
                     response.Name = userinfo.UserInfo.Name;
                     break;
                 case 2:
-                    ActorId teamServerId = StartSceneConfigCategory.Instance.GetBySceneName(scene.Zone(), "Team").ActorId;
+                    ActorId teamServerId = UnitCacheHelper.GetTeamServerId(scene.Zone());
                     T2C_GetTeamInfoResponse g_SendChatRequest1 = (T2C_GetTeamInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
                         (teamServerId, new C2T_GetTeamInfoRequest() { UserID = request.UserId });
 
