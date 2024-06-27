@@ -2275,6 +2275,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_Singing ES_Singing
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_singing == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_Singing");
+		    	   this.m_es_singing = this.AddChild<ES_Singing,Transform>(subTrans);
+     			}
+     			return this.m_es_singing;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_FpsRectTransform
      	{
      		get
@@ -2478,6 +2496,7 @@ namespace ET.Client
 			this.m_E_UnionImage = null;
 			this.m_E_UnionEventTrigger = null;
 			this.m_es_mainskill = null;
+			this.m_es_singing = null;
 			this.m_EG_FpsRectTransform = null;
 			this.m_EG_GuaJiSetRectTransform = null;
 			this.m_E_Btn_StopGuaJiButton = null;
@@ -2618,6 +2637,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_UnionImage = null;
 		private UnityEngine.EventSystems.EventTrigger m_E_UnionEventTrigger = null;
 		private EntityRef<ES_MainSkill> m_es_mainskill = null;
+		private EntityRef<ES_Singing> m_es_singing = null;
 		private UnityEngine.RectTransform m_EG_FpsRectTransform = null;
 		private UnityEngine.RectTransform m_EG_GuaJiSetRectTransform = null;
 		private UnityEngine.UI.Button m_E_Btn_StopGuaJiButton = null;
