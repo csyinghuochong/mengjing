@@ -162,7 +162,7 @@ message ObjectQueryResponse // IResponse
 }
 
 
-// ResponseType L2R_LoginAccountRequest
+//ResponseType L2R_LoginAccountRequest
 message R2L_LoginAccountRequest // IRequest
 {
 	int32 RpcId = 1;
@@ -176,7 +176,7 @@ message L2R_LoginAccountRequest // IResponse
 	string Message = 3;
 }
 
-// ResponseType G2L_DisconnectGateUnit
+//ResponseType G2L_DisconnectGateUnit
 message L2G_DisconnectGateUnit // IRequest
 {
 	int32 RpcId = 1;
@@ -191,7 +191,7 @@ message G2L_DisconnectGateUnit // IResponse
 }
 
 
-// ResponseType L2G_AddLoginRecord
+//ResponseType L2G_AddLoginRecord
 message G2L_AddLoginRecord // IRequest
 {
 	int32 RpcId = 1;
@@ -208,7 +208,7 @@ message L2G_AddLoginRecord // IResponse
 }
 
 
-// ResponseType L2G_RemoveLoginRecord
+//ResponseType L2G_RemoveLoginRecord
 message G2L_RemoveLoginRecord // IRequest
 {
 	int32 RpcId = 1;
@@ -227,7 +227,7 @@ message L2G_RemoveLoginRecord // IResponse
 
 
 
-// ResponseType M2G_SecondLogin
+//ResponseType M2G_SecondLogin
 message G2M_SecondLogin // ILocationRequest
 {
 	int32 RpcId = 1;
@@ -243,7 +243,7 @@ message M2G_SecondLogin // ILocationResponse
 
 
 
-// ResponseType M2G_RequestExitGame
+//ResponseType M2G_RequestExitGame
 message G2M_RequestExitGame // ILocationRequest
 {
 	int32 RpcId = 1;
