@@ -474,7 +474,9 @@ namespace ET.Server
             await self.InitPaiMainShop(11, oldPaiMaiShop);
             await self.InitPaiMainStall(12, oldPaiMaiStall);
 
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Minute * 30 + RandomHelper.RandomNumber(1000, 10000),
+            // self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Minute * 30 + RandomHelper.RandomNumber(1000, 10000),
+            //     TimerInvokeType.PaiMaiTimer, self);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer( RandomHelper.RandomNumber(1000, 10000),
                 TimerInvokeType.PaiMaiTimer, self);
             self.OnZeroClockUpdate();
         }
@@ -626,14 +628,16 @@ namespace ET.Server
                     //不能超过当前拥有上限
                     costNum = Math.Min(costNum, paiMaiItem.BagInfo.ItemNum);
 
-                    if (pro < 1.5f)
+                   if (pro < 1.5f && RandomHelper.RandFloat01() < buyPro)
                     {
-                        //概率购买
-                        if (RandomHelper.RandFloat01() < buyPro)
+                        Log.Info("拍卖行系统购买 概率:" + buyPro + "出售价格:" + paiMaiItem.Price * costNum + "玩家名称:" + paiMaiItem.PlayerName + "出售道具:" +
+                            paiMaiItem.BagInfo.ItemID + "出售单价:" + paiMaiItem.Price + "道具拥有数量:" + paiMaiItem.BagInfo.ItemNum);
+                        MailHelp.SendPaiMaiEmail(self.Root(), paiMaiItem, costNum, 0).Coroutine();
+                        
+                        paiMaiItem.BagInfo.ItemNum -= costNum;
+                        if (paiMaiItem.BagInfo.ItemNum <= 0)
                         {
-                            Log.Info("拍卖行系统购买 概率:" + buyPro + "出售价格:" + paiMaiItem.Price * costNum + "玩家名称:" + paiMaiItem.PlayerName + "出售道具:" +
-                                paiMaiItem.BagInfo.ItemID + "出售单价:" + paiMaiItem.Price + "道具拥有数量:" + paiMaiItem.BagInfo.ItemNum);
-                            MailHelp.SendPaiMaiEmail(self.Root(), paiMaiItem, costNum, 0).Coroutine();
+                            dBPaiMainInfo.PaiMaiItemInfos.RemoveAt(i);
                         }
                     }
                 }
