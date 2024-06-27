@@ -184,6 +184,20 @@ namespace ET.Client
         public string DataParamString;
     }
 
+    public struct DataUpdate_SkillCDUpdate
+    {
+    }
+
+    public struct DataUpdate_SkillBeging
+    {
+        public string DataParamString;
+    }
+
+    public struct DataUpdate_SkillFinish
+    {
+        public string DataParamString;
+    }
+
     public struct ReturnLogin
     {
         public int ErrorCode;
@@ -234,10 +248,6 @@ namespace ET.Client
         public Unit Unit;
     }
 
-    public struct SkillCDUpdate
-    {
-    }
-
     //吟唱
     public struct SingingUpdate
     {
@@ -270,16 +280,6 @@ namespace ET.Client
         public int FsmHandlerType;
         public int SkillId;
         public Unit Unit;
-    }
-
-    public struct SkillBeging
-    {
-        public int SkillId;
-    }
-
-    public struct SkillFinish
-    {
-        public int SkillId;
     }
 
     public struct SkillEffectMove

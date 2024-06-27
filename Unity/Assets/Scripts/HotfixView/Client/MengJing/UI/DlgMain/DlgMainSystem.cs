@@ -205,6 +205,50 @@ namespace ET.Client
         }
     }
 
+    [Event(SceneType.Demo)]
+    public class DataUpdate_SkillCDUpdate_DlgMainRefresh: AEvent<Scene, DataUpdate_SkillCDUpdate>
+    {
+        protected override async ETTask Run(Scene root, DataUpdate_SkillCDUpdate args)
+        {
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnSkillCDUpdate();
+
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
+    public class DataUpdate_SkillBeging_DlgMainRefresh: AEvent<Scene, DataUpdate_SkillBeging>
+    {
+        protected override async ETTask Run(Scene root, DataUpdate_SkillBeging args)
+        {
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnSkillBeging(args.DataParamString);
+
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
+    public class DataUpdate_SkillFinish_DlgMainRefresh: AEvent<Scene, DataUpdate_SkillFinish>
+    {
+        protected override async ETTask Run(Scene root, DataUpdate_SkillFinish args)
+        {
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnSkillFinish(args.DataParamString);
+
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
+    public class DataUpdate_JingLingButton_DlgMainRefresh: AEvent<Scene, DataUpdate_JingLingButton>
+    {
+        protected override async ETTask Run(Scene root, DataUpdate_JingLingButton args)
+        {
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.CheckJingLingFunction();
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [Invoke(TimerInvokeType.UIMainFPSTimer)]
     public class UIMainFPSTimer: ATimer<DlgMain>
     {

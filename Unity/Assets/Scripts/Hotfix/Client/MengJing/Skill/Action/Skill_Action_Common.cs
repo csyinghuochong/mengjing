@@ -9,9 +9,9 @@
 
             if (theUnitFrom.MainHero && skils.SkillConf.SkillType == 1 && SkillHelp.havePassiveSkillType(skils.SkillConf.PassiveSkillType, 1))
             {
-                EventSystem.Instance.Publish(skils.Root(), new SkillBeging()
+                EventSystem.Instance.Publish(skils.Root(), new DataUpdate_SkillBeging()
                 {
-                    SkillId =  skils.SkillConf.Id
+                    DataParamString =  skils.SkillConf.Id.ToString()
                 });
             }
         }
@@ -32,9 +32,9 @@
         {
             if (skils.TheUnitFrom.MainHero && skils.SkillConf.SkillType == 1 && SkillHelp.havePassiveSkillType(skils.SkillConf.PassiveSkillType, 1))
             {
-                EventSystem.Instance.Publish(skils.Root(), new SkillFinish()
+                EventSystem.Instance.Publish(skils.Root(), new DataUpdate_SkillFinish()
                 {
-                    SkillId =  skils.SkillConf.Id
+                    DataParamString =  skils.SkillConf.Id.ToString()
                 });
             }
 
