@@ -10,12 +10,12 @@ namespace ET.Server
             UnionSceneComponent unionSceneComponent = scene.GetComponent<UnionSceneComponent>();
             if (request.OperateType == 1)
             {
-                response.FubenInstanceId = unionSceneComponent.UnionRaceSceneInstanceId;
+                response.FubenActorId = unionSceneComponent.UnionRaceSceneInstanceId;
                 unionSceneComponent.OnJoinUnionRace(request.UnionId, request.UnitId);
             }
             else
             {
-                response.FubenInstanceId = unionSceneComponent.GetUnionFubenId(request.UnionId, request.UnitId);
+                response.FubenActorId = unionSceneComponent.GetUnionFubenId(request.UnionId, request.UnitId);
             }
             
             await ETTask.CompletedTask;

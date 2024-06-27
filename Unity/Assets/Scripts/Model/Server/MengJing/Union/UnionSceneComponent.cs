@@ -11,7 +11,7 @@ namespace ET.Server
         public long WinUnionId;
 
         public long UnionRaceSceneId;
-        public long UnionRaceSceneInstanceId{ get; set; } 
+        public ActorId UnionRaceSceneInstanceId{ get; set; } 
 
         public DBUnionManager DBUnionManager { get; set; } = new DBUnionManager();
 
@@ -19,7 +19,7 @@ namespace ET.Server
 
         public Dictionary<long, long> UnionBossList = new Dictionary<long, long>(); 
 
-        public Dictionary<long, long> UnionFubens = new Dictionary<long, long>();   //fubenid->fubeninstanceid
+        public Dictionary<long, ActorId> UnionFubens = new Dictionary<long, ActorId>();   //fubenid->fubeninstanceid
 
 
         public Dictionary<long, DBUnionInfo> DBUnionInfos = new Dictionary<long, DBUnionInfo>();

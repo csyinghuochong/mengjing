@@ -175,7 +175,7 @@ namespace ET.Server
 
         public static void OnUnionBoss(this UnionSceneComponent self)
         {
-            foreach ((long unionid, long instanceid) in self.UnionFubens)
+            foreach ((long unionid, ActorId actorId) in self.UnionFubens)
             {
                 Scene scene = self.GetChild<Scene>(unionid);
                 if (scene == null)
@@ -538,10 +538,10 @@ namespace ET.Server
             FubenHelp.CreateMonsterList(fubnescene, sceneConfigs.CreateMonsterPosi);
             TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
             self.UnionRaceSceneId = fubenid;
-            self.UnionRaceSceneInstanceId = fubenInstanceId;
+            self.UnionRaceSceneInstanceId = fubnescene.GetActorId();
         }
 
-        public static long GetUnionFubenId(this UnionSceneComponent self, long unionid, long unitid)
+        public static ActorId GetUnionFubenId(this UnionSceneComponent self, long unionid, long unitid)
         {
             //需要判读一下unitid 是否属于这个家族！
             if (self.UnionFubens.ContainsKey(unionid))
@@ -559,7 +559,12 @@ namespace ET.Server
             //Game.Scene.GetComponent<RecastPathComponent>().Update(mapComponent.NavMeshId);
             FubenHelp.CreateNpc(fubnescene, unionsceneid);
             TransferHelper.NoticeFubenCenter(fubnescene, 1).Coroutine();
-            self.UnionFubens.Add(unionid, fubenInstanceId);
+
+            ActorId actorId_2 = new ActorId(self.Fiber().Process, self.Fiber().Id, fubenInstanceId);
+            
+            Log.Debug($"GetUnionFubenI: {fubnescene.GetActorId().ToString()}");
+            Log.Debug($"GetUnionFuben2: {actorId_2.ToString()}");
+            self.UnionFubens.Add(unionid, fubnescene.GetActorId());
 
             if (!self.UnionBossList.ContainsKey(unionid))
             {
@@ -572,7 +577,7 @@ namespace ET.Server
                 }
             }
 
-            return fubenInstanceId;
+            return fubnescene.GetActorId();
         }
 
         public static void SaveDB(this UnionSceneComponent self)
