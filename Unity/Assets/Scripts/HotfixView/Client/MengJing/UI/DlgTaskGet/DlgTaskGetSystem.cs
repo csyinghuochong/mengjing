@@ -17,6 +17,7 @@ namespace ET.Client
             self.View.E_TaskFubenItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnTaskFubenItemsRefresh);
 
             self.View.E_Btn_EnergyDuihuanButton.AddListenerAsync(self.RequestEnergySkill);
+            self.View.E_ButtonGetButton.AddListener(self.OnButtonGetTask);
             self.View.E_BtnCommitTask1Button.AddListenerAsync(self.OnBtn_CommitTask);
             self.View.E_ButtonJieRiRewardButton.AddListener(self.OnButtonJieRiReward);
             self.View.E_ButtonExpDuiHuanButton.AddListenerAsync(self.OnButtonExpDuiHuan);
@@ -286,7 +287,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
             int petexpendNumber = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetExtendNumber);
-            
+
             if (PetHelper.GetBagPetNum(petComponent.RolePetInfos) >=
                 PetHelper.GetPetMaxNumber(self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv, petexpendNumber))
             {
