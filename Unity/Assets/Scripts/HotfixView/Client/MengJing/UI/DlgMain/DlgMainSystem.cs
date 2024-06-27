@@ -189,6 +189,22 @@ namespace ET.Client
         }
     }
 
+    [Event(SceneType.Demo)]
+    public class BeforeSkill_DlgMainRefresh: AEvent<Scene, BeforeSkill>
+    {
+        protected override async ETTask Run(Scene root, BeforeSkill args)
+        {
+            DlgMain dlgMain = root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>();
+            if (dlgMain != null)
+            {
+                dlgMain.OnSpellStart();
+                dlgMain.OnBeforeSkill();
+            }
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [Invoke(TimerInvokeType.UIMainFPSTimer)]
     public class UIMainFPSTimer: ATimer<DlgMain>
     {
@@ -302,6 +318,9 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgMain self, Entity contextData = null)
         {
+            self.LockTargetComponent = self.Root().GetComponent<LockTargetComponent>();
+            self.SkillIndicatorComponent = self.Root().GetComponent<SkillIndicatorComponent>();
+
             self.View.ES_RoleHead.uiTransform.gameObject.SetActive(true);
             self.View.ES_MainBuff.uiTransform.gameObject.SetActive(true);
             self.View.ES_MainHpBar.uiTransform.gameObject.SetActive(false);
@@ -415,26 +434,26 @@ namespace ET.Client
 
         public static void OnMoveStart(this DlgMain self)
         {
-            // if (self.UIOpenBoxComponent != null && self.UIOpenBoxComponent.BoxUnitId > 0)
-            // {
-            //     self.UIOpenBoxComponent.OnOpenBox(null);
-            // }
-            //
-            // self.UIMainSkillComponent.UIAttackGrid.OnMoveStart();
-            //
-            // self.MainUnit.GetComponent<SingingComponent>()?.BeginMove();
+            if (self.View.ES_OpenBox != null && self.View.ES_OpenBox.BoxUnitId > 0)
+            {
+                self.View.ES_OpenBox.OnOpenBox(null);
+            }
+
+            self.View.ES_MainSkill.ES_AttackGrid.OnMoveStart();
+
+            self.MainUnit.GetComponent<SingingComponent>()?.BeginMove();
         }
 
         public static void OnMainHeroMove(this DlgMain self)
         {
             self.View.ES_MapMini.OnMainHeroMove();
-            // self.LockTargetComponent.OnMainHeroMove();
-            // self.SkillIndicatorComponent.OnMainHeroMove();
-            //
-            // if (self.TianQiEffectObj != null)
-            // {
-            //     self.TianQiEffectObj.transform.localPosition = self.MainUnit.Position;
-            // }
+            self.LockTargetComponent.OnMainHeroMove();
+            self.SkillIndicatorComponent.OnMainHeroMove();
+
+            if (self.TianQiEffectObj != null)
+            {
+                self.TianQiEffectObj.transform.localPosition = self.MainUnit.Position;
+            }
         }
 
         #region 左边
@@ -1680,6 +1699,25 @@ namespace ET.Client
             string value = userInfoComponent.GetGameSettingValue(GameSettingEnum.AutoAttack);
             AttackComponent attackComponent = self.Root().GetComponent<AttackComponent>();
             attackComponent.AutoAttack = value == "1";
+        }
+
+        public static void OnSpellStart(this DlgMain self)
+        {
+            if (self.View.ES_OpenBox != null && self.View.ES_OpenBox.BoxUnitId > 0)
+            {
+                self.View.ES_OpenBox.OnOpenBox(null);
+            }
+        }
+
+        public static void OnBeforeSkill(this DlgMain self)
+        {
+            self.View.ES_JoystickMove.lastSendTime = 0;
+        }
+
+        public static void OnStopAction(this DlgMain self)
+        {
+            self.View.ES_JoystickMove.ResetUI();
+            self.OnMoveStart();
         }
     }
 }

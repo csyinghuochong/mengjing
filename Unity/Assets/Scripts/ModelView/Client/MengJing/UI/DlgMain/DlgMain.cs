@@ -19,15 +19,21 @@ namespace ET.Client
         public float AngleX;
         public float AngleY;
 
+        public LockTargetComponent LockTargetComponent { get; set; }
+        public SkillIndicatorComponent SkillIndicatorComponent { get; set; }
+
         public Unit MainUnit { get; set; }
 
         public List<TaskPro> ShowTaskPros = new();
         public Dictionary<int, Scroll_Item_MainTask> ScrollItemMainTasks;
         public Dictionary<int, Scroll_Item_MainTeamItem> ScrollItemMainTeamItems;
-        
+
         public List<ChatInfo> ShowChatInfos = new();
         public Dictionary<int, Scroll_Item_MainChatItem> ScrollItemMainChatItems;
 
+        public GameObject TianQiEffectObj;
+        public string TianQiEffectPath;
+        public long TimerFunctiuon;
         public long TimerPing;
         public int KillMonsterRewardKey;
         public int LevelRewardKey;
