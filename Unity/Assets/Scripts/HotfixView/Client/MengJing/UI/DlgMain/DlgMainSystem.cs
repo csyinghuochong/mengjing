@@ -1217,20 +1217,22 @@ namespace ET.Client
 
         public static void OnUpdateHP(this DlgMain self, int sceneType, Unit defend, Unit attack, long hurtvalue)
         {
-            // int unitType = defend.Type;
-            // if (unitType == UnitType.Player && sceneType == SceneTypeEnum.TeamDungeon)
-            // {
-            //     self.UIMainTeam.OnUpdateHP(defend);
-            // }
-            // if (unitType == UnitType.Monster)
-            // {
-            //     self.UIMainHpBar.OnUpdateHP(defend);
-            //     self.UIMainHpBar.OnUpdateHP(defend, attack, hurtvalue);
-            // }
-            // if (unitType == UnitType.Pet)
-            // {
-            //     self.UIRoleHead.OnUpdatePetHP(defend);
-            // }
+            int unitType = defend.Type;
+            if (unitType == UnitType.Player && sceneType == SceneTypeEnum.TeamDungeon)
+            {
+                // self.UIMainTeam.OnUpdateHP(defend);
+            }
+
+            if (unitType == UnitType.Monster)
+            {
+                self.View.ES_MainHpBar.OnUpdateHP(defend);
+                self.View.ES_MainHpBar.OnUpdateHP(defend, attack, hurtvalue);
+            }
+
+            if (unitType == UnitType.Pet)
+            {
+                self.View.ES_RoleHead.OnUpdatePetHP(defend);
+            }
         }
 
         public static void BeginEnterScene(this DlgMain self, int lastScene)
@@ -1244,7 +1246,7 @@ namespace ET.Client
 
             self.View.ES_MapMini.BeginChangeScene(lastScene);
             // self.UISingingComponent.GameObject.SetActive(false);
-            // self.UIMainHpBar.BeginEnterScene();
+            self.View.ES_MainHpBar.BeginEnterScene();
             self.Root().GetComponent<SkillIndicatorComponent>().BeginEnterScene();
             self.Root().GetComponent<LockTargetComponent>().BeginEnterScene();
             self.Root().GetComponent<BattleMessageComponent>().CancelRideTargetUnit(0);
@@ -1302,8 +1304,8 @@ namespace ET.Client
                     // self.UILevelGuideMini.GetComponent<UICellDungeonCellMiniComponent>().OnUpdateUI();
                     break;
                 case SceneTypeEnum.MainCityScene:
-                    // self.UIMainHpBar.MonsterNode.SetActive(false);
-                    // self.UIMainHpBar.BossNode.SetActive(false);
+                    self.View.ES_MainHpBar.EG_MonsterNodeRectTransform.gameObject.SetActive(false);
+                    self.View.ES_MainHpBar.EG_BossNodeRectTransform.gameObject.SetActive(false);
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(true);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(false);
                     self.View.E_MainTaskItemsLoopVerticalScrollRect.gameObject.SetActive(true);
