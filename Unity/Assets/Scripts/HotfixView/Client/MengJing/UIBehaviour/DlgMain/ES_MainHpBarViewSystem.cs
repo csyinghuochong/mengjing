@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [Invoke(TimerInvokeType.MonsterSingingTimer)]
-    public class MonsterSingingTimer: ATimer<ES_MainHpBar>
+    [Invoke(TimerInvokeType.UIMonsterSingingTimer)]
+    public class UIMonsterSingingTimer: ATimer<ES_MainHpBar>
     {
         protected override void Run(ES_MainHpBar self)
         {
@@ -236,7 +236,7 @@ namespace ET.Client
                 self.E_Img_SingValueImage.fillAmount = 1f;
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.SingTimer);
                 SkillConfig skillConfig = SkillConfigCategory.Instance.Get(paramid);
-                self.SingTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(100, TimerInvokeType.MonsterSingingTimer, self);
+                self.SingTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(100, TimerInvokeType.UIMonsterSingingTimer, self);
                 self.SingTotalTime = (long)(skillConfig.SkillFrontSingTime * 1000);
                 self.SingEndTime = self.SingTotalTime + TimeHelper.ClientNow();
             }
