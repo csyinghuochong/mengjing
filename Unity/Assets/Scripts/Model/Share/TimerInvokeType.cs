@@ -71,5 +71,6 @@
         public const int JiaYuanPetWalk = 340;
         public const int UIMonsterSingingTimer = 341;
         public const int OpenBoxTimer = 342;
+        public const int UIZhuaPuTimer = 343;
     }
 }

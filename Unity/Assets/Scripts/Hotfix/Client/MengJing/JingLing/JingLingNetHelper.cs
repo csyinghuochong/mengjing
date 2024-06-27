@@ -16,5 +16,12 @@
             chengJiuComponent.JingLingId = response.JingLingId;
             return ErrorCode.ERR_Success;
         }
+
+        public static async ETTask<M2C_JingLingCatchResponse> JingLingCatchRequest(Scene root, long jingLingId, int itemId, string operateType)
+        {
+            C2M_JingLingCatchRequest request = new() { JingLingId = jingLingId, ItemId = itemId, OperateType = operateType };
+            M2C_JingLingCatchResponse response = (M2C_JingLingCatchResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

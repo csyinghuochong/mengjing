@@ -334,24 +334,21 @@ namespace ET.Client
 
         public static async ETTask OnBuildEnter(this ES_MainSkill self)
         {
-            // UI uimain = UIHelper.GetUI(self.ZoneScene(), UIType.UIMain);
-            // uimain.GetComponent<UIMainComponent>().UIJoystickMoveComponent.GameObject.SetActive(true);
-            // long lockTargetId = self.Root().GetComponent<LockTargetComponent>().LastLockId;
-            // if (lockTargetId == 0)
-            // {
-            //     return;
-            // }
-            //
-            // Unit unit = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(lockTargetId);
-            // if (unit == null || unit.Type != UnitType.Monster)
-            // {
-            //     return;
-            // }
-            //
-            // //创建UI
-            // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIZhuaPu);
-            // ui.GetComponent<UIZhuaPuComponent>().OnInitUI(unit);
-            await ETTask.CompletedTask;
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
+            long lockTargetId = self.Root().GetComponent<LockTargetComponent>().LastLockId;
+            if (lockTargetId == 0)
+            {
+                return;
+            }
+
+            Unit unit = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(lockTargetId);
+            if (unit == null || unit.Type != UnitType.Monster)
+            {
+                return;
+            }
+
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ZhuaPu);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgZhuaPu>().OnInitUI(unit);
         }
 
         public static void OnBtn_NpcDuiHua(this ES_MainSkill self)
