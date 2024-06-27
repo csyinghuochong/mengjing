@@ -205,10 +205,10 @@ namespace ET.Server
 
                     //在线人数判断有问题。[获取的是在保存在账号服的玩家数量]
                     AccountSessionsComponent accountSessionsComponent = session.Root().GetComponent<AccountSessionsComponent>();
-                    long onlineNumber = accountSessionsComponent.GetAll().Values.Count;
+                    long onlineNumber = accountSessionsComponent.AccountSessionDictionary.Values.Count;
                     int maxNumber = GlobalValueConfigCategory.Instance.OnLineLimit;
                     //Log.Console($" {session.DomainZone()} ---  onlineNumber:{onlineNumber}");
-                    if (accountSessionsComponent.Get(account.Id) == 0 &&
+                    if (accountSessionsComponent.Get(account.Account) == null &&
                         onlineNumber >= maxNumber && (string.IsNullOrEmpty(queueToken) || queueToken != request.Token))
                     {
                         Log.Console($" {session.Zone()} --- onlineNumber: {onlineNumber}  queueToken:{queueToken} request.Token:{request.Token}");
@@ -249,33 +249,12 @@ namespace ET.Server
                         return;
                     }
                     
-                    //请求登录中心服查询有没有同账号玩家登录[uwa]
-                    //StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.DomainZone(), "LoginCenter");
-                    //long loginCenterInstanceId = startSceneConfig.InstanceId;
-                    //ActorId loginCenterInstanceId = StartSceneConfigCategory.Instance.LoginCenterConfig.ActorId;//踢掉进入gate的玩家
-                    //var loginAccountResponse = (L2A_LoginAccountResponse)await session.Root().GetComponent<MessageSender>().Call(loginCenterInstanceId, new A2L_LoginAccountRequest() { AccountId = account.Id, Relink = request.Relink });
-
-                    //if (loginAccountResponse.Error != ErrorCode.ERR_Success)
-                    //{
-                    //    response.Error = loginAccountResponse.Error;
-                    //    CloseSession(session).Coroutine();
-                    //    account?.Dispose();
-                    //    return;
-                    //}
-
-                    //AccountSessionsComponent.Remove 需要在适当的时候移除
-                    long accountSessionInstanceId = accountSessionsComponent.Get(account.Id);
-                    //Session otherSession = EventSystem.Instance.Get(accountSessionInstanceId) as Session;
-                    //if (otherSession != null)
-                    //{
-                    //    Log.Warning($"LoginTest C2A_LoginAccount.ERR_OtherAccountLogin1 account.Id: {account.Id}");
-                    //}
-                    //// //踢accout服的玩家下线
-                    //otherSession?.Send(new A2C_Disconnect() { Error = ErrorCode.ERR_OtherAccountLogin });                
-                    //CloseSession(otherSession).Coroutine();
-
-                    accountSessionsComponent.Add(account.Id, session.InstanceId);
-                    session.AddComponent<AccountCheckOutTimeComponent, long>(account.Id);   //自己在账号服只能停留600秒
+                    Session otherSession  = accountSessionsComponent.Get(request.Account);
+                   
+                    otherSession?.Send( A2C_Disconnect.Create());
+                    otherSession?.Disconnect().Coroutine();
+                    accountSessionsComponent.Add(request.Account, session);
+                    session.AddComponent<AccountCheckOutTimeComponent, string>(request.Account);
 
                     string Token = TimeHelper.ServerNow().ToString() + RandomHelper.RandomNumber(int.MinValue, int.MaxValue).ToString();
                     tokenComponent.Remove(account.Id);    //Token也是保留十分钟

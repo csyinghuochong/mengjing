@@ -1,10 +1,7 @@
-using System.Collections.Generic;
-
-namespace ET.Server 
+namespace ET.Server
 {
-
-    [FriendOf(typeof(AccountSessionsComponent))]
     [EntitySystemOf(typeof(AccountSessionsComponent))]
+    [FriendOfAttribute(typeof(ET.Server.AccountSessionsComponent))]
     public static partial class AccountSessionsComponentSystem
     {
         [EntitySystem]
@@ -12,50 +9,42 @@ namespace ET.Server
         {
 
         }
+
         [EntitySystem]
         private static void Destroy(this ET.Server.AccountSessionsComponent self)
         {
-            self.AccountSessionsDictionary.Clear();
+            self.AccountSessionDictionary.Clear();
         }
-
-        public static long Get(this AccountSessionsComponent self, long accountId)
+        
+        
+        public static Session Get(this AccountSessionsComponent self, string accountName)
         {
-            if (!self.AccountSessionsDictionary.TryGetValue(accountId, out long instanceId))
+            if (!self.AccountSessionDictionary.TryGetValue(accountName,out EntityRef<Session> session))
             {
-                return 0;
+                return null;
             }
-            return instanceId;
+
+            return session;
         }
 
-        // <summary>
-        /// AccountCheckOutTimeComponent 十分钟后
-        /// DisconnectHelper.KickPlayer
-        /// G2A_ExitGame
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="accountId"></param>
-        public static void Remove(this AccountSessionsComponent self, long accountId)
+        public static void Add(this AccountSessionsComponent self, string accountName, EntityRef<Session> session)
         {
-            if (self.AccountSessionsDictionary.ContainsKey(accountId))
+            
+            if (self.AccountSessionDictionary.ContainsKey(accountName))
             {
-                self.AccountSessionsDictionary.Remove(accountId);
-            }
-        }
-
-        public static Dictionary<long, long> GetAll(this AccountSessionsComponent self)
-        {
-            return self.AccountSessionsDictionary;
-        }
-
-        public static void Add(this AccountSessionsComponent self, long accountId, long instanceId)
-        {
-            if (self.AccountSessionsDictionary.ContainsKey(accountId))
-            {
-                self.AccountSessionsDictionary[accountId] = instanceId;
+                self.AccountSessionDictionary[accountName] = session;
                 return;
             }
-            self.AccountSessionsDictionary.Add(accountId, instanceId);
+            self.AccountSessionDictionary.Add(accountName,session);
+        }
+
+
+        public static void Remove(this AccountSessionsComponent self, string accountName)
+        {
+            if (self.AccountSessionDictionary.ContainsKey(accountName))
+            {
+                self.AccountSessionDictionary.Remove(accountName);
+            }
         }
     }
-
 }

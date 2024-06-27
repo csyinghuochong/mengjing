@@ -2,10 +2,10 @@ namespace ET.Server
 {
 
     [ComponentOf(typeof(Session))]
-    public class AccountCheckOutTimeComponent : Entity, IAwake<long>, IDestroy
+    public class AccountCheckOutTimeComponent : Entity, IAwake<string>, IDestroy
     {
         public long Timer = 0;
 
-        public long AccountId = 0;
+        public string Account;
     }
 }
