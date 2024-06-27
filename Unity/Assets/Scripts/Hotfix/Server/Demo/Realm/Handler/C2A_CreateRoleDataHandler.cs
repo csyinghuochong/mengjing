@@ -10,7 +10,6 @@ namespace ET.Server
     [MessageSessionHandler(SceneType.Gate)]
     public class C2A_CreateRoleDataHandler: MessageSessionHandler<C2A_CreateRoleData, A2C_CreateRoleData>
     {
-	    
 	    //获取角色创建列表信息
 	    public CreateRoleInfo GetRoleListInfo(UserInfo userInfo,long userID) 
 	    {

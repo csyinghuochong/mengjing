@@ -8,7 +8,7 @@ namespace ET.Server
     [FriendOf(typeof(UserInfoComponentS))]
     [FriendOf(typeof(GlobalValueConfigCategory))]
     [MessageSessionHandler(SceneType.Realm)]
-	public class C2R_LoginHandler : MessageSessionHandler<C2R_LoginAccount, R2C_LoginAccount>
+	public class C2R_LoginAccountHandler : MessageSessionHandler<C2R_LoginAccount, R2C_LoginAccount>
 	{
 
         public int CanLogin(string identityCard, bool isHoliday, int age_type)
@@ -231,6 +231,20 @@ namespace ET.Server
                         //response.QueueAddres = StartSceneConfigCategory.Instance.Queues[session.DomainZone()].OuterIPPort.ToString();
 
                         CloseSession(session).Coroutine();
+                        account?.Dispose();
+                        return;
+                    }
+                    
+                    R2L_LoginAccountRequest r2LLoginAccountRequest = R2L_LoginAccountRequest.Create();
+                    r2LLoginAccountRequest.AccountName = request.Account;
+                    StartSceneConfig loginCenterConfig = StartSceneConfigCategory.Instance.LoginCenterConfig;
+                    var loginAccountResponse =  await session.Fiber().Root.GetComponent<MessageSender>()
+                            .Call(loginCenterConfig.ActorId, r2LLoginAccountRequest) as L2R_LoginAccountRequest;
+  
+                    if (loginAccountResponse.Error != ErrorCode.ERR_Success)
+                    {
+                        response.Error = loginAccountResponse.Error;
+                        session?.Disconnect().Coroutine();
                         account?.Dispose();
                         return;
                     }
