@@ -178,6 +178,17 @@ namespace ET.Client
         }
     }
 
+    [Event(SceneType.Demo)]
+    public class SingingUpdate_DlgMainRefresh: AEvent<Scene, SingingUpdate>
+    {
+        protected override async ETTask Run(Scene root, SingingUpdate args)
+        {
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_Singing.OnTimer(args);
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [Invoke(TimerInvokeType.UIMainFPSTimer)]
     public class UIMainFPSTimer: ATimer<DlgMain>
     {
@@ -1247,7 +1258,7 @@ namespace ET.Client
             self.View.ES_JoystickMove.ResetUI();
 
             self.View.ES_MapMini.BeginChangeScene(lastScene);
-            // self.UISingingComponent.GameObject.SetActive(false);
+            self.View.ES_Singing.uiTransform.gameObject.SetActive(false);
             self.View.ES_MainHpBar.BeginEnterScene();
             self.Root().GetComponent<SkillIndicatorComponent>().BeginEnterScene();
             self.Root().GetComponent<LockTargetComponent>().BeginEnterScene();
