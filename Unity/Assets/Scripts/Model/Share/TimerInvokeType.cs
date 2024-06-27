@@ -67,5 +67,6 @@
         public const int MainBuffTimer = 328;
         public const int TurtleSpeak = 329;
         public const int UILoadingTimer = 330;
+        public const int JiaYuanPetWalk = 340;
     }
 }

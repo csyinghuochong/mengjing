@@ -277,7 +277,7 @@ namespace ET.Client
             self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
         }
 
-        private static void ShowMapName(this ES_MapMini self, string mapname)
+        public static void ShowMapName(this ES_MapMini self, string mapname)
         {
             self.E_MapNameText.text = mapname;
         }

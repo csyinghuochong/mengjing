@@ -4,6 +4,11 @@ namespace ET.Client
 {
     public static class UnitTypeHelper
     {
+        public static bool IsPasture(this Unit self)
+        {
+            return self.Type == UnitType.Pasture;
+        }
+
         public static bool IsCanBeAttack(this Unit self, bool checkdead = true)
         {
             if (self.Type == UnitType.Npc || self.Type == UnitType.DropItem
