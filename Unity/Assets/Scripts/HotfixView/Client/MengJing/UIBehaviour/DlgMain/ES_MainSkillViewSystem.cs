@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_JoystickMove))]
     [FriendOf(typeof (ES_AttackGrid))]
     [FriendOf(typeof (ES_FangunSkill))]
     [FriendOf(typeof (ES_SkillGrid))]
@@ -62,11 +63,6 @@ namespace ET.Client
             self.ES_AttackGrid.uiTransform.gameObject.SetActive(true);
 
             self.ES_FangunSkill.uiTransform.gameObject.SetActive(true);
-
-            // DataUpdateComponent.Instance.AddListener(DataType.SkillCDUpdate, self);
-            // DataUpdateComponent.Instance.AddListener(DataType.SkillBeging, self);
-            // DataUpdateComponent.Instance.AddListener(DataType.SkillFinish, self);
-            // DataUpdateComponent.Instance.AddListener(DataType.JingLingButton, self);
         }
 
         [EntitySystem]
@@ -310,10 +306,9 @@ namespace ET.Client
 
             UIComponent uiComponent = self.Root().GetComponent<UIComponent>();
             uiComponent.CurrentNpcId = target.ConfigId;
-            // uiComponent.CurrentNpcUI = WindowID.WindowID_ZhuaPu;
-            // UI uimain = UIHelper.GetUI(self.ZoneScene(), UIType.UIMain);
-            // uimain.GetComponent<UIMainComponent>().UIJoystickMoveComponent.GameObject.SetActive(false);
-            // CameraComponent cameraComponent = self.ZoneScene().CurrentScene().GetComponent<CameraComponent>();
+            uiComponent.CurrentNpcUI = WindowID.WindowID_ZhuaPu;
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_JoystickMove.uiTransform.gameObject.SetActive(false);
+            MJCameraComponent cameraComponent = self.Root().CurrentScene().GetComponent<MJCameraComponent>();
             // cameraComponent.SetBuildEnter(target, () => { self.OnBuildEnter().Coroutine(); });
         }
 
@@ -361,7 +356,7 @@ namespace ET.Client
 
         public static void OnBtn_NpcDuiHua(this ES_MainSkill self)
         {
-            // DuiHuaHelper.MoveToNpcDialog(self.ZoneScene());
+            DuiHuaHelper.MoveToNpcDialog(self.Root());
         }
 
         public static void OnShiquItem(this ES_MainSkill self, float distance)

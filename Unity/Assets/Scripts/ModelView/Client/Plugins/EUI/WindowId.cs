@@ -129,5 +129,6 @@ namespace ET.Client
 		WindowID_TeamApplyList,
 		WindowID_BuffTips,
 		WindowID_JiaYuanMain,
+		WindowID_ZhuaPu,
 	}
 }
