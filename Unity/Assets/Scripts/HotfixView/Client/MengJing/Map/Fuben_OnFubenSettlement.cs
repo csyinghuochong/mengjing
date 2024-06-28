@@ -52,7 +52,7 @@ namespace ET.Client
                     break;
                 case SceneTypeEnum.PetTianTi:
                     FlyTipComponent.Instance.ShowFlyTip("宠物天梯对战结束！！！");
-                    
+
                     // UIHelper.GetUI(args.Scene, UIType.UIPetMain).GetComponent<UIPetMainComponent>().OnFubenResult(args.m2C_FubenSettlement);
                     // ui = await UIHelper.Create(args.Scene, UIType.UIPetFubenResult);
                     // ui.GetComponent<UIPetFubenResultComponent>().OnUpdateUI(args.m2C_FubenSettlement);
@@ -62,11 +62,10 @@ namespace ET.Client
                     // ui.GetComponent<UIRandomTowerResultComponent>().OnUpdateUI(args.m2C_FubenSettlement);
                     break;
                 case SceneTypeEnum.TrialDungeon:
-                    // UI uitrial = UIHelper.GetUI(args.Scene, UIType.UITrialMain);
-                    // uitrial.GetComponent<UITrialMainComponent>().StopTimer();
-                    // PopupTipHelp.OpenPopupTip_2(args.Scene, args.m2C_FubenSettlement.BattleResult == CombatResultEnum.Win? "胜利" : "失败",
-                    //     "恭喜你赢得了本场试炼的胜利！",
-                    //     () => { EnterFubenHelp.RequestQuitFuben(args.Scene); }).Coroutine();
+                    scene.GetComponent<UIComponent>().GetDlgLogic<DlgTrialMain>().StopTimer();
+                    PopupTipHelp.OpenPopupTip_2(scene, args.m2C_FubenSettlement.BattleResult == CombatResultEnum.Win? "胜利" : "失败",
+                        "恭喜你赢得了本场试炼的胜利！",
+                        () => { EnterMapHelper.RequestQuitFuben(scene); }).Coroutine();
                     break;
                 // case SceneTypeEnum.TowerOfSeal:
                 //     UI uITowerOfSealMain = UIHelper.GetUI(args.Scene, UIType.UITowerOfSealMain);

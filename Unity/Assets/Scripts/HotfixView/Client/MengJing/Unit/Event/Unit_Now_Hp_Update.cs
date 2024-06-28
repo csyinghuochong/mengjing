@@ -58,6 +58,7 @@ namespace ET.Client
                         HpGameObject = heroHeadBarComponent.GameObject;
                         heroHeadBarComponent.UpdateBlood();
                     }
+
                     break;
                 case UnitType.Monster:
                     UIMonsterHpComponent monsterHpComponent = unitDefend.GetComponent<UIMonsterHpComponent>();
@@ -66,6 +67,7 @@ namespace ET.Client
                         HpGameObject = monsterHpComponent.GameObject;
                         monsterHpComponent.UpdateBlood();
                     }
+
                     break;
                 case UnitType.Pet:
                     UIPetHpComponent petHpComponent = unitDefend.GetComponent<UIPetHpComponent>();
@@ -74,13 +76,14 @@ namespace ET.Client
                         HpGameObject = petHpComponent.GameObject;
                         petHpComponent.UpdateBlood();
                     }
+
                     break;
                 default:
                     break;
             }
-           
+
             bool showfloattext = unitAttack != null && UnitHelper.GetMasterId(unitAttack) == myunitid;
-            if (HpGameObject!= null && ( unitDefend.MainHero || UnitHelper.GetMasterId(unitDefend) == myunitid || showfloattext) )
+            if (HpGameObject != null && (unitDefend.MainHero || UnitHelper.GetMasterId(unitDefend) == myunitid || showfloattext))
             {
                 FallingFontComponent fallingFontComponent = unitDefend.Root().GetComponent<FallingFontComponent>();
                 //触发飘字
@@ -112,10 +115,10 @@ namespace ET.Client
                 }
             }
 
-            if (mapComponent.SceneType == SceneTypeEnum.TrialDungeon  
+            if (mapComponent.SceneType == SceneTypeEnum.TrialDungeon
                 && unitDefend.Type == UnitType.Monster)
             {
-                //root.GetComponent<UIComponent>().GetDlgLogic<DlgTrialMain>().OnUpdateHurt(args.ChangeHpValue);
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgTrialMain>().OnUpdateHurt(args.ChangeHpValue);
             }
 
             await ETTask.CompletedTask;
