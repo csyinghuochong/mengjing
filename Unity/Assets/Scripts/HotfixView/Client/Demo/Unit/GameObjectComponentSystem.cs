@@ -519,8 +519,7 @@ namespace ET.Client
 
                     if (numericComponent.GetAsInt(NumericType.Now_Dead) == 1)
                     {
-                        //EventType.UnitDead.Instance.Unit = unit;
-                        //Game.EventSystem.PublishClass(EventType.UnitDead.Instance);
+                        EventSystem.Instance.Publish(self.Root(), new UnitDead() { Unit = unit });
                     }
 
                     if (unit.MainHero)

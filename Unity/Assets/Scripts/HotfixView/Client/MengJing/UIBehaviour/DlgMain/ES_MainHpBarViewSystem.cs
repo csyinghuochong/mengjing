@@ -297,7 +297,7 @@ namespace ET.Client
                 self.PetHurt = 0;
                 self.PlayerHurt = 0;
                 self.UpdateHurtText();
-                self.EG_MonsterNodeRectTransform.gameObject.SetActive(false);
+                self.EG_BossNodeRectTransform.gameObject.SetActive(false);
                 self.E_Lab_OwnerText.text = string.Empty;
             }
         }
