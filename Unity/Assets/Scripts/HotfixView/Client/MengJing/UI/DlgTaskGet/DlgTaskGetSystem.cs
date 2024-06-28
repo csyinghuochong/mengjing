@@ -144,7 +144,7 @@ namespace ET.Client
                 case 5: //补偿大师
                     self.View.E_TaskFubenItemsLoopVerticalScrollRect.gameObject.SetActive(true);
                     PlayerComponent accountInfo = self.Root().GetComponent<PlayerComponent>();
-                    int buchangNumber = BuChangHelper.ShowNewBuChang(accountInfo.PlayerInfo, accountInfo.MyId);
+                    int buchangNumber = BuChangHelper.ShowNewBuChang(accountInfo.PlayerInfo, accountInfo.CurrentRoleId);
                     GameObject go = self.Root().GetComponent<ResourcesLoaderComponent>()
                             .LoadAssetSync<GameObject>("Assets/Bundles/UI/Item/Item_TaskFubenItem.prefab");
                     if (buchangNumber > 0)
