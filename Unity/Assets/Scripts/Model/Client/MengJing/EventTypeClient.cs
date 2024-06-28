@@ -348,4 +348,9 @@ namespace ET.Client
     public struct LoadSceneFinished
     {
     }
+
+    public struct JingLingGet
+    {
+        public int JingLingId;
+    }
 }

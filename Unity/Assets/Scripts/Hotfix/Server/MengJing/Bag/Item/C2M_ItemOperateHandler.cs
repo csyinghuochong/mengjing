@@ -471,7 +471,7 @@ namespace ET.Server
                             //unit.GetComponent<TitleComponent>().OnActiveTile(int.Parse(itemConfig.ItemUsePar));
                             break;
                         case 129: //激活精灵
-                            //unit.GetComponent<ChengJiuComponent>().OnActiveJingLing(int.Parse(itemConfig.ItemUsePar));
+                            unit.GetComponent<ChengJiuComponentS>().OnActiveJingLing(int.Parse(itemConfig.ItemUsePar));
                             Function_Fight.UnitUpdateProperty_Base(unit, true, true);
                             break;
                         case 131: //增加饱食度
