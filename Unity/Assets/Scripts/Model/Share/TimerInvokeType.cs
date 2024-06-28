@@ -37,6 +37,7 @@
         public const int MailSceneTimer = 225;
         public const int ShouLieUpLoadTimer = 226;
         public const int AccountSessionCheckOutTime = 227;
+        public const int PlayerOfflineOutTime = 228;
         
         public const int RoomUpdate = 301;
         public const int JoystickTimer = 302;

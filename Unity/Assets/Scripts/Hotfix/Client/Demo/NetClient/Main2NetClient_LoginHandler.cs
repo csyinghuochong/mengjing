@@ -28,21 +28,23 @@ namespace ET.Client
             IPEndPoint realmAddress = routerAddressComponent.GetRealmAddress(account);
 
             R2C_LoginAccount r2CLogin;
-            using (Session session = await netComponent.CreateRouterSession(realmAddress, account, password))
+            Session session = await netComponent.CreateRouterSession(realmAddress, account, password);
+            r2CLogin = (R2C_LoginAccount)await session.Call(new C2R_LoginAccount() { Account = account, Password = password });
+            if (r2CLogin.Error == ErrorCode.ERR_Success)
             {
-                r2CLogin = (R2C_LoginAccount)await session.Call(new C2R_LoginAccount() { Account = account, Password = password });
+                root.AddComponent<SessionComponent>().Session = session;
+            }
+            else
+            {
+                session?.Dispose();
             }
             
-            // 创建一个gate Session,并且保存到SessionComponent中
-            Session gateSession = await netComponent.CreateRouterSession(NetworkHelper.ToIPEndPoint(r2CLogin.Address), account, password);
-            gateSession.AddComponent<ClientSessionErrorComponent>();
-            root.AddComponent<SessionComponent>().Session = gateSession;
-            G2C_LoginGameGate g2CLoginGate = (G2C_LoginGameGate)await gateSession.Call(new C2G_LoginGameGate() { Key = r2CLogin.Key, GateId = r2CLogin.GateId });
-            Log.Debug("登陆gate成功!");
             response.AccountId = r2CLogin.AccountId;
             response.PlayerInfo = r2CLogin.PlayerInfo;
             response.RoleLists = r2CLogin.RoleLists;
-            response.PlayerId = g2CLoginGate.PlayerId;
+            response.Key = r2CLogin.Key;
+            response.Token = r2CLogin.Token;
+            response.Error = r2CLogin.Error;
         }
     }
 }

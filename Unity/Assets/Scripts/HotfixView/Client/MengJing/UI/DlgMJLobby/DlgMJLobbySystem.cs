@@ -134,7 +134,7 @@ namespace ET.Client
             }
 
             accountInfoComponentClient.CurrentRoleId = self.SeletRoleInfo.UnitId;
-            await EnterMapHelper.EnterMapAsync(self.Root());
+            await LoginHelper.LoginGameAsync(self.Root());
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MJLobby);
         }
 

@@ -18,6 +18,7 @@ namespace ET.Client
 
         public long AccountId { get; set; } = 0;
 
+        public long Key;
         public string Token;
 
         public string RealmKey;

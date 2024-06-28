@@ -1,9 +1,9 @@
+using System;
 
 namespace ET.Server
 {
-
-    [FriendOf(typeof(TokenComponent))]
     [EntitySystemOf(typeof(TokenComponent))]
+    [FriendOfAttribute(typeof(ET.Server.TokenComponent))]
     public static partial class TokenComponentSystem
     {
         [EntitySystem]
@@ -12,25 +12,20 @@ namespace ET.Server
 
         }
 
-        public static void Add(this TokenComponent self, long key, string token, bool queue = false)
+        public static void Add(this TokenComponent self, string key, string token)
         {
             self.TokenDictionary.Add(key, token);
-            self.TimeOutRemoveKey(key, token, queue).Coroutine();
+            self.TimeOutRemoveKey(key, token).Coroutine();
         }
 
-        public static string Get(this TokenComponent self, long key)
+        public static string Get(this TokenComponent self, string key)
         {
-            string value = string.Empty;
+            string value = String.Empty;
             self.TokenDictionary.TryGetValue(key, out value);
             return value;
         }
 
-        /// <summary>
-        /// G2AExitGame
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="key"></param>
-        public static void Remove(this TokenComponent self, long key)
+        public static void Remove(this TokenComponent self, string key)
         {
             if (self.TokenDictionary.ContainsKey(key))
             {
@@ -38,9 +33,9 @@ namespace ET.Server
             }
         }
 
-        private static async ETTask TimeOutRemoveKey(this TokenComponent self, long key, string tokenKey, bool queue = false)
+        private static async ETTask TimeOutRemoveKey(this TokenComponent self, string key, string tokenKey)
         {
-            await self.Root().GetComponent<TimerComponent>().WaitAsync(queue ? 6000000 : 600000);
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(600000);
 
             string onlineToken = self.Get(key);
 
@@ -48,6 +43,7 @@ namespace ET.Server
             {
                 self.Remove(key);
             }
+
         }
     }
 }

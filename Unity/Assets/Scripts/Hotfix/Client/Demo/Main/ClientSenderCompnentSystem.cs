@@ -38,13 +38,16 @@ namespace ET.Client
             
             Log.Debug("LoginAsync");
             
-            NetClient2Main_Login response = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, new Main2NetClient_Login()
-            {
-                OwnerFiberId = self.Fiber().Id, Account = account, Password = password
-            }) as NetClient2Main_Login;
+            Main2NetClient_Login main2NetClientLogin = Main2NetClient_Login.Create();
+            main2NetClientLogin.OwnerFiberId = self.Fiber().Id;
+            main2NetClientLogin.Account      = account;
+            main2NetClientLogin.Password     = password;
+            NetClient2Main_Login response = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientLogin) as NetClient2Main_Login;
 
             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
             playerComponent.Account = account;
+            playerComponent.Key = response.Key;
+            playerComponent.Token = response.Token;
             playerComponent.AccountId = response.AccountId;
             playerComponent.PlayerInfo = response.PlayerInfo;
             playerComponent.CreateRoleList = response.RoleLists;
@@ -52,6 +55,17 @@ namespace ET.Client
             return response.PlayerId;
         }
 
+        public static async ETTask<NetClient2Main_LoginGame> LoginGameAsync(this ClientSenderCompnent self, string account, long key,long roleId,string address)
+        {
+            Main2NetClient_LoginGame main2NetClientLoginGame = Main2NetClient_LoginGame.Create();
+            main2NetClientLoginGame.RealmKey    = key;
+            main2NetClientLoginGame.Account     = account;
+            main2NetClientLoginGame.RoleId      = roleId;
+            main2NetClientLoginGame.GateAddress = address;
+            NetClient2Main_LoginGame response = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientLoginGame) as NetClient2Main_LoginGame;
+            return response;
+        }
+        
         public static void Send(this ClientSenderCompnent self, IMessage message)
         {
             A2NetClient_Message a2NetClientMessage = A2NetClient_Message.Create();

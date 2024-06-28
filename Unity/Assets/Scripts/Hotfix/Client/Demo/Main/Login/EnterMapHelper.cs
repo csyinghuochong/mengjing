@@ -5,37 +5,6 @@ namespace ET.Client
     [FriendOf(typeof (PlayerComponent))]
     public static partial class EnterMapHelper
     {
-        public static async ETTask EnterMapAsync(Scene root)
-        {
-            try
-            {
-                C2G_EnterMap c2GEnterMap = new C2G_EnterMap();
-                c2GEnterMap.AccountId =  root.GetComponent<PlayerComponent>().AccountId;
-                c2GEnterMap.UnitId = root.GetComponent<PlayerComponent>().CurrentRoleId;
-
-                G2C_EnterMap g2CEnterMap = await root.GetComponent<ClientSenderCompnent>().Call(c2GEnterMap) as G2C_EnterMap;
-
-                root.GetComponent<PlayerComponent>().MyId = c2GEnterMap.UnitId;
-
-                // 等待场景切换完成
-                await root.GetComponent<ObjectWait>().Wait<Wait_SceneChangeFinish>();
-
-                await UserInfoNetHelper.RequestUserInfoInit(root);
-                await BagClientNetHelper.RequestBagInit(root);
-                await PetNetHelper.RequestPetInfo(root);
-                await TaskClientNetHelper.RequestTaskInit(root);
-                await SkillNetHelper.RequestSkillSet(root);
-                await FriendNetHelper.RequestFriendInfo(root);
-                await ActivityNetHelper.RequestActivityInfo(root);
-                await ChengJiuNetHelper.GetChengJiuList(root);
-                
-                EventSystem.Instance.Publish(root, new EnterMapFinish());
-            }
-            catch (Exception e)
-            {
-                Log.Error(e);
-            }
-        }
 
         public static async ETTask<int> RequestTransfer(Scene root, int newsceneType, int sceneId, int difficulty = FubenDifficulty.None,
         string paraminfo = "0")

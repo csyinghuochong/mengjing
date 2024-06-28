@@ -115,15 +115,15 @@ message C2C_GMInfoResponse // ICenterActorResponse
 	int32 OnLineRobot = 2;
 }
 
-//ResponseType G2C_EnterMap
-message C2G_EnterMap // ISessionRequest
+//ResponseType G2C_EnterGame
+message C2G_EnterGame // ISessionRequest
 {
 	int32 RpcId = 1;
 	int64 UnitId = 2;
 	int64 AccountId = 3;
 }
 
-message G2C_EnterMap // ISessionResponse
+message G2C_EnterGame // ISessionResponse
 {
 	int32 RpcId = 1;
 	int32 Error = 2;
@@ -332,8 +332,10 @@ message CreateRoleInfo
 message C2G_LoginGameGate // ISessionRequest
 {
 	int32 RpcId = 1;
-	int64 Key = 2;  // 帐号
+	int64 Key = 2;  
 	int64 GateId = 3;
+	string  AccountName = 4;
+	int64 RoleId = 5;
 }
 
 message G2C_LoginGameGate // ISessionResponse
@@ -355,8 +357,8 @@ message ServerItem
 	repeated int32 PlatformList = 7;   //不配置或者-1全部显示
 }
 
-//ResponseType G2C_CreateRoleData
-message C2G_CreateRoleData // ISessionRequest
+//ResponseType R2C_CreateRoleData
+message C2R_CreateRoleData // ISessionRequest
 {
 	int32 RpcId = 90;
 	int32 CreateOcc = 2;
@@ -364,7 +366,7 @@ message C2G_CreateRoleData // ISessionRequest
 	int64 AccountId = 4;
 }
 
-message G2C_CreateRoleData // ISessionResponse
+message R2C_CreateRoleData // ISessionResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
@@ -372,19 +374,39 @@ message G2C_CreateRoleData // ISessionResponse
 	CreateRoleInfo createRoleInfo = 1;
 }
 
-//ResponseType G2C_DeleteRoleData
-message C2G_DeleteRoleData // ISessionRequest
+//ResponseType R2C_DeleteRoleData
+message C2R_DeleteRoleData // ISessionRequest
 {
 	int32 RpcId = 90;
 	int64 AccountId = 1;
 	int64 UserId = 2;
 }
 
-message G2C_DeleteRoleData // ISessionResponse
+message R2C_DeleteRoleData // ISessionResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
+}
+
+
+//ResponseType R2C_GetRealmKey
+message C2R_GetRealmKey // ISessionRequest
+{
+	int32 RpcId = 1;
+	string Token = 2;
+	string Account = 3;
+	int32 ServerId = 4;
+}
+
+message R2C_GetRealmKey // ISessionResponse
+{
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
+	string Address = 4;
+	int64 Key = 5;
+	int64 GateId = 6;
 }
 
 message G2C_TestHotfixMessage // ISessionMessage

@@ -1,10 +1,9 @@
 ﻿using System;
 
-
 namespace ET.Server
 {
     [MessageSessionHandler(SceneType.Gate)]
-    public class C2G_LoginGateHandler : MessageSessionHandler<C2G_LoginGameGate, G2C_LoginGameGate>
+    public class C2G_LoginGateHandler: MessageSessionHandler<C2G_LoginGameGate, G2C_LoginGameGate>
     {
         protected override async ETTask Run(Session session, C2G_LoginGameGate request, G2C_LoginGameGate response)
         {
@@ -14,67 +13,85 @@ namespace ET.Server
                 session.Dispose();
                 return;
             }
-            
+
             Scene root = session.Root();
+
+            if (session.GetComponent<SessionLockingComponent>() != null)
+            {
+                response.Error = ErrorCode.ERR_RequestRepeatedly;
+                return;
+            }
+
             string account = root.GetComponent<GateSessionKeyComponent>().Get(request.Key);
             if (account == null)
             {
                 response.Error = ErrorCore.ERR_ConnectGateKeyError;
                 response.Message = "Gate key验证失败!";
+                session?.Disconnect().Coroutine();
                 return;
             }
-            
+
+            root.GetComponent<GateSessionKeyComponent>().Remove(request.Key);
             session.RemoveComponent<SessionAcceptTimeoutComponent>();
 
-            PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
-            Player player = playerComponent.GetByAccount(account);
-            if (player == null)
+            CoroutineLockComponent coroutineLockComponent = root.GetComponent<CoroutineLockComponent>();
+
+            long instanceId = session.InstanceId;
+            using (session.AddComponent<SessionLockingComponent>())
+            using (await coroutineLockComponent.Wait(CoroutineLockType.LoginGate, request.AccountName.GetLongHashCode()))
             {
-                player = playerComponent.AddChild<Player, string>(account);
-                playerComponent.Add(player);
-                PlayerSessionComponent playerSessionComponent = player.AddComponent<PlayerSessionComponent>();
-                playerSessionComponent.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.GateSession);
-                await playerSessionComponent.AddLocation(LocationType.GateSession);
-			
-                player.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.UnOrderedMessage);
-                await player.AddLocation(LocationType.Player);
-			
-                session.AddComponent<SessionPlayerComponent>().Player = player;
-                playerSessionComponent.Session = session;
-            }
-            else
-            {
-                // 判断是否在战斗
-                PlayerRoomComponent playerRoomComponent = player.GetComponent<PlayerRoomComponent>();
-                if (playerRoomComponent.RoomActorId != default)
+                if (instanceId != session.InstanceId)
                 {
-                    CheckRoom(player, session).Coroutine();
+                    response.Error = ErrorCode.ERR_LoginGameGateError01;
+                    return;
+                }
+
+                //通知登录中心服 记录本次登录的服务器Zone
+                G2L_AddLoginRecord g2LAddLoginRecord = G2L_AddLoginRecord.Create();
+
+                g2LAddLoginRecord.AccountName = request.AccountName;
+                g2LAddLoginRecord.ServerId = root.Zone();
+
+                L2G_AddLoginRecord l2ARoleLogin = (L2G_AddLoginRecord)await root.GetComponent<MessageSender>()
+                        .Call(StartSceneConfigCategory.Instance.LoginCenterConfig.ActorId, g2LAddLoginRecord);
+
+                if (l2ARoleLogin.Error != ErrorCode.ERR_Success)
+                {
+                    response.Error = l2ARoleLogin.Error;
+                    session?.Disconnect().Coroutine();
+                    return;
+                }
+
+                PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
+                Player player = playerComponent.GetByAccount(account);
+                if (player == null)
+                {
+                    player = playerComponent.AddChildWithId<Player, string>(request.RoleId, account);
+                    player.UnitId = request.RoleId;
+
+                    playerComponent.Add(player);
+                    PlayerSessionComponent playerSessionComponent = player.AddComponent<PlayerSessionComponent>();
+                    playerSessionComponent.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.GateSession);
+                    await playerSessionComponent.AddLocation(LocationType.GateSession);
+
+                    player.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.UnOrderedMessage);
+                    await player.AddLocation(LocationType.Player);
+
+                    session.AddComponent<SessionPlayerComponent>().Player = player;
+                    playerSessionComponent.Session = session;
+
+                    player.PlayerState = PlayerState.Gate;
                 }
                 else
                 {
-                    PlayerSessionComponent playerSessionComponent = player.GetComponent<PlayerSessionComponent>();
-                    playerSessionComponent.Session = session;
+                    player.RemoveComponent<PlayerOfflineOutTimeComponent>();
+
+                    session.AddComponent<SessionPlayerComponent>().Player = player;
+                    player.GetComponent<PlayerSessionComponent>().Session = session;
                 }
+
+                response.PlayerId = player.Id;
             }
-
-            response.PlayerId = player.Id;
-            await ETTask.CompletedTask;
-        }
-
-        private static async ETTask CheckRoom(Player player, Session session)
-        {
-            Fiber fiber = player.Fiber();
-            await fiber.WaitFrameFinish();
-            
-            using Room2G_Reconnect room2GateReconnect = await fiber.Root.GetComponent<MessageSender>().Call(
-                player.GetComponent<PlayerRoomComponent>().RoomActorId,
-                new G2Room_Reconnect() { PlayerId = player.Id }) as Room2G_Reconnect;
-            G2C_Reconnect g2CReconnect = new() { StartTime = room2GateReconnect.StartTime, Frame = room2GateReconnect.Frame };
-            g2CReconnect.UnitInfos.AddRange(room2GateReconnect.UnitInfos);
-            session.Send(g2CReconnect);
-            
-            session.AddComponent<SessionPlayerComponent>().Player = player;
-            player.GetComponent<PlayerSessionComponent>().Session = session;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace ET.Client
 		public static async ETTask EnterMap(this DlgLobby self)
 		{
 			Scene root = self.Root();
-			await EnterMapHelper.EnterMapAsync(root);
+			await LoginHelper.LoginGameAsync(root);
 			root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Lobby);
 		}
 

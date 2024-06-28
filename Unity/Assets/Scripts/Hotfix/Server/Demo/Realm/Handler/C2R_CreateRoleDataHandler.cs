@@ -7,8 +7,8 @@ namespace ET.Server
 {
 	[FriendOf(typeof(DBAccountInfo))]
 	[FriendOf(typeof(UserInfoComponentS))]
-    [MessageSessionHandler(SceneType.Gate)]
-    public class C2G_CreateRoleDataHandler: MessageSessionHandler<C2G_CreateRoleData, G2C_CreateRoleData>
+    [MessageSessionHandler(SceneType.Realm)]
+    public class C2R_CreateRoleDataHandler: MessageSessionHandler<C2R_CreateRoleData, R2C_CreateRoleData>
     {
 	    //获取角色创建列表信息
 	    public CreateRoleInfo GetRoleListInfo(UserInfo userInfo,long userID) 
@@ -24,9 +24,9 @@ namespace ET.Server
 		    return roleList;
 	    }
 	    
-        protected override async ETTask Run(Session session, C2G_CreateRoleData request, G2C_CreateRoleData response)
+        protected override async ETTask Run(Session session, C2R_CreateRoleData request, R2C_CreateRoleData response)
         {
-	        if (session.Root().SceneType != SceneType.Gate)
+	        if (session.Root().SceneType != SceneType.Realm)
 	        {
 		        Log.Error($"LoginTest C2G_CreateRoleData请求的Scene错误，当前Scene为：{session.Root().SceneType}");
 		        session.Dispose();

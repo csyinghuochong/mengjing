@@ -200,7 +200,7 @@ namespace ET.Server
                     }
                     Scene rootScene = session.Root();
                     TokenComponent tokenComponent = rootScene.GetComponent<TokenComponent>();
-                    string queueToken = tokenComponent.Get(account.Id);
+                    string queueToken = tokenComponent.Get(account.Account);
 
                     //在线人数判断有问题。[获取的是在保存在账号服的玩家数量]
                     AccountSessionsComponent accountSessionsComponent = session.Root().GetComponent<AccountSessionsComponent>();
@@ -213,8 +213,8 @@ namespace ET.Server
                         Log.Console($" {session.Zone()} --- onlineNumber: {onlineNumber}  queueToken:{queueToken} request.Token:{request.Token}");
 
                         queueToken = TimeHelper.ServerNow().ToString() + RandomHelper.RandomNumber(int.MinValue, int.MaxValue).ToString();
-                        tokenComponent.Remove(account.Id);
-                        tokenComponent.Add(account.Id, queueToken, true);
+                        tokenComponent.Remove(account.Account);
+                        tokenComponent.Add(account.Account, queueToken);
 
                         //long queueServerId = DBHelper.GetQueueServerId(session.DomainZone());
                         //Q2A_EnterQueue d2GGetUnit = (Q2A_EnterQueue)await ActorMessageSenderComponent.Instance.Call(queueServerId, new A2Q_EnterQueue()
@@ -256,8 +256,8 @@ namespace ET.Server
                     session.AddComponent<AccountCheckOutTimeComponent, string>(request.Account);
 
                     string Token = TimeHelper.ServerNow().ToString() + RandomHelper.RandomNumber(int.MinValue, int.MaxValue).ToString();
-                    tokenComponent.Remove(account.Id);    //Token也是保留十分钟
-                    tokenComponent.Add(account.Id, Token);
+                    tokenComponent.Remove(account.Account);    //Token也是保留十分钟
+                    tokenComponent.Add(account.Account, Token);
 
                     response.RoleLists.Clear();
                     ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(session.Zone());
@@ -303,8 +303,6 @@ namespace ET.Server
 			response.Address = config.InnerIPPort.ToString();
 			response.Key = g2RGetLoginKey.Key;
 			response.GateId = g2RGetLoginKey.GateId;
-			
-			CloseSession(session).Coroutine();
 		}
 
         private CreateRoleInfo GetRoleListInfo(UserInfo userInfo, long userID)
