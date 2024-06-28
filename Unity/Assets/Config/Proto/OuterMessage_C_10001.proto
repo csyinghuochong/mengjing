@@ -4220,6 +4220,14 @@ message F2C_WatchPetResponse // IFriendActorResponse
 	repeated int64 Vs = 10;
 }
 
+message M2C_HappyInfoResult // IMessage
+{
+	int64 ActorId = 1;
+	int64 UnitId = 2;
+
+	int64 NextRefreshTime = 3; //下一刷新的时间
+}
+
 //喜从天降刷新
 //ResponseType M2C_HappyMoveResponse
 message C2M_HappyMoveRequest // ILocationRequest

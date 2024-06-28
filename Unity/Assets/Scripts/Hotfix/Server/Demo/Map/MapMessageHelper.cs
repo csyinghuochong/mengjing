@@ -29,7 +29,7 @@ namespace ET.Server
             MessageLocationSenderOneType oneTypeMessageLocationType = unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession);
             foreach (AOIEntity u in dict.Values)
             {
-                oneTypeMessageLocationType.Send(u.Unit.GateSessionActorId, message);
+                oneTypeMessageLocationType.Send(u.Unit.Id, message);
             }
         }
         
@@ -73,7 +73,7 @@ namespace ET.Server
         
         public static void SendToClient(Unit unit, IMessage message)
         {
-            unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(unit.GateSessionActorId, message);
+            unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(unit.Id, message);
         }
         
         public static void SendToClient(List<Unit> units, IMessage message)
@@ -81,7 +81,7 @@ namespace ET.Server
             for (int i = 0; i < units.Count;i++)
             {
                 Unit unit = units[i];
-                unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(unit.GateSessionActorId, message);
+                unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(unit.Id, message);
             }
         }
         

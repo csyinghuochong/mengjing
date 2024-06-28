@@ -65,7 +65,6 @@ namespace ET
             }
         }
         
-        public long GateSessionActorId { get; set; }
         
         public long UpdateUITime{ get; set; }
     }

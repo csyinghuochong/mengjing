@@ -126,7 +126,6 @@ namespace ET.Server
                         Unit unit = await UnitHelper.LoadUnit(player, scene, createRoleInfo, newAccountList[0].Account, request.AccountId);
                         StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map101");
                         response.MyId = request.UnitId;
-                        unit.GateSessionActorId = player.Id;
                         Log.Debug($"M2M_UnitTransferRequest_a:{unit.Components.Count}");
                         player.ChatInfoInstanceId = await EnterWorldChatServer(unit); //登录聊天服
                         Log.Debug($"M2M_UnitTransferRequest_b:{unit.Components.Count}");
@@ -157,7 +156,7 @@ namespace ET.Server
                     UnitId = unit.Id,
                     Name = unit.GetComponent<UserInfoComponentS>().UserInfo.Name,
                     UnionId = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.UnionId_0),
-                    GateSessionActorId = unit.GateSessionActorId
+                    GateSessionActorId = unit.Id
                 });
             return chat2G_EnterChat.ChatInfoUnitInstanceId;
         }
