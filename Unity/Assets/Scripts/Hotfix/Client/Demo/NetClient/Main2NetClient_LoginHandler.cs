@@ -37,7 +37,7 @@ namespace ET.Client
             Session gateSession = await netComponent.CreateRouterSession(NetworkHelper.ToIPEndPoint(r2CLogin.Address), account, password);
             gateSession.AddComponent<ClientSessionErrorComponent>();
             root.AddComponent<SessionComponent>().Session = gateSession;
-            G2C_LoginGate g2CLoginGate = (G2C_LoginGate)await gateSession.Call(new C2G_LoginGate() { Key = r2CLogin.Key, GateId = r2CLogin.GateId });
+            G2C_LoginGameGate g2CLoginGate = (G2C_LoginGameGate)await gateSession.Call(new C2G_LoginGameGate() { Key = r2CLogin.Key, GateId = r2CLogin.GateId });
             Log.Debug("登陆gate成功!");
             response.AccountId = r2CLogin.AccountId;
             response.PlayerInfo = r2CLogin.PlayerInfo;

@@ -328,15 +328,15 @@ message CreateRoleInfo
 	int32 RobotId = 8;
 }
 
-//ResponseType G2C_LoginGate
-message C2G_LoginGate // ISessionRequest
+//ResponseType G2C_LoginGameGate
+message C2G_LoginGameGate // ISessionRequest
 {
 	int32 RpcId = 1;
 	int64 Key = 2;  // 帐号
 	int64 GateId = 3;
 }
 
-message G2C_LoginGate // ISessionResponse
+message G2C_LoginGameGate // ISessionResponse
 {
 	int32 RpcId = 1;
 	int32 Error = 2;

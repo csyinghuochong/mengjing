@@ -1311,14 +1311,14 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(G2C_LoginGate))]
-	[Message(OuterMessage.C2G_LoginGate)]
+	[ResponseType(nameof(G2C_LoginGameGate))]
+	[Message(OuterMessage.C2G_LoginGameGate)]
 	[MemoryPackable]
-	public partial class C2G_LoginGate: MessageObject, ISessionRequest
+	public partial class C2G_LoginGameGate: MessageObject, ISessionRequest
 	{
-		public static C2G_LoginGate Create(bool isFromPool = false) 
+		public static C2G_LoginGameGate Create(bool isFromPool = false) 
 		{ 
-			return ObjectPool.Instance.Fetch(typeof(C2G_LoginGate), isFromPool) as C2G_LoginGate; 
+			return ObjectPool.Instance.Fetch(typeof(C2G_LoginGameGate), isFromPool) as C2G_LoginGameGate; 
 		}
 
 		[MemoryPackOrder(0)]
@@ -1342,13 +1342,13 @@ namespace ET
 
 	}
 
-	[Message(OuterMessage.G2C_LoginGate)]
+	[Message(OuterMessage.G2C_LoginGameGate)]
 	[MemoryPackable]
-	public partial class G2C_LoginGate: MessageObject, ISessionResponse
+	public partial class G2C_LoginGameGate: MessageObject, ISessionResponse
 	{
-		public static G2C_LoginGate Create(bool isFromPool = false) 
+		public static G2C_LoginGameGate Create(bool isFromPool = false) 
 		{ 
-			return ObjectPool.Instance.Fetch(typeof(G2C_LoginGate), isFromPool) as G2C_LoginGate; 
+			return ObjectPool.Instance.Fetch(typeof(G2C_LoginGameGate), isFromPool) as G2C_LoginGameGate; 
 		}
 
 		[MemoryPackOrder(0)]
@@ -27381,8 +27381,8 @@ namespace ET
 		 public const ushort KeyValuePairLong = 10038;
 		 public const ushort PlayerInfo = 10039;
 		 public const ushort CreateRoleInfo = 10040;
-		 public const ushort C2G_LoginGate = 10041;
-		 public const ushort G2C_LoginGate = 10042;
+		 public const ushort C2G_LoginGameGate = 10041;
+		 public const ushort G2C_LoginGameGate = 10042;
 		 public const ushort ServerItem = 10043;
 		 public const ushort C2A_CreateRoleData = 10044;
 		 public const ushort A2C_CreateRoleData = 10045;

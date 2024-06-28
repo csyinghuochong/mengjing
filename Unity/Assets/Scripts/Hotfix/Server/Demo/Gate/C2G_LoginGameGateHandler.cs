@@ -4,9 +4,9 @@
 namespace ET.Server
 {
     [MessageSessionHandler(SceneType.Gate)]
-    public class C2G_LoginGateHandler : MessageSessionHandler<C2G_LoginGate, G2C_LoginGate>
+    public class C2G_LoginGateHandler : MessageSessionHandler<C2G_LoginGameGate, G2C_LoginGameGate>
     {
-        protected override async ETTask Run(Session session, C2G_LoginGate request, G2C_LoginGate response)
+        protected override async ETTask Run(Session session, C2G_LoginGameGate request, G2C_LoginGameGate response)
         {
             Scene root = session.Root();
             string account = root.GetComponent<GateSessionKeyComponent>().Get(request.Key);
