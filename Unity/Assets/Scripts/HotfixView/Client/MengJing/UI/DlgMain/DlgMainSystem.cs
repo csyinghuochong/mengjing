@@ -48,6 +48,16 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
+    public class DataUpdate_BagItemUpdate_Refresh: AEvent<Scene, DataUpdate_BagItemUpdate>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_BagItemUpdate args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnBagItemUpdate();
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
     public class BuffUpdate_DlgMainRefresh: AEvent<Scene, BuffUpdate>
     {
         protected override async ETTask Run(Scene scene, BuffUpdate args)
@@ -1783,6 +1793,13 @@ namespace ET.Client
         {
             self.View.ES_JoystickMove.ResetUI();
             self.OnMoveStart();
+        }
+
+        public static void OnBagItemUpdate(this DlgMain self)
+        {
+            self.View.ES_MainSkill.OnBagItemUpdate();
+
+            // self.CheckCanEquip().Coroutine();
         }
     }
 }
