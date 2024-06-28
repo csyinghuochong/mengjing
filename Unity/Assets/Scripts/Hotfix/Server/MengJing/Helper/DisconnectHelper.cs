@@ -27,73 +27,62 @@ namespace ET.Server
             self.Dispose();
         }
 
+        public static async ETTask KickPlayerNoLock(Player player)
+        {
+            if (player == null || player.IsDisposed)
+            {
+                return;
+            }
+    
+            switch (player.PlayerState)
+            {
+                case PlayerState.Disconnect:
+                    break;
+                case PlayerState.Gate:
+                    break;
+                case PlayerState.Game:
+                    //通知游戏逻辑服下线Unit角色逻辑，并将数据存入数据库
+                    var m2GRequestExitGame = (M2G_RequestExitGame)await player.Root().GetComponent<MessageLocationSenderComponent>()
+                            .Get(LocationType.Unit).Call(player.UnitId, G2M_RequestExitGame.Create());
+
+                    //通知移除账号角色登录信息
+                    G2L_RemoveLoginRecord g2LRemoveLoginRecord = G2L_RemoveLoginRecord.Create();
+                    g2LRemoveLoginRecord.AccountName = player.Account;
+                    g2LRemoveLoginRecord.ServerId = player.Zone();
+                    var L2G_RemoveLoginRecord = (L2G_RemoveLoginRecord) await player.Root().GetComponent<MessageSender>()
+                            .Call(StartSceneConfigCategory.Instance.LoginCenterConfig.ActorId, g2LRemoveLoginRecord);
+                    break;
+            }
+    
+            TimerComponent timerComponent = player.Root().GetComponent<TimerComponent>();
+            player.PlayerState = PlayerState.Disconnect;
+
+            await player.GetComponent<PlayerSessionComponent>().RemoveLocation(LocationType.GateSession);
+            await player.RemoveLocation(LocationType.Player);
+            player.Root().GetComponent<PlayerComponent>()?.Remove(player);
+            player?.Dispose();
+    
+            await timerComponent.WaitAsync(300);
+        }
+        
         public static async ETTask KickPlayer(Player player, bool isException = false)
         {
             if (player == null || player.IsDisposed)
             {
                 return;
             }
-
             long instanceId = player.InstanceId;
-            // using (await player.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.LoginGate, player.AccountId.GetHashCode()))
-            // {
-            //     if (player.IsDisposed || instanceId != player.InstanceId)
-            //     {
-            //         return;
-            //     }
-            //     Log.Debug($"KickPlayerBegin playerId: {player.Id} InstanceId:{player.InstanceId}: state {player.PlayerState} {isException}");
-            //
-            //     if (!isException)   //异常下线不会走正常下线的流程。
-            //     {
-            //         switch (player.PlayerState)
-            //         {
-            //             case PlayerState.Disconnect:
-            //                 break;
-            //             case PlayerState.Gate:
-            //                 break;
-            //             case PlayerState.Game:
-            //                 //通知游戏逻辑服下线Unit角色逻辑，并将数据存入数据库
-            //                 var m2GRequestExitGame = (M2G_RequestExitGame)await MessageHelper.CallLocationActor(player.UnitId, new G2M_RequestExitGame());
-            //
-            //                 //通知组队服
-            //                 await ServerMessageHelper.SendServerMessage(player.TeamServerID, NoticeType.PlayerExit, player.UnitId.ToString());
-            //
-            //                 //通知Solo服
-            //                 await ServerMessageHelper.SendServerMessage(player.SoloServerID, NoticeType.PlayerExit, player.UnitId.ToString());
-            //
-            //                 //通知聊天服下线聊天Unit
-            //                 var chat2GRequestExitChat = (Chat2G_RequestExitChat)await MessageHelper.CallActor(player.ChatInfoInstanceId, new G2Chat_RequestExitChat());
-            //                 //通知移除账号角色登录信息
-            //                 long LoginCenterConfigSceneId = StartSceneConfigCategory.Instance.LoginCenterConfig.InstanceId;
-            //                 var L2G_RemoveLoginRecord = (L2G_RemoveLoginRecord)await MessageHelper.CallActor(LoginCenterConfigSceneId, new G2L_RemoveLoginRecord()
-            //                 {
-            //                     AccountId = player.AccountId,
-            //                     ServerId = player.DomainZone()
-            //                 });
-            //                 break;
-            //         }
-            //     }
-            //
-            //    
-            //     //通知账号服
-            //     long accountSceneId = DBHelper.GetAccountServerId(player.DomainZone());
-            //     var a2G_ExitGame = (A2G_ExitGame)await MessageHelper.CallActor(accountSceneId, new G2A_ExitGame()
-            //     {
-            //         AccountId = player.AccountId,
-            //     });
-            //
-            //     //通知排队服
-            //     long queueSceneId = DBHelper.GetQueueServerId(player.DomainZone());
-            //     var q2G_ExitGame = (Q2G_ExitGame)await MessageHelper.CallActor(queueSceneId, new G2Q_ExitGame()
-            //     {
-            //         AccountId = player.AccountId,
-            //     });
-            //
-            //     Log.Info($"KickPlayerEnd playerId: {player.Id} InstanceId:{player.InstanceId}: {isException}");
-            //     player.PlayerState = PlayerState.Disconnect;
-            //     player.DomainScene().GetComponent<PlayerComponent>()?.Remove(player.AccountId);
-            //     player?.Dispose();
-            await player.Root().GetComponent<TimerComponent>().WaitAsync(300);
+
+            CoroutineLockComponent coroutineLockComponent = player.Root().GetComponent<CoroutineLockComponent>();
+
+            using (await coroutineLockComponent.Wait(CoroutineLockType.LoginGate, player.Account.GetLongHashCode()))
+            {
+                if (player.IsDisposed || instanceId != player.InstanceId)
+                {
+                    return;
+                }
+                await KickPlayerNoLock(player);
+            }
         }
 
         public static async ETTask KickPlayer(int zone, long unitid)

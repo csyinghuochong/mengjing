@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ET.Client
 {
@@ -45,11 +46,17 @@ namespace ET.Client
                 return;
             }
 
-            FlyTipComponent.Instance.ShowFlyTipDi("功能暂未开放");
+            // Scene oldroot = scene.Root();
+            // scene.Root().RemoveComponent<ClientSenderCompnent>();
+            // SceneManager.MoveGameObjectToScene(GameObject.Find("Global"), SceneManager.GetActiveScene());
+            // GameObject.DestroyImmediate(GameObject.Find("Global"));
+            // //await scene.Root().GetComponent<ResourcesLoaderComponent>().LoadSceneAsync(ABPathHelper.GetScenePath("Init"), LoadSceneMode.Single);   
+            // oldroot.Dispose();
+            // World.Instance.Dispose();
+            // SceneManager.LoadScene("Init");
 
             // Camera camera = UIComponent.Instance.MainCamera.gameObject.GetComponent<Camera>();
             // camera.GetComponent<MyCamera_1>().enabled = false;
-
             // Session session = scene.GetComponent<SessionComponent>().Session;
             // if (session != null && !session.IsDisposed)
             // {

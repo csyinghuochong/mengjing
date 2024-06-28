@@ -52,7 +52,7 @@ namespace ET.Server
             if (string.IsNullOrEmpty(request.Account) || string.IsNullOrEmpty(request.Password))
 			{
 				response.Error = 20002;
-				CloseSession(session).Coroutine();
+                session.Disconnect().Coroutine();
                 return;
 			}
 
@@ -61,7 +61,7 @@ namespace ET.Server
             if (session.GetComponent<SessionLockingComponent>() != null)
             {
                 response.Error = ErrorCode.ERR_RequestRepeatedly;
-                CloseSession(session).Coroutine();
+                session.Disconnect().Coroutine();
                 return;
             }
 
@@ -106,7 +106,7 @@ namespace ET.Server
                     {
                         Log.Console($"session.IsDisposed: {request.Account}");
                         response.Error = ErrorCode.ERR_LoginInfoIsNull;
-                        CloseSession(session).Coroutine();
+                        session.Disconnect().Coroutine();
                         return;
                     }
 
@@ -143,14 +143,14 @@ namespace ET.Server
                     if (StopServer && !GMHelp.IsGmAccount(request.Account))
                     {
                         response.Error = ErrorCode.ERR_StopServer;
-                        CloseSession(session).Coroutine();
+                        session.Disconnect().Coroutine();
                         return;
                     }
 
                     if (centerPlayerInfo == null)
                     {
                         response.Error = ErrorCode.ERR_LoginInfoIsNull;
-                        CloseSession(session).Coroutine();
+                        session.Disconnect().Coroutine();
                         return;
                     }
                     if (account == null)
@@ -167,7 +167,7 @@ namespace ET.Server
                     {
                         response.Error = ErrorCode.ERR_AccountInBlackListError;
                         response.AccountId = account.Id;
-                        CloseSession(session).Coroutine();
+                        session.Disconnect().Coroutine();
                         account?.Dispose();
                         return;
                     }
@@ -175,7 +175,7 @@ namespace ET.Server
                     {
                         response.Error = ErrorCode.ERR_NotRealName;
                         response.AccountId = account.Id;
-                        CloseSession(session).Coroutine();
+                        session.Disconnect().Coroutine();
                         account?.Dispose();
                         return;
                     }
@@ -183,7 +183,7 @@ namespace ET.Server
                     {
                         Log.Console($"session.IsDisposed: {request.Account}");
                         response.Error = ErrorCode.ERR_LoginInfoIsNull;
-                        CloseSession(session).Coroutine();
+                        session.Disconnect().Coroutine();
                         account?.Dispose();
                         return;
                     }
@@ -194,7 +194,7 @@ namespace ET.Server
                     if (canLogin != ErrorCode.ERR_Success)
                     {
                         response.Error = canLogin;
-                        CloseSession(session).Coroutine();
+                        session.Disconnect().Coroutine();
                         account?.Dispose();
                         return;
                     }
@@ -229,7 +229,7 @@ namespace ET.Server
                         //response.QueueNumber = d2GGetUnit.QueueNumber;
                         //response.QueueAddres = StartSceneConfigCategory.Instance.Queues[session.DomainZone()].OuterIPPort.ToString();
 
-                        CloseSession(session).Coroutine();
+                        session.Disconnect().Coroutine();
                         account?.Dispose();
                         return;
                     }
@@ -317,12 +317,6 @@ namespace ET.Server
 
             return roleList;
         }
-
-        private async ETTask CloseSession(Session session)
-		{
-            Log.Debug("CloseSession");
-			await session.Root().GetComponent<TimerComponent>().WaitAsync(1000);
-			session.Dispose();
-		}
+        
 	}
 }
