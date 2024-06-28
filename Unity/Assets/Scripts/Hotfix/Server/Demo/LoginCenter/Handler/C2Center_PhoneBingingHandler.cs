@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 
-    [MessageHandler(SceneType.BigCenter)]
+    [MessageHandler(SceneType.LoginCenter)]
     public class C2Center_PhoneBingingHandler : MessageHandler<Session, C2Center_PhoneBinging, Center2C_PhoneBinging>
     {
         protected override async ETTask Run(Session session, C2Center_PhoneBinging request, Center2C_PhoneBinging response)

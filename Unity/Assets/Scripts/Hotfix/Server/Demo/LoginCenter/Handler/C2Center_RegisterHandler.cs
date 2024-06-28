@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-    [MessageHandler(SceneType.BigCenter)]
+    [MessageHandler(SceneType.LoginCenter)]
     public class C2Center_RegisterHandler : MessageHandler<Session, C2Center_Register, Center2C_Register>
     {
 
         protected override async ETTask Run(Session session, C2Center_Register request, Center2C_Register response)
         {
             Log.Warning($"C2Center_Register:{request.Account}");
-            if (session.Scene().SceneType != SceneType.AccountCenter)
+            if (session.Scene().SceneType != SceneType.LoginCenter)
             {
                 Log.Warning($"请求的Scene错误2，当前Scene为：{session.Scene().SceneType}");
                 session.Dispose();

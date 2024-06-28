@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 
-    [MessageHandler(SceneType.BigCenter)]
+    [MessageHandler(SceneType.LoginCenter)]
     public class Center2C_BlackAccountHandler : MessageHandler<Session, C2Center_BlackAccountRequest, Center2C_BlackAccountResponse>
     {
         protected override async ETTask Run(Session session, C2Center_BlackAccountRequest request, Center2C_BlackAccountResponse response)

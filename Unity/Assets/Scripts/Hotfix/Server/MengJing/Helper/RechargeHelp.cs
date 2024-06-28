@@ -47,7 +47,7 @@ namespace ET.Server
             {
                 Amount = rechargeNumber, Time = TimeHelper.ServerNow(), UnitId = userId, OrderInfo = ordinfo
             };
-            ActorId accountZone = UnitCacheHelper.GetCenterServerId();
+            ActorId accountZone = UnitCacheHelper.GetLoginCenterId();
             Center2A_RechargeResponse saveAccount =
                     (Center2A_RechargeResponse)await root.GetComponent<MessageSender>().Call(accountZone, rechargeRequest);
         }

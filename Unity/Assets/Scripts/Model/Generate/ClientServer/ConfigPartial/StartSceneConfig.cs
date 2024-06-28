@@ -23,14 +23,12 @@ namespace ET
         public StartSceneConfig Match;
         
         public StartSceneConfig Benchmark;
-
-        public StartSceneConfig AccountCenterConfig;
+        
 
         public StartSceneConfig LoginCenterConfig;
 
         public StartSceneConfig RechargeConfig;
-
-        public StartSceneConfig BigCenterConfig;
+        
         
         public Dictionary<int, StartSceneConfig> UnitCaches = new Dictionary<int, StartSceneConfig>();
 
@@ -86,12 +84,6 @@ namespace ET
                         break;
                     case SceneType.DBCache:
                         this.UnitCaches.Add(startSceneConfig.Zone, startSceneConfig);
-                        break;
-                    case SceneType.AccountCenter:
-                        this.AccountCenterConfig = startSceneConfig;
-                        break;
-                    case SceneType.BigCenter:
-                        this.BigCenterConfig = startSceneConfig;
                         break;
                     case SceneType.LoginCenter:
                         this.LoginCenterConfig = startSceneConfig;

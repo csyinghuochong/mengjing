@@ -88,7 +88,7 @@ namespace ET.Server
                         }
   
                         break;
-                    case SceneType.AccountCenter:
+                    case SceneType.LoginCenter:
                         string[] messagevalue = request.MessageValue.Split('_');
                         
                         if (messagevalue[0] == "0")

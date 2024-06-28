@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-    [MessageHandler(SceneType.BigCenter)]
+    [MessageHandler(SceneType.LoginCenter)]
     public class C2C_CenterServerInfoHandler : MessageHandler<Scene, C2C_CenterServerInfoReuest, C2C_CenterServerInfoRespone>
     {
 

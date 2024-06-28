@@ -9,7 +9,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_BuChangeRequest request, M2C_BuChangeResponse response)
         {
             Log.Error($"C2M_BuChangeRequest: {unit.Id}  {request.BuChangId}");
-            ActorId accountZone = UnitCacheHelper.GetAccountCenter();
+            ActorId accountZone = UnitCacheHelper.GetLoginCenterId();
             UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
             Center2M_BuChangeResponse centerAccount = (Center2M_BuChangeResponse)await unit.Root().GetComponent<MessageSender>().Call(accountZone, new M2Center_BuChangeRequest()
             { 

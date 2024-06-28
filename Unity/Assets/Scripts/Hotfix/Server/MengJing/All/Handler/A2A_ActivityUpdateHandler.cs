@@ -188,7 +188,7 @@ namespace ET.Server
                         fubenCenter.OnActivityClose(request.FunctionId);
                     }
                     break;
-                case SceneType.AccountCenter:
+                case SceneType.LoginCenter:
                     if (hour == 0)
                     {
                         scene.GetComponent<FangChenMiComponentS>().CheckHoliday().Coroutine();

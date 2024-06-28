@@ -5,7 +5,7 @@ namespace ET.Server
 {
     [FriendOf(typeof(DBCenterAccountInfo))]
     [FriendOf(typeof(FangChenMiComponentS))]
-    [MessageHandler(SceneType.AccountCenter)]
+    [MessageHandler(SceneType.LoginCenter)]
     public class A2Center_CheckAccountHandler : MessageHandler<Scene, A2Center_CheckAccount, Center2A_CheckAccount>
     {
         protected override async ETTask Run(Scene scene, A2Center_CheckAccount request, Center2A_CheckAccount response)

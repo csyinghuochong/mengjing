@@ -39,10 +39,8 @@ namespace ET
         Team = 1L << 31,
         Union = 1L << 32,
         Solo = 1L << 33,
-        BigCenter = 1L << 34,
-        LoginCenter = 1L << 35,
-        AccountCenter = 1L << 36,
-        ReCharge = 1L << 37,
+        LoginCenter = 1L << 34,
+        ReCharge = 1L << 35,
 
         // 客户端
         Demo = 1L << 50,

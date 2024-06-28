@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
 
-    [MessageHandler(SceneType.BigCenter)]
+    [MessageHandler(SceneType.LoginCenter)]
     public class C2Center_DeleteAccountHandler : MessageHandler<Session, C2Center_DeleteAccountRequest, Center2C_DeleteAccountResponse>
     {
         protected override async ETTask Run(Session session, C2Center_DeleteAccountRequest request, Center2C_DeleteAccountResponse response)

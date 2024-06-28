@@ -40,7 +40,7 @@ namespace ET.Server
                 return;
             }
 
-            ActorId accountZone = UnitCacheHelper.GetAccountCenter();
+            ActorId accountZone = UnitCacheHelper.GetLoginCenterId();
             UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
             Center2M_ShareSucessResponse centerAccount = (Center2M_ShareSucessResponse)await unit.Root().GetComponent<MessageSender>().Call(accountZone, new M2Center_ShareSucessRequest()
             {

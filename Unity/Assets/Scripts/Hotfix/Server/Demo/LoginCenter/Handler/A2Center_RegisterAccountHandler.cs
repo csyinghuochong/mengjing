@@ -6,7 +6,7 @@ namespace ET.Server
 
     [FriendOf(typeof(DBCenterAccountInfo))]
     [FriendOf(typeof(FangChenMiComponentS))]
-    [MessageHandler(SceneType.AccountCenter)]
+    [MessageHandler(SceneType.LoginCenter)]
     public class A2Center_RegisterAccountHandler : MessageHandler<Scene, A2Center_RegisterAccount, Center2A_RegisterAccount>
     {
         protected override async ETTask Run(Scene scene, A2Center_RegisterAccount request, Center2A_RegisterAccount response)

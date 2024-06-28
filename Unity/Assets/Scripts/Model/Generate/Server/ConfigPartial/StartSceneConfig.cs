@@ -89,14 +89,8 @@ namespace ET
                     case SceneType.DBCache:
                         this.UnitCaches.Add(startSceneConfig.Zone, startSceneConfig);
                         break;
-                    case SceneType.AccountCenter:
-                        this.AccountCenterConfig = startSceneConfig;
-                        break;
                     case SceneType.LoginCenter:
                         this.LoginCenterConfig = startSceneConfig;
-                        break;
-                    case SceneType.BigCenter:
-                        this.BigCenterConfig = startSceneConfig;
                         break;
                     case SceneType.Chat:
                         this.ChatConfig = startSceneConfig;

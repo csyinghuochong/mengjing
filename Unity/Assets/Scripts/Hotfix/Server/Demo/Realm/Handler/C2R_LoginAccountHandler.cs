@@ -77,7 +77,7 @@ namespace ET.Server
             {
                 using (await session.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.LoginAccount, request.Account.Trim().GetHashCode()))
                 {
-                    ActorId accountZone = StartSceneConfigCategory.Instance.AccountCenterConfig.ActorId;
+                    ActorId accountZone = StartSceneConfigCategory.Instance.LoginCenterConfig.ActorId;
                     Center2A_CheckAccount centerAccount = (Center2A_CheckAccount)await session.Root().GetComponent<MessageSender>().Call(accountZone, new A2Center_CheckAccount()
                     {
                         AccountName = request.Account,
