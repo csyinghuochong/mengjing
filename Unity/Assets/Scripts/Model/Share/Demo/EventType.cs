@@ -11,16 +11,16 @@ namespace ET.Client
         public int SceneType;
         public int ChapterId;
     }
-    
+
     public struct SceneChangeFinish
     {
         public int SceneType;
     }
-    
+
     public struct AfterCreateClientScene
     {
     }
-    
+
     public struct AfterCreateCurrentScene
     {
     }
@@ -41,10 +41,19 @@ namespace ET.Client
     {
         public Unit Unit;
     }
-    
+
+    public struct UnitRemove
+    {
+        public Unit Unit;
+    }
+
     public struct UnitDead
     {
         public Unit Unit;
     }
 
+    public struct UnitRevive
+    {
+        public Unit Unit;
+    }
 }
