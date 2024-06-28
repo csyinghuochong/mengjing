@@ -4228,6 +4228,15 @@ message M2C_HappyInfoResult // IMessage
 	int64 NextRefreshTime = 3; //下一刷新的时间
 }
 
+
+message M2C_UpdateMailInfo // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	repeated MailInfo MailInfos = 1;
+}
+
+
 //喜从天降刷新
 //ResponseType M2C_HappyMoveResponse
 message C2M_HappyMoveRequest // ILocationRequest

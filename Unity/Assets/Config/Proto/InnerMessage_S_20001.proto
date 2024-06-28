@@ -1369,13 +1369,6 @@ message E2M_EMailReceiveResponse // IResponse
 	MailInfo MailInfo = 4;
 }
 
-message M2C_UpdateMailInfo // IMessage
-{
-	int32 RpcId = 90;
-	int64 ActorId = 93;
-	repeated MailInfo MailInfos = 1;
-}
-
 //ResponseType F2M_FubenCenterListResponse
 message M2F_FubenCenterListRequest // IRequest
 {
