@@ -3,7 +3,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class Unit_Now_Hp_Update: AEvent<Scene, Now_Hp_Update>
+    public class Unit_ONNowHpUpdate: AEvent<Scene, Now_Hp_Update>
     {
         protected override async ETTask Run(Scene scene, Now_Hp_Update args)
         {

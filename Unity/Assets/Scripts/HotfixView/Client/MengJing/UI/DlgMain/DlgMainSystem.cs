@@ -760,7 +760,9 @@ namespace ET.Client
 
         private static void OnChengJiuButton(this DlgMain self)
         {
-            self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_ChengJiu);
+            //self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_ChengJiu);
+            
+            self.Root().RemoveComponent<ClientSenderCompnent>();
         }
 
         #endregion
