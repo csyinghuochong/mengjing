@@ -15,6 +15,7 @@
 				unitComponent.Remove(unitId);
 			}
 
+			EventSystem.Instance.Publish(root, new UnitRemove() { RemoveIds = message.Units });
 			await ETTask.CompletedTask;
 		}
 	}

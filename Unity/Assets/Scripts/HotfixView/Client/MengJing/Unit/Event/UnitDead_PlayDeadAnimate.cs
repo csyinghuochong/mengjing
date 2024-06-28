@@ -127,6 +127,8 @@ namespace ET.Client
             {
                 Log.Error(e);
             }
+
+            await ETTask.CompletedTask;
         }
 
         private async ETTask ShowRevive(Unit unit, MapComponent mapComponent)

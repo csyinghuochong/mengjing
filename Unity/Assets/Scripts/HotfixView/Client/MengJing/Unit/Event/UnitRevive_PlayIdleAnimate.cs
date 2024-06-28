@@ -9,6 +9,7 @@
             unit.GetComponent<FsmComponent>()?.ChangeState(FsmStateEnum.FsmIdleState);
             unit.GetComponent<UIPlayerHpComponent>()?.OnRevive();
             unit.GetComponent<GameObjectComponent>()?.OnRevive();
+            await ETTask.CompletedTask;
         }
     }
 }

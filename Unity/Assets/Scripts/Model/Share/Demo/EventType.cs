@@ -44,7 +44,7 @@ namespace ET.Client
 
     public struct UnitRemove
     {
-        public Unit Unit;
+        public List<long> RemoveIds;
     }
 
     public struct UnitDead
