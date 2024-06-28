@@ -8,7 +8,7 @@
             get => this.GetComponent<DlgWatchViewComponent>();
         }
 
-        public F2C_WatchPlayerResponse F2C_WatchPlayerResponse;
+        public F2C_WatchPlayerResponse F2C_WatchPlayerResponse { get; set; }
         public bool CanClick;
     }
 }

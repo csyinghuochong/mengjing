@@ -8,6 +8,7 @@ namespace ET.Client
 {
     [FriendOf(typeof (ES_WatchEquip))]
     [FriendOf(typeof (ES_PetList))]
+    [FriendOf(typeof (ES_WatchPet))]
     [FriendOf(typeof (DlgWatch))]
     public static class DlgWatchSystem
     {
@@ -34,7 +35,8 @@ namespace ET.Client
                     self.View.ES_WatchEquip.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-                    self.View.ES_PetList.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_WatchPet.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_WatchPet.OnUpdateUI();
                     break;
             }
         }
