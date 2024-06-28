@@ -335,6 +335,23 @@ namespace ET.Client
             return typeList;
         }
 
+        public static BagInfo GetBagInfoByConfigId(this BagComponentC self, int itemId)
+        {
+            for (int i = 0; i < self.AllItemList.Length; i++)
+            {
+                List<BagInfo> baglist = self.AllItemList[i];
+                for (int k = 0; k < baglist.Count; k++)
+                {
+                    if (baglist[k].ItemID == itemId)
+                    {
+                        return baglist[k];
+                    }
+                }
+            }
+
+            return null;
+        }
+
         public static BagInfo GetBagInfo(this BagComponentC self, long id)
         {
             for (int i = 0; i < self.AllItemList.Length; i++)

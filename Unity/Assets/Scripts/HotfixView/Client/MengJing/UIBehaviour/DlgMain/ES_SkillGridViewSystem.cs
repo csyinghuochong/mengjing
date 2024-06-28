@@ -209,9 +209,10 @@ namespace ET.Client
             }
             else
             {
-                BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(self.SkillPro.SkillID);
+                BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfoByConfigId(self.SkillPro.SkillID);
                 if (bagInfo == null)
                 {
+                    FlyTipComponent.Instance.ShowFlyTipDi($"道具 {ItemConfigCategory.Instance.Get(self.SkillPro.SkillID).ItemName} 不足");
                     return;
                 }
 
