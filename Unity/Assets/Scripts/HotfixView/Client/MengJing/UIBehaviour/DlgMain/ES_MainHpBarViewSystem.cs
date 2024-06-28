@@ -39,7 +39,7 @@ namespace ET.Client
             self.EG_HurtTextNodeRectTransform.gameObject.SetActive(false);
             self.UpdateHurtText();
 
-            self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 200, 378f));
+            self.ES_ModelShow.SetCameraPosition(new Vector3(0f, 100f, 378f));
             self.LockTargetComponent = self.Root().GetComponent<LockTargetComponent>();
         }
 
@@ -315,12 +315,12 @@ namespace ET.Client
 
         public static void ShowBossHPBar(this ES_MainHpBar self, Unit unit)
         {
-            if (self.EG_MonsterNodeRectTransform.gameObject.activeSelf && unit != null)
+            if (self.EG_BossNodeRectTransform.gameObject.activeSelf && unit != null)
             {
                 return;
             }
 
-            if (!self.EG_MonsterNodeRectTransform.gameObject.activeSelf && unit == null)
+            if (!self.EG_BossNodeRectTransform.gameObject.activeSelf && unit == null)
             {
                 return;
             }
@@ -342,7 +342,7 @@ namespace ET.Client
                 MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(configid);
                 self.LockBossId = unit.Id;
                 self.BossConfiId = unit.ConfigId;
-                self.EG_MonsterNodeRectTransform.gameObject.SetActive(true);
+                self.EG_BossNodeRectTransform.gameObject.SetActive(true);
                 self.E_Lab_BossLvText.text = monsterConfig.Lv.ToString();
                 self.E_Lab_BossNameText.text = monsterConfig.MonsterName;
                 self.UpdateModelShowView(configid);
