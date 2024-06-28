@@ -130,5 +130,6 @@ namespace ET.Client
 		WindowID_BuffTips,
 		WindowID_JiaYuanMain,
 		WindowID_ZhuaPu,
+		WindowID_JingLingGet,
 	}
 }

@@ -45,14 +45,14 @@ namespace ET.Client
 
         public static void OnActiveJingLing(this ChengJiuComponentC self, int jid)
         {
+            EventSystem.Instance.Publish(self.Root(), new JingLingGet { JingLingId = jid });
+            
             if (self.JingLingList.Contains(jid))
             {
                 return;
             }
 
             self.JingLingList.Add(jid);
-
-            EventSystem.Instance.Publish(self.Root(), new JingLingGet { JingLingId = jid });
         }
     }
 }

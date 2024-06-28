@@ -107,11 +107,10 @@ namespace ET.Client
                         return;
                     }
 
-                    
                     NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
                     int runmonsterId = numericComponent.GetAsInt(NumericType.RunRaceTransform);
                     int cardtransform = numericComponent.GetAsInt(NumericType.CardTransform);
-                    
+
                     if (runmonsterId > 0)
                     {
                         self.OnRunRaceMonster(0, runmonsterId, false);
@@ -120,7 +119,8 @@ namespace ET.Client
                     {
                         self.OnRunRaceMonster(runmonsterId, cardtransform, false);
                     }
-                    if(string.IsNullOrEmpty(self.UnitAssetsPath))
+
+                    if (string.IsNullOrEmpty(self.UnitAssetsPath))
                     {
                         path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(unit.ConfigId).ModelAsset}");
                         self.UnitAssetsPath = string.Empty;
@@ -205,7 +205,8 @@ namespace ET.Client
                     break;
                 case UnitType.JingLing:
                     JingLingConfig jingLing = JingLingConfigCategory.Instance.Get(unit.ConfigId);
-                    path = ABPathHelper.GetUnitPath("JingLing/" + jingLing.Assets);
+                    // path = ABPathHelper.GetUnitPath("JingLing/" + jingLing.Assets);
+                    path = ABPathHelper.GetUnitPath("JingLing/" + 70001001);
                     self.UnitAssetsPath = path;
                     break;
                 case UnitType.Plant:
@@ -454,7 +455,7 @@ namespace ET.Client
 
             if (self.GameObject != null)
             {
-                Log.Error($" self.GameObject !=null:   {self.GameObject.name}    {go.name}   {self.InstanceId}   {formId}" );
+                Log.Error($" self.GameObject !=null:   {self.GameObject.name}    {go.name}   {self.InstanceId}   {formId}");
                 return;
             }
 
@@ -1054,17 +1055,17 @@ namespace ET.Client
             if (remove)
             {
                 unit.RemoveComponent<ChangeEquipComponent>();
-                unit.RemoveComponent<HeroTransformComponent>();              //获取角色绑点组件
+                unit.RemoveComponent<HeroTransformComponent>(); //获取角色绑点组件
                 unit.RemoveComponent<AnimatorComponent>();
-                unit.RemoveComponent<FsmComponent>();                         //当前状态组建
-                unit.RemoveComponent<EffectViewComponent>();               //添加特效组建
+                unit.RemoveComponent<FsmComponent>(); //当前状态组建
+                unit.RemoveComponent<EffectViewComponent>(); //添加特效组建
                 unit.RemoveComponent<SkillYujingComponent>();
                 unit.RemoveComponent<UIPlayerHpComponent>();
             }
-            
+
             if (runraceid > 0 || cardmonsterid > 0)
             {
-                int monsterid = runraceid > 0 ? runraceid : cardmonsterid;  
+                int monsterid = runraceid > 0? runraceid : cardmonsterid;
                 MonsterConfig runmonsterCof = MonsterConfigCategory.Instance.Get(monsterid);
                 string path = ABPathHelper.GetUnitPath("Monster/" + runmonsterCof.MonsterModelID);
                 self.UnitAssetsPath = path;
@@ -1074,10 +1075,12 @@ namespace ET.Client
                 //string path = ABPathHelper.GetUnitPath($"Player/{OccupationConfigCategory.Instance.Get(self.GetParent<Unit>().ConfigId).ModelAsset}");
                 self.UnitAssetsPath = string.Empty;
             }
+
             if (unit.MainHero)
             {
                 self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnTransform(runraceid, cardmonsterid);
             }
+
             self.BianShenEffect = unit.MainHero && remove;
         }
 
