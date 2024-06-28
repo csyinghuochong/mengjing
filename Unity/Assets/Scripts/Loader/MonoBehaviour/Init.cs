@@ -59,9 +59,13 @@ namespace ET
 			yield return operation;
 		}
 
-		public static async ETTask OnUpdaterDone()
+		public void HidePatchWindow()
 		{
 			GameObject.Find("Global/UI/PopUpRoot/PatchWindow").gameObject.SetActive(false);
+		}
+
+		public async ETTask OnUpdaterDone()
+		{
 			CodeLoader codeLoader = World.Instance.AddSingleton<CodeLoader>();
 			await codeLoader.DownloadAsync();
 

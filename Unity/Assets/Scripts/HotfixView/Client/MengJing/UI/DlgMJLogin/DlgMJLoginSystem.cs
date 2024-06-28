@@ -13,6 +13,9 @@ namespace ET.Client
 
         public static void ShowWindow(this DlgMJLogin self, Entity contextData = null)
         {
+            Application.targetFrameRate = 60;
+            GameObject.Find("Global").GetComponent<Init>().HidePatchWindow();
+            
             self.AddUIScrollItems(ref self.Dictionary, 100);
             self.View.E_AccountInputField.text = PlayerPrefs.GetString("MJ_Account");
             self.View.E_PasswordInputField.text = PlayerPrefs.GetString("MJ_Password");
