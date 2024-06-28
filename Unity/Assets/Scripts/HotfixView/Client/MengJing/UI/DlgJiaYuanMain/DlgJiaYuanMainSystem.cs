@@ -486,10 +486,10 @@ namespace ET.Client
             }
 
             //植物
-            float distance = 2f;
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            // float distance = 2f;
+            // Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             List<UnitLockRange> UnitLockRanges = new ListComponent<UnitLockRange>();
-            JiaYuanComponent jiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
+            // JiaYuanComponent jiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
             // for (int i = 0; i < self.JianYuanPlanUIs.Count; i++)
             // {
             //     float dd = Vector3.Distance(unit.Position, self.JianYuanPlanUIs[i].transform.position);
