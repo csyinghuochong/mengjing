@@ -11,6 +11,13 @@ namespace ET.Server
 	{
 		protected override async ETTask Run(Session session, C2G_EnterMap request, G2C_EnterMap response)
 		{
+			if (session.Root().SceneType != SceneType.Gate)
+			{
+				Log.Error($"LoginTest C2G_EnterMapHandler请求的Scene错误，当前Scene为：{session.Root().SceneType}");
+				session.Dispose();
+				return;
+			}
+			
 			DBComponent dbComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(session.Zone());
 			List<DBAccountInfo> newAccountList = await dbComponent.Query<DBAccountInfo>(session.Zone(), d => d.Id == request.AccountId);
 

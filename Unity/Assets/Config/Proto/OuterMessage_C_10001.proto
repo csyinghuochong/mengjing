@@ -355,8 +355,8 @@ message ServerItem
 	repeated int32 PlatformList = 7;   //不配置或者-1全部显示
 }
 
-//ResponseType A2C_CreateRoleData
-message C2A_CreateRoleData // ISessionRequest
+//ResponseType G2C_CreateRoleData
+message C2G_CreateRoleData // ISessionRequest
 {
 	int32 RpcId = 90;
 	int32 CreateOcc = 2;
@@ -364,12 +364,27 @@ message C2A_CreateRoleData // ISessionRequest
 	int64 AccountId = 4;
 }
 
-message A2C_CreateRoleData // ISessionResponse
+message G2C_CreateRoleData // ISessionResponse
 {
 	int32 RpcId = 90;
 	int32 Error = 91;
 	string Message = 92;
 	CreateRoleInfo createRoleInfo = 1;
+}
+
+//ResponseType G2C_DeleteRoleData
+message C2G_DeleteRoleData // ISessionRequest
+{
+	int32 RpcId = 90;
+	int64 AccountId = 1;
+	int64 UserId = 2;
+}
+
+message G2C_DeleteRoleData // ISessionResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
 }
 
 message G2C_TestHotfixMessage // ISessionMessage
@@ -821,22 +836,6 @@ message FubenPassInfo
 {
 	int32 FubenId = 1;
 	int32 Difficulty = 2;			//1 difficulty普通 2 挑战  3困难
-}
-
-
-//ResponseType A2C_DeleteRoleData
-message C2A_DeleteRoleData // ISessionRequest
-{
-	int32 RpcId = 90;
-	int64 AccountId = 1;
-	int64 UserId = 2;
-}
-
-message A2C_DeleteRoleData // ISessionResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
 }
 
 message C2M_GMCommand // ILocationMessage

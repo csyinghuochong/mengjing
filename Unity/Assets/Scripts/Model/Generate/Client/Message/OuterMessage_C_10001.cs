@@ -1422,14 +1422,14 @@ namespace ET
 
 	}
 
-	[ResponseType(nameof(A2C_CreateRoleData))]
-	[Message(OuterMessage.C2A_CreateRoleData)]
+	[ResponseType(nameof(G2C_CreateRoleData))]
+	[Message(OuterMessage.C2G_CreateRoleData)]
 	[MemoryPackable]
-	public partial class C2A_CreateRoleData: MessageObject, ISessionRequest
+	public partial class C2G_CreateRoleData: MessageObject, ISessionRequest
 	{
-		public static C2A_CreateRoleData Create(bool isFromPool = false) 
+		public static C2G_CreateRoleData Create(bool isFromPool = false) 
 		{ 
-			return ObjectPool.Instance.Fetch(typeof(C2A_CreateRoleData), isFromPool) as C2A_CreateRoleData; 
+			return ObjectPool.Instance.Fetch(typeof(C2G_CreateRoleData), isFromPool) as C2G_CreateRoleData; 
 		}
 
 		[MemoryPackOrder(89)]
@@ -1457,13 +1457,13 @@ namespace ET
 
 	}
 
-	[Message(OuterMessage.A2C_CreateRoleData)]
+	[Message(OuterMessage.G2C_CreateRoleData)]
 	[MemoryPackable]
-	public partial class A2C_CreateRoleData: MessageObject, ISessionResponse
+	public partial class G2C_CreateRoleData: MessageObject, ISessionResponse
 	{
-		public static A2C_CreateRoleData Create(bool isFromPool = false) 
+		public static G2C_CreateRoleData Create(bool isFromPool = false) 
 		{ 
-			return ObjectPool.Instance.Fetch(typeof(A2C_CreateRoleData), isFromPool) as A2C_CreateRoleData; 
+			return ObjectPool.Instance.Fetch(typeof(G2C_CreateRoleData), isFromPool) as G2C_CreateRoleData; 
 		}
 
 		[MemoryPackOrder(89)]
@@ -1485,6 +1485,67 @@ namespace ET
 			this.Error = default;
 			this.Message = default;
 			this.createRoleInfo = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[ResponseType(nameof(G2C_DeleteRoleData))]
+	[Message(OuterMessage.C2G_DeleteRoleData)]
+	[MemoryPackable]
+	public partial class C2G_DeleteRoleData: MessageObject, ISessionRequest
+	{
+		public static C2G_DeleteRoleData Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(C2G_DeleteRoleData), isFromPool) as C2G_DeleteRoleData; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(0)]
+		public long AccountId { get; set; }
+
+		[MemoryPackOrder(1)]
+		public long UserId { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.AccountId = default;
+			this.UserId = default;
+			
+			ObjectPool.Instance.Recycle(this); 
+		}
+
+	}
+
+	[Message(OuterMessage.G2C_DeleteRoleData)]
+	[MemoryPackable]
+	public partial class G2C_DeleteRoleData: MessageObject, ISessionResponse
+	{
+		public static G2C_DeleteRoleData Create(bool isFromPool = false) 
+		{ 
+			return ObjectPool.Instance.Fetch(typeof(G2C_DeleteRoleData), isFromPool) as G2C_DeleteRoleData; 
+		}
+
+		[MemoryPackOrder(89)]
+		public int RpcId { get; set; }
+
+		[MemoryPackOrder(90)]
+		public int Error { get; set; }
+
+		[MemoryPackOrder(91)]
+		public string Message { get; set; }
+
+		public override void Dispose() 
+		{
+			if (!this.IsFromPool) return;
+			this.RpcId = default;
+			this.Error = default;
+			this.Message = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -3102,67 +3163,6 @@ namespace ET
 			if (!this.IsFromPool) return;
 			this.FubenId = default;
 			this.Difficulty = default;
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
-
-	}
-
-	[ResponseType(nameof(A2C_DeleteRoleData))]
-	[Message(OuterMessage.C2A_DeleteRoleData)]
-	[MemoryPackable]
-	public partial class C2A_DeleteRoleData: MessageObject, ISessionRequest
-	{
-		public static C2A_DeleteRoleData Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(C2A_DeleteRoleData), isFromPool) as C2A_DeleteRoleData; 
-		}
-
-		[MemoryPackOrder(89)]
-		public int RpcId { get; set; }
-
-		[MemoryPackOrder(0)]
-		public long AccountId { get; set; }
-
-		[MemoryPackOrder(1)]
-		public long UserId { get; set; }
-
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.AccountId = default;
-			this.UserId = default;
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
-
-	}
-
-	[Message(OuterMessage.A2C_DeleteRoleData)]
-	[MemoryPackable]
-	public partial class A2C_DeleteRoleData: MessageObject, ISessionResponse
-	{
-		public static A2C_DeleteRoleData Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(A2C_DeleteRoleData), isFromPool) as A2C_DeleteRoleData; 
-		}
-
-		[MemoryPackOrder(89)]
-		public int RpcId { get; set; }
-
-		[MemoryPackOrder(90)]
-		public int Error { get; set; }
-
-		[MemoryPackOrder(91)]
-		public string Message { get; set; }
-
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.Error = default;
-			this.Message = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}
@@ -27384,45 +27384,45 @@ namespace ET
 		 public const ushort C2G_LoginGameGate = 10041;
 		 public const ushort G2C_LoginGameGate = 10042;
 		 public const ushort ServerItem = 10043;
-		 public const ushort C2A_CreateRoleData = 10044;
-		 public const ushort A2C_CreateRoleData = 10045;
-		 public const ushort G2C_TestHotfixMessage = 10046;
-		 public const ushort C2M_TestRobotCase = 10047;
-		 public const ushort M2C_TestRobotCase = 10048;
-		 public const ushort C2M_TestRobotCase2 = 10049;
-		 public const ushort M2C_TestRobotCase2 = 10050;
-		 public const ushort C2M_TransferMap = 10051;
-		 public const ushort M2C_TransferMap = 10052;
-		 public const ushort C2G_Benchmark = 10053;
-		 public const ushort G2C_Benchmark = 10054;
-		 public const ushort HideProList = 10055;
-		 public const ushort BagInfo = 10056;
-		 public const ushort MysteryItemInfo = 10057;
-		 public const ushort ZhanQuReceiveNumber = 10058;
-		 public const ushort FirstWinInfo = 10059;
-		 public const ushort PetMingPlayerInfo = 10060;
-		 public const ushort ChatInfo = 10061;
-		 public const ushort MailInfo = 10062;
-		 public const ushort PaiMaiItemInfo = 10063;
-		 public const ushort PaiMaiShopItemInfo = 10064;
-		 public const ushort PopularizeInfo = 10065;
-		 public const ushort RankingInfo = 10066;
-		 public const ushort RankShouLieInfo = 10067;
-		 public const ushort RankPetInfo = 10068;
-		 public const ushort ServerInfo = 10069;
-		 public const ushort ServerMailItem = 10070;
-		 public const ushort UnionInfo = 10071;
-		 public const ushort UnionPlayerInfo = 10072;
-		 public const ushort DonationRecord = 10073;
-		 public const ushort A2C_Disconnect = 10074;
-		 public const ushort UserInfo = 10075;
-		 public const ushort M2C_RoleDataUpdate = 10076;
-		 public const ushort M2C_RoleDataBroadcast = 10077;
-		 public const ushort SkillPro = 10078;
-		 public const ushort RewardItem = 10079;
-		 public const ushort FubenPassInfo = 10080;
-		 public const ushort C2A_DeleteRoleData = 10081;
-		 public const ushort A2C_DeleteRoleData = 10082;
+		 public const ushort C2G_CreateRoleData = 10044;
+		 public const ushort G2C_CreateRoleData = 10045;
+		 public const ushort C2G_DeleteRoleData = 10046;
+		 public const ushort G2C_DeleteRoleData = 10047;
+		 public const ushort G2C_TestHotfixMessage = 10048;
+		 public const ushort C2M_TestRobotCase = 10049;
+		 public const ushort M2C_TestRobotCase = 10050;
+		 public const ushort C2M_TestRobotCase2 = 10051;
+		 public const ushort M2C_TestRobotCase2 = 10052;
+		 public const ushort C2M_TransferMap = 10053;
+		 public const ushort M2C_TransferMap = 10054;
+		 public const ushort C2G_Benchmark = 10055;
+		 public const ushort G2C_Benchmark = 10056;
+		 public const ushort HideProList = 10057;
+		 public const ushort BagInfo = 10058;
+		 public const ushort MysteryItemInfo = 10059;
+		 public const ushort ZhanQuReceiveNumber = 10060;
+		 public const ushort FirstWinInfo = 10061;
+		 public const ushort PetMingPlayerInfo = 10062;
+		 public const ushort ChatInfo = 10063;
+		 public const ushort MailInfo = 10064;
+		 public const ushort PaiMaiItemInfo = 10065;
+		 public const ushort PaiMaiShopItemInfo = 10066;
+		 public const ushort PopularizeInfo = 10067;
+		 public const ushort RankingInfo = 10068;
+		 public const ushort RankShouLieInfo = 10069;
+		 public const ushort RankPetInfo = 10070;
+		 public const ushort ServerInfo = 10071;
+		 public const ushort ServerMailItem = 10072;
+		 public const ushort UnionInfo = 10073;
+		 public const ushort UnionPlayerInfo = 10074;
+		 public const ushort DonationRecord = 10075;
+		 public const ushort A2C_Disconnect = 10076;
+		 public const ushort UserInfo = 10077;
+		 public const ushort M2C_RoleDataUpdate = 10078;
+		 public const ushort M2C_RoleDataBroadcast = 10079;
+		 public const ushort SkillPro = 10080;
+		 public const ushort RewardItem = 10081;
+		 public const ushort FubenPassInfo = 10082;
 		 public const ushort C2M_GMCommand = 10083;
 		 public const ushort C2A_ActivityInfoRequest = 10084;
 		 public const ushort A2C_ActivityInfoResponse = 10085;

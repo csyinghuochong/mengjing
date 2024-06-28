@@ -6,12 +6,19 @@ namespace ET.Server
     [FriendOf(typeof (DBAccountInfo))]
     [FriendOf(typeof (UserInfoComponentS))]
     [MessageSessionHandler(SceneType.Gate)]
-    public class C2A_DeleteRoleDataHandler: MessageSessionHandler<C2A_DeleteRoleData, A2C_DeleteRoleData>
+    public class C2G_DeleteRoleDataHandler: MessageSessionHandler<C2G_DeleteRoleData, G2C_DeleteRoleData>
     {
-        protected override async ETTask Run(Session session, C2A_DeleteRoleData request, A2C_DeleteRoleData response)
+        protected override async ETTask Run(Session session, C2G_DeleteRoleData request, G2C_DeleteRoleData response)
         {
             try
             {
+                if (session.Root().SceneType != SceneType.Gate)
+                {
+                    Log.Error($"LoginTest C2G_DeleteRoleData请求的Scene错误，当前Scene为：{session.Root().SceneType}");
+                    session.Dispose();
+                    return;
+                }
+                
                 if (session.GetComponent<SessionLockingComponent>() != null)
                 {
                     response.Error = ErrorCode.ERR_RequestRepeatedly;

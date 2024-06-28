@@ -147,7 +147,7 @@ namespace ET.Client
             }
 
             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
-            await EnterMapHelper.RequestDeleteRole(self.Root(), playerComponent.AccountId, self.SeletRoleInfo.UnitId, self.SeletRoleInfo);
+            await LoginHelper.RequestDeleteRole(self.Root(), playerComponent.AccountId, self.SeletRoleInfo.UnitId, self.SeletRoleInfo);
             self.Refresh();
         }
 

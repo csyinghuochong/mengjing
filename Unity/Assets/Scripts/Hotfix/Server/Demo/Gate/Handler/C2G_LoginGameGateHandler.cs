@@ -8,6 +8,13 @@ namespace ET.Server
     {
         protected override async ETTask Run(Session session, C2G_LoginGameGate request, G2C_LoginGameGate response)
         {
+            if (session.Root().SceneType != SceneType.Gate)
+            {
+                Log.Error($"LoginTest C2G_LoginGameGate请求的Scene错误，当前Scene为：{session.Root().SceneType}");
+                session.Dispose();
+                return;
+            }
+            
             Scene root = session.Root();
             string account = root.GetComponent<GateSessionKeyComponent>().Get(request.Key);
             if (account == null)

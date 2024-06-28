@@ -8,7 +8,7 @@ namespace ET.Server
 	[FriendOf(typeof(DBAccountInfo))]
 	[FriendOf(typeof(UserInfoComponentS))]
     [MessageSessionHandler(SceneType.Gate)]
-    public class C2A_CreateRoleDataHandler: MessageSessionHandler<C2A_CreateRoleData, A2C_CreateRoleData>
+    public class C2G_CreateRoleDataHandler: MessageSessionHandler<C2G_CreateRoleData, G2C_CreateRoleData>
     {
 	    //获取角色创建列表信息
 	    public CreateRoleInfo GetRoleListInfo(UserInfo userInfo,long userID) 
@@ -24,8 +24,15 @@ namespace ET.Server
 		    return roleList;
 	    }
 	    
-        protected override async ETTask Run(Session session, C2A_CreateRoleData request, A2C_CreateRoleData response)
+        protected override async ETTask Run(Session session, C2G_CreateRoleData request, G2C_CreateRoleData response)
         {
+	        if (session.Root().SceneType != SceneType.Gate)
+	        {
+		        Log.Error($"LoginTest C2G_CreateRoleData请求的Scene错误，当前Scene为：{session.Root().SceneType}");
+		        session.Dispose();
+		        return;
+	        }
+	        
 	        Log.Debug("C2A_CreateRoleData.server1");
             //判断名字是否符合要求
             if (string.IsNullOrEmpty(request.CreateName))

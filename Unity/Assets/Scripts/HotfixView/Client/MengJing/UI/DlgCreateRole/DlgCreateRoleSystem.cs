@@ -66,7 +66,7 @@ namespace ET.Client
                 return;
             }
 
-            await EnterMapHelper.RequestCreateRole(self.Root(), playerComponent.AccountId, self.Occ, createName);
+            await LoginHelper.RequestCreateRole(self.Root(), playerComponent.AccountId, self.Occ, createName);
 
             self.OnCloseButton();
         }

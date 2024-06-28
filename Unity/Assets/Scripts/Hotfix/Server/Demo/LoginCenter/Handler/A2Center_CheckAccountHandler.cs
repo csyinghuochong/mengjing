@@ -14,14 +14,13 @@ namespace ET.Server
 
             DBComponent dBComponent = scene.Root().GetComponent<DBManagerComponent>().GetZoneDB(scene.Zone());
             List<DBCenterAccountInfo> centerAccountInfoList = await dBComponent.Query<DBCenterAccountInfo>(scene.Zone(), d => d.Account == request.AccountName && d.Password == request.Password);
-
-            //�ֻ����ж�3/4
+            
             if (centerAccountInfoList.Count == 0 && (request.ThirdLogin == "3" || request.ThirdLogin == "4"))
             {
                 string Password = request.Password == "3" ? "4" : "3";
                 centerAccountInfoList = await dBComponent.Query<DBCenterAccountInfo>(scene.Zone(), d => d.Account == request.AccountName && d.Password == Password);
             }
-            //���ֻ��ŵ��˺�
+
             if (centerAccountInfoList.Count == 0 && (request.ThirdLogin == "3" || request.ThirdLogin == "4"))
             {
                 centerAccountInfoList = await dBComponent.Query<DBCenterAccountInfo>(scene.Zone(),
