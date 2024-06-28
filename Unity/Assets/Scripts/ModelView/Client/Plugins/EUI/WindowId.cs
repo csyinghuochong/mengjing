@@ -132,5 +132,6 @@ namespace ET.Client
 		WindowID_ZhuaPu,
 		WindowID_JingLingGet,
 		WindowID_TrialMain,
+		WindowID_CellDungeonRevive,
 	}
 }

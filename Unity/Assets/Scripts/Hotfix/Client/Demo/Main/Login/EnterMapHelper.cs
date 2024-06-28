@@ -5,7 +5,6 @@ namespace ET.Client
     [FriendOf(typeof (PlayerComponent))]
     public static partial class EnterMapHelper
     {
-
         public static async ETTask<int> RequestTransfer(Scene root, int newsceneType, int sceneId, int difficulty = FubenDifficulty.None,
         string paraminfo = "0")
         {
@@ -14,6 +13,7 @@ namespace ET.Client
             {
                 return ErrorCode.ERR_OperationOften;
             }
+
             mapComponent.LastQuitTime = TimeHelper.ServerNow();
             if (!SceneConfigHelper.CanTransfer(mapComponent.SceneType, newsceneType))
             {
@@ -34,11 +34,13 @@ namespace ET.Client
                 {
                     return ErrorCode.ERR_TimesIsNot;
                 }
+
                 if (sceneConfig.EnterLv > userInfoComponent.GetUserLv())
                 {
                     return ErrorCode.ERR_LevelIsNot;
                 }
             }
+
             if (DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(sceneId))
             {
                 root.GetComponent<BattleMessageComponent>().LastDungeonId = mapComponent.SceneId;
@@ -47,10 +49,10 @@ namespace ET.Client
             {
                 root.GetComponent<BattleMessageComponent>().LastDungeonId = 0;
             }
-              
+
             C2M_TransferMap c2M_ItemHuiShouRequest = new C2M_TransferMap()
-            { 
-                SceneType = newsceneType, SceneId = sceneId,  Difficulty = difficulty, paramInfo = paraminfo
+            {
+                SceneType = newsceneType, SceneId = sceneId, Difficulty = difficulty, paramInfo = paraminfo
             };
             M2C_TransferMap r2c_roleEquip = (M2C_TransferMap)await root.GetComponent<ClientSenderCompnent>().Call(c2M_ItemHuiShouRequest);
             userInfoComponent.AddSceneFubenTimes(sceneId);
@@ -68,10 +70,16 @@ namespace ET.Client
                 Log.Error(e);
             }
         }
-        
+
         public static void RequestQuitFuben(Scene zoneScene)
         {
             RequestTransfer(zoneScene, (int)SceneTypeEnum.MainCityScene, ComHelp.MainCityID()).Coroutine();
+        }
+
+        public static async ETTask SendReviveRequest(Scene root, bool revive)
+        {
+            Actor_SendReviveRequest request = new() { Revive = revive };
+            Actor_SendReviveResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as Actor_SendReviveResponse;
         }
     }
 }

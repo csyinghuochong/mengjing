@@ -157,11 +157,12 @@ namespace ET.Client
             root.GetComponent<SkillIndicatorComponent>().OnSelfDead();
             root.GetComponent<LockTargetComponent>().LastLockId = 0;
             root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnStopAction();
-            // if (root.GetComponent<UIComponent>().GetDlgLogic<DlgCellDungeonRevive>()) == null)
-            // {
-            //     UI uI = await UIHelper.Create(unit.ZoneScene(), UIType.UICellDungeonRevive);
-            //     uI.GetComponent<UICellDungeonReviveComponent>().OnInitUI(mapComponent.SceneTypeEnum);
-            // }
+
+            DlgCellDungeonRevive dungeonRevive = root.GetComponent<UIComponent>().GetDlgLogic<DlgCellDungeonRevive>();
+            if (dungeonRevive != null)
+            {
+                dungeonRevive.OnInitUI(mapComponent.SceneType);
+            }
         }
 
         private async ETTask OnMonsterDead(Unit unit)
