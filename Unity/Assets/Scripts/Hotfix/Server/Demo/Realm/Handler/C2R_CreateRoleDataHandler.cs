@@ -10,20 +10,7 @@ namespace ET.Server
     [MessageSessionHandler(SceneType.Realm)]
     public class C2R_CreateRoleDataHandler: MessageSessionHandler<C2R_CreateRoleData, R2C_CreateRoleData>
     {
-	    //获取角色创建列表信息
-	    public CreateRoleInfo GetRoleListInfo(UserInfo userInfo,long userID) 
-	    {
-		    CreateRoleInfo roleList = new CreateRoleInfo();
-
-		    roleList.OccTwo =  userInfo.OccTwo;
-		    roleList.UnitId = userID;
-		    roleList.PlayerName = userInfo.Name;
-		    roleList.PlayerLv = userInfo.Lv;
-		    roleList.PlayerOcc = userInfo.Occ;
-
-		    return roleList;
-	    }
-	    
+	   
         protected override async ETTask Run(Session session, C2R_CreateRoleData request, R2C_CreateRoleData response)
         {
 	        if (session.Root().SceneType != SceneType.Realm)
@@ -101,6 +88,21 @@ namespace ET.Server
             
             await ETTask.CompletedTask;
         }
+        
+        //获取角色创建列表信息
+        public CreateRoleInfo GetRoleListInfo(UserInfo userInfo,long userID) 
+        {
+	        CreateRoleInfo roleList = new CreateRoleInfo();
+
+	        roleList.OccTwo =  userInfo.OccTwo;
+	        roleList.UnitId = userID;
+	        roleList.PlayerName = userInfo.Name;
+	        roleList.PlayerLv = userInfo.Lv;
+	        roleList.PlayerOcc = userInfo.Occ;
+
+	        return roleList;
+        }
+
     }
 }
 	

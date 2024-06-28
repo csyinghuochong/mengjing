@@ -4,41 +4,10 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-    [FriendOf(typeof(DBAccountInfo))]
-    [FriendOf(typeof(UserInfoComponentS))]
-    [FriendOf(typeof(GlobalValueConfigCategory))]
+
     [MessageSessionHandler(SceneType.Realm)]
 	public class C2R_LoginAccountHandler : MessageSessionHandler<C2R_LoginAccount, R2C_LoginAccount>
 	{
-
-        public int CanLogin(string identityCard, bool isHoliday, int age_type)
-        {
-            int age = IDCardHelper.GetBirthdayAgeSex(identityCard, age_type);
-            if (age >= 18)
-            {
-                return ErrorCode.ERR_Success;
-            }
-            if (age < 12)
-            {
-                return ErrorCode.ERR_FangChengMi_Tip6;
-            }
-            DateTime dateTime = TimeHelper.DateTimeNow();
-            if (isHoliday)
-            {
-                if (dateTime.Hour == 20)
-                {
-                    return ErrorCode.ERR_Success;           //允许登录
-                }
-                else
-                {
-                    return ErrorCode.ERR_FangChengMi_Tip7;
-                }
-            }
-            else
-            {
-                return ErrorCode.ERR_FangChengMi_Tip7;
-            }
-        }
 
         protected override async ETTask Run(Session session, C2R_LoginAccount request, R2C_LoginAccount response)
 		{
@@ -318,5 +287,36 @@ namespace ET.Server
             return roleList;
         }
         
+        
+        
+        public int CanLogin(string identityCard, bool isHoliday, int age_type)
+        {
+            int age = IDCardHelper.GetBirthdayAgeSex(identityCard, age_type);
+            if (age >= 18)
+            {
+                return ErrorCode.ERR_Success;
+            }
+            if (age < 12)
+            {
+                return ErrorCode.ERR_FangChengMi_Tip6;
+            }
+            DateTime dateTime = TimeHelper.DateTimeNow();
+            if (isHoliday)
+            {
+                if (dateTime.Hour == 20)
+                {
+                    return ErrorCode.ERR_Success;           //允许登录
+                }
+                else
+                {
+                    return ErrorCode.ERR_FangChengMi_Tip7;
+                }
+            }
+            else
+            {
+                return ErrorCode.ERR_FangChengMi_Tip7;
+            }
+        }
+
 	}
 }

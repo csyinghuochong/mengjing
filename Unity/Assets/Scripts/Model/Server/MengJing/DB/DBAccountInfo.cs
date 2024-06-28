@@ -15,7 +15,7 @@ namespace ET.Server
 		public string Password { get; set; }
 
 		//UserList列表
-		public List<CreateRoleInfo> RoleList = new List<CreateRoleInfo>();
+		public List<CreateRoleInfo> RoleList  { get; set; }= new List<CreateRoleInfo>();
 
 		//删除UserList列表
 		public List<long> DeleteRoleList = new List<long>();
