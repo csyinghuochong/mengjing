@@ -73,5 +73,6 @@
         public const int UIMonsterSingingTimer = 341;
         public const int OpenBoxTimer = 342;
         public const int UIZhuaPuTimer = 343;
+        public const int TrialMainTimer = 344;
     }
 }

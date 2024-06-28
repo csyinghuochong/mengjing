@@ -131,5 +131,6 @@ namespace ET.Client
 		WindowID_JiaYuanMain,
 		WindowID_ZhuaPu,
 		WindowID_JingLingGet,
+		WindowID_TrialMain,
 	}
 }

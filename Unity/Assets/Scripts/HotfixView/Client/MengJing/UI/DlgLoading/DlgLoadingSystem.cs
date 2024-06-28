@@ -342,8 +342,8 @@ namespace ET.Client
                     // uimain.GameObject.transform.localScale = Vector3.one;
                     break;
                 case SceneTypeEnum.TrialDungeon:
-                    // UIHelper.Create(zoneScene, UIType.UITrialMain).Coroutine();
-                    // uimain.GameObject.transform.localScale = Vector3.one;
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TrialMain).Coroutine();
+                    dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
                 // case SceneTypeEnum.TowerOfSeal:
                 //     UIHelper.Create(zoneScene, UIType.UITowerOfSealMain).Coroutine();

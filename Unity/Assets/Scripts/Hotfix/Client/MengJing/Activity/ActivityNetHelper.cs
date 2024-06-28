@@ -288,5 +288,12 @@ namespace ET.Client
             M2C_KillMonsterRewardResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_KillMonsterRewardResponse;
             return response.Error;
         }
+
+        public static async ETTask<int> TrialDungeonBeginRequest(Scene root)
+        {
+            C2M_TrialDungeonBeginRequest request = new();
+            M2C_TrialDungeonBeginResponse response = (M2C_TrialDungeonBeginResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }

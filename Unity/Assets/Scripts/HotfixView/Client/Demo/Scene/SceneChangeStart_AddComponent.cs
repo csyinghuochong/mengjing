@@ -59,7 +59,7 @@ namespace ET.Client
                         // UIHelper.Remove(args.ZoneScene, UIType.UITeamMain);
                         break;
                     case SceneTypeEnum.TrialDungeon:
-                        // UIHelper.Remove(args.ZoneScene, UIType.UITrialMain);
+                        root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TrialMain);
                         break;
                     // case SceneTypeEnum.TowerOfSeal:
                     //     UIHelper.Remove(args.ZoneScene, UIType.UITowerOfSealMain);
