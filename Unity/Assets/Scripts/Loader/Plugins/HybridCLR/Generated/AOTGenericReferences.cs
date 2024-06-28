@@ -48,23 +48,34 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.AEvent<object,ET.Client.DataUpdate_OnAccountWarehous>
 	// ET.AEvent<object,ET.Client.DataUpdate_OnActiveTianFu>
 	// ET.AEvent<object,ET.Client.DataUpdate_OnMailUpdate>
+	// ET.AEvent<object,ET.Client.DataUpdate_OnPetFightSet>
 	// ET.AEvent<object,ET.Client.DataUpdate_OnRecvChat>
 	// ET.AEvent<object,ET.Client.DataUpdate_PetHeChengUpdate>
 	// ET.AEvent<object,ET.Client.DataUpdate_PetItemSelect>
 	// ET.AEvent<object,ET.Client.DataUpdate_PetXiLianUpdate>
 	// ET.AEvent<object,ET.Client.DataUpdate_SettingUpdate>
+	// ET.AEvent<object,ET.Client.DataUpdate_SkillBeging>
+	// ET.AEvent<object,ET.Client.DataUpdate_SkillCDUpdate>
+	// ET.AEvent<object,ET.Client.DataUpdate_SkillFinish>
 	// ET.AEvent<object,ET.Client.DataUpdate_SkillReset>
 	// ET.AEvent<object,ET.Client.DataUpdate_SkillSetting>
 	// ET.AEvent<object,ET.Client.DataUpdate_SkillUpgrade>
 	// ET.AEvent<object,ET.Client.DataUpdate_TaskComplete>
 	// ET.AEvent<object,ET.Client.DataUpdate_TaskGet>
+	// ET.AEvent<object,ET.Client.DataUpdate_TaskGiveUp>
 	// ET.AEvent<object,ET.Client.DataUpdate_TaskTrace>
+	// ET.AEvent<object,ET.Client.DataUpdate_TaskUpdate>
+	// ET.AEvent<object,ET.Client.DataUpdate_TeamUpdate>
 	// ET.AEvent<object,ET.Client.DataUpdate_UpdateRoleProper>
+	// ET.AEvent<object,ET.Client.DataUpdate_UpdateSing>
 	// ET.AEvent<object,ET.Client.DataUpdate_UpdateUserData>
 	// ET.AEvent<object,ET.Client.EnterMapFinish>
 	// ET.AEvent<object,ET.Client.FsmChange>
+	// ET.AEvent<object,ET.Client.FubenSettlement>
+	// ET.AEvent<object,ET.Client.JingLingGet>
 	// ET.AEvent<object,ET.Client.LSSceneChangeStart>
 	// ET.AEvent<object,ET.Client.LSSceneInitFinish>
+	// ET.AEvent<object,ET.Client.LoadSceneFinished>
 	// ET.AEvent<object,ET.Client.LoginFinish>
 	// ET.AEvent<object,ET.Client.Now_Hp_Update>
 	// ET.AEvent<object,ET.Client.OnSkillUse>
@@ -74,25 +85,26 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.AEvent<object,ET.Client.RoleDataBroadcase>
 	// ET.AEvent<object,ET.Client.RolePetAdd>
 	// ET.AEvent<object,ET.Client.RolePetUpdate>
+	// ET.AEvent<object,ET.Client.RunRaceBattleInfo>
 	// ET.AEvent<object,ET.Client.SceneChangeFinish>
 	// ET.AEvent<object,ET.Client.SceneChangeStart>
 	// ET.AEvent<object,ET.Client.ShowFlyTip>
 	// ET.AEvent<object,ET.Client.ShowItemTips>
 	// ET.AEvent<object,ET.Client.SingingUpdate>
-	// ET.AEvent<object,ET.Client.SkillBeging>
-	// ET.AEvent<object,ET.Client.SkillCDUpdate>
 	// ET.AEvent<object,ET.Client.SkillEffect>
 	// ET.AEvent<object,ET.Client.SkillEffectFinish>
 	// ET.AEvent<object,ET.Client.SkillEffectMove>
 	// ET.AEvent<object,ET.Client.SkillEffectReset>
-	// ET.AEvent<object,ET.Client.SkillFinish>
 	// ET.AEvent<object,ET.Client.SkillSound>
 	// ET.AEvent<object,ET.Client.SkillYuJing>
 	// ET.AEvent<object,ET.Client.TaskNpcDialog>
 	// ET.AEvent<object,ET.Client.TaskTypeItemClick>
 	// ET.AEvent<object,ET.Client.UnitDead>
+	// ET.AEvent<object,ET.Client.UnitRemove>
+	// ET.AEvent<object,ET.Client.UnitRevive>
 	// ET.AEvent<object,ET.Client.UserDataTypeUpdate_Diamond>
 	// ET.AEvent<object,ET.Client.UserDataTypeUpdate_Gold>
+	// ET.AEvent<object,ET.Client.UserDataTypeUpdate_HorseNotice>
 	// ET.AEvent<object,ET.EntryEvent1>
 	// ET.AEvent<object,ET.EntryEvent3>
 	// ET.AEvent<object,ET.MoveStart>
@@ -847,6 +859,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Comparison<object>
 	// System.Comparison<uint>
 	// System.Comparison<ushort>
+	// System.Func<int,byte>
 	// System.Func<int,object>
 	// System.Func<object,byte>
 	// System.Func<object,object,object>
@@ -928,6 +941,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<System.ValueTuple<uint,object>>.AwaitUnsafeOnCompleted<object,object>(object&,object&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<byte>.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<object>,object>(System.Runtime.CompilerServices.TaskAwaiter<object>&,object&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<byte>.AwaitUnsafeOnCompleted<object,object>(object&,object&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,object>(ET.ETTaskCompleted&,object&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<object,object>(object&,object&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<long>.AwaitUnsafeOnCompleted<object,object>(object&,object&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter,object>(System.Runtime.CompilerServices.TaskAwaiter&,object&)
@@ -1007,22 +1021,30 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_OnAccountWarehous>(object,ET.Client.DataUpdate_OnAccountWarehous)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_OnActiveTianFu>(object,ET.Client.DataUpdate_OnActiveTianFu)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_OnMailUpdate>(object,ET.Client.DataUpdate_OnMailUpdate)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_OnPetFightSet>(object,ET.Client.DataUpdate_OnPetFightSet)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_OnRecvChat>(object,ET.Client.DataUpdate_OnRecvChat)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_PetHeChengUpdate>(object,ET.Client.DataUpdate_PetHeChengUpdate)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_PetItemSelect>(object,ET.Client.DataUpdate_PetItemSelect)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_PetXiLianUpdate>(object,ET.Client.DataUpdate_PetXiLianUpdate)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_SettingUpdate>(object,ET.Client.DataUpdate_SettingUpdate)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_SkillBeging>(object,ET.Client.DataUpdate_SkillBeging)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_SkillCDUpdate>(object,ET.Client.DataUpdate_SkillCDUpdate)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_SkillFinish>(object,ET.Client.DataUpdate_SkillFinish)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_SkillReset>(object,ET.Client.DataUpdate_SkillReset)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_SkillSetting>(object,ET.Client.DataUpdate_SkillSetting)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_SkillUpgrade>(object,ET.Client.DataUpdate_SkillUpgrade)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_TaskComplete>(object,ET.Client.DataUpdate_TaskComplete)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_TaskGet>(object,ET.Client.DataUpdate_TaskGet)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_TaskTrace>(object,ET.Client.DataUpdate_TaskTrace)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_TaskUpdate>(object,ET.Client.DataUpdate_TaskUpdate)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_UpdateRoleProper>(object,ET.Client.DataUpdate_UpdateRoleProper)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_UpdateUserData>(object,ET.Client.DataUpdate_UpdateUserData)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.EnterMapFinish>(object,ET.Client.EnterMapFinish)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.FsmChange>(object,ET.Client.FsmChange)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.FubenSettlement>(object,ET.Client.FubenSettlement)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.JingLingGet>(object,ET.Client.JingLingGet)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.LSSceneInitFinish>(object,ET.Client.LSSceneInitFinish)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.LoadSceneFinished>(object,ET.Client.LoadSceneFinished)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.Now_Hp_Update>(object,ET.Client.Now_Hp_Update)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.OnSkillUse>(object,ET.Client.OnSkillUse)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.PlayAnimator>(object,ET.Client.PlayAnimator)
@@ -1031,25 +1053,26 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.EventSystem.Publish<object,ET.Client.RoleDataBroadcase>(object,ET.Client.RoleDataBroadcase)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.RolePetAdd>(object,ET.Client.RolePetAdd)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.RolePetUpdate>(object,ET.Client.RolePetUpdate)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.RunRaceBattleInfo>(object,ET.Client.RunRaceBattleInfo)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.SceneChangeFinish>(object,ET.Client.SceneChangeFinish)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.SceneChangeStart>(object,ET.Client.SceneChangeStart)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.ShowFlyTip>(object,ET.Client.ShowFlyTip)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.ShowItemTips>(object,ET.Client.ShowItemTips)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.SingingUpdate>(object,ET.Client.SingingUpdate)
-		// System.Void ET.EventSystem.Publish<object,ET.Client.SkillBeging>(object,ET.Client.SkillBeging)
-		// System.Void ET.EventSystem.Publish<object,ET.Client.SkillCDUpdate>(object,ET.Client.SkillCDUpdate)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.SkillEffect>(object,ET.Client.SkillEffect)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.SkillEffectFinish>(object,ET.Client.SkillEffectFinish)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.SkillEffectMove>(object,ET.Client.SkillEffectMove)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.SkillEffectReset>(object,ET.Client.SkillEffectReset)
-		// System.Void ET.EventSystem.Publish<object,ET.Client.SkillFinish>(object,ET.Client.SkillFinish)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.SkillSound>(object,ET.Client.SkillSound)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.SkillYuJing>(object,ET.Client.SkillYuJing)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.TaskNpcDialog>(object,ET.Client.TaskNpcDialog)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.TaskTypeItemClick>(object,ET.Client.TaskTypeItemClick)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.UnitDead>(object,ET.Client.UnitDead)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.UnitRemove>(object,ET.Client.UnitRemove)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.UnitRevive>(object,ET.Client.UnitRevive)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.UserDataTypeUpdate_Diamond>(object,ET.Client.UserDataTypeUpdate_Diamond)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.UserDataTypeUpdate_Gold>(object,ET.Client.UserDataTypeUpdate_Gold)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.UserDataTypeUpdate_HorseNotice>(object,ET.Client.UserDataTypeUpdate_HorseNotice)
 		// System.Void ET.EventSystem.Publish<object,ET.MoveStart>(object,ET.MoveStart)
 		// System.Void ET.EventSystem.Publish<object,ET.MoveStop>(object,ET.MoveStop)
 		// System.Void ET.EventSystem.Publish<object,ET.NumbericChange>(object,ET.NumbericChange)
