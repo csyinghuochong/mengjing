@@ -66,14 +66,14 @@ namespace ET.Client
 
         public static async ETTask SkillInfoShow(this ES_SkillGrid self)
         {
-            // UI skillTips = await UIHelper.Create(self.DomainScene(), UIType.UISkillTips);
-            //
-            // Vector2 localPoint;
-            // RectTransform canvas = UIEventComponent.Instance.UILayers[(int)UILayer.Mid].gameObject.GetComponent<RectTransform>();
-            // Camera uiCamera = self.DomainScene().GetComponent<UIComponent>().UICamera;
-            // RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, Input.mousePosition, uiCamera, out localPoint);
-            // skillTips.GetComponent<UISkillTipsComponent>().OnUpdateData(self.SkillPro.SkillID, new Vector3(localPoint.x, localPoint.y, 0f));
-            await ETTask.CompletedTask;
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SkillTips);
+
+            Vector2 localPoint;
+            RectTransform canvas = self.Root().GetComponent<GlobalComponent>().NormalRoot.GetComponent<RectTransform>();
+            Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas, Input.mousePosition, uiCamera, out localPoint);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgSkillTips>()
+                    .OnUpdateData(self.SkillPro.SkillID, new Vector3(localPoint.x, localPoint.y, 0f));
         }
 
         public static void OnCancel(this ES_SkillGrid self, PointerEventData eventData)
@@ -126,7 +126,7 @@ namespace ET.Client
                 self.SkillInfoShowTimer = 0;
             }
 
-            // UIHelper.Remove(self.DomainScene(), UIType.UISkillTips);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SkillTips);
         }
 
         public static void Draging(this ES_SkillGrid self, PointerEventData eventData)
