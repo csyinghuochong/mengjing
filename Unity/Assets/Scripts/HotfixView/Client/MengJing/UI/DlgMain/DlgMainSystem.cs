@@ -25,6 +25,18 @@ namespace ET.Client
         }
     }
 
+    [NumericWatcher(SceneType.Demo, NumericType.UnionId_0)]
+    public class NumericWatcher_UnionId_0_UpdateDlgMain: INumericWatcher
+    {
+        public void Run(Unit unit, NumbericChange args)
+        {
+            if (unit.MainHero)
+            {
+                unit.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.E_UnionButton.gameObject.SetActive(args.NewValue > 0);
+            }
+        }
+    }
+
     [Event(SceneType.Demo)]
     public class DataUpdate_OnPetFightSet_Refresh: AEvent<Scene, DataUpdate_OnPetFightSet>
     {
