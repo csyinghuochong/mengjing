@@ -1290,7 +1290,7 @@ namespace ET.Client
             DlgDungeonMapTransfer dlgDungeonMapTransfer = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgDungeonMapTransfer>();
         }
 
-        private static void OnBtn_RerurnDungeon(this DlgMain self)
+        public static void OnBtn_RerurnDungeon(this DlgMain self)
         {
             PopupTipHelp.OpenPopupTip(self.Root(), "返回副本", GameSettingLanguge.LoadLocalization("移动次数消耗完毕,请返回副本!"),
                 () =>

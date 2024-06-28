@@ -295,5 +295,12 @@ namespace ET.Client
             M2C_TrialDungeonBeginResponse response = (M2C_TrialDungeonBeginResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<int> DungeonHappyMoveRequest(Scene root, int operatateType)
+        {
+            C2M_DungeonHappyMoveRequest request = new() { OperatateType = operatateType };
+            M2C_DungeonHappyMoveResponse response = (M2C_DungeonHappyMoveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }

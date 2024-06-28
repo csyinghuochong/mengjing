@@ -133,5 +133,6 @@ namespace ET.Client
 		WindowID_JingLingGet,
 		WindowID_TrialMain,
 		WindowID_CellDungeonRevive,
+		WindowID_DungeonHappyMain,
 	}
 }

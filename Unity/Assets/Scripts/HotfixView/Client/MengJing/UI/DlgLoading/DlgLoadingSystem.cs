@@ -297,8 +297,8 @@ namespace ET.Client
                     switch (subType)
                     {
                         case SceneSubTypeEnum.LocalDungeon_1:
-                            // UIHelper.Create(self.ZoneScene(), UIType.UIDungeonHappyMain).Coroutine();
-                            // uimain.GameObject.transform.localScale = Vector3.one;
+                            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_DungeonHappyMain).Coroutine();
+                            dlgMain.View.uiTransform.localScale = Vector3.one;
                             break;
                         default:
                             // UIHelper.Create(zoneScene, UIType.UIEnterMapHint).Coroutine();

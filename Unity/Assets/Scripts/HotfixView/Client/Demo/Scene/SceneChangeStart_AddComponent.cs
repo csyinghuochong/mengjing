@@ -36,7 +36,7 @@ namespace ET.Client
                         switch (dungeonConfig.MapType)
                         {
                             case SceneSubTypeEnum.LocalDungeon_1:
-                                // UIHelper.Remove(args.ZoneScene, UIType.UIDungeonHappyMain);
+                                root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DungeonHappyMain);
                                 break;
                             default:
                                 break;
