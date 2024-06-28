@@ -36,7 +36,9 @@ namespace ET.Client
                     return;
                 }
                 
-                NetClient2Main_LoginGame netClient2MainLoginGame = await clientSenderComponent.LoginGameAsync(playerComponent.Account, 
+                NetClient2Main_LoginGame netClient2MainLoginGame = await clientSenderComponent.LoginGameAsync(
+                    playerComponent.Account, 
+                    playerComponent.AccountId,
                     playerComponent.Key,
                     playerComponent.CurrentRoleId,
                     r2CGetRealmKey.Address);
@@ -45,6 +47,18 @@ namespace ET.Client
                     Log.Error($"进入游戏失败：{netClient2MainLoginGame.Error}");
                     return;
                 }
+                
+                // 等待场景切换完成
+                await root.GetComponent<ObjectWait>().Wait<Wait_SceneChangeFinish>();
+
+                await UserInfoNetHelper.RequestUserInfoInit(root);
+                await BagClientNetHelper.RequestBagInit(root);
+                await PetNetHelper.RequestPetInfo(root);
+                await TaskClientNetHelper.RequestTaskInit(root);
+                await SkillNetHelper.RequestSkillSet(root);
+                await FriendNetHelper.RequestFriendInfo(root);
+                await ActivityNetHelper.RequestActivityInfo(root);
+                await ChengJiuNetHelper.GetChengJiuList(root);
                 
                 Log.Debug("进入游戏成功！！！");
                 

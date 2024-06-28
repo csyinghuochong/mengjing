@@ -118,6 +118,9 @@ namespace ET
 		[MemoryPackOrder(4)]
 		public string GateAddress { get; set; }
 
+		[MemoryPackOrder(5)]
+		public long AccountId { get; set; }
+
 		public override void Dispose() 
 		{
 			if (!this.IsFromPool) return;
@@ -126,6 +129,7 @@ namespace ET
 			this.RealmKey = default;
 			this.RoleId = default;
 			this.GateAddress = default;
+			this.AccountId = default;
 			
 			ObjectPool.Instance.Recycle(this); 
 		}

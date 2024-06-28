@@ -32,8 +32,8 @@ namespace ET.Client
              Log.Debug("登陆gate成功!");
 
              C2G_EnterGame cEnterGame = C2G_EnterGame.Create();
-             cEnterGame.AccountId = root.GetComponent<PlayerComponent>().AccountId;
-             cEnterGame.UnitId = root.GetComponent<PlayerComponent>().CurrentRoleId;
+             cEnterGame.AccountId = request.AccountId;
+             cEnterGame.UnitId = request.RoleId;
              G2C_EnterGame g2CEnterGame = (G2C_EnterGame)await gateSession.Call(cEnterGame);
              if (g2CEnterGame.Error != ErrorCode.ERR_Success)
              {
@@ -42,20 +42,7 @@ namespace ET.Client
                  return;
              }
              
-             // 等待场景切换完成
-             await root.GetComponent<ObjectWait>().Wait<Wait_SceneChangeFinish>();
-
-             await UserInfoNetHelper.RequestUserInfoInit(root);
-             await BagClientNetHelper.RequestBagInit(root);
-             await PetNetHelper.RequestPetInfo(root);
-             await TaskClientNetHelper.RequestTaskInit(root);
-             await SkillNetHelper.RequestSkillSet(root);
-             await FriendNetHelper.RequestFriendInfo(root);
-             await ActivityNetHelper.RequestActivityInfo(root);
-             await ChengJiuNetHelper.GetChengJiuList(root);
-             
              Log.Debug("登陆Map成功!");
-             
              response.PlayerId = g2CEnterGame.MyId;
         }
     }

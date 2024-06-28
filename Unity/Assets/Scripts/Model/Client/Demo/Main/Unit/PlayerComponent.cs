@@ -25,7 +25,7 @@ namespace ET.Client
         public string RealmAddress;
 
         //当前登录角色
-        public int ServerId { get; set; }
+        public int ServerId { get; set; } = 1;
         public string ServerIp;
         public string Account { get; set; }
         public string Password;
