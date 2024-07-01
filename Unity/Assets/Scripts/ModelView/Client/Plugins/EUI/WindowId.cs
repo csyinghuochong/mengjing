@@ -134,5 +134,6 @@ namespace ET.Client
 		WindowID_TrialMain,
 		WindowID_CellDungeonRevive,
 		WindowID_DungeonHappyMain,
+		WindowID_PetMain,
 	}
 }
