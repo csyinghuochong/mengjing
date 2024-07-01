@@ -7,6 +7,8 @@ namespace ET.Client
         {
             EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = "to do : M2C_HappyInfoResult" });
             root.GetComponent<BattleMessageComponent>().M2C_HappyInfoResult = message;
+
+            EventSystem.Instance.Publish(root, new HappyInfo() { M2CHappyInfoResult = message });
             await ETTask.CompletedTask;
         }
     }

@@ -139,5 +139,6 @@ namespace ET.Client
 		WindowID_TowerOpen,
 		WindowID_TowerFightReward,
 		WindowID_RandomOpen,
+		WindowID_HappyMain,
 	}
 }

@@ -47,7 +47,7 @@ namespace ET.Client
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TowerOpen);
                         break;
                     case SceneTypeEnum.Happy:
-                        // UIHelper.Remove(args.ZoneScene, UIType.UIHappyMain);
+                        root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_HappyMain);
                         break;
                     case SceneTypeEnum.Battle:
                         // UIHelper.Remove(args.ZoneScene, UIType.UIBattleMain);

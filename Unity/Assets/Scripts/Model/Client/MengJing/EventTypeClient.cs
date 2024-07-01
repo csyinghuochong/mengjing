@@ -353,4 +353,9 @@ namespace ET.Client
     {
         public int JingLingId;
     }
+
+    public struct HappyInfo
+    {
+        public M2C_HappyInfoResult M2CHappyInfoResult;
+    }
 }

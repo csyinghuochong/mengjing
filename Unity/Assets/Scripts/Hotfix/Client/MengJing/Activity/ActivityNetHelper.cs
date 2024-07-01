@@ -323,5 +323,12 @@ namespace ET.Client
             M2C_RandomTowerBeginResponse response = (M2C_RandomTowerBeginResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<int> HappyMoveRequest(Scene root, int operatateType)
+        {
+            C2M_HappyMoveRequest request = new() { OperatateType = operatateType };
+            M2C_HappyMoveResponse response = (M2C_HappyMoveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }

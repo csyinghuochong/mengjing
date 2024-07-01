@@ -77,5 +77,6 @@
         public const int DungeonHappyMainTimer = 345;
         public const int PetMainTimer = 346;
         public const int TowerOpenTimer = 347;
+        public const int UIHappyMainTimer = 348;
     }
 }
