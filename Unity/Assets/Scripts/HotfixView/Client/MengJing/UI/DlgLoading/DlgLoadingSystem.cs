@@ -321,8 +321,8 @@ namespace ET.Client
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
                 case SceneTypeEnum.RandomTower:
-                    // UIHelper.Create(self.ZoneScene(), UIType.UIRandomOpen).Coroutine();
-                    // uimain.GameObject.transform.localScale = Vector3.one;
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RandomOpen).Coroutine();
+                    dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
                 case SceneTypeEnum.Happy:
                     // UIHelper.Create(self.ZoneScene(), UIType.UIHappyMain).Coroutine();

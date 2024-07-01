@@ -248,6 +248,8 @@ namespace ET.Client
 
                     break;
             }
+
+            await ETTask.CompletedTask;
         }
     }
 }

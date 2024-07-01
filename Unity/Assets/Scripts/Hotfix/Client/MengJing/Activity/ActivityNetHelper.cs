@@ -316,5 +316,12 @@ namespace ET.Client
             M2C_TowerExitResponse response = (M2C_TowerExitResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<int> RandomTowerBeginRequest(Scene root, int randomNumber)
+        {
+            C2M_RandomTowerBeginRequest request = new() { RandomNumber = randomNumber };
+            M2C_RandomTowerBeginResponse response = (M2C_RandomTowerBeginResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }
