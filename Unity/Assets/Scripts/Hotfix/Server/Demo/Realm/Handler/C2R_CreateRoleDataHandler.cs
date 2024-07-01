@@ -13,6 +13,13 @@ namespace ET.Server
 	   
         protected override async ETTask Run(Session session, C2R_CreateRoleData request, R2C_CreateRoleData response)
         {
+	        if (session.GetComponent<SessionLockingComponent>()!=null)
+	        { 
+		        response.Error = ErrorCode.ERR_RequestRepeatedly;
+		        response.Message = "角色名字过短!";
+		        return;
+	        }
+
 	        if (session.Root().SceneType != SceneType.Realm)
 	        {
 		        Log.Error($"LoginTest C2G_CreateRoleData请求的Scene错误，当前Scene为：{session.Root().SceneType}");

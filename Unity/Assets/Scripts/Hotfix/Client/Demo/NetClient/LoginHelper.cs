@@ -11,6 +11,7 @@ namespace ET.Client
             root.RemoveComponent<ClientSenderCompnent>();
             ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
 
+            //登陆成功之后才有session.  才能call
             await clientSenderCompnent.LoginAsync(account, password);
             await EventSystem.Instance.PublishAsync(root, new LoginFinish());
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace ET.Server
 {
@@ -24,6 +25,19 @@ namespace ET.Server
                 session.Disconnect().Coroutine();
                 return;
 			}
+            // if (!Regex.IsMatch(request.Account.Trim(), @"^(?=.*[0-9].*)(?=.*[A-Z].*)(?=.*[a-z].*).{6,15}$"))
+            // {
+            //     response.Error = ErrorCode.ERR_AccountNameFormError;
+            //     session.Disconnect().Coroutine();
+            //     return;
+            // }
+            //
+            // if (!Regex.IsMatch(request.Password.Trim(), @"^[A-Za-z0-9]+$"))
+            // {
+            //     response.Error = ErrorCode.ERR_PasswordFormError;
+            //     session.Disconnect().Coroutine();
+            //     return;
+            // }
 
             session.RemoveComponent<SessionAcceptTimeoutComponent>();
 
@@ -42,9 +56,10 @@ namespace ET.Server
             //public const int TapTap = 5;                //taptap登录
             //先检测一下QQ和微信登录
             long AccountId = 0;
+            CoroutineLockComponent coroutineLockComponent = session.Root().GetComponent<CoroutineLockComponent>();
             using (session.AddComponent<SessionLockingComponent>())
             {
-                using (await session.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.LoginAccount, request.Account.Trim().GetHashCode()))
+                using (await coroutineLockComponent.Wait(CoroutineLockType.LoginAccount, request.Account.Trim().GetHashCode()))
                 {
                     ActorId accountZone = StartSceneConfigCategory.Instance.LoginCenterConfig.ActorId;
                     Center2A_CheckAccount centerAccount = (Center2A_CheckAccount)await session.Root().GetComponent<MessageSender>().Call(accountZone, new A2Center_CheckAccount()
@@ -266,12 +281,12 @@ namespace ET.Server
 			Log.Debug($"gate address: {config}");
 			
 			// 向gate请求一个key,客户端可以拿着这个key连接gate
-			G2R_GetLoginKey g2RGetLoginKey = (G2R_GetLoginKey) await session.Fiber().Root.GetComponent<MessageSender>().Call(
-				config.ActorId, new R2G_GetLoginKey() {Account = request.Account});
-            
-			response.Address = config.InnerIPPort.ToString();
-			response.Key = g2RGetLoginKey.Key;
-			response.GateId = g2RGetLoginKey.GateId;
+			 G2R_GetLoginKey g2RGetLoginKey = (G2R_GetLoginKey) await session.Fiber().Root.GetComponent<MessageSender>().Call(
+			 	config.ActorId, new R2G_GetLoginKey() {Account = request.Account});
+             
+			 response.Address = config.InnerIPPort.ToString();
+			 response.Key = g2RGetLoginKey.Key;
+			 response.GateId = g2RGetLoginKey.GateId;
 		}
 
         private CreateRoleInfo GetRoleListInfo(UserInfo userInfo, long userID)

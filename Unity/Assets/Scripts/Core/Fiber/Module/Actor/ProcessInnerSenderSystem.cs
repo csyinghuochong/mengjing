@@ -106,12 +106,6 @@ namespace ET
             {
                 throw new Exception($"actor inner process diff: {actorId.Process} {fiber.Process}");
             }
-
-            if (actorId.Fiber == fiber.Id)
-            {
-                self.HandleMessage(fiber, new MessageInfo() {ActorId = actorId, MessageObject = message});
-                return;
-            }
             
             MessageQueue.Instance.Send(fiber.Address, actorId, message);
         }

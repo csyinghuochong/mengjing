@@ -25,7 +25,6 @@ namespace ET
 		RoomRoot = 1 << 17,
 		Watcher = 1 << 18,
         Activity = 1 << 19,
-        Battle = 1 << 20,
         Chat = 1 << 21,
         DBCache = 1 << 22,
         EMail = 1 << 23,

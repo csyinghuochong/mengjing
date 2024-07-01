@@ -11,6 +11,12 @@ namespace ET.Server
     {
         protected override async ETTask Run(Session session, C2G_EnterGame request, G2C_EnterGame response)
         {
+            
+            if (session.GetComponent<SessionLockingComponent>() != null)
+            {
+                response.Error = ErrorCode.ERR_RequestRepeatedly;
+                return;
+            }
             if (session.Root().SceneType != SceneType.Gate)
             {
                 Log.Error($"LoginTest C2G_EnterMapHandler请求的Scene错误，当前Scene为：{session.Root().SceneType}");
@@ -57,7 +63,7 @@ namespace ET.Server
                                     .Get(LocationType.Unit).Call(player.UnitId, g2MSecondLogin);
                             if (reqEnter.Error == ErrorCode.ERR_Success)
                             {
-                                Log.Console("作业:二次登陆逻辑，补全下发切换场景消息");
+                                Log.Console("二次登陆逻辑，补全下发切换场景消息");
 
                                 return;
                             }
