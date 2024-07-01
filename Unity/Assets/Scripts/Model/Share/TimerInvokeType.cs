@@ -76,5 +76,6 @@
         public const int TrialMainTimer = 344;
         public const int DungeonHappyMainTimer = 345;
         public const int PetMainTimer = 346;
+        public const int TowerOpenTimer = 347;
     }
 }

@@ -70,5 +70,18 @@ namespace ET.Client
 
             return CommonHelp.GetDayByTime(TimeHelper.ServerNow()) != CommonHelp.GetDayByTime(self.LastLoginTime);
         }
+
+        public static void OnZeroClockUpdate(this ActivityComponentC self)
+        {
+            //重置每日特惠
+            for (int i = self.ActivityReceiveIds.Count - 1; i >= 0; i--)
+            {
+                ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(self.ActivityReceiveIds[i]);
+                if (activityConfig.ActivityType == 2 || activityConfig.ActivityType == 32)
+                {
+                    self.ActivityReceiveIds.RemoveAt(i);
+                }
+            }
+        }
     }
 }

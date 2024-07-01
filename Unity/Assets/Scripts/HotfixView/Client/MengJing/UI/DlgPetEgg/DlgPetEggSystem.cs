@@ -49,5 +49,15 @@ namespace ET.Client
         {
             self.View.ES_PetEggList.UpdatePetEggUI();
         }
+
+        public static void OnUpdateLuckly(this DlgPetEgg self)
+        {
+            self.View.ES_PetEggChouKa.OnUpdateInfo();
+        }
+        public static void UpdateChouKaTime(this DlgPetEgg self)
+        {
+            // UI ui = self.UIPageView.UISubViewList[(int)PetEggEnum.PetChouKa];
+            // ui.GetComponent<UIPetChouKaComponent>().UpdateChouKaTime();
+        }
     }
 }

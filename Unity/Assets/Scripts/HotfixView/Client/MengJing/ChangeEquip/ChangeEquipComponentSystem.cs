@@ -468,5 +468,11 @@ namespace ET.Client
                 self.LoadPrefab(self.objectNames[i]);
             }
         }
+        
+        public static void ChangeEquipIndex(this ChangeEquipComponent self)
+        {
+            NumericComponentC numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentC>();
+            self.EquipIndex = numericComponent.GetAsInt(NumericType.EquipIndex);
+        }
     }
 }

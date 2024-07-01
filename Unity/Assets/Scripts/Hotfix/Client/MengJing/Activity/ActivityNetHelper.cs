@@ -302,5 +302,19 @@ namespace ET.Client
             M2C_DungeonHappyMoveResponse response = (M2C_DungeonHappyMoveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<int> TowerFightBeginRequest(Scene root)
+        {
+            C2M_TowerFightBeginRequest request = new();
+            M2C_TowerFightBeginResponse response = (M2C_TowerFightBeginResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
+        public static async ETTask<int> TowerExitRequest(Scene root)
+        {
+            C2M_TowerExitRequest request = new();
+            M2C_TowerExitResponse response = (M2C_TowerExitResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }

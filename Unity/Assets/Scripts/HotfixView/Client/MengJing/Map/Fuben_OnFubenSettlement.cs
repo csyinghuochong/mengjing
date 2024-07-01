@@ -39,11 +39,11 @@ namespace ET.Client
                     uiComponent.GetDlgLogic<DlgPetFubenResult>().OnUpdateUI(args.m2C_FubenSettlement);
                     break;
                 case SceneTypeEnum.Tower:
-                    // ui = UIHelper.GetUI(args.Scene, UIType.UITowerOpen);
-                    // if (ui != null)
-                    // {
-                    //     ui.GetComponent<UITowerOpenComponent>()?.OnFubenResult(args.m2C_FubenSettlement).Coroutine();
-                    // }
+                    DlgTowerOpen dlgTowerOpen = uiComponent.GetDlgLogic<DlgTowerOpen>();
+                    if (dlgTowerOpen != null)
+                    {
+                        dlgTowerOpen.OnFubenResult(args.m2C_FubenSettlement).Coroutine();
+                    }
 
                     break;
                 case SceneTypeEnum.PetMing:

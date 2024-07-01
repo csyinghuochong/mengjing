@@ -524,7 +524,7 @@ namespace ET.Client
         /// 阵营改变，其他玩家的血条颜色做相应调整
         /// </summary>
         /// <param name="self"></param>
-        public static void UpdateBattleCamp(Unit mainUnit, long unitId)
+        public static void UpdateBattleCamp(this UIPlayerHpComponent self, Unit mainUnit, long unitId)
         {
             if (mainUnit == null)
             {

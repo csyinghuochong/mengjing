@@ -17,6 +17,11 @@ namespace ET.Client
         {
         }
 
+        public static void OnZeroClockUpdate(this TaskComponentC self)
+        {
+            self.ReceiveHuoYueIds.Clear();
+        }
+
         public static List<TaskPro> GetAllTrackList(this TaskComponentC self)
         {
             List<TaskPro> taskPros = new List<TaskPro>();

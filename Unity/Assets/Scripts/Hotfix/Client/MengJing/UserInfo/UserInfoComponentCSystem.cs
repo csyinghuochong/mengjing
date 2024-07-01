@@ -292,5 +292,20 @@ namespace ET.Client
                 }
             }
         }
+
+        public static void ClearDayData(this UserInfoComponentC self)
+        {
+            self.UserInfo.DayFubenTimes.Clear();
+            self.UserInfo.ChouKaRewardIds.Clear();
+            self.UserInfo.MysteryItems.Clear();
+            self.UserInfo.BuyStoreItems.Clear();
+            self.UserInfo.BuyStoreItems.Clear();
+            self.UserInfo.DayItemUse.Clear();
+            self.UserInfo.DayMonsters.Clear();
+            self.UserInfo.DayJingLing.Clear();
+            self.UserInfo.PetExploreRewardIds.Clear();
+            self.UserInfo.PetHeXinExploreRewardIds.Clear();
+            self.UserInfo.ItemXiLianNumRewardIds.Clear();
+        }
     }
 }

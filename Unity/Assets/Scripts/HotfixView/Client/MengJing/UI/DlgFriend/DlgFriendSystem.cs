@@ -101,5 +101,15 @@ namespace ET.Client
                     break;
             }
         }
+
+        public static void OnCreateUnion(this DlgFriend self)
+        {
+            self.View.ES_UnionShow.OnCreateUnion();
+        }
+
+        public static void OnLeaveUnion(this DlgFriend self)
+        {
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
+        }
     }
 }

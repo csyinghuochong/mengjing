@@ -761,7 +761,7 @@ namespace ET.Client
         private static void OnChengJiuButton(this DlgMain self)
         {
             //self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_ChengJiu);
-            
+
             self.Root().RemoveComponent<ClientSenderCompnent>();
         }
 
@@ -1313,6 +1313,13 @@ namespace ET.Client
             Scene zoneScene = self.Root();
             MapComponent mapComponent = zoneScene.GetComponent<MapComponent>();
 
+            DlgTowerOpen dlgTowerOpen = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgTowerOpen>();
+            if (dlgTowerOpen != null && dlgTowerOpen.M2C_FubenSettlement == null)
+            {
+                dlgTowerOpen.RequestTowerQuit();
+                return;
+            }
+
             string tipStr = "确定返回主城？";
             if (mapComponent.SceneType == SceneTypeEnum.Battle)
             {
@@ -1802,6 +1809,126 @@ namespace ET.Client
             self.View.ES_MainSkill.OnBagItemUpdate();
 
             // self.CheckCanEquip().Coroutine();
+        }
+
+        public static void OnRechageSucess(this DlgMain self, int addNumber)
+        {
+            FlyTipComponent.Instance.ShowFlyTipDi($"充值{addNumber}元成功");
+
+            self.Root().GetComponent<PlayerComponent>().PlayerInfo.RechargeInfos.Add(new()
+            {
+                Amount = addNumber, Time = TimeHelper.ClientNow(), UnitId = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId
+            });
+        }
+
+        public static void ShowUIStall(this DlgMain self, long stallId)
+        {
+            // self.View.EG_UIStall.SetActive(stallId > 0);
+        }
+
+        public static void OnZeroClockUpdate(this DlgMain self)
+        {
+            self.InitFunctionButton();
+        }
+
+        public static void InitFunctionButton(this DlgMain self)
+        {
+            FlyTipComponent.Instance.ShowFlyTipDi("重新设置主界面功能按钮");
+            // self.FunctionButtons.Clear();
+            //
+            // long serverTime = TimeHelper.ServerNow();
+            // DateTime dateTime = TimeInfo.Instance.ToDateTime(serverTime);
+            // long curTime = (dateTime.Hour * 60 + dateTime.Minute) * 60 + dateTime.Second;
+            // self.MainUnit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
+            //
+            // //1058变身大赛 1055喜从天降 1052狩猎活动 1045竞技场    1062争霸捐献 1063开区奖励 1064活跃     1065商城 1066活动      
+            // //1040拍卖特惠 1023红包活动 1067新年活动 1068萌新福利  1069分享     1016排行榜   1025战场活动 1070世界等级 1014拍卖行
+            //
+            // List<int> functonIds = new List<int>()
+            // {
+            //     1023,
+            //     1025,
+            //     1031,
+            //     1040,
+            //     1045,
+            //     1052,
+            //     1055,
+            //     1057,
+            //     1058,
+            //     1059,
+            //     1062,
+            //     1063,
+            //     1064,
+            //     1065,
+            //     1066,
+            //     1067,
+            //     1068,
+            //     1069,
+            //     1016,
+            //     1070,
+            //     1014,
+            //     1071
+            // };
+            // for (int i = 0; i < functonIds.Count; i++)
+            // {
+            //     long startTime = FunctionHelp.GetOpenTime(functonIds[i]);
+            //     long endTime = FunctionHelp.GetCloseTime(functonIds[i]) - 10;
+            //
+            //     if (functonIds[i] == 1025) //战场按钮延长30分钟消失
+            //     {
+            //         endTime += (30 * 60);
+            //     }
+            //
+            //     if (functonIds[i] == 1052)
+            //     {
+            //         endTime += (10 * 60);
+            //     }
+            //
+            //     if (curTime >= endTime)
+            //     {
+            //         continue;
+            //     }
+            //
+            //     long sTime = serverTime + (startTime - curTime) * 1000;
+            //     self.FunctionButtons.Add(new ActivityTimer()
+            //     {
+            //         FunctionId = functonIds[i], FunctionType = 1, BeginTime = sTime
+            //     }); //FunctionType1 并且大于beingTime 开启
+            //
+            //     long eTime = serverTime + (endTime - curTime) * 1000;
+            //     self.FunctionButtons.Add(new ActivityTimer()
+            //     {
+            //         FunctionId = functonIds[i], FunctionType = 0, BeginTime = eTime
+            //     }); //FunctionType0 并且大于beingTime 关闭时间点
+            // }
+            //
+            // TimerComponent.Instance.Remove(ref self.TimerFunctiuon);
+            // if (self.FunctionButtons.Count > 0)
+            // {
+            //     self.FunctionButtons.Sort(delegate(ActivityTimer a, ActivityTimer b)
+            //     {
+            //         long endTime_1 = a.BeginTime;
+            //         long endTime_2 = b.BeginTime;
+            //         return (int)(endTime_1 - endTime_2);
+            //     });
+            //
+            //     self.TimerFunctiuon = TimerComponent.Instance.NewOnceTimer(self.FunctionButtons[0].BeginTime, TimerType.UIMainTimer, self);
+            // }
+        }
+
+        public static void OnHongBao(this DlgMain self, int value)
+        {
+            if (value == 1)
+            {
+                self.View.E_Button_HongBaoButton.gameObject.SetActive(false);
+            }
+        }
+        
+        public static void OnHorseRide(this DlgMain self)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            // self.View.E_Button_Horse.SetActive(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HorseFightID) > 0);
+            self.View.E_CityHorseButton.gameObject.SetActive(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HorseFightID) > 0);
         }
     }
 }
