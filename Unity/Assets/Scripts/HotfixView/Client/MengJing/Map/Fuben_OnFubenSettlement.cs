@@ -34,7 +34,7 @@ namespace ET.Client
                         scene.GetComponent<PetComponentC>().OnPassPetFuben(mapComponent.SonSceneId, star);
                     }
 
-                    // UIHelper.GetUI(args.Scene, UIType.UIPetMain).GetComponent<DlgPetMain>().OnFubenResult(args.m2C_FubenSettlement);
+                    scene.GetComponent<UIComponent>().GetDlgLogic<DlgPetMain>().OnFubenResult(args.m2C_FubenSettlement);
                     // UI ui = await UIHelper.Create(args.Scene, UIType.UIPetFubenResult);
                     // ui.GetComponent<UIPetFubenResultComponent>().OnUpdateUI(args.m2C_FubenSettlement);
                     break;

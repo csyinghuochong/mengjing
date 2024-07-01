@@ -29,7 +29,7 @@ namespace ET.Client
                     case SceneTypeEnum.PetTianTi:
                     case SceneTypeEnum.PetDungeon:
                     case SceneTypeEnum.PetMing:
-                        // UIHelper.Remove(args.ZoneScene, UIType.UIPetMain);
+                        root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetMain);
                         break;
                     case SceneTypeEnum.LocalDungeon:
                         DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(args.LastChapterId);

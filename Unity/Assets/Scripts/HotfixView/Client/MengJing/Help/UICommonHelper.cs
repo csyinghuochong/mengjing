@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,11 @@ namespace ET.Client
 {
     public static class UICommonHelper
     {
+        public static void DOScale(Transform transform, Vector3 vector3, float time)
+        {
+            transform.DOScale(vector3, time).SetEase(Ease.OutCubic);
+        }
+
         public static void TargetFrameRate(int frame)
         {
             Application.targetFrameRate = frame;

@@ -75,5 +75,6 @@
         public const int UIZhuaPuTimer = 343;
         public const int TrialMainTimer = 344;
         public const int DungeonHappyMainTimer = 345;
+        public const int PetMainTimer = 346;
     }
 }

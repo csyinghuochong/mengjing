@@ -367,5 +367,18 @@ namespace ET.Client
 
             return response.Error;
         }
+
+        public static async ETTask<int> PetFubenBeginRequest(Scene root)
+        {
+            C2M_PetFubenBeginRequest request = new();
+            M2C_PetFubenBeginResponse response = (M2C_PetFubenBeginResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
+        
+        public static void PetFubenOverRequest(Scene root)
+        {
+            root.GetComponent<ClientSenderCompnent>().Send(new C2M_PetFubenOverRequest());
+        }
     }
 }
