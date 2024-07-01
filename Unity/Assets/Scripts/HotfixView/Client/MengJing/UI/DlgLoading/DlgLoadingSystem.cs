@@ -313,8 +313,8 @@ namespace ET.Client
                 case SceneTypeEnum.PetDungeon:
                 case SceneTypeEnum.PetTianTi:
                 case SceneTypeEnum.PetMing:
-                    // UIHelper.Create(zoneScene, UIType.UIPetMain).Coroutine();
-                    // uimain.GameObject.transform.localScale = Vector3.zero;
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetMain).Coroutine();
+                    dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
                 case SceneTypeEnum.Tower:
                     // UIHelper.Create(zoneScene, UIType.UITowerOpen).Coroutine();
