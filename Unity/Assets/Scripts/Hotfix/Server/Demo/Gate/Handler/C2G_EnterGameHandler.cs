@@ -128,6 +128,7 @@ namespace ET.Server
                         player.UnionServerID = UnitCacheHelper.GetUnionServerId(session.Zone());
                         player.SoloServerID = UnitCacheHelper.GetSoloServerId(session.Zone());
                         player.PopularizeServerID = UnitCacheHelper.GetPopularizeServerId(session.Zone());
+                        player.TeamServerID = UnitCacheHelper.GetTeamServerId(session.Zone());
                         player.PlayerState = PlayerState.Game;
                         Unit unit = await UnitHelper.LoadUnit(player, scene, createRoleInfo, newAccountList[0].Account, request.AccountId);
                         StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map101");

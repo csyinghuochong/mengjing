@@ -127,6 +127,12 @@ namespace ET.Server
                         ActorId popularizeServerID = player.PopularizeServerID;
                         response = await root.GetComponent<MessageSender>().Call(popularizeServerID, iPopularizeActorRequest);
                     }
+                    
+                    if (actorRequest is ITeamActorRequest iTeamActorRequest)
+                    {
+                        ActorId teamServerID = player.TeamServerID;
+                        response = await root.GetComponent<MessageSender>().Call(teamServerID, iTeamActorRequest);
+                    }
 
                     if (response == null)
                     {
