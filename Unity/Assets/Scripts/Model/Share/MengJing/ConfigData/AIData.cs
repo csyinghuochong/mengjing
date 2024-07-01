@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using UnityEngine;
+using Unity.Mathematics;
 
 namespace ET
 {
@@ -7,39 +7,39 @@ namespace ET
     {
         //己方位置
         [StaticField]
-        public static readonly List<Vector3> Formation_1 = new List<Vector3>()
+        public static readonly List<float3> Formation_1 = new List<float3>()
         {
             //前排
-            new Vector3(-1.88f, 0f, -9.11f),
-            new Vector3(1.17f, 0f, -9.11f),
-            new Vector3(4.28f, 0f, -9.11f),
+            new float3(-1.88f, 0f, -9.11f),
+            new float3(1.17f, 0f, -9.11f),
+            new float3(4.28f, 0f, -9.11f),
             //中排
-            new Vector3(-1.88f, 0f, -12.16f),
-            new Vector3(1.17f, 0f, -12.16f),
-            new Vector3(4.28f, 0f, -12.16f),
+            new float3(-1.88f, 0f, -12.16f),
+            new float3(1.17f, 0f, -12.16f),
+            new float3(4.28f, 0f, -12.16f),
             //后排
-            new Vector3(-1.88f, 0f, -15.33f),
-            new Vector3(1.17f, 0f, -15.33f),
-            new Vector3(4.28f, 0f, -15.33f),
+            new float3(-1.88f, 0f, -15.33f),
+            new float3(1.17f, 0f, -15.33f),
+            new float3(4.28f, 0f, -15.33f),
 
         };
 
         //对方位置
         [StaticField]
-        public static readonly List<Vector3> Formation_2 = new List<Vector3>()
+        public static readonly List<float3> Formation_2 = new List<float3>()
         {
             //前排
-            new Vector3(-1.88f, 0f, 9.87f),
-            new Vector3(1.17f, 0f, 9.87f),
-            new Vector3(4.28f, 0f, 9.87f),
+            new float3(-1.88f, 0f, 9.87f),
+            new float3(1.17f, 0f, 9.87f),
+            new float3(4.28f, 0f, 9.87f),
             //中排
-            new Vector3(-1.88f, 0f, 13.09f),
-            new Vector3(1.17f, 0f, 13.09f),
-            new Vector3(4.28f, 0f, 13.09f),
+            new float3(-1.88f, 0f, 13.09f),
+            new float3(1.17f, 0f, 13.09f),
+            new float3(4.28f, 0f, 13.09f),
             //后排
-            new Vector3(-1.88f, 0f,16.14f),
-            new Vector3(1.17f, 0f, 16.14f),
-            new Vector3(4.28f, 0f, 16.14f),
+            new float3(-1.88f, 0f,16.14f),
+            new float3(1.17f, 0f, 16.14f),
+            new float3(4.28f, 0f, 16.14f),
         };
 
 
