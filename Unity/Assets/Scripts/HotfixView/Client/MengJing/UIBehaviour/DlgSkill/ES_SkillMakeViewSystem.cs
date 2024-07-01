@@ -243,7 +243,7 @@ namespace ET.Client
             string[] needList = neadItems.Split('@');
             for (int i = 0; i < needList.Length; i++)
             {
-                if (ComHelp.IfNull(needList[i]))
+                if (CommonHelp.IfNull(needList[i]))
                 {
                     continue;
                 }
@@ -277,7 +277,7 @@ namespace ET.Client
         public static void UpdateShuLianDu(this ES_SkillMake self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            int maxValue = ComHelp.MaxShuLianDu();
+            int maxValue = CommonHelp.MaxShuLianDu();
             int shulianduNumeric = self.Plan == 1? NumericType.MakeShuLianDu_1 : NumericType.MakeShuLianDu_2;
             int curValue = unit.GetComponent<NumericComponentC>().GetAsInt(shulianduNumeric);
 
@@ -298,7 +298,7 @@ namespace ET.Client
             //显示名称
             self.E_Lab_MakeNameText.text = ItemConfigCategory.Instance.Get(equipMakeConfig.MakeItemID).ItemName;
             self.E_Lab_MakeNameText.color =
-                    UICommonHelper.QualityReturnColor(ItemConfigCategory.Instance.Get(equipMakeConfig.MakeItemID).ItemQuality);
+                    CommonViewHelper.QualityReturnColor(ItemConfigCategory.Instance.Get(equipMakeConfig.MakeItemID).ItemQuality);
             self.E_Lab_MakeNumText.text = equipMakeConfig.MakeEquipNum.ToString();
 
             if (equipMakeConfig.ProficiencyValue[0] != 0)
@@ -404,7 +404,7 @@ namespace ET.Client
                     if (self.ScrollItemMakeItems[k].MakeID == makeid)
                     {
                         self.E_ImageSelectImage.gameObject.SetActive(true);
-                        UICommonHelper.SetParent(self.E_ImageSelectImage.gameObject, self.ScrollItemMakeItems[k].uiTransform.gameObject);
+                        CommonViewHelper.SetParent(self.E_ImageSelectImage.gameObject, self.ScrollItemMakeItems[k].uiTransform.gameObject);
                         self.E_ImageSelectImage.gameObject.transform.localPosition = new Vector3(0f, 12f, 0f);
                         break;
                     }

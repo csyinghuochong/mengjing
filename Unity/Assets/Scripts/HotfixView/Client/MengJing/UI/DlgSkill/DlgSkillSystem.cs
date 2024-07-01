@@ -76,7 +76,7 @@ namespace ET.Client
 
         private static void OnFunctionSetBtn(this DlgSkill self, int index)
         {
-            UICommonHelper.HideChildren(self.View.EG_SubViewNodeRectTransform);
+            CommonViewHelper.HideChildren(self.View.EG_SubViewNodeRectTransform);
 
             switch (index)
             {

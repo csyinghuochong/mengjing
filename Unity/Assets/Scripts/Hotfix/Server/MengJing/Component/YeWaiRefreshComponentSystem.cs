@@ -237,7 +237,7 @@ namespace ET.Server
         /// <param name="fubenDifficulty"></param>
         public static void CreateMonsterList(this YeWaiRefreshComponent self, string createMonster)
         {
-            if (ComHelp.IfNull(createMonster))
+            if (CommonHelp.IfNull(createMonster))
             {
                 return;
             }
@@ -313,7 +313,7 @@ namespace ET.Server
         /// <param name="fubenDifficulty"></param>
         public static void CreateMonsterList_2(this YeWaiRefreshComponent self, string createMonster)
         {
-            if (ComHelp.IfNull(createMonster))
+            if (CommonHelp.IfNull(createMonster))
             {
                 return;
             }
@@ -485,7 +485,7 @@ namespace ET.Server
             {
                 self.Scene().GetComponent<MiJingComponent>().BossId = refreshMonster.MonsterId;
 
-                if (!ComHelp.IsBanHaoZone(self.Zone()) && ServerHelper.GetOpenServerDay(false, self.Zone()) > 0)
+                if (!CommonHelp.IsBanHaoZone(self.Zone()) && ServerHelper.GetOpenServerDay(false, self.Zone()) > 0)
                 {
                     ActorId robotSceneId = StartSceneConfigCategory.Instance.GetBySceneName(203, "Robot01").ActorId;
                     self.Root().GetComponent<MessageSender>() .Send(robotSceneId,

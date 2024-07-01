@@ -36,7 +36,7 @@ namespace ET.Client
             for (int i = 0; i < twoConfig.SkillID.Length; i++)
             {
                 GameObject go = UnityEngine.Object.Instantiate(bundleGameObject);
-                UICommonHelper.SetParent(go, self.View.EG_SkillListItemRectTransform.gameObject);
+                CommonViewHelper.SetParent(go, self.View.EG_SkillListItemRectTransform.gameObject);
                 Scroll_Item_CommonSkillItem ui_item = self.AddChild<Scroll_Item_CommonSkillItem>(go);
                 ui_item.uiTransform = go.transform;
                 ui_item.OnUpdateUI(twoConfig.SkillID[i], ABAtlasTypes.RoleSkillIcon);

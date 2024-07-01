@@ -105,7 +105,7 @@ namespace ET
         public static List<int> CreateMonsterList(string createMonster)
         {
             List<int> monsterId = new List<int>();
-            if (ComHelp.IfNull(createMonster))
+            if (CommonHelp.IfNull(createMonster))
             {
                 return monsterId;
             }
@@ -238,7 +238,7 @@ namespace ET
             string[] monsters = monsterlist.Split('@');
             for (int i = 0; i < monsters.Length; i++)
             {
-                if (ComHelp.IfNull(monsters[i]))
+                if (CommonHelp.IfNull(monsters[i]))
                 {
                     continue;
                 }
@@ -287,7 +287,7 @@ namespace ET
             string[] monsters = createMonster.Split('@');
             for (int i = 0; i < monsters.Length; i++)
             {
-                if (ComHelp.IfNull(monsters[i]))
+                if (CommonHelp.IfNull(monsters[i]))
                 {
                     continue;
                 }

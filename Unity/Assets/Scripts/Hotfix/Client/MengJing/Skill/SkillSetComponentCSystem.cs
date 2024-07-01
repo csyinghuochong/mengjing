@@ -469,7 +469,7 @@ namespace ET.Client
 				}
 
 				string GameObjectParameter = skillConfig.GameObjectParameter;
-				if (ComHelp.IfNull(GameObjectParameter))
+				if (CommonHelp.IfNull(GameObjectParameter))
 				{
 					continue;
 				}

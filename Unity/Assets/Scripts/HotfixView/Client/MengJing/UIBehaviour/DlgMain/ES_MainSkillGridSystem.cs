@@ -345,8 +345,8 @@ namespace ET.Client
             self.E_Text_SkillItemNum.gameObject.SetActive(true);
             self.E_Text_SkillItemNum.GetComponent<Text>().text = number.ToString();
 
-            UICommonHelper.SetImageGray(self.Root(), self.E_SkillDi.gameObject, number == 0);
-            UICommonHelper.SetImageGray(self.Root(), self.E_Img_SkillIcon.gameObject, number == 0);
+            CommonViewHelper.SetImageGray(self.Root(), self.E_SkillDi.gameObject, number == 0);
+            CommonViewHelper.SetImageGray(self.Root(), self.E_Img_SkillIcon.gameObject, number == 0);
         }
 
         public static void SendCancleSkill(this ES_MainSkillGrid self)

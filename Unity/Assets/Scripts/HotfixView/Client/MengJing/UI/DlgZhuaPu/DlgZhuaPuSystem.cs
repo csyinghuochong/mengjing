@@ -58,8 +58,8 @@ namespace ET.Client
                     long number = bagComponent.GetItemNumber(itemid);
 
                     item.ES_CommonItem.E_ItemNumText.text = ItemViewHelp.ReturnNumStr(number);
-                    UICommonHelper.SetImageGray(self.Root(), item.ES_CommonItem.E_ItemIconImage.gameObject, number <= 0);
-                    UICommonHelper.SetImageGray(self.Root(), item.ES_CommonItem.E_ItemQualityImage.gameObject, number <= 0);
+                    CommonViewHelper.SetImageGray(self.Root(), item.ES_CommonItem.E_ItemIconImage.gameObject, number <= 0);
+                    CommonViewHelper.SetImageGray(self.Root(), item.ES_CommonItem.E_ItemQualityImage.gameObject, number <= 0);
                 }
             }
         }
@@ -123,7 +123,7 @@ namespace ET.Client
                 return;
             }
 
-            int gailv = ComHelp.GetZhuPuGaiLv(self.MonsterId, self.ItemId, 1);
+            int gailv = CommonHelp.GetZhuPuGaiLv(self.MonsterId, self.ItemId, 1);
             self.View.E_TextGaiLvText.text = $"抓捕成功率： {gailv * 0.01f}%";
         }
 

@@ -38,44 +38,44 @@ namespace ET.Client
 
                 if (showPropertyList.NumericType == NumericType.Now_Cri)
                 {
-                    value += ComHelp.LvProChange(numericComponentC.GetAsLong(NumericType.Now_CriLv), userInfoComponentC.UserInfo.Lv) * 100f;
+                    value += CommonHelp.LvProChange(numericComponentC.GetAsLong(NumericType.Now_CriLv), userInfoComponentC.UserInfo.Lv) * 100f;
                 }
 
                 if (showPropertyList.NumericType == NumericType.Now_Res)
                 {
-                    value += ComHelp.LvProChange(numericComponentC.GetAsLong(NumericType.Now_ResLv), userInfoComponentC.UserInfo.Lv) * 100f;
-                    value += ComHelp.LvProChange(numericComponentC.GetAsLong(NumericType.PointNaiLi) * 4, userInfoComponentC.UserInfo.Lv) *
+                    value += CommonHelp.LvProChange(numericComponentC.GetAsLong(NumericType.Now_ResLv), userInfoComponentC.UserInfo.Lv) * 100f;
+                    value += CommonHelp.LvProChange(numericComponentC.GetAsLong(NumericType.PointNaiLi) * 4, userInfoComponentC.UserInfo.Lv) *
                             100f;
                 }
 
                 if (showPropertyList.NumericType == NumericType.Now_Hit)
                 {
-                    value += ComHelp.LvProChange(numericComponentC.GetAsLong(NumericType.Now_HitLv), userInfoComponentC.UserInfo.Lv) * 100f;
+                    value += CommonHelp.LvProChange(numericComponentC.GetAsLong(NumericType.Now_HitLv), userInfoComponentC.UserInfo.Lv) * 100f;
                 }
 
                 if (showPropertyList.NumericType == NumericType.Now_Dodge)
                 {
-                    value += ComHelp.LvProChange(numericComponentC.GetAsLong(NumericType.Now_DodgeLv), userInfoComponentC.UserInfo.Lv) *
+                    value += CommonHelp.LvProChange(numericComponentC.GetAsLong(NumericType.Now_DodgeLv), userInfoComponentC.UserInfo.Lv) *
                             100f;
-                    value += ComHelp.LvProChange(numericComponentC.GetAsLong(NumericType.PointTiZhi) * 2, userInfoComponentC.UserInfo.Lv) *
+                    value += CommonHelp.LvProChange(numericComponentC.GetAsLong(NumericType.PointTiZhi) * 2, userInfoComponentC.UserInfo.Lv) *
                             100f;
                 }
 
                 if (showPropertyList.NumericType == NumericType.Now_ZhongJiPro)
                 {
-                    value += ComHelp.LvProChange(numericComponentC.GetAsLong(NumericType.Now_ZhongJiLv), userInfoComponentC.UserInfo.Lv) *
+                    value += CommonHelp.LvProChange(numericComponentC.GetAsLong(NumericType.Now_ZhongJiLv), userInfoComponentC.UserInfo.Lv) *
                             100f;
                 }
 
                 if (showPropertyList.NumericType == NumericType.Now_MageDamgeAddPro)
                 {
-                    value += ComHelp.LvProChange(numericComponentC.GetAsLong(NumericType.PointZhiLi) * 5, userInfoComponentC.UserInfo.Lv) *
+                    value += CommonHelp.LvProChange(numericComponentC.GetAsLong(NumericType.PointZhiLi) * 5, userInfoComponentC.UserInfo.Lv) *
                             100f;
                 }
 
                 if (showPropertyList.NumericType == NumericType.Now_ActSpeedPro)
                 {
-                    value += ComHelp.LvProChange(
+                    value += CommonHelp.LvProChange(
                         numericComponentC.GetAsLong(NumericType.PointMinJie) * 2 +
                         numericComponentC.GetAsLong(NumericType.PointLiLiang) * 2,
                         userInfoComponentC.UserInfo.Lv) * 100f;

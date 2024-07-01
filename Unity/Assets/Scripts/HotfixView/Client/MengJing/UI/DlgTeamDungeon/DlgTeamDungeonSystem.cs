@@ -48,7 +48,7 @@ namespace ET.Client
 
         private static void OnFunctionSetBtn(this DlgTeamDungeon self, int index)
         {
-            UICommonHelper.HideChildren(self.View.EG_SubViewRectTransform);
+            CommonViewHelper.HideChildren(self.View.EG_SubViewRectTransform);
             switch (index)
             {
                 case 0:

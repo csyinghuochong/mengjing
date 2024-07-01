@@ -45,7 +45,7 @@ namespace ET.Client
             self.View.E_Lab_MyLv1Text.text = $"你当前的等级：{userInfo.Lv}";
             self.View.E_Lab_MyLv2Text.text = $"你当前的等级：{userInfo.Lv}";
 
-            float expAdd = ComHelp.GetExpAdd(userInfo.Lv, response.ServerInfo);
+            float expAdd = CommonHelp.GetExpAdd(userInfo.Lv, response.ServerInfo);
             self.View.E_Lab_ExpRateText.text = $"可以获得经验加成:{(int)(expAdd * 100)}%";
             self.View.E_Lab_ExpAddProText.text = $"可以获得经验加成{(int)(expAdd * 100)}%";
             self.UpdateDuiHuanTimes();

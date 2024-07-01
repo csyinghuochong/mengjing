@@ -37,7 +37,7 @@ namespace ET.Client
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.EG_SkillIconItemRectTransform.gameObject);
                 go.SetActive(false);
-                UICommonHelper.SetParent(go, self.EG_SkillIPositionSetRectTransform.transform.GetChild(i).gameObject);
+                CommonViewHelper.SetParent(go, self.EG_SkillIPositionSetRectTransform.transform.GetChild(i).gameObject);
                 self.SkillSetIconList.Add(go);
                 //self.SkillIPositionSet.transform.GetChild(i).gameObject.GetComponent<Image>().enabled = false;
             }
@@ -157,7 +157,7 @@ namespace ET.Client
         {
             self.SkillIconItemCopy = UnityEngine.Object.Instantiate(self.EG_SkillIconItemRectTransform.gameObject);
             self.SkillIconItemCopy.SetActive(true);
-            UICommonHelper.SetParent(self.SkillIconItemCopy, self.uiTransform.parent.parent.gameObject);
+            CommonViewHelper.SetParent(self.SkillIconItemCopy, self.uiTransform.parent.parent.gameObject);
 
             ItemConfig itemconfig = ItemConfigCategory.Instance.Get(binfo.ItemID);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemconfig.Icon);

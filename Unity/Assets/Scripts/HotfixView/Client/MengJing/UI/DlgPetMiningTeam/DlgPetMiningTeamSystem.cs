@@ -60,7 +60,7 @@ namespace ET.Client
 
             GameObject icon = self.View.E_IconItemDragImage.transform.Find("ImageIcon").gameObject;
             icon.GetComponent<Image>().sprite = sp;
-            UICommonHelper.SetParent(self.View.E_IconItemDragImage.gameObject, self.View.uiTransform.gameObject);
+            CommonViewHelper.SetParent(self.View.E_IconItemDragImage.gameObject, self.View.uiTransform.gameObject);
         }
 
         public static void Draging(this DlgPetMiningTeam self, RolePetInfo binfo, PointerEventData pdata)
@@ -104,7 +104,7 @@ namespace ET.Client
                 break;
             }
 
-            UICommonHelper.SetParent(self.View.E_IconItemDragImage.gameObject, self.View.uiTransform.gameObject);
+            CommonViewHelper.SetParent(self.View.E_IconItemDragImage.gameObject, self.View.uiTransform.gameObject);
             self.View.E_IconItemDragImage.gameObject.SetActive(false);
         }
 

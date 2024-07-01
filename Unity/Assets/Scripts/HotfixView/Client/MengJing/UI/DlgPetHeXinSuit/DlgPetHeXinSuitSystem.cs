@@ -26,7 +26,7 @@ namespace ET.Client
                 GameObject go = UnityEngine.Object.Instantiate(self.View.E_UIPetHeXinSuitItemImage.gameObject);
                 self.UpdateItemInfo(go, valuePair.Key, valuePair.Key == id);
                 go.SetActive(true);
-                UICommonHelper.SetParent(go, self.View.EG_UIPetHeXinSuitItemListNodeRectTransform.gameObject);
+                CommonViewHelper.SetParent(go, self.View.EG_UIPetHeXinSuitItemListNodeRectTransform.gameObject);
             }
         }
 
@@ -70,7 +70,7 @@ namespace ET.Client
                 GameObject go = UnityEngine.Object.Instantiate(rc.Get<GameObject>("PropertyText"));
                 go.GetComponent<Text>().text = str;
                 go.SetActive(true);
-                UICommonHelper.SetParent(go, rc.Get<GameObject>("PropertyTextListNode"));
+                CommonViewHelper.SetParent(go, rc.Get<GameObject>("PropertyTextListNode"));
             }
 
             if (jiHuo)

@@ -26,7 +26,7 @@ namespace ET.Server
             List<long> ShareTimes = dBAccountInfos.PlayerInfo.ShareTimes;
             for (int i = 0; i < ShareTimes.Count; i++)
             {
-                if (ComHelp.GetDayByTime(serverNow) == ComHelp.GetDayByTime(ShareTimes[i]))
+                if (CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(ShareTimes[i]))
                 {
                     totalTimes++;
                 }

@@ -50,7 +50,7 @@ namespace ET.Server
                 string[] monsterids = summonParList[6].Split(",");
                 for (int i = 0; i < monsterids.Length; i++)
                 {
-                    if (!ComHelp.IfNull(monsterids[i]))
+                    if (!CommonHelp.IfNull(monsterids[i]))
                     {
                         destoryOldMonsterList.Add( int.Parse(monsterids[i]) );
                     }

@@ -141,7 +141,7 @@ namespace ET.Client
 
         public static void UpdateAttribute(this ES_RoleXiLianShow self, BagInfo bagInfo)
         {
-            UICommonHelper.DestoryChild(self.EG_EquipBaseSetListRectTransform.gameObject);
+            CommonViewHelper.DestoryChild(self.EG_EquipBaseSetListRectTransform.gameObject);
             if (bagInfo == null)
             {
                 return;

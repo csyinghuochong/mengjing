@@ -72,7 +72,7 @@ namespace ET.Server
 			        DBAccountInfo newAccount = newAccountList[0];
 
 					int robotId = 0;
-					if (newAccount.Password == ComHelp.RobotPassWord)
+					if (newAccount.Password == CommonHelp.RobotPassWord)
 					{
 						robotId = int.Parse(newAccount.Account.Split('_')[0]);
 					}

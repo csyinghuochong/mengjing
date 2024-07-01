@@ -199,7 +199,7 @@ namespace ET.Server
                     if (buffS.TheUnitBelongto.Type == UnitType.Player)
                     {
                         using var list = ListComponent<int>.Create();
-                        if (!ComHelp.IfNull(buffS.mBuffConfig.buffParameterValue2))
+                        if (!CommonHelp.IfNull(buffS.mBuffConfig.buffParameterValue2))
                         {
                             string[] skillinfos = buffS.mBuffConfig.buffParameterValue2.Split(';');
                             for (int i = 0; i < skillinfos.Length; i++)

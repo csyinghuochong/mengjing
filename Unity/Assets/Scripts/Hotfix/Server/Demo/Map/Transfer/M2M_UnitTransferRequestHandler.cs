@@ -154,7 +154,7 @@ namespace ET.Server
 
                             if (fubenType == TeamFubenType.ShenYuan && unit.Id == teamDungeonComponent.TeamInfo.TeamId)
                             {
-                                unit.GetComponent<BagComponentS>().OnCostItemData($"{ComHelp.ShenYuanCostId};1");
+                                unit.GetComponent<BagComponentS>().OnCostItemData($"{CommonHelp.ShenYuanCostId};1");
                             }
 
                             if (fubenType == TeamFubenType.ShenYuan)

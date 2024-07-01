@@ -37,7 +37,7 @@ namespace ET.Client
 
                 self.FubenIdList.Add(sceneConfig[i].Id);
                 GameObject item = UnityEngine.Object.Instantiate(self.View.EG_TeamdungeonItemRectTransform.gameObject);
-                UICommonHelper.SetParent(item, self.View.EG_TeamdungeonListRectTransform.gameObject);
+                CommonViewHelper.SetParent(item, self.View.EG_TeamdungeonListRectTransform.gameObject);
                 item.SetActive(true);
                 self.ButtonList.Add(item.transform);
 
@@ -149,9 +149,9 @@ namespace ET.Client
             if (dungeonType == TeamFubenType.Normal && shenyuan)
             {
                 BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-                if (bagComponent.GetItemNumber(ComHelp.ShenYuanCostId) < 1)
+                if (bagComponent.GetItemNumber(CommonHelp.ShenYuanCostId) < 1)
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi($"需要道具{ItemConfigCategory.Instance.Get(ComHelp.ShenYuanCostId).ItemName}！");
+                    FlyTipComponent.Instance.ShowFlyTipDi($"需要道具{ItemConfigCategory.Instance.Get(CommonHelp.ShenYuanCostId).ItemName}！");
                     return;
                 }
 

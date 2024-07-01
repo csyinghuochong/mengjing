@@ -100,8 +100,8 @@ namespace ET.Server
                 request.IsRecharge = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.RechargeNumber);
 
                 if (request.IsRecharge > 0
-                    || ComHelp.IsCanPaiMai_KillBoss(userInfoComponent.UserInfo.MonsterRevives, userInfoComponent.UserInfo.Lv)
-                    || ComHelp.IsCanPaiMai_Level(createDay, userInfoComponent.UserInfo.Lv) == 0)
+                    || CommonHelp.IsCanPaiMai_KillBoss(userInfoComponent.UserInfo.MonsterRevives, userInfoComponent.UserInfo.Lv)
+                    || CommonHelp.IsCanPaiMai_Level(createDay, userInfoComponent.UserInfo.Lv) == 0)
                 {
                     openPaiMai = 1;
                     unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.PaiMaiOpen, 1);

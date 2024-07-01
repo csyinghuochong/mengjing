@@ -10,7 +10,7 @@ namespace ET.Server
             RankSceneComponent rankComponent = scene.GetComponent<RankSceneComponent>();
 
             List<RankingInfo> all = rankComponent.DBRankInfo.rankingInfos;
-            List<RankingInfo> list = all.GetRange(0, all.Count > ComHelp.RankNumber ? ComHelp.RankNumber : all.Count);
+            List<RankingInfo> list = all.GetRange(0, all.Count > CommonHelp.RankNumber ? CommonHelp.RankNumber : all.Count);
 
             response.RankList = list;
 

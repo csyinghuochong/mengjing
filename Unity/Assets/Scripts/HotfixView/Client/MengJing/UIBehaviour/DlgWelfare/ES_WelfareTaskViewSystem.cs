@@ -33,7 +33,7 @@ namespace ET.Client
                 }
                 else
                 {
-                    UICommonHelper.SetImageGray(self.Root(), self.EG_DayListNodeRectTransform.GetChild(i).gameObject, true);
+                    CommonViewHelper.SetImageGray(self.Root(), self.EG_DayListNodeRectTransform.GetChild(i).gameObject, true);
                 }
             }
 

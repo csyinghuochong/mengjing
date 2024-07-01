@@ -41,7 +41,7 @@ namespace ET.Client
         {
             int level = self.Root().GetComponent<SkillSetComponentC>().GetLifeShieldLevel(self.ShieldType);
 
-            UICommonHelper.SetImageGray(self.Root(), self.E_ImageIconImage.gameObject, level == 0);
+            CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIconImage.gameObject, level == 0);
             int showId = self.Root().GetComponent<SkillSetComponentC>().GetLifeShieldShowId(self.ShieldType);
             self.E_TextNameText.text = LifeShieldConfigCategory.Instance.Get(showId).ShieldName;
         }

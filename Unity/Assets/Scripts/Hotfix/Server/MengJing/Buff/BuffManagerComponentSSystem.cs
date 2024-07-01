@@ -420,7 +420,7 @@ namespace ET.Server
 
             string[] weiyiBuffId = new string[0];
             List<int> weiyiBuffList = new List<int>();
-            if (!ComHelp.IfNull(skillBuffConfig.WeiYiBuffID))
+            if (!CommonHelp.IfNull(skillBuffConfig.WeiYiBuffID))
             {
                 weiyiBuffId = skillBuffConfig.WeiYiBuffID.Split(";");
             }

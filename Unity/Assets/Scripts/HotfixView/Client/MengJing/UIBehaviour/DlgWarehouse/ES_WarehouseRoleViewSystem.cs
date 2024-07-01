@@ -61,7 +61,7 @@ namespace ET.Client
             if (cangkuNumber <= page)
             {
                 string costItems = GlobalValueConfigCategory.Instance.Get(38).Value;
-                PopupTipHelp.OpenPopupTip(self.Root(), "开启仓库", $"是否消耗{UICommonHelper.GetNeedItemDesc(costItems)}开启一个仓库",
+                PopupTipHelp.OpenPopupTip(self.Root(), "开启仓库", $"是否消耗{CommonViewHelper.GetNeedItemDesc(costItems)}开启一个仓库",
                     () => { self.RequestOpenCangKu().Coroutine(); }, null).Coroutine();
                 return false;
             }
@@ -93,7 +93,7 @@ namespace ET.Client
         public static void OnBuyBagCell(this ES_WarehouseRole self, string dataparams)
         {
             self.RefreshHouseItems();
-            FlyTipComponent.Instance.ShowFlyTipDi($"获得道具: {UICommonHelper.GetNeedItemDesc(dataparams)}");
+            FlyTipComponent.Instance.ShowFlyTipDi($"获得道具: {CommonViewHelper.GetNeedItemDesc(dataparams)}");
         }
 
         private static void OnClickImage_Lock(this ES_WarehouseRole self)
@@ -102,7 +102,7 @@ namespace ET.Client
             int addcell = bagComponent.WarehouseAddedCell[self.CurrentItemType];
             BuyCellCost buyCellCost = ConfigData.BuyStoreCellCosts[self.CurrentItemType * 10 + addcell];
             PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
-                $"是否花费{UICommonHelper.GetNeedItemDesc(buyCellCost.Cost)}购买一个背包格子?",
+                $"是否花费{CommonViewHelper.GetNeedItemDesc(buyCellCost.Cost)}购买一个背包格子?",
                 () => { BagClientNetHelper.RequestBuyBagCell(self.Root(), self.CurrentItemType + (int)ItemLocType.ItemWareHouse1).Coroutine(); },
                 null).Coroutine();
         }

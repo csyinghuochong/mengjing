@@ -9,7 +9,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_ItemMeltingRequest request, M2C_ItemMeltingResponse response)
         {//通过回收列表计算所得
-            int getItemId = ComHelp.MeltingItemId;
+            int getItemId = CommonHelp.MeltingItemId;
             int getNumber = 1;
 
 

@@ -87,25 +87,25 @@ namespace ET.Client
             if (chaValue >= 8 && chaValue < 16)
             {
                 jianDingStr = "十发十中";
-                self.View.E_JianDingShowText.color = UICommonHelper.QualityReturnColor(2);
+                self.View.E_JianDingShowText.color = CommonViewHelper.QualityReturnColor(2);
             }
 
             if (chaValue >= 16 && chaValue < 24)
             {
                 jianDingStr = "百年不遇";
-                self.View.E_JianDingShowText.color = UICommonHelper.QualityReturnColor(3);
+                self.View.E_JianDingShowText.color = CommonViewHelper.QualityReturnColor(3);
             }
 
             if (chaValue >= 24 && chaValue < 32)
             {
                 jianDingStr = "千载难逢";
-                self.View.E_JianDingShowText.color = UICommonHelper.QualityReturnColor(4);
+                self.View.E_JianDingShowText.color = CommonViewHelper.QualityReturnColor(4);
             }
 
             if (chaValue >= 32 && chaValue < 999)
             {
                 jianDingStr = "万里挑一";
-                self.View.E_JianDingShowText.color = UICommonHelper.QualityReturnColor(5);
+                self.View.E_JianDingShowText.color = CommonViewHelper.QualityReturnColor(5);
             }
 
             self.View.E_JianDingShowText.text = jianDingStr;

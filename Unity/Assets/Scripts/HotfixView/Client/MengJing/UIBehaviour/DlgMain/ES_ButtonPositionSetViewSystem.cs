@@ -217,7 +217,7 @@ namespace ET.Client
 
             self.SkillIconItemCopy = UnityEngine.Object.Instantiate(self.UISkillDragList[skillIndex].GameObject);
             self.SkillIconItemCopy.SetActive(true);
-            UICommonHelper.SetParent(self.SkillIconItemCopy, self.UIMain);
+            CommonViewHelper.SetParent(self.SkillIconItemCopy, self.UIMain);
         }
 
         public static void OnDrag_TriggerHandler(this ES_ButtonPositionSet self, PointerEventData pdata)

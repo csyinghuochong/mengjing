@@ -85,7 +85,7 @@ namespace ET.Client
             self.EG_MaxNodeRectTransform.gameObject.SetActive(qianghuaLevel >= maxLevel - 1);
             self.EG_NextNodeRectTransform.gameObject.SetActive(!self.EG_MaxNodeRectTransform.gameObject.activeSelf);
 
-            UICommonHelper.SetParent(self.E_ImageSelectImage.gameObject, self.QiangHuaItemList[subType - 1].uiTransform.gameObject);
+            CommonViewHelper.SetParent(self.E_ImageSelectImage.gameObject, self.QiangHuaItemList[subType - 1].uiTransform.gameObject);
             self.E_ImageSelectImage.transform.localPosition = new Vector3(1f, -2f, 0f);
             string qianghuaName = ItemViewData.EquipWeiZhiToName[subType].Name;
             self.E_QiangHuaNameText.text = $"{qianghuaName}强化 +{qianghuaLevel}";

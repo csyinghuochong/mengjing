@@ -68,7 +68,7 @@ namespace ET.Client
                 return false;
             }
 
-            return ComHelp.GetDayByTime(TimeHelper.ServerNow()) != ComHelp.GetDayByTime(self.LastLoginTime);
+            return CommonHelp.GetDayByTime(TimeHelper.ServerNow()) != CommonHelp.GetDayByTime(self.LastLoginTime);
         }
     }
 }

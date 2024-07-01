@@ -64,7 +64,7 @@ namespace ET.Client
             for (int i = 0; i < response.RankList.Count; i++)
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.EG_UIRankUnionItemRectTransform.gameObject);
-                UICommonHelper.SetParent(go, self.EG_RankingListNodeRectTransform.gameObject);
+                CommonViewHelper.SetParent(go, self.EG_RankingListNodeRectTransform.gameObject);
                 go.SetActive(true);
                 ReferenceCollector rc = go.GetComponent<ReferenceCollector>();
                 rc.Get<GameObject>("NameText").GetComponent<Text>().text = $"   {i + 1}    {response.RankList[i].PlayerName}";

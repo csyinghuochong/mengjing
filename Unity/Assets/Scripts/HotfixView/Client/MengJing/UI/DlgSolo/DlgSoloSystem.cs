@@ -63,7 +63,7 @@ namespace ET.Client
             for (int i = 0; i < response.SoloPlayerResultInfoList.Count; i++)
             {
                 GameObject gameObject = UnityEngine.Object.Instantiate(self.View.EG_UISoloResultShowRectTransform.gameObject);
-                UICommonHelper.SetParent(gameObject, self.View.EG_SoloResultListNodeRectTransform.gameObject);
+                CommonViewHelper.SetParent(gameObject, self.View.EG_SoloResultListNodeRectTransform.gameObject);
                 gameObject.SetActive(true);
                 ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
                 rc.Get<GameObject>("Text_Name").GetComponent<Text>().text = response.SoloPlayerResultInfoList[i].Name;

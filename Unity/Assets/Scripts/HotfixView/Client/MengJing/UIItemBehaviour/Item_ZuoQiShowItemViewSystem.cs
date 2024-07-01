@@ -74,7 +74,7 @@ namespace ET.Client
             SkillBuffConfig buffCof = SkillBuffConfigCategory.Instance.Get(self.ZuoQiConfig.MoveBuffID);
             self.E_LabDesText.text = buffCof.BuffDescribe;
 
-            UICommonHelper.SetRawImageGray(self.Root(), self.ES_ModelShow.E_RenderRawImage.gameObject, !self.IsHaveZuoQi(zuoQiConfig.Id));
+            CommonViewHelper.SetRawImageGray(self.Root(), self.ES_ModelShow.E_RenderRawImage.gameObject, !self.IsHaveZuoQi(zuoQiConfig.Id));
 
             self.E_ButtonFightButton.gameObject.SetActive(self.IsHaveZuoQi(zuoQiConfig.Id));
             self.E_Lab_LaiYuanText.gameObject.SetActive(!self.IsHaveZuoQi(zuoQiConfig.Id));

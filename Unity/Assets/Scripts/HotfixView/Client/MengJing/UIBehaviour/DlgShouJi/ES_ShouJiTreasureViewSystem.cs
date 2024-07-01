@@ -41,7 +41,7 @@ namespace ET.Client
             {
                 GameObject taskTypeItem = GameObject.Instantiate(self.UIShouJiTreasureType);
                 taskTypeItem.SetActive(true);
-                UICommonHelper.SetParent(taskTypeItem, self.TypeListNode);
+                CommonViewHelper.SetParent(taskTypeItem, self.TypeListNode);
 
                 UIShouJiTreasureTypeComponent uIItemComponent = self.AddChild<UIShouJiTreasureTypeComponent, GameObject>(taskTypeItem);
                 uIItemComponent.OnInitData(item);
@@ -92,7 +92,7 @@ namespace ET.Client
                 {
                     GameObject taskTypeItem = GameObject.Instantiate(self.UIShouJiTreasureItem);
                     taskTypeItem.SetActive(true);
-                    UICommonHelper.SetParent(taskTypeItem, self.ItemListNode);
+                    CommonViewHelper.SetParent(taskTypeItem, self.ItemListNode);
                     uIShouJiTreasureItem = self.AddChild<UIShouJiTreasureItemComponent, GameObject>(taskTypeItem);
                     self.TreasureItemList.Add(uIShouJiTreasureItem);
                 }

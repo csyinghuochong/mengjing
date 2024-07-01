@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace  ET
 { 
-    public static class ComHelp
+    public static class CommonHelp
     {
 
         public const int MaxZone = 1024;

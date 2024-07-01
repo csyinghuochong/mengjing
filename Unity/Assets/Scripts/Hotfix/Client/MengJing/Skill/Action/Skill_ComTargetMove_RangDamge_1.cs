@@ -22,7 +22,7 @@
 
             for (int i = 0; i < number; i++ )
             {
-                SkillInfo skillInfo = ComHelp.DeepCopy<SkillInfo>(skils.SkillInfo);
+                SkillInfo skillInfo = CommonHelp.DeepCopy<SkillInfo>(skils.SkillInfo);
                 skillInfo.TargetAngle = starAngle + i * delta;
                 skils.OnShowSkillIndicator(skillInfo);
             }

@@ -115,7 +115,7 @@ namespace ET.Client
                 if (camp == CampEnum.CampPlayer_1)
                 {
                     GameObject gameObject = UnityEngine.Object.Instantiate(self.View.EG_UIPetHpRectTransform.gameObject);
-                    UICommonHelper.SetParent(gameObject, self.View.EG_PetHpNodeRectTransform.gameObject);
+                    CommonViewHelper.SetParent(gameObject, self.View.EG_PetHpNodeRectTransform.gameObject);
                     gameObject.SetActive(true);
 
                     gameObject.transform.Find("Lal_Name").GetComponent<Text>().text = PetConfigCategory.Instance.Get(entities[i].ConfigId).PetName;
@@ -128,7 +128,7 @@ namespace ET.Client
                 {
                     self.EnemyNumber++;
                     GameObject gameObject = UnityEngine.Object.Instantiate(self.View.EG_UIMonsterHpRectTransform.gameObject);
-                    UICommonHelper.SetParent(gameObject, self.View.EG_MonsterHpNodeRectTransform.gameObject);
+                    CommonViewHelper.SetParent(gameObject, self.View.EG_MonsterHpNodeRectTransform.gameObject);
                     gameObject.SetActive(true);
 
                     gameObject.transform.Find("Lal_Name").GetComponent<Text>().text = PetConfigCategory.Instance.Get(entities[i].ConfigId).PetName;
@@ -142,7 +142,7 @@ namespace ET.Client
                 {
                     self.EnemyNumber++;
                     GameObject gameObject = UnityEngine.Object.Instantiate(self.View.EG_UIMonsterHpRectTransform.gameObject);
-                    UICommonHelper.SetParent(gameObject, self.View.EG_MonsterHpNodeRectTransform.gameObject);
+                    CommonViewHelper.SetParent(gameObject, self.View.EG_MonsterHpNodeRectTransform.gameObject);
                     gameObject.SetActive(true);
 
                     MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(entities[i].ConfigId);
@@ -171,7 +171,7 @@ namespace ET.Client
             self.View.E_Image_3Image.gameObject.SetActive(true);
             self.BeginTime = Time.time;
             self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.PetMainTimer, self);
-            UICommonHelper.DOScale(self.View.E_Image_3Image.transform, Vector3.zero, 1f);
+            CommonViewHelper.DOScale(self.View.E_Image_3Image.transform, Vector3.zero, 1f);
             await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
             if (instanceId != self.InstanceId)
             {
@@ -180,7 +180,7 @@ namespace ET.Client
 
             self.View.E_Image_3Image.gameObject.SetActive(false);
             self.View.E_Image_2Image.gameObject.SetActive(true);
-            UICommonHelper.DOScale(self.View.E_Image_2Image.transform, Vector3.zero, 1f);
+            CommonViewHelper.DOScale(self.View.E_Image_2Image.transform, Vector3.zero, 1f);
             await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
             if (instanceId != self.InstanceId)
             {
@@ -189,7 +189,7 @@ namespace ET.Client
 
             self.View.E_Image_2Image.gameObject.SetActive(false);
             self.View.E_Image_1Image.gameObject.SetActive(true);
-            UICommonHelper.DOScale(self.View.E_Image_1Image.transform, Vector3.zero, 1f);
+            CommonViewHelper.DOScale(self.View.E_Image_1Image.transform, Vector3.zero, 1f);
             await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
             if (instanceId != self.InstanceId)
             {

@@ -133,7 +133,7 @@ namespace ET.Client
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.EG_UIPopularizeItemRectTransform.gameObject);
                 go.SetActive(true);
-                UICommonHelper.SetParent(go, self.EG_BuildingListRectTransform.gameObject);
+                CommonViewHelper.SetParent(go, self.EG_BuildingListRectTransform.gameObject);
 
                 ReferenceCollector rc = go.GetComponent<ReferenceCollector>();
                 rc.Get<GameObject>("Text_Name").GetComponent<Text>().text = response.MyPopularizeList[i].Nmae;

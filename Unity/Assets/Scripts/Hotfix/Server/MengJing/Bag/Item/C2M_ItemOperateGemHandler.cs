@@ -69,7 +69,7 @@ namespace ET.Server
                         string[] gemList = EquipList[i].GemIDNew.Split('_');
                         for (int y = 0; y < gemList.Length; y++)
                         {
-                            if (ComHelp.IfNull(gemList[y]) == false)
+                            if (CommonHelp.IfNull(gemList[y]) == false)
                             {
                                 ItemConfig gemItemCof = ItemConfigCategory.Instance.Get(int.Parse(gemList[y]));
                                 if (gemItemCof.ItemSubType == 110)

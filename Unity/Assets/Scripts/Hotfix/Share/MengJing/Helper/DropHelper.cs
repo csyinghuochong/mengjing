@@ -141,7 +141,7 @@ namespace ET
 			MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(monsterID);
 			//最小等级;最大等级;掉落ID1,掉落ID2
 			string LvDropID = monsterCof.LvDropID;
-			if (ComHelp.IfNull(LvDropID))
+			if (CommonHelp.IfNull(LvDropID))
 			{
 				return null;
 			}

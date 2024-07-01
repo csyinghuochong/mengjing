@@ -223,7 +223,7 @@ namespace ET.Client
                 {
                     GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     go = UnityEngine.Object.Instantiate(prefab);
-                    UICommonHelper.SetParent(go, self.GetParent<Unit>().GetComponent<HeroTransformComponent>().GetTranform(PosType.Head).gameObject);
+                    CommonViewHelper.SetParent(go, self.GetParent<Unit>().GetComponent<HeroTransformComponent>().GetTranform(PosType.Head).gameObject);
                     go.transform.localPosition = new Vector3(0f, 1f, 0f);
                     self.EffectComTask[type] = go;
                 }

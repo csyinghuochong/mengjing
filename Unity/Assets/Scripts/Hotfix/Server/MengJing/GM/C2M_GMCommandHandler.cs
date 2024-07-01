@@ -13,7 +13,7 @@ namespace ET.Server
             try
             {
                 if (!GMHelp.IsGmAccount(message.Account)
-                    && !ComHelp.IsBanHaoZone(unit.Zone()))
+                    && !CommonHelp.IsBanHaoZone(unit.Zone()))
                 {
                     return;
                 }

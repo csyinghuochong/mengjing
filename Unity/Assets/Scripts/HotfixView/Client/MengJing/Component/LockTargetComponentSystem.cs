@@ -120,7 +120,7 @@ namespace ET.Client
 
             self.LastLockId = unitId;
             self.CheckLockEffect();
-            UICommonHelper.SetParent(self.LockUnitEffect, unitTarget.GetComponent<GameObjectComponent>().GameObject);
+            CommonViewHelper.SetParent(self.LockUnitEffect, unitTarget.GetComponent<GameObjectComponent>().GameObject);
             self.LockUnitEffect.SetActive(true);
 
             if (unitTarget.Type == UnitType.Monster)
@@ -305,7 +305,7 @@ namespace ET.Client
             self.CheckLockEffect();
             if (unitTarget != null)
             {
-                UICommonHelper.SetParent(self.LockUnitEffect, unitTarget.GetComponent<GameObjectComponent>().GameObject);
+                CommonViewHelper.SetParent(self.LockUnitEffect, unitTarget.GetComponent<GameObjectComponent>().GameObject);
                 self.LockUnitEffect.SetActive(true);
                 self.SetEffectSize(1f);
             }

@@ -38,12 +38,12 @@ namespace ET.Client
             {
                 GameObject gameObject = UnityEngine.Object.Instantiate(self.View.EG_UIAuctionRecordItemRectTransform.gameObject);
                 gameObject.SetActive(true);
-                UICommonHelper.SetParent(gameObject, self.View.EG_BuildingListRectTransform.gameObject);
+                CommonViewHelper.SetParent(gameObject, self.View.EG_BuildingListRectTransform.gameObject);
                 ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
                 DateTime dateTime = TimeInfo.Instance.ToDateTime(response.RecordList[i].Time);
                 rc.Get<GameObject>("TextContent").GetComponent<Text>().text =
-                        $"玩家 <color=#{ComHelp.QualityReturnColor(4)}>{response.RecordList[i].PlayerName}</color> {dateTime.ToShortTimeString()} " +
-                        $"出价： <color=#{ComHelp.QualityReturnColor(2)}>{response.RecordList[i].Price}</color>";
+                        $"玩家 <color=#{CommonHelp.QualityReturnColor(4)}>{response.RecordList[i].PlayerName}</color> {dateTime.ToShortTimeString()} " +
+                        $"出价： <color=#{CommonHelp.QualityReturnColor(2)}>{response.RecordList[i].Price}</color>";
             }
         }
     }

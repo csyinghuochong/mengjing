@@ -48,7 +48,7 @@ namespace ET.Client
 
             int zone = self.Root().GetComponent<PlayerComponent>().ServerId;
             int openDay = ServerHelper.GetOpenServerDay(false, zone);
-            float coffi = ComHelp.GetMineCoefficient(openDay, mingType, index, petMineExtend);
+            float coffi = CommonHelp.GetMineCoefficient(openDay, mingType, index, petMineExtend);
             int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi);
             self.E_TextChanChu.text = $"{chanchu}/小时";
         }

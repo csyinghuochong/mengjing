@@ -36,7 +36,7 @@ namespace ET.Client
             for (int i = 0; i < xilianSkill.Count; i++)
             {
                 GameObject bagSpace = UnityEngine.Object.Instantiate(bundleGameObject);
-                UICommonHelper.SetParent(bagSpace, self.EG_ItemNodeRectTransform.gameObject);
+                CommonViewHelper.SetParent(bagSpace, self.EG_ItemNodeRectTransform.gameObject);
                 Scroll_Item_CommonSkillItem ui_item = self.AddChild<Scroll_Item_CommonSkillItem>();
                 ui_item.uiTransform = bagSpace.transform;
                 ui_item.OnUpdateUI((int)xilianSkill[i].Value, ABAtlasTypes.RoleSkillIcon, false, ItemViewHelp.XiLianWeiZhiTip(xilianSkill[i].KeyId));
@@ -54,7 +54,7 @@ namespace ET.Client
             bool gray = xilianlv < self.EquipXiLianConfig.XiLianLevel;
             for (int i = 0; i < self.uIItems.Count; i++)
             {
-                UICommonHelper.SetImageGray(self.Root(), self.uIItems[i].E_ImageIconImage.gameObject, gray);
+                CommonViewHelper.SetImageGray(self.Root(), self.uIItems[i].E_ImageIconImage.gameObject, gray);
             }
 
             if (gray)

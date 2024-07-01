@@ -27,7 +27,7 @@ namespace ET.Client
 
             //显示字
             //self.Label_ItemNum.GetComponent<Text>().text = $"{bagComponent.GetItemNumber(itemId)}/{itemNum}";
-            self.E_ItemNumText.text = $"{UICommonHelper.NumToWString(bagComponent.GetItemNumber(itemId))}/{UICommonHelper.NumToWString(itemNum)}";
+            self.E_ItemNumText.text = $"{CommonViewHelper.NumToWString(bagComponent.GetItemNumber(itemId))}/{CommonViewHelper.NumToWString(itemNum)}";
             //显示颜色
             self.E_ItemNumText.color = (itemNum <= bagComponent.GetItemNumber(itemId))? Color.green : Color.red;
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);

@@ -42,7 +42,7 @@ namespace ET.Server
                 {
                     //移除宠物
                     petComponent.RemovePet(request.PetInfoXianJiId);
-                    response.OldPetInfo = ComHelp.DeepCopy<RolePetInfo>(rolePetInfo);
+                    response.OldPetInfo = CommonHelp.DeepCopy<RolePetInfo>(rolePetInfo);
 
                     //获取评分
                     int pingfen = PetHelper.PetPingJia(rolePetInfoXianJi);

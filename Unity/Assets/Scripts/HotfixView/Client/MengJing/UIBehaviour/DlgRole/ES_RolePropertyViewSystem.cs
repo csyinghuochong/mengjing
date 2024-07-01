@@ -153,8 +153,8 @@ namespace ET.Client
                     .Get(numericComponentC.GetAsInt(NumericType.YueKaRemainTimes) > 0? 26 : 10).Value);
             self.E_PiLaoImgImage.fillAmount = (float)userInfoComponentC.UserInfo.PiLao / maxPiLao;
             self.E_PiLaoTextText.text = userInfoComponentC.UserInfo.PiLao + "/" + maxPiLao;
-            self.E_BaoShiDuImgImage.fillAmount = (float)userInfoComponentC.UserInfo.BaoShiDu / ComHelp.GetMaxBaoShiDu();
-            self.E_BaoShiDuTextText.text = userInfoComponentC.UserInfo.BaoShiDu + "/" + ComHelp.GetMaxBaoShiDu();
+            self.E_BaoShiDuImgImage.fillAmount = (float)userInfoComponentC.UserInfo.BaoShiDu / CommonHelp.GetMaxBaoShiDu();
+            self.E_BaoShiDuTextText.text = userInfoComponentC.UserInfo.BaoShiDu + "/" + CommonHelp.GetMaxBaoShiDu();
 
             self.AddUIScrollItems(ref self.ScrollItemRolePropertyBaseItems, self.ShowPropertyList_Base.Count);
             self.E_RolePropertyBaseItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPropertyList_Base.Count);

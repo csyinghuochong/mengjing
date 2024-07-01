@@ -69,7 +69,7 @@ namespace ET.Client
                         .LoadAssetAsync<GameObject>(ABPathHelper.GetEffetPath("UIFightHintEffect"));
                 GameObject effect = UnityEngine.Object.Instantiate(prefab);
                 effect.GetComponent<UISizeFangDa>().Obj_Img = self.E_Btn_SkillStartButton.gameObject;
-                UICommonHelper.SetParent(effect, self.EG_FightEffectRectTransform.gameObject);
+                CommonViewHelper.SetParent(effect, self.EG_FightEffectRectTransform.gameObject);
             }
             else
             {

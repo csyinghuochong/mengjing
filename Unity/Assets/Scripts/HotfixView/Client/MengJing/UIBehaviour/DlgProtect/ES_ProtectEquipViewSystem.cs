@@ -41,7 +41,7 @@ namespace ET.Client
 
         public static void UpdateAttribute(this ES_ProtectEquip self, BagInfo bagInfo)
         {
-            UICommonHelper.DestoryChild(self.EG_EquipBaseSetListRectTransform.gameObject);
+            CommonViewHelper.DestoryChild(self.EG_EquipBaseSetListRectTransform.gameObject);
             if (!bagInfo.IfJianDing)
             {
                 BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();

@@ -37,7 +37,7 @@ namespace ET.Client
                 }
 
                 GameObject go = UnityEngine.Object.Instantiate(bundleGameObject);
-                UICommonHelper.SetParent(go, self.EG_ShoujiContentRectTransform.gameObject);
+                CommonViewHelper.SetParent(go, self.EG_ShoujiContentRectTransform.gameObject);
                 self.AddChild<UIShouJiChapterComponent, GameObject>(go).OnInitUI(shouJiConfigs[i]).Coroutine();
                 await self.Root().GetComponent<TimerComponent>().WaitAsync(200);
             }

@@ -125,7 +125,7 @@ namespace ET.Server
                 {
                     baotutype = 2;
                 }
-                int dropID2 = ComHelp.TreasureToDropID(dungeonid, roleLv, baotutype);
+                int dropID2 = CommonHelp.TreasureToDropID(dungeonid, roleLv, baotutype);
                 DropHelper.DropIDToDropItem_2(dropID2, rewardList);
             }
 

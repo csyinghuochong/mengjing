@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    public static class UICommonHelper
+    public static class CommonViewHelper
     {
         public static void DOScale(Transform transform, Vector3 vector3, float time)
         {

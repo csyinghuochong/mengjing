@@ -28,7 +28,7 @@ namespace ET.Server
             }          
            
             int openDay = unit.GetComponent<UserInfoComponentS>().GetCrateDay();
-            int index = ComHelp.GetWelfareDrawIndex( openDay );
+            int index = CommonHelp.GetWelfareDrawIndex( openDay );
 
             if (index == -1)
             {

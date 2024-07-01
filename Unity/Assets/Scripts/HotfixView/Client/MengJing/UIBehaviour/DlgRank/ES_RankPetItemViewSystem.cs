@@ -74,7 +74,7 @@ namespace ET.Client
         public static void OnInitUI(this ES_RankPetItem self, RankPetInfo rankPetInfo)
         {
             self.RankPetInfo = rankPetInfo;
-            if (!ComHelp.IfNull(rankPetInfo.TeamName))
+            if (!CommonHelp.IfNull(rankPetInfo.TeamName))
             {
                 self.E_Lab_TeamNameText.text = rankPetInfo.TeamName;
                 self.E_Lab_OwnerText.text = "";

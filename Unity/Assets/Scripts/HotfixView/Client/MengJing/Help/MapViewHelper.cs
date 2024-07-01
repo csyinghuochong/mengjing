@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    public static class UIMapHelper
+    public static class MapViewHelper
     {
         
         public static void OnMainHeroInit(Scene root, Transform topTf, Transform mainTf, int sceneTypeEnum)

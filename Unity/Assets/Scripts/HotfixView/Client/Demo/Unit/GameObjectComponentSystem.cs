@@ -478,7 +478,7 @@ namespace ET.Client
             switch (unit.Type)
             {
                 case UnitType.Player:
-                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
+                    CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
@@ -525,7 +525,7 @@ namespace ET.Client
                     if (unit.MainHero)
                     {
                         Transform topTf = unit.GetComponent<HeroTransformComponent>().GetTranform(PosType.Head).transform;
-                        UIMapHelper.OnMainHeroInit(unit.Root(), topTf, go.transform, mapComponent.SceneType);
+                        MapViewHelper.OnMainHeroInit(unit.Root(), topTf, go.transform, mapComponent.SceneType);
                     }
 
                     if (self.BianShenEffect)
@@ -536,7 +536,7 @@ namespace ET.Client
 
                     break;
                 case UnitType.Stall:
-                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
+                    CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     LayerHelp.ChangeLayer(go.transform, LayerEnum.Player);
@@ -547,7 +547,7 @@ namespace ET.Client
                     unit.AddComponent<UIStallHpComponent>(true);
                     break;
                 case UnitType.Monster:
-                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
+                    CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.transform.name = unit.Id.ToString();
@@ -636,7 +636,7 @@ namespace ET.Client
 
                     break;
                 case UnitType.Pet:
-                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
+                    CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.transform.name = unit.Id.ToString();
@@ -649,7 +649,7 @@ namespace ET.Client
                     LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
                     break;
                 case UnitType.Npc:
-                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
+                    CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     LayerHelp.ChangeLayer(go.transform, LayerEnum.NPC);
@@ -662,7 +662,7 @@ namespace ET.Client
                     unit.AddComponent<EffectViewComponent>();
                     break;
                 case UnitType.DropItem:
-                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
+                    CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.name = unit.Id.ToString();
@@ -671,7 +671,7 @@ namespace ET.Client
                     unit.AddComponent<UIDropComponent>().InitData(dropComponent.DropInfo);
                     break;
                 case UnitType.Chuansong:
-                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
+                    CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.name = unit.Id.ToString();
@@ -696,7 +696,7 @@ namespace ET.Client
                     unit.AddComponent<UITransferHpComponent>().OnInitUI(unit.ConfigId).Coroutine();
                     break;
                 case UnitType.JingLing:
-                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
+                    CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.transform.name = unit.Id.ToString();
@@ -707,7 +707,7 @@ namespace ET.Client
                     unit.AddComponent<UIJingLingHpComponent>(); //血条UI组件
                     break;
                 case UnitType.Pasture:
-                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
+                    CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     LayerHelp.ChangeLayer(go.transform, LayerEnum.Monster);
@@ -720,7 +720,7 @@ namespace ET.Client
                     unit.AddComponent<UIJiaYuanPastureComponent>(); //血条UI组件
                     break;
                 case UnitType.Plant:
-                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
+                    CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
                     go.transform.name = unit.Id.ToString();
@@ -729,7 +729,7 @@ namespace ET.Client
                     unit.AddComponent<JiaYuanPlanEffectComponent>();
                     break;
                 case UnitType.Bullet:
-                    UICommonHelper.SetParent(go, globalComponent.Unit.gameObject);
+                    CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.name = unit.Id.ToString();
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;

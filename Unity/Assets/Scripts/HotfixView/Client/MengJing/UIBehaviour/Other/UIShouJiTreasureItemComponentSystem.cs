@@ -91,8 +91,8 @@ namespace ET.Client
             int haveNumber = keyValuePairInt != null? (int)keyValuePairInt.Value : 0;
             self.TextNumber.GetComponent<Text>().text = $"激活:{haveNumber}/{shouJiItemConfig.AcitveNum}";
 
-            UICommonHelper.SetImageGray(self.Root(), self.UIItemComponent.E_ItemIconImage.gameObject, haveNumber == 0);
-            UICommonHelper.SetImageGray(self.Root(), self.UIItemComponent.E_ItemQualityImage.gameObject, haveNumber == 0);
+            CommonViewHelper.SetImageGray(self.Root(), self.UIItemComponent.E_ItemIconImage.gameObject, haveNumber == 0);
+            CommonViewHelper.SetImageGray(self.Root(), self.UIItemComponent.E_ItemQualityImage.gameObject, haveNumber == 0);
 
             bool actived = haveNumber >= shouJiItemConfig.AcitveNum;
 

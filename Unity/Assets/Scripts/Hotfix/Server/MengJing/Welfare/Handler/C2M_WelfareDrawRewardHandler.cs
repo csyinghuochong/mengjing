@@ -26,7 +26,7 @@ namespace ET.Server
             if (index == 7)
             { 
                 UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
-                int weaponId = ComHelp.GetWelfareWeapon( userInfoComponent.UserInfo.Occ, userInfoComponent.UserInfo.OccTwo );
+                int weaponId = CommonHelp.GetWelfareWeapon( userInfoComponent.UserInfo.Occ, userInfoComponent.UserInfo.OccTwo );
                 reward = $"{weaponId};1";
             }
 

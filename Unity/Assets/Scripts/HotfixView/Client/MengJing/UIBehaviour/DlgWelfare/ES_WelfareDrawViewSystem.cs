@@ -37,7 +37,7 @@ namespace ET.Client
                 if (i == 6)
                 {
                     UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-                    int weaponId = ComHelp.GetWelfareWeapon(userInfoComponent.UserInfo.Occ, userInfoComponent.UserInfo.OccTwo);
+                    int weaponId = CommonHelp.GetWelfareWeapon(userInfoComponent.UserInfo.Occ, userInfoComponent.UserInfo.OccTwo);
                     string reward = $"{weaponId};1";
                     rewardItems = ItemHelper.GetRewardItems(reward);
                 }
@@ -99,8 +99,8 @@ namespace ET.Client
                 {
                     GameObject uiItem = rewardList.transform.GetChild(j).gameObject;
 
-                    UICommonHelper.SetImageGray(self.Root(), uiItem.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemIcon"), true);
-                    UICommonHelper.SetImageGray(self.Root(), uiItem.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemQuality"), true);
+                    CommonViewHelper.SetImageGray(self.Root(), uiItem.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemIcon"), true);
+                    CommonViewHelper.SetImageGray(self.Root(), uiItem.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemQuality"), true);
                     uiItem.GetComponent<ReferenceCollector>().Get<GameObject>("Label_ItemName").SetActive(false);
                 }
 
@@ -202,8 +202,8 @@ namespace ET.Client
             {
                 GameObject uiItem = rewardList.transform.GetChild(j).gameObject;
 
-                UICommonHelper.SetImageGray(self.Root(), uiItem.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemIcon"), true);
-                UICommonHelper.SetImageGray(self.Root(), uiItem.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemQuality"), true);
+                CommonViewHelper.SetImageGray(self.Root(), uiItem.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemIcon"), true);
+                CommonViewHelper.SetImageGray(self.Root(), uiItem.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemQuality"), true);
                 uiItem.GetComponent<ReferenceCollector>().Get<GameObject>("Label_ItemName").SetActive(false);
             }
 

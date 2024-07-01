@@ -115,7 +115,7 @@ namespace ET.Client
             //显示名称
             self.View.E_Lab_MakeNameText.text = ItemConfigCategory.Instance.Get(equipMakeConfig.MakeItemID).ItemName;
             self.View.E_Lab_MakeNameText.color =
-                    UICommonHelper.QualityReturnColor(ItemConfigCategory.Instance.Get(equipMakeConfig.MakeItemID).ItemQuality);
+                    CommonViewHelper.QualityReturnColor(ItemConfigCategory.Instance.Get(equipMakeConfig.MakeItemID).ItemQuality);
             self.View.E_Lab_MakeNumText.text = equipMakeConfig.MakeEquipNum.ToString();
 
             //显示消耗活力

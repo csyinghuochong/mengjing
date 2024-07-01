@@ -66,7 +66,7 @@ namespace ET
             string[] attributeInfoList = prolist.Split('@');
             for (int a = 0; a < attributeInfoList.Length; a++)
             {
-                if (ComHelp.IfNull(attributeInfoList[a]))
+                if (CommonHelp.IfNull(attributeInfoList[a]))
                 {
                     continue;
                 }

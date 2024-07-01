@@ -81,7 +81,7 @@ namespace ET.Client
             }
 
             GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
-            UICommonHelper.SetParent(gameObject, globalComponent.Unit.gameObject);
+            CommonViewHelper.SetParent(gameObject, globalComponent.Unit.gameObject);
             gameObject.transform.localPosition = unit.Position;
             skillIndicatorItem.GameObject = gameObject;
             skillIndicatorItem.GameObject.SetActive(true);

@@ -23,7 +23,7 @@ namespace ET.Client
             self.E_Text_RankText.gameObject.SetActive(true);
             self.ES_RewardList.Refresh(rankRewardConfig.RewardItems, 0.9f);
 
-            UICommonHelper.HideChildren(self.EG_RankShowSetRectTransform);
+            CommonViewHelper.HideChildren(self.EG_RankShowSetRectTransform);
             if (rankRewardConfig.NeedPoint[0] == 1)
             {
                 self.E_Rank_1Image.gameObject.SetActive(true);

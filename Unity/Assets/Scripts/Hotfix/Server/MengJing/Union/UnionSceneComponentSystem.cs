@@ -249,7 +249,7 @@ namespace ET.Server
             if (dBUnionInfo != null)
             {
                 BroadMessageHelper.SendBroadMessage(self.Root(), NoticeType.Notice,
-                    $"恭喜 <color=#{ComHelp.QualityReturnColor(2)}>{dBUnionInfo.UnionInfo.UnionName}</color>家族占领了家族争霸赛地图!");
+                    $"恭喜 <color=#{CommonHelp.QualityReturnColor(2)}>{dBUnionInfo.UnionInfo.UnionName}</color>家族占领了家族争霸赛地图!");
             }
         }
 

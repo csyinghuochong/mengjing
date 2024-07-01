@@ -70,7 +70,7 @@ namespace ET.Client
                 return;
             }
 
-            UICommonHelper.HideChildren(self.View.EG_SubViewNodeRectTransform);
+            CommonViewHelper.HideChildren(self.View.EG_SubViewNodeRectTransform);
 
             switch (index)
             {

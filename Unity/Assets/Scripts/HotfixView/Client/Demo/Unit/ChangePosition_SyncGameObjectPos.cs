@@ -25,7 +25,7 @@ namespace ET.Client
             {
                 EventSystem.Instance.Publish(scene.Root(), new DataUpdate_MainHeroMove());
 
-                UIMapHelper.OnMainHeroMove(unit);
+                MapViewHelper.OnMainHeroMove(unit);
             }
 
             await ETTask.CompletedTask;

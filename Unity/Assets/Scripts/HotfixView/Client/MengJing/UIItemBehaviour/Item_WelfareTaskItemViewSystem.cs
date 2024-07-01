@@ -30,7 +30,7 @@ namespace ET.Client
             self.E_TaskNameTextText.text = taskConfig.TaskName;
             self.E_TaskDescTextText.text = taskConfig.TaskDes;
 
-            if (!ComHelp.IfNull(taskConfig.ItemID))
+            if (!CommonHelp.IfNull(taskConfig.ItemID))
             {
                 List<RewardItem> rewardItems = new List<RewardItem>();
 

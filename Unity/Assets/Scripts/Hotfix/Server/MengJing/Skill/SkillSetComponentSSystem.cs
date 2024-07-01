@@ -300,7 +300,7 @@ namespace ET.Server
                 }
 
                 string GameObjectParameter = skillConfig.GameObjectParameter;
-                if (ComHelp.IfNull(GameObjectParameter))
+                if (CommonHelp.IfNull(GameObjectParameter))
                 {
                     continue;
                 }
@@ -353,7 +353,7 @@ namespace ET.Server
                 }
 
                 string GameObjectParameter = skillConfig.GameObjectParameter;
-                if (ComHelp.IfNull(GameObjectParameter))
+                if (CommonHelp.IfNull(GameObjectParameter))
                 {
                     continue;
                 }

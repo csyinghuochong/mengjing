@@ -257,7 +257,7 @@ namespace ET.Server
 
 			for (int i = 0; i < monsters.Length; i++)
 			{
-				if (ComHelp.IfNull(monsters[i]))
+				if (CommonHelp.IfNull(monsters[i]))
 				{
 					continue;
 				}
@@ -305,7 +305,7 @@ namespace ET.Server
 
 		public static void CreateMonsterList(Scene scene, string createMonster)
 		{
-			if (ComHelp.IfNull(createMonster))
+			if (CommonHelp.IfNull(createMonster))
 			{
 				return;
 			}
@@ -319,7 +319,7 @@ namespace ET.Server
 
 			for (int i = 0; i < monsters.Length; i++)
 			{
-				if (ComHelp.IfNull(monsters[i]))
+				if (CommonHelp.IfNull(monsters[i]))
 				{
 					continue;
 				}

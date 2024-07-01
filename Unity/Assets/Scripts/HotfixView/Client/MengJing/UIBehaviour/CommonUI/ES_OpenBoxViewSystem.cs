@@ -103,7 +103,7 @@ namespace ET.Client
             if (itemneeds.Length > 2 && !bagComponent.CheckNeedItem(itemneeds))
             {
                 self.uiTransform.gameObject.SetActive(false);
-                FlyTipComponent.Instance.ShowFlyTipDi($"道具不足，需要道具 {UICommonHelper.GetNeedItemDesc(itemneeds)}！");
+                FlyTipComponent.Instance.ShowFlyTipDi($"道具不足，需要道具 {CommonViewHelper.GetNeedItemDesc(itemneeds)}！");
                 return;
             }
 

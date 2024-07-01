@@ -56,7 +56,7 @@ namespace ET.Server
                 }
             });
 
-            int maxnumber = Math.Min(rankSeasonTower.Count, ComHelp.RankNumber);
+            int maxnumber = Math.Min(rankSeasonTower.Count, CommonHelp.RankNumber);
             rankSceneComponent.DBRankInfo.rankSeasonTower = rankSeasonTower.GetRange(0, maxnumber);
             response.RankId = rankSceneComponent.GetSeasonTowerRank(request.RankingInfo.KeyId);
             await ETTask.CompletedTask;

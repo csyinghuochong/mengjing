@@ -42,8 +42,8 @@ namespace ET.Client
             bool have = shoujiComponent.HaveShouJiItem(chapterId, shouJiItemConfig.ItemID);
             self.Label_HaveTag.GetComponent<Text>().text = have? "已拥有" : "未拥有";
             self.Label_HaveTag.GetComponent<Text>().color = have? Color.green : Color.white;
-            UICommonHelper.SetImageGray(self.Root(), self.Image_ItemIcon, !have);
-            UICommonHelper.SetImageGray(self.Root(), self.Image_ItemQuality, !have);
+            CommonViewHelper.SetImageGray(self.Root(), self.Image_ItemIcon, !have);
+            CommonViewHelper.SetImageGray(self.Root(), self.Image_ItemQuality, !have);
         }
     }
 }

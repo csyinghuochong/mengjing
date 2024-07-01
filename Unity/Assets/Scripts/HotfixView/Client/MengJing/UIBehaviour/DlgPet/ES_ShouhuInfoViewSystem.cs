@@ -84,22 +84,22 @@ namespace ET.Client
             {
                 case 0:
                     self.E_Text_AttriText.text =
-                            "暴击率附加" + (ComHelp.GetPetShouHuPro(rolePetInfo.PetPingFen, fightNum) * 100).ToString("F2") + "%";
+                            "暴击率附加" + (CommonHelp.GetPetShouHuPro(rolePetInfo.PetPingFen, fightNum) * 100).ToString("F2") + "%";
                     break;
 
                 case 1:
                     self.E_Text_AttriText.text =
-                            "抗暴率附加" + (ComHelp.GetPetShouHuPro(rolePetInfo.PetPingFen, fightNum) * 100).ToString("F2") + "%";
+                            "抗暴率附加" + (CommonHelp.GetPetShouHuPro(rolePetInfo.PetPingFen, fightNum) * 100).ToString("F2") + "%";
                     break;
 
                 case 2:
                     self.E_Text_AttriText.text =
-                            "命中率附加" + (ComHelp.GetPetShouHuPro(rolePetInfo.PetPingFen, fightNum) * 100).ToString("F2") + "%";
+                            "命中率附加" + (CommonHelp.GetPetShouHuPro(rolePetInfo.PetPingFen, fightNum) * 100).ToString("F2") + "%";
                     break;
 
                 case 3:
                     self.E_Text_AttriText.text =
-                            "闪避率附加" + (ComHelp.GetPetShouHuPro(rolePetInfo.PetPingFen, fightNum) * 100).ToString("F2") + "%";
+                            "闪避率附加" + (CommonHelp.GetPetShouHuPro(rolePetInfo.PetPingFen, fightNum) * 100).ToString("F2") + "%";
                     break;
             }
         }

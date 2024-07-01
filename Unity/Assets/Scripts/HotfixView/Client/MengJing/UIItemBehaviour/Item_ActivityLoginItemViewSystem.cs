@@ -65,7 +65,7 @@ namespace ET.Client
             }
 
             ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
-            if (ComHelp.GetDayByTime(activityComponent.LastLoginTime) == ComHelp.GetDayByTime(TimeHelper.ServerNow()))
+            if (CommonHelp.GetDayByTime(activityComponent.LastLoginTime) == CommonHelp.GetDayByTime(TimeHelper.ServerNow()))
             {
                 FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.LoadLocalization("今天的奖励已领取"));
                 return;

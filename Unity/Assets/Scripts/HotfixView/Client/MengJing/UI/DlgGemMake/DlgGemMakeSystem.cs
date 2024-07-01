@@ -111,7 +111,7 @@ namespace ET.Client
             //显示名称
             self.View.E_Lab_MakeNameText.text = ItemConfigCategory.Instance.Get(equipMakeConfig.MakeItemID).ItemName;
             self.View.E_Lab_MakeNameText.color =
-                    UICommonHelper.QualityReturnColor(ItemConfigCategory.Instance.Get(equipMakeConfig.MakeItemID).ItemQuality);
+                    CommonViewHelper.QualityReturnColor(ItemConfigCategory.Instance.Get(equipMakeConfig.MakeItemID).ItemQuality);
             self.View.E_Lab_MakeNumText.text = equipMakeConfig.MakeEquipNum.ToString();
 
             //显示消耗活力
@@ -172,7 +172,7 @@ namespace ET.Client
                     if (self.ScrollItemMakeItems[k].uiTransform != null && self.ScrollItemMakeItems[k].MakeID == makeid)
                     {
                         self.View.E_ImageSelectImage.gameObject.SetActive(true);
-                        UICommonHelper.SetParent(self.View.E_ImageSelectImage.gameObject, self.ScrollItemMakeItems[k].uiTransform.gameObject);
+                        CommonViewHelper.SetParent(self.View.E_ImageSelectImage.gameObject, self.ScrollItemMakeItems[k].uiTransform.gameObject);
                         self.View.E_ImageSelectImage.transform.localPosition = new Vector3(0f, 12f, 0f);
                         break;
                     }

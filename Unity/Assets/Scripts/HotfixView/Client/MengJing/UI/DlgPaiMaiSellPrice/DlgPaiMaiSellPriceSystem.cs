@@ -105,7 +105,7 @@ namespace ET.Client
             }
 
             PaiMaiItemInfo paiMaiItemInfo = new();
-            paiMaiItemInfo.BagInfo = ComHelp.DeepCopy(self.BagInfo);
+            paiMaiItemInfo.BagInfo = CommonHelp.DeepCopy(self.BagInfo);
             paiMaiItemInfo.BagInfo.ItemNum = self.SellNum;
             paiMaiItemInfo.Price = self.nowPrice;
             DlgPaiMai dlgPaiMai = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPaiMai>();
@@ -139,7 +139,7 @@ namespace ET.Client
             {
                 long paimaiItemId = response.PaiMaiItemInfo.Id;
                 string text =
-                        $"在拍卖行上架道具<color=#{ComHelp.QualityReturnColor(4)}>{itemConfig.ItemName}</color>！<color=#00FF00>点击前往拍卖行 </color><link=paimai_{itemConfig.ItemType}_{paimaiItemId}></link>";
+                        $"在拍卖行上架道具<color=#{CommonHelp.QualityReturnColor(4)}>{itemConfig.ItemName}</color>！<color=#00FF00>点击前往拍卖行 </color><link=paimai_{itemConfig.ItemType}_{paimaiItemId}></link>";
                 ChatNetHelper.RequestSendChat(self.Root(), ChannelEnum.PaiMai, text).Coroutine();
             }
 

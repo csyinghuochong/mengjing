@@ -151,7 +151,7 @@ namespace ET.Client
                     {
                         GameObject goitem = UnityEngine.Object.Instantiate(go);
                         goitem.SetActive(true);
-                        UICommonHelper.SetParent(goitem, self.View.E_TaskFubenItemsLoopVerticalScrollRect.transform.Find("Content").gameObject);
+                        CommonViewHelper.SetParent(goitem, self.View.E_TaskFubenItemsLoopVerticalScrollRect.transform.Find("Content").gameObject);
                         Scroll_Item_TaskFubenItem uIBuChangItem = self.AddChild<Scroll_Item_TaskFubenItem>();
                         uIBuChangItem.uiTransform = goitem.transform;
                         uIBuChangItem.OnInitUI_2((long userid) => { self.OnClickBuChangItem(userid); }, buchangNumber);
@@ -162,7 +162,7 @@ namespace ET.Client
                         {
                             GameObject goitem = UnityEngine.Object.Instantiate(go);
                             goitem.SetActive(true);
-                            UICommonHelper.SetParent(goitem, self.View.E_TaskFubenItemsLoopVerticalScrollRect.transform.Find("Content").gameObject);
+                            CommonViewHelper.SetParent(goitem, self.View.E_TaskFubenItemsLoopVerticalScrollRect.transform.Find("Content").gameObject);
                             Scroll_Item_TaskFubenItem uIBuChangItem = self.AddChild<Scroll_Item_TaskFubenItem>();
                             uIBuChangItem.uiTransform = goitem.transform;
                             uIBuChangItem.OnInitUI((long userid) => { self.OnClickBuChangItem(userid); }, accountInfo.PlayerInfo.DeleteUserList[i]);

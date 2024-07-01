@@ -34,7 +34,7 @@ namespace ET.Client
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.View.EG_SkillIconItemRectTransform.gameObject);
                 go.SetActive(false);
-                UICommonHelper.SetParent(go, self.View.EG_SkillIPositionSetLeftRectTransform.GetChild(i).gameObject);
+                CommonViewHelper.SetParent(go, self.View.EG_SkillIPositionSetLeftRectTransform.GetChild(i).gameObject);
                 self.SkillSetIconLeftList.Add(go);
                 int i1 = i;
                 // itemgo.GetComponentInChildren<Button>().onClick.AddListener(() => { self.OnClick(i1); });
@@ -56,7 +56,7 @@ namespace ET.Client
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.View.EG_SkillIconItemRectTransform.gameObject);
                 go.SetActive(false);
-                UICommonHelper.SetParent(go, self.View.EG_SkillIPositionSetRightRectTransform.GetChild(i).gameObject);
+                CommonViewHelper.SetParent(go, self.View.EG_SkillIPositionSetRightRectTransform.GetChild(i).gameObject);
                 self.SkillSetIconRightList.Add(go);
                 int i1 = i;
                 ReferenceCollector rc = go.GetComponent<ReferenceCollector>();

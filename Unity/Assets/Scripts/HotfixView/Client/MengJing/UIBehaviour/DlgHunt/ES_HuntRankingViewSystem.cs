@@ -69,7 +69,7 @@ namespace ET.Client
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.EG_UIHuntRankingPlayerInfoItemRectTransform.gameObject);
                 go.SetActive(true);
-                UICommonHelper.SetParent(go, self.EG_HuntRankingListNodeRectTransform.gameObject);
+                CommonViewHelper.SetParent(go, self.EG_HuntRankingListNodeRectTransform.gameObject);
                 ReferenceCollector rc = go.GetComponent<ReferenceCollector>();
                 rc.Get<GameObject>("NameText").GetComponent<Text>().text = $"   {i + 1}    {response.RankList[i].PlayerName}";
                 rc.Get<GameObject>("HuntNumText").GetComponent<Text>().text = $"狩猎数量:{response.RankList[i].KillNumber}";

@@ -94,8 +94,8 @@ namespace ET.Client
                 self.E_Lab_PetNameText.text = rolePetInfo.PetName;
                 self.E_Lab_PetLvText.text = rolePetInfo.PetLv.ToString() + GameSettingLanguge.LoadLocalization("级");
 
-                self.E_Lab_PetQualityText.text = UICommonHelper.GetPetQualityName(petConfig.PetQuality);
-                self.E_Lab_PetQualityText.color = UICommonHelper.QualityReturnColor(petConfig.PetQuality);
+                self.E_Lab_PetQualityText.text = CommonViewHelper.GetPetQualityName(petConfig.PetQuality);
+                self.E_Lab_PetQualityText.color = CommonViewHelper.QualityReturnColor(petConfig.PetQuality);
 
                 self.E_Lab_StatusText.text = rolePetInfo.PetStatus == 2? "散步中..." : String.Empty;
 

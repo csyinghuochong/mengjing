@@ -158,7 +158,7 @@ namespace ET.Client
 
             int zone = self.Root().GetComponent<PlayerComponent>().ServerId;
             int openDay = ServerHelper.GetOpenServerDay(false, zone);
-            float coffi = ComHelp.GetMineCoefficient(openDay, mineType, position, uIPetMining.PetMineExtend);
+            float coffi = CommonHelp.GetMineCoefficient(openDay, mineType, position, uIPetMining.PetMineExtend);
             int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi);
 
             self.View.E_Text_chanchuText.text = $"产出:{chanchu}小时";

@@ -570,7 +570,7 @@ namespace ET
                     if (hintProValueType == 1)
                     {
                         //表示整数
-                        hintProVlaue = ComHelp.ReturnEquipRamdomValue((int)(propertyValueMin), (int)(propertyValueMax));
+                        hintProVlaue = CommonHelp.ReturnEquipRamdomValue((int)(propertyValueMin), (int)(propertyValueMax));
                         if (hintProVlaue <= 0)
                         {
                             hintProVlaue = propertyValueMin;
@@ -579,7 +579,7 @@ namespace ET
                     else
                     {
                         //表示浮点数
-                        hintProVlaue = ComHelp.ReturnEquipRamdomValue_float(propertyValueMin, propertyValueMax);
+                        hintProVlaue = CommonHelp.ReturnEquipRamdomValue_float(propertyValueMin, propertyValueMax);
                         if (hintProVlaue <= 0)
                         {
                             hintProVlaue = propertyValueMin;
@@ -690,7 +690,7 @@ namespace ET
                         {
                             //获取随机范围,并随机获取一个值
                             int hideMaxStr = equipConfig.HideMax;
-                            int addValue = ComHelp.ReturnEquipRamdomValue(1, hideMaxStr, bagInfo.HideID);
+                            int addValue = CommonHelp.ReturnEquipRamdomValue(1, hideMaxStr, bagInfo.HideID);
                             BaseHideProList.Add(new HideProList() { HideID = returnProValue(i), HideValue = addValue });
                         }
                     }
@@ -712,7 +712,7 @@ namespace ET
                             {
                                 hideMaxStr = hideMaxStr * 5;
                             }
-                            int addValue = ComHelp.ReturnEquipRamdomValue(1, hideMaxStr, bagInfo.HideID);
+                            int addValue = CommonHelp.ReturnEquipRamdomValue(1, hideMaxStr, bagInfo.HideID);
                             BaseHideProList.Add(new HideProList() { HideID = returnProValue(i), HideValue = addValue });
                         }
                     }
@@ -733,7 +733,7 @@ namespace ET
                             {
                                 hideMaxStr = hideMaxStr * 5;
                             }
-                            int addValue = ComHelp.ReturnEquipRamdomValue(1, hideMaxStr, bagInfo.HideID);
+                            int addValue = CommonHelp.ReturnEquipRamdomValue(1, hideMaxStr, bagInfo.HideID);
                             BaseHideProList.Add(new HideProList() { HideID = returnProValue(i), HideValue = addValue });
                         }
                     }
@@ -844,7 +844,7 @@ namespace ET
                             if (hintProValueType == 1)
                             {
                                 //表示整数
-                                hintProVlaue = ComHelp.ReturnEquipRamdomValue((int)propertyValueMin, (int)(propertyValueMax), bagInfo.HideID);
+                                hintProVlaue = CommonHelp.ReturnEquipRamdomValue((int)propertyValueMin, (int)(propertyValueMax), bagInfo.HideID);
                                 if (hintProVlaue <= 0)
                                 {
                                     hintProVlaue = propertyValueMin;
@@ -853,7 +853,7 @@ namespace ET
                             else
                             {
                                 //表示浮点数
-                                hintProVlaue = ComHelp.ReturnEquipRamdomValue_float(propertyValueMin, propertyValueMax);
+                                hintProVlaue = CommonHelp.ReturnEquipRamdomValue_float(propertyValueMin, propertyValueMax);
                                 if (hintProVlaue <= 0)
                                 {
                                     hintProVlaue = propertyValueMin;

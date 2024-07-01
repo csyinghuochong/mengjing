@@ -116,23 +116,23 @@ namespace ET.Client
             //释放者是怪物,那么就显示怪物的头像Icon,最后还是没找到显示默认图标b001
             string aBAtlasTypes = ABAtlasTypes.RoleSkillIcon;
 
-            if (!ComHelp.IfNull(bufficon) && skillBuffConfig.BuffIconType.Equals("ItemIcon"))
+            if (!CommonHelp.IfNull(bufficon) && skillBuffConfig.BuffIconType.Equals("ItemIcon"))
             {
                 aBAtlasTypes = ABAtlasTypes.ItemIcon;
             }
 
-            if (ComHelp.IfNull(bufficon) && buffHandler.BuffData.SkillId != 0)
+            if (CommonHelp.IfNull(bufficon) && buffHandler.BuffData.SkillId != 0)
             {
                 bufficon = SkillConfigCategory.Instance.Get(buffHandler.BuffData.SkillId).SkillIcon;
             }
 
-            if (ComHelp.IfNull(bufficon) && buffHandler.BuffData.UnitType == UnitType.Monster)
+            if (CommonHelp.IfNull(bufficon) && buffHandler.BuffData.UnitType == UnitType.Monster)
             {
                 aBAtlasTypes = ABAtlasTypes.MonsterIcon;
                 bufficon = MonsterConfigCategory.Instance.Get(buffHandler.BuffData.UnitConfigId).MonsterHeadIcon;
             }
 
-            if (ComHelp.IfNull(bufficon))
+            if (CommonHelp.IfNull(bufficon))
             {
                 bufficon = "b001";
             }

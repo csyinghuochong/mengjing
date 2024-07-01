@@ -164,11 +164,11 @@ namespace ET.Client
             if (skillBaseConfig.SkillLv == 0)
             {
                 self.E_Lab_SkillLvText.text = $"{skillBaseConfig.LearnRoseLv}级以后学习";
-                UICommonHelper.SetImageGray(self.Root(), self.E_Img_SkillIconImage.gameObject, true);
+                CommonViewHelper.SetImageGray(self.Root(), self.E_Img_SkillIconImage.gameObject, true);
             }
             else
             {
-                UICommonHelper.SetImageGray(self.Root(), self.E_Img_SkillIconImage.gameObject, false);
+                CommonViewHelper.SetImageGray(self.Root(), self.E_Img_SkillIconImage.gameObject, false);
             }
 
             self.OnUpdateSkillInfo(baseskill);

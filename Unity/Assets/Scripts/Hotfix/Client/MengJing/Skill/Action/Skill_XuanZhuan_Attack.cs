@@ -25,7 +25,7 @@ namespace ET.Client
             {
                 skils.PlaySkillEffects(skils.TargetPosition, starAngle + i * delta);
 
-                SkillInfo skillInfo = ComHelp.DeepCopy<SkillInfo>(skils.SkillInfo);
+                SkillInfo skillInfo = CommonHelp.DeepCopy<SkillInfo>(skils.SkillInfo);
                 skillInfo.TargetAngle = starAngle + i * delta;
                 skils.OnShowSkillIndicator(skillInfo);
             }

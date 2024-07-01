@@ -136,7 +136,7 @@ namespace ET.Client
             TalentConfig talentConfig = TalentConfigCategory.Instance.Get(tianfuId);
 
             string[] descList = talentConfig.talentDes.Split(';');
-            UICommonHelper.DestoryChild(self.EG_DescListNodeRectTransform.gameObject);
+            CommonViewHelper.DestoryChild(self.EG_DescListNodeRectTransform.gameObject);
             for (int i = 0; i < descList.Length; i++)
             {
                 if (string.IsNullOrEmpty(descList[i]))
@@ -145,7 +145,7 @@ namespace ET.Client
                 }
 
                 GameObject gameObject = UnityEngine.Object.Instantiate(self.E_TextDesc1Text.gameObject);
-                UICommonHelper.SetParent(gameObject, self.EG_DescListNodeRectTransform.gameObject);
+                CommonViewHelper.SetParent(gameObject, self.EG_DescListNodeRectTransform.gameObject);
                 gameObject.SetActive(true);
                 gameObject.GetComponent<Text>().text = descList[i];
                 gameObject.GetComponent<Text>().text = gameObject.GetComponent<Text>().text.Replace("\\n", "\n");
@@ -173,7 +173,7 @@ namespace ET.Client
                 if (index >= 0)
                 {
                     self.E_ImageSelectImage.gameObject.SetActive(true);
-                    UICommonHelper.SetParent(self.E_ImageSelectImage.gameObject, uISkillTianFuItem.GetKuangByIndex(index));
+                    CommonViewHelper.SetParent(self.E_ImageSelectImage.gameObject, uISkillTianFuItem.GetKuangByIndex(index));
                 }
             }
         }

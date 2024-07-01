@@ -42,7 +42,7 @@ namespace ET.Server
             }
 
             //增加属性
-            float addFloat = ComHelp.GetPetShouHuPro(nowNum,fightNum);
+            float addFloat = CommonHelp.GetPetShouHuPro(nowNum,fightNum);
             PropertyValue hide = new PropertyValue();
             hide.HideID = int.Parse(ConfigHelper.PetShouHuAttri()[self.PetShouHuActive - 1].Value2);
             hide.HideValue = (long)(addFloat * 10000);
@@ -481,7 +481,7 @@ namespace ET.Server
             }
             //80001010,01;80001014,0.1;80001015.1
 
-            if (!ComHelp.IfNull(randomSkillID))
+            if (!CommonHelp.IfNull(randomSkillID))
             {
                 string[] randomSkillList = randomSkillID.Split(';');
                 for (int i = 0; i < randomSkillList.Length; i++)
@@ -1027,7 +1027,7 @@ namespace ET.Server
 
             //宠物之核套装属性
             string petheXinPro = ConfigHelper.GetPetSuitProperty(petheXinLv);
-            if (!ComHelp.IfNull(petheXinPro))
+            if (!CommonHelp.IfNull(petheXinPro))
             {
                 string[] attriList = petheXinPro.Split(';');
                 for (int a = 0; a < attriList.Length; a++)
@@ -1075,7 +1075,7 @@ namespace ET.Server
                 Log.Warning($"rolePetInfo.SkinId:  {rolePetInfo.SkinId}");
             }
             PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
-            if (!ComHelp.IfNull(petSkinConfig.PripertySet))
+            if (!CommonHelp.IfNull(petSkinConfig.PripertySet))
             {
                 string[] attriList = petSkinConfig.PripertySet.Split(';');
                 for (int a = 0; a < attriList.Length; a++)
@@ -1109,7 +1109,7 @@ namespace ET.Server
             for (int i = 0; i < rolePetInfo.PetSkill.Count; i++)
             {
                 SkillConfig skillCof = SkillConfigCategory.Instance.Get(rolePetInfo.PetSkill[i]);
-                if (ComHelp.IfNull(skillCof.GameObjectParameter))
+                if (CommonHelp.IfNull(skillCof.GameObjectParameter))
                 {
                     continue;
                 }

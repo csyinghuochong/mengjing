@@ -190,7 +190,7 @@ namespace ET.Client
                     {
                         GameObject obj = UnityEngine.Object.Instantiate(self.E_SkillDescriptionItemTextText.gameObject);
                         obj.SetActive(true);
-                        UICommonHelper.SetParent(obj, self.EG_SkillDescriptionListNodeRectTransform.gameObject);
+                        CommonViewHelper.SetParent(obj, self.EG_SkillDescriptionListNodeRectTransform.gameObject);
                         self.SkillDescriptionList.Add(obj);
                         obj.GetComponent<RectTransform>().sizeDelta = new Vector2(750, height);
                         obj.GetComponent<Text>().text = str;

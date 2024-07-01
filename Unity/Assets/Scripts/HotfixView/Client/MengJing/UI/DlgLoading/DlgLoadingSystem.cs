@@ -76,7 +76,7 @@ namespace ET.Client
                     // }
 
                     SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(chapterId);
-                    loadResName = !ComHelp.IfNull(sceneConfig.LoadingRes)? sceneConfig.LoadingRes : "MainCity";
+                    loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes)? sceneConfig.LoadingRes : "MainCity";
                     break;
                 case (int)SceneTypeEnum.CellDungeon:
                     loadResName = backpngs[index];
@@ -96,7 +96,7 @@ namespace ET.Client
                 case (int)SceneTypeEnum.Arena:
                     loadResName = backpngs[index];
                     sceneConfig = SceneConfigCategory.Instance.Get(chapterId);
-                    loadResName = !ComHelp.IfNull(sceneConfig.LoadingRes)? sceneConfig.LoadingRes : "MainCity";
+                    loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes)? sceneConfig.LoadingRes : "MainCity";
                     self.PreLoadAssets.AddRange(self.GetRoleSkillEffect());
                     self.PreLoadAssets.AddRange(self.GetSceneDungeonMonsters());
                     break;

@@ -24,7 +24,7 @@ namespace ET.Client
 
             self.TaskPro = taskPro;
             TaskCountryConfig taskConfig = TaskCountryConfigCategory.Instance.Get(taskPro.taskID);
-            if (!ComHelp.IfNull(taskConfig.RewardItem))
+            if (!CommonHelp.IfNull(taskConfig.RewardItem))
             {
                 self.ES_RewardList.Refresh(taskConfig.RewardItem, 0.8f);
             }

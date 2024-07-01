@@ -454,7 +454,7 @@ namespace ET.Client
 
         public static int GetPetHeXinLeftSpace(this BagComponentC self)
         {
-            return ComHelp.PetHeXinMax - self.GetItemsByLoc(ItemLocType.ItemPetHeXinBag).Count;
+            return CommonHelp.PetHeXinMax - self.GetItemsByLoc(ItemLocType.ItemPetHeXinBag).Count;
         }
     }
 }

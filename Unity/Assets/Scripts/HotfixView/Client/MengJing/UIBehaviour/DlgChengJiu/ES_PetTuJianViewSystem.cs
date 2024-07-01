@@ -70,7 +70,7 @@ namespace ET.Client
                         row += commonPetNum % 4 > 0? 1 : 0;
                         self.EG_CommonPetListRectTransform.sizeDelta = new Vector2(713f, 150f + row * 160f);
 
-                        UICommonHelper.SetParent(go,
+                        CommonViewHelper.SetParent(go,
                             self.EG_CommonPetListRectTransform.GetComponent<ReferenceCollector>().Get<GameObject>("ItemNode"));
                     }
                     else
@@ -80,7 +80,7 @@ namespace ET.Client
                         row += godPetNum % 4 > 0? 1 : 0;
                         self.EG_GodPetListRectTransform.sizeDelta = new Vector2(713f, 150f + row * 160f);
 
-                        UICommonHelper.SetParent(go, self.EG_GodPetListRectTransform.GetComponent<ReferenceCollector>().Get<GameObject>("ItemNode"));
+                        CommonViewHelper.SetParent(go, self.EG_GodPetListRectTransform.GetComponent<ReferenceCollector>().Get<GameObject>("ItemNode"));
                     }
 
                     uIPetTuJianItem = self.AddChild<Scroll_Item_PetTuJianItem>();
@@ -202,7 +202,7 @@ namespace ET.Client
             string[] baseskill = petConfig.BaseSkillID.Split(';');
             for (int i = 0; i < baseskill.Length; i++)
             {
-                if (ComHelp.IfNull(baseskill[i]))
+                if (CommonHelp.IfNull(baseskill[i]))
                 {
                     continue;
                 }
@@ -215,7 +215,7 @@ namespace ET.Client
             }
 
             string randomSkillID = petConfig.RandomSkillID;
-            if (!ComHelp.IfNull(randomSkillID))
+            if (!CommonHelp.IfNull(randomSkillID))
             {
                 string[] randomSkillList = randomSkillID.Split(';');
                 for (int i = 0; i < randomSkillList.Length; i++)

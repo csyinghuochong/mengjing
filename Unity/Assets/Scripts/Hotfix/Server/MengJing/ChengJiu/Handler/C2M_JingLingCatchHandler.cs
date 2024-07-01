@@ -33,7 +33,7 @@ namespace ET.Server
                 }
             }
 
-            int gailv = ComHelp.GetZhuPuGaiLv(zhupuUnit.ConfigId, request.ItemId, int.Parse(request.OperateType));
+            int gailv = CommonHelp.GetZhuPuGaiLv(zhupuUnit.ConfigId, request.ItemId, int.Parse(request.OperateType));
             if (RandomHelper.RandFloat01() <= gailv * 0.0001f)
             {
                 response.Message = String.Empty;

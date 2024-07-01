@@ -68,7 +68,7 @@ namespace ET.Client
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.UIPaiMaiShopType);
                 go.SetActive(true);
-                UICommonHelper.SetParent(go, self.EG_TypeListNodeRectTransform.gameObject);
+                CommonViewHelper.SetParent(go, self.EG_TypeListNodeRectTransform.gameObject);
 
                 UIPaiMaiShopTypeComponent itemComponent = self.AddChild<UIPaiMaiShopTypeComponent, GameObject>(go);
                 itemComponent.OnUpdateData(i);

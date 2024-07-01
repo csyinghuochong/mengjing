@@ -178,7 +178,7 @@ namespace ET.Client
                     self.PetOccupyItemList.Add(gameObject);
                 }
 
-                UICommonHelper.SetParent(gameObject, self.E_BuildingList.gameObject);
+                CommonViewHelper.SetParent(gameObject, self.E_BuildingList.gameObject);
                 Image Image_ItemIcon = gameObject.transform.Find("Image_ItemIcon").GetComponent<Image>();
 
                 MineBattleConfig mineBattleConfig = MineBattleConfigCategory.Instance.Get(petMingPlayers[i].MineType);
@@ -187,7 +187,7 @@ namespace ET.Client
 
                 Image_ItemIcon.sprite = sp;
 
-                float coffi = ComHelp.GetMineCoefficient(openDay, petMingPlayers[i].MineType, petMingPlayers[i].Postion, self.PetMineExtend);
+                float coffi = CommonHelp.GetMineCoefficient(openDay, petMingPlayers[i].MineType, petMingPlayers[i].Postion, self.PetMineExtend);
 
                 int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi);
                 chatchun += chanchu;
@@ -249,11 +249,11 @@ namespace ET.Client
                     GameObject gameObject = GameObject.Instantiate(self.E_PetMiningItem.gameObject);
                     gameObject.SetActive(true);
                     uIPetMiningItem = self.AddChild<ES_PetMiningItem, Transform>(gameObject.transform);
-                    UICommonHelper.SetParent(gameObject, self.E_PetMiningNode.gameObject);
+                    CommonViewHelper.SetParent(gameObject, self.E_PetMiningNode.gameObject);
                     self.PetMiningItemList.Add(uIPetMiningItem);
                 }
 
-                bool hexin = ComHelp.IsHexinMine(mineType, i, self.PetMineExtend);
+                bool hexin = CommonHelp.IsHexinMine(mineType, i, self.PetMineExtend);
 
                 PetMingPlayerInfo petMingPlayerInfo = self.GetPetMingPlayerInfos(mineType, i);
                 uIPetMiningItem.uiTransform.GetComponent<RectTransform>().anchoredPosition = new Vector3(miningItems[i].X, miningItems[i].Y, 0f);

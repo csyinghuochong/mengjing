@@ -392,7 +392,7 @@ namespace ET.Client
                     self.SkillMoveTime = skillRigibTime;
                 }
 
-                if (!ComHelp.IfNull(skillConfig.SkillAnimation))
+                if (!CommonHelp.IfNull(skillConfig.SkillAnimation))
                 {
                     int fsmType = skillConfig.ComboSkillID > 0? 5 : 4;
                     if (ConfigData.NotCombatSkill.Contains(skillConfig.SkillAnimation))

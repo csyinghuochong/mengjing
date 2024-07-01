@@ -101,18 +101,18 @@ namespace ET.Client
                     self.E_EquipingedImage.gameObject.SetActive(false);
                     self.E_Btn_ActiveButton.gameObject.SetActive(true);
                     self.E_Btn_ActiveButton.transform.Find("Text").GetComponent<Text>().text = "激活";
-                    UICommonHelper.SetRawImageGray(self.Root(), self.ES_ModelShow.E_RenderRawImage.gameObject, true);
+                    CommonViewHelper.SetRawImageGray(self.Root(), self.ES_ModelShow.E_RenderRawImage.gameObject, true);
                     break;
                 case 1:
                     self.E_EquipingedImage.gameObject.SetActive(false);
                     self.E_Btn_ActiveButton.gameObject.SetActive(true);
                     self.E_Btn_ActiveButton.transform.Find("Text").GetComponent<Text>().text = "穿戴";
-                    UICommonHelper.SetRawImageGray(self.Root(), self.ES_ModelShow.E_RenderRawImage.gameObject, false);
+                    CommonViewHelper.SetRawImageGray(self.Root(), self.ES_ModelShow.E_RenderRawImage.gameObject, false);
                     break;
                 case 2:
                     self.E_EquipingedImage.gameObject.SetActive(true);
                     self.E_Btn_ActiveButton.gameObject.SetActive(false);
-                    UICommonHelper.SetRawImageGray(self.Root(), self.ES_ModelShow.E_RenderRawImage.gameObject, false);
+                    CommonViewHelper.SetRawImageGray(self.Root(), self.ES_ModelShow.E_RenderRawImage.gameObject, false);
                     break;
             }
 

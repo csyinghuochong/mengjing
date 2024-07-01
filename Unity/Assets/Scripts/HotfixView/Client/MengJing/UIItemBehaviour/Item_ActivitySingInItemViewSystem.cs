@@ -49,7 +49,7 @@ namespace ET.Client
 
         public static void SetSignState(this Scroll_Item_ActivitySingInItem self, int curDay, bool isSign)
         {
-            UICommonHelper.SetImageGray(self.Root(), self.CurrentImage_ItemIcon, int.Parse(self.ActivityConfig.Par_1) > curDay);
+            CommonViewHelper.SetImageGray(self.Root(), self.CurrentImage_ItemIcon, int.Parse(self.ActivityConfig.Par_1) > curDay);
         }
 
         public static void SetSelected(this Scroll_Item_ActivitySingInItem self, int activityId)

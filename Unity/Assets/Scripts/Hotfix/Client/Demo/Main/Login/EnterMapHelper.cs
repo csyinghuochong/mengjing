@@ -73,7 +73,7 @@ namespace ET.Client
 
         public static void RequestQuitFuben(Scene zoneScene)
         {
-            RequestTransfer(zoneScene, (int)SceneTypeEnum.MainCityScene, ComHelp.MainCityID()).Coroutine();
+            RequestTransfer(zoneScene, (int)SceneTypeEnum.MainCityScene, CommonHelp.MainCityID()).Coroutine();
         }
 
         public static async ETTask SendReviveRequest(Scene root, bool revive)

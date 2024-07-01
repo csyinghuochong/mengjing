@@ -127,7 +127,7 @@ namespace ET
             for (int i = 0; i < 5; i++)
             {
                 int randInt = RandomHelper.RandomNumber(0, newJiaYuanPurchases.Count);
-                JiaYuanPurchaseItem jiaYuanPurchaseItem = ComHelp.DeepCopy<JiaYuanPurchaseItem>(newJiaYuanPurchases[randInt]);
+                JiaYuanPurchaseItem jiaYuanPurchaseItem = CommonHelp.DeepCopy<JiaYuanPurchaseItem>(newJiaYuanPurchases[randInt]);
 
 
                 int newPurchaseId = jiaYuanPurchases.Count + 1;

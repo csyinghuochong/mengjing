@@ -69,8 +69,8 @@ namespace ET.Client
             Sprite sp =await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<Sprite>(path);
             self.E_ImageIcon.sprite = sp;
 
-            UICommonHelper.SetImageGray(self.Root(), self.E_ImageDi.gameObject, locked);
-            UICommonHelper.SetImageGray(self.Root(),self.E_ImageIcon.gameObject, locked);
+            CommonViewHelper.SetImageGray(self.Root(), self.E_ImageDi.gameObject, locked);
+            CommonViewHelper.SetImageGray(self.Root(),self.E_ImageIcon.gameObject, locked);
         }
     }
 

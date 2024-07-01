@@ -383,12 +383,12 @@ namespace ET.Client
             GameObject weaponParent_2 = hero.Get<GameObject>("Wuqi002");
             if (weaponParent_1 != null)
             {
-                UICommonHelper.DestoryChild(weaponParent_1);
+                CommonViewHelper.DestoryChild(weaponParent_1);
             }
 
             if (weaponParent_2 != null)
             {
-                UICommonHelper.DestoryChild(weaponParent_2);
+                CommonViewHelper.DestoryChild(weaponParent_2);
             }
 
             Transform weaponParent = weaponParent_1.transform;

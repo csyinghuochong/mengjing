@@ -549,7 +549,7 @@ namespace ET.Server
             long userId = unit.Id;
             Scene scene = unit.Scene();
             TransferHelper.BeforeTransfer(unit);
-            await TransferHelper.Transfer(unit, mapInstanceId, (int)SceneTypeEnum.MainCityScene, ComHelp.MainCityID(), 0, "0");
+            await TransferHelper.Transfer(unit, mapInstanceId, (int)SceneTypeEnum.MainCityScene, CommonHelp.MainCityID(), 0, "0");
             OnTransfer(scene, userId);
         }
         

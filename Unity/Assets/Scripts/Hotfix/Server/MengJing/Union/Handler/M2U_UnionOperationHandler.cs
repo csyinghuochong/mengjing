@@ -58,7 +58,7 @@ namespace ET.Server
                                     MailHelp.SendUserMail(scene.Root(), dBUnionInfo.UnionInfo.UnionPlayerList[i].UserID, mailInfo).Coroutine();
                                 }
 
-                                string noticeContent = $"恭喜 <color=#{ComHelp.QualityReturnColor(5)}>{dBUnionInfo.UnionInfo.UnionName}</color> 家族等级提升至{dBUnionInfo.UnionInfo.Level}级";
+                                string noticeContent = $"恭喜 <color=#{CommonHelp.QualityReturnColor(5)}>{dBUnionInfo.UnionInfo.UnionName}</color> 家族等级提升至{dBUnionInfo.UnionInfo.Level}级";
                                 BroadMessageHelper.SendBroadMessage(scene.Root(), NoticeType.Notice, noticeContent);
                             }
                         }

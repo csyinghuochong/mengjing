@@ -33,7 +33,7 @@ namespace ET.Server
             List<StartZoneConfig> listprogress = StartZoneConfigCategory.Instance.GetAll().Values.ToList();
             for (int i = 0; i < listprogress.Count; i++)
             {
-                if (listprogress[i].Id >= ComHelp.MaxZone || ConfigData.InnerZoneList.Contains(listprogress[i].Id))
+                if (listprogress[i].Id >= CommonHelp.MaxZone || ConfigData.InnerZoneList.Contains(listprogress[i].Id))
                 {
                     continue;
                 }

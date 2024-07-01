@@ -64,8 +64,8 @@ namespace ET.Client
             if (taskConfig.Development == 1)
             {
                 UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-                coffiexp = ComHelp.GetTaskExpRewardCof(userInfoComponent.UserInfo.Lv);
-                cofficoin = ComHelp.GetTaskCoinRewardCof(userInfoComponent.UserInfo.Lv);
+                coffiexp = CommonHelp.GetTaskExpRewardCof(userInfoComponent.UserInfo.Lv);
+                cofficoin = CommonHelp.GetTaskCoinRewardCof(userInfoComponent.UserInfo.Lv);
             }
 
             int taskExp = (int)(taskConfig.TaskExp * coffiexp);
@@ -73,7 +73,7 @@ namespace ET.Client
 
             string rewardStr = taskConfig.ItemID;
             string rewardNum = taskConfig.ItemNum;
-            if (ComHelp.IfNull(rewardStr))
+            if (CommonHelp.IfNull(rewardStr))
             {
                 rewardStr = "1;2";
                 rewardNum = taskCoin + ";" + taskExp;

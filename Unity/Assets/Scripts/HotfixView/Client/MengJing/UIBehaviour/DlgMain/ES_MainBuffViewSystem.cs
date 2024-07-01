@@ -119,7 +119,7 @@ namespace ET.Client
                 self.MainBuffUIList.Add(ui_buff);
                 ui_buff.GameObject.SetActive(true);
                 ui_buff.OnAddBuff(buffHandler);
-                UICommonHelper.SetParent(ui_buff.GameObject, self.uiTransform.gameObject);
+                CommonViewHelper.SetParent(ui_buff.GameObject, self.uiTransform.gameObject);
             }
 
             if (self.Timer == 0)

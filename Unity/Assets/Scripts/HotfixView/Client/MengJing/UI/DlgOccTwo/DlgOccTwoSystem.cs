@@ -93,10 +93,10 @@ namespace ET.Client
 
         public static void OnButton_ZhiYe(this DlgOccTwo self, int index)
         {
-            UICommonHelper.SetImageGray(self.Root(), self.Button_ZhiYe_List[0], true);
-            UICommonHelper.SetImageGray(self.Root(), self.Button_ZhiYe_List[1], true);
-            UICommonHelper.SetImageGray(self.Root(), self.Button_ZhiYe_List[2], true);
-            UICommonHelper.SetImageGray(self.Root(), self.Button_ZhiYe_List[index], false);
+            CommonViewHelper.SetImageGray(self.Root(), self.Button_ZhiYe_List[0], true);
+            CommonViewHelper.SetImageGray(self.Root(), self.Button_ZhiYe_List[1], true);
+            CommonViewHelper.SetImageGray(self.Root(), self.Button_ZhiYe_List[2], true);
+            CommonViewHelper.SetImageGray(self.Root(), self.Button_ZhiYe_List[index], false);
 
             int occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ;
             OccupationConfig occupationConfig = OccupationConfigCategory.Instance.Get(occ);
@@ -133,7 +133,7 @@ namespace ET.Client
             self.OccTwoId = occTwoId;
             OccupationTwoConfig occupationTwoConfig = OccupationTwoConfigCategory.Instance.Get(occTwoId);
             self.View.E_Text_ZhiYe_4Text.text = occupationTwoConfig.OccupationName;
-            UICommonHelper.DestoryChild(self.View.EG_SkillContainerRectTransform.gameObject);
+            CommonViewHelper.DestoryChild(self.View.EG_SkillContainerRectTransform.gameObject);
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
 
@@ -173,7 +173,7 @@ namespace ET.Client
             for (int i = 0; i < skills.Length; i++)
             {
                 GameObject go = UnityEngine.Object.Instantiate(bundleGameObject);
-                UICommonHelper.SetParent(go, self.View.EG_SkillContainerRectTransform.gameObject);
+                CommonViewHelper.SetParent(go, self.View.EG_SkillContainerRectTransform.gameObject);
                 go.SetActive(true);
                 go.transform.localScale = Vector3.one * 1f;
 
@@ -192,7 +192,7 @@ namespace ET.Client
                 return;
             }
 
-            string costitem = UICommonHelper.GetNeedItemDesc(ConfigData.ChangeOccItem);
+            string costitem = CommonViewHelper.GetNeedItemDesc(ConfigData.ChangeOccItem);
             PopupTipHelp.OpenPopupTip(self.Root(), "技能点重置", $"是否花费{costitem}重置技能点", () => { self.RequestReset(2).Coroutine(); }).Coroutine();
         }
 

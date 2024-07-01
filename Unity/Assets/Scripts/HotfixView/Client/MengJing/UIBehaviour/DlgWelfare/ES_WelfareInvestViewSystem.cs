@@ -47,7 +47,7 @@ namespace ET.Client
             self.E_InvestNumTextText.text = touzi.ToString();
 
             int total = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.InvestTotal);
-            int lirun = ComHelp.GetWelfareTotalLiRun(total, touzi);
+            int lirun = CommonHelp.GetWelfareTotalLiRun(total, touzi);
             self.E_ProfitNumTextText.text = lirun.ToString();
 
             self.E_TotalReturnNumTextText.text = total.ToString();

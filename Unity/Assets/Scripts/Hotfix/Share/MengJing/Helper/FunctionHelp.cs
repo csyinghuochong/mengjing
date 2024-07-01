@@ -103,7 +103,7 @@ namespace ET
         public static long GetOpenTime(int function)
         {
             FuntionConfig funtionConfig = FuntionConfigCategory.Instance.Get(function);
-            if (ComHelp.IfNull(funtionConfig.OpenTime))
+            if (CommonHelp.IfNull(funtionConfig.OpenTime))
             {
                 return 0;
             }
@@ -123,7 +123,7 @@ namespace ET
         public static long GetCloseTime(int function)
         {
             FuntionConfig funtionConfig = FuntionConfigCategory.Instance.Get(function);
-            if (ComHelp.IfNull(funtionConfig.OpenTime))
+            if (CommonHelp.IfNull(funtionConfig.OpenTime))
             {
                 return (24 * 60 + 60) * 60;
             }

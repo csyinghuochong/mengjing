@@ -98,7 +98,7 @@ namespace ET.Server
             Dictionary<int, int> promaxvalue = new Dictionary<int, int>();
             for (int i = 0; i < prolist.Length; i++)
             {
-                if (ComHelp.IfNull(prolist[i]))
+                if (CommonHelp.IfNull(prolist[i]))
                 {
                     continue;
                 }
@@ -339,7 +339,7 @@ namespace ET.Server
 
                 int passHour = (int)(1f * passTime / TimeHelper.Hour);
                 passHour = math.min(12, passHour);
-                jiaYuanPet.CurExp +=(passHour * ComHelp.GetJiaYuanPetExp(jiaYuanPet.PetLv, jiaYuanPet.MoodValue) );
+                jiaYuanPet.CurExp +=(passHour * CommonHelp.GetJiaYuanPetExp(jiaYuanPet.PetLv, jiaYuanPet.MoodValue) );
                 jiaYuanPet.LastExpTime = TimeHelper.ServerNow();
             }
 

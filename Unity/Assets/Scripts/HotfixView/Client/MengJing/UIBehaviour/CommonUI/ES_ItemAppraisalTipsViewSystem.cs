@@ -142,7 +142,7 @@ namespace ET.Client
 
             // 显示封印
             self.E_FengYinImage.gameObject.SetActive(itemconf.EquipType == 101);
-            UICommonHelper.SetImageGray(self.Root(), self.E_ItemIconImage.gameObject, true);
+            CommonViewHelper.SetImageGray(self.Root(), self.E_ItemIconImage.gameObject, true);
 
             self.E_ItemDesText.text = itemconf.EquipType == 101? "封印生肖" : "未鉴定装备";
             // 赛季晶核

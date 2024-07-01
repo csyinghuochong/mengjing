@@ -164,7 +164,7 @@ namespace ET.Client
                 }
 
                 GameObject go = UnityEngine.Object.Instantiate(bundleGameObject);
-                UICommonHelper.SetParent(go, self.ItemNode);
+                CommonViewHelper.SetParent(go, self.ItemNode);
                 ShouJiItemConfig shouJiItemConfig = ShouJiItemConfigCategory.Instance.Get(itemId);
                 self.AddChild<UIShouJiItemComponent, GameObject>(go).OnUpdateUI(shouJiConfig.Id, shouJiItemConfig);
                 itemId = shouJiItemConfig.NextID;

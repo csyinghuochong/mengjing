@@ -58,7 +58,7 @@ namespace ET.Client
             self.E_Text_valueText.text = jingLingConfig.Des;
             self.E_ObjGetTextText.text = jingLingConfig.GetDes;
             self.E_JingLingDesText.text = jingLingConfig.ProDes;
-            UICommonHelper.SetRawImageGray(self.Root(), self.ES_ModelShow.E_RenderRawImage.gameObject, !active);
+            CommonViewHelper.SetRawImageGray(self.Root(), self.ES_ModelShow.E_RenderRawImage.gameObject, !active);
 
             ChengJiuComponentC chengJiuComponent = self.Root().GetComponent<ChengJiuComponentC>();
             bool current = chengJiuComponent.JingLingId == jid;

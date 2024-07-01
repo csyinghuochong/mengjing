@@ -45,7 +45,7 @@ namespace ET.Client
         public static void UpdateShuLianDu(this DlgMakeLearn self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            int maxValue = ComHelp.MaxShuLianDu();
+            int maxValue = CommonHelp.MaxShuLianDu();
 
             int shulianduNumeric = self.Plan == 1? NumericType.MakeShuLianDu_1 : NumericType.MakeShuLianDu_2;
             int curValue = unit.GetComponent<NumericComponentC>().GetAsInt(shulianduNumeric);

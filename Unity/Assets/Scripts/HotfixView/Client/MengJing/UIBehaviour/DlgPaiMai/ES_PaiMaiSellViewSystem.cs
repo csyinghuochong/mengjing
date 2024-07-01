@@ -75,7 +75,7 @@ namespace ET.Client
             float sellgold_1 = sellgold * 0.0001f;
             float todayGold_1 = todayGold * 0.0001f;
 
-            self.E_PaiMaiGoldTextText.text = $"今日获利:{UICommonHelper.ShowFloatValue(sellgold_1)}万/{UICommonHelper.ShowFloatValue(todayGold_1)}万";
+            self.E_PaiMaiGoldTextText.text = $"今日获利:{CommonViewHelper.ShowFloatValue(sellgold_1)}万/{CommonViewHelper.ShowFloatValue(todayGold_1)}万";
             self.UpdateSellItemUILIist(self.CurrentItemType);
         }
 
@@ -149,7 +149,7 @@ namespace ET.Client
                 return;
             }
 
-            if (!ComHelp.IsShowPaiMai(itemConfig.ItemType, itemConfig.ItemSubType))
+            if (!CommonHelp.IsShowPaiMai(itemConfig.ItemType, itemConfig.ItemSubType))
             {
                 FlyTipComponent.Instance.ShowFlyTipDi("此道具不能上架！");
                 return;

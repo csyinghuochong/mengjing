@@ -47,7 +47,7 @@ namespace ET.Client
                 string content =
                         $"玩家 {response.PetMingRecords[i].WinPlayer} {TimeInfo.Instance.ToDateTime(petMingRecord.Time)} 占领了你的{mineBattleConfig.Name}";
                 gameObject.transform.Find("Text").GetComponent<Text>().text = content;
-                UICommonHelper.SetParent(gameObject, self.View.EG_BuildingList2RectTransform.gameObject);
+                CommonViewHelper.SetParent(gameObject, self.View.EG_BuildingList2RectTransform.gameObject);
             }
         }
     }

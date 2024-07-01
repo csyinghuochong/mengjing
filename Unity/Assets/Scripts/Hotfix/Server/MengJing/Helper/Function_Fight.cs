@@ -1458,7 +1458,7 @@ namespace ET.Server
                         }
 
                         string GameObjectParameter = skillConfig.GameObjectParameter;
-                        if (ComHelp.IfNull(GameObjectParameter))
+                        if (CommonHelp.IfNull(GameObjectParameter))
                         {
                             continue;
                         }
@@ -1513,7 +1513,7 @@ namespace ET.Server
             }
 
             SeasonLevelConfig seasonLevelConfig = SeasonLevelConfigCategory.Instance.Get(userInfo.SeasonLevel);
-            if (!ComHelp.IfNull(seasonLevelConfig.PripertySet))
+            if (!CommonHelp.IfNull(seasonLevelConfig.PripertySet))
             {
                 string[] addProList = seasonLevelConfig.PripertySet.Split("@");
                 for (int p = 0; p < addProList.Length; p++)

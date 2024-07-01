@@ -48,7 +48,7 @@ namespace ET.Server
              self.HurtAddPro = 0f;   
 
              //获取通用脚本参数
-             if (ComHelp.IfNull(self.SkillConf.ComObjParameter) == false)
+             if (CommonHelp.IfNull(self.SkillConf.ComObjParameter) == false)
              {
                  string[] skillParList = self.SkillConf.ComObjParameter.Split('@');
                  for (int i = 0; i < skillParList.Length; i++)

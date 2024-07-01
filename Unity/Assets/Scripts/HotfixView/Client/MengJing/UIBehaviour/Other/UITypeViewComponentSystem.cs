@@ -29,7 +29,7 @@ namespace ET.Client
             for (int i = 0; i < self.TypeButtonInfos.Count; i++)
             {
                 GameObject taskTypeItem = UnityEngine.Object.Instantiate(bundleObj);
-                UICommonHelper.SetParent(taskTypeItem, self.GameObject);
+                CommonViewHelper.SetParent(taskTypeItem, self.GameObject);
 
                 UITypeButtonComponent uIItemComponent = self.AddChild<UITypeButtonComponent, GameObject>(taskTypeItem);
                 uIItemComponent.TypeItemAsset = self.TypeButtonItemAsset;
@@ -122,7 +122,7 @@ namespace ET.Client
                 else
                 {
                     GameObject taskTypeItem = UnityEngine.Object.Instantiate(bundleObj);
-                    UICommonHelper.SetParent(taskTypeItem, self.UIPointTaskDate);
+                    CommonViewHelper.SetParent(taskTypeItem, self.UIPointTaskDate);
                     taskTypeItem.transform.localPosition = new Vector3(0f, i * self.Spacing * -1, 0f);
 
                     ui_1 = self.AddChild<UITypeButtonItemComponent, GameObject>(taskTypeItem);

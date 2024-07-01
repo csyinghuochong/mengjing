@@ -41,7 +41,7 @@ namespace ET.Client
 
             int curDay = 0;
             long serverNow = TimeHelper.ServerNow();
-            bool isSign = ComHelp.GetDayByTime(serverNow) == ComHelp.GetDayByTime(activityComponent.LastSignTime);
+            bool isSign = CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime);
             curDay = activityComponent.TotalSignNumber;
             if (activityComponent.TotalSignNumber < 30 && !isSign)
             {
@@ -110,7 +110,7 @@ namespace ET.Client
 
             ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
             long serverNow = TimeHelper.ServerNow();
-            bool isSign = ComHelp.GetDayByTime(serverNow) == ComHelp.GetDayByTime(activityComponent.LastSignTime);
+            bool isSign = CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime);
             bool ifShow = int.Parse(ActivityConfig.Par_1) <= activityComponent.TotalSignNumber || isSign ||
                     activityComponent.ActivityReceiveIds.Contains(activityId);
             self.E_Img_lingQuImage.gameObject.SetActive(ifShow);
@@ -152,7 +152,7 @@ namespace ET.Client
             }
 
             long serverNow = TimeHelper.ServerNow();
-            if (ComHelp.GetDayByTime(serverNow) == ComHelp.GetDayByTime(activityComponent.LastSignTime))
+            if (CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime))
             {
                 FlyTipComponent.Instance.ShowFlyTipDi("当日奖励已领取！");
                 return;

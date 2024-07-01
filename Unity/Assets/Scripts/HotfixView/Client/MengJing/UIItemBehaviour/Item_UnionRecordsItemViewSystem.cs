@@ -21,9 +21,9 @@ namespace ET.Client
         {
             string[] strs = record.Split('_');
             self.E_TextContentText.text =
-                    $"<color=#{ComHelp.QualityReturnColor(4)}>{strs[0]}</color> " +
+                    $"<color=#{CommonHelp.QualityReturnColor(4)}>{strs[0]}</color> " +
                     $"通过{ConfigData.ItemGetWayNameList[int.Parse(strs[1])]} " +
-                    $"增加了<color=#{ComHelp.QualityReturnColor(2)}>{strs[3]}</color>{ItemConfigCategory.Instance.Get(int.Parse(strs[2])).ItemName}";
+                    $"增加了<color=#{CommonHelp.QualityReturnColor(2)}>{strs[3]}</color>{ItemConfigCategory.Instance.Get(int.Parse(strs[2])).ItemName}";
         }
     }
 }

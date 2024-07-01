@@ -25,7 +25,7 @@ namespace ET.Server
                     return;
                 }
 
-                if (!ComHelp.IsBanHaoZone(chatInfoUnit.Zone()) && chatInfoUnit.Level < 20)
+                if (!CommonHelp.IsBanHaoZone(chatInfoUnit.Zone()) && chatInfoUnit.Level < 20)
                 {
                     response.Error = ErrorCode.ERR_LevelIsNot;
                     return;

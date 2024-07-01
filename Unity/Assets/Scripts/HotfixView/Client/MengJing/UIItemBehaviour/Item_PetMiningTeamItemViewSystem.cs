@@ -84,7 +84,7 @@ namespace ET.Client
                 if (rolePetInfo != null && self.FormationItemComponents[i] == null)
                 {
                     GameObject goItem = GameObject.Instantiate(bundleGameObject);
-                    UICommonHelper.SetParent(goItem, self.PetIcon_di_List[i]);
+                    CommonViewHelper.SetParent(goItem, self.PetIcon_di_List[i]);
                     goItem.transform.localScale = Vector3.one * 0.6f;
                     Scroll_Item_PetFormationItem FormationItem = self.AddChild<Scroll_Item_PetFormationItem>();
                     FormationItem.uiTransform = goItem.transform;
@@ -117,7 +117,7 @@ namespace ET.Client
 
             GameObject icon = self.IconItemDrag.transform.Find("ImageIcon").gameObject;
             icon.GetComponent<Image>().sprite = sp;
-            UICommonHelper.SetParent(self.IconItemDrag, self.uiTransform.parent.parent.gameObject);
+            CommonViewHelper.SetParent(self.IconItemDrag, self.uiTransform.parent.parent.gameObject);
         }
 
         public static void Draging(this Scroll_Item_PetMiningTeamItem self, RolePetInfo binfo, PointerEventData pdata)
@@ -153,7 +153,7 @@ namespace ET.Client
                 }
             }
 
-            UICommonHelper.SetParent(self.IconItemDrag, self.uiTransform.gameObject);
+            CommonViewHelper.SetParent(self.IconItemDrag, self.uiTransform.gameObject);
             self.IconItemDrag.SetActive(false);
         }
     }

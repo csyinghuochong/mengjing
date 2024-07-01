@@ -77,9 +77,9 @@ namespace ET.Client
             SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
 
             List<int> activeList = skillSetComponent.TianFuList();
-            UICommonHelper.SetImageGray(self.Root(), self.E_ImageIcon3Image.gameObject, !activeList.Contains(self.TianFuList[2]));
-            UICommonHelper.SetImageGray(self.Root(), self.E_ImageIcon2Image.gameObject, !activeList.Contains(self.TianFuList[1]));
-            UICommonHelper.SetImageGray(self.Root(), self.E_ImageIcon1Image.gameObject, !activeList.Contains(self.TianFuList[0]));
+            CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIcon3Image.gameObject, !activeList.Contains(self.TianFuList[2]));
+            CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIcon2Image.gameObject, !activeList.Contains(self.TianFuList[1]));
+            CommonViewHelper.SetImageGray(self.Root(), self.E_ImageIcon1Image.gameObject, !activeList.Contains(self.TianFuList[0]));
         }
     }
 }

@@ -148,7 +148,7 @@ namespace ET.Client
 
                 skillIndicatorItem.GameObject.SetActive(true);
                 GlobalComponent globalComponent = self.Root().GetComponent<GlobalComponent>();
-                UICommonHelper.SetParent(skillIndicatorItem.GameObject, globalComponent.Unit.gameObject);
+                CommonViewHelper.SetParent(skillIndicatorItem.GameObject, globalComponent.Unit.gameObject);
                 skillIndicatorItem.GameObject.transform.position = new Vector3(skillcmd.PosX, skillcmd.PosY, skillcmd.PosZ);
                 self.InitZhishiEffect(skillIndicatorItem);
                 self.AddTimer();

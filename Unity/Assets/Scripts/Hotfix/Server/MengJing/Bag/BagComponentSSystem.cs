@@ -915,7 +915,7 @@ namespace ET.Server
        {
            return false;
        }
-       if ((petHeXinNumber + self.BagItemPetHeXin.Count > ComHelp.PetHeXinMax) && UseLocType == ItemLocType.ItemLocBag)
+       if ((petHeXinNumber + self.BagItemPetHeXin.Count > CommonHelp.PetHeXinMax) && UseLocType == ItemLocType.ItemLocBag)
        {
            return false;
        }
@@ -1180,7 +1180,7 @@ namespace ET.Server
                if (itemCof.ItemType == 3 && itemCof.ItemQuality >= 5 && getType == ItemGetWay.PickItem)
                {
                    string name = unit.GetComponent<UserInfoComponentS>().GetName();
-                   string noticeContent = $"恭喜玩家 {name} 获得装备: <color=#{ComHelp.QualityReturnColor(5)}>{itemCof.ItemName}</color>";
+                   string noticeContent = $"恭喜玩家 {name} 获得装备: <color=#{CommonHelp.QualityReturnColor(5)}>{itemCof.ItemName}</color>";
                    BroadMessageHelper.SendBroadMessage(self.Root(), NoticeType.Notice, noticeContent);
                }
 

@@ -353,7 +353,7 @@ namespace ET
         public static List<RewardItem> GetRewardItems(string needitems)
         {
             List<RewardItem> costItems = new List<RewardItem>();
-            if (ComHelp.IfNull(needitems))
+            if (CommonHelp.IfNull(needitems))
             {
                 return costItems;
             }
@@ -869,7 +869,7 @@ namespace ET
         {
             ////69000013;69000017
             List<int> skillids = new List<int>();
-            if (ComHelp.IfNull(skillpar))
+            if (CommonHelp.IfNull(skillpar))
             { 
                 return skillids;    
             }

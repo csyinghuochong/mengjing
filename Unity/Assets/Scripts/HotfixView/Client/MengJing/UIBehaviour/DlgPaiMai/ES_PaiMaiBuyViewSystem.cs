@@ -433,7 +433,7 @@ namespace ET.Client
             {
                 PaiMaiItemInfo paiMaiItemInfo = self.PaiMaiIteminfos_Now[i];
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(paiMaiItemInfo.BagInfo.ItemID);
-                if (!ComHelp.IsShowPaiMai(itemConfig.ItemType, itemConfig.ItemSubType))
+                if (!CommonHelp.IsShowPaiMai(itemConfig.ItemType, itemConfig.ItemSubType))
                 {
                     continue;
                 }

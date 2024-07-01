@@ -307,7 +307,7 @@ namespace ET.Client
             bool unactive = self.ShowPetSkills[index] == self.UnactiveId;
             scrollItemCommonSkillItem.OnUpdatePetSkill(self.ShowPetSkills[index], ABAtlasTypes.PetSkillIcon,
                 self.LastSelectItem.LockSkill.Contains(self.ShowPetSkills[index]), unactive, self.UnactiveNum);
-            UICommonHelper.SetImageGray(self.Root(), scrollItemCommonSkillItem.E_ImageIconImage.gameObject, unactive);
+            CommonViewHelper.SetImageGray(self.Root(), scrollItemCommonSkillItem.E_ImageIconImage.gameObject, unactive);
         }
 
         private static void OnSelectSkinHandler(this ES_PetList self, int skinId)
@@ -560,7 +560,7 @@ namespace ET.Client
             List<string> TypeNames = new List<string>() { "进攻能量", "守护能量", "生命能量" };
             self.E_TextTypeText.text = TypeNames[self.Position];
 
-            UICommonHelper.DestoryChild(self.EG_AttributeListNodeRectTransform.gameObject);
+            CommonViewHelper.DestoryChild(self.EG_AttributeListNodeRectTransform.gameObject);
             long baginfoId = self.LastSelectItem.PetHeXinList[self.Position];
             BagInfo bagInfo = null;
             for (int i = 0; i < bagInfos.Count; i++)
@@ -607,7 +607,7 @@ namespace ET.Client
                 float numberValue = float.Parse(attributeInfo[1]);
                 GameObject gameObject = GameObject.Instantiate(attributeItem);
                 gameObject.SetActive(true);
-                UICommonHelper.SetParent(gameObject, itemNodeList);
+                CommonViewHelper.SetParent(gameObject, itemNodeList);
                 string icon = ItemViewHelp.GetAttributeIcon(numberType);
 
                 icon = "PetPro_2";
@@ -865,7 +865,7 @@ namespace ET.Client
             //更新宠物是否进化
             if (rolePetInfo.UpStageStatus == 0 || rolePetInfo.UpStageStatus == 1)
             {
-                UICommonHelper.SetImageGray(self.Root(), self.E_ImageJinHuaImage.gameObject, true);
+                CommonViewHelper.SetImageGray(self.Root(), self.E_ImageJinHuaImage.gameObject, true);
                 if (rolePetInfo.UpStageStatus == 1)
                 {
                     self.E_JinHuaReddotImage.gameObject.SetActive(true);
@@ -879,7 +879,7 @@ namespace ET.Client
             }
             else
             {
-                UICommonHelper.SetImageGray(self.Root(), self.E_ImageJinHuaImage.gameObject, false);
+                CommonViewHelper.SetImageGray(self.Root(), self.E_ImageJinHuaImage.gameObject, false);
                 self.E_JinHuaReddotImage.gameObject.SetActive(false);
                 self.E_Lab_JinHuaText.text = "已进化";
             }
@@ -887,7 +887,7 @@ namespace ET.Client
             PetConfig petConfig = PetConfigCategory.Instance.Get(self.LastSelectItem.ConfigId);
             if (petConfig.PetType == 2)
             {
-                UICommonHelper.SetImageGray(self.Root(), self.E_ImageJinHuaImage.gameObject, false);
+                CommonViewHelper.SetImageGray(self.Root(), self.E_ImageJinHuaImage.gameObject, false);
                 self.E_JinHuaReddotImage.gameObject.SetActive(false);
                 self.E_Lab_JinHuaText.text = "已进化";
             }
@@ -971,7 +971,7 @@ namespace ET.Client
             self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
                     $"{rolePetInfo.ZiZhi_Adf}/{petConfig.ZiZhi_Adf_Max}";
             self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text = string.Format("{0}/{1}",
-                UICommonHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang), UICommonHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max));
+                CommonViewHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang), CommonViewHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max));
             self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
                     $"{rolePetInfo.ZiZhi_MageAct}/{petConfig.ZiZhi_MageAct_Max}";
 
@@ -1094,7 +1094,7 @@ namespace ET.Client
             else
             {
                 gameObject = UnityEngine.Object.Instantiate(itemObj);
-                UICommonHelper.SetParent(gameObject, parentObj);
+                CommonViewHelper.SetParent(gameObject, parentObj);
                 gameObject.SetActive(true);
             }
 

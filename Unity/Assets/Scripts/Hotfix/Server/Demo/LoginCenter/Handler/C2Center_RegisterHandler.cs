@@ -56,7 +56,7 @@ namespace ET.Server
                     newAccount.Password = request.Password;
                     newAccount.PlayerInfo = new PlayerInfo();
 
-                    if (request.Password == ComHelp.RobotPassWord)
+                    if (request.Password == CommonHelp.RobotPassWord)
                     {
                         newAccount.PlayerInfo.RealName = 1;
                         newAccount.PlayerInfo.Name = request.Account;

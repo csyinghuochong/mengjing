@@ -557,8 +557,8 @@ namespace ET.Server
             float cofficoin = 1f;
             if (taskConfig.Development == 1)
             {
-                coffiexp = ComHelp.GetTaskExpRewardCof(userInfoComponent.GetUserLv());
-                cofficoin = ComHelp.GetTaskCoinRewardCof(userInfoComponent.GetUserLv());
+                coffiexp = CommonHelp.GetTaskExpRewardCof(userInfoComponent.GetUserLv());
+                cofficoin = CommonHelp.GetTaskCoinRewardCof(userInfoComponent.GetUserLv());
             }
 
             int TaskExp = (int)(taskConfig.TaskExp * coffiexp);
@@ -1134,7 +1134,7 @@ namespace ET.Server
                     self.TriggerTaskEvent(TaskTargetType.MineHaveNumber_401, mineid, 1);
                 }
 
-                bool hexin = ComHelp.IsHexinMine(petMingPlayers[i].MineType, petMingPlayers[i].Postion, extends);
+                bool hexin = CommonHelp.IsHexinMine(petMingPlayers[i].MineType, petMingPlayers[i].Postion, extends);
                 if (hexin)
                 {
                     self.TriggerTaskCountryEvent(TaskTargetType.MineHaveNumber_401, 0, 1);

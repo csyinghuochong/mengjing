@@ -80,7 +80,7 @@ namespace ET.Client
                 return;
             }
 
-            int costValue = ComHelp.ReturnPetOpenTimeDiamond(self.RolePetEgg.KeyId, self.RolePetEgg.Value);
+            int costValue = CommonHelp.ReturnPetOpenTimeDiamond(self.RolePetEgg.KeyId, self.RolePetEgg.Value);
             PopupTipHelp.OpenPopupTip(self.Root(), "开启宠物蛋", $"开启需要花费 {costValue}钻石", () => { self.OnButtonGet().Coroutine(); }).Coroutine();
         }
 
@@ -117,7 +117,7 @@ namespace ET.Client
             int needCost = 0;
             if (TimeHelper.ServerNow() < rolePetEgg.Value)
             {
-                needCost = ComHelp.ReturnPetOpenTimeDiamond(self.RolePetEgg.KeyId, self.RolePetEgg.Value);
+                needCost = CommonHelp.ReturnPetOpenTimeDiamond(self.RolePetEgg.KeyId, self.RolePetEgg.Value);
             }
 
             if (userInfo.Diamond < needCost)

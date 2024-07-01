@@ -158,7 +158,7 @@ namespace ET.Client
             self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
                     $"{rolePetInfo.ZiZhi_MageAct}/{petConfig.ZiZhi_MageAct_Max}";
             self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{UICommonHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang)}/{UICommonHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max)}";
+                    $"{CommonViewHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang)}/{CommonViewHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max)}";
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             Sprite sprite16 = resourcesLoaderComponent.LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Pro_16.png");

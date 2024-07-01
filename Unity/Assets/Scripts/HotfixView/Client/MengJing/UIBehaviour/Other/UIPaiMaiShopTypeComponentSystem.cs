@@ -70,7 +70,7 @@ namespace ET.Client
                 {
                     GameObject go = UnityEngine.Object.Instantiate(self.UIPaiMaiShopTypeItem);
                     go.SetActive(true);
-                    UICommonHelper.SetParent(go, self.UIPointTaskDate);
+                    CommonViewHelper.SetParent(go, self.UIPointTaskDate);
                     go.transform.localPosition = new Vector3(0f, i * -80f, 0f);
 
                     itemComponent = self.AddChild<UIPaiMaiShopTypeItemComponent, GameObject>(go);

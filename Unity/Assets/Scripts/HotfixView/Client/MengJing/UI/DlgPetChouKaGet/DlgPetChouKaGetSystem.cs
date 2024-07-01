@@ -127,8 +127,8 @@ namespace ET.Client
 
             self.View.E_Text_PetLevelText.text = rolePetInfo.PetLv.ToString() + "级";
 
-            self.View.E_Text_QualityText.text = UICommonHelper.GetPetQualityName(petConfig.PetQuality);
-            self.View.E_Text_QualityText.color = UICommonHelper.QualityReturnColor(petConfig.PetQuality);
+            self.View.E_Text_QualityText.text = CommonViewHelper.GetPetQualityName(petConfig.PetQuality);
+            self.View.E_Text_QualityText.color = CommonViewHelper.QualityReturnColor(petConfig.PetQuality);
 
             self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
                     $"{rolePetInfo.ZiZhi_Hp}/{petConfig.ZiZhi_Hp_Max}";

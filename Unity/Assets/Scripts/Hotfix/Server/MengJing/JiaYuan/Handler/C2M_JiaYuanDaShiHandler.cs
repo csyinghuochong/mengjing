@@ -41,7 +41,7 @@ namespace ET.Server
 
                 int numeid = int.Parse(attriinfo[0]);
                 int maxValue = int.Parse(attriinfo[2]);
-                if ( ComHelp.IfNull(useBagInfo.ItemPar) ) 
+                if ( CommonHelp.IfNull(useBagInfo.ItemPar) ) 
                 {
                     useBagInfo.ItemPar = "50";
                 }

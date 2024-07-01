@@ -43,8 +43,8 @@ namespace ET.Client
 
             self.E_Image_ItemIconImage.sprite = sp;
             self.E_TextSkinNameText.text = skillConfig.Name;
-            UICommonHelper.SetImageGray(self.Root(), self.E_Image_ItemIconImage.gameObject, !unlocked);
-            UICommonHelper.SetImageGray(self.Root(), self.E_Image_ItemQualityImage.gameObject, !unlocked);
+            CommonViewHelper.SetImageGray(self.Root(), self.E_Image_ItemIconImage.gameObject, !unlocked);
+            CommonViewHelper.SetImageGray(self.Root(), self.E_Image_ItemQualityImage.gameObject, !unlocked);
             self.E_JiHuoSetText.gameObject.SetActive(unlocked);
 
             self.E_Image_XuanZhongImage.gameObject.SetActive(false);

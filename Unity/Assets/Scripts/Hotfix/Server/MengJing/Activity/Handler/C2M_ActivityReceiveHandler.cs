@@ -68,7 +68,7 @@ namespace ET.Server
                             return;
                         }
                         long serverNow = TimeHelper.ServerNow();
-                        if (ComHelp.GetDayByTime(serverNow) == ComHelp.GetDayByTime(activityComponent.LastSignTime))
+                        if (CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime))
                         {
                             response.Error = ErrorCode.ERR_AlreadyReceived;
           
@@ -136,7 +136,7 @@ namespace ET.Server
                             return;
                         }
                         serverNow = TimeHelper.ServerNow();
-                        if (ComHelp.GetDayByTime(serverNow) == ComHelp.GetDayByTime(activityComponent.LastLoginTime))
+                        if (CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastLoginTime))
                         {
                             response.Error = ErrorCode.ERR_AlreadyReceived;
                             return;

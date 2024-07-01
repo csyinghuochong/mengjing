@@ -61,7 +61,7 @@ namespace ET.Server
             userInfo.ServerMailIdCur = -1;
             userInfo.PiLao = int.Parse(GlobalValueConfigCategory.Instance.Get(10).Value); //初始化疲劳
             userInfo.Vitality = int.Parse(GlobalValueConfigCategory.Instance.Get(10).Value);
-            userInfo.MakeList.AddRange(ComHelp.StringArrToIntList(GlobalValueConfigCategory.Instance.Get(18).Value.Split(';')));
+            userInfo.MakeList.AddRange(CommonHelp.StringArrToIntList(GlobalValueConfigCategory.Instance.Get(18).Value.Split(';')));
             userInfo.CreateTime = TimeHelper.ServerNow();
             userInfo.RobotId = createRoleInfo.RobotId;
 
@@ -368,7 +368,7 @@ namespace ET.Server
             }
             ServerInfo serverInfo = serverInfoComponent.ServerInfo;
 
-            float expAdd = ComHelp.GetExpAdd(self.UserInfo.Lv, serverInfo);
+            float expAdd = CommonHelp.GetExpAdd(self.UserInfo.Lv, serverInfo);
 
             ExpConfig xiulianconf1 = ExpConfigCategory.Instance.Get(self.UserInfo.Lv);
             long upNeedExp = xiulianconf1.UpExp;
@@ -535,7 +535,7 @@ namespace ET.Server
                 case UserDataType.BaoShiDu:
                     long addValue = long.Parse(value);
                     newValue = self.UserInfo.BaoShiDu + (int)addValue;
-                    newValue = Math.Min(Math.Max(0, newValue), ComHelp.GetMaxBaoShiDu());
+                    newValue = Math.Min(Math.Max(0, newValue), CommonHelp.GetMaxBaoShiDu());
                     self.UserInfo.BaoShiDu = (int)newValue;
                     saveValue = self.UserInfo.BaoShiDu.ToString();
                     unit.GetComponent<BuffManagerComponentS>()?.InitBaoShiBuff();

@@ -340,7 +340,7 @@ namespace ET.Client
             string[] monsters = createMonster.Split('@');
             for (int i = 0; i < monsters.Length; i++)
             {
-                if (ComHelp.IfNull(monsters[i]))
+                if (CommonHelp.IfNull(monsters[i]))
                 {
                     continue;
                 }
@@ -475,7 +475,7 @@ namespace ET.Client
 
                 if (self.ScrollItemMapBigNpcItems[i].ConfigId == configid)
                 {
-                    UICommonHelper.SetParent(self.View.EG_ImageSelectRectTransform.gameObject,
+                    CommonViewHelper.SetParent(self.View.EG_ImageSelectRectTransform.gameObject,
                         self.ScrollItemMapBigNpcItems[i].uiTransform.gameObject);
                     break;
                 }
@@ -586,7 +586,7 @@ namespace ET.Client
             string[] monsters = SceneConfigHelper.GetLocalDungeonMonsters_2(self.SceneId).Split('@');
             for (int i = 0; i < monsters.Length; i++)
             {
-                if (ComHelp.IfNull(monsters[i]))
+                if (CommonHelp.IfNull(monsters[i]))
                 {
                     continue;
                 }

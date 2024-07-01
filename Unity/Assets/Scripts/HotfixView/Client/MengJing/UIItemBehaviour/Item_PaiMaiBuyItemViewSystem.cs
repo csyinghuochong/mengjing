@@ -92,12 +92,12 @@ namespace ET.Client
                 canBuy = true;
             }
 
-            if (ComHelp.IsCanPaiMai_KillBoss(userInfoComponent.UserInfo.MonsterRevives, userInfoComponent.UserInfo.Lv))
+            if (CommonHelp.IsCanPaiMai_KillBoss(userInfoComponent.UserInfo.MonsterRevives, userInfoComponent.UserInfo.Lv))
             {
                 canBuy = true;
             }
 
-            int needLv = ComHelp.IsCanPaiMai_Level(createDay, userInfoComponent.UserInfo.Lv);
+            int needLv = CommonHelp.IsCanPaiMai_Level(createDay, userInfoComponent.UserInfo.Lv);
             if (needLv == 0)
             {
                 canBuy = true;

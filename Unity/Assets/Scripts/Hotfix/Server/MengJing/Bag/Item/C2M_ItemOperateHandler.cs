@@ -553,7 +553,7 @@ namespace ET.Server
                     return;
                 }
 
-                if (ComHelp.IfNull(sellinfo[1]))
+                if (CommonHelp.IfNull(sellinfo[1]))
                 {
                     response.Error = ErrorCode.ERR_VersionNoMatch;
                     return;
@@ -695,7 +695,7 @@ namespace ET.Server
 
                 //获取之前的位置是否有装备
                 BagInfo beforeequip = null;
-                if (weizhi == (int) ItemSubTypeEnum.Shiping && !ComHelp.IsBanHaoZone(unit.Zone()))
+                if (weizhi == (int) ItemSubTypeEnum.Shiping && !CommonHelp.IsBanHaoZone(unit.Zone()))
                 {
                     List<BagInfo> equipList = bagComponent.GetEquipListByWeizhi(ItemLocType.ItemLocEquip, weizhi);
                     beforeequip = equipList.Count < 3? null : equipList[0];

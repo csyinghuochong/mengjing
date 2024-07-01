@@ -27,13 +27,13 @@ namespace ET.Client
         {
             for (int i = 0; i < itemXiLians.Count; i++)
             {
-                BagInfo bagInfoTemp = ComHelp.DeepCopy(bagInfo);
+                BagInfo bagInfoTemp = CommonHelp.DeepCopy(bagInfo);
                 bagInfoTemp.XiLianHideTeShuProLists = itemXiLians[i].XiLianHideTeShuProLists;
                 bagInfoTemp.XiLianHideProLists = itemXiLians[i].XiLianHideProLists;
                 bagInfoTemp.HideSkillLists = itemXiLians[i].HideSkillLists;
 
                 GameObject itemGo = UnityEngine.Object.Instantiate(self.UIRoleXiLianTenItem);
-                UICommonHelper.SetParent(itemGo, self.View.EG_ItemListNodeRectTransform.gameObject);
+                CommonViewHelper.SetParent(itemGo, self.View.EG_ItemListNodeRectTransform.gameObject);
                 itemGo.SetActive(true);
                 self.AddChild<UIRoleXiLianTenItem, GameObject>(itemGo).OnInitUI(bagInfoTemp, itemXiLians[i]);
             }

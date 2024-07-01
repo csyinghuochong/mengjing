@@ -12,7 +12,7 @@ namespace ET.Server
         {
             List<ActorId> mapIdList = new List<ActorId>();
             FubenCenterComponent fubenCenterComponent = scene.GetComponent<FubenCenterComponent>();
-            mapIdList.Add(StartSceneConfigCategory.Instance.GetBySceneName(scene.Zone(), $"Map{ComHelp.MainCityID()}").ActorId);
+            mapIdList.Add(StartSceneConfigCategory.Instance.GetBySceneName(scene.Zone(), $"Map{CommonHelp.MainCityID()}").ActorId);
             mapIdList.AddRange(fubenCenterComponent.FubenActorIdList.Values.ToList() );
             for (int i = mapIdList.Count - 1; i >= 0; i--)
             {

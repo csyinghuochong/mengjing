@@ -141,7 +141,7 @@ namespace ET.Client
             BuyCellCost buyCellCost = ConfigData.BuyBagCellCosts[bagComponent.WarehouseAddedCell[0]];
 
             PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
-                $"是否花费{UICommonHelper.GetNeedItemDesc(buyCellCost.Cost)}购买一个背包格子?",
+                $"是否花费{CommonViewHelper.GetNeedItemDesc(buyCellCost.Cost)}购买一个背包格子?",
                 () => { BagClientNetHelper.RequestBuyBagCell(self.Root(), 0).Coroutine(); }, null).Coroutine();
             return;
         }

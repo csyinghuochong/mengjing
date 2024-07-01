@@ -166,8 +166,8 @@ namespace ET.Client
             {
                 GameObject uiItem = rewardList.transform.GetChild(j).gameObject;
 
-                UICommonHelper.SetImageGray(self.Root(), uiItem.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemIcon"), true);
-                UICommonHelper.SetImageGray(self.Root(), uiItem.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemQuality"), true);
+                CommonViewHelper.SetImageGray(self.Root(), uiItem.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemIcon"), true);
+                CommonViewHelper.SetImageGray(self.Root(), uiItem.GetComponent<ReferenceCollector>().Get<GameObject>("Image_ItemQuality"), true);
                 uiItem.GetComponent<ReferenceCollector>().Get<GameObject>("Label_ItemName").SetActive(false);
             }
 

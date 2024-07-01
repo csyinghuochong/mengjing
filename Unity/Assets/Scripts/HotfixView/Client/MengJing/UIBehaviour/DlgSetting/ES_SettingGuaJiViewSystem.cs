@@ -98,7 +98,7 @@ namespace ET.Client
             {
                 GameObject go = UnityEngine.Object.Instantiate(self.EG_SkillIconItemRectTransform.gameObject);
                 go.SetActive(false);
-                UICommonHelper.SetParent(go, self.EG_SkillIPositionSetRectTransform.GetChild(i).gameObject);
+                CommonViewHelper.SetParent(go, self.EG_SkillIPositionSetRectTransform.GetChild(i).gameObject);
                 self.SkillSetIconRightList.Add(go);
             }
         }

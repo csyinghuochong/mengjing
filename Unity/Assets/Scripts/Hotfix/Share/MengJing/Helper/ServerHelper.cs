@@ -77,9 +77,9 @@ namespace ET
             switch (versionMode)
             {
                 case VersionMode.BanHao:
-                    return innerNet ? ComHelp.LocalIp : LogicServerBanHao;
+                    return innerNet ? CommonHelp.LocalIp : LogicServerBanHao;
                 default:
-                    return innerNet ? ComHelp.LocalIp : LogicServer;
+                    return innerNet ? CommonHelp.LocalIp : LogicServer;
 
             }
         }
@@ -92,7 +92,7 @@ namespace ET
         /// <returns></returns>
         public static int GetNewServerId(int zone)
         {
-            bool banhao = ComHelp.IsBanHaoZone(zone);
+            bool banhao = CommonHelp.IsBanHaoZone(zone);
 
             List<ServerItem> serverItems_1 = new List<ServerItem>();
             if (banhao)
@@ -132,7 +132,7 @@ namespace ET
         /// <returns></returns>
         public static int GetOldServerId(int zone)
         {
-            bool banhao = ComHelp.IsBanHaoZone(zone);
+            bool banhao = CommonHelp.IsBanHaoZone(zone);
             List<ServerItem> serverItems_1 = new List<ServerItem>();
             if (banhao)
             {
@@ -196,7 +196,7 @@ namespace ET
             //Log.Debug("UpdateServerList");
             ServerItems.Clear();
 
-            VersionMode versionMode = ComHelp.IsBanHaoZone(zone) ? VersionMode.BanHao : VersionMode.Beta;
+            VersionMode versionMode = CommonHelp.IsBanHaoZone(zone) ? VersionMode.BanHao : VersionMode.Beta;
             string ip =  GetLogicServer(innerNet, versionMode);
             List<ServerItem> serverItems_1 = ServerItems;
 

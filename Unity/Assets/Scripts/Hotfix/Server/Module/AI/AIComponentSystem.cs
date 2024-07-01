@@ -230,7 +230,7 @@ namespace ET
             int haveMagic = 0;
             for (int i = 0; i < rolePetInfo.PetSkill.Count; i++)
             {
-                if (ComHelp.PetMagicSkill().Contains(rolePetInfo.PetSkill[i]))
+                if (CommonHelp.PetMagicSkill().Contains(rolePetInfo.PetSkill[i]))
                 {
                     haveMagic = rolePetInfo.PetSkill[i];
                     break;

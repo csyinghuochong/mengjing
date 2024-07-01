@@ -555,7 +555,7 @@ namespace ET.Client
         {
             string oldValue = self.UserInfoComponent.GetGameSettingValue(GameSettingEnum.HighFps);
             self.EG_HighFpsRectTransform.Find("Image_Click").gameObject.SetActive(oldValue == "1");
-            UICommonHelper.TargetFrameRate(oldValue == "1"? 60 : 30);
+            CommonViewHelper.TargetFrameRate(oldValue == "1"? 60 : 30);
         }
 
         public static void UpdateSmooth(this ES_SettingGame self)
@@ -616,7 +616,7 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (!bagComponent.CheckNeedItem(globalValueConfig.Value))
             {
-                string needItem = UICommonHelper.GetNeedItemDesc(globalValueConfig.Value);
+                string needItem = CommonViewHelper.GetNeedItemDesc(globalValueConfig.Value);
                 FlyTipComponent.Instance.ShowFlyTipDi($"需要 {needItem}");
                 return;
             }

@@ -54,7 +54,7 @@ namespace ET.Client
             self.E_Text_valueText.text = titleConfig.Des;
             self.OnUpdateUI();
 
-            UICommonHelper.SetImageGray(self.Root(), self.E_RawImageImage.gameObject, !activeed);
+            CommonViewHelper.SetImageGray(self.Root(), self.E_RawImageImage.gameObject, !activeed);
         }
     }
 }

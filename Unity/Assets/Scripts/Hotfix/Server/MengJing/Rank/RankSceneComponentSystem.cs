@@ -497,7 +497,7 @@ namespace ET.Server
 
             if (!have)
             {
-                if (rankList.Count < ComHelp.CampRankNumber)
+                if (rankList.Count < CommonHelp.CampRankNumber)
                 {
                     rankList.Add(rankingInfo);
                 }
@@ -559,7 +559,7 @@ namespace ET.Server
                 1000601,
                 1000701
             };
-            for (int i = 0; i < ComHelp.PetRankNumber; i++)
+            for (int i = 0; i < CommonHelp.PetRankNumber; i++)
             {
                 int[] indexs = RandomHelper.GetRandoms(3, 0, allPet.Count);
                 List<int> pets = new List<int>();

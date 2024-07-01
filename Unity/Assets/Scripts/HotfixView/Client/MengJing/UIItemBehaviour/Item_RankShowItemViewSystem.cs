@@ -48,7 +48,7 @@ namespace ET.Client
             else
             {
                 self.EG_RankShowSetRectTransform.gameObject.SetActive(true);
-                UICommonHelper.HideChildren(self.EG_RankShowSetRectTransform);
+                CommonViewHelper.HideChildren(self.EG_RankShowSetRectTransform);
                 self.E_Text_RankText.gameObject.SetActive(false);
                 switch (rank)
                 {

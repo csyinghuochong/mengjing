@@ -112,7 +112,7 @@ namespace ET.Client
 
         public static void OnClickSubButton(this ES_FashionShow self, int subType)
         {
-            UICommonHelper.SetParent(self.E_Image_SelectImage.gameObject, self.ButtonList[subType]);
+            CommonViewHelper.SetParent(self.E_Image_SelectImage.gameObject, self.ButtonList[subType]);
             self.E_Image_SelectImage.transform.SetAsFirstSibling();
 
             self.OnUpdateFashionList(subType);

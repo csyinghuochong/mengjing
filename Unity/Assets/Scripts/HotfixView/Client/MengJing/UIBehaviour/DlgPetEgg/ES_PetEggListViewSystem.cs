@@ -85,7 +85,7 @@ namespace ET.Client
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
             icon.GetComponent<Image>().sprite = sp;
-            UICommonHelper.SetParent(self.EG_IconItemDargRectTransform.gameObject, self.uiTransform.parent.parent.gameObject);
+            CommonViewHelper.SetParent(self.EG_IconItemDargRectTransform.gameObject, self.uiTransform.parent.parent.gameObject);
         }
 
         public static void Draging(this ES_PetEggList self, BagInfo binfo, PointerEventData pdata)
@@ -136,7 +136,7 @@ namespace ET.Client
                 break;
             }
 
-            UICommonHelper.SetParent(self.EG_IconItemDargRectTransform.gameObject, self.uiTransform.gameObject);
+            CommonViewHelper.SetParent(self.EG_IconItemDargRectTransform.gameObject, self.uiTransform.gameObject);
             self.EG_IconItemDargRectTransform.gameObject.SetActive(false);
         }
 
@@ -151,7 +151,7 @@ namespace ET.Client
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
             icon.GetComponent<Image>().sprite = sp;
-            UICommonHelper.SetParent(self.EG_IconItemDargRectTransform.gameObject, self.uiTransform.parent.parent.gameObject);
+            CommonViewHelper.SetParent(self.EG_IconItemDargRectTransform.gameObject, self.uiTransform.parent.parent.gameObject);
         }
 
         public static void PetEggDraging(this ES_PetEggList self, int binfo, PointerEventData pdata)
@@ -201,7 +201,7 @@ namespace ET.Client
                 break;
             }
 
-            UICommonHelper.SetParent(self.EG_IconItemDargRectTransform.gameObject, self.UITransform.gameObject);
+            CommonViewHelper.SetParent(self.EG_IconItemDargRectTransform.gameObject, self.UITransform.gameObject);
             self.EG_IconItemDargRectTransform.gameObject.SetActive(false);
         }
     }

@@ -14,7 +14,7 @@ namespace ET.Server
                 return;
             }
 
-            if (ComHelp.GetDayByTime(dBUnionInfo.MysteryFreshTime) != ComHelp.GetDayByTime(TimeHelper.ServerNow()))
+            if (CommonHelp.GetDayByTime(dBUnionInfo.MysteryFreshTime) != CommonHelp.GetDayByTime(TimeHelper.ServerNow()))
             {
                 int openDay = ServerHelper.GetOpenServerDay(false, scene.Zone());
                 dBUnionInfo.MysteryItemInfos = MysteryShopHelper.InitUnionMysteryItemInfos(openDay); 

@@ -44,8 +44,8 @@ namespace ET.Client
                 }
 
                 bool gray = bagComponent.GetItemNumber(item.ES_CommonItem.Baginfo.ItemID) <= 0;
-                UICommonHelper.SetImageGray(self.Root(), item.ES_CommonItem.E_ItemIconImage.gameObject, gray);
-                UICommonHelper.SetImageGray(self.Root(), item.ES_CommonItem.E_ItemQualityImage.gameObject, gray);
+                CommonViewHelper.SetImageGray(self.Root(), item.ES_CommonItem.E_ItemIconImage.gameObject, gray);
+                CommonViewHelper.SetImageGray(self.Root(), item.ES_CommonItem.E_ItemQualityImage.gameObject, gray);
             }
 
             ActivityConfig activityConfig = self.ActivityConfig;

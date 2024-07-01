@@ -554,7 +554,7 @@ public static (int, BattleInfo) GenerateBattleInstanceId(this FubenCenterCompone
                     break;
                 }
 
-                if (battleInfo.PlayerNumber < ComHelp.GetPlayerLimit(sceneId))
+                if (battleInfo.PlayerNumber < CommonHelp.GetPlayerLimit(sceneId))
                 {
                     battleInfo.PlayerNumber++;
                     camp = battleInfo.PlayerNumber % 2 + 1;

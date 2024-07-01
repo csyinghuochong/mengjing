@@ -232,7 +232,7 @@ namespace ET.Server
                 {
                     long playerLimit = playerLimitList[petMingPlayers[i].UnitId];
 
-                    float coffi = ComHelp.GetMineCoefficient(openDay, petMingPlayers[i].MineType, petMingPlayers[i].Postion,
+                    float coffi = CommonHelp.GetMineCoefficient(openDay, petMingPlayers[i].MineType, petMingPlayers[i].Postion,
                         self.DBDayActivityInfo.PetMingHexinList);
 
                     MineBattleConfig mineBattleConfig = MineBattleConfigCategory.Instance.Get(petMingPlayers[i].MineType);
