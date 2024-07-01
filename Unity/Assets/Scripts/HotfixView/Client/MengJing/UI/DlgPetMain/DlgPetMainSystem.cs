@@ -247,8 +247,8 @@ namespace ET.Client
             Vector3 move = new Vector3(pdata.delta.x * -0.01f, 0f, pdata.delta.y * -0.01f);
             Quaternion rotaion = Quaternion.Euler(0, -90, 0);
             Vector3 targ = self.CameraTarget.localPosition + rotaion * move;
-            targ.x = Mathf.Clamp(targ.x, AIData.FuBenCameraPositionMin_X, AIData.FuBenCameraPositionMax_X);
-            targ.z = Mathf.Clamp(targ.z, AIData.FuBenCameraPositionMin_Z, AIData.FuBenCameraPositionMax_Z);
+            targ.x = Mathf.Clamp(targ.x, AIViewData.FuBenCameraPositionMin_X, AIViewData.FuBenCameraPositionMax_X);
+            targ.z = Mathf.Clamp(targ.z, AIViewData.FuBenCameraPositionMin_Z, AIViewData.FuBenCameraPositionMax_Z);
             self.CameraTarget.localPosition = targ;
         }
 
