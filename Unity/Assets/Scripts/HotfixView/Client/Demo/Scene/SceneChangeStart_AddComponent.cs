@@ -44,7 +44,7 @@ namespace ET.Client
 
                         break;
                     case SceneTypeEnum.Tower:
-                        // UIHelper.Remove(args.ZoneScene, UIType.UITowerOpen);
+                        root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_TowerOpen);
                         break;
                     case SceneTypeEnum.Happy:
                         // UIHelper.Remove(args.ZoneScene, UIType.UIHappyMain);

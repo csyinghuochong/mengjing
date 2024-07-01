@@ -317,8 +317,8 @@ namespace ET.Client
                     dlgMain.View.uiTransform.localScale = Vector3.zero;
                     break;
                 case SceneTypeEnum.Tower:
-                    // UIHelper.Create(zoneScene, UIType.UITowerOpen).Coroutine();
-                    // uimain.GameObject.transform.localScale = Vector3.one;
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TowerOpen).Coroutine();
+                    dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
                 case SceneTypeEnum.RandomTower:
                     // UIHelper.Create(self.ZoneScene(), UIType.UIRandomOpen).Coroutine();

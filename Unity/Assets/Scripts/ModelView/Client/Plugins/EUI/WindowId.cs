@@ -136,5 +136,6 @@ namespace ET.Client
 		WindowID_DungeonHappyMain,
 		WindowID_PetMain,
 		WindowID_PetFubenResult,
+		WindowID_TowerOpen,
 	}
 }
