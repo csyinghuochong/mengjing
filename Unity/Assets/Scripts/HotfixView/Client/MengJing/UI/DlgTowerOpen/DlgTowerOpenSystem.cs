@@ -67,34 +67,30 @@ namespace ET.Client
 
         public static async ETTask OnFubenResult(this DlgTowerOpen self, M2C_FubenSettlement message)
         {
-            // if (self.M2C_FubenSettlement != null)
-            // {
-            //     return;
-            // }
-            //
-            // try
-            // {
-            //     long instanceId = self.InstanceId;
-            //     self.M2C_FubenSettlement = message;
-            //     self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-            //
-            //     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TowerFightReward);
-            //     if (instanceId != self.InstanceId)
-            //     {
-            //         return;
-            //     }
-            //
-            //     if (ui.GameObject == null)
-            //     {
-            //         return;
-            //     }
-            //
-            //     ui.GetComponent<UITowerFightRewardComponent>()?.OnUpdateUI(message);
-            // }
-            // catch (Exception ex)
-            // {
-            //     Log.Error(ex.ToString());
-            // }
+            if (self.M2C_FubenSettlement != null)
+            {
+                return;
+            }
+
+            try
+            {
+                long instanceId = self.InstanceId;
+                self.M2C_FubenSettlement = message;
+                self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TowerFightReward);
+                DlgTowerFightReward dlgTowerFightReward = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgTowerFightReward>();
+                if (instanceId != self.InstanceId)
+                {
+                    return;
+                }
+
+                dlgTowerFightReward.OnUpdateUI(message);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.ToString());
+            }
         }
 
         public static void OnUpdateUI(this DlgTowerOpen self, int towerId)

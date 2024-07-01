@@ -137,5 +137,6 @@ namespace ET.Client
 		WindowID_PetMain,
 		WindowID_PetFubenResult,
 		WindowID_TowerOpen,
+		WindowID_TowerFightReward,
 	}
 }
