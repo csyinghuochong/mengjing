@@ -34,9 +34,9 @@ namespace ET.Client
                         scene.GetComponent<PetComponentC>().OnPassPetFuben(mapComponent.SonSceneId, star);
                     }
 
-                    scene.GetComponent<UIComponent>().GetDlgLogic<DlgPetMain>().OnFubenResult(args.m2C_FubenSettlement);
-                    await scene.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetFubenResult);
-                    scene.GetComponent<UIComponent>().GetDlgLogic<DlgPetFubenResult>().OnUpdateUI(args.m2C_FubenSettlement);
+                    uiComponent.GetDlgLogic<DlgPetMain>().OnFubenResult(args.m2C_FubenSettlement);
+                    await uiComponent.ShowWindowAsync(WindowID.WindowID_PetFubenResult);
+                    uiComponent.GetDlgLogic<DlgPetFubenResult>().OnUpdateUI(args.m2C_FubenSettlement);
                     break;
                 case SceneTypeEnum.Tower:
                     // ui = UIHelper.GetUI(args.Scene, UIType.UITowerOpen);
@@ -47,15 +47,16 @@ namespace ET.Client
 
                     break;
                 case SceneTypeEnum.PetMing:
-                    // ui = await UIHelper.Create(args.Scene, UIType.UIPetFubenResult);
-                    // ui.GetComponent<UIPetFubenResultComponent>().OnUpdateUI(args.m2C_FubenSettlement);
+                    await uiComponent.ShowWindowAsync(WindowID.WindowID_PetFubenResult);
+                    uiComponent.GetDlgLogic<DlgPetFubenResult>().OnUpdateUI(args.m2C_FubenSettlement);
                     break;
                 case SceneTypeEnum.PetTianTi:
                     FlyTipComponent.Instance.ShowFlyTip("宠物天梯对战结束！！！");
 
                     // UIHelper.GetUI(args.Scene, UIType.UIPetMain).GetComponent<UIPetMainComponent>().OnFubenResult(args.m2C_FubenSettlement);
-                    // ui = await UIHelper.Create(args.Scene, UIType.UIPetFubenResult);
-                    // ui.GetComponent<UIPetFubenResultComponent>().OnUpdateUI(args.m2C_FubenSettlement);
+                    uiComponent.GetDlgLogic<DlgPetMain>().OnFubenResult(args.m2C_FubenSettlement);
+                    await uiComponent.ShowWindowAsync(WindowID.WindowID_PetFubenResult);
+                    uiComponent.GetDlgLogic<DlgPetFubenResult>().OnUpdateUI(args.m2C_FubenSettlement);
                     break;
                 case SceneTypeEnum.RandomTower:
                     // ui = await UIHelper.Create(args.Scene, UIType.UIRandomTowerResult);
@@ -76,8 +77,8 @@ namespace ET.Client
                 //     uimain.GetComponent<UIMainComponent>().BeginEnterScene(sceneTypeEnum);
                 //     break;
                 case SceneTypeEnum.SeasonTower:
-                    // ui = await UIHelper.Create(args.Scene, UIType.UIPetFubenResult);
-                    // ui.GetComponent<UIPetFubenResultComponent>().OnUpdateUI(args.m2C_FubenSettlement);
+                    await uiComponent.ShowWindowAsync(WindowID.WindowID_PetFubenResult);
+                    uiComponent.GetDlgLogic<DlgPetFubenResult>().OnUpdateUI(args.m2C_FubenSettlement);
                     break;
                 default:
                     // ui = await UIHelper.Create(args.Scene, UIType.UICellDungeonSettlement);

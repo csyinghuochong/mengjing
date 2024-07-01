@@ -100,7 +100,7 @@ namespace ET.Client
                 || mapComponent.SceneType == SceneTypeEnum.PetTianTi
                 || mapComponent.SceneType == SceneTypeEnum.PetMing)
             {
-                //root.GetComponent<UIComponent>().GetDlgLogic<DlgPetMain>()?.OnUnitHpUpdate(unitDefend, unitAttack, args.ChangeHpValue);
+                root.GetComponent<UIComponent>().GetDlgLogic<DlgPetMain>()?.OnUnitHpUpdate(unitDefend, unitAttack, args.ChangeHpValue);
             }
 
             if (mapComponent.SceneType == SceneTypeEnum.BaoZang
