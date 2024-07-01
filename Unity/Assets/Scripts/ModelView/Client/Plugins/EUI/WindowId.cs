@@ -135,5 +135,6 @@ namespace ET.Client
 		WindowID_CellDungeonRevive,
 		WindowID_DungeonHappyMain,
 		WindowID_PetMain,
+		WindowID_PetFubenResult,
 	}
 }

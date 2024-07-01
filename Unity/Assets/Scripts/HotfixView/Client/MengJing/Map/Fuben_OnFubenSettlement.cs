@@ -35,8 +35,8 @@ namespace ET.Client
                     }
 
                     scene.GetComponent<UIComponent>().GetDlgLogic<DlgPetMain>().OnFubenResult(args.m2C_FubenSettlement);
-                    // UI ui = await UIHelper.Create(args.Scene, UIType.UIPetFubenResult);
-                    // ui.GetComponent<UIPetFubenResultComponent>().OnUpdateUI(args.m2C_FubenSettlement);
+                    await scene.GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetFubenResult);
+                    scene.GetComponent<UIComponent>().GetDlgLogic<DlgPetFubenResult>().OnUpdateUI(args.m2C_FubenSettlement);
                     break;
                 case SceneTypeEnum.Tower:
                     // ui = UIHelper.GetUI(args.Scene, UIType.UITowerOpen);
