@@ -7,7 +7,7 @@ namespace ET.Server
 
     [EntitySystemOf(typeof(PetComponentS))]
     [FriendOf(typeof(PetComponentS))]
-    public static partial class PetComponentServerSystem
+    public static partial class PetComponentSSystem
     {
         [EntitySystem]
         private static void Awake(this ET.Server.PetComponentS self)
@@ -274,6 +274,7 @@ namespace ET.Server
 
         public static void OnLogin(this PetComponentS self)
         {
+            self.InitPetInfo();
             self.CheckSkin();
             self.CheckPetPingFen();
             self.CheckPetZiZhi();

@@ -254,7 +254,6 @@ namespace ET.Server
             unit.GetComponent<ChengJiuComponentS>().OnLogin();
             unit.GetComponent<JiaYuanComponentS>().OnLogin();
             unit.GetComponent<SkillSetComponentS>().OnLogin(self.UserInfo.Occ);
-
             self.LastLoginTime = currentTime;
             self.UserName = self.UserInfo.Name;
             self.ShouLieSendTime = 0;

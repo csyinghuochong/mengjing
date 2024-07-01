@@ -10,13 +10,13 @@ namespace ET.Server
     {
         protected override async ETTask Run(Scene scene, M2M_UnitTransferRequest request, M2M_UnitTransferResponse response)
         {
-            Log.Debug($"M2M_UnitTransferRequest:1");
+            Console.WriteLine($"M2M_UnitTransferRequest:1");
             UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
             Unit unit = MongoHelper.Deserialize<Unit>(request.Unit);
 
             unitComponent.AddChild(unit);
             unitComponent.Add(unit);
-
+            Console.WriteLine($"M2M_UnitTransferRequest:1_1");
             foreach (byte[] bytes in request.Entitys)
             {
                 try
@@ -31,7 +31,7 @@ namespace ET.Server
                     throw;
                 }
             }
-            Log.Debug($"M2M_UnitTransferRequest:2");
+            Console.WriteLine($"M2M_UnitTransferRequest:2");
             
             unit.AddComponent<MoveComponent>();
             unit.AddComponent<SkillManagerComponentS>();
@@ -40,14 +40,20 @@ namespace ET.Server
             unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
             unit.GetComponent<DBSaveComponent>().Activeted();
 
+            Console.WriteLine($"M2M_UnitTransferRequest:2_a");
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             numericComponent.ApplyValue(NumericType.BattleCamp, CampEnum.CampPlayer_1, false);
             numericComponent.ApplyValue(NumericType.RunRaceTransform, 0, false);
             numericComponent.ApplyValue(NumericType.CardTransform, 0, false);
+            
+            Console.WriteLine($"M2M_UnitTransferRequest:2_b");
+            
             unit.GetComponent<HeroDataComponentS>().CheckNumeric();
             Function_Fight.UnitUpdateProperty_Base(unit, false, false);
             
-            Log.Debug($"M2M_UnitTransferRequest:3");
+            Console.WriteLine($"M2M_UnitTransferRequest:2_c");
+            
+            Console.WriteLine($"M2M_UnitTransferRequest:3");
             // 通知客户端开始切场景
             M2C_StartSceneChange m2CStartSceneChange = new() { SceneInstanceId = scene.InstanceId, SceneId = request.SceneId, SceneType = request.SceneType, Difficulty = request.Difficulty, ParamInfo = request.ParamInfo };
             MapMessageHelper.SendToClient(unit, m2CStartSceneChange);
@@ -268,13 +274,13 @@ namespace ET.Server
             }
             
             TransferHelper.AfterTransfer(unit, request.SceneType);
-            Log.Debug($"M2M_UnitTransferRequest:4");
+            Console.WriteLine($"M2M_UnitTransferRequest:4");
             
             // 通知客户端创建My Unit
             M2C_CreateMyUnit m2CCreateUnits = new();
             m2CCreateUnits.Unit = UnitHelper.CreateUnitInfo(unit);
             MapMessageHelper.SendToClient(unit, m2CCreateUnits);
-            Log.Debug($"M2M_UnitTransferRequest:5");
+            Console.WriteLine($"M2M_UnitTransferRequest:5");
             // 加入aoi
             unit.AddComponent<AOIEntity, int, float3>(aoivalue * 1000, unit.Position);
 
