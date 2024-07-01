@@ -329,8 +329,8 @@ namespace ET.Client
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
                 case SceneTypeEnum.Battle:
-                    // UIHelper.Create(zoneScene, UIType.UIBattleMain).Coroutine();
-                    // uimain.GameObject.transform.localScale = Vector3.one;
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_BattleMain).Coroutine();
+                    dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
                 case SceneTypeEnum.Arena:
                     // UIHelper.Create(zoneScene, UIType.UIArenaMain).Coroutine();

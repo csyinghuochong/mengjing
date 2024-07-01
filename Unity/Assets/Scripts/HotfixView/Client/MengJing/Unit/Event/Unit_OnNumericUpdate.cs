@@ -210,8 +210,8 @@ namespace ET.Client
 
                     break;
                 case NumericType.BattleTodayKill:
-                    // UI uI_2 = UIHelper.GetUI(args.Unit.ZoneScene(), UIType.UIBattleMain);
-                    // uI_2?.GetComponent<UIBattleMainComponent>().OnUpdateSelfKill();
+                    DlgBattleMain dlgBattleMain = root.GetComponent<UIComponent>().GetDlgLogic<DlgBattleMain>();
+                    dlgBattleMain?.OnUpdateSelfKill();
                     break;
                 case NumericType.PetExtendNumber:
                     Log.Debug("NumericType.PetExtendNumber");

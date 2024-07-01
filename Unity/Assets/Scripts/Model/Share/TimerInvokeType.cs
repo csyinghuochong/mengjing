@@ -78,5 +78,6 @@
         public const int PetMainTimer = 346;
         public const int TowerOpenTimer = 347;
         public const int UIHappyMainTimer = 348;
+        public const int BattleMainTimer = 349;
     }
 }

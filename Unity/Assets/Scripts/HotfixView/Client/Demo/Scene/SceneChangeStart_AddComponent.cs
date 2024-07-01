@@ -50,7 +50,7 @@ namespace ET.Client
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_HappyMain);
                         break;
                     case SceneTypeEnum.Battle:
-                        // UIHelper.Remove(args.ZoneScene, UIType.UIBattleMain);
+                        root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_BattleMain);
                         break;
                     case SceneTypeEnum.Arena:
                         // UIHelper.Remove(args.ZoneScene, UIType.UIArenaMain);

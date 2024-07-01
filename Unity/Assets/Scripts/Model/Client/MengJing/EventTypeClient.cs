@@ -358,4 +358,9 @@ namespace ET.Client
     {
         public M2C_HappyInfoResult M2CHappyInfoResult;
     }
+
+    public struct BattleInfo
+    {
+        public M2C_BattleInfoResult M2CBattleInfoResult;
+    }
 }
