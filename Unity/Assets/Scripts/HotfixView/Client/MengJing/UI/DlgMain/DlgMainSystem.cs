@@ -652,9 +652,8 @@ namespace ET.Client
 
         public static void RefreshMainTeamItems(this DlgMain self)
         {
-
         }
-        
+
         public static void OnUpdateDamage(this DlgMain self, M2C_SyncMiJingDamage message)
         {
             // for (int i = 0; i < message.DamageList.Count; i++)
@@ -1918,7 +1917,7 @@ namespace ET.Client
                 self.View.E_Button_HongBaoButton.gameObject.SetActive(false);
             }
         }
-        
+
         public static void OnHorseRide(this DlgMain self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());

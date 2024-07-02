@@ -365,10 +365,10 @@ namespace ET.Client
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_MiJingMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
-                // case SceneTypeEnum.SeasonTower:
-                //     UIHelper.Create(zoneScene, UIType.UISeasonMain).Coroutine();
-                //     uimain.GameObject.transform.localScale = Vector3.one;
-                //     break;
+                case SceneTypeEnum.SeasonTower:
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SeasonMain).Coroutine();
+                    dlgMain.View.uiTransform.localScale = Vector3.one;
+                    break;
                 default:
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;

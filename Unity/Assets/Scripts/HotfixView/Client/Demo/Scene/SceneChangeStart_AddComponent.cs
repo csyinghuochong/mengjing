@@ -77,7 +77,7 @@ namespace ET.Client
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_MiJingMain);
                         break;
                     case SceneTypeEnum.SeasonTower:
-                        // UIHelper.Remove(args.ZoneScene, UIType.UISeasonMain);
+                        root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_SeasonMain);
                         break;
                     default:
                         break;

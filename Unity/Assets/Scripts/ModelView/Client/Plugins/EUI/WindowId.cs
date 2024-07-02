@@ -147,5 +147,6 @@ namespace ET.Client
 		WindowID_RunRaceMain,
 		WindowID_DemonMain,
 		WindowID_MiJingMain,
+		WindowID_SeasonMain,
 	}
 }
