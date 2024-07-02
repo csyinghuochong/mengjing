@@ -1924,5 +1924,17 @@ namespace ET.Client
             // self.View.E_Button_Horse.SetActive(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HorseFightID) > 0);
             self.View.E_CityHorseButton.gameObject.SetActive(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HorseFightID) > 0);
         }
+        
+        public static  void OnCellDungeonEnterShow(this DlgMain self, int chapterId)
+        {
+            if (chapterId == 0)
+                return;
+
+            // var BaseObj = ResourcesComponent.Instance.LoadAsset<GameObject>(ABPathHelper.GetUGUIPath("CellDungeon/UICellDungeonEnterShow"));
+            // UI uiskillButton = self.AddChild<UI, string, GameObject>("ChapterEnterShow", GameObject.Instantiate(BaseObj));
+            // uiskillButton.AddComponent<UICellDungeonEnterShowComponent>().OnUpdateUI(chapterId);
+            //
+            // UICommonHelper.SetParent(uiskillButton.GameObject, UIEventComponent.Instance.UILayers[(int)UILayer.Mid].gameObject);
+        }
     }
 }

@@ -307,8 +307,8 @@ namespace ET.Client
 
                     break;
                 case SceneTypeEnum.CellDungeon:
-                    // dlgMain.OnCellDungeonEnterShow(self.ChapterId);
-                    // dlgMain.GameObject.transform.localScale = Vector3.one;
+                    dlgMain.OnCellDungeonEnterShow(self.ChapterId);
+                    dlgMain.View.uiTransform.localScale = Vector3.zero;
                     break;
                 case SceneTypeEnum.PetDungeon:
                 case SceneTypeEnum.PetTianTi:
