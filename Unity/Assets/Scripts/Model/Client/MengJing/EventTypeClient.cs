@@ -345,6 +345,16 @@ namespace ET.Client
         public M2C_FubenSettlement m2C_FubenSettlement;
     }
 
+    public struct RunRaceRewardInfo
+    {
+        public M2C_RankRunRaceReward M2CRankRunRaceReward;
+    }
+
+    public struct RunRaceInfo
+    {
+        public M2C_RankRunRaceMessage M2CRankRunRaceMessage;
+    }
+
     public struct RunRaceBattleInfo
     {
         public M2C_RunRaceBattleInfo M2C_RunRaceBattleInfo;
