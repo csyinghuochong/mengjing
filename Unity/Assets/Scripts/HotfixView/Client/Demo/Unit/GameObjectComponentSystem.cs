@@ -243,11 +243,11 @@ namespace ET.Client
 
         public static void RecoverHorse(this GameObjectComponent self)
         {
-            // if (self.ObjectHorse != null)
-            // {
-            //     GameObjectPoolComponent.Instance.RecoverGameObject(self.HorseAssetsPath, self.ObjectHorse);
-            //     self.ObjectHorse = null;
-            // }
+            if (self.ObjectHorse != null)
+            {
+                GameObjectLoadHelper.RecoverGameObject(self.HorseAssetsPath, self.ObjectHorse);
+                self.ObjectHorse = null;
+            }
         }
 
         public static void UpdateRotation(this GameObjectComponent self, Quaternion quaternion)
