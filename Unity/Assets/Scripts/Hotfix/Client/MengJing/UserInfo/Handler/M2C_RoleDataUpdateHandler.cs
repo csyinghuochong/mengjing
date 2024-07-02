@@ -17,7 +17,7 @@
                     updateValue = message.UpdateTypeValue;
                     break;
                 case UserDataType.BuffSkill:
-                    // HintHelp.GetInstance().DataUpdate(DataType.UpdateUserBuffSkill, "", message.UpdateValueLong);
+                    EventSystem.Instance.Publish(root, new UpdateUserBuffSkill() { UpdateValue = message.UpdateValueLong });
                     updateValue = string.Empty;
                     break;
                 case (int)UserDataType.Exp:

@@ -6,14 +6,263 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class OnSkillUse_DlgRunRaceMainRefresh: AEvent<Scene, OnSkillUse>
+    {
+        protected override async ETTask Run(Scene scene, OnSkillUse args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRunRaceMain>()?.OnSkillUse(args.SkillId);
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [Event(SceneType.Demo)]
+    public class UpdateUserBuffSkill_DlgRunRaceMainRefresh: AEvent<Scene, UpdateUserBuffSkill>
+    {
+        protected override async ETTask Run(Scene scene, UpdateUserBuffSkill args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgRunRaceMain>()?.OnUpdateUserBuffSkill(args.UpdateValue);
+            await ETTask.CompletedTask;
+        }
+    }
+
+    [FriendOf(typeof (DlgRunRaceMainViewComponent))]
+    [FriendOf(typeof (ES_SkillGrid))]
     [FriendOf(typeof (DlgRunRaceMain))]
     public static class DlgRunRaceMainSystem
     {
         public static void RegisterUIEvent(this DlgRunRaceMain self)
         {
+            self.Rankings.Add(self.View.EG_PlayerInfoItem_1RectTransform.gameObject);
+            self.Rankings.Add(self.View.EG_PlayerInfoItem_2RectTransform.gameObject);
+            self.Rankings.Add(self.View.EG_PlayerInfoItem_3RectTransform.gameObject);
+            self.Rankings.Add(self.View.EG_PlayerInfoItem_OtherRectTransform.gameObject);
+
+            self.View.EG_PlayerInfoItem_1RectTransform.gameObject.SetActive(false);
+            self.View.EG_PlayerInfoItem_2RectTransform.gameObject.SetActive(false);
+            self.View.EG_PlayerInfoItem_3RectTransform.gameObject.SetActive(false);
+            self.View.EG_PlayerInfoItem_OtherRectTransform.gameObject.SetActive(false);
+
+            FuntionConfig funtionConfig = FuntionConfigCategory.Instance.Get(1058);
+            string[] openTimes = funtionConfig.OpenTime.Split('@');
+            self.ReadyTime = (int.Parse(openTimes[1].Split(';')[0]) * 60 + int.Parse(openTimes[1].Split(';')[1])) * 60;
+            self.EndTime = (int.Parse(openTimes[2].Split(';')[0]) * 60 + int.Parse(openTimes[2].Split(';')[1])) * 60;
+
+            self.UISkillGrids.Clear();
+
+            ES_MainSkill esMainSkill = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_MainSkill;
+
+            ES_SkillGrid uiSkillGridComponent_1 = self.AddChild<ES_SkillGrid, Transform>(esMainSkill.ES_SkillGrid_Normal_1.uiTransform);
+            uiSkillGridComponent_1.SkillCancelHandler = self.ShowCancelButton;
+            uiSkillGridComponent_1.UseSkillHandler = self.OnUseSkill;
+            uiSkillGridComponent_1.uiTransform.gameObject.SetActive(false);
+            uiSkillGridComponent_1.Index = 0;
+            self.UISkillGrids.Add(uiSkillGridComponent_1);
+
+            ES_SkillGrid uiSkillGridComponent_2 = self.AddChild<ES_SkillGrid, Transform>(esMainSkill.ES_SkillGrid_Normal_2.uiTransform);
+            uiSkillGridComponent_2.SkillCancelHandler = self.ShowCancelButton;
+            uiSkillGridComponent_2.UseSkillHandler = self.OnUseSkill;
+            uiSkillGridComponent_2.uiTransform.gameObject.SetActive(false);
+            uiSkillGridComponent_2.Index = 1;
+            self.UISkillGrids.Add(uiSkillGridComponent_2);
         }
 
         public static void ShowWindow(this DlgRunRaceMain self, Entity contextData = null)
+        {
+            self.OnInitUI();
+            self.UpdateRanking().Coroutine();
+            self.ShoweEndTime().Coroutine();
+        }
+
+        public static void OnUseSkill(this DlgRunRaceMain self, int index)
+        {
+            self.Index = index;
+        }
+
+        public static void OnSkillUse(this DlgRunRaceMain self, long skillId)
+        {
+            for (int i = 0; i < self.UISkillGrids.Count; i++)
+            {
+                if (self.UISkillGrids[i].SkillPro == null)
+                {
+                    continue;
+                }
+
+                if (self.UISkillGrids[i].SkillPro.SkillID != skillId)
+                {
+                    continue;
+                }
+
+                if (i == self.Index || i == self.UISkillGrids.Count - 1)
+                {
+                    self.UISkillGrids[i].RemoveSkillInfoShow();
+                    self.UISkillGrids[i].uiTransform.gameObject.SetActive(false);
+                    break;
+                }
+            }
+        }
+
+        public static void OnUpdateUserBuffSkill(this DlgRunRaceMain self, long skillId)
+        {
+            int addIndex = 0;
+            for (int i = 0; i < self.UISkillGrids.Count; i++)
+            {
+                if (self.UISkillGrids[i].uiTransform.gameObject.activeSelf)
+                {
+                    continue;
+                }
+
+                addIndex = i;
+
+                break;
+            }
+
+            self.UISkillGrids[addIndex].uiTransform.gameObject.SetActive(true);
+            SkillPro skillPro = new SkillPro();
+            skillPro.SkillID = (int)skillId;
+            skillPro.SkillSetType = (int)SkillSetEnum.Skill;
+            skillPro.SkillSource = (int)SkillSourceEnum.Buff;
+            self.UISkillGrids[addIndex].UpdateSkillInfo(skillPro);
+
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            FunctionEffect.PlaySelfEffect(unit, 60000002);
+        }
+
+        public static void OnInitUI(this DlgRunRaceMain self)
+        {
+            BattleMessageComponent battleMessageComponent = self.Root().GetComponent<BattleMessageComponent>();
+            self.UpdateNextTransformTime(battleMessageComponent.M2C_RunRaceBattleInfo);
+        }
+
+        public static async ETTask ShoweEndTime(this DlgRunRaceMain self)
+        {
+            TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
+            while (!self.IsDisposed)
+            {
+                DateTime dateTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+                long curTime = (dateTime.Hour * 60 + dateTime.Minute) * 60 + dateTime.Second;
+                long endTime = self.EndTime - curTime;
+                long leftTime = (self.NextTransformTime - TimeHelper.ServerNow()) / 1000;
+
+                long readyTime = self.ReadyTime - curTime;
+                if (readyTime > 0)
+                {
+                    self.View.E_ReadyTimeTextText.text = $"奔跑准备时间 {readyTime / 60}:{readyTime % 60}";
+                    self.View.E_TransformTimeTextText.text = string.Empty;
+                }
+                else if (endTime > 0)
+                {
+                    self.View.E_ReadyTimeTextText.text = $"活动结束倒计时 {endTime / 60}:{endTime % 60}";
+                    self.View.E_TransformTimeTextText.text = $"下次变身时间:  {leftTime / 60}:{leftTime % 60}";
+                }
+
+                await timerComponent.WaitAsync(1000);
+                if (self.IsDisposed)
+                {
+                    break;
+                }
+            }
+        }
+
+        public static void UpdateNextTransformTime(this DlgRunRaceMain self, M2C_RunRaceBattleInfo message)
+        {
+            Log.Debug($"下次变身时间:  {message.NextTransforTime - TimeHelper.ServerNow()}");
+            self.NextTransformTime = message.NextTransforTime;
+        }
+
+        public static async ETTask UpdateRanking(this DlgRunRaceMain self)
+        {
+            long instacnid = self.InstanceId;
+            R2C_RankRunRaceResponse response = await ActivityNetHelper.RankRunRaceRequest(self.Root());
+
+            if (instacnid != self.InstanceId)
+            {
+                return;
+            }
+
+            self.View.uiTransform.SetAsFirstSibling();
+            if (response.RankList == null || response.RankList.Count < 1)
+            {
+                return;
+            }
+
+            self.UpdateRanking(response.RankList);
+            await ETTask.CompletedTask;
+        }
+
+        public static async ETTask WaitExitFuben(this DlgRunRaceMain self)
+        {
+            long instanceid = self.InstanceId;
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(TimeHelper.Second * 5);
+            if (instanceid != self.InstanceId)
+            {
+                return;
+            }
+
+            EnterMapHelper.RequestQuitFuben(self.Root());
+        }
+
+        public static void ShowPlayerInfo(this DlgRunRaceMain self, int i, GameObject gameObject, RankingInfo rankingInfo)
+        {
+            if (rankingInfo.PlayerLv < 0)
+            {
+                gameObject.GetComponentInChildren<Text>().text = $"第{i + 1}名 {rankingInfo.PlayerName}  还剩:{rankingInfo.Combat * 0.01}";
+            }
+            else
+            {
+                DateTime dateTime = TimeInfo.Instance.ToDateTime(rankingInfo.Combat);
+                string showTime = $"{dateTime.Hour}:{dateTime.Minute}:{dateTime.Second}";
+                gameObject.GetComponentInChildren<Text>().text = $"第{i + 1}名 {rankingInfo.PlayerName}  时间:{showTime}";
+            }
+        }
+
+        public static void UpdateRanking(this DlgRunRaceMain self, List<RankingInfo> rankingInfos)
+        {
+            int num = 0;
+            for (int i = 0; i < rankingInfos.Count; i++)
+            {
+                if (i == 0)
+                {
+                    self.ShowPlayerInfo(i, self.View.EG_PlayerInfoItem_1RectTransform.gameObject, rankingInfos[i]);
+                    self.View.EG_PlayerInfoItem_1RectTransform.gameObject.SetActive(true);
+                }
+                else if (i == 1)
+                {
+                    self.ShowPlayerInfo(i, self.View.EG_PlayerInfoItem_2RectTransform.gameObject, rankingInfos[i]);
+                    self.View.EG_PlayerInfoItem_1RectTransform.gameObject.SetActive(true);
+                }
+                else if (i == 2)
+                {
+                    self.ShowPlayerInfo(i, self.View.EG_PlayerInfoItem_3RectTransform.gameObject, rankingInfos[i]);
+                    self.View.EG_PlayerInfoItem_1RectTransform.gameObject.SetActive(true);
+                }
+                else
+                {
+                    if (num < self.Rankings.Count)
+                    {
+                        self.ShowPlayerInfo(i, self.Rankings[i], rankingInfos[i]);
+                        self.Rankings[i].SetActive(true);
+                    }
+                    else
+                    {
+                        GameObject go = UnityEngine.Object.Instantiate(self.View.EG_PlayerInfoItem_OtherRectTransform.gameObject);
+                        self.ShowPlayerInfo(i, go, rankingInfos[i]);
+                        go.SetActive(true);
+                        CommonViewHelper.SetParent(go, self.View.EG_RankingListNodeRectTransform.gameObject);
+                        self.Rankings.Add(go);
+                    }
+                }
+
+                num++;
+            }
+
+            for (int i = num; i < self.Rankings.Count; i++)
+            {
+                self.Rankings[i].SetActive(false);
+            }
+        }
+
+        public static void ShowCancelButton(this DlgRunRaceMain self, bool show)
         {
         }
     }

@@ -267,6 +267,11 @@ namespace ET.Client
         public int SkillId;
     }
 
+    public struct UpdateUserBuffSkill
+    {
+        public long UpdateValue;
+    }
+
     //动画
     public struct PlayAnimator
     {

@@ -330,5 +330,12 @@ namespace ET.Client
             M2C_HappyMoveResponse response = (M2C_HappyMoveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<R2C_RankRunRaceResponse> RankRunRaceRequest(Scene root)
+        {
+            C2R_RankRunRaceRequest request = new();
+            R2C_RankRunRaceResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as R2C_RankRunRaceResponse;
+            return response;
+        }
     }
 }

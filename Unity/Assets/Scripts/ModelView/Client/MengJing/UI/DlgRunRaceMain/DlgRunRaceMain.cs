@@ -11,6 +11,7 @@ namespace ET.Client
             get => this.GetComponent<DlgRunRaceMainViewComponent>();
         }
 
+        public long NextTransformTime;
         public long EndTime;
         public long ReadyTime;
         public List<GameObject> Rankings = new();
