@@ -179,5 +179,11 @@
             T2C_TeamDungeonAgreeResponse repose = (T2C_TeamDungeonAgreeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return repose.Error;
         }
+
+        public static void TeamPickRequest(Scene root, DropInfo dropInfo, int need)
+        {
+            C2M_TeamPickRequest request = new() { DropItem = dropInfo, Need = need };
+            root.GetComponent<ClientSenderCompnent>().Send(request);
+        }
     }
 }

@@ -79,5 +79,6 @@
         public const int TowerOpenTimer = 347;
         public const int UIHappyMainTimer = 348;
         public const int BattleMainTimer = 349;
+        public const int UITeamDropTimer = 350;
     }
 }

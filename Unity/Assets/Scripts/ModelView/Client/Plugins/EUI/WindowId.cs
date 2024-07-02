@@ -142,5 +142,6 @@ namespace ET.Client
 		WindowID_HappyMain,
 		WindowID_BattleMain,
 		WindowID_ArenaMain,
+		WindowID_TeamMain,
 	}
 }

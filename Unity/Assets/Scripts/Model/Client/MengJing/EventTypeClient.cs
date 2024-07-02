@@ -368,4 +368,9 @@ namespace ET.Client
     {
         public M2C_AreneInfoResult M2CAreneInfoResult;
     }
+
+    public struct TeamPickNotice
+    {
+        public M2C_TeamPickMessage M2CTeamPickMessage;
+    }
 }
