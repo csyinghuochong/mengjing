@@ -393,4 +393,9 @@ namespace ET.Client
     {
         public M2C_TeamPickMessage M2CTeamPickMessage;
     }
+
+    public struct SyncMiJingDamage
+    {
+        public M2C_SyncMiJingDamage M2C_SyncMiJingDamage;
+    }
 }

@@ -1,12 +1,15 @@
-﻿namespace ET.Client
+﻿using System.Collections.Generic;
+
+namespace ET.Client
 {
-	 [ComponentOf(typeof(UIBaseWindow))]
-	public  class DlgMiJingMain :Entity,IAwake,IUILogic
-	{
+    [ComponentOf(typeof (UIBaseWindow))]
+    public class DlgMiJingMain: Entity, IAwake, IUILogic
+    {
+        public DlgMiJingMainViewComponent View
+        {
+            get => this.GetComponent<DlgMiJingMainViewComponent>();
+        }
 
-		public DlgMiJingMainViewComponent View { get => this.GetComponent<DlgMiJingMainViewComponent>();} 
-
-		 
-
-	}
+        public List<Scroll_Item_MainTeamItem> TeamUIList = new();
+    }
 }

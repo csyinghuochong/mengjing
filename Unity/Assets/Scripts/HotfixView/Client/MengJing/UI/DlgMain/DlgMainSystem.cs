@@ -650,23 +650,18 @@ namespace ET.Client
             // scrollItemMainTeamItem.Refresh(self.ShowTaskPros[index]);
         }
 
-        private static void RefreshMainTeamItems(this DlgMain self)
+        public static void RefreshMainTeamItems(this DlgMain self)
         {
-            self.ShowTaskPros.Clear();
-            foreach (TaskPro taskPro in self.Root().GetComponent<TaskComponentC>().RoleTaskList)
-            {
-                if (taskPro.TrackStatus == 0)
-                {
-                    continue;
-                }
 
-                self.ShowTaskPros.Add(taskPro);
-            }
-
-            self.View.E_RoseTaskButton.gameObject.SetActive(self.ShowTaskPros.Count == 0);
-
-            self.AddUIScrollItems(ref self.ScrollItemMainTasks, self.ShowTaskPros.Count);
-            self.View.E_MainTaskItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskPros.Count);
+        }
+        
+        public static void OnUpdateDamage(this DlgMain self, M2C_SyncMiJingDamage message)
+        {
+            // for (int i = 0; i < message.DamageList.Count; i++)
+            // {
+            //     UIMainTeamItemComponent uIMainTeamItemComponent = self.TeamUIList[i];
+            //     uIMainTeamItemComponent.OnUpdateDamage(message.DamageList[i]);
+            // }
         }
 
         public static void OnBtn_RoseTeam(this DlgMain self)
