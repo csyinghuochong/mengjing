@@ -334,31 +334,33 @@ namespace ET.Client
             {
                 return;
             }
-            // Unit unit = self.GetParent<Unit>();
-            // UICommonHelper.SetParent(go, GlobalComponent.Instance.UnitPlayer.gameObject);
-            // go.SetActive(true);
-            // go.transform.localPosition = unit.Position;
-            // go.transform.rotation = unit.Rotation;
-            //
-            // UICommonHelper.SetParent(self.GameObject, HoreseHelper.GetHorseNode(self.ObjectHorse));
-            // self.GameObject.transform.localScale = HoreseHelper.GetRoleScale(go, horseId) * Vector3.one;
-            // //特殊处理
-            // if (horseId == 10008)
-            // {
-            //     self.GameObject.transform.localRotation = Quaternion.Euler(0, 90, 0);
-            // }
-            // unit.GetComponent<FsmComponent>()?.SetHorseState();
-            // try
-            // {
-            //     unit.GetComponent<AnimatorComponent>()?.UpdateAnimator(go);
-            // }
-            // catch (Exception ex)
-            // {
-            //     Log.Error($"OnShangMaError:  {ex.ToString()}");
-            // }
-            //
-            // self.ShowRoleDi(false);
-            // self.CheckRunState();
+
+            Unit unit = self.GetParent<Unit>();
+            CommonViewHelper.SetParent(go, self.Root().GetComponent<GlobalComponent>().Unit.gameObject);
+            go.SetActive(true);
+            go.transform.localPosition = unit.Position;
+            go.transform.rotation = unit.Rotation;
+
+            CommonViewHelper.SetParent(self.GameObject, HoreseHelper.GetHorseNode(self.ObjectHorse));
+            self.GameObject.transform.localScale = HoreseHelper.GetRoleScale(go, horseId) * Vector3.one;
+            //特殊处理
+            if (horseId == 10008)
+            {
+                self.GameObject.transform.localRotation = Quaternion.Euler(0, 90, 0);
+            }
+
+            unit.GetComponent<FsmComponent>()?.SetHorseState();
+            try
+            {
+                unit.GetComponent<AnimatorComponent>()?.UpdateAnimator(go);
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"OnShangMaError:  {ex.ToString()}");
+            }
+
+            self.ShowRoleDi(false);
+            self.CheckRunState();
         }
 
         public static void OnXiaMa(this GameObjectComponent self)
@@ -367,52 +369,56 @@ namespace ET.Client
             {
                 return;
             }
-            // self.RecoverHorse();
-            // Unit unit = self.GetParent<Unit>();
-            // UICommonHelper.SetParent(self.GameObject, GlobalComponent.Instance.UnitPlayer.gameObject);
-            // self.UpdatePositon(self.GetParent<Unit>().Position);
-            // unit.GetComponent<AnimatorComponent>()?.UpdateAnimator(self.GameObject);
-            // self.ShowRoleDi(true);
-            // self.CheckRunState();
+
+            self.RecoverHorse();
+            Unit unit = self.GetParent<Unit>();
+            CommonViewHelper.SetParent(self.GameObject, self.Root().GetComponent<GlobalComponent>().Unit.gameObject);
+            self.UpdatePositon(self.GetParent<Unit>().Position);
+            unit.GetComponent<AnimatorComponent>()?.UpdateAnimator(self.GameObject);
+            self.ShowRoleDi(true);
+            self.CheckRunState();
         }
 
         public static void OnUpdateHorse(this GameObjectComponent self)
         {
+            FlyTipComponent.Instance.ShowFlyTipDi("骑马！！！");
             if (self.GameObject == null)
             {
                 return;
             }
 
-            // Unit unit = self.GetParent<Unit>();
-            // NumericComponentClient numericComponent = unit.GetComponent<NumericComponentClient>();
-            // if (numericComponent.GetAsInt(NumericType.RunRaceTransform) > 0
-            //     || numericComponent.GetAsInt(NumericType.CardTransform) > 0)
-            // {
-            //     return;
-            // }
-            //
-            // int horseRide = numericComponent.GetAsInt(NumericType.HorseRide);
-            // if (horseRide != 0)
-            // {
-            //     MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            //     if (SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
-            //     {
-            //         int sceneid = mapComponent.SceneId;
-            //         SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
-            //         if (sceneConfig.IfMount == 1)
-            //         {
-            //             return;
-            //         }
-            //     }
-            //
-            //     ZuoQiShowConfig zuoQiShowConfig = ZuoQiShowConfigCategory.Instance.Get(horseRide);
-            //     self.HorseAssetsPath = ABPathHelper.GetUnitPath($"ZuoQi/{zuoQiShowConfig.ModelID}");
-            //     GameObjectPoolComponent.Instance.AddLoadQueue(self.HorseAssetsPath, self.InstanceId, self.OnLoadHorse);
-            // }
-            // else
-            // {
-            //     self.OnXiaMa();
-            // }
+            Unit unit = self.GetParent<Unit>();
+            NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
+            if (numericComponent.GetAsInt(NumericType.RunRaceTransform) > 0
+                || numericComponent.GetAsInt(NumericType.CardTransform) > 0)
+            {
+                return;
+            }
+
+            int horseRide = numericComponent.GetAsInt(NumericType.HorseRide);
+            if (horseRide != 0)
+            {
+                MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+                if (SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
+                {
+                    int sceneid = mapComponent.SceneId;
+                    SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
+                    if (sceneConfig.IfMount == 1)
+                    {
+                        return;
+                    }
+                }
+
+                ZuoQiShowConfig zuoQiShowConfig = ZuoQiShowConfigCategory.Instance.Get(horseRide);
+
+                // self.HorseAssetsPath = ABPathHelper.GetUnitPath($"ZuoQi/{zuoQiShowConfig.ModelID}");
+                self.HorseAssetsPath = ABPathHelper.GetUnitPath($"ZuoQi/{10001}");
+                GameObjectLoadHelper.AddLoadQueue(self.Root(), self.HorseAssetsPath, self.InstanceId, self.OnLoadHorse);
+            }
+            else
+            {
+                self.OnXiaMa();
+            }
         }
 
         public static void OnAddCollider(this GameObjectComponent self, GameObject go)
