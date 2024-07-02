@@ -337,9 +337,9 @@ namespace ET.Client
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
                 case SceneTypeEnum.TeamDungeon:
-                    // UIHelper.Create(zoneScene, UIType.UIEnterMapHint).Coroutine();
-                    // UIHelper.Create(zoneScene, UIType.UITeamMain).Coroutine();
-                    // uimain.GameObject.transform.localScale = Vector3.one;
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_EnterMapHint).Coroutine();
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TeamMain).Coroutine();
+                    dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
                 case SceneTypeEnum.TrialDungeon:
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TrialMain).Coroutine();

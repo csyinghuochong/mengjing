@@ -143,5 +143,6 @@ namespace ET.Client
 		WindowID_BattleMain,
 		WindowID_ArenaMain,
 		WindowID_TeamMain,
+		WindowID_EnterMapHint,
 	}
 }

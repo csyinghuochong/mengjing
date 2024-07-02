@@ -169,5 +169,43 @@ namespace ET.Client
                 obj.GetComponent<RawImage>().material = null;
             }
         }
+
+        public static void CrossFadeAlpha(Transform transform, float alpha, float duration)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Transform child = transform.GetChild(i);
+                if (child.GetComponent<Text>() != null)
+                {
+                    child.GetComponent<Text>().CrossFadeAlpha(alpha, duration, false);
+                }
+
+                if (transform.GetComponent<Image>() != null)
+                {
+                    child.GetComponent<Image>().CrossFadeAlpha(alpha, duration, false);
+                }
+            }
+        }
+
+        public static async ETTask DOLocalMove(Scene root, Transform transform, Vector3 vector3, float totalTime)
+        {
+            Vector3 oldPostition = transform.localPosition;
+            float passTime = 0;
+            float starTime = Time.time;
+
+            TimerComponent timerComponent = root.GetComponent<TimerComponent>();
+            while (passTime < totalTime)
+            {
+                passTime = Time.time - starTime;
+                float rate = passTime / totalTime;
+                Vector3 curPostion = rate * (vector3 - oldPostition) + oldPostition;
+                transform.transform.localPosition = curPostion;
+                await timerComponent.WaitFrameAsync();
+                if (transform == null)
+                {
+                    break;
+                }
+            }
+        }
     }
 }

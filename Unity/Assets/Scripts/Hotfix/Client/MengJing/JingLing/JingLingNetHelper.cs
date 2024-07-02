@@ -23,5 +23,12 @@
             M2C_JingLingCatchResponse response = (M2C_JingLingCatchResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_FindJingLingResponse> FindJingLingRequest(Scene root)
+        {
+            C2M_FindJingLingRequest request = new();
+            M2C_FindJingLingResponse response = (M2C_FindJingLingResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }
