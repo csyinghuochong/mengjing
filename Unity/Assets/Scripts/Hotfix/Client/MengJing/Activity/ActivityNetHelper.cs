@@ -337,5 +337,12 @@ namespace ET.Client
             R2C_RankRunRaceResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as R2C_RankRunRaceResponse;
             return response;
         }
+        
+        public static async ETTask<R2C_RankDemonResponse> RankDemonRequest(Scene root)
+        {
+            C2R_RankDemonRequest request = new();
+            R2C_RankDemonResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as R2C_RankDemonResponse;
+            return response;
+        }
     }
 }
