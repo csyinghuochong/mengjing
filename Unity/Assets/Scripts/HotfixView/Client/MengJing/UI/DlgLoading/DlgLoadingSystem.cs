@@ -357,10 +357,10 @@ namespace ET.Client
                     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RunRaceMain).Coroutine();
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
-                // case SceneTypeEnum.Demon:
-                //     UIHelper.Create(zoneScene, UIType.UIDemonMain).Coroutine();
-                //     uimain.GameObject.transform.localScale = Vector3.one;
-                //     break;
+                case SceneTypeEnum.Demon:
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_DemonMain).Coroutine();
+                    dlgMain.View.uiTransform.localScale = Vector3.one;
+                    break;
                 // case SceneTypeEnum.MiJing:
                 //     UIHelper.Create(zoneScene, UIType.UIMiJingMain).Coroutine();
                 //     uimain.GameObject.transform.localScale = Vector3.one;

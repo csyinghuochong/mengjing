@@ -145,5 +145,6 @@ namespace ET.Client
 		WindowID_TeamMain,
 		WindowID_EnterMapHint,
 		WindowID_RunRaceMain,
+		WindowID_DemonMain,
 	}
 }

@@ -71,7 +71,7 @@ namespace ET.Client
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_RunRaceMain);
                         break;
                     case SceneTypeEnum.Demon:
-                        // UIHelper.Remove(args.ZoneScene, UIType.UIDemonMain);
+                        root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_DemonMain);
                         break;
                     case SceneTypeEnum.MiJing:
                         // UIHelper.Remove(args.ZoneScene, UIType.UIMiJingMain);
