@@ -333,8 +333,8 @@ namespace ET.Client
                     dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
                 case SceneTypeEnum.Arena:
-                    // UIHelper.Create(zoneScene, UIType.UIArenaMain).Coroutine();
-                    // uimain.GameObject.transform.localScale = Vector3.one;
+                    self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ArenaMain).Coroutine();
+                    dlgMain.View.uiTransform.localScale = Vector3.one;
                     break;
                 case SceneTypeEnum.TeamDungeon:
                     // UIHelper.Create(zoneScene, UIType.UIEnterMapHint).Coroutine();

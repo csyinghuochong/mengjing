@@ -53,7 +53,7 @@ namespace ET.Client
                         root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_BattleMain);
                         break;
                     case SceneTypeEnum.Arena:
-                        // UIHelper.Remove(args.ZoneScene, UIType.UIArenaMain);
+                        root.GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ArenaMain);
                         break;
                     case SceneTypeEnum.TeamDungeon:
                         // UIHelper.Remove(args.ZoneScene, UIType.UITeamMain);

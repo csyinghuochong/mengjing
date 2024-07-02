@@ -363,4 +363,9 @@ namespace ET.Client
     {
         public M2C_BattleInfoResult M2CBattleInfoResult;
     }
+
+    public struct AreneInfo
+    {
+        public M2C_AreneInfoResult M2CAreneInfoResult;
+    }
 }
