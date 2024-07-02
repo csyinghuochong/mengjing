@@ -15,6 +15,8 @@
             {
                 scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnUpdateDamage(args.M2C_SyncMiJingDamage);
             }
+
+            await ETTask.CompletedTask;
         }
     }
 }
