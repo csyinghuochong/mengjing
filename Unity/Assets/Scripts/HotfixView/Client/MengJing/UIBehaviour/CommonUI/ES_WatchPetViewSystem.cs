@@ -65,33 +65,33 @@ namespace ET.Client
             self.E_ButtonCloseAddPointButton.AddListener(self.OnButtonCloseAddPoint);
             self.E_PetHeXinSuitButton.AddListenerAsync(self.OnPetHeXinSuitBtn);
 
-            EventTrigger LiLiang_Btn_Add = self.EG_AddProperty_LiLiangRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
-            EventTrigger LiLiang_Btn_Cost = self.EG_AddProperty_LiLiangRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
-            LiLiang_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(0).Coroutine(); });
-            LiLiang_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(0).Coroutine(); });
-            LiLiang_Btn_Add.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
-            LiLiang_Btn_Cost.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
-
-            EventTrigger ZhiLi_Btn_Add = self.EG_AddProperty_ZhiLiRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
-            EventTrigger ZhiLi_Btn_Cost = self.EG_AddProperty_ZhiLiRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
-            ZhiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(0).Coroutine(); });
-            ZhiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(0).Coroutine(); });
-            ZhiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
-            ZhiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
-
-            EventTrigger TiZhi_Btn_Add = self.EG_AddProperty_TiZhiRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
-            EventTrigger TiZhi_Btn_Cost = self.EG_AddProperty_TiZhiRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
-            TiZhi_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(0).Coroutine(); });
-            TiZhi_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(0).Coroutine(); });
-            TiZhi_Btn_Add.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
-            TiZhi_Btn_Cost.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
-
-            EventTrigger NaiLi_Btn_Add = self.EG_AddProperty_NaiLiRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
-            EventTrigger NaiLi_Btn_Cost = self.EG_AddProperty_NaiLiRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
-            NaiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(0).Coroutine(); });
-            NaiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(0).Coroutine(); });
-            NaiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
-            NaiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
+            // EventTrigger LiLiang_Btn_Add = self.EG_AddProperty_LiLiangRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
+            // EventTrigger LiLiang_Btn_Cost = self.EG_AddProperty_LiLiangRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
+            // LiLiang_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(0).Coroutine(); });
+            // LiLiang_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(0).Coroutine(); });
+            // LiLiang_Btn_Add.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
+            // LiLiang_Btn_Cost.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
+            //
+            // EventTrigger ZhiLi_Btn_Add = self.EG_AddProperty_ZhiLiRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
+            // EventTrigger ZhiLi_Btn_Cost = self.EG_AddProperty_ZhiLiRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
+            // ZhiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(0).Coroutine(); });
+            // ZhiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(0).Coroutine(); });
+            // ZhiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
+            // ZhiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
+            //
+            // EventTrigger TiZhi_Btn_Add = self.EG_AddProperty_TiZhiRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
+            // EventTrigger TiZhi_Btn_Cost = self.EG_AddProperty_TiZhiRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
+            // TiZhi_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(0).Coroutine(); });
+            // TiZhi_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(0).Coroutine(); });
+            // TiZhi_Btn_Add.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
+            // TiZhi_Btn_Cost.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
+            //
+            // EventTrigger NaiLi_Btn_Add = self.EG_AddProperty_NaiLiRectTransform.transform.Find("Btn_Add").GetComponent<EventTrigger>();
+            // EventTrigger NaiLi_Btn_Cost = self.EG_AddProperty_NaiLiRectTransform.transform.Find("Btn_Cost").GetComponent<EventTrigger>();
+            // NaiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_AddNum(0).Coroutine(); });
+            // NaiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown_Btn_CostNum(0).Coroutine(); });
+            // NaiLi_Btn_Add.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
+            // NaiLi_Btn_Cost.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp_Btn_AddNum(); });
         }
 
         [EntitySystem]
@@ -259,19 +259,27 @@ namespace ET.Client
 
         private static void OnClickPetHandler(this ES_WatchPet self, long petId)
         {
-            if (self.Root().GetComponent<PetComponentC>().GetPetInfoByID(petId) == null)
-            {
-                return;
-            }
-
             self.PetSkinId = 0;
-            self.LastSelectItem = self.Root().GetComponent<PetComponentC>().GetPetInfoByID(petId);
+            self.LastSelectItem = self.GetPetInfoByID(petId);
             self.E_ItemTypeSetToggleGroup.OnSelectIndex(0);
             self.OnChangeNode(1);
             self.OnUpdatePetInfo(self.LastSelectItem);
             self.UpdatePetSelected(self.LastSelectItem);
             self.UpdatePetHeXin(self.LastSelectItem);
             self.E_JiBanButton.gameObject.SetActive(PetHelper.IsShenShou(self.LastSelectItem.ConfigId));
+        }
+
+        public static RolePetInfo GetPetInfoByID(this ES_WatchPet self, long petId)
+        {
+            for (int i = 0; i < self.ShowRolePetInfos.Count; i++)
+            {
+                if (self.ShowRolePetInfos[i].Id == petId)
+                {
+                    return self.ShowRolePetInfos[i];
+                }
+            }
+
+            return null;
         }
 
         public static void UpdatePetHeXin(this ES_WatchPet self, RolePetInfo rolePetItem)
@@ -823,7 +831,8 @@ namespace ET.Client
             self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
                     $"{rolePetInfo.ZiZhi_Adf}/{petConfig.ZiZhi_Adf_Max}";
             self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text = string.Format("{0}/{1}",
-                CommonViewHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang), CommonViewHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max));
+                CommonViewHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang),
+                CommonViewHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max));
             self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
                     $"{rolePetInfo.ZiZhi_MageAct}/{petConfig.ZiZhi_MageAct_Max}";
 
