@@ -1400,12 +1400,12 @@ namespace ET.Client
 
             if (!SceneConfigHelper.ShowLeftButton(sceneTypeEnum))
             {
-                self.View.E_LeftTypeSetToggleGroup.gameObject.SetActive(false);
+                self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(false);
                 // self.OnClickPageButton(-1);
             }
             else
             {
-                self.View.E_LeftTypeSetToggleGroup.gameObject.SetActive(true);
+                self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(true);
                 self.View.E_LeftTypeSetToggleGroup.OnSelectIndex(sceneTypeEnum == SceneTypeEnum.TeamDungeon? 1 : 0);
             }
 
@@ -1421,7 +1421,7 @@ namespace ET.Client
                     self.View.EG_HomeButtonRectTransform.gameObject.SetActive(true);
                     self.View.ES_MainSkill.uiTransform.gameObject.SetActive(false);
                     self.View.E_MainTaskItemsLoopVerticalScrollRect.gameObject.SetActive(true);
-                    self.View.E_LeftTypeSetToggleGroup.gameObject.SetActive(true);
+                    self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(true);
                     self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
                     break;
                 case SceneTypeEnum.Happy:
@@ -1475,7 +1475,7 @@ namespace ET.Client
                     break;
             }
 
-            // self.OnHorseRide();
+            self.OnHorseRide();
             self.UpdateShadow();
             self.UpdateNpcTaskUI();
             self.View.ES_MapMini.OnEnterScene();
