@@ -31,7 +31,7 @@ namespace ET.Client
             self.ES_EquipSet1.RefreshEquip(m2C_WatchPlayerResponse.EquipList, new List<BagInfo>(), m2C_WatchPlayerResponse.Occ,
                 ItemOperateEnum.Watch);
             BagInfo bagInfo = ItemHelper.GetEquipByWeizhi(m2C_WatchPlayerResponse.EquipList, (int)ItemSubTypeEnum.Wuqi);
-            self.ES_EquipSet1.ShowPlayerModel(bagInfo, m2C_WatchPlayerResponse.Occ, 0, m2C_WatchPlayerResponse.FashionIds, 4);
+            self.ES_EquipSet1.ShowPlayerModel(bagInfo, m2C_WatchPlayerResponse.Occ, 0, new List<int>(), 4);
 
             UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
@@ -40,7 +40,7 @@ namespace ET.Client
             self.ES_EquipSet2.PlayerName(userInfoComponentC.UserInfo.Name);
             self.ES_EquipSet2.RefreshEquip(bagComponentC.GetEquipList(), new List<BagInfo>(), selfOcc, ItemOperateEnum.Watch);
             BagInfo bagInfo2 = bagComponentC.GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
-            self.ES_EquipSet2.ShowPlayerModel(bagInfo2, selfOcc, 0, bagComponentC.FashionEquipList, 5);
+            self.ES_EquipSet2.ShowPlayerModel(bagInfo2, selfOcc, 0, new List<int>(), 5);
         }
     }
 }
