@@ -6,20 +6,94 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-	[FriendOf(typeof(DlgTeam))]
-	public static  class DlgTeamSystem
-	{
+    [Event(SceneType.Demo)]
+    public class DataUpdate_TeamUpdate_DlgTeamRefresh: AEvent<Scene, DataUpdate_TeamUpdate>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_TeamUpdate args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgTeam>()?.OnTeamUpdate();
+            await ETTask.CompletedTask;
+        }
+    }
 
-		public static void RegisterUIEvent(this DlgTeam self)
-		{
-		 
-		}
+    [FriendOf(typeof (ES_TeamItem))]
+    [FriendOf(typeof (DlgTeam))]
+    public static class DlgTeamSystem
+    {
+        public static void RegisterUIEvent(this DlgTeam self)
+        {
+            self.UITeamNodeList[2] = self.View.ES_TeamItem3.uiTransform.gameObject;
+            self.UITeamNodeList[1] = self.View.ES_TeamItem2.uiTransform.gameObject;
+            self.UITeamNodeList[0] = self.View.ES_TeamItem.uiTransform.gameObject;
 
-		public static void ShowWindow(this DlgTeam self, Entity contextData = null)
-		{
-		}
+            self.TeamUIList.Add(self.View.ES_TeamItem);
+            self.TeamUIList.Add(self.View.ES_TeamItem2);
+            self.TeamUIList.Add(self.View.ES_TeamItem3);
 
-		 
+            self.View.E_ButtonLeaveButton.AddListener(() => { self.On_ButtonLeave(); });
+            self.View.E_ButtonApplyListButton.AddListener(() => { self.On_ButtonApplyList(); });
+            self.TeamUIList.Clear();
+        }
 
-	}
+        public static void ShowWindow(this DlgTeam self, Entity contextData = null)
+        {
+            self.OnUpdateUI();
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.RegisterReddot(ReddotType.TeamApply, self.Reddot_TeamApply);
+        }
+
+        public static void BeforeUnload(this DlgTeam self)
+        {
+            ReddotViewComponent redPointComponent = self.Root().GetComponent<ReddotViewComponent>();
+            redPointComponent.UnRegisterReddot(ReddotType.TeamApply, self.Reddot_TeamApply);
+        }
+
+        public static void Reddot_TeamApply(this DlgTeam self, int num)
+        {
+            self.View.E_ButtonApplyListButton.transform.Find("Reddot").gameObject.SetActive(num > 0);
+        }
+
+        public static void OnTeamUpdate(this DlgTeam self)
+        {
+            self.OnUpdateUI();
+        }
+
+        public static void OnUpdateUI(this DlgTeam self)
+        {
+            TeamInfo teamInfo = self.Root().GetComponent<TeamComponentC>().GetSelfTeam();
+            self.TeamUIList[0].OnUpdateItem(null);
+            self.TeamUIList[1].OnUpdateItem(null);
+            self.TeamUIList[2].OnUpdateItem(null);
+            if (teamInfo == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < teamInfo.PlayerList.Count; i++)
+            {
+                self.TeamUIList[i].OnUpdateItem(teamInfo.PlayerList[i]);
+            }
+        }
+
+        public static void SendLeaveRequest(this DlgTeam self)
+        {
+            TeamNetHelper.SendLeaveRequest(self.Root()).Coroutine();
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Team);
+        }
+
+        public static void On_ButtonApplyList(this DlgTeam self)
+        {
+            ReddotComponentC redPointComponent = self.Root().GetComponent<ReddotComponentC>();
+            redPointComponent.RemoveReddont(ReddotType.TeamApply);
+
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TeamApplyList).Coroutine();
+        }
+
+        public static void On_ButtonLeave(this DlgTeam self)
+        {
+            bool isLeader = self.Root().GetComponent<TeamComponentC>().IsTeamLeader();
+
+            PopupTipHelp.OpenPopupTip(self.Root(), "我的队伍", isLeader? "是否解散队伍" : "是否离开队伍？", () => { self.SendLeaveRequest(); }).Coroutine();
+        }
+    }
 }
