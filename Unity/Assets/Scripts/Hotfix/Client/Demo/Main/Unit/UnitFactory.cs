@@ -77,8 +77,8 @@ namespace ET.Client
             {
                 unit.AddComponent<SkillManagerComponentC>();
                 unit.AddComponent<BuffManagerComponentC>();
-                // unit.GetComponent<BuffManagerComponent>().t_Buffs = unitInfo.Buffs;
-                // unit.GetComponent<SkillManagerComponent>().t_Skills = unitInfo.Skills;
+                unit.GetComponent<BuffManagerComponentC>().t_Buffs = unitInfo.Buffs;
+                unit.GetComponent<SkillManagerComponentC>().t_Skills = unitInfo.Skills;
             }
 
             if (mainHero)
@@ -86,6 +86,28 @@ namespace ET.Client
                 int runraceMonster = numericComponentC.GetAsInt(NumericType.RunRaceTransform);
                 unit.Root().GetComponent<AttackComponent>().OnTransformId(unit.ConfigId, runraceMonster);
             }
+
+            EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
+            return unit;
+        }
+        
+        public static Unit CreateDropItem(Scene currentScene, DropInfo dropInfo)
+        {
+            UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
+            long unitId = dropInfo.UnitId == 0 ? IdGenerater.Instance.GenerateId() : dropInfo.UnitId;
+            if (unitComponent.Get(unitId) != null)
+            {
+                return null;
+            }
+            Unit unit = unitComponent.AddChildWithId<Unit, int>(unitId, 1);
+            unit.Type = UnitType.DropItem;
+            unitComponent.Add(unit);
+
+            dropInfo.UnitId = unitId;
+            unit.AddComponent<DropComponentC>().DropInfo =  dropInfo;
+            unit.GetComponent<DropComponentC>().CellIndex = dropInfo.CellIndex;
+            unit.AddComponent<UnitInfoComponent>();
+            unit.Position = new float3(dropInfo.X, dropInfo.Y, dropInfo.Z);
 
             EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
             return unit;
