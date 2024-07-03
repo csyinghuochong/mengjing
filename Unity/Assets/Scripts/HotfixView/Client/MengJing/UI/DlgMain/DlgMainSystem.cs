@@ -659,7 +659,7 @@ namespace ET.Client
                 return;
             }
 
-            // self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Team).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Team).Coroutine();
         }
 
         public static void OnUpdateTeamDamage(this DlgMain self, M2C_SyncMiJingDamage message)

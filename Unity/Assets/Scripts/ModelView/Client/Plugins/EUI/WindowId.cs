@@ -148,5 +148,6 @@ namespace ET.Client
 		WindowID_DemonMain,
 		WindowID_MiJingMain,
 		WindowID_SeasonMain,
+		WindowID_Team,
 	}
 }
