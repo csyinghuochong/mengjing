@@ -13,7 +13,7 @@
 
             if (mapComponent.SceneType == SceneTypeEnum.TeamDungeon)
             {
-                scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnUpdateDamage(args.M2C_SyncMiJingDamage);
+                scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnUpdateTeamDamage(args.M2C_SyncMiJingDamage);
             }
 
             await ETTask.CompletedTask;

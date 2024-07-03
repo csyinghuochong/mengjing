@@ -297,6 +297,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof (Scroll_Item_MainTeamItem))]
     [FriendOf(typeof (ES_RoleHead))]
     [FriendOf(typeof (ES_MainBuff))]
     [FriendOf(typeof (ES_MainHpBar))]
@@ -383,12 +384,11 @@ namespace ET.Client
 
             self.View.E_LeftTypeSetToggleGroup.AddListener(self.OnLeftTypeSet);
             self.View.E_MainTaskItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainTaskItemsRefresh);
-            self.View.E_RoseTaskButton.AddListener(self.OnOpenTask);
+            self.View.E_RoseTaskButton.AddListener(self.OnRoseTaskButton);
             self.View.E_MainTeamItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainTeamItemsRefresh);
             self.View.E_RoseTeamButton.AddListener(self.OnBtn_RoseTeam);
 
             self.View.E_MainChatItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnMainChatItemsRefresh);
-            self.View.E_RoseTaskButton.AddListener(self.OnRoseTaskButton);
         }
 
         public static void ShowWindow(this DlgMain self, Entity contextData = null)
@@ -602,78 +602,6 @@ namespace ET.Client
             self.View.E_MainTaskItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskPros.Count);
         }
 
-        private static void OnOpenTask(this DlgMain self)
-        {
-            TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
-
-            int nextTask = taskComponent.GetNextMainTask();
-            if (nextTask == 0)
-            {
-                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Task).Coroutine();
-                return;
-            }
-
-            int getNpc = TaskConfigCategory.Instance.Get(nextTask).GetNpcID;
-            int fubenId = TaskViewHelp.GetFubenByNpc(getNpc);
-            if (fubenId == 0)
-            {
-                return;
-            }
-
-            string fubenName = $"请前往{DungeonConfigCategory.Instance.Get(fubenId).ChapterName} {NpcConfigCategory.Instance.Get(getNpc).Name} 出接取任务";
-            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            if (mapComponent.SceneType != SceneTypeEnum.LocalDungeon)
-            {
-                FlyTipComponent.Instance.ShowFlyTipDi(fubenName);
-                return;
-            }
-
-            int curdungeonid = mapComponent.SceneId;
-            if (curdungeonid == fubenId)
-            {
-                TaskViewHelp.MoveToNpc(self.Root(), getNpc).Coroutine();
-                return;
-            }
-
-            if (TaskViewHelp.GeToOtherFuben(self.Root(), fubenId, mapComponent.SceneId))
-            {
-                return;
-            }
-
-            FlyTipComponent.Instance.ShowFlyTipDi(fubenName);
-        }
-
-        private static void OnMainTeamItemsRefresh(this DlgMain self, Transform transform, int index)
-        {
-            Scroll_Item_MainTeamItem scrollItemMainTeamItem = self.ScrollItemMainTeamItems[index].BindTrans(transform);
-            // scrollItemMainTeamItem.Refresh(self.ShowTaskPros[index]);
-        }
-
-        public static void RefreshMainTeamItems(this DlgMain self)
-        {
-        }
-
-        public static void OnUpdateDamage(this DlgMain self, M2C_SyncMiJingDamage message)
-        {
-            // for (int i = 0; i < message.DamageList.Count; i++)
-            // {
-            //     UIMainTeamItemComponent uIMainTeamItemComponent = self.TeamUIList[i];
-            //     uIMainTeamItemComponent.OnUpdateDamage(message.DamageList[i]);
-            // }
-        }
-
-        public static void OnBtn_RoseTeam(this DlgMain self)
-        {
-            // TeamInfo teamInfo = self.Root().GetComponent<TeamComponent>().GetSelfTeam();
-            // if (teamInfo == null || teamInfo.PlayerList.Count == 0)
-            // {
-            //     FloatTipManager.Instance.ShowFloatTip("没有队伍！");
-            //     return;
-            // }
-            //
-            // UIHelper.Create(self.DomainScene(), UIType.UITeam).Coroutine();
-        }
-
         private static void OnRoseTaskButton(this DlgMain self)
         {
             TaskComponentC taskComponent = self.Root().GetComponent<TaskComponentC>();
@@ -714,6 +642,73 @@ namespace ET.Client
             }
 
             flyTipComponent.ShowFlyTipDi(fubenName);
+        }
+
+        private static void OnMainTeamItemsRefresh(this DlgMain self, Transform transform, int index)
+        {
+            Scroll_Item_MainTeamItem scrollItemMainTeamItem = self.ScrollItemMainTeamItems[index].BindTrans(transform);
+            scrollItemMainTeamItem.OnUpdateItem(self.ShowTeamInfo.PlayerList[index]);
+        }
+
+        private static void OnBtn_RoseTeam(this DlgMain self)
+        {
+            TeamInfo teamInfo = self.Root().GetComponent<TeamComponentC>().GetSelfTeam();
+            if (teamInfo == null || teamInfo.PlayerList.Count == 0)
+            {
+                FlyTipComponent.Instance.ShowFlyTipDi("没有队伍！");
+                return;
+            }
+
+            // self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_Team).Coroutine();
+        }
+
+        public static void OnUpdateTeamDamage(this DlgMain self, M2C_SyncMiJingDamage message)
+        {
+            for (int i = 0; i < message.DamageList.Count; i++)
+            {
+                Scroll_Item_MainTeamItem uIMainTeamItemComponent = self.ScrollItemMainTeamItems[i];
+                uIMainTeamItemComponent.OnUpdateDamage(message.DamageList[i]);
+            }
+        }
+
+        public static void OnUpdateTeamHP(this DlgMain self, Unit unit)
+        {
+            if (self.ScrollItemMainTeamItems != null)
+            {
+                foreach (Scroll_Item_MainTeamItem item in self.ScrollItemMainTeamItems.Values)
+                {
+                    if (item.uiTransform == null)
+                    {
+                        continue;
+                    }
+
+                    item.OnUpdateHP(unit);
+                }
+            }
+        }
+
+        private static void ResetTeamUI(this DlgMain self)
+        {
+            if (self.ScrollItemMainTeamItems != null)
+            {
+                foreach (Scroll_Item_MainTeamItem item in self.ScrollItemMainTeamItems.Values)
+                {
+                    if (item.uiTransform == null)
+                    {
+                        continue;
+                    }
+
+                    item.OnReset();
+                }
+            }
+        }
+
+        public static void OnUpdateTeamUI(this DlgMain self)
+        {
+            self.ShowTeamInfo = self.Root().GetComponent<TeamComponentC>().GetSelfTeam();
+
+            self.AddUIScrollItems(ref self.ScrollItemMainTeamItems, self.ShowTeamInfo.PlayerList.Count);
+            self.View.E_MainTeamItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTeamInfo.PlayerList.Count);
         }
 
         #endregion
@@ -1350,7 +1345,7 @@ namespace ET.Client
         {
             Log.Debug("BeginEnterScene");
 
-            // self.View.ES_MainTeam.ResetUI();
+            self.ResetTeamUI();
             self.View.ES_MainSkill.ResetUI();
             self.View.ES_MainBuff.ResetUI();
             self.View.ES_JoystickMove.ResetUI();
@@ -1362,7 +1357,7 @@ namespace ET.Client
             self.Root().GetComponent<LockTargetComponent>().BeginEnterScene();
             self.Root().GetComponent<BattleMessageComponent>().CancelRideTargetUnit(0);
             self.Root().GetComponent<BattleMessageComponent>().AttackSelfPlayer.Clear();
-            // self.Root().RemoveComponent<UnitGuaJiComponen>();
+            self.Root().RemoveComponent<UnitGuaJiComponent>();
         }
 
         /// <summary>
