@@ -194,9 +194,9 @@ namespace ET.Client
                     self.UnitAssetsPath = path;
                     break;
                 case UnitType.DropItem:
-                    DropComponentC dropComponent = unit.GetComponent<DropComponentC>();
-                    string assetPath = dropComponent.DropInfo.ItemID == 1 ? "DropICoin" : "DropItem";
-                    path = ABPathHelper.GetUnitPath($"Player/{assetPath}");
+                    // DropComponentC dropComponent = unit.GetComponent<DropComponentC>();
+                    // string assetPath = dropComponent.DropInfo.ItemID == 1 ? "DropICoin" : "DropItem";
+                    path = ABPathHelper.GetUnitPath($"Player/DropICoin");
                     self.UnitAssetsPath = path;
                     break;
                 case UnitType.Chuansong:
