@@ -464,7 +464,7 @@ namespace ET.Server
                             {
                                 //unit.GetComponent<TaskComponent>().TriggerTaskEvent(TaskTargetType.TreasureMapHigh_27, 0, 1);
                                 //unit.GetComponent<TaskComponent>().TriggerTaskCountryEvent(TaskTargetType.TreasureMapHigh_27, 0, 1);
-                            }
+                            }   
 
                             break;
                         case 128: //激活称号

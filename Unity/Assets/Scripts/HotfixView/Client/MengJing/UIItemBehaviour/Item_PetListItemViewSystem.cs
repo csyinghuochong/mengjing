@@ -67,6 +67,7 @@ namespace ET.Client
 
         public static void OnInitData(this Scroll_Item_PetListItem self, RolePetInfo rolePetInfo, int nextLv)
         {
+            self.E_ImageXuanzhongImage.gameObject.SetActive(false);
             self.E_ImageDiButtonButton.AddListener(self.OnClickPetItem);
 
             if (rolePetInfo != null)

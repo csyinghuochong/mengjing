@@ -55,7 +55,7 @@ namespace ET.Client
             self.E_PetListItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetListItemsRefresh);
             self.E_PetSkinIconItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetSkinIconItemsRefresh);
             self.E_CommonSkillItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnCommonSkillItemsRefresh);
-            self.E_PetHeXinListLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetHeXinListItemsRefresh);
+            // self.E_PetHeXinListLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetHeXinListItemsRefresh);
             self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
             self.E_ButtonEquipHeXinButton.AddListenerAsync(self.OnButtonEquipHeXin);
             self.E_ButtonHeXinHeChengButton.AddListener(self.OnButtonHeXinHeCheng);
@@ -128,20 +128,20 @@ namespace ET.Client
             Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[index].BindTrans(transform);
             scrollItemPetListItem.SetClickHandler((long petId) => { self.OnClickPetHandler(petId); });
 
-            scrollItemPetListItem.E_ImageDiButtonButton.gameObject.SetActive(false);
+            scrollItemPetListItem.E_ImageDiButtonButton.gameObject.SetActive(true);
 
-            scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.triggers.Clear();
-            scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
-                (pdata) => { self.OnPointerDown(pdata as PointerEventData); });
-            scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.RegisterEvent(EventTriggerType.PointerUp,
-                (pdata) => { self.OnPointerUp(pdata as PointerEventData, index); });
-            scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.RegisterEvent(EventTriggerType.BeginDrag,
-                (pdata) => { self.OnBeginDrag(pdata as PointerEventData, index); });
-            scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.RegisterEvent(EventTriggerType.Drag,
-                (pdata) => { self.OnDraging(pdata as PointerEventData); });
-            scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.RegisterEvent(EventTriggerType.EndDrag,
-                (pdata) => { self.OnEndDrag(pdata as PointerEventData, index); });
-            scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.gameObject.SetActive(true);
+            // scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.triggers.Clear();
+            // scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
+            //     (pdata) => { self.OnPointerDown(pdata as PointerEventData); });
+            // scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.RegisterEvent(EventTriggerType.PointerUp,
+            //     (pdata) => { self.OnPointerUp(pdata as PointerEventData, index); });
+            // scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.RegisterEvent(EventTriggerType.BeginDrag,
+            //     (pdata) => { self.OnBeginDrag(pdata as PointerEventData, index); });
+            // scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.RegisterEvent(EventTriggerType.Drag,
+            //     (pdata) => { self.OnDraging(pdata as PointerEventData); });
+            // scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.RegisterEvent(EventTriggerType.EndDrag,
+            //     (pdata) => { self.OnEndDrag(pdata as PointerEventData, index); });
+            // scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.gameObject.SetActive(true);
 
             scrollItemPetListItem.uiTransform.gameObject.name = $"UIPetListItem_{index}";
 
@@ -404,7 +404,7 @@ namespace ET.Client
             self.BagInfo = null;
             self.Position = position;
             self.UpdatePetHexinItem(eqipInfos);
-            self.OnUpdateItemList(bagInfos);
+            // self.OnUpdateItemList(bagInfos);
         }
 
         private static void UpdatePetHexinItem(this ES_WatchPet self, List<BagInfo> bagInfos)
@@ -489,33 +489,33 @@ namespace ET.Client
             }
         }
 
-        private static void OnUpdateItemList(this ES_WatchPet self, List<BagInfo> bagInfos)
-        {
-            self.BagInfo = null;
-
-            self.ShowBagInfos.Clear();
-            for (int i = 0; i < bagInfos.Count; i++)
-            {
-                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
-
-                if (itemConfig.ItemSubType - 1 != self.Position)
-                {
-                    continue;
-                }
-
-                self.ShowBagInfos.Add(bagInfos[i]);
-            }
-
-            self.ShowBagInfos.Sort((bagInfo1, bagInfo2) =>
-            {
-                ItemConfig itemConfig1 = ItemConfigCategory.Instance.Get(bagInfo1.ItemID);
-                ItemConfig itemConfig2 = ItemConfigCategory.Instance.Get(bagInfo2.ItemID);
-                return itemConfig2.UseLv - itemConfig1.UseLv;
-            });
-
-            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
-            self.E_PetHeXinListLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
-        }
+        // private static void OnUpdateItemList(this ES_WatchPet self, List<BagInfo> bagInfos)
+        // {
+        //     self.BagInfo = null;
+        //
+        //     self.ShowBagInfos.Clear();
+        //     for (int i = 0; i < bagInfos.Count; i++)
+        //     {
+        //         ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
+        //
+        //         if (itemConfig.ItemSubType - 1 != self.Position)
+        //         {
+        //             continue;
+        //         }
+        //
+        //         self.ShowBagInfos.Add(bagInfos[i]);
+        //     }
+        //
+        //     self.ShowBagInfos.Sort((bagInfo1, bagInfo2) =>
+        //     {
+        //         ItemConfig itemConfig1 = ItemConfigCategory.Instance.Get(bagInfo1.ItemID);
+        //         ItemConfig itemConfig2 = ItemConfigCategory.Instance.Get(bagInfo2.ItemID);
+        //         return itemConfig2.UseLv - itemConfig1.UseLv;
+        //     });
+        //
+        //     self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
+        //     self.E_PetHeXinListLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
+        // }
 
         private static void OnPetHeXinListItemsRefresh(this ES_WatchPet self, Transform transform, int index)
         {
@@ -581,7 +581,7 @@ namespace ET.Client
             self.UpdateAttribute(self.LastSelectItem);
             self.SelectItemHandlder(null);
             self.UpdatePetHexinItem(eqipInfos);
-            self.OnUpdateItemList(bagInfos);
+            // self.OnUpdateItemList(bagInfos);
         }
 
         # endregion
