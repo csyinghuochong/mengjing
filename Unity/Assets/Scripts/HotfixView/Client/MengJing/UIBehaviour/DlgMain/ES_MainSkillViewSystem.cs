@@ -18,6 +18,8 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
+            self.E_Button_HorseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().OnCityHorseButton(true); });
+            
             self.E_Btn_TargetButton.AddListener(self.OnLockTargetUnit);
 
             self.E_Btn_ShiQuButton.AddListener(() => { self.OnShiquItem(3f); });
@@ -71,6 +73,35 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
+        private static void OnCityHorseButton(this ES_MainSkill self, bool showtip)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int now_horse = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HorseRide);
+            if (now_horse == 0 && !self.Root().GetComponent<BattleMessageComponent>().IsCanRideHorse())
+            {
+                FlyTipComponent.Instance.ShowFlyTipDi("战斗状态不能骑马!");
+                return;
+            }
+
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            if (SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
+            {
+                int sceneid = mapComponent.SceneId;
+                SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
+                if (sceneConfig.IfMount == 1)
+                {
+                    if (showtip)
+                    {
+                        FlyTipComponent.Instance.ShowFlyTipDi("该场景不能骑马!");
+                    }
+
+                    return;
+                }
+            }
+
+            UserInfoNetHelper.HorseRideRequest(self.Root()).Coroutine();
+        }
+        
         public static async ETTask OnBtn_PetTarget(this ES_MainSkill self)
         {
             long lockId = self.Root().GetComponent<LockTargetComponent>().LastLockId;

@@ -479,32 +479,31 @@ namespace ET.Client
 
         public static void OnButton_Horse(this DlgMain self, bool showtip)
         {
-            // Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            // int now_horse = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HorseRide);
-            // if (now_horse == 0 && !self.Root().GetComponent<BattleMessageComponent>().IsCanRideHorse())
-            // {
-            //     FlyTipComponent.Instance.SpawnFlyTipDi("战斗状态不能骑马!");
-            //     return;
-            // }
-            //
-            // MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
-            // if (SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
-            // {
-            //     int sceneid = mapComponent.SceneId;
-            //     SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
-            //     if (sceneConfig.IfMount == 1)
-            //     {
-            //         if (showtip)
-            //         {
-            //             FlyTipComponent.Instance.SpawnFlyTipDi("该场景不能骑马!");
-            //         }
-            //
-            //         return;
-            //     }
-            // }
-            //
-            // C2M_HorseRideRequest request = new C2M_HorseRideRequest() { };
-            // self.ZoneScene().GetComponent<SessionComponent>().Session.Call(request).Coroutine();
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            int now_horse = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HorseRide);
+            if (now_horse == 0 && !self.Root().GetComponent<BattleMessageComponent>().IsCanRideHorse())
+            {
+                FlyTipComponent.Instance.ShowFlyTipDi("战斗状态不能骑马!");
+                return;
+            }
+
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            if (SceneConfigHelper.UseSceneConfig(mapComponent.SceneType))
+            {
+                int sceneid = mapComponent.SceneId;
+                SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
+                if (sceneConfig.IfMount == 1)
+                {
+                    if (showtip)
+                    {
+                        FlyTipComponent.Instance.ShowFlyTipDi("该场景不能骑马!");
+                    }
+
+                    return;
+                }
+            }
+
+            UserInfoNetHelper.HorseRideRequest(self.Root()).Coroutine();
         }
 
         public static void OnMoveStart(this DlgMain self)
@@ -773,7 +772,7 @@ namespace ET.Client
             self.Root().GetComponent<UIComponent>().ShowWindow(WindowID.WindowID_PetSet);
         }
 
-        private static void OnCityHorseButton(this DlgMain self, bool showtip)
+        public static void OnCityHorseButton(this DlgMain self, bool showtip)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int now_horse = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HorseRide);
@@ -1921,11 +1920,12 @@ namespace ET.Client
         public static void OnHorseRide(this DlgMain self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            // self.View.E_Button_Horse.SetActive(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HorseFightID) > 0);
+            self.View.ES_MainSkill.E_Button_HorseButton.gameObject.SetActive(
+                unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HorseFightID) > 0);
             self.View.E_CityHorseButton.gameObject.SetActive(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HorseFightID) > 0);
         }
-        
-        public static  void OnCellDungeonEnterShow(this DlgMain self, int chapterId)
+
+        public static void OnCellDungeonEnterShow(this DlgMain self, int chapterId)
         {
             if (chapterId == 0)
                 return;
