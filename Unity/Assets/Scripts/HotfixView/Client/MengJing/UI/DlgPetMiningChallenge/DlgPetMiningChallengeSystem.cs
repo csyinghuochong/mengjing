@@ -239,8 +239,8 @@ namespace ET.Client
 
             EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.PetMing, sceneid, self.MineTpe, $"{self.Position}_{self.TeamId}").Coroutine();
 
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetMiningChallenge);
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetSet);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetMiningChallenge);
         }
     }
 }
