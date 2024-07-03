@@ -52,14 +52,14 @@ namespace ET.Client
 
             ES_MainSkill esMainSkill = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_MainSkill;
 
-            ES_SkillGrid uiSkillGridComponent_1 = self.AddChild<ES_SkillGrid, Transform>(esMainSkill.ES_SkillGrid_Normal_1.uiTransform);
+            ES_SkillGrid uiSkillGridComponent_1 = self.AddChild<ES_SkillGrid, Transform>(esMainSkill.ES_SkillGrid_Transforms_1.uiTransform);
             uiSkillGridComponent_1.SkillCancelHandler = self.ShowCancelButton;
             uiSkillGridComponent_1.UseSkillHandler = self.OnUseSkill;
             uiSkillGridComponent_1.uiTransform.gameObject.SetActive(false);
             uiSkillGridComponent_1.Index = 0;
             self.UISkillGrids.Add(uiSkillGridComponent_1);
 
-            ES_SkillGrid uiSkillGridComponent_2 = self.AddChild<ES_SkillGrid, Transform>(esMainSkill.ES_SkillGrid_Normal_2.uiTransform);
+            ES_SkillGrid uiSkillGridComponent_2 = self.AddChild<ES_SkillGrid, Transform>(esMainSkill.ES_SkillGrid_Transforms_2.uiTransform);
             uiSkillGridComponent_2.SkillCancelHandler = self.ShowCancelButton;
             uiSkillGridComponent_2.UseSkillHandler = self.OnUseSkill;
             uiSkillGridComponent_2.uiTransform.gameObject.SetActive(false);
