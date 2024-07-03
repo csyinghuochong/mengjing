@@ -90,25 +90,90 @@ namespace ET.Client
             EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
             return unit;
         }
-        
+
+        public static Unit CreateSpiling(Scene currentScene, SpilingInfo unitInfo)
+        {
+            UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
+            Unit unit = unitComponent.AddChildWithId<Unit, int>(unitInfo.UnitId, 1);
+            unitComponent.Add(unit);
+            unit.Type = UnitType.Monster;
+            unit.ConfigId = unitInfo.MonsterID;
+            NumericComponentC numericComponent = unit.AddComponent<NumericComponentC>(true);
+            for (int i = 0; i < unitInfo.Ks.Count; ++i)
+            {
+                numericComponent.Set(unitInfo.Ks[i], unitInfo.Vs[i]);
+            }
+
+            unit.MasterId = numericComponent.GetAsLong(NumericType.MasterId);
+            unit.AddComponent<ObjectWait>(true);
+            unit.AddComponent<HeroDataComponentC>(true);
+            unit.AddComponent<StateComponentC>(true);
+            UnitInfoComponent unitInfoComponent = unit.AddComponent<UnitInfoComponent>(true);
+            unitInfoComponent.EnergySkillId = unitInfo.SkillId;
+
+            MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(unitInfo.MonsterID);
+            if (monsterCof.AI != 0)
+            {
+                unit.AddComponent<BuffManagerComponentC>(true); //buff管理器组建
+                unit.AddComponent<SkillManagerComponentC>(true);
+                unit.GetComponent<BuffManagerComponentC>().t_Buffs = unitInfo.Buffs;
+                unit.GetComponent<SkillManagerComponentC>().t_Skills = unitInfo.Skills;
+            }
+
+            unit.Position = new(unitInfo.X, unitInfo.Y, unitInfo.Z);
+            unit.Forward = new(unitInfo.ForwardX, unitInfo.ForwardY, unitInfo.ForwardZ);
+            unit.AddComponent<MoveComponent>(true);
+
+            EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
+            return unit;
+        }
+
         public static Unit CreateDropItem(Scene currentScene, DropInfo dropInfo)
         {
             UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
-            long unitId = dropInfo.UnitId == 0 ? IdGenerater.Instance.GenerateId() : dropInfo.UnitId;
+            long unitId = dropInfo.UnitId == 0? IdGenerater.Instance.GenerateId() : dropInfo.UnitId;
             if (unitComponent.Get(unitId) != null)
             {
                 return null;
             }
+
             Unit unit = unitComponent.AddChildWithId<Unit, int>(unitId, 1);
             unit.Type = UnitType.DropItem;
             unitComponent.Add(unit);
 
             dropInfo.UnitId = unitId;
-            unit.AddComponent<DropComponentC>().DropInfo =  dropInfo;
+            unit.AddComponent<DropComponentC>().DropInfo = dropInfo;
             unit.GetComponent<DropComponentC>().CellIndex = dropInfo.CellIndex;
             unit.AddComponent<UnitInfoComponent>();
             unit.Position = new float3(dropInfo.X, dropInfo.Y, dropInfo.Z);
 
+            EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
+            return unit;
+        }
+
+        //创建传送点
+        public static Unit CreateTransferItem(Scene currentScene, TransferInfo transferInfo)
+        {
+            if (transferInfo.TransferId == 20000040)
+            {
+                PetComponentC petComponent = currentScene.Root().GetComponent<PetComponentC>();
+                if (!PetHelper.IsShenShouFull(petComponent.RolePetInfos))
+                {
+                    return null;
+                }
+            }
+
+            UnitComponent unitComponent = currentScene.GetComponent<UnitComponent>();
+            Unit unit = unitComponent.AddChildWithId<Unit, int>(transferInfo.UnitId, 1);
+            unit.Type = UnitType.Chuansong;
+            unit.ConfigId = transferInfo.TransferId;
+            unitComponent.Add(unit);
+
+            // ChuansongComponentC chuansongComponent = unit.AddComponent<ChuansongComponentC>();
+            // chuansongComponent.CellIndex = transferInfo.CellIndex;
+            // chuansongComponent.DirectionType = transferInfo.Direction;
+            unit.AddComponent<UnitInfoComponent>();
+            unit.Position = new(transferInfo.X, transferInfo.Y, transferInfo.Z);
             EventSystem.Instance.Publish(unit.Scene(), new AfterUnitCreate() { Unit = unit });
             return unit;
         }

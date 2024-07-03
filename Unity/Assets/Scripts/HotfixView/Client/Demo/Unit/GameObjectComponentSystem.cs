@@ -380,7 +380,6 @@ namespace ET.Client
 
         public static void OnUpdateHorse(this GameObjectComponent self)
         {
-            FlyTipComponent.Instance.ShowFlyTipDi("骑马！！！");
             if (self.GameObject == null)
             {
                 return;
