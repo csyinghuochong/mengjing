@@ -82,7 +82,6 @@ namespace ET.Client
             if (!string.IsNullOrEmpty(self.UnitAssetsPath))
             {
                 self.OnRevive();
-                //GameObjectPoolHelper.ReturnObjectToPool(self.GameObject);
                 GameObjectLoadHelper.RecoverGameObject(self.UnitAssetsPath, self.GameObject);
             }
 
@@ -129,7 +128,7 @@ namespace ET.Client
                     break;
                 case UnitType.Stall:
                     path = ABPathHelper.GetUnitPath("Player/BaiTan");
-                    // GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
+                    GameObjectLoadHelper.AddLoadQueue(self.Root(), path, self.InstanceId, self.OnLoadGameObject);
                     self.UnitAssetsPath = path;
                     break;
                 case UnitType.Monster:
@@ -195,10 +194,10 @@ namespace ET.Client
                     self.UnitAssetsPath = path;
                     break;
                 case UnitType.DropItem:
-                    // DropComponent dropComponent = unit.GetComponent<DropComponent>();
-                    // string assetPath = dropComponent.DropInfo.ItemID == 1 ? "DropICoin" : "DropItem";
-                    // path = ABPathHelper.GetUnitPath($"Player/{assetPath}");
-                    // self.UnitAssetsPath = path;
+                    DropComponentC dropComponent = unit.GetComponent<DropComponentC>();
+                    string assetPath = dropComponent.DropInfo.ItemID == 1 ? "DropICoin" : "DropItem";
+                    path = ABPathHelper.GetUnitPath($"Player/{assetPath}");
+                    self.UnitAssetsPath = path;
                     break;
                 case UnitType.Chuansong:
                     path = ABPathHelper.GetUnitPath("Monster/DorrWay_1");
