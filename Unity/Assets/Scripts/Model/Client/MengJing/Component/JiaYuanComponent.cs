@@ -2,6 +2,17 @@
 
 namespace ET.Client
 {
+    /// <summary>
+    /// 1进入家园 2收获植物 3收获动物  4清理 
+    /// </summary>
+    public static class JiaYuanOperateType
+    {
+        public const int Visit = 1;
+        public const int GatherPlant = 2;
+        public const int GatherPasture = 3;
+        public const int Pick = 4;
+    }
+    
     [ComponentOf(typeof (Scene))]
     public class JiaYuanComponent: Entity, IAwake
     {

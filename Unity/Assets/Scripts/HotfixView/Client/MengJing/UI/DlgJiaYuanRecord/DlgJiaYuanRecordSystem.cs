@@ -1,0 +1,70 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace ET.Client
+{
+    [FriendOf(typeof (DlgJiaYuanRecord))]
+    public static class DlgJiaYuanRecordSystem
+    {
+        public static void RegisterUIEvent(this DlgJiaYuanRecord self)
+        {
+            self.View.E_ImageCloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanRecord); });
+        }
+
+        public static void ShowWindow(this DlgJiaYuanRecord self, Entity contextData = null)
+        {
+            self.View.EG_UIJiaYuanRecordItemRectTransform.gameObject.SetActive(false);
+            self.OnInitUI().Coroutine();
+        }
+
+        public static async ETTask OnInitUI(this DlgJiaYuanRecord self)
+        {
+            M2C_JiaYuanRecordListResponse response = await JiaYuanNetHelper.JiaYuanRecordListRequest(self.Root());
+            if (self.IsDisposed)
+            {
+                return;
+            }
+
+            for (int i = 0; i < response.JiaYuanRecordList.Count; i++)
+            {
+                GameObject gameObject = UnityEngine.Object.Instantiate(self.View.EG_UIJiaYuanRecordItemRectTransform.gameObject);
+                gameObject.SetActive(true);
+                CommonViewHelper.SetParent(gameObject, self.View.EG_BuildingList2RectTransform.gameObject);
+                JiaYuanRecord jiaYuanRecord = response.JiaYuanRecordList[i];
+                string time = TimeInfo.Instance.ToDateTime(jiaYuanRecord.Time).ToString();
+                time = time.Substring(5, time.Length - 5);
+                Text Text = gameObject.transform.Find("Text").GetComponent<Text>();
+                string tip = string.Empty;
+                tip = $"{time} 玩家<color=#9CA606>{jiaYuanRecord.PlayerName}</color>";
+                switch (jiaYuanRecord.OperateType)
+                {
+                    case JiaYuanOperateType.Visit:
+                        tip += " 来到你的家园逛了一圈。";
+                        break;
+                    case JiaYuanOperateType.GatherPlant:
+                        tip += $" 在你的家园拾取了<color=#9CA606> {JiaYuanFarmConfigCategory.Instance.Get(jiaYuanRecord.OperateId).Name}</color>";
+                        break;
+                    case JiaYuanOperateType.GatherPasture:
+                        tip += $" 在你的家园拾取了<color=#9CA606> {JiaYuanPastureConfigCategory.Instance.Get(jiaYuanRecord.OperateId).Name}</color>";
+                        break;
+                    case JiaYuanOperateType.Pick:
+                        tip += $" 在你的家园清理了<color=#9CA606> {MonsterConfigCategory.Instance.Get(jiaYuanRecord.OperateId).MonsterName}</color>";
+                        break;
+                    default:
+                        break;
+                }
+
+                Text.text = tip;
+            }
+
+            if (response.JiaYuanRecordList.Count > 6)
+            {
+                await self.Root().GetComponent<TimerComponent>().WaitFrameAsync();
+                self.View.EG_BuildingList2RectTransform.localPosition = new Vector2(0, (response.JiaYuanRecordList.Count - 6) * 110);
+            }
+        }
+    }
+}
