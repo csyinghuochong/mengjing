@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_JiaYuanDaShiPro))]
     [FriendOf(typeof (DlgJiaYuanDaShi))]
     public static class DlgJiaYuanDaShiSystem
     {
@@ -25,6 +26,7 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
+                    self.View.ES_JiaYuanDaShiPro.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
                     break;

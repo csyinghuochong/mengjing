@@ -24,6 +24,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_JiaYuanDaShiPro ES_JiaYuanDaShiPro
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_jiayuandashipro == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_JiaYuanDaShiPro");
+		    	   this.m_es_jiayuandashipro = this.AddChild<ES_JiaYuanDaShiPro,Transform>(subTrans);
+     			}
+     			return this.m_es_jiayuandashipro;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -44,11 +62,13 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
+			this.m_es_jiayuandashipro = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
+		private EntityRef<ES_JiaYuanDaShiPro> m_es_jiayuandashipro = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}
