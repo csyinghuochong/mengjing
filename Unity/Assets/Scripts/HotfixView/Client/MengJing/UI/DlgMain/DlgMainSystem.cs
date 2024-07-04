@@ -414,7 +414,42 @@ namespace ET.Client
             self.AfterEnterScene(SceneTypeEnum.MainCityScene);
 
             // IOS适配
-            IPHoneHelper.SetPosition(self.View.EG_PhoneLeftRectTransform.gameObject, new Vector2(120f, 0f));
+            IPHoneHelper.SetPosition(self.View.EG_PhoneLeftRectTransform.gameObject, new(120f, 0f));
+
+            UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+            if (userInfoComponent.GetGameSettingValue(GameSettingEnum.FenBianlLv) == "1")
+            {
+                self.SetFenBianLv1();
+            }
+
+            if (userInfoComponent.GetGameSettingValue(GameSettingEnum.FenBianlLv) == "2")
+            {
+                self.SetFenBianLv2();
+            }
+
+            if (PlayerPrefsHelp.GetInt(PlayerPrefsHelp.LastFrame) == 0)
+            {
+                FlyTipComponent.Instance.ShowFlyTipDi("UISettingFrame暂未开放");
+                // UIHelper.Create(self.ZoneScene(), UIType.UISettingFrame).Coroutine();
+            }
+            else
+            {
+                string oldValue = userInfoComponent.GetGameSettingValue(GameSettingEnum.HighFps);
+                CommonViewHelper.TargetFrameRate(oldValue == "1"? 60 : 30);
+            }
+
+            string attackmode = userInfoComponent.GetGameSettingValue(GameSettingEnum.AttackTarget);
+            self.Root().GetComponent<LockTargetComponent>().AttackTarget = int.Parse(attackmode);
+
+            self.Root().GetComponent<LockTargetComponent>().SkillAttackPlayerFirst =
+                    int.Parse(userInfoComponent.GetGameSettingValue(GameSettingEnum.SkillAttackPlayerFirst));
+
+            float lenDepth = PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.LenDepth);
+            self.Root().CurrentScene().GetComponent<MJCameraComponent>().LenDepth = lenDepth <= 0? 1 : lenDepth;
+
+            self.View.E_DragPanelEventTrigger.gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.RotaAngle) == 1);
+
+            userInfoComponent.PickSet = userInfoComponent.GetGameSettingValue(GameSettingEnum.PickSet).Split('@');
         }
 
         public static void BeforeUnload(this DlgMain self)
