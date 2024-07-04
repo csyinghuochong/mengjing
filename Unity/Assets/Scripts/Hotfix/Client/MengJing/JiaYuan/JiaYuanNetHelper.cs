@@ -90,5 +90,20 @@ namespace ET.Client
             M2C_JiaYuanDaShiResponse response = (M2C_JiaYuanDaShiResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_JiaYuanPurchaseRefresh> JiaYuanPurchaseRefresh(Scene root)
+        {
+            C2M_JiaYuanPurchaseRefresh request = new();
+            M2C_JiaYuanPurchaseRefresh response = (M2C_JiaYuanPurchaseRefresh)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<M2C_JiaYuanPurchaseResponse> JiaYuanPurchaseRequest(Scene root, int itemId, int purchaseId)
+        {
+            C2M_JiaYuanPurchaseRequest request = new() { ItemId = itemId, PurchaseId = purchaseId };
+            M2C_JiaYuanPurchaseResponse response =
+                    (M2C_JiaYuanPurchaseResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }
