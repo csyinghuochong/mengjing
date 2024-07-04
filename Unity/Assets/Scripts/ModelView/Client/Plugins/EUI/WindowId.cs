@@ -149,5 +149,6 @@ namespace ET.Client
 		WindowID_MiJingMain,
 		WindowID_SeasonMain,
 		WindowID_Team,
+		WindowID_JiaYuanUpLv,
 	}
 }

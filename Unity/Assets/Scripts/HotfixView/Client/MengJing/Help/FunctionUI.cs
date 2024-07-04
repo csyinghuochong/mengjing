@@ -92,6 +92,7 @@ namespace ET.Client
                 "UIZuoQi" => WindowID.WindowID_ZuoQi,
                 "UIProtect" => WindowID.WindowID_Protect,
                 "UITowerOfSeal" => WindowID.WindowID_TowerOfSeal,
+                "UIJiaYuanUpLv" => WindowID.WindowID_JiaYuanUpLv,
                 _ => WindowID.WindowID_Invaild
             };
         }
