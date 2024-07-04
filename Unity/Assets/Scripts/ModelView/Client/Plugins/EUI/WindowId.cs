@@ -152,5 +152,6 @@ namespace ET.Client
 		WindowID_JiaYuanUpLv,
 		WindowID_JiaYuanBag,
 		WindowID_JiaYuanChouKa,
+		WindowID_JiaYuanRecord,
 	}
 }
