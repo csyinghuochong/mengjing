@@ -53,5 +53,19 @@
             M2C_JiaYuanPickResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_JiaYuanPickResponse;
             return response.Error;
         }
+
+        public static async ETTask<int> JiaYuanUpLvRequest(Scene root)
+        {
+            C2M_JiaYuanUpLvRequest requet = new();
+            M2C_JiaYuanUpLvResponse response = (M2C_JiaYuanUpLvResponse)await root.GetComponent<ClientSenderCompnent>().Call(requet);
+            return response.Error;
+        }
+
+        public static async ETTask<int> JiaYuanExchangeRequest(Scene root, int exchangeType)
+        {
+            C2M_JiaYuanExchangeRequest request = new() { ExchangeType = exchangeType };
+            M2C_JiaYuanExchangeResponse response = (M2C_JiaYuanExchangeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }
