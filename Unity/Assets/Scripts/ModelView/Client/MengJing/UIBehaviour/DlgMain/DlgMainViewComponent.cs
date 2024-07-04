@@ -846,6 +846,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_MainActivityTip ES_MainActivityTip
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_mainactivitytip == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_RightSet/ES_MainActivityTip");
+		    	   this.m_es_mainactivitytip = this.AddChild<ES_MainActivityTip,Transform>(subTrans);
+     			}
+     			return this.m_es_mainactivitytip;
+     		}
+     	}
+
 		public UnityEngine.UI.Button E_Button_ZhanKaiButton
      	{
      		get
@@ -2328,6 +2346,57 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_TextFpsText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TextFpsText == null )
+     			{
+		    		this.m_E_TextFpsText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Fps/E_TextFps");
+     			}
+     			return this.m_E_TextFpsText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_TextPingText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TextPingText == null )
+     			{
+		    		this.m_E_TextPingText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Fps/E_TextPing");
+     			}
+     			return this.m_E_TextPingText;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_TextMessageText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_TextMessageText == null )
+     			{
+		    		this.m_E_TextMessageText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Fps/E_TextMessage");
+     			}
+     			return this.m_E_TextMessageText;
+     		}
+     	}
+
 		public UnityEngine.RectTransform EG_GuaJiSetRectTransform
      	{
      		get
@@ -2430,6 +2499,7 @@ namespace ET.Client
 			this.m_E_OpenChatImage = null;
 			this.m_EG_RightSetRectTransform = null;
 			this.m_es_mapmini = null;
+			this.m_es_mainactivitytip = null;
 			this.m_E_Button_ZhanKaiButton = null;
 			this.m_E_Button_ZhanKaiImage = null;
 			this.m_EG_Btn_TopRight_1RectTransform = null;
@@ -2517,6 +2587,9 @@ namespace ET.Client
 			this.m_es_openbox = null;
 			this.m_es_singing = null;
 			this.m_EG_FpsRectTransform = null;
+			this.m_E_TextFpsText = null;
+			this.m_E_TextPingText = null;
+			this.m_E_TextMessageText = null;
 			this.m_EG_GuaJiSetRectTransform = null;
 			this.m_E_Btn_StopGuaJiButton = null;
 			this.m_E_Btn_StopGuaJiImage = null;
@@ -2572,6 +2645,7 @@ namespace ET.Client
 		private UnityEngine.UI.Image m_E_OpenChatImage = null;
 		private UnityEngine.RectTransform m_EG_RightSetRectTransform = null;
 		private EntityRef<ES_MapMini> m_es_mapmini = null;
+		private EntityRef<ES_MainActivityTip> m_es_mainactivitytip = null;
 		private UnityEngine.UI.Button m_E_Button_ZhanKaiButton = null;
 		private UnityEngine.UI.Image m_E_Button_ZhanKaiImage = null;
 		private UnityEngine.RectTransform m_EG_Btn_TopRight_1RectTransform = null;
@@ -2659,6 +2733,9 @@ namespace ET.Client
 		private EntityRef<ES_OpenBox> m_es_openbox = null;
 		private EntityRef<ES_Singing> m_es_singing = null;
 		private UnityEngine.RectTransform m_EG_FpsRectTransform = null;
+		private UnityEngine.UI.Text m_E_TextFpsText = null;
+		private UnityEngine.UI.Text m_E_TextPingText = null;
+		private UnityEngine.UI.Text m_E_TextMessageText = null;
 		private UnityEngine.RectTransform m_EG_GuaJiSetRectTransform = null;
 		private UnityEngine.UI.Button m_E_Btn_StopGuaJiButton = null;
 		private UnityEngine.UI.Image m_E_Btn_StopGuaJiImage = null;

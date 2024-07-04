@@ -25,6 +25,8 @@ namespace ET
         // ping消息会设置该值，原子操作
         public long ServerMinusClientTime { private get; set; }
 
+        public long Ping { get; set; }
+
         public long FrameTime { get; private set; }
         
         public void Awake()

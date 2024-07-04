@@ -68,7 +68,7 @@ namespace ET
         public long OpenTime;
         public long CloseTime;
         public string Conent;
-        public string UIType;
+        public int UIType;
         public List<int> OpenDay;
     }
 

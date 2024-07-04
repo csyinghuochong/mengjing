@@ -82,5 +82,6 @@
         public const int UITeamDropTimer = 350;
         public const int SeasonTowerTimer = 351;
         public const int DropUITimer = 352;
+        public const int MainActivityTipTimer = 353;
     }
 }

@@ -297,6 +297,7 @@ namespace ET.Client
         }
     }
 
+    [FriendOf(typeof (ES_MainActivityTip))]
     [FriendOf(typeof (Scroll_Item_MainTeamItem))]
     [FriendOf(typeof (ES_RoleHead))]
     [FriendOf(typeof (ES_MainBuff))]
@@ -401,6 +402,7 @@ namespace ET.Client
             self.View.ES_MainHpBar.uiTransform.gameObject.SetActive(true);
             self.View.ES_OpenBox.uiTransform.gameObject.SetActive(false);
             self.View.ES_Singing.uiTransform.gameObject.SetActive(false);
+            self.View.ES_MainActivityTip.uiTransform.gameObject.SetActive(false);
 
             self.View.ES_JoystickMove.uiTransform.gameObject.SetActive(true);
 
@@ -1735,38 +1737,26 @@ namespace ET.Client
 
         public static void UpdatePing(this DlgMain self)
         {
-            // SessionComponent sessionComponent = self.Root()?.GetComponent<SessionComponent>();
-            // if (sessionComponent == null || sessionComponent.Session == null)
-            // {
-            //     return;
-            // }
-            //
-            // PingComponent pingComponent = sessionComponent.Session.GetComponent<PingComponent>();
-            // if (pingComponent == null)
-            // {
-            //     return;
-            // }
-            //
-            // long ping = pingComponent.Ping;
-            // self.TextPing.text = StringBuilderHelper.GetPing(ping);
-            // if (ping <= 200)
-            // {
-            //     self.TextPing.color = Color.green;
-            //     return;
-            // }
-            //
-            // if (ping <= 500)
-            // {
-            //     self.TextPing.color = Color.yellow;
-            //     return;
-            // }
-            //
-            // self.TextPing.color = Color.red;
+            long ping = TimeInfo.Instance.Ping;
+            self.View.E_TextPingText.text = StringBuilderHelper.GetPing(ping);
+            if (ping <= 200)
+            {
+                self.View.E_TextPingText.color = Color.green;
+                return;
+            }
+
+            if (ping <= 500)
+            {
+                self.View.E_TextPingText.color = Color.yellow;
+                return;
+            }
+
+            self.View.E_TextPingText.color = Color.red;
         }
 
         public static void UpdateMessage(this DlgMain self)
         {
-            // self.TextMessage.text = StringBuilderHelper.GetMessageCnt(OpcodeHelper.OneTotalNumber);
+            // self.View.E_TextMessageText.text = StringBuilderHelper.GetMessageCnt(OpcodeHelper.OneTotalNumber);
             // OpcodeHelper.OneTotalNumber = 0;
         }
 
