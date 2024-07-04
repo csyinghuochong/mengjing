@@ -6,20 +6,126 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-	[FriendOf(typeof(DlgJiaYuanBag))]
-	public static  class DlgJiaYuanBagSystem
-	{
+    [Event(SceneType.Demo)]
+    public class DataUpdate_BagItemUpdate_DlgJiaYuanBagRefresh: AEvent<Scene, DataUpdate_BagItemUpdate>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_BagItemUpdate args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanBag>()?.OnUpdateUI();
+            await ETTask.CompletedTask;
+        }
+    }
 
-		public static void RegisterUIEvent(this DlgJiaYuanBag self)
-		{
-		 
-		}
+    [FriendOf(typeof (Scroll_Item_CommonItem))]
+    [FriendOf(typeof (DlgJiaYuanBag))]
+    public static class DlgJiaYuanBagSystem
+    {
+        public static void RegisterUIEvent(this DlgJiaYuanBag self)
+        {
+            self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
+            self.View.E_ButtonCloseButton.AddListener(() => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanBag); });
 
-		public static void ShowWindow(this DlgJiaYuanBag self, Entity contextData = null)
-		{
-		}
+            self.View.E_Btn_PlanButton.AddListenerAsync(self.OnBtn_Plan);
+        }
 
-		 
+        public static void ShowWindow(this DlgJiaYuanBag self, Entity contextData = null)
+        {
+            self.OnUpdateUI();
+        }
 
-	}
+        public static async ETTask OnBtn_Plan(this DlgJiaYuanBag self)
+        {
+            Scene curScene = self.Root().CurrentScene();
+            if (self.BagInfo == null)
+            {
+                return;
+            }
+
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            if (mapComponent.SceneType != SceneTypeEnum.JiaYuan)
+            {
+                return;
+            }
+
+            DlgJiaYuanMain dlgJiaYuanMain = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>();
+
+            Unit unit = JiaYuanHelper.GetUnitByCellIndex(curScene, dlgJiaYuanMain.CellIndex);
+            if (unit != null)
+            {
+                FlyTipComponent.Instance.ShowFlyTipDi("当前土地有植物！");
+                return;
+            }
+
+            try
+            {
+                await JiaYuanNetHelper.JiaYuanPlantRequest(self.Root(), dlgJiaYuanMain.CellIndex, self.BagInfo.ItemID);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return;
+            }
+
+            if (self.IsDisposed)
+            {
+                return;
+            }
+
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanBag);
+        }
+
+        private static void OnBagItemsRefresh(this DlgJiaYuanBag self, Transform transform, int index)
+        {
+            Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
+
+            if (index < self.ShowBagInfos.Count)
+            {
+                scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.JianYuanBag, self.OnClickHandler);
+            }
+            else
+            {
+                scrollItemCommonItem.Refresh(null, ItemOperateEnum.Bag);
+            }
+        }
+
+        public static void OnUpdateUI(this DlgJiaYuanBag self)
+        {
+            int maxCapacity = GlobalValueConfigCategory.Instance.BagInitCapacity;
+
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            List<BagInfo> bagInfos = bagComponent.GetItemsByType(2);
+            self.ShowBagInfos.Clear();
+
+            for (int i = 0; i < bagInfos.Count; i++)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
+                if (itemConfig.ItemType != 2 || itemConfig.ItemSubType != 101)
+                {
+                    continue;
+                }
+
+                self.ShowBagInfos.Add(bagInfos[i]);
+            }
+
+            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count > maxCapacity? self.ShowBagInfos.Count : maxCapacity);
+            self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count > maxCapacity? self.ShowBagInfos.Count : maxCapacity);
+        }
+
+        public static void OnClickHandler(this DlgJiaYuanBag self, BagInfo bagInfo)
+        {
+            self.BagInfo = bagInfo;
+            if (self.ScrollItemCommonItems != null)
+            {
+                foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
+                {
+                    if (item.uiTransform == null)
+                    {
+                        continue;
+                    }
+
+                    item.ES_CommonItem.SetSelected(bagInfo);
+                }
+            }
+        }
+    }
 }

@@ -11,7 +11,7 @@ namespace ET.Client
             get => this.GetComponent<DlgJiaYuanMainViewComponent>();
         }
 
-        public int CellIndex;
+        public int CellIndex { get; set; }
 
         public int LastPasureIndex;
         public int LastCellIndex;

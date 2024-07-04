@@ -224,7 +224,7 @@ namespace ET.Client
                 int GatherNumber = numericComponent.GetAsInt(NumericType.GatherNumber);
                 long LastGameTime = numericComponent.GetAsLong(NumericType.GatherLastTime);
                 int cellIndex = numericComponent.GetAsInt(NumericType.GatherCellIndex);
-                int getcode = JiaYuanHelper.GetPlanShouHuoItem(planlist[i].ConfigId, StartTime, GatherNumber, LastGameTime);
+                int getcode = ET.JiaYuanHelper.GetPlanShouHuoItem(planlist[i].ConfigId, StartTime, GatherNumber, LastGameTime);
                 if (getcode == ErrorCode.ERR_Success)
                 {
                     gatherNumber++;
@@ -253,7 +253,7 @@ namespace ET.Client
                 int cellIndex = numericComponent.GetAsInt(NumericType.GatherCellIndex);
 
                 // 铲除枯萎的植物
-                int state = JiaYuanHelper.GetPlanStage(planlist[i].ConfigId, StartTime, GatherNumber);
+                int state = ET.JiaYuanHelper.GetPlanStage(planlist[i].ConfigId, StartTime, GatherNumber);
                 if (state < 0 || state > 3)
                 {
                     await JiaYuanNetHelper.JiaYuanUprootRequest(self.Root(), cellIndex, planlist[i].Id, 1);
@@ -278,7 +278,7 @@ namespace ET.Client
                 int GatherNumber = numericComponent.GetAsInt(NumericType.GatherNumber);
                 long LastGameTime = numericComponent.GetAsLong(NumericType.GatherLastTime);
 
-                int getcode = JiaYuanHelper.GetPastureShouHuoItem(pasturelist[i].ConfigId, StartTime, GatherNumber, LastGameTime);
+                int getcode = ET.JiaYuanHelper.GetPastureShouHuoItem(pasturelist[i].ConfigId, StartTime, GatherNumber, LastGameTime);
                 if (getcode == ErrorCode.ERR_Success)
                 {
                     gatherNumber++;
@@ -325,7 +325,7 @@ namespace ET.Client
                 int GatherNumber = numericComponent.GetAsInt(NumericType.GatherNumber);
                 long LastGameTime = numericComponent.GetAsLong(NumericType.GatherLastTime);
                 int cellIndex = numericComponent.GetAsInt(NumericType.GatherCellIndex);
-                int getcode = JiaYuanHelper.GetPlanShouHuoItem(planlist[i].ConfigId, StartTime, GatherNumber, LastGameTime);
+                int getcode = ET.JiaYuanHelper.GetPlanShouHuoItem(planlist[i].ConfigId, StartTime, GatherNumber, LastGameTime);
                 if (getcode == ErrorCode.ERR_Success)
                 {
                     gatherNumber++;
@@ -351,7 +351,7 @@ namespace ET.Client
                 int GatherNumber = numericComponent.GetAsInt(NumericType.GatherNumber);
                 long LastGameTime = numericComponent.GetAsLong(NumericType.GatherLastTime);
 
-                int getcode = JiaYuanHelper.GetPastureShouHuoItem(pasturelist[i].ConfigId, StartTime, GatherNumber, LastGameTime);
+                int getcode = ET.JiaYuanHelper.GetPastureShouHuoItem(pasturelist[i].ConfigId, StartTime, GatherNumber, LastGameTime);
                 if (getcode == ErrorCode.ERR_Success)
                 {
                     gatherNumber++;

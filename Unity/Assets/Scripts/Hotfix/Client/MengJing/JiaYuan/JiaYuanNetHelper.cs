@@ -67,5 +67,12 @@
             M2C_JiaYuanExchangeResponse response = (M2C_JiaYuanExchangeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<int> JiaYuanPlantRequest(Scene root, int cellIndex, int itemId)
+        {
+            C2M_JiaYuanPlantRequest request = new() { CellIndex = cellIndex, ItemId = itemId };
+            M2C_JiaYuanPlantResponse response = (M2C_JiaYuanPlantResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }

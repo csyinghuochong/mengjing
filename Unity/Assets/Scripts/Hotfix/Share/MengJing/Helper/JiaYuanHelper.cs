@@ -7,7 +7,7 @@ using Unity.Mathematics;
 
 namespace ET
 {
-    public static class JiaYuanHelper
+    public static partial class JiaYuanHelper
     {
 
         public const long JiaYuanPurchaseRefresh = 15000;
