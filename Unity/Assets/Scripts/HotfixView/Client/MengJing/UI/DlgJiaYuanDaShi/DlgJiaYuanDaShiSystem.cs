@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_JiaYuanDaShiPro))]
+    [FriendOf(typeof (ES_JiaYuanDaShiShow))]
     [FriendOf(typeof (DlgJiaYuanDaShi))]
     public static class DlgJiaYuanDaShiSystem
     {
@@ -30,6 +31,8 @@ namespace ET.Client
                     self.View.ES_JiaYuanDaShiPro.OnUpdateUI();
                     break;
                 case 1:
+                    self.View.ES_JiaYuanDaShiShow.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_JiaYuanDaShiShow.OnUpdateUI();
                     break;
             }
         }
