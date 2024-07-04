@@ -1,0 +1,158 @@
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace ET.Client
+{
+    [Invoke(TimerInvokeType.JiaYuanPurchaseTimer)]
+    public class JiaYuanPurchaseTimer: ATimer<ES_JiaYuanPurchase>
+    {
+        protected override void Run(ES_JiaYuanPurchase self)
+        {
+            try
+            {
+                self.OnTimer();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"move timer error: {self.Id}\n{e}");
+            }
+        }
+    }
+
+    [FriendOf(typeof (Scroll_Item_JiaYuanPurchaseItem))]
+    [EntitySystemOf(typeof (ES_JiaYuanPurchase))]
+    [FriendOfAttribute(typeof (ES_JiaYuanPurchase))]
+    public static partial class ES_JiaYuanPurchaseSystem
+    {
+        [EntitySystem]
+        private static void Awake(this ES_JiaYuanPurchase self, Transform transform)
+        {
+            self.uiTransform = transform;
+            self.E_ButtonRefreshButton.AddListener(self.OnButtonRefresh);
+            self.E_JiaYuanPurchaseItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnJiaYuanPurchaseItemsRefresh);
+
+            self.JiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.JiaYuanPurchaseTimer, self);
+
+            self.OnUpdateUI();
+            self.ShowCDTime();
+        }
+
+        [EntitySystem]
+        private static void Destroy(this ES_JiaYuanPurchase self)
+        {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
+            self.DestroyWidget();
+        }
+
+        public static void OnButtonRefresh(this ES_JiaYuanPurchase self)
+        {
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            long jiayuanzijin = self.Root().GetComponent<UserInfoComponentC>().UserInfo.JiaYuanFund;
+            int refreshtime = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.JiaYuanPurchaseRefresh);
+            long needzijin = refreshtime >= 1? JiaYuanData.JiaYuanPurchaseRefresh : 0;
+
+            if (refreshtime >= 3)
+            {
+                FlyTipComponent.Instance.ShowFlyTipDi("今日次数不足!");
+                return;
+            }
+
+            if (jiayuanzijin < needzijin)
+            {
+                FlyTipComponent.Instance.ShowFlyTipDi("家园资金不足!");
+                return;
+            }
+
+            if (needzijin > 0)
+            {
+                PopupTipHelp.OpenPopupTip(self.Root(), "家园刷新", $"是否花费{needzijin}家园资金刷新", () => { self.RquestFresh().Coroutine(); }, null)
+                        .Coroutine();
+            }
+            else
+            {
+                self.RquestFresh().Coroutine();
+            }
+        }
+
+        public static async ETTask RquestFresh(this ES_JiaYuanPurchase self)
+        {
+            M2C_JiaYuanPurchaseRefresh response = await JiaYuanNetHelper.JiaYuanPurchaseRefresh(self.Root());
+
+            if (self.IsDisposed || response.Error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            self.Root().GetComponent<JiaYuanComponent>().PurchaseItemList_7 = response.PurchaseItemList;
+            self.OnUpdateUI();
+        }
+
+        public static void OnTimer(this ES_JiaYuanPurchase self)
+        {
+            long removeid = 0;
+            if (self.ScrollItemJiaYuanPurchaseItems != null)
+            {
+                for (int i = self.ScrollItemJiaYuanPurchaseItems.Count - 2; i >= 0; i--)
+                {
+                    bool leftTime = self.ScrollItemJiaYuanPurchaseItems[i].UpdateLeftTime();
+                    if (leftTime)
+                    {
+                        continue;
+                    }
+
+                    self.ScrollItemJiaYuanPurchaseItems[i].uiTransform.gameObject.SetActive(false);
+                    removeid = self.ScrollItemJiaYuanPurchaseItems[i].JiaYuanPurchaseItem.PurchaseId;
+                }
+            }
+
+            if (removeid > 0)
+            {
+                for (int k = self.JiaYuanComponent.PurchaseItemList_7.Count - 1; k >= 0; k--)
+                {
+                    if (self.JiaYuanComponent.PurchaseItemList_7[k].PurchaseId == removeid)
+                    {
+                        self.JiaYuanComponent.PurchaseItemList_7.RemoveAt(k);
+                    }
+                }
+            }
+
+            self.ShowCDTime();
+        }
+
+        public static void ShowCDTime(this ES_JiaYuanPurchase self)
+        {
+            DateTime dateTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+            long curTime = dateTime.Hour * 60 * 60 + dateTime.Minute * 60 + dateTime.Second;
+            long cdTime = 0;
+            if (dateTime.Hour < 12)
+            {
+                cdTime = 12 * 60 * 60 - curTime;
+            }
+            else
+            {
+                cdTime = 24 * 60 * 60 - curTime;
+            }
+
+            self.E_Text_TimeText.text = $"刷新倒计时: {TimeHelper.ShowLeftTime(cdTime * 1000)}";
+        }
+
+        public static void OnUpdateItem(this ES_JiaYuanPurchase self)
+        {
+            self.OnUpdateUI();
+        }
+
+        private static void OnJiaYuanPurchaseItemsRefresh(this ES_JiaYuanPurchase self, Transform transform, int index)
+        {
+            Scroll_Item_JiaYuanPurchaseItem scrollItemJiaYuanPurchaseItem = self.ScrollItemJiaYuanPurchaseItems[index].BindTrans(transform);
+            scrollItemJiaYuanPurchaseItem.OnUpdateUI(self.JiaYuanComponent.PurchaseItemList_7[index], self.OnUpdateItem);
+        }
+
+        public static void OnUpdateUI(this ES_JiaYuanPurchase self)
+        {
+            self.AddUIScrollItems(ref self.ScrollItemJiaYuanPurchaseItems, self.JiaYuanComponent.PurchaseItemList_7.Count);
+            self.E_JiaYuanPurchaseItemsLoopVerticalScrollRect.SetVisible(true, self.JiaYuanComponent.PurchaseItemList_7.Count);
+        }
+    }
+}
