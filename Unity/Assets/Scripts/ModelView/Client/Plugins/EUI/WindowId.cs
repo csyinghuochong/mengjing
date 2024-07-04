@@ -151,5 +151,6 @@ namespace ET.Client
 		WindowID_Team,
 		WindowID_JiaYuanUpLv,
 		WindowID_JiaYuanBag,
+		WindowID_JiaYuanChouKa,
 	}
 }
