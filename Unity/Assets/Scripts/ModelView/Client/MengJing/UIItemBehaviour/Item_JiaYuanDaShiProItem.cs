@@ -1,11 +1,14 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_JiaYuanDaShiProItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_JiaYuanDaShiProItem : Entity,IAwake,IDestroy,IUIScrollItem
 	{
+		public Dictionary<int, string> jiayuanDaShi = new();
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)

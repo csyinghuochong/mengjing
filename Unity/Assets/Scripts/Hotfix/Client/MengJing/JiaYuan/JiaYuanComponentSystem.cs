@@ -43,5 +43,18 @@
         {
             return self.MasterId == selfId;
         }
+
+        public static KeyValuePair GetDaShiProInfo(this JiaYuanComponent self, int keyid)
+        {
+            for (int i = 0; i < self.JiaYuanProList_7.Count; i++)
+            {
+                if (self.JiaYuanProList_7[i].KeyId == keyid)
+                {
+                    return self.JiaYuanProList_7[i];
+                }
+            }
+
+            return null;
+        }
     }
 }

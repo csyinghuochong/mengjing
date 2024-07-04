@@ -1,4 +1,6 @@
-﻿namespace ET.Client
+﻿using System.Collections.Generic;
+
+namespace ET.Client
 {
     public static class JiaYuanNetHelper
     {
@@ -79,6 +81,13 @@
         {
             C2M_JiaYuanRecordListRequest request = new();
             M2C_JiaYuanRecordListResponse response = (M2C_JiaYuanRecordListResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<M2C_JiaYuanDaShiResponse> JiaYuanDaShiRequest(Scene root, List<long> bagInfoIDs)
+        {
+            C2M_JiaYuanDaShiRequest request = new() { BagInfoIDs = bagInfoIDs };
+            M2C_JiaYuanDaShiResponse response = (M2C_JiaYuanDaShiResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
     }

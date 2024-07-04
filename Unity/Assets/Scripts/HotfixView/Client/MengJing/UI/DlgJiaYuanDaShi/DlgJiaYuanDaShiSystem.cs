@@ -27,6 +27,7 @@ namespace ET.Client
             {
                 case 0:
                     self.View.ES_JiaYuanDaShiPro.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_JiaYuanDaShiPro.OnUpdateUI();
                     break;
                 case 1:
                     break;
