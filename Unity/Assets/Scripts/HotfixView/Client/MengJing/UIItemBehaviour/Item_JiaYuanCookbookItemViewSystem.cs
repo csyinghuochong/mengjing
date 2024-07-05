@@ -61,6 +61,9 @@ namespace ET.Client
 
         public static void OnUpdateUI(this Scroll_Item_JiaYuanCookbookItem self, int itmeid, bool active)
         {
+            self.EG_MakeItemRectTransform.gameObject.SetActive(false);
+            self.EG_MakeItemRectTransform.SetParent(self.uiTransform);
+
             self.MakeItemId = itmeid;
             self.ES_CommonItem.UpdateItem(new() { ItemID = itmeid, ItemNum = 1 }, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
@@ -70,35 +73,29 @@ namespace ET.Client
             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(makeid);
             string[] iteminfos = equipMakeConfig.NeedItems.Split('@');
 
+            CommonViewHelper.DestoryChild(self.EG_MakeItemListRectTransform.gameObject);
             for (int i = 0; i < iteminfos.Length; i++)
             {
-                UIItemComponent uIItemComponent = null;
+                ES_CommonItem uIItemComponent = null;
                 int needitmeid = int.Parse(iteminfos[i].Split(';')[0]);
-                if (i < self.NeedItemList.Count)
-                {
-                    uIItemComponent = self.NeedItemList[i];
-                    uIItemComponent.GameObject.SetActive(true);
-                }
-                else
-                {
-                    GameObject go = GameObject.Instantiate(self.MakeItem);
-                    UICommonHelper.SetParent(go, self.MakeItemList);
-                    uIItemComponent = self.AddChild<UIItemComponent, GameObject>(go);
-                    uIItemComponent.Image_Lock.GetComponent<Button>().onClick.AddListener(self.OnImage_Lock);
-                    self.NeedItemList.Add(uIItemComponent);
-                    go.SetActive(true);
-                }
+
+                GameObject go = UnityEngine.Object.Instantiate(self.EG_MakeItemRectTransform.gameObject);
+                CommonViewHelper.SetParent(go, self.EG_MakeItemListRectTransform.gameObject);
+                uIItemComponent = self.AddChild<ES_CommonItem, Transform>(go.transform);
+                uIItemComponent.E_LockButton.AddListener(self.OnImage_Lock);
+
+                go.SetActive(true);
 
                 BagInfo bagInfo = active? new BagInfo() { ItemID = needitmeid, ItemNum = 1 } : null;
                 uIItemComponent.UpdateItem(bagInfo, ItemOperateEnum.None);
-                uIItemComponent.Image_ItemQuality.SetActive(true);
+                uIItemComponent.E_ItemQualityImage.gameObject.SetActive(true);
                 if (active)
                 {
-                    uIItemComponent.Image_Lock.SetActive(false);
+                    uIItemComponent.E_LockButton.gameObject.SetActive(false);
                 }
                 else
                 {
-                    uIItemComponent.Image_Lock.SetActive(true);
+                    uIItemComponent.E_LockButton.gameObject.SetActive(true);
                 }
             }
         }
