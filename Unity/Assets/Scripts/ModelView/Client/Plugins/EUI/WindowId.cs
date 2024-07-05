@@ -156,5 +156,6 @@ namespace ET.Client
 		WindowID_JiaYuanDaShi,
 		WindowID_JiaYuanFood,
 		WindowID_JiaYuanMystery,
+		WindowID_JiaYuanPasture,
 	}
 }
