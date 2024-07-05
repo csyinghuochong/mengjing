@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_JiaYuanPasture_A))]
+    [FriendOf(typeof (ES_JiaYuanPasture_B))]
     [FriendOf(typeof (DlgJiaYuanPasture))]
     public static class DlgJiaYuanPastureSystem
     {
@@ -30,6 +31,7 @@ namespace ET.Client
                     self.View.ES_JiaYuanPasture_A.OnUpdateUI();
                     break;
                 case 1:
+                    self.View.ES_JiaYuanPasture_B.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }

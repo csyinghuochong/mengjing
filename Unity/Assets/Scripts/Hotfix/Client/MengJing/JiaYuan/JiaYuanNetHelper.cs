@@ -140,5 +140,12 @@ namespace ET.Client
             M2C_JiaYuanPastureBuyResponse response = (M2C_JiaYuanPastureBuyResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_JiaYuanPastureListResponse> JiaYuanPastureListRequest(Scene root)
+        {
+            C2M_JiaYuanPastureListRequest request = new();
+            M2C_JiaYuanPastureListResponse response = (M2C_JiaYuanPastureListResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }
