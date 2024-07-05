@@ -6,6 +6,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_JiaYuanCookbookItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
+		public int MakeItemId = 0;  
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
