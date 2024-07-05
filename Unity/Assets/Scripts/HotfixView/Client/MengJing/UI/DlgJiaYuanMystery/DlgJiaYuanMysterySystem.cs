@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_JiaYuanMystery_A))]
+    [FriendOf(typeof (ES_JiaYuanMystery_B))]
     [FriendOf(typeof (DlgJiaYuanMystery))]
     public static class DlgJiaYuanMysterySystem
     {
@@ -30,6 +31,8 @@ namespace ET.Client
                     self.View.ES_JiaYuanMystery_A.OnUpdateUI();
                     break;
                 case 1:
+                    self.View.ES_JiaYuanMystery_B.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_JiaYuanMystery_B.OnUpdateUI();
                     break;
             }
         }
