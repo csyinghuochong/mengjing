@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_JiaYuanPurchase))]
+    [FriendOf(typeof (ES_JiaYuanCooking))]
     [FriendOf(typeof (DlgJiaYuanFood))]
     public static class DlgJiaYuanFoodSystem
     {
@@ -29,7 +30,7 @@ namespace ET.Client
                     self.View.ES_JiaYuanPurchase.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-
+                    self.View.ES_JiaYuanCooking.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
 
