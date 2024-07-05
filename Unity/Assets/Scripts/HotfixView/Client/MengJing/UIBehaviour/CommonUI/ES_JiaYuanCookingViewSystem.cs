@@ -1,8 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (Scroll_Item_CommonItem))]
     [EntitySystemOf(typeof (ES_JiaYuanCooking))]
     [FriendOfAttribute(typeof (ES_JiaYuanCooking))]
     public static partial class ES_JiaYuanCookingSystem
@@ -11,12 +15,274 @@ namespace ET.Client
         private static void Awake(this ES_JiaYuanCooking self, Transform transform)
         {
             self.uiTransform = transform;
+            self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
+            self.E_ButtonMakeButton.AddListenerAsync(self.OnButtonMake);
+            self.CostItemList[0] = self.ES_CommonItem_0;
+            self.CostItemList[1] = self.ES_CommonItem_1;
+            self.CostItemList[2] = self.ES_CommonItem_2;
+            self.CostItemList[3] = self.ES_CommonItem_3;
+
+            self.OnUpdateUI();
         }
 
         [EntitySystem]
         private static void Destroy(this ES_JiaYuanCooking self)
         {
             self.DestroyWidget();
+        }
+
+        public static async ETTask OnButtonMake(this ES_JiaYuanCooking self)
+        {
+            if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < 1)
+            {
+                FlyTipComponent.Instance.ShowFlyTipDi("背包空间不足！");
+                return;
+            }
+
+            M2C_JiaYuanCookResponse response = await JiaYuanNetHelper.JiaYuanCookRequest(self.Root(), self.GetSelectIds());
+            if (response.Error != ErrorCode.ERR_Success)
+            {
+                return;
+            }
+
+            if (response.ItemId != 0)
+            {
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_CommonReward);
+                List<RewardItem> rewardItems = new List<RewardItem>();
+                rewardItems.Add(new() { ItemID = response.ItemId, ItemNum = 1 });
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgCommonReward>().OnUpdateUI(rewardItems);
+            }
+
+            if (response.LearnId != 0)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(response.LearnId);
+                FlyTipComponent.Instance.ShowFlyTipDi($"恭喜你学会制作 {itemConfig.ItemName}");
+            }
+
+            self.Root().GetComponent<JiaYuanComponent>().LearnMakeIds_7 = response.LearnMakeIds;
+            self.OnUpdateUI();
+        }
+
+        public static List<long> GetSelectIds(this ES_JiaYuanCooking self)
+        {
+            List<long> ids = new List<long>();
+            for (int i = 0; i < self.CostItemList.Length; i++)
+            {
+                if (self.CostItemList[i].Baginfo == null)
+                {
+                    continue;
+                }
+
+                ids.Add(self.CostItemList[i].Baginfo.BagInfoID);
+            }
+
+            return ids;
+        }
+
+        public static void ResetUiItem(this ES_JiaYuanCooking self)
+        {
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            Dictionary<long, long> itemNumber = new Dictionary<long, long>();
+
+            for (int i = 0; i < self.CostItemList.Length; i++)
+            {
+                if (self.CostItemList[i].Baginfo == null)
+                {
+                    self.CostItemList[i].UpdateItem(null, ItemOperateEnum.None);
+                    continue;
+                }
+
+                BagInfo bagInfo = bagComponent.GetBagInfo(self.CostItemList[i].Baginfo.BagInfoID);
+                if (bagInfo == null)
+                {
+                    self.CostItemList[i].UpdateItem(null, ItemOperateEnum.None);
+                    continue;
+                }
+
+                if (!itemNumber.ContainsKey(bagInfo.BagInfoID))
+                {
+                    itemNumber.Add(bagInfo.BagInfoID, 1);
+                }
+                else
+                {
+                    itemNumber[bagInfo.BagInfoID]++;
+                }
+
+                if (itemNumber[bagInfo.BagInfoID] > bagInfo.ItemNum)
+                {
+                    self.CostItemList[i].UpdateItem(null, ItemOperateEnum.None);
+                }
+            }
+        }
+
+        private static void OnBagItemsRefresh(this ES_JiaYuanCooking self, Transform transform, int index)
+        {
+            Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
+            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.HuishouBag);
+            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (BagInfo binfo, PointerEventData pdata) =>
+            {
+                self.OnPointerDown(binfo, pdata).Coroutine();
+            };
+            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (BagInfo binfo, PointerEventData pdata) => { self.OnPointerUp(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
+
+            scrollItemCommonItem.ES_CommonItem.E_ItemDragEventTrigger.gameObject.SetActive(index < self.ShowBagInfos.Count);
+            scrollItemCommonItem.ES_CommonItem.E_ItemNameText.gameObject.SetActive(false);
+        }
+
+        public static void UpdateBagUI(this ES_JiaYuanCooking self, int itemType = -1)
+        {
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+
+            self.ShowBagInfos.Clear();
+            List<BagInfo> baglist = bagComponent.GetBagList();
+            for (int i = 0; i < baglist.Count; i++)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(baglist[i].ItemID);
+                if (itemConfig.ItemType == 2 && (itemConfig.ItemSubType == 201 || itemConfig.ItemSubType == 301))
+                {
+                    self.ShowBagInfos.Add(baglist[i]);
+                }
+            }
+
+            int max = bagComponent.GetBagTotalCell();
+            self.AddUIScrollItems(ref self.ScrollItemCommonItems, max);
+            self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, max);
+        }
+
+        public static void UpdateSelected(this ES_JiaYuanCooking self)
+        {
+            if (self.ScrollItemCommonItems != null)
+            {
+                foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
+                {
+                    if (item.uiTransform == null)
+                    {
+                        continue;
+                    }
+
+                    BagInfo bagInfo = item.ES_CommonItem.Baginfo;
+                    if (bagInfo == null)
+                    {
+                        continue;
+                    }
+
+                    bool have = false;
+                    for (int h = 0; h < self.CostItemList.Length; h++)
+                    {
+                        if (self.CostItemList[h].Baginfo != null
+                            && self.CostItemList[h].Baginfo.BagInfoID == bagInfo.BagInfoID)
+                        {
+                            have = true;
+                        }
+                    }
+
+                    item.ES_CommonItem.E_XuanZhongImage.gameObject.SetActive(have);
+                }
+            }
+        }
+
+        public static void OnHuiShouSelect(this ES_JiaYuanCooking self, string dataparams)
+        {
+            long curNumber = 0;
+            string[] huishouInfo = dataparams.Split('_');
+            BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(long.Parse(huishouInfo[1]));
+
+            long totalNumber = bagInfo.ItemNum;
+
+            if (huishouInfo[0] == "1")
+            {
+                for (int i = 0; i < self.CostItemList.Length; i++)
+                {
+                    BagInfo bagInfo1 = self.CostItemList[i].Baginfo;
+                    if (bagInfo1 != null && bagInfo1.ItemID == bagInfo.ItemID)
+                    {
+                        curNumber++;
+                    }
+                }
+
+                if (curNumber >= totalNumber)
+                {
+                    return;
+                }
+
+                for (int i = 0; i < self.CostItemList.Length; i++)
+                {
+                    if (self.CostItemList[i].Baginfo != null)
+                    {
+                        continue;
+                    }
+
+                    self.CostItemList[i].UpdateItem(new BagInfo()
+                    {
+                        ItemID = bagInfo.ItemID, BagInfoID = bagInfo.BagInfoID, ItemNum = 1, RpcId = i,
+                    }, ItemOperateEnum.HuishouShow);
+                    self.CostItemList[i].E_ItemNumText.text = "1";
+                    self.CostItemList[i].E_ItemNameText.gameObject.SetActive(false);
+                    break;
+                }
+            }
+            else
+            {
+                for (int i = self.CostItemList.Length - 1; i >= 0; i--)
+                {
+                    BagInfo bagInfo1 = self.CostItemList[i].Baginfo;
+                    if (bagInfo1 == null)
+                    {
+                        continue;
+                    }
+
+                    if (bagInfo1.BagInfoID == bagInfo.BagInfoID)
+                    {
+                        self.CostItemList[i].UpdateItem(null, ItemOperateEnum.HuishouShow);
+                        self.CostItemList[i].E_ItemNumText.text = "1";
+                        self.CostItemList[i].E_ItemNameText.gameObject.SetActive(false);
+                        break;
+                    }
+                }
+            }
+
+            self.UpdateSelected();
+        }
+
+        public static async ETTask OnPointerDown(this ES_JiaYuanCooking self, BagInfo binfo, PointerEventData pdata)
+        {
+            if (binfo == null)
+            {
+                return;
+            }
+
+            self.IsHoldDown = true;
+            EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
+
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(500);
+            if (!self.IsHoldDown)
+            {
+                return;
+            }
+
+            EventSystem.Instance.Publish(self.Root(),
+                new ShowItemTips()
+                {
+                    BagInfo = binfo,
+                    ItemOperateEnum = ItemOperateEnum.None,
+                    InputPoint = Input.mousePosition,
+                    Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
+                    EquipList = new()
+                });
+        }
+
+        public static void OnPointerUp(this ES_JiaYuanCooking self, BagInfo binfo, PointerEventData pdata)
+        {
+            self.IsHoldDown = false;
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
+        }
+
+        public static void OnUpdateUI(this ES_JiaYuanCooking self)
+        {
+            self.ResetUiItem();
+            self.UpdateBagUI();
+            self.UpdateSelected();
         }
     }
 }

@@ -105,5 +105,12 @@ namespace ET.Client
                     (M2C_JiaYuanPurchaseResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_JiaYuanCookResponse> JiaYuanCookRequest(Scene root, List<long> bagInfoIds)
+        {
+            C2M_JiaYuanCookRequest request = new() { BagInfoIds = bagInfoIds };
+            M2C_JiaYuanCookResponse response = (M2C_JiaYuanCookResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

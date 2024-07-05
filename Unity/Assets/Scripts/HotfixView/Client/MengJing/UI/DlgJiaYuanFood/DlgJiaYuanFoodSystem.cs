@@ -6,6 +6,16 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class DataUpdate_HuiShouSelect_DlgJiaYuanFoodRefresh: AEvent<Scene, DataUpdate_HuiShouSelect>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_HuiShouSelect args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanFood>()?.View.ES_JiaYuanCooking.OnHuiShouSelect(args.DataParamString);
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof (ES_JiaYuanPurchase))]
     [FriendOf(typeof (ES_JiaYuanCooking))]
     [FriendOf(typeof (DlgJiaYuanFood))]
