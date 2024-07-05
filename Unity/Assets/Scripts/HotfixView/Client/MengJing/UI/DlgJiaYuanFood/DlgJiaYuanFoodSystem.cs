@@ -45,6 +45,7 @@ namespace ET.Client
                     break;
                 case 2:
                     self.View.ES_JiaYuanCookbook.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_JiaYuanCookbook.OnUpdateUI();
                     break;
             }
         }

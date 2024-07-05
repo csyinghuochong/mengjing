@@ -1,24 +1,61 @@
-﻿
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
-	[EntitySystemOf(typeof(ES_JiaYuanCookbook))]
-	[FriendOfAttribute(typeof(ES_JiaYuanCookbook))]
-	public static partial class ES_JiaYuanCookbookSystem 
-	{
-		[EntitySystem]
-		private static void Awake(this ES_JiaYuanCookbook self,Transform transform)
-		{
-			self.uiTransform = transform;
-		}
+    [EntitySystemOf(typeof (ES_JiaYuanCookbook))]
+    [FriendOfAttribute(typeof (ES_JiaYuanCookbook))]
+    public static partial class ES_JiaYuanCookbookSystem
+    {
+        [EntitySystem]
+        private static void Awake(this ES_JiaYuanCookbook self, Transform transform)
+        {
+            self.uiTransform = transform;
+            self.E_JiaYuanCookbookItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnJiaYuanCookbookItemsRefresh);
+        }
 
-		[EntitySystem]
-		private static void Destroy(this ES_JiaYuanCookbook self)
-		{
-			self.DestroyWidget();
-		}
-	}
+        [EntitySystem]
+        private static void Destroy(this ES_JiaYuanCookbook self)
+        {
+            self.DestroyWidget();
+        }
 
+        private static void OnJiaYuanCookbookItemsRefresh(this ES_JiaYuanCookbook self, Transform transform, int index)
+        {
+            Scroll_Item_JiaYuanCookbookItem scrollItemJiaYuanCookbookItem = self.ScrollItemJiaYuanCookbookItems[index].BindTrans(transform);
+            JiaYuanComponent jiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
+            scrollItemJiaYuanCookbookItem.OnUpdateUI(self.ShowFoods[index], jiaYuanComponent.LearnMakeIds_7.Contains(self.ShowFoods[index]));
+        }
 
+        public static void OnUpdateUI(this ES_JiaYuanCookbook self)
+        {
+            JiaYuanComponent jiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
+            List<int> foodlist = ItemConfigCategory.Instance.FoodList;
+            List<int> allfoods = new List<int>();
+            allfoods.AddRange(jiaYuanComponent.LearnMakeIds_7);
+            for (int i = 0; i < foodlist.Count; i++)
+            {
+                if (!allfoods.Contains(foodlist[i]))
+                {
+                    allfoods.Add(foodlist[i]);
+                }
+            }
+
+            for (int i = allfoods.Count - 1; i >= 0; i--)
+            {
+                int makeid = EquipMakeConfigCategory.Instance.GetMakeId(allfoods[i]);
+                if (makeid == 0)
+                {
+                    allfoods.RemoveAt(i);
+                }
+            }
+
+            self.ShowFoods.Clear();
+            self.ShowFoods.AddRange(allfoods);
+
+            self.AddUIScrollItems(ref self.ScrollItemJiaYuanCookbookItems, self.ShowFoods.Count);
+            self.E_JiaYuanCookbookItemsLoopVerticalScrollRect.SetVisible(true, self.ShowFoods.Count);
+        }
+    }
 }
