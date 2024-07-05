@@ -1,0 +1,67 @@
+﻿
+using UnityEngine;
+using UnityEngine.UI;
+namespace ET.Client
+{
+	[ChildOf]
+	[EnableMethod]
+	public  class ES_JiaYuanMystery_B : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	{
+		public UnityEngine.UI.LoopVerticalScrollRect E_JiaYuanMysteryItemsLoopVerticalScrollRect
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_JiaYuanMysteryItemsLoopVerticalScrollRect == null )
+     			{
+		    		this.m_E_JiaYuanMysteryItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_JiaYuanMysteryItems");
+     			}
+     			return this.m_E_JiaYuanMysteryItemsLoopVerticalScrollRect;
+     		}
+     	}
+
+		public UnityEngine.UI.Text E_Text_CDTimeText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_Text_CDTimeText == null )
+     			{
+		    		this.m_E_Text_CDTimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_CDTime");
+     			}
+     			return this.m_E_Text_CDTimeText;
+     		}
+     	}
+
+		    public Transform UITransform
+         {
+     	    get
+     	    {
+     		    return this.uiTransform;
+     	    }
+     	    set
+     	    {
+     		    this.uiTransform = value;
+     	    }
+         }
+
+		public void DestroyWidget()
+		{
+			this.m_E_JiaYuanMysteryItemsLoopVerticalScrollRect = null;
+			this.m_E_Text_CDTimeText = null;
+			this.uiTransform = null;
+		}
+
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_JiaYuanMysteryItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.Text m_E_Text_CDTimeText = null;
+		public Transform uiTransform = null;
+	}
+}

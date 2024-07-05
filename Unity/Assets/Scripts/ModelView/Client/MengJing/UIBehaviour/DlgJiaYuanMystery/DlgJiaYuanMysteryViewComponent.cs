@@ -60,6 +60,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_JiaYuanMystery_B ES_JiaYuanMystery_B
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_jiayuanmystery_b == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_JiaYuanMystery_B");
+		    	   this.m_es_jiayuanmystery_b = this.AddChild<ES_JiaYuanMystery_B,Transform>(subTrans);
+     			}
+     			return this.m_es_jiayuanmystery_b;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -82,6 +100,7 @@ namespace ET.Client
 			this.m_es_modelshow = null;
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_jiayuanmystery_a = null;
+			this.m_es_jiayuanmystery_b = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.uiTransform = null;
 		}
@@ -89,6 +108,7 @@ namespace ET.Client
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_JiaYuanMystery_A> m_es_jiayuanmystery_a = null;
+		private EntityRef<ES_JiaYuanMystery_B> m_es_jiayuanmystery_b = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}
