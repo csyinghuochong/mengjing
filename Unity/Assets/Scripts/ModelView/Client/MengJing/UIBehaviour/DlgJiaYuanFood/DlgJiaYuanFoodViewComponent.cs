@@ -60,6 +60,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_JiaYuanCookbook ES_JiaYuanCookbook
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_jiayuancookbook == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_JiaYuanCookbook");
+		    	   this.m_es_jiayuancookbook = this.AddChild<ES_JiaYuanCookbook,Transform>(subTrans);
+     			}
+     			return this.m_es_jiayuancookbook;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -82,6 +100,7 @@ namespace ET.Client
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_jiayuanpurchase = null;
 			this.m_es_jiayuancooking = null;
+			this.m_es_jiayuancookbook = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.uiTransform = null;
 		}
@@ -89,6 +108,7 @@ namespace ET.Client
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_JiaYuanPurchase> m_es_jiayuanpurchase = null;
 		private EntityRef<ES_JiaYuanCooking> m_es_jiayuancooking = null;
+		private EntityRef<ES_JiaYuanCookbook> m_es_jiayuancookbook = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}

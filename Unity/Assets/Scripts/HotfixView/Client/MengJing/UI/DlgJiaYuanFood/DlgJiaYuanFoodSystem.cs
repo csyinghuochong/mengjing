@@ -18,6 +18,7 @@ namespace ET.Client
 
     [FriendOf(typeof (ES_JiaYuanPurchase))]
     [FriendOf(typeof (ES_JiaYuanCooking))]
+    [FriendOf(typeof (ES_JiaYuanCookbook))]
     [FriendOf(typeof (DlgJiaYuanFood))]
     public static class DlgJiaYuanFoodSystem
     {
@@ -43,7 +44,7 @@ namespace ET.Client
                     self.View.ES_JiaYuanCooking.uiTransform.gameObject.SetActive(true);
                     break;
                 case 2:
-
+                    self.View.ES_JiaYuanCookbook.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
