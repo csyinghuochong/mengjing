@@ -119,5 +119,12 @@ namespace ET.Client
             M2C_JiaYuanCookBookOpen response = (M2C_JiaYuanCookBookOpen)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_JiaYuanMysteryBuyResponse> JiaYuanMysteryBuyRequest(Scene root, int mysteryId, int productId)
+        {
+            C2M_JiaYuanMysteryBuyRequest request = new() { MysteryId = mysteryId, ProductId = productId };
+            M2C_JiaYuanMysteryBuyResponse response = (M2C_JiaYuanMysteryBuyResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

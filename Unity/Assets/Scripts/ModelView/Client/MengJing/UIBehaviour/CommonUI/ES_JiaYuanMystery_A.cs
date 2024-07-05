@@ -1,12 +1,16 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_JiaYuanMystery_A : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_JiaYuanMystery_A : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public List<MysteryItemInfo> ShowMysteryItemInfos = new();
+		public Dictionary<int, Scroll_Item_JiaYuanMysteryItem_A> ScrollItemJiaYuanMysteryItemAs;
+		
 		public UnityEngine.UI.LoopVerticalScrollRect E_JiaYuanMysteryItem_AsLoopVerticalScrollRect
      	{
      		get
