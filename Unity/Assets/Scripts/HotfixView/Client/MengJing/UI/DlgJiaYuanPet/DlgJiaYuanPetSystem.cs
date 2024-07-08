@@ -26,7 +26,7 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    self.View.EG_SubViewRectTransform.gameObject.SetActive(true);
+                    
                     break;
                 case 1:
 

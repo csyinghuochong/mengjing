@@ -67,6 +67,14 @@ namespace ET.Client
 
         public static void OnUpdateUI(this Scroll_Item_JiaYuanPetWalkItem self, RolePetInfo rolePetInfo, JiaYuanPet jiaYuanPet)
         {
+            self.E_Button_StopButton.AddListenerAsync(self.OnButton_Stop);
+            self.ImageMood_List[0] = self.E_ImageMood_0Image.gameObject;
+            self.ImageMood_List[1] = self.E_ImageMood_1Image.gameObject;
+            self.ImageMood_List[2] = self.E_ImageMood_2Image.gameObject;
+            self.ImageMood_List[3] = self.E_ImageMood_3Image.gameObject;
+            self.ImageMood_List[4] = self.E_ImageMood_4Image.gameObject;
+            self.E_Button_AddButton.AddListenerAsync(self.OnButton_Add);
+
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             JiaYuanConfig jiayuanCof = JiaYuanConfigCategory.Instance.Get(userInfoComponent.UserInfo.JiaYuanLv);
 
@@ -78,56 +86,52 @@ namespace ET.Client
             if (self.Position == 1)
             {
                 self.E_Image_LockImage.gameObject.SetActive(jiayuanCof.Lv < 10);
-                self.Set.SetActive(!(jiayuanCof.Lv < 10));
-                self.OpenLv.GetComponent<Text>().text = "10级家园开启";
+                self.EG_SetRectTransform.gameObject.SetActive(!(jiayuanCof.Lv < 10));
+                self.E_OpenLvText.text = "10级家园开启";
             }
 
             if (self.Position == 2)
             {
-                self.Image_Lock.SetActive(jiayuanCof.Lv < 20);
-                self.Set.SetActive(!(jiayuanCof.Lv < 20));
-                self.OpenLv.GetComponent<Text>().text = "20级家园开启";
+                self.E_Image_LockImage.gameObject.SetActive(jiayuanCof.Lv < 20);
+                self.EG_SetRectTransform.gameObject.SetActive(!(jiayuanCof.Lv < 20));
+                self.E_OpenLvText.text = "20级家园开启";
             }
 
             if (jiaYuanPet == null)
             {
-                self.Button_Add.SetActive(true);
+                self.E_Button_AddButton.gameObject.SetActive(true);
 
-                self.Text_TotalExp.GetComponent<Text>().text = String.Empty;
-                self.Button_Walk.SetActive(false);
-                self.Button_Stop.SetActive(false);
+                self.E_Text_TotalExpText.text = String.Empty;
+                self.E_Button_WalkButton.gameObject.SetActive(false);
+                self.E_Button_StopButton.gameObject.SetActive(false);
             }
             else
             {
-                self.Button_Add.SetActive(false);
+                self.E_Button_AddButton.gameObject.SetActive(false);
                 self.RolePetInfo = rolePetInfo;
-                self.Text_TotalExp.GetComponent<Text>().text = $"{jiaYuanPet.CurExp}";
+                self.E_Text_TotalExpText.text = $"{jiaYuanPet.CurExp}";
 
                 for (int i = 0; i < self.ImageMood_List.Length; i++)
                 {
-                    self.ImageMood_List[i].SetActive(i < JiaYuanHelper.GetPetMoodStar(jiaYuanPet.MoodValue));
+                    self.ImageMood_List[i].SetActive(i < ET.JiaYuanHelper.GetPetMoodStar(jiaYuanPet.MoodValue));
                 }
 
-                self.Text_Level.GetComponent<Text>().text = $"等级：{rolePetInfo.PetLv}";
-                self.Text_Name.GetComponent<Text>().text = rolePetInfo.PetName;
+                self.E_Text_LevelText.text = $"等级：{rolePetInfo.PetLv}";
+                self.E_Text_NameText.text = rolePetInfo.PetName;
 
                 PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, petConfig.HeadIcon);
-                Sprite sp = ResourcesComponent.Instance.LoadAsset<Sprite>(path);
-                if (!self.AssetPath.Contains(path))
-                {
-                    self.AssetPath.Add(path);
-                }
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
-                self.ImagePetIcon.GetComponent<Image>().sprite = sp;
+                self.E_ImagePetIconImage.sprite = sp;
 
                 long walkTime = jiaYuanPet.StartTime > 0? TimeHelper.ServerNow() - jiaYuanPet.StartTime : 0;
-                self.Text_Tip_121.GetComponent<Text>().text = $"已经散步:{TimeHelper.ShowLeftTime(walkTime)}";
+                self.E_Text_Tip_121Text.text = $"已经散步:{TimeHelper.ShowLeftTime(walkTime)}";
 
-                self.Button_Walk.SetActive(self.RolePetInfo.PetStatus == 0);
-                self.Button_Stop.SetActive(self.RolePetInfo.PetStatus == 2);
+                self.E_Button_WalkButton.gameObject.SetActive(self.RolePetInfo.PetStatus == 0);
+                self.E_Button_StopButton.gameObject.SetActive(self.RolePetInfo.PetStatus == 2);
 
-                self.Text_TotalExpHour.GetComponent<Text>().text = ComHelp.GetJiaYuanPetExp(rolePetInfo.PetLv, jiaYuanPet.MoodValue) + "/小时";
+                self.E_Text_TotalExpHourText.text = CommonHelp.GetJiaYuanPetExp(rolePetInfo.PetLv, jiaYuanPet.MoodValue) + "/小时";
             }
         }
     }
