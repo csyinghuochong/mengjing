@@ -154,5 +154,19 @@ namespace ET.Client
             M2C_JiaYuanStoreResponse response = (M2C_JiaYuanStoreResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<int> PetPutCangKu(Scene root, long petInfoId, int petStatus)
+        {
+            C2M_PetPutCangKu request = new() { PetInfoId = petInfoId, PetStatus = petStatus };
+            M2C_PetPutCangKu response = (M2C_PetPutCangKu)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
+        public static async ETTask<int> PetOpenCangKu(Scene root, int openIndex)
+        {
+            C2M_PetOpenCangKu request = new() { OpenIndex = openIndex };
+            M2C_PetOpenCangKu response = (M2C_PetOpenCangKu)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }

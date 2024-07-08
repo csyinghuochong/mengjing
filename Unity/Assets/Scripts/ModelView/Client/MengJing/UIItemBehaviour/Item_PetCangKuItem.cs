@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -6,6 +7,10 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_PetCangKuItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
+		public RolePetInfo RolePetInfo;
+		public Action PetCangKuAction;
+		public int Index;
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
