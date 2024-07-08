@@ -159,5 +159,6 @@ namespace ET.Client
 		WindowID_JiaYuanPasture,
 		WindowID_JiaYuanWarehouse,
 		WindowID_JiaYuanPet,
+		WindowID_JiaYuanTreasureMapStorage,
 	}
 }
