@@ -245,8 +245,14 @@ namespace ET.Client
 
         public static void ReSetTexture(this ES_ModelShow self)
         {
+            if (self.RenderTexture != null)
+            {
+                self.RenderTexture.Release();
+            }
+            
             RenderTexture renderTexture = new RenderTexture(512, 512, 16, RenderTextureFormat.ARGB32);
             renderTexture.Create();
+            self.RenderTexture = renderTexture;
             self.E_RenderRawImage.texture = renderTexture;
             self.EG_RootRectTransform.transform.Find("Camera").GetComponent<Camera>().targetTexture = renderTexture;
         }

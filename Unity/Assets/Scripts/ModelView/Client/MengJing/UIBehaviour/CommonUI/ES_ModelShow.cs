@@ -12,6 +12,7 @@ namespace ET.Client
 		public Transform Camera { get; set; }
 		public Transform ModelParent { get; set; }
 		public List<GameObject> Model = new();
+		public RenderTexture RenderTexture;
 		
 		public Vector2 StartPosition;
 		public bool Draged = false;
