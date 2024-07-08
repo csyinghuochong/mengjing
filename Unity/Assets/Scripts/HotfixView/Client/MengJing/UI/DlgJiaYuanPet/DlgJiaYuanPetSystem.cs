@@ -17,6 +17,7 @@ namespace ET.Client
     }
 
     [FriendOf(typeof (ES_JiaYuanPetWalk))]
+    [FriendOf(typeof (ES_PetCangKu))]
     [FriendOf(typeof (DlgJiaYuanPet))]
     public static class DlgJiaYuanPetSystem
     {
@@ -39,7 +40,7 @@ namespace ET.Client
                     self.View.ES_JiaYuanPetWalk.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-
+                    self.View.ES_PetCangKu.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
