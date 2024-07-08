@@ -147,5 +147,12 @@ namespace ET.Client
             M2C_JiaYuanPastureListResponse response = (M2C_JiaYuanPastureListResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<int> JiaYuanStoreRequest(Scene root, int horseId)
+        {
+            C2M_JiaYuanStoreRequest request = new() { HorseId = horseId };
+            M2C_JiaYuanStoreResponse response = (M2C_JiaYuanStoreResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }
