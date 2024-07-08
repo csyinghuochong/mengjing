@@ -6,20 +6,31 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-	[FriendOf(typeof(DlgJiaYuanPet))]
-	public static  class DlgJiaYuanPetSystem
-	{
+    [FriendOf(typeof (DlgJiaYuanPet))]
+    public static class DlgJiaYuanPetSystem
+    {
+        public static void RegisterUIEvent(this DlgJiaYuanPet self)
+        {
+            self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+        }
 
-		public static void RegisterUIEvent(this DlgJiaYuanPet self)
-		{
-		 
-		}
+        public static void ShowWindow(this DlgJiaYuanPet self, Entity contextData = null)
+        {
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
+        }
 
-		public static void ShowWindow(this DlgJiaYuanPet self, Entity contextData = null)
-		{
-		}
+        private static void OnFunctionSetBtn(this DlgJiaYuanPet self, int index)
+        {
+            CommonViewHelper.HideChildren(self.View.EG_SubViewRectTransform);
+            switch (index)
+            {
+                case 0:
 
-		 
+                    break;
+                case 1:
 
-	}
+                    break;
+            }
+        }
+    }
 }
