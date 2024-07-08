@@ -103,7 +103,7 @@ namespace ET.Client
             self.JiaYuanPet = null;
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             Unit unitmonster = unit.GetParent<UnitComponent>().Get(unitid);
-            JiaYuanPet jiaYuanPet = self.Root().GetComponent<JiaYuanComponent>().GetJiaYuanPet(unitid);
+            JiaYuanPet jiaYuanPet = self.Root().GetComponent<JiaYuanComponentC>().GetJiaYuanPet(unitid);
             if (jiaYuanPet == null)
             {
                 return;
@@ -139,7 +139,7 @@ namespace ET.Client
                 return;
             }
 
-            JiaYuanPet jiaYuanPet = self.Root().GetComponent<JiaYuanComponent>().GetJiaYuanPet(unitid);
+            JiaYuanPet jiaYuanPet = self.Root().GetComponent<JiaYuanComponentC>().GetJiaYuanPet(unitid);
             if (jiaYuanPet == null)
             {
                 return;
@@ -153,28 +153,28 @@ namespace ET.Client
 
         public static async ETTask OnInit(this DlgJiaYuanMain self)
         {
-            JiaYuanComponent jiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
+            JiaYuanComponentC jiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
 
-            M2C_JiaYuanInitResponse response = await JiaYuanNetHelper.JiaYuanInitRequest(self.Root(), jiaYuanComponent.MasterId);
-            jiaYuanComponent.PlanOpenList_7 = response.PlanOpenList;
-            jiaYuanComponent.PurchaseItemList_7 = response.PurchaseItemList;
-            jiaYuanComponent.LearnMakeIds_7 = response.LearnMakeIds;
-            jiaYuanComponent.JiaYuanPastureList_7 = response.JiaYuanPastureList;
-            jiaYuanComponent.JiaYuanProList_7 = response.JiaYuanProList;
-            jiaYuanComponent.JiaYuanDaShiTime_1 = response.JiaYuanDaShiTime;
-            jiaYuanComponent.JiaYuanPetList_2 = response.JiaYuanPetList;
+            M2C_JiaYuanInitResponse response = await JiaYuanNetHelper.JiaYuanInitRequest(self.Root(), jiaYuanComponentC.MasterId);
+            jiaYuanComponentC.PlanOpenList_7 = response.PlanOpenList;
+            jiaYuanComponentC.PurchaseItemList_7 = response.PurchaseItemList;
+            jiaYuanComponentC.LearnMakeIds_7 = response.LearnMakeIds;
+            jiaYuanComponentC.JiaYuanPastureList_7 = response.JiaYuanPastureList;
+            jiaYuanComponentC.JiaYuanProList_7 = response.JiaYuanProList;
+            jiaYuanComponentC.JiaYuanDaShiTime_1 = response.JiaYuanDaShiTime;
+            jiaYuanComponentC.JiaYuanPetList_2 = response.JiaYuanPetList;
             if (self.IsDisposed)
             {
                 return;
             }
 
-            self.MyJiaYuan = jiaYuanComponent.MasterId == userInfoComponent.UserInfo.UserId;
+            self.MyJiaYuan = jiaYuanComponentC.MasterId == userInfoComponent.UserInfo.UserId;
             self.JiaYuanLv = self.MyJiaYuan? userInfoComponent.UserInfo.JiaYuanLv : response.JiaYuanLv;
             JiaYuanConfig jiayuanCof = JiaYuanConfigCategory.Instance.Get(self.JiaYuanLv);
 
-            self.View.E_RenKouTextText.text = jiaYuanComponent.GetPeopleNumber() + "/" + jiayuanCof.PeopleNumMax;
-            self.View.E_GengDiTextText.text = jiaYuanComponent.GetOpenPlanNumber() + "/" + jiayuanCof.FarmNumMax;
+            self.View.E_RenKouTextText.text = jiaYuanComponentC.GetPeopleNumber() + "/" + jiayuanCof.PeopleNumMax;
+            self.View.E_GengDiTextText.text = jiaYuanComponentC.GetOpenPlanNumber() + "/" + jiayuanCof.FarmNumMax;
 
             self.OnInitPlan();
             self.InitEffect();
@@ -189,12 +189,12 @@ namespace ET.Client
 
         public static void OnUpdatePlanNumber(this DlgJiaYuanMain self)
         {
-            JiaYuanComponent jiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
+            JiaYuanComponentC jiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             self.JiaYuanLv = userInfoComponent.UserInfo.JiaYuanLv;
             JiaYuanConfig jiayuanCof = JiaYuanConfigCategory.Instance.Get(self.JiaYuanLv);
-            self.View.E_RenKouTextText.text = jiaYuanComponent.GetPeopleNumber() + "/" + jiayuanCof.PeopleNumMax;
-            self.View.E_GengDiTextText.text = jiaYuanComponent.GetOpenPlanNumber() + "/" + jiayuanCof.FarmNumMax;
+            self.View.E_RenKouTextText.text = jiaYuanComponentC.GetPeopleNumber() + "/" + jiayuanCof.PeopleNumMax;
+            self.View.E_GengDiTextText.text = jiaYuanComponentC.GetOpenPlanNumber() + "/" + jiayuanCof.FarmNumMax;
         }
 
         public static async ETTask OnGatherSelf(this DlgJiaYuanMain self)
@@ -311,7 +311,7 @@ namespace ET.Client
             int gatherNumber = 0;
             long instanceid = self.InstanceId;
             self.GatherTime = TimeHelper.ClientNow();
-            JiaYuanComponent jiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
+            JiaYuanComponentC jiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
             List<Unit> planlist = UnitHelper.GetUnitList(self.Root().CurrentScene(), UnitType.Plant);
             for (int i = planlist.Count - 1; i >= 0; i--)
             {
@@ -329,7 +329,7 @@ namespace ET.Client
                 if (getcode == ErrorCode.ERR_Success)
                 {
                     gatherNumber++;
-                    await JiaYuanNetHelper.JiaYuanGatherOtherRequest(self.Root(), cellIndex, jiaYuanComponent.MasterId, planlist[i].Id, 1);
+                    await JiaYuanNetHelper.JiaYuanGatherOtherRequest(self.Root(), cellIndex, jiaYuanComponentC.MasterId, planlist[i].Id, 1);
                 }
 
                 if (instanceid != self.InstanceId)
@@ -356,7 +356,7 @@ namespace ET.Client
                 {
                     gatherNumber++;
 
-                    await JiaYuanNetHelper.JiaYuanGatherOtherRequest(self.Root(), 0, jiaYuanComponent.MasterId, pasturelist[i].Id, 2);
+                    await JiaYuanNetHelper.JiaYuanGatherOtherRequest(self.Root(), 0, jiaYuanComponentC.MasterId, pasturelist[i].Id, 2);
                 }
 
                 if (instanceid != self.InstanceId)
@@ -379,7 +379,7 @@ namespace ET.Client
             }
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            if (self.Root().GetComponent<JiaYuanComponent>().IsMyJiaYuan(unit.Id))
+            if (self.Root().GetComponent<JiaYuanComponentC>().IsMyJiaYuan(unit.Id))
             {
                 self.OnGatherSelf().Coroutine();
             }
@@ -523,7 +523,7 @@ namespace ET.Client
                 return;
             }
 
-            self.Root().GetComponent<JiaYuanComponent>().PlanOpenList_7 = response.PlanOpenList;
+            self.Root().GetComponent<JiaYuanComponentC>().PlanOpenList_7 = response.PlanOpenList;
 
             self.OnOpenPlan(index);
             await ETTask.CompletedTask;
@@ -531,8 +531,8 @@ namespace ET.Client
 
         public static async ETTask OnClickPlanItem(this DlgJiaYuanMain self, int index)
         {
-            JiaYuanComponent jiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
-            if (jiaYuanComponent.PlanOpenList_7.Contains(index))
+            JiaYuanComponentC jiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
+            if (jiaYuanComponentC.PlanOpenList_7.Contains(index))
             {
                 self.OnSelectCell(index);
                 // UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIJiaYuanMenu);
@@ -606,7 +606,7 @@ namespace ET.Client
         {
             // self.JianYuanPlanUIs.Clear();
             GameObject NongChangSet = GameObject.Find("NongChangSet");
-            JiaYuanComponent jiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
+            JiaYuanComponentC jiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
             // for (int i = 0; i < NongChangSet.transform.childCount; i++)
             // {
             //     GameObject item = NongChangSet.transform.GetChild(i).gameObject;

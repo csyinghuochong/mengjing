@@ -127,7 +127,7 @@ namespace ET.Client
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             if (mapComponent.SceneType == SceneTypeEnum.JiaYuan)
             {
-                long masterid = self.Root().GetComponent<JiaYuanComponent>().MasterId;
+                long masterid = self.Root().GetComponent<JiaYuanComponentC>().MasterId;
 
                 await JiaYuanNetHelper.JiaYuanPickRequest(self.Root(), self.BoxUnitId, masterid);
             }

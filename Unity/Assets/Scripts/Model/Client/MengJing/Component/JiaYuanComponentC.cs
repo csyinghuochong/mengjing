@@ -14,7 +14,7 @@ namespace ET.Client
     }
     
     [ComponentOf(typeof (Scene))]
-    public class JiaYuanComponent: Entity, IAwake
+    public class JiaYuanComponentC: Entity, IAwake
     {
         public long RefreshMonsterTime_2 { get; set; } = 0;
 

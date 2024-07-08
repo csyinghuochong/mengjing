@@ -69,7 +69,7 @@ namespace ET.Client
                 return;
             }
 
-            self.Root().GetComponent<JiaYuanComponent>().JiaYuanPastureList_7 = response.JiaYuanPastureList;
+            self.Root().GetComponent<JiaYuanComponentC>().JiaYuanPastureList_7 = response.JiaYuanPastureList;
 
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>().OnUpdatePlanNumber();
 

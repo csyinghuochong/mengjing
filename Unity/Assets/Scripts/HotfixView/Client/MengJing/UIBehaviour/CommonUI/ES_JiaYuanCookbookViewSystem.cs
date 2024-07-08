@@ -24,16 +24,16 @@ namespace ET.Client
         private static void OnJiaYuanCookbookItemsRefresh(this ES_JiaYuanCookbook self, Transform transform, int index)
         {
             Scroll_Item_JiaYuanCookbookItem scrollItemJiaYuanCookbookItem = self.ScrollItemJiaYuanCookbookItems[index].BindTrans(transform);
-            JiaYuanComponent jiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
-            scrollItemJiaYuanCookbookItem.OnUpdateUI(self.ShowFoods[index], jiaYuanComponent.LearnMakeIds_7.Contains(self.ShowFoods[index]));
+            JiaYuanComponentC jiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
+            scrollItemJiaYuanCookbookItem.OnUpdateUI(self.ShowFoods[index], jiaYuanComponentC.LearnMakeIds_7.Contains(self.ShowFoods[index]));
         }
 
         public static void OnUpdateUI(this ES_JiaYuanCookbook self)
         {
-            JiaYuanComponent jiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
+            JiaYuanComponentC jiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
             List<int> foodlist = ItemConfigCategory.Instance.FoodList;
             List<int> allfoods = new List<int>();
-            allfoods.AddRange(jiaYuanComponent.LearnMakeIds_7);
+            allfoods.AddRange(jiaYuanComponentC.LearnMakeIds_7);
             for (int i = 0; i < foodlist.Count; i++)
             {
                 if (!allfoods.Contains(foodlist[i]))

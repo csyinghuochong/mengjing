@@ -6,6 +6,16 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class DataUpdate_PetItemSelect_DlgJiaYuanPetRefresh: AEvent<Scene, DataUpdate_PetItemSelect>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_PetItemSelect args)
+        {
+            // scene.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanPet>()?.PetItemSelect(args.DataParamString);
+            await ETTask.CompletedTask;
+        }
+    }
+    
     [FriendOf(typeof (ES_JiaYuanPetWalk))]
     [FriendOf(typeof (DlgJiaYuanPet))]
     public static class DlgJiaYuanPetSystem

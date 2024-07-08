@@ -25,8 +25,8 @@ namespace ET.Client
         private static void OnJiaYuanDaShiShowItemsRefresh(this ES_JiaYuanDaShiShow self, Transform transform, int index)
         {
             Scroll_Item_JiaYuanDaShiShowItem scrollItemJiaYuanDaShiShowItem = self.ScrollItemJiaYuanDaShiShowItems[index].BindTrans(transform);
-            JiaYuanComponent jiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
-            scrollItemJiaYuanDaShiShowItem.OnUpdateUI(self.ShowIndex[index], jiaYuanComponent.JiaYuanDaShiTime_1);
+            JiaYuanComponentC jiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
+            scrollItemJiaYuanDaShiShowItem.OnUpdateUI(self.ShowIndex[index], jiaYuanComponentC.JiaYuanDaShiTime_1);
         }
 
         public static void OnUpdateUI(this ES_JiaYuanDaShiShow self)

@@ -61,7 +61,7 @@ namespace ET.Client
                 return;
             }
 
-            self.Root().GetComponent<JiaYuanComponent>().JiaYuanPetList_2 = response.JiaYuanPetList;
+            self.Root().GetComponent<JiaYuanComponentC>().JiaYuanPetList_2 = response.JiaYuanPetList;
             self.ClickStopHandler?.Invoke();
         }
 

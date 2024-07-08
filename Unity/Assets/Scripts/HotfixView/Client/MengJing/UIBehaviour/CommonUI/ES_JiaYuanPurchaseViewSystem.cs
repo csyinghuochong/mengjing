@@ -32,7 +32,7 @@ namespace ET.Client
             self.E_ButtonRefreshButton.AddListener(self.OnButtonRefresh);
             self.E_JiaYuanPurchaseItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnJiaYuanPurchaseItemsRefresh);
 
-            self.JiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
+            self.JiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.JiaYuanPurchaseTimer, self);
 
             self.OnUpdateUI();
@@ -85,7 +85,7 @@ namespace ET.Client
                 return;
             }
 
-            self.Root().GetComponent<JiaYuanComponent>().PurchaseItemList_7 = response.PurchaseItemList;
+            self.Root().GetComponent<JiaYuanComponentC>().PurchaseItemList_7 = response.PurchaseItemList;
             self.OnUpdateUI();
         }
 
@@ -109,11 +109,11 @@ namespace ET.Client
 
             if (removeid > 0)
             {
-                for (int k = self.JiaYuanComponent.PurchaseItemList_7.Count - 1; k >= 0; k--)
+                for (int k = self.JiaYuanComponentC.PurchaseItemList_7.Count - 1; k >= 0; k--)
                 {
-                    if (self.JiaYuanComponent.PurchaseItemList_7[k].PurchaseId == removeid)
+                    if (self.JiaYuanComponentC.PurchaseItemList_7[k].PurchaseId == removeid)
                     {
-                        self.JiaYuanComponent.PurchaseItemList_7.RemoveAt(k);
+                        self.JiaYuanComponentC.PurchaseItemList_7.RemoveAt(k);
                     }
                 }
             }
@@ -146,13 +146,13 @@ namespace ET.Client
         private static void OnJiaYuanPurchaseItemsRefresh(this ES_JiaYuanPurchase self, Transform transform, int index)
         {
             Scroll_Item_JiaYuanPurchaseItem scrollItemJiaYuanPurchaseItem = self.ScrollItemJiaYuanPurchaseItems[index].BindTrans(transform);
-            scrollItemJiaYuanPurchaseItem.OnUpdateUI(self.JiaYuanComponent.PurchaseItemList_7[index], self.OnUpdateItem);
+            scrollItemJiaYuanPurchaseItem.OnUpdateUI(self.JiaYuanComponentC.PurchaseItemList_7[index], self.OnUpdateItem);
         }
 
         public static void OnUpdateUI(this ES_JiaYuanPurchase self)
         {
-            self.AddUIScrollItems(ref self.ScrollItemJiaYuanPurchaseItems, self.JiaYuanComponent.PurchaseItemList_7.Count);
-            self.E_JiaYuanPurchaseItemsLoopVerticalScrollRect.SetVisible(true, self.JiaYuanComponent.PurchaseItemList_7.Count);
+            self.AddUIScrollItems(ref self.ScrollItemJiaYuanPurchaseItems, self.JiaYuanComponentC.PurchaseItemList_7.Count);
+            self.E_JiaYuanPurchaseItemsLoopVerticalScrollRect.SetVisible(true, self.JiaYuanComponentC.PurchaseItemList_7.Count);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace ET.Client
 		public GameObject[] ImageMood_List = new GameObject[5];
 		public RolePetInfo RolePetInfo;
 
-		public int Position;
+		public int Position { get; set; }
 		public Action<int> ClickAddHandler;
 		public Action ClickStopHandler;
 

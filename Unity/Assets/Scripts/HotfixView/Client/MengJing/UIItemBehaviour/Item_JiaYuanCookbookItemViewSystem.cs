@@ -29,8 +29,8 @@ namespace ET.Client
             ItemConfig itemCof = ItemConfigCategory.Instance.Get(self.MakeItemId);
             long needcost = ET.JiaYuanHelper.GetCookBookCost(itemCof.UseLv);
 
-            JiaYuanComponent jiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
-            if (jiaYuanComponent.LearnMakeIds_7.Contains(self.MakeItemId))
+            JiaYuanComponentC jiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
+            if (jiaYuanComponentC.LearnMakeIds_7.Contains(self.MakeItemId))
             {
                 FlyTipComponent.Instance.ShowFlyTipDi("已经学习过该食谱！");
                 return;
@@ -54,8 +54,8 @@ namespace ET.Client
                 return;
             }
 
-            JiaYuanComponent jiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
-            jiaYuanComponent.LearnMakeIds_7 = response.LearnMakeIds;
+            JiaYuanComponentC jiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
+            jiaYuanComponentC.LearnMakeIds_7 = response.LearnMakeIds;
             self.OnUpdateUI(self.MakeItemId, true);
         }
 

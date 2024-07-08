@@ -1,15 +1,15 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (JiaYuanComponent))]
-    [EntitySystemOf(typeof (JiaYuanComponent))]
+    [FriendOf(typeof (JiaYuanComponentC))]
+    [EntitySystemOf(typeof (JiaYuanComponentC))]
     public static partial class JiaYuanComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this JiaYuanComponent self)
+        private static void Awake(this JiaYuanComponentC self)
         {
         }
 
-        public static JiaYuanPet GetJiaYuanPet(this JiaYuanComponent self, long unitid)
+        public static JiaYuanPet GetJiaYuanPet(this JiaYuanComponentC self, long unitid)
         {
             for (int i = 0; i < self.JiaYuanPetList_2.Count; i++)
             {
@@ -22,7 +22,7 @@
             return null;
         }
 
-        public static int GetPeopleNumber(this JiaYuanComponent self)
+        public static int GetPeopleNumber(this JiaYuanComponentC self)
         {
             int number = 0;
             for (int i = 0; i < self.JiaYuanPastureList_7.Count; i++)
@@ -34,17 +34,17 @@
             return number;
         }
 
-        public static int GetOpenPlanNumber(this JiaYuanComponent self)
+        public static int GetOpenPlanNumber(this JiaYuanComponentC self)
         {
             return self.PlanOpenList_7.Count;
         }
 
-        public static bool IsMyJiaYuan(this JiaYuanComponent self, long selfId)
+        public static bool IsMyJiaYuan(this JiaYuanComponentC self, long selfId)
         {
             return self.MasterId == selfId;
         }
 
-        public static KeyValuePair GetDaShiProInfo(this JiaYuanComponent self, int keyid)
+        public static KeyValuePair GetDaShiProInfo(this JiaYuanComponentC self, int keyid)
         {
             for (int i = 0; i < self.JiaYuanProList_7.Count; i++)
             {

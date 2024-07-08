@@ -36,7 +36,7 @@ namespace ET.Client
             Scroll_Item_JiaYuanDaShiProItem scrollItemJiaYuanDaShiProItem = self.ScrollItemJiaYuanDaShiProItems[index].BindTrans(transform);
 
             string[] proinfo = self.ShowProlist[index].Split(',');
-            scrollItemJiaYuanDaShiProItem.OnUpdateUI(self.Root().GetComponent<JiaYuanComponent>().GetDaShiProInfo(int.Parse(proinfo[0])),
+            scrollItemJiaYuanDaShiProItem.OnUpdateUI(self.Root().GetComponent<JiaYuanComponentC>().GetDaShiProInfo(int.Parse(proinfo[0])),
                 self.ShowProlist[index]);
         }
 
@@ -178,9 +178,9 @@ namespace ET.Client
 
             FlyTipComponent.Instance.ShowFlyTipDi(asstips);
 
-            JiaYuanComponent jiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
-            jiaYuanComponent.JiaYuanProList_7 = response.JiaYuanProList;
-            jiaYuanComponent.JiaYuanDaShiTime_1 = response.JiaYuanDaShiTime;
+            JiaYuanComponentC jiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
+            jiaYuanComponentC.JiaYuanProList_7 = response.JiaYuanProList;
+            jiaYuanComponentC.JiaYuanDaShiTime_1 = response.JiaYuanDaShiTime;
 
             if (bagComponent.GetItemNumber(self.ES_CommonItem.Baginfo.ItemID) < 1)
             {

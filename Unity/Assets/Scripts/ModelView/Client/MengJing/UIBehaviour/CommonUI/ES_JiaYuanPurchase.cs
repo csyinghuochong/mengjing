@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_JiaYuanPurchase : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public long Timer;
-		public JiaYuanComponent JiaYuanComponent { get; set; }
+		public JiaYuanComponentC JiaYuanComponentC { get; set; }
 		public Dictionary<int, Scroll_Item_JiaYuanPurchaseItem> ScrollItemJiaYuanPurchaseItems;
 
 		public UnityEngine.UI.Button E_ButtonRefreshButton

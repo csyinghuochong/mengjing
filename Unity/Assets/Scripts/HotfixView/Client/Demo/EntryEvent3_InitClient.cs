@@ -42,7 +42,7 @@ namespace ET.Client
             root.AddComponent<ActivityComponentC>();
             root.AddComponent<ReddotViewComponent>();
             root.AddComponent<SceneManagerComponent>();
-            root.AddComponent<JiaYuanComponent>();
+            root.AddComponent<JiaYuanComponentC>();
             root.AddComponent<TeamComponentC>();
 
             // 根据配置修改掉Main Fiber的SceneType

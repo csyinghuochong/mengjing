@@ -37,7 +37,7 @@ namespace ET.Client
                 return;
             }
 
-            self.Root().GetComponent<JiaYuanComponent>().PurchaseItemList_7 = response.PurchaseItemList;
+            self.Root().GetComponent<JiaYuanComponentC>().PurchaseItemList_7 = response.PurchaseItemList;
 
             self.Action_Buy.Invoke();
         }

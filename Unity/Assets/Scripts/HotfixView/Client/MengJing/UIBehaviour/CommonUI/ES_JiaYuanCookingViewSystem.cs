@@ -59,7 +59,7 @@ namespace ET.Client
                 FlyTipComponent.Instance.ShowFlyTipDi($"恭喜你学会制作 {itemConfig.ItemName}");
             }
 
-            self.Root().GetComponent<JiaYuanComponent>().LearnMakeIds_7 = response.LearnMakeIds;
+            self.Root().GetComponent<JiaYuanComponentC>().LearnMakeIds_7 = response.LearnMakeIds;
             self.OnUpdateUI();
         }
 

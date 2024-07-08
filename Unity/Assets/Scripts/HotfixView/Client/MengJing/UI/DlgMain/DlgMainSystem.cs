@@ -842,7 +842,7 @@ namespace ET.Client
         public static void OnJiaYuanButton(this DlgMain self)
         {
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            self.Root().GetComponent<JiaYuanComponent>().MasterId = userInfoComponent.UserInfo.UserId;
+            self.Root().GetComponent<JiaYuanComponentC>().MasterId = userInfoComponent.UserInfo.UserId;
             EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.JiaYuan, 2000011, 1, userInfoComponent.UserInfo.UserId.ToString()).Coroutine();
         }
 
