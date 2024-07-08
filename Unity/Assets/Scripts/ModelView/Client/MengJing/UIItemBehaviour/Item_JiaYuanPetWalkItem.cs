@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -6,6 +7,13 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_JiaYuanPetWalkItem : Entity,IAwake,IDestroy,IUIScrollItem 
 	{
+		public GameObject[] ImageMood_List = new GameObject[5];
+		public RolePetInfo RolePetInfo;
+
+		public int Position;
+		public Action<int> ClickAddHandler;
+		public Action ClickStopHandler;
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
