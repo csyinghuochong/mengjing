@@ -11,11 +11,11 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene scene, DataUpdate_PetItemSelect args)
         {
-            // scene.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanPet>()?.PetItemSelect(args.DataParamString);
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanPet>()?.View.ES_JiaYuanPetWalk.PetItemSelect(args.DataParamString);
             await ETTask.CompletedTask;
         }
     }
-    
+
     [FriendOf(typeof (ES_JiaYuanPetWalk))]
     [FriendOf(typeof (DlgJiaYuanPet))]
     public static class DlgJiaYuanPetSystem
@@ -36,7 +36,7 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-                    
+                    self.View.ES_JiaYuanPetWalk.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
 

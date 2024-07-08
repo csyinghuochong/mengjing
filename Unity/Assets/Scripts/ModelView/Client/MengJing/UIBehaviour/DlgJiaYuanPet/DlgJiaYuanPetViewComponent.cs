@@ -24,6 +24,24 @@ namespace ET.Client
      		}
      	}
 
+		public ES_JiaYuanPetWalk ES_JiaYuanPetWalk
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_es_jiayuanpetwalk == null )
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_JiaYuanPetWalk");
+		    	   this.m_es_jiayuanpetwalk = this.AddChild<ES_JiaYuanPetWalk,Transform>(subTrans);
+     			}
+     			return this.m_es_jiayuanpetwalk;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -44,11 +62,13 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
+			this.m_es_jiayuanpetwalk = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
+		private EntityRef<ES_JiaYuanPetWalk> m_es_jiayuanpetwalk = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}
