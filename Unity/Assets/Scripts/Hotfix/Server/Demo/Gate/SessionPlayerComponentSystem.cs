@@ -20,6 +20,8 @@
             }
 
             PlayerSessionComponent playerSessionComponent = self.Player.GetComponent<PlayerSessionComponent>();
+            
+            
             Session playerSession = playerSessionComponent ?.Session;
             if ( playerSession == null)
             {

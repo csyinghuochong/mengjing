@@ -8,7 +8,7 @@ namespace ET
 
         public Dictionary<int, List<int>> FoodLevelList = new Dictionary<int, List<int>>();
         public Dictionary<int, List<int>> EquipTypeList = new Dictionary<int, List<int>>(); 
-
+        public List<int> FoodList = new List<int>();
         public override void EndInit()
         {
             foreach (ItemConfig itemConfig in this.GetAll().Values)
