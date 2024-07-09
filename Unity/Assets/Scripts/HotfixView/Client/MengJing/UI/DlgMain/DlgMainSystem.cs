@@ -591,10 +591,10 @@ namespace ET.Client
                     continue;
                 }
 
-                // if (unit.GetComponent<NpcHeadBarComponent>() != null)
-                // {
-                //     unit.GetComponent<NpcHeadBarComponent>().OnRecvTaskUpdate();
-                // }
+                if (unit.GetComponent<UINpcHpComponent>() != null)
+                {
+                    unit.GetComponent<UINpcHpComponent>().OnRecvTaskUpdate();
+                }
             }
         }
 
