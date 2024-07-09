@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [FriendOf(typeof (ES_UnionMystery_A))]
     [FriendOf(typeof (DlgUnionMystery))]
     public static class DlgUnionMysterySystem
     {
@@ -29,7 +30,7 @@ namespace ET.Client
             switch (index)
             {
                 case 0:
-
+                    self.View.ES_UnionMystery_A.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
 
