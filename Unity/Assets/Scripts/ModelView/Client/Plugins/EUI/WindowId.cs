@@ -163,5 +163,6 @@ namespace ET.Client
 		WindowID_SettingFrame,
 		WindowID_JiaYuanPetFeed,
 		WindowID_UnionDonation,
+		WindowID_UnionDonationRecord,
 	}
 }

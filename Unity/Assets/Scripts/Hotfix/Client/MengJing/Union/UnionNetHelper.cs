@@ -73,5 +73,12 @@ namespace ET.Client
             M2C_UnionDonationResponse response = (M2C_UnionDonationResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<U2C_UnionRecordResponse> UnionRecordRequest(Scene root, long unionId)
+        {
+            C2U_UnionRecordRequest request = new() { UnionId = unionId };
+            U2C_UnionRecordResponse response = (U2C_UnionRecordResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

@@ -44,7 +44,7 @@ namespace ET.Client
 
         public static void OnButton_Record(this DlgUnionDonation self)
         {
-            // self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_UnionDonationRecord).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_UnionDonationRecord).Coroutine();
         }
 
         public static async ETTask OnButton_DiamondDonation(this DlgUnionDonation self)
