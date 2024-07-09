@@ -108,5 +108,12 @@ namespace ET.Client
             U2C_UnionKeJiActiteResponse response = (U2C_UnionKeJiActiteResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_UnionKeJiLearnResponse> UnionKeJiLearnRequest(Scene root, int position)
+        {
+            C2M_UnionKeJiLearnRequest request = new() { Position = position };
+            M2C_UnionKeJiLearnResponse response = (M2C_UnionKeJiLearnResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

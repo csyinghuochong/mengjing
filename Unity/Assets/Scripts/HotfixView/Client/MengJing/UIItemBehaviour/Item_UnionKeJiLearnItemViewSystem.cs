@@ -1,20 +1,46 @@
-﻿
+﻿using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
-	[EntitySystemOf(typeof(Scroll_Item_UnionKeJiLearnItem))]
-	public static partial class Scroll_Item_UnionKeJiLearnItemSystem 
-	{
-		[EntitySystem]
-		private static void Awake(this Scroll_Item_UnionKeJiLearnItem self )
-		{
-		}
+    [FriendOf(typeof (Scroll_Item_UnionKeJiLearnItem))]
+    [EntitySystemOf(typeof (Scroll_Item_UnionKeJiLearnItem))]
+    public static partial class Scroll_Item_UnionKeJiLearnItemSystem
+    {
+        [EntitySystem]
+        private static void Awake(this Scroll_Item_UnionKeJiLearnItem self)
+        {
+        }
 
-		[EntitySystem]
-		private static void Destroy(this Scroll_Item_UnionKeJiLearnItem self )
-		{
-			self.DestroyWidget();
-		}
-	}
+        [EntitySystem]
+        private static void Destroy(this Scroll_Item_UnionKeJiLearnItem self)
+        {
+            self.DestroyWidget();
+        }
+
+        public static void UpdateInfo(this Scroll_Item_UnionKeJiLearnItem self, int position, int configId, int maxConfigId)
+        {
+            self.Position = position;
+
+            UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(configId);
+
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, unionKeJiConfig.Icon);
+            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+            self.E_IconImgImage.sprite = sp;
+
+            Match match = Regex.Match(unionKeJiConfig.EquipSpaceName, @"\d");
+            self.E_NameTextText.text = unionKeJiConfig.EquipSpaceName.Substring(0, match.Index);
+            self.E_LvTextText.text =
+                    $"等级：{unionKeJiConfig.QiangHuaLv.ToString()}/{UnionKeJiConfigCategory.Instance.Get(maxConfigId).QiangHuaLv}";
+
+            CommonViewHelper.SetImageGray(self.Root(), self.E_IconImgImage.gameObject, unionKeJiConfig.QiangHuaLv == 0);
+        }
+
+        public static void OnClickBtn(this Scroll_Item_UnionKeJiLearnItem self)
+        {
+            self.ClickAction?.Invoke(self.Position);
+        }
+    }
 }
