@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof (ES_UnionKeJiResearch))]
+    [FriendOf(typeof (ES_UnionKeJiLearn))]
     [FriendOf(typeof (DlgUnionKeJi))]
     public static class DlgUnionKeJiSystem
     {
@@ -29,6 +30,7 @@ namespace ET.Client
                     self.View.ES_UnionKeJiResearch.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
+                    self.View.ES_UnionKeJiLearn.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
