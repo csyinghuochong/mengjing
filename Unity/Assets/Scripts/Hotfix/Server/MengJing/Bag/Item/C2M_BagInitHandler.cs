@@ -12,16 +12,7 @@ namespace ET.Server
             BagComponentS bagComponentS = unit.GetComponent<BagComponentS>();
             response.BagInfos = bagComponentS.GetAllItems();
 
-            // 测试。。
-            if (bagComponentS.QiangHuaLevel.Count == 0)
-            {
-                for (int i = 0; i <= 11; i++)
-                {
-                    bagComponentS.QiangHuaLevel.Add(0);
-                    bagComponentS.QiangHuaFails.Add(0);
-                }
-            }
-
+          
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             if (numericComponent.GetAsInt(NumericType.CangKuNumber) == 0)
             {
