@@ -160,5 +160,6 @@ namespace ET.Client
 		WindowID_JiaYuanWarehouse,
 		WindowID_JiaYuanPet,
 		WindowID_JiaYuanTreasureMapStorage,
+		WindowID_SettingFrame,
 	}
 }
