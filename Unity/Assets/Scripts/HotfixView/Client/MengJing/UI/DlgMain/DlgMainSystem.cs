@@ -431,8 +431,7 @@ namespace ET.Client
 
             if (PlayerPrefsHelp.GetInt(PlayerPrefsHelp.LastFrame) == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("UISettingFrame暂未开放");
-                // UIHelper.Create(self.ZoneScene(), UIType.UISettingFrame).Coroutine();
+                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SettingFrame).Coroutine();
             }
             else
             {
