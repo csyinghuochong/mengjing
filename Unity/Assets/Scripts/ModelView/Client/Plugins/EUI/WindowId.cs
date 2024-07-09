@@ -165,5 +165,6 @@ namespace ET.Client
 		WindowID_UnionDonation,
 		WindowID_UnionDonationRecord,
 		WindowID_UnionMystery,
+		WindowID_UnionKeJi,
 	}
 }
