@@ -94,5 +94,19 @@ namespace ET.Client
             M2C_UnionMysteryBuyResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_UnionMysteryBuyResponse;
             return response.Error;
         }
+
+        public static async ETTask<U2C_UnionKeJiQuickResponse> UnionKeJiQuickRequest(Scene root, long unionId, int position)
+        {
+            C2U_UnionKeJiQuickRequest request = new() { UnionId = unionId, Position = position };
+            U2C_UnionKeJiQuickResponse response = (U2C_UnionKeJiQuickResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
+        public static async ETTask<U2C_UnionKeJiActiteResponse> UnionKeJiActiteRequest(Scene root, long unionId, int position)
+        {
+            C2U_UnionKeJiActiteRequest request = new() { UnionId = unionId, Position = position };
+            U2C_UnionKeJiActiteResponse response = (U2C_UnionKeJiActiteResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

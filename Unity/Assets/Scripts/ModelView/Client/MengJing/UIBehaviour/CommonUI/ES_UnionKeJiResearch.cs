@@ -1,12 +1,18 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_UnionKeJiResearch : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_UnionKeJiResearch : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public long NeedTime;
+		public int Position;
+		public UnionInfo UnionMyInfo;
+		public Dictionary<int, Scroll_Item_UnionKeJiResearchItem> ScrollItemUnionKeJiResearchItems;
+		
 		public UnityEngine.UI.LoopVerticalScrollRect E_UnionKeJiResearchItemsLoopVerticalScrollRect
      	{
      		get

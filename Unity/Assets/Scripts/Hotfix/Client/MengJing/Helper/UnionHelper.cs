@@ -16,5 +16,25 @@ namespace ET.Client
 
             return null;
         }
+
+        public static int CalcuNeedeForAccele(long startTime, long needTime)
+        {
+            int g = GlobalValueConfigCategory.Instance.Get(105).Value2;
+            long passTime = (TimeHelper.ServerNow() - startTime) / 1000;
+            long remainTime = needTime - passTime;
+            if (remainTime <= 0)
+            {
+                return 0;
+            }
+
+            if (remainTime % 3600 != 0)
+            {
+                return (int)((remainTime / 3600 + 1) * g);
+            }
+            else
+            {
+                return (int)(remainTime / 3600 * g);
+            }
+        }
     }
 }
