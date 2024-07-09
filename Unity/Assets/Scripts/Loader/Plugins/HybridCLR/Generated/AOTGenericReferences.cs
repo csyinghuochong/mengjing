@@ -25,12 +25,109 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// }} 
 
 	// {{ AOT generic types
+	// ET.AEvent.<Handle>d__3<object,ET.ChangePosition>
+	// ET.AEvent.<Handle>d__3<object,ET.ChangeRotation>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.AfterCreateClientScene>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.AfterCreateCurrentScene>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.AfterUnitCreate>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.AppStartInitFinish>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.AreneInfo>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.BattleInfo>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.BeforeSkill>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.BuffScale>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.BuffUpdate>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.ChangeCameraMoveType>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_BagItemUpdate>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_BeforeMove>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_ChouKaWarehouseAddItem>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_EquipHuiShow>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_EquipWear>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_FriendChat>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_FriendUpdate>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_HuiShouSelect>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_JingLingButton>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_MainHeroMove>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_OnAccountWarehous>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_OnActiveTianFu>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_OnMailUpdate>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_OnPetFightSet>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_OnRecvChat>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_PetHeChengUpdate>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_PetItemSelect>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_PetXiLianUpdate>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_SettingUpdate>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_SkillBeging>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_SkillCDUpdate>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_SkillFinish>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_SkillReset>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_SkillSetting>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_SkillUpgrade>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_TaskComplete>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_TaskGet>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_TaskGiveUp>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_TaskTrace>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_TaskUpdate>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_TeamUpdate>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_UpdateRoleProper>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_UpdateSing>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_UpdateUserData>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.EnterMapFinish>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.FsmChange>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.FubenSettlement>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.HappyInfo>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.JingLingGet>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.LSSceneChangeStart>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.LSSceneInitFinish>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.LoadSceneFinished>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.LoginFinish>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.Now_Hp_Update>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.OnSkillUse>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.PlayAnimator>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.RankDemonInfo>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.ReddotChange>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.ReturnLogin>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.RoleDataBroadcase>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.RolePetAdd>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.RolePetUpdate>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.RunRaceBattleInfo>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.RunRaceInfo>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.RunRaceRewardInfo>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.SceneChangeFinish>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.SceneChangeStart>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.ShowFlyTip>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.ShowItemTips>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.SingingUpdate>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.SkillEffect>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.SkillEffectFinish>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.SkillEffectMove>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.SkillEffectReset>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.SkillSound>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.SkillYuJing>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.SyncMiJingDamage>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.TaskNpcDialog>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.TaskTypeItemClick>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.TeamPickNotice>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.UnitDead>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.UnitRemove>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.UnitRevive>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.UpdateUserBuffSkill>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.UserDataTypeUpdate_Diamond>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.UserDataTypeUpdate_Gold>
+	// ET.AEvent.<Handle>d__3<object,ET.Client.UserDataTypeUpdate_HorseNotice>
+	// ET.AEvent.<Handle>d__3<object,ET.EntryEvent1>
+	// ET.AEvent.<Handle>d__3<object,ET.EntryEvent2>
+	// ET.AEvent.<Handle>d__3<object,ET.EntryEvent3>
+	// ET.AEvent.<Handle>d__3<object,ET.MoveStart>
+	// ET.AEvent.<Handle>d__3<object,ET.MoveStop>
+	// ET.AEvent.<Handle>d__3<object,ET.NumbericChange>
 	// ET.AEvent<object,ET.ChangePosition>
 	// ET.AEvent<object,ET.ChangeRotation>
 	// ET.AEvent<object,ET.Client.AfterCreateClientScene>
 	// ET.AEvent<object,ET.Client.AfterCreateCurrentScene>
 	// ET.AEvent<object,ET.Client.AfterUnitCreate>
 	// ET.AEvent<object,ET.Client.AppStartInitFinish>
+	// ET.AEvent<object,ET.Client.AreneInfo>
+	// ET.AEvent<object,ET.Client.BattleInfo>
 	// ET.AEvent<object,ET.Client.BeforeSkill>
 	// ET.AEvent<object,ET.Client.BuffScale>
 	// ET.AEvent<object,ET.Client.BuffUpdate>
@@ -72,6 +169,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.AEvent<object,ET.Client.EnterMapFinish>
 	// ET.AEvent<object,ET.Client.FsmChange>
 	// ET.AEvent<object,ET.Client.FubenSettlement>
+	// ET.AEvent<object,ET.Client.HappyInfo>
 	// ET.AEvent<object,ET.Client.JingLingGet>
 	// ET.AEvent<object,ET.Client.LSSceneChangeStart>
 	// ET.AEvent<object,ET.Client.LSSceneInitFinish>
@@ -80,12 +178,15 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.AEvent<object,ET.Client.Now_Hp_Update>
 	// ET.AEvent<object,ET.Client.OnSkillUse>
 	// ET.AEvent<object,ET.Client.PlayAnimator>
+	// ET.AEvent<object,ET.Client.RankDemonInfo>
 	// ET.AEvent<object,ET.Client.ReddotChange>
 	// ET.AEvent<object,ET.Client.ReturnLogin>
 	// ET.AEvent<object,ET.Client.RoleDataBroadcase>
 	// ET.AEvent<object,ET.Client.RolePetAdd>
 	// ET.AEvent<object,ET.Client.RolePetUpdate>
 	// ET.AEvent<object,ET.Client.RunRaceBattleInfo>
+	// ET.AEvent<object,ET.Client.RunRaceInfo>
+	// ET.AEvent<object,ET.Client.RunRaceRewardInfo>
 	// ET.AEvent<object,ET.Client.SceneChangeFinish>
 	// ET.AEvent<object,ET.Client.SceneChangeStart>
 	// ET.AEvent<object,ET.Client.ShowFlyTip>
@@ -97,15 +198,19 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.AEvent<object,ET.Client.SkillEffectReset>
 	// ET.AEvent<object,ET.Client.SkillSound>
 	// ET.AEvent<object,ET.Client.SkillYuJing>
+	// ET.AEvent<object,ET.Client.SyncMiJingDamage>
 	// ET.AEvent<object,ET.Client.TaskNpcDialog>
 	// ET.AEvent<object,ET.Client.TaskTypeItemClick>
+	// ET.AEvent<object,ET.Client.TeamPickNotice>
 	// ET.AEvent<object,ET.Client.UnitDead>
 	// ET.AEvent<object,ET.Client.UnitRemove>
 	// ET.AEvent<object,ET.Client.UnitRevive>
+	// ET.AEvent<object,ET.Client.UpdateUserBuffSkill>
 	// ET.AEvent<object,ET.Client.UserDataTypeUpdate_Diamond>
 	// ET.AEvent<object,ET.Client.UserDataTypeUpdate_Gold>
 	// ET.AEvent<object,ET.Client.UserDataTypeUpdate_HorseNotice>
 	// ET.AEvent<object,ET.EntryEvent1>
+	// ET.AEvent<object,ET.EntryEvent2>
 	// ET.AEvent<object,ET.EntryEvent3>
 	// ET.AEvent<object,ET.MoveStart>
 	// ET.AEvent<object,ET.MoveStop>
@@ -134,6 +239,17 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.ETAsyncTaskMethodBuilder<long>
 	// ET.ETAsyncTaskMethodBuilder<object>
 	// ET.ETAsyncTaskMethodBuilder<uint>
+	// ET.ETTask.<InnerCoroutine>d__8<ET.Client.WaitType.Wait_Room2C_Start>
+	// ET.ETTask.<InnerCoroutine>d__8<ET.Client.Wait_CreateMyUnit>
+	// ET.ETTask.<InnerCoroutine>d__8<ET.Client.Wait_SceneChangeFinish>
+	// ET.ETTask.<InnerCoroutine>d__8<ET.Client.Wait_UnitStop>
+	// ET.ETTask.<InnerCoroutine>d__8<System.ValueTuple<int,int>>
+	// ET.ETTask.<InnerCoroutine>d__8<System.ValueTuple<uint,object>>
+	// ET.ETTask.<InnerCoroutine>d__8<byte>
+	// ET.ETTask.<InnerCoroutine>d__8<int>
+	// ET.ETTask.<InnerCoroutine>d__8<long>
+	// ET.ETTask.<InnerCoroutine>d__8<object>
+	// ET.ETTask.<InnerCoroutine>d__8<uint>
 	// ET.ETTask<ET.Client.WaitType.Wait_Room2C_Start>
 	// ET.ETTask<ET.Client.Wait_CreateMyUnit>
 	// ET.ETTask<ET.Client.Wait_SceneChangeFinish>
@@ -146,6 +262,12 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.ETTask<object>
 	// ET.ETTask<uint>
 	// ET.EntityRef<object>
+	// ET.EventSystem.<PublishAsync>d__4<object,ET.Client.AppStartInitFinish>
+	// ET.EventSystem.<PublishAsync>d__4<object,ET.Client.LSSceneChangeStart>
+	// ET.EventSystem.<PublishAsync>d__4<object,ET.Client.LoginFinish>
+	// ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent1>
+	// ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent2>
+	// ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent3>
 	// ET.IAwake<int,int>
 	// ET.IAwake<int,object>
 	// ET.IAwake<int>
@@ -162,6 +284,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.IAwakeSystem<object>
 	// ET.LateUpdateSystem<object>
 	// ET.ListComponent<Unity.Mathematics.float3>
+	// ET.ListComponent<long>
 	// ET.ListComponent<object>
 	// ET.MultiDictionary<int,int,int>
 	// ET.Singleton<object>
@@ -948,12 +1071,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<object>,object>(System.Runtime.CompilerServices.TaskAwaiter<object>&,object&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,object>(object&,object&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<uint>.AwaitUnsafeOnCompleted<object,object>(object&,object&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.EventSystem.<PublishAsync>d__4<object,ET.Client.AppStartInitFinish>>(ET.EventSystem.<PublishAsync>d__4<object,ET.Client.AppStartInitFinish>&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.EventSystem.<PublishAsync>d__4<object,ET.Client.LSSceneChangeStart>>(ET.EventSystem.<PublishAsync>d__4<object,ET.Client.LSSceneChangeStart>&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.EventSystem.<PublishAsync>d__4<object,ET.Client.LoginFinish>>(ET.EventSystem.<PublishAsync>d__4<object,ET.Client.LoginFinish>&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent1>>(ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent1>&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent2>>(ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent2>&)
-		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent3>>(ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent3>&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<object>(object&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<ET.Client.WaitType.Wait_Room2C_Start>.Start<object>(object&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<ET.Client.Wait_CreateMyUnit>.Start<object>(object&)
@@ -1004,6 +1121,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.EventSystem.Publish<object,ET.ChangeRotation>(object,ET.ChangeRotation)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.AfterCreateCurrentScene>(object,ET.Client.AfterCreateCurrentScene)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.AfterUnitCreate>(object,ET.Client.AfterUnitCreate)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.AreneInfo>(object,ET.Client.AreneInfo)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.BattleInfo>(object,ET.Client.BattleInfo)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.BeforeSkill>(object,ET.Client.BeforeSkill)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.BuffScale>(object,ET.Client.BuffScale)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.BuffUpdate>(object,ET.Client.BuffUpdate)
@@ -1042,18 +1161,22 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.EventSystem.Publish<object,ET.Client.EnterMapFinish>(object,ET.Client.EnterMapFinish)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.FsmChange>(object,ET.Client.FsmChange)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.FubenSettlement>(object,ET.Client.FubenSettlement)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.HappyInfo>(object,ET.Client.HappyInfo)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.JingLingGet>(object,ET.Client.JingLingGet)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.LSSceneInitFinish>(object,ET.Client.LSSceneInitFinish)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.LoadSceneFinished>(object,ET.Client.LoadSceneFinished)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.Now_Hp_Update>(object,ET.Client.Now_Hp_Update)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.OnSkillUse>(object,ET.Client.OnSkillUse)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.PlayAnimator>(object,ET.Client.PlayAnimator)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.RankDemonInfo>(object,ET.Client.RankDemonInfo)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.ReddotChange>(object,ET.Client.ReddotChange)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.ReturnLogin>(object,ET.Client.ReturnLogin)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.RoleDataBroadcase>(object,ET.Client.RoleDataBroadcase)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.RolePetAdd>(object,ET.Client.RolePetAdd)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.RolePetUpdate>(object,ET.Client.RolePetUpdate)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.RunRaceBattleInfo>(object,ET.Client.RunRaceBattleInfo)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.RunRaceInfo>(object,ET.Client.RunRaceInfo)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.RunRaceRewardInfo>(object,ET.Client.RunRaceRewardInfo)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.SceneChangeFinish>(object,ET.Client.SceneChangeFinish)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.SceneChangeStart>(object,ET.Client.SceneChangeStart)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.ShowFlyTip>(object,ET.Client.ShowFlyTip)
@@ -1065,11 +1188,14 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.EventSystem.Publish<object,ET.Client.SkillEffectReset>(object,ET.Client.SkillEffectReset)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.SkillSound>(object,ET.Client.SkillSound)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.SkillYuJing>(object,ET.Client.SkillYuJing)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.SyncMiJingDamage>(object,ET.Client.SyncMiJingDamage)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.TaskNpcDialog>(object,ET.Client.TaskNpcDialog)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.TaskTypeItemClick>(object,ET.Client.TaskTypeItemClick)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.TeamPickNotice>(object,ET.Client.TeamPickNotice)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.UnitDead>(object,ET.Client.UnitDead)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.UnitRemove>(object,ET.Client.UnitRemove)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.UnitRevive>(object,ET.Client.UnitRevive)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.UpdateUserBuffSkill>(object,ET.Client.UpdateUserBuffSkill)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.UserDataTypeUpdate_Diamond>(object,ET.Client.UserDataTypeUpdate_Diamond)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.UserDataTypeUpdate_Gold>(object,ET.Client.UserDataTypeUpdate_Gold)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.UserDataTypeUpdate_HorseNotice>(object,ET.Client.UserDataTypeUpdate_HorseNotice)
@@ -1147,8 +1273,10 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<byte,long,Unity.Mathematics.float3>(byte&,long&,Unity.Mathematics.float3&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<byte,long,byte,int>(byte&,long&,byte&,int&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<byte,long,float,float,float,long,int>(byte&,long&,float&,float&,float&,long&,int&)
+		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<byte,long,float,float,float>(byte&,long&,float&,float&,float&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<byte,long,int,int,Unity.Mathematics.float3,Unity.Mathematics.float3>(byte&,long&,int&,int&,Unity.Mathematics.float3&,Unity.Mathematics.float3&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<byte,long,int,int,float,float,float,int,int,long>(byte&,long&,int&,int&,float&,float&,float&,int&,int&,long&)
+		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<byte,long,int,int,float,float,float,int>(byte&,long&,int&,int&,float&,float&,float&,int&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<byte,long,int,int,float,float,float,long,long,float>(byte&,long&,int&,int&,float&,float&,float&,long&,long&,float&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<byte,long,int,int,int,float,int>(byte&,long&,int&,int&,int&,float&,int&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<byte,long,int,int,int,int,int>(byte&,long&,int&,int&,int&,int&,int&)
@@ -1179,6 +1307,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<int,byte,int>(int&,byte&,int&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<int,byte>(int&,byte&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<int,int,byte>(int&,int&,byte&)
+		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<int,int,int,float,float,float>(int&,int&,int&,float&,float&,float&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<int,int,int,int,int,int,int,float>(int&,int&,int&,int&,int&,int&,int&,float&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<int,int,int,int>(int&,int&,int&,int&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<int,int,int,long>(int&,int&,int&,long&)
@@ -1224,6 +1353,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<int,byte,int>(int&,byte&,int&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<int,byte>(int&,byte&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<int,int,byte>(int&,int&,byte&)
+		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<int,int,int,float,float,float>(int&,int&,int&,float&,float&,float&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<int,int,int,int,int,int,int,float>(int&,int&,int&,int&,int&,int&,int&,float&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<int,int,int,int>(int&,int&,int&,int&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanaged<int,int,int,long>(int&,int&,int&,long&)
@@ -1285,8 +1415,10 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long,Unity.Mathematics.float3>(byte,byte&,long&,Unity.Mathematics.float3&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long,byte,int>(byte,byte&,long&,byte&,int&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long,float,float,float,long,int>(byte,byte&,long&,float&,float&,float&,long&,int&)
+		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long,float,float,float>(byte,byte&,long&,float&,float&,float&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long,int,int,Unity.Mathematics.float3,Unity.Mathematics.float3>(byte,byte&,long&,int&,int&,Unity.Mathematics.float3&,Unity.Mathematics.float3&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long,int,int,float,float,float,int,int,long>(byte,byte&,long&,int&,int&,float&,float&,float&,int&,int&,long&)
+		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long,int,int,float,float,float,int>(byte,byte&,long&,int&,int&,float&,float&,float&,int&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long,int,int,float,float,float,long,long,float>(byte,byte&,long&,int&,int&,float&,float&,float&,long&,long&,float&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long,int,int,int,float,int>(byte,byte&,long&,int&,int&,int&,float&,int&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long,int,int,int,int,int>(byte,byte&,long&,int&,int&,int&,int&,int&)
