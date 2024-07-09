@@ -615,7 +615,7 @@ namespace ET.Server
        {
            for (int i = 0; i <= 11; i++)
            {
-               int maxLevel = 1;// QiangHuaHelper.GetQiangHuaMaxLevel(i);
+               int maxLevel =  QiangHuaHelper.GetQiangHuaMaxLevel(i);
                if (self.QiangHuaLevel[i] >= maxLevel)
                {
                    self.QiangHuaLevel[i] = maxLevel - 1;
