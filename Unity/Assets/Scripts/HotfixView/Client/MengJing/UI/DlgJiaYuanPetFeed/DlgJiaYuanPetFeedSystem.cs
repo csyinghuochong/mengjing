@@ -1,25 +1,281 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
-	[FriendOf(typeof(DlgJiaYuanPetFeed))]
-	public static  class DlgJiaYuanPetFeedSystem
-	{
+    [Event(SceneType.Demo)]
+    public class DataUpdate_HuiShouSelect_DlgJiaYuanPetFeedRefresh: AEvent<Scene, DataUpdate_HuiShouSelect>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_HuiShouSelect args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanPetFeed>()?.OnHuiShouSelect(args.DataParamString);
+            await ETTask.CompletedTask;
+        }
+    }
 
-		public static void RegisterUIEvent(this DlgJiaYuanPetFeed self)
-		{
-		 
-		}
+    [FriendOf(typeof (Scroll_Item_CommonItem))]
+    [FriendOf(typeof (DlgJiaYuanPetFeed))]
+    public static class DlgJiaYuanPetFeedSystem
+    {
+        public static void RegisterUIEvent(this DlgJiaYuanPetFeed self)
+        {
+            self.View.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
+            self.View.E_ImageCloseButton.AddListener(self.OnImageClose);
+            self.View.E_Btn_CloseDiButton.AddListener(self.OnImageClose);
+            self.View.E_ButtonEatButton.AddListenerAsync(self.OnButtonEat);
 
-		public static void ShowWindow(this DlgJiaYuanPetFeed self, Entity contextData = null)
-		{
-		}
+            self.MoodList[0] = self.View.E_Image_Mood_0Image.gameObject;
+            self.MoodList[1] = self.View.E_Image_Mood_1Image.gameObject;
+            self.MoodList[2] = self.View.E_Image_Mood_2Image.gameObject;
+            self.MoodList[3] = self.View.E_Image_Mood_3Image.gameObject;
+            self.MoodList[4] = self.View.E_Image_Mood_4Image.gameObject;
 
-		 
+            self.CostItemList[0] = self.View.ES_CommonItem_0;
+            self.CostItemList[1] = self.View.ES_CommonItem_1;
+            self.CostItemList[2] = self.View.ES_CommonItem_2;
+        }
 
-	}
+        public static void ShowWindow(this DlgJiaYuanPetFeed self, Entity contextData = null)
+        {
+        }
+
+        public static void OnImageClose(this DlgJiaYuanPetFeed self)
+        {
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>().WaitPetWalk(self.JiaYuanPet);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanPetFeed);
+        }
+
+        public static void OnInitUI(this DlgJiaYuanPetFeed self, JiaYuanPet jiaYuanPet)
+        {
+            self.JiaYuanPet = jiaYuanPet;
+
+            PetConfig petConfig = PetConfigCategory.Instance.Get(jiaYuanPet.ConfigId);
+            self.View.ES_ModelShow.ShowOtherModel("Pet/" + petConfig.PetModel).Coroutine();
+            self.View.ES_ModelShow.Camera.localPosition = new Vector3(0f, 100f, 450f);
+            self.View.ES_ModelShow.Camera.GetComponent<Camera>().fieldOfView = 30;
+            self.View.ES_ModelShow.SetRootPosition(new Vector2(1000, 0));
+            self.View.ES_ModelShow.ModelParent.localRotation = Quaternion.Euler(0f, -45f, 0f);
+
+            self.OnUpdateItemList();
+            self.OnUpdatePetInfo();
+        }
+
+        public static void OnUpdatePetInfo(this DlgJiaYuanPetFeed self)
+        {
+            JiaYuanComponentC jiaYuanComponent = self.Root().GetComponent<JiaYuanComponentC>();
+            JiaYuanPet jiaYuanPet = jiaYuanComponent.GetJiaYuanPet(self.JiaYuanPet.unitId);
+            if (jiaYuanPet == null)
+            {
+                Log.Error($"UIJiaYuanPetFeed:  {self.Root().GetComponent<PlayerComponent>().CurrentRoleId}");
+                return;
+            }
+
+            for (int i = 0; i < self.MoodList.Length; i++)
+            {
+                self.MoodList[i].SetActive(i < ET.JiaYuanHelper.GetPetMoodStar(jiaYuanPet.MoodValue));
+            }
+
+            int addExp = CommonHelp.GetJiaYuanPetExp(jiaYuanPet.PetLv, jiaYuanPet.MoodValue);
+            self.View.E_Text_HourExpText.text = $"经验收益: {addExp}/小时";
+
+            self.View.E_Text_PetNameText.text = jiaYuanPet.PetName;
+        }
+
+        private static void OnBagItemsRefresh(this DlgJiaYuanPetFeed self, Transform transform, int index)
+        {
+            Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
+
+            scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.HuishouBag);
+
+            scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (binfo, pdata) => { self.OnPointerDown(binfo, pdata).Coroutine(); };
+            scrollItemCommonItem.ES_CommonItem.PointerUpHandler = (binfo, pdata) => { self.OnPointerUp(binfo, pdata); };
+            scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
+        }
+
+        public static void OnUpdateItemList(this DlgJiaYuanPetFeed self)
+        {
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            List<BagInfo> bagInfos = bagComponent.GetBagList();
+
+            self.ShowBagInfos.Clear();
+            for (int i = 0; i < bagInfos.Count; i++)
+            {
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
+                bool ifShow = false;
+                if (!ifShow && itemConfig.ItemType == 1 && itemConfig.ItemSubType == 131)
+                {
+                    ifShow = true;
+                    //continue;
+                }
+
+                if (!ifShow && itemConfig.ItemType == 2 && itemConfig.ItemSubType == 101 ||
+                    itemConfig.ItemSubType == 201 && itemConfig.ItemSubType == 301)
+                {
+                    ifShow = true;
+                    //continue;
+                }
+
+                if (ifShow)
+                {
+                    self.ShowBagInfos.Add(bagInfos[i]);
+                }
+            }
+
+            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
+            self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
+        }
+
+        public static void OnHuiShouSelect(this DlgJiaYuanPetFeed self, string dataparams)
+        {
+            string[] huishouInfo = dataparams.Split('_');
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            BagInfo bagInfo = bagComponent.GetBagInfo(long.Parse(huishouInfo[1]));
+            if (bagInfo == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < self.CostItemList.Length; i++)
+            {
+                if (self.CostItemList[i].Baginfo == null)
+                {
+                    continue;
+                }
+
+                if (self.CostItemList[i].Baginfo.BagInfoID == bagInfo.BagInfoID)
+                {
+                    self.CostItemList[i].UpdateItem(null, ItemOperateEnum.None);
+                    self.CostItemList[i].E_ItemNameText.gameObject.SetActive(false);
+                }
+            }
+
+            //1新增  2移除 
+            if (huishouInfo[0] == "1")
+            {
+                for (int i = 0; i < self.CostItemList.Length; i++)
+                {
+                    if (self.CostItemList[i].Baginfo == null)
+                    {
+                        self.CostItemList[i].UpdateItem(bagInfo, ItemOperateEnum.HuishouShow);
+                        self.CostItemList[i].E_ItemNumText.text = "1";
+                        self.CostItemList[i].E_ItemNameText.gameObject.SetActive(true);
+                        break;
+                    }
+                }
+            }
+
+            self.UpdateSelected();
+        }
+
+        public static async ETTask OnButtonEat(this DlgJiaYuanPetFeed self)
+        {
+            List<long> idslist = new List<long>();
+            for (int h = 0; h < self.CostItemList.Length; h++)
+            {
+                if (self.CostItemList[h].Baginfo != null)
+                {
+                    idslist.Add(self.CostItemList[h].Baginfo.BagInfoID);
+                }
+            }
+
+            C2M_JiaYuanPetFeedRequest request = new() { PetId = self.JiaYuanPet.unitId, BagInfoIDs = idslist };
+            M2C_JiaYuanPetFeedResponse response = (M2C_JiaYuanPetFeedResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            self.Root().GetComponent<JiaYuanComponentC>().JiaYuanPetList_2 = response.JiaYuanPetList;
+
+            FlyTipComponent.Instance.ShowFlyTipDi($"宠物增加 {response.MoodAdd}心情值");
+
+            self.OnUpdateItemList();
+            self.OnUpdatePetInfo();
+            self.UpdateCostList();
+            self.UpdateSelected();
+        }
+
+        public static void UpdateCostList(this DlgJiaYuanPetFeed self)
+        {
+            BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
+            for (int h = 0; h < self.CostItemList.Length; h++)
+            {
+                if (self.CostItemList[h].Baginfo == null)
+                {
+                    continue;
+                }
+
+                if (null == bagComponent.GetBagInfo(self.CostItemList[h].Baginfo.BagInfoID))
+                {
+                    self.CostItemList[h].UpdateItem(null, ItemOperateEnum.None);
+                    self.CostItemList[h].E_ItemNameText.gameObject.SetActive(false);
+                }
+            }
+        }
+
+        public static void UpdateSelected(this DlgJiaYuanPetFeed self)
+        {
+            if (self.ScrollItemCommonItems != null)
+            {
+                foreach (Scroll_Item_CommonItem item in self.ScrollItemCommonItems.Values)
+                {
+                    if (item.uiTransform == null)
+                    {
+                        continue;
+                    }
+
+                    BagInfo bagInfo = item.ES_CommonItem.Baginfo;
+                    if (bagInfo == null)
+                    {
+                        continue;
+                    }
+
+                    bool have = false;
+                    for (int h = 0; h < self.CostItemList.Length; h++)
+                    {
+                        if (self.CostItemList[h].Baginfo != null
+                            && self.CostItemList[h].Baginfo.BagInfoID == bagInfo.BagInfoID)
+                        {
+                            have = true;
+                        }
+                    }
+
+                    item.ES_CommonItem.E_XuanZhongImage.gameObject.SetActive(have);
+                }
+            }
+        }
+
+        public static async ETTask OnPointerDown(this DlgJiaYuanPetFeed self, BagInfo binfo, PointerEventData pdata)
+        {
+            if (binfo == null)
+            {
+                return;
+            }
+
+            self.IsHoldDown = true;
+            EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
+
+            await self.Root().GetComponent<TimerComponent>().WaitAsync(500);
+            if (!self.IsHoldDown)
+            {
+                return;
+            }
+
+            EventSystem.Instance.Publish(self.Root(),
+                new ShowItemTips()
+                {
+                    BagInfo = binfo,
+                    ItemOperateEnum = ItemOperateEnum.None,
+                    InputPoint = Input.mousePosition,
+                    Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
+                    EquipList = new()
+                });
+        }
+
+        public static void OnPointerUp(this DlgJiaYuanPetFeed self, BagInfo binfo, PointerEventData pdata)
+        {
+            self.IsHoldDown = false;
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
+        }
+    }
 }
