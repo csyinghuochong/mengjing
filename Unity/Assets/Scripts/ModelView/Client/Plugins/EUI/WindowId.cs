@@ -164,5 +164,6 @@ namespace ET.Client
 		WindowID_JiaYuanPetFeed,
 		WindowID_UnionDonation,
 		WindowID_UnionDonationRecord,
+		WindowID_UnionMystery,
 	}
 }
