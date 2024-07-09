@@ -80,5 +80,19 @@ namespace ET.Client
             U2C_UnionRecordResponse response = (U2C_UnionRecordResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<U2C_UnionMysteryListResponse> UnionMysteryListRequest(Scene root, long unionId)
+        {
+            C2U_UnionMysteryListRequest request = new() { UnionId = unionId };
+            U2C_UnionMysteryListResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as U2C_UnionMysteryListResponse;
+            return response;
+        }
+
+        public static async ETTask<int> UnionMysteryBuyRequest(Scene root, int mysteryId, int buyNumber)
+        {
+            C2M_UnionMysteryBuyRequest request = new() { MysteryId = mysteryId, BuyNumber = buyNumber };
+            M2C_UnionMysteryBuyResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_UnionMysteryBuyResponse;
+            return response.Error;
+        }
     }
 }
