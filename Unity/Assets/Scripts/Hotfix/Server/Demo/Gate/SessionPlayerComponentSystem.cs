@@ -22,16 +22,16 @@
             PlayerSessionComponent playerSessionComponent = self.Player.GetComponent<PlayerSessionComponent>();
             
             
-            Session playerSession = playerSessionComponent ?.Session;
-            if ( playerSession == null)
-            {
-                return;
-            }
-            
-            if (playerSession.InstanceId != self.GetParent<Session>().InstanceId)
-            {
-                return;
-            }
+            // Session playerSession = playerSessionComponent ?.Session;
+            // if ( playerSession == null)
+            // {
+            //     return;
+            // }
+            //
+            // if (playerSession.InstanceId != self.GetParent<Session>().InstanceId)
+            // {
+            //     return;
+            // }
 
             if (self.Player.GetComponent<PlayerOfflineOutTimeComponent>() == null)
             {

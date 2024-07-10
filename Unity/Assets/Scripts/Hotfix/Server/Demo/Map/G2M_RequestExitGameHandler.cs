@@ -1,3 +1,5 @@
+using System;
+
 namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
@@ -15,11 +17,21 @@ namespace ET.Server
 
         private async ETTask RemoveUnit(Unit unit)
         {
-            Log.Debug("RemoveUnit");
+            Console.WriteLine("RemoveUnit");
             await unit.Fiber().WaitFrameFinish();
             
             await unit.RemoveLocation(LocationType.Unit);
+            
             UnitComponent unitComponent = unit.Root().GetComponent<UnitComponent>();
+            
+            PetComponentS petComponentS = unit.GetComponent<PetComponentS>();
+            RolePetInfo rolePetInfo =  petComponentS.GetFightPet();
+            if (rolePetInfo != null)
+            {
+                unitComponent.Remove(rolePetInfo.Id);
+            }
+
+            
             unitComponent.Remove(unit.Id);
         }
         

@@ -20,7 +20,7 @@ namespace ET.Server
         [EntitySystem]
         private static void Awake(this ET.Server.PlayerOfflineOutTimeComponent self)
         {
-            self.Timer = self.Root().GetComponent<TimerComponent>().NewOnceTimer(TimeInfo.Instance.ServerNow() + 1000, TimerInvokeType.PlayerOfflineOutTime, self);
+            self.Timer = self.Root().GetComponent<TimerComponent>().NewOnceTimer(TimeInfo.Instance.ServerNow() + 5000, TimerInvokeType.PlayerOfflineOutTime, self);
 
         }
         
