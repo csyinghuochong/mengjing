@@ -53,7 +53,7 @@ namespace ET.Client
             WindowID windowID = GetUIPath(funtionOpenConfig.Name);
             if (windowID == WindowID.WindowID_Invaild)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("该NPC没有要打开的UI");
+                FlyTipComponent.Instance.ShowFlyTipDi($"请添加NPC对应 {funtionOpenConfig.Name}");
                 return;
             }
 
@@ -92,7 +92,17 @@ namespace ET.Client
                 "UIZuoQi" => WindowID.WindowID_ZuoQi,
                 "UIProtect" => WindowID.WindowID_Protect,
                 "UITowerOfSeal" => WindowID.WindowID_TowerOfSeal,
+                "UIJiaYuanBag" => WindowID.WindowID_JiaYuanBag,
+                "UIJiaYuanChouKa" => WindowID.WindowID_JiaYuanChouKa,
+                "UIJiaYuanDaShi" => WindowID.WindowID_JiaYuanDaShi,
+                "UIJiaYuanFood" => WindowID.WindowID_JiaYuanFood,
+                "UIUIJiaYuanMystery" => WindowID.WindowID_JiaYuanMystery,
+                "UIJiaYuanPasture" => WindowID.WindowID_JiaYuanPasture,
+                "UIJiaYuanPet" => WindowID.WindowID_JiaYuanPet,
+                "UIJiaYuanRecord" => WindowID.WindowID_JiaYuanRecord,
+                "UIJiaYuanTreasureMapStorage" => WindowID.WindowID_JiaYuanTreasureMapStorage,
                 "UIJiaYuanUpLv" => WindowID.WindowID_JiaYuanUpLv,
+                "UIJiaYuanWarehouse" => WindowID.WindowID_JiaYuanWarehouse,
                 _ => WindowID.WindowID_Invaild
             };
         }
