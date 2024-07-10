@@ -34,12 +34,11 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> JiaYuanUprootRequest(Scene root, int cellIndex, long unitId, int operateType)
+        public static async ETTask<M2C_JiaYuanUprootResponse> JiaYuanUprootRequest(Scene root, int cellIndex, long unitId, int operateType)
         {
             C2M_JiaYuanUprootRequest request = new() { CellIndex = cellIndex, UnitId = unitId, OperateType = operateType };
-            M2C_JiaYuanUprootResponse response =
-                    (M2C_JiaYuanUprootResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
-            return response.Error;
+            M2C_JiaYuanUprootResponse response = (M2C_JiaYuanUprootResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
         }
 
         public static async ETTask<M2C_JiaYuanPlanOpenResponse> JiaYuanPlanOpenRequest(Scene root, int cellIndex)
