@@ -17,12 +17,14 @@ namespace ET.Client
             mapComponent.LastQuitTime = TimeHelper.ServerNow();
             if (!SceneConfigHelper.CanTransfer(mapComponent.SceneType, newsceneType))
             {
+                HintHelp.ShowHint(root, "请先退出副本！");
                 return ErrorCode.ERR_RequestExitFuben;
             }
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
             if (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.Now_Stall) > 0)
             {
+                HintHelp.ShowHint(root, "请先退出摆摊！");
                 return ErrorCode.ERR_RequestExitFuben;
             }
 
@@ -32,11 +34,13 @@ namespace ET.Client
                 SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneId);
                 if (sceneConfig.DayEnterNum > 0 && sceneConfig.DayEnterNum <= userInfoComponent.GetSceneFubenTimes(sceneId))
                 {
+                    HintHelp.ShowHint(root, "次数不足！");
                     return ErrorCode.ERR_TimesIsNot;
                 }
 
                 if (sceneConfig.EnterLv > userInfoComponent.GetUserLv())
                 {
+                    HintHelp.ShowHint(root, $"{sceneConfig.EnterLv}级开启！");
                     return ErrorCode.ERR_LevelIsNot;
                 }
             }
@@ -50,11 +54,8 @@ namespace ET.Client
                 root.GetComponent<BattleMessageComponent>().LastDungeonId = 0;
             }
 
-            C2M_TransferMap c2M_ItemHuiShouRequest = new C2M_TransferMap()
-            {
-                SceneType = newsceneType, SceneId = sceneId, Difficulty = difficulty, paramInfo = paraminfo
-            };
-            M2C_TransferMap r2c_roleEquip = (M2C_TransferMap)await root.GetComponent<ClientSenderCompnent>().Call(c2M_ItemHuiShouRequest);
+            C2M_TransferMap request = new() { SceneType = newsceneType, SceneId = sceneId, Difficulty = difficulty, paramInfo = paraminfo };
+            M2C_TransferMap response = (M2C_TransferMap)await root.GetComponent<ClientSenderCompnent>().Call(request);
             userInfoComponent.AddSceneFubenTimes(sceneId);
             return ErrorCode.ERR_Success;
         }
