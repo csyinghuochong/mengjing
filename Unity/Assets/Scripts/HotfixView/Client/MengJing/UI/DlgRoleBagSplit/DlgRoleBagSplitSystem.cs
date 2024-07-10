@@ -11,11 +11,11 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgRoleBagSplit self)
         {
-            self.View.E_AddNumButton.AddListener(self.OnAddNumButton);
-            self.View.E_NumInputField.onValueChanged.AddListener(self.OnOnNumInputField);
-            self.View.E_CostNumButton.AddListener(self.OnCostNumButton);
-            self.View.E_CloseButton.AddListener(self.OnCloseButton);
-            self.View.E_SplitButton.AddListenerAsync(self.OnSplitButton);
+            self.View.E_Btn_AddNumButton.AddListener(self.OnAddNumButton);
+            self.View.E_InputFieldInputField.onValueChanged.AddListener(self.OnOnNumInputField);
+            self.View.E_Btn_CostNumButton.AddListener(self.OnCostNumButton);
+            self.View.E_ButtonCloseButton.AddListener(self.OnCloseButton);
+            self.View.E_Btn_SplitButton.AddListenerAsync(self.OnSplitButton);
         }
 
         public static void ShowWindow(this DlgRoleBagSplit self, Entity contextData = null)
@@ -27,7 +27,7 @@ namespace ET.Client
             self.BagInfo = bagInfo;
             self.Num = 1;
             self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
-            self.View.E_NumInputField.text = self.Num.ToString();
+            self.View.E_InputFieldInputField.text = self.Num.ToString();
         }
 
         private static void OnAddNumButton(this DlgRoleBagSplit self)
@@ -38,7 +38,7 @@ namespace ET.Client
             }
 
             self.Num++;
-            self.View.E_NumInputField.text = self.Num.ToString();
+            self.View.E_InputFieldInputField.text = self.Num.ToString();
         }
 
         private static void OnOnNumInputField(this DlgRoleBagSplit self, string text)
@@ -61,7 +61,7 @@ namespace ET.Client
             }
 
             self.Num--;
-            self.View.E_NumInputField.text = self.Num.ToString();
+            self.View.E_InputFieldInputField.text = self.Num.ToString();
         }
 
         private static void OnCloseButton(this DlgRoleBagSplit self)
@@ -78,7 +78,7 @@ namespace ET.Client
                 flyTipComponent.ShowFlyTipDi("拆分完成!");
             }
 
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemSellTip);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_RoleBagSplit);
         }
     }
 }

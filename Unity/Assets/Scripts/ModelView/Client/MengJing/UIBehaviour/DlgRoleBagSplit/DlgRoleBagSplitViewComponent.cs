@@ -16,7 +16,7 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_commonitem ==null )
+     			if( this.m_es_commonitem == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem");
 		    	   this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
@@ -25,7 +25,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_SplitButton
+		public UnityEngine.UI.Button E_Btn_SplitButton
      	{
      		get
      		{
@@ -34,15 +34,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SplitButton == null )
+     			if( this.m_E_Btn_SplitButton == null )
      			{
-		    		this.m_E_SplitButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Split");
+		    		this.m_E_Btn_SplitButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_Split");
      			}
-     			return this.m_E_SplitButton;
+     			return this.m_E_Btn_SplitButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_SplitImage
+		public UnityEngine.UI.Image E_Btn_SplitImage
      	{
      		get
      		{
@@ -51,15 +51,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_SplitImage == null )
+     			if( this.m_E_Btn_SplitImage == null )
      			{
-		    		this.m_E_SplitImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Split");
+		    		this.m_E_Btn_SplitImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_Split");
      			}
-     			return this.m_E_SplitImage;
+     			return this.m_E_Btn_SplitImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_AddNumButton
+		public UnityEngine.UI.Button E_Btn_AddNumButton
      	{
      		get
      		{
@@ -68,15 +68,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_AddNumButton == null )
+     			if( this.m_E_Btn_AddNumButton == null )
      			{
-		    		this.m_E_AddNumButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_AddNum");
+		    		this.m_E_Btn_AddNumButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_AddNum");
      			}
-     			return this.m_E_AddNumButton;
+     			return this.m_E_Btn_AddNumButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_AddNumImage
+		public UnityEngine.UI.Image E_Btn_AddNumImage
      	{
      		get
      		{
@@ -85,15 +85,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_AddNumImage == null )
+     			if( this.m_E_Btn_AddNumImage == null )
      			{
-		    		this.m_E_AddNumImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_AddNum");
+		    		this.m_E_Btn_AddNumImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_AddNum");
      			}
-     			return this.m_E_AddNumImage;
+     			return this.m_E_Btn_AddNumImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_AddNumEventTrigger
+		public UnityEngine.EventSystems.EventTrigger E_Btn_AddNumEventTrigger
      	{
      		get
      		{
@@ -102,15 +102,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_AddNumEventTrigger == null )
+     			if( this.m_E_Btn_AddNumEventTrigger == null )
      			{
-		    		this.m_E_AddNumEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_AddNum");
+		    		this.m_E_Btn_AddNumEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_Btn_AddNum");
      			}
-     			return this.m_E_AddNumEventTrigger;
+     			return this.m_E_Btn_AddNumEventTrigger;
      		}
      	}
 
-		public UnityEngine.UI.Button E_CostNumButton
+		public UnityEngine.UI.Button E_Btn_CostNumButton
      	{
      		get
      		{
@@ -119,15 +119,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_CostNumButton == null )
+     			if( this.m_E_Btn_CostNumButton == null )
      			{
-		    		this.m_E_CostNumButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_CostNum");
+		    		this.m_E_Btn_CostNumButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_CostNum");
      			}
-     			return this.m_E_CostNumButton;
+     			return this.m_E_Btn_CostNumButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_CostNumImage
+		public UnityEngine.UI.Image E_Btn_CostNumImage
      	{
      		get
      		{
@@ -136,15 +136,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_CostNumImage == null )
+     			if( this.m_E_Btn_CostNumImage == null )
      			{
-		    		this.m_E_CostNumImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_CostNum");
+		    		this.m_E_Btn_CostNumImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_CostNum");
      			}
-     			return this.m_E_CostNumImage;
+     			return this.m_E_Btn_CostNumImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_CostNumEventTrigger
+		public UnityEngine.EventSystems.EventTrigger E_Btn_CostNumEventTrigger
      	{
      		get
      		{
@@ -153,15 +153,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_CostNumEventTrigger == null )
+     			if( this.m_E_Btn_CostNumEventTrigger == null )
      			{
-		    		this.m_E_CostNumEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_CostNum");
+		    		this.m_E_Btn_CostNumEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_Btn_CostNum");
      			}
-     			return this.m_E_CostNumEventTrigger;
+     			return this.m_E_Btn_CostNumEventTrigger;
      		}
      	}
 
-		public UnityEngine.UI.InputField E_NumInputField
+		public UnityEngine.UI.InputField E_InputFieldInputField
      	{
      		get
      		{
@@ -170,15 +170,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_NumInputField == null )
+     			if( this.m_E_InputFieldInputField == null )
      			{
-		    		this.m_E_NumInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"E_Num");
+		    		this.m_E_InputFieldInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"E_InputField");
      			}
-     			return this.m_E_NumInputField;
+     			return this.m_E_InputFieldInputField;
      		}
      	}
 
-		public UnityEngine.UI.Image E_NumImage
+		public UnityEngine.UI.Image E_InputFieldImage
      	{
      		get
      		{
@@ -187,15 +187,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_NumImage == null )
+     			if( this.m_E_InputFieldImage == null )
      			{
-		    		this.m_E_NumImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Num");
+		    		this.m_E_InputFieldImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_InputField");
      			}
-     			return this.m_E_NumImage;
+     			return this.m_E_InputFieldImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_CloseButton
+		public UnityEngine.UI.Button E_ButtonCloseButton
      	{
      		get
      		{
@@ -204,15 +204,15 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_CloseButton == null )
+     			if( this.m_E_ButtonCloseButton == null )
      			{
-		    		this.m_E_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Close");
+		    		this.m_E_ButtonCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonClose");
      			}
-     			return this.m_E_CloseButton;
+     			return this.m_E_ButtonCloseButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_CloseImage
+		public UnityEngine.UI.Image E_ButtonCloseImage
      	{
      		get
      		{
@@ -221,45 +221,45 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_CloseImage == null )
+     			if( this.m_E_ButtonCloseImage == null )
      			{
-		    		this.m_E_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Close");
+		    		this.m_E_ButtonCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonClose");
      			}
-     			return this.m_E_CloseImage;
+     			return this.m_E_ButtonCloseImage;
      		}
      	}
 
 		public void DestroyWidget()
 		{
 			this.m_es_commonitem = null;
-			this.m_E_SplitButton = null;
-			this.m_E_SplitImage = null;
-			this.m_E_AddNumButton = null;
-			this.m_E_AddNumImage = null;
-			this.m_E_AddNumEventTrigger = null;
-			this.m_E_CostNumButton = null;
-			this.m_E_CostNumImage = null;
-			this.m_E_CostNumEventTrigger = null;
-			this.m_E_NumInputField = null;
-			this.m_E_NumImage = null;
-			this.m_E_CloseButton = null;
-			this.m_E_CloseImage = null;
+			this.m_E_Btn_SplitButton = null;
+			this.m_E_Btn_SplitImage = null;
+			this.m_E_Btn_AddNumButton = null;
+			this.m_E_Btn_AddNumImage = null;
+			this.m_E_Btn_AddNumEventTrigger = null;
+			this.m_E_Btn_CostNumButton = null;
+			this.m_E_Btn_CostNumImage = null;
+			this.m_E_Btn_CostNumEventTrigger = null;
+			this.m_E_InputFieldInputField = null;
+			this.m_E_InputFieldImage = null;
+			this.m_E_ButtonCloseButton = null;
+			this.m_E_ButtonCloseImage = null;
 			this.uiTransform = null;
 		}
 
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
-		private UnityEngine.UI.Button m_E_SplitButton = null;
-		private UnityEngine.UI.Image m_E_SplitImage = null;
-		private UnityEngine.UI.Button m_E_AddNumButton = null;
-		private UnityEngine.UI.Image m_E_AddNumImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_AddNumEventTrigger = null;
-		private UnityEngine.UI.Button m_E_CostNumButton = null;
-		private UnityEngine.UI.Image m_E_CostNumImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_CostNumEventTrigger = null;
-		private UnityEngine.UI.InputField m_E_NumInputField = null;
-		private UnityEngine.UI.Image m_E_NumImage = null;
-		private UnityEngine.UI.Button m_E_CloseButton = null;
-		private UnityEngine.UI.Image m_E_CloseImage = null;
+		private UnityEngine.UI.Button m_E_Btn_SplitButton = null;
+		private UnityEngine.UI.Image m_E_Btn_SplitImage = null;
+		private UnityEngine.UI.Button m_E_Btn_AddNumButton = null;
+		private UnityEngine.UI.Image m_E_Btn_AddNumImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_Btn_AddNumEventTrigger = null;
+		private UnityEngine.UI.Button m_E_Btn_CostNumButton = null;
+		private UnityEngine.UI.Image m_E_Btn_CostNumImage = null;
+		private UnityEngine.EventSystems.EventTrigger m_E_Btn_CostNumEventTrigger = null;
+		private UnityEngine.UI.InputField m_E_InputFieldInputField = null;
+		private UnityEngine.UI.Image m_E_InputFieldImage = null;
+		private UnityEngine.UI.Button m_E_ButtonCloseButton = null;
+		private UnityEngine.UI.Image m_E_ButtonCloseImage = null;
 		public Transform uiTransform = null;
 	}
 }
