@@ -167,5 +167,12 @@ namespace ET.Client
             M2C_PetOpenCangKu response = (M2C_PetOpenCangKu)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<M2C_JiaYuanWatchResponse> JiaYuanWatchRequest(Scene root, long masterId, long operateId)
+        {
+            C2M_JiaYuanWatchRequest request = new() { MasterId = masterId, OperateId = operateId };
+            M2C_JiaYuanWatchResponse response = (M2C_JiaYuanWatchResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }
