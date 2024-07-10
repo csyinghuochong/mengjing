@@ -25,101 +25,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// }} 
 
 	// {{ AOT generic types
-	// ET.AEvent.<Handle>d__3<object,ET.ChangePosition>
-	// ET.AEvent.<Handle>d__3<object,ET.ChangeRotation>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.AfterCreateClientScene>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.AfterCreateCurrentScene>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.AfterUnitCreate>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.AppStartInitFinish>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.AreneInfo>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.BattleInfo>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.BeforeSkill>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.BuffScale>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.BuffUpdate>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.ChangeCameraMoveType>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_BagItemUpdate>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_BeforeMove>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_ChouKaWarehouseAddItem>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_EquipHuiShow>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_EquipWear>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_FriendChat>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_FriendUpdate>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_HuiShouSelect>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_JingLingButton>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_MainHeroMove>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_OnAccountWarehous>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_OnActiveTianFu>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_OnMailUpdate>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_OnPetFightSet>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_OnRecvChat>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_PetHeChengUpdate>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_PetItemSelect>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_PetXiLianUpdate>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_SettingUpdate>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_SkillBeging>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_SkillCDUpdate>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_SkillFinish>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_SkillReset>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_SkillSetting>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_SkillUpgrade>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_TaskComplete>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_TaskGet>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_TaskGiveUp>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_TaskTrace>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_TaskUpdate>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_TeamUpdate>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_UpdateRoleProper>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_UpdateSing>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.DataUpdate_UpdateUserData>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.EnterMapFinish>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.FsmChange>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.FubenSettlement>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.HappyInfo>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.JingLingGet>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.LSSceneChangeStart>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.LSSceneInitFinish>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.LoadSceneFinished>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.LoginFinish>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.Now_Hp_Update>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.OnSkillUse>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.PlayAnimator>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.RankDemonInfo>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.ReddotChange>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.ReturnLogin>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.RoleDataBroadcase>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.RolePetAdd>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.RolePetUpdate>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.RunRaceBattleInfo>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.RunRaceInfo>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.RunRaceRewardInfo>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.SceneChangeFinish>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.SceneChangeStart>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.ShowFlyTip>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.ShowItemTips>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.SingingUpdate>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.SkillEffect>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.SkillEffectFinish>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.SkillEffectMove>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.SkillEffectReset>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.SkillSound>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.SkillYuJing>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.SyncMiJingDamage>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.TaskNpcDialog>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.TaskTypeItemClick>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.TeamPickNotice>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.UnitDead>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.UnitRemove>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.UnitRevive>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.UpdateUserBuffSkill>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.UserDataTypeUpdate_Diamond>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.UserDataTypeUpdate_Gold>
-	// ET.AEvent.<Handle>d__3<object,ET.Client.UserDataTypeUpdate_HorseNotice>
-	// ET.AEvent.<Handle>d__3<object,ET.EntryEvent1>
-	// ET.AEvent.<Handle>d__3<object,ET.EntryEvent2>
-	// ET.AEvent.<Handle>d__3<object,ET.EntryEvent3>
-	// ET.AEvent.<Handle>d__3<object,ET.MoveStart>
-	// ET.AEvent.<Handle>d__3<object,ET.MoveStop>
-	// ET.AEvent.<Handle>d__3<object,ET.NumbericChange>
 	// ET.AEvent<object,ET.ChangePosition>
 	// ET.AEvent<object,ET.ChangeRotation>
 	// ET.AEvent<object,ET.Client.AfterCreateClientScene>
@@ -210,7 +115,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.AEvent<object,ET.Client.UserDataTypeUpdate_Gold>
 	// ET.AEvent<object,ET.Client.UserDataTypeUpdate_HorseNotice>
 	// ET.AEvent<object,ET.EntryEvent1>
-	// ET.AEvent<object,ET.EntryEvent2>
 	// ET.AEvent<object,ET.EntryEvent3>
 	// ET.AEvent<object,ET.MoveStart>
 	// ET.AEvent<object,ET.MoveStop>
@@ -239,17 +143,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.ETAsyncTaskMethodBuilder<long>
 	// ET.ETAsyncTaskMethodBuilder<object>
 	// ET.ETAsyncTaskMethodBuilder<uint>
-	// ET.ETTask.<InnerCoroutine>d__8<ET.Client.WaitType.Wait_Room2C_Start>
-	// ET.ETTask.<InnerCoroutine>d__8<ET.Client.Wait_CreateMyUnit>
-	// ET.ETTask.<InnerCoroutine>d__8<ET.Client.Wait_SceneChangeFinish>
-	// ET.ETTask.<InnerCoroutine>d__8<ET.Client.Wait_UnitStop>
-	// ET.ETTask.<InnerCoroutine>d__8<System.ValueTuple<int,int>>
-	// ET.ETTask.<InnerCoroutine>d__8<System.ValueTuple<uint,object>>
-	// ET.ETTask.<InnerCoroutine>d__8<byte>
-	// ET.ETTask.<InnerCoroutine>d__8<int>
-	// ET.ETTask.<InnerCoroutine>d__8<long>
-	// ET.ETTask.<InnerCoroutine>d__8<object>
-	// ET.ETTask.<InnerCoroutine>d__8<uint>
 	// ET.ETTask<ET.Client.WaitType.Wait_Room2C_Start>
 	// ET.ETTask<ET.Client.Wait_CreateMyUnit>
 	// ET.ETTask<ET.Client.Wait_SceneChangeFinish>
@@ -262,12 +155,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.ETTask<object>
 	// ET.ETTask<uint>
 	// ET.EntityRef<object>
-	// ET.EventSystem.<PublishAsync>d__4<object,ET.Client.AppStartInitFinish>
-	// ET.EventSystem.<PublishAsync>d__4<object,ET.Client.LSSceneChangeStart>
-	// ET.EventSystem.<PublishAsync>d__4<object,ET.Client.LoginFinish>
-	// ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent1>
-	// ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent2>
-	// ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent3>
 	// ET.IAwake<int,int>
 	// ET.IAwake<int,object>
 	// ET.IAwake<int>
@@ -355,6 +242,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Action<ET.DropItemInfo>
 	// System.Action<ET.EquipChuanChengList>
 	// System.Action<ET.JiaYuanPurchase>
+	// System.Action<ET.MessageSessionDispatcherInfo>
 	// System.Action<ET.PetMiningItem>
 	// System.Action<ET.PropertyValue>
 	// System.Action<ET.TypeButtonItem>
@@ -401,6 +289,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.ArraySortHelper<ET.DropItemInfo>
 	// System.Collections.Generic.ArraySortHelper<ET.EquipChuanChengList>
 	// System.Collections.Generic.ArraySortHelper<ET.JiaYuanPurchase>
+	// System.Collections.Generic.ArraySortHelper<ET.MessageSessionDispatcherInfo>
 	// System.Collections.Generic.ArraySortHelper<ET.PetMiningItem>
 	// System.Collections.Generic.ArraySortHelper<ET.PropertyValue>
 	// System.Collections.Generic.ArraySortHelper<ET.TypeButtonItem>
@@ -428,6 +317,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.Comparer<ET.DropItemInfo>
 	// System.Collections.Generic.Comparer<ET.EquipChuanChengList>
 	// System.Collections.Generic.Comparer<ET.JiaYuanPurchase>
+	// System.Collections.Generic.Comparer<ET.MessageSessionDispatcherInfo>
 	// System.Collections.Generic.Comparer<ET.PetMiningItem>
 	// System.Collections.Generic.Comparer<ET.PropertyValue>
 	// System.Collections.Generic.Comparer<ET.TypeButtonItem>
@@ -457,6 +347,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.ComparisonComparer<ET.DropItemInfo>
 	// System.Collections.Generic.ComparisonComparer<ET.EquipChuanChengList>
 	// System.Collections.Generic.ComparisonComparer<ET.JiaYuanPurchase>
+	// System.Collections.Generic.ComparisonComparer<ET.MessageSessionDispatcherInfo>
 	// System.Collections.Generic.ComparisonComparer<ET.PetMiningItem>
 	// System.Collections.Generic.ComparisonComparer<ET.PropertyValue>
 	// System.Collections.Generic.ComparisonComparer<ET.TypeButtonItem>
@@ -608,6 +499,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.ICollection<ET.DropItemInfo>
 	// System.Collections.Generic.ICollection<ET.EquipChuanChengList>
 	// System.Collections.Generic.ICollection<ET.JiaYuanPurchase>
+	// System.Collections.Generic.ICollection<ET.MessageSessionDispatcherInfo>
 	// System.Collections.Generic.ICollection<ET.PetMiningItem>
 	// System.Collections.Generic.ICollection<ET.PropertyValue>
 	// System.Collections.Generic.ICollection<ET.RpcInfo>
@@ -650,6 +542,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IComparer<ET.DropItemInfo>
 	// System.Collections.Generic.IComparer<ET.EquipChuanChengList>
 	// System.Collections.Generic.IComparer<ET.JiaYuanPurchase>
+	// System.Collections.Generic.IComparer<ET.MessageSessionDispatcherInfo>
 	// System.Collections.Generic.IComparer<ET.PetMiningItem>
 	// System.Collections.Generic.IComparer<ET.PropertyValue>
 	// System.Collections.Generic.IComparer<ET.TypeButtonItem>
@@ -677,6 +570,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IEnumerable<ET.DropItemInfo>
 	// System.Collections.Generic.IEnumerable<ET.EquipChuanChengList>
 	// System.Collections.Generic.IEnumerable<ET.JiaYuanPurchase>
+	// System.Collections.Generic.IEnumerable<ET.MessageSessionDispatcherInfo>
 	// System.Collections.Generic.IEnumerable<ET.PetMiningItem>
 	// System.Collections.Generic.IEnumerable<ET.PropertyValue>
 	// System.Collections.Generic.IEnumerable<ET.RpcInfo>
@@ -719,6 +613,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IEnumerator<ET.DropItemInfo>
 	// System.Collections.Generic.IEnumerator<ET.EquipChuanChengList>
 	// System.Collections.Generic.IEnumerator<ET.JiaYuanPurchase>
+	// System.Collections.Generic.IEnumerator<ET.MessageSessionDispatcherInfo>
 	// System.Collections.Generic.IEnumerator<ET.PetMiningItem>
 	// System.Collections.Generic.IEnumerator<ET.PropertyValue>
 	// System.Collections.Generic.IEnumerator<ET.RpcInfo>
@@ -766,6 +661,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IList<ET.DropItemInfo>
 	// System.Collections.Generic.IList<ET.EquipChuanChengList>
 	// System.Collections.Generic.IList<ET.JiaYuanPurchase>
+	// System.Collections.Generic.IList<ET.MessageSessionDispatcherInfo>
 	// System.Collections.Generic.IList<ET.PetMiningItem>
 	// System.Collections.Generic.IList<ET.PropertyValue>
 	// System.Collections.Generic.IList<ET.TypeButtonItem>
@@ -809,6 +705,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.List.Enumerator<ET.DropItemInfo>
 	// System.Collections.Generic.List.Enumerator<ET.EquipChuanChengList>
 	// System.Collections.Generic.List.Enumerator<ET.JiaYuanPurchase>
+	// System.Collections.Generic.List.Enumerator<ET.MessageSessionDispatcherInfo>
 	// System.Collections.Generic.List.Enumerator<ET.PetMiningItem>
 	// System.Collections.Generic.List.Enumerator<ET.PropertyValue>
 	// System.Collections.Generic.List.Enumerator<ET.TypeButtonItem>
@@ -835,6 +732,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.List<ET.DropItemInfo>
 	// System.Collections.Generic.List<ET.EquipChuanChengList>
 	// System.Collections.Generic.List<ET.JiaYuanPurchase>
+	// System.Collections.Generic.List<ET.MessageSessionDispatcherInfo>
 	// System.Collections.Generic.List<ET.PetMiningItem>
 	// System.Collections.Generic.List<ET.PropertyValue>
 	// System.Collections.Generic.List<ET.TypeButtonItem>
@@ -862,6 +760,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.ObjectComparer<ET.DropItemInfo>
 	// System.Collections.Generic.ObjectComparer<ET.EquipChuanChengList>
 	// System.Collections.Generic.ObjectComparer<ET.JiaYuanPurchase>
+	// System.Collections.Generic.ObjectComparer<ET.MessageSessionDispatcherInfo>
 	// System.Collections.Generic.ObjectComparer<ET.PetMiningItem>
 	// System.Collections.Generic.ObjectComparer<ET.PropertyValue>
 	// System.Collections.Generic.ObjectComparer<ET.TypeButtonItem>
@@ -936,6 +835,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.ObjectModel.ReadOnlyCollection<ET.DropItemInfo>
 	// System.Collections.ObjectModel.ReadOnlyCollection<ET.EquipChuanChengList>
 	// System.Collections.ObjectModel.ReadOnlyCollection<ET.JiaYuanPurchase>
+	// System.Collections.ObjectModel.ReadOnlyCollection<ET.MessageSessionDispatcherInfo>
 	// System.Collections.ObjectModel.ReadOnlyCollection<ET.PetMiningItem>
 	// System.Collections.ObjectModel.ReadOnlyCollection<ET.PropertyValue>
 	// System.Collections.ObjectModel.ReadOnlyCollection<ET.TypeButtonItem>
@@ -963,6 +863,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Comparison<ET.DropItemInfo>
 	// System.Comparison<ET.EquipChuanChengList>
 	// System.Comparison<ET.JiaYuanPurchase>
+	// System.Comparison<ET.MessageSessionDispatcherInfo>
 	// System.Comparison<ET.PetMiningItem>
 	// System.Comparison<ET.PropertyValue>
 	// System.Comparison<ET.TypeButtonItem>
@@ -999,6 +900,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Predicate<ET.DropItemInfo>
 	// System.Predicate<ET.EquipChuanChengList>
 	// System.Predicate<ET.JiaYuanPurchase>
+	// System.Predicate<ET.MessageSessionDispatcherInfo>
 	// System.Predicate<ET.PetMiningItem>
 	// System.Predicate<ET.PropertyValue>
 	// System.Predicate<ET.TypeButtonItem>
@@ -1071,6 +973,12 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<object>,object>(System.Runtime.CompilerServices.TaskAwaiter<object>&,object&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,object>(object&,object&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<uint>.AwaitUnsafeOnCompleted<object,object>(object&,object&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.EventSystem.<PublishAsync>d__4<object,ET.Client.AppStartInitFinish>>(ET.EventSystem.<PublishAsync>d__4<object,ET.Client.AppStartInitFinish>&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.EventSystem.<PublishAsync>d__4<object,ET.Client.LSSceneChangeStart>>(ET.EventSystem.<PublishAsync>d__4<object,ET.Client.LSSceneChangeStart>&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.EventSystem.<PublishAsync>d__4<object,ET.Client.LoginFinish>>(ET.EventSystem.<PublishAsync>d__4<object,ET.Client.LoginFinish>&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent1>>(ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent1>&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent2>>(ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent2>&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent3>>(ET.EventSystem.<PublishAsync>d__4<object,ET.EntryEvent3>&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<object>(object&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<ET.Client.WaitType.Wait_Room2C_Start>.Start<object>(object&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<ET.Client.Wait_CreateMyUnit>.Start<object>(object&)
