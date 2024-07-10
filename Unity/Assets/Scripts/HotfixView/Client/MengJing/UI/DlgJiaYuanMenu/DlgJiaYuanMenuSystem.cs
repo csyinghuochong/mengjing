@@ -130,7 +130,7 @@ namespace ET.Client
 
         public static void OnButton_Watch(this DlgJiaYuanMenu self)
         {
-            // self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanPlanWatch).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanPlanWatch).Coroutine();
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanMenu);
         }
 

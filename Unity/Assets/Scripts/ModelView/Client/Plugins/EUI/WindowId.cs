@@ -167,5 +167,6 @@ namespace ET.Client
 		WindowID_UnionMystery,
 		WindowID_UnionKeJi,
 		WindowID_JiaYuanMenu,
+		WindowID_JiaYuanPlanWatch,
 	}
 }
