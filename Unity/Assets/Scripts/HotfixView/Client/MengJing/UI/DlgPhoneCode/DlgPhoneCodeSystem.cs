@@ -41,7 +41,7 @@ namespace ET.Client
 #if UNITY_EDITOR
             self.OnCommitCodeHandler(phoneNum);
 #else
-            GlobalHelp.OnButtonCommbitCode(self.OnCommitCodeHandler, phoneNum,code);
+            //GlobalHelp.OnButtonCommbitCode(self.OnCommitCodeHandler, phoneNum,code);
 #endif
         }
 

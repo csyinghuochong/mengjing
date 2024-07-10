@@ -149,7 +149,7 @@ namespace ET.Client
 #if UNITY_EDITOR
             self.OnShareHandler(shareType, true).Coroutine();
 #else
-            GlobalHelp.FenXiang(fenXiangContent);
+            //GlobalHelp.FenXiang(fenXiangContent);
 #endif
         }
 

@@ -267,8 +267,8 @@ public class MyEditorScript
 			Directory.CreateDirectory(target_dir);
 		}
 
-		PlayerSettings.SetScriptingDefineSymbolsForGroup(targetGroup, ";" + name);
-		PlayerSettings.SetScriptingDefineSymbolsForGroup(targetGroup, "NET452;DISABLE_ILRUNTIME_DEBUG;" + name);
+		//PlayerSettings.SetScriptingDefineSymbolsForGroup(targetGroup, ";" + name);
+		//PlayerSettings.SetScriptingDefineSymbolsForGroup(targetGroup, "NET452;DISABLE_ILRUNTIME_DEBUG;" + name);
 
 		string[] scenes = new string[] { SCENES[0] };
 		PlayerSettings.Android.keystorePass = "829475";
