@@ -279,30 +279,27 @@ namespace ET.Client
 
         public static async ETTask OnOpenBox(this OperaComponent self, long boxid)
         {
-            // UI uI = UIHelper.GetUI(self.ZoneScene(), UIType.UIMain);
-            // Unit box = self.ZoneScene().CurrentScene().GetComponent<UnitComponent>().Get(boxid);
-            // if (box == null)
-            // {
-            //     return;
-            // }
-            //
-            // if (box.ConfigId == 83000101 || box.ConfigId == 83000102)
-            // {
-            //     UI uijiayuan = await UIHelper.Create(self.ZoneScene(), UIType.UIJiaYuanMenu);
-            //     uijiayuan.GetComponent<UIJiaYuanMenuComponent>().OnUpdateRubsh(box);
-            //     return;
-            // }
-            //
-            // MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(box.ConfigId);
-            // if (monsterConfig.Parameter != null && monsterConfig.Parameter.Length > 0 && monsterConfig.Parameter[0] > 0)
-            // {
-            //     UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIOpenChest);
-            //     ui.GetComponent<UIOpenChestComponent>().UpdateInfo(box);
-            // }
-            // else
-            // {
-            //     uI.GetComponent<UIMainComponent>().UIOpenBoxComponent.OnOpenBox(box);
-            // }
+            Unit box = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(boxid);
+            if (box == null)
+            {
+                return;
+            }
+
+            if (box.ConfigId == 83000101 || box.ConfigId == 83000102)
+            {
+                // self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>().OnUpdateRubsh(box);
+                return;
+            }
+
+            MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(box.ConfigId);
+            if (monsterConfig.Parameter != null && monsterConfig.Parameter.Length > 0 && monsterConfig.Parameter[0] > 0)
+            {
+                // self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgOpenChest>().UpdateInfo(box);
+            }
+            else
+            {
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_OpenBox.OnOpenBox(box);
+            }
 
             await ETTask.CompletedTask;
         }

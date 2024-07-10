@@ -168,5 +168,6 @@ namespace ET.Client
 		WindowID_UnionKeJi,
 		WindowID_JiaYuanMenu,
 		WindowID_JiaYuanPlanWatch,
+		WindowID_OpenChest,
 	}
 }
