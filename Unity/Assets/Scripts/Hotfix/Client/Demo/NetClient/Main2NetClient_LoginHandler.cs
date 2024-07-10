@@ -18,7 +18,7 @@ namespace ET.Client
             
             root.RemoveComponent<RouterAddressComponent>();
             RouterAddressComponent routerAddressComponent =
-                    root.AddComponent<RouterAddressComponent, string, int>(ConstValue.RouterHttpHostOuter, ConstValue.RouterHttpPort);
+                    root.AddComponent<RouterAddressComponent, string, int>(ConstValue.RouterHttpHostInter, ConstValue.RouterHttpPort);
             await routerAddressComponent.Init();
             root.AddComponent<NetComponent, AddressFamily, NetworkProtocol>(routerAddressComponent.RouterManagerIPAddress.AddressFamily, NetworkProtocol.UDP);
             root.GetComponent<FiberParentComponent>().ParentFiberId = request.OwnerFiberId;
