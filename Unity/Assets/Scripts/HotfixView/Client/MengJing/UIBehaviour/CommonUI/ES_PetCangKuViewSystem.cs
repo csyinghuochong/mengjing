@@ -83,8 +83,8 @@ namespace ET.Client
                 self.ShowRolePetInfos.Add(rolePetInfo);
             }
 
-            self.AddUIScrollItems(ref self.ScrollItemPetCangKuItems, self.ScrollItemPetCangKuItems.Count);
-            self.E_PetCangKuItemsLoopVerticalScrollRect.SetVisible(true, self.ScrollItemPetCangKuItems.Count);
+            self.AddUIScrollItems(ref self.ScrollItemPetCangKuItems, self.ShowRolePetInfos.Count);
+            self.E_PetCangKuItemsLoopVerticalScrollRect.SetVisible(true, self.ShowRolePetInfos.Count);
         }
     }
 }

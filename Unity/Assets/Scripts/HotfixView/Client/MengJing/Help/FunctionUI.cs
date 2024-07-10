@@ -103,6 +103,10 @@ namespace ET.Client
                 "UIJiaYuanTreasureMapStorage" => WindowID.WindowID_JiaYuanTreasureMapStorage,
                 "UIJiaYuanUpLv" => WindowID.WindowID_JiaYuanUpLv,
                 "UIJiaYuanWarehouse" => WindowID.WindowID_JiaYuanWarehouse,
+                "UIUnionDonation" => WindowID.WindowID_UnionDonation,
+                "UIUnionKeJi" => WindowID.WindowID_UnionKeJi,
+                "UIUnionMystery" => WindowID.WindowID_UnionMystery,
+                "UIFriend" => WindowID.WindowID_Friend,
                 _ => WindowID.WindowID_Invaild
             };
         }

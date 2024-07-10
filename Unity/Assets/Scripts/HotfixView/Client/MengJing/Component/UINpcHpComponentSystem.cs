@@ -192,8 +192,8 @@ namespace ET.Client
             List<int> canGets = taskComponent.GetOpenTaskIds(self.NpcId);
             canGets.AddRange(self.GetAddtionTaskId(self.NpcId));
 
-            self.ShowNpcEffect(0, ABPathHelper.GetEffetPath("UIEffect/Effect_GetTask"), canGets.Count > 0 && taskProCompleted.Count == 0);
-            self.ShowNpcEffect(1, ABPathHelper.GetEffetPath("UIEffect/Effect_ComTask"), taskProCompleted.Count > 0);
+            self.ShowNpcEffect(0, ABPathHelper.GetEffetPath("UIEffect/10000001"), canGets.Count > 0 && taskProCompleted.Count == 0);
+            self.ShowNpcEffect(1, ABPathHelper.GetEffetPath("UIEffect/10000001"), taskProCompleted.Count > 0);
         }
 
         public static List<int> GetAddtionTaskId(this UINpcHpComponent self, int npcId)
@@ -223,7 +223,8 @@ namespace ET.Client
                 {
                     GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
                     go = UnityEngine.Object.Instantiate(prefab);
-                    CommonViewHelper.SetParent(go, self.GetParent<Unit>().GetComponent<HeroTransformComponent>().GetTranform(PosType.Head).gameObject);
+                    CommonViewHelper.SetParent(go,
+                        self.GetParent<Unit>().GetComponent<HeroTransformComponent>().GetTranform(PosType.Head).gameObject);
                     go.transform.localPosition = new Vector3(0f, 1f, 0f);
                     self.EffectComTask[type] = go;
                 }
