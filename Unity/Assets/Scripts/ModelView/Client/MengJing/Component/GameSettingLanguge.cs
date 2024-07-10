@@ -23,8 +23,9 @@ namespace ET.Client
                 Log.Warning("222222222");
                 var path_1 = ABPathHelper.GetTextPath("RandName_Xing");
                 var path_2 = ABPathHelper.GetTextPath("RandName_Name");
-                TextAsset textAsset1 = await ResourcesComponent.Instance.LoadAssetAsync<TextAsset>(path_1);
-                TextAsset textAsset2 = await ResourcesComponent.Instance.LoadAssetAsync<TextAsset>(path_2);
+                ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
+                TextAsset textAsset1 = await resourcesLoaderComponent.LoadAssetAsync<TextAsset>(path_1);
+                TextAsset textAsset2 = await resourcesLoaderComponent.LoadAssetAsync<TextAsset>(path_2);
                 self.LoadWWW_Xing(textAsset1.text);
                 self.LoadWWW_Name(textAsset2.text);
             }
