@@ -166,5 +166,6 @@ namespace ET.Client
 		WindowID_UnionDonationRecord,
 		WindowID_UnionMystery,
 		WindowID_UnionKeJi,
+		WindowID_JiaYuanMenu,
 	}
 }

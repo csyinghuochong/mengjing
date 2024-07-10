@@ -67,8 +67,8 @@ namespace ET.Client
 
             if (Input.GetKeyDown(KeyCode.R))
             {
-                CodeLoader.Instance.Reload();
-                return;
+                // CodeLoader.Instance.Reload();
+                // return;
             }
 
             if (Input.GetKeyDown(KeyCode.T))
