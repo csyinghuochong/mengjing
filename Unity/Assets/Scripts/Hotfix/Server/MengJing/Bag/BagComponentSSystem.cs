@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace ET.Server
@@ -576,7 +577,8 @@ namespace ET.Server
    }
 
    public static void OnLogin(this BagComponentS self, int robotId)
-   {
+   {  
+       Console.WriteLine("BagComponentS.OnLogin");
        Unit unit = self.GetParent<Unit>();
        int zodiacnumber = self.GetZodiacnumber();
        //unit.GetComponent<ChengJiuComponent>().TriggerEvent(ChengJiuTargetEnum.ZodiacEquipNumber_215, 0, zodiacnumber);
@@ -1464,6 +1466,13 @@ namespace ET.Server
        {
            return 0;
        }
+
+       if (self.QiangHuaLevel.Count == 0)
+       {
+           Console.WriteLine("self.QiangHuaLevel.Count == 0");
+           return 0;
+       }
+
        return self.QiangHuaLevel[subType];
    }
 

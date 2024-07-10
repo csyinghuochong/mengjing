@@ -28,6 +28,12 @@ namespace ET.Server
             int nowNum = 0;
             for (int i = 0; i < 4; i++)
             {
+                if (self.PetShouHuList.Count == 0)
+                {
+                    Console.WriteLine("self.PetShouHuList.Count == 0");
+                    break;
+                }
+
                 RolePetInfo rolePetInfoNow = self.GetPetInfo(self.PetShouHuList[i]);
                 if (rolePetInfoNow == null)
                 {
@@ -274,6 +280,7 @@ namespace ET.Server
 
         public static void OnLogin(this PetComponentS self)
         {
+            Console.WriteLine("PetComponentS.OnLogin");
             self.InitPetInfo();
             self.CheckSkin();
             self.CheckPetPingFen();
