@@ -2,20 +2,21 @@
 {
     public interface ISingletonReverseDispose
     {
+        
     }
-
+    
     public abstract class ASingleton: DisposeObject
     {
         internal abstract void Register();
     }
-
-    public abstract class Singleton<T>: ASingleton where T : Singleton<T>
+    
+    public abstract class Singleton<T>: ASingleton where T: Singleton<T>
     {
         private bool isDisposed;
-
+        
         [StaticField]
         private static T instance;
-
+        
         [StaticField]
         public static T Instance
         {
@@ -41,6 +42,7 @@
 
         protected virtual void Destroy()
         {
+            
         }
 
         public override void Dispose()
@@ -49,11 +51,11 @@
             {
                 return;
             }
-
+            
             this.isDisposed = true;
 
             this.Destroy();
-
+            
             Instance = null;
         }
     }

@@ -209,7 +209,7 @@ namespace ET.Server
         public static void Broadcast(Unit unit, IMessage message)
         {
             (message as MessageObject).IsFromPool = false;
-            Dictionary<long, AOIEntity> dict = unit.GetBeSeePlayers();
+            Dictionary<long, EntityRef<AOIEntity>> dict = unit.GetBeSeePlayers();
             // 网络底层做了优化，同一个消息不会多次序列化
             MessageLocationSenderOneType oneTypeMessageLocationType =
                     unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession);
@@ -229,7 +229,7 @@ namespace ET.Server
             }
 
             ///0 全部 1 队友
-            Dictionary<long, AOIEntity> dict = unit.GetBeSeePlayers();
+            Dictionary<long, EntityRef<AOIEntity>>  dict = unit.GetBeSeePlayers();
             //(ushort opcode, MemoryStream stream) = MessageSerializeHelper.MessageToStream(message);
 
             foreach (AOIEntity u in dict.Values)

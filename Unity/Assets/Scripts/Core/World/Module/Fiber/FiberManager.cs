@@ -65,11 +65,6 @@ namespace ET
         {
             try
             {
-                if (sceneType == SceneType.None)
-                {
-                    Log.Error("11");;
-                }
-
                 Fiber fiber = new(fiberId, zone, sceneType, name);
 
                 if (!this.fibers.TryAdd(fiberId, fiber))
@@ -93,7 +88,7 @@ namespace ET
                         Log.Error($"init fiber fail: {sceneType} {e}");
                     }
                 });
-                
+
                 await tcs.Task;
                 return fiberId;
             }

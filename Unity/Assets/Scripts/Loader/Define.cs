@@ -5,8 +5,8 @@
         /// <summary>
         /// 编辑器下加载热更dll的目录
         /// </summary>
-        public const string CodeDir = "Assets/Bundles/Code/";
-
+        public const string CodeDir = "Assets/Bundles/Code";
+        
         /// <summary>
         /// VS或Rider工程生成dll的所在目录, 使用HybridCLR打包时需要使用
         /// </summary>
@@ -24,16 +24,18 @@
         public static bool IsAsync = true;
 #endif
 
+            //et8.1 to remove
+#if ENABLE_DLL
+            public static bool EnableDll = true;
+#else
+        public static bool EnableDll = false;
+#endif
+            
+            
 #if UNITY_EDITOR
         public static bool IsEditor = true;
 #else
         public static bool IsEditor = false;
-#endif
-
-#if ENABLE_DLL
-        public static bool EnableDll = true;
-#else
-        public static bool EnableDll = false;
 #endif
 
 #if ENABLE_VIEW

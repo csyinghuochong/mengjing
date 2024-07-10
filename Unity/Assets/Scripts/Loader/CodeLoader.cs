@@ -13,9 +13,11 @@ namespace ET
 
         private Dictionary<string, TextAsset> dlls;
         private Dictionary<string, TextAsset> aotDlls;
-
+        private bool enableDll;
+        
         public void Awake()
-        {
+        { 
+            this.enableDll = Resources.Load<GlobalConfig>("GlobalConfig").EnableDll;
         }
 
         public async ETTask DownloadAsync()
@@ -29,62 +31,62 @@ namespace ET
 
         public void Start()
         {
-            if (!Define.EnableDll)
+            byte[] assBytes;
+            byte[] pdbBytes;
+            if (!Define.IsEditor)
             {
-                GlobalConfig globalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
-                if (globalConfig.CodeMode != CodeMode.ClientServer)
-                {
-                    throw new Exception("!ENABLE_DLL mode must use ClientServer code mode!");
-                }
+                assBytes = this.dlls["Model.dll"].bytes;
+                pdbBytes = this.dlls["Model.pdb"].bytes;
 
-                Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                // 如果需要测试，可替换成下面注释的代码直接加载Assets/Bundles/Code/Model.dll.bytes，但真正打包时必须使用上面的代码
+                //assBytes = File.ReadAllBytes(Path.Combine(Define.CodeDir, "Model.dll.bytes"));
+                //pdbBytes = File.ReadAllBytes(Path.Combine(Define.CodeDir, "Model.pdb.bytes"));
 
-                foreach (Assembly ass in assemblies)
+                if (Define.EnableIL2CPP)
                 {
-                    string name = ass.GetName().Name;
-                    if (name == "Unity.Model")
+                    foreach (var kv in this.aotDlls)
                     {
-                        this.assembly = ass;
-                        break;
+                        TextAsset textAsset = kv.Value;
+                        RuntimeApi.LoadMetadataForAOTAssembly(textAsset.bytes, HomologousImageMode.SuperSet);
                     }
+                    this.assembly = Assembly.Load(assBytes, pdbBytes);
                 }
-
-                World.Instance.AddSingleton<CodeTypes, Assembly[]>(assemblies);
             }
             else
             {
-                byte[] assBytes;
-                byte[] pdbBytes;
-                if (!Define.IsEditor)
+                if (this.enableDll)
                 {
-                    assBytes = this.dlls["Model.dll"].bytes;
-                    pdbBytes = this.dlls["Model.pdb"].bytes;
-
-                    // 如果需要测试，可替换成下面注释的代码直接加载Assets/Bundles/Code/Model.dll.bytes，但真正打包时必须使用上面的代码
-                    //assBytes = File.ReadAllBytes(Path.Combine(Define.CodeDir, "Model.dll.bytes"));
-                    //pdbBytes = File.ReadAllBytes(Path.Combine(Define.CodeDir, "Model.pdb.bytes"));
-
-                    if (Define.EnableIL2CPP)
+                    GlobalConfig globalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
+                    if (globalConfig.CodeMode != CodeMode.ClientServer)
                     {
-                        foreach (var kv in this.aotDlls)
+                        throw new Exception("!ENABLE_DLL mode must use ClientServer code mode!");
+                    }
+
+                    Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+                    foreach (Assembly ass in assemblies)
+                    {
+                        string name = ass.GetName().Name;
+                        if (name == "Unity.Model")
                         {
-                            TextAsset textAsset = kv.Value;
-                            RuntimeApi.LoadMetadataForAOTAssembly(textAsset.bytes, HomologousImageMode.SuperSet);
+                            this.assembly = ass;
+                            break;
                         }
                     }
+
+                    World.Instance.AddSingleton<CodeTypes, Assembly[]>(assemblies);
                 }
                 else
                 {
                     assBytes = File.ReadAllBytes(Path.Combine(Define.CodeDir, "Model.dll.bytes"));
                     pdbBytes = File.ReadAllBytes(Path.Combine(Define.CodeDir, "Model.pdb.bytes"));
+                    this.assembly = Assembly.Load(assBytes, pdbBytes);
                 }
-
-                this.assembly = Assembly.Load(assBytes, pdbBytes);
-
-                Assembly hotfixAssembly = this.LoadHotfix();
-
-                World.Instance.AddSingleton<CodeTypes, Assembly[]>(new[] { typeof(World).Assembly, typeof(Init).Assembly, this.assembly, hotfixAssembly });
             }
+            
+            Assembly hotfixAssembly = this.LoadHotfix();
+
+            World.Instance.AddSingleton<CodeTypes, Assembly[]>(new[] { typeof(World).Assembly, typeof(Init).Assembly, this.assembly, hotfixAssembly });
 
             IStaticMethod start = new StaticMethod(this.assembly, "ET.Entry", "Start");
             start.Run();
