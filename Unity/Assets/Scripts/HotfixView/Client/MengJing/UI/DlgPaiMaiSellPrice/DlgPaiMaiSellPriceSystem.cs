@@ -117,7 +117,7 @@ namespace ET.Client
                 if (nowPrice < (int)(oldPrice * 0.5f))
                 {
                     FlyTipComponent.Instance.ShowFlyTipDi(
-                        GameSettingLanguge.LoadLocalization("出售价格过低,当前最低价格为:" + (int)(oldPrice * 0.5f) * paiMaiItemInfo.BagInfo.ItemNum));
+                        GameSettingLanguge.Instance.LoadLocalization("出售价格过低,当前最低价格为:" + (int)(oldPrice * 0.5f) * paiMaiItemInfo.BagInfo.ItemNum));
                     return;
                 }
             }
@@ -180,7 +180,7 @@ namespace ET.Client
             if (self.priceProNum >= 10)
             {
                 self.priceProNum = 10;
-                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.LoadLocalization("如需再提高价格,请手动修改价格!"));
+                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.Instance.LoadLocalization("如需再提高价格,请手动修改价格!"));
             }
 
             self.nowPrice = (int)(self.oldPrice * (1f + 0.1f * self.priceProNum));

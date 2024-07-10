@@ -83,7 +83,7 @@ namespace ET.Client
             self.E_ImagePetHeadIconImage.sprite = sp;
             self.E_Lab_PetNameText.text = rolePetInfo.PetName;
             Unit pet = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(rolePetInfo.Id);
-            self.E_Lab_PetLvText.text = GameSettingLanguge.LoadLocalization("等级") + ":" + rolePetInfo.PetLv;
+            self.E_Lab_PetLvText.text = GameSettingLanguge.Instance.LoadLocalization("等级") + ":" + rolePetInfo.PetLv;
             self.OnUpdatePetHP(pet);
         }
 
@@ -96,7 +96,7 @@ namespace ET.Client
         //角色经验更新
         public static void UpdateShowRoleExp(this ES_RoleHead self)
         {
-            self.E_RoleLvText.text = GameSettingLanguge.LoadLocalization("等级") + ":" + self.UserInfoComponent.UserInfo.Lv;
+            self.E_RoleLvText.text = GameSettingLanguge.Instance.LoadLocalization("等级") + ":" + self.UserInfoComponent.UserInfo.Lv;
         }
 
         //角色疲劳更新
@@ -104,7 +104,7 @@ namespace ET.Client
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int maxPiLao = unit.GetMaxPiLao();
-            self.E_RolePiLaoText.text = GameSettingLanguge.LoadLocalization("体力:") + self.UserInfoComponent.UserInfo.PiLao + "/" + maxPiLao;
+            self.E_RolePiLaoText.text = GameSettingLanguge.Instance.LoadLocalization("体力:") + self.UserInfoComponent.UserInfo.PiLao + "/" + maxPiLao;
             self.E_RolePiLaoImgImage.fillAmount = 1f * self.UserInfoComponent.UserInfo.PiLao / maxPiLao;
         }
 
@@ -116,7 +116,7 @@ namespace ET.Client
             int skillNumber = 1 + numericComponent.GetAsInt(NumericType.MakeType_2) > 0? 1 : 0;
             int maxPiLao = unit.GetMaxHuoLi(skillNumber);
 
-            self.E_RoleHuoLiText.text = GameSettingLanguge.LoadLocalization("活力:") + self.UserInfoComponent.UserInfo.Vitality + "/" + maxPiLao;
+            self.E_RoleHuoLiText.text = GameSettingLanguge.Instance.LoadLocalization("活力:") + self.UserInfoComponent.UserInfo.Vitality + "/" + maxPiLao;
             self.E_RoleHuoLiImgImage.fillAmount = 1f * self.UserInfoComponent.UserInfo.Vitality / maxPiLao;
         }
 

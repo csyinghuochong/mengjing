@@ -16,6 +16,7 @@ namespace ET.Client
             self.View.E_CloseButton.AddListener(self.OnCloseButton);
             self.View.E_RandomNameButton.AddListener(self.OnRandomNameButton);
             self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+            self.View.E_CreateRoleNameInputField.onValueChanged.AddListener((string text) => { self.CheckSensitiveWords(); });
         }
 
         public static void ShowWindow(this DlgCreateRole self, Entity contextData = null)
@@ -37,24 +38,50 @@ namespace ET.Client
             self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
         }
 
+        public static void CheckSensitiveWords(this DlgCreateRole self)
+        {
+            string text_new = "";
+            string text_old = self.View.E_CreateRoleNameInputField.text;
+            MaskWordHelper.Instance.IsContainSensitiveWords(ref text_old, out text_new);
+            text_old = text_old.Replace("*", "");
+            self.View.E_CreateRoleNameInputField.text = text_old;
+        }
+
         private static void OnRandomNameButton(this DlgCreateRole self)
         {
-            self.View.E_CreateRoleNameInputField.text = $"玩家{RandomHelper.NextInt(0, 1000)}";
+            string randomNameStr = "";
+            int xingXuHaoMax = GameSettingLanguge.Instance.randomName_xing.Length - 1;
+            int nameXuHaoMax = GameSettingLanguge.Instance.randomName_name.Length - 1;
+            int xingXuHao = RandomHelper.NextInt(0, xingXuHaoMax);
+            int nameXuHao = RandomHelper.NextInt(0, nameXuHaoMax);
+            randomNameStr = GameSettingLanguge.Instance.randomName_xing[xingXuHao] + GameSettingLanguge.Instance.randomName_name[nameXuHao];
+
+            if (randomNameStr != "")
+            {
+                randomNameStr = randomNameStr.Replace("*", "");
+                self.View.E_CreateRoleNameInputField.text = randomNameStr;
+            }
         }
 
         private static async ETTask OnCreateRoleButton(this DlgCreateRole self)
         {
             string createName = self.View.E_CreateRoleNameInputField.text;
 
+            if (createName.Contains("*") || !StringHelper.IsSpecialChar(createName))
+            {
+                FlyTipComponent.Instance.ShowFlyTipDi("名字不合法!");
+                return;
+            }
+
             if (string.IsNullOrEmpty(createName))
             {
-                Log.Error("请输入名字！！！");
+                FlyTipComponent.Instance.ShowFlyTipDi("请输入名字！！！");
                 return;
             }
 
             if (self.Occ == 0)
             {
-                Log.Error("请选择职业！！！");
+                FlyTipComponent.Instance.ShowFlyTipDi("请选择职业！！！");
                 return;
             }
 

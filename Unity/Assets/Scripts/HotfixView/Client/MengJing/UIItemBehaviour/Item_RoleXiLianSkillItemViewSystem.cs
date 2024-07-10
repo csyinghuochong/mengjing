@@ -26,7 +26,7 @@ namespace ET.Client
 
             var bundleGameObject = self.Root().GetComponent<ResourcesLoaderComponent>()
                     .LoadAssetSync<GameObject>("Assets/Bundles/UI/Item/Item_CommonSkillItem.prefab");
-            self.E_Text_XiLianNameText.text = equipXiLianConfig.Title + GameSettingLanguge.LoadLocalization("额外增加概率出现的特殊属性");
+            self.E_Text_XiLianNameText.text = equipXiLianConfig.Title + GameSettingLanguge.Instance.LoadLocalization("额外增加概率出现的特殊属性");
             List<KeyValuePairInt> xilianSkill = XiLianHelper.GetLevelSkill(equipXiLianConfig.XiLianLevel);
 
             int row = (xilianSkill.Count / 8);

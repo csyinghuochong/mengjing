@@ -117,7 +117,7 @@ namespace ET.Client
         {
             string text_new = "";
             string text_old = InputField.GetComponent<InputField>().text;
-            MaskWordComponent.Instance.IsContainSensitiveWords(ref text_old, out text_new);
+            MaskWordHelper.Instance.IsContainSensitiveWords(ref text_old, out text_new);
             InputField.GetComponent<InputField>().text = text_old;
         }
 
@@ -130,7 +130,7 @@ namespace ET.Client
         public static async ETTask RequestCreateUnion(this ES_UnionShow self)
         {
             string unionName = self.E_InputFieldNameInputField.text;
-            bool mask = MaskWordComponent.Instance.IsContainSensitiveWords(unionName);
+            bool mask = MaskWordHelper.Instance.IsContainSensitiveWords(unionName);
             if (mask || !StringHelper.IsSpecialChar(unionName))
             {
                 FlyTipComponent.Instance.ShowFlyTipDi("家族名字有特殊字符！");

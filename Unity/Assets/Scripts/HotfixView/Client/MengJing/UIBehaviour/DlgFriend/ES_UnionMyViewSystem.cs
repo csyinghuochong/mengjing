@@ -91,7 +91,7 @@ namespace ET.Client
         public static async ETTask OnButtonModify(this ES_UnionMy self)
         {
             string text = self.E_InputFieldPurposeInputField.text;
-            bool mask = MaskWordComponent.Instance.IsContainSensitiveWords(text);
+            bool mask = MaskWordHelper.Instance.IsContainSensitiveWords(text);
             if (mask)
             {
                 FlyTipComponent.Instance.ShowFlyTipDi("输入不合法!");
@@ -121,7 +121,7 @@ namespace ET.Client
         {
             string text_new = "";
             string text_old = self.E_InputFieldNameInputField.text;
-            MaskWordComponent.Instance.IsContainSensitiveWords(ref text_old, out text_new);
+            MaskWordHelper.Instance.IsContainSensitiveWords(ref text_old, out text_new);
             self.E_InputFieldNameInputField.text = text_old;
         }
 
@@ -129,7 +129,7 @@ namespace ET.Client
         {
             string text_new = "";
             string text_old = self.E_InputFieldPurposeInputField.text;
-            MaskWordComponent.Instance.IsContainSensitiveWords(ref text_old, out text_new);
+            MaskWordHelper.Instance.IsContainSensitiveWords(ref text_old, out text_new);
             self.E_InputFieldPurposeInputField.text = text_old;
             self.E_ButtonModifyButton.gameObject.SetActive(true);
         }
@@ -137,7 +137,7 @@ namespace ET.Client
         public static async ETTask OnButtonName(this ES_UnionMy self)
         {
             string text = self.E_InputFieldNameInputField.text;
-            bool mask = MaskWordComponent.Instance.IsContainSensitiveWords(text);
+            bool mask = MaskWordHelper.Instance.IsContainSensitiveWords(text);
             if (mask)
             {
                 FlyTipComponent.Instance.ShowFlyTipDi("请重新输入！");

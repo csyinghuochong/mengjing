@@ -237,7 +237,7 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.MakeList.Contains(self.MakeId))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.LoadLocalization("已经学习过该道具!"));
+                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.Instance.LoadLocalization("已经学习过该道具!"));
                 return;
             }
 
@@ -245,7 +245,7 @@ namespace ET.Client
             if (response.Error == 0)
             {
                 self.InitData(self.MakeType);
-                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.LoadLocalization("学习配方成功!"));
+                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.Instance.LoadLocalization("学习配方成功!"));
             }
         }
     }

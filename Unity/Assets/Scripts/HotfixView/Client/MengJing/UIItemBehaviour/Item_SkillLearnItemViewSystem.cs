@@ -159,7 +159,7 @@ namespace ET.Client
             self.E_Lab_SkillNameText.text = skillConfig.SkillName;
             self.E_Img_SkillIconImage.sprite = sp;
 
-            self.E_Lab_SkillLvText.text = GameSettingLanguge.LoadLocalization("等级 ") + skillConfig.SkillLv;
+            self.E_Lab_SkillLvText.text = GameSettingLanguge.Instance.LoadLocalization("等级 ") + skillConfig.SkillLv;
 
             if (skillBaseConfig.SkillLv == 0)
             {

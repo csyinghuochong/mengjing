@@ -1314,7 +1314,7 @@ namespace ET.Client
 
         public static void OnBtn_RerurnDungeon(this DlgMain self)
         {
-            PopupTipHelp.OpenPopupTip(self.Root(), "返回副本", GameSettingLanguge.LoadLocalization("移动次数消耗完毕,请返回副本!"),
+            PopupTipHelp.OpenPopupTip(self.Root(), "返回副本", GameSettingLanguge.Instance.LoadLocalization("移动次数消耗完毕,请返回副本!"),
                 () =>
                 {
                     int sceneid = self.Root().GetComponent<BattleMessageComponent>().LastDungeonId;
@@ -1348,7 +1348,7 @@ namespace ET.Client
                 tipStr = "现在离开战场,将不会获得战场胜利的奖励哦";
             }
 
-            PopupTipHelp.OpenPopupTip(self.Root(), "", GameSettingLanguge.LoadLocalization(tipStr),
+            PopupTipHelp.OpenPopupTip(self.Root(), "", GameSettingLanguge.Instance.LoadLocalization(tipStr),
                 () => { EnterMapHelper.RequestQuitFuben(self.Root()); },
                 null).Coroutine();
         }
@@ -1562,7 +1562,7 @@ namespace ET.Client
                     // self.CheckFuntionButtonByLv(int.Parse(updateValue));
                     FunctionEffect.PlaySelfEffect(self.MainUnit, 60000002);
                     // self.Root().GetComponent<GuideComponent>().OnTrigger(GuideTriggerType.LevelUp, userInfo.Lv.ToString());
-                    FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.LoadLocalization("恭喜你!等级提升至:") + userInfo.Lv);
+                    FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.Instance.LoadLocalization("恭喜你!等级提升至:") + userInfo.Lv);
                     self.UpdateLvReward();
                     // self.CheckCanEquip().Coroutine();
                     // if (int.Parse(updateValue) > 30)

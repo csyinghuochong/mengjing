@@ -26,7 +26,7 @@ namespace ET.Client
             if (createRoleInfo != null)
             {
                 self.E_RoleNameText.text = createRoleInfo.PlayerName;
-                self.E_RoleLvText.text = GameSettingLanguge.LoadLocalization("等级:") + createRoleInfo.PlayerLv;
+                self.E_RoleLvText.text = GameSettingLanguge.Instance.LoadLocalization("等级:") + createRoleInfo.PlayerLv;
                 if (createRoleInfo.OccTwo > 0)
                 {
                     OccupationTwoConfig occupationTwo = OccupationTwoConfigCategory.Instance.Get(createRoleInfo.OccTwo);

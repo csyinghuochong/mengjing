@@ -93,7 +93,7 @@ namespace ET.Client
 
                 self.E_Img_CanZhanImage.gameObject.SetActive(rolePetInfo.PetStatus == 1);
                 self.E_Lab_PetNameText.text = rolePetInfo.PetName;
-                self.E_Lab_PetLvText.text = rolePetInfo.PetLv.ToString() + GameSettingLanguge.LoadLocalization("级");
+                self.E_Lab_PetLvText.text = rolePetInfo.PetLv.ToString() + GameSettingLanguge.Instance.LoadLocalization("级");
 
                 self.E_Lab_PetQualityText.text = CommonViewHelper.GetPetQualityName(petConfig.PetQuality);
                 self.E_Lab_PetQualityText.color = CommonViewHelper.QualityReturnColor(petConfig.PetQuality);

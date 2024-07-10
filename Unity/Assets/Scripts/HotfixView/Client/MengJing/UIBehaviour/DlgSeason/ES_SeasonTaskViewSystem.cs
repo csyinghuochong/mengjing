@@ -246,11 +246,11 @@ namespace ET.Client
                     taskConfig.TargetType == (int)TaskTargetType.JianDingAttrNumber_43 ||
                     taskConfig.TargetType == (int)TaskTargetType.MakeQulityNumber_29)
                 {
-                    self.E_ProgressTextText.text = GameSettingLanguge.LoadLocalization("当前进度值") + ": " + "1/1";
+                    self.E_ProgressTextText.text = GameSettingLanguge.Instance.LoadLocalization("当前进度值") + ": " + "1/1";
                 }
                 else
                 {
-                    self.E_ProgressTextText.text = GameSettingLanguge.LoadLocalization("当前进度值") + ": " +
+                    self.E_ProgressTextText.text = GameSettingLanguge.Instance.LoadLocalization("当前进度值") + ": " +
                             $"{taskPro.taskTargetNum_1}/{taskConfig.TargetValue[0]}";
                 }
 
@@ -263,7 +263,7 @@ namespace ET.Client
                 // 进行中
                 if (taskConfig.TargetType == (int)TaskTargetType.GiveItem_10 || taskConfig.TargetType == (int)TaskTargetType.GivePet_25)
                 {
-                    self.E_ProgressTextText.text = GameSettingLanguge.LoadLocalization("当前进度值") + ": " + "0/1";
+                    self.E_ProgressTextText.text = GameSettingLanguge.Instance.LoadLocalization("当前进度值") + ": " + "0/1";
                     self.E_GetBtnButton.gameObject.SetActive(false);
                     self.E_GiveBtnButton.gameObject.SetActive(true);
                 }
@@ -273,20 +273,20 @@ namespace ET.Client
                 {
                     if (self.TaskPro.taskStatus == (int)TaskStatuEnum.Completed)
                     {
-                        self.E_ProgressTextText.text = GameSettingLanguge.LoadLocalization("当前进度值") + ": " + "1/1";
+                        self.E_ProgressTextText.text = GameSettingLanguge.Instance.LoadLocalization("当前进度值") + ": " + "1/1";
                         self.E_GetBtnButton.gameObject.SetActive(false);
                         self.E_GiveBtnButton.gameObject.SetActive(false);
                     }
                     else
                     {
-                        self.E_ProgressTextText.text = GameSettingLanguge.LoadLocalization("当前进度值") + ": " + "0/1";
+                        self.E_ProgressTextText.text = GameSettingLanguge.Instance.LoadLocalization("当前进度值") + ": " + "0/1";
                         self.E_GetBtnButton.gameObject.SetActive(true);
                         self.E_GiveBtnButton.gameObject.SetActive(false);
                     }
                 }
                 else
                 {
-                    self.E_ProgressTextText.text = GameSettingLanguge.LoadLocalization("当前进度值") + ": " +
+                    self.E_ProgressTextText.text = GameSettingLanguge.Instance.LoadLocalization("当前进度值") + ": " +
                             $"{self.TaskPro.taskTargetNum_1}/{taskConfig.TargetValue[0]}";
                     self.E_GetBtnButton.gameObject.SetActive(true);
                     self.E_GiveBtnButton.gameObject.SetActive(false);
@@ -320,11 +320,11 @@ namespace ET.Client
                     taskConfig.TargetType == (int)TaskTargetType.JianDingAttrNumber_43 ||
                     taskConfig.TargetType == (int)TaskTargetType.MakeQulityNumber_29)
                 {
-                    self.E_ProgressTextText.text = GameSettingLanguge.LoadLocalization("当前进度值") + ": " + "1/1";
+                    self.E_ProgressTextText.text = GameSettingLanguge.Instance.LoadLocalization("当前进度值") + ": " + "1/1";
                 }
                 else
                 {
-                    self.E_ProgressTextText.text = GameSettingLanguge.LoadLocalization("当前进度值") + ": " +
+                    self.E_ProgressTextText.text = GameSettingLanguge.Instance.LoadLocalization("当前进度值") + ": " +
                             $"{taskConfig.TargetValue[0]}/{taskConfig.TargetValue[0]}";
                 }
 
@@ -337,7 +337,7 @@ namespace ET.Client
                 // 进行中
                 if (taskConfig.TargetType == (int)TaskTargetType.GiveItem_10 || taskConfig.TargetType == (int)TaskTargetType.GivePet_25)
                 {
-                    self.E_ProgressTextText.text = GameSettingLanguge.LoadLocalization("当前进度值") + ": " + "0/1";
+                    self.E_ProgressTextText.text = GameSettingLanguge.Instance.LoadLocalization("当前进度值") + ": " + "0/1";
                     self.E_GetBtnButton.gameObject.SetActive(false);
                     self.E_GiveBtnButton.gameObject.SetActive(true);
                 }
@@ -347,20 +347,20 @@ namespace ET.Client
                 {
                     if (self.TaskPro.taskStatus == (int)TaskStatuEnum.Completed)
                     {
-                        self.E_ProgressTextText.text = GameSettingLanguge.LoadLocalization("当前进度值") + ": " + "1/1";
+                        self.E_ProgressTextText.text = GameSettingLanguge.Instance.LoadLocalization("当前进度值") + ": " + "1/1";
                         self.E_GetBtnButton.gameObject.SetActive(true);
                         self.E_GiveBtnButton.gameObject.SetActive(false);
                     }
                     else
                     {
-                        self.E_ProgressTextText.text = GameSettingLanguge.LoadLocalization("当前进度值") + ": " + "0/1";
+                        self.E_ProgressTextText.text = GameSettingLanguge.Instance.LoadLocalization("当前进度值") + ": " + "0/1";
                         self.E_GetBtnButton.gameObject.SetActive(true);
                         self.E_GiveBtnButton.gameObject.SetActive(false);
                     }
                 }
                 else
                 {
-                    self.E_ProgressTextText.text = GameSettingLanguge.LoadLocalization("当前进度值") + ": " +
+                    self.E_ProgressTextText.text = GameSettingLanguge.Instance.LoadLocalization("当前进度值") + ": " +
                             $"{self.TaskPro.taskTargetNum_1}/{taskConfig.TargetValue[0]}";
                     self.E_GetBtnButton.gameObject.SetActive(true);
                     self.E_GiveBtnButton.gameObject.SetActive(false);

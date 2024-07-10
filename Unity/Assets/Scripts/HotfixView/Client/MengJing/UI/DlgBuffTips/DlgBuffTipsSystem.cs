@@ -38,7 +38,7 @@ namespace ET.Client
             self.View.E_Lab_SkillNameText.text = skillBufConfig.BuffName;
             self.View.E_Lab_SkillDesText.text = skillBufConfig.BuffDescribe;
 
-            self.View.E_Lab_BuffTimeText.text = GameSettingLanguge.LoadLocalization("剩余时间") + ":" + showStr;
+            self.View.E_Lab_BuffTimeText.text = GameSettingLanguge.Instance.LoadLocalization("剩余时间") + ":" + showStr;
 
             self.View.EG_PositionNodeRectTransform.localPosition = vector3 + new Vector3(100, 0f, 0f);
             self.View.E_Lab_SpellcasterText.text = $"施法者：{spellcast}";

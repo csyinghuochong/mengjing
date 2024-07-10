@@ -28,7 +28,7 @@ namespace ET.Client
 
             self.E_Img_PetHeroIonImage.sprite = sp;
             self.E_Lab_PetNameText.text = rolePetInfo.PetName;
-            self.E_Lab_PetLvText.text = rolePetInfo.PetLv + GameSettingLanguge.LoadLocalization("级");
+            self.E_Lab_PetLvText.text = rolePetInfo.PetLv + GameSettingLanguge.Instance.LoadLocalization("级");
             self.E_Image_ProtectImage.gameObject.SetActive(rolePetInfo.IsProtect);
 
             self.E_ImageDiButtonButton.AddListener(self.OnClickPetItem);

@@ -95,16 +95,16 @@ namespace ET.Client
             }
 
             // 部位、类型
-            string textEquipType = GameSettingLanguge.LoadLocalization(ItemViewHelp.GetItemSubType3Name(itemConfig.ItemSubType));
+            string textEquipType = GameSettingLanguge.Instance.LoadLocalization(ItemViewHelp.GetItemSubType3Name(itemConfig.ItemSubType));
             string textEquipTypeSon = self.GetEquipType(itemConfig.EquipType);
             if (itemConfig.EquipType == 101) // 生肖
             {
                 textEquipType = self.GetEquipShengXiaoType(itemConfig.ItemSubType % 100);
-                textEquipTypeSon = GameSettingLanguge.LoadLocalization("生肖");
+                textEquipTypeSon = GameSettingLanguge.Instance.LoadLocalization("生肖");
             }
 
-            self.E_EquipTypeText.text = GameSettingLanguge.LoadLocalization("部位") + ":" + textEquipType;
-            self.E_EquipTypeSonText.text = GameSettingLanguge.LoadLocalization("类型") + ":" + textEquipTypeSon;
+            self.E_EquipTypeText.text = GameSettingLanguge.Instance.LoadLocalization("部位") + ":" + textEquipType;
+            self.E_EquipTypeSonText.text = GameSettingLanguge.Instance.LoadLocalization("类型") + ":" + textEquipTypeSon;
 
             int occTwo = self.Root().GetComponent<UserInfoComponentC>().UserInfo.OccTwo;
             if (occTwo != 0)
@@ -120,24 +120,24 @@ namespace ET.Client
             // 使用等级
             if (itemConfig.UseLv > self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv)
             {
-                self.E_EquipNeedLvText.text = GameSettingLanguge.LoadLocalization("等级") + " : " + itemConfig.UseLv + " (等级不足)";
+                self.E_EquipNeedLvText.text = GameSettingLanguge.Instance.LoadLocalization("等级") + " : " + itemConfig.UseLv + " (等级不足)";
                 self.E_EquipNeedLvText.color = new Color(255f / 255f, 200f / 255f, 200f / 255f);
             }
             else
             {
-                self.E_EquipNeedLvText.text = GameSettingLanguge.LoadLocalization("等级") + " : " + itemConfig.UseLv;
+                self.E_EquipNeedLvText.text = GameSettingLanguge.Instance.LoadLocalization("等级") + " : " + itemConfig.UseLv;
             }
 
             // 绑定
             if (self.BagInfo.isBinging)
             {
-                self.E_EquipBangDingText.text = GameSettingLanguge.LoadLocalization("已绑定");
+                self.E_EquipBangDingText.text = GameSettingLanguge.Instance.LoadLocalization("已绑定");
                 self.E_EquipBangDingText.color = new Color(175f / 255f, 1, 6f / 255f);
                 self.E_EquipBangDingImgImage.gameObject.SetActive(true);
             }
             else
             {
-                self.E_EquipBangDingText.text = GameSettingLanguge.LoadLocalization("未绑定");
+                self.E_EquipBangDingText.text = GameSettingLanguge.Instance.LoadLocalization("未绑定");
                 self.E_EquipBangDingText.color = new Color(255f / 255f, 240f / 255f, 200f / 255f);
                 self.E_EquipBangDingImgImage.gameObject.SetActive(false);
             }
@@ -483,7 +483,7 @@ namespace ET.Client
 
                     if (ifShowSuitNum == "0")
                     {
-                        string langStr = GameSettingLanguge.LoadLocalization("件套");
+                        string langStr = GameSettingLanguge.Instance.LoadLocalization("件套");
                         ItemViewHelp.ShowPropertyText(triggerSuitNum + langStr + "：" + equipSuitDes, showType,
                             self.E_EquipPropertyTextText.gameObject,
                             self.EG_EquipSuitSetListRectTransform.gameObject);
@@ -528,7 +528,7 @@ namespace ET.Client
 
                     SkillConfig skillconf = SkillConfigCategory.Instance.Get(int.Parse(skillID[i]));
                     string skillName = skillconf.SkillName;
-                    string showHintTxt = GameSettingLanguge.LoadLocalization("技能") + "：" + skillName;
+                    string showHintTxt = GameSettingLanguge.Instance.LoadLocalization("技能") + "：" + skillName;
                     ItemViewHelp.ShowPropertyText(showHintTxt, "4", self.E_EquipPropertyTextText.gameObject,
                         self.EG_EquipHintSkillRectTransform.gameObject);
                     properShowNum += 1;

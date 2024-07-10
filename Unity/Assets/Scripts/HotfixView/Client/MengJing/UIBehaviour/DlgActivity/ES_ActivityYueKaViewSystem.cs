@@ -99,7 +99,7 @@ namespace ET.Client
             if (error == 0)
             {
                 // 月卡开启成功
-                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.LoadLocalization("月卡开启成功"));
+                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.Instance.LoadLocalization("月卡开启成功"));
                 self.E_Img_JiHuoImage.gameObject.SetActive(true);
                 self.EG_BtnOpenYueKaSetRectTransform.gameObject.SetActive(false);
                 self.E_Btn_GetRewardButton.gameObject.SetActive(true);

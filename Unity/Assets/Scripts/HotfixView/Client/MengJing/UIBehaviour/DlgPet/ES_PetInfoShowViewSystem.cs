@@ -92,7 +92,7 @@ namespace ET.Client
 
             self.E_Img_PetHeroIonImage.sprite = sp;
 
-            self.E_Text_PetLevelText.text = rolePetInfo.PetLv + GameSettingLanguge.LoadLocalization("级");
+            self.E_Text_PetLevelText.text = rolePetInfo.PetLv + GameSettingLanguge.Instance.LoadLocalization("级");
             ExpConfig expConfig = ExpConfigCategory.Instance.Get(rolePetInfo.PetLv);
 
             string expStr = rolePetInfo.PetExp.ToString();
@@ -100,12 +100,12 @@ namespace ET.Client
 
             if (rolePetInfo.PetExp >= 10000)
             {
-                expStr = (int)(rolePetInfo.PetExp / 10000) + GameSettingLanguge.LoadLocalization("万");
+                expStr = (int)(rolePetInfo.PetExp / 10000) + GameSettingLanguge.Instance.LoadLocalization("万");
             }
 
             if (expConfig.UpExp >= 10000)
             {
-                upExpStr = (int)(expConfig.UpExp / 10000) + GameSettingLanguge.LoadLocalization("万");
+                upExpStr = (int)(expConfig.UpExp / 10000) + GameSettingLanguge.Instance.LoadLocalization("万");
             }
 
             self.E_Text_PetExpText.text = $"{expStr}/{upExpStr}";

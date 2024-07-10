@@ -24,7 +24,7 @@ namespace ET.Client
             self.E_ButtonChargeButton.AddListener(self.OnImageButton);
             self.RechargeNumber = recharge;
 
-            self.E_Text_giveText.text = GameSettingLanguge.LoadLocalization("赠送") + " " + giveNumber;
+            self.E_Text_giveText.text = GameSettingLanguge.Instance.LoadLocalization("赠送") + " " + giveNumber;
             self.EG_ZengSongRectTransform.gameObject.SetActive(giveNumber > 0);
             self.E_Text_ZuanShiText.text = (recharge * 100).ToString();
             self.E_Text_RMBText.text = "￥" + recharge;

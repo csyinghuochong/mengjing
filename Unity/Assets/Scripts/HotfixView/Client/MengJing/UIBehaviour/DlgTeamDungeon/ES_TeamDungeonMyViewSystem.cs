@@ -172,7 +172,7 @@ namespace ET.Client
             }
 
             self.E_Lab_FuBenNameText.text = sceneConfig.Name + addStr;
-            self.E_Lab_FuBenLvText.text = $"{GameSettingLanguge.LoadLocalization("等级")}: {sceneConfig.EnterLv} - 50";
+            self.E_Lab_FuBenLvText.text = $"{GameSettingLanguge.Instance.LoadLocalization("等级")}: {sceneConfig.EnterLv} - 50";
         }
     }
 }

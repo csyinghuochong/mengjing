@@ -33,7 +33,7 @@ namespace ET.Client
 			if (taskPro.taskStatus == (int)TaskStatuEnum.Completed)
 			{
 				self.E_TaskTargetDesText.color = Color.green;
-				self.E_TaskTargetDesText.text =self.E_TaskTargetDesText.text + " (" + GameSettingLanguge.LoadLocalization("已完成") + ")";
+				self.E_TaskTargetDesText.text =self.E_TaskTargetDesText.text + " (" + GameSettingLanguge.Instance.LoadLocalization("已完成") + ")";
 			}
 			else
 			{

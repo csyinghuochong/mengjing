@@ -5,18 +5,18 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (MaskWordComponent))]
-    [EntitySystemOf(typeof (MaskWordComponent))]
-    public static partial class MaskWordComponentSystem
+    [FriendOf(typeof (MaskWordHelper))]
+    [EntitySystemOf(typeof (MaskWordHelper))]
+    public static partial class MaskWordHelperSystem
     {
         [EntitySystem]
-        private static void Awake(this MaskWordComponent self)
+        private static void Awake(this MaskWordHelper self)
         {
-            MaskWordComponent.Instance = self;
+            MaskWordHelper.Instance = self;
             self.InitMaskWord().Coroutine();
         }
 
-        private static async ETTask InitMaskWord(this MaskWordComponent self)
+        private static async ETTask InitMaskWord(this MaskWordHelper self)
         {
             self.keyDict.Clear();
             await self.InitMaskWordText("MaskWord", "、");
@@ -24,7 +24,7 @@ namespace ET.Client
             await self.InitMaskWordText("MaskWord3", "、");
         }
 
-        private static async ETTask InitMaskWordText(this MaskWordComponent self, string maskword, string split)
+        private static async ETTask InitMaskWordText(this MaskWordHelper self, string maskword, string split)
         {
             var path_1 = ABPathHelper.GetTextPath(maskword);
             TextAsset textAsset3 = await self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetAsync<TextAsset>(path_1);
@@ -43,7 +43,7 @@ namespace ET.Client
         }
 
         //判断一个字符串是否包含敏感词，包括含的话将其替换为*
-        public static bool IsContainSensitiveWords(this MaskWordComponent self, string text)
+        public static bool IsContainSensitiveWords(this MaskWordHelper self, string text)
         {
             bool isFind = false;
             if (null == self.sensitiveWordsArray || string.IsNullOrEmpty(text))
@@ -89,7 +89,7 @@ namespace ET.Client
         }
 
         //判断一个字符串是否包含敏感词，包括含的话将其替换为*
-        public static bool IsContainSensitiveWords(this MaskWordComponent self, ref string text, out string SensitiveWords)
+        public static bool IsContainSensitiveWords(this MaskWordHelper self, ref string text, out string SensitiveWords)
         {
             bool isFind = false;
             SensitiveWords = "";
@@ -138,5 +138,16 @@ namespace ET.Client
 
             return isFind;
         }
+    }
+
+    [ComponentOf(typeof (Scene))]
+    public class MaskWordHelper: Entity, IAwake
+    {
+        public string MaskWord;
+        public string[] sensitiveWordsArray = null;
+        public Dictionary<char, IList<string>> keyDict = new();
+
+        [StaticField]
+        public static MaskWordHelper Instance;
     }
 }

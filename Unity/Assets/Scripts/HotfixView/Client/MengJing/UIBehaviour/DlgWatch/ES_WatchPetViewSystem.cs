@@ -187,7 +187,7 @@ namespace ET.Client
             if (petConfig.PripertyShow != "" && petConfig.PripertyShow != "0")
             {
                 self.E_PropertyShowTextText.gameObject.SetActive(true);
-                self.E_PropertyShowTextText.text = GameSettingLanguge.LoadLocalization("激活属性") + ":" + petConfig.PripertyShow;
+                self.E_PropertyShowTextText.text = GameSettingLanguge.Instance.LoadLocalization("激活属性") + ":" + petConfig.PripertyShow;
             }
             else
             {
@@ -807,7 +807,7 @@ namespace ET.Client
 
         private static void UpdateExpAndLv(this ES_WatchPet self, RolePetInfo rolePetInfo)
         {
-            self.E_Text_PetLevelText.text = rolePetInfo.PetLv.ToString() + GameSettingLanguge.LoadLocalization("级");
+            self.E_Text_PetLevelText.text = rolePetInfo.PetLv.ToString() + GameSettingLanguge.Instance.LoadLocalization("级");
             ExpConfig expConfig = ExpConfigCategory.Instance.Get(rolePetInfo.PetLv);
             self.E_Text_PetExpText.text = string.Format("{0}/{1}", rolePetInfo.PetExp, expConfig.PetUpExp);
             self.E_ImageExpValueImage.transform.localScale = new Vector3(Mathf.Clamp(rolePetInfo.PetExp * 1f / expConfig.PetUpExp, 0f, 1f), 1f, 1f);

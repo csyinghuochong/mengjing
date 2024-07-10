@@ -181,7 +181,7 @@ namespace ET.Client
             //    FloatTipManager.Instance.ShowFloatTip("当前宠物存在于宠物矿场队伍中,不能分解！");
             //    return;
             //}
-            PopupTipHelp.OpenPopupTip(self.Root(), "", GameSettingLanguge.LoadLocalization("确定放生?"),
+            PopupTipHelp.OpenPopupTip(self.Root(), "", GameSettingLanguge.Instance.LoadLocalization("确定放生?"),
                 () => { PetNetHelper.RequestFenJie(self.Root(), self.LastSelectItem.Id).Coroutine(); },
                 null).Coroutine();
         }
@@ -218,7 +218,7 @@ namespace ET.Client
         {
             string text_new = "";
             string text_old = self.E_InputFieldNameInputField.text;
-            MaskWordComponent.Instance.IsContainSensitiveWords(ref text_old, out text_new);
+            MaskWordHelper.Instance.IsContainSensitiveWords(ref text_old, out text_new);
             self.E_InputFieldNameInputField.GetComponent<InputField>().text = text_old;
         }
 
@@ -237,7 +237,7 @@ namespace ET.Client
                 return;
             }
 
-            bool mask = MaskWordComponent.Instance.IsContainSensitiveWords(text_old);
+            bool mask = MaskWordHelper.Instance.IsContainSensitiveWords(text_old);
             if (mask)
             {
                 FlyTipComponent.Instance.ShowFlyTipDi("请重新输入！");
@@ -333,7 +333,7 @@ namespace ET.Client
             if (petConfig.PripertyShow != "" && petConfig.PripertyShow != "0")
             {
                 self.E_PropertyShowTextText.gameObject.SetActive(true);
-                self.E_PropertyShowTextText.text = GameSettingLanguge.LoadLocalization("激活属性") + ":" + petConfig.PripertyShow;
+                self.E_PropertyShowTextText.text = GameSettingLanguge.Instance.LoadLocalization("激活属性") + ":" + petConfig.PripertyShow;
             }
             else
             {
@@ -947,7 +947,7 @@ namespace ET.Client
 
         private static void UpdateExpAndLv(this ES_PetList self, RolePetInfo rolePetInfo)
         {
-            self.E_Text_PetLevelText.text = rolePetInfo.PetLv.ToString() + GameSettingLanguge.LoadLocalization("级");
+            self.E_Text_PetLevelText.text = rolePetInfo.PetLv.ToString() + GameSettingLanguge.Instance.LoadLocalization("级");
             ExpConfig expConfig = ExpConfigCategory.Instance.Get(rolePetInfo.PetLv);
             self.E_Text_PetExpText.text = string.Format("{0}/{1}", rolePetInfo.PetExp, expConfig.PetUpExp);
             self.E_ImageExpValueImage.transform.localScale = new Vector3(Mathf.Clamp(rolePetInfo.PetExp * 1f / expConfig.PetUpExp, 0f, 1f), 1f, 1f);

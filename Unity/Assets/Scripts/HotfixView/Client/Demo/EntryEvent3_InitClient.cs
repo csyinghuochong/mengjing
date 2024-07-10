@@ -11,11 +11,12 @@ namespace ET.Client
         {
             Log.Debug("EntryEvent3_InitClient");
             GlobalComponent globalComponent = root.AddComponent<GlobalComponent>();
+            root.AddComponent<ResourcesLoaderComponent>();
+            root.AddComponent<MaskWordHelper>();
+            root.AddComponent<GameSettingLanguge>();
             root.AddComponent<UIPathComponent>();
             root.AddComponent<UIEventComponent>();
             root.AddComponent<UIComponent>();
-
-            root.AddComponent<ResourcesLoaderComponent>();
             root.AddComponent<PlayerComponent>();
             root.AddComponent<CurrentScenesComponent>();
             root.AddComponent<BagComponentC>();
@@ -29,7 +30,6 @@ namespace ET.Client
             root.AddComponent<PetComponentC>();
             root.AddComponent<SkillSetComponentC>();
             root.AddComponent<ChengJiuComponentC>();
-            root.AddComponent<MaskWordComponent>();
             root.AddComponent<LockTargetComponent>();
             root.AddComponent<FallingFontComponent>();
             root.AddComponent<SkillIndicatorComponent>();

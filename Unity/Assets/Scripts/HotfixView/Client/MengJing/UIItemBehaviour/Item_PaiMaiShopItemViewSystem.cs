@@ -75,7 +75,7 @@ namespace ET.Client
                 self.E_Lab_TipsText.color = new Color(137f / 255f, 89f / 255f, 51f / 255f);
             }
 
-            self.E_Lab_TipsText.text = GameSettingLanguge.LoadLocalization(des);
+            self.E_Lab_TipsText.text = GameSettingLanguge.Instance.LoadLocalization(des);
         }
     }
 }

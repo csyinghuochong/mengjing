@@ -258,7 +258,7 @@ namespace ET.Client
 
         public static void OnBtn_RerurnBuilding(this DlgPetMain self)
         {
-            PopupTipHelp.OpenPopupTip(self.Root(), "", GameSettingLanguge.LoadLocalization("确定返回主城？"),
+            PopupTipHelp.OpenPopupTip(self.Root(), "", GameSettingLanguge.Instance.LoadLocalization("确定返回主城？"),
                 () => { EnterMapHelper.RequestQuitFuben(self.Root()); },
                 null).Coroutine();
         }

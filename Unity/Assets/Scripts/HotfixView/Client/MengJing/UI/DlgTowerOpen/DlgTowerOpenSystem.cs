@@ -60,7 +60,7 @@ namespace ET.Client
 
         public static void RequestTowerQuit(this DlgTowerOpen self)
         {
-            PopupTipHelp.OpenPopupTip(self.Root(), "", GameSettingLanguge.LoadLocalization("战斗未结束，是否领取奖励？"),
+            PopupTipHelp.OpenPopupTip(self.Root(), "", GameSettingLanguge.Instance.LoadLocalization("战斗未结束，是否领取奖励？"),
                 () => { ActivityNetHelper.TowerExitRequest(self.Root()).Coroutine(); },
                 null).Coroutine();
         }

@@ -16,14 +16,14 @@ namespace ET.Client
 
         public Dictionary<int, string> showType = new()
         {
-            { 1, GameSettingLanguge.LoadLocalization("剑类") },
-            { 2, GameSettingLanguge.LoadLocalization("刀类") },
-            { 3, GameSettingLanguge.LoadLocalization("法杖") },
-            { 4, GameSettingLanguge.LoadLocalization("魔法书") },
-            { 5, GameSettingLanguge.LoadLocalization("弓箭") },
-            { 11, GameSettingLanguge.LoadLocalization("布甲") },
-            { 12, GameSettingLanguge.LoadLocalization("轻甲") },
-            { 13, GameSettingLanguge.LoadLocalization("重甲") },
+            { 1, GameSettingLanguge.Instance.LoadLocalization("剑类") },
+            { 2, GameSettingLanguge.Instance.LoadLocalization("刀类") },
+            { 3, GameSettingLanguge.Instance.LoadLocalization("法杖") },
+            { 4, GameSettingLanguge.Instance.LoadLocalization("魔法书") },
+            { 5, GameSettingLanguge.Instance.LoadLocalization("弓箭") },
+            { 11, GameSettingLanguge.Instance.LoadLocalization("布甲") },
+            { 12, GameSettingLanguge.Instance.LoadLocalization("轻甲") },
+            { 13, GameSettingLanguge.Instance.LoadLocalization("重甲") },
         };
     }
 }

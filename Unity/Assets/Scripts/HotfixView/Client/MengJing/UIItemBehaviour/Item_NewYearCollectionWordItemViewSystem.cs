@@ -60,7 +60,7 @@ namespace ET.Client
             }
 
             //显示兑换次数
-            self.E_LabDuiHuanText.text = GameSettingLanguge.LoadLocalization($"兑换次数:{receiveNumber}/{activityConfig.Par_1}");
+            self.E_LabDuiHuanText.text = GameSettingLanguge.Instance.LoadLocalization($"兑换次数:{receiveNumber}/{activityConfig.Par_1}");
         }
 
         public static void SetAction(this Scroll_Item_NewYearCollectionWordItem self, Action action)

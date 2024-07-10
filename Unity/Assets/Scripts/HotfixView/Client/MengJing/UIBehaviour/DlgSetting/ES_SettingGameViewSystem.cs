@@ -574,7 +574,7 @@ namespace ET.Client
         {
             string text_new = "";
             string text_old = self.E_InputFieldCNameInputField.text;
-            MaskWordComponent.Instance.IsContainSensitiveWords(ref text_old, out text_new);
+            MaskWordHelper.Instance.IsContainSensitiveWords(ref text_old, out text_new);
             self.E_InputFieldCNameInputField.text = text_old;
         }
 

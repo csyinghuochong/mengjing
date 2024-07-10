@@ -121,13 +121,13 @@ namespace ET.Client
             //显示是否绑定
             if (bagInfo.isBinging)
             {
-                self.E_BangDingText.text = GameSettingLanguge.LoadLocalization("已绑定");
+                self.E_BangDingText.text = GameSettingLanguge.Instance.LoadLocalization("已绑定");
                 self.E_BangDingText.color = new Color(175f / 255f, 1, 6f / 255f);
                 self.E_BangDingImage.gameObject.SetActive(true);
             }
             else
             {
-                self.E_BangDingText.text = GameSettingLanguge.LoadLocalization("未绑定");
+                self.E_BangDingText.text = GameSettingLanguge.Instance.LoadLocalization("未绑定");
                 self.E_BangDingText.color = new Color(255f / 255f, 240f / 255f, 200f / 255f);
                 self.E_BangDingImage.gameObject.SetActive(false);
             }
@@ -340,7 +340,7 @@ namespace ET.Client
                 self.E_BackImage.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(vector2.x + exceedWidth + 30, vector2.y);
             }
 
-            string langStr = GameSettingLanguge.LoadLocalization("等级");
+            string langStr = GameSettingLanguge.Instance.LoadLocalization("等级");
             if (itemconf.UseLv > 0)
             {
                 self.E_ItemLvText.text = langStr + ":" + itemconf.UseLv;
