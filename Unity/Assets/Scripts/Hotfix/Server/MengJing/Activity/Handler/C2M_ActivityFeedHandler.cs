@@ -32,11 +32,11 @@ namespace ET.Server
             bagComponent.OnCostItemData($"{costItemId};1");
             bagComponent.OnAddItemData(ConfigData.FeedItemReward[costItemId], $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
             ActorId activitySceneid = UnitCacheHelper.GetActivityServerId(unit.Zone());
+
+            M2A_ActivityFeedRequest M2A_ActivityFeedRequest = M2A_ActivityFeedRequest.Create();
+            M2A_ActivityFeedRequest.UnitID = unit.Id;
             A2M_ActivityFeedResponse r_GameStatusResponse = (A2M_ActivityFeedResponse)await unit.Root().GetComponent<MessageSender>().Call
-                 (activitySceneid, new M2A_ActivityFeedRequest()
-                 {
-                     UnitID = unit.Id,
-                 });
+                 (activitySceneid, M2A_ActivityFeedRequest);
 
             response.ActivityV1Info = unit.GetComponent<ActivityComponentS>().ActivityV1Info;
             response.ActivityV1Info.BaoShiDu = r_GameStatusResponse.BaoShiDu;

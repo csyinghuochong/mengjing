@@ -112,13 +112,11 @@ namespace ET.Server
                     }
                     bool IsHoliday = false;
                     bool StopServer = false;
-                    
-                    Center2A_CheckAccount checkAccount = (Center2A_CheckAccount)await session.Root().GetComponent<MessageSender>().Call(accountZone, new A2Center_CheckAccount()
-                    {
-                        AccountName = request.Account,
-                        Password = request.Password,
-                        ThirdLogin = request.ThirdLogin
-                    });
+                    A2Center_CheckAccount = A2Center_CheckAccount.Create();
+                    A2Center_CheckAccount.AccountName = request.Account;
+                    A2Center_CheckAccount.Password = request.Password;
+                    A2Center_CheckAccount.ThirdLogin = request.ThirdLogin;
+                    Center2A_CheckAccount checkAccount = (Center2A_CheckAccount)await session.Root().GetComponent<MessageSender>().Call(accountZone, A2Center_CheckAccount);
                     PlayerInfo centerPlayerInfo = checkAccount.PlayerInfo;
                     IsHoliday = checkAccount.IsHoliday;
                     StopServer = checkAccount.StopServer;
@@ -279,8 +277,11 @@ namespace ET.Server
 			Log.Debug($"gate address: {config}");
 			
 			// 向gate请求一个key,客户端可以拿着这个key连接gate
+
+            R2G_GetLoginKey R2G_GetLoginKey = R2G_GetLoginKey.Create();
+            R2G_GetLoginKey.Account = request.Account;
 			 G2R_GetLoginKey g2RGetLoginKey = (G2R_GetLoginKey) await session.Fiber().Root.GetComponent<MessageSender>().Call(
-			 	config.ActorId, new R2G_GetLoginKey() {Account = request.Account});
+			 	config.ActorId, R2G_GetLoginKey);
              
 			 response.Address = config.InnerIPPort.ToString();
 			 response.Key = g2RGetLoginKey.Key;

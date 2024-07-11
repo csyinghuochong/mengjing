@@ -208,8 +208,11 @@ namespace ET.Server
                             return ErrorCode.ERR_Union_Not_Exist;
                         }
                         ActorId mapInstanceId = UnitCacheHelper.GetUnionServerId(unit.Zone());
+                        M2U_UnionEnterRequest M2U_UnionEnterRequest = M2U_UnionEnterRequest.Create();
+                        M2U_UnionEnterRequest.UnionId = unionid;
+                        M2U_UnionEnterRequest.SceneId = request.SceneId;
                          U2M_UnionEnterResponse responseUnionEnter = (U2M_UnionEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                         mapInstanceId, new M2U_UnionEnterRequest() { UnionId = unionid, UnitId = unit.Id, SceneId = request.SceneId });
+                         mapInstanceId, M2U_UnionEnterRequest);
                         TransferHelper.BeforeTransfer(unit);
                         await TransferHelper.Transfer(unit, responseUnionEnter.FubenActorId, (int)SceneTypeEnum.Union, request.SceneId, request.Difficulty, "0");
                         break;
@@ -224,9 +227,14 @@ namespace ET.Server
                             jiaYuanComponent.OnBeforEnter();
                             await UnitCacheHelper.SaveComponentCache(unit.Root(), jiaYuanComponent);
                         }
-                        
+
+
+                        M2J_JiaYuanEnterRequest M2J_JiaYuanEnterRequest = M2J_JiaYuanEnterRequest.Create();
+                        M2J_JiaYuanEnterRequest.MasterId = long.Parse(request.paramInfo);
+                        M2J_JiaYuanEnterRequest.UnitId = unit.Id;
+                        M2J_JiaYuanEnterRequest.SceneId = request.SceneId;
                         J2M_JiaYuanEnterResponse j2M_JianYuanEnterResponse = (J2M_JiaYuanEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                        mapInstanceId, new M2J_JiaYuanEnterRequest() { MasterId = long.Parse(request.paramInfo), UnitId = unit.Id, SceneId = request.SceneId });
+                        mapInstanceId, M2J_JiaYuanEnterRequest);
                         TransferHelper.BeforeTransfer(unit);
                         await TransferHelper.Transfer(unit, j2M_JianYuanEnterResponse.FubenActorId, (int)SceneTypeEnum.JiaYuan, request.SceneId, request.Difficulty, "0");
                         
@@ -338,8 +346,10 @@ namespace ET.Server
                         break;
                     case SceneTypeEnum.BaoZang:
                     case SceneTypeEnum.MiJing:
+                        M2F_FubenSceneIdRequest M2F_FubenSceneIdRequest = M2F_FubenSceneIdRequest.Create();
+                        M2F_FubenSceneIdRequest.SceneId = request.SceneId;
                         F2M_FubenSceneIdResponse f2M_YeWaiSceneIdResponse = (F2M_FubenSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                        UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_FubenSceneIdRequest() { SceneId = request.SceneId });
+                        UnitCacheHelper.GetFubenCenterId(unit.Zone()), M2F_FubenSceneIdRequest);
                         if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
                         {
                             return ErrorCode.ERR_MapLimit;
