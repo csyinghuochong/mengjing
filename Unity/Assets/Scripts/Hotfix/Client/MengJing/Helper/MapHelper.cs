@@ -11,8 +11,6 @@ namespace ET.Client
             //Log.ILog.Debug(message);
         }
 
-        
-
         public static Unit GetNearestUnit(Unit main)
         {
             List<Entity> units = main.GetParent<UnitComponent>().Children.Values.ToList();
@@ -94,7 +92,7 @@ namespace ET.Client
                 }
             }
 
-            return unit != null? unit.Id : 0;
+            return unit != null ? unit.Id : 0;
         }
 
         public static List<DropInfo> GetCanShiQuByCell(Scene zoneScene, int cell)
@@ -155,9 +153,10 @@ namespace ET.Client
         {
             try
             {
-                C2M_PickItemRequest actor_PickItemRequest = new C2M_PickItemRequest() { ItemIds = ids };
-                M2C_PickItemResponse actor_PickItemResponse =
-                        await zoneScene.GetComponent<ClientSenderCompnent>().Call(actor_PickItemRequest) as M2C_PickItemResponse;
+                C2M_PickItemRequest request = C2M_PickItemRequest.Create();
+                request.ItemIds = ids;
+
+                M2C_PickItemResponse response = await zoneScene.GetComponent<ClientSenderCompnent>().Call(request) as M2C_PickItemResponse;
 
                 for (int i = 0; i < ids.Count; i++)
                 {
@@ -176,7 +175,10 @@ namespace ET.Client
 
         public static async ETTask<int> RequestTowerReward(Scene root, int towerid, int sceneType)
         {
-            C2M_RandomTowerRewardRequest request = new() { RewardId = towerid, SceneType = sceneType };
+            C2M_RandomTowerRewardRequest request = C2M_RandomTowerRewardRequest.Create();
+            request.RewardId = towerid;
+            request.SceneType = sceneType;
+
             M2C_RandomTowerRewardResponse respone = (M2C_RandomTowerRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             if (respone.Error == ErrorCode.ERR_Success)
             {

@@ -198,6 +198,14 @@ namespace ET.Client
         public string DataParamString;
     }
 
+    public struct ChengJiuUpdate
+    {
+    }
+
+    public struct PetFenJieUpdate
+    {
+    }
+
     public struct ReturnLogin
     {
         public int ErrorCode;
