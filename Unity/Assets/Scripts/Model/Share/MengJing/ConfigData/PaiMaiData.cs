@@ -5,6 +5,7 @@ namespace ET
     using System.Collections.Generic;
 
     //成就类型数据
+    [EnableClass]
     public class PaiMaiTypeData
     {
         //每个章节对应的拍卖道具

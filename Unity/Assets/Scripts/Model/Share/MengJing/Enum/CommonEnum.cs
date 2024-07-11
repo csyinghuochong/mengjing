@@ -3,6 +3,8 @@
 namespace ET
 {
 
+    
+    [EnableClass]
     public sealed class TikTokCode
     {
         public int code;        //返回码
@@ -12,12 +14,16 @@ namespace ET
         public TikTokData data;
     }
 
+    
+    [EnableClass]
     public sealed class TikTokData
     {
         public string sdk_open_id;      //用户唯一标识
         public int age_type;        //实名年龄段
     }
 
+    
+    [EnableClass]
     public sealed class TikTokPay
     {
         public int code;        //返回码
@@ -32,6 +38,7 @@ namespace ET
         public int FunctionType; //1开始 2结束
     }
 
+    [EnableClass]
     public sealed class SMSSVerifyResult
     {
         //认证结果
@@ -46,6 +53,7 @@ namespace ET
         public long HideValue;
     }
     
+    [EnableClass]
     public class BossDevelopment
     {
         public string Name;

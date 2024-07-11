@@ -5,6 +5,6 @@ namespace ET
     [ComponentOf(typeof (Scene))]
     public class UnitComponent: Entity, IAwake, IDestroy
     {
-        public List<Unit> Units = new();
+        public List<EntityRef<Unit>> Units = new();
     }
 }

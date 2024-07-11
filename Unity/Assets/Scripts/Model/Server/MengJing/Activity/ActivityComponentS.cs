@@ -29,6 +29,6 @@ namespace ET.Server
 
         public List<int> ZhanQuReceiveIds { get; set; }= new List<int>();
 
-        public ActivityV1Info ActivityV1Info { get; set; } = new ActivityV1Info();
+        public ActivityV1Info ActivityV1Info { get; set; } = ActivityV1Info.Create();
     }
 }

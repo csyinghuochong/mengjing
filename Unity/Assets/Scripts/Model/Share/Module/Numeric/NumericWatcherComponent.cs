@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace ET
 {
+    
+    [EnableClass]
     public class NumericWatcherInfo
     {
         public SceneType SceneType { get; }

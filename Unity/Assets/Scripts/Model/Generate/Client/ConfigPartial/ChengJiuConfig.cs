@@ -3,6 +3,7 @@ using System.Collections.Generic;
 namespace ET
 {
     //成就类型数据
+    [EnableClass]
     public class ChengJiuTypeData
     {
         //每个章节对应的成就任务
