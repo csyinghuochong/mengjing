@@ -30,12 +30,22 @@ namespace ET
         
         private static async ETTask StartAsync()
         {
+            
+            Log.Warning($"Debug...Entry.StartAsync: {TimeHelper.ClientNow()}");
             WinPeriod.Init();
 
+            Log.Warning($"Debug...WinPeriod.Init: {TimeHelper.ClientNow()}");
+            
             // 注册Mongo type
-            MongoRegister.Init();
+            MongoRegister.Init();   //耗时6s
+            
+            Log.Warning($"Debug...MongoRegister.Init: {TimeHelper.ClientNow()}");
+            
             // 注册Entity序列化器
             EntitySerializeRegister.Init();
+            
+            Log.Warning($"Debug...EntitySerializeRegister.Init: {TimeHelper.ClientNow()}");
+            
             World.Instance.AddSingleton<IdGenerater>();
             World.Instance.AddSingleton<OpcodeType>();
             World.Instance.AddSingleton<ObjectPool>();
@@ -44,14 +54,19 @@ namespace ET
             World.Instance.AddSingleton<NavmeshComponent>();
             World.Instance.AddSingleton<LogMsg>();
             
+            Log.Warning($"Debug...AddSingleton: {TimeHelper.ClientNow()}");
+            
+            
             TimeInfo.Instance.TimeZone = 8;
             // 创建需要reload的code singleton
             CodeTypes.Instance.CreateCode();
             
-            await World.Instance.AddSingleton<ConfigLoader>().LoadAsync();
-
-            Log.Debug(" ConstFiberId.Main");
-
+            Log.Warning($"Debug...CreateCode: {TimeHelper.ClientNow()}");
+            
+            await World.Instance.AddSingleton<ConfigLoader>().LoadAsync();  //耗时8s
+            
+            Log.Warning($"Debug...Entry.Create.Main: {TimeHelper.ClientNow()}");
+            
             await FiberManager.Instance.Create(SchedulerType.Main, ConstFiberId.Main, 0, SceneType.Main, "");
         }
     }
