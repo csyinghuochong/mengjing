@@ -28,9 +28,9 @@ namespace ET.Server
 
             ActorId dbCacheId = UnitCacheHelper.GetUnionServerId(unit.Zone());
             M2U_UnionCreateRequest M2U_UnionCreateRequest = M2U_UnionCreateRequest.Create();
-            M2U_UnionCreateRequest.UnionName =request.UnionName,
-            M2U_UnionCreateRequest.UnionPurpose = request.UnionPurpose,
-            M2U_UnionCreateRequest.UserID = userInfo.UserId
+            M2U_UnionCreateRequest.UnionName = request.UnionName;
+            M2U_UnionCreateRequest.UnionPurpose = request.UnionPurpose;
+            M2U_UnionCreateRequest.UserID = userInfo.UserId;
             U2M_UnionCreateResponse d2GGetUnit = (U2M_UnionCreateResponse)await unit.Root().GetComponent<MessageSender>().Call(dbCacheId, M2U_UnionCreateRequest);
 
             if (d2GGetUnit.Error == ErrorCode.ERR_Success)
