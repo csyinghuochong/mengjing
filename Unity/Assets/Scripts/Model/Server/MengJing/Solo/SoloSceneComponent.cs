@@ -13,7 +13,7 @@ namespace ET.Server
 
         public Dictionary<long, SoloMatchInfo> MatchResult { get; set; }= new Dictionary<long, SoloMatchInfo>();
 
-        public M2C_SoloMatchResult m2C_SoloMatchResult { get; set; }= new M2C_SoloMatchResult();
+        public M2C_SoloMatchResult m2C_SoloMatchResult { get; set; } = M2C_SoloMatchResult.Create();
 
         public Dictionary<long, int> PlayerIntegralList { get; set; } = new Dictionary<long, int>(); //竞技场列表添加
 

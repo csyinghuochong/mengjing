@@ -11,6 +11,6 @@ namespace ET.Server
         //称号
         public List<KeyValuePairInt> TitleList{ get; set; }  = new List<KeyValuePairInt>();
 
-        public M2C_TitleUpdateResult TitleUpdateResult = new M2C_TitleUpdateResult();
+        public M2C_TitleUpdateResult TitleUpdateResult = M2C_TitleUpdateResult.Create();
     }
 }

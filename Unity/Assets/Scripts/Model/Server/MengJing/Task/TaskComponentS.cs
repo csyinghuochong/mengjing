@@ -14,8 +14,9 @@ namespace ET.Server
         public List<int> RoleComoleteTaskList { get; set; } = new List<int>();
 
         [BsonIgnore]
-        public M2C_TaskCountryUpdate m2C_TaskCountryUpdate = new M2C_TaskCountryUpdate();
+        public M2C_TaskCountryUpdate m2C_TaskCountryUpdate = M2C_TaskCountryUpdate.Create();
+
         [BsonIgnore]
-        public M2C_TaskUpdate M2C_TaskUpdate = new M2C_TaskUpdate();
+        public M2C_TaskUpdate M2C_TaskUpdate = M2C_TaskUpdate.Create();
     }
 }

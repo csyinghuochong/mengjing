@@ -1246,6 +1246,11 @@ namespace ET.Server
         public static void UpdateSkillSet(this SkillSetComponentS self)
         {
             Unit unit = self.GetParent<Unit>();
+            if (self.M2C_SkillSetMessage.SkillSetInfo == null)
+            {
+                self.M2C_SkillSetMessage.SkillSetInfo = ET.SkillSetInfo.Create();
+            }
+
             SkillSetInfo SkillSetInfo = self.M2C_SkillSetMessage.SkillSetInfo;
             SkillSetInfo.TianFuPlan = self.TianFuPlan;
             SkillSetInfo.TianFuList = self.TianFuList;

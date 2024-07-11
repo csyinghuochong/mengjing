@@ -2,14 +2,16 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
+    
+    [EnableClass]
     public class SkillPassiveInfo
     {
         public int SkillId;
         public List<int> SkillPassiveTypeEnum;
-        public List<float> SkillPro;                  //´¥·¢¸ÅÂÊ»òÕßÑªÁ¿°Ù·Ö±È
-        public int TriggerOnce;                 //ÊÇ·ñ´¥·¢Ò»´Î
-        public long TriggerInterval;           //´¥·¢¼ä¸ô
-        public long LastTriggerTime;            //ÉÏ´Î´¥·¢Ê±¼ä
+        public List<float> SkillPro;                  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê»ï¿½ï¿½ï¿½Ñªï¿½ï¿½ï¿½Ù·Ö±ï¿½
+        public int TriggerOnce;                 //ï¿½Ç·ñ´¥·ï¿½Ò»ï¿½ï¿½
+        public long TriggerInterval;           //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        public long LastTriggerTime;            //ï¿½Ï´Î´ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
         public int TriggerNumber;
 
         public SkillPassiveInfo(int skillId, List<int> skillPassiveTypeEnum, List<float> skillPro, int triggerOnce, double triggerTime)
@@ -36,10 +38,10 @@ namespace ET.Server
         public long Timer;
         public int UnitType;
         public long SingTimer;
-        public int HuixueTimeNum;               //»ØÑª´¥·¢¼ÆÊ±Æ÷,¼¸Ãë´¥·¢
+        public int HuixueTimeNum;               //ï¿½ï¿½Ñªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½,ï¿½ï¿½ï¿½ë´¥ï¿½ï¿½
         public List<SkillPassiveInfo> SkillPassiveInfos = new List<SkillPassiveInfo>();
 
-        public C2M_SkillCmd C2M_SkillCmd = new C2M_SkillCmd();
+        public C2M_SkillCmd C2M_SkillCmd = C2M_SkillCmd.Create();
 
         public SkillPassiveInfo SingSkillIfo;
         public long SingTargetId = 0;

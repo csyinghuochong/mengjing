@@ -8,7 +8,7 @@ namespace ET.Server
     public class UserInfoComponentS : Entity, IAwake, IDestroy, ITransfer, IUnitCache
     {
         public string Account { get; set; }
-        public UserInfo UserInfo { get; set; } = new UserInfo();
+        public UserInfo UserInfo { get; set; }
 
           /// <summary>
         /// 登录或者零点刷新的时候会改变.主要用来体力恢复，刷新数据
@@ -40,7 +40,7 @@ namespace ET.Server
         public long UpdateRankTime;
 
         [BsonIgnore]
-        public readonly M2C_RoleDataBroadcast m2C_RoleDataBroadcast  = new M2C_RoleDataBroadcast();
+        public readonly M2C_RoleDataBroadcast m2C_RoleDataBroadcast = M2C_RoleDataBroadcast.Create();
 
         [BsonIgnore]
         public long ShouLieUpLoadTimer;

@@ -22,6 +22,6 @@ namespace ET.Server
         public List<LifeShieldInfo> LifeShieldList = new List<LifeShieldInfo>();
 
 
-        public M2C_SkillSetMessage M2C_SkillSetMessage = new M2C_SkillSetMessage() { SkillSetInfo = new SkillSetInfo() };
+        public M2C_SkillSetMessage M2C_SkillSetMessage = M2C_SkillSetMessage.Create();
     }
 }
