@@ -15,7 +15,8 @@ namespace ET.Server
         
         public int Level { get; set; }
     }
-
+    
+    [EnableClass]
     public class BeReportedInfo
     {
         public long JinYanTime;

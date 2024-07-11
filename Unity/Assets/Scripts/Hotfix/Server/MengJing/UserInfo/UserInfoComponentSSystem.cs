@@ -49,7 +49,7 @@ namespace ET.Server
         public static void OnInit(this UserInfoComponentS self, string account, long id, long accountId, CreateRoleInfo createRoleInfo)
         {
             self.Account = account;
-            self.UserInfo = new UserInfo();
+            self.UserInfo = UserInfo.Create();
             UserInfo userInfo = self.UserInfo;
             userInfo.Sp = 1;
             userInfo.UserId = id;

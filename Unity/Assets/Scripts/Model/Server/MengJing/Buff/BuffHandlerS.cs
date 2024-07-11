@@ -6,6 +6,7 @@ namespace ET.Server
 
     }
     
+    [EnableClass]
     [BuffHandlerS]
     public abstract class BuffHandlerS
     {

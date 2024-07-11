@@ -10,7 +10,7 @@ namespace ET.Server
         public bool SendReward { get; set; }
 
         public long BattleOpenTime { get; set; } = 0;
-        public M2C_BattleInfoResult m2C_BattleInfoResult  { get; set; }= new M2C_BattleInfoResult();  
+        public M2C_BattleInfoResult m2C_BattleInfoResult { get; set; } = M2C_BattleInfoResult.Create();
     }
     
 }

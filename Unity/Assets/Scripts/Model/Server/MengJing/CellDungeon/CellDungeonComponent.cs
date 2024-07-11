@@ -29,6 +29,7 @@ namespace ET.Server
         Right
     }
 
+    [EnableClass]
     public class CellDungeonInfo
     {
         public int row;         //行
@@ -50,8 +51,8 @@ namespace ET.Server
         public ChapterConfig ChapterConfig { get; set; }
         public int FubenDifficulty { get; set; }
 
-        public FubenInfo FubenInfo  { get; set; }= new FubenInfo();
-        public SonFubenInfo SonFubenInfo { get; set; } = new SonFubenInfo();
+        public FubenInfo FubenInfo { get; set; } = FubenInfo.Create();
+        public SonFubenInfo SonFubenInfo { get; set; } = SonFubenInfo.Create();
 
         public CellDungeonInfo[][] FubenCellInfoList { get; set; }
 
