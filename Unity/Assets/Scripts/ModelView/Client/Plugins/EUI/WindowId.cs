@@ -169,5 +169,6 @@ namespace ET.Client
 		WindowID_JiaYuanMenu,
 		WindowID_JiaYuanPlanWatch,
 		WindowID_OpenChest,
+		WindowID_JiaYuanOneKeyPlant,
 	}
 }
