@@ -6,11 +6,12 @@ namespace ET.Client
     {
         public static async ETTask RequestSkillSet(Scene root)
         {
-            C2M_SkillInitRequest c2M_SkillSet = new C2M_SkillInitRequest() { };
-            M2C_SkillInitResponse m2C_SkillSet = (M2C_SkillInitResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2M_SkillSet);
+            C2M_SkillInitRequest request = C2M_SkillInitRequest.Create();
+
+            M2C_SkillInitResponse response = (M2C_SkillInitResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             SkillSetComponentC skillSetComponent = root.GetComponent<SkillSetComponentC>();
-            skillSetComponent.UpdateSkillSet(m2C_SkillSet.SkillSetInfo);
+            skillSetComponent.UpdateSkillSet(response.SkillSetInfo);
 
             EventSystem.Instance.Publish(root, new DataUpdate_SkillSetting());
         }
@@ -18,7 +19,9 @@ namespace ET.Client
         //激活天赋
         public static async ETTask ActiveTianFu(Scene root, int tianfuId)
         {
-            C2M_TianFuActiveRequest request = new() { TianFuId = tianfuId };
+            C2M_TianFuActiveRequest request = C2M_TianFuActiveRequest.Create();
+            request.TianFuId = tianfuId;
+
             M2C_TianFuActiveResponse response = (M2C_TianFuActiveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             if (response.Error != 0)
@@ -34,7 +37,9 @@ namespace ET.Client
         //激活技能
         public static async ETTask ActiveSkillID(Scene root, int skillId)
         {
-            C2M_SkillUp request = new() { SkillID = skillId };
+            C2M_SkillUp request = C2M_SkillUp.Create();
+            request.SkillID = skillId;
+
             M2C_SkillUp response = (M2C_SkillUp)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             if (response.Error != 0)
@@ -50,7 +55,9 @@ namespace ET.Client
         public static async ETTask<bool> ChangeOccTwoRequest(Scene root, int occTwoID)
         {
             UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
-            C2M_ChangeOccTwoRequest request = new() { OccTwoID = occTwoID };
+            C2M_ChangeOccTwoRequest request = C2M_ChangeOccTwoRequest.Create();
+            request.OccTwoID = occTwoID;
+
             M2C_ChangeOccTwoResponse response = (M2C_ChangeOccTwoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             if (response.Error == 0)
@@ -75,7 +82,11 @@ namespace ET.Client
             if (skillType == (int)SkillSetEnum.Item && pos <= 8)
                 return;
 
-            C2M_SkillSet request = new() { SkillID = skillId, SkillType = skillType, Position = pos };
+            C2M_SkillSet request = C2M_SkillSet.Create();
+            request.SkillID = skillId;
+            request.SkillType = skillType;
+            request.Position = pos;
+
             M2C_SkillSet response = (M2C_SkillSet)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             if (response.Error != 0)
@@ -87,7 +98,9 @@ namespace ET.Client
 
         public static async ETTask<int> SkillOperation(Scene root, int operationType)
         {
-            C2M_SkillOperation request = new() { OperationType = operationType };
+            C2M_SkillOperation request = C2M_SkillOperation.Create();
+            request.OperationType = operationType;
+
             M2C_SkillOperation response = (M2C_SkillOperation)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
@@ -95,7 +108,9 @@ namespace ET.Client
 
         public static async ETTask<int> TianFuPlan(Scene root, int tianFuPlan)
         {
-            C2M_TianFuPlanRequest request = new() { TianFuPlan = tianFuPlan };
+            C2M_TianFuPlanRequest request = C2M_TianFuPlanRequest.Create();
+            request.TianFuPlan = tianFuPlan;
+
             M2C_TianFuPlanResponse response = (M2C_TianFuPlanResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
@@ -103,7 +118,10 @@ namespace ET.Client
 
         public static async ETTask<int> MakeSelect(Scene root, int makeType, int plan)
         {
-            C2M_MakeSelectRequest request = new() { MakeType = makeType, Plan = plan };
+            C2M_MakeSelectRequest request = C2M_MakeSelectRequest.Create();
+            request.MakeType = makeType;
+            request.Plan = plan;
+
             M2C_MakeSelectResponse response = (M2C_MakeSelectResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             root.GetComponent<UserInfoComponentC>().UserInfo.MakeList.Clear();
@@ -114,7 +132,11 @@ namespace ET.Client
 
         public static async ETTask<int> MakeEquip(Scene root, long bagInfoID, int makeId, int plan)
         {
-            C2M_MakeEquipRequest request = new() { BagInfoID = bagInfoID, MakeId = makeId, Plan = plan };
+            C2M_MakeEquipRequest request = C2M_MakeEquipRequest.Create();
+            request.BagInfoID = bagInfoID;
+            request.MakeId = makeId;
+            request.Plan = plan;
+
             M2C_MakeEquipResponse response = (M2C_MakeEquipResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             if (response.ItemId == 0)
@@ -140,7 +162,10 @@ namespace ET.Client
 
         public static async ETTask<int> ItemMelting(Scene root, List<long> operateBagID, int makeType)
         {
-            C2M_ItemMeltingRequest request = new() { OperateBagID = operateBagID, MakeType = makeType };
+            C2M_ItemMeltingRequest request = C2M_ItemMeltingRequest.Create();
+            request.OperateBagID = operateBagID;
+            request.MakeType = makeType;
+
             M2C_ItemMeltingResponse response = (M2C_ItemMeltingResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
@@ -148,7 +173,10 @@ namespace ET.Client
 
         public static async ETTask<M2C_LifeShieldCostResponse> LifeShieldCost(Scene root, int operateType, List<long> operateBagID)
         {
-            C2M_LifeShieldCostRequest request = new() { OperateType = operateType, OperateBagID = operateBagID };
+            C2M_LifeShieldCostRequest request = C2M_LifeShieldCostRequest.Create();
+            request.OperateType = operateType;
+            request.OperateBagID = operateBagID;
+
             M2C_LifeShieldCostResponse response = (M2C_LifeShieldCostResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response;
@@ -156,9 +184,11 @@ namespace ET.Client
 
         public static async ETTask<M2C_MakeLearnResponse> MakeLearn(Scene root, int makeId, int plan)
         {
-            C2M_MakeLearnRequest request = new() { MakeId = makeId, Plan = plan };
-            M2C_MakeLearnResponse response =
-                    (M2C_MakeLearnResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            C2M_MakeLearnRequest request = C2M_MakeLearnRequest.Create();
+            request.MakeId = makeId;
+            request.Plan = plan;
+
+            M2C_MakeLearnResponse response = (M2C_MakeLearnResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             if (response.Error == 0)
             {
                 root.GetComponent<UserInfoComponentC>().UserInfo.MakeList.Add(makeId);
@@ -169,7 +199,8 @@ namespace ET.Client
 
         public static async ETTask<M2C_FindNearMonsterResponse> FindNearMonster(Scene root)
         {
-            C2M_FindNearMonsterRequest request = new();
+            C2M_FindNearMonsterRequest request = C2M_FindNearMonsterRequest.Create();
+
             M2C_FindNearMonsterResponse response = (M2C_FindNearMonsterResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response;

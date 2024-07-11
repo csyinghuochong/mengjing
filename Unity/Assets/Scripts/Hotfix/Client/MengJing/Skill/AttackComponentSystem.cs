@@ -62,7 +62,7 @@ namespace ET.Client
             if (taretUnit == null || taretUnit.IsDisposed || taretUnit.GetComponent<NumericComponentC>().GetAsInt(NumericType.Now_Dead) == 1)
             {
                 self.MoveAttackId = 0;
-                self.Root().GetComponent<ClientSenderCompnent>().Send(new C2M_Stop());
+                self.Root().GetComponent<ClientSenderCompnent>().Send(C2M_Stop.Create());
                 self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
                 return;
             }

@@ -167,7 +167,7 @@ namespace ET.Client
                 Unit unit = self.GetParent<Unit>();
                 if (self.SkillCmd == null)
                 {
-                    self.SkillCmd = new C2M_SkillCmd();
+                    self.SkillCmd = C2M_SkillCmd.Create();
                 }
 
                 C2M_SkillCmd skillCmd = self.SkillCmd;
@@ -316,7 +316,7 @@ namespace ET.Client
                     continue;
                 }
 
-                M2C_UnitUseSkill m2C_UnitUseSkill = new M2C_UnitUseSkill();
+                M2C_UnitUseSkill m2C_UnitUseSkill = M2C_UnitUseSkill.Create();
                 m2C_UnitUseSkill.SkillInfos.Add(skillInfos[i]);
                 self.OnUseSkill(m2C_UnitUseSkill);
             }
