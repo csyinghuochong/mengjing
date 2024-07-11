@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_MakeLearnItem))]
-    [FriendOf(typeof (DlgMakeLearn))]
+    [FriendOf(typeof(Scroll_Item_MakeLearnItem))]
+    [FriendOf(typeof(DlgMakeLearn))]
     public static class DlgMakeLearnSystem
     {
         public static void RegisterUIEvent(this DlgMakeLearn self)
@@ -47,7 +47,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int maxValue = CommonHelp.MaxShuLianDu();
 
-            int shulianduNumeric = self.Plan == 1? NumericType.MakeShuLianDu_1 : NumericType.MakeShuLianDu_2;
+            int shulianduNumeric = self.Plan == 1 ? NumericType.MakeShuLianDu_1 : NumericType.MakeShuLianDu_2;
             int curValue = unit.GetComponent<NumericComponentC>().GetAsInt(shulianduNumeric);
 
             self.View.E_Lab_ShuLianDuText.text = $"{curValue}/{maxValue}";
@@ -80,7 +80,7 @@ namespace ET.Client
                 return;
             }
 
-            await SkillNetHelper.MakeSelect(self.Root(), makeId, self.Plan == -1? 1 : self.Plan);
+            await SkillNetHelper.MakeSelect(self.Root(), makeId, self.Plan == -1 ? 1 : self.Plan);
             self.CheckMakeType();
         }
 
@@ -203,12 +203,15 @@ namespace ET.Client
 
             self.View.E_Lab_LearnItemCostText.text = equipMakeConfig.LearnGoldValue.ToString();
 
-            self.View.ES_CommonItem.UpdateItem(new BagInfo() { ItemID = itemConfig.Id, ItemNum = 1 }, ItemOperateEnum.None);
+            BagInfo bagInfo = BagInfo.Create();
+            bagInfo.ItemID = itemConfig.Id;
+            bagInfo.ItemNum = 1;
+            self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.View.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
 
             //显示需要熟练度
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            int shulianduNumeric = self.Plan == 1? NumericType.MakeShuLianDu_1 : NumericType.MakeShuLianDu_2;
+            int shulianduNumeric = self.Plan == 1 ? NumericType.MakeShuLianDu_1 : NumericType.MakeShuLianDu_2;
             int nowShuLianDu = unit.GetComponent<NumericComponentC>().GetAsInt(shulianduNumeric);
             self.View.E_LabNeedShuLianText.text = $"{nowShuLianDu}/{equipMakeConfig.NeedProficiencyValue}";
             if (unit.GetComponent<NumericComponentC>().GetAsInt(shulianduNumeric) < equipMakeConfig.NeedProficiencyValue)

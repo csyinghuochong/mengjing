@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [NumericWatcher(SceneType.Demo, NumericType.KillMonsterNumber)]
-    public class NumericWatcher_KillMonsterNumber_UpdateDlgMain: INumericWatcher
+    public class NumericWatcher_KillMonsterNumber_UpdateDlgMain : INumericWatcher
     {
         public void Run(Unit unit, NumbericChange args)
         {
@@ -17,7 +17,7 @@ namespace ET.Client
     }
 
     [NumericWatcher(SceneType.Demo, NumericType.BossBelongID)]
-    public class NumericWatcher_BossBelongID_UpdateDlgMain: INumericWatcher
+    public class NumericWatcher_BossBelongID_UpdateDlgMain : INumericWatcher
     {
         public void Run(Unit unit, NumbericChange args)
         {
@@ -26,7 +26,7 @@ namespace ET.Client
     }
 
     [NumericWatcher(SceneType.Demo, NumericType.UnionId_0)]
-    public class NumericWatcher_UnionId_0_UpdateDlgMain: INumericWatcher
+    public class NumericWatcher_UnionId_0_UpdateDlgMain : INumericWatcher
     {
         public void Run(Unit unit, NumbericChange args)
         {
@@ -38,7 +38,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_OnPetFightSet_Refresh: AEvent<Scene, DataUpdate_OnPetFightSet>
+    public class DataUpdate_OnPetFightSet_Refresh : AEvent<Scene, DataUpdate_OnPetFightSet>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_OnPetFightSet args)
         {
@@ -48,7 +48,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_BagItemUpdate_Refresh: AEvent<Scene, DataUpdate_BagItemUpdate>
+    public class DataUpdate_BagItemUpdate_Refresh : AEvent<Scene, DataUpdate_BagItemUpdate>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_BagItemUpdate args)
         {
@@ -58,7 +58,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class BuffUpdate_DlgMainRefresh: AEvent<Scene, BuffUpdate>
+    public class BuffUpdate_DlgMainRefresh : AEvent<Scene, BuffUpdate>
     {
         protected override async ETTask Run(Scene scene, BuffUpdate args)
         {
@@ -82,7 +82,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_SkillSetting_DlgMainRefresh: AEvent<Scene, DataUpdate_SkillSetting>
+    public class DataUpdate_SkillSetting_DlgMainRefresh : AEvent<Scene, DataUpdate_SkillSetting>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_SkillSetting args)
         {
@@ -93,7 +93,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_UpdateUserData_Refresh: AEvent<Scene, DataUpdate_UpdateUserData>
+    public class DataUpdate_UpdateUserData_Refresh : AEvent<Scene, DataUpdate_UpdateUserData>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_UpdateUserData args)
         {
@@ -103,7 +103,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_SettingUpdate_Refresh: AEvent<Scene, DataUpdate_SettingUpdate>
+    public class DataUpdate_SettingUpdate_Refresh : AEvent<Scene, DataUpdate_SettingUpdate>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_SettingUpdate args)
         {
@@ -113,7 +113,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_TaskUpdate_Refresh: AEvent<Scene, DataUpdate_TaskUpdate>
+    public class DataUpdate_TaskUpdate_Refresh : AEvent<Scene, DataUpdate_TaskUpdate>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_TaskUpdate args)
         {
@@ -123,7 +123,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_TaskTrace_Refresh: AEvent<Scene, DataUpdate_TaskTrace>
+    public class DataUpdate_TaskTrace_Refresh : AEvent<Scene, DataUpdate_TaskTrace>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_TaskTrace args)
         {
@@ -133,7 +133,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_TaskGet_DlgMainRefresh: AEvent<Scene, DataUpdate_TaskGet>
+    public class DataUpdate_TaskGet_DlgMainRefresh : AEvent<Scene, DataUpdate_TaskGet>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_TaskGet args)
         {
@@ -143,7 +143,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_TaskComplete_DlgMainRefresh: AEvent<Scene, DataUpdate_TaskComplete>
+    public class DataUpdate_TaskComplete_DlgMainRefresh : AEvent<Scene, DataUpdate_TaskComplete>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_TaskComplete args)
         {
@@ -153,7 +153,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_TaskGiveUp_DlgMainRefresh: AEvent<Scene, DataUpdate_TaskGiveUp>
+    public class DataUpdate_TaskGiveUp_DlgMainRefresh : AEvent<Scene, DataUpdate_TaskGiveUp>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_TaskGiveUp args)
         {
@@ -163,7 +163,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_OnRecvChat_MainChatItemsRefresh: AEvent<Scene, DataUpdate_OnRecvChat>
+    public class DataUpdate_OnRecvChat_MainChatItemsRefresh : AEvent<Scene, DataUpdate_OnRecvChat>
     {
         protected override async ETTask Run(Scene root, DataUpdate_OnRecvChat args)
         {
@@ -173,7 +173,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_MainHeroMove_MainChatItemsRefresh: AEvent<Scene, DataUpdate_MainHeroMove>
+    public class DataUpdate_MainHeroMove_MainChatItemsRefresh : AEvent<Scene, DataUpdate_MainHeroMove>
     {
         protected override async ETTask Run(Scene root, DataUpdate_MainHeroMove args)
         {
@@ -183,7 +183,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_BeforeMove_DlgMainRefresh: AEvent<Scene, DataUpdate_BeforeMove>
+    public class DataUpdate_BeforeMove_DlgMainRefresh : AEvent<Scene, DataUpdate_BeforeMove>
     {
         protected override async ETTask Run(Scene root, DataUpdate_BeforeMove args)
         {
@@ -199,7 +199,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_UpdateSing_DlgMainRefresh: AEvent<Scene, DataUpdate_UpdateSing>
+    public class DataUpdate_UpdateSing_DlgMainRefresh : AEvent<Scene, DataUpdate_UpdateSing>
     {
         protected override async ETTask Run(Scene root, DataUpdate_UpdateSing args)
         {
@@ -210,7 +210,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class SingingUpdate_DlgMainRefresh: AEvent<Scene, SingingUpdate>
+    public class SingingUpdate_DlgMainRefresh : AEvent<Scene, SingingUpdate>
     {
         protected override async ETTask Run(Scene root, SingingUpdate args)
         {
@@ -221,7 +221,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class BeforeSkill_DlgMainRefresh: AEvent<Scene, BeforeSkill>
+    public class BeforeSkill_DlgMainRefresh : AEvent<Scene, BeforeSkill>
     {
         protected override async ETTask Run(Scene root, BeforeSkill args)
         {
@@ -237,7 +237,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_SkillCDUpdate_DlgMainRefresh: AEvent<Scene, DataUpdate_SkillCDUpdate>
+    public class DataUpdate_SkillCDUpdate_DlgMainRefresh : AEvent<Scene, DataUpdate_SkillCDUpdate>
     {
         protected override async ETTask Run(Scene root, DataUpdate_SkillCDUpdate args)
         {
@@ -248,7 +248,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_SkillBeging_DlgMainRefresh: AEvent<Scene, DataUpdate_SkillBeging>
+    public class DataUpdate_SkillBeging_DlgMainRefresh : AEvent<Scene, DataUpdate_SkillBeging>
     {
         protected override async ETTask Run(Scene root, DataUpdate_SkillBeging args)
         {
@@ -259,7 +259,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_SkillFinish_DlgMainRefresh: AEvent<Scene, DataUpdate_SkillFinish>
+    public class DataUpdate_SkillFinish_DlgMainRefresh : AEvent<Scene, DataUpdate_SkillFinish>
     {
         protected override async ETTask Run(Scene root, DataUpdate_SkillFinish args)
         {
@@ -270,7 +270,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_JingLingButton_DlgMainRefresh: AEvent<Scene, DataUpdate_JingLingButton>
+    public class DataUpdate_JingLingButton_DlgMainRefresh : AEvent<Scene, DataUpdate_JingLingButton>
     {
         protected override async ETTask Run(Scene root, DataUpdate_JingLingButton args)
         {
@@ -281,7 +281,7 @@ namespace ET.Client
     }
 
     [Invoke(TimerInvokeType.UIMainFPSTimer)]
-    public class UIMainFPSTimer: ATimer<DlgMain>
+    public class UIMainFPSTimer : ATimer<DlgMain>
     {
         protected override void Run(DlgMain self)
         {
@@ -297,22 +297,22 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (ES_MainActivityTip))]
-    [FriendOf(typeof (Scroll_Item_MainTeamItem))]
-    [FriendOf(typeof (ES_RoleHead))]
-    [FriendOf(typeof (ES_MainBuff))]
-    [FriendOf(typeof (ES_MainHpBar))]
-    [FriendOf(typeof (ES_OpenBox))]
-    [FriendOf(typeof (ES_Singing))]
-    [FriendOf(typeof (ES_ButtonPositionSet))]
-    [FriendOf(typeof (DlgMainViewComponent))]
-    [FriendOf(typeof (ES_JoystickMove))]
-    [FriendOf(typeof (ES_MainSkill))]
-    [FriendOf(typeof (Scroll_Item_MainChatItem))]
-    [FriendOf(typeof (ChatComponent))]
-    [FriendOf(typeof (TaskComponentC))]
-    [FriendOf(typeof (UserInfoComponentC))]
-    [FriendOf(typeof (DlgMain))]
+    [FriendOf(typeof(ES_MainActivityTip))]
+    [FriendOf(typeof(Scroll_Item_MainTeamItem))]
+    [FriendOf(typeof(ES_RoleHead))]
+    [FriendOf(typeof(ES_MainBuff))]
+    [FriendOf(typeof(ES_MainHpBar))]
+    [FriendOf(typeof(ES_OpenBox))]
+    [FriendOf(typeof(ES_Singing))]
+    [FriendOf(typeof(ES_ButtonPositionSet))]
+    [FriendOf(typeof(DlgMainViewComponent))]
+    [FriendOf(typeof(ES_JoystickMove))]
+    [FriendOf(typeof(ES_MainSkill))]
+    [FriendOf(typeof(Scroll_Item_MainChatItem))]
+    [FriendOf(typeof(ChatComponent))]
+    [FriendOf(typeof(TaskComponentC))]
+    [FriendOf(typeof(UserInfoComponentC))]
+    [FriendOf(typeof(DlgMain))]
     public static class DlgMainSystem
     {
         public static void RegisterUIEvent(this DlgMain self)
@@ -436,7 +436,7 @@ namespace ET.Client
             else
             {
                 string oldValue = userInfoComponent.GetGameSettingValue(GameSettingEnum.HighFps);
-                CommonViewHelper.TargetFrameRate(oldValue == "1"? 60 : 30);
+                CommonViewHelper.TargetFrameRate(oldValue == "1" ? 60 : 30);
             }
 
             string attackmode = userInfoComponent.GetGameSettingValue(GameSettingEnum.AttackTarget);
@@ -446,7 +446,7 @@ namespace ET.Client
                     int.Parse(userInfoComponent.GetGameSettingValue(GameSettingEnum.SkillAttackPlayerFirst));
 
             float lenDepth = PlayerPrefsHelp.GetFloat(PlayerPrefsHelp.LenDepth);
-            self.Root().CurrentScene().GetComponent<MJCameraComponent>().LenDepth = lenDepth <= 0? 1 : lenDepth;
+            self.Root().CurrentScene().GetComponent<MJCameraComponent>().LenDepth = lenDepth <= 0 ? 1 : lenDepth;
 
             self.View.E_DragPanelEventTrigger.gameObject.SetActive(PlayerPrefsHelp.GetInt(PlayerPrefsHelp.RotaAngle) == 1);
 
@@ -577,7 +577,7 @@ namespace ET.Client
 
         private static void UpdateNpcTaskUI(this DlgMain self)
         {
-            List<Unit> allunit = self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> allunit = self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < allunit.Count; i++)
             {
                 Unit unit = allunit[i];
@@ -942,7 +942,7 @@ namespace ET.Client
             self.View.EG_Btn_TopRight_2RectTransform.gameObject.SetActive(!active);
             self.View.EG_Btn_TopRight_3RectTransform.gameObject.SetActive(!active);
 
-            self.View.E_Button_ZhanKaiButton.transform.localScale = active? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
+            self.View.E_Button_ZhanKaiButton.transform.localScale = active ? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
         }
 
         private static void OnButton_RunRace(this DlgMain self)
@@ -1155,9 +1155,13 @@ namespace ET.Client
             string[] item = items[0].Split(';');
             if (numericComponent.GetAsInt(NumericType.KillMonsterNumber) < self.KillMonsterRewardKey)
             {
+                BagInfo bagInfo = BagInfo.Create();
+                bagInfo.ItemID = int.Parse(item[0]);
+                bagInfo.ItemNum = int.Parse(item[1]);
+
                 ShowItemTips showItemTips = new()
                 {
-                    BagInfo = new BagInfo() { ItemID = int.Parse(item[0]), ItemNum = int.Parse(item[1]) },
+                    BagInfo = bagInfo,
                     ItemOperateEnum = ItemOperateEnum.None,
                     InputPoint = Input.mousePosition,
                     Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
@@ -1268,9 +1272,12 @@ namespace ET.Client
             string[] item = items[0].Split(';');
             if (userInfoComponent.UserInfo.Lv < self.LevelRewardKey)
             {
+                BagInfo bagInfo = BagInfo.Create();
+                bagInfo.ItemID = int.Parse(item[0]);
+                bagInfo.ItemNum = int.Parse(item[1]);
                 ShowItemTips showItemTips = new()
                 {
-                    BagInfo = new BagInfo() { ItemID = int.Parse(item[0]), ItemNum = int.Parse(item[1]) },
+                    BagInfo = bagInfo,
                     ItemOperateEnum = ItemOperateEnum.None,
                     InputPoint = Input.mousePosition,
                     Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
@@ -1434,7 +1441,7 @@ namespace ET.Client
             else
             {
                 self.View.EG_PhoneLeftRectTransform.gameObject.SetActive(true);
-                self.View.E_LeftTypeSetToggleGroup.OnSelectIndex(sceneTypeEnum == SceneTypeEnum.TeamDungeon? 1 : 0);
+                self.View.E_LeftTypeSetToggleGroup.OnSelectIndex(sceneTypeEnum == SceneTypeEnum.TeamDungeon ? 1 : 0);
             }
 
             int sceneid = self.Root().GetComponent<MapComponent>().SceneId;
@@ -1707,9 +1714,9 @@ namespace ET.Client
             }
 
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-            string value = usevalue != ""? usevalue : userInfoComponent.GetGameSettingValue(GameSettingEnum.Shadow);
+            string value = usevalue != "" ? usevalue : userInfoComponent.GetGameSettingValue(GameSettingEnum.Shadow);
             Light light = gameObject.GetComponent<Light>();
-            light.shadows = value == "0"? LightShadows.None : LightShadows.Soft;
+            light.shadows = value == "0" ? LightShadows.None : LightShadows.Soft;
         }
 
         public static void ShowPing(this DlgMain self)

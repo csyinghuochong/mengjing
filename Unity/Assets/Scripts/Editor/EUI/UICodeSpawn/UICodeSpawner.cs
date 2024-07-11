@@ -641,9 +641,10 @@ public partial class UICodeSpawner
 	    strBuilder.AppendLine("     				return null;");
 	    strBuilder.AppendLine("     			}");
 	    
+	    strBuilder.AppendFormat("		    	{0} es = this.m_{1};\r\n", subUIClassType, widget.ToLower());
 	    strBuilder.AppendLine("     			if (this.isCacheNode)");
 	    strBuilder.AppendLine("     			{");
-	    strBuilder.AppendFormat("     				if( this.m_{0} == null )\n" , widget.ToLower());
+	    strBuilder.AppendLine("     				if( es == null )\n");
 	    strBuilder.AppendLine("     				{");
 	    strBuilder.AppendFormat("		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,\"{0}\");\r\n",  strPath);
 	    strBuilder.AppendFormat("		    			this.m_{0} = this.AddChild<{1},Transform>(subTrans);\r\n", widget.ToLower(),subUIClassType);
@@ -652,10 +653,10 @@ public partial class UICodeSpawner
 	    strBuilder.AppendLine("     			}");
 	    strBuilder.AppendLine("     			else");
 	    strBuilder.AppendLine("     			{");
-	    strBuilder.AppendFormat("     				if( this.m_{0} != null )\n" , widget.ToLower());
+	    strBuilder.AppendLine("     				if( es != null )\n");
 	    strBuilder.AppendLine("     				{");
 	    strBuilder.AppendFormat("		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,\"{0}\");\r\n",  strPath);
-	    strBuilder.AppendFormat("		    			{0} es = this.m_{1};\r\n", subUIClassType, widget.ToLower());
+	    strBuilder.AppendFormat("		    			es = this.m_{0};\r\n", widget.ToLower());
 	    strBuilder.AppendLine("     					if( es.UITransform != subTrans )");
 	    strBuilder.AppendLine("     					{");
 	    strBuilder.AppendLine("     						es.Dispose();");

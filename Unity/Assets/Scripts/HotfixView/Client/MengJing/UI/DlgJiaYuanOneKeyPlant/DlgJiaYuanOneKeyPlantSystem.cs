@@ -59,7 +59,10 @@ namespace ET.Client
                     int index = num;
                     ES_CommonItem uI = null;
                     uI = self.AddChild<ES_CommonItem, Transform>(go.GetComponent<ReferenceCollector>().Get<GameObject>("UICommonItem").transform);
-                    uI.UpdateItem(new BagInfo() { ItemID = bagInfos[i].ItemID, ItemNum = 1 }, ItemOperateEnum.None);
+                    BagInfo bagInfo = BagInfo.Create();
+                    bagInfo.ItemID = bagInfos[i].ItemID;
+                    bagInfo.ItemNum = 1;
+                    uI.UpdateItem(bagInfo, ItemOperateEnum.None);
                     go.GetComponent<ReferenceCollector>().Get<GameObject>("Btn_Click").GetComponent<Button>()
                             .AddListener(() => { self.OnSeedToggle(index); });
 

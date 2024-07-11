@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgJiaYuanPlanWatch))]
+    [FriendOf(typeof(DlgJiaYuanPlanWatch))]
     public static class DlgJiaYuanPlanWatchSystem
     {
         public static void RegisterUIEvent(this DlgJiaYuanPlanWatch self)
@@ -56,7 +56,10 @@ namespace ET.Client
             long shouhuoTime = ET.JiaYuanHelper.GetPlanNextShouHuoTime(unit.ConfigId, StartTime, GatherNumber, GatherLastTime);
             self.View.E_Text_Desc_3Text.text = $"预计收获: {ET.JiaYuanHelper.TimeToShow(TimeInfo.Instance.ToDateTime(shouhuoTime).ToString("f"))}";
 
-            self.View.ES_CommonItem.UpdateItem(new BagInfo() { ItemID = jiaYuanFarmConfig.GetItemID, ItemNum = 1 }, ItemOperateEnum.None);
+            BagInfo bagInfo = BagInfo.Create();
+            bagInfo.ItemID = jiaYuanFarmConfig.GetItemID;
+            bagInfo.ItemNum = 1;
+            self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
 
             JiaYuanComponentC jiaYuanComponent = self.Root().GetComponent<JiaYuanComponentC>();
             M2C_JiaYuanWatchResponse response = await JiaYuanNetHelper.JiaYuanWatchRequest(self.Root(), jiaYuanComponent.MasterId, unit.Id);

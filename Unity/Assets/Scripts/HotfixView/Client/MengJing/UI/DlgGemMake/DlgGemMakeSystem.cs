@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.GemMakeCDTimer)]
-    public class GemMakeCDTimer: ATimer<DlgGemMake>
+    public class GemMakeCDTimer : ATimer<DlgGemMake>
     {
         protected override void Run(DlgGemMake self)
         {
@@ -23,9 +23,9 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (Scroll_Item_MakeItem))]
-    [FriendOf(typeof (ES_CommonItem))]
-    [FriendOf(typeof (DlgGemMake))]
+    [FriendOf(typeof(Scroll_Item_MakeItem))]
+    [FriendOf(typeof(ES_CommonItem))]
+    [FriendOf(typeof(DlgGemMake))]
     public static class DlgGemMakeSystem
     {
         public static void RegisterUIEvent(this DlgGemMake self)
@@ -96,7 +96,9 @@ namespace ET.Client
             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(self.MakeId);
             if (self.View.ES_CommonItem.uiTransform.gameObject != null)
             {
-                self.View.ES_CommonItem.UpdateItem(new BagInfo() { ItemID = equipMakeConfig.MakeItemID }, ItemOperateEnum.MakeItem);
+                BagInfo bagInfo = BagInfo.Create();
+                bagInfo.ItemID = equipMakeConfig.MakeItemID;
+                self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.MakeItem);
                 self.View.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
             }
         }
@@ -198,7 +200,7 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemMakeItems, self.ShowMake.Count);
             self.View.E_MakeItemsLoopVerticalScrollRect.SetVisible(true, self.ShowMake.Count);
 
-            self.OnSelectMakeItem(self.ShowMake.Count == 0? 0 : self.ShowMake[0]);
+            self.OnSelectMakeItem(self.ShowMake.Count == 0 ? 0 : self.ShowMake[0]);
         }
 
         private static void OnMakeItemsRefresh(this DlgGemMake self, Transform transform, int index)

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_BeforeMove_DlgJiaYuanMainRefesh: AEvent<Scene, DataUpdate_BeforeMove>
+    public class DataUpdate_BeforeMove_DlgJiaYuanMainRefesh : AEvent<Scene, DataUpdate_BeforeMove>
     {
         protected override async ETTask Run(Scene root, DataUpdate_BeforeMove args)
         {
@@ -16,7 +16,7 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (DlgJiaYuanMain))]
+    [FriendOf(typeof(DlgJiaYuanMain))]
     public static class DlgJiaYuanMainSystem
     {
         public static void RegisterUIEvent(this DlgJiaYuanMain self)
@@ -73,8 +73,8 @@ namespace ET.Client
             bool activeSelf = self.View.EG_RightRectTransform.gameObject.activeSelf;
             self.View.EG_RightRectTransform.gameObject.SetActive(!activeSelf);
 
-            self.View.E_Btn_ShouSuoButton.transform.localPosition = activeSelf? new Vector3(-51f, -142f, 0f) : new Vector3(-551f, -142f, 0f);
-            self.View.E_Btn_ShouSuoButton.transform.localScale = activeSelf? new Vector3(-1f, 1f, 1f) : new Vector3(1f, 1f, 1f);
+            self.View.E_Btn_ShouSuoButton.transform.localPosition = activeSelf ? new Vector3(-51f, -142f, 0f) : new Vector3(-551f, -142f, 0f);
+            self.View.E_Btn_ShouSuoButton.transform.localScale = activeSelf ? new Vector3(-1f, 1f, 1f) : new Vector3(1f, 1f, 1f);
         }
 
         public static void OnButtonMyJiaYuan(this DlgJiaYuanMain self)
@@ -169,7 +169,7 @@ namespace ET.Client
             }
 
             self.MyJiaYuan = jiaYuanComponentC.MasterId == userInfoComponent.UserInfo.UserId;
-            self.JiaYuanLv = self.MyJiaYuan? userInfoComponent.UserInfo.JiaYuanLv : response.JiaYuanLv;
+            self.JiaYuanLv = self.MyJiaYuan ? userInfoComponent.UserInfo.JiaYuanLv : response.JiaYuanLv;
             JiaYuanConfig jiayuanCof = JiaYuanConfigCategory.Instance.Get(self.JiaYuanLv);
 
             self.View.E_RenKouTextText.text = jiaYuanComponentC.GetPeopleNumber() + "/" + jiayuanCof.PeopleNumMax;
@@ -391,27 +391,28 @@ namespace ET.Client
         public static void OnButtonTalk(this DlgJiaYuanMain self)
         {
             Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            List<Unit> units = main.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = main.GetParent<UnitComponent>().GetAll();
 
             float mindis = float.MaxValue;
             long rubshid = 0;
             for (int i = 0; i < units.Count; i++)
             {
-                if (units[i].Type != UnitType.Monster)
+                Unit unit = units[i];
+                if (unit.Type != UnitType.Monster)
                 {
                     continue;
                 }
 
-                MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(units[i].ConfigId);
+                MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
                 if (monsterConfig.MonsterSonType != 60)
                 {
                     continue;
                 }
 
-                float t_distance = PositionHelper.Distance2D(main.Position, units[i].Position);
+                float t_distance = PositionHelper.Distance2D(main.Position, unit.Position);
                 if (t_distance < 5f && t_distance <= mindis)
                 {
-                    rubshid = units[i].Id;
+                    rubshid = unit.Id;
                     mindis = t_distance;
                 }
             }
@@ -436,7 +437,7 @@ namespace ET.Client
             float distance = 10f;
 
             Unit main = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            List<Unit> units = main.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = main.GetParent<UnitComponent>().GetAll();
             ListComponent<UnitLockRange> UnitLockRanges = new ListComponent<UnitLockRange>();
             for (int i = 0; i < units.Count; i++)
             {

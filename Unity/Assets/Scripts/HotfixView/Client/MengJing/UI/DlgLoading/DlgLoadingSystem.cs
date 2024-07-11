@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.UILoadingTimer)]
-    public class UILoadingTimer: ATimer<DlgLoading>
+    public class UILoadingTimer : ATimer<DlgLoading>
     {
         protected override void Run(DlgLoading self)
         {
@@ -23,7 +23,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class LoadSceneFinished_DlgLoadingRefesh: AEvent<Scene, LoadSceneFinished>
+    public class LoadSceneFinished_DlgLoadingRefesh : AEvent<Scene, LoadSceneFinished>
     {
         protected override async ETTask Run(Scene root, LoadSceneFinished args)
         {
@@ -32,8 +32,8 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (DlgMainViewComponent))]
-    [FriendOf(typeof (DlgLoading))]
+    [FriendOf(typeof(DlgMainViewComponent))]
+    [FriendOf(typeof(DlgLoading))]
     public static class DlgLoadingSystem
     {
         public static void RegisterUIEvent(this DlgLoading self)
@@ -76,7 +76,7 @@ namespace ET.Client
                     // }
 
                     SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(chapterId);
-                    loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes)? sceneConfig.LoadingRes : "MainCity";
+                    loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes) ? sceneConfig.LoadingRes : "MainCity";
                     break;
                 case (int)SceneTypeEnum.CellDungeon:
                     loadResName = backpngs[index];
@@ -96,7 +96,7 @@ namespace ET.Client
                 case (int)SceneTypeEnum.Arena:
                     loadResName = backpngs[index];
                     sceneConfig = SceneConfigCategory.Instance.Get(chapterId);
-                    loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes)? sceneConfig.LoadingRes : "MainCity";
+                    loadResName = !CommonHelp.IfNull(sceneConfig.LoadingRes) ? sceneConfig.LoadingRes : "MainCity";
                     self.PreLoadAssets.AddRange(self.GetRoleSkillEffect());
                     self.PreLoadAssets.AddRange(self.GetSceneDungeonMonsters());
                     break;
@@ -121,7 +121,7 @@ namespace ET.Client
             }
 
             self.PassTime = 0f;
-            self.ChapterId = sceneTypeEnum == (int)SceneTypeEnum.CellDungeon? chapterId : 0;
+            self.ChapterId = sceneTypeEnum == (int)SceneTypeEnum.CellDungeon ? chapterId : 0;
         }
 
         public static List<string> GetMonstersModelAndEffect(this DlgLoading self, List<int> monsterIds)
@@ -208,7 +208,11 @@ namespace ET.Client
             SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();
             List<SkillPro> allskills = new List<SkillPro>();
             allskills.AddRange(skillSetComponent.SkillList);
-            allskills.Add(new SkillPro() { SkillID = fangunSkill, SkillPosition = 100, SkillSetType = (int)SkillSetEnum.Skill });
+            SkillPro skillProNew = SkillPro.Create();
+            skillProNew.SkillID = fangunSkill;
+            skillProNew.SkillPosition = 100;
+            skillProNew.SkillSetType = (int)SkillSetEnum.Skill;
+            allskills.Add(skillProNew);
 
             for (int i = 0; i < allskills.Count; i++)
             {
