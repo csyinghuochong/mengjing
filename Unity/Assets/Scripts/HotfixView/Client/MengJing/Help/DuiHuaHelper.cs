@@ -13,16 +13,17 @@ namespace ET.Client
             float distance = 20f;
             Unit npc = null;
             Unit main = UnitHelper.GetMyUnitFromClientScene(root);
-            List<Unit> units = root.CurrentScene().GetComponent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = root.CurrentScene().GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
-                if (units[i].Type == UnitType.Npc || units[i].IsChest())
+                Unit unit = units[i];
+                if (unit.Type == UnitType.Npc || unit.IsChest())
                 {
-                    float t_distance = PositionHelper.Distance2D(main.Position, units[i].Position);
+                    float t_distance = PositionHelper.Distance2D(main.Position, unit.Position);
                     if (t_distance < distance)
                     {
                         distance = t_distance;
-                        npc = units[i];
+                        npc = unit;
                     }
                 }
             }

@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [EntitySystemOf(typeof (ES_JiaYuanCooking))]
-    [FriendOfAttribute(typeof (ES_JiaYuanCooking))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [EntitySystemOf(typeof(ES_JiaYuanCooking))]
+    [FriendOfAttribute(typeof(ES_JiaYuanCooking))]
     public static partial class ES_JiaYuanCookingSystem
     {
         [EntitySystem]
@@ -118,7 +118,7 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this ES_JiaYuanCooking self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.HuishouBag);
+            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count ? self.ShowBagInfos[index] : null, ItemOperateEnum.HuishouBag);
             scrollItemCommonItem.ES_CommonItem.PointerDownHandler = (BagInfo binfo, PointerEventData pdata) =>
             {
                 self.OnPointerDown(binfo, pdata).Coroutine();
@@ -213,10 +213,12 @@ namespace ET.Client
                         continue;
                     }
 
-                    self.CostItemList[i].UpdateItem(new BagInfo()
-                    {
-                        ItemID = bagInfo.ItemID, BagInfoID = bagInfo.BagInfoID, ItemNum = 1, RpcId = i,
-                    }, ItemOperateEnum.HuishouShow);
+                    BagInfo bagInfo1 = BagInfo.Create();
+                    bagInfo1.ItemID = bagInfo.ItemID;
+                    bagInfo1.BagInfoID = bagInfo.BagInfoID;
+                    bagInfo1.ItemNum = 1;
+                    bagInfo1.RpcId = i;
+                    self.CostItemList[i].UpdateItem(bagInfo1, ItemOperateEnum.HuishouShow);
                     self.CostItemList[i].E_ItemNumText.text = "1";
                     self.CostItemList[i].E_ItemNameText.gameObject.SetActive(false);
                     break;

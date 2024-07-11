@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (LockTargetComponent))]
-    [EntitySystemOf(typeof (LockTargetComponent))]
+    [FriendOf(typeof(LockTargetComponent))]
+    [EntitySystemOf(typeof(LockTargetComponent))]
     public static partial class LockTargetComponentSystem
     {
         [EntitySystem]
@@ -36,7 +36,7 @@ namespace ET.Client
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             if (mapComponent.SceneType != SceneTypeEnum.MainCityScene)
             {
-                List<Unit> allUnit = main.GetParent<UnitComponent>().GetAll();
+                List<EntityRef<Unit>> allUnit = main.GetParent<UnitComponent>().GetAll();
                 for (int i = 0; i < allUnit.Count; i++)
                 {
                     Unit unit = allUnit[i];
@@ -186,7 +186,7 @@ namespace ET.Client
             }
 
             float distance = 10f;
-            List<Unit> units = main.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = main.GetParent<UnitComponent>().GetAll();
             ListComponent<UnitLockRange> UnitLockRanges = new ListComponent<UnitLockRange>();
             for (int i = 0; i < units.Count; i++)
             {
@@ -208,7 +208,8 @@ namespace ET.Client
                     }
                 }
 
-                StateComponentC stateComponent = units[i].GetComponent<StateComponentC>();
+                Unit unit1 = units[i];
+                StateComponentC stateComponent = unit1.GetComponent<StateComponentC>();
                 if (stateComponent.StateTypeGet(StateTypeEnum.Stealth) || stateComponent.StateTypeGet(StateTypeEnum.Hide))
                 {
                     continue;

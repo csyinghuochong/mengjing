@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (SkillIndicatorComponent))]
-    [FriendOf(typeof (SkillIndicatorComponent))]
+    [EntitySystemOf(typeof(SkillIndicatorComponent))]
+    [FriendOf(typeof(SkillIndicatorComponent))]
     public static partial class SkillIndicatorComponentSystem
     {
         [EntitySystem]
@@ -102,7 +102,7 @@ namespace ET.Client
             self.SkillRangeSize = (float)self.mSkillConfig.SkillRangeSize;
             SkillIndicatorItem skillIndicatorItem = new SkillIndicatorItem();
             self.SkillIndicator = skillIndicatorItem;
-            skillIndicatorItem.SkillZhishiType = skillconfig.SkillTargetType == SkillTargetType.TargetOnly? SkillZhishiType.TargetOnly
+            skillIndicatorItem.SkillZhishiType = skillconfig.SkillTargetType == SkillTargetType.TargetOnly ? SkillZhishiType.TargetOnly
                     : skillconfig.SkillZhishiType;
 
             skillIndicatorItem.EffectPath = self.GetIndicatorPath(skillIndicatorItem.SkillZhishiType);
@@ -145,7 +145,7 @@ namespace ET.Client
                             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
                             int equipIndex = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.EquipIndex);
                             //equipIndex 0弓   1剑
-                            scaleList = equipIndex == 0? new float[3] { 15f, 15f, 15f } : new float[3] { 6f, 12f, 6f };
+                            scaleList = equipIndex == 0 ? new float[3] { 15f, 15f, 15f } : new float[3] { 6f, 12f, 6f };
                         }
 
                         skillIndicatorItem.GameObject.Get<GameObject>("Skill_Area").transform.localScale = Vector3.one * scaleList[occ - 1];
@@ -257,7 +257,7 @@ namespace ET.Client
             {
                 float rate = 1;
                 rate = self.StartIndicator.magnitude / 120f;
-                rate = (rate > 1f)? 1f : rate;
+                rate = (rate > 1f) ? 1f : rate;
                 skillIndicatorItem.AttackDistance = self.SkillRangeSize * rate;
                 skillIndicatorItem.TargetAngle = 90 - (int)(Mathf.Atan2(self.StartIndicator.y, self.StartIndicator.x) * Mathf.Rad2Deg);
             }
@@ -273,7 +273,7 @@ namespace ET.Client
 
         public static float GetIndicatorDistance(this SkillIndicatorComponent self)
         {
-            return self.SkillIndicator != null? self.SkillIndicator.AttackDistance : 0;
+            return self.SkillIndicator != null ? self.SkillIndicator.AttackDistance : 0;
         }
 
         public static int GetIndicatorAngle(this SkillIndicatorComponent self)
@@ -357,7 +357,7 @@ namespace ET.Client
                     float distance = 10f;
                     Vector3 vector3 = new Vector3();
                     long monsterId = 0;
-                    List<Unit> allunits = myUnit.GetParent<UnitComponent>().GetAll();
+                    List<EntityRef<Unit>> allunits = myUnit.GetParent<UnitComponent>().GetAll();
                     foreach (Unit u in allunits)
                     {
                         if (!myUnit.IsCanAttackUnit(u) && !u.IsJingLingMonster())

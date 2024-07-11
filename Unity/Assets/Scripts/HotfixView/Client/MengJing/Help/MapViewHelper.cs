@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,11 +5,10 @@ namespace ET.Client
 {
     public static class MapViewHelper
     {
-        
         public static void OnMainHeroInit(Scene root, Transform topTf, Transform mainTf, int sceneTypeEnum)
-        { 
+        {
             GlobalComponent globalComponent = root.GetComponent<GlobalComponent>();
-            Camera camera =globalComponent.MainCamera.GetComponent<Camera>() ;
+            Camera camera = globalComponent.MainCamera.GetComponent<Camera>();
             camera.GetComponent<MyCamera_1>().enabled = sceneTypeEnum == SceneTypeEnum.MainCityScene;
             camera.GetComponent<MyCamera_1>().Target = topTf;
 
@@ -27,6 +25,7 @@ namespace ET.Client
                     {
                         continue;
                     }
+
                     NpcConfig npcConfig = NpcConfigCategory.Instance.Get(npcLocal.NpcId);
                     npcLocal.Target = mainTf;
                     npcLocal.NpcName = npcConfig.Name;
@@ -36,17 +35,16 @@ namespace ET.Client
             }
         }
 
-        
         public static void OnMainHeroMove(Unit self)
         {
             float curTime = Time.time;
-            List<Unit> units = self.Scene().GetComponent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = self.Scene().GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
                 Unit unit = units[i];
                 //if (curTime <= unit.UpdateUITime)
                 //{
-               //     continue;
+                //     continue;
                 //}
                 if (unit.Type == UnitType.Npc)
                 {
@@ -55,6 +53,7 @@ namespace ET.Client
                     //npcHeadBarComponent?.OnUpdateNpcTalk(self);
                     continue;
                 }
+
                 if (unit.Type == UnitType.Pasture)
                 {
                     //unit.UpdateUITime = curTime;
@@ -62,6 +61,7 @@ namespace ET.Client
                     //npcHeadBarComponent?.OnUpdateNpcTalk(self);
                     continue;
                 }
+
                 if (unit.Type == UnitType.Chuansong)
                 {
                     //unit.UpdateUITime = curTime;
@@ -71,5 +71,4 @@ namespace ET.Client
             }
         }
     }
-    
 }
