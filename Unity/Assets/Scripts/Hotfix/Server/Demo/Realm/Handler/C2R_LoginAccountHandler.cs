@@ -62,23 +62,20 @@ namespace ET.Server
                 using (await coroutineLockComponent.Wait(CoroutineLockType.LoginAccount, request.Account.Trim().GetHashCode()))
                 {
                     ActorId accountZone = StartSceneConfigCategory.Instance.LoginCenterConfig.ActorId;
-                    Center2A_CheckAccount centerAccount = (Center2A_CheckAccount)await session.Root().GetComponent<MessageSender>().Call(accountZone, new A2Center_CheckAccount()
-                    {
-                        AccountName = request.Account,
-                        Password = request.Password,
-                        ThirdLogin = request.ThirdLogin
-                    });
+                    A2Center_CheckAccount A2Center_CheckAccount = A2Center_CheckAccount.Create();
+                    A2Center_CheckAccount.AccountName = request.Account;
+                    A2Center_CheckAccount.Password = request.Password;
+                    A2Center_CheckAccount.ThirdLogin = request.ThirdLogin;
+                    Center2A_CheckAccount centerAccount = (Center2A_CheckAccount)await session.Root().GetComponent<MessageSender>().Call(accountZone, A2Center_CheckAccount);
                     PlayerInfo playerInfo = centerAccount.PlayerInfo != null ? centerAccount.PlayerInfo : null;
-
-
+                    
                     //没有则注册
                     if (centerAccount.PlayerInfo == null)
                     {
-                        Center2A_RegisterAccount saveAccount = (Center2A_RegisterAccount)await session.Root().GetComponent<MessageSender>().Call(accountZone, new A2Center_RegisterAccount()
-                        {
-                            AccountName = request.Account,
-                            Password = request.Password
-                        });
+                        A2Center_RegisterAccount A2Center_RegisterAccount = A2Center_RegisterAccount.Create();
+                        A2Center_RegisterAccount.AccountName = request.Account;
+                        A2Center_RegisterAccount.Password = request.Password;
+                        Center2A_RegisterAccount saveAccount = (Center2A_RegisterAccount)await session.Root().GetComponent<MessageSender>().Call(accountZone, A2Center_RegisterAccount);
                         AccountId = saveAccount.AccountId;
                     }
                     else
@@ -115,6 +112,7 @@ namespace ET.Server
                     }
                     bool IsHoliday = false;
                     bool StopServer = false;
+                    
                     Center2A_CheckAccount checkAccount = (Center2A_CheckAccount)await session.Root().GetComponent<MessageSender>().Call(accountZone, new A2Center_CheckAccount()
                     {
                         AccountName = request.Account,

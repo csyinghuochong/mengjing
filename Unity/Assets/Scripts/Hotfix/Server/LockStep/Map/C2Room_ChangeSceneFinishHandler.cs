@@ -24,10 +24,11 @@ namespace ET.Server
             Room2C_Start room2CStart = new() { StartTime = TimeInfo.Instance.ServerFrameTime() };
             foreach (RoomPlayer rp in roomServerComponent.Children.Values)
             {
-                room2CStart.UnitInfo.Add(new LockStepUnitInfo()
-                {
-                    PlayerId = rp.Id, Position = new TSVector(20, 0, -10), Rotation = TSQuaternion.identity
-                });
+                LockStepUnitInfo LockStepUnitInfo = LockStepUnitInfo.Create();
+                LockStepUnitInfo.PlayerId = rp.Id;
+                LockStepUnitInfo.Position = new TSVector(20, 0, -10);
+                LockStepUnitInfo.Rotation = TSQuaternion.identity;
+                room2CStart.UnitInfo.Add(LockStepUnitInfo);
             }
 
             room.Init(room2CStart.UnitInfo, room2CStart.StartTime);

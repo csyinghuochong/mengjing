@@ -17,7 +17,9 @@ namespace ET.Server
                 long nowFrameTime = room.FixedTimeCounter.FrameTime(message.Frame);
                 int diffTime = (int)(nowFrameTime - TimeInfo.Instance.ServerFrameTime());
 
-                room.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(message.PlayerId, new Room2C_AdjustUpdateTime() {DiffTime = diffTime});
+                Room2C_AdjustUpdateTime Room2C_AdjustUpdateTime = Room2C_AdjustUpdateTime.Create();
+                Room2C_AdjustUpdateTime.DiffTime = diffTime;
+                room.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(message.PlayerId, Room2C_AdjustUpdateTime);
             }
 
             if (message.Frame < room.AuthorityFrame)  // 小于AuthorityFrame，丢弃

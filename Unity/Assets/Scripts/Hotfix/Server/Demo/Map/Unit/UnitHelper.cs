@@ -416,13 +416,11 @@ namespace ET.Server
         public static async ETTask<int> UpdateUnionToChat(this Unit self)
         {
             ActorId chatServerId = UnitCacheHelper.GetChatServerId( self.Zone() );
- 
-            
-            Chat2M_UpdateUnion chat2G_EnterChat = (Chat2M_UpdateUnion)await self.Root().GetComponent<MessageSender>().Call(chatServerId, new M2Chat_UpdateUnion()
-            {
-                UnitId = self.Id,
-                UnionId = self.GetComponent<NumericComponentS>().GetAsLong(NumericType.UnionId_0),
-            });
+
+            M2Chat_UpdateUnion M2Chat_UpdateUnion = M2Chat_UpdateUnion.Create();
+            M2Chat_UpdateUnion.UnitId = self.Id;
+            M2Chat_UpdateUnion.UnionId = self.GetComponent<NumericComponentS>().GetAsLong(NumericType.UnionId_0);
+            Chat2M_UpdateUnion chat2G_EnterChat = (Chat2M_UpdateUnion)await self.Root().GetComponent<MessageSender>().Call(chatServerId, M2Chat_UpdateUnion);
             return chat2G_EnterChat.Error;
         }
         
