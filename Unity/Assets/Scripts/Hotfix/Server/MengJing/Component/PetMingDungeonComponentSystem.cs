@@ -110,12 +110,11 @@ namespace ET.Server
              public static async ETTask GeneratePetFuben(this PetMingDungeonComponent self)
              {
                  ActorId chargeServerId = UnitCacheHelper.GetActivityServerId(self.Zone());
+                 M2A_PetMingPlayerInfoRequest M2A_PetMingPlayerInfoRequest = M2A_PetMingPlayerInfoRequest.Create();
+                 M2A_PetMingPlayerInfoRequest.MingType = self.MineType;
+                 M2A_PetMingPlayerInfoRequest.Postion = self.Position;
                  A2M_PetMingPlayerInfoResponse r_GameStatusResponse = (A2M_PetMingPlayerInfoResponse)await self.Root().GetComponent<MessageSender>().Call
-                     (chargeServerId, new M2A_PetMingPlayerInfoRequest()
-                     {
-                         MingType = self.MineType, 
-                         Postion = self.Position,
-                     });
+                     (chargeServerId, M2A_PetMingPlayerInfoRequest);
 
                  if (r_GameStatusResponse.Error != ErrorCode.ERR_Success)
                  {

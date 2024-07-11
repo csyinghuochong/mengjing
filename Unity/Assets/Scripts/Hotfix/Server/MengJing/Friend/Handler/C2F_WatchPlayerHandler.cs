@@ -56,8 +56,10 @@ namespace ET.Server
                     break;
                 case 2:
                     ActorId teamServerId = UnitCacheHelper.GetTeamServerId(scene.Zone());
+                    C2T_GetTeamInfoRequest C2T_GetTeamInfoRequest = C2T_GetTeamInfoRequest.Create();
+                    C2T_GetTeamInfoRequest.UserID = request.UserId;
                     T2C_GetTeamInfoResponse g_SendChatRequest1 = (T2C_GetTeamInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
-                        (teamServerId, new C2T_GetTeamInfoRequest() { UserID = request.UserId });
+                        (teamServerId, C2T_GetTeamInfoRequest);
 
                     response.TeamId = g_SendChatRequest1.TeamInfo != null ? g_SendChatRequest1.TeamInfo.TeamId : 0;
                     break;

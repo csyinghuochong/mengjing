@@ -166,7 +166,8 @@ namespace ET.Server
         {
             Scene root = scene.Root();
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(scene.Zone());
-            Other2UnitCache_DeleteUnit message = new Other2UnitCache_DeleteUnit() { UnitId = unitId };
+            Other2UnitCache_DeleteUnit message = Other2UnitCache_DeleteUnit.Create();
+            message.UnitId = unitId;
             await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message);
         }
 
@@ -177,7 +178,8 @@ namespace ET.Server
         /// <param name="unit"></param>
         public static void AddOrUpdateUnitAllCache(Unit unit)
         {
-            Other2UnitCache_AddOrUpdateUnit message = new Other2UnitCache_AddOrUpdateUnit() { UnitId = unit.Id, };
+            Other2UnitCache_AddOrUpdateUnit message = Other2UnitCache_AddOrUpdateUnit.Create();
+            message.UnitId = unit.Id;
 
             message.EntityTypes.Add(unit.GetType().FullName);
             message.EntityBytes.Add(unit.ToBson());

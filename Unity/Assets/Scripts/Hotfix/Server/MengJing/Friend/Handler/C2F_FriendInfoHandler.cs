@@ -21,14 +21,13 @@ namespace  ET.Server
 
                 //await  root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(friendId, new ILocationRequest());
 
-                friendInfos.Add(new FriendInfo()
-                {
-                    UserId = friendId,
-                    PlayerLevel = userInfoComponent.UserInfo.Lv,
-                    //OnLineTime = g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0  ? 1 : 0,
-                    PlayerName = userInfoComponent.UserInfo.Name,
-                    Occ = userInfoComponent.UserInfo.Occ
-                });
+                FriendInfo FriendInfo = FriendInfo.Create();
+                FriendInfo.UserId = friendId;
+                FriendInfo.PlayerLevel = userInfoComponent.UserInfo.Lv;
+                //FriendInfo.OnLineTime = g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0  ? 1 : 0,
+                FriendInfo.PlayerName = userInfoComponent.UserInfo.Name;
+                FriendInfo.Occ = userInfoComponent.UserInfo.Occ;
+                friendInfos.Add(FriendInfo);
             }
 
             return friendInfos;
@@ -70,24 +69,21 @@ namespace  ET.Server
 
             if (response.FriendList.Count == 0)
             {
-                response.FriendList.Add(new FriendInfo()
-                {
-                    PlayerName = "玩家1",
-                    Occ = 1,
-                    PlayerLevel = 1,
-                    UserId = IdGenerater.Instance.GenerateId(),
-                });
-                response.FriendList.Add(new FriendInfo()
-                {
-                    PlayerName = "玩家2",
-                    Occ = 1,
-                    PlayerLevel = 1,
-                    UserId = IdGenerater.Instance.GenerateId(),
-                });
+                FriendInfo FriendInfo_a = FriendInfo.Create();
+                FriendInfo_a.PlayerName = "玩家1";
+                FriendInfo_a.Occ = 1;
+                FriendInfo_a.PlayerLevel = 1;
+                FriendInfo_a.UserId = IdGenerater.Instance.GenerateId();
+                response.FriendList.Add(FriendInfo_a);
+
+                FriendInfo FriendInfo_b = FriendInfo.Create();
+                FriendInfo_b.PlayerName = "玩家2";
+                FriendInfo_b.Occ = 1;
+                FriendInfo_b.PlayerLevel = 1;
+                FriendInfo_b.UserId = IdGenerater.Instance.GenerateId();
+                response.FriendList.Add(FriendInfo_b);
                 
             }
-
-           
             await ETTask.CompletedTask;
         }
     }

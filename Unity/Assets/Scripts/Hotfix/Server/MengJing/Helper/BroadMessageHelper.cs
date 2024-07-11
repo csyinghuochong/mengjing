@@ -15,12 +15,11 @@ namespace ET.Server
 
         public static async ETTask SendServerMessage(Scene root, ActorId serverid, int messageType, string message)
         {
+            A2A_ServerMessageRequest A2A_ServerMessageRequest = A2A_ServerMessageRequest.Create();
+            A2A_ServerMessageRequest.MessageType = messageType;
+            A2A_ServerMessageRequest.MessageValue = message;
             A2A_ServerMessageRResponse g_SendChatRequest = (A2A_ServerMessageRResponse)await root.GetComponent<MessageSender>().Call
-            (serverid, new A2A_ServerMessageRequest()
-            {
-                MessageType = messageType,
-                MessageValue = message
-            });
+            (serverid, A2A_ServerMessageRequest);
         }
 
         /// <summary>

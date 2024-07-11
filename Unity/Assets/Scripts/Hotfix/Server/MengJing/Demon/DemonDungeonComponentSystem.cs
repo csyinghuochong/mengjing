@@ -22,10 +22,12 @@ namespace ET.Server
             self.IsOver = false;
             if (self.Zone() == 5)
             {
-                
+                G2Robot_MessageRequest G2Robot_MessageRequest = G2Robot_MessageRequest.Create();
+                G2Robot_MessageRequest.Zone = self.Zone();
+                G2Robot_MessageRequest.MessageType = NoticeType.Demon;
+                G2Robot_MessageRequest.Message = string.Empty;
                 ActorId robotSceneId = StartSceneConfigCategory.Instance.GetBySceneName(203, "Robot01").ActorId;
-                self.Root().GetComponent<MessageSender>().Send(robotSceneId,
-                    new G2Robot_MessageRequest() { Zone = self.Zone(), MessageType = NoticeType.Demon, Message = string.Empty });
+                self.Root().GetComponent<MessageSender>().Send(robotSceneId,G2Robot_MessageRequest);
             }
         }
 

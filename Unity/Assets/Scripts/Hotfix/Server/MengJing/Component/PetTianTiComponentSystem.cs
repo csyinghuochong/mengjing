@@ -146,7 +146,7 @@ namespace ET.Server
                  ActorId mapInstanceId = UnitCacheHelper.GetRankServerId(self.Zone());
 
                  Unit unit = self.MainUnit;
-                 RankPetInfo rankPetInfo = new RankPetInfo();
+                 RankPetInfo rankPetInfo = RankPetInfo.Create();
                  UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                  rankPetInfo.UserId = userInfoComponent.UserInfo.UserId;
                  rankPetInfo.PlayerName = userInfoComponent.UserInfo.Name;
@@ -157,8 +157,13 @@ namespace ET.Server
                      RolePetInfo rolePetInfo = unit.GetComponent<PetComponentS>().GetPetInfo(rankPetInfo.PetUId[i]);
                      rankPetInfo.PetConfigId.Add(rolePetInfo!=null ? rolePetInfo.ConfigId :0);
                  }
+
+                 M2R_PetRankUpdateRequest M2R_PetRankUpdateRequest = M2R_PetRankUpdateRequest.Create();
+                 M2R_PetRankUpdateRequest.RankPetInfo = rankPetInfo;
+                 M2R_PetRankUpdateRequest.Win = result;
+                 M2R_PetRankUpdateRequest.EnemyId = self.EnemyId;
                  R2M_PetRankUpdateResponse m2m_TrasferUnitResponse = (R2M_PetRankUpdateResponse)await self.Root().GetComponent<MessageSender>().Call
-                          (mapInstanceId, new M2R_PetRankUpdateRequest() {  RankPetInfo = rankPetInfo, Win = result, EnemyId = self.EnemyId });
+                          (mapInstanceId, M2R_PetRankUpdateRequest);
 
                  return m2m_TrasferUnitResponse.SelfRank;
              }

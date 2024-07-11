@@ -39,16 +39,15 @@ namespace ET.Server
                 }
 
                 ActorId gateServerId = UnitCacheHelper.GetGateServerId(scene.Zone());
+                T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+                T2G_GateUnitInfoRequest.UserID = request.Id;
                 G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
-                      (gateServerId, new T2G_GateUnitInfoRequest()
-                      {
-                          UserID = request.Id
-                      });
+                      (gateServerId, T2G_GateUnitInfoRequest);
 
                 //在线直接推送
                 if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
                 {
-                    M2C_UpdateMailInfo m2C_HorseNoticeInfo = new M2C_UpdateMailInfo();
+                    M2C_UpdateMailInfo m2C_HorseNoticeInfo = M2C_UpdateMailInfo.Create();
                     MapMessageHelper.SendToClient( scene.Root(), g2M_UpdateUnitResponse.SessionInstanceId, m2C_HorseNoticeInfo);
                 }
                 if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.None)
