@@ -154,7 +154,10 @@ namespace ET.Client
 			}
 			if (add && index == -1)
 			{
-				self.SkillList.Add(new SkillPro() { SkillID = skillId, SkillSource = (int)SkillSourceEnum.TianFu });
+				SkillPro SkillPro = SkillPro.Create();
+				SkillPro.SkillID = skillId;
+				SkillPro.SkillSource = (int)SkillSourceEnum.TianFu;
+				self.SkillList.Add(SkillPro);
 			}
 			if (!add && index >= 0)
 			{
@@ -332,7 +335,7 @@ namespace ET.Client
 				newSkill = self.GetBySkillID(skillId);
 				if (newSkill == null)
 				{
-					newSkill = new SkillPro();
+					newSkill = SkillPro.Create();
 					self.SkillList.Add(newSkill);
 				}
 			}

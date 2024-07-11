@@ -57,8 +57,8 @@ namespace ET
 
         public static (RolePetInfo, RolePetInfo) GetPetHeChengZiZhiPreview(RolePetInfo rolePetA, RolePetInfo rolePetB)
         {
-            RolePetInfo rolePetInfoMin = new RolePetInfo();
-            RolePetInfo rolePetInfoMax = new RolePetInfo();
+            RolePetInfo rolePetInfoMin = RolePetInfo.Create();
+            RolePetInfo rolePetInfoMax = RolePetInfo.Create();
 
             int zizhiNow_Hp_1 = rolePetA.ZiZhi_Hp;
             int zizhiNow_Act_1 = rolePetA.ZiZhi_Act;

@@ -27,19 +27,18 @@ namespace ET.Client
         {
             UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
             BagInfo bagInfo = root.GetComponent<BagComponentC>().GetEquipBySubType(ItemLocType.ItemLocEquip, (int)ItemSubTypeEnum.Wuqi);
+            TeamPlayerInfo TeamPlayerInfo = TeamPlayerInfo.Create();
 
-            return new TeamPlayerInfo()
-            {
-                UserID = userInfoComponent.UserInfo.UserId,
-                PlayerLv = userInfoComponent.UserInfo.Lv,
-                PlayerName = userInfoComponent.UserInfo.Name,
-                WeaponId = bagInfo != null? bagInfo.ItemID : 0,
-                Occ = userInfoComponent.UserInfo.Occ,
-                Combat = userInfoComponent.UserInfo.Combat,
-                RobotId = userInfoComponent.UserInfo.RobotId,
-                OccTwo = userInfoComponent.UserInfo.OccTwo,
-                FashionIds = root.GetComponent<BagComponentC>().FashionEquipList,
-            };
+            TeamPlayerInfo.UserID = userInfoComponent.UserInfo.UserId;
+            TeamPlayerInfo.PlayerLv = userInfoComponent.UserInfo.Lv;
+            TeamPlayerInfo.PlayerName = userInfoComponent.UserInfo.Name;
+            TeamPlayerInfo.WeaponId = bagInfo != null ? bagInfo.ItemID : 0;
+            TeamPlayerInfo.Occ = userInfoComponent.UserInfo.Occ;
+            TeamPlayerInfo.Combat = userInfoComponent.UserInfo.Combat;
+            TeamPlayerInfo.RobotId = userInfoComponent.UserInfo.RobotId;
+            TeamPlayerInfo.OccTwo = userInfoComponent.UserInfo.OccTwo;
+            TeamPlayerInfo.FashionIds = root.GetComponent<BagComponentC>().FashionEquipList;
+            return TeamPlayerInfo;
         }
 
         public static int GetMaxPiLao(this Unit self)

@@ -1000,7 +1000,7 @@ namespace ET
                 }
             }
 
-            ItemXiLianResult itemXiLianResult = new ItemXiLianResult();
+            ItemXiLianResult itemXiLianResult = ItemXiLianResult.Create();
             itemXiLianResult.XiLianHideProLists = BaseHideProList;   //基础属性洗炼
             itemXiLianResult.HideSkillLists = HideSkillList;         //隐藏技能
             itemXiLianResult.XiLianHideTeShuProLists = TeShuHideProList;  //特殊属性洗炼
@@ -1020,7 +1020,7 @@ namespace ET
                 proList.Add(new HideProList() { HideID = equipConfig.AddPropreListType[i], HideValue = randInt });
             }
 
-            ItemXiLianResult itemXiLianResult = new ItemXiLianResult();
+            ItemXiLianResult itemXiLianResult = ItemXiLianResult.Create();
             itemXiLianResult.XiLianHideProLists = proList;          //属性随机赋值
             //itemXiLianResult.XiLianHideTeShuProLists = proList;     //属性随机赋值
             return itemXiLianResult;

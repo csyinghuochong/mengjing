@@ -112,7 +112,7 @@ namespace ET
                 //家园订单只给超过自身家园等级的
                 if (itemCof.UseLv <= jiayuanCof.Lv)
                 {
-                    JiaYuanPurchaseItem jiaYuanPurchaseItem = new JiaYuanPurchaseItem();
+                    JiaYuanPurchaseItem jiaYuanPurchaseItem = JiaYuanPurchaseItem.Create();
                     jiaYuanPurchaseItem.ItemID = jiaYuanPurchase.ItemID;
                     jiaYuanPurchaseItem.LeftNum = jiaYuanPurchase.ItemNum;
                     jiaYuanPurchaseItem.BuyZiJin = jiaYuanPurchase.BuyMinZiJin;
@@ -179,13 +179,12 @@ namespace ET
                 int index = RandomHelper.RandomByWeight(weightList);
                 int mystId = mystIdList[index];
                 JiaYuanPastureConfig mysteryConfig = JiaYuanPastureConfigCategory.Instance.Get(mystId);
-                mysteryItemInfos.Add(new MysteryItemInfo()
-                {
-                    MysteryId = mystId,
-                    ItemID = mysteryConfig.GetItemID,
-                    ProductId = mysteryItemInfos.Count + 1,
-                    ItemNumber = 1
-                });
+                MysteryItemInfo MysteryItemInfo = MysteryItemInfo.Create();
+                MysteryItemInfo.MysteryId = mystId;
+                MysteryItemInfo.ItemID = mysteryConfig.GetItemID;
+                MysteryItemInfo.ProductId = mysteryItemInfos.Count + 1;
+                MysteryItemInfo.ItemNumber = 1;
+                mysteryItemInfos.Add(MysteryItemInfo);
             }
 
             return mysteryItemInfos;

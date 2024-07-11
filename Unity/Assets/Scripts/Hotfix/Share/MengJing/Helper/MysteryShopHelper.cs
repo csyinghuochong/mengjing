@@ -53,12 +53,12 @@ namespace ET
 				int index = RandomHelper.RandomByWeight(weightList);
 				int mystId = mystIdList[index];
 				MysteryConfig mysteryConfig = MysteryConfigCategory.Instance.Get(mystId);
-				mysteryItemInfos.Add(new MysteryItemInfo()
-				{
-					MysteryId = mystId,
-					ItemID = mysteryConfig.SellItemID,
-					ItemNumber = RandomHelper.RandomNumber(mysteryConfig.NumberLimit[0], mysteryConfig.NumberLimit[1])
-				});
+
+				MysteryItemInfo MysteryItemInfo = MysteryItemInfo.Create();
+				MysteryItemInfo.MysteryId = mystId;
+				MysteryItemInfo.ItemID = mysteryConfig.SellItemID;
+				MysteryItemInfo.ItemNumber = RandomHelper.RandomNumber(mysteryConfig.NumberLimit[0], mysteryConfig.NumberLimit[1]);
+				mysteryItemInfos.Add(MysteryItemInfo);
 				weightList.RemoveAt(index);
 				mystIdList.RemoveAt(index);
 			}
@@ -95,12 +95,11 @@ namespace ET
 				int index = RandomHelper.RandomByWeight(weightList);
 				int mystId = mystIdList[index];
 				MysteryConfig mysteryConfig = MysteryConfigCategory.Instance.Get(mystId);
-				mysteryItemInfos.Add(new MysteryItemInfo()
-				{
-					MysteryId = mystId,
-					ItemID = mysteryConfig.SellItemID,
-					ItemNumber = RandomHelper.RandomNumber(mysteryConfig.NumberLimit[0], mysteryConfig.NumberLimit[1]),
-				});
+				MysteryItemInfo MysteryItemInfo = MysteryItemInfo.Create();
+				MysteryItemInfo.MysteryId = mystId;
+				MysteryItemInfo.ItemID = mysteryConfig.SellItemID;
+				MysteryItemInfo.ItemNumber = RandomHelper.RandomNumber(mysteryConfig.NumberLimit[0], mysteryConfig.NumberLimit[1]);
+				mysteryItemInfos.Add(MysteryItemInfo);
 			}
 
 			return mysteryItemInfos;

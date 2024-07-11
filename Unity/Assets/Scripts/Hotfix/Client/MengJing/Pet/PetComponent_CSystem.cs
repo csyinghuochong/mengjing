@@ -324,7 +324,11 @@ namespace ET.Client
                 }
             }
 
-            self.PetFubenInfos.Add(new PetFubenInfo() { PetFubenId = petfubenId, Star = star, Reward = 0 });
+            PetFubenInfo PetFubenInfo = PetFubenInfo.Create();
+            PetFubenInfo.PetFubenId = petfubenId;
+            PetFubenInfo.Star = star;
+            PetFubenInfo.Reward = 0;
+            self.PetFubenInfos.Add(PetFubenInfo);
         }
 
         public static bool HavePetSkin(this PetComponentC self, int petId, int skinId)

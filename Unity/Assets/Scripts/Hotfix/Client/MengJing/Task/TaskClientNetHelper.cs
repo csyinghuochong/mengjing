@@ -10,7 +10,7 @@ namespace ET.Client
         public static async ETTask<int> RequestTaskInit(Scene root)
         {
             Log.Debug($"C2M_TaskInitRequest: client0");
-            M2C_TaskInitResponse response = (M2C_TaskInitResponse)await root.GetComponent<ClientSenderCompnent>().Call(new C2M_TaskInitRequest());
+            M2C_TaskInitResponse response = (M2C_TaskInitResponse)await root.GetComponent<ClientSenderCompnent>().Call(C2M_TaskInitRequest.Create());
 
             TaskComponentC taskComponentC = root.GetComponent<TaskComponentC>();
             taskComponentC.RoleTaskList = response.RoleTaskList;

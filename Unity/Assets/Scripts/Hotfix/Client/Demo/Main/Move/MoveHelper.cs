@@ -37,7 +37,7 @@ namespace ET.Client
 
         public static void Stop(Scene root)
         {
-            root.GetComponent<ClientSenderCompnent>().Send(new C2M_Stop());
+            root.GetComponent<ClientSenderCompnent>().Send(C2M_Stop.Create());
         }
     }
 }

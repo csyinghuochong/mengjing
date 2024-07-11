@@ -142,13 +142,17 @@ namespace ET.Client
             int occ = root.GetComponent<UserInfoComponentC>().UserInfo.Occ;
             if (occ == 3 && itemCof.ItemSubType == (int)ItemSubTypeEnum.Wuqi)
             {
-                C2M_ItemOperateWearRequest c2M_ItemOperate = new C2M_ItemOperateWearRequest() { OperateType = 3, OperateBagID = bagInfo.BagInfoID };
+                C2M_ItemOperateWearRequest c2M_ItemOperate = C2M_ItemOperateWearRequest.Create();
+                c2M_ItemOperate.OperateType = 3;
+                c2M_ItemOperate.OperateBagID = bagInfo.BagInfoID;
                 M2C_ItemOperateWearResponse m2C_ItemOperate =
                         (M2C_ItemOperateWearResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2M_ItemOperate);
             }
             else
             {
-                C2M_ItemOperateRequest m_ItemOperateWear = new C2M_ItemOperateRequest() { OperateType = 3, OperateBagID = bagInfo.BagInfoID };
+                C2M_ItemOperateRequest m_ItemOperateWear = C2M_ItemOperateRequest.Create();
+                m_ItemOperateWear.OperateType = 3;
+                m_ItemOperateWear.OperateBagID = bagInfo.BagInfoID;
                 M2C_ItemOperateResponse r2c_roleEquip =
                         (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(m_ItemOperateWear);
             }

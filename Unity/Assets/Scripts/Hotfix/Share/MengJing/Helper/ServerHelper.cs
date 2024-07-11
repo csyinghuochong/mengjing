@@ -199,7 +199,7 @@ namespace ET
             VersionMode versionMode = CommonHelp.IsBanHaoZone(zone) ? VersionMode.BanHao : VersionMode.Beta;
             string ip =  GetLogicServer(innerNet, versionMode);
             List<ServerItem> serverItems_1 = ServerItems;
-
+            
             serverItems_1.Add(new ServerItem()
             {
                 ServerId = 1,
@@ -208,17 +208,6 @@ namespace ET
                 ServerOpenTime = 1662189906681,
                 New = 0,
                 Show = 1,
-                PlatformList = new List<int>()
-                {
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    20001
-                }
             });
 
             ///PlatformHelper.GetPlatformName(); 所有渠道ID定义
