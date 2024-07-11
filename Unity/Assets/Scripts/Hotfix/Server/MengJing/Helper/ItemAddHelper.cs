@@ -13,7 +13,7 @@ namespace ET.Server
         public static void OnItemUpdate(Unit self, BagInfo bagInfo)
         {
             //通知客户端背包道具发生改变
-            M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+            M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
             m2c_bagUpdate.BagInfoUpdate = new List<BagInfo>();
             m2c_bagUpdate.BagInfoUpdate.Add(bagInfo);
             MapMessageHelper.SendToClient(self, m2c_bagUpdate);

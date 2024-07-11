@@ -367,7 +367,7 @@ namespace ET.Server
                 if (newState == StateTypeEnum.Shackle || newState == StateTypeEnum.Dizziness || newState == StateTypeEnum.Shackle)
                 {
                     //免疫
-                    M2C_UnitBuffStatus m2C_UnitBuffStatus = new M2C_UnitBuffStatus();
+                    M2C_UnitBuffStatus m2C_UnitBuffStatus = M2C_UnitBuffStatus.Create();
                     m2C_UnitBuffStatus.UnitID = unit.Id;
                     m2C_UnitBuffStatus.FlyType = 12;
                     m2C_UnitBuffStatus.BuffID = buffData.BuffId;
@@ -384,7 +384,7 @@ namespace ET.Server
                 if (newState == StateTypeEnum.Dizziness)
                 {
                     //眩晕抵抗
-                    M2C_UnitBuffStatus m2C_UnitBuffStatus = new M2C_UnitBuffStatus();
+                    M2C_UnitBuffStatus m2C_UnitBuffStatus = M2C_UnitBuffStatus.Create();
                     m2C_UnitBuffStatus.UnitID = unit.Id;
                     m2C_UnitBuffStatus.FlyType = 11;
                     m2C_UnitBuffStatus.BuffID = buffData.BuffId;
@@ -524,7 +524,7 @@ namespace ET.Server
             int[] addSkill = skillBuffConfig.AddSkill;
             if (addSkill != null && addSkill.Length >= 2 && from != null && self.GetBuffSourceNumber(from.Id, buffData.BuffId) >= addSkill[0])
             {
-                C2M_SkillCmd cmd = new C2M_SkillCmd();
+                C2M_SkillCmd cmd = C2M_SkillCmd.Create();
                 cmd.SkillID = addSkill[1];
                 cmd.TargetID = unit.Id;
                 cmd.TargetAngle = 0; ///int)Quaternion.Lerp(unit.Rotation).y;

@@ -410,10 +410,9 @@ namespace ET.Server
                  MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(unit.ConfigId);
                  if (monsterConfig.DeathSkillId != 0)
                  {
-                     unit.GetComponent<SkillManagerComponentS>().OnUseSkill(new C2M_SkillCmd()
-                     {
-                         SkillID = monsterConfig.DeathSkillId,
-                     }, false);
+                     C2M_SkillCmd C2M_SkillCmd = C2M_SkillCmd.Create();
+                     C2M_SkillCmd.SkillID = monsterConfig.DeathSkillId;
+                     unit.GetComponent<SkillManagerComponentS>().OnUseSkill(C2M_SkillCmd, false);
                  }
              }
              if (unit.Type == UnitType.Pet )

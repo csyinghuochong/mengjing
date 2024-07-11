@@ -56,15 +56,14 @@ namespace ET.Server
                 ActorId gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(scene.Zone(), "Gate1").ActorId;
                 for (int i = 0; i < userlist.Count; i++)
                 {
+                    T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+                    T2G_GateUnitInfoRequest.UserID = userlist[i];
                     G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
-                        (gateServerId, new T2G_GateUnitInfoRequest()
-                        {
-                            UserID = userlist[i]
-                        });
+                        (gateServerId, T2G_GateUnitInfoRequest);
                    
                     if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
                     {
-                        R2M_RankUpdateMessage r2M_RankUpdateMessage = new R2M_RankUpdateMessage();
+                        R2M_RankUpdateMessage r2M_RankUpdateMessage = R2M_RankUpdateMessage.Create();
                         r2M_RankUpdateMessage.RankType = 3;
                         r2M_RankUpdateMessage.RankId = rankSceneComponent.GetDonationRank(userlist[i]);
                         scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(userlist[i], r2M_RankUpdateMessage);

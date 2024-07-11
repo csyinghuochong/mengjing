@@ -120,9 +120,11 @@ namespace ET.Server
 						break;
                     case 15:
                         List<BagInfo> itemList = new List<BagInfo>();
-                        itemList.Add(new BagInfo() { ItemID = 1, ItemNum = 100});
-                        itemList.Add(new BagInfo() { ItemID = 3, ItemNum = 100});
-                        MailInfo mailInfo = new MailInfo();
+                        BagInfo BagInfo_1 = BagInfo.Create();
+                        BagInfo_1.ItemID = 1;
+                        BagInfo_1.ItemNum = 100;
+                        itemList.Add(BagInfo_1);
+                        MailInfo mailInfo = MailInfo.Create();
                         mailInfo.Status = 0;
                         mailInfo.Title = "测试邮件";
                         mailInfo.MailId = IdGenerater.Instance.GenerateId();

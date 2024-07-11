@@ -487,14 +487,12 @@ namespace ET.Server
 
                 if (!CommonHelp.IsBanHaoZone(self.Zone()) && ServerHelper.GetOpenServerDay(false, self.Zone()) > 0)
                 {
+                    G2Robot_MessageRequest G2Robot_MessageRequest = G2Robot_MessageRequest.Create();
+                    G2Robot_MessageRequest.Zone = self.Zone();
+                    G2Robot_MessageRequest.MessageType = NoticeType.YeWaiBoss;
+                    G2Robot_MessageRequest.Message = $"{mapComponent.SceneId}@{form.x};{form.y};{form.z}@{refreshMonster.MonsterId}@2";
                     ActorId robotSceneId = StartSceneConfigCategory.Instance.GetBySceneName(203, "Robot01").ActorId;
-                    self.Root().GetComponent<MessageSender>() .Send(robotSceneId,
-                        new G2Robot_MessageRequest()
-                        {
-                            Zone = self.Zone(),
-                            MessageType = NoticeType.YeWaiBoss,
-                            Message = $"{mapComponent.SceneId}@{form.x};{form.y};{form.z}@{refreshMonster.MonsterId}@2"
-                        });
+                    self.Root().GetComponent<MessageSender>() .Send(robotSceneId,G2Robot_MessageRequest);
                 }
             }
 

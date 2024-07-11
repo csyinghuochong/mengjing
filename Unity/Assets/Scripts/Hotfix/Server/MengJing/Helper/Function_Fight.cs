@@ -2472,7 +2472,8 @@ namespace ET.Server
                         vs.Add(numericComponent.GetAsLong(nowValue));
                     }
                 }
-                M2C_UnitNumericListUpdate m2C_UnitNumericListUpdate = new M2C_UnitNumericListUpdate();
+
+                M2C_UnitNumericListUpdate m2C_UnitNumericListUpdate = M2C_UnitNumericListUpdate.Create();
                 //通知自己
                 m2C_UnitNumericListUpdate.UnitID = unit.Id;
                 m2C_UnitNumericListUpdate.Vs = vs;

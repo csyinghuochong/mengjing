@@ -9,13 +9,13 @@ namespace ET.Server
     {
         public static async ETTask SendPaiMaiEmail(Scene root, PaiMaiItemInfo paiMaiItemInfo, int costNum, long unitid)
         {
-            MailInfo mailInfo = new MailInfo();
+            MailInfo mailInfo = MailInfo.Create();
             ItemConfig itemCof = ItemConfigCategory.Instance.Get(paiMaiItemInfo.BagInfo.ItemID);
             mailInfo.Status = 0;
             mailInfo.Context = "你拍卖行出售的道具:" + itemCof.ItemName + ",已经被其他玩家购买" + costNum + "个。";
             mailInfo.Title = "拍卖行邮件";
             mailInfo.MailId = IdGenerater.Instance.GenerateId();
-            BagInfo reward = new BagInfo();
+            BagInfo reward = BagInfo.Create();
             reward.ItemID = 1;
             int sellPrice = (int)(paiMaiItemInfo.Price * 0.95f) * costNum; //5%手续费
             reward.ItemNum = sellPrice;
@@ -26,14 +26,16 @@ namespace ET.Server
 
             //发送到邮件服
             ActorId mailServerId = UnitCacheHelper.GetMailServerId(root.Zone());
-            E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await root.GetComponent<MessageSender>().Call(mailServerId,
-                new M2E_EMailSendRequest() { Id = paiMaiItemInfo.UserId, MailInfo = mailInfo });
+            M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
+            M2E_EMailSendRequest.Id = paiMaiItemInfo.UserId;
+            M2E_EMailSendRequest.MailInfo = mailInfo;
+            E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await root.GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
         }
 
         public static void SendServerMail(Scene root, long userID, ServerMailItem serverMailItem)
         {
             // (M2A_PetMingRecordResponse) await scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(oldUnitid, a2M_PetMing);
-            Mail2M_SendServerMailItem mail2M_SendServer = new Mail2M_SendServerMailItem();
+            Mail2M_SendServerMailItem mail2M_SendServer = Mail2M_SendServerMailItem.Create();
             mail2M_SendServer.ServerMailItem = serverMailItem;
             root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(userID, mail2M_SendServer);
         }
@@ -112,7 +114,7 @@ namespace ET.Server
                 return;
             }
 
-            MailInfo mailInfo = new MailInfo();
+            MailInfo mailInfo = MailInfo.Create();
             mailInfo.Status = 0;
             mailInfo.Title = "奖励";
             mailInfo.Context = "全服补偿邮件";

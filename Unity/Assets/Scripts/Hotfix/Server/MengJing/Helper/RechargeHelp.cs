@@ -43,10 +43,12 @@ namespace ET.Server
         {
             A2Center_RechargeRequest rechargeRequest = A2Center_RechargeRequest.Create();
             rechargeRequest.AccountId = accountId;
-            rechargeRequest.RechargeInfo = new RechargeInfo()
-            {
-                Amount = rechargeNumber, Time = TimeHelper.ServerNow(), UnitId = userId, OrderInfo = ordinfo
-            };
+            rechargeRequest.RechargeInfo = RechargeInfo.Create();
+            rechargeRequest.RechargeInfo.Amount = rechargeNumber;
+            rechargeRequest.RechargeInfo.Time = TimeHelper.ServerNow();
+            rechargeRequest.RechargeInfo.UnitId = userId; 
+            rechargeRequest.RechargeInfo.OrderInfo = ordinfo;
+            
             ActorId accountZone = UnitCacheHelper.GetLoginCenterId();
             Center2A_RechargeResponse saveAccount =
                     (Center2A_RechargeResponse)await root.GetComponent<MessageSender>().Call(accountZone, rechargeRequest);
@@ -59,10 +61,11 @@ namespace ET.Server
             if (gateUnitInfo != null && gateUnitInfo.PlayerState == PlayerState.Game && gateUnitInfo.InstanceId > 0)
             {
                 Log.Warning($"充值OnPaySucess PlayerState.Game: {scene.Zone()}   {userId}  rechargeNumber:{rechargeNumber}");
-                G2M_RechargeResultRequest r2M_RechargeRequest =
-                        new G2M_RechargeResultRequest() { RechargeNumber = rechargeNumber, OrderInfo = orderInfo };
+                G2M_RechargeResultRequest G2M_RechargeResultRequest = G2M_RechargeResultRequest.Create();
+                G2M_RechargeResultRequest.RechargeNumber = rechargeNumber;
+                G2M_RechargeResultRequest.OrderInfo = orderInfo;
                 M2G_RechargeResultResponse m2G_RechargeResponse =
-                        (M2G_RechargeResultResponse)await scene.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(gateUnitInfo.UnitId, r2M_RechargeRequest);
+                        (M2G_RechargeResultResponse)await scene.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(gateUnitInfo.UnitId, G2M_RechargeResultRequest);
             }
             else
             {
@@ -84,8 +87,11 @@ namespace ET.Server
         public static async ETTask OnPaySucessToGate(Scene scene, int zone, long userId, int rechargeNumber, string orderInfo, int rechargeType)
         {
             ActorId gateServerId = UnitCacheHelper.GetGateServerId(zone);
-            R2G_RechargeResultRequest r2M_RechargeRequest =
-                    new R2G_RechargeResultRequest() { RechargeNumber = rechargeNumber, UserID = userId, OrderInfo = orderInfo };
+
+            R2G_RechargeResultRequest r2M_RechargeRequest = R2G_RechargeResultRequest.Create();
+            r2M_RechargeRequest.RechargeNumber = rechargeNumber;
+            r2M_RechargeRequest.UserID = userId;
+            r2M_RechargeRequest.OrderInfo = orderInfo;
             G2R_RechargeResultResponse m2G_RechargeResponse =
                     (G2R_RechargeResultResponse)await scene.GetComponent<MessageSender>().Call(gateServerId, r2M_RechargeRequest);
         }

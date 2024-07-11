@@ -36,12 +36,11 @@ namespace ET.Server
 
             UserInfoComponentS userInfoComponent = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), request.UserID);
             unionInfo.UnionInfo.LeaderName = userInfoComponent.UserInfo.Name;
-            unionInfo.UnionInfo.UnionPlayerList.Add(new UnionPlayerInfo()
-            {
-                 PlayerLevel = userInfoComponent.UserInfo.Lv,
-                 PlayerName = userInfoComponent.UserInfo.Name,
-                 UserID = request.UserID,
-            });
+            UnionPlayerInfo UnionPlayerInfo = UnionPlayerInfo.Create();
+            UnionPlayerInfo.PlayerLevel = userInfoComponent.UserInfo.Lv;
+            UnionPlayerInfo.PlayerName = userInfoComponent.UserInfo.Name;
+            UnionPlayerInfo.UserID = request.UserID;
+            unionInfo.UnionInfo.UnionPlayerList.Add(UnionPlayerInfo);
             UnitCacheHelper.SaveComponentCache(scene.Root(), unionInfo).Coroutine();
             response.UnionId = unionId;
             

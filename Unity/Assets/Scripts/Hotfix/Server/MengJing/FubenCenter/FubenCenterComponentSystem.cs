@@ -408,7 +408,8 @@ namespace ET.Server
                     Log.Warning($"DisposeFubenInstance; {functionId}  {instanceid}");
                 }
 
-                C2M_TransferMap actor_Transfer = new C2M_TransferMap() { SceneType = SceneTypeEnum.MainCityScene, };
+                C2M_TransferMap actor_Transfer = C2M_TransferMap.Create();
+                actor_Transfer.SceneType = SceneTypeEnum.MainCityScene;
                 List<EntityRef<Unit>> units = fubenScene.GetComponent<UnitComponent>().GetAll();
                 for (int unit = 0; unit < units.Count; unit++)
                 {
@@ -586,8 +587,11 @@ public static (int, BattleInfo) GenerateBattleInstanceId(this FubenCenterCompone
             LogHelper.LogDebug($"OnBattleOver : {self.Zone()}");
             //Console.WriteLine($"OnBattleOver : {self.DomainZone()}");
             ActorId robotSceneId = StartSceneConfigCategory.Instance.GetBySceneName(203, "Robot01").ActorId;
-            self.Root().GetComponent<MessageSender>().Send(robotSceneId,
-                new G2Robot_MessageRequest() { Zone = self.Zone(), MessageType = NoticeType.BattleOver });
+
+            G2Robot_MessageRequest G2Robot_MessageRequest = G2Robot_MessageRequest.Create();
+            G2Robot_MessageRequest.Zone = self.Zone();
+            G2Robot_MessageRequest.MessageType = NoticeType.BattleOver;
+            self.Root().GetComponent<MessageSender>().Send(robotSceneId,G2Robot_MessageRequest);
 
             await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(10000, 20000));
             for (int i = 0; i < self.BattleInfos.Count; i++)

@@ -486,7 +486,7 @@ namespace ET.Server
 
                 if (fubenPassInfo == null)
                 {
-                    fubenPassInfo = new FubenPassInfo();
+                    fubenPassInfo = FubenPassInfo.Create();
                     fubenPassInfo.FubenId = self.ChapterId;
                     userInfo.FubenPassList.Add(fubenPassInfo);
                 }

@@ -48,14 +48,15 @@ namespace ET.Server
         public static async ETTask NoticeUnionLeader(Scene root, long unitid, int leader)
         {
             ActorId gateServerId = UnitCacheHelper.GetGateServerId(root.Zone());
+            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+            T2G_GateUnitInfoRequest.UserID = unitid;
             G2T_GateUnitInfoResponse g2M_UpdateUnitResponse_3 = (G2T_GateUnitInfoResponse)await root.GetComponent<MessageSender>().Call
-            (gateServerId, new T2G_GateUnitInfoRequest()
-            {
-                UserID = unitid
-            });
+            (gateServerId, T2G_GateUnitInfoRequest);
             if (g2M_UpdateUnitResponse_3.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse_3.SessionInstanceId > 0)
             {
-                root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(unitid, new M2M_UnionTransferMessage() { UnionLeader = leader });
+                M2M_UnionTransferMessage M2M_UnionTransferMessage = M2M_UnionTransferMessage.Create();
+                M2M_UnionTransferMessage.UnionLeader = leader;
+                root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(unitid, M2M_UnionTransferMessage);
             }
             else
             {
