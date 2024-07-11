@@ -31,7 +31,7 @@ namespace ET.Server
         public List<TeamDropItem> TeamDropItems { get; set; } = new List<TeamDropItem>();
         public Dictionary<long, long> ItemFlags  { get; set; }= new Dictionary<long, long>();
 
-        public M2C_TeamPickMessage m2C_TeamPickMessage  { get; set; }= new M2C_TeamPickMessage();
+        public M2C_TeamPickMessage m2C_TeamPickMessage { get; set; } = M2C_TeamPickMessage.Create();
 
         public float3 BossDeadPosition  { get; set; }= float3.zero;
     }
