@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgSelectReward))]
+    [FriendOf(typeof(DlgSelectReward))]
     public static class DlgSelectRewardSystem
     {
         public static void RegisterUIEvent(this DlgSelectReward self)
@@ -23,8 +23,10 @@ namespace ET.Client
         {
             Scroll_Item_SelectRewardItem scrollItemSelectRewardItem = self.ScrollItemSelectRewardItems[index].BindTrans(transform);
             string[] item = self.Items[index].Split(';');
-            scrollItemSelectRewardItem.ES_CommonItem.UpdateItem(new BagInfo() { ItemID = int.Parse(item[0]), ItemNum = int.Parse(item[1]) },
-                ItemOperateEnum.None);
+            BagInfo bagInfoNew = BagInfo.Create();
+            bagInfoNew.ItemID = int.Parse(item[0]);
+            bagInfoNew.ItemNum = int.Parse(item[1]);
+            scrollItemSelectRewardItem.ES_CommonItem.UpdateItem(bagInfoNew, ItemOperateEnum.None);
             scrollItemSelectRewardItem.E_GetBtnButton.AddListener(() => { self.OnGetBtn(index).Coroutine(); });
         }
 

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.PetMainTimer)]
-    public class PetMainTimer: ATimer<DlgPetMain>
+    public class PetMainTimer : ATimer<DlgPetMain>
     {
         protected override void Run(DlgPetMain self)
         {
@@ -23,7 +23,7 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (DlgPetMain))]
+    [FriendOf(typeof(DlgPetMain))]
     public static class DlgPetMainSystem
     {
         public static void RegisterUIEvent(this DlgPetMain self)
@@ -101,55 +101,56 @@ namespace ET.Client
 
         public static void InitHpList(this DlgPetMain self)
         {
-            List<Unit> entities = self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> entities = self.Root().CurrentScene().GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < entities.Count; i++)
             {
-                if (entities[i].Type == UnitType.Player)
+                Unit unit = entities[i];
+                if (unit.Type == UnitType.Player)
                 {
                     continue;
                 }
 
-                int camp = entities[i].GetBattleCamp();
+                int camp = unit.GetBattleCamp();
 
-                self.PetBattleList.Add(entities[i].Id, new());
+                self.PetBattleList.Add(unit.Id, new());
                 if (camp == CampEnum.CampPlayer_1)
                 {
                     GameObject gameObject = UnityEngine.Object.Instantiate(self.View.EG_UIPetHpRectTransform.gameObject);
                     CommonViewHelper.SetParent(gameObject, self.View.EG_PetHpNodeRectTransform.gameObject);
                     gameObject.SetActive(true);
 
-                    gameObject.transform.Find("Lal_Name").GetComponent<Text>().text = PetConfigCategory.Instance.Get(entities[i].ConfigId).PetName;
-                    self.PetBattleList[entities[i].Id].Image = gameObject.transform.Find("Img_HpValue").GetComponent<Image>();
-                    self.PetBattleList[entities[i].Id].Text = gameObject.transform.Find("Lal_Hurt").GetComponent<Text>();
+                    gameObject.transform.Find("Lal_Name").GetComponent<Text>().text = PetConfigCategory.Instance.Get(unit.ConfigId).PetName;
+                    self.PetBattleList[unit.Id].Image = gameObject.transform.Find("Img_HpValue").GetComponent<Image>();
+                    self.PetBattleList[unit.Id].Text = gameObject.transform.Find("Lal_Hurt").GetComponent<Text>();
                     continue;
                 }
 
-                if (entities[i].Type == UnitType.Pet)
+                if (unit.Type == UnitType.Pet)
                 {
                     self.EnemyNumber++;
                     GameObject gameObject = UnityEngine.Object.Instantiate(self.View.EG_UIMonsterHpRectTransform.gameObject);
                     CommonViewHelper.SetParent(gameObject, self.View.EG_MonsterHpNodeRectTransform.gameObject);
                     gameObject.SetActive(true);
 
-                    gameObject.transform.Find("Lal_Name").GetComponent<Text>().text = PetConfigCategory.Instance.Get(entities[i].ConfigId).PetName;
+                    gameObject.transform.Find("Lal_Name").GetComponent<Text>().text = PetConfigCategory.Instance.Get(unit.ConfigId).PetName;
                     gameObject.transform.Find("Lal_Lv").GetComponent<Text>().text = "";
-                    self.PetBattleList[entities[i].Id].Image = gameObject.transform.Find("Img_HpValue").GetComponent<Image>();
-                    self.PetBattleList[entities[i].Id].Text = gameObject.transform.Find("Lal_Hurt").GetComponent<Text>();
+                    self.PetBattleList[unit.Id].Image = gameObject.transform.Find("Img_HpValue").GetComponent<Image>();
+                    self.PetBattleList[unit.Id].Text = gameObject.transform.Find("Lal_Hurt").GetComponent<Text>();
                     continue;
                 }
 
-                if (entities[i].Type == UnitType.Monster)
+                if (unit.Type == UnitType.Monster)
                 {
                     self.EnemyNumber++;
                     GameObject gameObject = UnityEngine.Object.Instantiate(self.View.EG_UIMonsterHpRectTransform.gameObject);
                     CommonViewHelper.SetParent(gameObject, self.View.EG_MonsterHpNodeRectTransform.gameObject);
                     gameObject.SetActive(true);
 
-                    MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(entities[i].ConfigId);
+                    MonsterConfig monsterCof = MonsterConfigCategory.Instance.Get(unit.ConfigId);
                     gameObject.transform.Find("Lal_Name").GetComponent<Text>().text = monsterCof.MonsterName;
                     gameObject.transform.Find("Lal_Lv").GetComponent<Text>().text = monsterCof.Lv.ToString();
-                    self.PetBattleList[entities[i].Id].Image = gameObject.transform.Find("Img_HpValue").GetComponent<Image>();
-                    self.PetBattleList[entities[i].Id].Text = gameObject.transform.Find("Lal_Hurt").GetComponent<Text>();
+                    self.PetBattleList[unit.Id].Image = gameObject.transform.Find("Img_HpValue").GetComponent<Image>();
+                    self.PetBattleList[unit.Id].Text = gameObject.transform.Find("Lal_Hurt").GetComponent<Text>();
                     continue;
                 }
             }

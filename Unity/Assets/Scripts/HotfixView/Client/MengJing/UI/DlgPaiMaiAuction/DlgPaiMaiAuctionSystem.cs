@@ -197,7 +197,10 @@ namespace ET.Client
             self.View.E_TextPriceText.text = price.ToString();
             self.View.E_Lab_RmbNumInputField.text = price.ToString();
 
-            self.View.ES_CommonItem.UpdateItem(new BagInfo() { ItemID = itemid, ItemNum = number }, ItemOperateEnum.None);
+            BagInfo bagInfo = BagInfo.Create();
+            bagInfo.ItemID = itemid;
+            bagInfo.ItemNum = number;
+            self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
         }
 
         public static void OnRecvHorseNotice(this DlgPaiMaiAuction self, string noticeText)

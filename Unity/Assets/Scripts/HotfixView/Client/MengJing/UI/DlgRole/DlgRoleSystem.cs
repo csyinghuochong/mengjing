@@ -138,7 +138,7 @@ namespace ET.Client
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             self.View.ES_EquipSet.PlayerLv(userInfo.Lv);
             self.View.ES_EquipSet.PlayerName(userInfo.Name);
-            self.View.ES_EquipSet.ShowPlayerModel(new BagInfo(), userInfo.Occ, 0, new List<int>());
+            self.View.ES_EquipSet.ShowPlayerModel(BagInfo.Create(), userInfo.Occ, 0, new List<int>());
 
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
             UserInfoComponentC userInfoComponentC = self.Root().GetComponent<UserInfoComponentC>();

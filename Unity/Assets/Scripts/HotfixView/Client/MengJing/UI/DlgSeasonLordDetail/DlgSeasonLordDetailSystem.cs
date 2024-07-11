@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [FriendOf(typeof (ES_CommonItem))]
-    [FriendOf(typeof (DlgSeasonLordDetail))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [FriendOf(typeof(ES_CommonItem))]
+    [FriendOf(typeof(DlgSeasonLordDetail))]
     public static class DlgSeasonLordDetailSystem
     {
         public static void RegisterUIEvent(this DlgSeasonLordDetail self)
@@ -84,7 +84,7 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this DlgSeasonLordDetail self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.None, self.OnSelect);
+            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count ? self.ShowBagInfos[index] : null, ItemOperateEnum.None, self.OnSelect);
         }
 
         public static void UpdateItemList(this DlgSeasonLordDetail self)
@@ -102,14 +102,17 @@ namespace ET.Client
                 }
             }
 
-            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count >= 10? self.ShowBagInfos.Count : 10);
-            self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count >= 10? self.ShowBagInfos.Count : 10);
+            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count >= 10 ? self.ShowBagInfos.Count : 10);
+            self.View.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count >= 10 ? self.ShowBagInfos.Count : 10);
         }
 
         public static void OnSelect(this DlgSeasonLordDetail self, BagInfo bagInfo)
         {
             self.BagInfo = bagInfo;
-            self.View.ES_CommonItem.UpdateItem(new BagInfo() { ItemID = bagInfo.ItemID, ItemNum = 1 }, ItemOperateEnum.None);
+            BagInfo bagInfoNew = BagInfo.Create();
+            bagInfoNew.ItemID = bagInfo.ItemID;
+            bagInfoNew.ItemNum = 1;
+            self.View.ES_CommonItem.UpdateItem(bagInfoNew, ItemOperateEnum.None);
             self.View.ES_CommonItem.uiTransform.gameObject.SetActive(true);
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             self.View.E_ItemNameTextText.text = itemConfig.ItemName;

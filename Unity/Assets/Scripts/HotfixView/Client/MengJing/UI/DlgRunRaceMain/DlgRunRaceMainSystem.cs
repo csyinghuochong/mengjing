@@ -118,7 +118,7 @@ namespace ET.Client
             }
 
             self.UISkillGrids[addIndex].uiTransform.gameObject.SetActive(true);
-            SkillPro skillPro = new SkillPro();
+            SkillPro skillPro = SkillPro.Create();
             skillPro.SkillID = (int)skillId;
             skillPro.SkillSetType = (int)SkillSetEnum.Skill;
             skillPro.SkillSource = (int)SkillSourceEnum.Buff;

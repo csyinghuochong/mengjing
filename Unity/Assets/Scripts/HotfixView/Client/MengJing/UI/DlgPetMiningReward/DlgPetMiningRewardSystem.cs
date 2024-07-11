@@ -59,8 +59,8 @@ namespace ET.Client
             }
 
             // 测试数据
-            self.ShowTaskPros.Add(new TaskPro() { taskID = 500001, taskStatus = (int)TaskStatuEnum.Completed });
-            self.ShowTaskPros.Add(new TaskPro() { taskID = 500002, taskStatus = (int)TaskStatuEnum.Accepted });
+            // self.ShowTaskPros.Add(new TaskPro() { taskID = 500001, taskStatus = (int)TaskStatuEnum.Completed });
+            // self.ShowTaskPros.Add(new TaskPro() { taskID = 500002, taskStatus = (int)TaskStatuEnum.Accepted });
 
             self.AddUIScrollItems(ref self.ScrollItemPetMiningRewardItems, self.ShowTaskPros.Count);
             self.View.E_PetMiningRewardItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskPros.Count);
