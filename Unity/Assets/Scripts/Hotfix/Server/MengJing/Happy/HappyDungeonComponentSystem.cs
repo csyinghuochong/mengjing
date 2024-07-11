@@ -76,12 +76,13 @@ namespace ET.Server
             List<EntityRef<Unit>> units = fubnescene.GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
-                if (units[i].Type != UnitType.Player)
+                Unit unit = units[i];
+                if (unit.Type != UnitType.Player)
                 {
                     continue;
                 }
 
-                if (units[i].IsDisposed || units[i].IsRobot())
+                if (unit.IsDisposed || unit.IsRobot())
                 {
                     continue;
                 }

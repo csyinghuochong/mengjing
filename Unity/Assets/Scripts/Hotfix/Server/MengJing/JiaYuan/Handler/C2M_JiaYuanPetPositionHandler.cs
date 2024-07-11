@@ -13,37 +13,38 @@ namespace ET.Server
                 return;
             }
 
-            List<Unit> units = unit.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = unit.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
-                if (units[i].Type == UnitType.Pet)
+                Unit uniitem = units[i];
+                if (uniitem.Type == UnitType.Pet)
                 {
-                    if (units[i].GetComponent<AIComponent>().AIConfigId != 11)
+                    if (uniitem.GetComponent<AIComponent>().AIConfigId != 11)
                     {
                         continue;
                     }
-                    response.PetList.Add(new UnitInfo()
-                    {
-                        Type = UnitType.Pet,
-                        UnitId = units[i].Id,
-                        ConfigId = units[i].ConfigId,
-                        Position = units[i].Position,
-                    });
+
+                    UnitInfo unitInfo = UnitInfo.Create();
+                    unitInfo.Type = UnitType.Pet;
+                    unitInfo.UnitId = uniitem.Id;
+                    unitInfo.ConfigId = uniitem.ConfigId;
+                    unitInfo.Position = uniitem.Position;
+                    response.PetList.Add(unitInfo);
                     continue;
                 }
-                if (units[i].Type == UnitType.Monster)
+                if (uniitem.Type == UnitType.Monster)
                 {
-                    if (!ConfigData.JiaYuanMonster.ContainsKey(  units[i].ConfigId))
+                    if (!ConfigData.JiaYuanMonster.ContainsKey( uniitem.ConfigId))
                     {
                         continue;
                     }
-                    response.PetList.Add(new UnitInfo()
-                    {
-                        Type = UnitType.Monster,
-                        UnitId = units[i].Id,
-                        ConfigId = units[i].ConfigId,
-                        Position = units[i].Position
-                    });
+
+                    UnitInfo unitInfo = UnitInfo.Create();
+                    unitInfo.Type = UnitType.Monster;
+                    unitInfo.UnitId = uniitem.Id;
+                    unitInfo.ConfigId = uniitem.ConfigId;
+                    unitInfo.Position = uniitem.Position;
+                    response.PetList.Add(unitInfo);
                     continue;
                 }
             }

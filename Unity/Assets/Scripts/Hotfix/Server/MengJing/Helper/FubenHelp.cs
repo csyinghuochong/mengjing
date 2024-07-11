@@ -14,10 +14,11 @@ namespace ET.Server
 		public static List<Unit> GetUnitList(Scene scene, int unitType)
 		{
 			List<Unit> list = new List<Unit>();
-			List<Unit> allunits = scene.GetComponent<UnitComponent>().GetAll();
+			List<EntityRef<Unit>> allunits = scene.GetComponent<UnitComponent>().GetAll();
 			for (int i = 0; i < allunits.Count; i++)
 			{
-				if (allunits[i].Type == unitType)
+				Unit unit = allunits[i];
+				if (unit.Type == unitType)
 				{
 					list.Add(allunits[i]);
 				}
@@ -38,17 +39,18 @@ namespace ET.Server
 				return;
 			}
 
-			List<Unit> entities = self.Root().GetComponent<UnitComponent>().GetAll();
+			List<EntityRef<Unit>> entities = self.Root().GetComponent<UnitComponent>().GetAll();
 			for (int i = entities.Count - 1; i >= 0; i--)
 			{
-				if (entities[i].Type != UnitType.Player)
+				Unit unit = entities[i];
+				if (unit.Type != UnitType.Player)
 				{
 					continue;
 				}
 
 				if (self.IsSameTeam(entities[i]))
 				{
-					entities[i].GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.TeamerEnter_12);
+					unit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.TeamerEnter_12);
 					//entities[i].GetComponent<SkillManagerComponent>().TriggerTeamBuff();
 				}
 			}

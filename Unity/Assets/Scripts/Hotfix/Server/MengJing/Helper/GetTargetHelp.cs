@@ -18,7 +18,7 @@ namespace ET.Server
         {
             Unit nearest = null;
             float minDistance = maxdis;
-            List<Unit> units = main.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = main.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
                 Unit unit = units[i];
@@ -55,7 +55,7 @@ namespace ET.Server
         {
             Unit nearest = null;
             float minDistance = maxdis;
-            List<Unit> units = main.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = main.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
                 Unit unit = units[i];
@@ -91,7 +91,7 @@ namespace ET.Server
         {
             List<long> unitIdList = new List<long>();
             List<EnemyUnitInfo> enemyUnitInfos = new List<EnemyUnitInfo>();
-            List<Unit> units = main.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = main.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
                 Unit unit = units[i];
@@ -143,7 +143,7 @@ namespace ET.Server
         {
             List<long> unitIdList = new List<long>();
             List<EnemyUnitInfo> enemyUnitInfos = new List<EnemyUnitInfo>();
-            List<Unit> units = main.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = main.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
                 Unit unit = units[i];
@@ -215,7 +215,7 @@ namespace ET.Server
         {
             List<Unit> nearest = new List<Unit>();
 
-            List<Unit> allunits = main.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> allunits = main.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < allunits.Count; i++)
             {
                 Unit unit = allunits[i];
@@ -244,7 +244,7 @@ namespace ET.Server
         {
             List<Unit> nearest = new List<Unit>();
 
-            List<Unit> monsters = main.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> monsters = main.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < monsters.Count; i++)
             {
                 Unit unit = monsters[i];
@@ -272,7 +272,7 @@ namespace ET.Server
         public static List<Unit> GetNearestMonsters(Unit main, float maxdis)
         {
             List<Unit> nearest = new List<Unit>();
-            List<Unit> units = main.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = main.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
                 Unit unit = units[i];
@@ -302,7 +302,7 @@ namespace ET.Server
         {
             Unit nearest = null;
             float distance = maxdis;
-            List<Unit> units = unitForm.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = unitForm.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
                 Unit uu = units[i];

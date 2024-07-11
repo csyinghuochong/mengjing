@@ -20,12 +20,13 @@ namespace ET.Server
 				{
 					unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.AttackMode, int.Parse(request.GameSettingInfos[i].Value));
 
-					List<Unit> unitlist = unit.GetParent<UnitComponent>().GetAll();
+					List<EntityRef<Unit>> unitlist = unit.GetParent<UnitComponent>().GetAll();
                     for (int u = 0; u < unitlist.Count; u++)
-					{
-						if (unitlist[u].MasterId == unit.Id)
+                    {
+	                    Unit unititem = unitlist[i];
+						if (unititem.MasterId == unit.Id)
 						{
-                            unitlist[u].GetComponent<NumericComponentS>().ApplyValue(NumericType.AttackMode, int.Parse(request.GameSettingInfos[i].Value));
+							unititem.GetComponent<NumericComponentS>().ApplyValue(NumericType.AttackMode, int.Parse(request.GameSettingInfos[i].Value));
                         }
 					}
 				}

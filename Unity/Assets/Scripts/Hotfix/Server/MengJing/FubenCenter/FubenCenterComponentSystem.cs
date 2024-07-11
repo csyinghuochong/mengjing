@@ -409,20 +409,21 @@ namespace ET.Server
                 }
 
                 C2M_TransferMap actor_Transfer = new C2M_TransferMap() { SceneType = SceneTypeEnum.MainCityScene, };
-                List<Unit> units = fubenScene.GetComponent<UnitComponent>().GetAll();
+                List<EntityRef<Unit>> units = fubenScene.GetComponent<UnitComponent>().GetAll();
                 for (int unit = 0; unit < units.Count; unit++)
                 {
-                    if (units[unit].Type != UnitType.Player)
+                    Unit uniitem = units[unit];
+                    if (uniitem.Type != UnitType.Player)
                     {
                         continue;
                     }
 
-                    if (units[unit].IsDisposed || units[unit].IsRobot())
+                    if (uniitem.IsDisposed || uniitem.IsRobot())
                     {
                         continue;
                     }
 
-                    TransferHelper.TransferUnit(units[unit], actor_Transfer).Coroutine();
+                    TransferHelper.TransferUnit(uniitem, actor_Transfer).Coroutine();
                 }
 
                 await self.Root().GetComponent<TimerComponent>().WaitAsync(60000 + RandomHelper.RandomNumber(0, 1000));

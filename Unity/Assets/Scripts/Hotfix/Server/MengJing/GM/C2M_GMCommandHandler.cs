@@ -106,7 +106,7 @@ namespace ET.Server
                         }
 						break;
 					case 13:
-						List<Unit> players = unit.GetParent<UnitComponent>().GetAll();
+						List<EntityRef<Unit>> players = unit.GetParent<UnitComponent>().GetAll();
 						for (int player = 0; player < players.Count; player++)
 						{
                             for (int i = 0; i < long.Parse(commands[1]); i++)
