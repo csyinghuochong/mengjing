@@ -440,6 +440,15 @@ namespace ET.Client
             return response.Error;
         }
 
+        public static async ETTask<M2C_PetDuiHuanResponse> PetDuiHuanRequest(Scene root, int operateId)
+        {
+            C2M_PetDuiHuanRequest request = C2M_PetDuiHuanRequest.Create();
+            request.OperateId = operateId;
+
+            M2C_PetDuiHuanResponse response = (M2C_PetDuiHuanResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
+
         public static void PetFubenOverRequest(Scene root)
         {
             root.GetComponent<ClientSenderCompnent>().Send(C2M_PetFubenOverRequest.Create());

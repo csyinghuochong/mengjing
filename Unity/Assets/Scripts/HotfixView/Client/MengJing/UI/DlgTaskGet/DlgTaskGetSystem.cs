@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_TaskGet_DlgTaskGetRefresh: AEvent<Scene, DataUpdate_TaskGet>
+    public class DataUpdate_TaskGet_DlgTaskGetRefresh : AEvent<Scene, DataUpdate_TaskGet>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_TaskGet args)
         {
@@ -16,9 +16,9 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (Scroll_Item_TaskFubenItem))]
-    [FriendOf(typeof (Scroll_Item_TaskGetItem))]
-    [FriendOf(typeof (DlgTaskGet))]
+    [FriendOf(typeof(Scroll_Item_TaskFubenItem))]
+    [FriendOf(typeof(Scroll_Item_TaskGetItem))]
+    [FriendOf(typeof(DlgTaskGet))]
     public static class DlgTaskGetSystem
     {
         public static void RegisterUIEvent(this DlgTaskGet self)
@@ -305,8 +305,7 @@ namespace ET.Client
                 return;
             }
 
-            C2M_PetDuiHuanRequest request = new C2M_PetDuiHuanRequest() { OperateId = configId };
-            M2C_PetDuiHuanResponse response = (M2C_PetDuiHuanResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_PetDuiHuanResponse response = await PetNetHelper.PetDuiHuanRequest(self.Root(), configId);
             if (response.RolePetInfo == null)
             {
                 return;

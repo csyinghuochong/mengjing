@@ -56,9 +56,9 @@ namespace ET.Client
             }
 
             // 测试数据
-            response.SoloPlayerResultInfoList.Add(new SoloPlayerResultInfo() { Name = "测试角色1", Occ = 1, Combat = 3000 });
-            response.SoloPlayerResultInfoList.Add(new SoloPlayerResultInfo() { Name = "测试角色2", Occ = 2, Combat = 2000 });
-            response.SoloPlayerResultInfoList.Add(new SoloPlayerResultInfo() { Name = "测试角色3", Occ = 1, Combat = 1000 });
+            // response.SoloPlayerResultInfoList.Add(new SoloPlayerResultInfo() { Name = "测试角色1", Occ = 1, Combat = 3000 });
+            // response.SoloPlayerResultInfoList.Add(new SoloPlayerResultInfo() { Name = "测试角色2", Occ = 2, Combat = 2000 });
+            // response.SoloPlayerResultInfoList.Add(new SoloPlayerResultInfo() { Name = "测试角色3", Occ = 1, Combat = 1000 });
 
             for (int i = 0; i < response.SoloPlayerResultInfoList.Count; i++)
             {

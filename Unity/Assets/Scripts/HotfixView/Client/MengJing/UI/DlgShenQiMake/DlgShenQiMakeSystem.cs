@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.ShenQiMakeTimer)]
-    public class ShenQiMakeTimer: ATimer<DlgShenQiMake>
+    public class ShenQiMakeTimer : ATimer<DlgShenQiMake>
     {
         protected override void Run(DlgShenQiMake self)
         {
@@ -23,8 +23,8 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (ES_CommonItem))]
-    [FriendOf(typeof (DlgShenQiMake))]
+    [FriendOf(typeof(ES_CommonItem))]
+    [FriendOf(typeof(DlgShenQiMake))]
     public static class DlgShenQiMakeSystem
     {
         public static void RegisterUIEvent(this DlgShenQiMake self)
@@ -100,7 +100,9 @@ namespace ET.Client
             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(self.MakeId);
             if (self.View.ES_CommonItem.uiTransform.gameObject != null)
             {
-                self.View.ES_CommonItem.UpdateItem(new BagInfo() { ItemID = equipMakeConfig.MakeItemID }, ItemOperateEnum.MakeItem);
+                BagInfo bagInfoNew = BagInfo.Create();
+                bagInfoNew.ItemID = equipMakeConfig.MakeItemID;
+                self.View.ES_CommonItem.UpdateItem(bagInfoNew, ItemOperateEnum.MakeItem);
                 self.View.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
             }
         }
