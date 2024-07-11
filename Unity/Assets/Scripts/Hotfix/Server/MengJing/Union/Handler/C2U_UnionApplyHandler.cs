@@ -14,14 +14,13 @@ namespace ET.Server
             }
 
             ActorId gateServerId = UnitCacheHelper.GetGateServerId(scene.Zone());
+            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+            T2G_GateUnitInfoRequest.UserID = dBUnionInfo.UnionInfo.LeaderId;
             G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
-                  (gateServerId, new T2G_GateUnitInfoRequest()
-                  {
-                      UserID = dBUnionInfo.UnionInfo.LeaderId
-                  });
+                  (gateServerId, T2G_GateUnitInfoRequest);
             if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
             {
-                M2C_UnionApplyResult m2C_HorseNoticeInfo = new M2C_UnionApplyResult();
+                M2C_UnionApplyResult m2C_HorseNoticeInfo = M2C_UnionApplyResult.Create();
                 MapMessageHelper.SendToClient(scene.Root(), g2M_UpdateUnitResponse.SessionInstanceId, m2C_HorseNoticeInfo);
             }
             //暂时离线需要通知到map?

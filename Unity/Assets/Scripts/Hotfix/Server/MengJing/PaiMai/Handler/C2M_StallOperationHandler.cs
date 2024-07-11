@@ -34,8 +34,8 @@ namespace ET.Server
 
                 long stallId = unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_Stall);
                 Unit unitstall = unit.GetParent<UnitComponent>().Get(stallId);
-                unitstall.GetComponent<UnitInfoComponent>().UnitName = request.Value;   
-                M2C_RoleDataBroadcast m2C_BroadcastRoleData = new M2C_RoleDataBroadcast();
+                unitstall.GetComponent<UnitInfoComponent>().UnitName = request.Value;
+                M2C_RoleDataBroadcast m2C_BroadcastRoleData = M2C_RoleDataBroadcast.Create();
                 m2C_BroadcastRoleData.UnitId = stallId;
                 m2C_BroadcastRoleData.UpdateType = UserDataType.Name;
                 m2C_BroadcastRoleData.UpdateTypeValue = request.Value;

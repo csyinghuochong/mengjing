@@ -119,7 +119,7 @@ namespace ET.Server
             if (teamPlayerInfo == null)
             {
                 UserInfo userInfo = attack.GetComponent<UserInfoComponentS>().UserInfo;
-                teamPlayerInfo = new TeamPlayerInfo();
+                teamPlayerInfo = TeamPlayerInfo.Create();
                 teamPlayerInfo.UserID = attack.Id;
                 teamPlayerInfo.PlayerName = userInfo.Name;
                 teamPlayerInfo.Damage = (int)damage;

@@ -26,17 +26,16 @@ namespace ET.Server
             request.UnitId = unit.Id;
             ActorId serverid = UnitCacheHelper.GetUnionServerId(unit.Zone());
             UserInfo userInfo = unit.GetComponent<UserInfoComponentS>().UserInfo;
-            RankingInfo rankingInfo = new RankingInfo()
-            {
-                Combat = request.Price,
-                UserId = unit.Id,
-                PlayerLv = userInfo.Lv,
-                PlayerName = userInfo.Name, 
-                Occ = userInfo.Occ, 
-            };
-            U2M_DonationResponse d2GGetUnit = (U2M_DonationResponse)await unit.Root().GetComponent<MessageSender>().Call(serverid,
-                new M2U_DonationRequest() { RankingInfo = rankingInfo }
-                );
+            RankingInfo rankingInfo = RankingInfo.Create();
+            rankingInfo.Combat = request.Price;
+            rankingInfo.UserId = unit.Id;
+            rankingInfo.PlayerLv = userInfo.Lv;
+            rankingInfo.PlayerName = userInfo.Name;
+            rankingInfo.Occ = userInfo.Occ;
+
+            M2U_DonationRequest M2U_DonationRequest = M2U_DonationRequest.Create();
+            M2U_DonationRequest.RankingInfo = rankingInfo;
+            U2M_DonationResponse d2GGetUnit = (U2M_DonationResponse)await unit.Root().GetComponent<MessageSender>().Call(serverid,M2U_DonationRequest);
 
             if (d2GGetUnit.Error != ErrorCode.ERR_Success)
             {

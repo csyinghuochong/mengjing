@@ -40,15 +40,13 @@ namespace ET.Server
             Log.Warning($"拍卖行购买请求 : {unit.Id}  {paiMaiSellConfig.ItemID}  {request.BuyNum}  {cell}");
 
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Buy, unit.Id))
-			{
+            {
 
-				M2P_PaiMaiShopRequest m2P_PaiMaiShopRequest = new M2P_PaiMaiShopRequest()
-				{
-					ItemID = paiMaiSellConfig.ItemID,
-					BuyNum = request.BuyNum,
-					//Price = r_PaiMaiShopResponse.PaiMaiShopItemInfo.Price,
-					ActorId = unit.GetComponent<UserInfoComponentS>().UserInfo.Gold,
-				};
+	            M2P_PaiMaiShopRequest m2P_PaiMaiShopRequest = M2P_PaiMaiShopRequest.Create();
+	            m2P_PaiMaiShopRequest.ItemID = paiMaiSellConfig.ItemID;
+	            m2P_PaiMaiShopRequest.BuyNum = request.BuyNum;
+	            //m2P_PaiMaiShopRequest.//Price = r_PaiMaiShopResponse.PaiMaiShopItemInfo.Price,
+	            m2P_PaiMaiShopRequest.ActorId = unit.GetComponent<UserInfoComponentS>().UserInfo.Gold;
 
 				ActorId paimaiServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.Zone(), "PaiMai").ActorId;
 				P2M_PaiMaiShopResponse r_PaiMaiShopResponse = (P2M_PaiMaiShopResponse)await unit.Root().GetComponent<MessageSender>().Call(paimaiServerId, m2P_PaiMaiShopRequest);

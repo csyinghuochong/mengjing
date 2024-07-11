@@ -15,11 +15,10 @@ namespace ET.Server
             }
 
             ActorId unitonsceneid = UnitCacheHelper.GetUnionServerId( unit.Zone() );
-            unit.Root().GetComponent<MessageSender>().Send(unitonsceneid, new M2U_UnionInviteReplyMessage()
-            {
-                UnionId = message.UnionId,
-                UnitID = unit.Id,
-            });
+            M2U_UnionInviteReplyMessage M2U_UnionInviteReplyMessage = M2U_UnionInviteReplyMessage.Create();
+            M2U_UnionInviteReplyMessage.UnionId = message.UnionId;
+            M2U_UnionInviteReplyMessage.UnitID = unit.Id;
+            unit.Root().GetComponent<MessageSender>().Send(unitonsceneid, M2U_UnionInviteReplyMessage);
             await ETTask.CompletedTask;
         }
     }

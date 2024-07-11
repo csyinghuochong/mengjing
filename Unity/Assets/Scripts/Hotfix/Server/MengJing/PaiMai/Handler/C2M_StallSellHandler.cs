@@ -67,9 +67,10 @@ namespace ET.Server
 
                 //发送对应拍卖行信息
                 ActorId paimaiServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.Zone(), "PaiMai").ActorId;
+                M2P_StallSellRequest M2P_StallSellRequest = M2P_StallSellRequest.Create();
+                M2P_StallSellRequest.PaiMaiItemInfo = request.PaiMaiItemInfo;
                 P2M_StallSellResponse p2MStallSellResponse =
-                        (P2M_StallSellResponse)await unit.Root().GetComponent<MessageSender>().Call(paimaiServerId,
-                            new M2P_StallSellRequest() { PaiMaiItemInfo = request.PaiMaiItemInfo });
+                        (P2M_StallSellResponse)await unit.Root().GetComponent<MessageSender>().Call(paimaiServerId,M2P_StallSellRequest);
 
                 if (p2MStallSellResponse.Error == ErrorCode.ERR_Success)
                 {

@@ -46,11 +46,10 @@ namespace ET.Server
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Buy, unit.Id))
             {
                 ActorId paimaiServerId = UnitCacheHelper.GetPaiMaiServerId(unit.Zone());
-                P2M_StallBuyResponse p2MStallBuyResponse = (P2M_StallBuyResponse)await unit.Root().GetComponent<MessageSender>().Call(paimaiServerId,
-                    new M2P_StallBuyRequest()
-                    {
-                        PaiMaiItemInfo = request.PaiMaiItemInfo, ActorId = unit.GetComponent<UserInfoComponentS>().UserInfo.Gold
-                    });
+                M2P_StallBuyRequest M2P_StallBuyRequest = M2P_StallBuyRequest.Create();
+                M2P_StallBuyRequest.PaiMaiItemInfo = request.PaiMaiItemInfo;
+                M2P_StallBuyRequest.ActorId = unit.GetComponent<UserInfoComponentS>().UserInfo.Gold;
+                P2M_StallBuyResponse p2MStallBuyResponse = (P2M_StallBuyResponse)await unit.Root().GetComponent<MessageSender>().Call(paimaiServerId,M2P_StallBuyRequest);
                 if (p2MStallBuyResponse.Error != ErrorCode.ERR_Success)
                 {
                     response.Error = p2MStallBuyResponse.Error;

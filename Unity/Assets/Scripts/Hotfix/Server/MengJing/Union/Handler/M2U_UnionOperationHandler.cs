@@ -50,8 +50,12 @@ namespace ET.Server
                                 for (int i = 0; i < rewardStrList.Length; i++)
                                 {
                                     string[] rewardList = rewardStrList[i].Split(',');
-                                    
-                                    mailInfo.ItemList.Add(new BagInfo() { ItemID = int.Parse(rewardList[0]), ItemNum = int.Parse(rewardList[1]), GetWay = $"{ItemGetWay.UnionUpLv}_{serverTime}" });
+
+                                    BagInfo BagInfo = BagInfo.Create();
+                                    BagInfo.ItemID = int.Parse(rewardList[0]);
+                                    BagInfo.ItemNum = int.Parse(rewardList[1]);
+                                    BagInfo. GetWay =$"{ItemGetWay.UnionUpLv}_{serverTime}";
+                                    mailInfo.ItemList.Add(BagInfo);
                                 }
 
                                 for (int i = 0; i < dBUnionInfo.UnionInfo.UnionPlayerList.Count; i++)
@@ -102,12 +106,12 @@ namespace ET.Server
                         {
                             dBUnionInfo.UnionInfo.DonationRecords.RemoveAt(0);
                         }
-                        dBUnionInfo.UnionInfo.DonationRecords.Add( new DonationRecord()
-                        { 
-                            Gold = unionConfig.DonateGold,
-                            Time = TimeHelper.ServerNow(),
-                            UnitId = request.UnitId
-                        });
+
+                        DonationRecord DonationRecord = DonationRecord.Create();
+                        DonationRecord.Gold = unionConfig.DonateGold;
+                        DonationRecord.Time = TimeHelper.ServerNow();
+                        DonationRecord.UnitId = request.UnitId;
+                        dBUnionInfo.UnionInfo.DonationRecords.Add( DonationRecord);
                         UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo).Coroutine();
                         break;
                     case 4: //钻石捐献
@@ -125,12 +129,12 @@ namespace ET.Server
                         {
                             dBUnionInfo.UnionInfo.DonationRecords.RemoveAt(0);
                         }
-                        dBUnionInfo.UnionInfo.DonationRecords.Add( new DonationRecord()
-                        { 
-                            Diamond = unionConfig.DonateDiamond,
-                            Time = TimeHelper.ServerNow(),
-                            UnitId = request.UnitId
-                        });
+
+                        DonationRecord = DonationRecord.Create();
+                        DonationRecord.Diamond = unionConfig.DonateDiamond;
+                        DonationRecord.Time = TimeHelper.ServerNow();
+                        DonationRecord.UnitId = request.UnitId;
+                        dBUnionInfo.UnionInfo.DonationRecords.Add(DonationRecord);
                         UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo).Coroutine();
                         break;
                     case 5: //增加金币

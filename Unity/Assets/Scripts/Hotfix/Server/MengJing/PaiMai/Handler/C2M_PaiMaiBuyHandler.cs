@@ -117,13 +117,12 @@ namespace ET.Server
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Buy, unit.Id))
             {
                 ActorId paimaiServerId = UnitCacheHelper.GetPaiMaiServerId( unit.Zone() );
+                M2P_PaiMaiBuyRequest M2P_PaiMaiBuyRequest = M2P_PaiMaiBuyRequest.Create();
+                M2P_PaiMaiBuyRequest.PaiMaiItemInfo = request.PaiMaiItemInfo;
+                M2P_PaiMaiBuyRequest.Gold = unit.GetComponent<UserInfoComponentS>().UserInfo.Gold;
+                M2P_PaiMaiBuyRequest.BuyNum = buyNum;
                 P2M_PaiMaiBuyResponse r_GameStatusResponse = (P2M_PaiMaiBuyResponse)await unit.Root().GetComponent<MessageSender>().Call
-                    (paimaiServerId, new M2P_PaiMaiBuyRequest()
-                    {
-                        PaiMaiItemInfo = request.PaiMaiItemInfo,
-                        Gold = unit.GetComponent<UserInfoComponentS>().UserInfo.Gold,
-                        BuyNum = buyNum
-                    });
+                    (paimaiServerId, M2P_PaiMaiBuyRequest);
                 if (r_GameStatusResponse.Error != ErrorCode.ERR_Success)
                 {
                     response.Error = r_GameStatusResponse.Error;
@@ -156,7 +155,9 @@ namespace ET.Server
                 {
                     long locationactor = r_GameStatusResponse.PaiMaiItemInfo.UserId;
 
-                    M2M_PaiMaiBuyInfoRequest r2M_RechargeRequest = new M2M_PaiMaiBuyInfoRequest() { PlayerId = unit.Id, CostGold = (long)(needGold * 0.95f) };
+                    M2M_PaiMaiBuyInfoRequest r2M_RechargeRequest = M2M_PaiMaiBuyInfoRequest.Create();
+                    r2M_RechargeRequest.PlayerId = unit.Id;
+                    r2M_RechargeRequest.CostGold = (long)(needGold * 0.95f);
                     M2M_PaiMaiBuyInfoResponse m2G_RechargeResponse = (M2M_PaiMaiBuyInfoResponse)await unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(locationactor, r2M_RechargeRequest);
 
                     if (m2G_RechargeResponse.Error != ErrorCode.ERR_Success)

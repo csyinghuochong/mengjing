@@ -29,12 +29,11 @@ namespace ET.Server
                     return;
                 }
 
-                MapMessageHelper.SendToClient(beinvite, new M2C_UnionInviteMessage()
-                { 
-                    UnionId = unionid,
-                    UnionName = userInfo.UnionName,
-                    PlayerName = userInfo.Name,
-                });
+                M2C_UnionInviteMessage M2C_UnionInviteMessage = M2C_UnionInviteMessage.Create();
+                M2C_UnionInviteMessage.UnionId = unionid;
+                M2C_UnionInviteMessage.UnionName = userInfo.UnionName;
+                M2C_UnionInviteMessage.PlayerName = userInfo.Name;
+                MapMessageHelper.SendToClient(beinvite, M2C_UnionInviteMessage);
             }
             await ETTask.CompletedTask;
         }

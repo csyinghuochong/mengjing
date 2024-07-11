@@ -381,7 +381,7 @@ namespace ET.Server
                 }
 
                 self.RefreshMonsterTime_2 += TimeHelper.Hour;
-                JiaYuanMonster keyValuePair = new JiaYuanMonster();
+                JiaYuanMonster keyValuePair = JiaYuanMonster.Create();
                 keyValuePair.ConfigId = JiaYuanHelper.GetRandomMonster();
                 keyValuePair.BornTime = self.RefreshMonsterTime_2;
                 MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(keyValuePair.ConfigId);
@@ -547,7 +547,8 @@ namespace ET.Server
             JiaYuanHelper.InitPurchaseItemList(userInfo.JiaYuanLv, self.PurchaseItemList_7);
             if (notice)
             {
-                M2C_JiaYuanUpdate m2C_JiaYuan = new M2C_JiaYuanUpdate() { PurchaseItemList = self.PurchaseItemList_7 };
+                M2C_JiaYuanUpdate  m2C_JiaYuan = M2C_JiaYuanUpdate.Create();
+                m2C_JiaYuan.PurchaseItemList = self.PurchaseItemList_7;
                 MapMessageHelper.SendToClient( self.GetParent<Unit>(), m2C_JiaYuan);
             }
         }

@@ -22,7 +22,10 @@ namespace ET.Server
             }
 
             ActorId unionserverid = UnitCacheHelper.GetUnionServerId( unit.Zone() );
-            M2U_UnionTransferRequest transferRequest = new M2U_UnionTransferRequest() { NewLeader = request.NewLeader, UnionId = unionid, UnitID = unit.Id };
+            M2U_UnionTransferRequest transferRequest = M2U_UnionTransferRequest.Create();
+            transferRequest.NewLeader = request.NewLeader;
+            transferRequest.UnionId = unionid;
+            transferRequest.UnitID = unit.Id;
             U2M_UnionTransferResponse responseUnionEnter = (U2M_UnionTransferResponse)await unit.Root().GetComponent<MessageSender>().Call(unionserverid, transferRequest);
 
             if (responseUnionEnter.Error != ErrorCode.ERR_Success)

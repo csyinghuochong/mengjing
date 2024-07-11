@@ -16,9 +16,10 @@ namespace ET.Server
                 }
 
                 ActorId chargeServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.Zone(), "PaiMai").ActorId;
+                M2P_StallXiaJiaRequest M2P_StallXiaJiaRequest = M2P_StallXiaJiaRequest.Create();
+                M2P_StallXiaJiaRequest.PaiMaiItemInfoId = request.PaiMaiItemInfoId;
                 P2M_StallXiaJiaResponse p2MStallXiaJiaResponse =
-                        (P2M_StallXiaJiaResponse)await unit.Root().GetComponent<MessageSender>().Call(chargeServerId,
-                            new M2P_StallXiaJiaRequest() { PaiMaiItemInfoId = request.PaiMaiItemInfoId });
+                        (P2M_StallXiaJiaResponse)await unit.Root().GetComponent<MessageSender>().Call(chargeServerId,M2P_StallXiaJiaRequest);
 
                 if (p2MStallXiaJiaResponse.Error == ErrorCode.ERR_Success && p2MStallXiaJiaResponse.PaiMaiItemInfo != null)
                 {

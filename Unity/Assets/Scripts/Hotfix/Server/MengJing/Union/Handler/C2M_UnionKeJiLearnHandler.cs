@@ -28,12 +28,11 @@ namespace ET.Server
             }
 
             ActorId dbCacheId = UnitCacheHelper.GetUnionServerId(unit.Zone());
-            U2M_UnionKeJiLearnResponse d2GGetUnit = (U2M_UnionKeJiLearnResponse)await unit.Root().GetComponent<MessageSender>().Call(dbCacheId, new M2U_UnionKeJiLearnRequest()
-            {
-                UnionId = unit.GetUnionId(),    
-                KeJiId = unionKeJiConfig.NextID,
-                Position = request.Position,    
-            });
+            M2U_UnionKeJiLearnRequest M2U_UnionKeJiLearnRequest = M2U_UnionKeJiLearnRequest.Create();
+            M2U_UnionKeJiLearnRequest.UnionId = unit.GetUnionId(),    
+            M2U_UnionKeJiLearnRequest.KeJiId = unionKeJiConfig.NextID,
+            M2U_UnionKeJiLearnRequest.Position = request.Position,    
+            U2M_UnionKeJiLearnResponse d2GGetUnit = (U2M_UnionKeJiLearnResponse)await unit.Root().GetComponent<MessageSender>().Call(dbCacheId, M2U_UnionKeJiLearnRequest);
 
             if(d2GGetUnit.Error != ErrorCode.ERR_Success)
             {

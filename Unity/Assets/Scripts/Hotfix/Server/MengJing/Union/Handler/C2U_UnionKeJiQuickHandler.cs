@@ -31,7 +31,8 @@ namespace ET.Server
             int cost = UnionHelper.CalcuNeedeForAccele(dBUnionInfo.UnionInfo.KeJiActiteTime, unionKeJiConfig.NeedTime);
             
             ////需要向游戏服发送协议扣除钻石
-            U2M_UnionKeJiQuickRequest r2M_RechargeRequest = new U2M_UnionKeJiQuickRequest() { Cost = cost };
+            U2M_UnionKeJiQuickRequest r2M_RechargeRequest = U2M_UnionKeJiQuickRequest.Create();
+            r2M_RechargeRequest.Cost = cost;
             M2U_UnionKeJiQuickResponse m2G_RechargeResponse = (M2U_UnionKeJiQuickResponse)await scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(request.ActorId, r2M_RechargeRequest);
             if (m2G_RechargeResponse.Error != ErrorCode.ERR_Success)
             {

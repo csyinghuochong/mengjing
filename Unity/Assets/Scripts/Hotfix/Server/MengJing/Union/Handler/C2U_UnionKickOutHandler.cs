@@ -30,14 +30,14 @@ namespace ET.Server
             UnitCacheHelper.SaveComponentCache(scene.Root(),  dBUnionInfo).Coroutine();
             //通知玩家
             ActorId gateServerId = UnitCacheHelper.GetGateServerId(scene.Zone());
+            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+            T2G_GateUnitInfoRequest.UserID = request.UserId;
             G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
-               (gateServerId, new T2G_GateUnitInfoRequest()
-               {
-                   UserID = request.UserId
-               });
+               (gateServerId, T2G_GateUnitInfoRequest);
             if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
             {
-                U2M_UnionKickOutRequest r2M_RechargeRequest = new U2M_UnionKickOutRequest() { UserId = request.UserId };
+                U2M_UnionKickOutRequest r2M_RechargeRequest = U2M_UnionKickOutRequest.Create();
+                r2M_RechargeRequest.UserId = request.UserId;
                 M2U_UnionKickOutResponse m2G_RechargeResponse = (M2U_UnionKickOutResponse)await scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(request.UserId, r2M_RechargeRequest);
             }
             else

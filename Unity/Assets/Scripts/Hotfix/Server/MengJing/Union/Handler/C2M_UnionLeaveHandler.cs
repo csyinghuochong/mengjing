@@ -11,12 +11,11 @@ namespace ET.Server
         {
             ActorId dbCacheId = UnitCacheHelper.GetUnionServerId(unit.Zone());
             UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
-            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();  
-            U2M_UnionLeaveResponse d2GGetUnit = (U2M_UnionLeaveResponse)await unit.Root().GetComponent<MessageSender>().Call(dbCacheId, new M2U_UnionLeaveRequest()
-            {
-                UnionId = numericComponent.GetAsLong(NumericType.UnionId_0),
-                UserId = userInfoComponent.UserInfo.UserId,
-            });
+            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
+            M2U_UnionLeaveRequest M2U_UnionLeaveRequest = M2U_UnionLeaveRequest.Create();
+            M2U_UnionLeaveRequest.UnionId = numericComponent.GetAsLong(NumericType.UnionId_0),
+            M2U_UnionLeaveRequest.UserId = userInfoComponent.UserInfo.UserId,
+            U2M_UnionLeaveResponse d2GGetUnit = (U2M_UnionLeaveResponse)await unit.Root().GetComponent<MessageSender>().Call(dbCacheId, M2U_UnionLeaveRequest);
 
             if (d2GGetUnit.Error != ErrorCode.ERR_Success)
             {
