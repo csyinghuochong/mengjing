@@ -14,12 +14,15 @@ namespace ET.Server
             FubenCenterComponent fubenCenterComponent = scene.GetComponent<FubenCenterComponent>();
             mapIdList.Add(StartSceneConfigCategory.Instance.GetBySceneName(scene.Zone(), $"Map{CommonHelp.MainCityID()}").ActorId);
             mapIdList.AddRange(fubenCenterComponent.FubenActorIdList.Values.ToList() );
+
+            F2M_ServerInfoUpdateRequest F2M_ServerInfoUpdateRequest = F2M_ServerInfoUpdateRequest.Create();
+            F2M_ServerInfoUpdateRequest.ServerInfo = request.ServerInfo;
             for (int i = mapIdList.Count - 1; i >= 0; i--)
             {
                 try
                 {
                     M2F_ServerInfoUpdateResponse m2m_TrasferUnitResponse = (M2F_ServerInfoUpdateResponse)await scene.Root().GetComponent<MessageSender>().Call
-                           (mapIdList[i], new F2M_ServerInfoUpdateRequest() { ServerInfo = request.ServerInfo });
+                           (mapIdList[i], F2M_ServerInfoUpdateRequest);
 
                     if (i != 0 && m2m_TrasferUnitResponse.Error != ErrorCode.ERR_Success)
                     {

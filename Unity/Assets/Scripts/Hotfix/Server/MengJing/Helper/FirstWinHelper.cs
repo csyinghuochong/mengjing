@@ -30,7 +30,7 @@ namespace ET.Server
                 return;
             }
             UserInfoComponentS userInfo =  player.GetComponent<UserInfoComponentS>();
-            FirstWinInfo firstWinInfo = new FirstWinInfo();
+            FirstWinInfo firstWinInfo = FirstWinInfo.Create();
             firstWinInfo.FirstWinId = firstwinid;
             firstWinInfo.KillTime = TimeHelper.ServerNow();
             firstWinInfo.UserId = userInfo.Id;

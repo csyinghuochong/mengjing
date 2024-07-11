@@ -16,7 +16,7 @@ namespace ET.Server
         {
             await ETTask.CompletedTask;
             Unit unit = aiComponent.GetParent<Unit>();
-            C2M_SkillCmd cmd = new C2M_SkillCmd();
+            C2M_SkillCmd cmd = C2M_SkillCmd.Create();
             cmd.SkillID = aiComponent.AISkillIDList[0];
             cmd.TargetID = 0;
             cmd.TargetDistance = 0;

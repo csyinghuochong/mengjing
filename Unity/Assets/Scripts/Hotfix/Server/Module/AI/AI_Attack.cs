@@ -46,7 +46,7 @@ namespace ET.Server
                     SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillId);
                     float3 direction = target.Position - unit.Position;
 
-                    C2M_SkillCmd cmd = new C2M_SkillCmd();
+                    C2M_SkillCmd cmd = C2M_SkillCmd.Create();
                     //触发技能
                     cmd.TargetID = target.Id;
                     cmd.SkillID = skillId;

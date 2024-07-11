@@ -447,7 +447,7 @@ namespace ET.Server
                 long maxHp = players[0].GetComponent<NumericComponentS>().GetAsLong(NumericType.Now_MaxHp);
                 ChapterConfig chapterConfig = ChapterConfigCategory.Instance.Get(self.ChapterId);
 
-                M2C_FubenSettlement m2C_FubenSettlement = new M2C_FubenSettlement();
+                M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
 
                 m2C_FubenSettlement.BattleResult = 1;
                 m2C_FubenSettlement.BattleGrade = 1;
