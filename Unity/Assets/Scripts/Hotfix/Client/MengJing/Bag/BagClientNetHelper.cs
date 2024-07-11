@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponentC))]
-    [FriendOf(typeof (BagComponentC))]
+    [FriendOf(typeof(UserInfoComponentC))]
+    [FriendOf(typeof(BagComponentC))]
     public static class BagClientNetHelper
     {
         public static async ETTask<int> RequestBagInit(Scene root)
         {
             Log.Debug($"C2M_BagInitHandler: client0");
-            M2C_BagInitResponse response = (M2C_BagInitResponse)await root.GetComponent<ClientSenderCompnent>().Call( C2M_BagInitRequest.Create());
+            M2C_BagInitResponse response = (M2C_BagInitResponse)await root.GetComponent<ClientSenderCompnent>().Call(C2M_BagInitRequest.Create());
 
             BagComponentC bagComponentC = root.GetComponent<BagComponentC>();
             for (int i = 0; i < response.BagInfos.Count; i++)
@@ -39,7 +39,11 @@ namespace ET.Client
                 return ErrorCode.ERR_Error;
             }
 
-            C2M_ItemOperateRequest request = new() { OperateType = 2, OperateBagID = bagInfo.BagInfoID, OperatePar = $"{bagInfo.ItemID}_{parinfo}" };
+            C2M_ItemOperateRequest request = C2M_ItemOperateRequest.Create();
+            request.OperateType = 2;
+            request.OperateBagID = bagInfo.BagInfoID;
+            request.OperatePar = $"{bagInfo.ItemID}_{parinfo}";
+
             M2C_ItemOperateResponse response = (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
@@ -56,7 +60,11 @@ namespace ET.Client
                 return ErrorCode.ERR_ItemOnlyUseOcc;
             }
 
-            C2M_ItemOperateRequest request = new() { OperateType = 1, OperateBagID = bagInfo.BagInfoID, OperatePar = parinfo };
+            C2M_ItemOperateRequest request = C2M_ItemOperateRequest.Create();
+            request.OperateType = 1;
+            request.OperateBagID = bagInfo.BagInfoID;
+            request.OperatePar = parinfo;
+
             M2C_ItemOperateResponse response = (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             if (response.Error != ErrorCode.ERR_Success)
@@ -142,19 +150,19 @@ namespace ET.Client
             int occ = root.GetComponent<UserInfoComponentC>().UserInfo.Occ;
             if (occ == 3 && itemCof.ItemSubType == (int)ItemSubTypeEnum.Wuqi)
             {
-                C2M_ItemOperateWearRequest c2M_ItemOperate = C2M_ItemOperateWearRequest.Create();
-                c2M_ItemOperate.OperateType = 3;
-                c2M_ItemOperate.OperateBagID = bagInfo.BagInfoID;
-                M2C_ItemOperateWearResponse m2C_ItemOperate =
-                        (M2C_ItemOperateWearResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2M_ItemOperate);
+                C2M_ItemOperateWearRequest request = C2M_ItemOperateWearRequest.Create();
+                request.OperateType = 3;
+                request.OperateBagID = bagInfo.BagInfoID;
+
+                M2C_ItemOperateWearResponse response = (M2C_ItemOperateWearResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             }
             else
             {
-                C2M_ItemOperateRequest m_ItemOperateWear = C2M_ItemOperateRequest.Create();
-                m_ItemOperateWear.OperateType = 3;
-                m_ItemOperateWear.OperateBagID = bagInfo.BagInfoID;
-                M2C_ItemOperateResponse r2c_roleEquip =
-                        (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(m_ItemOperateWear);
+                C2M_ItemOperateRequest request = C2M_ItemOperateRequest.Create();
+                request.OperateType = 3;
+                request.OperateBagID = bagInfo.BagInfoID;
+
+                M2C_ItemOperateResponse response = (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             }
 
             string ItemModelID = "";
@@ -175,29 +183,36 @@ namespace ET.Client
             ItemConfig itemCof = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             if (occ == 3 && itemCof.ItemSubType == (int)ItemSubTypeEnum.Wuqi)
             {
-                C2M_ItemOperateWearRequest c2M_ItemOperate = new C2M_ItemOperateWearRequest() { OperateType = 4, OperateBagID = bagInfo.BagInfoID };
-                M2C_ItemOperateWearResponse m2C_ItemOperate =
-                        (M2C_ItemOperateWearResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2M_ItemOperate);
+                C2M_ItemOperateWearRequest request = C2M_ItemOperateWearRequest.Create();
+                request.OperateType = 4;
+                request.OperateBagID = bagInfo.BagInfoID;
+
+                M2C_ItemOperateWearResponse response = (M2C_ItemOperateWearResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             }
             else
             {
-                C2M_ItemOperateRequest m_ItemOperateWear = new C2M_ItemOperateRequest() { OperateType = 4, OperateBagID = bagInfo.BagInfoID };
-                M2C_ItemOperateResponse r2c_roleEquip =
-                        (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(m_ItemOperateWear);
-                if (r2c_roleEquip.Error != 0)
+                C2M_ItemOperateRequest request = C2M_ItemOperateRequest.Create();
+                request.OperateType = 4;
+                request.OperateBagID = bagInfo.BagInfoID;
+
+                M2C_ItemOperateResponse response = (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+                if (response.Error != 0)
                 {
                     return;
                 }
             }
 
-            // self.ZoneScene().GetComponent<AttackComponent>().UpdateComboTime();
-            // HintHelp.GetInstance().DataUpdate(DataType.EquipWear);
+            root.GetComponent<AttackComponent>().UpdateComboTime();
+
             EventSystem.Instance.Publish(root, new DataUpdate_EquipWear());
         }
 
         public static async ETTask<int> RequestSplitItem(Scene root, BagInfo bagInfo, int splitnumber)
         {
-            C2M_ItemSplitRequest request = new() { OperateBagID = bagInfo.BagInfoID, OperatePar = splitnumber.ToString() };
+            C2M_ItemSplitRequest request = C2M_ItemSplitRequest.Create();
+            request.OperateBagID = bagInfo.BagInfoID;
+            request.OperatePar = splitnumber.ToString();
+
             M2C_ItemSplitResponse response = (M2C_ItemSplitResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
@@ -208,7 +223,12 @@ namespace ET.Client
             BagComponentC bagComponentC = root.GetComponent<BagComponentC>();
             bagComponentC.RealAddItem = false;
             int loctype = (int)loc;
-            C2M_ItemOperateRequest request = new() { OperateType = 8, OperateBagID = 0, OperatePar = loctype.ToString() };
+
+            C2M_ItemOperateRequest request = C2M_ItemOperateRequest.Create();
+            request.OperateType = 8;
+            request.OperateBagID = 0;
+            request.OperatePar = loctype.ToString();
+
             M2C_ItemOperateResponse response = (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             bagComponentC.RealAddItem = true;
             bagComponentC.OnRecvItemSort(loc);
@@ -218,7 +238,11 @@ namespace ET.Client
 
         public static async ETTask<int> RequestAppraisalItem(Scene root, BagInfo bagInfo, long appID = 0)
         {
-            C2M_ItemOperateRequest request = new() { OperateType = 5, OperateBagID = bagInfo.BagInfoID, OperatePar = appID.ToString() };
+            C2M_ItemOperateRequest request = C2M_ItemOperateRequest.Create();
+            request.OperateType = 5;
+            request.OperateBagID = bagInfo.BagInfoID;
+            request.OperatePar = appID.ToString();
+
             M2C_ItemOperateResponse response = (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
@@ -226,7 +250,9 @@ namespace ET.Client
 
         public static async ETTask<int> RequestHuiShou(Scene root, List<long> huishouList)
         {
-            C2M_ItemHuiShouRequest request = new() { OperateBagID = huishouList };
+            C2M_ItemHuiShouRequest request = C2M_ItemHuiShouRequest.Create();
+            request.OperateBagID = huishouList;
+
             M2C_ItemHuiShouResponse response = (M2C_ItemHuiShouResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             EventSystem.Instance.Publish(root, new DataUpdate_EquipHuiShow());
@@ -235,7 +261,11 @@ namespace ET.Client
 
         public static async ETTask<int> RequestXiangQianGem(Scene root, BagInfo bagInfo, string par = "")
         {
-            C2M_ItemOperateGemRequest request = new() { OperateType = 9, OperateBagID = bagInfo.BagInfoID, OperatePar = par };
+            C2M_ItemOperateGemRequest request = C2M_ItemOperateGemRequest.Create();
+            request.OperateType = 9;
+            request.OperateBagID = bagInfo.BagInfoID;
+            request.OperatePar = par;
+
             M2C_ItemOperateGemResponse response = (M2C_ItemOperateGemResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
@@ -243,7 +273,11 @@ namespace ET.Client
 
         public static async ETTask<int> RequestXieXiaGem(Scene root, BagInfo bagInfo, string par = "")
         {
-            C2M_ItemOperateGemRequest request = new() { OperateType = 10, OperateBagID = bagInfo.BagInfoID, OperatePar = par };
+            C2M_ItemOperateGemRequest request = C2M_ItemOperateGemRequest.Create();
+            request.OperateType = 10;
+            request.OperateBagID = bagInfo.BagInfoID;
+            request.OperatePar = par;
+
             M2C_ItemOperateGemResponse response = (M2C_ItemOperateGemResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
@@ -251,7 +285,9 @@ namespace ET.Client
 
         public static async ETTask<(int, int)> RequestItemQiangHua(Scene root, int itemSubType)
         {
-            C2M_ItemQiangHuaRequest request = new() { WeiZhi = itemSubType };
+            C2M_ItemQiangHuaRequest request = C2M_ItemQiangHuaRequest.Create();
+            request.WeiZhi = itemSubType;
+
             M2C_ItemQiangHuaResponse response = (M2C_ItemQiangHuaResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return (response.Error, response.QiangHuaLevel);
@@ -259,7 +295,9 @@ namespace ET.Client
 
         public static async ETTask<int> RequestBuyBagCell(Scene root, int itemlocktype)
         {
-            C2M_ItemBuyCellRequest request = new() { OperateType = itemlocktype };
+            C2M_ItemBuyCellRequest request = C2M_ItemBuyCellRequest.Create();
+            request.OperateType = itemlocktype;
+
             M2C_ItemBuyCellResponse response = (M2C_ItemBuyCellResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
@@ -331,7 +369,10 @@ namespace ET.Client
                 }
             }
 
-            C2M_ItemOneSellRequest request = new() { BagInfoIds = baginfoids, OperateType = (int)itemLocType };
+            C2M_ItemOneSellRequest request = C2M_ItemOneSellRequest.Create();
+            request.BagInfoIds = baginfoids;
+            request.OperateType = (int)itemLocType;
+
             M2C_ItemOneSellResponse response = (M2C_ItemOneSellResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
@@ -339,9 +380,10 @@ namespace ET.Client
 
         public static async ETTask<int> RquestGemHeCheng(Scene root, int locType)
         {
-            C2M_GemHeChengQuickRequest request = new() { LocType = locType };
-            M2C_GemHeChengQuickResponse response =
-                    (M2C_GemHeChengQuickResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            C2M_GemHeChengQuickRequest request = C2M_GemHeChengQuickRequest.Create();
+            request.LocType = locType;
+
+            M2C_GemHeChengQuickResponse response = (M2C_GemHeChengQuickResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
         }
@@ -349,16 +391,24 @@ namespace ET.Client
         public static async ETTask<int> RquestPutStoreHouse(Scene root, BagInfo bagInfo)
         {
             int houseId = root.GetComponent<BagComponentC>().CurrentHouse;
-            C2M_ItemOperateRequest request = new() { OperateType = 6, OperateBagID = bagInfo.BagInfoID, OperatePar = houseId.ToString() };
-            M2C_ItemOperateResponse response =
-                    (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            C2M_ItemOperateRequest request = C2M_ItemOperateRequest.Create();
+            request.OperateType = 6;
+            request.OperateBagID = bagInfo.BagInfoID;
+            request.OperatePar = houseId.ToString();
+
+            M2C_ItemOperateResponse response = (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             CheckSameId(root);
             return response.Error;
         }
 
         public static async ETTask<int> RquestPutBag(Scene root, BagInfo bagInfo)
         {
-            C2M_ItemOperateRequest request = new() { OperateType = 7, OperateBagID = bagInfo.BagInfoID, OperatePar = bagInfo.Loc.ToString() };
+            C2M_ItemOperateRequest request = C2M_ItemOperateRequest.Create();
+            request.OperateType = 7;
+            request.OperateBagID = bagInfo.BagInfoID;
+            request.OperatePar = bagInfo.Loc.ToString();
+
             M2C_ItemOperateResponse response = (M2C_ItemOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             CheckSameId(root);
             return response.Error;
@@ -389,15 +439,19 @@ namespace ET.Client
 
         public static async ETTask<int> RquestQuickPut(Scene root, int hourseId)
         {
-            C2M_ItemQuickPutRequest request = new() { HorseId = hourseId };
-            M2C_ItemQuickPutResponse response =
-                    (M2C_ItemQuickPutResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            C2M_ItemQuickPutRequest request = C2M_ItemQuickPutRequest.Create();
+            request.HorseId = hourseId;
+
+            M2C_ItemQuickPutResponse response = (M2C_ItemQuickPutResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
 
         public static async ETTask<int> RequestAccountWarehousOperate(Scene root, int operateType, long operateId)
         {
-            C2M_AccountWarehousOperateRequest request = new() { OperatateType = operateType, OperateBagID = operateId };
+            C2M_AccountWarehousOperateRequest request = C2M_AccountWarehousOperateRequest.Create();
+            request.OperatateType = operateType;
+            request.OperateBagID = operateId;
+
             M2C_AccountWarehousOperateResponse response =
                     (M2C_AccountWarehousOperateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             if (response.Error == ErrorCode.ERR_Success)
@@ -412,25 +466,28 @@ namespace ET.Client
         public static async ETTask<int> RequestAccountWarehousInfo(Scene root)
         {
             long accountId = root.GetComponent<PlayerComponent>().AccountId;
-            C2E_AccountWarehousInfoRequest reuqest = new() { AccInfoID = accountId };
-            E2C_AccountWarehousInfoResponse response =
-                    (E2C_AccountWarehousInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(reuqest);
+            C2E_AccountWarehousInfoRequest reuqest = C2E_AccountWarehousInfoRequest.Create();
+            reuqest.AccInfoID = accountId;
+
+            E2C_AccountWarehousInfoResponse response = (E2C_AccountWarehousInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(reuqest);
 
             return response.Error;
         }
 
         public static async ETTask<int> RquestOpenCangKu(Scene root)
         {
-            C2M_RoleOpenCangKuRequest request = new();
-            M2C_RoleOpenCangKuResponse response =
-                    (M2C_RoleOpenCangKuResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            C2M_RoleOpenCangKuRequest request = C2M_RoleOpenCangKuRequest.Create();
+            M2C_RoleOpenCangKuResponse response = (M2C_RoleOpenCangKuResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
         }
 
         public static async ETTask<M2C_ItemXiLianResponse> RquestItemXiLian(Scene root, long bagInfoID, int times)
         {
-            C2M_ItemXiLianRequest request = new() { OperateBagID = bagInfoID, Times = times };
+            C2M_ItemXiLianRequest request = C2M_ItemXiLianRequest.Create();
+            request.OperateBagID = bagInfoID;
+            request.Times = times;
+
             M2C_ItemXiLianResponse response = (M2C_ItemXiLianResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response;
@@ -438,36 +495,41 @@ namespace ET.Client
 
         public static async ETTask<int> RquestItemXiLianSelect(Scene root, long bagInfoID, ItemXiLianResult itemXiLianResult)
         {
-            C2M_ItemXiLianSelectRequest request = new() { OperateBagID = bagInfoID, ItemXiLianResult = itemXiLianResult };
-            M2C_ItemXiLianSelectResponse response =
-                    (M2C_ItemXiLianSelectResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            C2M_ItemXiLianSelectRequest request = C2M_ItemXiLianSelectRequest.Create();
+            request.OperateBagID = bagInfoID;
+            request.ItemXiLianResult = itemXiLianResult;
+
+            M2C_ItemXiLianSelectResponse response = (M2C_ItemXiLianSelectResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
         }
 
         public static async ETTask<int> RquestItemXiLianNumReward(Scene root, int rewardId)
         {
-            C2M_ItemXiLianNumReward request = new() { RewardId = rewardId };
-            M2C_ItemXiLianNumReward response =
-                    (M2C_ItemXiLianNumReward)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            C2M_ItemXiLianNumReward request = C2M_ItemXiLianNumReward.Create();
+            request.RewardId = rewardId;
+
+            M2C_ItemXiLianNumReward response = (M2C_ItemXiLianNumReward)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
         }
 
         public static async ETTask<int> RquestPetExploreReward(Scene root, int rewardId)
         {
-            C2M_PetExploreReward request = new() { RewardId = rewardId };
-            M2C_PetExploreReward response =
-                    (M2C_PetExploreReward)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            C2M_PetExploreReward request = C2M_PetExploreReward.Create();
+            request.RewardId = rewardId;
+
+            M2C_PetExploreReward response = (M2C_PetExploreReward)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
         }
 
         public static async ETTask<int> RquestItemXiLianReward(Scene root, int xiLianId)
         {
-            C2M_ItemXiLianRewardRequest request = new() { XiLianId = xiLianId };
-            M2C_ItemXiLianRewardResponse response =
-                    (M2C_ItemXiLianRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            C2M_ItemXiLianRewardRequest request = C2M_ItemXiLianRewardRequest.Create();
+            request.XiLianId = xiLianId;
+
+            M2C_ItemXiLianRewardResponse response = (M2C_ItemXiLianRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
         }
@@ -503,7 +565,10 @@ namespace ET.Client
                 return;
             }
 
-            C2M_StoreBuyRequest request = new() { SellItemID = sellId, SellItemNum = buyNum };
+            C2M_StoreBuyRequest request = C2M_StoreBuyRequest.Create();
+            request.SellItemID = sellId;
+            request.SellItemNum = buyNum;
+
             M2C_StoreBuyResponse response = (M2C_StoreBuyResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             if (response.Error == ErrorCode.ERR_Success)
             {
@@ -513,9 +578,11 @@ namespace ET.Client
 
         public static async ETTask<int> RquestMysteryBuy(Scene root, MysteryItemInfo mysteryItemInfo, int npdId)
         {
-            C2M_MysteryBuyRequest request = new() { MysteryItemInfo = mysteryItemInfo, NpcId = npdId };
-            M2C_MysteryBuyResponse response =
-                    (M2C_MysteryBuyResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            C2M_MysteryBuyRequest request = C2M_MysteryBuyRequest.Create();
+            request.MysteryItemInfo = mysteryItemInfo;
+            request.NpcId = npdId;
+
+            M2C_MysteryBuyResponse response = (M2C_MysteryBuyResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
         }
@@ -524,6 +591,7 @@ namespace ET.Client
         {
             C2A_MysteryListRequest request = C2A_MysteryListRequest.Create();
             request.UserId = userId;
+
             A2C_MysteryListResponse response = (A2C_MysteryListResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response;
@@ -531,7 +599,8 @@ namespace ET.Client
 
         public static async ETTask<Actor_FubenMoNengResponse> RquestFubenMoNeng(Scene root)
         {
-            Actor_FubenMoNengRequest request = new();
+            Actor_FubenMoNengRequest request = Actor_FubenMoNengRequest.Create();
+
             Actor_FubenMoNengResponse response = (Actor_FubenMoNengResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response;
@@ -539,7 +608,9 @@ namespace ET.Client
 
         public static async ETTask<int> RquestTakeOutAll(Scene root, int horseId)
         {
-            C2M_TakeOutAllRequest request = new() { HorseId = horseId };
+            C2M_TakeOutAllRequest request = C2M_TakeOutAllRequest.Create();
+            request.HorseId = horseId;
+
             M2C_TakeOutAllResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_TakeOutAllResponse;
 
             return response.Error;
@@ -547,7 +618,11 @@ namespace ET.Client
 
         public static async ETTask<int> RequestEquipMake(Scene root, long baginfoId, int makeId, int plan)
         {
-            C2M_MakeEquipRequest request = new() { BagInfoID = baginfoId, MakeId = makeId, Plan = plan };
+            C2M_MakeEquipRequest request = C2M_MakeEquipRequest.Create();
+            request.BagInfoID = baginfoId;
+            request.MakeId = makeId;
+            request.Plan = plan;
+
             M2C_MakeEquipResponse response = (M2C_MakeEquipResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             if (response.ItemId == 0)
             {
@@ -572,24 +647,30 @@ namespace ET.Client
 
         public static async ETTask<M2C_ChouKaResponse> ChouKa(Scene root, int chapterId, int chouKaType)
         {
-            C2M_ChouKaRequest request = new() { ChapterId = chapterId, ChouKaType = chouKaType };
+            C2M_ChouKaRequest request = C2M_ChouKaRequest.Create();
+            request.ChapterId = chapterId;
+            request.ChouKaType = chouKaType;
+
             M2C_ChouKaResponse response = (M2C_ChouKaResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_ItemXiLianTransferResponse> ItemXiLianTransfer(Scene root, long operateBagID_1, long operateBagID_2)
         {
-            C2M_ItemXiLianTransferRequest request = new() { OperateBagID_1 = operateBagID_1, OperateBagID_2 = operateBagID_2 };
-            M2C_ItemXiLianTransferResponse response =
-                    (M2C_ItemXiLianTransferResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            C2M_ItemXiLianTransferRequest request = C2M_ItemXiLianTransferRequest.Create();
+            request.OperateBagID_1 = operateBagID_1;
+            request.OperateBagID_2 = operateBagID_2;
+
+            M2C_ItemXiLianTransferResponse response = (M2C_ItemXiLianTransferResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_ChouKaRewardResponse> ChouKaReward(Scene root, int rewardId)
         {
-            C2M_ChouKaRewardRequest request = new() { RewardId = rewardId };
-            M2C_ChouKaRewardResponse response =
-                    (M2C_ChouKaRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            C2M_ChouKaRewardRequest request = C2M_ChouKaRewardRequest.Create();
+            request.RewardId = rewardId;
+
+            M2C_ChouKaRewardResponse response = (M2C_ChouKaRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             if (response.Error == ErrorCode.ERR_Success)
             {
@@ -601,49 +682,63 @@ namespace ET.Client
 
         public static async ETTask<M2C_RoleAddPointResponse> RoleAddPoint(Scene root, List<int> pointList)
         {
-            C2M_RoleAddPointRequest request = new() { PointList = pointList };
+            C2M_RoleAddPointRequest request = C2M_RoleAddPointRequest.Create();
+            request.PointList = pointList;
+
             M2C_RoleAddPointResponse response = (M2C_RoleAddPointResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_ItemInheritResponse> ItemInherit(Scene root, long operateBagID)
         {
-            C2M_ItemInheritRequest request = new() { OperateBagID = operateBagID };
+            C2M_ItemInheritRequest request = C2M_ItemInheritRequest.Create();
+            request.OperateBagID = operateBagID;
+
             M2C_ItemInheritResponse response = (M2C_ItemInheritResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_ItemInheritSelectResponse> ItemInheritSelect(Scene root, long operateBagID, List<int> inheritSkills)
         {
-            C2M_ItemInheritSelectRequest request = new() { OperateBagID = operateBagID, InheritSkills = inheritSkills };
+            C2M_ItemInheritSelectRequest request = C2M_ItemInheritSelectRequest.Create();
+            request.OperateBagID = operateBagID;
+            request.InheritSkills = inheritSkills;
+
             M2C_ItemInheritSelectResponse response = (M2C_ItemInheritSelectResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_PetTargetLockResponse> PetTargetLock(Scene root, long targetId)
         {
-            C2M_PetTargetLockRequest request = new() { TargetId = targetId };
+            C2M_PetTargetLockRequest request = C2M_PetTargetLockRequest.Create();
+            request.TargetId = targetId;
+
             M2C_PetTargetLockResponse response = (M2C_PetTargetLockResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_ItemEquipIndexResponse> ItemEquipIndex(Scene root, int equipIndex)
         {
-            C2M_ItemEquipIndexRequest request = new() { EquipIndex = equipIndex };
+            C2M_ItemEquipIndexRequest request = C2M_ItemEquipIndexRequest.Create();
+            request.EquipIndex = equipIndex;
+
             M2C_ItemEquipIndexResponse response = (M2C_ItemEquipIndexResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_JingLingDropResponse> JingLingDrop(Scene root)
         {
-            C2M_JingLingDropRequest request = new();
+            C2M_JingLingDropRequest request = C2M_JingLingDropRequest.Create();
+
             M2C_JingLingDropResponse response = (M2C_JingLingDropResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_HorseFightResponse> HorseFight(Scene root, int horseId)
         {
-            C2M_HorseFightRequest request = new() { HorseId = horseId };
+            C2M_HorseFightRequest request = C2M_HorseFightRequest.Create();
+            request.HorseId = horseId;
+
             M2C_HorseFightResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_HorseFightResponse;
             return response;
         }
@@ -652,84 +747,114 @@ namespace ET.Client
         {
             root.GetComponent<UserInfoComponentC>().UpdateGameSetting(gameSettingInfos);
             EventSystem.Instance.Publish(root, new DataUpdate_SettingUpdate());
-            C2M_GameSettingRequest request = new() { GameSettingInfos = gameSettingInfos };
+
+            C2M_GameSettingRequest request = C2M_GameSettingRequest.Create();
+            request.GameSettingInfos = gameSettingInfos;
+
             M2C_GameSettingResponse response = (M2C_GameSettingResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<Popularize2C_UploadResponse> Upload(Scene root, string memoryInfo)
         {
-            C2Popularize_UploadRequest request = new() { MemoryInfo = memoryInfo };
+            C2Popularize_UploadRequest request = C2Popularize_UploadRequest.Create();
+            request.MemoryInfo = memoryInfo;
+
             Popularize2C_UploadResponse response = (Popularize2C_UploadResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_ModifyNameResponse> ModifyName(Scene root, string newName)
         {
-            C2M_ModifyNameRequest request = new() { NewName = newName };
+            C2M_ModifyNameRequest request = C2M_ModifyNameRequest.Create();
+            request.NewName = newName;
+
             M2C_ModifyNameResponse response = (M2C_ModifyNameResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_TitleUseResponse> TitleUse(Scene root, int titleId)
         {
-            C2M_TitleUseRequest request = new() { TitleId = titleId };
+            C2M_TitleUseRequest request = C2M_TitleUseRequest.Create();
+            request.TitleId = titleId;
+
             M2C_TitleUseResponse response = (M2C_TitleUseResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_FashionActiveResponse> FashionActive(Scene root, int fashionId)
         {
-            C2M_FashionActiveRequest request = new() { FashionId = fashionId };
+            C2M_FashionActiveRequest request = C2M_FashionActiveRequest.Create();
+            request.FashionId = fashionId;
+
             M2C_FashionActiveResponse response = (M2C_FashionActiveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_FashionWearResponse> FashionWear(Scene root, int fashionId, int operatateType)
         {
-            C2M_FashionWearRequest request = new() { FashionId = fashionId, OperatateType = operatateType };
+            C2M_FashionWearRequest request = C2M_FashionWearRequest.Create();
+            request.FashionId = fashionId;
+            request.OperatateType = operatateType;
+
             M2C_FashionWearResponse response = (M2C_FashionWearResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_ItemProtectResponse> ItemProtect(Scene root, long operateBagID, bool isProtect)
         {
-            C2M_ItemProtectRequest request = new() { OperateBagID = operateBagID, IsProtect = isProtect };
+            C2M_ItemProtectRequest request = C2M_ItemProtectRequest.Create();
+            request.OperateBagID = operateBagID;
+            request.IsProtect = isProtect;
+
             M2C_ItemProtectResponse response = (M2C_ItemProtectResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_JingHePlanResponse> JingHePlan(Scene root, int jingHePlan)
         {
-            C2M_JingHePlanRequest request = new() { JingHePlan = jingHePlan };
+            C2M_JingHePlanRequest request = C2M_JingHePlanRequest.Create();
+            request.JingHePlan = jingHePlan;
+
             M2C_JingHePlanResponse response = (M2C_JingHePlanResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_SeasonOpenJingHeResponse> SeasonOpenJingHe(Scene root, int jingHeId)
         {
-            C2M_SeasonOpenJingHeRequest request = new() { JingHeId = jingHeId };
+            C2M_SeasonOpenJingHeRequest request = C2M_SeasonOpenJingHeRequest.Create();
+            request.JingHeId = jingHeId;
+
             M2C_SeasonOpenJingHeResponse response = (M2C_SeasonOpenJingHeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_JingHeWearResponse> JingHeWear(Scene root, long operateBagID, int operateType, string operatePar)
         {
-            C2M_JingHeWearRequest request = new() { OperateBagID = operateBagID, OperateType = operateType, OperatePar = operatePar };
+            C2M_JingHeWearRequest request = C2M_JingHeWearRequest.Create();
+            request.OperateBagID = operateBagID;
+            request.OperateType = operateType;
+            request.OperatePar = operatePar;
+
             M2C_JingHeWearResponse response = (M2C_JingHeWearResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_JingHeActivateResponse> JingHeActivate(Scene root, long bagInfoId)
         {
-            C2M_JingHeActivateRequest request = new() { BagInfoId = bagInfoId };
+            C2M_JingHeActivateRequest request = C2M_JingHeActivateRequest.Create();
+            request.BagInfoId = bagInfoId;
+
             M2C_JingHeActivateResponse response = (M2C_JingHeActivateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_JingHeZhuruResponse> JingHeZhuru(Scene root, long bagInfoId, List<long> operateBagID)
         {
-            C2M_JingHeZhuruRequest request = new() { BagInfoId = bagInfoId, OperateBagID = operateBagID };
+            C2M_JingHeZhuruRequest request = C2M_JingHeZhuruRequest.Create();
+            request.BagInfoId = bagInfoId;
+            request.OperateBagID = operateBagID;
+
             M2C_JingHeZhuruResponse response = (M2C_JingHeZhuruResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
