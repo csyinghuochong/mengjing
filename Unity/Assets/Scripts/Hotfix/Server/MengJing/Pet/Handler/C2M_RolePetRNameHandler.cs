@@ -18,8 +18,18 @@ namespace ET.Server
 			petinfo.PetName = request.PetName;
 
 			//通知客户端
-			MapMessageHelper.SendToClient(unit, new M2C_PetDataUpdate() { UpdateType = (int)UserDataType.Name, PetId = request.PetInfoId, UpdateTypeValue = request.PetName });
-			MapMessageHelper.Broadcast(unit, new M2C_PetDataBroadcast() { UnitId = unit.Id, UpdateType = (int)UserDataType.Name, PetId = request.PetInfoId, UpdateTypeValue = request.PetName });
+			M2C_PetDataUpdate M2C_PetDataUpdate = M2C_PetDataUpdate.Create();
+			M2C_PetDataUpdate.UpdateType = (int)UserDataType.Name;
+			M2C_PetDataUpdate.PetId = request.PetInfoId;
+			M2C_PetDataUpdate.UpdateTypeValue = request.PetName;
+			MapMessageHelper.SendToClient(unit, M2C_PetDataUpdate);
+
+			M2C_PetDataBroadcast M2C_PetDataBroadcast = M2C_PetDataBroadcast.Create();
+			M2C_PetDataBroadcast.UnitId = unit.Id;
+			M2C_PetDataBroadcast.UpdateType = (int)UserDataType.Name;
+			M2C_PetDataBroadcast.PetId = request.PetInfoId;
+			M2C_PetDataBroadcast.UpdateTypeValue = request.PetName;
+			MapMessageHelper.Broadcast(unit, M2C_PetDataBroadcast);
 			await ETTask.CompletedTask;
 		}
 	}

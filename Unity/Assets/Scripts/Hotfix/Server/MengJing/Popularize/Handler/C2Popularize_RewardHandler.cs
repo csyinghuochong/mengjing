@@ -42,7 +42,9 @@ namespace ET.Server
 
                 Log.Warning($"推广奖励: {request.ActorId}  {rewardItems.Count}");
 
-                Popularize2M_RewardRequest rewardRequest = new Popularize2M_RewardRequest() { ReardList = rewardItems };
+                Popularize2M_RewardRequest rewardRequest = Popularize2M_RewardRequest.Create();
+                rewardRequest.ReardList = rewardItems;
+                
                 M2Popularize_RewardResponse reqEnter = (M2Popularize_RewardResponse)await scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(request.ActorId, rewardRequest);
                 //(M2Popularize_RewardResponse)await MessageHelper.CallLocationActor(request.ActorId, rewardRequest);
                 if (reqEnter.Error == ErrorCode.ERR_Success)

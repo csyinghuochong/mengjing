@@ -127,20 +127,22 @@ namespace ET.Server
 
             if (self.AuctioUnitId != 0)
             {
+                T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+                T2G_GateUnitInfoRequest.UserID = self.AuctioUnitId;
                 G2T_GateUnitInfoResponse g2M_UpdateUnitResponse =
-                        (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>().Call(gateServerId,
-                            new T2G_GateUnitInfoRequest() { UserID = self.AuctioUnitId });
+                        (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>().Call(gateServerId,T2G_GateUnitInfoRequest);
 
                 bool getitem = false;
 
                 //在线
                 if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
                 {
-                    P2M_PaiMaiAuctionOverRequest p2M_PaiMaiAuctionOverRequest = new P2M_PaiMaiAuctionOverRequest()
-                    {
-                        Price = self.AuctionPrice, ItemID = self.AuctionItem, ItemNumber = self.AuctionItemNum,
-                    };
 
+                    P2M_PaiMaiAuctionOverRequest p2M_PaiMaiAuctionOverRequest = P2M_PaiMaiAuctionOverRequest.Create();
+                    p2M_PaiMaiAuctionOverRequest.Price = self.AuctionPrice;
+                    p2M_PaiMaiAuctionOverRequest.ItemID = self.AuctionItem;
+                    p2M_PaiMaiAuctionOverRequest.ItemNumber = self.AuctionItemNum;
+                    
                     Log.Warning($"OnAuctionOver[在线]:  {self.Zone()}  {self.AuctioUnitId}  {self.AuctionPlayer}");
 
                     M2P_PaiMaiAuctionOverResponse m2G_RechargeResponse =
@@ -187,20 +189,21 @@ namespace ET.Server
 
                 if (getitem)
                 {
-                    MailInfo mailInfo = new MailInfo();
+                    MailInfo mailInfo = MailInfo.Create();
                     mailInfo.Status = 0;
                     mailInfo.Context = "竞拍道具";
                     mailInfo.Title = "竞拍道具";
                     mailInfo.MailId = IdGenerater.Instance.GenerateId();
-                    mailInfo.ItemList.Add(new BagInfo()
-                    {
-                        ItemID = self.AuctionItem, ItemNum = self.AuctionItemNum, GetWay = $"{ItemGetWay.Auction}_{TimeHelper.ServerNow()}"
-                    });
+                    BagInfo BagInfo = BagInfo.Create();
+                    BagInfo.ItemID = self.AuctionItem;
+                    BagInfo.ItemNum = self.AuctionItemNum;
+                    BagInfo.GetWay = $"{ItemGetWay.Auction}_{TimeHelper.ServerNow()}";
+                    mailInfo.ItemList.Add(BagInfo);
                     await MailHelp.SendUserMail(self.Root(), self.AuctioUnitId, mailInfo);
                 }
                 else
                 {
-                    MailInfo mailInfo = new MailInfo();
+                    MailInfo mailInfo = MailInfo.Create();
                     mailInfo.Status = 0;
                     mailInfo.Context = "竞拍失败";
                     mailInfo.Title = $"金币小于{self.AuctionPrice},竞拍失败";
@@ -213,12 +216,16 @@ namespace ET.Server
             int returnggold = (int)(self.AuctionStart * 0.1f);
             for (int i = 0; i < self.AuctionJoinList.Count; i++)
             {
-                MailInfo mailInfo = new MailInfo();
+                MailInfo mailInfo = MailInfo.Create();
                 mailInfo.Status = 0;
                 mailInfo.Context = "退还保证金";
                 mailInfo.Title = "退还保证金";
                 mailInfo.MailId = IdGenerater.Instance.GenerateId();
-                mailInfo.ItemList.Add(new BagInfo() { ItemID = 1, ItemNum = returnggold, GetWay = $"{ItemGetWay.Auction}_{TimeHelper.ServerNow()}" });
+                BagInfo BagInfo = BagInfo.Create();
+                BagInfo.ItemID = 1;
+                BagInfo.ItemNum = returnggold;
+                BagInfo.GetWay = $"{ItemGetWay.Auction}_{TimeHelper.ServerNow()}";
+                mailInfo.ItemList.Add(BagInfo);
 
                 await MailHelp.SendUserMail(self.Root(), self.AuctionJoinList[i], mailInfo);
             }

@@ -23,7 +23,7 @@ namespace ET.Server
             paiMaiSceneComponent.AuctioUnitId = message.UnitID;
             paiMaiSceneComponent.AuctionPlayer = message.AuctionPlayer;
 
-            PaiMaiAuctionRecord keyValuePair = new PaiMaiAuctionRecord();
+            PaiMaiAuctionRecord keyValuePair = PaiMaiAuctionRecord.Create();
             keyValuePair.UnionId = message.UnitID;
             keyValuePair.Price = message.Price;
             keyValuePair.Time = TimeHelper.ServerNow();

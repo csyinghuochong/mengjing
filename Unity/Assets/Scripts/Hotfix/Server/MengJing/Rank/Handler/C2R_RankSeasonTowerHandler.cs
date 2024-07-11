@@ -31,18 +31,17 @@ namespace ET.Server
                     }
 
                     idlist.Add(ranklist[i].KeyId);
-
+                    
                     UserInfoComponentS userinfoComponent =
                             await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), ranklist[i].KeyId);
-                    response.RankList.Add(new RankSeasonTowerInfo()
-                    {
-                        UserId = ranklist[i].KeyId,
-                        TotalTime = ranklist[i].Value,        //时间
-                        FubenId = (int)(ranklist[i].Value2),  //副本
-                        PlayerLv = userinfoComponent.UserInfo.Lv,
-                        PlayerName = userinfoComponent.UserInfo.Name,
-                        Occ = userinfoComponent.UserInfo.Occ,
-                    });
+                    RankSeasonTowerInfo RankSeasonTowerInfo = RankSeasonTowerInfo.Create();
+                    RankSeasonTowerInfo.UserId = ranklist[i].KeyId;
+                    RankSeasonTowerInfo.TotalTime = ranklist[i].Value;        //时间
+                    RankSeasonTowerInfo.FubenId = (int)(ranklist[i].Value2);  //副本
+                    RankSeasonTowerInfo.PlayerLv = userinfoComponent.UserInfo.Lv;
+                    RankSeasonTowerInfo.PlayerName = userinfoComponent.UserInfo.Name;
+                    RankSeasonTowerInfo.Occ = userinfoComponent.UserInfo.Occ;
+                    response.RankList.Add(RankSeasonTowerInfo);
                 }
                 rankComponent.RankSeasonTowerLastTime = TimeHelper.ServerNow();
                 rankComponent.RankSeasonTowers = response.RankList;

@@ -64,9 +64,9 @@ namespace ET.Server
             else
             {
                 bagInfo.ItemNum -= request.BuyNum;
-                PaiMaiItemInfo paiMaiItemInfo2 = new PaiMaiItemInfo();
-                
-                BagInfo useBagInfo = new BagInfo();
+                PaiMaiItemInfo paiMaiItemInfo2 = PaiMaiItemInfo.Create();
+
+                BagInfo useBagInfo = BagInfo.Create();
                 useBagInfo.ItemID = bagInfo.ItemID;
                 useBagInfo.ItemNum = request.BuyNum;
                 useBagInfo.Loc = itemCof.ItemType == (int)ItemTypeEnum.PetHeXin ? (int)ItemLocType.ItemPetHeXinBag : (int)ItemLocType.ItemLocBag;

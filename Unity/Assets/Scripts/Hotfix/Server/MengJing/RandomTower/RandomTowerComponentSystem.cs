@@ -25,7 +25,8 @@ namespace ET.Server
                 NumericComponentS numericComponent = mainUnit.GetComponent<NumericComponentS>();
                 numericComponent.ApplyValue(NumericType.RandomTowerId, self.TowerId);
             }
-            M2C_FubenSettlement m2C_FubenSettlement = new M2C_FubenSettlement();
+
+            M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
             m2C_FubenSettlement.BattleResult = allMonsterDead ? 1 : 0;
             MapMessageHelper.SendToClient(mainUnit, m2C_FubenSettlement);
         }

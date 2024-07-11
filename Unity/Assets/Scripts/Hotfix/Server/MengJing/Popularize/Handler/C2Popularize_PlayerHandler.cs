@@ -65,7 +65,9 @@ namespace ET.Server
                     return;
                 }
 
-                dBPopularizeInfoList[0].MyPopularizeList.Add(new PopularizeInfo() { UnitId = request.ActorId });
+                PopularizeInfo PopularizeInfo = PopularizeInfo.Create();
+                PopularizeInfo.UnitId = request.ActorId;
+                dBPopularizeInfoList[0].MyPopularizeList.Add(PopularizeInfo);
                 await UnitCacheHelper.SaveComponent(scene.Root(), dBPopularizeInfoList[0].Id, dBPopularizeInfoList[0]);
 
                 dBPopularizeInfo.BePopularizeId = request.PopularizeId;

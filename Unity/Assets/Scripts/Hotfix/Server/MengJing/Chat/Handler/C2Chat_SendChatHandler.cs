@@ -84,12 +84,11 @@ namespace ET.Server
                         ActorId gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.Zone(), "Gate1").ActorId;
                         G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = null;
                         
-                        T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+                        T2G_GateUnitInfoRequest t2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
                         if (g_SendChatRequest1.Error == 0 && g_SendChatRequest1.TeamInfo != null)
                         {
                             for (int i = 0; i < g_SendChatRequest1.TeamInfo.PlayerList.Count; i++)
                             {
-                               
                                 t2G_GateUnitInfoRequest.UserID = g_SendChatRequest1.TeamInfo.PlayerList[i].UserID;
                                 g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse) await chatInfoUnit.Root().GetComponent<MessageSender>().Call
                                 (gateServerId, t2G_GateUnitInfoRequest);
@@ -118,7 +117,7 @@ namespace ET.Server
                         break;
 
                     case (int)ChannelEnum.Friend:
-                        T2G_GateUnitInfoRequest t2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+                        t2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
                         t2G_GateUnitInfoRequest.UserID = request.ChatInfo.ParamId;
                         gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.Zone(), "Gate1").ActorId;
                         g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await chatInfoUnit.Root().GetComponent<MessageSender>().Call
