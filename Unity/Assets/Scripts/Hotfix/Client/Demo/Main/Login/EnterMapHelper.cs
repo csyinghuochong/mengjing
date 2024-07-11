@@ -2,7 +2,7 @@ using System;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (PlayerComponent))]
+    [FriendOf(typeof(PlayerComponent))]
     public static partial class EnterMapHelper
     {
         public static async ETTask<int> RequestTransfer(Scene root, int newsceneType, int sceneId, int difficulty = FubenDifficulty.None,
@@ -54,7 +54,12 @@ namespace ET.Client
                 root.GetComponent<BattleMessageComponent>().LastDungeonId = 0;
             }
 
-            C2M_TransferMap request = new() { SceneType = newsceneType, SceneId = sceneId, Difficulty = difficulty, paramInfo = paraminfo };
+            C2M_TransferMap request = C2M_TransferMap.Create();
+            request.SceneType = newsceneType;
+            request.SceneId = sceneId;
+            request.Difficulty = difficulty;
+            request.paramInfo = paraminfo;
+
             M2C_TransferMap response = (M2C_TransferMap)await root.GetComponent<ClientSenderCompnent>().Call(request);
             userInfoComponent.AddSceneFubenTimes(sceneId);
             return ErrorCode.ERR_Success;
@@ -64,7 +69,7 @@ namespace ET.Client
         {
             try
             {
-                G2C_Match g2CEnterMap = await fiber.Root.GetComponent<ClientSenderCompnent>().Call(new C2G_Match()) as G2C_Match;
+                G2C_Match g2CEnterMap = await fiber.Root.GetComponent<ClientSenderCompnent>().Call(C2G_Match.Create()) as G2C_Match;
             }
             catch (Exception e)
             {
@@ -79,7 +84,9 @@ namespace ET.Client
 
         public static async ETTask SendReviveRequest(Scene root, bool revive)
         {
-            Actor_SendReviveRequest request = new() { Revive = revive };
+            Actor_SendReviveRequest request = Actor_SendReviveRequest.Create();
+            request.Revive = revive;
+
             Actor_SendReviveResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as Actor_SendReviveResponse;
         }
     }

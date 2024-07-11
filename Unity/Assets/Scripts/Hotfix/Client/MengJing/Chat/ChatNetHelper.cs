@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponentC))]
+    [FriendOf(typeof(UserInfoComponentC))]
     public static class ChatNetHelper
     {
         public static async ETTask<int> RequestSendChat(Scene root, int channelEnum, string content, long paramId = 0)
@@ -17,8 +17,8 @@
             // }
 
             UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
-            C2C_SendChatRequest request = new C2C_SendChatRequest() { };
-            request.ChatInfo = new ChatInfo();
+            C2C_SendChatRequest request = C2C_SendChatRequest.Create();
+            request.ChatInfo = ChatInfo.Create();
             request.ChatInfo.PlayerLevel = userInfo.Lv;
             request.ChatInfo.Occ = userInfo.Occ;
             // switch (channelEnum)

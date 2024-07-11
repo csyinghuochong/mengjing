@@ -3,12 +3,14 @@ using System.Collections.Generic;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (FriendComponent))]
+    [FriendOf(typeof(FriendComponent))]
     public static class FriendNetHelper
     {
         public static async ETTask<int> RequestFriendInfo(Scene root)
         {
-            C2F_FriendInfoRequest request = new C2F_FriendInfoRequest() { UnitId = root.GetComponent<PlayerComponent>().CurrentRoleId };
+            C2F_FriendInfoRequest request = C2F_FriendInfoRequest.Create();
+            request.UnitId = root.GetComponent<PlayerComponent>().CurrentRoleId;
+
             F2C_FriendInfoResponse response = (F2C_FriendInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             FriendComponent friendComponent = root.GetComponent<FriendComponent>();
@@ -22,7 +24,10 @@ namespace ET.Client
 
         public static async ETTask<int> RequestFriendDelete(Scene root, long friendId)
         {
-            C2F_FriendDeleteRequest request = new() { UnitId = UnitHelper.GetMyUnitFromClientScene(root).Id, FriendID = friendId };
+            C2F_FriendDeleteRequest request = C2F_FriendDeleteRequest.Create();
+            request.UnitId = UnitHelper.GetMyUnitFromClientScene(root).Id;
+            request.FriendID = friendId;
+
             F2C_FriendDeleteResponse response = (F2C_FriendDeleteResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             if (response.Error == ErrorCode.ERR_Success)
@@ -36,7 +41,10 @@ namespace ET.Client
 
         public static async ETTask<F2C_WatchPlayerResponse> RequestWatchPlayer(Scene root, long userId, int watchType)
         {
-            C2F_WatchPlayerRequest request = new() { UserId = userId, WatchType = watchType };
+            C2F_WatchPlayerRequest request = C2F_WatchPlayerRequest.Create();
+            request.UserId = userId;
+            request.WatchType = watchType;
+
             F2C_WatchPlayerResponse response = (F2C_WatchPlayerResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response;
@@ -44,7 +52,10 @@ namespace ET.Client
 
         public static async ETTask<int> RequestFriendChatRead(Scene root, long friendId)
         {
-            C2F_FriendChatRead request = new() { UnitId = UnitHelper.GetMyUnitFromClientScene(root).Id, FriendID = friendId };
+            C2F_FriendChatRead request = C2F_FriendChatRead.Create();
+            request.UnitId = UnitHelper.GetMyUnitFromClientScene(root).Id;
+            request.FriendID = friendId;
+
             F2C_FriendChatRead response = (F2C_FriendChatRead)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
@@ -53,7 +64,11 @@ namespace ET.Client
         public static async ETTask<int> RequestRemoveBlack(Scene root, long friendId)
         {
             UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
-            C2F_FriendBlacklistRequest request = new() { OperateType = 2, UnitId = userInfoComponent.UserInfo.UserId, FriendId = friendId };
+            C2F_FriendBlacklistRequest request = C2F_FriendBlacklistRequest.Create();
+            request.OperateType = 2;
+            request.UnitId = userInfoComponent.UserInfo.UserId;
+            request.FriendId = friendId;
+
             F2C_FriendBlacklistResponse response = (F2C_FriendBlacklistResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
@@ -61,18 +76,22 @@ namespace ET.Client
         public static async ETTask<int> RequestAddBlack(Scene root, long friendId)
         {
             UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
-            C2F_FriendBlacklistRequest request = new() { OperateType = 1, UnitId = userInfoComponent.UserInfo.UserId, FriendId = friendId };
-            F2C_FriendBlacklistResponse response =
-                    (F2C_FriendBlacklistResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            C2F_FriendBlacklistRequest request = C2F_FriendBlacklistRequest.Create();
+            request.OperateType = 1;
+            request.UnitId = userInfoComponent.UserInfo.UserId;
+            request.FriendId = friendId;
+
+            F2C_FriendBlacklistResponse response = (F2C_FriendBlacklistResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
 
         public static async ETTask<int> RequestFriendApplyReply(Scene root, FriendInfo friendInfo, int code)
         {
-            C2F_FriendApplyReplyRequest request = new()
-            {
-                UnitId = UnitHelper.GetMyUnitFromClientScene(root).Id, FriendID = friendInfo.UserId, ReplyCode = code
-            };
+            C2F_FriendApplyReplyRequest request = C2F_FriendApplyReplyRequest.Create();
+            request.UnitId = UnitHelper.GetMyUnitFromClientScene(root).Id;
+            request.FriendID = friendInfo.UserId;
+            request.ReplyCode = code;
+
             F2C_FriendApplyReplyResponse response = (F2C_FriendApplyReplyResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             if (response.Error == ErrorCode.ERR_Success)
@@ -101,25 +120,25 @@ namespace ET.Client
         public static async ETTask<int> RequestFriendApply(Scene root, long unitId)
         {
             UserInfoComponentC userInfoComponent = root.GetComponent<UserInfoComponentC>();
-            C2F_FriendApplyRequest c2F_FriendApplyReplyRequest = new()
-            {
-                UnitId = unitId,
-                FriendInfo = new FriendInfo()
-                {
-                    UserId = userInfoComponent.UserInfo.UserId,
-                    PlayerName = userInfoComponent.UserInfo.Name,
-                    PlayerLevel = userInfoComponent.UserInfo.Lv,
-                    Occ = userInfoComponent.UserInfo.Occ,
-                }
-            };
-            F2C_FriendApplyResponse response =
-                    (F2C_FriendApplyResponse)await root.GetComponent<ClientSenderCompnent>().Call(c2F_FriendApplyReplyRequest);
+            C2F_FriendApplyRequest request = C2F_FriendApplyRequest.Create();
+            request.UnitId = unitId;
+            FriendInfo friendInfo = FriendInfo.Create();
+            friendInfo.UserId = userInfoComponent.UserInfo.UserId;
+            friendInfo.PlayerName = userInfoComponent.UserInfo.Name;
+            friendInfo.PlayerLevel = userInfoComponent.UserInfo.Lv;
+            friendInfo.Occ = userInfoComponent.UserInfo.Occ;
+            request.FriendInfo = friendInfo;
+
+            F2C_FriendApplyResponse response = (F2C_FriendApplyResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
 
         public static async ETTask<F2C_WatchPetResponse> RequestWatchPet(Scene root, long unitID, long petId)
         {
-            C2F_WatchPetRequest request = new() { UnitID = unitID, PetId = petId };
+            C2F_WatchPetRequest request = C2F_WatchPetRequest.Create();
+            request.UnitID = unitID;
+            request.PetId = petId;
+
             F2C_WatchPetResponse response = (F2C_WatchPetResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
