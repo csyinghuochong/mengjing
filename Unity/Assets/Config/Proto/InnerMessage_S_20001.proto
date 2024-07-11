@@ -312,7 +312,7 @@ message UnitCache2Other_GetUnit //IResponse
 	int32 Error = 91;
 	string Message = 92;
 
-	repeated Entity EntityList = 1;
+	repeated bytes EntityList = 1;
 	repeated string ComponentNameList = 2;
 }
 
@@ -346,7 +346,7 @@ message UnitCache2Other_GetComponent // IResponse
     int32 RpcId = 90;
     int32 Error = 91;
     string Message = 92;
-    Entity Component = 1;
+	  bytes Component = 1;
 }
 
 //----------玩家缓存相关----------------

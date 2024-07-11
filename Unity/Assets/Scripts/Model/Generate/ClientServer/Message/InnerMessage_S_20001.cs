@@ -1331,7 +1331,7 @@ namespace ET
         public string Message { get; set; }
 
         [MemoryPackOrder(0)]
-        public List<Entity> EntityList { get; set; } = new();
+        public List<byte[]> EntityList { get; set; } = new();
 
         [MemoryPackOrder(1)]
         public List<string> ComponentNameList { get; set; } = new();
@@ -1474,7 +1474,7 @@ namespace ET
         public string Message { get; set; }
 
         [MemoryPackOrder(0)]
-        public Entity Component { get; set; }
+        public byte[] Component { get; set; }
 
         public override void Dispose()
         {
