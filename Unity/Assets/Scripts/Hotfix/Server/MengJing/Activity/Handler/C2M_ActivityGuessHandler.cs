@@ -24,12 +24,11 @@ namespace ET.Server
                 return;
             }
 
+            M2A_ActivityGuessRequest M2A_ActivityGuessRequest = M2A_ActivityGuessRequest.Create();
+            M2A_ActivityGuessRequest.UnitId = unit.Id;
+            M2A_ActivityGuessRequest.GuessId = request.GuessId;
             A2M_ActivityGuessResponse r_GameStatusResponse = (A2M_ActivityGuessResponse)await unit.Root().GetComponent<MessageSender>().Call
-                   (activitySceneid, new M2A_ActivityGuessRequest()
-                   {
-                       UnitId = unit.Id,
-                       GuessId = request.GuessId,   
-                   });
+                   (activitySceneid, M2A_ActivityGuessRequest);
             if (activityV1Info.GuessIds.Contains(request.GuessId))
             {
                 response.Error = ErrorCode.ERR_Already_Guess;

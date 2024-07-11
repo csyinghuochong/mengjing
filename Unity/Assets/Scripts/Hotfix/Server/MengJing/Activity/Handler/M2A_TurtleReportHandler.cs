@@ -27,7 +27,7 @@ namespace ET.Server
             scene.GetComponent<ActivitySceneComponent>().TurtleSupportList.TryGetValue(request.TurtleId, out playerids);
             if (playerids != null)
             {
-                MailInfo mailInfo = new MailInfo();
+                MailInfo mailInfo = MailInfo.Create();
                 mailInfo.Status = 0;
                 mailInfo.Context = "小龟竞猜奖励";
                 mailInfo.Title = "小龟竞猜奖励";

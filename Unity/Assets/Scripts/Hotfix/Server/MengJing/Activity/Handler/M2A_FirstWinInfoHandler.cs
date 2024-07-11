@@ -46,17 +46,20 @@ namespace ET.Server
                 }
                 int itemId = int.Parse(itemInfo[0]);
                 int itemNum = int.Parse(itemInfo[1]);
-                mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.FirstWin}_{serverTime}" });
+                BagInfo BagInfo = BagInfo.Create();
+                BagInfo.ItemID = itemId;
+                BagInfo.ItemNum = itemNum;
+                BagInfo.GetWay = $"{ItemGetWay.FirstWin}_{serverTime}";
+                mailInfo.ItemList.Add(BagInfo);
             }
 
             dBFirstWinInfo.FirstWinInfos.Add(message.FirstWinInfo);
             ActorId mailServerId = StartSceneConfigCategory.Instance.GetBySceneName(scene.Zone(), "EMail").ActorId;
+            M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
+            M2E_EMailSendRequest.Id = message.FirstWinInfo.UserId;
+            M2E_EMailSendRequest.MailInfo = mailInfo;
             E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await scene.Root().GetComponent<MessageSender>().Call
-                     (mailServerId, new M2E_EMailSendRequest()
-                     {
-                         Id = message.FirstWinInfo.UserId,
-                         MailInfo = mailInfo
-                     });
+                     (mailServerId, M2E_EMailSendRequest);
 
             await ETTask.CompletedTask;
         }

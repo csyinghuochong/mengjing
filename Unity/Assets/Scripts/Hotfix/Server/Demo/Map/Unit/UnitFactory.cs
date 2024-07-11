@@ -818,7 +818,7 @@ namespace ET.Server
                         break;
                     }
 
-                    M2C_CreateDropItems m2C_CreateDropItems = new M2C_CreateDropItems();
+                    M2C_CreateDropItems m2C_CreateDropItems = M2C_CreateDropItems.Create();
                     for (int k = 0; k < droplist.Count; k++)
                     {
                         //if (sceneType == SceneTypeEnum.TeamDungeon && (droplist[k].ItemID >= 10030011 && droplist[k].ItemID <= 10030019))
@@ -834,16 +834,14 @@ namespace ET.Server
                             continue;
                         }
 
-                        DropInfo dropInfo = new DropInfo()
-                        {
-                            DropType = 1,
-                            ItemID = droplist[k].ItemID,
-                            ItemNum = droplist[k].ItemNum,
-                            X = bekill.Position.x + RandomHelper.RandomNumberFloat(-1f, 1f),
-                            Y = bekill.Position.y,
-                            Z = bekill.Position.z + RandomHelper.RandomNumberFloat(-1f, 1f),
-                            UnitId = IdGenerater.Instance.GenerateId(),
-                        };
+                        DropInfo dropInfo = DropInfo.Create();
+                        dropInfo.DropType = 1;
+                        dropInfo.ItemID = droplist[k].ItemID;
+                        dropInfo.ItemNum = droplist[k].ItemNum;
+                        dropInfo.X = bekill.Position.x + RandomHelper.RandomNumberFloat(-1f, 1f);
+                        dropInfo.Y = bekill.Position.y;
+                        dropInfo.Z = bekill.Position.z + RandomHelper.RandomNumberFloat(-1f, 1f);
+                        dropInfo.UnitId = IdGenerater.Instance.GenerateId();
                         m2C_CreateDropItems.Drops.Add(dropInfo);
                         beAttack.GetComponent<UnitInfoComponent>().Drops.Add(dropInfo);
 
@@ -909,7 +907,7 @@ namespace ET.Server
 
             if (dropType == 1)
             {
-                M2C_CreateDropItems m2C_CreateDropItems = new M2C_CreateDropItems();
+                M2C_CreateDropItems m2C_CreateDropItems = M2C_CreateDropItems.Create();
                 List<RewardItem> droplist = new List<RewardItem>();
                 DropHelper.DropIDToDropItem(dropId, droplist);
 
@@ -927,17 +925,16 @@ namespace ET.Server
                         Log.Error($"掉落装备.字: {droplist[k].ItemID}  {par}   {sceneType}");
                     }
 
-                    DropInfo dropInfo = new DropInfo()
-                    {
-                        DropType = 1,
-                        ItemID = droplist[k].ItemID,
-                        ItemNum = droplist[k].ItemNum,
-                        X = beKill.Position.x + RandomHelper.RandomNumberFloat(-1f, 1f),
-                        Y = beKill.Position.y,
-                        Z = beKill.Position.z + RandomHelper.RandomNumberFloat(-1f, 1f),
-                        UnitId = IdGenerater.Instance.GenerateId(),
-                        BeKillId = beKill.Id,
-                    };
+
+                    DropInfo dropInfo = DropInfo.Create();
+                    dropInfo.DropType = 1;
+                    dropInfo.ItemID = droplist[k].ItemID;
+                    dropInfo.ItemNum = droplist[k].ItemNum;
+                    dropInfo.X = beKill.Position.x + RandomHelper.RandomNumberFloat(-1f, 1f);
+                    dropInfo.Y = beKill.Position.y;
+                    dropInfo.Z = beKill.Position.z + RandomHelper.RandomNumberFloat(-1f, 1f);
+                    dropInfo.UnitId = IdGenerater.Instance.GenerateId();
+                    dropInfo.BeKillId = beKill.Id;
                     m2C_CreateDropItems.Drops.Add(dropInfo);
                     main.GetComponent<UnitInfoComponent>().Drops.Add(dropInfo);
                 }

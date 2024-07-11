@@ -366,8 +366,11 @@ namespace ET.Server
                         break;
                     case SceneTypeEnum.RunRace:
                     case SceneTypeEnum.Demon:
+                        M2F_FubenSceneIdRequest = M2F_FubenSceneIdRequest.Create();
+                        M2F_FubenSceneIdRequest.SceneId = request.SceneId;
+                        M2F_FubenSceneIdRequest.UnitId = unit.Id  ;
                         f2M_YeWaiSceneIdResponse = (F2M_FubenSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                        UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_FubenSceneIdRequest() { SceneId = request.SceneId,UnitId = unit.Id  });
+                        UnitCacheHelper.GetFubenCenterId(unit.Zone()), M2F_FubenSceneIdRequest);
                         if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
                         {
                             return ErrorCode.ERR_AlreadyFinish;
@@ -378,10 +381,9 @@ namespace ET.Server
                         break;
                     case SceneTypeEnum.Solo:
                         ActorId soloServerId = UnitCacheHelper.GetSoloServerId(unit.Zone());
-                        S2M_SoloEnterResponse d2GGetUnit = (S2M_SoloEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(soloServerId, new M2S_SoloEnterRequest()
-                        {
-                            FubenId = long.Parse(request.paramInfo)
-                        });
+                        M2S_SoloEnterRequest M2S_SoloEnterRequest = M2S_SoloEnterRequest.Create();
+                        M2S_SoloEnterRequest.FubenId = long.Parse(request.paramInfo);
+                        S2M_SoloEnterResponse d2GGetUnit = (S2M_SoloEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(soloServerId, M2S_SoloEnterRequest);
                         
                         if (d2GGetUnit.Error != ErrorCode.ERR_Success)
                         {
@@ -417,8 +419,13 @@ namespace ET.Server
                             return ErrorCode.ERR_AlreadyFinish;
                         }
                         mapInstanceId = UnitCacheHelper.GetUnionServerId(unit.Zone());
+                        M2U_UnionEnterRequest = M2U_UnionEnterRequest.Create();
+                        M2U_UnionEnterRequest.OperateType = 1;
+                        M2U_UnionEnterRequest.UnionId = unionid;
+                        M2U_UnionEnterRequest.UnitId = unit.Id;
+                        M2U_UnionEnterRequest.SceneId = request.SceneId;
                         responseUnionEnter = (U2M_UnionEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                        mapInstanceId, new M2U_UnionEnterRequest() { OperateType = 1, UnionId = unionid, UnitId = unit.Id, SceneId = request.SceneId });
+                        mapInstanceId, M2U_UnionEnterRequest);
                         if (responseUnionEnter.FubenInstanceId == 0)
                         {
                             return ErrorCode.ERR_AlreadyFinish;
@@ -427,8 +434,11 @@ namespace ET.Server
                         await TransferHelper.Transfer(unit, responseUnionEnter.FubenActorId, SceneTypeEnum.UnionRace, request.SceneId, 0, "0");
                         break;
                     case SceneTypeEnum.Happy:
+                        M2F_FubenSceneIdRequest = M2F_FubenSceneIdRequest.Create();
+                        M2F_FubenSceneIdRequest.SceneId = request.SceneId;
+                        M2F_FubenSceneIdRequest.UnitId = unit.Id;
                         f2M_YeWaiSceneIdResponse = (F2M_FubenSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                            UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_FubenSceneIdRequest() { SceneId = request.SceneId,UnitId = unit.Id  });
+                            UnitCacheHelper.GetFubenCenterId(unit.Zone()), M2F_FubenSceneIdRequest);
                         if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
                         {
                             return ErrorCode.ERR_AlreadyFinish;
@@ -437,8 +447,11 @@ namespace ET.Server
                         await TransferHelper.Transfer(unit, f2M_YeWaiSceneIdResponse.FubenActorId, (int)SceneTypeEnum.Happy, request.SceneId, FubenDifficulty.Normal, f2M_YeWaiSceneIdResponse.Position.ToString());
                         break;
                     case SceneTypeEnum.Battle:
+                        M2F_FubenSceneIdRequest = M2F_FubenSceneIdRequest.Create();
+                        M2F_FubenSceneIdRequest.SceneId = request.SceneId;
+                        M2F_FubenSceneIdRequest.UnitId = unit.Id ;
                         f2M_YeWaiSceneIdResponse = (F2M_FubenSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                            UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_FubenSceneIdRequest() { SceneId = request.SceneId,UnitId = unit.Id  });
+                            UnitCacheHelper.GetFubenCenterId(unit.Zone()), M2F_FubenSceneIdRequest);
                         if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
                         {
                             return ErrorCode.ERR_AlreadyFinish;
@@ -454,9 +467,13 @@ namespace ET.Server
                         {
                             return ErrorCode.ERR_LevelIsNot;
                         }
+
+                        M2F_FubenSceneIdRequest = M2F_FubenSceneIdRequest.Create();
+                        M2F_FubenSceneIdRequest.SceneId = request.SceneId;
+                        M2F_FubenSceneIdRequest.UnitId = unit.Id;
                         
                         f2M_YeWaiSceneIdResponse = (F2M_FubenSceneIdResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                            UnitCacheHelper.GetFubenCenterId(unit.Zone()), new M2F_FubenSceneIdRequest() { SceneId = request.SceneId,UnitId = unit.Id  });
+                            UnitCacheHelper.GetFubenCenterId(unit.Zone()), M2F_FubenSceneIdRequest);
                         if (f2M_YeWaiSceneIdResponse.FubenInstanceId == 0)
                         {
                             return ErrorCode.ERR_AlreadyFinish;

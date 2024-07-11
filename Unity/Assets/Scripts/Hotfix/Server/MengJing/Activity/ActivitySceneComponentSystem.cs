@@ -87,9 +87,11 @@ namespace ET.Server
             Log.Warning($"NoticeActivityUpdate_Hour: zone: {self.Zone()} openday: {openServerDay}  {hour}");
             for (int i = 0; i < self.MapIdList.Count; i++)
             {
+                A2A_ActivityUpdateRequest A2A_ActivityUpdateRequest = A2A_ActivityUpdateRequest.Create();
+                A2A_ActivityUpdateRequest.Hour = hour;
+                A2A_ActivityUpdateRequest.OpenDay = openServerDay;
                 A2A_ActivityUpdateResponse m2m_TrasferUnitResponse =
-                        (A2A_ActivityUpdateResponse) await self.Root().GetComponent<MessageSender>().Call(self.MapIdList[i],
-                            new A2A_ActivityUpdateRequest() { Hour = hour, OpenDay = openServerDay });
+                        (A2A_ActivityUpdateResponse) await self.Root().GetComponent<MessageSender>().Call(self.MapIdList[i],A2A_ActivityUpdateRequest);
             }
 
             if (hour == 0)
@@ -132,7 +134,10 @@ namespace ET.Server
                 for (int i = 0; i < rewardItem.Length; i++)
                 {
                     string[] itemInfo = rewardItem[i].Split(';');
-                    itemList.Add(new BagInfo() { ItemID = int.Parse(itemInfo[0]), ItemNum = int.Parse(itemInfo[1]) });
+                    BagInfo BagInfo = BagInfo.Create();
+                    BagInfo.ItemID = int.Parse(itemInfo[0]);
+                    BagInfo.ItemNum = int.Parse(itemInfo[1]);
+                    itemList.Add(BagInfo);
                 }
 
                 ActorId mailServerId = UnitCacheHelper.GetMailServerId(self.Zone());
@@ -140,7 +145,7 @@ namespace ET.Server
                 {
                     Log.Warning($"发放竞猜奖励: {self.Zone()}  {guessIndex} {playerIds[i]}");
 
-                    MailInfo mailInfo = new MailInfo();
+                    MailInfo mailInfo = MailInfo.Create();
                     mailInfo.Status = 0;
                     mailInfo.Title = "竞猜奖励";
                     mailInfo.MailId = IdGenerater.Instance.GenerateId();
@@ -337,12 +342,12 @@ namespace ET.Server
                     }
                     else
                     {
+                        A2A_ActivityUpdateRequest A2A_ActivityUpdateRequest = A2A_ActivityUpdateRequest.Create();
+                        A2A_ActivityUpdateRequest.Hour = -1;
+                        A2A_ActivityUpdateRequest.FunctionId = functionId;
+                        A2A_ActivityUpdateRequest.FunctionType = self.ActivityTimerList[0].FunctionType;
                         A2A_ActivityUpdateResponse m2m_TrasferUnitResponse = (A2A_ActivityUpdateResponse)await self.Root()
-                                .GetComponent<MessageSender>().Call(sceneserverid,
-                                    new A2A_ActivityUpdateRequest()
-                                    {
-                                        Hour = -1, FunctionId = functionId, FunctionType = self.ActivityTimerList[0].FunctionType
-                                    });
+                                .GetComponent<MessageSender>().Call(sceneserverid, A2A_ActivityUpdateRequest);
                     }
                 }
 
@@ -350,9 +355,14 @@ namespace ET.Server
                 {
                     //1044
                     ActorId rankserverid = UnitCacheHelper.GetRankServerId(self.Zone());
+
+                    A2A_ActivityUpdateRequest A2A_ActivityUpdateRequest = A2A_ActivityUpdateRequest.Create();
+                    A2A_ActivityUpdateRequest.Hour = -1;
+                    A2A_ActivityUpdateRequest.FunctionId = functionId;
+                    A2A_ActivityUpdateRequest.FunctionType = 2;
                     ////家族战结束. 发送奖励
                     A2A_ActivityUpdateResponse m2m_TrasferUnitResponse = (A2A_ActivityUpdateResponse)await self.Root().GetComponent<MessageSender>()
-                            .Call(rankserverid, new A2A_ActivityUpdateRequest() { Hour = -1, FunctionId = functionId, FunctionType = 2 });
+                            .Call(rankserverid, A2A_ActivityUpdateRequest);
                 }
 
                 self.ActivityTimerList.RemoveAt(0);

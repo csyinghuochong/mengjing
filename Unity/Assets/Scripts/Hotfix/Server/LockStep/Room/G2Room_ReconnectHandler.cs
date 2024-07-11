@@ -13,7 +13,12 @@ namespace ET.Server
             foreach (long playerId in room.PlayerIds)
             {
                 LSUnit lsUnit = lsUnitComponent.GetChild<LSUnit>(playerId);
-                response.UnitInfos.Add(new LockStepUnitInfo() {PlayerId = playerId, Position = lsUnit.Position, Rotation = lsUnit.Rotation});    
+                LockStepUnitInfo LockStepUnitInfo = LockStepUnitInfo.Create();
+                LockStepUnitInfo.PlayerId = playerId;
+                LockStepUnitInfo.Position = lsUnit.Position;
+                LockStepUnitInfo.Rotation = lsUnit.Rotation;
+                
+                response.UnitInfos.Add(nLockStepUnitInfo);    
             }
 
             response.Frame = room.AuthorityFrame;

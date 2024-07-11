@@ -26,7 +26,7 @@ namespace ET.Server
                   else
                   {
                       activitySceneComponent.PetMingList.Clear();
-                     
+
                       for (int i = 0; i < minglist.Count; i++)
                       {
                           long enemyId = minglist[i].UnitId;
@@ -35,7 +35,7 @@ namespace ET.Server
                           {
                               continue;
                           }
-                        
+
                           PetComponentS petComponent = await UnitCacheHelper.GetComponentCache<PetComponentS>(scene.Root(), enemyId);
                           if (petComponent == null)
                           {
@@ -45,7 +45,7 @@ namespace ET.Server
                           int teamid = minglist[i].TeamId;
                           List<int> petconfidds = new List<int>();
                           List<long> petidlist = new List<long>();
-                          for (int p = teamid * 5; p < (teamid + 1) * 5; p++ )
+                          for (int p = teamid * 5; p < (teamid + 1) * 5; p++)
                           {
                               RolePetInfo rolePetInfo = petComponent.GetPetInfo(petComponent.PetMingList[p]);
                               if (rolePetInfo != null)
@@ -56,20 +56,19 @@ namespace ET.Server
                               else
                               {
                                   petidlist.Add(0);
-                                  petconfidds.Add(0); 
+                                  petconfidds.Add(0);
                               }
                           }
 
-                          activitySceneComponent.PetMingList.Add(new PetMingPlayerInfo()
-                          {
-                              MineType = minglist[i].MineType,
-                              Postion = minglist[i].Postion,
-                              TeamId = teamid,
-                              PlayerName = userInfoComponentS.UserInfo.Name,
-                              PetConfig = petconfidds,
-                              PetIdList = petidlist,
-                              UnitId = minglist[i].UnitId,
-                          }); ;
+                          PetMingPlayerInfo PetMingPlayerInfo = PetMingPlayerInfo.Create();
+                          PetMingPlayerInfo.MineType = minglist[i].MineType;
+                          PetMingPlayerInfo.Postion = minglist[i].Postion;
+                          PetMingPlayerInfo.TeamId = teamid;
+                          PetMingPlayerInfo.PlayerName = userInfoComponentS.UserInfo.Name;
+                          PetMingPlayerInfo.PetConfig = petconfidds;
+                          PetMingPlayerInfo.PetIdList = petidlist;
+                          PetMingPlayerInfo.UnitId = minglist[i].UnitId;
+                          activitySceneComponent.PetMingList.Add(PetMingPlayerInfo);
                       }
 
                       activitySceneComponent.PetMingLastTime = TimeHelper.ServerNow();

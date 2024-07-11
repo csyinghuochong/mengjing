@@ -54,13 +54,12 @@ namespace ET.Server
 
                       
                         ActorId paimaiServerId =   UnitCacheHelper.GetPaiMaiServerId(unit.Zone());
+                        M2A_ZhanQuReceiveRequest M2A_ZhanQuReceiveRequest = M2A_ZhanQuReceiveRequest.Create();
+                        M2A_ZhanQuReceiveRequest.ActivityId = request.ActivityId;
+                        M2A_ZhanQuReceiveRequest.ActivityType = request.ActivityType;
+                        M2A_ZhanQuReceiveRequest.UnitId = unit.Id;
                         A2M_ZhanQuReceiveResponse r_GameStatusResponse = (A2M_ZhanQuReceiveResponse)await unit.Root().GetComponent<MessageSender>().Call
-                            (paimaiServerId, new M2A_ZhanQuReceiveRequest()
-                            {
-                                ActivityId = request.ActivityId,
-                                ActivityType = request.ActivityType,
-                                UnitId = unit.Id,   
-                            });
+                            (paimaiServerId, M2A_ZhanQuReceiveRequest);
                         if (r_GameStatusResponse.Error != ErrorCode.ERR_Success)
                         {
                             response.Error = ErrorCode.ERR_AlreadyReceived;

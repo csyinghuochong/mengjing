@@ -11,11 +11,11 @@ namespace ET.Server
         {
 
             ActorId paimaiServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.Zone(), "Activity").ActorId;
+
+            M2A_ZhanQuInfoRequest M2A_ZhanQuInfoRequest = M2A_ZhanQuInfoRequest.Create();
+            M2A_ZhanQuInfoRequest.UserId = unit.GetComponent<UserInfoComponentS>().UserInfo.UserId
             A2M_ZhanQuInfoResponse r_GameStatusResponse = (A2M_ZhanQuInfoResponse)await unit.Root().GetComponent<MessageSender>().Call
-                (paimaiServerId, new M2A_ZhanQuInfoRequest()
-                {
-                    UserId = unit.GetComponent<UserInfoComponentS>().UserInfo.UserId
-                });
+                (paimaiServerId, M2A_ZhanQuInfoRequest);
 
             ActivityComponentS activityComponent = unit.GetComponent<ActivityComponentS>();
             response.ReceiveNum = r_GameStatusResponse.ReceiveNum;

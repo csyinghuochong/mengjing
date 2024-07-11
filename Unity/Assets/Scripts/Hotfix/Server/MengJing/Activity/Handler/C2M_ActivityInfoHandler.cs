@@ -33,11 +33,11 @@ namespace ET.Server
             activityV1Info.GuessIds.Clear();
 
             ActorId activitySceneid = UnitCacheHelper.GetActivityServerId(  unit.Zone() );
+
+            M2A_ActivitySelfInfo M2A_ActivitySelfInfo = M2A_ActivitySelfInfo.Create();
+            M2A_ActivitySelfInfo.UnitId = unit.Id;
             A2M_ActivitySelfInfo r_GameStatusResponse = (A2M_ActivitySelfInfo)await unit.Root().GetComponent<MessageSender>().Call
-                   (activitySceneid, new M2A_ActivitySelfInfo()
-                   {
-                        UnitId = unit.Id,   
-                   });
+                   (activitySceneid, M2A_ActivitySelfInfo);
             activityV1Info.GuessIds = r_GameStatusResponse.GuessIds;
             activityV1Info.LastGuessReward = r_GameStatusResponse.LastGuessReward;
             activityV1Info.BaoShiDu = r_GameStatusResponse.BaoShiDu;

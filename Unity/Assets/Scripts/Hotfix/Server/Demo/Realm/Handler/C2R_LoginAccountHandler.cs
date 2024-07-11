@@ -290,7 +290,7 @@ namespace ET.Server
 
         private CreateRoleInfo GetRoleListInfo(UserInfo userInfo, long userID)
         {
-            CreateRoleInfo roleList = new CreateRoleInfo();
+            CreateRoleInfo roleList = CreateRoleInfo.Create();
 
             roleList.OccTwo = userInfo.OccTwo;
             roleList.UnitId = userID;

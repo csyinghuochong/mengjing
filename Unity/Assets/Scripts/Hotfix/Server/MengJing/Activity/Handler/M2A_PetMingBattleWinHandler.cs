@@ -38,19 +38,18 @@ namespace ET.Server
             }
             if (request.UnitID != 0)
             {
-                petMingPlayerInfos.Add(new PetMingPlayerInfo()
-                {
-                    MineType = request.MingType,
-                    Postion = request.Postion,
-                    UnitId = request.UnitID,
-                    TeamId = request.TeamId,
-                    OccupyTime = serverTime
-                });
+                PetMingPlayerInfo PetMingPlayerInfo = PetMingPlayerInfo.Create();
+                PetMingPlayerInfo.MineType = request.MingType;
+                PetMingPlayerInfo.Postion = request.Postion;
+                PetMingPlayerInfo.UnitId = request.UnitID;
+                PetMingPlayerInfo.TeamId = request.TeamId;
+                PetMingPlayerInfo.OccupyTime = serverTime;
+                petMingPlayerInfos.Add(PetMingPlayerInfo);
             }
 
             if (oldUnitid != 0)
             {
-                PetMingRecord petMingRecord = new PetMingRecord();
+                PetMingRecord petMingRecord = PetMingRecord.Create();
                 petMingRecord.UnitID = request.UnitID;
                 petMingRecord.Position = request.Postion;
                 petMingRecord.MineType = request.MingType;
@@ -72,11 +71,9 @@ namespace ET.Server
                 //{
                     
                 //}
-                A2M_PetMingRecordRequest a2M_PetMing = new A2M_PetMingRecordRequest()
-                {
-                    UnitID = oldUnitid,
-                    PetMingRecord = petMingRecord
-                };
+                A2M_PetMingRecordRequest a2M_PetMing = A2M_PetMingRecordRequest.Create();
+                a2M_PetMing.UnitID = oldUnitid;
+                a2M_PetMing.PetMingRecord = petMingRecord;
                 
                 // root.GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(unitId, actorLocationMessage);
                 M2A_PetMingRecordResponse m2G_RechargeResponse =  (M2A_PetMingRecordResponse) await scene.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Call(oldUnitid, a2M_PetMing);

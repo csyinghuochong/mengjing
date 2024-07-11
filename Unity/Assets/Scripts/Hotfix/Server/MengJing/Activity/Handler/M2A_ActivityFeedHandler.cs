@@ -31,24 +31,26 @@ namespace ET.Server
                 for (int i = 0; i < rewardItem.Length; i++)
                 {
                     string[] itemInfo = rewardItem[i].Split(';');
-                    itemList.Add(new BagInfo() { ItemID = int.Parse(itemInfo[0]), ItemNum = int.Parse(itemInfo[1]) });
+                    BagInfo BagInfo = BagInfo.Create();
+                    BagInfo.ItemID = int.Parse(itemInfo[0]);
+                    BagInfo.ItemNum = int.Parse(itemInfo[1]);
+                    itemList.Add( BagInfo );
                 }
 
                 foreach (( long unitid, int feednumber ) in activitySceneComponent.DBDayActivityInfo.FeedPlayerList)
                 {
-                    MailInfo mailInfo = new MailInfo();
+                    MailInfo mailInfo = MailInfo.Create();
                     mailInfo.Status = 0;
                     mailInfo.Title = "喂食奖励";
                     mailInfo.MailId = IdGenerater.Instance.GenerateId();
                     mailInfo.ItemList.AddRange(itemList);
 
+                    M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
+                    M2E_EMailSendRequest.Id = unitid;
+                    M2E_EMailSendRequest.MailInfo = mailInfo;
+                    M2E_EMailSendRequest.GetWay = ItemGetWay.Activity;
                     E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await scene.Root().GetComponent<MessageSender>().Call
-                                       (mailServerId, new M2E_EMailSendRequest()
-                                       {
-                                           Id = unitid,
-                                           MailInfo = mailInfo,
-                                           GetWay = ItemGetWay.Activity,
-                                       });
+                                       (mailServerId, M2E_EMailSendRequest);
                 }
             }
             
