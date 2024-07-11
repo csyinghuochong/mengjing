@@ -41,7 +41,7 @@ namespace ET.Server
         public static void OnEmptyReward(this TowerComponent self)
         {
             Unit mainunit = UnitHelper.GetUnitList(self.Scene(), UnitType.Player)[0];
-            M2C_FubenSettlement message = new M2C_FubenSettlement();
+            M2C_FubenSettlement message = M2C_FubenSettlement.Create();
             message.BattleResult = 2;
             message.RewardExp = 0;
             message.RewardGold = 0;
@@ -62,7 +62,7 @@ namespace ET.Server
             int endId = self.TowerId; //当前波
 
             Unit mainunit = UnitHelper.GetUnitList(self.Scene(), UnitType.Player)[0];
-            M2C_FubenSettlement message = new M2C_FubenSettlement();
+            M2C_FubenSettlement message = M2C_FubenSettlement.Create();
             message.BattleResult = 1;
             message.RewardExp = 0;
             message.RewardGold = 0;

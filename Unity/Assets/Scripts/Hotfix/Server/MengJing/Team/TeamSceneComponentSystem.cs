@@ -99,7 +99,10 @@ namespace ET.Server
                 return teamInfo;
             }
 
-            teamInfo = new TeamInfo() { TeamId = teamPlayerInfo.UserID, SceneId = fubenId };
+            teamInfo = TeamInfo.Create();
+            teamInfo.TeamId = teamPlayerInfo.UserID;
+            teamInfo.SceneId = fubenId;
+            
             teamInfo.PlayerList.Add(teamPlayerInfo);
             self.TeamList.Add(teamInfo);
             return teamInfo;
@@ -112,12 +115,13 @@ namespace ET.Server
             T2M_TeamUpdateRequest t2M_TeamUpdateRequest = self.t2M_TeamUpdateRequest;
 
             ActorId gateServerId = UnitCacheHelper.GetGateServerId(self.Zone());
+            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
             for (int i = 0; i < userIds.Count; i++)
             {
                 long userId = userIds[i].UserID;
+                T2G_GateUnitInfoRequest.UserID = userId;
                 G2T_GateUnitInfoResponse g2M_UpdateUnitResponse =
-                        (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>().Call(gateServerId,
-                            new T2G_GateUnitInfoRequest() { UserID = userId });
+                        (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>().Call(gateServerId,T2G_GateUnitInfoRequest);
 
                 if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
                 {

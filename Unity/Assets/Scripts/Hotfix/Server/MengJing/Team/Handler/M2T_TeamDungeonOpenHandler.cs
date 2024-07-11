@@ -21,15 +21,16 @@ namespace ET.Server
             }
 
             teamInfo.FubenType = request.FubenType;
-            M2C_TeamDungeonOpenResult m2C_HorseNoticeInfo = new M2C_TeamDungeonOpenResult() { TeamInfo = teamInfo  };
+            M2C_TeamDungeonOpenResult m2C_HorseNoticeInfo = M2C_TeamDungeonOpenResult.Create();
+            m2C_HorseNoticeInfo.TeamInfo = teamInfo;
+            
             ActorId gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(scene.Zone(), "Gate1").ActorId;
+            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
             for (int i = 0; i < teamInfo.PlayerList.Count; i++)
             {
+                T2G_GateUnitInfoRequest.UserID = teamInfo.PlayerList[i].UserID;/
                 G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
-                    (gateServerId, new T2G_GateUnitInfoRequest()
-                    {
-                        UserID = teamInfo.PlayerList[i].UserID
-                    });
+                    (gateServerId, T2G_GateUnitInfoRequest);
 
                 if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
                 {

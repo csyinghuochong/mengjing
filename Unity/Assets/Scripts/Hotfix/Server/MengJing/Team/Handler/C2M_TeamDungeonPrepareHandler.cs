@@ -44,13 +44,12 @@ namespace ET.Server
 
 			//判断副本次数
 			ActorId teamServerId = UnitCacheHelper.GetTeamServerId(unit.Zone());
-			T2M_TeamDungeonPrepareResponse createResponse = (T2M_TeamDungeonPrepareResponse)await unit.Root().GetComponent<MessageSender>().Call(teamServerId, new M2T_TeamDungeonPrepareRequest()
-			{
-				TeamId = request.TeamInfo.TeamId,
-				UnitID = unit.Id,
-				Prepare = request.Prepare,
-				ErrorCode = errorcode
-			});
+			M2T_TeamDungeonPrepareRequest M2T_TeamDungeonPrepareRequest = M2T_TeamDungeonPrepareRequest.Create();
+			M2T_TeamDungeonPrepareRequest.TeamId = request.TeamInfo.TeamId;
+			M2T_TeamDungeonPrepareRequest.UnitID = unit.Id;
+			M2T_TeamDungeonPrepareRequest.Prepare = request.Prepare;
+			M2T_TeamDungeonPrepareRequest.ErrorCode = errorcode;
+			T2M_TeamDungeonPrepareResponse createResponse = (T2M_TeamDungeonPrepareResponse)await unit.Root().GetComponent<MessageSender>().Call(teamServerId, M2T_TeamDungeonPrepareRequest);
 
 			await ETTask.CompletedTask;
         }

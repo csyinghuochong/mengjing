@@ -21,12 +21,10 @@ namespace ET.Server
                 }
 
                 ActorId activtiyserverid = UnitCacheHelper.GetActivityServerId(unit.Zone());
-                M2A_TurtleSupportRequest m2A_TurtleSupport = new M2A_TurtleSupportRequest()
-                {
-                    UnitId = unit.Id,   
-                    AccountId = userInfoComponent.UserInfo.AccInfoID,
-                    SupportId = request.SupportId,
-                };
+                M2A_TurtleSupportRequest m2A_TurtleSupport = M2A_TurtleSupportRequest.Create();
+                m2A_TurtleSupport.UnitId = unit.Id;
+                m2A_TurtleSupport.AccountId = userInfoComponent.UserInfo.AccInfoID;
+                m2A_TurtleSupport.SupportId = request.SupportId;
                 A2M_TurtleSupportResponse a2M_TurtleSupport = (A2M_TurtleSupportResponse)await unit.Root().GetComponent<MessageSender>().Call
                         (activtiyserverid, m2A_TurtleSupport);
 

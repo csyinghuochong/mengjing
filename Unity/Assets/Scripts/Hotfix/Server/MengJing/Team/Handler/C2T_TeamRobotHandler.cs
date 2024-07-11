@@ -17,12 +17,11 @@ namespace ET.Server
             }
 
             ActorId robotSceneId = UnitCacheHelper.GetRobotServerId();
-            scene.Root().GetComponent<MessageSender>().Send(robotSceneId, new G2Robot_MessageRequest()
-            {
-                Zone = scene.Zone(),
-                MessageType = NoticeType.TeamDungeon,
-                Message = $"{teamInfo.SceneId}_{teamInfo.TeamId}"
-            });
+            G2Robot_MessageRequest G2Robot_MessageRequest = G2Robot_MessageRequest.Create();
+            G2Robot_MessageRequest.Zone = scene.Zone();
+            G2Robot_MessageRequest.MessageType = NoticeType.TeamDungeon;
+            G2Robot_MessageRequest.Message = $"{teamInfo.SceneId}_{teamInfo.TeamId}";
+            scene.Root().GetComponent<MessageSender>().Send(robotSceneId, G2Robot_MessageRequest);
             
             await ETTask.CompletedTask;
 

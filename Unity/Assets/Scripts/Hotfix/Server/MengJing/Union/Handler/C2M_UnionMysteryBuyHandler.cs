@@ -44,13 +44,12 @@ namespace ET.Server
                 }
                 request.BuyNumber = 1;
                 ActorId unionServerId = UnitCacheHelper.GetUnionServerId(unit.Zone());
+                M2U_UnionMysteryBuyRequest M2U_UnionMysteryBuyRequest = M2U_UnionMysteryBuyRequest.Create();
+                M2U_UnionMysteryBuyRequest.MysteryId = mysteryId;
+                M2U_UnionMysteryBuyRequest.BuyNumber = request.BuyNumber;
+                M2U_UnionMysteryBuyRequest.UnionId = unionid;
                 U2M_UnionMysteryBuyResponse r_GameStatusResponse = (U2M_UnionMysteryBuyResponse)await unit.Root().GetComponent<MessageSender>().Call
-                    (unionServerId, new M2U_UnionMysteryBuyRequest()
-                    {
-                        MysteryId = mysteryId,  
-                        BuyNumber = request.BuyNumber,
-                        UnionId = unionid
-                    });
+                    (unionServerId, M2U_UnionMysteryBuyRequest);
 
                 if (r_GameStatusResponse.Error != ErrorCode.ERR_Success)
                 {

@@ -28,7 +28,7 @@ namespace ET.Server
 
             self.UploadHurtValue().Coroutine();
 
-            M2C_FubenSettlement m2C_FubenSettlement = new M2C_FubenSettlement();
+            M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
             m2C_FubenSettlement.BattleResult = CombatResultEnum.Win;
 
             long lastDungeonId = players[0].GetComponent<NumericComponentS>().GetAsLong(NumericType.TrialDungeonId);
@@ -67,11 +67,9 @@ namespace ET.Server
             players[0].GetComponent<DataCollationComponent>().OnSceondHurt(hurtValue);
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();
             ActorId mapInstanceId = UnitCacheHelper.GetRankServerId(self.Zone());
-            R2M_RankTrialResponse Response = (R2M_RankTrialResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,
-                new M2R_RankTrialRequest()
-                {
-                    RankingInfo = new KeyValuePairLong() { KeyId = unitId, Value = hurtValue, Value2 = mapComponent.SonSceneId }
-                });
+            M2R_RankTrialRequest M2R_RankTrialRequest = M2R_RankTrialRequest.Create();
+            M2R_RankTrialRequest. RankingInfo = new KeyValuePairLong() { KeyId = unitId, Value = hurtValue, Value2 = mapComponent.SonSceneId};
+            R2M_RankTrialResponse Response = (R2M_RankTrialResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,M2R_RankTrialRequest);
             if (Response.Error == ErrorCode.ERR_Success && Response.RankId != 0)
             {
                 players[0].GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.TrialRank_81, Response.RankId, 1);

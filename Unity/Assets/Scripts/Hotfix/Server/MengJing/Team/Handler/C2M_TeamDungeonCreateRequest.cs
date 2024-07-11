@@ -13,12 +13,11 @@ namespace ET.Server
             }
 
             ActorId teamServerId = UnitCacheHelper.GetTeamServerId(unit.Zone());
-            T2M_TeamDungeonCreateResponse createResponse = (T2M_TeamDungeonCreateResponse)await unit.Root().GetComponent<MessageSender>().Call(teamServerId, new M2T_TeamDungeonCreateRequest()
-            {
-                FubenId = request.FubenId,
-                TeamPlayerInfo = request.TeamPlayerInfo,
-                FubenType = request.FubenType,
-            });
+            M2T_TeamDungeonCreateRequest M2T_TeamDungeonCreateRequest = M2T_TeamDungeonCreateRequest.Create();
+            M2T_TeamDungeonCreateRequest.FubenId = request.FubenId;
+            M2T_TeamDungeonCreateRequest.TeamPlayerInfo = request.TeamPlayerInfo;
+            M2T_TeamDungeonCreateRequest.FubenType = request.FubenType;
+            T2M_TeamDungeonCreateResponse createResponse = (T2M_TeamDungeonCreateResponse)await unit.Root().GetComponent<MessageSender>().Call(teamServerId,M2T_TeamDungeonCreateRequest);
 
             if (createResponse.Error != ErrorCode.ERR_Success)
             {

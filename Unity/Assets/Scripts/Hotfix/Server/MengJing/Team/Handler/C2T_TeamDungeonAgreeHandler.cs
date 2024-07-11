@@ -15,11 +15,10 @@ namespace ET.Server
             }
 
             ActorId gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(scene.Zone(), "Gate1").ActorId;
+            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+            T2G_GateUnitInfoRequest.UserID = request.TeamPlayerInfo.UserID;
             G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await scene.Root().GetComponent<MessageSender>().Call
-                    (gateServerId, new T2G_GateUnitInfoRequest()
-                    {
-                        UserID= request.TeamPlayerInfo.UserID
-                    });
+                    (gateServerId, T2G_GateUnitInfoRequest);
             if (g2M_UpdateUnitResponse.PlayerState != (int)PlayerState.Game || g2M_UpdateUnitResponse.SessionInstanceId == 0)
             {
                 //对方已下线

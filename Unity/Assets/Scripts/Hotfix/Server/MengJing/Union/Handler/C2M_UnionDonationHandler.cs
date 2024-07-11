@@ -27,9 +27,13 @@ namespace ET.Server
                     }
 
                     long selfgold = unit.GetComponent<UserInfoComponentS>().UserInfo.Gold;
+                    M2U_UnionOperationRequest M2U_UnionOperationRequest = M2U_UnionOperationRequest.Create();
+                    M2U_UnionOperationRequest.OperateType = 3;
+                    M2U_UnionOperationRequest.UnitId = unit.Id;
+                    M2U_UnionOperationRequest.UnionId = unionid; 
+                    M2U_UnionOperationRequest.Par = selfgold.ToString();
                     U2M_UnionOperationResponse responseUnionEnter = (U2M_UnionOperationResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                        UnitCacheHelper.GetUnionServerId(unit.Zone()),
-                        new M2U_UnionOperationRequest() { OperateType = 3, UnitId = unit.Id, UnionId = unionid, Par = selfgold.ToString() });
+                        UnitCacheHelper.GetUnionServerId(unit.Zone()),M2U_UnionOperationRequest);
 
                     if (responseUnionEnter.Error != ErrorCode.ERR_Success)
                     {
@@ -59,9 +63,14 @@ namespace ET.Server
                     }
 
                     long selfDiamond = unit.GetComponent<UserInfoComponentS>().UserInfo.Diamond;
+                    M2U_UnionOperationRequest M2U_UnionOperationRequest = M2U_UnionOperationRequest.Create();
+                    M2U_UnionOperationRequest.OperateType = 4;
+                    M2U_UnionOperationRequest.UnitId = unit.Id;
+                    M2U_UnionOperationRequest.UnionId = unionid;
+                    M2U_UnionOperationRequest.Par = selfDiamond.ToString();
+                    
                     U2M_UnionOperationResponse responseUnionEnter = (U2M_UnionOperationResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                        UnitCacheHelper.GetUnionServerId(unit.Zone()),
-                        new M2U_UnionOperationRequest() { OperateType = 4, UnitId = unit.Id, UnionId = unionid, Par = selfDiamond.ToString() });
+                        UnitCacheHelper.GetUnionServerId(unit.Zone()),M2U_UnionOperationRequest);
 
                     if (responseUnionEnter.Error != ErrorCode.ERR_Success)
                     {
