@@ -13,6 +13,6 @@ namespace ET.Client
 
         public long EffectInstanceId;
 
-        public C2M_SkillCmd c2M_SkillCmd = new C2M_SkillCmd();
+        public C2M_SkillCmd c2M_SkillCmd = C2M_SkillCmd.Create();
     }
 }

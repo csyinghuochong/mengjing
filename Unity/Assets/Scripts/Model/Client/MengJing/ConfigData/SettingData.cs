@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    public class SettingData
+    public static class SettingData
     {
         /// <summary>
         /// 主城周围超过50个人不再进行显示

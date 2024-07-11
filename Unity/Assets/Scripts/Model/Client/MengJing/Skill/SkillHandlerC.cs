@@ -6,6 +6,8 @@ namespace ET.Client
 
     }
     
+    
+    [EnableClass]
     [SkillHandlerC]
     public abstract class SkillHandlerC
     {

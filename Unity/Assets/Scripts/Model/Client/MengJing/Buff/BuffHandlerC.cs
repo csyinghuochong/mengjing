@@ -6,6 +6,7 @@ namespace ET.Client
 
     }
     
+    [EnableClass]
     [BuffHandlerC]
     public abstract class BuffHandlerC
     {

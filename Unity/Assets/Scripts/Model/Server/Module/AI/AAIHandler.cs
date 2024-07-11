@@ -7,6 +7,7 @@ namespace ET.Server
     }
     
     [AIHandler]
+    [EnableClass]
     public abstract class AAIHandler
     {
         // 检查是否满足条件

@@ -163,7 +163,7 @@ namespace ET
         AddBuffTime = 2,
     }
 
-    public class TianFuProEnum
+    public static class TianFuProEnum
     {
         public const string SkillIdAdd = "SkillIdAdd";
         public const string SkillPropertyAdd = "SkillPropertyAdd";
@@ -175,6 +175,7 @@ namespace ET
         public const string SkillSingingCancel = "SkillSingingCancel";
     }
 
+    [EnableClass]
     public class SkillCDItem
     {
         public int SkillID;

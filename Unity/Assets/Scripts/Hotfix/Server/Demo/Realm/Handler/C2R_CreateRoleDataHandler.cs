@@ -78,13 +78,12 @@ namespace ET.Server
 					}
 
 					//存储账号信息
-					CreateRoleInfo createRoleInfo = new CreateRoleInfo()
-					{
-						UnitId = userId,PlayerLv = 1, 
-						PlayerOcc = request.CreateOcc,
-						PlayerName  = request.CreateName,
-						RobotId = robotId,
-					};
+					CreateRoleInfo createRoleInfo = CreateRoleInfo.Create();
+					createRoleInfo.UnitId = userId;
+					createRoleInfo.PlayerLv = 1;
+					createRoleInfo.PlayerOcc = request.CreateOcc;
+					createRoleInfo.PlayerName = request.CreateName;
+					createRoleInfo.RobotId = robotId;
 					newAccount.RoleList.Add(createRoleInfo);
 					await dbComponent.Save(newAccount);
 
