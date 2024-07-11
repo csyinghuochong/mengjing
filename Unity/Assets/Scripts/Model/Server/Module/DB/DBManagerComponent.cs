@@ -9,5 +9,6 @@ namespace ET.Server
         //[StaticField]
         //public static DBManagerComponent Instance { get;  set; } 
         public DBComponent[] DBComponents = new DBComponent[IdGenerater.MaxZone];
+        
     }
 }

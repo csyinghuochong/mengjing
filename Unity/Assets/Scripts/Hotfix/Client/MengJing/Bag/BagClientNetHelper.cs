@@ -10,7 +10,7 @@ namespace ET.Client
         public static async ETTask<int> RequestBagInit(Scene root)
         {
             Log.Debug($"C2M_BagInitHandler: client0");
-            M2C_BagInitResponse response = (M2C_BagInitResponse)await root.GetComponent<ClientSenderCompnent>().Call(new C2M_BagInitRequest());
+            M2C_BagInitResponse response = (M2C_BagInitResponse)await root.GetComponent<ClientSenderCompnent>().Call( C2M_BagInitRequest.Create());
 
             BagComponentC bagComponentC = root.GetComponent<BagComponentC>();
             for (int i = 0; i < response.BagInfos.Count; i++)

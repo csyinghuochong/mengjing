@@ -27,7 +27,7 @@ namespace ET
         public int  HideID;
     
         [MemoryPackOrder(1)]
-        public int  HideValue ;
+        public long  HideValue ;
     }
 
     [MemoryPackable]

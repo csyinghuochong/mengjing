@@ -13,22 +13,23 @@ namespace ET
         {
             Unit npc = null;
             float distance = -1f;
-            List<Unit> units = zongScene.CurrentScene().GetComponent<UnitComponent>().GetAll();
-            UnitInfoComponent unitInfoComponent;
+            List<EntityRef<Unit>> units = zongScene.CurrentScene().GetComponent<UnitComponent>().GetAll();
+
             for (int i = 0; i < units.Count; i++)
             {
-                unitInfoComponent = units[i].GetComponent<UnitInfoComponent>();
-                if (units[i].Type != UnitType.Npc)
+                Unit unit = units[i];
+                UnitInfoComponent unitInfoComponent = unit.GetComponent<UnitInfoComponent>();
+                if (unit.Type != UnitType.Npc)
                 {
                     continue;
                 }
 
-                if (units[i].ConfigId != npcid)
+                if (unit.ConfigId != npcid)
                 {
                     continue;
                 }
 
-                Vector3 unitPos = new Vector3(units[i].Position.x, units[i].Position.y, units[i].Position.z);
+                Vector3 unitPos = new Vector3(unit.Position.x, unit.Position.y, unit.Position.z);
                 if (Vector3.Distance(position, unitPos) < distance || distance < 0f)
                 {
                     npc = units[i];
