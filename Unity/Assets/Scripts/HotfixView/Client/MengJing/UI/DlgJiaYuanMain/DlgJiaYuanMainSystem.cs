@@ -23,7 +23,7 @@ namespace ET.Client
         {
             self.View.E_ButtonWarehouseButton.AddListener(() =>
             {
-                // UIHelper.Create(self.ZoneScene(), UIType.UIJiaYuanWarehouse).Coroutine();
+                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanWarehouse).Coroutine();
             });
 
             self.View.E_ButtonReturnButton.AddListener(() => { self.OnButtonReturn().Coroutine(); });
@@ -37,7 +37,7 @@ namespace ET.Client
 
             self.View.E_ButtonOneKeyPlantButton.AddListener(() =>
             {
-                // UIHelper.Create(self.DomainScene(), UIType.UIJiaYuanOneKeyPlant).Coroutine();
+                // self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanOneKeyPlant).Coroutine();
             });
             self.View.E_ButtonGatherButton.AddListener(() => { self.OnButtonGather(); });
             self.View.E_ButtonTalkButton.AddListener(() => { self.OnButtonTalk(); });
@@ -146,9 +146,8 @@ namespace ET.Client
             }
 
             FlyTipComponent.Instance.ShowFlyTipDi("UIJiaYuanPetFeed暂未开放");
-            // UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIJiaYuanPetFeed);
-            // uI.GetComponent<UIJiaYuanPetFeedComponent>().OnInitUI(jiaYuanPet);
-            await ETTask.CompletedTask;
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanPetFeed);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanPetFeed>().OnInitUI(jiaYuanPet);
         }
 
         public static async ETTask OnInit(this DlgJiaYuanMain self)
@@ -468,17 +467,16 @@ namespace ET.Client
                 self.LastPasureIndex = 0;
             }
 
-            // UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIJiaYuanMenu);
+            await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanMenu);
             Unit targetUnit = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(UnitLockRanges[self.LastPasureIndex].Id);
             self.Root().GetComponent<LockTargetComponent>().LockTargetUnitId(targetUnit.Id);
-            // uI.GetComponent<UIJiaYuanMenuComponent>().OnUpdatePasture(targetUnit);
-            await ETTask.CompletedTask;
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMenu>().OnUpdatePasture(targetUnit);
             return self.LastPasureIndex;
         }
 
         public static async ETTask LockTargetUnit(this DlgJiaYuanMain self)
         {
-            // UIHelper.Remove(self.ZoneScene(), UIType.UIJiaYuanMenu);
+            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_JiaYuanMenu);
             int lastTarget = await self.LockTargetPasture();
             if (lastTarget != -1)
             {
@@ -486,18 +484,18 @@ namespace ET.Client
             }
 
             //植物
-            // float distance = 2f;
-            // Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            float distance = 2f;
+            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             List<UnitLockRange> UnitLockRanges = new ListComponent<UnitLockRange>();
-            // JiaYuanComponent jiaYuanComponent = self.Root().GetComponent<JiaYuanComponent>();
-            // for (int i = 0; i < self.JianYuanPlanUIs.Count; i++)
-            // {
-            //     float dd = Vector3.Distance(unit.Position, self.JianYuanPlanUIs[i].transform.position);
-            //     if (dd < distance && jiaYuanComponent.PlanOpenList_7.Contains(i))
-            //     {
-            //         UnitLockRanges.Add(new UnitLockRange() { Id = i, Range = (int)(dd * 100) });
-            //     }
-            // }
+            JiaYuanComponentC jiaYuanComponent = self.Root().GetComponent<JiaYuanComponentC>();
+            for (int i = 0; i < self.JianYuanPlanUIs.Count; i++)
+            {
+                float dd = Vector3.Distance(unit.Position, self.JianYuanPlanUIs[i].transform.position);
+                if (dd < distance && jiaYuanComponent.PlanOpenList_7.Contains(i))
+                {
+                    UnitLockRanges.Add(new UnitLockRange() { Id = i, Range = (int)(dd * 100) });
+                }
+            }
 
             if (UnitLockRanges.Count == 0)
             {
@@ -512,7 +510,6 @@ namespace ET.Client
             }
 
             self.OnClickPlanItem((int)UnitLockRanges[self.LastCellIndex].Id).Coroutine();
-            await ETTask.CompletedTask;
         }
 
         public static async ETTask RequestPlanOpen(this DlgJiaYuanMain self, int index)
@@ -526,7 +523,6 @@ namespace ET.Client
             self.Root().GetComponent<JiaYuanComponentC>().PlanOpenList_7 = response.PlanOpenList;
 
             self.OnOpenPlan(index);
-            await ETTask.CompletedTask;
         }
 
         public static async ETTask OnClickPlanItem(this DlgJiaYuanMain self, int index)
@@ -535,8 +531,8 @@ namespace ET.Client
             if (jiaYuanComponentC.PlanOpenList_7.Contains(index))
             {
                 self.OnSelectCell(index);
-                // UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIJiaYuanMenu);
-                // uI.GetComponent<UIJiaYuanMenuComponent>().OnUpdatePlan();
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanMenu);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMenu>().OnUpdatePlan();
                 await ETTask.CompletedTask;
                 return;
             }
@@ -550,19 +546,18 @@ namespace ET.Client
             string consttip = CommonViewHelper.GetNeedItemDesc($"13;{costnumber}");
             PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", $"是否花费 {consttip} 开启一块土地", () => { self.RequestPlanOpen(index).Coroutine(); }, null)
                     .Coroutine();
-            return;
         }
 
         public static void OnOpenPlan(this DlgJiaYuanMain self, int index)
         {
-            // JiaYuanPlanLockComponent jiaYuanPlanLockComponent = null;
-            // self.JiaYuanPlanLocks.TryGetValue(index, out jiaYuanPlanLockComponent);
-            // if (jiaYuanPlanLockComponent == null)
-            // {
-            //     return;
-            // }
-            //
-            // jiaYuanPlanLockComponent.SetOpenState(index, true);
+            JiaYuanPlanLockComponent jiaYuanPlanLockComponent = null;
+            self.JiaYuanPlanLocks.TryGetValue(index, out jiaYuanPlanLockComponent);
+            if (jiaYuanPlanLockComponent == null)
+            {
+                return;
+            }
+
+            jiaYuanPlanLockComponent.SetOpenState(index, true);
 
             self.OnUpdatePlanNumber();
         }
@@ -604,23 +599,23 @@ namespace ET.Client
 
         public static void OnInitPlan(this DlgJiaYuanMain self)
         {
-            // self.JianYuanPlanUIs.Clear();
+            self.JianYuanPlanUIs.Clear();
             GameObject NongChangSet = GameObject.Find("NongChangSet");
             JiaYuanComponentC jiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
-            // for (int i = 0; i < NongChangSet.transform.childCount; i++)
-            // {
-            //     GameObject item = NongChangSet.transform.GetChild(i).gameObject;
-            //     item.SetActive(true);
-            //     JiaYuanPlanLockComponent jiaYuanPlanLock = self.AddChild<JiaYuanPlanLockComponent, GameObject>(item);
-            //     self.JiaYuanPlanLocks.Add(i, jiaYuanPlanLock);
-            //     jiaYuanPlanLock.SetOpenState(i, jiaYuanComponent.PlanOpenList_7.Contains(i));
-            //     self.JianYuanPlanUIs.Add(i, item);
-            // }
+            for (int i = 0; i < NongChangSet.transform.childCount; i++)
+            {
+                GameObject item = NongChangSet.transform.GetChild(i).gameObject;
+                item.SetActive(true);
+                JiaYuanPlanLockComponent jiaYuanPlanLock = self.AddChild<JiaYuanPlanLockComponent, GameObject>(item);
+                self.JiaYuanPlanLocks.Add(i, jiaYuanPlanLock);
+                jiaYuanPlanLock.SetOpenState(i, jiaYuanComponentC.PlanOpenList_7.Contains(i));
+                self.JianYuanPlanUIs.Add(i, item);
+            }
         }
 
         public static void OnSelectCell(this DlgJiaYuanMain self, int cell)
         {
-            // UICommonHelper.SetParent(self.SelectEffect, self.JianYuanPlanUIs[cell]);
+            CommonViewHelper.SetParent(self.SelectEffect, self.JianYuanPlanUIs[cell]);
             self.CellIndex = cell;
             self.SelectEffect.SetActive(true);
             self.SelectEffect.transform.localPosition = new Vector3(0f, 0.2f, 0f);

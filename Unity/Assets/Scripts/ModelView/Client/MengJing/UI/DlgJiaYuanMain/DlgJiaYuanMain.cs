@@ -20,6 +20,10 @@ namespace ET.Client
 
         public long GatherTime;
 
+        // public UIJiaYuanVisitComponent UIJiaYuaVisitComponent;
+        public Dictionary<int, GameObject> JianYuanPlanUIs = new();
+        public Dictionary<int, JiaYuanPlanLockComponent> JiaYuanPlanLocks = new();
+
         public long PetTimer;
         public JiaYuanPet JiaYuanPet;
 
