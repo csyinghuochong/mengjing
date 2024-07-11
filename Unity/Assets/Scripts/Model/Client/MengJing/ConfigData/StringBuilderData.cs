@@ -3,7 +3,7 @@ using System.Text;
 
 namespace ET.Client
 {
-    public class StringBuilderData
+    public static class StringBuilderData
     {
         [StaticField]
         public static string ToonBasic = "Toon/Basic";
