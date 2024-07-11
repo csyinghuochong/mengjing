@@ -13,6 +13,6 @@ namespace ET.Server
     {
         public string key {  get; set; }
 
-        public Dictionary<long, Entity> CacheCompoenntsDictionary = new Dictionary<long, Entity>();
+        public Dictionary<long, EntityRef<Entity>> CacheCompoenntsDictionary = new Dictionary<long, EntityRef<Entity>>();
     }
 }

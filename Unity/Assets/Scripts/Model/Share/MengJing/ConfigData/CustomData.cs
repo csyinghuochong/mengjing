@@ -5,6 +5,30 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace ET
 {
+    
+    //通过奖励
+    [MemoryPackable]
+    [EnableClass]
+    public partial class RewardItem
+    {
+
+        [MemoryPackOrder(0)]
+        public int ItemID;
+
+        [MemoryPackOrder(1)]
+        public int ItemNum;
+    }
+
+    [MemoryPackable]
+    [EnableClass]
+    public partial class  HideProList
+    {
+        [MemoryPackOrder(0)]
+        public int  HideID;
+    
+        [MemoryPackOrder(1)]
+        public int  HideValue ;
+    }
 
     [MemoryPackable]
     [EnableClass]

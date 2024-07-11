@@ -25,7 +25,7 @@ namespace ET
             unit?.Dispose();
         }
 
-        public static List<Unit> GetAll(this UnitComponent self)
+        public static List<EntityRef<Unit>> GetAll(this UnitComponent self)
         {
             return self.Units;
         }

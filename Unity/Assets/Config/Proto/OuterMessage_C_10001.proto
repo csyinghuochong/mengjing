@@ -473,12 +473,6 @@ message G2C_Benchmark // ISessionResponse
 	string Message = 3;
 }
 
-message HideProList
-{
-	int32 HideID = 1;
-	int64 HideValue = 2;
-}
-
 message BagInfo
 {
 	int32 RpcId = 90;
@@ -846,13 +840,6 @@ message SkillPro
     int32 SkillSetType = 3;	//1技能 2道具 
     int32 Actived = 4;  //0 未学习  1已学习
     int32 SkillSource = 5; //1职业技能 2装备技能 3天赋技能 4 精灵技能 5 套装技能
-}
-
-//通过奖励
-message RewardItem
-{
-	int32 ItemID = 1;
-	int32 ItemNum = 2;
 }
 
 message FubenPassInfo

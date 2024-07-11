@@ -22,7 +22,7 @@ namespace ET.Server
         public Dictionary<long, ActorId> UnionFubens = new Dictionary<long, ActorId>();   //fubenid->fubeninstanceid
 
 
-        public Dictionary<long, DBUnionInfo> DBUnionInfos = new Dictionary<long, DBUnionInfo>();
+        public Dictionary<long, DBUnionInfo> DBUnionInfos { get; set; }
     }
     
 }
