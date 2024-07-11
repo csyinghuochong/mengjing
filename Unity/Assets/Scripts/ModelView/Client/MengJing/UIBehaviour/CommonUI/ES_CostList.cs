@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_CostList : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<BagInfo> ShowBagInfos = new();
-		public Dictionary<int, Scroll_Item_CommonCostItem> ScrollItemCommonCostItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonCostItem>> ScrollItemCommonCostItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_CostItemsLoopVerticalScrollRect
      	{

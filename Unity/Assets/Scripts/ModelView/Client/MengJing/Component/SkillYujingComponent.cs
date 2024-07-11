@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
+    [EnableClass]
     public class UnitLockRange
     {
         public long Id;
@@ -11,6 +12,7 @@ namespace ET.Client
         public int Type;
     }
 
+    [EnableClass]
     public class SkillIndicatorItem
     {
         public int SkillZhishiType;

@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_JiaYuanMystery_A))]
-    [FriendOfAttribute(typeof (ES_JiaYuanMystery_A))]
+    [EntitySystemOf(typeof(ES_JiaYuanMystery_A))]
+    [FriendOfAttribute(typeof(ES_JiaYuanMystery_A))]
     public static partial class ES_JiaYuanMystery_ASystem
     {
         [EntitySystem]
@@ -56,10 +56,11 @@ namespace ET.Client
             {
                 MysteryConfig mysteryConfig = MysteryConfigCategory.Instance.Get(itemList[i]);
 
-                MysteryItemInfo mysteryItemInfo = new MysteryItemInfo()
-                {
-                    ItemID = mysteryConfig.SellItemID, ItemNumber = 1, MysteryId = itemList[i], ProductId = -1
-                };
+                MysteryItemInfo mysteryItemInfo = MysteryItemInfo.Create();
+                mysteryItemInfo.ItemID = mysteryConfig.SellItemID;
+                mysteryItemInfo.ItemNumber = 1;
+                mysteryItemInfo.MysteryId = itemList[i];
+                mysteryItemInfo.ProductId = -1;
 
                 self.ShowMysteryItemInfos.Add(mysteryItemInfo);
             }
