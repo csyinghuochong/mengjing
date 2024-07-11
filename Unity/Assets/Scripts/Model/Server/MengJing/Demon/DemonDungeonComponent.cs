@@ -6,7 +6,7 @@ namespace ET.Server
     {
         public bool IsOver;
 
-        public M2C_RankDemonMessage M2C_RankDemonMessage = new M2C_RankDemonMessage();
+        public M2C_RankDemonMessage M2C_RankDemonMessage = M2C_RankDemonMessage.Create();
     }
     
 }

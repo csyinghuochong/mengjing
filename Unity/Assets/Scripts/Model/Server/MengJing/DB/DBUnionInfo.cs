@@ -9,7 +9,7 @@ namespace ET.Server
     [BsonIgnoreExtraElements]
     public class DBUnionInfo : Entity, IAwake
     {
-        public UnionInfo UnionInfo { get; set; } = new UnionInfo();
+        public UnionInfo UnionInfo { get; set; } = UnionInfo.Create();
 
         public List<MysteryItemInfo> MysteryItemInfos{ get; set; } = new List<MysteryItemInfo>();
 

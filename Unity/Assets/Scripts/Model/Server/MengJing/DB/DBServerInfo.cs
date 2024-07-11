@@ -9,7 +9,7 @@ namespace ET.Server
     [BsonIgnoreExtraElements]
 	public class DBServerInfo : Entity, IAwake
 	{
-		public ServerInfo ServerInfo { get; set; } = new ServerInfo();
+		public ServerInfo ServerInfo { get; set; } 
 	}
 
 }

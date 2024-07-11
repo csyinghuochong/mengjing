@@ -9,7 +9,7 @@ namespace ET.Server
         public int BossId { get; set; }
         public long LastTime{ get; set; }
         public List<TeamPlayerInfo> PlayerDamageList { get; set; }= new List<TeamPlayerInfo>();
-        public M2C_SyncMiJingDamage M2C_SyncMiJingDamage { get; set; }= new M2C_SyncMiJingDamage();
+        public M2C_SyncMiJingDamage M2C_SyncMiJingDamage { get; set; } = M2C_SyncMiJingDamage.Create();
     }
     
 }

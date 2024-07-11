@@ -11,6 +11,7 @@ namespace ET.Server
         bool Contains(float3 point);
     }
 
+    [EnableClass]
     public class Circle : Shape
     {
         public float3 s_position { get; set; }   //检测体坐标
@@ -28,6 +29,7 @@ namespace ET.Server
         }
     }
 
+    [EnableClass]
     public class Rectangle : Shape
     {
 
@@ -64,6 +66,7 @@ namespace ET.Server
         }
     }
 
+    [EnableClass]
     public class Fan : Shape
     {
         public float3 s_position { get; set; }     //检测体坐标
@@ -103,6 +106,7 @@ namespace ET.Server
     }
     
     
+    [EnableClass]
     [SkillHandlerS]
     public abstract class SkillHandlerS
     {

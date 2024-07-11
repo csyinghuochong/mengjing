@@ -3,6 +3,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     
+    [EnableClass]
     public class InApp
     {
         /// <summary>
@@ -11,6 +12,7 @@ namespace ET.Server
         public string product_id { get; set; }
     }
 
+    [EnableClass]
     public class Receipt
     {
 
@@ -82,6 +84,7 @@ namespace ET.Server
         public string original_purchase_date_ms { get; set; }
     }
 
+    [EnableClass]
     public class Root
     {
         /// <summary>

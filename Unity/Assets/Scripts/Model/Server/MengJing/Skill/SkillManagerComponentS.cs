@@ -17,8 +17,8 @@ namespace ET.Server
         public long LastLianJiTime = 0;
         public long Timer;
 
-        public M2C_SkillCmd M2C_SkillCmd = new M2C_SkillCmd();
-        public M2C_UnitFinishSkill M2C_UnitFinishSkill = new M2C_UnitFinishSkill();
+        public M2C_SkillCmd M2C_SkillCmd = M2C_SkillCmd.Create();
+        public M2C_UnitFinishSkill M2C_UnitFinishSkill = M2C_UnitFinishSkill.Create();
         public UnitComponent SelfUnitComponent{ set; get; }
         public Unit SelfUnit { set; get; }
     }
