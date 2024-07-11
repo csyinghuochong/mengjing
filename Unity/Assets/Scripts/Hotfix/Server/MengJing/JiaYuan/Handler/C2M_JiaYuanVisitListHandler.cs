@@ -77,11 +77,9 @@ namespace ET.Server
                 if (TimeHelper.ServerNow() - jiaYuanComponent.JiaYuanFuJinTime_3 > TimeHelper.Hour * 4)
                 {
                     jiaYuanComponent.JiaYuanFuJins_3.Clear();
-
+                    M2M_AllPlayerListRequest M2M_AllPlayerListRequest = M2M_AllPlayerListRequest.Create();
                     ActorId mapInstanceId = UnitCacheHelper.GetMailServerId(unit.Zone());
-                    M2M_AllPlayerListResponse reqEnter = (M2M_AllPlayerListResponse)await  unit.Root().GetComponent<MessageSender>().Call(mapInstanceId, new M2M_AllPlayerListRequest()
-                    {
-                    });
+                    M2M_AllPlayerListResponse reqEnter = (M2M_AllPlayerListResponse)await  unit.Root().GetComponent<MessageSender>().Call(mapInstanceId, M2M_AllPlayerListRequest);
                     List<long> allPlayers = new List<long>();
                     if (reqEnter.Error == ErrorCode.ERR_Success)
                     {

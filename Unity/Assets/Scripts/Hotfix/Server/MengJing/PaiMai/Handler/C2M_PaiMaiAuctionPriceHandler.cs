@@ -14,13 +14,11 @@ namespace ET.Server
                 return;
             }
             UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
-            M2P_PaiMaiAuctionPriceRequest message = new M2P_PaiMaiAuctionPriceRequest()
-            {
-                Price = request.Price,
-                UnitID = unit.Id, 
-                Occ = userInfoComponent.UserInfo.Occ,
-                AuctionPlayer = userInfoComponent.UserInfo.Name,
-            };
+            M2P_PaiMaiAuctionPriceRequest message = M2P_PaiMaiAuctionPriceRequest.Create();
+            message.Price = request.Price;
+            message.UnitID = unit.Id;
+            message.Occ = userInfoComponent.UserInfo.Occ;
+            message.AuctionPlayer = userInfoComponent.UserInfo.Name;
             ActorId paimaiserverid = UnitCacheHelper.GetPaiMaiServerId(unit.Zone());
             P2M_PaiMaiAuctionPriceResponse r_GameStatusResponse = (P2M_PaiMaiAuctionPriceResponse)await unit.Root().GetComponent<MessageSender>().Call
                     (paimaiserverid, message);

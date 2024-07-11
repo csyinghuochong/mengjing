@@ -25,7 +25,9 @@ namespace ET.Server
 
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Received, unit.Id))
             {
-                M2Center_SerialReardRequest m2Center_Serial = new M2Center_SerialReardRequest() { SerialNumber = request.SerialNumber };
+                M2Center_SerialReardRequest m2Center_Serial = M2Center_SerialReardRequest.Create();
+                m2Center_Serial.SerialNumber = request.SerialNumber;
+                
                 ActorId centerid = UnitCacheHelper.GetLoginCenterId();
                 Center2M_SerialReardResponse m2m_TrasferUnitResponse = (Center2M_SerialReardResponse)await unit.Root().GetComponent<MessageSender>().Call
                           (centerid, m2Center_Serial);

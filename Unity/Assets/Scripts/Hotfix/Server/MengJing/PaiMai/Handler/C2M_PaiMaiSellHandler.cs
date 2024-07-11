@@ -73,6 +73,7 @@ namespace ET.Server
 
 				//发送对应拍卖行信息
 				ActorId paimaiServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.Zone(), "PaiMai").ActorId;
+				
 				P2M_PaiMaiSellResponse r_GameStatusResponse = (P2M_PaiMaiSellResponse)await unit.Root().GetComponent<MessageSender>().Call
 					(paimaiServerId, new M2P_PaiMaiSellRequest()
 					{

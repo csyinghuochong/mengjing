@@ -10,12 +10,11 @@ namespace ET.Server
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Buy, unit.Id))
             {
                 ActorId paimaiserverid = UnitCacheHelper.GetPaiMaiServerId(unit.Zone());
+                M2P_PaiMaiAuctionJoinRequest M2P_PaiMaiAuctionJoinRequest = M2P_PaiMaiAuctionJoinRequest.Create();
+                M2P_PaiMaiAuctionJoinRequest.UnitID = unit.Id;
+                M2P_PaiMaiAuctionJoinRequest.Gold = unit.GetComponent<UserInfoComponentS>().UserInfo.Gold;
                 P2M_PaiMaiAuctionJoinResponse r_GameStatusResponse = (P2M_PaiMaiAuctionJoinResponse)await unit.Root().GetComponent<MessageSender>().Call
-                        (paimaiserverid, new M2P_PaiMaiAuctionJoinRequest()
-                        {
-                            UnitID = unit.Id,
-                            Gold = unit.GetComponent<UserInfoComponentS>().UserInfo.Gold
-                        });
+                        (paimaiserverid, M2P_PaiMaiAuctionJoinRequest);
 
                 if (r_GameStatusResponse.Error == ErrorCode.ERR_Success)
                 {

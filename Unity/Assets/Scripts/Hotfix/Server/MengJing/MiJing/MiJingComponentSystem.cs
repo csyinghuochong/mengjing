@@ -60,7 +60,7 @@ namespace ET.Server
                     return;
                 }
 
-                MailInfo mailInfo = new MailInfo();
+                MailInfo mailInfo = MailInfo.Create();
                 mailInfo.Status = 0;
                 int num = i + 1;
                 mailInfo.Context = $"恭喜你在秘境中获得第{num}名,获得如下奖励";
@@ -77,14 +77,21 @@ namespace ET.Server
 
                     int itemId = int.Parse(itemInfo[0]);
                     int itemNum = int.Parse(itemInfo[1]);
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.MiJingBoss}_{serverTime}" });
+                    BagInfo BagInfo = ET.BagInfo.Create();
+                    BagInfo.ItemID = itemId;
+                    BagInfo.ItemNum = itemNum;
+                    BagInfo.GetWay = $"{ItemGetWay.MiJingBoss}_{serverTime}";
+                    mailInfo.ItemList.Add(BagInfo);
                 }
 
                 Log.Warning($"世界Boss排名奖励1: {self.Zone()}  {players[i].UserID}");
 
                 // MailHelp.SendUserMail(self.DomainZone(),  players[i].UserID, mailInfo).Coroutine();
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,
-                    new M2E_EMailSendRequest() { Id = players[i].UserID, MailInfo = mailInfo, GetWay = ItemGetWay.MiJingBoss, });
+                M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
+                M2E_EMailSendRequest.Id = players[i].UserID;
+                M2E_EMailSendRequest.MailInfo = mailInfo;
+                M2E_EMailSendRequest.GetWay = ItemGetWay.MiJingBoss;
+                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
                 if (g_EMailSendResponse.Error != ErrorCode.ERR_Success)
                 {
                     Log.Warning($"世界Boss排名奖励失败: {players[i].UserID}");

@@ -16,13 +16,13 @@ namespace ET.Server
                     return;
                 }
 
+                
                 ActorId chargeServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.Zone(), "PaiMai").ActorId;
+                M2P_PaiMaiXiaJiaRequest M2P_PaiMaiXiaJiaRequest = M2P_PaiMaiXiaJiaRequest.Create();
+                M2P_PaiMaiXiaJiaRequest.ItemType = request.ItemType;
+                M2P_PaiMaiXiaJiaRequest.PaiMaiItemInfoId = request.PaiMaiItemInfoId;
                 P2M_PaiMaiXiaJiaResponse r_GameStatusResponse = (P2M_PaiMaiXiaJiaResponse)await unit.Root().GetComponent<MessageSender>().Call
-                    (chargeServerId, new M2P_PaiMaiXiaJiaRequest()
-                    {
-                        ItemType = request.ItemType,    
-                        PaiMaiItemInfoId = request.PaiMaiItemInfoId
-                    });
+                    (chargeServerId, M2P_PaiMaiXiaJiaRequest);
 
                 if (r_GameStatusResponse.Error == ErrorCode.ERR_Success && r_GameStatusResponse.PaiMaiItemInfo != null)
                 {

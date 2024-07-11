@@ -10,7 +10,8 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_PaiMaiDuiHuanRequest request, M2C_PaiMaiDuiHuanResponse response)
         {
             ActorId dbCacheId = UnitCacheHelper.GetRankServerId(unit.Zone());
-            R2M_DBServerInfoResponse d2GGetUnit = (R2M_DBServerInfoResponse)await unit.Root().GetComponent<MessageSender>().Call(dbCacheId, new M2R_DBServerInfoRequest() { });
+            M2R_DBServerInfoRequest M2R_DBServerInfoRequest = M2R_DBServerInfoRequest.Create();
+            R2M_DBServerInfoResponse d2GGetUnit = (R2M_DBServerInfoResponse)await unit.Root().GetComponent<MessageSender>().Call(dbCacheId, M2R_DBServerInfoRequest);
             long diamond = request.DiamondsNumber;
             if (request.DiamondsNumber <= 0)
             {
