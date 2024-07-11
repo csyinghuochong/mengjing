@@ -37,7 +37,7 @@ namespace ET.Server
             }
 
             skillS.SkillTriggerLastTime = servernow;
-            List<Unit> entities = skillS.TheUnitFrom.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> entities = skillS.TheUnitFrom.GetParent<UnitComponent>().GetAll();
             for (int i = entities.Count - 1; i >= 0; i--)
             {
                 Unit target = entities[i];

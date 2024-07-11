@@ -66,7 +66,7 @@ namespace ET.Server
             {
                 if (!moveComponent.IsArrived())
                 {
-                    unitInfo.MoveInfo = new MoveInfo();
+                    unitInfo.MoveInfo = MoveInfo.Create();
                     unitInfo.MoveInfo.Points.Add(unit.Position);
                     for (int i = moveComponent.N; i < moveComponent.Targets.Count; ++i)
                     {
@@ -130,7 +130,7 @@ namespace ET.Server
 
         public static SpilingInfo CreateSpilingInfo(Unit unit)
         {
-            SpilingInfo spilingInfo = new SpilingInfo();
+            SpilingInfo spilingInfo = SpilingInfo.Create();
             unit.GetComponent<UnitInfoComponent>();
             spilingInfo.X = unit.Position.x;
             spilingInfo.Y = unit.Position.y;
@@ -168,7 +168,7 @@ namespace ET.Server
         
         public static DropInfo CreateDropInfo(Unit unit)
         {
-            DropInfo dropinfo = new DropInfo();
+            DropInfo dropinfo = DropInfo.Create();
             dropinfo.UnitId = unit.Id;
             //DropType == 0 公共掉落 2保护掉落   1私有掉落
             DropComponentS dropComponent = unit.GetComponent<DropComponentS>();
@@ -185,7 +185,7 @@ namespace ET.Server
 
         public static TransferInfo CreateTransferInfo(Unit unit)
         {
-            TransferInfo transferinfo = new TransferInfo();
+            TransferInfo transferinfo = TransferInfo.Create();
             ChuansongComponent chuansongComponent = unit.GetComponent<ChuansongComponent>();
 
             transferinfo.UnitId = unit.Id;

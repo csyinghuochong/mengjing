@@ -51,7 +51,7 @@ namespace ET
             }
             if (zhanQuReceive==null)
             {
-                ZhanQuReceiveNumber zhanQuReceiveNumber = new ZhanQuReceiveNumber();
+                ZhanQuReceiveNumber zhanQuReceiveNumber = ZhanQuReceiveNumber.Create();
                 zhanQuReceiveNumber.ActivityId = request.ActivityId;
                 zhanQuReceiveNumber.ReceiveNum = 1;
                 zhanQuReceiveNumber.ReceiveUnitIds.Add(request.UnitId);

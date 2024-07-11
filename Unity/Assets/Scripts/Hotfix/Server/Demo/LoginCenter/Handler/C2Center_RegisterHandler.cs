@@ -54,7 +54,7 @@ namespace ET.Server
                     DBCenterAccountInfo newAccount = session.AddChild<DBCenterAccountInfo>();
                     newAccount.Account = request.Account;
                     newAccount.Password = request.Password;
-                    newAccount.PlayerInfo = new PlayerInfo();
+                    newAccount.PlayerInfo = PlayerInfo.Create();
 
                     if (request.Password == CommonHelp.RobotPassWord)
                     {

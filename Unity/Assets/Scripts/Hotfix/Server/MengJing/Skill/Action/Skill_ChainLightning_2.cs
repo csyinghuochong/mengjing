@@ -46,7 +46,7 @@ namespace ET.Server
                 skillS.IsExcuteHurt = true;
 
                 List<Unit> enemyList = new List<Unit>();
-                List<Unit> entities = skillS.TheUnitFrom.GetParent<UnitComponent>().GetAll();
+                List<EntityRef<Unit>> entities = skillS.TheUnitFrom.GetParent<UnitComponent>().GetAll();
 
                 for (int i = entities.Count - 1; i >= 0; i--)
                 {

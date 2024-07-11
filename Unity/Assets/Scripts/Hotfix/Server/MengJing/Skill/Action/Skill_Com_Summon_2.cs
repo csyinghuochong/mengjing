@@ -59,7 +59,7 @@ namespace ET.Server
 
             if (destoryOldMonsterList.Count > 0)
             {
-                List<Unit> entities = theUnitFrom.GetParent<UnitComponent>().GetAll();
+                List<EntityRef<Unit>> entities = theUnitFrom.GetParent<UnitComponent>().GetAll();
                 for (int i = entities.Count - 1; i >= 0; i--)
                 {
                     Unit uu = entities[i];

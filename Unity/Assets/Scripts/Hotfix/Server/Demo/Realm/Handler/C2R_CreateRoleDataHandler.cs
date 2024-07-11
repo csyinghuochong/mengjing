@@ -96,9 +96,9 @@ namespace ET.Server
         }
         
         //获取角色创建列表信息
-        public CreateRoleInfo GetRoleListInfo(UserInfo userInfo,long userID) 
+        public CreateRoleInfo GetRoleListInfo(UserInfo userInfo,long userID)
         {
-	        CreateRoleInfo roleList = new CreateRoleInfo();
+	        CreateRoleInfo roleList = CreateRoleInfo.Create();
 
 	        roleList.OccTwo =  userInfo.OccTwo;
 	        roleList.UnitId = userID;

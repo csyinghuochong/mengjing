@@ -37,11 +37,12 @@ namespace ET.Server
              {
                  int buffId = (int)SkillConfigCategory.Instance.BuffSecondSkill[skillManagerManagerComponent.SkillSecond[request.SkillID]].KeyId;
 
-                 List<Unit> allDefend = unit.GetParent<UnitComponent>().GetAll();
+                 List<EntityRef<Unit>> allDefend = unit.GetParent<UnitComponent>().GetAll();
                  for (int defend = 0; defend < allDefend.Count; defend++)
                  {
-                     BuffManagerComponentS buffManagerManagerComponent = allDefend[defend].GetComponent<BuffManagerComponentS>();
-                     if (buffManagerManagerComponent == null || allDefend[defend].Id == request.TargetID || allDefend[defend].Id == unit.Id)
+                     Unit unitdefend = allDefend[defend];
+                     BuffManagerComponentS buffManagerManagerComponent = unitdefend.GetComponent<BuffManagerComponentS>();
+                     if (buffManagerManagerComponent == null || unitdefend.Id == request.TargetID ||unitdefend.Id == unit.Id)
                      {
                          continue;
                      }
@@ -50,7 +51,7 @@ namespace ET.Server
                      {
                          continue;
                      }
-                     request.TargetID = allDefend[defend].Id;
+                     request.TargetID =unitdefend.Id;
                      buffManagerManagerComponent.BuffRemoveByUnit(0, buffId);
                      unit.GetComponent<SkillManagerComponentS>().OnUseSkill(request, false);
                  }

@@ -25,7 +25,7 @@ namespace ET
                 }
             }
 
-            M2C_UnitNumericUpdate m2C_UnitNumericUpdate = new M2C_UnitNumericUpdate();
+            M2C_UnitNumericUpdate m2C_UnitNumericUpdate = M2C_UnitNumericUpdate.Create();
             m2C_UnitNumericUpdate.UnitId = args.Defend.Id;
             m2C_UnitNumericUpdate.NumericType = args.NumericType;
             m2C_UnitNumericUpdate.NewValue = args.NewValue;
@@ -52,7 +52,7 @@ namespace ET
             //     return;
             // }
 
-            M2C_UnitNumericUpdate m2C_UnitNumericUpdate = new M2C_UnitNumericUpdate();
+            M2C_UnitNumericUpdate m2C_UnitNumericUpdate = M2C_UnitNumericUpdate.Create();
             m2C_UnitNumericUpdate.UnitId = args.Defend.Id;
             m2C_UnitNumericUpdate.NumericType = args.NumericType;
             m2C_UnitNumericUpdate.NewValue = args.NewValue;

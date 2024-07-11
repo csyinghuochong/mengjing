@@ -16,7 +16,7 @@ namespace ET.Server
         {
             skillS.InitSelfBuff();
 
-            List<Unit> units = skillS.TheUnitFrom.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = skillS.TheUnitFrom.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
                 Unit unit = units[i];

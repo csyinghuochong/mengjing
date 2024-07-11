@@ -322,7 +322,7 @@ namespace ET.Server
               for (int i = skillcnt - 1; i >= 0; i--)
               {
                   SkillS skillHandler = self.Skills[i];
-                  SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(self.Skills[i].SkillConf.GameObjectName);
+                  SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(skillHandler.SkillConf.GameObjectName);
                   aaiHandler.OnFinished( skillHandler );
                   self.Skills.RemoveAt(i);
                   ObjectPool.Instance.Recycle(skillHandler);
@@ -368,7 +368,8 @@ namespace ET.Server
               int skillcnt = self.Skills.Count;
               for (int i = skillcnt - 1; i >= 0; i--)
               {
-                  if (self.Skills[i].SkillConf.GameObjectName == ConfigData.ChongJiSkill)
+                  SkillS skillS = self.Skills[i];
+                  if (skillS.SkillConf.GameObjectName == ConfigData.ChongJiSkill)
                   {
                       return true;
                   }
@@ -396,7 +397,8 @@ namespace ET.Server
               int skillcnt = self.Skills.Count;
               for (int i = skillcnt - 1; i >= 0; i--)
               {
-                  if (self.Skills[i].SkillConf.GameObjectName == skillConfig.GameObjectName)
+                  SkillS skillS = self.Skills[i];
+                  if (skillS.SkillConf.GameObjectName == skillConfig.GameObjectName)
                   {
                       return true;
                   }
@@ -890,7 +892,8 @@ namespace ET.Server
               List<SkillInfo> skillinfos = new List<SkillInfo>();
               for (int i = 0; i < self.Skills.Count; i++)
               {
-                  skillinfos.Add(self.Skills[i].SkillInfo);
+                  SkillS skillS = self.Skills[i];
+                  skillinfos.Add(skillS.SkillInfo);
               }
               return skillinfos;
           }
@@ -1000,7 +1003,8 @@ namespace ET.Server
               int skillcnt = self.Skills.Count;
               for (int i = skillcnt - 1; i >= 0; i-- )
               {
-                  SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(self.Skills[i].SkillConf.GameObjectName);
+                  SkillS skillS = self.Skills[i];
+                  SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(skillS.SkillConf.GameObjectName);
                   aaiHandler.OnUpdate(self.Skills[i], 0);
                   
                   if (self.Skills.Count == 0 || self.SelfUnit.IsDisposed)
@@ -1017,7 +1021,7 @@ namespace ET.Server
                       break;
                   }
 
-                  if (self.Skills[i].GetSkillState() == SkillState.Finished)
+                  if (skillS.GetSkillState() == SkillState.Finished)
                   {
                       SkillS skillHandler = self.Skills[i];
                       self.CheckEndSkill(skillHandler.SkillConf.EndSkillId);

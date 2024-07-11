@@ -6,7 +6,7 @@
         public static async ETTask<int> RequestUserInfoInit(Scene root)
         {
             M2C_UserInfoInitResponse response =
-                    (M2C_UserInfoInitResponse)await root.GetComponent<ClientSenderCompnent>().Call(new C2M_UserInfoInitRequest());
+                    (M2C_UserInfoInitResponse)await root.GetComponent<ClientSenderCompnent>().Call(C2M_UserInfoInitRequest.Create());
 
             root.GetComponent<UserInfoComponentC>().UserInfo = response.UserInfo;
             root.GetComponent<ReddotComponentC>().ReddontList = response.ReddontList;

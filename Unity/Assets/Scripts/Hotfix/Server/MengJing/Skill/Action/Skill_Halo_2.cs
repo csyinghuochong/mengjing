@@ -19,10 +19,11 @@ namespace ET.Server
 
         public void Check_Map(SkillS skillS )
         {
-            List<Unit> entities = skillS.TheUnitFrom.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> entities = skillS.TheUnitFrom.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < entities.Count; i++)
             {
-                if (entities[i].Type != UnitType.Player)
+                Unit uniitem = entities[i];
+                if (uniitem.Type != UnitType.Player)
                 {
                     continue;
                 }

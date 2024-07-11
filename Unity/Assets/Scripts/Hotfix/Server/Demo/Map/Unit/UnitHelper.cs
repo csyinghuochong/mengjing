@@ -417,6 +417,7 @@ namespace ET.Server
         {
             ActorId chatServerId = UnitCacheHelper.GetChatServerId( self.Zone() );
  
+            
             Chat2M_UpdateUnion chat2G_EnterChat = (Chat2M_UpdateUnion)await self.Root().GetComponent<MessageSender>().Call(chatServerId, new M2Chat_UpdateUnion()
             {
                 UnitId = self.Id,

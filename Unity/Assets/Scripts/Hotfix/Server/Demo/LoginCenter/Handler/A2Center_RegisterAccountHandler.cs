@@ -26,7 +26,7 @@ namespace ET.Server
                 DBCenterAccountInfo newAccount = scene.AddChild<DBCenterAccountInfo>();
                 newAccount.Account = request.AccountName;
                 newAccount.Password = request.Password;
-                newAccount.PlayerInfo = new PlayerInfo();
+                newAccount.PlayerInfo = PlayerInfo.Create();
                 
                 if (request.LoginType == LoginTypeEnum.TikTok && request.age_type > 0)
                 {

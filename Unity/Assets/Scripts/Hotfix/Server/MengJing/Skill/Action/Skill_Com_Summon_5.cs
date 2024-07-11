@@ -134,7 +134,7 @@ namespace ET.Server
             }
 
             List<Unit> haved = new List<Unit>();
-            List<Unit> all = theUnitFrom.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> all = theUnitFrom.GetParent<UnitComponent>().GetAll();
             foreach (Unit unit in all)
             {
                 if (unit.Type == UnitType.Monster && monsterIds.Contains(unit.ConfigId) && unit.MasterId == theUnitFrom.Id)

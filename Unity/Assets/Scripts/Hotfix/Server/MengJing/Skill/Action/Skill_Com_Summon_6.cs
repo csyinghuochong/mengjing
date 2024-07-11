@@ -47,12 +47,12 @@ namespace ET.Server
                     return;
                 }
 
-                List<Unit> all = theUnitFrom.GetParent<UnitComponent>().GetAll();
+                List<EntityRef<Unit>> all = theUnitFrom.GetParent<UnitComponent>().GetAll();
                 foreach (Unit unit in all)
                 {
                     if (unit.Type == UnitType.Monster && unit.MasterId == theUnitFrom.Id && (allMonster || monsterIds.Contains(unit.ConfigId)))
                     {
-                        C2M_SkillCmd cmd = new C2M_SkillCmd();
+                        C2M_SkillCmd cmd = C2M_SkillCmd.Create();
                         cmd.TargetID = skillS.SkillInfo.TargetID;
                         cmd.SkillID = skillS.SkillConf.Id;
                         if (skillS.SkillConf.SkillZhishiTargetType == 1) //自身点
