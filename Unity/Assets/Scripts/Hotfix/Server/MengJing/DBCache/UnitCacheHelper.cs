@@ -26,7 +26,8 @@ namespace ET.Server
         /// <typeparam name="T"></typeparam>
         public static async ETTask AddOrUpdateUnitCache<T>(this T self) where T : Entity, IUnitCache
         {
-            Other2UnitCache_AddOrUpdateUnit message = new Other2UnitCache_AddOrUpdateUnit() { UnitId = self.Id, };
+            Other2UnitCache_AddOrUpdateUnit message = Other2UnitCache_AddOrUpdateUnit.Create();
+            message.UnitId = self.Id;
             message.EntityTypes.Add(typeof(T).FullName);
             message.EntityBytes.Add(self.ToBson());
 

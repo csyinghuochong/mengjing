@@ -28,15 +28,14 @@ namespace ET.Server
                  logInfo = $"玩家 {unitName} 队伍{self.TeamId + 1} 占领了第{self.Position+1} {mineBattleConfig.Name}";
                  
                  ActorId chargeServerId = UnitCacheHelper.GetActivityServerId(self.Zone());
+                 M2A_PetMingBattleWinRequest M2A_PetMingBattleWinRequest = M2A_PetMingBattleWinRequest.Create();
+                 M2A_PetMingBattleWinRequest.MingType = self.MineType;
+                 M2A_PetMingBattleWinRequest.Postion = self.Position;
+                 M2A_PetMingBattleWinRequest.UnitID = self.MainUnit.Id;
+                 M2A_PetMingBattleWinRequest.TeamId = self.TeamId;
+                 M2A_PetMingBattleWinRequest.WinPlayer = unitName;
                  A2M_PetMingBattleWinResponse r_GameStatusResponse = (A2M_PetMingBattleWinResponse)await self.Root().GetComponent<MessageSender>().Call
-                     (chargeServerId, new M2A_PetMingBattleWinRequest()
-                     {
-                         MingType = self.MineType,
-                         Postion = self.Position,
-                         UnitID = self.MainUnit.Id,
-                         TeamId = self.TeamId,
-                         WinPlayer = unitName,
-                     });
+                     (chargeServerId, M2A_PetMingBattleWinRequest);
              }
          }
 
@@ -47,7 +46,7 @@ namespace ET.Server
              self.OnPetMingOccupy().Coroutine();
 
              long cdTime = result == CombatResultEnum.Win ? TimeHelper.Hour : TimeHelper.Minute * 10;
-             M2C_FubenSettlement m2C_FubenSettlement = new M2C_FubenSettlement();
+             M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
              m2C_FubenSettlement.BattleResult = result;
              m2C_FubenSettlement.StarInfos = result == CombatResultEnum.Win ?  new List<int>() { 1, 1, 1 } : new List<int>() { 0,0,0};
              MapMessageHelper.SendToClient(self.MainUnit, m2C_FubenSettlement);

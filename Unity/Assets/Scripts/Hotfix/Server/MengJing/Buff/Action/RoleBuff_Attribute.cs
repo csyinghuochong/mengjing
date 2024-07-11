@@ -162,7 +162,7 @@ namespace ET.Server
                     //buff來源者再次釋放技能
                     if (!buffS.TheUnitFrom.IsDisposed)
                     {
-                        C2M_SkillCmd cmd = new C2M_SkillCmd();
+                        C2M_SkillCmd cmd = C2M_SkillCmd.Create();
                         cmd.SkillID = buffS.mBuffConfig.buffParameterType;
                         cmd.TargetID = buffS.TheUnitBelongto.Id;
                         float3 direction = buffS.TheUnitBelongto.Position - buffS.TheUnitFrom.Position;

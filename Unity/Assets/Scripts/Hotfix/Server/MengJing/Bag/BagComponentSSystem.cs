@@ -781,7 +781,7 @@ namespace ET.Server
        useBagInfo.isBinging = bagInfo.isBinging;
        self.GetItemByLoc((ItemLocType)useBagInfo.Loc).Add(useBagInfo);
 
-       M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+       M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
        m2c_bagUpdate.BagInfoAdd.Add(useBagInfo);
        //通知客户端背包道具发生改变
        MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2c_bagUpdate);
@@ -1035,7 +1035,7 @@ namespace ET.Server
            //还没有插入完，需要开启新格子
            while (leftNum > 0)
            {
-               BagInfo useBagInfo = new BagInfo();
+               BagInfo useBagInfo = BagInfo.Create();
                useBagInfo.ItemID = itemID;
                useBagInfo.ItemNum = (leftNum > maxPileSum) ? maxPileSum : leftNum;
                useBagInfo.Loc = (int)itemLockType;
@@ -1113,7 +1113,7 @@ namespace ET.Server
                    }
 
 
-                   ItemXiLianResult itemXiLian = new ItemXiLianResult();
+                   ItemXiLianResult itemXiLian = ItemXiLianResult.Create();
                    if (itemCof.EquipType < 101) //装备洗炼
                    {
                        itemXiLian = XiLianHelper.XiLianItem(unit, useBagInfo, xilianType, xilianLevel, 0, 0,
@@ -1298,7 +1298,7 @@ namespace ET.Server
    public static bool OnCostItemData(this BagComponentS self, List<long> costItems, ItemLocType itemLocType = ItemLocType.ItemLocBag)
    {
        //通知客户端背包刷新
-       M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+       M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
 
        List<BagInfo> ItemTypeList = self.GetItemByLoc(itemLocType);
 
@@ -1324,7 +1324,7 @@ namespace ET.Server
    public static bool OnCostItemData(this BagComponentS self, long uid, int number)
    {
        //通知客户端背包刷新
-       M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+       M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
 
        List<BagInfo> ItemTypeList = self.GetItemByLoc(ItemLocType.ItemLocBag);
        for (int k = ItemTypeList.Count - 1; k >= 0; k--)
@@ -1367,7 +1367,7 @@ namespace ET.Server
 
        //通知客户端背包刷新
        Unit unit = self.GetParent<Unit>();
-       M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+       M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
        m2c_bagUpdate.BagInfoAdd = new List<BagInfo>();
 
        for (int i = costItems.Count - 1; i >= 0; i--)
@@ -1508,7 +1508,7 @@ namespace ET.Server
            return;
        }
        //通知客户端背包刷新
-       M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+       M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
        m2c_bagUpdate.BagInfoUpdate.Add(bagInfos[index]);
 
        //9@200103; 0.03; 0.03

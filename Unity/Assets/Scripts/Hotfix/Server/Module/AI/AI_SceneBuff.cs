@@ -28,8 +28,8 @@ namespace ET.Server
                 {
                     remove = true;
                     float3 direction = target.Position - unit.Position;
-                    
-                    C2M_SkillCmd cmd = new C2M_SkillCmd();
+
+                    C2M_SkillCmd cmd = C2M_SkillCmd.Create();
                     cmd.SkillID = monsterCof.ActSkillID;
                     cmd.TargetID = target.Id;
                     if (skillConfig.SkillZhishiTargetType == 1)  //自身点

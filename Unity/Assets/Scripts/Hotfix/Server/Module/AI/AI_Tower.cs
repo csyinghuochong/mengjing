@@ -22,7 +22,7 @@ namespace ET.Server
                 if (unit.IsDisposed)
                     return;
 
-                C2M_SkillCmd cmd = new C2M_SkillCmd();
+                C2M_SkillCmd cmd = C2M_SkillCmd.Create();
                 cmd.SkillID = monsterCof.ActSkillID;
                 //技能释放角度
                 cmd.TargetAngle = int.Parse(monsterCof.AIParameter);

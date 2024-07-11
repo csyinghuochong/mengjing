@@ -32,7 +32,7 @@ namespace ET.Server
                 }
 
                 chatInfoUnit.LastSendChat = serverTime;
-                M2C_SyncChatInfo m2C_SyncChatInfo = new M2C_SyncChatInfo();
+                M2C_SyncChatInfo m2C_SyncChatInfo = M2C_SyncChatInfo.Create();
                 request.ChatInfo.Time = TimeHelper.ServerNow();
                 request.ChatInfo.PlayerName = chatInfoUnit.Name;
                 m2C_SyncChatInfo.ChatInfo = request.ChatInfo;
@@ -75,9 +75,11 @@ namespace ET.Server
                         
                         break;
                     case (int)ChannelEnum.Team:
+                        C2T_GetTeamInfoRequest C2T_GetTeamInfoRequest = C2T_GetTeamInfoRequest.Create();
+                        C2T_GetTeamInfoRequest.UserID = request.ChatInfo.UserId;
                         ActorId teamServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.Zone(), "Team").ActorId;
                         T2C_GetTeamInfoResponse g_SendChatRequest1 = (T2C_GetTeamInfoResponse)await chatInfoUnit.Root().GetComponent<MessageSender>().Call
-                            (teamServerId, new C2T_GetTeamInfoRequest() { UserID = request.ChatInfo.UserId });
+                            (teamServerId, C2T_GetTeamInfoRequest);
 
                         ActorId gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.Zone(), "Gate1").ActorId;
                         G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = null;
@@ -85,11 +87,10 @@ namespace ET.Server
                         {
                             for (int i = 0; i < g_SendChatRequest1.TeamInfo.PlayerList.Count; i++)
                             {
+                                T2G_GateUnitInfoRequest t2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+                                t2G_GateUnitInfoRequest.UserID = g_SendChatRequest1.TeamInfo.PlayerList[i].UserID
                                 g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse) await chatInfoUnit.Root().GetComponent<MessageSender>().Call
-                                (gateServerId, new T2G_GateUnitInfoRequest()
-                                {
-                                    UserID = g_SendChatRequest1.TeamInfo.PlayerList[i].UserID
-                                });
+                                (gateServerId, t2G_GateUnitInfoRequest);
 
                                 if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
                                 {
@@ -115,12 +116,11 @@ namespace ET.Server
                         break;
 
                     case (int)ChannelEnum.Friend:
+                        T2G_GateUnitInfoRequest t2GGateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+                        t2GGateUnitInfoRequest.UserID = request.ChatInfo.ParamId;
                         gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.Zone(), "Gate1").ActorId;
                         g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await chatInfoUnit.Root().GetComponent<MessageSender>().Call
-                              (gateServerId, new T2G_GateUnitInfoRequest()
-                              {
-                                  UserID = request.ChatInfo.ParamId
-                              });
+                              (gateServerId, t2GGateUnitInfoRequest);
 
                         //发给好友()
                         if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
@@ -140,11 +140,10 @@ namespace ET.Server
                         }
 
                         //发给自己
+                        T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+                        T2G_GateUnitInfoRequest.UserID = request.ChatInfo.UserId;
                         g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await chatInfoUnit.Root().GetComponent<MessageSender>().Call
-                              (gateServerId, new T2G_GateUnitInfoRequest()
-                              {
-                                  UserID = request.ChatInfo.UserId
-                              });
+                              (gateServerId, T2G_GateUnitInfoRequest);
                         MapMessageHelper.SendToClient(chatInfoUnit.Root(), g2M_UpdateUnitResponse.SessionInstanceId, m2C_SyncChatInfo);
                         break;
                 }

@@ -47,7 +47,10 @@ namespace ET.Server
                 }
             }
 
-            MapMessageHelper.Broadcast(unit, new M2C_TurtleRewardMessage() {  UnitID = unit.Id, PlayerName = rewardName });
+            M2C_TurtleRewardMessage M2C_TurtleRewardMessage = M2C_TurtleRewardMessage.Create();
+            M2C_TurtleRewardMessage.UnitID = unit.Id;
+            M2C_TurtleRewardMessage.PlayerName = rewardName;
+            MapMessageHelper.Broadcast(unit, M2C_TurtleRewardMessage);
         }
 
         public async ETTask TurtleReport(AIComponent aiComponent)
@@ -56,7 +59,8 @@ namespace ET.Server
             //上报胜利
             Unit unit = aiComponent.GetParent<Unit>();
             ActorId activtiyserverid = UnitCacheHelper.GetActivityServerId(unit.Zone());
-            M2A_TurtleReportRequest request = new M2A_TurtleReportRequest() { TurtleId = unit.ConfigId };
+            M2A_TurtleReportRequest request = M2A_TurtleReportRequest.Create();
+            request.TurtleId = unit.ConfigId;
             A2M_TurtleReportResponse a2M_TurtleSupport = (A2M_TurtleReportResponse)await aiComponent.Root().GetComponent<MessageSender>().Call
                     (activtiyserverid, request);
 

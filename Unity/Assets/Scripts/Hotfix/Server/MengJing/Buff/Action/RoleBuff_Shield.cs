@@ -43,7 +43,7 @@ namespace ET.Server
 
                 if (skillId > 0)
                 {
-                    C2M_SkillCmd cmd = new C2M_SkillCmd();
+                    C2M_SkillCmd cmd = C2M_SkillCmd.Create();
                     cmd.SkillID = skillId;
                     cmd.TargetID = 0;
                     cmd.TargetAngle = (int)buffS.TheUnitBelongto.Rotation.value.y;

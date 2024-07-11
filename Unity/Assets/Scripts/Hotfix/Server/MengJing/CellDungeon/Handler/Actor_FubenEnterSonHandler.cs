@@ -20,7 +20,7 @@ namespace ET.Server
                 unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.PiLao, "-1");
             }
 
-            SonFubenInfo enterFubenInfo = new SonFubenInfo();
+            SonFubenInfo enterFubenInfo = SonFubenInfo.Create();
             enterFubenInfo.SonSceneId = fubenCellInfoNext.sonid;
             enterFubenInfo.PassableFlag = fubenComponent.GetPassableFlag();
             enterFubenInfo.CurrentCell = fubenComponent.GetCellIndex(fubenCellInfoNext.row, fubenCellInfoNext.line);

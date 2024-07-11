@@ -78,7 +78,7 @@ namespace ET.Server
             long serverTime = TimeHelper.ServerNow();
             for (int i = 0; i < winPlayers.Count; i++)
             {
-                MailInfo mailInfo = new MailInfo();
+                MailInfo mailInfo = MailInfo.Create();
                 mailInfo.Status = 0;
                 mailInfo.Context = "战场奖励";
                 mailInfo.Title = "战场奖励";
@@ -94,7 +94,11 @@ namespace ET.Server
 
                     int itemId = int.Parse(itemInfo[0]);
                     int itemNum = int.Parse(itemInfo[1]);
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.BattleWin}_{serverTime}" });
+                    BagInfo BagInfo = BagInfo.Create();
+                    BagInfo.ItemID = itemId;
+                    BagInfo.ItemNum = itemNum;
+                    BagInfo.GetWay = $"{ItemGetWay.BattleWin}_{serverTime}";
+                    mailInfo.ItemList.Add(BagInfo);
                 }
 
                 Unit unit = self.Scene().GetComponent<UnitComponent>().Get(winPlayers[i]);

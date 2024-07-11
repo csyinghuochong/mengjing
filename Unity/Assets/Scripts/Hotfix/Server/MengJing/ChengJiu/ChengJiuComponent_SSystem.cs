@@ -217,7 +217,7 @@ namespace ET.Server
         public static void TriggerEvent(this ChengJiuComponentS self, ChengJiuTargetEnum chengJiuTarget, int target_id, int target_value = 1)
         {
             int chengJiuTargetInt = (int)chengJiuTarget;
-            List<int> chengjiuList = null;/// ChengJiuConfigCategory.Instance.GetChengJiuTargetData(chengJiuTargetInt);
+            List<int> chengjiuList = ChengJiuConfigCategory.Instance.GetChengJiuTargetData(chengJiuTargetInt);
             if (chengjiuList == null)
             {
                 return;
@@ -242,7 +242,9 @@ namespace ET.Server
                     continue;
                 }
 
-                self.ChengJiuProgessList.Add(new ChengJiuInfo() { ChengJiuID = chengjiuList[i] });
+                ChengJiuInfo ChengJiuInfo = ChengJiuInfo.Create();
+                ChengJiuInfo.ChengJiuID = chengjiuList[i];
+                self.ChengJiuProgessList.Add(ChengJiuInfo);
             }
 
             for (int i = self.ChengJiuProgessList.Count - 1; i >= 0; i--)
@@ -322,7 +324,9 @@ namespace ET.Server
 
                 if (acitiveId > 0 && !self.GetParent<UserInfoComponentS>().IsRobot())
                 {
-                    MapMessageHelper.SendToClient(self.GetParent<Unit>(), new M2C_ChengJiuActiveMessage() { ChengJiuId = acitiveId });
+                    M2C_ChengJiuActiveMessage M2C_ChengJiuActiveMessage = M2C_ChengJiuActiveMessage.Create();
+                    M2C_ChengJiuActiveMessage.ChengJiuId = acitiveId;
+                    MapMessageHelper.SendToClient(self.GetParent<Unit>(), M2C_ChengJiuActiveMessage);
                 }
             }
         }

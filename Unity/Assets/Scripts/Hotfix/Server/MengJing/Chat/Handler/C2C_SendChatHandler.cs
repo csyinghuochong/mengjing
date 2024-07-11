@@ -71,9 +71,11 @@
                 case (int)ChannelEnum.Team:
                     ActorId teamServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.Zone(), "Team")
                             .ActorId;
+
+                    C2T_GetTeamInfoRequest C2T_GetTeamInfoRequest = C2T_GetTeamInfoRequest.Create();
+                    C2T_GetTeamInfoRequest.UserID = request.ChatInfo.UserId;
                     T2C_GetTeamInfoResponse g_SendChatRequest1 =
-                            (T2C_GetTeamInfoResponse)await root.GetComponent<MessageSender>().Call(teamServerId,
-                                new C2T_GetTeamInfoRequest() { UserID = request.ChatInfo.UserId });
+                            (T2C_GetTeamInfoResponse)await root.GetComponent<MessageSender>().Call(teamServerId,C2T_GetTeamInfoRequest );
 
                     ActorId gateServerId = UnitCacheHelper.GetGateServerId(chatInfoUnit.Zone());
                     G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = null;
@@ -81,8 +83,9 @@
                     {
                         for (int i = 0; i < g_SendChatRequest1.TeamInfo.PlayerList.Count; i++)
                         {
-                            g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await root.GetComponent<MessageSender>().Call(gateServerId,
-                                new T2G_GateUnitInfoRequest() { UserID = g_SendChatRequest1.TeamInfo.PlayerList[i].UserID });
+                            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+                            T2G_GateUnitInfoRequest.UserID = g_SendChatRequest1.TeamInfo.PlayerList[i].UserID;
+                            g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await root.GetComponent<MessageSender>().Call(gateServerId, T2G_GateUnitInfoRequest);
                     
                             if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
                             {
@@ -111,10 +114,11 @@
 
                 case (int)ChannelEnum.Friend:
                 {
+                    T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+                    T2G_GateUnitInfoRequest.UserID = request.ChatInfo.ParamId;
                     gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.Zone(), "Gate1").ActorId;
                     G2T_GateUnitInfoResponse g2TGateUnitInfoResponse = (G2T_GateUnitInfoResponse)await root.GetComponent<MessageSender>().Call(
-                        gateServerId,
-                        new T2G_GateUnitInfoRequest() { UserID = request.ChatInfo.ParamId });
+                        gateServerId,  T2G_GateUnitInfoRequest);
                     
                     //发给好友
                     if (g2TGateUnitInfoResponse.PlayerState == (int)PlayerState.Game && g2TGateUnitInfoResponse.SessionInstanceId > 0)
@@ -133,9 +137,10 @@
                         }
                     }
 
+                    T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+                    T2G_GateUnitInfoRequest.UserID = request.ChatInfo.UserId;
                     //发给自己
-                    g2TGateUnitInfoResponse = (G2T_GateUnitInfoResponse)await root.GetComponent<MessageSender>().Call(gateServerId,
-                        new T2G_GateUnitInfoRequest() { UserID = request.ChatInfo.UserId });
+                    g2TGateUnitInfoResponse = (G2T_GateUnitInfoResponse)await root.GetComponent<MessageSender>().Call(gateServerId,T2G_GateUnitInfoRequest);
                     messageLocationSenderComponent.Get(LocationType.GateSession).Send(g2TGateUnitInfoResponse.SessionInstanceId, m2C_SyncChatInfo);
                     break;
                 }

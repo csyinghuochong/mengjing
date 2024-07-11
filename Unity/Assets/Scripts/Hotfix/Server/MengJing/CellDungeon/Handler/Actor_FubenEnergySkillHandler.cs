@@ -24,7 +24,8 @@ namespace ET.Server
                         skills.Add(e_skillid);
                     }
                 }
-                C2M_SkillCmd cmd = new C2M_SkillCmd();
+
+                C2M_SkillCmd cmd = C2M_SkillCmd.Create();
                 cmd.SkillID = skills[RandomHelper.RandomNumber(0, skills.Count)];
                 cmd.TargetAngle = 0;
                 cmd.TargetID = unit.Id;

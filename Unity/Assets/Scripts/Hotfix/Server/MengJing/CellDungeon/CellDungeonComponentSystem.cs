@@ -15,8 +15,8 @@ namespace ET.Server
 
         public static void InitFubenCell(this CellDungeonComponent self, int chapterid)
         {
-            self.FubenInfo = new FubenInfo();
-            self.SonFubenInfo = new SonFubenInfo();
+            self.FubenInfo = FubenInfo.Create();
+            self.SonFubenInfo = SonFubenInfo.Create();
 
             self.ChapterConfig = ChapterConfigCategory.Instance.Get(chapterid);
             self.ChapterId = chapterid;
