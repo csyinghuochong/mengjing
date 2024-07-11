@@ -45,15 +45,17 @@ namespace ET.Server
         {
             Scene root = scene.Root();
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(scene.Zone());
-            Other2UnitCache_GetUnit message = new Other2UnitCache_GetUnit() { UnitId = unitId };
+            Other2UnitCache_GetUnit message = Other2UnitCache_GetUnit.Create();
+            message.UnitId = unitId;
+            
             UnitCache2Other_GetUnit queryUnit = (UnitCache2Other_GetUnit)await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message);
             if (queryUnit.Error != ErrorCode.ERR_Success || queryUnit.EntityList.Count <= 0)
             {
                 return null;
             }
 
-            int indexOf = queryUnit.ComponentNameList.IndexOf(typeof(Unit).FullName);
-             Unit unit = queryUnit.EntityList[indexOf] as Unit;
+             int indexOf = queryUnit.ComponentNameList.IndexOf(typeof(Unit).FullName);
+             Unit unit = queryUnit.EntityList[indexOf];
              UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
              // if (unit == null)
              // {
@@ -88,7 +90,8 @@ namespace ET.Server
             Scene root = scene.Root();
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(scene.Zone());
 
-            Other2UnitCache_GetUnit message = new Other2UnitCache_GetUnit() { UnitId = unitId };
+            Other2UnitCache_GetUnit message = Other2UnitCache_GetUnit.Create();
+            message.UnitId = unitId;
             message.ComponentNameList.Add(typeof(T).FullName);
 
             UnitCache2Other_GetUnit queryUnit = (UnitCache2Other_GetUnit)await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message);
@@ -107,12 +110,12 @@ namespace ET.Server
         public static async ETTask<T> GetComponentCache<T>(Scene root,  long unitId) where T : Entity
         {
             ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(root.Zone());
+
+            Other2UnitCache_GetComponent other2UnitCacheGetComponent = Other2UnitCache_GetComponent.Create();
+            other2UnitCacheGetComponent.UnitId = unitId;
+            other2UnitCacheGetComponent.Component = typeof(T).FullName;
             UnitCache2Other_GetComponent d2GGetUnit = (UnitCache2Other_GetComponent)await root.GetComponent<MessageSender>().Call(dbCacheId,
-                new Other2UnitCache_GetComponent() 
-                { 
-                    UnitId = unitId,
-                    Component = typeof(T).FullName
-                });
+                other2UnitCacheGetComponent);
 
             if (d2GGetUnit.Error == ErrorCode.ERR_Success && d2GGetUnit.Component != null)
             {
@@ -123,10 +126,7 @@ namespace ET.Server
         
         public static async ETTask SaveComponentCache(Scene root,  Entity entity)
         {
-            Other2UnitCache_AddOrUpdateUnit addOrUpdateUnit = new Other2UnitCache_AddOrUpdateUnit()
-            {
-
-            };
+            Other2UnitCache_AddOrUpdateUnit addOrUpdateUnit = Other2UnitCache_AddOrUpdateUnit.Create();
             addOrUpdateUnit.UnitId = entity.Id;
             addOrUpdateUnit.EntityTypes.Add(entity.GetType().FullName);
             addOrUpdateUnit.EntityBytes.Add(entity.ToBson());

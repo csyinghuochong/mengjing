@@ -21,15 +21,16 @@ namespace ET.Server
         {
             List<Unit> players = FubenHelp.GetUnitList(self.Scene(), UnitType.Player);
             
-            List<Unit> units = self.Root().GetComponent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = self.Root().GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
-                AIComponent aIComponent = units[i].GetComponent<AIComponent>();
+                Unit unit = units[i];
+                AIComponent aIComponent =unit.GetComponent<AIComponent>();
 
                 aIComponent?.Stop();
             }
 
-            M2C_FubenSettlement m2C_FubenSettlement = new M2C_FubenSettlement();
+            M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
             bool allMonsterDead = FubenHelp.IsAllMonsterDead(self.Scene(), players[0]);
             int alivedPetNumber = FubenHelp.GetAlivePetNumber(self.Scene());
             int number = 0;

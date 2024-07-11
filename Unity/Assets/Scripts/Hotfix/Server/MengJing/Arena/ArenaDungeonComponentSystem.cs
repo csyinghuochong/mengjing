@@ -210,16 +210,18 @@ namespace ET.Server
         /// <param name="self"></param>
         public static void KickOutPlayer(this ArenaDungeonComponent self)
         {
-            C2M_TransferMap actor_Transfer = new C2M_TransferMap() { SceneType = SceneTypeEnum.MainCityScene, };
-            List<Unit> units = self.Scene().GetComponent<UnitComponent>().GetAll();
+            C2M_TransferMap actor_Transfer = C2M_TransferMap.Create();
+            actor_Transfer.SceneType = SceneTypeEnum.MainCityScene;
+            List<EntityRef<Unit>> units = self.Scene().GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
-                if (units[i].Type != UnitType.Player)
+                Unit unit = units[i];
+                if (unit.Type != UnitType.Player)
                 {
                     continue;
                 }
 
-                if (units[i].IsDisposed || units[i].IsRobot())
+                if (unit.IsDisposed || unit.IsRobot())
                 {
                     continue;
                 }

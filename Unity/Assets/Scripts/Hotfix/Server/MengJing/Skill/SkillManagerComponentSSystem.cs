@@ -47,8 +47,7 @@ namespace ET.Server
           {
               Unit unit = self.GetParent<Unit>();
               List<SkillInfo> skillInfos = new List<SkillInfo>();
-
-              SkillInfo skillInfo = new SkillInfo();
+              
               SkillConfig skillConfig = SkillConfigCategory.Instance.Get(weaponSkill);
 
               Unit target = unit.GetParent<UnitComponent>().Get(skillcmd.TargetID);
@@ -57,7 +56,7 @@ namespace ET.Server
               {
                   case (int)SkillTargetType.SelfPosition:
                   case (int)SkillTargetType.SelfFollow:
-                      skillInfo = new SkillInfo();
+                      SkillInfo skillInfo = SkillInfo.Create();
                       skillInfo.WeaponSkillID = weaponSkill;
                       skillInfo.PosX = unit.Position.x;
                       skillInfo.PosY = unit.Position.y;
@@ -67,7 +66,7 @@ namespace ET.Server
                       skillInfos.Add(skillInfo);
                       break;
                   case (int)SkillTargetType.TargetPositon:
-                      skillInfo = new SkillInfo();
+                      SkillInfo skillInfo = SkillInfo.Create();
                       skillInfo.WeaponSkillID = weaponSkill;
                       skillInfo.PosX = target != null ? target.Position.x : unit.Position.x;
                       skillInfo.PosY = target != null ? target.Position.y : unit.Position.y;
@@ -80,6 +79,7 @@ namespace ET.Server
                       float3 sourcePoint = unit.Position;
                       quaternion rotation = quaternion.Euler(0, skillcmd.TargetAngle, 0);
                       float3 targetPoint = sourcePoint + math.mul(rotation , new float3(0,1,0)) * skillcmd.TargetDistance;
+                      SkillInfo skillInfo = SkillInfo.Create();
                       skillInfo.WeaponSkillID = weaponSkill;
                       skillInfo.PosX = targetPoint.x;
                       skillInfo.PosY = targetPoint.y;
@@ -113,7 +113,7 @@ namespace ET.Server
                            skillNumber = RandomHelper.RandomNumber(1, randomNumber);
                           for (int i = 0; i < skillNumber; i++)
                           {
-                              skillInfo = new SkillInfo();
+                              SkillInfo skillInfo = SkillInfo.Create();
                               skillInfo.WeaponSkillID = randomSkillId;
                               skillInfo.TargetID = skillcmd.TargetID;
                               skillInfo.PosX = unit.Position.x + RandomHelper.RandomNumberFloat(-1 * randomRange, randomRange);
@@ -140,7 +140,7 @@ namespace ET.Server
 
                       for (int i = 0; i < skillNumber; i++)
                       {
-                          skillInfo = new SkillInfo();
+                          SkillInfo skillInfo = SkillInfo.Create();
                           skillInfo.WeaponSkillID = randomSkillId;
                           skillInfo.PosX = target == null ? unit.Position.x : target.Position.x + RandomHelper.RandomNumberFloat(-1 * randomRange, randomRange);
                           skillInfo.PosY = target == null ? unit.Position.y : target.Position.y;
@@ -168,7 +168,7 @@ namespace ET.Server
 
                       for (int i = 0; i < skillNumber; i++)
                       {
-                          skillInfo = new SkillInfo();
+                          SkillInfo skillInfo = SkillInfo.Create();
                           skillInfo.WeaponSkillID = randomSkillId;
                           skillInfo.PosX = targetPoint.x + RandomHelper.RandomNumberFloat(-1 * randomRange, randomRange);
                           skillInfo.PosY = targetPoint.y;
@@ -192,7 +192,7 @@ namespace ET.Server
 
                       for (int i = 0; i < skillNumber; i++)
                       {
-                          skillInfo = new SkillInfo();
+                          SkillInfo skillInfo = SkillInfo.Create();
                           skillInfo.WeaponSkillID = randomSkillId;
                           skillInfo.PosX = target == null ? unit.Position.x : target.Position.x;
                           skillInfo.PosY = target == null ? unit.Position.y : target.Position.y;
@@ -210,7 +210,7 @@ namespace ET.Server
                       }
                       break;
                   case (int)SkillTargetType.SelfOnly:
-                      skillInfo = new SkillInfo();
+                      SkillInfo skillInfo = SkillInfo.Create();
                       skillInfo.WeaponSkillID = weaponSkill;
                       skillInfo.PosX = unit.Position.x;
                       skillInfo.PosY = unit.Position.y;
@@ -238,7 +238,7 @@ namespace ET.Server
                           }
                           float3 direction = targetUnit.Position - unit.Position;
                           float ange = math.atan2(direction.x, direction.z) * 3.14f;
-                          skillInfo = new SkillInfo();
+                          SkillInfo skillInfo = SkillInfo.Create();
                           skillInfo.WeaponSkillID = weaponSkill;
                           skillInfo.PosX = targetUnit.Position.x;
                           skillInfo.PosY = targetUnit.Position.y;
@@ -251,7 +251,7 @@ namespace ET.Server
                   case (int)SkillTargetType.TargetOnly:
                       if (target != null)
                       {
-                          skillInfo = new SkillInfo();
+                          SkillInfo skillInfo = SkillInfo.Create();
                           skillInfo.WeaponSkillID = weaponSkill;
                           skillInfo.PosX = target.Position.x;
                           skillInfo.PosY = target.Position.y;
@@ -262,7 +262,7 @@ namespace ET.Server
                       }
                       else if (target == null && skillConfig.SkillActType == 0)
                       {
-                          skillInfo = new SkillInfo();
+                          SkillInfo skillInfo = SkillInfo.Create();
                           skillInfo.TargetAngle = (int)math.forward(unit.Rotation).y;
                           SkillConfig skillConfig1 = SkillConfigCategory.Instance.Get(weaponSkill);
                           float3 targetPosition = unit.Position + math.mul(unit.Rotation , new float3(0,1,0)) * (float)skillConfig1.SkillRangeSize;

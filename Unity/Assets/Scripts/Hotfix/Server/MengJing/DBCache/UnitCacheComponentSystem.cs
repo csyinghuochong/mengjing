@@ -43,8 +43,9 @@ namespace ET.Server
         [EntitySystem]
         private static void Destroy(this UnitCacheComponent self)
         {
-            foreach (var unitCache in self.UnitCaches.Values)
+            foreach (var item in self.UnitCaches.Values)
             {
+                UnitCache unitCache = item;
                 unitCache?.Dispose();
             }
             self.UnitCaches.Clear();
@@ -52,25 +53,33 @@ namespace ET.Server
 
         public static async ETTask<Entity> Get(this UnitCacheComponent self, long unitId, string key)
         {
-            if (!self.UnitCaches.TryGetValue(key, out UnitCache unitCache))
+            UnitCache unitCache_2 = null;
+            if (!self.UnitCaches.TryGetValue(key, out EntityRef<UnitCache> unitCache))
             {
                 unitCache = self.AddChild<UnitCache>();
-                unitCache.SetKey( key );
+                unitCache_2 = unitCache;
+                unitCache_2.SetKey( key );
                 self.UnitCaches.Add(key, unitCache);
             }
-            return await unitCache.Get(unitId);
+            
+            unitCache_2 = unitCache;
+            return await unitCache_2.Get(unitId);
         }
 
 
         public static async ETTask<T> Get<T>(this UnitCacheComponent self, long unitId) where T : Entity
         {
             string key = typeof(T).Name;
-
-            if (!self.UnitCaches.TryGetValue(key, out UnitCache unitCache))
+            UnitCache unitCache;
+            if (!self.UnitCaches.TryGetValue(key, out EntityRef<UnitCache> refunitCache))
             {
                 unitCache = self.AddChild<UnitCache>();
                 unitCache.key = key;
                 self.UnitCaches.Add(key, unitCache);
+            }
+            else
+            {
+                unitCache = refunitCache;
             }
             return await unitCache.Get(unitId) as T;
         }
@@ -82,12 +91,18 @@ namespace ET.Server
                 foreach (Entity entity in entityList)
                 {
                     string key = entity.GetType().FullName;
-                    if (!self.UnitCaches.TryGetValue(key, out UnitCache unitCache))
+                    UnitCache unitCache;
+                    if (!self.UnitCaches.TryGetValue(key, out EntityRef<UnitCache> refunitCache))
                     {
                         unitCache = self.AddChild<UnitCache>();
                         unitCache.key = key;
                         self.UnitCaches.Add(key, unitCache);
                     }
+                    else
+                    {
+                        unitCache = refunitCache;
+                    }
+
                     unitCache.AddOrUpdate(entity);
                     list.Add(entity);
                 }

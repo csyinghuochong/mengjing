@@ -31,12 +31,13 @@ namespace ET.Server
                 self.CampKillNumber_1++;
             }
 
-            List<Unit> units = self.Scene().GetComponent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = self.Scene().GetComponent<UnitComponent>().GetAll();
             M2C_BattleInfoResult m2C_Battle = self.m2C_BattleInfoResult;
             m2C_Battle.SceneType = SceneTypeEnum.Battle;
             for (int i = 0; i < units.Count; i++)
             {
-                if (units[i].Type != UnitType.Player)
+                Unit unit = units[i];
+                if (unit.Type != UnitType.Player)
                 {
                     continue;
                 }

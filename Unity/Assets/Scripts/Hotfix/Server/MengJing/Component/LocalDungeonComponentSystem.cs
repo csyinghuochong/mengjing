@@ -49,10 +49,11 @@ namespace ET.Server
             if (userInfoComponent.GetUserLv() > 0 && !unit.IsSceneItem() && RandomHelper.RandFloat01() < 0.001f)
             {
                 int shenminId = 40000003;
-                List<Unit> npclist = self.MainUnit.GetParent<UnitComponent>().GetAll();
+                List<EntityRef<Unit>> npclist = self.MainUnit.GetParent<UnitComponent>().GetAll();
                 for (int i = 0; i < npclist.Count; i++)
                 {
-                    if (npclist[i].Type == UnitType.Npc && npclist[i].ConfigId == shenminId)
+                    Unit npc = npclist[i];
+                    if (npc.Type == UnitType.Npc && npc.ConfigId == shenminId)
                     {
                         shenminId = 0;
                     }
@@ -67,7 +68,7 @@ namespace ET.Server
 
         public static void OnCleanBossCD(this LocalDungeonComponent self)
         {
-            List<Unit> entities = self.Root().GetComponent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> entities = self.Root().GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < entities.Count; i++)
             {
                 Unit entity = entities[i];
@@ -78,7 +79,7 @@ namespace ET.Server
 
                 if (entity.GetComponent<NumericComponentS>().GetAsInt(NumericType.Now_Dead) == 1)
                 {
-                    //entity.GetComponent<HeroDataComponentServer>().OnRevive();
+                    entity.GetComponent<HeroDataComponentS>().OnRevive();
                 }
             }
         }

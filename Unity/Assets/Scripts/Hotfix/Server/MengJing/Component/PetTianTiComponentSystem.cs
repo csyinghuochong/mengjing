@@ -95,16 +95,17 @@ namespace ET.Server
 
          public static async ETTask OnGameOver(this PetTianTiComponent self, int result)
          {
-             List<Unit> units = self.Root().GetComponent<UnitComponent>().GetAll();
+             List<EntityRef<Unit>> units = self.Root().GetComponent<UnitComponent>().GetAll();
              for (int i = 0; i < units.Count; i++)
              {
-                 AIComponent aIComponent = units[i].GetComponent<AIComponent>();
+                 Unit unit = units[i];
+                 AIComponent aIComponent = unit.GetComponent<AIComponent>();
                  aIComponent?.Stop();
              }
 
              int rankid = await self.NoticeRankServer(result);
 
-             M2C_FubenSettlement m2C_FubenSettlement = new M2C_FubenSettlement();
+             M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
              m2C_FubenSettlement.BattleResult = result;
              if (result == CombatResultEnum.Win)
              {
@@ -171,7 +172,7 @@ namespace ET.Server
              {
                  int number_self = 0;
                  int number_enemy = 0;
-                 List<Unit> unitList = self.Scene().GetComponent<UnitComponent>().GetAll();
+                 List<EntityRef<Unit>> unitList = self.Scene().GetComponent<UnitComponent>().GetAll();
                  for(int i = 0; i < unitList.Count; i++)
                  {
                      Unit unit = unitList[i];    

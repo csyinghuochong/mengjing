@@ -35,11 +35,12 @@ namespace ET.Server
                 return;
             }
 
-            if (self.CacheCompoenntsDictionary.TryGetValue(entity.Id, out Entity oldEntity))
+            if (self.CacheCompoenntsDictionary.TryGetValue(entity.Id, out EntityRef<Entity> oldEntity))
             {
-                if (entity != oldEntity)
+                Entity oEntity = oldEntity;
+                if (entity != oEntity)
                 {
-                    oldEntity.Dispose();
+                    oEntity.Dispose();
                 }
 
                 self.CacheCompoenntsDictionary.Remove(entity.Id);
@@ -51,7 +52,7 @@ namespace ET.Server
         public static async ETTask<Entity> Get(this UnitCache self, long unitId)
         {
             Entity entity = null;
-            if (!self.CacheCompoenntsDictionary.TryGetValue(unitId, out entity))
+            if (!self.CacheCompoenntsDictionary.TryGetValue(unitId, out EntityRef<Entity> eentity))
             {
                 entity = await self.Root().GetComponent<DBManagerComponent>().GetZoneDB(self.Zone()).Query<Entity>(unitId, self.key);
                 if (entity != null)
@@ -59,13 +60,16 @@ namespace ET.Server
                     self.AddOrUpdate(entity);
                 }
             }
+
+            entity = eentity;
             return entity;
         }
 
         public static void Delete(this UnitCache self, long id)
         {
-            if (self.CacheCompoenntsDictionary.TryGetValue(id, out Entity entity))
+            if (self.CacheCompoenntsDictionary.TryGetValue(id, out EntityRef<Entity> refentity))
             {
+                Entity entity = refentity;
                 entity.Dispose();
                 self.CacheCompoenntsDictionary.Remove(id);
             }

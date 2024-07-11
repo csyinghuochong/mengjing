@@ -16,21 +16,22 @@ namespace ET.Server
             player.Dispose();
         }
         
-        public static Player GetByAccount(this PlayerComponent self,  string account)
+        public static EntityRef<Player> GetByAccount(this PlayerComponent self,  string account)
         {
-            self.dictionary.TryGetValue(account, out Player player);
+            self.dictionary.TryGetValue(account, out EntityRef<Player> player);
             return player;
         }
         
-        public static Player[] GetAll(this PlayerComponent self)
+        public static EntityRef<Player>[] GetAll(this PlayerComponent self)
         {
             return self.dictionary.Values.ToArray();
         }
         
         public static Player GetByUserId(this PlayerComponent self, long id)
         {
-            foreach (var player in self.dictionary.Values)
+            foreach (var item in self.dictionary.Values)
             {
+                Player player = item;
                 if (player.UnitId == id)
                 {
                     return player;

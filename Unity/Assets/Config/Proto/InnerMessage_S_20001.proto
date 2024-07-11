@@ -337,7 +337,7 @@ message Other2UnitCache_GetComponent // IRequest
 {
     int32 RpcId = 90;
     int64 ActorId = 93;
-	int64 UnitId = 1;
+	  int64 UnitId = 1;
     string Component = 2;
 }
 

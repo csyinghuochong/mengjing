@@ -50,7 +50,16 @@ namespace ET.Server
                 }
                 
                 response.ComponentNameList.AddRange(dictionary.Keys);
-                response.EntityList.AddRange(dictionary.Values);
+                foreach (var VARIABLE in dictionary.Values)
+                {
+                    response.EntityList.Add(VARIABLE.ToBson()  );
+                }
+
+                (int i = 0; i < dictionary.Values.Count; i++)
+                {
+                    Entity entity = dictionary.Values[i];
+                    response.EntityList.Add();
+                }
             }
             finally
             {

@@ -73,7 +73,7 @@ namespace ET.Server
             C2M_TransferMap actor_Transfer = new C2M_TransferMap() { SceneType = SceneTypeEnum.MainCityScene, };
 
             await self.Root().GetComponent<TimerComponent>().WaitAsync(TimeHelper.Minute);
-            List<Unit> units = fubnescene.GetComponent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = fubnescene.GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
                 if (units[i].Type != UnitType.Player)

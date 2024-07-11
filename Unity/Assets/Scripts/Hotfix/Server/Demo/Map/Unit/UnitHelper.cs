@@ -278,10 +278,11 @@ namespace ET.Server
         public static List<Unit> GetUnitList(Scene scene, int unitType)
         {
             List<Unit> list = new List<Unit>();
-            List<Unit> allunits = scene.GetComponent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> allunits = scene.GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < allunits.Count; i++)
             {
-                if (allunits[i].Type == unitType)
+                Unit unit = allunits[i];
+                if (unit.Type == unitType)
                 {
                     list.Add(allunits[i]);
                 }
@@ -427,10 +428,11 @@ namespace ET.Server
         public static List<Unit> GetAliveUnitList(Scene scene, int unitType)
         {
             List<Unit> units = new List<Unit>();
-            List<Unit> allunits = scene.GetComponent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> allunits = scene.GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < allunits.Count; i++)
             {
-                if (allunits[i].Type == unitType && allunits[i].GetComponent<NumericComponentS>().GetAsInt(NumericType.Now_Dead) == 0)
+                Unit unit = allunits[i];
+                if (unit.Type == unitType && unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.Now_Dead) == 0)
                 {
                     units.Add(allunits[i]);
                 }
@@ -441,15 +443,16 @@ namespace ET.Server
         public static List<Unit> GetUnitList(Scene scene, float3 position, int unitType, float distance)
         {
             List<Unit> units = new List<Unit>();
-            List<Unit> allunits = scene.GetComponent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> allunits = scene.GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < allunits.Count; i++)
             {
-                if (allunits[i].Type != unitType)
+                Unit unit = allunits[i];
+                if (unit.Type != unitType)
                 {
                     continue;
                 }
 
-                if (math.distance(allunits[i].Position, position) > distance)
+                if (math.distance(unit.Position, position) > distance)
                 {
                     continue;
                 }
@@ -484,14 +487,15 @@ namespace ET.Server
         public static int GetRealPlayer(Scene scene)
         {
             int realPlayer = 0;
-            List<Unit> allunits = scene.GetComponent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> allunits = scene.GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < allunits.Count; i++)
             {
-                if (allunits[i].Type != UnitType.Player)
+                Unit unit = allunits[i];
+                if (unit.Type != UnitType.Player)
                 {
                     continue;
                 }
-                if (allunits[i].GetComponent<UserInfoComponentS>().UserInfo.RobotId == 0)
+                if (unit.GetComponent<UserInfoComponentS>().UserInfo.RobotId == 0)
                 {
                     realPlayer++;
                 }
@@ -525,10 +529,11 @@ namespace ET.Server
         public static List<Unit> GetUnitListByCamp(Scene scene, int unitType, int camp)
         {
             List<Unit> units = new List<Unit>();
-            List<Unit> allunits = scene.GetComponent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> allunits = scene.GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < allunits.Count; i++)
             {
-                if (allunits[i].Type == unitType && allunits[i].GetBattleCamp() == camp)
+                Unit unit = allunits[i];
+                if (unit.Type == unitType && unit.GetBattleCamp() == camp)
                 {
                     units.Add(allunits[i]);
                 }

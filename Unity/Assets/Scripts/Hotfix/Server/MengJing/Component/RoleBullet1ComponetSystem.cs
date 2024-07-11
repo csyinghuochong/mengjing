@@ -69,7 +69,7 @@ namespace ET.Server
             }
 
             //获取当前全部的unit进行范围监测
-            List<Unit> units = unit.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = unit.GetParent<UnitComponent>().GetAll();
             self.SkillHandler.UpdateCheckPoint(unit.Position);
 
             //Log.Debug($"子弹位置： x: {unit.Position.x}  z: {unit.Position.z}");
