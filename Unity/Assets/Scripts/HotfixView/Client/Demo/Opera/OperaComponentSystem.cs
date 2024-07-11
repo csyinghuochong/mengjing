@@ -287,14 +287,14 @@ namespace ET.Client
 
             if (box.ConfigId == 83000101 || box.ConfigId == 83000102)
             {
-                // self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>().OnUpdateRubsh(box);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMenu>().OnUpdateRubsh(box);
                 return;
             }
 
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(box.ConfigId);
             if (monsterConfig.Parameter != null && monsterConfig.Parameter.Length > 0 && monsterConfig.Parameter[0] > 0)
             {
-                // self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgOpenChest>().UpdateInfo(box);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgOpenChest>().UpdateInfo(box);
             }
             else
             {
@@ -328,11 +328,11 @@ namespace ET.Client
 
         public static async ETTask OnClickUnitItem(this OperaComponent self, long unitid)
         {
-            // PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
-            // if (unitid == playerComponent.MyId)
-            // {
-            //     return;
-            // }
+            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            if (unitid == playerComponent.CurrentRoleId)
+            {
+                return;
+            }
 
             Unit unit = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(unitid);
             // if (unit.Type == UnitType.Stall)
@@ -394,8 +394,8 @@ namespace ET.Client
                 GameObject gameObject = colliderobj.transform.parent.gameObject;
                 string[] namelist = gameObject.name.Split('_');
                 int index = int.Parse(namelist[namelist.Length - 1]);
-                // UI uI = UIHelper.GetUI(self.ZoneScene(), UIType.UIJiaYuanMain);
-                // uI.GetComponent<UIJiaYuanMainComponent>()?.OnClickPlanItem(index).Coroutine();
+
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>()?.OnClickPlanItem(index).Coroutine();
                 return true;
             }
 
@@ -404,41 +404,39 @@ namespace ET.Client
 
         public static async ETTask OnClickMonsterItem(this OperaComponent self, long unitid)
         {
-            // MapComponent mapComponent = self.ZoneScene().GetComponent<MapComponent>();
-            // Unit unitmonster = self.DomainScene().GetComponent<UnitComponent>().Get(unitid);
-            // if (unitmonster == null)
-            // {
-            //     return;
-            // }
-            //
-            // if (unitmonster.Type == UnitType.Monster && unitmonster.MasterId == UnitHelper.GetMyUnitId(self.ZoneScene()))
-            // {
-            //     UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UICommonProperty);
-            //     ui.GetComponent<UICommonPropertyComponent>().InitPropertyShow(unitmonster).Coroutine();
-            //     return;
-            // }
-            //
-            // if (unitmonster.Type == UnitType.Monster)
-            // {
-            //     self.ZoneScene().GetComponent<LockTargetComponent>().LockTargetUnitId(unitid);
-            //     return;
-            // }
-            //
-            // if (unitmonster.Type == UnitType.Pet && mapComponent.SceneTypeEnum == SceneTypeEnum.JiaYuan)
-            // {
-            //     UI uI = UIHelper.GetUI(self.ZoneScene(), UIType.UIJiaYuanMain);
-            //     uI.GetComponent<UIJiaYuanMainComponent>().OnClickPet(unitid).Coroutine();
-            //     return;
-            // }
-            //
-            // if (unitmonster.Type == UnitType.Pasture)
-            // {
-            //     self.ZoneScene().GetComponent<LockTargetComponent>().LockTargetUnitId(unitid);
-            //     UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIJiaYuanMenu);
-            //     uI.GetComponent<UIJiaYuanMenuComponent>().OnUpdatePasture(unitmonster);
-            //     return;
-            // }
-            await ETTask.CompletedTask;
+            MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+            Unit unitmonster = self.Scene().GetComponent<UnitComponent>().Get(unitid);
+            if (unitmonster == null)
+            {
+                return;
+            }
+
+            if (unitmonster.Type == UnitType.Monster && unitmonster.MasterId == UnitHelper.GetMyUnitId(self.Root()))
+            {
+                // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UICommonProperty);
+                // ui.GetComponent<UICommonPropertyComponent>().InitPropertyShow(unitmonster).Coroutine();
+                return;
+            }
+
+            if (unitmonster.Type == UnitType.Monster)
+            {
+                self.Root().GetComponent<LockTargetComponent>().LockTargetUnitId(unitid);
+                return;
+            }
+
+            if (unitmonster.Type == UnitType.Pet && mapComponent.SceneType == SceneTypeEnum.JiaYuan)
+            {
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>().OnClickPet(unitid).Coroutine();
+                return;
+            }
+
+            if (unitmonster.Type == UnitType.Pasture)
+            {
+                self.Root().GetComponent<LockTargetComponent>().LockTargetUnitId(unitid);
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanMenu);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMenu>().OnUpdatePasture(unitmonster);
+                return;
+            }
         }
 
         public static bool CheckNpc(this OperaComponent self)
