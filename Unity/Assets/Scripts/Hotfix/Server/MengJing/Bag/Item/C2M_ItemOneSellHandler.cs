@@ -9,7 +9,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_ItemOneSellRequest request, M2C_ItemOneSellResponse response)
         {
-            M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+            M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
 
             for (int i = 0; i < request.BagInfoIds.Count; i++)
             {

@@ -112,7 +112,7 @@ namespace ET.Server
                 }
 
                 //通知客户端背包刷新
-                M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+                M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
 
                 //获取之前的位置是否有装备
                 ItemLocType toLocType = findIndex == 0 ? ItemLocType.ItemLocEquip : ItemLocType.ItemLocEquip_2;
@@ -164,7 +164,7 @@ namespace ET.Server
                     return;
                 }
                 //通知客户端背包刷新
-                M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+                M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
 
                 unit.GetComponent<BagComponentS>().OnChangeItemLoc(useBagInfo, ItemLocType.ItemLocBag, beloc);
                 unit.GetComponent<SkillSetComponentS>().OnTakeOffEquip(beloc, useBagInfo);

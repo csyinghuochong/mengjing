@@ -19,7 +19,7 @@ namespace ET.Server
                 }
             }
 
-            MailInfo mailInfo = new MailInfo();
+            MailInfo mailInfo = MailInfo.Create();
             mailInfo.Status = 0;
             mailInfo.Context = $"首杀奖励";
             mailInfo.Title = "首杀奖励";

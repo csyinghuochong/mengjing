@@ -18,7 +18,7 @@ namespace ET.Server
                 LockStepUnitInfo.Position = lsUnit.Position;
                 LockStepUnitInfo.Rotation = lsUnit.Rotation;
                 
-                response.UnitInfos.Add(nLockStepUnitInfo);    
+                response.UnitInfos.Add(LockStepUnitInfo);    
             }
 
             response.Frame = room.AuthorityFrame;

@@ -28,12 +28,11 @@ namespace ET.Server
                         continue;
                     }
 
-                    BattleSummonList.Add(new BattleSummonInfo()
-                    {
-                        SummonId = battleSummonInfos[i].Id,
-                        SummonTime = unit.Scene().GetComponent<BattleDungeonComponent>().BattleOpenTime,
-                        SummonNumber = 0
-                    });
+                    BattleSummonInfo BattleSummonInfo = BattleSummonInfo.Create();
+                    BattleSummonInfo.SummonId = battleSummonInfos[i].Id;
+                    BattleSummonInfo.SummonTime = unit.Scene().GetComponent<BattleDungeonComponent>().BattleOpenTime;
+                    BattleSummonInfo.SummonNumber = 0;
+                    BattleSummonList.Add(BattleSummonInfo);
                 }
             }
 

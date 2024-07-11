@@ -137,7 +137,7 @@ namespace ET.Server
 
             for (int i = 0; i < players.Count; i++)
             {
-                MailInfo mailInfo = new MailInfo();
+                MailInfo mailInfo = MailInfo.Create();
                 mailInfo.Status = 0;
                 mailInfo.Title = "角斗场排名奖励";
                 mailInfo.MailId = IdGenerater.Instance.GenerateId();
@@ -162,7 +162,11 @@ namespace ET.Server
 
                     int itemId = int.Parse(itemInfo[0]);
                     int itemNum = int.Parse(itemInfo[1]);
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.ArenaWin}_{serverTime}" });
+                    BagInfo BagInfo = BagInfo.Create();
+                    BagInfo.ItemID = itemId;
+                    BagInfo.ItemNum = itemNum;
+                    BagInfo.GetWay = $"{ItemGetWay.ArenaWin}_{serverTime}";
+                    mailInfo.ItemList.Add(BagInfo);
                 }
 
                 MailHelp.SendUserMail(self.Root(), players[i].UnitId, mailInfo).Coroutine();

@@ -39,7 +39,7 @@ namespace ET.Server
                     unit.GetComponent<SkillSetComponentS>().OnWearEquip(bagInfo);
             }
 
-            M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+            M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
             //通知客户端背包道具发生改变
             m2c_bagUpdate.BagInfoUpdate.Add(bagInfo);
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);

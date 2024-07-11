@@ -19,7 +19,7 @@ namespace ET.Server
                 return;
             }
 
-            M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+            M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
 
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
 

@@ -170,7 +170,7 @@ namespace ET.Server
    {
        List<BagInfo> ItemTypeList = self.GetItemByLoc(itemEquipType);
 
-       M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+       M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
 
 
        Dictionary<int, List<BagInfo>> ItemSameList_1 = new Dictionary<int, List<BagInfo>>();
@@ -738,7 +738,7 @@ namespace ET.Server
        {
            self.BagItemList.Add(bagInfo);
 
-           M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+           M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
            m2c_bagUpdate.BagInfoAdd.Add(bagInfo);
            //通知客户端背包道具发生改变
            MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2c_bagUpdate);
@@ -750,7 +750,7 @@ namespace ET.Server
 
    public static void OnAddItemToStore(this BagComponentS self, int itemlockType, int itemid, int itemnumber, string getType)
    {
-       BagInfo useBagInfo = new BagInfo();
+       BagInfo useBagInfo = BagInfo.Create();
        useBagInfo.ItemID = itemid;
        useBagInfo.ItemNum = itemnumber;
        useBagInfo.Loc = itemlockType;
@@ -760,7 +760,7 @@ namespace ET.Server
        useBagInfo.GetWay = getType;
        self.GetItemByLoc((ItemLocType)useBagInfo.Loc).Add(useBagInfo);
 
-       M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+       M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
        m2c_bagUpdate.BagInfoAdd.Add(useBagInfo);
        //通知客户端背包道具发生改变
        MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2c_bagUpdate);
@@ -769,7 +769,7 @@ namespace ET.Server
    public static void OnAddItemDataNewCell(this BagComponentS self, BagInfo bagInfo, int itemnumber)
    {
        int itemid = bagInfo.ItemID;
-       BagInfo useBagInfo = new BagInfo();
+       BagInfo useBagInfo = BagInfo.Create();
        useBagInfo.ItemID = itemid;
        useBagInfo.ItemNum = itemnumber;
        ItemConfig itemCof = ItemConfigCategory.Instance.Get(itemid);

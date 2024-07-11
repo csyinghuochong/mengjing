@@ -104,7 +104,7 @@ namespace ET.Server
                     bagInfo.HideSkillLists = itemXiLian.HideSkillLists;                      //隐藏技能
                     bagInfo.XiLianHideTeShuProLists = itemXiLian.XiLianHideTeShuProLists;    //特殊属性洗炼
 
-                    M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+                    M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
                     //通知客户端背包道具发生改变
                     m2c_bagUpdate.BagInfoUpdate.Add(bagInfo);
                     MapMessageHelper.SendToClient(unit, m2c_bagUpdate);

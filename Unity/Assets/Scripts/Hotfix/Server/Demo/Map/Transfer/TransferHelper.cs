@@ -487,8 +487,11 @@ namespace ET.Server
                         sceneTypeEnum = mapComponent.SceneType;
                         mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(unit.Zone(), "Team").ActorId;
                         //[创建副本Scene]
+
+                        M2T_TeamDungeonEnterRequest M2T_TeamDungeonEnterRequest = M2T_TeamDungeonEnterRequest.Create();
+                        M2T_TeamDungeonEnterRequest.UserID = unit.GetComponent<UserInfoComponentS>().UserInfo.UserId;
                         T2M_TeamDungeonEnterResponse createUnit = (T2M_TeamDungeonEnterResponse)await unit.Root().GetComponent<MessageSender>().Call(
-                        mapInstanceId, new M2T_TeamDungeonEnterRequest() { UserID = unit.GetComponent<UserInfoComponentS>().UserInfo.UserId });
+                        mapInstanceId, M2T_TeamDungeonEnterRequest);
                         if (createUnit.Error != ErrorCode.ERR_Success)
                         {
                             return ErrorCode.ERR_TransferFailError;
@@ -677,12 +680,11 @@ namespace ET.Server
             {
                 sceneType = scene.GetComponent<MapComponent>().SceneType;
             }
-            M2F_FubenCenterOperateRequest request = new M2F_FubenCenterOperateRequest()
-            {
-                SceneType = sceneType,
-                OperateType = operateType,
-                FubenInstanceId = scene.InstanceId
-            };
+
+            M2F_FubenCenterOperateRequest request = M2F_FubenCenterOperateRequest.Create();
+            request.SceneType = sceneType;
+            request.OperateType = operateType;
+            request.FubenInstanceId = scene.InstanceId;
             F2M_FubenCenterOpenResponse response = (F2M_FubenCenterOpenResponse)await scene.Root().GetComponent<MessageSender>().Call(fubencenterId, request);
             if (operateType == 1)
             { 

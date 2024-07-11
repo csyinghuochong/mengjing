@@ -77,12 +77,11 @@ namespace ET.Server
             
             if (!have)
             {
-                BattleSummonList.Add( new BattleSummonInfo()
-                { 
-                    SummonId = request.SummonId,
-                    SummonTime = TimeHelper.ServerNow(),
-                    SummonNumber = 1
-                });
+                BattleSummonInfo BattleSummonInfo = BattleSummonInfo.Create();
+                BattleSummonInfo.SummonId = request.SummonId;
+                BattleSummonInfo.SummonTime = TimeHelper.ServerNow();
+                BattleSummonInfo.SummonNumber = 1;
+                BattleSummonList.Add( BattleSummonInfo);
             }
 
             //发兵

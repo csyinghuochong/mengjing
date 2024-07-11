@@ -52,7 +52,7 @@ namespace ET.Server
                 bagComponent.FashionEquipList.Remove(request.FashionId);
             }
 
-            M2C_FashionUpdate m2C_FashionUpdate = new M2C_FashionUpdate();
+            M2C_FashionUpdate m2C_FashionUpdate = M2C_FashionUpdate.Create();
             m2C_FashionUpdate.UnitID = unit.Id;
             m2C_FashionUpdate.FashionEquipList = bagComponent.FashionEquipList;
             MapMessageHelper.Broadcast(unit, m2C_FashionUpdate);

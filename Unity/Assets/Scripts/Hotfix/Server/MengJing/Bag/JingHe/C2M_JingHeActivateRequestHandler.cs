@@ -17,7 +17,7 @@ namespace ET.Server
                 return;
             }
             //通知客户端背包刷新
-            M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+            M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
 
             bagInfoJinHe.XiLianHideProLists.Clear();
             HideProList hideProList = ItemHelper.GetJingHeHidePro(bagInfoJinHe.ItemID, int.Parse(bagInfoJinHe.ItemPar));

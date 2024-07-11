@@ -64,8 +64,8 @@ namespace ET.Server
                         }
                         else if (request.MessageType == NoticeType.PaiMai)
                         {
-                            M2C_SyncChatInfo m2C_SyncChatInfo = new M2C_SyncChatInfo();
-                            m2C_SyncChatInfo.ChatInfo = new ChatInfo();
+                            M2C_SyncChatInfo m2C_SyncChatInfo = M2C_SyncChatInfo.Create();
+                            m2C_SyncChatInfo.ChatInfo = ChatInfo.Create();
                             m2C_SyncChatInfo.ChatInfo.ChannelId = (int)ChannelEnum.PaiMai;
                             m2C_SyncChatInfo.ChatInfo.ChatMsg = request.MessageValue;
                             m2C_SyncChatInfo.ChatInfo.Time = TimeHelper.ServerNow();
@@ -76,11 +76,9 @@ namespace ET.Server
                         }
                         else
                         {
-                            M2C_HorseNoticeInfo m2C_HorseNoticeInfo = new M2C_HorseNoticeInfo()
-                            {
-                                NoticeType = request.MessageType,
-                                NoticeText = request.MessageValue
-                            };
+                            M2C_HorseNoticeInfo m2C_HorseNoticeInfo = M2C_HorseNoticeInfo.Create();
+                            m2C_HorseNoticeInfo.NoticeType = request.MessageType;
+                            m2C_HorseNoticeInfo.NoticeText = request.MessageValue;
                             foreach (var otherUnit in chatInfoUnitsComponent.ChatInfoUnitsDict.Values)
                             {
                                 MapMessageHelper.SendToClient(scene.Root(), otherUnit.GateSessionActorId, m2C_HorseNoticeInfo);

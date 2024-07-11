@@ -43,7 +43,11 @@ namespace ET.Server
                     }
                     int itemId = int.Parse(itemInfo[0]);
                     int itemNum = int.Parse(itemInfo[1]);
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.Turtle}_{TimeHelper.ServerNow()}" });
+                    BagInfo BagInfo = BagInfo.Create();
+                    BagInfo.ItemID = itemId;
+                    BagInfo.ItemNum = itemNum;
+                    BagInfo.GetWay = $"{ItemGetWay.Turtle}_{TimeHelper.ServerNow()}";
+                    mailInfo.ItemList.Add(BagInfo);
                 }
 
                 for (int i = 0; i < playerids.Count; i++)

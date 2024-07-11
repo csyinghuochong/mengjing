@@ -19,7 +19,7 @@ namespace ET.Server
             }
 
             //通知客户端背包刷新
-            M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+            M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
             List<long> huishouList = request.OperateBagID;
             List<long> bagsList = new List<long>();
             List<int> qulitylist = new List<int> { };

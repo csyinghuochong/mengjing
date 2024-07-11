@@ -55,7 +55,7 @@ namespace ET.Server
             unit.GetComponent<BagComponentS>().OnAddItemDataNewCell(useBagInfo, (int)splitNumber);
             Log.Warning($"道具拆分 {unit.Zone()} {unit.Id} {splitNumber}");
 
-            M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+            M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
             m2c_bagUpdate.BagInfoUpdate.Add(useBagInfo);
             MapMessageHelper.SendToClient(unit, m2c_bagUpdate);
 

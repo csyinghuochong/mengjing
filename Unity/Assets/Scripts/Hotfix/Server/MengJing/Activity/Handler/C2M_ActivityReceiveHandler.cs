@@ -126,7 +126,10 @@ namespace ET.Server
                             return;
                         }
 
-                        zhanQuTokenRecvives.Add(new TokenRecvive() { ActivityId = request.ActivityId, ReceiveIndex = request.ReceiveIndex });
+                        TokenRecvive TokenRecvive = TokenRecvive.Create();
+                        TokenRecvive.ActivityId = request.ActivityId; 
+                        TokenRecvive.ReceiveIndex = request.ReceiveIndex;
+                        zhanQuTokenRecvives.Add(TokenRecvive);
                         unit.GetComponent<BagComponentS>().OnAddItemData(rewards, $"{ItemGetWay.Activity}_{TimeHelper.ServerNow()}");
                         break;
                     case 31:    //登录奖励
