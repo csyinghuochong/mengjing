@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ET
 {
-    public class OnGenerateCSProjectProcessor : AssetPostprocessor
+    public class OnGenerateCSProjectProcessor: AssetPostprocessor
     {
         /// <summary>
         /// 对生成的C#项目文件(.csproj)进行处理
@@ -16,7 +16,7 @@ namespace ET
         {
             GlobalConfig globalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
             // 判空原因:初次打开工程时会加载失败, 因为此时Unity的资源数据库(AssetDatabase)还未完成初始化
-            BuildType buildType = globalConfig != null ? globalConfig.BuildType : BuildType.Release;
+            BuildType buildType = globalConfig != null? globalConfig.BuildType : BuildType.Release;
             if (buildType == BuildType.Release)
             {
                 content = content.Replace("<Optimize>false</Optimize>", "<Optimize>true</Optimize>");

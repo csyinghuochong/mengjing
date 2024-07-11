@@ -2,14 +2,12 @@
 
 namespace ET
 {
-    [EnableClass]
-    public abstract class MessageHandler<E, Message>: IMHandler where E : Entity where Message : class, IMessage
+    public abstract class MessageHandler<E, Message>: HandlerObject, IMHandler where E : Entity where Message : class, IMessage
     {
         protected abstract ETTask Run(E entity, Message message);
 
         public async ETTask Handle(Entity entity, Address fromAddress, MessageObject actorMessage)
         {
-            using MessageObject _ = actorMessage;
             if (actorMessage is not Message msg)
             {
                 Log.Error($"消息类型转换错误: {actorMessage.GetType().FullName} to {typeof (Message).Name}");
@@ -41,10 +39,7 @@ namespace ET
         }
     }
     
-    
-    
-    [EnableClass]
-    public abstract class MessageHandler<E, Request, Response>: IMHandler where E : Entity where Request : MessageObject, IRequest where Response : MessageObject, IResponse
+    public abstract class MessageHandler<E, Request, Response>: HandlerObject, IMHandler where E : Entity where Request : MessageObject, IRequest where Response : MessageObject, IResponse
     {
         protected abstract ETTask Run(E unit, Request request, Response response);
 
@@ -52,7 +47,6 @@ namespace ET
         {
             try
             {
-                using MessageObject _ = actorMessage;
                 Fiber fiber = entity.Fiber();
                 if (actorMessage is not Request request)
                 {

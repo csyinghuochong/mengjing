@@ -52,9 +52,7 @@ namespace ET
         
         private static async ETTask WaitExitAsync(System.Diagnostics.Process process)
         {
-            //await process.WaitForExitAsync();
-            process.WaitForExit();
-            await ETTask.CompletedTask;
+            await process.WaitForExitAsync();
 #if UNITY
             Log.Info($"process exit, exitcode: {process.ExitCode} {process.StandardOutput.ReadToEnd()} {process.StandardError.ReadToEnd()}");
 #endif

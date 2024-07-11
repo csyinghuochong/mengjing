@@ -14,15 +14,15 @@ namespace ET
                 switch (change)
                 {
                     case PlayModeStateChange.ExitingEditMode:
-                        {
-                            OnExitingEditMode();
-                            break;
-                        }
+                    {
+                        OnExitingEditMode();
+                        break;
+                    }
                     case PlayModeStateChange.ExitingPlayMode:
-                        {
-                            OnExitingPlayMode();
-                            break;
-                        }
+                    {
+                        OnExitingPlayMode();
+                        break;
+                    }
                 }
             };
         }

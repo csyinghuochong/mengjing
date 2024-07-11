@@ -67,7 +67,7 @@ namespace ET
 
             CopyHotUpdateDlls();
             BuildHelper.ReGenerateProjectFiles();
-
+            
             Log.Info($"Compile Finish!");
         }
 
@@ -86,20 +86,20 @@ namespace ET
             switch (codeMode)
             {
                 case CodeMode.Client:
-                    {
-                        EnableUnityClient();
-                        break;
-                    }
+                {
+                    EnableUnityClient();
+                    break;
+                }
                 case CodeMode.Server:
-                    {
-                        EnableUnityServer();
-                        break;
-                    }
+                {
+                    EnableUnityServer();
+                    break;
+                }
                 case CodeMode.ClientServer:
-                    {
-                        EnableUnityClientServer();
-                        break;
-                    }
+                {
+                    EnableUnityClientServer();
+                    break;
+                }
             }
 
             AssetDatabase.Refresh();
