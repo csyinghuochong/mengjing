@@ -18,7 +18,7 @@ namespace ET.Server
         {
             Unit nearest = null;
             Unit main = aIComponent.GetParent<Unit>();
-            List<Unit> units = main.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = main.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
                 Unit unit = units[i];

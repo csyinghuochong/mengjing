@@ -47,7 +47,7 @@ namespace ET.Server
             if (SkillConfigCategory.Instance.BuffTriggerSkill.ContainsKey(skillconfig.Id))
             {
                 KeyValuePairLong keyValuePairLong = SkillConfigCategory.Instance.BuffTriggerSkill[skillconfig.Id];
-                List<Unit> allDefend = attackUnit.GetParent<UnitComponent>().GetAll();
+                List<EntityRef<Unit>> allDefend = attackUnit.GetParent<UnitComponent>().GetAll();
                 for ( int defend = 0; defend < allDefend.Count; defend++  )
                 {
                     // BuffManagerComponent buffManagerComponent = allDefend[defend].GetComponent<BuffManagerComponent>();

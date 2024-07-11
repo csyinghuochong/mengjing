@@ -513,10 +513,11 @@ namespace ET.Server
 
 		public static bool IsAllMonsterDead(Scene scene, Unit main)
 		{
-			List<Unit> units = scene.GetComponent<UnitComponent>().GetAll();
+			List<EntityRef<Unit>> units = scene.GetComponent<UnitComponent>().GetAll();
 			for (int i = 0; i < units.Count; i++)
 			{
-				if (units[i].Type == UnitType.Monster && main.IsCanAttackUnit(units[i]))
+				Unit unititem = units[i];
+				if (unititem.Type == UnitType.Monster && main.IsCanAttackUnit(units[i]))
 				{
 					return false;
 				}
@@ -528,10 +529,11 @@ namespace ET.Server
 		public static int GetAlivePetNumber(Scene scene)
 		{
 			int petNumber = 0;
-			List<Unit> units = scene.GetComponent<UnitComponent>().GetAll();
+			List<EntityRef<Unit>> units = scene.GetComponent<UnitComponent>().GetAll();
 			for (int i = 0; i < units.Count; i++)
 			{
-				if (units[i].Type == UnitType.Pet && units[i].GetComponent<NumericComponentS>().GetAsInt(NumericType.Now_Dead) == 0)
+				Unit unititem = units[i];
+				if (unititem.Type == UnitType.Pet && unititem.GetComponent<NumericComponentS>().GetAsInt(NumericType.Now_Dead) == 0)
 				{
 					petNumber++;
 				}

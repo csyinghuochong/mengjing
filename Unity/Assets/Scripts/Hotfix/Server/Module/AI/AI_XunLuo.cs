@@ -23,7 +23,7 @@ namespace ET.Server
             List<int> postionAttack = ConfigData.PetPositionAttack[selfCell];
 
             Unit[] enemyUnit = new Unit[9];
-            List<Unit> units = main.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = main.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
                 Unit unit = units[i];

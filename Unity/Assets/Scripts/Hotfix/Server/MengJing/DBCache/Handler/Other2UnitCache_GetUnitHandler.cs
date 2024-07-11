@@ -54,12 +54,6 @@ namespace ET.Server
                 {
                     response.EntityList.Add(VARIABLE.ToBson()  );
                 }
-
-                (int i = 0; i < dictionary.Values.Count; i++)
-                {
-                    Entity entity = dictionary.Values[i];
-                    response.EntityList.Add();
-                }
             }
             finally
             {
