@@ -10,32 +10,31 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_TeamerPositionRequest request, M2C_TeamerPositionResponse response)
         {
             int sceneType = unit.Scene().GetComponent<MapComponent>().SceneType;
-            List<Unit> units = unit.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = unit.GetParent<UnitComponent>().GetAll();
 
             for (int i = 0; i < units.Count; i++)
             {
-               
-                if (sceneType == SceneTypeEnum.TeamDungeon && units[i].Id!=unit.Id && units[i].Type == UnitType.Player)
+                Unit uniitem = units[i];
+                
+                if (sceneType == SceneTypeEnum.TeamDungeon && uniitem.Id!=unit.Id && uniitem.Type == UnitType.Player)
                 {
-                    response.UnitList.Add(new UnitInfo()
-                    {
-                        Type = units[i].Type,
-                        UnitId = units[i].Id,
-                        ConfigId = units[i].ConfigId,
-                        UnitName = units[i].GetComponent<UserInfoComponentS>().UserInfo.Name,
-                        Position = units[i].Position,
-                    });
+                    UnitInfo UnitInfo = UnitInfo.Create();
+                    UnitInfo.Type = uniitem.Type;
+                    UnitInfo.UnitId = uniitem.Id;
+                    UnitInfo.ConfigId = uniitem.ConfigId;
+                    UnitInfo.UnitName = uniitem.GetComponent<UserInfoComponentS>().UserInfo.Name;
+                    UnitInfo.Position = uniitem.Position;
+                    response.UnitList.Add(UnitInfo);
                 }
                
-                if (sceneType == SceneTypeEnum.LocalDungeon && (units[i].ConfigId == SeasonHelper.SeasonBossId || units[i].IsJingLingMonster()))
+                if (sceneType == SceneTypeEnum.LocalDungeon && (uniitem.ConfigId == SeasonHelper.SeasonBossId ||uniitem.IsJingLingMonster()))
                 {
-                    response.UnitList.Add(new UnitInfo()
-                    {
-                        Type = units[i].Type,
-                        UnitId = units[i].Id,
-                        ConfigId = units[i].ConfigId,
-                        Position = units[i].Position,
-                    });
+                    UnitInfo unitInfo = UnitInfo.Create();
+                    unitInfo.Type = uniitem.Type;
+                    unitInfo.UnitId = uniitem.Id;
+                    unitInfo.ConfigId = uniitem.ConfigId;
+                    unitInfo.Position = uniitem.Position;
+                    response.UnitList.Add(unitInfo);
                 }
             }
             

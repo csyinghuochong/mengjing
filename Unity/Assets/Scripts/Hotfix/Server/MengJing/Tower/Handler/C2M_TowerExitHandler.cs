@@ -9,12 +9,13 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_TowerExitRequest request, M2C_TowerExitResponse response)
         {
             UnitComponent unitComponent = unit.GetParent<UnitComponent>();
-            List<Unit> allunits = unitComponent.GetAll();
+            List<EntityRef<Unit>> allunits = unitComponent.GetAll();
             for (int i = allunits.Count - 1; i >= 0; i--)
             {
-                if (allunits[i].Type == UnitType.Monster)
+                Unit uniitem = allunits[i];
+                if (uniitem.Type == UnitType.Monster)
                 {
-                    unitComponent.Remove(allunits[i].Id);
+                    unitComponent.Remove(uniitem.Id);
                 }
             }
             TowerComponent towerComponent = unit.Scene().GetComponent<TowerComponent>();

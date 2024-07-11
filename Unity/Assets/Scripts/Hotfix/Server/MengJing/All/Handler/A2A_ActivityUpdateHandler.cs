@@ -18,15 +18,18 @@ namespace ET.Server
                     {
                         PrintAllEntity();
                     }
-                    Player[] players = scene.GetComponent<PlayerComponent>().GetAll();
+                    EntityRef<Player>[] players = scene.GetComponent<PlayerComponent>().GetAll();
+                    G2M_ActivityUpdate g2MActivityUpdate = G2M_ActivityUpdate.Create();
+                    g2MActivityUpdate.ActivityType = hour;
                     for (int i = 0; i < players.Length; i++)
                     {
-                        if (players[i].PlayerState != PlayerState.Game)
+                        Player player = players[i];
+                        if (player.PlayerState != PlayerState.Game)
                         {
                             continue;
                         }
                        
-                        scene.Root().GetComponent<MessageLocationSenderComponent>().Get( LocationType.Unit).Send(players[i].UnitId, new G2M_ActivityUpdate() { ActivityType = hour });
+                        scene.Root().GetComponent<MessageLocationSenderComponent>().Get( LocationType.Unit).Send(player.UnitId, g2MActivityUpdate);
                     }
 
                     if (request.Hour >= 20 && scene.Zone() == 3)

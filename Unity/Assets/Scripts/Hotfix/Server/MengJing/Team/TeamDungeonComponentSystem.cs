@@ -356,10 +356,10 @@ namespace ET.Server
             self.CheckFriend(hurtList).Coroutine();
 
             //TeamDungeonHurt_136
-            List<Unit> units = unit.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = unit.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
-                Unit unititem = units[i] as Unit;
+                Unit unititem = units[i];
                 if (unititem.Type != UnitType.Player || unititem.IsRobot())
                 {
                     continue;

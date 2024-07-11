@@ -177,7 +177,7 @@ namespace ET.Server
 
              //ListComponent<Unit> entities = ListComponent<Unit>.Create();
              //entities.AddRange(  self.TheUnitFrom.DomainScene().GetComponent<UnitComponent>().GetAll() );
-             List<Unit> entities = self.TheUnitFrom.Scene().GetComponent<UnitComponent>().GetAll();
+             List<EntityRef<Unit>> entities = self.TheUnitFrom.Scene().GetComponent<UnitComponent>().GetAll();
              for (int i = entities.Count - 1; i >= 0; i--)
              {
                  Unit uu = entities[i];
@@ -233,7 +233,7 @@ namespace ET.Server
                  return;
              }
              self.DamgeChiXuLastTime = servernow;
-             List<Unit> entities = self.TheUnitFrom.GetParent<UnitComponent>().GetAll();
+             List<EntityRef<Unit>> entities = self.TheUnitFrom.GetParent<UnitComponent>().GetAll();
              for (int i = entities.Count - 1; i >= 0; i--)
              {
                  Unit uu = entities[i];
