@@ -22,6 +22,7 @@ namespace ET.Server
             self.IsOver = false;
             if (self.Zone() == 5)
             {
+                
                 ActorId robotSceneId = StartSceneConfigCategory.Instance.GetBySceneName(203, "Robot01").ActorId;
                 self.Root().GetComponent<MessageSender>().Send(robotSceneId,
                     new G2Robot_MessageRequest() { Zone = self.Zone(), MessageType = NoticeType.Demon, Message = string.Empty });
@@ -49,7 +50,7 @@ namespace ET.Server
 
         public static void SendCampReward(this DemonDungeonComponent self, int campId, int rewardId)
         {
-            MailInfo mailInfo = new MailInfo();
+            MailInfo mailInfo = MailInfo.Create();
             string rewardTime = rewardId == 100? "胜利" : "参与";
             mailInfo.Status = 0;
             mailInfo.Title = "恶魔活动奖励";
@@ -61,7 +62,10 @@ namespace ET.Server
             for (int i = 0; i < rewardList.Length; i++)
             {
                 string[] rewardItem = rewardList[i].Split(';');
-                mailInfo.ItemList.Add(new BagInfo() { ItemID = int.Parse(rewardItem[0]), ItemNum = int.Parse(rewardItem[1]), });
+                BagInfo BagInfo = BagInfo.Create();
+                BagInfo.ItemID = int.Parse(rewardItem[0]);
+                BagInfo.ItemNum = int.Parse(rewardItem[1]);
+                mailInfo.ItemList.Add(BagInfo);
             }
 
             List<Unit> sourcelist = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
@@ -81,15 +85,18 @@ namespace ET.Server
             //1059
             ActorId rankserverid = UnitCacheHelper.GetRankServerId(self.Zone());
             ////恶魔结束. 发送奖励
+            A2A_ActivityUpdateRequest A2A_ActivityUpdateRequest = A2A_ActivityUpdateRequest.Create();
+            A2A_ActivityUpdateRequest.Hour = -1;
+            A2A_ActivityUpdateRequest.FunctionId = 1059;
+            A2A_ActivityUpdateRequest.FunctionType = 2;
             A2A_ActivityUpdateResponse m2m_TrasferUnitResponse =
-                    (A2A_ActivityUpdateResponse)await self.Root().GetComponent<MessageSender>().Call(rankserverid,
-                        new A2A_ActivityUpdateRequest() { Hour = -1, FunctionId = 1059, FunctionType = 2 });
+                    (A2A_ActivityUpdateResponse)await self.Root().GetComponent<MessageSender>().Call(rankserverid,A2A_ActivityUpdateRequest);
         }
 
         public static async ETTask OnUpdateScore(this DemonDungeonComponent self, Unit unit, int score)
         {
             ActorId mapInstanceId = UnitCacheHelper.GetRankServerId(self.Zone());
-            RankingInfo rankPetInfo = new RankingInfo();
+            RankingInfo rankPetInfo = RankingInfo.Create();
             UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
             rankPetInfo.UserId = userInfoComponent.UserInfo.UserId;
             rankPetInfo.PlayerName = userInfoComponent.UserInfo.Name;
@@ -97,9 +104,10 @@ namespace ET.Server
             rankPetInfo.Occ = userInfoComponent.UserInfo.Occ;
             rankPetInfo.Combat = score;
 
+            M2R_RankDemonRequest M2R_RankDemonRequest = M2R_RankDemonRequest.Create();
+            M2R_RankDemonRequest.RankingInfo = rankPetInfo;
             R2M_RankDemonResponse Response =
-                    (R2M_RankDemonResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,
-                        new M2R_RankDemonRequest() { RankingInfo = rankPetInfo });
+                    (R2M_RankDemonResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId, M2R_RankDemonRequest);
 
             //推给客户端
             List<Unit> sourcelist = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);

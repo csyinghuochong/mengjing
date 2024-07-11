@@ -16,7 +16,13 @@ namespace ET.Server
             }
 
             long mailid = IdGenerater.Instance.GenerateId();
-            dBMainInfo.MailInfoList.Add(new MailInfo() { MailId = mailid, Context = "拍卖下架", Title = "拍卖下架", ItemList = new List<BagInfo>() { request.PaiMaiItemInfo.BagInfo } });
+            MailInfo MailInfo = MailInfo.Create();
+            MailInfo.MailId = mailid;
+            MailInfo.Context = "拍卖下架";
+            MailInfo.Title = "拍卖下架";
+            MailInfo.ItemList.Clear();
+            MailInfo.ItemList.Add(request.PaiMaiItemInfo.BagInfo);
+            dBMainInfo.MailInfoList.Add(MailInfo);
 
             await UnitCacheHelper.SaveComponent(scene.Root(),  request.PaiMaiItemInfo.UserId, dBMainInfo);
         }

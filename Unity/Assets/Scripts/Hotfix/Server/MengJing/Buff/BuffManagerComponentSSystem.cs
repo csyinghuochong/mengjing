@@ -326,7 +326,7 @@ namespace ET.Server
         public static void UpdateFuHuoStatus(this BuffManagerComponentS self)
         {
             Unit unit = self.GetParent<Unit>();
-            M2C_UnitBuffStatus m2C_UnitBuffStatus = new M2C_UnitBuffStatus();
+            M2C_UnitBuffStatus m2C_UnitBuffStatus = M2C_UnitBuffStatus.Create();
             m2C_UnitBuffStatus.UnitID = unit.Id;
             m2C_UnitBuffStatus.FlyType = 101;
             m2C_UnitBuffStatus.BuffID = 0;
