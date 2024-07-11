@@ -525,12 +525,12 @@ namespace ET.Client
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             if (mapComponent.SceneType == SceneTypeEnum.JiaYuan)
             {
-                // JiaYuanComponent jiaYuanComponent = self.ZoneScene().GetComponent<JiaYuanComponent>();
-                // UserInfo userInfo = self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo;
-                // if (!jiaYuanComponent.IsMyJiaYuan(userInfo.UserId))
-                // {
-                //     return;
-                // }
+                JiaYuanComponentC jiaYuanComponent = self.Root().GetComponent<JiaYuanComponentC>();
+                UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
+                if (!jiaYuanComponent.IsMyJiaYuan(userInfo.UserId))
+                {
+                    return;
+                }
             }
 
             int functionId = NpcConfigCategory.Instance.Get(self.NpcId).NpcType;
@@ -546,20 +546,20 @@ namespace ET.Client
             }
             else if (self.NpcId == 40000004)
             {
-                // PopupTipHelp.OpenPopupTip(self.Root(), "返回副本", GameSettingLanguge.LoadLocalization("是否返回副本!"),
-                //     () =>
-                //     {
-                //         int sceneid = self.Root().GetComponent<BattleMessageComponent>().LastDungeonId;
-                //         if (sceneid == 0)
-                //         {
-                //             EnterFubenHelp.RequestQuitFuben(self.ZoneScene());
-                //         }
-                //         else
-                //         {
-                //             EnterFubenHelp.RequestTransfer(self.ZoneScene(), SceneTypeEnum.LocalDungeon, sceneid, 0, "0").Coroutine();
-                //         }
-                //     },
-                //     null).Coroutine();
+                PopupTipHelp.OpenPopupTip(self.Root(), "返回副本", GameSettingLanguge.Instance.LoadLocalization("是否返回副本!"),
+                    () =>
+                    {
+                        int sceneid = self.Root().GetComponent<BattleMessageComponent>().LastDungeonId;
+                        if (sceneid == 0)
+                        {
+                            EnterMapHelper.RequestQuitFuben(self.Root());
+                        }
+                        else
+                        {
+                            EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, sceneid, 0, "0").Coroutine();
+                        }
+                    },
+                    null).Coroutine();
             }
             else if (functionId < 100)
             {
