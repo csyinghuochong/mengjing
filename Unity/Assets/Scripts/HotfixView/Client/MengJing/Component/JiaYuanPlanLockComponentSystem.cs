@@ -13,8 +13,8 @@ namespace ET.Client
         {
             self.HeadBar = null;
             self.GameObject = gameObject;
-            self.UICamera = GameObject.Find("Global/UI/UICamera").GetComponent<Camera>();
-            self.MainCamera = GameObject.Find("Global/Main Camera").GetComponent<Camera>();
+            self.UICamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
+            self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
         }
 
         [EntitySystem]
