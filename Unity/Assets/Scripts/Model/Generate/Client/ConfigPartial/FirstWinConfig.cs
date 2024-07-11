@@ -36,7 +36,7 @@ namespace ET
                     return new KeyValuePairInt() { KeyId = item.Key, Value = item.Value.IndexOf(bossId) };
                 }
             }
-            return null;
+            return new KeyValuePairInt(0,0);
         }
     }
 }

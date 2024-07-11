@@ -1,180 +1,192 @@
-using ET;
 using MemoryPack;
 using System.Collections.Generic;
+
 namespace ET
 {
-// using
-	[ResponseType(nameof(NetClient2Main_Login))]
-	[Message(ClientMessage.Main2NetClient_Login)]
-	[MemoryPackable]
-	public partial class Main2NetClient_Login: MessageObject, IRequest
-	{
-		public static Main2NetClient_Login Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(Main2NetClient_Login), isFromPool) as Main2NetClient_Login; 
-		}
+    // using
+    [MemoryPackable]
+    [Message(ClientMessage.Main2NetClient_Login)]
+    [ResponseType(nameof(NetClient2Main_Login))]
+    public partial class Main2NetClient_Login : MessageObject, IRequest
+    {
+        public static Main2NetClient_Login Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Main2NetClient_Login), isFromPool) as Main2NetClient_Login;
+        }
 
-		[MemoryPackOrder(0)]
-		public int RpcId { get; set; }
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
 
-		[MemoryPackOrder(1)]
-		public int OwnerFiberId { get; set; }
+        [MemoryPackOrder(1)]
+        public int OwnerFiberId { get; set; }
 
-		[MemoryPackOrder(2)]
-		public string Account { get; set; }
+        [MemoryPackOrder(2)]
+        public string Account { get; set; }
 
-		[MemoryPackOrder(3)]
-		public string Password { get; set; }
+        [MemoryPackOrder(3)]
+        public string Password { get; set; }
 
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.OwnerFiberId = default;
-			this.Account = default;
-			this.Password = default;
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
 
-	}
+            this.RpcId = default;
+            this.OwnerFiberId = default;
+            this.Account = default;
+            this.Password = default;
 
-	[Message(ClientMessage.NetClient2Main_Login)]
-	[MemoryPackable]
-	public partial class NetClient2Main_Login: MessageObject, IResponse
-	{
-		public static NetClient2Main_Login Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(NetClient2Main_Login), isFromPool) as NetClient2Main_Login; 
-		}
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
 
-		[MemoryPackOrder(0)]
-		public int RpcId { get; set; }
+    [MemoryPackable]
+    [Message(ClientMessage.NetClient2Main_Login)]
+    public partial class NetClient2Main_Login : MessageObject, IResponse
+    {
+        public static NetClient2Main_Login Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(NetClient2Main_Login), isFromPool) as NetClient2Main_Login;
+        }
 
-		[MemoryPackOrder(1)]
-		public int Error { get; set; }
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
 
-		[MemoryPackOrder(2)]
-		public string Message { get; set; }
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
 
-		[MemoryPackOrder(3)]
-		public long PlayerId { get; set; }
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
 
-		[MemoryPackOrder(4)]
-		public long AccountId { get; set; }
+        [MemoryPackOrder(3)]
+        public long PlayerId { get; set; }
 
-		[MemoryPackOrder(5)]
-		public string Token { get; set; }
+        [MemoryPackOrder(4)]
+        public long AccountId { get; set; }
 
-		[MemoryPackOrder(6)]
-		public long Key { get; set; }
+        [MemoryPackOrder(5)]
+        public string Token { get; set; }
 
-		[MemoryPackOrder(10)]
-		public PlayerInfo PlayerInfo { get; set; }
+        [MemoryPackOrder(6)]
+        public long Key { get; set; }
 
-		[MemoryPackOrder(11)]
-		public List<CreateRoleInfo> RoleLists { get; set; } = new();
+        [MemoryPackOrder(10)]
+        public PlayerInfo PlayerInfo { get; set; }
 
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.Error = default;
-			this.Message = default;
-			this.PlayerId = default;
-			this.AccountId = default;
-			this.Token = default;
-			this.Key = default;
-			this.PlayerInfo = default;
-			this.RoleLists.Clear();
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
+        [MemoryPackOrder(11)]
+        public List<CreateRoleInfo> RoleLists { get; set; } = new();
 
-	}
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
 
-	[ResponseType(nameof(NetClient2Main_LoginGame))]
-	[Message(ClientMessage.Main2NetClient_LoginGame)]
-	[MemoryPackable]
-	public partial class Main2NetClient_LoginGame: MessageObject, IRequest
-	{
-		public static Main2NetClient_LoginGame Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(Main2NetClient_LoginGame), isFromPool) as Main2NetClient_LoginGame; 
-		}
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.PlayerId = default;
+            this.AccountId = default;
+            this.Token = default;
+            this.Key = default;
+            this.PlayerInfo = default;
+            this.RoleLists.Clear();
 
-		[MemoryPackOrder(0)]
-		public int RpcId { get; set; }
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
 
-		[MemoryPackOrder(1)]
-		public string Account { get; set; }
+    [MemoryPackable]
+    [Message(ClientMessage.Main2NetClient_LoginGame)]
+    [ResponseType(nameof(NetClient2Main_LoginGame))]
+    public partial class Main2NetClient_LoginGame : MessageObject, IRequest
+    {
+        public static Main2NetClient_LoginGame Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Main2NetClient_LoginGame), isFromPool) as Main2NetClient_LoginGame;
+        }
 
-		[MemoryPackOrder(2)]
-		public long RealmKey { get; set; }
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
 
-		[MemoryPackOrder(3)]
-		public long RoleId { get; set; }
+        [MemoryPackOrder(1)]
+        public string Account { get; set; }
 
-		[MemoryPackOrder(4)]
-		public string GateAddress { get; set; }
+        [MemoryPackOrder(2)]
+        public long RealmKey { get; set; }
 
-		[MemoryPackOrder(5)]
-		public long AccountId { get; set; }
+        [MemoryPackOrder(3)]
+        public long RoleId { get; set; }
 
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.Account = default;
-			this.RealmKey = default;
-			this.RoleId = default;
-			this.GateAddress = default;
-			this.AccountId = default;
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
+        [MemoryPackOrder(4)]
+        public string GateAddress { get; set; }
 
-	}
+        [MemoryPackOrder(5)]
+        public long AccountId { get; set; }
 
-	[Message(ClientMessage.NetClient2Main_LoginGame)]
-	[MemoryPackable]
-	public partial class NetClient2Main_LoginGame: MessageObject, IResponse
-	{
-		public static NetClient2Main_LoginGame Create(bool isFromPool = false) 
-		{ 
-			return ObjectPool.Instance.Fetch(typeof(NetClient2Main_LoginGame), isFromPool) as NetClient2Main_LoginGame; 
-		}
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
 
-		[MemoryPackOrder(0)]
-		public int RpcId { get; set; }
+            this.RpcId = default;
+            this.Account = default;
+            this.RealmKey = default;
+            this.RoleId = default;
+            this.GateAddress = default;
+            this.AccountId = default;
 
-		[MemoryPackOrder(1)]
-		public int Error { get; set; }
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
 
-		[MemoryPackOrder(2)]
-		public string Message { get; set; }
+    [MemoryPackable]
+    [Message(ClientMessage.NetClient2Main_LoginGame)]
+    public partial class NetClient2Main_LoginGame : MessageObject, IResponse
+    {
+        public static NetClient2Main_LoginGame Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(NetClient2Main_LoginGame), isFromPool) as NetClient2Main_LoginGame;
+        }
 
-		[MemoryPackOrder(3)]
-		public long PlayerId { get; set; }
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
 
-		public override void Dispose() 
-		{
-			if (!this.IsFromPool) return;
-			this.RpcId = default;
-			this.Error = default;
-			this.Message = default;
-			this.PlayerId = default;
-			
-			ObjectPool.Instance.Recycle(this); 
-		}
+        [MemoryPackOrder(1)]
+        public int Error { get; set; }
 
-	}
+        [MemoryPackOrder(2)]
+        public string Message { get; set; }
 
-	public static class ClientMessage
-	{
-		 public const ushort Main2NetClient_Login = 1001;
-		 public const ushort NetClient2Main_Login = 1002;
-		 public const ushort Main2NetClient_LoginGame = 1003;
-		 public const ushort NetClient2Main_LoginGame = 1004;
-	}
+        [MemoryPackOrder(3)]
+        public long PlayerId { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.PlayerId = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    public static class ClientMessage
+    {
+        public const ushort Main2NetClient_Login = 1001;
+        public const ushort NetClient2Main_Login = 1002;
+        public const ushort Main2NetClient_LoginGame = 1003;
+        public const ushort NetClient2Main_LoginGame = 1004;
+    }
 }

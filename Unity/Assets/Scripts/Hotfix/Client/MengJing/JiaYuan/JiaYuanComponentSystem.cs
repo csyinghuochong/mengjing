@@ -54,7 +54,7 @@
                 }
             }
 
-            return null;
+            return new KeyValuePair(0,0);
         }
     }
 }

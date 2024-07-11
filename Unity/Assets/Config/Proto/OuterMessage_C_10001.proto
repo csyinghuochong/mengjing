@@ -304,27 +304,6 @@ message RechargeInfo
 	string OrderInfo = 4;
 }
 
-message KeyValuePair
-{
-	int32 KeyId = 1;
-	string Value = 2;
-	string Value2 = 3;
-}
-
-
-message KeyValuePairInt
-{
-	int32 KeyId = 1;	
-	int64 Value = 2;
-}
-
-message KeyValuePairLong
-{
-	int64 KeyId = 1;	
-	int64 Value = 2;
-	int64 Value2 = 3;
-}
-
 message PlayerInfo
 {
 	int32 RealName = 1;
