@@ -20,7 +20,8 @@ namespace ET.Server
                 {
                     continue;
                 }
-                UnionListItem unionListItem = new UnionListItem();
+
+                UnionListItem unionListItem = UnionListItem.Create();
                 unionListItem.UnionName = dBUnionInfo.UnionInfo.UnionName;
                 unionListItem.PlayerNumber = dBUnionInfo.UnionInfo.UnionPlayerList.Count;
                 unionListItem.UnionId = dBUnionInfo.UnionInfo.UnionId;

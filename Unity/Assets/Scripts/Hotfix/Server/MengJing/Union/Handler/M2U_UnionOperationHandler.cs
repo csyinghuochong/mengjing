@@ -40,7 +40,7 @@ namespace ET.Server
                                 dBUnionInfo.UnionInfo.Level++;
                                 dBUnionInfo.UnionInfo.Exp -= unionConfig.Exp;
 
-                                MailInfo mailInfo = new MailInfo();
+                                MailInfo mailInfo = MailInfo.Create();
                                 mailInfo.Title = "家族升级";
                                 mailInfo.Context = "恭喜您!您所在得家族等级获得提升,这是家族升级的奖励!";
 
@@ -50,6 +50,7 @@ namespace ET.Server
                                 for (int i = 0; i < rewardStrList.Length; i++)
                                 {
                                     string[] rewardList = rewardStrList[i].Split(',');
+                                    
                                     mailInfo.ItemList.Add(new BagInfo() { ItemID = int.Parse(rewardList[0]), ItemNum = int.Parse(rewardList[1]), GetWay = $"{ItemGetWay.UnionUpLv}_{serverTime}" });
                                 }
 

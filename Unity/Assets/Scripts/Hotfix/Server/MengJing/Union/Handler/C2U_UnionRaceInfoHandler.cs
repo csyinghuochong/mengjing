@@ -25,7 +25,7 @@ namespace ET.Server
                     continue;
                 }
                 DBUnionInfo dBUnionInfo = result[0];
-                UnionListItem unionListItem = new UnionListItem();
+                UnionListItem unionListItem = UnionListItem.Create();
                 unionListItem.UnionName = dBUnionInfo.UnionInfo.UnionName;
                 unionListItem.PlayerNumber = dBUnionInfo.UnionInfo.UnionPlayerList.Count;
                 unionListItem.UnionId = dBUnionInfo.UnionInfo.UnionId;

@@ -134,8 +134,10 @@ namespace ET.Server
 
                 ////通知玩家
 
-                U2M_UnionApplyRequest r2M_RechargeRequest =
-                        new U2M_UnionApplyRequest() { UnionId = unionid, UnionName = dBUnionInfo.UnionInfo.UnionName };
+                U2M_UnionApplyRequest r2M_RechargeRequest = U2M_UnionApplyRequest.Create();
+                r2M_RechargeRequest.UnionId = unionid;
+                r2M_RechargeRequest.UnionName = dBUnionInfo.UnionInfo.UnionName;
+
                 M2U_UnionApplyResponse m2G_RechargeResponse = (M2U_UnionApplyResponse)await self.Root().GetComponent<MessageLocationSenderComponent>()
                         .Get(LocationType.Unit).Call(unitid, r2M_RechargeRequest);
                 if (m2G_RechargeResponse.Error == ErrorCode.ERR_Success)
@@ -159,7 +161,9 @@ namespace ET.Server
 
                 if (operateSucess)
                 {
-                    dBUnionInfo.UnionInfo.UnionPlayerList.Add(new UnionPlayerInfo() { UserID = unitid, });
+                    UnionPlayerInfo UnionPlayerInfo = UnionPlayerInfo.Create();
+                    UnionPlayerInfo.UserID = unitid;
+                    dBUnionInfo.UnionInfo.UnionPlayerList.Add(UnionPlayerInfo);
                 }
             }
 
