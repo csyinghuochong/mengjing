@@ -168,7 +168,7 @@ namespace ET.Client
 
             Unit unit = self.GetParent<Unit>();
  
-            self.Root().GetComponent<ClientSenderCompnent>().Send(new C2M_Stop());
+            self.Root().GetComponent<ClientSenderCompnent>().Send(C2M_Stop.Create());
             StateComponentC stateComponent = unit.GetComponent<StateComponentC>();
             stateComponent.SendUpdateState(1, StateTypeEnum.Singing, $"{c2M_SkillCmd.SkillID}_0");
 

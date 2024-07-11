@@ -40,19 +40,19 @@ namespace ET
         
 
        
-        public static List<BagInfo> GetHeQuReward(int lv)
+        public static List<RewardItem> GetHeQuReward(int lv)
         {
-            List<BagInfo> rewards = new List<BagInfo>();
+            List<RewardItem> rewards = new List<RewardItem>();
             if (lv < 50)
             {
                 return rewards;
             }
             else
             {
-                rewards.Add(new BagInfo() { GetWay = $"{ItemGetWay.System}_{TimeHelper.ServerNow()}", ItemID = 10000143, ItemNum = 30 });
-                rewards.Add(new BagInfo() { GetWay = $"{ItemGetWay.System}_{TimeHelper.ServerNow()}", ItemID = 10010093, ItemNum = 1 });
-                rewards.Add(new BagInfo() { GetWay = $"{ItemGetWay.System}_{TimeHelper.ServerNow()}", ItemID = 10010041, ItemNum = 50 });
-                rewards.Add(new BagInfo() { GetWay = $"{ItemGetWay.System}_{TimeHelper.ServerNow()}", ItemID = 10010046, ItemNum = 1 });
+                rewards.Add(new RewardItem() {  ItemID = 10000143, ItemNum = 30 });
+                rewards.Add(new RewardItem() {  ItemID = 10010093, ItemNum = 1 });
+                rewards.Add(new RewardItem() {  ItemID = 10010041, ItemNum = 50 });
+                rewards.Add(new RewardItem() {  ItemID = 10010046, ItemNum = 1 });
                 return rewards;
             }
         }

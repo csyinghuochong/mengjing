@@ -72,7 +72,7 @@ namespace ET
 
             foreach (var item in allPaiMaiData)
             {
-                PaiMaiShopItemInfo shopList = new PaiMaiShopItemInfo();
+                PaiMaiShopItemInfo shopList = PaiMaiShopItemInfo.Create();
                 if (item.Value.Price.Length < 2)
                 {
                     Log.Debug($"item.Value.Price: {item.Value.Id} {item.Value.Price.Length}");

@@ -74,10 +74,11 @@ namespace ET.Client
         public static List<Unit> GetUnitList(Scene currentScene, int unitType)
         {
             List<Unit> list = new List<Unit>();
-            List<Unit> allunits = currentScene.GetComponent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> allunits = currentScene.GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < allunits.Count; i++)
             {
-                if (allunits[i].Type == unitType)
+                Unit unit = allunits[i];
+                if (unit.Type == unitType)
                 {
                     list.Add(allunits[i]);
                 }
@@ -257,7 +258,7 @@ namespace ET.Client
         {
             Unit nearest = null;
             float distance = -1f;
-            List<Unit> units = main.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = main.GetParent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
                 Unit unit = units[i];

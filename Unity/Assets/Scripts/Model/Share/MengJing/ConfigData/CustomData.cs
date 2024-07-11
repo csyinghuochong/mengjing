@@ -2,6 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using MemoryPack;
 using MongoDB.Bson.Serialization.Attributes;
+using NativeCollection;
 
 namespace ET
 {
@@ -21,7 +22,7 @@ namespace ET
 
     [MemoryPackable]
     [EnableClass]
-    public partial class  HideProList
+    public partial class HideProList
     {
         [MemoryPackOrder(0)]
         public int  HideID;
@@ -46,12 +47,12 @@ namespace ET
         public string Value2 ;
     }
 
+
     [MemoryPackable]
     [EnableClass]
     public partial class KeyValuePairInt 
     {
 
-        
         [MemoryPackOrder(0)]
         public int  KeyId ;	
         

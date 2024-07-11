@@ -52,10 +52,10 @@ namespace ET.Client
             float distance = 10f;
             Unit unit = null;
             Unit main = UnitHelper.GetMyUnitFromClientScene(zoneScene);
-            List<Unit> units = zoneScene.CurrentScene().GetComponent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = zoneScene.CurrentScene().GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
-                Unit uu = units[i] as Unit;
+                Unit uu = units[i];
                 if (uu.Type != UnitType.DropItem)
                 {
                     continue;
@@ -77,7 +77,7 @@ namespace ET.Client
             float distance = 10f;
             Unit unit = null;
             Unit main = UnitHelper.GetMyUnitFromClientScene(zoneScene);
-            List<Unit> units = zoneScene.CurrentScene().GetComponent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> units = zoneScene.CurrentScene().GetComponent<UnitComponent>().GetAll();
             for (int i = 0; i < units.Count; i++)
             {
                 Unit uu = units[i];

@@ -63,23 +63,24 @@ namespace ET.Client
             if (message.UpdateAll == 1)
             {
                 //移除不存在的unit. 只检测玩家 。怪物和掉落
-                List<Unit> allunits = unitComponent.GetAll();
+                List<EntityRef<Unit>> allunits = unitComponent.GetAll();
                 for (int i = allunits.Count - 1; i >= 0; i--)
                 {
-                    int unitType = allunits[i].Type;
+                    Unit unit = allunits[i];
+                    int unitType = unit.Type;
                     if (unitType != UnitType.Player && unitType != UnitType.Monster && unitType != UnitType.DropItem)
                     {
                         continue;
                     }
 
-                    if (allunits[i].MainHero)
+                    if (unit.MainHero)
                     {
                         continue;
                     }
 
-                    if (!allunitids.Contains(allunits[i].Id))
+                    if (!allunitids.Contains(unit.Id))
                     {
-                        unitComponent.Remove(allunits[i].Id);
+                        unitComponent.Remove(unit.Id);
                         continue;
                     }
                 }
