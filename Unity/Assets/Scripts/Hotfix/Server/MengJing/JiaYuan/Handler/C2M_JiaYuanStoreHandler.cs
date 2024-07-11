@@ -21,7 +21,8 @@ namespace ET.Server
                 response.Error = ErrorCode.ERR_BagIsFull;     //错误码:仓库已满
                 return;
             }
-            M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+
+            M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
 
             List <BagInfo> bagInfos = unit.GetComponent<BagComponentS>().BagItemList;
 

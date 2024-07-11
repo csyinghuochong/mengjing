@@ -12,13 +12,12 @@ namespace ET.Server
             switch (jiaYuanOperate.OperateType)
             {
                 case JiaYuanOperateType.Visit:
-                    jiaYuanComponent.AddJiaYuanRecord( new JiaYuanRecord()
-                    {
-                        OperateType = JiaYuanOperateType.Visit,
-                        OperateId = 0,
-                        PlayerName = jiaYuanOperate.PlayerName,
-                        Time = TimeHelper.ServerNow(),
-                    });
+                    JiaYuanRecord JiaYuanRecord = JiaYuanRecord.Create();
+                    JiaYuanRecord.OperateType = JiaYuanOperateType.Visit;
+                    JiaYuanRecord.OperateId = 0;
+                    JiaYuanRecord.PlayerName = jiaYuanOperate.PlayerName;
+                    JiaYuanRecord.Time = TimeHelper.ServerNow();
+                    jiaYuanComponent.AddJiaYuanRecord( JiaYuanRecord);
                     break;
                 case JiaYuanOperateType.GatherPlant:
                     JiaYuanPlant jiaYuanPlan = jiaYuanComponent.GetJiaYuanPlant(jiaYuanOperate.UnitId);
@@ -29,14 +28,12 @@ namespace ET.Server
                     jiaYuanPlan.StealNumber += 1;
                     jiaYuanPlan.GatherNumber += 1;
                     jiaYuanPlan.GatherLastTime = TimeHelper.ServerNow();
-                    JiaYuanRecord jiaYuanRecord = new JiaYuanRecord()
-                    {
-                        OperateType = JiaYuanOperateType.GatherPlant,
-                        OperateId = jiaYuanPlan.ItemId,
-                        PlayerName = jiaYuanOperate.PlayerName,
-                        Time = TimeHelper.ServerNow(),
-                        PlayerId = jiaYuanOperate.PlayerId,
-                    };
+                    JiaYuanRecord jiaYuanRecord = JiaYuanRecord.Create();
+                    jiaYuanRecord.OperateType = JiaYuanOperateType.GatherPlant;
+                    jiaYuanRecord.OperateId = jiaYuanPlan.ItemId;
+                    jiaYuanRecord.PlayerName = jiaYuanOperate.PlayerName;
+                    jiaYuanRecord.Time = TimeHelper.ServerNow();
+                    jiaYuanRecord.PlayerId = jiaYuanOperate.PlayerId;
                     jiaYuanComponent.AddJiaYuanRecord(jiaYuanRecord);
                     break;
                 case JiaYuanOperateType.GatherPasture:
@@ -48,24 +45,21 @@ namespace ET.Server
                     jiaYuanPasture.StealNumber += 1;
                     jiaYuanPasture.GatherNumber += 1;
                     jiaYuanPasture.GatherLastTime = TimeHelper.ServerNow();
-
-                    jiaYuanComponent.AddJiaYuanRecord(new JiaYuanRecord()
-                    {
-                        OperateType = JiaYuanOperateType.GatherPasture,
-                        OperateId = jiaYuanPasture.ConfigId,
-                        PlayerName = jiaYuanOperate.PlayerName,
-                        Time = TimeHelper.ServerNow(),
-                    });
+                    JiaYuanRecord = JiaYuanRecord.Create();
+                    JiaYuanRecord.OperateType = JiaYuanOperateType.GatherPasture;
+                    JiaYuanRecord.OperateId = jiaYuanPasture.ConfigId;
+                    JiaYuanRecord.PlayerName = jiaYuanOperate.PlayerName;
+                    JiaYuanRecord.Time = TimeHelper.ServerNow();
+                    jiaYuanComponent.AddJiaYuanRecord(JiaYuanRecord);
                     break;
                 case JiaYuanOperateType.Pick:
                     unit.GetComponent<JiaYuanComponentS>().OnRemoveUnit(jiaYuanOperate.UnitId);
-                    jiaYuanComponent.AddJiaYuanRecord(new JiaYuanRecord()
-                    {
-                        OperateType = JiaYuanOperateType.Pick,
-                        OperateId = jiaYuanOperate.OperateId,
-                        PlayerName = jiaYuanOperate.PlayerName,
-                        Time = TimeHelper.ServerNow(),
-                    });
+                    JiaYuanRecord = JiaYuanRecord.Create();
+                    JiaYuanRecord.OperateType = JiaYuanOperateType.Pick;
+                    JiaYuanRecord.OperateId = jiaYuanOperate.OperateId;
+                    JiaYuanRecord.PlayerName = jiaYuanOperate.PlayerName;
+                    JiaYuanRecord.Time = TimeHelper.ServerNow();
+                    jiaYuanComponent.AddJiaYuanRecord(JiaYuanRecord);
                     break;
             }
 

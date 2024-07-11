@@ -13,34 +13,30 @@ namespace ET.Server
             if (unit.Id != request.MasterId)
             {
                 ActorId gateServerId = UnitCacheHelper.GetGateServerId(unit.Zone());
+                T2G_GateUnitInfoRequest t2GGateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+                t2GGateUnitInfoRequest.UserID = request.MasterId;
                 G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await unit.Root().GetComponent<MessageSender>().Call
-                    (gateServerId, new T2G_GateUnitInfoRequest()
-                    {
-                        UserID = request.MasterId
-                    });
+                    (gateServerId, t2GGateUnitInfoRequest);
 
                 //玩家在线
                 if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
                 {
-                    JiaYuanOperate jiaYuanOperate = new JiaYuanOperate();
-                    jiaYuanOperate = new JiaYuanOperate();
+                    JiaYuanOperate jiaYuanOperate = JiaYuanOperate.Create();
+                    jiaYuanOperate = JiaYuanOperate.Create();
                     jiaYuanOperate.OperateType = JiaYuanOperateType.Visit;
                     jiaYuanOperate.PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
-                    M2M_JiaYuanOperateMessage opmessage = new M2M_JiaYuanOperateMessage()
-                    {
-                        JiaYuanOperate = jiaYuanOperate,
-                    };
+                    M2M_JiaYuanOperateMessage opmessage = M2M_JiaYuanOperateMessage.Create();
+                    opmessage.JiaYuanOperate = jiaYuanOperate;
                     unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(request.MasterId, opmessage);
                 }
                 else
                 {
-                    jiaYuanComponent.AddJiaYuanRecord(new JiaYuanRecord()
-                    {
-                        OperateType = JiaYuanOperateType.Visit,
-                        OperateId = 0,
-                        PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name,
-                        Time = TimeHelper.ServerNow(),
-                    });
+                    JiaYuanRecord JiaYuanRecord = JiaYuanRecord.Create();
+                    JiaYuanRecord.OperateType = JiaYuanOperateType.Visit;
+                    JiaYuanRecord.OperateId = 0;
+                    JiaYuanRecord.PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
+                    JiaYuanRecord.Time = TimeHelper.ServerNow();
+                    jiaYuanComponent.AddJiaYuanRecord(JiaYuanRecord);
                     await UnitCacheHelper.SaveComponentCache(unit.Root(),  jiaYuanComponent);
                 }
             }

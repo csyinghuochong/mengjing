@@ -69,20 +69,18 @@ namespace ET.Server
                         jiaYuanPlan.StealNumber += 1;
                         jiaYuanPlan.GatherLastTime = TimeHelper.ServerNow();
 
-                        jiaYuanOperate  = new JiaYuanOperate();
+                        jiaYuanOperate = JiaYuanOperate.Create();
                         jiaYuanOperate.OperateType = JiaYuanOperateType.GatherPlant;
                         jiaYuanOperate.UnitId = request.UnitId;
                         jiaYuanOperate.PlayerId = unit.Id;
                         jiaYuanOperate.PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
 
-                        JiaYuanRecord jiaYuanRecord = new JiaYuanRecord()
-                        {
-                            OperateType = JiaYuanOperateType.GatherPlant,
-                            OperateId = jiaYuanPlan.ItemId,
-                            PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name,
-                            Time = TimeHelper.ServerNow(),
-                            PlayerId = unit.Id,
-                        };
+                        JiaYuanRecord jiaYuanRecord = JiaYuanRecord.Create();
+                        jiaYuanRecord.OperateType = JiaYuanOperateType.GatherPlant;
+                        jiaYuanRecord.OperateId = jiaYuanPlan.ItemId;
+                        jiaYuanRecord.PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
+                        jiaYuanRecord.Time = TimeHelper.ServerNow();
+                        jiaYuanRecord.PlayerId = unit.Id;
                         jiaYuanPlan.GatherRecord.Add(jiaYuanRecord);
                         jiaYuanComponent.AddJiaYuanRecord(jiaYuanRecord);
                         break;
@@ -113,36 +111,31 @@ namespace ET.Server
                         jiaYuanPasture.StealNumber += 1;
                         jiaYuanPasture.GatherLastTime = TimeHelper.ServerNow();
 
-                        jiaYuanOperate = new JiaYuanOperate();
+                        jiaYuanOperate = JiaYuanOperate.Create();
                         jiaYuanOperate.OperateType = JiaYuanOperateType.GatherPasture;
                         jiaYuanOperate.UnitId = request.UnitId;
                         jiaYuanOperate.PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
-                        JiaYuanRecord jiaYuanRecord_1 = new JiaYuanRecord()
-                        {
-                            OperateType = JiaYuanOperateType.GatherPasture,
-                            OperateId = jiaYuanPasture.ConfigId,
-                            PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name,
-                            Time = TimeHelper.ServerNow(),
-                        };
+                        JiaYuanRecord jiaYuanRecord_1 = JiaYuanRecord.Create();
+                        jiaYuanRecord_1.OperateType = JiaYuanOperateType.GatherPasture;
+                        jiaYuanRecord_1.OperateId = jiaYuanPasture.ConfigId;
+                        jiaYuanRecord_1.PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
+                        jiaYuanRecord_1.Time = TimeHelper.ServerNow();
                         jiaYuanComponent.AddJiaYuanRecord(jiaYuanRecord_1);
                         break;
                 }
 
 
                 ActorId gateServerId = UnitCacheHelper.GetGateServerId(unit.Zone());
+                T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+                T2G_GateUnitInfoRequest.UserID = request.MasterId;
                 G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await unit.Root().GetComponent<MessageSender>().Call
-                    (gateServerId, new T2G_GateUnitInfoRequest()
-                    {
-                        UserID = request.MasterId
-                    });
+                    (gateServerId, T2G_GateUnitInfoRequest);
 
                 //玩家在线
                 if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
                 {
-                    M2M_JiaYuanOperateMessage opmessage = new M2M_JiaYuanOperateMessage()
-                    {
-                        JiaYuanOperate = jiaYuanOperate,
-                    };
+                    M2M_JiaYuanOperateMessage opmessage = M2M_JiaYuanOperateMessage.Create();
+                    opmessage.JiaYuanOperate = jiaYuanOperate;
                     unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send (request.MasterId, opmessage);
                 }
                 else

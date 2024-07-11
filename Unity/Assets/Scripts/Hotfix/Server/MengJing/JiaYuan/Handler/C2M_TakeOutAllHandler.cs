@@ -16,7 +16,7 @@ namespace ET.Server
             }
 
             List<BagInfo> storeLists = new List<BagInfo>();
-            M2C_RoleBagUpdate m2c_bagUpdate = new M2C_RoleBagUpdate();
+            M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
             
             storeLists.AddRange(unit.GetComponent<BagComponentS>().GetItemByLoc((ItemLocType)hourseId));
 

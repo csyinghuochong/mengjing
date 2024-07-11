@@ -22,13 +22,11 @@ namespace ET.Server
 
             bagComponent.OnCostItemData($"{request.ItemId};1");
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(request.ItemId);
-            JiaYuanPlant jiaYuanPlant = new JiaYuanPlant()
-            {
-                CellIndex = request.CellIndex,
-                ItemId = int.Parse(itemConfig.ItemUsePar),
-                StartTime = TimeHelper.ServerNow(),
-                UnitId = IdGenerater.Instance.GenerateId(),
-            };
+            JiaYuanPlant jiaYuanPlant = JiaYuanPlant.Create();
+            jiaYuanPlant.CellIndex = request.CellIndex;
+            jiaYuanPlant.ItemId = int.Parse(itemConfig.ItemUsePar);
+            jiaYuanPlant.StartTime = TimeHelper.ServerNow();
+            jiaYuanPlant.UnitId = IdGenerater.Instance.GenerateId();
 
             unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JiaYuanPlantNumber_92, 0, 1);
             unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanPlantNumber_92, 0, 1);

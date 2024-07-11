@@ -39,18 +39,17 @@ namespace ET.Server
 
             if (status == 2)
             {
-                self.JiaYuanPetList_2.Add( new JiaYuanPet()
-                {
-                    LastExpTime = TimeHelper.ServerNow(),
-                    unitId = rolePetInfo.Id,
-                    ConfigId = rolePetInfo.ConfigId,
-                    PetLv = rolePetInfo.PetLv,
-                    PlayerName = rolePetInfo.PlayerName,
-                    PetName = rolePetInfo.PetName,  
-                    Position = position,
-                    CurExp = 0,
-                    MoodValue = 0,
-                });
+                JiaYuanPet JiaYuanPet = JiaYuanPet.Create();
+                JiaYuanPet.LastExpTime = TimeHelper.ServerNow();
+                JiaYuanPet.unitId = rolePetInfo.Id;
+                JiaYuanPet.ConfigId = rolePetInfo.ConfigId;
+                JiaYuanPet.PetLv = rolePetInfo.PetLv;
+                JiaYuanPet.PlayerName = rolePetInfo.PlayerName;
+                JiaYuanPet.PetName = rolePetInfo.PetName;
+                JiaYuanPet.Position = position;
+                JiaYuanPet.CurExp = 0;
+                JiaYuanPet.MoodValue = 0;
+                self.JiaYuanPetList_2.Add(JiaYuanPet);
             }
         }
 

@@ -1244,15 +1244,17 @@ namespace ET.Server
 
             self.ShouLieSendTime = TimeHelper.ServerNow();
             self.Root().GetComponent<TimerComponent>().Remove(ref self.ShouLieUpLoadTimer);
-            RankShouLieInfo rankPetInfo = new RankShouLieInfo();
+            RankShouLieInfo rankPetInfo = RankShouLieInfo.Create();
             UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
             rankPetInfo.UnitID = userInfoComponent.UserInfo.UserId;
             rankPetInfo.PlayerName = userInfoComponent.UserInfo.Name;
             rankPetInfo.Occ = userInfoComponent.UserInfo.Occ;
             rankPetInfo.KillNumber = self.ShouLieKill;
             ActorId mapInstanceId = UnitCacheHelper.GetRankServerId(self.Zone());
+            M2R_RankShowLieRequest M2R_RankShowLieRequest = M2R_RankShowLieRequest.Create();
+            M2R_RankShowLieRequest.RankingInfo = rankPetInfo;
             R2M_RankShowLieResponse Response = (R2M_RankShowLieResponse)await self.Root().GetComponent<MessageSender>()
-                    .Call(mapInstanceId, new M2R_RankShowLieRequest() { RankingInfo = rankPetInfo });
+                    .Call(mapInstanceId, M2R_RankShowLieRequest);
         }
 
         public static void OnAddChests(this UserInfoComponentS self, int fubenId, int monsterId)
@@ -1371,15 +1373,17 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             ActorId mapInstanceId = UnitCacheHelper.GetRankServerId(self.Zone());
-            RankingInfo rankPetInfo = new RankingInfo();
+            RankingInfo rankPetInfo = RankingInfo.Create();
 
             rankPetInfo.UserId = self.UserInfo.UserId;
             rankPetInfo.PlayerName = self.UserInfo.Name;
             rankPetInfo.PlayerLv = self.UserInfo.Lv;
             rankPetInfo.Combat = self.UserInfo.Combat;
             rankPetInfo.Occ = self.UserInfo.Occ;
-            R2M_RankUpdateResponse Response = (R2M_RankUpdateResponse)await unit.Root().GetComponent<MessageSender>().Call(mapInstanceId,
-                new M2R_RankUpdateRequest() { CampId = numericComponent.GetAsInt(NumericType.AcvitiyCamp), RankingInfo = rankPetInfo });
+            M2R_RankUpdateRequest M2R_RankUpdateRequest = M2R_RankUpdateRequest.Create();
+            M2R_RankUpdateRequest.CampId = numericComponent.GetAsInt(NumericType.AcvitiyCamp);
+            M2R_RankUpdateRequest.RankingInfo = rankPetInfo;
+            R2M_RankUpdateResponse Response = (R2M_RankUpdateResponse)await unit.Root().GetComponent<MessageSender>().Call(mapInstanceId,M2R_RankUpdateRequest);
             if (unit.IsDisposed)
             {
                 return;

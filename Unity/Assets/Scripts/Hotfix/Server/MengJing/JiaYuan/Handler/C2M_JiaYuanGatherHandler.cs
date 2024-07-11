@@ -45,12 +45,11 @@ namespace ET.Server
 
                     jiaYuanPlan.GatherNumber += 1;
                     jiaYuanPlan.GatherLastTime = TimeHelper.ServerNow();
-                    jiaYuanPlan.GatherRecord.Add(new JiaYuanRecord()
-                    {
-                        PlayerId = unit.Id,
-                        Time = TimeHelper.ServerNow(),
-                        PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name,
-                    }) ;
+                    JiaYuanRecord JiaYuanRecord = JiaYuanRecord.Create();
+                    JiaYuanRecord.PlayerId = unit.Id;
+                    JiaYuanRecord.Time = TimeHelper.ServerNow();
+                    JiaYuanRecord.PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
+                    jiaYuanPlan.GatherRecord.Add(JiaYuanRecord) ;
                     unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.JiaYuanGatherPlant_401, 0, 1);
                     unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JiaYuanGatherPlant_93, 0, 1);
                     unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanGatherPlant_93, 0, 1);

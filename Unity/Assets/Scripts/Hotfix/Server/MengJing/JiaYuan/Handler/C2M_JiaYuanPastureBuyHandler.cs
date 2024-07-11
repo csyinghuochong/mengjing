@@ -64,12 +64,10 @@ namespace ET.Server
             unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JiaYuanPastureNumber_94, 0, 1);
             unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanPastureNumber_94, 0, 1);
 
-            JiaYuanPastures jiaYuanPastures = new JiaYuanPastures()
-            { 
-                ConfigId = jiaYuanPastureConfig.Id,
-                StartTime = TimeHelper.ServerNow(),
-                UnitId = IdGenerater.Instance.GenerateId(), 
-            };
+            JiaYuanPastures jiaYuanPastures = JiaYuanPastures.Create();
+            jiaYuanPastures.ConfigId = jiaYuanPastureConfig.Id;
+            jiaYuanPastures.StartTime = TimeHelper.ServerNow();
+            jiaYuanPastures.UnitId = IdGenerater.Instance.GenerateId();
 
             UnitFactory.CreatePasture(unit.Scene(), jiaYuanPastures, unit.Id);
             List<JiaYuanPastures> JiaYuanPastureList_3 = unit.GetComponent<JiaYuanComponentS>().JiaYuanPastureList_7;

@@ -334,7 +334,7 @@ namespace ET.Server
             {
                 for (int i = 0; i < unitids.Count; i++)
                 {
-                    MailInfo mailInfo = new MailInfo();
+                    MailInfo mailInfo = MailInfo.Create();
                     mailInfo.Status = 0;
                     mailInfo.Title = "家族争霸赛奖励";
                     mailInfo.MailId = IdGenerater.Instance.GenerateId();
@@ -343,18 +343,30 @@ namespace ET.Server
                     {
                         mailInfo.Context = "发送家族争霸赛胜利奖励";
                         Log.Warning($"发送奖励胜利！！: {self.Zone()} {unitids[i]}");
-                        mailInfo.ItemList.Add(new BagInfo() { ItemID = 1, ItemNum = winJingJin, GetWay = $"{ItemGetWay.UnionRace}_{serverTime}" });
+                        BagInfo BagInfo = ET.BagInfo.Create();
+                        BagInfo.ItemID = 1;
+                        BagInfo.ItemNum = winJingJin;
+                        BagInfo.GetWay = $"{ItemGetWay.UnionRace}_{serverTime}";
+                        mailInfo.ItemList.Add(BagInfo);
                     }
                     else
                     {
                         mailInfo.Context = "发送家族争霸赛失败奖励";
                         Log.Warning($"发送奖励失败！！: {self.Zone()} {unitids[i]}");
-                        mailInfo.ItemList.Add(new BagInfo() { ItemID = 1, ItemNum = failJiangJin, GetWay = $"{ItemGetWay.UnionRace}_{serverTime}" });
+                        BagInfo BagInfo = ET.BagInfo.Create();
+                        BagInfo.ItemID = 1;
+                        BagInfo.ItemNum = failJiangJin;
+                        BagInfo.GetWay = $"{ItemGetWay.UnionRace}_{serverTime}";
+                        mailInfo.ItemList.Add(BagInfo);
                     }
 
                     //MailHelp.SendUserMail(self.DomainZone(), unitids[i], mailInfo).Coroutine();
+                    M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
+                    M2E_EMailSendRequest.Id = unitids[i];
+                    M2E_EMailSendRequest.MailInfo = mailInfo;
+                    M2E_EMailSendRequest.GetWay = ItemGetWay.UnionRace;
                     E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>()
-                            .Call(mailServerId, new M2E_EMailSendRequest() { Id = unitids[i], MailInfo = mailInfo, GetWay = ItemGetWay.UnionRace, });
+                            .Call(mailServerId, M2E_EMailSendRequest);
                     if (g_EMailSendResponse.Error != ErrorCode.ERR_Success)
                     {
                         Log.Warning($"家族战发送奖励失败: {unitids[i]}");
@@ -368,7 +380,7 @@ namespace ET.Server
             if (fubnescene != null)
             {
                 List<Unit> units = UnitHelper.GetUnitList(fubnescene, UnitType.Player);
-                M2C_UnionRaceInfoResult m2C_Battle = new M2C_UnionRaceInfoResult();
+                M2C_UnionRaceInfoResult m2C_Battle = M2C_UnionRaceInfoResult.Create();
                 m2C_Battle.SceneType = SceneTypeEnum.UnionRace;
                 for (int i = 0; i < units.Count; i++)
                 {
@@ -381,7 +393,8 @@ namespace ET.Server
             fubnescene = self.GetChild<Scene>(self.UnionRaceSceneId);
             if (fubnescene != null)
             {
-                C2M_TransferMap actor_Transfer = new C2M_TransferMap() { SceneType = SceneTypeEnum.MainCityScene, };
+                C2M_TransferMap actor_Transfer = C2M_TransferMap.Create();
+                actor_Transfer.SceneType = SceneTypeEnum.MainCityScene;
                 List<Unit> units = UnitHelper.GetUnitList(fubnescene, UnitType.Player);
                 for (int i = 0; i < units.Count; i++)
                 {
@@ -443,11 +456,15 @@ namespace ET.Server
             }
 
             ActorId gateServerId = UnitCacheHelper.GetGateServerId(self.Zone());
-            M2C_HorseNoticeInfo m2C_HorseNoticeInfo = new M2C_HorseNoticeInfo() { NoticeType = NoticeType.UnionRace, };
+            M2C_HorseNoticeInfo m2C_HorseNoticeInfo = M2C_HorseNoticeInfo.Create();
+            m2C_HorseNoticeInfo.NoticeType = NoticeType.UnionRace;
+
+            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
             for (int i = 0; i < playerlist.Count; i++)
             {
+                T2G_GateUnitInfoRequest.UserID = playerlist[i].UserID;
                 G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>()
-                        .Call(gateServerId, new T2G_GateUnitInfoRequest() { UserID = playerlist[i].UserID });
+                        .Call(gateServerId, T2G_GateUnitInfoRequest);
                 if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
                 {
                     MapMessageHelper.SendToClient(self.Root(), g2M_UpdateUnitResponse.SessionInstanceId, m2C_HorseNoticeInfo);
@@ -516,12 +533,17 @@ namespace ET.Server
             List<Unit> players = UnitHelper.GetUnitList(scene, UnitType.Player);
             for (int i = 0; i < players.Count; i++)
             {
-                MailInfo mailInfo = new MailInfo();
+                MailInfo mailInfo = MailInfo.Create();
                 mailInfo.Status = 0;
                 mailInfo.Title = "家族入侵怪物奖励";
                 mailInfo.MailId = IdGenerater.Instance.GenerateId();
 
-                mailInfo.ItemList.Add(new BagInfo() { ItemID = 1, ItemNum = 100, GetWay = $"{ItemGetWay.UnionBoss}_{serverTime}" });
+                BagInfo BagInfo = BagInfo.Create();
+                BagInfo.ItemID = 1;
+                BagInfo.ItemNum = 100;
+                BagInfo.GetWay = $"{ItemGetWay.UnionBoss}_{serverTime}";
+                
+                mailInfo.ItemList.Add(BagInfo);
                 MailHelp.SendUserMail(self.Root(), players[i].Id, mailInfo).Coroutine();
             }
         }

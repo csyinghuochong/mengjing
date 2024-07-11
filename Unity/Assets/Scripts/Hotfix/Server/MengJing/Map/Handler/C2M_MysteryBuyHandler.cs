@@ -43,11 +43,11 @@ namespace ET.Server
                 ActorId chargeServerId = StartSceneConfigCategory.Instance.GetBySceneName(unit.Zone(), "Activity").ActorId;
                 request.MysteryItemInfo.ItemID = mysteryConfig.SellItemID;
                 request.MysteryItemInfo.ItemNumber = 1;
+
+                M2A_MysteryBuyRequest M2A_MysteryBuyRequest = M2A_MysteryBuyRequest.Create();
+                M2A_MysteryBuyRequest.MysteryItemInfo = request.MysteryItemInfo;
                 A2M_MysteryBuyResponse r_GameStatusResponse = (A2M_MysteryBuyResponse)await unit.Root().GetComponent<MessageSender>().Call
-                    (chargeServerId, new M2A_MysteryBuyRequest()
-                    {
-                        MysteryItemInfo = request.MysteryItemInfo
-                    });
+                    (chargeServerId, M2A_MysteryBuyRequest);
 
                 if (r_GameStatusResponse.Error != ErrorCode.ERR_Success)
                 {

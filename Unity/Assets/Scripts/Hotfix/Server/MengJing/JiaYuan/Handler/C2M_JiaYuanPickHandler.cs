@@ -44,25 +44,23 @@ namespace ET.Server
 
                 JiaYuanComponentS jiaYuanComponent_2 = await UnitCacheHelper.GetComponentCache<JiaYuanComponentS>(unit.Root(), request.MasterId);
                 ActorId gateServerId = UnitCacheHelper.GetGateServerId(unit.Zone());
+
+                T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+                T2G_GateUnitInfoRequest.UserID = request.MasterId;
                 G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await unit.Root().GetComponent<MessageSender>().Call
-                    (gateServerId, new T2G_GateUnitInfoRequest()
-                    {
-                        UserID = request.MasterId
-                    });
+                    (gateServerId, T2G_GateUnitInfoRequest);
 
                 //玩家在线
                 if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
                 {
-                    JiaYuanOperate jiaYuanOperate = new JiaYuanOperate();
-                    jiaYuanOperate = new JiaYuanOperate();
+                    JiaYuanOperate jiaYuanOperate = JiaYuanOperate.Create();
+                    jiaYuanOperate = JiaYuanOperate.Create();
                     jiaYuanOperate.OperateType = JiaYuanOperateType.Pick;
                     jiaYuanOperate.UnitId = request.UnitId;
                     jiaYuanOperate.PlayerName = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
                     jiaYuanOperate.OperateId = boxUnit.ConfigId;
-                    M2M_JiaYuanOperateMessage opmessage = new M2M_JiaYuanOperateMessage()
-                    {
-                        JiaYuanOperate = jiaYuanOperate,
-                    };
+                    M2M_JiaYuanOperateMessage opmessage = M2M_JiaYuanOperateMessage.Create();
+                    opmessage.JiaYuanOperate = jiaYuanOperate;
                     unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(request.MasterId, opmessage);
                 }
                 else

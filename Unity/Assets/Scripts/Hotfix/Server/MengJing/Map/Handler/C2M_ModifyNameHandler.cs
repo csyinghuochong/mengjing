@@ -52,7 +52,7 @@ namespace ET.Server
             if (unit.GetComponent<BagComponentS>().OnCostItemData(globalValueConfig.Value))
             {
                 unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.Name, request.NewName);
-                M2C_RoleDataBroadcast m2C_BroadcastRoleData = new M2C_RoleDataBroadcast();
+                M2C_RoleDataBroadcast m2C_BroadcastRoleData = M2C_RoleDataBroadcast.Create();
                 m2C_BroadcastRoleData.UnitId = unit.Id;
                 m2C_BroadcastRoleData.UpdateType = (int)UserDataType.Name;
                 m2C_BroadcastRoleData.UpdateTypeValue = request.NewName;

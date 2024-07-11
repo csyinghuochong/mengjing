@@ -83,12 +83,14 @@ namespace ET.Server
 
                         ActorId gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.Zone(), "Gate1").ActorId;
                         G2T_GateUnitInfoResponse g2M_UpdateUnitResponse = null;
+                        
+                        T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
                         if (g_SendChatRequest1.Error == 0 && g_SendChatRequest1.TeamInfo != null)
                         {
                             for (int i = 0; i < g_SendChatRequest1.TeamInfo.PlayerList.Count; i++)
                             {
-                                T2G_GateUnitInfoRequest t2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
-                                t2G_GateUnitInfoRequest.UserID = g_SendChatRequest1.TeamInfo.PlayerList[i].UserID
+                               
+                                t2G_GateUnitInfoRequest.UserID = g_SendChatRequest1.TeamInfo.PlayerList[i].UserID;
                                 g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse) await chatInfoUnit.Root().GetComponent<MessageSender>().Call
                                 (gateServerId, t2G_GateUnitInfoRequest);
 
@@ -116,11 +118,11 @@ namespace ET.Server
                         break;
 
                     case (int)ChannelEnum.Friend:
-                        T2G_GateUnitInfoRequest t2GGateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
-                        t2GGateUnitInfoRequest.UserID = request.ChatInfo.ParamId;
+                        T2G_GateUnitInfoRequest t2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+                        t2G_GateUnitInfoRequest.UserID = request.ChatInfo.ParamId;
                         gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(chatInfoUnit.Zone(), "Gate1").ActorId;
                         g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await chatInfoUnit.Root().GetComponent<MessageSender>().Call
-                              (gateServerId, t2GGateUnitInfoRequest);
+                              (gateServerId, t2G_GateUnitInfoRequest);
 
                         //发给好友()
                         if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
@@ -140,10 +142,10 @@ namespace ET.Server
                         }
 
                         //发给自己
-                        T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
-                        T2G_GateUnitInfoRequest.UserID = request.ChatInfo.UserId;
+                        t2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+                        t2G_GateUnitInfoRequest.UserID = request.ChatInfo.UserId;
                         g2M_UpdateUnitResponse = (G2T_GateUnitInfoResponse)await chatInfoUnit.Root().GetComponent<MessageSender>().Call
-                              (gateServerId, T2G_GateUnitInfoRequest);
+                              (gateServerId, t2G_GateUnitInfoRequest);
                         MapMessageHelper.SendToClient(chatInfoUnit.Root(), g2M_UpdateUnitResponse.SessionInstanceId, m2C_SyncChatInfo);
                         break;
                 }

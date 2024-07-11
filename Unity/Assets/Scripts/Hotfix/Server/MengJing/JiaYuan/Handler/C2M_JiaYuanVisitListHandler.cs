@@ -26,7 +26,8 @@ namespace ET.Server
             {
                 return null;
             }
-            JiaYuanVisit jiaYuanVisit = new JiaYuanVisit() ;
+
+            JiaYuanVisit jiaYuanVisit = JiaYuanVisit.Create();
             jiaYuanVisit.Occ = resultUser[0].UserInfo.Occ;
             jiaYuanVisit.OccTwo = resultUser[0].UserInfo.OccTwo;
             jiaYuanVisit.PlayerName = resultUser[0].UserInfo.Name;
