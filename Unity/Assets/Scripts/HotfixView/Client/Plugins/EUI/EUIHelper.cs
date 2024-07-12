@@ -156,8 +156,8 @@ namespace ET.Client
             toggle.onValueChanged?.Invoke(isSelected);
         }
 
-        public static void RemoveUIScrollItems<K, T>(this K self, ref Dictionary<int, T> dictionary) where K : Entity, IUILogic
-                where T : Entity, IUIScrollItem
+        public static void RemoveUIScrollItems<K, T>(this K self, ref Dictionary<int, EntityRef<T>> dictionary) where K : Entity, IUILogic
+                where T : Entity,IAwake,IUIScrollItem<T>
         {
             if (dictionary == null)
             {
@@ -166,7 +166,8 @@ namespace ET.Client
 
             foreach (var item in dictionary)
             {
-                item.Value.Dispose();
+                T value = item.Value;
+                value?.Dispose();
             }
 
             dictionary.Clear();
