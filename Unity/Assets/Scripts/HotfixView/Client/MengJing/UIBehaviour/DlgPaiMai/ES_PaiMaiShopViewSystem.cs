@@ -78,7 +78,8 @@ namespace ET.Client
                 self.TypeItemUIList.Add(itemComponent);
             }
 
-            self.TypeItemUIList[0].OnClickTypeButton();
+            UIPaiMaiShopTypeComponent uiPaiMaiShopTypeComponent = self.TypeItemUIList[0];
+            uiPaiMaiShopTypeComponent.OnClickTypeButton();
         }
 
         public static async ETTask OnBtn_BuyItem(this ES_PaiMaiShop self)

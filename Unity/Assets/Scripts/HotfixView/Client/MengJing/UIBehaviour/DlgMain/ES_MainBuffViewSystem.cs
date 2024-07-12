@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.MainBuffTimer)]
-    public class MainBuffTimer: ATimer<ES_MainBuff>
+    public class MainBuffTimer : ATimer<ES_MainBuff>
     {
         protected override void Run(ES_MainBuff self)
         {
@@ -20,9 +20,9 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (UIMainBuffItemComponent))]
-    [EntitySystemOf(typeof (ES_MainBuff))]
-    [FriendOfAttribute(typeof (ES_MainBuff))]
+    [FriendOf(typeof(UIMainBuffItemComponent))]
+    [EntitySystemOf(typeof(ES_MainBuff))]
+    [FriendOfAttribute(typeof(ES_MainBuff))]
     public static partial class ES_MainBuffSystem
     {
         [EntitySystem]
@@ -51,7 +51,10 @@ namespace ET.Client
                 {
                     uIMainBuffItemComponent.BeforeRemove();
                     uIMainBuffItemComponent.BuffID = 0;
-                    self.MainBuffUIList[i].GameObject.SetActive(false);
+
+                    UIMainBuffItemComponent uiMainBuffItemComponent = self.MainBuffUIList[i];
+                    uiMainBuffItemComponent.GameObject.SetActive(false);
+
                     self.CacheUIList.Add(self.MainBuffUIList[i]);
                     self.MainBuffUIList.RemoveAt(i);
                 }
@@ -85,8 +88,10 @@ namespace ET.Client
         {
             for (int i = 0; i < self.MainBuffUIList.Count; i++)
             {
-                self.MainBuffUIList[i].BuffID = 0;
-                self.MainBuffUIList[i].GameObject.SetActive(false);
+                UIMainBuffItemComponent uiMainBuffItemComponent = self.MainBuffUIList[i];
+                uiMainBuffItemComponent.BuffID = 0;
+                uiMainBuffItemComponent.GameObject.SetActive(false);
+
                 self.CacheUIList.Add(self.MainBuffUIList[i]);
             }
 
@@ -106,7 +111,7 @@ namespace ET.Client
 
             if (!self.AddSameBuff(buffHandler))
             {
-                UIMainBuffItemComponent ui_buff = self.CacheUIList.Count > 0? self.CacheUIList[0] : null;
+                UIMainBuffItemComponent ui_buff = self.CacheUIList.Count > 0 ? self.CacheUIList[0] : null;
                 if (ui_buff == null)
                 {
                     ui_buff = self.AddChild<UIMainBuffItemComponent, GameObject>(GameObject.Instantiate(self.UIMainBuffItem));

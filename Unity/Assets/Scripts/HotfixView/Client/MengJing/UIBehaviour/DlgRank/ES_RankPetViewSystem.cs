@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_RankPet))]
-    [FriendOfAttribute(typeof (ES_RankPet))]
+    [EntitySystemOf(typeof(ES_RankPet))]
+    [FriendOfAttribute(typeof(ES_RankPet))]
     public static partial class ES_RankPetSystem
     {
         [EntitySystem]
@@ -43,10 +43,11 @@ namespace ET.Client
 
             for (int i = 0; i < response.RankPetList.Count; i++)
             {
-                self.PetUIList[i].OnInitUI(response.RankPetList[i]);
+                ES_RankPetItem esRankPetItem = self.PetUIList[i];
+                esRankPetItem.OnInitUI(response.RankPetList[i]);
             }
 
-            self.E_Text_RankText.text = response.RankNumber == 0? "无" : response.RankNumber.ToString();
+            self.E_Text_RankText.text = response.RankNumber == 0 ? "无" : response.RankNumber.ToString();
         }
 
         public static void OnUpdateTimes(this ES_RankPet self)

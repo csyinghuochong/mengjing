@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.RoleXiLianLevel)]
-    public class RoleXiLianLevelTimer: ATimer<ES_RoleXiLianLevel>
+    public class RoleXiLianLevelTimer : ATimer<ES_RoleXiLianLevel>
     {
         protected override void Run(ES_RoleXiLianLevel self)
         {
@@ -21,9 +21,9 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (ES_RoleXiLianLevelItem))]
-    [EntitySystemOf(typeof (ES_RoleXiLianLevel))]
-    [FriendOfAttribute(typeof (ES_RoleXiLianLevel))]
+    [FriendOf(typeof(ES_RoleXiLianLevelItem))]
+    [EntitySystemOf(typeof(ES_RoleXiLianLevel))]
+    [FriendOfAttribute(typeof(ES_RoleXiLianLevel))]
     public static partial class ES_RoleXiLianLevelSystem
     {
         [EntitySystem]
@@ -53,16 +53,18 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int xiliandu = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemXiLianDu);
             int xilianLevel = XiLianHelper.GetXiLianId(xiliandu);
-            xilianLevel = xilianLevel != 0? xilianLevel : EquipXiLianConfigCategory.Instance.EquipXiLianLevelList[1].Id;
+            xilianLevel = xilianLevel != 0 ? xilianLevel : EquipXiLianConfigCategory.Instance.EquipXiLianLevelList[1].Id;
             self.OnUpdateButton(xilianLevel);
-            self.UIRoleXiLianLevels[1].OnUpdateUI(xilianLevel);
+            ES_RoleXiLianLevelItem esRoleXiLianLevelItem = self.UIRoleXiLianLevels[1];
+            esRoleXiLianLevelItem.OnUpdateUI(xilianLevel);
         }
 
         private static void InitItemUIList(this ES_RoleXiLianLevel self)
         {
             for (int i = 0; i < 3; i++)
             {
-                self.UIRoleXiLianLevels[i].uiTransform.localPosition = new Vector3((i - 1) * self.ItemWidth, 0f, 0f);
+                ES_RoleXiLianLevelItem esRoleXiLianLevelItem = self.UIRoleXiLianLevels[i];
+                esRoleXiLianLevelItem.uiTransform.localPosition = new Vector3((i - 1) * self.ItemWidth, 0f, 0f);
             }
         }
 
@@ -70,15 +72,20 @@ namespace ET.Client
         {
             TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
             timerComponent.Remove(ref self.Timer);
-            self.UIRoleXiLianLevels[0].PostionY = self.ItemWidth * -1f;
-            self.UIRoleXiLianLevels[1].PostionY = 0f;
-            self.UIRoleXiLianLevels[2].PostionY = self.ItemWidth;
-            float offset = self.UIRoleXiLianLevels[1].uiTransform.localPosition.x;
+            
+            ES_RoleXiLianLevelItem item0 = self.UIRoleXiLianLevels[0];
+            ES_RoleXiLianLevelItem item1 = self.UIRoleXiLianLevels[1];
+            ES_RoleXiLianLevelItem item2 = self.UIRoleXiLianLevels[2];
+            
+            item0.PostionY = self.ItemWidth * -1f;
+            item1.PostionY = 0f;
+            item2.PostionY = self.ItemWidth;
+            float offset = item1.uiTransform.localPosition.x;
             if (Mathf.Abs(offset) < self.MoveSpeed + 1f)
             {
-                self.UIRoleXiLianLevels[0].uiTransform.localPosition = new Vector3(self.ItemWidth * -1f, 0f, 0f);
-                self.UIRoleXiLianLevels[1].uiTransform.localPosition = new Vector3(0f, 0f, 0f);
-                self.UIRoleXiLianLevels[2].uiTransform.localPosition = new Vector3(self.ItemWidth, 0f, 0f);
+                item0.uiTransform.localPosition = new Vector3(self.ItemWidth * -1f, 0f, 0f);
+                item1.uiTransform.localPosition = new Vector3(0f, 0f, 0f);
+                item2.uiTransform.localPosition = new Vector3(self.ItemWidth, 0f, 0f);
             }
             else
             {
@@ -95,18 +102,22 @@ namespace ET.Client
 
         public static void OnUpdate(this ES_RoleXiLianLevel self)
         {
-            float offset = self.UIRoleXiLianLevels[1].uiTransform.localPosition.x;
-            float movedis = offset < 0? self.MoveSpeed : -self.MoveSpeed;
+            ES_RoleXiLianLevelItem item0 = self.UIRoleXiLianLevels[0];
+            ES_RoleXiLianLevelItem item1 = self.UIRoleXiLianLevels[1];
+            ES_RoleXiLianLevelItem item2 = self.UIRoleXiLianLevels[2];
+            
+            float offset = item1.uiTransform.localPosition.x;
+            float movedis = offset < 0 ? self.MoveSpeed : -self.MoveSpeed;
 
-            self.MoveToPositon(self.UIRoleXiLianLevels[0].uiTransform.gameObject, movedis);
-            self.MoveToPositon(self.UIRoleXiLianLevels[1].uiTransform.gameObject, movedis);
-            self.MoveToPositon(self.UIRoleXiLianLevels[2].uiTransform.gameObject, movedis);
+            self.MoveToPositon(item0.uiTransform.gameObject, movedis);
+            self.MoveToPositon(item1.uiTransform.gameObject, movedis);
+            self.MoveToPositon(item2.uiTransform.gameObject, movedis);
 
             if (Mathf.Abs(offset) < self.MoveSpeed + 1f)
             {
-                self.UIRoleXiLianLevels[0].uiTransform.localPosition = new Vector3(self.ItemWidth * -1f, 0f, 0f);
-                self.UIRoleXiLianLevels[1].uiTransform.localPosition = new Vector3(0f, 0f, 0f);
-                self.UIRoleXiLianLevels[2].uiTransform.localPosition = new Vector3(self.ItemWidth, 0f, 0f);
+                item0.uiTransform.localPosition = new Vector3(self.ItemWidth * -1f, 0f, 0f);
+                item1.uiTransform.localPosition = new Vector3(0f, 0f, 0f);
+                item2.uiTransform.localPosition = new Vector3(self.ItemWidth, 0f, 0f);
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
             }
         }
@@ -122,7 +133,9 @@ namespace ET.Client
             self.UIRoleXiLianLevels.RemoveAt(2);
             self.UIRoleXiLianLevels.Insert(0, esRoleXiLianLevelItem);
 
-            self.UIRoleXiLianLevels[1].OnUpdateUI(self.EquipXilianId - 1);
+            ES_RoleXiLianLevelItem item1 = self.UIRoleXiLianLevels[1];
+            
+            item1.OnUpdateUI(self.EquipXilianId - 1);
             self.OnUpdateButton(self.EquipXilianId - 1);
             self.SetPosition();
         }
@@ -138,7 +151,9 @@ namespace ET.Client
             self.UIRoleXiLianLevels.RemoveAt(0);
             self.UIRoleXiLianLevels.Add(esRoleXiLianLevelItem);
 
-            self.UIRoleXiLianLevels[1].OnUpdateUI(self.EquipXilianId + 1);
+            ES_RoleXiLianLevelItem item1 = self.UIRoleXiLianLevels[1];
+            
+            item1.OnUpdateUI(self.EquipXilianId + 1);
             self.OnUpdateButton(self.EquipXilianId + 1);
             self.SetPosition();
         }

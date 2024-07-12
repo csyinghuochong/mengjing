@@ -68,12 +68,13 @@ namespace ET.Client
             List<long> ids = new List<long>();
             for (int i = 0; i < self.CostItemList.Length; i++)
             {
-                if (self.CostItemList[i].Baginfo == null)
+                ES_CommonItem esCommonItem = self.CostItemList[i];
+                if (esCommonItem.Baginfo == null)
                 {
                     continue;
                 }
 
-                ids.Add(self.CostItemList[i].Baginfo.BagInfoID);
+                ids.Add(esCommonItem.Baginfo.BagInfoID);
             }
 
             return ids;
@@ -86,16 +87,17 @@ namespace ET.Client
 
             for (int i = 0; i < self.CostItemList.Length; i++)
             {
-                if (self.CostItemList[i].Baginfo == null)
+                ES_CommonItem esCommonItem = self.CostItemList[i];
+                if (esCommonItem.Baginfo == null)
                 {
-                    self.CostItemList[i].UpdateItem(null, ItemOperateEnum.None);
+                    esCommonItem.UpdateItem(null, ItemOperateEnum.None);
                     continue;
                 }
 
-                BagInfo bagInfo = bagComponent.GetBagInfo(self.CostItemList[i].Baginfo.BagInfoID);
+                BagInfo bagInfo = bagComponent.GetBagInfo(esCommonItem.Baginfo.BagInfoID);
                 if (bagInfo == null)
                 {
-                    self.CostItemList[i].UpdateItem(null, ItemOperateEnum.None);
+                    esCommonItem.UpdateItem(null, ItemOperateEnum.None);
                     continue;
                 }
 
@@ -110,7 +112,7 @@ namespace ET.Client
 
                 if (itemNumber[bagInfo.BagInfoID] > bagInfo.ItemNum)
                 {
-                    self.CostItemList[i].UpdateItem(null, ItemOperateEnum.None);
+                    esCommonItem.UpdateItem(null, ItemOperateEnum.None);
                 }
             }
         }
@@ -170,8 +172,8 @@ namespace ET.Client
                     bool have = false;
                     for (int h = 0; h < self.CostItemList.Length; h++)
                     {
-                        if (self.CostItemList[h].Baginfo != null
-                            && self.CostItemList[h].Baginfo.BagInfoID == bagInfo.BagInfoID)
+                        ES_CommonItem esCommonItem = self.CostItemList[h];
+                        if (esCommonItem.Baginfo != null && esCommonItem.Baginfo.BagInfoID == bagInfo.BagInfoID)
                         {
                             have = true;
                         }
@@ -194,7 +196,8 @@ namespace ET.Client
             {
                 for (int i = 0; i < self.CostItemList.Length; i++)
                 {
-                    BagInfo bagInfo1 = self.CostItemList[i].Baginfo;
+                    ES_CommonItem esCommonItem = self.CostItemList[i];
+                    BagInfo bagInfo1 = esCommonItem.Baginfo;
                     if (bagInfo1 != null && bagInfo1.ItemID == bagInfo.ItemID)
                     {
                         curNumber++;
@@ -208,7 +211,8 @@ namespace ET.Client
 
                 for (int i = 0; i < self.CostItemList.Length; i++)
                 {
-                    if (self.CostItemList[i].Baginfo != null)
+                    ES_CommonItem esCommonItem = self.CostItemList[i];
+                    if (esCommonItem.Baginfo != null)
                     {
                         continue;
                     }
@@ -218,9 +222,9 @@ namespace ET.Client
                     bagInfo1.BagInfoID = bagInfo.BagInfoID;
                     bagInfo1.ItemNum = 1;
                     bagInfo1.RpcId = i;
-                    self.CostItemList[i].UpdateItem(bagInfo1, ItemOperateEnum.HuishouShow);
-                    self.CostItemList[i].E_ItemNumText.text = "1";
-                    self.CostItemList[i].E_ItemNameText.gameObject.SetActive(false);
+                    esCommonItem.UpdateItem(bagInfo1, ItemOperateEnum.HuishouShow);
+                    esCommonItem.E_ItemNumText.text = "1";
+                    esCommonItem.E_ItemNameText.gameObject.SetActive(false);
                     break;
                 }
             }
@@ -228,7 +232,8 @@ namespace ET.Client
             {
                 for (int i = self.CostItemList.Length - 1; i >= 0; i--)
                 {
-                    BagInfo bagInfo1 = self.CostItemList[i].Baginfo;
+                    ES_CommonItem esCommonItem = self.CostItemList[i];
+                    BagInfo bagInfo1 = esCommonItem.Baginfo;
                     if (bagInfo1 == null)
                     {
                         continue;
@@ -236,9 +241,9 @@ namespace ET.Client
 
                     if (bagInfo1.BagInfoID == bagInfo.BagInfoID)
                     {
-                        self.CostItemList[i].UpdateItem(null, ItemOperateEnum.HuishouShow);
-                        self.CostItemList[i].E_ItemNumText.text = "1";
-                        self.CostItemList[i].E_ItemNameText.gameObject.SetActive(false);
+                        esCommonItem.UpdateItem(null, ItemOperateEnum.HuishouShow);
+                        esCommonItem.E_ItemNumText.text = "1";
+                        esCommonItem.E_ItemNameText.gameObject.SetActive(false);
                         break;
                     }
                 }

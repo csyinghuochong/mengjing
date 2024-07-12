@@ -93,17 +93,20 @@ namespace ET.Client
 
             for (int i = petConfigs.Count; i < self.uIPetTuJianItems.Count; i++)
             {
-                self.uIPetTuJianItems[i].uiTransform.gameObject.SetActive(false);
+                Scroll_Item_PetTuJianItem item = self.uIPetTuJianItems[i];
+                item.uiTransform.gameObject.SetActive(false);
             }
 
-            self.uIPetTuJianItems[0].OnImage_ItemButton();
+            Scroll_Item_PetTuJianItem scrollItemPetTuJianItem = self.uIPetTuJianItems[0];
+            scrollItemPetTuJianItem.OnImage_ItemButton();
         }
 
         public static void OnClickPetHandler(this ES_PetTuJian self, int petid)
         {
             for (int i = 0; i < self.uIPetTuJianItems.Count; i++)
             {
-                self.uIPetTuJianItems[i].SetSelected(petid);
+                Scroll_Item_PetTuJianItem scrollItemPetTuJianItem = self.uIPetTuJianItems[i];
+                scrollItemPetTuJianItem.SetSelected(petid);
             }
 
             self.UpdatePetZizhi(petid);

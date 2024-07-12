@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_PetEggListItem))]
-    [EntitySystemOf(typeof (ES_PetEggList))]
-    [FriendOfAttribute(typeof (ES_PetEggList))]
+    [FriendOf(typeof(ES_PetEggListItem))]
+    [EntitySystemOf(typeof(ES_PetEggList))]
+    [FriendOfAttribute(typeof(ES_PetEggList))]
     public static partial class ES_PetEggListSystem
     {
         [EntitySystem]
@@ -72,7 +72,8 @@ namespace ET.Client
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
             for (int i = 0; i < self.PetList.Count; i++)
             {
-                self.PetList[i].OnUpdateUI(petComponent.RolePetEggs[i], i);
+                ES_PetEggListItem esPetEggListItem = self.PetList[i];
+                esPetEggListItem.OnUpdateUI(petComponent.RolePetEggs[i], i);
             }
         }
 
@@ -100,7 +101,8 @@ namespace ET.Client
 
         public static async ETTask RequestHatch(this ES_PetEggList self, int index, BagInfo bagInfo)
         {
-            KeyValuePairInt oldEgg = self.PetList[index].RolePetEgg;
+            ES_PetEggListItem esPetEggListItem = self.PetList[index];
+            KeyValuePairInt oldEgg = esPetEggListItem.RolePetEgg;
             if (oldEgg != null && oldEgg.KeyId > 0)
             {
                 return;

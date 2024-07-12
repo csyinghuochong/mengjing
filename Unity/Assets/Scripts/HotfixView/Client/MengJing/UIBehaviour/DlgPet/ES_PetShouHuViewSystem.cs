@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_ShouhuInfo))]
-    [EntitySystemOf(typeof (ES_PetShouHu))]
-    [FriendOfAttribute(typeof (ES_PetShouHu))]
+    [FriendOf(typeof(ES_ShouhuInfo))]
+    [EntitySystemOf(typeof(ES_PetShouHu))]
+    [FriendOfAttribute(typeof(ES_PetShouHu))]
     public static partial class ES_PetShouHuSystem
     {
         [EntitySystem]
@@ -26,7 +26,8 @@ namespace ET.Client
             self.E_PetShouHuItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnPetShouHuItemsRefresh);
             self.E_ButtonSetButton.AddListenerAsync(self.OnButtonSet);
 
-            self.ShouhuInfos[0].OnClickButton();
+            ES_ShouhuInfo esShouhuInfo = self.ShouhuInfos[0];
+            esShouhuInfo.OnClickButton();
             self.OnUpdateUI();
         }
 
@@ -80,7 +81,8 @@ namespace ET.Client
 
             for (int i = 0; i < self.ShouhuInfos.Count; i++)
             {
-                self.ShouhuInfos[i].E_ImageSelectImage.gameObject.SetActive(i == index);
+                ES_ShouhuInfo esShouhuInfo = self.ShouhuInfos[i];
+                esShouhuInfo.E_ImageSelectImage.gameObject.SetActive(i == index);
             }
         }
 
@@ -88,7 +90,8 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ShouhuInfos.Count; i++)
             {
-                self.ShouhuInfos[i].E_ImageActiveImage.gameObject.SetActive(i == index);
+                ES_ShouhuInfo esShouhuInfo = self.ShouhuInfos[i];
+                esShouhuInfo.E_ImageActiveImage.gameObject.SetActive(i == index);
             }
         }
 
@@ -96,7 +99,8 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ShouhuInfos.Count; i++)
             {
-                self.ShouhuInfos[i].OnUpdateUI(i);
+                ES_ShouhuInfo esShouhuInfo = self.ShouhuInfos[i];
+                esShouhuInfo.OnUpdateUI(i);
             }
         }
 

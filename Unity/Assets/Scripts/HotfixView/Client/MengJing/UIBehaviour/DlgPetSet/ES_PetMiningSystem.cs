@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_PetMining))]
-    [FriendOfAttribute(typeof (ES_PetMining))]
-    [FriendOf(typeof (ES_PetMiningItem))]
+    [EntitySystemOf(typeof(ES_PetMining))]
+    [FriendOfAttribute(typeof(ES_PetMining))]
+    [FriendOf(typeof(ES_PetMiningItem))]
     public static partial class ES_PetMiningSystem
     {
         [EntitySystem]
@@ -55,8 +55,8 @@ namespace ET.Client
             self.E_PetMiningTeam.gameObject.SetActive(!self.E_PetMiningTeam.gameObject.activeSelf);
 
             self.E_ButtonTeamToggle.GetComponent<RectTransform>().anchoredPosition =
-                    self.E_PetMiningTeam.gameObject.activeSelf? new Vector2(-471.8f, -252.2f) : new Vector2(-198f, -252.2f);
-            self.E_ButtonTeamToggle.transform.localScale = self.E_PetMiningTeam.gameObject.activeSelf? Vector3.one : new Vector3(-1f, 1f, 1f);
+                    self.E_PetMiningTeam.gameObject.activeSelf ? new Vector2(-471.8f, -252.2f) : new Vector2(-198f, -252.2f);
+            self.E_ButtonTeamToggle.transform.localScale = self.E_PetMiningTeam.gameObject.activeSelf ? Vector3.one : new Vector3(-1f, 1f, 1f);
         }
 
         public static async ETTask OnPetMiningTeamButton(this ES_PetMining self)
@@ -260,13 +260,14 @@ namespace ET.Client
                 maxWidth = miningItems[i].X + 300;
                 uIPetMiningItem.OnInitUI(mineType, i, hexin, self.PetMineExtend);
                 uIPetMiningItem.OnUpdateUI(petMingPlayerInfo);
-                occNumber += (petMingPlayerInfo != null? 1 : 0);
+                occNumber += (petMingPlayerInfo != null ? 1 : 0);
                 uIPetMiningItem.uiTransform.localScale = Vector3.one * scaleValue[page];
             }
 
             for (int i = miningItems.Count; i < self.PetMiningItemList.Count; i++)
             {
-                self.PetMiningItemList[i].uiTransform.gameObject.SetActive(false);
+                ES_PetMiningItem esPetMiningItem = self.PetMiningItemList[i];
+                esPetMiningItem.uiTransform.gameObject.SetActive(false);
             }
 
             List<string> baginfs = new List<string>() { "Back_22", "Back_22", "Back_22" };

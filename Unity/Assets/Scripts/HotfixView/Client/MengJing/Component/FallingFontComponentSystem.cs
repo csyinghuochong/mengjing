@@ -47,7 +47,7 @@ namespace ET.Client
         
         public static void OnAwake(this FallingFontComponent self)
         {
-            self.FallingFontShows = new List<FallingFontShowComponent>();
+            self.FallingFontShows = new ();
         }
 
         /// <summary>

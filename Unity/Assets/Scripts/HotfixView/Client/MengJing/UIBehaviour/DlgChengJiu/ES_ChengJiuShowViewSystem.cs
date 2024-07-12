@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_ChengJiuShowItem))]
-    [FriendOf(typeof (Scroll_Item_ChengJiuTypeItem))]
-    [EntitySystemOf(typeof (ES_ChengJiuShow))]
-    [FriendOfAttribute(typeof (ES_ChengJiuShow))]
+    [FriendOf(typeof(Scroll_Item_ChengJiuShowItem))]
+    [FriendOf(typeof(Scroll_Item_ChengJiuTypeItem))]
+    [EntitySystemOf(typeof(ES_ChengJiuShow))]
+    [FriendOfAttribute(typeof(ES_ChengJiuShow))]
     public static partial class ES_ChengJiuShowSystem
     {
         [EntitySystem]
@@ -58,7 +58,8 @@ namespace ET.Client
                 self.UIChengJiuShowTypes.Add(uiChengJiuShowType);
             }
 
-            self.UIChengJiuShowTypes[0].OnImageButton();
+            UIChengJiuShowType ui = self.UIChengJiuShowTypes[0];
+            ui.OnImageButton();
         }
 
         public static void OnType(this ES_ChengJiuShow self, int type)

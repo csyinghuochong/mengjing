@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_ButtonPositionSet))]
-    [FriendOfAttribute(typeof (ES_ButtonPositionSet))]
+    [EntitySystemOf(typeof(ES_ButtonPositionSet))]
+    [FriendOfAttribute(typeof(ES_ButtonPositionSet))]
     public static partial class ES_ButtonPositionSetSystem
     {
         [EntitySystem]
@@ -85,15 +85,16 @@ namespace ET.Client
 
             for (int i = 0; i < self.UISkillDragList.Count; i++)
             {
+                UISkillDragComponent uiSkillDragComponent = self.UISkillDragList[i];
                 if (i == 20)
                 {
                     UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
                     int operatMode = int.Parse(userInfoComponent.GetGameSettingValue(GameSettingEnum.YanGan));
-                    self.UISkillDragList[i].Img_EventTrigger.SetActive(operatMode == 0);
+                    uiSkillDragComponent.Img_EventTrigger.SetActive(operatMode == 0);
                 }
                 else
                 {
-                    self.UISkillDragList[i].Img_EventTrigger.SetActive(true);
+                    uiSkillDragComponent.Img_EventTrigger.SetActive(true);
                 }
             }
 
@@ -137,7 +138,8 @@ namespace ET.Client
         {
             for (int i = 0; i < self.UISkillDragList.Count; i++)
             {
-                self.UISkillDragList[i].GameObject.transform.localPosition = self.TempPositionList[i];
+                UISkillDragComponent uiSkillDragComponent = self.UISkillDragList[i];
+                uiSkillDragComponent.GameObject.transform.localPosition = self.TempPositionList[i];
             }
         }
 
@@ -158,7 +160,8 @@ namespace ET.Client
             self.E_SkillPositionSetImage.gameObject.SetActive(false);
             for (int i = 0; i < self.UISkillDragList.Count; i++)
             {
-                self.UISkillDragList[i].Img_EventTrigger.SetActive(false);
+                UISkillDragComponent uiSkillDragComponent = self.UISkillDragList[i];
+                uiSkillDragComponent.Img_EventTrigger.SetActive(false);
             }
         }
 
@@ -181,7 +184,8 @@ namespace ET.Client
             self.E_SkillPositionSetImage.gameObject.SetActive(false);
             for (int i = 0; i < self.UISkillDragList.Count; i++)
             {
-                self.UISkillDragList[i].Img_EventTrigger.SetActive(false);
+                UISkillDragComponent uiSkillDragComponent = self.UISkillDragList[i];
+                uiSkillDragComponent.Img_EventTrigger.SetActive(false);
             }
 
             ReferenceCollector rc_skill = self.UIMain.Get<GameObject>("UIMainSkill").GetComponent<ReferenceCollector>();
@@ -215,7 +219,8 @@ namespace ET.Client
         {
             self.CurDragIndex = skillIndex;
 
-            self.SkillIconItemCopy = UnityEngine.Object.Instantiate(self.UISkillDragList[skillIndex].GameObject);
+            UISkillDragComponent uiSkillDragComponent = self.UISkillDragList[skillIndex];
+            self.SkillIconItemCopy = UnityEngine.Object.Instantiate(uiSkillDragComponent.GameObject);
             self.SkillIconItemCopy.SetActive(true);
             CommonViewHelper.SetParent(self.SkillIconItemCopy, self.UIMain);
         }
