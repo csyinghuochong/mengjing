@@ -130,7 +130,7 @@ namespace ET.Server
                         player.PopularizeServerID = UnitCacheHelper.GetPopularizeServerId(session.Zone());
                         player.TeamServerID = UnitCacheHelper.GetTeamServerId(session.Zone());
                         player.PlayerState = PlayerState.Game;
-                        Unit unit = await UnitHelper.LoadUnit(player, scene, createRoleInfo, newAccountList[0].Account, request.AccountId);
+                        Unit unit = await UnitFactory.LoadUnit(player, scene, createRoleInfo, newAccountList[0].Account, request.AccountId);
                         StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetBySceneName(session.Zone(), "Map101");
                         response.MyId = request.UnitId;
                         Log.Debug($"M2M_UnitTransferRequest_a:{unit.Components.Count}");

@@ -6,6 +6,27 @@ namespace ET.Server
 {
     public static partial class UnitFactory
     {
+        public static async ETTask<Unit> LoadUnit(Player player, Scene scene, CreateRoleInfo createRoleInfo, string account, long accountId)
+        {
+            Unit unit = await UnitCacheHelper.GetUnitCache(scene, player.UnitId);
+
+            bool isNewUnit = unit == null;
+
+            // if (isNewUnit)
+            // {
+            //     unit = await UnitFactory.Create(scene, player.UnitId, UnitType.Player,createRoleInfo,account, accountId);
+            //
+            //     UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
+            // }
+
+            await UnitFactory.Create(scene, unit, player.UnitId, UnitType.Player, createRoleInfo, account, accountId);
+
+            //UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
+
+            return unit;
+        }
+
+        
         public static async ETTask Create(Scene scene, Unit unit, long id, int unitType, CreateRoleInfo createRoleInfo, string account,
         long accountId)
         {
