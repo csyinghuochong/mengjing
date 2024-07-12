@@ -214,7 +214,7 @@ namespace ET.Server
             self.JingLingList.Add(jid);
         }
 
-        public static void TriggerEvent(this ChengJiuComponentS self, ChengJiuTargetEnum chengJiuTarget, int target_id, int target_value = 1)
+        public static void TriggerEvent(this ChengJiuComponentS self, ChengJiuTargetEnum chengJiuTarget, int target_id, int target_value = 1, bool notice = true)
         {
             int chengJiuTargetInt = (int)chengJiuTarget;
             List<int> chengjiuList = ChengJiuConfigCategory.Instance.GetChengJiuTargetData(chengJiuTargetInt);
@@ -322,7 +322,7 @@ namespace ET.Server
                         break;
                 }
 
-                if (acitiveId > 0 && !self.GetParent<Unit>().GetComponent<UserInfoComponentS>().IsRobot())
+                if (notice && acitiveId > 0 && !self.GetParent<Unit>().GetComponent<UserInfoComponentS>().IsRobot())
                 {
                     M2C_ChengJiuActiveMessage M2C_ChengJiuActiveMessage = M2C_ChengJiuActiveMessage.Create();
                     M2C_ChengJiuActiveMessage.ChengJiuId = acitiveId;

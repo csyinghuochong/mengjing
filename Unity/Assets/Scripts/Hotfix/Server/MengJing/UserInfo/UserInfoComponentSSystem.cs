@@ -28,7 +28,7 @@ namespace ET.Server
             {
                 self.LingDiOnLine = 0;
                 //self.OnRongyuChanChu(1, true);
-                self.OnJiaYuanExp(1f);
+                self.OnJiaYuanExp(1f, true);
             }
 
             if (self.UpdateRankTime > 0)
@@ -38,12 +38,12 @@ namespace ET.Server
             }
         }
 
-        public static void OnJiaYuanExp(this UserInfoComponentS self, float hour)
+        public static void OnJiaYuanExp(this UserInfoComponentS self, float hour, bool notice)
         {
             JiaYuanConfig jiaYuanConfig = JiaYuanConfigCategory.Instance.Get(self.UserInfo.JiaYuanLv);
             //self.UserInfo.JiaYuanExp += jiaYuanConfig.JiaYuanAddExp;
             int addexp = (int)math.floor(hour * jiaYuanConfig.JiaYuanAddExp);
-            self.UpdateRoleMoneyAdd(UserDataType.JiaYuanExp, $"{addexp}", true, ItemGetWay.JiaYuanExchange);
+            self.UpdateRoleMoneyAdd(UserDataType.JiaYuanExp, $"{addexp}", notice, ItemGetWay.JiaYuanExchange);
         }
 
         public static void OnInit(this UserInfoComponentS self, string account, long id, long accountId, CreateRoleInfo createRoleInfo)
@@ -212,7 +212,7 @@ namespace ET.Server
                     }
 
                     self.OnZeroClockUpdate(false);
-                    self.OnJiaYuanExp(Math.Min(passhour, 12f));
+                    self.OnJiaYuanExp(Math.Min(passhour, 12f), false);
                 }
                 else
                 {
@@ -225,7 +225,7 @@ namespace ET.Server
                     self.RecoverPiLao(tiliTimes * 30, false);
 
                     float passhour = ((currentTime - lastLoginTime) * 1f / TimeHelper.Hour);
-                    self.OnJiaYuanExp(Math.Min(passhour, 12f));
+                    self.OnJiaYuanExp(Math.Min(passhour, 12f), false);
                 }
             }
             else
