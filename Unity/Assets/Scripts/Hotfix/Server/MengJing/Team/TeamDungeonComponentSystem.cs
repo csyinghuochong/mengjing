@@ -285,11 +285,11 @@ namespace ET.Server
             await ETTask.CompletedTask;
         }
 
-        public static void OnKillEvent(this TeamDungeonComponent self, Unit unit)
+        public static bool OnKillEvent(this TeamDungeonComponent self, Unit unit)
         {
             if (unit.Type != UnitType.Monster)
             {
-                return;
+                return false;
             }
 
             if (unit.IsBoss())
@@ -315,7 +315,7 @@ namespace ET.Server
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(self.TeamInfo.SceneId);
             if (unit.ConfigId != sceneConfig.BossId)
             {
-                return;
+                return false;
             }
 
             M2C_TeamDungeonSettlement m2C_FubenSettlement = M2C_TeamDungeonSettlement.Create();
@@ -386,8 +386,7 @@ namespace ET.Server
 
                 MapMessageHelper.SendToClient(unititem, m2C_FubenSettlement);
             }
-
-            (self.Parent.Parent as TeamSceneComponent).OnDungeonOver(self.TeamInfo.TeamId);
+            return true;
         }
     }
 }
