@@ -753,9 +753,10 @@ namespace ET.Server
 
                     StartSceneConfig startSceneConfig = processScenes[0];
                     ActorId mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(startSceneConfig.Zone, startSceneConfig.Name).ActorId;
-                    
-                    A2A_BroadcastResponse createUnit = (A2A_BroadcastResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,
-                        new A2A_BroadcastRequest() { LoadType = 1, LoadValue = loadvalue });
+                    A2A_BroadcastRequest A2A_BroadcastRequest = A2A_BroadcastRequest.Create();
+                    A2A_BroadcastRequest.LoadType = 1;
+                    A2A_BroadcastRequest.LoadValue = loadvalue;
+                    A2A_BroadcastResponse createUnit = (A2A_BroadcastResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,A2A_BroadcastRequest);
                 }
             }
         }
@@ -776,7 +777,7 @@ namespace ET.Server
                     continue;
                 }
 
-                MailInfo mailInfo = new MailInfo();
+                MailInfo mailInfo = MailInfo.Create();
 
                 Log.Warning($"发放恶魔排行榜奖励2： {rankingInfos[i].UserId}");
 
@@ -796,11 +797,17 @@ namespace ET.Server
 
                     int itemId = int.Parse(itemInfo[0]);
                     int itemNum = int.Parse(itemInfo[1]);
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.Demon}_{serverTime}" });
+                    BagInfo BagInfo = BagInfo.Create();
+                    BagInfo.ItemID = itemId;
+                    BagInfo.ItemNum = itemNum;
+                    BagInfo.GetWay = $"{ItemGetWay.Demon}_{serverTime}";
+                    mailInfo.ItemList.Add(new () { });
                 }
 
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,
-                    new M2E_EMailSendRequest() { Id = rankingInfos[i].UserId, MailInfo = mailInfo });
+                M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
+                M2E_EMailSendRequest.Id = rankingInfos[i].UserId;
+                M2E_EMailSendRequest.MailInfo = mailInfo;
+                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
             }
         }
 
@@ -841,11 +848,17 @@ namespace ET.Server
 
                     int itemId = int.Parse(itemInfo[0]);
                     int itemNum = int.Parse(itemInfo[1]);
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.ShowLie}_{serverTime}" });
+                    BagInfo BagInfo = BagInfo.Create();
+                    BagInfo.ItemID = itemId;
+                    BagInfo.ItemNum = itemNum;
+                    BagInfo.GetWay = $"{ItemGetWay.ShowLie}_{serverTime}";
+                    mailInfo.ItemList.Add(BagInfo);
                 }
 
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,
-                    new M2E_EMailSendRequest() { Id = rankingInfos[i].UnitID, MailInfo = mailInfo });
+                M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
+                M2E_EMailSendRequest.Id = rankingInfos[i].UnitID;
+                M2E_EMailSendRequest.MailInfo = mailInfo;
+                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
             }
         }
 
@@ -868,7 +881,7 @@ namespace ET.Server
                     continue;
                 }
 
-                MailInfo mailInfo = new MailInfo();
+                MailInfo mailInfo = MailInfo.Create();
 
                 mailInfo.Status = 0;
                 mailInfo.Context = $"恭喜您获得狩猎排行榜第{i + 1}名奖励";

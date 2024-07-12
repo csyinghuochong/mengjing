@@ -825,8 +825,18 @@ namespace ET.Server
             self.UpdatePetAttribute(rolePetInfo, true);
 
             //通知客户端
-            MapMessageHelper.SendToClient(self.GetParent<Unit>(), new M2C_PetDataUpdate() { UpdateType = (int)UserDataType.Lv, PetId = rolePetInfo.Id, UpdateTypeValue = rolePetInfo.PetLv.ToString() });
-            MapMessageHelper.Broadcast(self.GetParent<Unit>(), new M2C_PetDataBroadcast() { UnitId = self.GetParent<Unit>().Id, UpdateType = (int)UserDataType.Lv, PetId = rolePetInfo.Id, UpdateTypeValue = rolePetInfo.PetLv.ToString() });
+            M2C_PetDataUpdate M2C_PetDataUpdate = M2C_PetDataUpdate.Create();
+            M2C_PetDataUpdate.UpdateType = (int)UserDataType.Lv;
+            M2C_PetDataUpdate.PetId = rolePetInfo.Id;
+            M2C_PetDataUpdate.UpdateTypeValue = rolePetInfo.PetLv.ToString();
+            MapMessageHelper.SendToClient(self.GetParent<Unit>(), M2C_PetDataUpdate);
+
+            M2C_PetDataBroadcast M2C_PetDataBroadcast = M2C_PetDataBroadcast.Create();
+            M2C_PetDataBroadcast.UnitId = self.GetParent<Unit>().Id;
+            M2C_PetDataBroadcast.UpdateType = (int)UserDataType.Lv;
+            M2C_PetDataBroadcast.PetId = rolePetInfo.Id;
+            M2C_PetDataBroadcast.UpdateTypeValue =rolePetInfo.PetLv.ToString();
+            MapMessageHelper.Broadcast(self.GetParent<Unit>(), M2C_PetDataBroadcast);
 
         }
 
@@ -834,14 +844,22 @@ namespace ET.Server
         {
             RolePetInfo petinfo = self.GetPetInfo(petId);
             petinfo.PetStatus = 0;
-            MapMessageHelper.SendToClient(self.GetParent<Unit>(), new M2C_PetDataUpdate() { UpdateType = (int)UserDataType.PetStatus, PetId = petId, UpdateTypeValue = "0" });
+            M2C_PetDataUpdate M2C_PetDataUpdate = M2C_PetDataUpdate.Create();
+            M2C_PetDataUpdate.UpdateType = (int)UserDataType.PetStatus;
+            M2C_PetDataUpdate.PetId = petId; 
+            M2C_PetDataUpdate.UpdateTypeValue = "0";
+            MapMessageHelper.SendToClient(self.GetParent<Unit>(), M2C_PetDataUpdate);
         }
 
         public static void OnPetWalk(this PetComponentS self, long petId, int petstatu)
         {
             RolePetInfo petinfo = self.GetPetInfo(petId);
             petinfo.PetStatus = petstatu;
-            MapMessageHelper.SendToClient(self.GetParent<Unit>(), new M2C_PetDataUpdate() { UpdateType = (int)UserDataType.PetStatus, PetId = petId, UpdateTypeValue = petstatu.ToString() });
+            M2C_PetDataUpdate M2C_PetDataUpdate = M2C_PetDataUpdate.Create();
+            M2C_PetDataUpdate.UpdateType = (int)UserDataType.PetStatus;
+            M2C_PetDataUpdate. PetId = petId;
+            M2C_PetDataUpdate.UpdateTypeValue = petstatu.ToString();
+            MapMessageHelper.SendToClient(self.GetParent<Unit>(), M2C_PetDataUpdate);
         }
 
         //增加等级
