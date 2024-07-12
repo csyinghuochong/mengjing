@@ -229,12 +229,11 @@ namespace ET.Server
                         mapInstanceId, M2J_JiaYuanEnterRequest);
                         TransferHelper.BeforeTransfer(unit);
                         await TransferHelper.Transfer(unit, j2M_JianYuanEnterResponse.FubenActorId, (int)SceneTypeEnum.JiaYuan, request.SceneId, request.Difficulty, "0");
-                        
-                        if (oldScene == SceneTypeEnum.JiaYuan)
-                        {
-                            JiaYuanSceneComponent jiayuanSceneComponent = scene.GetParent<JiaYuanSceneComponent>();
-                            jiayuanSceneComponent.OnUnitLeave(scene);
-                        }
+                        // if (oldScene == SceneTypeEnum.JiaYuan)
+                        // {
+                        //     JiaYuanSceneComponent jiayuanSceneComponent = scene.GetParent<JiaYuanSceneComponent>();
+                        //     jiayuanSceneComponent.OnUnitLeave(scene);
+                        // }
                         break;
                     case (int)SceneTypeEnum.Tower:
                         //动态创建副本
