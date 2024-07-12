@@ -33,7 +33,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_jiayuandashipro == null )
+		        ES_JiaYuanDaShiPro es = this.m_es_jiayuandashipro;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_JiaYuanDaShiPro");
 		    	   this.m_es_jiayuandashipro = this.AddChild<ES_JiaYuanDaShiPro,Transform>(subTrans);
@@ -51,7 +52,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_jiayuandashishow == null )
+
+		        ES_JiaYuanDaShiShow es = this.m_es_jiayuandashishow;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_JiaYuanDaShiShow");
 		    	   this.m_es_jiayuandashishow = this.AddChild<ES_JiaYuanDaShiShow,Transform>(subTrans);

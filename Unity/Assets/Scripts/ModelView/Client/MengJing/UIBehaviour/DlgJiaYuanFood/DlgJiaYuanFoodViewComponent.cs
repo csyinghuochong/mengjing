@@ -33,7 +33,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_jiayuanpurchase == null )
+
+		        ES_JiaYuanPurchase es = this.m_es_jiayuanpurchase;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_JiaYuanPurchase");
 		    	   this.m_es_jiayuanpurchase = this.AddChild<ES_JiaYuanPurchase,Transform>(subTrans);
@@ -51,7 +53,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_jiayuancooking == null )
+
+		        ES_JiaYuanCooking es = this.m_es_jiayuancooking;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_JiaYuanCooking");
 		    	   this.m_es_jiayuancooking = this.AddChild<ES_JiaYuanCooking,Transform>(subTrans);
@@ -69,7 +73,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_jiayuancookbook == null )
+
+		        ES_JiaYuanCookbook es = this.m_es_jiayuancookbook;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_JiaYuanCookbook");
 		    	   this.m_es_jiayuancookbook = this.AddChild<ES_JiaYuanCookbook,Transform>(subTrans);

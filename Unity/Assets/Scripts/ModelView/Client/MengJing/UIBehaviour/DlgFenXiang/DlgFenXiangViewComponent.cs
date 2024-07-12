@@ -33,7 +33,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_fenxiangset == null )
+		        ES_FenXiangSet es = this.m_es_fenxiangset;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_FenXiangSet");
 		    	   this.m_es_fenxiangset = this.AddChild<ES_FenXiangSet,Transform>(subTrans);
@@ -51,7 +52,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_popularize == null )
+		        ES_Popularize es = this.m_es_popularize;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_Popularize");
 		    	   this.m_es_popularize = this.AddChild<ES_Popularize,Transform>(subTrans);
@@ -69,7 +71,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_serial == null )
+		        ES_Serial es = this.m_es_serial;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_Serial");
 		    	   this.m_es_serial = this.AddChild<ES_Serial,Transform>(subTrans);
@@ -87,7 +90,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_luntan == null )
+		        ES_LunTan es = this.m_es_luntan;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_LunTan");
 		    	   this.m_es_luntan = this.AddChild<ES_LunTan,Transform>(subTrans);
@@ -105,7 +109,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_fenxiangqqaddset == null )
+		        ES_FenXiangQQAddSet es = this.m_es_fenxiangqqaddset;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_FenXiangQQAddSet");
 		    	   this.m_es_fenxiangqqaddset = this.AddChild<ES_FenXiangQQAddSet,Transform>(subTrans);

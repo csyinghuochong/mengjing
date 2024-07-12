@@ -50,7 +50,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rewardlist_1 == null )
+		        ES_RewardList es = this.m_es_rewardlist_1;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList_1");
 		    	   this.m_es_rewardlist_1 = this.AddChild<ES_RewardList,Transform>(subTrans);
@@ -68,7 +69,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rewardlist_2 == null )
+		        ES_RewardList es = this.m_es_rewardlist_2;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList_2");
 		    	   this.m_es_rewardlist_2 = this.AddChild<ES_RewardList,Transform>(subTrans);
@@ -86,7 +88,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rewardlist_3 == null )
+		        ES_RewardList es = this.m_es_rewardlist_3;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList_3");
 		    	   this.m_es_rewardlist_3 = this.AddChild<ES_RewardList,Transform>(subTrans);

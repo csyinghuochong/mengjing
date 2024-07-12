@@ -33,7 +33,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_friendlist == null )
+		        ES_FriendList es = this.m_es_friendlist;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubViewNode/ES_FriendList");
 		    	   this.m_es_friendlist = this.AddChild<ES_FriendList,Transform>(subTrans);
@@ -51,7 +52,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_friendapply == null )
+		        ES_FriendApply es = this.m_es_friendapply;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubViewNode/ES_FriendApply");
 		    	   this.m_es_friendapply = this.AddChild<ES_FriendApply,Transform>(subTrans);
@@ -69,7 +71,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_friendblack == null )
+		        ES_FriendBlack es = this.m_es_friendblack;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubViewNode/ES_FriendBlack");
 		    	   this.m_es_friendblack = this.AddChild<ES_FriendBlack,Transform>(subTrans);
@@ -87,7 +90,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_unionshow == null )
+		        ES_UnionShow es = this.m_es_unionshow;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubViewNode/ES_UnionShow");
 		    	   this.m_es_unionshow = this.AddChild<ES_UnionShow,Transform>(subTrans);
@@ -105,7 +109,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_unionmy == null )
+		        ES_UnionMy es = this.m_es_unionmy;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubViewNode/ES_UnionMy");
 		    	   this.m_es_unionmy = this.AddChild<ES_UnionMy,Transform>(subTrans);
