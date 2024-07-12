@@ -116,7 +116,6 @@ namespace ET.Server
              numericComponent.ApplyValue((int)NumericType.Now_Stall, 0, false);
              numericComponent.ApplyValue((int)NumericType.TeamId, 0, false);
              numericComponent.ApplyValue((int)NumericType.Now_Hp, numericComponent.GetAsLong((int)NumericType.Now_MaxHp), false);
-             numericComponent.ApplyValue((int)NumericType.Now_Weapon, unit.GetComponent<BagComponentS>().GetWuqiItemId(), false);
              numericComponent.ApplyValue(NumericType.JueXingAnger, 0, false);
              numericComponent.ApplyValue(NumericType.RunRaceRankId, 0, false);
              numericComponent.ApplyValue(NumericType.ZeroClock, 0, false);
