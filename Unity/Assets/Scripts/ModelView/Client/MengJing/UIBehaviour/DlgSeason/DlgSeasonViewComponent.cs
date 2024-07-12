@@ -33,7 +33,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_seasonhome == null )
+
+		        ES_SeasonHome es = this.m_es_seasonhome;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_SeasonHome");
 		    	   this.m_es_seasonhome = this.AddChild<ES_SeasonHome,Transform>(subTrans);
@@ -51,7 +53,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_seasontask == null )
+
+		        ES_SeasonTask es = this.m_es_seasontask;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_SeasonTask");
 		    	   this.m_es_seasontask = this.AddChild<ES_SeasonTask,Transform>(subTrans);
@@ -69,7 +73,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_seasonjinghe == null )
+
+		        ES_SeasonJingHe es = this.m_es_seasonjinghe;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_SeasonJingHe");
 		    	   this.m_es_seasonjinghe = this.AddChild<ES_SeasonJingHe,Transform>(subTrans);
@@ -87,7 +93,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_seasonstore == null )
+
+		        ES_SeasonStore es = this.m_es_seasonstore;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_SeasonStore");
 		    	   this.m_es_seasonstore = this.AddChild<ES_SeasonStore,Transform>(subTrans);
@@ -105,7 +113,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_seasontower == null )
+
+		        ES_SeasonTower es = this.m_es_seasontower;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_SeasonTower");
 		    	   this.m_es_seasontower = this.AddChild<ES_SeasonTower,Transform>(subTrans);
