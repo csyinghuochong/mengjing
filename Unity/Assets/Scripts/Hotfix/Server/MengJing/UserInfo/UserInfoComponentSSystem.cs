@@ -212,14 +212,6 @@ namespace ET.Server
                     }
 
                     self.OnZeroClockUpdate(false);
-                    unit.GetComponent<TaskComponentS>().CheckWeeklyUpdate(lastLoginTime, currentTime);
-                    unit.GetComponent<TaskComponentS>().OnZeroClockUpdate(false);
-                    unit.GetComponent<EnergyComponentS>().OnResetEnergyInfo();
-                    unit.GetComponent<HeroDataComponentS>().OnZeroClockUpdate(false);
-                    unit.GetComponent<ActivityComponentS>().OnZeroClockUpdate(self.UserInfo.Lv);
-                    unit.GetComponent<ChengJiuComponentS>().OnZeroClockUpdate();
-                    unit.GetComponent<JiaYuanComponentS>().OnZeroClockUpdate(false);
-                    unit.GetComponent<DataCollationComponent>().OnZeroClockUpdate(false);
                     self.OnJiaYuanExp(Math.Min(passhour, 12f));
                 }
                 else
@@ -231,7 +223,6 @@ namespace ET.Server
                     int tiliTimes = self.GetTiLiTimes(hour_1, hour_2);
                     tiliTimes = Math.Min(tiliTimes, 4);
                     self.RecoverPiLao(tiliTimes * 30, false);
-                    unit.GetComponent<JiaYuanComponentS>().OnLoginCheck(hour_1, hour_2);
 
                     float passhour = ((currentTime - lastLoginTime) * 1f / TimeHelper.Hour);
                     self.OnJiaYuanExp(Math.Min(passhour, 12f));
@@ -239,21 +230,8 @@ namespace ET.Server
             }
             else
             {
-                Log.Debug($"OnZeroClockUpdate [数据初始化]: {unit.Id}");
-                unit.GetComponent<TaskComponentS>().OnZeroClockUpdate(false);
             }
 
-            unit.GetComponent<BagComponentS>().OnLogin(self.UserInfo.RobotId);
-            unit.GetComponent<TaskComponentS>().OnLogin();
-            unit.GetComponent<HeroDataComponentS>().OnLogin(self.UserInfo.RobotId);
-            unit.GetComponent<DBSaveComponent>().OnLogin();
-            unit.GetComponent<RechargeComponent>().OnLogin();
-            unit.GetComponent<PetComponentS>().OnLogin();
-            unit.GetComponent<ActivityComponentS>().OnLogin(self.UserInfo.Lv);
-            unit.GetComponent<TitleComponentS>().OnCheckTitle(false);
-            unit.GetComponent<ChengJiuComponentS>().OnLogin();
-            unit.GetComponent<JiaYuanComponentS>().OnLogin();
-            unit.GetComponent<SkillSetComponentS>().OnLogin(self.UserInfo.Occ);
             self.LastLoginTime = currentTime;
             self.UserName = self.UserInfo.Name;
             self.ShouLieSendTime = 0;
