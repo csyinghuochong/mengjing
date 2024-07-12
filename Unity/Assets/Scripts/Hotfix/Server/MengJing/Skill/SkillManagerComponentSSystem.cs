@@ -425,7 +425,10 @@ namespace ET.Server
                   if (ifStop)
                   {
                       skillHandler.SetSkillState(SkillState.Finished);
-                      M2C_SkillInterruptResult m2C_SkillInterruptResult = new M2C_SkillInterruptResult() { UnitId = unit.Id, SkillId = skillHandler.SkillConf.Id };
+                      M2C_SkillInterruptResult m2C_SkillInterruptResult = M2C_SkillInterruptResult.Create();
+                      m2C_SkillInterruptResult.UnitId = unit.Id;
+                      m2C_SkillInterruptResult.SkillId = skillHandler.SkillConf.Id;
+
                       //MessageHelper.Broadcast(unit, m2C_SkillInterruptResult);
                       self.BroadcastSkill(unit, m2C_SkillInterruptResult);
                   }
@@ -492,7 +495,7 @@ namespace ET.Server
               m2C_Skill.CDEndTime = skillCd != null ? skillCd.CDEndTime : 0;
               m2C_Skill.PublicCDTime = self.SkillPublicCDTime;
 
-              M2C_UnitUseSkill useSkill = new M2C_UnitUseSkill();
+              M2C_UnitUseSkill useSkill = M2C_UnitUseSkill.Create();
               useSkill.UnitId = unit.Id;
               useSkill.ItemId = skillcmd.ItemId;
               useSkill.SkillID = skillcmd.SkillID;
@@ -613,7 +616,11 @@ namespace ET.Server
                   {
                       return;
                   }
-                  self.OnUseSkill(new C2M_SkillCmd() { SkillID = (int)keyValuePair.Value, TargetID = targetId }, false);
+
+                  C2M_SkillCmd C2M_SkillCmd = C2M_SkillCmd.Create();
+                  C2M_SkillCmd.SkillID = (int)keyValuePair.Value;
+                  C2M_SkillCmd.TargetID = targetId;
+                  self.OnUseSkill(C2M_SkillCmd, false);
               }
           }
 
@@ -626,7 +633,11 @@ namespace ET.Server
                   {
                       return;
                   }
-                  self.OnUseSkill(new C2M_SkillCmd() { SkillID = skillId, TargetID = 0 }, false);
+
+                  C2M_SkillCmd C2M_SkillCmd = C2M_SkillCmd.Create();
+                  C2M_SkillCmd.SkillID = skillId;
+                  C2M_SkillCmd.TargetID = 0;
+                  self.OnUseSkill(C2M_SkillCmd, false);
               }
           }
 
@@ -974,7 +985,10 @@ namespace ET.Server
               }
 
               //有伤害才同步 打断CD. 只同步一次
-              M2C_SkillSecondResult request = new M2C_SkillSecondResult() { UnitId = self.Id, SkillId = skillHandler.SkillConf.Id, HurtIds = hurtIds };
+              M2C_SkillSecondResult request = M2C_SkillSecondResult.Create();
+              request.UnitId = self.Id;
+              request.SkillId = skillHandler.SkillConf.Id;
+              request.HurtIds = hurtIds;
               MapMessageHelper.SendToClient(self.GetParent<Unit>(), request);
           }
 
@@ -990,7 +1004,7 @@ namespace ET.Server
               }
 
               Unit unit = self.GetParent<Unit>();
-              C2M_SkillCmd cmd = new C2M_SkillCmd();
+              C2M_SkillCmd cmd = C2M_SkillCmd.Create();
               cmd.SkillID = endSkillId;
               cmd.TargetID = unit.Id;
               cmd.TargetAngle = (int)math.forward(unit.Rotation).y;

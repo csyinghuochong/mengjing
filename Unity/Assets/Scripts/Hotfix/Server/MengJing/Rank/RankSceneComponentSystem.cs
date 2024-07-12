@@ -380,12 +380,13 @@ namespace ET.Server
 
             //通知玩家
             ActorId gateServerId = UnitCacheHelper.GetGateServerId(zone);
+            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+            T2G_GateUnitInfoRequest.UserID = userId;
             G2T_GateUnitInfoResponse g2M_UpdateUnitResponse =
-                    (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>().Call(gateServerId,
-                        new T2G_GateUnitInfoRequest() { UserID = userId });
+                    (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>().Call(gateServerId,T2G_GateUnitInfoRequest);
             if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
             {
-                R2M_RankUpdateMessage r2M_RankUpdateMessage = new R2M_RankUpdateMessage();
+                R2M_RankUpdateMessage r2M_RankUpdateMessage = R2M_RankUpdateMessage.Create();
                 r2M_RankUpdateMessage.RankType = 1;
                 r2M_RankUpdateMessage.RankId = rankId;
                 r2M_RankUpdateMessage.OccRankId = self.GetOccCombatRank(userId, occ);
@@ -569,15 +570,14 @@ namespace ET.Server
                     pets.Add(allPet[p]);
                 }
 
-                self.DBRankInfo.rankingPets.Add(new RankPetInfo()
-                {
-                    UserId = IdGenerater.Instance.GenerateId(),
-                    TeamName = "机器人:" + (i + 1) + "的队伍",
-                    RankId = i + 1,
-                    PlayerName = "机器人:" + (i + 1),
-                    PetUId = new List<long>() { 0, 0, 0 },
-                    PetConfigId = pets
-                });
+                RankPetInfo RankPetInfo = RankPetInfo.Create();
+                RankPetInfo.UserId = IdGenerater.Instance.GenerateId();
+                RankPetInfo.TeamName = "机器人:" + (i + 1) + "的队伍";
+                RankPetInfo.RankId = i + 1;
+                RankPetInfo.PlayerName = "机器人:" + (i + 1);
+                RankPetInfo.PetUId = new List<long>() { 0, 0, 0 };
+                RankPetInfo.PetConfigId = pets;
+                self.DBRankInfo.rankingPets.Add(RankPetInfo);
             }
         }
 
@@ -753,6 +753,7 @@ namespace ET.Server
 
                     StartSceneConfig startSceneConfig = processScenes[0];
                     ActorId mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(startSceneConfig.Zone, startSceneConfig.Name).ActorId;
+                    
                     A2A_BroadcastResponse createUnit = (A2A_BroadcastResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,
                         new A2A_BroadcastRequest() { LoadType = 1, LoadValue = loadvalue });
                 }

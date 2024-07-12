@@ -284,7 +284,8 @@ namespace ET.Server
                 rankList.Sort(delegate(RankingInfo a, RankingInfo b) { return (int)(b.Combat - a.Combat); });
                 int number = math.min(10, rankList.Count);
                 rankList = rankList.GetRange(0, number);
-                M2C_RankRunRaceMessage m2C_RankRun = new M2C_RankRunRaceMessage() { RankList = rankList };
+                M2C_RankRunRaceMessage m2C_RankRun = M2C_RankRunRaceMessage.Create();
+                m2C_RankRun.RankList = rankList;
                 MapMessageHelper.SendToClient(units, m2C_RankRun);
             }
         }

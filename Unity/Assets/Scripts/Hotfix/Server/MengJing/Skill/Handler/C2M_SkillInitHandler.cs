@@ -16,7 +16,7 @@ namespace ET.Server
              int occ = unit.GetComponent<UserInfoComponentS>().GetOcc();
             int occTwo = unit.GetComponent<UserInfoComponentS>().GetOccTwo();
              SkillSetComponentS skillSetComponent = unit.GetComponent<SkillSetComponentS>();
-             response.SkillSetInfo = new SkillSetInfo();
+             response.SkillSetInfo = SkillSetInfo.Create();
 
 
              //强化技能可以激活
@@ -39,7 +39,10 @@ namespace ET.Server
                      {
                          continue;
                      }
-                     skillSetComponent.SkillList.Add(new SkillPro() { SkillID = baseSkilllist[i] });
+
+                     SkillPro SkillPro = SkillPro.Create();
+                     SkillPro.SkillID = baseSkilllist[i];
+                     skillSetComponent.SkillList.Add(SkillPro);
                  }
              }
 
@@ -88,7 +91,9 @@ namespace ET.Server
                          continue;
                      }
 
-                     skillSetComponent.SkillList.Add(new SkillPro() { SkillID = occTwoSkillList[i] });
+                     SkillPro SkillPro = SkillPro.Create();
+                     SkillPro.SkillID = occTwoSkillList[i];
+                     skillSetComponent.SkillList.Add(SkillPro);
                  }
              }
 

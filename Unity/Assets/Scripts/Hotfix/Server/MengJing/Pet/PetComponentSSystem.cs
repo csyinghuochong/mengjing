@@ -544,7 +544,7 @@ namespace ET.Server
             if (ItemGetWay.PetExplore == getWay)
             {
                 self.RolePetBag.Add(newpet);
-                M2C_RolePetBagUpdate m2C_RolePetBag = new M2C_RolePetBagUpdate();
+                M2C_RolePetBagUpdate m2C_RolePetBag = M2C_RolePetBagUpdate.Create();
                 m2C_RolePetBag.RolePetBag = self.RolePetBag;
                 m2C_RolePetBag.UpdateMode = 1;
                 MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_RolePetBag);
@@ -552,7 +552,7 @@ namespace ET.Server
             else
             {
                 self.RolePetInfos.Add(newpet);
-                M2C_RolePetUpdate m2C_RolePetUpdate = new M2C_RolePetUpdate();
+                M2C_RolePetUpdate m2C_RolePetUpdate = M2C_RolePetUpdate.Create();
                 m2C_RolePetUpdate.PetInfoAdd = new List<RolePetInfo>();
                 m2C_RolePetUpdate.PetInfoAdd.Add(newpet);
                 MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_RolePetUpdate);

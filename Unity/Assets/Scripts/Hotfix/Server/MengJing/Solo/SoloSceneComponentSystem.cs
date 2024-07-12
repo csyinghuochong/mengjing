@@ -283,7 +283,7 @@ namespace ET.Server
         {
             if (!self.AllPlayerDateList.ContainsKey(unitID))
             {
-                SoloPlayerInfo soloPlayerInfo = new SoloPlayerInfo();
+                SoloPlayerInfo soloPlayerInfo = SoloPlayerInfo.Create();
                 soloPlayerInfo.Name = name;
                 soloPlayerInfo.Occ = occ;
                 self.AllPlayerDateList.Add(unitID, soloPlayerInfo);
@@ -361,10 +361,11 @@ namespace ET.Server
 
                     //把匹配的结果和要进入的副本ID存入缓存
                     long fubenId = self.GetSoloInstanceId(soloPlayerInfo_i.UnitId, soloPlayerInfo_t.UnitId);
-                    SoloMatchInfo soloResultInfo = new SoloMatchInfo()
-                    {
-                        UnitId_1 = soloPlayerInfo_i.UnitId, UnitId_2 = soloPlayerInfo_t.UnitId, FubenId = fubenId
-                    };
+                    SoloMatchInfo soloResultInfo = SoloMatchInfo.Create();
+                    soloResultInfo.UnitId_1 = soloPlayerInfo_i.UnitId;
+                    soloResultInfo.UnitId_2 = soloPlayerInfo_t.UnitId;
+                    soloResultInfo.FubenId = fubenId;
+    
                     self.MatchResult[fubenId] = soloResultInfo;
                     fubenids[soloPlayerInfo_i.UnitId] = fubenId;
                     fubenids[soloPlayerInfo_t.UnitId] = fubenId;
@@ -380,9 +381,10 @@ namespace ET.Server
 
                 //循环给每个要进入的玩家发送进入副本的消息
                 //发送消息获取对应的玩家数据
+                T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+                T2G_GateUnitInfoRequest.UserID = playerlist[i].UnitId;
                 G2T_GateUnitInfoResponse g2M_UpdateUnitResponse =
-                        (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>().Call(gateServerId,
-                            new T2G_GateUnitInfoRequest() { UserID = playerlist[i].UnitId });
+                        (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>().Call(gateServerId,T2G_GateUnitInfoRequest);
                 //判断目标是玩家且当前是在线的
                 if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
                 {
@@ -438,7 +440,7 @@ namespace ET.Server
 
             foreach (long unitId in dicSort.Keys)
             {
-                SoloPlayerResultInfo soloPlayerRes = new SoloPlayerResultInfo();
+                SoloPlayerResultInfo soloPlayerRes = SoloPlayerResultInfo.Create();
                 soloPlayerRes.Combat = self.PlayerIntegralList[unitId];
                 if (self.AllPlayerDateList.ContainsKey(unitId))
                 {

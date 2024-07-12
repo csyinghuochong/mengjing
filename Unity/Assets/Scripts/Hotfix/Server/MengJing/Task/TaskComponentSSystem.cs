@@ -827,17 +827,15 @@ namespace ET.Server
         public static async ETTask UpdateUnionRaceRank(this TaskComponentS self)
         {
             Unit unit = self.GetParent<Unit>();
-            RankShouLieInfo rankingInfo = new RankShouLieInfo()
-            {
-                UnitID = unit.Id,
-                KillNumber = 1,
-                Occ = unit.GetComponent<UserInfoComponentS>().GetOcc(),
-                PlayerName = unit.GetComponent<UserInfoComponentS>().GetName()
-            };
-            M2R_RankUnionRaceRequest request = new M2R_RankUnionRaceRequest()
-            {
-                RankingInfo = rankingInfo
-            };
+            RankShouLieInfo rankingInfo = RankShouLieInfo.Create();
+            rankingInfo.UnitID = unit.Id;
+            rankingInfo.KillNumber = 1;
+            rankingInfo.Occ = unit.GetComponent<UserInfoComponentS>().GetOcc();
+            rankingInfo.PlayerName = unit.GetComponent<UserInfoComponentS>().GetName();
+
+            M2R_RankUnionRaceRequest request = M2R_RankUnionRaceRequest.Create();
+            request.RankingInfo = rankingInfo;
+
             ActorId mapInstanceId = UnitCacheHelper.GetRankServerId(self.Zone());
             R2M_RankUnionRaceResponse Response = (R2M_RankUnionRaceResponse)await self.Root().GetComponent<MessageSender>().Call
                      (mapInstanceId, request);
@@ -1352,7 +1350,9 @@ namespace ET.Server
 
             for (int i = 0; i < taskCountryList.Count; i++)
             {
-                self.TaskCountryList.Add(new TaskPro() { taskID = taskCountryList[i] });
+                TaskPro TaskPro = TaskPro.Create();
+                TaskPro.taskID = taskCountryList[i];
+                self.TaskCountryList.Add(TaskPro);
             }
             //UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
             //userInfoComponent.UpdateRoleData(UserDataType.HuoYue, (0 - userInfoComponent.UserInfo.HuoYue).ToString(), notice);
@@ -1669,7 +1669,9 @@ namespace ET.Server
                 List<int> taskCountryList = TaskHelper.GetSeasonTask();
                 for (int i = 0; i < taskCountryList.Count; i++)
                 {
-                    self.TaskCountryList.Add(new TaskPro() { taskID = taskCountryList[i] });
+                    TaskPro TaskPro = TaskPro.Create();
+                    TaskPro.taskID = taskCountryList[i];
+                    self.TaskCountryList.Add(TaskPro);
                 }
             }
 

@@ -604,8 +604,7 @@ namespace ET.Server
             }
             return HideProList;
         }
-
-        //ת��ְҵ
+        
         public static void OnChangeOccTwoRequest(this SkillSetComponentS self, int occTwo)
         {
             if (occTwo == 0)
@@ -634,11 +633,7 @@ namespace ET.Server
             }
         }
 
-        /// <summary>
-        /// ��ȡ����ľ��Ѽ���
-        /// </summary>
-        /// <param name="self"></param>
-        /// <returns></returns>
+
         public static List<int> GetJueSkillIds(this SkillSetComponentS self)
         {
             List<int> ids = new List<int>();
@@ -677,7 +672,8 @@ namespace ET.Server
                 {
                     continue;
                 }
-                SkillPro skillPro = new SkillPro();
+
+                SkillPro skillPro = SkillPro.Create();
                 skillPro.SkillID = skillId;
                 skillPro.SkillPosition = 0;
                 skillPro.SkillSetType = (int)SkillSetEnum.Skill;
@@ -848,7 +844,7 @@ namespace ET.Server
                 List<int> addskills = equipIndex == 0 ? ConfigHelper.HunterFarSkill() : ConfigHelper.HunterNearSkill();
                 for (int i = 0; i < addskills.Count; i++)
                 {
-                    SkillPro skillPro = new SkillPro();
+                    SkillPro skillPro = SkillPro.Create();
                     skillPro.SkillID = addskills[i];
                     skillPro.SkillPosition = 0;
                     skillPro.SkillSetType = (int)SkillSetEnum.Skill;
@@ -930,11 +926,11 @@ namespace ET.Server
 
                 if (newSkill == null)
                 {
-                    Log.Warning($"�������ô���: {request.SkillID}");
+                    Log.Warning($"newSkill == null:  {request.SkillID}");
                     return ErrorCode.ERR_ModifyData;
                 }
             }
-            else    //ҩ��
+            else    
             {
                 SkillPro oldSkill = self.GetByPosition(request.Position);
                 if (oldSkill != null)
@@ -945,7 +941,7 @@ namespace ET.Server
                 newSkill = self.GetBySkillID(request.SkillID);
                 if (newSkill == null)
                 {
-                    newSkill = new SkillPro();
+                    newSkill = SkillPro.Create();
                     self.SkillList.Add(newSkill);
                 }
             }
@@ -999,7 +995,8 @@ namespace ET.Server
             {
                 return;
             }
-            SkillPro skillPro = new SkillPro();
+
+            SkillPro skillPro = SkillPro.Create();
             skillPro.SkillID = skillId;
             skillPro.SkillPosition = 0;
             skillPro.SkillSetType = (int)SkillSetEnum.Skill;
@@ -1141,8 +1138,10 @@ namespace ET.Server
             }
             if (keyValuePair == null)
             {
-                //Ĭ��0�� 0����
-                keyValuePair = new LifeShieldInfo() { ShieldType = shieldType, Level = 0, Exp = 0 };
+                keyValuePair = LifeShieldInfo.Create();
+                keyValuePair.ShieldType = shieldType;
+                keyValuePair.Level = 0;
+                keyValuePair.Exp = 0;
                 self.LifeShieldList.Add(keyValuePair);
             }
 
