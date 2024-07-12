@@ -11,6 +11,6 @@ namespace ET.Client
         }
 
         public List<TaskPro> ShowTaskPros = new();
-        public Dictionary<int, Scroll_Item_PetMiningRewardItem> ScrollItemPetMiningRewardItems;
+        public Dictionary<int, EntityRef<Scroll_Item_PetMiningRewardItem>> ScrollItemPetMiningRewardItems;
     }
 }

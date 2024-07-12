@@ -7,7 +7,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class Scroll_Item_PetFormationItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_PetFormationItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetFormationItem>
 	{
 		public Action<RolePetInfo, PointerEventData> BeginDragHandler;
 		public Action<RolePetInfo, PointerEventData> DragingHandler;

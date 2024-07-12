@@ -13,6 +13,6 @@ namespace ET.Client
         public int PayType; //1微信  2支付宝
         public int ReChargeNumber;
 
-        public Dictionary<int, Scroll_Item_RechargeItem> ScrollItemRechargeItems;
+        public Dictionary<int, EntityRef<Scroll_Item_RechargeItem>> ScrollItemRechargeItems;
     }
 }

@@ -11,6 +11,6 @@ namespace ET.Client
         }
 
         public List<RankRewardConfig> ShowRankRewardConfigs;
-        public Dictionary<int, Scroll_Item_RunRaceItem> ScrollItemRunRaceItems;
+        public Dictionary<int, EntityRef<Scroll_Item_RunRaceItem>> ScrollItemRunRaceItems;
     }
 }

@@ -12,11 +12,11 @@ namespace ET.Client
         }
 
         public GameObject[] PetZiZhiItemList = new GameObject[6];
-        public Dictionary<int, Scroll_Item_CommonSkillItem> ScrollItemCommonSkillItems_A;
+        public Dictionary<int, EntityRef<Scroll_Item_CommonSkillItem>> ScrollItemCommonSkillItems_A;
         public List<int> PetAbaseSkillId = new();
-        public Dictionary<int, Scroll_Item_CommonSkillItem> ScrollItemCommonSkillItems_B;
+        public Dictionary<int, EntityRef<Scroll_Item_CommonSkillItem>> ScrollItemCommonSkillItems_B;
         public List<int> PetBbaseSkillId = new();
-        public Dictionary<int, Scroll_Item_CommonSkillItem> ScrollItemCommonSkillItems;
+        public Dictionary<int, EntityRef<Scroll_Item_CommonSkillItem>> ScrollItemCommonSkillItems;
         public List<int> AllSkillId = new();
     }
 }

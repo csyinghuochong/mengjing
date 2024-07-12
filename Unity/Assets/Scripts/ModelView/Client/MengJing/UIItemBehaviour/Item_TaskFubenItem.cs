@@ -6,7 +6,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class Scroll_Item_TaskFubenItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_TaskFubenItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_TaskFubenItem>
 	{
 		public Action<int, int> ClickHandler;
 		public int NpcType;

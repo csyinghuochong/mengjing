@@ -11,7 +11,7 @@ namespace ET.Client
         }
 
         public string[] Items;
-        public Dictionary<int, Scroll_Item_SelectRewardItem> ScrollItemSelectRewardItems;
+        public Dictionary<int, EntityRef<Scroll_Item_SelectRewardItem>> ScrollItemSelectRewardItems;
         public int Key;
         public int Type; // 0等级领取 1击败领取
     }

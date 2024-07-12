@@ -447,7 +447,8 @@ namespace ET.Client
 
             if (self.ShowTaskId.Count > 0)
             {
-                self.ScrollItemTaskGetItems[0].OnClickSelectTask();
+                Scroll_Item_TaskGetItem scrollItemTaskGetItem = self.ScrollItemTaskGetItems[0];
+                scrollItemTaskGetItem.OnClickSelectTask();
                 return true;
             }
 
@@ -460,12 +461,14 @@ namespace ET.Client
 
             for (int i = 0; i < self.ScrollItemTaskGetItems.Count; i++)
             {
-                if (self.ScrollItemTaskGetItems[i].uiTransform == null)
+                Scroll_Item_TaskGetItem scrollItemTaskGetItem = self.ScrollItemTaskGetItems[i];
+                
+                if (scrollItemTaskGetItem.uiTransform == null)
                 {
                     continue;
                 }
 
-                self.ScrollItemTaskGetItems[i].SetSelected(taskid);
+                scrollItemTaskGetItem.SetSelected(taskid);
             }
 
             TaskPro taskPro = self.Root().GetComponent<TaskComponentC>().GetTaskById(taskid);

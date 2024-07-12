@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_PetSelectItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_PetSelectItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetSelectItem>
 	{
 		public PetOperationType OperationType; //1合成 2洗练
 		public RolePetInfo RolePetInfo;

@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (UIBaseWindow))]
-    public class DlgSeasonJingHeZhuru: Entity, IAwake, IUILogic
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgSeasonJingHeZhuru : Entity, IAwake, IUILogic
     {
         public DlgSeasonJingHeZhuruViewComponent View
         {
@@ -15,6 +15,6 @@ namespace ET.Client
         public int MaxAdd;
         public int MinAdd;
         public List<BagInfo> ShowBagInfos = new();
-        public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+        public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
     }
 }

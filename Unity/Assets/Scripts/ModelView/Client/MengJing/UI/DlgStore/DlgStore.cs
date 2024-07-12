@@ -11,6 +11,6 @@ namespace ET.Client
         }
 
         public List<int> ShowStores = new();
-        public Dictionary<int, Scroll_Item_StoreItem> ScrollItemStoreItems;
+        public Dictionary<int, EntityRef<Scroll_Item_StoreItem>> ScrollItemStoreItems;
     }
 }

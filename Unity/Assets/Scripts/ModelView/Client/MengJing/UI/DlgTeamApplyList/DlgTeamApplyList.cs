@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (UIBaseWindow))]
-    public class DlgTeamApplyList: Entity, IAwake, IUILogic
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgTeamApplyList : Entity, IAwake, IUILogic
     {
         public DlgTeamApplyListViewComponent View
         {
@@ -11,6 +11,6 @@ namespace ET.Client
         }
 
         public List<TeamPlayerInfo> ShowTeamPlayerInfos;
-        public Dictionary<int, Scroll_Item_TeamApplyItem> ScrollItemTeamApplyItems;
+        public Dictionary<int, EntityRef<Scroll_Item_TeamApplyItem>> ScrollItemTeamApplyItems;
     }
 }

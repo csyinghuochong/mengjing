@@ -22,7 +22,7 @@ namespace ET.Client
         }
 
         public PetOperationType OperationType;
-        public Dictionary<int, Scroll_Item_PetSelectItem> ScrollItemPetSelectItems;
+        public Dictionary<int, EntityRef<Scroll_Item_PetSelectItem>> ScrollItemPetSelectItems;
         public List<RolePetInfo> ShowRolePetInfos = new();
     }
 }

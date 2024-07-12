@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.TrialMainTimer)]
-    public class TrialMainTimer: ATimer<DlgTrialMain>
+    public class TrialMainTimer : ATimer<DlgTrialMain>
     {
         protected override void Run(DlgTrialMain self)
         {
@@ -22,7 +22,7 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (DlgTrialMain))]
+    [FriendOf(typeof(DlgTrialMain))]
     public static class DlgTrialMainSystem
     {
         public static void RegisterUIEvent(this DlgTrialMain self)
@@ -102,7 +102,7 @@ namespace ET.Client
         {
             if (self.Countdown <= 0)
             {
-                self.Root().GetComponent<ClientSenderCompnent>().Call(new C2M_TrialDungeonFinishRequest()).Coroutine();
+                self.Root().GetComponent<ClientSenderCompnent>().Call(C2M_TrialDungeonFinishRequest.Create()).Coroutine();
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
 
                 self.View.E_TextCoundownText.text = $"未能在60秒内击败怪物,请点击重新挑战";

@@ -14,8 +14,8 @@ namespace ET.Client
         public GameObject[] PetZiZhiItemList = new GameObject[6];
         public RolePetInfo RolePetInfo;
         public List<RolePetInfo> ShowRolePetInfos = new();
-        public Dictionary<int, Scroll_Item_RolePetBagItem> ScrollItemRolePetBagItems;
+        public Dictionary<int, EntityRef<Scroll_Item_RolePetBagItem>> ScrollItemRolePetBagItems;
         public List<int> ShowSkills = new();
-        public Dictionary<int, Scroll_Item_CommonSkillItem> ScrollItemCommonSkillItems;
+        public Dictionary<int, EntityRef<Scroll_Item_CommonSkillItem>> ScrollItemCommonSkillItems;
     }
 }
