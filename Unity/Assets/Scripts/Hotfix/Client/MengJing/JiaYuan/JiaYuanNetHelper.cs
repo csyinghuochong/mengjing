@@ -174,5 +174,14 @@ namespace ET.Client
             M2C_JiaYuanWatchResponse response = (M2C_JiaYuanWatchResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<M2C_JiaYuanPetFeedResponse> JiaYuanPetFeedRequest(Scene root, long petId, List<long> bagInfoIDs)
+        {
+            C2M_JiaYuanPetFeedRequest request = C2M_JiaYuanPetFeedRequest.Create();
+            request.PetId = petId;
+            request.BagInfoIDs = bagInfoIDs;
+            M2C_JiaYuanPetFeedResponse response = (M2C_JiaYuanPetFeedResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

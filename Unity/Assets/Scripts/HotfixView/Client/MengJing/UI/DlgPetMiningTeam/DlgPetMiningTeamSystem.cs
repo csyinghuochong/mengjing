@@ -7,10 +7,10 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_PetFormationItem))]
-    [FriendOf(typeof (DlgPetMiningTeamViewComponent))]
-    [FriendOf(typeof (Scroll_Item_PetMiningTeamItem))]
-    [FriendOf(typeof (DlgPetMiningTeam))]
+    [FriendOf(typeof(Scroll_Item_PetFormationItem))]
+    [FriendOf(typeof(DlgPetMiningTeamViewComponent))]
+    [FriendOf(typeof(Scroll_Item_PetMiningTeamItem))]
+    [FriendOf(typeof(DlgPetMiningTeam))]
     public static class DlgPetMiningTeamSystem
     {
         public static void RegisterUIEvent(this DlgPetMiningTeam self)
@@ -176,9 +176,12 @@ namespace ET.Client
 
         public static void UpdateTeamList(this DlgPetMiningTeam self)
         {
-            self.MiningTeamList[0].UpdatePetTeam(self.PetTeamList);
-            self.MiningTeamList[1].UpdatePetTeam(self.PetTeamList);
-            self.MiningTeamList[2].UpdatePetTeam(self.PetTeamList);
+            Scroll_Item_PetMiningTeamItem item0 = self.MiningTeamList[0];
+            Scroll_Item_PetMiningTeamItem item1 = self.MiningTeamList[1];
+            Scroll_Item_PetMiningTeamItem item2 = self.MiningTeamList[2];
+            item0.UpdatePetTeam(self.PetTeamList);
+            item1.UpdatePetTeam(self.PetTeamList);
+            item2.UpdatePetTeam(self.PetTeamList);
         }
 
         public static void OnUpdatePetList(this DlgPetMiningTeam self)

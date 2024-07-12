@@ -9,7 +9,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_HuiShouSelect_DlgJiaYuanPetFeedRefresh: AEvent<Scene, DataUpdate_HuiShouSelect>
+    public class DataUpdate_HuiShouSelect_DlgJiaYuanPetFeedRefresh : AEvent<Scene, DataUpdate_HuiShouSelect>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_HuiShouSelect args)
         {
@@ -18,8 +18,8 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [FriendOf(typeof (DlgJiaYuanPetFeed))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [FriendOf(typeof(DlgJiaYuanPetFeed))]
     public static class DlgJiaYuanPetFeedSystem
     {
         public static void RegisterUIEvent(this DlgJiaYuanPetFeed self)
@@ -142,15 +142,16 @@ namespace ET.Client
 
             for (int i = 0; i < self.CostItemList.Length; i++)
             {
-                if (self.CostItemList[i].Baginfo == null)
+                ES_CommonItem item = self.CostItemList[i];
+                if (item.Baginfo == null)
                 {
                     continue;
                 }
 
-                if (self.CostItemList[i].Baginfo.BagInfoID == bagInfo.BagInfoID)
+                if (item.Baginfo.BagInfoID == bagInfo.BagInfoID)
                 {
-                    self.CostItemList[i].UpdateItem(null, ItemOperateEnum.None);
-                    self.CostItemList[i].E_ItemNameText.gameObject.SetActive(false);
+                    item.UpdateItem(null, ItemOperateEnum.None);
+                    item.E_ItemNameText.gameObject.SetActive(false);
                 }
             }
 
@@ -159,11 +160,12 @@ namespace ET.Client
             {
                 for (int i = 0; i < self.CostItemList.Length; i++)
                 {
-                    if (self.CostItemList[i].Baginfo == null)
+                    ES_CommonItem item = self.CostItemList[i];
+                    if (item.Baginfo == null)
                     {
-                        self.CostItemList[i].UpdateItem(bagInfo, ItemOperateEnum.HuishouShow);
-                        self.CostItemList[i].E_ItemNumText.text = "1";
-                        self.CostItemList[i].E_ItemNameText.gameObject.SetActive(true);
+                        item.UpdateItem(bagInfo, ItemOperateEnum.HuishouShow);
+                        item.E_ItemNumText.text = "1";
+                        item.E_ItemNameText.gameObject.SetActive(true);
                         break;
                     }
                 }
@@ -177,14 +179,14 @@ namespace ET.Client
             List<long> idslist = new List<long>();
             for (int h = 0; h < self.CostItemList.Length; h++)
             {
-                if (self.CostItemList[h].Baginfo != null)
+                ES_CommonItem item = self.CostItemList[h];
+                if (item.Baginfo != null)
                 {
-                    idslist.Add(self.CostItemList[h].Baginfo.BagInfoID);
+                    idslist.Add(item.Baginfo.BagInfoID);
                 }
             }
 
-            C2M_JiaYuanPetFeedRequest request = new() { PetId = self.JiaYuanPet.unitId, BagInfoIDs = idslist };
-            M2C_JiaYuanPetFeedResponse response = (M2C_JiaYuanPetFeedResponse)await self.Root().GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_JiaYuanPetFeedResponse response = await JiaYuanNetHelper.JiaYuanPetFeedRequest(self.Root(), self.JiaYuanPet.unitId, idslist);
             self.Root().GetComponent<JiaYuanComponentC>().JiaYuanPetList_2 = response.JiaYuanPetList;
 
             FlyTipComponent.Instance.ShowFlyTipDi($"宠物增加 {response.MoodAdd}心情值");
@@ -200,15 +202,16 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             for (int h = 0; h < self.CostItemList.Length; h++)
             {
-                if (self.CostItemList[h].Baginfo == null)
+                ES_CommonItem esCommonItem = self.CostItemList[h];
+                if (esCommonItem.Baginfo == null)
                 {
                     continue;
                 }
 
-                if (null == bagComponent.GetBagInfo(self.CostItemList[h].Baginfo.BagInfoID))
+                if (null == bagComponent.GetBagInfo(esCommonItem.Baginfo.BagInfoID))
                 {
-                    self.CostItemList[h].UpdateItem(null, ItemOperateEnum.None);
-                    self.CostItemList[h].E_ItemNameText.gameObject.SetActive(false);
+                    esCommonItem.UpdateItem(null, ItemOperateEnum.None);
+                    esCommonItem.E_ItemNameText.gameObject.SetActive(false);
                 }
             }
         }
@@ -233,8 +236,8 @@ namespace ET.Client
                     bool have = false;
                     for (int h = 0; h < self.CostItemList.Length; h++)
                     {
-                        if (self.CostItemList[h].Baginfo != null
-                            && self.CostItemList[h].Baginfo.BagInfoID == bagInfo.BagInfoID)
+                        ES_CommonItem esCommonItem = self.CostItemList[h];
+                        if (esCommonItem.Baginfo != null && esCommonItem.Baginfo.BagInfoID == bagInfo.BagInfoID)
                         {
                             have = true;
                         }

@@ -173,7 +173,8 @@ namespace ET.Client
             //设置选中框
             for (int k = 0; k < self.ChapterListUI.Count; k++)
             {
-                self.ChapterListUI[k].OnSelectMakeItem(makeid);
+                UIShenQiChapterComponent ui = self.ChapterListUI[k];
+                ui.OnSelectMakeItem(makeid);
             }
         }
 

@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UIChengJiuShowChapterItem))]
-    [FriendOf(typeof (UIChengJiuShowType))]
-    [EntitySystemOf(typeof (UIChengJiuShowType))]
+    [FriendOf(typeof(UIChengJiuShowChapterItem))]
+    [FriendOf(typeof(UIChengJiuShowType))]
+    [EntitySystemOf(typeof(UIChengJiuShowType))]
     public static partial class UIChengJiuShowTypeSystem
     {
         [EntitySystem]
@@ -82,13 +82,15 @@ namespace ET.Client
 
                 for (int i = num; i < self.UIChengJiuShowChapterItems.Count; i++)
                 {
-                    self.UIChengJiuShowChapterItems[i].GameObject.SetActive(false);
+                    UIChengJiuShowChapterItem ui = self.UIChengJiuShowChapterItems[i];
+                    ui.GameObject.SetActive(false);
                 }
 
                 // 默认点第一个
                 if (self.UIChengJiuShowChapterItems.Count > 0)
                 {
-                    self.UIChengJiuShowChapterItems[0].OnIma_Di();
+                    UIChengJiuShowChapterItem ui = self.UIChengJiuShowChapterItems[0];
+                    ui.OnIma_Di();
                 }
             }
         }

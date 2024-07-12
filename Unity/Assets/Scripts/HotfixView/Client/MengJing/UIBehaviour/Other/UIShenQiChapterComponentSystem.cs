@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_MakeItem))]
-    [FriendOf(typeof (UIShenQiChapterComponent))]
-    [EntitySystemOf(typeof (UIShenQiChapterComponent))]
+    [FriendOf(typeof(Scroll_Item_MakeItem))]
+    [FriendOf(typeof(UIShenQiChapterComponent))]
+    [EntitySystemOf(typeof(UIShenQiChapterComponent))]
     public static partial class UIShenQiChapterComponentSystem
     {
         [EntitySystem]
@@ -24,7 +24,7 @@ namespace ET.Client
         public static void OnInitUI(this UIShenQiChapterComponent self, int chaptet, List<int> makeList)
         {
             int row = (makeList.Count / 5);
-            row += (makeList.Count % 5 > 0? 1 : 0);
+            row += (makeList.Count % 5 > 0 ? 1 : 0);
             self.GameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(800f, 100f + row * 170f);
 
             var path = ABPathHelper.GetUGUIPath("Item/Item_MakeItem");
@@ -44,7 +44,8 @@ namespace ET.Client
             if (chaptet == 0)
             {
                 self.Text_Name.GetComponent<Text>().text = $"生肖";
-                self.OnClickMakeItem(self.MakeListUI[0].MakeID);
+                Scroll_Item_MakeItem item = self.MakeListUI[0];
+                self.OnClickMakeItem(item.MakeID);
             }
             else if (chaptet == 6)
             {
@@ -73,7 +74,8 @@ namespace ET.Client
             //设置选中框
             for (int k = 0; k < self.MakeListUI.Count; k++)
             {
-                self.MakeListUI[k].E_Image_SelectImage.gameObject.SetActive(makeid == self.MakeListUI[k].MakeID);
+                Scroll_Item_MakeItem item = self.MakeListUI[k];
+                item.E_Image_SelectImage.gameObject.SetActive(makeid == item.MakeID);
             }
         }
     }

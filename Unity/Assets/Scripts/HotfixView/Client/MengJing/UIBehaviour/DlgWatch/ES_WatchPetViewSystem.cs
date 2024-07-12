@@ -541,9 +541,10 @@ namespace ET.Client
             self.BagInfo = bagInfo;
             for (int i = 0; i < self.ScrollItemCommonItems.Count; i++)
             {
-                if (self.ScrollItemCommonItems[i].uiTransform != null)
+                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[i];
+                if (scrollItemCommonItem.uiTransform != null)
                 {
-                    self.ScrollItemCommonItems[i].ES_CommonItem.SetSelected(bagInfo);
+                    scrollItemCommonItem.ES_CommonItem.SetSelected(bagInfo);
                 }
             }
         }

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UIPaiMaiShopTypeComponent))]
-    [EntitySystemOf(typeof (UIPaiMaiShopTypeComponent))]
+    [FriendOf(typeof(UIPaiMaiShopTypeComponent))]
+    [EntitySystemOf(typeof(UIPaiMaiShopTypeComponent))]
     public static partial class UIPaiMaiShopTypeComponentSystem
     {
         [EntitySystem]
@@ -44,7 +44,8 @@ namespace ET.Client
 
             for (int i = 0; i < self.UITaskTypeItemList.Count; i++)
             {
-                self.UITaskTypeItemList[i].GameObject.SetActive(false);
+                UIPaiMaiShopTypeItemComponent ui = self.UITaskTypeItemList[i];
+                ui.GameObject.SetActive(false);
             }
 
             if (!self.bSelected)
@@ -86,7 +87,8 @@ namespace ET.Client
             self.GameObject.transform.parent.gameObject.SetActive(true);
             if (ids.Count > 0)
             {
-                self.UITaskTypeItemList[0].OnClickButtoin();
+                UIPaiMaiShopTypeItemComponent ui = self.UITaskTypeItemList[0];
+                ui.OnClickButtoin();
             }
         }
 
@@ -116,7 +118,8 @@ namespace ET.Client
         {
             for (int i = 0; i < self.UITaskTypeItemList.Count; i++)
             {
-                self.UITaskTypeItemList[i].SetSelected(chapterid);
+                UIPaiMaiShopTypeItemComponent ui = self.UITaskTypeItemList[i];
+                ui.SetSelected(chapterid);
             }
 
             self.ClickTypeItemHandler(self.TypeId, chapterid);

@@ -54,7 +54,8 @@ namespace ET.Client
             bool gray = xilianlv < self.EquipXiLianConfig.XiLianLevel;
             for (int i = 0; i < self.uIItems.Count; i++)
             {
-                CommonViewHelper.SetImageGray(self.Root(), self.uIItems[i].E_ImageIconImage.gameObject, gray);
+                Scroll_Item_CommonSkillItem item = self.uIItems[i];
+                CommonViewHelper.SetImageGray(self.Root(), item.E_ImageIconImage.gameObject, gray);
             }
 
             if (gray)

@@ -18,7 +18,8 @@ namespace ET.Client
                 Scroll_Item_MainTeamItem scrollItemMainTeamItem = self.AddChild<Scroll_Item_MainTeamItem>();
                 scrollItemMainTeamItem.uiTransform = gameObject.transform;
                 self.TeamUIList.Add(scrollItemMainTeamItem);
-                self.TeamUIList[i].uiTransform.gameObject.SetActive(false);
+                Scroll_Item_MainTeamItem item = self.TeamUIList[i];
+                item.uiTransform.gameObject.SetActive(false);
             }
         }
 
@@ -30,7 +31,8 @@ namespace ET.Client
         {
             for (int i = 0; i < message.DamageList.Count; i++)
             {
-                self.TeamUIList[i].OnUpdateItem(message.DamageList[i]);
+                Scroll_Item_MainTeamItem item = self.TeamUIList[i];
+                item.OnUpdateItem(message.DamageList[i]);
             }
         }
     }

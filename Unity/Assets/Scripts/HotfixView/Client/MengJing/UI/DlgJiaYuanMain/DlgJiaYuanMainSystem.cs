@@ -552,7 +552,11 @@ namespace ET.Client
         public static void OnOpenPlan(this DlgJiaYuanMain self, int index)
         {
             JiaYuanPlanLockComponent jiaYuanPlanLockComponent = null;
-            self.JiaYuanPlanLocks.TryGetValue(index, out jiaYuanPlanLockComponent);
+            if (self.JiaYuanPlanLocks.ContainsKey(index))
+            {
+                jiaYuanPlanLockComponent = self.JiaYuanPlanLocks[index];
+            }
+
             if (jiaYuanPlanLockComponent == null)
             {
                 return;

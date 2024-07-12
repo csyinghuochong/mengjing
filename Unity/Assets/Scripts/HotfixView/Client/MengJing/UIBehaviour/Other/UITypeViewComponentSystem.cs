@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UITypeButtonComponent))]
-    [FriendOf(typeof (UITypeViewComponent))]
-    [EntitySystemOf(typeof (UITypeViewComponent))]
+    [FriendOf(typeof(UITypeButtonComponent))]
+    [FriendOf(typeof(UITypeViewComponent))]
+    [EntitySystemOf(typeof(UITypeViewComponent))]
     public static partial class UITypeViewComponentSystem
     {
         [EntitySystem]
@@ -57,9 +57,9 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (UITypeButtonItemComponent))]
-    [FriendOf(typeof (UITypeButtonComponent))]
-    [EntitySystemOf(typeof (UITypeButtonComponent))]
+    [FriendOf(typeof(UITypeButtonItemComponent))]
+    [FriendOf(typeof(UITypeButtonComponent))]
+    [EntitySystemOf(typeof(UITypeButtonComponent))]
     public static partial class UITypeButtonComponentSystem
     {
         [EntitySystem]
@@ -90,7 +90,8 @@ namespace ET.Client
 
             for (int i = 0; i < self.TypeItemUIList.Count; i++)
             {
-                self.TypeItemUIList[i].GameObject.SetActive(false);
+                UITypeButtonItemComponent ui = self.TypeItemUIList[i];
+                ui.GameObject.SetActive(false);
             }
 
             if (!self.bSelected)
@@ -138,7 +139,8 @@ namespace ET.Client
             self.GameObject.transform.parent.gameObject.SetActive(true);
             if (TypeButtonItems.Count > 0)
             {
-                self.TypeItemUIList[self.SubPage].OnClickButtoin();
+                UITypeButtonItemComponent ui = self.TypeItemUIList[self.SubPage];
+                ui.OnClickButtoin();
                 self.SubPage = 0;
             }
         }
@@ -171,15 +173,16 @@ namespace ET.Client
         {
             for (int i = 0; i < self.TypeItemUIList.Count; i++)
             {
-                self.TypeItemUIList[i].SetSelected(chapterid);
+                UITypeButtonItemComponent ui = self.TypeItemUIList[i];
+                ui.SetSelected(chapterid);
             }
 
             self.ClickTypeItemHandler(self.TypeId, chapterid);
         }
     }
 
-    [FriendOf(typeof (UITypeButtonItemComponent))]
-    [EntitySystemOf(typeof (UITypeButtonItemComponent))]
+    [FriendOf(typeof(UITypeButtonItemComponent))]
+    [EntitySystemOf(typeof(UITypeButtonItemComponent))]
     public static partial class UITypeButtonItemComponentSystem
     {
         [EntitySystem]

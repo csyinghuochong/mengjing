@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_EquipItem))]
-    [FriendOf(typeof (DlgRoleZodiac))]
+    [FriendOf(typeof(ES_EquipItem))]
+    [FriendOf(typeof(DlgRoleZodiac))]
     public static class DlgRoleZodiacSystem
     {
         public static void RegisterUIEvent(this DlgRoleZodiac self)
@@ -52,8 +52,9 @@ namespace ET.Client
 
             for (int i = 0; i < self.EquipList.Count; i++)
             {
-                self.EquipList[i].E_EquipBackImage.gameObject.SetActive(false);
-                self.EquipList[i].E_EquipQualityImage.gameObject.SetActive(true);
+                ES_EquipItem item = self.EquipList[i];
+                item.E_EquipBackImage.gameObject.SetActive(false);
+                item.E_EquipQualityImage.gameObject.SetActive(true);
 
                 //改变底框
                 if (page == 0)
@@ -61,7 +62,7 @@ namespace ET.Client
                     string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, "ItemQuality_2");
                     Sprite sp = resourcesLoaderComponent.LoadAssetSync<Sprite>(path);
 
-                    self.EquipList[i].E_EquipQualityImage.sprite = sp;
+                    item.E_EquipQualityImage.sprite = sp;
                 }
 
                 if (page == 1)
@@ -69,7 +70,7 @@ namespace ET.Client
                     string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, "ItemQuality_3");
                     Sprite sp = resourcesLoaderComponent.LoadAssetSync<Sprite>(path);
 
-                    self.EquipList[i].E_EquipQualityImage.sprite = sp;
+                    item.E_EquipQualityImage.sprite = sp;
                 }
 
                 if (page == 2)
@@ -77,7 +78,7 @@ namespace ET.Client
                     string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, "ItemQuality_4");
                     Sprite sp = resourcesLoaderComponent.LoadAssetSync<Sprite>(path);
 
-                    self.EquipList[i].E_EquipQualityImage.sprite = sp;
+                    item.E_EquipQualityImage.sprite = sp;
                 }
 
                 if (page == 3)
@@ -85,7 +86,7 @@ namespace ET.Client
                     string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, "ItemQuality_5");
                     Sprite sp = resourcesLoaderComponent.LoadAssetSync<Sprite>(path);
 
-                    self.EquipList[i].E_EquipQualityImage.sprite = sp;
+                    item.E_EquipQualityImage.sprite = sp;
                 }
             }
 
@@ -119,7 +120,8 @@ namespace ET.Client
                     continue;
                 }
 
-                self.EquipList[itemConfig.ItemSubType % 100 - 1].Refresh(equiplist[i], self.Occ, self.ItemOperateEnum, equiplist);
+                ES_EquipItem esEquipItem = self.EquipList[itemConfig.ItemSubType % 100 - 1];
+                esEquipItem.Refresh(equiplist[i], self.Occ, self.ItemOperateEnum, equiplist);
             }
 
             //线条显示
@@ -157,7 +159,8 @@ namespace ET.Client
         {
             for (int i = 0; i < self.EquipList.Count; i++)
             {
-                self.EquipList[i].InitUI(1101);
+                ES_EquipItem esEquipItem = self.EquipList[i];
+                esEquipItem.InitUI(1101);
             }
         }
 

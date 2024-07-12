@@ -81,7 +81,8 @@ namespace ET.Client
                 long petId = petlist[i + self.TeamId * 5];
                 RolePetInfo rolePetInfo = self.PetComponent.GetPetInfoByID(petId);
 
-                if (rolePetInfo != null && self.FormationItemComponents[i] == null)
+                Scroll_Item_PetFormationItem item = self.FormationItemComponents[i];
+                if (rolePetInfo != null && item == null)
                 {
                     GameObject goItem = GameObject.Instantiate(bundleGameObject);
                     CommonViewHelper.SetParent(goItem, self.PetIcon_di_List[i]);
@@ -95,15 +96,15 @@ namespace ET.Client
                     FormationItem.SetDragEnable(true);
                 }
 
-                if (rolePetInfo == null && self.FormationItemComponents[i] != null)
+                if (rolePetInfo == null && item  != null)
                 {
-                    self.FormationItemComponents[i].uiTransform.gameObject.SetActive(false);
+                    item.uiTransform.gameObject.SetActive(false);
                 }
 
                 if (rolePetInfo != null)
                 {
-                    self.FormationItemComponents[i].OnInitUI(rolePetInfo);
-                    self.FormationItemComponents[i].uiTransform.gameObject.SetActive(true);
+                    item.OnInitUI(rolePetInfo);
+                    item.uiTransform.gameObject.SetActive(true);
                 }
             }
         }

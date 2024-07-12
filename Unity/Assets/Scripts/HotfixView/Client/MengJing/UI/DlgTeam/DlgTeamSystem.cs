@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_TeamUpdate_DlgTeamRefresh: AEvent<Scene, DataUpdate_TeamUpdate>
+    public class DataUpdate_TeamUpdate_DlgTeamRefresh : AEvent<Scene, DataUpdate_TeamUpdate>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_TeamUpdate args)
         {
@@ -16,8 +16,8 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (ES_TeamItem))]
-    [FriendOf(typeof (DlgTeam))]
+    [FriendOf(typeof(ES_TeamItem))]
+    [FriendOf(typeof(DlgTeam))]
     public static class DlgTeamSystem
     {
         public static void RegisterUIEvent(this DlgTeam self)
@@ -61,9 +61,13 @@ namespace ET.Client
         public static void OnUpdateUI(this DlgTeam self)
         {
             TeamInfo teamInfo = self.Root().GetComponent<TeamComponentC>().GetSelfTeam();
-            self.TeamUIList[0].OnUpdateItem(null);
-            self.TeamUIList[1].OnUpdateItem(null);
-            self.TeamUIList[2].OnUpdateItem(null);
+            ES_TeamItem item0 = self.TeamUIList[0];
+            ES_TeamItem item1 = self.TeamUIList[1];
+            ES_TeamItem item2 = self.TeamUIList[2];
+            item0.OnUpdateItem(null);
+            item1.OnUpdateItem(null);
+            item2.OnUpdateItem(null);
+
             if (teamInfo == null)
             {
                 return;
@@ -71,7 +75,8 @@ namespace ET.Client
 
             for (int i = 0; i < teamInfo.PlayerList.Count; i++)
             {
-                self.TeamUIList[i].OnUpdateItem(teamInfo.PlayerList[i]);
+                ES_TeamItem esTeamItem = self.TeamUIList[i];
+                esTeamItem.OnUpdateItem(teamInfo.PlayerList[i]);
             }
         }
 
@@ -93,7 +98,7 @@ namespace ET.Client
         {
             bool isLeader = self.Root().GetComponent<TeamComponentC>().IsTeamLeader();
 
-            PopupTipHelp.OpenPopupTip(self.Root(), "我的队伍", isLeader? "是否解散队伍" : "是否离开队伍？", () => { self.SendLeaveRequest(); }).Coroutine();
+            PopupTipHelp.OpenPopupTip(self.Root(), "我的队伍", isLeader ? "是否解散队伍" : "是否离开队伍？", () => { self.SendLeaveRequest(); }).Coroutine();
         }
     }
 }

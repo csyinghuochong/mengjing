@@ -137,8 +137,9 @@ namespace ET.Client
             self.TeamId = teamid;
             for (int i = 0; i < self.ChallengeTeamList.Count; i++)
             {
-                self.ChallengeTeamList[i].ImageSelect.SetActive(teamid == i);
-                self.ChallengeTeamList[i].ButtonSelect.SetActive(teamid != i);
+                Scroll_Item_PetMiningChallengeItem item = self.ChallengeTeamList[i];
+                item.ImageSelect.SetActive(teamid == i);
+                item.ButtonSelect.SetActive(teamid != i);
             }
         }
 

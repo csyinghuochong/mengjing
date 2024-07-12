@@ -83,20 +83,22 @@ namespace ET.Client
         {
             for (int i = 0; i < self.UISkillGrids.Count; i++)
             {
-                if (self.UISkillGrids[i].SkillPro == null)
+                ES_SkillGrid esSkillGrid = self.UISkillGrids[i];
+                
+                if (esSkillGrid.SkillPro == null)
                 {
                     continue;
                 }
 
-                if (self.UISkillGrids[i].SkillPro.SkillID != skillId)
+                if (esSkillGrid.SkillPro.SkillID != skillId)
                 {
                     continue;
                 }
 
                 if (i == self.Index || i == self.UISkillGrids.Count - 1)
                 {
-                    self.UISkillGrids[i].RemoveSkillInfoShow();
-                    self.UISkillGrids[i].uiTransform.gameObject.SetActive(false);
+                    esSkillGrid.RemoveSkillInfoShow();
+                    esSkillGrid.uiTransform.gameObject.SetActive(false);
                     break;
                 }
             }
@@ -107,7 +109,8 @@ namespace ET.Client
             int addIndex = 0;
             for (int i = 0; i < self.UISkillGrids.Count; i++)
             {
-                if (self.UISkillGrids[i].uiTransform.gameObject.activeSelf)
+                ES_SkillGrid esSkillGrid = self.UISkillGrids[i];
+                if (esSkillGrid.uiTransform.gameObject.activeSelf)
                 {
                     continue;
                 }
@@ -117,12 +120,13 @@ namespace ET.Client
                 break;
             }
 
-            self.UISkillGrids[addIndex].uiTransform.gameObject.SetActive(true);
+            ES_SkillGrid grid = self.UISkillGrids[addIndex];
+            grid.uiTransform.gameObject.SetActive(true);
             SkillPro skillPro = SkillPro.Create();
             skillPro.SkillID = (int)skillId;
             skillPro.SkillSetType = (int)SkillSetEnum.Skill;
             skillPro.SkillSource = (int)SkillSourceEnum.Buff;
-            self.UISkillGrids[addIndex].UpdateSkillInfo(skillPro);
+            grid.UpdateSkillInfo(skillPro);
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             FunctionEffect.PlaySelfEffect(unit, 60000002);
