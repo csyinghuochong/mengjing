@@ -8,7 +8,10 @@ namespace ET.Client
         public static async ETTask<E2C_GetAllMailResponse> SendGetMailList(Scene root)
         {
             UserInfo userInfo = root.GetComponent<UserInfoComponentC>().UserInfo;
-            C2E_GetAllMailRequest request = new() { ActorId = userInfo.UserId };
+
+            C2E_GetAllMailRequest request = C2E_GetAllMailRequest.Create();
+            request.ActorId = userInfo.UserId;
+
             E2C_GetAllMailResponse response = (E2C_GetAllMailResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             root.GetComponent<MailComponentC>().MailInfoList = response.MailInfos;
@@ -43,7 +46,9 @@ namespace ET.Client
                 return ErrorCode.ERR_BagIsFull;
             }
 
-            C2M_ReceiveMailRequest request = new() { MailId = mailComponent.SelectMail.MailId };
+            C2M_ReceiveMailRequest request = C2M_ReceiveMailRequest.Create();
+            request.MailId = mailComponent.SelectMail.MailId;
+
             M2C_ReceiveMailResponse response = (M2C_ReceiveMailResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             if (response.Error != 0)
             {
@@ -64,7 +69,9 @@ namespace ET.Client
 
         public static async ETTask<E2C_GMEMailResponse> GMEMail(Scene root, string mailInfo)
         {
-            C2E_GMEMailRequest request = new() { MailInfo = mailInfo };
+            C2E_GMEMailRequest request = C2E_GMEMailRequest.Create();
+            request.MailInfo = mailInfo;
+
             E2C_GMEMailResponse response = (E2C_GMEMailResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
