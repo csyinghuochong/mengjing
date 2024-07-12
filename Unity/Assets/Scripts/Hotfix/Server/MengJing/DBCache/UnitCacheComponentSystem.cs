@@ -53,17 +53,17 @@ namespace ET.Server
 
         public static async ETTask<Entity> Get(this UnitCacheComponent self, long unitId, string key)
         {
-            UnitCache unitCache_2 = null;
-            if (!self.UnitCaches.TryGetValue(key, out EntityRef<UnitCache> unitCache))
+            UnitCache unitCache = null;
+            self.UnitCaches.TryGetValue(key, out EntityRef<UnitCache> refunitCache);
+            unitCache = refunitCache;
+            
+            if (unitCache == null)
             {
                 unitCache = self.AddChild<UnitCache>();
-                unitCache_2 = unitCache;
-                unitCache_2.SetKey( key );
+                unitCache.SetKey( key );
                 self.UnitCaches.Add(key, unitCache);
             }
-            
-            unitCache_2 = unitCache;
-            return await unitCache_2.Get(unitId);
+            return await unitCache.Get(unitId);
         }
 
 

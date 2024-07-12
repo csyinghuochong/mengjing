@@ -48,26 +48,27 @@ namespace ET.Server
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(scene.Zone());
             Other2UnitCache_GetUnit message = Other2UnitCache_GetUnit.Create();
             message.UnitId = unitId;
-            
-            UnitCache2Other_GetUnit queryUnit = (UnitCache2Other_GetUnit)await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message);
+
+            UnitCache2Other_GetUnit queryUnit =
+                    (UnitCache2Other_GetUnit)await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message);
             if (queryUnit.Error != ErrorCode.ERR_Success || queryUnit.EntityList.Count <= 0)
             {
                 return null;
             }
 
-             int indexOf = queryUnit.ComponentNameList.IndexOf(typeof(Unit).FullName);
-             Unit unit =  MongoHelper.Deserialize<Unit>(queryUnit.EntityList[indexOf]);
-             UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
-             // if (unit == null)
-             // {
-             //     unit =  unitComponent.AddChildWithId<Unit, int>(unitId, 1001);
-             // }
-             // else
-             // {
-             //     unitComponent.AddChild(unit);
-             // }
-             
-             unit =  unitComponent.AddChildWithId<Unit, int>(unitId, 1001);
+            int indexOf = queryUnit.ComponentNameList.IndexOf(typeof(Unit).FullName);
+            Unit unit = MongoHelper.Deserialize<Unit>(queryUnit.EntityList[indexOf]);
+            UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
+            // if (unit == null)
+            // {
+            //     unit =  unitComponent.AddChildWithId<Unit, int>(unitId, 1001);
+            // }
+            // else
+            // {
+            //     unitComponent.AddChild(unit);
+            // }
+
+            unit = unitComponent.AddChildWithId<Unit, int>(unitId, 1001);
 
             foreach (var bytess in queryUnit.EntityList)
             {
@@ -76,34 +77,13 @@ namespace ET.Server
                 {
                     continue;
                 }
+
                 unit.AddComponent(entity);
             }
+
             return unit;
         }
 
-        /// <summary>
-        /// 获取玩家组件缓存
-        /// </summary>
-        /// <param name="unitId"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static async ETTask<T> GetUnitComponentCache<T>(Scene scene, long unitId) where T : Entity, IUnitCache
-        {
-            Scene root = scene.Root();
-            StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(scene.Zone());
-
-            Other2UnitCache_GetUnit message = Other2UnitCache_GetUnit.Create();
-            message.UnitId = unitId;
-            message.ComponentNameList.Add(typeof(T).FullName);
-
-            UnitCache2Other_GetUnit queryUnit = (UnitCache2Other_GetUnit)await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message);
-            if (queryUnit.Error == ErrorCode.ERR_Success && queryUnit.EntityList.Count > 0)
-            {
-                return queryUnit.EntityList[0] as T;
-            }
-            return null;
-        }
-        
         /// 获取玩家组件缓存
         /// </summary>
         /// <param name="unitId"></param>
@@ -121,7 +101,7 @@ namespace ET.Server
 
             if (d2GGetUnit.Error == ErrorCode.ERR_Success && d2GGetUnit.Component != null)
             {
-                return d2GGetUnit.Component as T;
+                return  MongoHelper.Deserialize<T>(d2GGetUnit.Component);
             }
             return null;
         }

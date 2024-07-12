@@ -52,7 +52,10 @@ namespace ET.Server
         public static async ETTask<Entity> Get(this UnitCache self, long unitId)
         {
             Entity entity = null;
-            if (!self.CacheCompoenntsDictionary.TryGetValue(unitId, out EntityRef<Entity> eentity))
+            self.CacheCompoenntsDictionary.TryGetValue(unitId, out EntityRef<Entity> refentity);
+
+            entity = refentity;
+            if (entity == null)
             {
                 entity = await self.Root().GetComponent<DBManagerComponent>().GetZoneDB(self.Zone()).Query<Entity>(unitId, self.key);
                 if (entity != null)
@@ -60,8 +63,6 @@ namespace ET.Server
                     self.AddOrUpdate(entity);
                 }
             }
-
-            entity = eentity;
             return entity;
         }
 
