@@ -2,15 +2,15 @@
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (UIBaseWindow))]
-    public class DlgWeiJingShop: Entity, IAwake, IUILogic
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgWeiJingShop : Entity, IAwake, IUILogic
     {
         public DlgWeiJingShopViewComponent View
         {
             get => this.GetComponent<DlgWeiJingShopViewComponent>();
         }
 
-        public Dictionary<int, Scroll_Item_WeiJingShopItem> ScrollItemWeiJingShopItems;
+        public Dictionary<int, EntityRef<Scroll_Item_WeiJingShopItem>> ScrollItemWeiJingShopItems;
         public List<StoreSellConfig> ShowStoreSellConfigs = new();
         public int SellId;
     }

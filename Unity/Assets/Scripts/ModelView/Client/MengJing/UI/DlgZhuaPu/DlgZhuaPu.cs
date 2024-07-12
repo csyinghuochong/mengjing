@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (UIBaseWindow))]
-    public class DlgZhuaPu: Entity, IAwake, IUILogic
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgZhuaPu : Entity, IAwake, IUILogic
     {
         public DlgZhuaPuViewComponent View
         {
@@ -18,6 +18,6 @@ namespace ET.Client
         public long MonsterUnitid;
 
         public List<BagInfo> ShowBagInfos = new();
-        public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+        public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
     }
 }

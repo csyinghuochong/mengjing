@@ -10,7 +10,7 @@ namespace ET.Client
             get => this.GetComponent<DlgUnionRecordsViewComponent>();
         }
 
-        public Dictionary<int, Scroll_Item_UnionRecordsItem> ScrollItemUnionRecordsItems;
+        public Dictionary<int, EntityRef<Scroll_Item_UnionRecordsItem>> ScrollItemUnionRecordsItems;
         public List<string> ShowInfo = new();
     }
 }

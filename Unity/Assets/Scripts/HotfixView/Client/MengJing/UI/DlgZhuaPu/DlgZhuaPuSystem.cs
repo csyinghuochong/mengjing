@@ -35,7 +35,9 @@ namespace ET.Client
             self.ShowBagInfos.Clear();
             foreach (var item in GlobalValueConfigCategory.Instance.ZhuaPuItem)
             {
-                self.ShowBagInfos.Add(new BagInfo() { ItemID = item.Key });
+                BagInfo bagInfo = BagInfo.Create();
+                bagInfo.ItemID = item.Key;
+                self.ShowBagInfos.Add(bagInfo);
             }
 
             self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
