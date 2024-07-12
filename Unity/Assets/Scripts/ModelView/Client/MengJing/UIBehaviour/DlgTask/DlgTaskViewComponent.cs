@@ -50,7 +50,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_taskdetail == null )
+
+		        ES_TaskDetail es = this.m_es_taskdetail;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_TaskDetail");
 		    	   this.m_es_taskdetail = this.AddChild<ES_TaskDetail,Transform>(subTrans);
@@ -68,7 +70,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_taskgrowup == null )
+
+		        ES_TaskGrowUp es = this.m_es_taskgrowup;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_TaskGrowUp");
 		    	   this.m_es_taskgrowup = this.AddChild<ES_TaskGrowUp,Transform>(subTrans);

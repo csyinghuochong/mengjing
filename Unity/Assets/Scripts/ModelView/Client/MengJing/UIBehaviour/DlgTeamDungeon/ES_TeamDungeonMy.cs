@@ -20,7 +20,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_teamitem1 == null )
+
+		        ES_TeamItem es = this.m_es_teamitem1;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_TeamItem1");
 		    	   this.m_es_teamitem1 = this.AddChild<ES_TeamItem,Transform>(subTrans);
@@ -38,7 +40,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_teamitem2 == null )
+
+		        ES_TeamItem es = this.m_es_teamitem2;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_TeamItem2");
 		    	   this.m_es_teamitem2 = this.AddChild<ES_TeamItem,Transform>(subTrans);
@@ -56,7 +60,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_teamitem3 == null )
+
+		        ES_TeamItem es = this.m_es_teamitem3;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_TeamItem3");
 		    	   this.m_es_teamitem3 = this.AddChild<ES_TeamItem,Transform>(subTrans);

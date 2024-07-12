@@ -33,7 +33,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_unionkejiresearch == null )
+
+		        ES_UnionKeJiResearch es = this.m_es_unionkejiresearch;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_UnionKeJiResearch");
 		    	   this.m_es_unionkejiresearch = this.AddChild<ES_UnionKeJiResearch,Transform>(subTrans);
@@ -51,7 +53,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_unionkejilearn == null )
+
+		        ES_UnionKeJiLearn es = this.m_es_unionkejilearn;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_UnionKeJiLearn");
 		    	   this.m_es_unionkejilearn = this.AddChild<ES_UnionKeJiLearn,Transform>(subTrans);

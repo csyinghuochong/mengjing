@@ -33,7 +33,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_towerdungeon == null )
+
+		        ES_TowerDungeon es = this.m_es_towerdungeon;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_TowerDungeon");
 		    	   this.m_es_towerdungeon = this.AddChild<ES_TowerDungeon,Transform>(subTrans);
@@ -51,7 +53,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_towershop == null )
+
+		        ES_TowerShop es = this.m_es_towershop;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_TowerShop");
 		    	   this.m_es_towershop = this.AddChild<ES_TowerShop,Transform>(subTrans);
