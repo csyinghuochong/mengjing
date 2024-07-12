@@ -118,7 +118,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rewardlist ==null )
+		        ES_RewardList es = this.m_es_rewardlist;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList");
 		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
@@ -306,7 +307,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_choukachapterselect ==null )
+		        ES_ChouKaChapterSelect es = this.m_es_choukachapterselect;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ChouKaChapterSelect");
 		    	   this.m_es_choukachapterselect = this.AddChild<ES_ChouKaChapterSelect,Transform>(subTrans);

@@ -33,7 +33,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_countrytask == null )
+		        ES_CountryTask es = this.m_es_countrytask;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_CountryTask");
 		    	   this.m_es_countrytask = this.AddChild<ES_CountryTask,Transform>(subTrans);
@@ -51,7 +52,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_countryhuodong == null )
+		        ES_CountryHuoDong es = this.m_es_countryhuodong;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_CountryHuoDong");
 		    	   this.m_es_countryhuodong = this.AddChild<ES_CountryHuoDong,Transform>(subTrans);
@@ -69,7 +71,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_activitysingin == null )
+		        ES_ActivitySingIn es = this.m_es_activitysingin;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ActivitySingIn");
 		    	   this.m_es_activitysingin = this.AddChild<ES_ActivitySingIn,Transform>(subTrans);

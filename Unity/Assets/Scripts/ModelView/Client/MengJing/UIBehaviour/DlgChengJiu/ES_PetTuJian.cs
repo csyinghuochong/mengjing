@@ -43,7 +43,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_modelshow ==null )
+		        ES_ModelShow es = this.m_es_modelshow;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ModelShow");
 		    	   this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);

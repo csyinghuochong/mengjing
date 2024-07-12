@@ -67,7 +67,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_itemappraisaltips_1 ==null )
+		        ES_ItemAppraisalTips es = this.m_es_itemappraisaltips_1;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Tips1/ES_ItemAppraisalTips_1");
 		    	   this.m_es_itemappraisaltips_1 = this.AddChild<ES_ItemAppraisalTips,Transform>(subTrans);
@@ -85,7 +86,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equiptips_1 ==null )
+		        ES_EquipTips es = this.m_es_equiptips_1;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Tips1/ES_EquipTips_1");
 		    	   this.m_es_equiptips_1 = this.AddChild<ES_EquipTips,Transform>(subTrans);
@@ -120,7 +122,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_itemappraisaltips_2 ==null )
+		        ES_ItemAppraisalTips es = this.m_es_itemappraisaltips_2;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Tips2/ES_ItemAppraisalTips_2");
 		    	   this.m_es_itemappraisaltips_2 = this.AddChild<ES_ItemAppraisalTips,Transform>(subTrans);
@@ -138,7 +141,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equiptips_2 ==null)
+		        ES_EquipTips es = this.m_es_equiptips_2;
+     			if( es ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Tips2/ES_EquipTips_2");
 		    	   this.m_es_equiptips_2 = this.AddChild<ES_EquipTips,Transform>(subTrans);

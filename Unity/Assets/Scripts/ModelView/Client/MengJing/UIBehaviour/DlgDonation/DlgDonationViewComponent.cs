@@ -33,7 +33,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_donationshow == null )
+		        ES_DonationShow es = this.m_es_donationshow;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_DonationShow");
 		    	   this.m_es_donationshow = this.AddChild<ES_DonationShow,Transform>(subTrans);
@@ -51,7 +52,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_donationunion == null )
+		        ES_DonationUnion es = this.m_es_donationunion;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_DonationUnion");
 		    	   this.m_es_donationunion = this.AddChild<ES_DonationUnion,Transform>(subTrans);
@@ -69,7 +71,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rankunion == null )
+		        ES_RankUnion es = this.m_es_rankunion;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_RankUnion");
 		    	   this.m_es_rankunion = this.AddChild<ES_RankUnion,Transform>(subTrans);
