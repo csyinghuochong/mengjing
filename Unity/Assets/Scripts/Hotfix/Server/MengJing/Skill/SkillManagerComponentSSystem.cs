@@ -471,12 +471,8 @@ namespace ET.Server
                   return m2C_Skill;
               }
 
-              unit.Rotation = quaternion.Euler(0, skillcmd.TargetAngle, 0);
-              if (weaponSkillConfig.IfStopMove == 0 && !unit.GetComponent<MoveComponent>().IsArrived())
-              {
-                  unit.Stop(skillcmd.SkillID);
-              }
-             
+              EventSystem.Instance.Publish( self.Scene(), new UnitUseSkill() { UnitDefend = unit, skillcmd = skillcmd }  );
+              
               self.InterruptSing(skillcmd.SkillID,false);
 
               List<SkillS> handlerList = new List<SkillS>();  

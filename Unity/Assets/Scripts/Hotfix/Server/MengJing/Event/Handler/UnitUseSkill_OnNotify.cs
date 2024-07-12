@@ -1,0 +1,25 @@
+using System;
+using System.Collections.Generic;
+using Unity.Mathematics;
+
+namespace ET.Server
+{
+    [Event(SceneType.Map)]
+    public class UnitUseSkill_OnNotify : AEvent<Scene, UnitUseSkill>
+    {
+        protected override async ETTask Run(Scene scene, UnitUseSkill args)
+        {
+            Unit unit = args.UnitDefend;
+            C2M_SkillCmd skillcmd = args.skillcmd;
+          
+            unit.Rotation = quaternion.Euler(0, skillcmd.TargetAngle, 0);
+            SkillConfig weaponSkillConfig = SkillConfigCategory.Instance.Get(skillcmd.WeaponSkillID);
+            if (weaponSkillConfig.IfStopMove == 0 && !unit.GetComponent<MoveComponent>().IsArrived())
+            {
+                unit.Stop(skillcmd.SkillID);
+            }
+            
+            await ETTask.CompletedTask;
+        }
+    }
+}

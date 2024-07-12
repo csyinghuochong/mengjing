@@ -24,4 +24,12 @@ namespace ET.Server
         public Unit UnitDefend;
         public long nowStateType;
     }
+
+    public struct UnitUseSkill
+    {
+        public Unit UnitDefend;
+        public C2M_SkillCmd skillcmd;
+        public bool zhudong;
+        public bool checkDead;
+    }
 }

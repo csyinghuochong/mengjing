@@ -12,7 +12,7 @@ namespace ET.Server
             Dictionary<long, EntityRef<AOIEntity>>  dict = unit.GetBeSeePlayers();
             foreach (AOIEntity u in dict.Values)
             {
-                createUnits.Units.Add( UnitHelper.CreateUnitInfo(u.Unit) ); 
+                createUnits.Units.Add( MapMessageHelper.CreateUnitInfo(u.Unit) ); 
             }
             createUnits.UpdateAll = 1;
             MapMessageHelper.SendToClient(unit, createUnits);
