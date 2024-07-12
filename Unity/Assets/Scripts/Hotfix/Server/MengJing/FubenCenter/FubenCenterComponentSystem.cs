@@ -198,11 +198,16 @@ namespace ET.Server
             fubnescene.GetComponent<ServerInfoComponent>().ServerInfo = self.ServerInfo;
             YeWaiRefreshComponent yeWaiRefreshComponen = fubnescene.AddComponent<YeWaiRefreshComponent>();
             yeWaiRefreshComponen.SceneId = sceneConfig.Id;
+            
+            ActorId actorId = new ActorId(self.Fiber().Process, self.Fiber().Id, fubenInstanceId);
+            BattleInfo battleInfo = new BattleInfo() { SceneId = sceneid, FubenId = fubenid, FubenInstanceId = fubenInstanceId, ActorId = actorId };
+            battleInfo.PlayerList.Add(unitId, new ArenaPlayerStatu() { UnitId = unitId });
+            battleInfos.Add(battleInfo);
 
             switch (sceneConfig.MapType)
             {
                 case SceneTypeEnum.Arena:
-                    fubnescene.AddComponent<ArenaDungeonComponent>();
+                    fubnescene.AddComponent<ArenaDungeonComponent>().ArenaInfo = battleInfo;
                     fubnescene.GetComponent<ArenaDungeonComponent>().OnArenaOpen();
                     break;
                 case SceneTypeEnum.Happy:
@@ -224,12 +229,7 @@ namespace ET.Server
             FubenHelp.CreateNpc(fubnescene, sceneid);
             FubenHelp.CreateMonsterList(fubnescene, sceneConfig.CreateMonster);
             FubenHelp.CreateMonsterList(fubnescene, sceneConfig.CreateMonsterPosi);
-
-            ActorId actorId = new ActorId(self.Fiber().Process, self.Fiber().Id, fubenInstanceId);
-            BattleInfo battleInfo = new BattleInfo() { SceneId = sceneid, FubenId = fubenid, FubenInstanceId = fubenInstanceId, ActorId = actorId };
-            battleInfo.PlayerList.Add(unitId, new ArenaPlayerStatu() { UnitId = unitId });
-            battleInfos.Add(battleInfo);
-
+            
             return battleInfo;
         }
 
@@ -485,7 +485,7 @@ namespace ET.Server
         #endregion
 
         #region Battle
-public static (int, BattleInfo) GenerateBattleInstanceId(this FubenCenterComponent self, long unitid, int sceneId)
+        public static (int, BattleInfo) GenerateBattleInstanceId(this FubenCenterComponent self, long unitid, int sceneId)
         {
             //动态创建副本
             long fubenid = IdGenerater.Instance.GenerateId();

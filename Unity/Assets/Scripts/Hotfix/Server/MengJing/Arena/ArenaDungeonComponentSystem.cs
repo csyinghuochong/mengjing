@@ -47,7 +47,7 @@ namespace ET.Server
         {
             await self.Root().GetComponent<TimerComponent>().WaitAsync(TimeHelper.Minute);
             List<Unit> unitlist = UnitHelper.GetAliveUnitList(self.Scene(), UnitType.Player);
-            BattleInfo arenaInfo = self.GetParent<FubenCenterComponent>().GetArenaInfo(self.Scene().Id);
+            BattleInfo arenaInfo = self.ArenaInfo;
             for (int i = 0; i < unitlist.Count; i++)
             {
                 ArenaPlayerStatu arenaPlayerStatu = arenaInfo.PlayerList[unitlist[i].Id];
