@@ -71,9 +71,5 @@ namespace ET.Server
             skillS.Clear();
         }
         
-        public void Check_Map(SkillS skillS)
-        {
-            
-        }
     }
 }

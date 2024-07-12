@@ -26,10 +26,6 @@
         {
             skillS.Clear();
         }
-
-        public void Check_Map(SkillS skillS)
-        {
-            
-        }
+        
     }
 }

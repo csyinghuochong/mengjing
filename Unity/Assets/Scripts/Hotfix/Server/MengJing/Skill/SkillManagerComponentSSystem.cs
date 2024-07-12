@@ -931,7 +931,20 @@ namespace ET.Server
                   {
                       if (skillHandler.SkillConf.GameObjectName == ConfigData.Skill_Halo_2)
                       {
-                          skillHandler.Check_Map();
+                          //skillHandler.Check_Map();
+                          // List<EntityRef<Unit>> entities = skillS.TheUnitFrom.GetParent<UnitComponent>().GetAll();
+                          // for (int i = 0; i < entities.Count; i++)
+                          // {
+                          //     Unit uniitem = entities[i];
+                          //     if (uniitem.Type != UnitType.Player)
+                          //     {
+                          //         continue;
+                          //     }
+                          //     if (skillS.TheUnitFrom.IsSameTeam(entities[i]))
+                          //     {
+                          //         skillS.OnCollisionUnit(entities[i]);
+                          //     }
+                          // }
                       }
                   }
                   catch (Exception ex)
