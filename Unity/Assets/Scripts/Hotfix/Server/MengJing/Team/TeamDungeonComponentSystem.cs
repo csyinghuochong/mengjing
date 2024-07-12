@@ -237,7 +237,7 @@ namespace ET.Server
             List<Unit> allPlayer = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
             for (int i = 0; i < allPlayer.Count; i++)
             {
-                M2C_SyncMiJingDamage m2C_SyncMiJingDamage = new M2C_SyncMiJingDamage();
+                M2C_SyncMiJingDamage m2C_SyncMiJingDamage = M2C_SyncMiJingDamage.Create();
                 m2C_SyncMiJingDamage.DamageList.AddRange(self.TeamInfo.PlayerList);
                 MapMessageHelper.SendToClient(allPlayer[i], m2C_SyncMiJingDamage);
             }
@@ -318,7 +318,7 @@ namespace ET.Server
                 return;
             }
 
-            M2C_TeamDungeonSettlement m2C_FubenSettlement = new M2C_TeamDungeonSettlement();
+            M2C_TeamDungeonSettlement m2C_FubenSettlement = M2C_TeamDungeonSettlement.Create();
             m2C_FubenSettlement.PassTime = 5 * 60 * 1000;
             m2C_FubenSettlement.PlayerList = self.TeamInfo.PlayerList;
 

@@ -23,16 +23,15 @@ namespace ET.Server
 
             //给匹配服务器发送消息
             ActorId soloServerId = UnitCacheHelper.GetSoloServerId(unit.Zone());  //获取solo服务器ID
-            SoloPlayerInfo soloPlayerInfo = new SoloPlayerInfo();
+            SoloPlayerInfo soloPlayerInfo = SoloPlayerInfo.Create();
             soloPlayerInfo.UnitId = unit.Id;
             soloPlayerInfo.Combat = unit.GetComponent<UserInfoComponentS>().UserInfo.Combat;
             soloPlayerInfo.Name = unit.GetComponent<UserInfoComponentS>().UserInfo.Name;
             soloPlayerInfo.Occ = unit.GetComponent<UserInfoComponentS>().UserInfo.Occ;
             soloPlayerInfo.MatchTime = TimeHelper.ServerNow();
-            S2M_SoloMatchResponse d2GGetUnit = (S2M_SoloMatchResponse)await unit.Root().GetComponent<MessageSender>().Call(soloServerId, new M2S_SoloMatchRequest()
-            {
-                SoloPlayerInfo = soloPlayerInfo,    
-            });
+            M2S_SoloMatchRequest M2S_SoloMatchRequest = M2S_SoloMatchRequest.Create();
+            M2S_SoloMatchRequest.SoloPlayerInfo = soloPlayerInfo;
+            S2M_SoloMatchResponse d2GGetUnit = (S2M_SoloMatchResponse)await unit.Root().GetComponent<MessageSender>().Call(soloServerId,M2S_SoloMatchRequest);
 
             LogHelper.LogWarning("发送竞技场匹配地图消息" + soloPlayerInfo.UnitId, true);
             await ETTask.CompletedTask;

@@ -53,7 +53,7 @@ namespace ET.Server
 
                 float3 direction = target.Position - skillS.BulletUnit.Position;
                 float ange = (math.atan2(direction.x, direction.z)) * 3.14f;
-                C2M_SkillCmd cmd = new C2M_SkillCmd();
+                C2M_SkillCmd cmd = C2M_SkillCmd.Create();
                 //触发技能
                 cmd.TargetID = target.Id;
                 cmd.SkillID = skillS.TriggeSkillId;

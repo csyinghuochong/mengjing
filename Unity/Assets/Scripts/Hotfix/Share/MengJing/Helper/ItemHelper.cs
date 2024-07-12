@@ -6,6 +6,16 @@ namespace ET
     [FriendOf(typeof(RewardItem))]
     public static class ItemHelper
     {
+        
+        public static BagInfo GetBagInfo( int itemId, int itemNum, int getWay)
+        {
+            BagInfo bagInfo = BagInfo.Create();
+            bagInfo.ItemID = itemId;
+            bagInfo.ItemNum = itemNum;
+            bagInfo.GetWay = $"{getWay}_{TimeHelper.ServerNow()}";
+            return bagInfo;
+        }
+        
         public static string GetInheritCost(int number)
         {
             string[] costitem = GlobalValueConfigCategory.Instance.Get(88).Value.Split('@');

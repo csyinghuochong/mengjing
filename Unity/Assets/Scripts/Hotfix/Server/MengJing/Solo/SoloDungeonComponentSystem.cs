@@ -120,8 +120,10 @@ namespace ET.Server
                 reward.ItemID = 10010035;
                 reward.ItemNum = RandomHelper.NextInt(1, 4);
                 rewardList.Add(reward);
-
-                MapMessageHelper.SendToClient(attackUnit, new M2C_SoloDungeon() { RewardItem = rewardList, SoloResult = 1 });
+                M2C_SoloDungeon M2C_SoloDungeon = M2C_SoloDungeon.Create();
+                M2C_SoloDungeon.RewardItem = rewardList;
+                M2C_SoloDungeon.SoloResult = 1;
+                MapMessageHelper.SendToClient(attackUnit, M2C_SoloDungeon);
                 attackUnit.GetComponent<BagComponentS>().OnAddItemData(rewardList, string.Empty, $"{ItemGetWay.SoloReward}_{TimeHelper.ServerNow()}");
             }
 
@@ -149,7 +151,10 @@ namespace ET.Server
                 }
 
                 rewardListFail.Add(rewardFail);
-                MapMessageHelper.SendToClient(defendUnit, new M2C_SoloDungeon() { RewardItem = rewardListFail, SoloResult = 0 });
+                M2C_SoloDungeon M2C_SoloDungeon = M2C_SoloDungeon.Create();
+                M2C_SoloDungeon.RewardItem = rewardListFail;
+                M2C_SoloDungeon.SoloResult = 0;
+                MapMessageHelper.SendToClient(defendUnit, M2C_SoloDungeon);
                 defendUnit.GetComponent<BagComponentS>()
                         .OnAddItemData(rewardListFail, string.Empty, $"{ItemGetWay.SoloReward}_{TimeHelper.ServerNow()}");
             }

@@ -22,13 +22,14 @@ namespace ET.Server
         public static async ETTask UpdateSoloRank(this SoloSceneComponent self, long unitid, int rankid)
         {
             ActorId gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "Gate1").ActorId;
+            T2G_GateUnitInfoRequest T2G_GateUnitInfoRequest = T2G_GateUnitInfoRequest.Create();
+            T2G_GateUnitInfoRequest.UserID = unitid;
             G2T_GateUnitInfoResponse g2M_UpdateUnitResponse =
-                    (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>().Call(gateServerId,
-                        new T2G_GateUnitInfoRequest() { UserID = unitid });
+                    (G2T_GateUnitInfoResponse)await self.Root().GetComponent<MessageSender>().Call(gateServerId,T2G_GateUnitInfoRequest);
 
             if (g2M_UpdateUnitResponse.PlayerState == (int)PlayerState.Game && g2M_UpdateUnitResponse.SessionInstanceId > 0)
             {
-                R2M_RankUpdateMessage r2M_RankUpdateMessage = new R2M_RankUpdateMessage();
+                R2M_RankUpdateMessage r2M_RankUpdateMessage = R2M_RankUpdateMessage.Create();
                 r2M_RankUpdateMessage.RankType = 4;
                 r2M_RankUpdateMessage.RankId = rankid;
                 self.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.Unit).Send(unitid, r2M_RankUpdateMessage);
@@ -114,7 +115,7 @@ namespace ET.Server
 
             LogHelper.WriteLogList(sololist, $"../Logs/WJ_Solo/Rank_{self.Zone()}.txt", false);
         }
-
+        
         //竞技场结束
         public static async ETTask OnSoloOver(this SoloSceneComponent self)
         {
@@ -136,42 +137,42 @@ namespace ET.Server
             {
                 if (rankingInfo == null)
                 {
-                    rankingInfo = new RankingInfo();
+                    rankingInfo = RankingInfo.Create();
                     rankingInfo.UserId = unitId;
                 }
 
                 num += 1;
-                MailInfo mailInfo = new MailInfo();
+                MailInfo mailInfo = MailInfo.Create();
 
                 if (num == 1)
                 {
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = 10000209, ItemNum = 1, GetWay = $"{ItemGetWay.SoloReward}_{serverTime}" });
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = 10010035, ItemNum = 30, GetWay = $"{ItemGetWay.SoloReward}_{serverTime}" });
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = 10010083, ItemNum = 30, GetWay = $"{ItemGetWay.SoloReward}_{serverTime}" });
+                    mailInfo.ItemList.Add( ItemHelper.GetBagInfo(10000209, 1, ItemGetWay.SoloReward) );
+                    mailInfo.ItemList.Add( ItemHelper.GetBagInfo(10010035, 30, ItemGetWay.SoloReward) );
+                    mailInfo.ItemList.Add( ItemHelper.GetBagInfo(10010083, 30, ItemGetWay.SoloReward));
                 }
 
                 if (num == 2)
                 {
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = 10010035, ItemNum = 20, GetWay = $"{ItemGetWay.SoloReward}_{serverTime}" });
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = 10010083, ItemNum = 20, GetWay = $"{ItemGetWay.SoloReward}_{serverTime}" });
+                    mailInfo.ItemList.Add( ItemHelper.GetBagInfo(10010035, 20, ItemGetWay.SoloReward)  );
+                    mailInfo.ItemList.Add( ItemHelper.GetBagInfo(10010083, 20, ItemGetWay.SoloReward));
                 }
 
                 if (num == 3)
                 {
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = 10010035, ItemNum = 15, GetWay = $"{ItemGetWay.SoloReward}_{serverTime}" });
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = 10010083, ItemNum = 15, GetWay = $"{ItemGetWay.SoloReward}_{serverTime}" });
+                    mailInfo.ItemList.Add( ItemHelper.GetBagInfo(10010035, 15, ItemGetWay.SoloReward) );
+                    mailInfo.ItemList.Add(  ItemHelper.GetBagInfo(10010083, 15, ItemGetWay.SoloReward));
                 }
 
                 if (num == 4 || num == 5)
                 {
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = 10010035, ItemNum = 10, GetWay = $"{ItemGetWay.SoloReward}_{serverTime}" });
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = 10010083, ItemNum = 10, GetWay = $"{ItemGetWay.SoloReward}_{serverTime}" });
+                    mailInfo.ItemList.Add ( ItemHelper.GetBagInfo(10010035, 10, ItemGetWay.SoloReward)  );
+                    mailInfo.ItemList.Add( ItemHelper.GetBagInfo(10010083, 10, ItemGetWay.SoloReward) );
                 }
 
                 if (num >= 6)
                 {
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = 10010035, ItemNum = 5, GetWay = $"{ItemGetWay.SoloReward}_{serverTime}" });
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = 10010083, ItemNum = 5, GetWay = $"{ItemGetWay.SoloReward}_{serverTime}" });
+                    mailInfo.ItemList.Add( ItemHelper.GetBagInfo(10010035, 5, ItemGetWay.SoloReward)   );
+                    mailInfo.ItemList.Add(  ItemHelper.GetBagInfo(10010083, 5, ItemGetWay.SoloReward) );
                 }
 
                 mailInfo.Title = "竞技场第" + num + "名";
@@ -189,8 +190,10 @@ namespace ET.Server
             if (rankingInfo != null)
             {
                 ActorId mapInstanceId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "Rank").ActorId;
-                R2S_SoloResultResponse Response = (R2S_SoloResultResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,
-                    new S2R_SoloResultRequest() { CampId = -3, RankingInfo = rankingInfo });
+                S2R_SoloResultRequest S2R_SoloResultRequest = S2R_SoloResultRequest.Create();
+                S2R_SoloResultRequest.CampId = -3;
+                S2R_SoloResultRequest.RankingInfo = rankingInfo;
+                R2S_SoloResultResponse Response = (R2S_SoloResultResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,S2R_SoloResultRequest);
             }
 
             ActorId gateServerId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "Gate1").ActorId;

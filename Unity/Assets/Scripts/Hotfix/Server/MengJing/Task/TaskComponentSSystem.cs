@@ -14,7 +14,12 @@ namespace ET.Server
             if (self.RoleTaskList.Count == 0)
             {
                 int initTask = int.Parse(GlobalValueConfigCategory.Instance.Get(1).Value);
-                self.RoleTaskList.Add(new TaskPro() { taskID = initTask, TrackStatus = 1, taskStatus = (int)TaskStatuEnum.Completed, taskTargetNum_1 = 1 });
+                TaskPro TaskPro = TaskPro.Create();
+                TaskPro.taskID = initTask;
+                TaskPro.TrackStatus = 1;
+                TaskPro.taskStatus = (int)TaskStatuEnum.Completed;
+                TaskPro.taskTargetNum_1 = 1;
+                self.RoleTaskList.Add(TaskPro);
             }
         }
         [EntitySystem]
@@ -236,7 +241,7 @@ namespace ET.Server
         {
             Unit unit = self.GetParent<Unit>();
             TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskid);
-            TaskPro taskPro = new TaskPro();
+            TaskPro taskPro = TaskPro.Create();
             taskPro.taskID = taskid;
 
             switch (taskConfig.TargetType)

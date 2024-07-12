@@ -15,7 +15,6 @@ namespace ET.Server
             self.TianFuList.Clear();
             self.TianFuList1.Clear();
 
-            //���ݲ�ͬ��ְҵ��ʼ������
             if (self.SkillList.Count == 0)
             {
                 int[] SkillList = OccupationConfigCategory.Instance.Get(self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetOcc()).InitSkillID;
@@ -23,18 +22,33 @@ namespace ET.Server
                 {
                     if (i == 0)
                     {
-                        self.SkillList.Add(new SkillPro() { SkillID = SkillList[i], SkillPosition = 1, SkillSetType = (int)SkillSetEnum.Skill });
+                        SkillPro SkillPro = SkillPro.Create();
+                        SkillPro.SkillID = SkillList[i];
+                        SkillPro.SkillPosition = 1;
+                        SkillPro.SkillSetType = (int)SkillSetEnum.Skill;
+                        self.SkillList.Add(  SkillPro  );
                     }
                     else
                     {
-                        self.SkillList.Add(new SkillPro() { SkillID = SkillList[i] });
+                        SkillPro SkillPro = SkillPro.Create();
+                        SkillPro.SkillID = SkillList[i];
+                        self.SkillList.Add(SkillPro);
                     }
                 }
 
                 string initItem = GlobalValueConfigCategory.Instance.Get(9).Value;
                 string[] needList = initItem.Split('@');
-                self.SkillList.Add(new SkillPro() { SkillID = int.Parse(needList[0].Split(';')[0]), SkillPosition = 9, SkillSetType = (int)SkillSetEnum.Item });
-                self.SkillList.Add(new SkillPro() { SkillID = int.Parse(needList[1].Split(';')[0]), SkillPosition = 10, SkillSetType = (int)SkillSetEnum.Item });
+                SkillPro SkillPro_1 = SkillPro.Create();
+                SkillPro_1.SkillID = int.Parse(needList[0].Split(';')[0]);
+                SkillPro_1.SkillPosition = 9;
+                SkillPro_1.SkillSetType = (int)SkillSetEnum.Item;
+                self.SkillList.Add(SkillPro_1);
+
+                SkillPro SkillPro_2 = SkillPro.Create();
+                SkillPro_2.SkillID = int.Parse(needList[1].Split(';')[0]);
+                SkillPro_2.SkillPosition = 10;
+                SkillPro_2.SkillSetType = (int)SkillSetEnum.Item;
+                self.SkillList.Add(SkillPro_2);
             }
 
             int robotId = self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetRobotId();

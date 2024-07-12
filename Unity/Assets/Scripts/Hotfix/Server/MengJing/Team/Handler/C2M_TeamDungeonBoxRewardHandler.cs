@@ -38,8 +38,11 @@ namespace ET.Server
             {
                 response.Mail = 1;
                 List<BagInfo> bagInfos = new List<BagInfo>();
-                bagInfos.Add(new BagInfo(){ ItemID = request.RewardItem.ItemID, ItemNum = request.RewardItem.ItemNum } );
-                MailInfo mailInfo = new MailInfo();
+                BagInfo BagInfo = BagInfo.Create();
+                BagInfo.ItemID = request.RewardItem.ItemID;
+                BagInfo. ItemNum = request.RewardItem.ItemNum;
+                bagInfos.Add(BagInfo );
+                MailInfo mailInfo = MailInfo.Create();
                 mailInfo.Status = 0;
                 mailInfo.Context = "副本奖励";
                 mailInfo.Title = "副本奖励";
@@ -55,12 +58,11 @@ namespace ET.Server
             }
 
             UserInfo userInfo = unit.GetComponent<UserInfoComponentS>().UserInfo;
-            M2C_TeamDungeonBoxRewardResult m2C_HorseNoticeInfo = new M2C_TeamDungeonBoxRewardResult()
-            { 
-                UserId = userInfo.UserId,
-                BoxIndex = request.BoxIndex,
-                PlayerName = userInfo.Name
-            };
+
+            M2C_TeamDungeonBoxRewardResult m2C_HorseNoticeInfo = M2C_TeamDungeonBoxRewardResult.Create();
+            m2C_HorseNoticeInfo.UserId = userInfo.UserId;
+            m2C_HorseNoticeInfo.BoxIndex = request.BoxIndex;
+            m2C_HorseNoticeInfo.PlayerName = userInfo.Name;
             List<Unit> allPlayer = UnitHelper.GetUnitList(unit.Scene(), UnitType.Player);
             MapMessageHelper.SendToClient(allPlayer, m2C_HorseNoticeInfo);
             
