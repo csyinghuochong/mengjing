@@ -52,14 +52,18 @@ namespace ET.Server
             if (self.Zone() == 5)
             {
                 ActorId robotSceneId = StartSceneConfigCategory.Instance.GetBySceneName(203, "Robot01").ActorId;
-                self.Root().GetComponent<MessageSender>().Send(robotSceneId,
-                    new G2Robot_MessageRequest() { Zone = self.Zone(), MessageType = NoticeType.RunRace, Message = string.Empty });
+                G2Robot_MessageRequest G2Robot_MessageRequest = G2Robot_MessageRequest.Create();
+                G2Robot_MessageRequest.Zone = self.Zone();
+                G2Robot_MessageRequest.MessageType = NoticeType.RunRace;
+                G2Robot_MessageRequest.Message = string.Empty;
+                self.Root().GetComponent<MessageSender>().Send(robotSceneId,G2Robot_MessageRequest);
             }
         }
 
         public static void OnEnter(this RunRaceDungeonComponent self, Unit unit)
         {
-            M2C_RunRaceBattleInfo m2C_RunRaceBattle = new M2C_RunRaceBattleInfo() { NextTransforTime = self.NextTransforTime };
+            M2C_RunRaceBattleInfo m2C_RunRaceBattle = M2C_RunRaceBattleInfo.Create();
+            m2C_RunRaceBattle.NextTransforTime = self.NextTransforTime;
             MapMessageHelper.SendToClient(unit, m2C_RunRaceBattle);
         }
 

@@ -36,15 +36,14 @@ namespace ET.Server
 
                     UserInfoComponentS userinfoComponent =
                             await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(scene.Root(), ranklist[i].KeyId);
-                    response.RankList.Add(new RankingTrialInfo()
-                    { 
-                        UserId = ranklist[i].KeyId,
-                        Hurt = ranklist[i].Value,
-                        FubenId = (int)(ranklist[i].Value2),
-                        PlayerLv = userinfoComponent.UserInfo.Lv,
-                        PlayerName = userinfoComponent.UserInfo.Name,   
-                        Occ = userinfoComponent.UserInfo.Occ,
-                    });
+                    RankingTrialInfo RankingTrialInfo = RankingTrialInfo.Create();
+                    RankingTrialInfo.UserId = ranklist[i].KeyId;
+                    RankingTrialInfo.Hurt = ranklist[i].Value;
+                    RankingTrialInfo.FubenId = (int)(ranklist[i].Value2);
+                    RankingTrialInfo.PlayerLv = userinfoComponent.UserInfo.Lv;
+                    RankingTrialInfo.PlayerName = userinfoComponent.UserInfo.Name;
+                    RankingTrialInfo.Occ = userinfoComponent.UserInfo.Occ;
+                    response.RankList.Add(RankingTrialInfo);
                 }
                 rankComponent.RankingTrialLastTime = TimeHelper.ServerNow();
                 rankComponent.RankingTrials = response.RankList;

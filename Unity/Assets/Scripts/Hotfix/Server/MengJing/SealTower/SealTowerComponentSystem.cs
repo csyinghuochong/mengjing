@@ -29,7 +29,7 @@ namespace ET.Server
 
             players[0].GetComponent<SkillManagerComponentS>().ClearSkillAndCd();
 
-            M2C_FubenSettlement m2C_FubenSettlement = new M2C_FubenSettlement();
+            M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
             m2C_FubenSettlement.BattleResult = CombatResultEnum.Win;
 
             MapComponent mapComponent = self.Scene().GetComponent<MapComponent>();

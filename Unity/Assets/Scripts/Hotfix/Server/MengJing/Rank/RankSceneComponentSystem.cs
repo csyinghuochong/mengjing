@@ -82,7 +82,8 @@ namespace ET.Server
             //延迟刷新，以免有些服务器还没启动
             await self.Root().GetComponent<TimerComponent>().WaitAsync(RandomHelper.RandomNumber(5000, 10000));
             ActorId fubenCenterId = UnitCacheHelper.GetFubenCenterId(self.Zone());
-            R2F_WorldLvUpdateRequest request = new R2F_WorldLvUpdateRequest() { ServerInfo = self.DBServerInfo.ServerInfo };
+            R2F_WorldLvUpdateRequest request = R2F_WorldLvUpdateRequest.Create();
+            request.ServerInfo = self.DBServerInfo.ServerInfo;
             F2R_WorldLvUpdateResponse response = (F2R_WorldLvUpdateResponse)await self.Root().GetComponent<MessageSender>().Call(fubenCenterId, request);
         }
 

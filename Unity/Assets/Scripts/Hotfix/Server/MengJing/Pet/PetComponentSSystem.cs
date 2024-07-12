@@ -230,7 +230,7 @@ namespace ET.Server
         {
             Unit unit = self.GetParent<Unit>();
             PetConfig petConfig = PetConfigCategory.Instance.Get(petId);
-            RolePetInfo newpet = new RolePetInfo();
+            RolePetInfo newpet = RolePetInfo.Create();
             newpet.Id = IdGenerater.Instance.GenerateId();
             newpet.PetStatus = 0;
             newpet.ConfigId = petConfig.Id;
