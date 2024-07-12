@@ -33,7 +33,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_teamdungeonlist == null )
+
+		        ES_TeamDungeonList es = this.m_es_teamdungeonlist;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_TeamDungeonList");
 		    	   this.m_es_teamdungeonlist = this.AddChild<ES_TeamDungeonList,Transform>(subTrans);
@@ -51,7 +53,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_teamdungeonmy == null )
+
+		        ES_TeamDungeonMy es = this.m_es_teamdungeonmy;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_TeamDungeonMy");
 		    	   this.m_es_teamdungeonmy = this.AddChild<ES_TeamDungeonMy,Transform>(subTrans);
@@ -69,7 +73,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_teamdungeonshop == null )
+
+		        ES_TeamDungeonShop es = this.m_es_teamdungeonshop;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_TeamDungeonShop");
 		    	   this.m_es_teamdungeonshop = this.AddChild<ES_TeamDungeonShop,Transform>(subTrans);

@@ -18,7 +18,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_tasktype_0==null  )
+
+		        ES_TaskType es = this.m_es_tasktype_0;
+     			if( es==null  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ScrollView/Viewport/TypeListNode/ES_TaskType_0");
 		    	   this.m_es_tasktype_0 = this.AddChild<ES_TaskType,Transform>(subTrans);
@@ -36,7 +38,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_tasktype_1==null)
+
+		        ES_TaskType es = this.m_es_tasktype_1;
+     			if( es==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ScrollView/Viewport/TypeListNode/ES_TaskType_1");
 		    	   this.m_es_tasktype_1 = this.AddChild<ES_TaskType,Transform>(subTrans);
@@ -54,7 +58,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_tasktype_2==null )
+
+		        ES_TaskType es = this.m_es_tasktype_2;
+     			if( es==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Left/ScrollView/Viewport/TypeListNode/ES_TaskType_2");
 		    	   this.m_es_tasktype_2 = this.AddChild<ES_TaskType,Transform>(subTrans);
@@ -89,7 +95,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rewardlist ==null )
+
+		        ES_RewardList es = this.m_es_rewardlist;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Right/ES_RewardList");
 		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
