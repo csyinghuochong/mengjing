@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_MapBigNpcItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_MapBigNpcItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_MapBigNpcItem>
 	{
 		public Action<int, int> ClickHandler;
 		public int ConfigId;

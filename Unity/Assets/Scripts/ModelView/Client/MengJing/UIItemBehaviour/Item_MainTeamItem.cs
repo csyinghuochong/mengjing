@@ -5,7 +5,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class Scroll_Item_MainTeamItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_MainTeamItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_MainTeamItem>
 	{
 		public TeamPlayerInfo TeamPlayerInfo;
 		public long UnitId;

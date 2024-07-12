@@ -14,6 +14,6 @@ namespace ET.Client
         public int MakeId;
         public int Plan = 1;
         public List<int> ShowMakeLearns = new();
-        public Dictionary<int, Scroll_Item_MakeLearnItem> ScrollItemMakeLearnItems;
+        public Dictionary<int, EntityRef<Scroll_Item_MakeLearnItem>> ScrollItemMakeLearnItems;
     }
 }

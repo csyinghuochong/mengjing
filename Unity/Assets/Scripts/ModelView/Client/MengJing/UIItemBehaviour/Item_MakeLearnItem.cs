@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_MakeLearnItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_MakeLearnItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_MakeLearnItem>
 	{
 		public int MakeId;
 		public Action<int> ClickHandler;

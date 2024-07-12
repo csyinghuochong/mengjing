@@ -101,7 +101,8 @@ namespace ET.Client
             // EUIModelViewHelper.AddUIScrollItems 添加时用的<=,会多一个,不知道为什么
             for (int i = 0; i < self.ScrollItemCreateRoleItems.Keys.Count - 1; i++)
             {
-                self.ScrollItemCreateRoleItems[i].UpdateSelectStatus(self.SeletRoleInfo);
+                Scroll_Item_CreateRoleItem scrollItemCreateRoleItem = self.ScrollItemCreateRoleItems[i];
+                scrollItemCreateRoleItem.UpdateSelectStatus(self.SeletRoleInfo);
             }
 
             if (self.SeletRoleInfo != null)

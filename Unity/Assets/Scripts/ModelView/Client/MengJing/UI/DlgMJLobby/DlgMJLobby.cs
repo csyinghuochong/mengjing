@@ -13,7 +13,7 @@ namespace ET.Client
         public int PageIndex = 0;
         public int PageCount = 4;
         public CreateRoleInfo SeletRoleInfo;
-        public Dictionary<int, Scroll_Item_CreateRoleItem> ScrollItemCreateRoleItems;
+        public Dictionary<int, EntityRef<Scroll_Item_CreateRoleItem>> ScrollItemCreateRoleItems;
         public List<CreateRoleInfo> ShowCreateRoleInfos = new();
     }
 }

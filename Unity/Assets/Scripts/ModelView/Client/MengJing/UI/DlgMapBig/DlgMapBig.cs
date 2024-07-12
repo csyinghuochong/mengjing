@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (UIBaseWindow))]
-    public class DlgMapBig: Entity, IAwake, IUILogic
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgMapBig : Entity, IAwake, IUILogic
     {
         public DlgMapBigViewComponent View
         {
@@ -12,7 +12,7 @@ namespace ET.Client
         }
 
         public long Timer;
-        
+
         public int SceneId = 1;
         public float ScaleRateX = 1f;
         public float ScaleRateY = 1f;
@@ -30,6 +30,6 @@ namespace ET.Client
 
         public List<int> ShowNpc = new();
         public List<int> ShowBoss = new();
-        public Dictionary<int, Scroll_Item_MapBigNpcItem> ScrollItemMapBigNpcItems;
+        public Dictionary<int, EntityRef<Scroll_Item_MapBigNpcItem>> ScrollItemMapBigNpcItems;
     }
 }

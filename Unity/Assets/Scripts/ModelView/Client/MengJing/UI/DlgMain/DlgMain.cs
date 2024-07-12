@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (UIBaseWindow))]
-    public class DlgMain: Entity, IAwake, IUILogic
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgMain : Entity, IAwake, IUILogic
     {
         public DlgMainViewComponent View
         {
@@ -25,12 +25,12 @@ namespace ET.Client
         public Unit MainUnit { get; set; }
 
         public List<TaskPro> ShowTaskPros = new();
-        public Dictionary<int, Scroll_Item_MainTask> ScrollItemMainTasks;
+        public Dictionary<int, EntityRef<Scroll_Item_MainTask>> ScrollItemMainTasks;
         public TeamInfo ShowTeamInfo;
-        public Dictionary<int, Scroll_Item_MainTeamItem> ScrollItemMainTeamItems;
+        public Dictionary<int, EntityRef<Scroll_Item_MainTeamItem>> ScrollItemMainTeamItems;
 
         public List<ChatInfo> ShowChatInfos = new();
-        public Dictionary<int, Scroll_Item_MainChatItem> ScrollItemMainChatItems;
+        public Dictionary<int, EntityRef<Scroll_Item_MainChatItem>> ScrollItemMainChatItems;
 
         public GameObject TianQiEffectObj;
         public string TianQiEffectPath;

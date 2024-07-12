@@ -164,10 +164,10 @@ namespace ET.Client
 
             if (self.ShowMakeLearns.Count > 0)
             {
-                if (self.ScrollItemMakeLearnItems != null && self.ScrollItemMakeLearnItems.Count > 0 &&
-                    self.ScrollItemMakeLearnItems[0].uiTransform != null)
+                Scroll_Item_MakeLearnItem scrollItemMakeLearnItem = self.ScrollItemMakeLearnItems[0];
+                if (self.ScrollItemMakeLearnItems != null && self.ScrollItemMakeLearnItems.Count > 0 && scrollItemMakeLearnItem.uiTransform != null)
                 {
-                    self.ScrollItemMakeLearnItems[0].OnImageButton();
+                    scrollItemMakeLearnItem.OnImageButton();
                 }
             }
 

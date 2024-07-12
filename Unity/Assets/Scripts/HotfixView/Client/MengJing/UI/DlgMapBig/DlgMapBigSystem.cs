@@ -468,15 +468,15 @@ namespace ET.Client
             self.View.EG_ImageSelectRectTransform.gameObject.SetActive(true);
             for (int i = 0; i < self.ScrollItemMapBigNpcItems.Count; i++)
             {
-                if (self.ScrollItemMapBigNpcItems[i].uiTransform == null)
+                Scroll_Item_MapBigNpcItem scrollItemMapBigNpcItem = self.ScrollItemMapBigNpcItems[i];
+                if (scrollItemMapBigNpcItem.uiTransform == null)
                 {
                     continue;
                 }
 
-                if (self.ScrollItemMapBigNpcItems[i].ConfigId == configid)
+                if (scrollItemMapBigNpcItem.ConfigId == configid)
                 {
-                    CommonViewHelper.SetParent(self.View.EG_ImageSelectRectTransform.gameObject,
-                        self.ScrollItemMapBigNpcItems[i].uiTransform.gameObject);
+                    CommonViewHelper.SetParent(self.View.EG_ImageSelectRectTransform.gameObject, scrollItemMapBigNpcItem.uiTransform.gameObject);
                     break;
                 }
             }

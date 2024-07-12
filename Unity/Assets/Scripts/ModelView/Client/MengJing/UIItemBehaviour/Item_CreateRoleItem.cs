@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_CreateRoleItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_CreateRoleItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_CreateRoleItem>
 	{
 		public CreateRoleInfo CreateRoleInfo;
 		public long DataId {get;set;}
