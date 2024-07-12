@@ -41,7 +41,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolexilianlevelitem_0 ==null)
+
+		        ES_RoleXiLianLevelItem es = this.m_es_rolexilianlevelitem_0;
+     			if( es ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_LevelListNode/ES_RoleXiLianLevelItem_0");
 		    	   this.m_es_rolexilianlevelitem_0 = this.AddChild<ES_RoleXiLianLevelItem,Transform>(subTrans);
@@ -59,7 +61,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolexilianlevelitem_1 ==null )
+
+		        ES_RoleXiLianLevelItem es = this.m_es_rolexilianlevelitem_1;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_LevelListNode/ES_RoleXiLianLevelItem_1");
 		    	   this.m_es_rolexilianlevelitem_1 = this.AddChild<ES_RoleXiLianLevelItem,Transform>(subTrans);
@@ -77,7 +81,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolexilianlevelitem_2 ==null )
+
+		        ES_RoleXiLianLevelItem es = this.m_es_rolexilianlevelitem_2;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_LevelListNode/ES_RoleXiLianLevelItem_2");
 		    	   this.m_es_rolexilianlevelitem_2 = this.AddChild<ES_RoleXiLianLevelItem,Transform>(subTrans);

@@ -135,7 +135,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_petformationset ==null )
+
+		        ES_PetFormationSet es = this.m_es_petformationset;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_FormationNode/ES_PetFormationSet");
 		    	   this.m_es_petformationset = this.AddChild<ES_PetFormationSet,Transform>(subTrans);

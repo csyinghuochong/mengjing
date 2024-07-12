@@ -101,7 +101,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_0 == null )
+
+		        ES_EquipItem es = this.m_es_equipitem_0;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_0");
 		    	   this.m_es_equipitem_0 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -119,7 +121,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_1 == null )
+
+		        ES_EquipItem es = this.m_es_equipitem_1;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_1");
 		    	   this.m_es_equipitem_1 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -137,7 +141,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_2 == null )
+
+		        ES_EquipItem es = this.m_es_equipitem_2;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_2");
 		    	   this.m_es_equipitem_2 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -155,7 +161,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_3 == null )
+
+		        ES_EquipItem es = this.m_es_equipitem_3;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_3");
 		    	   this.m_es_equipitem_3 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -173,7 +181,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_4 == null )
+
+		        ES_EquipItem es = this.m_es_equipitem_4;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_4");
 		    	   this.m_es_equipitem_4 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -191,7 +201,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_5 == null )
+
+		        ES_EquipItem es = this.m_es_equipitem_5;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_5");
 		    	   this.m_es_equipitem_5 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -209,7 +221,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_6 == null )
+
+		        ES_EquipItem es = this.m_es_equipitem_6;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_6");
 		    	   this.m_es_equipitem_6 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -227,7 +241,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_7 == null )
+
+		        ES_EquipItem es = this.m_es_equipitem_7;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_7");
 		    	   this.m_es_equipitem_7 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -245,7 +261,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_8 == null )
+
+		        ES_EquipItem es = this.m_es_equipitem_8;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_8");
 		    	   this.m_es_equipitem_8 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -263,7 +281,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_9 == null )
+
+		        ES_EquipItem es = this.m_es_equipitem_9;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_9");
 		    	   this.m_es_equipitem_9 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -281,7 +301,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_10 == null )
+
+		        ES_EquipItem es = this.m_es_equipitem_10;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_10");
 		    	   this.m_es_equipitem_10 = this.AddChild<ES_EquipItem,Transform>(subTrans);
@@ -299,7 +321,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipitem_11 == null )
+
+		        ES_EquipItem es = this.m_es_equipitem_11;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_ZodiacList/ES_EquipItem_11");
 		    	   this.m_es_equipitem_11 = this.AddChild<ES_EquipItem,Transform>(subTrans);

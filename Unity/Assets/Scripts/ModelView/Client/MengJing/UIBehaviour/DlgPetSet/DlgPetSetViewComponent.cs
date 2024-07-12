@@ -33,7 +33,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_petchallenge == null )
+
+		        ES_PetChallenge es = this.m_es_petchallenge;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetChallenge");
 		    	   this.m_es_petchallenge = this.AddChild<ES_PetChallenge,Transform>(subTrans);
@@ -51,7 +53,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_petmining == null )
+
+		        ES_PetMining es = this.m_es_petmining;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetMining");
 		    	   this.m_es_petmining = this.AddChild<ES_PetMining,Transform>(subTrans);
