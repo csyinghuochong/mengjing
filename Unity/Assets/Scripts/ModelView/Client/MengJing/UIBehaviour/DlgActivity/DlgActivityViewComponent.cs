@@ -33,7 +33,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_activityyueka == null )
+		        ES_ActivityYueKa es = this.m_es_activityyueka;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ActivityYueKa");
 		    	   this.m_es_activityyueka = this.AddChild<ES_ActivityYueKa,Transform>(subTrans);
@@ -51,7 +52,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_activitymaoxian == null )
+		        ES_ActivityMaoXian es = this.m_es_activitymaoxian;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ActivityMaoXian");
 		    	   this.m_es_activitymaoxian = this.AddChild<ES_ActivityMaoXian,Transform>(subTrans);
@@ -69,7 +71,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_activitytoken == null )
+		        ES_ActivityToken es = this.m_es_activitytoken;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ActivityToken");
 		    	   this.m_es_activitytoken = this.AddChild<ES_ActivityToken,Transform>(subTrans);
@@ -87,7 +90,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_activitytehui == null )
+		        ES_ActivityTeHui es = this.m_es_activitytehui;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ActivityTeHui");
 		    	   this.m_es_activitytehui = this.AddChild<ES_ActivityTeHui,Transform>(subTrans);
@@ -105,7 +109,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_activitysinglerecharge == null )
+		        ES_ActivitySingleRecharge es = this.m_es_activitysinglerecharge;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ActivitySingleRecharge");
 		    	   this.m_es_activitysinglerecharge = this.AddChild<ES_ActivitySingleRecharge,Transform>(subTrans);

@@ -2,8 +2,7 @@
 
 namespace ET.Client
 {
-
-    public class SkillData
+    public static partial class SkillData
     {
         [StaticField]
         public static Dictionary<string, long> AckExitTime = new()
@@ -17,4 +16,3 @@ namespace ET.Client
         };
     }
 }
-

@@ -2,7 +2,7 @@
 
 namespace ET.Client
 {
-    public class FashionData
+    public static partial class FashionData
     {
         //1001  头饰
         //1002  脸

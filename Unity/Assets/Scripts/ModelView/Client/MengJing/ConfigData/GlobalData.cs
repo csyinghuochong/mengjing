@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    public class GlobalData
+    public static partial class GlobalData
     {
         [StaticField]
         public static Dictionary<string, Shader> ShaderList = new();
     }
 }
-

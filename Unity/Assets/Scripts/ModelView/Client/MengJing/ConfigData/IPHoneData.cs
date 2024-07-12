@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    public class IPHoneData
+    public static partial class IPHoneData
     {
         [StaticField]
         public static int CheckValue = 0;

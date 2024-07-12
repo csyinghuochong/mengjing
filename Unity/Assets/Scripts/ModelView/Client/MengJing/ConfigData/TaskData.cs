@@ -1,10 +1,8 @@
 ﻿namespace ET.Client
 {
-    
-    public class TaskData
+    public static partial class TaskData
     {
         [StaticField]
         public static float NpcSpeakDistance = 2f;
     }
 }
-

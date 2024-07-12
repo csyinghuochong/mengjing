@@ -90,7 +90,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_costlist == null )
+		        ES_CostList es = this.m_es_costlist;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CostList");
 		    	   this.m_es_costlist = this.AddChild<ES_CostList,Transform>(subTrans);

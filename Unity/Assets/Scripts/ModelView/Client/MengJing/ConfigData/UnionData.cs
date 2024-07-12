@@ -2,7 +2,7 @@
 
 namespace ET.Client
 {
-    public class UnionData
+    public static partial class UnionData
     {
         [StaticField]
         public static Dictionary<int, string> UnionPosition = new()

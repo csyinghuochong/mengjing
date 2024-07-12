@@ -6,6 +6,7 @@ namespace ET.Client
     /// <summary>
     /// 红点数据
     /// </summary>
+    [EnableClass]
     public class ReddotData
     {
         public int key;
@@ -15,6 +16,7 @@ namespace ET.Client
     /// <summary>
     /// 红点树节点
     /// </summary>
+    [EnableClass]
     public class ReddotNode
     {
         private int m_reddotCount;

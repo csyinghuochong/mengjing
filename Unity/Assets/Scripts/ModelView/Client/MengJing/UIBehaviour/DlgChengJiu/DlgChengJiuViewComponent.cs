@@ -50,7 +50,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_chengjiureward == null )
+		        ES_ChengJiuReward es = this.m_es_chengjiureward;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ChengJiuReward");
 		    	   this.m_es_chengjiureward = this.AddChild<ES_ChengJiuReward,Transform>(subTrans);
@@ -68,7 +69,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_chengjiushow == null )
+		        ES_ChengJiuShow es = this.m_es_chengjiushow;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ChengJiuShow");
 		    	   this.m_es_chengjiushow = this.AddChild<ES_ChengJiuShow,Transform>(subTrans);
@@ -86,7 +88,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_chengjiujingling == null )
+		        ES_ChengJiuJingling es = this.m_es_chengjiujingling;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ChengJiuJingling");
 		    	   this.m_es_chengjiujingling = this.AddChild<ES_ChengJiuJingling,Transform>(subTrans);
@@ -104,7 +107,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_pettujian == null )
+		        ES_PetTuJian es = this.m_es_pettujian;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetTuJian");
 		    	   this.m_es_pettujian = this.AddChild<ES_PetTuJian,Transform>(subTrans);

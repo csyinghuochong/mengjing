@@ -33,7 +33,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_battleenter == null )
+		        ES_BattleEnter es = this.m_es_battleenter;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_BattleEnter");
 		    	   this.m_es_battleenter = this.AddChild<ES_BattleEnter,Transform>(subTrans);
@@ -51,7 +52,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_battletask == null )
+		        ES_BattleTask es = this.m_es_battletask;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_BattleTask");
 		    	   this.m_es_battletask = this.AddChild<ES_BattleTask,Transform>(subTrans);
@@ -69,7 +71,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_battleshop == null )
+		        ES_BattleShop es = this.m_es_battleshop;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_BattleShop");
 		    	   this.m_es_battleshop = this.AddChild<ES_BattleShop,Transform>(subTrans);
