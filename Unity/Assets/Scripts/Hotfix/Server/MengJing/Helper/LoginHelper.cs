@@ -5,12 +5,11 @@ namespace ET.Server
     
     public static class LoginHelper
     {
-        public static void OnLogin(this Unit self, string remoteIp, string deviceName)
+        public static void OnLogin(this Unit unit, string remoteIp, string deviceName)
         {
-            UserInfoComponentS userInfoComponentS = self.GetComponent<UserInfoComponentS>();
+            UserInfoComponentS userInfoComponentS = unit.GetComponent<UserInfoComponentS>();
             UserInfo userInfo = userInfoComponentS.UserInfo;
-           
-            Unit unit = self.GetParent<Unit>();
+            
             long currentTime = TimeHelper.ServerNow();
 
             DateTime dateTime = TimeInfo.Instance.ToDateTime(currentTime);
