@@ -189,35 +189,7 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             self.CurrentStateType = self.CurrentStateType | nowStateType;
 
-            //ѣ��״ֹ̬ͣ��ǰ�ƶ�(����������)
-            if (ErrorCode.ERR_Success != self.CanMove())
-            {
-                unit.Stop(0);        //ֹͣ��ǰ�ƶ�
-              
-            }
-            if (nowStateType == StateTypeEnum.Dizziness)
-            {
-                //unit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.Dizziness_13);
-            }
-            if (nowStateType == StateTypeEnum.BaTi)
-            {
-                ///unit.GetComponent<BuffManagerComponent>().OnRemoveBuffByState(StateTypeEnum.Dizziness);
-            }
-            //unit.GetComponent<SkillManagerComponent>().InterruptSing(0, true);
-            //unit.GetComponent<SkillPassiveComponent>().StateTypeAdd(nowStateType);
-            ////���͸ı����Ե������Ϣ
-            //if (self.IsBroadcastType(nowStateType))
-            //{
-            //    MessageHelper.Broadcast(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateValue = stateValue, StateOperateType = 1, StateTime = 0 });
-            //}
-            //else
-            //{
-            //    if (unit.Type == UnitType.Player)
-            //    {
-            //        MessageHelper.SendToClient(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateValue = stateValue, StateOperateType = 1, StateTime = 0 });
-            //    }
-            //}
-
+            
             EventSystem.Instance.Publish( self.Scene(), new StateTypeAdd() { UnitDefend = unit, nowStateType = nowStateType }  );
         }
 
@@ -243,20 +215,7 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             if (unit == null || unit.IsDisposed)
                 return;
-            //unit.GetComponent<SkillManagerComponent>().InterruptSing(0, true);
-            //unit.GetComponent<SkillPassiveComponent>().StateTypeAdd(nowStateType);
-            ////���͸ı����Ե������Ϣ
-            //if (self.IsBroadcastType(nowStateType))
-            //{
-            //    MessageHelper.Broadcast(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateValue = stateValue, StateOperateType = 1, StateTime = 0 });
-            //}
-            //else
-            //{
-            //    if (unit.Type == UnitType.Player)
-            //    {
-            //        MessageHelper.SendToClient(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateValue = stateValue, StateOperateType = 1, StateTime = 0 });
-            //    }
-            //}
+            EventSystem.Instance.Publish( self.Scene(), new StateTypeRemove() { UnitDefend = unit, nowStateType = nowStateType }  );
         }
 
         /// <summary>

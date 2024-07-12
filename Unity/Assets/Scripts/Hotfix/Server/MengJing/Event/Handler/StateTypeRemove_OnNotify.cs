@@ -4,27 +4,11 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [Event(SceneType.Map)]
-    public class StateTypeAdd_OnNotify : AEvent<Scene, StateTypeAdd>
+    public class StateTypeRemove_OnNotify : AEvent<Scene, StateTypeRemove>
     {
-        protected override async ETTask Run(Scene scene, StateTypeAdd args)
+        protected override async ETTask Run(Scene scene, StateTypeRemove args)
         {
-            //ѣ��״ֹ̬ͣ��ǰ�ƶ�(����������)
-            Unit unit = args.UnitDefend;
-            long nowStateType = args.nowStateType;
-            StateComponentS stateComponentS = unit.GetComponent<StateComponentS>();
-            if (ErrorCode.ERR_Success != stateComponentS.CanMove())
-            {
-                unit.Stop(0);        //ֹͣ��ǰ�ƶ�
-              
-            }
-            if (nowStateType == StateTypeEnum.Dizziness)
-            {
-                //unit.GetComponent<SkillPassiveComponent>().OnTrigegerPassiveSkill(SkillPassiveTypeEnum.Dizziness_13);
-            }
-            if (nowStateType == StateTypeEnum.BaTi)
-            {
-                ///unit.GetComponent<BuffManagerComponent>().OnRemoveBuffByState(StateTypeEnum.Dizziness);
-            }
+            
             //unit.GetComponent<SkillManagerComponent>().InterruptSing(0, true);
             //unit.GetComponent<SkillPassiveComponent>().StateTypeAdd(nowStateType);
             ////���͸ı����Ե������Ϣ
@@ -39,8 +23,6 @@ namespace ET.Server
             //        MessageHelper.SendToClient(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateValue = stateValue, StateOperateType = 1, StateTime = 0 });
             //    }
             //}
-
-            
             await ETTask.CompletedTask;
         }
     }

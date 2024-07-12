@@ -18,4 +18,10 @@ namespace ET.Server
         public Unit UnitDefend;
         public long nowStateType;
     }
+
+    public struct StateTypeRemove
+    {
+        public Unit UnitDefend;
+        public long nowStateType;
+    }
 }
