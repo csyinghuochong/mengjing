@@ -236,7 +236,10 @@ namespace ET.Server
             }
             if (add && index == -1)
             {
-                self.SkillList.Add(new SkillPro() { SkillID = skillId, SkillSource = (int)SkillSourceEnum.TianFu });
+                SkillPro SkillPro = SkillPro.Create();
+                SkillPro.SkillID = skillId;
+                SkillPro.SkillSource = (int)SkillSourceEnum.TianFu ;
+                self.SkillList.Add(SkillPro);
             }
             if (!add && index >= 0)
             {
@@ -618,7 +621,7 @@ namespace ET.Server
             int[] addSkills = occupationTwoConfig.SkillID;
             for (int i = 0; i < addSkills.Length; i++)
             {
-                SkillPro skillPro = new SkillPro();
+                SkillPro skillPro = SkillPro.Create();
                 skillPro.SkillID = addSkills[i];
                 skillPro.SkillPosition = 0;
 

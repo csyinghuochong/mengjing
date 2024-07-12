@@ -1076,7 +1076,7 @@ namespace ET.Server
                   //    TargetAngle = 0,
                   //    SkillInfos = new List<SkillInfo>() { skillInfo }
                   //};
-                  M2C_UnitUseSkill useSkill = new M2C_UnitUseSkill();
+                  M2C_UnitUseSkill useSkill = M2C_UnitUseSkill.Create();
                   useSkill.UnitId = self.SelfUnit.Id;
                   useSkill.SkillID = 0;
                   useSkill.TargetAngle = 0;

@@ -828,7 +828,7 @@ namespace ET.Server
                     continue;
                 }
 
-                MailInfo mailInfo = new MailInfo();
+                MailInfo mailInfo = MailInfo.Create();
 
                 Log.Warning($"发放家族战排行榜奖励2： {rankingInfos[i].UnitID}");
 
@@ -900,11 +900,13 @@ namespace ET.Server
 
                     int itemId = int.Parse(itemInfo[0]);
                     int itemNum = int.Parse(itemInfo[1]);
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.RankReward}_{serverTime}" });
+                    mailInfo.ItemList.Add(ItemHelper.GetBagInfo(itemId, itemNum, ItemGetWay.RankReward));
                 }
 
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,
-                    new M2E_EMailSendRequest() { Id = rankingInfos[i].UnitID, MailInfo = mailInfo });
+                M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
+                M2E_EMailSendRequest.Id = rankingInfos[i].UnitID;
+                M2E_EMailSendRequest.MailInfo = mailInfo;
+                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
             }
         }
 
@@ -936,7 +938,7 @@ namespace ET.Server
                     continue;
                 }
 
-                MailInfo mailInfo = new MailInfo();
+                MailInfo mailInfo = MailInfo.Create();
 
                 mailInfo.Status = 0;
                 mailInfo.Context = $"恭喜您获得试炼排行榜第{i + 1}名奖励";
@@ -959,11 +961,13 @@ namespace ET.Server
 
                     int itemId = int.Parse(itemInfo[0]);
                     int itemNum = int.Parse(itemInfo[1]);
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.RankReward}_{serverTime}" });
+                    mailInfo.ItemList.Add(ItemHelper.GetBagInfo(itemId, itemNum, ItemGetWay.RankReward));
                 }
 
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,
-                    new M2E_EMailSendRequest() { Id = rankingInfos[i].KeyId, MailInfo = mailInfo });
+                M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
+                M2E_EMailSendRequest.Id = rankingInfos[i].KeyId;
+                M2E_EMailSendRequest.MailInfo = mailInfo;
+                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
             }
 
             self.DBRankInfo.rankingTrial.Clear();
@@ -993,7 +997,7 @@ namespace ET.Server
                     continue;
                 }
 
-                MailInfo mailInfo = new MailInfo();
+                MailInfo mailInfo = MailInfo.Create();
 
                 mailInfo.Status = 0;
                 mailInfo.Context = $"恭喜您获得赛季之塔第{i + 1}名奖励";
@@ -1016,11 +1020,13 @@ namespace ET.Server
 
                     int itemId = int.Parse(itemInfo[0]);
                     int itemNum = int.Parse(itemInfo[1]);
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.RankReward}_{serverTime}" });
+                    mailInfo.ItemList.Add(  ItemHelper.GetBagInfo(itemId, itemNum, ItemGetWay.RankReward) );
                 }
 
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,
-                    new M2E_EMailSendRequest() { Id = rankingInfos[i].KeyId, MailInfo = mailInfo });
+                M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
+                M2E_EMailSendRequest.Id = rankingInfos[i].KeyId;
+                M2E_EMailSendRequest.MailInfo = mailInfo;
+                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
             }
 
             self.DBRankInfo.rankSeasonTower.Clear();
@@ -1054,7 +1060,7 @@ namespace ET.Server
                     continue;
                 }
 
-                MailInfo mailInfo = new MailInfo();
+                MailInfo mailInfo = MailInfo.Create();
 
                 mailInfo.Status = 0;
                 mailInfo.Context = $"恭喜您获得排行榜第{i + 1}名奖励";
@@ -1077,11 +1083,13 @@ namespace ET.Server
 
                     int itemId = int.Parse(itemInfo[0]);
                     int itemNum = int.Parse(itemInfo[1]);
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.RankReward}_{serverTime}" });
+                    mailInfo.ItemList.Add(   ItemHelper.GetBagInfo(itemId, itemNum, ItemGetWay.RankReward) );
                 }
 
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,
-                    new M2E_EMailSendRequest() { Id = rankingInfos[i].UserId, MailInfo = mailInfo });
+                M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
+                M2E_EMailSendRequest.Id = rankingInfos[i].UserId;
+                M2E_EMailSendRequest.MailInfo = mailInfo;
+                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
             }
         }
 
@@ -1122,7 +1130,7 @@ namespace ET.Server
                     continue;
                 }
 
-                MailInfo mailInfo = new MailInfo();
+                MailInfo mailInfo = MailInfo.Create();
 
                 mailInfo.Status = 0;
                 mailInfo.Context = $"恭喜您获得排行榜第{i + 1}名奖励";
@@ -1140,11 +1148,13 @@ namespace ET.Server
 
                     int itemId = int.Parse(itemInfo[0]);
                     int itemNum = int.Parse(itemInfo[1]);
-                    mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.RankReward}_{serverTime}" });
+                    mailInfo.ItemList.Add(   ItemHelper.GetBagInfo(itemId, itemNum, ItemGetWay.RankReward) );
                 }
 
-                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,
-                    new M2E_EMailSendRequest() { Id = rankingInfos[i].UserId, MailInfo = mailInfo });
+                M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
+                M2E_EMailSendRequest.Id = rankingInfos[i].UserId;
+                M2E_EMailSendRequest.MailInfo = mailInfo;
+                E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(mailServerId,M2E_EMailSendRequest);
             }
         }
     }

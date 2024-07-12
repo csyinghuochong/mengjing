@@ -881,7 +881,11 @@ namespace ET.Server
             rolePetInfo.PetExp = newExp;
 
             //通知客户端
-            MapMessageHelper.SendToClient(self.GetParent<Unit>(), new M2C_PetDataUpdate() { UpdateType = (int)UserDataType.Exp, PetId = rolePetInfo.Id, UpdateTypeValue = rolePetInfo.PetExp.ToString() });
+            M2C_PetDataUpdate M2C_PetDataUpdate = M2C_PetDataUpdate.Create();
+            M2C_PetDataUpdate.UpdateType = (int)UserDataType.Exp;
+            M2C_PetDataUpdate.PetId = rolePetInfo.Id;
+            M2C_PetDataUpdate.UpdateTypeValue = rolePetInfo.PetExp.ToString();
+            MapMessageHelper.SendToClient(self.GetParent<Unit>(), M2C_PetDataUpdate);
         }
 
         public static long GetByKey(this PetComponentS self, RolePetInfo rolePetInfo, int numericType)
@@ -1361,7 +1365,7 @@ namespace ET.Server
             self.RemovePetBag(petId);
 
             self.RolePetInfos.Add(rolePetInfo);
-            M2C_RolePetUpdate m2C_RolePetUpdate = new M2C_RolePetUpdate();
+            M2C_RolePetUpdate m2C_RolePetUpdate = M2C_RolePetUpdate.Create();
             m2C_RolePetUpdate.PetInfoAdd = new List<RolePetInfo>();
             m2C_RolePetUpdate.PetInfoAdd.Add(rolePetInfo);
             m2C_RolePetUpdate.GetWay = 2;
@@ -1379,7 +1383,7 @@ namespace ET.Server
                 }
             }
 
-            M2C_RolePetBagUpdate m2C_RolePetBag = new M2C_RolePetBagUpdate();
+            M2C_RolePetBagUpdate m2C_RolePetBag = M2C_RolePetBagUpdate.Create();
             m2C_RolePetBag.RolePetBag = self.RolePetBag;
             m2C_RolePetBag.UpdateMode = 2;
             MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_RolePetBag);
@@ -1396,7 +1400,7 @@ namespace ET.Server
                 self.UpdatePetAttribute(self.RolePetInfos[i], false);
             }
 
-            M2C_PetListMessage  m2C_PetListMessage = new M2C_PetListMessage();
+            M2C_PetListMessage m2C_PetListMessage = M2C_PetListMessage.Create();
             m2C_PetListMessage.PetList = self.RolePetInfos;
             m2C_PetListMessage.RemovePetId = petId;
             MapMessageHelper.SendToClient( self.GetParent<Unit>(), m2C_PetListMessage );
@@ -1522,7 +1526,12 @@ namespace ET.Server
                     return;
                 }
             }
-            self.PetFubenInfos.Add( new PetFubenInfo() { PetFubenId = petfubenId, Star = star, Reward = 0 } );
+
+            PetFubenInfo PetFubenInfo = PetFubenInfo.Create();
+            PetFubenInfo.PetFubenId = petfubenId;
+            PetFubenInfo.Star = star;
+            PetFubenInfo.Reward = 0;
+            self.PetFubenInfos.Add( PetFubenInfo);
         }
 
         public static void OnPetMingRecord(this PetComponentS self, PetMingRecord record)
