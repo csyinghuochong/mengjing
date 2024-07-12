@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [EnableClass]
     public class PetBattleInfo
     {
         public Image Image;

@@ -6,7 +6,7 @@ namespace ET.Client
 {
 	[EnableMethod]
 	[ChildOf]
-	public  class Scroll_Item_PetTuJianItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_PetTuJianItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetTuJianItem> 
 	{
 		public Action<int> ClickHandler;
 		public int PetId;

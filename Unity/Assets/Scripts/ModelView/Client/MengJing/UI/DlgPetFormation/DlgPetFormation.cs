@@ -15,6 +15,6 @@ namespace ET.Client
         public Action SetHandler = null;
         public int SceneTypeEnum;
         public List<RolePetInfo> ShowRolePetInfos = new();
-        public Dictionary<int, Scroll_Item_PetFormationItem> ScrollItemPetFormationItems;
+        public Dictionary<int, EntityRef<Scroll_Item_PetFormationItem>> ScrollItemPetFormationItems;
     }
 }

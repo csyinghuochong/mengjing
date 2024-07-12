@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (UIBaseWindow))]
-    public class DlgPetChouKaGet: Entity, IAwake, IUILogic
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgPetChouKaGet : Entity, IAwake, IUILogic
     {
         public DlgPetChouKaGetViewComponent View
         {
@@ -14,7 +14,7 @@ namespace ET.Client
         public GameObject[] PetZiZhiItemList = new GameObject[6];
         public GameObject[] PetZiZhiItemAddList = new GameObject[6];
 
-        public Dictionary<int, Scroll_Item_CommonSkillItem> ScrollItemCommonSkillItems;
+        public Dictionary<int, EntityRef<Scroll_Item_CommonSkillItem>> ScrollItemCommonSkillItems;
 
         public RolePetInfo RolePetInfo;
         public RolePetInfo OldRolePetInfo;

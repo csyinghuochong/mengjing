@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_NewYearCollectionWordItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_NewYearCollectionWordItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_NewYearCollectionWordItem>
 	{
 		public Action ReceiveHandler;
 		public ActivityConfig ActivityConfig;
@@ -32,9 +32,10 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+		        ES_RewardList es = this.m_es_rewardlist;
      			if (this.isCacheNode)
      			{
-     				if( this.m_es_rewardlist == null )
+     				if( es == null )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList");
 		    			this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);
@@ -43,10 +44,10 @@ namespace ET.Client
      			}
      			else
      			{
-     				if( this.m_es_rewardlist != null )
+     				if( es != null )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList");
-		    			ES_RewardList es = this.m_es_rewardlist;
+		    			es = this.m_es_rewardlist;
      					if( es.UITransform != subTrans )
      					{
      						es.Dispose();
@@ -73,9 +74,10 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+		        ES_RewardList es = this.m_es_rewardlist_word;
      			if (this.isCacheNode)
      			{
-     				if( this.m_es_rewardlist_word == null )
+     				if( es == null )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList_Word");
 		    			this.m_es_rewardlist_word = this.AddChild<ES_RewardList,Transform>(subTrans);
@@ -84,10 +86,10 @@ namespace ET.Client
      			}
      			else
      			{
-     				if( this.m_es_rewardlist_word != null )
+     				if( es != null )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList_Word");
-		    			ES_RewardList es = this.m_es_rewardlist_word;
+		    			es = this.m_es_rewardlist_word;
      					if( es.UITransform != subTrans )
      					{
      						es.Dispose();

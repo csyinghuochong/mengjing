@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_SettingTitleItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_SettingTitleItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_SettingTitleItem>
 	{
 		public int Title;
 		public UIXuLieZhenComponent UIXuLieZhenComponent { get; set; }

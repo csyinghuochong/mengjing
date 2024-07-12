@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_SkillTianFuItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_SkillTianFuItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_SkillTianFuItem>
 	{
 		public List<int> TianFuList;
 		public Action<int> ClickHandler;

@@ -5,7 +5,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class Scroll_Item_PetMiningTeamItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_PetMiningTeamItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetMiningTeamItem>
 	{
 		public int TeamId = 0;   //0 1 2
 		public PetComponentC PetComponent { get; set; }

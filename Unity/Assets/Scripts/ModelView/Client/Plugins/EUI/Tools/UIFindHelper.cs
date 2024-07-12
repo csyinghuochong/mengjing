@@ -16,7 +16,7 @@ using UnityEngine.Events;
 
 namespace ET.Client
 {
-    public class UIFindHelper
+    public static partial class UIFindHelper
     {
         /// <summary>
         /// 查找子节点

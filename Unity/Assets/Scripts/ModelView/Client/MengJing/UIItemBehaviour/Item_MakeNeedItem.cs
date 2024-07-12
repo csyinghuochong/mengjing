@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_MakeNeedItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_MakeNeedItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_MakeNeedItem>
 	{
 		public int ItemId;
 		

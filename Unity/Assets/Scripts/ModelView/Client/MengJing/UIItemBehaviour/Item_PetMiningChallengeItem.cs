@@ -6,7 +6,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public class Scroll_Item_PetMiningChallengeItem: Entity, IAwake, IDestroy, IUIScrollItem
+	public class Scroll_Item_PetMiningChallengeItem: Entity, IAwake, IDestroy, IUIScrollItem<Scroll_Item_PetMiningChallengeItem>
 	{
 		public int TeamId = 0; //0 1 2
 		public GameObject TextTip11;

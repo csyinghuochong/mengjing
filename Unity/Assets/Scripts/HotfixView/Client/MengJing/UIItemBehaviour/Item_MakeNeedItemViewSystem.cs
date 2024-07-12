@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_MakeNeedItem))]
-    [EntitySystemOf(typeof (Scroll_Item_MakeNeedItem))]
+    [FriendOf(typeof(Scroll_Item_MakeNeedItem))]
+    [EntitySystemOf(typeof(Scroll_Item_MakeNeedItem))]
     public static partial class Scroll_Item_MakeNeedItemSystem
     {
         [EntitySystem]
@@ -22,11 +22,13 @@ namespace ET.Client
 
         public static void OnClickUIItem(this Scroll_Item_MakeNeedItem self)
         {
+            BagInfo bagInfo = BagInfo.Create();
+            bagInfo.ItemID = self.ItemId;
             //弹出Tips
             EventSystem.Instance.Publish(self.Root(),
                 new ShowItemTips()
                 {
-                    BagInfo = new BagInfo() { ItemID = self.ItemId },
+                    BagInfo = bagInfo,
                     ItemOperateEnum = ItemOperateEnum.None,
                     InputPoint = Input.mousePosition,
                     Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,

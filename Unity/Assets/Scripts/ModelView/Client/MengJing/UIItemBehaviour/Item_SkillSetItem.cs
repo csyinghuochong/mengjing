@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_SkillSetItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_SkillSetItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_SkillSetItem> 
 	{
 		public GameObject Img_SkillIconDi_Copy;
 		public Vector2 localPoint;

@@ -2,15 +2,15 @@
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (UIBaseWindow))]
-    public class DlgPetEggChouKaReward: Entity, IAwake, IUILogic
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgPetEggChouKaReward : Entity, IAwake, IUILogic
     {
         public DlgPetEggChouKaRewardViewComponent View
         {
             get => this.GetComponent<DlgPetEggChouKaRewardViewComponent>();
         }
 
-        public Dictionary<int, Scroll_Item_PetEggChouKaRewardItem> ScrollItemPetEggChouKaRewardItems;
+        public Dictionary<int, EntityRef<Scroll_Item_PetEggChouKaRewardItem>> ScrollItemPetEggChouKaRewardItems;
         public List<int> ShowInfo = new();
     }
 }

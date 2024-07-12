@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_UnionKeJiResearchItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_UnionKeJiResearchItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_UnionKeJiResearchItem>
 	{
 		public int Position;
 		public Action<int> ClickAction;
