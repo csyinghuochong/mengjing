@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_UnionMystery_A : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<MysteryItemInfo> ShowMysteryItemInfos;
-		public Dictionary<int, Scroll_Item_UnionMysteryItem_A> ScrollItemUnionMysteryItemAs;
+		public Dictionary<int, EntityRef<Scroll_Item_UnionMysteryItem_A>> ScrollItemUnionMysteryItemAs;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect ELoopScrollList_LoopVerticalScrollRect
      	{

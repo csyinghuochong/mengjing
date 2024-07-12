@@ -11,7 +11,7 @@ namespace ET.Client
 		public int Position;
 		public UnionInfo UnionMyInfo;
 		public UserInfo UserInfo;
-		public Dictionary<int, Scroll_Item_UnionKeJiLearnItem> ScrollItemUnionKeJiLearnItems;
+		public Dictionary<int, EntityRef<Scroll_Item_UnionKeJiLearnItem>> ScrollItemUnionKeJiLearnItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_UnionKeJiLearnItemsLoopVerticalScrollRect
      	{

@@ -8,7 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_ActivityTeHui : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
-		public Dictionary<int, Scroll_Item_ActivityTeHuiItem> ScrollItemActivityTeHuiItems;
+		public Dictionary<int, EntityRef<Scroll_Item_ActivityTeHuiItem>> ScrollItemActivityTeHuiItems;
 		
 		public UnityEngine.UI.LoopHorizontalScrollRect E_ActivityTeHuiItemsLoopHorizontalScrollRect
      	{

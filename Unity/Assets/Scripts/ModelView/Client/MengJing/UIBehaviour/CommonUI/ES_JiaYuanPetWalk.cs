@@ -8,7 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_JiaYuanPetWalk : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
-		public Dictionary<int, Scroll_Item_JiaYuanPetWalkItem> ScrollItemJiaYuanPetWalkItems;
+		public Dictionary<int, EntityRef<Scroll_Item_JiaYuanPetWalkItem>> ScrollItemJiaYuanPetWalkItems;
 		public int Position;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_JiaYuanPetWalkItemsLoopVerticalScrollRect

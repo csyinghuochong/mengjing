@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_JiaYuanPasture_B : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<MysteryItemInfo> ShowMysteryItemInfos = new();
-		public Dictionary<int, Scroll_Item_JiaYuanPastureItem> ScrollItemJiaYuanPastureItems;
+		public Dictionary<int, EntityRef<Scroll_Item_JiaYuanPastureItem>> ScrollItemJiaYuanPastureItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_JiaYuanPastureItemsLoopVerticalScrollRect
      	{

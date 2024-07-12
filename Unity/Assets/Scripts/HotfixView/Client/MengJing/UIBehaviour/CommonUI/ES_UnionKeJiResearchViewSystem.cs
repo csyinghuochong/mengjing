@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_UnionKeJiResearchItem))]
-    [EntitySystemOf(typeof (ES_UnionKeJiResearch))]
-    [FriendOfAttribute(typeof (ES_UnionKeJiResearch))]
+    [FriendOf(typeof(Scroll_Item_UnionKeJiResearchItem))]
+    [EntitySystemOf(typeof(ES_UnionKeJiResearch))]
+    [FriendOfAttribute(typeof(ES_UnionKeJiResearch))]
     public static partial class ES_UnionKeJiResearchSystem
     {
         [EntitySystem]
@@ -58,12 +58,12 @@ namespace ET.Client
             {
                 for (int i = 0; i < self.ScrollItemUnionKeJiResearchItems.Count; i++)
                 {
-                    if (self.ScrollItemUnionKeJiResearchItems[i].uiTransform == null)
+                    Scroll_Item_UnionKeJiResearchItem item = self.ScrollItemUnionKeJiResearchItems[i];
+                    if (item.uiTransform == null)
                     {
                         continue;
                     }
 
-                    Scroll_Item_UnionKeJiResearchItem item = self.ScrollItemUnionKeJiResearchItems[i];
                     item.UpdateInfo(i, self.UnionMyInfo.UnionKeJiList[i]);
                     GameObject highlightImg = item.E_HighlightImgImage.gameObject;
                     highlightImg.SetActive(item.Position == position);
@@ -84,12 +84,12 @@ namespace ET.Client
                 {
                     for (int i = 0; i < self.ScrollItemUnionKeJiResearchItems.Count; i++)
                     {
-                        if (self.ScrollItemUnionKeJiResearchItems[i].uiTransform == null)
+                        Scroll_Item_UnionKeJiResearchItem item = self.ScrollItemUnionKeJiResearchItems[i];
+
+                        if (item.uiTransform == null)
                         {
                             continue;
                         }
-
-                        Scroll_Item_UnionKeJiResearchItem item = self.ScrollItemUnionKeJiResearchItems[i];
 
                         if (item.Position != self.UnionMyInfo.KeJiActitePos)
                         {

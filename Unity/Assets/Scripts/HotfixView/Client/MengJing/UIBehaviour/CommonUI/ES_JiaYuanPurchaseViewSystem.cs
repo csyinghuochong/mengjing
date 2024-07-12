@@ -96,14 +96,16 @@ namespace ET.Client
             {
                 for (int i = self.ScrollItemJiaYuanPurchaseItems.Count - 2; i >= 0; i--)
                 {
-                    bool leftTime = self.ScrollItemJiaYuanPurchaseItems[i].UpdateLeftTime();
+                    Scroll_Item_JiaYuanPurchaseItem scrollItemJiaYuanPurchaseItem = self.ScrollItemJiaYuanPurchaseItems[i];
+                    
+                    bool leftTime = scrollItemJiaYuanPurchaseItem.UpdateLeftTime();
                     if (leftTime)
                     {
                         continue;
                     }
 
-                    self.ScrollItemJiaYuanPurchaseItems[i].uiTransform.gameObject.SetActive(false);
-                    removeid = self.ScrollItemJiaYuanPurchaseItems[i].JiaYuanPurchaseItem.PurchaseId;
+                    scrollItemJiaYuanPurchaseItem.uiTransform.gameObject.SetActive(false);
+                    removeid = scrollItemJiaYuanPurchaseItem.JiaYuanPurchaseItem.PurchaseId;
                 }
             }
 

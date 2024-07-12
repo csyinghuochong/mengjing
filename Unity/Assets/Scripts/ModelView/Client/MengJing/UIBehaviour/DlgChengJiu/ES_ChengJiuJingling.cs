@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_ChengJiuJingling : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<JingLingConfig> ShowJingLing = new();
-		public Dictionary<int, Scroll_Item_ChengJiuJinglingItem> ScrollItemChengJiuJinglingItems;
+		public Dictionary<int, EntityRef<Scroll_Item_ChengJiuJinglingItem>> ScrollItemChengJiuJinglingItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_ChengJiuJinglingItemsLoopVerticalScrollRect
      	{

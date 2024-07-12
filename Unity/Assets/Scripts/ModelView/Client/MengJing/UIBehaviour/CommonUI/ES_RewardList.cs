@@ -8,7 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_RewardList : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
 		public float Scale;
 		public bool ShowNum;

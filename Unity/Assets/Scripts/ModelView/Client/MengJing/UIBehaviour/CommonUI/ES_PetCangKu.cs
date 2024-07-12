@@ -9,9 +9,9 @@ namespace ET.Client
 	public  class ES_PetCangKu : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<RolePetInfo> ShowRolePetInfos = new();
-		public Dictionary<int, Scroll_Item_PetCangKuItem> ScrollItemPetCangKuItems;
+		public Dictionary<int, EntityRef<Scroll_Item_PetCangKuItem>> ScrollItemPetCangKuItems;
 		public List<(int, int)> ShowCangkuDefends = new();
-		public Dictionary<int, Scroll_Item_PetCangKuDefend> ScrollItemPetCangKuDefends;
+		public Dictionary<int, EntityRef<Scroll_Item_PetCangKuDefend>> ScrollItemPetCangKuDefends;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_PetCangKuItemsLoopVerticalScrollRect
      	{

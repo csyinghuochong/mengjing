@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_DonationShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<RankingInfo> ShowRankingInfos;
-		public Dictionary<int, Scroll_Item_DonationShowItem> ScrollItemDonationShowItems;
+		public Dictionary<int, EntityRef<Scroll_Item_DonationShowItem>> ScrollItemDonationShowItems;
         
 		public UnityEngine.UI.LoopVerticalScrollRect E_DonationShowItemsLoopVerticalScrollRect
      	{

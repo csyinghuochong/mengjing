@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_ActivityToken : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<ActivityConfig> ShowActivityConfigs = new();
-		public Dictionary<int, Scroll_Item_ActivityTokenItem> ScrollItemActivityTokenItems;
+		public Dictionary<int, EntityRef<Scroll_Item_ActivityTokenItem>> ScrollItemActivityTokenItems;
 		
 		public UnityEngine.UI.Text E_ZanZhuHint_1Text
      	{

@@ -12,7 +12,7 @@ namespace ET.Client
 		public bool IsSign;
 		public int ActivityId;
 		public List<ActivityConfig> ShowActivityConfigs = new();
-		public Dictionary<int, Scroll_Item_ActivitySingInItem> ScrollItemActivitySingInItems;
+		public Dictionary<int, EntityRef<Scroll_Item_ActivitySingInItem>> ScrollItemActivitySingInItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_ActivitySingInItemsLoopVerticalScrollRect
      	{

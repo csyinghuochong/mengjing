@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_UnionKeJiLearnItem))]
-    [EntitySystemOf(typeof (ES_UnionKeJiLearn))]
-    [FriendOfAttribute(typeof (ES_UnionKeJiLearn))]
+    [FriendOf(typeof(Scroll_Item_UnionKeJiLearnItem))]
+    [EntitySystemOf(typeof(ES_UnionKeJiLearn))]
+    [FriendOfAttribute(typeof(ES_UnionKeJiLearn))]
     public static partial class ES_UnionKeJiLearnSystem
     {
         [EntitySystem]
@@ -57,12 +57,12 @@ namespace ET.Client
             {
                 for (int i = 0; i < self.ScrollItemUnionKeJiLearnItems.Count; i++)
                 {
-                    if (self.ScrollItemUnionKeJiLearnItems[i].uiTransform == null)
+                    Scroll_Item_UnionKeJiLearnItem item = self.ScrollItemUnionKeJiLearnItems[i];
+
+                    if (item.uiTransform == null)
                     {
                         continue;
                     }
-
-                    Scroll_Item_UnionKeJiLearnItem item = self.ScrollItemUnionKeJiLearnItems[i];
 
                     item.UpdateInfo(i, self.UserInfo.UnionKeJiList[i], self.UnionMyInfo.UnionKeJiList[i]);
 

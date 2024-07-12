@@ -11,7 +11,7 @@ namespace ET.Client
 		public long NeedTime;
 		public int Position;
 		public UnionInfo UnionMyInfo;
-		public Dictionary<int, Scroll_Item_UnionKeJiResearchItem> ScrollItemUnionKeJiResearchItems;
+		public Dictionary<int, EntityRef<Scroll_Item_UnionKeJiResearchItem>> ScrollItemUnionKeJiResearchItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_UnionKeJiResearchItemsLoopVerticalScrollRect
      	{

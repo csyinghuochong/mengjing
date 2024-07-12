@@ -10,7 +10,7 @@ namespace ET.Client
 	{
 		public long Timer;
 		public JiaYuanComponentC JiaYuanComponentC { get; set; }
-		public Dictionary<int, Scroll_Item_JiaYuanPurchaseItem> ScrollItemJiaYuanPurchaseItems;
+		public Dictionary<int, EntityRef<Scroll_Item_JiaYuanPurchaseItem>> ScrollItemJiaYuanPurchaseItems;
 
 		public UnityEngine.UI.Button E_ButtonRefreshButton
      	{

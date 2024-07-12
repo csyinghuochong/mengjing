@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [EntitySystemOf(typeof (ES_RewardList))]
-    [FriendOf(typeof (ES_RewardList))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [EntitySystemOf(typeof(ES_RewardList))]
+    [FriendOf(typeof(ES_RewardList))]
     public static partial class ES_RewardListSystem
     {
         [EntitySystem]
@@ -53,7 +53,10 @@ namespace ET.Client
             self.ShowBagInfos.Clear();
             foreach (RewardItem item in rewardItems)
             {
-                self.ShowBagInfos.Add(new BagInfo() { ItemID = item.ItemID, ItemNum = item.ItemNum });
+                BagInfo bagInfo = BagInfo.Create();
+                bagInfo.ItemID = item.ItemID;
+                bagInfo.ItemNum = item.ItemNum;
+                self.ShowBagInfos.Add(bagInfo);
             }
 
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
@@ -74,7 +77,10 @@ namespace ET.Client
             foreach (string item in items)
             {
                 string[] it = item.Split(';');
-                self.ShowBagInfos.Add(new BagInfo() { ItemID = int.Parse(it[0]), ItemNum = int.Parse(it[1]) });
+                BagInfo bagInfo = BagInfo.Create();
+                bagInfo.ItemID = int.Parse(it[0]);
+                bagInfo.ItemNum = int.Parse(it[1]);
+                self.ShowBagInfos.Add(bagInfo);
             }
 
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);

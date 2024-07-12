@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_ActivitySingleRecharge : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<int> ShowItem;
-		public Dictionary<int, Scroll_Item_ActivitySingleRechargeItem> ScrollItemActivitySingleRechargeItems;
+		public Dictionary<int, EntityRef<Scroll_Item_ActivitySingleRechargeItem>> ScrollItemActivitySingleRechargeItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_ActivitySingleRechargeItemsLoopVerticalScrollRect
      	{

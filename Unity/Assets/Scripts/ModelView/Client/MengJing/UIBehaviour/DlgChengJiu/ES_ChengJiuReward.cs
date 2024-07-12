@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_ChengJiuReward : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<ChengJiuRewardConfig> ShowChengJiuRewardConfigs = new();
-		public Dictionary<int, Scroll_Item_ChengJiuRewardItem> ScrollItemChengJiuRewardItems;
+		public Dictionary<int, EntityRef<Scroll_Item_ChengJiuRewardItem>> ScrollItemChengJiuRewardItems;
 		public int RewardId;
 		
 		public UnityEngine.UI.Text E_Text_TotalPointText

@@ -11,7 +11,7 @@ namespace ET.Client
 		public int BuyNum;
 		public int SellId;
 		public List<StoreSellConfig> ShowStoreSellConfigs = new();
-		public Dictionary<int, Scroll_Item_BattleShopItem> ScrollItemBattleShopItems;
+		public Dictionary<int, EntityRef<Scroll_Item_BattleShopItem>> ScrollItemBattleShopItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_BattleShopItemsLoopVerticalScrollRect
      	{

@@ -57,7 +57,8 @@ namespace ET.Client
 
             if (self.ScrollItemChengJiuRewardItems.Count > 0)
             {
-                self.ScrollItemChengJiuRewardItems[0].OnClick_DiButton();
+                Scroll_Item_ChengJiuRewardItem scrollItemChengJiuRewardItem = self.ScrollItemChengJiuRewardItems[0];
+                scrollItemChengJiuRewardItem.OnClick_DiButton();
             }
         }
 
@@ -67,9 +68,10 @@ namespace ET.Client
 
             for (int i = 0; i < self.ScrollItemChengJiuRewardItems.Count; i++)
             {
-                if (self.ScrollItemChengJiuRewardItems[i].uiTransform != null)
+                Scroll_Item_ChengJiuRewardItem scrollItemChengJiuRewardItem = self.ScrollItemChengJiuRewardItems[i];
+                if (scrollItemChengJiuRewardItem.uiTransform != null)
                 {
-                    self.ScrollItemChengJiuRewardItems[i].SetSelected(rewardId);
+                    scrollItemChengJiuRewardItem.SetSelected(rewardId);
                 }
             }
 
@@ -96,9 +98,10 @@ namespace ET.Client
             await ChengJiuNetHelper.ReceivedReward(self.Root(), self.RewardId);
             for (int i = 0; i < self.ScrollItemChengJiuRewardItems.Count; i++)
             {
-                if (self.ScrollItemChengJiuRewardItems[i].uiTransform != null)
+                Scroll_Item_ChengJiuRewardItem scrollItemChengJiuRewardItem = self.ScrollItemChengJiuRewardItems[i];
+                if (scrollItemChengJiuRewardItem.uiTransform != null)
                 {
-                    self.ScrollItemChengJiuRewardItems[i].SetSelected(self.RewardId);
+                    scrollItemChengJiuRewardItem.SetSelected(self.RewardId);
                 }
             }
         }

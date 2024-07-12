@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_ChengJiuShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<int> ShowTask = new();
-		public Dictionary<int, Scroll_Item_ChengJiuShowItem> ScrollItemChengJiuShowItems;
+		public Dictionary<int, EntityRef<Scroll_Item_ChengJiuShowItem>> ScrollItemChengJiuShowItems;
 		public List<UIChengJiuShowType> UIChengJiuShowTypes = new();
 		public GameObject LeftContent;
 		public GameObject UIChengJiuShowType;

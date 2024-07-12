@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_BattleTask : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<TaskPro> ShowTaskPro = new();
-		public Dictionary<int, Scroll_Item_BattleTaskItem> ScrollItemBattleTaskItems;
+		public Dictionary<int, EntityRef<Scroll_Item_BattleTaskItem>> ScrollItemBattleTaskItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_BattleTaskItemsLoopVerticalScrollRect
      	{

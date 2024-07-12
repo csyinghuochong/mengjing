@@ -67,8 +67,9 @@ namespace ET.Client
 
             self.E_Img_lingQuImage.gameObject.SetActive(isSign);
             self.E_Btn_ComButton.gameObject.SetActive(!isSign);
-            self.ScrollItemActivitySingInItems[curDay - 1].OnImage_ItemButton();
-            self.ActivityId = self.ScrollItemActivitySingInItems[curDay - 1].ActivityConfig.Id;
+            Scroll_Item_ActivitySingInItem scrollItemActivitySingInItem = self.ScrollItemActivitySingInItems[curDay - 1];
+            scrollItemActivitySingInItem.OnImage_ItemButton();
+            self.ActivityId = scrollItemActivitySingInItem.ActivityConfig.Id;
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             self.E_Img_lingQu2Image.gameObject.SetActive(unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeSign) == 2);

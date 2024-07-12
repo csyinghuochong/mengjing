@@ -12,10 +12,10 @@ namespace ET.Client
 		public List<Scroll_Item_PetTuJianItem> uIPetTuJianItems = new List<Scroll_Item_PetTuJianItem>();
 
 		public List<int> ShowSkill = new List<int>();
-		public Dictionary<int, Scroll_Item_CommonSkillItem> ScrollItemCommonSkillItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonSkillItem>> ScrollItemCommonSkillItems;
 
 		public List<int> ShowSkin = new List<int>();
-		public Dictionary<int, Scroll_Item_PetSkinIconItem> ScrollItemPetSkinIconItems;
+		public Dictionary<int, EntityRef<Scroll_Item_PetSkinIconItem>> ScrollItemPetSkinIconItems;
 		
 		public UnityEngine.UI.Text E_Text_PetNameText
      	{

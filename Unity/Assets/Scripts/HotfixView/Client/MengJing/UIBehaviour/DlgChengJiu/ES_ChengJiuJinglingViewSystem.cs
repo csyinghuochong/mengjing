@@ -47,9 +47,10 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemChengJiuJinglingItems.Count; i++)
             {
-                if (self.ScrollItemChengJiuJinglingItems[i].uiTransform != null)
+                Scroll_Item_ChengJiuJinglingItem scrollItemChengJiuJinglingItem = self.ScrollItemChengJiuJinglingItems[i];
+                if (scrollItemChengJiuJinglingItem.uiTransform != null)
                 {
-                    self.ScrollItemChengJiuJinglingItems[i].OnUpdateUI();
+                    scrollItemChengJiuJinglingItem.OnUpdateUI();
                 }
             }
         }

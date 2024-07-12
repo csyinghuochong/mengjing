@@ -46,8 +46,8 @@ namespace ET.Client
             R2C_RankUnionRaceResponse response = await RankNetHelper.RankUnionRaceRequest(self.Root());
 
             // 测试数据
-            response.RankList.Add(new RankShouLieInfo() { PlayerName = "测试角色1", KillNumber = 300 });
-            response.RankList.Add(new RankShouLieInfo() { PlayerName = "测试角色2", KillNumber = 200 });
+            // response.RankList.Add(new RankShouLieInfo() { PlayerName = "测试角色1", KillNumber = 300 });
+            // response.RankList.Add(new RankShouLieInfo() { PlayerName = "测试角色2", KillNumber = 200 });
 
             if (response.RankList == null || response.RankList.Count < 1)
             {
@@ -110,8 +110,8 @@ namespace ET.Client
             }
 
             // 测试数据
-            self.ShowTaskPros.Add(new TaskPro() { taskID = 400001, taskStatus = (int)TaskStatuEnum.Completed });
-            self.ShowTaskPros.Add(new TaskPro() { taskID = 400002, taskStatus = (int)TaskStatuEnum.Accepted });
+            // self.ShowTaskPros.Add(new TaskPro() { taskID = 400001, taskStatus = (int)TaskStatuEnum.Completed });
+            // self.ShowTaskPros.Add(new TaskPro() { taskID = 400002, taskStatus = (int)TaskStatuEnum.Accepted });
 
             self.AddUIScrollItems(ref self.ScrollItemRankUnionTaskItems, self.ShowTaskPros.Count);
             self.E_RankUnionTaskItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskPros.Count);
