@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [EntitySystemOf(typeof (ES_WarehouseAccount))]
-    [FriendOf(typeof (ES_WarehouseAccount))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [EntitySystemOf(typeof(ES_WarehouseAccount))]
+    [FriendOf(typeof(ES_WarehouseAccount))]
     public static partial class ES_WarehouseAccountSystem
     {
         [EntitySystem]
@@ -80,7 +80,7 @@ namespace ET.Client
         private static void RefreshHouseItems(this ES_WarehouseAccount self)
         {
             int hourseNumber = GlobalValueConfigCategory.Instance.AccountBagMax;
-            hourseNumber = self.AccountBagInfos.Count > hourseNumber? self.AccountBagInfos.Count : hourseNumber;
+            hourseNumber = self.AccountBagInfos.Count > hourseNumber ? self.AccountBagInfos.Count : hourseNumber;
 
             self.AddUIScrollItems(ref self.ScrollItemHouseItems, hourseNumber);
             self.E_BagItems1LoopVerticalScrollRect.SetVisible(true, hourseNumber);
@@ -115,7 +115,7 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this ES_WarehouseAccount self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemBagItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count? self.ShowBagBagInfos[index] : null, ItemOperateEnum.CangkuBag,
+            scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count ? self.ShowBagBagInfos[index] : null, ItemOperateEnum.CangkuBag,
                 self.UpdateBagSelect);
         }
 
@@ -123,9 +123,10 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemHouseItems.Keys.Count - 1; i++)
             {
-                if (self.ScrollItemHouseItems[i].uiTransform != null)
+                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[i];
+                if (scrollItemCommonItem.uiTransform != null)
                 {
-                    self.ScrollItemHouseItems[i].UpdateSelectStatus(bagInfo);
+                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
                 }
             }
         }
@@ -134,9 +135,10 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemBagItems.Keys.Count - 1; i++)
             {
-                if (self.ScrollItemBagItems[i].uiTransform != null)
+                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[i];
+                if (scrollItemCommonItem.uiTransform != null)
                 {
-                    self.ScrollItemBagItems[i].UpdateSelectStatus(bagInfo);
+                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
                 }
             }
         }

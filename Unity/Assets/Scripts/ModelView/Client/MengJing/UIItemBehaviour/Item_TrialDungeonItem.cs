@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_TrialDungeonItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_TrialDungeonItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_TrialDungeonItem>
 	{
 		public TowerConfig TowerConfig;
 		public Action<int> ClickHandle;

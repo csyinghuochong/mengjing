@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [EntitySystemOf(typeof (ES_WarehouseRole))]
-    [FriendOfAttribute(typeof (ES_WarehouseRole))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [EntitySystemOf(typeof(ES_WarehouseRole))]
+    [FriendOfAttribute(typeof(ES_WarehouseRole))]
     public static partial class ES_WarehouseRoleSystem
     {
         [EntitySystem]
@@ -165,7 +165,10 @@ namespace ET.Client
                 BuyCellCost buyCellCost = ConfigData.BuyStoreCellCosts[self.CurrentItemType * 10 + addcell];
                 int itemid = int.Parse(buyCellCost.Get.Split(';')[0]);
                 int itemnum = int.Parse(buyCellCost.Get.Split(';')[1]);
-                scrollItemCommonItem.Refresh(new BagInfo() { ItemID = itemid, ItemNum = itemnum }, ItemOperateEnum.None);
+                BagInfo bagInfoNew = BagInfo.Create();
+                bagInfoNew.ItemID = itemid;
+                bagInfoNew.ItemNum = itemnum;
+                scrollItemCommonItem.Refresh(bagInfoNew, ItemOperateEnum.None);
                 scrollItemCommonItem.ES_CommonItem.UpdateUnLock(false);
                 scrollItemCommonItem.ES_CommonItem.E_LockButton.AddListener(self.OnClickImage_Lock);
             }
@@ -174,7 +177,7 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this ES_WarehouseRole self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemBagItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count? self.ShowBagBagInfos[index] : null, ItemOperateEnum.CangkuBag,
+            scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count ? self.ShowBagBagInfos[index] : null, ItemOperateEnum.CangkuBag,
                 self.UpdateBagSelect);
         }
 
@@ -182,9 +185,10 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemHouseItems.Keys.Count - 1; i++)
             {
-                if (self.ScrollItemHouseItems[i].uiTransform != null)
+                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[i];
+                if (scrollItemCommonItem.uiTransform != null)
                 {
-                    self.ScrollItemHouseItems[i].UpdateSelectStatus(bagInfo);
+                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
                 }
             }
         }
@@ -193,9 +197,10 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemBagItems.Keys.Count - 1; i++)
             {
-                if (self.ScrollItemBagItems[i].uiTransform != null)
+                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[i];
+                if (scrollItemCommonItem.uiTransform != null)
                 {
-                    self.ScrollItemBagItems[i].UpdateSelectStatus(bagInfo);
+                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
                 }
             }
         }

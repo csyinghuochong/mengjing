@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_TowerShop : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public int SellId;
-		public Dictionary<int, Scroll_Item_WeiJingShopItem> ScrollItemWeiJingShopItems;
+		public Dictionary<int, EntityRef<Scroll_Item_WeiJingShopItem>> ScrollItemWeiJingShopItems;
 		public List<StoreSellConfig> ShowStoreSellConfigs = new();
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_WeiJingShopItemsLoopVerticalScrollRect

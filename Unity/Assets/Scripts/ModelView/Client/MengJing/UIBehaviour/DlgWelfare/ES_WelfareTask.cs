@@ -10,7 +10,7 @@ namespace ET.Client
 	{
 		public int Day;
 		public List<TaskPro> ShowTaskPros = new();
-		public Dictionary<int, Scroll_Item_WelfareTaskItem> ScrollItemWelfareTaskItems;
+		public Dictionary<int, EntityRef<Scroll_Item_WelfareTaskItem>> ScrollItemWelfareTaskItems;
 		
 		public UnityEngine.UI.Image E_DayProgressImgImage
      	{
@@ -89,7 +89,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rewardlist ==null )
+		        ES_RewardList es = this.m_es_rewardlist;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_RewardList");
 		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);

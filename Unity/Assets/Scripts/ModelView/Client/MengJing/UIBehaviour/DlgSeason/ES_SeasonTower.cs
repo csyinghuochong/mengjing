@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_SeasonTower : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<RankSeasonTowerInfo> ShowRankSeasonTowerInfos;
-		public Dictionary<int, Scroll_Item_SeasonTowerRankItem> ScrollItemSeasonTowerRankItems;
+		public Dictionary<int, EntityRef<Scroll_Item_SeasonTowerRankItem>> ScrollItemSeasonTowerRankItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_SeasonTowerRankItemsLoopVerticalScrollRect
      	{

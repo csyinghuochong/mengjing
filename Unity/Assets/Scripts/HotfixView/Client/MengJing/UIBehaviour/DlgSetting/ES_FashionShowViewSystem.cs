@@ -68,13 +68,14 @@ namespace ET.Client
             {
                 for (int i = 0; i < self.ScrollItemFashionShowItems.Count; i++)
                 {
-                    if (self.ScrollItemFashionShowItems[i].uiTransform == null)
+                    Scroll_Item_FashionShowItem scrollItemFashionShowItem = self.ScrollItemFashionShowItems[i];
+                    if (scrollItemFashionShowItem.uiTransform == null)
                     {
                         continue;
                     }
 
-                    self.ScrollItemFashionShowItems[i].Position = i + 2;
-                    self.ScrollItemFashionShowItems[i].OnUpdateUI(self.ScrollItemFashionShowItems[i].FashionId);
+                    scrollItemFashionShowItem.Position = i + 2;
+                    scrollItemFashionShowItem.OnUpdateUI(scrollItemFashionShowItem.FashionId);
                 }
             }
         }

@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_TrialDungeon : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public int TowerId;
-		public Dictionary<int, Scroll_Item_TrialDungeonItem> ScrollItemTrialDungeonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_TrialDungeonItem>> ScrollItemTrialDungeonItems;
 		public List<TowerConfig> ShowTowerConfigs = new();
 		
 		public UnityEngine.UI.Button E_Btn_EnterButton
@@ -89,7 +89,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rewardlist==null )
+		        ES_RewardList es = this.m_es_rewardlist;
+     			if( es==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_RewardList");
 		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);

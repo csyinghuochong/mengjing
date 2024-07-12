@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_ModelShow))]
-    [EntitySystemOf(typeof (ES_TeamItem))]
-    [FriendOfAttribute(typeof (ES_TeamItem))]
+    [FriendOf(typeof(ES_ModelShow))]
+    [EntitySystemOf(typeof(ES_TeamItem))]
+    [FriendOfAttribute(typeof(ES_TeamItem))]
     public static partial class ES_TeamItemSystem
     {
         [EntitySystem]
@@ -29,8 +29,9 @@ namespace ET.Client
             self.ES_ModelShow.ClickHandler = () => { self.OnClickTeamItem().Coroutine(); };
             if (self.TeamPlayerInfo != null)
             {
-                self.ES_ModelShow.ShowPlayerModel(new BagInfo() { ItemID = self.TeamPlayerInfo.WeaponId }, self.TeamPlayerInfo.Occ, 0,
-                    self.TeamPlayerInfo.FashionIds);
+                BagInfo bagInfoNew = BagInfo.Create();
+                bagInfoNew.ItemID = self.TeamPlayerInfo.WeaponId;
+                self.ES_ModelShow.ShowPlayerModel(bagInfoNew, self.TeamPlayerInfo.Occ, 0, self.TeamPlayerInfo.FashionIds);
             }
         }
 
@@ -87,8 +88,9 @@ namespace ET.Client
 
             if (teamPlayerInfo != null && self.ES_ModelShow != null)
             {
-                self.ES_ModelShow.ShowPlayerModel(new BagInfo() { ItemID = teamPlayerInfo.WeaponId }, self.TeamPlayerInfo.Occ, 0,
-                    teamPlayerInfo.FashionIds);
+                BagInfo bagInfoNew = BagInfo.Create();
+                bagInfoNew.ItemID = teamPlayerInfo.WeaponId;
+                self.ES_ModelShow.ShowPlayerModel(bagInfoNew, self.TeamPlayerInfo.Occ, 0, teamPlayerInfo.FashionIds);
             }
         }
     }

@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_ZhanQuCombat : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<ActivityConfig> ShowActivityConfigs = new();
-		public Dictionary<int, Scroll_Item_ZhanQuCombatItem> ScrollItemZhanQuCombatItems;
+		public Dictionary<int, EntityRef<Scroll_Item_ZhanQuCombatItem>> ScrollItemZhanQuCombatItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_ZhanQuCombatItemsLoopVerticalScrollRect
      	{

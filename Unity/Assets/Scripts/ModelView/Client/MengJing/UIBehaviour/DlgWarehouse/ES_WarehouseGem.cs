@@ -8,9 +8,9 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_WarehouseGem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemHouseItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemHouseItems;
 		public List<BagInfo> ShowHouseBagInfos = new();
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemBagItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemBagItems;
 		public List<BagInfo> ShowBagBagInfos = new();
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_BagItems2LoopVerticalScrollRect
