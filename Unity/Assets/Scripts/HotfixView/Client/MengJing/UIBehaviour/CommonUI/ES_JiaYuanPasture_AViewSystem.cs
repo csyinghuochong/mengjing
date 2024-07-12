@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_JiaYuanPasture_A))]
-    [FriendOfAttribute(typeof (ES_JiaYuanPasture_A))]
+    [EntitySystemOf(typeof(ES_JiaYuanPasture_A))]
+    [FriendOfAttribute(typeof(ES_JiaYuanPasture_A))]
     public static partial class ES_JiaYuanPasture_ASystem
     {
         [EntitySystem]
@@ -59,10 +59,11 @@ namespace ET.Client
 
             for (int i = 0; i < jiaYuanPastureConfigs.Count; i++)
             {
-                MysteryItemInfo mysteryItemInfos = new MysteryItemInfo()
-                {
-                    ItemID = jiaYuanPastureConfigs[i].GetItemID, ItemNumber = 1, MysteryId = jiaYuanPastureConfigs[i].Id, ProductId = -1
-                };
+                MysteryItemInfo mysteryItemInfos = MysteryItemInfo.Create();
+                mysteryItemInfos.ItemID = jiaYuanPastureConfigs[i].GetItemID;
+                mysteryItemInfos.ItemNumber = 1;
+                mysteryItemInfos.MysteryId = jiaYuanPastureConfigs[i].Id;
+                mysteryItemInfos.ProductId = -1;
 
                 self.ShowMysteryItemInfos.Add(mysteryItemInfos);
             }

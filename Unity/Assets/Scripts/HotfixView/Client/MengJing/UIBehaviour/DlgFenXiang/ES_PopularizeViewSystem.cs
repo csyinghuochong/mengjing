@@ -126,8 +126,8 @@ namespace ET.Client
             self.E_ButtonGetButton.gameObject.SetActive(rewardlist.Count > 0);
 
             // 测试数据
-            response.MyPopularizeList.Add(new PopularizeInfo() { Nmae = "测试角色1", Level = 20 });
-            response.MyPopularizeList.Add(new PopularizeInfo() { Nmae = "测试角色2", Level = 30 });
+            // response.MyPopularizeList.Add(new PopularizeInfo() { Nmae = "测试角色1", Level = 20 });
+            // response.MyPopularizeList.Add(new PopularizeInfo() { Nmae = "测试角色2", Level = 30 });
 
             for (int i = 0; i < response.MyPopularizeList.Count; i++)
             {

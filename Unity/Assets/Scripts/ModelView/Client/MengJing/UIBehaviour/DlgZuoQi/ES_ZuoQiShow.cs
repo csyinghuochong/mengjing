@@ -8,7 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_ZuoQiShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
-		public Dictionary<int, Scroll_Item_ZuoQiShowItem> ScrollItemZuoQiShowItems;
+		public Dictionary<int, EntityRef<Scroll_Item_ZuoQiShowItem>> ScrollItemZuoQiShowItems;
 		public List<ZuoQiShowConfig> ShowZuoQiShowConfigs = new();
 		
 		public UnityEngine.UI.LoopHorizontalScrollRect E_ZuoQiShowItemsLoopHorizontalScrollRect

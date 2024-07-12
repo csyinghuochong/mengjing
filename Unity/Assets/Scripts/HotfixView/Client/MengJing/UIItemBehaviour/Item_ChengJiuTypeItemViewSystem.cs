@@ -39,7 +39,8 @@ namespace ET.Client
 
             if (self.ScrollItemChengJiuTypeItemItems.Count > 0)
             {
-                self.ScrollItemChengJiuTypeItemItems[0].OnClickButtoin();
+                Scroll_Item_ChengJiuTypeItemItem scrollItemChengJiuTypeItemItem = self.ScrollItemChengJiuTypeItemItems[0];
+                scrollItemChengJiuTypeItemItem.OnClickButtoin();
             }
         }
 
@@ -72,9 +73,10 @@ namespace ET.Client
 
             for (int i = 0; i < self.ScrollItemChengJiuTypeItemItems.Count; i++)
             {
-                if (self.ScrollItemChengJiuTypeItemItems[i].uiTransform != null)
+                Scroll_Item_ChengJiuTypeItemItem scrollItemChengJiuTypeItemItem = self.ScrollItemChengJiuTypeItemItems[i];
+                if (scrollItemChengJiuTypeItemItem.uiTransform != null)
                 {
-                    self.ScrollItemChengJiuTypeItemItems[i].SetSelected(-1);
+                    scrollItemChengJiuTypeItemItem.SetSelected(-1);
                 }
             }
 
@@ -90,9 +92,10 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemChengJiuTypeItemItems.Count; i++)
             {
-                if (self.ScrollItemChengJiuTypeItemItems[i].uiTransform != null)
+                Scroll_Item_ChengJiuTypeItemItem scrollItemChengJiuTypeItemItem = self.ScrollItemChengJiuTypeItemItems[i];
+                if (scrollItemChengJiuTypeItemItem.uiTransform != null)
                 {
-                    self.ScrollItemChengJiuTypeItemItems[i].SetSelected(chapterid);
+                    scrollItemChengJiuTypeItemItem.SetSelected(chapterid);
                 }
             }
 

@@ -12,7 +12,7 @@ namespace ET.Client
 		public int ChengJiuTypeId;
 		public bool Selected;
 		public List<int> ShowChapter = new();
-		public Dictionary<int, Scroll_Item_ChengJiuTypeItemItem> ScrollItemChengJiuTypeItemItems;
+		public Dictionary<int, EntityRef<Scroll_Item_ChengJiuTypeItemItem>> ScrollItemChengJiuTypeItemItems;
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;

@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_ActivityTokenItem))]
-    [EntitySystemOf(typeof (Scroll_Item_ActivityTokenItem))]
+    [FriendOf(typeof(Scroll_Item_ActivityTokenItem))]
+    [EntitySystemOf(typeof(Scroll_Item_ActivityTokenItem))]
     public static partial class Scroll_Item_ActivityTokenItemSystem
     {
         [EntitySystem]
@@ -65,7 +65,10 @@ namespace ET.Client
                 return;
             }
 
-            zhanQuTokenRecvives.Add(new TokenRecvive() { ActivityId = self.ActivityConfig.Id, ReceiveIndex = index });
+            TokenRecvive tokenRecvive = TokenRecvive.Create();
+            tokenRecvive.ActivityId = self.ActivityConfig.Id;
+            tokenRecvive.ReceiveIndex = index;
+            zhanQuTokenRecvives.Add(tokenRecvive);
             self.SetReceiced(self.E_LingQuHint_3Image.gameObject, 3);
             self.SetReceiced(self.E_LingQuHint_2Image.gameObject, 2);
             self.SetReceiced(self.E_LingQuHint_1Image.gameObject, 1);
@@ -80,15 +83,20 @@ namespace ET.Client
             self.ActivityConfig = activityConfig;
             self.E_TextNameText.text = $"{activityConfig.Par_1}级";
 
-            self.ES_CommonItem_1.UpdateItem(
-                new BagInfo() { ItemID = int.Parse(activityConfig.Par_2.Split(';')[0]), ItemNum = int.Parse(activityConfig.Par_2.Split(';')[1]) },
-                ItemOperateEnum.None);
-            self.ES_CommonItem_2.UpdateItem(
-                new BagInfo() { ItemID = int.Parse(activityConfig.Par_3.Split(';')[0]), ItemNum = int.Parse(activityConfig.Par_3.Split(';')[1]) },
-                ItemOperateEnum.None);
-            self.ES_CommonItem_3.UpdateItem(
-                new BagInfo() { ItemID = int.Parse(activityConfig.Par_4.Split(';')[0]), ItemNum = int.Parse(activityConfig.Par_4.Split(';')[1]) },
-                ItemOperateEnum.None);
+            BagInfo bagInfo1 = BagInfo.Create();
+            bagInfo1.ItemID = int.Parse(activityConfig.Par_2.Split(';')[0]);
+            bagInfo1.ItemNum = int.Parse(activityConfig.Par_2.Split(';')[1]);
+            self.ES_CommonItem_1.UpdateItem(bagInfo1, ItemOperateEnum.None);
+            
+            BagInfo bagInfo2 = BagInfo.Create();
+            bagInfo2.ItemID = int.Parse(activityConfig.Par_3.Split(';')[0]);
+            bagInfo2.ItemNum = int.Parse(activityConfig.Par_3.Split(';')[1]);
+            self.ES_CommonItem_2.UpdateItem(bagInfo2, ItemOperateEnum.None);
+            
+            BagInfo bagInfo3 = BagInfo.Create();
+            bagInfo3.ItemID = int.Parse(activityConfig.Par_4.Split(';')[0]);
+            bagInfo3.ItemNum = int.Parse(activityConfig.Par_4.Split(';')[1]);
+            self.ES_CommonItem_3.UpdateItem(bagInfo3, ItemOperateEnum.None);
 
             self.SetReceiced(self.E_LingQuHint_3Image.gameObject, 3);
             self.SetReceiced(self.E_LingQuHint_2Image.gameObject, 2);

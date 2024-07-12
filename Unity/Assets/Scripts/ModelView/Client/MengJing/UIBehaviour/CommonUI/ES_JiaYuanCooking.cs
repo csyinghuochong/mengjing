@@ -11,7 +11,7 @@ namespace ET.Client
 		public ES_CommonItem[] CostItemList = new ES_CommonItem[4];
 		public bool IsHoldDown = false;
 		public List<BagInfo> ShowBagInfos = new();
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		
 		public ES_CommonItem ES_CommonItem_0
      	{

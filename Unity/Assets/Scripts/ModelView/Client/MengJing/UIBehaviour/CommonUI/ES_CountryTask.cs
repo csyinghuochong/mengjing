@@ -12,7 +12,7 @@ namespace ET.Client
 		public GameObject[] Button_Reward;
 		public GameObject[] Text_Huoyue;
 		public List<TaskPro> ShowTaskPros = new();
-		public Dictionary<int, Scroll_Item_CountryTaskItem> ScrollItemCountryTaskItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CountryTaskItem>> ScrollItemCountryTaskItems;
 
 		public UnityEngine.UI.LoopVerticalScrollRect E_CountryTaskItemsLoopVerticalScrollRect
      	{
