@@ -55,7 +55,7 @@ namespace ET.Server
         ShouJiChapterInfo shouJiChapterInfo = self.GetShouJiChapterInfo(itemStarInfo.Chapter);
         if (shouJiChapterInfo == null)
         {
-            shouJiChapterInfo = new ShouJiChapterInfo();
+            shouJiChapterInfo = ShouJiChapterInfo.Create();
             shouJiChapterInfo.RewardInfo = 0;
             shouJiChapterInfo.ChapterId = itemStarInfo.Chapter;
             self.ShouJiChapterInfos.Add(shouJiChapterInfo);

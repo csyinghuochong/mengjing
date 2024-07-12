@@ -223,7 +223,7 @@ namespace ET.Server
                 Unit unit = await UnitCacheHelper.GetUnitCache(self.Scene(), rankingInfo.UserId);
                 Function_Fight.UnitUpdateProperty_Base(unit, false, false);
 
-                RankingInfo rankPetInfo = new RankingInfo();
+                RankingInfo rankPetInfo = RankingInfo.Create();
                 UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                 rankPetInfo.UserId = userInfoComponent.UserInfo.UserId;
                 rankPetInfo.PlayerName = userInfoComponent.UserInfo.Name;

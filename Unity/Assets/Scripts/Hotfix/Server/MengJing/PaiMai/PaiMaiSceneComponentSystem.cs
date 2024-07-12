@@ -731,9 +731,10 @@ namespace ET.Server
                 if (currentTime - paiMaiItemInfo.SellTime >= TimeHelper.OneDay || removeIds.Contains(dBPaiMainInfo.PaiMaiItemInfos[i].Id))
                 {
                     ActorId emaiId = StartSceneConfigCategory.Instance.GetBySceneName(self.Zone(), "EMail").ActorId;
+                    P2E_PaiMaiOverTimeRequest P2E_PaiMaiOverTimeRequest = P2E_PaiMaiOverTimeRequest.Create();
+                    P2E_PaiMaiOverTimeRequest.PaiMaiItemInfo = paiMaiItemInfo;
                     E2P_PaiMaiOverTimeResponse g_SendChatRequest =
-                            (E2P_PaiMaiOverTimeResponse)await self.Root().GetComponent<MessageSender>().Call(emaiId,
-                                new P2E_PaiMaiOverTimeRequest() { PaiMaiItemInfo = paiMaiItemInfo });
+                            (E2P_PaiMaiOverTimeResponse)await self.Root().GetComponent<MessageSender>().Call(emaiId,P2E_PaiMaiOverTimeRequest);
                     dBPaiMainInfo.PaiMaiItemInfos.RemoveAt(i);
                 }
             }

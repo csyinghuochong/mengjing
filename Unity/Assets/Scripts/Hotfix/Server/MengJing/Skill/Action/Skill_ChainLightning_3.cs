@@ -31,18 +31,16 @@ namespace ET.Server
 
         public void BroadcastSkill(SkillS skillS, long unitid, long targetId, float x, float y, float z)
         {
-            MapMessageHelper.Broadcast(skillS.TheUnitFrom,
-                new M2C_ChainLightning()
-                {
-                    UnitId = unitid,
-                    TargetID = targetId,
-                    SkillID = skillS.SkillInfo.WeaponSkillID,
-                    PosX = x,
-                    PosY = y,
-                    PosZ = z,
-                    Type = 3,
-                    InstanceId = skillS.InstanceId
-                });
+            M2C_ChainLightning M2C_ChainLightning = M2C_ChainLightning.Create();
+            M2C_ChainLightning.UnitId = unitid;
+            M2C_ChainLightning.TargetID = targetId;
+            M2C_ChainLightning.SkillID = skillS.SkillInfo.WeaponSkillID;
+            M2C_ChainLightning.PosX = x;
+            M2C_ChainLightning.PosY = y;
+            M2C_ChainLightning.PosZ = z;
+            M2C_ChainLightning.Type = 3;
+            M2C_ChainLightning.InstanceId = skillS.InstanceId;
+            MapMessageHelper.Broadcast(skillS.TheUnitFrom,M2C_ChainLightning);
         }
 
         public override void OnUpdate(SkillS skillS,int updateMode)

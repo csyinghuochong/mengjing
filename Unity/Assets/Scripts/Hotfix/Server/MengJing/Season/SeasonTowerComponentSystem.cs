@@ -19,7 +19,7 @@ namespace ET.Server
 
             if (defend.Id == players[0].Id)
             {
-                M2C_FubenSettlement m2C_FubenSettlement = new M2C_FubenSettlement();
+                M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
                 m2C_FubenSettlement.BattleResult = CombatResultEnum.Fail;
                 m2C_FubenSettlement.StarInfos = new List<int> { 0, 0, 0 };
                 MapMessageHelper.SendToClient(players[0], m2C_FubenSettlement);
@@ -28,7 +28,7 @@ namespace ET.Server
 
             if (FubenHelp.IsAllMonsterDead(self.Scene(), players[0]))
             {
-                M2C_FubenSettlement m2C_FubenSettlement = new M2C_FubenSettlement();
+                M2C_FubenSettlement m2C_FubenSettlement = M2C_FubenSettlement.Create();
                 m2C_FubenSettlement.BattleResult = CombatResultEnum.Win;
                 m2C_FubenSettlement.StarInfos = new List<int> { 1, 1, 1 };
                 MapMessageHelper.SendToClient(players[0], m2C_FubenSettlement);
@@ -45,7 +45,8 @@ namespace ET.Server
 
             unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SeasonTowerId, mapComponent.SonSceneId);
             ActorId mapInstanceId = UnitCacheHelper.GetRankServerId(self.Zone());
-            M2R_RankSeasonTowerRequest reuqest = new M2R_RankSeasonTowerRequest() { RankingInfo = rankingInfo };
+            M2R_RankSeasonTowerRequest reuqest = M2R_RankSeasonTowerRequest.Create();
+            reuqest.RankingInfo = rankingInfo;
             R2M_RankSeasonTowerResponse Response =
                     (R2M_RankSeasonTowerResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId, reuqest);
         }

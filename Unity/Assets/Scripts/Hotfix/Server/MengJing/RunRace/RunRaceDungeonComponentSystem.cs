@@ -123,7 +123,8 @@ namespace ET.Server
                 unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.RunRaceTransform, runracemonster);
                 Function_Fight.UnitUpdateProperty_RunRace(unit, true);
 
-                M2C_RunRaceBattleInfo m2C_RunRaceBattle = new M2C_RunRaceBattleInfo() { NextTransforTime = self.NextTransforTime };
+                M2C_RunRaceBattleInfo m2C_RunRaceBattle = M2C_RunRaceBattleInfo.Create();
+                m2C_RunRaceBattle.NextTransforTime = self.NextTransforTime;
                 MapMessageHelper.SendToClient(unit, m2C_RunRaceBattle);
             }
         }
@@ -168,7 +169,7 @@ namespace ET.Server
                 self.HaveArrived = true;
 
                 ActorId mapInstanceId = UnitCacheHelper.GetRankServerId(self.Zone());
-                RankingInfo rankPetInfo = new RankingInfo();
+                RankingInfo rankPetInfo = RankingInfo.Create();
                 UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                 rankPetInfo.UserId = userInfoComponent.UserInfo.UserId;
                 rankPetInfo.PlayerName = userInfoComponent.UserInfo.Name;
@@ -176,9 +177,10 @@ namespace ET.Server
                 //rankPetInfo.Combat = userInfoComponent.UserInfo.Combat;
                 rankPetInfo.Combat = TimeHelper.ServerNow();
                 rankPetInfo.Occ = userInfoComponent.UserInfo.Occ;
+                M2R_RankRunRaceRequest M2R_RankRunRaceRequest = M2R_RankRunRaceRequest.Create();
+                M2R_RankRunRaceRequest.RankingInfo = rankPetInfo;
                 R2M_RankRunRaceResponse Response =
-                        (R2M_RankRunRaceResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,
-                            new M2R_RankRunRaceRequest() { RankingInfo = rankPetInfo });
+                        (R2M_RankRunRaceResponse)await self.Root().GetComponent<MessageSender>().Call(mapInstanceId,M2R_RankRunRaceRequest);
                 if (Response.Error != ErrorCode.ERR_Success)
                 {
                     continue;
@@ -191,7 +193,8 @@ namespace ET.Server
                 }
 
                 List<Unit> unitlist = UnitHelper.GetUnitList(self.Scene(), UnitType.Player);
-                M2C_RankRunRaceMessage m2C_RankRun = new M2C_RankRunRaceMessage() { RankList = Response.RankList };
+                M2C_RankRunRaceMessage m2C_RankRun = M2C_RankRunRaceMessage.Create();
+                m2C_RankRun.RankList = Response.RankList;
                 MapMessageHelper.SendToClient(unitlist, m2C_RankRun);
 
                 if (!unit.IsDisposed)
@@ -209,7 +212,7 @@ namespace ET.Server
 
                     string[] itemList = rankRewardConfig.RewardItems.Split('@');
                     List<RewardItem> rewardItems = new List<RewardItem>();
-                    MailInfo mailInfo = new MailInfo();
+                    MailInfo mailInfo = MailInfo.Create();
                     for (int k = 0; k < itemList.Length; k++)
                     {
                         string[] itemInfo = itemList[k].Split(';');
@@ -221,7 +224,11 @@ namespace ET.Server
                         int itemId = int.Parse(itemInfo[0]);
                         int itemNum = int.Parse(itemInfo[1]);
                         rewardItems.Add(new RewardItem() { ItemID = itemId, ItemNum = itemNum });
-                        mailInfo.ItemList.Add(new BagInfo() { ItemID = itemId, ItemNum = itemNum, GetWay = $"{ItemGetWay.ShowLie}_{serverTime}" });
+                        BagInfo BagInfo = BagInfo.Create();
+                        BagInfo.ItemID = itemId;
+                        BagInfo.ItemNum = itemNum;
+                        BagInfo.GetWay = $"{ItemGetWay.ShowLie}_{serverTime}";
+                        mailInfo.ItemList.Add(BagInfo);
                     }
 
                     if (itemList.Length <= bagComponent.GetBagLeftCell())
@@ -241,12 +248,15 @@ namespace ET.Server
                         mailInfo.Context = $"恭喜您获得赛跑大赛排行榜第{Response.RankId}名奖励";
                         mailInfo.Title = "赛跑大赛排行榜奖励";
                         mailInfo.MailId = IdGenerater.Instance.GenerateId();
+                        M2E_EMailSendRequest M2E_EMailSendRequest = M2E_EMailSendRequest.Create();
+                        M2E_EMailSendRequest.Id = userInfoComponent.UserInfo.UserId;
+                        M2E_EMailSendRequest.MailInfo = mailInfo;
                         E2M_EMailSendResponse g_EMailSendResponse = (E2M_EMailSendResponse)await self.Root().GetComponent<MessageSender>().Call(
-                            mailServerId,
-                            new M2E_EMailSendRequest() { Id = userInfoComponent.UserInfo.UserId, MailInfo = mailInfo });
+                            mailServerId,M2E_EMailSendRequest);
                     }
 
-                    M2C_RankRunRaceReward m2C_RankRunRace = new M2C_RankRunRaceReward() { RewardList = rewardItems };
+                    M2C_RankRunRaceReward m2C_RankRunRace = M2C_RankRunRaceReward.Create();
+                    m2C_RankRunRace.RewardList = rewardItems;
                     MapMessageHelper.SendToClient(unit, m2C_RankRunRace);
                 }
             }
@@ -261,7 +271,7 @@ namespace ET.Server
                     Unit unit = units[i];
                     float distance = math.distance(units[i].Position, vector3);
 
-                    RankingInfo rankPetInfo = new RankingInfo();
+                    RankingInfo rankPetInfo = RankingInfo.Create();
                     UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                     rankPetInfo.UserId = userInfoComponent.UserInfo.UserId;
                     rankPetInfo.PlayerName = userInfoComponent.UserInfo.Name;

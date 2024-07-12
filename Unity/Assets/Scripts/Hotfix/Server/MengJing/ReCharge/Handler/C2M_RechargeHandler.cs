@@ -11,7 +11,10 @@ namespace ET.Server
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Recharge, unit.Id))
             {
                 ActorId dbCacheId = UnitCacheHelper.GetLoginCenterId();
-                C2C_CenterServerInfoRespone d2GGetUnit = (C2C_CenterServerInfoRespone)await unit.Root().GetComponent<MessageSender>().Call(dbCacheId, new C2C_CenterServerInfoReuest() { Zone = unit.Zone(), infoType = 1 });
+                C2C_CenterServerInfoReuest C2C_CenterServerInfoReuest = C2C_CenterServerInfoReuest.Create();
+                C2C_CenterServerInfoReuest.Zone = unit.Zone();
+                C2C_CenterServerInfoReuest.infoType = 1;
+                C2C_CenterServerInfoRespone d2GGetUnit = (C2C_CenterServerInfoRespone)await unit.Root().GetComponent<MessageSender>().Call(dbCacheId, C2C_CenterServerInfoReuest);
                 //Log.ILog.Info("d2GGetUnit.Value = " + d2GGetUnit.Value);
                 if (int.Parse(d2GGetUnit.Value) != 1)
                 {
@@ -68,18 +71,16 @@ namespace ET.Server
                 }
 
                 ActorId rechareId = UnitCacheHelper.GetRechargeCenter();
-              
-                R2M_RechargeResponse r2M_RechargeResponse = (R2M_RechargeResponse)await unit.Root().GetComponent<MessageSender>().Call(rechareId, new M2R_RechargeRequest()
-                {
-                    Zone = unit.Zone(),
-                    PayType = request.PayType,
-                    UnitId = unit.Id,
-                    UnitName = userName,
-                    RechargeNumber = request.RechargeNumber,
-                    Account = userInfoComponent.Account,
-                    payMessage = request.RiskControlInfo,
-                    ClientIp = userInfoComponent.RemoteAddress
-                });
+                M2R_RechargeRequest M2R_RechargeRequest = M2R_RechargeRequest.Create();
+                M2R_RechargeRequest.Zone = unit.Zone();
+                M2R_RechargeRequest.PayType = request.PayType;
+                M2R_RechargeRequest.UnitId = unit.Id;
+                M2R_RechargeRequest.UnitName = userName;
+                M2R_RechargeRequest.RechargeNumber = request.RechargeNumber;
+                M2R_RechargeRequest.Account = userInfoComponent.Account;
+                M2R_RechargeRequest.payMessage = request.RiskControlInfo;
+                M2R_RechargeRequest.ClientIp = userInfoComponent.RemoteAddress;
+                R2M_RechargeResponse r2M_RechargeResponse = (R2M_RechargeResponse)await unit.Root().GetComponent<MessageSender>().Call(rechareId, M2R_RechargeRequest);
 
                 response.Message = r2M_RechargeResponse.Message;
             }
