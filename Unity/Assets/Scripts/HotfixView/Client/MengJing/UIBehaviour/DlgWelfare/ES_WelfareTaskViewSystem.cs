@@ -90,7 +90,7 @@ namespace ET.Client
                 TaskConfig taskConfig = TaskConfigCategory.Instance.Get(tasks[i]);
                 if (taskPro == null && roleComoleteTaskList.Contains(tasks[i]))
                 {
-                    taskPro = new TaskPro();
+                    taskPro = TaskPro.Create();
                     taskPro.taskID = tasks[i];
                     taskPro.taskTargetNum_1 = taskConfig.TargetValue[0];
                     taskPro.taskStatus = (int)TaskStatuEnum.Commited;
@@ -100,7 +100,7 @@ namespace ET.Client
                 if (taskPro == null)
                 {
                     Log.Error($"未领取的任务 {tasks[i]}");
-                    taskPro = new TaskPro();
+                    taskPro = TaskPro.Create();
                     taskPro.taskID = tasks[i];
                     taskPro.taskTargetNum_1 = 0;
                     taskPro.taskStatus = (int)TaskStatuEnum.Accepted;

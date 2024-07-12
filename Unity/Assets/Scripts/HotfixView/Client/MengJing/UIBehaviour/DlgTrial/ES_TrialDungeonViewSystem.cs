@@ -144,7 +144,8 @@ namespace ET.Client
             showIndex = showIndex == -1? 0 : showIndex;
             self.E_TextLayerText.text = $"第{cengNum}层";
             int moveIndex = Mathf.Max(showIndex, showNum - 5);
-            self.ScrollItemTrialDungeonItems[showIndex].OnBtn_XuanZhong();
+            Scroll_Item_TrialDungeonItem scrollItemTrialDungeonItem = self.ScrollItemTrialDungeonItems[showIndex];
+            scrollItemTrialDungeonItem.OnBtn_XuanZhong();
             self.MoveToIndex(showIndex);
         }
 

@@ -10,7 +10,7 @@ namespace ET.Client
 	public  class ES_WelfareInvest : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public DateTime EndTime;
-		public Dictionary<int, Scroll_Item_WelfareInvestItem> ScrollItemWelfareInvestItems;
+		public Dictionary<int, EntityRef<Scroll_Item_WelfareInvestItem>> ScrollItemWelfareInvestItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_WelfareInvestItemsLoopVerticalScrollRect
      	{

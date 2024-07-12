@@ -106,38 +106,38 @@ namespace ET.Client
             R2C_RankTrialListResponse response = await RankNetHelper.RankTrialList(self.Root());
 
             // 测试数据
-            response.RankList.Add(new RankingTrialInfo()
-            {
-                FubenId = 1,
-                Hurt = 1000,
-                Occ = 1,
-                PlayerLv = 10,
-                PlayerName = "测试玩家1"
-            });
-            response.RankList.Add(new RankingTrialInfo()
-            {
-                FubenId = 1,
-                Hurt = 2000,
-                Occ = 1,
-                PlayerLv = 10,
-                PlayerName = "测试玩家2"
-            });
-            response.RankList.Add(new RankingTrialInfo()
-            {
-                FubenId = 1,
-                Hurt = 1000,
-                Occ = 2,
-                PlayerLv = 10,
-                PlayerName = "测试玩家3"
-            });
-            response.RankList.Add(new RankingTrialInfo()
-            {
-                FubenId = 1,
-                Hurt = 4000,
-                Occ = 3,
-                PlayerLv = 40,
-                PlayerName = "测试玩家4"
-            });
+            // response.RankList.Add(new RankingTrialInfo()
+            // {
+            //     FubenId = 1,
+            //     Hurt = 1000,
+            //     Occ = 1,
+            //     PlayerLv = 10,
+            //     PlayerName = "测试玩家1"
+            // });
+            // response.RankList.Add(new RankingTrialInfo()
+            // {
+            //     FubenId = 1,
+            //     Hurt = 2000,
+            //     Occ = 1,
+            //     PlayerLv = 10,
+            //     PlayerName = "测试玩家2"
+            // });
+            // response.RankList.Add(new RankingTrialInfo()
+            // {
+            //     FubenId = 1,
+            //     Hurt = 1000,
+            //     Occ = 2,
+            //     PlayerLv = 10,
+            //     PlayerName = "测试玩家3"
+            // });
+            // response.RankList.Add(new RankingTrialInfo()
+            // {
+            //     FubenId = 1,
+            //     Hurt = 4000,
+            //     Occ = 3,
+            //     PlayerLv = 40,
+            //     PlayerName = "测试玩家4"
+            // });
 
             if (instanceid != self.InstanceId)
             {

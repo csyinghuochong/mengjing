@@ -9,9 +9,9 @@ namespace ET.Client
 	public  class ES_WarehouseAccount : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public BagInfo BagInfoPutIn { get; set; }
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemHouseItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemHouseItems;
 		public List<BagInfo> AccountBagInfos = new();
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemBagItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemBagItems;
 		public List<BagInfo> ShowBagBagInfos = new();
 		public UnityEngine.UI.LoopVerticalScrollRect E_BagItems2LoopVerticalScrollRect
      	{

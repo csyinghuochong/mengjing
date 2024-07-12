@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_TrialRank : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public int Page;
-		public Dictionary<int, Scroll_Item_RankItem> ScrollItemRankItems;
+		public Dictionary<int, EntityRef<Scroll_Item_RankItem>> ScrollItemRankItems;
 		public List<RankingTrialInfo> ShowRankingTrialInfos = new();
 		public int CurrentItemType;
 

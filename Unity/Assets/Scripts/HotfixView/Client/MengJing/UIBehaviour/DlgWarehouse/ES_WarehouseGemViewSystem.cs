@@ -114,9 +114,10 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemHouseItems.Keys.Count - 1; i++)
             {
-                if (self.ScrollItemHouseItems[i].uiTransform != null)
+                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[i];
+                if (scrollItemCommonItem.uiTransform != null)
                 {
-                    self.ScrollItemHouseItems[i].UpdateSelectStatus(bagInfo);
+                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
                 }
             }
         }
@@ -125,9 +126,10 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemBagItems.Keys.Count - 1; i++)
             {
-                if (self.ScrollItemBagItems[i].uiTransform != null)
+                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[i];
+                if (scrollItemCommonItem.uiTransform != null)
                 {
-                    self.ScrollItemBagItems[i].UpdateSelectStatus(bagInfo);
+                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
                 }
             }
         }
