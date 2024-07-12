@@ -3,7 +3,6 @@ namespace ET.Server
 
     [EntitySystemOf(typeof(StateComponentS))]
     [FriendOf(typeof(StateComponentS))]
-    //[FriendOf(typeof(SkillPassiveComponent))]
     public static partial class StateComponentSSystem
     {
         [EntitySystem]
@@ -89,8 +88,7 @@ namespace ET.Server
             {
                 return ErrorCode.ERR_CanNotUseSkill_Hung;
             }
-
-            //��Ĭ�������ͨ������ǰ��
+            
             if (self.StateTypeGet(StateTypeEnum.Silence))
             {
                 if (skillConfig.Id != 60000011 && skillConfig.SkillActType != 0)
@@ -195,6 +193,7 @@ namespace ET.Server
             if (ErrorCode.ERR_Success != self.CanMove())
             {
                 unit.Stop(0);        //ֹͣ��ǰ�ƶ�
+              
             }
             if (nowStateType == StateTypeEnum.Dizziness)
             {
@@ -204,8 +203,6 @@ namespace ET.Server
             {
                 ///unit.GetComponent<BuffManagerComponent>().OnRemoveBuffByState(StateTypeEnum.Dizziness);
             }
-
-            //��������м���
             //unit.GetComponent<SkillManagerComponent>().InterruptSing(0, true);
             //unit.GetComponent<SkillPassiveComponent>().StateTypeAdd(nowStateType);
             ////���͸ı����Ե������Ϣ
@@ -220,6 +217,8 @@ namespace ET.Server
             //        MessageHelper.SendToClient(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateValue = stateValue, StateOperateType = 1, StateTime = 0 });
             //    }
             //}
+
+            EventSystem.Instance.Publish( self.Scene(), new StateTypeAdd() { UnitDefend = unit, nowStateType = nowStateType }  );
         }
 
         public static bool IsBroadcastType(this StateComponentS self, long nowStateType)
@@ -244,16 +243,18 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             if (unit == null || unit.IsDisposed)
                 return;
-
+            //unit.GetComponent<SkillManagerComponent>().InterruptSing(0, true);
+            //unit.GetComponent<SkillPassiveComponent>().StateTypeAdd(nowStateType);
+            ////���͸ı����Ե������Ϣ
             //if (self.IsBroadcastType(nowStateType))
             //{
-            //    MapMessageHelper.Broadcast(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateOperateType = 2, StateTime = 0 });
+            //    MessageHelper.Broadcast(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateValue = stateValue, StateOperateType = 1, StateTime = 0 });
             //}
             //else
             //{
             //    if (unit.Type == UnitType.Player)
             //    {
-            //        MapMessageHelper.SendToClient(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateOperateType = 2, StateTime = 0 });
+            //        MessageHelper.SendToClient(self.GetParent<Unit>(), new M2C_UnitStateUpdate() { UnitId = self.Parent.Id, StateType = (long)nowStateType, StateValue = stateValue, StateOperateType = 1, StateTime = 0 });
             //    }
             //}
         }

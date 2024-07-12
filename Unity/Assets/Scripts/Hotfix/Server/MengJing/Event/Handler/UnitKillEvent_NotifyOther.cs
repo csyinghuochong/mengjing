@@ -7,20 +7,7 @@ namespace ET.Server
     public class UnitKillEvent_NotifyOther: AEvent<Scene, UnitKillEvent>
     {
         
-        private async ETTask OnRemoveUnit(Scene root, UnitKillEvent args, long waittime)
-        {
-            Unit unitDefend = args.UnitDefend;
-            await root.GetComponent<TimerComponent>() .WaitAsync(waittime);
-            if (unitDefend.IsDisposed)
-            {
-                return;
-            }
-            if (unitDefend.Type != UnitType.Player && args.WaitRevive == 0)
-            {
-                unitDefend.GetParent<UnitComponent>().Remove(unitDefend.Id);
-            }
-        }
-        
+
         protected override async ETTask Run(Scene scene, UnitKillEvent args)
         {
             Unit defendUnit = args.UnitDefend;
@@ -231,5 +218,20 @@ namespace ET.Server
             OnRemoveUnit(mainAttack.Root(), args, waittime).Coroutine();
             await ETTask.CompletedTask;
         }
+        
+        private async ETTask OnRemoveUnit(Scene root, UnitKillEvent args, long waittime)
+        {
+            Unit unitDefend = args.UnitDefend;
+            await root.GetComponent<TimerComponent>() .WaitAsync(waittime);
+            if (unitDefend.IsDisposed)
+            {
+                return;
+            }
+            if (unitDefend.Type != UnitType.Player && args.WaitRevive == 0)
+            {
+                unitDefend.GetParent<UnitComponent>().Remove(unitDefend.Id);
+            }
+        }
+
     }
 }

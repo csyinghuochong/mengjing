@@ -105,7 +105,7 @@ namespace ET.Server
 
             if (self.ArenaClose)
             {
-                BattleInfo arenaInfo = self.GetParent<FubenCenterComponent>().GetArenaInfo(self.Scene().Id);
+                BattleInfo arenaInfo = self.ArenaInfo;
                 for (int i = 0; i < unitlist.Count; i++)
                 {
                     ArenaPlayerStatu arenaPlayerStatu = arenaInfo.PlayerList[unitlist[i].Id];
@@ -176,7 +176,7 @@ namespace ET.Server
         public static List<ArenaPlayerStatu> GetNoRankPlayers(this ArenaDungeonComponent self)
         {
             List<ArenaPlayerStatu> arenaPlayerStatus = new List<ArenaPlayerStatu>();
-            BattleInfo arenaInfo = self.GetParent<FubenCenterComponent>().GetArenaInfo(self.Scene().Id);
+            BattleInfo arenaInfo = self.ArenaInfo;
             foreach (var item in arenaInfo.PlayerList)
             {
                 if (item.Value.RankId == 0)
@@ -191,7 +191,7 @@ namespace ET.Server
         public static List<ArenaPlayerStatu> GetRankPlayers(this ArenaDungeonComponent self, int start, int end)
         {
             List<ArenaPlayerStatu> arenaPlayerStatus = new List<ArenaPlayerStatu>();
-            BattleInfo arenaInfo = self.GetParent<FubenCenterComponent>().GetArenaInfo(self.Scene().Id);
+            BattleInfo arenaInfo = self.ArenaInfo;
             foreach (var item in arenaInfo.PlayerList)
             {
                 if (item.Value.RankId == 0)
@@ -242,7 +242,7 @@ namespace ET.Server
         /// <returns></returns>
         public static async ETTask OnArenaOver(this ArenaDungeonComponent self)
         {
-            BattleInfo arenaInfo = self.GetParent<FubenCenterComponent>().GetArenaInfo(self.Scene().Id);
+            BattleInfo arenaInfo = self.ArenaInfo;
             foreach ((long unitid, ArenaPlayerStatu ArenaPlayerStatu) in arenaInfo.PlayerList)
             {
                 LogHelper.LogDebug($"OnArenaOver: {self.Zone()} {unitid} {ArenaPlayerStatu.RankId}");
@@ -281,7 +281,7 @@ namespace ET.Server
                 return;
             }
 
-            BattleInfo arenaInfo = self.GetParent<FubenCenterComponent>().GetArenaInfo(self.Scene().Id);
+            BattleInfo arenaInfo = self.ArenaInfo;
             if (!arenaInfo.PlayerList.ContainsKey(attack.Id))
             {
                 LogHelper.LogDebug($"ArenaDungeon:  {attack.Id}not found");

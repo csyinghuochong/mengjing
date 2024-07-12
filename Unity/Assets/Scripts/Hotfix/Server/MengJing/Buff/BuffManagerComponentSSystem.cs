@@ -921,7 +921,6 @@ namespace ET.Server
                     Value = $"{buffHandler.BuffData.SkillId}_{buffHandler.BuffData.Spellcaster}",
                     Value2 = buffHandler.BuffEndTime.ToString()
                 });
-                ;
             }
 
             return Buffs;
@@ -929,7 +928,7 @@ namespace ET.Server
 
         public static void BeforeTransfer(this BuffManagerComponentS self)
         {
-            UnitInfoComponent unitInfoComponent = self.GetParent<Unit>().GetComponent<UnitInfoComponent>();
+            UnitInfoComponent unitInfoComponent = self.GetParent<Unit>().GetComponent<UnitInfoComponent>(); 
             unitInfoComponent.Buffs.Clear();
             int buffcnt = self.m_Buffs.Count;
             for (int i = buffcnt - 1; i >= 0; i--)
