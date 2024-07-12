@@ -12,7 +12,7 @@ namespace ET.Client
 		public int Weizhi; //-1左 1 右边
 		public PetOperationType BagOperationType;
 		public RolePetInfo RolePetInfo;
-		public Dictionary<int, Scroll_Item_CommonSkillItem> ScrollItemCommonSkillItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonSkillItem>> ScrollItemCommonSkillItems;
 		public List<int> ShowPetSkills = new();
 		
 		public UnityEngine.RectTransform EG_ImageStarListRectTransform

@@ -157,7 +157,9 @@ namespace ET.Client
                     Log.Error("uiTransform is null.");
                     return null;
                 }
-                if( this.m_es_petformationset ==null )
+
+                ES_PetFormationSet es = this.m_es_petformationset;
+                if( es ==null )
                 {
                     Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"FormationNode/ES_PetFormationSet");
                     this.m_es_petformationset = this.AddChild<ES_PetFormationSet,Transform>(subTrans);
@@ -188,7 +190,7 @@ namespace ET.Client
         private EntityRef<ES_PetFormationSet> m_es_petformationset = null;
 
         public List<PetFubenConfig> ShowPetFubenConfig = new List<PetFubenConfig>();
-        public Dictionary<int, Scroll_Item_PetChallengeItem> ScrollItemPetChallengeItems = new Dictionary<int, Scroll_Item_PetChallengeItem>();
+        public Dictionary<int, EntityRef<Scroll_Item_PetChallengeItem>> ScrollItemPetChallengeItems;
         private UnityEngine.UI.LoopVerticalScrollRect m_E_PetChallengeItemsLoopVerticalScrollRect = null;
         public Transform uiTransform = null;
         

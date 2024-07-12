@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (BattleMessageComponent))]
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [FriendOf(typeof (Scroll_Item_CommonSkillItem))]
-    [FriendOf(typeof (Scroll_Item_PetSkinIconItem))]
-    [FriendOf(typeof (Scroll_Item_PetListItem))]
-    [FriendOf(typeof (PetComponentC))]
-    [EntitySystemOf(typeof (ES_PetList))]
-    [FriendOf(typeof (ES_PetList))]
+    [FriendOf(typeof(BattleMessageComponent))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [FriendOf(typeof(Scroll_Item_CommonSkillItem))]
+    [FriendOf(typeof(Scroll_Item_PetSkinIconItem))]
+    [FriendOf(typeof(Scroll_Item_PetListItem))]
+    [FriendOf(typeof(PetComponentC))]
+    [EntitySystemOf(typeof(ES_PetList))]
+    [FriendOf(typeof(ES_PetList))]
     public static partial class ES_PetListSystem
     {
         [EntitySystem]
@@ -211,7 +211,7 @@ namespace ET.Client
                 return;
             }
 
-            PetNetHelper.RequestPetFight(self.Root(), rolePetInfo.Id, rolePetInfo.PetStatus == 0? 1 : 0).Coroutine();
+            PetNetHelper.RequestPetFight(self.Root(), rolePetInfo.Id, rolePetInfo.PetStatus == 0 ? 1 : 0).Coroutine();
         }
 
         private static void CheckSensitiveWords(this ES_PetList self)
@@ -257,14 +257,15 @@ namespace ET.Client
             self.OnUpdatePetInfo(rolePetInfo);
             for (int i = 0; i < self.ScrollItemPetListItems.Count; i++)
             {
-                if (self.ScrollItemPetListItems[i].uiTransform == null)
+                Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[i];
+                if (scrollItemPetListItem.uiTransform == null)
                 {
                     continue;
                 }
 
-                if (self.ScrollItemPetListItems[i].PetId == self.LastSelectItem.Id)
+                if (scrollItemPetListItem.PetId == self.LastSelectItem.Id)
                 {
-                    self.ScrollItemPetListItems[i].OnRName(rolePetInfo);
+                    scrollItemPetListItem.OnRName(rolePetInfo);
                 }
             }
         }
@@ -315,9 +316,10 @@ namespace ET.Client
             self.PetSkinId = skinId;
             for (int i = 0; i < self.ScrollItemPetSkinIconItems.Count; i++)
             {
-                if (self.ScrollItemPetSkinIconItems[i].uiTransform != null)
+                Scroll_Item_PetSkinIconItem scrollItemPetSkinIconItem = self.ScrollItemPetSkinIconItems[i];
+                if (scrollItemPetSkinIconItem.uiTransform != null)
                 {
-                    self.ScrollItemPetSkinIconItems[i].OnSelected(skinId);
+                    scrollItemPetSkinIconItem.OnSelected(skinId);
                 }
             }
 
@@ -366,7 +368,8 @@ namespace ET.Client
             {
                 self.EG_RightRectTransform.gameObject.SetActive(true);
                 self.EG_GameObject2RectTransform.gameObject.SetActive(false);
-                self.ScrollItemPetListItems[0].OnClickPetItem();
+                Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[0];
+                scrollItemPetListItem.OnClickPetItem();
             }
             else
             {
@@ -677,9 +680,10 @@ namespace ET.Client
             self.BagInfo = bagInfo;
             for (int i = 0; i < self.ScrollItemCommonItems.Count; i++)
             {
-                if (self.ScrollItemCommonItems[i].uiTransform != null)
+                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[i];
+                if (scrollItemCommonItem.uiTransform != null)
                 {
-                    self.ScrollItemCommonItems[i].ES_CommonItem.SetSelected(bagInfo);
+                    scrollItemCommonItem.ES_CommonItem.SetSelected(bagInfo);
                 }
             }
         }
@@ -971,7 +975,8 @@ namespace ET.Client
             self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
                     $"{rolePetInfo.ZiZhi_Adf}/{petConfig.ZiZhi_Adf_Max}";
             self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text = string.Format("{0}/{1}",
-                CommonViewHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang), CommonViewHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max));
+                CommonViewHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang),
+                CommonViewHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max));
             self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
                     $"{rolePetInfo.ZiZhi_MageAct}/{petConfig.ZiZhi_MageAct_Max}";
 
@@ -981,32 +986,32 @@ namespace ET.Client
                     .LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Pro_17.png");
 
             self.PetZiZhiItemList[0].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
-                    rolePetInfo.ZiZhi_Hp >= petConfig.ZiZhi_Hp_Max? sprite16 : sprite17;
+                    rolePetInfo.ZiZhi_Hp >= petConfig.ZiZhi_Hp_Max ? sprite16 : sprite17;
             self.PetZiZhiItemList[0].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount =
                     Mathf.Clamp((float)rolePetInfo.ZiZhi_Hp / (float)petConfig.ZiZhi_Hp_Max, 0f, 1f);
 
             self.PetZiZhiItemList[1].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
-                    rolePetInfo.ZiZhi_Act >= petConfig.ZiZhi_Act_Max? sprite16 : sprite17;
+                    rolePetInfo.ZiZhi_Act >= petConfig.ZiZhi_Act_Max ? sprite16 : sprite17;
             self.PetZiZhiItemList[1].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount =
                     Mathf.Clamp((float)rolePetInfo.ZiZhi_Act / (float)petConfig.ZiZhi_Act_Max, 0f, 1f);
 
             self.PetZiZhiItemList[2].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
-                    rolePetInfo.ZiZhi_Def >= petConfig.ZiZhi_Def_Max? sprite16 : sprite17;
+                    rolePetInfo.ZiZhi_Def >= petConfig.ZiZhi_Def_Max ? sprite16 : sprite17;
             self.PetZiZhiItemList[2].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount =
                     Mathf.Clamp((float)rolePetInfo.ZiZhi_Def / (float)petConfig.ZiZhi_Def_Max, 0f, 1f);
 
             self.PetZiZhiItemList[3].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
-                    rolePetInfo.ZiZhi_Adf >= petConfig.ZiZhi_Adf_Max? sprite16 : sprite17;
+                    rolePetInfo.ZiZhi_Adf >= petConfig.ZiZhi_Adf_Max ? sprite16 : sprite17;
             self.PetZiZhiItemList[3].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount =
                     Mathf.Clamp((float)rolePetInfo.ZiZhi_Adf / (float)petConfig.ZiZhi_Adf_Max, 0f, 1f);
 
             self.PetZiZhiItemList[4].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
-                    rolePetInfo.ZiZhi_ChengZhang >= petConfig.ZiZhi_ChengZhang_Max? sprite16 : sprite17;
+                    rolePetInfo.ZiZhi_ChengZhang >= petConfig.ZiZhi_ChengZhang_Max ? sprite16 : sprite17;
             self.PetZiZhiItemList[4].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount =
                     Mathf.Clamp((float)rolePetInfo.ZiZhi_ChengZhang / (float)petConfig.ZiZhi_ChengZhang_Max, 0f, 1f);
 
             self.PetZiZhiItemList[5].transform.Find("ImageExpValue").GetComponent<Image>().sprite =
-                    rolePetInfo.ZiZhi_MageAct >= petConfig.ZiZhi_MageAct_Max? sprite16 : sprite17;
+                    rolePetInfo.ZiZhi_MageAct >= petConfig.ZiZhi_MageAct_Max ? sprite16 : sprite17;
             self.PetZiZhiItemList[5].transform.Find("ImageExpValue").GetComponent<Image>().fillAmount =
                     Mathf.Clamp((float)rolePetInfo.ZiZhi_MageAct / (float)petConfig.ZiZhi_MageAct_Max, 0f, 1f);
         }
@@ -1037,7 +1042,8 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemPetSkinIconItems, self.ShowPetSkins.Length);
             self.E_PetSkinIconItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPetSkins.Length);
 
-            self.ScrollItemPetSkinIconItems[selectIndex].OnImage_ItemButton();
+            Scroll_Item_PetSkinIconItem scrollItemPetSkinIconItem = self.ScrollItemPetSkinIconItems[selectIndex];
+            scrollItemPetSkinIconItem.OnImage_ItemButton();
         }
 
         private static void UpdateSkillList(this ES_PetList self, RolePetInfo rolePetInfo)
@@ -1112,9 +1118,10 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemPetListItems.Count; i++)
             {
-                if (self.ScrollItemPetListItems[i].uiTransform != null)
+                Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[i];
+                if (scrollItemPetListItem.uiTransform != null)
                 {
-                    self.ScrollItemPetListItems[i].OnSelectUI(rolePetItem);
+                    scrollItemPetListItem.OnSelectUI(rolePetItem);
                 }
             }
 
@@ -1127,7 +1134,8 @@ namespace ET.Client
             self.E_ButtonAddPointButton.transform.Find("Reddot").gameObject.SetActive(rolePetItem != null && rolePetItem.AddPropretyNum > 0);
             for (int i = 0; i < self.ScrollItemPetListItems.Count; i++)
             {
-                self.ScrollItemPetListItems[i].OnUpdatePetPoint(rolePetItem);
+                Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[i];
+                scrollItemPetListItem.OnUpdatePetPoint(rolePetItem);
             }
 
             self.UpdateAttribute(self.LastSelectItem);
@@ -1176,8 +1184,9 @@ namespace ET.Client
             {
                 self.IsChange = true;
                 self.EG_MaskRectTransform.gameObject.SetActive(true);
+                Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[index1];
                 self.EG_MaskRectTransform.transform.Find("Img_PetIcon").GetComponent<Image>().sprite =
-                        self.ScrollItemPetListItems[index1].E_Img_PetHeroIonImage.sprite;
+                        scrollItemPetListItem.E_Img_PetHeroIonImage.sprite;
                 // self.EG_MaskRectTransform.transform.SetParent(self.Root().GetComponent<GlobalComponent>().PopUpRoot);
                 self.EG_MaskRectTransform.transform.localScale = Vector3.one;
             }
@@ -1247,7 +1256,8 @@ namespace ET.Client
 
         private static void OnClick(this ES_PetList self, int index)
         {
-            self.ScrollItemPetListItems[index].OnClickPetItem();
+            Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[index];
+            scrollItemPetListItem.OnClickPetItem();
         }
 
         private static void ChangePos(this ES_PetList self, int index1, int index2)
@@ -1257,8 +1267,10 @@ namespace ET.Client
                 return;
             }
 
-            long petId1 = self.ScrollItemPetListItems[index1].PetId;
-            long petId2 = self.ScrollItemPetListItems[index2].PetId;
+            Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[index1];
+            long petId1 = scrollItemPetListItem.PetId;
+            scrollItemPetListItem = self.ScrollItemPetListItems[index2];
+            long petId2 = scrollItemPetListItem.PetId;
 
             if (petId1 == 0 || petId2 == 0)
             {

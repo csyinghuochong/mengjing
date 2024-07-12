@@ -134,10 +134,10 @@ namespace ET.Client
 
             if (ids.Count > 0)
             {
-                if (self.ScrollItemPaiMaiShopItems != null && self.ScrollItemPaiMaiShopItems.Count > 0 &&
-                    self.ScrollItemPaiMaiShopItems[0].uiTransform != null)
+                Scroll_Item_PaiMaiShopItem scrollItemPaiMaiShopItem = self.ScrollItemPaiMaiShopItems[0];
+                if (self.ScrollItemPaiMaiShopItems != null && self.ScrollItemPaiMaiShopItems.Count > 0 && scrollItemPaiMaiShopItem.uiTransform != null)
                 {
-                    self.ScrollItemPaiMaiShopItems[0].ImageButton();
+                    scrollItemPaiMaiShopItem.ImageButton();
                 }
             }
         }
@@ -155,7 +155,7 @@ namespace ET.Client
             self.PaiMaiSellId = paimaiId;
             if (self.ScrollItemPaiMaiShopItems != null)
             {
-                foreach (var item in self.ScrollItemPaiMaiShopItems.Values)
+                foreach (Scroll_Item_PaiMaiShopItem item in self.ScrollItemPaiMaiShopItems.Values)
                 {
                     if (item.uiTransform == null)
                     {

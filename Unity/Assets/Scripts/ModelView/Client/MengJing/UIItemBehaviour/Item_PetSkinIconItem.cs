@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_PetSkinIconItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_PetSkinIconItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetSkinIconItem>
 	{
 		public Action<int> ClickHandler;
 		public int SkinId;

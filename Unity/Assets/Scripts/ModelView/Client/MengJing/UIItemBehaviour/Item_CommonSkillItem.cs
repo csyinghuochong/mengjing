@@ -6,7 +6,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class Scroll_Item_CommonSkillItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_CommonSkillItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_CommonSkillItem>
 	{
 		public string SkillAtlas;
 		public int SkillId;

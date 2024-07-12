@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_PaiMaiShopItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_PaiMaiShopItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PaiMaiShopItem>
 	{
 		public PaiMaiShopItemInfo PaiMaiShopItemInfo;
 		public int PaiMaiId;
@@ -105,9 +105,10 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+		        ES_CommonItem es = this.m_es_commonitem;
      			if (this.isCacheNode)
      			{
-     				if( this.m_es_commonitem ==null )
+     				if( es ==null )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem");
 		    			this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
@@ -116,10 +117,10 @@ namespace ET.Client
      			}
      			else
      			{
-     				if( this.m_es_commonitem !=null  )
+     				if( es !=null  )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem");
-		    			ES_CommonItem es = this.m_es_commonitem;
+		    			es = this.m_es_commonitem;
      					if( es.UITransform != subTrans )
      					{
      						es.Dispose();

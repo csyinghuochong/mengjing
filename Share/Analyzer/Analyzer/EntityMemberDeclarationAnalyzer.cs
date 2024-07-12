@@ -52,12 +52,12 @@ namespace ET.Analyzer
             if (baseType== Definition.EntityType)
             {
                 // AnalyzeDelegateMember(context, namedTypeSymbol);
-                // AnalyzeEntityMember(context, namedTypeSymbol);
+                AnalyzeEntityMember(context, namedTypeSymbol);
                 AnalyzeComponentChildAttr(context, namedTypeSymbol);
             }else if (baseType == Definition.LSEntityType)
             {
                 // AnalyzeDelegateMember(context, namedTypeSymbol);
-                // AnalyzeEntityMember(context, namedTypeSymbol);
+                AnalyzeEntityMember(context, namedTypeSymbol);
                 AnalyzeFloatMemberInLSEntity(context,namedTypeSymbol);
                 AnalyzeComponentChildAttr(context, namedTypeSymbol);
             }

@@ -119,16 +119,16 @@ namespace ET.Client
         public static async ETTask OnButtonChallenge(this ES_PetChallenge self)
         {
             bool locked = false;
-            foreach (var item in self.ScrollItemPetChallengeItems)
+            foreach (Scroll_Item_PetChallengeItem item in self.ScrollItemPetChallengeItems.Values)
             {
-                if (item.Value.uiTransform == null)
+                if (item.uiTransform == null)
                 {
                     continue;
                 }
 
-                if (item.Value.PetFubenId == self.PetFubenId)
+                if (item.PetFubenId == self.PetFubenId)
                 {
-                    locked = item.Value.E_Node_2.gameObject.activeSelf;
+                    locked = item.E_Node_2.gameObject.activeSelf;
                 }
             }
             if (locked)
@@ -216,14 +216,14 @@ namespace ET.Client
         public static void OnClickChallengeItem(this ES_PetChallenge self, int petfubenId)
         {
             self.PetFubenId = petfubenId;
-            foreach (var item in self.ScrollItemPetChallengeItems)
+            foreach (Scroll_Item_PetChallengeItem item in self.ScrollItemPetChallengeItems.Values)
             {
-                if (item.Value.uiTransform == null)
+                if (item.uiTransform == null)
                 {
                     continue;
                 }
 
-                item.Value.SetSelected(petfubenId);
+                item.SetSelected(petfubenId);
             }
         }
         

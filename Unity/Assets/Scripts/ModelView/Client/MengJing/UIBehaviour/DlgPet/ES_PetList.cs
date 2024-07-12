@@ -15,11 +15,11 @@ namespace ET.Client
 		public int PetHeXinSuit;
 		public int PetSkinId;
 		public RolePetInfo LastSelectItem;
-		public Dictionary<int, Scroll_Item_PetListItem> ScrollItemPetListItems;
+		public Dictionary<int, EntityRef<Scroll_Item_PetListItem>> ScrollItemPetListItems;
 		public List<RolePetInfo> ShowRolePetInfos = new();
-		public Dictionary<int, Scroll_Item_PetSkinIconItem> ScrollItemPetSkinIconItems;
+		public Dictionary<int, EntityRef<Scroll_Item_PetSkinIconItem>> ScrollItemPetSkinIconItems;
 		public int[] ShowPetSkins;
-		public Dictionary<int, Scroll_Item_CommonSkillItem> ScrollItemCommonSkillItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonSkillItem>> ScrollItemCommonSkillItems;
 		public List<int> ShowPetSkills = new();
 		public int UnactiveId;
 		public int UnactiveNum;
@@ -27,7 +27,7 @@ namespace ET.Client
 		public int Position;
 		public int Type;
 		public BagInfo BagInfo;
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
 		
 		public bool IsHoldDown;
@@ -95,7 +95,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_modelshow == null )
+		        ES_ModelShow es = this.m_es_modelshow;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_Right/ES_ModelShow");
 		    	   this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);

@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_PetEggList : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<ES_PetEggListItem> PetList = new();
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
 		
 		public UnityEngine.RectTransform EG_PetNodeListRectTransform
@@ -38,7 +38,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_petegglistitem_0 ==null)
+		        ES_PetEggListItem es = this.m_es_petegglistitem_0;
+     			if( es ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetNodeList/ES_PetEggListItem_0");
 		    	   this.m_es_petegglistitem_0 = this.AddChild<ES_PetEggListItem,Transform>(subTrans);
@@ -56,7 +57,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_petegglistitem_1 ==null )
+		        ES_PetEggListItem es = this.m_es_petegglistitem_1;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetNodeList/ES_PetEggListItem_1");
 		    	   this.m_es_petegglistitem_1 = this.AddChild<ES_PetEggListItem,Transform>(subTrans);
@@ -74,7 +76,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_petegglistitem_2 ==null )
+
+		        ES_PetEggListItem es = this.m_es_petegglistitem_2;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_PetNodeList/ES_PetEggListItem_2");
 		    	   this.m_es_petegglistitem_2 = this.AddChild<ES_PetEggListItem,Transform>(subTrans);
