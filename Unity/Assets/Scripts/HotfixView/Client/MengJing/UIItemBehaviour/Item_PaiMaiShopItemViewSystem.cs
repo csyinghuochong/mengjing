@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_CommonItem))]
-    [FriendOf(typeof (Scroll_Item_PaiMaiShopItem))]
-    [EntitySystemOf(typeof (Scroll_Item_PaiMaiShopItem))]
+    [FriendOf(typeof(ES_CommonItem))]
+    [FriendOf(typeof(Scroll_Item_PaiMaiShopItem))]
+    [EntitySystemOf(typeof(Scroll_Item_PaiMaiShopItem))]
     public static partial class Scroll_Item_PaiMaiShopItemSystem
     {
         [EntitySystem]
@@ -51,7 +51,10 @@ namespace ET.Client
 
             PaiMaiSellConfig paiMaiSellConfig = PaiMaiSellConfigCategory.Instance.Get(paimaiId);
 
-            self.ES_CommonItem.UpdateItem(new BagInfo() { BagInfoID = paimaiId, ItemID = paiMaiSellConfig.ItemID }, ItemOperateEnum.None);
+            BagInfo bagInfoNew = BagInfo.Create();
+            bagInfoNew.BagInfoID = paimaiId;
+            bagInfoNew.ItemID = paiMaiSellConfig.ItemID;
+            self.ES_CommonItem.UpdateItem(bagInfoNew, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
 
             self.E_Lab_PriceText.text = shopItemInfo.Price.ToString();

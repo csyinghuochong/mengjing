@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_ChatItem : Entity,IAwake,IDestroy,IUIScrollItem
+	public  class Scroll_Item_ChatItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_ChatItem>
 	{
 		public ChatInfo ChatInfo;
 		public GameObject[] TitleList = new GameObject[ChannelEnum.Number];

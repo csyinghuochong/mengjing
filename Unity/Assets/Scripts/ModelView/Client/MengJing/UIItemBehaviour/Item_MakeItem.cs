@@ -6,7 +6,7 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class Scroll_Item_MakeItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_MakeItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_MakeItem>
 	{
 		public int ItemID;
 		public int MakeID;

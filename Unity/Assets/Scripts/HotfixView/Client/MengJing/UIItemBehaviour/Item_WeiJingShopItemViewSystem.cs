@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_WeiJingShopItem))]
-    [EntitySystemOf(typeof (Scroll_Item_WeiJingShopItem))]
+    [FriendOf(typeof(Scroll_Item_WeiJingShopItem))]
+    [EntitySystemOf(typeof(Scroll_Item_WeiJingShopItem))]
     public static partial class Scroll_Item_WeiJingShopItemSystem
     {
         [EntitySystem]
@@ -61,11 +61,13 @@ namespace ET.Client
 
             self.StoreSellConfig = storeSellConfig;
             int costType = self.StoreSellConfig.SellType;
-            self.ES_CommonItem_Gold.UpdateItem(new BagInfo() { ItemID = costType }, ItemOperateEnum.None);
+            BagInfo bagInfoNew = BagInfo.Create();
+            bagInfoNew.ItemID = costType;
+            self.ES_CommonItem_Gold.UpdateItem(bagInfoNew, ItemOperateEnum.None);
             self.ES_CommonItem_Gold.E_ItemNumText.gameObject.SetActive(false);
             self.ES_CommonItem_Gold.E_ItemQualityImage.gameObject.SetActive(false);
 
-            BagInfo bagInfo = new BagInfo();
+            BagInfo bagInfo = BagInfo.Create();
             bagInfo.ItemNum = storeSellConfig.SellItemNum;
             bagInfo.ItemID = storeSellConfig.SellItemID;
             self.E_Text_valueText.text = storeSellConfig.SellValue.ToString();

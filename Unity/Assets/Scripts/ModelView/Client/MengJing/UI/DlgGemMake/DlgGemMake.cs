@@ -12,7 +12,7 @@ namespace ET.Client
 
         public int MakeId;
         public long Timer;
-        public Dictionary<int, Scroll_Item_MakeItem> ScrollItemMakeItems;
+        public Dictionary<int, EntityRef<Scroll_Item_MakeItem>> ScrollItemMakeItems;
         public List<int> ShowMake = new();
     }
 }

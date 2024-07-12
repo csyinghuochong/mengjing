@@ -136,9 +136,10 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemBossRefreshTimeItems.Count; i++)
             {
-                if (self.ScrollItemBossRefreshTimeItems[i].uiTransform != null)
+                Scroll_Item_BossRefreshTimeItem scrollItemBossRefreshTimeItem = self.ScrollItemBossRefreshTimeItems[i];
+                if (scrollItemBossRefreshTimeItem.uiTransform != null)
                 {
-                    self.ScrollItemBossRefreshTimeItems[i].RefreshTime();
+                    scrollItemBossRefreshTimeItem.RefreshTime();
                 }
             }
         }

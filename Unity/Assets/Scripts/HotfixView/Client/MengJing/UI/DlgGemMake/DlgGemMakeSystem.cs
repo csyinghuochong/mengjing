@@ -171,10 +171,11 @@ namespace ET.Client
             {
                 for (int k = 0; k < self.ScrollItemMakeItems.Count; k++)
                 {
-                    if (self.ScrollItemMakeItems[k].uiTransform != null && self.ScrollItemMakeItems[k].MakeID == makeid)
+                    Scroll_Item_MakeItem scrollItemMakeItem = self.ScrollItemMakeItems[k];
+                    if (scrollItemMakeItem.uiTransform != null && scrollItemMakeItem.MakeID == makeid)
                     {
                         self.View.E_ImageSelectImage.gameObject.SetActive(true);
-                        CommonViewHelper.SetParent(self.View.E_ImageSelectImage.gameObject, self.ScrollItemMakeItems[k].uiTransform.gameObject);
+                        CommonViewHelper.SetParent(self.View.E_ImageSelectImage.gameObject, scrollItemMakeItem.uiTransform.gameObject);
                         self.View.E_ImageSelectImage.transform.localPosition = new Vector3(0f, 12f, 0f);
                         break;
                     }

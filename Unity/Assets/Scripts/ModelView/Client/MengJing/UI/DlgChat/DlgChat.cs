@@ -11,7 +11,7 @@ namespace ET.Client
         }
 
         public int CurrentChatType;
-        public Dictionary<int, Scroll_Item_ChatItem> ScrollItemChatItems;
+        public Dictionary<int, EntityRef<Scroll_Item_ChatItem>> ScrollItemChatItems;
         public List<ChatInfo> ShowChatInfos = new();
     }
 }

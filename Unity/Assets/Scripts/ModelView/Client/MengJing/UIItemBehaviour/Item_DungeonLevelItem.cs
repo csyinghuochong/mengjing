@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_DungeonLevelItem : Entity,IAwake,IDestroy,IUIScrollItem
+	public  class Scroll_Item_DungeonLevelItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_DungeonLevelItem>
 	{
 		public int Type;
 		public int LevelIndex;

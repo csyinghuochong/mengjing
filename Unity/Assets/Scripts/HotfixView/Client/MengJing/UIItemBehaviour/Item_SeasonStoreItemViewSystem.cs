@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_SeasonStoreItem))]
-    [EntitySystemOf(typeof (Scroll_Item_SeasonStoreItem))]
+    [FriendOf(typeof(Scroll_Item_SeasonStoreItem))]
+    [EntitySystemOf(typeof(Scroll_Item_SeasonStoreItem))]
     public static partial class Scroll_Item_SeasonStoreItemSystem
     {
         [EntitySystem]
@@ -43,7 +43,9 @@ namespace ET.Client
             self.StoreSellConfigId = id;
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(storeSellConfig.SellItemID);
 
-            self.ES_CommonItem.UpdateItem(new BagInfo() { ItemID = storeSellConfig.SellItemID }, ItemOperateEnum.None);
+            BagInfo bagInfo = BagInfo.Create();
+            bagInfo.ItemID = storeSellConfig.SellItemID;
+            self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
             self.ES_CommonItem.HideItemName();
             self.E_NameTextText.text = $"<color=\"#{CommonHelp.QualityReturnColor(itemConfig.ItemQuality)}\">{itemConfig.ItemName}</color>";

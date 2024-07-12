@@ -48,9 +48,10 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemDungeonLevelItems.Count; i++)
             {
-                if (self.ScrollItemDungeonLevelItems[i].uiTransform != null)
+                Scroll_Item_DungeonLevelItem scrollItemDungeonLevelItem = self.ScrollItemDungeonLevelItems[i];
+                if (scrollItemDungeonLevelItem.uiTransform != null)
                 {
-                    self.ScrollItemDungeonLevelItems[i].SetSelected(self.ScrollItemDungeonLevelItems[i].ChapterId == chapterId);
+                    scrollItemDungeonLevelItem.SetSelected(scrollItemDungeonLevelItem.ChapterId == chapterId);
                 }
             }
         }

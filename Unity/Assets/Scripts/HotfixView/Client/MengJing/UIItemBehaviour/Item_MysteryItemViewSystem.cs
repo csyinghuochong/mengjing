@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_MysteryItem))]
-    [EntitySystemOf(typeof (Scroll_Item_MysteryItem))]
+    [FriendOf(typeof(Scroll_Item_MysteryItem))]
+    [EntitySystemOf(typeof(Scroll_Item_MysteryItem))]
     public static partial class Scroll_Item_MysteryItemSystem
     {
         [EntitySystem]
@@ -66,7 +66,9 @@ namespace ET.Client
             self.E_Text_NumberText.text = $"剩余 {mysteryItemInfo.ItemNumber}件";
             self.E_Text_valueText.text = mysteryConfig.SellValue.ToString();
 
-            self.ES_CommonItem.UpdateItem(new BagInfo() { ItemID = self.MysteryItemInfo.ItemID }, ItemOperateEnum.None);
+            BagInfo bagInfoNew = BagInfo.Create();
+            bagInfoNew.ItemID = self.MysteryItemInfo.ItemID;
+            self.ES_CommonItem.UpdateItem(bagInfoNew, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(mysteryConfig.SellType);

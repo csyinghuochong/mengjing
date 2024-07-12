@@ -12,6 +12,6 @@ namespace ET.Client
 
         public BagInfo BagInfo;
         public List<BagInfo> ShowBagInfos = new();
-        public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+        public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
     }
 }

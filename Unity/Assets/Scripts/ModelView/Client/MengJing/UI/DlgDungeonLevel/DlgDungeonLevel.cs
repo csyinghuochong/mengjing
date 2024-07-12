@@ -13,7 +13,7 @@ namespace ET.Client
         public int Difficulty;
         public int ChapterId;
         public List<int> ShowLevel = new();
-        public Dictionary<int, Scroll_Item_DungeonLevelItem> ScrollItemDungeonLevelItems;
+        public Dictionary<int, EntityRef<Scroll_Item_DungeonLevelItem>> ScrollItemDungeonLevelItems;
         public DungeonSectionConfig DungeonSectionConfig;
     }
 }

@@ -161,10 +161,11 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemCommonItems.Keys.Count - 1; i++)
             {
+                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[i];
                 // 滚动组件的子物体是动态从对象池里拿的，只引用看的到的
-                if (self.ScrollItemCommonItems[i].uiTransform != null)
+                if (scrollItemCommonItem.uiTransform != null)
                 {
-                    self.ScrollItemCommonItems[i].UpdateSelectStatus(bagInfo);
+                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
                 }
             }
         }

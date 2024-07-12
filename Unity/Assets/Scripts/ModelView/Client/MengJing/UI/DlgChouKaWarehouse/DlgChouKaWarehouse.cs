@@ -10,9 +10,9 @@ namespace ET.Client
             get => this.GetComponent<DlgChouKaWarehouseViewComponent>();
         }
 
-        public Dictionary<int, Scroll_Item_CommonItem> ScrollItemHouseItems;
+        public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemHouseItems;
         public List<BagInfo> ShowHouseBagInfos = new();
-        public Dictionary<int, Scroll_Item_CommonItem> ScrollItemBagItems;
+        public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemBagItems;
         public List<BagInfo> ShowBagBagInfos = new();
     }
 }

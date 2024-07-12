@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [ComponentOf(typeof (UIBaseWindow))]
-    public class DlgDungeon: Entity, IAwake, IUILogic
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgDungeon : Entity, IAwake, IUILogic
     {
         public DlgDungeonViewComponent View
         {
@@ -12,10 +12,10 @@ namespace ET.Client
 
         public long Timer;
         public List<int> ShowChapter = new();
-        public Dictionary<int, Scroll_Item_DungeonItem> ScrollItemDungeonItems;
+        public Dictionary<int, EntityRef<Scroll_Item_DungeonItem>> ScrollItemDungeonItems;
         public List<KeyValuePair> ShowBoosRefreshTime = new();
-        public Dictionary<int, Scroll_Item_BossRefreshTimeItem> ScrollItemBossRefreshTimeItems;
+        public Dictionary<int, EntityRef<Scroll_Item_BossRefreshTimeItem>> ScrollItemBossRefreshTimeItems;
         public List<int> ShowBossSetting = new();
-        public Dictionary<int, Scroll_Item_BossRefreshSettingItem> ScrollItemBossRefreshSettingItems;
+        public Dictionary<int, EntityRef<Scroll_Item_BossRefreshSettingItem>> ScrollItemBossRefreshSettingItems;
     }
 }

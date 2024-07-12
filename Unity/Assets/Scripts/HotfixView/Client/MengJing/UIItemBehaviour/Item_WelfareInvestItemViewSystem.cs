@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_WelfareInvestItem))]
-    [EntitySystemOf(typeof (Scroll_Item_WelfareInvestItem))]
+    [FriendOf(typeof(Scroll_Item_WelfareInvestItem))]
+    [EntitySystemOf(typeof(Scroll_Item_WelfareInvestItem))]
     public static partial class Scroll_Item_WelfareInvestItemSystem
     {
         [EntitySystem]
@@ -28,7 +28,10 @@ namespace ET.Client
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(int.Parse(ConfigData.WelfareInvestList[day].Value.Split(';')[0]));
 
-            self.ES_CommonItem.UpdateItem(new BagInfo() { ItemID = itemConfig.Id, ItemNum = 1 }, ItemOperateEnum.None);
+            BagInfo bagInfo = BagInfo.Create();
+            bagInfo.ItemID = itemConfig.Id;
+            bagInfo.ItemNum = 1;
+            self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
 
             self.E_InvestTextText.text = $"投资{ConfigData.WelfareInvestList[day].KeyId}金币";
 
