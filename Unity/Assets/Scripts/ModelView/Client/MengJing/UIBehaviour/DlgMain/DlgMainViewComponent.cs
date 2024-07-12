@@ -50,7 +50,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_buttonpositionset == null )
+
+		        ES_ButtonPositionSet es = this.m_es_buttonpositionset;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ButtonPositionSet");
 		    	   this.m_es_buttonpositionset = this.AddChild<ES_ButtonPositionSet,Transform>(subTrans);
@@ -68,7 +70,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_joystickmove == null )
+
+		        ES_JoystickMove es = this.m_es_joystickmove;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_JoystickMove");
 		    	   this.m_es_joystickmove = this.AddChild<ES_JoystickMove,Transform>(subTrans);
@@ -86,7 +90,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolehead == null )
+
+		        ES_RoleHead es = this.m_es_rolehead;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RoleHead");
 		    	   this.m_es_rolehead = this.AddChild<ES_RoleHead,Transform>(subTrans);
@@ -308,7 +314,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_mainhpbar == null )
+
+		        ES_MainHpBar es = this.m_es_mainhpbar;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_LeftSet/ES_MainHpBar");
 		    	   this.m_es_mainhpbar = this.AddChild<ES_MainHpBar,Transform>(subTrans);
@@ -326,7 +334,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_mainbuff == null )
+
+		        ES_MainBuff es = this.m_es_mainbuff;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_LeftSet/ES_MainBuff");
 		    	   this.m_es_mainbuff = this.AddChild<ES_MainBuff,Transform>(subTrans);
@@ -837,7 +847,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_mapmini == null )
+
+		        ES_MapMini es = this.m_es_mapmini;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_RightSet/ES_MapMini");
 		    	   this.m_es_mapmini = this.AddChild<ES_MapMini,Transform>(subTrans);
@@ -855,7 +867,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_mainactivitytip == null )
+
+		        ES_MainActivityTip es = this.m_es_mainactivitytip;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_RightSet/ES_MainActivityTip");
 		    	   this.m_es_mainactivitytip = this.AddChild<ES_MainActivityTip,Transform>(subTrans);
@@ -2284,7 +2298,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_mainskill == null )
+
+		        ES_MainSkill es = this.m_es_mainskill;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_RightSet/ES_MainSkill");
 		    	   this.m_es_mainskill = this.AddChild<ES_MainSkill,Transform>(subTrans);
@@ -2302,7 +2318,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_openbox == null )
+
+		        ES_OpenBox es = this.m_es_openbox;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_OpenBox");
 		    	   this.m_es_openbox = this.AddChild<ES_OpenBox,Transform>(subTrans);
@@ -2320,7 +2338,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_singing == null )
+
+		        ES_Singing es = this.m_es_singing;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_Singing");
 		    	   this.m_es_singing = this.AddChild<ES_Singing,Transform>(subTrans);

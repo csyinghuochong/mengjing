@@ -33,7 +33,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_paimaishop == null )
+
+		        ES_PaiMaiShop es = this.m_es_paimaishop;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PaiMaiShop");
 		    	   this.m_es_paimaishop = this.AddChild<ES_PaiMaiShop,Transform>(subTrans);
@@ -51,7 +53,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_paimaibuy == null )
+
+		        ES_PaiMaiBuy es = this.m_es_paimaibuy;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PaiMaiBuy");
 		    	   this.m_es_paimaibuy = this.AddChild<ES_PaiMaiBuy,Transform>(subTrans);
@@ -69,7 +73,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_paimaisell == null )
+
+		        ES_PaiMaiSell es = this.m_es_paimaisell;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PaiMaiSell");
 		    	   this.m_es_paimaisell = this.AddChild<ES_PaiMaiSell,Transform>(subTrans);
@@ -87,7 +93,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_paimaiduihuan == null )
+
+		        ES_PaiMaiDuiHuan es = this.m_es_paimaiduihuan;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PaiMaiDuiHuan");
 		    	   this.m_es_paimaiduihuan = this.AddChild<ES_PaiMaiDuiHuan,Transform>(subTrans);

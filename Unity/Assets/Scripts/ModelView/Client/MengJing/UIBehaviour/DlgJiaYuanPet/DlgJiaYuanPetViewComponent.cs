@@ -33,7 +33,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_jiayuanpetwalk == null )
+
+		        ES_JiaYuanPetWalk es = this.m_es_jiayuanpetwalk;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_JiaYuanPetWalk");
 		    	   this.m_es_jiayuanpetwalk = this.AddChild<ES_JiaYuanPetWalk,Transform>(subTrans);
@@ -51,7 +53,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_petcangku == null )
+
+		        ES_PetCangKu es = this.m_es_petcangku;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_PetCangKu");
 		    	   this.m_es_petcangku = this.AddChild<ES_PetCangKu,Transform>(subTrans);

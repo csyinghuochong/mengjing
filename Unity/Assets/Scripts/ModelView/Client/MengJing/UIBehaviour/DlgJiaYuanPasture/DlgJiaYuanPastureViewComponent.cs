@@ -16,7 +16,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_modelshow == null )
+
+		        ES_ModelShow es = this.m_es_modelshow;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ModelShow");
 		    	   this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
@@ -51,7 +53,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_jiayuanpasture_a == null )
+
+		        ES_JiaYuanPasture_A es = this.m_es_jiayuanpasture_a;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_JiaYuanPasture_A");
 		    	   this.m_es_jiayuanpasture_a = this.AddChild<ES_JiaYuanPasture_A,Transform>(subTrans);
@@ -69,7 +73,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_jiayuanpasture_b == null )
+
+		        ES_JiaYuanPasture_B es = this.m_es_jiayuanpasture_b;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_JiaYuanPasture_B");
 		    	   this.m_es_jiayuanpasture_b = this.AddChild<ES_JiaYuanPasture_B,Transform>(subTrans);
