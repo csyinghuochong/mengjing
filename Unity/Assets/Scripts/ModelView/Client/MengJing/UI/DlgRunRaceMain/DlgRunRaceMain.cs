@@ -16,7 +16,7 @@ namespace ET.Client
         public long ReadyTime;
         public List<GameObject> Rankings = new();
 
-        public List<ES_SkillGrid> UISkillGrids = new();
+        public List<EntityRef<ES_SkillGrid>> UISkillGrids = new();
 
         public int Index = 0;
     }

@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_PetShouHu : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public int SelectIndex;
-		public List<ES_ShouhuInfo> ShouhuInfos = new();
+		public List<EntityRef<ES_ShouhuInfo>> ShouhuInfos = new();
 		public List<RolePetInfo> ShowRolePetInfos = new();
 		public Dictionary<int, EntityRef<Scroll_Item_PetShouHuItem>> ScrollItemPetShouHuItems;
 		

@@ -15,6 +15,6 @@ namespace ET.Client
         public int ChengJiuType;
         public Action<int> OnTypeAction;
         public Action<int, int> OnChapterAction;
-        public List<UIChengJiuShowChapterItem> UIChengJiuShowChapterItems = new();
+        public List<EntityRef<UIChengJiuShowChapterItem>> UIChengJiuShowChapterItems = new();
     }
 }

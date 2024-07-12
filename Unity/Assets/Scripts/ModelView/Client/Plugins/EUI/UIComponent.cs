@@ -5,22 +5,21 @@ namespace ET.Client
 {
     public interface IUILogic
     {
-        
     }
 
-    public interface IUIScrollItem<T> where T : Entity,IAwake
+    public interface IUIScrollItem<T> where T : Entity, IAwake
     {
         public T BindTrans(Transform trans);
     }
 
     [ComponentOf()]
-    public class UIComponent : Entity,IAwake,IDestroy
+    public class UIComponent : Entity, IAwake, IDestroy
     {
-        public Dictionary<int, UIBaseWindow> AllWindowsDic     = new Dictionary<int, UIBaseWindow>();
-        public List<WindowID> UIBaseWindowlistCached           = new List<WindowID>();
-        public Dictionary<int, UIBaseWindow> VisibleWindowsDic = new Dictionary<int, UIBaseWindow>();
-        public Queue<WindowID> StackWindowsQueue               = new Queue<WindowID>();
-        public bool IsPopStackWndStatus                        = false;
+        public Dictionary<int, EntityRef<UIBaseWindow>> AllWindowsDic = new();
+        public List<WindowID> UIBaseWindowlistCached = new();
+        public Dictionary<int, EntityRef<UIBaseWindow>> VisibleWindowsDic = new();
+        public Queue<WindowID> StackWindowsQueue = new();
+        public bool IsPopStackWndStatus = false;
         public int CurrentNpcId { get; set; }
         public WindowID CurrentNpcUI { get; set; }
         public List<WindowID> OpenUIList { get; set; } = new();

@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_RoleHuiShou : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public BagInfo[] HuiShouInfos = new BagInfo[8];
-		public ES_CommonItem[] HuiShouUIList = new ES_CommonItem[8];
+		public EntityRef<ES_CommonItem>[] HuiShouUIList = new EntityRef<ES_CommonItem>[8];
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
 		public bool IsHoldDown;

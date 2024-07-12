@@ -10,7 +10,7 @@ namespace ET.Client
             get => this.GetComponent<DlgShenQiMakeViewComponent>();
         }
 
-        public List<UIShenQiChapterComponent> ChapterListUI = new();
+        public List<EntityRef<UIShenQiChapterComponent>> ChapterListUI = new();
         public int MakeId;
         public long Timer;
     }

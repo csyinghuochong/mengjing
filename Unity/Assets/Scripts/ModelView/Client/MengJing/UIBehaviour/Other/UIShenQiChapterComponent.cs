@@ -12,6 +12,6 @@ namespace ET.Client
         public GameObject GameObject;
         public Action<int> ActionClick;
 
-        public List<Scroll_Item_MakeItem> MakeListUI = new();
+        public List<EntityRef<Scroll_Item_MakeItem>> MakeListUI = new();
     }
 }

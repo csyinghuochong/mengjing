@@ -18,7 +18,7 @@ namespace ET.Client
 		public Dictionary<int, EntityRef<Scroll_Item_MakeItem>> ScrollItemMakeItems;
 		
 		public BagInfo[] HuiShouInfos = new BagInfo[5];
-		public ES_CommonItem[] HuiShouUIList = new ES_CommonItem[5];
+		public EntityRef<ES_CommonItem>[] HuiShouUIList = new EntityRef<ES_CommonItem>[5];
 		public List<BagInfo> ShowBagInfos = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public bool IsHoldDown = false;

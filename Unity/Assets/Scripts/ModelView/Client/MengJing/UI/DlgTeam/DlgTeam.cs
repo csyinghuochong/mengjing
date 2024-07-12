@@ -12,6 +12,6 @@ namespace ET.Client
         }
 
         public GameObject[] UITeamNodeList = new GameObject[3];
-        public List<ES_TeamItem> TeamUIList = new();
+        public List<EntityRef<ES_TeamItem>> TeamUIList = new();
     }
 }

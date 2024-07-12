@@ -10,7 +10,7 @@ namespace ET.Client
 		public int TeamId = 0;   //0 1 2
 		public PetComponentC PetComponent { get; set; }
 		public GameObject[] PetIcon_di_List = new GameObject[5];
-		public Scroll_Item_PetFormationItem[] FormationItemComponents = new Scroll_Item_PetFormationItem[5];
+		public EntityRef<Scroll_Item_PetFormationItem>[] FormationItemComponents = new EntityRef<Scroll_Item_PetFormationItem>[5];
 		
 		public GameObject TextTip11;
 		public GameObject TextTip12;

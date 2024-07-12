@@ -27,7 +27,7 @@ namespace ET.Client
 		public int Position;
 		public int Type;
 		public BagInfo BagInfo;
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
 		
 		public bool IsHoldDown;

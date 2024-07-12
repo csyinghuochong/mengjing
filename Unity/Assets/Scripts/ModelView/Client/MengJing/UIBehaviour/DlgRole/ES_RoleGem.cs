@@ -11,7 +11,7 @@ namespace ET.Client
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
 		public int CurrentItemType;
-		public List<ES_RoleGemHole> GemHoleList = new();
+		public List<EntityRef<ES_RoleGemHole>> GemHoleList = new();
 		public BagInfo XiangQianItem;
 		public int XiangQianIndex;
 

@@ -8,7 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_RankPet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
-		public List<ES_RankPetItem> PetUIList = new();
+		public List<EntityRef<ES_RankPetItem>> PetUIList = new();
 		
 		public UnityEngine.UI.Text E_Text_RankText
      	{

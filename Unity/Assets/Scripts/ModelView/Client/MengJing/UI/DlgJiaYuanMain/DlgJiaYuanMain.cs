@@ -22,7 +22,7 @@ namespace ET.Client
 
         // public UIJiaYuanVisitComponent UIJiaYuaVisitComponent;
         public Dictionary<int, GameObject> JianYuanPlanUIs = new();
-        public Dictionary<int, JiaYuanPlanLockComponent> JiaYuanPlanLocks = new();
+        public Dictionary<int, EntityRef<JiaYuanPlanLockComponent>> JiaYuanPlanLocks = new();
 
         public long PetTimer;
         public JiaYuanPet JiaYuanPet;

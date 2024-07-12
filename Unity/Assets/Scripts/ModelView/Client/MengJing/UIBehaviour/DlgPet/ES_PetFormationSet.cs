@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_PetFormationSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public Action<long, int, int> DragEndHandler { get; set; } = null;
-		public Scroll_Item_PetFormationItem[] FormationItemComponents = new Scroll_Item_PetFormationItem[9];
+		public EntityRef<Scroll_Item_PetFormationItem>[] FormationItemComponents = new EntityRef<Scroll_Item_PetFormationItem>[9];
 		
 		public UnityEngine.UI.Image E_IconItemDragImage
      	{

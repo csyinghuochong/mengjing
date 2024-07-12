@@ -13,7 +13,7 @@ namespace ET.Client
 		public List<Vector2> InitPositionList = new();
 		public List<Vector2> TempPositionList = new();
 
-		public List<UISkillDragComponent> UISkillDragList = new();
+		public List<EntityRef<UISkillDragComponent>> UISkillDragList = new();
 		public GameObject UIMain;
 		public int CurDragIndex;
 		

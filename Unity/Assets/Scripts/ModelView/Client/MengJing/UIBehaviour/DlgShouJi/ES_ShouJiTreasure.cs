@@ -13,8 +13,8 @@ namespace ET.Client
 		public GameObject ItemListNode;
 		public GameObject UIShouJiTreasureItem;
 
-		public List<UIShouJiTreasureItemComponent> TreasureItemList = new();
-		public List<UIShouJiTreasureTypeComponent> TreasureTypeList = new();
+		public List<EntityRef<UIShouJiTreasureItemComponent>> TreasureItemList = new();
+		public List<EntityRef<UIShouJiTreasureTypeComponent>> TreasureTypeList = new();
 		
 		public ES_CommonItem ES_CommonItem
      	{

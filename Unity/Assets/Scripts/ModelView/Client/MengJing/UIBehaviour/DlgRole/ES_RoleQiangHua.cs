@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_RoleQiangHua : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
 		public int ItemSubType;
-		public List<ES_RoleQiangHuaItem> QiangHuaItemList = new();
+		public List<EntityRef<ES_RoleQiangHuaItem>> QiangHuaItemList = new();
 		
 		public UnityEngine.UI.Image E_ImageSelectImage
      	{

@@ -12,7 +12,7 @@ namespace ET.Client
         }
 
         public GameObject[] MoodList = new GameObject[5];
-        public ES_CommonItem[] CostItemList = new ES_CommonItem[3];
+        public EntityRef<ES_CommonItem>[] CostItemList = new EntityRef<ES_CommonItem>[3];
         public JiaYuanPet JiaYuanPet;
         public bool IsHoldDown;
         public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;

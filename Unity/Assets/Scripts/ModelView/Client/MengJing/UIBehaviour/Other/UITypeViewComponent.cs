@@ -41,7 +41,7 @@ namespace ET
         public GameObject TaskTypeName;
         public GameObject GameObject;
 
-        public List<UITypeButtonItemComponent> TypeItemUIList = new();
+        public List<EntityRef<UITypeButtonItemComponent>> TypeItemUIList = new();
         public Action<int, int> ClickTypeItemHandler;
         public Action<int> ClickTypeHandler;
 

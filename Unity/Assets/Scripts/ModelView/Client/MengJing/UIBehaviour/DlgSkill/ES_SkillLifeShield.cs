@@ -8,8 +8,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_SkillLifeShield : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
-		public List<ES_Shield> ShieldUIList = new();
-		public List<ES_CommonItem> HuiShoulist = new ();
+		public List<EntityRef<ES_Shield>> ShieldUIList = new();
+		public List<EntityRef<ES_CommonItem>> HuiShoulist = new ();
 		public List<BagInfo> ShowBagInfos = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public bool IsDrag;

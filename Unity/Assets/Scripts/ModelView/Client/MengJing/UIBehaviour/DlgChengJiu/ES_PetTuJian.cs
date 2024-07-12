@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_PetTuJian : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public GameObject[] PetZiZhiItemList = new GameObject[6];
-		public List<Scroll_Item_PetTuJianItem> uIPetTuJianItems = new List<Scroll_Item_PetTuJianItem>();
+		public List<EntityRef<Scroll_Item_PetTuJianItem>> uIPetTuJianItems = new();
 
 		public List<int> ShowSkill = new List<int>();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonSkillItem>> ScrollItemCommonSkillItems;

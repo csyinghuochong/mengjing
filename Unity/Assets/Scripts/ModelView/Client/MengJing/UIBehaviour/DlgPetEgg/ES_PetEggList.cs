@@ -8,7 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_PetEggList : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
-		public List<ES_PetEggListItem> PetList = new();
+		public List<EntityRef<ES_PetEggListItem>> PetList = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
 		

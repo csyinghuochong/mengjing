@@ -14,7 +14,7 @@ namespace ET.Client
         public PetMingPlayerInfo PetMingPlayerInfo;
 
         public List<Image> PetIconList = new();
-        public List<Scroll_Item_PetMiningChallengeItem> ChallengeTeamList = new();
+        public List<EntityRef<Scroll_Item_PetMiningChallengeItem>> ChallengeTeamList = new();
 
         public int MineTpe;
         public int Position;

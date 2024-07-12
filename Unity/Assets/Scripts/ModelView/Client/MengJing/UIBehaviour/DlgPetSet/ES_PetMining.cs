@@ -390,7 +390,7 @@ namespace ET.Client
 
         public List<PetMingPlayerInfo> PetMingPlayers = new List<PetMingPlayerInfo>();
         public List<KeyValuePairInt> PetMineExtend { get; set; }= new List<KeyValuePairInt>();
-        public List<ES_PetMiningItem> PetMiningItemList = new List<ES_PetMiningItem>();
+        public List<EntityRef<ES_PetMiningItem>> PetMiningItemList = new();
 
         
         private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;

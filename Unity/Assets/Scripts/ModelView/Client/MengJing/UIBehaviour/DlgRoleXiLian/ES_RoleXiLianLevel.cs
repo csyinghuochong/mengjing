@@ -8,7 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_RoleXiLianLevel : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
-		public List<ES_RoleXiLianLevelItem> UIRoleXiLianLevels = new();
+		public List<EntityRef<ES_RoleXiLianLevelItem>> UIRoleXiLianLevels = new();
 		public int EquipXilianId;
 		public long Timer;
 

@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_RoleXiLianTransfer : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public BagInfo[] BagInfo_Transfer;
-		public ES_CommonItem[] UIItem_Transfer;
+		public EntityRef<ES_CommonItem>[] UIItem_Transfer;
 		public Vector2 localPoint;
 		public bool IsHoldDown;
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;

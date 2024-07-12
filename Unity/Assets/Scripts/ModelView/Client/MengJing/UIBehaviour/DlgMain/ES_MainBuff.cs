@@ -10,8 +10,8 @@ namespace ET.Client
 	{
 		public long Timer;
 		public GameObject UIMainBuffItem;
-		public List<UIMainBuffItemComponent> MainBuffUIList = new();
-		public List<UIMainBuffItemComponent> CacheUIList = new();
+		public List<EntityRef<UIMainBuffItemComponent>> MainBuffUIList = new();
+		public List<EntityRef<UIMainBuffItemComponent>> CacheUIList = new();
 		
 		    public Transform UITransform
          {

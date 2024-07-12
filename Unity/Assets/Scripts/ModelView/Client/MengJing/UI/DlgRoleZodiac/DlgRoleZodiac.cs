@@ -11,7 +11,7 @@ namespace ET.Client
         }
 
         public int CurrentItemType;
-        public List<ES_EquipItem> EquipList = new();
+        public List<EntityRef<ES_EquipItem>> EquipList = new();
         public List<BagInfo> EquipInfoList = new();
         public ItemOperateEnum ItemOperateEnum;
         public int Occ;

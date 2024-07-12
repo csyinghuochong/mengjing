@@ -8,7 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_JiaYuanCooking : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
-		public ES_CommonItem[] CostItemList = new ES_CommonItem[4];
+		public EntityRef<ES_CommonItem>[] CostItemList = new EntityRef<ES_CommonItem>[4];
 		public bool IsHoldDown = false;
 		public List<BagInfo> ShowBagInfos = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;

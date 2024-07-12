@@ -10,7 +10,7 @@ namespace ET.Client
 	{
 		public List<int> ShowTask = new();
 		public Dictionary<int, EntityRef<Scroll_Item_ChengJiuShowItem>> ScrollItemChengJiuShowItems;
-		public List<UIChengJiuShowType> UIChengJiuShowTypes = new();
+		public List<EntityRef<UIChengJiuShowType>> UIChengJiuShowTypes = new();
 		public GameObject LeftContent;
 		public GameObject UIChengJiuShowType;
 		public GameObject UIChengJiuShowChapterItemListNode;

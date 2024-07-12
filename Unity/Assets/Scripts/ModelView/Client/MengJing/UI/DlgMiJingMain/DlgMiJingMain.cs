@@ -10,6 +10,6 @@ namespace ET.Client
             get => this.GetComponent<DlgMiJingMainViewComponent>();
         }
 
-        public List<Scroll_Item_MainTeamItem> TeamUIList = new();
+        public List<EntityRef<Scroll_Item_MainTeamItem>> TeamUIList = new();
     }
 }

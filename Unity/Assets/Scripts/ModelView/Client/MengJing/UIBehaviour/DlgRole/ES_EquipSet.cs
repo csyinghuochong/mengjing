@@ -10,8 +10,8 @@ namespace ET.Client
 	{
 		public int Occ;
 		public ItemOperateEnum ItemOperateEnum;
-		public List<ES_EquipItem> ESEquipItems_1 = new();
-		public List<ES_EquipItem> ESEquipItems_2 = new();
+		public List<EntityRef<ES_EquipItem>> ESEquipItems_1 = new();
+		public List<EntityRef<ES_EquipItem>> ESEquipItems_2 = new();
 		public List<BagInfo> EquipInfoList = new();
 		
 		public UnityEngine.RectTransform EG_EquipSetHideRectTransform

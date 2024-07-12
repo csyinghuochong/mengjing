@@ -13,7 +13,7 @@ namespace ET.Client
         public GameObject UIPaiMaiShopTypeItem;
         public GameObject TaskTypeName;
 
-        public List<UIPaiMaiShopTypeItemComponent> UITaskTypeItemList = new();
+        public List<EntityRef<UIPaiMaiShopTypeItemComponent>> UITaskTypeItemList = new();
         public Action<int, int> ClickTypeItemHandler;
         public Action<int> ClickTypeHandler;
 

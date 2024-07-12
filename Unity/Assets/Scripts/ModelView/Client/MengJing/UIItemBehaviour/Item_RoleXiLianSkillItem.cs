@@ -8,7 +8,7 @@ namespace ET.Client
 	public  class Scroll_Item_RoleXiLianSkillItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_RoleXiLianSkillItem>
 	{
 		public EquipXiLianConfig EquipXiLianConfig;
-		public List<Scroll_Item_CommonSkillItem> uIItems = new();
+		public List<EntityRef<Scroll_Item_CommonSkillItem>> uIItems = new();
 		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
