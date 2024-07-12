@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace ET.Client
 {
@@ -7,13 +8,12 @@ namespace ET.Client
         
     }
 
-    public interface IUIScrollItem
+    public interface IUIScrollItem<T> where T : Entity,IAwake
     {
-        
+        public T BindTrans(Transform trans);
     }
 
     [ComponentOf()]
-    [ChildOf(typeof(UIBaseWindow))]
     public class UIComponent : Entity,IAwake,IDestroy
     {
         public Dictionary<int, UIBaseWindow> AllWindowsDic     = new Dictionary<int, UIBaseWindow>();

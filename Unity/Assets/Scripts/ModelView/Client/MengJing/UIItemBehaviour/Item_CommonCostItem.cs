@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_CommonCostItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_CommonCostItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_CommonCostItem>
 	{
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
