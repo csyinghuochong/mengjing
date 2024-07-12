@@ -19,7 +19,7 @@ namespace ET.Client
 
             self.IsHoldDown = false;
             self.BagInfo_Transfer = new BagInfo[2];
-            self.UIItem_Transfer = new ES_CommonItem[2];
+            self.UIItem_Transfer = new EntityRef<ES_CommonItem>[2];
             self.E_BagItemsLoopVerticalScrollRect.AddItemRefreshListener(self.OnBagItemsRefresh);
             self.E_ButtonTransferButton.AddListenerAsync(self.OnButtonTransfer);
 
@@ -111,8 +111,8 @@ namespace ET.Client
 
             self.UIItem_Transfer[0] = self.ES_CommonItem_1;
             self.UIItem_Transfer[1] = self.ES_CommonItem_2;
-            self.UIItem_Transfer[0].uiTransform.gameObject.SetActive(false);
-            self.UIItem_Transfer[1].uiTransform.gameObject.SetActive(false);
+            self.ES_CommonItem_1.uiTransform.gameObject.SetActive(false);
+            self.ES_CommonItem_2.uiTransform.gameObject.SetActive(false);
         }
 
         public static void OnUpdateUI(this ES_RoleXiLianTransfer self)
@@ -133,8 +133,11 @@ namespace ET.Client
         {
             self.BagInfo_Transfer[0] = null;
             self.BagInfo_Transfer[1] = null;
-            self.UIItem_Transfer[0].uiTransform.gameObject.SetActive(false);
-            self.UIItem_Transfer[1].uiTransform.gameObject.SetActive(false);
+
+            ES_CommonItem esCommonItem0 = self.UIItem_Transfer[0];
+            ES_CommonItem esCommonItem1 = self.UIItem_Transfer[1];
+            esCommonItem0.uiTransform.gameObject.SetActive(false);
+            esCommonItem1.uiTransform.gameObject.SetActive(false);
         }
 
         public static void UpdateSelect(this ES_RoleXiLianTransfer self)
@@ -142,8 +145,10 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             BagInfo bagInfo_1 = bagComponent.GetBagInfo(self.BagInfo_Transfer[0].BagInfoID);
             BagInfo bagInfo_2 = bagComponent.GetBagInfo(self.BagInfo_Transfer[1].BagInfoID);
-            self.UIItem_Transfer[0].UpdateItem(bagInfo_1, ItemOperateEnum.None);
-            self.UIItem_Transfer[1].UpdateItem(bagInfo_2, ItemOperateEnum.None);
+            ES_CommonItem esCommonItem0 = self.UIItem_Transfer[0];
+            ES_CommonItem esCommonItem1 = self.UIItem_Transfer[1];
+            esCommonItem0.UpdateItem(bagInfo_1, ItemOperateEnum.None);
+            esCommonItem1.UpdateItem(bagInfo_2, ItemOperateEnum.None);
         }
 
         public static void UpdateEquipItemUI(this ES_RoleXiLianTransfer self)
@@ -272,8 +277,9 @@ namespace ET.Client
 
                 int index = int.Parse(name.Split('_')[1]);
                 self.BagInfo_Transfer[index] = binfo;
-                self.UIItem_Transfer[index].uiTransform.gameObject.SetActive(true);
-                self.UIItem_Transfer[index].UpdateItem(binfo, ItemOperateEnum.None);
+                ES_CommonItem esCommonItem = self.UIItem_Transfer[index];
+                esCommonItem.uiTransform.gameObject.SetActive(true);
+                esCommonItem.UpdateItem(binfo, ItemOperateEnum.None);
                 break;
             }
 

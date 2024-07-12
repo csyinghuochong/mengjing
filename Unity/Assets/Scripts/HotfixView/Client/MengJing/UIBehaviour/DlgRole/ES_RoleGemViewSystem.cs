@@ -107,7 +107,8 @@ namespace ET.Client
         {
             for (int i = 0; i < self.GemHoleList.Count; i++)
             {
-                self.GemHoleList[i].OnUpdateUI(0, 0, -1);
+                ES_RoleGemHole esRoleGemHole = self.GemHoleList[i];
+                esRoleGemHole.OnUpdateUI(0, 0, -1);
             }
         }
 
@@ -134,8 +135,9 @@ namespace ET.Client
                 int gemHoleId = (gemHoles.Length > i && gemHoles[i] != "") ? int.Parse(gemHoles[i]) : 0;
                 int gemId = (gemIds.Length > i && gemIds[i] != "") ? int.Parse(gemIds[i]) : 0;
 
-                self.GemHoleList[i].OnUpdateUI(gemHoleId, gemId, i);
-                self.GemHoleList[i].SetClickHandler(self.OnSetHoleIndex);
+                ES_RoleGemHole esRoleGemHole = self.GemHoleList[i];
+                esRoleGemHole.OnUpdateUI(gemHoleId, gemId, i);
+                esRoleGemHole.SetClickHandler(self.OnSetHoleIndex);
             }
         }
 
@@ -144,7 +146,8 @@ namespace ET.Client
             self.XiangQianIndex = index;
             for (int i = 0; i < self.GemHoleList.Count; i++)
             {
-                self.GemHoleList[i].SetSelected(i == index);
+                ES_RoleGemHole esRoleGemHole = self.GemHoleList[i];
+                esRoleGemHole.SetSelected(i == index);
             }
         }
     }

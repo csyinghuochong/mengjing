@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [FriendOf(typeof (ES_CommonItem))]
-    [EntitySystemOf(typeof (ES_SkillLifeShield))]
-    [FriendOfAttribute(typeof (ES_SkillLifeShield))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [FriendOf(typeof(ES_CommonItem))]
+    [EntitySystemOf(typeof(ES_SkillLifeShield))]
+    [FriendOfAttribute(typeof(ES_SkillLifeShield))]
     public static partial class ES_SkillLifeShieldSystem
     {
         [EntitySystem]
@@ -36,7 +36,8 @@ namespace ET.Client
             self.ES_Shield_5.SetClickHandler(self.OnClickShieldHandler);
             self.ES_Shield_6.SetClickHandler(self.OnClickShieldHandler);
 
-            self.ShieldUIList[0].OnButtonClick();
+            ES_Shield esShield = self.ShieldUIList[0];
+            esShield.OnButtonClick();
 
             self.HuiShoulist.Add(self.ES_CommonItem_1);
             self.HuiShoulist.Add(self.ES_CommonItem_2);
@@ -63,8 +64,9 @@ namespace ET.Client
 
             for (int i = 0; i < self.HuiShoulist.Count; i++)
             {
-                self.HuiShoulist[i].UpdateItem(null, ItemOperateEnum.None);
-                self.HuiShoulist[i].HideItemName();
+                ES_CommonItem esCommonItem = self.HuiShoulist[i];
+                esCommonItem.UpdateItem(null, ItemOperateEnum.None);
+                esCommonItem.HideItemName();
             }
         }
 
@@ -72,7 +74,8 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ShieldUIList.Count; i++)
             {
-                self.ShieldUIList[i].OnUpdateUI();
+                ES_Shield esShield = self.ShieldUIList[i];
+                esShield.OnUpdateUI();
             }
         }
 
@@ -146,12 +149,13 @@ namespace ET.Client
             {
                 for (int i = 0; i < self.HuiShoulist.Count; i++)
                 {
-                    if (self.HuiShoulist[i].Baginfo == null)
+                    ES_CommonItem esCommonItem = self.HuiShoulist[i];
+                    if (esCommonItem.Baginfo == null)
                     {
                         continue;
                     }
 
-                    if (self.HuiShoulist[i].Baginfo.BagInfoID == bagInfo.BagInfoID)
+                    if (esCommonItem.Baginfo.BagInfoID == bagInfo.BagInfoID)
                     {
                         return;
                     }
@@ -159,10 +163,11 @@ namespace ET.Client
 
                 for (int i = 0; i < self.HuiShoulist.Count; i++)
                 {
-                    if (self.HuiShoulist[i].Baginfo == null)
+                    ES_CommonItem esCommonItem = self.HuiShoulist[i];
+                    if (esCommonItem.Baginfo == null)
                     {
-                        self.HuiShoulist[i].UpdateItem(bagInfo, ItemOperateEnum.HuishouShow);
-                        self.HuiShoulist[i].E_ItemNameText.gameObject.SetActive(true);
+                        esCommonItem.UpdateItem(bagInfo, ItemOperateEnum.HuishouShow);
+                        esCommonItem.E_ItemNameText.gameObject.SetActive(true);
                         break;
                     }
                 }
@@ -171,15 +176,16 @@ namespace ET.Client
             {
                 for (int i = 0; i < self.HuiShoulist.Count; i++)
                 {
-                    if (self.HuiShoulist[i].Baginfo == null)
+                    ES_CommonItem esCommonItem = self.HuiShoulist[i];
+                    if (esCommonItem.Baginfo == null)
                     {
                         continue;
                     }
 
-                    if (self.HuiShoulist[i].Baginfo.BagInfoID == bagInfo.BagInfoID)
+                    if (esCommonItem.Baginfo.BagInfoID == bagInfo.BagInfoID)
                     {
-                        self.HuiShoulist[i].UpdateItem(null, ItemOperateEnum.None);
-                        self.HuiShoulist[i].E_ItemNameText.gameObject.SetActive(false);
+                        esCommonItem.UpdateItem(null, ItemOperateEnum.None);
+                        esCommonItem.E_ItemNameText.gameObject.SetActive(false);
                     }
                 }
             }
@@ -194,7 +200,7 @@ namespace ET.Client
                 {
                     continue;
                 }
-                
+
                 BagInfo bagInfo = uIItemComponent.ES_CommonItem.Baginfo;
                 if (bagInfo == null)
                 {
@@ -204,7 +210,8 @@ namespace ET.Client
                 bool have = false;
                 for (int h = 0; h < self.HuiShoulist.Count; h++)
                 {
-                    if (self.HuiShoulist[h].Baginfo != null && self.HuiShoulist[h].Baginfo == bagInfo)
+                    ES_CommonItem esCommonItem = self.HuiShoulist[h];
+                    if (esCommonItem.Baginfo != null && esCommonItem.Baginfo == bagInfo)
                     {
                         have = true;
                     }
@@ -227,7 +234,7 @@ namespace ET.Client
             self.E_Text_ShieldDescText.text = lifeShieldConfig.Des;
 
             LifeShieldInfo lifeShieldInfo = skillSetComponent.GetLifeShieldByType(shieldType);
-            int curExp = lifeShieldInfo != null? lifeShieldInfo.Exp : 0;
+            int curExp = lifeShieldInfo != null ? lifeShieldInfo.Exp : 0;
 
             if (curLv == maxLv)
             {
@@ -241,7 +248,8 @@ namespace ET.Client
 
             for (int i = 0; i < self.ShieldUIList.Count; i++)
             {
-                self.ShieldUIList[i].SetSelected(shieldType);
+                ES_Shield esShield = self.ShieldUIList[i];
+                esShield.SetSelected(shieldType);
             }
         }
 
@@ -368,9 +376,10 @@ namespace ET.Client
             List<long> constids = new List<long>();
             for (int h = 0; h < self.HuiShoulist.Count; h++)
             {
-                if (self.HuiShoulist[h].Baginfo != null)
+                ES_CommonItem esCommonItem = self.HuiShoulist[h];
+                if (esCommonItem.Baginfo != null)
                 {
-                    constids.Add(self.HuiShoulist[h].Baginfo.BagInfoID);
+                    constids.Add(esCommonItem.Baginfo.BagInfoID);
                 }
             }
 

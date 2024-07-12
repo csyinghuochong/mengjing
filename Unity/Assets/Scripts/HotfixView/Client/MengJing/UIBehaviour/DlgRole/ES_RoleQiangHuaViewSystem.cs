@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_RoleQiangHuaItem))]
-    [FriendOf(typeof (BagComponentC))]
-    [EntitySystemOf(typeof (ES_RoleQiangHua))]
-    [FriendOfAttribute(typeof (ES_RoleQiangHua))]
+    [FriendOf(typeof(ES_RoleQiangHuaItem))]
+    [FriendOf(typeof(BagComponentC))]
+    [EntitySystemOf(typeof(ES_RoleQiangHua))]
+    [FriendOfAttribute(typeof(ES_RoleQiangHua))]
     public static partial class ES_RoleQiangHuaSystem
     {
         [EntitySystem]
@@ -62,10 +62,12 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             for (int i = 0; i < self.QiangHuaItemList.Count; i++)
             {
-                self.QiangHuaItemList[i].OnUpateUI(bagComponent.QiangHuaLevel[i + 1]);
+                ES_RoleQiangHuaItem esRoleQiangHuaItem = self.QiangHuaItemList[i];
+                esRoleQiangHuaItem.OnUpateUI(bagComponent.QiangHuaLevel[i + 1]);
             }
 
-            self.QiangHuaItemList[0].OnBtn_Equip();
+            ES_RoleQiangHuaItem item = self.QiangHuaItemList[0];
+            item.OnBtn_Equip();
         }
 
         public static void OnBtn_EquipHandler(this ES_RoleQiangHua self, int index)
@@ -85,7 +87,8 @@ namespace ET.Client
             self.EG_MaxNodeRectTransform.gameObject.SetActive(qianghuaLevel >= maxLevel - 1);
             self.EG_NextNodeRectTransform.gameObject.SetActive(!self.EG_MaxNodeRectTransform.gameObject.activeSelf);
 
-            CommonViewHelper.SetParent(self.E_ImageSelectImage.gameObject, self.QiangHuaItemList[subType - 1].uiTransform.gameObject);
+            ES_RoleQiangHuaItem esRoleQiangHuaItem = self.QiangHuaItemList[subType - 1];
+            CommonViewHelper.SetParent(self.E_ImageSelectImage.gameObject, esRoleQiangHuaItem.uiTransform.gameObject);
             self.E_ImageSelectImage.transform.localPosition = new Vector3(1f, -2f, 0f);
             string qianghuaName = ItemViewData.EquipWeiZhiToName[subType].Name;
             self.E_QiangHuaNameText.text = $"{qianghuaName}强化 +{qianghuaLevel}";
@@ -98,7 +101,7 @@ namespace ET.Client
 
             self.ES_EquipSetItem.E_QiangHuaLvText.text = $"+{qianghuaLevel}";
             self.E_QiangHuaNameText.text = ItemViewData.EquipWeiZhiToName[subType].Name;
-            self.QiangHuaItemList[subType - 1].OnUpateUI(qianghuaLevel);
+            esRoleQiangHuaItem.OnUpateUI(qianghuaLevel);
 
             for (int i = 0; i < self.EG_QiangHuaLevelListRectTransform.transform.childCount; i++)
             {
@@ -119,7 +122,7 @@ namespace ET.Client
             string costItems = equipQiangHuaConfig.CostItem;
             costItems += $"@1;{equipQiangHuaConfig.CostGold}";
             self.ES_CostList.Refresh(costItems);
-            
+
             self.E_SuccessRateText.text = $"强化成功率: {(int)(equipQiangHuaConfig.SuccessPro * 100)}%";
             double addPro = QiangHuaHelper.GetQiangHuaConfig(subType, qianghuaLevel).AdditionPro * bagComponent.QiangHuaFails[subType];
             self.E_SuccessAdditionText.text = $"附加成功率 {(int)(addPro * 100)}%";

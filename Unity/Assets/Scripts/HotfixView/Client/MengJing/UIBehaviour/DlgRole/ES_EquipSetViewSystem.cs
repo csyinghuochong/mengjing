@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_EquipItem))]
-    [FriendOf(typeof (UserInfoComponentC))]
-    [EntitySystemOf(typeof (ES_EquipSet))]
-    [FriendOfAttribute(typeof (ES_EquipSet))]
+    [FriendOf(typeof(ES_EquipItem))]
+    [FriendOf(typeof(UserInfoComponentC))]
+    [EntitySystemOf(typeof(ES_EquipSet))]
+    [FriendOfAttribute(typeof(ES_EquipSet))]
     public static partial class ES_EquipSetSystem
     {
         [EntitySystem]
@@ -73,12 +73,14 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ESEquipItems_1.Count; i++)
             {
-                self.ESEquipItems_1[i].InitUI(FunctionUI.GetItemSubtypeByWeizhi(i));
+                ES_EquipItem equipItem = self.ESEquipItems_1[i];
+                equipItem.InitUI(FunctionUI.GetItemSubtypeByWeizhi(i));
             }
 
             for (int i = 0; i < self.ESEquipItems_2.Count; i++)
             {
-                self.ESEquipItems_2[i].InitUI(FunctionUI.GetItemSubtypeByWeizhi(i));
+                ES_EquipItem equipItem = self.ESEquipItems_2[i];
+                equipItem.InitUI(FunctionUI.GetItemSubtypeByWeizhi(i));
             }
 
             self.RefreshEquip_1(equiplist_1, occ, itemOperateEnum);
@@ -121,18 +123,21 @@ namespace ET.Client
 
                 if (itemConfig.ItemSubType < (int)ItemSubTypeEnum.Shiping)
                 {
-                    self.ESEquipItems_1[itemConfig.ItemSubType - 1].Refresh(equiplist[i], occ, itemOperateEnum, equiplist);
+                    ES_EquipItem esEquipItem = self.ESEquipItems_1[itemConfig.ItemSubType - 1];
+                    esEquipItem.Refresh(equiplist[i], occ, itemOperateEnum, equiplist);
                 }
 
                 if (itemConfig.ItemSubType == (int)ItemSubTypeEnum.Shiping)
                 {
-                    self.ESEquipItems_1[itemConfig.ItemSubType + shipingIndex - 1].Refresh(equiplist[i], occ, itemOperateEnum, equiplist);
+                    ES_EquipItem esEquipItem = self.ESEquipItems_1[itemConfig.ItemSubType + shipingIndex - 1];
+                    esEquipItem.Refresh(equiplist[i], occ, itemOperateEnum, equiplist);
                     shipingIndex++;
                 }
 
                 if (itemConfig.ItemSubType > (int)ItemSubTypeEnum.Shiping)
                 {
-                    self.ESEquipItems_1[itemConfig.ItemSubType + 1].Refresh(equiplist[i], occ, itemOperateEnum, equiplist);
+                    ES_EquipItem esEquipItem = self.ESEquipItems_1[itemConfig.ItemSubType + 1];
+                    esEquipItem.Refresh(equiplist[i], occ, itemOperateEnum, equiplist);
                 }
             }
 
@@ -153,7 +158,8 @@ namespace ET.Client
                     continue;
                 }
 
-                self.ESEquipItems_2[itemConfig.ItemSubType - 1].Refresh(equiplist[i], occ, itemOperateEnum, equiplist);
+                ES_EquipItem esEquipItem = self.ESEquipItems_2[itemConfig.ItemSubType - 1];
+                esEquipItem.Refresh(equiplist[i], occ, itemOperateEnum, equiplist);
             }
         }
     }

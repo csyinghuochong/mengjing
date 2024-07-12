@@ -239,7 +239,8 @@ namespace ET.Client
 		{
 			for (int i = 0; i < self.HuiShouInfos.Length; i++)
 			{
-				self.HuiShouUIList[i].UpdateItem(self.HuiShouInfos[i], ItemOperateEnum.HuishouShow);
+				ES_CommonItem esCommonItem = self.HuiShouUIList[i];
+				esCommonItem.UpdateItem(self.HuiShouInfos[i], ItemOperateEnum.HuishouShow);
 			}
 		}
 

@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UIShouJiTreasureItemComponent))]
-    [FriendOf(typeof (UIShouJiTreasureTypeComponent))]
-    [EntitySystemOf(typeof (ES_ShouJiTreasure))]
-    [FriendOfAttribute(typeof (ES_ShouJiTreasure))]
+    [FriendOf(typeof(UIShouJiTreasureItemComponent))]
+    [FriendOf(typeof(UIShouJiTreasureTypeComponent))]
+    [EntitySystemOf(typeof(ES_ShouJiTreasure))]
+    [FriendOfAttribute(typeof(ES_ShouJiTreasure))]
     public static partial class ES_ShouJiTreasureSystem
     {
         [EntitySystem]
@@ -50,14 +50,16 @@ namespace ET.Client
                 self.TreasureTypeList.Add(uIItemComponent);
             }
 
-            self.TreasureTypeList[0].OnClick();
+            UIShouJiTreasureTypeComponent uiShouJiTreasureTypeComponent = self.TreasureTypeList[0];
+            uiShouJiTreasureTypeComponent.OnClick();
         }
 
         public static void OnClickType(this ES_ShouJiTreasure self, int chapter)
         {
             for (int i = 0; i < self.TreasureTypeList.Count; i++)
             {
-                self.TreasureTypeList[i].OnSelected(chapter);
+                UIShouJiTreasureTypeComponent uiShouJiTreasureTypeComponent = self.TreasureTypeList[i];
+                uiShouJiTreasureTypeComponent.OnSelected(chapter);
             }
 
             self.OnUpdateTreasureItemList(chapter);
@@ -68,9 +70,10 @@ namespace ET.Client
             int chapterId = 0;
             for (int i = 0; i < self.TreasureTypeList.Count; i++)
             {
-                if (self.TreasureTypeList[i].Ima_SelectStatus.activeSelf)
+                UIShouJiTreasureTypeComponent uiShouJiTreasureTypeComponent = self.TreasureTypeList[i];
+                if (uiShouJiTreasureTypeComponent.Ima_SelectStatus.activeSelf)
                 {
-                    chapterId = self.TreasureTypeList[i].Chapter;
+                    chapterId = uiShouJiTreasureTypeComponent.Chapter;
                 }
             }
 
@@ -102,7 +105,8 @@ namespace ET.Client
 
             for (int i = shouList.Count; i < self.TreasureItemList.Count; i++)
             {
-                self.TreasureItemList[i].GameObject.SetActive(false);
+                UIShouJiTreasureItemComponent uiShouJiTreasureItemComponent = self.TreasureItemList[i];
+                uiShouJiTreasureItemComponent.GameObject.SetActive(false);
             }
         }
 
