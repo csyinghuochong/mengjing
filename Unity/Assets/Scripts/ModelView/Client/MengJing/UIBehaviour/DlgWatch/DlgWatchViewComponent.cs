@@ -33,7 +33,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_watchequip == null )
+
+		        ES_WatchEquip es = this.m_es_watchequip;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WatchEquip");
 		    	   this.m_es_watchequip = this.AddChild<ES_WatchEquip,Transform>(subTrans);
@@ -51,7 +53,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_watchpet == null )
+
+		        ES_WatchPet es = this.m_es_watchpet;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_WatchPet");
 		    	   this.m_es_watchpet = this.AddChild<ES_WatchPet,Transform>(subTrans);
