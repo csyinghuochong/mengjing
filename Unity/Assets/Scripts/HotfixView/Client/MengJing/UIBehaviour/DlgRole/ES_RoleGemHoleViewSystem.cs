@@ -87,7 +87,9 @@ namespace ET.Client
             self.E_HoleBackImage.sprite = sp1;
             self.E_HoleNameText.gameObject.SetActive(false);
             self.ES_CommonItem.uiTransform.gameObject.SetActive(true);
-            BagInfo bagInfo = new BagInfo() { ItemID = gemId, ItemNum = 1 };
+            BagInfo bagInfo = BagInfo.Create();
+            bagInfo.ItemID = gemId;
+            bagInfo.ItemNum = 1;
             self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.XiangQianGem);
             self.ES_CommonItem.E_ItemQualityImage.gameObject.SetActive(false);
         }

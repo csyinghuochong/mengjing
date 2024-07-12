@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_SeasonStore : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<int> ShowItems = new();
-		public Dictionary<int, Scroll_Item_SeasonStoreItem> ScrollItemSeasonStoreItems;
+		public Dictionary<int, EntityRef<Scroll_Item_SeasonStoreItem>> ScrollItemSeasonStoreItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_SeasonStoreItemsLoopVerticalScrollRect
      	{

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
+	[EnableClass]
 	public class ShowPropertyList
 	{
 		public int NumericType;
@@ -15,8 +16,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_RoleProperty : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy ,IUILogic
 	{
-		public Dictionary<int, Scroll_Item_RolePropertyBaseItem> ScrollItemRolePropertyBaseItems;
-		public Dictionary<int, Scroll_Item_RolePropertyTeShuItem> ScrollItemRolePropertyTeShuItems;
+		public Dictionary<int, EntityRef<Scroll_Item_RolePropertyBaseItem>> ScrollItemRolePropertyBaseItems;
+		public Dictionary<int, EntityRef<Scroll_Item_RolePropertyTeShuItem>> ScrollItemRolePropertyTeShuItems;
 		public List<ShowPropertyList> ShowPropertyList_Base = new();
 		public List<ShowPropertyList> ShowPropertyList_TeShu = new();
 		public List<int> PointList = new();

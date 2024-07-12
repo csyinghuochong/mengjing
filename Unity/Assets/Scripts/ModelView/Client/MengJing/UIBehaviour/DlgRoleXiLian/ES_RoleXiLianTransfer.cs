@@ -12,7 +12,7 @@ namespace ET.Client
 		public ES_CommonItem[] UIItem_Transfer;
 		public Vector2 localPoint;
 		public bool IsHoldDown;
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
 
 		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
@@ -41,7 +41,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_commonitem_1==null)
+		        ES_CommonItem es = this.m_es_commonitem_1;
+     			if( es==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem_1");
 		    	   this.m_es_commonitem_1 = this.AddChild<ES_CommonItem,Transform>(subTrans);
@@ -59,7 +60,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_commonitem_2 ==null )
+		        ES_CommonItem es = this.m_es_commonitem_2;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem_2");
 		    	   this.m_es_commonitem_2 = this.AddChild<ES_CommonItem,Transform>(subTrans);
@@ -77,7 +79,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_commonitem_copy ==null)
+		        ES_CommonItem es = this.m_es_commonitem_copy;
+     			if( es ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem_Copy");
 		    	   this.m_es_commonitem_copy = this.AddChild<ES_CommonItem,Transform>(subTrans);
@@ -95,7 +98,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_costitem ==null  )
+		        ES_CostItem es = this.m_es_costitem;
+     			if( es ==null  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CostItem");
 		    	   this.m_es_costitem = this.AddChild<ES_CostItem,Transform>(subTrans);

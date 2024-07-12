@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_RoleXiLianSkillItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_RoleXiLianSkillItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_RoleXiLianSkillItem>
 	{
 		public EquipXiLianConfig EquipXiLianConfig;
 		public List<Scroll_Item_CommonSkillItem> uIItems = new();

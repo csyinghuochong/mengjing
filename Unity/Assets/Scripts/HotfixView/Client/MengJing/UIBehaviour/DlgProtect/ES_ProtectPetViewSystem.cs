@@ -38,7 +38,8 @@ namespace ET.Client
             self.OnInitPetList();
             if (self.ScrollItemPetListItems != null)
             {
-                self.ScrollItemPetListItems[0].OnClickPetItem();
+                Scroll_Item_PetListItem scrollItemPetListItem = self.ScrollItemPetListItems[0];
+                scrollItemPetListItem.OnClickPetItem();
             }
         }
 

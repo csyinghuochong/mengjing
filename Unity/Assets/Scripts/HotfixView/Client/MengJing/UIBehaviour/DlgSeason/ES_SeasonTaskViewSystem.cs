@@ -140,7 +140,9 @@ namespace ET.Client
                 // 玩家身上没有赛季任务则可以任务全部完成
                 if (self.TaskPro == null && self.CompeletTaskId > 0)
                 {
-                    self.TaskPro = new TaskPro() { taskID = self.CompeletTaskId };
+                    TaskPro taskPro = TaskPro.Create();
+                    taskPro.taskID = self.CompeletTaskId;
+                    self.TaskPro = taskPro;
                 }
 
                 int index = 0;
@@ -178,9 +180,10 @@ namespace ET.Client
                 // 赛季每日任务
                 // List<TaskPro> taskPros = self.Root().GetComponent<TaskComponentC>().TaskCountryList;
 
+                // 测试数据
                 List<TaskPro> taskPros = new();
-                taskPros.Add(new TaskPro() { taskID = 600101, taskStatus = (int)TaskStatuEnum.Accepted });
-                taskPros.Add(new TaskPro() { taskID = 600102, taskStatus = (int)TaskStatuEnum.Accepted });
+                // taskPros.Add(new TaskPro() { taskID = 600101, taskStatus = (int)TaskStatuEnum.Accepted });
+                // taskPros.Add(new TaskPro() { taskID = 600102, taskStatus = (int)TaskStatuEnum.Accepted });
 
                 taskPros.Sort(delegate(TaskPro a, TaskPro b)
                 {
@@ -220,7 +223,8 @@ namespace ET.Client
                 {
                     if (self.ScrollItemSeasonDayTaskItems.Count > 0)
                     {
-                        self.UpdateInfo(taskPro ?? self.ScrollItemSeasonDayTaskItems[0].TaskPro);
+                        Scroll_Item_SeasonDayTaskItem scrollItemSeasonDayTaskItem = self.ScrollItemSeasonDayTaskItems[0];
+                        self.UpdateInfo(taskPro ?? scrollItemSeasonDayTaskItem.TaskPro);
                     }
                 }
             }

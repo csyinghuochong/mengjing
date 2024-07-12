@@ -117,10 +117,11 @@ namespace ET.Client
 		{
 			for (int i = 0; i < self.ScrollItemCommonItems.Keys.Count - 1; i++)
 			{
+				Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[i];
 				// 滚动组件的子物体是动态从对象池里拿的，只引用看的到的
-				if (self.ScrollItemCommonItems[i].uiTransform != null)
+				if (scrollItemCommonItem.uiTransform != null)
 				{
-					if (self.ScrollItemCommonItems[i].ES_CommonItem.Baginfo == null)
+					if (scrollItemCommonItem.ES_CommonItem.Baginfo == null)
 					{
 						continue;
 					}
@@ -129,14 +130,14 @@ namespace ET.Client
 					for (int h = 0; h < self.HuiShouInfos.Length; h++)
 					{
 						if (self.HuiShouInfos[h] != null &&
-						    self.HuiShouInfos[h].BagInfoID == self.ScrollItemCommonItems[i].ES_CommonItem.Baginfo.BagInfoID)
+						    self.HuiShouInfos[h].BagInfoID == scrollItemCommonItem.ES_CommonItem.Baginfo.BagInfoID)
 						{
 							have = true;
 							break;
 						}
 					}
 
-					self.ScrollItemCommonItems[i].ES_CommonItem.E_XuanZhongImage.gameObject.SetActive(have);
+					scrollItemCommonItem.ES_CommonItem.E_XuanZhongImage.gameObject.SetActive(have);
 				}
 			}
 		}
@@ -268,7 +269,10 @@ namespace ET.Client
 						}
 						else
 						{
-							huishouGet.Add(itemId, new BagInfo() { ItemID = itemId, ItemNum = itemNum });
+							BagInfo bagInfoNew = BagInfo.Create();
+							bagInfoNew.ItemID = itemId;
+							bagInfoNew.ItemNum = itemNum;
+							huishouGet.Add(itemId, bagInfoNew);
 						}
 					}
 				}

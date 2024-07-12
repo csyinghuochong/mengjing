@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_CommonItem))]
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [EntitySystemOf(typeof (ES_RoleBag))]
-    [FriendOfAttribute(typeof (ES_RoleBag))]
+    [FriendOf(typeof(ES_CommonItem))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [EntitySystemOf(typeof(ES_RoleBag))]
+    [FriendOfAttribute(typeof(ES_RoleBag))]
     public static partial class ES_RoleBagSystem
     {
         [EntitySystem]
@@ -39,7 +39,7 @@ namespace ET.Client
             if (index < openell)
             {
                 scrollItemCommonItem.ES_CommonItem.UpdateUnLock(true);
-                scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.Bag,
+                scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count ? self.ShowBagInfos[index] : null, ItemOperateEnum.Bag,
                     self.UpdateSelect);
             }
             else
@@ -48,7 +48,11 @@ namespace ET.Client
                 BuyCellCost buyCellCost = ConfigData.BuyBagCellCosts[addcell];
                 int itemid = int.Parse(buyCellCost.Get.Split(';')[0]);
                 int itemnum = int.Parse(buyCellCost.Get.Split(';')[1]);
-                scrollItemCommonItem.Refresh(new BagInfo() { ItemID = itemid, BagInfoID = index, ItemNum = itemnum }, ItemOperateEnum.None);
+                BagInfo bagInfoNew = BagInfo.Create();
+                bagInfoNew.ItemID = itemid;
+                bagInfoNew.BagInfoID = index;
+                bagInfoNew.ItemNum = itemnum;
+                scrollItemCommonItem.Refresh(bagInfoNew, ItemOperateEnum.None);
                 scrollItemCommonItem.ES_CommonItem.E_LockButton.AddListener(self.OnClickImage_Lock);
                 scrollItemCommonItem.ES_CommonItem.UpdateUnLock(false);
             }
@@ -186,10 +190,10 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemCommonItems.Keys.Count - 1; i++)
             {
-                // 滚动组件的子物体是动态从对象池里拿的，只引用看的到的
-                if (self.ScrollItemCommonItems[i].uiTransform != null)
+                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[i];
+                if (scrollItemCommonItem.uiTransform != null)
                 {
-                    self.ScrollItemCommonItems[i].UpdateSelectStatus(bagInfo);
+                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
                 }
             }
         }

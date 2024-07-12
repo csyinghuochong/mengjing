@@ -11,7 +11,7 @@ namespace ET.Client
 		public BagInfo CostItemInfo;
 		public RolePetInfo RolePetInfo;
 
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
 		
 		public ES_PetInfoShow ES_PetInfoShow
@@ -23,7 +23,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_petinfoshow ==null )
+		        ES_PetInfoShow es = this.m_es_petinfoshow;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"E_UIPetInfo1/ES_PetInfoShow");
 		    	   this.m_es_petinfoshow = this.AddChild<ES_PetInfoShow,Transform>(subTrans);

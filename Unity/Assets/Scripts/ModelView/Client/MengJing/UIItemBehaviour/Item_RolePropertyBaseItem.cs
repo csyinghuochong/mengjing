@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_RolePropertyBaseItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_RolePropertyBaseItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_RolePropertyBaseItem>
 	{
 		public long DataId {get;set;}
 		private bool isCacheNode = false;

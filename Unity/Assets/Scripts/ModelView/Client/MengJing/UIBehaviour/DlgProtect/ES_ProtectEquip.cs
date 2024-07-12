@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_ProtectEquip : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public BagInfo XilianBagInfo;
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
@@ -72,7 +72,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_commonitem ==null)
+		        ES_CommonItem es = this.m_es_commonitem;
+     			if( es ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_CommonItem");
 		    	   this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);

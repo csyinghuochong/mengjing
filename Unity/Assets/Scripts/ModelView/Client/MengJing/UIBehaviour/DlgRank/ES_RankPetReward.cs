@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_RankPetReward : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<RankRewardConfig> ShowRankRewardConfigs;
-		public Dictionary<int, Scroll_Item_RankRewardItem> ScrollItemRankRewardItems;
+		public Dictionary<int, EntityRef<Scroll_Item_RankRewardItem>> ScrollItemRankRewardItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_RankRewardItemsLoopVerticalScrollRect
      	{

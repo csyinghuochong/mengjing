@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_CommonItem))]
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [EntitySystemOf(typeof (ES_RoleGem))]
-    [FriendOfAttribute(typeof (ES_RoleGem))]
+    [FriendOf(typeof(ES_CommonItem))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [EntitySystemOf(typeof(ES_RoleGem))]
+    [FriendOfAttribute(typeof(ES_RoleGem))]
     public static partial class ES_RoleGemSystem
     {
         [EntitySystem]
@@ -52,7 +52,7 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this ES_RoleGem self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.XiangQianBag,
+            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count ? self.ShowBagInfos[index] : null, ItemOperateEnum.XiangQianBag,
                 self.UpdateSelect);
         }
 
@@ -95,10 +95,10 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemCommonItems.Keys.Count - 1; i++)
             {
-                // 滚动组件的子物体是动态从对象池里拿的，只引用看的到的
-                if (self.ScrollItemCommonItems[i].uiTransform != null)
+                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[i];
+                if (scrollItemCommonItem.uiTransform != null)
                 {
-                    self.ScrollItemCommonItems[i].UpdateSelectStatus(bagInfo);
+                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
                 }
             }
         }
@@ -124,15 +124,15 @@ namespace ET.Client
             self.ES_CommonItem.UpdateItem(info, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
 
-            info.GemHole = string.IsNullOrEmpty(info.GemHole)? "" : info.GemHole;
-            info.GemIDNew = string.IsNullOrEmpty(info.GemIDNew)? "" : info.GemIDNew;
+            info.GemHole = string.IsNullOrEmpty(info.GemHole) ? "" : info.GemHole;
+            info.GemIDNew = string.IsNullOrEmpty(info.GemIDNew) ? "" : info.GemIDNew;
             string[] gemHoles = info.GemHole.Split('_');
             string[] gemIds = info.GemIDNew.Split('_');
 
             for (int i = 0; i < 4; i++)
             {
-                int gemHoleId = (gemHoles.Length > i && gemHoles[i] != "")? int.Parse(gemHoles[i]) : 0;
-                int gemId = (gemIds.Length > i && gemIds[i] != "")? int.Parse(gemIds[i]) : 0;
+                int gemHoleId = (gemHoles.Length > i && gemHoles[i] != "") ? int.Parse(gemHoles[i]) : 0;
+                int gemId = (gemIds.Length > i && gemIds[i] != "") ? int.Parse(gemIds[i]) : 0;
 
                 self.GemHoleList[i].OnUpdateUI(gemHoleId, gemId, i);
                 self.GemHoleList[i].SetClickHandler(self.OnSetHoleIndex);

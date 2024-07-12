@@ -95,9 +95,10 @@ namespace ET.Client
                     }
                     else if (self.ShowBagInfos.Count > 0)
                     {
-                        if (self.ScrollItemCommonItems[0].uiTransform != null)
+                        Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[0];
+                        if (scrollItemCommonItem.uiTransform != null)
                         {
-                            self.ScrollItemCommonItems[0].ES_CommonItem.OnClickUIItem();
+                            scrollItemCommonItem.ES_CommonItem.OnClickUIItem();
                         }
                     }
 
@@ -177,7 +178,9 @@ namespace ET.Client
             }
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            BagInfo bagInfoNeed = new BagInfo() { ItemID = itemCost[0], ItemNum = itemCost[1] };
+            BagInfo bagInfoNeed = BagInfo.Create();
+            bagInfoNeed.ItemID = itemCost[0];
+            bagInfoNeed.ItemNum = itemCost[1];
             self.ES_CommonItem_Cost.UpdateItem(bagInfoNeed, ItemOperateEnum.None);
             self.ES_CommonItem_Cost.E_ItemNumText.gameObject.SetActive(false);
 

@@ -10,7 +10,7 @@ namespace ET.Client
 	{
 		
 		public long PetInfoId;
-		public Dictionary<int, Scroll_Item_PetListItem> ScrollItemPetListItems;
+		public Dictionary<int, EntityRef<Scroll_Item_PetListItem>> ScrollItemPetListItems;
 		public List<RolePetInfo> ShowRolePetInfos = new();
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_PetListItemsLoopVerticalScrollRect

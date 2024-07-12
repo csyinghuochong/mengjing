@@ -12,9 +12,9 @@ namespace ET.Client
 		public BagInfo BagInfo;
 		public int JingHeId;
 		public List<SeasonJingHeConfig> ShowSeasonJingHeConfigs;
-		public Dictionary<int, Scroll_Item_SeasonJingHeItem> ScrollItemSeasonJingHeItems;
+		public Dictionary<int, EntityRef<Scroll_Item_SeasonJingHeItem>> ScrollItemSeasonJingHeItems;
 		public List<BagInfo> ShowBagInfos = new();
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		
 		public UnityEngine.UI.Button E_Btn_TianFu_1Button
      	{
@@ -144,7 +144,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_costitem == null )
+		        ES_CostItem es = this.m_es_costitem;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CostItem");
 		    	   this.m_es_costitem = this.AddChild<ES_CostItem,Transform>(subTrans);

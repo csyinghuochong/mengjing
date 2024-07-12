@@ -11,7 +11,7 @@ namespace ET.Client
 		public BagInfo XilianBagInfo;
 		public ETCancellationToken ETCancellationToken;
 		public List<int> InheritSkills = new();
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
@@ -74,7 +74,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_commonitem ==null )
+		        ES_CommonItem es = this.m_es_commonitem;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_CommonItem");
 		    	   this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);
@@ -92,7 +93,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_commonitem_cost ==null)
+		        ES_CommonItem es = this.m_es_commonitem_cost;
+     			if( es ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_CommonItem_Cost");
 		    	   this.m_es_commonitem_cost = this.AddChild<ES_CommonItem,Transform>(subTrans);

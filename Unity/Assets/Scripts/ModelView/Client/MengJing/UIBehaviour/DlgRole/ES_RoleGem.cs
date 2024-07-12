@@ -8,7 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_RoleGem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
 		public int CurrentItemType;
 		public List<ES_RoleGemHole> GemHoleList = new();
@@ -24,7 +24,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolegemhole_0 == null )
+
+		        ES_RoleGemHole es = this.m_es_rolegemhole_0;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_RoleGemHole_0");
 		    	   this.m_es_rolegemhole_0 = this.AddChild<ES_RoleGemHole,Transform>(subTrans);
@@ -42,7 +44,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolegemhole_1 == null )
+		        ES_RoleGemHole es = this.m_es_rolegemhole_1;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_RoleGemHole_1");
 		    	   this.m_es_rolegemhole_1 = this.AddChild<ES_RoleGemHole,Transform>(subTrans);
@@ -60,7 +63,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolegemhole_2 == null )
+		        ES_RoleGemHole es = this.m_es_rolegemhole_2;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_RoleGemHole_2");
 		    	   this.m_es_rolegemhole_2 = this.AddChild<ES_RoleGemHole,Transform>(subTrans);
@@ -78,7 +82,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rolegemhole_3 == null )
+		        ES_RoleGemHole es = this.m_es_rolegemhole_3;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_RoleGemHole_3");
 		    	   this.m_es_rolegemhole_3 = this.AddChild<ES_RoleGemHole,Transform>(subTrans);
@@ -96,7 +101,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_commonitem == null )
+		        ES_CommonItem es = this.m_es_commonitem;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Gem/ES_CommonItem");
 		    	   this.m_es_commonitem = this.AddChild<ES_CommonItem,Transform>(subTrans);

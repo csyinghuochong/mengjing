@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_RankShowItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_RankShowItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_RankShowItem>
 	{
 		public RankingInfo RankingInfo;
 		

@@ -90,9 +90,10 @@ namespace ET.Client
             }
             else if (self.ShowBagInfos.Count > 0)
             {
-                if (self.ScrollItemCommonItems != null && self.ScrollItemCommonItems.Count > 0 && self.ScrollItemCommonItems[0].uiTransform != null)
+                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[0];
+                if (self.ScrollItemCommonItems != null && self.ScrollItemCommonItems.Count > 0 && scrollItemCommonItem.uiTransform != null)
                 {
-                    self.ScrollItemCommonItems[0].ES_CommonItem.OnClickUIItem();
+                    scrollItemCommonItem.ES_CommonItem.OnClickUIItem();
                 }
             }
         }

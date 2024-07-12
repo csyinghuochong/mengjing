@@ -12,9 +12,9 @@ namespace ET.Client
 		public int TaskType;
 		public int CompeletTaskId;
 		public List<int> ShowTaskIds = new();
-		public Dictionary<int, Scroll_Item_SeasonTaskItem> ScrollItemSeasonTaskItems;
+		public Dictionary<int, EntityRef<Scroll_Item_SeasonTaskItem>> ScrollItemSeasonTaskItems;
 		public List<TaskPro> ShowTaskPros = new();
-		public Dictionary<int, Scroll_Item_SeasonDayTaskItem> ScrollItemSeasonDayTaskItems;
+		public Dictionary<int, EntityRef<Scroll_Item_SeasonDayTaskItem>> ScrollItemSeasonDayTaskItems;
 
 		public UnityEngine.UI.ToggleGroup E_ItemTypeSetToggleGroup
      	{
@@ -127,7 +127,8 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_rewardlist == null )
+		        ES_RewardList es = this.m_es_rewardlist;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_RewardList");
 		    	   this.m_es_rewardlist = this.AddChild<ES_RewardList,Transform>(subTrans);

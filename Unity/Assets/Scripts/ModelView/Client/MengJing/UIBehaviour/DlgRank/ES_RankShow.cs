@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_RankShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<RankingInfo> ShowRankingInfos = new();
-		public Dictionary<int, Scroll_Item_RankShowItem> ScrollItemRankShowItems;
+		public Dictionary<int, EntityRef<Scroll_Item_RankShowItem>> ScrollItemRankShowItems;
 		public int CurrentItemType;
 
 		public UnityEngine.RectTransform EG_UISetRectTransform

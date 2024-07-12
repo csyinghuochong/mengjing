@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_PetShouHuItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_PetShouHuItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetShouHuItem>
 	{
 		public RolePetInfo RolePetInfo;
 		public Action<long> ButtonShouHuHandler;

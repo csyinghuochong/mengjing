@@ -8,7 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_RoleXiLianSkill : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
-		public Dictionary<int, Scroll_Item_RoleXiLianSkillItem> ScrollItemRoleXiLianSkillItems;
+		public Dictionary<int, EntityRef<Scroll_Item_RoleXiLianSkillItem>> ScrollItemRoleXiLianSkillItems;
 		public List<EquipXiLianConfig> ShouJiConfigs;
 		public int XilianLevel;
 		
