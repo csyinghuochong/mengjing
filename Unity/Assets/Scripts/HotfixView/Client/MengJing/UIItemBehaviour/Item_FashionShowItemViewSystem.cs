@@ -128,7 +128,10 @@ namespace ET.Client
                 string[] costitem = fashionConfig.ActiveCost.Split(';');
                 self.E_Text_222Text.text = $"需要:{int.Parse(costitem[1])}个";
                 int havenumber = (int)bagComponent.GetItemNumber(int.Parse(costitem[0]));
-                self.ES_CommonItem.UpdateItem(new BagInfo() { ItemID = int.Parse(costitem[0]), ItemNum = havenumber }, ItemOperateEnum.None);
+                BagInfo bagInfo = BagInfo.Create();
+                bagInfo.ItemID = int.Parse(costitem[0]);
+                bagInfo.ItemNum = havenumber;
+                self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
                 self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
                 self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
             }

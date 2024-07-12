@@ -8,7 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_FriendBlack : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
-		public Dictionary<int, Scroll_Item_FriendBlackItem> ScrollItemFriendBlackItems;
+		public Dictionary<int, EntityRef<Scroll_Item_FriendBlackItem>> ScrollItemFriendBlackItems;
 		public List<FriendInfo> ShowFriendInfos = new();
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_FriendBlackItemsLoopVerticalScrollRect

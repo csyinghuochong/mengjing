@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_JiaYuanPurchaseItem))]
-    [EntitySystemOf(typeof (Scroll_Item_JiaYuanPurchaseItem))]
+    [FriendOf(typeof(Scroll_Item_JiaYuanPurchaseItem))]
+    [EntitySystemOf(typeof(Scroll_Item_JiaYuanPurchaseItem))]
     public static partial class Scroll_Item_JiaYuanPurchaseItemSystem
     {
         [EntitySystem]
@@ -61,13 +61,16 @@ namespace ET.Client
         public static void OnUpdateUI(this Scroll_Item_JiaYuanPurchaseItem self, JiaYuanPurchaseItem jiaYuanPurchaseItem, Action action)
         {
             self.E_Button_SellButton.AddListenerAsync(self.OnButton_Sell);
-            
+
             self.Action_Buy = action;
             self.JiaYuanPurchaseItem = jiaYuanPurchaseItem;
             int itemid = jiaYuanPurchaseItem.ItemID;
             int makeid = EquipMakeConfigCategory.Instance.GetMakeId(itemid);
             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(makeid);
-            self.ES_CommonItem.UpdateItem(new BagInfo() { ItemID = itemid, ItemNum = jiaYuanPurchaseItem.LeftNum }, ItemOperateEnum.None);
+            BagInfo bagInfo = BagInfo.Create();
+            bagInfo.ItemID = itemid;
+            bagInfo.ItemNum = jiaYuanPurchaseItem.LeftNum;
+            self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.ES_RewardList.Refresh(equipMakeConfig.NeedItems);
 
             self.E_Text_PriceText.text = "资金:" + jiaYuanPurchaseItem.BuyZiJin.ToString();

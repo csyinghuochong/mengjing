@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_JiaYuanCookbookItem))]
-    [EntitySystemOf(typeof (Scroll_Item_JiaYuanCookbookItem))]
+    [FriendOf(typeof(Scroll_Item_JiaYuanCookbookItem))]
+    [EntitySystemOf(typeof(Scroll_Item_JiaYuanCookbookItem))]
     public static partial class Scroll_Item_JiaYuanCookbookItemSystem
     {
         [EntitySystem]
@@ -86,7 +86,10 @@ namespace ET.Client
 
                 go.SetActive(true);
 
-                BagInfo bagInfo = active? new BagInfo() { ItemID = needitmeid, ItemNum = 1 } : null;
+                BagInfo bagInfoNew = BagInfo.Create();
+                bagInfoNew.ItemID = needitmeid;
+                bagInfoNew.ItemNum = 1;
+                BagInfo bagInfo = active ? bagInfoNew : null;
                 uIItemComponent.UpdateItem(bagInfo, ItemOperateEnum.None);
                 uIItemComponent.E_ItemQualityImage.gameObject.SetActive(true);
                 if (active)

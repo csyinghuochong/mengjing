@@ -41,10 +41,13 @@ namespace ET.Client
 
             self.E_ItemButtonButton.AddListener(() =>
             {
+                BagInfo bagInfo = BagInfo.Create();
+                bagInfo.ItemID = itemId;
+                bagInfo.ItemNum = itemNum;
                 EventSystem.Instance.Publish(self.Root(),
                     new ShowItemTips()
                     {
-                        BagInfo = new BagInfo() { ItemID = itemId, ItemNum = itemNum },
+                        BagInfo = bagInfo,
                         ItemOperateEnum = ItemOperateEnum.None,
                         InputPoint = Input.mousePosition,
                         Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
