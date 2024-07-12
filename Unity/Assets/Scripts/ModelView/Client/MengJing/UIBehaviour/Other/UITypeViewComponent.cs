@@ -11,6 +11,7 @@ namespace ET
         public string ItemName;
     }
 
+    [EnableClass]
     public class TypeButtonInfo
     {
         public int TypeId;

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_JiaYuanPastureItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_JiaYuanPastureItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_JiaYuanPastureItem>
 	{
 		public MysteryItemInfo MysteryItemInfo;
 		
@@ -30,9 +30,10 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+		        ES_ModelShow es = this.m_es_modelshow;
      			if (this.isCacheNode)
      			{
-     				if( this.m_es_modelshow == null )
+     				if( es == null )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ModelShow");
 		    			this.m_es_modelshow = this.AddChild<ES_ModelShow,Transform>(subTrans);
@@ -41,10 +42,10 @@ namespace ET.Client
      			}
      			else
      			{
-     				if( this.m_es_modelshow != null )
+     				if( es != null )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_ModelShow");
-		    			ES_ModelShow es = this.m_es_modelshow;
+		    			es = this.m_es_modelshow;
      					if( es.UITransform != subTrans )
      					{
      						es.Dispose();

@@ -33,7 +33,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_zhanqulevel == null )
+
+		        ES_ZhanQuLevel es = this.m_es_zhanqulevel;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ZhanQuLevel");
 		    	   this.m_es_zhanqulevel = this.AddChild<ES_ZhanQuLevel,Transform>(subTrans);
@@ -51,7 +53,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_zhanqucombat == null )
+
+		        ES_ZhanQuCombat es = this.m_es_zhanqucombat;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_ZhanQuCombat");
 		    	   this.m_es_zhanqucombat = this.AddChild<ES_ZhanQuCombat,Transform>(subTrans);
@@ -69,7 +73,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_firstwin == null )
+
+		        ES_FirstWin es = this.m_es_firstwin;
+     			if( es == null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_FirstWin");
 		    	   this.m_es_firstwin = this.AddChild<ES_FirstWin,Transform>(subTrans);

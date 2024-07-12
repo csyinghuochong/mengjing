@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_ActivityTokenItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_ActivityTokenItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_ActivityTokenItem>
 	{
 		public ActivityConfig ActivityConfig;
 		
@@ -30,9 +30,10 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+		        ES_CommonItem es = this.m_es_commonitem_1;
      			if (this.isCacheNode)
      			{
-     				if( this.m_es_commonitem_1 == null )
+     				if( es == null )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem_1");
 		    			this.m_es_commonitem_1 = this.AddChild<ES_CommonItem,Transform>(subTrans);
@@ -41,10 +42,10 @@ namespace ET.Client
      			}
      			else
      			{
-     				if( this.m_es_commonitem_1 != null )
+     				if( es != null )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem_1");
-		    			ES_CommonItem es = this.m_es_commonitem_1;
+		    			es = this.m_es_commonitem_1;
      					if( es.UITransform != subTrans )
      					{
      						es.Dispose();
@@ -71,9 +72,10 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+		        ES_CommonItem es = this.m_es_commonitem_2;
      			if (this.isCacheNode)
      			{
-     				if( this.m_es_commonitem_2 == null )
+     				if( es == null )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem_2");
 		    			this.m_es_commonitem_2 = this.AddChild<ES_CommonItem,Transform>(subTrans);
@@ -82,10 +84,10 @@ namespace ET.Client
      			}
      			else
      			{
-     				if( this.m_es_commonitem_2 != null )
+     				if( es != null )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem_2");
-		    			ES_CommonItem es = this.m_es_commonitem_2;
+		    			es = this.m_es_commonitem_2;
      					if( es.UITransform != subTrans )
      					{
      						es.Dispose();
@@ -112,9 +114,10 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
+		        ES_CommonItem es = this.m_es_commonitem_3;
      			if (this.isCacheNode)
      			{
-     				if( this.m_es_commonitem_3 == null )
+     				if( es == null )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem_3");
 		    			this.m_es_commonitem_3 = this.AddChild<ES_CommonItem,Transform>(subTrans);
@@ -123,10 +126,10 @@ namespace ET.Client
      			}
      			else
      			{
-     				if( this.m_es_commonitem_3 != null )
+     				if( es != null )
      				{
 		    			Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"ES_CommonItem_3");
-		    			ES_CommonItem es = this.m_es_commonitem_3;
+		    			es = this.m_es_commonitem_3;
      					if( es.UITransform != subTrans )
      					{
      						es.Dispose();

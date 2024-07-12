@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_JiaYuanPetWalkItem : Entity,IAwake,IDestroy,IUIScrollItem 
+	public  class Scroll_Item_JiaYuanPetWalkItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_JiaYuanPetWalkItem>
 	{
 		public GameObject[] ImageMood_List = new GameObject[5];
 		public RolePetInfo RolePetInfo;

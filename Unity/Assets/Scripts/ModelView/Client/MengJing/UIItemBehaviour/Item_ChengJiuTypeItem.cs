@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
 	[EnableMethod]
-	public  class Scroll_Item_ChengJiuTypeItem : Entity,IAwake,IDestroy,IUIScrollItem,IUILogic
+	public  class Scroll_Item_ChengJiuTypeItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_ChengJiuTypeItem>,IUILogic
 	{
 		public Action<int, int> ClickTaskSubTypeHandler;
 		public int ChengJiuTypeId;
