@@ -37,7 +37,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_roleqianghuaitem_1 ==null )
+
+		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_1;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_1");
 		    	   this.m_es_roleqianghuaitem_1 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
@@ -55,7 +57,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_roleqianghuaitem_2 ==null )
+
+		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_2;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_2");
 		    	   this.m_es_roleqianghuaitem_2 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
@@ -73,7 +77,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_roleqianghuaitem_3 ==null )
+
+		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_3;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_3");
 		    	   this.m_es_roleqianghuaitem_3 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
@@ -91,7 +97,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_roleqianghuaitem_4 ==null )
+
+		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_4;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_4");
 		    	   this.m_es_roleqianghuaitem_4 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
@@ -109,7 +117,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_roleqianghuaitem_5 ==null )
+
+		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_5;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_5");
 		    	   this.m_es_roleqianghuaitem_5 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
@@ -127,7 +137,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_roleqianghuaitem_6 ==null)
+
+		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_6;
+     			if( es ==null)
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_6");
 		    	   this.m_es_roleqianghuaitem_6 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
@@ -145,7 +157,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_roleqianghuaitem_7 ==null )
+
+		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_7;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_7");
 		    	   this.m_es_roleqianghuaitem_7 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
@@ -163,7 +177,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_roleqianghuaitem_8 ==null )
+
+		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_8;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_8");
 		    	   this.m_es_roleqianghuaitem_8 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
@@ -181,7 +197,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_roleqianghuaitem_9 ==null )
+
+		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_9;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_9");
 		    	   this.m_es_roleqianghuaitem_9 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
@@ -199,7 +217,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_roleqianghuaitem_10==null )
+
+		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_10;
+     			if( es==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_10");
 		    	   this.m_es_roleqianghuaitem_10 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
@@ -217,7 +237,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_roleqianghuaitem_11 ==null  )
+
+		        ES_RoleQiangHuaItem es = this.m_es_roleqianghuaitem_11;
+     			if( es ==null  )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EquipSet/ES_RoleQiangHuaItem_11");
 		    	   this.m_es_roleqianghuaitem_11 = this.AddChild<ES_RoleQiangHuaItem,Transform>(subTrans);
@@ -252,7 +274,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_equipsetitem ==null )
+
+		        ES_EquipSetItem es = this.m_es_equipsetitem;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/ES_EquipSetItem");
 		    	   this.m_es_equipsetitem = this.AddChild<ES_EquipSetItem,Transform>(subTrans);
@@ -406,7 +430,9 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_es_costlist ==null )
+
+		        ES_CostList es = this.m_es_costlist;
+     			if( es ==null )
      			{
 		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Right/EG_NextNode/ES_CostList");
 		    	   this.m_es_costlist = this.AddChild<ES_CostList,Transform>(subTrans);
