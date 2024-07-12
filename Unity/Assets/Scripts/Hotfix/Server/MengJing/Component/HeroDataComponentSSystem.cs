@@ -771,72 +771,9 @@ namespace ET.Server
          public static void OnDead(this HeroDataComponentS self, Unit attack)
          {
              Unit unit = self.GetParent<Unit>();
-             unit.GetComponent<MoveComponent>()?.Stop(false);
-             //{
-             //    unit.Stop(-1);
-             //}
-
-             unit.GetComponent<AIComponent>()?.Stop();
-             unit.GetComponent<SkillPassiveComponent>()?.Stop();
-             unit.GetComponent<SkillManagerComponentS>()?.OnFinish(false);
-             unit.GetComponent<BuffManagerComponentS>()?.OnDead(attack);
-             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-             if (unit.Type == UnitType.Player)
-             {
-                 RolePetInfo rolePetInfo = unit.GetComponent<PetComponentS>().GetFightPet();
-                 if (rolePetInfo != null)
-                 {
-                     unit.GetParent<UnitComponent>().Remove(rolePetInfo.Id);
-                     unit.GetComponent<PetComponentS>().OnPetDead(rolePetInfo.Id);
-                 }
-
-                 int now_horse = numericComponent.GetAsInt(NumericType.HorseRide);
-                 if (now_horse > 0)
-                 {
-                     numericComponent.ApplyValue(NumericType.HorseRide, 0, false);
-                 }
-             }
-             //玩家死亡，怪物技能清空
-             if (unit.Type == UnitType.Player && attack != null && attack.Type == UnitType.Monster)
-             {
-                 Unit nearest = GetTargetHelp.GetNearestEnemy(attack, attack.GetComponent<AIComponent>().GetActRange());
-                 if (nearest == null)
-                 {
-                     attack.GetComponent<AIComponent>().ChangeTarget(0);
-                     attack.GetComponent<SkillManagerComponentS>().OnFinish(true);
-                 }
-                 
-                 List<Unit> units = FubenHelp.GetUnitList(unit.Scene(), UnitType.Monster);
-                 for (int i = 0; i < units.Count; i++)
-                 {
-                     units[i].GetComponent<AttackRecordComponent>()?.OnRemoveAttackByUnit(unit.Id);
-                 }
-             }
-             if (unit.Type == UnitType.Pet)
-             {
-                 int sceneTypeEnum = unit.Scene().GetComponent<MapComponent>().SceneType;
-                 if (sceneTypeEnum != (int)SceneTypeEnum.PetTianTi
-                  && sceneTypeEnum != (int)SceneTypeEnum.PetDungeon
-                  && sceneTypeEnum != (int)SceneTypeEnum.PetMing)
-                 {
-                     long manster = numericComponent.GetAsLong(NumericType.MasterId);
-                     Unit unit_manster = unit.GetParent<UnitComponent>().Get(manster);
-                     //修改宠物出战状态
-                     unit_manster.GetComponent<PetComponentS>().OnPetDead(unit.Id);
-                 }
-             }
-             //怪物死亡， 清除玩家BUFF
-             if (unit.Type == UnitType.Monster && MonsterConfigCategory.Instance.Get(unit.ConfigId).RemoveBuff == 0)
-             {
-                 List<Unit> units = FubenHelp.GetUnitList(unit.Scene(), UnitType.Player);
-                 for (int i = 0; i < units.Count; i++)
-                 {
-                     units[i].GetComponent<BuffManagerComponentS>().OnDeadRemoveBuffBy(unit.Id);
-                 }
-             }
+            
              int waitRevive = self.OnWaitRevive();
-             numericComponent.Set(NumericType.Now_Dead, 1);
-             
+
              EventSystem.Instance.Publish( self.Root(), new UnitKillEvent()
              {
                  WaitRevive = waitRevive,
