@@ -37,7 +37,7 @@ namespace ET.Server
             return proList;
         }
 
-        public static void OnLogin(this ChengJiuComponentS self)
+        public static void OnLogin(this ChengJiuComponentS self, int lv)
         {
             NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
             if (self.Zone() <= 48 && numericComponent.GetAsLong(NumericType.RechargeNumber) < 400 && self.JingLingList.Contains(10003))
@@ -48,7 +48,7 @@ namespace ET.Server
                 self.JingLingUnitId = 0;
             }
 
-            self.TriggerEvent(ChengJiuTargetEnum.PlayerLevel_205, 0, self.GetParent<Unit>().GetComponent<UserInfoComponentS>().GetUserLv());
+            self.TriggerEvent(ChengJiuTargetEnum.PlayerLevel_205, 0, lv);
         }
 
         public static void OnZeroClockUpdate(this ChengJiuComponentS self)
@@ -322,7 +322,7 @@ namespace ET.Server
                         break;
                 }
 
-                if (acitiveId > 0 && !self.GetParent<UserInfoComponentS>().IsRobot())
+                if (acitiveId > 0 && !self.GetParent<Unit>().GetComponent<UserInfoComponentS>().IsRobot())
                 {
                     M2C_ChengJiuActiveMessage M2C_ChengJiuActiveMessage = M2C_ChengJiuActiveMessage.Create();
                     M2C_ChengJiuActiveMessage.ChengJiuId = acitiveId;

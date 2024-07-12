@@ -64,7 +64,7 @@ namespace ET.Server
             unit.GetComponent<PetComponentS>().OnLogin();
             unit.GetComponent<ActivityComponentS>().OnLogin(userInfo.Lv);
             unit.GetComponent<TitleComponentS>().OnCheckTitle(false);
-            unit.GetComponent<ChengJiuComponentS>().OnLogin();
+            unit.GetComponent<ChengJiuComponentS>().OnLogin(userInfo.Lv);
             unit.GetComponent<JiaYuanComponentS>().OnLogin();
             unit.GetComponent<SkillSetComponentS>().OnLogin(userInfo.Occ);
         }
