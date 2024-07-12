@@ -4,9 +4,11 @@
     {
         public static async ETTask<int> RequestJingLingUse(Scene root, int jingLingId, int operateType)
         {
-            C2M_JingLingUseRequest request = new() { JingLingId = jingLingId, OperateType = operateType };
-            M2C_JingLingUseResponse response =
-                    await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_JingLingUseResponse;
+            C2M_JingLingUseRequest request = C2M_JingLingUseRequest.Create();
+            request.JingLingId = jingLingId;
+            request.OperateType = operateType;
+
+            M2C_JingLingUseResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_JingLingUseResponse;
             if (response.Error != ErrorCode.ERR_Success)
             {
                 return response.Error;
@@ -19,14 +21,19 @@
 
         public static async ETTask<M2C_JingLingCatchResponse> JingLingCatchRequest(Scene root, long jingLingId, int itemId, string operateType)
         {
-            C2M_JingLingCatchRequest request = new() { JingLingId = jingLingId, ItemId = itemId, OperateType = operateType };
+            C2M_JingLingCatchRequest request = C2M_JingLingCatchRequest.Create();
+            request.JingLingId = jingLingId;
+            request.ItemId = itemId;
+            request.OperateType = operateType;
+
             M2C_JingLingCatchResponse response = (M2C_JingLingCatchResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
 
         public static async ETTask<M2C_FindJingLingResponse> FindJingLingRequest(Scene root)
         {
-            C2M_FindJingLingRequest request = new();
+            C2M_FindJingLingRequest request = C2M_FindJingLingRequest.Create();
+
             M2C_FindJingLingResponse response = (M2C_FindJingLingResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
