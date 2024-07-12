@@ -42,7 +42,7 @@ namespace ET.Server
         public static async ETTask CreateJiaYuanUnit(this JiaYuanSceneComponent self, Scene fubnescene, long masterid, long unitid)
         {
             JiaYuanComponentS jiaYuanComponent = await UnitCacheHelper.GetComponentCache<JiaYuanComponentS>(fubnescene.Root(), masterid);
-
+            jiaYuanComponent.OnBeforEnter();
             if (jiaYuanComponent.JiaYuanPastureList_7.Count > 100
                 || jiaYuanComponent.JianYuanPlantList_7.Count > 100
                 || jiaYuanComponent.JiaYuanMonster_2.Count > 100)
