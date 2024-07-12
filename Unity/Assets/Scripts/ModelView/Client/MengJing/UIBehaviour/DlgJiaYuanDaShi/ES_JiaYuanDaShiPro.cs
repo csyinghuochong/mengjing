@@ -9,9 +9,9 @@ namespace ET.Client
 	public  class ES_JiaYuanDaShiPro : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<BagInfo> ShowBagInfos = new();
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<string> ShowProlist = new();
-		public Dictionary<int, Scroll_Item_JiaYuanDaShiProItem> ScrollItemJiaYuanDaShiProItems;
+		public Dictionary<int, EntityRef<Scroll_Item_JiaYuanDaShiProItem>> ScrollItemJiaYuanDaShiProItems;
 		
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_JiaYuanDaShiProItemsLoopVerticalScrollRect

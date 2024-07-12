@@ -115,7 +115,9 @@ namespace ET.Client
 
             if (self.TaskPro == null && self.CompeletTaskId > 0)
             {
-                self.TaskPro = new TaskPro() { taskID = self.CompeletTaskId };
+                TaskPro taskPro = TaskPro.Create();
+                taskPro.taskID = self.CompeletTaskId;
+                self.TaskPro = taskPro;
             }
 
             int index = 0;
@@ -233,9 +235,10 @@ namespace ET.Client
 
             for (int i = 0; i < self.ScrollItemTaskGrowUpItems.Count; i++)
             {
-                if (self.ScrollItemTaskGrowUpItems[i].uiTransform != null)
+                Scroll_Item_TaskGrowUpItem scrollItemTaskGrowUpItem = self.ScrollItemTaskGrowUpItems[i];
+                if (scrollItemTaskGrowUpItem.uiTransform != null)
                 {
-                    self.ScrollItemTaskGrowUpItems[i].Selected(taskId);
+                    scrollItemTaskGrowUpItem.Selected(taskId);
                 }
             }
         }

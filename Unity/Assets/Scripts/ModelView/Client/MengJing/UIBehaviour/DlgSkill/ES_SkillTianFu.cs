@@ -10,7 +10,7 @@ namespace ET.Client
 	{
 		public int TianFuId;
 		public List<List<int>> ShowTianFu = new();
-		public Dictionary<int, Scroll_Item_SkillTianFuItem> ScrollItemSkillTianFuItems;
+		public Dictionary<int, EntityRef<Scroll_Item_SkillTianFuItem>> ScrollItemSkillTianFuItems;
         
 		public UnityEngine.UI.LoopVerticalScrollRect E_SkillTianFuItemsLoopVerticalScrollRect
      	{

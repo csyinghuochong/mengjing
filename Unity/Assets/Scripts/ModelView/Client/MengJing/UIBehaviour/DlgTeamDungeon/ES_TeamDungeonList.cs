@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_TeamDungeonList : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<TeamInfo> ShowTeamInfos = new();
-		public Dictionary<int, Scroll_Item_TeamDungeonItem> ScrollItemTeamDungeonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_TeamDungeonItem>> ScrollItemTeamDungeonItems;
 		
 		public UnityEngine.UI.Button E_Button_CreateButton
      	{

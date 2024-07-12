@@ -11,7 +11,7 @@ namespace ET.Client
 		public List<ES_Shield> ShieldUIList = new();
 		public List<ES_CommonItem> HuiShoulist = new ();
 		public List<BagInfo> ShowBagInfos = new();
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public bool IsDrag;
 		public long ClickTime;
 		public int ShieldType;

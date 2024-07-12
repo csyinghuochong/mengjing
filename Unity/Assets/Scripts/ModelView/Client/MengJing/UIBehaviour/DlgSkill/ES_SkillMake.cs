@@ -13,14 +13,14 @@ namespace ET.Client
 		public int Plan = -1;
 
 		public List<(int, int)> ShowMakeNeed = new();
-		public Dictionary<int, Scroll_Item_MakeNeedItem> ScrollItemMakeNeedItems;
+		public Dictionary<int, EntityRef<Scroll_Item_MakeNeedItem>> ScrollItemMakeNeedItems;
 		public List<int> ShowMake = new();
-		public Dictionary<int, Scroll_Item_MakeItem> ScrollItemMakeItems;
+		public Dictionary<int, EntityRef<Scroll_Item_MakeItem>> ScrollItemMakeItems;
 		
 		public BagInfo[] HuiShouInfos = new BagInfo[5];
 		public ES_CommonItem[] HuiShouUIList = new ES_CommonItem[5];
 		public List<BagInfo> ShowBagInfos = new();
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public bool IsHoldDown = false;
 		public int PlanMelt = 1;
 		

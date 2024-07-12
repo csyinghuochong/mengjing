@@ -12,9 +12,9 @@ namespace ET.Client
 		public GameObject SkillIconItemCopy;
 		public Vector2 localPoint;
 		public List<SkillPro> ShowSkillPros = new();
-		public Dictionary<int, Scroll_Item_SkillSetItem> ScrollItemSkillSetItems;
+		public Dictionary<int, EntityRef<Scroll_Item_SkillSetItem>> ScrollItemSkillSetItems;
 		public List<BagInfo> ShowBagInfos = new();
-		public Dictionary<int, Scroll_Item_CommonItem> ScrollItemCommonItems;
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		
 		public UnityEngine.RectTransform EG_SkillIPositionSetRectTransform
      	{

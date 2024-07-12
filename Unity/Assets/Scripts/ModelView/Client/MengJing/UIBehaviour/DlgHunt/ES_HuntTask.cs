@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_HuntTask : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<TaskPro> ShowTaskPro = new();
-		public Dictionary<int, Scroll_Item_HuntTaskItem> ScrollItemHuntTaskItems;
+		public Dictionary<int, EntityRef<Scroll_Item_HuntTaskItem>> ScrollItemHuntTaskItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_HuntTaskItemsLoopVerticalScrollRect
      	{

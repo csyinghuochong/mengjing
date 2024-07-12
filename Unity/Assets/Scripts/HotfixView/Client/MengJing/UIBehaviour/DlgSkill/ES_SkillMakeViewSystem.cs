@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.MakeCDTimer)]
-    public class SkillMakeTimer: ATimer<ES_SkillMake>
+    public class SkillMakeTimer : ATimer<ES_SkillMake>
     {
         protected override void Run(ES_SkillMake self)
         {
@@ -23,12 +23,12 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (ES_CommonItem))]
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [FriendOf(typeof (Scroll_Item_MakeNeedItem))]
-    [FriendOf(typeof (Scroll_Item_MakeItem))]
-    [EntitySystemOf(typeof (ES_SkillMake))]
-    [FriendOfAttribute(typeof (ES_SkillMake))]
+    [FriendOf(typeof(ES_CommonItem))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [FriendOf(typeof(Scroll_Item_MakeNeedItem))]
+    [FriendOf(typeof(Scroll_Item_MakeItem))]
+    [EntitySystemOf(typeof(ES_SkillMake))]
+    [FriendOfAttribute(typeof(ES_SkillMake))]
     public static partial class ES_SkillMakeSystem
     {
         [EntitySystem]
@@ -85,7 +85,7 @@ namespace ET.Client
             PopupTipHelp.OpenPopupTip(self.Root(), "学习技能", "可以在主城对应的各职业学习大师处学习当前等级最新的生活技能喔!", () =>
             {
                 Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-                int makeTypenumreic = self.Plan == 1? NumericType.MakeType_1 : NumericType.MakeType_2;
+                int makeTypenumreic = self.Plan == 1 ? NumericType.MakeType_1 : NumericType.MakeType_2;
                 int makeId = unit.GetComponent<NumericComponentC>().GetAsInt(makeTypenumreic);
                 int npcId = 0;
                 switch (makeId)
@@ -129,7 +129,7 @@ namespace ET.Client
                 return;
             }
 
-            await SkillNetHelper.MakeSelect(self.Root(), makeId, self.Plan == -1? 1 : self.Plan);
+            await SkillNetHelper.MakeSelect(self.Root(), makeId, self.Plan == -1 ? 1 : self.Plan);
 
             self.OnUpdateMakeType();
             self.UpdateShuLianDu();
@@ -138,7 +138,7 @@ namespace ET.Client
         public static void OnUpdateMakeType(this ES_SkillMake self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            int makeTypeNumeric = self.Plan == 1? NumericType.MakeType_1 : NumericType.MakeType_2;
+            int makeTypeNumeric = self.Plan == 1 ? NumericType.MakeType_1 : NumericType.MakeType_2;
             int makeType = unit.GetComponent<NumericComponentC>().GetAsInt(makeTypeNumeric);
             self.EG_RightRectTransform.gameObject.SetActive(makeType != 0);
             self.EG_LeftRectTransform.gameObject.SetActive(makeType != 0);
@@ -278,7 +278,7 @@ namespace ET.Client
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int maxValue = CommonHelp.MaxShuLianDu();
-            int shulianduNumeric = self.Plan == 1? NumericType.MakeShuLianDu_1 : NumericType.MakeShuLianDu_2;
+            int shulianduNumeric = self.Plan == 1 ? NumericType.MakeShuLianDu_1 : NumericType.MakeShuLianDu_2;
             int curValue = unit.GetComponent<NumericComponentC>().GetAsInt(shulianduNumeric);
 
             self.E_Lab_ShuLianDuText.text = $"{curValue}/{maxValue}";
@@ -289,7 +289,9 @@ namespace ET.Client
         {
             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(self.MakeId);
 
-            self.ES_CommonItem_0.UpdateItem(new BagInfo() { ItemID = equipMakeConfig.MakeItemID }, ItemOperateEnum.MakeItem);
+            BagInfo bagInfo = BagInfo.Create();
+            bagInfo.ItemID = equipMakeConfig.MakeItemID;
+            self.ES_CommonItem_0.UpdateItem(bagInfo, ItemOperateEnum.MakeItem);
             self.ES_CommonItem_0.E_ItemNumText.gameObject.SetActive(false);
 
             string needItems = equipMakeConfig.NeedItems;
@@ -399,12 +401,13 @@ namespace ET.Client
             //设置选中框
             for (int k = 0; k < self.ScrollItemMakeItems.Count; k++)
             {
-                if (self.ScrollItemMakeItems[k].uiTransform != null)
+                Scroll_Item_MakeItem scrollItemMakeItem = self.ScrollItemMakeItems[k];
+                if (scrollItemMakeItem.uiTransform != null)
                 {
-                    if (self.ScrollItemMakeItems[k].MakeID == makeid)
+                    if (scrollItemMakeItem.MakeID == makeid)
                     {
                         self.E_ImageSelectImage.gameObject.SetActive(true);
-                        CommonViewHelper.SetParent(self.E_ImageSelectImage.gameObject, self.ScrollItemMakeItems[k].uiTransform.gameObject);
+                        CommonViewHelper.SetParent(self.E_ImageSelectImage.gameObject, scrollItemMakeItem.uiTransform.gameObject);
                         self.E_ImageSelectImage.gameObject.transform.localPosition = new Vector3(0f, 12f, 0f);
                         break;
                     }
@@ -456,7 +459,8 @@ namespace ET.Client
             }
             else
             {
-                self.OnSelectMakeItem(number == 0? 0 : self.ScrollItemMakeItems[0].MakeID);
+                Scroll_Item_MakeItem scrollItemMakeItem = self.ScrollItemMakeItems[0];
+                self.OnSelectMakeItem(number == 0 ? 0 : scrollItemMakeItem.MakeID);
             }
         }
 
@@ -464,9 +468,11 @@ namespace ET.Client
         {
             self.PlanMelt = plan;
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            int makeType = unit.GetComponent<NumericComponentC>().GetAsInt(plan == 1? NumericType.MakeType_1 : NumericType.MakeType_2);
+            int makeType = unit.GetComponent<NumericComponentC>().GetAsInt(plan == 1 ? NumericType.MakeType_1 : NumericType.MakeType_2);
 
-            self.ES_CommonItem.UpdateItem(new BagInfo() { ItemID = XiLianHelper.ReturnMeltingItem(makeType) }, ItemOperateEnum.None);
+            BagInfo bagInfo = BagInfo.Create();
+            bagInfo.ItemID = XiLianHelper.ReturnMeltingItem(makeType);
+            self.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
         }
 
@@ -544,7 +550,7 @@ namespace ET.Client
             }
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            int makeId = unit.GetComponent<NumericComponentC>().GetAsInt(self.Plan == 1? NumericType.MakeType_1 : NumericType.MakeType_2);
+            int makeId = unit.GetComponent<NumericComponentC>().GetAsInt(self.Plan == 1 ? NumericType.MakeType_1 : NumericType.MakeType_2);
 
             await SkillNetHelper.ItemMelting(self.Root(), huishouList, makeId);
 
@@ -555,7 +561,9 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemCommonItems.Count; i++)
             {
-                if (self.ScrollItemCommonItems[i].uiTransform == null)
+                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[i];
+                
+                if (scrollItemCommonItem.uiTransform == null)
                 {
                     continue;
                 }

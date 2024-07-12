@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_HuntRanking : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<RankRewardConfig> ShowRankRewardConfigs;
-		public Dictionary<int, Scroll_Item_RunRaceItem> ScrollItemRunRaceItems;
+		public Dictionary<int, EntityRef<Scroll_Item_RunRaceItem>> ScrollItemRunRaceItems;
 		public long EndTime;
 		
 		public UnityEngine.UI.Text E_HuntingTimeTextText

@@ -117,7 +117,7 @@ namespace ET.Client
                 return;
             }
 
-            List<Unit> allUnit = main.GetParent<UnitComponent>().GetAll();
+            List<EntityRef<Unit>> allUnit = main.GetParent<UnitComponent>().GetAll();
 
             int teamNumber = 0;
             // int selfCamp_1 = main.GetBattleCamp();

@@ -70,9 +70,10 @@ namespace ET.Client
             // 默认选第一个
             if (self.ScrollItemTaskTypeItems.Values.Count > 0)
             {
-                if (self.ScrollItemTaskTypeItems.Values.ToList()[0].uiTransform != null)
+                Scroll_Item_TaskTypeItem scrollItemTaskTypeItem = self.ScrollItemTaskTypeItems.Values.ToList()[0];
+                if (scrollItemTaskTypeItem.uiTransform != null)
                 {
-                    ExecuteEvents.Execute(self.ScrollItemTaskTypeItems.Values.ToList()[0].E_ClickButton.gameObject,
+                    ExecuteEvents.Execute(scrollItemTaskTypeItem.E_ClickButton.gameObject,
                         new PointerEventData(UnityEngine.EventSystems.EventSystem.current), ExecuteEvents.pointerClickHandler);
                 }
             }
@@ -98,9 +99,10 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemTaskTypeItems.Keys.Count - 1; i++)
             {
-                if (self.ScrollItemTaskTypeItems[i].uiTransform != null)
+                Scroll_Item_TaskTypeItem scrollItemTaskTypeItem = self.ScrollItemTaskTypeItems[i];
+                if (scrollItemTaskTypeItem.uiTransform != null)
                 {
-                    self.ScrollItemTaskTypeItems[i].UpdateHighlight(taskId);
+                    scrollItemTaskTypeItem.UpdateHighlight(taskId);
                 }
             }
         }

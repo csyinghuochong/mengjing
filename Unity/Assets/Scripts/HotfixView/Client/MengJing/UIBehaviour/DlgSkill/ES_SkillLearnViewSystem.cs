@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_SkillLearnItem))]
-    [FriendOf(typeof (Scroll_Item_SkillLearnSkillItem))]
-    [EntitySystemOf(typeof (ES_SkillLearn))]
-    [FriendOfAttribute(typeof (ES_SkillLearn))]
+    [FriendOf(typeof(Scroll_Item_SkillLearnItem))]
+    [FriendOf(typeof(Scroll_Item_SkillLearnSkillItem))]
+    [EntitySystemOf(typeof(ES_SkillLearn))]
+    [FriendOfAttribute(typeof(ES_SkillLearn))]
     public static partial class ES_SkillLearnSystem
     {
         [EntitySystem]
@@ -128,7 +128,7 @@ namespace ET.Client
                     OccupationTwoConfig occTwoCof = OccupationTwoConfigCategory.Instance.Get(occTwo);
                     for (int i = 0; i < occTwoCof.ShowPassiveSkill.Length; i++)
                     {
-                        SkillPro pro = new SkillPro();
+                        SkillPro pro = SkillPro.Create();
                         pro.SkillID = occTwoCof.ShowPassiveSkill[i];
                         showSkillPros.Add(pro);
                     }
@@ -177,7 +177,8 @@ namespace ET.Client
 
                 if (self.ScrollItemSkillLearnItems.Count > 0)
                 {
-                    self.ScrollItemSkillLearnItems[0].OnImg_Button();
+                    Scroll_Item_SkillLearnItem scrollItemSkillLearnItem = self.ScrollItemSkillLearnItems[0];
+                    scrollItemSkillLearnItem.OnImg_Button();
                 }
             }
             else if (page == 2) // 强化
@@ -199,7 +200,7 @@ namespace ET.Client
                     OccupationTwoConfig occTwoCof = OccupationTwoConfigCategory.Instance.Get(occTwo);
                     for (int i = 0; i < occTwoCof.ShowPassiveSkill.Length; i++)
                     {
-                        SkillPro pro = new SkillPro();
+                        SkillPro pro = SkillPro.Create();
                         pro.SkillID = occTwoCof.ShowPassiveSkill[i];
                         showSkillPros.Add(pro);
                     }
@@ -248,7 +249,8 @@ namespace ET.Client
 
                 if (self.ScrollItemSkillLearnSkillItems.Count > 0)
                 {
-                    self.ScrollItemSkillLearnSkillItems[0].OnImg_Button();
+                    Scroll_Item_SkillLearnSkillItem scrollItemSkillLearnSkillItem = self.ScrollItemSkillLearnSkillItems[0];
+                    scrollItemSkillLearnSkillItem.OnImg_Button();
                 }
             }
 
@@ -265,15 +267,16 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemSkillLearnSkillItems.Count; i++)
             {
-                if (self.ScrollItemSkillLearnSkillItems[i].uiTransform != null)
+                Scroll_Item_SkillLearnSkillItem scrollItemSkillLearnSkillItem = self.ScrollItemSkillLearnSkillItems[i];
+                if (scrollItemSkillLearnSkillItem.uiTransform != null)
                 {
-                    if (self.ScrollItemSkillLearnSkillItems[i].SkillPro == skillPro)
+                    if (scrollItemSkillLearnSkillItem.SkillPro == skillPro)
                     {
-                        self.ScrollItemSkillLearnSkillItems[i].E_BorderImgImage.gameObject.SetActive(true);
+                        scrollItemSkillLearnSkillItem.E_BorderImgImage.gameObject.SetActive(true);
                     }
                     else
                     {
-                        self.ScrollItemSkillLearnSkillItems[i].E_BorderImgImage.gameObject.SetActive(false);
+                        scrollItemSkillLearnSkillItem.E_BorderImgImage.gameObject.SetActive(false);
                     }
                 }
             }
@@ -338,9 +341,10 @@ namespace ET.Client
 
             for (int i = 0; i < self.ScrollItemSkillLearnItems.Count; i++)
             {
-                if (self.ScrollItemSkillLearnItems[i].uiTransform != null)
+                Scroll_Item_SkillLearnItem scrollItemSkillLearnItem = self.ScrollItemSkillLearnItems[i];
+                if (scrollItemSkillLearnItem.uiTransform != null)
                 {
-                    self.ScrollItemSkillLearnItems[i].OnSetSelected(skillPro.SkillID);
+                    scrollItemSkillLearnItem.OnSetSelected(skillPro.SkillID);
                 }
             }
         }
@@ -361,12 +365,13 @@ namespace ET.Client
             {
                 for (int i = 0; i < self.ScrollItemSkillLearnItems.Count; i++)
                 {
-                    if (self.ScrollItemSkillLearnItems[i].uiTransform == null)
+                    Scroll_Item_SkillLearnItem uISkillSetItemComponent = self.ScrollItemSkillLearnItems[i];
+
+                    if (uISkillSetItemComponent.uiTransform == null)
                     {
                         continue;
                     }
 
-                    Scroll_Item_SkillLearnItem uISkillSetItemComponent = self.ScrollItemSkillLearnItems[i];
                     SkillPro sp = uISkillSetItemComponent.SkillPro;
                     if (sp.SkillID == newSkill)
                     {
@@ -381,12 +386,13 @@ namespace ET.Client
             {
                 for (int i = 0; i < self.ScrollItemSkillLearnSkillItems.Count; i++)
                 {
-                    if (self.ScrollItemSkillLearnSkillItems[i].uiTransform == null)
+                    Scroll_Item_SkillLearnSkillItem uiSkillLearnSkillItemComponent = self.ScrollItemSkillLearnSkillItems[i];
+
+                    if (uiSkillLearnSkillItemComponent.uiTransform == null)
                     {
                         continue;
                     }
 
-                    Scroll_Item_SkillLearnSkillItem uiSkillLearnSkillItemComponent = self.ScrollItemSkillLearnSkillItems[i];
                     SkillPro sp = uiSkillLearnSkillItemComponent.SkillPro;
                     if (sp.SkillID == newSkill)
                     {

@@ -9,7 +9,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_TaskType : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy ,IUILogic
 	{
-		public Dictionary<int, Scroll_Item_TaskTypeItem> ScrollItemTaskTypeItems;
+		public Dictionary<int, EntityRef<Scroll_Item_TaskTypeItem>> ScrollItemTaskTypeItems;
 		public List<TaskPro> ShowTaskPros = new();
 		public bool IsExpand;
 		public int TaskType;

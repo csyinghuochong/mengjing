@@ -463,7 +463,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (!unit.GetComponent<MoveComponent>().IsArrived())
             {
-                self.Root().GetComponent<ClientSenderCompnent>().Send(new C2M_Stop());
+                self.Root().GetComponent<ClientSenderCompnent>().Send(C2M_Stop.Create());
             }
 
             unit.GetComponent<FsmComponent>().ChangeState(FsmStateEnum.FsmShiQuItem);

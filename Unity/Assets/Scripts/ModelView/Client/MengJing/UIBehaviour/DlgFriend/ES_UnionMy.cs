@@ -12,7 +12,7 @@ namespace ET.Client
 		public List<long> OnLinePlayer;
 		public long UnionJingXuanTimer;
 		public List<UnionPlayerInfo> ShowUnionPlayerInfos = new();
-		public Dictionary<int, Scroll_Item_UnionMyItem> ScrollItemUnionMyItems;
+		public Dictionary<int, EntityRef<Scroll_Item_UnionMyItem>> ScrollItemUnionMyItems;
 		
 		public UnityEngine.RectTransform EG_ShowSetRectTransform
      	{

@@ -11,7 +11,7 @@ namespace ET.Client
 		public TaskPro TaskPro;
 		public int CompeletTaskId;
 		public List<int> ShowTaskConfigIds = new();
-		public Dictionary<int, Scroll_Item_TaskGrowUpItem> ScrollItemTaskGrowUpItems;
+		public Dictionary<int, EntityRef<Scroll_Item_TaskGrowUpItem>> ScrollItemTaskGrowUpItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_TaskGrowUpItemsLoopVerticalScrollRect
      	{

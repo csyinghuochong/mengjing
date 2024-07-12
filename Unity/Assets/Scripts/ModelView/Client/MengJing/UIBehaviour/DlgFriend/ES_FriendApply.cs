@@ -8,7 +8,7 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_FriendApply : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
-		public Dictionary<int, Scroll_Item_FriendApplyItem> ScrollItemFriendApplyItems;
+		public Dictionary<int, EntityRef<Scroll_Item_FriendApplyItem>> ScrollItemFriendApplyItems;
 		public List<FriendInfo> ShowFriendInfos = new();
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_FriendApplyItemsLoopVerticalScrollRect

@@ -12,7 +12,7 @@ namespace ET.Client
 		public int ItemType;
 		public int ItemSubType;
 		public List<PaiMaiItemInfo> ShowPaiMaiIteminfos = new();
-		public Dictionary<int, Scroll_Item_PaiMaiBuyItem> ScrollItemPaiMaiBuyItems;
+		public Dictionary<int, EntityRef<Scroll_Item_PaiMaiBuyItem>> ScrollItemPaiMaiBuyItems;
 		public UITypeViewComponent UITypeViewComponent { get; set; }
 		//当前用到的显示用的
 		public List<PaiMaiItemInfo> PaiMaiIteminfos_Now = new();

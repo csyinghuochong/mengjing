@@ -9,7 +9,7 @@ namespace ET.Client
 	public  class ES_JiaYuanDaShiShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
 		public List<int> ShowIndex = new();
-		public Dictionary<int, Scroll_Item_JiaYuanDaShiShowItem> ScrollItemJiaYuanDaShiShowItems;
+		public Dictionary<int, EntityRef<Scroll_Item_JiaYuanDaShiShowItem>> ScrollItemJiaYuanDaShiShowItems;
 		
 		public UnityEngine.UI.LoopVerticalScrollRect E_JiaYuanDaShiShowItemsLoopVerticalScrollRect
      	{

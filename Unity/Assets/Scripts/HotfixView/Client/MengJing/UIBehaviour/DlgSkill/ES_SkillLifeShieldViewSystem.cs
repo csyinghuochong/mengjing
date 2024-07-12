@@ -189,12 +189,12 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemCommonItems.Count; i++)
             {
-                if (self.ScrollItemCommonItems[i].uiTransform == null)
+                Scroll_Item_CommonItem uIItemComponent = self.ScrollItemCommonItems[i];
+                if (uIItemComponent.uiTransform == null)
                 {
                     continue;
                 }
-
-                Scroll_Item_CommonItem uIItemComponent = self.ScrollItemCommonItems[i];
+                
                 BagInfo bagInfo = uIItemComponent.ES_CommonItem.Baginfo;
                 if (bagInfo == null)
                 {

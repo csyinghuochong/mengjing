@@ -12,9 +12,9 @@ namespace ET.Client
 		public bool LinShiSkillStatus;
 		public SkillPro SkillPro;
 		public List<SkillPro> ShowLearnSkillPros = new();
-		public Dictionary<int, Scroll_Item_SkillLearnItem> ScrollItemSkillLearnItems;
+		public Dictionary<int, EntityRef<Scroll_Item_SkillLearnItem>> ScrollItemSkillLearnItems;
 		public List<SkillPro> ShowLearnSkillSkillPros = new();
-		public Dictionary<int, Scroll_Item_SkillLearnSkillItem> ScrollItemSkillLearnSkillItems;
+		public Dictionary<int, EntityRef<Scroll_Item_SkillLearnSkillItem>> ScrollItemSkillLearnSkillItems;
 
 		public UnityEngine.UI.Button E_ButtonResetButton
      	{

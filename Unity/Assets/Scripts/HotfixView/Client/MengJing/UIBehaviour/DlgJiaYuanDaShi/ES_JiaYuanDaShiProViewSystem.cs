@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [EntitySystemOf(typeof (ES_JiaYuanDaShiPro))]
-    [FriendOfAttribute(typeof (ES_JiaYuanDaShiPro))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [EntitySystemOf(typeof(ES_JiaYuanDaShiPro))]
+    [FriendOfAttribute(typeof(ES_JiaYuanDaShiPro))]
     public static partial class ES_JiaYuanDaShiProSystem
     {
         [EntitySystem]
@@ -193,13 +193,15 @@ namespace ET.Client
 
             self.E_Label_TipsText.text = "";
 
-            if (self.ScrollItemCommonItems[index].uiTransform.gameObject.activeSelf)
+            Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index];
+            Scroll_Item_CommonItem scrollItemCommonItem1 = self.ScrollItemCommonItems[index - 1];
+            if (scrollItemCommonItem.uiTransform.gameObject.activeSelf)
             {
-                self.OnSelectItem(self.ScrollItemCommonItems[index].ES_CommonItem.Baginfo);
+                self.OnSelectItem(scrollItemCommonItem.ES_CommonItem.Baginfo);
             }
-            else if (index > 0 && self.ScrollItemCommonItems[index - 1].uiTransform.gameObject.activeSelf)
+            else if (index > 0 && scrollItemCommonItem1.uiTransform.gameObject.activeSelf)
             {
-                self.OnSelectItem(self.ScrollItemCommonItems[index - 1].ES_CommonItem.Baginfo);
+                self.OnSelectItem(scrollItemCommonItem1.ES_CommonItem.Baginfo);
             }
         }
     }

@@ -108,7 +108,8 @@ namespace ET.Client
             self.OnActiveTianFu();
             self.UpdatePlanButton();
 
-            self.ScrollItemSkillTianFuItems[0].OnClickTianFu(0);
+            Scroll_Item_SkillTianFuItem scrollItemSkillTianFuItem = self.ScrollItemSkillTianFuItems[0];
+            scrollItemSkillTianFuItem.OnClickTianFu(0);
         }
 
         private static void OnSkillTianFuItemsRefresh(this ES_SkillTianFu self, Transform transform, int index)
@@ -122,9 +123,10 @@ namespace ET.Client
         {
             for (int i = 0; i < self.ScrollItemSkillTianFuItems.Count; i++)
             {
-                if (self.ScrollItemSkillTianFuItems[i].uiTransform != null)
+                Scroll_Item_SkillTianFuItem scrollItemSkillTianFuItem = self.ScrollItemSkillTianFuItems[i];
+                if (scrollItemSkillTianFuItem.uiTransform != null)
                 {
-                    self.ScrollItemSkillTianFuItems[i].OnActiveTianFu();
+                    scrollItemSkillTianFuItem.OnActiveTianFu();
                 }
             }
         }
@@ -162,7 +164,9 @@ namespace ET.Client
 
             for (int i = 0; i < self.ScrollItemSkillTianFuItems.Count; i++)
             {
-                if (self.ScrollItemSkillTianFuItems[i].uiTransform == null)
+                Scroll_Item_SkillTianFuItem scrollItemSkillTianFuItem = self.ScrollItemSkillTianFuItems[i];
+                
+                if (scrollItemSkillTianFuItem.uiTransform == null)
                 {
                     continue;
                 }

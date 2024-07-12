@@ -63,8 +63,8 @@ namespace ET.Client
             }
 
             // 测试数据
-            self.ShowTaskPro.Add(new TaskPro() { taskID = 300001, taskStatus = (int)TaskStatuEnum.Completed });
-            self.ShowTaskPro.Add(new TaskPro() { taskID = 300002, taskStatus = (int)TaskStatuEnum.Accepted });
+            // self.ShowTaskPro.Add(new TaskPro() { taskID = 300001, taskStatus = (int)TaskStatuEnum.Completed });
+            // self.ShowTaskPro.Add(new TaskPro() { taskID = 300002, taskStatus = (int)TaskStatuEnum.Accepted });
 
             self.AddUIScrollItems(ref self.ScrollItemHuntTaskItems, self.ShowTaskPro.Count);
             self.E_HuntTaskItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskPro.Count);
