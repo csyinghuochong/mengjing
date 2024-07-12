@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponentC))]
-    [FriendOf(typeof (TaskComponentC))]
+    [FriendOf(typeof(UserInfoComponentC))]
+    [FriendOf(typeof(TaskComponentC))]
     public static class TaskClientNetHelper
     {
         public static async ETTask<int> RequestTaskInit(Scene root)
@@ -19,7 +19,10 @@ namespace ET.Client
 
         public static async ETTask<int> RequestTaskTrack(Scene root, int taskId, int trackStatus)
         {
-            C2M_TaskTrackRequest request = new() { TaskId = taskId, TrackStatus = trackStatus };
+            C2M_TaskTrackRequest request = C2M_TaskTrackRequest.Create();
+            request.TaskId = taskId;
+            request.TrackStatus = trackStatus;
+
             M2C_TaskTrackResponse response = (M2C_TaskTrackResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             TaskComponentC taskComponentC = root.GetComponent<TaskComponentC>();
@@ -51,7 +54,10 @@ namespace ET.Client
                 return ErrorCode.ERR_BagIsFull;
             }
 
-            C2M_TaskCommitRequest request = new() { TaskId = taskid, BagInfoID = banginfoId };
+            C2M_TaskCommitRequest request = C2M_TaskCommitRequest.Create();
+            request.TaskId = taskid;
+            request.BagInfoID = banginfoId;
+
             M2C_TaskCommitResponse response = (M2C_TaskCommitResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             if (response.Error != ErrorCode.ERR_Success)
             {
@@ -74,9 +80,11 @@ namespace ET.Client
 
         public static async ETTask<int> SendCommitTaskCountry(Scene root, int taskId, long baginfoId = 0)
         {
-            C2M_CommitTaskCountryRequest request = new() { TaskId = taskId, BagInfoID = baginfoId };
-            M2C_CommitTaskCountryResponse response =
-                    (M2C_CommitTaskCountryResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            C2M_CommitTaskCountryRequest request = C2M_CommitTaskCountryRequest.Create();
+            request.TaskId = taskId;
+            request.BagInfoID = baginfoId;
+
+            M2C_CommitTaskCountryResponse response = (M2C_CommitTaskCountryResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             TaskComponentC taskComponentC = root.GetComponent<TaskComponentC>();
             if (response.Error == ErrorCode.ERR_Success)
@@ -95,7 +103,9 @@ namespace ET.Client
 
         public static async ETTask<int> RequestGetTask(Scene root, int taskId)
         {
-            C2M_TaskGetRequest request = new() { TaskId = taskId };
+            C2M_TaskGetRequest request = C2M_TaskGetRequest.Create();
+            request.TaskId = taskId;
+
             M2C_TaskGetResponse response = (M2C_TaskGetResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             if (response.Error != ErrorCode.ERR_Success)
@@ -111,7 +121,9 @@ namespace ET.Client
 
         public static async ETTask<int> RequestGiveUpTask(Scene root, int taskId)
         {
-            C2M_TaskGiveUpRequest request = new() { TaskId = taskId };
+            C2M_TaskGiveUpRequest request = C2M_TaskGiveUpRequest.Create();
+            request.TaskId = taskId;
+
             M2C_TaskGiveUpResponse response = (M2C_TaskGiveUpResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             TaskComponentC taskComponentC = root.GetComponent<TaskComponentC>();
@@ -130,7 +142,9 @@ namespace ET.Client
 
         public static async ETTask<M2C_WelfareTaskRewardResponse> WelfareTaskReward(Scene root, int day)
         {
-            C2M_WelfareTaskRewardRequest request = new() { day = day };
+            C2M_WelfareTaskRewardRequest request = C2M_WelfareTaskRewardRequest.Create();
+            request.day = day;
+
             M2C_WelfareTaskRewardResponse response = (M2C_WelfareTaskRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             if (response.Error != ErrorCode.ERR_Success)
             {
@@ -142,7 +156,9 @@ namespace ET.Client
 
         public static async ETTask<int> TaskHuoYueRewardRequest(Scene root, int huoYueId)
         {
-            C2M_TaskHuoYueRewardRequest request = new() { HuoYueId = huoYueId };
+            C2M_TaskHuoYueRewardRequest request = C2M_TaskHuoYueRewardRequest.Create();
+            request.HuoYueId = huoYueId;
+
             M2C_TaskHuoYueRewardResponse response = (M2C_TaskHuoYueRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             if (response.Error == ErrorCode.ERR_Success)
@@ -167,7 +183,9 @@ namespace ET.Client
                 }
             }
 
-            C2M_TaskNoticeRequest request = new() { TaskId = taskId };
+            C2M_TaskNoticeRequest request = C2M_TaskNoticeRequest.Create();
+            request.TaskId = taskId;
+
             M2C_TaskNoticeResponse response = (M2C_TaskNoticeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             EventSystem.Instance.Publish(root, new DataUpdate_TaskUpdate());

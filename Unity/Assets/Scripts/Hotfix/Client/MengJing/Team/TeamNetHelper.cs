@@ -4,7 +4,9 @@
     {
         public static async ETTask<int> RequestTeamDungeonList(Scene root)
         {
-            C2T_TeamDungeonInfoRequest request = new() { UserId = root.GetComponent<UserInfoComponentC>().UserInfo.UserId };
+            C2T_TeamDungeonInfoRequest request = C2T_TeamDungeonInfoRequest.Create();
+            request.UserId = root.GetComponent<UserInfoComponentC>().UserInfo.UserId;
+
             T2C_TeamDungeonInfoResponse response = (T2C_TeamDungeonInfoResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             root.GetComponent<TeamComponentC>().TeamList = response.TeamList;
             return response.Error;
@@ -46,7 +48,10 @@
 
             HintHelp.ShowHint(root, "已申请加入队伍！");
 
-            C2T_TeamDungeonApplyRequest request = new() { TeamId = teamId, TeamPlayerInfo = UnitHelper.GetSelfTeamPlayerInfo(root) };
+            C2T_TeamDungeonApplyRequest request = C2T_TeamDungeonApplyRequest.Create();
+            request.TeamId = teamId;
+            request.TeamPlayerInfo = UnitHelper.GetSelfTeamPlayerInfo(root);
+
             T2C_TeamDungeonApplyResponse response = (T2C_TeamDungeonApplyResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
@@ -86,10 +91,11 @@
                 return errorCode;
             }
 
-            C2M_TeamDungeonCreateRequest request = new()
-            {
-                FubenId = fubenId, FubenType = fubenType, TeamPlayerInfo = UnitHelper.GetSelfTeamPlayerInfo(root)
-            };
+            C2M_TeamDungeonCreateRequest request = C2M_TeamDungeonCreateRequest.Create();
+            request.FubenId = fubenId;
+            request.FubenType = fubenType;
+            request.TeamPlayerInfo = UnitHelper.GetSelfTeamPlayerInfo(root);
+
             //创建队伍
             M2C_TeamDungeonCreateResponse response = (M2C_TeamDungeonCreateResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             teamComponent.FubenType = response.FubenType;
@@ -104,7 +110,9 @@
 
         public static async ETTask<int> TeamRobotRequest(Scene root)
         {
-            C2T_TeamRobotRequest request = new() { UnitId = UnitHelper.GetMyUnitFromClientScene(root).Id };
+            C2T_TeamRobotRequest request = C2T_TeamRobotRequest.Create();
+            request.UnitId = UnitHelper.GetMyUnitFromClientScene(root).Id;
+
             T2C_TeamRobotResponse response = (T2C_TeamRobotResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response.Error;
@@ -119,7 +127,9 @@
                 return;
             }
 
-            C2T_TeamLeaveRequest request = new() { UserId = root.GetComponent<UserInfoComponentC>().UserInfo.UserId };
+            C2T_TeamLeaveRequest request = C2T_TeamLeaveRequest.Create();
+            request.UserId = root.GetComponent<UserInfoComponentC>().UserInfo.UserId;
+
             T2C_TeamLeaveResponse response = (T2C_TeamLeaveResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
         }
 
@@ -147,7 +157,10 @@
                 return ErrorCode.ERR_PlayerIsNot;
             }
 
-            C2M_TeamDungeonOpenRequest request = new() { UserID = userInfoComponent.UserInfo.UserId, FubenType = teamComponent.FubenType };
+            C2M_TeamDungeonOpenRequest request = C2M_TeamDungeonOpenRequest.Create();
+            request.UserID = userInfoComponent.UserInfo.UserId;
+            request.FubenType = teamComponent.FubenType;
+
             M2C_TeamDungeonOpenResponse response = (M2C_TeamDungeonOpenResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             teamInfo.FubenType = response.FubenType;
             teamComponent.ApplyList.Clear();
@@ -172,17 +185,20 @@
                 return ErrorCode.ERR_Success;
             }
 
-            C2T_TeamDungeonAgreeRequest request = new()
-            {
-                TeamId = root.GetComponent<UserInfoComponentC>().UserInfo.UserId, TeamPlayerInfo = m2C_Team
-            };
+            C2T_TeamDungeonAgreeRequest request = C2T_TeamDungeonAgreeRequest.Create();
+            request.TeamId = root.GetComponent<UserInfoComponentC>().UserInfo.UserId;
+            request.TeamPlayerInfo = m2C_Team;
+
             T2C_TeamDungeonAgreeResponse repose = (T2C_TeamDungeonAgreeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return repose.Error;
         }
 
         public static void TeamPickRequest(Scene root, DropInfo dropInfo, int need)
         {
-            C2M_TeamPickRequest request = new() { DropItem = dropInfo, Need = need };
+            C2M_TeamPickRequest request = C2M_TeamPickRequest.Create();
+            request.DropItem = dropInfo;
+            request.Need = need;
+
             root.GetComponent<ClientSenderCompnent>().Send(request);
         }
     }

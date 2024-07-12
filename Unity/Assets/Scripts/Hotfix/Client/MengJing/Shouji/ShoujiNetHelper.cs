@@ -6,7 +6,10 @@ namespace ET.Client
     {
         public static async ETTask<M2C_ShouJiTreasureResponse> ShouJiTreasure(Scene root, List<long> itemIds, int shouJiId)
         {
-            C2M_ShouJiTreasureRequest request = new() { ItemIds = itemIds, ShouJiId = shouJiId };
+            C2M_ShouJiTreasureRequest request = C2M_ShouJiTreasureRequest.Create();
+            request.ItemIds = itemIds;
+            request.ShouJiId = shouJiId;
+
             M2C_ShouJiTreasureResponse response = (M2C_ShouJiTreasureResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             return response;
@@ -14,7 +17,10 @@ namespace ET.Client
 
         public static async ETTask<M2C_ShoujiRewardResponse> ShoujiReward(Scene root, int chapterId, int rewardIndex)
         {
-            C2M_ShoujiRewardRequest request = new() { ChapterId = chapterId, RewardIndex = rewardIndex };
+            C2M_ShoujiRewardRequest request = C2M_ShoujiRewardRequest.Create();
+            request.ChapterId = chapterId;
+            request.RewardIndex = rewardIndex;
+
             M2C_ShoujiRewardResponse response = (M2C_ShoujiRewardResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
             if (response.Error == ErrorCode.ERR_Success)
