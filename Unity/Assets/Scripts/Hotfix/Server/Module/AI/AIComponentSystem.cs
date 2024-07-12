@@ -258,20 +258,6 @@ namespace ET
             return self.AISkillIDList[RandomHelper.RandomNumber(0, self.AISkillIDList.Count)];
         }
         
-        public static bool IsCanZhuiJi(this AIComponent self)
-        {
-            StateComponentS stateComponent = self.GetParent<Unit>().GetComponent<StateComponentS>();
-            if (ErrorCode.ERR_Success!=stateComponent.CanMove())
-            {
-                return false;
-            }
-            if (stateComponent.StateTypeGet(StateTypeEnum.Singing))
-            {
-                return false;
-            }
-            return true;
-        }
-
         public static void BeAttacking(this AIComponent self, Unit attack)
         {
             //0.1的概率概率转移仇恨

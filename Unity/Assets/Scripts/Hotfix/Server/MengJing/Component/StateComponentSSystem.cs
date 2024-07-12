@@ -4,7 +4,7 @@ namespace ET.Server
     [EntitySystemOf(typeof(StateComponentS))]
     [FriendOf(typeof(StateComponentS))]
     //[FriendOf(typeof(SkillPassiveComponent))]
-    public static partial class StateComponentServerSystem
+    public static partial class StateComponentSSystem
     {
         [EntitySystem]
         private static void Awake(this ET.Server.StateComponentS self)
@@ -19,6 +19,19 @@ namespace ET.Server
             self.CurrentStateType = StateTypeEnum.None;
             self.RigidityEndTime = 0;
             self.ObstructStatus = 0;
+        }
+
+        public static bool IsCanZhuiJi(this StateComponentS self)
+        {
+            if (ErrorCode.ERR_Success!=self.CanMove())
+            {
+                return false;
+            }
+            if (self.StateTypeGet(StateTypeEnum.Singing))
+            {
+                return false;
+            }
+            return true;
         }
 
 

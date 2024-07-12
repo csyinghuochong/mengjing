@@ -278,7 +278,7 @@ namespace ET.Server
             
             // 通知客户端创建My Unit
             M2C_CreateMyUnit m2CCreateUnits = new();
-            m2CCreateUnits.Unit = MapMessageHelper.CreateUnitInfo(unit);
+            m2CCreateUnits.Unit = UnitHelper.CreateUnitInfo(unit);
             MapMessageHelper.SendToClient(unit, m2CCreateUnits);
             Console.WriteLine($"M2M_UnitTransferRequest:5");
             // 加入aoi
