@@ -73,8 +73,8 @@ namespace ET.Server
             {
                 case UnitType.Player:
                     //携带的buff
-                    unitInfo.Buffs = unit.GetComponent<BuffManagerComponentS>().GetMessageBuff();
-                    unitInfo.Skills = unit.GetComponent<SkillManagerComponentS>().GetMessageSkill();
+                    // unitInfo.Buffs = unit.GetComponent<BuffManagerComponentS>().GetMessageBuff();
+                    // unitInfo.Skills = unit.GetComponent<SkillManagerComponentS>().GetMessageSkill();
                     //设置数据
                     UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                     unitInfo.UnitName = userInfoComponent.UserInfo.Name;
@@ -139,11 +139,11 @@ namespace ET.Server
                 }
             }
 
-            if (unit.GetComponent<BuffManagerComponentS>() != null)
-            {
-                spilingInfo.Buffs = unit.GetComponent<BuffManagerComponentS>().GetMessageBuff();
-                spilingInfo.Skills = unit.GetComponent<SkillManagerComponentS>().GetMessageSkill();
-            }
+            // if (unit.GetComponent<BuffManagerComponentS>() != null)
+            // {
+            //     spilingInfo.Buffs = unit.GetComponent<BuffManagerComponentS>().GetMessageBuff();
+            //     spilingInfo.Skills = unit.GetComponent<SkillManagerComponentS>().GetMessageSkill();
+            // }
             //广播创建的是那个怪物ID
             spilingInfo.SkillId = unit.GetComponent<UnitInfoComponent>().EnergySkillId;
             spilingInfo.MonsterID = unit.ConfigId;
@@ -260,6 +260,16 @@ namespace ET.Server
             }
         }
 
+        //技能广播
+        public static void BroadcastSkill( Unit unit, IMessage message)
+        {
+            //主城不广播技能
+            if (unit.SceneType != SceneTypeEnum.MainCityScene)
+            {
+                MapMessageHelper.Broadcast(unit, message);
+            }
+        }
+        
         public static void SendToClient(Unit unit, IMessage message)
         {
             unit.Root().GetComponent<MessageLocationSenderComponent>().Get(LocationType.GateSession).Send(unit.Id, message);

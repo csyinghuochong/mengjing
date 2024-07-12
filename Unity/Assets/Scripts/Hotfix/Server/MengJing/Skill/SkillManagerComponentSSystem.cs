@@ -430,7 +430,7 @@ namespace ET.Server
                       m2C_SkillInterruptResult.SkillId = skillHandler.SkillConf.Id;
 
                       //MessageHelper.Broadcast(unit, m2C_SkillInterruptResult);
-                      self.BroadcastSkill(unit, m2C_SkillInterruptResult);
+                      MapMessageHelper.BroadcastSkill(unit, m2C_SkillInterruptResult);
                   }
               }
           }
@@ -499,7 +499,7 @@ namespace ET.Server
               useSkill.SkillInfos = skillList;
               useSkill.CDEndTime = skillCd != null ? skillCd.CDEndTime : 0;
               useSkill.PublicCDTime = self.SkillPublicCDTime;
-              self.BroadcastSkill(unit, useSkill);
+              MapMessageHelper.BroadcastSkill(unit, useSkill);
 
               for (int i = 0; i < handlerList.Count; i++)
               {
@@ -1079,9 +1079,8 @@ namespace ET.Server
                   useSkill.SkillInfos = new List<SkillInfo>() { skillInfo };
                   useSkill.PublicCDTime = 0;
                   useSkill.CDEndTime = 0;
-                  //MessageHelper.Broadcast(self.SelfUnit, useSkill);
-                  self.BroadcastSkill(self.SelfUnit, useSkill);
                   self.DelaySkillList.RemoveAt(i);
+                  MapMessageHelper.BroadcastSkill(self.SelfUnit, useSkill);
               }
 
               //循环检查冷却CD的技能
@@ -1113,16 +1112,7 @@ namespace ET.Server
               }
           }
 
-          //技能广播
-          public static void BroadcastSkill(this SkillManagerComponentS self, Unit unit, IMessage message)
-          {
-              //主城不广播技能
-              if (unit.SceneType != SceneTypeEnum.MainCityScene)
-              {
-                  MapMessageHelper.Broadcast(unit, message);
-              }
-          }
-        
+          
     }
 
 }
