@@ -107,6 +107,7 @@ namespace ET.Client
                 "UIUnionKeJi" => WindowID.WindowID_UnionKeJi,
                 "UIUnionMystery" => WindowID.WindowID_UnionMystery,
                 "UIFriend" => WindowID.WindowID_Friend,
+                "UIUnionXiuLian" => WindowID.WindowID_UnionXiuLian,
                 _ => WindowID.WindowID_Invaild
             };
         }

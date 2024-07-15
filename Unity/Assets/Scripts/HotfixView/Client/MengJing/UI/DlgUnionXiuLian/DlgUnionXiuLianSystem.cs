@@ -7,6 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [FriendOf(typeof(ES_UnionRoleXiuLian))]
+    [FriendOf(typeof(ES_UnionPetXiuLian))]
     [FriendOf(typeof(DlgUnionXiuLian))]
     public static class DlgUnionXiuLianSystem
     {
@@ -29,6 +30,7 @@ namespace ET.Client
                     self.View.ES_UnionRoleXiuLian.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
+                    self.View.ES_UnionPetXiuLian.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
