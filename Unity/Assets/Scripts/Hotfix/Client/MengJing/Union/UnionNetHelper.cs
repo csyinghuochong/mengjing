@@ -150,5 +150,15 @@ namespace ET.Client
             M2C_UnionKeJiLearnResponse response = (M2C_UnionKeJiLearnResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<int> UnionXiuLianRequest(Scene root, int position, int type)
+        {
+            C2M_UnionXiuLianRequest request = C2M_UnionXiuLianRequest.Create();
+            request.Position = position;
+            request.Type = type;
+
+            M2C_UnionXiuLianResponse response = (M2C_UnionXiuLianResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }

@@ -1,12 +1,16 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_UnionRoleXiuLian : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_UnionRoleXiuLian : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
+		public List<EntityRef<ES_UnionXiuLianItem>> UIUnionXiuLianItemList = new();
+		public int Position;
+		
 		public UnityEngine.UI.Text E_XiuLianNameText
      	{
      		get

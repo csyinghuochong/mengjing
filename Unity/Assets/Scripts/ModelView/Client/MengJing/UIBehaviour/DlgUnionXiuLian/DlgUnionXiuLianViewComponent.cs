@@ -24,6 +24,26 @@ namespace ET.Client
      		}
      	}
 
+		public ES_UnionRoleXiuLian ES_UnionRoleXiuLian
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_UnionRoleXiuLian es = this.m_es_unionrolexiulian;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_UnionRoleXiuLian");
+		    	   this.m_es_unionrolexiulian = this.AddChild<ES_UnionRoleXiuLian,Transform>(subTrans);
+     			}
+     			return this.m_es_unionrolexiulian;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -44,11 +64,13 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
+			this.m_es_unionrolexiulian = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
+		private EntityRef<ES_UnionRoleXiuLian> m_es_unionrolexiulian = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}

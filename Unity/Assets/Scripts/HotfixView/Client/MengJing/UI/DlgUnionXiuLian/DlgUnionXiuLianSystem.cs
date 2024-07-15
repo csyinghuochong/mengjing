@@ -6,20 +6,31 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-	[FriendOf(typeof(DlgUnionXiuLian))]
-	public static  class DlgUnionXiuLianSystem
-	{
+    [FriendOf(typeof(ES_UnionRoleXiuLian))]
+    [FriendOf(typeof(DlgUnionXiuLian))]
+    public static class DlgUnionXiuLianSystem
+    {
+        public static void RegisterUIEvent(this DlgUnionXiuLian self)
+        {
+            self.View.E_FunctionSetBtnToggleGroup.AddListener(self.OnFunctionSetBtn);
+        }
 
-		public static void RegisterUIEvent(this DlgUnionXiuLian self)
-		{
-		 
-		}
+        public static void ShowWindow(this DlgUnionXiuLian self, Entity contextData = null)
+        {
+            self.View.E_FunctionSetBtnToggleGroup.OnSelectIndex(0);
+        }
 
-		public static void ShowWindow(this DlgUnionXiuLian self, Entity contextData = null)
-		{
-		}
-
-		 
-
-	}
+        private static void OnFunctionSetBtn(this DlgUnionXiuLian self, int index)
+        {
+            CommonViewHelper.HideChildren(self.View.EG_SubViewRectTransform);
+            switch (index)
+            {
+                case 0:
+                    self.View.ES_UnionRoleXiuLian.uiTransform.gameObject.SetActive(true);
+                    break;
+                case 1:
+                    break;
+            }
+        }
+    }
 }

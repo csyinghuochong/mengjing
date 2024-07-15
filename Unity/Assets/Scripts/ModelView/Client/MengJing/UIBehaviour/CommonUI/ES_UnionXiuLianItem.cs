@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -7,6 +8,9 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_UnionXiuLianItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
 	{
+		public Action<int> ClickHandler;
+		public int Position;
+		
 		public UnityEngine.UI.Image E_ImageSelectImage
      	{
      		get
