@@ -7,9 +7,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ES_RoleGem))]
-    [FriendOf(typeof (DlgItemTipsViewComponent))]
-    [FriendOf(typeof (DlgItemTips))]
+    [FriendOf(typeof(ES_RoleGem))]
+    [FriendOf(typeof(DlgItemTipsViewComponent))]
+    [FriendOf(typeof(DlgItemTips))]
     public static class DlgItemTipsSystem
     {
         public static void RegisterUIEvent(this DlgItemTips self)
@@ -151,7 +151,7 @@ namespace ET.Client
             }
 
             // 显示按钮
-            self.View.E_UseButton.GetComponentInChildren<Text>().text = itemConfig.ItemSubType == 114? "镶嵌" : "使用";
+            self.View.E_UseButton.GetComponentInChildren<Text>().text = itemConfig.ItemSubType == 114 ? "镶嵌" : "使用";
             self.View.EG_BagOpenSetRectTransform.gameObject.SetActive(false);
             self.View.E_HuiShouButton.gameObject.SetActive(false);
             self.View.E_HuiShouCancleButton.gameObject.SetActive(false);
@@ -256,7 +256,7 @@ namespace ET.Client
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ItemSellTip);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgItemSellTip>().Init(self.BagInfo);
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+            self.OnCloseTips();
         }
 
         private static async ETTask OnUseButton(this DlgItemTips self)
@@ -348,27 +348,27 @@ namespace ET.Client
                 DlgPet dlgPet = self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPet>();
                 await dlgPet.RequestPetHeXinSelect();
 
-                self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+                self.OnCloseTips();
 
                 return;
             }
 
-            // if (itemConfig.ItemSubType == 4 || itemConfig.ItemSubType == 14)
-            // {
-            //     if (self.ZoneScene().GetComponent<MapComponent>().SceneTypeEnum != (int)SceneTypeEnum.LocalDungeon)
-            //     {
-            //         FloatTipManager.Instance.ShowFloatTip("副本中才能使用!");
-            //         return;
-            //     }
-            // }
+            if (itemConfig.ItemSubType == 4 || itemConfig.ItemSubType == 14)
+            {
+                if (self.Root().GetComponent<MapComponent>().SceneType != (int)SceneTypeEnum.LocalDungeon)
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("副本中才能使用!");
+                    return;
+                }
+            }
 
-            // if (itemConfig.ItemSubType == 5)
-            // {
-            //     UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UITuZhiMake);
-            //     uI.GetComponent<UITuZhiMakeComponent>().OnInitUI(self.BagInfo).Coroutine();
-            //     self.OnCloseTips();
-            //     return;
-            // }
+            if (itemConfig.ItemSubType == 5)
+            {
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_TuZhiMake);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgTuZhiMake>().OnInitUI(self.BagInfo);
+                self.OnCloseTips();
+                return;
+            }
 
             // if (itemConfig.ItemSubType == 15) //附魔
             // {
@@ -376,41 +376,42 @@ namespace ET.Client
             //     return;
             // }
 
-            // if (itemConfig.ItemSubType == 16) //锻造精灵
-            // {
-            //     int makeNew = int.Parse(itemConfig.ItemUsePar);
-            //     EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(makeNew);
-            //
-            //     Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
-            //     int makeType_1 = unit.GetComponent<NumericComponent>().GetAsInt(NumericType.MakeType_1);
-            //     int makeType_2 = unit.GetComponent<NumericComponent>().GetAsInt(NumericType.MakeType_2);
-            //     if (makeType_1 != equipMakeConfig.ProficiencyType && makeType_2 != equipMakeConfig.ProficiencyType)
-            //     {
-            //         ErrorHelp.Instance.ErrorHint(ErrorCode.ERR_MakeTypeError);
-            //         return;
-            //     }
-            //
-            //     if (self.ZoneScene().GetComponent<UserInfoComponent>().UserInfo.MakeList.Contains(makeNew))
-            //     {
-            //         FloatTipManager.Instance.ShowFloatTip("已经学习过该技能！");
-            //         return;
-            //     }
-            // }
+            if (itemConfig.ItemSubType == 16) //锻造精灵
+            {
+                int makeNew = int.Parse(itemConfig.ItemUsePar);
+                EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(makeNew);
 
-            // if (itemConfig.ItemSubType == 101)
-            // {
-            //     Unit unit = UnitHelper.GetMyUnitFromZoneScene(self.ZoneScene());
-            //     unit.GetComponent<SkillManagerComponent>().SendUseSkill(int.Parse(itemConfig.ItemUsePar), itemConfig.Id,
-            //         Mathf.FloorToInt(unit.Rotation.eulerAngles.y), 0, 0).Coroutine();
-            //     self.OnCloseTips();
-            //     return;
-            // }
+                Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                int makeType_1 = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.MakeType_1);
+                int makeType_2 = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.MakeType_2);
+                if (makeType_1 != equipMakeConfig.ProficiencyType && makeType_2 != equipMakeConfig.ProficiencyType)
+                {
+                    HintHelp.ShowErrorHint(self.Root(), ErrorCode.ERR_MakeTypeError);
+                    return;
+                }
 
-            // if (itemConfig.ItemSubType == 102)
-            // {
-            //     FloatTipManager.Instance.ShowFloatTip("请前往主城的宠物蛋孵化处!");
-            //     return;
-            // }
+                if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.MakeList.Contains(makeNew))
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("已经学习过该技能！");
+                    return;
+                }
+            }
+
+            if (itemConfig.ItemSubType == 101)
+            {
+                Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                Quaternion quaternion = unit.Rotation;
+                unit.GetComponent<SkillManagerComponentC>()
+                        .SendUseSkill(int.Parse(itemConfig.ItemUsePar), itemConfig.Id, Mathf.FloorToInt(quaternion.eulerAngles.y), 0, 0).Coroutine();
+                self.OnCloseTips();
+                return;
+            }
+
+            if (itemConfig.ItemSubType == 102)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("请前往主城的宠物蛋孵化处!");
+                return;
+            }
 
             // if (itemConfig.ItemSubType == 112)
             // {
@@ -428,153 +429,149 @@ namespace ET.Client
             //     return;
             // }
             //
-            // // 弹出道具批量使用
-            // if (self.BagInfo.ItemNum >= 2 && ConfigHelper.BatchUseItemList.Contains(itemConfig.Id))
-            // {
-            //     UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIItemBatchUse);
-            //     uI.GetComponent<UIItemBatchUseComponent>().OnInitUI(self.BagInfo);
-            //     self.OnCloseTips();
-            //     return;
-            // }
-            //
-            // if (itemConfig.ItemSubType == 113 || itemConfig.ItemSubType == 127)
-            // {
-            //     if (self.BagComponent.GetBagLeftCell() < 1)
-            //     {
-            //         FloatTipManager.Instance.ShowFloatTip("背包格子不够！");
-            //         return;
-            //     }
-            //
-            //     int curSceneId = 0;
-            //     int needSceneId = int.Parse(self.BagInfo.ItemPar.Split('@')[0]);
-            //     MapComponent mapComponent = self.ZoneScene().GetComponent<MapComponent>();
-            //     if (mapComponent.SceneTypeEnum == (int)SceneTypeEnum.LocalDungeon)
-            //     {
-            //         curSceneId = mapComponent.SceneId;
-            //     }
-            //
-            //     if (curSceneId != needSceneId)
-            //     {
-            //         string fubenName = DungeonConfigCategory.Instance.Get(needSceneId).ChapterName;
-            //         FloatTipManager.Instance.ShowFloatTip($"请前往{fubenName}");
-            //         return;
-            //     }
-            //     else
-            //     {
-            //         // $"{dungeonid}@{"TaskMove_6"}@{dropId}";
-            //         Scene zoneScene = self.ZoneScene();
-            //         EventType.DigForTreasure.Instance.BagInfo = self.BagInfo;
-            //         EventType.DigForTreasure.Instance.ZoneScene = self.ZoneScene();
-            //         Game.EventSystem.PublishClass(EventType.DigForTreasure.Instance);
-            //         UIHelper.Remove(zoneScene, UIType.UIRole);
-            //         self.OnCloseTips();
-            //         FloatTipManager.Instance.ShowFloatTip($"消耗道具:{itemConfig.ItemName}");
-            //         return;
-            //     }
-            // }
-            //
-            // if (itemConfig.ItemSubType == 108
-            //     || itemConfig.ItemSubType == 109
-            //     || itemConfig.ItemSubType == 117
-            //     || itemConfig.ItemSubType == 118
-            //     || itemConfig.ItemSubType == 119
-            //     || itemConfig.ItemSubType == 122)
-            // {
-            //     PetComponent petComponent = self.ZoneScene().GetComponent<PetComponent>();
-            //     RolePetInfo petInfo = petComponent.GetFightPet();
-            //     if ((itemConfig.ItemSubType == 108
-            //             || itemConfig.ItemSubType == 109) && petInfo != null)
-            //     {
-            //         petComponent.RequestXiLian(self.BagInfo.BagInfoID, petInfo.Id).Coroutine();
-            //         self.OnCloseTips();
-            //         return;
-            //     }
-            //
-            //     FloatTipManager.Instance.ShowFloatTip("请前往宠物重塑界面使用！");
-            //     return;
-            // }
-            //
-            // if (itemConfig.ItemSubType == 132)
-            // {
-            //     FloatTipManager.Instance.ShowFloatTip("请前往赛季界面使用");
-            //     return;
-            // }
-            //
-            // if (itemConfig.ItemSubType == 137)
-            // {
-            //     UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIPetEggFuLing);
-            //     ui.GetComponent<UIPetEggFuLingComponent>().UpdateItemList(self.BagInfo).Coroutine();
-            //     UIHelper.PlayUIMusic("10010");
-            //     self.OnCloseTips();
-            //     return;
-            // }
-            //
-            // if (itemConfig.ItemSubType == 139)
-            // {
-            //     if (self.ZoneScene().GetComponent<BagComponent>().AdditionalCellNum[0] >= 10)
-            //     {
-            //         FloatTipManager.Instance.ShowFloatTipDi(GameSettingLanguge.LoadLocalization("已达到最大购买格子数量!"));
-            //         return;
-            //     }
-            // }
-            //
-            // if (itemConfig.ItemSubType == 140)
-            // {
-            //     if (self.ZoneScene().GetComponent<BagComponent>().AdditionalCellNum[5] >= 10)
-            //     {
-            //         FloatTipManager.Instance.ShowFloatTipDi(GameSettingLanguge.LoadLocalization("已达到最大购买格子数量!"));
-            //         return;
-            //     }
-            // }
-            //
-            // long instanceid = self.InstanceId;
+            // 弹出道具批量使用
+            if (self.BagInfo.ItemNum >= 2 && ConfigData.BatchUseItemList.Contains(itemConfig.Id))
+            {
+                // UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIItemBatchUse);
+                // uI.GetComponent<UIItemBatchUseComponent>().OnInitUI(self.BagInfo);
+                // self.OnCloseTips();
+                return;
+            }
+
+            if (itemConfig.ItemSubType == 113 || itemConfig.ItemSubType == 127)
+            {
+                if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < 1)
+                {
+                    FlyTipComponent.Instance.ShowFlyTip("背包格子不够！");
+                    return;
+                }
+
+                int curSceneId = 0;
+                int needSceneId = int.Parse(self.BagInfo.ItemPar.Split('@')[0]);
+                MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
+                if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
+                {
+                    curSceneId = mapComponent.SceneId;
+                }
+
+                if (curSceneId != needSceneId)
+                {
+                    string fubenName = DungeonConfigCategory.Instance.Get(needSceneId).ChapterName;
+                    FlyTipComponent.Instance.ShowFlyTip($"请前往{fubenName}");
+                    return;
+                }
+                else
+                {
+                    EventSystem.Instance.Publish(self.Root(), new DigForTreasure() { BagInfo = self.BagInfo });
+                    self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Role);
+                    FlyTipComponent.Instance.ShowFlyTip($"消耗道具:{itemConfig.ItemName}");
+                    self.OnCloseTips();
+                    return;
+                }
+            }
+
+            if (itemConfig.ItemSubType == 108
+                || itemConfig.ItemSubType == 109
+                || itemConfig.ItemSubType == 117
+                || itemConfig.ItemSubType == 118
+                || itemConfig.ItemSubType == 119
+                || itemConfig.ItemSubType == 122)
+            {
+                PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
+                RolePetInfo petInfo = petComponent.GetFightPet();
+                if ((itemConfig.ItemSubType == 108
+                        || itemConfig.ItemSubType == 109) && petInfo != null)
+                {
+                    PetNetHelper.RequestXiLian(self.Root(), self.BagInfo.BagInfoID, petInfo.Id).Coroutine();
+                    self.OnCloseTips();
+                    return;
+                }
+
+                FlyTipComponent.Instance.ShowFlyTip("请前往宠物重塑界面使用！");
+                return;
+            }
+
+            if (itemConfig.ItemSubType == 132)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("请前往赛季界面使用");
+                return;
+            }
+
+            if (itemConfig.ItemSubType == 137)
+            {
+                // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIPetEggFuLing);
+                // ui.GetComponent<UIPetEggFuLingComponent>().UpdateItemList(self.BagInfo).Coroutine();
+                // UIHelper.PlayUIMusic("10010");
+                // self.OnCloseTips();
+                return;
+            }
+
+            if (itemConfig.ItemSubType == 139)
+            {
+                if (self.Root().GetComponent<BagComponentC>().AdditionalCellNum[0] >= 10)
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("已达到最大购买格子数量!"));
+                    return;
+                }
+            }
+
+            if (itemConfig.ItemSubType == 140)
+            {
+                if (self.Root().GetComponent<BagComponentC>().AdditionalCellNum[5] >= 10)
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("已达到最大购买格子数量!"));
+                    return;
+                }
+            }
+
+            long instanceid = self.InstanceId;
             errorCode = await BagClientNetHelper.RequestUseItem(self.Root(), self.BagInfo, usrPar);
 
-            // if (errorCode == ErrorCode.ERR_Success)
-            // {
-            //     FloatTipManager.Instance.ShowFloatTipDi(GameSettingLanguge.LoadLocalization("道具使用成功!"));
-            // }
-            //
-            // if (errorCode == ErrorCode.ERR_ItemOnlyUseOcc)
-            // {
-            //     OccupationConfig occupationConfig = OccupationConfigCategory.Instance.Get(itemConfig.UseOcc);
-            //     string tip = string.Format(ErrorHelp.Instance.GetHint(ErrorCode.ERR_ItemOnlyUseOcc), occupationConfig.OccupationName);
-            //     FloatTipManager.Instance.ShowFloatTipDi(GameSettingLanguge.LoadLocalization(tip));
-            // }
-            //
-            // //播放音效
-            // UIHelper.PlayUIMusic("10010");
-            //
-            // if (instanceid == self.InstanceId)
-            // {
-            //     if (itemConfig.ItemSubType == 110)
-            //     {
-            //         UIHelper.Remove(self.ZoneScene(), UIType.UIRole);
-            //     }
-            //
-            //     //注销Tips
-            //     self.OnCloseTips();
-            // }
+            if (errorCode == ErrorCode.ERR_Success)
+            {
+                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.Instance.LoadLocalization("道具使用成功!"));
+            }
 
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+            if (errorCode == ErrorCode.ERR_ItemOnlyUseOcc)
+            {
+                OccupationConfig occupationConfig = OccupationConfigCategory.Instance.Get(itemConfig.UseOcc);
+                string tip = string.Format(HintHelp.GetErrorHint(ErrorCode.ERR_ItemOnlyUseOcc), occupationConfig.OccupationName);
+                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.Instance.LoadLocalization(tip));
+            }
+
+            //播放音效
+            // UIHelper.PlayUIMusic("10010");
+
+            if (instanceid == self.InstanceId)
+            {
+                if (itemConfig.ItemSubType == 110)
+                {
+                    self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Role);
+                }
+
+                //注销Tips
+                self.OnCloseTips();
+            }
+
+            self.OnCloseTips();
         }
 
         private static void RequestXiangQianGem(this DlgItemTips self, string usrPar)
         {
             BagClientNetHelper.RequestXiangQianGem(self.Root(), self.BagInfo, usrPar).Coroutine();
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+            self.OnCloseTips();
         }
 
         private static async ETTask OnSplitButton(this DlgItemTips self)
         {
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_RoleBagSplit);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgRoleBagSplit>().Init(self.BagInfo);
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+            self.OnCloseTips();
         }
 
         private static void OnPlanButton(this DlgItemTips self)
         {
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+            self.OnCloseTips();
         }
 
         private static void OnStoreHouseButton(this DlgItemTips self)
@@ -595,19 +592,19 @@ namespace ET.Client
                 BagClientNetHelper.RquestPutStoreHouse(self.Root(), self.BagInfo).Coroutine();
             }
 
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+            self.OnCloseTips();
         }
 
         private static void OnHuiShouButton(this DlgItemTips self)
         {
             EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"1_{self.BagInfo.BagInfoID}" });
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+            self.OnCloseTips();
         }
 
         private static void OnHuiShouCancleButton(this DlgItemTips self)
         {
             EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"0_{self.BagInfo.BagInfoID}" });
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+            self.OnCloseTips();
         }
 
         private static void OnXieXiaGemButton(this DlgItemTips self)
@@ -625,7 +622,7 @@ namespace ET.Client
 
             BagClientNetHelper.RequestXieXiaGem(self.Root(), dlgRole.View.ES_RoleGem.XiangQianItem,
                 dlgRole.View.ES_RoleGem.XiangQianIndex.ToString()).Coroutine();
-            self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
+            self.OnCloseTips();
         }
 
         private static void OnPutBagButton(this DlgItemTips self)
@@ -639,6 +636,11 @@ namespace ET.Client
                 BagClientNetHelper.RquestPutBag(self.Root(), self.BagInfo).Coroutine();
             }
 
+            self.OnCloseTips();
+        }
+
+        private static void OnCloseTips(this DlgItemTips self)
+        {
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemTips);
         }
     }

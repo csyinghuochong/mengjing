@@ -508,15 +508,7 @@ namespace ET
         }
 
 
-        /// <summary>
-        /// 支持批量使用的道具.  目前服务器只支持ItemSubType = 111 的道具批量使用
-        /// 支持批量使用的道具客户端点击使用的时候二次弹框，输入使用数量。
-        /// self.ZoneScene().GetComponent<BagComponent>().SendUseItem(self.BagInfo, 使用数量).Coroutine();
-        /// </summary>
-        public static List<int> BatchUseItemList()
-        {
-            return new List<int>() { 10010042, 10010043 };
-        }
+
 
 
         public static List<BossDevelopment> BossDevelopmentList_5()

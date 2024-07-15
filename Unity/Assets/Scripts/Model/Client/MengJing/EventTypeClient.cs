@@ -406,4 +406,9 @@ namespace ET.Client
     {
         public M2C_SyncMiJingDamage M2C_SyncMiJingDamage;
     }
+
+    public struct DigForTreasure
+    {
+        public BagInfo BagInfo;
+    }
 }

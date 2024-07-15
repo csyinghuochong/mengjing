@@ -124,7 +124,7 @@ namespace ET.Server
                     return;
                 }
 
-                if (itemConfig.ItemSubType == 111 && ConfigHelper.BatchUseItemList().Contains(itemConfig.Id))
+                if (itemConfig.ItemSubType == 111 && ConfigData.BatchUseItemList.Contains(itemConfig.Id))
                 {
                     //目前只有111类型支持批量使用
                     if (!string.IsNullOrEmpty(request.OperatePar))

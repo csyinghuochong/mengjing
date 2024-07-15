@@ -5,7 +5,17 @@ namespace ET
 {
     public static class ConfigData
     {
-
+        /// <summary>
+        /// 支持批量使用的道具.  目前服务器只支持ItemSubType = 111 的道具批量使用
+        /// 支持批量使用的道具客户端点击使用的时候二次弹框，输入使用数量。
+        /// self.ZoneScene().GetComponent<BagComponent>().SendUseItem(self.BagInfo, 使用数量).Coroutine();
+        /// </summary>
+        [StaticField]
+        public static List<int> BatchUseItemList = new()
+        {
+            10010042, 10010043
+        };
+        
         //客戶端活动提示
         [StaticField]
         public static List<ActivityTipConfig> ActivityShowList = new List<ET.ActivityTipConfig>()
