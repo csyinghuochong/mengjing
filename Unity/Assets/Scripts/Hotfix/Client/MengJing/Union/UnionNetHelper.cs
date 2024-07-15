@@ -160,5 +160,12 @@ namespace ET.Client
             M2C_UnionXiuLianResponse response = (M2C_UnionXiuLianResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<M2C_BloodstoneQiangHuaResponse> BloodstoneQiangHuaRequest(Scene root)
+        {
+            C2M_BloodstoneQiangHuaRequest request = C2M_BloodstoneQiangHuaRequest.Create();
+            M2C_BloodstoneQiangHuaResponse response = (M2C_BloodstoneQiangHuaResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response;
+        }
     }
 }

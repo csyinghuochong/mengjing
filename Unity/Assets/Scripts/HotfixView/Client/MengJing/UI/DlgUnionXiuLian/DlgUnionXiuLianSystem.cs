@@ -8,6 +8,7 @@ namespace ET.Client
 {
     [FriendOf(typeof(ES_UnionRoleXiuLian))]
     [FriendOf(typeof(ES_UnionPetXiuLian))]
+    [FriendOf(typeof(ES_UnionBloodStone))]
     [FriendOf(typeof(DlgUnionXiuLian))]
     public static class DlgUnionXiuLianSystem
     {
@@ -31,6 +32,9 @@ namespace ET.Client
                     break;
                 case 1:
                     self.View.ES_UnionPetXiuLian.uiTransform.gameObject.SetActive(true);
+                    break;
+                case 2:
+                    self.View.ES_UnionBloodStone.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
