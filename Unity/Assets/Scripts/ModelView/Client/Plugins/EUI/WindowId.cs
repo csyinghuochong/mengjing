@@ -174,5 +174,6 @@ namespace ET.Client
 		WindowID_TuZhiMake,
 		WindowID_ItemBatchUse,
 		WindowID_PetEggFuLing,
+		WindowID_ItemExpBox,
 	}
 }

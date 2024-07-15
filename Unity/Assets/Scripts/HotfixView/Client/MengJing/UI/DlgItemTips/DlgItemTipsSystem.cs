@@ -413,21 +413,21 @@ namespace ET.Client
                 return;
             }
 
-            // if (itemConfig.ItemSubType == 112)
-            // {
-            //     AccountInfoComponent accountInfoComponent = self.ZoneScene().GetComponent<AccountInfoComponent>();
-            //     long openserverTime = ServerHelper.GetOpenServerTime(!GlobalHelp.IsOutNetMode, accountInfoComponent.ServerId);
-            //     if (TimeHelper.ServerNow() - openserverTime < TimeHelper.Hour * 4)
-            //     {
-            //         FloatTipManager.Instance.ShowFloatTip("开区4小时后开启!");
-            //         return;
-            //     }
-            //
-            //     UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIItemExpBox);
-            //     uI.GetComponent<UIItemExpBoxComponent>().OnInitUI(self.BagInfo);
-            //     self.OnCloseTips();
-            //     return;
-            // }
+            if (itemConfig.ItemSubType == 112)
+            {
+                // AccountInfoComponent accountInfoComponent = self.ZoneScene().GetComponent<AccountInfoComponent>();
+                // long openserverTime = ServerHelper.GetOpenServerTime(!GlobalHelp.IsOutNetMode, accountInfoComponent.ServerId);
+                // if (TimeHelper.ServerNow() - openserverTime < TimeHelper.Hour * 4)
+                // {
+                //     FloatTipManager.Instance.ShowFloatTip("开区4小时后开启!");
+                //     return;
+                // }
+
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ItemExpBox);
+                self.Root().GetComponent<UIComponent>().GetComponent<DlgItemExpBox>().OnInitUI(self.BagInfo);
+                self.OnCloseTips();
+                return;
+            }
 
             // 弹出道具批量使用
             if (self.BagInfo.ItemNum >= 2 && ConfigData.BatchUseItemList.Contains(itemConfig.Id))
