@@ -171,5 +171,6 @@ namespace ET.Client
 		WindowID_OpenChest,
 		WindowID_JiaYuanOneKeyPlant,
 		WindowID_UnionXiuLian,
+		WindowID_TuZhiMake,
 	}
 }
