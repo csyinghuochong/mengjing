@@ -175,5 +175,6 @@ namespace ET.Client
 		WindowID_ItemBatchUse,
 		WindowID_PetEggFuLing,
 		WindowID_ItemExpBox,
+		WindowID_Turtle,
 	}
 }
