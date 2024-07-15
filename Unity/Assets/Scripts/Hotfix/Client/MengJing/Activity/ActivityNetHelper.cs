@@ -414,5 +414,22 @@ namespace ET.Client
             R2C_RankDemonResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as R2C_RankDemonResponse;
             return response;
         }
+
+        public static async ETTask<int> TurtleSupportRequest(Scene root, int supportId)
+        {
+            C2M_TurtleSupportRequest request = C2M_TurtleSupportRequest.Create();
+            request.SupportId = supportId;
+
+            M2C_TurtleSupportResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_TurtleSupportResponse;
+            return response.Error;
+        }
+
+        public static async ETTask<M2C_TurtleRecordResponse> TurtleRecordRequest(Scene root)
+        {
+            C2M_TurtleRecordRequest request = C2M_TurtleRecordRequest.Create();
+
+            M2C_TurtleRecordResponse response = await root.GetComponent<ClientSenderCompnent>().Call(request) as M2C_TurtleRecordResponse;
+            return response;
+        }
     }
 }
