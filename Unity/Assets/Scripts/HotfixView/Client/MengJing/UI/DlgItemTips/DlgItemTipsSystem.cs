@@ -424,7 +424,7 @@ namespace ET.Client
                 // }
 
                 await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ItemExpBox);
-                self.Root().GetComponent<UIComponent>().GetComponent<DlgItemExpBox>().OnInitUI(self.BagInfo);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgItemExpBox>().OnInitUI(self.BagInfo);
                 self.OnCloseTips();
                 return;
             }
