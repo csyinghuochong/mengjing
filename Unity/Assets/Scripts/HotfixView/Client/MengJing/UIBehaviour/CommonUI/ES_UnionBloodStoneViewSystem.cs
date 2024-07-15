@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -11,6 +10,9 @@ namespace ET.Client
         private static void Awake(this ES_UnionBloodStone self, Transform transform)
         {
             self.uiTransform = transform;
+            
+            self.E_UpBtnButton.AddListenerAsync(self.OnUpBtn);
+            self.UpdateInfo();
         }
 
         [EntitySystem]
