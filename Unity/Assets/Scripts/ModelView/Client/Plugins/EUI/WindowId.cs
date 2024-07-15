@@ -173,5 +173,6 @@ namespace ET.Client
 		WindowID_UnionXiuLian,
 		WindowID_TuZhiMake,
 		WindowID_ItemBatchUse,
+		WindowID_PetEggFuLing,
 	}
 }
