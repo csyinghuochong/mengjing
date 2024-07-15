@@ -170,5 +170,6 @@ namespace ET.Client
 		WindowID_JiaYuanPlanWatch,
 		WindowID_OpenChest,
 		WindowID_JiaYuanOneKeyPlant,
+		WindowID_UnionXiuLian,
 	}
 }
