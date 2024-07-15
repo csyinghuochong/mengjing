@@ -47,7 +47,7 @@ namespace ET.Client
             self.E_TextMine.text = mineBattleConfig.Name + (hexin? "(核心矿)" : string.Empty);
 
             int zone = self.Root().GetComponent<PlayerComponent>().ServerId;
-            int openDay = ServerHelper.GetOpenServerDay(false, zone);
+            int openDay = ServerHelper.GetServeOpenrDay( zone);
             float coffi = CommonHelp.GetMineCoefficient(openDay, mingType, index, petMineExtend);
             int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi);
             self.E_TextChanChu.text = $"{chanchu}/小时";

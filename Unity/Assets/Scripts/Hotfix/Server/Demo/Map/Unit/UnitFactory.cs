@@ -101,7 +101,7 @@ namespace ET.Server
 
         public static Unit CreateMonster(Scene scene, int monsterID, float3 vector3, CreateMonsterInfo createMonsterInfo)
         {
-            int openDay = ServerHelper.GetOpenServerDay(false, scene.Zone());
+            int openDay = ServerHelper.GetServeOpenrDay( scene.Zone());
             monsterID = MonsterConfigCategory.Instance.GetNewMonsterId(openDay, monsterID);
 
             //精灵不能作为主人

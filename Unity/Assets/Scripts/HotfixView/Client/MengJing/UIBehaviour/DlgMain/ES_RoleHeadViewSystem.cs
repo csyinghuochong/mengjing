@@ -68,7 +68,7 @@ namespace ET.Client
         {
             int sceneType = self.Root().GetComponent<MapComponent>().SceneType;
             RolePetInfo rolePetInfo = self.Root().GetComponent<PetComponentC>().GetFightPet();
-            self.EG_PetIconSetRectTransform.gameObject.SetActive(!GlobalHelp.IsBanHaoMode() && rolePetInfo != null &&
+            self.EG_PetIconSetRectTransform.gameObject.SetActive(!CommonHelp.IsBanHaoZone(self.Root().GetComponent<PlayerComponent>().ServerId) && rolePetInfo != null &&
                 sceneType != SceneTypeEnum.RunRace);
             if (rolePetInfo == null)
             {

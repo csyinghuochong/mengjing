@@ -3,6 +3,25 @@ syntax = "proto3";
 
 package ET;
 
+//ResponseType NetClient2Main_ServerList
+message Main2NetClient_ServerList // IRequest
+{
+	int32 RpcId = 1;
+	int32 OwnerFiberId = 2;
+	int32  VersionMode = 3;
+}
+
+message NetClient2Main_ServerList // IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+
+	repeated ServerItem ServerItems = 2;		//服务器列表
+	string NoticeVersion = 3;
+	string NoticeText = 4;
+}
+
 //ResponseType NetClient2Main_Login
 message Main2NetClient_Login // IRequest
 {

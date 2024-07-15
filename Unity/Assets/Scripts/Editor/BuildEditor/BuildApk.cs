@@ -235,7 +235,7 @@ public class MyEditorScript
 			app_name = "梦境";
 		}
 		int version = GetVersion();
-		app_name = app_name + ((VersionMode)version).ToString() + name;
+		app_name = app_name + ((int)version).ToString() + name;
 		string target_dir = Application.dataPath + "/TargetAndroid";
 		string target_name = app_name + ".apk";
 		BuildTargetGroup targetGroup = BuildTargetGroup.Android;

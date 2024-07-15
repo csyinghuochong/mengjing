@@ -268,6 +268,23 @@ message M2C_Reload // ISessionResponse
 	string Message = 3;
 }
 
+//ResponseType R2C_ServerList
+message C2R_ServerList // ISessionRequest
+{
+	int32 RpcId = 90;
+	string Message = 91;
+}
+
+message R2C_ServerList // ISessionResponse
+{
+	int32 RpcId = 90;
+	string Message = 91;
+	int32 Error = 92;
+	repeated ServerItem ServerItems = 2;		//服务器列表
+	string NoticeVersion = 3;
+	string NoticeText = 4;
+}
+
 //ResponseType R2C_LoginAccount
 message C2R_LoginAccount // ISessionRequest
 {

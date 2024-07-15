@@ -29,7 +29,7 @@ namespace ET.Server
                 paimaiingGold += (paiMaiItemsTo[i].Price * paiMaiItemsTo[i].BagInfo.ItemNum);
             }
 
-            int openday = ServerHelper.GetOpenServerDay(false, scene.Zone());
+            int openday = ServerHelper.GetServeOpenrDay( scene.Zone());
             long todayGold = ConfigHelper.GetPaiMaiTodayGold(openday);
             long sellGold = request.PaiMaiItemInfo.BagInfo.ItemNum * request.PaiMaiItemInfo.Price;
             if (paimaiingGold + request.PaiMaiTodayGold + sellGold >= todayGold)

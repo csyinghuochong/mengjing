@@ -4,14 +4,9 @@ namespace ET.Client
 {
     public static class GlobalHelp
     {
-        public static bool IsBanHaoMode()
+        public static int GetVersionMode()
         {
-            return GameObject.Find("Global").GetComponent<Init>().VersionMode == VersionMode.BanHao;
-        }
-
-        public static bool IsOutNetMode()
-        {
-            return GameObject.Find("Global").GetComponent<Init>().OueNetMode;
+            return GameObject.Find("Global").GetComponent<Init>().VersionMode;
         }
 
         public static Shader Find(string path)

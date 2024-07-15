@@ -31,13 +31,24 @@ namespace ET.Client
             await FiberManager.Instance.Remove(fiberId);
         }
 
-        public static async ETTask<long> LoginAsync(this ClientSenderCompnent self, string account, string password)
+        public static async ETTask<NetClient2Main_ServerList> GetServerList(this ClientSenderCompnent self, int versionMode)
         {
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
+
+            Main2NetClient_ServerList main2NetClientServerList = Main2NetClient_ServerList.Create();
+            main2NetClientServerList.OwnerFiberId = self.Fiber().Id;
+            NetClient2Main_ServerList respone = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientServerList) as NetClient2Main_ServerList;
             
+            return respone;
+        }
+
+        public static async ETTask<long> LoginAsync(this ClientSenderCompnent self, string account, string password)
+        {
             Log.Debug("LoginAsync");
-            
+            self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
+            self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
+
             Main2NetClient_Login main2NetClientLogin = Main2NetClient_Login.Create();
             main2NetClientLogin.OwnerFiberId = self.Fiber().Id;
             main2NetClientLogin.Account      = account;

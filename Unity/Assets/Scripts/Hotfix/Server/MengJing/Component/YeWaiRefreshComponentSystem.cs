@@ -485,7 +485,7 @@ namespace ET.Server
             {
                 self.Scene().GetComponent<MiJingComponent>().BossId = refreshMonster.MonsterId;
 
-                if (!CommonHelp.IsBanHaoZone(self.Zone()) && ServerHelper.GetOpenServerDay(false, self.Zone()) > 0)
+                if (!CommonHelp.IsBanHaoZone(self.Zone()) && ServerHelper.GetServeOpenrDay( self.Zone()) > 0)
                 {
                     G2Robot_MessageRequest G2Robot_MessageRequest = G2Robot_MessageRequest.Create();
                     G2Robot_MessageRequest.Zone = self.Zone();

@@ -475,7 +475,7 @@ namespace ET.Server
         public static void GenerateUnionBoss(this UnionSceneComponent self, Scene scene, long unionid)
         {
             //获取开服天数
-            int openDay = ServerHelper.GetOpenServerDay(false, self.Zone());
+            int openDay = ServerHelper.GetServeOpenrDay( self.Zone());
 
             int monsterID = 72000021;
             //根据开服天数创建怪物

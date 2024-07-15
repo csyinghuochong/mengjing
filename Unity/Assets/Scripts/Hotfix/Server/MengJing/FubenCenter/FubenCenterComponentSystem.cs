@@ -478,7 +478,7 @@ namespace ET.Server
                 FubenHelp.CreateMonsterList(fubnescene, sceneConfigs[i].CreateMonster);
                 FubenHelp.CreateMonsterList(fubnescene, sceneConfigs[i].CreateMonsterPosi);
 
-                int openDay = ServerHelper.GetOpenServerDay(false, self.Zone());
+                int openDay = ServerHelper.GetServeOpenrDay( self.Zone());
                 yeWaiRefreshComponen.OnZeroClockUpdate(openDay);
             }
         }

@@ -40,7 +40,7 @@ namespace ET.Server
                     return;
                 }
 
-                string serverName = ServerHelper.GetGetServerItem(false, unit.Zone()).ServerName;
+                string serverName = ServerHelper.GetGetServerItem(VersionMode.Beta, unit.Zone()).ServerName;
                 UserInfoComponentS userInfoComponent = unit.GetComponent<UserInfoComponentS>();
                 string userName = userInfoComponent.UserInfo.Name;
 

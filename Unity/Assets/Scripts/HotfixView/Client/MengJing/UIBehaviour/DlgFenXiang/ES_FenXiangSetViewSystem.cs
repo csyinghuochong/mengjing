@@ -30,7 +30,7 @@ namespace ET.Client
                 self.EG_FenXiang_QQRectTransform.localPosition = new Vector3(-257f, 112f, 0f);
             }
 
-            if (GlobalHelp.IsBanHaoMode())
+            if (CommonHelp.IsBanHaoZone( self.Root().GetComponent<PlayerComponent>().ServerId) )
             {
                 self.E_Text_tip1Text.gameObject.SetActive(false);
             }

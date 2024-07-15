@@ -19,6 +19,13 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.Dictionary, 100);
             self.View.E_AccountInputField.text = PlayerPrefs.GetString("MJ_Account");
             self.View.E_PasswordInputField.text = PlayerPrefs.GetString("MJ_Password");
+            
+            //self.RequestServerList().Coroutine();
+        }
+
+        public static async ETTask RequestServerList(this DlgMJLogin self)
+        {
+            await LoginHelper.GetServerList(self.Root(), GlobalHelp.GetVersionMode());
         }
 
         public static void OnLoop(this DlgMJLogin self, Transform transform, int index)

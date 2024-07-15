@@ -16,7 +16,7 @@ namespace ET.Server
 
             if (CommonHelp.GetDayByTime(dBUnionInfo.MysteryFreshTime) != CommonHelp.GetDayByTime(TimeHelper.ServerNow()))
             {
-                int openDay = ServerHelper.GetOpenServerDay(false, scene.Zone());
+                int openDay = ServerHelper.GetServeOpenrDay( scene.Zone());
                 dBUnionInfo.MysteryItemInfos = MysteryShopHelper.InitUnionMysteryItemInfos(openDay); 
                 dBUnionInfo.MysteryFreshTime = TimeHelper.ServerNow();
                 UnitCacheHelper.SaveComponentCache(scene.Root(), dBUnionInfo).Coroutine();

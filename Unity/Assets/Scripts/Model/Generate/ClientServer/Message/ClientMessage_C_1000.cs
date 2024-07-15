@@ -5,6 +5,88 @@ namespace ET
 {
     // using
     [MemoryPackable]
+    [Message(ClientMessage.Main2NetClient_ServerList)]
+    [ResponseType(nameof(NetClient2Main_ServerList))]
+    public partial class Main2NetClient_ServerList : MessageObject, IRequest
+    {
+        public static Main2NetClient_ServerList Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(Main2NetClient_ServerList), isFromPool) as Main2NetClient_ServerList;
+        }
+
+        [MemoryPackOrder(0)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(1)]
+        public int OwnerFiberId { get; set; }
+
+        [MemoryPackOrder(2)]
+        public int VersionMode { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.OwnerFiberId = default;
+            this.VersionMode = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
+    [Message(ClientMessage.NetClient2Main_ServerList)]
+    public partial class NetClient2Main_ServerList : MessageObject, IResponse
+    {
+        public static NetClient2Main_ServerList Create(bool isFromPool = false)
+        {
+            return ObjectPool.Instance.Fetch(typeof(NetClient2Main_ServerList), isFromPool) as NetClient2Main_ServerList;
+        }
+
+        [MemoryPackOrder(89)]
+        public int RpcId { get; set; }
+
+        [MemoryPackOrder(90)]
+        public int Error { get; set; }
+
+        [MemoryPackOrder(91)]
+        public string Message { get; set; }
+
+        /// <summary>
+        /// 服务器列表
+        /// </summary>
+        [MemoryPackOrder(1)]
+        public List<ServerItem> ServerItems { get; set; } = new();
+
+        [MemoryPackOrder(2)]
+        public string NoticeVersion { get; set; }
+
+        [MemoryPackOrder(3)]
+        public string NoticeText { get; set; }
+
+        public override void Dispose()
+        {
+            if (!this.IsFromPool)
+            {
+                return;
+            }
+
+            this.RpcId = default;
+            this.Error = default;
+            this.Message = default;
+            this.ServerItems.Clear();
+            this.NoticeVersion = default;
+            this.NoticeText = default;
+
+            ObjectPool.Instance.Recycle(this);
+        }
+    }
+
+    [MemoryPackable]
     [Message(ClientMessage.Main2NetClient_Login)]
     [ResponseType(nameof(NetClient2Main_Login))]
     public partial class Main2NetClient_Login : MessageObject, IRequest
@@ -184,9 +266,11 @@ namespace ET
 
     public static class ClientMessage
     {
-        public const ushort Main2NetClient_Login = 1001;
-        public const ushort NetClient2Main_Login = 1002;
-        public const ushort Main2NetClient_LoginGame = 1003;
-        public const ushort NetClient2Main_LoginGame = 1004;
+        public const ushort Main2NetClient_ServerList = 1001;
+        public const ushort NetClient2Main_ServerList = 1002;
+        public const ushort Main2NetClient_Login = 1003;
+        public const ushort NetClient2Main_Login = 1004;
+        public const ushort Main2NetClient_LoginGame = 1005;
+        public const ushort NetClient2Main_LoginGame = 1006;
     }
 }

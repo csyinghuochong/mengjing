@@ -87,7 +87,7 @@ namespace ET.Client
                 return;
             }
 
-            if (GlobalHelp.IsBanHaoMode() || string.IsNullOrEmpty(response.Message))
+            if (CommonHelp.IsBanHaoZone(self.Root().GetComponent<PlayerComponent>().ServerId) || string.IsNullOrEmpty(response.Message))
             {
                 return;
             }

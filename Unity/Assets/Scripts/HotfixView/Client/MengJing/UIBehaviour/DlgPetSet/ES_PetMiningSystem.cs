@@ -161,7 +161,7 @@ namespace ET.Client
         {
             int chatchun = 0;
             int zone = self.Root().GetComponent<PlayerComponent>().ServerId;
-            int openDay = ServerHelper.GetOpenServerDay(false, zone);
+            int openDay = ServerHelper.GetServeOpenrDay( zone);
 
             List<PetMingPlayerInfo> petMingPlayers = self.GetSelfPetMing();
             for (int i = 0; i < petMingPlayers.Count; i++)

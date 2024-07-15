@@ -5,11 +5,20 @@ namespace ET.Client
     [FriendOf(typeof(PlayerComponent))]
     public static class LoginHelper
     {
+        
+        public static async ETTask<R2C_ServerList> GetServerList(Scene root, int versionMode)
+        {
+            await ETTask.CompletedTask;
+            root.RemoveComponent<ClientSenderCompnent>();
+            ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
+            await clientSenderCompnent.GetServerList(versionMode);
+            return null;
+        }
+
         public static async ETTask Login(Scene root, string account, string password)
         {
             root.RemoveComponent<ClientSenderCompnent>();
             ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
-
             //登陆成功之后才有session.  才能call
             await clientSenderCompnent.LoginAsync(account, password);
             await EventSystem.Instance.PublishAsync(root, new LoginFinish());

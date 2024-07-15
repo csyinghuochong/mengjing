@@ -76,7 +76,7 @@ namespace ET.Server
                 return;
             }
             int zone = attack.Zone();
-            ServerItem serverItem  = ServerHelper.GetGetServerItem(false, zone);
+            ServerItem serverItem  = ServerHelper.GetGetServerItem(VersionMode.Beta, zone);
             if (serverItem == null)
             {
                 return;
@@ -111,7 +111,7 @@ namespace ET.Server
 
         public static void TrialBattleInfo(int zone, string loginfo)
         {
-            ServerItem serverItem = ServerHelper.GetGetServerItem(false, zone);
+            ServerItem serverItem = ServerHelper.GetGetServerItem(VersionMode.Beta, zone);
             if (serverItem == null)
             {
                 return;
@@ -129,7 +129,7 @@ namespace ET.Server
 
         public static void PetMingBattleInfo(int zone, string loginfo)
         {
-            ServerItem serverItem = ServerHelper.GetGetServerItem(false, zone);
+            ServerItem serverItem = ServerHelper.GetGetServerItem(VersionMode.Beta, zone);
             if (serverItem == null)
             {
                 return;
@@ -183,7 +183,7 @@ namespace ET.Server
             }
             else
             {
-                ConfigData.NoticeLastContent = string.Empty;
+                ConfigData.NoticeLastContent = "0@公告未配置";
             }
 
             ConfigData.NoticeLastGetTime = serverTime;
@@ -391,7 +391,7 @@ namespace ET.Server
                 return;
             }
 
-            int openDay = ServerHelper.GetOpenServerDay(false, unit.Zone());
+            int openDay = ServerHelper.GetServeOpenrDay( unit.Zone());
             //钻石线
             if (userInfo.UserInfo.Diamond >= unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber) * 150 + 50000)
             {

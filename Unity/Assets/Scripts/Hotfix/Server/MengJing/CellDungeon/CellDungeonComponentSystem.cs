@@ -507,7 +507,7 @@ namespace ET.Server
         public static void InitMysteryItemInfos(this CellDungeonComponent self)
         {
             self.MysteryItemInfos.Clear();
-            int openServerDay = ServerHelper.GetOpenServerDay(false, self.Zone());
+            int openServerDay = ServerHelper.GetServeOpenrDay( self.Zone());
             self.MysteryItemInfos = MysteryShopHelper.InitMysteryItemInfos(openServerDay);
         }
 
