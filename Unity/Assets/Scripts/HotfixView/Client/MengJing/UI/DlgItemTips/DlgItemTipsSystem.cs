@@ -499,10 +499,10 @@ namespace ET.Client
 
             if (itemConfig.ItemSubType == 137)
             {
-                // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIPetEggFuLing);
-                // ui.GetComponent<UIPetEggFuLingComponent>().UpdateItemList(self.BagInfo).Coroutine();
-                // UIHelper.PlayUIMusic("10010");
-                // self.OnCloseTips();
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetEggFuLing);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetEggFuLing>().UpdateItemList(self.BagInfo);
+                CommonViewHelper.PlayUIMusic("10010");
+                self.OnCloseTips();
                 return;
             }
 
@@ -540,7 +540,7 @@ namespace ET.Client
             }
 
             //播放音效
-            // UIHelper.PlayUIMusic("10010");
+            CommonViewHelper.PlayUIMusic("10010");
 
             if (instanceid == self.InstanceId)
             {

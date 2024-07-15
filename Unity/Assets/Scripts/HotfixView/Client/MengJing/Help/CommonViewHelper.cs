@@ -7,6 +7,15 @@ namespace ET.Client
 {
     public static class CommonViewHelper
     {
+        //播放UI音效
+        public static void PlayUIMusic(string music)
+        {
+            if (!string.IsNullOrEmpty(music))
+            {
+                SoundComponent.Instance.PlayClip("UI/" + music, "mp3").Coroutine();
+            }
+        }
+
         public static void DOScale(Transform transform, Vector3 vector3, float time)
         {
             transform.DOScale(vector3, time).SetEase(Ease.OutCubic);

@@ -130,7 +130,7 @@ namespace ET.Client
                 self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.ES_MainSkill.RequestShiQu(ids).Coroutine();
 
                 //播放音效
-                // UIHelper.PlayUIMusic("10004");
+                CommonViewHelper.PlayUIMusic("10004");
                 return;
             }
         }
