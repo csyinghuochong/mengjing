@@ -10,9 +10,7 @@ namespace ET.Client
         { 
             Unit unit = args.Unit;
             int unitType = unit.Type;
-            
-            Log.Debug(($"MoveStop_PlayIdleAnimate : {unitType}"));
-            
+
             if (unitType == UnitType.Player && unit.GetComponent<StateComponentC>().ObstructStatus == 1)
             {
                 args.Unit.GetComponent<StateComponentC>().ObstructStatus = 0;

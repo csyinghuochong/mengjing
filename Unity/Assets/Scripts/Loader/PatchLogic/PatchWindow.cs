@@ -66,7 +66,7 @@ public class PatchWindow : MonoBehaviour
     {
         _slider = transform.Find("Slider").GetComponent<Slider>();
         _tips = transform.Find("Slider/txt_tips").GetComponent<Text>();
-        _tips.text = "Initializing the game world !";
+        _tips.text = "资源更新 !";
         _messageBoxObj = transform.Find("MessgeBox").gameObject;
         _messageBoxObj.SetActive(false);
 
@@ -94,7 +94,7 @@ public class PatchWindow : MonoBehaviour
             {
                 UserEventDefine.UserTryInitialize.SendEventMessage();
             };
-            ShowMessageBox($"Failed to initialize package !", callback);
+            ShowMessageBox($"初始化资源包失败 !", callback);
         }
         else if (message is PatchEventDefine.PatchStatesChange)
         {
@@ -127,7 +127,7 @@ public class PatchWindow : MonoBehaviour
             {
                 UserEventDefine.UserTryUpdatePackageVersion.SendEventMessage();
             };
-            ShowMessageBox($"Failed to update static version, please check the network status.", callback);
+            ShowMessageBox($"更新版本失败, 请检查网络状态.", callback);
         }
         else if (message is PatchEventDefine.PatchManifestUpdateFailed)
         {
@@ -135,7 +135,7 @@ public class PatchWindow : MonoBehaviour
             {
                 UserEventDefine.UserTryUpdatePatchManifest.SendEventMessage();
             };
-            ShowMessageBox($"Failed to update patch manifest, please check the network status.", callback);
+            ShowMessageBox($"更新资源清单失败, 请检查网络状态.", callback);
         }
         else if (message is PatchEventDefine.WebFileDownloadFailed)
         {
@@ -144,7 +144,7 @@ public class PatchWindow : MonoBehaviour
             {
                 UserEventDefine.UserTryDownloadWebFiles.SendEventMessage();
             };
-            ShowMessageBox($"Failed to download file : {msg.FileName}", callback);
+            ShowMessageBox($"下载资源失败 : {msg.FileName}", callback);
         }
         else
         {

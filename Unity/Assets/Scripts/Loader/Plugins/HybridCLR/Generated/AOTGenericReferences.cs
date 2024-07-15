@@ -37,6 +37,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.AEvent<object,ET.Client.BuffScale>
 	// ET.AEvent<object,ET.Client.BuffUpdate>
 	// ET.AEvent<object,ET.Client.ChangeCameraMoveType>
+	// ET.AEvent<object,ET.Client.ChengJiuUpdate>
 	// ET.AEvent<object,ET.Client.DataUpdate_BagItemUpdate>
 	// ET.AEvent<object,ET.Client.DataUpdate_BeforeMove>
 	// ET.AEvent<object,ET.Client.DataUpdate_ChouKaWarehouseAddItem>
@@ -82,6 +83,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.AEvent<object,ET.Client.LoginFinish>
 	// ET.AEvent<object,ET.Client.Now_Hp_Update>
 	// ET.AEvent<object,ET.Client.OnSkillUse>
+	// ET.AEvent<object,ET.Client.PetFenJieUpdate>
 	// ET.AEvent<object,ET.Client.PlayAnimator>
 	// ET.AEvent<object,ET.Client.RankDemonInfo>
 	// ET.AEvent<object,ET.Client.ReddotChange>
@@ -392,6 +394,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.DlgJiaYuanMenuSystem.<OnButton_Gather>d__11>
 	// ET.StateMachineWrap<ET.Client.DlgJiaYuanMenuSystem.<OnButton_Sell>d__8>
 	// ET.StateMachineWrap<ET.Client.DlgJiaYuanMenuSystem.<RequestUproot>d__10>
+	// ET.StateMachineWrap<ET.Client.DlgJiaYuanOneKeyPlantSystem.<OnBtn_OnePlant>d__4>
 	// ET.StateMachineWrap<ET.Client.DlgJiaYuanPetFeedSystem.<OnButtonEat>d__8>
 	// ET.StateMachineWrap<ET.Client.DlgJiaYuanPetFeedSystem.<OnPointerDown>d__11>
 	// ET.StateMachineWrap<ET.Client.DlgJiaYuanPlanWatchSystem.<OnInitUI>d__2>
@@ -751,6 +754,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.JiaYuanNetHelper.<JiaYuanMysteryListRequest>d__17>
 	// ET.StateMachineWrap<ET.Client.JiaYuanNetHelper.<JiaYuanPastureBuyRequest>d__18>
 	// ET.StateMachineWrap<ET.Client.JiaYuanNetHelper.<JiaYuanPastureListRequest>d__19>
+	// ET.StateMachineWrap<ET.Client.JiaYuanNetHelper.<JiaYuanPetFeedRequest>d__24>
 	// ET.StateMachineWrap<ET.Client.JiaYuanNetHelper.<JiaYuanPetOperateRequest>d__0>
 	// ET.StateMachineWrap<ET.Client.JiaYuanNetHelper.<JiaYuanPickRequest>d__6>
 	// ET.StateMachineWrap<ET.Client.JiaYuanNetHelper.<JiaYuanPlanOpenRequest>d__5>
@@ -787,6 +791,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.Login_OnReturnLogin.<RunAsync2>d__1>
 	// ET.StateMachineWrap<ET.Client.M2C_AreneInfoHandler.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.M2C_BattleInfoResultHandler.<Run>d__0>
+	// ET.StateMachineWrap<ET.Client.M2C_ChengJiuActiveHandler.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.M2C_CreateDropItemsHandlers.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.M2C_CreateMyUnitHandler.<Run>d__0>
 	// ET.StateMachineWrap<ET.Client.M2C_CreateUnitsHandler.<Run>d__0>
@@ -857,6 +862,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// ET.StateMachineWrap<ET.Client.PaiMaiNetHelper.<PaiMaiShopShowList>d__0>
 	// ET.StateMachineWrap<ET.Client.PaiMaiNetHelper.<PaiMaiXiaJia>d__5>
 	// ET.StateMachineWrap<ET.Client.PetNetHelper.<OpenBoxRequest>d__31>
+	// ET.StateMachineWrap<ET.Client.PetNetHelper.<PetDuiHuanRequest>d__33>
 	// ET.StateMachineWrap<ET.Client.PetNetHelper.<PetFragmentDuiHuan>d__28>
 	// ET.StateMachineWrap<ET.Client.PetNetHelper.<PetFubenBeginRequest>d__32>
 	// ET.StateMachineWrap<ET.Client.PetNetHelper.<RequestChangePos>d__9>
@@ -1168,6 +1174,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Action<ET.DayJingLing>
 	// System.Action<ET.DayMonsters>
 	// System.Action<ET.DropItemInfo>
+	// System.Action<ET.EntityRef<object>>
 	// System.Action<ET.EquipChuanChengList>
 	// System.Action<ET.JiaYuanPurchase>
 	// System.Action<ET.MessageSessionDispatcherInfo>
@@ -1215,6 +1222,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.ArraySortHelper<ET.DayJingLing>
 	// System.Collections.Generic.ArraySortHelper<ET.DayMonsters>
 	// System.Collections.Generic.ArraySortHelper<ET.DropItemInfo>
+	// System.Collections.Generic.ArraySortHelper<ET.EntityRef<object>>
 	// System.Collections.Generic.ArraySortHelper<ET.EquipChuanChengList>
 	// System.Collections.Generic.ArraySortHelper<ET.JiaYuanPurchase>
 	// System.Collections.Generic.ArraySortHelper<ET.MessageSessionDispatcherInfo>
@@ -1243,6 +1251,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.Comparer<ET.DayJingLing>
 	// System.Collections.Generic.Comparer<ET.DayMonsters>
 	// System.Collections.Generic.Comparer<ET.DropItemInfo>
+	// System.Collections.Generic.Comparer<ET.EntityRef<object>>
 	// System.Collections.Generic.Comparer<ET.EquipChuanChengList>
 	// System.Collections.Generic.Comparer<ET.JiaYuanPurchase>
 	// System.Collections.Generic.Comparer<ET.MessageSessionDispatcherInfo>
@@ -1273,6 +1282,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.ComparisonComparer<ET.DayJingLing>
 	// System.Collections.Generic.ComparisonComparer<ET.DayMonsters>
 	// System.Collections.Generic.ComparisonComparer<ET.DropItemInfo>
+	// System.Collections.Generic.ComparisonComparer<ET.EntityRef<object>>
 	// System.Collections.Generic.ComparisonComparer<ET.EquipChuanChengList>
 	// System.Collections.Generic.ComparisonComparer<ET.JiaYuanPurchase>
 	// System.Collections.Generic.ComparisonComparer<ET.MessageSessionDispatcherInfo>
@@ -1297,6 +1307,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.ComparisonComparer<ushort>
 	// System.Collections.Generic.Dictionary.Enumerator<int,ET.Client.ItemViewData.EquipWeiZhiInfo>
 	// System.Collections.Generic.Dictionary.Enumerator<int,ET.Client.NumericAttribute>
+	// System.Collections.Generic.Dictionary.Enumerator<int,ET.EntityRef<object>>
 	// System.Collections.Generic.Dictionary.Enumerator<int,ET.RpcInfo>
 	// System.Collections.Generic.Dictionary.Enumerator<int,UnityEngine.Vector3>
 	// System.Collections.Generic.Dictionary.Enumerator<int,float>
@@ -1314,6 +1325,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.Dictionary.Enumerator<ushort,object>
 	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<int,ET.Client.ItemViewData.EquipWeiZhiInfo>
 	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<int,ET.Client.NumericAttribute>
+	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<int,ET.EntityRef<object>>
 	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<int,ET.RpcInfo>
 	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<int,UnityEngine.Vector3>
 	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<int,float>
@@ -1331,6 +1343,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<ushort,object>
 	// System.Collections.Generic.Dictionary.KeyCollection<int,ET.Client.ItemViewData.EquipWeiZhiInfo>
 	// System.Collections.Generic.Dictionary.KeyCollection<int,ET.Client.NumericAttribute>
+	// System.Collections.Generic.Dictionary.KeyCollection<int,ET.EntityRef<object>>
 	// System.Collections.Generic.Dictionary.KeyCollection<int,ET.RpcInfo>
 	// System.Collections.Generic.Dictionary.KeyCollection<int,UnityEngine.Vector3>
 	// System.Collections.Generic.Dictionary.KeyCollection<int,float>
@@ -1348,6 +1361,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.Dictionary.KeyCollection<ushort,object>
 	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<int,ET.Client.ItemViewData.EquipWeiZhiInfo>
 	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<int,ET.Client.NumericAttribute>
+	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<int,ET.EntityRef<object>>
 	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<int,ET.RpcInfo>
 	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<int,UnityEngine.Vector3>
 	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<int,float>
@@ -1365,6 +1379,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<ushort,object>
 	// System.Collections.Generic.Dictionary.ValueCollection<int,ET.Client.ItemViewData.EquipWeiZhiInfo>
 	// System.Collections.Generic.Dictionary.ValueCollection<int,ET.Client.NumericAttribute>
+	// System.Collections.Generic.Dictionary.ValueCollection<int,ET.EntityRef<object>>
 	// System.Collections.Generic.Dictionary.ValueCollection<int,ET.RpcInfo>
 	// System.Collections.Generic.Dictionary.ValueCollection<int,UnityEngine.Vector3>
 	// System.Collections.Generic.Dictionary.ValueCollection<int,float>
@@ -1382,6 +1397,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.Dictionary.ValueCollection<ushort,object>
 	// System.Collections.Generic.Dictionary<int,ET.Client.ItemViewData.EquipWeiZhiInfo>
 	// System.Collections.Generic.Dictionary<int,ET.Client.NumericAttribute>
+	// System.Collections.Generic.Dictionary<int,ET.EntityRef<object>>
 	// System.Collections.Generic.Dictionary<int,ET.RpcInfo>
 	// System.Collections.Generic.Dictionary<int,UnityEngine.Vector3>
 	// System.Collections.Generic.Dictionary<int,float>
@@ -1425,6 +1441,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.ICollection<ET.DayJingLing>
 	// System.Collections.Generic.ICollection<ET.DayMonsters>
 	// System.Collections.Generic.ICollection<ET.DropItemInfo>
+	// System.Collections.Generic.ICollection<ET.EntityRef<object>>
 	// System.Collections.Generic.ICollection<ET.EquipChuanChengList>
 	// System.Collections.Generic.ICollection<ET.JiaYuanPurchase>
 	// System.Collections.Generic.ICollection<ET.MessageSessionDispatcherInfo>
@@ -1435,6 +1452,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.ICollection<ET.WorldSayConfig>
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<int,ET.Client.ItemViewData.EquipWeiZhiInfo>>
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<int,ET.Client.NumericAttribute>>
+	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<int,ET.EntityRef<object>>>
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<int,ET.RpcInfo>>
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<int,UnityEngine.Vector3>>
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<int,float>>
@@ -1468,6 +1486,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IComparer<ET.DayJingLing>
 	// System.Collections.Generic.IComparer<ET.DayMonsters>
 	// System.Collections.Generic.IComparer<ET.DropItemInfo>
+	// System.Collections.Generic.IComparer<ET.EntityRef<object>>
 	// System.Collections.Generic.IComparer<ET.EquipChuanChengList>
 	// System.Collections.Generic.IComparer<ET.JiaYuanPurchase>
 	// System.Collections.Generic.IComparer<ET.MessageSessionDispatcherInfo>
@@ -1496,6 +1515,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IEnumerable<ET.DayJingLing>
 	// System.Collections.Generic.IEnumerable<ET.DayMonsters>
 	// System.Collections.Generic.IEnumerable<ET.DropItemInfo>
+	// System.Collections.Generic.IEnumerable<ET.EntityRef<object>>
 	// System.Collections.Generic.IEnumerable<ET.EquipChuanChengList>
 	// System.Collections.Generic.IEnumerable<ET.JiaYuanPurchase>
 	// System.Collections.Generic.IEnumerable<ET.MessageSessionDispatcherInfo>
@@ -1506,6 +1526,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IEnumerable<ET.WorldSayConfig>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<int,ET.Client.ItemViewData.EquipWeiZhiInfo>>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<int,ET.Client.NumericAttribute>>
+	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<int,ET.EntityRef<object>>>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<int,ET.RpcInfo>>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<int,UnityEngine.Vector3>>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<int,float>>
@@ -1539,6 +1560,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IEnumerator<ET.DayJingLing>
 	// System.Collections.Generic.IEnumerator<ET.DayMonsters>
 	// System.Collections.Generic.IEnumerator<ET.DropItemInfo>
+	// System.Collections.Generic.IEnumerator<ET.EntityRef<object>>
 	// System.Collections.Generic.IEnumerator<ET.EquipChuanChengList>
 	// System.Collections.Generic.IEnumerator<ET.JiaYuanPurchase>
 	// System.Collections.Generic.IEnumerator<ET.MessageSessionDispatcherInfo>
@@ -1549,6 +1571,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IEnumerator<ET.WorldSayConfig>
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<int,ET.Client.ItemViewData.EquipWeiZhiInfo>>
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<int,ET.Client.NumericAttribute>>
+	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<int,ET.EntityRef<object>>>
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<int,ET.RpcInfo>>
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<int,UnityEngine.Vector3>>
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<int,float>>
@@ -1587,6 +1610,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IList<ET.DayJingLing>
 	// System.Collections.Generic.IList<ET.DayMonsters>
 	// System.Collections.Generic.IList<ET.DropItemInfo>
+	// System.Collections.Generic.IList<ET.EntityRef<object>>
 	// System.Collections.Generic.IList<ET.EquipChuanChengList>
 	// System.Collections.Generic.IList<ET.JiaYuanPurchase>
 	// System.Collections.Generic.IList<ET.MessageSessionDispatcherInfo>
@@ -1609,6 +1633,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IList<object>
 	// System.Collections.Generic.KeyValuePair<int,ET.Client.ItemViewData.EquipWeiZhiInfo>
 	// System.Collections.Generic.KeyValuePair<int,ET.Client.NumericAttribute>
+	// System.Collections.Generic.KeyValuePair<int,ET.EntityRef<object>>
 	// System.Collections.Generic.KeyValuePair<int,ET.RpcInfo>
 	// System.Collections.Generic.KeyValuePair<int,UnityEngine.Vector3>
 	// System.Collections.Generic.KeyValuePair<int,float>
@@ -1631,6 +1656,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.List.Enumerator<ET.DayJingLing>
 	// System.Collections.Generic.List.Enumerator<ET.DayMonsters>
 	// System.Collections.Generic.List.Enumerator<ET.DropItemInfo>
+	// System.Collections.Generic.List.Enumerator<ET.EntityRef<object>>
 	// System.Collections.Generic.List.Enumerator<ET.EquipChuanChengList>
 	// System.Collections.Generic.List.Enumerator<ET.JiaYuanPurchase>
 	// System.Collections.Generic.List.Enumerator<ET.MessageSessionDispatcherInfo>
@@ -1658,6 +1684,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.List<ET.DayJingLing>
 	// System.Collections.Generic.List<ET.DayMonsters>
 	// System.Collections.Generic.List<ET.DropItemInfo>
+	// System.Collections.Generic.List<ET.EntityRef<object>>
 	// System.Collections.Generic.List<ET.EquipChuanChengList>
 	// System.Collections.Generic.List<ET.JiaYuanPurchase>
 	// System.Collections.Generic.List<ET.MessageSessionDispatcherInfo>
@@ -1686,6 +1713,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.ObjectComparer<ET.DayJingLing>
 	// System.Collections.Generic.ObjectComparer<ET.DayMonsters>
 	// System.Collections.Generic.ObjectComparer<ET.DropItemInfo>
+	// System.Collections.Generic.ObjectComparer<ET.EntityRef<object>>
 	// System.Collections.Generic.ObjectComparer<ET.EquipChuanChengList>
 	// System.Collections.Generic.ObjectComparer<ET.JiaYuanPurchase>
 	// System.Collections.Generic.ObjectComparer<ET.MessageSessionDispatcherInfo>
@@ -1761,6 +1789,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.ObjectModel.ReadOnlyCollection<ET.DayJingLing>
 	// System.Collections.ObjectModel.ReadOnlyCollection<ET.DayMonsters>
 	// System.Collections.ObjectModel.ReadOnlyCollection<ET.DropItemInfo>
+	// System.Collections.ObjectModel.ReadOnlyCollection<ET.EntityRef<object>>
 	// System.Collections.ObjectModel.ReadOnlyCollection<ET.EquipChuanChengList>
 	// System.Collections.ObjectModel.ReadOnlyCollection<ET.JiaYuanPurchase>
 	// System.Collections.ObjectModel.ReadOnlyCollection<ET.MessageSessionDispatcherInfo>
@@ -1789,6 +1818,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Comparison<ET.DayJingLing>
 	// System.Comparison<ET.DayMonsters>
 	// System.Comparison<ET.DropItemInfo>
+	// System.Comparison<ET.EntityRef<object>>
 	// System.Comparison<ET.EquipChuanChengList>
 	// System.Comparison<ET.JiaYuanPurchase>
 	// System.Comparison<ET.MessageSessionDispatcherInfo>
@@ -1826,6 +1856,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Predicate<ET.DayJingLing>
 	// System.Predicate<ET.DayMonsters>
 	// System.Predicate<ET.DropItemInfo>
+	// System.Predicate<ET.EntityRef<object>>
 	// System.Predicate<ET.EquipChuanChengList>
 	// System.Predicate<ET.JiaYuanPurchase>
 	// System.Predicate<ET.MessageSessionDispatcherInfo>
@@ -2015,6 +2046,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.Login_OnReturnLogin.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.Login_OnReturnLogin.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.M2C_AreneInfoHandler.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.M2C_AreneInfoHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.M2C_BattleInfoResultHandler.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.M2C_BattleInfoResultHandler.<Run>d__0&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.M2C_ChengJiuActiveHandler.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.M2C_ChengJiuActiveHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.M2C_CreateDropItemsHandlers.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.M2C_CreateDropItemsHandlers.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.M2C_CreateMyUnitHandler.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.M2C_CreateMyUnitHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<ET.ETTaskCompleted,ET.Client.M2C_CreateUnitsHandler.<Run>d__0>(ET.ETTaskCompleted&,ET.Client.M2C_CreateUnitsHandler.<Run>d__0&)
@@ -2147,6 +2179,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgJiaYuanMenuSystem.<OnButton_Gather>d__11>(object&,ET.Client.DlgJiaYuanMenuSystem.<OnButton_Gather>d__11&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgJiaYuanMenuSystem.<OnButton_Sell>d__8>(object&,ET.Client.DlgJiaYuanMenuSystem.<OnButton_Sell>d__8&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgJiaYuanMenuSystem.<RequestUproot>d__10>(object&,ET.Client.DlgJiaYuanMenuSystem.<RequestUproot>d__10&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgJiaYuanOneKeyPlantSystem.<OnBtn_OnePlant>d__4>(object&,ET.Client.DlgJiaYuanOneKeyPlantSystem.<OnBtn_OnePlant>d__4&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgJiaYuanPetFeedSystem.<OnButtonEat>d__8>(object&,ET.Client.DlgJiaYuanPetFeedSystem.<OnButtonEat>d__8&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgJiaYuanPetFeedSystem.<OnPointerDown>d__11>(object&,ET.Client.DlgJiaYuanPetFeedSystem.<OnPointerDown>d__11&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.AwaitUnsafeOnCompleted<object,ET.Client.DlgJiaYuanPlanWatchSystem.<OnInitUI>d__2>(object&,ET.Client.DlgJiaYuanPlanWatchSystem.<OnInitUI>d__2&)
@@ -2776,6 +2809,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.JiaYuanNetHelper.<JiaYuanMysteryListRequest>d__17>(object&,ET.Client.JiaYuanNetHelper.<JiaYuanMysteryListRequest>d__17&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.JiaYuanNetHelper.<JiaYuanPastureBuyRequest>d__18>(object&,ET.Client.JiaYuanNetHelper.<JiaYuanPastureBuyRequest>d__18&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.JiaYuanNetHelper.<JiaYuanPastureListRequest>d__19>(object&,ET.Client.JiaYuanNetHelper.<JiaYuanPastureListRequest>d__19&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.JiaYuanNetHelper.<JiaYuanPetFeedRequest>d__24>(object&,ET.Client.JiaYuanNetHelper.<JiaYuanPetFeedRequest>d__24&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.JiaYuanNetHelper.<JiaYuanPlanOpenRequest>d__5>(object&,ET.Client.JiaYuanNetHelper.<JiaYuanPlanOpenRequest>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.JiaYuanNetHelper.<JiaYuanPurchaseRefresh>d__12>(object&,ET.Client.JiaYuanNetHelper.<JiaYuanPurchaseRefresh>d__12&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.JiaYuanNetHelper.<JiaYuanPurchaseRequest>d__13>(object&,ET.Client.JiaYuanNetHelper.<JiaYuanPurchaseRequest>d__13&)
@@ -2794,6 +2828,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.PaiMaiNetHelper.<PaiMaiSearch>d__3>(object&,ET.Client.PaiMaiNetHelper.<PaiMaiSearch>d__3&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.PaiMaiNetHelper.<PaiMaiSell>d__9>(object&,ET.Client.PaiMaiNetHelper.<PaiMaiSell>d__9&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.PaiMaiNetHelper.<PaiMaiShopShowList>d__0>(object&,ET.Client.PaiMaiNetHelper.<PaiMaiShopShowList>d__0&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.PetNetHelper.<PetDuiHuanRequest>d__33>(object&,ET.Client.PetNetHelper.<PetDuiHuanRequest>d__33&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.PetNetHelper.<RequestPetEggChouKa>d__23>(object&,ET.Client.PetNetHelper.<RequestPetEggChouKa>d__23&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.PetNetHelper.<RequestPetEggDuiHuan>d__22>(object&,ET.Client.PetNetHelper.<RequestPetEggDuiHuan>d__22&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<object,ET.Client.PetNetHelper.<RequestPetHeXinChouKa>d__24>(object&,ET.Client.PetNetHelper.<RequestPetHeXinChouKa>d__24&)
@@ -2964,6 +2999,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgJiaYuanMenuSystem.<OnButton_Gather>d__11>(ET.Client.DlgJiaYuanMenuSystem.<OnButton_Gather>d__11&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgJiaYuanMenuSystem.<OnButton_Sell>d__8>(ET.Client.DlgJiaYuanMenuSystem.<OnButton_Sell>d__8&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgJiaYuanMenuSystem.<RequestUproot>d__10>(ET.Client.DlgJiaYuanMenuSystem.<RequestUproot>d__10&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgJiaYuanOneKeyPlantSystem.<OnBtn_OnePlant>d__4>(ET.Client.DlgJiaYuanOneKeyPlantSystem.<OnBtn_OnePlant>d__4&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgJiaYuanPetFeedSystem.<OnButtonEat>d__8>(ET.Client.DlgJiaYuanPetFeedSystem.<OnButtonEat>d__8&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgJiaYuanPetFeedSystem.<OnPointerDown>d__11>(ET.Client.DlgJiaYuanPetFeedSystem.<OnPointerDown>d__11&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.DlgJiaYuanPlanWatchSystem.<OnInitUI>d__2>(ET.Client.DlgJiaYuanPlanWatchSystem.<OnInitUI>d__2&)
@@ -3320,6 +3356,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.Login_OnReturnLogin.<RunAsync2>d__1>(ET.Client.Login_OnReturnLogin.<RunAsync2>d__1&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.M2C_AreneInfoHandler.<Run>d__0>(ET.Client.M2C_AreneInfoHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.M2C_BattleInfoResultHandler.<Run>d__0>(ET.Client.M2C_BattleInfoResultHandler.<Run>d__0&)
+		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.M2C_ChengJiuActiveHandler.<Run>d__0>(ET.Client.M2C_ChengJiuActiveHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.M2C_CreateDropItemsHandlers.<Run>d__0>(ET.Client.M2C_CreateDropItemsHandlers.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.M2C_CreateMyUnitHandler.<Run>d__0>(ET.Client.M2C_CreateMyUnitHandler.<Run>d__0&)
 		// System.Void ET.ETAsyncTaskMethodBuilder.Start<ET.Client.M2C_CreateUnitsHandler.<Run>d__0>(ET.Client.M2C_CreateUnitsHandler.<Run>d__0&)
@@ -3713,6 +3750,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.JiaYuanNetHelper.<JiaYuanMysteryListRequest>d__17>(ET.Client.JiaYuanNetHelper.<JiaYuanMysteryListRequest>d__17&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.JiaYuanNetHelper.<JiaYuanPastureBuyRequest>d__18>(ET.Client.JiaYuanNetHelper.<JiaYuanPastureBuyRequest>d__18&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.JiaYuanNetHelper.<JiaYuanPastureListRequest>d__19>(ET.Client.JiaYuanNetHelper.<JiaYuanPastureListRequest>d__19&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.JiaYuanNetHelper.<JiaYuanPetFeedRequest>d__24>(ET.Client.JiaYuanNetHelper.<JiaYuanPetFeedRequest>d__24&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.JiaYuanNetHelper.<JiaYuanPlanOpenRequest>d__5>(ET.Client.JiaYuanNetHelper.<JiaYuanPlanOpenRequest>d__5&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.JiaYuanNetHelper.<JiaYuanPurchaseRefresh>d__12>(ET.Client.JiaYuanNetHelper.<JiaYuanPurchaseRefresh>d__12&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.JiaYuanNetHelper.<JiaYuanPurchaseRequest>d__13>(ET.Client.JiaYuanNetHelper.<JiaYuanPurchaseRequest>d__13&)
@@ -3731,6 +3769,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.PaiMaiNetHelper.<PaiMaiSearch>d__3>(ET.Client.PaiMaiNetHelper.<PaiMaiSearch>d__3&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.PaiMaiNetHelper.<PaiMaiSell>d__9>(ET.Client.PaiMaiNetHelper.<PaiMaiSell>d__9&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.PaiMaiNetHelper.<PaiMaiShopShowList>d__0>(ET.Client.PaiMaiNetHelper.<PaiMaiShopShowList>d__0&)
+		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.PetNetHelper.<PetDuiHuanRequest>d__33>(ET.Client.PetNetHelper.<PetDuiHuanRequest>d__33&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.PetNetHelper.<RequestPetEggChouKa>d__23>(ET.Client.PetNetHelper.<RequestPetEggChouKa>d__23&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.PetNetHelper.<RequestPetEggDuiHuan>d__22>(ET.Client.PetNetHelper.<RequestPetEggDuiHuan>d__22&)
 		// System.Void ET.ETAsyncTaskMethodBuilder<object>.Start<ET.Client.PetNetHelper.<RequestPetHeXinChouKa>d__24>(ET.Client.PetNetHelper.<RequestPetHeXinChouKa>d__24&)
@@ -3826,6 +3865,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.EventSystem.Publish<object,ET.Client.BuffScale>(object,ET.Client.BuffScale)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.BuffUpdate>(object,ET.Client.BuffUpdate)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.ChangeCameraMoveType>(object,ET.Client.ChangeCameraMoveType)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.ChengJiuUpdate>(object,ET.Client.ChengJiuUpdate)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_BagItemUpdate>(object,ET.Client.DataUpdate_BagItemUpdate)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_BeforeMove>(object,ET.Client.DataUpdate_BeforeMove)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.DataUpdate_ChouKaWarehouseAddItem>(object,ET.Client.DataUpdate_ChouKaWarehouseAddItem)
@@ -3866,6 +3906,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void ET.EventSystem.Publish<object,ET.Client.LoadSceneFinished>(object,ET.Client.LoadSceneFinished)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.Now_Hp_Update>(object,ET.Client.Now_Hp_Update)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.OnSkillUse>(object,ET.Client.OnSkillUse)
+		// System.Void ET.EventSystem.Publish<object,ET.Client.PetFenJieUpdate>(object,ET.Client.PetFenJieUpdate)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.PlayAnimator>(object,ET.Client.PlayAnimator)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.RankDemonInfo>(object,ET.Client.RankDemonInfo)
 		// System.Void ET.EventSystem.Publish<object,ET.Client.ReddotChange>(object,ET.Client.ReddotChange)
@@ -4031,6 +4072,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<long,long,int,int>(long&,long&,int&,int&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<long,long,int,long,long,int,int,int,int,int,int,long>(long&,long&,int&,long&,long&,int&,int&,int&,int&,int&,int&,long&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<long,long,long,int>(long&,long&,long&,int&)
+		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<long,long,long>(long&,long&,long&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<long,long>(long&,long&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<long>(long&)
 		// System.Void MemoryPack.MemoryPackReader.ReadUnmanaged<uint>(uint&)
@@ -4144,6 +4186,10 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,long>(byte,byte&,long&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte,uint>(byte,byte&,uint&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<byte>(byte,byte&)
+		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<int,int>(byte,int&,int&)
+		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<int,long>(byte,int&,long&)
+		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<int>(byte,int&)
+		// System.Void MemoryPack.MemoryPackWriter.WriteUnmanagedWithObjectHeader<long,long,long>(byte,long&,long&,long&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteValue<byte>(byte&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteValue<long>(long&)
 		// System.Void MemoryPack.MemoryPackWriter.WriteValue<object>(object&)
@@ -4161,6 +4207,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// bool System.Linq.Enumerable.Contains<int>(System.Collections.Generic.IEnumerable<int>,int,System.Collections.Generic.IEqualityComparer<int>)
 		// ET.RpcInfo[] System.Linq.Enumerable.ToArray<ET.RpcInfo>(System.Collections.Generic.IEnumerable<ET.RpcInfo>)
 		// object[] System.Linq.Enumerable.ToArray<object>(System.Collections.Generic.IEnumerable<object>)
+		// System.Collections.Generic.List<ET.EntityRef<object>> System.Linq.Enumerable.ToList<ET.EntityRef<object>>(System.Collections.Generic.IEnumerable<ET.EntityRef<object>>)
 		// System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<int,int>> System.Linq.Enumerable.ToList<System.Collections.Generic.KeyValuePair<int,int>>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<int,int>>)
 		// System.Collections.Generic.List<int> System.Linq.Enumerable.ToList<int>(System.Collections.Generic.IEnumerable<int>)
 		// System.Collections.Generic.List<object> System.Linq.Enumerable.ToList<object>(System.Collections.Generic.IEnumerable<object>)
