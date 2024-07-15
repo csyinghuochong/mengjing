@@ -185,7 +185,18 @@ namespace ET
             return ConstValue.RouterHttpHostInter;
         }
 
-        
+        public static ServerItem GetServerItem(int id, string ip, string name, long openTime)
+        {
+            ServerItem serverItem = ServerItem.Create();
+            serverItem.ServerId = 1;
+            serverItem.ServerIp = ip;
+            serverItem.ServerName = name;
+            serverItem.ServerOpenTime = openTime;
+            serverItem.New = 0;
+            serverItem.Show = 1;
+            return serverItem;
+        }
+
         public static List<ServerItem> GetServerList(int  versionMode, int zone)
         {
             List<ServerItem> ServerItems = ConfigData.ServerItems;
@@ -198,15 +209,9 @@ namespace ET
             string ip = GetRouterHttpHost(versionMode);
             List<ServerItem> serverItems_1 = ServerItems;
             
-            serverItems_1.Add(new ServerItem()
-            {
-                ServerId = 1,
-                ServerIp = $"{ip}:20325",
-                ServerName = "封测区",
-                ServerOpenTime = 1662189906681,
-                New = 0,
-                Show = 1,
-            });
+            serverItems_1.Add( GetServerItem( 1, $"{ip}:20325", "封测一区", 1720782000000 ) );
+            serverItems_1.Add( GetServerItem( 2, $"{ip}:20335", "封测二区", 1720954800000 ) );
+            serverItems_1.Add( GetServerItem( 3, $"{ip}:20345", "封测三区", 1721041200000 ) );
 
             ///PlatformHelper.GetPlatformName(); 所有渠道ID定义
             return serverItems_1;

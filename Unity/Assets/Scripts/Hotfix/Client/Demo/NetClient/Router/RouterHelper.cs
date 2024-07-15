@@ -32,6 +32,11 @@ namespace ET.Client
         public static async ETTask<Session> CreateRouterSession(this NetComponent netComponent, IPEndPoint address, string account, string password)
         {
             uint localConn = (uint)(account.GetLongHashCode() ^ password.GetLongHashCode() ^ RandomGenerator.RandUInt32());
+            
+            Log.Debug($"CreateRouterSession.account:  {account.GetLongHashCode()}");
+            Log.Debug($"CreateRouterSession.password:  {password.GetLongHashCode()}");
+            Log.Debug($"CreateRouterSession.localConn:  {localConn}");
+            
             (uint recvLocalConn, IPEndPoint routerAddress) = await GetRouterAddress(netComponent, address, localConn, 0);
 
             if (recvLocalConn == 0)
@@ -68,6 +73,9 @@ namespace ET.Client
 
             // 注意，session也以localConn作为id，所以这里不能用localConn作为id
             long id = (long)(((ulong)localConn << 32) | remoteConn);
+            
+            Log.Debug($"Connect:  {id}");
+            
             using RouterConnector routerConnector = netComponent.AddChildWithId<RouterConnector>(id);
             
             int count = 20;

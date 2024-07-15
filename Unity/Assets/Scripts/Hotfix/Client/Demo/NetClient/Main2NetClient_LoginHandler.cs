@@ -30,6 +30,11 @@ namespace ET.Client
 
             Session session = await netComponent.CreateRouterSession(realmAddress, account, password);
 
+            
+            C2R_ServerList c2RLoginAccount2 = C2R_ServerList.Create();
+            R2C_ServerList r2CLoginAccount2 = (R2C_ServerList)await session.Call(c2RLoginAccount2);
+
+            
             C2R_LoginAccount c2RLoginAccount = C2R_LoginAccount.Create();
             c2RLoginAccount.Account = account;
             c2RLoginAccount.Password = password;

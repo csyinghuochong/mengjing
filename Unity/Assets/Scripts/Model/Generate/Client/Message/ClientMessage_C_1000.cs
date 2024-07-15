@@ -47,25 +47,25 @@ namespace ET
             return ObjectPool.Instance.Fetch(typeof(NetClient2Main_ServerList), isFromPool) as NetClient2Main_ServerList;
         }
 
-        [MemoryPackOrder(89)]
+        [MemoryPackOrder(0)]
         public int RpcId { get; set; }
 
-        [MemoryPackOrder(90)]
+        [MemoryPackOrder(1)]
         public int Error { get; set; }
 
-        [MemoryPackOrder(91)]
+        [MemoryPackOrder(2)]
         public string Message { get; set; }
 
         /// <summary>
         /// 服务器列表
         /// </summary>
-        [MemoryPackOrder(1)]
+        [MemoryPackOrder(3)]
         public List<ServerItem> ServerItems { get; set; } = new();
 
-        [MemoryPackOrder(2)]
+        [MemoryPackOrder(4)]
         public string NoticeVersion { get; set; }
 
-        [MemoryPackOrder(3)]
+        [MemoryPackOrder(5)]
         public string NoticeText { get; set; }
 
         public override void Dispose()

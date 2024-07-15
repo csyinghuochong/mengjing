@@ -13,13 +13,13 @@ message Main2NetClient_ServerList // IRequest
 
 message NetClient2Main_ServerList // IResponse
 {
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
+	int32 RpcId = 1;
+	int32 Error = 2;
+	string Message = 3;
 
-	repeated ServerItem ServerItems = 2;		//服务器列表
-	string NoticeVersion = 3;
-	string NoticeText = 4;
+	repeated ServerItem ServerItems = 4;		//服务器列表
+	string NoticeVersion = 5;
+	string NoticeText = 6;
 }
 
 //ResponseType NetClient2Main_Login

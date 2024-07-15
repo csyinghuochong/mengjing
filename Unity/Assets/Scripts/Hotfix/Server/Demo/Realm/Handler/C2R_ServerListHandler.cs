@@ -16,7 +16,7 @@ namespace ET.Server
                 session.Disconnect().Coroutine();
                 return;
             }
-
+            
             using (session.AddComponent<SessionLockingComponent>())
             {
                 using (await session.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.GetServerList, 0))
