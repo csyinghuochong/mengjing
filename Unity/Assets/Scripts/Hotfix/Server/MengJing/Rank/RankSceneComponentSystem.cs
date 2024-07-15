@@ -726,7 +726,7 @@ namespace ET.Server
 
         public static async ETTask BroadcastShowLie(this RankSceneComponent self, string loadvalue)
         {
-            ServerHelper.GetServerList(VersionMode.Beta, self.Zone());
+            ServerHelper.GetServerList(VersionMode.Beta);
 
             int firstserver = 0;
             for (int i = 0; i < ConfigData.ServerItems.Count; i++)

@@ -20,14 +20,14 @@ namespace ET
         //BanHao = 2,
         public static string GetServerIpList(int versionMode, int zone)
         {
-            ServerItem serverItem = GetGetServerItem(versionMode, zone);
+            ServerItem serverItem = GetServerItemByZone(versionMode, zone);
             return serverItem.ServerIp;
         }
 
-        public static ServerItem GetGetServerItem( int versionMode,int zone)
+        public static ServerItem GetServerItemByZone( int versionMode,int zone)
         {
             ServerItem serverItem = null;
-            List<ServerItem> serverItems = ServerHelper.GetServerList(versionMode, zone);
+            List<ServerItem> serverItems = GetServerList( zone);
             for (int i = 0; i < serverItems.Count; i++)
             {
                 if (serverItems[i].ServerId == zone)
@@ -40,7 +40,7 @@ namespace ET
 
         public static long GetServerOpenTime(int zone)
         { 
-            ServerItem serverItem = GetGetServerItem(VersionMode.Beta, zone);
+            ServerItem serverItem = GetServerItemByZone(VersionMode.Beta, zone);
             if (serverItem == null)
             {
                 Log.Debug($"serverItem == null {zone}");
@@ -81,17 +81,8 @@ namespace ET
         /// <returns></returns>
         public static int GetNewServerId(int zone)
         {
-            bool banhao = CommonHelp.IsBanHaoZone(zone);
 
-            List<ServerItem> serverItems_1 = new List<ServerItem>();
-            if (banhao)
-            {
-                serverItems_1 = GetServerList(VersionMode.BanHao, 201);
-            }
-            else
-            {
-                serverItems_1 = GetServerList(VersionMode.Alpha, 1);
-            }
+            List<ServerItem> serverItems_1 = GetServerList(VersionMode.Beta);
 
             string serverip = string.Empty;
             for (int i = 0; i < serverItems_1.Count; i++)
@@ -122,15 +113,7 @@ namespace ET
         public static int GetOldServerId(int zone)
         {
             bool banhao = CommonHelp.IsBanHaoZone(zone);
-            List<ServerItem> serverItems_1 = new List<ServerItem>();
-            if (banhao)
-            {
-                serverItems_1 = GetServerList(VersionMode.BanHao, 201);
-            }
-            else
-            {
-                serverItems_1 = GetServerList(VersionMode.Alpha, 1);
-            }
+            List<ServerItem> serverItems_1 = GetServerList(VersionMode.BanHao);
 
             string serverip = string.Empty;
             for (int i = 0; i < serverItems_1.Count; i++)
@@ -153,7 +136,7 @@ namespace ET
 
         public static bool IsOldServer(int zone)
         {
-            List<ServerItem> serverItems_1 = GetServerList(VersionMode.Beta, 1);
+            List<ServerItem> serverItems_1 = GetServerList(VersionMode.Beta);
             string serverip = string.Empty;
             for (int i = 0; i < serverItems_1.Count; i++)
             {
@@ -197,7 +180,7 @@ namespace ET
             return serverItem;
         }
 
-        public static List<ServerItem> GetServerList(int  versionMode, int zone)
+        public static List<ServerItem> GetServerList(int  versionMode)
         {
             List<ServerItem> ServerItems = ConfigData.ServerItems;
             if (ServerItems.Count > 0 )

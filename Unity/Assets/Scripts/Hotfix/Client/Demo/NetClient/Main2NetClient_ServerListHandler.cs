@@ -25,13 +25,12 @@ namespace ET.Client
 
             NetComponent netComponent = root.GetComponent<NetComponent>();
 
-            IPEndPoint realmAddress = routerAddressComponent.GetRealmAddress(account);
+            IPEndPoint realmAddress = routerAddressComponent.GetCenterAddress(request.VersionMode);
 
             Session session = await netComponent.CreateRouterSession(realmAddress, account, password);
-
-
-            C2R_ServerList c2RLoginAccount = C2R_ServerList.Create();
-            R2C_ServerList r2CLoginAccount = (R2C_ServerList)await session.Call(c2RLoginAccount);
+            
+            C2Center_ServerList c2RLoginAccount = C2Center_ServerList.Create();
+            Center2C_ServerList r2CLoginAccount = (Center2C_ServerList)await session.Call(c2RLoginAccount);
             
             Log.Debug($"R2C_ServerList: {r2CLoginAccount.Error}");
             
@@ -44,7 +43,7 @@ namespace ET.Client
                 session?.Dispose();
             }
 
-            //response.ServerItems = r2CLoginAccount.ServerItems;
+            response.ServerItems = r2CLoginAccount.ServerItems;
             response.NoticeVersion = r2CLoginAccount.NoticeVersion;
             response.NoticeText = r2CLoginAccount.NoticeText;
             response.Error = r2CLoginAccount.Error;

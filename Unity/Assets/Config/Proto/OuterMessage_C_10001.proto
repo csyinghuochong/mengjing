@@ -279,13 +279,13 @@ message ServerItem
 	repeated int32 PlatformList = 7;   //不配置或者-1全部显示
 }
 
-//ResponseType R2C_ServerList
-message C2R_ServerList // ISessionRequest
+//ResponseType Center2C_ServerList
+message C2Center_ServerList // ISessionRequest
 {
 	int32 RpcId = 1;
 }
 
-message R2C_ServerList // ISessionResponse
+message Center2C_ServerList // ISessionResponse
 {
 	int32 RpcId = 1;
 	string Message = 2;

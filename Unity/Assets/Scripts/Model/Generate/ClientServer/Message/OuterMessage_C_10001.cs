@@ -1226,13 +1226,13 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(OuterMessage.C2R_ServerList)]
-    [ResponseType(nameof(R2C_ServerList))]
-    public partial class C2R_ServerList : MessageObject, ISessionRequest
+    [Message(OuterMessage.C2Center_ServerList)]
+    [ResponseType(nameof(Center2C_ServerList))]
+    public partial class C2Center_ServerList : MessageObject, ISessionRequest
     {
-        public static C2R_ServerList Create(bool isFromPool = false)
+        public static C2Center_ServerList Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(C2R_ServerList), isFromPool) as C2R_ServerList;
+            return ObjectPool.Instance.Fetch(typeof(C2Center_ServerList), isFromPool) as C2Center_ServerList;
         }
 
         [MemoryPackOrder(0)]
@@ -1252,12 +1252,12 @@ namespace ET
     }
 
     [MemoryPackable]
-    [Message(OuterMessage.R2C_ServerList)]
-    public partial class R2C_ServerList : MessageObject, ISessionResponse
+    [Message(OuterMessage.Center2C_ServerList)]
+    public partial class Center2C_ServerList : MessageObject, ISessionResponse
     {
-        public static R2C_ServerList Create(bool isFromPool = false)
+        public static Center2C_ServerList Create(bool isFromPool = false)
         {
-            return ObjectPool.Instance.Fetch(typeof(R2C_ServerList), isFromPool) as R2C_ServerList;
+            return ObjectPool.Instance.Fetch(typeof(Center2C_ServerList), isFromPool) as Center2C_ServerList;
         }
 
         [MemoryPackOrder(0)]
@@ -30727,8 +30727,8 @@ namespace ET
         public const ushort C2M_Reload = 10032;
         public const ushort M2C_Reload = 10033;
         public const ushort ServerItem = 10034;
-        public const ushort C2R_ServerList = 10035;
-        public const ushort R2C_ServerList = 10036;
+        public const ushort C2Center_ServerList = 10035;
+        public const ushort Center2C_ServerList = 10036;
         public const ushort C2R_LoginAccount = 10037;
         public const ushort R2C_LoginAccount = 10038;
         public const ushort RechargeInfo = 10039;

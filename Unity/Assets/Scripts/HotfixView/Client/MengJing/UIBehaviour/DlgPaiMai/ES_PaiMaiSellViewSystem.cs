@@ -63,7 +63,7 @@ namespace ET.Client
                 return;
             }
 
-            int zone = self.Root().GetComponent<PlayerComponent>().ServerId;
+            int zone = self.Root().GetComponent<PlayerComponent>().ServerItem.ServerId;
             int openday = ServerHelper.GetServeOpenrDay( zone);
 
             self.PaiMaiItemInfos = response.PaiMaiItemInfos;

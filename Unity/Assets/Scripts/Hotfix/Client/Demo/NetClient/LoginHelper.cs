@@ -6,15 +6,14 @@ namespace ET.Client
     public static class LoginHelper
     {
         
-        public static async ETTask<R2C_ServerList> GetServerList(Scene root, int versionMode)
+        public static async ETTask<Center2C_ServerList> GetServerList(Scene root, int versionMode)
         {
             await ETTask.CompletedTask;
             root.RemoveComponent<ClientSenderCompnent>();
             ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
-            await clientSenderCompnent.GetServerList(versionMode);
-            return null;
+            return await clientSenderCompnent.GetServerList(versionMode);
         }
-
+        
         public static async ETTask Login(Scene root, string account, string password)
         {
             root.RemoveComponent<ClientSenderCompnent>();
@@ -36,7 +35,7 @@ namespace ET.Client
                 C2R_GetRealmKey c2RGetRealmKey = C2R_GetRealmKey.Create();
                 c2RGetRealmKey.Token = playerComponent.Token;
                 c2RGetRealmKey.Account = playerComponent.Account;
-                c2RGetRealmKey.ServerId = playerComponent.ServerId;
+                c2RGetRealmKey.ServerId = playerComponent.ServerItem.ServerId;
                 R2C_GetRealmKey r2CGetRealmKey = await clientSenderComponent.Call(c2RGetRealmKey) as R2C_GetRealmKey;
 
                 if (r2CGetRealmKey.Error != ErrorCode.ERR_Success)

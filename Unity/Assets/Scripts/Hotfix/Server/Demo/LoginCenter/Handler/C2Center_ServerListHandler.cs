@@ -6,9 +6,9 @@ namespace ET.Server
 {
     
     [MessageSessionHandler(SceneType.Realm)]
-    public class C2R_ServerListHandler: MessageSessionHandler<C2R_ServerList, R2C_ServerList>
+    public class C2Center_ServerListHandler: MessageSessionHandler<C2Center_ServerList, Center2C_ServerList>
     {
-        protected override async ETTask Run(Session session, C2R_ServerList request, R2C_ServerList response)
+        protected override async ETTask Run(Session session, C2Center_ServerList request, Center2C_ServerList response)
         {
             if (session.GetComponent<SessionLockingComponent>() != null)
             {
@@ -22,7 +22,7 @@ namespace ET.Server
                 using (await session.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.GetServerList, 0))
                 {
                     long serverTime = TimeHelper.ServerNow();
-                    List<ServerItem> serverItems = ServerHelper.GetServerList(VersionMode.Beta, session.Zone());
+                    List<ServerItem> serverItems = ServerHelper.GetServerList(VersionMode.Beta);
                     response.ServerItems.Clear();
                     for (int i = 0; i < serverItems.Count; i++)
                     {

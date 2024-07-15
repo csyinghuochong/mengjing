@@ -19,13 +19,19 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.Dictionary, 100);
             self.View.E_AccountInputField.text = PlayerPrefs.GetString("MJ_Account");
             self.View.E_PasswordInputField.text = PlayerPrefs.GetString("MJ_Password");
-            
+
+            self.Root().GetComponent<PlayerComponent>().ServerItem = ServerHelper.GetServerList(GlobalHelp.GetVersionMode())[0];
             //self.RequestServerList().Coroutine();
         }
 
         public static async ETTask RequestServerList(this DlgMJLogin self)
         {
-            await LoginHelper.GetServerList(self.Root(), GlobalHelp.GetVersionMode());
+            //获取服务器列表
+            Center2C_ServerList r2CServerList =  await LoginHelper.GetServerList(self.Root(), GlobalHelp.GetVersionMode());
+            
+            ServerItem serverItem = r2CServerList.ServerItems[r2CServerList.ServerItems.Count - 1];
+            //如果之前登陆过游戏，在记录一下服务器id. serverItem = ServerHelper.GetServerItem(oldid);
+            self.Root().GetComponent<PlayerComponent>().ServerItem = serverItem;
         }
 
         public static void OnLoop(this DlgMJLogin self, Transform transform, int index)

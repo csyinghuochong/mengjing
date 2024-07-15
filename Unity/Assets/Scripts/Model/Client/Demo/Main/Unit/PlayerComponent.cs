@@ -6,6 +6,8 @@ namespace ET.Client
     public class PlayerComponent: Entity, IAwake
     {
 
+        public ServerItem ServerItem { get; set; }
+
         public List<ServerItem> AllServerList = new(); //服务器列表存内容
 
         //当前角色列表数据
@@ -22,10 +24,6 @@ namespace ET.Client
 
         public string RealmKey;
         public string RealmAddress;
-
-        //当前登录角色
-        public int ServerId { get; set; } = 1;
-        public string ServerIp;
         
         public string Account { get; set; }
         public string Password;

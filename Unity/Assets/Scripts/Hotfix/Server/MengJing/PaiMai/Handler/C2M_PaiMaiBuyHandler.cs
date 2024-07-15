@@ -195,7 +195,7 @@ namespace ET.Server
                 if (needGold >= 500000)
                 {
                     //服务器 道具名称 数量  价格  购买者名称 购买者等级  购买者充值 购买者当前金币 购买者账号 出售者名称   出售者账号  出售者等级 出售者当前金币
-                    string serverName = ServerHelper.GetGetServerItem(VersionMode.Beta, unit.Zone()).ServerName;
+                    string serverName = ServerHelper.GetServerItemByZone(VersionMode.Beta, unit.Zone()).ServerName;
                     string itemName = itemConfig.ItemName;
                     int itemNumber = r_GameStatusResponse.PaiMaiItemInfo.BagInfo.ItemNum;
                     long price = r_GameStatusResponse.PaiMaiItemInfo.Price;

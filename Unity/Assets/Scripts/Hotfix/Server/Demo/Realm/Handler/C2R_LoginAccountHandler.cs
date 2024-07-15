@@ -300,9 +300,7 @@ namespace ET.Server
 
             return roleList;
         }
-        
-        
-        
+
         public int CanLogin(string identityCard, bool isHoliday, int age_type)
         {
             int age = IDCardHelper.GetBirthdayAgeSex(identityCard, age_type);

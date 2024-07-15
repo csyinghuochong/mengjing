@@ -19,7 +19,7 @@ namespace ET.Client
             self.E_Btn_HuoDong_ArenaJieShaoButton.AddListenerAsync(self.On_Btn_HuoDong_ArenaJieShao);
             self.E_Btn_HuoDong_XiaoGuiButton.AddListener(self.Btn_HuoDong_XiaoGui);
 
-            int zone = self.Root().GetComponent<PlayerComponent>().ServerId;
+            int zone = self.Root().GetComponent<PlayerComponent>().ServerItem.ServerId;
             int openDay = ServerHelper.GetServeOpenrDay( zone);
             self.EG_UICountryTaskItem_0RectTransform.gameObject.SetActive(openDay <= 7);
         }

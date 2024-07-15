@@ -76,7 +76,7 @@ namespace ET.Server
                 return;
             }
             int zone = attack.Zone();
-            ServerItem serverItem  = ServerHelper.GetGetServerItem(VersionMode.Beta, zone);
+            ServerItem serverItem  = ServerHelper.GetServerItemByZone(VersionMode.Beta, zone);
             if (serverItem == null)
             {
                 return;
@@ -111,7 +111,7 @@ namespace ET.Server
 
         public static void TrialBattleInfo(int zone, string loginfo)
         {
-            ServerItem serverItem = ServerHelper.GetGetServerItem(VersionMode.Beta, zone);
+            ServerItem serverItem = ServerHelper.GetServerItemByZone(VersionMode.Beta, zone);
             if (serverItem == null)
             {
                 return;
@@ -129,7 +129,7 @@ namespace ET.Server
 
         public static void PetMingBattleInfo(int zone, string loginfo)
         {
-            ServerItem serverItem = ServerHelper.GetGetServerItem(VersionMode.Beta, zone);
+            ServerItem serverItem = ServerHelper.GetServerItemByZone(VersionMode.Beta, zone);
             if (serverItem == null)
             {
                 return;
