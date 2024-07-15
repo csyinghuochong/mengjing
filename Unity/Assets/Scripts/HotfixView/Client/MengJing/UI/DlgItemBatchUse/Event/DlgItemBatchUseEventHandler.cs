@@ -1,8 +1,8 @@
 ﻿namespace ET.Client
 {
 	[FriendOf(typeof(UIBaseWindow))]
-	[AUIEvent(WindowID.WindowID_TuZhiMake)]
-	public  class DlgTuZhiMakeEventHandler : IAUIEventHandler
+	[AUIEvent(WindowID.WindowID_ItemBatchUse)]
+	public  class DlgItemBatchUseEventHandler : IAUIEventHandler
 	{
 
 		public void OnInitWindowCoreData(UIBaseWindow uiBaseWindow)
@@ -12,17 +12,17 @@
 
 		public void OnInitComponent(UIBaseWindow uiBaseWindow)
 		{
-		  uiBaseWindow.AddComponent<DlgTuZhiMake>().AddComponent<DlgTuZhiMakeViewComponent>();
+		  uiBaseWindow.AddComponent<DlgItemBatchUse>().AddComponent<DlgItemBatchUseViewComponent>();
 		}
 
 		public void OnRegisterUIEvent(UIBaseWindow uiBaseWindow)
 		{
-		  uiBaseWindow.GetComponent<DlgTuZhiMake>().RegisterUIEvent(); 
+		  uiBaseWindow.GetComponent<DlgItemBatchUse>().RegisterUIEvent(); 
 		}
 
 		public void OnShowWindow(UIBaseWindow uiBaseWindow, Entity contextData = null)
 		{
-		  uiBaseWindow.GetComponent<DlgTuZhiMake>().ShowWindow(contextData); 
+		  uiBaseWindow.GetComponent<DlgItemBatchUse>().ShowWindow(contextData); 
 		}
 
 		public void OnHideWindow(UIBaseWindow uiBaseWindow)

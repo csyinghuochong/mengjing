@@ -172,5 +172,6 @@ namespace ET.Client
 		WindowID_JiaYuanOneKeyPlant,
 		WindowID_UnionXiuLian,
 		WindowID_TuZhiMake,
+		WindowID_ItemBatchUse,
 	}
 }

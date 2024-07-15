@@ -428,13 +428,13 @@ namespace ET.Client
             //     self.OnCloseTips();
             //     return;
             // }
-            //
+
             // 弹出道具批量使用
             if (self.BagInfo.ItemNum >= 2 && ConfigData.BatchUseItemList.Contains(itemConfig.Id))
             {
-                // UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIItemBatchUse);
-                // uI.GetComponent<UIItemBatchUseComponent>().OnInitUI(self.BagInfo);
-                // self.OnCloseTips();
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ItemBatchUse);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgItemBatchUse>().OnInitUI(self.BagInfo);
+                self.OnCloseTips();
                 return;
             }
 
