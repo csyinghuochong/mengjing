@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_UnionKeJiLearnItem))]
-    [EntitySystemOf(typeof (Scroll_Item_UnionKeJiLearnItem))]
+    [FriendOf(typeof(Scroll_Item_UnionKeJiLearnItem))]
+    [EntitySystemOf(typeof(Scroll_Item_UnionKeJiLearnItem))]
     public static partial class Scroll_Item_UnionKeJiLearnItemSystem
     {
         [EntitySystem]
@@ -21,6 +21,7 @@ namespace ET.Client
 
         public static void UpdateInfo(this Scroll_Item_UnionKeJiLearnItem self, int position, int configId, int maxConfigId)
         {
+            self.E_ClickBtnButton.AddListener(self.OnClickBtn);
             self.Position = position;
 
             UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(configId);
