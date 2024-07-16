@@ -4,14 +4,14 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     [FriendOf(typeof (UserInfoComponentS))]
-    [MessageSessionHandler(SceneType.Gate)]
+    [MessageSessionHandler(SceneType.Realm)]
     public class C2R_DeleteRoleDataHandler: MessageSessionHandler<C2R_DeleteRoleData, R2C_DeleteRoleData>
     {
         protected override async ETTask Run(Session session, C2R_DeleteRoleData request, R2C_DeleteRoleData response)
         {
             try
             {
-                if (session.Root().SceneType != SceneType.Gate)
+                if (session.Root().SceneType != SceneType.Realm)
                 {
                     Log.Error($"LoginTest C2G_DeleteRoleData请求的Scene错误，当前Scene为：{session.Root().SceneType}");
                     session.Dispose();

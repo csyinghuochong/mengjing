@@ -13,9 +13,10 @@ namespace ET.Server
         /// </summary>
         public int SeasonJingHePlan { get; set; }
 
-        public List<int> QiangHuaLevel { get; set; } = new();
+        
+        public List<int> QiangHuaLevel { get; set; }= new List<int>();
 
-        public List<int> QiangHuaFails { get; set; } = new();
+        public List<int> QiangHuaFails { get; set; } = new List<int>();
         
         /// <summary>
         /// ItemLocType.ItemWareHouse1 之后的所有仓库（购买格子数量）

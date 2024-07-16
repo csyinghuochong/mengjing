@@ -1,6 +1,7 @@
 namespace ET.Server
 {
 
+    [FriendOf(typeof(BagComponentS))]
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_ItemQiangHuaHandler: MessageLocationHandler<Unit, C2M_ItemQiangHuaRequest, M2C_ItemQiangHuaResponse>
     {

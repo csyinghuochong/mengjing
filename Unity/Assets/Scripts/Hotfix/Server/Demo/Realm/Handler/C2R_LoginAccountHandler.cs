@@ -94,7 +94,7 @@ namespace ET.Server
                         centerAccountInfo.Account = request.Account.Trim();
                         centerAccountInfo.Password = request.Password;
                         centerAccountInfo.CreateTime  = TimeInfo.Instance.ServerNow();
-                        centerAccountInfo.AccountType = (int)AccountType.General;
+                        centerAccountInfo.AccountType = (int)AccountType.Normal;
                         await dBComponent.Save<DBCenterAccountInfo>(centerAccountInfo);
                     }
 
@@ -194,7 +194,8 @@ namespace ET.Server
                     response.RoleLists.Clear();
                     for (int i = 0; i < centerAccountInfo.RoleList.Count; i++)
                     {
-                        if (centerAccountInfo.RoleList[i].ServerId != request.ServerId)
+                        if (centerAccountInfo.RoleList[i].ServerId != request.ServerId
+                            || centerAccountInfo.RoleList[i].State == (int)RoleInfoState.Freeze)
                         {
                             continue;
                         }

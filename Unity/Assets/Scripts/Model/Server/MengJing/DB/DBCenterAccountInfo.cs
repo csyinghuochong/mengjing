@@ -5,17 +5,14 @@ namespace ET.Server
 {
     public enum AccountType
     {
-        General = 0,
-
+        Normal = 0,
         BlackList = 1,  //黑名单
-
-        Delete = 2,
     }
 
     public enum RoleInfoState
     {
         Normal = 0,
-        Freeze,
+        Freeze = 1,    //冻结
     }
 
     [ChildOf]

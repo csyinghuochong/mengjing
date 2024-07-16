@@ -40,7 +40,7 @@ namespace ET.Server
             unit.AddComponent<MailBoxComponent, MailBoxType>(MailBoxType.OrderedMessage);
             unit.GetComponent<DBSaveComponent>().Activeted();
 
-            Console.WriteLine($"M2M_UnitTransferRequest:2_a");
+            Console.WriteLine($"M2M_UnitTransferRequest:QiangHuaLevel:  {unit.GetComponent<BagComponentS>().QiangHuaLevel.Count}");
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
             numericComponent.ApplyValue(NumericType.BattleCamp, CampEnum.CampPlayer_1, false);
             numericComponent.ApplyValue(NumericType.RunRaceTransform, 0, false);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
+    [FriendOf(typeof(BagComponentS))]
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_BagInitHandler: MessageLocationHandler<Unit, C2M_BagInitRequest, M2C_BagInitResponse>
     {
@@ -12,16 +13,6 @@ namespace ET.Server
             BagComponentS bagComponentS = unit.GetComponent<BagComponentS>();
             response.BagInfos = bagComponentS.GetAllItems();
 
-          
-            NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
-            if (numericComponent.GetAsInt(NumericType.CangKuNumber) == 0)
-            {
-                numericComponent.Set(NumericType.CangKuNumber, 1);
-            }
-            if (numericComponent.GetAsInt(NumericType.RechargeNumber) == 0)
-            {
-                numericComponent.Set(NumericType.RechargeNumber, 648);
-            }
 
             for (int i = bagComponentS.WarehouseAddedCell.Count; i < (int)ItemLocType.ItemLocMax; i++)
             {
@@ -35,7 +26,6 @@ namespace ET.Server
 
             response.QiangHuaLevel = bagComponentS.QiangHuaLevel;
             response.QiangHuaFails = bagComponentS.QiangHuaFails;
-            //response.BagAddedCell = bagComponent.BagAddedCell;
             response.WarehouseAddedCell = bagComponentS.WarehouseAddedCell;
             response.FashionActiveIds = bagComponentS.FashionActiveIds;
             response.FashionEquipList = bagComponentS.FashionEquipList;
