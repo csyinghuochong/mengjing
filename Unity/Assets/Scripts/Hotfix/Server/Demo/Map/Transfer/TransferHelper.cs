@@ -235,7 +235,7 @@ namespace ET.Server
                         mapInstanceId, M2J_JiaYuanEnterRequest);
                         TransferHelper.BeforeTransfer(unit);
                         await TransferHelper.Transfer(unit, j2M_JianYuanEnterResponse.FubenActorId, (int)SceneTypeEnum.JiaYuan, request.SceneId, request.Difficulty, "0");
-                        // if (oldScene == SceneTypeEnum.JiaYuan)
+                        // if (oldScene == SceneTypeEnum.JiaYuan) //派发事件处理
                         // {
                         //     JiaYuanSceneComponent jiayuanSceneComponent = scene.GetParent<JiaYuanSceneComponent>();
                         //     jiayuanSceneComponent.OnUnitLeave(scene);
