@@ -67,6 +67,7 @@ namespace ET.Client
             self.MakeItemId = itmeid;
             self.ES_CommonItem.UpdateItem(new() { ItemID = itmeid, ItemNum = 1 }, ItemOperateEnum.None);
             self.ES_CommonItem.E_ItemNumText.gameObject.SetActive(false);
+            self.ES_CommonItem.E_ItemNameText.gameObject.SetActive(true);
             CommonViewHelper.SetImageGray(self.Root(), self.ES_CommonItem.E_LockButton.gameObject, !active);
             int makeid = EquipMakeConfigCategory.Instance.GetMakeId(itmeid);
 
