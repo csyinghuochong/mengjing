@@ -79,7 +79,6 @@ namespace ET.Client
 
         public static async ETTask RequestCreateRole(Scene root, long accountId, int occ, string name)
         {
-            Log.Debug("C2A_CreateRoleData.client0");
             PlayerComponent PlayerComponent = root.GetComponent<PlayerComponent>();
             C2R_CreateRoleData request = C2R_CreateRoleData.Create();
             request.AccountId = accountId;

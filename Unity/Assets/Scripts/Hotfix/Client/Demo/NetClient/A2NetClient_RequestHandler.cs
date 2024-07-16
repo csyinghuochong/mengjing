@@ -6,6 +6,18 @@
         protected override async ETTask Run(Scene root, A2NetClient_Request request, A2NetClient_Response response)
         {
             int rpcId = request.RpcId;
+            SessionComponent sessionComponent = root.GetComponent<SessionComponent>();
+            if (sessionComponent == null)
+            {
+                Log.Debug($"sessionComponent == null");
+            }
+
+            Session session = sessionComponent.Session;
+            if (session == null)
+            {
+                Log.Debug($"session == null");
+            }
+            
             IResponse res = await root.GetComponent<SessionComponent>().Session.Call(request.MessageObject);
             res.RpcId = rpcId;
             response.MessageObject = res;
