@@ -444,6 +444,7 @@ namespace ET.Server
           /// <returns></returns>
           public static M2C_SkillCmd OnUseSkill(this SkillManagerComponentS self, C2M_SkillCmd skillcmd, bool zhudong = true, bool checkDead = true)
           {
+              
               Unit unit = self.GetParent<Unit>();
               M2C_SkillCmd m2C_Skill = self.M2C_SkillCmd;
               m2C_Skill.Message = String.Empty;
@@ -471,6 +472,7 @@ namespace ET.Server
                   return m2C_Skill;
               }
 
+              skillcmd.WeaponSkillID = weaponSkill;
               EventSystem.Instance.Publish( self.Scene(), new UnitUseSkill() { UnitDefend = unit, skillcmd = skillcmd }  );
               
               self.InterruptSing(skillcmd.SkillID,false);

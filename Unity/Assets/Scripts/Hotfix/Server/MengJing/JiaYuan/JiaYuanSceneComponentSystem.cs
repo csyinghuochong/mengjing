@@ -77,6 +77,8 @@ namespace ET.Server
             {
                 UnitFactory.CreateJiaYuanPet(fubnescene, masterid, jiaYuanComponent.JiaYuanPetList_2[i]);
             }
+            
+            Log.Debug("1111111111111");
         }
 
         public static async ETTask<long> GetJiaYuanFubenId(this JiaYuanSceneComponent self, long masterid, long unitid)
