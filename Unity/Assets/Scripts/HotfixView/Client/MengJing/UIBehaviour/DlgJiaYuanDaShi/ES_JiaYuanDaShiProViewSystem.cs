@@ -96,8 +96,8 @@ namespace ET.Client
                 self.ShowBagInfos.Add(bagInfos[i]);
             }
 
-            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowProlist.Count);
-            self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowProlist.Count);
+            self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
+            self.E_BagItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);
         }
 
         public static void OnSelectItem(this ES_JiaYuanDaShiPro self, BagInfo bagInfo)
