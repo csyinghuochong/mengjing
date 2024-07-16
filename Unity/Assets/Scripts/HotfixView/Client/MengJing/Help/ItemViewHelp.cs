@@ -8,6 +8,30 @@ namespace ET.Client
 {
     public static class ItemViewHelp
     {
+        public static string GetFumpProDesc(List<HideProList> hideProLists)
+        {
+            string fumopro = "";
+            for (int i = 0; i < hideProLists.Count; i++)
+            {
+                HideProList hideProList = hideProLists[i];
+                int showType = NumericHelp.GetNumericValueType(hideProList.HideID);
+                string attribute;
+                if (showType == 2) //浮点数
+                {
+                    float value = (float)hideProList.HideValue / 100f;
+                    attribute = $"{ItemViewHelp.GetAttributeName(hideProList.HideID)} + " + value.ToString("0.##") + "%";
+                }
+                else //整数
+                {
+                    attribute = $"{ItemViewHelp.GetAttributeName(hideProList.HideID)} + {hideProList.HideValue}";
+                }
+
+                fumopro += " " + attribute;
+            }
+
+            return fumopro;
+        }
+
         public static string GetAttributeDesc(string pro)
         {
             string attributeStr = string.Empty;

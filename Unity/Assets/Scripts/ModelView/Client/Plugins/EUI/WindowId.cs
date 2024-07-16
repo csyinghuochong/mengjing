@@ -176,5 +176,6 @@ namespace ET.Client
 		WindowID_PetEggFuLing,
 		WindowID_ItemExpBox,
 		WindowID_Turtle,
+		WindowID_ItemFumoSelect,
 	}
 }

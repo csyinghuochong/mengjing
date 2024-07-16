@@ -370,11 +370,11 @@ namespace ET.Client
                 return;
             }
 
-            // if (itemConfig.ItemSubType == 15) //附魔
-            // {
-            //     self.OnItemFumoUse(itemConfig).Coroutine();
-            //     return;
-            // }
+            if (itemConfig.ItemSubType == 15) //附魔
+            {
+                self.OnItemFumoUse(itemConfig).Coroutine();
+                return;
+            }
 
             if (itemConfig.ItemSubType == 16) //锻造精灵
             {
@@ -554,6 +554,52 @@ namespace ET.Client
             }
 
             self.OnCloseTips();
+        }
+
+        public static async ETTask OnItemFumoUse(this DlgItemTips self, ItemConfig itemConfig)
+        {
+            await ETTask.CompletedTask;
+            string[] itemparams = itemConfig.ItemUsePar.Split('@');
+            int weizhi = int.Parse(itemparams[0]);
+            BagInfo equipinfo = self.Root().GetComponent<BagComponentC>().GetEquipBySubType(ItemLocType.ItemLocEquip, weizhi);
+            if (equipinfo == null)
+            {
+                FlyTipComponent.Instance.ShowFlyTip("对应的位置没有装备！");
+                return;
+            }
+
+            if (weizhi == (int)ItemSubTypeEnum.Shiping)
+            {
+                await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_ItemFumoSelect);
+                self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgItemFumoSelect>().OnInitUI(self.BagInfo);
+                self.OnCloseTips();
+                return;
+            }
+
+            List<HideProList> hideProLists = XiLianHelper.GetItemFumoPro(itemConfig.Id);
+            string itemfumo = ItemViewHelp.GetFumpProDesc(hideProLists);
+
+            if (equipinfo.FumoProLists.Count > 0)
+            {
+                string equipfumo = ItemViewHelp.GetFumpProDesc(equipinfo.FumoProLists);
+                string fumopro = $"当前附魔属性<color=#BEFF34>{equipfumo}</color> \n是否覆盖已有属性\n{itemfumo}\n此附魔道具已消耗";
+
+                BagClientNetHelper.SendFumoUse(self.Root(), self.BagInfo, hideProLists).Coroutine();
+                PopupTipHelp.OpenPopupTip(self.Root(), "装备附魔", fumopro, () =>
+                {
+                    BagClientNetHelper.SendFumoPro(self.Root(), 0).Coroutine();
+                    FlyTipComponent.Instance.ShowFlyTip($"附魔属性 {itemfumo}");
+                    self.OnCloseTips();
+                }, () => { self.OnCloseTips(); }).Coroutine();
+            }
+            else
+            {
+                await BagClientNetHelper.SendFumoUse(self.Root(), self.BagInfo, hideProLists);
+                await BagClientNetHelper.SendFumoPro(self.Root(), 0);
+                FlyTipComponent.Instance.ShowFlyTip($"附魔属性 {itemfumo}");
+
+                self.OnCloseTips();
+            }
         }
 
         private static void RequestXiangQianGem(this DlgItemTips self, string usrPar)

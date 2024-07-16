@@ -858,5 +858,24 @@ namespace ET.Client
             M2C_JingHeZhuruResponse response = (M2C_JingHeZhuruResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response;
         }
+
+        public static async ETTask<int> SendFumoUse(Scene root, BagInfo bagInfo, List<HideProList> hideProLists)
+        {
+            C2M_ItemFumoUseRequest request = C2M_ItemFumoUseRequest.Create();
+            request.OperateBagID = bagInfo.BagInfoID;
+            request.FuMoProList = hideProLists;
+
+            M2C_ItemFumoUseResponse response = (M2C_ItemFumoUseResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
+        public static async ETTask<int> SendFumoPro(Scene root, int index)
+        {
+            C2M_ItemFumoProRequest request = C2M_ItemFumoProRequest.Create();
+            request.Index = index;
+
+            M2C_ItemFumoProResponse response = (M2C_ItemFumoProResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }
