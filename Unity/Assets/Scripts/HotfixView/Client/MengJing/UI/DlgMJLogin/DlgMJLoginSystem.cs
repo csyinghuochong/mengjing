@@ -28,8 +28,13 @@ namespace ET.Client
             //获取服务器列表
             R2C_ServerList r2CServerList =  await LoginHelper.GetServerList(self.Root(), GlobalHelp.GetVersionMode());
             
+            Debug.Log($"RequestServerList:  {r2CServerList}");
+            
             ServerItem serverItem = r2CServerList.ServerItems[r2CServerList.ServerItems.Count - 1];
-            //如果之前登陆过游戏，在记录一下服务器id. serverItem = ServerHelper.GetServerItem(oldid);
+            
+            
+            Debug.Log($"RequestServerList2:  {serverItem}");
+            //如果之前登陆过游戏，记录一下服务器id. serverItem = ServerHelper.GetServerItem(oldid);
             self.Root().GetComponent<PlayerComponent>().ServerItem = serverItem;
         }
 

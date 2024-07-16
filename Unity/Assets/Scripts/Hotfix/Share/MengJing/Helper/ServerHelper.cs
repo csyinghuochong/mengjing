@@ -171,7 +171,7 @@ namespace ET
         public static ServerItem GetServerItem(int id, string ip, string name, long openTime)
         {
             ServerItem serverItem = ServerItem.Create();
-            serverItem.ServerId = 1;
+            serverItem.ServerId = id;
             serverItem.ServerIp = ip;
             serverItem.ServerName = name;
             serverItem.ServerOpenTime = openTime;
