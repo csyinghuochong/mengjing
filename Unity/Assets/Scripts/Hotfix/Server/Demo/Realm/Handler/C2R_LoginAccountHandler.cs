@@ -114,15 +114,14 @@ namespace ET.Server
                         return;
                     }
                     
-                    
-                    if (centerAccountInfo.PlayerInfo.RealName == 0)
-                    {
-                        response.Error = ErrorCode.ERR_NotRealName;
-                        response.AccountId = centerAccountInfo.Id;
-                        session.Disconnect().Coroutine();
-                        centerAccountInfo?.Dispose();
-                        return;
-                    }
+                    // if (centerAccountInfo.PlayerInfo.RealName == 0)
+                    // {
+                    //     response.Error = ErrorCode.ERR_NotRealName;
+                    //     response.AccountId = centerAccountInfo.Id;
+                    //     session.Disconnect().Coroutine();
+                    //     centerAccountInfo?.Dispose();
+                    //     return;
+                    // }
                     
                     //防沉迷相关
                     string idCardNo = centerAccountInfo.PlayerInfo.IdCardNo;

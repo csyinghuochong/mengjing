@@ -49,7 +49,7 @@ namespace ET.Client
 
         public static async ETTask<long> LoginAsync(this ClientSenderCompnent self, string account, string password)
         {
-            Log.Debug("LoginAsync");
+            Log.Debug("LoginAsync111");
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
@@ -59,7 +59,7 @@ namespace ET.Client
             main2NetClientLogin.Password     = password;
             main2NetClientLogin.ServerId     = playerComponent.ServerItem.ServerId;
             NetClient2Main_Login response = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientLogin) as NetClient2Main_Login;
-            
+            Log.Debug("LoginAsync2222");
             playerComponent.Account = account;
             playerComponent.Key = response.Key;
             playerComponent.Token = response.Token;
