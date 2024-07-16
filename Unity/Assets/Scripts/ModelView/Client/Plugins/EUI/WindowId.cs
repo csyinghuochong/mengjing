@@ -177,5 +177,6 @@ namespace ET.Client
 		WindowID_ItemExpBox,
 		WindowID_Turtle,
 		WindowID_ItemFumoSelect,
+		WindowID_PetQuickFight,
 	}
 }

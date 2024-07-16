@@ -46,7 +46,7 @@ namespace ET.Client
 
         public static void OnImagePetHeadIcon(this ES_RoleHead self)
         {
-            // UIHelper.Create(self.ZoneScene(), UIType.UIPetQuickFight).Coroutine();
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_PetQuickFight).Coroutine();
         }
 
         public static void OnOpenSettingUI(this ES_RoleHead self)
