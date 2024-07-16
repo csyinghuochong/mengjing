@@ -315,7 +315,6 @@ message R2C_LoginAccount // ISessionResponse
 	int32 Error = 2;
 	string Message = 3;
 	string Address = 4;
-	int64 Key = 5;
 	int64 GateId = 6;
 	string Token = 7;
 	int64 AccountId = 8;

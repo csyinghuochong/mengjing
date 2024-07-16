@@ -41,7 +41,6 @@ message NetClient2Main_Login // IResponse
 	int64 PlayerId = 4;
 	int64 AccountId = 5;
 	string Token = 6;
-	int64 Key = 7;
 	PlayerInfo PlayerInfo = 11;
 	repeated CreateRoleInfo RoleLists = 12;
 }

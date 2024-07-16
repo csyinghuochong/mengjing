@@ -86,7 +86,7 @@ namespace ET.Server
 
                     try
                     {
-                        DBComponent dbComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(session.Zone());
+                        DBComponent dbComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(1000);
                         List<DBCenterAccountInfo> newAccountList = await dbComponent.Query<DBCenterAccountInfo>(1000, d => d.Id == request.AccountId); 
                         if (newAccountList == null || newAccountList.Count == 0)
                         {

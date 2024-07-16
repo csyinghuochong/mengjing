@@ -44,21 +44,31 @@ namespace ET.Server
         /// <returns></returns>
         public static async ETTask<Unit> GetUnitCache(Scene scene, long unitId)
         {
+            int zone = scene.Zone();
             Scene root = scene.Root();
-            StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(scene.Zone());
+            StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.GetUnitCacheConfig(zone);
             Other2UnitCache_GetUnit message = Other2UnitCache_GetUnit.Create();
             message.UnitId = unitId;
 
             UnitCache2Other_GetUnit queryUnit =
                     (UnitCache2Other_GetUnit)await root.GetComponent<MessageSender>().Call(startSceneConfig.ActorId, message);
-            if (queryUnit.Error != ErrorCode.ERR_Success || queryUnit.EntityList.Count <= 0)
+            if (queryUnit.Error != ErrorCode.ERR_Success )
             {
                 return null;
             }
 
-            int indexOf = queryUnit.ComponentNameList.IndexOf(typeof(Unit).FullName);
-            Unit unit = MongoHelper.Deserialize<Unit>(queryUnit.EntityList[indexOf]);
-            UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
+            Unit unit = null;
+            if (queryUnit.EntityList.Count > 0)
+            {
+                 int indexOf = queryUnit.ComponentNameList.IndexOf(typeof(Unit).FullName);
+                 MongoHelper.Deserialize<Unit>(queryUnit.EntityList[indexOf]);
+            }
+            else
+            {  
+                UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
+                unit = unitComponent.AddChildWithId<Unit, int>(unitId, 1001);
+            }
+
             // if (unit == null)
             // {
             //     unit =  unitComponent.AddChildWithId<Unit, int>(unitId, 1001);
@@ -67,9 +77,6 @@ namespace ET.Server
             // {
             //     unitComponent.AddChild(unit);
             // }
-
-            unit = unitComponent.AddChildWithId<Unit, int>(unitId, 1001);
-
             foreach (var bytess in queryUnit.EntityList)
             {
                 Entity entity = MongoHelper.Deserialize<Entity>(bytess);

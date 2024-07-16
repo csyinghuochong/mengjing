@@ -18,10 +18,8 @@ namespace ET.Client
         public int Age_Type = -1;
 
         public long AccountId { get; set; } = 0;
-
-        public long Key;
+        
         public string Token;
-
         public string RealmKey;
         public string RealmAddress;
         

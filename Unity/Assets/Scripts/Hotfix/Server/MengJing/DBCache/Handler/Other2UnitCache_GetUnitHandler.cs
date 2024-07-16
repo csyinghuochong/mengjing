@@ -52,7 +52,10 @@ namespace ET.Server
                 response.ComponentNameList.AddRange(dictionary.Keys);
                 foreach (var VARIABLE in dictionary.Values)
                 {
-                    response.EntityList.Add(VARIABLE.ToBson()  );
+                    if (VARIABLE != null)
+                    { 
+                        response.EntityList.Add(VARIABLE.ToBson()  );
+                    }
                 }
             }
             finally

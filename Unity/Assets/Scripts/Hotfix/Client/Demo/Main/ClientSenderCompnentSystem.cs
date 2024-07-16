@@ -61,7 +61,6 @@ namespace ET.Client
             NetClient2Main_Login response = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientLogin) as NetClient2Main_Login;
             Log.Debug("LoginAsync2222");
             playerComponent.Account = account;
-            playerComponent.Key = response.Key;
             playerComponent.Token = response.Token;
             playerComponent.AccountId = response.AccountId;
             playerComponent.PlayerInfo = response.PlayerInfo;
