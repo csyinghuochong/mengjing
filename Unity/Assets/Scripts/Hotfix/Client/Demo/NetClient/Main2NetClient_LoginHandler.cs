@@ -33,7 +33,7 @@ namespace ET.Client
             C2R_LoginAccount c2RLoginAccount = C2R_LoginAccount.Create();
             c2RLoginAccount.Account = account;
             c2RLoginAccount.Password = password;
-
+            c2RLoginAccount.ServerId = request.ServerId;
             R2C_LoginAccount r2CLoginAccount = (R2C_LoginAccount)await session.Call(c2RLoginAccount);
             if (r2CLoginAccount.Error == ErrorCode.ERR_Success)
             {
