@@ -20,9 +20,9 @@ namespace ET.Client
             self.E_PlayerHeadIconImage.sprite = self.Root().GetComponent<ResourcesLoaderComponent>()
                     .LoadAssetSync<Sprite>(ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PlayerIcon, self.UserInfoComponent.UserInfo.Occ.ToString()));
 
-            // AccountInfoComponent accountInfoComponent = self.ZoneScene().GetComponent<AccountInfoComponent>();
-            // string serverName = accountInfoComponent.ServerName;
-            self.E_ServerNameText.text = "测试服";
+            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            string serverName = playerComponent.ServerItem.ServerName;
+            self.E_ServerNameText.text = serverName;
 
             self.InitShow();
         }

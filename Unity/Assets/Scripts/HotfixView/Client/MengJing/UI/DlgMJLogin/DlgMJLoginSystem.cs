@@ -19,8 +19,8 @@ namespace ET.Client
             GameObject.Find("Global").GetComponent<Init>().HidePatchWindow();
 
             self.AddUIScrollItems(ref self.Dictionary, 100);
-            self.View.E_AccountInputField.text = PlayerPrefs.GetString("MJ_Account");
-            self.View.E_PasswordInputField.text = PlayerPrefs.GetString("MJ_Password");
+            self.View.E_AccountInputField.text = PlayerPrefsHelp.GetString("MJ_Account");
+            self.View.E_PasswordInputField.text = PlayerPrefsHelp.GetString("MJ_Password");
 
             self.RequestServerList().Coroutine();
         }
@@ -72,8 +72,8 @@ namespace ET.Client
                 self.View.E_PasswordInputField.text).Coroutine();
 
             PlayerPrefsHelp.SetInt(PlayerPrefsHelp.MyServerID, self.ServerInfo.ServerId);
-            PlayerPrefs.SetString("MJ_Account", self.View.E_AccountInputField.text);
-            PlayerPrefs.SetString("MJ_Password", self.View.E_PasswordInputField.text);
+            PlayerPrefsHelp.SetString("MJ_Account", self.View.E_AccountInputField.text);
+            PlayerPrefsHelp.SetString("MJ_Password", self.View.E_PasswordInputField.text);
         }
 
         public static void OnSelectServer(this DlgMJLogin self, ServerItem serverId)
