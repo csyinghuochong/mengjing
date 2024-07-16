@@ -58,9 +58,10 @@ namespace ET.Server
 						response.Error = ErrorCode.ERR_RoleNameRepeat;
 						return;
 					}
-					
-					dbComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(session.Zone());
-			        List<DBCenterAccountInfo> newAccountList = await dbComponent.Query<DBCenterAccountInfo>(session.Zone(), d => d.Id == request.AccountId);
+
+					int zone = session.Zone();
+					dbComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(zone);
+			        List<DBCenterAccountInfo> newAccountList = await dbComponent.Query<DBCenterAccountInfo>(zone, d => d.Id == request.AccountId);
 			        DBCenterAccountInfo newAccount = newAccountList[0];
 
 					int robotId = 0;

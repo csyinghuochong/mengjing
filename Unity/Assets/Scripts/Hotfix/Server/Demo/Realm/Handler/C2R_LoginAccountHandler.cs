@@ -95,6 +95,7 @@ namespace ET.Server
                         centerAccountInfo.Password = request.Password;
                         centerAccountInfo.CreateTime  = TimeInfo.Instance.ServerNow();
                         centerAccountInfo.AccountType = (int)AccountType.General;
+                        await dBComponent.Save<DBCenterAccountInfo>(centerAccountInfo);
                     }
 
                     if (session.IsDisposed || session.Zone() == 0)
