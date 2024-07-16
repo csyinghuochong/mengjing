@@ -27,16 +27,21 @@ namespace ET.Client
         public static async ETTask RequestServerList(this DlgMJLogin self)
         {
             //获取服务器列表
-            R2C_ServerList r2CServerList =  await LoginHelper.GetServerList(self.Root(), GlobalHelp.GetVersionMode());
-            
+            R2C_ServerList r2CServerList = await LoginHelper.GetServerList(self.Root(), GlobalHelp.GetVersionMode());
+
             Debug.Log($"RequestServerList:  {r2CServerList}");
-            
-            ServerItem serverItem = r2CServerList.ServerItems[r2CServerList.ServerItems.Count -1];
+
+            ServerItem serverItem = r2CServerList.ServerItems[r2CServerList.ServerItems.Count - 1];
 
             Debug.Log($"RequestServerList2:  {serverItem}");
+
+            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+
+            self.OnSelectServer(serverItem);
+
             //如果之前登陆过游戏，记录一下服务器id. serverItem = ServerHelper.GetServerItem(oldid);
-            self.Root().GetComponent<PlayerComponent>().ServerItem = serverItem;
-            self.Root().GetComponent<PlayerComponent>().AllServerList = r2CServerList.ServerItems;
+            playerComponent.ServerItem = serverItem;
+            playerComponent.AllServerList = r2CServerList.ServerItems;
         }
 
         public static void OnLoop(this DlgMJLogin self, Transform transform, int index)
@@ -47,9 +52,14 @@ namespace ET.Client
 
         public static void OnLogin(this DlgMJLogin self)
         {
+            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            playerComponent.ServerItem.ServerId = self.ServerInfo.ServerId;
+
             LoginHelper.Login(self.Root(),
                 self.View.E_AccountInputField.text,
                 self.View.E_PasswordInputField.text).Coroutine();
+            
+            PlayerPrefsHelp.SetInt(PlayerPrefsHelp.MyServerID, self.ServerInfo.ServerId);
             PlayerPrefs.SetString("MJ_Account", self.View.E_AccountInputField.text);
             PlayerPrefs.SetString("MJ_Password", self.View.E_PasswordInputField.text);
         }
