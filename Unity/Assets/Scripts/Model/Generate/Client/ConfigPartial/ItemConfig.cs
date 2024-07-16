@@ -13,6 +13,14 @@ namespace ET
         {
             foreach (ItemConfig itemConfig in this.GetAll().Values)
             {
+                if (itemConfig.ItemType == 1 && itemConfig.ItemSubType == 131 && itemConfig.ItemQuality > 2)
+                {
+                    FoodList.Add(itemConfig.Id);
+                }
+            }
+            
+            foreach (ItemConfig itemConfig in this.GetAll().Values)
+            {
                 if (itemConfig.ItemType== 1 && itemConfig.ItemSubType== 131)
                 {
                     List<int> foodlist = null;

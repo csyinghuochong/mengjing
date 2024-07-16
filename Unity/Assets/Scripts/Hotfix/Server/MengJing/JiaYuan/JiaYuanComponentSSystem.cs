@@ -291,6 +291,11 @@ namespace ET.Server
             {
                 self.RefreshMonsterTime_2 = TimeHelper.ServerNow() - TimeHelper.Hour * 5;
             }
+
+            if (self.PurchaseItemList_7.Count == 0)
+            {
+                self.UpdatePurchaseItemList(false);
+            }
         }
 
         public static void OnBeforEnter(this JiaYuanComponentS self)
