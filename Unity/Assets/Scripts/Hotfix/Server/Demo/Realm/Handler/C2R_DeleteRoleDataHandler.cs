@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-    [FriendOf(typeof (DBAccountInfo))]
     [FriendOf(typeof (UserInfoComponentS))]
     [MessageSessionHandler(SceneType.Gate)]
     public class C2R_DeleteRoleDataHandler: MessageSessionHandler<C2R_DeleteRoleData, R2C_DeleteRoleData>
@@ -31,7 +30,7 @@ namespace ET.Server
                     //存储账号信息
                     int zone = session.Zone();
                     DBComponent dbComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(zone);
-                    List<DBAccountInfo> newAccountList = await dbComponent.Query<DBAccountInfo>(zone, d => d.Id == request.AccountId);
+                    List<DBCenterAccountInfo> newAccountList = await dbComponent.Query<DBCenterAccountInfo>(zone, d => d.Id == request.AccountId);
                     if (newAccountList.Count == 0)
                     {
                         response.Error = ErrorCode.ERR_NotFindAccount;
@@ -40,7 +39,7 @@ namespace ET.Server
 
                     Log.Warning($"C2A_DeleteRoleData: {request.AccountId} {request.UserId}");
 
-                    DBAccountInfo newAccount = newAccountList[0];
+                    DBCenterAccountInfo newAccount = newAccountList[0];
                     //移除角色
                     if (newAccount.RoleList.Count > 0)
                     {
@@ -48,14 +47,13 @@ namespace ET.Server
                         {
                             if (newAccount.RoleList[i].UnitId == request.UserId)
                             {
-                                newAccount.RoleList.RemoveAt(i);
+                                newAccount.RoleList[i].State = (int)RoleInfoState.Freeze;
                             }
                         }
                         
-                        newAccount.DeleteRoleList.Add(request.UserId);
                     }
 
-                    await dbComponent.Save<DBAccountInfo>(zone, newAccount);
+                    await dbComponent.Save<DBCenterAccountInfo>(zone, newAccount);
                     // long mapInstanceId = DBHelper.GetRankServerId(session.DomainZone());
                     // R2A_DeleteRoleData deleteResponse = (R2A_DeleteRoleData)await ActorMessageSenderComponent.Instance.Call(mapInstanceId,
                     //     new A2R_DeleteRoleData() { DeleUserID = request.UserId, AccountId = request.AccountId });

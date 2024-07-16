@@ -11,12 +11,16 @@ namespace ET.Server
         {
             using (await scene.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.LoginAccount, request.AccInfoID))
             {
-                DBAccountInfo dBAccountWarehouse = await UnitCacheHelper.GetComponent<DBAccountInfo>(scene.Root(), request.AccInfoID);
+                DBAccountBagInfo dBAccountWarehouse = await UnitCacheHelper.GetComponent<DBAccountBagInfo>(scene.Root(), request.AccInfoID);
                 if (dBAccountWarehouse != null)
                 {
                     response.BagInfos = dBAccountWarehouse.BagInfoList;
                 }
-
+                else
+                {
+                    DBAccountBagInfo dBAccountBagInfo = scene.AddChildWithId<DBAccountBagInfo>(request.AccInfoID);
+                    UnitCacheHelper.SaveComponent(scene.Root(),request.AccInfoID, dBAccountBagInfo).Coroutine();
+                }
             }
             await ETTask.CompletedTask;
         }

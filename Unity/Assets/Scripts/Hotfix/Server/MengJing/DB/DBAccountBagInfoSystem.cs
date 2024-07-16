@@ -3,11 +3,11 @@
 namespace ET.Server
 {
 
-    [FriendOf(typeof(DBAccountInfo))]
-    public static partial class DBAccountInfoSystem
+    [FriendOf(typeof(DBAccountBagInfo))]
+    public static partial class DBAccountBagInfoSystem
     {
 
-        public static int HaveItemById( this DBAccountInfo self, long bagInfoId)
+        public static int HaveItemById( this DBAccountBagInfo self, long bagInfoId)
         {
             for (int i = 0; i < self.BagInfoList.Count; i++)
             {

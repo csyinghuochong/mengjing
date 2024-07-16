@@ -279,13 +279,13 @@ message ServerItem
 	repeated int32 PlatformList = 7;   //不配置或者-1全部显示
 }
 
-//ResponseType Center2C_ServerList
-message C2Center_ServerList // ISessionRequest
+//ResponseType R2C_ServerList
+message C2R_ServerList // ISessionRequest
 {
 	int32 RpcId = 1;
 }
 
-message Center2C_ServerList // ISessionResponse
+message R2C_ServerList // ISessionResponse
 {
 	int32 RpcId = 1;
 	string Message = 2;
@@ -355,6 +355,8 @@ message CreateRoleInfo
 	int32 OccTwo = 6;
 	int32 EquipIndex = 7;
 	int32 RobotId = 8;
+	int32 ServerId = 9;
+	int32 State = 10;
 }
 
 //ResponseType G2C_LoginGameGate
@@ -382,6 +384,7 @@ message C2R_CreateRoleData // ISessionRequest
 	int32 CreateOcc = 2;
 	string CreateName = 3;
 	int64 AccountId = 4;
+	int32 ServerId = 5;
 }
 
 message R2C_CreateRoleData // ISessionResponse

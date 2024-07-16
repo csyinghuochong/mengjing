@@ -10,7 +10,7 @@ namespace ET.Server
             using (await unit.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.Buy, unit.Id))
             {
                 long accountId = unit.GetComponent<UserInfoComponentS>().UserInfo.AccInfoID;
-                DBAccountInfo dBAccountWarehouse = await UnitCacheHelper.GetComponent<DBAccountInfo>(unit.Root(), accountId);
+                DBAccountBagInfo dBAccountWarehouse = await UnitCacheHelper.GetComponent<DBAccountBagInfo>(unit.Root(), accountId);
                 
                 if(dBAccountWarehouse == null)
                 {

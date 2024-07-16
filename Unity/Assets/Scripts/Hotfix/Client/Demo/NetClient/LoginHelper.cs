@@ -6,7 +6,7 @@ namespace ET.Client
     public static class LoginHelper
     {
         
-        public static async ETTask<Center2C_ServerList> GetServerList(Scene root, int versionMode)
+        public static async ETTask<R2C_ServerList> GetServerList(Scene root, int versionMode)
         {
             await ETTask.CompletedTask;
             root.RemoveComponent<ClientSenderCompnent>();
@@ -80,13 +80,15 @@ namespace ET.Client
         public static async ETTask RequestCreateRole(Scene root, long accountId, int occ, string name)
         {
             Log.Debug("C2A_CreateRoleData.client0");
+            PlayerComponent PlayerComponent = root.GetComponent<PlayerComponent>();
             C2R_CreateRoleData request = C2R_CreateRoleData.Create();
             request.AccountId = accountId;
             request.CreateOcc = occ;
             request.CreateName = name;
+            request.ServerId = PlayerComponent.ServerItem.ServerId;
 
             R2C_CreateRoleData response = await root.GetComponent<ClientSenderCompnent>().Call(request) as R2C_CreateRoleData;
-            root.GetComponent<PlayerComponent>().CreateRoleList.Add(response.createRoleInfo);
+            PlayerComponent.CreateRoleList.Add(response.createRoleInfo);
         }
 
         public static async ETTask RequestDeleteRole(Scene root, long accountId, long userId, CreateRoleInfo createRoleInfo)

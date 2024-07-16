@@ -12,6 +12,11 @@ namespace ET.Server
         Delete = 2,
     }
 
+    public enum RoleInfoState
+    {
+        Normal = 0,
+        Freeze,
+    }
 
     [ChildOf]
     [BsonIgnoreExtraElements]
@@ -23,10 +28,15 @@ namespace ET.Server
         //密码
         public string Password { get; set; }
 
+        //UserList列表
+        public List<CreateRoleInfo> RoleList  { get; set; }= new List<CreateRoleInfo>();
+
         public PlayerInfo PlayerInfo { get; set; }
 
         public int AccountType{ get; set; } //账号类型
 
-        public long CreateTime; //创建时间
+        
+        public long CreateTime { get; set; } //创建时间
+        
     }
 }

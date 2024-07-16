@@ -27,7 +27,7 @@ namespace ET.Client
         public static async ETTask RequestServerList(this DlgMJLogin self)
         {
             //获取服务器列表
-            Center2C_ServerList r2CServerList =  await LoginHelper.GetServerList(self.Root(), GlobalHelp.GetVersionMode());
+            R2C_ServerList r2CServerList =  await LoginHelper.GetServerList(self.Root(), GlobalHelp.GetVersionMode());
             
             ServerItem serverItem = r2CServerList.ServerItems[r2CServerList.ServerItems.Count - 1];
             //如果之前登陆过游戏，在记录一下服务器id. serverItem = ServerHelper.GetServerItem(oldid);

@@ -31,7 +31,7 @@ namespace ET.Client
             await FiberManager.Instance.Remove(fiberId);
         }
 
-        public static async ETTask<Center2C_ServerList> GetServerList(this ClientSenderCompnent self, int versionMode)
+        public static async ETTask<R2C_ServerList> GetServerList(this ClientSenderCompnent self, int versionMode)
         {
             self.fiberId = await FiberManager.Instance.Create(SchedulerType.ThreadPool, 0, SceneType.NetClient, "");
             self.netClientActorId = new ActorId(self.Fiber().Process, self.fiberId);  // this.Root = new Scene(this, id, 1, sceneType, name); / this.InstanceId = 1;
@@ -40,7 +40,7 @@ namespace ET.Client
             main2NetClientServerList.OwnerFiberId = self.Fiber().Id;
             main2NetClientServerList.VersionMode = versionMode;
             NetClient2Main_ServerList respone = await self.Root().GetComponent<ProcessInnerSender>().Call(self.netClientActorId, main2NetClientServerList) as NetClient2Main_ServerList;
-            Center2C_ServerList r2CServerList = Center2C_ServerList.Create();
+            R2C_ServerList r2CServerList = R2C_ServerList.Create();
             r2CServerList.ServerItems = respone.ServerItems;
             r2CServerList.NoticeText = respone.NoticeText;
             r2CServerList.NoticeText = respone.NoticeText;

@@ -21,13 +21,6 @@ namespace ET.Server
                 //dBCenterAccountInfo.AccountType = 2;////(int)AccountType.Delete;
                 //await Game.Scene.GetComponent<DBComponent>().Save<DBCenterAccountInfo>(session.DomainZone(), dBCenterAccountInfo); 
                 await dbComponent.Remove<DBCenterAccountInfo>(session.Zone(), dBCenterAccountInfo.Id);
-
-                List<int> allZones = BroadMessageHelper.GetAllZone();
-                for ( int i = 0; i < allZones.Count; i++ )
-                { 
-                    int pzone = allZones[i];
-                    await dbComponent.Remove<DBAccountInfo>(pzone, dBCenterAccountInfo.Id);
-                }
             }
             else
             {

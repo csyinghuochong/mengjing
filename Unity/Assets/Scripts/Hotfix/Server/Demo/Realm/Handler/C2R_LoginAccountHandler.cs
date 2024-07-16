@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 namespace ET.Server
 {
 
+    [FriendOf(typeof(DBCenterAccountInfo))]
     [MessageSessionHandler(SceneType.Realm)]
 	public class C2R_LoginAccountHandler : MessageSessionHandler<C2R_LoginAccount, R2C_LoginAccount>
 	{
@@ -55,32 +56,45 @@ namespace ET.Server
             //public const int PhoneNumLogin = 4;        //手机号登录
             //public const int TapTap = 5;                //taptap登录
             //先检测一下QQ和微信登录
-            long AccountId = 0;
             CoroutineLockComponent coroutineLockComponent = session.Root().GetComponent<CoroutineLockComponent>();
             using (session.AddComponent<SessionLockingComponent>())
             {
                 using (await coroutineLockComponent.Wait(CoroutineLockType.LoginAccount, request.Account.Trim().GetHashCode()))
                 {
-                    ActorId accountZone = StartSceneConfigCategory.Instance.LoginCenterConfig.ActorId;
-                    A2Center_CheckAccount A2Center_CheckAccount = A2Center_CheckAccount.Create();
-                    A2Center_CheckAccount.AccountName = request.Account;
-                    A2Center_CheckAccount.Password = request.Password;
-                    A2Center_CheckAccount.ThirdLogin = request.ThirdLogin;
-                    Center2A_CheckAccount centerAccount = (Center2A_CheckAccount)await session.Root().GetComponent<MessageSender>().Call(accountZone, A2Center_CheckAccount);
-                    PlayerInfo playerInfo = centerAccount.PlayerInfo != null ? centerAccount.PlayerInfo : null;
-                    
-                    //没有则注册
-                    if (centerAccount.PlayerInfo == null)
+
+                    DBComponent dBComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(session.Zone()); 
+                    List<DBCenterAccountInfo> centerAccountInfoList = await dBComponent.Query<DBCenterAccountInfo>(session.Zone(), d => d.Account == request.Account && d.Password == request.Password);
+                    DBCenterAccountInfo centerAccountInfo = null;
+                    if (centerAccountInfoList != null && centerAccountInfoList.Count > 0)
                     {
-                        A2Center_RegisterAccount A2Center_RegisterAccount = A2Center_RegisterAccount.Create();
-                        A2Center_RegisterAccount.AccountName = request.Account;
-                        A2Center_RegisterAccount.Password = request.Password;
-                        Center2A_RegisterAccount saveAccount = (Center2A_RegisterAccount)await session.Root().GetComponent<MessageSender>().Call(accountZone, A2Center_RegisterAccount);
-                        AccountId = saveAccount.AccountId;
+                        centerAccountInfo = centerAccountInfoList[0];
+                        session.AddChild(centerAccountInfo);
+                        
+                        if (centerAccountInfo.AccountType == (int)AccountType.BlackList)
+                        {
+                            response.Error = ErrorCode.ERR_AccountInBlackListError;
+                            session.Disconnect().Coroutine();
+                            centerAccountInfo?.Dispose();
+                            return;
+                        }
+
+
+                        if (!centerAccountInfo.Password.Equals(request.Password))
+                        {
+                            response.Error = ErrorCode.ERR_LoginInfoIsNull;
+                            session.Disconnect().Coroutine();
+                            centerAccountInfo?.Dispose();
+                            return;
+                        }
                     }
                     else
                     {
-                        AccountId = centerAccount.AccountId;
+                        centerAccountInfo =  session.AddChild<DBCenterAccountInfo>();
+                        centerAccountInfo.PlayerInfo = PlayerInfo.Create();
+                        centerAccountInfo.Account = request.Account.Trim();
+                        centerAccountInfo.Password = request.Password;
+                        centerAccountInfo.CreateTime  = TimeInfo.Instance.ServerNow();
+                        centerAccountInfo.AccountType = (int)AccountType.General;
                     }
 
                     if (session.IsDisposed || session.Zone() == 0)
@@ -91,110 +105,52 @@ namespace ET.Server
                         return;
                     }
 
-                    DBComponent dBComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(session.Zone());
-                    List<DBAccountInfo> accountInfoList = await dBComponent.Query<DBAccountInfo>(session.Zone(), d => d.Account == request.Account && d.Password == request.Password);
-                    if (accountInfoList.Count == 0 && AccountId > 0)
-                    {
-                        accountInfoList = await dBComponent.Query<DBAccountInfo>(session.Zone(), d => d.Id == AccountId);
-                    }
-
-                    if (accountInfoList.Count == 0 && (request.Password == "3" || request.Password == "4"))
-                    {
-                        string password = request.Password == "3" ? "4" : "3";
-                        accountInfoList = await dBComponent.Query<DBAccountInfo>(session.Zone(), d => d.Account == request.Account && d.Password == password);
-                    }
-
-                    DBAccountInfo account = accountInfoList != null && accountInfoList.Count > 0 ? accountInfoList[0] : null;
-                    if (AccountId > 0 && account == null)
-                    {
-                        //Log.Console($"当前区找不到账号: {session.DomainZone()} {request.AccountName} {request.Password}");
-                        //Log.Warning($"当前区找不到账号: {session.DomainZone()} {request.AccountName} {request.Password}");
-                    }
-                    bool IsHoliday = false;
-                    bool StopServer = false;
-                    A2Center_CheckAccount = A2Center_CheckAccount.Create();
-                    A2Center_CheckAccount.AccountName = request.Account;
-                    A2Center_CheckAccount.Password = request.Password;
-                    A2Center_CheckAccount.ThirdLogin = request.ThirdLogin;
-                    Center2A_CheckAccount checkAccount = (Center2A_CheckAccount)await session.Root().GetComponent<MessageSender>().Call(accountZone, A2Center_CheckAccount);
-                    PlayerInfo centerPlayerInfo = checkAccount.PlayerInfo;
-                    IsHoliday = checkAccount.IsHoliday;
-                    StopServer = checkAccount.StopServer;
+                    bool IsHoliday = session.Root().GetComponent<FangChenMiComponentS>().IsHoliday;;
+                    bool StopServer = session.Root().GetComponent<FangChenMiComponentS>().IsHoliday;;
                     if (StopServer && !GMHelp.IsGmAccount(request.Account))
                     {
                         response.Error = ErrorCode.ERR_StopServer;
                         session.Disconnect().Coroutine();
                         return;
                     }
-
-                    if (centerPlayerInfo == null)
-                    {
-                        response.Error = ErrorCode.ERR_LoginInfoIsNull;
-                        session.Disconnect().Coroutine();
-                        return;
-                    }
-                    if (account == null)
-                    {
-                        //在该区创建账号信息
-                        account = session.AddChildWithId<DBAccountInfo>(AccountId);
-                        account.Account = request.Account;
-                        account.Password = request.Password;
-                        account.CreateTime = TimeHelper.ServerNow();
-                        await dBComponent.Save<DBAccountInfo>(session.Zone(), account);
-                    }
-
-                    if (account.AccountType == 2) //黑名单
-                    {
-                        response.Error = ErrorCode.ERR_AccountInBlackListError;
-                        response.AccountId = account.Id;
-                        session.Disconnect().Coroutine();
-                        account?.Dispose();
-                        return;
-                    }
-                    if (centerPlayerInfo.RealName == 0)
+                    
+                    
+                    if (centerAccountInfo.PlayerInfo.RealName == 0)
                     {
                         response.Error = ErrorCode.ERR_NotRealName;
-                        response.AccountId = account.Id;
+                        response.AccountId = centerAccountInfo.Id;
                         session.Disconnect().Coroutine();
-                        account?.Dispose();
+                        centerAccountInfo?.Dispose();
                         return;
                     }
-                    if (session.IsDisposed || session.Zone() == 0)
-                    {
-                        Log.Console($"session.IsDisposed: {request.Account}");
-                        response.Error = ErrorCode.ERR_LoginInfoIsNull;
-                        session.Disconnect().Coroutine();
-                        account?.Dispose();
-                        return;
-                    }
-
+                    
                     //防沉迷相关
-                    string idCardNo = centerPlayerInfo.IdCardNo;
+                    string idCardNo = centerAccountInfo.PlayerInfo.IdCardNo;
                     int canLogin = CanLogin(idCardNo, IsHoliday, request.age_type);
                     if (canLogin != ErrorCode.ERR_Success)
                     {
                         response.Error = canLogin;
                         session.Disconnect().Coroutine();
-                        account?.Dispose();
+                        centerAccountInfo?.Dispose();
                         return;
                     }
                     Scene rootScene = session.Root();
                     TokenComponent tokenComponent = rootScene.GetComponent<TokenComponent>();
-                    string queueToken = tokenComponent.Get(account.Account);
+                    string queueToken = tokenComponent.Get(centerAccountInfo.Account);
 
                     //在线人数判断有问题。[获取的是在保存在账号服的玩家数量]
                     AccountSessionsComponent accountSessionsComponent = session.Root().GetComponent<AccountSessionsComponent>();
                     long onlineNumber = accountSessionsComponent.AccountSessionDictionary.Values.Count;
                     int maxNumber = GlobalValueConfigCategory.Instance.OnLineLimit;
                     //Log.Console($" {session.DomainZone()} ---  onlineNumber:{onlineNumber}");
-                    if (accountSessionsComponent.Get(account.Account) == null &&
+                    if (accountSessionsComponent.Get(centerAccountInfo.Account) == null &&
                         onlineNumber >= maxNumber && (string.IsNullOrEmpty(queueToken) || queueToken != request.Token))
                     {
                         Log.Console($" {session.Zone()} --- onlineNumber: {onlineNumber}  queueToken:{queueToken} request.Token:{request.Token}");
 
                         queueToken = TimeHelper.ServerNow().ToString() + RandomHelper.RandomNumber(int.MinValue, int.MaxValue).ToString();
-                        tokenComponent.Remove(account.Account);
-                        tokenComponent.Add(account.Account, queueToken);
+                        tokenComponent.Remove(centerAccountInfo.Account);
+                        tokenComponent.Add(centerAccountInfo.Account, queueToken);
 
                         //long queueServerId = DBHelper.GetQueueServerId(session.DomainZone());
                         //Q2A_EnterQueue d2GGetUnit = (Q2A_EnterQueue)await ActorMessageSenderComponent.Instance.Call(queueServerId, new A2Q_EnterQueue()
@@ -210,7 +166,7 @@ namespace ET.Server
                         //response.QueueAddres = StartSceneConfigCategory.Instance.Queues[session.DomainZone()].OuterIPPort.ToString();
 
                         session.Disconnect().Coroutine();
-                        account?.Dispose();
+                        centerAccountInfo?.Dispose();
                         return;
                     }
                     
@@ -224,7 +180,7 @@ namespace ET.Server
                     {
                         response.Error = loginAccountResponse.Error;
                         session?.Disconnect().Coroutine();
-                        account?.Dispose();
+                        centerAccountInfo?.Dispose();
                         return;
                     }
                     
@@ -236,21 +192,23 @@ namespace ET.Server
                     session.AddComponent<AccountCheckOutTimeComponent, string>(request.Account);
 
                     string Token = TimeHelper.ServerNow().ToString() + RandomHelper.RandomNumber(int.MinValue, int.MaxValue).ToString();
-                    tokenComponent.Remove(account.Account);    //Token也是保留十分钟
-                    tokenComponent.Add(account.Account, Token);
+                    tokenComponent.Remove(centerAccountInfo.Account);    //Token也是保留十分钟
+                    tokenComponent.Add(centerAccountInfo.Account, Token);
 
                     response.RoleLists.Clear();
                     ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(session.Zone());
-                    for (int i = 0; i < account.RoleList.Count; i++)
+                    for (int i = 0; i < centerAccountInfo.RoleList.Count; i++)
                     {
-                        UserInfoComponentS userinfo = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(session.Root(), account.RoleList[i].UnitId);
+                        
+                        
+                        UserInfoComponentS userinfo = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(session.Root(), centerAccountInfo.RoleList[i].UnitId);
                         if (userinfo == null)
                         {
                             continue;
                         }
 
-                        CreateRoleInfo roleList = GetRoleListInfo(userinfo.UserInfo, account.RoleList[i].UnitId);
-                        NumericComponentS numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentS>(session.Root(), account.RoleList[i].UnitId);
+                        CreateRoleInfo roleList = GetRoleListInfo(userinfo.UserInfo, centerAccountInfo.RoleList[i].UnitId);
+                        NumericComponentS numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentS>(session.Root(), centerAccountInfo.RoleList[i].UnitId);
                         if (numericComponent == null)
                         {
                             continue;
@@ -260,32 +218,31 @@ namespace ET.Server
                         roleList.EquipIndex = numericComponent.GetAsInt(NumericType.EquipIndex);
                         response.RoleLists.Add(roleList);
                     }
-                    response.PlayerInfo = centerPlayerInfo;
-                    response.AccountId = account.Id;
+                    response.PlayerInfo = centerAccountInfo.PlayerInfo;
+                    response.AccountId = centerAccountInfo.Id;
                     response.Token = Token;
                     for (int r = 0; r < response.PlayerInfo.RechargeInfos.Count; r++)
                     {
                         response.PlayerInfo.RechargeInfos[r].OrderInfo = String.Empty;
                     }
-                    account?.Dispose();
+                    centerAccountInfo?.Dispose();
+                    
+                    // 随机分配一个Gate
+                    StartSceneConfig config = RealmGateAddressHelper.GetGate(session.Zone(), request.Account);
+                    Log.Debug($"gate address: {config}");
+			
+                    // 向gate请求一个key,客户端可以拿着这个key连接gate
 
+                    R2G_GetLoginKey R2G_GetLoginKey = R2G_GetLoginKey.Create();
+                    R2G_GetLoginKey.Account = request.Account;
+                    G2R_GetLoginKey g2RGetLoginKey = (G2R_GetLoginKey) await session.Fiber().Root.GetComponent<MessageSender>().Call(
+                        config.ActorId, R2G_GetLoginKey);
+             
+                    response.Address = config.InnerIPPort.ToString();
+                    response.Key = g2RGetLoginKey.Key;
+                    response.GateId = g2RGetLoginKey.GateId;
                 }
             }
-
-            // 随机分配一个Gate
-            StartSceneConfig config = RealmGateAddressHelper.GetGate(session.Zone(), request.Account);
-			Log.Debug($"gate address: {config}");
-			
-			// 向gate请求一个key,客户端可以拿着这个key连接gate
-
-            R2G_GetLoginKey R2G_GetLoginKey = R2G_GetLoginKey.Create();
-            R2G_GetLoginKey.Account = request.Account;
-			 G2R_GetLoginKey g2RGetLoginKey = (G2R_GetLoginKey) await session.Fiber().Root.GetComponent<MessageSender>().Call(
-			 	config.ActorId, R2G_GetLoginKey);
-             
-			 response.Address = config.InnerIPPort.ToString();
-			 response.Key = g2RGetLoginKey.Key;
-			 response.GateId = g2RGetLoginKey.GateId;
 		}
 
         private CreateRoleInfo GetRoleListInfo(UserInfo userInfo, long userID)

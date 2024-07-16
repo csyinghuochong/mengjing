@@ -5,7 +5,6 @@ namespace ET.Server
 {
     [FriendOf(typeof (UserInfoComponentS))]
     [FriendOf(typeof (Unit))]
-    [FriendOf(typeof (DBAccountInfo))]
     [MessageSessionHandler(SceneType.Gate)]
     public class C2G_EnterGameHandler: MessageSessionHandler<C2G_EnterGame, G2C_EnterGame>
     {
@@ -88,24 +87,14 @@ namespace ET.Server
                     try
                     {
                         DBComponent dbComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(session.Zone());
-                        List<DBAccountInfo> newAccountList = await dbComponent.Query<DBAccountInfo>(session.Zone(), d => d.Id == request.AccountId);
-
+                        List<DBCenterAccountInfo> newAccountList = await dbComponent.Query<DBCenterAccountInfo>(1000, d => d.Id == request.AccountId); 
                         if (newAccountList == null || newAccountList.Count == 0)
                         {
                             response.Error = ErrorCode.ERR_NotFindAccount;
                             return;
                         }
 
-                        CreateRoleInfo createRoleInfo = null;
-                        for (int i = 0; i < newAccountList[0].RoleList.Count; i++)
-                        {
-                            if (newAccountList[0].RoleList[i].UnitId == request.UnitId)
-                            {
-                                createRoleInfo = newAccountList[0].RoleList[i];
-                                break;
-                            }
-                        }
-
+                        CreateRoleInfo createRoleInfo = newAccountList[0].GetRoleInfo(session.Zone(), request.UnitId);
                         if (createRoleInfo == null)
                         {
                             response.Error = ErrorCode.ERR_NotFindAccount;

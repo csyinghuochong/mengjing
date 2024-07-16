@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace ET.Server
 {
-	[FriendOf(typeof(DBAccountInfo))]
 	[FriendOf(typeof(UserInfoComponentS))]
     [MessageSessionHandler(SceneType.Realm)]
     public class C2R_CreateRoleDataHandler: MessageSessionHandler<C2R_CreateRoleData, R2C_CreateRoleData>
@@ -68,8 +67,8 @@ namespace ET.Server
 			        //D2G_GetComponent d2GGetUnit = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = request.AccountId, Component = DBHelper.DBAccountInfo });
 			        //DBAccountInfo newAccount = d2GGetUnit.Component as DBAccountInfo;
 
-			        List<DBAccountInfo> newAccountList = await dbComponent.Query<DBAccountInfo>(session.Zone(), d => d.Id == request.AccountId);
-			        DBAccountInfo newAccount = newAccountList[0];
+			        List<DBCenterAccountInfo> newAccountList = await dbComponent.Query<DBCenterAccountInfo>(session.Zone(), d => d.Id == request.AccountId);
+			        DBCenterAccountInfo newAccount = newAccountList[0];
 
 					int robotId = 0;
 					if (newAccount.Password == CommonHelp.RobotPassWord)
@@ -84,6 +83,7 @@ namespace ET.Server
 					createRoleInfo.PlayerOcc = request.CreateOcc;
 					createRoleInfo.PlayerName = request.CreateName;
 					createRoleInfo.RobotId = robotId;
+					createRoleInfo.ServerId = request.ServerId;
 					newAccount.RoleList.Add(createRoleInfo);
 					await dbComponent.Save(newAccount);
 
