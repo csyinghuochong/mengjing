@@ -65,7 +65,7 @@ namespace ET.Client
         public static void OnLogin(this DlgMJLogin self)
         {
             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
-            playerComponent.ServerItem.ServerId = self.ServerInfo.ServerId;
+            playerComponent.ServerItem = self.ServerInfo;
 
             LoginHelper.Login(self.Root(),
                 self.View.E_AccountInputField.text,
