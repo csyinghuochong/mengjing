@@ -19,8 +19,7 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.Dictionary, 100);
             self.View.E_AccountInputField.text = PlayerPrefs.GetString("MJ_Account");
             self.View.E_PasswordInputField.text = PlayerPrefs.GetString("MJ_Password");
-
-            self.Root().GetComponent<PlayerComponent>().ServerItem = ServerHelper.GetServerList(GlobalHelp.GetVersionMode())[0];
+            
             self.RequestServerList().Coroutine();
         }
 

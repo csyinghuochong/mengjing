@@ -16,6 +16,22 @@ namespace ET.Client
         
         public static async ETTask Login(Scene root, string account, string password)
         {
+            PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
+            C2R_LoginAccount c2RLoginAccount = C2R_LoginAccount.Create();
+            c2RLoginAccount.Account = account;
+            c2RLoginAccount.Password = password;
+            c2RLoginAccount.ServerId = playerComponent.ServerItem.ServerId;
+            R2C_LoginAccount response = (R2C_LoginAccount)await root.GetComponent<ClientSenderCompnent>().Call(c2RLoginAccount);
+            playerComponent.Account = account;
+            playerComponent.Token = response.Token;
+            playerComponent.AccountId = response.AccountId;
+            playerComponent.PlayerInfo = response.PlayerInfo;
+            playerComponent.CreateRoleList = response.RoleLists;
+            await EventSystem.Instance.PublishAsync(root, new LoginFinish());
+        }
+        
+        public static async ETTask LoginOld(Scene root, string account, string password)
+        {
             root.RemoveComponent<ClientSenderCompnent>();
             ClientSenderCompnent clientSenderCompnent = root.AddComponent<ClientSenderCompnent>();
             //登陆成功之后才有session.  才能call

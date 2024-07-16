@@ -12,9 +12,8 @@ namespace ET.Client
             Log.Debug("Main2NetClient_ServerListHandler.");
             Console.WriteLine("Main2NetClient_ServerListHandler.");
 
-            string account = "tcg01";
-            string password = "111111";
-
+            string account = "aaa";
+            string password = "111"; 
             root.RemoveComponent<RouterAddressComponent>();
             RouterAddressComponent routerAddressComponent =
                     root.AddComponent<RouterAddressComponent, string, int>(ConstValue.RouterHttpHostInter, ConstValue.RouterHttpPort);
