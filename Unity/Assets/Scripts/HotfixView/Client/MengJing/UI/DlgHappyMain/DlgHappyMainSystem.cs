@@ -22,8 +22,9 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (DlgHappyMain))]
-    public static class DlgHappyMainSystem
+    [EntitySystemOf(typeof(DlgHappyMain))]
+    [FriendOf(typeof(DlgHappyMain))]
+    public static partial class DlgHappyMainSystem
     {
         public static void RegisterUIEvent(this DlgHappyMain self)
         {
@@ -41,6 +42,11 @@ namespace ET.Client
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(TimeHelper.Second, TimerInvokeType.UIHappyMainTimer, self);
             self.OnInitUI();
             self.OnUpdateMoney();
+        }
+
+        public static void HideWindow(this DlgHappyMain self)
+        {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
         public static void OnInitUI(this DlgHappyMain self)
@@ -227,5 +233,11 @@ namespace ET.Client
 
             self.OnUpdateMoney();
         }
+        [EntitySystem]
+        private static void Awake(this ET.Client.DlgHappyMain self)
+        {
+
+        }
+        
     }
 }

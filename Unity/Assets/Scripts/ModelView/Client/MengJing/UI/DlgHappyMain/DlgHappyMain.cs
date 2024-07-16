@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
     [ComponentOf(typeof (UIBaseWindow))]
-    public class DlgHappyMain: Entity, IAwake, IUILogic
+    public class DlgHappyMain: Entity, IAwake, IUILogic, IDestroy
     {
         public DlgHappyMainViewComponent View
         {

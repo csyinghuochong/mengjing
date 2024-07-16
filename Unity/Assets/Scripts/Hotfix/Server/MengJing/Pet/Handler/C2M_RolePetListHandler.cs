@@ -17,14 +17,13 @@ namespace ET.Server
 			response.PetMingList .AddRange( petComponent.PetMingList);
 			response.PetMingPosition .AddRange( petComponent.PetMingPosition);
 			response.PetCangKuOpen .AddRange( petComponent.PetCangKuOpen);
+			response.RolePetEggs  .AddRange(  petComponent.RolePetEggs);
+			response.PetFubenInfos  .AddRange(  petComponent.PetFubenInfos);
+			response.PetSkinList  .AddRange(  petComponent.PetSkinList);
+			response.RolePetBag  .AddRange(  petComponent.RolePetBag);
 			
-			response.RolePetEggs = petComponent.RolePetEggs;
-			response.PetFubenInfos = petComponent.PetFubenInfos;
-			response.PetFubeRewardId = petComponent.PetFubeRewardId;
-			response.PetSkinList = petComponent.PetSkinList;
 			response.PetShouHuActive = petComponent.PetShouHuActive;
-			response.RolePetBag = petComponent.RolePetBag;
-			
+			response.PetFubeRewardId = petComponent.PetFubeRewardId;
 			await ETTask.CompletedTask;
 		}
 
