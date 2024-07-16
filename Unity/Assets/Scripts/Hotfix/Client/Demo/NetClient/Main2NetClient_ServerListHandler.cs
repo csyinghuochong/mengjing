@@ -29,6 +29,7 @@ namespace ET.Client
             Session session = await netComponent.CreateRouterSession(realmAddress, account, password);
             
             C2R_ServerList c2RLoginAccount = C2R_ServerList.Create();
+            c2RLoginAccount.VersionMode = request.VersionMode;
             R2C_ServerList r2CLoginAccount = (R2C_ServerList)await session.Call(c2RLoginAccount);
             
             Log.Warning($"R2C_ServerList: {r2CLoginAccount.Error}");

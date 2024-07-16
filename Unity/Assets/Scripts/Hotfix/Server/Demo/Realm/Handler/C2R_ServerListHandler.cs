@@ -22,7 +22,7 @@ namespace ET.Server
                 using (await session.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.GetServerList, 0))
                 {
                     long serverTime = TimeHelper.ServerNow();
-                    List<ServerItem> serverItems = ServerHelper.GetServerList(VersionMode.Beta);
+                    List<ServerItem> serverItems = ServerHelper.GetServerList(request.VersionMode);
                     response.ServerItems.Clear();
                     for (int i = 0; i < serverItems.Count; i++)
                     {

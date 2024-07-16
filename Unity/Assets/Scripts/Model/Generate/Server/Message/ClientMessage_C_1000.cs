@@ -155,9 +155,6 @@ namespace ET
         [MemoryPackOrder(5)]
         public string Token { get; set; }
 
-        [MemoryPackOrder(6)]
-        public long Key { get; set; }
-
         [MemoryPackOrder(10)]
         public PlayerInfo PlayerInfo { get; set; }
 
@@ -177,7 +174,6 @@ namespace ET
             this.PlayerId = default;
             this.AccountId = default;
             this.Token = default;
-            this.Key = default;
             this.PlayerInfo = default;
             this.RoleLists.Clear();
 

@@ -283,6 +283,7 @@ message ServerItem
 message C2R_ServerList // ISessionRequest
 {
 	int32 RpcId = 1;
+	int32 VersionMode = 2;
 }
 
 message R2C_ServerList // ISessionResponse

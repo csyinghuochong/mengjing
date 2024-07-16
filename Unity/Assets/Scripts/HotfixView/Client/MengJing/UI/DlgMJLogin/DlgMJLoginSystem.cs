@@ -30,7 +30,7 @@ namespace ET.Client
             
             Debug.Log($"RequestServerList:  {r2CServerList}");
             
-            ServerItem serverItem = r2CServerList.ServerItems[r2CServerList.ServerItems.Count - 1];
+            ServerItem serverItem = r2CServerList.ServerItems[0];
             
             
             Debug.Log($"RequestServerList2:  {serverItem}");

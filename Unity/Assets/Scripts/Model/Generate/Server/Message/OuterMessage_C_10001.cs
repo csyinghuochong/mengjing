@@ -1238,6 +1238,9 @@ namespace ET
         [MemoryPackOrder(0)]
         public int RpcId { get; set; }
 
+        [MemoryPackOrder(1)]
+        public int VersionMode { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -1246,6 +1249,7 @@ namespace ET
             }
 
             this.RpcId = default;
+            this.VersionMode = default;
 
             ObjectPool.Instance.Recycle(this);
         }
@@ -1380,9 +1384,6 @@ namespace ET
         [MemoryPackOrder(3)]
         public string Address { get; set; }
 
-        [MemoryPackOrder(4)]
-        public long Key { get; set; }
-
         [MemoryPackOrder(5)]
         public long GateId { get; set; }
 
@@ -1415,7 +1416,6 @@ namespace ET
             this.Error = default;
             this.Message = default;
             this.Address = default;
-            this.Key = default;
             this.GateId = default;
             this.Token = default;
             this.AccountId = default;
