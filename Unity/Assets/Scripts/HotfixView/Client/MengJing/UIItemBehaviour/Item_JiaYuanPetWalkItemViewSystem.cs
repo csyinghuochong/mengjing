@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_JiaYuanPetWalkItem))]
-    [EntitySystemOf(typeof (Scroll_Item_JiaYuanPetWalkItem))]
+    [FriendOf(typeof(Scroll_Item_JiaYuanPetWalkItem))]
+    [EntitySystemOf(typeof(Scroll_Item_JiaYuanPetWalkItem))]
     public static partial class Scroll_Item_JiaYuanPetWalkItemSystem
     {
         [EntitySystem]
@@ -81,6 +81,7 @@ namespace ET.Client
             if (self.Position == 0)
             {
                 self.E_Image_LockImage.gameObject.SetActive(false);
+                self.EG_SetRectTransform.gameObject.SetActive(true);
             }
 
             if (self.Position == 1)
@@ -125,7 +126,7 @@ namespace ET.Client
 
                 self.E_ImagePetIconImage.sprite = sp;
 
-                long walkTime = jiaYuanPet.StartTime > 0? TimeHelper.ServerNow() - jiaYuanPet.StartTime : 0;
+                long walkTime = jiaYuanPet.StartTime > 0 ? TimeHelper.ServerNow() - jiaYuanPet.StartTime : 0;
                 self.E_Text_Tip_121Text.text = $"已经散步:{TimeHelper.ShowLeftTime(walkTime)}";
 
                 self.E_Button_WalkButton.gameObject.SetActive(self.RolePetInfo.PetStatus == 0);
