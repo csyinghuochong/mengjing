@@ -51,22 +51,15 @@ namespace ET.Server
 			{
 				using (await session.Root().GetComponent<CoroutineLockComponent>().Wait(CoroutineLockType.LoginAccount, request.AccountId.GetHashCode()))
 				{
-					DBComponent dbComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(session.Zone());
-					List<UserInfoComponentS> result = await dbComponent.Query<UserInfoComponentS>(session.Zone(), _account => _account.UserName == request.CreateName);
+					DBComponent dbComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(request.ServerId);
+					List<UserInfoComponentS> result = await dbComponent.Query<UserInfoComponentS>(request.ServerId, _account => _account.UserName == request.CreateName);
 					if (result.Count > 0)
 					{
 						response.Error = ErrorCode.ERR_RoleNameRepeat;
 						return;
 					}
 					
-					int zone = session.Zone();
-					long userId = IdGenerater.Instance.GenerateId();
-					ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(zone);
-
-			        //通过账号ID获取列表  //获取UserID,默认使用第一个角色
-			        //D2G_GetComponent d2GGetUnit = (D2G_GetComponent)await ActorMessageSenderComponent.Instance.Call(dbCacheId, new G2D_GetComponent() { UnitId = request.AccountId, Component = DBHelper.DBAccountInfo });
-			        //DBAccountInfo newAccount = d2GGetUnit.Component as DBAccountInfo;
-
+					dbComponent = session.Root().GetComponent<DBManagerComponent>().GetZoneDB(session.Zone());
 			        List<DBCenterAccountInfo> newAccountList = await dbComponent.Query<DBCenterAccountInfo>(session.Zone(), d => d.Id == request.AccountId);
 			        DBCenterAccountInfo newAccount = newAccountList[0];
 
@@ -78,7 +71,7 @@ namespace ET.Server
 
 					//存储账号信息
 					CreateRoleInfo createRoleInfo = CreateRoleInfo.Create();
-					createRoleInfo.UnitId = userId;
+					createRoleInfo.UnitId = IdGenerater.Instance.GenerateId();
 					createRoleInfo.PlayerLv = 1;
 					createRoleInfo.PlayerOcc = request.CreateOcc;
 					createRoleInfo.PlayerName = request.CreateName;
