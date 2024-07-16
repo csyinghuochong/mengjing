@@ -32,7 +32,7 @@ namespace ET.Client
             C2Center_ServerList c2RLoginAccount = C2Center_ServerList.Create();
             Center2C_ServerList r2CLoginAccount = (Center2C_ServerList)await session.Call(c2RLoginAccount);
             
-            Log.Debug($"R2C_ServerList: {r2CLoginAccount.Error}");
+            Log.Warning($"R2C_ServerList: {r2CLoginAccount.Error}");
             
             if (r2CLoginAccount.Error == ErrorCode.ERR_Success)
             {

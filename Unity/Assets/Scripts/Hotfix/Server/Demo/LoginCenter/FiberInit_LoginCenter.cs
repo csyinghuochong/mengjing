@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 
 namespace ET.Server
@@ -17,6 +18,10 @@ namespace ET.Server
             root.AddComponent<DBManagerComponent>();
             root.AddComponent<LoginInfoRecordComponent>();
             root.AddComponent<FangChenMiComponentS>();
+            StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.Get(root.Fiber.Id);
+            root.AddComponent<NetComponent, IPEndPoint, NetworkProtocol>(startSceneConfig.InnerIPPort, NetworkProtocol.UDP);
+            
+            Console.WriteLine($"FiberInit_LoginCenter: {root.Fiber.Id}  {startSceneConfig.InnerIPPort}");
             await ETTask.CompletedTask;
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 
 namespace ET.Server
 {
@@ -18,7 +19,7 @@ namespace ET.Server
             root.AddComponent<DBManagerComponent>();
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.Get(root.Fiber.Id);
             root.AddComponent<NetComponent, IPEndPoint, NetworkProtocol>(startSceneConfig.InnerIPPort, NetworkProtocol.UDP);
-
+            Console.WriteLine($"FiberInit_Realm: {root.Fiber.Id}  {startSceneConfig.InnerIPPort}");
             await ETTask.CompletedTask;
         }
     }

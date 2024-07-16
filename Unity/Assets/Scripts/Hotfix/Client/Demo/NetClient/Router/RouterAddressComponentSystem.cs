@@ -71,6 +71,8 @@ namespace ET.Client
         {
             string address = self.Info.Realms[0];
             string[] ss = address.Split(':');
+            
+            Log.Debug($"GetRealmAddress: {ss[0]}  {ss[1]}");
             IPAddress ipAddress = IPAddress.Parse(ss[0]);
             //if (self.IPAddress.AddressFamily == AddressFamily.InterNetworkV6)
             //{ 

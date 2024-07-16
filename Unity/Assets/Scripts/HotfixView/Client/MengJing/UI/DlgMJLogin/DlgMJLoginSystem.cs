@@ -21,7 +21,7 @@ namespace ET.Client
             self.View.E_PasswordInputField.text = PlayerPrefs.GetString("MJ_Password");
 
             self.Root().GetComponent<PlayerComponent>().ServerItem = ServerHelper.GetServerList(GlobalHelp.GetVersionMode())[0];
-            //self.RequestServerList().Coroutine();
+            self.RequestServerList().Coroutine();
         }
 
         public static async ETTask RequestServerList(this DlgMJLogin self)

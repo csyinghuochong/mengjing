@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace ET.Server
 {
     
-    [MessageSessionHandler(SceneType.Realm)]
+    [MessageSessionHandler(SceneType.LoginCenter)]
     public class C2Center_ServerListHandler: MessageSessionHandler<C2Center_ServerList, Center2C_ServerList>
     {
         protected override async ETTask Run(Session session, C2Center_ServerList request, Center2C_ServerList response)

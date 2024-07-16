@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 
 namespace ET.Server
 {
@@ -21,6 +22,8 @@ namespace ET.Server
             
             StartSceneConfig startSceneConfig = StartSceneConfigCategory.Instance.Get((int)root.Id);
             root.AddComponent<NetComponent, IPEndPoint, NetworkProtocol>(startSceneConfig.InnerIPPort, NetworkProtocol.UDP);
+            
+            Console.WriteLine($"FiberInit_Gate: {root.Fiber.Id}  {startSceneConfig.InnerIPPort}");
             await ETTask.CompletedTask;
         }
     }
