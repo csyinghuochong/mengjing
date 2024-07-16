@@ -21,8 +21,7 @@ namespace ET.Client
              c2GLoginGameGate.AccountName = request.Account;
              c2GLoginGameGate.RoleId = request.RoleId;
              G2C_LoginGameGate g2CLoginGameGate = (G2C_LoginGameGate)await gateSession.Call(c2GLoginGameGate);
-
-
+             
              if (g2CLoginGameGate.Error != ErrorCode.ERR_Success)
              {
                  response.Error = g2CLoginGameGate.Error;

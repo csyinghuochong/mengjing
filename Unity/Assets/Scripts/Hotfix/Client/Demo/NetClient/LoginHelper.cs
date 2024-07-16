@@ -46,7 +46,7 @@ namespace ET.Client
 
                 NetClient2Main_LoginGame netClient2MainLoginGame = await clientSenderComponent.LoginGameAsync(playerComponent.Account,
                     playerComponent.AccountId,
-                    playerComponent.Key,
+                    r2CGetRealmKey.Key,
                     playerComponent.CurrentRoleId,
                     r2CGetRealmKey.Address);
                 if (netClient2MainLoginGame.Error != ErrorCode.ERR_Success)
