@@ -214,6 +214,24 @@ namespace ET.Client
             PetNetHelper.RequestPetFight(self.Root(), rolePetInfo.Id, rolePetInfo.PetStatus == 0 ? 1 : 0).Coroutine();
         }
 
+        public static void OnPetFightingSet(this ES_PetList self)
+        {
+            RolePetInfo rolePetInfo = self.Root().GetComponent<PetComponentC>().GetFightPet();
+
+            foreach (var value in self.ScrollItemPetListItems.Values)
+            {
+                Scroll_Item_PetListItem item = value;
+                if (item.uiTransform == null)
+                {
+                    continue;
+                }
+
+                item.OnPetFightingSet(rolePetInfo);
+            }
+
+            self.OnUpdatePetInfo(self.LastSelectItem);
+        }
+
         private static void CheckSensitiveWords(this ES_PetList self)
         {
             string text_new = "";

@@ -7,6 +7,16 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
+    public class DataUpdate_OnPetFightSet_DlgPetRefresh: AEvent<Scene, DataUpdate_OnPetFightSet>
+    {
+        protected override async ETTask Run(Scene scene, DataUpdate_OnPetFightSet args)
+        {
+            scene.GetComponent<UIComponent>().GetDlgLogic<DlgPet>()?.OnPetFightSet();
+            await ETTask.CompletedTask;
+        }
+    }
+    
+    [Event(SceneType.Demo)]
     public class DataUpdate_PetItemSelect_Refresh: AEvent<Scene, DataUpdate_PetItemSelect>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_PetItemSelect args)
@@ -129,6 +139,14 @@ namespace ET.Client
             if (self.View.ES_PetXiLian.uiTransform.gameObject.activeSelf)
             {
                 self.View.ES_PetXiLian.OnXiLianUpdate();
+            }
+        }
+        
+        public static void OnPetFightSet(this DlgPet self)
+        {
+            if (self.View.ES_PetList.uiTransform.gameObject.activeSelf)
+            {
+                self.View.ES_PetList.OnPetFightingSet();
             }
         }
     }
