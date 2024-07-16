@@ -121,7 +121,6 @@ namespace ET.Client
 
             RolePetInfo rolePetInfo = self.GetPetInfoByID(petId);
             rolePetInfo.PetStatus = fight;
-            //HintHelp.GetInstance().DataUpdate(DataType.OnPetFightSet);
         }
 
         public static void RequestUpStar(this PetComponentC self, long mainId, List<long> costIds, RolePetInfo rolePetInfo)

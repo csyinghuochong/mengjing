@@ -74,9 +74,9 @@ namespace ET.Client
             if (response.Error == ErrorCode.ERR_Success)
             {
                 root.GetComponent<PetComponentC>().RequestPetFight(petId, fight);
+                EventSystem.Instance.Publish(root, new DataUpdate_OnPetFightSet());
             }
 
-            EventSystem.Instance.Publish(root, new DataUpdate_OnPetFightSet());
             return response.Error;
         }
 

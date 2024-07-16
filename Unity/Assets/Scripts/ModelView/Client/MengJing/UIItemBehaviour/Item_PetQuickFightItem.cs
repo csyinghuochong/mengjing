@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
@@ -6,6 +7,9 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_PetQuickFightItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_PetQuickFightItem> 
 	{
+		public Action<long> ClickHandler;
+		public long PetId;
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)

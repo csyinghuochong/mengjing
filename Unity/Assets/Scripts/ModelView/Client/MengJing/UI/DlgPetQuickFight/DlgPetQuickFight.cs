@@ -1,12 +1,14 @@
-﻿namespace ET.Client
+﻿using System.Collections.Generic;
+
+namespace ET.Client
 {
-	 [ComponentOf(typeof(UIBaseWindow))]
-	public  class DlgPetQuickFight :Entity,IAwake,IUILogic
-	{
+    [ComponentOf(typeof(UIBaseWindow))]
+    public class DlgPetQuickFight : Entity, IAwake, IUILogic
+    {
+        public DlgPetQuickFightViewComponent View { get => this.GetComponent<DlgPetQuickFightViewComponent>(); }
 
-		public DlgPetQuickFightViewComponent View { get => this.GetComponent<DlgPetQuickFightViewComponent>();} 
-
-		 
-
-	}
+        public long Timer;
+        public List<RolePetInfo> ShowRolePetInfos = new();
+        public Dictionary<int, EntityRef<Scroll_Item_PetQuickFightItem>> ScrollItemPetQuickFightItems;
+    }
 }

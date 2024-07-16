@@ -84,5 +84,6 @@
         public const int DropUITimer = 352;
         public const int MainActivityTipTimer = 353;
         public const int JiaYuanPurchaseTimer = 354;
+        public const int PetQuickFightTimer = 355;
     }
 }
