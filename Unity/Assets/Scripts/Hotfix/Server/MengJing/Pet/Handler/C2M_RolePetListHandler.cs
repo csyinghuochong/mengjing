@@ -11,17 +11,18 @@ namespace ET.Server
 			PetComponentS petComponent = unit.GetComponent<PetComponentS>();
 			
 			response.RolePetInfos = petComponent.GetAllPets();
-			response.TeamPetList = petComponent.TeamPetList;
+			response.TeamPetList .AddRange( petComponent.TeamPetList);
+			response.PetFormations .AddRange( petComponent.PetFormations);
+			response.PetShouHuList .AddRange( petComponent.PetShouHuList);
+			response.PetMingList .AddRange( petComponent.PetMingList);
+			response.PetMingPosition .AddRange( petComponent.PetMingPosition);
+			response.PetCangKuOpen .AddRange( petComponent.PetCangKuOpen);
+			
 			response.RolePetEggs = petComponent.RolePetEggs;
-			response.PetFormations = petComponent.PetFormations;
 			response.PetFubenInfos = petComponent.PetFubenInfos;
 			response.PetFubeRewardId = petComponent.PetFubeRewardId;
 			response.PetSkinList = petComponent.PetSkinList;
-			response.PetShouHuList = petComponent.PetShouHuList;
 			response.PetShouHuActive = petComponent.PetShouHuActive;
-            response.PetCangKuOpen = petComponent.PetCangKuOpen;
-			response.PetMingList = petComponent.PetMingList;
-			response.PetMingPosition = petComponent.PetMingPosition;
 			response.RolePetBag = petComponent.RolePetBag;
 			
 			await ETTask.CompletedTask;

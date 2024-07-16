@@ -9,7 +9,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_BagInitRequest request, M2C_BagInitResponse response)
         {
-            Log.Debug($"C2M_BagInitHandler: server0");
+            Console.WriteLine($"C2M_BagInitHandler: server0");
             BagComponentS bagComponentS = unit.GetComponent<BagComponentS>();
             response.BagInfos = bagComponentS.GetAllItems();
 
@@ -24,13 +24,13 @@ namespace ET.Server
                 bagComponentS.AdditionalCellNum.Add(0);
             }
 
-            response.QiangHuaLevel = bagComponentS.QiangHuaLevel;
-            response.QiangHuaFails = bagComponentS.QiangHuaFails;
-            response.WarehouseAddedCell = bagComponentS.WarehouseAddedCell;
-            response.FashionActiveIds = bagComponentS.FashionActiveIds;
-            response.FashionEquipList = bagComponentS.FashionEquipList;
+            response.QiangHuaLevel .AddRange(bagComponentS.QiangHuaLevel); 
+            response.QiangHuaFails .AddRange(bagComponentS.QiangHuaFails);
+            response.WarehouseAddedCell .AddRange( bagComponentS.WarehouseAddedCell);
+            response.FashionActiveIds .AddRange( bagComponentS.FashionActiveIds);
+            response.FashionEquipList .AddRange( bagComponentS.FashionEquipList);
+            response.AdditionalCellNum .AddRange( bagComponentS.AdditionalCellNum);
             response.SeasonJingHePlan = bagComponentS.SeasonJingHePlan;
-            response.AdditionalCellNum = bagComponentS.AdditionalCellNum;
             await ETTask.CompletedTask;
         }
     }
