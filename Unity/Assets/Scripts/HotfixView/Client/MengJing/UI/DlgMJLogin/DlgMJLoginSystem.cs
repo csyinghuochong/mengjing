@@ -72,6 +72,7 @@ namespace ET.Client
                 self.View.E_PasswordInputField.text).Coroutine();
 
             PlayerPrefsHelp.SetInt(PlayerPrefsHelp.MyServerID, self.ServerInfo.ServerId);
+            PlayerPrefsHelp.SetOldServerIds(self.ServerInfo.ServerId);
             PlayerPrefsHelp.SetString("MJ_Account", self.View.E_AccountInputField.text);
             PlayerPrefsHelp.SetString("MJ_Password", self.View.E_PasswordInputField.text);
         }
