@@ -365,6 +365,12 @@ namespace ET.Server
             for (int i = self.JiaYuanMonster_2.Count -1; i >= 0; i--)
             {
                 JiaYuanMonster keyValuePair = self.JiaYuanMonster_2[i];
+                if (!MonsterConfigCategory.Instance.Contain(keyValuePair.ConfigId))
+                {
+                    self.JiaYuanMonster_2.RemoveAt(i);
+                    continue;
+                }
+                
                 MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(keyValuePair.ConfigId);
                 long deathTime = monsterConfig.DeathTime * 1000;
                 if (serverNow - keyValuePair.BornTime >= deathTime)
