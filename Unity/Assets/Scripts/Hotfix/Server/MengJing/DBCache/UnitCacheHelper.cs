@@ -58,14 +58,15 @@ namespace ET.Server
             }
 
             Unit unit = null;
+            UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
             if (queryUnit.EntityList.Count > 0)
             {
                  int indexOf = queryUnit.ComponentNameList.IndexOf(typeof(Unit).FullName);
-                 MongoHelper.Deserialize<Unit>(queryUnit.EntityList[indexOf]);
+                 unit = MongoHelper.Deserialize<Unit>(queryUnit.EntityList[indexOf]);
+                 unitComponent.AddChild(unit);
             }
             else
             {  
-                UnitComponent unitComponent = scene.GetComponent<UnitComponent>();
                 unit = unitComponent.AddChildWithId<Unit, int>(unitId, 1001);
             }
 

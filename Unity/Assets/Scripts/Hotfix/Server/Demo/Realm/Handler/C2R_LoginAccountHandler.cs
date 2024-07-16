@@ -214,7 +214,9 @@ namespace ET.Server
                         {
                             continue;
                         }
-                        
+
+                        roleList.State = centerAccountInfo.RoleList[i].State;
+                        roleList.ServerId = centerAccountInfo.RoleList[i].ServerId;
                         roleList.WeaponId = numericComponentlist[0].GetAsInt(NumericType.Now_Weapon);
                         roleList.EquipIndex = numericComponentlist[0].GetAsInt(NumericType.EquipIndex);
                         response.RoleLists.Add(roleList);
@@ -247,7 +249,6 @@ namespace ET.Server
             roleList.PlayerName = userInfo.Name;
             roleList.PlayerLv = userInfo.Lv;
             roleList.PlayerOcc = userInfo.Occ;
-
             return roleList;
         }
 
