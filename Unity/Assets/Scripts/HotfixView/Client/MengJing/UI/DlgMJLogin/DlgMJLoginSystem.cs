@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,11 +36,22 @@ namespace ET.Client
 
             Debug.Log($"RequestServerList2:  {serverItem}");
 
-            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
+            int myserver = PlayerPrefsHelp.GetInt(PlayerPrefsHelp.MyServerID);
+            myserver = ServerHelper.GetNewServerId(myserver);
+
+            for (int i = 0; i < r2CServerList.ServerItems.Count; i++)
+            {
+                if (r2CServerList.ServerItems[i].ServerId == myserver)
+                {
+                    serverItem = r2CServerList.ServerItems[i];
+                    break;
+                }
+            }
 
             self.OnSelectServer(serverItem);
 
             //如果之前登陆过游戏，记录一下服务器id. serverItem = ServerHelper.GetServerItem(oldid);
+            PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
             playerComponent.ServerItem = serverItem;
             playerComponent.AllServerList = r2CServerList.ServerItems;
         }
@@ -58,7 +70,7 @@ namespace ET.Client
             LoginHelper.Login(self.Root(),
                 self.View.E_AccountInputField.text,
                 self.View.E_PasswordInputField.text).Coroutine();
-            
+
             PlayerPrefsHelp.SetInt(PlayerPrefsHelp.MyServerID, self.ServerInfo.ServerId);
             PlayerPrefs.SetString("MJ_Account", self.View.E_AccountInputField.text);
             PlayerPrefs.SetString("MJ_Password", self.View.E_PasswordInputField.text);
