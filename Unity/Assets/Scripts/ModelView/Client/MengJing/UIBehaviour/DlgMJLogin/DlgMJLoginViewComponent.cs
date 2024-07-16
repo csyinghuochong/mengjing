@@ -41,6 +41,57 @@ namespace ET.Client
      		}
      	}
 
+		public UnityEngine.UI.Text E_SelectServerNameText
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectServerNameText == null )
+     			{
+		    		this.m_E_SelectServerNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"HideNode/SelectGameServer/E_SelectServerName");
+     			}
+     			return this.m_E_SelectServerNameText;
+     		}
+     	}
+
+		public UnityEngine.UI.Button E_SelectBtnButton
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectBtnButton == null )
+     			{
+		    		this.m_E_SelectBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"HideNode/SelectGameServer/E_SelectBtn");
+     			}
+     			return this.m_E_SelectBtnButton;
+     		}
+     	}
+
+		public UnityEngine.UI.Image E_SelectBtnImage
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			if( this.m_E_SelectBtnImage == null )
+     			{
+		    		this.m_E_SelectBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"HideNode/SelectGameServer/E_SelectBtn");
+     			}
+     			return this.m_E_SelectBtnImage;
+     		}
+     	}
+
 		public UnityEngine.UI.InputField E_AccountInputField
      	{
      		get
@@ -113,6 +164,9 @@ namespace ET.Client
 		{
 			this.m_E_LoginButton = null;
 			this.m_E_LoginImage = null;
+			this.m_E_SelectServerNameText = null;
+			this.m_E_SelectBtnButton = null;
+			this.m_E_SelectBtnImage = null;
 			this.m_E_AccountInputField = null;
 			this.m_E_AccountImage = null;
 			this.m_E_PasswordInputField = null;
@@ -122,6 +176,9 @@ namespace ET.Client
 
 		private UnityEngine.UI.Button m_E_LoginButton = null;
 		private UnityEngine.UI.Image m_E_LoginImage = null;
+		private UnityEngine.UI.Text m_E_SelectServerNameText = null;
+		private UnityEngine.UI.Button m_E_SelectBtnButton = null;
+		private UnityEngine.UI.Image m_E_SelectBtnImage = null;
 		private UnityEngine.UI.InputField m_E_AccountInputField = null;
 		private UnityEngine.UI.Image m_E_AccountImage = null;
 		private UnityEngine.UI.InputField m_E_PasswordInputField = null;

@@ -8,7 +8,7 @@ namespace ET.Client
 
         public ServerItem ServerItem { get; set; }
 
-        public List<ServerItem> AllServerList = new(); //服务器列表存内容
+        public List<ServerItem> AllServerList { get; set; } = new(); //服务器列表存内容
 
         //当前角色列表数据
         public List<CreateRoleInfo> CreateRoleList = new();
