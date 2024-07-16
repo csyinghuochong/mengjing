@@ -190,56 +190,49 @@ namespace ET.Server
                     accountSessionsComponent.Add(request.Account, session);
                     session.AddComponent<AccountCheckOutTimeComponent, string>(request.Account);
 
+                    response.RoleLists.Clear();
+                    for (int i = 0; i < centerAccountInfo.RoleList.Count; i++)
+                    {
+                        if (centerAccountInfo.RoleList[i].ServerId != request.ServerId)
+                        {
+                            continue;
+                        }
+
+                        DBManagerComponent dbManagerComponent = session.Root().GetComponent<DBManagerComponent>();
+                        DBComponent dbComponent = dbManagerComponent.GetZoneDB(request.ServerId);
+                        
+                        List<UserInfoComponentS> userinfolist = await dbComponent.Query<UserInfoComponentS>(request.ServerId,d=> d.Id ==centerAccountInfo.RoleList[i].UnitId);
+                        if (userinfolist == null || userinfolist.Count == 0)
+                        {
+                            continue;
+                        }
+
+                        CreateRoleInfo roleList = GetRoleListInfo(userinfolist[0].UserInfo, centerAccountInfo.RoleList[i].UnitId);
+                        List<NumericComponentS> numericComponentlist = await dbComponent.Query<NumericComponentS>(request.ServerId,d=> d.Id ==centerAccountInfo.RoleList[i].UnitId);
+                        if (numericComponentlist == null || numericComponentlist.Count == 0)
+                        {
+                            continue;
+                        }
+                        
+                        roleList.WeaponId = numericComponentlist[0].GetAsInt(NumericType.Now_Weapon);
+                        roleList.EquipIndex = numericComponentlist[0].GetAsInt(NumericType.EquipIndex);
+                        response.RoleLists.Add(roleList);
+                    }
+                    
                     string Token = TimeHelper.ServerNow().ToString() + RandomHelper.RandomNumber(int.MinValue, int.MaxValue).ToString();
                     tokenComponent.Remove(centerAccountInfo.Account);    //Token也是保留十分钟
                     tokenComponent.Add(centerAccountInfo.Account, Token);
-
-                    response.RoleLists.Clear();
-                    ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(session.Zone());
-                    for (int i = 0; i < centerAccountInfo.RoleList.Count; i++)
-                    {
-                        
-                        
-                        UserInfoComponentS userinfo = await UnitCacheHelper.GetComponentCache<UserInfoComponentS>(session.Root(), centerAccountInfo.RoleList[i].UnitId);
-                        if (userinfo == null)
-                        {
-                            continue;
-                        }
-
-                        CreateRoleInfo roleList = GetRoleListInfo(userinfo.UserInfo, centerAccountInfo.RoleList[i].UnitId);
-                        NumericComponentS numericComponent = await UnitCacheHelper.GetComponentCache<NumericComponentS>(session.Root(), centerAccountInfo.RoleList[i].UnitId);
-                        if (numericComponent == null)
-                        {
-                            continue;
-                        }
-                        
-                        roleList.WeaponId = numericComponent.GetAsInt(NumericType.Now_Weapon);
-                        roleList.EquipIndex = numericComponent.GetAsInt(NumericType.EquipIndex);
-                        response.RoleLists.Add(roleList);
-                    }
                     response.PlayerInfo = centerAccountInfo.PlayerInfo;
                     response.AccountId = centerAccountInfo.Id;
                     response.Token = Token;
+                    
                     for (int r = 0; r < response.PlayerInfo.RechargeInfos.Count; r++)
                     {
                         response.PlayerInfo.RechargeInfos[r].OrderInfo = String.Empty;
                     }
                     centerAccountInfo?.Dispose();
                     
-                    // 随机分配一个Gate
-                    StartSceneConfig config = RealmGateAddressHelper.GetGate(session.Zone(), request.Account);
-                    Log.Debug($"gate address: {config}");
-			
-                    // 向gate请求一个key,客户端可以拿着这个key连接gate
-
-                    R2G_GetLoginKey R2G_GetLoginKey = R2G_GetLoginKey.Create();
-                    R2G_GetLoginKey.Account = request.Account;
-                    G2R_GetLoginKey g2RGetLoginKey = (G2R_GetLoginKey) await session.Fiber().Root.GetComponent<MessageSender>().Call(
-                        config.ActorId, R2G_GetLoginKey);
-             
-                    response.Address = config.InnerIPPort.ToString();
-                    response.Key = g2RGetLoginKey.Key;
-                    response.GateId = g2RGetLoginKey.GateId;
+                    Console.WriteLine($"C2RLoginAccountHandler__11");
                 }
             }
 		}

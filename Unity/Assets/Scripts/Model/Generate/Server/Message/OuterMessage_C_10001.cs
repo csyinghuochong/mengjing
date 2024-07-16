@@ -1336,6 +1336,9 @@ namespace ET
         [MemoryPackOrder(6)]
         public int age_type { get; set; }
 
+        [MemoryPackOrder(7)]
+        public int ServerId { get; set; }
+
         public override void Dispose()
         {
             if (!this.IsFromPool)
@@ -1350,6 +1353,7 @@ namespace ET
             this.ThirdLogin = default;
             this.Relink = default;
             this.age_type = default;
+            this.ServerId = default;
 
             ObjectPool.Instance.Recycle(this);
         }

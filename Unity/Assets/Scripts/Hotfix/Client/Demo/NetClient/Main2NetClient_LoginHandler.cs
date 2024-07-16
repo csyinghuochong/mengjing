@@ -50,7 +50,6 @@ namespace ET.Client
             response.Key = r2CLoginAccount.Key;
             response.Token = r2CLoginAccount.Token;
             response.Error = r2CLoginAccount.Error;
-            
             Log.Debug(($"NetClient2Main_Login.Handlder"));
         }
     }
