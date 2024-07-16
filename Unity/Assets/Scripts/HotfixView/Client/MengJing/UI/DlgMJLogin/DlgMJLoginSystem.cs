@@ -30,9 +30,8 @@ namespace ET.Client
             
             Debug.Log($"RequestServerList:  {r2CServerList}");
             
-            ServerItem serverItem = r2CServerList.ServerItems[0];
-            
-            
+            ServerItem serverItem = r2CServerList.ServerItems[r2CServerList.ServerItems.Count -1];
+
             Debug.Log($"RequestServerList2:  {serverItem}");
             //如果之前登陆过游戏，记录一下服务器id. serverItem = ServerHelper.GetServerItem(oldid);
             self.Root().GetComponent<PlayerComponent>().ServerItem = serverItem;

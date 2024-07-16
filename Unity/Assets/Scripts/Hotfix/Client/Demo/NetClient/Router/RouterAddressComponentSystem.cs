@@ -93,7 +93,7 @@ namespace ET.Client
         public static IPEndPoint GetRealmAddress(this RouterAddressComponent self, string account, int zone)
         {
             int v = account.Mode(self.Info.Realms.Count);
-            string address = self.Info.Realms[zone - 1];
+            string address = self.Info.Realms[0]; //self.Info.Realms[zone - 1]
             string[] ss = address.Split(':');
             IPAddress ipAddress = IPAddress.Parse(ss[0]);
             //if (self.IPAddress.AddressFamily == AddressFamily.InterNetworkV6)

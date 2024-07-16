@@ -47,7 +47,6 @@ namespace ET.Client
             response.AccountId = r2CLoginAccount.AccountId;
             response.PlayerInfo = r2CLoginAccount.PlayerInfo;
             response.RoleLists = r2CLoginAccount.RoleLists;
-            response.Key = r2CLoginAccount.Key;
             response.Token = r2CLoginAccount.Token;
             response.Error = r2CLoginAccount.Error;
             Log.Debug(($"NetClient2Main_Login.Handlder"));

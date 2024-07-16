@@ -32,15 +32,15 @@ namespace ET.Client
             c2RLoginAccount.VersionMode = request.VersionMode;
             R2C_ServerList r2CLoginAccount = (R2C_ServerList)await session.Call(c2RLoginAccount);
             
-            Log.Warning($"R2C_ServerList: {r2CLoginAccount.Error}");
-            
             if (r2CLoginAccount.Error == ErrorCode.ERR_Success)
             {
                 root.AddComponent<SessionComponent>().Session = session;
+                Log.Warning($"R2C_ServerList: session!=null {r2CLoginAccount.Error}");
             }
             else
             {
                 session?.Dispose();
+                Log.Warning($"R2C_ServerList: session?.Dispose");
             }
 
             response.ServerItems = r2CLoginAccount.ServerItems;
