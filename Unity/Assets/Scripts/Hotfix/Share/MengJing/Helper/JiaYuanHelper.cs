@@ -77,7 +77,7 @@ namespace ET
 
         public static float3 GetMonsterPostion()
         {
-            int positionId = 50001;
+            int positionId = 10001;
             List<MonsterPositionConfig> configs = new List<MonsterPositionConfig>();
             while (positionId > 0)
             {
