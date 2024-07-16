@@ -54,6 +54,11 @@ namespace ET.Server
                 dBServerInfo = self.AddComponent<DBServerInfo>();
             }
 
+            if (dBServerInfo.ServerInfo == null)
+            {
+                dBServerInfo.ServerInfo  = ServerInfo.Create();
+            }
+
             //初始化参数
             self.DBServerInfo = dBServerInfo;
             self.UpdateExchangeGold(ServerHelper.GetServeOpenrDay(  self.Zone()));

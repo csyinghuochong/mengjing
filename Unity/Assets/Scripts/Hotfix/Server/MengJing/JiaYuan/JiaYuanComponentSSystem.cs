@@ -262,6 +262,8 @@ namespace ET.Server
 
         public static void OnLogin(this JiaYuanComponentS self)
         {
+            self.CheckPetExp();
+            
             //检测宠物
             PetComponentS petComponent = self.GetParent<Unit>().GetComponent<PetComponentS>();
             for(int i = self.JiaYuanPetList_2.Count - 1; i >= 0; i--)

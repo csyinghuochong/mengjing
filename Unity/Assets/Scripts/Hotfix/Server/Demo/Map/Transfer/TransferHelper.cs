@@ -220,7 +220,13 @@ namespace ET.Server
                         //动态创建副本
                         Scene scene = unit.Root();
                         mapInstanceId = UnitCacheHelper.GetJiaYuanServerId(unit.Zone());
-                       
+                        
+                        ///进入之前先刷新一下
+                        if (long.Parse(request.paramInfo) == unit.Id)
+                        {
+                            JiaYuanComponentS jiaYuanComponent = unit.GetComponent<JiaYuanComponentS>();
+                            jiaYuanComponent.OnBeforEnter();
+                        }
                         M2J_JiaYuanEnterRequest M2J_JiaYuanEnterRequest = M2J_JiaYuanEnterRequest.Create();
                         M2J_JiaYuanEnterRequest.MasterId = long.Parse(request.paramInfo);
                         M2J_JiaYuanEnterRequest.UnitId = unit.Id;
