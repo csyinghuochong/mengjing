@@ -70,22 +70,17 @@ namespace ET.Client
             int taskExp = (int)(taskConfig.TaskExp * coffiexp);
             int taskCoin = (int)(taskConfig.TaskCoin * cofficoin);
 
-            string rewardStr = taskConfig.ItemID;
-            string rewardNum = taskConfig.ItemNum;
+            string rewardStr = taskConfig.RewardItem;
             if (CommonHelp.IfNull(rewardStr))
             {
-                rewardStr = "1;2";
-                rewardNum = taskCoin + ";" + taskExp;
+                rewardStr = $"1;{taskCoin}@2;{taskExp}";
             }
             else
             {
-                rewardStr = "1;2;" + rewardStr;
-                rewardNum = taskCoin + ";" + taskExp + ";" + rewardNum;
+                rewardStr = $"1;{taskCoin}@2;{taskExp}@";
+                rewardStr += rewardStr;
             }
-
-            string[] rewarditems = rewardStr.Split(';');
-            string[] rewardItemNums = rewardNum.Split(';');
-
+            
             // 跑环任务显示对应的环数奖励
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int taskType = TaskConfigCategory.Instance.Get(taskPro.taskID).TaskType;
@@ -100,18 +95,6 @@ namespace ET.Client
                     {
                         List<RewardItem> droplist = new List<RewardItem>();
                         DropHelper.DropIDToDropItem_2(ConfigData.WeekTaskDrop[nowNum], droplist);
-
-                        if (droplist.Count > 0)
-                        {
-                            for (int i = 0; i < droplist.Count; i++)
-                            {
-                                Array.Resize(ref rewarditems, rewarditems.Length + 1);
-                                rewarditems[rewarditems.Length - 1] = droplist[i].ItemID.ToString();
-
-                                Array.Resize(ref rewardItemNums, rewardItemNums.Length + 1);
-                                rewardItemNums[rewardItemNums.Length - 1] = droplist[i].ItemNum.ToString();
-                            }
-                        }
                     }
                 }
             }
@@ -131,22 +114,14 @@ namespace ET.Client
                         {
                             for (int i = 0; i < droplist.Count; i++)
                             {
-                                Array.Resize(ref rewarditems, rewarditems.Length + 1);
-                                rewarditems[rewarditems.Length - 1] = droplist[i].ItemID.ToString();
-
-                                Array.Resize(ref rewardItemNums, rewardItemNums.Length + 1);
-                                rewardItemNums[rewardItemNums.Length - 1] = droplist[i].ItemNum.ToString();
+                                
                             }
                         }
                     }
                 }
             }
 
-            List<RewardItem> rewardItems = new List<RewardItem>();
-            for (int i = 0; i < rewarditems.Length; i++)
-            {
-                rewardItems.Add(new RewardItem() { ItemID = int.Parse(rewarditems[i]), ItemNum = int.Parse(rewardItemNums[i]) });
-            }
+            List<RewardItem> rewardItems = ItemHelper.GetRewardItems(rewardStr);
 
             self.ES_RewardList.Refresh(rewardItems);
 
