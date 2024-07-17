@@ -85,5 +85,6 @@
         public const int MainActivityTipTimer = 353;
         public const int JiaYuanPurchaseTimer = 354;
         public const int PetQuickFightTimer = 355;
+        public const int JiaYuanPlanTimer = 356;
     }
 }

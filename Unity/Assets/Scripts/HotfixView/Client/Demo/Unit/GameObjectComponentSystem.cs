@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.HighLightTimer)]
-    public class HighLightTimer: ATimer<GameObjectComponent>
+    public class HighLightTimer : ATimer<GameObjectComponent>
     {
         protected override void Run(GameObjectComponent self)
         {
@@ -21,7 +21,7 @@ namespace ET.Client
     }
 
     [Invoke(TimerInvokeType.DelayShowTimer)]
-    public class DelayShowTimer: ATimer<GameObjectComponent>
+    public class DelayShowTimer : ATimer<GameObjectComponent>
     {
         protected override void Run(GameObjectComponent self)
         {
@@ -41,8 +41,8 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (GameObjectComponent))]
-    [EntitySystemOf(typeof (GameObjectComponent))]
+    [FriendOf(typeof(GameObjectComponent))]
+    [EntitySystemOf(typeof(GameObjectComponent))]
     public static partial class GameObjectComponentSystem
     {
         [EntitySystem]
@@ -227,17 +227,18 @@ namespace ET.Client
 
         public static void OnUpdatePlan(this GameObjectComponent self)
         {
-            // self.RecoverGameObject();
-            // Unit unit = self.GetParent<Unit>(); 
-            // JiaYuanFarmConfig jiaYuanFarmConfig = JiaYuanFarmConfigCategory.Instance.Get(unit.ConfigId);
-            // NumericComponentClient numericComponent = unit.GetComponent<NumericComponentClient>();
-            // long startTime = numericComponent.GetAsLong(NumericType.StartTime);
-            // int gatherNumber = numericComponent.GetAsInt(NumericType.GatherNumber);
-            // int planStage = JiaYuanHelper.GetPlanStage(unit.ConfigId, startTime, gatherNumber);
+            self.RecoverGameObject();
+            Unit unit = self.GetParent<Unit>();
+            JiaYuanFarmConfig jiaYuanFarmConfig = JiaYuanFarmConfigCategory.Instance.Get(unit.ConfigId);
+            NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
+            long startTime = numericComponent.GetAsLong(NumericType.StartTime);
+            int gatherNumber = numericComponent.GetAsInt(NumericType.GatherNumber);
+            int planStage = ET.JiaYuanHelper.GetPlanStage(unit.ConfigId, startTime, gatherNumber);
             // string path = ABPathHelper.GetUnitPath($"JiaYuan/{jiaYuanFarmConfig.ModelID + planStage}");
-            // unit.RemoveComponent<JiaYuanPlanUIComponent>();
-            // unit.RemoveComponent<JiaYuanPlanEffectComponent>();
-            // GameObjectPoolComponent.Instance.AddLoadQueue(path, self.InstanceId, self.OnLoadGameObject);
+            string path = ABPathHelper.GetUnitPath($"JiaYuan/100101");
+            unit.RemoveComponent<JiaYuanPlanUIComponent>();
+            unit.RemoveComponent<JiaYuanPlanEffectComponent>();
+            GameObjectLoadHelper.AddLoadQueue(self.Root(), path, self.InstanceId, self.OnLoadGameObject);
         }
 
         public static void RecoverHorse(this GameObjectComponent self)
@@ -572,7 +573,7 @@ namespace ET.Client
 
                         mapComponent = self.Root().GetComponent<MapComponent>();
                         bool shenYuan = mapComponent.SceneType == SceneTypeEnum.TeamDungeon && mapComponent.FubenDifficulty == TeamFubenType.ShenYuan;
-                        go.transform.localScale = shenYuan? Vector3.one * 1.3f : Vector3.one;
+                        go.transform.localScale = shenYuan ? Vector3.one * 1.3f : Vector3.one;
                     }
 
                     //51 场景怪 有AI 不显示名称
@@ -1069,7 +1070,7 @@ namespace ET.Client
 
             if (runraceid > 0 || cardmonsterid > 0)
             {
-                int monsterid = runraceid > 0? runraceid : cardmonsterid;
+                int monsterid = runraceid > 0 ? runraceid : cardmonsterid;
                 MonsterConfig runmonsterCof = MonsterConfigCategory.Instance.Get(monsterid);
                 string path = ABPathHelper.GetUnitPath("Monster/" + runmonsterCof.MonsterModelID);
                 self.UnitAssetsPath = path;
