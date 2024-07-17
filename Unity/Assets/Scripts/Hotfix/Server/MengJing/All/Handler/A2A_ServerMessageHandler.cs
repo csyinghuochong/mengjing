@@ -102,7 +102,7 @@ namespace ET.Server
                         }
                         if (messagevalue[0] == "2")
                         {
-                            EventSystem.Instance.Publish(scene.Root(), new  GenerateSerials() { Scene = scene });
+                            EventSystem.Instance.Publish(scene.Scene(), new  GenerateSerials() { Scene = scene });
                         }
                         break;
                     default:

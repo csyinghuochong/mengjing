@@ -179,13 +179,7 @@ namespace ET.Server
                 {
                     continue;
                 }
-
-                if (key.FullName.Contains("Bag"))
-                {
-                    Console.WriteLine($"AddOrUpdateUnitAllCache:QiangHuaLevel:  {(entity as BagComponentS).QiangHuaLevel.Count}");
-                }
                 
-
                 message.EntityTypes.Add(key.FullName);
                 message.EntityBytes.Add(entity.ToBson());
             }

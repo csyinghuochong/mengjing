@@ -774,7 +774,7 @@ namespace ET.Server
             
              int waitRevive = self.OnWaitRevive();
 
-             EventSystem.Instance.Publish( self.Root(), new UnitKillEvent()
+             EventSystem.Instance.Publish( self.Scene(), new UnitKillEvent()
              {
                  WaitRevive = waitRevive,
                  UnitAttack = attack,
