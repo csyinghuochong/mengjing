@@ -75,6 +75,8 @@ namespace ET
 		public int TriggerType { get; set; }
 		/// <summary>触发值</summary>
 		public int TriggerValue { get; set; }
+		/// <summary>下个任务</summary>
+		public int NextTask { get; set; }
 		/// <summary>任务经验</summary>
 		public int TaskExp { get; set; }
 		/// <summary>任务金币</summary>

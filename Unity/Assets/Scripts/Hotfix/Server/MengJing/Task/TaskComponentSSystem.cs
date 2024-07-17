@@ -966,13 +966,12 @@ namespace ET.Server
             }
             for (int i = self.TaskCountryList.Count - 1; i >= 0; i--)
             {
-                if (!TaskCountryConfigCategory.Instance.Contain(self.TaskCountryList[i].taskID))
+                if (!TaskConfigCategory.Instance.Contain(self.TaskCountryList[i].taskID))
                 {
                     self.TaskCountryList.RemoveAt(i);
                 }
             }
-
-            //����һ���Ѽ��������͵�����
+            
             for (int i = 0; i < self.RoleTaskList.Count; i++)
             {
                 TaskPro taskPro = self.RoleTaskList[i];
@@ -1014,11 +1013,11 @@ namespace ET.Server
                 }
             }
 
-            //��������
+
             for (int i = 0; i < self.TaskCountryList.Count; i++)
             {
                 int trialid = self.GetParent<Unit>().GetComponent<NumericComponentS>().GetAsInt(NumericType.TrialDungeonId);
-                TaskCountryConfig taskCountryConfig = TaskCountryConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
+                TaskConfig taskCountryConfig = TaskConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
                 if (taskCountryConfig.TargetType == (int)TaskTargetType.TrialFuben_1012 && trialid >= 20100)
                 {
                     self.TriggerTaskCountryEvent(TaskTargetType.TrialFuben_1012, 0, taskCountryConfig.TargetValue[0], false);
@@ -1292,7 +1291,7 @@ namespace ET.Server
             for (int i = 0; i < self.TaskCountryList.Count; i++)
             {
                 TaskPro taskPro = self.TaskCountryList[i];
-                TaskCountryConfig taskConfig = TaskCountryConfigCategory.Instance.Get(taskPro.taskID);
+                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
                 int taskCountryTargetType = taskConfig.TargetType;
                 if (taskCountryTargetType != targetType)
                 {
@@ -1327,11 +1326,10 @@ namespace ET.Server
             {
                 Log.Debug($"���»�Ծ����ERROE:  {unit.Id} {notice} {self.Zone()} ");
             }
-
-            //��������ÿ�����
+            
             for (int i = self.TaskCountryList.Count - 1; i >= 0; i--)
             {
-                TaskCountryConfig taskCountry = TaskCountryConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
+                TaskConfig taskCountry = TaskConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
                 if (taskCountry.TaskType == TaskCountryType.Season)
                 {
                     continue;
@@ -1645,17 +1643,16 @@ namespace ET.Server
         {
             Unit unit = self.GetParent<Unit>();
             unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SeasonTowerId, 0, notice);
-
-            //��������ÿ�����
+            
             for (int i = self.TaskCountryList.Count - 1; i >= 0; i--)
             {
-                if (!TaskCountryConfigCategory.Instance.Contain(self.TaskCountryList[i].taskID))
+                if (!TaskConfigCategory.Instance.Contain(self.TaskCountryList[i].taskID))
                 {
                     self.TaskCountryList.RemoveAt(i);
                     continue;
                 }
 
-                TaskCountryConfig taskCountry = TaskCountryConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
+                TaskConfig taskCountry = TaskConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
                 if (taskCountry.TaskType == TaskCountryType.Season)
                 {
                     self.TaskCountryList.RemoveAt(i);

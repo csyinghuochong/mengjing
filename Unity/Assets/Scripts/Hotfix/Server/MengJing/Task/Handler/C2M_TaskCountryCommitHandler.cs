@@ -6,13 +6,13 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_CommitTaskCountryRequest request, M2C_CommitTaskCountryResponse response)
         {
-            if (!TaskCountryConfigCategory.Instance.Contain(request.TaskId))
+            if (!TaskConfigCategory.Instance.Contain(request.TaskId))
             {
                 response.Error = ErrorCode.ERR_ModifyData;
                 return;
             }
 
-            TaskCountryConfig taskCountryConfig = TaskCountryConfigCategory.Instance.Get(request.TaskId);
+            TaskConfig taskCountryConfig = TaskConfigCategory.Instance.Get(request.TaskId);
             int itemItem = taskCountryConfig.RewardItem.Split('@').Length;
             if (unit.GetComponent<BagComponentS>().GetBagLeftCell() < itemItem)
             {
