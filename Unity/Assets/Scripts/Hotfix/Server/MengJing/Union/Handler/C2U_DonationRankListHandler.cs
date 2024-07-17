@@ -13,7 +13,7 @@ namespace ET.Server
             List<RankingInfo> all = rankComponent.DBUnionManager.rankingDonation;
             List<RankingInfo> list = all.GetRange(0, Math.Min( 10, all.Count ));
 
-            response.RankList = list;
+            response.RankList .AddRange(list); 
             
             await ETTask.CompletedTask;
         }

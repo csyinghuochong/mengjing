@@ -13,10 +13,11 @@ namespace ET.Server
 
             if (timeNow - rankComponent.RankSeasonTowerLastTime < TimeHelper.Second * 10)
             {
-                response.RankList = rankComponent.RankSeasonTowers;
+                response.RankList .AddRange(rankComponent.RankSeasonTowers); 
             }
             else
             {
+                rankComponent.RankSeasonTowers.Clear();
                 List<KeyValuePairLong> ranklist = rankComponent.DBRankInfo.rankSeasonTower;
 
                 List<long> idlist = new List<long>();
@@ -41,10 +42,10 @@ namespace ET.Server
                     RankSeasonTowerInfo.PlayerLv = userinfoComponent.UserInfo.Lv;
                     RankSeasonTowerInfo.PlayerName = userinfoComponent.UserInfo.Name;
                     RankSeasonTowerInfo.Occ = userinfoComponent.UserInfo.Occ;
-                    response.RankList.Add(RankSeasonTowerInfo);
+                    rankComponent.RankSeasonTowers.Add(RankSeasonTowerInfo);
                 }
                 rankComponent.RankSeasonTowerLastTime = TimeHelper.ServerNow();
-                rankComponent.RankSeasonTowers = response.RankList;
+                response.RankList.AddRange(rankComponent.RankSeasonTowers);
 
                 for (int remove = 0; remove < idremove.Count; remove++)
                 {

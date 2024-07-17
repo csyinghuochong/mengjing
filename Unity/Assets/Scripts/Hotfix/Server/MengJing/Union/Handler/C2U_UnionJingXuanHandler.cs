@@ -33,7 +33,7 @@ namespace ET.Server
                 dBUnionInfo.UnionInfo.JingXuanList.Clear();
                 dBUnionInfo.UnionInfo.JingXuanEndTime = 0;
             }
-            response.JingXuanList = dBUnionInfo.UnionInfo.JingXuanList;
+            response.JingXuanList .AddRange( dBUnionInfo.UnionInfo.JingXuanList);
             response.JingXuanEndTime = dBUnionInfo.UnionInfo.JingXuanEndTime;
             UnitCacheHelper.SaveComponentCache(scene.Root(), dBUnionInfo).Coroutine();
             await ETTask.CompletedTask;

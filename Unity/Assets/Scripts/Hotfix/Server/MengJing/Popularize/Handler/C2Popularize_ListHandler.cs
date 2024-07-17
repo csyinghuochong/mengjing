@@ -61,7 +61,7 @@ namespace ET.Server
 
                 response.PopularizeCode = dBPopularizeInfo.PopularizeCode;
                 response.BePopularizeId = dBPopularizeInfo.BePopularizeId;
-                response.MyPopularizeList = dBPopularizeInfo.MyPopularizeList;
+                response.MyPopularizeList .AddRange(dBPopularizeInfo.MyPopularizeList); 
 
             }
             await ETTask.CompletedTask;

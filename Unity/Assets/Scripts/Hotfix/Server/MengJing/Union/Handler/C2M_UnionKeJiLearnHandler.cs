@@ -14,7 +14,7 @@ namespace ET.Server
             UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(kejiid);
             if (unionKeJiConfig.NextID == 0)
             {
-                response.UnionKeJiList = userInfoComponent.UserInfo.UnionKeJiList;
+                response.UnionKeJiList .AddRange( userInfoComponent.UserInfo.UnionKeJiList);
                 response.Error = ErrorCode.ERR_UnionXiuLianMax;
                 return;
             }
@@ -22,7 +22,7 @@ namespace ET.Server
             BagComponentS bagComponent = unit.GetComponent<BagComponentS>();
             if (!bagComponent.CheckCostItem( unionKeJiConfig.LearnCost ))
             {
-                response.UnionKeJiList = userInfoComponent.UserInfo.UnionKeJiList;
+                response.UnionKeJiList.AddRange( userInfoComponent.UserInfo.UnionKeJiList);
                 response.Error = ErrorCode.ERR_ItemNotEnoughError;
                 return;
             }
@@ -36,14 +36,14 @@ namespace ET.Server
 
             if(d2GGetUnit.Error != ErrorCode.ERR_Success)
             {
-                response.UnionKeJiList = userInfoComponent.UserInfo.UnionKeJiList;
+                response.UnionKeJiList.AddRange(userInfoComponent.UserInfo.UnionKeJiList);
                 response.Error = d2GGetUnit.Error;
                 return;
             }
 
             bagComponent.OnCostItemData(unionKeJiConfig.LearnCost);
             userInfoComponent.UserInfo.UnionKeJiList[request.Position] = unionKeJiConfig.NextID;
-            response.UnionKeJiList = userInfoComponent.UserInfo.UnionKeJiList;
+            response.UnionKeJiList .AddRange(userInfoComponent.UserInfo.UnionKeJiList); 
 
             await ETTask.CompletedTask;
         }

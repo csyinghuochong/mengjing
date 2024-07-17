@@ -9,8 +9,8 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_TaskCountryInitRequest request, M2C_TaskCountryInitResponse response)
         {
             TaskComponentS taskComponent = unit.GetComponent<TaskComponentS>();
-            response.TaskCountryList = taskComponent.TaskCountryList;
-            response.ReceiveHuoYueIds = taskComponent.ReceiveHuoYueIds;
+            response.TaskCountryList .AddRange(taskComponent.TaskCountryList); 
+            response.ReceiveHuoYueIds .AddRange(taskComponent.ReceiveHuoYueIds); 
             await ETTask.CompletedTask;
         }
     }

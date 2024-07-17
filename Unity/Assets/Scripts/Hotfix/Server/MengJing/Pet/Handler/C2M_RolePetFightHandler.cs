@@ -45,27 +45,7 @@ namespace ET.Server
                 unit.GetParent<UnitComponent>().Remove(petinfo.Id);
             }
             
-            ///移除有问题的宠物
-            //List<Unit> entities = unit.GetParent<UnitComponent>().GetAll();
-            //{
-            //	for (int i = entities.Count - 1; i >= 0; i--)
-            //	{
-            //                    if (entities[i].Id == petinfo.Id)
-            //                    {
-            //                        continue;
-            //                    }
-            //                    if (entities[i].Type != UnitType.Pet)
-            //		{
-            //			continue;
-            //		}
-            //		if (entities[i].GetMasterId() != unit.Id)
-            //		{
-            //                        continue;
-            //                    }
-
-            //                    unit.GetParent<UnitComponent>().Remove(entities[i].Id);
-            //                }
-            //}
+           
 			await ETTask.CompletedTask;
 		}
 	}

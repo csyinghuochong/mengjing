@@ -22,7 +22,7 @@ namespace ET.Server
                 UnitCacheHelper.SaveComponentCache(scene.Root(), dBUnionInfo).Coroutine();
             }
 
-            response.MysteryItemInfos = dBUnionInfo.MysteryItemInfos;
+            response.MysteryItemInfos .AddRange(dBUnionInfo.MysteryItemInfos); 
         }
     }
 }

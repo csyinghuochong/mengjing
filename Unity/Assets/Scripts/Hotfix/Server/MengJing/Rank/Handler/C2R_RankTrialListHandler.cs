@@ -15,10 +15,12 @@ namespace ET.Server
 
             if (timeNow - rankComponent.RankingTrialLastTime < TimeHelper.Minute)
             {
-                response.RankList = rankComponent.RankingTrials;
+                response.RankList .AddRange(rankComponent.RankingTrials); 
             }
             else
             {
+                rankComponent.RankingTrials .Clear();
+                
                 List<KeyValuePairLong> ranklist = rankComponent.DBRankInfo.rankingTrial;
               
                 List<long> idlist = new List<long>();
@@ -43,10 +45,10 @@ namespace ET.Server
                     RankingTrialInfo.PlayerLv = userinfoComponent.UserInfo.Lv;
                     RankingTrialInfo.PlayerName = userinfoComponent.UserInfo.Name;
                     RankingTrialInfo.Occ = userinfoComponent.UserInfo.Occ;
-                    response.RankList.Add(RankingTrialInfo);
+                    rankComponent.RankingTrials.Add(RankingTrialInfo);
                 }
                 rankComponent.RankingTrialLastTime = TimeHelper.ServerNow();
-                rankComponent.RankingTrials = response.RankList;
+                response.RankList.AddRange(rankComponent.RankingTrials);
 
                 for (int remove = 0; remove < idremove.Count; remove++)
                 {

@@ -10,13 +10,7 @@ namespace ET.Server
         {
 
             PetComponentS petComponent = unit.GetComponent<PetComponentS>();
-            //string upStarStone = GlobalValueConfigCategory.Instance.Get(7).Value;
-            //string[] upStarStoneInfo = upStarStone.Split(';');
-            //int upStarStoneId = int.Parse(upStarStoneInfo[0]);
-            //int upStarStoneNum = int.Parse(upStarStoneInfo[1]);
-            //List<RewardItem> rewardItems = new List<RewardItem>();
-            //rewardItems.Add(new RewardItem() {ItemID = upStarStoneId, ItemNum = upStarStoneNum });
-
+          
             //获取当前操作宠物星数
             float upStartLvPro = 0;
             RolePetInfo rolePetInfo = petComponent.GetPetInfo(request.PetInfoId);

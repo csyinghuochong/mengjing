@@ -49,7 +49,7 @@ namespace ET.Server
 
             Function_Fight.UnitUpdateProperty_Base(unit, true, true);
 
-            response.ShieldList = skillsetComponent.GetLifeShieldList();
+            response.ShieldList .AddRange(skillsetComponent.GetLifeShieldList()); 
         }
     }
 }

@@ -12,10 +12,10 @@ namespace ET.Server
         {
             TaskComponentS taskComponent = unit.GetComponent<TaskComponentS>();
 
-            response.RoleTaskList = taskComponent.RoleTaskList;
-            response.RoleComoleteTaskList = taskComponent.RoleComoleteTaskList;
-            response.ReceiveHuoYueIds = taskComponent.ReceiveHuoYueIds;
-            response.TaskCountryList = taskComponent.TaskCountryList;
+            response.RoleTaskList .AddRange(taskComponent.RoleTaskList); 
+            response.RoleComoleteTaskList .AddRange(taskComponent.RoleComoleteTaskList); 
+            response.ReceiveHuoYueIds .AddRange(taskComponent.ReceiveHuoYueIds); 
+            response.TaskCountryList .AddRange(taskComponent.TaskCountryList); 
          
             await ETTask.CompletedTask;
         }

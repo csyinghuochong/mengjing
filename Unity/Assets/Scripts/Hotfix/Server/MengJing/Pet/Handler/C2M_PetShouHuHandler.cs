@@ -26,7 +26,7 @@ namespace ET.Server
             }
 
 
-            response.PetShouHuList = shouhulist;
+            response.PetShouHuList .AddRange(shouhulist); 
             Function_Fight.UnitUpdateProperty_Base(  unit, true, true);
             await ETTask.CompletedTask;
         }

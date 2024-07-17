@@ -9,7 +9,7 @@ namespace ET.Server
         protected override async ETTask Run(Scene scene, C2R_RankDemonRequest request, R2C_RankDemonResponse response)
         {
             RankSceneComponent rankComponent = scene.GetComponent<RankSceneComponent>();
-            response.RankList = rankComponent.DBRankInfo.rankingDemon;
+            response.RankList .AddRange( rankComponent.DBRankInfo.rankingDemon);
 
             await ETTask.CompletedTask;
         }

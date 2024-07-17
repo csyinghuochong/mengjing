@@ -43,7 +43,8 @@ namespace ET.Server
                     response.RankId = i + 1;
                 }
             }
-            response.RankList = rankDemonList;
+
+            response.RankList.AddRange(rankDemonList);
             await ETTask.CompletedTask;
         }
     }

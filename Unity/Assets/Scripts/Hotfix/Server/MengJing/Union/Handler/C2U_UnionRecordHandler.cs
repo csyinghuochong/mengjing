@@ -25,7 +25,7 @@ namespace ET.Server
                 donationRecord.Name = userInfoComponent.UserInfo.Name;
                 donationRecord.Occ = userInfoComponent.UserInfo.Occ;    
             }
-            response.DonationRecords = dBUnionInfo.UnionInfo.DonationRecords;
+            response.DonationRecords .AddRange(dBUnionInfo.UnionInfo.DonationRecords); 
             await ETTask.CompletedTask;
         }
     }

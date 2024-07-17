@@ -15,9 +15,6 @@ namespace ET.Server
             //给当前solo场景加入匹配的玩家
             SoloSceneComponent soloSceneComponent = scene.GetComponent<SoloSceneComponent>();
 
-            response.Error = soloSceneComponent.OnJoinMatch(request.SoloPlayerInfo);
-
-
             //添加数据缓存
             soloSceneComponent.OnAddSoloDateList(request.SoloPlayerInfo.UnitId, request.SoloPlayerInfo.Name, request.SoloPlayerInfo.Occ);
 
@@ -26,6 +23,9 @@ namespace ET.Server
                 soloSceneComponent.PlayerCombatList.Add(request.SoloPlayerInfo.UnitId, request.SoloPlayerInfo.Combat);
             }
             
+            response.Error = soloSceneComponent.OnJoinMatch(request.SoloPlayerInfo);
+
+
             await ETTask.CompletedTask;
         }
     }

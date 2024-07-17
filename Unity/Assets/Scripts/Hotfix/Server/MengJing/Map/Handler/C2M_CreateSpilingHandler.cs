@@ -14,12 +14,6 @@ namespace ET.Server
                 Camp =CampEnum.CampMonster1
             });
 
-            // 广播创建的木桩unit
-            //M2C_CreateSpilings createSpilings = new M2C_CreateSpilings();
-            //SpilingInfo spilingInfo = UnitHelper.CreateSpilingInfo(unit);
-            //createSpilings.Spilings.Add(spilingInfo);  
-            //MessageHelper.Broadcast(unit, createSpilings);
-
             await ETTask.CompletedTask;
         }
     }

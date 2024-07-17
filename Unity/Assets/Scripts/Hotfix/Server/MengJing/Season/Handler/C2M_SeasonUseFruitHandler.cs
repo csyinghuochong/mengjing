@@ -20,23 +20,7 @@ namespace ET.Server
                 response.Error = ErrorCode.ERR_ModifyData;
             }
             
-            // for (int i = 0; i < huishouList.Count; i++)
-            // {
-            //     BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, huishouList[i]);
-            //     if (bagInfo == null)
-            //     {
-            //         continue;
-            //     }
-            //
-            //     ItemConfig itemConfig = ItemConfigCategory.Instance.Get( bagInfo.ItemID );
-            //     if (itemConfig.ItemType != ItemTypeEnum.Consume ||  itemConfig.ItemSubType != 132 )
-            //     {
-            //         continue;
-            //     }
-            //
-            //     reduceTime += long.Parse(itemConfig.ItemUsePar);
-            // }
-
+           
             BagInfo bagInfo = bagComponent.GetItemByLoc(ItemLocType.ItemLocBag, huishouList[0]);
             if (bagInfo == null)
             {

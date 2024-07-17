@@ -12,7 +12,7 @@ namespace ET.Server
             List<RankingInfo> all = rankComponent.DBRankInfo.rankingInfos;
             List<RankingInfo> list = all.GetRange(0, all.Count > CommonHelp.RankNumber ? CommonHelp.RankNumber : all.Count);
 
-            response.RankList = list;
+            response.RankList .AddRange(list); 
 
             await ETTask.CompletedTask;
         }
