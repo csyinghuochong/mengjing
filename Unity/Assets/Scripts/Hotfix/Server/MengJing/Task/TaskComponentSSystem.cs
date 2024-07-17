@@ -77,7 +77,7 @@ namespace ET.Server
             return self.RoleComoleteTaskList.IndexOf(taskid) >= 0;
         }
 
-        //����׷��
+
         public static int TaskTrack(this TaskComponentS self, C2M_TaskTrackRequest request)
         {
             for (int i = 0; i < self.RoleTaskList.Count; i++)
@@ -90,7 +90,7 @@ namespace ET.Server
             return ErrorCode.ERR_Success;
         }
 
-        //�Ի�֮��������ɿͻ��˴������
+
         public static void OnTaskNotice(this TaskComponentS self, C2M_TaskNoticeRequest request)
         {
             int taskid = request.TaskId;
@@ -103,12 +103,8 @@ namespace ET.Server
                 }
             }
         }
-
-        /// <summary>
-        /// ��������
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="taskId"></param>
+        
+        
         public static void OnRecvGiveUpTask(this TaskComponentS self, int taskId)
         {
             for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
@@ -122,13 +118,7 @@ namespace ET.Server
             }
         }
 
-        /// <summary>
-        /// ��ȡ����
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="request"></param>
-        /// <param name="response"></param>
-        /// <returns></returns>
+
         public static (TaskPro, int) OnAcceptedTask(this TaskComponentS self, int taskId)
         {
             if (taskId == 0)
@@ -411,7 +401,7 @@ namespace ET.Server
 
         public static int CheckGiveItemTask(this TaskComponentS self, int TargetType, int[] Target, int[] TargetValue, long BagInfoID, TaskPro taskPro)
         {
-            //�ռ����ߵ�����
+
 
             if (TargetType == (int)TaskTargetType.ItemID_Number_2)
             {
@@ -429,7 +419,7 @@ namespace ET.Server
                 bagComponent.OnCostItemData($"{needid};{neednumber}");
                 return ErrorCode.ERR_Success;
             }
-            //��������
+
             if (TargetType == (int)TaskTargetType.GiveItem_10)
             {
                 BagComponentS bagComponent = self.GetParent<Unit>().GetComponent<BagComponentS>();
@@ -445,7 +435,7 @@ namespace ET.Server
                 bagComponent.OnCostItemData(BagInfoID, 1);
                 return ErrorCode.ERR_Success;
             }
-            //�������
+
             if (TargetType == (int)TaskTargetType.GivePet_25)
             {
                 PetComponentS petComponent = self.GetParent<Unit>().GetComponent<PetComponentS>();
@@ -466,7 +456,7 @@ namespace ET.Server
             //return ErrorCode.ERR_Success; 
         }
 
-        //��ȡ����
+
         public static int OnCommitTask(this TaskComponentS self, C2M_TaskCommitRequest request)
         {
             int taskid = request.TaskId;
@@ -670,28 +660,20 @@ namespace ET.Server
             return ErrorCode.ERR_Success;
         }
 
-        /// <summary>
-        /// תְ
-        /// </summary>
-        /// <param name="self"></param>
+
         public static void OnChangeOccTwo(this TaskComponentS self)
         {
             self.TriggerTaskEvent(TaskTargetType.ChangeOcc_8, 0, 1);
             self.TriggerTaskCountryEvent(TaskTargetType.ChangeOcc_8, 0, 1);
         }
 
-        /// <summary>
-        /// ����
-        /// </summary>
+
         public static void OnMakeItem(this TaskComponentS self)
         {
             self.TriggerTaskCountryEvent(TaskTargetType.MakeItem_1006, 0, 1);
         }
 
-        /// <summary>
-        /// ����ϴ��
-        /// </summary>
-        /// <param name="self"></param>
+
         public static void OnPetXiLian(this TaskComponentS self, RolePetInfo rolePetInfo)
         {
             self.TriggerTaskEvent(TaskTargetType.PetNSkill_18, 0, rolePetInfo.PetSkill.Count);
@@ -721,10 +703,6 @@ namespace ET.Server
             self.TriggerTaskCountryEvent(TaskTargetType.PetHeChengCombat_32, combat, 1);
         }
 
-        /// <summary>
-        /// ��ó���
-        /// </summary>
-        /// <param name="self"></param>
         public static void OnGetPet(this TaskComponentS self, RolePetInfo rolePetInfo)
         {
             self.TriggerTaskEvent(TaskTargetType.PetNumber1_11, 0, 1);
@@ -742,10 +720,7 @@ namespace ET.Server
             self.TriggerTaskCountryEvent(TaskTargetType.GetPet_1008, 0, 1);
         }
 
-        /// <summary>
-        /// ����ϴ��
-        /// </summary>
-        /// <param name="self"></param>
+
         public static void OnEquipXiLian(this TaskComponentS self, int times)
         {
             self.TriggerTaskEvent(TaskTargetType.EquipXiLian_13, 0, times);
@@ -753,10 +728,7 @@ namespace ET.Server
             self.TriggerTaskCountryEvent(TaskTargetType.EquipXiLian_1009, 0, times);
         }
 
-        /// <summary>
-        /// ����ʱ������ʱһ���Ӵ���һ��
-        /// </summary>
-        /// <param name="self"></param>
+
         public static void OnLineTime(this TaskComponentS self, int time)
         {
             self.TriggerTaskCountryEvent(TaskTargetType.OnLineTime_1010, 0, 1);
@@ -767,10 +739,7 @@ namespace ET.Server
             }
         }
 
-        /// <summary>
-        /// ���߻���
-        /// </summary>
-        /// <param name="self"></param>
+
         public static void OnItemHuiShow(this TaskComponentS self, int itemNumber)
         {
             self.TriggerTaskEvent(TaskTargetType.EquipHuiShou_16, 0, itemNumber);
@@ -778,10 +747,7 @@ namespace ET.Server
             self.TriggerTaskCountryEvent(TaskTargetType.ItemHuiShou_1011, 0, itemNumber);
         }
 
-        /// <summary>
-        /// ���Ľ��
-        /// </summary>
-        /// <param name="self"></param>
+
         public static void OnCostCoin(this TaskComponentS self, int costCoin)
         {
             if (costCoin >= 0)
@@ -791,13 +757,7 @@ namespace ET.Server
             self.TriggerTaskCountryEvent(TaskTargetType.CostCoin_1005, 0, costCoin * -1);
         }
 
-        /// <summary>
-        /// ͨ�ظ���
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="difficulty"></param>
-        /// <param name="chapterid"></param>
-        /// <param name="star"></param>
+
         public static void OnPassFuben(this TaskComponentS self, int difficulty, int chapterid, int star)
         {
             self.TriggerTaskEvent(TaskTargetType.PassFubenID_7, chapterid, 1);
@@ -841,7 +801,7 @@ namespace ET.Server
                      (mapInstanceId, request);
         }
 
-        //��ɱ����ɴ����������͵�����
+
         public static void OnKillUnit(this TaskComponentS self, Unit bekill, int sceneType)
         {
             if (bekill == null || bekill.IsDisposed)
@@ -927,7 +887,7 @@ namespace ET.Server
             }
         }
 
-        //�ȼ�����
+
         public static void OnUpdateLevel(this TaskComponentS self, int rolelv)
         {
             self.TriggerTaskEvent(TaskTargetType.PlayerLv_4, 0, rolelv);
@@ -940,7 +900,7 @@ namespace ET.Server
             self.CheckWeeklyTask();
         }
 
-        //��¼
+
         public static void OnLogin(this TaskComponentS self)
         {
             UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
@@ -1003,7 +963,6 @@ namespace ET.Server
                 }
                 if (taskConfig.TargetType == TaskTargetType.TrialTowerCeng_134)
                 {
-                    //��������
                     int trialid = numericComponent.GetAsInt(NumericType.TrialDungeonId);
                     if (trialid >= taskConfig.Target[0])
                     {
@@ -1064,14 +1023,14 @@ namespace ET.Server
             self.TriggerTaskCountryEvent(TaskTargetType.CombatRank_83, numericComponent.GetAsInt(NumericType.CombatRankID), 1);
         }
 
-        //�ռ�����
+
         public static void OnGetItemForWarehouse(this TaskComponentS self, int itemId)
         {
             self.TriggerTaskEvent(TaskTargetType.ItemID_Number_2, itemId, 0);
             self.TriggerTaskCountryEvent(TaskTargetType.ItemID_Number_2, itemId, 0);
         }
 
-        //�ۼƻ�õ�������
+
         public static void OnGetItemNumber(this TaskComponentS self, int getWay, int itemId, int itemNumber)
         {
             if (itemId == 1 || (getWay != ItemGetWay.ReceieMail && getWay != ItemGetWay.PaiMaiSell))
@@ -1493,8 +1452,7 @@ namespace ET.Server
             {
                 return;
             }
-
-            //��������
+            
             List<int> taskids = new List<int>();
             for (int i = 0; i < createDay; i++)
             {
@@ -1564,7 +1522,6 @@ namespace ET.Server
 
             //int ringTaskId = TaskHelper.GetTaskIdByType(TaskTypeEnum.Ring, roleLv);
             //numericComponent.ApplyValue(NumericType.RingTaskId, ringTaskId, notice);
-            //Log.Debug($"����ÿ������: {numericComponent.GetAsInt(NumericType.DailyTaskID)}");
         }
 
         public static TaskPro GetTreasureMonster(this TaskComponentS self, int fubenid)
@@ -1710,10 +1667,7 @@ namespace ET.Server
             }
         }
 
-        /// <summary>
-        /// ����ÿ�ջ�Ծ
-        /// </summary> 
-        /// <param name="self"></param>
+
         public static void OnZeroClockUpdate(this TaskComponentS self, bool notice)
         {
             self.OnLineTime = 0;
