@@ -1,17 +1,18 @@
-﻿using System;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace ET
 {
-    public partial class TaskCountryConfigCategory
+    public partial class TaskConfigCategory
     {
 
         public Dictionary<int, List<int>> SeasonTaskList = new Dictionary<int, List<int>>();
 
         public override void EndInit()
         {
-            foreach (TaskCountryConfig taskCountryConfig in this.GetAll().Values)
+            foreach (TaskConfig taskCountryConfig in this.GetAll().Values)
             {
 
                 if (taskCountryConfig.TaskType != TaskCountryType.Season)

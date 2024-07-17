@@ -216,8 +216,8 @@ namespace ET.Client
                     continue;
                 }
 
-                TaskCountryConfig taskCountryConfig = TaskCountryConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
-                huoYueDu += taskCountryConfig.EveryTaskRewardNum;
+                TaskConfig taskCountryConfig = TaskConfig.Instance.Get(self.TaskCountryList[i].taskID);
+                huoYueDu += taskCountryConfig.TaskCoin;
             }
 
             return huoYueDu;
