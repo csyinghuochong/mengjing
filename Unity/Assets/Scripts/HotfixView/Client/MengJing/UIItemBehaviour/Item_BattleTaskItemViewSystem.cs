@@ -35,12 +35,12 @@ namespace ET.Client
             self.E_TextTaskProgressText.text =
                     GameSettingLanguge.Instance.LoadLocalization("进度值") + ": " + $"{taskPro.taskTargetNum_1}/{taskConfig.TargetValue[0]}";
 
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TaskIcon, taskConfig.Iconcon.ToString());
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TaskIcon, taskConfig.TaskIcon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
             self.E_ImageIconImage.sprite = sp;
 
-            self.E_ItemNumberText.text = " +" + taskConfig.RewardGold;
+            self.E_ItemNumberText.text = " +" + taskConfig.TaskCoin;
 
             self.E_TextHuoyueValueText.text = GameSettingLanguge.Instance.LoadLocalization("活跃度") + " +" + taskConfig.EveryTaskRewardNum;
 

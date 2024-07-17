@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CountryTaskItem))]
-    [EntitySystemOf(typeof (Scroll_Item_CountryTaskItem))]
+    [FriendOf(typeof(Scroll_Item_CountryTaskItem))]
+    [EntitySystemOf(typeof(Scroll_Item_CountryTaskItem))]
     public static partial class Scroll_Item_CountryTaskItemSystem
     {
         [EntitySystem]
@@ -27,16 +27,23 @@ namespace ET.Client
             self.E_TextTaskNameText.text = taskConfig.TaskName;
             self.E_TextTaskDescText.text = taskConfig.TaskDes;
 
-            taskPro.taskTargetNum_1 = taskPro.taskTargetNum_1 > taskConfig.TargetValue[0]? taskConfig.TargetValue[0] : taskPro.taskTargetNum_1;
+            taskPro.taskTargetNum_1 = taskPro.taskTargetNum_1 > taskConfig.TargetValue[0] ? taskConfig.TargetValue[0] : taskPro.taskTargetNum_1;
             self.E_TextTaskProgressText.text =
                     $"{GameSettingLanguge.Instance.LoadLocalization("进度值")}: {string.Format("{0}/{1}", taskPro.taskTargetNum_1, taskConfig.TargetValue[0])}";
 
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TaskIcon, taskConfig.TaskIcon.ToString());
-            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            // string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TaskIcon, taskConfig.TaskIcon.ToString());
+            // Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+            // self.E_ImageIconImage.sprite = sp;
 
-            self.E_ImageIconImage.sprite = sp;
-
-            self.E_ItemNumberText.text = " +" + taskConfig.RewardGold;
+            foreach (string str in taskConfig.RewardItem.Split('@'))
+            {
+                string[] reward = str.Split(',');
+                if (reward[0] == "1")
+                {
+                    self.E_ItemNumberText.text = " +" + reward[1];
+                    break;
+                }
+            }
 
             self.E_TextHuoyueValueText.text = GameSettingLanguge.Instance.LoadLocalization("活跃度") + " +" + taskConfig.EveryTaskRewardNum;
 

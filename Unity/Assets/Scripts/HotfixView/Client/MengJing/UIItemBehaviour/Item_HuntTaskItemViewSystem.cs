@@ -40,7 +40,7 @@ namespace ET.Client
 
             self.E_ImageIconImage.sprite = sp;
 
-            self.E_ItemNumberText.text = " +" + taskConfig.RewardGold;
+            self.E_ItemNumberText.text = " +" + taskConfig.TaskCoin;
 
             self.E_TextHuoyueValueText.text = GameSettingLanguge.Instance.LoadLocalization("活跃度") + " +" + taskConfig.EveryTaskRewardNum;
 
