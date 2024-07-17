@@ -61,7 +61,7 @@ namespace ET.Server
                 }
             }
             UnitCacheHelper.SaveComponentCache(unit.Root(), unit.GetComponent<JiaYuanComponentS>()).Coroutine();
-            response.JiaYuanPetList = unit.GetComponent<JiaYuanComponentS>().JiaYuanPetList_2;
+            response.JiaYuanPetList .AddRange( unit.GetComponent<JiaYuanComponentS>().JiaYuanPetList_2);
 
             await ETTask.CompletedTask;
         }

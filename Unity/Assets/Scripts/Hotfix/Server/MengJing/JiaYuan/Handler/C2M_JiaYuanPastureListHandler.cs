@@ -8,7 +8,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_JiaYuanPastureListRequest request, M2C_JiaYuanPastureListResponse response)
         {
-            response.MysteryItemInfos = unit.GetComponent<JiaYuanComponentS>().PastureGoods_7;
+            response.MysteryItemInfos .AddRange(unit.GetComponent<JiaYuanComponentS>().PastureGoods_7); 
             await ETTask.CompletedTask;
         }
     }

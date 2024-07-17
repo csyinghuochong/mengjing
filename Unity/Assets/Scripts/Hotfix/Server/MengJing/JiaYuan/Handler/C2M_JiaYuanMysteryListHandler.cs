@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ET.Server
 {
@@ -10,12 +11,12 @@ namespace ET.Server
             //家园商店
             if (request.NpcID == 30000001)
             {
-                response.MysteryItemInfos = unit.GetComponent<JiaYuanComponentS>().PlantGoods_7;
+                response.MysteryItemInfos .AddRange( unit.GetComponent<JiaYuanComponentS>().PlantGoods_7);
             }
             //牧场商店
             if (request.NpcID == 30000013)
             {
-                response.MysteryItemInfos = unit.GetComponent<JiaYuanComponentS>().JiaYuanStore;
+                response.MysteryItemInfos .AddRange(unit.GetComponent<JiaYuanComponentS>().JiaYuanStore); 
             }
 
             unit.GetComponent<JiaYuanComponentS>().NowOpenNpcId = request.NpcID;

@@ -64,7 +64,7 @@ namespace ET.Server
                 bagComponent.OnCostItemData(request.BagInfoIDs[i], 1);
             }
             response.MoodAdd = moodvalue;
-            response.JiaYuanPetList = unit.GetComponent<JiaYuanComponentS>().JiaYuanPetList_2;
+            response.JiaYuanPetList .AddRange( unit.GetComponent<JiaYuanComponentS>().JiaYuanPetList_2);
             await ETTask.CompletedTask;
         }
     }

@@ -28,7 +28,7 @@ namespace ET.Server
             JiaYuanComponentS jiaYuanComponent = unit.GetComponent<JiaYuanComponentS>();
             jiaYuanComponent.UpdatePurchaseItemList_2();
 
-            response.PurchaseItemList = jiaYuanComponent.PurchaseItemList_7;
+            response.PurchaseItemList .AddRange(jiaYuanComponent.PurchaseItemList_7); 
             await ETTask.CompletedTask;
         }
     }

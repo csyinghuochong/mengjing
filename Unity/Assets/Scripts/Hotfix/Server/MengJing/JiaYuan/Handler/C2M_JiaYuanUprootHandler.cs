@@ -28,7 +28,7 @@ namespace ET.Server
             }
 
             unit.GetParent<UnitComponent>().Remove(request.UnitId);
-            response.JiaYuanPastureList = unit.GetComponent<JiaYuanComponentS>().JiaYuanPastureList_7;
+            response.JiaYuanPastureList .AddRange(unit.GetComponent<JiaYuanComponentS>().JiaYuanPastureList_7); 
             UnitCacheHelper.SaveComponentCache(unit.Root(),  unit.GetComponent<JiaYuanComponentS>()).Coroutine();
             await ETTask.CompletedTask;
         }

@@ -38,7 +38,7 @@ namespace ET.Server
 
             unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.JiaYuanFund, jiaYuanPurchaseItem.BuyZiJin.ToString());
             unit.GetComponent<BagComponentS>().OnCostItemData($"{request.ItemId};1");
-            response.PurchaseItemList = jiaYuanComponent.PurchaseItemList_7;
+            response.PurchaseItemList .AddRange(jiaYuanComponent.PurchaseItemList_7); 
             UnitCacheHelper.SaveComponentCache( unit.Root(), jiaYuanComponent).Coroutine();
             await ETTask.CompletedTask;
         }

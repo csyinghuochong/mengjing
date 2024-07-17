@@ -10,7 +10,7 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_JiaYuanRecordListRequest request, M2C_JiaYuanRecordListResponse response)
         {
             JiaYuanComponentS jiaYuanComponent = unit.GetComponent<JiaYuanComponentS>();
-            response.JiaYuanRecordList = jiaYuanComponent.JiaYuanRecordList_1;
+            response.JiaYuanRecordList .AddRange(jiaYuanComponent.JiaYuanRecordList_1); 
             await ETTask.CompletedTask;
         }
     }

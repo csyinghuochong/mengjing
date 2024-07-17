@@ -40,15 +40,14 @@ namespace ET.Server
                     await UnitCacheHelper.SaveComponentCache(unit.Root(),  jiaYuanComponent);
                 }
             }
-
-            response.PlanOpenList = jiaYuanComponent.InitOpenList();
-            response.PurchaseItemList = jiaYuanComponent.PurchaseItemList_7;
-            response.LearnMakeIds = jiaYuanComponent.LearnMakeIds_7;
-            response.JiaYuanPastureList = jiaYuanComponent.JiaYuanPastureList_7;
-            response.JiaYuanProList = jiaYuanComponent.JiaYuanProList_7;
+            jiaYuanComponent.InitOpenList();
+            response.PlanOpenList .AddRange(jiaYuanComponent.PlanOpenList_7);
+            response.PurchaseItemList .AddRange(jiaYuanComponent.PurchaseItemList_7); 
+            response.LearnMakeIds .AddRange(jiaYuanComponent.LearnMakeIds_7); 
+            response.JiaYuanPastureList .AddRange(jiaYuanComponent.JiaYuanPastureList_7); 
+            response.JiaYuanProList .AddRange(jiaYuanComponent.JiaYuanProList_7); 
+            response.JiaYuanPetList .AddRange(jiaYuanComponent.JiaYuanPetList_2); 
             response.JiaYuanDaShiTime = jiaYuanComponent.JiaYuanDaShiTime_1;
-            response.JiaYuanPetList = jiaYuanComponent.JiaYuanPetList_2;
-
             response.JiaYuanLv = userInfoComponent.UserInfo.JiaYuanLv;
             response.MasterName = userInfoComponent.UserInfo.Name;
         }

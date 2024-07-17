@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ET.Server
 {
@@ -24,14 +25,14 @@ namespace ET.Server
                 JiaYuanComponentS jiaYuanComponent = unit.GetComponent<JiaYuanComponentS>();
                 JiaYuanPlant jiaYuanPlant = jiaYuanComponent.GetJiaYuanPlant(request.OperateId);
 
-                response.JiaYuanRecord = jiaYuanPlant.GatherRecord;
+                response.JiaYuanRecord .AddRange(jiaYuanPlant.GatherRecord); 
             }
             else
             {
                 JiaYuanComponentS jiaYuanComponent_2 = await UnitCacheHelper.GetComponentCache<JiaYuanComponentS>(unit.Root(), request.MasterId);
                 JiaYuanPlant jiaYuanPlant_2 = jiaYuanComponent_2.GetJiaYuanPlant(request.OperateId);
 
-                response.JiaYuanRecord = jiaYuanPlant_2.GatherRecord;
+                response.JiaYuanRecord .AddRange(jiaYuanPlant_2.GatherRecord); 
             }
             
             await ETTask.CompletedTask;

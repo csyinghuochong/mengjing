@@ -28,15 +28,10 @@ namespace ET.Server
                         response.Error = ErrorCode.ERR_Error;
                         return;
                     }
-
-                    response.EquipList = bagComponents.EquipList;
-                    response.PetHeXinList = bagComponents.PetHeXinList;
-                    response.Occ = userinfo.UserInfo.Occ;
-                   
-                    PetComponentS petComponent = await UnitCacheHelper.GetComponentCache<PetComponentS>(scene.Root(), request.UserId);
-                    response.RolePetInfos = petComponent.RolePetInfos;
-                    response.PetSkinList = petComponent.PetSkinList;
                     
+                    PetComponentS petComponent = await UnitCacheHelper.GetComponentCache<PetComponentS>(scene.Root(), request.UserId);
+                    
+                 
                     NumericComponentS numericComponent =  await UnitCacheHelper.GetComponentCache<NumericComponentS>(scene.Root(), request.UserId);
                     foreach ((int key, long value) in numericComponent.NumericDic)
                     {
@@ -48,7 +43,12 @@ namespace ET.Server
                         response.Vs.Add(value);
                     }
                     
-                    response.FashionIds = bagComponents.FashionEquipList;
+                    response.EquipList .AddRange(bagComponents.EquipList); 
+                    response.PetHeXinList .AddRange(bagComponents.PetHeXinList); 
+                    response.Occ = userinfo.UserInfo.Occ;
+                    response.RolePetInfos .AddRange(petComponent.RolePetInfos); 
+                    response.PetSkinList .AddRange(petComponent.PetSkinList); 
+                    response.FashionIds .AddRange(bagComponents.FashionEquipList); 
                     break;
                 //只返回名字
                 case 1:

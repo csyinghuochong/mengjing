@@ -9,7 +9,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Scene scene, M2F_FubenCenterListRequest request, F2M_FubenCenterListResponse response)
         {
-            response.FubenInstanceList = scene.GetComponent<FubenCenterComponent>().FubenInstanceList;
+            response.FubenInstanceList .AddRange( scene.GetComponent<FubenCenterComponent>().FubenInstanceList);
 
             await ETTask.CompletedTask;
         }
