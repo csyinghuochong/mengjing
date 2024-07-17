@@ -57,6 +57,12 @@ namespace ET.Client
             self.PetTimer = timerComponent.NewOnceTimer(TimeHelper.ServerNow() + 5000, TimerInvokeType.JiaYuanPetWalk, self);
         }
 
+        public static void HideWindow(this DlgJiaYuanMain self)
+        {
+            TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
+            timerComponent.Remove(ref self.PetTimer);
+        }
+
         public static async ETTask ReqestStartPet(this DlgJiaYuanMain self)
         {
             JiaYuanPet jiaYuanPet = self.JiaYuanPet;
