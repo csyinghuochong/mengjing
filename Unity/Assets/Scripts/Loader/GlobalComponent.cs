@@ -3,12 +3,14 @@ using ET.Client;
 
 namespace ET
 {
-    [FriendOf(typeof (GlobalComponent))]
+    [FriendOf(typeof(GlobalComponent))]
     public static partial class GlobalComponentSystem
     {
         [EntitySystem]
         public static void Awake(this GlobalComponent self)
         {
+            GlobalComponent.Instance = self;
+
             self.Global = GameObject.Find("/Global").transform;
             self.Unit = GameObject.Find("/Global/Unit").transform;
             self.UI = GameObject.Find("/Global/UI").transform;
@@ -20,7 +22,7 @@ namespace ET
             self.MainCamera = GameObject.Find("/Global/MainCamera").transform;
             self.UICamera = GameObject.Find("/Global/UICamera").transform;
             self.GlobalConfig = Resources.Load<GlobalConfig>("GlobalConfig");
-            
+
             GameObject uiRoot = GameObject.Find("/Global/UI");
             self.BloodPlayer = new GameObject("BloodPlayer");
             self.BloodPlayer.AddComponent<RectTransform>();
@@ -32,7 +34,7 @@ namespace ET
             self.BloodText.AddComponent<RectTransform>();
             SetParent(self.BloodText, self.NormalRoot.gameObject);
         }
-        
+
         public static void SetParent(GameObject son, GameObject parent)
         {
             if (son == null || parent == null)
@@ -43,9 +45,12 @@ namespace ET
         }
     }
 
-    [ComponentOf(typeof (Scene))]
-    public class GlobalComponent: Entity, IAwake
+    [ComponentOf(typeof(Scene))]
+    public class GlobalComponent : Entity, IAwake
     {
+        [StaticField]
+        public static GlobalComponent Instance { get; set; }
+
         public Transform Global;
         public Transform Unit { get; set; }
         public Transform UI;
@@ -61,8 +66,7 @@ namespace ET
         public Transform MainCamera { get; set; }
 
         public Transform UICamera { get; set; }
-        
-        
+
         public GameObject BloodPlayer { get; set; }
         public GameObject BloodMonster { get; set; }
         public GameObject BloodText { get; set; }
