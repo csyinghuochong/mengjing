@@ -180,7 +180,7 @@ namespace ET
         public static List<int> GetActivityV1Task()
         {
             List<int> taskIds = new List<int>();
-            Dictionary<int, TaskCountryConfig> keyValuePairs = TaskCountryConfigCategory.Instance.GetAll();
+            Dictionary<int, TaskConfig> keyValuePairs = TaskConfigCategory.Instance.GetAll();
             foreach (var item in keyValuePairs)
             {
                 if (item.Value.TaskType == TaskCountryType.ActivityV1)
@@ -208,12 +208,12 @@ namespace ET
                 float taskRandValue = RandomHelper.RandFloat01();
                 int writeTaskID = int.Parse(dayTaskID[i]);
                 int writeTaskID_Next = writeTaskID;
-                TaskCountryConfig taskCountryConfig = null;
+                TaskConfig taskCountryConfig = null;
                 double triggerPro = 0;
                 do
                 {
                     writeTaskID = writeTaskID_Next;
-                    taskCountryConfig = TaskCountryConfigCategory.Instance.Get(writeTaskID);
+                    taskCountryConfig = TaskConfigCategory.Instance.Get(writeTaskID);
 
                     if (taskCountryConfig.TriggerType == 1 && playerLv < taskCountryConfig.TargetValue[0])
                     {
