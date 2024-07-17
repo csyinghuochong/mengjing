@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgTrialReward))]
 	[EnableMethod]
 	public  class DlgTrialRewardViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_CloseButtonButton
+		public Button E_CloseButtonButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseButtonButton == null )
      			{
-		    		this.m_E_CloseButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_CloseButton");
+		    		this.m_E_CloseButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_CloseButton");
      			}
      			return this.m_E_CloseButtonButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_CloseButtonImage
+		public Image E_CloseButtonImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseButtonImage == null )
      			{
-		    		this.m_E_CloseButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_CloseButton");
+		    		this.m_E_CloseButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_CloseButton");
      			}
      			return this.m_E_CloseButtonImage;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_RankRewardItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_RankRewardItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_RankRewardItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_RankRewardItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RankRewardItems");
+		    		this.m_E_RankRewardItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RankRewardItems");
      			}
      			return this.m_E_RankRewardItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_RewardListNodeRectTransform
+		public RectTransform EG_RewardListNodeRectTransform
      	{
      		get
      		{
@@ -69,7 +69,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_RewardListNodeRectTransform == null )
      			{
-		    		this.m_EG_RewardListNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"ScrollView1/Viewport/EG_RewardListNode");
+		    		this.m_EG_RewardListNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"ScrollView1/Viewport/EG_RewardListNode");
      			}
      			return this.m_EG_RewardListNodeRectTransform;
      		}
@@ -84,10 +84,10 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_CloseButtonButton = null;
-		private UnityEngine.UI.Image m_E_CloseButtonImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_RankRewardItemsLoopVerticalScrollRect = null;
-		private UnityEngine.RectTransform m_EG_RewardListNodeRectTransform = null;
+		private Button m_E_CloseButtonButton = null;
+		private Image m_E_CloseButtonImage = null;
+		private LoopVerticalScrollRect m_E_RankRewardItemsLoopVerticalScrollRect = null;
+		private RectTransform m_EG_RewardListNodeRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

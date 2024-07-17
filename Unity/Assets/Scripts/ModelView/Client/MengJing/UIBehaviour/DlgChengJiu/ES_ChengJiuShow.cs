@@ -1,12 +1,12 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ChengJiuShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_ChengJiuShow : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public List<int> ShowTask = new();
 		public Dictionary<int, EntityRef<Scroll_Item_ChengJiuShowItem>> ScrollItemChengJiuShowItems;
@@ -14,7 +14,7 @@ namespace ET.Client
 		public GameObject LeftContent;
 		public GameObject UIChengJiuShowType;
 		public GameObject UIChengJiuShowChapterItemListNode;
-		public UnityEngine.UI.Button E_ImageButtonButton
+		public Button E_ImageButtonButton
      	{
      		get
      		{
@@ -25,13 +25,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonButton == null )
      			{
-		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowType/E_ImageButton");
+		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowType/E_ImageButton");
      			}
      			return this.m_E_ImageButtonButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageButtonImage
+		public Image E_ImageButtonImage
      	{
      		get
      		{
@@ -42,13 +42,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonImage == null )
      			{
-		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowType/E_ImageButton");
+		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowType/E_ImageButton");
      			}
      			return this.m_E_ImageButtonImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_CheckmarkImage
+		public Image E_CheckmarkImage
      	{
      		get
      		{
@@ -59,13 +59,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CheckmarkImage == null )
      			{
-		    		this.m_E_CheckmarkImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowType/E_Checkmark");
+		    		this.m_E_CheckmarkImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowType/E_Checkmark");
      			}
      			return this.m_E_CheckmarkImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TaskTypeNameText
+		public Text E_TaskTypeNameText
      	{
      		get
      		{
@@ -76,13 +76,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TaskTypeNameText == null )
      			{
-		    		this.m_E_TaskTypeNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowType/E_TaskTypeName");
+		    		this.m_E_TaskTypeNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowType/E_TaskTypeName");
      			}
      			return this.m_E_TaskTypeNameText;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_ChengJiuTypeItemItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_ChengJiuTypeItemItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -93,13 +93,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ChengJiuTypeItemItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_ChengJiuTypeItemItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowType/E_ChengJiuTypeItemItems");
+		    		this.m_E_ChengJiuTypeItemItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowType/E_ChengJiuTypeItemItems");
      			}
      			return this.m_E_ChengJiuTypeItemItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Ima_DiButton
+		public Button E_Ima_DiButton
      	{
      		get
      		{
@@ -110,13 +110,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Ima_DiButton == null )
      			{
-		    		this.m_E_Ima_DiButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Ima_Di");
+		    		this.m_E_Ima_DiButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Ima_Di");
      			}
      			return this.m_E_Ima_DiButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Ima_DiImage
+		public Image E_Ima_DiImage
      	{
      		get
      		{
@@ -127,13 +127,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Ima_DiImage == null )
      			{
-		    		this.m_E_Ima_DiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Ima_Di");
+		    		this.m_E_Ima_DiImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Ima_Di");
      			}
      			return this.m_E_Ima_DiImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Ima_SelectStatusImage
+		public Image E_Ima_SelectStatusImage
      	{
      		get
      		{
@@ -144,13 +144,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Ima_SelectStatusImage == null )
      			{
-		    		this.m_E_Ima_SelectStatusImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Ima_SelectStatus");
+		    		this.m_E_Ima_SelectStatusImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Ima_SelectStatus");
      			}
      			return this.m_E_Ima_SelectStatusImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Ima_ItemQulityImage
+		public Image E_Ima_ItemQulityImage
      	{
      		get
      		{
@@ -161,13 +161,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Ima_ItemQulityImage == null )
      			{
-		    		this.m_E_Ima_ItemQulityImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Ima_ItemQulity");
+		    		this.m_E_Ima_ItemQulityImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Ima_ItemQulity");
      			}
      			return this.m_E_Ima_ItemQulityImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Ima_ItemIconImage
+		public Image E_Ima_ItemIconImage
      	{
      		get
      		{
@@ -178,13 +178,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Ima_ItemIconImage == null )
      			{
-		    		this.m_E_Ima_ItemIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Ima_ItemIcon");
+		    		this.m_E_Ima_ItemIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Ima_ItemIcon");
      			}
      			return this.m_E_Ima_ItemIconImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Ima_ProgressImage
+		public Image E_Ima_ProgressImage
      	{
      		get
      		{
@@ -195,13 +195,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Ima_ProgressImage == null )
      			{
-		    		this.m_E_Ima_ProgressImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Ima_Progress");
+		    		this.m_E_Ima_ProgressImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Ima_Progress");
      			}
      			return this.m_E_Ima_ProgressImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Ima_CompleteTaskImage
+		public Image E_Ima_CompleteTaskImage
      	{
      		get
      		{
@@ -212,13 +212,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Ima_CompleteTaskImage == null )
      			{
-		    		this.m_E_Ima_CompleteTaskImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Ima_CompleteTask");
+		    		this.m_E_Ima_CompleteTaskImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Ima_CompleteTask");
      			}
      			return this.m_E_Ima_CompleteTaskImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_TaskNumText
+		public Text E_Lab_TaskNumText
      	{
      		get
      		{
@@ -229,13 +229,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_TaskNumText == null )
      			{
-		    		this.m_E_Lab_TaskNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Lab_TaskNum");
+		    		this.m_E_Lab_TaskNumText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Lab_TaskNum");
      			}
      			return this.m_E_Lab_TaskNumText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_TaskNameText
+		public Text E_Lab_TaskNameText
      	{
      		get
      		{
@@ -246,13 +246,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_TaskNameText == null )
      			{
-		    		this.m_E_Lab_TaskNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Lab_TaskName");
+		    		this.m_E_Lab_TaskNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Left/Scroll View/Viewport/LeftContent/UIChengJiuShowChapterItemListNode/UIChengJiuShowChapterItem/E_Lab_TaskName");
      			}
      			return this.m_E_Lab_TaskNameText;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ChengJiuShowItemsImage
+		public Image E_ChengJiuShowItemsImage
      	{
      		get
      		{
@@ -263,13 +263,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ChengJiuShowItemsImage == null )
      			{
-		    		this.m_E_ChengJiuShowItemsImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ChengJiuShowItems");
+		    		this.m_E_ChengJiuShowItemsImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/E_ChengJiuShowItems");
      			}
      			return this.m_E_ChengJiuShowItemsImage;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_ChengJiuShowItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_ChengJiuShowItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -280,7 +280,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ChengJiuShowItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_ChengJiuShowItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_ChengJiuShowItems");
+		    		this.m_E_ChengJiuShowItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_ChengJiuShowItems");
      			}
      			return this.m_E_ChengJiuShowItemsLoopVerticalScrollRect;
      		}
@@ -319,22 +319,22 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_ImageButtonButton = null;
-		private UnityEngine.UI.Image m_E_ImageButtonImage = null;
-		private UnityEngine.UI.Image m_E_CheckmarkImage = null;
-		private UnityEngine.UI.Text m_E_TaskTypeNameText = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_ChengJiuTypeItemItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Button m_E_Ima_DiButton = null;
-		private UnityEngine.UI.Image m_E_Ima_DiImage = null;
-		private UnityEngine.UI.Image m_E_Ima_SelectStatusImage = null;
-		private UnityEngine.UI.Image m_E_Ima_ItemQulityImage = null;
-		private UnityEngine.UI.Image m_E_Ima_ItemIconImage = null;
-		private UnityEngine.UI.Image m_E_Ima_ProgressImage = null;
-		private UnityEngine.UI.Image m_E_Ima_CompleteTaskImage = null;
-		private UnityEngine.UI.Text m_E_Lab_TaskNumText = null;
-		private UnityEngine.UI.Text m_E_Lab_TaskNameText = null;
-		private UnityEngine.UI.Image m_E_ChengJiuShowItemsImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_ChengJiuShowItemsLoopVerticalScrollRect = null;
+		private Button m_E_ImageButtonButton = null;
+		private Image m_E_ImageButtonImage = null;
+		private Image m_E_CheckmarkImage = null;
+		private Text m_E_TaskTypeNameText = null;
+		private LoopVerticalScrollRect m_E_ChengJiuTypeItemItemsLoopVerticalScrollRect = null;
+		private Button m_E_Ima_DiButton = null;
+		private Image m_E_Ima_DiImage = null;
+		private Image m_E_Ima_SelectStatusImage = null;
+		private Image m_E_Ima_ItemQulityImage = null;
+		private Image m_E_Ima_ItemIconImage = null;
+		private Image m_E_Ima_ProgressImage = null;
+		private Image m_E_Ima_CompleteTaskImage = null;
+		private Text m_E_Lab_TaskNumText = null;
+		private Text m_E_Lab_TaskNameText = null;
+		private Image m_E_ChengJiuShowItemsImage = null;
+		private LoopVerticalScrollRect m_E_ChengJiuShowItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

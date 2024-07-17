@@ -1,7 +1,3 @@
-using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
-
 namespace UnityEngine.UI
 {
     [AddComponentMenu("UI/Loop Vertical Scroll Rect(MultiPrefab)", 53)]

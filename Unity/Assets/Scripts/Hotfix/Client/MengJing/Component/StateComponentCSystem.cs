@@ -5,7 +5,7 @@ namespace ET.Client
     public static partial class StateComponentCSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.StateComponentC self)
+        private static void Awake(this StateComponentC self)
         {
             self.CurrentStateType = StateTypeEnum.None;
             self.RigidityEndTime = 0;

@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgMakeLearnViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgMakeLearnViewComponent))]
+	[FriendOfAttribute(typeof(DlgMakeLearnViewComponent))]
 	public static partial class DlgMakeLearnViewComponentSystem
 	{
 		[EntitySystem]

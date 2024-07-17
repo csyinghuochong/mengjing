@@ -1,18 +1,18 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_WelfareTask : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_WelfareTask : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public int Day;
 		public List<TaskPro> ShowTaskPros = new();
 		public Dictionary<int, EntityRef<Scroll_Item_WelfareTaskItem>> ScrollItemWelfareTaskItems;
 		
-		public UnityEngine.UI.Image E_DayProgressImgImage
+		public Image E_DayProgressImgImage
      	{
      		get
      		{
@@ -23,13 +23,13 @@ namespace ET.Client
      			}
      			if( this.m_E_DayProgressImgImage == null )
      			{
-		    		this.m_E_DayProgressImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/ProgressBar/E_DayProgressImg");
+		    		this.m_E_DayProgressImgImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/ProgressBar/E_DayProgressImg");
      			}
      			return this.m_E_DayProgressImgImage;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_DayListNodeRectTransform
+		public RectTransform EG_DayListNodeRectTransform
      	{
      		get
      		{
@@ -40,13 +40,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_DayListNodeRectTransform == null )
      			{
-		    		this.m_EG_DayListNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/ProgressBar/EG_DayListNode");
+		    		this.m_EG_DayListNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Right/ProgressBar/EG_DayListNode");
      			}
      			return this.m_EG_DayListNodeRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_WelfareTaskItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_WelfareTaskItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -57,13 +57,13 @@ namespace ET.Client
      			}
      			if( this.m_E_WelfareTaskItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_WelfareTaskItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_WelfareTaskItems");
+		    		this.m_E_WelfareTaskItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_WelfareTaskItems");
      			}
      			return this.m_E_WelfareTaskItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Text E_CompletenessTextText
+		public Text E_CompletenessTextText
      	{
      		get
      		{
@@ -74,7 +74,7 @@ namespace ET.Client
      			}
      			if( this.m_E_CompletenessTextText == null )
      			{
-		    		this.m_E_CompletenessTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_CompletenessText");
+		    		this.m_E_CompletenessTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_CompletenessText");
      			}
      			return this.m_E_CompletenessTextText;
      		}
@@ -99,7 +99,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ReceiveBtnButton
+		public Button E_ReceiveBtnButton
      	{
      		get
      		{
@@ -110,13 +110,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ReceiveBtnButton == null )
      			{
-		    		this.m_E_ReceiveBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_ReceiveBtn");
+		    		this.m_E_ReceiveBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/E_ReceiveBtn");
      			}
      			return this.m_E_ReceiveBtnButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ReceiveBtnImage
+		public Image E_ReceiveBtnImage
      	{
      		get
      		{
@@ -127,13 +127,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ReceiveBtnImage == null )
      			{
-		    		this.m_E_ReceiveBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ReceiveBtn");
+		    		this.m_E_ReceiveBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/E_ReceiveBtn");
      			}
      			return this.m_E_ReceiveBtnImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ReceivedImgImage
+		public Image E_ReceivedImgImage
      	{
      		get
      		{
@@ -144,7 +144,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ReceivedImgImage == null )
      			{
-		    		this.m_E_ReceivedImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ReceivedImg");
+		    		this.m_E_ReceivedImgImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/E_ReceivedImg");
      			}
      			return this.m_E_ReceivedImgImage;
      		}
@@ -175,14 +175,14 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Image m_E_DayProgressImgImage = null;
-		private UnityEngine.RectTransform m_EG_DayListNodeRectTransform = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_WelfareTaskItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Text m_E_CompletenessTextText = null;
+		private Image m_E_DayProgressImgImage = null;
+		private RectTransform m_EG_DayListNodeRectTransform = null;
+		private LoopVerticalScrollRect m_E_WelfareTaskItemsLoopVerticalScrollRect = null;
+		private Text m_E_CompletenessTextText = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
-		private UnityEngine.UI.Button m_E_ReceiveBtnButton = null;
-		private UnityEngine.UI.Image m_E_ReceiveBtnImage = null;
-		private UnityEngine.UI.Image m_E_ReceivedImgImage = null;
+		private Button m_E_ReceiveBtnButton = null;
+		private Image m_E_ReceiveBtnImage = null;
+		private Image m_E_ReceivedImgImage = null;
 		public Transform uiTransform = null;
 	}
 }

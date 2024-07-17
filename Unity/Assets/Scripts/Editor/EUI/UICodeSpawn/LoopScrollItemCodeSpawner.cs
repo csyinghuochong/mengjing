@@ -1,11 +1,8 @@
-﻿
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using System.IO;
-
 using System.Text;
-using ET;
+using UnityEditor;
+using UnityEngine;
 
 public partial class UICodeSpawner
 {
@@ -29,9 +26,9 @@ public partial class UICodeSpawner
 
         string strFilePath = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UIItemBehaviour";
 
-        if ( !System.IO.Directory.Exists(strFilePath) )
+        if ( !Directory.Exists(strFilePath) )
         {
-            System.IO.Directory.CreateDirectory(strFilePath);
+            Directory.CreateDirectory(strFilePath);
         }
         strFilePath     = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UIItemBehaviour/" + strDlgName + "ViewSystem.cs";
         StreamWriter sw = new StreamWriter(strFilePath, false, Encoding.UTF8);
@@ -81,9 +78,9 @@ public partial class UICodeSpawner
 
         string strFilePath = Application.dataPath + "/Scripts/ModelView/Client/MengJing/UIItemBehaviour";
 
-        if ( !System.IO.Directory.Exists(strFilePath) )
+        if ( !Directory.Exists(strFilePath) )
         {
-            System.IO.Directory.CreateDirectory(strFilePath);
+            Directory.CreateDirectory(strFilePath);
         }
         strFilePath     = Application.dataPath + "/Scripts/ModelView/Client/MengJing/UIItemBehaviour/" + strDlgName + ".cs";
         StreamWriter sw = new StreamWriter(strFilePath, false, Encoding.UTF8);

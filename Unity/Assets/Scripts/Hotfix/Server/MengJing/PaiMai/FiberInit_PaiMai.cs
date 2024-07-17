@@ -1,5 +1,3 @@
-using System.Net;
-
 namespace ET.Server
 {
     [Invoke((long)SceneType.PaiMai)]

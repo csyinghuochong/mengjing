@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
-using KO;
 
 public class UIImage : Image
 {

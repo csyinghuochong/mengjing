@@ -8,7 +8,7 @@ namespace ET.Client
     
     [ChildOf]
     [EnableMethod]
-    public class ES_MainSkillGrid: Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+    public class ES_MainSkillGrid: Entity,IAwake<Transform>,IDestroy
     {
 
         public Transform E_SkillYanGan
@@ -22,7 +22,7 @@ namespace ET.Client
                 }
                 if( this.m_e_SkillYanGan == null )
                 {
-                    this.m_e_SkillYanGan = UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"SkillYanGan");
+                    this.m_e_SkillYanGan = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"SkillYanGan");
                 }
                 return this.m_e_SkillYanGan;
             }
@@ -39,7 +39,7 @@ namespace ET.Client
                 }
                 if( this.m_e_Button_Cancle == null )
                 {
-                    this.m_e_Button_Cancle = UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"Button_Cancle");
+                    this.m_e_Button_Cancle = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Button_Cancle");
                 }
                 return this.m_e_Button_Cancle;
             }
@@ -56,7 +56,7 @@ namespace ET.Client
                 }
                 if( this.m_e_SkillDi == null )
                 {
-                    this.m_e_SkillDi = UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"SkillDi");
+                    this.m_e_SkillDi = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"SkillDi");
                 }
                 return this.m_e_SkillDi;
             }
@@ -73,7 +73,7 @@ namespace ET.Client
                 }
                 if( this.m_e_Btn_SkillStart == null )
                 {
-                    this.m_e_Btn_SkillStart = UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"Btn_SkillStart");
+                    this.m_e_Btn_SkillStart = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Btn_SkillStart");
                 }
                 return this.m_e_Btn_SkillStart;
             }
@@ -90,7 +90,7 @@ namespace ET.Client
                 }
                 if( this.m_e_Img_SkillIcon == null )
                 {
-                    this.m_e_Img_SkillIcon = UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"Img_Mask/Img_SkillIcon");
+                    this.m_e_Img_SkillIcon = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Img_Mask/Img_SkillIcon");
                 }
                 return this.m_e_Img_SkillIcon;
             }
@@ -107,7 +107,7 @@ namespace ET.Client
                 }
                 if( this.m_e_Text_SkillItemNum == null )
                 {
-                    this.m_e_Text_SkillItemNum = UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"Text_SkillItemNum");
+                    this.m_e_Text_SkillItemNum = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Text_SkillItemNum");
                 }
                 return this.m_e_Text_SkillItemNum;
             }
@@ -124,7 +124,7 @@ namespace ET.Client
                 }
                 if( this.m_e_Img_Mask == null )
                 {
-                    this.m_e_Img_Mask = UIFindHelper.FindDeepChild<UnityEngine.Transform>(this.uiTransform.gameObject,"Img_Mask");
+                    this.m_e_Img_Mask = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"Img_Mask");
                 }
                 return this.m_e_Img_Mask;
             }
@@ -141,7 +141,7 @@ namespace ET.Client
                 }
                 if( this.m_e_SkillSecondCD == null )
                 {
-                    this.m_e_SkillSecondCD = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"SkillSecondCD");
+                    this.m_e_SkillSecondCD = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"SkillSecondCD");
                 }
                 return this.m_e_SkillSecondCD;
             }
@@ -158,7 +158,7 @@ namespace ET.Client
                 }
                 if( this.m_e_Img_SkillCD == null )
                 {
-                    this.m_e_Img_SkillCD = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Img_SkillCD");
+                    this.m_e_Img_SkillCD = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Img_SkillCD");
                 }
                 return this.m_e_Img_SkillCD;
             }
@@ -175,7 +175,7 @@ namespace ET.Client
                 }
                 if( this.m_e_Img_PublicSkillCD == null )
                 {
-                    this.m_e_Img_PublicSkillCD = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Img_PublicSkillCD");
+                    this.m_e_Img_PublicSkillCD = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Img_PublicSkillCD");
                 }
                 return this.m_e_Img_PublicSkillCD;
             }
@@ -192,7 +192,7 @@ namespace ET.Client
                 }
                 if( this.m_e_Text_SkillCD == null )
                 {
-                    this.m_e_Text_SkillCD = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Text_SkillCD");
+                    this.m_e_Text_SkillCD = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Text_SkillCD");
                 }
                 return this.m_e_Text_SkillCD;
             }

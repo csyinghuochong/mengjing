@@ -10,12 +10,12 @@ namespace ET.Server
     public static partial class AccountCenterComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.AccountCenterComponent self)
+        private static void Awake(this AccountCenterComponent self)
         {
 
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.AccountCenterComponent self)
+        private static void Destroy(this AccountCenterComponent self)
         {
 
         }

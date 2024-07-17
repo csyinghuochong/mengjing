@@ -7,7 +7,7 @@ namespace ET.Client
     
     [ChildOf]
     [EnableMethod]
-    public class ES_PetMining: Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+    public class ES_PetMining: Entity,IAwake<Transform>,IDestroy
     {
     
         public Transform UITransform
@@ -261,7 +261,7 @@ namespace ET.Client
             }
         }
         
-        public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
+        public ToggleGroup E_FunctionSetBtnToggleGroup
         {
             get
             {
@@ -272,13 +272,13 @@ namespace ET.Client
                 }
                 if( this.m_E_FunctionSetBtnToggleGroup == null )
                 {
-                    this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
+                    this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
                 }
                 return this.m_E_FunctionSetBtnToggleGroup;
             }
         }
 
-        public UnityEngine.UI.Toggle E_Type1Toggle
+        public Toggle E_Type1Toggle
         {
             get
             {
@@ -289,13 +289,13 @@ namespace ET.Client
                 }
                 if( this.m_E_Type1Toggle == null )
                 {
-                    this.m_E_Type1Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type1");
+                    this.m_E_Type1Toggle = UIFindHelper.FindDeepChild<Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type1");
                 }
                 return this.m_E_Type1Toggle;
             }
         }
 
-        public UnityEngine.UI.Toggle E_Type2Toggle
+        public Toggle E_Type2Toggle
         {
             get
             {
@@ -306,13 +306,13 @@ namespace ET.Client
                 }
                 if( this.m_E_Type2Toggle == null )
                 {
-                    this.m_E_Type2Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type2");
+                    this.m_E_Type2Toggle = UIFindHelper.FindDeepChild<Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type2");
                 }
                 return this.m_E_Type2Toggle;
             }
         }
 
-        public UnityEngine.UI.Toggle E_Type3Toggle
+        public Toggle E_Type3Toggle
         {
             get
             {
@@ -323,7 +323,7 @@ namespace ET.Client
                 }
                 if( this.m_E_Type3Toggle == null )
                 {
-                    this.m_E_Type3Toggle = UIFindHelper.FindDeepChild<UnityEngine.UI.Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type3");
+                    this.m_E_Type3Toggle = UIFindHelper.FindDeepChild<Toggle>(this.uiTransform.gameObject,"E_FunctionSetBtn/E_Type3");
                 }
                 return this.m_E_Type3Toggle;
             }
@@ -393,10 +393,10 @@ namespace ET.Client
         public List<EntityRef<ES_PetMiningItem>> PetMiningItemList = new();
 
         
-        private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
-        private UnityEngine.UI.Toggle m_E_Type1Toggle = null;
-        private UnityEngine.UI.Toggle m_E_Type2Toggle = null;
-        private UnityEngine.UI.Toggle m_E_Type3Toggle = null;
+        private ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+        private Toggle m_E_Type1Toggle = null;
+        private Toggle m_E_Type2Toggle = null;
+        private Toggle m_E_Type3Toggle = null;
         
         public List<Image> TeamIconList = new List<Image>();    
         public List<Text> TeamTipList = new List<Text>();

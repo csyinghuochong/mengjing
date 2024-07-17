@@ -1,16 +1,16 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetHeCheng : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_PetHeCheng : Entity,IAwake<Transform>,IDestroy 
 	{
 		public RolePetInfo HeChengPet_Left;
 		public RolePetInfo HeChengPet_Right;
 		
-		public UnityEngine.RectTransform EG_PetInfo1RectTransform
+		public RectTransform EG_PetInfo1RectTransform
      	{
      		get
      		{
@@ -21,7 +21,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_PetInfo1RectTransform == null )
      			{
-		    		this.m_EG_PetInfo1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PetInfo1");
+		    		this.m_EG_PetInfo1RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_PetInfo1");
      			}
      			return this.m_EG_PetInfo1RectTransform;
      		}
@@ -47,7 +47,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_PetInfo2RectTransform
+		public RectTransform EG_PetInfo2RectTransform
      	{
      		get
      		{
@@ -58,7 +58,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_PetInfo2RectTransform == null )
      			{
-		    		this.m_EG_PetInfo2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PetInfo2");
+		    		this.m_EG_PetInfo2RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_PetInfo2");
      			}
      			return this.m_EG_PetInfo2RectTransform;
      		}
@@ -84,7 +84,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_HeChengButton
+		public Button E_Btn_HeChengButton
      	{
      		get
      		{
@@ -95,13 +95,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_HeChengButton == null )
      			{
-		    		this.m_E_Btn_HeChengButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_HeCheng");
+		    		this.m_E_Btn_HeChengButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_HeCheng");
      			}
      			return this.m_E_Btn_HeChengButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_HeChengImage
+		public Image E_Btn_HeChengImage
      	{
      		get
      		{
@@ -112,13 +112,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_HeChengImage == null )
      			{
-		    		this.m_E_Btn_HeChengImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_HeCheng");
+		    		this.m_E_Btn_HeChengImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_HeCheng");
      			}
      			return this.m_E_Btn_HeChengImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_PreviewButton
+		public Button E_Btn_PreviewButton
      	{
      		get
      		{
@@ -129,13 +129,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_PreviewButton == null )
      			{
-		    		this.m_E_Btn_PreviewButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_Preview");
+		    		this.m_E_Btn_PreviewButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_Preview");
      			}
      			return this.m_E_Btn_PreviewButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_PreviewImage
+		public Image E_Btn_PreviewImage
      	{
      		get
      		{
@@ -146,13 +146,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_PreviewImage == null )
      			{
-		    		this.m_E_Btn_PreviewImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_Preview");
+		    		this.m_E_Btn_PreviewImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_Preview");
      			}
      			return this.m_E_Btn_PreviewImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_HeChengExplainButton
+		public Button E_Btn_HeChengExplainButton
      	{
      		get
      		{
@@ -163,13 +163,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_HeChengExplainButton == null )
      			{
-		    		this.m_E_Btn_HeChengExplainButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_HeChengExplain");
+		    		this.m_E_Btn_HeChengExplainButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_HeChengExplain");
      			}
      			return this.m_E_Btn_HeChengExplainButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_HeChengExplainImage
+		public Image E_Btn_HeChengExplainImage
      	{
      		get
      		{
@@ -180,7 +180,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_HeChengExplainImage == null )
      			{
-		    		this.m_E_Btn_HeChengExplainImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_HeChengExplain");
+		    		this.m_E_Btn_HeChengExplainImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_HeChengExplain");
      			}
      			return this.m_E_Btn_HeChengExplainImage;
      		}
@@ -213,16 +213,16 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EG_PetInfo1RectTransform = null;
+		private RectTransform m_EG_PetInfo1RectTransform = null;
 		private EntityRef<ES_PetInfoShow> m_es_petinfoshow_1 = null;
-		private UnityEngine.RectTransform m_EG_PetInfo2RectTransform = null;
+		private RectTransform m_EG_PetInfo2RectTransform = null;
 		private EntityRef<ES_PetInfoShow> m_es_petinfoshow_2 = null;
-		private UnityEngine.UI.Button m_E_Btn_HeChengButton = null;
-		private UnityEngine.UI.Image m_E_Btn_HeChengImage = null;
-		private UnityEngine.UI.Button m_E_Btn_PreviewButton = null;
-		private UnityEngine.UI.Image m_E_Btn_PreviewImage = null;
-		private UnityEngine.UI.Button m_E_Btn_HeChengExplainButton = null;
-		private UnityEngine.UI.Image m_E_Btn_HeChengExplainImage = null;
+		private Button m_E_Btn_HeChengButton = null;
+		private Image m_E_Btn_HeChengImage = null;
+		private Button m_E_Btn_PreviewButton = null;
+		private Image m_E_Btn_PreviewImage = null;
+		private Button m_E_Btn_HeChengExplainButton = null;
+		private Image m_E_Btn_HeChengExplainImage = null;
 		public Transform uiTransform = null;
 	}
 }

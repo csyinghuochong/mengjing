@@ -1,10 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Collections.Generic;
 using System.Text;
 
 namespace ET
@@ -406,7 +405,7 @@ namespace ET
         public static string UrlEncode_1(string str)
         {
             StringBuilder sb = new StringBuilder();
-            byte[] byStr = System.Text.Encoding.UTF8.GetBytes(str); //默认是System.Text.Encoding.Default.GetBytes(str)
+            byte[] byStr = Encoding.UTF8.GetBytes(str); //默认是System.Text.Encoding.Default.GetBytes(str)
             for (int i = 0; i < byStr.Length; i++)
             {
                 sb.Append(@"%" + Convert.ToString(byStr[i], 16));
@@ -470,7 +469,7 @@ namespace ET
             {
                 httpclient.BaseAddress = new Uri(uri);
                 httpclient.DefaultRequestHeaders.Accept.Clear();
-                httpclient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                httpclient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 httpclient.DefaultRequestHeaders.Add("Authorization", appcode);
 
                 HttpResponseMessage response = await httpclient.GetAsync($"?{paramss}");

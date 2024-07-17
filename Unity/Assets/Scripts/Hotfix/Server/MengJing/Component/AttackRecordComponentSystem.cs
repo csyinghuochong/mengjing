@@ -9,7 +9,7 @@ namespace ET.Server
     public static partial class AttackRecordComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.AttackRecordComponent self)
+        private static void Awake(this AttackRecordComponent self)
         {
             self.DropType = 0;
             self.AttackingId = 0;
@@ -23,7 +23,7 @@ namespace ET.Server
             self.DropType = MonsterConfigCategory.Instance.Get(self.GetParent<Unit>().ConfigId).DropType;
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.AttackRecordComponent self)
+        private static void Destroy(this AttackRecordComponent self)
         {
 
         }

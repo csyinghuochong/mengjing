@@ -1,19 +1,19 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RoleXiLianLevelItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_RoleXiLianLevelItem : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public float PostionY;
 		public int XiLianLevelId;
 		public List<KeyValuePairInt> ShowSkill;
 		public Dictionary<int, EntityRef<Scroll_Item_CommonSkillItem>> ScrollItemCommonSkillItems;
 		
-		public UnityEngine.UI.Image E_ImageExpImage
+		public Image E_ImageExpImage
      	{
      		get
      		{
@@ -24,13 +24,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageExpImage == null )
      			{
-		    		this.m_E_ImageExpImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageExp");
+		    		this.m_E_ImageExpImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageExp");
      			}
      			return this.m_E_ImageExpImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextTitleText
+		public Text E_TextTitleText
      	{
      		get
      		{
@@ -41,13 +41,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextTitleText == null )
      			{
-		    		this.m_E_TextTitleText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextTitle");
+		    		this.m_E_TextTitleText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextTitle");
      			}
      			return this.m_E_TextTitleText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextAttributeText
+		public Text E_TextAttributeText
      	{
      		get
      		{
@@ -58,13 +58,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextAttributeText == null )
      			{
-		    		this.m_E_TextAttributeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextAttribute");
+		    		this.m_E_TextAttributeText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextAttribute");
      			}
      			return this.m_E_TextAttributeText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextLevelTipText
+		public Text E_TextLevelTipText
      	{
      		get
      		{
@@ -75,13 +75,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextLevelTipText == null )
      			{
-		    		this.m_E_TextLevelTipText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextLevelTip");
+		    		this.m_E_TextLevelTipText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextLevelTip");
      			}
      			return this.m_E_TextLevelTipText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextShuLianDuText
+		public Text E_TextShuLianDuText
      	{
      		get
      		{
@@ -92,7 +92,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TextShuLianDuText == null )
      			{
-		    		this.m_E_TextShuLianDuText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextShuLianDu");
+		    		this.m_E_TextShuLianDuText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextShuLianDu");
      			}
      			return this.m_E_TextShuLianDuText;
      		}
@@ -117,7 +117,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_CommonSkillItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_CommonSkillItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -128,13 +128,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CommonSkillItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_CommonSkillItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_CommonSkillItems");
+		    		this.m_E_CommonSkillItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_CommonSkillItems");
      			}
      			return this.m_E_CommonSkillItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Image_AcvityedImage
+		public Image E_Image_AcvityedImage
      	{
      		get
      		{
@@ -145,13 +145,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Image_AcvityedImage == null )
      			{
-		    		this.m_E_Image_AcvityedImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Image_Acvityed");
+		    		this.m_E_Image_AcvityedImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Image_Acvityed");
      			}
      			return this.m_E_Image_AcvityedImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonGetButton
+		public Button E_ButtonGetButton
      	{
      		get
      		{
@@ -162,13 +162,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonGetButton == null )
      			{
-		    		this.m_E_ButtonGetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonGet");
+		    		this.m_E_ButtonGetButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonGet");
      			}
      			return this.m_E_ButtonGetButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonGetImage
+		public Image E_ButtonGetImage
      	{
      		get
      		{
@@ -179,7 +179,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonGetImage == null )
      			{
-		    		this.m_E_ButtonGetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonGet");
+		    		this.m_E_ButtonGetImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonGet");
      			}
      			return this.m_E_ButtonGetImage;
      		}
@@ -212,16 +212,16 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Image m_E_ImageExpImage = null;
-		private UnityEngine.UI.Text m_E_TextTitleText = null;
-		private UnityEngine.UI.Text m_E_TextAttributeText = null;
-		private UnityEngine.UI.Text m_E_TextLevelTipText = null;
-		private UnityEngine.UI.Text m_E_TextShuLianDuText = null;
+		private Image m_E_ImageExpImage = null;
+		private Text m_E_TextTitleText = null;
+		private Text m_E_TextAttributeText = null;
+		private Text m_E_TextLevelTipText = null;
+		private Text m_E_TextShuLianDuText = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_CommonSkillItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Image m_E_Image_AcvityedImage = null;
-		private UnityEngine.UI.Button m_E_ButtonGetButton = null;
-		private UnityEngine.UI.Image m_E_ButtonGetImage = null;
+		private LoopVerticalScrollRect m_E_CommonSkillItemsLoopVerticalScrollRect = null;
+		private Image m_E_Image_AcvityedImage = null;
+		private Button m_E_ButtonGetButton = null;
+		private Image m_E_ButtonGetImage = null;
 		public Transform uiTransform = null;
 	}
 }

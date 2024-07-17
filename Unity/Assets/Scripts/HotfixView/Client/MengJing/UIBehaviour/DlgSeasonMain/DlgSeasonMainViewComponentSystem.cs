@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgSeasonMainViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgSeasonMainViewComponent))]
+	[FriendOfAttribute(typeof(DlgSeasonMainViewComponent))]
 	public static partial class DlgSeasonMainViewComponentSystem
 	{
 		[EntitySystem]

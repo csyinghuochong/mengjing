@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgLobby))]
 	[EnableMethod]
 	public  class DlgLobbyViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.RectTransform EGBackGroundRectTransform
+		public RectTransform EGBackGroundRectTransform
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_EGBackGroundRectTransform == null )
      			{
-		    		this.m_EGBackGroundRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EGBackGround");
+		    		this.m_EGBackGroundRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EGBackGround");
      			}
      			return this.m_EGBackGroundRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Button E_EnterMapButton
+		public Button E_EnterMapButton
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_EnterMapButton == null )
      			{
-		    		this.m_E_EnterMapButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EGBackGround/E_EnterMap");
+		    		this.m_E_EnterMapButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EGBackGround/E_EnterMap");
      			}
      			return this.m_E_EnterMapButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_EnterMapImage
+		public Image E_EnterMapImage
      	{
      		get
      		{
@@ -52,7 +52,7 @@ namespace ET.Client
      			}
      			if( this.m_E_EnterMapImage == null )
      			{
-		    		this.m_E_EnterMapImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EGBackGround/E_EnterMap");
+		    		this.m_E_EnterMapImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EGBackGround/E_EnterMap");
      			}
      			return this.m_E_EnterMapImage;
      		}
@@ -66,9 +66,9 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EGBackGroundRectTransform = null;
-		private UnityEngine.UI.Button m_E_EnterMapButton = null;
-		private UnityEngine.UI.Image m_E_EnterMapImage = null;
+		private RectTransform m_EGBackGroundRectTransform = null;
+		private Button m_E_EnterMapButton = null;
+		private Image m_E_EnterMapImage = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -1,5 +1,3 @@
-using System;
-
 namespace ET.Server
 {
     
@@ -14,18 +12,18 @@ namespace ET.Server
     
     
     [EntitySystemOf(typeof(PlayerOfflineOutTimeComponent))]
-    [FriendOfAttribute(typeof(ET.Server.PlayerOfflineOutTimeComponent))]
+    [FriendOfAttribute(typeof(PlayerOfflineOutTimeComponent))]
     public static partial class PlayerOfflineOutTimeComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.PlayerOfflineOutTimeComponent self)
+        private static void Awake(this PlayerOfflineOutTimeComponent self)
         {
             self.Timer = self.Root().GetComponent<TimerComponent>().NewOnceTimer(TimeInfo.Instance.ServerNow() + 5000, TimerInvokeType.PlayerOfflineOutTime, self);
 
         }
         
         [EntitySystem]
-        private static void Destroy(this ET.Server.PlayerOfflineOutTimeComponent self)
+        private static void Destroy(this PlayerOfflineOutTimeComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }

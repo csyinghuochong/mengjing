@@ -1,17 +1,17 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_UnionShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_UnionShow : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_UnionListItem>> ScrollItemUnionListItems;
 		public List<UnionListItem> ShowUnionListItems;
 		
-		public UnityEngine.RectTransform EG_UIUnionCreateRectTransform
+		public RectTransform EG_UIUnionCreateRectTransform
      	{
      		get
      		{
@@ -22,13 +22,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_UIUnionCreateRectTransform == null )
      			{
-		    		this.m_EG_UIUnionCreateRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_UIUnionCreate");
+		    		this.m_EG_UIUnionCreateRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_UIUnionCreate");
      			}
      			return this.m_EG_UIUnionCreateRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.InputField E_InputFieldPurposeInputField
+		public InputField E_InputFieldPurposeInputField
      	{
      		get
      		{
@@ -39,13 +39,13 @@ namespace ET.Client
      			}
      			if( this.m_E_InputFieldPurposeInputField == null )
      			{
-		    		this.m_E_InputFieldPurposeInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_InputFieldPurpose");
+		    		this.m_E_InputFieldPurposeInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_InputFieldPurpose");
      			}
      			return this.m_E_InputFieldPurposeInputField;
      		}
      	}
 
-		public UnityEngine.UI.Image E_InputFieldPurposeImage
+		public Image E_InputFieldPurposeImage
      	{
      		get
      		{
@@ -56,13 +56,13 @@ namespace ET.Client
      			}
      			if( this.m_E_InputFieldPurposeImage == null )
      			{
-		    		this.m_E_InputFieldPurposeImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_InputFieldPurpose");
+		    		this.m_E_InputFieldPurposeImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_InputFieldPurpose");
      			}
      			return this.m_E_InputFieldPurposeImage;
      		}
      	}
 
-		public UnityEngine.UI.InputField E_InputFieldNameInputField
+		public InputField E_InputFieldNameInputField
      	{
      		get
      		{
@@ -73,13 +73,13 @@ namespace ET.Client
      			}
      			if( this.m_E_InputFieldNameInputField == null )
      			{
-		    		this.m_E_InputFieldNameInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_InputFieldName");
+		    		this.m_E_InputFieldNameInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_InputFieldName");
      			}
      			return this.m_E_InputFieldNameInputField;
      		}
      	}
 
-		public UnityEngine.UI.Image E_InputFieldNameImage
+		public Image E_InputFieldNameImage
      	{
      		get
      		{
@@ -90,13 +90,13 @@ namespace ET.Client
      			}
      			if( this.m_E_InputFieldNameImage == null )
      			{
-		    		this.m_E_InputFieldNameImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_InputFieldName");
+		    		this.m_E_InputFieldNameImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_InputFieldName");
      			}
      			return this.m_E_InputFieldNameImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_CreateButton
+		public Button E_Btn_CreateButton
      	{
      		get
      		{
@@ -107,13 +107,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CreateButton == null )
      			{
-		    		this.m_E_Btn_CreateButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_Btn_Create");
+		    		this.m_E_Btn_CreateButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_Btn_Create");
      			}
      			return this.m_E_Btn_CreateButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_CreateImage
+		public Image E_Btn_CreateImage
      	{
      		get
      		{
@@ -124,13 +124,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CreateImage == null )
      			{
-		    		this.m_E_Btn_CreateImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_Btn_Create");
+		    		this.m_E_Btn_CreateImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_Btn_Create");
      			}
      			return this.m_E_Btn_CreateImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_Contion1Text
+		public Text E_Text_Contion1Text
      	{
      		get
      		{
@@ -141,13 +141,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_Contion1Text == null )
      			{
-		    		this.m_E_Text_Contion1Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_Text_Contion1");
+		    		this.m_E_Text_Contion1Text = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_Text_Contion1");
      			}
      			return this.m_E_Text_Contion1Text;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_Contion2Text
+		public Text E_Text_Contion2Text
      	{
      		get
      		{
@@ -158,13 +158,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_Contion2Text == null )
      			{
-		    		this.m_E_Text_Contion2Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_Text_Contion2");
+		    		this.m_E_Text_Contion2Text = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_Text_Contion2");
      			}
      			return this.m_E_Text_Contion2Text;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_ReturnButton
+		public Button E_Btn_ReturnButton
      	{
      		get
      		{
@@ -175,13 +175,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ReturnButton == null )
      			{
-		    		this.m_E_Btn_ReturnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_Btn_Return");
+		    		this.m_E_Btn_ReturnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_Btn_Return");
      			}
      			return this.m_E_Btn_ReturnButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_ReturnImage
+		public Image E_Btn_ReturnImage
      	{
      		get
      		{
@@ -192,13 +192,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ReturnImage == null )
      			{
-		    		this.m_E_Btn_ReturnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_Btn_Return");
+		    		this.m_E_Btn_ReturnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_UIUnionCreate/E_Btn_Return");
      			}
      			return this.m_E_Btn_ReturnImage;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_UIUnionListRectTransform
+		public RectTransform EG_UIUnionListRectTransform
      	{
      		get
      		{
@@ -209,13 +209,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_UIUnionListRectTransform == null )
      			{
-		    		this.m_EG_UIUnionListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_UIUnionList");
+		    		this.m_EG_UIUnionListRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_UIUnionList");
      			}
      			return this.m_EG_UIUnionListRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_UnionListItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_UnionListItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -226,13 +226,13 @@ namespace ET.Client
      			}
      			if( this.m_E_UnionListItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_UnionListItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_UIUnionList/E_UnionListItems");
+		    		this.m_E_UnionListItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"EG_UIUnionList/E_UnionListItems");
      			}
      			return this.m_E_UnionListItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonCreateButton
+		public Button E_ButtonCreateButton
      	{
      		get
      		{
@@ -243,13 +243,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCreateButton == null )
      			{
-		    		this.m_E_ButtonCreateButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_UIUnionList/E_ButtonCreate");
+		    		this.m_E_ButtonCreateButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_UIUnionList/E_ButtonCreate");
      			}
      			return this.m_E_ButtonCreateButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonCreateImage
+		public Image E_ButtonCreateImage
      	{
      		get
      		{
@@ -260,7 +260,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCreateImage == null )
      			{
-		    		this.m_E_ButtonCreateImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_UIUnionList/E_ButtonCreate");
+		    		this.m_E_ButtonCreateImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_UIUnionList/E_ButtonCreate");
      			}
      			return this.m_E_ButtonCreateImage;
      		}
@@ -298,21 +298,21 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EG_UIUnionCreateRectTransform = null;
-		private UnityEngine.UI.InputField m_E_InputFieldPurposeInputField = null;
-		private UnityEngine.UI.Image m_E_InputFieldPurposeImage = null;
-		private UnityEngine.UI.InputField m_E_InputFieldNameInputField = null;
-		private UnityEngine.UI.Image m_E_InputFieldNameImage = null;
-		private UnityEngine.UI.Button m_E_Btn_CreateButton = null;
-		private UnityEngine.UI.Image m_E_Btn_CreateImage = null;
-		private UnityEngine.UI.Text m_E_Text_Contion1Text = null;
-		private UnityEngine.UI.Text m_E_Text_Contion2Text = null;
-		private UnityEngine.UI.Button m_E_Btn_ReturnButton = null;
-		private UnityEngine.UI.Image m_E_Btn_ReturnImage = null;
-		private UnityEngine.RectTransform m_EG_UIUnionListRectTransform = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_UnionListItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Button m_E_ButtonCreateButton = null;
-		private UnityEngine.UI.Image m_E_ButtonCreateImage = null;
+		private RectTransform m_EG_UIUnionCreateRectTransform = null;
+		private InputField m_E_InputFieldPurposeInputField = null;
+		private Image m_E_InputFieldPurposeImage = null;
+		private InputField m_E_InputFieldNameInputField = null;
+		private Image m_E_InputFieldNameImage = null;
+		private Button m_E_Btn_CreateButton = null;
+		private Image m_E_Btn_CreateImage = null;
+		private Text m_E_Text_Contion1Text = null;
+		private Text m_E_Text_Contion2Text = null;
+		private Button m_E_Btn_ReturnButton = null;
+		private Image m_E_Btn_ReturnImage = null;
+		private RectTransform m_EG_UIUnionListRectTransform = null;
+		private LoopVerticalScrollRect m_E_UnionListItemsLoopVerticalScrollRect = null;
+		private Button m_E_ButtonCreateButton = null;
+		private Image m_E_ButtonCreateImage = null;
 		public Transform uiTransform = null;
 	}
 }

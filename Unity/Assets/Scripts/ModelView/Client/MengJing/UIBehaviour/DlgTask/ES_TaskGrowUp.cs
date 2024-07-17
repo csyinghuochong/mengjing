@@ -1,19 +1,19 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_TaskGrowUp : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_TaskGrowUp : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public TaskPro TaskPro;
 		public int CompeletTaskId;
 		public List<int> ShowTaskConfigIds = new();
 		public Dictionary<int, EntityRef<Scroll_Item_TaskGrowUpItem>> ScrollItemTaskGrowUpItems;
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_TaskGrowUpItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_TaskGrowUpItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -24,13 +24,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TaskGrowUpItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_TaskGrowUpItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_TaskGrowUpItems");
+		    		this.m_E_TaskGrowUpItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_TaskGrowUpItems");
      			}
      			return this.m_E_TaskGrowUpItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TaskNameTextText
+		public Text E_TaskNameTextText
      	{
      		get
      		{
@@ -41,13 +41,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TaskNameTextText == null )
      			{
-		    		this.m_E_TaskNameTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TaskNameText");
+		    		this.m_E_TaskNameTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TaskNameText");
      			}
      			return this.m_E_TaskNameTextText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_ProgressTextText
+		public Text E_ProgressTextText
      	{
      		get
      		{
@@ -58,13 +58,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ProgressTextText == null )
      			{
-		    		this.m_E_ProgressTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_ProgressText");
+		    		this.m_E_ProgressTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_ProgressText");
      			}
      			return this.m_E_ProgressTextText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TaskDescTextText
+		public Text E_TaskDescTextText
      	{
      		get
      		{
@@ -75,7 +75,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TaskDescTextText == null )
      			{
-		    		this.m_E_TaskDescTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TaskDescText");
+		    		this.m_E_TaskDescTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TaskDescText");
      			}
      			return this.m_E_TaskDescTextText;
      		}
@@ -101,7 +101,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_GetBtnButton
+		public Button E_GetBtnButton
      	{
      		get
      		{
@@ -112,13 +112,13 @@ namespace ET.Client
      			}
      			if( this.m_E_GetBtnButton == null )
      			{
-		    		this.m_E_GetBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_GetBtn");
+		    		this.m_E_GetBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_GetBtn");
      			}
      			return this.m_E_GetBtnButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_GetBtnImage
+		public Image E_GetBtnImage
      	{
      		get
      		{
@@ -129,13 +129,13 @@ namespace ET.Client
      			}
      			if( this.m_E_GetBtnImage == null )
      			{
-		    		this.m_E_GetBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_GetBtn");
+		    		this.m_E_GetBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_GetBtn");
      			}
      			return this.m_E_GetBtnImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_GiveBtnButton
+		public Button E_GiveBtnButton
      	{
      		get
      		{
@@ -146,13 +146,13 @@ namespace ET.Client
      			}
      			if( this.m_E_GiveBtnButton == null )
      			{
-		    		this.m_E_GiveBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_GiveBtn");
+		    		this.m_E_GiveBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_GiveBtn");
      			}
      			return this.m_E_GiveBtnButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_GiveBtnImage
+		public Image E_GiveBtnImage
      	{
      		get
      		{
@@ -163,13 +163,13 @@ namespace ET.Client
      			}
      			if( this.m_E_GiveBtnImage == null )
      			{
-		    		this.m_E_GiveBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_GiveBtn");
+		    		this.m_E_GiveBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_GiveBtn");
      			}
      			return this.m_E_GiveBtnImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_AcvityedImgImage
+		public Image E_AcvityedImgImage
      	{
      		get
      		{
@@ -180,7 +180,7 @@ namespace ET.Client
      			}
      			if( this.m_E_AcvityedImgImage == null )
      			{
-		    		this.m_E_AcvityedImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_AcvityedImg");
+		    		this.m_E_AcvityedImgImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_AcvityedImg");
      			}
      			return this.m_E_AcvityedImgImage;
      		}
@@ -213,16 +213,16 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_TaskGrowUpItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Text m_E_TaskNameTextText = null;
-		private UnityEngine.UI.Text m_E_ProgressTextText = null;
-		private UnityEngine.UI.Text m_E_TaskDescTextText = null;
+		private LoopVerticalScrollRect m_E_TaskGrowUpItemsLoopVerticalScrollRect = null;
+		private Text m_E_TaskNameTextText = null;
+		private Text m_E_ProgressTextText = null;
+		private Text m_E_TaskDescTextText = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
-		private UnityEngine.UI.Button m_E_GetBtnButton = null;
-		private UnityEngine.UI.Image m_E_GetBtnImage = null;
-		private UnityEngine.UI.Button m_E_GiveBtnButton = null;
-		private UnityEngine.UI.Image m_E_GiveBtnImage = null;
-		private UnityEngine.UI.Image m_E_AcvityedImgImage = null;
+		private Button m_E_GetBtnButton = null;
+		private Image m_E_GetBtnImage = null;
+		private Button m_E_GiveBtnButton = null;
+		private Image m_E_GiveBtnImage = null;
+		private Image m_E_AcvityedImgImage = null;
 		public Transform uiTransform = null;
 	}
 }

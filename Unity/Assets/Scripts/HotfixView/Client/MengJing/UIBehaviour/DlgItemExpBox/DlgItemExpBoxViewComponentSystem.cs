@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgItemExpBoxViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgItemExpBoxViewComponent))]
+	[FriendOfAttribute(typeof(DlgItemExpBoxViewComponent))]
 	public static partial class DlgItemExpBoxViewComponentSystem
 	{
 		[EntitySystem]

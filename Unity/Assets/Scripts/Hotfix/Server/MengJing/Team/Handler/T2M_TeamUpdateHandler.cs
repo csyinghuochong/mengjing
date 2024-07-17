@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Team)]
     public class T2M_TeamUpdateHandler : MessageHandler<Unit, T2M_TeamUpdateRequest>

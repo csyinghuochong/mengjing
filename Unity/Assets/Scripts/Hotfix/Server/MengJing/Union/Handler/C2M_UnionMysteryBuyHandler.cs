@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_UnionMysteryBuyHandler : MessageLocationHandler<Unit, C2M_UnionMysteryBuyRequest, M2C_UnionMysteryBuyResponse>

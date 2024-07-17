@@ -1,7 +1,4 @@
-﻿using System;
-
-
-namespace ET.Server
+﻿namespace ET.Server
 {
 
     [MessageHandler(SceneType.PaiMai)]

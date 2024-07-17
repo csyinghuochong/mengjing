@@ -1,5 +1,4 @@
 using System;
-using ET;
 
 namespace ET.Server
 {
@@ -9,7 +8,7 @@ namespace ET.Server
     public static partial class FangChenMiComponentSSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.FangChenMiComponentS self)
+        private static void Awake(this FangChenMiComponentS self)
         {
 
         }

@@ -19,7 +19,7 @@ namespace ET.Client
         
         
         [EntitySystem]
-        private static void Destroy(this ET.Client.UIPathComponent self)
+        private static void Destroy(this UIPathComponent self)
         {
             self.WindowPrefabPath.Clear();
             self.WindowTypeIdDict.Clear();

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,12 +27,12 @@ public class CanvasAdjust : MonoBehaviour
         if (adjustor == 0)
         {
             canvasScalerTemp.matchWidthOrHeight = 1;
-            UnityEngine.Debug.LogWarning("adjustor == 0");
+            Debug.LogWarning("adjustor == 0");
         }
         else
         {
             canvasScalerTemp.matchWidthOrHeight = 0;
-            UnityEngine.Debug.LogWarning("adjustor == 1");
+            Debug.LogWarning("adjustor == 1");
         }
     }
 

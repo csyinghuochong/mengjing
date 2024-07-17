@@ -10,12 +10,12 @@ namespace ET.Server
     public static partial class JiaYuanComponentSSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.JiaYuanComponentS self)
+        private static void Awake(this JiaYuanComponentS self)
         {
             self.InitOpenList();
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.JiaYuanComponentS self)
+        private static void Destroy(this JiaYuanComponentS self)
         {
 
         }

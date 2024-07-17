@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgWatchMenuViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgWatchMenuViewComponent))]
+	[FriendOfAttribute(typeof(DlgWatchMenuViewComponent))]
 	public static partial class DlgWatchMenuViewComponentSystem
 	{
 		[EntitySystem]

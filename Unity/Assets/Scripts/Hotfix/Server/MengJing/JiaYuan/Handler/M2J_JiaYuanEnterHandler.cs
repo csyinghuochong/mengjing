@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.JiaYuan)]
     public class M2J_JiaYuanEnterHandler : MessageHandler<Scene, M2J_JiaYuanEnterRequest, J2M_JiaYuanEnterResponse>

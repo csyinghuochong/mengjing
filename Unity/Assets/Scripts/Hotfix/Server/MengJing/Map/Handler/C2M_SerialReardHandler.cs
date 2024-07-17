@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_SerialReardHandler : MessageLocationHandler<Unit, C2M_SerialReardRequest, M2C_SerialReardResponse>

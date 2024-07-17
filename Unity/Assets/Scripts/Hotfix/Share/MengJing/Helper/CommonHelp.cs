@@ -327,8 +327,8 @@ namespace  ET
             if (obj == null || obj is string || obj.GetType().IsValueType) return obj;
 
             object retval = Activator.CreateInstance(obj.GetType());
-            System.Reflection.FieldInfo[] fields = obj.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
-            foreach (System.Reflection.FieldInfo field in fields)
+            FieldInfo[] fields = obj.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+            foreach (FieldInfo field in fields)
             {
                 //try { field.SetValue(retval, DeepCopy(field.GetValue(obj))); }
                 try { field.SetValue(retval, (field.GetValue(obj))); }
@@ -343,8 +343,8 @@ namespace  ET
             if (obj == null || obj is string || obj.GetType().IsValueType) return obj;
 
             object retval = Activator.CreateInstance(obj.GetType());
-            System.Reflection.FieldInfo[] fields = obj.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
-            foreach (System.Reflection.FieldInfo field in fields)
+            FieldInfo[] fields = obj.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+            foreach (FieldInfo field in fields)
             {
                 try { field.SetValue(retval, DeepCopy(field.GetValue(obj))); }
                 catch { }
@@ -858,7 +858,7 @@ namespace  ET
 
             //计算最终值
             float retunrnValue = (float)(randomMinValue + randomChaValue * randomRangeValue_Now);
-            retunrnValue = (float)(System.Math.Round(retunrnValue, 3));
+            retunrnValue = (float)(Math.Round(retunrnValue, 3));
             return retunrnValue;
         }
         

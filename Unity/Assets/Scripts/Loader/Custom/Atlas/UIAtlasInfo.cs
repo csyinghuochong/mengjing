@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using KO;
 using KO.UI.Common.Atlas;
 using UnityEngine;
 

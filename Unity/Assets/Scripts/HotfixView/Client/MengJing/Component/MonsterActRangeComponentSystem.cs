@@ -9,7 +9,7 @@ namespace ET.Client
     public static partial class MonsterActRangeComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.MonsterActRangeComponent self, int args2)
+        private static void Awake(this MonsterActRangeComponent self, int args2)
         {
             self.IsInAck = false;
             self.MonsterActRange = null;
@@ -18,7 +18,7 @@ namespace ET.Client
             self.BornPositon = self.GetParent<Unit>().GetBornPostion();
         }
         [EntitySystem]
-        private static void Destroy(this ET.Client.MonsterActRangeComponent self)
+        private static void Destroy(this MonsterActRangeComponent self)
         {
             string path = ABPathHelper.GetEffetPath("MonsterActRange");
             GameObjectLoadHelper.RecoverGameObject(path, self.MonsterActRange);

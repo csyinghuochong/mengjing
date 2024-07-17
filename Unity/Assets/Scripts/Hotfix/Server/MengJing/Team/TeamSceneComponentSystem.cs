@@ -8,7 +8,7 @@ namespace ET.Server
     public static partial class TeamSceneComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.TeamSceneComponent self)
+        private static void Awake(this TeamSceneComponent self)
         {
         }
 

@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgRechargeRewardViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgRechargeRewardViewComponent))]
+	[FriendOfAttribute(typeof(DlgRechargeRewardViewComponent))]
 	public static partial class DlgRechargeRewardViewComponentSystem
 	{
 		[EntitySystem]

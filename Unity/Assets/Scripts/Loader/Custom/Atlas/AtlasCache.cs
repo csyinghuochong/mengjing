@@ -1,9 +1,10 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace KO.UI.Common.Atlas
 {
-    [System.Serializable]
+    [Serializable]
     public class SpriteCache
     {
         public bool IsAvailable
@@ -11,7 +12,7 @@ namespace KO.UI.Common.Atlas
             get { return Sprite != null; }
         }
 
-        [System.NonSerialized]
+        [NonSerialized]
         public SpriteCacheGroup Group;
         public string Name;
         public Sprite Sprite;
@@ -19,14 +20,14 @@ namespace KO.UI.Common.Atlas
         public float Height;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class SpriteCacheGroup
     {
         public Texture2D Texture;
         public List<SpriteCache> Sprites = new List<SpriteCache>();
     }
 
-    [System.Serializable]
+    [Serializable]
     public class AtlasCache
     {
         public bool Used = false;

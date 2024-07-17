@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [FriendOf(typeof (GameObjectComponent))]
     [Event(SceneType.Current)]

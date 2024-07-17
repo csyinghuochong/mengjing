@@ -1,12 +1,12 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RoleHuiShou : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_RoleHuiShou : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public BagInfo[] HuiShouInfos = new BagInfo[8];
 		public EntityRef<ES_CommonItem>[] HuiShouUIList = new EntityRef<ES_CommonItem>[8];
@@ -185,7 +185,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_HuiShouButton
+		public Button E_HuiShouButton
      	{
      		get
      		{
@@ -196,13 +196,13 @@ namespace ET.Client
      			}
      			if( this.m_E_HuiShouButton == null )
      			{
-		    		this.m_E_HuiShouButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_HuiShou");
+		    		this.m_E_HuiShouButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/E_HuiShou");
      			}
      			return this.m_E_HuiShouButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_HuiShouImage
+		public Image E_HuiShouImage
      	{
      		get
      		{
@@ -213,13 +213,13 @@ namespace ET.Client
      			}
      			if( this.m_E_HuiShouImage == null )
      			{
-		    		this.m_E_HuiShouImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_HuiShou");
+		    		this.m_E_HuiShouImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/E_HuiShou");
      			}
      			return this.m_E_HuiShouImage;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -230,13 +230,13 @@ namespace ET.Client
      			}
      			if( this.m_E_BagItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_BagItems");
+		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_BagItems");
      			}
      			return this.m_E_BagItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Button E_YiJianInputButton
+		public Button E_YiJianInputButton
      	{
      		get
      		{
@@ -247,13 +247,13 @@ namespace ET.Client
      			}
      			if( this.m_E_YiJianInputButton == null )
      			{
-		    		this.m_E_YiJianInputButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_YiJianInput");
+		    		this.m_E_YiJianInputButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Left/E_YiJianInput");
      			}
      			return this.m_E_YiJianInputButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_YiJianInputImage
+		public Image E_YiJianInputImage
      	{
      		get
      		{
@@ -264,7 +264,7 @@ namespace ET.Client
      			}
      			if( this.m_E_YiJianInputImage == null )
      			{
-		    		this.m_E_YiJianInputImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_YiJianInput");
+		    		this.m_E_YiJianInputImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/E_YiJianInput");
      			}
      			return this.m_E_YiJianInputImage;
      		}
@@ -298,11 +298,11 @@ namespace ET.Client
 		private EntityRef<ES_CommonItem> m_es_commonitem_7 = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem_8 = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
-		private UnityEngine.UI.Button m_E_HuiShouButton = null;
-		private UnityEngine.UI.Image m_E_HuiShouImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Button m_E_YiJianInputButton = null;
-		private UnityEngine.UI.Image m_E_YiJianInputImage = null;
+		private Button m_E_HuiShouButton = null;
+		private Image m_E_HuiShouImage = null;
+		private LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
+		private Button m_E_YiJianInputButton = null;
+		private Image m_E_YiJianInputImage = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.FubenCenter)]
     public class M2F_FubenSceneIdHandler : MessageHandler<Scene, M2F_FubenSceneIdRequest, F2M_FubenSceneIdResponse>

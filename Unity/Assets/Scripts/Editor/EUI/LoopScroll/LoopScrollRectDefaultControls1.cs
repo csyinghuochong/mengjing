@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-
-namespace UnityEngine.UI
+﻿namespace UnityEngine.UI
 {
     public static class LoopScrollRectDefaultControls
     {
@@ -100,8 +97,8 @@ namespace UnityEngine.UI
             scrollRect.verticalScrollbar = null;
             scrollRect.horizontal = true;
             scrollRect.vertical = false;
-            scrollRect.horizontalScrollbarVisibility = LoopScrollRect.ScrollbarVisibility.Permanent;
-            scrollRect.verticalScrollbarVisibility = LoopScrollRect.ScrollbarVisibility.Permanent;
+            scrollRect.horizontalScrollbarVisibility = LoopScrollRectBase.ScrollbarVisibility.Permanent;
+            scrollRect.verticalScrollbarVisibility = LoopScrollRectBase.ScrollbarVisibility.Permanent;
             scrollRect.horizontalScrollbarSpacing = 0;
             scrollRect.verticalScrollbarSpacing = 0;
             
@@ -153,8 +150,8 @@ namespace UnityEngine.UI
             scrollRect.verticalScrollbar = null;
             scrollRect.horizontal = false;
             scrollRect.vertical = true;
-            scrollRect.horizontalScrollbarVisibility = LoopScrollRect.ScrollbarVisibility.Permanent;
-            scrollRect.verticalScrollbarVisibility = LoopScrollRect.ScrollbarVisibility.Permanent;
+            scrollRect.horizontalScrollbarVisibility = LoopScrollRectBase.ScrollbarVisibility.Permanent;
+            scrollRect.verticalScrollbarVisibility = LoopScrollRectBase.ScrollbarVisibility.Permanent;
             scrollRect.horizontalScrollbarSpacing = 0;
             scrollRect.verticalScrollbarSpacing = 0;
 

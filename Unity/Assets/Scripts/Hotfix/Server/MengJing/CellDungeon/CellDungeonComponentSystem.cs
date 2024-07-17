@@ -9,7 +9,7 @@ namespace ET.Server
     public static partial class CellDungeonComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.CellDungeonComponent self)
+        private static void Awake(this CellDungeonComponent self)
         {
         }
 

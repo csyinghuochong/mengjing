@@ -1,16 +1,16 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PaiMaiDuiHuan : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_PaiMaiDuiHuan : Entity,IAwake<Transform>,IDestroy 
 	{
 		public long ExchangeValue;
 		public int ExchangeZuanShi;
 		
-		public UnityEngine.UI.Button E_Btn_DuiHuanButton
+		public Button E_Btn_DuiHuanButton
      	{
      		get
      		{
@@ -21,13 +21,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_DuiHuanButton == null )
      			{
-		    		this.m_E_Btn_DuiHuanButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_DuiHuan");
+		    		this.m_E_Btn_DuiHuanButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_DuiHuan");
      			}
      			return this.m_E_Btn_DuiHuanButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_DuiHuanImage
+		public Image E_Btn_DuiHuanImage
      	{
      		get
      		{
@@ -38,13 +38,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_DuiHuanImage == null )
      			{
-		    		this.m_E_Btn_DuiHuanImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_DuiHuan");
+		    		this.m_E_Btn_DuiHuanImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_DuiHuan");
      			}
      			return this.m_E_Btn_DuiHuanImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_ShopButton
+		public Button E_Btn_ShopButton
      	{
      		get
      		{
@@ -55,13 +55,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ShopButton == null )
      			{
-		    		this.m_E_Btn_ShopButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_Shop");
+		    		this.m_E_Btn_ShopButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_Shop");
      			}
      			return this.m_E_Btn_ShopButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_ShopImage
+		public Image E_Btn_ShopImage
      	{
      		get
      		{
@@ -72,13 +72,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ShopImage == null )
      			{
-		    		this.m_E_Btn_ShopImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_Shop");
+		    		this.m_E_Btn_ShopImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_Shop");
      			}
      			return this.m_E_Btn_ShopImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_DuiHuan_GoldText
+		public Text E_DuiHuan_GoldText
      	{
      		get
      		{
@@ -89,13 +89,13 @@ namespace ET.Client
      			}
      			if( this.m_E_DuiHuan_GoldText == null )
      			{
-		    		this.m_E_DuiHuan_GoldText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"tip_1/E_DuiHuan_Gold");
+		    		this.m_E_DuiHuan_GoldText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"tip_1/E_DuiHuan_Gold");
      			}
      			return this.m_E_DuiHuan_GoldText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_BuyNum_jia1Button
+		public Button E_Btn_BuyNum_jia1Button
      	{
      		get
      		{
@@ -106,13 +106,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_BuyNum_jia1Button == null )
      			{
-		    		this.m_E_Btn_BuyNum_jia1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"duihuan_1/E_Btn_BuyNum_jia1");
+		    		this.m_E_Btn_BuyNum_jia1Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"duihuan_1/E_Btn_BuyNum_jia1");
      			}
      			return this.m_E_Btn_BuyNum_jia1Button;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_BuyNum_jia1Image
+		public Image E_Btn_BuyNum_jia1Image
      	{
      		get
      		{
@@ -123,13 +123,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_BuyNum_jia1Image == null )
      			{
-		    		this.m_E_Btn_BuyNum_jia1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"duihuan_1/E_Btn_BuyNum_jia1");
+		    		this.m_E_Btn_BuyNum_jia1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"duihuan_1/E_Btn_BuyNum_jia1");
      			}
      			return this.m_E_Btn_BuyNum_jia1Image;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_BuyNum_jia10Button
+		public Button E_Btn_BuyNum_jia10Button
      	{
      		get
      		{
@@ -140,13 +140,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_BuyNum_jia10Button == null )
      			{
-		    		this.m_E_Btn_BuyNum_jia10Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"duihuan_1/E_Btn_BuyNum_jia10");
+		    		this.m_E_Btn_BuyNum_jia10Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"duihuan_1/E_Btn_BuyNum_jia10");
      			}
      			return this.m_E_Btn_BuyNum_jia10Button;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_BuyNum_jia10Image
+		public Image E_Btn_BuyNum_jia10Image
      	{
      		get
      		{
@@ -157,13 +157,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_BuyNum_jia10Image == null )
      			{
-		    		this.m_E_Btn_BuyNum_jia10Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"duihuan_1/E_Btn_BuyNum_jia10");
+		    		this.m_E_Btn_BuyNum_jia10Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"duihuan_1/E_Btn_BuyNum_jia10");
      			}
      			return this.m_E_Btn_BuyNum_jia10Image;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_BuyNum_jian1Button
+		public Button E_Btn_BuyNum_jian1Button
      	{
      		get
      		{
@@ -174,13 +174,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_BuyNum_jian1Button == null )
      			{
-		    		this.m_E_Btn_BuyNum_jian1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"duihuan_1/E_Btn_BuyNum_jian1");
+		    		this.m_E_Btn_BuyNum_jian1Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"duihuan_1/E_Btn_BuyNum_jian1");
      			}
      			return this.m_E_Btn_BuyNum_jian1Button;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_BuyNum_jian1Image
+		public Image E_Btn_BuyNum_jian1Image
      	{
      		get
      		{
@@ -191,13 +191,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_BuyNum_jian1Image == null )
      			{
-		    		this.m_E_Btn_BuyNum_jian1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"duihuan_1/E_Btn_BuyNum_jian1");
+		    		this.m_E_Btn_BuyNum_jian1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"duihuan_1/E_Btn_BuyNum_jian1");
      			}
      			return this.m_E_Btn_BuyNum_jian1Image;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_BuyNum_jian10Button
+		public Button E_Btn_BuyNum_jian10Button
      	{
      		get
      		{
@@ -208,13 +208,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_BuyNum_jian10Button == null )
      			{
-		    		this.m_E_Btn_BuyNum_jian10Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"duihuan_1/E_Btn_BuyNum_jian10");
+		    		this.m_E_Btn_BuyNum_jian10Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"duihuan_1/E_Btn_BuyNum_jian10");
      			}
      			return this.m_E_Btn_BuyNum_jian10Button;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_BuyNum_jian10Image
+		public Image E_Btn_BuyNum_jian10Image
      	{
      		get
      		{
@@ -225,13 +225,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_BuyNum_jian10Image == null )
      			{
-		    		this.m_E_Btn_BuyNum_jian10Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"duihuan_1/E_Btn_BuyNum_jian10");
+		    		this.m_E_Btn_BuyNum_jian10Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"duihuan_1/E_Btn_BuyNum_jian10");
      			}
      			return this.m_E_Btn_BuyNum_jian10Image;
      		}
      	}
 
-		public UnityEngine.UI.InputField E_Lab_RmbNumInputField
+		public InputField E_Lab_RmbNumInputField
      	{
      		get
      		{
@@ -242,13 +242,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_RmbNumInputField == null )
      			{
-		    		this.m_E_Lab_RmbNumInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"duihuan_1/E_Lab_RmbNum");
+		    		this.m_E_Lab_RmbNumInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"duihuan_1/E_Lab_RmbNum");
      			}
      			return this.m_E_Lab_RmbNumInputField;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Lab_RmbNumImage
+		public Image E_Lab_RmbNumImage
      	{
      		get
      		{
@@ -259,13 +259,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_RmbNumImage == null )
      			{
-		    		this.m_E_Lab_RmbNumImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"duihuan_1/E_Lab_RmbNum");
+		    		this.m_E_Lab_RmbNumImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"duihuan_1/E_Lab_RmbNum");
      			}
      			return this.m_E_Lab_RmbNumImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_DuiHuanGoldProShowText
+		public Text E_Lab_DuiHuanGoldProShowText
      	{
      		get
      		{
@@ -276,13 +276,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_DuiHuanGoldProShowText == null )
      			{
-		    		this.m_E_Lab_DuiHuanGoldProShowText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_DuiHuanGoldProShow");
+		    		this.m_E_Lab_DuiHuanGoldProShowText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_DuiHuanGoldProShow");
      			}
      			return this.m_E_Lab_DuiHuanGoldProShowText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_DuiHuanZuanShiProShowText
+		public Text E_Lab_DuiHuanZuanShiProShowText
      	{
      		get
      		{
@@ -293,13 +293,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_DuiHuanZuanShiProShowText == null )
      			{
-		    		this.m_E_Lab_DuiHuanZuanShiProShowText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_DuiHuanZuanShiProShow");
+		    		this.m_E_Lab_DuiHuanZuanShiProShowText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_DuiHuanZuanShiProShow");
      			}
      			return this.m_E_Lab_DuiHuanZuanShiProShowText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_WeiJingGoldText
+		public Text E_Lab_WeiJingGoldText
      	{
      		get
      		{
@@ -310,7 +310,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_WeiJingGoldText == null )
      			{
-		    		this.m_E_Lab_WeiJingGoldText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_WeiJingGold");
+		    		this.m_E_Lab_WeiJingGoldText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_WeiJingGold");
      			}
      			return this.m_E_Lab_WeiJingGoldText;
      		}
@@ -351,24 +351,24 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_Btn_DuiHuanButton = null;
-		private UnityEngine.UI.Image m_E_Btn_DuiHuanImage = null;
-		private UnityEngine.UI.Button m_E_Btn_ShopButton = null;
-		private UnityEngine.UI.Image m_E_Btn_ShopImage = null;
-		private UnityEngine.UI.Text m_E_DuiHuan_GoldText = null;
-		private UnityEngine.UI.Button m_E_Btn_BuyNum_jia1Button = null;
-		private UnityEngine.UI.Image m_E_Btn_BuyNum_jia1Image = null;
-		private UnityEngine.UI.Button m_E_Btn_BuyNum_jia10Button = null;
-		private UnityEngine.UI.Image m_E_Btn_BuyNum_jia10Image = null;
-		private UnityEngine.UI.Button m_E_Btn_BuyNum_jian1Button = null;
-		private UnityEngine.UI.Image m_E_Btn_BuyNum_jian1Image = null;
-		private UnityEngine.UI.Button m_E_Btn_BuyNum_jian10Button = null;
-		private UnityEngine.UI.Image m_E_Btn_BuyNum_jian10Image = null;
-		private UnityEngine.UI.InputField m_E_Lab_RmbNumInputField = null;
-		private UnityEngine.UI.Image m_E_Lab_RmbNumImage = null;
-		private UnityEngine.UI.Text m_E_Lab_DuiHuanGoldProShowText = null;
-		private UnityEngine.UI.Text m_E_Lab_DuiHuanZuanShiProShowText = null;
-		private UnityEngine.UI.Text m_E_Lab_WeiJingGoldText = null;
+		private Button m_E_Btn_DuiHuanButton = null;
+		private Image m_E_Btn_DuiHuanImage = null;
+		private Button m_E_Btn_ShopButton = null;
+		private Image m_E_Btn_ShopImage = null;
+		private Text m_E_DuiHuan_GoldText = null;
+		private Button m_E_Btn_BuyNum_jia1Button = null;
+		private Image m_E_Btn_BuyNum_jia1Image = null;
+		private Button m_E_Btn_BuyNum_jia10Button = null;
+		private Image m_E_Btn_BuyNum_jia10Image = null;
+		private Button m_E_Btn_BuyNum_jian1Button = null;
+		private Image m_E_Btn_BuyNum_jian1Image = null;
+		private Button m_E_Btn_BuyNum_jian10Button = null;
+		private Image m_E_Btn_BuyNum_jian10Image = null;
+		private InputField m_E_Lab_RmbNumInputField = null;
+		private Image m_E_Lab_RmbNumImage = null;
+		private Text m_E_Lab_DuiHuanGoldProShowText = null;
+		private Text m_E_Lab_DuiHuanZuanShiProShowText = null;
+		private Text m_E_Lab_WeiJingGoldText = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgTeamApplyListViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgTeamApplyListViewComponent))]
+	[FriendOfAttribute(typeof(DlgTeamApplyListViewComponent))]
 	public static partial class DlgTeamApplyListViewComponentSystem
 	{
 		[EntitySystem]

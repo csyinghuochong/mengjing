@@ -1,9 +1,7 @@
+using System.Collections.Generic;
+
 namespace ET
 {
-
-    using System.Linq;
-    using System.Collections.Generic;
-
     //成就类型数据
     [EnableClass]
     public class PaiMaiTypeData

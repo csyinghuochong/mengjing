@@ -1,6 +1,3 @@
-using UnityEngine;
-using System.Collections;
-
 namespace UnityEngine.UI
 {
     [AddComponentMenu("UI/Loop Horizontal Scroll Rect", 50)]

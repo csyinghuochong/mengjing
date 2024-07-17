@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using FantasyRPG;
-using UnityEngine;
+﻿using FantasyRPG;
 
 public class PanelStage : PanelBase
 {

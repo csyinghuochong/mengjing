@@ -7,14 +7,14 @@ namespace ET.Client
     public static partial class BuffManagerComponentCSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.BuffManagerComponentC self)
+        private static void Awake(this BuffManagerComponentC self)
         {
             self.t_Buffs.Clear();
             self.m_Buffs.Clear();
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Client.BuffManagerComponentC self)
+        private static void Destroy(this BuffManagerComponentC self)
         {
             self.OnFinish();
         }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Popularize)]
     public class C2Popularize_UploadHandler : MessageHandler<Scene, C2Popularize_UploadRequest, Popularize2C_UploadResponse>

@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgPetEggChouKaRewardViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgPetEggChouKaRewardViewComponent))]
+	[FriendOfAttribute(typeof(DlgPetEggChouKaRewardViewComponent))]
 	public static partial class DlgPetEggChouKaRewardViewComponentSystem
 	{
 		[EntitySystem]

@@ -1,7 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
-using Debug = System.Diagnostics.Debug;
 
 namespace ET.Client
 {

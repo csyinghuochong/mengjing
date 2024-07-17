@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageSessionHandler(SceneType.Gate)]
     public class C2G_LoginGameGateHandler: MessageSessionHandler<C2G_LoginGameGate, G2C_LoginGameGate>

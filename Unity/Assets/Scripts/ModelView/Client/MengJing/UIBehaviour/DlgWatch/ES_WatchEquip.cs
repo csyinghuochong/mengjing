@@ -1,11 +1,10 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_WatchEquip : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_WatchEquip : Entity,IAwake<Transform>,IDestroy 
 	{
 		public ES_EquipSet ES_EquipSet1
      	{

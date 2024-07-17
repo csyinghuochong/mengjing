@@ -1,17 +1,17 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_JiaYuanDaShiShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_JiaYuanDaShiShow : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public List<int> ShowIndex = new();
 		public Dictionary<int, EntityRef<Scroll_Item_JiaYuanDaShiShowItem>> ScrollItemJiaYuanDaShiShowItems;
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_JiaYuanDaShiShowItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_JiaYuanDaShiShowItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -22,7 +22,7 @@ namespace ET.Client
      			}
      			if( this.m_E_JiaYuanDaShiShowItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_JiaYuanDaShiShowItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_JiaYuanDaShiShowItems");
+		    		this.m_E_JiaYuanDaShiShowItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_JiaYuanDaShiShowItems");
      			}
      			return this.m_E_JiaYuanDaShiShowItemsLoopVerticalScrollRect;
      		}
@@ -46,7 +46,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_JiaYuanDaShiShowItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_JiaYuanDaShiShowItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

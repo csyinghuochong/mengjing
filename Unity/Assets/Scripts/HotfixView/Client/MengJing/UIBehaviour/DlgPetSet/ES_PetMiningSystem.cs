@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +10,7 @@ namespace ET.Client
     public static partial class ES_PetMiningSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.ES_PetMining self, UnityEngine.Transform args2)
+        private static void Awake(this ES_PetMining self, Transform args2)
         {
             self.uiTransform = args2;
 
@@ -28,7 +27,7 @@ namespace ET.Client
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Client.ES_PetMining self)
+        private static void Destroy(this ES_PetMining self)
         {
             self.DestroyWidget();
         }

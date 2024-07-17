@@ -8,12 +8,12 @@ namespace ET.Client
     public static partial class ChengJiuComponentCSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.ChengJiuComponentC self)
+        private static void Awake(this ChengJiuComponentC self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Client.ChengJiuComponentC self)
+        private static void Destroy(this ChengJiuComponentC self)
         {
         }
 

@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgLoading))]
 	[EnableMethod]
 	public  class DlgLoadingViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.RectTransform EG_BackSetRectTransform
+		public RectTransform EG_BackSetRectTransform
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_BackSetRectTransform == null )
      			{
-		    		this.m_EG_BackSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_BackSet");
+		    		this.m_EG_BackSetRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_BackSet");
      			}
      			return this.m_EG_BackSetRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Back_1Image
+		public Image E_Back_1Image
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Back_1Image == null )
      			{
-		    		this.m_E_Back_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_BackSet/E_Back_1");
+		    		this.m_E_Back_1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_BackSet/E_Back_1");
      			}
      			return this.m_E_Back_1Image;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_LodingValueImage
+		public Image E_Img_LodingValueImage
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Img_LodingValueImage == null )
      			{
-		    		this.m_E_Img_LodingValueImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"GameObject/E_Img_LodingValue");
+		    		this.m_E_Img_LodingValueImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"GameObject/E_Img_LodingValue");
      			}
      			return this.m_E_Img_LodingValueImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageImage
+		public Image E_ImageImage
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageImage == null )
      			{
-		    		this.m_E_ImageImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"GameObject/E_Image");
+		    		this.m_E_ImageImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"GameObject/E_Image");
      			}
      			return this.m_E_ImageImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_TextText
+		public Text E_Lab_TextText
      	{
      		get
      		{
@@ -86,7 +86,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_TextText == null )
      			{
-		    		this.m_E_Lab_TextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"GameObject/E_Lab_Text");
+		    		this.m_E_Lab_TextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"GameObject/E_Lab_Text");
      			}
      			return this.m_E_Lab_TextText;
      		}
@@ -102,11 +102,11 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EG_BackSetRectTransform = null;
-		private UnityEngine.UI.Image m_E_Back_1Image = null;
-		private UnityEngine.UI.Image m_E_Img_LodingValueImage = null;
-		private UnityEngine.UI.Image m_E_ImageImage = null;
-		private UnityEngine.UI.Text m_E_Lab_TextText = null;
+		private RectTransform m_EG_BackSetRectTransform = null;
+		private Image m_E_Back_1Image = null;
+		private Image m_E_Img_LodingValueImage = null;
+		private Image m_E_ImageImage = null;
+		private Text m_E_Lab_TextText = null;
 		public Transform uiTransform = null;
 	}
 }

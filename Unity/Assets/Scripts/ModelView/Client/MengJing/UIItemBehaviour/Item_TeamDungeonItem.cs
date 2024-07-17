@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -23,7 +23,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.UI.Button E_Button_ApplyButton
+		public Button E_Button_ApplyButton
      	{
      		get
      		{
@@ -36,18 +36,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Button_ApplyButton == null )
      				{
-		    			this.m_E_Button_ApplyButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Button_Apply");
+		    			this.m_E_Button_ApplyButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Button_Apply");
      				}
      				return this.m_E_Button_ApplyButton;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Button_Apply");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Button_Apply");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_Button_ApplyImage
+		public Image E_Button_ApplyImage
      	{
      		get
      		{
@@ -60,18 +60,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Button_ApplyImage == null )
      				{
-		    			this.m_E_Button_ApplyImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Button_Apply");
+		    			this.m_E_Button_ApplyImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Button_Apply");
      				}
      				return this.m_E_Button_ApplyImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Button_Apply");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Button_Apply");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_NameText
+		public Text E_Text_NameText
      	{
      		get
      		{
@@ -84,18 +84,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Text_NameText == null )
      				{
-		    			this.m_E_Text_NameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_Name");
+		    			this.m_E_Text_NameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Name");
      				}
      				return this.m_E_Text_NameText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_Name");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Name");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_ConditionText
+		public Text E_Text_ConditionText
      	{
      		get
      		{
@@ -108,18 +108,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Text_ConditionText == null )
      				{
-		    			this.m_E_Text_ConditionText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_Condition");
+		    			this.m_E_Text_ConditionText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Condition");
      				}
      				return this.m_E_Text_ConditionText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_Condition");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Condition");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_TuijianText
+		public Text E_Text_TuijianText
      	{
      		get
      		{
@@ -132,18 +132,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Text_TuijianText == null )
      				{
-		    			this.m_E_Text_TuijianText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_Tuijian");
+		    			this.m_E_Text_TuijianText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Tuijian");
      				}
      				return this.m_E_Text_TuijianText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_Tuijian");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Tuijian");
      			}
      		}
      	}
 
-		public UnityEngine.RectTransform EG_ImagePlayerNull_1RectTransform
+		public RectTransform EG_ImagePlayerNull_1RectTransform
      	{
      		get
      		{
@@ -156,18 +156,18 @@ namespace ET.Client
      			{
      				if( this.m_EG_ImagePlayerNull_1RectTransform == null )
      				{
-		    			this.m_EG_ImagePlayerNull_1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayerNull_1");
+		    			this.m_EG_ImagePlayerNull_1RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayerNull_1");
      				}
      				return this.m_EG_ImagePlayerNull_1RectTransform;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayerNull_1");
+		    		return UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayerNull_1");
      			}
      		}
      	}
 
-		public UnityEngine.RectTransform EG_ImagePlayerNull_2RectTransform
+		public RectTransform EG_ImagePlayerNull_2RectTransform
      	{
      		get
      		{
@@ -180,18 +180,18 @@ namespace ET.Client
      			{
      				if( this.m_EG_ImagePlayerNull_2RectTransform == null )
      				{
-		    			this.m_EG_ImagePlayerNull_2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayerNull_2");
+		    			this.m_EG_ImagePlayerNull_2RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayerNull_2");
      				}
      				return this.m_EG_ImagePlayerNull_2RectTransform;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayerNull_2");
+		    		return UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayerNull_2");
      			}
      		}
      	}
 
-		public UnityEngine.RectTransform EG_ImagePlayerNull_3RectTransform
+		public RectTransform EG_ImagePlayerNull_3RectTransform
      	{
      		get
      		{
@@ -204,18 +204,18 @@ namespace ET.Client
      			{
      				if( this.m_EG_ImagePlayerNull_3RectTransform == null )
      				{
-		    			this.m_EG_ImagePlayerNull_3RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayerNull_3");
+		    			this.m_EG_ImagePlayerNull_3RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayerNull_3");
      				}
      				return this.m_EG_ImagePlayerNull_3RectTransform;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayerNull_3");
+		    		return UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayerNull_3");
      			}
      		}
      	}
 
-		public UnityEngine.RectTransform EG_ImagePlayer1RectTransform
+		public RectTransform EG_ImagePlayer1RectTransform
      	{
      		get
      		{
@@ -228,18 +228,18 @@ namespace ET.Client
      			{
      				if( this.m_EG_ImagePlayer1RectTransform == null )
      				{
-		    			this.m_EG_ImagePlayer1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayer1");
+		    			this.m_EG_ImagePlayer1RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayer1");
      				}
      				return this.m_EG_ImagePlayer1RectTransform;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayer1");
+		    		return UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayer1");
      			}
      		}
      	}
 
-		public UnityEngine.RectTransform EG_ImagePlayer2RectTransform
+		public RectTransform EG_ImagePlayer2RectTransform
      	{
      		get
      		{
@@ -252,18 +252,18 @@ namespace ET.Client
      			{
      				if( this.m_EG_ImagePlayer2RectTransform == null )
      				{
-		    			this.m_EG_ImagePlayer2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayer2");
+		    			this.m_EG_ImagePlayer2RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayer2");
      				}
      				return this.m_EG_ImagePlayer2RectTransform;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayer2");
+		    		return UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayer2");
      			}
      		}
      	}
 
-		public UnityEngine.RectTransform EG_ImagePlayer3RectTransform
+		public RectTransform EG_ImagePlayer3RectTransform
      	{
      		get
      		{
@@ -276,13 +276,13 @@ namespace ET.Client
      			{
      				if( this.m_EG_ImagePlayer3RectTransform == null )
      				{
-		    			this.m_EG_ImagePlayer3RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayer3");
+		    			this.m_EG_ImagePlayer3RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayer3");
      				}
      				return this.m_EG_ImagePlayer3RectTransform;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayer3");
+		    		return UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"PlayerIconShow/EG_ImagePlayer3");
      			}
      		}
      	}
@@ -304,17 +304,17 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.UI.Button m_E_Button_ApplyButton = null;
-		private UnityEngine.UI.Image m_E_Button_ApplyImage = null;
-		private UnityEngine.UI.Text m_E_Text_NameText = null;
-		private UnityEngine.UI.Text m_E_Text_ConditionText = null;
-		private UnityEngine.UI.Text m_E_Text_TuijianText = null;
-		private UnityEngine.RectTransform m_EG_ImagePlayerNull_1RectTransform = null;
-		private UnityEngine.RectTransform m_EG_ImagePlayerNull_2RectTransform = null;
-		private UnityEngine.RectTransform m_EG_ImagePlayerNull_3RectTransform = null;
-		private UnityEngine.RectTransform m_EG_ImagePlayer1RectTransform = null;
-		private UnityEngine.RectTransform m_EG_ImagePlayer2RectTransform = null;
-		private UnityEngine.RectTransform m_EG_ImagePlayer3RectTransform = null;
+		private Button m_E_Button_ApplyButton = null;
+		private Image m_E_Button_ApplyImage = null;
+		private Text m_E_Text_NameText = null;
+		private Text m_E_Text_ConditionText = null;
+		private Text m_E_Text_TuijianText = null;
+		private RectTransform m_EG_ImagePlayerNull_1RectTransform = null;
+		private RectTransform m_EG_ImagePlayerNull_2RectTransform = null;
+		private RectTransform m_EG_ImagePlayerNull_3RectTransform = null;
+		private RectTransform m_EG_ImagePlayer1RectTransform = null;
+		private RectTransform m_EG_ImagePlayer2RectTransform = null;
+		private RectTransform m_EG_ImagePlayer3RectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -21,7 +21,7 @@ namespace ET.Client
 
             self.RemoveEventTriggers();
 
-            self.E_Button_Cancle.GetComponent<UnityEngine.UI.Button>().AddListener(self.SendCancleSkill);
+            self.E_Button_Cancle.GetComponent<Button>().AddListener(self.SendCancleSkill);
 
             EventTrigger eventTrigger = self.E_Btn_SkillStart.GetComponent<EventTrigger>();
             eventTrigger.RegisterEvent(EventTriggerType.Drag, (pdata) => { self.Draging(pdata as PointerEventData); });
@@ -48,7 +48,7 @@ namespace ET.Client
             EventTrigger eventTrigger = self.E_Btn_SkillStart.GetComponent<EventTrigger>();
             eventTrigger.triggers.RemoveRange(0, eventTrigger.triggers.Count);
             eventTrigger.triggers.Clear();
-            self.E_Button_Cancle.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
+            self.E_Button_Cancle.GetComponent<Button>().onClick.RemoveAllListeners();
         }
 
         public static async ETTask SkillInfoShow(this ES_MainSkillGrid self)

@@ -1,7 +1,7 @@
+using System.Collections.Generic;
+
 namespace ET
 {
-    using System.Collections.Generic;
-
     public static class UnionHelper
     {
         public static int CalcuNeedeForAccele(long startTime, long needTime)

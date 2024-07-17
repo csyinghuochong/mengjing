@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 //Object并非C#基础中的Object，而是 UnityEngine.Object
 using Object = UnityEngine.Object;
@@ -35,11 +36,11 @@ public class ReferenceCollector: MonoBehaviour, ISerializationCallbackReceiver
     //添加新的元素
 	public void Add(string key, Object obj)
 	{
-		UnityEditor.SerializedObject serializedObject = new UnityEditor.SerializedObject(this);
+		SerializedObject serializedObject = new SerializedObject(this);
         //根据PropertyPath读取数据
         //如果不知道具体的格式，可以右键用文本编辑器打开一个prefab文件（如Bundles/UI目录中的几个）
         //因为这几个prefab挂载了ReferenceCollector，所以搜索data就能找到存储的数据
-        UnityEditor.SerializedProperty dataProperty = serializedObject.FindProperty("data");
+        SerializedProperty dataProperty = serializedObject.FindProperty("data");
 		int i;
         //遍历data，看添加的数据是否存在相同key
 		for (i = 0; i < data.Count; i++)
@@ -53,7 +54,7 @@ public class ReferenceCollector: MonoBehaviour, ISerializationCallbackReceiver
         if (i != data.Count)
 		{
             //根据i的值获取dataProperty，也就是data中的对应ReferenceCollectorData，不过在这里，是对Property进行的读取，有点类似json或者xml的节点
-            UnityEditor.SerializedProperty element = dataProperty.GetArrayElementAtIndex(i);
+            SerializedProperty element = dataProperty.GetArrayElementAtIndex(i);
             //对对应节点进行赋值，值为gameobject相对应的fileID
             //fileID独一无二，单对单关系，其他挂载在这个gameobject上的script或组件会保存相对应的fileID
             element.FindPropertyRelative("gameObject").objectReferenceValue = obj;
@@ -62,20 +63,20 @@ public class ReferenceCollector: MonoBehaviour, ISerializationCallbackReceiver
 		{
             //等于则说明key在data中无对应元素，所以得向其插入新的元素
             dataProperty.InsertArrayElementAtIndex(i);
-            UnityEditor.SerializedProperty element = dataProperty.GetArrayElementAtIndex(i);
+            SerializedProperty element = dataProperty.GetArrayElementAtIndex(i);
 			element.FindPropertyRelative("key").stringValue = key;
 			element.FindPropertyRelative("gameObject").objectReferenceValue = obj;
 		}
         //应用与更新
-        UnityEditor.EditorUtility.SetDirty(this);
+        EditorUtility.SetDirty(this);
 		serializedObject.ApplyModifiedProperties();
 		serializedObject.UpdateIfRequiredOrScript();
 	}
     //删除元素，知识点与上面的添加相似
 	public void Remove(string key)
 	{
-		UnityEditor.SerializedObject serializedObject = new UnityEditor.SerializedObject(this);
-		UnityEditor.SerializedProperty dataProperty = serializedObject.FindProperty("data");
+		SerializedObject serializedObject = new SerializedObject(this);
+		SerializedProperty dataProperty = serializedObject.FindProperty("data");
 		int i;
 		for (i = 0; i < data.Count; i++)
 		{
@@ -88,28 +89,28 @@ public class ReferenceCollector: MonoBehaviour, ISerializationCallbackReceiver
 		{
 			dataProperty.DeleteArrayElementAtIndex(i);
 		}
-		UnityEditor.EditorUtility.SetDirty(this);
+		EditorUtility.SetDirty(this);
 		serializedObject.ApplyModifiedProperties();
 		serializedObject.UpdateIfRequiredOrScript();
 	}
 
 	public void Clear()
 	{
-		UnityEditor.SerializedObject serializedObject = new UnityEditor.SerializedObject(this);
+		SerializedObject serializedObject = new SerializedObject(this);
         //根据PropertyPath读取prefab文件中的数据
         //如果不知道具体的格式，可以直接右键用文本编辑器打开，搜索data就能找到
         var dataProperty = serializedObject.FindProperty("data");
 		dataProperty.ClearArray();
-		UnityEditor.EditorUtility.SetDirty(this);
+		EditorUtility.SetDirty(this);
 		serializedObject.ApplyModifiedProperties();
 		serializedObject.UpdateIfRequiredOrScript();
 	}
 
 	public void Sort()
 	{
-		UnityEditor.SerializedObject serializedObject = new UnityEditor.SerializedObject(this);
+		SerializedObject serializedObject = new SerializedObject(this);
 		data.Sort(new ReferenceCollectorDataComparer());
-		UnityEditor.EditorUtility.SetDirty(this);
+		EditorUtility.SetDirty(this);
 		serializedObject.ApplyModifiedProperties();
 		serializedObject.UpdateIfRequiredOrScript();
 	}

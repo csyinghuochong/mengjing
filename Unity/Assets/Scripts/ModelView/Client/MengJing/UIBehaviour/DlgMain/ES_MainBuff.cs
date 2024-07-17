@@ -1,12 +1,11 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_MainBuff : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_MainBuff : Entity,IAwake<Transform>,IDestroy 
 	{
 		public long Timer;
 		public GameObject UIMainBuffItem;

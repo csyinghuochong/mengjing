@@ -1,5 +1,3 @@
-using ET;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET

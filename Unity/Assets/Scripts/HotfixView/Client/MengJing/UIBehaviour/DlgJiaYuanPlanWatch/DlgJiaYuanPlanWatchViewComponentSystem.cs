@@ -1,10 +1,7 @@
-
-using UnityEngine;
-using UnityEngine.UI;
 namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgJiaYuanPlanWatchViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgJiaYuanPlanWatchViewComponent))]
+	[FriendOfAttribute(typeof(DlgJiaYuanPlanWatchViewComponent))]
 	public static partial class DlgJiaYuanPlanWatchViewComponentSystem
 	{
 		[EntitySystem]

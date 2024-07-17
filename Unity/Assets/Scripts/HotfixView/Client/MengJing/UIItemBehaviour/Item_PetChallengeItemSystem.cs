@@ -11,13 +11,13 @@ namespace ET.Client
     public static partial class Scroll_Item_PetChallengeItemSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.Scroll_Item_PetChallengeItem self)
+        private static void Awake(this Scroll_Item_PetChallengeItem self)
         {
            
         }
         
         [EntitySystem]
-        private static void Destroy(this ET.Client.Scroll_Item_PetChallengeItem self)
+        private static void Destroy(this Scroll_Item_PetChallengeItem self)
         {
             self.DestroyWidget();
         }

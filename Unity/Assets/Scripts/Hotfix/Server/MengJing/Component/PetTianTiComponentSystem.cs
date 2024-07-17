@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ET.Server
 {
@@ -9,12 +8,12 @@ namespace ET.Server
     public static partial class PetTianTiComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.PetTianTiComponent self)
+        private static void Awake(this PetTianTiComponent self)
         {
 
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.PetTianTiComponent self)
+        private static void Destroy(this PetTianTiComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }

@@ -1,4 +1,5 @@
 using System.Linq;
+using Unity.CodeEditor;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace ET
         [InitializeOnLoadMethod]
         public static void ReGenerateProjectFiles()
         {
-            Unity.CodeEditor.CodeEditor.CurrentEditor.SyncAll();
+            CodeEditor.CurrentEditor.SyncAll();
         }
 
 #if ENABLE_VIEW

@@ -5,7 +5,7 @@ namespace ET.Client
     public static partial class BuffCSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.BuffC self)
+        private static void Awake(this BuffC self)
         {
         }
 

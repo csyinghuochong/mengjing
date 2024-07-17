@@ -8,12 +8,12 @@ namespace ET.Server
     public static partial class PetFubenComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.PetFubenComponent self)
+        private static void Awake(this PetFubenComponent self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.PetFubenComponent self)
+        private static void Destroy(this PetFubenComponent self)
         {
         }
 

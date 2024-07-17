@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
@@ -23,7 +23,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.UI.Image E_ImageHeadImage
+		public Image E_ImageHeadImage
      	{
      		get
      		{
@@ -36,18 +36,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ImageHeadImage == null )
      				{
-		    			this.m_E_ImageHeadImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageHead");
+		    			this.m_E_ImageHeadImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageHead");
      				}
      				return this.m_E_ImageHeadImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageHead");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageHead");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageBooldValueImage
+		public Image E_ImageBooldValueImage
      	{
      		get
      		{
@@ -60,18 +60,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ImageBooldValueImage == null )
      				{
-		    			this.m_E_ImageBooldValueImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ImageBooldDi/E_ImageBooldValue");
+		    			this.m_E_ImageBooldValueImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"ImageBooldDi/E_ImageBooldValue");
      				}
      				return this.m_E_ImageBooldValueImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"ImageBooldDi/E_ImageBooldValue");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"ImageBooldDi/E_ImageBooldValue");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_PlayerLvText
+		public Text E_PlayerLvText
      	{
      		get
      		{
@@ -84,18 +84,18 @@ namespace ET.Client
      			{
      				if( this.m_E_PlayerLvText == null )
      				{
-		    			this.m_E_PlayerLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PlayerLv");
+		    			this.m_E_PlayerLvText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_PlayerLv");
      				}
      				return this.m_E_PlayerLvText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PlayerLv");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_PlayerLv");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_PlayerNameText
+		public Text E_PlayerNameText
      	{
      		get
      		{
@@ -108,18 +108,18 @@ namespace ET.Client
      			{
      				if( this.m_E_PlayerNameText == null )
      				{
-		    			this.m_E_PlayerNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PlayerName");
+		    			this.m_E_PlayerNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_PlayerName");
      				}
      				return this.m_E_PlayerNameText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PlayerName");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_PlayerName");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_DamageValueText
+		public Text E_DamageValueText
      	{
      		get
      		{
@@ -132,13 +132,13 @@ namespace ET.Client
      			{
      				if( this.m_E_DamageValueText == null )
      				{
-		    			this.m_E_DamageValueText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_DamageValue");
+		    			this.m_E_DamageValueText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_DamageValue");
      				}
      				return this.m_E_DamageValueText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_DamageValue");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_DamageValue");
      			}
      		}
      	}
@@ -154,11 +154,11 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.UI.Image m_E_ImageHeadImage = null;
-		private UnityEngine.UI.Image m_E_ImageBooldValueImage = null;
-		private UnityEngine.UI.Text m_E_PlayerLvText = null;
-		private UnityEngine.UI.Text m_E_PlayerNameText = null;
-		private UnityEngine.UI.Text m_E_DamageValueText = null;
+		private Image m_E_ImageHeadImage = null;
+		private Image m_E_ImageBooldValueImage = null;
+		private Text m_E_PlayerLvText = null;
+		private Text m_E_PlayerNameText = null;
+		private Text m_E_DamageValueText = null;
 		public Transform uiTransform = null;
 	}
 }

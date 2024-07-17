@@ -1,7 +1,6 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using System.Collections.Generic;
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Options;
-using System.Collections.Generic;
-
 
 namespace ET.Server
 {

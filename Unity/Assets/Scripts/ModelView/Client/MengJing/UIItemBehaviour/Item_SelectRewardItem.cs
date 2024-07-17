@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -61,7 +61,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_GetBtnButton
+		public Button E_GetBtnButton
      	{
      		get
      		{
@@ -74,18 +74,18 @@ namespace ET.Client
      			{
      				if( this.m_E_GetBtnButton == null )
      				{
-		    			this.m_E_GetBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_GetBtn");
+		    			this.m_E_GetBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_GetBtn");
      				}
      				return this.m_E_GetBtnButton;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_GetBtn");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_GetBtn");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_GetBtnImage
+		public Image E_GetBtnImage
      	{
      		get
      		{
@@ -98,13 +98,13 @@ namespace ET.Client
      			{
      				if( this.m_E_GetBtnImage == null )
      				{
-		    			this.m_E_GetBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_GetBtn");
+		    			this.m_E_GetBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_GetBtn");
      				}
      				return this.m_E_GetBtnImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_GetBtn");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_GetBtn");
      			}
      		}
      	}
@@ -119,8 +119,8 @@ namespace ET.Client
 		}
 
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
-		private UnityEngine.UI.Button m_E_GetBtnButton = null;
-		private UnityEngine.UI.Image m_E_GetBtnImage = null;
+		private Button m_E_GetBtnButton = null;
+		private Image m_E_GetBtnImage = null;
 		public Transform uiTransform = null;
 	}
 }

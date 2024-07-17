@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
+using UnityEditor;
 using YooAsset;
 
 namespace ET
@@ -117,11 +117,11 @@ namespace ET
                 string appVersion = "v1.0";
 
 #if UNITY_EDITOR
-                if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.Android)
+                if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android)
                     return $"{hostServerIP}/weijing1/DLCBeta/MJ/Android";
-                else if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.iOS)
+                else if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.iOS)
                     return $"{hostServerIP}/weijing1/DLCBeta/MJ/IPhone";
-                else if (UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.WebGL)
+                else if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.WebGL)
                     return $"{hostServerIP}/weijing1/DLCBeta/MJ/WebGL";
                 else
                     return $"{hostServerIP}/weijing1/DLCBeta/MJ/PC";

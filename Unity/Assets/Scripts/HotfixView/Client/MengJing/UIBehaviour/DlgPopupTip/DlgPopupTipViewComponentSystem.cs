@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgPopupTipViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgPopupTipViewComponent))]
+	[FriendOfAttribute(typeof(DlgPopupTipViewComponent))]
 	public static partial class DlgPopupTipViewComponentSystem
 	{
 		[EntitySystem]

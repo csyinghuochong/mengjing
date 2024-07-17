@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgTurtleViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgTurtleViewComponent))]
+	[FriendOfAttribute(typeof(DlgTurtleViewComponent))]
 	public static partial class DlgTurtleViewComponentSystem
 	{
 		[EntitySystem]

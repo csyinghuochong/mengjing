@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using ET;
 
 namespace ET.Server
 {
@@ -10,7 +7,7 @@ namespace ET.Server
     public static partial class ShoujiComponentSSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.ShoujiComponentS self)
+        private static void Awake(this ShoujiComponentS self)
         {
 
         }

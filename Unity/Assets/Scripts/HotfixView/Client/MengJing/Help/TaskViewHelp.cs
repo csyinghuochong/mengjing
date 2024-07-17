@@ -190,7 +190,7 @@ namespace ET.Client
 
                 if (!TaskHelper.HaveNpc(root, npcid))
                 {
-                    int fubenId = TaskViewHelp.GetFubenByNpc(npcid);
+                    int fubenId = GetFubenByNpc(npcid);
 
                     if (fubenId >= 0 && fubenId != curdungeonid)
                     {
@@ -203,7 +203,7 @@ namespace ET.Client
                     //再查找其他scene
                     if (fubenId == 0)
                     {
-                        fubenId = TaskViewHelp.GetSceneByNpc(taskConfig.CompleteNpcID);
+                        fubenId = GetSceneByNpc(taskConfig.CompleteNpcID);
                         if (fubenId > 0)
                         {
                             fubenname = SceneConfigCategory.Instance.Get(fubenId).Name;
@@ -219,13 +219,13 @@ namespace ET.Client
                 }
 
                 flyTipComponent.ShowFlyTipDi("正在前往任务目标点");
-                TaskViewHelp.MoveToNpc(root, npcid).Coroutine();
+                MoveToNpc(root, npcid).Coroutine();
                 return false;
             }
 
             if (taskConfig.TargetPosition != 0)
             {
-                bool excuteVAlue = TaskViewHelp.MoveToTask(root, taskConfig.TargetPosition);
+                bool excuteVAlue = MoveToTask(root, taskConfig.TargetPosition);
                 if (excuteVAlue)
                 {
                     flyTipComponent.ShowFlyTipDi("正在前往任务目标点");
@@ -233,7 +233,7 @@ namespace ET.Client
                 }
             }
 
-            TaskViewHelp.GetTaskLogic(target).taskExcute(root, taskPro, taskConfig);
+            GetTaskLogic(target).taskExcute(root, taskPro, taskConfig);
             return true;
         }
 

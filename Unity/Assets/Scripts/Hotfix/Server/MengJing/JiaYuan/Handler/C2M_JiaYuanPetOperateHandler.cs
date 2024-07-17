@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_JiaYuanPetOperateHandler : MessageLocationHandler<Unit, C2M_JiaYuanPetOperateRequest, M2C_JiaYuanPetOperateResponse>

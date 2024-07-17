@@ -24,7 +24,7 @@ namespace ET
         private float _scaleTime = 0.12f;
         private bool _hasDown = false;
 
-        [UnityEngine.SerializeField]
+        [SerializeField]
         private Transform _tweenTarget;
         private float mDownScaleTime;
         private float mClickScaleTime;

@@ -1,18 +1,17 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RoleGemHole : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_RoleGemHole : Entity,IAwake<Transform>,IDestroy 
 	{
 		public int Index;
 		public Action<int> ClickHandler;
 		
-		public UnityEngine.UI.Button E_SelectButton
+		public Button E_SelectButton
      	{
      		get
      		{
@@ -23,13 +22,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SelectButton == null )
      			{
-		    		this.m_E_SelectButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Select");
+		    		this.m_E_SelectButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Select");
      			}
      			return this.m_E_SelectButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_SelectImage
+		public Image E_SelectImage
      	{
      		get
      		{
@@ -40,13 +39,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SelectImage == null )
      			{
-		    		this.m_E_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Select");
+		    		this.m_E_SelectImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Select");
      			}
      			return this.m_E_SelectImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_HoleBackImage
+		public Image E_HoleBackImage
      	{
      		get
      		{
@@ -57,13 +56,13 @@ namespace ET.Client
      			}
      			if( this.m_E_HoleBackImage == null )
      			{
-		    		this.m_E_HoleBackImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_HoleBack");
+		    		this.m_E_HoleBackImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_HoleBack");
      			}
      			return this.m_E_HoleBackImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_HoleNameText
+		public Text E_HoleNameText
      	{
      		get
      		{
@@ -74,7 +73,7 @@ namespace ET.Client
      			}
      			if( this.m_E_HoleNameText == null )
      			{
-		    		this.m_E_HoleNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_HoleName");
+		    		this.m_E_HoleNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_HoleName");
      			}
      			return this.m_E_HoleNameText;
      		}
@@ -100,7 +99,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_HighlightImage
+		public Image E_HighlightImage
      	{
      		get
      		{
@@ -111,7 +110,7 @@ namespace ET.Client
      			}
      			if( this.m_E_HighlightImage == null )
      			{
-		    		this.m_E_HighlightImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Highlight");
+		    		this.m_E_HighlightImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Highlight");
      			}
      			return this.m_E_HighlightImage;
      		}
@@ -128,12 +127,12 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_SelectButton = null;
-		private UnityEngine.UI.Image m_E_SelectImage = null;
-		private UnityEngine.UI.Image m_E_HoleBackImage = null;
-		private UnityEngine.UI.Text m_E_HoleNameText = null;
+		private Button m_E_SelectButton = null;
+		private Image m_E_SelectImage = null;
+		private Image m_E_HoleBackImage = null;
+		private Text m_E_HoleNameText = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
-		private UnityEngine.UI.Image m_E_HighlightImage = null;
+		private Image m_E_HighlightImage = null;
 		public Transform uiTransform = null;
 	}
 }

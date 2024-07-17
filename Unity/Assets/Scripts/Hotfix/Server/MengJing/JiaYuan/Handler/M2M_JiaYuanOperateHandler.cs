@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.JiaYuan)]
     public class M2M_JiaYuanOperateHandler : MessageHandler<Unit, M2M_JiaYuanOperateMessage>

@@ -1,6 +1,5 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -19,7 +18,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.RectTransform EG_Item_0RectTransform
+		public RectTransform EG_Item_0RectTransform
      	{
      		get
      		{
@@ -32,18 +31,18 @@ namespace ET.Client
      			{
      				if( this.m_EG_Item_0RectTransform == null )
      				{
-		    			this.m_EG_Item_0RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Item_0");
+		    			this.m_EG_Item_0RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Item_0");
      				}
      				return this.m_EG_Item_0RectTransform;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Item_0");
+		    		return UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Item_0");
      			}
      		}
      	}
 
-		public UnityEngine.RectTransform EG_Item_1RectTransform
+		public RectTransform EG_Item_1RectTransform
      	{
      		get
      		{
@@ -56,18 +55,18 @@ namespace ET.Client
      			{
      				if( this.m_EG_Item_1RectTransform == null )
      				{
-		    			this.m_EG_Item_1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Item_1");
+		    			this.m_EG_Item_1RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Item_1");
      				}
      				return this.m_EG_Item_1RectTransform;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Item_1");
+		    		return UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Item_1");
      			}
      		}
      	}
 
-		public UnityEngine.RectTransform EG_Item_2RectTransform
+		public RectTransform EG_Item_2RectTransform
      	{
      		get
      		{
@@ -80,13 +79,13 @@ namespace ET.Client
      			{
      				if( this.m_EG_Item_2RectTransform == null )
      				{
-		    			this.m_EG_Item_2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Item_2");
+		    			this.m_EG_Item_2RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Item_2");
      				}
      				return this.m_EG_Item_2RectTransform;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Item_2");
+		    		return UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Item_2");
      			}
      		}
      	}
@@ -100,9 +99,9 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.RectTransform m_EG_Item_0RectTransform = null;
-		private UnityEngine.RectTransform m_EG_Item_1RectTransform = null;
-		private UnityEngine.RectTransform m_EG_Item_2RectTransform = null;
+		private RectTransform m_EG_Item_0RectTransform = null;
+		private RectTransform m_EG_Item_1RectTransform = null;
+		private RectTransform m_EG_Item_2RectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

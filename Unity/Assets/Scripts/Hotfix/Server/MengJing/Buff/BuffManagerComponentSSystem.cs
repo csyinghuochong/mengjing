@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 
 namespace ET.Server
 {
@@ -26,14 +25,14 @@ namespace ET.Server
         }
         
         [EntitySystem]
-        private static void Awake(this ET.Server.BuffManagerComponentS self)
+        private static void Awake(this BuffManagerComponentS self)
         {
             self.m_Buffs.Clear();
             self.SceneType = self.Scene().GetComponent<MapComponent>().SceneType;
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.BuffManagerComponentS self)
+        private static void Destroy(this BuffManagerComponentS self)
         {
             self.OnDispose();
         }

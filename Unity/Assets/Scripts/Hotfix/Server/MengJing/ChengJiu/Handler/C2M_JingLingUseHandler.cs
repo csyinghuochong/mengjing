@@ -1,8 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     [FriendOf(typeof(ChengJiuComponentS))]

@@ -335,7 +335,7 @@ namespace ET
         //游戏公告
         public static List<WorldSayConfig> WorldSayList()
         {
-            return new List<ET.WorldSayConfig>
+            return new List<WorldSayConfig>
         {
             new WorldSayConfig(){ Time = 1230, OpenDay = new List<int>{ -1},  Conent = "巨龙神已经准时出现在宝藏之地,想要挑战我的就带上你们的武器过来挑战我吧!"  },
             new WorldSayConfig(){ Time = 1930, OpenDay = new List<int>{ -1},  Conent = "一波红包雨已经来临,赶紧来看看自己是否是那个幸运玩家!"  },

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ET.Client
@@ -10,7 +9,7 @@ namespace ET.Client
     public static partial class HeroTransformComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.HeroTransformComponent self)
+        private static void Awake(this HeroTransformComponent self)
         {
             Unit MyHero = self.GetParent<Unit>();
             Transform transform = MyHero.GetComponent<GameObjectComponent>().GameObject.transform;
@@ -42,7 +41,7 @@ namespace ET.Client
         }
         
         
-        public static void ShowRunEffect(this ET.Client.HeroTransformComponent self)
+        public static void ShowRunEffect(this HeroTransformComponent self)
         {
             if (self.RunEffect == null)
             {
@@ -57,7 +56,7 @@ namespace ET.Client
         /// </summary>
         /// <param name="posType"></param>
         /// <returns></returns>
-        public static Transform GetTranform(this ET.Client.HeroTransformComponent self, string posType)
+        public static Transform GetTranform(this HeroTransformComponent self, string posType)
         {
             switch (posType)
             {

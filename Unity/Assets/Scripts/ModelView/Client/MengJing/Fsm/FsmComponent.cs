@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     //动画状态机组件
     [ComponentOf(typeof (Unit))]

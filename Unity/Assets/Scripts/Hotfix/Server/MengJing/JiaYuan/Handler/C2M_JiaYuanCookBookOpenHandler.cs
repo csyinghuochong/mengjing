@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_JiaYuanCookBookOpenHandler : MessageLocationHandler<Unit, C2M_JiaYuanCookBookOpen, M2C_JiaYuanCookBookOpen>

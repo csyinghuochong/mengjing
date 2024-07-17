@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [ComponentOf(typeof (UIBaseWindow))]
     public class DlgRole: Entity, IAwake, IUILogic

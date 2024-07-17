@@ -26,7 +26,7 @@ namespace ET.Client
         }
         
         [EntitySystem]
-        private static void Awake(this ET.Client.SkillManagerComponentC self)
+        private static void Awake(this SkillManagerComponentC self)
         {
             self.t_Skills.Clear();
             self.Skills.Clear();
@@ -39,7 +39,7 @@ namespace ET.Client
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Client.SkillManagerComponentC self)
+        private static void Destroy(this SkillManagerComponentC self)
         {
             self.SkillCDs.Clear();
             self.OnFinish();

@@ -1,18 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Xml;
-using System.Reflection;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.UI;
-
-
-using UnityEngine.EventSystems;
-using UnityEngine.Events;
-
+﻿using UnityEngine;
 
 namespace ET.Client
 {
@@ -32,7 +18,7 @@ namespace ET.Client
             {
                 foreach (Transform trs in _target.transform)
                 {
-                    resultTrs = UIFindHelper.FindDeepChild(trs.gameObject, _childName);
+                    resultTrs = FindDeepChild(trs.gameObject, _childName);
                     if (resultTrs != null)
                         return resultTrs;
                 }
@@ -49,7 +35,7 @@ namespace ET.Client
         /// <returns></returns>
         public static T FindDeepChild<T>(GameObject _target, string _childName) where T : Component
         {
-            Transform resultTrs = UIFindHelper.FindDeepChild(_target, _childName);
+            Transform resultTrs = FindDeepChild(_target, _childName);
             if (resultTrs != null)
                 return resultTrs.gameObject.GetComponent<T>();
             return (T)((object)null);

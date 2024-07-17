@@ -1,7 +1,4 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(Scroll_Item_JiaYuanVisitItem))]
 	public static partial class Scroll_Item_JiaYuanVisitItemSystem 

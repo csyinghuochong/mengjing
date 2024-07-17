@@ -1,18 +1,18 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ProtectEquip : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_ProtectEquip : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public BagInfo XilianBagInfo;
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -23,13 +23,13 @@ namespace ET.Client
      			}
      			if( this.m_E_BagItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_BagItems");
+		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_BagItems");
      			}
      			return this.m_E_BagItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Obj_EquipPropertyTextText
+		public Text E_Obj_EquipPropertyTextText
      	{
      		get
      		{
@@ -40,13 +40,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Obj_EquipPropertyTextText == null )
      			{
-		    		this.m_E_Obj_EquipPropertyTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Obj_EquipPropertyText");
+		    		this.m_E_Obj_EquipPropertyTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_Obj_EquipPropertyText");
      			}
      			return this.m_E_Obj_EquipPropertyTextText;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_EquipBaseSetListRectTransform
+		public RectTransform EG_EquipBaseSetListRectTransform
      	{
      		get
      		{
@@ -57,7 +57,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_EquipBaseSetListRectTransform == null )
      			{
-		    		this.m_EG_EquipBaseSetListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_EquipBaseSetList");
+		    		this.m_EG_EquipBaseSetListRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Right/EG_EquipBaseSetList");
      			}
      			return this.m_EG_EquipBaseSetListRectTransform;
      		}
@@ -82,7 +82,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_XiLianButtonButton
+		public Button E_XiLianButtonButton
      	{
      		get
      		{
@@ -93,13 +93,13 @@ namespace ET.Client
      			}
      			if( this.m_E_XiLianButtonButton == null )
      			{
-		    		this.m_E_XiLianButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_XiLianButton");
+		    		this.m_E_XiLianButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/E_XiLianButton");
      			}
      			return this.m_E_XiLianButtonButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_XiLianButtonImage
+		public Image E_XiLianButtonImage
      	{
      		get
      		{
@@ -110,13 +110,13 @@ namespace ET.Client
      			}
      			if( this.m_E_XiLianButtonImage == null )
      			{
-		    		this.m_E_XiLianButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_XiLianButton");
+		    		this.m_E_XiLianButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/E_XiLianButton");
      			}
      			return this.m_E_XiLianButtonImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonUnLockButton
+		public Button E_ButtonUnLockButton
      	{
      		get
      		{
@@ -127,13 +127,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonUnLockButton == null )
      			{
-		    		this.m_E_ButtonUnLockButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_ButtonUnLock");
+		    		this.m_E_ButtonUnLockButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/E_ButtonUnLock");
      			}
      			return this.m_E_ButtonUnLockButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonUnLockImage
+		public Image E_ButtonUnLockImage
      	{
      		get
      		{
@@ -144,13 +144,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonUnLockImage == null )
      			{
-		    		this.m_E_ButtonUnLockImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ButtonUnLock");
+		    		this.m_E_ButtonUnLockImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/E_ButtonUnLock");
      			}
      			return this.m_E_ButtonUnLockImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_NumText
+		public Text E_Lab_NumText
      	{
      		get
      		{
@@ -161,7 +161,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_NumText == null )
      			{
-		    		this.m_E_Lab_NumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/Text_2 (1)/E_Lab_Num");
+		    		this.m_E_Lab_NumText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/Text_2 (1)/E_Lab_Num");
      			}
      			return this.m_E_Lab_NumText;
      		}
@@ -193,15 +193,15 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Text m_E_Obj_EquipPropertyTextText = null;
-		private UnityEngine.RectTransform m_EG_EquipBaseSetListRectTransform = null;
+		private LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
+		private Text m_E_Obj_EquipPropertyTextText = null;
+		private RectTransform m_EG_EquipBaseSetListRectTransform = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
-		private UnityEngine.UI.Button m_E_XiLianButtonButton = null;
-		private UnityEngine.UI.Image m_E_XiLianButtonImage = null;
-		private UnityEngine.UI.Button m_E_ButtonUnLockButton = null;
-		private UnityEngine.UI.Image m_E_ButtonUnLockImage = null;
-		private UnityEngine.UI.Text m_E_Lab_NumText = null;
+		private Button m_E_XiLianButtonButton = null;
+		private Image m_E_XiLianButtonImage = null;
+		private Button m_E_ButtonUnLockButton = null;
+		private Image m_E_ButtonUnLockImage = null;
+		private Text m_E_Lab_NumText = null;
 		public Transform uiTransform = null;
 	}
 }

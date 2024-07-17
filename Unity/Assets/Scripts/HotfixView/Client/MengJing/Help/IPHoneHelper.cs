@@ -62,7 +62,7 @@ namespace ET.Client
 
         public static bool IsRoot()
         {
-            bool isRoot = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop) == "/";
+            bool isRoot = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) == "/";
             return isRoot;      
         }
 

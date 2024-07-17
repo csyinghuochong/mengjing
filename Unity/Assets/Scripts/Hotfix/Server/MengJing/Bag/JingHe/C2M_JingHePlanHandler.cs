@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_JingHePlanHandler : MessageLocationHandler<Unit, C2M_JingHePlanRequest, M2C_JingHePlanResponse>

@@ -5,14 +5,14 @@ namespace ET.Server
     public static partial class TowerComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.TowerComponent self)
+        private static void Awake(this TowerComponent self)
         {
             self.TowerId = 0;
             self.Timer = 0;
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.TowerComponent self)
+        private static void Destroy(this TowerComponent self)
         {
         }
 

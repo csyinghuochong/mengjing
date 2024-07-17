@@ -1,6 +1,6 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ET.Server
 {
@@ -42,7 +42,7 @@ namespace ET.Server
     public static partial class ActivitySceneComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.ActivitySceneComponent self)
+        private static void Awake(this ActivitySceneComponent self)
         {
             self.MapIdList.Clear();
             Log.Debug($"self.Zone:  {self.Zone()}");
@@ -59,7 +59,7 @@ namespace ET.Server
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.ActivitySceneComponent self)
+        private static void Destroy(this ActivitySceneComponent self)
         {
         }
 

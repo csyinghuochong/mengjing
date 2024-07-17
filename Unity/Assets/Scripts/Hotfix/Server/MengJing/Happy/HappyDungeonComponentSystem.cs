@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
-using System;
 
 namespace ET.Server
 {
@@ -26,12 +26,12 @@ namespace ET.Server
         }
         
         [EntitySystem]
-        private static void Awake(this ET.Server.HappyDungeonComponent self)
+        private static void Awake(this HappyDungeonComponent self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.HappyDungeonComponent self)
+        private static void Destroy(this HappyDungeonComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }

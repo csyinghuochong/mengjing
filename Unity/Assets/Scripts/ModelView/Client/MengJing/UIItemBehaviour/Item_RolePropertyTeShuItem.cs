@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -19,7 +19,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.UI.Image E_IconImage
+		public Image E_IconImage
      	{
      		get
      		{
@@ -32,18 +32,18 @@ namespace ET.Client
      			{
      				if( this.m_E_IconImage == null )
      				{
-		    			this.m_E_IconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Icon");
+		    			this.m_E_IconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Icon");
      				}
      				return this.m_E_IconImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Icon");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Icon");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_PropertyTypeText
+		public Text E_PropertyTypeText
      	{
      		get
      		{
@@ -56,18 +56,18 @@ namespace ET.Client
      			{
      				if( this.m_E_PropertyTypeText == null )
      				{
-		    			this.m_E_PropertyTypeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PropertyType");
+		    			this.m_E_PropertyTypeText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_PropertyType");
      				}
      				return this.m_E_PropertyTypeText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PropertyType");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_PropertyType");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_ProTypeValueText
+		public Text E_ProTypeValueText
      	{
      		get
      		{
@@ -80,13 +80,13 @@ namespace ET.Client
      			{
      				if( this.m_E_ProTypeValueText == null )
      				{
-		    			this.m_E_ProTypeValueText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_ProTypeValue");
+		    			this.m_E_ProTypeValueText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_ProTypeValue");
      				}
      				return this.m_E_ProTypeValueText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_ProTypeValue");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_ProTypeValue");
      			}
      		}
      	}
@@ -100,9 +100,9 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.UI.Image m_E_IconImage = null;
-		private UnityEngine.UI.Text m_E_PropertyTypeText = null;
-		private UnityEngine.UI.Text m_E_ProTypeValueText = null;
+		private Image m_E_IconImage = null;
+		private Text m_E_PropertyTypeText = null;
+		private Text m_E_ProTypeValueText = null;
 		public Transform uiTransform = null;
 	}
 }

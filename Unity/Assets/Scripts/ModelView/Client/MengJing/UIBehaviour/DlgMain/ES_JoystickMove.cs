@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
     [ChildOf]
     [EnableMethod]
-    public class ES_JoystickMove: Entity, ET.IAwake<UnityEngine.Transform>, IDestroy
+    public class ES_JoystickMove: Entity, IAwake<Transform>, IDestroy
     {
         public Vector2 OldPoint;
         public Vector2 NewPoint;
@@ -30,7 +31,7 @@ namespace ET.Client
 
         public int OperateMode;
 
-        public UnityEngine.UI.Image E_YaoGanDiMoveImage
+        public Image E_YaoGanDiMoveImage
         {
             get
             {
@@ -42,14 +43,14 @@ namespace ET.Client
 
                 if (this.m_E_YaoGanDiMoveImage == null)
                 {
-                    this.m_E_YaoGanDiMoveImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject, "E_YaoGanDiMove");
+                    this.m_E_YaoGanDiMoveImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject, "E_YaoGanDiMove");
                 }
 
                 return this.m_E_YaoGanDiMoveImage;
             }
         }
 
-        public UnityEngine.EventSystems.EventTrigger E_YaoGanDiMoveEventTrigger
+        public EventTrigger E_YaoGanDiMoveEventTrigger
         {
             get
             {
@@ -62,14 +63,14 @@ namespace ET.Client
                 if (this.m_E_YaoGanDiMoveEventTrigger == null)
                 {
                     this.m_E_YaoGanDiMoveEventTrigger =
-                            UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject, "E_YaoGanDiMove");
+                            UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject, "E_YaoGanDiMove");
                 }
 
                 return this.m_E_YaoGanDiMoveEventTrigger;
             }
         }
 
-        public UnityEngine.UI.Image E_YaoGanDiFixImage
+        public Image E_YaoGanDiFixImage
         {
             get
             {
@@ -81,14 +82,14 @@ namespace ET.Client
 
                 if (this.m_E_YaoGanDiFixImage == null)
                 {
-                    this.m_E_YaoGanDiFixImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject, "E_YaoGanDiFix");
+                    this.m_E_YaoGanDiFixImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject, "E_YaoGanDiFix");
                 }
 
                 return this.m_E_YaoGanDiFixImage;
             }
         }
 
-        public UnityEngine.EventSystems.EventTrigger E_YaoGanDiFixEventTrigger
+        public EventTrigger E_YaoGanDiFixEventTrigger
         {
             get
             {
@@ -101,14 +102,14 @@ namespace ET.Client
                 if (this.m_E_YaoGanDiFixEventTrigger == null)
                 {
                     this.m_E_YaoGanDiFixEventTrigger =
-                            UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject, "E_YaoGanDiFix");
+                            UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject, "E_YaoGanDiFix");
                 }
 
                 return this.m_E_YaoGanDiFixEventTrigger;
             }
         }
 
-        public UnityEngine.UI.Image E_CenterShowImage
+        public Image E_CenterShowImage
         {
             get
             {
@@ -121,14 +122,14 @@ namespace ET.Client
                 if (this.m_E_CenterShowImage == null)
                 {
                     this.m_E_CenterShowImage =
-                            UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject, "E_YaoGanDiFix/E_CenterShow");
+                            UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject, "E_YaoGanDiFix/E_CenterShow");
                 }
 
                 return this.m_E_CenterShowImage;
             }
         }
 
-        public UnityEngine.UI.Image E_ThumbImage
+        public Image E_ThumbImage
         {
             get
             {
@@ -140,7 +141,7 @@ namespace ET.Client
 
                 if (this.m_E_ThumbImage == null)
                 {
-                    this.m_E_ThumbImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject, "E_YaoGanDiFix/E_Thumb");
+                    this.m_E_ThumbImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject, "E_YaoGanDiFix/E_Thumb");
                 }
 
                 return this.m_E_ThumbImage;
@@ -170,12 +171,12 @@ namespace ET.Client
             this.uiTransform = null;
         }
 
-        private UnityEngine.UI.Image m_E_YaoGanDiMoveImage = null;
-        private UnityEngine.EventSystems.EventTrigger m_E_YaoGanDiMoveEventTrigger = null;
-        private UnityEngine.UI.Image m_E_YaoGanDiFixImage = null;
-        private UnityEngine.EventSystems.EventTrigger m_E_YaoGanDiFixEventTrigger = null;
-        private UnityEngine.UI.Image m_E_CenterShowImage = null;
-        private UnityEngine.UI.Image m_E_ThumbImage = null;
+        private Image m_E_YaoGanDiMoveImage = null;
+        private EventTrigger m_E_YaoGanDiMoveEventTrigger = null;
+        private Image m_E_YaoGanDiFixImage = null;
+        private EventTrigger m_E_YaoGanDiFixEventTrigger = null;
+        private Image m_E_CenterShowImage = null;
+        private Image m_E_ThumbImage = null;
         public Transform uiTransform = null;
     }
 }

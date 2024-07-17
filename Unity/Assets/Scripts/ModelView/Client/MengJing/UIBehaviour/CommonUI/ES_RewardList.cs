@@ -1,12 +1,12 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RewardList : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_RewardList : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
@@ -15,7 +15,7 @@ namespace ET.Client
 		public bool ShowName;
 		public int GetWay;
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -26,7 +26,7 @@ namespace ET.Client
      			}
      			if( this.m_E_BagItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_BagItems");
+		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_BagItems");
      			}
      			return this.m_E_BagItemsLoopVerticalScrollRect;
      		}
@@ -50,7 +50,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

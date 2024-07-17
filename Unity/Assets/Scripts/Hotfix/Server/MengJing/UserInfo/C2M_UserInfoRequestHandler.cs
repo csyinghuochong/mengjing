@@ -1,5 +1,4 @@
-﻿using System;
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_UserInfoRequestHandler : MessageLocationHandler<Unit, C2M_UserInfoInitRequest, M2C_UserInfoInitResponse>

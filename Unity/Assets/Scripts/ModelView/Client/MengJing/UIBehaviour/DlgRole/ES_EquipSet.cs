@@ -1,12 +1,12 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_EquipSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_EquipSet : Entity,IAwake<Transform>,IDestroy 
 	{
 		public int Occ;
 		public ItemOperateEnum ItemOperateEnum;
@@ -14,7 +14,7 @@ namespace ET.Client
 		public List<EntityRef<ES_EquipItem>> ESEquipItems_2 = new();
 		public List<BagInfo> EquipInfoList = new();
 		
-		public UnityEngine.RectTransform EG_EquipSetHideRectTransform
+		public RectTransform EG_EquipSetHideRectTransform
      	{
      		get
      		{
@@ -25,7 +25,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_EquipSetHideRectTransform == null )
      			{
-		    		this.m_EG_EquipSetHideRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_EquipSetHide");
+		    		this.m_EG_EquipSetHideRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_EquipSetHide");
      			}
      			return this.m_EG_EquipSetHideRectTransform;
      		}
@@ -51,7 +51,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Text E_RoseNameText
+		public Text E_RoseNameText
      	{
      		get
      		{
@@ -62,13 +62,13 @@ namespace ET.Client
      			}
      			if( this.m_E_RoseNameText == null )
      			{
-		    		this.m_E_RoseNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_EquipSetHide/RoseNameLv/E_RoseName");
+		    		this.m_E_RoseNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_EquipSetHide/RoseNameLv/E_RoseName");
      			}
      			return this.m_E_RoseNameText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_RoseLvText
+		public Text E_RoseLvText
      	{
      		get
      		{
@@ -79,7 +79,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RoseLvText == null )
      			{
-		    		this.m_E_RoseLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_EquipSetHide/RoseNameLv/E_RoseLv");
+		    		this.m_E_RoseLvText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_EquipSetHide/RoseNameLv/E_RoseLv");
      			}
      			return this.m_E_RoseLvText;
      		}
@@ -388,10 +388,10 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EG_EquipSetHideRectTransform = null;
+		private RectTransform m_EG_EquipSetHideRectTransform = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
-		private UnityEngine.UI.Text m_E_RoseNameText = null;
-		private UnityEngine.UI.Text m_E_RoseLvText = null;
+		private Text m_E_RoseNameText = null;
+		private Text m_E_RoseLvText = null;
 		private EntityRef<ES_EquipItem> m_es_equipitemwuqi_1 = null;
 		private EntityRef<ES_EquipItem> m_es_equipitemyifu_1 = null;
 		private EntityRef<ES_EquipItem> m_es_equipitemfuhu_1 = null;

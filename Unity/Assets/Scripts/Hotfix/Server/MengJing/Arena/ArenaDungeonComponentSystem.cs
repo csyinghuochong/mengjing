@@ -7,12 +7,12 @@ namespace ET.Server
     public static partial class ArenaDungeonComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.ArenaDungeonComponent self)
+        private static void Awake(this ArenaDungeonComponent self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.ArenaDungeonComponent self)
+        private static void Destroy(this ArenaDungeonComponent self)
         {
         }
 

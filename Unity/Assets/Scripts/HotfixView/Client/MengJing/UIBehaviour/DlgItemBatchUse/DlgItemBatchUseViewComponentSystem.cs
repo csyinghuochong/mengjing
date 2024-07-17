@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgItemBatchUseViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgItemBatchUseViewComponent))]
+	[FriendOfAttribute(typeof(DlgItemBatchUseViewComponent))]
 	public static partial class DlgItemBatchUseViewComponentSystem
 	{
 		[EntitySystem]

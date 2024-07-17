@@ -1,6 +1,5 @@
-using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ET.Server
 {
@@ -10,12 +9,12 @@ namespace ET.Server
     public static partial class ActivityComponentSSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.ActivityComponentS self)
+        private static void Awake(this ActivityComponentS self)
         {
 
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.ActivityComponentS self)
+        private static void Destroy(this ActivityComponentS self)
         {
 
         }

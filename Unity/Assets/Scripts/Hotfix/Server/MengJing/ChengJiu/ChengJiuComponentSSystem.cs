@@ -8,7 +8,7 @@ namespace ET.Server
     public static partial class ChengJiuComponentSSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.ChengJiuComponentS self)
+        private static void Awake(this ChengJiuComponentS self)
         {
 
         }

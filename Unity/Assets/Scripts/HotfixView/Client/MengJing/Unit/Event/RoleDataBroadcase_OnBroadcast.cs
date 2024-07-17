@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [Event(SceneType.Demo)]
     public class RoleDataBroadcase_OnBroadcast: AEvent<Scene, RoleDataBroadcase>

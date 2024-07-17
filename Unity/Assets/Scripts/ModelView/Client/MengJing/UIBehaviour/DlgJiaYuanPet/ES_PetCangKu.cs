@@ -1,19 +1,19 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetCangKu : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_PetCangKu : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public List<RolePetInfo> ShowRolePetInfos = new();
 		public Dictionary<int, EntityRef<Scroll_Item_PetCangKuItem>> ScrollItemPetCangKuItems;
 		public List<(int, int)> ShowCangkuDefends = new();
 		public Dictionary<int, EntityRef<Scroll_Item_PetCangKuDefend>> ScrollItemPetCangKuDefends;
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_PetCangKuItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_PetCangKuItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -24,13 +24,13 @@ namespace ET.Client
      			}
      			if( this.m_E_PetCangKuItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_PetCangKuItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_PetCangKuItems");
+		    		this.m_E_PetCangKuItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_PetCangKuItems");
      			}
      			return this.m_E_PetCangKuItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_PetCangKuDefendsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_PetCangKuDefendsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -41,7 +41,7 @@ namespace ET.Client
      			}
      			if( this.m_E_PetCangKuDefendsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_PetCangKuDefendsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_PetCangKuDefends");
+		    		this.m_E_PetCangKuDefendsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_PetCangKuDefends");
      			}
      			return this.m_E_PetCangKuDefendsLoopVerticalScrollRect;
      		}
@@ -66,8 +66,8 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetCangKuItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetCangKuDefendsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_PetCangKuItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_PetCangKuDefendsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

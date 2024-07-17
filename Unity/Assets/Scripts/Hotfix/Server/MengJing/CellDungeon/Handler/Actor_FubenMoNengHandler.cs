@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class Actor_FubenMoNengHandler : MessageLocationHandler<Unit, Actor_FubenMoNengRequest, Actor_FubenMoNengResponse>

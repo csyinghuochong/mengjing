@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgSeasonMain))]
 	[EnableMethod]
 	public  class DlgSeasonMainViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Text E_CDdownTimeTextText
+		public Text E_CDdownTimeTextText
      	{
      		get
      		{
@@ -18,7 +18,7 @@ namespace ET.Client
      			}
      			if( this.m_E_CDdownTimeTextText == null )
      			{
-		    		this.m_E_CDdownTimeTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Top/E_CDdownTimeText");
+		    		this.m_E_CDdownTimeTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Top/E_CDdownTimeText");
      			}
      			return this.m_E_CDdownTimeTextText;
      		}
@@ -30,7 +30,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Text m_E_CDdownTimeTextText = null;
+		private Text m_E_CDdownTimeTextText = null;
 		public Transform uiTransform = null;
 	}
 }

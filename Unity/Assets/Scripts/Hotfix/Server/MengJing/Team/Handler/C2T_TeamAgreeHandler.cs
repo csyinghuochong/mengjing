@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     /// <summary>
     /// 同意组队邀请

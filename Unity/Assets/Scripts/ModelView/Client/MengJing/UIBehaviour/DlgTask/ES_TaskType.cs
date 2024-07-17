@@ -1,20 +1,19 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_TaskType : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy ,IUILogic
+	public  class ES_TaskType : Entity,IAwake<Transform>,IDestroy ,IUILogic
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_TaskTypeItem>> ScrollItemTaskTypeItems;
 		public List<TaskPro> ShowTaskPros = new();
 		public bool IsExpand;
 		public int TaskType;
 		
-		public UnityEngine.UI.Button E_SelectButton
+		public Button E_SelectButton
      	{
      		get
      		{
@@ -25,13 +24,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SelectButton == null )
      			{
-		    		this.m_E_SelectButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Select");
+		    		this.m_E_SelectButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Select");
      			}
      			return this.m_E_SelectButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_SelectImage
+		public Image E_SelectImage
      	{
      		get
      		{
@@ -42,13 +41,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SelectImage == null )
      			{
-		    		this.m_E_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Select");
+		    		this.m_E_SelectImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Select");
      			}
      			return this.m_E_SelectImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TaskTypeNameText
+		public Text E_TaskTypeNameText
      	{
      		get
      		{
@@ -59,13 +58,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TaskTypeNameText == null )
      			{
-		    		this.m_E_TaskTypeNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TaskTypeName");
+		    		this.m_E_TaskTypeNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TaskTypeName");
      			}
      			return this.m_E_TaskTypeNameText;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_TaskTypeItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_TaskTypeItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -76,7 +75,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TaskTypeItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_TaskTypeItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_TaskTypeItems");
+		    		this.m_E_TaskTypeItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_TaskTypeItems");
      			}
      			return this.m_E_TaskTypeItemsLoopVerticalScrollRect;
      		}
@@ -91,10 +90,10 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_SelectButton = null;
-		private UnityEngine.UI.Image m_E_SelectImage = null;
-		private UnityEngine.UI.Text m_E_TaskTypeNameText = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_TaskTypeItemsLoopVerticalScrollRect = null;
+		private Button m_E_SelectButton = null;
+		private Image m_E_SelectImage = null;
+		private Text m_E_TaskTypeNameText = null;
+		private LoopVerticalScrollRect m_E_TaskTypeItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

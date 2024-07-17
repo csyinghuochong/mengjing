@@ -1,12 +1,12 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_JiaYuanCooking : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_JiaYuanCooking : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public EntityRef<ES_CommonItem>[] CostItemList = new EntityRef<ES_CommonItem>[4];
 		public bool IsHoldDown = false;
@@ -89,7 +89,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -100,13 +100,13 @@ namespace ET.Client
      			}
      			if( this.m_E_BagItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_BagItems");
+		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_BagItems");
      			}
      			return this.m_E_BagItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonMakeButton
+		public Button E_ButtonMakeButton
      	{
      		get
      		{
@@ -117,13 +117,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonMakeButton == null )
      			{
-		    		this.m_E_ButtonMakeButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonMake");
+		    		this.m_E_ButtonMakeButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonMake");
      			}
      			return this.m_E_ButtonMakeButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonMakeImage
+		public Image E_ButtonMakeImage
      	{
      		get
      		{
@@ -134,7 +134,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonMakeImage == null )
      			{
-		    		this.m_E_ButtonMakeImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonMake");
+		    		this.m_E_ButtonMakeImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonMake");
      			}
      			return this.m_E_ButtonMakeImage;
      		}
@@ -168,9 +168,9 @@ namespace ET.Client
 		private EntityRef<ES_CommonItem> m_es_commonitem_1 = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem_2 = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem_3 = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Button m_E_ButtonMakeButton = null;
-		private UnityEngine.UI.Image m_E_ButtonMakeImage = null;
+		private LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
+		private Button m_E_ButtonMakeButton = null;
+		private Image m_E_ButtonMakeImage = null;
 		public Transform uiTransform = null;
 	}
 }

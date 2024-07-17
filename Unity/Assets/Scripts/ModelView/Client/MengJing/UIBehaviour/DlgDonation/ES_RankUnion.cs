@@ -1,19 +1,19 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RankUnion : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_RankUnion : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public List<RankRewardConfig> ShowRankRewardConfigs;
 		public Dictionary<int, EntityRef<Scroll_Item_RunRaceItem>> ScrollItemRunRaceItems;
 		public List<TaskPro> ShowTaskPros = new();
 		public Dictionary<int, EntityRef<Scroll_Item_RankUnionTaskItem>> ScrollItemRankUnionTaskItems;
 		
-		public UnityEngine.RectTransform EG_RankingListNodeRectTransform
+		public RectTransform EG_RankingListNodeRectTransform
      	{
      		get
      		{
@@ -24,13 +24,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_RankingListNodeRectTransform == null )
      			{
-		    		this.m_EG_RankingListNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"ScrollView/Viewport/EG_RankingListNode");
+		    		this.m_EG_RankingListNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"ScrollView/Viewport/EG_RankingListNode");
      			}
      			return this.m_EG_RankingListNodeRectTransform;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_UIRankUnionItemRectTransform
+		public RectTransform EG_UIRankUnionItemRectTransform
      	{
      		get
      		{
@@ -41,13 +41,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_UIRankUnionItemRectTransform == null )
      			{
-		    		this.m_EG_UIRankUnionItemRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"ScrollView/Viewport/EG_RankingListNode/EG_UIRankUnionItem");
+		    		this.m_EG_UIRankUnionItemRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"ScrollView/Viewport/EG_RankingListNode/EG_UIRankUnionItem");
      			}
      			return this.m_EG_UIRankUnionItemRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_RankUnionTaskItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_RankUnionTaskItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -58,13 +58,13 @@ namespace ET.Client
      			}
      			if( this.m_E_RankUnionTaskItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_RankUnionTaskItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RankUnionTaskItems");
+		    		this.m_E_RankUnionTaskItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RankUnionTaskItems");
      			}
      			return this.m_E_RankUnionTaskItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_RunRaceItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_RunRaceItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -75,7 +75,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RunRaceItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_RunRaceItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RunRaceItems");
+		    		this.m_E_RunRaceItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RunRaceItems");
      			}
      			return this.m_E_RunRaceItemsLoopVerticalScrollRect;
      		}
@@ -102,10 +102,10 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EG_RankingListNodeRectTransform = null;
-		private UnityEngine.RectTransform m_EG_UIRankUnionItemRectTransform = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_RankUnionTaskItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_RunRaceItemsLoopVerticalScrollRect = null;
+		private RectTransform m_EG_RankingListNodeRectTransform = null;
+		private RectTransform m_EG_UIRankUnionItemRectTransform = null;
+		private LoopVerticalScrollRect m_E_RankUnionTaskItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_RunRaceItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

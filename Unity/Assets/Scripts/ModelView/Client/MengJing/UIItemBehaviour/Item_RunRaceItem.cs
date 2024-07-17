@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -19,7 +19,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.UI.Text E_TextTipText
+		public Text E_TextTipText
      	{
      		get
      		{
@@ -32,13 +32,13 @@ namespace ET.Client
      			{
      				if( this.m_E_TextTipText == null )
      				{
-		    			this.m_E_TextTipText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextTip");
+		    			this.m_E_TextTipText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextTip");
      				}
      				return this.m_E_TextTipText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextTip");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextTip");
      			}
      		}
      	}
@@ -93,7 +93,7 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.UI.Text m_E_TextTipText = null;
+		private Text m_E_TextTipText = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
 		public Transform uiTransform = null;
 	}

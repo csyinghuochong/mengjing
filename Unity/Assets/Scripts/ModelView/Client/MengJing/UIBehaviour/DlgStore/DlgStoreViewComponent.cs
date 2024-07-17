@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgStore))]
 	[EnableMethod]
 	public  class DlgStoreViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_closeButtonButton
+		public Button E_closeButtonButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_closeButtonButton == null )
      			{
-		    		this.m_E_closeButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_closeButton");
+		    		this.m_E_closeButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_closeButton");
      			}
      			return this.m_E_closeButtonButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_closeButtonImage
+		public Image E_closeButtonImage
      	{
      		get
      		{
@@ -35,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_E_closeButtonImage == null )
      			{
-		    		this.m_E_closeButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_closeButton");
+		    		this.m_E_closeButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_closeButton");
      			}
      			return this.m_E_closeButtonImage;
      		}
@@ -61,7 +61,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_StoreItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_StoreItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -72,7 +72,7 @@ namespace ET.Client
      			}
      			if( this.m_E_StoreItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_StoreItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_StoreItems");
+		    		this.m_E_StoreItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_StoreItems");
      			}
      			return this.m_E_StoreItemsLoopVerticalScrollRect;
      		}
@@ -87,10 +87,10 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_closeButtonButton = null;
-		private UnityEngine.UI.Image m_E_closeButtonImage = null;
+		private Button m_E_closeButtonButton = null;
+		private Image m_E_closeButtonImage = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_StoreItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_StoreItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

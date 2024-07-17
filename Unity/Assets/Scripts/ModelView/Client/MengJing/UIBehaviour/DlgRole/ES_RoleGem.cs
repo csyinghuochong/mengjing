@@ -1,12 +1,12 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RoleGem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_RoleGem : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
@@ -111,7 +111,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.ToggleGroup E_ItemTypeSetToggleGroup
+		public ToggleGroup E_ItemTypeSetToggleGroup
      	{
      		get
      		{
@@ -122,13 +122,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemTypeSetToggleGroup == null )
      			{
-		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Right/E_ItemTypeSet");
+		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"Right/E_ItemTypeSet");
      			}
      			return this.m_E_ItemTypeSetToggleGroup;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -139,7 +139,7 @@ namespace ET.Client
      			}
      			if( this.m_E_BagItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_BagItems");
+		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_BagItems");
      			}
      			return this.m_E_BagItemsLoopVerticalScrollRect;
      		}
@@ -174,8 +174,8 @@ namespace ET.Client
 		private EntityRef<ES_RoleGemHole> m_es_rolegemhole_2 = null;
 		private EntityRef<ES_RoleGemHole> m_es_rolegemhole_3 = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
-		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
+		private ToggleGroup m_E_ItemTypeSetToggleGroup = null;
+		private LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

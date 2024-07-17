@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgPetFubenResultViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgPetFubenResultViewComponent))]
+	[FriendOfAttribute(typeof(DlgPetFubenResultViewComponent))]
 	public static partial class DlgPetFubenResultViewComponentSystem
 	{
 		[EntitySystem]

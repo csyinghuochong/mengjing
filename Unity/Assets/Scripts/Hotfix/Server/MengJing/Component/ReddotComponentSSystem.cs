@@ -7,12 +7,12 @@ namespace ET.Server
     public static partial class ReddotComponentSSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.ReddotComponentS self)
+        private static void Awake(this ReddotComponentS self)
         {
             self.ReddontList.Clear();
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.ReddotComponentS self)
+        private static void Destroy(this ReddotComponentS self)
         {
 
         }

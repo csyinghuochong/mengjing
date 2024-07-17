@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UniFramework.Event;
+using UnityEngine;
 using YooAsset;
 
 public class GameManager

@@ -1,9 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using UniFramework.Event;
 using UnityEngine;
 using UnityEngine.UI;
-using UniFramework.Event;
 
 public class PatchWindow : MonoBehaviour
 {
@@ -15,7 +14,7 @@ public class PatchWindow : MonoBehaviour
         private GameObject _cloneObject;
         private Text _content;
         private Button _btnOK;
-        private System.Action _clickOK;
+        private Action _clickOK;
 
         public bool ActiveSelf
         {
@@ -32,7 +31,7 @@ public class PatchWindow : MonoBehaviour
             _btnOK = cloneObject.transform.Find("btn_ok").GetComponent<Button>();
             _btnOK.onClick.AddListener(OnClickYes);
         }
-        public void Show(string content, System.Action clickOK)
+        public void Show(string content, Action clickOK)
         {
             _content.text = content;
             _clickOK = clickOK;
@@ -90,7 +89,7 @@ public class PatchWindow : MonoBehaviour
     {
         if (message is PatchEventDefine.InitializeFailed)
         {
-            System.Action callback = () =>
+            Action callback = () =>
             {
                 UserEventDefine.UserTryInitialize.SendEventMessage();
             };
@@ -104,7 +103,7 @@ public class PatchWindow : MonoBehaviour
         else if (message is PatchEventDefine.FoundUpdateFiles)
         {
             var msg = message as PatchEventDefine.FoundUpdateFiles;
-            System.Action callback = () =>
+            Action callback = () =>
             {
                 UserEventDefine.UserBeginDownloadWebFiles.SendEventMessage();
             };
@@ -123,7 +122,7 @@ public class PatchWindow : MonoBehaviour
         }
         else if (message is PatchEventDefine.PackageVersionUpdateFailed)
         {
-            System.Action callback = () =>
+            Action callback = () =>
             {
                 UserEventDefine.UserTryUpdatePackageVersion.SendEventMessage();
             };
@@ -131,7 +130,7 @@ public class PatchWindow : MonoBehaviour
         }
         else if (message is PatchEventDefine.PatchManifestUpdateFailed)
         {
-            System.Action callback = () =>
+            Action callback = () =>
             {
                 UserEventDefine.UserTryUpdatePatchManifest.SendEventMessage();
             };
@@ -140,7 +139,7 @@ public class PatchWindow : MonoBehaviour
         else if (message is PatchEventDefine.WebFileDownloadFailed)
         {
             var msg = message as PatchEventDefine.WebFileDownloadFailed;
-            System.Action callback = () =>
+            Action callback = () =>
             {
                 UserEventDefine.UserTryDownloadWebFiles.SendEventMessage();
             };
@@ -148,14 +147,14 @@ public class PatchWindow : MonoBehaviour
         }
         else
         {
-            throw new System.NotImplementedException($"{message.GetType()}");
+            throw new NotImplementedException($"{message.GetType()}");
         }
     }
 
     /// <summary>
     /// 显示对话框
     /// </summary>
-    private void ShowMessageBox(string content, System.Action ok)
+    private void ShowMessageBox(string content, Action ok)
     {
         // 尝试获取一个可用的对话框
         MessageBox msgBox = null;
@@ -173,7 +172,7 @@ public class PatchWindow : MonoBehaviour
         if (msgBox == null)
         {
             msgBox = new MessageBox();
-            var cloneObject = GameObject.Instantiate(_messageBoxObj, _messageBoxObj.transform.parent);
+            var cloneObject = Instantiate(_messageBoxObj, _messageBoxObj.transform.parent);
             msgBox.Create(cloneObject);
             _msgBoxList.Add(msgBox);
         }

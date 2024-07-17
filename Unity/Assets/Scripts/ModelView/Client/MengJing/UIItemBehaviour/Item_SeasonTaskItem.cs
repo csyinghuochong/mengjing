@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -21,7 +21,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.RectTransform EG_ItemRectTransform
+		public RectTransform EG_ItemRectTransform
      	{
      		get
      		{
@@ -34,18 +34,18 @@ namespace ET.Client
      			{
      				if( this.m_EG_ItemRectTransform == null )
      				{
-		    			this.m_EG_ItemRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Item");
+		    			this.m_EG_ItemRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Item");
      				}
      				return this.m_EG_ItemRectTransform;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Item");
+		    		return UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Item");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_lineDiImage
+		public Image E_Img_lineDiImage
      	{
      		get
      		{
@@ -58,18 +58,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Img_lineDiImage == null )
      				{
-		    			this.m_E_Img_lineDiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Item/E_Img_lineDi");
+		    			this.m_E_Img_lineDiImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Item/E_Img_lineDi");
      				}
      				return this.m_E_Img_lineDiImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Item/E_Img_lineDi");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Item/E_Img_lineDi");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_lineImage
+		public Image E_Img_lineImage
      	{
      		get
      		{
@@ -82,18 +82,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Img_lineImage == null )
      				{
-		    			this.m_E_Img_lineImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Item/E_Img_line");
+		    			this.m_E_Img_lineImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Item/E_Img_line");
      				}
      				return this.m_E_Img_lineImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Item/E_Img_line");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Item/E_Img_line");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_ScelectImgImage
+		public Image E_ScelectImgImage
      	{
      		get
      		{
@@ -106,18 +106,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ScelectImgImage == null )
      				{
-		    			this.m_E_ScelectImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Item/E_ScelectImg");
+		    			this.m_E_ScelectImgImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Item/E_ScelectImg");
      				}
      				return this.m_E_ScelectImgImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Item/E_ScelectImg");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Item/E_ScelectImg");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Button E_SeasonIconButton
+		public Button E_SeasonIconButton
      	{
      		get
      		{
@@ -130,18 +130,18 @@ namespace ET.Client
      			{
      				if( this.m_E_SeasonIconButton == null )
      				{
-		    			this.m_E_SeasonIconButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Item/E_SeasonIcon");
+		    			this.m_E_SeasonIconButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Item/E_SeasonIcon");
      				}
      				return this.m_E_SeasonIconButton;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Item/E_SeasonIcon");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Item/E_SeasonIcon");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_SeasonIconImage
+		public Image E_SeasonIconImage
      	{
      		get
      		{
@@ -154,18 +154,18 @@ namespace ET.Client
      			{
      				if( this.m_E_SeasonIconImage == null )
      				{
-		    			this.m_E_SeasonIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Item/E_SeasonIcon");
+		    			this.m_E_SeasonIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Item/E_SeasonIcon");
      				}
      				return this.m_E_SeasonIconImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Item/E_SeasonIcon");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Item/E_SeasonIcon");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextText
+		public Text E_TextText
      	{
      		get
      		{
@@ -178,13 +178,13 @@ namespace ET.Client
      			{
      				if( this.m_E_TextText == null )
      				{
-		    			this.m_E_TextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Item/E_Text");
+		    			this.m_E_TextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Item/E_Text");
      				}
      				return this.m_E_TextText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Item/E_Text");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Item/E_Text");
      			}
      		}
      	}
@@ -202,13 +202,13 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.RectTransform m_EG_ItemRectTransform = null;
-		private UnityEngine.UI.Image m_E_Img_lineDiImage = null;
-		private UnityEngine.UI.Image m_E_Img_lineImage = null;
-		private UnityEngine.UI.Image m_E_ScelectImgImage = null;
-		private UnityEngine.UI.Button m_E_SeasonIconButton = null;
-		private UnityEngine.UI.Image m_E_SeasonIconImage = null;
-		private UnityEngine.UI.Text m_E_TextText = null;
+		private RectTransform m_EG_ItemRectTransform = null;
+		private Image m_E_Img_lineDiImage = null;
+		private Image m_E_Img_lineImage = null;
+		private Image m_E_ScelectImgImage = null;
+		private Button m_E_SeasonIconButton = null;
+		private Image m_E_SeasonIconImage = null;
+		private Text m_E_TextText = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using Vector3 = System.Numerics.Vector3;
 
 namespace ET.Client
 {
@@ -40,7 +41,7 @@ namespace ET.Client
             //    return true;
             //}
             Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
-            System.Numerics.Vector3 unitPosi = new(unit.Position.x, unit.Position.y, unit.Position.z);
+            Vector3 unitPosi = new(unit.Position.x, unit.Position.y, unit.Position.z);
             Unit npc = TaskHelper.GetNpcByConfigId(root, unitPosi, npcid);
             if (npc == null)
             {

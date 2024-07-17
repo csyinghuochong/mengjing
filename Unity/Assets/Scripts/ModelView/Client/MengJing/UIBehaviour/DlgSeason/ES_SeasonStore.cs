@@ -1,17 +1,17 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_SeasonStore : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_SeasonStore : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public List<int> ShowItems = new();
 		public Dictionary<int, EntityRef<Scroll_Item_SeasonStoreItem>> ScrollItemSeasonStoreItems;
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_SeasonStoreItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_SeasonStoreItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -22,13 +22,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SeasonStoreItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_SeasonStoreItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_SeasonStoreItems");
+		    		this.m_E_SeasonStoreItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_SeasonStoreItems");
      			}
      			return this.m_E_SeasonStoreItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Text E_GoldNumTextText
+		public Text E_GoldNumTextText
      	{
      		get
      		{
@@ -39,13 +39,13 @@ namespace ET.Client
      			}
      			if( this.m_E_GoldNumTextText == null )
      			{
-		    		this.m_E_GoldNumTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_GoldNumText");
+		    		this.m_E_GoldNumTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_GoldNumText");
      			}
      			return this.m_E_GoldNumTextText;
      		}
      	}
 
-		public UnityEngine.UI.Image E_GoldImgImage
+		public Image E_GoldImgImage
      	{
      		get
      		{
@@ -56,7 +56,7 @@ namespace ET.Client
      			}
      			if( this.m_E_GoldImgImage == null )
      			{
-		    		this.m_E_GoldImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_GoldImg");
+		    		this.m_E_GoldImgImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_GoldImg");
      			}
      			return this.m_E_GoldImgImage;
      		}
@@ -82,9 +82,9 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_SeasonStoreItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Text m_E_GoldNumTextText = null;
-		private UnityEngine.UI.Image m_E_GoldImgImage = null;
+		private LoopVerticalScrollRect m_E_SeasonStoreItemsLoopVerticalScrollRect = null;
+		private Text m_E_GoldNumTextText = null;
+		private Image m_E_GoldImgImage = null;
 		public Transform uiTransform = null;
 	}
 }

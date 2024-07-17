@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -19,7 +19,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.UI.Image E_Ima_IconImage
+		public Image E_Ima_IconImage
      	{
      		get
      		{
@@ -32,18 +32,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Ima_IconImage == null )
      				{
-		    			this.m_E_Ima_IconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Ima_Icon");
+		    			this.m_E_Ima_IconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Ima_Icon");
      				}
      				return this.m_E_Ima_IconImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Ima_Icon");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Ima_Icon");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_Ima_CompleteTaskImage
+		public Image E_Ima_CompleteTaskImage
      	{
      		get
      		{
@@ -56,18 +56,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Ima_CompleteTaskImage == null )
      				{
-		    			this.m_E_Ima_CompleteTaskImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Ima_CompleteTask");
+		    			this.m_E_Ima_CompleteTaskImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Ima_CompleteTask");
      				}
      				return this.m_E_Ima_CompleteTaskImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Ima_CompleteTask");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Ima_CompleteTask");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_ProValueText
+		public Text E_Lab_ProValueText
      	{
      		get
      		{
@@ -80,18 +80,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Lab_ProValueText == null )
      				{
-		    			this.m_E_Lab_ProValueText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_ProValue");
+		    			this.m_E_Lab_ProValueText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_ProValue");
      				}
      				return this.m_E_Lab_ProValueText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_ProValue");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_ProValue");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_ChengJiuNumText
+		public Text E_Lab_ChengJiuNumText
      	{
      		get
      		{
@@ -104,18 +104,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Lab_ChengJiuNumText == null )
      				{
-		    			this.m_E_Lab_ChengJiuNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_ChengJiuNum");
+		    			this.m_E_Lab_ChengJiuNumText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_ChengJiuNum");
      				}
      				return this.m_E_Lab_ChengJiuNumText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_ChengJiuNum");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_ChengJiuNum");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_TaskDesText
+		public Text E_Lab_TaskDesText
      	{
      		get
      		{
@@ -128,18 +128,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Lab_TaskDesText == null )
      				{
-		    			this.m_E_Lab_TaskDesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_TaskDes");
+		    			this.m_E_Lab_TaskDesText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_TaskDes");
      				}
      				return this.m_E_Lab_TaskDesText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_TaskDes");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_TaskDes");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_TaskNameText
+		public Text E_Lab_TaskNameText
      	{
      		get
      		{
@@ -152,13 +152,13 @@ namespace ET.Client
      			{
      				if( this.m_E_Lab_TaskNameText == null )
      				{
-		    			this.m_E_Lab_TaskNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_TaskName");
+		    			this.m_E_Lab_TaskNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_TaskName");
      				}
      				return this.m_E_Lab_TaskNameText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_TaskName");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_TaskName");
      			}
      		}
      	}
@@ -175,12 +175,12 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.UI.Image m_E_Ima_IconImage = null;
-		private UnityEngine.UI.Image m_E_Ima_CompleteTaskImage = null;
-		private UnityEngine.UI.Text m_E_Lab_ProValueText = null;
-		private UnityEngine.UI.Text m_E_Lab_ChengJiuNumText = null;
-		private UnityEngine.UI.Text m_E_Lab_TaskDesText = null;
-		private UnityEngine.UI.Text m_E_Lab_TaskNameText = null;
+		private Image m_E_Ima_IconImage = null;
+		private Image m_E_Ima_CompleteTaskImage = null;
+		private Text m_E_Lab_ProValueText = null;
+		private Text m_E_Lab_ChengJiuNumText = null;
+		private Text m_E_Lab_TaskDesText = null;
+		private Text m_E_Lab_TaskNameText = null;
 		public Transform uiTransform = null;
 	}
 }

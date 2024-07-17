@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgOccTwoViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgOccTwoViewComponent))]
+	[FriendOfAttribute(typeof(DlgOccTwoViewComponent))]
 	public static partial class DlgOccTwoViewComponentSystem
 	{
 		[EntitySystem]

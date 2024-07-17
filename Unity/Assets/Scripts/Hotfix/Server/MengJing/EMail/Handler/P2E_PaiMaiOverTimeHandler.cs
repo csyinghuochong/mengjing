@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.EMail)]
     public class P2E_PaiMaiOverTimeHandler : MessageHandler<Scene, P2E_PaiMaiOverTimeRequest, E2P_PaiMaiOverTimeResponse>

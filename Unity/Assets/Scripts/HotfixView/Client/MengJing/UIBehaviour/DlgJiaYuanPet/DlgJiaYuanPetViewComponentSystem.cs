@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgJiaYuanPetViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgJiaYuanPetViewComponent))]
+	[FriendOfAttribute(typeof(DlgJiaYuanPetViewComponent))]
 	public static partial class DlgJiaYuanPetViewComponentSystem
 	{
 		[EntitySystem]

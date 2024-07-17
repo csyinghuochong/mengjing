@@ -108,7 +108,7 @@ namespace ET
             {
                 float hidevaluemin = float.Parse(hidevalueinfo[1]);
                 float hidevaluemax = float.Parse(hidevalueinfo[2]);
-                (hidevaluemin, hidevaluemax) = ItemHelper.GetJingHeHideProRange(hidevaluemin, hidevaluemax, qulity);
+                (hidevaluemin, hidevaluemax) = GetJingHeHideProRange(hidevaluemin, hidevaluemax, qulity);
                 float hidevalue = RandomHelper.RandomNumberFloat(hidevaluemin, hidevaluemax);
                 // float hidevalue = RandomHelper.RandomNumberFloat(hidevaluemin, hidevalueman - hidevaluemin);
                 // if (qulity < 90) {
@@ -121,7 +121,7 @@ namespace ET
             {
                 int hidevaluemin = int.Parse(hidevalueinfo[1]);
                 int hidevaluemax = int.Parse(hidevalueinfo[2]);
-                (hidevaluemin, hidevaluemax) = ItemHelper.GetJingHeHideProRange(hidevaluemin, hidevaluemax, qulity);
+                (hidevaluemin, hidevaluemax) = GetJingHeHideProRange(hidevaluemin, hidevaluemax, qulity);
                 int hidevalue = RandomHelper.RandomNumber(hidevaluemin, hidevaluemax);
                 // int hidevalue = RandomHelper.RandomNumber(hidevaluemin, hidevaluemax - hidevaluemin);
                 // if (qulity < 90)

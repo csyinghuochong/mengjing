@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgPetMiningFormation))]
 	[EnableMethod]
 	public  class DlgPetMiningFormationViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_ButtonConfirmButton
+		public Button E_ButtonConfirmButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonConfirmButton == null )
      			{
-		    		this.m_E_ButtonConfirmButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonConfirm");
+		    		this.m_E_ButtonConfirmButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonConfirm");
      			}
      			return this.m_E_ButtonConfirmButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonConfirmImage
+		public Image E_ButtonConfirmImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonConfirmImage == null )
      			{
-		    		this.m_E_ButtonConfirmImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonConfirm");
+		    		this.m_E_ButtonConfirmImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonConfirm");
      			}
      			return this.m_E_ButtonConfirmImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonChallengeButton
+		public Button E_ButtonChallengeButton
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonChallengeButton == null )
      			{
-		    		this.m_E_ButtonChallengeButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonChallenge");
+		    		this.m_E_ButtonChallengeButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonChallenge");
      			}
      			return this.m_E_ButtonChallengeButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonChallengeImage
+		public Image E_ButtonChallengeImage
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonChallengeImage == null )
      			{
-		    		this.m_E_ButtonChallengeImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonChallenge");
+		    		this.m_E_ButtonChallengeImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonChallenge");
      			}
      			return this.m_E_ButtonChallengeImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_IconItemDragImage
+		public Image E_IconItemDragImage
      	{
      		get
      		{
@@ -86,7 +86,7 @@ namespace ET.Client
      			}
      			if( this.m_E_IconItemDragImage == null )
      			{
-		    		this.m_E_IconItemDragImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_IconItemDrag");
+		    		this.m_E_IconItemDragImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_IconItemDrag");
      			}
      			return this.m_E_IconItemDragImage;
      		}
@@ -112,7 +112,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_CloseButtonButton
+		public Button E_CloseButtonButton
      	{
      		get
      		{
@@ -123,13 +123,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseButtonButton == null )
      			{
-		    		this.m_E_CloseButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_CloseButton");
+		    		this.m_E_CloseButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_CloseButton");
      			}
      			return this.m_E_CloseButtonButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_CloseButtonImage
+		public Image E_CloseButtonImage
      	{
      		get
      		{
@@ -140,13 +140,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseButtonImage == null )
      			{
-		    		this.m_E_CloseButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_CloseButton");
+		    		this.m_E_CloseButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_CloseButton");
      			}
      			return this.m_E_CloseButtonImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextNumberText
+		public Text E_TextNumberText
      	{
      		get
      		{
@@ -157,7 +157,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TextNumberText == null )
      			{
-		    		this.m_E_TextNumberText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextNumber");
+		    		this.m_E_TextNumberText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextNumber");
      			}
      			return this.m_E_TextNumberText;
      		}
@@ -177,15 +177,15 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_ButtonConfirmButton = null;
-		private UnityEngine.UI.Image m_E_ButtonConfirmImage = null;
-		private UnityEngine.UI.Button m_E_ButtonChallengeButton = null;
-		private UnityEngine.UI.Image m_E_ButtonChallengeImage = null;
-		private UnityEngine.UI.Image m_E_IconItemDragImage = null;
+		private Button m_E_ButtonConfirmButton = null;
+		private Image m_E_ButtonConfirmImage = null;
+		private Button m_E_ButtonChallengeButton = null;
+		private Image m_E_ButtonChallengeImage = null;
+		private Image m_E_IconItemDragImage = null;
 		private EntityRef<ES_PetFormationSet> m_es_petformationset = null;
-		private UnityEngine.UI.Button m_E_CloseButtonButton = null;
-		private UnityEngine.UI.Image m_E_CloseButtonImage = null;
-		private UnityEngine.UI.Text m_E_TextNumberText = null;
+		private Button m_E_CloseButtonButton = null;
+		private Image m_E_CloseButtonImage = null;
+		private Text m_E_TextNumberText = null;
 		public Transform uiTransform = null;
 	}
 }

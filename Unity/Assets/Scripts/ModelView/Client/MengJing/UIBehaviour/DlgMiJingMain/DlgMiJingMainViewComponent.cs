@@ -1,13 +1,12 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgMiJingMain))]
 	[EnableMethod]
 	public  class DlgMiJingMainViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.RectTransform EG_DamageListNodeRectTransform
+		public RectTransform EG_DamageListNodeRectTransform
      	{
      		get
      		{
@@ -18,7 +17,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_DamageListNodeRectTransform == null )
      			{
-		    		this.m_EG_DamageListNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_DamageListNode");
+		    		this.m_EG_DamageListNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Left/EG_DamageListNode");
      			}
      			return this.m_EG_DamageListNodeRectTransform;
      		}
@@ -30,7 +29,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EG_DamageListNodeRectTransform = null;
+		private RectTransform m_EG_DamageListNodeRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace ET
 {
@@ -36,12 +35,12 @@ namespace ET
             return ids;
         }
         [EntitySystem]
-        private static void Awake(this ET.UnitComponent self)
+        private static void Awake(this UnitComponent self)
         {
 
         }
         [EntitySystem]
-        private static void Destroy(this ET.UnitComponent self)
+        private static void Destroy(this UnitComponent self)
         {
 
         }

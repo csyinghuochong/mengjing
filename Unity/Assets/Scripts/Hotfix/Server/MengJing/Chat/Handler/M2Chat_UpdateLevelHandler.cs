@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Chat)]
     public class M2Chat_UpdateLevelHandler : MessageHandler<Scene, M2Chat_UpdateLevel, Chat2M_UpdateLevel>

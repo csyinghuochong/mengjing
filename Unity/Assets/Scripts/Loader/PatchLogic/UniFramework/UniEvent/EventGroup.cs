@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace UniFramework.Event
 {
 	public class EventGroup
 	{
-		private readonly Dictionary<System.Type, List<Action<IEventMessage>>> _cachedListener = new Dictionary<System.Type, List<Action<IEventMessage>>>();
+		private readonly Dictionary<Type, List<Action<IEventMessage>>> _cachedListener = new Dictionary<Type, List<Action<IEventMessage>>>();
 
 		/// <summary>
 		/// 添加一个监听
 		/// </summary>
-		public void AddListener<TEvent>(System.Action<IEventMessage> listener) where TEvent : IEventMessage
+		public void AddListener<TEvent>(Action<IEventMessage> listener) where TEvent : IEventMessage
 		{
-			System.Type eventType = typeof(TEvent);
+			Type eventType = typeof(TEvent);
 			if (_cachedListener.ContainsKey(eventType) == false)
 				_cachedListener.Add(eventType, new List<Action<IEventMessage>>());
 
@@ -35,7 +34,7 @@ namespace UniFramework.Event
 		{
 			foreach (var pair in _cachedListener)
 			{
-				System.Type eventType = pair.Key;
+				Type eventType = pair.Key;
 				for (int i = 0; i < pair.Value.Count; i++)
 				{
 					UniEvent.RemoveListener(eventType, pair.Value[i]);

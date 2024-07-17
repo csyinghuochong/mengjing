@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.EMail)]
     public class M2E_EMailSendHandler: MessageHandler<Scene, M2E_EMailSendRequest, E2M_EMailSendResponse>

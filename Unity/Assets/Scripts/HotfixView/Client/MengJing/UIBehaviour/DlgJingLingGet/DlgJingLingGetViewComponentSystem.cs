@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgJingLingGetViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgJingLingGetViewComponent))]
+	[FriendOfAttribute(typeof(DlgJingLingGetViewComponent))]
 	public static partial class DlgJingLingGetViewComponentSystem
 	{
 		[EntitySystem]

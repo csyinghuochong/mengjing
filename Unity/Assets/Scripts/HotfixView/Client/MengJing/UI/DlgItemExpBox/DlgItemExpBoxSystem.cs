@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
-using UnityEngine;
+﻿using System;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace ET.Client
 {

@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgRunRaceMain))]
 	[EnableMethod]
 	public  class DlgRunRaceMainViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Text E_ReadyTimeTextText
+		public Text E_ReadyTimeTextText
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ReadyTimeTextText == null )
      			{
-		    		this.m_E_ReadyTimeTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Top/E_ReadyTimeText");
+		    		this.m_E_ReadyTimeTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Top/E_ReadyTimeText");
      			}
      			return this.m_E_ReadyTimeTextText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TransformTimeTextText
+		public Text E_TransformTimeTextText
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TransformTimeTextText == null )
      			{
-		    		this.m_E_TransformTimeTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Top/E_TransformTimeText");
+		    		this.m_E_TransformTimeTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Top/E_TransformTimeText");
      			}
      			return this.m_E_TransformTimeTextText;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_RankingListNodeRectTransform
+		public RectTransform EG_RankingListNodeRectTransform
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_RankingListNodeRectTransform == null )
      			{
-		    		this.m_EG_RankingListNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/ScrollView/Viewport/EG_RankingListNode");
+		    		this.m_EG_RankingListNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Left/ScrollView/Viewport/EG_RankingListNode");
      			}
      			return this.m_EG_RankingListNodeRectTransform;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_PlayerInfoItem_1RectTransform
+		public RectTransform EG_PlayerInfoItem_1RectTransform
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_PlayerInfoItem_1RectTransform == null )
      			{
-		    		this.m_EG_PlayerInfoItem_1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/ScrollView/Viewport/EG_RankingListNode/EG_PlayerInfoItem_1");
+		    		this.m_EG_PlayerInfoItem_1RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Left/ScrollView/Viewport/EG_RankingListNode/EG_PlayerInfoItem_1");
      			}
      			return this.m_EG_PlayerInfoItem_1RectTransform;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_PlayerInfoItem_2RectTransform
+		public RectTransform EG_PlayerInfoItem_2RectTransform
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_PlayerInfoItem_2RectTransform == null )
      			{
-		    		this.m_EG_PlayerInfoItem_2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/ScrollView/Viewport/EG_RankingListNode/EG_PlayerInfoItem_2");
+		    		this.m_EG_PlayerInfoItem_2RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Left/ScrollView/Viewport/EG_RankingListNode/EG_PlayerInfoItem_2");
      			}
      			return this.m_EG_PlayerInfoItem_2RectTransform;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_PlayerInfoItem_3RectTransform
+		public RectTransform EG_PlayerInfoItem_3RectTransform
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_PlayerInfoItem_3RectTransform == null )
      			{
-		    		this.m_EG_PlayerInfoItem_3RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/ScrollView/Viewport/EG_RankingListNode/EG_PlayerInfoItem_3");
+		    		this.m_EG_PlayerInfoItem_3RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Left/ScrollView/Viewport/EG_RankingListNode/EG_PlayerInfoItem_3");
      			}
      			return this.m_EG_PlayerInfoItem_3RectTransform;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_PlayerInfoItem_OtherRectTransform
+		public RectTransform EG_PlayerInfoItem_OtherRectTransform
      	{
      		get
      		{
@@ -120,7 +120,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_PlayerInfoItem_OtherRectTransform == null )
      			{
-		    		this.m_EG_PlayerInfoItem_OtherRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/ScrollView/Viewport/EG_RankingListNode/EG_PlayerInfoItem_Other");
+		    		this.m_EG_PlayerInfoItem_OtherRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Left/ScrollView/Viewport/EG_RankingListNode/EG_PlayerInfoItem_Other");
      			}
      			return this.m_EG_PlayerInfoItem_OtherRectTransform;
      		}
@@ -138,13 +138,13 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Text m_E_ReadyTimeTextText = null;
-		private UnityEngine.UI.Text m_E_TransformTimeTextText = null;
-		private UnityEngine.RectTransform m_EG_RankingListNodeRectTransform = null;
-		private UnityEngine.RectTransform m_EG_PlayerInfoItem_1RectTransform = null;
-		private UnityEngine.RectTransform m_EG_PlayerInfoItem_2RectTransform = null;
-		private UnityEngine.RectTransform m_EG_PlayerInfoItem_3RectTransform = null;
-		private UnityEngine.RectTransform m_EG_PlayerInfoItem_OtherRectTransform = null;
+		private Text m_E_ReadyTimeTextText = null;
+		private Text m_E_TransformTimeTextText = null;
+		private RectTransform m_EG_RankingListNodeRectTransform = null;
+		private RectTransform m_EG_PlayerInfoItem_1RectTransform = null;
+		private RectTransform m_EG_PlayerInfoItem_2RectTransform = null;
+		private RectTransform m_EG_PlayerInfoItem_3RectTransform = null;
+		private RectTransform m_EG_PlayerInfoItem_OtherRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

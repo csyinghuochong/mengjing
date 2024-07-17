@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     public class G2M_RechargeRequestHandler : MessageHandler<Unit, G2M_RechargeResultRequest, M2G_RechargeResultResponse>

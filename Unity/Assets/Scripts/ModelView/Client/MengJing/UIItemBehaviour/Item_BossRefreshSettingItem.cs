@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -19,7 +19,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.UI.Text E_NameTextText
+		public Text E_NameTextText
      	{
      		get
      		{
@@ -32,18 +32,18 @@ namespace ET.Client
      			{
      				if( this.m_E_NameTextText == null )
      				{
-		    			this.m_E_NameTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_NameText");
+		    			this.m_E_NameTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_NameText");
      				}
      				return this.m_E_NameTextText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_NameText");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_NameText");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Button E_ToggleBtnButton
+		public Button E_ToggleBtnButton
      	{
      		get
      		{
@@ -56,18 +56,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ToggleBtnButton == null )
      				{
-		    			this.m_E_ToggleBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ToggleBtn");
+		    			this.m_E_ToggleBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ToggleBtn");
      				}
      				return this.m_E_ToggleBtnButton;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ToggleBtn");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ToggleBtn");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_ToggleBtnImage
+		public Image E_ToggleBtnImage
      	{
      		get
      		{
@@ -80,18 +80,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ToggleBtnImage == null )
      				{
-		    			this.m_E_ToggleBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ToggleBtn");
+		    			this.m_E_ToggleBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ToggleBtn");
      				}
      				return this.m_E_ToggleBtnImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ToggleBtn");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ToggleBtn");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_ShowTextImage
+		public Image E_ShowTextImage
      	{
      		get
      		{
@@ -104,13 +104,13 @@ namespace ET.Client
      			{
      				if( this.m_E_ShowTextImage == null )
      				{
-		    			this.m_E_ShowTextImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ToggleBtn/E_ShowText");
+		    			this.m_E_ShowTextImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ToggleBtn/E_ShowText");
      				}
      				return this.m_E_ShowTextImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ToggleBtn/E_ShowText");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ToggleBtn/E_ShowText");
      			}
      		}
      	}
@@ -125,10 +125,10 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.UI.Text m_E_NameTextText = null;
-		private UnityEngine.UI.Button m_E_ToggleBtnButton = null;
-		private UnityEngine.UI.Image m_E_ToggleBtnImage = null;
-		private UnityEngine.UI.Image m_E_ShowTextImage = null;
+		private Text m_E_NameTextText = null;
+		private Button m_E_ToggleBtnButton = null;
+		private Image m_E_ToggleBtnImage = null;
+		private Image m_E_ShowTextImage = null;
 		public Transform uiTransform = null;
 	}
 }

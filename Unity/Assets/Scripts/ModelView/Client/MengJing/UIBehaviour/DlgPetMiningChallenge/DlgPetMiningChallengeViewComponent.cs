@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgPetMiningChallenge))]
 	[EnableMethod]
 	public  class DlgPetMiningChallengeViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_ButtonCloseButton
+		public Button E_ButtonCloseButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCloseButton == null )
      			{
-		    		this.m_E_ButtonCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonClose");
+		    		this.m_E_ButtonCloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonClose");
      			}
      			return this.m_E_ButtonCloseButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonCloseImage
+		public Image E_ButtonCloseImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCloseImage == null )
      			{
-		    		this.m_E_ButtonCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonClose");
+		    		this.m_E_ButtonCloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonClose");
      			}
      			return this.m_E_ButtonCloseImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonConfirmButton
+		public Button E_ButtonConfirmButton
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonConfirmButton == null )
      			{
-		    		this.m_E_ButtonConfirmButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonConfirm");
+		    		this.m_E_ButtonConfirmButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonConfirm");
      			}
      			return this.m_E_ButtonConfirmButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonConfirmImage
+		public Image E_ButtonConfirmImage
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonConfirmImage == null )
      			{
-		    		this.m_E_ButtonConfirmImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonConfirm");
+		    		this.m_E_ButtonConfirmImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonConfirm");
      			}
      			return this.m_E_ButtonConfirmImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonResetButton
+		public Button E_ButtonResetButton
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonResetButton == null )
      			{
-		    		this.m_E_ButtonResetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonReset");
+		    		this.m_E_ButtonResetButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonReset");
      			}
      			return this.m_E_ButtonResetButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonResetImage
+		public Image E_ButtonResetImage
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonResetImage == null )
      			{
-		    		this.m_E_ButtonResetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonReset");
+		    		this.m_E_ButtonResetImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonReset");
      			}
      			return this.m_E_ButtonResetImage;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_TeamListNodeRectTransform
+		public RectTransform EG_TeamListNodeRectTransform
      	{
      		get
      		{
@@ -120,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_TeamListNodeRectTransform == null )
      			{
-		    		this.m_EG_TeamListNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_TeamListNode");
+		    		this.m_EG_TeamListNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_TeamListNode");
      			}
      			return this.m_EG_TeamListNodeRectTransform;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_DefendTeamRectTransform
+		public RectTransform EG_DefendTeamRectTransform
      	{
      		get
      		{
@@ -137,13 +137,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_DefendTeamRectTransform == null )
      			{
-		    		this.m_EG_DefendTeamRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_DefendTeam");
+		    		this.m_EG_DefendTeamRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_DefendTeam");
      			}
      			return this.m_EG_DefendTeamRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Image E_RawImageImage
+		public Image E_RawImageImage
      	{
      		get
      		{
@@ -154,13 +154,13 @@ namespace ET.Client
      			}
      			if( this.m_E_RawImageImage == null )
      			{
-		    		this.m_E_RawImageImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_RawImage");
+		    		this.m_E_RawImageImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_RawImage");
      			}
      			return this.m_E_RawImageImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_mingText
+		public Text E_Text_mingText
      	{
      		get
      		{
@@ -171,13 +171,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_mingText == null )
      			{
-		    		this.m_E_Text_mingText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_ming");
+		    		this.m_E_Text_mingText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_ming");
      			}
      			return this.m_E_Text_mingText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_playerText
+		public Text E_Text_playerText
      	{
      		get
      		{
@@ -188,13 +188,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_playerText == null )
      			{
-		    		this.m_E_Text_playerText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_player");
+		    		this.m_E_Text_playerText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_player");
      			}
      			return this.m_E_Text_playerText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_chanchuText
+		public Text E_Text_chanchuText
      	{
      		get
      		{
@@ -205,13 +205,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_chanchuText == null )
      			{
-		    		this.m_E_Text_chanchuText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_chanchu");
+		    		this.m_E_Text_chanchuText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_chanchu");
      			}
      			return this.m_E_Text_chanchuText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextChallengeCDText
+		public Text E_TextChallengeCDText
      	{
      		get
      		{
@@ -222,13 +222,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextChallengeCDText == null )
      			{
-		    		this.m_E_TextChallengeCDText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextChallengeCD");
+		    		this.m_E_TextChallengeCDText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextChallengeCD");
      			}
      			return this.m_E_TextChallengeCDText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextChallengeTimeText
+		public Text E_TextChallengeTimeText
      	{
      		get
      		{
@@ -239,7 +239,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TextChallengeTimeText == null )
      			{
-		    		this.m_E_TextChallengeTimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextChallengeTime");
+		    		this.m_E_TextChallengeTimeText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextChallengeTime");
      			}
      			return this.m_E_TextChallengeTimeText;
      		}
@@ -264,20 +264,20 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_ButtonCloseButton = null;
-		private UnityEngine.UI.Image m_E_ButtonCloseImage = null;
-		private UnityEngine.UI.Button m_E_ButtonConfirmButton = null;
-		private UnityEngine.UI.Image m_E_ButtonConfirmImage = null;
-		private UnityEngine.UI.Button m_E_ButtonResetButton = null;
-		private UnityEngine.UI.Image m_E_ButtonResetImage = null;
-		private UnityEngine.RectTransform m_EG_TeamListNodeRectTransform = null;
-		private UnityEngine.RectTransform m_EG_DefendTeamRectTransform = null;
-		private UnityEngine.UI.Image m_E_RawImageImage = null;
-		private UnityEngine.UI.Text m_E_Text_mingText = null;
-		private UnityEngine.UI.Text m_E_Text_playerText = null;
-		private UnityEngine.UI.Text m_E_Text_chanchuText = null;
-		private UnityEngine.UI.Text m_E_TextChallengeCDText = null;
-		private UnityEngine.UI.Text m_E_TextChallengeTimeText = null;
+		private Button m_E_ButtonCloseButton = null;
+		private Image m_E_ButtonCloseImage = null;
+		private Button m_E_ButtonConfirmButton = null;
+		private Image m_E_ButtonConfirmImage = null;
+		private Button m_E_ButtonResetButton = null;
+		private Image m_E_ButtonResetImage = null;
+		private RectTransform m_EG_TeamListNodeRectTransform = null;
+		private RectTransform m_EG_DefendTeamRectTransform = null;
+		private Image m_E_RawImageImage = null;
+		private Text m_E_Text_mingText = null;
+		private Text m_E_Text_playerText = null;
+		private Text m_E_Text_chanchuText = null;
+		private Text m_E_TextChallengeCDText = null;
+		private Text m_E_TextChallengeTimeText = null;
 		public Transform uiTransform = null;
 	}
 }

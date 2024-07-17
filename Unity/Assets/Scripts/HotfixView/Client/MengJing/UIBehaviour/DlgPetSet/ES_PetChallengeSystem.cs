@@ -14,7 +14,7 @@ namespace ET.Client
     public static partial class ES_PetChallengeSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.ES_PetChallenge self, UnityEngine.Transform transform)
+        private static void Awake(this ES_PetChallenge self, Transform transform)
         {
             self.uiTransform = transform;
             
@@ -32,7 +32,7 @@ namespace ET.Client
         }
         
         [EntitySystem]
-        private static void Destroy(this ET.Client.ES_PetChallenge self)
+        private static void Destroy(this ES_PetChallenge self)
         {
             self.DestroyWidget();
         }

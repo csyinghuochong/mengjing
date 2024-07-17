@@ -1,16 +1,17 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_AttackGrid : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_AttackGrid : Entity,IAwake<Transform>,IDestroy 
 	{
 		public bool InitEffect;
 		public long MoveAttackId;
 		
-		public UnityEngine.UI.Button E_Btn_SkillStartButton
+		public Button E_Btn_SkillStartButton
      	{
      		get
      		{
@@ -21,13 +22,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_SkillStartButton == null )
      			{
-		    		this.m_E_Btn_SkillStartButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_SkillStart");
+		    		this.m_E_Btn_SkillStartButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_SkillStart");
      			}
      			return this.m_E_Btn_SkillStartButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_SkillStartImage
+		public Image E_Btn_SkillStartImage
      	{
      		get
      		{
@@ -38,13 +39,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_SkillStartImage == null )
      			{
-		    		this.m_E_Btn_SkillStartImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_SkillStart");
+		    		this.m_E_Btn_SkillStartImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_SkillStart");
      			}
      			return this.m_E_Btn_SkillStartImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_Btn_SkillStartEventTrigger
+		public EventTrigger E_Btn_SkillStartEventTrigger
      	{
      		get
      		{
@@ -55,13 +56,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_SkillStartEventTrigger == null )
      			{
-		    		this.m_E_Btn_SkillStartEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_Btn_SkillStart");
+		    		this.m_E_Btn_SkillStartEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"E_Btn_SkillStart");
      			}
      			return this.m_E_Btn_SkillStartEventTrigger;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_FightEffectRectTransform
+		public RectTransform EG_FightEffectRectTransform
      	{
      		get
      		{
@@ -72,7 +73,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_FightEffectRectTransform == null )
      			{
-		    		this.m_EG_FightEffectRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_FightEffect");
+		    		this.m_EG_FightEffectRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_FightEffect");
      			}
      			return this.m_EG_FightEffectRectTransform;
      		}
@@ -99,10 +100,10 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_Btn_SkillStartButton = null;
-		private UnityEngine.UI.Image m_E_Btn_SkillStartImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_Btn_SkillStartEventTrigger = null;
-		private UnityEngine.RectTransform m_EG_FightEffectRectTransform = null;
+		private Button m_E_Btn_SkillStartButton = null;
+		private Image m_E_Btn_SkillStartImage = null;
+		private EventTrigger m_E_Btn_SkillStartEventTrigger = null;
+		private RectTransform m_EG_FightEffectRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

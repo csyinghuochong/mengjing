@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgMJLogin))]
 	[EnableMethod]
 	public  class DlgMJLoginViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_LoginButton
+		public Button E_LoginButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_LoginButton == null )
      			{
-		    		this.m_E_LoginButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"HideNode/BanHanNode/E_Login");
+		    		this.m_E_LoginButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"HideNode/BanHanNode/E_Login");
      			}
      			return this.m_E_LoginButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_LoginImage
+		public Image E_LoginImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_LoginImage == null )
      			{
-		    		this.m_E_LoginImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"HideNode/BanHanNode/E_Login");
+		    		this.m_E_LoginImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"HideNode/BanHanNode/E_Login");
      			}
      			return this.m_E_LoginImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_SelectServerNameText
+		public Text E_SelectServerNameText
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SelectServerNameText == null )
      			{
-		    		this.m_E_SelectServerNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"HideNode/SelectGameServer/E_SelectServerName");
+		    		this.m_E_SelectServerNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"HideNode/SelectGameServer/E_SelectServerName");
      			}
      			return this.m_E_SelectServerNameText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_SelectBtnButton
+		public Button E_SelectBtnButton
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SelectBtnButton == null )
      			{
-		    		this.m_E_SelectBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"HideNode/SelectGameServer/E_SelectBtn");
+		    		this.m_E_SelectBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"HideNode/SelectGameServer/E_SelectBtn");
      			}
      			return this.m_E_SelectBtnButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_SelectBtnImage
+		public Image E_SelectBtnImage
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SelectBtnImage == null )
      			{
-		    		this.m_E_SelectBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"HideNode/SelectGameServer/E_SelectBtn");
+		    		this.m_E_SelectBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"HideNode/SelectGameServer/E_SelectBtn");
      			}
      			return this.m_E_SelectBtnImage;
      		}
      	}
 
-		public UnityEngine.UI.InputField E_AccountInputField
+		public InputField E_AccountInputField
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_E_AccountInputField == null )
      			{
-		    		this.m_E_AccountInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"Panel/E_Account");
+		    		this.m_E_AccountInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"Panel/E_Account");
      			}
      			return this.m_E_AccountInputField;
      		}
      	}
 
-		public UnityEngine.UI.Image E_AccountImage
+		public Image E_AccountImage
      	{
      		get
      		{
@@ -120,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_E_AccountImage == null )
      			{
-		    		this.m_E_AccountImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Panel/E_Account");
+		    		this.m_E_AccountImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Panel/E_Account");
      			}
      			return this.m_E_AccountImage;
      		}
      	}
 
-		public UnityEngine.UI.InputField E_PasswordInputField
+		public InputField E_PasswordInputField
      	{
      		get
      		{
@@ -137,13 +137,13 @@ namespace ET.Client
      			}
      			if( this.m_E_PasswordInputField == null )
      			{
-		    		this.m_E_PasswordInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"Panel/E_Password");
+		    		this.m_E_PasswordInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"Panel/E_Password");
      			}
      			return this.m_E_PasswordInputField;
      		}
      	}
 
-		public UnityEngine.UI.Image E_PasswordImage
+		public Image E_PasswordImage
      	{
      		get
      		{
@@ -154,7 +154,7 @@ namespace ET.Client
      			}
      			if( this.m_E_PasswordImage == null )
      			{
-		    		this.m_E_PasswordImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Panel/E_Password");
+		    		this.m_E_PasswordImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Panel/E_Password");
      			}
      			return this.m_E_PasswordImage;
      		}
@@ -174,15 +174,15 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_LoginButton = null;
-		private UnityEngine.UI.Image m_E_LoginImage = null;
-		private UnityEngine.UI.Text m_E_SelectServerNameText = null;
-		private UnityEngine.UI.Button m_E_SelectBtnButton = null;
-		private UnityEngine.UI.Image m_E_SelectBtnImage = null;
-		private UnityEngine.UI.InputField m_E_AccountInputField = null;
-		private UnityEngine.UI.Image m_E_AccountImage = null;
-		private UnityEngine.UI.InputField m_E_PasswordInputField = null;
-		private UnityEngine.UI.Image m_E_PasswordImage = null;
+		private Button m_E_LoginButton = null;
+		private Image m_E_LoginImage = null;
+		private Text m_E_SelectServerNameText = null;
+		private Button m_E_SelectBtnButton = null;
+		private Image m_E_SelectBtnImage = null;
+		private InputField m_E_AccountInputField = null;
+		private Image m_E_AccountImage = null;
+		private InputField m_E_PasswordInputField = null;
+		private Image m_E_PasswordImage = null;
 		public Transform uiTransform = null;
 	}
 }

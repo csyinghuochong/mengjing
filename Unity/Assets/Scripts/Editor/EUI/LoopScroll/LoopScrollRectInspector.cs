@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 
 [CustomEditor(typeof(LoopScrollRect), true)]
 public class LoopScrollRectInspector : Editor

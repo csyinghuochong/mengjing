@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace UniFramework.Event
 {
@@ -38,9 +38,9 @@ namespace UniFramework.Event
 			{
 				// 创建驱动器
 				_isInitialize = true;
-				_driver = new UnityEngine.GameObject($"[{nameof(UniEvent)}]");
+				_driver = new GameObject($"[{nameof(UniEvent)}]");
 				_driver.AddComponent<UniEventDriver>();
-				UnityEngine.Object.DontDestroyOnLoad(_driver);
+				Object.DontDestroyOnLoad(_driver);
 				UniLogger.Log($"{nameof(UniEvent)} initalize !");
 			}
 		}
@@ -69,7 +69,7 @@ namespace UniFramework.Event
 			for (int i = _postingList.Count - 1; i >= 0; i--)
 			{
 				var wrapper = _postingList[i];
-				if (UnityEngine.Time.frameCount > wrapper.PostFrame)
+				if (Time.frameCount > wrapper.PostFrame)
 				{
 					SendMessage(wrapper.EventID, wrapper.Message);
 					_postingList.RemoveAt(i);
@@ -93,9 +93,9 @@ namespace UniFramework.Event
 		/// <summary>
 		/// 添加监听
 		/// </summary>
-		public static void AddListener<TEvent>(System.Action<IEventMessage> listener) where TEvent : IEventMessage
+		public static void AddListener<TEvent>(Action<IEventMessage> listener) where TEvent : IEventMessage
 		{
-			System.Type eventType = typeof(TEvent);
+			Type eventType = typeof(TEvent);
 			int eventId = eventType.GetHashCode();
 			AddListener(eventId, listener);
 		}
@@ -103,7 +103,7 @@ namespace UniFramework.Event
 		/// <summary>
 		/// 添加监听
 		/// </summary>
-		public static void AddListener(System.Type eventType, System.Action<IEventMessage> listener)
+		public static void AddListener(Type eventType, Action<IEventMessage> listener)
 		{
 			int eventId = eventType.GetHashCode();
 			AddListener(eventId, listener);
@@ -112,7 +112,7 @@ namespace UniFramework.Event
 		/// <summary>
 		/// 添加监听
 		/// </summary>
-		public static void AddListener(int eventId, System.Action<IEventMessage> listener)
+		public static void AddListener(int eventId, Action<IEventMessage> listener)
 		{
 			if (_listeners.ContainsKey(eventId) == false)
 				_listeners.Add(eventId, new LinkedList<Action<IEventMessage>>());
@@ -124,9 +124,9 @@ namespace UniFramework.Event
 		/// <summary>
 		/// 移除监听
 		/// </summary>
-		public static void RemoveListener<TEvent>(System.Action<IEventMessage> listener) where TEvent : IEventMessage
+		public static void RemoveListener<TEvent>(Action<IEventMessage> listener) where TEvent : IEventMessage
 		{
-			System.Type eventType = typeof(TEvent);
+			Type eventType = typeof(TEvent);
 			int eventId = eventType.GetHashCode();
 			RemoveListener(eventId, listener);
 		}
@@ -134,7 +134,7 @@ namespace UniFramework.Event
 		/// <summary>
 		/// 移除监听
 		/// </summary>
-		public static void RemoveListener(System.Type eventType, System.Action<IEventMessage> listener)
+		public static void RemoveListener(Type eventType, Action<IEventMessage> listener)
 		{
 			int eventId = eventType.GetHashCode();
 			RemoveListener(eventId, listener);
@@ -143,7 +143,7 @@ namespace UniFramework.Event
 		/// <summary>
 		/// 移除监听
 		/// </summary>
-		public static void RemoveListener(int eventId, System.Action<IEventMessage> listener)
+		public static void RemoveListener(int eventId, Action<IEventMessage> listener)
 		{
 			if (_listeners.ContainsKey(eventId))
 			{
@@ -197,7 +197,7 @@ namespace UniFramework.Event
 		public static void PostMessage(int eventId, IEventMessage message)
 		{
 			var wrapper = new PostWrapper();
-			wrapper.PostFrame = UnityEngine.Time.frameCount;
+			wrapper.PostFrame = Time.frameCount;
 			wrapper.EventID = eventId;
 			wrapper.Message = message;
 			_postingList.Add(wrapper);

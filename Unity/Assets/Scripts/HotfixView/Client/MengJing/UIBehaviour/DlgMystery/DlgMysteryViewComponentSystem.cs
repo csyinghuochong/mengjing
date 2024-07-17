@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgMysteryViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgMysteryViewComponent))]
+	[FriendOfAttribute(typeof(DlgMysteryViewComponent))]
 	public static partial class DlgMysteryViewComponentSystem
 	{
 		[EntitySystem]

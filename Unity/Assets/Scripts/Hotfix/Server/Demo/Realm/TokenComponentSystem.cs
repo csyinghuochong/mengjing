@@ -3,11 +3,11 @@ using System;
 namespace ET.Server
 {
     [EntitySystemOf(typeof(TokenComponent))]
-    [FriendOfAttribute(typeof(ET.Server.TokenComponent))]
+    [FriendOfAttribute(typeof(TokenComponent))]
     public static partial class TokenComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.TokenComponent self)
+        private static void Awake(this TokenComponent self)
         {
 
         }

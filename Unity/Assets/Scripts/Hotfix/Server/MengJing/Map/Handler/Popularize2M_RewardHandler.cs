@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     public class Popularize2M_RewardHandler : MessageHandler<Unit, Popularize2M_RewardRequest, M2Popularize_RewardResponse>

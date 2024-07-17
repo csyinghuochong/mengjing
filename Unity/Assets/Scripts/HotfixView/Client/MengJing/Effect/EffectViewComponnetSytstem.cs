@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 using System.Collections.Generic;
 
 namespace ET.Client
@@ -26,14 +25,14 @@ namespace ET.Client
         }
                 
         [EntitySystem]
-        private static void Awake(this ET.Client.EffectViewComponent self)
+        private static void Awake(this EffectViewComponent self)
         {
             self.Effects = new List<Effect>();
             self.InitEffect();
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Client.EffectViewComponent self)
+        private static void Destroy(this EffectViewComponent self)
         {
             self.OnDispose();
         }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Union)]
     public class G2Union_EnterUnionHandler : MessageHandler<Scene, G2Union_EnterUnion, Union2G_EnterUnion>

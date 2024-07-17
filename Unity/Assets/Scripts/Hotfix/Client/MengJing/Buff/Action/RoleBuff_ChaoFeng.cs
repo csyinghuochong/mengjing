@@ -1,5 +1,4 @@
-﻿using System;
-namespace ET.Client
+﻿namespace ET.Client
 {
     public class RoleBuff_ChaoFeng : RoleBuff_Base
     {

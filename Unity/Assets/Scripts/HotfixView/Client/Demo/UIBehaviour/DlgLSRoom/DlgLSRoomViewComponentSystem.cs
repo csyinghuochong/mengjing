@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgLSRoomViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgLSRoomViewComponent))]
+	[FriendOfAttribute(typeof(DlgLSRoomViewComponent))]
 	public static partial class DlgLSRoomViewComponentSystem
 	{
 		[EntitySystem]

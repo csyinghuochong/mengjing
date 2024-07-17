@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +6,7 @@ namespace ET.Client
     
     [ChildOf]
     [EnableMethod]
-    public class ES_MainSkillFangun: Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+    public class ES_MainSkillFangun: Entity,IAwake<Transform>,IDestroy
     {
 
         public Image E_Img_SkillCD
@@ -22,7 +20,7 @@ namespace ET.Client
                 }
                 if( this.m_e_Img_SkillCD == null )
                 {
-                    this.m_e_Img_SkillCD = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Img_SkillCD");
+                    this.m_e_Img_SkillCD = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Img_SkillCD");
                 }
                 return this.m_e_Img_SkillCD;
             }

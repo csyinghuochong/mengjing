@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 
-
 namespace ET.Client
 {
     public class BuffDispatcherComponentC: Singleton<BuffDispatcherComponentC>, ISingletonAwake

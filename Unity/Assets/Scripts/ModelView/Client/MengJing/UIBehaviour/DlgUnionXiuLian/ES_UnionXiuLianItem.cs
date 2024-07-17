@@ -1,17 +1,17 @@
-﻿
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_UnionXiuLianItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_UnionXiuLianItem : Entity,IAwake<Transform>,IDestroy 
 	{
 		public Action<int> ClickHandler;
 		public int Position;
 		
-		public UnityEngine.UI.Image E_ImageSelectImage
+		public Image E_ImageSelectImage
      	{
      		get
      		{
@@ -22,13 +22,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageSelectImage == null )
      			{
-		    		this.m_E_ImageSelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageSelect");
+		    		this.m_E_ImageSelectImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageSelect");
      			}
      			return this.m_E_ImageSelectImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_Tip_1Text
+		public Text E_Text_Tip_1Text
      	{
      		get
      		{
@@ -39,13 +39,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_Tip_1Text == null )
      			{
-		    		this.m_E_Text_Tip_1Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_Tip_1");
+		    		this.m_E_Text_Tip_1Text = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Tip_1");
      			}
      			return this.m_E_Text_Tip_1Text;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ImageIconButton
+		public Button E_ImageIconButton
      	{
      		get
      		{
@@ -56,13 +56,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageIconButton == null )
      			{
-		    		this.m_E_ImageIconButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ImageIcon");
+		    		this.m_E_ImageIconButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ImageIcon");
      			}
      			return this.m_E_ImageIconButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageIconImage
+		public Image E_ImageIconImage
      	{
      		get
      		{
@@ -73,7 +73,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageIconImage == null )
      			{
-		    		this.m_E_ImageIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageIcon");
+		    		this.m_E_ImageIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageIcon");
      			}
      			return this.m_E_ImageIconImage;
      		}
@@ -100,10 +100,10 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Image m_E_ImageSelectImage = null;
-		private UnityEngine.UI.Text m_E_Text_Tip_1Text = null;
-		private UnityEngine.UI.Button m_E_ImageIconButton = null;
-		private UnityEngine.UI.Image m_E_ImageIconImage = null;
+		private Image m_E_ImageSelectImage = null;
+		private Text m_E_Text_Tip_1Text = null;
+		private Button m_E_ImageIconButton = null;
+		private Image m_E_ImageIconImage = null;
 		public Transform uiTransform = null;
 	}
 }

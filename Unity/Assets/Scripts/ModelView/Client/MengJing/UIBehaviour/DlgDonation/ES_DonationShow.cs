@@ -1,17 +1,17 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_DonationShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_DonationShow : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public List<RankingInfo> ShowRankingInfos;
 		public Dictionary<int, EntityRef<Scroll_Item_DonationShowItem>> ScrollItemDonationShowItems;
         
-		public UnityEngine.UI.LoopVerticalScrollRect E_DonationShowItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_DonationShowItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -22,13 +22,13 @@ namespace ET.Client
      			}
      			if( this.m_E_DonationShowItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_DonationShowItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_DonationShowItems");
+		    		this.m_E_DonationShowItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_DonationShowItems");
      			}
      			return this.m_E_DonationShowItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_Donation_1Button
+		public Button E_Btn_Donation_1Button
      	{
      		get
      		{
@@ -39,13 +39,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_Donation_1Button == null )
      			{
-		    		this.m_E_Btn_Donation_1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_Donation_1");
+		    		this.m_E_Btn_Donation_1Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_Donation_1");
      			}
      			return this.m_E_Btn_Donation_1Button;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_Donation_1Image
+		public Image E_Btn_Donation_1Image
      	{
      		get
      		{
@@ -56,13 +56,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_Donation_1Image == null )
      			{
-		    		this.m_E_Btn_Donation_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_Donation_1");
+		    		this.m_E_Btn_Donation_1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_Donation_1");
      			}
      			return this.m_E_Btn_Donation_1Image;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_MyDonationText
+		public Text E_Text_MyDonationText
      	{
      		get
      		{
@@ -73,13 +73,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_MyDonationText == null )
      			{
-		    		this.m_E_Text_MyDonationText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_MyDonation");
+		    		this.m_E_Text_MyDonationText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_MyDonation");
      			}
      			return this.m_E_Text_MyDonationText;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_UIDonationPriceRectTransform
+		public RectTransform EG_UIDonationPriceRectTransform
      	{
      		get
      		{
@@ -90,13 +90,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_UIDonationPriceRectTransform == null )
      			{
-		    		this.m_EG_UIDonationPriceRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_UIDonationPrice");
+		    		this.m_EG_UIDonationPriceRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_UIDonationPrice");
      			}
      			return this.m_EG_UIDonationPriceRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ImageButtonButton
+		public Button E_ImageButtonButton
      	{
      		get
      		{
@@ -107,13 +107,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonButton == null )
      			{
-		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_ImageButton");
+		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_ImageButton");
      			}
      			return this.m_E_ImageButtonButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageButtonImage
+		public Image E_ImageButtonImage
      	{
      		get
      		{
@@ -124,13 +124,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonImage == null )
      			{
-		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_ImageButton");
+		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_ImageButton");
      			}
      			return this.m_E_ImageButtonImage;
      		}
      	}
 
-		public UnityEngine.UI.InputField E_InputFieldNumberInputField
+		public InputField E_InputFieldNumberInputField
      	{
      		get
      		{
@@ -141,13 +141,13 @@ namespace ET.Client
      			}
      			if( this.m_E_InputFieldNumberInputField == null )
      			{
-		    		this.m_E_InputFieldNumberInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_InputFieldNumber");
+		    		this.m_E_InputFieldNumberInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_InputFieldNumber");
      			}
      			return this.m_E_InputFieldNumberInputField;
      		}
      	}
 
-		public UnityEngine.UI.Image E_InputFieldNumberImage
+		public Image E_InputFieldNumberImage
      	{
      		get
      		{
@@ -158,13 +158,13 @@ namespace ET.Client
      			}
      			if( this.m_E_InputFieldNumberImage == null )
      			{
-		    		this.m_E_InputFieldNumberImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_InputFieldNumber");
+		    		this.m_E_InputFieldNumberImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_InputFieldNumber");
      			}
      			return this.m_E_InputFieldNumberImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_Donation_2Button
+		public Button E_Btn_Donation_2Button
      	{
      		get
      		{
@@ -175,13 +175,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_Donation_2Button == null )
      			{
-		    		this.m_E_Btn_Donation_2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_Btn_Donation_2");
+		    		this.m_E_Btn_Donation_2Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_Btn_Donation_2");
      			}
      			return this.m_E_Btn_Donation_2Button;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_Donation_2Image
+		public Image E_Btn_Donation_2Image
      	{
      		get
      		{
@@ -192,13 +192,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_Donation_2Image == null )
      			{
-		    		this.m_E_Btn_Donation_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_Btn_Donation_2");
+		    		this.m_E_Btn_Donation_2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_Btn_Donation_2");
      			}
      			return this.m_E_Btn_Donation_2Image;
      		}
      	}
 
-		public UnityEngine.UI.Button E_BtnCloseButton
+		public Button E_BtnCloseButton
      	{
      		get
      		{
@@ -209,13 +209,13 @@ namespace ET.Client
      			}
      			if( this.m_E_BtnCloseButton == null )
      			{
-		    		this.m_E_BtnCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_BtnClose");
+		    		this.m_E_BtnCloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_BtnClose");
      			}
      			return this.m_E_BtnCloseButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_BtnCloseImage
+		public Image E_BtnCloseImage
      	{
      		get
      		{
@@ -226,13 +226,13 @@ namespace ET.Client
      			}
      			if( this.m_E_BtnCloseImage == null )
      			{
-		    		this.m_E_BtnCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_BtnClose");
+		    		this.m_E_BtnCloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_BtnClose");
      			}
      			return this.m_E_BtnCloseImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextMyDonationText
+		public Text E_TextMyDonationText
      	{
      		get
      		{
@@ -243,7 +243,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TextMyDonationText == null )
      			{
-		    		this.m_E_TextMyDonationText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_TextMyDonation");
+		    		this.m_E_TextMyDonationText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_UIDonationPrice/E_TextMyDonation");
      			}
      			return this.m_E_TextMyDonationText;
      		}
@@ -280,20 +280,20 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_DonationShowItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Button m_E_Btn_Donation_1Button = null;
-		private UnityEngine.UI.Image m_E_Btn_Donation_1Image = null;
-		private UnityEngine.UI.Text m_E_Text_MyDonationText = null;
-		private UnityEngine.RectTransform m_EG_UIDonationPriceRectTransform = null;
-		private UnityEngine.UI.Button m_E_ImageButtonButton = null;
-		private UnityEngine.UI.Image m_E_ImageButtonImage = null;
-		private UnityEngine.UI.InputField m_E_InputFieldNumberInputField = null;
-		private UnityEngine.UI.Image m_E_InputFieldNumberImage = null;
-		private UnityEngine.UI.Button m_E_Btn_Donation_2Button = null;
-		private UnityEngine.UI.Image m_E_Btn_Donation_2Image = null;
-		private UnityEngine.UI.Button m_E_BtnCloseButton = null;
-		private UnityEngine.UI.Image m_E_BtnCloseImage = null;
-		private UnityEngine.UI.Text m_E_TextMyDonationText = null;
+		private LoopVerticalScrollRect m_E_DonationShowItemsLoopVerticalScrollRect = null;
+		private Button m_E_Btn_Donation_1Button = null;
+		private Image m_E_Btn_Donation_1Image = null;
+		private Text m_E_Text_MyDonationText = null;
+		private RectTransform m_EG_UIDonationPriceRectTransform = null;
+		private Button m_E_ImageButtonButton = null;
+		private Image m_E_ImageButtonImage = null;
+		private InputField m_E_InputFieldNumberInputField = null;
+		private Image m_E_InputFieldNumberImage = null;
+		private Button m_E_Btn_Donation_2Button = null;
+		private Image m_E_Btn_Donation_2Image = null;
+		private Button m_E_BtnCloseButton = null;
+		private Image m_E_BtnCloseImage = null;
+		private Text m_E_TextMyDonationText = null;
 		public Transform uiTransform = null;
 	}
 }

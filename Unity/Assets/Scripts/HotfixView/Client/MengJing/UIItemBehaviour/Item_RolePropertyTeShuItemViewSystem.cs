@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [FriendOf(typeof (UserInfoComponentC))]
     [EntitySystemOf(typeof (Scroll_Item_RolePropertyTeShuItem))]

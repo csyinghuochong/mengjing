@@ -9,18 +9,18 @@ namespace ET
     public static partial class UnitInfoComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.UnitInfoComponent self)
+        private static void Awake(this UnitInfoComponent self)
         {
 
         }
         
         [EntitySystem]
-        private static void Destroy(this ET.UnitInfoComponent self)
+        private static void Destroy(this UnitInfoComponent self)
         {
 
         }
 
-        public static List<long> GetZhaoHuanList(this ET.UnitInfoComponent self)
+        public static List<long> GetZhaoHuanList(this UnitInfoComponent self)
         {
             return self.ZhaohuanIds;
         }

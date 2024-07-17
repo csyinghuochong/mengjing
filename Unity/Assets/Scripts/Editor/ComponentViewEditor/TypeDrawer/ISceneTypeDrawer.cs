@@ -1,9 +1,7 @@
 #if ENABLE_VIEW
 
 using System;
-using System.Reflection;
 using UnityEditor;
-using UnityEngine;
 
 namespace ET
 {

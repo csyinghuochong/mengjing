@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Numerics;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -11,17 +10,17 @@ namespace ET.Server
     {
         
         [EntitySystem]
-        private static void Awake(this ET.Server.SkillS self)
+        private static void Awake(this SkillS self)
         {
 
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.SkillS self)
+        private static void Destroy(this SkillS self)
         {
 
         }
         
-         public static void BaseOnInit(this ET.Server.SkillS self, SkillInfo skillcmd, Unit theUnitFrom)
+         public static void BaseOnInit(this SkillS self, SkillInfo skillcmd, Unit theUnitFrom)
          {
              self.SkillInfo = skillcmd;
              self.HurtIds.Clear();
@@ -83,7 +82,7 @@ namespace ET.Server
              }
          }
 
-         public static float GetTianfuProAdd(this ET.Server.SkillS self, int key)
+         public static float GetTianfuProAdd(this SkillS self, int key)
          {
              float value = 0f;
              if (self.TianfuProAdd == null)
@@ -93,7 +92,7 @@ namespace ET.Server
          }
 
          //初始化
-         public static void InitSelfBuff(this ET.Server.SkillS self)
+         public static void InitSelfBuff(this SkillS self)
          {
              //触发初始化BUFF
              if (self.SkillConf == null)
@@ -125,7 +124,7 @@ namespace ET.Server
          }
          
          //每帧检测
-         public static void BaseOnUpdate(this ET.Server.SkillS self)
+         public static void BaseOnUpdate(this SkillS self)
          {
              long serverNow = TimeHelper.ServerNow();
 
@@ -167,7 +166,7 @@ namespace ET.Server
              }
          }
 
-         public static void ExcuteSkillAction(this ET.Server.SkillS self)
+         public static void ExcuteSkillAction(this SkillS self)
          {
              if (self.TheUnitFrom.IsDisposed)
              {
@@ -202,7 +201,7 @@ namespace ET.Server
              }
          }
 
-         public static void OnCollisionUnit(this ET.Server.SkillS self, Unit uu)
+         public static void OnCollisionUnit(this SkillS self, Unit uu)
          {
              if (!self.SkillCanAttackUnit(uu))
              {
@@ -219,7 +218,7 @@ namespace ET.Server
              }
          }
 
-         public static void CheckChiXuHurt(this ET.Server.SkillS self)
+         public static void CheckChiXuHurt(this SkillS self)
          {
              if (self.SkillConf.DamgeChiXuValue == 0 || self.TheUnitFrom.IsDisposed)
              {
@@ -246,7 +245,7 @@ namespace ET.Server
              }
          }
 
-         public static bool SkillCanAttackUnit(this ET.Server.SkillS self, Unit uu)
+         public static bool SkillCanAttackUnit(this SkillS self, Unit uu)
          {
              //鞭炮打年兽 鞭炮道具10030002 技能76001001年兽 72009001
              if (self.SkillConf.Id == 76001001 && uu.ConfigId != 72009001)
@@ -260,7 +259,7 @@ namespace ET.Server
              return true;
          }
 
-         public static void OnChiXuHurtCollision(this ET.Server.SkillS self, Unit uu)
+         public static void OnChiXuHurtCollision(this SkillS self, Unit uu)
          {
              if (!self.SkillCanAttackUnit(uu))
              {
@@ -278,7 +277,7 @@ namespace ET.Server
          }
 
          //目标附加Buff
-         public static void TriggerSkillBuff(this ET.Server.SkillS self, Unit uu)
+         public static void TriggerSkillBuff(this SkillS self, Unit uu)
          {
              //触发Buff
              if (self.SkillConf.BuffID!=null && self.SkillConf.BuffID[0] != 0)
@@ -301,13 +300,13 @@ namespace ET.Server
          }
 
          
-         public static void SetSkillState(this ET.Server.SkillS self,SkillState state)
+         public static void SetSkillState(this SkillS self,SkillState state)
          {
              self.SkillState = state;
          }
 
          
-         public static bool CheckShape(this ET.Server.SkillS self, float3 t_positon)
+         public static bool CheckShape(this SkillS self, float3 t_positon)
          {
              for (int i = 0; i < self.ICheckShape.Count; i++)
              {
@@ -319,7 +318,7 @@ namespace ET.Server
              return false;
          }
 
-         public static bool  TriggeSkillHurt(this ET.Server.SkillS self,  Unit uu, int hurtMode = 0)
+         public static bool  TriggeSkillHurt(this SkillS self,  Unit uu, int hurtMode = 0)
          {
              //技能伤害为0不执行
              if (hurtMode == 0 && self.SkillConf.ActDamge == 0 && self.SkillConf.DamgeValue == 0) 
@@ -376,7 +375,7 @@ namespace ET.Server
              return ishit;
          }
 
-         public static Shape CreateCheckShape(this ET.Server.SkillS self,  int targetAngle)
+         public static Shape CreateCheckShape(this SkillS self,  int targetAngle)
          {
              Shape ishape = null;
              float addRange = self.GetTianfuProAdd((int)SkillAttributeEnum.AddDamageRange);
@@ -413,7 +412,7 @@ namespace ET.Server
          }
 
          //目前只有冲锋技能用到。 
-         public static void UpdateCheckPoint(this ET.Server.SkillS self,  float3 vector3)
+         public static void UpdateCheckPoint(this SkillS self,  float3 vector3)
          {
              if (self.ICheckShape == null || self.ICheckShape.Count == 0)
              {
@@ -437,19 +436,19 @@ namespace ET.Server
              }
          }
 
-         public static SkillState GetSkillState(this ET.Server.SkillS self)
+         public static SkillState GetSkillState(this SkillS self)
          {
              return self.SkillState;
          }
 
          
-         public static bool IsFinished(this ET.Server.SkillS self)
+         public static bool IsFinished(this SkillS self)
          {
              return self.SkillState == SkillState.Finished;
          }
 
          
-         public static void Clear(this ET.Server.SkillS self)
+         public static void Clear(this SkillS self)
          {
              self.ICheckShape.Clear();
              self.SkillInfo = null;
@@ -460,7 +459,7 @@ namespace ET.Server
          //3：己方【同阵营】
          //4: 敌方
          //5：全部
-         public static void SkillBuff(this ET.Server.SkillS self, int buffID, Unit uu)
+         public static void SkillBuff(this SkillS self, int buffID, Unit uu)
          {
              if (uu == null || uu.IsDisposed)
              {
@@ -563,7 +562,7 @@ namespace ET.Server
              //Log.Info("结束释放buff" + buffID);
          }
          
-         public static void Check_Map(this ET.Server.SkillS self)
+         public static void Check_Map(this SkillS self)
          {
              SkillHandlerS aaiHandler = SkillDispatcherComponentS.Instance.Get(self.SkillConf.GameObjectName);
              if (aaiHandler != null)

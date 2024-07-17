@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +20,7 @@ namespace ET.Client
             return this;
         }
 
-        public UnityEngine.UI.Image E_ImageIcon
+        public Image E_ImageIcon
         {
             get
             {
@@ -34,13 +33,13 @@ namespace ET.Client
                 {
                     if( this.m_es_ImageIcon == null )
                     {
-                        this.m_es_ImageIcon = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Node_1/ImageIcon");
+                        this.m_es_ImageIcon = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Node_1/ImageIcon");
                     }
                     return this.m_es_ImageIcon;
                 }
                 else
                 {
-                    return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Node_1/ImageIcon");
+                    return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Node_1/ImageIcon");
                 }
             }
         }

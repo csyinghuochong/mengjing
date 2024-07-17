@@ -1,19 +1,19 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetShouHu : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_PetShouHu : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public int SelectIndex;
 		public List<EntityRef<ES_ShouhuInfo>> ShouhuInfos = new();
 		public List<RolePetInfo> ShowRolePetInfos = new();
 		public Dictionary<int, EntityRef<Scroll_Item_PetShouHuItem>> ScrollItemPetShouHuItems;
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_PetShouHuItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_PetShouHuItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -24,7 +24,7 @@ namespace ET.Client
      			}
      			if( this.m_E_PetShouHuItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_PetShouHuItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_PetShouHuItems");
+		    		this.m_E_PetShouHuItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_PetShouHuItems");
      			}
      			return this.m_E_PetShouHuItemsLoopVerticalScrollRect;
      		}
@@ -106,7 +106,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonSetButton
+		public Button E_ButtonSetButton
      	{
      		get
      		{
@@ -117,13 +117,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonSetButton == null )
      			{
-		    		this.m_E_ButtonSetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_ButtonSet");
+		    		this.m_E_ButtonSetButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/E_ButtonSet");
      			}
      			return this.m_E_ButtonSetButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonSetImage
+		public Image E_ButtonSetImage
      	{
      		get
      		{
@@ -134,7 +134,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonSetImage == null )
      			{
-		    		this.m_E_ButtonSetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ButtonSet");
+		    		this.m_E_ButtonSetImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/E_ButtonSet");
      			}
      			return this.m_E_ButtonSetImage;
      		}
@@ -164,13 +164,13 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_PetShouHuItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_PetShouHuItemsLoopVerticalScrollRect = null;
 		private EntityRef<ES_ShouhuInfo> m_es_shouhuinfo2 = null;
 		private EntityRef<ES_ShouhuInfo> m_es_shouhuinfo3 = null;
 		private EntityRef<ES_ShouhuInfo> m_es_shouhuinfo1 = null;
 		private EntityRef<ES_ShouhuInfo> m_es_shouhuinfo0 = null;
-		private UnityEngine.UI.Button m_E_ButtonSetButton = null;
-		private UnityEngine.UI.Image m_E_ButtonSetImage = null;
+		private Button m_E_ButtonSetButton = null;
+		private Image m_E_ButtonSetImage = null;
 		public Transform uiTransform = null;
 	}
 }

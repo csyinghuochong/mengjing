@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_KillMonsterRewardHandler: MessageLocationHandler<Unit, C2M_KillMonsterRewardRequest, M2C_KillMonsterRewardResponse>

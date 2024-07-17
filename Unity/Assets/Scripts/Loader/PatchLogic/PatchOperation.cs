@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UniFramework.Machine;
 using UniFramework.Event;
+using UniFramework.Machine;
 using YooAsset;
 
 public class PatchOperation : GameAsyncOperation
@@ -98,7 +95,7 @@ public class PatchOperation : GameAsyncOperation
         }
         else
         {
-            throw new System.NotImplementedException($"{message.GetType()}");
+            throw new NotImplementedException($"{message.GetType()}");
         }
     }
 }

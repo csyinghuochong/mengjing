@@ -1,17 +1,17 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_WelfareDraw : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_WelfareDraw : Entity,IAwake<Transform>,IDestroy
 	{
 		public List<GameObject> Draws = new();
 		public List<GameObject> OutLines = new();
 		
-		public UnityEngine.UI.Button E_DrawBtnButton
+		public Button E_DrawBtnButton
      	{
      		get
      		{
@@ -22,13 +22,13 @@ namespace ET.Client
      			}
      			if( this.m_E_DrawBtnButton == null )
      			{
-		    		this.m_E_DrawBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_DrawBtn");
+		    		this.m_E_DrawBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_DrawBtn");
      			}
      			return this.m_E_DrawBtnButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_DrawBtnImage
+		public Image E_DrawBtnImage
      	{
      		get
      		{
@@ -39,13 +39,13 @@ namespace ET.Client
      			}
      			if( this.m_E_DrawBtnImage == null )
      			{
-		    		this.m_E_DrawBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_DrawBtn");
+		    		this.m_E_DrawBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_DrawBtn");
      			}
      			return this.m_E_DrawBtnImage;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_DrawListRectTransform
+		public RectTransform EG_DrawListRectTransform
      	{
      		get
      		{
@@ -56,7 +56,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_DrawListRectTransform == null )
      			{
-		    		this.m_EG_DrawListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_DrawList");
+		    		this.m_EG_DrawListRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_DrawList");
      			}
      			return this.m_EG_DrawListRectTransform;
      		}
@@ -229,9 +229,9 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_DrawBtnButton = null;
-		private UnityEngine.UI.Image m_E_DrawBtnImage = null;
-		private UnityEngine.RectTransform m_EG_DrawListRectTransform = null;
+		private Button m_E_DrawBtnButton = null;
+		private Image m_E_DrawBtnImage = null;
+		private RectTransform m_EG_DrawListRectTransform = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist_1 = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist_2 = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist_3 = null;

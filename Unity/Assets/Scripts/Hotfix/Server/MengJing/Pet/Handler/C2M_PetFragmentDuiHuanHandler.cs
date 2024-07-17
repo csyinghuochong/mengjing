@@ -1,8 +1,4 @@
-﻿
-using System.Collections.Generic;
-using System.Linq;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_PetFragmentDuiHuanHandler: MessageLocationHandler<Unit, C2M_PetFragmentDuiHuan, M2C_PetFragmentDuiHuan>

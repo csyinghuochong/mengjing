@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgRechargeReward))]
 	[EnableMethod]
 	public  class DlgRechargeRewardViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.ToggleGroup E_ItemTypeSetToggleGroup
+		public ToggleGroup E_ItemTypeSetToggleGroup
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemTypeSetToggleGroup == null )
      			{
-		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_ItemTypeSet");
+		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"E_ItemTypeSet");
      			}
      			return this.m_E_ItemTypeSetToggleGroup;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonCloseButton
+		public Button E_ButtonCloseButton
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCloseButton == null )
      			{
-		    		this.m_E_ButtonCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonClose");
+		    		this.m_E_ButtonCloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonClose");
      			}
      			return this.m_E_ButtonCloseButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonCloseImage
+		public Image E_ButtonCloseImage
      	{
      		get
      		{
@@ -52,7 +52,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonCloseImage == null )
      			{
-		    		this.m_E_ButtonCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonClose");
+		    		this.m_E_ButtonCloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonClose");
      			}
      			return this.m_E_ButtonCloseImage;
      		}
@@ -78,7 +78,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonRewardButton
+		public Button E_ButtonRewardButton
      	{
      		get
      		{
@@ -89,13 +89,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonRewardButton == null )
      			{
-		    		this.m_E_ButtonRewardButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonReward");
+		    		this.m_E_ButtonRewardButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonReward");
      			}
      			return this.m_E_ButtonRewardButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonRewardImage
+		public Image E_ButtonRewardImage
      	{
      		get
      		{
@@ -106,13 +106,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonRewardImage == null )
      			{
-		    		this.m_E_ButtonRewardImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonReward");
+		    		this.m_E_ButtonRewardImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonReward");
      			}
      			return this.m_E_ButtonRewardImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonGoToPayButton
+		public Button E_ButtonGoToPayButton
      	{
      		get
      		{
@@ -123,13 +123,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonGoToPayButton == null )
      			{
-		    		this.m_E_ButtonGoToPayButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonGoToPay");
+		    		this.m_E_ButtonGoToPayButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonGoToPay");
      			}
      			return this.m_E_ButtonGoToPayButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonGoToPayImage
+		public Image E_ButtonGoToPayImage
      	{
      		get
      		{
@@ -140,13 +140,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonGoToPayImage == null )
      			{
-		    		this.m_E_ButtonGoToPayImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonGoToPay");
+		    		this.m_E_ButtonGoToPayImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonGoToPay");
      			}
      			return this.m_E_ButtonGoToPayImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageReceivedImage
+		public Image E_ImageReceivedImage
      	{
      		get
      		{
@@ -157,13 +157,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageReceivedImage == null )
      			{
-		    		this.m_E_ImageReceivedImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageReceived");
+		    		this.m_E_ImageReceivedImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageReceived");
      			}
      			return this.m_E_ImageReceivedImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextTipText
+		public Text E_TextTipText
      	{
      		get
      		{
@@ -174,7 +174,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TextTipText == null )
      			{
-		    		this.m_E_TextTipText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextTip");
+		    		this.m_E_TextTipText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextTip");
      			}
      			return this.m_E_TextTipText;
      		}
@@ -195,16 +195,16 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
-		private UnityEngine.UI.Button m_E_ButtonCloseButton = null;
-		private UnityEngine.UI.Image m_E_ButtonCloseImage = null;
+		private ToggleGroup m_E_ItemTypeSetToggleGroup = null;
+		private Button m_E_ButtonCloseButton = null;
+		private Image m_E_ButtonCloseImage = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
-		private UnityEngine.UI.Button m_E_ButtonRewardButton = null;
-		private UnityEngine.UI.Image m_E_ButtonRewardImage = null;
-		private UnityEngine.UI.Button m_E_ButtonGoToPayButton = null;
-		private UnityEngine.UI.Image m_E_ButtonGoToPayImage = null;
-		private UnityEngine.UI.Image m_E_ImageReceivedImage = null;
-		private UnityEngine.UI.Text m_E_TextTipText = null;
+		private Button m_E_ButtonRewardButton = null;
+		private Image m_E_ButtonRewardImage = null;
+		private Button m_E_ButtonGoToPayButton = null;
+		private Image m_E_ButtonGoToPayImage = null;
+		private Image m_E_ImageReceivedImage = null;
+		private Text m_E_TextTipText = null;
 		public Transform uiTransform = null;
 	}
 }

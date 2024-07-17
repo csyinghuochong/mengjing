@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 namespace ET.Client
 {

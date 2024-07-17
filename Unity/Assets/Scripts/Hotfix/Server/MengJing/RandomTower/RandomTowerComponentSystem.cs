@@ -6,7 +6,7 @@ namespace ET.Server
     public static partial class RandomTowerComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.RandomTowerComponent self)
+        private static void Awake(this RandomTowerComponent self)
         {
 
         }

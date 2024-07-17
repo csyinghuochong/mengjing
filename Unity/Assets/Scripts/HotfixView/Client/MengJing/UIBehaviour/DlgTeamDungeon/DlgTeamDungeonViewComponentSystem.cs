@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgTeamDungeonViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgTeamDungeonViewComponent))]
+	[FriendOfAttribute(typeof(DlgTeamDungeonViewComponent))]
 	public static partial class DlgTeamDungeonViewComponentSystem
 	{
 		[EntitySystem]

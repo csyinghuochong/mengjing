@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-namespace ET
+﻿namespace ET
 {
     public partial class FuntionConfigCategory
     {

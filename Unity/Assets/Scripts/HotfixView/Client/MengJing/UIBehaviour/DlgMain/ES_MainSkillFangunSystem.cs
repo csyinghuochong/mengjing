@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -9,7 +8,7 @@ namespace ET.Client
     public static partial class ES_MainSkillFangunSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.ES_MainSkillFangun self, UnityEngine.Transform transform)
+        private static void Awake(this ES_MainSkillFangun self, Transform transform)
         {
             self.uiTransform = transform;
             
@@ -18,7 +17,7 @@ namespace ET.Client
         }
         
         [EntitySystem]
-        private static void Destroy(this ET.Client.ES_MainSkillFangun self)
+        private static void Destroy(this ES_MainSkillFangun self)
         {
 
         }

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-
 namespace ET.Server
 {
     [EntitySystemOf(typeof (RankSceneComponent))]
@@ -27,7 +26,7 @@ namespace ET.Server
         }
         
         [EntitySystem]
-        private static void Awake(this ET.Server.RankSceneComponent self)
+        private static void Awake(this RankSceneComponent self)
         {
             self.InitServerInfo().Coroutine();
             self.InitDBRankInfo().Coroutine();
@@ -39,7 +38,7 @@ namespace ET.Server
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.RankSceneComponent self)
+        private static void Destroy(this RankSceneComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }

@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgRandomOpenViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgRandomOpenViewComponent))]
+	[FriendOfAttribute(typeof(DlgRandomOpenViewComponent))]
 	public static partial class DlgRandomOpenViewComponentSystem
 	{
 		[EntitySystem]

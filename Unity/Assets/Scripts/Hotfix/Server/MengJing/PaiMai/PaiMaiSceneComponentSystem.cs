@@ -26,13 +26,13 @@ namespace ET.Server
 
         
         [EntitySystem]
-        private static void Awake(this ET.Server.PaiMaiSceneComponent self)
+        private static void Awake(this PaiMaiSceneComponent self)
         {
             self.InitDBData().Coroutine();
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.PaiMaiSceneComponent self)
+        private static void Destroy(this PaiMaiSceneComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }

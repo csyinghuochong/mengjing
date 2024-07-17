@@ -7,12 +7,12 @@ namespace ET.Client
     public static partial class SkillCSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.SkillC self)
+        private static void Awake(this SkillC self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Client.SkillC self)
+        private static void Destroy(this SkillC self)
         {
         }
 

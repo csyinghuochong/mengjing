@@ -8,7 +8,7 @@ namespace ET.Client
     
     [ChildOf]
     [EnableMethod]
-    public class ES_PetChallenge : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy, IUILogic
+    public class ES_PetChallenge : Entity,IAwake<Transform>,IDestroy, IUILogic
     {
     
         public Transform UITransform
@@ -23,7 +23,7 @@ namespace ET.Client
             }
         }
         
-        public UnityEngine.UI.LoopVerticalScrollRect E_PetChallengeItemsLoopVerticalScrollRect
+        public LoopVerticalScrollRect E_PetChallengeItemsLoopVerticalScrollRect
         {
             get
             {
@@ -34,7 +34,7 @@ namespace ET.Client
                 }
                 if( this.m_E_PetChallengeItemsLoopVerticalScrollRect == null )
                 {
-                    this.m_E_PetChallengeItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_C_VerticalLoop");
+                    this.m_E_PetChallengeItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_C_VerticalLoop");
                 }
                 return this.m_E_PetChallengeItemsLoopVerticalScrollRect;
             }
@@ -52,7 +52,7 @@ namespace ET.Client
                 
                 if( this.m_es_TextTimes == null )
                 {
-                    this.m_es_TextTimes = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"TextTimes");
+                    this.m_es_TextTimes = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"TextTimes");
                 }
                 return this.m_es_TextTimes;
             }
@@ -70,7 +70,7 @@ namespace ET.Client
                 
                 if( this.m_es_TextStar == null )
                 {
-                    this.m_es_TextStar = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"TextStar");
+                    this.m_es_TextStar = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"TextStar");
                 }
                 return this.m_es_TextStar;
             }
@@ -191,7 +191,7 @@ namespace ET.Client
 
         public List<PetFubenConfig> ShowPetFubenConfig = new List<PetFubenConfig>();
         public Dictionary<int, EntityRef<Scroll_Item_PetChallengeItem>> ScrollItemPetChallengeItems;
-        private UnityEngine.UI.LoopVerticalScrollRect m_E_PetChallengeItemsLoopVerticalScrollRect = null;
+        private LoopVerticalScrollRect m_E_PetChallengeItemsLoopVerticalScrollRect = null;
         public Transform uiTransform = null;
         
         public int PetFubenId;

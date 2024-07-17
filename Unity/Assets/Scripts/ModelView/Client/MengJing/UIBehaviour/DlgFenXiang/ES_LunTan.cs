@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_LunTan : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_LunTan : Entity,IAwake<Transform>,IDestroy 
 	{
-		public UnityEngine.UI.Button E_ButtonGetButton
+		public Button E_ButtonGetButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonGetButton == null )
      			{
-		    		this.m_E_ButtonGetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonGet");
+		    		this.m_E_ButtonGetButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonGet");
      			}
      			return this.m_E_ButtonGetButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonGetImage
+		public Image E_ButtonGetImage
      	{
      		get
      		{
@@ -35,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonGetImage == null )
      			{
-		    		this.m_E_ButtonGetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonGet");
+		    		this.m_E_ButtonGetImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonGet");
      			}
      			return this.m_E_ButtonGetImage;
      		}
@@ -60,8 +60,8 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_ButtonGetButton = null;
-		private UnityEngine.UI.Image m_E_ButtonGetImage = null;
+		private Button m_E_ButtonGetButton = null;
+		private Image m_E_ButtonGetImage = null;
 		public Transform uiTransform = null;
 	}
 }

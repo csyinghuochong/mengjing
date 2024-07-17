@@ -8,13 +8,13 @@ namespace ET.Server
     public static partial class DataCollationComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.DataCollationComponent self)
+        private static void Awake(this DataCollationComponent self)
         {
             self.CreateRoleTime = TimeHelper.DateTimeNow().ToString();
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.DataCollationComponent self)
+        private static void Destroy(this DataCollationComponent self)
         {
 
         }

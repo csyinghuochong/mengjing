@@ -1,13 +1,10 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using UnityEditor;
 using UnityEngine;
-
-using ET;
-using NUnit.Framework;
 
 public partial class UICodeSpawner
 {
@@ -76,13 +73,13 @@ public partial class UICodeSpawner
         string strFilePath = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UI/" + strDlgName ;
         
         
-        if ( !System.IO.Directory.Exists(strFilePath) )
+        if ( !Directory.Exists(strFilePath) )
         {
-	        System.IO.Directory.CreateDirectory(strFilePath);
+	        Directory.CreateDirectory(strFilePath);
         }
         
 	    strFilePath = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UI/" + strDlgName + "/" + strDlgName + "System.cs";
-        if(System.IO.File.Exists(strFilePath))
+        if(File.Exists(strFilePath))
         {
             Debug.LogError("已存在 " + strDlgName + "System.cs,将不会再次生成。");
             return;
@@ -177,13 +174,13 @@ public partial class UICodeSpawner
         string strFilePath = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UI/" + strDlgName + "/Event" ;
         
         
-        if ( !System.IO.Directory.Exists(strFilePath) )
+        if ( !Directory.Exists(strFilePath) )
         {
-	        System.IO.Directory.CreateDirectory(strFilePath);
+	        Directory.CreateDirectory(strFilePath);
         }
         
 	    strFilePath = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UI/" + strDlgName + "/Event/" + strDlgName + "EventHandler.cs";
-        if(System.IO.File.Exists(strFilePath))
+        if(File.Exists(strFilePath))
         {
 	        Debug.LogError("已存在 " + strDlgName + ".cs,将不会再次生成。");
             return;
@@ -261,13 +258,13 @@ public partial class UICodeSpawner
         string strFilePath = Application.dataPath + "/Scripts/ModelView/Client/MengJing/UI/" + strDlgName  ;
         
         
-        if ( !System.IO.Directory.Exists(strFilePath) )
+        if ( !Directory.Exists(strFilePath) )
         {
-	        System.IO.Directory.CreateDirectory(strFilePath);
+	        Directory.CreateDirectory(strFilePath);
         }
         
 	    strFilePath = Application.dataPath + "/Scripts/ModelView/Client/MengJing/UI/" + strDlgName  + "/" + strDlgName  + ".cs";
-        if(System.IO.File.Exists(strFilePath))
+        if(File.Exists(strFilePath))
         {
 	        Debug.LogError("已存在 " + strDlgName + ".cs,将不会再次生成。");
             return;
@@ -307,9 +304,9 @@ public partial class UICodeSpawner
 
         string strFilePath = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UIBehaviour/" + strDlgName;
 
-        if ( !System.IO.Directory.Exists(strFilePath) )
+        if ( !Directory.Exists(strFilePath) )
         {
-	        System.IO.Directory.CreateDirectory(strFilePath);
+	        Directory.CreateDirectory(strFilePath);
         }
 	    strFilePath = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UIBehaviour/" + strDlgName + "/" + strDlgComponentName + "System.cs";
 	    
@@ -359,9 +356,9 @@ public partial class UICodeSpawner
 
 
 	    string strFilePath = Application.dataPath + "/Scripts/ModelView/Client/MengJing/UIBehaviour/" + strDlgName;
-	    if ( !System.IO.Directory.Exists(strFilePath) )
+	    if ( !Directory.Exists(strFilePath) )
 	    {
-		    System.IO.Directory.CreateDirectory(strFilePath);
+		    Directory.CreateDirectory(strFilePath);
 	    }
 	    strFilePath = Application.dataPath + "/Scripts/ModelView/Client/MengJing/UIBehaviour/" + strDlgName + "/" + strDlgComponentName + ".cs";
 	    StreamWriter sw = new StreamWriter(strFilePath, false, Encoding.UTF8);

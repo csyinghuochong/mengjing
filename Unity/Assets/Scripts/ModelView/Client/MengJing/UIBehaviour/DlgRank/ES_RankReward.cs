@@ -1,17 +1,17 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RankReward : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_RankReward : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public List<RankRewardConfig> ShowRankRewardConfigs;
 		public Dictionary<int, EntityRef<Scroll_Item_RankRewardItem>> ScrollItemRankRewardItems;
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_RankRewardItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_RankRewardItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -22,7 +22,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RankRewardItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_RankRewardItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RankRewardItems");
+		    		this.m_E_RankRewardItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RankRewardItems");
      			}
      			return this.m_E_RankRewardItemsLoopVerticalScrollRect;
      		}
@@ -46,7 +46,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_RankRewardItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_RankRewardItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

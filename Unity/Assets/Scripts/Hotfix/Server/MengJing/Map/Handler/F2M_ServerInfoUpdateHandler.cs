@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     public class F2M_ServerInfoUpdateHandler : MessageHandler<Scene, F2M_ServerInfoUpdateRequest, M2F_ServerInfoUpdateResponse>

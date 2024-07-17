@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_ShareSucessHandler : MessageLocationHandler<Unit, C2M_ShareSucessRequest, M2C_ShareSucessResponse>

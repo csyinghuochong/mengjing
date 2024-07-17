@@ -30,7 +30,7 @@ namespace ET.Client
 
         public static void OnText_Button_Copy(this ES_Popularize self)
         {
-            UnityEngine.GUIUtility.systemCopyBuffer = self.E_Text_My_CodeText.text;
+            GUIUtility.systemCopyBuffer = self.E_Text_My_CodeText.text;
         }
 
         public static async ETTask OnButtonGet(this ES_Popularize self)

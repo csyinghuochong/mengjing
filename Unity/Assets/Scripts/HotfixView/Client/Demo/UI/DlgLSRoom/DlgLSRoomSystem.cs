@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -44,7 +41,7 @@ namespace ET.Client
         
         
         [EntitySystem]
-        private static void Awake(this ET.Client.DlgLSRoom self)
+        private static void Awake(this DlgLSRoom self)
         {
 
         }

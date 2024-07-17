@@ -1,7 +1,7 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -23,7 +23,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.UI.Text E_Text_XiLianNameText
+		public Text E_Text_XiLianNameText
      	{
      		get
      		{
@@ -36,18 +36,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Text_XiLianNameText == null )
      				{
-		    			this.m_E_Text_XiLianNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"TopNode/E_Text_XiLianName");
+		    			this.m_E_Text_XiLianNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"TopNode/E_Text_XiLianName");
      				}
      				return this.m_E_Text_XiLianNameText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"TopNode/E_Text_XiLianName");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"TopNode/E_Text_XiLianName");
      			}
      		}
      	}
 
-		public UnityEngine.RectTransform EG_JiHuoSetRectTransform
+		public RectTransform EG_JiHuoSetRectTransform
      	{
      		get
      		{
@@ -60,18 +60,18 @@ namespace ET.Client
      			{
      				if( this.m_EG_JiHuoSetRectTransform == null )
      				{
-		    			this.m_EG_JiHuoSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"TopNode/EG_JiHuoSet");
+		    			this.m_EG_JiHuoSetRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"TopNode/EG_JiHuoSet");
      				}
      				return this.m_EG_JiHuoSetRectTransform;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"TopNode/EG_JiHuoSet");
+		    		return UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"TopNode/EG_JiHuoSet");
      			}
      		}
      	}
 
-		public UnityEngine.RectTransform EG_ItemNodeRectTransform
+		public RectTransform EG_ItemNodeRectTransform
      	{
      		get
      		{
@@ -84,13 +84,13 @@ namespace ET.Client
      			{
      				if( this.m_EG_ItemNodeRectTransform == null )
      				{
-		    			this.m_EG_ItemNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_ItemNode");
+		    			this.m_EG_ItemNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_ItemNode");
      				}
      				return this.m_EG_ItemNodeRectTransform;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_ItemNode");
+		    		return UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_ItemNode");
      			}
      		}
      	}
@@ -104,9 +104,9 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.UI.Text m_E_Text_XiLianNameText = null;
-		private UnityEngine.RectTransform m_EG_JiHuoSetRectTransform = null;
-		private UnityEngine.RectTransform m_EG_ItemNodeRectTransform = null;
+		private Text m_E_Text_XiLianNameText = null;
+		private RectTransform m_EG_JiHuoSetRectTransform = null;
+		private RectTransform m_EG_ItemNodeRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

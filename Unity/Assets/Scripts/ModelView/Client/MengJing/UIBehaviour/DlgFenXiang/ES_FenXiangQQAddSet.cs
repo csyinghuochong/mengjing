@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_FenXiangQQAddSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_FenXiangQQAddSet : Entity,IAwake<Transform>,IDestroy 
 	{
-		public UnityEngine.UI.Button E_Button_AddQQButton
+		public Button E_Button_AddQQButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_AddQQButton == null )
      			{
-		    		this.m_E_Button_AddQQButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"FenXiang_QQ/E_Button_AddQQ");
+		    		this.m_E_Button_AddQQButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"FenXiang_QQ/E_Button_AddQQ");
      			}
      			return this.m_E_Button_AddQQButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Button_AddQQImage
+		public Image E_Button_AddQQImage
      	{
      		get
      		{
@@ -35,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_AddQQImage == null )
      			{
-		    		this.m_E_Button_AddQQImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"FenXiang_QQ/E_Button_AddQQ");
+		    		this.m_E_Button_AddQQImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"FenXiang_QQ/E_Button_AddQQ");
      			}
      			return this.m_E_Button_AddQQImage;
      		}
@@ -80,8 +80,8 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_Button_AddQQButton = null;
-		private UnityEngine.UI.Image m_E_Button_AddQQImage = null;
+		private Button m_E_Button_AddQQButton = null;
+		private Image m_E_Button_AddQQImage = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
 		public Transform uiTransform = null;
 	}

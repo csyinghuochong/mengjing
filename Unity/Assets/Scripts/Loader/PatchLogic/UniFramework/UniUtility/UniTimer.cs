@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace UniFramework.Utility
 {
 	public sealed class UniTimer
@@ -97,7 +99,7 @@ namespace UniFramework.Utility
 				if (IsOver)
 					return 0f;
 				else
-					return System.Math.Max(0f, DelayTime - _delayTimer);
+					return Math.Max(0f, DelayTime - _delayTimer);
 			}
 		}
 

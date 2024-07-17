@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgRunRaceViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgRunRaceViewComponent))]
+	[FriendOfAttribute(typeof(DlgRunRaceViewComponent))]
 	public static partial class DlgRunRaceViewComponentSystem
 	{
 		[EntitySystem]

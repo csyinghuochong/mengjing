@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 
 namespace UniFramework.Event
 {
@@ -7,15 +8,15 @@ namespace UniFramework.Event
 		[Conditional("DEBUG")]
 		public static void Log(string info)
 		{
-			UnityEngine.Debug.Log(info);
+			Debug.Log(info);
 		}
 		public static void Warning(string info)
 		{
-			UnityEngine.Debug.LogWarning(info);
+			Debug.LogWarning(info);
 		}
 		public static void Error(string info)
 		{
-			UnityEngine.Debug.LogError(info);
+			Debug.LogError(info);
 		}
 	}
 }

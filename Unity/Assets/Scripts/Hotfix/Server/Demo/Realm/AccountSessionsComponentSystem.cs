@@ -1,17 +1,17 @@
 namespace ET.Server
 {
     [EntitySystemOf(typeof(AccountSessionsComponent))]
-    [FriendOfAttribute(typeof(ET.Server.AccountSessionsComponent))]
+    [FriendOfAttribute(typeof(AccountSessionsComponent))]
     public static partial class AccountSessionsComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.AccountSessionsComponent self)
+        private static void Awake(this AccountSessionsComponent self)
         {
 
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.AccountSessionsComponent self)
+        private static void Destroy(this AccountSessionsComponent self)
         {
             self.AccountSessionDictionary.Clear();
         }

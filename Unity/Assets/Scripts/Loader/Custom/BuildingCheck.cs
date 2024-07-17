@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,7 +44,7 @@ public class BuildingCheck : MonoBehaviour
         {
            // if (hit[i].transform.gameObject.layer == LayerMask.NameToLayer("Building"))    //    if (hit[i].collider.gameObject)
             {
-                UnityEngine.Debug.Log("hit[i].transform.gameObject:  " + hit[i].transform.gameObject.name);
+                Debug.Log("hit[i].transform.gameObject:  " + hit[i].transform.gameObject.name);
 
                 MeshRenderer m = hit[i].transform.GetComponent<MeshRenderer>();
                 if (m)

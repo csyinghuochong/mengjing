@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler( SceneType.Rank)]
     public class C2R_RankUnionRaceHandler : MessageHandler<Scene, C2R_RankUnionRaceRequest, R2C_RankUnionRaceResponse>

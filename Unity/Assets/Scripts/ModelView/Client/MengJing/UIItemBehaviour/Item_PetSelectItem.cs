@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -22,7 +22,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.UI.Button E_ImageDiButtonButton
+		public Button E_ImageDiButtonButton
      	{
      		get
      		{
@@ -35,18 +35,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ImageDiButtonButton == null )
      				{
-		    			this.m_E_ImageDiButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ImageDiButton");
+		    			this.m_E_ImageDiButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ImageDiButton");
      				}
      				return this.m_E_ImageDiButtonButton;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ImageDiButton");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ImageDiButton");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageDiButtonImage
+		public Image E_ImageDiButtonImage
      	{
      		get
      		{
@@ -59,18 +59,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ImageDiButtonImage == null )
      				{
-		    			this.m_E_ImageDiButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageDiButton");
+		    			this.m_E_ImageDiButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageDiButton");
      				}
      				return this.m_E_ImageDiButtonImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageDiButton");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageDiButton");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageXuanzhongImage
+		public Image E_ImageXuanzhongImage
      	{
      		get
      		{
@@ -83,18 +83,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ImageXuanzhongImage == null )
      				{
-		    			this.m_E_ImageXuanzhongImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageXuanzhong");
+		    			this.m_E_ImageXuanzhongImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageXuanzhong");
      				}
      				return this.m_E_ImageXuanzhongImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageXuanzhong");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageXuanzhong");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_PeteroQualityImage
+		public Image E_Img_PeteroQualityImage
      	{
      		get
      		{
@@ -107,18 +107,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Img_PeteroQualityImage == null )
      				{
-		    			this.m_E_Img_PeteroQualityImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_PeteroQuality");
+		    			this.m_E_Img_PeteroQualityImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_PeteroQuality");
      				}
      				return this.m_E_Img_PeteroQualityImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_PeteroQuality");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_PeteroQuality");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_PetHeroIonImage
+		public Image E_Img_PetHeroIonImage
      	{
      		get
      		{
@@ -131,18 +131,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Img_PetHeroIonImage == null )
      				{
-		    			this.m_E_Img_PetHeroIonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_PetHeroIon");
+		    			this.m_E_Img_PetHeroIonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_PetHeroIon");
      				}
      				return this.m_E_Img_PetHeroIonImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_PetHeroIon");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_PetHeroIon");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_PetNameText
+		public Text E_Lab_PetNameText
      	{
      		get
      		{
@@ -155,18 +155,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Lab_PetNameText == null )
      				{
-		    			this.m_E_Lab_PetNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_PetName");
+		    			this.m_E_Lab_PetNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_PetName");
      				}
      				return this.m_E_Lab_PetNameText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_PetName");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_PetName");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_PetLvText
+		public Text E_Lab_PetLvText
      	{
      		get
      		{
@@ -179,18 +179,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Lab_PetLvText == null )
      				{
-		    			this.m_E_Lab_PetLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_PetLv");
+		    			this.m_E_Lab_PetLvText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_PetLv");
      				}
      				return this.m_E_Lab_PetLvText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_PetLv");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_PetLv");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_CanZhanImage
+		public Image E_Img_CanZhanImage
      	{
      		get
      		{
@@ -203,18 +203,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Img_CanZhanImage == null )
      				{
-		    			this.m_E_Img_CanZhanImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_CanZhan");
+		    			this.m_E_Img_CanZhanImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_CanZhan");
      				}
      				return this.m_E_Img_CanZhanImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_CanZhan");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_CanZhan");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_StartImage
+		public Image E_Img_StartImage
      	{
      		get
      		{
@@ -227,18 +227,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Img_StartImage == null )
      				{
-		    			this.m_E_Img_StartImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_Start");
+		    			this.m_E_Img_StartImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_Start");
      				}
      				return this.m_E_Img_StartImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_Start");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_Start");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_StartLvText
+		public Text E_Lab_StartLvText
      	{
      		get
      		{
@@ -251,18 +251,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Lab_StartLvText == null )
      				{
-		    			this.m_E_Lab_StartLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_StartLv");
+		    			this.m_E_Lab_StartLvText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_StartLv");
      				}
      				return this.m_E_Lab_StartLvText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_StartLv");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_StartLv");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_Image_ProtectImage
+		public Image E_Image_ProtectImage
      	{
      		get
      		{
@@ -275,13 +275,13 @@ namespace ET.Client
      			{
      				if( this.m_E_Image_ProtectImage == null )
      				{
-		    			this.m_E_Image_ProtectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Image_Protect");
+		    			this.m_E_Image_ProtectImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Image_Protect");
      				}
      				return this.m_E_Image_ProtectImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Image_Protect");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Image_Protect");
      			}
      		}
      	}
@@ -303,17 +303,17 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.UI.Button m_E_ImageDiButtonButton = null;
-		private UnityEngine.UI.Image m_E_ImageDiButtonImage = null;
-		private UnityEngine.UI.Image m_E_ImageXuanzhongImage = null;
-		private UnityEngine.UI.Image m_E_Img_PeteroQualityImage = null;
-		private UnityEngine.UI.Image m_E_Img_PetHeroIonImage = null;
-		private UnityEngine.UI.Text m_E_Lab_PetNameText = null;
-		private UnityEngine.UI.Text m_E_Lab_PetLvText = null;
-		private UnityEngine.UI.Image m_E_Img_CanZhanImage = null;
-		private UnityEngine.UI.Image m_E_Img_StartImage = null;
-		private UnityEngine.UI.Text m_E_Lab_StartLvText = null;
-		private UnityEngine.UI.Image m_E_Image_ProtectImage = null;
+		private Button m_E_ImageDiButtonButton = null;
+		private Image m_E_ImageDiButtonImage = null;
+		private Image m_E_ImageXuanzhongImage = null;
+		private Image m_E_Img_PeteroQualityImage = null;
+		private Image m_E_Img_PetHeroIonImage = null;
+		private Text m_E_Lab_PetNameText = null;
+		private Text m_E_Lab_PetLvText = null;
+		private Image m_E_Img_CanZhanImage = null;
+		private Image m_E_Img_StartImage = null;
+		private Text m_E_Lab_StartLvText = null;
+		private Image m_E_Image_ProtectImage = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -4,7 +4,6 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 
-
 public partial class UICodeSpawner
 {
     static public void SpawnSubUICode(GameObject gameObject)
@@ -29,9 +28,9 @@ public partial class UICodeSpawner
         string strFilePath = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UIBehaviour/CommonUI" +
                              "";
 
-        if ( !System.IO.Directory.Exists(strFilePath) )
+        if ( !Directory.Exists(strFilePath) )
         {
-            System.IO.Directory.CreateDirectory(strFilePath);
+            Directory.CreateDirectory(strFilePath);
         }
         strFilePath     = Application.dataPath + "/Scripts/HotfixView/Client/MengJing/UIBehaviour/CommonUI/" + strDlgName + "ViewSystem.cs";
 	    
@@ -79,9 +78,9 @@ public partial class UICodeSpawner
 
         string strFilePath = Application.dataPath + "/Scripts/ModelView/Client/MengJing/UIBehaviour/CommonUI";
 
-        if ( !System.IO.Directory.Exists(strFilePath) )
+        if ( !Directory.Exists(strFilePath) )
         {
-            System.IO.Directory.CreateDirectory(strFilePath);
+            Directory.CreateDirectory(strFilePath);
         }
         strFilePath = Application.dataPath + "/Scripts/ModelView/Client/MengJing/UIBehaviour/CommonUI/" + strDlgName + ".cs";
 	    

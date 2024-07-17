@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgPetFubenResult))]
 	[EnableMethod]
 	public  class DlgPetFubenResultViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Image E_Img_Star_1Image
+		public Image E_Img_Star_1Image
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Img_Star_1Image == null )
      			{
-		    		this.m_E_Img_Star_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_Star_1");
+		    		this.m_E_Img_Star_1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_Star_1");
      			}
      			return this.m_E_Img_Star_1Image;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_Star_2Image
+		public Image E_Img_Star_2Image
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Img_Star_2Image == null )
      			{
-		    		this.m_E_Img_Star_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_Star_2");
+		    		this.m_E_Img_Star_2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_Star_2");
      			}
      			return this.m_E_Img_Star_2Image;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_Star_3Image
+		public Image E_Img_Star_3Image
      	{
      		get
      		{
@@ -52,7 +52,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Img_Star_3Image == null )
      			{
-		    		this.m_E_Img_Star_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_Star_3");
+		    		this.m_E_Img_Star_3Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_Star_3");
      			}
      			return this.m_E_Img_Star_3Image;
      		}
@@ -78,7 +78,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_Button_exitButton
+		public Button E_Button_exitButton
      	{
      		get
      		{
@@ -89,13 +89,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_exitButton == null )
      			{
-		    		this.m_E_Button_exitButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"buttonlistnode/E_Button_exit");
+		    		this.m_E_Button_exitButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"buttonlistnode/E_Button_exit");
      			}
      			return this.m_E_Button_exitButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Button_exitImage
+		public Image E_Button_exitImage
      	{
      		get
      		{
@@ -106,13 +106,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_exitImage == null )
      			{
-		    		this.m_E_Button_exitImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"buttonlistnode/E_Button_exit");
+		    		this.m_E_Button_exitImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"buttonlistnode/E_Button_exit");
      			}
      			return this.m_E_Button_exitImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Button_continueButton
+		public Button E_Button_continueButton
      	{
      		get
      		{
@@ -123,13 +123,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_continueButton == null )
      			{
-		    		this.m_E_Button_continueButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"buttonlistnode/E_Button_continue");
+		    		this.m_E_Button_continueButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"buttonlistnode/E_Button_continue");
      			}
      			return this.m_E_Button_continueButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Button_continueImage
+		public Image E_Button_continueImage
      	{
      		get
      		{
@@ -140,13 +140,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_continueImage == null )
      			{
-		    		this.m_E_Button_continueImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"buttonlistnode/E_Button_continue");
+		    		this.m_E_Button_continueImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"buttonlistnode/E_Button_continue");
      			}
      			return this.m_E_Button_continueImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Button_nextButton
+		public Button E_Button_nextButton
      	{
      		get
      		{
@@ -157,13 +157,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_nextButton == null )
      			{
-		    		this.m_E_Button_nextButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"buttonlistnode/E_Button_next");
+		    		this.m_E_Button_nextButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"buttonlistnode/E_Button_next");
      			}
      			return this.m_E_Button_nextButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Button_nextImage
+		public Image E_Button_nextImage
      	{
      		get
      		{
@@ -174,13 +174,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_nextImage == null )
      			{
-		    		this.m_E_Button_nextImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"buttonlistnode/E_Button_next");
+		    		this.m_E_Button_nextImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"buttonlistnode/E_Button_next");
      			}
      			return this.m_E_Button_nextImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextResultText
+		public Text E_TextResultText
      	{
      		get
      		{
@@ -191,7 +191,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TextResultText == null )
      			{
-		    		this.m_E_TextResultText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextResult");
+		    		this.m_E_TextResultText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextResult");
      			}
      			return this.m_E_TextResultText;
      		}
@@ -213,17 +213,17 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Image m_E_Img_Star_1Image = null;
-		private UnityEngine.UI.Image m_E_Img_Star_2Image = null;
-		private UnityEngine.UI.Image m_E_Img_Star_3Image = null;
+		private Image m_E_Img_Star_1Image = null;
+		private Image m_E_Img_Star_2Image = null;
+		private Image m_E_Img_Star_3Image = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
-		private UnityEngine.UI.Button m_E_Button_exitButton = null;
-		private UnityEngine.UI.Image m_E_Button_exitImage = null;
-		private UnityEngine.UI.Button m_E_Button_continueButton = null;
-		private UnityEngine.UI.Image m_E_Button_continueImage = null;
-		private UnityEngine.UI.Button m_E_Button_nextButton = null;
-		private UnityEngine.UI.Image m_E_Button_nextImage = null;
-		private UnityEngine.UI.Text m_E_TextResultText = null;
+		private Button m_E_Button_exitButton = null;
+		private Image m_E_Button_exitImage = null;
+		private Button m_E_Button_continueButton = null;
+		private Image m_E_Button_continueImage = null;
+		private Button m_E_Button_nextButton = null;
+		private Image m_E_Button_nextImage = null;
+		private Text m_E_TextResultText = null;
 		public Transform uiTransform = null;
 	}
 }

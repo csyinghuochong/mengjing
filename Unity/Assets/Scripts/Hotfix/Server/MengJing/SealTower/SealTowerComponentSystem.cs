@@ -91,7 +91,7 @@ namespace ET.Server
             }
         }
         [EntitySystem]
-        private static void Awake(this ET.Server.SealTowerComponent self)
+        private static void Awake(this SealTowerComponent self)
         {
 
         }

@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgTowerViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgTowerViewComponent))]
+	[FriendOfAttribute(typeof(DlgTowerViewComponent))]
 	public static partial class DlgTowerViewComponentSystem
 	{
 		[EntitySystem]

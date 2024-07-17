@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
+using Random = System.Random;
 
 namespace FantasyRPG
 {
@@ -21,7 +23,7 @@ namespace FantasyRPG
         public static List<E> ShuffleList<E>(List<E> inputList)
         {
             List<E> randomList = new List<E>();
-            System.Random r = new System.Random();
+            Random r = new Random();
             int randomIndex = 0;
             while (inputList.Count > 0)
             {
@@ -41,13 +43,13 @@ namespace FantasyRPG
             hex = hex.Replace("0x", ""); //in case the string is formatted 0xFFFFFF
             hex = hex.Replace("#", ""); //in case the string is formatted #FFFFFF
             byte a = 255; //assume fully visible unless specified in hex
-            byte r = byte.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
-            byte g = byte.Parse(hex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
-            byte b = byte.Parse(hex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+            byte r = byte.Parse(hex.Substring(0, 2), NumberStyles.HexNumber);
+            byte g = byte.Parse(hex.Substring(2, 2), NumberStyles.HexNumber);
+            byte b = byte.Parse(hex.Substring(4, 2), NumberStyles.HexNumber);
             //Only use alpha if the string has enough characters
             if (hex.Length == 8)
             {
-                a = byte.Parse(hex.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
+                a = byte.Parse(hex.Substring(6, 2), NumberStyles.HexNumber);
             }
 
             return new Color32(r, g, b, a);

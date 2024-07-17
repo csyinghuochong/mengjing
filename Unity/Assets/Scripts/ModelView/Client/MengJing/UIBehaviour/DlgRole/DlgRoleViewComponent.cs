@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgRole))]
@@ -27,7 +27,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ZodiacButton
+		public Button E_ZodiacButton
      	{
      		get
      		{
@@ -38,13 +38,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ZodiacButton == null )
      			{
-		    		this.m_E_ZodiacButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Zodiac");
+		    		this.m_E_ZodiacButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Zodiac");
      			}
      			return this.m_E_ZodiacButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ZodiacImage
+		public Image E_ZodiacImage
      	{
      		get
      		{
@@ -55,13 +55,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ZodiacImage == null )
      			{
-		    		this.m_E_ZodiacImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Zodiac");
+		    		this.m_E_ZodiacImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Zodiac");
      			}
      			return this.m_E_ZodiacImage;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_SubViewRectTransform
+		public RectTransform EG_SubViewRectTransform
      	{
      		get
      		{
@@ -72,7 +72,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_SubViewRectTransform == null )
      			{
-		    		this.m_EG_SubViewRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SubView");
+		    		this.m_EG_SubViewRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_SubView");
      			}
      			return this.m_EG_SubViewRectTransform;
      		}
@@ -178,7 +178,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
+		public ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
      		{
@@ -189,7 +189,7 @@ namespace ET.Client
      			}
      			if( this.m_E_FunctionSetBtnToggleGroup == null )
      			{
-		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
+		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
      			}
      			return this.m_E_FunctionSetBtnToggleGroup;
      		}
@@ -211,15 +211,15 @@ namespace ET.Client
 		}
 
 		private EntityRef<ES_EquipSet> m_es_equipset = null;
-		private UnityEngine.UI.Button m_E_ZodiacButton = null;
-		private UnityEngine.UI.Image m_E_ZodiacImage = null;
-		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
+		private Button m_E_ZodiacButton = null;
+		private Image m_E_ZodiacImage = null;
+		private RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_RoleBag> m_es_rolebag = null;
 		private EntityRef<ES_RoleProperty> m_es_roleproperty = null;
 		private EntityRef<ES_RoleGem> m_es_rolegem = null;
 		private EntityRef<ES_RoleHuiShou> m_es_rolehuishou = null;
 		private EntityRef<ES_RoleQiangHua> m_es_roleqianghua = null;
-		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}
 }

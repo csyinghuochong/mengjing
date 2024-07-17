@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 namespace ET.Client
 {
@@ -23,7 +19,7 @@ namespace ET.Client
             self.View.ES_RewardList.Refresh(rewards);
             string[] rewardItems = rewards.Split('@');
             int width = 50 + rewardItems.Length * 130 + (rewardItems.Length - 1) * 10;
-            float halfwidth = UnityEngine.Screen.width * 0.5f;
+            float halfwidth = Screen.width * 0.5f;
 
             int r = rewardItems.Length / 5 + 1;
             if (rewardItems.Length % 5 == 0)

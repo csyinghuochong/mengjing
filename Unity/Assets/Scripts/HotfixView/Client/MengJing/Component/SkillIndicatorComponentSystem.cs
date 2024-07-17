@@ -9,14 +9,14 @@ namespace ET.Client
     public static partial class SkillIndicatorComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.SkillIndicatorComponent self)
+        private static void Awake(this SkillIndicatorComponent self)
         {
             self.SkillIndicator = null;
             self.MainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Client.SkillIndicatorComponent self)
+        private static void Destroy(this SkillIndicatorComponent self)
         {
             self.RecoveryEffect();
         }

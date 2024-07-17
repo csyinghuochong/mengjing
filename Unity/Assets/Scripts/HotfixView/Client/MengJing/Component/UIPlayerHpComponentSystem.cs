@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
@@ -11,7 +10,7 @@ namespace ET.Client
     public static partial class UIPlayerHpComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.UIPlayerHpComponent self)
+        private static void Awake(this UIPlayerHpComponent self)
         {
             self.GameObject = null;
             self.Img_HpValue = null;
@@ -27,19 +26,19 @@ namespace ET.Client
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Client.UIPlayerHpComponent self)
+        private static void Destroy(this UIPlayerHpComponent self)
         {
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
             self.RecoverGameObject(self.GameObject);
             self.UIXuLieZhenComponent = null;
         }
 
-        public static void ShowHearBar(this ET.Client.UIPlayerHpComponent self, bool show)
+        public static void ShowHearBar(this UIPlayerHpComponent self, bool show)
         {
             self.GameObject.SetActive(show);
         }
 
-        public static void ExitStealth(this ET.Client.UIPlayerHpComponent self)
+        public static void ExitStealth(this UIPlayerHpComponent self)
         {
             if (self.GameObject == null)
             {
@@ -76,7 +75,7 @@ namespace ET.Client
             //}
         }
 
-        public static void EnterHide(this ET.Client.UIPlayerHpComponent self)
+        public static void EnterHide(this UIPlayerHpComponent self)
         {
             if (self.GameObject == null)
             {
@@ -87,7 +86,7 @@ namespace ET.Client
             self.UIPlayerHpText.SetActive(false);
         }
 
-        public static void ExitHide(this ET.Client.UIPlayerHpComponent self)
+        public static void ExitHide(this UIPlayerHpComponent self)
         {
             if (self.GameObject == null)
             {
@@ -98,7 +97,7 @@ namespace ET.Client
             self.UIPlayerHpText.SetActive(true);
         }
 
-        public static void EnterStealth(this ET.Client.UIPlayerHpComponent self, float alpha)
+        public static void EnterStealth(this UIPlayerHpComponent self, float alpha)
         {
             if (self.GameObject == null)
             {
@@ -136,7 +135,7 @@ namespace ET.Client
             //}
         }
 
-        public static void OnLoadGameObject(this ET.Client.UIPlayerHpComponent self, GameObject gameObject, long formId)
+        public static void OnLoadGameObject(this UIPlayerHpComponent self, GameObject gameObject, long formId)
         {
             if (self.IsDisposed)
             {

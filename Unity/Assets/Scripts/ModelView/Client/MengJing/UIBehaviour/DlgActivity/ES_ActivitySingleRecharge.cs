@@ -1,17 +1,17 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ActivitySingleRecharge : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_ActivitySingleRecharge : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public List<int> ShowItem;
 		public Dictionary<int, EntityRef<Scroll_Item_ActivitySingleRechargeItem>> ScrollItemActivitySingleRechargeItems;
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_ActivitySingleRechargeItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_ActivitySingleRechargeItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -22,7 +22,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ActivitySingleRechargeItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_ActivitySingleRechargeItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_ActivitySingleRechargeItems");
+		    		this.m_E_ActivitySingleRechargeItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_ActivitySingleRechargeItems");
      			}
      			return this.m_E_ActivitySingleRechargeItemsLoopVerticalScrollRect;
      		}
@@ -46,7 +46,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_ActivitySingleRechargeItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_ActivitySingleRechargeItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_TeamDungeonOpenHandler : MessageLocationHandler<Unit, C2M_TeamDungeonOpenRequest, M2C_TeamDungeonOpenResponse>

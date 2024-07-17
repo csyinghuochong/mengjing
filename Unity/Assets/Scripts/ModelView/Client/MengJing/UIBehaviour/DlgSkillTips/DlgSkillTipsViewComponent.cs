@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgSkillTips))]
 	[EnableMethod]
 	public  class DlgSkillTipsViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_ImageButtonButton
+		public Button E_ImageButtonButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonButton == null )
      			{
-		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ImageButton");
+		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ImageButton");
      			}
      			return this.m_E_ImageButtonButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageButtonImage
+		public Image E_ImageButtonImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonImage == null )
      			{
-		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageButton");
+		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageButton");
      			}
      			return this.m_E_ImageButtonImage;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_PositionNodeRectTransform
+		public RectTransform EG_PositionNodeRectTransform
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_PositionNodeRectTransform == null )
      			{
-		    		this.m_EG_PositionNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PositionNode");
+		    		this.m_EG_PositionNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_PositionNode");
      			}
      			return this.m_EG_PositionNodeRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Image_SkillIconImage
+		public Image E_Image_SkillIconImage
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Image_SkillIconImage == null )
      			{
-		    		this.m_E_Image_SkillIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PositionNode/Image_SkillIcon (1)/E_Image_SkillIcon");
+		    		this.m_E_Image_SkillIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_PositionNode/Image_SkillIcon (1)/E_Image_SkillIcon");
      			}
      			return this.m_E_Image_SkillIconImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_SkillNameText
+		public Text E_Lab_SkillNameText
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_SkillNameText == null )
      			{
-		    		this.m_E_Lab_SkillNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_PositionNode/E_Lab_SkillName");
+		    		this.m_E_Lab_SkillNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_PositionNode/E_Lab_SkillName");
      			}
      			return this.m_E_Lab_SkillNameText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_SkillDesText
+		public Text E_Lab_SkillDesText
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_SkillDesText == null )
      			{
-		    		this.m_E_Lab_SkillDesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_PositionNode/E_Lab_SkillDes");
+		    		this.m_E_Lab_SkillDesText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_PositionNode/E_Lab_SkillDes");
      			}
      			return this.m_E_Lab_SkillDesText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_SkillTypeText
+		public Text E_Lab_SkillTypeText
      	{
      		get
      		{
@@ -120,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_SkillTypeText == null )
      			{
-		    		this.m_E_Lab_SkillTypeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_PositionNode/E_Lab_SkillType");
+		    		this.m_E_Lab_SkillTypeText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_PositionNode/E_Lab_SkillType");
      			}
      			return this.m_E_Lab_SkillTypeText;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_UnActiveTipRectTransform
+		public RectTransform EG_UnActiveTipRectTransform
      	{
      		get
      		{
@@ -137,13 +137,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_UnActiveTipRectTransform == null )
      			{
-		    		this.m_EG_UnActiveTipRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PositionNode/EG_UnActiveTip");
+		    		this.m_EG_UnActiveTipRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_PositionNode/EG_UnActiveTip");
      			}
      			return this.m_EG_UnActiveTipRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextTip2Text
+		public Text E_TextTip2Text
      	{
      		get
      		{
@@ -154,7 +154,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TextTip2Text == null )
      			{
-		    		this.m_E_TextTip2Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_PositionNode/EG_UnActiveTip/E_TextTip2");
+		    		this.m_E_TextTip2Text = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_PositionNode/EG_UnActiveTip/E_TextTip2");
      			}
      			return this.m_E_TextTip2Text;
      		}
@@ -174,15 +174,15 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_ImageButtonButton = null;
-		private UnityEngine.UI.Image m_E_ImageButtonImage = null;
-		private UnityEngine.RectTransform m_EG_PositionNodeRectTransform = null;
-		private UnityEngine.UI.Image m_E_Image_SkillIconImage = null;
-		private UnityEngine.UI.Text m_E_Lab_SkillNameText = null;
-		private UnityEngine.UI.Text m_E_Lab_SkillDesText = null;
-		private UnityEngine.UI.Text m_E_Lab_SkillTypeText = null;
-		private UnityEngine.RectTransform m_EG_UnActiveTipRectTransform = null;
-		private UnityEngine.UI.Text m_E_TextTip2Text = null;
+		private Button m_E_ImageButtonButton = null;
+		private Image m_E_ImageButtonImage = null;
+		private RectTransform m_EG_PositionNodeRectTransform = null;
+		private Image m_E_Image_SkillIconImage = null;
+		private Text m_E_Lab_SkillNameText = null;
+		private Text m_E_Lab_SkillDesText = null;
+		private Text m_E_Lab_SkillTypeText = null;
+		private RectTransform m_EG_UnActiveTipRectTransform = null;
+		private Text m_E_TextTip2Text = null;
 		public Transform uiTransform = null;
 	}
 }

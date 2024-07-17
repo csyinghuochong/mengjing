@@ -26,13 +26,13 @@ namespace ET.Server
         }
         
         [EntitySystem]
-        private static void Awake(this ET.Server.UnionSceneComponent self)
+        private static void Awake(this UnionSceneComponent self)
         {
             self.OnAwake().Coroutine();
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.UnionSceneComponent self)
+        private static void Destroy(this UnionSceneComponent self)
         {
         }
 
@@ -343,7 +343,7 @@ namespace ET.Server
                     {
                         mailInfo.Context = "发送家族争霸赛胜利奖励";
                         Log.Warning($"发送奖励胜利！！: {self.Zone()} {unitids[i]}");
-                        BagInfo BagInfo = ET.BagInfo.Create();
+                        BagInfo BagInfo = BagInfo.Create();
                         BagInfo.ItemID = 1;
                         BagInfo.ItemNum = winJingJin;
                         BagInfo.GetWay = $"{ItemGetWay.UnionRace}_{serverTime}";
@@ -353,7 +353,7 @@ namespace ET.Server
                     {
                         mailInfo.Context = "发送家族争霸赛失败奖励";
                         Log.Warning($"发送奖励失败！！: {self.Zone()} {unitids[i]}");
-                        BagInfo BagInfo = ET.BagInfo.Create();
+                        BagInfo BagInfo = BagInfo.Create();
                         BagInfo.ItemID = 1;
                         BagInfo.ItemNum = failJiangJin;
                         BagInfo.GetWay = $"{ItemGetWay.UnionRace}_{serverTime}";

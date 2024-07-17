@@ -10,7 +10,7 @@ namespace ET.Server
     public static partial class PetComponentSSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.PetComponentS self)
+        private static void Awake(this PetComponentS self)
         {
 
         }

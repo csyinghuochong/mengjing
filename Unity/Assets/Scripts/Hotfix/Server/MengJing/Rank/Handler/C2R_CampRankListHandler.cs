@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Rank)]
     public class C2R_CampRankListHandler : MessageHandler<Scene, C2R_CampRankListRequest, R2C_CampRankListResponse>

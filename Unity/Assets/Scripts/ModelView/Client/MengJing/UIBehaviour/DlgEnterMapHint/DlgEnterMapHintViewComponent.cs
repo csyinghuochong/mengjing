@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgEnterMapHint))]
 	[EnableMethod]
 	public  class DlgEnterMapHintViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.RectTransform EG_LeftRectTransform
+		public RectTransform EG_LeftRectTransform
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_LeftRectTransform == null )
      			{
-		    		this.m_EG_LeftRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Left");
+		    		this.m_EG_LeftRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Left");
      			}
      			return this.m_EG_LeftRectTransform;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_JingLingShowSetRectTransform
+		public RectTransform EG_JingLingShowSetRectTransform
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_JingLingShowSetRectTransform == null )
      			{
-		    		this.m_EG_JingLingShowSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Left/EG_JingLingShowSet");
+		    		this.m_EG_JingLingShowSetRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Left/EG_JingLingShowSet");
      			}
      			return this.m_EG_JingLingShowSetRectTransform;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_ShenYuanSetRectTransform
+		public RectTransform EG_ShenYuanSetRectTransform
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_ShenYuanSetRectTransform == null )
      			{
-		    		this.m_EG_ShenYuanSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Left/EG_ShenYuanSet");
+		    		this.m_EG_ShenYuanSetRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Left/EG_ShenYuanSet");
      			}
      			return this.m_EG_ShenYuanSetRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Text E_titleTextText
+		public Text E_titleTextText
      	{
      		get
      		{
@@ -69,7 +69,7 @@ namespace ET.Client
      			}
      			if( this.m_E_titleTextText == null )
      			{
-		    		this.m_E_titleTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Left/E_titleText");
+		    		this.m_E_titleTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Left/E_titleText");
      			}
      			return this.m_E_titleTextText;
      		}
@@ -84,10 +84,10 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EG_LeftRectTransform = null;
-		private UnityEngine.RectTransform m_EG_JingLingShowSetRectTransform = null;
-		private UnityEngine.RectTransform m_EG_ShenYuanSetRectTransform = null;
-		private UnityEngine.UI.Text m_E_titleTextText = null;
+		private RectTransform m_EG_LeftRectTransform = null;
+		private RectTransform m_EG_JingLingShowSetRectTransform = null;
+		private RectTransform m_EG_ShenYuanSetRectTransform = null;
+		private Text m_E_titleTextText = null;
 		public Transform uiTransform = null;
 	}
 }

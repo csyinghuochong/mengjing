@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ namespace ET.Client
     public static partial class ChainLightningComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.ChainLightningComponent self, UnityEngine.GameObject go)
+        private static void Awake(this ChainLightningComponent self, GameObject go)
         {
             self._lineRender = go.GetComponent<LineRenderer>();
             self._linePosList = new List<Vector3>();
@@ -21,7 +20,7 @@ namespace ET.Client
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Client.ChainLightningComponent self)
+        private static void Destroy(this ChainLightningComponent self)
         {
             self.Start = null;
             self.End = null;
@@ -98,11 +97,11 @@ namespace ET.Client
                 float midY = (startPos.y + destPos.y) / 2;
                 float midZ = (startPos.z + destPos.z) / 2;
 
-                midX += (float)(UnityEngine.Random.value - 0.5) * displace;
+                midX += (float)(Random.value - 0.5) * displace;
 
-                midY += (float)(UnityEngine.Random.value - 0.5) * displace;
+                midY += (float)(Random.value - 0.5) * displace;
 
-                midZ += (float)(UnityEngine.Random.value - 0.5) * displace;
+                midZ += (float)(Random.value - 0.5) * displace;
 
                 Vector3 midPos = new Vector3(midX, midY, midZ);
 

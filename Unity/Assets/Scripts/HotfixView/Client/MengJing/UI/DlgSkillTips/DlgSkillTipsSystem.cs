@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 namespace ET.Client
 {
@@ -61,7 +57,7 @@ namespace ET.Client
                 self.View.E_Lab_SkillTypeText.text = GameSettingLanguge.Instance.LoadLocalization("类型：被动技能");
             }
 
-            if (vector3.x > UnityEngine.Screen.width * -0.5 + 500)
+            if (vector3.x > Screen.width * -0.5 + 500)
             {
                 self.View.EG_PositionNodeRectTransform.transform.localPosition = vector3 + new Vector3(-50f, 50f, 0f);
             }

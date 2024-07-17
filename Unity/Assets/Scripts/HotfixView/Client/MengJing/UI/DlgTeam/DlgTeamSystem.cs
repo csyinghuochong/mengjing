@@ -1,10 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [Event(SceneType.Demo)]
     public class DataUpdate_TeamUpdate_DlgTeamRefresh : AEvent<Scene, DataUpdate_TeamUpdate>

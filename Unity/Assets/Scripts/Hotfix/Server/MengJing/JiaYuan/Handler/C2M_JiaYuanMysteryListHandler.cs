@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_JiaYuanMysteryListHandler : MessageLocationHandler<Unit, C2M_JiaYuanMysteryListRequest, M2C_JiaYuanMysteryListResponse>

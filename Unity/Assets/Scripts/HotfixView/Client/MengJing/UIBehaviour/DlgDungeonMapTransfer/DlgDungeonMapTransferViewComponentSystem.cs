@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgDungeonMapTransferViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgDungeonMapTransferViewComponent))]
+	[FriendOfAttribute(typeof(DlgDungeonMapTransferViewComponent))]
 	public static partial class DlgDungeonMapTransferViewComponentSystem
 	{
 		[EntitySystem]

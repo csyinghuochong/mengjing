@@ -1,7 +1,4 @@
-﻿using System;
-
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_GMCustomHandler : MessageLocationHandler<Unit, C2M_GMCustomRequest, M2C_GMCustomResponse>

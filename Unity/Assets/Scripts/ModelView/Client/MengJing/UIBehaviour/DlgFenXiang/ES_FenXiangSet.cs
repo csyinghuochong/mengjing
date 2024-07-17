@@ -1,16 +1,16 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_FenXiangSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_FenXiangSet : Entity,IAwake<Transform>,IDestroy 
 	{
 		public string PopularizeCode;
 		public int ShareType;
 		
-		public UnityEngine.RectTransform EG_FenXiang_QQRectTransform
+		public RectTransform EG_FenXiang_QQRectTransform
      	{
      		get
      		{
@@ -21,13 +21,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_FenXiang_QQRectTransform == null )
      			{
-		    		this.m_EG_FenXiang_QQRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_FenXiang_QQ");
+		    		this.m_EG_FenXiang_QQRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_FenXiang_QQ");
      			}
      			return this.m_EG_FenXiang_QQRectTransform;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_FenXiang_WeiXinRectTransform
+		public RectTransform EG_FenXiang_WeiXinRectTransform
      	{
      		get
      		{
@@ -38,13 +38,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_FenXiang_WeiXinRectTransform == null )
      			{
-		    		this.m_EG_FenXiang_WeiXinRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_FenXiang_WeiXin");
+		    		this.m_EG_FenXiang_WeiXinRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_FenXiang_WeiXin");
      			}
      			return this.m_EG_FenXiang_WeiXinRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Button_AddQQButton
+		public Button E_Button_AddQQButton
      	{
      		get
      		{
@@ -55,13 +55,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_AddQQButton == null )
      			{
-		    		this.m_E_Button_AddQQButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_FenXiang_WeiXin/E_Button_AddQQ");
+		    		this.m_E_Button_AddQQButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_FenXiang_WeiXin/E_Button_AddQQ");
      			}
      			return this.m_E_Button_AddQQButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Button_AddQQImage
+		public Image E_Button_AddQQImage
      	{
      		get
      		{
@@ -72,13 +72,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_AddQQImage == null )
      			{
-		    		this.m_E_Button_AddQQImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_FenXiang_WeiXin/E_Button_AddQQ");
+		    		this.m_E_Button_AddQQImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_FenXiang_WeiXin/E_Button_AddQQ");
      			}
      			return this.m_E_Button_AddQQImage;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_FenXiang_TikTokRectTransform
+		public RectTransform EG_FenXiang_TikTokRectTransform
      	{
      		get
      		{
@@ -89,13 +89,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_FenXiang_TikTokRectTransform == null )
      			{
-		    		this.m_EG_FenXiang_TikTokRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_FenXiang_TikTok");
+		    		this.m_EG_FenXiang_TikTokRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_FenXiang_TikTok");
      			}
      			return this.m_EG_FenXiang_TikTokRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Button_supportButton
+		public Button E_Button_supportButton
      	{
      		get
      		{
@@ -106,13 +106,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_supportButton == null )
      			{
-		    		this.m_E_Button_supportButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Button_support");
+		    		this.m_E_Button_supportButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Button_support");
      			}
      			return this.m_E_Button_supportButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Button_supportImage
+		public Image E_Button_supportImage
      	{
      		get
      		{
@@ -123,13 +123,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_supportImage == null )
      			{
-		    		this.m_E_Button_supportImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Button_support");
+		    		this.m_E_Button_supportImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Button_support");
      			}
      			return this.m_E_Button_supportImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_tip1Text
+		public Text E_Text_tip1Text
      	{
      		get
      		{
@@ -140,7 +140,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_tip1Text == null )
      			{
-		    		this.m_E_Text_tip1Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_tip1");
+		    		this.m_E_Text_tip1Text = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_tip1");
      			}
      			return this.m_E_Text_tip1Text;
      		}
@@ -171,14 +171,14 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EG_FenXiang_QQRectTransform = null;
-		private UnityEngine.RectTransform m_EG_FenXiang_WeiXinRectTransform = null;
-		private UnityEngine.UI.Button m_E_Button_AddQQButton = null;
-		private UnityEngine.UI.Image m_E_Button_AddQQImage = null;
-		private UnityEngine.RectTransform m_EG_FenXiang_TikTokRectTransform = null;
-		private UnityEngine.UI.Button m_E_Button_supportButton = null;
-		private UnityEngine.UI.Image m_E_Button_supportImage = null;
-		private UnityEngine.UI.Text m_E_Text_tip1Text = null;
+		private RectTransform m_EG_FenXiang_QQRectTransform = null;
+		private RectTransform m_EG_FenXiang_WeiXinRectTransform = null;
+		private Button m_E_Button_AddQQButton = null;
+		private Image m_E_Button_AddQQImage = null;
+		private RectTransform m_EG_FenXiang_TikTokRectTransform = null;
+		private Button m_E_Button_supportButton = null;
+		private Image m_E_Button_supportImage = null;
+		private Text m_E_Text_tip1Text = null;
 		public Transform uiTransform = null;
 	}
 }

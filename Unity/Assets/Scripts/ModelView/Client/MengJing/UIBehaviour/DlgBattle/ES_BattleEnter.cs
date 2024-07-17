@@ -1,11 +1,11 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_BattleEnter : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_BattleEnter : Entity,IAwake<Transform>,IDestroy 
 	{
 		public ES_RewardList ES_RewardList
      	{
@@ -26,7 +26,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonEnterButton
+		public Button E_ButtonEnterButton
      	{
      		get
      		{
@@ -37,13 +37,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonEnterButton == null )
      			{
-		    		this.m_E_ButtonEnterButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonEnter");
+		    		this.m_E_ButtonEnterButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonEnter");
      			}
      			return this.m_E_ButtonEnterButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonEnterImage
+		public Image E_ButtonEnterImage
      	{
      		get
      		{
@@ -54,7 +54,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonEnterImage == null )
      			{
-		    		this.m_E_ButtonEnterImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonEnter");
+		    		this.m_E_ButtonEnterImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonEnter");
      			}
      			return this.m_E_ButtonEnterImage;
      		}
@@ -81,8 +81,8 @@ namespace ET.Client
 		}
 
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
-		private UnityEngine.UI.Button m_E_ButtonEnterButton = null;
-		private UnityEngine.UI.Image m_E_ButtonEnterImage = null;
+		private Button m_E_ButtonEnterButton = null;
+		private Image m_E_ButtonEnterImage = null;
 		public Transform uiTransform = null;
 	}
 }

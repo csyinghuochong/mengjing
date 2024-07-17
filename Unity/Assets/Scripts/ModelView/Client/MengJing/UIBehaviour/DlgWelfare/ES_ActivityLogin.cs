@@ -1,17 +1,17 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ActivityLogin : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_ActivityLogin : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public List<ActivityConfig> ShowActivityConfigs = new();
 		public Dictionary<int, EntityRef<Scroll_Item_ActivityLoginItem>> ScrollItemActivityLoginItems;
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_ActivityLoginItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_ActivityLoginItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -22,7 +22,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ActivityLoginItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_ActivityLoginItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_ActivityLoginItems");
+		    		this.m_E_ActivityLoginItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_ActivityLoginItems");
      			}
      			return this.m_E_ActivityLoginItemsLoopVerticalScrollRect;
      		}
@@ -46,7 +46,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_ActivityLoginItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_ActivityLoginItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

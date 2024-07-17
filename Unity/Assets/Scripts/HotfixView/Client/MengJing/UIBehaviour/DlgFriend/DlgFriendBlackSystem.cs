@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace ET.Client
 {
 
@@ -6,7 +8,7 @@ namespace ET.Client
     public static partial class DlgFriendBlackSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.DlgFriendBlack self, UnityEngine.Transform args2)
+        private static void Awake(this DlgFriendBlack self, Transform args2)
         {
             self.uiTransform = args2;
             
@@ -14,7 +16,7 @@ namespace ET.Client
         }
         
         [EntitySystem]
-        private static void Destroy(this ET.Client.DlgFriendBlack self)
+        private static void Destroy(this DlgFriendBlack self)
         {
             self.DestroyWidget();
         }

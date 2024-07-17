@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Union)]
     public class U2M_UnionKickOutHandler : MessageHandler<Unit, U2M_UnionKickOutRequest, M2U_UnionKickOutResponse>

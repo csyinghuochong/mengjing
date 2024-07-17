@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [EntitySystemOf(typeof(UIBaseWindow))]
-    [FriendOfAttribute(typeof(ET.Client.UIBaseWindow))]
+    [FriendOfAttribute(typeof(UIBaseWindow))]
     public static partial class UIBaseWindowSystem
     {
         [EntitySystem]

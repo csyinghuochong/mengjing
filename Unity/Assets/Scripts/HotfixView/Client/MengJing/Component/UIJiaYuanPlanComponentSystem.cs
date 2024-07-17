@@ -106,7 +106,7 @@ namespace ET.Client
                 if (self.PlanStage == 3)
                 {
                     long shouhuoTime = ET.JiaYuanHelper.GetPlanNextShouHuoTime(unit.ConfigId, startTime, gatherNumber, gatherLastTime);
-                    System.TimeSpan chaDate = TimeInfo.Instance.ToDateTime(shouhuoTime) - TimeHelper.DateTimeNow();
+                    TimeSpan chaDate = TimeInfo.Instance.ToDateTime(shouhuoTime) - TimeHelper.DateTimeNow();
                     string showStr = String.Empty;
                     if (chaDate.Days > 0)
                     {

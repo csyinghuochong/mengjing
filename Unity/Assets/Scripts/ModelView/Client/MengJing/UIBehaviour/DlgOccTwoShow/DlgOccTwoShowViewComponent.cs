@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgOccTwoShow))]
@@ -27,7 +27,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextOccTwoNameText
+		public Text E_TextOccTwoNameText
      	{
      		get
      		{
@@ -38,13 +38,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextOccTwoNameText == null )
      			{
-		    		this.m_E_TextOccTwoNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextOccTwoName");
+		    		this.m_E_TextOccTwoNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextOccTwoName");
      			}
      			return this.m_E_TextOccTwoNameText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_CloseButton
+		public Button E_Btn_CloseButton
      	{
      		get
      		{
@@ -55,13 +55,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseButton == null )
      			{
-		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_CloseImage
+		public Image E_Btn_CloseImage
      	{
      		get
      		{
@@ -72,13 +72,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseImage == null )
      			{
-		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseImage;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_SkillListItemRectTransform
+		public RectTransform EG_SkillListItemRectTransform
      	{
      		get
      		{
@@ -89,7 +89,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_SkillListItemRectTransform == null )
      			{
-		    		this.m_EG_SkillListItemRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SkillListItem");
+		    		this.m_EG_SkillListItemRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_SkillListItem");
      			}
      			return this.m_EG_SkillListItemRectTransform;
      		}
@@ -106,10 +106,10 @@ namespace ET.Client
 		}
 
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
-		private UnityEngine.UI.Text m_E_TextOccTwoNameText = null;
-		private UnityEngine.UI.Button m_E_Btn_CloseButton = null;
-		private UnityEngine.UI.Image m_E_Btn_CloseImage = null;
-		private UnityEngine.RectTransform m_EG_SkillListItemRectTransform = null;
+		private Text m_E_TextOccTwoNameText = null;
+		private Button m_E_Btn_CloseButton = null;
+		private Image m_E_Btn_CloseImage = null;
+		private RectTransform m_EG_SkillListItemRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

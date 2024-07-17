@@ -1,13 +1,14 @@
-using UnityEngine;
-using UnityEditor;
-using System.Collections;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.IO;
-using UnityEditor.Build.Reporting;
 using System.Reflection;
 using ET;
+using UnityEditor;
+using UnityEditor.Build.Reporting;
+using UnityEditor.SceneManagement;
+using UnityEngine;
 using YooAsset;
+using Scene = UnityEngine.SceneManagement.Scene;
 
 //监听Unity启动，一启动就执行
 [InitializeOnLoad]
@@ -168,7 +169,7 @@ public class MyEditorScript
     {
         int version = -1;
 
-        UnityEngine.SceneManagement.Scene curScene = UnityEditor.SceneManagement.EditorSceneManager.GetSceneByPath("Assets/Scenes/Init.unity");
+        Scene curScene = EditorSceneManager.GetSceneByPath("Assets/Scenes/Init.unity");
         GameObject[] gos = curScene.GetRootGameObjects();
         foreach (var go in gos)
         {
@@ -193,7 +194,7 @@ public class MyEditorScript
 
         if (version == -1)
         {
-            UnityEngine.Debug.LogError("version == -1");
+            Debug.LogError("version == -1");
             return version;
         }
 

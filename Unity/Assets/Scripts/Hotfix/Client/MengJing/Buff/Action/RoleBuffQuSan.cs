@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Unity.Mathematics;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     public class RoleBuffQuSan : RoleBuff_Base
     {

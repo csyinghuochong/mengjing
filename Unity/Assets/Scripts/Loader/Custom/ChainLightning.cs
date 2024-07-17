@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
@@ -84,11 +83,11 @@ public class ChainLightning : MonoBehaviour
             float midY = (startPos.y + destPos.y) / 2;
             float midZ = (startPos.z + destPos.z) / 2;
 
-            midX += (float)(UnityEngine.Random.value - 0.5) * displace;
+            midX += (float)(Random.value - 0.5) * displace;
 
-            midY += (float)(UnityEngine.Random.value - 0.5) * displace;
+            midY += (float)(Random.value - 0.5) * displace;
 
-            midZ += (float)(UnityEngine.Random.value - 0.5) * displace;
+            midZ += (float)(Random.value - 0.5) * displace;
 
             Vector3 midPos = new Vector3(midX, midY, midZ);
 

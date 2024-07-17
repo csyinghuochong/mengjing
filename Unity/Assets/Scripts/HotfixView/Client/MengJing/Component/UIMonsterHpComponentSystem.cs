@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +10,7 @@ namespace ET.Client
     public static partial class UIMonsterHpComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.UIMonsterHpComponent self)
+        private static void Awake(this UIMonsterHpComponent self)
         {
             self.GameObject = null;
             self.Img_HpValue = null;
@@ -25,18 +24,18 @@ namespace ET.Client
             GameObjectLoadHelper.AddLoadQueue(self.Root(), self.HeadBarPath, self.InstanceId, self.OnLoadGameObject);
         }
         [EntitySystem]
-        private static void Destroy(this ET.Client.UIMonsterHpComponent self)
+        private static void Destroy(this UIMonsterHpComponent self)
         {
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
             self.RecoverGameObject(self.GameObject);
         }
         
-         public static void ShowHearBar(this ET.Client.UIMonsterHpComponent self, bool show)
+         public static void ShowHearBar(this UIMonsterHpComponent self, bool show)
          {
              self.GameObject.SetActive(show);
          }
 
-         public static void ExitStealth(this ET.Client.UIMonsterHpComponent self)
+         public static void ExitStealth(this UIMonsterHpComponent self)
          {
              if (self.GameObject == null)
              {
@@ -73,7 +72,7 @@ namespace ET.Client
              //}
          }
 
-         public static void EnterHide(this ET.Client.UIMonsterHpComponent self)
+         public static void EnterHide(this UIMonsterHpComponent self)
          { 
              if (self.GameObject == null)
              {
@@ -83,7 +82,7 @@ namespace ET.Client
              self.UIPlayerHpText.SetActive(false);
          }
 
-         public static void ExitHide(this ET.Client.UIMonsterHpComponent self)
+         public static void ExitHide(this UIMonsterHpComponent self)
          {
              if (self.GameObject == null)
              {
@@ -93,7 +92,7 @@ namespace ET.Client
              self.UIPlayerHpText.SetActive(true);
          }
 
-         public static void EnterStealth(this ET.Client.UIMonsterHpComponent self, float alpha)
+         public static void EnterStealth(this UIMonsterHpComponent self, float alpha)
          {
              if (self.GameObject == null)
              {
@@ -131,7 +130,7 @@ namespace ET.Client
              //}
          }
 
-         public static void OnLoadGameObject(this ET.Client.UIMonsterHpComponent self, GameObject gameObject, long formId)
+         public static void OnLoadGameObject(this UIMonsterHpComponent self, GameObject gameObject, long formId)
          {
              if (self.IsDisposed)
              {

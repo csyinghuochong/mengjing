@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_StallXiaJiaHandler: MessageLocationHandler<Unit, C2M_StallXiaJiaRequest, M2C_StallXiaJiaResponse>

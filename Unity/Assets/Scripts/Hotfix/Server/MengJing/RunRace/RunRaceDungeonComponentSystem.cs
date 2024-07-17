@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
-using System;
 
 namespace ET.Server
 {
@@ -26,7 +26,7 @@ namespace ET.Server
         }
         
         [EntitySystem]
-        private static void Awake(this ET.Server.RunRaceDungeonComponent self)
+        private static void Awake(this RunRaceDungeonComponent self)
         {
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(1000, TimerInvokeType.RunRaceDungeonTimer, self);
 
@@ -38,7 +38,7 @@ namespace ET.Server
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.RunRaceDungeonComponent self)
+        private static void Destroy(this RunRaceDungeonComponent self)
         {
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
         }

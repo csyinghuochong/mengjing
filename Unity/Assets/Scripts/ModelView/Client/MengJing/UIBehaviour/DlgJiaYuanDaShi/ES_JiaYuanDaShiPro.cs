@@ -1,12 +1,12 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_JiaYuanDaShiPro : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_JiaYuanDaShiPro : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public List<BagInfo> ShowBagInfos = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
@@ -14,7 +14,7 @@ namespace ET.Client
 		public Dictionary<int, EntityRef<Scroll_Item_JiaYuanDaShiProItem>> ScrollItemJiaYuanDaShiProItems;
 		
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_JiaYuanDaShiProItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_JiaYuanDaShiProItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -25,13 +25,13 @@ namespace ET.Client
      			}
      			if( this.m_E_JiaYuanDaShiProItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_JiaYuanDaShiProItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_JiaYuanDaShiProItems");
+		    		this.m_E_JiaYuanDaShiProItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_JiaYuanDaShiProItems");
      			}
      			return this.m_E_JiaYuanDaShiProItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -42,7 +42,7 @@ namespace ET.Client
      			}
      			if( this.m_E_BagItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_BagItems");
+		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_BagItems");
      			}
      			return this.m_E_BagItemsLoopVerticalScrollRect;
      		}
@@ -68,7 +68,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonEatButton
+		public Button E_ButtonEatButton
      	{
      		get
      		{
@@ -79,13 +79,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonEatButton == null )
      			{
-		    		this.m_E_ButtonEatButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_ButtonEat");
+		    		this.m_E_ButtonEatButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/E_ButtonEat");
      			}
      			return this.m_E_ButtonEatButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonEatImage
+		public Image E_ButtonEatImage
      	{
      		get
      		{
@@ -96,13 +96,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonEatImage == null )
      			{
-		    		this.m_E_ButtonEatImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ButtonEat");
+		    		this.m_E_ButtonEatImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/E_ButtonEat");
      			}
      			return this.m_E_ButtonEatImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Label_TipsText
+		public Text E_Label_TipsText
      	{
      		get
      		{
@@ -113,7 +113,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Label_TipsText == null )
      			{
-		    		this.m_E_Label_TipsText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Label_Tips");
+		    		this.m_E_Label_TipsText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_Label_Tips");
      			}
      			return this.m_E_Label_TipsText;
      		}
@@ -142,12 +142,12 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_JiaYuanDaShiProItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_JiaYuanDaShiProItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
-		private UnityEngine.UI.Button m_E_ButtonEatButton = null;
-		private UnityEngine.UI.Image m_E_ButtonEatImage = null;
-		private UnityEngine.UI.Text m_E_Label_TipsText = null;
+		private Button m_E_ButtonEatButton = null;
+		private Image m_E_ButtonEatImage = null;
+		private Text m_E_Label_TipsText = null;
 		public Transform uiTransform = null;
 	}
 }

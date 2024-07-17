@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgChouKaProbExplainViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgChouKaProbExplainViewComponent))]
+	[FriendOfAttribute(typeof(DlgChouKaProbExplainViewComponent))]
 	public static partial class DlgChouKaProbExplainViewComponentSystem
 	{
 		[EntitySystem]

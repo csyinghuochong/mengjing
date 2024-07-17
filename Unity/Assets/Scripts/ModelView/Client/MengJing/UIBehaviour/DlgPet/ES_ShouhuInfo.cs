@@ -1,17 +1,17 @@
-﻿
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ShouhuInfo : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_ShouhuInfo : Entity,IAwake<Transform>,IDestroy 
 	{
 		public int Index;
 		public Action<int> SelectHandler;
 		
-		public UnityEngine.UI.Button E_ImageSelectButton
+		public Button E_ImageSelectButton
      	{
      		get
      		{
@@ -22,13 +22,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageSelectButton == null )
      			{
-		    		this.m_E_ImageSelectButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ImageSelect");
+		    		this.m_E_ImageSelectButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ImageSelect");
      			}
      			return this.m_E_ImageSelectButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageSelectImage
+		public Image E_ImageSelectImage
      	{
      		get
      		{
@@ -39,13 +39,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageSelectImage == null )
      			{
-		    		this.m_E_ImageSelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageSelect");
+		    		this.m_E_ImageSelectImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageSelect");
      			}
      			return this.m_E_ImageSelectImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageActiveImage
+		public Image E_ImageActiveImage
      	{
      		get
      		{
@@ -56,13 +56,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageActiveImage == null )
      			{
-		    		this.m_E_ImageActiveImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageActive");
+		    		this.m_E_ImageActiveImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageActive");
      			}
      			return this.m_E_ImageActiveImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ImageButtonButton
+		public Button E_ImageButtonButton
      	{
      		get
      		{
@@ -73,13 +73,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonButton == null )
      			{
-		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ImageButton");
+		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ImageButton");
      			}
      			return this.m_E_ImageButtonButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageButtonImage
+		public Image E_ImageButtonImage
      	{
      		get
      		{
@@ -90,13 +90,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonImage == null )
      			{
-		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageButton");
+		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageButton");
      			}
      			return this.m_E_ImageButtonImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageDaDiImage
+		public Image E_ImageDaDiImage
      	{
      		get
      		{
@@ -107,13 +107,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageDaDiImage == null )
      			{
-		    		this.m_E_ImageDaDiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageDaDi");
+		    		this.m_E_ImageDaDiImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageDaDi");
      			}
      			return this.m_E_ImageDaDiImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageIconImage
+		public Image E_ImageIconImage
      	{
      		get
      		{
@@ -124,7 +124,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageIconImage == null )
      			{
-		    		this.m_E_ImageIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageIcon");
+		    		this.m_E_ImageIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageIcon");
      			}
      			return this.m_E_ImageIconImage;
      		}
@@ -150,7 +150,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_NameText
+		public Text E_Text_NameText
      	{
      		get
      		{
@@ -161,13 +161,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_NameText == null )
      			{
-		    		this.m_E_Text_NameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_Name");
+		    		this.m_E_Text_NameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Name");
      			}
      			return this.m_E_Text_NameText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_AttriText
+		public Text E_Text_AttriText
      	{
      		get
      		{
@@ -178,7 +178,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_AttriText == null )
      			{
-		    		this.m_E_Text_AttriText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_Attri");
+		    		this.m_E_Text_AttriText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Attri");
      			}
      			return this.m_E_Text_AttriText;
      		}
@@ -211,16 +211,16 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_ImageSelectButton = null;
-		private UnityEngine.UI.Image m_E_ImageSelectImage = null;
-		private UnityEngine.UI.Image m_E_ImageActiveImage = null;
-		private UnityEngine.UI.Button m_E_ImageButtonButton = null;
-		private UnityEngine.UI.Image m_E_ImageButtonImage = null;
-		private UnityEngine.UI.Image m_E_ImageDaDiImage = null;
-		private UnityEngine.UI.Image m_E_ImageIconImage = null;
+		private Button m_E_ImageSelectButton = null;
+		private Image m_E_ImageSelectImage = null;
+		private Image m_E_ImageActiveImage = null;
+		private Button m_E_ImageButtonButton = null;
+		private Image m_E_ImageButtonImage = null;
+		private Image m_E_ImageDaDiImage = null;
+		private Image m_E_ImageIconImage = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
-		private UnityEngine.UI.Text m_E_Text_NameText = null;
-		private UnityEngine.UI.Text m_E_Text_AttriText = null;
+		private Text m_E_Text_NameText = null;
+		private Text m_E_Text_AttriText = null;
 		public Transform uiTransform = null;
 	}
 }

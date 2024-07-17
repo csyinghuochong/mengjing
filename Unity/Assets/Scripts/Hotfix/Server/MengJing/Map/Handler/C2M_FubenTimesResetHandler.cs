@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_FubenTimesResetHandler : MessageLocationHandler<Unit, C2M_FubenTimesResetRequest, M2C_FubenTimesResetResponse>

@@ -1,8 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     
     public enum UIWindowType

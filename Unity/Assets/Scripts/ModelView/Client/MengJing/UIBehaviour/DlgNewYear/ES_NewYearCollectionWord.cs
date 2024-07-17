@@ -1,17 +1,17 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_NewYearCollectionWord : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_NewYearCollectionWord : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public List<ActivityConfig> ShowActivityConfigs = new();
 		public Dictionary<int, EntityRef<Scroll_Item_NewYearCollectionWordItem>> ScrollItemNewYearCollectionWordItems;
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_NewYearCollectionWordItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_NewYearCollectionWordItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -22,7 +22,7 @@ namespace ET.Client
      			}
      			if( this.m_E_NewYearCollectionWordItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_NewYearCollectionWordItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_NewYearCollectionWordItems");
+		    		this.m_E_NewYearCollectionWordItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_NewYearCollectionWordItems");
      			}
      			return this.m_E_NewYearCollectionWordItemsLoopVerticalScrollRect;
      		}
@@ -46,7 +46,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_NewYearCollectionWordItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_NewYearCollectionWordItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

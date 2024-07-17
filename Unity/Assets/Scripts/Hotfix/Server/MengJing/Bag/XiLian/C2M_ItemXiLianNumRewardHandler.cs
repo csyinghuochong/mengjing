@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_ItemXiLianNumRewardHandler: MessageLocationHandler<Unit, C2M_ItemXiLianNumReward, M2C_ItemXiLianNumReward>

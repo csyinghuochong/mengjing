@@ -1,17 +1,17 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_JiaYuanCookbook : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_JiaYuanCookbook : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public List<int> ShowFoods = new();
 		public Dictionary<int, EntityRef<Scroll_Item_JiaYuanCookbookItem>> ScrollItemJiaYuanCookbookItems;
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_JiaYuanCookbookItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_JiaYuanCookbookItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -22,7 +22,7 @@ namespace ET.Client
      			}
      			if( this.m_E_JiaYuanCookbookItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_JiaYuanCookbookItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_JiaYuanCookbookItems");
+		    		this.m_E_JiaYuanCookbookItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_JiaYuanCookbookItems");
      			}
      			return this.m_E_JiaYuanCookbookItemsLoopVerticalScrollRect;
      		}
@@ -46,7 +46,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_JiaYuanCookbookItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_JiaYuanCookbookItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

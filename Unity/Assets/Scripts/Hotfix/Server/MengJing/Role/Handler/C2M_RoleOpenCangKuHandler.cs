@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_RoleOpenCangKuHandler : MessageLocationHandler<Unit, C2M_RoleOpenCangKuRequest, M2C_RoleOpenCangKuResponse>

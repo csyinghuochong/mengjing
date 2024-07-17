@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-using Unity.Mathematics;
+﻿using Unity.Mathematics;
 
 namespace ET.Client
 {

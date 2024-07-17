@@ -8,12 +8,12 @@ namespace ET.Server
     public static partial class PetMingDungeonComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.PetMingDungeonComponent self)
+        private static void Awake(this PetMingDungeonComponent self)
         {
 
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.PetMingDungeonComponent self)
+        private static void Destroy(this PetMingDungeonComponent self)
         {
 
         }

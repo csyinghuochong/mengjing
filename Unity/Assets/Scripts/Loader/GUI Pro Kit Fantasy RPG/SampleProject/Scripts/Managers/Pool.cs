@@ -3,9 +3,11 @@
  * 	You shall not license, sublicense, sell, resell, transfer, assign, distribute or
  * 	otherwise make available to any third party the Service or the Content. */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Pool
 {
@@ -125,7 +127,7 @@ namespace Pool
                     return null;
 
                 //instantiation possible, instantiate new instance of the prefab
-                obj = (GameObject) Object.Instantiate(prefab);
+                obj = (GameObject) Instantiate(prefab);
                 //get instance transform
                 trans = obj.transform;
                 //rename it to an unique heading for easier editor overview
@@ -226,7 +228,7 @@ namespace Pool
                 for (int i = inactive.Count - 1; i >= preLoad; i--)
                 {
                     //destroy the object at 'i'
-                    Object.Destroy(inactive[i]);
+                    Destroy(inactive[i]);
                 }
 
                 //remove the range of destroyed objects (now null references) from the list
@@ -238,7 +240,7 @@ namespace Pool
                 //limitToPreLoad is false, destroy all inactive instances
                 for (int i = 0; i < inactive.Count; i++)
                 {
-                    Object.Destroy(inactive[i]);
+                    Destroy(inactive[i]);
                 }
 
                 //reset the list
@@ -266,7 +268,7 @@ namespace Pool
             //until we destroyed the amount passed in
             for (int i = inactive.Count - 1; i >= inactive.Count - count; i--)
             {
-                Object.Destroy(inactive[i]);
+                Destroy(inactive[i]);
             }
 
             //remove the range of destroyed objects (now null references) from the list
@@ -317,7 +319,7 @@ namespace Pool
     /// <summary>
     /// Stores properties used on timed deactivation of instances.
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class PoolTimeObject
     {
         /// <summary>

@@ -1,11 +1,10 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_NewYearMonster : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_NewYearMonster : Entity,IAwake<Transform>,IDestroy 
 	{
 		    public Transform UITransform
          {

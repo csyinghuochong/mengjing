@@ -9,7 +9,7 @@ namespace ET.Server
     public static partial class SkillSetComponentSSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.SkillSetComponentS self)
+        private static void Awake(this SkillSetComponentS self)
         {
             self.TianFuPlan = 0;
             self.TianFuList.Clear();
@@ -59,12 +59,12 @@ namespace ET.Server
             }
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.SkillSetComponentS self)
+        private static void Destroy(this SkillSetComponentS self)
         {
 
         }
         [EntitySystem]
-        private static void Deserialize(this ET.Server.SkillSetComponentS self)
+        private static void Deserialize(this SkillSetComponentS self)
         {
 
         }

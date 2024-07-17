@@ -395,14 +395,14 @@ namespace ET.Server
             //钻石线
             if (userInfo.UserInfo.Diamond >= unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber) * 150 + 50000)
             {
-                LogHelper.ZuobiInfo("钻石作弊:" + userInfo.UserInfo.Diamond + " 服务器:" + unit.Zone() + " 名字:" + userInfo.UserName + " 等级:" + userInfo.UserInfo.Lv + " 充值:" + unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber));
+                ZuobiInfo("钻石作弊:" + userInfo.UserInfo.Diamond + " 服务器:" + unit.Zone() + " 名字:" + userInfo.UserName + " 等级:" + userInfo.UserInfo.Lv + " 充值:" + unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber));
             }
 
             //等级线
             ServerInfo serverInfo = unit.Scene().GetComponent<ServerInfoComponent>().ServerInfo;
             if (userInfo.UserInfo.Lv > serverInfo.WorldLv) 
             {
-                LogHelper.ZuobiInfo("玩家等级超过服务器等级限制:" + userInfo.UserInfo.Lv + " 服务器:" + unit.Zone() + " 名字:" + userInfo.UserName + " 等级:" + userInfo.UserInfo.Lv + " 充值:" + unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber));
+                ZuobiInfo("玩家等级超过服务器等级限制:" + userInfo.UserInfo.Lv + " 服务器:" + unit.Zone() + " 名字:" + userInfo.UserName + " 等级:" + userInfo.UserInfo.Lv + " 充值:" + unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber));
             }
 
             if (openDay <= 180 || userInfo.UserInfo.Lv < 60)
@@ -410,12 +410,12 @@ namespace ET.Server
                 //金币线
                 if (userInfo.UserInfo.Gold >= unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber) * 300000 + 5000000 + userInfo.UserInfo.Lv * 500000)
                 {
-                    LogHelper.ZuobiInfo("金币作弊:" + userInfo.UserInfo.Gold + " 服务器:" + unit.Zone() + " 名字:" + userInfo.UserName + " 等级:" + userInfo.UserInfo.Lv + " 充值:" + unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber));
+                    ZuobiInfo("金币作弊:" + userInfo.UserInfo.Gold + " 服务器:" + unit.Zone() + " 名字:" + userInfo.UserName + " 等级:" + userInfo.UserInfo.Lv + " 充值:" + unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber));
                 }
 
                 //道具线
                 if (unit.GetComponent<BagComponentS>().GetItemNumber(10010083) > 1000 + unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber) * 10) {
-                    LogHelper.ZuobiInfo("洗练石作弊:" + unit.GetComponent<BagComponentS>().GetItemNumber(10010083) + " 服务器:" + unit.Zone() + " 名字:" + userInfo.UserName + " 等级:" + userInfo.UserInfo.Lv + " 充值:" + unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber));
+                    ZuobiInfo("洗练石作弊:" + unit.GetComponent<BagComponentS>().GetItemNumber(10010083) + " 服务器:" + unit.Zone() + " 名字:" + userInfo.UserName + " 等级:" + userInfo.UserInfo.Lv + " 充值:" + unit.GetComponent<NumericComponentS>().GetAsLong(NumericType.RechargeNumber));
                 }
             }
 
@@ -425,7 +425,7 @@ namespace ET.Server
             {
                 //if (PetHelper.IsHaveShenShou(unit.GetComponent<PetComponent>().GetAllPets()))
                 {
-                    LogHelper.ZuobiInfo("低充值有神兽需核查! " + " 服务器:" + unit.Zone() + " 名字:" + userInfo.UserName + " 充值:" + rechargeValue);
+                    ZuobiInfo("低充值有神兽需核查! " + " 服务器:" + unit.Zone() + " 名字:" + userInfo.UserName + " 充值:" + rechargeValue);
                 }
             }
 
@@ -435,7 +435,7 @@ namespace ET.Server
             {
                 if (bagInfos[i].ItemID > 100 && bagInfos[i].ItemNum >= 10000)
                 {
-                    LogHelper.ZuobiInfo($"道具数量异常： {unit.Zone()} {unit.Id} {bagInfos[i].ItemID} {bagInfos[i].ItemNum} ");
+                    ZuobiInfo($"道具数量异常： {unit.Zone()} {unit.Id} {bagInfos[i].ItemID} {bagInfos[i].ItemNum} ");
                 }
             }
         }

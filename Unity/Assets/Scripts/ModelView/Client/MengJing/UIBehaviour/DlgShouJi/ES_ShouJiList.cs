@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ShouJiList : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_ShouJiList : Entity,IAwake<Transform>,IDestroy 
 	{
-		public UnityEngine.UI.ScrollRect E_ScrollViewScrollRect
+		public ScrollRect E_ScrollViewScrollRect
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ScrollViewScrollRect == null )
      			{
-		    		this.m_E_ScrollViewScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.ScrollRect>(this.uiTransform.gameObject,"E_ScrollView");
+		    		this.m_E_ScrollViewScrollRect = UIFindHelper.FindDeepChild<ScrollRect>(this.uiTransform.gameObject,"E_ScrollView");
      			}
      			return this.m_E_ScrollViewScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ScrollViewImage
+		public Image E_ScrollViewImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ScrollViewImage == null )
      			{
-		    		this.m_E_ScrollViewImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ScrollView");
+		    		this.m_E_ScrollViewImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ScrollView");
      			}
      			return this.m_E_ScrollViewImage;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_ShoujiContentRectTransform
+		public RectTransform EG_ShoujiContentRectTransform
      	{
      		get
      		{
@@ -52,7 +52,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_ShoujiContentRectTransform == null )
      			{
-		    		this.m_EG_ShoujiContentRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"E_ScrollView/Viewport/EG_ShoujiContent");
+		    		this.m_EG_ShoujiContentRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"E_ScrollView/Viewport/EG_ShoujiContent");
      			}
      			return this.m_EG_ShoujiContentRectTransform;
      		}
@@ -78,9 +78,9 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.ScrollRect m_E_ScrollViewScrollRect = null;
-		private UnityEngine.UI.Image m_E_ScrollViewImage = null;
-		private UnityEngine.RectTransform m_EG_ShoujiContentRectTransform = null;
+		private ScrollRect m_E_ScrollViewScrollRect = null;
+		private Image m_E_ScrollViewImage = null;
+		private RectTransform m_EG_ShoujiContentRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

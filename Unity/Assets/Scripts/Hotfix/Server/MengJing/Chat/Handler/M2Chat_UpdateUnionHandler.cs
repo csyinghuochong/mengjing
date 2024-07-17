@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Chat)]
     public class M2Chat_UpdateUnionHandler : MessageHandler<Scene, M2Chat_UpdateUnion, Chat2M_UpdateUnion>

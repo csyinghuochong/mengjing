@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEditor;
-using System.IO;
-using ET;
+﻿using UnityEditor;
 using UnityEngine;
 
 namespace ClientEditor
@@ -22,7 +16,7 @@ namespace ClientEditor
         public static void NameAllUIPrefab()
         {
             string suffix = ".unity3d";
-            UnityEngine.Object[] selectAsset = Selection.GetFiltered<UnityEngine.Object>(SelectionMode.DeepAssets);
+            Object[] selectAsset = Selection.GetFiltered<Object>(SelectionMode.DeepAssets);
             for (int i = 0; i < selectAsset.Length; i++)
             {
                 string prefabName = AssetDatabase.GetAssetPath(selectAsset[i]);
@@ -42,7 +36,7 @@ namespace ClientEditor
         [MenuItem("Assets/AssetBundle/ClearABName")]
         public static void ClearABName()
         {
-            UnityEngine.Object[] selectAsset = Selection.GetFiltered<UnityEngine.Object>(SelectionMode.DeepAssets);
+            Object[] selectAsset = Selection.GetFiltered<Object>(SelectionMode.DeepAssets);
             for (int i = 0; i < selectAsset.Length; i++)
             {
                 string prefabName = AssetDatabase.GetAssetPath(selectAsset[i]);

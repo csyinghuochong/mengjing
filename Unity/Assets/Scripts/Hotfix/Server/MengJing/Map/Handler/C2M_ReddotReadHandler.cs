@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_ReddotReadHandler : MessageLocationHandler<Unit, C2M_ReddotReadRequest, M2C_ReddotReadResponse>

@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgPetHeXinSuitViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgPetHeXinSuitViewComponent))]
+	[FriendOfAttribute(typeof(DlgPetHeXinSuitViewComponent))]
 	public static partial class DlgPetHeXinSuitViewComponentSystem
 	{
 		[EntitySystem]

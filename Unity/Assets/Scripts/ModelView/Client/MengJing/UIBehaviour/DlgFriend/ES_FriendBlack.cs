@@ -1,17 +1,17 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_FriendBlack : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_FriendBlack : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_FriendBlackItem>> ScrollItemFriendBlackItems;
 		public List<FriendInfo> ShowFriendInfos = new();
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_FriendBlackItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_FriendBlackItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -22,7 +22,7 @@ namespace ET.Client
      			}
      			if( this.m_E_FriendBlackItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_FriendBlackItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_FriendBlackItems");
+		    		this.m_E_FriendBlackItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_FriendBlackItems");
      			}
      			return this.m_E_FriendBlackItemsLoopVerticalScrollRect;
      		}
@@ -34,7 +34,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_FriendBlackItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_FriendBlackItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

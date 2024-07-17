@@ -8,7 +8,7 @@ namespace ET.Client
     public static partial class FallingFontShowComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.FallingFontShowComponent self)
+        private static void Awake(this FallingFontShowComponent self)
         {  
             self.Transform = null;
             self.GameObject = null;
@@ -16,7 +16,7 @@ namespace ET.Client
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Client.FallingFontShowComponent self)
+        private static void Destroy(this FallingFontShowComponent self)
         {
             self.RecoveryGameObject(self.GameObject);
         }

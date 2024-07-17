@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Rank)]
     public class M2R_DBServerInfoHandler : MessageHandler<Scene, M2R_DBServerInfoRequest, R2M_DBServerInfoResponse>

@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 namespace ET.Client
 {
@@ -28,12 +26,12 @@ namespace ET.Client
         }
         
         [EntitySystem]
-        private static void Awake(this ET.Client.FallingFontComponent self)
+        private static void Awake(this FallingFontComponent self)
         {
            self.OnAwake();
         }
         [EntitySystem]
-        private static void Destroy(this ET.Client.FallingFontComponent self)
+        private static void Destroy(this FallingFontComponent self)
         {
             for (int i = self.FallingFontShows.Count - 1; i >= 0; i--)
             {

@@ -1,16 +1,16 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RankPet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+	public  class ES_RankPet : Entity,IAwake<Transform>,IDestroy
 	{
 		public List<EntityRef<ES_RankPetItem>> PetUIList = new();
 		
-		public UnityEngine.UI.Text E_Text_RankText
+		public Text E_Text_RankText
      	{
      		get
      		{
@@ -21,13 +21,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_RankText == null )
      			{
-		    		this.m_E_Text_RankText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_Rank");
+		    		this.m_E_Text_RankText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Rank");
      			}
      			return this.m_E_Text_RankText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_LeftTimeText
+		public Text E_Text_LeftTimeText
      	{
      		get
      		{
@@ -38,13 +38,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_LeftTimeText == null )
      			{
-		    		this.m_E_Text_LeftTimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_LeftTime");
+		    		this.m_E_Text_LeftTimeText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_LeftTime");
      			}
      			return this.m_E_Text_LeftTimeText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Button_TeamButton
+		public Button E_Button_TeamButton
      	{
      		get
      		{
@@ -55,13 +55,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_TeamButton == null )
      			{
-		    		this.m_E_Button_TeamButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Button_Team");
+		    		this.m_E_Button_TeamButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Button_Team");
      			}
      			return this.m_E_Button_TeamButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Button_TeamImage
+		public Image E_Button_TeamImage
      	{
      		get
      		{
@@ -72,13 +72,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_TeamImage == null )
      			{
-		    		this.m_E_Button_TeamImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Button_Team");
+		    		this.m_E_Button_TeamImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Button_Team");
      			}
      			return this.m_E_Button_TeamImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Button_RewardButton
+		public Button E_Button_RewardButton
      	{
      		get
      		{
@@ -89,13 +89,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_RewardButton == null )
      			{
-		    		this.m_E_Button_RewardButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Button_Reward");
+		    		this.m_E_Button_RewardButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Button_Reward");
      			}
      			return this.m_E_Button_RewardButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Button_RewardImage
+		public Image E_Button_RewardImage
      	{
      		get
      		{
@@ -106,13 +106,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_RewardImage == null )
      			{
-		    		this.m_E_Button_RewardImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Button_Reward");
+		    		this.m_E_Button_RewardImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Button_Reward");
      			}
      			return this.m_E_Button_RewardImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Button_RefreshButton
+		public Button E_Button_RefreshButton
      	{
      		get
      		{
@@ -123,13 +123,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_RefreshButton == null )
      			{
-		    		this.m_E_Button_RefreshButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Button_Refresh");
+		    		this.m_E_Button_RefreshButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Button_Refresh");
      			}
      			return this.m_E_Button_RefreshButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Button_RefreshImage
+		public Image E_Button_RefreshImage
      	{
      		get
      		{
@@ -140,13 +140,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_RefreshImage == null )
      			{
-		    		this.m_E_Button_RefreshImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Button_Refresh");
+		    		this.m_E_Button_RefreshImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Button_Refresh");
      			}
      			return this.m_E_Button_RefreshImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Button_AddButton
+		public Button E_Button_AddButton
      	{
      		get
      		{
@@ -157,13 +157,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_AddButton == null )
      			{
-		    		this.m_E_Button_AddButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Button_Add");
+		    		this.m_E_Button_AddButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Button_Add");
      			}
      			return this.m_E_Button_AddButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Button_AddImage
+		public Image E_Button_AddImage
      	{
      		get
      		{
@@ -174,13 +174,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_AddImage == null )
      			{
-		    		this.m_E_Button_AddImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Button_Add");
+		    		this.m_E_Button_AddImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Button_Add");
      			}
      			return this.m_E_Button_AddImage;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_PetListNodeRectTransform
+		public RectTransform EG_PetListNodeRectTransform
      	{
      		get
      		{
@@ -191,7 +191,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_PetListNodeRectTransform == null )
      			{
-		    		this.m_EG_PetListNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PetListNode");
+		    		this.m_EG_PetListNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_PetListNode");
      			}
      			return this.m_EG_PetListNodeRectTransform;
      		}
@@ -288,17 +288,17 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Text m_E_Text_RankText = null;
-		private UnityEngine.UI.Text m_E_Text_LeftTimeText = null;
-		private UnityEngine.UI.Button m_E_Button_TeamButton = null;
-		private UnityEngine.UI.Image m_E_Button_TeamImage = null;
-		private UnityEngine.UI.Button m_E_Button_RewardButton = null;
-		private UnityEngine.UI.Image m_E_Button_RewardImage = null;
-		private UnityEngine.UI.Button m_E_Button_RefreshButton = null;
-		private UnityEngine.UI.Image m_E_Button_RefreshImage = null;
-		private UnityEngine.UI.Button m_E_Button_AddButton = null;
-		private UnityEngine.UI.Image m_E_Button_AddImage = null;
-		private UnityEngine.RectTransform m_EG_PetListNodeRectTransform = null;
+		private Text m_E_Text_RankText = null;
+		private Text m_E_Text_LeftTimeText = null;
+		private Button m_E_Button_TeamButton = null;
+		private Image m_E_Button_TeamImage = null;
+		private Button m_E_Button_RewardButton = null;
+		private Image m_E_Button_RewardImage = null;
+		private Button m_E_Button_RefreshButton = null;
+		private Image m_E_Button_RefreshImage = null;
+		private Button m_E_Button_AddButton = null;
+		private Image m_E_Button_AddImage = null;
+		private RectTransform m_EG_PetListNodeRectTransform = null;
 		private EntityRef<ES_RankPetItem> m_es_rankpetitem_0 = null;
 		private EntityRef<ES_RankPetItem> m_es_rankpetitem_1 = null;
 		private EntityRef<ES_RankPetItem> m_es_rankpetitem_2 = null;

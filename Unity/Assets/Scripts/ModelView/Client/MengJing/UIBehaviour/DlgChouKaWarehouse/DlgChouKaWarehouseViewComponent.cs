@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgChouKaWarehouse))]
 	[EnableMethod]
 	public  class DlgChouKaWarehouseViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.LoopVerticalScrollRect E_BagItems2LoopVerticalScrollRect
+		public LoopVerticalScrollRect E_BagItems2LoopVerticalScrollRect
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_BagItems2LoopVerticalScrollRect == null )
      			{
-		    		this.m_E_BagItems2LoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_BagItems2");
+		    		this.m_E_BagItems2LoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_BagItems2");
      			}
      			return this.m_E_BagItems2LoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_BagItems1LoopVerticalScrollRect
+		public LoopVerticalScrollRect E_BagItems1LoopVerticalScrollRect
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_BagItems1LoopVerticalScrollRect == null )
      			{
-		    		this.m_E_BagItems1LoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_BagItems1");
+		    		this.m_E_BagItems1LoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_BagItems1");
      			}
      			return this.m_E_BagItems1LoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonTakeOutAllButton
+		public Button E_ButtonTakeOutAllButton
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonTakeOutAllButton == null )
      			{
-		    		this.m_E_ButtonTakeOutAllButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_ButtonTakeOutAll");
+		    		this.m_E_ButtonTakeOutAllButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Left/E_ButtonTakeOutAll");
      			}
      			return this.m_E_ButtonTakeOutAllButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonTakeOutAllImage
+		public Image E_ButtonTakeOutAllImage
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonTakeOutAllImage == null )
      			{
-		    		this.m_E_ButtonTakeOutAllImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_ButtonTakeOutAll");
+		    		this.m_E_ButtonTakeOutAllImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/E_ButtonTakeOutAll");
      			}
      			return this.m_E_ButtonTakeOutAllImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonSellButton
+		public Button E_ButtonSellButton
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonSellButton == null )
      			{
-		    		this.m_E_ButtonSellButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_ButtonSell");
+		    		this.m_E_ButtonSellButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Left/E_ButtonSell");
      			}
      			return this.m_E_ButtonSellButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonSellImage
+		public Image E_ButtonSellImage
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonSellImage == null )
      			{
-		    		this.m_E_ButtonSellImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_ButtonSell");
+		    		this.m_E_ButtonSellImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/E_ButtonSell");
      			}
      			return this.m_E_ButtonSellImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonZhengLiButton
+		public Button E_ButtonZhengLiButton
      	{
      		get
      		{
@@ -120,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonZhengLiButton == null )
      			{
-		    		this.m_E_ButtonZhengLiButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_ButtonZhengLi");
+		    		this.m_E_ButtonZhengLiButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Left/E_ButtonZhengLi");
      			}
      			return this.m_E_ButtonZhengLiButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonZhengLiImage
+		public Image E_ButtonZhengLiImage
      	{
      		get
      		{
@@ -137,7 +137,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonZhengLiImage == null )
      			{
-		    		this.m_E_ButtonZhengLiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_ButtonZhengLi");
+		    		this.m_E_ButtonZhengLiImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/E_ButtonZhengLi");
      			}
      			return this.m_E_ButtonZhengLiImage;
      		}
@@ -156,14 +156,14 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItems2LoopVerticalScrollRect = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItems1LoopVerticalScrollRect = null;
-		private UnityEngine.UI.Button m_E_ButtonTakeOutAllButton = null;
-		private UnityEngine.UI.Image m_E_ButtonTakeOutAllImage = null;
-		private UnityEngine.UI.Button m_E_ButtonSellButton = null;
-		private UnityEngine.UI.Image m_E_ButtonSellImage = null;
-		private UnityEngine.UI.Button m_E_ButtonZhengLiButton = null;
-		private UnityEngine.UI.Image m_E_ButtonZhengLiImage = null;
+		private LoopVerticalScrollRect m_E_BagItems2LoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_BagItems1LoopVerticalScrollRect = null;
+		private Button m_E_ButtonTakeOutAllButton = null;
+		private Image m_E_ButtonTakeOutAllImage = null;
+		private Button m_E_ButtonSellButton = null;
+		private Image m_E_ButtonSellImage = null;
+		private Button m_E_ButtonZhengLiButton = null;
+		private Image m_E_ButtonZhengLiImage = null;
 		public Transform uiTransform = null;
 	}
 }

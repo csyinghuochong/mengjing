@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_StallSellHandler: MessageLocationHandler<Unit, C2M_StallSellRequest, M2C_StallSellResponse>

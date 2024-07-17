@@ -1,12 +1,12 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_SkillLifeShield : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_SkillLifeShield : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public List<EntityRef<ES_Shield>> ShieldUIList = new();
 		public List<EntityRef<ES_CommonItem>> HuiShoulist = new ();
@@ -237,7 +237,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_CommonItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_CommonItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -248,13 +248,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CommonItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_CommonItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_CommonItems");
+		    		this.m_E_CommonItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_CommonItems");
      			}
      			return this.m_E_CommonItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_ZhuRuButton
+		public Button E_Btn_ZhuRuButton
      	{
      		get
      		{
@@ -265,13 +265,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ZhuRuButton == null )
      			{
-		    		this.m_E_Btn_ZhuRuButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/E_Btn_ZhuRu");
+		    		this.m_E_Btn_ZhuRuButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/E_Btn_ZhuRu");
      			}
      			return this.m_E_Btn_ZhuRuButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_ZhuRuImage
+		public Image E_Btn_ZhuRuImage
      	{
      		get
      		{
@@ -282,13 +282,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ZhuRuImage == null )
      			{
-		    		this.m_E_Btn_ZhuRuImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_Btn_ZhuRu");
+		    		this.m_E_Btn_ZhuRuImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/E_Btn_ZhuRu");
      			}
      			return this.m_E_Btn_ZhuRuImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageProgessImage
+		public Image E_ImageProgessImage
      	{
      		get
      		{
@@ -299,13 +299,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageProgessImage == null )
      			{
-		    		this.m_E_ImageProgessImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/E_ImageProgess");
+		    		this.m_E_ImageProgessImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/E_ImageProgess");
      			}
      			return this.m_E_ImageProgessImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_ShieldNameText
+		public Text E_Text_ShieldNameText
      	{
      		get
      		{
@@ -316,13 +316,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_ShieldNameText == null )
      			{
-		    		this.m_E_Text_ShieldNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Text_ShieldName");
+		    		this.m_E_Text_ShieldNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_Text_ShieldName");
      			}
      			return this.m_E_Text_ShieldNameText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_ProgessText
+		public Text E_Text_ProgessText
      	{
      		get
      		{
@@ -333,13 +333,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_ProgessText == null )
      			{
-		    		this.m_E_Text_ProgessText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Text_Progess");
+		    		this.m_E_Text_ProgessText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_Text_Progess");
      			}
      			return this.m_E_Text_ProgessText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_ShieldDescText
+		public Text E_Text_ShieldDescText
      	{
      		get
      		{
@@ -350,13 +350,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_ShieldDescText == null )
      			{
-		    		this.m_E_Text_ShieldDescText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Text_ShieldDesc");
+		    		this.m_E_Text_ShieldDescText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_Text_ShieldDesc");
      			}
      			return this.m_E_Text_ShieldDescText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_Zhuru_ExpText
+		public Text E_Text_Zhuru_ExpText
      	{
      		get
      		{
@@ -367,7 +367,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_Zhuru_ExpText == null )
      			{
-		    		this.m_E_Text_Zhuru_ExpText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Text_Zhuru_Exp");
+		    		this.m_E_Text_Zhuru_ExpText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_Text_Zhuru_Exp");
      			}
      			return this.m_E_Text_Zhuru_ExpText;
      		}
@@ -420,14 +420,14 @@ namespace ET.Client
 		private EntityRef<ES_Shield> m_es_shield_4 = null;
 		private EntityRef<ES_Shield> m_es_shield_5 = null;
 		private EntityRef<ES_Shield> m_es_shield_6 = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_CommonItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Button m_E_Btn_ZhuRuButton = null;
-		private UnityEngine.UI.Image m_E_Btn_ZhuRuImage = null;
-		private UnityEngine.UI.Image m_E_ImageProgessImage = null;
-		private UnityEngine.UI.Text m_E_Text_ShieldNameText = null;
-		private UnityEngine.UI.Text m_E_Text_ProgessText = null;
-		private UnityEngine.UI.Text m_E_Text_ShieldDescText = null;
-		private UnityEngine.UI.Text m_E_Text_Zhuru_ExpText = null;
+		private LoopVerticalScrollRect m_E_CommonItemsLoopVerticalScrollRect = null;
+		private Button m_E_Btn_ZhuRuButton = null;
+		private Image m_E_Btn_ZhuRuImage = null;
+		private Image m_E_ImageProgessImage = null;
+		private Text m_E_Text_ShieldNameText = null;
+		private Text m_E_Text_ProgessText = null;
+		private Text m_E_Text_ShieldDescText = null;
+		private Text m_E_Text_Zhuru_ExpText = null;
 		public Transform uiTransform = null;
 	}
 }

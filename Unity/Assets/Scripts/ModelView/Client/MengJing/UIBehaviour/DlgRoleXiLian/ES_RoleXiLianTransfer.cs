@@ -1,12 +1,12 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RoleXiLianTransfer : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_RoleXiLianTransfer : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public BagInfo[] BagInfo_Transfer;
 		public EntityRef<ES_CommonItem>[] UIItem_Transfer;
@@ -15,7 +15,7 @@ namespace ET.Client
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		public List<BagInfo> ShowBagInfos = new();
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -26,7 +26,7 @@ namespace ET.Client
      			}
      			if( this.m_E_BagItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_BagItems");
+		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_BagItems");
      			}
      			return this.m_E_BagItemsLoopVerticalScrollRect;
      		}
@@ -108,7 +108,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonTransferButton
+		public Button E_ButtonTransferButton
      	{
      		get
      		{
@@ -119,13 +119,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonTransferButton == null )
      			{
-		    		this.m_E_ButtonTransferButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonTransfer");
+		    		this.m_E_ButtonTransferButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonTransfer");
      			}
      			return this.m_E_ButtonTransferButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonTransferImage
+		public Image E_ButtonTransferImage
      	{
      		get
      		{
@@ -136,7 +136,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonTransferImage == null )
      			{
-		    		this.m_E_ButtonTransferImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonTransfer");
+		    		this.m_E_ButtonTransferImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonTransfer");
      			}
      			return this.m_E_ButtonTransferImage;
      		}
@@ -166,13 +166,13 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem_1 = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem_2 = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem_copy = null;
 		private EntityRef<ES_CostItem> m_es_costitem = null;
-		private UnityEngine.UI.Button m_E_ButtonTransferButton = null;
-		private UnityEngine.UI.Image m_E_ButtonTransferImage = null;
+		private Button m_E_ButtonTransferButton = null;
+		private Image m_E_ButtonTransferImage = null;
 		public Transform uiTransform = null;
 	}
 }

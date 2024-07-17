@@ -1,7 +1,3 @@
-using System;
-using System.Net;
-using System.Net.Sockets;
-
 namespace ET.Client
 {
     [MessageHandler(SceneType.NetClient)]

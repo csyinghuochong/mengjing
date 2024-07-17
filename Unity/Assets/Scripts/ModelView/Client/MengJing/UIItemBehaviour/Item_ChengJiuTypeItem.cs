@@ -1,8 +1,8 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -27,7 +27,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.UI.Button E_ImageButtonButton
+		public Button E_ImageButtonButton
      	{
      		get
      		{
@@ -40,18 +40,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ImageButtonButton == null )
      				{
-		    			this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ImageButton");
+		    			this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ImageButton");
      				}
      				return this.m_E_ImageButtonButton;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ImageButton");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ImageButton");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageButtonImage
+		public Image E_ImageButtonImage
      	{
      		get
      		{
@@ -64,18 +64,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ImageButtonImage == null )
      				{
-		    			this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageButton");
+		    			this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageButton");
      				}
      				return this.m_E_ImageButtonImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageButton");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageButton");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_CheckmarkImage
+		public Image E_CheckmarkImage
      	{
      		get
      		{
@@ -88,18 +88,18 @@ namespace ET.Client
      			{
      				if( this.m_E_CheckmarkImage == null )
      				{
-		    			this.m_E_CheckmarkImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Checkmark");
+		    			this.m_E_CheckmarkImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Checkmark");
      				}
      				return this.m_E_CheckmarkImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Checkmark");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Checkmark");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_TaskTypeNameText
+		public Text E_TaskTypeNameText
      	{
      		get
      		{
@@ -112,18 +112,18 @@ namespace ET.Client
      			{
      				if( this.m_E_TaskTypeNameText == null )
      				{
-		    			this.m_E_TaskTypeNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TaskTypeName");
+		    			this.m_E_TaskTypeNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TaskTypeName");
      				}
      				return this.m_E_TaskTypeNameText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TaskTypeName");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TaskTypeName");
      			}
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_ChengJiuTypeItemItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_ChengJiuTypeItemItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -136,13 +136,13 @@ namespace ET.Client
      			{
      				if( this.m_E_ChengJiuTypeItemItemsLoopVerticalScrollRect == null )
      				{
-		    			this.m_E_ChengJiuTypeItemItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_ChengJiuTypeItemItems");
+		    			this.m_E_ChengJiuTypeItemItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_ChengJiuTypeItemItems");
      				}
      				return this.m_E_ChengJiuTypeItemItemsLoopVerticalScrollRect;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_ChengJiuTypeItemItems");
+		    		return UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_ChengJiuTypeItemItems");
      			}
      		}
      	}
@@ -158,11 +158,11 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.UI.Button m_E_ImageButtonButton = null;
-		private UnityEngine.UI.Image m_E_ImageButtonImage = null;
-		private UnityEngine.UI.Image m_E_CheckmarkImage = null;
-		private UnityEngine.UI.Text m_E_TaskTypeNameText = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_ChengJiuTypeItemItemsLoopVerticalScrollRect = null;
+		private Button m_E_ImageButtonButton = null;
+		private Image m_E_ImageButtonImage = null;
+		private Image m_E_CheckmarkImage = null;
+		private Text m_E_TaskTypeNameText = null;
+		private LoopVerticalScrollRect m_E_ChengJiuTypeItemItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

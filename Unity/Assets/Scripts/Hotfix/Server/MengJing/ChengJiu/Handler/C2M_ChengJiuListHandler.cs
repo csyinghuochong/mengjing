@@ -1,7 +1,4 @@
 ﻿
-using System.Collections.Generic;
-
-
 namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]

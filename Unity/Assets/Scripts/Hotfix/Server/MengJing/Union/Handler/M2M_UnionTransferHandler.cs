@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Union)]
     public class M2M_UnionTransferHandler : MessageHandler<Unit, M2M_UnionTransferMessage>

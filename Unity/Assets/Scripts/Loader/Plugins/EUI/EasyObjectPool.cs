@@ -4,8 +4,9 @@
  * contact@marchingbytes.com
  */
 // modified version by Kanglai Qian
-using UnityEngine;
+
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace ET.Client
 {

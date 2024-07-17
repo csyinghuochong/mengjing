@@ -1,8 +1,7 @@
-using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
 using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ScrollCircle : ScrollRect
 {
@@ -33,7 +32,7 @@ public class ScrollCircle : ScrollRect
         EndDragAction?.Invoke();
     }
 
-    public override void OnDrag(UnityEngine.EventSystems.PointerEventData eventData)
+    public override void OnDrag(PointerEventData eventData)
     {
         base.OnDrag(eventData);
 

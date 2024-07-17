@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ET.Client
 {

@@ -1,10 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [FriendOf(typeof (DlgOpenChest))]
     public static class DlgOpenChestSystem

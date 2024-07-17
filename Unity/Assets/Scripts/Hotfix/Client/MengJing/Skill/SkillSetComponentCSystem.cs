@@ -8,12 +8,12 @@ namespace ET.Client
     public static partial class SkillSetComponentCSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.SkillSetComponentC self)
+        private static void Awake(this SkillSetComponentC self)
         {
 
         }
         [EntitySystem]
-        private static void Destroy(this ET.Client.SkillSetComponentC self)
+        private static void Destroy(this SkillSetComponentC self)
         {
 
         }

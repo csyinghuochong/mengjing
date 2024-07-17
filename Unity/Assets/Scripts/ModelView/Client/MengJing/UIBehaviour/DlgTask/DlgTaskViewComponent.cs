@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgTask))]
 	[EnableMethod]
 	public  class DlgTaskViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
+		public ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_FunctionSetBtnToggleGroup == null )
      			{
-		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
+		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"E_FunctionSetBtn");
      			}
      			return this.m_E_FunctionSetBtnToggleGroup;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_SubViewRectTransform
+		public RectTransform EG_SubViewRectTransform
      	{
      		get
      		{
@@ -35,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_SubViewRectTransform == null )
      			{
-		    		this.m_EG_SubViewRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_SubView");
+		    		this.m_EG_SubViewRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_SubView");
      			}
      			return this.m_EG_SubViewRectTransform;
      		}
@@ -90,8 +90,8 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
-		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
+		private ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_TaskDetail> m_es_taskdetail = null;
 		private EntityRef<ES_TaskGrowUp> m_es_taskgrowup = null;
 		public Transform uiTransform = null;

@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgPetMiningTeamViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgPetMiningTeamViewComponent))]
+	[FriendOfAttribute(typeof(DlgPetMiningTeamViewComponent))]
 	public static partial class DlgPetMiningTeamViewComponentSystem
 	{
 		[EntitySystem]

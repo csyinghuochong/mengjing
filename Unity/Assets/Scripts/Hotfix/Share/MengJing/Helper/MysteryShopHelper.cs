@@ -152,7 +152,7 @@ namespace ET
 			for (int i = 0; i < itemList.Length; i++)
 			{
 				string[] iteminfo = itemList[i].Split(';');
-				mysteryItemInfos.AddRange(MysteryShopHelper.InitMysteryTypeItems(openserverDay, int.Parse(iteminfo[0]), int.Parse(iteminfo[1])));
+				mysteryItemInfos.AddRange(InitMysteryTypeItems(openserverDay, int.Parse(iteminfo[0]), int.Parse(iteminfo[1])));
 			}
 
 			return mysteryItemInfos;

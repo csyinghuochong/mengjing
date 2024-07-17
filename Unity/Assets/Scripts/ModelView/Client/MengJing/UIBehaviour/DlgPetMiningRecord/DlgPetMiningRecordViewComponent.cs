@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgPetMiningRecord))]
 	[EnableMethod]
 	public  class DlgPetMiningRecordViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_ImageCloseButton
+		public Button E_ImageCloseButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageCloseButton == null )
      			{
-		    		this.m_E_ImageCloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ImageClose");
+		    		this.m_E_ImageCloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ImageClose");
      			}
      			return this.m_E_ImageCloseButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageCloseImage
+		public Image E_ImageCloseImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageCloseImage == null )
      			{
-		    		this.m_E_ImageCloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageClose");
+		    		this.m_E_ImageCloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageClose");
      			}
      			return this.m_E_ImageCloseImage;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_BuildingList2RectTransform
+		public RectTransform EG_BuildingList2RectTransform
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_BuildingList2RectTransform == null )
      			{
-		    		this.m_EG_BuildingList2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"ScrollView2/Viewport/EG_BuildingList2");
+		    		this.m_EG_BuildingList2RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"ScrollView2/Viewport/EG_BuildingList2");
      			}
      			return this.m_EG_BuildingList2RectTransform;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_UIPetMiningRecordItemRectTransform
+		public RectTransform EG_UIPetMiningRecordItemRectTransform
      	{
      		get
      		{
@@ -69,7 +69,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_UIPetMiningRecordItemRectTransform == null )
      			{
-		    		this.m_EG_UIPetMiningRecordItemRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"ScrollView2/Viewport/EG_BuildingList2/EG_UIPetMiningRecordItem");
+		    		this.m_EG_UIPetMiningRecordItemRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"ScrollView2/Viewport/EG_BuildingList2/EG_UIPetMiningRecordItem");
      			}
      			return this.m_EG_UIPetMiningRecordItemRectTransform;
      		}
@@ -84,10 +84,10 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_ImageCloseButton = null;
-		private UnityEngine.UI.Image m_E_ImageCloseImage = null;
-		private UnityEngine.RectTransform m_EG_BuildingList2RectTransform = null;
-		private UnityEngine.RectTransform m_EG_UIPetMiningRecordItemRectTransform = null;
+		private Button m_E_ImageCloseButton = null;
+		private Image m_E_ImageCloseImage = null;
+		private RectTransform m_EG_BuildingList2RectTransform = null;
+		private RectTransform m_EG_UIPetMiningRecordItemRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

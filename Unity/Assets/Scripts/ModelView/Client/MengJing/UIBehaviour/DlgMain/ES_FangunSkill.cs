@@ -1,16 +1,17 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_FangunSkill : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_FangunSkill : Entity,IAwake<Transform>,IDestroy 
 	{
 		public float LastSkillTime;
 		public int SkillId;
 		
-		public UnityEngine.UI.Image E_Img_SkillCDImage
+		public Image E_Img_SkillCDImage
      	{
      		get
      		{
@@ -21,13 +22,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Img_SkillCDImage == null )
      			{
-		    		this.m_E_Img_SkillCDImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_SkillCD");
+		    		this.m_E_Img_SkillCDImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_SkillCD");
      			}
      			return this.m_E_Img_SkillCDImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_EventTriggerImage
+		public Image E_Img_EventTriggerImage
      	{
      		get
      		{
@@ -38,13 +39,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Img_EventTriggerImage == null )
      			{
-		    		this.m_E_Img_EventTriggerImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_EventTrigger");
+		    		this.m_E_Img_EventTriggerImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_EventTrigger");
      			}
      			return this.m_E_Img_EventTriggerImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_Img_EventTriggerEventTrigger
+		public EventTrigger E_Img_EventTriggerEventTrigger
      	{
      		get
      		{
@@ -55,7 +56,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Img_EventTriggerEventTrigger == null )
      			{
-		    		this.m_E_Img_EventTriggerEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_Img_EventTrigger");
+		    		this.m_E_Img_EventTriggerEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"E_Img_EventTrigger");
      			}
      			return this.m_E_Img_EventTriggerEventTrigger;
      		}
@@ -81,9 +82,9 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Image m_E_Img_SkillCDImage = null;
-		private UnityEngine.UI.Image m_E_Img_EventTriggerImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_Img_EventTriggerEventTrigger = null;
+		private Image m_E_Img_SkillCDImage = null;
+		private Image m_E_Img_EventTriggerImage = null;
+		private EventTrigger m_E_Img_EventTriggerEventTrigger = null;
 		public Transform uiTransform = null;
 	}
 }

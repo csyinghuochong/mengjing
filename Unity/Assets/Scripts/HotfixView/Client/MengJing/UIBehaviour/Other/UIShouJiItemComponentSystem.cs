@@ -8,7 +8,7 @@ namespace ET.Client
     public static partial class UIShouJiItemComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.UIShouJiItemComponent self, GameObject go)
+        private static void Awake(this UIShouJiItemComponent self, GameObject go)
         {
             self.GameObject = go;
             self.Label_ItemName = go.Get<GameObject>("Label_ItemName");

@@ -1,18 +1,18 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_RoleXiLianSkill : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_RoleXiLianSkill : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_RoleXiLianSkillItem>> ScrollItemRoleXiLianSkillItems;
 		public List<EquipXiLianConfig> ShouJiConfigs;
 		public int XilianLevel;
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_RoleXiLianSkillItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_RoleXiLianSkillItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -23,7 +23,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RoleXiLianSkillItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_RoleXiLianSkillItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RoleXiLianSkillItems");
+		    		this.m_E_RoleXiLianSkillItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RoleXiLianSkillItems");
      			}
      			return this.m_E_RoleXiLianSkillItemsLoopVerticalScrollRect;
      		}
@@ -47,7 +47,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_RoleXiLianSkillItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_RoleXiLianSkillItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

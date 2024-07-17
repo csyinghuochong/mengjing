@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgPaiMaiAuctionViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgPaiMaiAuctionViewComponent))]
+	[FriendOfAttribute(typeof(DlgPaiMaiAuctionViewComponent))]
 	public static partial class DlgPaiMaiAuctionViewComponentSystem
 	{
 		[EntitySystem]

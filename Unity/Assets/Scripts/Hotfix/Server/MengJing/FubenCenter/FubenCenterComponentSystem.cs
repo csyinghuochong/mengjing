@@ -9,7 +9,7 @@ namespace ET.Server
     public static partial class FubenCenterComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.FubenCenterComponent self)
+        private static void Awake(this FubenCenterComponent self)
         {
             self.FubenInstanceList.Clear();
             self.YeWaiFubenList.Clear();

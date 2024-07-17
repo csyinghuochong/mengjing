@@ -1,8 +1,5 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System;
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace ET.Client
 {
@@ -234,7 +231,7 @@ namespace ET.Client
             self.OnUpdateMoney();
         }
         [EntitySystem]
-        private static void Awake(this ET.Client.DlgHappyMain self)
+        private static void Awake(this DlgHappyMain self)
         {
 
         }

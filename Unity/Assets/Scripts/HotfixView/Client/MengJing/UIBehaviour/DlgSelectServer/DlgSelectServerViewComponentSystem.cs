@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgSelectServerViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgSelectServerViewComponent))]
+	[FriendOfAttribute(typeof(DlgSelectServerViewComponent))]
 	public static partial class DlgSelectServerViewComponentSystem
 	{
 		[EntitySystem]

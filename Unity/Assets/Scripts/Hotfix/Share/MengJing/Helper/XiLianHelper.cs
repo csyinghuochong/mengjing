@@ -1,6 +1,5 @@
-using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ET
 {
@@ -906,7 +905,7 @@ namespace ET
                         HideProListConfig hideProListConfig = HideProListConfigCategory.Instance.Get(hintProListID);
 
                         //获取当前洗炼家等级 洗炼家等级不满足直接跳出
-                        int xilianLevel = XiLianHelper.GetXiLianId(ItemXiLianDu);
+                        int xilianLevel = GetXiLianId(ItemXiLianDu);
                         if (xilianLevel < hideProListConfig.NeedXiLianLv) {
                             //立即跳出循环
                             break;
@@ -972,7 +971,7 @@ namespace ET
 
             if (xilianType == 0|| xilianType == 2) //普通掉落和打造
             {
-                bagInfo.GemHole = XiLianHelper.GenerateGemHoleInfo(itemConfig.ItemQuality, itemConfig.UseLv, xilianType);
+                bagInfo.GemHole = GenerateGemHoleInfo(itemConfig.ItemQuality, itemConfig.UseLv, xilianType);
             }
 
             if (HideSkillList.Count > 0)

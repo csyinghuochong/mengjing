@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.PaiMai)]
     public class C2P_PaiMaiSearchHandler: MessageHandler<Scene, C2P_PaiMaiSearchRequest, P2C_PaiMaiSearchResponse>

@@ -1,12 +1,12 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_FashionShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_FashionShow : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public Dictionary<int, GameObject> ButtonList = new();
 		public Dictionary<int, EntityRef<Scroll_Item_FashionShowItem>> ScrollItemFashionShowItems;
@@ -31,7 +31,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_Image_SelectImage
+		public Image E_Image_SelectImage
      	{
      		get
      		{
@@ -42,13 +42,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Image_SelectImage == null )
      			{
-		    		this.m_E_Image_SelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/TouBuList/Button_1001/E_Image_Select");
+		    		this.m_E_Image_SelectImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/TouBuList/Button_1001/E_Image_Select");
      			}
      			return this.m_E_Image_SelectImage;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_FashionShowItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_FashionShowItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -59,7 +59,7 @@ namespace ET.Client
      			}
      			if( this.m_E_FashionShowItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_FashionShowItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_FashionShowItems");
+		    		this.m_E_FashionShowItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_FashionShowItems");
      			}
      			return this.m_E_FashionShowItemsLoopVerticalScrollRect;
      		}
@@ -86,8 +86,8 @@ namespace ET.Client
 		}
 
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
-		private UnityEngine.UI.Image m_E_Image_SelectImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_FashionShowItemsLoopVerticalScrollRect = null;
+		private Image m_E_Image_SelectImage = null;
+		private LoopVerticalScrollRect m_E_FashionShowItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

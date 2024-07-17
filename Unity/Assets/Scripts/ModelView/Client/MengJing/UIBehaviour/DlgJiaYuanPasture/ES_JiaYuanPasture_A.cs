@@ -1,17 +1,17 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_JiaYuanPasture_A : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_JiaYuanPasture_A : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public List<MysteryItemInfo> ShowMysteryItemInfos = new();
 		public Dictionary<int, EntityRef<Scroll_Item_JiaYuanPastureItem_A>> ScrollItemJiaYuanPastureItemAs;
 		
-		public UnityEngine.UI.LoopVerticalScrollRect E_JiaYuanPastureItem_AsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_JiaYuanPastureItem_AsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -22,7 +22,7 @@ namespace ET.Client
      			}
      			if( this.m_E_JiaYuanPastureItem_AsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_JiaYuanPastureItem_AsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_JiaYuanPastureItem_As");
+		    		this.m_E_JiaYuanPastureItem_AsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_JiaYuanPastureItem_As");
      			}
      			return this.m_E_JiaYuanPastureItem_AsLoopVerticalScrollRect;
      		}
@@ -46,7 +46,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_JiaYuanPastureItem_AsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_JiaYuanPastureItem_AsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -8,7 +8,7 @@ namespace ET.Server
     public static partial class TrialDungeonComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.TrialDungeonComponent self)
+        private static void Awake(this TrialDungeonComponent self)
         {
             self.HurtValue = 0;
         }

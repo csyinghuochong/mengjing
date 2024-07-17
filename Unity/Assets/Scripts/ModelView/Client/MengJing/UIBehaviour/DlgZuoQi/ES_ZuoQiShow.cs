@@ -1,17 +1,17 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ZuoQiShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_ZuoQiShow : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_ZuoQiShowItem>> ScrollItemZuoQiShowItems;
 		public List<ZuoQiShowConfig> ShowZuoQiShowConfigs = new();
 		
-		public UnityEngine.UI.LoopHorizontalScrollRect E_ZuoQiShowItemsLoopHorizontalScrollRect
+		public LoopHorizontalScrollRect E_ZuoQiShowItemsLoopHorizontalScrollRect
      	{
      		get
      		{
@@ -22,7 +22,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ZuoQiShowItemsLoopHorizontalScrollRect == null )
      			{
-		    		this.m_E_ZuoQiShowItemsLoopHorizontalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopHorizontalScrollRect>(this.uiTransform.gameObject,"E_ZuoQiShowItems");
+		    		this.m_E_ZuoQiShowItemsLoopHorizontalScrollRect = UIFindHelper.FindDeepChild<LoopHorizontalScrollRect>(this.uiTransform.gameObject,"E_ZuoQiShowItems");
      			}
      			return this.m_E_ZuoQiShowItemsLoopHorizontalScrollRect;
      		}
@@ -46,7 +46,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopHorizontalScrollRect m_E_ZuoQiShowItemsLoopHorizontalScrollRect = null;
+		private LoopHorizontalScrollRect m_E_ZuoQiShowItemsLoopHorizontalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

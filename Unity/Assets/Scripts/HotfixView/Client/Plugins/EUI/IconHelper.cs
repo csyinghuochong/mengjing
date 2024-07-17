@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
-using UnityEngine.UIElements;
-using Image = UnityEngine.UI.Image;
 
 namespace ET.Client
 {

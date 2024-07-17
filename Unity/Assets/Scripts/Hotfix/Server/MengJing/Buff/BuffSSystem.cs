@@ -7,12 +7,12 @@ namespace ET.Server
     public static partial class BuffSSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.BuffS self)
+        private static void Awake(this BuffS self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.BuffS self)
+        private static void Destroy(this BuffS self)
         {
         }
 
@@ -77,19 +77,19 @@ namespace ET.Server
             return addValue;
         }
 
-        public static void OnFinished(this ET.Server.BuffS self)
+        public static void OnFinished(this BuffS self)
         {
             BuffHandlerS aaiHandler = BuffDispatcherComponentS.Instance.Get(self.mBuffConfig.BuffScript);
             aaiHandler.OnFinished(self);
         }
 
-        public static void OnInit(this ET.Server.BuffS self, Unit from, Unit to, SkillS skillS)
+        public static void OnInit(this BuffS self, Unit from, Unit to, SkillS skillS)
         {
             BuffHandlerS aaiHandler = BuffDispatcherComponentS.Instance.Get(self.mBuffConfig.BuffScript);
             aaiHandler.OnInit(self, from, to, skillS);
         }
 
-        public static void OnUpdate(this ET.Server.BuffS self)
+        public static void OnUpdate(this BuffS self)
         {
             BuffHandlerS aaiHandler = BuffDispatcherComponentS.Instance.Get(self.mBuffConfig.BuffScript);
             aaiHandler.OnUpdate(self);

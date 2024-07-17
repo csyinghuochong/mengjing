@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgRecharge))]
 	[EnableMethod]
 	public  class DlgRechargeViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_ImageButtonButton
+		public Button E_ImageButtonButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonButton == null )
      			{
-		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ImageButton");
+		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ImageButton");
      			}
      			return this.m_E_ImageButtonButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageButtonImage
+		public Image E_ImageButtonImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonImage == null )
      			{
-		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageButton");
+		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageButton");
      			}
      			return this.m_E_ImageButtonImage;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_RechargeItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_RechargeItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_RechargeItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_RechargeItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RechargeItems");
+		    		this.m_E_RechargeItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RechargeItems");
      			}
      			return this.m_E_RechargeItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonWeiXinButton
+		public Button E_ButtonWeiXinButton
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonWeiXinButton == null )
      			{
-		    		this.m_E_ButtonWeiXinButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonWeiXin");
+		    		this.m_E_ButtonWeiXinButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonWeiXin");
      			}
      			return this.m_E_ButtonWeiXinButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonWeiXinImage
+		public Image E_ButtonWeiXinImage
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonWeiXinImage == null )
      			{
-		    		this.m_E_ButtonWeiXinImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonWeiXin");
+		    		this.m_E_ButtonWeiXinImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonWeiXin");
      			}
      			return this.m_E_ButtonWeiXinImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonAliPayButton
+		public Button E_ButtonAliPayButton
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonAliPayButton == null )
      			{
-		    		this.m_E_ButtonAliPayButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonAliPay");
+		    		this.m_E_ButtonAliPayButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonAliPay");
      			}
      			return this.m_E_ButtonAliPayButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonAliPayImage
+		public Image E_ButtonAliPayImage
      	{
      		get
      		{
@@ -120,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonAliPayImage == null )
      			{
-		    		this.m_E_ButtonAliPayImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonAliPay");
+		    		this.m_E_ButtonAliPayImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonAliPay");
      			}
      			return this.m_E_ButtonAliPayImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageSelect2Image
+		public Image E_ImageSelect2Image
      	{
      		get
      		{
@@ -137,13 +137,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageSelect2Image == null )
      			{
-		    		this.m_E_ImageSelect2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageSelect2");
+		    		this.m_E_ImageSelect2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageSelect2");
      			}
      			return this.m_E_ImageSelect2Image;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageSelect1Image
+		public Image E_ImageSelect1Image
      	{
      		get
      		{
@@ -154,13 +154,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageSelect1Image == null )
      			{
-		    		this.m_E_ImageSelect1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageSelect1");
+		    		this.m_E_ImageSelect1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageSelect1");
      			}
      			return this.m_E_ImageSelect1Image;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_LoadingRectTransform
+		public RectTransform EG_LoadingRectTransform
      	{
      		get
      		{
@@ -171,7 +171,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_LoadingRectTransform == null )
      			{
-		    		this.m_EG_LoadingRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Loading");
+		    		this.m_EG_LoadingRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Loading");
      			}
      			return this.m_EG_LoadingRectTransform;
      		}
@@ -192,16 +192,16 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_ImageButtonButton = null;
-		private UnityEngine.UI.Image m_E_ImageButtonImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_RechargeItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Button m_E_ButtonWeiXinButton = null;
-		private UnityEngine.UI.Image m_E_ButtonWeiXinImage = null;
-		private UnityEngine.UI.Button m_E_ButtonAliPayButton = null;
-		private UnityEngine.UI.Image m_E_ButtonAliPayImage = null;
-		private UnityEngine.UI.Image m_E_ImageSelect2Image = null;
-		private UnityEngine.UI.Image m_E_ImageSelect1Image = null;
-		private UnityEngine.RectTransform m_EG_LoadingRectTransform = null;
+		private Button m_E_ImageButtonButton = null;
+		private Image m_E_ImageButtonImage = null;
+		private LoopVerticalScrollRect m_E_RechargeItemsLoopVerticalScrollRect = null;
+		private Button m_E_ButtonWeiXinButton = null;
+		private Image m_E_ButtonWeiXinImage = null;
+		private Button m_E_ButtonAliPayButton = null;
+		private Image m_E_ButtonAliPayImage = null;
+		private Image m_E_ImageSelect2Image = null;
+		private Image m_E_ImageSelect1Image = null;
+		private RectTransform m_EG_LoadingRectTransform = null;
 		public Transform uiTransform = null;
 	}
 }

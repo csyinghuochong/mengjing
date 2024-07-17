@@ -25,14 +25,14 @@ namespace ET.Server
         }
         
         [EntitySystem]
-        private static void Awake(this ET.Server.SoloDungeonComponent self)
+        private static void Awake(this SoloDungeonComponent self)
         {
             //记录开场时间设置计时器 没15秒检测一次
             self.Timer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(15000, TimerInvokeType.SoloDungeonTimer, self);
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.SoloDungeonComponent self)
+        private static void Destroy(this SoloDungeonComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }

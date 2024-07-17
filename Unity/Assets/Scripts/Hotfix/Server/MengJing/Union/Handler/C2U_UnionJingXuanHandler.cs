@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Union)]
     public class C2U_UnionJingXuanHandler : MessageHandler<Scene, C2U_UnionJingXuanRequest, U2C_UnionJingXuanResponse>

@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [FriendOf(typeof (Scroll_Item_TeamApplyItem))]
     [EntitySystemOf(typeof (Scroll_Item_TeamApplyItem))]

@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgRoleZodiacViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgRoleZodiacViewComponent))]
+	[FriendOfAttribute(typeof(DlgRoleZodiacViewComponent))]
 	public static partial class DlgRoleZodiacViewComponentSystem
 	{
 		[EntitySystem]

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace ET.Client
 {
 
@@ -7,12 +9,12 @@ namespace ET.Client
     public static partial class ES_MainTeamSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.ES_MainTeam self, UnityEngine.Transform args2)
+        private static void Awake(this ES_MainTeam self, Transform args2)
         {
             self.UITransform = args2;
         }
         [EntitySystem]
-        private static void Destroy(this ET.Client.ES_MainTeam self)
+        private static void Destroy(this ES_MainTeam self)
         {
             self.DestroyWidget();
         }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Rank)]
     public class C2R_RankDemonHandler : MessageHandler<Scene, C2R_RankDemonRequest, R2C_RankDemonResponse>

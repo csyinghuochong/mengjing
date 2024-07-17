@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgRoleBagSplitViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgRoleBagSplitViewComponent))]
+	[FriendOfAttribute(typeof(DlgRoleBagSplitViewComponent))]
 	public static partial class DlgRoleBagSplitViewComponentSystem
 	{
 		[EntitySystem]

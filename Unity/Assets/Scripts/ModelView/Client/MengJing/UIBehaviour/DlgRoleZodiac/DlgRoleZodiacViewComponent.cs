@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgRoleZodiac))]
 	[EnableMethod]
 	public  class DlgRoleZodiacViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_ButtonColseButton
+		public Button E_ButtonColseButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonColseButton == null )
      			{
-		    		this.m_E_ButtonColseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonColse");
+		    		this.m_E_ButtonColseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonColse");
      			}
      			return this.m_E_ButtonColseButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonColseImage
+		public Image E_ButtonColseImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonColseImage == null )
      			{
-		    		this.m_E_ButtonColseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonColse");
+		    		this.m_E_ButtonColseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonColse");
      			}
      			return this.m_E_ButtonColseImage;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_LinkShowSetRectTransform
+		public RectTransform EG_LinkShowSetRectTransform
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_LinkShowSetRectTransform == null )
      			{
-		    		this.m_EG_LinkShowSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_LinkShowSet");
+		    		this.m_EG_LinkShowSetRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_LinkShowSet");
      			}
      			return this.m_EG_LinkShowSetRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.ToggleGroup E_ItemTypeSetToggleGroup
+		public ToggleGroup E_ItemTypeSetToggleGroup
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemTypeSetToggleGroup == null )
      			{
-		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"E_ItemTypeSet");
+		    		this.m_E_ItemTypeSetToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"E_ItemTypeSet");
      			}
      			return this.m_E_ItemTypeSetToggleGroup;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_ZodiacListRectTransform
+		public RectTransform EG_ZodiacListRectTransform
      	{
      		get
      		{
@@ -86,7 +86,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_ZodiacListRectTransform == null )
      			{
-		    		this.m_EG_ZodiacListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_ZodiacList");
+		    		this.m_EG_ZodiacListRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_ZodiacList");
      			}
      			return this.m_EG_ZodiacListRectTransform;
      		}
@@ -354,11 +354,11 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_ButtonColseButton = null;
-		private UnityEngine.UI.Image m_E_ButtonColseImage = null;
-		private UnityEngine.RectTransform m_EG_LinkShowSetRectTransform = null;
-		private UnityEngine.UI.ToggleGroup m_E_ItemTypeSetToggleGroup = null;
-		private UnityEngine.RectTransform m_EG_ZodiacListRectTransform = null;
+		private Button m_E_ButtonColseButton = null;
+		private Image m_E_ButtonColseImage = null;
+		private RectTransform m_EG_LinkShowSetRectTransform = null;
+		private ToggleGroup m_E_ItemTypeSetToggleGroup = null;
+		private RectTransform m_EG_ZodiacListRectTransform = null;
 		private EntityRef<ES_EquipItem> m_es_equipitem_0 = null;
 		private EntityRef<ES_EquipItem> m_es_equipitem_1 = null;
 		private EntityRef<ES_EquipItem> m_es_equipitem_2 = null;

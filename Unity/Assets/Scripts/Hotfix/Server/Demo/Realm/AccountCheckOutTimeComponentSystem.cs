@@ -1,5 +1,3 @@
-using System;
-
 namespace ET.Server
 {
     [Invoke(TimerInvokeType.AccountSessionCheckOutTime)]
@@ -13,11 +11,11 @@ namespace ET.Server
     
     
     [EntitySystemOf(typeof(AccountCheckOutTimeComponent))]
-    [FriendOfAttribute(typeof(ET.Server.AccountCheckOutTimeComponent))]
+    [FriendOfAttribute(typeof(AccountCheckOutTimeComponent))]
     public static partial class AccountCheckOutTimeComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.AccountCheckOutTimeComponent self, string account)
+        private static void Awake(this AccountCheckOutTimeComponent self, string account)
         {
             self.Account = account;
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
@@ -26,7 +24,7 @@ namespace ET.Server
 
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.AccountCheckOutTimeComponent self)
+        private static void Destroy(this AccountCheckOutTimeComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }

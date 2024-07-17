@@ -8,11 +8,11 @@ namespace ET.Client
     public static partial class EffectSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.Effect self)
+        private static void Awake(this Effect self)
         {
         }
 
-        public  static void OnInit(this ET.Client.Effect self, EffectData effectData, Unit theUnitBelongto)
+        public  static void OnInit(this Effect self, EffectData effectData, Unit theUnitBelongto)
         {
             self.EffectPath = string.Empty;
             self.EffectObj = null;
@@ -26,7 +26,7 @@ namespace ET.Client
             self.OnUpdate();
         }
 
-        public static void OnLoadGameObject(this ET.Client.Effect self, GameObject gameObject, long instanceId)
+        public static void OnLoadGameObject(this Effect self, GameObject gameObject, long instanceId)
         {
             try
             {

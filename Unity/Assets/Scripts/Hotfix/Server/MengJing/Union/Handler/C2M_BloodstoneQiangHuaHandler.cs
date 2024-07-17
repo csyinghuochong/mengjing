@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_BloodstoneQiangHuaHandler: MessageLocationHandler<Unit, C2M_BloodstoneQiangHuaRequest, M2C_BloodstoneQiangHuaResponse>

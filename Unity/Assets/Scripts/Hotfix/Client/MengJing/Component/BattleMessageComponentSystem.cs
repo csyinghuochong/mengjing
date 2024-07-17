@@ -6,7 +6,7 @@ namespace ET.Client
     public static partial class BattleMessageComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.BattleMessageComponent self)
+        private static void Awake(this BattleMessageComponent self)
         {
 
         }

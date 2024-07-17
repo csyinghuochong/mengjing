@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgItemFumoSelectViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgItemFumoSelectViewComponent))]
+	[FriendOfAttribute(typeof(DlgItemFumoSelectViewComponent))]
 	public static partial class DlgItemFumoSelectViewComponentSystem
 	{
 		[EntitySystem]

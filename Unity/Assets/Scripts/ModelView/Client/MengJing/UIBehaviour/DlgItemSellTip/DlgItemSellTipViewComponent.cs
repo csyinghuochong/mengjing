@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgItemSellTip))]
 	[EnableMethod]
 	public  class DlgItemSellTipViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_CloseButton
+		public Button E_CloseButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseButton == null )
      			{
-		    		this.m_E_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Close");
+		    		this.m_E_CloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Close");
      			}
      			return this.m_E_CloseButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_CloseImage
+		public Image E_CloseImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseImage == null )
      			{
-		    		this.m_E_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Close");
+		    		this.m_E_CloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Close");
      			}
      			return this.m_E_CloseImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_AddButton
+		public Button E_AddButton
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_AddButton == null )
      			{
-		    		this.m_E_AddButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Add");
+		    		this.m_E_AddButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Add");
      			}
      			return this.m_E_AddButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_AddImage
+		public Image E_AddImage
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_AddImage == null )
      			{
-		    		this.m_E_AddImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Add");
+		    		this.m_E_AddImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Add");
      			}
      			return this.m_E_AddImage;
      		}
      	}
 
-		public UnityEngine.UI.InputField E_NumInputField
+		public InputField E_NumInputField
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_NumInputField == null )
      			{
-		    		this.m_E_NumInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"E_Num");
+		    		this.m_E_NumInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"E_Num");
      			}
      			return this.m_E_NumInputField;
      		}
      	}
 
-		public UnityEngine.UI.Image E_NumImage
+		public Image E_NumImage
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_E_NumImage == null )
      			{
-		    		this.m_E_NumImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Num");
+		    		this.m_E_NumImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Num");
      			}
      			return this.m_E_NumImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_CostButton
+		public Button E_CostButton
      	{
      		get
      		{
@@ -120,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CostButton == null )
      			{
-		    		this.m_E_CostButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Cost");
+		    		this.m_E_CostButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Cost");
      			}
      			return this.m_E_CostButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_CostImage
+		public Image E_CostImage
      	{
      		get
      		{
@@ -137,13 +137,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CostImage == null )
      			{
-		    		this.m_E_CostImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Cost");
+		    		this.m_E_CostImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Cost");
      			}
      			return this.m_E_CostImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_MoneyImage
+		public Image E_MoneyImage
      	{
      		get
      		{
@@ -154,13 +154,13 @@ namespace ET.Client
      			}
      			if( this.m_E_MoneyImage == null )
      			{
-		    		this.m_E_MoneyImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Money");
+		    		this.m_E_MoneyImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Money");
      			}
      			return this.m_E_MoneyImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TotalPricesText
+		public Text E_TotalPricesText
      	{
      		get
      		{
@@ -171,13 +171,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TotalPricesText == null )
      			{
-		    		this.m_E_TotalPricesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TotalPrices");
+		    		this.m_E_TotalPricesText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TotalPrices");
      			}
      			return this.m_E_TotalPricesText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_CancelButton
+		public Button E_CancelButton
      	{
      		get
      		{
@@ -188,13 +188,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CancelButton == null )
      			{
-		    		this.m_E_CancelButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Cancel");
+		    		this.m_E_CancelButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Cancel");
      			}
      			return this.m_E_CancelButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_CancelImage
+		public Image E_CancelImage
      	{
      		get
      		{
@@ -205,13 +205,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CancelImage == null )
      			{
-		    		this.m_E_CancelImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Cancel");
+		    		this.m_E_CancelImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Cancel");
      			}
      			return this.m_E_CancelImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ChuShouButton
+		public Button E_ChuShouButton
      	{
      		get
      		{
@@ -222,13 +222,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ChuShouButton == null )
      			{
-		    		this.m_E_ChuShouButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ChuShou");
+		    		this.m_E_ChuShouButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ChuShou");
      			}
      			return this.m_E_ChuShouButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ChuShouImage
+		public Image E_ChuShouImage
      	{
      		get
      		{
@@ -239,7 +239,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ChuShouImage == null )
      			{
-		    		this.m_E_ChuShouImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ChuShou");
+		    		this.m_E_ChuShouImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ChuShou");
      			}
      			return this.m_E_ChuShouImage;
      		}
@@ -264,20 +264,20 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_CloseButton = null;
-		private UnityEngine.UI.Image m_E_CloseImage = null;
-		private UnityEngine.UI.Button m_E_AddButton = null;
-		private UnityEngine.UI.Image m_E_AddImage = null;
-		private UnityEngine.UI.InputField m_E_NumInputField = null;
-		private UnityEngine.UI.Image m_E_NumImage = null;
-		private UnityEngine.UI.Button m_E_CostButton = null;
-		private UnityEngine.UI.Image m_E_CostImage = null;
-		private UnityEngine.UI.Image m_E_MoneyImage = null;
-		private UnityEngine.UI.Text m_E_TotalPricesText = null;
-		private UnityEngine.UI.Button m_E_CancelButton = null;
-		private UnityEngine.UI.Image m_E_CancelImage = null;
-		private UnityEngine.UI.Button m_E_ChuShouButton = null;
-		private UnityEngine.UI.Image m_E_ChuShouImage = null;
+		private Button m_E_CloseButton = null;
+		private Image m_E_CloseImage = null;
+		private Button m_E_AddButton = null;
+		private Image m_E_AddImage = null;
+		private InputField m_E_NumInputField = null;
+		private Image m_E_NumImage = null;
+		private Button m_E_CostButton = null;
+		private Image m_E_CostImage = null;
+		private Image m_E_MoneyImage = null;
+		private Text m_E_TotalPricesText = null;
+		private Button m_E_CancelButton = null;
+		private Image m_E_CancelImage = null;
+		private Button m_E_ChuShouButton = null;
+		private Image m_E_ChuShouImage = null;
 		public Transform uiTransform = null;
 	}
 }

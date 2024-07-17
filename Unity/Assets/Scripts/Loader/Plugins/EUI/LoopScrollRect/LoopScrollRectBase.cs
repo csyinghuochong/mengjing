@@ -1,9 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace UnityEngine.UI
 {
@@ -641,7 +639,7 @@ namespace UnityEngine.UI
         private float m_HSliderHeight;
         private float m_VSliderWidth;
 
-        [System.NonSerialized] private RectTransform m_Rect;
+        [NonSerialized] private RectTransform m_Rect;
         private RectTransform rectTransform
         {
             get

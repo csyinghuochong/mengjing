@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -21,7 +21,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.UI.Image E_HeadIconImage
+		public Image E_HeadIconImage
      	{
      		get
      		{
@@ -34,18 +34,18 @@ namespace ET.Client
      			{
      				if( this.m_E_HeadIconImage == null )
      				{
-		    			this.m_E_HeadIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_HeadIcon");
+		    			this.m_E_HeadIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_HeadIcon");
      				}
      				return this.m_E_HeadIconImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_HeadIcon");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_HeadIcon");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_PlayerNameText
+		public Text E_PlayerNameText
      	{
      		get
      		{
@@ -58,18 +58,18 @@ namespace ET.Client
      			{
      				if( this.m_E_PlayerNameText == null )
      				{
-		    			this.m_E_PlayerNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PlayerName");
+		    			this.m_E_PlayerNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_PlayerName");
      				}
      				return this.m_E_PlayerNameText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PlayerName");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_PlayerName");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_PlayerLevelText
+		public Text E_PlayerLevelText
      	{
      		get
      		{
@@ -82,18 +82,18 @@ namespace ET.Client
      			{
      				if( this.m_E_PlayerLevelText == null )
      				{
-		    			this.m_E_PlayerLevelText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PlayerLevel");
+		    			this.m_E_PlayerLevelText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_PlayerLevel");
      				}
      				return this.m_E_PlayerLevelText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PlayerLevel");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_PlayerLevel");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Button E_AgreeButton
+		public Button E_AgreeButton
      	{
      		get
      		{
@@ -106,18 +106,18 @@ namespace ET.Client
      			{
      				if( this.m_E_AgreeButton == null )
      				{
-		    			this.m_E_AgreeButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Agree");
+		    			this.m_E_AgreeButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Agree");
      				}
      				return this.m_E_AgreeButton;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Agree");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Agree");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_AgreeImage
+		public Image E_AgreeImage
      	{
      		get
      		{
@@ -130,18 +130,18 @@ namespace ET.Client
      			{
      				if( this.m_E_AgreeImage == null )
      				{
-		    			this.m_E_AgreeImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Agree");
+		    			this.m_E_AgreeImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Agree");
      				}
      				return this.m_E_AgreeImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Agree");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Agree");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Button E_RefuseButton
+		public Button E_RefuseButton
      	{
      		get
      		{
@@ -154,18 +154,18 @@ namespace ET.Client
      			{
      				if( this.m_E_RefuseButton == null )
      				{
-		    			this.m_E_RefuseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Refuse");
+		    			this.m_E_RefuseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Refuse");
      				}
      				return this.m_E_RefuseButton;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Refuse");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Refuse");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_RefuseImage
+		public Image E_RefuseImage
      	{
      		get
      		{
@@ -178,18 +178,18 @@ namespace ET.Client
      			{
      				if( this.m_E_RefuseImage == null )
      				{
-		    			this.m_E_RefuseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Refuse");
+		    			this.m_E_RefuseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Refuse");
      				}
      				return this.m_E_RefuseImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Refuse");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Refuse");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_PlayerTipText
+		public Text E_PlayerTipText
      	{
      		get
      		{
@@ -202,18 +202,18 @@ namespace ET.Client
      			{
      				if( this.m_E_PlayerTipText == null )
      				{
-		    			this.m_E_PlayerTipText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PlayerTip");
+		    			this.m_E_PlayerTipText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_PlayerTip");
      				}
      				return this.m_E_PlayerTipText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PlayerTip");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_PlayerTip");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_PlayerOnLineText
+		public Text E_PlayerOnLineText
      	{
      		get
      		{
@@ -226,18 +226,18 @@ namespace ET.Client
      			{
      				if( this.m_E_PlayerOnLineText == null )
      				{
-		    			this.m_E_PlayerOnLineText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PlayerOnLine");
+		    			this.m_E_PlayerOnLineText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_PlayerOnLine");
      				}
      				return this.m_E_PlayerOnLineText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PlayerOnLine");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_PlayerOnLine");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_PlayerOccText
+		public Text E_PlayerOccText
      	{
      		get
      		{
@@ -250,13 +250,13 @@ namespace ET.Client
      			{
      				if( this.m_E_PlayerOccText == null )
      				{
-		    			this.m_E_PlayerOccText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PlayerOcc");
+		    			this.m_E_PlayerOccText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_PlayerOcc");
      				}
      				return this.m_E_PlayerOccText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_PlayerOcc");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_PlayerOcc");
      			}
      		}
      	}
@@ -277,16 +277,16 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.UI.Image m_E_HeadIconImage = null;
-		private UnityEngine.UI.Text m_E_PlayerNameText = null;
-		private UnityEngine.UI.Text m_E_PlayerLevelText = null;
-		private UnityEngine.UI.Button m_E_AgreeButton = null;
-		private UnityEngine.UI.Image m_E_AgreeImage = null;
-		private UnityEngine.UI.Button m_E_RefuseButton = null;
-		private UnityEngine.UI.Image m_E_RefuseImage = null;
-		private UnityEngine.UI.Text m_E_PlayerTipText = null;
-		private UnityEngine.UI.Text m_E_PlayerOnLineText = null;
-		private UnityEngine.UI.Text m_E_PlayerOccText = null;
+		private Image m_E_HeadIconImage = null;
+		private Text m_E_PlayerNameText = null;
+		private Text m_E_PlayerLevelText = null;
+		private Button m_E_AgreeButton = null;
+		private Image m_E_AgreeImage = null;
+		private Button m_E_RefuseButton = null;
+		private Image m_E_RefuseImage = null;
+		private Text m_E_PlayerTipText = null;
+		private Text m_E_PlayerOnLineText = null;
+		private Text m_E_PlayerOccText = null;
 		public Transform uiTransform = null;
 	}
 }

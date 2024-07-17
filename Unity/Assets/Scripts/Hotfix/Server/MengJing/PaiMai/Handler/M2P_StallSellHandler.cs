@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.PaiMai)]
     public class M2P_StallSellHandler: MessageHandler<Scene, M2P_StallSellRequest, P2M_StallSellResponse>

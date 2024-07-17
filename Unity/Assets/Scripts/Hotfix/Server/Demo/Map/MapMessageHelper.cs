@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -197,7 +196,7 @@ namespace ET.Server
 
             M2C_CreateUnits createUnits = M2C_CreateUnits.Create();
             GetUnitInfo(sendUnit, createUnits);
-            MapMessageHelper.SendToClient(unit, createUnits);
+            SendToClient(unit, createUnits);
         }
 
 
@@ -205,7 +204,7 @@ namespace ET.Server
         {
             M2C_RemoveUnits removeUnits = M2C_RemoveUnits.Create();
             removeUnits.Units.Add(sendUnit.Id);
-            MapMessageHelper.SendToClient(unit, removeUnits);
+            SendToClient(unit, removeUnits);
         }
 
         public static void Broadcast(Unit unit, IMessage message)
@@ -266,7 +265,7 @@ namespace ET.Server
             //主城不广播技能
             if (unit.SceneType != SceneTypeEnum.MainCityScene)
             {
-                MapMessageHelper.Broadcast(unit, message);
+                Broadcast(unit, message);
             }
         }
         

@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgWarehouseViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgWarehouseViewComponent))]
+	[FriendOfAttribute(typeof(DlgWarehouseViewComponent))]
 	public static partial class DlgWarehouseViewComponentSystem
 	{
 		[EntitySystem]

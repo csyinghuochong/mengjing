@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -19,7 +19,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.UI.Text ELvText
+		public Text ELvText
      	{
      		get
      		{
@@ -32,18 +32,18 @@ namespace ET.Client
      			{
      				if( this.m_ELvText == null )
      				{
-		    			this.m_ELvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"ELv");
+		    			this.m_ELvText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"ELv");
      				}
      				return this.m_ELvText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"ELv");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"ELv");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text ENameText
+		public Text ENameText
      	{
      		get
      		{
@@ -56,13 +56,13 @@ namespace ET.Client
      			{
      				if( this.m_ENameText == null )
      				{
-		    			this.m_ENameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EName");
+		    			this.m_ENameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EName");
      				}
      				return this.m_ENameText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EName");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EName");
      			}
      		}
      	}
@@ -75,8 +75,8 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.UI.Text m_ELvText = null;
-		private UnityEngine.UI.Text m_ENameText = null;
+		private Text m_ELvText = null;
+		private Text m_ENameText = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -6,12 +6,12 @@ namespace ET.Server
     public static partial class RechargeComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.RechargeComponent self)
+        private static void Awake(this RechargeComponent self)
         {
 
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.RechargeComponent self)
+        private static void Destroy(this RechargeComponent self)
         {
 
         }

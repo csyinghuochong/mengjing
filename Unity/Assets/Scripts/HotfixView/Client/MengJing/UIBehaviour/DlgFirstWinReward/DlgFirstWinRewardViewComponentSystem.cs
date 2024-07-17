@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgFirstWinRewardViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgFirstWinRewardViewComponent))]
+	[FriendOfAttribute(typeof(DlgFirstWinRewardViewComponent))]
 	public static partial class DlgFirstWinRewardViewComponentSystem
 	{
 		[EntitySystem]

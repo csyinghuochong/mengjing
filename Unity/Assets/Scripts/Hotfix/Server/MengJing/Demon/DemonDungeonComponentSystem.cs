@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace ET.Server
@@ -8,12 +7,12 @@ namespace ET.Server
     public static partial class DemonDungeonComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.DemonDungeonComponent self)
+        private static void Awake(this DemonDungeonComponent self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.DemonDungeonComponent self)
+        private static void Destroy(this DemonDungeonComponent self)
         {
         }
 

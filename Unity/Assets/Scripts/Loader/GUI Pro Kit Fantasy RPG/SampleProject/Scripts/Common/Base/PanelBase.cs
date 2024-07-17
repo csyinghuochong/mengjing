@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using FantasyRPG;
+﻿using FantasyRPG;
 using UnityEngine;
 
 public class PanelBase : MonoBehaviour

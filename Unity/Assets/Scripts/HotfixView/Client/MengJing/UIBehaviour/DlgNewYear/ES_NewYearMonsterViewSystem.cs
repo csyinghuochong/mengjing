@@ -1,6 +1,5 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+
 namespace ET.Client
 {
 	[EntitySystemOf(typeof(ES_NewYearMonster))]

@@ -10,7 +10,7 @@ namespace ET.Server
     public static partial class HeroDataComponentSSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.HeroDataComponentS self)
+        private static void Awake(this HeroDataComponentS self)
         {
 
         }

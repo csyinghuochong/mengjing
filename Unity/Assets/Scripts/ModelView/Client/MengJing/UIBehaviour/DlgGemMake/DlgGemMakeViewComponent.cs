@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgGemMake))]
 	[EnableMethod]
 	public  class DlgGemMakeViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Text E_Text_CurrentText
+		public Text E_Text_CurrentText
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_CurrentText == null )
      			{
-		    		this.m_E_Text_CurrentText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_Text_Current");
+		    		this.m_E_Text_CurrentText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_Text_Current");
      			}
      			return this.m_E_Text_CurrentText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextVitalityText
+		public Text E_TextVitalityText
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextVitalityText == null )
      			{
-		    		this.m_E_TextVitalityText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/E_TextVitality");
+		    		this.m_E_TextVitalityText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/E_TextVitality");
      			}
      			return this.m_E_TextVitalityText;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_MakeINeedNodeRectTransform
+		public RectTransform EG_MakeINeedNodeRectTransform
      	{
      		get
      		{
@@ -52,7 +52,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_MakeINeedNodeRectTransform == null )
      			{
-		    		this.m_EG_MakeINeedNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_MakeINeedNode");
+		    		this.m_EG_MakeINeedNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Right/EG_MakeINeedNode");
      			}
      			return this.m_EG_MakeINeedNodeRectTransform;
      		}
@@ -96,7 +96,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_MakeButton
+		public Button E_Btn_MakeButton
      	{
      		get
      		{
@@ -107,13 +107,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_MakeButton == null )
      			{
-		    		this.m_E_Btn_MakeButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_MakeINeedNode/E_Btn_Make");
+		    		this.m_E_Btn_MakeButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_MakeINeedNode/E_Btn_Make");
      			}
      			return this.m_E_Btn_MakeButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_MakeImage
+		public Image E_Btn_MakeImage
      	{
      		get
      		{
@@ -124,13 +124,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_MakeImage == null )
      			{
-		    		this.m_E_Btn_MakeImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_MakeINeedNode/E_Btn_Make");
+		    		this.m_E_Btn_MakeImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_MakeINeedNode/E_Btn_Make");
      			}
      			return this.m_E_Btn_MakeImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_MakeNameText
+		public Text E_Lab_MakeNameText
      	{
      		get
      		{
@@ -141,13 +141,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_MakeNameText == null )
      			{
-		    		this.m_E_Lab_MakeNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_MakeINeedNode/E_Lab_MakeName");
+		    		this.m_E_Lab_MakeNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_MakeINeedNode/E_Lab_MakeName");
      			}
      			return this.m_E_Lab_MakeNameText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_MakeNumText
+		public Text E_Lab_MakeNumText
      	{
      		get
      		{
@@ -158,13 +158,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_MakeNumText == null )
      			{
-		    		this.m_E_Lab_MakeNumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_MakeINeedNode/E_Lab_MakeNum");
+		    		this.m_E_Lab_MakeNumText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_MakeINeedNode/E_Lab_MakeNum");
      			}
      			return this.m_E_Lab_MakeNumText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_MakeCDTimeText
+		public Text E_Lab_MakeCDTimeText
      	{
      		get
      		{
@@ -175,13 +175,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_MakeCDTimeText == null )
      			{
-		    		this.m_E_Lab_MakeCDTimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_MakeINeedNode/E_Lab_MakeCDTime");
+		    		this.m_E_Lab_MakeCDTimeText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_MakeINeedNode/E_Lab_MakeCDTime");
      			}
      			return this.m_E_Lab_MakeCDTimeText;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageSelectImage
+		public Image E_ImageSelectImage
      	{
      		get
      		{
@@ -192,13 +192,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageSelectImage == null )
      			{
-		    		this.m_E_ImageSelectImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_ImageSelect");
+		    		this.m_E_ImageSelectImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/E_ImageSelect");
      			}
      			return this.m_E_ImageSelectImage;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_MakeItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_MakeItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -209,7 +209,7 @@ namespace ET.Client
      			}
      			if( this.m_E_MakeItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_MakeItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_MakeItems");
+		    		this.m_E_MakeItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_MakeItems");
      			}
      			return this.m_E_MakeItemsLoopVerticalScrollRect;
      		}
@@ -232,18 +232,18 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Text m_E_Text_CurrentText = null;
-		private UnityEngine.UI.Text m_E_TextVitalityText = null;
-		private UnityEngine.RectTransform m_EG_MakeINeedNodeRectTransform = null;
+		private Text m_E_Text_CurrentText = null;
+		private Text m_E_TextVitalityText = null;
+		private RectTransform m_EG_MakeINeedNodeRectTransform = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
 		private EntityRef<ES_CostList> m_es_costlist = null;
-		private UnityEngine.UI.Button m_E_Btn_MakeButton = null;
-		private UnityEngine.UI.Image m_E_Btn_MakeImage = null;
-		private UnityEngine.UI.Text m_E_Lab_MakeNameText = null;
-		private UnityEngine.UI.Text m_E_Lab_MakeNumText = null;
-		private UnityEngine.UI.Text m_E_Lab_MakeCDTimeText = null;
-		private UnityEngine.UI.Image m_E_ImageSelectImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_MakeItemsLoopVerticalScrollRect = null;
+		private Button m_E_Btn_MakeButton = null;
+		private Image m_E_Btn_MakeImage = null;
+		private Text m_E_Lab_MakeNameText = null;
+		private Text m_E_Lab_MakeNumText = null;
+		private Text m_E_Lab_MakeCDTimeText = null;
+		private Image m_E_ImageSelectImage = null;
+		private LoopVerticalScrollRect m_E_MakeItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

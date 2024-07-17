@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -63,7 +63,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_StarListRectTransform
+		public RectTransform EG_StarListRectTransform
      	{
      		get
      		{
@@ -76,18 +76,18 @@ namespace ET.Client
      			{
      				if( this.m_EG_StarListRectTransform == null )
      				{
-		    			this.m_EG_StarListRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_StarList");
+		    			this.m_EG_StarListRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_StarList");
      				}
      				return this.m_EG_StarListRectTransform;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_StarList");
+		    		return UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_StarList");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonFightButton
+		public Button E_ButtonFightButton
      	{
      		get
      		{
@@ -100,18 +100,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ButtonFightButton == null )
      				{
-		    			this.m_E_ButtonFightButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonFight");
+		    			this.m_E_ButtonFightButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonFight");
      				}
      				return this.m_E_ButtonFightButton;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonFight");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonFight");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonFightImage
+		public Image E_ButtonFightImage
      	{
      		get
      		{
@@ -124,18 +124,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ButtonFightImage == null )
      				{
-		    			this.m_E_ButtonFightImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonFight");
+		    			this.m_E_ButtonFightImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonFight");
      				}
      				return this.m_E_ButtonFightImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonFight");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonFight");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextNameText
+		public Text E_TextNameText
      	{
      		get
      		{
@@ -148,18 +148,18 @@ namespace ET.Client
      			{
      				if( this.m_E_TextNameText == null )
      				{
-		    			this.m_E_TextNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextName");
+		    			this.m_E_TextNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextName");
      				}
      				return this.m_E_TextNameText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextName");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextName");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_Attribute_1Text
+		public Text E_Text_Attribute_1Text
      	{
      		get
      		{
@@ -172,18 +172,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Text_Attribute_1Text == null )
      				{
-		    			this.m_E_Text_Attribute_1Text = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_Attribute_1");
+		    			this.m_E_Text_Attribute_1Text = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Attribute_1");
      				}
      				return this.m_E_Text_Attribute_1Text;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_Attribute_1");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Attribute_1");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_LaiYuanText
+		public Text E_Lab_LaiYuanText
      	{
      		get
      		{
@@ -196,18 +196,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Lab_LaiYuanText == null )
      				{
-		    			this.m_E_Lab_LaiYuanText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_LaiYuan");
+		    			this.m_E_Lab_LaiYuanText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_LaiYuan");
      				}
      				return this.m_E_Lab_LaiYuanText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_LaiYuan");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_LaiYuan");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_LabDesText
+		public Text E_LabDesText
      	{
      		get
      		{
@@ -220,18 +220,18 @@ namespace ET.Client
      			{
      				if( this.m_E_LabDesText == null )
      				{
-		    			this.m_E_LabDesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_LabDes");
+		    			this.m_E_LabDesText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_LabDes");
      				}
      				return this.m_E_LabDesText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_LabDes");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_LabDes");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_LabProDesText
+		public Text E_LabProDesText
      	{
      		get
      		{
@@ -244,13 +244,13 @@ namespace ET.Client
      			{
      				if( this.m_E_LabProDesText == null )
      				{
-		    			this.m_E_LabProDesText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_LabProDes");
+		    			this.m_E_LabProDesText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_LabProDes");
      				}
      				return this.m_E_LabProDesText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_LabProDes");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_LabProDes");
      			}
      		}
      	}
@@ -271,14 +271,14 @@ namespace ET.Client
 		}
 
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
-		private UnityEngine.RectTransform m_EG_StarListRectTransform = null;
-		private UnityEngine.UI.Button m_E_ButtonFightButton = null;
-		private UnityEngine.UI.Image m_E_ButtonFightImage = null;
-		private UnityEngine.UI.Text m_E_TextNameText = null;
-		private UnityEngine.UI.Text m_E_Text_Attribute_1Text = null;
-		private UnityEngine.UI.Text m_E_Lab_LaiYuanText = null;
-		private UnityEngine.UI.Text m_E_LabDesText = null;
-		private UnityEngine.UI.Text m_E_LabProDesText = null;
+		private RectTransform m_EG_StarListRectTransform = null;
+		private Button m_E_ButtonFightButton = null;
+		private Image m_E_ButtonFightImage = null;
+		private Text m_E_TextNameText = null;
+		private Text m_E_Text_Attribute_1Text = null;
+		private Text m_E_Lab_LaiYuanText = null;
+		private Text m_E_LabDesText = null;
+		private Text m_E_LabProDesText = null;
 		public Transform uiTransform = null;
 	}
 }

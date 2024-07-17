@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ET.Client
 {
     [ChildOf]
     [EnableMethod]
-    public class ES_MainTeam: Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+    public class ES_MainTeam: Entity,IAwake<Transform>,IDestroy
     {
         
         public Dictionary<int, EntityRef<Scroll_Item_MainTeamItem>> ScrollItemMainTeamItems;

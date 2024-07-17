@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_BuChangeRequestHandler : MessageLocationHandler<Unit, C2M_BuChangeRequest, M2C_BuChangeResponse>

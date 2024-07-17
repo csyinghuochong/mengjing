@@ -9,7 +9,7 @@ namespace ET.Client
     public static partial class ES_PetMiningItemSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.ES_PetMiningItem self, UnityEngine.Transform args2)
+        private static void Awake(this ES_PetMiningItem self, Transform args2)
         {
             self.uiTransform = args2;
 
@@ -21,7 +21,7 @@ namespace ET.Client
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Client.ES_PetMiningItem self)
+        private static void Destroy(this ES_PetMiningItem self)
         {
             self.DestroyWidget();
         }

@@ -9,7 +9,7 @@ namespace ET.Server
     public static partial class TaskComponentSSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.TaskComponentS self)
+        private static void Awake(this TaskComponentS self)
         {
             if (self.RoleTaskList.Count == 0)
             {
@@ -23,12 +23,12 @@ namespace ET.Server
             }
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.TaskComponentS self)
+        private static void Destroy(this TaskComponentS self)
         {
 
         }
         [EntitySystem]
-        private static void Deserialize(this ET.Server.TaskComponentS self)
+        private static void Deserialize(this TaskComponentS self)
         {
 
         }
@@ -1540,7 +1540,7 @@ namespace ET.Server
 
             //���ÿ������
             Unit unit = self.GetParent<Unit>();
-            System.DateTime dateTime = TimeHelper.DateTimeNow();
+            DateTime dateTime = TimeHelper.DateTimeNow();
             for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
             {
                 TaskConfig taskConfig = TaskConfigCategory.Instance.Get(self.RoleTaskList[i].taskID);
@@ -1589,8 +1589,8 @@ namespace ET.Server
 
         public static void CheckWeeklyUpdate(this TaskComponentS self)
         {
-            System.DateTime dateTime = TimeHelper.DateTimeNow();
-            if (dateTime.DayOfWeek == System.DayOfWeek.Monday)
+            DateTime dateTime = TimeHelper.DateTimeNow();
+            if (dateTime.DayOfWeek == DayOfWeek.Monday)
             {
                 //Log.Console($"ResetWeeklyTask: passday:{self.Id} {dateTime.DayOfWeek == System.DayOfWeek.Monday}");
                 self.ResetWeeklyTask();

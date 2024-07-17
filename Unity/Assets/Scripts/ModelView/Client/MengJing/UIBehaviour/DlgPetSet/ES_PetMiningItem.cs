@@ -1,14 +1,12 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 
 namespace ET.Client
 {
     
     [ChildOf]
     [EnableMethod]
-    public class ES_PetMiningItem: Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
+    public class ES_PetMiningItem: Entity,IAwake<Transform>,IDestroy
     {
         
         public Text E_TextChanChu

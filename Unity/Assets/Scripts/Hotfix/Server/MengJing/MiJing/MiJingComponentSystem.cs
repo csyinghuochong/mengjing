@@ -8,12 +8,12 @@ namespace ET.Server
     public static partial class MiJingComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.MiJingComponent self)
+        private static void Awake(this MiJingComponent self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.MiJingComponent self)
+        private static void Destroy(this MiJingComponent self)
         {
         }
 
@@ -77,7 +77,7 @@ namespace ET.Server
 
                     int itemId = int.Parse(itemInfo[0]);
                     int itemNum = int.Parse(itemInfo[1]);
-                    BagInfo BagInfo = ET.BagInfo.Create();
+                    BagInfo BagInfo = BagInfo.Create();
                     BagInfo.ItemID = itemId;
                     BagInfo.ItemNum = itemNum;
                     BagInfo.GetWay = $"{ItemGetWay.MiJingBoss}_{serverTime}";

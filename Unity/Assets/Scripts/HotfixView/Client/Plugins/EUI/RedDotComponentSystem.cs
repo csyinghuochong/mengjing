@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ET.Client
 {
@@ -9,7 +8,7 @@ namespace ET.Client
     {
         
         [EntitySystem]
-        private static void Awake(this ET.Client.RedDotComponent self)
+        private static void Awake(this RedDotComponent self)
         {
 
         }

@@ -1035,17 +1035,17 @@ public class zstring
                 str.dispose(); //循环调用栈中zstring的Dispose方法
             }
 
-            zstring.g_blocks.Push(this); //将自身push入缓存栈
+            g_blocks.Push(this); //将自身push入缓存栈
 
             //赋值currentBlock
             g_open_blocks.Pop();
             if (g_open_blocks.Count > 0)
             {
-                zstring.g_current_block = g_open_blocks.Peek();
+                g_current_block = g_open_blocks.Peek();
             }
             else
             {
-                zstring.g_current_block = null;
+                g_current_block = null;
             }
         }
     }

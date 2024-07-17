@@ -1,8 +1,4 @@
-﻿using System;
-using UnityEngine;
-using System.Collections;
-
-namespace UnityEngine.UI
+﻿namespace UnityEngine.UI
 {
     public interface LoopScrollMultiDataSource
     {

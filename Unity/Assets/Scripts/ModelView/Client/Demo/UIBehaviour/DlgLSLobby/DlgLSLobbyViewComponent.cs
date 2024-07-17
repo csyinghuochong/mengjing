@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgLSLobby))]
 	[EnableMethod]
 	public  class DlgLSLobbyViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button EMatchButton
+		public Button EMatchButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_EMatchButton == null )
      			{
-		    		this.m_EMatchButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Panel/EMatch");
+		    		this.m_EMatchButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Panel/EMatch");
      			}
      			return this.m_EMatchButton;
      		}
      	}
 
-		public UnityEngine.UI.Image EMatchImage
+		public Image EMatchImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_EMatchImage == null )
      			{
-		    		this.m_EMatchImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Panel/EMatch");
+		    		this.m_EMatchImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Panel/EMatch");
      			}
      			return this.m_EMatchImage;
      		}
      	}
 
-		public UnityEngine.UI.InputField EReplayPathInputField
+		public InputField EReplayPathInputField
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_EReplayPathInputField == null )
      			{
-		    		this.m_EReplayPathInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"Panel/GameObject/EReplayPath");
+		    		this.m_EReplayPathInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"Panel/GameObject/EReplayPath");
      			}
      			return this.m_EReplayPathInputField;
      		}
      	}
 
-		public UnityEngine.UI.Image EReplayPathImage
+		public Image EReplayPathImage
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_EReplayPathImage == null )
      			{
-		    		this.m_EReplayPathImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Panel/GameObject/EReplayPath");
+		    		this.m_EReplayPathImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Panel/GameObject/EReplayPath");
      			}
      			return this.m_EReplayPathImage;
      		}
      	}
 
-		public UnityEngine.UI.Button EReplayButton
+		public Button EReplayButton
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_EReplayButton == null )
      			{
-		    		this.m_EReplayButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Panel/GameObject/EReplay");
+		    		this.m_EReplayButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Panel/GameObject/EReplay");
      			}
      			return this.m_EReplayButton;
      		}
      	}
 
-		public UnityEngine.UI.Image EReplayImage
+		public Image EReplayImage
      	{
      		get
      		{
@@ -103,7 +103,7 @@ namespace ET.Client
      			}
      			if( this.m_EReplayImage == null )
      			{
-		    		this.m_EReplayImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Panel/GameObject/EReplay");
+		    		this.m_EReplayImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Panel/GameObject/EReplay");
      			}
      			return this.m_EReplayImage;
      		}
@@ -120,12 +120,12 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_EMatchButton = null;
-		private UnityEngine.UI.Image m_EMatchImage = null;
-		private UnityEngine.UI.InputField m_EReplayPathInputField = null;
-		private UnityEngine.UI.Image m_EReplayPathImage = null;
-		private UnityEngine.UI.Button m_EReplayButton = null;
-		private UnityEngine.UI.Image m_EReplayImage = null;
+		private Button m_EMatchButton = null;
+		private Image m_EMatchImage = null;
+		private InputField m_EReplayPathInputField = null;
+		private Image m_EReplayPathImage = null;
+		private Button m_EReplayButton = null;
+		private Image m_EReplayImage = null;
 		public Transform uiTransform = null;
 	}
 }

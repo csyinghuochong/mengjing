@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -147,7 +147,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_LingQuHint_1Image
+		public Image E_LingQuHint_1Image
      	{
      		get
      		{
@@ -160,18 +160,18 @@ namespace ET.Client
      			{
      				if( this.m_E_LingQuHint_1Image == null )
      				{
-		    			this.m_E_LingQuHint_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_LingQuHint_1");
+		    			this.m_E_LingQuHint_1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_LingQuHint_1");
      				}
      				return this.m_E_LingQuHint_1Image;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_LingQuHint_1");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_LingQuHint_1");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_LingQuHint_2Image
+		public Image E_LingQuHint_2Image
      	{
      		get
      		{
@@ -184,18 +184,18 @@ namespace ET.Client
      			{
      				if( this.m_E_LingQuHint_2Image == null )
      				{
-		    			this.m_E_LingQuHint_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_LingQuHint_2");
+		    			this.m_E_LingQuHint_2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_LingQuHint_2");
      				}
      				return this.m_E_LingQuHint_2Image;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_LingQuHint_2");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_LingQuHint_2");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_LingQuHint_3Image
+		public Image E_LingQuHint_3Image
      	{
      		get
      		{
@@ -208,18 +208,18 @@ namespace ET.Client
      			{
      				if( this.m_E_LingQuHint_3Image == null )
      				{
-		    			this.m_E_LingQuHint_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_LingQuHint_3");
+		    			this.m_E_LingQuHint_3Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_LingQuHint_3");
      				}
      				return this.m_E_LingQuHint_3Image;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_LingQuHint_3");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_LingQuHint_3");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_LingQu_1Button
+		public Button E_Btn_LingQu_1Button
      	{
      		get
      		{
@@ -232,18 +232,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Btn_LingQu_1Button == null )
      				{
-		    			this.m_E_Btn_LingQu_1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_LingQu_1");
+		    			this.m_E_Btn_LingQu_1Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_LingQu_1");
      				}
      				return this.m_E_Btn_LingQu_1Button;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_LingQu_1");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_LingQu_1");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_LingQu_1Image
+		public Image E_Btn_LingQu_1Image
      	{
      		get
      		{
@@ -256,18 +256,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Btn_LingQu_1Image == null )
      				{
-		    			this.m_E_Btn_LingQu_1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_LingQu_1");
+		    			this.m_E_Btn_LingQu_1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_LingQu_1");
      				}
      				return this.m_E_Btn_LingQu_1Image;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_LingQu_1");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_LingQu_1");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_LingQu_2Button
+		public Button E_Btn_LingQu_2Button
      	{
      		get
      		{
@@ -280,18 +280,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Btn_LingQu_2Button == null )
      				{
-		    			this.m_E_Btn_LingQu_2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_LingQu_2");
+		    			this.m_E_Btn_LingQu_2Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_LingQu_2");
      				}
      				return this.m_E_Btn_LingQu_2Button;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_LingQu_2");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_LingQu_2");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_LingQu_2Image
+		public Image E_Btn_LingQu_2Image
      	{
      		get
      		{
@@ -304,18 +304,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Btn_LingQu_2Image == null )
      				{
-		    			this.m_E_Btn_LingQu_2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_LingQu_2");
+		    			this.m_E_Btn_LingQu_2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_LingQu_2");
      				}
      				return this.m_E_Btn_LingQu_2Image;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_LingQu_2");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_LingQu_2");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_LingQu_3Button
+		public Button E_Btn_LingQu_3Button
      	{
      		get
      		{
@@ -328,18 +328,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Btn_LingQu_3Button == null )
      				{
-		    			this.m_E_Btn_LingQu_3Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_LingQu_3");
+		    			this.m_E_Btn_LingQu_3Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_LingQu_3");
      				}
      				return this.m_E_Btn_LingQu_3Button;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_LingQu_3");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_LingQu_3");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_LingQu_3Image
+		public Image E_Btn_LingQu_3Image
      	{
      		get
      		{
@@ -352,18 +352,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Btn_LingQu_3Image == null )
      				{
-		    			this.m_E_Btn_LingQu_3Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_LingQu_3");
+		    			this.m_E_Btn_LingQu_3Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_LingQu_3");
      				}
      				return this.m_E_Btn_LingQu_3Image;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_LingQu_3");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_LingQu_3");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextNameText
+		public Text E_TextNameText
      	{
      		get
      		{
@@ -376,13 +376,13 @@ namespace ET.Client
      			{
      				if( this.m_E_TextNameText == null )
      				{
-		    			this.m_E_TextNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextName");
+		    			this.m_E_TextNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextName");
      				}
      				return this.m_E_TextNameText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextName");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextName");
      			}
      		}
      	}
@@ -409,16 +409,16 @@ namespace ET.Client
 		private EntityRef<ES_CommonItem> m_es_commonitem_1 = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem_2 = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem_3 = null;
-		private UnityEngine.UI.Image m_E_LingQuHint_1Image = null;
-		private UnityEngine.UI.Image m_E_LingQuHint_2Image = null;
-		private UnityEngine.UI.Image m_E_LingQuHint_3Image = null;
-		private UnityEngine.UI.Button m_E_Btn_LingQu_1Button = null;
-		private UnityEngine.UI.Image m_E_Btn_LingQu_1Image = null;
-		private UnityEngine.UI.Button m_E_Btn_LingQu_2Button = null;
-		private UnityEngine.UI.Image m_E_Btn_LingQu_2Image = null;
-		private UnityEngine.UI.Button m_E_Btn_LingQu_3Button = null;
-		private UnityEngine.UI.Image m_E_Btn_LingQu_3Image = null;
-		private UnityEngine.UI.Text m_E_TextNameText = null;
+		private Image m_E_LingQuHint_1Image = null;
+		private Image m_E_LingQuHint_2Image = null;
+		private Image m_E_LingQuHint_3Image = null;
+		private Button m_E_Btn_LingQu_1Button = null;
+		private Image m_E_Btn_LingQu_1Image = null;
+		private Button m_E_Btn_LingQu_2Button = null;
+		private Image m_E_Btn_LingQu_2Image = null;
+		private Button m_E_Btn_LingQu_3Button = null;
+		private Image m_E_Btn_LingQu_3Image = null;
+		private Text m_E_TextNameText = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.U2D;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     public static class ABAtlasTypes
     {

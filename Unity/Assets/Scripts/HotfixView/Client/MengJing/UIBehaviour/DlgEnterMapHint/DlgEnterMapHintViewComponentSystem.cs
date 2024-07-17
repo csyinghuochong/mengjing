@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgEnterMapHintViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgEnterMapHintViewComponent))]
+	[FriendOfAttribute(typeof(DlgEnterMapHintViewComponent))]
 	public static partial class DlgEnterMapHintViewComponentSystem
 	{
 		[EntitySystem]

@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-
 
 namespace ET.Server
 {
@@ -10,7 +8,7 @@ namespace ET.Server
     public static partial class TeamDungeonComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.TeamDungeonComponent self)
+        private static void Awake(this TeamDungeonComponent self)
         {
             self.EnterTime = 0;
             self.TeamInfo = null;
@@ -21,7 +19,7 @@ namespace ET.Server
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.TeamDungeonComponent self)
+        private static void Destroy(this TeamDungeonComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }

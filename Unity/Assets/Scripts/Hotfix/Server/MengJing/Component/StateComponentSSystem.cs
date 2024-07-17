@@ -6,14 +6,14 @@ namespace ET.Server
     public static partial class StateComponentSSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.StateComponentS self)
+        private static void Awake(this StateComponentS self)
         {
             self.CurrentStateType = StateTypeEnum.None;
             self.RigidityEndTime = 0;
         }
 
         [EntitySystem]
-        private static void Deserialize(this ET.Server.StateComponentS self)
+        private static void Deserialize(this StateComponentS self)
         {
             self.CurrentStateType = StateTypeEnum.None;
             self.RigidityEndTime = 0;

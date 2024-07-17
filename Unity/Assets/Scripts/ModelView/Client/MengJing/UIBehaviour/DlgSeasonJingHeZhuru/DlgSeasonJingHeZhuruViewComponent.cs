@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgSeasonJingHeZhuru))]
 	[EnableMethod]
 	public  class DlgSeasonJingHeZhuruViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_CloseBtnButton
+		public Button E_CloseBtnButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseBtnButton == null )
      			{
-		    		this.m_E_CloseBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_CloseBtn");
+		    		this.m_E_CloseBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_CloseBtn");
      			}
      			return this.m_E_CloseBtnButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_CloseBtnImage
+		public Image E_CloseBtnImage
      	{
      		get
      		{
@@ -35,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseBtnImage == null )
      			{
-		    		this.m_E_CloseBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_CloseBtn");
+		    		this.m_E_CloseBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_CloseBtn");
      			}
      			return this.m_E_CloseBtnImage;
      		}
@@ -61,7 +61,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Text E_ItemNameTextText
+		public Text E_ItemNameTextText
      	{
      		get
      		{
@@ -72,13 +72,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemNameTextText == null )
      			{
-		    		this.m_E_ItemNameTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_ItemNameText");
+		    		this.m_E_ItemNameTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_ItemNameText");
      			}
      			return this.m_E_ItemNameTextText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_NowQualityTextText
+		public Text E_NowQualityTextText
      	{
      		get
      		{
@@ -89,13 +89,13 @@ namespace ET.Client
      			}
      			if( this.m_E_NowQualityTextText == null )
      			{
-		    		this.m_E_NowQualityTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_NowQualityText");
+		    		this.m_E_NowQualityTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_NowQualityText");
      			}
      			return this.m_E_NowQualityTextText;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -106,13 +106,13 @@ namespace ET.Client
      			}
      			if( this.m_E_BagItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_BagItems");
+		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_BagItems");
      			}
      			return this.m_E_BagItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.Text E_AddQualityTextText
+		public Text E_AddQualityTextText
      	{
      		get
      		{
@@ -123,13 +123,13 @@ namespace ET.Client
      			}
      			if( this.m_E_AddQualityTextText == null )
      			{
-		    		this.m_E_AddQualityTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_AddQualityText");
+		    		this.m_E_AddQualityTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_AddQualityText");
      			}
      			return this.m_E_AddQualityTextText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ZhuRuBtnButton
+		public Button E_ZhuRuBtnButton
      	{
      		get
      		{
@@ -140,13 +140,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ZhuRuBtnButton == null )
      			{
-		    		this.m_E_ZhuRuBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ZhuRuBtn");
+		    		this.m_E_ZhuRuBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ZhuRuBtn");
      			}
      			return this.m_E_ZhuRuBtnButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ZhuRuBtnImage
+		public Image E_ZhuRuBtnImage
      	{
      		get
      		{
@@ -157,7 +157,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ZhuRuBtnImage == null )
      			{
-		    		this.m_E_ZhuRuBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ZhuRuBtn");
+		    		this.m_E_ZhuRuBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ZhuRuBtn");
      			}
      			return this.m_E_ZhuRuBtnImage;
      		}
@@ -177,15 +177,15 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_CloseBtnButton = null;
-		private UnityEngine.UI.Image m_E_CloseBtnImage = null;
+		private Button m_E_CloseBtnButton = null;
+		private Image m_E_CloseBtnImage = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
-		private UnityEngine.UI.Text m_E_ItemNameTextText = null;
-		private UnityEngine.UI.Text m_E_NowQualityTextText = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.Text m_E_AddQualityTextText = null;
-		private UnityEngine.UI.Button m_E_ZhuRuBtnButton = null;
-		private UnityEngine.UI.Image m_E_ZhuRuBtnImage = null;
+		private Text m_E_ItemNameTextText = null;
+		private Text m_E_NowQualityTextText = null;
+		private LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
+		private Text m_E_AddQualityTextText = null;
+		private Button m_E_ZhuRuBtnButton = null;
+		private Image m_E_ZhuRuBtnImage = null;
 		public Transform uiTransform = null;
 	}
 }

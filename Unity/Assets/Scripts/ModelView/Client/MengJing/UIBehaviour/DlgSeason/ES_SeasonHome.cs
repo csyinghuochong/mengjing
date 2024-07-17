@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_SeasonHome : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_SeasonHome : Entity,IAwake<Transform>,IDestroy 
 	{
-		public UnityEngine.UI.Text E_SeasonTextText
+		public Text E_SeasonTextText
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SeasonTextText == null )
      			{
-		    		this.m_E_SeasonTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_SeasonText");
+		    		this.m_E_SeasonTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_SeasonText");
      			}
      			return this.m_E_SeasonTextText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_SeasonTimeTextText
+		public Text E_SeasonTimeTextText
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SeasonTimeTextText == null )
      			{
-		    		this.m_E_SeasonTimeTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_SeasonTimeText");
+		    		this.m_E_SeasonTimeTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_SeasonTimeText");
      			}
      			return this.m_E_SeasonTimeTextText;
      		}
      	}
 
-		public UnityEngine.UI.Image E_SeasonExperienceImgImage
+		public Image E_SeasonExperienceImgImage
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SeasonExperienceImgImage == null )
      			{
-		    		this.m_E_SeasonExperienceImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_SeasonExperienceImg");
+		    		this.m_E_SeasonExperienceImgImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_SeasonExperienceImg");
      			}
      			return this.m_E_SeasonExperienceImgImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_SeasonExperienceTextText
+		public Text E_SeasonExperienceTextText
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SeasonExperienceTextText == null )
      			{
-		    		this.m_E_SeasonExperienceTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_SeasonExperienceText");
+		    		this.m_E_SeasonExperienceTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_SeasonExperienceText");
      			}
      			return this.m_E_SeasonExperienceTextText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_SeasonLvTextText
+		public Text E_SeasonLvTextText
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SeasonLvTextText == null )
      			{
-		    		this.m_E_SeasonLvTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"SeasonLv/E_SeasonLvText");
+		    		this.m_E_SeasonLvTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"SeasonLv/E_SeasonLvText");
      			}
      			return this.m_E_SeasonLvTextText;
      		}
      	}
 
-		public UnityEngine.UI.Image E_MonsterHeadImgImage
+		public Image E_MonsterHeadImgImage
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_E_MonsterHeadImgImage == null )
      			{
-		    		this.m_E_MonsterHeadImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_MonsterHeadImg");
+		    		this.m_E_MonsterHeadImgImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_MonsterHeadImg");
      			}
      			return this.m_E_MonsterHeadImgImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_MonsterNameTextText
+		public Text E_MonsterNameTextText
      	{
      		get
      		{
@@ -120,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_E_MonsterNameTextText == null )
      			{
-		    		this.m_E_MonsterNameTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_MonsterNameText");
+		    		this.m_E_MonsterNameTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_MonsterNameText");
      			}
      			return this.m_E_MonsterNameTextText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_MonsterPositionTextText
+		public Text E_MonsterPositionTextText
      	{
      		get
      		{
@@ -137,13 +137,13 @@ namespace ET.Client
      			}
      			if( this.m_E_MonsterPositionTextText == null )
      			{
-		    		this.m_E_MonsterPositionTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_MonsterPositionText");
+		    		this.m_E_MonsterPositionTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_MonsterPositionText");
      			}
      			return this.m_E_MonsterPositionTextText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_MonsterRefreshTimeTextText
+		public Text E_MonsterRefreshTimeTextText
      	{
      		get
      		{
@@ -154,13 +154,13 @@ namespace ET.Client
      			}
      			if( this.m_E_MonsterRefreshTimeTextText == null )
      			{
-		    		this.m_E_MonsterRefreshTimeTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_MonsterRefreshTimeText");
+		    		this.m_E_MonsterRefreshTimeTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_MonsterRefreshTimeText");
      			}
      			return this.m_E_MonsterRefreshTimeTextText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ShowBtnButton
+		public Button E_ShowBtnButton
      	{
      		get
      		{
@@ -171,13 +171,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ShowBtnButton == null )
      			{
-		    		this.m_E_ShowBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ShowBtn");
+		    		this.m_E_ShowBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ShowBtn");
      			}
      			return this.m_E_ShowBtnButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ShowBtnImage
+		public Image E_ShowBtnImage
      	{
      		get
      		{
@@ -188,13 +188,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ShowBtnImage == null )
      			{
-		    		this.m_E_ShowBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ShowBtn");
+		    		this.m_E_ShowBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ShowBtn");
      			}
      			return this.m_E_ShowBtnImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_SeasonRewardTextText
+		public Text E_SeasonRewardTextText
      	{
      		get
      		{
@@ -205,7 +205,7 @@ namespace ET.Client
      			}
      			if( this.m_E_SeasonRewardTextText == null )
      			{
-		    		this.m_E_SeasonRewardTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_SeasonRewardText");
+		    		this.m_E_SeasonRewardTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_SeasonRewardText");
      			}
      			return this.m_E_SeasonRewardTextText;
      		}
@@ -231,7 +231,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_GetBtnButton
+		public Button E_GetBtnButton
      	{
      		get
      		{
@@ -242,13 +242,13 @@ namespace ET.Client
      			}
      			if( this.m_E_GetBtnButton == null )
      			{
-		    		this.m_E_GetBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_GetBtn");
+		    		this.m_E_GetBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_GetBtn");
      			}
      			return this.m_E_GetBtnButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_GetBtnImage
+		public Image E_GetBtnImage
      	{
      		get
      		{
@@ -259,13 +259,13 @@ namespace ET.Client
      			}
      			if( this.m_E_GetBtnImage == null )
      			{
-		    		this.m_E_GetBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_GetBtn");
+		    		this.m_E_GetBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_GetBtn");
      			}
      			return this.m_E_GetBtnImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_AcvityedImgImage
+		public Image E_AcvityedImgImage
      	{
      		get
      		{
@@ -276,7 +276,7 @@ namespace ET.Client
      			}
      			if( this.m_E_AcvityedImgImage == null )
      			{
-		    		this.m_E_AcvityedImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_AcvityedImg");
+		    		this.m_E_AcvityedImgImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_AcvityedImg");
      			}
      			return this.m_E_AcvityedImgImage;
      		}
@@ -315,22 +315,22 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Text m_E_SeasonTextText = null;
-		private UnityEngine.UI.Text m_E_SeasonTimeTextText = null;
-		private UnityEngine.UI.Image m_E_SeasonExperienceImgImage = null;
-		private UnityEngine.UI.Text m_E_SeasonExperienceTextText = null;
-		private UnityEngine.UI.Text m_E_SeasonLvTextText = null;
-		private UnityEngine.UI.Image m_E_MonsterHeadImgImage = null;
-		private UnityEngine.UI.Text m_E_MonsterNameTextText = null;
-		private UnityEngine.UI.Text m_E_MonsterPositionTextText = null;
-		private UnityEngine.UI.Text m_E_MonsterRefreshTimeTextText = null;
-		private UnityEngine.UI.Button m_E_ShowBtnButton = null;
-		private UnityEngine.UI.Image m_E_ShowBtnImage = null;
-		private UnityEngine.UI.Text m_E_SeasonRewardTextText = null;
+		private Text m_E_SeasonTextText = null;
+		private Text m_E_SeasonTimeTextText = null;
+		private Image m_E_SeasonExperienceImgImage = null;
+		private Text m_E_SeasonExperienceTextText = null;
+		private Text m_E_SeasonLvTextText = null;
+		private Image m_E_MonsterHeadImgImage = null;
+		private Text m_E_MonsterNameTextText = null;
+		private Text m_E_MonsterPositionTextText = null;
+		private Text m_E_MonsterRefreshTimeTextText = null;
+		private Button m_E_ShowBtnButton = null;
+		private Image m_E_ShowBtnImage = null;
+		private Text m_E_SeasonRewardTextText = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
-		private UnityEngine.UI.Button m_E_GetBtnButton = null;
-		private UnityEngine.UI.Image m_E_GetBtnImage = null;
-		private UnityEngine.UI.Image m_E_AcvityedImgImage = null;
+		private Button m_E_GetBtnButton = null;
+		private Image m_E_GetBtnImage = null;
+		private Image m_E_AcvityedImgImage = null;
 		public Transform uiTransform = null;
 	}
 }

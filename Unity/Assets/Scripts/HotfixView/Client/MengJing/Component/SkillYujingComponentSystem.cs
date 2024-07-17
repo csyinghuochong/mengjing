@@ -11,14 +11,14 @@ namespace ET.Client
     public static partial class SkillYujingComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.SkillYujingComponent self)
+        private static void Awake(this SkillYujingComponent self)
         {
             self.Timer = 0;
             self.mSkillConfig = null;
             self.SkillIndicatorList = new List<SkillIndicatorItem>();
         }
         [EntitySystem]
-        private static void Destroy(this ET.Client.SkillYujingComponent self)
+        private static void Destroy(this SkillYujingComponent self)
         {
             for (int i = self.SkillIndicatorList.Count - 1; i >= 0; i--)
             {

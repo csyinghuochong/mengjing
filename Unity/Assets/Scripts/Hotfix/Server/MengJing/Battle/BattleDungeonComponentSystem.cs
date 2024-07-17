@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 namespace ET.Server
 {
     [EntitySystemOf(typeof (BattleDungeonComponent))]
@@ -8,7 +7,7 @@ namespace ET.Server
     public static partial class BattleDungeonComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.BattleDungeonComponent self)
+        private static void Awake(this BattleDungeonComponent self)
         {
             self.CampKillNumber_1 = 0;
             self.CampKillNumber_2 = 0;

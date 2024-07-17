@@ -1,5 +1,7 @@
 using System.Collections.Generic;
-public class AOTGenericReferences : UnityEngine.MonoBehaviour
+using UnityEngine;
+
+public class AOTGenericReferences : MonoBehaviour
 {
 
 	// {{ AOT assemblies

@@ -1,7 +1,5 @@
-using ET.Client;
 using System;
 using System.Collections.Generic;
-using static System.Collections.Specialized.BitVector32;
 
 namespace ET.Server
 {
@@ -99,7 +97,7 @@ namespace ET.Server
         /// <returns></returns>
         public static async ETTask<T> GetComponentCache<T>(Scene root,  long unitId) where T : Entity
         {
-            ActorId dbCacheId = UnitCacheHelper.GetDbCacheId(root.Zone());
+            ActorId dbCacheId = GetDbCacheId(root.Zone());
 
             Other2UnitCache_GetComponent other2UnitCacheGetComponent = Other2UnitCache_GetComponent.Create();
             other2UnitCacheGetComponent.UnitId = unitId;

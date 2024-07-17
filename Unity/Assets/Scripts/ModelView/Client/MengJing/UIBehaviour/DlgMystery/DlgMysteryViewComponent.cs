@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgMystery))]
@@ -27,7 +27,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_MysteryItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_MysteryItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -38,7 +38,7 @@ namespace ET.Client
      			}
      			if( this.m_E_MysteryItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_MysteryItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_MysteryItems");
+		    		this.m_E_MysteryItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_MysteryItems");
      			}
      			return this.m_E_MysteryItemsLoopVerticalScrollRect;
      		}
@@ -52,7 +52,7 @@ namespace ET.Client
 		}
 
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_MysteryItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_MysteryItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

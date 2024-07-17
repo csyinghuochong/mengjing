@@ -6,7 +6,7 @@ namespace ET
     public static partial class MapComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.MapComponent self)
+        private static void Awake(this MapComponent self)
         {
 
         }

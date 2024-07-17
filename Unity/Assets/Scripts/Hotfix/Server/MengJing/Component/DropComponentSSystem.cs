@@ -6,7 +6,7 @@ namespace ET.Server
     public static partial class DropComponentSSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.DropComponentS self)
+        private static void Awake(this DropComponentS self)
         {
             self.OwnerId = 0;   
             self.ProtectTime = 0;

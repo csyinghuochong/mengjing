@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgPhoneCodeViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgPhoneCodeViewComponent))]
+	[FriendOfAttribute(typeof(DlgPhoneCodeViewComponent))]
 	public static partial class DlgPhoneCodeViewComponentSystem
 	{
 		[EntitySystem]

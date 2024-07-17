@@ -1,5 +1,5 @@
-using Unity.Mathematics;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -8,13 +8,13 @@ namespace ET.Server
     public static partial class JiaYuanSceneComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.JiaYuanSceneComponent self)
+        private static void Awake(this JiaYuanSceneComponent self)
         {
             self.JiaYuanFubens.Clear();
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.JiaYuanSceneComponent self)
+        private static void Destroy(this JiaYuanSceneComponent self)
         {
         }
 

@@ -1,8 +1,8 @@
 #if ENABLE_VIEW
+
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-
 using UnityEditor;
 using UnityEngine;
 
@@ -97,7 +97,7 @@ namespace ET
             }
             catch (Exception e)
             {
-                UnityEngine.Debug.Log($"component view error: {entity.GetType().FullName} {e}");
+                Debug.Log($"component view error: {entity.GetType().FullName} {e}");
             }
         }
     }

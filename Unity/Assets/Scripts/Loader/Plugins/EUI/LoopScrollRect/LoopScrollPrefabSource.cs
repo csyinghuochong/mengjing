@@ -1,7 +1,4 @@
 ﻿using System;
-using UnityEngine;
-using System.Collections;
-using ET;
 using ET.Client;
 
 namespace UnityEngine.UI
@@ -15,7 +12,7 @@ namespace UnityEngine.UI
     
     
     
-    [System.Serializable]
+    [Serializable]
     public class LoopScrollPrefabSourceInstance : LoopScrollPrefabSource
     {
         public string prefabName;
@@ -47,7 +44,7 @@ namespace UnityEngine.UI
             {
                 if (isDestroy)
                 {
-                    UnityEngine.GameObject.Destroy(go.gameObject);
+                    GameObject.Destroy(go.gameObject);
                 }
                 else
                 {

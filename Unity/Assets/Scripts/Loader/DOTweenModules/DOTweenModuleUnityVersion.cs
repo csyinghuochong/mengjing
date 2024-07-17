@@ -1,10 +1,11 @@
 ﻿// Author: Daniele Giardini - http://www.demigiant.com
 // Created: 2018/07/13
 
-using System;
-using UnityEngine;
+using System.Threading.Tasks;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
+using UnityEngine;
+
 //#if UNITY_2018_1_OR_NEWER && (NET_4_6 || NET_STANDARD_2_0)
 //using Task = System.Threading.Tasks.Task;
 //#endif
@@ -213,13 +214,13 @@ namespace DG.Tweening
         /// It can be used inside an async operation.
         /// <para>Example usage:</para><code>await myTween.WaitForCompletion();</code>
         /// </summary>
-        public static async System.Threading.Tasks.Task AsyncWaitForCompletion(this Tween t)
+        public static async Task AsyncWaitForCompletion(this Tween t)
         {
             if (!t.active) {
                 if (Debugger.logPriority > 0) Debugger.LogInvalidTween(t);
                 return;
             }
-            while (t.active && !t.IsComplete()) await System.Threading.Tasks.Task.Yield();
+            while (t.active && !t.IsComplete()) await Task.Yield();
         }
 
         /// <summary>
@@ -227,13 +228,13 @@ namespace DG.Tweening
         /// It can be used inside an async operation.
         /// <para>Example usage:</para><code>await myTween.AsyncWaitForRewind();</code>
         /// </summary>
-        public static async System.Threading.Tasks.Task AsyncWaitForRewind(this Tween t)
+        public static async Task AsyncWaitForRewind(this Tween t)
         {
             if (!t.active) {
                 if (Debugger.logPriority > 0) Debugger.LogInvalidTween(t);
                 return;
             }
-            while (t.active && (!t.playedOnce || t.position * (t.CompletedLoops() + 1) > 0)) await System.Threading.Tasks.Task.Yield();
+            while (t.active && (!t.playedOnce || t.position * (t.CompletedLoops() + 1) > 0)) await Task.Yield();
         }
 
         /// <summary>
@@ -241,13 +242,13 @@ namespace DG.Tweening
         /// It can be used inside an async operation.
         /// <para>Example usage:</para><code>await myTween.AsyncWaitForKill();</code>
         /// </summary>
-        public static async System.Threading.Tasks.Task AsyncWaitForKill(this Tween t)
+        public static async Task AsyncWaitForKill(this Tween t)
         {
             if (!t.active) {
                 if (Debugger.logPriority > 0) Debugger.LogInvalidTween(t);
                 return;
             }
-            while (t.active) await System.Threading.Tasks.Task.Yield();
+            while (t.active) await Task.Yield();
         }
 
         /// <summary>
@@ -256,13 +257,13 @@ namespace DG.Tweening
         /// <para>Example usage:</para><code>await myTween.AsyncWaitForElapsedLoops();</code>
         /// </summary>
         /// <param name="elapsedLoops">Elapsed loops to wait for</param>
-        public static async System.Threading.Tasks.Task AsyncWaitForElapsedLoops(this Tween t, int elapsedLoops)
+        public static async Task AsyncWaitForElapsedLoops(this Tween t, int elapsedLoops)
         {
             if (!t.active) {
                 if (Debugger.logPriority > 0) Debugger.LogInvalidTween(t);
                 return;
             }
-            while (t.active && t.CompletedLoops() < elapsedLoops) await System.Threading.Tasks.Task.Yield();
+            while (t.active && t.CompletedLoops() < elapsedLoops) await Task.Yield();
         }
 
         /// <summary>
@@ -272,13 +273,13 @@ namespace DG.Tweening
         /// <para>Example usage:</para><code>await myTween.AsyncWaitForPosition();</code>
         /// </summary>
         /// <param name="position">Position (loops included, delays excluded) to wait for</param>
-        public static async System.Threading.Tasks.Task AsyncWaitForPosition(this Tween t, float position)
+        public static async Task AsyncWaitForPosition(this Tween t, float position)
         {
             if (!t.active) {
                 if (Debugger.logPriority > 0) Debugger.LogInvalidTween(t);
                 return;
             }
-            while (t.active && t.position * (t.CompletedLoops() + 1) < position) await System.Threading.Tasks.Task.Yield();
+            while (t.active && t.position * (t.CompletedLoops() + 1) < position) await Task.Yield();
         }
 
         /// <summary>
@@ -286,13 +287,13 @@ namespace DG.Tweening
         /// It can be used inside an async operation.
         /// <para>Example usage:</para><code>await myTween.AsyncWaitForKill();</code>
         /// </summary>
-        public static async System.Threading.Tasks.Task AsyncWaitForStart(this Tween t)
+        public static async Task AsyncWaitForStart(this Tween t)
         {
             if (!t.active) {
                 if (Debugger.logPriority > 0) Debugger.LogInvalidTween(t);
                 return;
             }
-            while (t.active && !t.playedOnce) await System.Threading.Tasks.Task.Yield();
+            while (t.active && !t.playedOnce) await Task.Yield();
         }
 
         #endregion

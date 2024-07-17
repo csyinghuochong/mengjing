@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgCountryTipsViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgCountryTipsViewComponent))]
+	[FriendOfAttribute(typeof(DlgCountryTipsViewComponent))]
 	public static partial class DlgCountryTipsViewComponentSystem
 	{
 		[EntitySystem]

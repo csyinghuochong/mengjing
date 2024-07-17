@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgHongBaoViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgHongBaoViewComponent))]
+	[FriendOfAttribute(typeof(DlgHongBaoViewComponent))]
 	public static partial class DlgHongBaoViewComponentSystem
 	{
 		[EntitySystem]

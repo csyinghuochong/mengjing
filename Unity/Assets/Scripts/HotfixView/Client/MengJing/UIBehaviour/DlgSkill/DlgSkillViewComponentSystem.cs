@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgSkillViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgSkillViewComponent))]
+	[FriendOfAttribute(typeof(DlgSkillViewComponent))]
 	public static partial class DlgSkillViewComponentSystem
 	{
 		[EntitySystem]

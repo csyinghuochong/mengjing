@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetHeXinChouKa : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_PetHeXinChouKa : Entity,IAwake<Transform>,IDestroy 
 	{
-		public UnityEngine.UI.Image E_ItemImageIconImage
+		public Image E_ItemImageIconImage
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemImageIconImage == null )
      			{
-		    		this.m_E_ItemImageIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"CostItem/E_ItemImageIcon");
+		    		this.m_E_ItemImageIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"CostItem/E_ItemImageIcon");
      			}
      			return this.m_E_ItemImageIconImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_CostNumberText
+		public Text E_Text_CostNumberText
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_CostNumberText == null )
      			{
-		    		this.m_E_Text_CostNumberText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"CostItem/E_Text_CostNumber");
+		    		this.m_E_Text_CostNumberText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"CostItem/E_Text_CostNumber");
      			}
      			return this.m_E_Text_CostNumberText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_DiamondNumberText
+		public Text E_Text_DiamondNumberText
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_DiamondNumberText == null )
      			{
-		    		this.m_E_Text_DiamondNumberText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_DiamondNumber");
+		    		this.m_E_Text_DiamondNumberText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_DiamondNumber");
      			}
      			return this.m_E_Text_DiamondNumberText;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ItemImageIcon10Image
+		public Image E_ItemImageIcon10Image
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ItemImageIcon10Image == null )
      			{
-		    		this.m_E_ItemImageIcon10Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ItemImageIcon10");
+		    		this.m_E_ItemImageIcon10Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ItemImageIcon10");
      			}
      			return this.m_E_ItemImageIcon10Image;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_ChouKaButton
+		public Button E_Btn_ChouKaButton
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ChouKaButton == null )
      			{
-		    		this.m_E_Btn_ChouKaButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_ChouKa");
+		    		this.m_E_Btn_ChouKaButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_ChouKa");
      			}
      			return this.m_E_Btn_ChouKaButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_ChouKaImage
+		public Image E_Btn_ChouKaImage
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ChouKaImage == null )
      			{
-		    		this.m_E_Btn_ChouKaImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_ChouKa");
+		    		this.m_E_Btn_ChouKaImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_ChouKa");
      			}
      			return this.m_E_Btn_ChouKaImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_ChouKaTenButton
+		public Button E_Btn_ChouKaTenButton
      	{
      		get
      		{
@@ -120,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ChouKaTenButton == null )
      			{
-		    		this.m_E_Btn_ChouKaTenButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_ChouKaTen");
+		    		this.m_E_Btn_ChouKaTenButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_ChouKaTen");
      			}
      			return this.m_E_Btn_ChouKaTenButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_ChouKaTenImage
+		public Image E_Btn_ChouKaTenImage
      	{
      		get
      		{
@@ -137,13 +137,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ChouKaTenImage == null )
      			{
-		    		this.m_E_Btn_ChouKaTenImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_ChouKaTen");
+		    		this.m_E_Btn_ChouKaTenImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_ChouKaTen");
      			}
      			return this.m_E_Btn_ChouKaTenImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_RolePetHeXinButton
+		public Button E_Btn_RolePetHeXinButton
      	{
      		get
      		{
@@ -154,13 +154,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_RolePetHeXinButton == null )
      			{
-		    		this.m_E_Btn_RolePetHeXinButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_RolePetHeXin");
+		    		this.m_E_Btn_RolePetHeXinButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_RolePetHeXin");
      			}
      			return this.m_E_Btn_RolePetHeXinButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_RolePetHeXinImage
+		public Image E_Btn_RolePetHeXinImage
      	{
      		get
      		{
@@ -171,7 +171,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_RolePetHeXinImage == null )
      			{
-		    		this.m_E_Btn_RolePetHeXinImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_RolePetHeXin");
+		    		this.m_E_Btn_RolePetHeXinImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_RolePetHeXin");
      			}
      			return this.m_E_Btn_RolePetHeXinImage;
      		}
@@ -204,16 +204,16 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Image m_E_ItemImageIconImage = null;
-		private UnityEngine.UI.Text m_E_Text_CostNumberText = null;
-		private UnityEngine.UI.Text m_E_Text_DiamondNumberText = null;
-		private UnityEngine.UI.Image m_E_ItemImageIcon10Image = null;
-		private UnityEngine.UI.Button m_E_Btn_ChouKaButton = null;
-		private UnityEngine.UI.Image m_E_Btn_ChouKaImage = null;
-		private UnityEngine.UI.Button m_E_Btn_ChouKaTenButton = null;
-		private UnityEngine.UI.Image m_E_Btn_ChouKaTenImage = null;
-		private UnityEngine.UI.Button m_E_Btn_RolePetHeXinButton = null;
-		private UnityEngine.UI.Image m_E_Btn_RolePetHeXinImage = null;
+		private Image m_E_ItemImageIconImage = null;
+		private Text m_E_Text_CostNumberText = null;
+		private Text m_E_Text_DiamondNumberText = null;
+		private Image m_E_ItemImageIcon10Image = null;
+		private Button m_E_Btn_ChouKaButton = null;
+		private Image m_E_Btn_ChouKaImage = null;
+		private Button m_E_Btn_ChouKaTenButton = null;
+		private Image m_E_Btn_ChouKaTenImage = null;
+		private Button m_E_Btn_RolePetHeXinButton = null;
+		private Image m_E_Btn_RolePetHeXinImage = null;
 		public Transform uiTransform = null;
 	}
 }

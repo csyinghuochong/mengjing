@@ -1,7 +1,7 @@
 namespace ET.Server
 {
     [MessageHandler(SceneType.Gate)]
-    [FriendOfAttribute(typeof(ET.Server.Player))]
+    [FriendOfAttribute(typeof(Player))]
     public class L2G_DisconnectGateUnitHandler : MessageHandler<Scene, L2G_DisconnectGateUnit, G2L_DisconnectGateUnit>
     {
         protected override async ETTask Run(Scene scene, L2G_DisconnectGateUnit request, G2L_DisconnectGateUnit response)

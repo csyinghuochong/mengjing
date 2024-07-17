@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgRunRace))]
 	[EnableMethod]
 	public  class DlgRunRaceViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_EnterBtnButton
+		public Button E_EnterBtnButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_EnterBtnButton == null )
      			{
-		    		this.m_E_EnterBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_EnterBtn");
+		    		this.m_E_EnterBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_EnterBtn");
      			}
      			return this.m_E_EnterBtnButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_EnterBtnImage
+		public Image E_EnterBtnImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_EnterBtnImage == null )
      			{
-		    		this.m_E_EnterBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_EnterBtn");
+		    		this.m_E_EnterBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_EnterBtn");
      			}
      			return this.m_E_EnterBtnImage;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_RunRaceItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_RunRaceItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -52,7 +52,7 @@ namespace ET.Client
      			}
      			if( this.m_E_RunRaceItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_RunRaceItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RunRaceItems");
+		    		this.m_E_RunRaceItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"E_RunRaceItems");
      			}
      			return this.m_E_RunRaceItemsLoopVerticalScrollRect;
      		}
@@ -66,9 +66,9 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_EnterBtnButton = null;
-		private UnityEngine.UI.Image m_E_EnterBtnImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_RunRaceItemsLoopVerticalScrollRect = null;
+		private Button m_E_EnterBtnButton = null;
+		private Image m_E_EnterBtnImage = null;
+		private LoopVerticalScrollRect m_E_RunRaceItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

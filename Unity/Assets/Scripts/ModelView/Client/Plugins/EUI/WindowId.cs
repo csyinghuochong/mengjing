@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace ET.Client
 {
     public enum WindowID

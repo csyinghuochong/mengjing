@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
-
-
-namespace FantasyRPG
+﻿namespace FantasyRPG
 {
 
 

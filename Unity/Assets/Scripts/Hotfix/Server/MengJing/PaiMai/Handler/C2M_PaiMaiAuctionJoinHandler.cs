@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_PaiMaiAuctionJoinHandler : MessageLocationHandler<Unit, C2M_PaiMaiAuctionJoinRequest, M2C_PaiMaiAuctionJoinResponse>

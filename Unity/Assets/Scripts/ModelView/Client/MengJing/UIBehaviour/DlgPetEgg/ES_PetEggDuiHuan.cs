@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetEggDuiHuan : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_PetEggDuiHuan : Entity,IAwake<Transform>,IDestroy 
 	{
-		public UnityEngine.UI.Button E_Btn_ChouKaCoin0Button
+		public Button E_Btn_ChouKaCoin0Button
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ChouKaCoin0Button == null )
      			{
-		    		this.m_E_Btn_ChouKaCoin0Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"UIPetEggDuiHuan/E_Btn_ChouKaCoin0");
+		    		this.m_E_Btn_ChouKaCoin0Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"UIPetEggDuiHuan/E_Btn_ChouKaCoin0");
      			}
      			return this.m_E_Btn_ChouKaCoin0Button;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_ChouKaCoin0Image
+		public Image E_Btn_ChouKaCoin0Image
      	{
      		get
      		{
@@ -35,7 +35,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ChouKaCoin0Image == null )
      			{
-		    		this.m_E_Btn_ChouKaCoin0Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"UIPetEggDuiHuan/E_Btn_ChouKaCoin0");
+		    		this.m_E_Btn_ChouKaCoin0Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"UIPetEggDuiHuan/E_Btn_ChouKaCoin0");
      			}
      			return this.m_E_Btn_ChouKaCoin0Image;
      		}
@@ -61,7 +61,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_ChouKaCoin1Button
+		public Button E_Btn_ChouKaCoin1Button
      	{
      		get
      		{
@@ -72,13 +72,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ChouKaCoin1Button == null )
      			{
-		    		this.m_E_Btn_ChouKaCoin1Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"UIPetEggDuiHuan1/E_Btn_ChouKaCoin1");
+		    		this.m_E_Btn_ChouKaCoin1Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"UIPetEggDuiHuan1/E_Btn_ChouKaCoin1");
      			}
      			return this.m_E_Btn_ChouKaCoin1Button;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_ChouKaCoin1Image
+		public Image E_Btn_ChouKaCoin1Image
      	{
      		get
      		{
@@ -89,7 +89,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ChouKaCoin1Image == null )
      			{
-		    		this.m_E_Btn_ChouKaCoin1Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"UIPetEggDuiHuan1/E_Btn_ChouKaCoin1");
+		    		this.m_E_Btn_ChouKaCoin1Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"UIPetEggDuiHuan1/E_Btn_ChouKaCoin1");
      			}
      			return this.m_E_Btn_ChouKaCoin1Image;
      		}
@@ -115,7 +115,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_ChouKaCoin2Button
+		public Button E_Btn_ChouKaCoin2Button
      	{
      		get
      		{
@@ -126,13 +126,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ChouKaCoin2Button == null )
      			{
-		    		this.m_E_Btn_ChouKaCoin2Button = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"UIPetEggDuiHuan2/E_Btn_ChouKaCoin2");
+		    		this.m_E_Btn_ChouKaCoin2Button = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"UIPetEggDuiHuan2/E_Btn_ChouKaCoin2");
      			}
      			return this.m_E_Btn_ChouKaCoin2Button;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_ChouKaCoin2Image
+		public Image E_Btn_ChouKaCoin2Image
      	{
      		get
      		{
@@ -143,7 +143,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ChouKaCoin2Image == null )
      			{
-		    		this.m_E_Btn_ChouKaCoin2Image = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"UIPetEggDuiHuan2/E_Btn_ChouKaCoin2");
+		    		this.m_E_Btn_ChouKaCoin2Image = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"UIPetEggDuiHuan2/E_Btn_ChouKaCoin2");
      			}
      			return this.m_E_Btn_ChouKaCoin2Image;
      		}
@@ -195,14 +195,14 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_Btn_ChouKaCoin0Button = null;
-		private UnityEngine.UI.Image m_E_Btn_ChouKaCoin0Image = null;
+		private Button m_E_Btn_ChouKaCoin0Button = null;
+		private Image m_E_Btn_ChouKaCoin0Image = null;
 		private EntityRef<ES_CostItem> m_es_costitem_0 = null;
-		private UnityEngine.UI.Button m_E_Btn_ChouKaCoin1Button = null;
-		private UnityEngine.UI.Image m_E_Btn_ChouKaCoin1Image = null;
+		private Button m_E_Btn_ChouKaCoin1Button = null;
+		private Image m_E_Btn_ChouKaCoin1Image = null;
 		private EntityRef<ES_CostItem> m_es_costitem_1 = null;
-		private UnityEngine.UI.Button m_E_Btn_ChouKaCoin2Button = null;
-		private UnityEngine.UI.Image m_E_Btn_ChouKaCoin2Image = null;
+		private Button m_E_Btn_ChouKaCoin2Button = null;
+		private Image m_E_Btn_ChouKaCoin2Image = null;
 		private EntityRef<ES_CostItem> m_es_costitem_2 = null;
 		public Transform uiTransform = null;
 	}

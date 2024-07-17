@@ -1,13 +1,14 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgPaiMaiSellPrice))]
 	[EnableMethod]
 	public  class DlgPaiMaiSellPriceViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_ImageButtonButton
+		public Button E_ImageButtonButton
      	{
      		get
      		{
@@ -18,13 +19,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonButton == null )
      			{
-		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ImageButton");
+		    		this.m_E_ImageButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ImageButton");
      			}
      			return this.m_E_ImageButtonButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageButtonImage
+		public Image E_ImageButtonImage
      	{
      		get
      		{
@@ -35,7 +36,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageButtonImage == null )
      			{
-		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageButton");
+		    		this.m_E_ImageButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageButton");
      			}
      			return this.m_E_ImageButtonImage;
      		}
@@ -61,7 +62,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_ChuShouButton
+		public Button E_Btn_ChuShouButton
      	{
      		get
      		{
@@ -72,13 +73,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ChuShouButton == null )
      			{
-		    		this.m_E_Btn_ChuShouButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_ChuShou");
+		    		this.m_E_Btn_ChuShouButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_ChuShou");
      			}
      			return this.m_E_Btn_ChuShouButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_ChuShouImage
+		public Image E_Btn_ChuShouImage
      	{
      		get
      		{
@@ -89,13 +90,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_ChuShouImage == null )
      			{
-		    		this.m_E_Btn_ChuShouImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_ChuShou");
+		    		this.m_E_Btn_ChuShouImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_ChuShou");
      			}
      			return this.m_E_Btn_ChuShouImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_TuijianText
+		public Text E_Lab_TuijianText
      	{
      		get
      		{
@@ -106,13 +107,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_TuijianText == null )
      			{
-		    		this.m_E_Lab_TuijianText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"ShowShangJia/Image1/E_Lab_Tuijian");
+		    		this.m_E_Lab_TuijianText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"ShowShangJia/Image1/E_Lab_Tuijian");
      			}
      			return this.m_E_Lab_TuijianText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_NameText
+		public Text E_Lab_NameText
      	{
      		get
      		{
@@ -123,13 +124,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_NameText == null )
      			{
-		    		this.m_E_Lab_NameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_Name");
+		    		this.m_E_Lab_NameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_Name");
      			}
      			return this.m_E_Lab_NameText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_AddButton
+		public Button E_Btn_AddButton
      	{
      		get
      		{
@@ -140,13 +141,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_AddButton == null )
      			{
-		    		this.m_E_Btn_AddButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"SellPriceSet/E_Btn_Add");
+		    		this.m_E_Btn_AddButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"SellPriceSet/E_Btn_Add");
      			}
      			return this.m_E_Btn_AddButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_AddImage
+		public Image E_Btn_AddImage
      	{
      		get
      		{
@@ -157,13 +158,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_AddImage == null )
      			{
-		    		this.m_E_Btn_AddImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"SellPriceSet/E_Btn_Add");
+		    		this.m_E_Btn_AddImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"SellPriceSet/E_Btn_Add");
      			}
      			return this.m_E_Btn_AddImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_CostButton
+		public Button E_Btn_CostButton
      	{
      		get
      		{
@@ -174,13 +175,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CostButton == null )
      			{
-		    		this.m_E_Btn_CostButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"SellPriceSet/E_Btn_Cost");
+		    		this.m_E_Btn_CostButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"SellPriceSet/E_Btn_Cost");
      			}
      			return this.m_E_Btn_CostButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_CostImage
+		public Image E_Btn_CostImage
      	{
      		get
      		{
@@ -191,13 +192,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CostImage == null )
      			{
-		    		this.m_E_Btn_CostImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"SellPriceSet/E_Btn_Cost");
+		    		this.m_E_Btn_CostImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"SellPriceSet/E_Btn_Cost");
      			}
      			return this.m_E_Btn_CostImage;
      		}
      	}
 
-		public UnityEngine.UI.InputField E_PriceInputFieldInputField
+		public InputField E_PriceInputFieldInputField
      	{
      		get
      		{
@@ -208,13 +209,13 @@ namespace ET.Client
      			}
      			if( this.m_E_PriceInputFieldInputField == null )
      			{
-		    		this.m_E_PriceInputFieldInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"SellPriceSet/E_PriceInputField");
+		    		this.m_E_PriceInputFieldInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"SellPriceSet/E_PriceInputField");
      			}
      			return this.m_E_PriceInputFieldInputField;
      		}
      	}
 
-		public UnityEngine.UI.Image E_PriceInputFieldImage
+		public Image E_PriceInputFieldImage
      	{
      		get
      		{
@@ -225,13 +226,13 @@ namespace ET.Client
      			}
      			if( this.m_E_PriceInputFieldImage == null )
      			{
-		    		this.m_E_PriceInputFieldImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"SellPriceSet/E_PriceInputField");
+		    		this.m_E_PriceInputFieldImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"SellPriceSet/E_PriceInputField");
      			}
      			return this.m_E_PriceInputFieldImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_PriceText
+		public Text E_Text_PriceText
      	{
      		get
      		{
@@ -242,13 +243,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_PriceText == null )
      			{
-		    		this.m_E_Text_PriceText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"SellPriceSet/E_PriceInputField/E_Text_Price");
+		    		this.m_E_Text_PriceText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"SellPriceSet/E_PriceInputField/E_Text_Price");
      			}
      			return this.m_E_Text_PriceText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_AddNumButton
+		public Button E_Btn_AddNumButton
      	{
      		get
      		{
@@ -259,13 +260,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_AddNumButton == null )
      			{
-		    		this.m_E_Btn_AddNumButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"SellNumSet/E_Btn_AddNum");
+		    		this.m_E_Btn_AddNumButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"SellNumSet/E_Btn_AddNum");
      			}
      			return this.m_E_Btn_AddNumButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_AddNumImage
+		public Image E_Btn_AddNumImage
      	{
      		get
      		{
@@ -276,13 +277,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_AddNumImage == null )
      			{
-		    		this.m_E_Btn_AddNumImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"SellNumSet/E_Btn_AddNum");
+		    		this.m_E_Btn_AddNumImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"SellNumSet/E_Btn_AddNum");
      			}
      			return this.m_E_Btn_AddNumImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_Btn_AddNumEventTrigger
+		public EventTrigger E_Btn_AddNumEventTrigger
      	{
      		get
      		{
@@ -293,13 +294,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_AddNumEventTrigger == null )
      			{
-		    		this.m_E_Btn_AddNumEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"SellNumSet/E_Btn_AddNum");
+		    		this.m_E_Btn_AddNumEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"SellNumSet/E_Btn_AddNum");
      			}
      			return this.m_E_Btn_AddNumEventTrigger;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Btn_CostNumButton
+		public Button E_Btn_CostNumButton
      	{
      		get
      		{
@@ -310,13 +311,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CostNumButton == null )
      			{
-		    		this.m_E_Btn_CostNumButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"SellNumSet/E_Btn_CostNum");
+		    		this.m_E_Btn_CostNumButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"SellNumSet/E_Btn_CostNum");
      			}
      			return this.m_E_Btn_CostNumButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_CostNumImage
+		public Image E_Btn_CostNumImage
      	{
      		get
      		{
@@ -327,13 +328,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CostNumImage == null )
      			{
-		    		this.m_E_Btn_CostNumImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"SellNumSet/E_Btn_CostNum");
+		    		this.m_E_Btn_CostNumImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"SellNumSet/E_Btn_CostNum");
      			}
      			return this.m_E_Btn_CostNumImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_Btn_CostNumEventTrigger
+		public EventTrigger E_Btn_CostNumEventTrigger
      	{
      		get
      		{
@@ -344,13 +345,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CostNumEventTrigger == null )
      			{
-		    		this.m_E_Btn_CostNumEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"SellNumSet/E_Btn_CostNum");
+		    		this.m_E_Btn_CostNumEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"SellNumSet/E_Btn_CostNum");
      			}
      			return this.m_E_Btn_CostNumEventTrigger;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_NumText
+		public Text E_Text_NumText
      	{
      		get
      		{
@@ -361,13 +362,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_NumText == null )
      			{
-		    		this.m_E_Text_NumText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"SellNumSet/E_Text_Num");
+		    		this.m_E_Text_NumText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"SellNumSet/E_Text_Num");
      			}
      			return this.m_E_Text_NumText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_SellSumProText
+		public Text E_Lab_SellSumProText
      	{
      		get
      		{
@@ -378,7 +379,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_SellSumProText == null )
      			{
-		    		this.m_E_Lab_SellSumProText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Lab_Time (1)/E_Lab_SellSumPro");
+		    		this.m_E_Lab_SellSumProText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Lab_Time (1)/E_Lab_SellSumPro");
      			}
      			return this.m_E_Lab_SellSumProText;
      		}
@@ -411,28 +412,28 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_ImageButtonButton = null;
-		private UnityEngine.UI.Image m_E_ImageButtonImage = null;
+		private Button m_E_ImageButtonButton = null;
+		private Image m_E_ImageButtonImage = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
-		private UnityEngine.UI.Button m_E_Btn_ChuShouButton = null;
-		private UnityEngine.UI.Image m_E_Btn_ChuShouImage = null;
-		private UnityEngine.UI.Text m_E_Lab_TuijianText = null;
-		private UnityEngine.UI.Text m_E_Lab_NameText = null;
-		private UnityEngine.UI.Button m_E_Btn_AddButton = null;
-		private UnityEngine.UI.Image m_E_Btn_AddImage = null;
-		private UnityEngine.UI.Button m_E_Btn_CostButton = null;
-		private UnityEngine.UI.Image m_E_Btn_CostImage = null;
-		private UnityEngine.UI.InputField m_E_PriceInputFieldInputField = null;
-		private UnityEngine.UI.Image m_E_PriceInputFieldImage = null;
-		private UnityEngine.UI.Text m_E_Text_PriceText = null;
-		private UnityEngine.UI.Button m_E_Btn_AddNumButton = null;
-		private UnityEngine.UI.Image m_E_Btn_AddNumImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_Btn_AddNumEventTrigger = null;
-		private UnityEngine.UI.Button m_E_Btn_CostNumButton = null;
-		private UnityEngine.UI.Image m_E_Btn_CostNumImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_Btn_CostNumEventTrigger = null;
-		private UnityEngine.UI.Text m_E_Text_NumText = null;
-		private UnityEngine.UI.Text m_E_Lab_SellSumProText = null;
+		private Button m_E_Btn_ChuShouButton = null;
+		private Image m_E_Btn_ChuShouImage = null;
+		private Text m_E_Lab_TuijianText = null;
+		private Text m_E_Lab_NameText = null;
+		private Button m_E_Btn_AddButton = null;
+		private Image m_E_Btn_AddImage = null;
+		private Button m_E_Btn_CostButton = null;
+		private Image m_E_Btn_CostImage = null;
+		private InputField m_E_PriceInputFieldInputField = null;
+		private Image m_E_PriceInputFieldImage = null;
+		private Text m_E_Text_PriceText = null;
+		private Button m_E_Btn_AddNumButton = null;
+		private Image m_E_Btn_AddNumImage = null;
+		private EventTrigger m_E_Btn_AddNumEventTrigger = null;
+		private Button m_E_Btn_CostNumButton = null;
+		private Image m_E_Btn_CostNumImage = null;
+		private EventTrigger m_E_Btn_CostNumEventTrigger = null;
+		private Text m_E_Text_NumText = null;
+		private Text m_E_Lab_SellSumProText = null;
 		public Transform uiTransform = null;
 	}
 }

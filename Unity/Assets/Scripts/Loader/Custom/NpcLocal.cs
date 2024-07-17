@@ -29,7 +29,7 @@ public class NpcLocal : MonoBehaviour
         this.HeadPos = this.transform.Find("NamePoint");
         if (this.HeadPos == null)
         {
-            UnityEngine.Debug.LogError($"NamePoint==null {this.gameObject.name}");
+            Debug.LogError($"NamePoint==null {this.gameObject.name}");
         }
     }
 
@@ -37,7 +37,7 @@ public class NpcLocal : MonoBehaviour
     {
         if (this.HeadBar != null)
         {
-            GameObject.Destroy(this.HeadBar);
+            Destroy(this.HeadBar);
             this.HeadBar = null;
         }
     }
@@ -52,7 +52,7 @@ public class NpcLocal : MonoBehaviour
         float distance = Vector3.Distance(Target.position, this.transform.position);
         if (distance < 15f && this.HeadBar == null)
         {
-            this.HeadBar = GameObject.Instantiate(this.AssetBundle);
+            this.HeadBar = Instantiate(this.AssetBundle);
             this.HeadBar.transform.Find("Lab_NpcName").GetComponent<Text>().text = this.NpcName;
             this.HeadBar.transform.Find("Lab_HeadSpeak").GetComponent<Text>().text = this.NpcSpeak;
             this.HeadBar.transform.SetParent(this.Blood.transform);
@@ -60,7 +60,7 @@ public class NpcLocal : MonoBehaviour
         }
         if (distance > 15f && this.HeadBar != null)
         {
-            GameObject.Destroy(this.HeadBar);
+            Destroy(this.HeadBar);
             this.HeadBar = null;
         }
 

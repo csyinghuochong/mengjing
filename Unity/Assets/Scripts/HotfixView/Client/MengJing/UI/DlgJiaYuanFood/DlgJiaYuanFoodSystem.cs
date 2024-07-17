@@ -1,10 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [Event(SceneType.Demo)]
     public class DataUpdate_HuiShouSelect_DlgJiaYuanFoodRefresh: AEvent<Scene, DataUpdate_HuiShouSelect>

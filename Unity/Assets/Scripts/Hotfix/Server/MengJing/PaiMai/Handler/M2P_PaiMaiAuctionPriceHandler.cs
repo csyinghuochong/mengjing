@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.PaiMai)]
     public class M2P_PaiMaiAuctionPriceHandler : MessageHandler<Scene, M2P_PaiMaiAuctionPriceRequest, P2M_PaiMaiAuctionPriceResponse>

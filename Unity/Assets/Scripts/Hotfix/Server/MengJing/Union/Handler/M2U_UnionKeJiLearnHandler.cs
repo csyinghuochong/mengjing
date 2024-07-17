@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Union)]
     public class M2U_UnionKeJiLearnHandler : MessageHandler<Scene, M2U_UnionKeJiLearnRequest, U2M_UnionKeJiLearnResponse>

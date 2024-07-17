@@ -1,12 +1,11 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ShouJiTreasure : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_ShouJiTreasure : Entity,IAwake<Transform>,IDestroy 
 	{
 		public GameObject TypeListNode;
 		public GameObject UIShouJiTreasureType;

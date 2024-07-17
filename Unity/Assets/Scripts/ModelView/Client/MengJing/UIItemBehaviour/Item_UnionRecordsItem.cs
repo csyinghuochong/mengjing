@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -19,7 +19,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.UI.Image E_HeadIconImage
+		public Image E_HeadIconImage
      	{
      		get
      		{
@@ -32,18 +32,18 @@ namespace ET.Client
      			{
      				if( this.m_E_HeadIconImage == null )
      				{
-		    			this.m_E_HeadIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_HeadIcon");
+		    			this.m_E_HeadIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_HeadIcon");
      				}
      				return this.m_E_HeadIconImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_HeadIcon");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_HeadIcon");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextContentText
+		public Text E_TextContentText
      	{
      		get
      		{
@@ -56,13 +56,13 @@ namespace ET.Client
      			{
      				if( this.m_E_TextContentText == null )
      				{
-		    			this.m_E_TextContentText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextContent");
+		    			this.m_E_TextContentText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextContent");
      				}
      				return this.m_E_TextContentText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_TextContent");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_TextContent");
      			}
      		}
      	}
@@ -75,8 +75,8 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.UI.Image m_E_HeadIconImage = null;
-		private UnityEngine.UI.Text m_E_TextContentText = null;
+		private Image m_E_HeadIconImage = null;
+		private Text m_E_TextContentText = null;
 		public Transform uiTransform = null;
 	}
 }

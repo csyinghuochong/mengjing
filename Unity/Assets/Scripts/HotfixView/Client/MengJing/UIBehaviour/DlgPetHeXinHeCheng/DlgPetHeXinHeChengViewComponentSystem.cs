@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [EntitySystemOf(typeof (DlgPetHeXinHeChengViewComponent))]
     [FriendOf(typeof (DlgPetHeXinHeChengViewComponent))]

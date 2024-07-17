@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ET.Server
 {
@@ -11,13 +8,13 @@ namespace ET.Server
     public static partial class TitleComponentSSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.TitleComponentS self)
+        private static void Awake(this TitleComponentS self)
         {
             self.TitleList.Clear();
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.TitleComponentS self)
+        private static void Destroy(this TitleComponentS self)
         {
         }
 

@@ -1,7 +1,5 @@
 ﻿
 
-using System;
-
 namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]

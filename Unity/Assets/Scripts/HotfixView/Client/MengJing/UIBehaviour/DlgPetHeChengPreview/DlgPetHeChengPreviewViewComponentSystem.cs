@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgPetHeChengPreviewViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgPetHeChengPreviewViewComponent))]
+	[FriendOfAttribute(typeof(DlgPetHeChengPreviewViewComponent))]
 	public static partial class DlgPetHeChengPreviewViewComponentSystem
 	{
 		[EntitySystem]

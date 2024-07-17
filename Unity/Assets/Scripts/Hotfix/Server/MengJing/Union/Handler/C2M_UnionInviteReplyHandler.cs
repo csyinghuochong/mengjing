@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_UnionInviteReplyHandler : MessageLocationHandler<Unit, C2M_UnionInviteReplyRequest>

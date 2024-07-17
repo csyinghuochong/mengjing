@@ -1,9 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
+﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using UnityEngine;
+using UnityEngine.UI;
 
-[System.Reflection.Obfuscation(Exclude = true)]
+[Obfuscation(Exclude = true)]
 class FPS : MonoBehaviour
 {
     void Update()
@@ -32,10 +33,10 @@ class FPS : MonoBehaviour
     private void UpdateTick()
     {
         mFrameCount++;
-        long nCurTime = TickToMilliSec(System.DateTime.Now.Ticks);
+        long nCurTime = TickToMilliSec(DateTime.Now.Ticks);
         if (mLastFrameTime == 0)
         {
-            mLastFrameTime = TickToMilliSec(System.DateTime.Now.Ticks);
+            mLastFrameTime = TickToMilliSec(DateTime.Now.Ticks);
         }
 
         if ((nCurTime - mLastFrameTime) >= 1000)

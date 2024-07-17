@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgGemMakeViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgGemMakeViewComponent))]
+	[FriendOfAttribute(typeof(DlgGemMakeViewComponent))]
 	public static partial class DlgGemMakeViewComponentSystem
 	{
 		[EntitySystem]

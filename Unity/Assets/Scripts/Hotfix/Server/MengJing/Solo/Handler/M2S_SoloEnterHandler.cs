@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Solo)]
     public class M2S_SoloEnterHandler : MessageHandler<Scene, M2S_SoloEnterRequest, S2M_SoloEnterResponse>

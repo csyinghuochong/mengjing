@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgChat))]
 	[EnableMethod]
 	public  class DlgChatViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
+		public ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_FunctionSetBtnToggleGroup == null )
      			{
-		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<UnityEngine.UI.ToggleGroup>(this.uiTransform.gameObject,"Left/E_FunctionSetBtn");
+		    		this.m_E_FunctionSetBtnToggleGroup = UIFindHelper.FindDeepChild<ToggleGroup>(this.uiTransform.gameObject,"Left/E_FunctionSetBtn");
      			}
      			return this.m_E_FunctionSetBtnToggleGroup;
      		}
      	}
 
-		public UnityEngine.UI.Button E_CloseButton
+		public Button E_CloseButton
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseButton == null )
      			{
-		    		this.m_E_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Rigt/E_Close");
+		    		this.m_E_CloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Rigt/E_Close");
      			}
      			return this.m_E_CloseButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_CloseImage
+		public Image E_CloseImage
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CloseImage == null )
      			{
-		    		this.m_E_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Rigt/E_Close");
+		    		this.m_E_CloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Rigt/E_Close");
      			}
      			return this.m_E_CloseImage;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_ChatItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_ChatItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ChatItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_ChatItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Rigt/E_ChatItems");
+		    		this.m_E_ChatItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Rigt/E_ChatItems");
      			}
      			return this.m_E_ChatItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.InputField E_ChatInputField
+		public InputField E_ChatInputField
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ChatInputField == null )
      			{
-		    		this.m_E_ChatInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"Rigt/ChatSendNode/E_Chat");
+		    		this.m_E_ChatInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"Rigt/ChatSendNode/E_Chat");
      			}
      			return this.m_E_ChatInputField;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ChatImage
+		public Image E_ChatImage
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ChatImage == null )
      			{
-		    		this.m_E_ChatImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Rigt/ChatSendNode/E_Chat");
+		    		this.m_E_ChatImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Rigt/ChatSendNode/E_Chat");
      			}
      			return this.m_E_ChatImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_SendButton
+		public Button E_SendButton
      	{
      		get
      		{
@@ -120,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_E_SendButton == null )
      			{
-		    		this.m_E_SendButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Rigt/ChatSendNode/E_Send");
+		    		this.m_E_SendButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Rigt/ChatSendNode/E_Send");
      			}
      			return this.m_E_SendButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_SendImage
+		public Image E_SendImage
      	{
      		get
      		{
@@ -137,7 +137,7 @@ namespace ET.Client
      			}
      			if( this.m_E_SendImage == null )
      			{
-		    		this.m_E_SendImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Rigt/ChatSendNode/E_Send");
+		    		this.m_E_SendImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Rigt/ChatSendNode/E_Send");
      			}
      			return this.m_E_SendImage;
      		}
@@ -156,14 +156,14 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
-		private UnityEngine.UI.Button m_E_CloseButton = null;
-		private UnityEngine.UI.Image m_E_CloseImage = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_ChatItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.InputField m_E_ChatInputField = null;
-		private UnityEngine.UI.Image m_E_ChatImage = null;
-		private UnityEngine.UI.Button m_E_SendButton = null;
-		private UnityEngine.UI.Image m_E_SendImage = null;
+		private ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
+		private Button m_E_CloseButton = null;
+		private Image m_E_CloseImage = null;
+		private LoopVerticalScrollRect m_E_ChatItemsLoopVerticalScrollRect = null;
+		private InputField m_E_ChatInputField = null;
+		private Image m_E_ChatImage = null;
+		private Button m_E_SendButton = null;
+		private Image m_E_SendImage = null;
 		public Transform uiTransform = null;
 	}
 }

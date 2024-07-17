@@ -25,12 +25,12 @@ namespace ET.Server
         }
         
         [EntitySystem]
-        private static void Awake(this ET.Server.RoleBullet1Componet self)
+        private static void Awake(this RoleBullet1Componet self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.RoleBullet1Componet self)
+        private static void Destroy(this RoleBullet1Componet self)
         {
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
         }

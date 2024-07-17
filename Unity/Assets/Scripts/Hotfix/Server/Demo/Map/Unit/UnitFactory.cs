@@ -1,6 +1,6 @@
 ﻿using System;
-using Unity.Mathematics;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET.Server
 {
@@ -19,7 +19,7 @@ namespace ET.Server
             //     UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
             // }
 
-            await UnitFactory.Create(scene, unit, player.UnitId, UnitType.Player, createRoleInfo, account, accountId);
+            await Create(scene, unit, player.UnitId, UnitType.Player, createRoleInfo, account, accountId);
 
             //UnitCacheHelper.AddOrUpdateUnitAllCache(unit);
 

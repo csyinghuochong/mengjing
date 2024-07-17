@@ -263,7 +263,7 @@ namespace ET
             List<DungeonConfig> dungeonConfigs = DungeonConfigCategory.Instance.GetAll().Values.ToList();
             for (int i = 0; i < dungeonConfigs.Count; i++)
             {
-                List<int> allmonster = SceneConfigHelper.GetLocalDungeonMonsters(dungeonConfigs[i].Id);
+                List<int> allmonster = GetLocalDungeonMonsters(dungeonConfigs[i].Id);
                 if (allmonster.Contains(monsterId))
                 {
                     ConfigData.MonsterToFuben.Add(monsterId, dungeonConfigs[i].Id);

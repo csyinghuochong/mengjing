@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgHuntViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgHuntViewComponent))]
+	[FriendOfAttribute(typeof(DlgHuntViewComponent))]
 	public static partial class DlgHuntViewComponentSystem
 	{
 		[EntitySystem]

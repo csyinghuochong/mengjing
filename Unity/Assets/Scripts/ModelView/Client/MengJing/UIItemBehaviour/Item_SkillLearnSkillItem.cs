@@ -1,7 +1,7 @@
-﻿
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -23,7 +23,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.UI.Text E_SkillNameTextText
+		public Text E_SkillNameTextText
      	{
      		get
      		{
@@ -36,18 +36,18 @@ namespace ET.Client
      			{
      				if( this.m_E_SkillNameTextText == null )
      				{
-		    			this.m_E_SkillNameTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_SkillNameText");
+		    			this.m_E_SkillNameTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_SkillNameText");
      				}
      				return this.m_E_SkillNameTextText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_SkillNameText");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_SkillNameText");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_SkillIconDiImage
+		public Image E_Img_SkillIconDiImage
      	{
      		get
      		{
@@ -60,18 +60,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Img_SkillIconDiImage == null )
      				{
-		    			this.m_E_Img_SkillIconDiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_SkillIconDi");
+		    			this.m_E_Img_SkillIconDiImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_SkillIconDi");
      				}
      				return this.m_E_Img_SkillIconDiImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_SkillIconDi");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_SkillIconDi");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Button E_SkillIconImgButton
+		public Button E_SkillIconImgButton
      	{
      		get
      		{
@@ -84,18 +84,18 @@ namespace ET.Client
      			{
      				if( this.m_E_SkillIconImgButton == null )
      				{
-		    			this.m_E_SkillIconImgButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Img_SkillIconDi/E_SkillIconImg");
+		    			this.m_E_SkillIconImgButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Img_SkillIconDi/E_SkillIconImg");
      				}
      				return this.m_E_SkillIconImgButton;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Img_SkillIconDi/E_SkillIconImg");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Img_SkillIconDi/E_SkillIconImg");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_SkillIconImgImage
+		public Image E_SkillIconImgImage
      	{
      		get
      		{
@@ -108,18 +108,18 @@ namespace ET.Client
      			{
      				if( this.m_E_SkillIconImgImage == null )
      				{
-		    			this.m_E_SkillIconImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_SkillIconDi/E_SkillIconImg");
+		    			this.m_E_SkillIconImgImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_SkillIconDi/E_SkillIconImg");
      				}
      				return this.m_E_SkillIconImgImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_SkillIconDi/E_SkillIconImg");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_SkillIconDi/E_SkillIconImg");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_BorderImgImage
+		public Image E_BorderImgImage
      	{
      		get
      		{
@@ -132,18 +132,18 @@ namespace ET.Client
      			{
      				if( this.m_E_BorderImgImage == null )
      				{
-		    			this.m_E_BorderImgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_SkillIconDi/E_BorderImg");
+		    			this.m_E_BorderImgImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_SkillIconDi/E_BorderImg");
      				}
      				return this.m_E_BorderImgImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_SkillIconDi/E_BorderImg");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_SkillIconDi/E_BorderImg");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_ReddotImage
+		public Image E_ReddotImage
      	{
      		get
      		{
@@ -156,13 +156,13 @@ namespace ET.Client
      			{
      				if( this.m_E_ReddotImage == null )
      				{
-		    			this.m_E_ReddotImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_SkillIconDi/E_Reddot");
+		    			this.m_E_ReddotImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_SkillIconDi/E_Reddot");
      				}
      				return this.m_E_ReddotImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_SkillIconDi/E_Reddot");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_SkillIconDi/E_Reddot");
      			}
      		}
      	}
@@ -179,12 +179,12 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.UI.Text m_E_SkillNameTextText = null;
-		private UnityEngine.UI.Image m_E_Img_SkillIconDiImage = null;
-		private UnityEngine.UI.Button m_E_SkillIconImgButton = null;
-		private UnityEngine.UI.Image m_E_SkillIconImgImage = null;
-		private UnityEngine.UI.Image m_E_BorderImgImage = null;
-		private UnityEngine.UI.Image m_E_ReddotImage = null;
+		private Text m_E_SkillNameTextText = null;
+		private Image m_E_Img_SkillIconDiImage = null;
+		private Button m_E_SkillIconImgButton = null;
+		private Image m_E_SkillIconImgImage = null;
+		private Image m_E_BorderImgImage = null;
+		private Image m_E_ReddotImage = null;
 		public Transform uiTransform = null;
 	}
 }

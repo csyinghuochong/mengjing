@@ -1,5 +1,5 @@
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ET.Client
 {
@@ -8,12 +8,12 @@ namespace ET.Client
     public static partial class PetComponentCSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.PetComponentC self)
+        private static void Awake(this PetComponentC self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Client.PetComponentC self)
+        private static void Destroy(this PetComponentC self)
         {
         }
 

@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgRandomOpen))]
 	[EnableMethod]
 	public  class DlgRandomOpenViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Text E_Text_LayerText
+		public Text E_Text_LayerText
      	{
      		get
      		{
@@ -18,7 +18,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_LayerText == null )
      			{
-		    		this.m_E_Text_LayerText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Text_Layer");
+		    		this.m_E_Text_LayerText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Text_Layer");
      			}
      			return this.m_E_Text_LayerText;
      		}
@@ -30,7 +30,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Text m_E_Text_LayerText = null;
+		private Text m_E_Text_LayerText = null;
 		public Transform uiTransform = null;
 	}
 }

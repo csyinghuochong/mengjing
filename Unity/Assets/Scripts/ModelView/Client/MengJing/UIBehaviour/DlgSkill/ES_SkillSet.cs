@@ -1,12 +1,12 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_SkillSet : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_SkillSet : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public List<GameObject> SkillSetIconList = new();
 		public GameObject SkillIconItemCopy;
@@ -16,7 +16,7 @@ namespace ET.Client
 		public List<BagInfo> ShowBagInfos = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemCommonItems;
 		
-		public UnityEngine.RectTransform EG_SkillIPositionSetRectTransform
+		public RectTransform EG_SkillIPositionSetRectTransform
      	{
      		get
      		{
@@ -27,13 +27,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_SkillIPositionSetRectTransform == null )
      			{
-		    		this.m_EG_SkillIPositionSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_SkillIPositionSet");
+		    		this.m_EG_SkillIPositionSetRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Left/EG_SkillIPositionSet");
      			}
      			return this.m_EG_SkillIPositionSetRectTransform;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_SkillIconItemRectTransform
+		public RectTransform EG_SkillIconItemRectTransform
      	{
      		get
      		{
@@ -44,13 +44,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_SkillIconItemRectTransform == null )
      			{
-		    		this.m_EG_SkillIconItemRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Left/EG_SkillIconItem");
+		    		this.m_EG_SkillIconItemRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Left/EG_SkillIconItem");
      			}
      			return this.m_EG_SkillIconItemRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_CommonItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_CommonItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -61,13 +61,13 @@ namespace ET.Client
      			}
      			if( this.m_E_CommonItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_CommonItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_CommonItems");
+		    		this.m_E_CommonItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_CommonItems");
      			}
      			return this.m_E_CommonItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_SkillSetItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_SkillSetItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -78,7 +78,7 @@ namespace ET.Client
      			}
      			if( this.m_E_SkillSetItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_SkillSetItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_SkillSetItems");
+		    		this.m_E_SkillSetItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_SkillSetItems");
      			}
      			return this.m_E_SkillSetItemsLoopVerticalScrollRect;
      		}
@@ -105,10 +105,10 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EG_SkillIPositionSetRectTransform = null;
-		private UnityEngine.RectTransform m_EG_SkillIconItemRectTransform = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_CommonItemsLoopVerticalScrollRect = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_SkillSetItemsLoopVerticalScrollRect = null;
+		private RectTransform m_EG_SkillIPositionSetRectTransform = null;
+		private RectTransform m_EG_SkillIconItemRectTransform = null;
+		private LoopVerticalScrollRect m_E_CommonItemsLoopVerticalScrollRect = null;
+		private LoopVerticalScrollRect m_E_SkillSetItemsLoopVerticalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

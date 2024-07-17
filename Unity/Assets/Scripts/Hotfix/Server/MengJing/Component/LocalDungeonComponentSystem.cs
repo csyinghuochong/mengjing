@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 
@@ -9,14 +8,14 @@ namespace ET.Server
     public static partial class LocalDungeonComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.LocalDungeonComponent self)
+        private static void Awake(this LocalDungeonComponent self)
         {
             self.RandomJingLing = 0;
             self.RandomMonster = 0;
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.LocalDungeonComponent self)
+        private static void Destroy(this LocalDungeonComponent self)
         {
         }
 

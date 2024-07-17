@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -575,7 +573,7 @@ namespace ET.Client
 
         public static void CopyBuffer(this DlgJiaYuanMain self)
         {
-            UnityEngine.GUIUtility.systemCopyBuffer = "Target String";
+            GUIUtility.systemCopyBuffer = "Target String";
         }
 
         public static void UpdateName(this DlgJiaYuanMain self, string mastername)

@@ -1,7 +1,8 @@
-﻿
-using System;
+﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[EnableMethod]
@@ -23,7 +24,7 @@ namespace ET.Client
 			return this;
 		}
 
-		public UnityEngine.UI.Button E_Img_ButtonButton
+		public Button E_Img_ButtonButton
      	{
      		get
      		{
@@ -36,18 +37,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Img_ButtonButton == null )
      				{
-		    			this.m_E_Img_ButtonButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Img_Button");
+		    			this.m_E_Img_ButtonButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Img_Button");
      				}
      				return this.m_E_Img_ButtonButton;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Img_Button");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Img_Button");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_ButtonImage
+		public Image E_Img_ButtonImage
      	{
      		get
      		{
@@ -60,18 +61,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Img_ButtonImage == null )
      				{
-		    			this.m_E_Img_ButtonImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_Button");
+		    			this.m_E_Img_ButtonImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_Button");
      				}
      				return this.m_E_Img_ButtonImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_Button");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_Button");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Button E_Img_XuanZhongButton
+		public Button E_Img_XuanZhongButton
      	{
      		get
      		{
@@ -84,18 +85,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Img_XuanZhongButton == null )
      				{
-		    			this.m_E_Img_XuanZhongButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Img_XuanZhong");
+		    			this.m_E_Img_XuanZhongButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Img_XuanZhong");
      				}
      				return this.m_E_Img_XuanZhongButton;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Img_XuanZhong");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Img_XuanZhong");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_XuanZhongImage
+		public Image E_Img_XuanZhongImage
      	{
      		get
      		{
@@ -108,18 +109,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Img_XuanZhongImage == null )
      				{
-		    			this.m_E_Img_XuanZhongImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_XuanZhong");
+		    			this.m_E_Img_XuanZhongImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_XuanZhong");
      				}
      				return this.m_E_Img_XuanZhongImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Img_XuanZhong");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Img_XuanZhong");
      			}
      		}
      	}
 
-		public UnityEngine.RectTransform EG_Node_1RectTransform
+		public RectTransform EG_Node_1RectTransform
      	{
      		get
      		{
@@ -132,18 +133,18 @@ namespace ET.Client
      			{
      				if( this.m_EG_Node_1RectTransform == null )
      				{
-		    			this.m_EG_Node_1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Node_1");
+		    			this.m_EG_Node_1RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Node_1");
      				}
      				return this.m_EG_Node_1RectTransform;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Node_1");
+		    		return UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Node_1");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Button E_Img_SkillIconButton
+		public Button E_Img_SkillIconButton
      	{
      		get
      		{
@@ -156,18 +157,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Img_SkillIconButton == null )
      				{
-		    			this.m_E_Img_SkillIconButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node_1/Img_SkillIconDi/E_Img_SkillIcon");
+		    			this.m_E_Img_SkillIconButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Node_1/Img_SkillIconDi/E_Img_SkillIcon");
      				}
      				return this.m_E_Img_SkillIconButton;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node_1/Img_SkillIconDi/E_Img_SkillIcon");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Node_1/Img_SkillIconDi/E_Img_SkillIcon");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_SkillIconImage
+		public Image E_Img_SkillIconImage
      	{
      		get
      		{
@@ -180,18 +181,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Img_SkillIconImage == null )
      				{
-		    			this.m_E_Img_SkillIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node_1/Img_SkillIconDi/E_Img_SkillIcon");
+		    			this.m_E_Img_SkillIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Node_1/Img_SkillIconDi/E_Img_SkillIcon");
      				}
      				return this.m_E_Img_SkillIconImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node_1/Img_SkillIconDi/E_Img_SkillIcon");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Node_1/Img_SkillIconDi/E_Img_SkillIcon");
      			}
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_Img_SkillIconEventTrigger
+		public EventTrigger E_Img_SkillIconEventTrigger
      	{
      		get
      		{
@@ -204,18 +205,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Img_SkillIconEventTrigger == null )
      				{
-		    			this.m_E_Img_SkillIconEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"EG_Node_1/Img_SkillIconDi/E_Img_SkillIcon");
+		    			this.m_E_Img_SkillIconEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"EG_Node_1/Img_SkillIconDi/E_Img_SkillIcon");
      				}
      				return this.m_E_Img_SkillIconEventTrigger;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"EG_Node_1/Img_SkillIconDi/E_Img_SkillIcon");
+		    		return UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"EG_Node_1/Img_SkillIconDi/E_Img_SkillIcon");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonMaxButton
+		public Button E_ButtonMaxButton
      	{
      		get
      		{
@@ -228,18 +229,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ButtonMaxButton == null )
      				{
-		    			this.m_E_ButtonMaxButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonMax");
+		    			this.m_E_ButtonMaxButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonMax");
      				}
      				return this.m_E_ButtonMaxButton;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonMax");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonMax");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonMaxImage
+		public Image E_ButtonMaxImage
      	{
      		get
      		{
@@ -252,18 +253,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ButtonMaxImage == null )
      				{
-		    			this.m_E_ButtonMaxImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonMax");
+		    			this.m_E_ButtonMaxImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonMax");
      				}
      				return this.m_E_ButtonMaxImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonMax");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonMax");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonUpButton
+		public Button E_ButtonUpButton
      	{
      		get
      		{
@@ -276,18 +277,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ButtonUpButton == null )
      				{
-		    			this.m_E_ButtonUpButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonUp");
+		    			this.m_E_ButtonUpButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonUp");
      				}
      				return this.m_E_ButtonUpButton;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonUp");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonUp");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonUpImage
+		public Image E_ButtonUpImage
      	{
      		get
      		{
@@ -300,18 +301,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ButtonUpImage == null )
      				{
-		    			this.m_E_ButtonUpImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonUp");
+		    			this.m_E_ButtonUpImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonUp");
      				}
      				return this.m_E_ButtonUpImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonUp");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonUp");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonLearnButton
+		public Button E_ButtonLearnButton
      	{
      		get
      		{
@@ -324,18 +325,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ButtonLearnButton == null )
      				{
-		    			this.m_E_ButtonLearnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonLearn");
+		    			this.m_E_ButtonLearnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonLearn");
      				}
      				return this.m_E_ButtonLearnButton;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonLearn");
+		    		return UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonLearn");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonLearnImage
+		public Image E_ButtonLearnImage
      	{
      		get
      		{
@@ -348,18 +349,18 @@ namespace ET.Client
      			{
      				if( this.m_E_ButtonLearnImage == null )
      				{
-		    			this.m_E_ButtonLearnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonLearn");
+		    			this.m_E_ButtonLearnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonLearn");
      				}
      				return this.m_E_ButtonLearnImage;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonLearn");
+		    		return UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Node_1/E_ButtonLearn");
      			}
      		}
      	}
 
-		public UnityEngine.RectTransform EG_ReddotRectTransform
+		public RectTransform EG_ReddotRectTransform
      	{
      		get
      		{
@@ -372,18 +373,18 @@ namespace ET.Client
      			{
      				if( this.m_EG_ReddotRectTransform == null )
      				{
-		    			this.m_EG_ReddotRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Node_1/EG_Reddot");
+		    			this.m_EG_ReddotRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Node_1/EG_Reddot");
      				}
      				return this.m_EG_ReddotRectTransform;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Node_1/EG_Reddot");
+		    		return UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Node_1/EG_Reddot");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_SkillNameText
+		public Text E_Lab_SkillNameText
      	{
      		get
      		{
@@ -396,18 +397,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Lab_SkillNameText == null )
      				{
-		    			this.m_E_Lab_SkillNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Node_1/E_Lab_SkillName");
+		    			this.m_E_Lab_SkillNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Node_1/E_Lab_SkillName");
      				}
      				return this.m_E_Lab_SkillNameText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Node_1/E_Lab_SkillName");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Node_1/E_Lab_SkillName");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_SkillLvText
+		public Text E_Lab_SkillLvText
      	{
      		get
      		{
@@ -420,18 +421,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Lab_SkillLvText == null )
      				{
-		    			this.m_E_Lab_SkillLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Node_1/E_Lab_SkillLv");
+		    			this.m_E_Lab_SkillLvText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Node_1/E_Lab_SkillLv");
      				}
      				return this.m_E_Lab_SkillLvText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Node_1/E_Lab_SkillLv");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Node_1/E_Lab_SkillLv");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_DescText
+		public Text E_Text_DescText
      	{
      		get
      		{
@@ -444,18 +445,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Text_DescText == null )
      				{
-		    			this.m_E_Text_DescText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Node_1/E_Text_Desc");
+		    			this.m_E_Text_DescText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Node_1/E_Text_Desc");
      				}
      				return this.m_E_Text_DescText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Node_1/E_Text_Desc");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Node_1/E_Text_Desc");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_NeedSpText
+		public Text E_Lab_NeedSpText
      	{
      		get
      		{
@@ -468,18 +469,18 @@ namespace ET.Client
      			{
      				if( this.m_E_Lab_NeedSpText == null )
      				{
-		    			this.m_E_Lab_NeedSpText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Node_1/E_Lab_NeedSp");
+		    			this.m_E_Lab_NeedSpText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Node_1/E_Lab_NeedSp");
      				}
      				return this.m_E_Lab_NeedSpText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Node_1/E_Lab_NeedSp");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Node_1/E_Lab_NeedSp");
      			}
      		}
      	}
 
-		public UnityEngine.RectTransform EG_Node_2RectTransform
+		public RectTransform EG_Node_2RectTransform
      	{
      		get
      		{
@@ -492,18 +493,18 @@ namespace ET.Client
      			{
      				if( this.m_EG_Node_2RectTransform == null )
      				{
-		    			this.m_EG_Node_2RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Node_2");
+		    			this.m_EG_Node_2RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Node_2");
      				}
      				return this.m_EG_Node_2RectTransform;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Node_2");
+		    		return UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Node_2");
      			}
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_LearnLvText
+		public Text E_Text_LearnLvText
      	{
      		get
      		{
@@ -516,13 +517,13 @@ namespace ET.Client
      			{
      				if( this.m_E_Text_LearnLvText == null )
      				{
-		    			this.m_E_Text_LearnLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Node_2/E_Text_LearnLv");
+		    			this.m_E_Text_LearnLvText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Node_2/E_Text_LearnLv");
      				}
      				return this.m_E_Text_LearnLvText;
      			}
      			else
      			{
-		    		return UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Node_2/E_Text_LearnLv");
+		    		return UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Node_2/E_Text_LearnLv");
      			}
      		}
      	}
@@ -554,27 +555,27 @@ namespace ET.Client
 			this.DataId = 0;
 		}
 
-		private UnityEngine.UI.Button m_E_Img_ButtonButton = null;
-		private UnityEngine.UI.Image m_E_Img_ButtonImage = null;
-		private UnityEngine.UI.Button m_E_Img_XuanZhongButton = null;
-		private UnityEngine.UI.Image m_E_Img_XuanZhongImage = null;
-		private UnityEngine.RectTransform m_EG_Node_1RectTransform = null;
-		private UnityEngine.UI.Button m_E_Img_SkillIconButton = null;
-		private UnityEngine.UI.Image m_E_Img_SkillIconImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_Img_SkillIconEventTrigger = null;
-		private UnityEngine.UI.Button m_E_ButtonMaxButton = null;
-		private UnityEngine.UI.Image m_E_ButtonMaxImage = null;
-		private UnityEngine.UI.Button m_E_ButtonUpButton = null;
-		private UnityEngine.UI.Image m_E_ButtonUpImage = null;
-		private UnityEngine.UI.Button m_E_ButtonLearnButton = null;
-		private UnityEngine.UI.Image m_E_ButtonLearnImage = null;
-		private UnityEngine.RectTransform m_EG_ReddotRectTransform = null;
-		private UnityEngine.UI.Text m_E_Lab_SkillNameText = null;
-		private UnityEngine.UI.Text m_E_Lab_SkillLvText = null;
-		private UnityEngine.UI.Text m_E_Text_DescText = null;
-		private UnityEngine.UI.Text m_E_Lab_NeedSpText = null;
-		private UnityEngine.RectTransform m_EG_Node_2RectTransform = null;
-		private UnityEngine.UI.Text m_E_Text_LearnLvText = null;
+		private Button m_E_Img_ButtonButton = null;
+		private Image m_E_Img_ButtonImage = null;
+		private Button m_E_Img_XuanZhongButton = null;
+		private Image m_E_Img_XuanZhongImage = null;
+		private RectTransform m_EG_Node_1RectTransform = null;
+		private Button m_E_Img_SkillIconButton = null;
+		private Image m_E_Img_SkillIconImage = null;
+		private EventTrigger m_E_Img_SkillIconEventTrigger = null;
+		private Button m_E_ButtonMaxButton = null;
+		private Image m_E_ButtonMaxImage = null;
+		private Button m_E_ButtonUpButton = null;
+		private Image m_E_ButtonUpImage = null;
+		private Button m_E_ButtonLearnButton = null;
+		private Image m_E_ButtonLearnImage = null;
+		private RectTransform m_EG_ReddotRectTransform = null;
+		private Text m_E_Lab_SkillNameText = null;
+		private Text m_E_Lab_SkillLvText = null;
+		private Text m_E_Text_DescText = null;
+		private Text m_E_Lab_NeedSpText = null;
+		private RectTransform m_EG_Node_2RectTransform = null;
+		private Text m_E_Text_LearnLvText = null;
 		public Transform uiTransform = null;
 	}
 }

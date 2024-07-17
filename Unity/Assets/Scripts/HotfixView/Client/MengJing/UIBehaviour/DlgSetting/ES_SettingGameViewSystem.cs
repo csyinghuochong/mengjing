@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Profiling;
 using UnityEngine.UI;
 
 namespace ET.Client
@@ -506,10 +507,10 @@ namespace ET.Client
                 return;
             }
 
-            long monouse = UnityEngine.Profiling.Profiler.GetMonoUsedSizeLong(); //使用的
-            long totalallocated = UnityEngine.Profiling.Profiler.GetTotalAllocatedMemoryLong(); //unity分配的
-            long totalreserved = UnityEngine.Profiling.Profiler.GetTotalReservedMemoryLong(); //总内存
-            long unusedreserved = UnityEngine.Profiling.Profiler.GetTotalUnusedReservedMemoryLong(); //未使用的内存
+            long monouse = Profiler.GetMonoUsedSizeLong(); //使用的
+            long totalallocated = Profiler.GetTotalAllocatedMemoryLong(); //unity分配的
+            long totalreserved = Profiler.GetTotalReservedMemoryLong(); //总内存
+            long unusedreserved = Profiler.GetTotalUnusedReservedMemoryLong(); //未使用的内存
 
             StringBuilder stringBuilder = StringBuilderData.stringBuilder;
             stringBuilder.Clear();

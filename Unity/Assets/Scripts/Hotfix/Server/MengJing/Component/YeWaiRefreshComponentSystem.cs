@@ -1,7 +1,5 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using MongoDB.Driver.Core.Servers;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -28,7 +26,7 @@ namespace ET.Server
         }
         
         [EntitySystem]
-        private static void Awake(this ET.Server.YeWaiRefreshComponent self)
+        private static void Awake(this YeWaiRefreshComponent self)
         {
             self.LogTest = false;
             self.RandomTime = RandomHelper.RandomNumber(0, 10);
@@ -36,7 +34,7 @@ namespace ET.Server
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Server.YeWaiRefreshComponent self)
+        private static void Destroy(this YeWaiRefreshComponent self)
         {
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }

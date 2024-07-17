@@ -1,5 +1,8 @@
-using MemoryPack;
 using System.Collections.Generic;
+using MemoryPack;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.Options;
+using Unity.Mathematics;
 
 namespace ET
 {
@@ -577,10 +580,10 @@ namespace ET
         }
 
         [MemoryPackOrder(0)]
-        public List<Unity.Mathematics.float3> Points { get; set; } = new();
+        public List<float3> Points { get; set; } = new();
 
         [MemoryPackOrder(1)]
-        public Unity.Mathematics.quaternion Rotation { get; set; }
+        public quaternion Rotation { get; set; }
 
         [MemoryPackOrder(2)]
         public int TurnSpeed { get; set; }
@@ -619,12 +622,12 @@ namespace ET
         public int Type { get; set; }
 
         [MemoryPackOrder(3)]
-        public Unity.Mathematics.float3 Position { get; set; }
+        public float3 Position { get; set; }
 
         [MemoryPackOrder(4)]
-        public Unity.Mathematics.float3 Forward { get; set; }
+        public float3 Forward { get; set; }
 
-        [MongoDB.Bson.Serialization.Attributes.BsonDictionaryOptions(MongoDB.Bson.Serialization.Options.DictionaryRepresentation.ArrayOfArrays)]
+        [BsonDictionaryOptions(DictionaryRepresentation.ArrayOfArrays)]
         [MemoryPackOrder(5)]
         public Dictionary<int, long> KV { get; set; } = new();
         [MemoryPackOrder(6)]
@@ -911,7 +914,7 @@ namespace ET
         public int RpcId { get; set; }
 
         [MemoryPackOrder(1)]
-        public Unity.Mathematics.float3 Position { get; set; }
+        public float3 Position { get; set; }
 
         public override void Dispose()
         {
@@ -965,10 +968,10 @@ namespace ET
         public long Id { get; set; }
 
         [MemoryPackOrder(1)]
-        public Unity.Mathematics.float3 Position { get; set; }
+        public float3 Position { get; set; }
 
         [MemoryPackOrder(2)]
-        public List<Unity.Mathematics.float3> Points { get; set; } = new();
+        public List<float3> Points { get; set; } = new();
 
         public override void Dispose()
         {
@@ -1001,10 +1004,10 @@ namespace ET
         public long Id { get; set; }
 
         [MemoryPackOrder(2)]
-        public Unity.Mathematics.float3 Position { get; set; }
+        public float3 Position { get; set; }
 
         [MemoryPackOrder(3)]
-        public Unity.Mathematics.quaternion Rotation { get; set; }
+        public quaternion Rotation { get; set; }
 
         public override void Dispose()
         {

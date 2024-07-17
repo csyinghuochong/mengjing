@@ -10,7 +10,7 @@ namespace ET.Server
     public static partial class SoloSceneComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.SoloSceneComponent self)
+        private static void Awake(this SoloSceneComponent self)
         {
         }
 

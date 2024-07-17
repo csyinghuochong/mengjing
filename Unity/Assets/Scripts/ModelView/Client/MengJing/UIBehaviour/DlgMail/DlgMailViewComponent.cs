@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgMail))]
 	[EnableMethod]
 	public  class DlgMailViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_Btn_CloseButton
+		public Button E_Btn_CloseButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseButton == null )
      			{
-		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Btn_CloseImage
+		public Image E_Btn_CloseImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Btn_CloseImage == null )
      			{
-		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Btn_Close");
+		    		this.m_E_Btn_CloseImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Btn_Close");
      			}
      			return this.m_E_Btn_CloseImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_NoMailText
+		public Text E_NoMailText
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_NoMailText == null )
      			{
-		    		this.m_E_NoMailText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_NoMail");
+		    		this.m_E_NoMailText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_NoMail");
      			}
      			return this.m_E_NoMailText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonOneKeyButton
+		public Button E_ButtonOneKeyButton
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonOneKeyButton == null )
      			{
-		    		this.m_E_ButtonOneKeyButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Left/E_ButtonOneKey");
+		    		this.m_E_ButtonOneKeyButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Left/E_ButtonOneKey");
      			}
      			return this.m_E_ButtonOneKeyButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonOneKeyImage
+		public Image E_ButtonOneKeyImage
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonOneKeyImage == null )
      			{
-		    		this.m_E_ButtonOneKeyImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Left/E_ButtonOneKey");
+		    		this.m_E_ButtonOneKeyImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Left/E_ButtonOneKey");
      			}
      			return this.m_E_ButtonOneKeyImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_NumTextText
+		public Text E_NumTextText
      	{
      		get
      		{
@@ -103,13 +103,13 @@ namespace ET.Client
      			}
      			if( this.m_E_NumTextText == null )
      			{
-		    		this.m_E_NumTextText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Left/E_NumText");
+		    		this.m_E_NumTextText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Left/E_NumText");
      			}
      			return this.m_E_NumTextText;
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_MailItemsLoopVerticalScrollRect
+		public LoopVerticalScrollRect E_MailItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -120,13 +120,13 @@ namespace ET.Client
      			}
      			if( this.m_E_MailItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_MailItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_MailItems");
+		    		this.m_E_MailItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<LoopVerticalScrollRect>(this.uiTransform.gameObject,"Left/E_MailItems");
      			}
      			return this.m_E_MailItemsLoopVerticalScrollRect;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_MailContentRectTransform
+		public RectTransform EG_MailContentRectTransform
      	{
      		get
      		{
@@ -137,7 +137,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_MailContentRectTransform == null )
      			{
-		    		this.m_EG_MailContentRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"Right/EG_MailContent");
+		    		this.m_EG_MailContentRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"Right/EG_MailContent");
      			}
      			return this.m_EG_MailContentRectTransform;
      		}
@@ -163,7 +163,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextMailTitleText
+		public Text E_TextMailTitleText
      	{
      		get
      		{
@@ -174,13 +174,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextMailTitleText == null )
      			{
-		    		this.m_E_TextMailTitleText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_MailContent/E_TextMailTitle");
+		    		this.m_E_TextMailTitleText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_MailContent/E_TextMailTitle");
      			}
      			return this.m_E_TextMailTitleText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_TextMailContentText
+		public Text E_TextMailContentText
      	{
      		get
      		{
@@ -191,13 +191,13 @@ namespace ET.Client
      			}
      			if( this.m_E_TextMailContentText == null )
      			{
-		    		this.m_E_TextMailContentText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"Right/EG_MailContent/E_TextMailContent");
+		    		this.m_E_TextMailContentText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"Right/EG_MailContent/E_TextMailContent");
      			}
      			return this.m_E_TextMailContentText;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonGetButton
+		public Button E_ButtonGetButton
      	{
      		get
      		{
@@ -208,13 +208,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonGetButton == null )
      			{
-		    		this.m_E_ButtonGetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Right/EG_MailContent/E_ButtonGet");
+		    		this.m_E_ButtonGetButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Right/EG_MailContent/E_ButtonGet");
      			}
      			return this.m_E_ButtonGetButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonGetImage
+		public Image E_ButtonGetImage
      	{
      		get
      		{
@@ -225,7 +225,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonGetImage == null )
      			{
-		    		this.m_E_ButtonGetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Right/EG_MailContent/E_ButtonGet");
+		    		this.m_E_ButtonGetImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Right/EG_MailContent/E_ButtonGet");
      			}
      			return this.m_E_ButtonGetImage;
      		}
@@ -249,19 +249,19 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_Btn_CloseButton = null;
-		private UnityEngine.UI.Image m_E_Btn_CloseImage = null;
-		private UnityEngine.UI.Text m_E_NoMailText = null;
-		private UnityEngine.UI.Button m_E_ButtonOneKeyButton = null;
-		private UnityEngine.UI.Image m_E_ButtonOneKeyImage = null;
-		private UnityEngine.UI.Text m_E_NumTextText = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_MailItemsLoopVerticalScrollRect = null;
-		private UnityEngine.RectTransform m_EG_MailContentRectTransform = null;
+		private Button m_E_Btn_CloseButton = null;
+		private Image m_E_Btn_CloseImage = null;
+		private Text m_E_NoMailText = null;
+		private Button m_E_ButtonOneKeyButton = null;
+		private Image m_E_ButtonOneKeyImage = null;
+		private Text m_E_NumTextText = null;
+		private LoopVerticalScrollRect m_E_MailItemsLoopVerticalScrollRect = null;
+		private RectTransform m_EG_MailContentRectTransform = null;
 		private EntityRef<ES_RewardList> m_es_rewardlist = null;
-		private UnityEngine.UI.Text m_E_TextMailTitleText = null;
-		private UnityEngine.UI.Text m_E_TextMailContentText = null;
-		private UnityEngine.UI.Button m_E_ButtonGetButton = null;
-		private UnityEngine.UI.Image m_E_ButtonGetImage = null;
+		private Text m_E_TextMailTitleText = null;
+		private Text m_E_TextMailContentText = null;
+		private Button m_E_ButtonGetButton = null;
+		private Image m_E_ButtonGetImage = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -1,17 +1,17 @@
 namespace ET.Server
 {
     [EntitySystemOf(typeof(LoginInfoRecordComponent))]
-    [FriendOfAttribute(typeof(ET.Server.LoginInfoRecordComponent))]
+    [FriendOfAttribute(typeof(LoginInfoRecordComponent))]
     public static partial class LoginInfoRecordComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.LoginInfoRecordComponent self)
+        private static void Awake(this LoginInfoRecordComponent self)
         {
 
         }
         
         [EntitySystem]
-        private static void Destroy(this ET.Server.LoginInfoRecordComponent self)
+        private static void Destroy(this LoginInfoRecordComponent self)
         {
             self.AccountLoginInfoDict.Clear();
         }

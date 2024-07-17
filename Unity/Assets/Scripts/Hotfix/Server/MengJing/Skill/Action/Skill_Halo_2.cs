@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-namespace ET.Server
+﻿namespace ET.Server
 {
     //光环2
     public class Skill_Halo_2 : SkillHandlerS

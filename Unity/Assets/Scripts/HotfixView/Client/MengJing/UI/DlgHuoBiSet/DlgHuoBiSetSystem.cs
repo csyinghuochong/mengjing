@@ -1,11 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
-
-namespace ET.Client
+﻿namespace ET.Client
 {
     [Event(SceneType.Demo)]
     public class UserDataTypeUpdate_Gold_HuoBiSetRefresh: AEvent<Scene, UserDataTypeUpdate_Gold>

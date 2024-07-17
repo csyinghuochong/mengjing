@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using ET;
 
 namespace ET.Server
 {
@@ -46,12 +45,12 @@ namespace ET.Server
            
         
         [EntitySystem]
-        private static void Awake(this ET.Server.SkillPassiveComponent self)
+        private static void Awake(this SkillPassiveComponent self)
         {
 
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.SkillPassiveComponent self)
+        private static void Destroy(this SkillPassiveComponent self)
         {
 
         }

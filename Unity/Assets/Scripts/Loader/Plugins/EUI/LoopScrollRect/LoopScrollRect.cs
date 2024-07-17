@@ -1,9 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using ET;
 
 namespace UnityEngine.UI
 {
@@ -77,7 +73,7 @@ namespace UnityEngine.UI
         {
             if ( null == this.dataSource || scrollMoveEvent == null )
             {
-                ET.Log.Error("dataSource or scrollMoveEvent is error!");
+                Log.Error("dataSource or scrollMoveEvent is error!");
                 Debug.LogError("dataSource or scrollMoveEvent is error!");
             }
             this.dataSource.scrollMoveEvent = null;

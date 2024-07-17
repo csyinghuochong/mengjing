@@ -7,7 +7,7 @@ namespace ET.Server
     public static partial class MailSceneComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.MailSceneComponent self)
+        private static void Awake(this MailSceneComponent self)
         {
             self.InitServerInfo().Coroutine();
 

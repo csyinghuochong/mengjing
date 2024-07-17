@@ -1,13 +1,13 @@
-﻿
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_PetEggListItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_PetEggListItem : Entity,IAwake<Transform>,IDestroy 
 	{
 		public KeyValuePairInt RolePetEgg;
 		public Action<int, PointerEventData> BeginDragHandler;
@@ -16,7 +16,7 @@ namespace ET.Client
 		public long Timer;
 		public int Index;
 		
-		public UnityEngine.RectTransform EG_Node0RectTransform
+		public RectTransform EG_Node0RectTransform
      	{
      		get
      		{
@@ -27,13 +27,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_Node0RectTransform == null )
      			{
-		    		this.m_EG_Node0RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Node0");
+		    		this.m_EG_Node0RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Node0");
      			}
      			return this.m_EG_Node0RectTransform;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_Node1RectTransform
+		public RectTransform EG_Node1RectTransform
      	{
      		get
      		{
@@ -44,13 +44,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_Node1RectTransform == null )
      			{
-		    		this.m_EG_Node1RectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_Node1");
+		    		this.m_EG_Node1RectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_Node1");
      			}
      			return this.m_EG_Node1RectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Image E_PetEggIconImage
+		public Image E_PetEggIconImage
      	{
      		get
      		{
@@ -61,13 +61,13 @@ namespace ET.Client
      			}
      			if( this.m_E_PetEggIconImage == null )
      			{
-		    		this.m_E_PetEggIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node1/E_PetEggIcon");
+		    		this.m_E_PetEggIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Node1/E_PetEggIcon");
      			}
      			return this.m_E_PetEggIconImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_PetEggIconEventTrigger
+		public EventTrigger E_PetEggIconEventTrigger
      	{
      		get
      		{
@@ -78,13 +78,13 @@ namespace ET.Client
      			}
      			if( this.m_E_PetEggIconEventTrigger == null )
      			{
-		    		this.m_E_PetEggIconEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"EG_Node1/E_PetEggIcon");
+		    		this.m_E_PetEggIconEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"EG_Node1/E_PetEggIcon");
      			}
      			return this.m_E_PetEggIconEventTrigger;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonOpenButton
+		public Button E_ButtonOpenButton
      	{
      		get
      		{
@@ -95,13 +95,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonOpenButton == null )
      			{
-		    		this.m_E_ButtonOpenButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node1/E_ButtonOpen");
+		    		this.m_E_ButtonOpenButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Node1/E_ButtonOpen");
      			}
      			return this.m_E_ButtonOpenButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonOpenImage
+		public Image E_ButtonOpenImage
      	{
      		get
      		{
@@ -112,13 +112,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonOpenImage == null )
      			{
-		    		this.m_E_ButtonOpenImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node1/E_ButtonOpen");
+		    		this.m_E_ButtonOpenImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Node1/E_ButtonOpen");
      			}
      			return this.m_E_ButtonOpenImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonFuHuaButton
+		public Button E_ButtonFuHuaButton
      	{
      		get
      		{
@@ -129,13 +129,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonFuHuaButton == null )
      			{
-		    		this.m_E_ButtonFuHuaButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node1/E_ButtonFuHua");
+		    		this.m_E_ButtonFuHuaButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Node1/E_ButtonFuHua");
      			}
      			return this.m_E_ButtonFuHuaButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonFuHuaImage
+		public Image E_ButtonFuHuaImage
      	{
      		get
      		{
@@ -146,13 +146,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonFuHuaImage == null )
      			{
-		    		this.m_E_ButtonFuHuaImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node1/E_ButtonFuHua");
+		    		this.m_E_ButtonFuHuaImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Node1/E_ButtonFuHua");
      			}
      			return this.m_E_ButtonFuHuaImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonGetButton
+		public Button E_ButtonGetButton
      	{
      		get
      		{
@@ -163,13 +163,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonGetButton == null )
      			{
-		    		this.m_E_ButtonGetButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_Node1/E_ButtonGet");
+		    		this.m_E_ButtonGetButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_Node1/E_ButtonGet");
      			}
      			return this.m_E_ButtonGetButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonGetImage
+		public Image E_ButtonGetImage
      	{
      		get
      		{
@@ -180,13 +180,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonGetImage == null )
      			{
-		    		this.m_E_ButtonGetImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_Node1/E_ButtonGet");
+		    		this.m_E_ButtonGetImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_Node1/E_ButtonGet");
      			}
      			return this.m_E_ButtonGetImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_TimeText
+		public Text E_Text_TimeText
      	{
      		get
      		{
@@ -197,13 +197,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_TimeText == null )
      			{
-		    		this.m_E_Text_TimeText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Node1/E_Text_Time");
+		    		this.m_E_Text_TimeText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Node1/E_Text_Time");
      			}
      			return this.m_E_Text_TimeText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Text_NameText
+		public Text E_Text_NameText
      	{
      		get
      		{
@@ -214,7 +214,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Text_NameText == null )
      			{
-		    		this.m_E_Text_NameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_Node1/E_Text_Name");
+		    		this.m_E_Text_NameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_Node1/E_Text_Name");
      			}
      			return this.m_E_Text_NameText;
      		}
@@ -249,18 +249,18 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EG_Node0RectTransform = null;
-		private UnityEngine.RectTransform m_EG_Node1RectTransform = null;
-		private UnityEngine.UI.Image m_E_PetEggIconImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_PetEggIconEventTrigger = null;
-		private UnityEngine.UI.Button m_E_ButtonOpenButton = null;
-		private UnityEngine.UI.Image m_E_ButtonOpenImage = null;
-		private UnityEngine.UI.Button m_E_ButtonFuHuaButton = null;
-		private UnityEngine.UI.Image m_E_ButtonFuHuaImage = null;
-		private UnityEngine.UI.Button m_E_ButtonGetButton = null;
-		private UnityEngine.UI.Image m_E_ButtonGetImage = null;
-		private UnityEngine.UI.Text m_E_Text_TimeText = null;
-		private UnityEngine.UI.Text m_E_Text_NameText = null;
+		private RectTransform m_EG_Node0RectTransform = null;
+		private RectTransform m_EG_Node1RectTransform = null;
+		private Image m_E_PetEggIconImage = null;
+		private EventTrigger m_E_PetEggIconEventTrigger = null;
+		private Button m_E_ButtonOpenButton = null;
+		private Image m_E_ButtonOpenImage = null;
+		private Button m_E_ButtonFuHuaButton = null;
+		private Image m_E_ButtonFuHuaImage = null;
+		private Button m_E_ButtonGetButton = null;
+		private Image m_E_ButtonGetImage = null;
+		private Text m_E_Text_TimeText = null;
+		private Text m_E_Text_NameText = null;
 		public Transform uiTransform = null;
 	}
 }

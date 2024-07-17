@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.EMail)]
     public class G2Mail_EnterMailHandler : MessageHandler<Scene, G2Mail_EnterMail, Mail2G_EnterMail>

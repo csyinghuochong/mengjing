@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     /// <summary>
     /// 怪物连击

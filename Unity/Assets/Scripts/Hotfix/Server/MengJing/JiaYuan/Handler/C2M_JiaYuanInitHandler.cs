@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_JiaYuanInitHandler : MessageLocationHandler<Unit, C2M_JiaYuanInitRequest, M2C_JiaYuanInitResponse>

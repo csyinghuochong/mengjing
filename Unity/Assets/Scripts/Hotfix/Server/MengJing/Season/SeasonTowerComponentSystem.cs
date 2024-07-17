@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-
 
 namespace ET.Server
 {
@@ -9,7 +7,7 @@ namespace ET.Server
     public static partial class SeasonTowerComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Server.SeasonTowerComponent self)
+        private static void Awake(this SeasonTowerComponent self)
         {
         }
 

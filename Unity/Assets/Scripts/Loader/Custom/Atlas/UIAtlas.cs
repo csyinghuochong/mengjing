@@ -1,10 +1,8 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using KO;
 using UnityEngine;
 
-
-[System.Serializable]
+[Serializable]
 public class SpritePair
 {
     public string name;

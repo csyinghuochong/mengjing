@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgHelper))]
 	[EnableMethod]
 	public  class DlgHelperViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Text E_TipText
+		public Text E_TipText
      	{
      		get
      		{
@@ -18,7 +18,7 @@ namespace ET.Client
      			}
      			if( this.m_E_TipText == null )
      			{
-		    		this.m_E_TipText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Tip");
+		    		this.m_E_TipText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Tip");
      			}
      			return this.m_E_TipText;
      		}
@@ -30,7 +30,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Text m_E_TipText = null;
+		private Text m_E_TipText = null;
 		public Transform uiTransform = null;
 	}
 }

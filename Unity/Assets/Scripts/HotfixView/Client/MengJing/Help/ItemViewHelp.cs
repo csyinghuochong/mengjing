@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ET;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,11 +18,11 @@ namespace ET.Client
                 if (showType == 2) //浮点数
                 {
                     float value = (float)hideProList.HideValue / 100f;
-                    attribute = $"{ItemViewHelp.GetAttributeName(hideProList.HideID)} + " + value.ToString("0.##") + "%";
+                    attribute = $"{GetAttributeName(hideProList.HideID)} + " + value.ToString("0.##") + "%";
                 }
                 else //整数
                 {
-                    attribute = $"{ItemViewHelp.GetAttributeName(hideProList.HideID)} + {hideProList.HideValue}";
+                    attribute = $"{GetAttributeName(hideProList.HideID)} + {hideProList.HideValue}";
                 }
 
                 fumopro += " " + attribute;
@@ -50,11 +49,11 @@ namespace ET.Client
                 {
                     float fvalue = float.Parse(attributeInfo[1]) * 100;
                     string svalue = fvalue.ToString("0.#####");
-                    attributeStr = attributeStr + $"{ItemViewHelp.GetAttributeName(numericType)}+{svalue}% ";
+                    attributeStr = attributeStr + $"{GetAttributeName(numericType)}+{svalue}% ";
                 }
                 else
                 {
-                    attributeStr = attributeStr + $"{ItemViewHelp.GetAttributeName(numericType)}+{int.Parse(attributeInfo[1])}";
+                    attributeStr = attributeStr + $"{GetAttributeName(numericType)}+{int.Parse(attributeInfo[1])}";
                 }
 
                 if (i < attributeInfoList.Length - 1)
@@ -225,7 +224,7 @@ namespace ET.Client
                     {
                         if (hideProList.HideID == 0) continue;
                         string attribute = "";
-                        string proName = ItemViewHelp.GetAttributeName(hideProList.HideID);
+                        string proName = GetAttributeName(hideProList.HideID);
                         int showType = NumericHelp.GetNumericValueType(hideProList.HideID);
                         if (showType == 2)
                         {
@@ -574,11 +573,11 @@ namespace ET.Client
                     if (showType == 2)
                     {
                         float value = (float)numericValue / 100f;
-                        attribute = $"{ItemViewHelp.GetAttributeName(numericType)} + " + value.ToString("0.##") + "%";
+                        attribute = $"{GetAttributeName(numericType)} + " + value.ToString("0.##") + "%";
                     }
                     else
                     {
-                        attribute = $"{ItemViewHelp.GetAttributeName(numericType)} + {numericValue}";
+                        attribute = $"{GetAttributeName(numericType)} + {numericValue}";
                     }
 
                     ShowPropertyText(attribute, "0", propertyGO, parentGO);
@@ -595,11 +594,11 @@ namespace ET.Client
                 if (showType == 2)
                 {
                     float value = (float)hideProList.HideValue / 100f;
-                    attribute = $"附魔属性: {ItemViewHelp.GetAttributeName(hideProList.HideID)} + " + value.ToString("0.##") + "%";
+                    attribute = $"附魔属性: {GetAttributeName(hideProList.HideID)} + " + value.ToString("0.##") + "%";
                 }
                 else
                 {
-                    attribute = $"附魔属性: {ItemViewHelp.GetAttributeName(hideProList.HideID)} + {hideProList.HideValue}";
+                    attribute = $"附魔属性: {GetAttributeName(hideProList.HideID)} + {hideProList.HideValue}";
                 }
 
                 ShowPropertyText(attribute, "1", propertyGO, parentGO);
@@ -612,7 +611,7 @@ namespace ET.Client
                 HideProList hide = baginfo.IncreaseProLists[i];
                 string canTransf = "";
                 HideProListConfig hideProListConfig = HideProListConfigCategory.Instance.Get(hide.HideID);
-                string proName = ItemViewHelp.GetAttributeName(hideProListConfig.PropertyType);
+                string proName = GetAttributeName(hideProListConfig.PropertyType);
                 int showType = NumericHelp.GetNumericValueType(hideProListConfig.PropertyType);
 
                 if (hideProListConfig.IfMove == 1)
@@ -1061,7 +1060,7 @@ namespace ET.Client
                     HideProList hide = baginfo.IncreaseProLists[i];
                     string canTransf = "";
                     HideProListConfig hideProListConfig = HideProListConfigCategory.Instance.Get(hide.HideID);
-                    string proName = ItemViewHelp.GetAttributeName(hideProListConfig.PropertyType);
+                    string proName = GetAttributeName(hideProListConfig.PropertyType);
                     int showType = NumericHelp.GetNumericValueType(hideProListConfig.PropertyType);
 
                     if (hideProListConfig.IfMove == 1)

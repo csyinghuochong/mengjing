@@ -1,6 +1,4 @@
-﻿using ET;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
@@ -132,7 +130,7 @@ namespace UnityEditor.UI
                 return canvas.gameObject;
 
             // No canvas in the scene at all? Then create a new one.
-            return LoopScrollRectMenuOptions.CreateNewUI();
+            return CreateNewUI();
         }
         #endregion
         

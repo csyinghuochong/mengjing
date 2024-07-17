@@ -24,13 +24,13 @@ namespace ET.Client
     public static partial class AttackComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.AttackComponent self)
+        private static void Awake(this AttackComponent self)
         {
             self.BagComponent = self.Root().GetComponent<BagComponentC>();
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Client.AttackComponent self)
+        private static void Destroy(this AttackComponent self)
         {
             self.RemoveTimer();
         }

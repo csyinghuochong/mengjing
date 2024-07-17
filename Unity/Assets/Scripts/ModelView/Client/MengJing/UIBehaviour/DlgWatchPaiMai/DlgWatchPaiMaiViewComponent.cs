@@ -1,13 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgWatchPaiMai))]
 	[EnableMethod]
 	public  class DlgWatchPaiMaiViewComponent : Entity,IAwake,IDestroy 
 	{
-		public UnityEngine.UI.Button E_ImageBgButton
+		public Button E_ImageBgButton
      	{
      		get
      		{
@@ -18,13 +18,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageBgButton == null )
      			{
-		    		this.m_E_ImageBgButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ImageBg");
+		    		this.m_E_ImageBgButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ImageBg");
      			}
      			return this.m_E_ImageBgButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageBgImage
+		public Image E_ImageBgImage
      	{
      		get
      		{
@@ -35,13 +35,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageBgImage == null )
      			{
-		    		this.m_E_ImageBgImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageBg");
+		    		this.m_E_ImageBgImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageBg");
      			}
      			return this.m_E_ImageBgImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ImageDiImage
+		public Image E_ImageDiImage
      	{
      		get
      		{
@@ -52,13 +52,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ImageDiImage == null )
      			{
-		    		this.m_E_ImageDiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ImageDi");
+		    		this.m_E_ImageDiImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ImageDi");
      			}
      			return this.m_E_ImageDiImage;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_PositionSetRectTransform
+		public RectTransform EG_PositionSetRectTransform
      	{
      		get
      		{
@@ -69,13 +69,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_PositionSetRectTransform == null )
      			{
-		    		this.m_EG_PositionSetRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_PositionSet");
+		    		this.m_EG_PositionSetRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_PositionSet");
      			}
      			return this.m_EG_PositionSetRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Button E_FastSearchBtnButton
+		public Button E_FastSearchBtnButton
      	{
      		get
      		{
@@ -86,13 +86,13 @@ namespace ET.Client
      			}
      			if( this.m_E_FastSearchBtnButton == null )
      			{
-		    		this.m_E_FastSearchBtnButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"EG_PositionSet/E_FastSearchBtn");
+		    		this.m_E_FastSearchBtnButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"EG_PositionSet/E_FastSearchBtn");
      			}
      			return this.m_E_FastSearchBtnButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_FastSearchBtnImage
+		public Image E_FastSearchBtnImage
      	{
      		get
      		{
@@ -103,7 +103,7 @@ namespace ET.Client
      			}
      			if( this.m_E_FastSearchBtnImage == null )
      			{
-		    		this.m_E_FastSearchBtnImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_PositionSet/E_FastSearchBtn");
+		    		this.m_E_FastSearchBtnImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_PositionSet/E_FastSearchBtn");
      			}
      			return this.m_E_FastSearchBtnImage;
      		}
@@ -120,12 +120,12 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Button m_E_ImageBgButton = null;
-		private UnityEngine.UI.Image m_E_ImageBgImage = null;
-		private UnityEngine.UI.Image m_E_ImageDiImage = null;
-		private UnityEngine.RectTransform m_EG_PositionSetRectTransform = null;
-		private UnityEngine.UI.Button m_E_FastSearchBtnButton = null;
-		private UnityEngine.UI.Image m_E_FastSearchBtnImage = null;
+		private Button m_E_ImageBgButton = null;
+		private Image m_E_ImageBgImage = null;
+		private Image m_E_ImageDiImage = null;
+		private RectTransform m_EG_PositionSetRectTransform = null;
+		private Button m_E_FastSearchBtnButton = null;
+		private Image m_E_FastSearchBtnImage = null;
 		public Transform uiTransform = null;
 	}
 }

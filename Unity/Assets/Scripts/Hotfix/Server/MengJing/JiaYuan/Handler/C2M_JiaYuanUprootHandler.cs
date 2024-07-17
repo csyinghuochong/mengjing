@@ -1,7 +1,4 @@
-﻿using System;
-
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_JiaYuanUprootHandler : MessageLocationHandler<Unit, C2M_JiaYuanUprootRequest, M2C_JiaYuanUprootResponse>

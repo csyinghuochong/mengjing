@@ -1,11 +1,11 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_MainHpBar : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_MainHpBar : Entity,IAwake<Transform>,IDestroy 
 	{
 		public int BossConfiId;
 		public long LockBossId;
@@ -23,7 +23,7 @@ namespace ET.Client
 
 		public long MyUnitId = 0;
 
-		public UnityEngine.RectTransform EG_BossNodeRectTransform
+		public RectTransform EG_BossNodeRectTransform
      	{
      		get
      		{
@@ -34,7 +34,7 @@ namespace ET.Client
      			}
      			if( this.m_EG_BossNodeRectTransform == null )
      			{
-		    		this.m_EG_BossNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_BossNode");
+		    		this.m_EG_BossNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_BossNode");
      			}
      			return this.m_EG_BossNodeRectTransform;
      		}
@@ -60,7 +60,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_BossHpImage
+		public Image E_Img_BossHpImage
      	{
      		get
      		{
@@ -71,7 +71,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Img_BossHpImage == null )
      			{
-		    		this.m_E_Img_BossHpImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_BossNode/E_Img_BossHp");
+		    		this.m_E_Img_BossHpImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_BossNode/E_Img_BossHp");
      			}
      			return this.m_E_Img_BossHpImage;
      		}
@@ -97,7 +97,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.RectTransform EG_SingNodeRectTransform
+		public RectTransform EG_SingNodeRectTransform
      	{
      		get
      		{
@@ -108,13 +108,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_SingNodeRectTransform == null )
      			{
-		    		this.m_EG_SingNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_BossNode/EG_SingNode");
+		    		this.m_EG_SingNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_BossNode/EG_SingNode");
      			}
      			return this.m_EG_SingNodeRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_SingValueImage
+		public Image E_Img_SingValueImage
      	{
      		get
      		{
@@ -125,13 +125,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Img_SingValueImage == null )
      			{
-		    		this.m_E_Img_SingValueImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_BossNode/EG_SingNode/E_Img_SingValue");
+		    		this.m_E_Img_SingValueImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_BossNode/EG_SingNode/E_Img_SingValue");
      			}
      			return this.m_E_Img_SingValueImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_SingDiImage
+		public Image E_Img_SingDiImage
      	{
      		get
      		{
@@ -142,13 +142,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Img_SingDiImage == null )
      			{
-		    		this.m_E_Img_SingDiImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_BossNode/EG_SingNode/E_Img_SingDi");
+		    		this.m_E_Img_SingDiImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_BossNode/EG_SingNode/E_Img_SingDi");
      			}
      			return this.m_E_Img_SingDiImage;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_HurtTextNodeRectTransform
+		public RectTransform EG_HurtTextNodeRectTransform
      	{
      		get
      		{
@@ -159,13 +159,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_HurtTextNodeRectTransform == null )
      			{
-		    		this.m_EG_HurtTextNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_BossNode/EG_HurtTextNode");
+		    		this.m_EG_HurtTextNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_BossNode/EG_HurtTextNode");
      			}
      			return this.m_EG_HurtTextNodeRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Text E_HurtTextPlayerText
+		public Text E_HurtTextPlayerText
      	{
      		get
      		{
@@ -176,13 +176,13 @@ namespace ET.Client
      			}
      			if( this.m_E_HurtTextPlayerText == null )
      			{
-		    		this.m_E_HurtTextPlayerText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_BossNode/EG_HurtTextNode/E_HurtTextPlayer");
+		    		this.m_E_HurtTextPlayerText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_BossNode/EG_HurtTextNode/E_HurtTextPlayer");
      			}
      			return this.m_E_HurtTextPlayerText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_HurtTextPetText
+		public Text E_HurtTextPetText
      	{
      		get
      		{
@@ -193,13 +193,13 @@ namespace ET.Client
      			}
      			if( this.m_E_HurtTextPetText == null )
      			{
-		    		this.m_E_HurtTextPetText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_BossNode/EG_HurtTextNode/E_HurtTextPet");
+		    		this.m_E_HurtTextPetText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_BossNode/EG_HurtTextNode/E_HurtTextPet");
      			}
      			return this.m_E_HurtTextPetText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_BossNameText
+		public Text E_Lab_BossNameText
      	{
      		get
      		{
@@ -210,13 +210,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_BossNameText == null )
      			{
-		    		this.m_E_Lab_BossNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_BossNode/E_Lab_BossName");
+		    		this.m_E_Lab_BossNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_BossNode/E_Lab_BossName");
      			}
      			return this.m_E_Lab_BossNameText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_BossLvText
+		public Text E_Lab_BossLvText
      	{
      		get
      		{
@@ -227,13 +227,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_BossLvText == null )
      			{
-		    		this.m_E_Lab_BossLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_BossNode/E_Lab_BossLv");
+		    		this.m_E_Lab_BossLvText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_BossNode/E_Lab_BossLv");
      			}
      			return this.m_E_Lab_BossLvText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_OwnerText
+		public Text E_Lab_OwnerText
      	{
      		get
      		{
@@ -244,13 +244,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_OwnerText == null )
      			{
-		    		this.m_E_Lab_OwnerText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_BossNode/E_Lab_Owner");
+		    		this.m_E_Lab_OwnerText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_BossNode/E_Lab_Owner");
      			}
      			return this.m_E_Lab_OwnerText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_DeveText
+		public Text E_Lab_DeveText
      	{
      		get
      		{
@@ -261,13 +261,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_DeveText == null )
      			{
-		    		this.m_E_Lab_DeveText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_BossNode/E_Lab_Deve");
+		    		this.m_E_Lab_DeveText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_BossNode/E_Lab_Deve");
      			}
      			return this.m_E_Lab_DeveText;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_MonsterNodeRectTransform
+		public RectTransform EG_MonsterNodeRectTransform
      	{
      		get
      		{
@@ -278,13 +278,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_MonsterNodeRectTransform == null )
      			{
-		    		this.m_EG_MonsterNodeRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_MonsterNode");
+		    		this.m_EG_MonsterNodeRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_MonsterNode");
      			}
      			return this.m_EG_MonsterNodeRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Img_MonsterHpImage
+		public Image E_Img_MonsterHpImage
      	{
      		get
      		{
@@ -295,13 +295,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Img_MonsterHpImage == null )
      			{
-		    		this.m_E_Img_MonsterHpImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"EG_MonsterNode/E_Img_MonsterHp");
+		    		this.m_E_Img_MonsterHpImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"EG_MonsterNode/E_Img_MonsterHp");
      			}
      			return this.m_E_Img_MonsterHpImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_MonsterNameText
+		public Text E_Lab_MonsterNameText
      	{
      		get
      		{
@@ -312,13 +312,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_MonsterNameText == null )
      			{
-		    		this.m_E_Lab_MonsterNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_MonsterNode/E_Lab_MonsterName");
+		    		this.m_E_Lab_MonsterNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_MonsterNode/E_Lab_MonsterName");
      			}
      			return this.m_E_Lab_MonsterNameText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_MonsterLvText
+		public Text E_Lab_MonsterLvText
      	{
      		get
      		{
@@ -329,7 +329,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_MonsterLvText == null )
      			{
-		    		this.m_E_Lab_MonsterLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"EG_MonsterNode/E_Lab_MonsterLv");
+		    		this.m_E_Lab_MonsterLvText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"EG_MonsterNode/E_Lab_MonsterLv");
      			}
      			return this.m_E_Lab_MonsterLvText;
      		}
@@ -370,24 +370,24 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.RectTransform m_EG_BossNodeRectTransform = null;
+		private RectTransform m_EG_BossNodeRectTransform = null;
 		private EntityRef<ES_MainBuff> m_es_mainbuff = null;
-		private UnityEngine.UI.Image m_E_Img_BossHpImage = null;
+		private Image m_E_Img_BossHpImage = null;
 		private EntityRef<ES_ModelShow> m_es_modelshow = null;
-		private UnityEngine.RectTransform m_EG_SingNodeRectTransform = null;
-		private UnityEngine.UI.Image m_E_Img_SingValueImage = null;
-		private UnityEngine.UI.Image m_E_Img_SingDiImage = null;
-		private UnityEngine.RectTransform m_EG_HurtTextNodeRectTransform = null;
-		private UnityEngine.UI.Text m_E_HurtTextPlayerText = null;
-		private UnityEngine.UI.Text m_E_HurtTextPetText = null;
-		private UnityEngine.UI.Text m_E_Lab_BossNameText = null;
-		private UnityEngine.UI.Text m_E_Lab_BossLvText = null;
-		private UnityEngine.UI.Text m_E_Lab_OwnerText = null;
-		private UnityEngine.UI.Text m_E_Lab_DeveText = null;
-		private UnityEngine.RectTransform m_EG_MonsterNodeRectTransform = null;
-		private UnityEngine.UI.Image m_E_Img_MonsterHpImage = null;
-		private UnityEngine.UI.Text m_E_Lab_MonsterNameText = null;
-		private UnityEngine.UI.Text m_E_Lab_MonsterLvText = null;
+		private RectTransform m_EG_SingNodeRectTransform = null;
+		private Image m_E_Img_SingValueImage = null;
+		private Image m_E_Img_SingDiImage = null;
+		private RectTransform m_EG_HurtTextNodeRectTransform = null;
+		private Text m_E_HurtTextPlayerText = null;
+		private Text m_E_HurtTextPetText = null;
+		private Text m_E_Lab_BossNameText = null;
+		private Text m_E_Lab_BossLvText = null;
+		private Text m_E_Lab_OwnerText = null;
+		private Text m_E_Lab_DeveText = null;
+		private RectTransform m_EG_MonsterNodeRectTransform = null;
+		private Image m_E_Img_MonsterHpImage = null;
+		private Text m_E_Lab_MonsterNameText = null;
+		private Text m_E_Lab_MonsterLvText = null;
 		public Transform uiTransform = null;
 	}
 }

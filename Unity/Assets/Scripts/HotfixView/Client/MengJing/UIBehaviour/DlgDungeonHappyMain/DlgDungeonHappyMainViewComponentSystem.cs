@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgDungeonHappyMainViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgDungeonHappyMainViewComponent))]
+	[FriendOfAttribute(typeof(DlgDungeonHappyMainViewComponent))]
 	public static partial class DlgDungeonHappyMainViewComponentSystem
 	{
 		[EntitySystem]

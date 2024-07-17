@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace ET.Client
 {
     [Event(SceneType.Demo)]

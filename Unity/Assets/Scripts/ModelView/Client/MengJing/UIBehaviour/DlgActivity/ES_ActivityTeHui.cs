@@ -1,16 +1,16 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_ActivityTeHui : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
+	public  class ES_ActivityTeHui : Entity,IAwake<Transform>,IDestroy,IUILogic
 	{
 		public Dictionary<int, EntityRef<Scroll_Item_ActivityTeHuiItem>> ScrollItemActivityTeHuiItems;
 		
-		public UnityEngine.UI.LoopHorizontalScrollRect E_ActivityTeHuiItemsLoopHorizontalScrollRect
+		public LoopHorizontalScrollRect E_ActivityTeHuiItemsLoopHorizontalScrollRect
      	{
      		get
      		{
@@ -21,7 +21,7 @@ namespace ET.Client
      			}
      			if( this.m_E_ActivityTeHuiItemsLoopHorizontalScrollRect == null )
      			{
-		    		this.m_E_ActivityTeHuiItemsLoopHorizontalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopHorizontalScrollRect>(this.uiTransform.gameObject,"E_ActivityTeHuiItems");
+		    		this.m_E_ActivityTeHuiItemsLoopHorizontalScrollRect = UIFindHelper.FindDeepChild<LoopHorizontalScrollRect>(this.uiTransform.gameObject,"E_ActivityTeHuiItems");
      			}
      			return this.m_E_ActivityTeHuiItemsLoopHorizontalScrollRect;
      		}
@@ -45,7 +45,7 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.LoopHorizontalScrollRect m_E_ActivityTeHuiItemsLoopHorizontalScrollRect = null;
+		private LoopHorizontalScrollRect m_E_ActivityTeHuiItemsLoopHorizontalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Union)]
     public class C2U_UnionKeJiQuickHandler : MessageHandler<Scene, C2U_UnionKeJiQuickRequest, U2C_UnionKeJiQuickResponse>

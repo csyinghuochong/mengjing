@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgMailViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgMailViewComponent))]
+	[FriendOfAttribute(typeof(DlgMailViewComponent))]
 	public static partial class DlgMailViewComponentSystem
 	{
 		[EntitySystem]

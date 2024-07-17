@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageHandler(SceneType.Map)]
     public class C2M_ShoujiRewardHandler : MessageLocationHandler<Unit, C2M_ShoujiRewardRequest, M2C_ShoujiRewardResponse>

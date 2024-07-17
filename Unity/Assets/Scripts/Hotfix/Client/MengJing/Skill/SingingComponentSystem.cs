@@ -7,12 +7,12 @@ namespace ET.Client
     public static partial class SingingComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this ET.Client.SingingComponent self)
+        private static void Awake(this SingingComponent self)
         {
         }
 
         [EntitySystem]
-        private static void Destroy(this ET.Client.SingingComponent self)
+        private static void Destroy(this SingingComponent self)
         {
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
         }

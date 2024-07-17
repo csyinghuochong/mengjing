@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 using Unity.Mathematics;
 
 namespace ET.Server
@@ -28,7 +27,7 @@ namespace ET.Server
         }
         
         [EntitySystem]
-        private static void Awake(this ET.Server.SkillManagerComponentS self)
+        private static void Awake(this SkillManagerComponentS self)
         {
             self.Skills.Clear();
             self.DelaySkillList.Clear();
@@ -38,7 +37,7 @@ namespace ET.Server
             self.SelfUnit = self.GetParent<Unit>();
         }
         [EntitySystem]
-        private static void Destroy(this ET.Server.SkillManagerComponentS self)
+        private static void Destroy(this SkillManagerComponentS self)
         {
             self.OnDispose();
         }

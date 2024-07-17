@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UniFramework.Machine;
+﻿using UniFramework.Machine;
 using YooAsset;
 
 /// <summary>
@@ -30,7 +27,7 @@ internal class FsmClearPackageCache : IStateNode
     {
     }
 
-    private void Operation_Completed(YooAsset.AsyncOperationBase obj)
+    private void Operation_Completed(AsyncOperationBase obj)
     {
         _machine.ChangeState<FsmUpdaterDone>();
     }

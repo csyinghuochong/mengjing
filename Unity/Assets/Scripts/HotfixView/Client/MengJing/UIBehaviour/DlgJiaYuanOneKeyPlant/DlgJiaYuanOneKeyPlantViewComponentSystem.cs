@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgJiaYuanOneKeyPlantViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgJiaYuanOneKeyPlantViewComponent))]
+	[FriendOfAttribute(typeof(DlgJiaYuanOneKeyPlantViewComponent))]
 	public static partial class DlgJiaYuanOneKeyPlantViewComponentSystem
 	{
 		[EntitySystem]

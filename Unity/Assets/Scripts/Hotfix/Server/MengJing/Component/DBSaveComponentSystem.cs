@@ -26,12 +26,12 @@ namespace ET.Server
 
 
         [EntitySystem]
-        private static void Awake(this ET.Server.DBSaveComponent self)
+        private static void Awake(this DBSaveComponent self)
         {
 
         }
 
-        public static void SetNoFindPath(this ET.Server.DBSaveComponent self)
+        public static void SetNoFindPath(this DBSaveComponent self)
         {
 
 
@@ -73,7 +73,7 @@ namespace ET.Server
         }
         
         [EntitySystem]
-        private static void Destroy(this ET.Server.DBSaveComponent self)
+        private static void Destroy(this DBSaveComponent self)
         {
             self.Root().GetComponent<TimerComponent>()?.Remove(ref self.Timer);
         }

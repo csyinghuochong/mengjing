@@ -1,13 +1,14 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_EquipSetItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_EquipSetItem : Entity,IAwake<Transform>,IDestroy 
 	{
 		public List<BagInfo> EquipIdList = new List<BagInfo>();
 		public BagInfo BagInfo;
@@ -16,7 +17,7 @@ namespace ET.Client
 
 		public ItemOperateEnum itemOperateEnum = ItemOperateEnum.Juese;
 		
-		public UnityEngine.UI.Image E_EquipBackImage
+		public Image E_EquipBackImage
      	{
      		get
      		{
@@ -27,13 +28,13 @@ namespace ET.Client
      			}
      			if( this.m_E_EquipBackImage == null )
      			{
-		    		this.m_E_EquipBackImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_EquipBack");
+		    		this.m_E_EquipBackImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_EquipBack");
      			}
      			return this.m_E_EquipBackImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_EquipBackTextImage
+		public Image E_EquipBackTextImage
      	{
      		get
      		{
@@ -44,13 +45,13 @@ namespace ET.Client
      			}
      			if( this.m_E_EquipBackTextImage == null )
      			{
-		    		this.m_E_EquipBackTextImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_EquipBackText");
+		    		this.m_E_EquipBackTextImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_EquipBackText");
      			}
      			return this.m_E_EquipBackTextImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_EquipQualityImage
+		public Image E_EquipQualityImage
      	{
      		get
      		{
@@ -61,13 +62,13 @@ namespace ET.Client
      			}
      			if( this.m_E_EquipQualityImage == null )
      			{
-		    		this.m_E_EquipQualityImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_EquipQuality");
+		    		this.m_E_EquipQualityImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_EquipQuality");
      			}
      			return this.m_E_EquipQualityImage;
      		}
      	}
 
-		public UnityEngine.UI.Image E_EquipIconImage
+		public Image E_EquipIconImage
      	{
      		get
      		{
@@ -78,13 +79,13 @@ namespace ET.Client
      			}
      			if( this.m_E_EquipIconImage == null )
      			{
-		    		this.m_E_EquipIconImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_EquipIcon");
+		    		this.m_E_EquipIconImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_EquipIcon");
      			}
      			return this.m_E_EquipIconImage;
      		}
      	}
 
-		public UnityEngine.RectTransform EG_BangDingRectTransform
+		public RectTransform EG_BangDingRectTransform
      	{
      		get
      		{
@@ -95,13 +96,13 @@ namespace ET.Client
      			}
      			if( this.m_EG_BangDingRectTransform == null )
      			{
-		    		this.m_EG_BangDingRectTransform = UIFindHelper.FindDeepChild<UnityEngine.RectTransform>(this.uiTransform.gameObject,"EG_BangDing");
+		    		this.m_EG_BangDingRectTransform = UIFindHelper.FindDeepChild<RectTransform>(this.uiTransform.gameObject,"EG_BangDing");
      			}
      			return this.m_EG_BangDingRectTransform;
      		}
      	}
 
-		public UnityEngine.UI.Button E_EquipButton
+		public Button E_EquipButton
      	{
      		get
      		{
@@ -112,13 +113,13 @@ namespace ET.Client
      			}
      			if( this.m_E_EquipButton == null )
      			{
-		    		this.m_E_EquipButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Equip");
+		    		this.m_E_EquipButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Equip");
      			}
      			return this.m_E_EquipButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_EquipImage
+		public Image E_EquipImage
      	{
      		get
      		{
@@ -129,13 +130,13 @@ namespace ET.Client
      			}
      			if( this.m_E_EquipImage == null )
      			{
-		    		this.m_E_EquipImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Equip");
+		    		this.m_E_EquipImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Equip");
      			}
      			return this.m_E_EquipImage;
      		}
      	}
 
-		public UnityEngine.EventSystems.EventTrigger E_EquipEventTrigger
+		public EventTrigger E_EquipEventTrigger
      	{
      		get
      		{
@@ -146,13 +147,13 @@ namespace ET.Client
      			}
      			if( this.m_E_EquipEventTrigger == null )
      			{
-		    		this.m_E_EquipEventTrigger = UIFindHelper.FindDeepChild<UnityEngine.EventSystems.EventTrigger>(this.uiTransform.gameObject,"E_Equip");
+		    		this.m_E_EquipEventTrigger = UIFindHelper.FindDeepChild<EventTrigger>(this.uiTransform.gameObject,"E_Equip");
      			}
      			return this.m_E_EquipEventTrigger;
      		}
      	}
 
-		public UnityEngine.UI.Text E_QiangHuaNameText
+		public Text E_QiangHuaNameText
      	{
      		get
      		{
@@ -163,13 +164,13 @@ namespace ET.Client
      			}
      			if( this.m_E_QiangHuaNameText == null )
      			{
-		    		this.m_E_QiangHuaNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_QiangHuaName");
+		    		this.m_E_QiangHuaNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_QiangHuaName");
      			}
      			return this.m_E_QiangHuaNameText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_QiangHuaLvText
+		public Text E_QiangHuaLvText
      	{
      		get
      		{
@@ -180,7 +181,7 @@ namespace ET.Client
      			}
      			if( this.m_E_QiangHuaLvText == null )
      			{
-		    		this.m_E_QiangHuaLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_QiangHuaLv");
+		    		this.m_E_QiangHuaLvText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_QiangHuaLv");
      			}
      			return this.m_E_QiangHuaLvText;
      		}
@@ -201,16 +202,16 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 
-		private UnityEngine.UI.Image m_E_EquipBackImage = null;
-		private UnityEngine.UI.Image m_E_EquipBackTextImage = null;
-		private UnityEngine.UI.Image m_E_EquipQualityImage = null;
-		private UnityEngine.UI.Image m_E_EquipIconImage = null;
-		private UnityEngine.RectTransform m_EG_BangDingRectTransform = null;
-		private UnityEngine.UI.Button m_E_EquipButton = null;
-		private UnityEngine.UI.Image m_E_EquipImage = null;
-		private UnityEngine.EventSystems.EventTrigger m_E_EquipEventTrigger = null;
-		private UnityEngine.UI.Text m_E_QiangHuaNameText = null;
-		private UnityEngine.UI.Text m_E_QiangHuaLvText = null;
+		private Image m_E_EquipBackImage = null;
+		private Image m_E_EquipBackTextImage = null;
+		private Image m_E_EquipQualityImage = null;
+		private Image m_E_EquipIconImage = null;
+		private RectTransform m_EG_BangDingRectTransform = null;
+		private Button m_E_EquipButton = null;
+		private Image m_E_EquipImage = null;
+		private EventTrigger m_E_EquipEventTrigger = null;
+		private Text m_E_QiangHuaNameText = null;
+		private Text m_E_QiangHuaLvText = null;
 		public Transform uiTransform = null;
 	}
 }

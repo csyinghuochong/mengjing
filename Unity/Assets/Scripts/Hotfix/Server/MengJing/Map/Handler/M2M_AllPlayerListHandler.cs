@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     public class M2M_AllPlayerListHandler : MessageHandler<Scene, M2M_AllPlayerListRequest, M2M_AllPlayerListResponse>

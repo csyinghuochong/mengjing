@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgJiaYuanTreasureMapStorageViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgJiaYuanTreasureMapStorageViewComponent))]
+	[FriendOfAttribute(typeof(DlgJiaYuanTreasureMapStorageViewComponent))]
 	public static partial class DlgJiaYuanTreasureMapStorageViewComponentSystem
 	{
 		[EntitySystem]

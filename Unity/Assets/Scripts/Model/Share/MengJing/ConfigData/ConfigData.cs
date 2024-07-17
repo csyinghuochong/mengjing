@@ -18,7 +18,7 @@ namespace ET
         
         //客戶端活动提示
         [StaticField]
-        public static List<ActivityTipConfig> ActivityShowList = new List<ET.ActivityTipConfig>()
+        public static List<ActivityTipConfig> ActivityShowList = new List<ActivityTipConfig>()
         {
             new ActivityTipConfig(){ OpenTime = 1940, OpenDay = new List<int>{-1}, CloseTime = 1950, Conent = "角斗场" , UIType = 0 },
             new ActivityTipConfig(){ OpenTime = 2000, OpenDay = new List<int>{1,3,5,0}, CloseTime = 2025, Conent = "世界领主活动开启" , UIType = 0 },

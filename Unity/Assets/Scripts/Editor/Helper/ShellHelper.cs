@@ -1,6 +1,8 @@
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
+using Debug = UnityEngine.Debug;
 
 namespace ET
 {
@@ -8,7 +10,7 @@ namespace ET
     {
         public static void Run(string cmd, string workDirectory, List<string> environmentVars = null)
         {
-            System.Diagnostics.Process process = new();
+            Process process = new();
             try
             {
 #if UNITY_EDITOR_OSX || UNITY_EDITOR_LINUX
@@ -48,8 +50,8 @@ namespace ET
                     start.RedirectStandardOutput = true;
                     start.RedirectStandardError = true;
                     start.RedirectStandardInput = true;
-                    start.StandardOutputEncoding = System.Text.Encoding.UTF8;
-                    start.StandardErrorEncoding = System.Text.Encoding.UTF8;
+                    start.StandardOutputEncoding = Encoding.UTF8;
+                    start.StandardErrorEncoding = Encoding.UTF8;
                 }
 
                 bool endOutput = false;
@@ -59,7 +61,7 @@ namespace ET
                 {
                     if (args.Data != null)
                     {
-                        UnityEngine.Debug.Log(args.Data);
+                        Debug.Log(args.Data);
                     }
                     else
                     {
@@ -71,7 +73,7 @@ namespace ET
                 {
                     if (args.Data != null)
                     {
-                        UnityEngine.Debug.LogError(args.Data);
+                        Debug.LogError(args.Data);
                     }
                     else
                     {
@@ -92,7 +94,7 @@ namespace ET
             }
             catch (Exception e)
             {
-                UnityEngine.Debug.LogException(e);
+                Debug.LogException(e);
             }
             finally
             {

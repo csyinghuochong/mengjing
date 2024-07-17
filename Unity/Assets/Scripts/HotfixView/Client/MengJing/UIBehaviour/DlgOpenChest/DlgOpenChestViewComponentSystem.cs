@@ -1,10 +1,7 @@
-﻿
-using UnityEngine;
-using UnityEngine.UI;
-namespace ET.Client
+﻿namespace ET.Client
 {
 	[EntitySystemOf(typeof(DlgOpenChestViewComponent))]
-	[FriendOfAttribute(typeof(ET.Client.DlgOpenChestViewComponent))]
+	[FriendOfAttribute(typeof(DlgOpenChestViewComponent))]
 	public static partial class DlgOpenChestViewComponentSystem
 	{
 		[EntitySystem]

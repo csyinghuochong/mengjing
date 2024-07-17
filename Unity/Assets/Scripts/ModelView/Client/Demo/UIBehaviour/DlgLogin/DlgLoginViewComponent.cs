@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ComponentOf(typeof(DlgLogin))]
@@ -9,7 +9,7 @@ namespace ET.Client
 	{
 
 
-		public UnityEngine.UI.Button ELoginButton
+		public Button ELoginButton
      	{
      		get
      		{
@@ -20,13 +20,13 @@ namespace ET.Client
      			}
      			if( this.m_ELoginButton == null )
      			{
-		    		this.m_ELoginButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"Sprite_BackGround/ELogin");
+		    		this.m_ELoginButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"Sprite_BackGround/ELogin");
      			}
      			return this.m_ELoginButton;
      		}
      	}
 
-		public UnityEngine.UI.Image ELoginImage
+		public Image ELoginImage
      	{
      		get
      		{
@@ -37,13 +37,13 @@ namespace ET.Client
      			}
      			if( this.m_ELoginImage == null )
      			{
-		    		this.m_ELoginImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Sprite_BackGround/ELogin");
+		    		this.m_ELoginImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Sprite_BackGround/ELogin");
      			}
      			return this.m_ELoginImage;
      		}
      	}
 
-		public UnityEngine.UI.InputField EAccountInputField
+		public InputField EAccountInputField
      	{
      		get
      		{
@@ -54,13 +54,13 @@ namespace ET.Client
      			}
      			if( this.m_EAccountInputField == null )
      			{
-		    		this.m_EAccountInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"Sprite_BackGround/EAccount");
+		    		this.m_EAccountInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"Sprite_BackGround/EAccount");
      			}
      			return this.m_EAccountInputField;
      		}
      	}
 
-		public UnityEngine.UI.Image EAccountImage
+		public Image EAccountImage
      	{
      		get
      		{
@@ -71,13 +71,13 @@ namespace ET.Client
      			}
      			if( this.m_EAccountImage == null )
      			{
-		    		this.m_EAccountImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Sprite_BackGround/EAccount");
+		    		this.m_EAccountImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Sprite_BackGround/EAccount");
      			}
      			return this.m_EAccountImage;
      		}
      	}
 
-		public UnityEngine.UI.InputField EPasswordInputField
+		public InputField EPasswordInputField
      	{
      		get
      		{
@@ -88,13 +88,13 @@ namespace ET.Client
      			}
      			if( this.m_EPasswordInputField == null )
      			{
-		    		this.m_EPasswordInputField = UIFindHelper.FindDeepChild<UnityEngine.UI.InputField>(this.uiTransform.gameObject,"Sprite_BackGround/EPassword");
+		    		this.m_EPasswordInputField = UIFindHelper.FindDeepChild<InputField>(this.uiTransform.gameObject,"Sprite_BackGround/EPassword");
      			}
      			return this.m_EPasswordInputField;
      		}
      	}
 
-		public UnityEngine.UI.Image EPasswordImage
+		public Image EPasswordImage
      	{
      		get
      		{
@@ -105,13 +105,13 @@ namespace ET.Client
      			}
      			if( this.m_EPasswordImage == null )
      			{
-		    		this.m_EPasswordImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"Sprite_BackGround/EPassword");
+		    		this.m_EPasswordImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"Sprite_BackGround/EPassword");
      			}
      			return this.m_EPasswordImage;
      		}
      	}
 
-		public UnityEngine.UI.LoopHorizontalScrollRect ELoopTestLoopHorizontalScrollRect
+		public LoopHorizontalScrollRect ELoopTestLoopHorizontalScrollRect
      	{
      		get
      		{
@@ -122,7 +122,7 @@ namespace ET.Client
      			}
      			if( this.m_ELoopTestLoopHorizontalScrollRect == null )
      			{
-		    		this.m_ELoopTestLoopHorizontalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopHorizontalScrollRect>(this.uiTransform.gameObject,"ELoopTest");
+		    		this.m_ELoopTestLoopHorizontalScrollRect = UIFindHelper.FindDeepChild<LoopHorizontalScrollRect>(this.uiTransform.gameObject,"ELoopTest");
      			}
      			return this.m_ELoopTestLoopHorizontalScrollRect;
      		}
@@ -140,13 +140,13 @@ namespace ET.Client
 			this.uiTransform = null;
 		}
 		
-		private UnityEngine.UI.Button m_ELoginButton = null;
-		private UnityEngine.UI.Image m_ELoginImage = null;
-		private UnityEngine.UI.InputField m_EAccountInputField = null;
-		private UnityEngine.UI.Image m_EAccountImage = null;
-		private UnityEngine.UI.InputField m_EPasswordInputField = null;
-		private UnityEngine.UI.Image m_EPasswordImage = null;
-		private UnityEngine.UI.LoopHorizontalScrollRect m_ELoopTestLoopHorizontalScrollRect = null;
+		private Button m_ELoginButton = null;
+		private Image m_ELoginImage = null;
+		private InputField m_EAccountInputField = null;
+		private Image m_EAccountImage = null;
+		private InputField m_EPasswordInputField = null;
+		private Image m_EPasswordImage = null;
+		private LoopHorizontalScrollRect m_ELoopTestLoopHorizontalScrollRect = null;
 		public Transform uiTransform = null;
 	}
 }

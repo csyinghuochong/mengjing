@@ -1,12 +1,12 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_TeamDungeonMy : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_TeamDungeonMy : Entity,IAwake<Transform>,IDestroy 
 	{
 		public GameObject[] UITeamNodeList = new GameObject[3];
 		public List<ES_TeamItem> TeamUIList { get; set; } = new();
@@ -71,7 +71,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.Button E_Button_CallButton
+		public Button E_Button_CallButton
      	{
      		get
      		{
@@ -82,13 +82,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_CallButton == null )
      			{
-		    		this.m_E_Button_CallButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Button_Call");
+		    		this.m_E_Button_CallButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Button_Call");
      			}
      			return this.m_E_Button_CallButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Button_CallImage
+		public Image E_Button_CallImage
      	{
      		get
      		{
@@ -99,13 +99,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_CallImage == null )
      			{
-		    		this.m_E_Button_CallImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Button_Call");
+		    		this.m_E_Button_CallImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Button_Call");
      			}
      			return this.m_E_Button_CallImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Button_EnterButton
+		public Button E_Button_EnterButton
      	{
      		get
      		{
@@ -116,13 +116,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_EnterButton == null )
      			{
-		    		this.m_E_Button_EnterButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Button_Enter");
+		    		this.m_E_Button_EnterButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Button_Enter");
      			}
      			return this.m_E_Button_EnterButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Button_EnterImage
+		public Image E_Button_EnterImage
      	{
      		get
      		{
@@ -133,13 +133,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_EnterImage == null )
      			{
-		    		this.m_E_Button_EnterImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Button_Enter");
+		    		this.m_E_Button_EnterImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Button_Enter");
      			}
      			return this.m_E_Button_EnterImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Button_LeaveButton
+		public Button E_Button_LeaveButton
      	{
      		get
      		{
@@ -150,13 +150,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_LeaveButton == null )
      			{
-		    		this.m_E_Button_LeaveButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Button_Leave");
+		    		this.m_E_Button_LeaveButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Button_Leave");
      			}
      			return this.m_E_Button_LeaveButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Button_LeaveImage
+		public Image E_Button_LeaveImage
      	{
      		get
      		{
@@ -167,13 +167,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_LeaveImage == null )
      			{
-		    		this.m_E_Button_LeaveImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Button_Leave");
+		    		this.m_E_Button_LeaveImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Button_Leave");
      			}
      			return this.m_E_Button_LeaveImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_ButtonApplyListButton
+		public Button E_ButtonApplyListButton
      	{
      		get
      		{
@@ -184,13 +184,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonApplyListButton == null )
      			{
-		    		this.m_E_ButtonApplyListButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_ButtonApplyList");
+		    		this.m_E_ButtonApplyListButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_ButtonApplyList");
      			}
      			return this.m_E_ButtonApplyListButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_ButtonApplyListImage
+		public Image E_ButtonApplyListImage
      	{
      		get
      		{
@@ -201,13 +201,13 @@ namespace ET.Client
      			}
      			if( this.m_E_ButtonApplyListImage == null )
      			{
-		    		this.m_E_ButtonApplyListImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_ButtonApplyList");
+		    		this.m_E_ButtonApplyListImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_ButtonApplyList");
      			}
      			return this.m_E_ButtonApplyListImage;
      		}
      	}
 
-		public UnityEngine.UI.Button E_Button_RobotButton
+		public Button E_Button_RobotButton
      	{
      		get
      		{
@@ -218,13 +218,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_RobotButton == null )
      			{
-		    		this.m_E_Button_RobotButton = UIFindHelper.FindDeepChild<UnityEngine.UI.Button>(this.uiTransform.gameObject,"E_Button_Robot");
+		    		this.m_E_Button_RobotButton = UIFindHelper.FindDeepChild<Button>(this.uiTransform.gameObject,"E_Button_Robot");
      			}
      			return this.m_E_Button_RobotButton;
      		}
      	}
 
-		public UnityEngine.UI.Image E_Button_RobotImage
+		public Image E_Button_RobotImage
      	{
      		get
      		{
@@ -235,13 +235,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Button_RobotImage == null )
      			{
-		    		this.m_E_Button_RobotImage = UIFindHelper.FindDeepChild<UnityEngine.UI.Image>(this.uiTransform.gameObject,"E_Button_Robot");
+		    		this.m_E_Button_RobotImage = UIFindHelper.FindDeepChild<Image>(this.uiTransform.gameObject,"E_Button_Robot");
      			}
      			return this.m_E_Button_RobotImage;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_FuBenNameText
+		public Text E_Lab_FuBenNameText
      	{
      		get
      		{
@@ -252,13 +252,13 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_FuBenNameText == null )
      			{
-		    		this.m_E_Lab_FuBenNameText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_FuBenName");
+		    		this.m_E_Lab_FuBenNameText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_FuBenName");
      			}
      			return this.m_E_Lab_FuBenNameText;
      		}
      	}
 
-		public UnityEngine.UI.Text E_Lab_FuBenLvText
+		public Text E_Lab_FuBenLvText
      	{
      		get
      		{
@@ -269,7 +269,7 @@ namespace ET.Client
      			}
      			if( this.m_E_Lab_FuBenLvText == null )
      			{
-		    		this.m_E_Lab_FuBenLvText = UIFindHelper.FindDeepChild<UnityEngine.UI.Text>(this.uiTransform.gameObject,"E_Lab_FuBenLv");
+		    		this.m_E_Lab_FuBenLvText = UIFindHelper.FindDeepChild<Text>(this.uiTransform.gameObject,"E_Lab_FuBenLv");
      			}
      			return this.m_E_Lab_FuBenLvText;
      		}
@@ -310,18 +310,18 @@ namespace ET.Client
 		private EntityRef<ES_TeamItem> m_es_teamitem1 = null;
 		private EntityRef<ES_TeamItem> m_es_teamitem2 = null;
 		private EntityRef<ES_TeamItem> m_es_teamitem3 = null;
-		private UnityEngine.UI.Button m_E_Button_CallButton = null;
-		private UnityEngine.UI.Image m_E_Button_CallImage = null;
-		private UnityEngine.UI.Button m_E_Button_EnterButton = null;
-		private UnityEngine.UI.Image m_E_Button_EnterImage = null;
-		private UnityEngine.UI.Button m_E_Button_LeaveButton = null;
-		private UnityEngine.UI.Image m_E_Button_LeaveImage = null;
-		private UnityEngine.UI.Button m_E_ButtonApplyListButton = null;
-		private UnityEngine.UI.Image m_E_ButtonApplyListImage = null;
-		private UnityEngine.UI.Button m_E_Button_RobotButton = null;
-		private UnityEngine.UI.Image m_E_Button_RobotImage = null;
-		private UnityEngine.UI.Text m_E_Lab_FuBenNameText = null;
-		private UnityEngine.UI.Text m_E_Lab_FuBenLvText = null;
+		private Button m_E_Button_CallButton = null;
+		private Image m_E_Button_CallImage = null;
+		private Button m_E_Button_EnterButton = null;
+		private Image m_E_Button_EnterImage = null;
+		private Button m_E_Button_LeaveButton = null;
+		private Image m_E_Button_LeaveImage = null;
+		private Button m_E_ButtonApplyListButton = null;
+		private Image m_E_ButtonApplyListImage = null;
+		private Button m_E_Button_RobotButton = null;
+		private Image m_E_Button_RobotImage = null;
+		private Text m_E_Lab_FuBenNameText = null;
+		private Text m_E_Lab_FuBenLvText = null;
 		public Transform uiTransform = null;
 	}
 }

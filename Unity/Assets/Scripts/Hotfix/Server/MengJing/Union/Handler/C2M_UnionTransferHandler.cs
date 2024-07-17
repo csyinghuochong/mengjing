@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ET.Server
+﻿namespace ET.Server
 {
     [MessageLocationHandler(SceneType.Map)]
     public class C2M_UnionTransferHandler : MessageLocationHandler<Unit, C2M_UnionTransferRequest, M2C_UnionTransferResponse>
