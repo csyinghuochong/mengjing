@@ -62,15 +62,7 @@ namespace ET.Server
                 {
                     continue;
                 }
-
-                //DeathTimeComponent deathTimeComponent = unitlist_1[i].GetComponent<DeathTimeComponent>();
-                //if (deathTimeComponent == null)
-                //{
-                //    Log.Debug("角斗场无敌Buff： null");
-                //    continue;
-                //}
-
-                //long passTime = TimeHelper.ServerNow() - deathTimeComponent.StartTime;
+                
                 //Log.Debug("角斗场无敌Buff： " + passTime.ToString());
                 if (unitlist_1[i].IsDisposed)
                 {
@@ -229,8 +221,7 @@ namespace ET.Server
                 {
                     continue;
                 }
-
-                //TransferHelper.MainCityTransfer(units[i]).Coroutine();
+                
                 TransferHelper.TransferUnit(units[i], actor_Transfer).Coroutine();
             }
         }

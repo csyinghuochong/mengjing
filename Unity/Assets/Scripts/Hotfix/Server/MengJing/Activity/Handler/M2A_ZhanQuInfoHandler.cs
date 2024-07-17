@@ -11,7 +11,7 @@ namespace ET.Server
         {
             DBDayActivityInfo dBDayActivityInfo = scene.GetComponent<ActivitySceneComponent>().DBDayActivityInfo;
 
-            response.ReceiveNum= dBDayActivityInfo.ZhanQuReveives;
+            response.ReceiveNum .AddRange(dBDayActivityInfo.ZhanQuReveives); 
 
             await ETTask.CompletedTask;
         }

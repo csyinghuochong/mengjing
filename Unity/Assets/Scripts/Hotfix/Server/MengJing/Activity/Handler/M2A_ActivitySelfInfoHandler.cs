@@ -32,10 +32,10 @@ namespace ET.Server
             }
 
 
-            response.GuessIds = guessIds;
-            response.LastGuessReward = lastGuessRewatd;
+            response.GuessIds .AddRange(guessIds); 
+            response.LastGuessReward  .AddRange (lastGuessRewatd);
             response.BaoShiDu = dBDayActivityInfo.BaoShiDu;
-            response.OpenGuessIds = dBDayActivityInfo.OpenGuessIds;
+            response.OpenGuessIds .AddRange(dBDayActivityInfo.OpenGuessIds) ;
             await ETTask.CompletedTask;
         }
     }

@@ -32,4 +32,9 @@ namespace ET.Server
         public bool zhudong;
         public bool checkDead;
     }
+
+    public struct GenerateSerials
+    {
+        public Scene Scene;
+    }
 }

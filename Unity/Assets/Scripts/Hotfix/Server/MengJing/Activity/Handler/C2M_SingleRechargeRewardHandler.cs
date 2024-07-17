@@ -51,7 +51,7 @@ namespace ET.Server
             if (ret)
             {
                 userInfo.SingleRewardIds.Add(request.RewardId);
-                response.RewardIds = userInfo.SingleRewardIds;
+                response.RewardIds .AddRange(userInfo.SingleRewardIds); 
             }
             else
             {

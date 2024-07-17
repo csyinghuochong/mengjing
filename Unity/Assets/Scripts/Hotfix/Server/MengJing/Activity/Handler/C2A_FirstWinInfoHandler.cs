@@ -9,7 +9,8 @@ namespace ET.Server
     {
         protected override async ETTask Run(Scene scene, C2A_FirstWinInfoRequest request, A2C_FirstWinInfoResponse response)
         {
-            response.FirstWinInfos = scene.GetComponent<ActivitySceneComponent>().DBDayActivityInfo.FirstWinInfos;
+            List<FirstWinInfo> FirstWinInfos  = scene.GetComponent<ActivitySceneComponent>().DBDayActivityInfo.FirstWinInfos;
+            response.FirstWinInfos .AddRange(FirstWinInfos);
             await ETTask.CompletedTask;
         }
     }

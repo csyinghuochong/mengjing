@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ET.Server
 {
@@ -17,7 +18,9 @@ namespace ET.Server
                 int openServerDay = ServerHelper.GetServeOpenrDay(scene.Zone());
                 activitySceneComponent.DBDayActivityInfo.MysteryItemInfos = MysteryShopHelper.InitMysteryItemInfos(openServerDay);
             }
-            response.MysteryItemInfos = activitySceneComponent.DBDayActivityInfo.MysteryItemInfos;
+            
+            List<MysteryItemInfo> MysteryItemInfos   = activitySceneComponent.DBDayActivityInfo.MysteryItemInfos;
+            response.MysteryItemInfos .AddRange(MysteryItemInfos);
             await ETTask.CompletedTask;
         }
     }

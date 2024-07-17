@@ -138,7 +138,7 @@ namespace ET.Server
                     if (request.FunctionId == 1044 && request.FunctionType == 2)
                     {
                         //Log.Console("UnionSceneComponent.OnUnionRaceOver");
-                        //scene.GetComponent<UnionSceneComponent>().OnUnionRaceOver().Coroutine();
+                        scene.GetComponent<UnionSceneComponent>().OnUnionRaceOver().Coroutine();
                     }
                     break;
                 case SceneType.PaiMai:

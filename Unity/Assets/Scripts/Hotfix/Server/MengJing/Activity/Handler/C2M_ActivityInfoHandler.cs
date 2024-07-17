@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ET.Server
 {
@@ -21,13 +22,7 @@ namespace ET.Server
                     }
                 }
             }
-            response.ReceiveIds = activityComponent.ActivityReceiveIds;
-            response.LastSignTime = activityComponent.LastSignTime;
-            response.TotalSignNumber = activityComponent.TotalSignNumber;
-            response.QuTokenRecvive = activityComponent.QuTokenRecvive;
-            response.LastLoginTime = activityComponent.LastLoginTime;
-            response.DayTeHui = activityComponent.DayTeHui;
-
+           
             ActivityV1Info activityV1Info = activityComponent.ActivityV1Info;
             activityV1Info.ChouKaDropId = unit.Scene().GetComponent<ServerInfoComponent>().ServerInfo.ChouKaDropId;
             activityV1Info.GuessIds.Clear();
@@ -42,6 +37,14 @@ namespace ET.Server
             activityV1Info.LastGuessReward = r_GameStatusResponse.LastGuessReward;
             activityV1Info.BaoShiDu = r_GameStatusResponse.BaoShiDu;
             activityV1Info.OpenGuessIds = r_GameStatusResponse.OpenGuessIds;
+            
+            response.ReceiveIds .AddRange(activityComponent.ActivityReceiveIds); 
+            response.LastSignTime = activityComponent.LastSignTime;
+            response.TotalSignNumber = activityComponent.TotalSignNumber;
+            response.QuTokenRecvive .AddRange(activityComponent.QuTokenRecvive); 
+            response.LastLoginTime = activityComponent.LastLoginTime;
+            response.DayTeHui .AddRange(activityComponent.DayTeHui); 
+
             response.ActivityV1Info = activityV1Info;
 
             await ETTask.CompletedTask;

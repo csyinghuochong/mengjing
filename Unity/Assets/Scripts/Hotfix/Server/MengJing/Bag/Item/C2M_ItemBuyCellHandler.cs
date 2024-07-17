@@ -81,7 +81,7 @@ namespace ET.Server
                 bagComponent.OnAddItemData(rewardItems, String.Empty, $"{ItemGetWay.CostItem}_{TimeHelper.ServerNow()}", true, false, (ItemLocType)request.OperateType);
             }
 
-            response.WarehouseAddedCell = bagComponent.WarehouseAddedCell;
+            response.WarehouseAddedCell .AddRange(bagComponent.WarehouseAddedCell); 
             await ETTask.CompletedTask;
         }
     }

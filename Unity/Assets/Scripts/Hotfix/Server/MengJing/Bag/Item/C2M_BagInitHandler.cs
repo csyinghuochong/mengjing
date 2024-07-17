@@ -11,19 +11,8 @@ namespace ET.Server
         {
             Console.WriteLine($"C2M_BagInitHandler: server0");
             BagComponentS bagComponentS = unit.GetComponent<BagComponentS>();
+            
             response.BagInfos = bagComponentS.GetAllItems();
-
-
-            for (int i = bagComponentS.WarehouseAddedCell.Count; i < (int)ItemLocType.ItemLocMax; i++)
-            {
-                bagComponentS.WarehouseAddedCell.Add(0);
-            }
-
-            for (int i = bagComponentS.AdditionalCellNum.Count; i < (int)ItemLocType.ItemLocMax; i++)
-            {
-                bagComponentS.AdditionalCellNum.Add(0);
-            }
-
             response.QiangHuaLevel .AddRange(bagComponentS.QiangHuaLevel); 
             response.QiangHuaFails .AddRange(bagComponentS.QiangHuaFails);
             response.WarehouseAddedCell .AddRange( bagComponentS.WarehouseAddedCell);

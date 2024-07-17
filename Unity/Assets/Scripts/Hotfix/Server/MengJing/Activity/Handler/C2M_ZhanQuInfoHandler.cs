@@ -18,8 +18,8 @@ namespace ET.Server
                 (paimaiServerId, M2A_ZhanQuInfoRequest);
 
             ActivityComponentS activityComponent = unit.GetComponent<ActivityComponentS>();
-            response.ReceiveNum = r_GameStatusResponse.ReceiveNum;
-            response.ReceiveIds = activityComponent.ZhanQuReceiveIds;
+            response.ReceiveNum .AddRange( r_GameStatusResponse.ReceiveNum);
+            response.ReceiveIds .AddRange(activityComponent.ZhanQuReceiveIds); 
 
             await ETTask.CompletedTask;
         }

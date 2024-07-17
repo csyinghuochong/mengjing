@@ -593,8 +593,7 @@ namespace ET.Server
        //        self.WarehouseAddedCell.Add(0);
        //    }
        //}
-
-  
+       
        for (int i = self.WarehouseAddedCell.Count; i < (int)ItemLocType.ItemLocMax; i++)
        {
            self.WarehouseAddedCell.Add(0);
@@ -603,7 +602,6 @@ namespace ET.Server
        {
            self.AdditionalCellNum.Add(0);
        }
-
 
        if (self.QiangHuaLevel.Count == 0)
        {

@@ -102,16 +102,8 @@ namespace ET.Server
                         }
                         if (messagevalue[0] == "2")
                         {
-                            //EventSystem.Publish(GenerateSerials() { AccountCenterScene = scene });
+                            EventSystem.Instance.Publish(scene.Root(), new  GenerateSerials() { Scene = scene });
                         }
-                        //if (yeardate == 20230412 && hour == 13 && self.DomainZone() == 3)
-                        //{
-                        //    //通知中心刷新序列号
-                        //    LogHelper.LogWarning($"刷新序列号", true);
-                        //    long centerid = DBHelper.GetAccountCenter();
-                        //    A2A_ActivityUpdateResponse m2m_TrasferUnitResponse = (A2A_ActivityUpdateResponse)await ActorMessageSenderComponent.Instance.Call
-                        //                 (centerid, new A2A_ActivityUpdateRequest() { ActivityType = 1 });
-                        //}
                         break;
                     default:
                         break;
