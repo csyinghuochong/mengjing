@@ -35,7 +35,7 @@ namespace ET.Client
             self.NoLockList.Add(self.View.E_NoLock_3Image.gameObject);
             self.NoLockList.Add(self.View.E_NoLock_4Image.gameObject);
 
-            self.View.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
+            self.View.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet, self.CheckPageButton_1);
             self.View.E_ButtonPackButton.AddListener(self.OnBtn_ZhengLi);
             self.View.E_ButtonTakeOutAllButton.AddListenerAsync(self.OnButtonOneKey);
             self.View.E_OneKeyButton.AddListenerAsync(self.OnButtonOneKey);
@@ -50,11 +50,6 @@ namespace ET.Client
 
         private static void OnItemTypeSet(this DlgJiaYuanWarehouse self, int index)
         {
-            if (!self.CheckPageButton_1(index))
-            {
-                return;
-            }
-
             self.RefreshHouseItems();
             self.UpdateLockList(index);
         }

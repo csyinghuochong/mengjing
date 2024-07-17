@@ -23,7 +23,7 @@ namespace ET.Client
             self.NoLockList.Add(self.E_NoLock_3Image.gameObject);
             self.NoLockList.Add(self.E_NoLock_4Image.gameObject);
 
-            self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet);
+            self.E_ItemTypeSetToggleGroup.AddListener(self.OnItemTypeSet, self.CheckPageButton_1);
             self.E_ButtonPackButton.AddListener(self.OnBtn_ZhengLi);
             self.E_ButtonQuickButton.AddListenerAsync(self.OnButtonQuick);
 
@@ -43,11 +43,6 @@ namespace ET.Client
 
         private static void OnItemTypeSet(this ES_WarehouseRole self, int index)
         {
-            if (!self.CheckPageButton_1(index))
-            {
-                return;
-            }
-
             self.RefreshHouseItems();
             self.UpdateLockList(index);
         }
