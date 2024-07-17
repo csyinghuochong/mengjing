@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.Options;
+using System.ComponentModel;
 
 namespace ET
 {
@@ -78,10 +79,10 @@ namespace ET
 		public int TaskExp { get; set; }
 		/// <summary>任务金币</summary>
 		public int TaskCoin { get; set; }
+		/// <summary>活跃度</summary>
+		public int EveryTaskRewardNum { get; set; }
 		/// <summary>奖励道具ID</summary>
-		public string ItemID { get; set; }
-		/// <summary>奖励道具数量</summary>
-		public string ItemNum { get; set; }
+		public string RewardItem { get; set; }
 		/// <summary>接取任务的NPC</summary>
 		public int GetNpcID { get; set; }
 		/// <summary>交任务的Npc</summary>
