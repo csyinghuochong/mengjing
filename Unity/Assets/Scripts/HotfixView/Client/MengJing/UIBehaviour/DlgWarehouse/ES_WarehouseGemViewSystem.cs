@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [EntitySystemOf(typeof (ES_WarehouseGem))]
-    [FriendOfAttribute(typeof (ES_WarehouseGem))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [EntitySystemOf(typeof(ES_WarehouseGem))]
+    [FriendOfAttribute(typeof(ES_WarehouseGem))]
     public static partial class ES_WarehouseGemSystem
     {
         [EntitySystem]
@@ -51,7 +51,6 @@ namespace ET.Client
 
         public static void Refresh(this ES_WarehouseGem self)
         {
-            self.Root().GetComponent<BagComponentC>().CurrentHouse = (int)ItemLocType.GemWareHouse1;
             self.RefreshHouseItems();
             self.RefreshBagItems();
         }
@@ -61,7 +60,7 @@ namespace ET.Client
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
 
             self.ShowHouseBagInfos.Clear();
-            self.ShowHouseBagInfos.AddRange(bagComponentC.GetItemsByLoc((ItemLocType)self.Root().GetComponent<BagComponentC>().CurrentHouse));
+            self.ShowHouseBagInfos.AddRange(bagComponentC.GetItemsByLoc(ItemLocType.GemWareHouse1));
 
             int hourseNumber = GlobalValueConfigCategory.Instance.GemStoreMaxCapacity;
             self.AddUIScrollItems(ref self.ScrollItemHouseItems, hourseNumber);
@@ -95,7 +94,8 @@ namespace ET.Client
 
             if (index < self.ShowHouseBagInfos.Count)
             {
-                scrollItemCommonItem.Refresh(self.ShowHouseBagInfos[index], ItemOperateEnum.GemCangku, self.UpdateHouseSelect);
+                scrollItemCommonItem.Refresh(self.ShowHouseBagInfos[index], ItemOperateEnum.GemCangku, self.UpdateHouseSelect,
+                    (int)ItemLocType.GemWareHouse1);
             }
             else
             {
@@ -106,8 +106,8 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this ES_WarehouseGem self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemBagItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count? self.ShowBagBagInfos[index] : null, ItemOperateEnum.GemBag,
-                self.UpdateBagSelect);
+            scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count ? self.ShowBagBagInfos[index] : null, ItemOperateEnum.GemBag,
+                self.UpdateBagSelect, (int)ItemLocType.GemWareHouse1);
         }
 
         private static void UpdateHouseSelect(this ES_WarehouseGem self, BagInfo bagInfo)

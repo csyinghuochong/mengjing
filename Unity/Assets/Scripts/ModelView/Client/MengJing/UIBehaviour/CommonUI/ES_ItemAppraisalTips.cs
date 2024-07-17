@@ -9,6 +9,7 @@ namespace ET.Client
 	{
 		public BagInfo BagInfo;
 		public ItemOperateEnum ItemOpetateType;
+		public int CurrentHouse;
 		
 		public UnityEngine.UI.Image E_BackImage
      	{

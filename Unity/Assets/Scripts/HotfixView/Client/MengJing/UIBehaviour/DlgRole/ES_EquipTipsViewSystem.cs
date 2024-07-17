@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponentC))]
-    [EntitySystemOf(typeof (ES_EquipTips))]
-    [FriendOfAttribute(typeof (ES_EquipTips))]
+    [FriendOf(typeof(UserInfoComponentC))]
+    [EntitySystemOf(typeof(ES_EquipTips))]
+    [FriendOfAttribute(typeof(ES_EquipTips))]
     public static partial class ES_EquipTipsSystem
     {
         [EntitySystem]
@@ -52,11 +52,12 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void RefreshInfo(this ES_EquipTips self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum, int occTwoValue,
+        public static void RefreshInfo(this ES_EquipTips self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum, int currentHouse, int occTwoValue,
         List<BagInfo> equipItemList)
         {
             self.BagInfo = bagInfo;
             self.ItemOpetateType = itemOperateEnum;
+            self.CurrentHouse = currentHouse;
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             if (itemConfig.ItemEquipID == 0)
             {
@@ -175,7 +176,7 @@ namespace ET.Client
             self.E_EquipDesText.text = itemConfig.ItemDes;
 
             // 制造方
-            self.E_EquipMakeText.text = !string.IsNullOrEmpty(self.BagInfo.MakePlayer)? $"由<color=#805100>{self.BagInfo.MakePlayer}</color>打造" : "";
+            self.E_EquipMakeText.text = !string.IsNullOrEmpty(self.BagInfo.MakePlayer) ? $"由<color=#805100>{self.BagInfo.MakePlayer}</color>打造" : "";
 
             // 专精
             if (occTwoValue != 0)
@@ -298,7 +299,7 @@ namespace ET.Client
                     self.Obj_UIEquipGemHoleList[gemNumber].SetActive(gemHoles[i] != "0");
                     self.TipsShowEquipGem(self.Obj_UIEquipGemHoleIconList[gemNumber], self.Obj_UIEquipGemHoleTextList[gemNumber],
                         int.Parse(gemHoles[gemNumber]), int.Parse(gemIds[gemNumber]));
-                    gemNumber += (gemHoles[i] != "0"? 1 : 0);
+                    gemNumber += (gemHoles[i] != "0" ? 1 : 0);
                 }
             }
             else
@@ -318,19 +319,19 @@ namespace ET.Client
 
             //显示隐藏技能
             //float HintTextNum = 50;
-            startPostionY -= (zhunjingNumber > 0? self.TitleMiniHeight_50 : 0);
+            startPostionY -= (zhunjingNumber > 0 ? self.TitleMiniHeight_50 : 0);
             startPostionY = startPostionY - zhunjingNumber * self.TextItemHeight_40;
             startPostionY -= 5;
             int hideSkillNumber = self.ShowHideSkill(itemConfig, startPostionY);
 
             //显示装备套装信息
             //float equipSuitTextNum = 0;
-            startPostionY -= (hideSkillNumber > 0? self.TitleMiniHeight_50 : 0);
+            startPostionY -= (hideSkillNumber > 0 ? self.TitleMiniHeight_50 : 0);
             startPostionY -= hideSkillNumber * self.TextItemHeight_40;
 
             EquipConfig equipConfig = EquipConfigCategory.Instance.Get(itemConfig.ItemEquipID);
             int suitEquipNumber = self.ShowSuitEquipInfo(itemConfig, equipConfig.EquipSuitID, startPostionY, equipItemList);
-            suitEquipNumber = suitEquipNumber + (suitEquipNumber > 0? 2 : 0);
+            suitEquipNumber = suitEquipNumber + (suitEquipNumber > 0 ? 2 : 0);
             startPostionY = startPostionY - self.TitleMiniHeight_50 - suitEquipNumber * self.TextItemHeight_40;
             startPostionY -= 5;
 
@@ -808,7 +809,7 @@ namespace ET.Client
             }
             else
             {
-                BagClientNetHelper.RquestPutStoreHouse(self.Root(), self.BagInfo).Coroutine();
+                BagClientNetHelper.RquestPutStoreHouse(self.Root(), self.BagInfo, self.CurrentHouse).Coroutine();
             }
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);

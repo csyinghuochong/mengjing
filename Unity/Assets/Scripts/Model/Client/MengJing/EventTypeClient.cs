@@ -8,8 +8,9 @@ namespace ET.Client
         public BagInfo BagInfo;
         public ItemOperateEnum ItemOperateEnum;
         public float3 InputPoint;
-        public List<BagInfo> EquipList;
         public int Occ;
+        public List<BagInfo> EquipList;
+        public int CurrentHouse;
     }
 
     public struct ShowFlyTip

@@ -96,7 +96,8 @@ namespace ET.Client
                         ItemOperateEnum = self.ItemOperateEnum,
                         InputPoint = Input.mousePosition,
                         Occ = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Occ,
-                        EquipList = new List<BagInfo>()
+                        EquipList = new List<BagInfo>(),
+                        CurrentHouse =  self.CurrentHouse
                     });
             }
         }
@@ -118,11 +119,17 @@ namespace ET.Client
             self.E_LockImage.gameObject.SetActive(!actived);
         }
 
+        public static void SetCurrentHouse(this ES_CommonItem self, int currentHouse)
+        {
+            self.CurrentHouse = currentHouse;
+        }
+        
         public static void UpdateItem(this ES_CommonItem self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum)
         {
             self.Baginfo = bagInfo;
             self.ItemOperateEnum = itemOperateEnum;
             self.ShowTip = true;
+            self.CurrentHouse = -1;
 
             self.E_ItemDiImage.gameObject.SetActive(false);
             self.E_ItemClickButton.gameObject.SetActive(false);

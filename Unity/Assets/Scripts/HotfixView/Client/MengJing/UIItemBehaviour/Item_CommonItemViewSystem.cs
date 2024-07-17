@@ -21,10 +21,11 @@ namespace ET.Client
         }
 
         public static void Refresh(this Scroll_Item_CommonItem self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum,
-        Action<BagInfo> onClickAction = null)
+        Action<BagInfo> onClickAction = null, int currentHouse = -1)
         {
             self.ES_CommonItem.UpdateItem(bagInfo, itemOperateEnum);
             self.ES_CommonItem.SetClickHandler(onClickAction);
+            self.ES_CommonItem.SetCurrentHouse(currentHouse);
         }
 
         public static void UpdateSelectStatus(this Scroll_Item_CommonItem self, BagInfo bagInfo)

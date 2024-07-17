@@ -5,10 +5,11 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_EquipTips : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_EquipTips : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
 		public BagInfo BagInfo;
 		public ItemOperateEnum ItemOpetateType;
+		public int CurrentHouse;
 		public float TitleBigHeight_160;      //底图头部的宽度
 		public float TextItemHeight_40;       //底图属性的宽度
 		public float TitleMiniHeight_50;

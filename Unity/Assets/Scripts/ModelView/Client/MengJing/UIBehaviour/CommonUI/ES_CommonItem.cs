@@ -6,8 +6,9 @@ namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_CommonItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_CommonItem : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy
 	{
+		public int CurrentHouse { get; set; }
 		public BagInfo Baginfo { get; set; }
 		public string ItemNum { get; set; }
 		public int ItemID { get; set; }

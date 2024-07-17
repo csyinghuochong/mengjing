@@ -37,10 +37,11 @@ namespace ET.Client
             self.View.uiTransform.GetComponent<RectTransform>().anchoredPosition = vector2;
         }
 
-        public static void RefreshInfo(this DlgItemTips self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum)
+        public static void RefreshInfo(this DlgItemTips self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum, int currentHouse)
         {
             self.BagInfo = bagInfo;
             self.ItemOperateEnum = itemOperateEnum;
+            self.CurrentHouse = currentHouse;
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             int itemType = itemConfig.ItemType;
             int itemSubType = itemConfig.ItemSubType;
@@ -635,7 +636,7 @@ namespace ET.Client
             }
             else
             {
-                BagClientNetHelper.RquestPutStoreHouse(self.Root(), self.BagInfo).Coroutine();
+                BagClientNetHelper.RquestPutStoreHouse(self.Root(), self.BagInfo, self.CurrentHouse).Coroutine();
             }
 
             self.OnCloseTips();

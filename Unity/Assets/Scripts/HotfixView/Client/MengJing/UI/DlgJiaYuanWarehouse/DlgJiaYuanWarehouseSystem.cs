@@ -55,8 +55,6 @@ namespace ET.Client
                 return;
             }
 
-            self.Root().GetComponent<BagComponentC>().CurrentHouse =
-                    self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1;
             self.RefreshHouseItems();
             self.UpdateLockList(index);
         }
@@ -120,8 +118,6 @@ namespace ET.Client
 
         public static void Refresh(this DlgJiaYuanWarehouse self)
         {
-            self.Root().GetComponent<BagComponentC>().CurrentHouse =
-                    self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1;
             self.RefreshHouseItems();
             self.RefreshBagItems();
         }
@@ -158,7 +154,8 @@ namespace ET.Client
 
             if (index < self.ShowHouseBagInfos.Count)
             {
-                scrollItemCommonItem.Refresh(self.ShowHouseBagInfos[index], ItemOperateEnum.Cangku, self.UpdateHouseSelect);
+                scrollItemCommonItem.Refresh(self.ShowHouseBagInfos[index], ItemOperateEnum.Cangku, self.UpdateHouseSelect,
+                    self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1);
             }
             else
             {
@@ -170,7 +167,7 @@ namespace ET.Client
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemBagItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count ? self.ShowBagBagInfos[index] : null, ItemOperateEnum.CangkuBag,
-                self.UpdateBagSelect);
+                self.UpdateBagSelect, self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1);
         }
 
         private static void UpdateHouseSelect(this DlgJiaYuanWarehouse self, BagInfo bagInfo)

@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponentC))]
-    [EntitySystemOf(typeof (ES_ItemAppraisalTips))]
-    [FriendOfAttribute(typeof (ES_ItemAppraisalTips))]
+    [FriendOf(typeof(UserInfoComponentC))]
+    [EntitySystemOf(typeof(ES_ItemAppraisalTips))]
+    [FriendOfAttribute(typeof(ES_ItemAppraisalTips))]
     public static partial class ES_ItemAppraisalTipsSystem
     {
         [EntitySystem]
@@ -29,10 +29,11 @@ namespace ET.Client
             self.DestroyWidget();
         }
 
-        public static void RefreshInfo(this ES_ItemAppraisalTips self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum)
+        public static void RefreshInfo(this ES_ItemAppraisalTips self, BagInfo bagInfo, ItemOperateEnum itemOperateEnum, int currentHouse)
         {
             self.BagInfo = bagInfo;
             self.ItemOpetateType = itemOperateEnum;
+            self.CurrentHouse = currentHouse;
             ItemConfig itemconf = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             int itemType = itemconf.ItemType;
             int itemSubType = itemconf.ItemSubType;
@@ -58,7 +59,7 @@ namespace ET.Client
                 int appraisalItem = EquipConfigCategory.Instance.Get(itemconf.ItemEquipID).AppraisalItem;
                 if (appraisalItem != 0)
                 {
-                    string tip_1 = itemconf.EquipType == 101? "封印生肖" : "进行鉴定";
+                    string tip_1 = itemconf.EquipType == 101 ? "封印生肖" : "进行鉴定";
                     string jiandingName = ItemConfigCategory.Instance.Get(appraisalItem).ItemName;
                     self.E_ItemCostDesText.text = $"消耗<color=#EA8EF9>{jiandingName}</color>{tip_1}";
                 }
@@ -144,7 +145,7 @@ namespace ET.Client
             self.E_FengYinImage.gameObject.SetActive(itemconf.EquipType == 101);
             CommonViewHelper.SetImageGray(self.Root(), self.E_ItemIconImage.gameObject, true);
 
-            self.E_ItemDesText.text = itemconf.EquipType == 101? "封印生肖" : "未鉴定装备";
+            self.E_ItemDesText.text = itemconf.EquipType == 101 ? "封印生肖" : "未鉴定装备";
             // 赛季晶核
             if (itemType == 3 && itemconf.EquipType == 201)
             {
@@ -201,7 +202,7 @@ namespace ET.Client
                 self.E_ItemJingHePropertyText.text = attribute;
             }
 
-            self.E_UseButton.transform.Find("Text").GetComponent<Text>().text = itemconf.EquipType == 101? "开启封印" : "鉴定";
+            self.E_UseButton.transform.Find("Text").GetComponent<Text>().text = itemconf.EquipType == 101 ? "开启封印" : "鉴定";
 
             string ItemQuality = FunctionUI.ItemQualiytoPath(itemconf.ItemQuality);
             string path3 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemQualityIcon, ItemQuality);
@@ -448,7 +449,7 @@ namespace ET.Client
             }
             else
             {
-                BagClientNetHelper.RquestPutStoreHouse(self.Root(), self.BagInfo).Coroutine();
+                BagClientNetHelper.RquestPutStoreHouse(self.Root(), self.BagInfo, self.CurrentHouse).Coroutine();
             }
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);

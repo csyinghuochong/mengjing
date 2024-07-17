@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class ShowItemTips_CreateItemTips: AEvent<Scene, ShowItemTips>
+    public class ShowItemTips_CreateItemTips : AEvent<Scene, ShowItemTips>
     {
         protected override async ETTask Run(Scene root, ShowItemTips args)
         {
@@ -15,7 +15,7 @@ namespace ET.Client
                 {
                     return;
                 }
-                
+
                 if (args.BagInfo.IfJianDing)
                 {
                     return;
@@ -39,6 +39,7 @@ namespace ET.Client
                 {
                     return;
                 }
+
                 return;
             }
 
@@ -84,7 +85,7 @@ namespace ET.Client
                 UIComponent uiComponent = root.GetComponent<UIComponent>();
                 await uiComponent.ShowWindowAsync(WindowID.WindowID_ItemTips);
                 uiComponent.GetDlgLogic<DlgItemTips>().SetPosition(ReturnX(root, args, itemWidth));
-                uiComponent.GetDlgLogic<DlgItemTips>().RefreshInfo(args.BagInfo, args.ItemOperateEnum);
+                uiComponent.GetDlgLogic<DlgItemTips>().RefreshInfo(args.BagInfo, args.ItemOperateEnum, args.CurrentHouse);
             }
         }
 

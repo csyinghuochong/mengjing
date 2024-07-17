@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class BagItemUpdate_DlgChouKaWarehouseRefresh: AEvent<Scene, DataUpdate_BagItemUpdate>
+    public class BagItemUpdate_DlgChouKaWarehouseRefresh : AEvent<Scene, DataUpdate_BagItemUpdate>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_BagItemUpdate args)
         {
@@ -16,8 +16,8 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [FriendOf(typeof (DlgChouKaWarehouse))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [FriendOf(typeof(DlgChouKaWarehouse))]
     public static class DlgChouKaWarehouseSystem
     {
         public static void RegisterUIEvent(this DlgChouKaWarehouse self)
@@ -38,15 +38,15 @@ namespace ET.Client
         private static void OnHouseItemsRefresh(this DlgChouKaWarehouse self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowHouseBagInfos.Count? self.ShowHouseBagInfos[index] : null, ItemOperateEnum.Cangku,
-                self.UpdateHouseSelect);
+            scrollItemCommonItem.Refresh(index < self.ShowHouseBagInfos.Count ? self.ShowHouseBagInfos[index] : null, ItemOperateEnum.Cangku,
+                self.UpdateHouseSelect, (int)ItemLocType.ChouKaWarehouse);
         }
 
         private static void OnBagItemsRefresh(this DlgChouKaWarehouse self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemBagItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count? self.ShowBagBagInfos[index] : null, ItemOperateEnum.CangkuBag,
-                self.UpdateBagSelect);
+            scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count ? self.ShowBagBagInfos[index] : null, ItemOperateEnum.CangkuBag,
+                self.UpdateBagSelect, (int)ItemLocType.ChouKaWarehouse);
         }
 
         private static void UpdateHouseSelect(this DlgChouKaWarehouse self, BagInfo bagInfo)
@@ -92,7 +92,6 @@ namespace ET.Client
 
         public static void Refresh(this DlgChouKaWarehouse self)
         {
-            self.Root().GetComponent<BagComponentC>().CurrentHouse = (int)ItemLocType.ChouKaWarehouse;
             self.RefreshHouse();
             self.RefreshBag();
         }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class BagItemUpdate_DlgJiaYuanTreasureMapStorageRefresh: AEvent<Scene, DataUpdate_BagItemUpdate>
+    public class BagItemUpdate_DlgJiaYuanTreasureMapStorageRefresh : AEvent<Scene, DataUpdate_BagItemUpdate>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_BagItemUpdate args)
         {
@@ -16,7 +16,7 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (DlgJiaYuanTreasureMapStorage))]
+    [FriendOf(typeof(DlgJiaYuanTreasureMapStorage))]
     public static class DlgJiaYuanTreasureMapStorageSystem
     {
         public static void RegisterUIEvent(this DlgJiaYuanTreasureMapStorage self)
@@ -36,20 +36,20 @@ namespace ET.Client
 
         private static void OnItemTypeSet(this DlgJiaYuanTreasureMapStorage self, int index)
         {
-            self.Root().GetComponent<BagComponentC>().CurrentHouse =
-                    self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1;
             self.UpdateStorage();
             self.UpdateBagList();
         }
 
         public static async ETTask OnButtonTakeOutAll(this DlgJiaYuanTreasureMapStorage self)
         {
-            await BagClientNetHelper.RquestTakeOutAll(self.Root(), self.Root().GetComponent<BagComponentC>().CurrentHouse);
+            await BagClientNetHelper.RquestTakeOutAll(self.Root(),
+                self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1);
         }
 
         public static async ETTask OnButtonOneKey(this DlgJiaYuanTreasureMapStorage self)
         {
-            await JiaYuanNetHelper.JiaYuanStoreRequest(self.Root(), self.Root().GetComponent<BagComponentC>().CurrentHouse);
+            await JiaYuanNetHelper.JiaYuanStoreRequest(self.Root(),
+                self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1);
         }
 
         private static void OnHouseItemsRefresh(this DlgJiaYuanTreasureMapStorage self, Transform transform, int index)
@@ -58,7 +58,8 @@ namespace ET.Client
 
             if (index < self.ShowHouseBagInfos.Count)
             {
-                scrollItemCommonItem.Refresh(self.ShowHouseBagInfos[index], ItemOperateEnum.Cangku);
+                scrollItemCommonItem.Refresh(self.ShowHouseBagInfos[index], ItemOperateEnum.Cangku, null,
+                    self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1);
             }
             else
             {
@@ -83,7 +84,8 @@ namespace ET.Client
 
             if (index < self.ShowBagBagInfos.Count)
             {
-                scrollItemCommonItem.Refresh(self.ShowBagBagInfos[index], ItemOperateEnum.CangkuBag);
+                scrollItemCommonItem.Refresh(self.ShowBagBagInfos[index], ItemOperateEnum.CangkuBag, null,
+                    self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1);
             }
             else
             {

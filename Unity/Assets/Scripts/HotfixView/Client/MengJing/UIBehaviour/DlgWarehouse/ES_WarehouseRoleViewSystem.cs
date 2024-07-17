@@ -48,8 +48,6 @@ namespace ET.Client
                 return;
             }
 
-            self.CurrentItemType = index;
-            self.Root().GetComponent<BagComponentC>().CurrentHouse = self.CurrentItemType + (int)ItemLocType.ItemWareHouse1;
             self.RefreshHouseItems();
             self.UpdateLockList(index);
         }
@@ -80,13 +78,13 @@ namespace ET.Client
 
         private static async ETTask OnButtonQuick(this ES_WarehouseRole self)
         {
-            int currentHouse = self.CurrentItemType + (int)ItemLocType.ItemWareHouse1;
+            int currentHouse = self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1;
             await BagClientNetHelper.RquestQuickPut(self.Root(), currentHouse);
         }
 
         private static void OnBtn_ZhengLi(this ES_WarehouseRole self)
         {
-            int currentHouse = self.CurrentItemType + (int)ItemLocType.ItemWareHouse1;
+            int currentHouse = self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1;
             BagClientNetHelper.RequestSortByLoc(self.Root(), (ItemLocType)currentHouse).Coroutine();
         }
 
@@ -99,17 +97,21 @@ namespace ET.Client
         private static void OnClickImage_Lock(this ES_WarehouseRole self)
         {
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            int addcell = bagComponent.WarehouseAddedCell[self.CurrentItemType];
-            BuyCellCost buyCellCost = ConfigData.BuyStoreCellCosts[self.CurrentItemType * 10 + addcell];
+            int addcell = bagComponent.WarehouseAddedCell[self.E_ItemTypeSetToggleGroup.GetCurrentIndex()];
+            BuyCellCost buyCellCost = ConfigData.BuyStoreCellCosts[self.E_ItemTypeSetToggleGroup.GetCurrentIndex() * 10 + addcell];
             PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
                 $"是否花费{CommonViewHelper.GetNeedItemDesc(buyCellCost.Cost)}购买一个背包格子?",
-                () => { BagClientNetHelper.RequestBuyBagCell(self.Root(), self.CurrentItemType + (int)ItemLocType.ItemWareHouse1).Coroutine(); },
+                () =>
+                {
+                    BagClientNetHelper
+                            .RequestBuyBagCell(self.Root(), self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1)
+                            .Coroutine();
+                },
                 null).Coroutine();
         }
 
         public static void Refresh(this ES_WarehouseRole self)
         {
-            self.Root().GetComponent<BagComponentC>().CurrentHouse = self.CurrentItemType + (int)ItemLocType.ItemWareHouse1;
             self.RefreshHouseItems();
             self.RefreshBagItems();
         }
@@ -119,9 +121,10 @@ namespace ET.Client
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
 
             self.ShowHouseBagInfos.Clear();
-            self.ShowHouseBagInfos.AddRange(bagComponentC.GetItemsByLoc((ItemLocType)(self.CurrentItemType + (int)ItemLocType.ItemWareHouse1)));
+            self.ShowHouseBagInfos.AddRange(
+                bagComponentC.GetItemsByLoc((ItemLocType)(self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1)));
 
-            int allNumber = bagComponentC.GetHouseShowCell(self.CurrentItemType + (int)ItemLocType.ItemWareHouse1);
+            int allNumber = bagComponentC.GetHouseShowCell(self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1);
             self.AddUIScrollItems(ref self.ScrollItemHouseItems, allNumber);
             self.E_BagItems1LoopVerticalScrollRect.SetVisible(true, allNumber);
         }
@@ -143,12 +146,13 @@ namespace ET.Client
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[index].BindTrans(transform);
 
             BagComponentC bagComponentC = self.Root().GetComponent<BagComponentC>();
-            int openell = bagComponentC.GetHouseTotalCell(self.CurrentItemType + (int)ItemLocType.ItemWareHouse1);
-            int allNumber = bagComponentC.GetHouseShowCell(self.CurrentItemType + (int)ItemLocType.ItemWareHouse1);
+            int openell = bagComponentC.GetHouseTotalCell(self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1);
+            int allNumber = bagComponentC.GetHouseShowCell(self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1);
 
             if (index < self.ShowHouseBagInfos.Count)
             {
-                scrollItemCommonItem.Refresh(self.ShowHouseBagInfos[index], ItemOperateEnum.Cangku, self.UpdateHouseSelect);
+                scrollItemCommonItem.Refresh(self.ShowHouseBagInfos[index], ItemOperateEnum.Cangku, self.UpdateHouseSelect,
+                    self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1);
             }
             else
             {
@@ -161,8 +165,9 @@ namespace ET.Client
             }
             else
             {
-                int addcell = bagComponentC.WarehouseAddedCell[self.CurrentItemType + (int)ItemLocType.ItemWareHouse1] + (index - openell);
-                BuyCellCost buyCellCost = ConfigData.BuyStoreCellCosts[self.CurrentItemType * 10 + addcell];
+                int addcell = bagComponentC.WarehouseAddedCell[self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1] +
+                        (index - openell);
+                BuyCellCost buyCellCost = ConfigData.BuyStoreCellCosts[self.E_ItemTypeSetToggleGroup.GetCurrentIndex() * 10 + addcell];
                 int itemid = int.Parse(buyCellCost.Get.Split(';')[0]);
                 int itemnum = int.Parse(buyCellCost.Get.Split(';')[1]);
                 BagInfo bagInfoNew = BagInfo.Create();
@@ -178,29 +183,35 @@ namespace ET.Client
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemBagItems[index].BindTrans(transform);
             scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count ? self.ShowBagBagInfos[index] : null, ItemOperateEnum.CangkuBag,
-                self.UpdateBagSelect);
+                self.UpdateBagSelect, self.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.ItemWareHouse1);
         }
 
         private static void UpdateHouseSelect(this ES_WarehouseRole self, BagInfo bagInfo)
         {
-            for (int i = 0; i < self.ScrollItemHouseItems.Keys.Count - 1; i++)
+            if (self.ScrollItemHouseItems != null)
             {
-                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[i];
-                if (scrollItemCommonItem.uiTransform != null)
+                foreach (var value in self.ScrollItemHouseItems.Values)
                 {
-                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    Scroll_Item_CommonItem scrollItemCommonItem = value;
+                    if (scrollItemCommonItem.uiTransform != null)
+                    {
+                        scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    }
                 }
             }
         }
 
         private static void UpdateBagSelect(this ES_WarehouseRole self, BagInfo bagInfo)
         {
-            for (int i = 0; i < self.ScrollItemBagItems.Keys.Count - 1; i++)
+            if (self.ScrollItemBagItems != null)
             {
-                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[i];
-                if (scrollItemCommonItem.uiTransform != null)
+                foreach (var value in self.ScrollItemBagItems.Values)
                 {
-                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    Scroll_Item_CommonItem scrollItemCommonItem = value;
+                    if (scrollItemCommonItem.uiTransform != null)
+                    {
+                        scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    }
                 }
             }
         }
