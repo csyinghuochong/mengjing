@@ -537,7 +537,7 @@ namespace ET.Server
              long fubenid = IdGenerater.Instance.GenerateId();
              long fubenInstanceId = IdGenerater.Instance.GenerateInstanceId();
              Scene fubnescene =  GateMapFactory.Create(unit.Root(), fubenid, fubenInstanceId, "LocalDungeon" + fubenid.ToString());
-             //fubnescene.AddComponent<YeWaiRefreshComponent>();
+             fubnescene.AddComponent<YeWaiRefreshComponent>();
              LocalDungeonComponent localDungeon = fubnescene.AddComponent<LocalDungeonComponent>();
              localDungeon.FubenDifficulty = difficulty;
              MapComponent mapComponent = fubnescene.GetComponent<MapComponent>();
