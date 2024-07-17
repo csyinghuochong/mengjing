@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class BagItemUpdate_DlgJiaYuanWarehouseRefresh: AEvent<Scene, DataUpdate_BagItemUpdate>
+    public class BagItemUpdate_DlgJiaYuanWarehouseRefresh : AEvent<Scene, DataUpdate_BagItemUpdate>
     {
         protected override async ETTask Run(Scene scene, DataUpdate_BagItemUpdate args)
         {
@@ -16,8 +16,8 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [FriendOf(typeof (DlgJiaYuanWarehouse))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [FriendOf(typeof(DlgJiaYuanWarehouse))]
     public static class DlgJiaYuanWarehouseSystem
     {
         public static void RegisterUIEvent(this DlgJiaYuanWarehouse self)
@@ -169,30 +169,36 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this DlgJiaYuanWarehouse self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemBagItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count? self.ShowBagBagInfos[index] : null, ItemOperateEnum.CangkuBag,
+            scrollItemCommonItem.Refresh(index < self.ShowBagBagInfos.Count ? self.ShowBagBagInfos[index] : null, ItemOperateEnum.CangkuBag,
                 self.UpdateBagSelect);
         }
 
         private static void UpdateHouseSelect(this DlgJiaYuanWarehouse self, BagInfo bagInfo)
         {
-            for (int i = 0; i < self.ScrollItemHouseItems.Keys.Count - 1; i++)
+            if (self.ScrollItemHouseItems != null)
             {
-                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[i];
-                if (scrollItemCommonItem.uiTransform != null)
+                foreach (var value in self.ScrollItemHouseItems.Values)
                 {
-                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    Scroll_Item_CommonItem scrollItemCommonItem = value;
+                    if (scrollItemCommonItem.uiTransform != null)
+                    {
+                        scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    }
                 }
             }
         }
 
         private static void UpdateBagSelect(this DlgJiaYuanWarehouse self, BagInfo bagInfo)
         {
-            for (int i = 0; i < self.ScrollItemBagItems.Keys.Count - 1; i++)
+            if (self.ScrollItemBagItems != null)
             {
-                Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemHouseItems[i];
-                if (scrollItemCommonItem.uiTransform != null)
+                foreach (var value in self.ScrollItemBagItems.Values)
                 {
-                    scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    Scroll_Item_CommonItem scrollItemCommonItem = value;
+                    if (scrollItemCommonItem.uiTransform != null)
+                    {
+                        scrollItemCommonItem.UpdateSelectStatus(bagInfo);
+                    }
                 }
             }
         }
