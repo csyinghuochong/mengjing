@@ -65,6 +65,8 @@ namespace ET
 		public string TaskName { get; set; }
 		/// <summary>任务等级</summary>
 		public int TaskLv { get; set; }
+		/// <summary>任务图标</summary>
+		public string TaskIcon { get; set; }
 		/// <summary>最大接取等级</summary>
 		public int TaskMaxLv { get; set; }
 		/// <summary>任务类型</summary>
