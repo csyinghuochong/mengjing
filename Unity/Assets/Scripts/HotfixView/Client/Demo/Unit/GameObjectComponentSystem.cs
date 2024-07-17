@@ -236,7 +236,7 @@ namespace ET.Client
             int planStage = ET.JiaYuanHelper.GetPlanStage(unit.ConfigId, startTime, gatherNumber);
             // string path = ABPathHelper.GetUnitPath($"JiaYuan/{jiaYuanFarmConfig.ModelID + planStage}");
             string path = ABPathHelper.GetUnitPath($"JiaYuan/100101");
-            unit.RemoveComponent<JiaYuanPlanUIComponent>();
+            unit.RemoveComponent<UIJiaYuanPlanComponent>();
             unit.RemoveComponent<JiaYuanPlanEffectComponent>();
             GameObjectLoadHelper.AddLoadQueue(self.Root(), path, self.InstanceId, self.OnLoadGameObject);
         }

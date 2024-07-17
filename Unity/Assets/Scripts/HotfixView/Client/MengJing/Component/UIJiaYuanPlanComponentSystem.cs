@@ -5,9 +5,9 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.JiaYuanPlanTimer)]
-    public class JiaYuanPlanTimer : ATimer<JiaYuanPlanUIComponent>
+    public class JiaYuanPlanTimer : ATimer<UIJiaYuanPlanComponent>
     {
-        protected override void Run(JiaYuanPlanUIComponent self)
+        protected override void Run(UIJiaYuanPlanComponent self)
         {
             try
             {
@@ -20,12 +20,12 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof(JiaYuanPlanUIComponent))]
-    [EntitySystemOf(typeof(JiaYuanPlanUIComponent))]
-    public static partial class JiaYuanPlanUIComponentSystem
+    [FriendOf(typeof(UIJiaYuanPlanComponent))]
+    [EntitySystemOf(typeof(UIJiaYuanPlanComponent))]
+    public static partial class UIJiaYuanPlanComponentSystem
     {
         [EntitySystem]
-        private static void Awake(this JiaYuanPlanUIComponent self)
+        private static void Awake(this UIJiaYuanPlanComponent self)
         {
             self.GameObject = null;
             self.PlanStage = -1;
@@ -38,11 +38,12 @@ namespace ET.Client
         }
 
         [EntitySystem]
-        private static void Destroy(this JiaYuanPlanUIComponent self)
+        private static void Destroy(this UIJiaYuanPlanComponent self)
         {
+            self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
         }
 
-        public static void OnInitUI(this JiaYuanPlanUIComponent self)
+        public static void OnInitUI(this UIJiaYuanPlanComponent self)
         {
             Unit unit = self.GetParent<Unit>();
             self.NumericComponent = unit.GetComponent<NumericComponentC>();
@@ -51,7 +52,7 @@ namespace ET.Client
             self.UIPosition = unit.GetComponent<GameObjectComponent>().GameObject.transform.Find("Head");
             string path = ABPathHelper.GetUGUIPath("Blood/UIEnergyTable");
             GameObject prefab = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<GameObject>(path);
-            self.GameObject = UnityEngine.Object.Instantiate(prefab, self.Root().GetComponent<GlobalComponent>().NormalRoot, true);
+            self.GameObject = UnityEngine.Object.Instantiate(prefab, GlobalComponent.Instance.BloodMonster.transform);
             self.GameObject.transform.localScale = Vector3.one;
             self.HeadBarUI = self.GameObject.GetComponent<HeadBarUI>();
             self.HeadBarUI.enabled = true;
@@ -63,7 +64,7 @@ namespace ET.Client
             self.GameObject.Get<GameObject>("Lal_Name").GetComponent<Text>().text = jiaYuanFarmConfig.Name;
         }
 
-        public static int GetPlanStage(this JiaYuanPlanUIComponent self)
+        public static int GetPlanStage(this UIJiaYuanPlanComponent self)
         {
             Unit unit = self.GetParent<Unit>();
             long startTime = self.NumericComponent.GetAsLong(NumericType.StartTime);
@@ -71,7 +72,7 @@ namespace ET.Client
             return ET.JiaYuanHelper.GetPlanStage(unit.ConfigId, startTime, gatherNumber);
         }
 
-        public static void OnTimer(this JiaYuanPlanUIComponent self)
+        public static void OnTimer(this UIJiaYuanPlanComponent self)
         {
             self.UpdateShouHuoTime();
             int state = self.GetPlanStage();
@@ -83,7 +84,7 @@ namespace ET.Client
             }
         }
 
-        public static void UpdateShouHuoTime(this JiaYuanPlanUIComponent self)
+        public static void UpdateShouHuoTime(this UIJiaYuanPlanComponent self)
         {
             if (self.GameObject == null)
             {

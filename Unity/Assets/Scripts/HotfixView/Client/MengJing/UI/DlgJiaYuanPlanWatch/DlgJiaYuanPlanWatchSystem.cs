@@ -39,7 +39,8 @@ namespace ET.Client
             JiaYuanFarmConfig jiaYuanFarmConfig = JiaYuanFarmConfigCategory.Instance.Get(unit.ConfigId);
             int stage = ET.JiaYuanHelper.GetPlanStage(unit.ConfigId, StartTime, GatherNumber);
 
-            self.View.ES_ModelShow.ShowOtherModel($"JiaYuan/{jiaYuanFarmConfig.ModelID + stage}").Coroutine();
+            // self.View.ES_ModelShow.ShowOtherModel($"JiaYuan/{jiaYuanFarmConfig.ModelID + stage}").Coroutine();
+            self.View.ES_ModelShow.ShowOtherModel($"JiaYuan/100101").Coroutine();
             self.View.ES_ModelShow.Camera.localPosition = new Vector3(1f, 11f, 150f);
             self.View.ES_ModelShow.Camera.GetComponent<Camera>().fieldOfView = 15;
             self.View.ES_ModelShow.SetRootPosition(new Vector2(1000, 0));
