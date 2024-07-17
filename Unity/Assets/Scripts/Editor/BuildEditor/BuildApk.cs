@@ -97,19 +97,13 @@ public class MyEditorScript
 
     private static void CopyLibs(string path)
     {
-        //isNull = false;
-        //"D:/weijingHot/trunk_2022_0213/Unity/Assets"
-        //D:\weijingHot\trunk_2022_0213\Unity\Android
-        //string formPath = Application.dataPath;
-        //formPath = formPath.Replace("Assets", "Android/");
-        //       string formPath = @"F:\gitcustom\trunk_android\AndroidProject_MengJing\Android\";
-        //       CopyDirectory(formPath + path, Application.dataPath + @"\Plugins\Android");
-        // if (!isNull)
-        // {
-        // 	Debug.Log("目录文件导入成功！！");
-        // }
-
-        return;
+        isNull = false;
+       string formPath = @"F:\gitcustom\trunk_android\AndroidProject_MengJing\Android\";
+        CopyDirectory(formPath + path, Application.dataPath + @"\Plugins\Android");
+         if (!isNull)
+         {
+         	Debug.Log("目录文件导入成功！！");
+         }
     }
 
     /// <summary>
@@ -226,18 +220,18 @@ public class MyEditorScript
         string app_name = "梦境";
         if (name == "TikTok5")
         {
-            CopyLibs("tiktok");
+            //CopyLibs("tiktok");
             app_name = "梦境抖音";
         }
         else if (name == "QuDao")
         {
-            CopyLibs("qudao");
+            //CopyLibs("qudao");
             app_name = "梦境渠道母包";
         }
         else
         {
             //TikTokMuBao6 也是用的官方的安卓库
-            CopyLibs("guanfang");
+            //CopyLibs("guanfang");
             app_name = "梦境";
         }
 
