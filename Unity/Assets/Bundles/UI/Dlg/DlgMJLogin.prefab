@@ -6613,7 +6613,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5656587922422293035}
   m_Layer: 5
-  m_Name: Loading
+  m_Name: EG_Loading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24158,6 +24158,7 @@ GameObject:
   - component: {fileID: 1380099522265469060}
   - component: {fileID: 9055854009328123159}
   - component: {fileID: 8685738217963641478}
+  - component: {fileID: 2685340842548078903}
   m_Layer: 5
   m_Name: Img_Loading
   m_TagString: Untagged
@@ -24223,6 +24224,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2685340842548078903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6918041713960773432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28e3c41bf750efb418b5a30fe9bd06bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 100
 --- !u!1 &7194842636010100755
 GameObject:
   m_ObjectHideFlags: 0

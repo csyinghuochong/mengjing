@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_SeasonTaskItem))]
-    [FriendOf(typeof (Scroll_Item_SeasonDayTaskItem))]
-    [EntitySystemOf(typeof (ES_SeasonTask))]
-    [FriendOfAttribute(typeof (ES_SeasonTask))]
+    [FriendOf(typeof(Scroll_Item_SeasonTaskItem))]
+    [FriendOf(typeof(Scroll_Item_SeasonDayTaskItem))]
+    [EntitySystemOf(typeof(ES_SeasonTask))]
+    [FriendOfAttribute(typeof(ES_SeasonTask))]
     public static partial class ES_SeasonTaskSystem
     {
         [EntitySystem]
@@ -186,10 +186,10 @@ namespace ET.Client
 
                 taskPros.Sort(delegate(TaskPro a, TaskPro b)
                 {
-                    int commita = a.taskStatus == (int)TaskStatuEnum.Commited? 1 : 0;
-                    int commitb = b.taskStatus == (int)TaskStatuEnum.Commited? 1 : 0;
-                    int completea = a.taskStatus == (int)TaskStatuEnum.Completed? 1 : 0;
-                    int completeb = b.taskStatus == (int)TaskStatuEnum.Completed? 1 : 0;
+                    int commita = a.taskStatus == (int)TaskStatuEnum.Commited ? 1 : 0;
+                    int commitb = b.taskStatus == (int)TaskStatuEnum.Commited ? 1 : 0;
+                    int completea = a.taskStatus == (int)TaskStatuEnum.Completed ? 1 : 0;
+                    int completeb = b.taskStatus == (int)TaskStatuEnum.Completed ? 1 : 0;
 
                     if (commita == commitb)
                         return completeb - completea; //可以领取的在前
@@ -201,7 +201,7 @@ namespace ET.Client
                 self.ShowTaskPros.Clear();
                 for (int i = 0; i < taskPros.Count; i++)
                 {
-                    TaskCountryConfig taskConfig = TaskCountryConfigCategory.Instance.Get(taskPros[i].taskID);
+                    TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPros[i].taskID);
                     if (taskConfig.TaskType != TaskCountryType.Season)
                     {
                         continue;
@@ -237,7 +237,7 @@ namespace ET.Client
         public static void UpdateInfo(this ES_SeasonTask self, TaskPro taskPro)
         {
             self.TaskPro = taskPro;
-            TaskCountryConfig taskConfig = TaskCountryConfigCategory.Instance.Get(taskPro.taskID);
+            TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
 
             self.E_TaskNameTextText.text = taskConfig.TaskName;
             // 已经完成
@@ -379,22 +379,20 @@ namespace ET.Client
             }
 
             self.E_TaskDescTextText.text = taskConfig.TaskDes;
-            if (!CommonHelp.IfNull(taskConfig.ItemID))
+
+            List<RewardItem> rewardItems = new List<RewardItem>();
+            if (taskConfig.TaskCoin != 0)
             {
-                List<RewardItem> rewardItems = new List<RewardItem>();
-                if (taskConfig.TaskCoin != 0)
-                {
-                    rewardItems.Add(new RewardItem() { ItemID = 1, ItemNum = taskConfig.TaskCoin });
-                }
-
-                if (taskConfig.TaskExp != 0)
-                {
-                    rewardItems.Add(new RewardItem() { ItemID = 2, ItemNum = taskConfig.TaskExp });
-                }
-
-                rewardItems.AddRange(TaskHelper.GetTaskRewards(taskId));
-                self.ES_RewardList.Refresh(rewardItems, 0.8f);
+                rewardItems.Add(new RewardItem() { ItemID = 1, ItemNum = taskConfig.TaskCoin });
             }
+
+            if (taskConfig.TaskExp != 0)
+            {
+                rewardItems.Add(new RewardItem() { ItemID = 2, ItemNum = taskConfig.TaskExp });
+            }
+
+            rewardItems.AddRange(TaskHelper.GetTaskRewards(taskId));
+            self.ES_RewardList.Refresh(rewardItems, 0.8f);
 
             if (self.ScrollItemSeasonTaskItems != null)
             {
@@ -460,7 +458,7 @@ namespace ET.Client
             }
             else
             {
-                TaskCountryConfig taskCountryConfig = TaskCountryConfigCategory.Instance.Get(self.TaskPro.taskID);
+                TaskConfig taskCountryConfig = TaskConfigCategory.Instance.Get(self.TaskPro.taskID);
                 if (taskCountryConfig.TargetType == (int)TaskTargetType.GiveItem_10)
                 {
                     // UI ui = await UIHelper.Create(self.ZoneScene(), UIType.UIGiveTask);

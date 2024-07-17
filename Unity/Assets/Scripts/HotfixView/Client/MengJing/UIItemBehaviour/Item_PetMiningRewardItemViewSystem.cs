@@ -36,7 +36,7 @@
             self.E_ButtonRewardButton.AddListenerAsync(self.OnButtonReward);
 
             self.TaskPro = taskPro;
-            TaskCountryConfig taskCountryConfig = TaskCountryConfigCategory.Instance.Get(taskPro.taskID);
+            TaskConfig taskCountryConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
 
             self.E_Text_tipText.text = taskCountryConfig.TaskDes;
             self.E_Text_progressText.text = $"{taskPro.taskTargetNum_1}/{taskCountryConfig.TargetValue[0]}";

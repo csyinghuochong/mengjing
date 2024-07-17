@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_WelfareTaskItem))]
-    [EntitySystemOf(typeof (Scroll_Item_WelfareTaskItem))]
+    [FriendOf(typeof(Scroll_Item_WelfareTaskItem))]
+    [EntitySystemOf(typeof(Scroll_Item_WelfareTaskItem))]
     public static partial class Scroll_Item_WelfareTaskItemSystem
     {
         [EntitySystem]
@@ -28,23 +28,20 @@ namespace ET.Client
             self.E_TaskNameTextText.text = taskConfig.TaskName;
             self.E_TaskDescTextText.text = taskConfig.TaskDes;
 
-            if (!CommonHelp.IfNull(taskConfig.ItemID))
+            List<RewardItem> rewardItems = new List<RewardItem>();
+
+            if (taskConfig.TaskCoin > 0)
             {
-                List<RewardItem> rewardItems = new List<RewardItem>();
-
-                if (taskConfig.TaskCoin > 0)
-                {
-                    rewardItems.Add(new RewardItem() { ItemID = 1, ItemNum = taskConfig.TaskCoin });
-                }
-
-                if (taskConfig.TaskExp > 0)
-                {
-                    rewardItems.Add(new RewardItem() { ItemID = 2, ItemNum = taskConfig.TaskExp });
-                }
-
-                rewardItems.AddRange(TaskHelper.GetTaskRewards(taskPro.taskID));
-                self.ES_RewardList.Refresh(rewardItems, 0.8f);
+                rewardItems.Add(new RewardItem() { ItemID = 1, ItemNum = taskConfig.TaskCoin });
             }
+
+            if (taskConfig.TaskExp > 0)
+            {
+                rewardItems.Add(new RewardItem() { ItemID = 2, ItemNum = taskConfig.TaskExp });
+            }
+
+            rewardItems.AddRange(TaskHelper.GetTaskRewards(taskPro.taskID));
+            self.ES_RewardList.Refresh(rewardItems, 0.8f);
 
             self.E_TaskProgressText.text = $"{taskPro.taskTargetNum_1}/{taskConfig.TargetValue[0]}";
             self.E_ReceiveBtnButton.gameObject.SetActive(taskPro.taskStatus != (int)TaskStatuEnum.Commited);

@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_TaskGrowUpItem))]
-    [EntitySystemOf(typeof (ES_TaskGrowUp))]
-    [FriendOfAttribute(typeof (ES_TaskGrowUp))]
+    [FriendOf(typeof(Scroll_Item_TaskGrowUpItem))]
+    [EntitySystemOf(typeof(ES_TaskGrowUp))]
+    [FriendOfAttribute(typeof(ES_TaskGrowUp))]
     public static partial class ES_TaskGrowUpSystem
     {
         [EntitySystem]
@@ -215,22 +215,20 @@ namespace ET.Client
             }
 
             self.E_TaskDescTextText.text = taskConfig.TaskDes;
-            if (!CommonHelp.IfNull(taskConfig.ItemID))
+
+            List<RewardItem> rewardItems = new List<RewardItem>();
+            if (taskConfig.TaskCoin != 0)
             {
-                List<RewardItem> rewardItems = new List<RewardItem>();
-                if (taskConfig.TaskCoin != 0)
-                {
-                    rewardItems.Add(new RewardItem() { ItemID = 1, ItemNum = taskConfig.TaskCoin });
-                }
-
-                if (taskConfig.TaskExp != 0)
-                {
-                    rewardItems.Add(new RewardItem() { ItemID = 2, ItemNum = taskConfig.TaskExp });
-                }
-
-                rewardItems.AddRange(TaskHelper.GetTaskRewards(taskId));
-                self.ES_RewardList.Refresh(rewardItems);
+                rewardItems.Add(new RewardItem() { ItemID = 1, ItemNum = taskConfig.TaskCoin });
             }
+
+            if (taskConfig.TaskExp != 0)
+            {
+                rewardItems.Add(new RewardItem() { ItemID = 2, ItemNum = taskConfig.TaskExp });
+            }
+
+            rewardItems.AddRange(TaskHelper.GetTaskRewards(taskId));
+            self.ES_RewardList.Refresh(rewardItems);
 
             for (int i = 0; i < self.ScrollItemTaskGrowUpItems.Count; i++)
             {

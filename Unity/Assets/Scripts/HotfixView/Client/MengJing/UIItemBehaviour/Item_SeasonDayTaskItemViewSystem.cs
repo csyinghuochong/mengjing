@@ -19,7 +19,7 @@
         {
             self.TaskPro = taskPro;
             self.E_ClickBtnButton.AddListener(() => { self.GetParent<ES_SeasonTask>().UpdateInfo(self.TaskPro); });
-            TaskCountryConfig taskConfig = TaskCountryConfigCategory.Instance.Get(taskPro.taskID);
+            TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
 
             self.E_TaskNameTextText.text = taskConfig.TaskName;
             self.E_TaskDescTextText.text = taskConfig.TaskDes;

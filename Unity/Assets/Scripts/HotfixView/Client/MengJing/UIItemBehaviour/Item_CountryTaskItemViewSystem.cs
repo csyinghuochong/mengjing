@@ -22,7 +22,7 @@ namespace ET.Client
             self.E_ButtonReceiveButton.AddListenerAsync(self.OnBtn_Receive);
 
             self.TaskPro = taskPro;
-            TaskCountryConfig taskConfig = TaskCountryConfigCategory.Instance.Get(taskPro.taskID);
+            TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
 
             self.E_TextTaskNameText.text = taskConfig.TaskName;
             self.E_TextTaskDescText.text = taskConfig.TaskDes;

@@ -7,7 +7,7 @@ namespace ET.Client
     {
         public static void RegisterUIEvent(this DlgMJLogin self)
         {
-            self.View.E_LoginButton.AddListener(self.OnLogin);
+            self.View.E_LoginButton.AddListenerAsync(self.OnLogin);
             self.View.E_SelectBtnButton.AddListener(self.OnSelectServerList);
         }
 
@@ -60,19 +60,19 @@ namespace ET.Client
             test.ELabel_ContentText.text = index.ToString();
         }
 
-        public static void OnLogin(this DlgMJLogin self)
+        public static async ETTask OnLogin(this DlgMJLogin self)
         {
             PlayerComponent playerComponent = self.Root().GetComponent<PlayerComponent>();
             playerComponent.ServerItem = self.ServerInfo;
 
-            LoginHelper.Login(self.Root(),
-                self.View.E_AccountInputField.text,
-                self.View.E_PasswordInputField.text).Coroutine();
-
+            self.View.EG_LoadingRectTransform.gameObject.SetActive(true);
+            
             PlayerPrefsHelp.SetInt(PlayerPrefsHelp.MyServerID, self.ServerInfo.ServerId);
             PlayerPrefsHelp.SetOldServerIds(self.ServerInfo.ServerId);
             PlayerPrefsHelp.SetString("MJ_Account", self.View.E_AccountInputField.text);
             PlayerPrefsHelp.SetString("MJ_Password", self.View.E_PasswordInputField.text);
+            
+            await LoginHelper.Login(self.Root(), self.View.E_AccountInputField.text, self.View.E_PasswordInputField.text);
         }
 
         public static void OnSelectServer(this DlgMJLogin self, ServerItem serverId)
@@ -83,7 +83,6 @@ namespace ET.Client
 
         private static void OnSelectServerList(this DlgMJLogin self)
         {
-            Log.Info("点击显示服务器列表...");
             self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_SelectServer).Coroutine();
         }
     }

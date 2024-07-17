@@ -22,7 +22,7 @@ namespace ET.Client
             self.E_ButtonReceiveButton.AddListener(self.OnBtn_Receive);
 
             self.TaskPro = taskPro;
-            TaskCountryConfig taskConfig = TaskCountryConfigCategory.Instance.Get(taskPro.taskID);
+            TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
             if (!CommonHelp.IfNull(taskConfig.RewardItem))
             {
                 self.ES_RewardList.Refresh(taskConfig.RewardItem, 0.8f);

@@ -22,7 +22,7 @@ namespace ET.Client
             self.E_ButtonReceiveButton.AddListener(self.OnBtn_Receive);
 
             self.TaskPro = taskPro;
-            TaskCountryConfig taskConfig = TaskCountryConfigCategory.Instance.Get(taskPro.taskID);
+            TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
             if (!CommonHelp.IfNull(taskConfig.RewardItem))
             {
                 self.ES_RewardList.Refresh(taskConfig.RewardItem, 0.8f);
@@ -35,7 +35,7 @@ namespace ET.Client
             self.E_TextTaskProgressText.text =
                     GameSettingLanguge.Instance.LoadLocalization("进度值") + ": " + $"{taskPro.taskTargetNum_1}/{taskConfig.TargetValue[0]}";
 
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TaskIcon, taskConfig.TaskIcon.ToString());
+            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TaskIcon, taskConfig.Iconcon.ToString());
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
             self.E_ImageIconImage.sprite = sp;
