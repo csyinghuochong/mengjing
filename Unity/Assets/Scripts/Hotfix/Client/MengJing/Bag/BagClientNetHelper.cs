@@ -388,9 +388,9 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RquestPutStoreHouse(Scene root, BagInfo bagInfo)
+        public static async ETTask<int> RquestPutStoreHouse(Scene root, BagInfo bagInfo, int houseId)
         {
-            int houseId = root.GetComponent<BagComponentC>().CurrentHouse;
+            //int houseId = root.GetComponent<BagComponentC>().CurrentHouse;
 
             C2M_ItemOperateRequest request = C2M_ItemOperateRequest.Create();
             request.OperateType = 6;

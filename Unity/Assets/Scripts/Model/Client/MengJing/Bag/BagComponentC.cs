@@ -35,10 +35,6 @@ namespace ET.Client
         public List<BagInfo>[] AllItemList { get; set; }
 
         public bool RealAddItem;
-
-        /// <summary>
-        /// 当前选择的仓库
-        /// </summary>
-        public int CurrentHouse { get; set; }
+        
     }
 }
