@@ -5,7 +5,7 @@ namespace ET.Client
 {
     [EntitySystemOf(typeof (PetComponentC))]
     [FriendOf(typeof (PetComponentC))]
-    public static partial class PetComponent_CSystem
+    public static partial class PetComponentCSystem
     {
         [EntitySystem]
         private static void Awake(this ET.Client.PetComponentC self)
