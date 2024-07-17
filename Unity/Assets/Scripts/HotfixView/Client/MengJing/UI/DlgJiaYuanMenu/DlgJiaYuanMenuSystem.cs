@@ -89,7 +89,7 @@ namespace ET.Client
 
             Camera uiCamera = self.Root().GetComponent<GlobalComponent>().UICamera.GetComponent<Camera>();
             Camera mainCamera = self.Root().GetComponent<GlobalComponent>().MainCamera.GetComponent<Camera>();
-            Vector2 OldPosition = WorldPosiToUIPos.WorldPosiToUIPosition(JiaYuanData.PlanPositionList[jiaYuanViewComponent.CellIndex],
+            Vector2 OldPosition = WorldPosiToUIPos.WorldPosiToUIPosition(ConfigData.PlanPositionList[jiaYuanViewComponent.CellIndex],
                 self.View.uiTransform.gameObject, uiCamera, mainCamera, false);
             Vector3 NewPosition = Vector3.zero;
             NewPosition.x = OldPosition.x;

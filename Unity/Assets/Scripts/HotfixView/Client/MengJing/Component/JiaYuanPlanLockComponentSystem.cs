@@ -68,7 +68,7 @@ namespace ET.Client
 
             self.PlanEffectObj = go;
             CommonViewHelper.SetParent(go, self.Root().GetComponent<GlobalComponent>().Unit.gameObject);
-            go.transform.localPosition = JiaYuanData.PlanPositionList[self.CellIndex];
+            go.transform.localPosition = ConfigData.PlanPositionList[self.CellIndex];
             go.transform.localScale = Vector3.one;
             go.SetActive(true);
         }

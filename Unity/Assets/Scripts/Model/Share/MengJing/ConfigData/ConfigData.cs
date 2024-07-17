@@ -1491,14 +1491,16 @@ namespace ET
         [StaticField]
         public static List<float3> PlanPositionList = new List<float3>()
         {
-            new float3(4f - 0.5f, 0f, -31.24f - 0.5f),
-            new float3(4f - 0.5f, 0f, -33.32f - 0.5f),
-            new float3(4f - 0.5f, 0f, -35.39f - 0.5f),
-            new float3(4f - 0.5f, 0f, -37.58f - 0.5f),
-            new float3(1.25f - 0.5f, 0f, -31.24f - 0.5f),
-            new float3(1.25f - 0.5f, 0f, -33.32f - 0.5f),
-            new float3(1.25f - 0.5f, 0f, -35.39f - 0.5f),
-            new float3(1.25f - 0.5f, 0f, -37.58f - 0.5f),
+            new float3(22.73f, 0.16f, -4.37f),
+            new float3(22.73f, 0.16f, -4.37f - 3f),
+            new float3(22.73f, 0.16f, -4.37f - 6f),
+            new float3(22.73f, 0.16f, -4.37f - 9f),
+
+            new float3(19.78f, 0.16f, -4.37f),
+            new float3(19.78f, 0.16f, -4.37f - 3f),
+            new float3(19.78f, 0.16f, -4.37f - 6f),
+            new float3(19.78f, 0.16f, -4.37f - 9f),
+            
             new float3(-2f, 0f, -31.24f - 0.5f),
             new float3(-2f, 0f, -33.32f - 0.5f),
             new float3(-2f, 0f, -35.39f - 0.5f),
