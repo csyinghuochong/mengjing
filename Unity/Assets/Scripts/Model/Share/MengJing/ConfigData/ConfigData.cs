@@ -1477,7 +1477,7 @@ namespace ET
                 };
 
         [StaticField]
-        public static float3 PastureInitPos = new float3(-15f, 0f, -20f);
+        public static float3 PastureInitPos = new float3(11f, 0f, -15f);
 
         [StaticField]
         public static string UI_pro_4_2 = "UI_pro_4_2";

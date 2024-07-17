@@ -320,7 +320,7 @@ namespace ET.Server
             unit.AddComponent<SkillManagerComponentS>();
             unit.AddComponent<PathfindingComponent, int>(scene.GetComponent<MapComponent>().NavMeshId);
             unit.AddComponent<AttackRecordComponent>();
-            //unitInfoComponent.MasterName = userInfoComponent.UserInfo.Name;
+
             unitInfoComponent.UnitName = JiaYuanPastureConfigCategory.Instance.Get(jiaYuanPastures.ConfigId).Name;
 
             unit.ConfigId = jiaYuanPastures.ConfigId;
