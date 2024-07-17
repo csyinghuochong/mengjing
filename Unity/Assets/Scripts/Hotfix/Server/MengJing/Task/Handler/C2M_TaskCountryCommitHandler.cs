@@ -60,10 +60,10 @@ namespace ET.Server
 
             unit.GetComponent<BagComponentS>().OnAddItemData(taskCountryConfig.RewardItem, $"{ItemGetWay.TaskCountry}_{TimeHelper.ServerNow()}");
 
-            if (taskCountryConfig.RewardGold > 0)
+            if (taskCountryConfig.TaskCoin > 0)
             {
                 //添加金币
-                unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneyAdd(UserDataType.Gold, taskCountryConfig.RewardGold.ToString(), true, ItemGetWay.TaskCountry);
+                unit.GetComponent<UserInfoComponentS>().UpdateRoleMoneyAdd(UserDataType.Gold, taskCountryConfig.TaskCoin.ToString(), true, ItemGetWay.TaskCountry);
             }
             //添加活跃
             unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.HuoYue, taskCountryConfig.EveryTaskRewardNum.ToString());

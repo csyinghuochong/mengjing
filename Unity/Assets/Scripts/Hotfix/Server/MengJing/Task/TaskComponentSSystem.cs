@@ -60,7 +60,7 @@ namespace ET.Server
                 {
                     continue;
                 }
-                TaskCountryConfig taskCountryConfig = TaskCountryConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
+                TaskConfig taskCountryConfig = TaskConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
                 huoYueDu += taskCountryConfig.EveryTaskRewardNum;
             }
             return huoYueDu;

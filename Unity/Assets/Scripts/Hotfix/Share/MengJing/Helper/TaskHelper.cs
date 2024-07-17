@@ -229,7 +229,7 @@ namespace ET
                         }
                     }
 
-                    triggerPro = taskCountryConfig.TriggerPro;
+                    triggerPro = taskCountryConfig.TriggerValue;
                     writeTaskID_Next = taskCountryConfig.NextTask;
 
                     if (writeTaskID_Next == 0)
@@ -248,7 +248,7 @@ namespace ET
         public static List<int> GetBattleTask()
         {
             List<int> taskIds = new List<int>();
-            Dictionary<int, TaskCountryConfig> keyValuePairs = TaskCountryConfigCategory.Instance.GetAll();
+            Dictionary<int, TaskConfig> keyValuePairs = TaskConfigCategory.Instance.GetAll();
             foreach (var item in keyValuePairs)
             {
                 if (item.Value.TaskType == TaskCountryType.Battle)
@@ -263,7 +263,7 @@ namespace ET
         public static List<int> GetShowLieTask()
         {
             List<int> taskIds = new List<int>();
-            Dictionary<int, TaskCountryConfig> keyValuePairs = TaskCountryConfigCategory.Instance.GetAll();
+            Dictionary<int, TaskConfig> keyValuePairs = TaskConfigCategory.Instance.GetAll();
             foreach (var item in keyValuePairs)
             {
                 if (item.Value.TaskType == TaskCountryType.ShowLie)
@@ -278,7 +278,7 @@ namespace ET
         public static List<int> GetUnionRaceTask()
         {
             List<int> taskIds = new List<int>();
-            Dictionary<int, TaskCountryConfig> keyValuePairs = TaskCountryConfigCategory.Instance.GetAll();
+            Dictionary<int, TaskConfig> keyValuePairs = TaskConfigCategory.Instance.GetAll();
             foreach (var item in keyValuePairs)
             {
                 if (item.Value.TaskType == TaskCountryType.UnionRace)
@@ -293,7 +293,7 @@ namespace ET
         public static List<int> GetMineTask()
         {
             List<int> taskIds = new List<int>();
-            Dictionary<int, TaskCountryConfig> keyValuePairs = TaskCountryConfigCategory.Instance.GetAll();
+            Dictionary<int, TaskConfig> keyValuePairs = TaskConfigCategory.Instance.GetAll();
             foreach (var item in keyValuePairs)
             {
                 if (item.Value.TaskType == TaskCountryType.Mine)
@@ -313,7 +313,7 @@ namespace ET
         {
             List<int> taskIds = new List<int>();
 
-            foreach ((int number, List<int> ids) in TaskCountryConfigCategory.Instance.SeasonTaskList)
+            foreach ((int number, List<int> ids) in TaskConfigCategory.Instance.SeasonTaskList)
             {
                 int[] randomids = RandomHelper.GetRandoms(number, 0, ids.Count);
                 for (int i = 0; i < randomids.Length; i++)
@@ -333,23 +333,7 @@ namespace ET
             }
 
             List<RewardItem> taskRewards = new List<RewardItem>();
-            string ItemIDs = taskConfig.ItemID;
-            string ItemNum = taskConfig.ItemNum;
-            string[] ids = ItemIDs.Split(';');
-            string[] nums = ItemNum.Split(';');
-            for (int i = 0; i < ids.Length; i++)
-            {
-                if (ids[i] == "0" || ids[i] == "")
-                {
-                    continue;
-                }
-
-                RewardItem taskReward = new RewardItem();
-                taskReward.ItemID = int.Parse(ids[i]);
-                taskReward.ItemNum = int.Parse(nums[i]);
-                taskRewards.Add(taskReward);
-            }
-
+            taskRewards = ItemHelper.GetRewardItems(taskConfig.RewardItem);
             return taskRewards;
         }
 
