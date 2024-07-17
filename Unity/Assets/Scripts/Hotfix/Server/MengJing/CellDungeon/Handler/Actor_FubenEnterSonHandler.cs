@@ -24,8 +24,7 @@ namespace ET.Server
             enterFubenInfo.SonSceneId = fubenCellInfoNext.sonid;
             enterFubenInfo.PassableFlag = fubenComponent.GetPassableFlag();
             enterFubenInfo.CurrentCell = fubenComponent.GetCellIndex(fubenCellInfoNext.row, fubenCellInfoNext.line);
-            response.SonFubenInfo = enterFubenInfo;
-
+            
             int sonid = fubenCellInfoNext.sonid;
             unit.Scene().GetComponent<MapComponent>().SonSceneId = (sonid);
             unit.Scene().GetComponent<MapComponent>().NavMeshId = ChapterSonConfigCategory.Instance.Get(sonid).MapID;
@@ -62,6 +61,8 @@ namespace ET.Server
 
             //自己通知给周围人
             //UnitHelper.BroadcastCreateUnit(unit.DomainScene(), unit);
+            
+            response.SonFubenInfo = enterFubenInfo;
             await ETTask.CompletedTask;
         }
 

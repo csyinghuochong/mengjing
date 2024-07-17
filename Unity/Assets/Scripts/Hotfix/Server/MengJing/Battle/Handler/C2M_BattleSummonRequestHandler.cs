@@ -103,7 +103,7 @@ namespace ET.Server
                 { Camp = camp });
             }
 
-            response.BattleSummonList = BattleSummonList;   
+            response.BattleSummonList .AddRange(BattleSummonList); 
             await ETTask.CompletedTask;
         }
     }

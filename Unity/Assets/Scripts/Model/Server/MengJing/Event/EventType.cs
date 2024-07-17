@@ -17,12 +17,14 @@ namespace ET.Server
     {
         public Unit UnitDefend;
         public long nowStateType;
+        public string stateValue;
     }
 
     public struct StateTypeRemove
     {
         public Unit UnitDefend;
         public long nowStateType;
+        public string stateValue;
     }
 
     public struct UnitUseSkill

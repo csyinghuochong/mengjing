@@ -51,8 +51,7 @@ namespace ET.Server
             }
             NumericComponentS numericComponent = unit.GetComponent<NumericComponentS>();
            
-            numericComponent.ApplyValue(NumericType.LastGameTime, TimeHelper.ServerNow(), false);
-            //unit.GetComponent<UnitGateComponent>().PlayerState = PlayerState.Game;
+            numericComponent.ApplyValue(NumericType.LastGameTime, TimeHelper.ServerNow(), false); 
         }
 
         public static void Activeted(this DBSaveComponent self)

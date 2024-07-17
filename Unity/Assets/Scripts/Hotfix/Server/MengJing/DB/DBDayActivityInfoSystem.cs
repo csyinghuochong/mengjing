@@ -6,11 +6,7 @@ namespace ET.Server
     [FriendOf(typeof(DBDayActivityInfo))]
     public static partial class DBDayActivityInfoSystem
     {
-
-        /// <summary>
-        /// 参与竞猜的玩家
-        /// </summary>
-        /// <param name="guessPlayerList"></param>
+        
         public static void AddGuessPlayerList(this DBDayActivityInfo self, Dictionary<int, List<long>> guessPlayerList)
         {
             foreach (var item in guessPlayerList)

@@ -10,7 +10,6 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, Actor_SendReviveRequest request, Actor_SendReviveResponse response)
         {
             MapComponent mapComponent = unit.Scene().GetComponent<MapComponent>();
-
             if (request.Revive)
             {
                 string reviveCost = GlobalValueConfigCategory.Instance.Get(5).Value;

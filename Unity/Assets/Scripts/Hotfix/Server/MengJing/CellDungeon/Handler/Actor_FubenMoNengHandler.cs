@@ -9,7 +9,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, Actor_FubenMoNengRequest request, Actor_FubenMoNengResponse response)
         {
-            response.MysteryItemInfos = unit.Scene().GetComponent<CellDungeonComponent>().MysteryItemInfos;
+            response.MysteryItemInfos .AddRange(unit.Scene().GetComponent<CellDungeonComponent>().MysteryItemInfos); 
             await ETTask.CompletedTask;
         }
     }

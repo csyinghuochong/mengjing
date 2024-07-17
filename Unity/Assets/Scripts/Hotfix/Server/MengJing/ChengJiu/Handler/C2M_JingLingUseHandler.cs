@@ -22,7 +22,7 @@ namespace ET.Server
                 {
                     int skillid = int.Parse(jingLingConfig.FunctionValue);
                     BuffManagerComponentS buffManagerManagerComponent = unit.GetComponent<BuffManagerComponentS>();
-                    //buffManagerComponent.BuffRemoveBySkillid(skillid);
+                    buffManagerManagerComponent.BuffRemoveBySkillid(skillid);
                 }
             }
 

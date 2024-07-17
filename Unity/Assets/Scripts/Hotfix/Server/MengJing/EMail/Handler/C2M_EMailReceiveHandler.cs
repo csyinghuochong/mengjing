@@ -36,11 +36,6 @@ namespace ET.Server
                     if (!string.IsNullOrEmpty(mailInfo.ItemList[i].GetWay))
                     {
                         unit.GetComponent<BagComponentS>().OnAddItemData(mailInfo.ItemList[i], mailInfo.ItemList[i].GetWay);
-                        //string[] getwayInfo = mailInfo.ItemList[i].GetWay.Split('_');
-                        //if (getwayInfo.Length >= 2 && mailInfo.ItemList[i].ItemID == 1 && int.Parse(getwayInfo[0]) == ItemGetWay.PaiMaiSell)
-                        //{
-                        //    unit.GetComponent<DataCollationComponent>().UpdateBuySelfPlayerList(mailInfo.ItemList[i].ItemNum, mailInfo.BuyPlayerId );
-                        //}
                     }
                     else
                     {

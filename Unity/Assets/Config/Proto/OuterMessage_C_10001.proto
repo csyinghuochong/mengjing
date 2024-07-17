@@ -3147,6 +3147,18 @@ message C2M_UnitStateUpdate // ILocationMessage
 	string StateValue = 5;
 }
 
+
+message M2C_UnitStateUpdate // IMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int64 UnitId = 1;
+	int64 StateType = 2;
+	int32 StateOperateType = 3;
+	int32 StateTime = 4;
+	string StateValue = 5;
+}
+
 message M2C_UnitBuffUpdate // IMessage
 {
 	int32 BuffID = 1;

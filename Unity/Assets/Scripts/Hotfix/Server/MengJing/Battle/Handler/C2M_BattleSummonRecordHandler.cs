@@ -36,7 +36,7 @@ namespace ET.Server
                 }
             }
 
-            response.BattleSummonList = BattleSummonList;
+            response.BattleSummonList .AddRange(BattleSummonList); 
             await ETTask.CompletedTask;
         }
     }

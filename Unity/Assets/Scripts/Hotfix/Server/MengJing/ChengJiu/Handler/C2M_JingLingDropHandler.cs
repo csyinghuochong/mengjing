@@ -10,7 +10,6 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_JingLingDropRequest request, M2C_JingLingDropResponse response)
         {
-            await ETTask.CompletedTask;
             ChengJiuComponentS chengJiuComponent = unit.GetComponent<ChengJiuComponentS>();
             int jinglingid = chengJiuComponent.JingLingId;
             if (jinglingid == 0 || chengJiuComponent.RandomDrop == 1)
@@ -36,6 +35,7 @@ namespace ET.Server
             }
             unit.GetComponent<BagComponentS>().OnAddItemData(droplist, string.Empty, $"{ItemGetWay.JingLing}_{TimeHelper.ServerNow()}", false);
             chengJiuComponent.RandomDrop = 1;
+            await ETTask.CompletedTask;
         }
     }
 }

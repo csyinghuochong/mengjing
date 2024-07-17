@@ -179,11 +179,7 @@ namespace ET.Server
 
             return ErrorCode.ERR_Success;
         }
-
-        /// <summary>
-        /// ����ĳ��״̬
-        /// </summary>
-        /// <param name="nowStateType"></param>
+        
         public static void StateTypeAdd(this StateComponentS self, long nowStateType, string stateValue = "0")
         {
             Unit unit = self.GetParent<Unit>();
@@ -201,32 +197,21 @@ namespace ET.Server
                 || nowStateType == StateTypeEnum.Hide
                 || nowStateType == StateTypeEnum.BaTi;
         }
-
-        /// <summary>
-        /// �Ƴ�ĳ��״̬
-        /// </summary>
-        /// <param name="nowStateType"></param>
+        
         public static void StateTypeRemove(this StateComponentS self, long nowStateType)
         {
             self.CurrentStateType = self.CurrentStateType & ~nowStateType;
 
-
-            //���͸ı����Ե������Ϣ
             Unit unit = self.GetParent<Unit>();
             if (unit == null || unit.IsDisposed)
                 return;
             EventSystem.Instance.Publish( self.Scene(), new StateTypeRemove() { UnitDefend = unit, nowStateType = nowStateType }  );
         }
-
-        /// <summary>
-        /// ��ȡĳ��״̬�Ƿ����
-        /// </summary>
-        /// <param name="nowStateType"></param>
+        
         public static bool StateTypeGet(this StateComponentS self, long nowStateType)
         {
             long state = (self.CurrentStateType & nowStateType);
             //Log.Debug("nowStateTypes = " + nowStateTypes + " state = " + state);
-            // 0 ��ʾû��״̬   ����0��ʾ��״̬
             if (state > 0)
             {
                 return true;
@@ -236,11 +221,7 @@ namespace ET.Server
                 return false;
             }
         }
-
-        /// <summary>
-        /// ��ȡ��ǰ״̬
-        /// </summary>
-        /// <returns></returns>
+        
         public static long GetNowStateType(this StateComponentS self)
         {
             return self.CurrentStateType;

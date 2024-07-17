@@ -5,7 +5,7 @@ namespace ET.Server
 
     [EntitySystemOf(typeof(ChengJiuComponentS))]
     [FriendOf(typeof(ChengJiuComponentS))]
-    public static partial class ChengJiuComponent_SSystem
+    public static partial class ChengJiuComponentSSystem
     {
         [EntitySystem]
         private static void Awake(this ET.Server.ChengJiuComponentS self)
@@ -76,11 +76,11 @@ namespace ET.Server
                 int fubenDifficulty = (int)FubenDifficulty.None;
                 if (mapComponent.SceneType == (int)SceneTypeEnum.CellDungeon)
                 {
-                    //fubenDifficulty = (int)self.GetParent<Unit>().Root().GetComponent<CellDungeonComponent>().FubenDifficulty;
+                    fubenDifficulty = (int)self.Scene().GetComponent<CellDungeonComponent>().FubenDifficulty;
                 }
                 if (mapComponent.SceneType == (int)SceneTypeEnum.LocalDungeon)
                 {
-                    //fubenDifficulty = (int)self.GetParent<Unit>().Root().GetComponent<LocalDungeonComponent>().FubenDifficulty;
+                    fubenDifficulty = (int)self.Scene().GetComponent<LocalDungeonComponent>().FubenDifficulty;
                 }
 
                 self.TriggerEvent(ChengJiuTargetEnum.KillIDMonster_1, unitconfigId, 1);

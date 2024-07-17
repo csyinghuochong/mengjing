@@ -9,9 +9,7 @@ namespace ET.Server
     {
         protected override async ETTask Run(Unit unit, C2M_BagInitRequest request, M2C_BagInitResponse response)
         {
-            Console.WriteLine($"C2M_BagInitHandler: server0");
             BagComponentS bagComponentS = unit.GetComponent<BagComponentS>();
-            
             response.BagInfos = bagComponentS.GetAllItems();
             response.QiangHuaLevel .AddRange(bagComponentS.QiangHuaLevel); 
             response.QiangHuaFails .AddRange(bagComponentS.QiangHuaFails);

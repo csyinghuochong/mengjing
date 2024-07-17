@@ -67,12 +67,6 @@ namespace ET.Server
         public static List<long> GetBeAttackPlayerList(this AttackRecordComponent self)
         {
             return self.BeAttackPlayerList.Keys.ToList();
-            //List<long> attackid = new List<long>(); 
-            //foreach ((long id, long hurt) in self.BeAttackPlayerList)
-            //{
-            //    attackid.Add(id);
-            //}
-            //return attackid;
         }
 
         public static void UpdateBelongId(this AttackRecordComponent self)

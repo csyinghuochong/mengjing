@@ -6,6 +6,7 @@ namespace ET.Server
 
     [EntitySystemOf(typeof(HeroDataComponentS))]
     [FriendOf(typeof(HeroDataComponentS))]
+    [FriendOf(typeof(NumericComponentS))]
     public static partial class HeroDataComponentSSystem
     {
         [EntitySystem]
@@ -330,7 +331,7 @@ namespace ET.Server
                   || mapComponent.SceneType == (int)SceneTypeEnum.MiJing
                   || mapComponent.SceneType == (int)SceneTypeEnum.RunRace)
                  {
-                     //unit.Root().GetComponent<YeWaiRefreshComponent>().OnAddRefreshList(unit, resurrection * 1000);
+                     unit.Scene().GetComponent<YeWaiRefreshComponent>().OnAddRefreshList(unit, resurrection * 1000);
                  }
                  return 0;
              }
@@ -523,10 +524,10 @@ namespace ET.Server
              NumericComponentS masterNumericComponent = master.GetComponent<NumericComponentS>();
 
              NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
-             // foreach ((int ntype, long value) in masterNumericComponent.NumericDic)
-             // {
-             //     numericComponent.SetEvent(ntype, value, false);
-             // }
+             foreach ((int ntype, long value) in masterNumericComponent.NumericDic)
+             {
+                 numericComponent.ApplyValue(ntype, value, false);
+             }
          }
 
          /// <summary>
@@ -619,7 +620,7 @@ namespace ET.Server
                  switch (sceneType)
                  {
                      case SceneTypeEnum.CellDungeon:
-                         //fubenDifficulty = nowUnit.Root().GetComponent<CellDungeonComponent>().FubenDifficulty;
+                         fubenDifficulty = nowUnit.Scene().GetComponent<CellDungeonComponent>().FubenDifficulty;
                          break;
                      case SceneTypeEnum.LocalDungeon:
                          if (monsterConfig.MonsterType == MonsterTypeEnum.Boss)
@@ -654,7 +655,7 @@ namespace ET.Server
              if (sceneType == SceneTypeEnum.TeamDungeon)
              {
                  //副本的怪物难度提升（类似不难度的个人副本 给个配置即可）
-                 int realplayerNumber = 1;// nowUnit.Root().GetComponent<TeamDungeonComponent>().InitPlayerNumber();
+                 int realplayerNumber = nowUnit.Scene().GetComponent<TeamDungeonComponent>().InitPlayerNumber();
                  fubenDifficulty = mapComponent.FubenDifficulty;
                  //深渊BOSSS属性加成
                  if (fubenDifficulty == TeamFubenType.ShenYuan && monsterConfig.MonsterType == MonsterTypeEnum.Boss)

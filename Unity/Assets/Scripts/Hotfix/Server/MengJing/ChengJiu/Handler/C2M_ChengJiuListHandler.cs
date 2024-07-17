@@ -12,11 +12,11 @@ namespace ET.Server
         protected override async ETTask Run(Unit unit, C2M_ChengJiuListRequest request, M2C_ChengJiuListResponse response)
         {
             ChengJiuComponentS chengJiuComponent = unit.GetComponent<ChengJiuComponentS>();
-            response.ChengJiuProgessList = chengJiuComponent.ChengJiuProgessList;
-            response.ChengJiuCompleteList = chengJiuComponent.ChengJiuCompleteList;
+            response.ChengJiuProgessList .AddRange(chengJiuComponent.ChengJiuProgessList); 
+            response.ChengJiuCompleteList .AddRange(chengJiuComponent.ChengJiuCompleteList); 
             response.TotalChengJiuPoint = chengJiuComponent.TotalChengJiuPoint;
-            response.AlreadReceivedId = chengJiuComponent.AlreadReceivedId;
-            response.JingLingList = chengJiuComponent.JingLingList;
+            response.AlreadReceivedId .AddRange(chengJiuComponent.AlreadReceivedId); 
+            response.JingLingList .AddRange( chengJiuComponent.JingLingList);
             response.JingLingId = chengJiuComponent.JingLingId;
             response.RandomDrop = chengJiuComponent.RandomDrop;
 

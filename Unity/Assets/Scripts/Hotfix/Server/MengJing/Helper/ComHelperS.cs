@@ -3,7 +3,16 @@ namespace ET.Server
     
     public static class ComHelperS
     {
-    
+
+        public static bool IsStateBroadcastType(long nowStateType)
+        {
+            return nowStateType == StateTypeEnum.Singing
+                    || nowStateType == StateTypeEnum.OpenBox
+                    || nowStateType == StateTypeEnum.Stealth
+                    || nowStateType == StateTypeEnum.Hide
+                    || nowStateType == StateTypeEnum.BaTi;  
+        }
+        
         public static void OnAddLingDiExp(Unit unit, int addExp, bool notice)
         {
             int lingdiLv = unit.GetComponent<NumericComponentS>().GetAsInt(NumericType.Ling_DiLv);
