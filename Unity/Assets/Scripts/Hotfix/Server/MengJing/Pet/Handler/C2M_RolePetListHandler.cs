@@ -10,7 +10,7 @@ namespace ET.Server
 		{
 			PetComponentS petComponent = unit.GetComponent<PetComponentS>();
 			
-			response.RolePetInfos = petComponent.GetAllPets();
+			response.RolePetInfos .AddRange(petComponent.RolePetInfos); 
 			response.TeamPetList .AddRange( petComponent.TeamPetList);
 			response.PetFormations .AddRange( petComponent.PetFormations);
 			response.PetShouHuList .AddRange( petComponent.PetShouHuList);
