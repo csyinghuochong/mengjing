@@ -44,6 +44,26 @@ namespace ET.Client
      		}
      	}
 
+		public ES_EquipmentIncreaseTransfer ES_EquipmentIncreaseTransfer
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_EquipmentIncreaseTransfer es = this.m_es_equipmentincreasetransfer;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_EquipmentIncreaseTransfer");
+		    	   this.m_es_equipmentincreasetransfer = this.AddChild<ES_EquipmentIncreaseTransfer,Transform>(subTrans);
+     			}
+     			return this.m_es_equipmentincreasetransfer;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -65,12 +85,14 @@ namespace ET.Client
 		{
 			this.m_EG_SubViewRectTransform = null;
 			this.m_es_equipmentincreaseshow = null;
+			this.m_es_equipmentincreasetransfer = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
 		private EntityRef<ES_EquipmentIncreaseShow> m_es_equipmentincreaseshow = null;
+		private EntityRef<ES_EquipmentIncreaseTransfer> m_es_equipmentincreasetransfer = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}

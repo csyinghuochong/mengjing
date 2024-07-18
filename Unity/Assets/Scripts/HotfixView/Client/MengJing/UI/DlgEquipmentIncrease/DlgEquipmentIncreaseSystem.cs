@@ -17,6 +17,7 @@ namespace ET.Client
     }
 
     [FriendOf(typeof(ES_EquipmentIncreaseShow))]
+    [FriendOf(typeof(ES_EquipmentIncreaseTransfer))]
     [FriendOf(typeof(DlgEquipmentIncrease))]
     public static class DlgEquipmentIncreaseSystem
     {
@@ -39,7 +40,7 @@ namespace ET.Client
                     self.View.ES_EquipmentIncreaseShow.uiTransform.gameObject.SetActive(true);
                     break;
                 case 1:
-
+                    self.View.ES_EquipmentIncreaseTransfer.uiTransform.gameObject.SetActive(true);
                     break;
             }
         }
