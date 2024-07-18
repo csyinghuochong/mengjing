@@ -131,7 +131,7 @@ namespace ET.Client
 
             if (self.MainHero)
             {
-                EventSystem.Instance.Publish(self.Root(), new DataUpdate_SkillCDUpdate());
+                EventSystem.Instance.Publish(self.Root(), new SkillCDUpdate());
             }
 
             if (self.Skills.Count == 0 && self.SkillCDs.Count == 0 && self.SkillPublicCDTime < nowTime)

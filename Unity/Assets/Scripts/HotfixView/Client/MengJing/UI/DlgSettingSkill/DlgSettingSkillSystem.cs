@@ -308,7 +308,7 @@ namespace ET.Client
 
             self.GameSettingInfos.Add(new KeyValuePair() { KeyId = (int)GameSettingEnum.GuaJiAutoUseSkill, Value = skillSet });
             self.Root().GetComponent<UserInfoComponentC>().UpdateGameSetting(self.GameSettingInfos);
-            EventSystem.Instance.Publish(self.Root(), new DataUpdate_SettingUpdate());
+            EventSystem.Instance.Publish(self.Root(), new SettingUpdate());
 
             await BagClientNetHelper.GameSetting(self.Root(), self.GameSettingInfos);
 

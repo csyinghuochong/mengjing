@@ -258,7 +258,7 @@ namespace ET.Client
             }
 
             self.IsHoldDown = true;
-            EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
+            EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
 
             await self.Root().GetComponent<TimerComponent>().WaitAsync(500);
             if (!self.IsHoldDown)

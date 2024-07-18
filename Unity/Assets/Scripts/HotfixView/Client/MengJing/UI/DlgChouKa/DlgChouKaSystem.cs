@@ -6,9 +6,9 @@ using UnityEngine;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_ChouKaWarehouseAddItem_Refresh: AEvent<Scene, DataUpdate_ChouKaWarehouseAddItem>
+    public class DataUpdate_ChouKaWarehouseAddItem_Refresh: AEvent<Scene, ChouKaWarehouseAddItem>
     {
-        protected override async ETTask Run(Scene root, DataUpdate_ChouKaWarehouseAddItem args)
+        protected override async ETTask Run(Scene root, ChouKaWarehouseAddItem args)
         {
             root.GetComponent<UIComponent>().GetDlgLogic<DlgChouKa>()?.SetRedDot(true);
 

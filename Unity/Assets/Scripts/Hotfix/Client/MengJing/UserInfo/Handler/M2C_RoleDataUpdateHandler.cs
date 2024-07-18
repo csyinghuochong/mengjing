@@ -1,8 +1,8 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponentC))]
+    [FriendOf(typeof(UserInfoComponentC))]
     [MessageHandler(SceneType.Demo)]
-    public class M2C_RoleDataUpdateHandler: MessageHandler<Scene, M2C_RoleDataUpdate>
+    public class M2C_RoleDataUpdateHandler : MessageHandler<Scene, M2C_RoleDataUpdate>
     {
         protected override async ETTask Run(Scene root, M2C_RoleDataUpdate message)
         {
@@ -24,7 +24,7 @@
                     long curExp = message.UpdateValueLong;
                     longValue = curExp - userInfo.Exp;
                     userInfo.Exp = curExp;
-                    // HintHelp.GetInstance().DataUpdate(DataType.UpdateUserDataExp, "", longValue);
+                    EventSystem.Instance.Publish(root, new UpdateUserDataExp() { UpdateValue = message.UpdateValueLong });
                     updateValue = string.Empty;
                     break;
                 case (int)UserDataType.PiLao:
@@ -32,7 +32,7 @@
                     longValue = curpilao - userInfo.PiLao;
                     userInfo.PiLao = curpilao;
 
-                    // HintHelp.GetInstance().DataUpdate(DataType.UpdateUserDataPiLao, "", longValue);
+                    EventSystem.Instance.Publish(root, new UpdateUserDataPiLao() { UpdateValue = message.UpdateValueLong });
                     updateValue = string.Empty;
                     break;
                 case (int)UserDataType.SeasonLevel:
@@ -50,8 +50,6 @@
                 case (int)UserDataType.Gold:
                     updateValue = (long.Parse(message.UpdateTypeValue) - userInfo.Gold).ToString();
                     userInfo.Gold = long.Parse(message.UpdateTypeValue);
-
-                    EventSystem.Instance.Publish(root, new UserDataTypeUpdate_Gold());
                     break;
                 case (int)UserDataType.RongYu:
                     updateValue = (long.Parse(message.UpdateTypeValue) - userInfo.RongYu).ToString();
@@ -60,8 +58,6 @@
                 case (int)UserDataType.Diamond:
                     updateValue = (long.Parse(message.UpdateTypeValue) - userInfo.Diamond).ToString();
                     userInfo.Diamond = long.Parse(message.UpdateTypeValue);
-
-                    EventSystem.Instance.Publish(root, new UserDataTypeUpdate_Diamond());
                     break;
                 case (int)UserDataType.DungeonTimes:
                     userInfo.DayFubenTimes.Clear();
@@ -117,7 +113,7 @@
             //更新比较频繁的单独处理
             if (!string.IsNullOrEmpty(updateValue))
             {
-                EventSystem.Instance.Publish(root, new DataUpdate_UpdateUserData() { DataParamString = $"{message.UpdateType}_{updateValue}" });
+                EventSystem.Instance.Publish(root, new UpdateUserData() { DataParamString = $"{message.UpdateType}_{updateValue}" });
             }
 
             await ETTask.CompletedTask;

@@ -21,7 +21,7 @@
             //主角
             if (unit.MainHero)
             {
-                EventSystem.Instance.Publish(scene.Root(), new DataUpdate_MainHeroMove());
+                EventSystem.Instance.Publish(scene.Root(), new MainHeroMove());
 
                 MapViewHelper.OnMainHeroMove(unit);
             }

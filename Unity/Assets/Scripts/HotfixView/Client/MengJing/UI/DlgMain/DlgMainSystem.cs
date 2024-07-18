@@ -37,9 +37,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_OnPetFightSet_Refresh : AEvent<Scene, DataUpdate_OnPetFightSet>
+    public class DataUpdate_OnPetFightSet_Refresh : AEvent<Scene, OnPetFightSet>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_OnPetFightSet args)
+        protected override async ETTask Run(Scene scene, OnPetFightSet args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_RoleHead.OnPetFightSet();
             await ETTask.CompletedTask;
@@ -47,9 +47,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_BagItemUpdate_Refresh : AEvent<Scene, DataUpdate_BagItemUpdate>
+    public class DataUpdate_BagItemUpdate_Refresh : AEvent<Scene, BagItemUpdate>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_BagItemUpdate args)
+        protected override async ETTask Run(Scene scene, BagItemUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnBagItemUpdate();
             await ETTask.CompletedTask;
@@ -81,9 +81,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_SkillSetting_DlgMainRefresh : AEvent<Scene, DataUpdate_SkillSetting>
+    public class DataUpdate_SkillSetting_DlgMainRefresh : AEvent<Scene, SkillSetting>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_SkillSetting args)
+        protected override async ETTask Run(Scene scene, SkillSetting args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnSkillSetUpdate();
 
@@ -92,9 +92,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_UpdateUserData_Refresh : AEvent<Scene, DataUpdate_UpdateUserData>
+    public class DataUpdate_UpdateUserData_Refresh : AEvent<Scene, UpdateUserData>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_UpdateUserData args)
+        protected override async ETTask Run(Scene scene, UpdateUserData args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnUpdateUserData(args.DataParamString);
             await ETTask.CompletedTask;
@@ -102,9 +102,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_SettingUpdate_Refresh : AEvent<Scene, DataUpdate_SettingUpdate>
+    public class DataUpdate_SettingUpdate_Refresh : AEvent<Scene, SettingUpdate>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_SettingUpdate args)
+        protected override async ETTask Run(Scene scene, SettingUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnSettingUpdate();
             await ETTask.CompletedTask;
@@ -112,9 +112,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_TaskUpdate_Refresh : AEvent<Scene, DataUpdate_TaskUpdate>
+    public class DataUpdate_TaskUpdate_Refresh : AEvent<Scene, TaskUpdate>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_TaskUpdate args)
+        protected override async ETTask Run(Scene scene, TaskUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.RefreshMainTaskItems();
             await ETTask.CompletedTask;
@@ -122,9 +122,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_TaskTrace_Refresh : AEvent<Scene, DataUpdate_TaskTrace>
+    public class DataUpdate_TaskTrace_Refresh : AEvent<Scene, TaskTrace>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_TaskTrace args)
+        protected override async ETTask Run(Scene scene, TaskTrace args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.RefreshMainTaskItems();
             await ETTask.CompletedTask;
@@ -132,9 +132,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_TaskGet_DlgMainRefresh : AEvent<Scene, DataUpdate_TaskGet>
+    public class DataUpdate_TaskGet_DlgMainRefresh : AEvent<Scene, TaskGet>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_TaskGet args)
+        protected override async ETTask Run(Scene scene, TaskGet args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnRecvTaskUpdate();
             await ETTask.CompletedTask;
@@ -142,9 +142,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_TaskComplete_DlgMainRefresh : AEvent<Scene, DataUpdate_TaskComplete>
+    public class DataUpdate_TaskComplete_DlgMainRefresh : AEvent<Scene, TaskComplete>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_TaskComplete args)
+        protected override async ETTask Run(Scene scene, TaskComplete args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnRecvTaskUpdate();
             await ETTask.CompletedTask;
@@ -152,9 +152,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_TaskGiveUp_DlgMainRefresh : AEvent<Scene, DataUpdate_TaskGiveUp>
+    public class DataUpdate_TaskGiveUp_DlgMainRefresh : AEvent<Scene, TaskGiveUp>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_TaskGiveUp args)
+        protected override async ETTask Run(Scene scene, TaskGiveUp args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnRecvTaskUpdate();
             await ETTask.CompletedTask;
@@ -162,9 +162,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_OnRecvChat_MainChatItemsRefresh : AEvent<Scene, DataUpdate_OnRecvChat>
+    public class DataUpdate_OnRecvChat_MainChatItemsRefresh : AEvent<Scene, OnRecvChat>
     {
-        protected override async ETTask Run(Scene root, DataUpdate_OnRecvChat args)
+        protected override async ETTask Run(Scene root, OnRecvChat args)
         {
             root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnRecvChat();
             await ETTask.CompletedTask;
@@ -172,9 +172,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_MainHeroMove_MainChatItemsRefresh : AEvent<Scene, DataUpdate_MainHeroMove>
+    public class DataUpdate_MainHeroMove_MainChatItemsRefresh : AEvent<Scene, MainHeroMove>
     {
-        protected override async ETTask Run(Scene root, DataUpdate_MainHeroMove args)
+        protected override async ETTask Run(Scene root, MainHeroMove args)
         {
             root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.OnMainHeroMove();
             await ETTask.CompletedTask;
@@ -182,9 +182,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_BeforeMove_DlgMainRefresh : AEvent<Scene, DataUpdate_BeforeMove>
+    public class DataUpdate_BeforeMove_DlgMainRefresh : AEvent<Scene, BeforeMove>
     {
-        protected override async ETTask Run(Scene root, DataUpdate_BeforeMove args)
+        protected override async ETTask Run(Scene root, BeforeMove args)
         {
             if (args.DataParamString == "1")
             {
@@ -198,9 +198,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_UpdateSing_DlgMainRefresh : AEvent<Scene, DataUpdate_UpdateSing>
+    public class DataUpdate_UpdateSing_DlgMainRefresh : AEvent<Scene, UpdateSing>
     {
-        protected override async ETTask Run(Scene root, DataUpdate_UpdateSing args)
+        protected override async ETTask Run(Scene root, UpdateSing args)
         {
             root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainHpBar.OnUpdateSing(args.DataParamString);
 
@@ -236,9 +236,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_SkillCDUpdate_DlgMainRefresh : AEvent<Scene, DataUpdate_SkillCDUpdate>
+    public class DataUpdate_SkillCDUpdate_DlgMainRefresh : AEvent<Scene, SkillCDUpdate>
     {
-        protected override async ETTask Run(Scene root, DataUpdate_SkillCDUpdate args)
+        protected override async ETTask Run(Scene root, SkillCDUpdate args)
         {
             root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnSkillCDUpdate();
 
@@ -247,9 +247,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_SkillBeging_DlgMainRefresh : AEvent<Scene, DataUpdate_SkillBeging>
+    public class DataUpdate_SkillBeging_DlgMainRefresh : AEvent<Scene, SkillBeging>
     {
-        protected override async ETTask Run(Scene root, DataUpdate_SkillBeging args)
+        protected override async ETTask Run(Scene root, SkillBeging args)
         {
             root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnSkillBeging(args.DataParamString);
 
@@ -258,9 +258,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_SkillFinish_DlgMainRefresh : AEvent<Scene, DataUpdate_SkillFinish>
+    public class DataUpdate_SkillFinish_DlgMainRefresh : AEvent<Scene, SkillFinish>
     {
-        protected override async ETTask Run(Scene root, DataUpdate_SkillFinish args)
+        protected override async ETTask Run(Scene root, SkillFinish args)
         {
             root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.OnSkillFinish(args.DataParamString);
 
@@ -269,9 +269,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_JingLingButton_DlgMainRefresh : AEvent<Scene, DataUpdate_JingLingButton>
+    public class DataUpdate_JingLingButton_DlgMainRefresh : AEvent<Scene, JingLingButton>
     {
-        protected override async ETTask Run(Scene root, DataUpdate_JingLingButton args)
+        protected override async ETTask Run(Scene root, JingLingButton args)
         {
             root.GetComponent<UIComponent>().GetDlgLogic<DlgMain>()?.View.ES_MainSkill.CheckJingLingFunction();
 

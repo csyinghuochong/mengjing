@@ -6,7 +6,7 @@
         protected override async ETTask Run(Scene root, M2C_SkillSetMessage message)
         {
             root.GetComponent<SkillSetComponentC>().UpdateSkillSet(message.SkillSetInfo);
-            EventSystem.Instance.Publish(root, new DataUpdate_SkillSetting());
+            EventSystem.Instance.Publish(root, new SkillSetting());
             await ETTask.CompletedTask;
         }
     }

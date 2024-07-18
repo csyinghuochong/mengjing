@@ -5,9 +5,9 @@ using UnityEngine;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_BagItemUpdate_DlgJiaYuanBagRefresh: AEvent<Scene, DataUpdate_BagItemUpdate>
+    public class DataUpdate_BagItemUpdate_DlgJiaYuanBagRefresh: AEvent<Scene, BagItemUpdate>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_BagItemUpdate args)
+        protected override async ETTask Run(Scene scene, BagItemUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanBag>()?.OnUpdateUI();
             await ETTask.CompletedTask;

@@ -172,7 +172,7 @@ namespace ET.Client
             }
 
             // self.ZoneScene().GetComponent<AttackComponent>().UpdateComboTime();
-            EventSystem.Instance.Publish(root, new DataUpdate_EquipWear());
+            EventSystem.Instance.Publish(root, new EquipWear());
         }
 
         public static async ETTask RequestTakeoffEquip(Scene root, BagInfo bagInfo)
@@ -203,7 +203,7 @@ namespace ET.Client
 
             root.GetComponent<AttackComponent>().UpdateComboTime();
 
-            EventSystem.Instance.Publish(root, new DataUpdate_EquipWear());
+            EventSystem.Instance.Publish(root, new EquipWear());
         }
 
         public static async ETTask<int> RequestSplitItem(Scene root, BagInfo bagInfo, int splitnumber)
@@ -254,7 +254,7 @@ namespace ET.Client
 
             M2C_ItemHuiShouResponse response = (M2C_ItemHuiShouResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
-            EventSystem.Instance.Publish(root, new DataUpdate_EquipHuiShow());
+            EventSystem.Instance.Publish(root, new EquipHuiShow());
             return response.Error;
         }
 
@@ -454,7 +454,7 @@ namespace ET.Client
             if (response.Error == ErrorCode.ERR_Success)
             {
                 EventSystem.Instance.Publish(root,
-                    new DataUpdate_OnAccountWarehous() { DataParamString = operateType.ToString(), baginfoId = operateId });
+                    new OnAccountWarehous() { DataParamString = operateType.ToString(), baginfoId = operateId });
             }
 
             return response.Error;
@@ -743,7 +743,7 @@ namespace ET.Client
         public static async ETTask<M2C_GameSettingResponse> GameSetting(Scene root, List<KeyValuePair> gameSettingInfos)
         {
             root.GetComponent<UserInfoComponentC>().UpdateGameSetting(gameSettingInfos);
-            EventSystem.Instance.Publish(root, new DataUpdate_SettingUpdate());
+            EventSystem.Instance.Publish(root, new SettingUpdate());
 
             C2M_GameSettingRequest request = C2M_GameSettingRequest.Create();
             request.GameSettingInfos = gameSettingInfos;

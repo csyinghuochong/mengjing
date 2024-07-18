@@ -1,9 +1,9 @@
 ﻿namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_OnPetFightSet_DlgPetRefresh: AEvent<Scene, DataUpdate_OnPetFightSet>
+    public class DataUpdate_OnPetFightSet_DlgPetRefresh: AEvent<Scene, OnPetFightSet>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_OnPetFightSet args)
+        protected override async ETTask Run(Scene scene, OnPetFightSet args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgPet>()?.OnPetFightSet();
             await ETTask.CompletedTask;
@@ -11,9 +11,9 @@
     }
     
     [Event(SceneType.Demo)]
-    public class DataUpdate_PetItemSelect_Refresh: AEvent<Scene, DataUpdate_PetItemSelect>
+    public class DataUpdate_PetItemSelect_Refresh: AEvent<Scene, PetItemSelect>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_PetItemSelect args)
+        protected override async ETTask Run(Scene scene, PetItemSelect args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgPet>()?.PetItemSelect(args.DataParamString);
             await ETTask.CompletedTask;
@@ -21,9 +21,9 @@
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_PetHeChengUpdate_Refresh: AEvent<Scene, DataUpdate_PetHeChengUpdate>
+    public class DataUpdate_PetHeChengUpdate_Refresh: AEvent<Scene, PetHeChengUpdate>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_PetHeChengUpdate args)
+        protected override async ETTask Run(Scene scene, PetHeChengUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgPet>()?.OnHeChengReturn();
             await ETTask.CompletedTask;
@@ -31,9 +31,9 @@
     }
 
     [Event(SceneType.Demo)]
-    public class DDataUpdate_PetXiLianUpdate_Refresh: AEvent<Scene, DataUpdate_PetXiLianUpdate>
+    public class DDataUpdate_PetXiLianUpdate_Refresh: AEvent<Scene, PetXiLianUpdate>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_PetXiLianUpdate args)
+        protected override async ETTask Run(Scene scene, PetXiLianUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgPet>()?.OnXiLianUpdate();
             await ETTask.CompletedTask;

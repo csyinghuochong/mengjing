@@ -627,7 +627,7 @@ namespace ET.Client
                 return -1;
             }
 
-            EventSystem.Instance.Publish(self.Root(), new DataUpdate_BeforeMove() { DataParamString = operatetype });
+            EventSystem.Instance.Publish(self.Root(), new BeforeMove() { DataParamString = operatetype });
             int ret = await unit.MoveToAsync(position);
             return ret;
         }

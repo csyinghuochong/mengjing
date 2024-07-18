@@ -68,14 +68,14 @@ namespace ET.Client
 
             if (operation == 1)
             {
-                EventSystem.Instance.Publish(self.Root(), new DataUpdate_SkillReset());
+                EventSystem.Instance.Publish(self.Root(), new SkillReset());
             }
 
             if (operation == 2)
             {
                 UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
                 userInfoComponent.UserInfo.OccTwo = 0;
-                EventSystem.Instance.Publish(self.Root(), new DataUpdate_SkillReset());
+                EventSystem.Instance.Publish(self.Root(), new SkillReset());
             }
 
             self.InitSkillList(self.CurrentItemType).Coroutine();

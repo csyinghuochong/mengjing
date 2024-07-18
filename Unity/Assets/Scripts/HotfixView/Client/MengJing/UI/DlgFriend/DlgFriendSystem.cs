@@ -12,9 +12,9 @@ namespace ET.Client
     public static class DlgFriendSystem
     {
         [Event(SceneType.Demo)]
-        public class DataUpdate_FriendUpdate_FriendItemsRefresh: AEvent<Scene, DataUpdate_FriendUpdate>
+        public class DataUpdate_FriendUpdate_FriendItemsRefresh: AEvent<Scene, FriendUpdate>
         {
-            protected override async ETTask Run(Scene root, DataUpdate_FriendUpdate args)
+            protected override async ETTask Run(Scene root, FriendUpdate args)
             {
                 root.GetComponent<UIComponent>().GetDlgLogic<DlgFriend>()?.View.ES_FriendList.Refresh();
                 root.GetComponent<UIComponent>().GetDlgLogic<DlgFriend>()?.View.ES_FriendApply.Refresh();
@@ -23,9 +23,9 @@ namespace ET.Client
         }
 
         [Event(SceneType.Demo)]
-        public class DataUpdate_FriendChat_Refresh: AEvent<Scene, DataUpdate_FriendChat>
+        public class DataUpdate_FriendChat_Refresh: AEvent<Scene, FriendChat>
         {
-            protected override async ETTask Run(Scene root, DataUpdate_FriendChat args)
+            protected override async ETTask Run(Scene root, FriendChat args)
             {
                 root.GetComponent<UIComponent>().GetDlgLogic<DlgFriend>()?.View.ES_FriendList.OnFriendChat();
                 await ETTask.CompletedTask;

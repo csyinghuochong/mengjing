@@ -641,13 +641,13 @@ namespace ET.Client
 
         private static void OnHuiShouButton(this DlgItemTips self)
         {
-            EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"1_{self.BagInfo.BagInfoID}" });
+            EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = $"1_{self.BagInfo.BagInfoID}" });
             self.OnCloseTips();
         }
 
         private static void OnHuiShouCancleButton(this DlgItemTips self)
         {
-            EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"0_{self.BagInfo.BagInfoID}" });
+            EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = $"0_{self.BagInfo.BagInfoID}" });
             self.OnCloseTips();
         }
 

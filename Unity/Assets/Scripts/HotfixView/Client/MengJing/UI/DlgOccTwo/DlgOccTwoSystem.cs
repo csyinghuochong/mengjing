@@ -213,7 +213,7 @@ namespace ET.Client
 
             userInfoComponent.UserInfo.OccTwo = 0;
             self.View.E_ButtonOccResetButton.gameObject.SetActive(false);
-            EventSystem.Instance.Publish(self.Root(), new DataUpdate_SkillReset());
+            EventSystem.Instance.Publish(self.Root(), new SkillReset());
         }
     }
 }

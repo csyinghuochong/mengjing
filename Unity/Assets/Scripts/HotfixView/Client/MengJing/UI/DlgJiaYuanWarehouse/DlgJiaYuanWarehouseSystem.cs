@@ -3,9 +3,9 @@
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class BagItemUpdate_DlgJiaYuanWarehouseRefresh : AEvent<Scene, DataUpdate_BagItemUpdate>
+    public class BagItemUpdate_DlgJiaYuanWarehouseRefresh : AEvent<Scene, BagItemUpdate>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_BagItemUpdate args)
+        protected override async ETTask Run(Scene scene, BagItemUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanWarehouse>()?.Refresh();
             await ETTask.CompletedTask;

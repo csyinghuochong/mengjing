@@ -13,7 +13,7 @@ namespace ET.Client
             SkillSetComponentC skillSetComponent = root.GetComponent<SkillSetComponentC>();
             skillSetComponent.UpdateSkillSet(response.SkillSetInfo);
 
-            EventSystem.Instance.Publish(root, new DataUpdate_SkillSetting());
+            EventSystem.Instance.Publish(root, new SkillSetting());
         }
 
         //激活天赋
@@ -30,7 +30,7 @@ namespace ET.Client
             }
 
             //如果有相同等级的天赋则替换
-            EventSystem.Instance.Publish(root, new DataUpdate_OnActiveTianFu());
+            EventSystem.Instance.Publish(root, new OnActiveTianFu());
             HintHelp.ShowHint(root, "激活成功！");
         }
 
@@ -49,7 +49,7 @@ namespace ET.Client
             skillSetComponent.OnActiveSkillID(skillId, response.NewSkillID);
 
             EventSystem.Instance.Publish(root,
-                new DataUpdate_SkillUpgrade { DataParamString = skillId + "_" + response.NewSkillID });
+                new SkillUpgrade { DataParamString = skillId + "_" + response.NewSkillID });
         }
 
         public static async ETTask<bool> ChangeOccTwoRequest(Scene root, int occTwoID)
@@ -93,7 +93,7 @@ namespace ET.Client
                 return;
 
             root.GetComponent<SkillSetComponentC>().OnSetSkillIdByPosition(skillId, skillType, pos);
-            EventSystem.Instance.Publish(root, new DataUpdate_SkillSetting());
+            EventSystem.Instance.Publish(root, new SkillSetting());
         }
 
         public static async ETTask<int> SkillOperation(Scene root, int operationType)

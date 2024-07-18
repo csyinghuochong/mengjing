@@ -1,27 +1,17 @@
 ﻿namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class UserDataTypeUpdate_Gold_HuoBiSetRefresh: AEvent<Scene, UserDataTypeUpdate_Gold>
+    public class UpdateUserData_HuoBiSetRefresh : AEvent<Scene, UpdateUserData>
     {
-        protected override async ETTask Run(Scene root, UserDataTypeUpdate_Gold args)
+        protected override async ETTask Run(Scene root, UpdateUserData args)
         {
             root.GetComponent<UIComponent>().GetDlgLogic<DlgHuoBiSet>()?.Refresh();
             await ETTask.CompletedTask;
         }
     }
 
-    [Event(SceneType.Demo)]
-    public class UserDataTypeUpdate_Diamond_HuoBiSetRefresh: AEvent<Scene, UserDataTypeUpdate_Diamond>
-    {
-        protected override async ETTask Run(Scene root, UserDataTypeUpdate_Diamond args)
-        {
-            root.GetComponent<UIComponent>().GetDlgLogic<DlgHuoBiSet>()?.Refresh();
-            await ETTask.CompletedTask;
-        }
-    }
-
-    [FriendOf(typeof (UserInfoComponentC))]
-    [FriendOf(typeof (DlgHuoBiSet))]
+    [FriendOf(typeof(UserInfoComponentC))]
+    [FriendOf(typeof(DlgHuoBiSet))]
     public static class DlgHuoBiSetSystem
     {
         public static void RegisterUIEvent(this DlgHuoBiSet self)

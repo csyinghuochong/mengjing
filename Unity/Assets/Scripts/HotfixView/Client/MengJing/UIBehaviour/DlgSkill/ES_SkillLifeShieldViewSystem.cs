@@ -363,7 +363,7 @@ namespace ET.Client
         {
             if (TimeHelper.ClientNow() - self.ClickTime < 200)
             {
-                EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
+                EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
             }
 
             self.IsHoldDown = false;

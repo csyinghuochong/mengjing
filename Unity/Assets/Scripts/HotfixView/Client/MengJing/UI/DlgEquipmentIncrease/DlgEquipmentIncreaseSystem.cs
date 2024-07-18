@@ -7,9 +7,9 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_BagItemUpdate_DlgEquipmentIncreaseRefresh : AEvent<Scene, DataUpdate_BagItemUpdate>
+    public class DataUpdate_BagItemUpdate_DlgEquipmentIncreaseRefresh : AEvent<Scene, BagItemUpdate>
     {
-        protected override async ETTask Run(Scene root, DataUpdate_BagItemUpdate args)
+        protected override async ETTask Run(Scene root, BagItemUpdate args)
         {
             root.GetComponent<UIComponent>().GetDlgLogic<DlgEquipmentIncrease>()?.View.ES_EquipmentIncreaseShow.OnUpdateUI();
             await ETTask.CompletedTask;

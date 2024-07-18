@@ -159,7 +159,7 @@ namespace ET.Client
 		private static async ETTask OnPointerDown(this ES_RoleHuiShou self, BagInfo binfo, PointerEventData pdata)
 		{
 			self.IsHoldDown = true;
-			EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
+			EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
 			await self.Root().GetComponent<TimerComponent>().WaitAsync(500);
 			if (!self.IsHoldDown)
 				return;

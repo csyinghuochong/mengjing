@@ -1,9 +1,9 @@
 ﻿namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_SkillReset_Refresh: AEvent<Scene, DataUpdate_SkillReset>
+    public class DataUpdate_SkillReset_Refresh: AEvent<Scene, SkillReset>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_SkillReset args)
+        protected override async ETTask Run(Scene scene, SkillReset args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgSkill>()?.OnSkillReset();
             await ETTask.CompletedTask;
@@ -11,9 +11,9 @@
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_SkillUpgrade_Refresh: AEvent<Scene, DataUpdate_SkillUpgrade>
+    public class DataUpdate_SkillUpgrade_Refresh: AEvent<Scene, SkillUpgrade>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_SkillUpgrade args)
+        protected override async ETTask Run(Scene scene, SkillUpgrade args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgSkill>()?.OnSkillUpgrade(args.DataParamString);
             await ETTask.CompletedTask;
@@ -21,9 +21,9 @@
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_SkillSetting_Refresh: AEvent<Scene, DataUpdate_SkillSetting>
+    public class DataUpdate_SkillSetting_Refresh: AEvent<Scene, SkillSetting>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_SkillSetting args)
+        protected override async ETTask Run(Scene scene, SkillSetting args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgSkill>()?.OnSkillSetUpdate();
             await ETTask.CompletedTask;
@@ -31,9 +31,9 @@
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_OnActiveTianFu_Refresh: AEvent<Scene, DataUpdate_OnActiveTianFu>
+    public class DataUpdate_OnActiveTianFu_Refresh: AEvent<Scene, OnActiveTianFu>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_OnActiveTianFu args)
+        protected override async ETTask Run(Scene scene, OnActiveTianFu args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgSkill>()?.OnActiveTianFu();
             await ETTask.CompletedTask;
@@ -41,9 +41,9 @@
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_HuiShouSelect_Refresh: AEvent<Scene, DataUpdate_HuiShouSelect>
+    public class DataUpdate_HuiShouSelect_Refresh: AEvent<Scene, HuiShouSelect>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_HuiShouSelect args)
+        protected override async ETTask Run(Scene scene, HuiShouSelect args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgSkill>()?.OnHuiShouSelect(args.DataParamString);
             await ETTask.CompletedTask;

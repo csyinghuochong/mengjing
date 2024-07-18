@@ -42,7 +42,7 @@ namespace ET.Client
             }
 
             EventSystem.Instance.Publish(self.Root(),
-                new DataUpdate_PetItemSelect { DataParamString = self.OperationType + "@" + self.RolePetInfo.Id });
+                new PetItemSelect { DataParamString = self.OperationType + "@" + self.RolePetInfo.Id });
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_PetSelect);
         }

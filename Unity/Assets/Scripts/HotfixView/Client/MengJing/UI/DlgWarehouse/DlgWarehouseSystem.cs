@@ -1,9 +1,9 @@
 ﻿namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class BagItemUpdate_DlgWarehouseRefresh: AEvent<Scene, DataUpdate_BagItemUpdate>
+    public class BagItemUpdate_DlgWarehouseRefresh: AEvent<Scene, BagItemUpdate>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_BagItemUpdate args)
+        protected override async ETTask Run(Scene scene, BagItemUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgWarehouse>()?.View.ES_WarehouseRole?.Refresh();
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgWarehouse>()?.View.ES_WarehouseGem?.Refresh();
@@ -12,9 +12,9 @@
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_OnAccountWarehous_DlgWarehouseRefresh: AEvent<Scene, DataUpdate_OnAccountWarehous>
+    public class DataUpdate_OnAccountWarehous_DlgWarehouseRefresh: AEvent<Scene, OnAccountWarehous>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_OnAccountWarehous args)
+        protected override async ETTask Run(Scene scene, OnAccountWarehous args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgWarehouse>()?.View.ES_WarehouseAccount
                     ?.OnAccountWarehous(args.DataParamString, args.baginfoId);

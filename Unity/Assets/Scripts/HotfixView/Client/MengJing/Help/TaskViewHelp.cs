@@ -296,7 +296,7 @@ namespace ET.Client
                 Vector3 unitPosi = unit.Position;
                 Vector3 dir = (unitPosi - targetPos).normalized;
                 targetPos += dir * TaskData.NpcSpeakDistance;
-                EventSystem.Instance.Publish(root, new DataUpdate_BeforeMove() { DataParamString = "1" });
+                EventSystem.Instance.Publish(root, new BeforeMove() { DataParamString = "1" });
 
                 ret = await unit.MoveToAsync(targetPos);
             }
@@ -359,7 +359,7 @@ namespace ET.Client
             }
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(root);
-            EventSystem.Instance.Publish(root, new DataUpdate_BeforeMove() { DataParamString = String.Empty });
+            EventSystem.Instance.Publish(root, new BeforeMove() { DataParamString = String.Empty });
             unit.MoveToAsync(gameObject.transform.position).Coroutine();
         }
 

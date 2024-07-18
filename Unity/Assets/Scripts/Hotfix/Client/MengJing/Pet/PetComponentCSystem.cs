@@ -413,7 +413,7 @@ namespace ET.Client
                 }
             }
 
-            EventSystem.Instance.Publish(self.Root(), new DataUpdate_PetHeChengUpdate());
+            EventSystem.Instance.Publish(self.Root(), new PetHeChengUpdate());
         }
     }
 }

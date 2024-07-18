@@ -6,9 +6,9 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_OnRecvChat_ChatItemsRefresh: AEvent<Scene, DataUpdate_OnRecvChat>
+    public class DataUpdate_OnRecvChat_ChatItemsRefresh: AEvent<Scene, OnRecvChat>
     {
-        protected override async ETTask Run(Scene root, DataUpdate_OnRecvChat args)
+        protected override async ETTask Run(Scene root, OnRecvChat args)
         {
             root.GetComponent<UIComponent>().GetDlgLogic<DlgChat>()?.Refresh();
             await ETTask.CompletedTask;

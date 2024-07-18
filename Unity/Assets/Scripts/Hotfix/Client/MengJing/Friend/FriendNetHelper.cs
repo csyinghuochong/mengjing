@@ -108,7 +108,7 @@ namespace ET.Client
                     }
                 }
 
-                EventSystem.Instance.Publish(root, new DataUpdate_FriendUpdate());
+                EventSystem.Instance.Publish(root, new FriendUpdate());
             }
 
             return response.Error;

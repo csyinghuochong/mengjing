@@ -1,9 +1,9 @@
 ﻿namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_HuiShouSelect_DlgJiaYuanFoodRefresh: AEvent<Scene, DataUpdate_HuiShouSelect>
+    public class DataUpdate_HuiShouSelect_DlgJiaYuanFoodRefresh: AEvent<Scene, HuiShouSelect>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_HuiShouSelect args)
+        protected override async ETTask Run(Scene scene, HuiShouSelect args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanFood>()?.View.ES_JiaYuanCooking.OnHuiShouSelect(args.DataParamString);
             await ETTask.CompletedTask;

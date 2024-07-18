@@ -529,7 +529,7 @@ namespace ET.Client
 
             if (hit.collider != null)
             {
-                EventSystem.Instance.Publish(self.Root(), new DataUpdate_BeforeMove() { DataParamString = "1" });
+                EventSystem.Instance.Publish(self.Root(), new BeforeMove() { DataParamString = "1" });
                 unit.MoveToAsync(hit.point).Coroutine();
             }
         }

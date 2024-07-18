@@ -4,9 +4,9 @@ using UnityEngine;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class BagItemUpdate_RefreshAppraisalSelectItem: AEvent<Scene, DataUpdate_BagItemUpdate>
+    public class BagItemUpdate_RefreshAppraisalSelectItem: AEvent<Scene, BagItemUpdate>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_BagItemUpdate args)
+        protected override async ETTask Run(Scene scene, BagItemUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgAppraisalSelect>()?.RefreshCommonItems();
             await ETTask.CompletedTask;

@@ -183,7 +183,7 @@ namespace ET.Client
         public static async ETTask OnPointerDown(this ES_RoleXiLianTransfer self, BagInfo binfo, PointerEventData pdata)
         {
             self.IsHoldDown = true;
-            EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
+            EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
             await self.Root().GetComponent<TimerComponent>().WaitAsync(400);
             if (!self.IsHoldDown)
                 return;

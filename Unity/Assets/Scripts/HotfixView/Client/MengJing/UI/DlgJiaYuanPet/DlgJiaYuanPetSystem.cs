@@ -1,9 +1,9 @@
 ﻿namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_PetItemSelect_DlgJiaYuanPetRefresh: AEvent<Scene, DataUpdate_PetItemSelect>
+    public class DataUpdate_PetItemSelect_DlgJiaYuanPetRefresh: AEvent<Scene, PetItemSelect>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_PetItemSelect args)
+        protected override async ETTask Run(Scene scene, PetItemSelect args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanPet>()?.View.ES_JiaYuanPetWalk.PetItemSelect(args.DataParamString);
             await ETTask.CompletedTask;

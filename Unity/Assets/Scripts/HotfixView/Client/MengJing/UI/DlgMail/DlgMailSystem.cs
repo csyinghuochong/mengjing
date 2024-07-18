@@ -4,9 +4,9 @@ using UnityEngine;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_OnMailUpdate_DlgMailRefresh: AEvent<Scene, DataUpdate_OnMailUpdate>
+    public class DataUpdate_OnMailUpdate_DlgMailRefresh: AEvent<Scene, OnMailUpdate>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_OnMailUpdate args)
+        protected override async ETTask Run(Scene scene, OnMailUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgMail>()?.OnMailUpdate();
             await ETTask.CompletedTask;

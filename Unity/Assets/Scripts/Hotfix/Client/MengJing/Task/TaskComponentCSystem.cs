@@ -177,7 +177,7 @@ namespace ET.Client
         public static void OnRecvTaskUpdate(this TaskComponentC self, M2C_TaskUpdate message)
         {
             self.RoleTaskList = message.RoleTaskList;
-            EventSystem.Instance.Publish(self.Root(), new DataUpdate_TaskUpdate());
+            EventSystem.Instance.Publish(self.Root(), new TaskUpdate());
         }
 
         public static bool IsTaskFinished(this TaskComponentC self, int taskId)

@@ -5,9 +5,9 @@ using UnityEngine.EventSystems;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_HuiShouSelect_DlgJiaYuanPetFeedRefresh : AEvent<Scene, DataUpdate_HuiShouSelect>
+    public class DataUpdate_HuiShouSelect_DlgJiaYuanPetFeedRefresh : AEvent<Scene, HuiShouSelect>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_HuiShouSelect args)
+        protected override async ETTask Run(Scene scene, HuiShouSelect args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanPetFeed>()?.OnHuiShouSelect(args.DataParamString);
             await ETTask.CompletedTask;
@@ -252,7 +252,7 @@ namespace ET.Client
             }
 
             self.IsHoldDown = true;
-            EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
+            EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
 
             await self.Root().GetComponent<TimerComponent>().WaitAsync(500);
             if (!self.IsHoldDown)

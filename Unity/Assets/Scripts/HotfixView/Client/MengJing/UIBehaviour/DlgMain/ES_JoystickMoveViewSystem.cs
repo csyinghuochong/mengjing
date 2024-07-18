@@ -254,7 +254,7 @@ namespace ET.Client
                 return;
             }
 
-            EventSystem.Instance.Publish(self.Root(), new DataUpdate_BeforeMove() { DataParamString = string.Empty });
+            EventSystem.Instance.Publish(self.Root(), new BeforeMove() { DataParamString = string.Empty });
 
             Vector3 newv3 = unitPosition + rotation * Vector3.forward * distance;
 

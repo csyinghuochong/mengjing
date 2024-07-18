@@ -830,14 +830,14 @@ namespace ET.Client
 
         private static async ETTask OnHuiShouFangZhiButton(this ES_EquipTips self)
         {
-            EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"1_{self.BagInfo.BagInfoID}" });
+            EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = $"1_{self.BagInfo.BagInfoID}" });
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
             await ETTask.CompletedTask;
         }
 
         private static async ETTask OnTakeButton(this ES_EquipTips self)
         {
-            EventSystem.Instance.Publish(self.Root(), new DataUpdate_HuiShouSelect() { DataParamString = $"0_{self.BagInfo.BagInfoID}" });
+            EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = $"0_{self.BagInfo.BagInfoID}" });
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_EquipDuiBiTips);
             await ETTask.CompletedTask;
         }

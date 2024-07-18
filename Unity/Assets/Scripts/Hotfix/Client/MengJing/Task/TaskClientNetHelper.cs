@@ -33,7 +33,7 @@ namespace ET.Client
                 }
             }
 
-            EventSystem.Instance.Publish(root, new DataUpdate_TaskTrace());
+            EventSystem.Instance.Publish(root, new TaskTrace());
             return response.Error;
         }
 
@@ -73,7 +73,7 @@ namespace ET.Client
             }
 
             taskComponentC.RoleComoleteTaskList = response.RoleComoleteTaskList;
-            EventSystem.Instance.Publish(root, new DataUpdate_TaskComplete());
+            EventSystem.Instance.Publish(root, new TaskComplete());
             return response.Error;
         }
 
@@ -113,7 +113,7 @@ namespace ET.Client
 
             TaskComponentC taskComponentC = root.GetComponent<TaskComponentC>();
             taskComponentC.RoleTaskList.Add(response.TaskPro);
-            EventSystem.Instance.Publish(root, new DataUpdate_TaskGet());
+            EventSystem.Instance.Publish(root, new TaskGet());
             return response.Error;
         }
 
@@ -134,7 +134,7 @@ namespace ET.Client
                 }
             }
 
-            EventSystem.Instance.Publish(root, new DataUpdate_TaskGet());
+            EventSystem.Instance.Publish(root, new TaskGet());
             return response.Error;
         }
 
@@ -186,7 +186,7 @@ namespace ET.Client
 
             M2C_TaskNoticeResponse response = (M2C_TaskNoticeResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
 
-            EventSystem.Instance.Publish(root, new DataUpdate_TaskUpdate());
+            EventSystem.Instance.Publish(root, new TaskUpdate());
         }
     }
 }

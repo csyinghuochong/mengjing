@@ -5,9 +5,9 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_BeforeMove_DlgJiaYuanMainRefesh : AEvent<Scene, DataUpdate_BeforeMove>
+    public class DataUpdate_BeforeMove_DlgJiaYuanMainRefesh : AEvent<Scene, BeforeMove>
     {
-        protected override async ETTask Run(Scene root, DataUpdate_BeforeMove args)
+        protected override async ETTask Run(Scene root, BeforeMove args)
         {
             root.GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>()?.OnSelectCancel();
             await ETTask.CompletedTask;

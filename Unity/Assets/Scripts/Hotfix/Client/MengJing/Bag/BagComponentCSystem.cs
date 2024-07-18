@@ -92,7 +92,7 @@ namespace ET.Client
         {
             List<BagInfo> ItemTypeList = self.GetItemsByLoc(itemEquipType);
             ItemHelper.ItemLitSort(ItemTypeList);
-            EventSystem.Instance.Publish(self.Root(), new DataUpdate_BagItemUpdate());
+            EventSystem.Instance.Publish(self.Root(), new BagItemUpdate());
         }
 
         public static void OnRecvBagUpdate(this BagComponentC self, M2C_RoleBagUpdate message)
@@ -119,7 +119,7 @@ namespace ET.Client
 
                     if (newInfo.Loc == (int)ItemLocType.ChouKaWarehouse)
                     {
-                        EventSystem.Instance.Publish(self.Root(), new DataUpdate_ChouKaWarehouseAddItem());
+                        EventSystem.Instance.Publish(self.Root(), new ChouKaWarehouseAddItem());
                     }
 
                     if (oldInfo.Loc != newInfo.Loc)
@@ -164,7 +164,7 @@ namespace ET.Client
 
                     if (bagInfo.Loc == (int)ItemLocType.ChouKaWarehouse)
                     {
-                        EventSystem.Instance.Publish(self.Root(), new DataUpdate_ChouKaWarehouseAddItem());
+                        EventSystem.Instance.Publish(self.Root(), new ChouKaWarehouseAddItem());
                     }
 
                     List<BagInfo> temp = self.GetItemsByLoc(bagInfo.Loc);
@@ -188,7 +188,7 @@ namespace ET.Client
                 }
             }
 
-            EventSystem.Instance.Publish(self.Root(), new DataUpdate_BagItemUpdate());
+            EventSystem.Instance.Publish(self.Root(), new BagItemUpdate());
         }
 
         private static void ShowGetItemTip(this BagComponentC self, BagInfo bagInfo, int addNum)

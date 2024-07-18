@@ -36,7 +36,7 @@ namespace ET.Client
             self.E_ButtonShouHuiButton.gameObject.SetActive(current);
             self.E_ButtonActiviteButton.gameObject.SetActive(!current);
 
-            EventSystem.Instance.Publish(self.Root(), new DataUpdate_JingLingButton());
+            EventSystem.Instance.Publish(self.Root(), new JingLingButton());
         }
 
         public static void OnInitUI(this Scroll_Item_ChengJiuJinglingItem self, int jid, bool active)

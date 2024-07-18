@@ -143,7 +143,7 @@ namespace ET.Client
             self.OnUpdateButton();
             self.ShowSwitchCD().Coroutine();
             self.Root().GetComponent<AttackComponent>().UpdateComboTime();
-            EventSystem.Instance.Publish(self.Root(), new DataUpdate_EquipWear());
+            EventSystem.Instance.Publish(self.Root(), new EquipWear());
         }
 
         public static async ETTask ShowSwitchCD(this ES_MainSkill self)

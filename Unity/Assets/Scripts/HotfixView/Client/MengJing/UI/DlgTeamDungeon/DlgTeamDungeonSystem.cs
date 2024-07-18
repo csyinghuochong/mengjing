@@ -3,9 +3,9 @@
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_TeamUpdate_DlgTeamDungeonRefresh: AEvent<Scene, DataUpdate_TeamUpdate>
+    public class DataUpdate_TeamUpdate_DlgTeamDungeonRefresh: AEvent<Scene, TeamUpdate>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_TeamUpdate args)
+        protected override async ETTask Run(Scene scene, TeamUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgTeamDungeon>()?.OnTeamUpdate();
             await ETTask.CompletedTask;
@@ -13,9 +13,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_BagItemUpdate_DlgTeamDungeonRefresh: AEvent<Scene, DataUpdate_BagItemUpdate>
+    public class DataUpdate_BagItemUpdate_DlgTeamDungeonRefresh: AEvent<Scene, BagItemUpdate>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_BagItemUpdate args)
+        protected override async ETTask Run(Scene scene, BagItemUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgTeamDungeon>()?.View.ES_TeamDungeonShop.OnUpdateUI();
             await ETTask.CompletedTask;

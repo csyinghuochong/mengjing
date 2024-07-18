@@ -15,7 +15,7 @@ namespace ET.Client
 
             root.GetComponent<MailComponentC>().MailInfoList = response.MailInfos;
 
-            EventSystem.Instance.Publish(root, new DataUpdate_OnMailUpdate());
+            EventSystem.Instance.Publish(root, new OnMailUpdate());
             return response;
         }
 
@@ -62,7 +62,7 @@ namespace ET.Client
                 }
             }
 
-            EventSystem.Instance.Publish(root, new DataUpdate_OnMailUpdate());
+            EventSystem.Instance.Publish(root, new OnMailUpdate());
             return ErrorCode.ERR_Success;
         }
 

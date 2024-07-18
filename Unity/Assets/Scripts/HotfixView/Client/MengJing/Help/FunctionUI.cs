@@ -110,6 +110,7 @@ namespace ET.Client
                 "UIFriend" => WindowID.WindowID_Friend,
                 "UIUnionXiuLian" => WindowID.WindowID_UnionXiuLian,
                 "UITurtle" => WindowID.WindowID_Turtle,
+                "UIEquipmentIncrease" => WindowID.WindowID_EquipmentIncrease,
                 _ => WindowID.WindowID_Invaild
             };
         }

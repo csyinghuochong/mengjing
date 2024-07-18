@@ -1,9 +1,9 @@
 ﻿namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_BagItemUpdate_DlgUnionMysteryRefresh: AEvent<Scene, DataUpdate_BagItemUpdate>
+    public class DataUpdate_BagItemUpdate_DlgUnionMysteryRefresh: AEvent<Scene, BagItemUpdate>
     {
-        protected override async ETTask Run(Scene root, DataUpdate_BagItemUpdate args)
+        protected override async ETTask Run(Scene root, BagItemUpdate args)
         {
             root.GetComponent<UIComponent>().GetDlgLogic<DlgUnionMystery>()?.View.ES_UnionMystery_B.UpdateItemNum();
 

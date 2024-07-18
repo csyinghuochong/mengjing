@@ -30,180 +30,220 @@ namespace ET.Client
         public int Number;
     }
 
-    public struct DataUpdate_UpdateUserData
+    # region DataType
+
+    // 更新玩家身上货币属性
+    public struct UpdateUserData
     {
         public string DataParamString;
     }
 
-    public struct UserDataTypeUpdate_Gold
+    // 更新玩家战斗属性
+    public struct UpdateRoleProper
     {
     }
 
-    public struct UserDataTypeUpdate_Diamond
+    // 获得物品
+    public struct BagItemItemAdd
     {
     }
 
-    public struct UserDataTypeUpdate_HorseNotice
-    {
-        public M2C_HorseNoticeInfo M2C_HorseNoticeInfo;
-    }
-
-    public struct DataUpdate_BagItemUpdate
+    public struct PaiMaiBuy
     {
     }
 
-    public struct DataUpdate_BagItemItemAdd
+    public struct BagItemUpdate
     {
     }
 
-    public struct DataUpdate_FriendChat
+    public struct SettingUpdate
     {
-    }
-
-    public struct DataUpdate_OnRecvChat
-    {
-    }
-
-    public struct DataUpdate_FriendUpdate
-    {
-    }
-
-    public struct DataUpdate_TaskUpdate
-    {
-    }
-
-    public struct DataUpdate_TaskTrace
-    {
-    }
-
-    public struct DataUpdate_TaskGet
-    {
-    }
-
-    public struct DataUpdate_TaskComplete
-    {
-    }
-
-    public struct DataUpdate_TaskGiveUp
-    {
-    }
-
-    public struct DataUpdate_BeforeMove
-    {
-        public string DataParamString;
-    }
-
-    public struct DataUpdate_EquipWear
-    {
-    }
-
-    public struct DataUpdate_HuiShouSelect
-    {
-        public string DataParamString;
-    }
-
-    public struct DataUpdate_PetItemSelect
-    {
-        public string DataParamString;
-    }
-
-    public struct DataUpdate_EquipHuiShow
-    {
-    }
-
-    public struct DataUpdate_UpdateRoleProper
-    {
-    }
-
-    public struct DataUpdate_PetHeChengUpdate
-    {
-    }
-
-    public struct DataUpdate_PetXiLianUpdate
-    {
-    }
-
-    public struct DataUpdate_JingLingButton
-    {
-    }
-
-    public struct DataUpdate_SkillReset
-    {
-    }
-
-    public struct DataUpdate_SkillUpgrade
-    {
-        public string DataParamString;
-    }
-
-    public struct DataUpdate_SkillSetting
-    {
-    }
-
-    public struct DataUpdate_OnActiveTianFu
-    {
-    }
-
-    public struct DataUpdate_MainHeroMove
-    {
-    }
-
-    public struct DataUpdate_BuyBagCell
-    {
-    }
-
-    public struct DataUpdate_TeamUpdate
-    {
-    }
-
-    public struct DataUpdate_OnAccountWarehous
-    {
-        public string DataParamString;
-        public long baginfoId;
-    }
-
-    public struct DataUpdate_OnMailUpdate
-    {
-        public string DataParamString;
-        public long baginfoId;
-    }
-
-    public struct DataUpdate_ChouKaWarehouseAddItem
-    {
-    }
-
-    public struct DataUpdate_SettingUpdate
-    {
-    }
-
-    public struct DataUpdate_OnPetFightSet
-    {
-    }
-
-    public struct DataUpdate_UpdateSing
-    {
-        public string DataParamString;
-    }
-
-    public struct DataUpdate_SkillCDUpdate
-    {
-    }
-
-    public struct DataUpdate_SkillBeging
-    {
-        public string DataParamString;
-    }
-
-    public struct DataUpdate_SkillFinish
-    {
-        public string DataParamString;
     }
 
     public struct ChengJiuUpdate
     {
     }
 
+    public struct OnMailUpdate
+    {
+        public string DataParamString;
+        public long baginfoId;
+    }
+
+    public struct OnRecvChat
+    {
+    }
+
+    public struct HorseNotice
+    {
+        public M2C_HorseNoticeInfo M2C_HorseNoticeInfo;
+    }
+
+    // 选择回收
+    public struct HuiShouSelect
+    {
+        public string DataParamString;
+    }
+
+    // 穿戴装备
+    public struct EquipWear
+    {
+    }
+
+    public struct EquipHuiShow
+    {
+    }
+
+    // 任务更新通知
+    public struct TaskUpdate
+    {
+    }
+
+    // 任务追踪
+    public struct TaskTrace
+    {
+    }
+
+    // 接取任务
+    public struct TaskGet
+    {
+    }
+
+    // 完成任务
+    public struct TaskComplete
+    {
+    }
+
+    public struct TaskGiveUp
+    {
+    }
+
+    public struct PetItemSelect
+    {
+        public string DataParamString;
+    }
+
+    public struct PetHeChengUpdate
+    {
+    }
+
+    public struct PetXiLianUpdate
+    {
+    }
+
     public struct PetFenJieUpdate
+    {
+    }
+
+    public struct PetUpStarUpdate
+    {
+    }
+
+    public struct OnPetFightSet
+    {
+    }
+
+    public struct SkillSetting
+    {
+    }
+
+    public struct SkillReset
+    {
+    }
+
+    public struct SkillUpgrade
+    {
+        public string DataParamString;
+    }
+
+    public struct OnActiveTianFu
+    {
+    }
+
+    // 组队更新
+    public struct TeamUpdate
+    {
+    }
+
+    // 好友更新
+    public struct FriendUpdate
+    {
+    }
+
+    public struct FriendChat
+    {
+    }
+
+    public struct SkillCDUpdate
+    {
+    }
+
+    public struct MainHeroMove
+    {
+    }
+
+    public struct SkillBeging
+    {
+        public string DataParamString;
+    }
+
+    public struct SkillFinish
+    {
+        public string DataParamString;
+    }
+
+    public struct JingLingButton
+    {
+    }
+
+    public struct BuyBagCell
+    {
+    }
+
+    public struct BeforeMove
+    {
+        public string DataParamString;
+    }
+
+    public struct UpdateSing
+    {
+        public string DataParamString;
+    }
+
+    public struct ChouKaWarehouseAddItem
+    {
+    }
+
+    // 更新玩家身上货币属性
+    public struct UpdateUserDataExp
+    {
+        public long UpdateValue;
+    }
+
+    public struct UpdateUserDataPiLao
+    {
+        public long UpdateValue;
+    }
+
+    public struct UpdateUserBuffSkill
+    {
+        public long UpdateValue;
+    }
+
+    public struct OnSkillUse
+    {
+        public int SkillId;
+    }
+
+    public struct OnAccountWarehous
+    {
+        public string DataParamString;
+        public long baginfoId;
+    }
+
+    #endregion
+
+    public struct DataUpdate_UpdateRoleProper
     {
     }
 
@@ -269,16 +309,6 @@ namespace ET.Client
     public struct ChangeCameraMoveType
     {
         public int CameraType;
-    }
-
-    public struct OnSkillUse
-    {
-        public int SkillId;
-    }
-
-    public struct UpdateUserBuffSkill
-    {
-        public long UpdateValue;
     }
 
     //动画

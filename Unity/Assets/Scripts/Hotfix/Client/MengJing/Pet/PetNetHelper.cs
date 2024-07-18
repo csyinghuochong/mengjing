@@ -72,7 +72,7 @@ namespace ET.Client
             if (response.Error == ErrorCode.ERR_Success)
             {
                 root.GetComponent<PetComponentC>().RequestPetFight(petId, fight);
-                EventSystem.Instance.Publish(root, new DataUpdate_OnPetFightSet());
+                EventSystem.Instance.Publish(root, new OnPetFightSet());
             }
 
             return response.Error;
@@ -123,7 +123,7 @@ namespace ET.Client
             }
 
             EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = "道具在宠物身上发生了作用！" });
-            EventSystem.Instance.Publish(root, new DataUpdate_PetXiLianUpdate());
+            EventSystem.Instance.Publish(root, new PetXiLianUpdate());
 
             return response.Error;
         }

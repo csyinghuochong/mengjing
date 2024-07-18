@@ -3,9 +3,9 @@
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class BagItemUpdate_DlgRoleAndBagRefresh: AEvent<Scene, DataUpdate_BagItemUpdate>
+    public class BagItemUpdate_DlgRoleAndBagRefresh: AEvent<Scene, BagItemUpdate>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_BagItemUpdate args)
+        protected override async ETTask Run(Scene scene, BagItemUpdate args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.Refresh();
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.View.ES_RoleBag?.RefreshBagItems();
@@ -15,9 +15,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_EquipWear_RefreshEquip: AEvent<Scene, DataUpdate_EquipWear>
+    public class DataUpdate_EquipWear_RefreshEquip: AEvent<Scene, EquipWear>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_EquipWear args)
+        protected override async ETTask Run(Scene scene, EquipWear args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.OnEquipWear();
             await ETTask.CompletedTask;
@@ -25,9 +25,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_HuiShouSelect_Refreshitem: AEvent<Scene, DataUpdate_HuiShouSelect>
+    public class DataUpdate_HuiShouSelect_Refreshitem: AEvent<Scene, HuiShouSelect>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_HuiShouSelect args)
+        protected override async ETTask Run(Scene scene, HuiShouSelect args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.OnHuiShouSelect(args.DataParamString);
             await ETTask.CompletedTask;
@@ -35,9 +35,9 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class DataUpdate_EquipHuiShow_Refreshitem: AEvent<Scene, DataUpdate_EquipHuiShow>
+    public class DataUpdate_EquipHuiShow_Refreshitem: AEvent<Scene, EquipHuiShow>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_EquipHuiShow args)
+        protected override async ETTask Run(Scene scene, EquipHuiShow args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgRole>()?.OnEquipHuiShow();
             await ETTask.CompletedTask;

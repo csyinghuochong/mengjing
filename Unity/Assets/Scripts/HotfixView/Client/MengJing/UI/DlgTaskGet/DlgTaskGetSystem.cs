@@ -4,9 +4,9 @@ using UnityEngine;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_TaskGet_DlgTaskGetRefresh : AEvent<Scene, DataUpdate_TaskGet>
+    public class DataUpdate_TaskGet_DlgTaskGetRefresh : AEvent<Scene, TaskGet>
     {
-        protected override async ETTask Run(Scene scene, DataUpdate_TaskGet args)
+        protected override async ETTask Run(Scene scene, TaskGet args)
         {
             scene.GetComponent<UIComponent>().GetDlgLogic<DlgTaskGet>()?.OnTaskGet();
             await ETTask.CompletedTask;
