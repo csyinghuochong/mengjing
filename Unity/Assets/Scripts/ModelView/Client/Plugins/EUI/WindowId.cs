@@ -178,5 +178,6 @@ namespace ET.Client
 		WindowID_PetQuickFight,
 		WindowID_SelectServer,
 		WindowID_EquipmentIncrease,
+		WindowID_YinSi,
 	}
 }

@@ -26,6 +26,13 @@ namespace ET.Client
             self.View.E_PasswordInputField.text = PlayerPrefsHelp.GetString("MJ_Password");
 
             self.RequestServerList().Coroutine();
+
+            // if (string.IsNullOrEmpty(PlayerPrefsHelp.GetString("UIYinSi0627")))
+            // {
+            //     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_YinSi).Coroutine();
+            //     PlayerPrefsHelp.SetString("UIYinSi0627", "1");
+            // }
+            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_YinSi).Coroutine();
         }
 
         public static async ETTask RequestServerList(this DlgMJLogin self)
