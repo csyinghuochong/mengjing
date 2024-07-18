@@ -9,6 +9,11 @@ namespace ET.Client
         {
             self.View.E_LoginButton.AddListenerAsync(self.OnLogin);
             self.View.E_SelectBtnButton.AddListener(self.OnSelectServerList);
+
+            self.View.E_TextButton_1Button.AddListener(() => { self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(true); });
+            self.View.E_TextButton_2Button.AddListener(() => { self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(true); });
+            self.View.E_YinSiXieYiCloseButton.AddListener(() => { self.View.EG_YinSiXieYiRectTransform.gameObject.SetActive(false); });
+            self.View.E_YongHuXieYiCloseButton.AddListener(() => { self.View.EG_YongHuXieYiRectTransform.gameObject.SetActive(false); });
         }
 
         public static void ShowWindow(this DlgMJLogin self, Entity contextData = null)
@@ -66,12 +71,12 @@ namespace ET.Client
             playerComponent.ServerItem = self.ServerInfo;
 
             self.View.EG_LoadingRectTransform.gameObject.SetActive(true);
-            
+
             PlayerPrefsHelp.SetInt(PlayerPrefsHelp.MyServerID, self.ServerInfo.ServerId);
             PlayerPrefsHelp.SetOldServerIds(self.ServerInfo.ServerId);
             PlayerPrefsHelp.SetString("MJ_Account", self.View.E_AccountInputField.text);
             PlayerPrefsHelp.SetString("MJ_Password", self.View.E_PasswordInputField.text);
-            
+
             await LoginHelper.Login(self.Root(), self.View.E_AccountInputField.text, self.View.E_PasswordInputField.text);
         }
 

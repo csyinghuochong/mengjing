@@ -249,7 +249,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000061035, y: -532}
+  m_AnchoredPosition: {x: 0.000061035, y: -604}
   m_SizeDelta: {x: 382, y: 106}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222002149542603454
@@ -732,7 +732,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 0}
+  m_SizeDelta: {x: -17, y: -17}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5772098438558791683
 CanvasRenderer:
@@ -2531,7 +2531,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &82070228726000726
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3516,7 +3516,7 @@ GameObject:
   - component: {fileID: 5841371673943286243}
   - component: {fileID: 6560587264038451575}
   m_Layer: 5
-  m_Name: TextButton_2
+  m_Name: E_TextButton_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8747,7 +8747,7 @@ GameObject:
   - component: {fileID: 6244083413358529416}
   - component: {fileID: 3010115034382998218}
   m_Layer: 5
-  m_Name: TextButton_1
+  m_Name: E_TextButton_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24250,7 +24250,7 @@ GameObject:
   - component: {fileID: 9155252413567606781}
   - component: {fileID: 2236936427574807699}
   m_Layer: 5
-  m_Name: YongHuXieYiClose
+  m_Name: E_YongHuXieYiClose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24515,7 +24515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7812584638847377973}
   m_Layer: 5
-  m_Name: YinSiXieYi
+  m_Name: EG_YinSiXieYi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30143,7 +30143,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_SizeDelta: {x: 20, y: -17}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &4268950445890015609
 CanvasRenderer:
@@ -30227,7 +30227,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5114848423199978267}
   m_Direction: 2
   m_Value: 0.5
-  m_Size: 0.097751714
+  m_Size: 0.0956745
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -30967,7 +30967,7 @@ GameObject:
   - component: {fileID: 5232926602648416310}
   - component: {fileID: 643009680159116638}
   m_Layer: 5
-  m_Name: YinSiXieYiClose
+  m_Name: E_YinSiXieYiClose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31230,8 +31230,8 @@ RectTransform:
   m_Father: {fileID: 6434763020521462786}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.45112413}
-  m_AnchorMax: {x: 1, y: 0.54887587}
+  m_AnchorMin: {x: 0, y: 0.45216274}
+  m_AnchorMax: {x: 1, y: 0.54783726}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -31753,7 +31753,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1060779329089425187}
   m_Layer: 5
-  m_Name: YongHuXieYi
+  m_Name: EG_YongHuXieYi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
