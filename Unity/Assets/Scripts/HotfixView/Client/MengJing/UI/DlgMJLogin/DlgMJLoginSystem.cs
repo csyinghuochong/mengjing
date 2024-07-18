@@ -32,7 +32,7 @@ namespace ET.Client
             //     self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_YinSi).Coroutine();
             //     PlayerPrefsHelp.SetString("UIYinSi0627", "1");
             // }
-            self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_YinSi).Coroutine();
+            //self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_YinSi).Coroutine();
         }
 
         public static async ETTask RequestServerList(this DlgMJLogin self)
