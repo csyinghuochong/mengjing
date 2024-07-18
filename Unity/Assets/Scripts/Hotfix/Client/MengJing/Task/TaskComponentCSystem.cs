@@ -180,27 +180,6 @@ namespace ET.Client
             EventSystem.Instance.Publish(self.Root(), new DataUpdate_TaskUpdate());
         }
 
-        public static void OnRecvTaskCountryUpdate(this TaskComponentC self, M2C_TaskCountryUpdate message)
-        {
-            //1增量更新   2全量更新
-            if (message.UpdateMode == 2)
-            {
-                self.TaskCountryList = message.TaskCountryList;
-                return;
-            }
-
-            for (int i = 0; i < message.TaskCountryList.Count; i++)
-            {
-                for (int k = 0; k < self.TaskCountryList.Count; k++)
-                {
-                    if (message.TaskCountryList[i].taskID == self.TaskCountryList[k].taskID)
-                    {
-                        self.TaskCountryList[k] = message.TaskCountryList[i];
-                    }
-                }
-            }
-        }
-
         public static bool IsTaskFinished(this TaskComponentC self, int taskId)
         {
             return self.RoleComoleteTaskList.Contains(taskId);
@@ -209,14 +188,14 @@ namespace ET.Client
         public static int GetHuoYueDu(this TaskComponentC self)
         {
             int huoYueDu = 0;
-            for (int i = 0; i < self.TaskCountryList.Count; i++)
+            for (int i = 0; i < self.RoleTaskList.Count; i++)
             {
-                if (self.TaskCountryList[i].taskStatus != (int)TaskStatuEnum.Commited)
+                if (self.RoleTaskList[i].taskStatus != (int)TaskStatuEnum.Commited)
                 {
                     continue;
                 }
 
-                TaskConfig taskCountryConfig = TaskConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
+                TaskConfig taskCountryConfig = TaskConfigCategory.Instance.Get(self.RoleTaskList[i].taskID);
                 huoYueDu += taskCountryConfig.EveryTaskRewardNum;
             }
 

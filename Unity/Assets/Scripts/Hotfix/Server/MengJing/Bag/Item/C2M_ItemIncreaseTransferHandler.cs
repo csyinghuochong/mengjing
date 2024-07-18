@@ -121,7 +121,6 @@ namespace ET.Server
             bagInfo_1.isBinging = true;
             bagInfo_2.isBinging = true;
             unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.IncreaseNumber_46, 0, 1);
-            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.IncreaseNumber_46, 0, 1);
 
             M2C_RoleBagUpdate m2c_bagUpdate = M2C_RoleBagUpdate.Create();
             //通知客户端背包道具发生改变
