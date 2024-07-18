@@ -2059,7 +2059,6 @@ message M2C_TaskInitResponse    // ILocationResponse
 	string Message = 92;
 	repeated TaskPro RoleTaskList = 1;
 	repeated int32 RoleComoleteTaskList = 2;
-	repeated TaskPro TaskCountryList = 3;
 	repeated int32 ReceiveHuoYueIds = 4;
 }
 

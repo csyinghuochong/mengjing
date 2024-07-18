@@ -11,7 +11,6 @@ namespace ET.Server
             response.RoleTaskList .AddRange(taskComponent.RoleTaskList); 
             response.RoleComoleteTaskList .AddRange(taskComponent.RoleComoleteTaskList); 
             response.ReceiveHuoYueIds .AddRange(taskComponent.ReceiveHuoYueIds); 
-            response.TaskCountryList .AddRange(taskComponent.TaskCountryList); 
          
             await ETTask.CompletedTask;
         }

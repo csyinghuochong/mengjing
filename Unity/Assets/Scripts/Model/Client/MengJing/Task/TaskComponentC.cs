@@ -6,7 +6,6 @@ namespace ET.Client
     public class TaskComponentC: Entity, IAwake, IDestroy
     {
         public List<int> ReceiveHuoYueIds { get; set; } = new();
-        public List<TaskPro> TaskCountryList { get; set; } = new();
         public List<TaskPro> RoleTaskList { get; set; } = new();
         public List<int> RoleComoleteTaskList { get; set; } = new();
     }
