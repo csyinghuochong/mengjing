@@ -69,7 +69,6 @@ namespace ET.Server
             response.JiaYuanProList = jiaYuanComponent.JiaYuanProList_7;
 
             unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JiaYuanDashiNumber_96, 0, 1);
-            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanDashiNumber_96, 0, 1);
 
             UnitCacheHelper.SaveComponentCache( unit.Root(), jiaYuanComponent).Coroutine();
             Function_Fight.UnitUpdateProperty_Base(unit, true, true);

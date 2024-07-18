@@ -44,11 +44,8 @@ namespace ET.Server
             }
            
             unit.GetComponent<TaskComponentS>().TriggerTaskEvent( TaskTargetType.PetFuHuaNumber_34, 0, 1 );
-            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.PetFuHuaNumber_34, 0, 1);
-
             unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.PetFuHuaId_35, rolePetEgg.KeyId, 1);
-            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.PetFuHuaId_35, rolePetEgg.KeyId, 1);
-
+          
             rolePetEgg.KeyId = 0;
             rolePetEgg.Value = 0;
             response.PetInfo =  unit.GetComponent<PetComponentS>().OnAddPet(ItemGetWay.PetEggDuiHuan, petlists[index]);

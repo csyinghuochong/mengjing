@@ -54,11 +54,9 @@ namespace ET.Server
              self.MainUnit.GetComponent<NumericComponentS>().ApplyValue( NumericType.PetMineCDTime, TimeHelper.ServerNow() + cdTime, true);
 
              self.MainUnit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.MineBattleNumber_402, 0, 1);
-             self.MainUnit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.MineBattleNumber_402, 0, 1);
              if (result == CombatResultEnum.Win)
              {
                  self.MainUnit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.MineWinNumber_403, 0, 1);
-                 self.MainUnit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.MineWinNumber_403, 0, 1);
              }
 
              await ETTask.CompletedTask;

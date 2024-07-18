@@ -417,7 +417,6 @@ namespace ET.Server
                 if (curnumber < neednumber)
                 {
                     self.TriggerTaskEvent(TaskTargetType.ItemID_Number_2, needid, 0);
-                    self.TriggerTaskCountryEvent(TaskTargetType.ItemID_Number_2, needid, 0);
                     return ErrorCode.ERR_ItemNotEnoughError;
                 }
 
@@ -582,7 +581,7 @@ namespace ET.Server
                     numericComponent.ApplyValue(NumericType.DailyTaskNumber, dailyTaskNumber, true);
                 }
 
-                self.TriggerTaskCountryEvent(TaskTargetType.DailyTask_1014, 0, 1);
+                self.TriggerTaskEvent(TaskTargetType.DailyTask_1014, 0, 1);
             }
             if (taskConfig.TaskType == TaskTypeEnum.Weekly)
             {
@@ -660,7 +659,7 @@ namespace ET.Server
             }
             if (taskConfig.TaskType != TaskTypeEnum.Main)
             {
-                self.TriggerTaskCountryEvent(TaskTargetType.EveryDayTask_1019, 0, 1);
+                self.TriggerTaskEvent(TaskTargetType.EveryDayTask_1019, 0, 1);
             }
             return ErrorCode.ERR_Success;
         }
@@ -669,78 +668,67 @@ namespace ET.Server
         public static void OnChangeOccTwo(this TaskComponentS self)
         {
             self.TriggerTaskEvent(TaskTargetType.ChangeOcc_8, 0, 1);
-            self.TriggerTaskCountryEvent(TaskTargetType.ChangeOcc_8, 0, 1);
         }
 
 
         public static void OnMakeItem(this TaskComponentS self)
         {
-            self.TriggerTaskCountryEvent(TaskTargetType.MakeItem_1006, 0, 1);
+            self.TriggerTaskEvent(TaskTargetType.MakeItem_1006, 0, 1);
         }
 
 
         public static void OnPetXiLian(this TaskComponentS self, RolePetInfo rolePetInfo)
         {
             self.TriggerTaskEvent(TaskTargetType.PetNSkill_18, 0, rolePetInfo.PetSkill.Count);
-            self.TriggerTaskCountryEvent(TaskTargetType.PetNSkill_18, 0, rolePetInfo.PetSkill.Count);
-
-            self.TriggerTaskCountryEvent(TaskTargetType.PetXiLian_1007, 0, 1);
+            self.TriggerTaskEvent(TaskTargetType.PetXiLian_1007, 0, 1);
         }
 
         public static void OnPetHeCheng(this TaskComponentS self, RolePetInfo rolePetInfo)
         {
             self.TriggerTaskEvent(TaskTargetType.PetNumber1_11, 0, 1);
-            self.TriggerTaskCountryEvent(TaskTargetType.PetNumber1_11, 0, 1);
 
             self.TriggerTaskEvent(TaskTargetType.PetHeCheng_23, 0, 1);
-            self.TriggerTaskCountryEvent(TaskTargetType.PetHeCheng_23, 0, 1);
 
             self.TriggerTaskEvent(TaskTargetType.PetNumber2_24, 0, 1);
-            self.TriggerTaskCountryEvent(TaskTargetType.PetNumber2_24, 0, 1);
 
             self.TriggerTaskEvent(TaskTargetType.PetNSkill_18, 0, rolePetInfo.PetSkill.Count);
-            self.TriggerTaskCountryEvent(TaskTargetType.PetNSkill_18, 0, rolePetInfo.PetSkill.Count);
 
-            self.TriggerTaskCountryEvent(TaskTargetType.GetPet_1008, 0, 1);
+            self.TriggerTaskEvent(TaskTargetType.GetPet_1008, 0, 1);
 
             int combat = PetHelper.PetPingJia(rolePetInfo);
             self.TriggerTaskEvent(TaskTargetType.PetHeChengCombat_32, combat, 1);
-            self.TriggerTaskCountryEvent(TaskTargetType.PetHeChengCombat_32, combat, 1);
         }
 
         public static void OnGetPet(this TaskComponentS self, RolePetInfo rolePetInfo)
         {
             self.TriggerTaskEvent(TaskTargetType.PetNumber1_11, 0, 1);
-            self.TriggerTaskCountryEvent(TaskTargetType.PetNumber1_11, 0, 1);
 
             self.TriggerTaskEvent(TaskTargetType.PetNumber2_24, 0, 1);
-            self.TriggerTaskCountryEvent(TaskTargetType.PetNumber2_24, 0, 1);
+
 
             self.TriggerTaskEvent(TaskTargetType.PetNSkill_18, 0, rolePetInfo.PetSkill.Count);
-            self.TriggerTaskCountryEvent(TaskTargetType.PetNSkill_18, 0, rolePetInfo.PetSkill.Count);
+
 
             self.TriggerTaskEvent(TaskTargetType.PetNumber_31, 0, 1);
-            self.TriggerTaskCountryEvent(TaskTargetType.PetNumber_31, 0, 1);
 
-            self.TriggerTaskCountryEvent(TaskTargetType.GetPet_1008, 0, 1);
+            self.TriggerTaskEvent(TaskTargetType.GetPet_1008, 0, 1);
         }
 
 
         public static void OnEquipXiLian(this TaskComponentS self, int times)
         {
             self.TriggerTaskEvent(TaskTargetType.EquipXiLian_13, 0, times);
-            self.TriggerTaskCountryEvent(TaskTargetType.EquipXiLian_13, 0, times);
-            self.TriggerTaskCountryEvent(TaskTargetType.EquipXiLian_1009, 0, times);
+            self.TriggerTaskEvent(TaskTargetType.EquipXiLian_1009, 0, times);
         }
 
 
         public static void OnLineTime(this TaskComponentS self, int time)
         {
-            self.TriggerTaskCountryEvent(TaskTargetType.OnLineTime_1010, 0, 1);
+            self.TriggerTaskEvent(TaskTargetType.OnLineTime_1010, 0, 1);
 
             if (self.Root().GetComponent<MapComponent>().SceneType == SceneTypeEnum.Battle)
             {
-                self.TriggerTaskCountryEvent(TaskTargetType.BattleExist_1103, 0, 1);
+                self.TriggerTaskEvent(TaskTargetType.BattleExist_1103, 0, 1);
             }
         }
 
@@ -748,8 +736,8 @@ namespace ET.Server
         public static void OnItemHuiShow(this TaskComponentS self, int itemNumber)
         {
             self.TriggerTaskEvent(TaskTargetType.EquipHuiShou_16, 0, itemNumber);
-            self.TriggerTaskCountryEvent(TaskTargetType.EquipHuiShou_16, 0, itemNumber);
-            self.TriggerTaskCountryEvent(TaskTargetType.ItemHuiShou_1011, 0, itemNumber);
+
+            self.TriggerTaskEvent(TaskTargetType.ItemHuiShou_1011, 0, itemNumber);
         }
 
 
@@ -758,35 +746,31 @@ namespace ET.Server
             if (costCoin >= 0)
                 return;
             self.TriggerTaskEvent(TaskTargetType.TotalCostGold_20, 0, costCoin * -1);
-            self.TriggerTaskCountryEvent(TaskTargetType.TotalCostGold_20, 0, costCoin * -1);
-            self.TriggerTaskCountryEvent(TaskTargetType.CostCoin_1005, 0, costCoin * -1);
+            self.TriggerTaskEvent(TaskTargetType.CostCoin_1005, 0, costCoin * -1);
         }
 
 
         public static void OnPassFuben(this TaskComponentS self, int difficulty, int chapterid, int star)
         {
             self.TriggerTaskEvent(TaskTargetType.PassFubenID_7, chapterid, 1);
-            self.TriggerTaskCountryEvent(TaskTargetType.PassFubenID_7, chapterid, 1);
-            if ((int)difficulty >= (int)FubenDifficulty.TiaoZhan)  //��ս
+            if ((int)difficulty >= (int)FubenDifficulty.TiaoZhan)  
             {
                 self.TriggerTaskEvent(TaskTargetType.PassTianZhanFubenID_111, chapterid, 1);
-                self.TriggerTaskCountryEvent(TaskTargetType.PassTianZhanFubenID_111, chapterid, 1);
             }
-            if ((int)difficulty >= (int)FubenDifficulty.DiYu)  //����
+            if ((int)difficulty >= (int)FubenDifficulty.DiYu)  
             {
                 self.TriggerTaskEvent(TaskTargetType.PassDiYuFubenID_112, chapterid, 1);
-                self.TriggerTaskCountryEvent(TaskTargetType.PassDiYuFubenID_112, chapterid, 1);
             }
         }
 
         public static void OnWinCampBattle(this TaskComponentS self)
         {
-            self.TriggerTaskCountryEvent(TaskTargetType.BattleWin_1101, 0, 1);
+            self.TriggerTaskEvent(TaskTargetType.BattleWin_1101, 0, 1);
         }
 
         public static void OnPassTeamFuben(this TaskComponentS self)
         {
-            self.TriggerTaskCountryEvent(TaskTargetType.PassTeamFuben_1004, 0, 1);
+            self.TriggerTaskEvent(TaskTargetType.PassTeamFuben_1004, 0, 1);
         }
 
         public static async ETTask UpdateUnionRaceRank(this TaskComponentS self)
@@ -814,18 +798,17 @@ namespace ET.Server
 
             if (bekill.Type == UnitType.Player && sceneType == SceneTypeEnum.Battle)
             {
-                self.TriggerTaskCountryEvent(TaskTargetType.BattleKillPlayer_1102, 0, 1);
-                bekill.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.BattleDead_1104, 0, 1);
+                self.TriggerTaskEvent(TaskTargetType.BattleKillPlayer_1102, 0, 1);
+                bekill.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.BattleDead_1104, 0, 1);
             }
             if (bekill.Type == UnitType.Player && sceneType == SceneTypeEnum.UnionRace)
             {
-                self.TriggerTaskCountryEvent(TaskTargetType.UnionRaceKill_1301, 0, 1);
+                self.TriggerTaskEvent(TaskTargetType.UnionRaceKill_1301, 0, 1);
                 self.UpdateUnionRaceRank().Coroutine();
             }
             if (bekill.Type == UnitType.Player)
             {
                 self.TriggerTaskEvent(TaskTargetType.KillPlayer_21, 0, 1);
-                self.TriggerTaskCountryEvent(TaskTargetType.KillPlayer_21, 0, 1);
             }
             if (bekill.Type == UnitType.Monster)
             {
@@ -845,47 +828,37 @@ namespace ET.Server
                 }
 
                 self.TriggerTaskEvent(TaskTargetType.KillMonsterID_1, unitconfigId, 1);
-                self.TriggerTaskCountryEvent(TaskTargetType.KillMonsterID_1, unitconfigId, 1);
 
                 self.TriggerTaskEvent(TaskTargetType.KillMonster_5, 0, 1);
-                self.TriggerTaskCountryEvent(TaskTargetType.KillMonster_5, 0, 1);
-                self.TriggerTaskCountryEvent(TaskTargetType.KillMonster_1002, 0, 1);
+                self.TriggerTaskEvent(TaskTargetType.KillMonster_1002, 0, 1);
 
                 if (isBoss)
                 {
                     self.TriggerTaskEvent(TaskTargetType.KillBOSS_6, 0, 1);
-                    self.TriggerTaskCountryEvent(TaskTargetType.KillBOSS_6, 0, 1);
-                    self.TriggerTaskCountryEvent(TaskTargetType.KillBoss_1003, 0, 1);
+                    self.TriggerTaskEvent(TaskTargetType.KillBoss_1003, 0, 1);
                 }
 
-                if ((int)fubenDifficulty >= (int)FubenDifficulty.TiaoZhan) //��ս
+                if ((int)fubenDifficulty >= (int)FubenDifficulty.TiaoZhan) 
                 {
                     self.TriggerTaskEvent(TaskTargetType.KillTiaoZhanMonsterID_101, unitconfigId, 1);
-                    self.TriggerTaskCountryEvent(TaskTargetType.KillTiaoZhanMonsterID_101, unitconfigId, 1);
 
                     self.TriggerTaskEvent(TaskTargetType.KillTianZhanMonsterNumber_121, 0, 1);
-                    self.TriggerTaskCountryEvent(TaskTargetType.KillTianZhanMonsterNumber_121, 0, 1);
                     if (isBoss)
                     {
                         self.TriggerTaskEvent(TaskTargetType.KillTianZhanBossNumber_131, 0, 1);
-                        self.TriggerTaskCountryEvent(TaskTargetType.KillTianZhanBossNumber_131, 0, 1);
                     }
                 }
 
-                if ((int)fubenDifficulty == (int)FubenDifficulty.DiYu)  //����
+                if ((int)fubenDifficulty == (int)FubenDifficulty.DiYu)  
                 {
                     self.TriggerTaskEvent(TaskTargetType.KillDiYuMonsterID_102, unitconfigId, 1);
-                    self.TriggerTaskCountryEvent(TaskTargetType.KillDiYuMonsterID_102, unitconfigId, 1);
 
                     self.TriggerTaskEvent(TaskTargetType.KillDiYuMonsterNumber_122, 0, 1);
-                    self.TriggerTaskCountryEvent(TaskTargetType.KillDiYuMonsterNumber_122, 0, 1);
                     if (isBoss)
                     {
                         self.TriggerTaskEvent(TaskTargetType.KillDiYuBossNumber_132, 0, 1);
-                        self.TriggerTaskCountryEvent(TaskTargetType.KillDiYuBossNumber_132, 0, 1);
 
                         self.TriggerTaskEvent(TaskTargetType.KillDiYuBoss_141, monsterConfig.Lv, 1);
-                        self.TriggerTaskCountryEvent(TaskTargetType.KillDiYuBoss_141, monsterConfig.Lv, 1);
                     }
                 }
 
@@ -896,7 +869,6 @@ namespace ET.Server
         public static void OnUpdateLevel(this TaskComponentS self, int rolelv)
         {
             self.TriggerTaskEvent(TaskTargetType.PlayerLv_4, 0, rolelv);
-            self.TriggerTaskCountryEvent(TaskTargetType.PlayerLv_4, 0, rolelv);
 
             if (rolelv == 10)
             {
@@ -956,14 +928,12 @@ namespace ET.Server
                 {
                     long unionid = numericComponent.GetAsLong(NumericType.UnionId_0);
                     self.TriggerTaskEvent(TaskTargetType.JoinUnion_9, taskConfig.Target[0], unionid > 0 ? 1 : 0);
-                    self.TriggerTaskCountryEvent(TaskTargetType.JoinUnion_9, taskConfig.Target[0], unionid > 0 ? 1 : 0);
                     continue;
                 }
                 if (taskConfig.TargetType == TaskTargetType.CombatToValue_133)
                 {
                     int combat = userInfoComponent.GetCombat();
                     self.TriggerTaskEvent(TaskTargetType.CombatToValue_133, 0, combat);
-                    self.TriggerTaskCountryEvent(TaskTargetType.CombatToValue_133, 0, combat);
                     continue;
                 }
                 if (taskConfig.TargetType == TaskTargetType.TrialTowerCeng_134)
@@ -972,7 +942,6 @@ namespace ET.Server
                     if (trialid >= taskConfig.Target[0])
                     {
                         self.TriggerTaskEvent(TaskTargetType.TrialTowerCeng_134, taskConfig.Target[0], 1);
-                        self.TriggerTaskCountryEvent(TaskTargetType.TrialTowerCeng_134, taskConfig.Target[0], 1);
                     }
                 }
             }
@@ -984,7 +953,7 @@ namespace ET.Server
                 TaskConfig taskCountryConfig = TaskConfigCategory.Instance.Get(self.RoleTaskList[i].taskID);
                 if (taskCountryConfig.TargetType == (int)TaskTargetType.TrialFuben_1012 && trialid >= 20100)
                 {
-                    self.TriggerTaskCountryEvent(TaskTargetType.TrialFuben_1012, 0, taskCountryConfig.TargetValue[0], false);
+                    self.TriggerTaskEvent(TaskTargetType.TrialFuben_1012, 0, taskCountryConfig.TargetValue[0]);
                 }
             }
 
@@ -1012,27 +981,23 @@ namespace ET.Server
             }
 
             self.UpdateTargetTask(false);
-            self.TriggerTaskCountryEvent(TaskTargetType.Login_1001, 0, 1, false);
+            self.TriggerTaskEvent(TaskTargetType.Login_1001, 0, 1, false);
 
             //numericComponent.ApplyValue(NumericType.RankID, chat2G_EnterChat.RankId, false, false);
             //numericComponent.ApplyValue(NumericType.PetRankID, chat2G_EnterChat.PetRankId, false, false);
             //numericComponent.ApplyValue(NumericType.SoloRankId, chat2G_EnterChat.SoloRankId, false, false);
             //numericComponent.ApplyValue(NumericType.TrialRankId, chat2G_EnterChat.TrialRankId, false, false);
             self.TriggerTaskEvent(TaskTargetType.TrialRank_81, numericComponent.GetAsInt(NumericType.TrialRankId), 1);
-            self.TriggerTaskCountryEvent(TaskTargetType.TrialRank_81, numericComponent.GetAsInt(NumericType.TrialRankId), 1);
 
             self.TriggerTaskEvent(TaskTargetType.PetTianTiRank_82, numericComponent.GetAsInt(NumericType.PetTianTiRankID), 1);
-            self.TriggerTaskCountryEvent(TaskTargetType.PetTianTiRank_82, numericComponent.GetAsInt(NumericType.PetTianTiRankID), 1);
-
+          
             self.TriggerTaskEvent(TaskTargetType.CombatRank_83, numericComponent.GetAsInt(NumericType.CombatRankID), 1);
-            self.TriggerTaskCountryEvent(TaskTargetType.CombatRank_83, numericComponent.GetAsInt(NumericType.CombatRankID), 1);
         }
 
 
         public static void OnGetItemForWarehouse(this TaskComponentS self, int itemId)
         {
             self.TriggerTaskEvent(TaskTargetType.ItemID_Number_2, itemId, 0);
-            self.TriggerTaskCountryEvent(TaskTargetType.ItemID_Number_2, itemId, 0);
         }
 
 
@@ -1041,22 +1006,18 @@ namespace ET.Server
             if (itemId == 1 || (getWay != ItemGetWay.ReceieMail && getWay != ItemGetWay.PaiMaiSell))
             {
                 self.TriggerTaskEvent(TaskTargetType.GetItemNumber_142, itemId, itemNumber);
-                self.TriggerTaskCountryEvent(TaskTargetType.GetItemNumber_142, itemId, itemNumber);
             }
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemId);
             if (itemConfig.ItemType == ItemTypeEnum.Equipment && itemConfig.ItemQuality >= 5)
             {
                 self.TriggerTaskEvent(TaskTargetType.GetOrangeEquip_139, itemConfig.UseLv, 1);
-                self.TriggerTaskCountryEvent(TaskTargetType.GetOrangeEquip_139, itemConfig.UseLv, 1);
             }
         }
-
-        //�ռ�����
+        
         public static void OnGetItem_2(this TaskComponentS self, int itemId)
         {
             self.TriggerTaskEvent(TaskTargetType.ItemID_Number_2, itemId, 0);
-            self.TriggerTaskCountryEvent(TaskTargetType.ItemID_Number_2, itemId, 0);
         }
 
         public static void CompletCurrentTask(this TaskComponentS self)
@@ -1096,20 +1057,18 @@ namespace ET.Server
             {
                 for (int mineid = petMingPlayers[i].MineType; mineid <= 10003; mineid++)
                 {
-                    self.TriggerTaskCountryEvent(TaskTargetType.MineHaveNumber_401, mineid, 1);
                     self.TriggerTaskEvent(TaskTargetType.MineHaveNumber_401, mineid, 1);
                 }
 
                 bool hexin = CommonHelp.IsHexinMine(petMingPlayers[i].MineType, petMingPlayers[i].Postion, extends);
                 if (hexin)
                 {
-                    self.TriggerTaskCountryEvent(TaskTargetType.MineHaveNumber_401, 0, 1);
                     self.TriggerTaskEvent(TaskTargetType.MineHaveNumber_401, 0, 1);
                 }
             }
         }
 
-        public static void TriggerTaskEvent(this TaskComponentS self, int targetType, int targetTypeId, int targetValue)
+        public static void TriggerTaskEvent(this TaskComponentS self, int targetType, int targetTypeId, int targetValue, bool notice = true)
         {
             bool updateTask = false;
 
@@ -1137,9 +1096,12 @@ namespace ET.Server
                 return;
             }
 
-            M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
-            m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
-            MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
+            if (notice)
+            {
+                M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
+                m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
+                MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
+            }
         }
 
 

@@ -118,7 +118,6 @@ namespace ET.Server
 
                  self.MainUnit.GetComponent<BagComponentS>().OnAddItemData(rewardItems, string.Empty, $"{ItemGetWay.PetTianTiReward}_{TimeHelper.ServerNow()}");
                  self.MainUnit.GetComponent<TaskComponentS>().TriggerTaskEvent( TaskTargetType.PetTianDiWin_37, 0, 1 );
-                 self.MainUnit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.PetTianDiWin_37, 0, 1);
              }
              else
              {
@@ -127,7 +126,6 @@ namespace ET.Server
              if (rankid > 0)
              {
                  self.MainUnit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.PetTianTiRank_309, 0, rankid);
-                 self.MainUnit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.PetTianTiRank_82, 0, rankid);
                  self.MainUnit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.PetTianTiRank_82, 0, rankid);
              }
              MapMessageHelper.SendToClient(self.MainUnit, m2C_FubenSettlement);

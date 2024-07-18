@@ -121,9 +121,8 @@ namespace ET.Server
             response.ItemId = getItemid;
             UnitCacheHelper.SaveComponentCache(unit.Root(), jiaYuanComponent).Coroutine();
             unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.JiaYuanCooking_403, 0, 1);
-            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanCook_1018, 0, 1);
+            unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JiaYuanCook_1018, 0, 1);
             unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JiaYuanCookNumber_91, 0, 1);
-            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanCookNumber_91, 0, 1);
 
             await ETTask.CompletedTask;
         }

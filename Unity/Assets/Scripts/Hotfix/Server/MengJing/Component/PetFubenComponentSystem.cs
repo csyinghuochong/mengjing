@@ -77,7 +77,6 @@ namespace ET.Server
                 }
                 players[0].GetComponent<PetComponentS>().OnPassPetFuben(petfubeId, star);
                 players[0].GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.PetFubenId_19, 0, petfubeId - 10000);
-                players[0].GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.PetFubenId_19, 0, petfubeId - 10000);
             }
             MapMessageHelper.SendToClient(players[0], m2C_FubenSettlement);
         }

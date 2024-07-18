@@ -276,7 +276,6 @@ namespace ET.Server
                 if (haveFriend)
                 {
                     unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.FriendPassFuben_138, 0, 1);
-                    unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.FriendPassFuben_138, 0, 1);
                 }
             }
 
@@ -367,7 +366,6 @@ namespace ET.Server
                 hurtList.TryGetValue(unititem.Id, out hurtvalue);
                 int hurtRate = (int)(hurtvalue * 100f / damageTotal);
                 unititem.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.TeamDungeonHurt_136, self.TeamInfo.SceneId, hurtRate);
-                unititem.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.TeamDungeonHurt_136, self.TeamInfo.SceneId, hurtRate);
 
                 unititem.GetComponent<TaskComponentS>().OnPassTeamFuben();
                 unititem.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.PassTeamFubenNumber_20, 0, 1);

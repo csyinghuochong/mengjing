@@ -109,7 +109,6 @@ namespace ET.Server
 					{
                         unit.GetComponent<PetComponentS>().UpdatePetAttribute(petInfo, true);
                         unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.PetUseSkillBook_36, 0, 1);
-                        unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.PetUseSkillBook_36, 0, 1);
                     }
 					petInfo.LockSkill.Clear();
                     response.rolePetInfo = petInfo;
@@ -174,7 +173,6 @@ namespace ET.Server
 				if (itemSubType == 105 || itemSubType == 133)
                 {
                     unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.PetXiLian10010086_33, 0, 1);
-                    unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.PetXiLian10010086_33, 0, 1);
                 }
             }
             unit.GetComponent<PetComponentS>().CheckPetPingFen();

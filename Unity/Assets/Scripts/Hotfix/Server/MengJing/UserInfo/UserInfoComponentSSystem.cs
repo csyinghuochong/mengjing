@@ -1271,7 +1271,7 @@ namespace ET.Server
             if (showlieopen && (monsterConfig.Lv >= 60 || Math.Abs(self.UserInfo.Lv - monsterConfig.Lv) <= 9))
             {
                 self.OnShowLieKill();
-                main.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.ShowLieMonster_1201, 0, 1);
+                main.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.ShowLieMonster_1201, 0, 1);
             }
 
             if (sceneType == SceneTypeEnum.LocalDungeon && monsterConfig.MonsterSonType == 55)

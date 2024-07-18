@@ -54,7 +54,6 @@ namespace ET.Server
 
             boxUnit.GetComponent<HeroDataComponentS>().OnDead(unit);
             unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.OpenBox_137, 0, 1);
-            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.OpenBox_137, 0, 1);
 
             response.Error = ErrorCode.ERR_Success;
             await ETTask.CompletedTask;

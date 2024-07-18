@@ -27,7 +27,7 @@
             jiaYuanPlant.UnitId = IdGenerater.Instance.GenerateId();
 
             unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JiaYuanPlantNumber_92, 0, 1);
-            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanPlantNumber_92, 0, 1);
+
 
             jianYuanComponent.JianYuanPlantList_7.Add(jiaYuanPlant);
             Unit plan = UnitFactory.CreatePlan( unit.Scene(), jiaYuanPlant, unit.Id);

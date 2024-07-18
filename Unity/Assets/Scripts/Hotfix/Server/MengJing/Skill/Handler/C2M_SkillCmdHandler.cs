@@ -66,7 +66,6 @@ namespace ET.Server
                      {
                          unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.BattleUseItem_214, 0, 1);
                          unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.BattleUseItem_30, 0, 1);
-                         unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.BattleUseItem_30, 0, 1);
                      }
                  }
                  if (juexingid == request.SkillID)

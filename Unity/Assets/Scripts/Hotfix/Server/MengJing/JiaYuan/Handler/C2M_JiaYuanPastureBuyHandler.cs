@@ -61,7 +61,6 @@ namespace ET.Server
             unit.GetComponent<UserInfoComponentS>().OnMysteryBuy(mysteryId);
             unit.GetComponent<BagComponentS>().OnCostItemData($"13;{(int)(jiaYuanPastureConfig.BuyGold * 1.5f)}");
             unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JiaYuanPastureNumber_94, 0, 1);
-            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanPastureNumber_94, 0, 1);
 
             JiaYuanPastures jiaYuanPastures = JiaYuanPastures.Create();
             jiaYuanPastures.ConfigId = jiaYuanPastureConfig.Id;

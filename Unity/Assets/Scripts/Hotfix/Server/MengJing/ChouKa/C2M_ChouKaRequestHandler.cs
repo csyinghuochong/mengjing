@@ -130,7 +130,7 @@ namespace ET.Server
             {
                 unit.GetComponent<ChengJiuComponentS>().OnChouKaTen();
             }
-            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.ChouKa_1016, 0, request.ChouKaType);
+            unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.ChouKa_1016, 0, request.ChouKaType);
             unit.GetComponent<DataCollationComponent>().OnChouKa(request.ChouKaType);
             response.RewardList = droplist;
             await ETTask.CompletedTask;
