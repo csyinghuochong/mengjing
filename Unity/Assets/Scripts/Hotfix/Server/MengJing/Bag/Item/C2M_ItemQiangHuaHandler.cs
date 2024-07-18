@@ -35,7 +35,6 @@ namespace ET.Server
             }
             response.QiangHuaLevel = bagComponent.QiangHuaLevel[request.WeiZhi];
             unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.QiangHuaLevel_17, 0, response.QiangHuaLevel);
-            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.QiangHuaLevel_17, 0, response.QiangHuaLevel);
             Function_Fight.UnitUpdateProperty_Base(unit, true, true);
             await ETTask.CompletedTask;
         }

@@ -428,7 +428,6 @@ namespace ET.Server
                     self.UserInfo.JiaYuanLv += int.Parse(value);
                     saveValue = self.UserInfo.JiaYuanLv.ToString();
                     unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JiaYuanLevel_22, 0, self.UserInfo.JiaYuanLv - 10000);
-                    unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JiaYuanLevel_22, 0, self.UserInfo.JiaYuanLv - 10000);
                     unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.JiaYuanLevel_404, 0, self.UserInfo.JiaYuanLv - 10000);
                     break;
                 case UserDataType.FangRong:

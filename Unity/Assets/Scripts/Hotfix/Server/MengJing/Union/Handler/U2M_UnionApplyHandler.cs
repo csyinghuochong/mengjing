@@ -10,7 +10,6 @@
             unit.GetComponent<UserInfoComponentS>().UpdateRoleData(UserDataType.UnionName, request.UnionName);
             unit.GetComponent<UserInfoComponentS>().UpdateRoleDataBroadcast(UserDataType.UnionName, request.UnionName);
             unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JoinUnion_9, 0, 1);
-            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JoinUnion_9, 0, 1);
             unit.UpdateUnionToChat().Coroutine();
 
             await ETTask.CompletedTask;

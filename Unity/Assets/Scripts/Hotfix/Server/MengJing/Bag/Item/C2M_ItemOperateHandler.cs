@@ -786,8 +786,7 @@ namespace ET.Server
                         ItemConfig costitemconfig = ItemConfigCategory.Instance.Get(baginfoCost.ItemID);
 
                         unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JianDingQulity_42, int.Parse(qulitylv), 1);
-                        unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JianDingQulity_42, int.Parse(qulitylv), 1);
-                        unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JianDing_1017, 0, 1);
+                        unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JianDing_1017, 0, 1);
 
                         ifSell = bagComponent.OnCostItemData(baginfoId, 1);
                         ifItem = true;
@@ -827,7 +826,6 @@ namespace ET.Server
                     if (useBagInfo.HideProLists != null && useBagInfo.HideProLists.Count > 0)
                     {
                         unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JianDingAttrNumber_43, useBagInfo.HideProLists.Count, 1);
-                        unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JianDingAttrNumber_43, useBagInfo.HideProLists.Count, 1);
 
                         for (int pro = 0; pro < useBagInfo.HideProLists.Count; pro++)
                         {
@@ -836,7 +834,6 @@ namespace ET.Server
                     }
 
                     unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.JianDingValue_140, (int)totalValue, 1);
-                    unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.JianDingValue_140, (int)totalValue, 1);
                     unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.JianDingEqipNumber_212, int.Parse(qulitylv), 1);
                 }
                 else

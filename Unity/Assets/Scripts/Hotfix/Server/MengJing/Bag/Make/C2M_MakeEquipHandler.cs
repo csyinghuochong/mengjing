@@ -131,9 +131,7 @@ namespace ET.Server
 
             unit.GetComponent<ChengJiuComponentS>().TriggerEvent(ChengJiuTargetEnum.MakeNumber_216, 0, 1);
             unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.MakeNumber_12, 0, 1);
-            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.MakeNumber_12, 0, 1);
             unit.GetComponent<TaskComponentS>().TriggerTaskEvent(TaskTargetType.MakeQulityNumber_29, itemConfig.ItemQuality, 1);
-            unit.GetComponent<TaskComponentS>().TriggerTaskCountryEvent(TaskTargetType.MakeQulityNumber_29, itemConfig.ItemQuality, 1);
 
             await ETTask.CompletedTask;
         }
