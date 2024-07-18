@@ -1,12 +1,18 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_EquipmentIncreaseShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_EquipmentIncreaseShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemBagItems;
+		public List<BagInfo> ShowBagInfos = new();
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemReelItems;
+		public List<BagInfo> ShowBagInfos = new();
+		
 		public UnityEngine.UI.ToggleGroup E_ItemTypeSetToggleGroup
      	{
      		get
