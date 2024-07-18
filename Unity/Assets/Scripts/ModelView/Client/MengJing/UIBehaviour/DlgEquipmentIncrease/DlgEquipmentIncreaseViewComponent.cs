@@ -24,6 +24,26 @@ namespace ET.Client
      		}
      	}
 
+		public ES_EquipmentIncreaseShow ES_EquipmentIncreaseShow
+     	{
+     		get
+     		{
+     			if (this.uiTransform == null)
+     			{
+     				Log.Error("uiTransform is null.");
+     				return null;
+     			}
+     			ES_EquipmentIncreaseShow es = this.m_es_equipmentincreaseshow;
+     			if( es == null )
+
+     			{
+		    	   Transform subTrans = UIFindHelper.FindDeepChild<Transform>(this.uiTransform.gameObject,"EG_SubView/ES_EquipmentIncreaseShow");
+		    	   this.m_es_equipmentincreaseshow = this.AddChild<ES_EquipmentIncreaseShow,Transform>(subTrans);
+     			}
+     			return this.m_es_equipmentincreaseshow;
+     		}
+     	}
+
 		public UnityEngine.UI.ToggleGroup E_FunctionSetBtnToggleGroup
      	{
      		get
@@ -44,11 +64,13 @@ namespace ET.Client
 		public void DestroyWidget()
 		{
 			this.m_EG_SubViewRectTransform = null;
+			this.m_es_equipmentincreaseshow = null;
 			this.m_E_FunctionSetBtnToggleGroup = null;
 			this.uiTransform = null;
 		}
 
 		private UnityEngine.RectTransform m_EG_SubViewRectTransform = null;
+		private EntityRef<ES_EquipmentIncreaseShow> m_es_equipmentincreaseshow = null;
 		private UnityEngine.UI.ToggleGroup m_E_FunctionSetBtnToggleGroup = null;
 		public Transform uiTransform = null;
 	}
