@@ -1,12 +1,22 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace ET.Client
 {
 	[ChildOf]
 	[EnableMethod]
-	public  class ES_EquipmentIncreaseTransfer : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy 
+	public  class ES_EquipmentIncreaseTransfer : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
+		public GameObject UICommonItem_Copy;
+		public BagInfo[] BagInfo_Transfer;
+		public ES_CommonItem[] UIItem_Transfer { get; set; }
+
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemEquipItems;
+		public List<BagInfo> ShowEquipBagInfos = new();
+		public Vector2 localPoint;
+		public bool IsHoldDown;
+		
 		public UnityEngine.UI.LoopVerticalScrollRect E_EquipItemsLoopVerticalScrollRect
      	{
      		get

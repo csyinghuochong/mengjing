@@ -41,6 +41,7 @@ namespace ET.Client
                     break;
                 case 1:
                     self.View.ES_EquipmentIncreaseTransfer.uiTransform.gameObject.SetActive(true);
+                    self.View.ES_EquipmentIncreaseTransfer.OnUpdateUI();
                     break;
             }
         }

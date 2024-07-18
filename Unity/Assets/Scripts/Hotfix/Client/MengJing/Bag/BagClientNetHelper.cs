@@ -884,5 +884,15 @@ namespace ET.Client
             M2C_EquipmentIncreaseResponse response = (M2C_EquipmentIncreaseResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
+
+        public static async ETTask<int> ItemIncreaseTransferRequest(Scene root, BagInfo equipmentBagInfo, BagInfo reelBagInfo)
+        {
+            C2M_ItemIncreaseTransferRequest request = C2M_ItemIncreaseTransferRequest.Create();
+            request.OperateBagID_1 = equipmentBagInfo.BagInfoID;
+            request.OperateBagID_2 = reelBagInfo.BagInfoID;
+
+            M2C_ItemIncreaseTransferResponse response = (M2C_ItemIncreaseTransferResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
     }
 }

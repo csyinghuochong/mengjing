@@ -2,12 +2,41 @@ using System.Collections.Generic;
 
 namespace ET
 {
-    
     [FriendOf(typeof(RewardItem))]
     public static class ItemHelper
     {
-        
-        public static BagInfo GetBagInfo( int itemId, int itemNum, int getWay)
+        /// <summary>
+        /// 是否有传承增幅属性
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public static bool IsHaveMovePro(BagInfo info)
+        {
+            bool canTrans = false;
+            foreach (HideProList hideProList in info.IncreaseProLists)
+            {
+                HideProListConfig hideProListConfig = HideProListConfigCategory.Instance.Get(hideProList.HideID);
+                if (hideProListConfig.IfMove == 1)
+                {
+                    canTrans = true;
+                    break;
+                }
+            }
+
+            foreach (int increaseSkillList in info.IncreaseSkillLists)
+            {
+                HideProListConfig hideProListConfig = HideProListConfigCategory.Instance.Get(increaseSkillList);
+                if (hideProListConfig.IfMove == 1)
+                {
+                    canTrans = true;
+                    break;
+                }
+            }
+
+            return canTrans;
+        }
+
+        public static BagInfo GetBagInfo(int itemId, int itemNum, int getWay)
         {
             BagInfo bagInfo = BagInfo.Create();
             bagInfo.ItemID = itemId;
@@ -15,7 +44,7 @@ namespace ET
             bagInfo.GetWay = $"{getWay}_{TimeHelper.ServerNow()}";
             return bagInfo;
         }
-        
+
         public static string GetInheritCost(int number)
         {
             string[] costitem = GlobalValueConfigCategory.Instance.Get(88).Value.Split('@');
@@ -56,7 +85,7 @@ namespace ET
 
             return RandomHelper.RandomNumber(lowlevel, highlevel + 1);
         }
-        
+
         //晶核属性类型
         public static int GetJingHeProType(int itemid)
         {
@@ -82,18 +111,19 @@ namespace ET
             {
                 return 0;
             }
+
             return int.Parse(attriinfos[1]);
         }
 
         //生成晶核属性. 
-        public static HideProList GetJingHeHidePro(int itemid, int qulity) 
+        public static HideProList GetJingHeHidePro(int itemid, int qulity)
         {
             //1,30@1;202103,0.01,0.03   增加属性
             //1,30@2;62000001           增加技能
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemid);
             string[] parmainfos = itemConfig.ItemUsePar.Split('@');
-            string[] attriinfos = parmainfos[1].Split(';'); 
+            string[] attriinfos = parmainfos[1].Split(';');
 
             int addType = int.Parse(attriinfos[0]);
             if (addType != 1)
@@ -207,25 +237,25 @@ namespace ET
             int number = 0;
             for (int i = 0; i < bagInfos.Count; i++)
             {
-                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID );
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
                 if (itemConfig.ItemQuality >= qulity)
-                { 
-                    number++;   
+                {
+                    number++;
                 }
             }
 
             return number;
         }
 
-
         public static List<BagInfo> GetSeedList(List<BagInfo> bagInfos)
         {
-            List <BagInfo>  seedlist = new List<BagInfo> ();
+            List<BagInfo> seedlist = new List<BagInfo>();
             for (int i = 0; i < bagInfos.Count; i++)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfos[i].ItemID);
                 if (itemConfig.ItemType == 2 &&
-                    (itemConfig.ItemSubType == 101 || itemConfig.ItemSubType == 131 || itemConfig.ItemSubType == 201 || itemConfig.ItemSubType == 301))
+                    (itemConfig.ItemSubType == 101 || itemConfig.ItemSubType == 131 || itemConfig.ItemSubType == 201 ||
+                        itemConfig.ItemSubType == 301))
                 {
                     seedlist.Add(bagInfos[i]);
                 }
@@ -235,6 +265,7 @@ namespace ET
                     seedlist.Add(bagInfos[i]);
                 }
             }
+
             return seedlist;
         }
 
@@ -280,11 +311,10 @@ namespace ET
 
             return treasureMapList;
         }
-        
 
         public static int GetItemToUserDataType(int itemid)
         {
-            int userDataType = UserDataType.None; 
+            int userDataType = UserDataType.None;
             ConfigData.ItemToUserDataType.TryGetValue(itemid, out userDataType);
             return userDataType;
         }
@@ -297,15 +327,17 @@ namespace ET
                 {
                     return ItemEquipType.Sword;
                 }
+
                 if (occ == 2)
                 {
                     return ItemEquipType.Wand;
                 }
+
                 if (occ == 3)
                 {
                     return ItemEquipType.Bow;
                 }
-               
+
                 Log.Error($"{occ} 没有配置此职业的默认武器！");
                 return ItemEquipType.Sword;
             }
@@ -318,24 +350,25 @@ namespace ET
 
         public static int GetNeedCell(string needitems)
         {
-            List<RewardItem> rewards = GetRewardItems(needitems);   
+            List<RewardItem> rewards = GetRewardItems(needitems);
             return GetNeedCell(rewards);
         }
 
         public static int GetNeedCell(List<RewardItem> rewardItems_1)
         {
-            Dictionary<int, int > rewardItems = new Dictionary<int, int>();
+            Dictionary<int, int> rewardItems = new Dictionary<int, int>();
             for (int i = 0; i < rewardItems_1.Count; i++)
             {
                 if (!rewardItems.ContainsKey(rewardItems_1[i].ItemID))
                 {
                     rewardItems.Add(rewardItems_1[i].ItemID, 0);
                 }
+
                 rewardItems[rewardItems_1[i].ItemID] += rewardItems_1[i].ItemNum;
             }
 
             int bagCellNumber = 1;
-            foreach( var item in rewardItems )
+            foreach (var item in rewardItems)
             {
                 int itemId = item.Key;
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(itemId);
@@ -343,8 +376,8 @@ namespace ET
                 {
                     bagCellNumber += 1;
                     continue;
-
                 }
+
                 int ItemPileSum = itemConfig.ItemPileSum;
                 if (item.Value <= ItemPileSum)
                 {
@@ -357,6 +390,7 @@ namespace ET
                 }
                 //needcell += Mathf.CeilToInt(rewards[i].ItemNum * 1f / itemConfig.ItemPileSum);
             }
+
             return bagCellNumber;
         }
 
@@ -367,6 +401,7 @@ namespace ET
             {
                 return costItems;
             }
+
             string[] needList = needitems.Split('@');
             for (int i = 0; i < needList.Length; i++)
             {
@@ -375,6 +410,7 @@ namespace ET
                 int itemNum = int.Parse(itemInfo[1]);
                 costItems.Add(new RewardItem() { ItemID = itemId, ItemNum = itemNum });
             }
+
             return costItems;
         }
 
@@ -390,6 +426,7 @@ namespace ET
                     getIds.Add(getItemId);
                 }
             }
+
             return getIds;
         }
 
@@ -428,13 +465,12 @@ namespace ET
             return gold;
         }
 
-
-        public static bool IsBuyItem(int getType) 
+        public static bool IsBuyItem(int getType)
         {
             return getType == ItemGetWay.StoreBuy || getType == ItemGetWay.MysteryBuy || getType == ItemGetWay.PaiMaiShop;
         }
 
-        public static BagInfo GetEquipByWeizhi( List<BagInfo> bagInfos, int pos)
+        public static BagInfo GetEquipByWeizhi(List<BagInfo> bagInfos, int pos)
         {
             for (int i = 0; i < bagInfos.Count; i++)
             {
@@ -444,12 +480,13 @@ namespace ET
                     return bagInfos[i];
                 }
             }
+
             return null;
         }
 
         //客户端线条用的
-        public static bool IfShengXiaoActiveLine(string shengXiaoItemID, List<BagInfo> equipList) {
-
+        public static bool IfShengXiaoActiveLine(string shengXiaoItemID, List<BagInfo> equipList)
+        {
             List<int> idList = new List<int>();
             for (int i = 0; i < equipList.Count; i++)
             {
@@ -458,12 +495,12 @@ namespace ET
 
             switch (shengXiaoItemID)
             {
-
                 case "16000104a":
                     if (idList.Contains(16000102) && idList.Contains(16000103))
                     {
                         return true;
                     }
+
                     return false;
 
                 case "16000104b":
@@ -471,6 +508,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     return false;
 
                 case "16000111a":
@@ -478,6 +516,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     return false;
 
                 case "16000111b":
@@ -485,6 +524,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     return false;
 
                 case "16000204a":
@@ -492,6 +532,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     return false;
 
                 case "16000204b":
@@ -499,6 +540,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     return false;
 
                 case "16000211a":
@@ -506,6 +548,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     return false;
 
                 case "16000211b":
@@ -513,6 +556,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     return false;
 
                 case "16000304a":
@@ -520,6 +564,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     return false;
 
                 case "16000304b":
@@ -527,6 +572,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     return false;
 
                 case "16000311a":
@@ -534,6 +580,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     return false;
 
                 case "16000311b":
@@ -541,23 +588,24 @@ namespace ET
                     {
                         return true;
                     }
+
                     return false;
             }
 
             return IfShengXiaoActive(int.Parse(shengXiaoItemID), equipList);
         }
 
-
         //生肖激活前缀
-        public static bool IfShengXiaoActive(int shengXiaoItemID,List<BagInfo> equipList) {
-
+        public static bool IfShengXiaoActive(int shengXiaoItemID, List<BagInfo> equipList)
+        {
             List<int> idList = new List<int>();
-            for (int i = 0; i < equipList.Count; i++) {
+            for (int i = 0; i < equipList.Count; i++)
+            {
                 idList.Add(equipList[i].ItemID);
             }
 
-            switch (shengXiaoItemID){
-
+            switch (shengXiaoItemID)
+            {
                 case 16000101:
                     return true;
 
@@ -565,16 +613,19 @@ namespace ET
                     return true;
 
                 case 16000103:
-                    if (idList.Contains(16000102)) {
-                        return true;
-                    }
-                    break;
-
-                case 16000104:
-                    if (idList.Contains(16000102)&& idList.Contains(16000103)|| idList.Contains(16000101))
+                    if (idList.Contains(16000102))
                     {
                         return true;
                     }
+
+                    break;
+
+                case 16000104:
+                    if (idList.Contains(16000102) && idList.Contains(16000103) || idList.Contains(16000101))
+                    {
+                        return true;
+                    }
+
                     break;
                 case 16000105:
                     return true;
@@ -584,13 +635,15 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000107:
-                    if (idList.Contains(16000105)&& idList.Contains(16000106))
+                    if (idList.Contains(16000105) && idList.Contains(16000106))
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000108:
@@ -598,6 +651,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000109:
@@ -608,13 +662,15 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000111:
-                    if (idList.Contains(16000109)&& idList.Contains(16000110)|| idList.Contains(16000112))
+                    if (idList.Contains(16000109) && idList.Contains(16000110) || idList.Contains(16000112))
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000112:
@@ -631,6 +687,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000204:
@@ -638,6 +695,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
                 case 16000205:
                     return true;
@@ -647,6 +705,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000207:
@@ -654,6 +713,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000208:
@@ -661,6 +721,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000209:
@@ -671,6 +732,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000211:
@@ -678,6 +740,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000212:
@@ -694,6 +757,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000304:
@@ -701,6 +765,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
                 case 16000305:
                     return true;
@@ -710,6 +775,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000307:
@@ -717,6 +783,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000308:
@@ -724,6 +791,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000309:
@@ -734,6 +802,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000311:
@@ -741,6 +810,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000312:
@@ -756,6 +826,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000404:
@@ -763,6 +834,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
                 case 16000405:
                     return true;
@@ -772,6 +844,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000407:
@@ -779,6 +852,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000408:
@@ -786,6 +860,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000409:
@@ -796,6 +871,7 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000411:
@@ -803,24 +879,26 @@ namespace ET
                     {
                         return true;
                     }
+
                     break;
 
                 case 16000412:
                     return true;
             }
+
             return false;
         }
 
         public static string ItemGetWayName(int itemgetWay)
-        { 
+        {
             string getname = string.Empty;
-                    ConfigData.ItemGetWayNameList.TryGetValue(itemgetWay, out getname);
-            return getname; 
+            ConfigData.ItemGetWayNameList.TryGetValue(itemgetWay, out getname);
+            return getname;
         }
 
         public static void ItemLitSort(List<BagInfo> ItemTypeList)
         {
-            ItemTypeList.Sort(delegate (BagInfo a, BagInfo b)
+            ItemTypeList.Sort(delegate(BagInfo a, BagInfo b)
             {
                 int itemIda = a.ItemID;
                 int itemIdb = b.ItemID;
@@ -874,24 +952,26 @@ namespace ET
                 }
             });
         }
-        
+
         public static List<int> GetItemSkill(string skillpar)
         {
             ////69000013;69000017
             List<int> skillids = new List<int>();
             if (CommonHelp.IfNull(skillpar))
-            { 
-                return skillids;    
+            {
+                return skillids;
             }
+
             string[] skillinfos = skillpar.Split(';');
-            for (int i = 0;i < skillinfos.Length; i++)
+            for (int i = 0; i < skillinfos.Length; i++)
             {
                 int skillid = int.Parse(skillinfos[i]);
                 if (skillid != 0)
-                { 
-                    skillids.Add(skillid);  
+                {
+                    skillids.Add(skillid);
                 }
             }
+
             return skillids;
         }
 
@@ -935,18 +1015,19 @@ namespace ET
                 JianDingPro = 0.5f;
             }
 
-
             //随机值(高品质保底属性)
             int minNum = 1;
             if (JianDingPro > 1f)
             {
                 minNum = (int)((float)equipCof.OneProRandomValue * (JianDingPro - 1f) * 0.8f);
             }
+
             int maxNum = (int)((float)equipCof.OneProRandomValue * JianDingPro * 0.8f);
             if (minNum > maxNum)
             {
                 maxNum = minNum;
             }
+
             if (maxNum > equipCof.OneProRandomValue)
             {
                 maxNum = equipCof.OneProRandomValue;
