@@ -199,6 +199,7 @@ namespace ET.Client
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
             self.UICommonItem_Copy.transform.Find("E_ItemIcon").GetComponent<Image>().sprite = sp;
+            self.UICommonItem_Copy.transform.Find("E_ItemIcon").gameObject.SetActive(true);
             self.UICommonItem_Copy.transform.Find("E_ItemQuality").gameObject.SetActive(false);
             self.UICommonItem_Copy.transform.Find("E_Binding").gameObject.SetActive(false);
         }
