@@ -172,9 +172,6 @@ namespace ET.Client
                 self.ShowTaskPros.Add(taskPros[i]);
             }
 
-            // 测试数据
-            // self.ShowTaskPros.Add(new TaskPro() { taskID = 100011, taskStatus = (int)TaskStatuEnum.Completed });
-            // self.ShowTaskPros.Add(new TaskPro() { taskID = 100021, taskStatus = (int)TaskStatuEnum.Accepted });
 
             self.AddUIScrollItems(ref self.ScrollItemCountryTaskItems, self.ShowTaskPros.Count);
             self.E_CountryTaskItemsLoopVerticalScrollRect.SetVisible(true, self.ShowTaskPros.Count);
