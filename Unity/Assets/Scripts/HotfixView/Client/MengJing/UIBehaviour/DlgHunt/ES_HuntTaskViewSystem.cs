@@ -34,7 +34,7 @@ namespace ET.Client
 
         public static void UpdateTaskCountrys(this ES_HuntTask self)
         {
-            List<TaskPro> taskPros = self.Root().GetComponent<TaskComponentC>().TaskCountryList;
+            List<TaskPro> taskPros = self.Root().GetComponent<TaskComponentC>().RoleTaskList;
             taskPros.Sort(delegate(TaskPro a, TaskPro b)
             {
                 int commita = a.taskStatus == (int)TaskStatuEnum.Commited? 1 : 0;
