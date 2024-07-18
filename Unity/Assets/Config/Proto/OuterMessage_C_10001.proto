@@ -1897,24 +1897,14 @@ message TaskPro
     int32 WaveId = 8;
 }
 
-message M2C_TaskCountryUpdate // IMessage
-{
-	int32 RpcId = 90;
-	int32 Error = 92;
-	int64 ActorId = 93;
-	
-	int32 UpdateMode = 1;	//1增量更新   2全量更新
-	repeated TaskPro TaskCountryList = 2;
-}
-
 message M2C_TaskUpdate // IMessage
 {
 	int32 RpcId = 90;
 	int32 Error = 92;
 	int64 ActorId = 93;
 	
-	repeated TaskPro RoleTaskList = 1;
-	repeated TaskPro DayTaskList = 2;
+	int32 UpdateMode = 1; //全量  2增量
+	repeated TaskPro RoleTaskList = 2;
 }
 
 //ResponseType M2C_TianFuActiveResponse
@@ -1964,38 +1954,6 @@ message M2C_TaskCommitResponse    // ILocationResponse
 	int32 Error = 91;
 	string Message = 92;
 	repeated int32 RoleComoleteTaskList = 1;
-}
-
-//提交任务
-//ResponseType M2C_CommitTaskCountryResponse
-message C2M_CommitTaskCountryRequest    // ILocationRequest
-{
-	int32 RpcId = 90;
-	int32 TaskId = 1;
-	int64 BagInfoID = 2;
-}
-
-message M2C_CommitTaskCountryResponse    // ILocationResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-}
-
-//每日活跃
-//ResponseType M2C_TaskCountryInitResponse
-message C2M_TaskCountryInitRequest    // ILocationRequest
-{
-	int32 RpcId = 90;
-}
-
-message M2C_TaskCountryInitResponse    // ILocationResponse
-{
-	int32 RpcId = 90;
-	int32 Error = 91;
-	string Message = 92;
-	repeated TaskPro TaskCountryList = 1;
-	repeated int32 ReceiveHuoYueIds = 2;
 }
 
 //接取任务

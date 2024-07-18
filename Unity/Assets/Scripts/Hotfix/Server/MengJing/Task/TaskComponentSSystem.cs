@@ -54,13 +54,18 @@ namespace ET.Server
         public static int GetHuoYueDu(this TaskComponentS self)
         {
             int huoYueDu = 0;
-            for (int i = 0; i < self.TaskCountryList.Count; i++)
+            for (int i = 0; i < self.RoleTaskList.Count; i++)
             {
-                if (self.TaskCountryList[i].taskStatus != (int)TaskStatuEnum.Commited)
+                if (self.RoleTaskList[i].taskStatus != (int)TaskStatuEnum.Commited)
                 {
                     continue;
                 }
-                TaskConfig taskCountryConfig = TaskConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
+                TaskConfig taskCountryConfig = TaskConfigCategory.Instance.Get(self.RoleTaskList[i].taskID);
+                if (taskCountryConfig.TaskType != TaskTypeEnum.Country)
+                {
+                    continue;
+                }
+
                 huoYueDu += taskCountryConfig.EveryTaskRewardNum;
             }
             return huoYueDu;
@@ -906,9 +911,9 @@ namespace ET.Server
             UserInfoComponentS userInfoComponent = self.GetParent<Unit>().GetComponent<UserInfoComponentS>();
             NumericComponentS numericComponent = self.GetParent<Unit>().GetComponent<NumericComponentS>();
 
-            if (self.TaskCountryList.Count == 0)
+            if (self.RoleTaskList.Count == 0)
             {
-                Log.Debug($"��Ծ����Ϊ��: {self.Zone()} {self.GetParent<Unit>().Id}");
+                Log.Debug($"self.RoleTaskList.Count: {self.Zone()} {self.GetParent<Unit>().Id}");
             }
             for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
             {
@@ -924,11 +929,11 @@ namespace ET.Server
                     continue;
                 }
             }
-            for (int i = self.TaskCountryList.Count - 1; i >= 0; i--)
+            for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
             {
-                if (!TaskConfigCategory.Instance.Contain(self.TaskCountryList[i].taskID))
+                if (!TaskConfigCategory.Instance.Contain(self.RoleTaskList[i].taskID))
                 {
-                    self.TaskCountryList.RemoveAt(i);
+                    self.RoleTaskList.RemoveAt(i);
                 }
             }
             
@@ -973,10 +978,10 @@ namespace ET.Server
             }
 
 
-            for (int i = 0; i < self.TaskCountryList.Count; i++)
+            for (int i = 0; i < self.RoleTaskList.Count; i++)
             {
                 int trialid = self.GetParent<Unit>().GetComponent<NumericComponentS>().GetAsInt(NumericType.TrialDungeonId);
-                TaskConfig taskCountryConfig = TaskConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
+                TaskConfig taskCountryConfig = TaskConfigCategory.Instance.Get(self.RoleTaskList[i].taskID);
                 if (taskCountryConfig.TargetType == (int)TaskTargetType.TrialFuben_1012 && trialid >= 20100)
                 {
                     self.TriggerTaskCountryEvent(TaskTargetType.TrialFuben_1012, 0, taskCountryConfig.TargetValue[0], false);
@@ -1242,58 +1247,22 @@ namespace ET.Server
             }
         }
 
-        public static void TriggerTaskCountryEvent(this TaskComponentS self, int targetType, int targetTypeId, int targetValue, bool notice = true)
-        {
-            bool updateTask = false;
-            List<TaskPro> countryList = new List<TaskPro>();
-
-            for (int i = 0; i < self.TaskCountryList.Count; i++)
-            {
-                TaskPro taskPro = self.TaskCountryList[i];
-                TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPro.taskID);
-                int taskCountryTargetType = taskConfig.TargetType;
-                if (taskCountryTargetType != targetType)
-                {
-                    continue;
-                }
-
-                if (taskPro.taskStatus >= (int)TaskStatuEnum.Completed)
-                {
-                    continue;
-                }
-
-                updateTask = true;
-                self.CheckTaskPro(taskPro, taskConfig.TargetType, taskConfig.Target, targetTypeId, targetValue);
-
-                bool completed = self.IsCompleted(taskPro, taskConfig.TargetType, taskConfig.Target, taskConfig.TargetValue);
-                taskPro.taskStatus = completed ? (int)TaskStatuEnum.Completed : (int)TaskStatuEnum.Accepted;
-                countryList.Add(taskPro);
-            }
-
-            if (!updateTask || !notice)
-                return;
-            M2C_TaskCountryUpdate m2C_TaskUpdate = self.m2C_TaskCountryUpdate;
-            m2C_TaskUpdate.UpdateMode = 1;
-            m2C_TaskUpdate.TaskCountryList = countryList;
-            MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
-        }
-
         public static void UpdateCountryList(this TaskComponentS self, bool notice)
         {
             Unit unit = self.GetParent<Unit>();
-            if (self.TaskCountryList.Count == 0)
+            if (self.RoleTaskList.Count == 0)
             {
                 Log.Debug($"self.TaskCountryList.Count == 0 {unit.Id} {notice} {self.Zone()} ");
             }
             
-            for (int i = self.TaskCountryList.Count - 1; i >= 0; i--)
+            for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
             {
-                TaskConfig taskCountry = TaskConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
+                TaskConfig taskCountry = TaskConfigCategory.Instance.Get(self.RoleTaskList[i].taskID);
                 if (taskCountry.TaskType == TaskTypeEnum.SeasonDaily)
                 {
                     continue;
                 }
-                self.TaskCountryList.RemoveAt(i);
+                self.RoleTaskList.RemoveAt(i);
             }
 
             self.ReceiveHuoYueIds.Clear();
@@ -1309,11 +1278,11 @@ namespace ET.Server
             {
                 TaskPro TaskPro = TaskPro.Create();
                 TaskPro.taskID = taskCountryList[i];
-                self.TaskCountryList.Add(TaskPro);
+                self.RoleTaskList.Add(TaskPro);
             }
             //UserInfoComponent userInfoComponent = unit.GetComponent<UserInfoComponent>();
             //userInfoComponent.UpdateRoleData(UserDataType.HuoYue, (0 - userInfoComponent.UserInfo.HuoYue).ToString(), notice);
-            Log.Debug($"���»�Ծ����:  {unit.Id} {self.Zone()}  {self.TaskCountryList.Count}");
+            Log.Debug($"RoleTaskList:  {unit.Id} {self.Zone()}  {self.RoleTaskList.Count}");
         }
 
         public static void CheckDailyTask(this TaskComponentS self, bool notice)
@@ -1601,18 +1570,18 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             unit.GetComponent<NumericComponentS>().ApplyValue(NumericType.SeasonTowerId, 0, notice);
             
-            for (int i = self.TaskCountryList.Count - 1; i >= 0; i--)
+            for (int i = self.RoleTaskList.Count - 1; i >= 0; i--)
             {
-                if (!TaskConfigCategory.Instance.Contain(self.TaskCountryList[i].taskID))
+                if (!TaskConfigCategory.Instance.Contain(self.RoleTaskList[i].taskID))
                 {
-                    self.TaskCountryList.RemoveAt(i);
+                    self.RoleTaskList.RemoveAt(i);
                     continue;
                 }
 
-                TaskConfig taskCountry = TaskConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
+                TaskConfig taskCountry = TaskConfigCategory.Instance.Get(self.RoleTaskList[i].taskID);
                 if (taskCountry.TaskType == TaskTypeEnum.SeasonDaily)
                 {
-                    self.TaskCountryList.RemoveAt(i);
+                    self.RoleTaskList.RemoveAt(i);
                     continue;
                 }
             }
@@ -1625,22 +1594,21 @@ namespace ET.Server
                 {
                     TaskPro TaskPro = TaskPro.Create();
                     TaskPro.taskID = taskCountryList[i];
-                    self.TaskCountryList.Add(TaskPro);
+                    self.RoleTaskList.Add(TaskPro);
                 }
             }
 
             if (notice)
             {
-                M2C_TaskCountryUpdate m2C_TaskUpdate = self.m2C_TaskCountryUpdate;
+                M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
                 m2C_TaskUpdate.UpdateMode = 2;
-                m2C_TaskUpdate.TaskCountryList = self.TaskCountryList;
+                m2C_TaskUpdate.RoleTaskList = self.RoleTaskList;
                 MapMessageHelper.SendToClient(self.GetParent<Unit>(), m2C_TaskUpdate);
             }
         }
 
         public static void CheckWeeklyUpdate(this TaskComponentS self, long lastTime, long curTime)
         {
-            //�ж������� ����һ�ܻ��߹�����ĩ
             float passday = ((curTime - lastTime) * 1f / TimeHelper.OneDay);
             if (passday >= 7)
             {
