@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_JiaYuanMysteryItem_A))]
-    [EntitySystemOf(typeof (Scroll_Item_JiaYuanMysteryItem_A))]
+    [FriendOf(typeof(Scroll_Item_JiaYuanMysteryItem_A))]
+    [EntitySystemOf(typeof(Scroll_Item_JiaYuanMysteryItem_A))]
     public static partial class Scroll_Item_JiaYuanMysteryItem_ASystem
     {
         [EntitySystem]
@@ -72,22 +72,23 @@ namespace ET.Client
             self.E_ButtonBuyButton.AddListenerAsync(self.OnButtonBuy);
             self.E_Text_NumberText.gameObject.SetActive(false);
             self.E_Text_TipText.gameObject.SetActive(false);
+            self.ES_CommonItem.E_ItemIconImage.material = null;
 
             MysteryConfig mysteryConfig = MysteryConfigCategory.Instance.Get(mysteryItemInfo.MysteryId);
             self.MysteryItemInfo = mysteryItemInfo;
-
-            ItemConfig itemConfig = ItemConfigCategory.Instance.Get(mysteryConfig.SellType);
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
-            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-
-            self.E_Image_goldImage.sprite = sp;
 
             // 判断家园等级是否足够
             int jiayuanid = self.Root().GetComponent<UserInfoComponentC>().UserInfo.JiaYuanLv;
             JiaYuanConfig jiayuanCof = JiaYuanConfigCategory.Instance.Get(jiayuanid);
             if (mysteryConfig.JiaYuanLv <= jiayuanCof.Lv)
             {
-                // self.Text_Number.GetComponent<Text>().text = $"剩余 {self.MysteryItemInfo.ItemNumber}件";
+                ItemConfig itemConfig = ItemConfigCategory.Instance.Get(mysteryConfig.SellType);
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+
+                self.E_Image_goldImage.sprite = sp;
+                self.E_Image_goldImage.gameObject.SetActive(true);
+                self.E_Text_valueText.gameObject.SetActive(true);
                 self.E_Text_valueText.text = mysteryConfig.SellValue.ToString();
             }
             else
