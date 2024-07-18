@@ -5,7 +5,23 @@ namespace ET.Client
 {
     public static partial class UnitHelper
     {
-        
+        /// <summary>
+        /// 是否小黑屋
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public static bool IsBackRoom(Scene root)
+        {
+            Unit unit = GetMyUnitFromClientScene(root);
+            return unit != null ? unit.IsBackRoom() : false;
+        }
+
+        public static bool IsBackRoom(this Unit self)
+        {
+            int black = self.GetComponent<NumericComponentC>().GetAsInt(NumericType.BlackRoom);
+            return black != 0;
+        }
+
         public static bool IsPasture(this Unit self)
         {
             return self.Type == UnitType.Pasture;
@@ -42,7 +58,7 @@ namespace ET.Client
             int sonType = MonsterConfigCategory.Instance.Get(self.ConfigId).MonsterSonType;
             return sonType == 58 || sonType == 59;
         }
-        
+
         public static long GetMyUnitId(Scene zoneScene)
         {
             PlayerComponent playerComponent = zoneScene.GetComponent<PlayerComponent>();
@@ -81,7 +97,7 @@ namespace ET.Client
 
         public static int GetMaxPiLao(this Unit self)
         {
-            return int.Parse(GlobalValueConfigCategory.Instance.Get(self.IsYueKaStates()? 26 : 10).Value);
+            return int.Parse(GlobalValueConfigCategory.Instance.Get(self.IsYueKaStates() ? 26 : 10).Value);
         }
 
         public static bool IsYueKaStates(this Unit self)

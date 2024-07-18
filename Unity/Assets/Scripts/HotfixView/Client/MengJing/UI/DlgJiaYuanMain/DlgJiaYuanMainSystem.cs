@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,23 @@ namespace ET.Client
         }
     }
 
+    [Invoke(TimerInvokeType.JiaYuanPetWalk)]
+    public class JiaYuanPetWalk : ATimer<DlgJiaYuanMain>
+    {
+        protected override void Run(DlgJiaYuanMain self)
+        {
+            try
+            {
+                self.ReqestStartPet().Coroutine();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"move timer error: {self.Id}\n{e}");
+            }
+        }
+    }
+
+    [FriendOf(typeof(ES_JiaYuaVisit))]
     [FriendOf(typeof(DlgJiaYuanMain))]
     public static class DlgJiaYuanMainSystem
     {
@@ -29,7 +47,7 @@ namespace ET.Client
             self.View.E_ButtonMyJiaYuanButton.gameObject.SetActive(false);
             self.View.E_ButtonMyJiaYuanButton.AddListener(self.OnButtonMyJiaYuan);
 
-            self.View.EG_RightRectTransform.gameObject.SetActive(false);
+            self.View.ES_JiaYuaVisit.uiTransform.gameObject.SetActive(false);
 
             self.View.E_Btn_ShouSuoButton.AddListener(self.OnBtn_ShouSuo);
 
@@ -74,8 +92,8 @@ namespace ET.Client
 
         public static void OnBtn_ShouSuo(this DlgJiaYuanMain self)
         {
-            bool activeSelf = self.View.EG_RightRectTransform.gameObject.activeSelf;
-            self.View.EG_RightRectTransform.gameObject.SetActive(!activeSelf);
+            bool activeSelf = self.View.ES_JiaYuaVisit.uiTransform.gameObject.activeSelf;
+            self.View.ES_JiaYuaVisit.uiTransform.gameObject.SetActive(!activeSelf);
 
             self.View.E_Btn_ShouSuoButton.transform.localPosition = activeSelf ? new Vector3(-51f, -142f, 0f) : new Vector3(-551f, -142f, 0f);
             self.View.E_Btn_ShouSuoButton.transform.localScale = activeSelf ? new Vector3(-1f, 1f, 1f) : new Vector3(1f, 1f, 1f);
@@ -182,7 +200,7 @@ namespace ET.Client
             self.OnInitPlan();
             self.InitEffect();
             self.UpdateName(response.MasterName);
-            // self.UIJiaYuaVisitComponent.OnInitUI(0).Coroutine();
+            self.View.ES_JiaYuaVisit.OnInitUI(0).Coroutine();
 
             if (!self.MyJiaYuan)
             {
@@ -578,24 +596,24 @@ namespace ET.Client
 
         public static void UpdateName(this DlgJiaYuanMain self, string mastername)
         {
-            Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            System.Numerics.Vector3 unitPosi = new(unit.Position.x, unit.Position.y, unit.Position.z);
-
-            Unit npc = TaskHelper.GetNpcByConfigId(self.Root(), unitPosi, 30000004);
-            if (npc == null)
-            {
-                return;
-            }
-
-            GameObjectComponent gameObjectComponent = npc.GetComponent<GameObjectComponent>();
-            if (gameObjectComponent == null || gameObjectComponent.GameObject == null)
-            {
-                return;
-            }
-
-            GameObject gameObject = gameObjectComponent.GameObject;
-            TextMesh textMesh = gameObject.Get<GameObject>("NewNameText").GetComponent<TextMesh>();
-            textMesh.text = mastername;
+            // Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+            // System.Numerics.Vector3 unitPosi = new(unit.Position.x, unit.Position.y, unit.Position.z);
+            //
+            // Unit npc = TaskHelper.GetNpcByConfigId(self.Root(), unitPosi, 30000004);
+            // if (npc == null)
+            // {
+            //     return;
+            // }
+            //
+            // GameObjectComponent gameObjectComponent = npc.GetComponent<GameObjectComponent>();
+            // if (gameObjectComponent == null || gameObjectComponent.GameObject == null)
+            // {
+            //     return;
+            // }
+            //
+            // GameObject gameObject = gameObjectComponent.GameObject;
+            // TextMesh textMesh = gameObject.Get<GameObject>("NewNameText").GetComponent<TextMesh>();
+            // textMesh.text = mastername;
         }
 
         public static void InitEffect(this DlgJiaYuanMain self)

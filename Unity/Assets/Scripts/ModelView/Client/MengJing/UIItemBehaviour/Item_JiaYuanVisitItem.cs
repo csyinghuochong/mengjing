@@ -6,6 +6,8 @@ namespace ET.Client
 	[EnableMethod]
 	public  class Scroll_Item_JiaYuanVisitItem : Entity,IAwake,IDestroy,IUIScrollItem<Scroll_Item_JiaYuanVisitItem>
 	{
+		public JiaYuanVisit JiaYuanVisit;
+		
 		public long DataId {get;set;}
 		private bool isCacheNode = false;
 		public void SetCacheMode(bool isCache)
