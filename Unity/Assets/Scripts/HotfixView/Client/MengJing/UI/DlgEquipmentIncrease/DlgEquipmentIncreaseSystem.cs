@@ -6,6 +6,16 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    [Event(SceneType.Demo)]
+    public class DataUpdate_BagItemUpdate_DlgEquipmentIncreaseRefresh : AEvent<Scene, DataUpdate_BagItemUpdate>
+    {
+        protected override async ETTask Run(Scene root, DataUpdate_BagItemUpdate args)
+        {
+            root.GetComponent<UIComponent>().GetDlgLogic<DlgEquipmentIncrease>()?.View.ES_EquipmentIncreaseShow.OnUpdateUI();
+            await ETTask.CompletedTask;
+        }
+    }
+
     [FriendOf(typeof(ES_EquipmentIncreaseShow))]
     [FriendOf(typeof(DlgEquipmentIncrease))]
     public static class DlgEquipmentIncreaseSystem

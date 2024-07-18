@@ -387,9 +387,8 @@ namespace ET.Client
             return response.Error;
         }
 
-        public static async ETTask<int> RquestPutStoreHouse(Scene root, BagInfo bagInfo,  int houseId )
+        public static async ETTask<int> RquestPutStoreHouse(Scene root, BagInfo bagInfo, int houseId)
         {
-
             C2M_ItemOperateRequest request = C2M_ItemOperateRequest.Create();
             request.OperateType = 6;
             request.OperateBagID = bagInfo.BagInfoID;
@@ -873,6 +872,16 @@ namespace ET.Client
             request.Index = index;
 
             M2C_ItemFumoProResponse response = (M2C_ItemFumoProResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            return response.Error;
+        }
+
+        public static async ETTask<int> SendEquipmentIncrease(Scene root, BagInfo equipmentBagInfo, BagInfo reelBagInfo)
+        {
+            C2M_EquipmentIncreaseRequest request = C2M_EquipmentIncreaseRequest.Create();
+            request.EquipmentBagInfo = equipmentBagInfo;
+            request.ReelBagInfo = reelBagInfo;
+
+            M2C_EquipmentIncreaseResponse response = (M2C_EquipmentIncreaseResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
     }

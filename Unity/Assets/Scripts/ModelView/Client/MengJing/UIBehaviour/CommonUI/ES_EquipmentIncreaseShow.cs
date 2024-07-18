@@ -8,10 +8,14 @@ namespace ET.Client
 	[EnableMethod]
 	public  class ES_EquipmentIncreaseShow : Entity,ET.IAwake<UnityEngine.Transform>,IDestroy,IUILogic
 	{
-		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemBagItems;
-		public List<BagInfo> ShowBagInfos = new();
+		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemEquipItems;
+		public List<BagInfo> ShowEquipBagInfos = new();
 		public Dictionary<int, EntityRef<Scroll_Item_CommonItem>> ScrollItemReelItems;
-		public List<BagInfo> ShowBagInfos = new();
+		public List<BagInfo> ShowReelBagInfos = new();
+		
+		public BagInfo EquipmentBagInfo;
+		public BagInfo ReelBagInfo;
+		public int Page;
 		
 		public UnityEngine.UI.ToggleGroup E_ItemTypeSetToggleGroup
      	{
@@ -121,7 +125,7 @@ namespace ET.Client
      		}
      	}
 
-		public UnityEngine.UI.LoopVerticalScrollRect E_BagItemsLoopVerticalScrollRect
+		public UnityEngine.UI.LoopVerticalScrollRect E_ReelItemsLoopVerticalScrollRect
      	{
      		get
      		{
@@ -130,11 +134,11 @@ namespace ET.Client
      				Log.Error("uiTransform is null.");
      				return null;
      			}
-     			if( this.m_E_BagItemsLoopVerticalScrollRect == null )
+     			if( this.m_E_ReelItemsLoopVerticalScrollRect == null )
      			{
-		    		this.m_E_BagItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_BagItems");
+		    		this.m_E_ReelItemsLoopVerticalScrollRect = UIFindHelper.FindDeepChild<UnityEngine.UI.LoopVerticalScrollRect>(this.uiTransform.gameObject,"Right/E_ReelItems");
      			}
-     			return this.m_E_BagItemsLoopVerticalScrollRect;
+     			return this.m_E_ReelItemsLoopVerticalScrollRect;
      		}
      	}
 
@@ -226,7 +230,7 @@ namespace ET.Client
 			this.m_E_Obj_EquipPropertyTextText = null;
 			this.m_EG_EquipBaseSetListRectTransform = null;
 			this.m_es_commonitem = null;
-			this.m_E_BagItemsLoopVerticalScrollRect = null;
+			this.m_E_ReelItemsLoopVerticalScrollRect = null;
 			this.m_E_IncreaseButtonButton = null;
 			this.m_E_IncreaseButtonImage = null;
 			this.m_E_Lab_NumText = null;
@@ -240,7 +244,7 @@ namespace ET.Client
 		private UnityEngine.UI.Text m_E_Obj_EquipPropertyTextText = null;
 		private UnityEngine.RectTransform m_EG_EquipBaseSetListRectTransform = null;
 		private EntityRef<ES_CommonItem> m_es_commonitem = null;
-		private UnityEngine.UI.LoopVerticalScrollRect m_E_BagItemsLoopVerticalScrollRect = null;
+		private UnityEngine.UI.LoopVerticalScrollRect m_E_ReelItemsLoopVerticalScrollRect = null;
 		private UnityEngine.UI.Button m_E_IncreaseButtonButton = null;
 		private UnityEngine.UI.Image m_E_IncreaseButtonImage = null;
 		private UnityEngine.UI.Text m_E_Lab_NumText = null;
