@@ -179,5 +179,6 @@ namespace ET.Client
 		WindowID_SelectServer,
 		WindowID_EquipmentIncrease,
 		WindowID_YinSi,
+		WindowID_JueXing,
 	}
 }
