@@ -1644,13 +1644,7 @@ namespace ET.Server
             self.UpdateDayTask(notice);
             self.UpdateTargetTask(notice);
 
-            if (notice)
-            {
-                M2C_TaskCountryUpdate m2C_TaskUpdate = self.m2C_TaskCountryUpdate;
-                m2C_TaskUpdate.UpdateMode = 2;
-                m2C_TaskUpdate.TaskCountryList = self.TaskCountryList;
-                MapMessageHelper.SendToClient(unit, m2C_TaskUpdate);
-            }
+
             if (notice)
             {
                 M2C_TaskUpdate m2C_TaskUpdate = self.M2C_TaskUpdate;
