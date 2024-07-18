@@ -54,7 +54,7 @@ namespace ET.Client
             for (int i = 0; i < taskPros.Count; i++)
             {
                 TaskConfig taskConfig = TaskConfigCategory.Instance.Get(taskPros[i].taskID);
-                if (taskConfig.TaskType != TaskCountryType.Battle)
+                if (taskConfig.TaskType != TaskTypeEnum.Battle)
                 {
                     continue;
                 }

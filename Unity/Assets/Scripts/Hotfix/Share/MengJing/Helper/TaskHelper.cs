@@ -183,7 +183,7 @@ namespace ET
             Dictionary<int, TaskConfig> keyValuePairs = TaskConfigCategory.Instance.GetAll();
             foreach (var item in keyValuePairs)
             {
-                if (item.Value.TaskType == TaskCountryType.ActivityV1)
+                if (item.Value.TaskType == TaskTypeEnum.ActivityV1)
                 {
                     taskIds.Add(item.Key);
                 }
@@ -251,7 +251,7 @@ namespace ET
             Dictionary<int, TaskConfig> keyValuePairs = TaskConfigCategory.Instance.GetAll();
             foreach (var item in keyValuePairs)
             {
-                if (item.Value.TaskType == TaskCountryType.Battle)
+                if (item.Value.TaskType == TaskTypeEnum.Battle)
                 {
                     taskIds.Add(item.Key);
                 }
@@ -266,7 +266,7 @@ namespace ET
             Dictionary<int, TaskConfig> keyValuePairs = TaskConfigCategory.Instance.GetAll();
             foreach (var item in keyValuePairs)
             {
-                if (item.Value.TaskType == TaskCountryType.ShowLie)
+                if (item.Value.TaskType == TaskTypeEnum.ShowLie)
                 {
                     taskIds.Add(item.Key);
                 }
@@ -281,7 +281,7 @@ namespace ET
             Dictionary<int, TaskConfig> keyValuePairs = TaskConfigCategory.Instance.GetAll();
             foreach (var item in keyValuePairs)
             {
-                if (item.Value.TaskType == TaskCountryType.UnionRace)
+                if (item.Value.TaskType == TaskTypeEnum.UnionRace)
                 {
                     taskIds.Add(item.Key);
                 }
@@ -296,7 +296,7 @@ namespace ET
             Dictionary<int, TaskConfig> keyValuePairs = TaskConfigCategory.Instance.GetAll();
             foreach (var item in keyValuePairs)
             {
-                if (item.Value.TaskType == TaskCountryType.Mine)
+                if (item.Value.TaskType == TaskTypeEnum.Mine)
                 {
                     taskIds.Add(item.Key);
                 }

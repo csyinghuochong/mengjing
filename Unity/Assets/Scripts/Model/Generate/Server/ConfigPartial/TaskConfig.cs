@@ -12,7 +12,7 @@ namespace ET
             foreach (TaskConfig taskCountryConfig in this.GetAll().Values)
             {
 
-                if (taskCountryConfig.TaskType != TaskCountryType.Season)
+                if (taskCountryConfig.TaskType != TaskTypeEnum.SeasonDaily)
                 {
                     continue;
                 }

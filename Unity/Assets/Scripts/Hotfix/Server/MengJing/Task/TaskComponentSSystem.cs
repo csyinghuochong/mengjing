@@ -1283,13 +1283,13 @@ namespace ET.Server
             Unit unit = self.GetParent<Unit>();
             if (self.TaskCountryList.Count == 0)
             {
-                Log.Debug($"���»�Ծ����ERROE:  {unit.Id} {notice} {self.Zone()} ");
+                Log.Debug($"self.TaskCountryList.Count == 0 {unit.Id} {notice} {self.Zone()} ");
             }
             
             for (int i = self.TaskCountryList.Count - 1; i >= 0; i--)
             {
                 TaskConfig taskCountry = TaskConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
-                if (taskCountry.TaskType == TaskCountryType.Season)
+                if (taskCountry.TaskType == TaskTypeEnum.SeasonDaily)
                 {
                     continue;
                 }
@@ -1610,7 +1610,7 @@ namespace ET.Server
                 }
 
                 TaskConfig taskCountry = TaskConfigCategory.Instance.Get(self.TaskCountryList[i].taskID);
-                if (taskCountry.TaskType == TaskCountryType.Season)
+                if (taskCountry.TaskType == TaskTypeEnum.SeasonDaily)
                 {
                     self.TaskCountryList.RemoveAt(i);
                     continue;

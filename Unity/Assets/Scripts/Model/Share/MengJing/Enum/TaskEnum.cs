@@ -25,17 +25,14 @@ namespace ET
         public const int Welfare = 9;           //福利任务
         public const int Ring = 10;             //跑环任务
         public const int System = 11;           //系统任务
-    }
-
-    public static class TaskCountryType
-    {
-        public const int Country = 1;    //活跃任务
-        public const int Battle = 2;     //战场任务
-        public const int ShowLie = 3;    //狩猎任务
-        public const int UnionRace = 4;  //家族战
-        public const int Mine = 5;       //宠物矿场
-        public const int Season = 6;    //赛季每日任务
-        public const int ActivityV1 = 7; //活动每日任务
+        
+        public const int Country = 21;    //活跃任务
+        public const int Battle = 22;     //战场任务
+        public const int ShowLie = 23;    //狩猎任务
+        public const int UnionRace = 24;  //家族战
+        public const int Mine = 25;       //宠物矿场
+        public const int SeasonDaily = 26;    //赛季每日任务
+        public const int ActivityV1 = 27; //活动每日任务
     }
 
     //1：杀怪
