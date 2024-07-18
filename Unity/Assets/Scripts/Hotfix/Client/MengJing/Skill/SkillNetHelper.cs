@@ -205,5 +205,14 @@ namespace ET.Client
 
             return response;
         }
+
+        public static async ETTask<int> SkillJueXingRequest(Scene root, int jueXingId)
+        {
+            C2M_SkillJueXingRequest request = C2M_SkillJueXingRequest.Create();
+            request.JueXingId = jueXingId;
+            M2C_SkillJueXingResponse response = (M2C_SkillJueXingResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+
+            return response.Error;
+        }
     }
 }
