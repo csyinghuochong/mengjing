@@ -177,5 +177,6 @@ namespace ET.Client
 		WindowID_ItemFumoSelect,
 		WindowID_PetQuickFight,
 		WindowID_SelectServer,
+		WindowID_EquipmentIncrease,
 	}
 }
