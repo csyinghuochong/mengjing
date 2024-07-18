@@ -35,7 +35,7 @@ namespace ET.Client
 
             self.View.E_ButtonOneKeyPlantButton.AddListener(() =>
             {
-                // self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanOneKeyPlant).Coroutine();
+                self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanOneKeyPlant).Coroutine();
             });
             self.View.E_ButtonGatherButton.AddListener(() => { self.OnButtonGather(); });
             self.View.E_ButtonTalkButton.AddListener(() => { self.OnButtonTalk(); });
