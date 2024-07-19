@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_SkillLearnItem))]
-    [EntitySystemOf(typeof (Scroll_Item_SkillLearnItem))]
+    [FriendOf(typeof(Scroll_Item_SkillLearnItem))]
+    [EntitySystemOf(typeof(Scroll_Item_SkillLearnItem))]
     public static partial class Scroll_Item_SkillLearnItemSystem
     {
         [EntitySystem]
@@ -142,7 +142,10 @@ namespace ET.Client
             int playerLv = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv;
             SkillConfig skillBaseConfig = SkillConfigCategory.Instance.Get(skillPro.SkillID);
 
-            self.E_Lab_NeedSpText.text = $"需要技能点: {skillBaseConfig.CostSPValue}";
+            using (zstring.Block())
+            {
+                self.E_Lab_NeedSpText.text = (zstring)"需要技能点: " + skillBaseConfig.CostSPValue;
+            }
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             SkillSetComponentC skillSetComponent = self.Root().GetComponent<SkillSetComponentC>();

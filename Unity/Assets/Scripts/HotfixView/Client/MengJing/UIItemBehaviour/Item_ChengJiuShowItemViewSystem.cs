@@ -50,7 +50,7 @@ namespace ET.Client
 
             self.E_Ima_IconImage.sprite = sp;
 
-            self.E_Lab_ChengJiuNumText.text = $"成就点数:{chengJiuConfig.RewardNum}";
+            self.E_Lab_ChengJiuNumText.text = (zstring)"成就点数:" + chengJiuConfig.RewardNum;
         }
     }
 }

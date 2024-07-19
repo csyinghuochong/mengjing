@@ -100,8 +100,8 @@ namespace ET.Client
             self.ChapterId = levelId;
             DungeonConfig chapterConfig = DungeonConfigCategory.Instance.Get(levelId);
             self.E_Lab_ChapSonNameOutText.text = chapterConfig.ChapterName;
-            self.E_Lab_ChapIndexText.text = $"第{levelIndex + 1}关";
-            self.E_Lab_EnterLevelText.text = "挑战等级:" + chapterConfig.EnterLv;
+            self.E_Lab_ChapIndexText.text = (zstring)"第" + levelIndex + 1 + "关";
+            self.E_Lab_EnterLevelText.text = (zstring)"挑战等级:" + chapterConfig.EnterLv;
 
             self.E_ButtonEnterButton.AddListenerAsync(self.OnEnterChapter);
         }
