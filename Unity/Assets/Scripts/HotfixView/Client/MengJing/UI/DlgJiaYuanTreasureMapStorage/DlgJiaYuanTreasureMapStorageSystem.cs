@@ -40,13 +40,13 @@ namespace ET.Client
         public static async ETTask OnButtonTakeOutAll(this DlgJiaYuanTreasureMapStorage self)
         {
             await BagClientNetHelper.RquestTakeOutAll(self.Root(),
-                self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1);
+                self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanTreasureMapStorage1);
         }
 
         public static async ETTask OnButtonOneKey(this DlgJiaYuanTreasureMapStorage self)
         {
             await JiaYuanNetHelper.JiaYuanStoreRequest(self.Root(),
-                self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1);
+                self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanTreasureMapStorage1);
         }
 
         private static void OnHouseItemsRefresh(this DlgJiaYuanTreasureMapStorage self, Transform transform, int index)
@@ -56,7 +56,7 @@ namespace ET.Client
             if (index < self.ShowHouseBagInfos.Count)
             {
                 scrollItemCommonItem.Refresh(self.ShowHouseBagInfos[index], ItemOperateEnum.Cangku, null,
-                    self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1);
+                    self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanTreasureMapStorage1);
             }
             else
             {
@@ -82,7 +82,7 @@ namespace ET.Client
             if (index < self.ShowBagBagInfos.Count)
             {
                 scrollItemCommonItem.Refresh(self.ShowBagBagInfos[index], ItemOperateEnum.CangkuBag, null,
-                    self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanWareHouse1);
+                    self.View.E_ItemTypeSetToggleGroup.GetCurrentIndex() + (int)ItemLocType.JianYuanTreasureMapStorage1);
             }
             else
             {
