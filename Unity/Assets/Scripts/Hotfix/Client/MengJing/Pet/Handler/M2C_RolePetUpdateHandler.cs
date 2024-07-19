@@ -15,7 +15,7 @@ namespace ET.Client
             if (message.GetWay == 2 && message.PetInfoAdd.Count > 0)
             {
                 PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(message.PetInfoAdd[0].SkinId);
-                EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = $"获得{petSkinConfig.Name}宠物!" });
+                HintHelp.ShowHint(root, $"获得{petSkinConfig.Name}宠物!");
             }
 
             if (message.GetWay == 0 && message.PetInfoAdd.Count > 0)

@@ -26,9 +26,9 @@
             EventSystem.Instance.Publish(root, new ShowFlyTip() { Type = 1, Str = string.IsNullOrEmpty(hintStr) ? code.ToString() : hintStr });
         }
 
-        public static void ShowHint(Scene root, string str)
+        public static void ShowHint(Scene root, string str, int type = 0)
         {
-            EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = str });
+            EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = str, Type = type });
         }
     }
 }

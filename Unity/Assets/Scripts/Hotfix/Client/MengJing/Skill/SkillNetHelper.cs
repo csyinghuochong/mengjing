@@ -141,14 +141,14 @@ namespace ET.Client
 
             if (response.ItemId == 0)
             {
-                EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = "制作失败!" });
+                HintHelp.ShowHint(root, "制作失败!");
             }
 
             if (response.NewMakeId != 0)
             {
                 EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(response.NewMakeId);
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(equipMakeConfig.MakeItemID);
-                EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = $"恭喜你领悟到新的制作技能 {itemConfig.ItemName}" });
+                HintHelp.ShowHint(root, $"恭喜你领悟到新的制作技能 {itemConfig.ItemName}");
                 root.GetComponent<UserInfoComponentC>().UserInfo.MakeList.Add(response.NewMakeId);
             }
 

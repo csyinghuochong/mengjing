@@ -95,7 +95,7 @@ namespace ET.Client
         {
             self.PassTime = -1;
             self.UpdateUISinging();
-            EventSystem.Instance.Publish(self.Root(), new ShowFlyTip(){ Str = "施法中断！"});
+            HintHelp.ShowHint(self.Root(), "施法中断！");
         }
 
         public static void BeginMove(this SingingComponent self)

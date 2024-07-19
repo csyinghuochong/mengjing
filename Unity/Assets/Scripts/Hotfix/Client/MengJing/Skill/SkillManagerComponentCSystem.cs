@@ -4,13 +4,12 @@ using Unity.Mathematics;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (SkillManagerComponentC))]
-    [FriendOf(typeof (SkillManagerComponentC))]
+    [EntitySystemOf(typeof(SkillManagerComponentC))]
+    [FriendOf(typeof(SkillManagerComponentC))]
     public static partial class SkillManagerComponentCSystem
     {
-        
         [Invoke(TimerInvokeType.SkillTimerC)]
-        public class SkillTimer: ATimer<SkillManagerComponentC>
+        public class SkillTimer : ATimer<SkillManagerComponentC>
         {
             protected override void Run(SkillManagerComponentC self)
             {
@@ -24,7 +23,7 @@ namespace ET.Client
                 }
             }
         }
-        
+
         [EntitySystem]
         private static void Awake(this SkillManagerComponentC self)
         {
@@ -119,14 +118,14 @@ namespace ET.Client
                 SkillHandlerC aaiHandler = SkillDispatcherComponentC.Instance.Get(skillHandler.SkillConf.GameObjectName);
                 if (skillHandler.IsSkillFinied())
                 {
-                    aaiHandler.OnFinished( skillHandler);
+                    aaiHandler.OnFinished(skillHandler);
                     self.Skills.RemoveAt(i);
                     ObjectPool.Instance.Recycle(skillHandler);
                     continue;
                 }
 
                 //self.Skills[i].OnUpdate();
-                aaiHandler.OnUpdate( skillHandler);
+                aaiHandler.OnUpdate(skillHandler);
             }
 
             if (self.MainHero)
@@ -179,7 +178,7 @@ namespace ET.Client
                 int errorCode = self.CanUseSkill(itemId, skillid);
                 if (errorCode != ErrorCode.ERR_Success)
                 {
-                    EventSystem.Instance.Publish(self.Root(), new ShowFlyTip() { Type = errorCode });
+                    HintHelp.ShowErrorHint(self.Root(), errorCode);
                     return errorCode;
                 }
 
@@ -252,7 +251,7 @@ namespace ET.Client
 
                 if (!string.IsNullOrEmpty(m2C_SkillCmd.Message))
                 {
-                    EventSystem.Instance.Publish(self.Root(), new ShowFlyTip(){ Str = m2C_SkillCmd.Message });
+                    HintHelp.ShowHint(self.Root(), m2C_SkillCmd.Message);
                 }
 
                 return m2C_SkillCmd.Error;
@@ -302,7 +301,7 @@ namespace ET.Client
         {
             if (self.Timer == 0)
             {
-                self.Timer =  self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.SkillTimerC, self);
+                self.Timer = self.Root().GetComponent<TimerComponent>().NewFrameTimer(TimerInvokeType.SkillTimerC, self);
             }
         }
 
@@ -343,8 +342,8 @@ namespace ET.Client
             if (unit.MainHero && !unit.IsRobot())
             {
                 self.AddSkillCD(skillcmd.SkillID, skillcmd.CDEndTime, skillcmd.PublicCDTime);
-                
-                EventSystem.Instance.Publish(self.Root(), new OnSkillUse(){ SkillId = skillcmd.SkillID });
+
+                EventSystem.Instance.Publish(self.Root(), new OnSkillUse() { SkillId = skillcmd.SkillID });
             }
 
             if (unit.Type != UnitType.Player && skillcmd.SkillInfos.Count > 0)
@@ -354,22 +353,22 @@ namespace ET.Client
                 {
                     //float3 direction = target.Position - unit.Position;
                     //float ange =Mathf.Rad2Deg * Mathf.Atan2(direction.x, direction.z);
-                    unit.Rotation =quaternion.Euler(0,  math.radians(skillcmd.TargetAngle) , 0);
+                    unit.Rotation = quaternion.Euler(0, math.radians(skillcmd.TargetAngle), 0);
                 }
                 else
                 {
-                    unit.Rotation = quaternion.Euler(0,  math.radians(skillcmd.TargetAngle) , 0);
+                    unit.Rotation = quaternion.Euler(0, math.radians(skillcmd.TargetAngle), 0);
                 }
             }
             else
-            {  
-                unit.Rotation = quaternion.Euler(0,  math.radians(skillcmd.TargetAngle) , 0);
+            {
+                unit.Rotation = quaternion.Euler(0, math.radians(skillcmd.TargetAngle), 0);
             }
 
             //播放对应攻击动作
             if (skillConfig.IfStopMove == 1)
             {
-                EventSystem.Instance.Publish( self.Root(), new  PlayAnimator()
+                EventSystem.Instance.Publish(self.Root(), new PlayAnimator()
                 {
                     Unit = unit,
                     Animator = skillConfig.SkillAnimation
@@ -378,11 +377,11 @@ namespace ET.Client
             else
             {
                 bool noMoveSkill = skillConfig.GameObjectName.Equals("Skill_Other_XuanFengZhan_1");
-                long SkillMoveTime = noMoveSkill? skillConfig.SkillLiveTime + TimeHelper.ClientNow() : 0;
+                long SkillMoveTime = noMoveSkill ? skillConfig.SkillLiveTime + TimeHelper.ClientNow() : 0;
                 self.SkillMoveTime = SkillMoveTime;
 
                 double singTime = skillConfig.SkillSingTime;
-                self.SkillSingTime = singTime == 0f? 0 : TimeHelper.ClientNow() + (int)(1000f * singTime);
+                self.SkillSingTime = singTime == 0f ? 0 : TimeHelper.ClientNow() + (int)(1000f * singTime);
 
                 double rigibTime = skillConfig.SkillRigidity;
                 long skillRigibTime = TimeHelper.ClientNow() + (int)(1000f * rigibTime);
@@ -394,13 +393,13 @@ namespace ET.Client
 
                 if (!CommonHelp.IfNull(skillConfig.SkillAnimation))
                 {
-                    int fsmType = skillConfig.ComboSkillID > 0? 5 : 4;
+                    int fsmType = skillConfig.ComboSkillID > 0 ? 5 : 4;
                     if (ConfigData.NotCombatSkill.Contains(skillConfig.SkillAnimation))
                     {
                         fsmType = 4;
                     }
 
-                    EventSystem.Instance.Publish( self.Root(), new FsmChange()
+                    EventSystem.Instance.Publish(self.Root(), new FsmChange()
                     {
                         FsmHandlerType = fsmType,
                         SkillId = skillcmd.SkillInfos[0].WeaponSkillID,
@@ -426,7 +425,7 @@ namespace ET.Client
                 self.Skills.Add(skillHandler);
                 //skillHandler.OnInit(skillcmd.SkillInfos[i], unit);
                 SkillHandlerC aaiHandler = SkillDispatcherComponentC.Instance.Get(skillHandler.SkillConf.GameObjectName);
-                aaiHandler.OnInit( skillHandler, unit);
+                aaiHandler.OnInit(skillHandler, unit);
             }
 
             self.AddSkillTimer();

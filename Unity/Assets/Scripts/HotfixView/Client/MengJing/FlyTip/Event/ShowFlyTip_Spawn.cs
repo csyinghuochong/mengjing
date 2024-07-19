@@ -1,6 +1,5 @@
 ﻿namespace ET.Client
 {
-
     [Event(SceneType.Demo)]
     public class ShowFlyTip_Spawn : AEvent<Scene, ShowFlyTip>
     {
@@ -8,11 +7,11 @@
         {
             if (args.Type == 0)
             {
-                scene.GetComponent<FlyTipComponent>().ShowFlyTip(args.Str);
+                FlyTipComponent.Instance.ShowFlyTip(args.Str);
             }
             else
             {
-                scene.GetComponent<FlyTipComponent>().ShowFlyTipDi(args.Str);
+                FlyTipComponent.Instance.ShowFlyTipDi(args.Str);
             }
 
             await ETTask.CompletedTask;

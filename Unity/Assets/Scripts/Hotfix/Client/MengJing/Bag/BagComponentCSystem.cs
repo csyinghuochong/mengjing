@@ -2,9 +2,9 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponentC))]
-    [FriendOf(typeof (BagComponentC))]
-    [EntitySystemOf(typeof (BagComponentC))]
+    [FriendOf(typeof(UserInfoComponentC))]
+    [FriendOf(typeof(BagComponentC))]
+    [EntitySystemOf(typeof(BagComponentC))]
     public static partial class BagComponentCSystem
     {
         [EntitySystem]
@@ -52,7 +52,7 @@ namespace ET.Client
                 else
                 {
                     cellNumber += (int)(1f * itemNum / ItemPileSum);
-                    cellNumber += (itemNum % ItemPileSum > 0? 1 : 0);
+                    cellNumber += (itemNum % ItemPileSum > 0 ? 1 : 0);
                 }
             }
 
@@ -196,15 +196,14 @@ namespace ET.Client
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             if (itemConfig.IfAutoUse == 1)
             {
-                // self.SendUseItem( bagInfo).Coroutine();
+                BagClientNetHelper.RequestUseItem(self.Root(), bagInfo).Coroutine();
                 return;
             }
 
             if (self.RealAddItem)
             {
-                // self.ZoneScene().GetComponent<ShoujiComponent>().OnGetItem(bagInfo.ItemID);
-                // HintHelp.GetInstance().DataUpdate(DataType.BagItemAdd, $"{bagInfo.ItemID}_{addNum}");
-                EventSystem.Instance.Publish(self.Root(), new ShowFlyTip() { Type = 1, Str = $"获得 {itemConfig.ItemName} {addNum}" });
+                // self.Root().GetComponent<ShoujiComponentC>().OnGetItem(bagInfo.ItemID);
+                HintHelp.ShowHint(self.Root(), $"获得 {itemConfig.ItemName} {addNum}");
             }
         }
 

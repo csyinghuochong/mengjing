@@ -15,7 +15,11 @@ namespace ET.Client
 
     public struct ShowFlyTip
     {
+        /// <summary>
+        /// 0 无边框 1 有边框
+        /// </summary>
         public int Type;
+
         public string Str;
     }
 

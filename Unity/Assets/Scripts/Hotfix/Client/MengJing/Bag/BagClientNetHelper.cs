@@ -539,26 +539,26 @@ namespace ET.Client
             int needCell = ItemHelper.GetNeedCell($"{storeSellConfig.SellItemID};{storeSellConfig.SellItemNum * buyNum}");
             if (bagComponent.GetBagLeftCell() < needCell)
             {
-                EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = "背包已经满" });
+                HintHelp.ShowHint(root, "背包已经满");
                 return;
             }
 
             int costType = storeSellConfig.SellType;
             if (costType == 1 && userInfo.Gold < storeSellConfig.SellValue)
             {
-                EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = "金币不足" });
+                HintHelp.ShowHint(root, "金币不足");
                 return;
             }
 
             if (costType == 3 && userInfo.Diamond < storeSellConfig.SellValue)
             {
-                EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = "钻石不足" });
+                HintHelp.ShowHint(root, "钻石不足");
                 return;
             }
 
             if (bagComponent.GetItemNumber(costType) < storeSellConfig.SellValue)
             {
-                EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = "道具不足" });
+                HintHelp.ShowHint(root, "道具不足");
                 return;
             }
 
@@ -891,7 +891,8 @@ namespace ET.Client
             request.OperateBagID_1 = equipmentBagInfo.BagInfoID;
             request.OperateBagID_2 = reelBagInfo.BagInfoID;
 
-            M2C_ItemIncreaseTransferResponse response = (M2C_ItemIncreaseTransferResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
+            M2C_ItemIncreaseTransferResponse response =
+                    (M2C_ItemIncreaseTransferResponse)await root.GetComponent<ClientSenderCompnent>().Call(request);
             return response.Error;
         }
     }

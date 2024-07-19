@@ -122,7 +122,7 @@ namespace ET.Client
                 root.GetComponent<PetComponentC>().RequestXiLian(itemId, petId, response.rolePetInfo);
             }
 
-            EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = "道具在宠物身上发生了作用！" });
+            HintHelp.ShowHint(root, "道具在宠物身上发生了作用！");
             EventSystem.Instance.Publish(root, new PetXiLianUpdate());
 
             return response.Error;

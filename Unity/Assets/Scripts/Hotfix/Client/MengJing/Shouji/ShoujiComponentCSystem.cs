@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (ShoujiComponentC))]
-    [EntitySystemOf(typeof (ShoujiComponentC))]
+    [FriendOf(typeof(ShoujiComponentC))]
+    [EntitySystemOf(typeof(ShoujiComponentC))]
     public static partial class ShoujiComponentCSystem
     {
         [EntitySystem]
@@ -27,7 +27,7 @@ namespace ET.Client
         public static int GetChapterStar(this ShoujiComponentC self, int chapterid)
         {
             ShouJiChapterInfo shouJiChapterInfo = self.GetShouJiChapterInfo(chapterid);
-            return shouJiChapterInfo != null? shouJiChapterInfo.StarNum : 0;
+            return shouJiChapterInfo != null ? shouJiChapterInfo.StarNum : 0;
         }
 
         public static List<PropertyValue> GetChapterPro(this ShoujiComponentC self, int chapterid, int level)

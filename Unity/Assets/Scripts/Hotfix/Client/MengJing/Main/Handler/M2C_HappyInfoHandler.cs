@@ -5,7 +5,7 @@ namespace ET.Client
     {
         protected override async ETTask Run(Scene root, M2C_HappyInfoResult message)
         {
-            EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = "to do : M2C_HappyInfoResult" });
+            HintHelp.ShowHint(root, "to do : M2C_HappyInfoResult");
             root.GetComponent<BattleMessageComponent>().M2C_HappyInfoResult = message;
 
             EventSystem.Instance.Publish(root, new HappyInfo() { M2CHappyInfoResult = message });
