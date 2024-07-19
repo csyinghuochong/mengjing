@@ -58,7 +58,7 @@ namespace ET.Client
             P2C_PaiMaiFindResponse response = await PaiMaiNetHelper.PaiMaiFind(self.Root(), itemType, paimaiItemId);
             if (response.Page == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("道具已经被买走了!");
+                FlyTipComponent.Instance.ShowFlyTip("道具已经被买走了!");
                 return;
             }
 
@@ -292,7 +292,7 @@ namespace ET.Client
                 case 1:
                     if (self.PageIndex >= self.MaxPage_Consume)
                     {
-                        FlyTipComponent.Instance.ShowFlyTipDi("已达最后一页");
+                        FlyTipComponent.Instance.ShowFlyTip("已达最后一页");
                         return;
                     }
 
@@ -301,7 +301,7 @@ namespace ET.Client
                 case 2:
                     if (self.PageIndex >= self.MaxPage_Material)
                     {
-                        FlyTipComponent.Instance.ShowFlyTipDi("已达最后一页");
+                        FlyTipComponent.Instance.ShowFlyTip("已达最后一页");
                         return;
                     }
 
@@ -310,7 +310,7 @@ namespace ET.Client
                 case 3:
                     if (self.PageIndex >= self.MaxPage_Equipment)
                     {
-                        FlyTipComponent.Instance.ShowFlyTipDi("已达最后一页");
+                        FlyTipComponent.Instance.ShowFlyTip("已达最后一页");
                         return;
                     }
 
@@ -319,7 +319,7 @@ namespace ET.Client
                 case 4:
                     if (self.PageIndex >= self.MaxPage_Gemstone)
                     {
-                        FlyTipComponent.Instance.ShowFlyTipDi("已达最后一页");
+                        FlyTipComponent.Instance.ShowFlyTip("已达最后一页");
                         return;
                     }
 
@@ -336,7 +336,7 @@ namespace ET.Client
 
             if (string.IsNullOrEmpty(text))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请输入道具名字！！！");
+                FlyTipComponent.Instance.ShowFlyTip("请输入道具名字！！！");
                 return;
             }
 
@@ -361,14 +361,14 @@ namespace ET.Client
 
             if (findTypeList.Count <= 0 || findItemIdList.Count <= 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("不存在该名称的道具，请输入正确的道具名！！！");
+                FlyTipComponent.Instance.ShowFlyTip("不存在该名称的道具，请输入正确的道具名！！！");
                 return;
             }
 
             long timeNow = TimeHelper.ServerNow();
             if (timeNow - self.SearchTime <= 3000)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("搜索过于频繁！！！");
+                FlyTipComponent.Instance.ShowFlyTip("搜索过于频繁！！！");
                 return;
             }
 
@@ -382,7 +382,7 @@ namespace ET.Client
             self.ShowPaiMaiList();
             if (self.PaiMaiIteminfos_Now.Count <= 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("未找到对应拍卖行道具");
+                FlyTipComponent.Instance.ShowFlyTip("未找到对应拍卖行道具");
             }
         }
 

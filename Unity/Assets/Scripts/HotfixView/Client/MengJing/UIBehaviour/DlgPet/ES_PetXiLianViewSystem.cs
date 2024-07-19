@@ -35,13 +35,13 @@ namespace ET.Client
         {
             if (self.RolePetInfo == null)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请选择宠物！");
+                FlyTipComponent.Instance.ShowFlyTip("请选择宠物！");
                 return;
             }
 
             if (self.CostItemInfo == null)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请选择道具！");
+                FlyTipComponent.Instance.ShowFlyTip("请选择道具！");
                 return;
             }
 
@@ -57,14 +57,14 @@ namespace ET.Client
 
             if ((itemConfig.ItemSubType == 108 || itemConfig.ItemSubType == 109) && self.RolePetInfo.PetLv >= userInfo.Lv + 5)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("宠物等级不能高于玩家5级！");
+                FlyTipComponent.Instance.ShowFlyTip("宠物等级不能高于玩家5级！");
                 return;
             }
 
             PetConfig petConfig = PetConfigCategory.Instance.Get(self.RolePetInfo.ConfigId);
             if (itemConfig.ItemSubType == 119 && self.RolePetInfo.ZiZhi_ChengZhang >= petConfig.ZiZhi_ChengZhang_Max) //成长
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("宠物成长已经达到上限！");
+                FlyTipComponent.Instance.ShowFlyTip("宠物成长已经达到上限！");
                 return;
             }
 
@@ -72,7 +72,7 @@ namespace ET.Client
             {
                 if (PetHelper.IsBianYI(self.RolePetInfo))
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi("变异的宠物不能使用此道具！");
+                    FlyTipComponent.Instance.ShowFlyTip("变异的宠物不能使用此道具！");
                     return;
                 }
             }

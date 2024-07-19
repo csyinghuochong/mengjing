@@ -101,7 +101,7 @@ namespace ET.Client
                 }
                 else
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi("空地数量不足！");
+                    FlyTipComponent.Instance.ShowFlyTip("空地数量不足！");
                 }
             }
         }

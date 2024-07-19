@@ -124,7 +124,7 @@ namespace ET.Client
 
             if (index != -1 && number >= 5 && self.PetTeamList[index] == 0 && operateType != 2)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已达到上阵最大数量！");
+                FlyTipComponent.Instance.ShowFlyTip("已达到上阵最大数量！");
                 return;
             }
 

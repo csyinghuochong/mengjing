@@ -12,7 +12,7 @@
 
             if (args.ErrorCode == ErrorCode.ERR_OtherAccountLogin)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("账号异地登录");
+                FlyTipComponent.Instance.ShowFlyTip("账号异地登录");
                 RunAsync2(scene, args, 100).Coroutine();
             }
             else if (args.ErrorCode == ErrorCode.ERR_KickOutPlayer)

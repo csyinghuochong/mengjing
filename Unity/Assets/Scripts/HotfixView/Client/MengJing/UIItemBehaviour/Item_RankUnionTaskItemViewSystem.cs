@@ -52,13 +52,13 @@ namespace ET.Client
         {
             if (self.TaskPro.taskStatus < (int)TaskStatuEnum.Completed)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("任务还没有完成！");
+                FlyTipComponent.Instance.ShowFlyTip("任务还没有完成！");
                 return;
             }
 
             if (self.TaskPro.taskStatus == (int)TaskStatuEnum.Commited)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已经领取过奖励！");
+                FlyTipComponent.Instance.ShowFlyTip("已经领取过奖励！");
                 return;
             }
 

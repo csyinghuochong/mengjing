@@ -559,7 +559,7 @@ namespace ET.Client
 
             if (itemConfig.ItemSubType - 1 != self.Position)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("孔位不符！");
+                FlyTipComponent.Instance.ShowFlyTip("孔位不符！");
                 return;
             }
 

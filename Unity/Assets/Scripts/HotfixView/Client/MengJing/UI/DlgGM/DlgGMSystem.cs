@@ -43,14 +43,14 @@
             string itemlist = self.View.E_InputField_EmailItemInputField.text;
             if (string.IsNullOrEmpty(itemlist))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("输入不能为空！");
+                FlyTipComponent.Instance.ShowFlyTip("输入不能为空！");
                 return;
             }
 
             E2C_GMEMailResponse response = await MailNetHelper.GMEMail(self.Root(), itemlist);
             if (response.Error == ErrorCode.ERR_Success)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("邮件发送成功！");
+                FlyTipComponent.Instance.ShowFlyTip("邮件发送成功！");
             }
         }
 
@@ -75,7 +75,7 @@
             string reload = self.View.E_InputField_ReLoadValueInputField.text;
             if (reload.Length < 1)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请输入热重载类型！");
+                FlyTipComponent.Instance.ShowFlyTip("请输入热重载类型！");
                 return;
             }
 

@@ -26,7 +26,7 @@ namespace ET.Client
             JiaYuanConfig jiayuanCof = JiaYuanConfigCategory.Instance.Get(jiayuanid);
             if (mysteryConfig.JiaYuanLv > jiayuanCof.Lv)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi($"家园{mysteryConfig.JiaYuanLv}级开启");
+                FlyTipComponent.Instance.ShowFlyTip($"家园{mysteryConfig.JiaYuanLv}级开启");
                 return;
             }
 
@@ -59,7 +59,7 @@ namespace ET.Client
 
             if (self.MysteryItemInfo.ItemNumber < 1)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请等待下次商店刷新");
+                FlyTipComponent.Instance.ShowFlyTip("请等待下次商店刷新");
                 return;
             }
 

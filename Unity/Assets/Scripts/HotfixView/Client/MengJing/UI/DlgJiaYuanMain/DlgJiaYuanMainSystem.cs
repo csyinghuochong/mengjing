@@ -167,7 +167,7 @@ namespace ET.Client
                 return;
             }
 
-            FlyTipComponent.Instance.ShowFlyTipDi("UIJiaYuanPetFeed暂未开放");
+            FlyTipComponent.Instance.ShowFlyTip("UIJiaYuanPetFeed暂未开放");
             await self.Root().GetComponent<UIComponent>().ShowWindowAsync(WindowID.WindowID_JiaYuanPetFeed);
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanPetFeed>().OnInitUI(jiaYuanPet);
         }
@@ -314,7 +314,7 @@ namespace ET.Client
 
             if (gatherNumber == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("附近没有可收获的道具！");
+                FlyTipComponent.Instance.ShowFlyTip("附近没有可收获的道具！");
             }
         }
 
@@ -388,7 +388,7 @@ namespace ET.Client
 
             if (gatherNumber == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("附近没有可收获的道具！");
+                FlyTipComponent.Instance.ShowFlyTip("附近没有可收获的道具！");
             }
         }
 

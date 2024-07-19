@@ -21,14 +21,14 @@ namespace ET.Client
         {
             if (!self.IsHaveZuoQi(self.ZuoQiConfig.Id))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请先激活当前坐骑！");
+                FlyTipComponent.Instance.ShowFlyTip("请先激活当前坐骑！");
                 return;
             }
 
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             if (self.ZuoQiConfig.Id == 10001 && userInfo.Lv < 25)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("等级达到25级才可以骑乘坐骑喔！");
+                FlyTipComponent.Instance.ShowFlyTip("等级达到25级才可以骑乘坐骑喔！");
                 return;
             }
 
@@ -36,7 +36,7 @@ namespace ET.Client
 
             if (response.Error == ErrorCode.ERR_Success)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("激活坐骑成功,清在主界面点击骑乘按钮即可喔！");
+                FlyTipComponent.Instance.ShowFlyTip("激活坐骑成功,清在主界面点击骑乘按钮即可喔！");
             }
         }
 

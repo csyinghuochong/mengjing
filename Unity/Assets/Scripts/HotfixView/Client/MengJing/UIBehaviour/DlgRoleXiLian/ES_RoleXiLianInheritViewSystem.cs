@@ -189,14 +189,14 @@ namespace ET.Client
             int maxInheritTimes = GlobalValueConfigCategory.Instance.Get(117).Value2;
             if (bagInfo.InheritTimes >= maxInheritTimes)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("该装备不可再进行传承鉴定！");
+                FlyTipComponent.Instance.ShowFlyTip("该装备不可再进行传承鉴定！");
                 return;
             }
 
             string costitem = ItemHelper.GetInheritCost(bagInfo.InheritTimes);
             if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem(costitem))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("材料不足！");
+                FlyTipComponent.Instance.ShowFlyTip("材料不足！");
                 return;
             }
 

@@ -339,7 +339,7 @@ namespace ET.Client
 				PopupTipHelp.OpenPopupTip(self.Root(), "分解", tip, async () =>
 				{
 					await BagClientNetHelper.RequestHuiShou(self.Root(), huishouList);
-					FlyTipComponent.Instance.ShowFlyTipDi("分解成功");
+					FlyTipComponent.Instance.ShowFlyTip("分解成功");
 				}, () => { }).Coroutine();
 			}
 			else

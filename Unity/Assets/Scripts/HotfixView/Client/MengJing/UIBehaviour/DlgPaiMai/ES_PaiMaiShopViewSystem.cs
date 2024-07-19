@@ -85,7 +85,7 @@ namespace ET.Client
         {
             if (self.PaiMaiSellId == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请选中要拍卖的商品！");
+                FlyTipComponent.Instance.ShowFlyTip("请选中要拍卖的商品！");
                 return;
             }
 
@@ -93,13 +93,13 @@ namespace ET.Client
             PaiMaiSellConfig paiMaiSellConfig = PaiMaiSellConfigCategory.Instance.Get(self.PaiMaiSellId);
             if (userInfo.Lv < paiMaiSellConfig.BuyLv)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi($"{paiMaiSellConfig.BuyLv}级才能购买！");
+                FlyTipComponent.Instance.ShowFlyTip($"{paiMaiSellConfig.BuyLv}级才能购买！");
                 return;
             }
 
             if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < 1)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("背包已满！");
+                FlyTipComponent.Instance.ShowFlyTip("背包已满！");
                 return;
             }
 
@@ -177,7 +177,7 @@ namespace ET.Client
         {
             if (num > 0 && self.BuyNum >= 100)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("单次购买数量最多为100");
+                FlyTipComponent.Instance.ShowFlyTip("单次购买数量最多为100");
                 return;
             }
 

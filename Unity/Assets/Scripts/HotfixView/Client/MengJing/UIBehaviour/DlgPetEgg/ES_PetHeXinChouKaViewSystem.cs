@@ -69,13 +69,13 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetBagLeftCell() < choukaType)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请预留足够的背包空间！");
+                FlyTipComponent.Instance.ShowFlyTip("请预留足够的背包空间！");
                 return;
             }
 
             if (bagComponent.GetPetHeXinLeftSpace() < choukaType)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请清理一下宠物之核背包！");
+                FlyTipComponent.Instance.ShowFlyTip("请清理一下宠物之核背包！");
                 return;
             }
 

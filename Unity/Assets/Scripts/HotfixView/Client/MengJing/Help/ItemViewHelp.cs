@@ -97,7 +97,7 @@ namespace ET.Client
             }
             else
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("只能存放非绑定的角色装备！");
+                FlyTipComponent.Instance.ShowFlyTip("只能存放非绑定的角色装备！");
             }
         }
 

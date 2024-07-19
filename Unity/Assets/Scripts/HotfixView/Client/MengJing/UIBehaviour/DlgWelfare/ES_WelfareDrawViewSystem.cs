@@ -113,14 +113,14 @@ namespace ET.Client
             int drawReward = numericComponent.GetAsInt(NumericType.DrawReward);
             if (drawReward == 1)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已经参与过抽奖！");
+                FlyTipComponent.Instance.ShowFlyTip("已经参与过抽奖！");
                 return;
             }
 
             long haveHuoyue = self.Root().GetComponent<TaskComponentC>().GetHuoYueDu();
             if (haveHuoyue < 60)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("活跃度不足！");
+                FlyTipComponent.Instance.ShowFlyTip("活跃度不足！");
                 return;
             }
 

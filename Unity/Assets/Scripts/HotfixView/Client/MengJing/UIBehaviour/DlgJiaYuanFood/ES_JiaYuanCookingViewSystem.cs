@@ -33,7 +33,7 @@ namespace ET.Client
         {
             if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < 1)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("背包空间不足！");
+                FlyTipComponent.Instance.ShowFlyTip("背包空间不足！");
                 return;
             }
 
@@ -54,7 +54,7 @@ namespace ET.Client
             if (response.LearnId != 0)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(response.LearnId);
-                FlyTipComponent.Instance.ShowFlyTipDi($"恭喜你学会制作 {itemConfig.ItemName}");
+                FlyTipComponent.Instance.ShowFlyTip($"恭喜你学会制作 {itemConfig.ItemName}");
             }
 
             self.Root().GetComponent<JiaYuanComponentC>().LearnMakeIds_7 = response.LearnMakeIds;

@@ -681,7 +681,7 @@ namespace ET.Client
             {
                 if (self.ItemOpetateType != ItemOperateEnum.PetEquipBag)
                 {
-                    flyTipComponent.ShowFlyTipDi("请到宠物界面操作");
+                    flyTipComponent.ShowFlyTip("请到宠物界面操作");
                     return;
                 }
 
@@ -703,15 +703,15 @@ namespace ET.Client
                         {
                             //战士
                             case 1:
-                                flyTipComponent.ShowFlyTipDi("请选择武器类型为：刀 剑！");
+                                flyTipComponent.ShowFlyTip("请选择武器类型为：刀 剑！");
                                 break;
                             //法师
                             case 2:
-                                flyTipComponent.ShowFlyTipDi("请选择武器类型为：法杖 魔法书！！");
+                                flyTipComponent.ShowFlyTip("请选择武器类型为：法杖 魔法书！！");
                                 break;
                             //猎人
                             case 3:
-                                flyTipComponent.ShowFlyTipDi("本职业无法穿戴此武器");
+                                flyTipComponent.ShowFlyTip("本职业无法穿戴此武器");
                                 break;
                         }
 
@@ -729,15 +729,15 @@ namespace ET.Client
                         {
                             //布甲
                             case 11:
-                                flyTipComponent.ShowFlyTipDi("转职后请选择布甲进行装备！");
+                                flyTipComponent.ShowFlyTip("转职后请选择布甲进行装备！");
                                 break;
                             //轻甲
                             case 12:
-                                flyTipComponent.ShowFlyTipDi("转职后请选择轻甲进行装备！");
+                                flyTipComponent.ShowFlyTip("转职后请选择轻甲进行装备！");
                                 break;
                             //重甲
                             case 13:
-                                flyTipComponent.ShowFlyTipDi("转职后请选择重甲进行装备！");
+                                flyTipComponent.ShowFlyTip("转职后请选择重甲进行装备！");
                                 break;
                         }
 

@@ -130,49 +130,49 @@ namespace ET.Client
 
             if (self.LastSelectItem.IsProtect)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("宠物已锁定！");
+                FlyTipComponent.Instance.ShowFlyTip("宠物已锁定！");
                 return;
             }
 
             if (self.LastSelectItem.PetStatus == 1)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("出战宠物不能分解！");
+                FlyTipComponent.Instance.ShowFlyTip("出战宠物不能分解！");
                 return;
             }
 
             if (self.LastSelectItem.PetStatus == 2)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请先停止家园散步！");
+                FlyTipComponent.Instance.ShowFlyTip("请先停止家园散步！");
                 return;
             }
 
             if (self.LastSelectItem.PetStatus == 3)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请先从仓库取出！");
+                FlyTipComponent.Instance.ShowFlyTip("请先从仓库取出！");
                 return;
             }
 
             if (self.Root().GetComponent<PetComponentC>().TeamPetList.Contains(self.LastSelectItem.Id))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("当前宠物存在于宠物天梯上阵中,不能分解！");
+                FlyTipComponent.Instance.ShowFlyTip("当前宠物存在于宠物天梯上阵中,不能分解！");
                 return;
             }
 
             if (self.Root().GetComponent<PetComponentC>().PetFormations.Contains(self.LastSelectItem.Id))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("当前宠物存在于宠物副本上阵中,不能分解！");
+                FlyTipComponent.Instance.ShowFlyTip("当前宠物存在于宠物副本上阵中,不能分解！");
                 return;
             }
 
             if (PetHelper.IsShenShou(self.LastSelectItem.ConfigId))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("神兽不能放生");
+                FlyTipComponent.Instance.ShowFlyTip("神兽不能放生");
                 return;
             }
 
             if (PetHelper.HavePetHeXin(self.LastSelectItem))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请先卸下宠物之核！");
+                FlyTipComponent.Instance.ShowFlyTip("请先卸下宠物之核！");
                 return;
             }
 
@@ -196,7 +196,7 @@ namespace ET.Client
 
             if (rolePetInfo.PetStatus == 2)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("先停止散步！");
+                FlyTipComponent.Instance.ShowFlyTip("先停止散步！");
                 return;
             }
 
@@ -207,7 +207,7 @@ namespace ET.Client
 
             if (TimeHelper.ClientNow() - cdTime < 180 * TimeHelper.Second)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("出战冷却中！");
+                FlyTipComponent.Instance.ShowFlyTip("出战冷却中！");
                 return;
             }
 
@@ -251,20 +251,20 @@ namespace ET.Client
             string text_old = self.E_InputFieldNameInputField.text;
             if (string.IsNullOrEmpty(text_old) || text_old.Length == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请输入名字！");
+                FlyTipComponent.Instance.ShowFlyTip("请输入名字！");
                 return;
             }
 
             bool mask = MaskWordHelper.Instance.IsContainSensitiveWords(text_old);
             if (mask)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请重新输入！");
+                FlyTipComponent.Instance.ShowFlyTip("请重新输入！");
                 return;
             }
 
             if (text_old.Length > 10)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("名字过长！");
+                FlyTipComponent.Instance.ShowFlyTip("名字过长！");
                 return;
             }
 
@@ -716,7 +716,7 @@ namespace ET.Client
 
             if (itemConfig.ItemSubType - 1 != self.Position)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("孔位不符！");
+                FlyTipComponent.Instance.ShowFlyTip("孔位不符！");
                 return;
             }
 

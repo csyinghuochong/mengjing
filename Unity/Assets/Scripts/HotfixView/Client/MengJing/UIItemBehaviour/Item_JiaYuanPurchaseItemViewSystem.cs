@@ -24,7 +24,7 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetItemNumber(itemid) < 1)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("道具不足！");
+                FlyTipComponent.Instance.ShowFlyTip("道具不足！");
                 return;
             }
 

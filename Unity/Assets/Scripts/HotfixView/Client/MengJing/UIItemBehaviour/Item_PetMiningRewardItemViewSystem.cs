@@ -19,7 +19,7 @@
         {
             if (self.TaskPro.taskStatus != (int)TaskStatuEnum.Completed)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("任务未完成！");
+                FlyTipComponent.Instance.ShowFlyTip("任务未完成！");
                 return;
             }
 

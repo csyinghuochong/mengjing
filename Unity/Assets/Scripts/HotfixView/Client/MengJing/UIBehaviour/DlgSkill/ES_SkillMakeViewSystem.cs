@@ -123,7 +123,7 @@ namespace ET.Client
             int makeType_2 = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.MakeType_2);
             if (makeType_1 == makeId || makeType_2 == makeId)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("该生活技能已学习！");
+                FlyTipComponent.Instance.ShowFlyTip("该生活技能已学习！");
                 return;
             }
 
@@ -180,7 +180,7 @@ namespace ET.Client
                 {
                     if (rechargeNumber < needRecharge)
                     {
-                        FlyTipComponent.Instance.ShowFlyTipDi("充值额度不足！");
+                        FlyTipComponent.Instance.ShowFlyTip("充值额度不足！");
                     }
                     else
                     {
@@ -254,14 +254,14 @@ namespace ET.Client
 
             if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.Vitality < equipMakeConfig.CostVitality)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("活力不足！");
+                FlyTipComponent.Instance.ShowFlyTip("活力不足！");
                 return;
             }
 
             bool success = self.Root().GetComponent<BagComponentC>().CheckNeedItem(costItems);
             if (!success)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("材料不足！");
+                FlyTipComponent.Instance.ShowFlyTip("材料不足！");
                 return;
             }
 

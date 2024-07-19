@@ -66,19 +66,19 @@ namespace ET.Client
 
             if (createName.Contains("*") || !StringHelper.IsSpecialChar(createName))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("名字不合法!");
+                FlyTipComponent.Instance.ShowFlyTip("名字不合法!");
                 return;
             }
 
             if (string.IsNullOrEmpty(createName))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请输入名字！！！");
+                FlyTipComponent.Instance.ShowFlyTip("请输入名字！！！");
                 return;
             }
 
             if (self.Occ == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请选择职业！！！");
+                FlyTipComponent.Instance.ShowFlyTip("请选择职业！！！");
                 return;
             }
 

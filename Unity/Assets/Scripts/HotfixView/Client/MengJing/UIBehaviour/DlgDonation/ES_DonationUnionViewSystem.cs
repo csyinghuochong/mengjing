@@ -69,7 +69,7 @@ namespace ET.Client
             }
             else
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("未报名！");
+                FlyTipComponent.Instance.ShowFlyTip("未报名！");
             }
         }
 
@@ -80,7 +80,7 @@ namespace ET.Client
 
             if (numericComponent.GetAsLong(NumericType.UnionId_0) == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("没有家族！");
+                FlyTipComponent.Instance.ShowFlyTip("没有家族！");
                 return;
             }
 
@@ -88,7 +88,7 @@ namespace ET.Client
             {
                 if (self.UnionListItems[i].UnionId == numericComponent.GetAsLong(NumericType.UnionId_0))
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi("已报名！");
+                    FlyTipComponent.Instance.ShowFlyTip("已报名！");
                     return;
                 }
             }
@@ -98,7 +98,7 @@ namespace ET.Client
             UnionPlayerInfo unionPlayerInfo = UnionHelper.GetUnionPlayerInfo(unionrespose.UnionMyInfo.UnionPlayerList, unit.Id);
             if (unionPlayerInfo.Position == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("没有权限！");
+                FlyTipComponent.Instance.ShowFlyTip("没有权限！");
                 return;
             }
 

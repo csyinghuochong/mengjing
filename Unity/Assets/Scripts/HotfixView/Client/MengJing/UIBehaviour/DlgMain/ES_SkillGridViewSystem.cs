@@ -175,7 +175,7 @@ namespace ET.Client
                 Unit targetUnit = null;
                 if (targetId == 0)
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi("请选中施法目标");
+                    FlyTipComponent.Instance.ShowFlyTip("请选中施法目标");
                     return;
                 }
 
@@ -183,7 +183,7 @@ namespace ET.Client
 
                 if (targetUnit == null || Vector3.Distance(targetUnit.Position, myUnit.Position) > self.SkillWuqiConfig.SkillRangeSize)
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi("施法距离太远");
+                    FlyTipComponent.Instance.ShowFlyTip("施法距离太远");
                     return;
                 }
 
@@ -211,7 +211,7 @@ namespace ET.Client
                 BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfoByConfigId(self.SkillPro.SkillID);
                 if (bagInfo == null)
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi($"道具 {ItemConfigCategory.Instance.Get(self.SkillPro.SkillID).ItemName} 不足");
+                    FlyTipComponent.Instance.ShowFlyTip($"道具 {ItemConfigCategory.Instance.Get(self.SkillPro.SkillID).ItemName} 不足");
                     return;
                 }
 

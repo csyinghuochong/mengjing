@@ -22,13 +22,13 @@ namespace ET.Client
         {
             if (self.PetNumber == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("出战队伍不能为空！");
+                FlyTipComponent.Instance.ShowFlyTip("出战队伍不能为空！");
                 return;
             }
 
             if (self.Defend)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("抢矿后原占有矿会变成无人看守的矿！");
+                FlyTipComponent.Instance.ShowFlyTip("抢矿后原占有矿会变成无人看守的矿！");
             }
 
             self.SelectHandler.Invoke(self.TeamId);

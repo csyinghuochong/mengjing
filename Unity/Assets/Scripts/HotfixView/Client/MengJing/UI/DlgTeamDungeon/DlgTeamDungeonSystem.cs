@@ -111,7 +111,7 @@ namespace ET.Client
             TeamInfo teamInfo = self.Root().GetComponent<TeamComponentC>().GetSelfTeam();
             if (teamInfo == null || teamInfo.SceneId == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请先创建或加入副本队伍");
+                FlyTipComponent.Instance.ShowFlyTip("请先创建或加入副本队伍");
                 return false;
             }
 

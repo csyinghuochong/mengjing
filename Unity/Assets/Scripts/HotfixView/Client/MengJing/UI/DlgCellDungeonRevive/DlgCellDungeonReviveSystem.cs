@@ -96,13 +96,13 @@ namespace ET.Client
             bool success = bagComponent.CheckNeedItem(reviveCost);
             if (!success)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("道具不足");
+                FlyTipComponent.Instance.ShowFlyTip("道具不足");
                 return;
             }
 
             if (self.SceneType == SceneTypeEnum.UnionRace)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("不支持复活");
+                FlyTipComponent.Instance.ShowFlyTip("不支持复活");
                 return;
             }
 
@@ -137,11 +137,11 @@ namespace ET.Client
                 {
                     if (self.SceneType == SceneTypeEnum.LocalDungeon)
                     {
-                        FlyTipComponent.Instance.ShowFlyTipDi($"{self.LeftTime}秒后可返回主城！");
+                        FlyTipComponent.Instance.ShowFlyTip($"{self.LeftTime}秒后可返回主城！");
                     }
                     else
                     {
-                        FlyTipComponent.Instance.ShowFlyTipDi($"{self.LeftTime}秒后可返回出生点！");
+                        FlyTipComponent.Instance.ShowFlyTip($"{self.LeftTime}秒后可返回出生点！");
                     }
                 }
                 else

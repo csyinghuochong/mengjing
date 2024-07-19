@@ -266,7 +266,7 @@ namespace ET.Client
                 int otlv = skillSetComponent.GetOtherMinLevel();
                 if (otlv <= hplv)
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi("请先升级其他护盾！");
+                    FlyTipComponent.Instance.ShowFlyTip("请先升级其他护盾！");
                     return;
                 }
             }
@@ -275,7 +275,7 @@ namespace ET.Client
 
             if (response.AddExp > 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("注入成功!本次增加" + response.AddExp + "点魂值");
+                FlyTipComponent.Instance.ShowFlyTip("注入成功!本次增加" + response.AddExp + "点魂值");
             }
 
             self.Root().GetComponent<SkillSetComponentC>().LifeShieldList = response.ShieldList;

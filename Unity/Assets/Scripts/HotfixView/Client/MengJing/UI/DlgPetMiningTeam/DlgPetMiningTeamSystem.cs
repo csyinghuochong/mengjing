@@ -122,7 +122,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (defendteamids.Contains(team) && unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.PetMineCDTime) > TimeHelper.ServerNow())
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("挑战冷却中，无法更换");
+                FlyTipComponent.Instance.ShowFlyTip("挑战冷却中，无法更换");
                 return;
             }
 

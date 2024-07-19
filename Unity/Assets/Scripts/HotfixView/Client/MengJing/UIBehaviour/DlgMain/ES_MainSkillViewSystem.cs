@@ -78,7 +78,7 @@ namespace ET.Client
             int now_horse = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HorseRide);
             if (now_horse == 0 && !self.Root().GetComponent<BattleMessageComponent>().IsCanRideHorse())
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("战斗状态不能骑马!");
+                FlyTipComponent.Instance.ShowFlyTip("战斗状态不能骑马!");
                 return;
             }
 
@@ -91,7 +91,7 @@ namespace ET.Client
                 {
                     if (showtip)
                     {
-                        FlyTipComponent.Instance.ShowFlyTipDi("该场景不能骑马!");
+                        FlyTipComponent.Instance.ShowFlyTip("该场景不能骑马!");
                     }
 
                     return;
@@ -124,7 +124,7 @@ namespace ET.Client
             BagInfo equip_2 = bagComponent.GetEquipBySubType(ItemLocType.ItemLocEquip_2, (int)ItemSubTypeEnum.Wuqi);
             if (equip_1 == null || equip_2 == null)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请先在对应位置装备武器！");
+                FlyTipComponent.Instance.ShowFlyTip("请先在对应位置装备武器！");
                 return;
             }
 
@@ -265,7 +265,7 @@ namespace ET.Client
                 case 1:
                     if (chengJiuComponent.RandomDrop == 1)
                     {
-                        FlyTipComponent.Instance.ShowFlyTipDi("每日只能获取一次奖励！");
+                        FlyTipComponent.Instance.ShowFlyTip("每日只能获取一次奖励！");
                         return;
                     }
 
@@ -617,7 +617,7 @@ namespace ET.Client
 
         public static void OnEnterCancelButton(this ES_MainSkill self)
         {
-            FlyTipComponent.Instance.ShowFlyTipDi("取消技能施法");
+            FlyTipComponent.Instance.ShowFlyTip("取消技能施法");
 
             for (int i = 0; i < self.UISkillGirdList.Count; i++)
             {

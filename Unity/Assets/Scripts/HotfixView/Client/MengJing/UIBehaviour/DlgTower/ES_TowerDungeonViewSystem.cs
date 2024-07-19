@@ -47,7 +47,7 @@ namespace ET.Client
             string[] jianyiLevel = globalValueConfig.Value.Split(';');
             if (userInfoComponent.UserInfo.Lv < int.Parse(jianyiLevel[self.FubenDifficulty - 1]))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi($"{jianyiLevel[self.FubenDifficulty - 1]}级进入！");
+                FlyTipComponent.Instance.ShowFlyTip($"{jianyiLevel[self.FubenDifficulty - 1]}级进入！");
                 return;
             }
 

@@ -42,7 +42,7 @@ namespace ET.Client
         {
             if (self.SellId == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请选择道具！");
+                FlyTipComponent.Instance.ShowFlyTip("请选择道具！");
                 return;
             }
 
@@ -111,7 +111,7 @@ namespace ET.Client
         {
             if (num > 0 && self.BuyNum >= 100)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("单次购买数量最多为100");
+                FlyTipComponent.Instance.ShowFlyTip("单次购买数量最多为100");
                 return;
             }
 

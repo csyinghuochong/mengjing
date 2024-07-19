@@ -185,7 +185,7 @@ namespace ET.Client
             M2C_JiaYuanPetFeedResponse response = await JiaYuanNetHelper.JiaYuanPetFeedRequest(self.Root(), self.JiaYuanPet.unitId, idslist);
             self.Root().GetComponent<JiaYuanComponentC>().JiaYuanPetList_2 = response.JiaYuanPetList;
 
-            FlyTipComponent.Instance.ShowFlyTipDi($"宠物增加 {response.MoodAdd}心情值");
+            FlyTipComponent.Instance.ShowFlyTip($"宠物增加 {response.MoodAdd}心情值");
 
             self.OnUpdateItemList();
             self.OnUpdatePetInfo();

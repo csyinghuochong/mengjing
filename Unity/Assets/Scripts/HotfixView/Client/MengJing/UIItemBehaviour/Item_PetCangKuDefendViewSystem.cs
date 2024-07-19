@@ -24,7 +24,7 @@ namespace ET.Client
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
             if (petComponent.PetCangKuOpen.Contains(self.Index - 1))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已开启！");
+                FlyTipComponent.Instance.ShowFlyTip("已开启！");
                 return;
             }
 
@@ -33,7 +33,7 @@ namespace ET.Client
             int petNum = jiaYuanConfig.PetNum;
             if (petNum <= petComponent.PetCangKuOpen.Count)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("家园等级不足！");
+                FlyTipComponent.Instance.ShowFlyTip("家园等级不足！");
                 return;
             }
 
@@ -49,7 +49,7 @@ namespace ET.Client
             string costitem = ConfigData.PetOpenCangKu[self.Index - 1];
             if (!self.Root().GetComponent<BagComponentC>().CheckNeedItem(costitem))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("家园资金不足！");
+                FlyTipComponent.Instance.ShowFlyTip("家园资金不足！");
                 return;
             }
 
@@ -84,7 +84,7 @@ namespace ET.Client
             int maxNum = PetHelper.GetPetMaxNumber(userInfo.Lv, petexpendNumber);
             if (PetHelper.GetBagPetNum(self.Root().GetComponent<PetComponentC>().RolePetInfos) >= maxNum)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("宠物格子不足！");
+                FlyTipComponent.Instance.ShowFlyTip("宠物格子不足！");
                 return;
             }
 

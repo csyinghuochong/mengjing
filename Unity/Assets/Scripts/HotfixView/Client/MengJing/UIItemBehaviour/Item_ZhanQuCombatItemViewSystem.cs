@@ -58,14 +58,14 @@
             int needCombat = int.Parse(activityInfo.Par_1);
             if (self.Root().GetComponent<UserInfoComponentC>().UserInfo.Combat < needCombat)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("战力不足！");
+                FlyTipComponent.Instance.ShowFlyTip("战力不足！");
                 return;
             }
 
             ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
             if (activityComponent.ZhanQuReceiveIds.Contains(self.ActivityConfig.Id))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已经领取过该奖励！");
+                FlyTipComponent.Instance.ShowFlyTip("已经领取过该奖励！");
                 return;
             }
 

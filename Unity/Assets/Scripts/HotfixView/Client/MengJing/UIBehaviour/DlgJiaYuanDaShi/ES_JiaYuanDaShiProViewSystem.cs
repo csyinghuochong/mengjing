@@ -133,7 +133,7 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetItemNumber(bagInfo.ItemID) < 1)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("道具数量不足！");
+                FlyTipComponent.Instance.ShowFlyTip("道具数量不足！");
                 return;
             }
 
@@ -175,7 +175,7 @@ namespace ET.Client
                 asstips += $"{pname}: +{response.JiaYuanProAdd[i].Value} ";
             }
 
-            FlyTipComponent.Instance.ShowFlyTipDi(asstips);
+            FlyTipComponent.Instance.ShowFlyTip(asstips);
 
             JiaYuanComponentC jiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
             jiaYuanComponentC.JiaYuanProList_7 = response.JiaYuanProList;

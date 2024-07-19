@@ -81,7 +81,7 @@ namespace ET.Client
                 return;
             }
 
-            FlyTipComponent.Instance.ShowFlyTipDi("UIUnionJingXuan 暂未开放");
+            FlyTipComponent.Instance.ShowFlyTip("UIUnionJingXuan 暂未开放");
             await ETTask.CompletedTask;
             // UI uI = await UIHelper.Create(self.ZoneScene(), UIType.UIUnionJingXuan);
             // uI.GetComponent<UIUnionJingXuanComponent>().OnUpdateUI(self.UnionInfo);
@@ -93,13 +93,13 @@ namespace ET.Client
             bool mask = MaskWordHelper.Instance.IsContainSensitiveWords(text);
             if (mask)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("输入不合法!");
+                FlyTipComponent.Instance.ShowFlyTip("输入不合法!");
                 return;
             }
 
             if (!StringHelper.IsSpecialChar(text))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("输入不合法!");
+                FlyTipComponent.Instance.ShowFlyTip("输入不合法!");
                 return;
             }
 
@@ -139,7 +139,7 @@ namespace ET.Client
             bool mask = MaskWordHelper.Instance.IsContainSensitiveWords(text);
             if (mask)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请重新输入！");
+                FlyTipComponent.Instance.ShowFlyTip("请重新输入！");
                 return;
             }
 
@@ -158,7 +158,7 @@ namespace ET.Client
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.UserId == self.UnionInfo.LeaderId && self.UnionInfo.UnionPlayerList.Count > 1)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("族长不能离开家族, 请先转移族长！");
+                FlyTipComponent.Instance.ShowFlyTip("族长不能离开家族, 请先转移族长！");
                 return;
             }
 
@@ -180,7 +180,7 @@ namespace ET.Client
 
             self.EG_ShowSetRectTransform.gameObject.SetActive(false);
 
-            FlyTipComponent.Instance.ShowFlyTipDi("UIUnionApplyList 暂未开放");
+            FlyTipComponent.Instance.ShowFlyTip("UIUnionApplyList 暂未开放");
             // UIHelper.Create(self.ZoneScene(), UIType.UIUnionApplyList).Coroutine();
             // UI ui = UIHelper.GetUI(self.ZoneScene(), UIType.UIUnionApplyList);
             // ui.GetComponent<UIUnionApplyListComponent>().ActionFunc = () => { self.ShowSetShow(); };

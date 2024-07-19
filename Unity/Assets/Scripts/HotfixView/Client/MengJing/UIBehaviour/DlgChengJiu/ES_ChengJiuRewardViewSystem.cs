@@ -84,13 +84,13 @@ namespace ET.Client
             ChengJiuRewardConfig chengJiuConfig = ChengJiuRewardConfigCategory.Instance.Get(self.RewardId);
             if (chengJiuComponent.TotalChengJiuPoint < chengJiuConfig.NeedPoint)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("成就点不足！");
+                FlyTipComponent.Instance.ShowFlyTip("成就点不足！");
                 return;
             }
 
             if (chengJiuComponent.AlreadReceivedId.Contains(self.RewardId))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已经领取过该奖励！");
+                FlyTipComponent.Instance.ShowFlyTip("已经领取过该奖励！");
                 return;
             }
 

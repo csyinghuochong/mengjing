@@ -27,7 +27,7 @@ namespace ET.Client
             TeamInfo teamInfo = self.Root().GetComponent<TeamComponentC>().GetSelfTeam();
             if (teamInfo != null && teamInfo.SceneId != 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已经有队伍了");
+                FlyTipComponent.Instance.ShowFlyTip("已经有队伍了");
                 return;
             }
 

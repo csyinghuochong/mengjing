@@ -47,7 +47,7 @@
             long selfDiamond = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Diamond;
             if (selfDiamond < unionConfig.DonateDiamond)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("钻石数量不足！");
+                FlyTipComponent.Instance.ShowFlyTip("钻石数量不足！");
                 return;
             }
 
@@ -60,7 +60,7 @@
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.UnionDiamondDonationNumber) >= 10)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("捐献次数已达上限！");
+                FlyTipComponent.Instance.ShowFlyTip("捐献次数已达上限！");
                 return;
             }
 
@@ -75,7 +75,7 @@
             long selfgold = self.Root().GetComponent<UserInfoComponentC>().UserInfo.Gold;
             if (selfgold < unionConfig.DonateGold)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("金币数量不足！");
+                FlyTipComponent.Instance.ShowFlyTip("金币数量不足！");
                 return;
             }
 
@@ -88,7 +88,7 @@
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.UnionDonationNumber) >= 5)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("捐献次数已达上限！");
+                FlyTipComponent.Instance.ShowFlyTip("捐献次数已达上限！");
                 return;
             }
 

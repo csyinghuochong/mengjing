@@ -139,14 +139,14 @@ namespace ET.Client
             bool canget = TaskHelper.IsDayTaskComplete(taskComponent.RoleComoleteTaskList, self.Day);
             if (!canget)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("所有任务还没有完成！");
+                FlyTipComponent.Instance.ShowFlyTip("所有任务还没有完成！");
                 return;
             }
 
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.WelfareTaskRewards.Contains(self.Day))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已经领取过奖励！");
+                FlyTipComponent.Instance.ShowFlyTip("已经领取过奖励！");
                 return;
             }
 

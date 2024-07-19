@@ -25,7 +25,7 @@ namespace ET.Client
 
             if (glod < storeSellConfig.SellValue)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("货币不足！");
+                FlyTipComponent.Instance.ShowFlyTip("货币不足！");
                 return;
             }
 

@@ -35,13 +35,13 @@ namespace ET.Client
 
             if (self.Position == 1 && jiayuanCof.Lv < 10)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("10级开启！");
+                FlyTipComponent.Instance.ShowFlyTip("10级开启！");
                 return;
             }
 
             if (self.Position == 2 && jiayuanCof.Lv < 20)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("20级开启！");
+                FlyTipComponent.Instance.ShowFlyTip("20级开启！");
                 return;
             }
 

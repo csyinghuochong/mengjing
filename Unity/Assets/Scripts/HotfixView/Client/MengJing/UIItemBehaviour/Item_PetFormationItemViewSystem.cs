@@ -32,7 +32,7 @@ namespace ET.Client
         {
             if (self.E_ImageFightImage.gameObject.activeSelf)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请先下阵！");
+                FlyTipComponent.Instance.ShowFlyTip("请先下阵！");
                 return;
             }
 

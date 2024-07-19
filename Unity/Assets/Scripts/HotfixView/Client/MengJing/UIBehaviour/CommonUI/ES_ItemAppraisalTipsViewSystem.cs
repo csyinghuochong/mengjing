@@ -392,7 +392,7 @@ namespace ET.Client
                 BagInfo costbaginfo = bagComponentC.GetBagInfo(appraisalItem);
                 if (costbaginfo == null)
                 {
-                    self.Root().GetComponent<FlyTipComponent>().ShowFlyTipDi("道具不足！");
+                    self.Root().GetComponent<FlyTipComponent>().ShowFlyTip("道具不足！");
                     return;
                 }
 

@@ -62,7 +62,7 @@
                 int sonsceneid = self.Root().GetComponent<MapComponent>().SonSceneId;
                 if (!PetFubenConfigCategory.Instance.Contain(sonsceneid))
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi("已通关！");
+                    FlyTipComponent.Instance.ShowFlyTip("已通关！");
                     return;
                 }
 
@@ -81,7 +81,7 @@
                 int sonsceneid = self.Root().GetComponent<MapComponent>().SonSceneId + 1;
                 if (!PetFubenConfigCategory.Instance.Contain(sonsceneid))
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi("已通关！");
+                    FlyTipComponent.Instance.ShowFlyTip("已通关！");
                     return;
                 }
 
@@ -94,7 +94,7 @@
                 int sonsceneid = self.Root().GetComponent<MapComponent>().SonSceneId + 1;
                 if (!TowerConfigCategory.Instance.Contain(sonsceneid))
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi("已通关！");
+                    FlyTipComponent.Instance.ShowFlyTip("已通关！");
                     return;
                 }
 

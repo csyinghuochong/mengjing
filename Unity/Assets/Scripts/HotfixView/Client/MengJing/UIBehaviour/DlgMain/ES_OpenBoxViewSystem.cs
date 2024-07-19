@@ -81,14 +81,14 @@ namespace ET.Client
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             if (userInfo.PiLao <= 0 && monsterConfig.MonsterSonType == 56)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("体力不足,无法拾取");
+                FlyTipComponent.Instance.ShowFlyTip("体力不足,无法拾取");
                 return;
             }
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetBagLeftCell() < 1 && monsterConfig.MonsterSonType == 57)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("背包空间不足,无法拾取");
+                FlyTipComponent.Instance.ShowFlyTip("背包空间不足,无法拾取");
                 return;
             }
 
@@ -102,7 +102,7 @@ namespace ET.Client
             if (itemneeds.Length > 2 && !bagComponent.CheckNeedItem(itemneeds))
             {
                 self.uiTransform.gameObject.SetActive(false);
-                FlyTipComponent.Instance.ShowFlyTipDi($"道具不足，需要道具 {CommonViewHelper.GetNeedItemDesc(itemneeds)}！");
+                FlyTipComponent.Instance.ShowFlyTip($"道具不足，需要道具 {CommonViewHelper.GetNeedItemDesc(itemneeds)}！");
                 return;
             }
 
@@ -148,7 +148,7 @@ namespace ET.Client
                     int maxNum = PetHelper.GetPetMaxNumber(userInfo.Lv, petexpendNumber);
                     if (PetHelper.GetBagPetNum(self.Root().GetComponent<PetComponentC>().RolePetInfos) >= maxNum)
                     {
-                        FlyTipComponent.Instance.ShowFlyTipDi("宠物格子不足！");
+                        FlyTipComponent.Instance.ShowFlyTip("宠物格子不足！");
                         return;
                     }
                 }

@@ -72,7 +72,7 @@ namespace ET.Client
             JiaYuanConfig jiayuanCof = JiaYuanConfigCategory.Instance.Get(jiayuanid);
             if (myJiaYuanPastureConfig.BuyJiaYuanLv > jiayuanCof.Lv)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi($"家园{myJiaYuanPastureConfig.BuyJiaYuanLv}级开启");
+                FlyTipComponent.Instance.ShowFlyTip($"家园{myJiaYuanPastureConfig.BuyJiaYuanLv}级开启");
                 return;
             }
 
@@ -102,7 +102,7 @@ namespace ET.Client
 
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>().OnUpdatePlanNumber();
 
-            FlyTipComponent.Instance.ShowFlyTipDi($"购买{mysteryConfig.Name}成功");
+            FlyTipComponent.Instance.ShowFlyTip($"购买{mysteryConfig.Name}成功");
         }
     }
 }

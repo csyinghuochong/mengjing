@@ -202,7 +202,7 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetBagLeftCell() < 1)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请至少预留一个格子");
+                FlyTipComponent.Instance.ShowFlyTip("请至少预留一个格子");
                 return;
             }
 
@@ -239,7 +239,7 @@ namespace ET.Client
 
             if (costgold <= 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("当前背包暂无可合成宝石");
+                FlyTipComponent.Instance.ShowFlyTip("当前背包暂无可合成宝石");
                 return;
             }
 
@@ -254,7 +254,7 @@ namespace ET.Client
             int errorCode = await BagClientNetHelper.RequestSortByLoc(self.Root(), ItemLocType.ItemLocBag);
             if (errorCode == ErrorCode.ERR_Success)
             {
-                flyTipComponent.ShowFlyTipDi("整理完成!");
+                flyTipComponent.ShowFlyTip("整理完成!");
             }
         }
 

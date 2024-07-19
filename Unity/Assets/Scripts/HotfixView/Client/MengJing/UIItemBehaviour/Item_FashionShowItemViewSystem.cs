@@ -46,7 +46,7 @@ namespace ET.Client
                 {
                     if (!bagComponent.CheckNeedItem(fashionConfig.ActiveCost))
                     {
-                        FlyTipComponent.Instance.ShowFlyTipDi("道具不足");
+                        FlyTipComponent.Instance.ShowFlyTip("道具不足");
                         return;
                     }
 

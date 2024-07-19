@@ -29,14 +29,14 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetExploreNumber) < self.RewardKey)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("条件未达到！");
+                FlyTipComponent.Instance.ShowFlyTip("条件未达到！");
                 return;
             }
 
             if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() <
                 ConfigData.PetExploreReward[self.RewardKey].Split('@').Length - 1)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("背包空间不足！");
+                FlyTipComponent.Instance.ShowFlyTip("背包空间不足！");
                 return;
             }
 

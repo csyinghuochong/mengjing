@@ -125,7 +125,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeSign) != 1)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("不满足领取条件");
+                FlyTipComponent.Instance.ShowFlyTip("不满足领取条件");
                 return;
             }
 
@@ -133,7 +133,7 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetBagLeftCell() < ItemHelper.GetNeedCell(activityConfig.Par_2))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("不满足领取条件");
+                FlyTipComponent.Instance.ShowFlyTip("不满足领取条件");
                 return;
             }
 
@@ -147,20 +147,20 @@ namespace ET.Client
             ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
             if (activityComponent.TotalSignNumber == 30)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已领完全部奖励！");
+                FlyTipComponent.Instance.ShowFlyTip("已领完全部奖励！");
                 return;
             }
 
             long serverNow = TimeHelper.ServerNow();
             if (CommonHelp.GetDayByTime(serverNow) == CommonHelp.GetDayByTime(activityComponent.LastSignTime))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("当日奖励已领取！");
+                FlyTipComponent.Instance.ShowFlyTip("当日奖励已领取！");
                 return;
             }
 
             if (activityComponent.ActivityReceiveIds.Contains(self.ActivityId))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("当日奖励已领取！");
+                FlyTipComponent.Instance.ShowFlyTip("当日奖励已领取！");
                 return;
             }
 

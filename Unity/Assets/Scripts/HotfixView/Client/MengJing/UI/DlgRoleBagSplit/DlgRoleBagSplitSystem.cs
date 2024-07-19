@@ -69,7 +69,7 @@
             int errorCode = await BagClientNetHelper.RequestSplitItem(self.Root(), self.BagInfo, (int)self.Num);
             if (errorCode == ErrorCode.ERR_Success)
             {
-                flyTipComponent.ShowFlyTipDi("拆分完成!");
+                flyTipComponent.ShowFlyTip("拆分完成!");
             }
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_RoleBagSplit);

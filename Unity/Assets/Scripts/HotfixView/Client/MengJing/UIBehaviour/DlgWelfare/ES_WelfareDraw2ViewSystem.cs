@@ -100,7 +100,7 @@ namespace ET.Client
             {
                 if (numericComponent.GetAsLong(NumericType.RechargeNumber) / 50 - numericComponent.GetAsLong(NumericType.WelfareChouKaNumber) <= 0)
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi("次数不足");
+                    FlyTipComponent.Instance.ShowFlyTip("次数不足");
                     return;
                 }
 

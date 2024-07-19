@@ -98,20 +98,20 @@ namespace ET.Client
             UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(self.UserInfo.UnionKeJiList[self.Position]);
             if (unionKeJiConfig.NextID == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已经达到满级！");
+                FlyTipComponent.Instance.ShowFlyTip("已经达到满级！");
                 return;
             }
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (!bagComponent.CheckNeedItem(unionKeJiConfig.LearnCost))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("道具数量不足！");
+                FlyTipComponent.Instance.ShowFlyTip("道具数量不足！");
                 return;
             }
 
             if (unionKeJiConfig.NextID > self.UnionMyInfo.UnionKeJiList[self.Position])
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("等级不足！");
+                FlyTipComponent.Instance.ShowFlyTip("等级不足！");
                 return;
             }
 

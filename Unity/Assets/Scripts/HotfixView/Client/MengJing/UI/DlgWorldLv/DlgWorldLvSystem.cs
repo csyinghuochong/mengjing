@@ -56,7 +56,7 @@
 
             if (userInfo.Lv < self.ServerInfo.WorldLv)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("低于世界等级无法兑换");
+                FlyTipComponent.Instance.ShowFlyTip("低于世界等级无法兑换");
                 return;
             }
 
@@ -65,7 +65,7 @@
             int costExp = (int)(expCof.UpExp * 0.2f);
             if (userInfo.Exp < costExp)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("低于20%经验无法兑换");
+                FlyTipComponent.Instance.ShowFlyTip("低于20%经验无法兑换");
                 return;
             }
 

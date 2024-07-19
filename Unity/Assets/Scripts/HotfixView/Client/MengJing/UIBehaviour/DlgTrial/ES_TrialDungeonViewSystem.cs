@@ -205,7 +205,7 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetBagLeftCell() < 2)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请清理一下背包！");
+                FlyTipComponent.Instance.ShowFlyTip("请清理一下背包！");
                 return;
             }
 
@@ -226,7 +226,7 @@ namespace ET.Client
 
             if (self.TowerId > nextId && nextId != 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请激活前置关卡！");
+                FlyTipComponent.Instance.ShowFlyTip("请激活前置关卡！");
                 return;
             }
 

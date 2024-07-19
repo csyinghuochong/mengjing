@@ -85,7 +85,7 @@ namespace ET.Client
             long leftnumber = bagComponent.GetItemNumber(bagInfo.ItemID);
             if (leftnumber <= 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("道具不足！");
+                FlyTipComponent.Instance.ShowFlyTip("道具不足！");
                 return;
             }
 
@@ -155,7 +155,7 @@ namespace ET.Client
                 int maxNum = PetHelper.GetPetMaxNumber(userInfo.Lv, petexpendNumber);
                 if (PetHelper.GetBagPetNum(self.Root().GetComponent<PetComponentC>().RolePetInfos) >= maxNum)
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi("宠物格子不足！");
+                    FlyTipComponent.Instance.ShowFlyTip("宠物格子不足！");
                     return;
                 }
             }
@@ -168,7 +168,7 @@ namespace ET.Client
 
             if (response.Error == ErrorCode.ERR_Success && response.Message != "1")
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("恭喜你,抓捕成功！");
+                FlyTipComponent.Instance.ShowFlyTip("恭喜你,抓捕成功！");
             }
 
             if (response.Error == ErrorCode.ERR_ZhuaBuFail)
@@ -178,7 +178,7 @@ namespace ET.Client
                 strList.Add("抓铺的动作太大,被他发现后马上的逃走了!");
 
                 int randInt = RandomHelper.RandomNumber(0, strList.Count);
-                FlyTipComponent.Instance.ShowFlyTipDi(strList[randInt]);
+                FlyTipComponent.Instance.ShowFlyTip(strList[randInt]);
             }
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ZhuaPu);

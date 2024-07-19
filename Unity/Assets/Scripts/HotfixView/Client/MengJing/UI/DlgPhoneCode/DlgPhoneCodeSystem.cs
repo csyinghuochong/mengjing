@@ -54,7 +54,7 @@
 
             self.OnRquestBingPhone(phone).Coroutine();
 
-            FlyTipComponent.Instance.ShowFlyTipDi("功能暂未开放");
+            FlyTipComponent.Instance.ShowFlyTip("功能暂未开放");
         }
 
         public static async ETTask OnRquestBingPhone(this DlgPhoneCode self, string phone)

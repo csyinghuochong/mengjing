@@ -43,7 +43,7 @@ namespace ET.Client
 
             if (numericComponent.GetAsInt(NumericType.JiaYuanExchangeExp) >= 10)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("兑换次数不足！");
+                FlyTipComponent.Instance.ShowFlyTip("兑换次数不足！");
                 return;
             }
 
@@ -51,7 +51,7 @@ namespace ET.Client
             JiaYuanConfig jiaYuanConfig = JiaYuanConfigCategory.Instance.Get(userInfo.JiaYuanLv);
             if (userInfo.JiaYuanFund < jiaYuanConfig.ExchangeExpCostZiJin)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("家园资金不足！");
+                FlyTipComponent.Instance.ShowFlyTip("家园资金不足！");
                 return;
             }
 
@@ -66,7 +66,7 @@ namespace ET.Client
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             if (numericComponent.GetAsInt(NumericType.JiaYuanExchangeZiJin) >= 10)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("兑换次数不足！");
+                FlyTipComponent.Instance.ShowFlyTip("兑换次数不足！");
                 return;
             }
 
@@ -74,7 +74,7 @@ namespace ET.Client
             JiaYuanConfig jiaYuanConfig = JiaYuanConfigCategory.Instance.Get(userInfo.JiaYuanLv);
             if (userInfo.Gold < jiaYuanConfig.ExchangeZiJinCostGold)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("金币不足！");
+                FlyTipComponent.Instance.ShowFlyTip("金币不足！");
                 return;
             }
 

@@ -50,7 +50,7 @@ namespace ET.Client
             Unit unit = JiaYuanHelper.GetUnitByCellIndex(curScene, dlgJiaYuanMain.CellIndex);
             if (unit != null)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("当前土地有植物！");
+                FlyTipComponent.Instance.ShowFlyTip("当前土地有植物！");
                 return;
             }
 

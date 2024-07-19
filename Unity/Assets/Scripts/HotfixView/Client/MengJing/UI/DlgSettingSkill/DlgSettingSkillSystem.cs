@@ -256,7 +256,7 @@ namespace ET.Client
             Log.Debug($"点击技能{index}");
             if (self.SkillSet.Contains(index))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已放置该技能！");
+                FlyTipComponent.Instance.ShowFlyTip("已放置该技能！");
                 return;
             }
 

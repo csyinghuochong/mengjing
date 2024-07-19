@@ -165,20 +165,20 @@ namespace ET.Client
             UnionKeJiConfig unionKeJiConfig = UnionKeJiConfigCategory.Instance.Get(self.UnionMyInfo.UnionKeJiList[self.Position]);
             if (self.UnionMyInfo.KeJiActiteTime == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("没有正在研究的科技！");
+                FlyTipComponent.Instance.ShowFlyTip("没有正在研究的科技！");
                 return;
             }
 
             if (unionKeJiConfig.NextID == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已经达到满级！");
+                FlyTipComponent.Instance.ShowFlyTip("已经达到满级！");
                 return;
             }
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (!bagComponent.CheckNeedItem("3;200"))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("钻石数量不足！");
+                FlyTipComponent.Instance.ShowFlyTip("钻石数量不足！");
                 return;
             }
 
@@ -208,19 +208,19 @@ namespace ET.Client
             long passTime = (timeNow - self.UnionMyInfo.KeJiActiteTime) / 1000;
             if (passTime < unionKeJiConfig.NeedTime)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("有科技正在研究中！");
+                FlyTipComponent.Instance.ShowFlyTip("有科技正在研究中！");
                 return;
             }
 
             if (unionKeJiConfig.NextID == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已经达到满级！");
+                FlyTipComponent.Instance.ShowFlyTip("已经达到满级！");
                 return;
             }
 
             if (self.UnionMyInfo.UnionGold < unionKeJiConfig.CostUnionGold)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("家族金币不足！");
+                FlyTipComponent.Instance.ShowFlyTip("家族金币不足！");
                 return;
             }
 

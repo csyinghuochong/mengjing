@@ -68,14 +68,14 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetMineReset) >= 3)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("每天最多只能重置3次！");
+                FlyTipComponent.Instance.ShowFlyTip("每天最多只能重置3次！");
                 return;
             }
 
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.Diamond < 350)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("钻石不足！");
+                FlyTipComponent.Instance.ShowFlyTip("钻石不足！");
                 return;
             }
 
@@ -117,7 +117,7 @@ namespace ET.Client
 
             if (response.RolePetInfos == null)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("查看宠物信息出错！");
+                FlyTipComponent.Instance.ShowFlyTip("查看宠物信息出错！");
                 return;
             }
 
@@ -222,7 +222,7 @@ namespace ET.Client
         {
             if (self.TeamId == -1)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请选择一个队伍！");
+                FlyTipComponent.Instance.ShowFlyTip("请选择一个队伍！");
                 return;
             }
 
@@ -230,7 +230,7 @@ namespace ET.Client
             long cdTime = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.PetMineCDTime);
             if (cdTime > TimeHelper.ServerNow())
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("挑战冷却中！");
+                FlyTipComponent.Instance.ShowFlyTip("挑战冷却中！");
                 return;
             }
 

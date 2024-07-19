@@ -52,7 +52,7 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetBagLeftCell() < 1)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("背包空间不足");
+                FlyTipComponent.Instance.ShowFlyTip("背包空间不足");
                 return;
             }
 

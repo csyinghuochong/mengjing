@@ -88,7 +88,7 @@ namespace ET.Client
             ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
             if (activityComponent.ActivityReceiveIds.Contains(activityId))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已经领取过奖励！");
+                FlyTipComponent.Instance.ShowFlyTip("已经领取过奖励！");
             }
 
             ActivityNetHelper.ActivityReceive(self.Root(), activityConfig.ActivityType, activityId).Coroutine();
@@ -227,13 +227,13 @@ namespace ET.Client
         {
             if (!PetHelper.IsShenShouFull(self.Root().GetComponent<PetComponentC>().RolePetInfos))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("神兽未满不能对话！");
+                FlyTipComponent.Instance.ShowFlyTip("神兽未满不能对话！");
                 return;
             }
 
             if (self.Root().GetComponent<BagComponentC>().GetItemNumber(10000136) < 1)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("神兽碎片不足！");
+                FlyTipComponent.Instance.ShowFlyTip("神兽碎片不足！");
                 return;
             }
 
@@ -298,7 +298,7 @@ namespace ET.Client
             if (PetHelper.GetBagPetNum(petComponent.RolePetInfos) >=
                 PetHelper.GetPetMaxNumber(self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv, petexpendNumber))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已达到最大宠物数量！");
+                FlyTipComponent.Instance.ShowFlyTip("已达到最大宠物数量！");
                 return;
             }
 
@@ -318,13 +318,13 @@ namespace ET.Client
                 Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
                 if (unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.ArenaNumber) > 0)
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi("次数不足！");
+                    FlyTipComponent.Instance.ShowFlyTip("次数不足！");
                     return;
                 }
 
                 if (!FunctionHelp.IsInTime(1031))
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi("不在活动时间内！");
+                    FlyTipComponent.Instance.ShowFlyTip("不在活动时间内！");
                     return;
                 }
             }
@@ -527,7 +527,7 @@ namespace ET.Client
         {
             if (self.TaskId == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请选择一个任务");
+                FlyTipComponent.Instance.ShowFlyTip("请选择一个任务");
                 return;
             }
 

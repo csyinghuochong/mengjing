@@ -134,7 +134,7 @@ namespace ET.Client
             int maxLevel = QiangHuaHelper.GetQiangHuaMaxLevel(self.ItemSubType);
             if (qianghuaLevel >= maxLevel - 1)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已经强化到最大等级！");
+                FlyTipComponent.Instance.ShowFlyTip("已经强化到最大等级！");
                 return;
             }
 
@@ -143,7 +143,7 @@ namespace ET.Client
             costItems += $"@1;{equipQiangHuaConfig.CostGold}";
             if (!bagComponent.CheckNeedItem(costItems))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("道具不足！");
+                FlyTipComponent.Instance.ShowFlyTip("道具不足！");
                 return;
             }
 
@@ -156,7 +156,7 @@ namespace ET.Client
             if (bagComponent.QiangHuaLevel[self.ItemSubType] == respons.Item2)
             {
                 bagComponent.QiangHuaFails[self.ItemSubType]++;
-                FlyTipComponent.Instance.ShowFlyTipDi("强化失败！");
+                FlyTipComponent.Instance.ShowFlyTip("强化失败！");
             }
             else
             {

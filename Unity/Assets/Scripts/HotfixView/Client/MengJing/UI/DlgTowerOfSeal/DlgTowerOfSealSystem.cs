@@ -20,7 +20,7 @@
             // 判断是否到达100层
             if (finished >= 100)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("今日已经达到塔顶,请明天再来挑战哦!");
+                FlyTipComponent.Instance.ShowFlyTip("今日已经达到塔顶,请明天再来挑战哦!");
                 return;
             }
 

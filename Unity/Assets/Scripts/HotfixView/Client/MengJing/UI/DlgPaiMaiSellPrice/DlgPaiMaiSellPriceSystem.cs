@@ -95,7 +95,7 @@ namespace ET.Client
 
             if (itemConfig.ItemQuality >= 5 && itemConfig.ItemType == 3)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("橙色品质及以上的装备不能上架！");
+                FlyTipComponent.Instance.ShowFlyTip("橙色品质及以上的装备不能上架！");
                 return;
             }
 
@@ -111,7 +111,7 @@ namespace ET.Client
                 int nowPrice = (int)((float)paiMaiItemInfo.Price);
                 if (nowPrice < (int)(oldPrice * 0.5f))
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi(
+                    FlyTipComponent.Instance.ShowFlyTip(
                         GameSettingLanguge.Instance.LoadLocalization("出售价格过低,当前最低价格为:" + (int)(oldPrice * 0.5f) * paiMaiItemInfo.BagInfo.ItemNum));
                     return;
                 }
@@ -119,7 +119,7 @@ namespace ET.Client
 
             if (paiMaiItemInfo.Price * self.SellNum >= 10000000)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("上架总金额不能超过1000万金币！");
+                FlyTipComponent.Instance.ShowFlyTip("上架总金额不能超过1000万金币！");
                 return;
             }
 
@@ -175,7 +175,7 @@ namespace ET.Client
             if (self.priceProNum >= 10)
             {
                 self.priceProNum = 10;
-                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.Instance.LoadLocalization("如需再提高价格,请手动修改价格!"));
+                FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("如需再提高价格,请手动修改价格!"));
             }
 
             self.nowPrice = (int)(self.oldPrice * (1f + 0.1f * self.priceProNum));

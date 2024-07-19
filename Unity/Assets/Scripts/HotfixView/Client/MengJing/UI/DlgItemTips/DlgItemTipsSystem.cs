@@ -301,28 +301,28 @@ namespace ET.Client
 
                 if (dlgRole.View.ES_RoleGem.XiangQianItem == null)
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi("请选择装备！");
+                    FlyTipComponent.Instance.ShowFlyTip("请选择装备！");
                     return;
                 }
 
                 string gemHole = dlgRole.View.ES_RoleGem.XiangQianItem.GemHole;
                 if (dlgRole.View.ES_RoleGem.XiangQianIndex == -1)
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi("请选择孔位！");
+                    FlyTipComponent.Instance.ShowFlyTip("请选择孔位！");
                     return;
                 }
 
                 string[] gemHolelist = gemHole.Split('_');
                 if (gemHolelist.Length <= dlgRole.View.ES_RoleGem.XiangQianIndex)
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi("请选择孔位！");
+                    FlyTipComponent.Instance.ShowFlyTip("请选择孔位！");
                     return;
                 }
 
                 string itemgem = gemHolelist[dlgRole.View.ES_RoleGem.XiangQianIndex];
                 if (itemgem != itemConfig.ItemSubType.ToString() && itemConfig.ItemSubType != 110 && itemConfig.ItemSubType != 111)
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi("宝石与孔位不符！");
+                    FlyTipComponent.Instance.ShowFlyTip("宝石与孔位不符！");
                     return;
                 }
 
@@ -527,14 +527,14 @@ namespace ET.Client
 
             if (errorCode == ErrorCode.ERR_Success)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.Instance.LoadLocalization("道具使用成功!"));
+                FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("道具使用成功!"));
             }
 
             if (errorCode == ErrorCode.ERR_ItemOnlyUseOcc)
             {
                 OccupationConfig occupationConfig = OccupationConfigCategory.Instance.Get(itemConfig.UseOcc);
                 string tip = string.Format(HintHelp.GetErrorHint(ErrorCode.ERR_ItemOnlyUseOcc), occupationConfig.OccupationName);
-                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.Instance.LoadLocalization(tip));
+                FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization(tip));
             }
 
             //播放音效
@@ -623,7 +623,7 @@ namespace ET.Client
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.BagInfo.ItemID);
             if (self.ItemOperateEnum == ItemOperateEnum.GemBag && itemConfig.ItemType != ItemTypeEnum.Gemstone)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("只能放入宝石！");
+                FlyTipComponent.Instance.ShowFlyTip("只能放入宝石！");
                 return;
             }
 

@@ -31,13 +31,13 @@ namespace ET.Client
             JiaYuanComponentC jiaYuanComponentC = self.Root().GetComponent<JiaYuanComponentC>();
             if (jiaYuanComponentC.LearnMakeIds_7.Contains(self.MakeItemId))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已经学习过该食谱！");
+                FlyTipComponent.Instance.ShowFlyTip("已经学习过该食谱！");
                 return;
             }
 
             if (userInfoComponent.UserInfo.JiaYuanFund < needcost)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("家园资金不足！");
+                FlyTipComponent.Instance.ShowFlyTip("家园资金不足！");
                 return;
             }
 

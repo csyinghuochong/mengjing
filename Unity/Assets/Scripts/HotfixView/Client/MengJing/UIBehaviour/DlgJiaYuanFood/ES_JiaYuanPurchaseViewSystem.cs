@@ -54,13 +54,13 @@ namespace ET.Client
 
             if (refreshtime >= 3)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("今日次数不足!");
+                FlyTipComponent.Instance.ShowFlyTip("今日次数不足!");
                 return;
             }
 
             if (jiayuanzijin < needzijin)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("家园资金不足!");
+                FlyTipComponent.Instance.ShowFlyTip("家园资金不足!");
                 return;
             }
 

@@ -53,7 +53,7 @@ namespace ET.Client
         {
             if (self.CDdownTimeNumber < 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("本层赛季之塔的时间已经用尽，请返回主城!");
+                FlyTipComponent.Instance.ShowFlyTip("本层赛季之塔的时间已经用尽，请返回主城!");
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.CDTimer);
                 self.WaitReturn().Coroutine();
                 return;

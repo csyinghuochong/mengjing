@@ -40,20 +40,20 @@
             string[] rewarditemlist = ConfigData.SingleRechargeReward[self.Key].Split('@');
             if (self.Root().GetComponent<BagComponentC>().GetBagLeftCell() < rewarditemlist.Length)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("背包空间不足");
+                FlyTipComponent.Instance.ShowFlyTip("背包空间不足");
                 return;
             }
 
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             if (!userInfo.SingleRechargeIds.Contains(self.Key))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("未达条件");
+                FlyTipComponent.Instance.ShowFlyTip("未达条件");
                 return;
             }
 
             if (userInfo.SingleRewardIds.Contains(self.Key))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已经领取");
+                FlyTipComponent.Instance.ShowFlyTip("已经领取");
                 return;
             }
 

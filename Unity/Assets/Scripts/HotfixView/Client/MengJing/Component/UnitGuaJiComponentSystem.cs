@@ -81,7 +81,7 @@ namespace ET.Client
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             if (mapComponent.SceneId == 101)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("主城禁止挂机喔,已为你自动移除挂机!");
+                FlyTipComponent.Instance.ShowFlyTip("主城禁止挂机喔,已为你自动移除挂机!");
                 self.Root().RemoveComponent<UnitGuaJiComponent>();
                 return false;
             }
@@ -90,7 +90,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (unit.Root().GetComponent<UserInfoComponentC>().UserInfo.PiLao <= 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("体力已经消耗完毕,请确保体力充足喔!");
+                FlyTipComponent.Instance.ShowFlyTip("体力已经消耗完毕,请确保体力充足喔!");
                 self.Root().RemoveComponent<UnitGuaJiComponent>(); //移除体力组件
                 return false;
             }
@@ -257,7 +257,7 @@ namespace ET.Client
             }
             else
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("附近未发现怪物");
+                FlyTipComponent.Instance.ShowFlyTip("附近未发现怪物");
             }
         }
 
@@ -274,7 +274,7 @@ namespace ET.Client
                 {
                     //一键出售
                     BagClientNetHelper.RequestOneSell(self.Root(), ItemLocType.ItemLocBag).Coroutine();
-                    FlyTipComponent.Instance.ShowFlyTipDi("背包已满，已自动一键出售道具!");
+                    FlyTipComponent.Instance.ShowFlyTip("背包已满，已自动一键出售道具!");
                 }
             }
         }

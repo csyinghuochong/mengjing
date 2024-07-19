@@ -31,13 +31,13 @@ namespace ET.Client
 
             if (self.Position == 1 && lv < 10)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("等级不足！");
+                FlyTipComponent.Instance.ShowFlyTip("等级不足！");
                 return;
             }
 
             if (self.Position == 2 && lv < 20)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("等级不足！");
+                FlyTipComponent.Instance.ShowFlyTip("等级不足！");
                 return;
             }
 

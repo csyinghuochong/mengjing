@@ -37,7 +37,7 @@ namespace ET.Client
         {
             if (self.RolePetInfo.IsProtect)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("锁定宠物不能操作！");
+                FlyTipComponent.Instance.ShowFlyTip("锁定宠物不能操作！");
                 return;
             }
 

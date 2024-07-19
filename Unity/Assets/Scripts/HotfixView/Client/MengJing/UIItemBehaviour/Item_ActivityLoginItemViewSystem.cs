@@ -52,20 +52,20 @@ namespace ET.Client
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             if (userInfo.Lv < 10)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.Instance.LoadLocalization("10级才能领取！"));
+                FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("10级才能领取！"));
                 return;
             }
 
             if (!self.CanReceive(self.ActivityConfig.Id))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.Instance.LoadLocalization("未达到领取条件！"));
+                FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("未达到领取条件！"));
                 return;
             }
 
             ActivityComponentC activityComponent = self.Root().GetComponent<ActivityComponentC>();
             if (CommonHelp.GetDayByTime(activityComponent.LastLoginTime) == CommonHelp.GetDayByTime(TimeHelper.ServerNow()))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.Instance.LoadLocalization("今天的奖励已领取"));
+                FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("今天的奖励已领取"));
                 return;
             }
 

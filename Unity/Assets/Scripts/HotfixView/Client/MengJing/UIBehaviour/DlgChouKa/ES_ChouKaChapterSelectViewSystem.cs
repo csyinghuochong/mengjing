@@ -37,7 +37,7 @@ namespace ET.Client
             TakeCardConfig takeCardConfig = TakeCardConfigCategory.Instance.Get(chapterid);
             if (level < takeCardConfig.RoseLvLimit)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("等级不足！");
+                FlyTipComponent.Instance.ShowFlyTip("等级不足！");
                 return;
             }
 

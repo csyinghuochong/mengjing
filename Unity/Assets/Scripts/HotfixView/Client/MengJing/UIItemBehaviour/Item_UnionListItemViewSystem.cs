@@ -24,7 +24,7 @@ namespace ET.Client
             long unionId = numericComponent.GetAsLong(NumericType.UnionId_0);
             if (unionId != 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请先退出公会");
+                FlyTipComponent.Instance.ShowFlyTip("请先退出公会");
                 return;
             }
 
@@ -32,7 +32,7 @@ namespace ET.Client
             if (TimeHelper.ServerNow() - leaveTime < TimeHelper.Hour * 8)
             {
                 string tip = TimeHelper.ShowLeftTime(TimeHelper.Hour * 8 - (TimeHelper.ServerNow() - leaveTime));
-                FlyTipComponent.Instance.ShowFlyTipDi($"{tip} 后才能加入家族！");
+                FlyTipComponent.Instance.ShowFlyTip($"{tip} 后才能加入家族！");
                 return;
             }
 
@@ -42,7 +42,7 @@ namespace ET.Client
                 return;
             }
 
-            FlyTipComponent.Instance.ShowFlyTipDi("已申请加入");
+            FlyTipComponent.Instance.ShowFlyTip("已申请加入");
         }
 
         public static void Refresh(this Scroll_Item_UnionListItem self, UnionListItem unionListItem)

@@ -85,13 +85,13 @@ namespace ET.Client
             FlyTipComponent flyTipComponent = self.Root().GetComponent<FlyTipComponent>();
             if (self.BagInfo.IsProtect)
             {
-                flyTipComponent.ShowFlyTipDi("锁定道具不能出售!");
+                flyTipComponent.ShowFlyTip("锁定道具不能出售!");
             }
 
             int errorCode = await BagClientNetHelper.RequestSellItem(self.Root(), self.BagInfo, self.Num.ToString());
             if (errorCode == ErrorCode.ERR_Success)
             {
-                flyTipComponent.ShowFlyTipDi("出售完成!");
+                flyTipComponent.ShowFlyTip("出售完成!");
             }
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemSellTip);

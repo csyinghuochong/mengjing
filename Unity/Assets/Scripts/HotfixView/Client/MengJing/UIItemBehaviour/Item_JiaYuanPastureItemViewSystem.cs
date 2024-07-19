@@ -73,7 +73,7 @@ namespace ET.Client
 
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgJiaYuanMain>().OnUpdatePlanNumber();
 
-            FlyTipComponent.Instance.ShowFlyTipDi($"购买{mysteryConfig.Name}成功");
+            FlyTipComponent.Instance.ShowFlyTip($"购买{mysteryConfig.Name}成功");
         }
     }
 }

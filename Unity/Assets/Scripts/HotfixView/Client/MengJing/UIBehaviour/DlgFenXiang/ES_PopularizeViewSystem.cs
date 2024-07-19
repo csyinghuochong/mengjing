@@ -48,14 +48,14 @@ namespace ET.Client
         {
             if (self.BePopularize)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已经作为被推广人");
+                FlyTipComponent.Instance.ShowFlyTip("已经作为被推广人");
                 return;
             }
 
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.Lv >= 15)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("大于15级不能作为推广人");
+                FlyTipComponent.Instance.ShowFlyTip("大于15级不能作为推广人");
                 return;
             }
 

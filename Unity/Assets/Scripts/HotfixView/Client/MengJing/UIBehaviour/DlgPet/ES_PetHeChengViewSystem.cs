@@ -66,26 +66,26 @@ namespace ET.Client
         {
             if (self.Root().GetComponent<PetComponentC>().RolePetInfos.Count < 3)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("最少有3个宠物才可以开启合成！");
+                FlyTipComponent.Instance.ShowFlyTip("最少有3个宠物才可以开启合成！");
                 return;
             }
 
             if (self.HeChengPet_Left == null || self.HeChengPet_Right == null)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请选择要合成的宠物！");
+                FlyTipComponent.Instance.ShowFlyTip("请选择要合成的宠物！");
                 return;
             }
 
             if (PetHelper.IsShenShou(self.HeChengPet_Left.ConfigId)
                 || PetHelper.IsShenShou(self.HeChengPet_Right.ConfigId))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("神兽不能合成！");
+                FlyTipComponent.Instance.ShowFlyTip("神兽不能合成！");
                 return;
             }
 
             if (PetHelper.HavePetHeXin(self.HeChengPet_Left) || PetHelper.HavePetHeXin(self.HeChengPet_Right))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请先卸下宠物之核！");
+                FlyTipComponent.Instance.ShowFlyTip("请先卸下宠物之核！");
                 return;
             }
 
@@ -119,14 +119,14 @@ namespace ET.Client
         {
             if (self.HeChengPet_Left == null || self.HeChengPet_Right == null)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请选择要合成的宠物！");
+                FlyTipComponent.Instance.ShowFlyTip("请选择要合成的宠物！");
                 return;
             }
 
             if (PetHelper.IsShenShou(self.HeChengPet_Left.ConfigId)
                 || PetHelper.IsShenShou(self.HeChengPet_Right.ConfigId))
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("神兽不能合成！");
+                FlyTipComponent.Instance.ShowFlyTip("神兽不能合成！");
                 return;
             }
 

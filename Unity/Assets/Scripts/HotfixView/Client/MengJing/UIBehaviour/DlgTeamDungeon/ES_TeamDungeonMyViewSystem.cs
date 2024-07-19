@@ -83,7 +83,7 @@ namespace ET.Client
             TeamInfo teamInfo = teamComponent.GetSelfTeam();
             if (teamInfo == null || teamInfo.SceneId == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("没有副本队伍");
+                FlyTipComponent.Instance.ShowFlyTip("没有副本队伍");
                 return;
             }
 
@@ -93,11 +93,11 @@ namespace ET.Client
                 string text =
                         $" 副本:{SceneConfigCategory.Instance.Get(teamInfo.SceneId).Name}开启冒险,现邀请你的加入！<color=#B5FF28>点击申请加入</color> <link=team_{teamInfo.TeamId}_{teamInfo.SceneId}_{teamInfo.FubenType}_{teamInfo.PlayerList[0].PlayerLv}></link>";
                 ChatNetHelper.RequestSendChat(self.Root(), ChannelEnum.Word, text).Coroutine();
-                FlyTipComponent.Instance.ShowFlyTipDi("已发送！");
+                FlyTipComponent.Instance.ShowFlyTip("已发送！");
             }
             else
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("喊话过于频繁！");
+                FlyTipComponent.Instance.ShowFlyTip("喊话过于频繁！");
             }
         }
 

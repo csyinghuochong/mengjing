@@ -33,12 +33,12 @@ namespace ET.Client
 
             if (setvalue == "1")
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("你开启了高帧模式");
+                FlyTipComponent.Instance.ShowFlyTip("你开启了高帧模式");
             }
 
             if (setvalue == "0")
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("你开启了普通模式");
+                FlyTipComponent.Instance.ShowFlyTip("你开启了普通模式");
             }
 
             //移除界面

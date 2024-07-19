@@ -175,7 +175,7 @@ namespace ET.Client
             MapComponent mapComponent = self.Root().GetComponent<MapComponent>();
             if (mapComponent.SceneType != SceneTypeEnum.LocalDungeon)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("当前地图不能挂机!");
+                FlyTipComponent.Instance.ShowFlyTip("当前地图不能挂机!");
                 return;
             }
 
@@ -187,24 +187,24 @@ namespace ET.Client
                     self.Root().RemoveComponent<UnitGuaJiComponent>();
                 }
 
-                FlyTipComponent.Instance.ShowFlyTipDi("体力已经消耗完毕,请确保体力充足喔!");
+                FlyTipComponent.Instance.ShowFlyTip("体力已经消耗完毕,请确保体力充足喔!");
                 return;
             }
 
             if (unit.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv < 12)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("达到12级才能挂机哦!");
+                FlyTipComponent.Instance.ShowFlyTip("达到12级才能挂机哦!");
                 return;
             }
 
             if (self.Root().GetComponent<UnitGuaJiComponent>() == null)
             {
                 self.Root().AddComponent<UnitGuaJiComponent>();
-                FlyTipComponent.Instance.ShowFlyTipDi("开始挂机!");
+                FlyTipComponent.Instance.ShowFlyTip("开始挂机!");
             }
             else
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("当前正在挂机,请确保周围是怪物刷新点!");
+                FlyTipComponent.Instance.ShowFlyTip("当前正在挂机,请确保周围是怪物刷新点!");
             }
 
             self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Setting);
@@ -215,7 +215,7 @@ namespace ET.Client
             if (self.Root().GetComponent<UnitGuaJiComponent>() != null)
             {
                 self.Root().RemoveComponent<UnitGuaJiComponent>();
-                FlyTipComponent.Instance.ShowFlyTipDi("取消挂机!");
+                FlyTipComponent.Instance.ShowFlyTip("取消挂机!");
             }
 
             self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgMain>().View.EG_GuaJiSetRectTransform.gameObject.SetActive(false);

@@ -53,7 +53,7 @@ namespace ET.Client
         {
             if (self.RolePetInfo == null)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("未选中宠物");
+                FlyTipComponent.Instance.ShowFlyTip("未选中宠物");
                 return;
             }
 
@@ -61,7 +61,7 @@ namespace ET.Client
             int maxNum = PetHelper.GetPetMaxNumber(self.Root().GetComponent<UserInfoComponentC>().UserInfo.Lv, userInfo.Lv);
             if (PetHelper.GetBagPetNum(self.Root().GetComponent<PetComponentC>().RolePetInfos) >= maxNum)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("已达到宠物最大数量");
+                FlyTipComponent.Instance.ShowFlyTip("已达到宠物最大数量");
                 return;
             }
 
@@ -78,7 +78,7 @@ namespace ET.Client
         {
             if (self.RolePetInfo == null)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("未选中宠物");
+                FlyTipComponent.Instance.ShowFlyTip("未选中宠物");
                 return;
             }
 

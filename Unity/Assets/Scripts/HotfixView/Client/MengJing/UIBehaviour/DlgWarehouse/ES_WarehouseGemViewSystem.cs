@@ -31,21 +31,21 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (bagComponent.GetBagLeftCell() < 1)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("请至少预留一个格子");
+                FlyTipComponent.Instance.ShowFlyTip("请至少预留一个格子");
                 return;
             }
 
             int error = await BagClientNetHelper.RquestGemHeCheng(self.Root(), 19);
             if (error == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi(GameSettingLanguge.Instance.LoadLocalization("宝石合成成功！"));
+                FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization("宝石合成成功！"));
             }
         }
 
         public static void OnBtn_ZhengLi(this ES_WarehouseGem self)
         {
             BagClientNetHelper.RequestSortByLoc(self.Root(), ItemLocType.GemWareHouse1).Coroutine();
-            FlyTipComponent.Instance.ShowFlyTipDi("宝石仓库已整理完毕");
+            FlyTipComponent.Instance.ShowFlyTip("宝石仓库已整理完毕");
         }
 
         public static void Refresh(this ES_WarehouseGem self)

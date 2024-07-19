@@ -149,7 +149,7 @@ namespace ET.Client
                 BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
                 if (bagComponent.GetItemNumber(CommonHelp.ShenYuanCostId) < 1)
                 {
-                    FlyTipComponent.Instance.ShowFlyTipDi($"需要道具{ItemConfigCategory.Instance.Get(CommonHelp.ShenYuanCostId).ItemName}！");
+                    FlyTipComponent.Instance.ShowFlyTip($"需要道具{ItemConfigCategory.Instance.Get(CommonHelp.ShenYuanCostId).ItemName}！");
                     return;
                 }
 

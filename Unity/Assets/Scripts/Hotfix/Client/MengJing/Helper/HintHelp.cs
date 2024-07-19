@@ -23,7 +23,7 @@
 
             string hintStr = code.ToString();
             ErrorViewData.ErrorHints.TryGetValue(code, out hintStr);
-            EventSystem.Instance.Publish(root, new ShowFlyTip() { Str = string.IsNullOrEmpty(hintStr) ? code.ToString() : hintStr });
+            EventSystem.Instance.Publish(root, new ShowFlyTip() { Type = 1, Str = string.IsNullOrEmpty(hintStr) ? code.ToString() : hintStr });
         }
 
         public static void ShowHint(Scene root, string str)

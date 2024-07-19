@@ -95,7 +95,7 @@ namespace ET.Client
         public static void OnBuyBagCell(this DlgJiaYuanWarehouse self, string dataparams)
         {
             self.RefreshHouseItems();
-            FlyTipComponent.Instance.ShowFlyTipDi($"获得道具: {CommonViewHelper.GetNeedItemDesc(dataparams)}");
+            FlyTipComponent.Instance.ShowFlyTip($"获得道具: {CommonViewHelper.GetNeedItemDesc(dataparams)}");
         }
 
         private static void OnClickImage_Lock(this DlgJiaYuanWarehouse self)

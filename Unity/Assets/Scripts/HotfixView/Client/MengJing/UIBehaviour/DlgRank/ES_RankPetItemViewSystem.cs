@@ -122,7 +122,7 @@ namespace ET.Client
 
             if (teamNumber < 3)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("上阵宠物不足三只!");
+                FlyTipComponent.Instance.ShowFlyTip("上阵宠物不足三只!");
                 return;
             }
 

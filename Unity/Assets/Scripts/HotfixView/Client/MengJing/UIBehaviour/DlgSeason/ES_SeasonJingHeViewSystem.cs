@@ -277,7 +277,7 @@ namespace ET.Client
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
             if (self.BagInfo == null || self.JingHeId == 0)
             {
-                FlyTipComponent.Instance.ShowFlyTipDi("未选择道具！");
+                FlyTipComponent.Instance.ShowFlyTip("未选择道具！");
                 return;
             }
 

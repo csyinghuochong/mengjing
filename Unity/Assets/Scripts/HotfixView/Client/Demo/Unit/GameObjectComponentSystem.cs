@@ -667,7 +667,7 @@ namespace ET.Client
                     unit.AddComponent<EffectViewComponent>();
                     break;
                 case UnitType.DropItem:
-                    FlyTipComponent.Instance.ShowFlyTipDi("生成掉落物");
+                    FlyTipComponent.Instance.ShowFlyTip("生成掉落物");
                     CommonViewHelper.SetParent(go, globalComponent.Unit.gameObject);
                     go.transform.localPosition = unit.Position;
                     go.transform.rotation = unit.Rotation;
