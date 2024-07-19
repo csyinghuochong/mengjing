@@ -35,10 +35,9 @@ namespace FantasyRPG
         private void ValueChangeed(float value)
         {
             int v = (int) Mathf.Ceil(value);
-            using (zstring.Block())
-            {
-                textValue.text = zstring.Format("{0}", v);
-            }
+
+            textValue.text = string.Format("{0}", v);
+            
 
             if (value <= 0)
             {

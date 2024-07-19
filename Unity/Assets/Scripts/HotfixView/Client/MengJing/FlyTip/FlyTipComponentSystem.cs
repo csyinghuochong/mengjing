@@ -40,12 +40,15 @@ namespace ET.Client
         {
             # region zstring 测试
 
-            // Profiler.BeginSample("zstring=============concat");
-            // using (zstring.Block())
-            // {
-            //     zstring.Concat("abc", 1);
-            // }
-            // Profiler.EndSample();
+            Profiler.BeginSample("zstring=============concat");
+            for (int i = 0; i < 20000; i++)
+            {
+                using (zstring.Block())
+                {
+                    zstring.Concat("abc", 1);
+                }
+            }
+            Profiler.EndSample();
             //
             // Profiler.BeginSample("string=============concat");
             // string.Concat("abc", 1);

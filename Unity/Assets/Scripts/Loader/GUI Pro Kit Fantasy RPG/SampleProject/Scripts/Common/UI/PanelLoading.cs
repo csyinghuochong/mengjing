@@ -47,10 +47,7 @@ namespace FantasyRPG
         void SetSlider(int value)
         {
             print("SetValue");
-            using (zstring.Block())
-            {
-                textSlider.text = zstring.Format("Loading... {0}%", value);
-            }
+            textSlider.text = string.Format("Loading... {0}%", value);
 
             slider.value = value;
         }
