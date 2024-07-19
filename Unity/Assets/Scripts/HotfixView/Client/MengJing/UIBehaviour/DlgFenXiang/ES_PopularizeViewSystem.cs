@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_Popularize))]
-    [FriendOfAttribute(typeof (ES_Popularize))]
+    [EntitySystemOf(typeof(ES_Popularize))]
+    [FriendOfAttribute(typeof(ES_Popularize))]
     public static partial class ES_PopularizeSystem
     {
         [EntitySystem]
@@ -102,7 +102,7 @@ namespace ET.Client
 
             self.BePopularize = response.BePopularizeId > 0;
             self.E_InputField_CodeInputField.text = response.BePopularizeId.ToString();
-            self.E_Text_My_CodeText.text = $"{response.PopularizeCode}";
+            self.E_Text_My_CodeText.text = response.PopularizeCode.ToString();
             List<RewardItem> rewardlist = PopularizeHelper.GetRewardList(response.MyPopularizeList);
             int goldReward = 0;
             int diamondReward = 0;
@@ -121,9 +121,12 @@ namespace ET.Client
                 }
             }
 
-            self.E_Text_Reward_1Text.text = $"金币： {goldReward}";
-            self.E_Text_Reward_2Text.text = $"钻石： {diamondReward}";
-            self.E_ButtonGetButton.gameObject.SetActive(rewardlist.Count > 0);
+            using (zstring.Block())
+            {
+                self.E_Text_Reward_1Text.text = (zstring)"金币： " + goldReward;
+                self.E_Text_Reward_2Text.text = (zstring)"钻石： " + diamondReward;
+                self.E_ButtonGetButton.gameObject.SetActive(rewardlist.Count > 0);
+            }
 
             // 测试数据
             // response.MyPopularizeList.Add(new PopularizeInfo() { Nmae = "测试角色1", Level = 20 });

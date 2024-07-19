@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UserInfoComponentC))]
-    [EntitySystemOf(typeof (ES_TaskDetail))]
-    [FriendOf(typeof (ES_TaskDetail))]
+    [FriendOf(typeof(UserInfoComponentC))]
+    [EntitySystemOf(typeof(ES_TaskDetail))]
+    [FriendOf(typeof(ES_TaskDetail))]
     public static partial class ES_TaskDetailSystem
     {
         [EntitySystem]
@@ -48,7 +48,10 @@ namespace ET.Client
             if (taskConfig.CompleteNpcID > 0)
             {
                 string npcName = NpcConfigCategory.Instance.Get(taskConfig.CompleteNpcID).Name;
-                self.E_ComTaskNpcText.text = $"完成任务请找:<color=#5C7B32>{npcName}</color>";
+                using (zstring.Block())
+                {
+                    self.E_ComTaskNpcText.text = (zstring)"完成任务请找:<color=#5C7B32>" + npcName + "</color>";
+                }
             }
 
             self.E_TeskDesText.text = taskConfig.TaskDes;
@@ -73,14 +76,20 @@ namespace ET.Client
             string rewardStr = taskConfig.RewardItem;
             if (CommonHelp.IfNull(rewardStr))
             {
-                rewardStr = $"1;{taskCoin}@2;{taskExp}";
+                using (zstring.Block())
+                {
+                    rewardStr = zstring.Format("1;{0}@2;{1}", taskCoin, taskExp);
+                }
             }
             else
             {
-                rewardStr = $"1;{taskCoin}@2;{taskExp}@";
-                rewardStr += rewardStr;
+                using (zstring.Block())
+                {
+                    rewardStr = zstring.Format("1;{0}@2;{1}", taskCoin, taskExp);
+                    rewardStr += rewardStr;
+                }
             }
-            
+
             // 跑环任务显示对应的环数奖励
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int taskType = TaskConfigCategory.Instance.Get(taskPro.taskID).TaskType;
@@ -114,7 +123,6 @@ namespace ET.Client
                         {
                             for (int i = 0; i < droplist.Count; i++)
                             {
-                                
                             }
                         }
                     }
@@ -198,13 +206,13 @@ namespace ET.Client
                 return;
             }
 
-            TaskClientNetHelper.RequestTaskTrack(self.Root(), self.TaskPro.taskID, self.TaskPro.TrackStatus == 0? 1 : 0).Coroutine();
+            TaskClientNetHelper.RequestTaskTrack(self.Root(), self.TaskPro.taskID, self.TaskPro.TrackStatus == 0 ? 1 : 0).Coroutine();
 
             self.E_ZhuizongButton.gameObject.SetActive(!self.E_ZhuizongButton.gameObject.activeSelf);
             self.E_CancelZhuizongButton.gameObject.SetActive(!self.E_CancelZhuizongButton.gameObject.activeSelf);
 
             // 提示
-            flyTipComponent.ShowFlyTip(self.E_ZhuizongButton.gameObject.activeSelf == false? "任务开启追踪!" : "任务取消追踪!");
+            flyTipComponent.ShowFlyTip(self.E_ZhuizongButton.gameObject.activeSelf == false ? "任务开启追踪!" : "任务取消追踪!");
         }
     }
 }

@@ -53,9 +53,12 @@ namespace ET.Client
                 return;
             }
 
-            PopupTipHelp.OpenPopupTip(self.Root(), "技能点重置",
-                $"是否花费{needGold}金币重置技能点",
-                () => { self.RequestReset(operation).Coroutine(); }).Coroutine();
+            using (zstring.Block())
+            {
+                PopupTipHelp.OpenPopupTip(self.Root(), "技能点重置",
+                    (zstring)"是否花费" + needGold + "金币重置技能点",
+                    () => { self.RequestReset(operation).Coroutine(); }).Coroutine();
+            }
         }
 
         public static async ETTask RequestReset(this ES_SkillLearn self, int operation)

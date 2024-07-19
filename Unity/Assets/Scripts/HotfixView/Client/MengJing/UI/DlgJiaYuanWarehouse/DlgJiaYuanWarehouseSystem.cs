@@ -57,8 +57,12 @@ namespace ET.Client
             if (cangkuNumber <= page)
             {
                 string costItems = ET.JiaYuanHelper.GetOpenJiaYuanWarehouse(cangkuNumber);
-                PopupTipHelp.OpenPopupTip(self.Root(), "开启仓库", $"是否消耗{CommonViewHelper.GetNeedItemDesc(costItems)}开启一个仓库",
-                    () => { self.RequestOpenCangKu().Coroutine(); }, null).Coroutine();
+                using (zstring.Block())
+                {
+                    PopupTipHelp.OpenPopupTip(self.Root(), "开启仓库", (zstring)"是否消耗" + CommonViewHelper.GetNeedItemDesc(costItems) + "开启一个仓库",
+                        () => { self.RequestOpenCangKu().Coroutine(); }, null).Coroutine();
+                }
+
                 return false;
             }
 
@@ -95,16 +99,22 @@ namespace ET.Client
         public static void OnBuyBagCell(this DlgJiaYuanWarehouse self, string dataparams)
         {
             self.RefreshHouseItems();
-            FlyTipComponent.Instance.ShowFlyTip($"获得道具: {CommonViewHelper.GetNeedItemDesc(dataparams)}");
+            using (zstring.Block())
+            {
+                FlyTipComponent.Instance.ShowFlyTip((zstring)"获得道具: " + CommonViewHelper.GetNeedItemDesc(dataparams));
+            }
         }
 
         private static void OnClickImage_Lock(this DlgJiaYuanWarehouse self)
         {
             string costitems = GlobalValueConfigCategory.Instance.Get(83).Value;
-            PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
-                $"是否花费{CommonViewHelper.GetNeedItemDesc(costitems)}购买一个背包格子?",
-                () => { },
-                null).Coroutine();
+            using (zstring.Block())
+            {
+                PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
+                    (zstring)"是否花费" + CommonViewHelper.GetNeedItemDesc(costitems) + "购买一个背包格子?",
+                    () => { },
+                    null).Coroutine();
+            }
         }
 
         public static void Refresh(this DlgJiaYuanWarehouse self)

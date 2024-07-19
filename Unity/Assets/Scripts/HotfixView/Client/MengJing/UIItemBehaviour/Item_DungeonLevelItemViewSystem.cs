@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgDungeonLevel))]
-    [FriendOf(typeof (Scroll_Item_DungeonLevelItem))]
-    [EntitySystemOf(typeof (Scroll_Item_DungeonLevelItem))]
+    [FriendOf(typeof(DlgDungeonLevel))]
+    [FriendOf(typeof(Scroll_Item_DungeonLevelItem))]
+    [EntitySystemOf(typeof(Scroll_Item_DungeonLevelItem))]
     public static partial class Scroll_Item_DungeonLevelItemSystem
     {
         [EntitySystem]
@@ -51,7 +51,10 @@ namespace ET.Client
                 {
                     DlgDungeonLevel uIDungeonLevel = uiComponent.GetDlgLogic<DlgDungeonLevel>();
 
-                    FlyTipComponent.Instance.ShowFlyTip($"请求传送 副本Id:{self.ChapterId} 副本难度：{uIDungeonLevel.Difficulty}");
+                    using (zstring.Block())
+                    {
+                        FlyTipComponent.Instance.ShowFlyTip((zstring)"请求传送 副本Id:" + self.ChapterId + " 副本难度：" + uIDungeonLevel.Difficulty);
+                    }
 
                     errorCode =
                             await EnterMapHelper.RequestTransfer(self.Root(), SceneTypeEnum.LocalDungeon, self.ChapterId, uIDungeonLevel.Difficulty);

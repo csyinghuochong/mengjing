@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_ChouKaRewardItem))]
-    [EntitySystemOf(typeof (Scroll_Item_ChouKaRewardItem))]
+    [FriendOf(typeof(Scroll_Item_ChouKaRewardItem))]
+    [EntitySystemOf(typeof(Scroll_Item_ChouKaRewardItem))]
     public static partial class Scroll_Item_ChouKaRewardItemSystem
     {
         [EntitySystem]
@@ -55,8 +55,11 @@
             self.TakeCardRewardConfig = takeCardRewardConfig;
             self.ES_RewardList.Refresh(takeCardRewardConfig.RewardItems, 0.8f);
 
-            self.E_TextZuanshiText.text = $"{takeCardRewardConfig.RewardDiamond[0]}-{takeCardRewardConfig.RewardDiamond[1]}";
-            self.E_TextNeedTimesText.text = $"抽卡次数达到{takeCardRewardConfig.RoseLvLimit}次";
+            using (zstring.Block())
+            {
+                self.E_TextZuanshiText.text = (zstring)takeCardRewardConfig.RewardDiamond[0] + "-" + takeCardRewardConfig.RewardDiamond[1];
+                self.E_TextNeedTimesText.text = (zstring)"抽卡次数达到" + takeCardRewardConfig.RoseLvLimit + "次";
+            }
 
             self.UpdateButton();
         }

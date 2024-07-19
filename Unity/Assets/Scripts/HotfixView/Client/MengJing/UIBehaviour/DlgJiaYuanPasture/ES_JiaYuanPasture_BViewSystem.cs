@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_JiaYuanPasture_B))]
-    [FriendOfAttribute(typeof (ES_JiaYuanPasture_B))]
+    [EntitySystemOf(typeof(ES_JiaYuanPasture_B))]
+    [FriendOfAttribute(typeof(ES_JiaYuanPasture_B))]
     public static partial class ES_JiaYuanPasture_BSystem
     {
         [EntitySystem]
@@ -50,7 +50,11 @@ namespace ET.Client
                     cdTime = 24 * 60 * 60 - curTime;
                 }
 
-                self.E_Text_CDTimeText.text = $"刷新倒计时: {TimeHelper.ShowLeftTime(cdTime * 1000)}";
+                using (zstring.Block())
+                {
+                    self.E_Text_CDTimeText.text = (zstring)"刷新倒计时: " + TimeHelper.ShowLeftTime(cdTime * 1000);
+                }
+
                 await timerComponent.WaitAsync(1000);
                 if (self.IsDisposed)
                 {

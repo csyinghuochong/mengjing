@@ -2,7 +2,7 @@
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (Scroll_Item_ChengJiuShowItem))]
+    [EntitySystemOf(typeof(Scroll_Item_ChengJiuShowItem))]
     public static partial class Scroll_Item_ChengJiuShowItemSystem
     {
         [EntitySystem]
@@ -28,11 +28,17 @@ namespace ET.Client
             self.E_Lab_TaskNameText.text = chengJiuConfig.Name;
             if (complete)
             {
-                self.E_Lab_ProValueText.text = $"进度:{chengJiuConfig.TargetValue}/{chengJiuConfig.TargetValue}";
+                using (zstring.Block())
+                {
+                    self.E_Lab_ProValueText.text = (zstring)"进度:" + chengJiuConfig.TargetValue + "/" + chengJiuConfig.TargetValue;
+                }
             }
             else
             {
-                self.E_Lab_ProValueText.text = $"进度:{chengJiuInfo?.ChengJiuProgess ?? 0}/{chengJiuConfig.TargetValue}";
+                using (zstring.Block())
+                {
+                    self.E_Lab_ProValueText.text = (zstring)"进度:" + chengJiuInfo?.ChengJiuProgess ?? 0 + "/" + chengJiuConfig.TargetValue;
+                }
             }
 
             self.E_Ima_CompleteTaskImage.gameObject.SetActive(complete);
