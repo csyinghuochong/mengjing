@@ -1,6 +1,6 @@
 ﻿namespace ET.Server
 {
-    [MessageLocationHandler(SceneType.EMail)]
+    [MessageLocationHandler(SceneType.Map)]
     public class M2M_AllPlayerListHandler : MessageHandler<Scene, M2M_AllPlayerListRequest, M2M_AllPlayerListResponse>
     {
         protected override async ETTask Run(Scene scene, M2M_AllPlayerListRequest request, M2M_AllPlayerListResponse response)

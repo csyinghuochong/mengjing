@@ -75,7 +75,7 @@ namespace ET.Server
                 {
                     jiaYuanComponent.JiaYuanFuJins_3.Clear();
                     M2M_AllPlayerListRequest M2M_AllPlayerListRequest = M2M_AllPlayerListRequest.Create();
-                    ActorId mapInstanceId = UnitCacheHelper.GetMailServerId(unit.Zone());
+                    ActorId mapInstanceId = UnitCacheHelper.MainCityServerId(unit.Zone());
                     M2M_AllPlayerListResponse reqEnter = (M2M_AllPlayerListResponse)await  unit.Root().GetComponent<MessageSender>().Call(mapInstanceId, M2M_AllPlayerListRequest);
                     List<long> allPlayers = new List<long>();
                     if (reqEnter.Error == ErrorCode.ERR_Success)
