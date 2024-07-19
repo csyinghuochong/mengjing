@@ -6,6 +6,24 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
+    # region 注册的事件
+
+    [Event(SceneType.Demo)]
+    public class CommonHintErrorEvent : AEvent<Scene, CommonHintError>
+    {
+        protected override async ETTask Run(Scene root, CommonHintError args)
+        {
+            if (args.ErrorValue == ErrorCode.ERR_ModifyData)
+            {
+                root.GetComponent<RelinkComponent>()?.OnModifyData();
+            }
+
+            HintHelp.ShowErrorHint(root, args.ErrorValue);
+
+            await ETTask.CompletedTask;
+        }
+    }
+
     [NumericWatcher(SceneType.Demo, NumericType.KillMonsterNumber)]
     public class NumericWatcher_KillMonsterNumber_UpdateDlgMain : INumericWatcher
     {
@@ -278,6 +296,8 @@ namespace ET.Client
             await ETTask.CompletedTask;
         }
     }
+
+    # endregion
 
     [Invoke(TimerInvokeType.UIMainFPSTimer)]
     public class UIMainFPSTimer : ATimer<DlgMain>

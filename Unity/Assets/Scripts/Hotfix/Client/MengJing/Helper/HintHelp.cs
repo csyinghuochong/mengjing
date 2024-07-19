@@ -1,21 +1,5 @@
 ﻿namespace ET.Client
 {
-    [Event(SceneType.Demo)]
-    public class CommonHintErrorEvent : AEvent<Scene, CommonHintError>
-    {
-        protected override async ETTask Run(Scene root, CommonHintError args)
-        {
-            if (args.ErrorValue == ErrorCode.ERR_ModifyData)
-            {
-                // root.GetComponent<RelinkComponent>()?.OnModifyData();
-            }
-
-            HintHelp.ShowErrorHint(root, args.ErrorValue);
-
-            await ETTask.CompletedTask;
-        }
-    }
-
     public static class HintHelp
     {
         public static string GetErrorHint(int code)
