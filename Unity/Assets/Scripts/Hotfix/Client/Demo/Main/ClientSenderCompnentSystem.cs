@@ -1,5 +1,10 @@
 ﻿namespace ET.Client
 {
+    public struct CommonHintError 
+    {
+        public int ErrorValue;
+    }
+    
     [EntitySystemOf(typeof(ClientSenderCompnent))]
     [FriendOf(typeof(ClientSenderCompnent))]
     [FriendOf(typeof(PlayerComponent))]
@@ -102,6 +107,12 @@
             {
                 throw new RpcException(response.Error, $"Rpc error: {request}, response: {response}");
             }
+            
+            if (response.Error != 0)
+            {
+                EventSystem.Instance.Publish(self.Root(), new CommonHintError() { ErrorValue = response.Error });
+            }
+            
             return response;
         }
 
