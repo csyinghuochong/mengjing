@@ -308,7 +308,10 @@ namespace ET.Client
                 (pdata) => { self.OnEndDrag(pdata as PointerEventData, index); });
             scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.gameObject.SetActive(true);
 
-            scrollItemPetListItem.uiTransform.gameObject.name = $"UIPetListItem_{index}";
+            using (zstring.Block())
+            {
+                scrollItemPetListItem.uiTransform.gameObject.name = (zstring)"UIPetListItem_" + index;
+            }
 
             scrollItemPetListItem.OnInitData(self.ShowRolePetInfos[index], self.NextPetNumber());
         }
@@ -344,7 +347,7 @@ namespace ET.Client
             PetSkinConfig petConfig = PetSkinConfigCategory.Instance.Get(skinId);
 
             self.ES_ModelShow.SetPosition(new Vector3(1 * 1000, 0, 0), new Vector3(0f, 115, 257f));
-            self.ES_ModelShow.ShowOtherModel("Pet/" + petConfig.SkinID.ToString(), true).Coroutine();
+            self.ES_ModelShow.ShowOtherModel((zstring)"Pet/" + petConfig.SkinID.ToString(), true).Coroutine();
 
             self.E_SkinJiHuoImage.gameObject.SetActive(self.LastSelectItem.SkinId == self.PetSkinId);
             self.E_SkinWeiJiHuoImage.gameObject.SetActive(!self.E_SkinJiHuoImage.gameObject.activeSelf);
@@ -353,7 +356,7 @@ namespace ET.Client
             if (petConfig.PripertyShow != "" && petConfig.PripertyShow != "0")
             {
                 self.E_PropertyShowTextText.gameObject.SetActive(true);
-                self.E_PropertyShowTextText.text = GameSettingLanguge.Instance.LoadLocalization("激活属性") + ":" + petConfig.PripertyShow;
+                self.E_PropertyShowTextText.text = (zstring)GameSettingLanguge.Instance.LoadLocalization("激活属性") + ":" + petConfig.PripertyShow;
             }
             else
             {
@@ -465,7 +468,11 @@ namespace ET.Client
                 Transform itemTransform = self.PetHeXinItemList[i].transform;
                 itemTransform.Find("Node_2").gameObject.SetActive(true);
                 itemTransform.Find("Node_2/TextName").gameObject.GetComponent<Text>().text = itemConfig.ItemName;
-                itemTransform.Find("Node_2/TextIcon").gameObject.GetComponent<Text>().text = $"等级 {itemConfig.UseLv}";
+                using (zstring.Block())
+                {
+                    itemTransform.Find("Node_2/TextIcon").gameObject.GetComponent<Text>().text = (zstring)"等级 " + itemConfig.UseLv;
+                }
+
                 Image ImageIcon = itemTransform.Find("Node_2/ImageIcon").gameObject.GetComponent<Image>();
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
                 Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
@@ -541,10 +548,12 @@ namespace ET.Client
             }
 
             // 更换图标
-            string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, $"hexin{index}");
-            Sprite sp1 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path1);
-
-            self.E_PetHeXinSuitButton.GetComponent<Image>().sprite = sp1;
+            using (zstring.Block())
+            {
+                string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, (zstring)"hexin" + index);
+                Sprite sp1 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path1);
+                self.E_PetHeXinSuitButton.GetComponent<Image>().sprite = sp1;
+            }
         }
 
         /// <summary>
@@ -606,7 +615,11 @@ namespace ET.Client
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             self.E_TextNameText.text = itemConfig.ItemName;
-            self.E_TextLevelText.text = $"等级: {itemConfig.UseLv}";
+            using (zstring.Block())
+            {
+                self.E_TextLevelText.text = (zstring)"等级: " + itemConfig.UseLv;
+            }
+
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
@@ -699,7 +712,10 @@ namespace ET.Client
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.PetHeXinBag);
             scrollItemCommonItem.ES_CommonItem.SetClickHandler(self.SelectItemHandlder);
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.ShowBagInfos[index].ItemID);
-            scrollItemCommonItem.ES_CommonItem.E_ItemNumText.text = $"{itemConfig.UseLv}级";
+            using (zstring.Block())
+            {
+                scrollItemCommonItem.ES_CommonItem.E_ItemNumText.text = (zstring)itemConfig.UseLv + "级";
+            }
         }
 
         private static void SelectItemHandlder(this ES_PetList self, BagInfo bagInfo)

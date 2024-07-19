@@ -297,12 +297,15 @@ namespace ET.Client
             {
                 SkillConfig skillNextConfig = SkillConfigCategory.Instance.Get(skillConfig.NextSkillID);
                 self.E_NextTextText.text = skillNextConfig.SkillDescribe;
-                self.E_ConsumeTextText.text = $"消耗技能点:{skillConfig.CostSPValue}";
+                using (zstring.Block())
+                {
+                    self.E_ConsumeTextText.text = (zstring)"消耗技能点:" + skillConfig.CostSPValue;
+                }
             }
             else
             {
                 self.E_NextTextText.text = "";
-                self.E_ConsumeTextText.text = $"达到最大级";
+                self.E_ConsumeTextText.text = "达到最大级";
             }
         }
 
@@ -354,7 +357,10 @@ namespace ET.Client
         public static void UpdateLeftSp(this ES_SkillLearn self)
         {
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
-            self.E_Text_LeftSpText.text = $"剩余技能点: {userInfo.Sp}";
+            using (zstring.Block())
+            {
+                self.E_Text_LeftSpText.text = (zstring)"剩余技能点: " + userInfo.Sp;
+            }
         }
 
         public static void OnSkillUpgrade(this ES_SkillLearn self, string dataparams)

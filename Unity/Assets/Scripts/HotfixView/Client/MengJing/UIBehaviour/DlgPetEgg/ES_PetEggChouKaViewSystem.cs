@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_PetEggChouKa))]
-    [FriendOfAttribute(typeof (ES_PetEggChouKa))]
+    [EntitySystemOf(typeof(ES_PetEggChouKa))]
+    [FriendOfAttribute(typeof(ES_PetEggChouKa))]
     public static partial class ES_PetEggChouKaSystem
     {
         [EntitySystem]
@@ -60,8 +60,12 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             int totalTimes = numericComponent.GetAsInt(NumericType.PetExploreNumber);
-            self.E_Text_TotalNumberText.text = $"今日累计次数：{totalTimes}";
-            self.E_Text_PetExploreLucklyText.text = $"{numericComponent.GetAsInt(NumericType.PetExploreLuckly)}";
+            using (zstring.Block())
+            {
+                self.E_Text_TotalNumberText.text = (zstring)"今日累计次数：" + totalTimes;
+            }
+
+            self.E_Text_PetExploreLucklyText.text = numericComponent.GetAsInt(NumericType.PetExploreLuckly).ToString();
         }
 
         public static void UpdateMoney(this ES_PetEggChouKa self)
@@ -88,8 +92,12 @@ namespace ET.Client
 
             self.E_ItemImageIconImage.sprite = sp;
             long haveNumber = self.Root().GetComponent<BagComponentC>().GetItemNumber(int.Parse(itemInfo[0]));
-            self.E_Text_CostNumberText.text = haveNumber + "/" + itemInfo[1];
-            self.E_Text_CostNumberText.color = haveNumber >= int.Parse(itemInfo[1])? Color.white : Color.red;
+            using (zstring.Block())
+            {
+                self.E_Text_CostNumberText.text = (zstring)haveNumber + "/" + itemInfo[1];
+            }
+
+            self.E_Text_CostNumberText.color = haveNumber >= int.Parse(itemInfo[1]) ? Color.white : Color.red;
         }
 
         public static void OnBtn_RolePetHeXin(this ES_PetEggChouKa self)

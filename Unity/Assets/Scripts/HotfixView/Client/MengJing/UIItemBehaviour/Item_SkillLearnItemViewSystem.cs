@@ -165,7 +165,11 @@ namespace ET.Client
 
             if (skillBaseConfig.SkillLv == 0)
             {
-                self.E_Lab_SkillLvText.text = $"{skillBaseConfig.LearnRoseLv}级以后学习";
+                using (zstring.Block())
+                {
+                    self.E_Lab_SkillLvText.text = (zstring)skillBaseConfig.LearnRoseLv + "级以后学习";
+                }
+
                 CommonViewHelper.SetImageGray(self.Root(), self.E_Img_SkillIconImage.gameObject, true);
             }
             else
