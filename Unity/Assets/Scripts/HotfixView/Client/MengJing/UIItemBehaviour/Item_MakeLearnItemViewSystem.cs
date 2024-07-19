@@ -40,7 +40,10 @@ namespace ET.Client
             self.MakeId = makeid;
 
             EquipMakeConfig equipMakeConfig = EquipMakeConfigCategory.Instance.Get(makeid);
-            self.E_Label_LearnLvText.text = string.Format("学习等级:{0}级", equipMakeConfig.LearnLv);
+            using (zstring.Block())
+            {
+                self.E_Label_LearnLvText.text = zstring.Format("学习等级:{0}级", equipMakeConfig.LearnLv);
+            }
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(equipMakeConfig.MakeItemID);
             self.E_Label_ItemNameText.text = itemConfig.ItemName;

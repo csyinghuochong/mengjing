@@ -190,7 +190,11 @@ namespace ET.Client
             {
                 self.Button_Reward[i].SetActive(!getids.Contains(i + 1));
                 self.Button_Open[i].SetActive(getids.Contains(i + 1));
-                self.Text_Huoyue[i].GetComponent<Text>().text = string.Format("{0}活跃度", HuoYueRewardConfigCategory.Instance.Get(i + 1).NeedPoint);
+                using (zstring.Block())
+                {
+                    self.Text_Huoyue[i].GetComponent<Text>().text =
+                            zstring.Format("{0}活跃度", HuoYueRewardConfigCategory.Instance.Get(i + 1).NeedPoint);
+                }
             }
         }
 

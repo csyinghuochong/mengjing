@@ -143,7 +143,10 @@ namespace ET.Client
             //     (pdata) => { self.OnEndDrag(pdata as PointerEventData, index); });
             // scrollItemPetListItem.E_ImageDiEventTriggerEventTrigger.gameObject.SetActive(true);
 
-            scrollItemPetListItem.uiTransform.gameObject.name = $"UIPetListItem_{index}";
+            using (zstring.Block())
+            {
+                scrollItemPetListItem.uiTransform.gameObject.name = (zstring)"UIPetListItem_" + index;
+            }
 
             scrollItemPetListItem.OnInitData(self.ShowRolePetInfos[index], self.NextPetNumber());
         }
@@ -233,7 +236,10 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             int maxNum = PetHelper.GetPetMaxNumber(userInfo.Lv, unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetExtendNumber));
-            self.E_Text_PetNumberText.text = $"{PetHelper.GetBagPetNum(rolePetInfos)}/{maxNum}";
+            using (zstring.Block())
+            {
+                self.E_Text_PetNumberText.text = (zstring)PetHelper.GetBagPetNum(rolePetInfos) + "/" + maxNum;
+            }
         }
 
         private static int NextPetNumber(this ES_WatchPet self)
@@ -305,7 +311,11 @@ namespace ET.Client
                 Transform itemTransform = self.PetHeXinItemList[i].transform;
                 itemTransform.Find("Node_2").gameObject.SetActive(true);
                 itemTransform.Find("Node_2/TextName").gameObject.GetComponent<Text>().text = itemConfig.ItemName;
-                itemTransform.Find("Node_2/TextIcon").gameObject.GetComponent<Text>().text = $"等级 {itemConfig.UseLv}";
+                using (zstring.Block())
+                {
+                    itemTransform.Find("Node_2/TextIcon").gameObject.GetComponent<Text>().text = (zstring)"等级 " + itemConfig.UseLv;
+                }
+
                 Image ImageIcon = itemTransform.Find("Node_2/ImageIcon").gameObject.GetComponent<Image>();
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
                 Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
@@ -381,7 +391,12 @@ namespace ET.Client
             }
 
             // 更换图标
-            string path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, $"hexin{index}");
+            string path1;
+            using (zstring.Block())
+            {
+                path1 = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, (zstring)"hexin" + index);
+            }
+
             Sprite sp1 = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path1);
 
             self.E_PetHeXinSuitButton.GetComponent<Image>().sprite = sp1;
@@ -446,7 +461,12 @@ namespace ET.Client
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             self.E_TextNameText.text = itemConfig.ItemName;
-            self.E_TextLevelText.text = $"等级: {itemConfig.UseLv}";
+
+            using (zstring.Block())
+            {
+                self.E_TextLevelText.text = (zstring)"等级: " + itemConfig.UseLv;
+            }
+
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
@@ -488,11 +508,17 @@ namespace ET.Client
                 string attribute;
                 if (showType == 2)
                 {
-                    attribute = $"{ItemViewHelp.GetAttributeName(numberType)} + {numberValue * 100}%";
+                    using (zstring.Block())
+                    {
+                        attribute = zstring.Format("{0} + {1}%", ItemViewHelp.GetAttributeName(numberType), numberValue * 100);
+                    }
                 }
                 else
                 {
-                    attribute = $"{ItemViewHelp.GetAttributeName(numberType)} + {numberValue}";
+                    using (zstring.Block())
+                    {
+                        attribute = zstring.Format("{0} + {1}", ItemViewHelp.GetAttributeName(numberType), numberValue);
+                    }
                 }
 
                 gameObject.transform.Find("Lab_ProTypeValue").GetComponent<Text>().text = attribute;
@@ -533,7 +559,10 @@ namespace ET.Client
             scrollItemCommonItem.Refresh(self.ShowBagInfos[index], ItemOperateEnum.PetHeXinBag);
             scrollItemCommonItem.ES_CommonItem.SetClickHandler(self.SelectItemHandlder);
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.ShowBagInfos[index].ItemID);
-            scrollItemCommonItem.ES_CommonItem.E_ItemNumText.text = $"{itemConfig.UseLv}级";
+            using (zstring.Block())
+            {
+                scrollItemCommonItem.ES_CommonItem.E_ItemNumText.text = (zstring)itemConfig.UseLv + "级";
+            }
         }
 
         private static void SelectItemHandlder(this ES_WatchPet self, BagInfo bagInfo)
@@ -720,7 +749,12 @@ namespace ET.Client
             self.E_Text_PetPingFenText.text = PetHelper.PetPingJia(rolePetInfo).ToString();
 
             self.E_Text_ShouHuText.text = ConfigData.PetShouHuAttri[rolePetInfo.ShouHuPos - 1].Value;
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, $"ShouHu_{rolePetInfo.ShouHuPos - 1}");
+            string path;
+            using (zstring.Block())
+            {
+                path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, (zstring)"ShouHu_" + (rolePetInfo.ShouHuPos - 1));
+            }
+
             Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
 
             self.E_ImageShouHuImage.sprite = sp;
@@ -812,7 +846,7 @@ namespace ET.Client
         {
             self.E_Text_PetLevelText.text = rolePetInfo.PetLv.ToString() + GameSettingLanguge.Instance.LoadLocalization("级");
             ExpConfig expConfig = ExpConfigCategory.Instance.Get(rolePetInfo.PetLv);
-            self.E_Text_PetExpText.text = string.Format("{0}/{1}", rolePetInfo.PetExp, expConfig.PetUpExp);
+            self.E_Text_PetExpText.text = zstring.Format("{0}/{1}", rolePetInfo.PetExp, expConfig.PetUpExp);
             self.E_ImageExpValueImage.transform.localScale = new Vector3(Mathf.Clamp(rolePetInfo.PetExp * 1f / expConfig.PetUpExp, 0f, 1f), 1f, 1f);
         }
 
@@ -825,19 +859,22 @@ namespace ET.Client
 
             PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
 
-            self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_Hp}/{petConfig.ZiZhi_Hp_Max}";
-            self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_Act}/{petConfig.ZiZhi_Act_Max}";
-            self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_Def}/{petConfig.ZiZhi_Def_Max}";
-            self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_Adf}/{petConfig.ZiZhi_Adf_Max}";
-            self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text = string.Format("{0}/{1}",
-                CommonViewHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang),
-                CommonViewHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max));
-            self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_MageAct}/{petConfig.ZiZhi_MageAct_Max}";
+            using (zstring.Block())
+            {
+                self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Hp, petConfig.ZiZhi_Hp_Max);
+                self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Act, petConfig.ZiZhi_Act_Max);
+                self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Def, petConfig.ZiZhi_Def_Max);
+                self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Adf, petConfig.ZiZhi_Adf_Max);
+                self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text = zstring.Format("{0}/{1}",
+                    CommonViewHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang),
+                    CommonViewHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max));
+                self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_MageAct, petConfig.ZiZhi_MageAct_Max);
+            }
 
             Sprite sprite16 = self.Root().GetComponent<ResourcesLoaderComponent>()
                     .LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Pro_16.png");
@@ -1008,11 +1045,18 @@ namespace ET.Client
                 float fvalue = (NumericHelp.GetAttributeValue(rolePetInfo, numericType)) * 0.01f + addValue * 100;
                 //string svalue = string.Format("{0:F}", fvalue);
                 string svalue = fvalue.ToString("0.#####");
-                return $"{ItemViewHelp.GetAttributeName(numericType)} {svalue}%";
+                using (zstring.Block())
+                {
+                    return (zstring)ItemViewHelp.GetAttributeName(numericType) + " " + svalue + "%";
+                }
             }
             else
             {
-                return $"{ItemViewHelp.GetAttributeName(numericType)} {(long)(NumericHelp.GetAttributeValue(rolePetInfo, numericType) + addValue)}";
+                using (zstring.Block())
+                {
+                    return (zstring)ItemViewHelp.GetAttributeName(numericType) + " " +
+                            (long)(NumericHelp.GetAttributeValue(rolePetInfo, numericType) + addValue);
+                }
             }
         }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_ChouKaWarehouseAddItem_Refresh: AEvent<Scene, ChouKaWarehouseAddItem>
+    public class DataUpdate_ChouKaWarehouseAddItem_Refresh : AEvent<Scene, ChouKaWarehouseAddItem>
     {
         protected override async ETTask Run(Scene root, ChouKaWarehouseAddItem args)
         {
@@ -17,7 +17,7 @@ namespace ET.Client
     }
 
     [Invoke(TimerInvokeType.UIChouKaTimer)]
-    public class UIChouKaTimer: ATimer<DlgChouKa>
+    public class UIChouKaTimer : ATimer<DlgChouKa>
     {
         protected override void Run(DlgChouKa self)
         {
@@ -27,13 +27,16 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
 
-    [FriendOf(typeof (ES_ChouKaChapterSelect))]
-    [FriendOf(typeof (DlgChouKa))]
+    [FriendOf(typeof(ES_ChouKaChapterSelect))]
+    [FriendOf(typeof(DlgChouKa))]
     public static class DlgChouKaSystem
     {
         public static void RegisterUIEvent(this DlgChouKa self)
@@ -100,7 +103,10 @@ namespace ET.Client
         public static void UpdateReardShowList(this DlgChouKa self)
         {
             int cindex = self.TakeCardId % 1000;
-            self.View.E_Text_ChapterText.text = string.Format("第{0}章探宝", cindex);
+            using (zstring.Block())
+            {
+                self.View.E_Text_ChapterText.text = zstring.Format("第{0}章探宝", cindex);
+            }
 
             TakeCardConfig takeCardConfig = TakeCardConfigCategory.Instance.Get(self.TakeCardId);
             string dropShow = takeCardConfig.DropShow;
@@ -109,7 +115,10 @@ namespace ET.Client
             string itemList = "";
             for (int i = 0; i < droplist.Count; i++)
             {
-                itemList += $"{droplist[i].ItemID};{1}@";
+                using (zstring.Block())
+                {
+                    itemList += (zstring)droplist[i].ItemID + ";" + 1 + "@";
+                }
             }
 
             itemList += dropShow;
@@ -191,8 +200,8 @@ namespace ET.Client
             long passTime_2 = curTime - numericComponent.GetAsLong(NumericType.ChouKaTenTime);
             long cdTime_1 = long.Parse(GlobalValueConfigCategory.Instance.Get(35).Value) * 1000;
             long cdTime_2 = long.Parse(GlobalValueConfigCategory.Instance.Get(36).Value) * 1000;
-            self.View.E_Text_MianFeiTime_1Text.text = passTime_1 > cdTime_1? "免费抽卡" : TimeHelper.ShowLeftTime(cdTime_1 - passTime_1);
-            self.View.E_Text_MianFeiTime_2Text.text = passTime_2 > cdTime_2? "免费抽卡" : TimeHelper.ShowLeftTime(cdTime_2 - passTime_2);
+            self.View.E_Text_MianFeiTime_1Text.text = passTime_1 > cdTime_1 ? "免费抽卡" : TimeHelper.ShowLeftTime(cdTime_1 - passTime_1);
+            self.View.E_Text_MianFeiTime_2Text.text = passTime_2 > cdTime_2 ? "免费抽卡" : TimeHelper.ShowLeftTime(cdTime_2 - passTime_2);
         }
 
         public static void OnUpdateUI(this DlgChouKa self)

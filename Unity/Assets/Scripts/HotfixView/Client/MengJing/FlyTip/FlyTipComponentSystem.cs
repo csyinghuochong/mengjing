@@ -1,11 +1,12 @@
 ﻿using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Profiling;
 using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (FlyTipComponent))]
-    [EntitySystemOf(typeof (FlyTipComponent))]
+    [FriendOf(typeof(FlyTipComponent))]
+    [EntitySystemOf(typeof(FlyTipComponent))]
     public static partial class FlyTipComponentSystem
     {
         [EntitySystem]
@@ -37,6 +38,47 @@ namespace ET.Client
         [EntitySystem]
         private static void Update(this FlyTipComponent self)
         {
+            # region zstring 测试
+
+            // Profiler.BeginSample("zstring=============concat");
+            // using (zstring.Block())
+            // {
+            //     zstring.Concat("abc", 1);
+            // }
+            // Profiler.EndSample();
+            //
+            // Profiler.BeginSample("string=============concat");
+            // string.Concat("abc", 1);
+            // Profiler.EndSample();
+            //
+            // Profiler.BeginSample("cn-zstring=============concat");
+            // using (zstring.Block())
+            // {
+            //     zstring.Concat("abc", 1);
+            // }
+            // Profiler.EndSample();
+            //
+            //
+            // Profiler.BeginSample("zstring=============format");
+            // using (zstring.Block())
+            // {
+            //     zstring.Format("hello,{0}", 1111);
+            // }
+            // Profiler.EndSample();
+            //
+            // Profiler.BeginSample("string=============format");
+            // string.Format("hello,{0}", 1111);
+            // Profiler.EndSample();
+            //
+            // Profiler.BeginSample("cn-zstring=============format");
+            // using (zstring.Block())
+            // {
+            //     zstring.Format("hello ,{0}", 1111);
+            // }
+            // Profiler.EndSample();
+
+            # endregion
+
             long time = TimeInfo.Instance.ClientNow();
 
             if (self.FlyTipQueue.Count > 0)

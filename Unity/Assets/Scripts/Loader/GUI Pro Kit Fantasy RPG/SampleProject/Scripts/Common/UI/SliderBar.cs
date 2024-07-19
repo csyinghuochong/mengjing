@@ -35,8 +35,11 @@ namespace FantasyRPG
         private void ValueChangeed(float value)
         {
             int v = (int) Mathf.Ceil(value);
-            textValue.text = string.Format("{0}", v);
-            
+            using (zstring.Block())
+            {
+                textValue.text = zstring.Format("{0}", v);
+            }
+
             if (value <= 0)
             {
                 textValue.color = Utility.HexToColor("76617D");

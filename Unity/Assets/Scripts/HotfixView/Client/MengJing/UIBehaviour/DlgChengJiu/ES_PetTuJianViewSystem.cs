@@ -127,18 +127,22 @@ namespace ET.Client
 
             if (petConfig.PetType == 0)
             {
-                self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        string.Format("{0}/{1}", petConfig.ZiZhi_Hp_Max, 3000);
-                self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        string.Format("{0}/{1}", petConfig.ZiZhi_Act_Max, 1500);
-                self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        string.Format("{0}/{1}", petConfig.ZiZhi_Def_Max, 1500);
-                self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        string.Format("{0}/{1}", petConfig.ZiZhi_Adf_Max, 1500);
-                self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        string.Format("{0}/{1}", petConfig.ZiZhi_MageAct_Max, 1500);
-                self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        string.Format("{0}/{1}", (float)petConfig.ZiZhi_ChengZhang_Max, 1.25f);
+                using (zstring.Block())
+                {
+                    self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                            zstring.Format("{0}/{1}", petConfig.ZiZhi_Hp_Max, 3000);
+                    self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                            zstring.Format("{0}/{1}", petConfig.ZiZhi_Act_Max, 1500);
+                    self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                            zstring.Format("{0}/{1}", petConfig.ZiZhi_Def_Max, 1500);
+                    self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                            zstring.Format("{0}/{1}", petConfig.ZiZhi_Adf_Max, 1500);
+                    self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                            zstring.Format("{0}/{1}", petConfig.ZiZhi_MageAct_Max, 1500);
+                    self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                            zstring.Format("{0}/{1}", (float)petConfig.ZiZhi_ChengZhang_Max, 1.25f);
+                }
+
                 Sprite sprite17 = self.Root().GetComponent<ResourcesLoaderComponent>()
                         .LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Pro_17.png");
                 self.PetZiZhiItemList[0].transform.Find("ImageExpValue").GetComponent<Image>().sprite = sprite17;
@@ -162,18 +166,22 @@ namespace ET.Client
             }
             else
             {
-                self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        string.Format("{0}/{1}", petConfig.ZiZhi_Hp_Max, petConfig.ZiZhi_Hp_Max);
-                self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        string.Format("{0}/{1}", petConfig.ZiZhi_Act_Max, petConfig.ZiZhi_Act_Max);
-                self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        string.Format("{0}/{1}", petConfig.ZiZhi_Def_Max, petConfig.ZiZhi_Def_Max);
-                self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        string.Format("{0}/{1}", petConfig.ZiZhi_Adf_Max, petConfig.ZiZhi_Adf_Max);
-                self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        string.Format("{0}/{1}", petConfig.ZiZhi_MageAct_Max, petConfig.ZiZhi_MageAct_Max);
-                self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text = string.Format("{0}/{1}",
-                    (float)petConfig.ZiZhi_ChengZhang_Max, (float)petConfig.ZiZhi_ChengZhang_Max);
+                using (zstring.Block())
+                {
+                    self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                            zstring.Format("{0}/{1}", petConfig.ZiZhi_Hp_Max, petConfig.ZiZhi_Hp_Max);
+                    self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                            zstring.Format("{0}/{1}", petConfig.ZiZhi_Act_Max, petConfig.ZiZhi_Act_Max);
+                    self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                            zstring.Format("{0}/{1}", petConfig.ZiZhi_Def_Max, petConfig.ZiZhi_Def_Max);
+                    self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                            zstring.Format("{0}/{1}", petConfig.ZiZhi_Adf_Max, petConfig.ZiZhi_Adf_Max);
+                    self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                            zstring.Format("{0}/{1}", petConfig.ZiZhi_MageAct_Max, petConfig.ZiZhi_MageAct_Max);
+                    self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text = 
+                            zstring.Format("{0}/{1}", (float)petConfig.ZiZhi_ChengZhang_Max, (float)petConfig.ZiZhi_ChengZhang_Max);
+                }
+
                 Sprite sprite16 = self.Root().GetComponent<ResourcesLoaderComponent>()
                         .LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Pro_16.png");
                 self.PetZiZhiItemList[0].transform.Find("ImageExpValue").GetComponent<Image>().sprite = sprite16;

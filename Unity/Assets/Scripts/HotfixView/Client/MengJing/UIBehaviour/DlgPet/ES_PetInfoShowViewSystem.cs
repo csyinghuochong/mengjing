@@ -4,11 +4,11 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CommonSkillItem))]
-    [FriendOf(typeof (DlgPet))]
-    [FriendOf(typeof (ES_PetInfoShow))]
-    [EntitySystemOf(typeof (ES_PetInfoShow))]
-    [FriendOf(typeof (ES_PetInfoShow))]
+    [FriendOf(typeof(Scroll_Item_CommonSkillItem))]
+    [FriendOf(typeof(DlgPet))]
+    [FriendOf(typeof(ES_PetInfoShow))]
+    [EntitySystemOf(typeof(ES_PetInfoShow))]
+    [FriendOf(typeof(ES_PetInfoShow))]
     public static partial class ES_PetInfoShowSystem
     {
         [EntitySystem]
@@ -108,21 +108,26 @@ namespace ET.Client
                 upExpStr = (int)(expConfig.UpExp / 10000) + GameSettingLanguge.Instance.LoadLocalization("万");
             }
 
-            self.E_Text_PetExpText.text = $"{expStr}/{upExpStr}";
-            self.E_ImageExpValueImage.transform.localScale = new Vector3(Mathf.Clamp(rolePetInfo.PetExp * 1f / expConfig.UpExp, 0f, 1f), 1f, 1f);
+            using (zstring.Block())
+            {
+                self.E_Text_PetExpText.text = zstring.Format("{0}/{1}", expStr, upExpStr);
+                self.E_ImageExpValueImage.transform.localScale = new Vector3(Mathf.Clamp(rolePetInfo.PetExp * 1f / expConfig.UpExp, 0f, 1f), 1f, 1f);
 
-            self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    string.Format("{0}/{1}", rolePetInfo.ZiZhi_Hp, petConfig.ZiZhi_Hp_Max);
-            self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    string.Format("{0}/{1}", rolePetInfo.ZiZhi_Act, petConfig.ZiZhi_Act_Max);
-            self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    string.Format("{0}/{1}", rolePetInfo.ZiZhi_Def, petConfig.ZiZhi_Def_Max);
-            self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    string.Format("{0}/{1}", rolePetInfo.ZiZhi_Adf, petConfig.ZiZhi_Adf_Max);
-            self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    string.Format("{0}/{1}", rolePetInfo.ZiZhi_MageAct, petConfig.ZiZhi_MageAct_Max);
-            self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text = string.Format("{0}/{1}",
-                CommonViewHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang), CommonViewHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max));
+                self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Hp, petConfig.ZiZhi_Hp_Max);
+                self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Act, petConfig.ZiZhi_Act_Max);
+                self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Def, petConfig.ZiZhi_Def_Max);
+                self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Adf, petConfig.ZiZhi_Adf_Max);
+                self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_MageAct, petConfig.ZiZhi_MageAct_Max);
+                self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}",
+                            CommonViewHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang),
+                            CommonViewHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max));
+            }
 
             self.PetZiZhiItemList[0].transform.Find("ImageExpValue").localScale =
                     new Vector3(Mathf.Clamp(rolePetInfo.ZiZhi_Hp * 1f / petConfig.ZiZhi_Hp_Max, 0f, 1f), 1f, 1f);

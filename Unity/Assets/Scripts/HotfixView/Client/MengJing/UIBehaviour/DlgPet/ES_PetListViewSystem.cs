@@ -398,7 +398,10 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             UserInfo userInfo = self.Root().GetComponent<UserInfoComponentC>().UserInfo;
             int maxNum = PetHelper.GetPetMaxNumber(userInfo.Lv, unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetExtendNumber));
-            self.E_Text_PetNumberText.text = $"{PetHelper.GetBagPetNum(rolePetInfos)}/{maxNum}";
+            using (zstring.Block())
+            {
+                self.E_Text_PetNumberText.text = (zstring)PetHelper.GetBagPetNum(rolePetInfos) + "/" + maxNum;
+            }
         }
 
         private static int NextPetNumber(this ES_PetList self)
@@ -645,11 +648,17 @@ namespace ET.Client
                 string attribute;
                 if (showType == 2)
                 {
-                    attribute = $"{ItemViewHelp.GetAttributeName(numberType)} + {numberValue * 100}%";
+                    using (zstring.Block())
+                    {
+                        attribute = (zstring)ItemViewHelp.GetAttributeName(numberType) + " + " + numberValue * 100 + "%";
+                    }
                 }
                 else
                 {
-                    attribute = $"{ItemViewHelp.GetAttributeName(numberType)} + {numberValue}";
+                    using (zstring.Block())
+                    {
+                        attribute = (zstring)ItemViewHelp.GetAttributeName(numberType) + " + " + numberValue;
+                    }
                 }
 
                 gameObject.transform.Find("Lab_ProTypeValue").GetComponent<Text>().text = attribute;
@@ -971,7 +980,11 @@ namespace ET.Client
         {
             self.E_Text_PetLevelText.text = rolePetInfo.PetLv.ToString() + GameSettingLanguge.Instance.LoadLocalization("级");
             ExpConfig expConfig = ExpConfigCategory.Instance.Get(rolePetInfo.PetLv);
-            self.E_Text_PetExpText.text = string.Format("{0}/{1}", rolePetInfo.PetExp, expConfig.PetUpExp);
+            using (zstring.Block())
+            {
+                self.E_Text_PetExpText.text = zstring.Format("{0}/{1}", rolePetInfo.PetExp, expConfig.PetUpExp);
+            }
+
             self.E_ImageExpValueImage.transform.localScale = new Vector3(Mathf.Clamp(rolePetInfo.PetExp * 1f / expConfig.PetUpExp, 0f, 1f), 1f, 1f);
         }
 
@@ -984,19 +997,23 @@ namespace ET.Client
 
             PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
 
-            self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_Hp}/{petConfig.ZiZhi_Hp_Max}";
-            self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_Act}/{petConfig.ZiZhi_Act_Max}";
-            self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_Def}/{petConfig.ZiZhi_Def_Max}";
-            self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_Adf}/{petConfig.ZiZhi_Adf_Max}";
-            self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text = string.Format("{0}/{1}",
-                CommonViewHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang),
-                CommonViewHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max));
-            self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_MageAct}/{petConfig.ZiZhi_MageAct_Max}";
+            using (zstring.Block())
+            {
+                self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Hp, petConfig.ZiZhi_Hp_Max);
+                self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Act, petConfig.ZiZhi_Act_Max);
+                self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Def, petConfig.ZiZhi_Def_Max);
+                self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Adf, petConfig.ZiZhi_Adf_Max);
+                self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}",
+                            CommonViewHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang),
+                            CommonViewHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max));
+                self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_MageAct, petConfig.ZiZhi_MageAct_Max);
+            }
 
             Sprite sprite16 = self.Root().GetComponent<ResourcesLoaderComponent>()
                     .LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Pro_16.png");
@@ -1167,11 +1184,19 @@ namespace ET.Client
                 float fvalue = (NumericHelp.GetAttributeValue(rolePetInfo, numericType)) * 0.01f + addValue * 100;
                 //string svalue = string.Format("{0:F}", fvalue);
                 string svalue = fvalue.ToString("0.#####");
-                return $"{ItemViewHelp.GetAttributeName(numericType)} {svalue}%";
+                using (zstring.Block())
+                {
+                    return (zstring)ItemViewHelp.GetAttributeName(numericType) + " " + svalue + "%";
+                }
             }
             else
             {
-                return $"{ItemViewHelp.GetAttributeName(numericType)} {(long)(NumericHelp.GetAttributeValue(rolePetInfo, numericType) + addValue)}";
+                using (zstring.Block())
+                {
+                    return (zstring)
+                            ItemViewHelp.GetAttributeName(numericType) + " " +
+                            (long)(NumericHelp.GetAttributeValue(rolePetInfo, numericType) + addValue);
+                }
             }
         }
 

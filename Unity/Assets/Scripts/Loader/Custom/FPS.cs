@@ -26,9 +26,9 @@ class FPS : MonoBehaviour
     private long mFrameCount = 0;
     private long mLastFrameTime = 0;
     static long mLastFps = 0;
-    private static string fpsText  = "帧数: {0}";
+    private static string fpsText = "帧数: {0}";
 
-    private List<long> TickCount = new List<long>();  //三百帧取一个平均数
+    private List<long> TickCount = new List<long>(); //三百帧取一个平均数
 
     private void UpdateTick()
     {
@@ -58,15 +58,21 @@ class FPS : MonoBehaviour
             {
                 totalFps += TickCount[i];
             }
+
             totalFps = totalFps / TickCount.Count;
             TickCount.Clear();
-            this.gameObject.GetComponent<Text>().text = $"平均帧数: {totalFps}";
+            using (zstring.Block())
+            {
+                this.gameObject.GetComponent<Text>().text = (zstring)"平均帧数: " + totalFps;
+            }
         }
         else
         {
-            this.gameObject.GetComponent<Text>().text = string.Format(fpsText, mLastFps);
+            using (zstring.Block())
+            {
+                this.gameObject.GetComponent<Text>().text = zstring.Format(fpsText, mLastFps);
+            }
         }
-       
     }
 
     public static long TickToMilliSec(long tick)

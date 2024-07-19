@@ -128,47 +128,50 @@ namespace ET.Client
             self.View.E_Text_QualityText.text = CommonViewHelper.GetPetQualityName(petConfig.PetQuality);
             self.View.E_Text_QualityText.color = CommonViewHelper.QualityReturnColor(petConfig.PetQuality);
 
-            self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_Hp}/{petConfig.ZiZhi_Hp_Max}";
-            self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_Act}/{petConfig.ZiZhi_Act_Max}";
-            self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_Def}/{petConfig.ZiZhi_Def_Max}";
-            self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_Adf}/{petConfig.ZiZhi_Adf_Max}";
-            self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_MageAct}/{petConfig.ZiZhi_MageAct_Max}";
-            self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_ChengZhang}/{petConfig.ZiZhi_ChengZhang_Max}";
-
-            if (oldPetInfo != null)
+            using (zstring.Block())
             {
-                self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
-                        string.Format("(提升" + (rolePetInfo.ZiZhi_Hp - oldPetInfo.ZiZhi_Hp) + "点)");
-                self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
-                        string.Format("(提升" + (rolePetInfo.ZiZhi_Act - oldPetInfo.ZiZhi_Act) + "点)");
-                self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
-                        string.Format("(提升" + (rolePetInfo.ZiZhi_Def - oldPetInfo.ZiZhi_Def) + "点)");
-                self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
-                        string.Format("(提升" + (rolePetInfo.ZiZhi_Adf - oldPetInfo.ZiZhi_Adf) + "点)");
-                self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
-                        string.Format("(提升" + (rolePetInfo.ZiZhi_MageAct - oldPetInfo.ZiZhi_MageAct) + "点)");
-                self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
-                        string.Format("(提升" + (rolePetInfo.ZiZhi_ChengZhang - oldPetInfo.ZiZhi_ChengZhang) + "点)");
-            }
+                self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        (zstring)$"{rolePetInfo.ZiZhi_Hp}/{petConfig.ZiZhi_Hp_Max}";
+                self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        (zstring)$"{rolePetInfo.ZiZhi_Act}/{petConfig.ZiZhi_Act_Max}";
+                self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        (zstring)$"{rolePetInfo.ZiZhi_Def}/{petConfig.ZiZhi_Def_Max}";
+                self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        (zstring)$"{rolePetInfo.ZiZhi_Adf}/{petConfig.ZiZhi_Adf_Max}";
+                self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        (zstring)$"{rolePetInfo.ZiZhi_MageAct}/{petConfig.ZiZhi_MageAct_Max}";
+                self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        (zstring)$"{rolePetInfo.ZiZhi_ChengZhang}/{petConfig.ZiZhi_ChengZhang_Max}";
 
-            self.PetZiZhiItemList[0].transform.Find("ImageExpValue").localScale =
-                    new Vector3(Mathf.Clamp(rolePetInfo.ZiZhi_Hp * 1f / petConfig.ZiZhi_Hp_Max, 0f, 1f), 1f, 1f);
-            self.PetZiZhiItemList[1].transform.Find("ImageExpValue").localScale =
-                    new Vector3(Mathf.Clamp(rolePetInfo.ZiZhi_Act * 1f / petConfig.ZiZhi_Act_Max, 0f, 1f), 1f, 1f);
-            self.PetZiZhiItemList[2].transform.Find("ImageExpValue").localScale =
-                    new Vector3(Mathf.Clamp(rolePetInfo.ZiZhi_Def * 1f / petConfig.ZiZhi_Def_Max, 0f, 1f), 1f, 1f);
-            self.PetZiZhiItemList[3].transform.Find("ImageExpValue").localScale =
-                    new Vector3(Mathf.Clamp(rolePetInfo.ZiZhi_Adf * 1f / petConfig.ZiZhi_Adf_Max, 0f, 1f), 1f, 1f);
-            self.PetZiZhiItemList[4].transform.Find("ImageExpValue").localScale =
-                    new Vector3(Mathf.Clamp(rolePetInfo.ZiZhi_MageAct * 1f / petConfig.ZiZhi_MageAct_Max, 0f, 1f), 1f, 1f);
-            self.PetZiZhiItemList[5].transform.Find("ImageExpValue").localScale =
-                    new Vector3(Mathf.Clamp(rolePetInfo.ZiZhi_ChengZhang * 1f / (float)petConfig.ZiZhi_ChengZhang_Max, 0f, 1f), 1f, 1f);
+                if (oldPetInfo != null)
+                {
+                    self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
+                            (zstring)"(提升" + (rolePetInfo.ZiZhi_Hp - oldPetInfo.ZiZhi_Hp) + "点)";
+                    self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
+                            (zstring)"(提升" + (rolePetInfo.ZiZhi_Act - oldPetInfo.ZiZhi_Act) + "点)";
+                    self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
+                            (zstring)"(提升" + (rolePetInfo.ZiZhi_Def - oldPetInfo.ZiZhi_Def) + "点)";
+                    self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
+                            (zstring)"(提升" + (rolePetInfo.ZiZhi_Adf - oldPetInfo.ZiZhi_Adf) + "点)";
+                    self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
+                            (zstring)"(提升" + (rolePetInfo.ZiZhi_MageAct - oldPetInfo.ZiZhi_MageAct) + "点)";
+                    self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
+                            (zstring)"(提升" + (rolePetInfo.ZiZhi_ChengZhang - oldPetInfo.ZiZhi_ChengZhang) + "点)";
+                }
+
+                self.PetZiZhiItemList[0].transform.Find("ImageExpValue").localScale =
+                        new Vector3(Mathf.Clamp(rolePetInfo.ZiZhi_Hp * 1f / petConfig.ZiZhi_Hp_Max, 0f, 1f), 1f, 1f);
+                self.PetZiZhiItemList[1].transform.Find("ImageExpValue").localScale =
+                        new Vector3(Mathf.Clamp(rolePetInfo.ZiZhi_Act * 1f / petConfig.ZiZhi_Act_Max, 0f, 1f), 1f, 1f);
+                self.PetZiZhiItemList[2].transform.Find("ImageExpValue").localScale =
+                        new Vector3(Mathf.Clamp(rolePetInfo.ZiZhi_Def * 1f / petConfig.ZiZhi_Def_Max, 0f, 1f), 1f, 1f);
+                self.PetZiZhiItemList[3].transform.Find("ImageExpValue").localScale =
+                        new Vector3(Mathf.Clamp(rolePetInfo.ZiZhi_Adf * 1f / petConfig.ZiZhi_Adf_Max, 0f, 1f), 1f, 1f);
+                self.PetZiZhiItemList[4].transform.Find("ImageExpValue").localScale =
+                        new Vector3(Mathf.Clamp(rolePetInfo.ZiZhi_MageAct * 1f / petConfig.ZiZhi_MageAct_Max, 0f, 1f), 1f, 1f);
+                self.PetZiZhiItemList[5].transform.Find("ImageExpValue").localScale =
+                        new Vector3(Mathf.Clamp(rolePetInfo.ZiZhi_ChengZhang * 1f / (float)petConfig.ZiZhi_ChengZhang_Max, 0f, 1f), 1f, 1f);
+            }
         }
 
         private static void StartShowImg(this DlgPetChouKaGet self, GameObject startObj)

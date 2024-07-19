@@ -111,31 +111,43 @@ namespace ET.Client
             //鉴定品质符
             if (itemConfig.ItemSubType == 121)
             {
-                self.View.E_ItemDesText.GetComponent<Text>().text = itemDes + "\n" + "\n" + $"鉴定符品质:{bagInfo.ItemPar}" + "\n" +
-                        "品质越高,鉴定出极品的概率越高。" + "\n" +
-                        "鉴定符品质与制造者熟练度相关。";
+                using (zstring.Block())
+                {
+                    self.View.E_ItemDesText.GetComponent<Text>().text = (zstring)itemDes + "\n" + "\n" + $"鉴定符品质:{bagInfo.ItemPar}" + "\n" +
+                            "品质越高,鉴定出极品的概率越高。" + "\n" +
+                            "鉴定符品质与制造者熟练度相关。";
+                }
             }
 
             //鉴定品质符
             if (itemConfig.ItemType == 1 && itemConfig.ItemSubType == 131)
             {
                 string[] addList = itemConfig.ItemUsePar.Split(';')[0].Split(',');
-                self.View.E_ItemDesText.GetComponent<Text>().text = itemDes + "\n" + "\n" + "烹饪品质:" + bagInfo.ItemPar;
+                using (zstring.Block())
+                {
+                    self.View.E_ItemDesText.GetComponent<Text>().text = (zstring)itemDes + "\n" + "\n" + "烹饪品质:" + bagInfo.ItemPar;
+                }
             }
 
             //宠物技能
             if (itemConfig.ItemType == 2 && itemConfig.ItemSubType == 122)
             {
                 SkillConfig skillCof = SkillConfigCategory.Instance.Get(int.Parse(itemConfig.ItemUsePar));
-                self.View.E_ItemDesText.GetComponent<Text>().text = itemDes + "\n" + "\n" + $"技能描述:{skillCof.SkillDescribe}";
+                using (zstring.Block())
+                {
+                    self.View.E_ItemDesText.GetComponent<Text>().text = (zstring)itemDes + "\n" + "\n" + $"技能描述:{skillCof.SkillDescribe}";
+                }
             }
 
             //藏宝图
             if (itemConfig.ItemSubType == 127 && !string.IsNullOrEmpty(self.BagInfo.ItemPar))
             {
                 int sceneID = int.Parse(self.BagInfo.ItemPar.Split('@')[0]);
-                self.View.E_ItemDesText.GetComponent<Text>().text =
-                        $"{itemConfig.ItemDes}\n前往地图:{DungeonConfigCategory.Instance.Get(sceneID).ChapterName}开启藏宝图!";
+                using (zstring.Block())
+                {
+                    self.View.E_ItemDesText.GetComponent<Text>().text =
+                            (zstring)itemConfig.ItemDes + "\n前往地图:" + DungeonConfigCategory.Instance.Get(sceneID).ChapterName + "开启藏宝图!";
+                }
             }
 
             string langStr = GameSettingLanguge.Instance.LoadLocalization("使用等级");
@@ -327,7 +339,11 @@ namespace ET.Client
                 }
 
                 string[] getIdNew = dlgRole.View.ES_RoleGem.XiangQianItem.GemIDNew.Split('_');
-                usrPar = $"{dlgRole.View.ES_RoleGem.XiangQianItem.BagInfoID}_{dlgRole.View.ES_RoleGem.XiangQianIndex}";
+                using (zstring.Block())
+                {
+                    usrPar = (zstring)dlgRole.View.ES_RoleGem.XiangQianItem.BagInfoID + "_" + dlgRole.View.ES_RoleGem.XiangQianIndex;
+                }
+
                 if (getIdNew[dlgRole.View.ES_RoleGem.XiangQianIndex] != "0")
                 {
                     PopupTipHelp.OpenPopupTip(self.Root(), "镶嵌宝石", "是否需要覆盖宝石?\n覆盖后原有位置得宝石会自动销毁哦!", () => { self.RequestXiangQianGem(usrPar); })
@@ -455,14 +471,22 @@ namespace ET.Client
                 if (curSceneId != needSceneId)
                 {
                     string fubenName = DungeonConfigCategory.Instance.Get(needSceneId).ChapterName;
-                    FlyTipComponent.Instance.ShowFlyTip($"请前往{fubenName}");
+                    using (zstring.Block())
+                    {
+                        FlyTipComponent.Instance.ShowFlyTip((zstring)"请前往" + fubenName);
+                    }
+
                     return;
                 }
                 else
                 {
                     EventSystem.Instance.Publish(self.Root(), new DigForTreasure() { BagInfo = self.BagInfo });
                     self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_Role);
-                    FlyTipComponent.Instance.ShowFlyTip($"消耗道具:{itemConfig.ItemName}");
+                    using (zstring.Block())
+                    {
+                        FlyTipComponent.Instance.ShowFlyTip((zstring)"消耗道具:" + itemConfig.ItemName);
+                    }
+
                     self.OnCloseTips();
                     return;
                 }
@@ -533,7 +557,12 @@ namespace ET.Client
             if (errorCode == ErrorCode.ERR_ItemOnlyUseOcc)
             {
                 OccupationConfig occupationConfig = OccupationConfigCategory.Instance.Get(itemConfig.UseOcc);
-                string tip = string.Format(HintHelp.GetErrorHint(ErrorCode.ERR_ItemOnlyUseOcc), occupationConfig.OccupationName);
+                string tip;
+                using (zstring.Block())
+                {
+                    tip = zstring.Format(HintHelp.GetErrorHint(ErrorCode.ERR_ItemOnlyUseOcc), occupationConfig.OccupationName);
+                }
+
                 FlyTipComponent.Instance.ShowFlyTip(GameSettingLanguge.Instance.LoadLocalization(tip));
             }
 
@@ -580,13 +609,21 @@ namespace ET.Client
             if (equipinfo.FumoProLists.Count > 0)
             {
                 string equipfumo = ItemViewHelp.GetFumpProDesc(equipinfo.FumoProLists);
-                string fumopro = $"当前附魔属性<color=#BEFF34>{equipfumo}</color> \n是否覆盖已有属性\n{itemfumo}\n此附魔道具已消耗";
+                string fumopro;
+                using (zstring.Block())
+                {
+                    fumopro = (zstring)"当前附魔属性<color=#BEFF34>" + equipfumo + "</color> \n是否覆盖已有属性\n" + itemfumo + "\n此附魔道具已消耗";
+                }
 
                 BagClientNetHelper.SendFumoUse(self.Root(), self.BagInfo, hideProLists).Coroutine();
                 PopupTipHelp.OpenPopupTip(self.Root(), "装备附魔", fumopro, () =>
                 {
                     BagClientNetHelper.SendFumoPro(self.Root(), 0).Coroutine();
-                    FlyTipComponent.Instance.ShowFlyTip($"附魔属性 {itemfumo}");
+                    using (zstring.Block())
+                    {
+                        FlyTipComponent.Instance.ShowFlyTip((zstring)$"附魔属性 {itemfumo}");
+                    }
+
                     self.OnCloseTips();
                 }, () => { self.OnCloseTips(); }).Coroutine();
             }
@@ -594,7 +631,10 @@ namespace ET.Client
             {
                 await BagClientNetHelper.SendFumoUse(self.Root(), self.BagInfo, hideProLists);
                 await BagClientNetHelper.SendFumoPro(self.Root(), 0);
-                FlyTipComponent.Instance.ShowFlyTip($"附魔属性 {itemfumo}");
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip((zstring)$"附魔属性 {itemfumo}");
+                }
 
                 self.OnCloseTips();
             }
@@ -641,13 +681,21 @@ namespace ET.Client
 
         private static void OnHuiShouButton(this DlgItemTips self)
         {
-            EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = $"1_{self.BagInfo.BagInfoID}" });
+            using (zstring.Block())
+            {
+                EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = (zstring)$"1_{self.BagInfo.BagInfoID}" });
+            }
+
             self.OnCloseTips();
         }
 
         private static void OnHuiShouCancleButton(this DlgItemTips self)
         {
-            EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = $"0_{self.BagInfo.BagInfoID}" });
+            using (zstring.Block())
+            {
+                EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = (zstring)$"0_{self.BagInfo.BagInfoID}" });
+            }
+
             self.OnCloseTips();
         }
 

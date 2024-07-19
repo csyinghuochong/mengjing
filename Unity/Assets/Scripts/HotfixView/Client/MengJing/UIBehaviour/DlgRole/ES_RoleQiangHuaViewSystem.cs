@@ -90,15 +90,21 @@ namespace ET.Client
             CommonViewHelper.SetParent(self.E_ImageSelectImage.gameObject, esRoleQiangHuaItem.uiTransform.gameObject);
             self.E_ImageSelectImage.transform.localPosition = new Vector3(1f, -2f, 0f);
             string qianghuaName = ItemViewData.EquipWeiZhiToName[subType].Name;
-            self.E_QiangHuaNameText.text = $"{qianghuaName}强化 +{qianghuaLevel}";
+            using (zstring.Block())
+            {
+                self.E_QiangHuaNameText.text = (zstring)$"{qianghuaName}强化 +{qianghuaLevel}";
+            }
+
             EquipQiangHuaConfig equipQiangHuaConfig = QiangHuaHelper.GetQiangHuaConfig(subType, qianghuaLevel);
 
             float fvalue = float.Parse(equipQiangHuaConfig.EquipPropreAdd) * 100f;
-            //string svalue = string.Format("{0:F}", fvalue);
             string svalue = fvalue.ToString("0.#####");
-            self.E_Attribute1Text.text = $"对应部位提升 {svalue}%属性";
+            using (zstring.Block())
+            {
+                self.E_Attribute1Text.text = (zstring)"对应部位提升 " + svalue + "%属性";
+            }
 
-            self.ES_EquipSetItem.E_QiangHuaLvText.text = $"+{qianghuaLevel}";
+            self.ES_EquipSetItem.E_QiangHuaLvText.text = (zstring)"+{qianghuaLevel}";
             self.E_QiangHuaNameText.text = ItemViewData.EquipWeiZhiToName[subType].Name;
             esRoleQiangHuaItem.OnUpateUI(qianghuaLevel);
 
@@ -115,16 +121,21 @@ namespace ET.Client
             EquipQiangHuaConfig next_equipQiangHuaConfig = QiangHuaHelper.GetQiangHuaConfig(subType, qianghuaLevel + 1);
             fvalue = float.Parse(next_equipQiangHuaConfig.EquipPropreAdd) * 100f;
             svalue = fvalue.ToString("0.#####");
-            ; /// string.Format("{0:P}", fvalue);
-            self.E_Attribute2Text.text = $"对应部位提升 {svalue}%属性";
+            using (zstring.Block())
+            {
+                self.E_Attribute2Text.text = (zstring)"对应部位提升 " + svalue + "%属性";
+            }
 
             string costItems = equipQiangHuaConfig.CostItem;
-            costItems += $"@1;{equipQiangHuaConfig.CostGold}";
+            costItems += (zstring)$"@1;{equipQiangHuaConfig.CostGold}";
             self.ES_CostList.Refresh(costItems);
 
-            self.E_SuccessRateText.text = $"强化成功率: {(int)(equipQiangHuaConfig.SuccessPro * 100)}%";
-            double addPro = QiangHuaHelper.GetQiangHuaConfig(subType, qianghuaLevel).AdditionPro * bagComponent.QiangHuaFails[subType];
-            self.E_SuccessAdditionText.text = $"附加成功率 {(int)(addPro * 100)}%";
+            using (zstring.Block())
+            {
+                self.E_SuccessRateText.text = (zstring)"强化成功率: " + (int)(equipQiangHuaConfig.SuccessPro * 100) + "%";
+                double addPro = QiangHuaHelper.GetQiangHuaConfig(subType, qianghuaLevel).AdditionPro * bagComponent.QiangHuaFails[subType];
+                self.E_SuccessAdditionText.text = (zstring)"附加成功率 " + (int)(addPro * 100) + "%";
+            }
         }
 
         public static async ETTask OnButtonQiangHua(this ES_RoleQiangHua self)
@@ -140,7 +151,11 @@ namespace ET.Client
 
             EquipQiangHuaConfig equipQiangHuaConfig = QiangHuaHelper.GetQiangHuaConfig(self.ItemSubType, qianghuaLevel);
             string costItems = equipQiangHuaConfig.CostItem;
-            costItems += $"@1;{equipQiangHuaConfig.CostGold}";
+            using (zstring.Block())
+            {
+                costItems += (zstring)"@1;" + equipQiangHuaConfig.CostGold;
+            }
+
             if (!bagComponent.CheckNeedItem(costItems))
             {
                 FlyTipComponent.Instance.ShowFlyTip("道具不足！");

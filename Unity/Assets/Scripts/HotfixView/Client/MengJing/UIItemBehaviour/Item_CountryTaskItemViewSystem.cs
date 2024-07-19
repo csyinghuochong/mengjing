@@ -28,8 +28,11 @@ namespace ET.Client
             self.E_TextTaskDescText.text = taskConfig.TaskDes;
 
             taskPro.taskTargetNum_1 = taskPro.taskTargetNum_1 > taskConfig.TargetValue[0] ? taskConfig.TargetValue[0] : taskPro.taskTargetNum_1;
-            self.E_TextTaskProgressText.text =
-                    $"{GameSettingLanguge.Instance.LoadLocalization("进度值")}: {string.Format("{0}/{1}", taskPro.taskTargetNum_1, taskConfig.TargetValue[0])}";
+            using (zstring.Block())
+            {
+                self.E_TextTaskProgressText.text = zstring.Format("{0}: {1}/{2}", GameSettingLanguge.Instance.LoadLocalization("进度值"),
+                    taskPro.taskTargetNum_1, taskConfig.TargetValue[0]);
+            }
 
             // string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TaskIcon, taskConfig.TaskIcon.ToString());
             // Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);

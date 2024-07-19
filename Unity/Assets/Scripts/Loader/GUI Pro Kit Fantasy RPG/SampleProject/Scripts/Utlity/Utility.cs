@@ -66,7 +66,10 @@ namespace FantasyRPG
         /// </summary>
         public static string ChangeMoneyString(int myScore)
         {
-            return string.Format("{0:n0}", myScore);
+            using (zstring.Block())
+            {
+                return zstring.Format("{0:n0}", myScore);
+            }
         }
 
 
