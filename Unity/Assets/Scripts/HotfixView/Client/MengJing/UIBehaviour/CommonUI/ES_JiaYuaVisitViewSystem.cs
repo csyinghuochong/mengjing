@@ -27,7 +27,6 @@ namespace ET.Client
             JiaYuanComponentC jiaYuanComponent = self.Root().GetComponent<JiaYuanComponentC>();
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
-            FlyTipComponent.Instance.ShowFlyTip("消息 C2M_JiaYuanVisitListRequest 没有返回");
             M2C_JiaYuanVisitListResponse response =
                     await JiaYuanNetHelper.JiaYuanVisitListRequest(self.Root(), jiaYuanComponent.MasterId, unit.Id, operateType);
             self.m2C_JiaYuanVisitList = response;
