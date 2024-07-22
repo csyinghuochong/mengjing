@@ -169,10 +169,13 @@ namespace ET.Client
             }
 
             string asstips = "增加属性： ";
-            for (int i = 0; i < response.JiaYuanProAdd.Count; i++)
+            using (zstring.Block())
             {
-                string pname = ItemViewHelp.GetAttributeName(response.JiaYuanProAdd[i].KeyId);
-                asstips += $"{pname}: +{response.JiaYuanProAdd[i].Value} ";
+                for (int i = 0; i < response.JiaYuanProAdd.Count; i++)
+                {
+                    string pname = ItemViewHelp.GetAttributeName(response.JiaYuanProAdd[i].KeyId);
+                    asstips += zstring.Format("{0}: +{1} ", pname, response.JiaYuanProAdd[i].Value);
+                }
             }
 
             FlyTipComponent.Instance.ShowFlyTip(asstips);

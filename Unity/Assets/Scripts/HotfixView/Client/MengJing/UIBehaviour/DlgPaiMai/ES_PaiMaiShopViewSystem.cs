@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_PaiMaiShopItem))]
-    [EntitySystemOf(typeof (ES_PaiMaiShop))]
-    [FriendOfAttribute(typeof (ES_PaiMaiShop))]
+    [FriendOf(typeof(Scroll_Item_PaiMaiShopItem))]
+    [EntitySystemOf(typeof(ES_PaiMaiShop))]
+    [FriendOfAttribute(typeof(ES_PaiMaiShop))]
     public static partial class ES_PaiMaiShopSystem
     {
         [EntitySystem]
@@ -93,7 +93,11 @@ namespace ET.Client
             PaiMaiSellConfig paiMaiSellConfig = PaiMaiSellConfigCategory.Instance.Get(self.PaiMaiSellId);
             if (userInfo.Lv < paiMaiSellConfig.BuyLv)
             {
-                FlyTipComponent.Instance.ShowFlyTip($"{paiMaiSellConfig.BuyLv}级才能购买！");
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0}级才能购买！", paiMaiSellConfig.BuyLv));
+                }
+
                 return;
             }
 
@@ -135,7 +139,8 @@ namespace ET.Client
             if (ids.Count > 0)
             {
                 Scroll_Item_PaiMaiShopItem scrollItemPaiMaiShopItem = self.ScrollItemPaiMaiShopItems[0];
-                if (self.ScrollItemPaiMaiShopItems != null && self.ScrollItemPaiMaiShopItems.Count > 0 && scrollItemPaiMaiShopItem.uiTransform != null)
+                if (self.ScrollItemPaiMaiShopItems != null && self.ScrollItemPaiMaiShopItems.Count > 0 &&
+                    scrollItemPaiMaiShopItem.uiTransform != null)
                 {
                     scrollItemPaiMaiShopItem.ImageButton();
                 }

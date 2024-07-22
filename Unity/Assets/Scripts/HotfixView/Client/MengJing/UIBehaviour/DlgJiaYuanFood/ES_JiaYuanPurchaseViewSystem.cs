@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.JiaYuanPurchaseTimer)]
-    public class JiaYuanPurchaseTimer: ATimer<ES_JiaYuanPurchase>
+    public class JiaYuanPurchaseTimer : ATimer<ES_JiaYuanPurchase>
     {
         protected override void Run(ES_JiaYuanPurchase self)
         {
@@ -14,14 +14,17 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
 
-    [FriendOf(typeof (Scroll_Item_JiaYuanPurchaseItem))]
-    [EntitySystemOf(typeof (ES_JiaYuanPurchase))]
-    [FriendOfAttribute(typeof (ES_JiaYuanPurchase))]
+    [FriendOf(typeof(Scroll_Item_JiaYuanPurchaseItem))]
+    [EntitySystemOf(typeof(ES_JiaYuanPurchase))]
+    [FriendOfAttribute(typeof(ES_JiaYuanPurchase))]
     public static partial class ES_JiaYuanPurchaseSystem
     {
         [EntitySystem]
@@ -50,7 +53,7 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             long jiayuanzijin = self.Root().GetComponent<UserInfoComponentC>().UserInfo.JiaYuanFund;
             int refreshtime = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.JiaYuanPurchaseRefresh);
-            long needzijin = refreshtime >= 1? JiaYuanData.JiaYuanPurchaseRefresh : 0;
+            long needzijin = refreshtime >= 1 ? JiaYuanData.JiaYuanPurchaseRefresh : 0;
 
             if (refreshtime >= 3)
             {
@@ -66,8 +69,12 @@ namespace ET.Client
 
             if (needzijin > 0)
             {
-                PopupTipHelp.OpenPopupTip(self.Root(), "家园刷新", $"是否花费{needzijin}家园资金刷新", () => { self.RquestFresh().Coroutine(); }, null)
-                        .Coroutine();
+                using (zstring.Block())
+                {
+                    PopupTipHelp.OpenPopupTip(self.Root(), "家园刷新", zstring.Format("是否花费{0}家园资金刷新", needzijin),
+                                () => { self.RquestFresh().Coroutine(); }, null)
+                            .Coroutine();
+                }
             }
             else
             {
@@ -96,7 +103,7 @@ namespace ET.Client
                 for (int i = self.ScrollItemJiaYuanPurchaseItems.Count - 2; i >= 0; i--)
                 {
                     Scroll_Item_JiaYuanPurchaseItem scrollItemJiaYuanPurchaseItem = self.ScrollItemJiaYuanPurchaseItems[i];
-                    
+
                     bool leftTime = scrollItemJiaYuanPurchaseItem.UpdateLeftTime();
                     if (leftTime)
                     {
@@ -136,7 +143,10 @@ namespace ET.Client
                 cdTime = 24 * 60 * 60 - curTime;
             }
 
-            self.E_Text_TimeText.text = $"刷新倒计时: {TimeHelper.ShowLeftTime(cdTime * 1000)}";
+            using (zstring.Block())
+            {
+                self.E_Text_TimeText.text = zstring.Format("刷新倒计时: {0}", TimeHelper.ShowLeftTime(cdTime * 1000));
+            }
         }
 
         public static void OnUpdateItem(this ES_JiaYuanPurchase self)

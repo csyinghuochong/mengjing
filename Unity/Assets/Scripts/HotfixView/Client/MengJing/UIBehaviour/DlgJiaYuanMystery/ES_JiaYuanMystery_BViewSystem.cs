@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_JiaYuanMystery_B))]
-    [FriendOfAttribute(typeof (ES_JiaYuanMystery_B))]
+    [EntitySystemOf(typeof(ES_JiaYuanMystery_B))]
+    [FriendOfAttribute(typeof(ES_JiaYuanMystery_B))]
     public static partial class ES_JiaYuanMystery_BSystem
     {
         [EntitySystem]
@@ -67,35 +67,38 @@ namespace ET.Client
 
         public static async ETTask ShowCDTime(this ES_JiaYuanMystery_B self)
         {
-            while (!self.IsDisposed)
+            using (zstring.Block())
             {
-                DateTime dateTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
-                long curTime = dateTime.Hour * 60 * 60 + dateTime.Minute * 60 + dateTime.Second;
-                long cdTime = 0;
+                while (!self.IsDisposed)
+                {
+                    DateTime dateTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+                    long curTime = dateTime.Hour * 60 * 60 + dateTime.Minute * 60 + dateTime.Second;
+                    long cdTime = 0;
 
-                if (dateTime.Hour < 6)
-                {
-                    cdTime = 6 * 60 * 60 - curTime;
-                }
-                else if (dateTime.Hour < 12)
-                {
-                    cdTime = 12 * 60 * 60 - curTime;
-                }
-                else if (dateTime.Hour < 18)
-                {
-                    cdTime = 18 * 60 * 60 - curTime;
-                }
-                else
-                {
-                    cdTime = 24 * 60 * 60 - curTime;
-                }
+                    if (dateTime.Hour < 6)
+                    {
+                        cdTime = 6 * 60 * 60 - curTime;
+                    }
+                    else if (dateTime.Hour < 12)
+                    {
+                        cdTime = 12 * 60 * 60 - curTime;
+                    }
+                    else if (dateTime.Hour < 18)
+                    {
+                        cdTime = 18 * 60 * 60 - curTime;
+                    }
+                    else
+                    {
+                        cdTime = 24 * 60 * 60 - curTime;
+                    }
 
-                self.E_Text_CDTimeText.text = $"刷新倒计时: {TimeHelper.ShowLeftTime(cdTime * 1000)}";
-                await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
+                    self.E_Text_CDTimeText.text = zstring.Format("刷新倒计时: {0}", TimeHelper.ShowLeftTime(cdTime * 1000));
+                    await self.Root().GetComponent<TimerComponent>().WaitAsync(1000);
 
-                if (self.IsDisposed)
-                {
-                    break;
+                    if (self.IsDisposed)
+                    {
+                        break;
+                    }
                 }
             }
         }

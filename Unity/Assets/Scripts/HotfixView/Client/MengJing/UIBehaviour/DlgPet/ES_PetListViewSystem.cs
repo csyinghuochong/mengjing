@@ -347,7 +347,10 @@ namespace ET.Client
             PetSkinConfig petConfig = PetSkinConfigCategory.Instance.Get(skinId);
 
             self.ES_ModelShow.SetPosition(new Vector3(1 * 1000, 0, 0), new Vector3(0f, 115, 257f));
-            self.ES_ModelShow.ShowOtherModel((zstring)"Pet/" + petConfig.SkinID.ToString(), true).Coroutine();
+            using (zstring.Block())
+            {
+                self.ES_ModelShow.ShowOtherModel(zstring.Format("Pet/{0}", petConfig.SkinID.ToString()), true).Coroutine();
+            }
 
             self.E_SkinJiHuoImage.gameObject.SetActive(self.LastSelectItem.SkinId == self.PetSkinId);
             self.E_SkinWeiJiHuoImage.gameObject.SetActive(!self.E_SkinJiHuoImage.gameObject.activeSelf);
@@ -356,7 +359,11 @@ namespace ET.Client
             if (petConfig.PripertyShow != "" && petConfig.PripertyShow != "0")
             {
                 self.E_PropertyShowTextText.gameObject.SetActive(true);
-                self.E_PropertyShowTextText.text = (zstring)GameSettingLanguge.Instance.LoadLocalization("激活属性") + ":" + petConfig.PripertyShow;
+                using (zstring.Block())
+                {
+                    self.E_PropertyShowTextText.text =
+                            zstring.Format("{0}:{1}", GameSettingLanguge.Instance.LoadLocalization("激活属性"), petConfig.PripertyShow);
+                }
             }
             else
             {
@@ -403,7 +410,7 @@ namespace ET.Client
             int maxNum = PetHelper.GetPetMaxNumber(userInfo.Lv, unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetExtendNumber));
             using (zstring.Block())
             {
-                self.E_Text_PetNumberText.text = (zstring)PetHelper.GetBagPetNum(rolePetInfos) + "/" + maxNum;
+                self.E_Text_PetNumberText.text = zstring.Format("{0}/{1}", PetHelper.GetBagPetNum(rolePetInfos), maxNum);
             }
         }
 
@@ -470,7 +477,7 @@ namespace ET.Client
                 itemTransform.Find("Node_2/TextName").gameObject.GetComponent<Text>().text = itemConfig.ItemName;
                 using (zstring.Block())
                 {
-                    itemTransform.Find("Node_2/TextIcon").gameObject.GetComponent<Text>().text = (zstring)"等级 " + itemConfig.UseLv;
+                    itemTransform.Find("Node_2/TextIcon").gameObject.GetComponent<Text>().text = zstring.Format("等级 {0}", itemConfig.UseLv);
                 }
 
                 Image ImageIcon = itemTransform.Find("Node_2/ImageIcon").gameObject.GetComponent<Image>();
@@ -617,7 +624,7 @@ namespace ET.Client
             self.E_TextNameText.text = itemConfig.ItemName;
             using (zstring.Block())
             {
-                self.E_TextLevelText.text = (zstring)"等级: " + itemConfig.UseLv;
+                self.E_TextLevelText.text = zstring.Format("等级: {0}", itemConfig.UseLv);
             }
 
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, itemConfig.Icon);
@@ -663,14 +670,14 @@ namespace ET.Client
                 {
                     using (zstring.Block())
                     {
-                        attribute = (zstring)ItemViewHelp.GetAttributeName(numberType) + " + " + numberValue * 100 + "%";
+                        attribute = zstring.Format("{0}+{1}%", ItemViewHelp.GetAttributeName(numberType), numberValue * 100);
                     }
                 }
                 else
                 {
                     using (zstring.Block())
                     {
-                        attribute = (zstring)ItemViewHelp.GetAttributeName(numberType) + " + " + numberValue;
+                        attribute = zstring.Format("{0}+{1}", ItemViewHelp.GetAttributeName(numberType), numberValue);
                     }
                 }
 
@@ -714,7 +721,7 @@ namespace ET.Client
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.ShowBagInfos[index].ItemID);
             using (zstring.Block())
             {
-                scrollItemCommonItem.ES_CommonItem.E_ItemNumText.text = (zstring)itemConfig.UseLv + "级";
+                scrollItemCommonItem.ES_CommonItem.E_ItemNumText.text = zstring.Format("{0}级", itemConfig.UseLv);
             }
         }
 
@@ -904,10 +911,12 @@ namespace ET.Client
             self.E_Text_PetPingFenText.text = PetHelper.PetPingJia(rolePetInfo).ToString();
 
             self.E_Text_ShouHuText.text = ConfigData.PetShouHuAttri[rolePetInfo.ShouHuPos - 1].Value;
-            string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, $"ShouHu_{rolePetInfo.ShouHuPos - 1}");
-            Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
-
-            self.E_ImageShouHuImage.sprite = sp;
+            using (zstring.Block())
+            {
+                string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.OtherIcon, zstring.Format("ShouHu_{0}", rolePetInfo.ShouHuPos - 1));
+                Sprite sp = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
+                self.E_ImageShouHuImage.sprite = sp;
+            }
 
             //更新宠物是否进化
             if (rolePetInfo.UpStageStatus == 0 || rolePetInfo.UpStageStatus == 1)
@@ -1202,16 +1211,15 @@ namespace ET.Client
                 string svalue = fvalue.ToString("0.#####");
                 using (zstring.Block())
                 {
-                    return (zstring)ItemViewHelp.GetAttributeName(numericType) + " " + svalue + "%";
+                    return zstring.Format("{0} {1}%", ItemViewHelp.GetAttributeName(numericType), svalue);
                 }
             }
             else
             {
                 using (zstring.Block())
                 {
-                    return (zstring)
-                            ItemViewHelp.GetAttributeName(numericType) + " " +
-                            (long)(NumericHelp.GetAttributeValue(rolePetInfo, numericType) + addValue);
+                    return zstring.Format("{0} {1}", ItemViewHelp.GetAttributeName(numericType),
+                        (long)(NumericHelp.GetAttributeValue(rolePetInfo, numericType) + addValue));
                 }
             }
         }

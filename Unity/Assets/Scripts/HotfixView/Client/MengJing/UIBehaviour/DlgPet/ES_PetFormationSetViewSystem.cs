@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_PetFormationItem))]
-    [EntitySystemOf(typeof (ES_PetFormationSet))]
-    [FriendOfAttribute(typeof (ES_PetFormationSet))]
+    [FriendOf(typeof(Scroll_Item_PetFormationItem))]
+    [EntitySystemOf(typeof(ES_PetFormationSet))]
+    [FriendOfAttribute(typeof(ES_PetFormationSet))]
     public static partial class ES_PetFormationSetSystem
     {
         [EntitySystem]
@@ -31,6 +31,7 @@ namespace ET.Client
 
             Transform transform = self.uiTransform.Find("FormationNode");
             PetComponentC petComponent = self.Root().GetComponent<PetComponentC>();
+
             for (int i = 0; i < teamPets.Count; i++)
             {
                 Scroll_Item_PetFormationItem uIRolePetItemComponent = self.FormationItemComponents[i];
@@ -47,7 +48,11 @@ namespace ET.Client
                 if (uIRolePetItemComponent == null)
                 {
                     GameObject go = GameObject.Instantiate(bundleGameObject);
-                    CommonViewHelper.SetParent(go, transform.Find("FormationSet" + i).gameObject);
+                    using (zstring.Block())
+                    {
+                        CommonViewHelper.SetParent(go, transform.Find(zstring.Format("FormationSet{0}", i)).gameObject);
+                    }
+
                     uIRolePetItemComponent = self.AddChild<Scroll_Item_PetFormationItem>();
                     uIRolePetItemComponent.uiTransform = go.transform;
                     self.FormationItemComponents[i] = uIRolePetItemComponent;

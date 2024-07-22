@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.MapMiniTimer)]
-    public class MapMiniTimer: ATimer<ES_MapMini>
+    public class MapMiniTimer : ATimer<ES_MapMini>
     {
         protected override void Run(ES_MapMini self)
         {
@@ -15,13 +15,16 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
 
-    [EntitySystemOf(typeof (ES_MapMini))]
-    [FriendOfAttribute(typeof (ES_MapMini))]
+    [EntitySystemOf(typeof(ES_MapMini))]
+    [FriendOfAttribute(typeof(ES_MapMini))]
     public static partial class ES_MapMiniSystem
     {
         [EntitySystem]
@@ -191,7 +194,10 @@ namespace ET.Client
             {
                 self.Lab_TimeIndex = 0;
                 DateTime serverTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
-                self.E_TimeText.text = $"{serverTime.Hour}:{serverTime.Minute}";
+                using (zstring.Block())
+                {
+                    self.E_TimeText.text = zstring.Format("{0}:{1}", serverTime.Hour, serverTime.Minute);
+                }
             }
         }
 
@@ -290,66 +296,69 @@ namespace ET.Client
             int sceneId = self.Root().GetComponent<MapComponent>().SceneId;
             self.E_MainCityShowImage.gameObject.SetActive(true);
 
-            //显示地图名称
-            switch (sceneTypeEnum)
+            using (zstring.Block())
             {
-                case (int)SceneTypeEnum.CellDungeon:
-                    self.E_MapNameText.text = ChapterConfigCategory.Instance.Get(sceneId).ChapterName;
-                    break;
-                case (int)SceneTypeEnum.LocalDungeon:
-                    string str = string.Empty;
-                    if (difficulty == FubenDifficulty.Normal)
-                    {
-                        str = "(普通)";
-                    }
+                //显示地图名称
+                switch (sceneTypeEnum)
+                {
+                    case (int)SceneTypeEnum.CellDungeon:
+                        self.E_MapNameText.text = ChapterConfigCategory.Instance.Get(sceneId).ChapterName;
+                        break;
+                    case (int)SceneTypeEnum.LocalDungeon:
+                        string str = string.Empty;
+                        if (difficulty == FubenDifficulty.Normal)
+                        {
+                            str = "(普通)";
+                        }
 
-                    if (difficulty == FubenDifficulty.TiaoZhan)
-                    {
-                        str = "(挑战)";
-                    }
+                        if (difficulty == FubenDifficulty.TiaoZhan)
+                        {
+                            str = "(挑战)";
+                        }
 
-                    if (difficulty == FubenDifficulty.DiYu)
-                    {
-                        str = "(地狱)";
-                    }
+                        if (difficulty == FubenDifficulty.DiYu)
+                        {
+                            str = "(地狱)";
+                        }
 
-                    if (DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(sceneId))
-                    {
-                        str = string.Empty;
-                    }
+                        if (DungeonSectionConfigCategory.Instance.MysteryDungeonList.Contains(sceneId))
+                        {
+                            str = string.Empty;
+                        }
 
-                    self.E_MapNameText.text = DungeonConfigCategory.Instance.Get(sceneId).ChapterName + str;
-                    break;
-                case (int)SceneTypeEnum.TeamDungeon:
-                    str = "";
-                    if (difficulty == TeamFubenType.XieZhu)
-                    {
-                        str = "(协助)";
-                    }
+                        self.E_MapNameText.text = zstring.Format("{0}{1}", DungeonConfigCategory.Instance.Get(sceneId).ChapterName, str);
+                        break;
+                    case (int)SceneTypeEnum.TeamDungeon:
+                        str = "";
+                        if (difficulty == TeamFubenType.XieZhu)
+                        {
+                            str = "(协助)";
+                        }
 
-                    if (difficulty == TeamFubenType.ShenYuan)
-                    {
-                        str = "(深渊)";
-                    }
+                        if (difficulty == TeamFubenType.ShenYuan)
+                        {
+                            str = "(深渊)";
+                        }
 
-                    self.E_MapNameText.text = SceneConfigCategory.Instance.Get(sceneId).Name + str;
-                    break;
-                case SceneTypeEnum.Union:
-                    UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
-                    self.E_MapNameText.text = $"{userInfoComponent.UserInfo.UnionName} 家族地图";
-                    break;
-                default:
-                    //显示地图名称
-                    self.E_MapNameText.text = SceneConfigCategory.Instance.Get(sceneId).Name;
-                    break;
+                        self.E_MapNameText.text = zstring.Format("{0}{1}", SceneConfigCategory.Instance.Get(sceneId).Name, str);
+                        break;
+                    case SceneTypeEnum.Union:
+                        UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
+                        self.E_MapNameText.text = zstring.Format("{0} 家族地图", userInfoComponent.UserInfo.UnionName);
+                        break;
+                    default:
+                        //显示地图名称
+                        self.E_MapNameText.text = SceneConfigCategory.Instance.Get(sceneId).Name;
+                        break;
+                }
+
+                self.EG_HeadListRectTransform.gameObject.SetActive(true);
+                self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
+                self.MapMiniTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(200, TimerInvokeType.MapMiniTimer, self);
+
+                DateTime serverTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
+                self.E_TimeText.text = zstring.Format("{0}:{1}", serverTime.Hour, serverTime.Minute);
             }
-
-            self.EG_HeadListRectTransform.gameObject.SetActive(true);
-            self.Root().GetComponent<TimerComponent>().Remove(ref self.MapMiniTimer);
-            self.MapMiniTimer = self.Root().GetComponent<TimerComponent>().NewRepeatedTimer(200, TimerInvokeType.MapMiniTimer, self);
-
-            DateTime serverTime = TimeInfo.Instance.ToDateTime(TimeHelper.ServerNow());
-            self.E_TimeText.text = $"{serverTime.Hour}:{serverTime.Minute}";
         }
     }
 }

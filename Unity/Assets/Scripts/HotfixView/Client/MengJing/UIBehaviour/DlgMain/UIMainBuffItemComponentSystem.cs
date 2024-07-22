@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (UIMainBuffItemComponent))]
-    [EntitySystemOf(typeof (UIMainBuffItemComponent))]
+    [FriendOf(typeof(UIMainBuffItemComponent))]
+    [EntitySystemOf(typeof(UIMainBuffItemComponent))]
     public static partial class UIMainBuffItemComponentSystem
     {
         [EntitySystem]
@@ -42,7 +42,11 @@ namespace ET.Client
 
             if (self.BuffID == 0)
             {
-                Log.Error($"UIMainBuffItemComponent {self.BuffID == 0}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("UIMainBuffItemComponent {0}", self.BuffID == 0));
+                }
+
                 return;
             }
 
@@ -96,7 +100,7 @@ namespace ET.Client
                 self.EndTime = buffHandler.BuffEndTime;
             }
 
-            self.TextNumber.text = BuffNumber > 1? BuffNumber.ToString() : string.Empty;
+            self.TextNumber.text = BuffNumber > 1 ? BuffNumber.ToString() : string.Empty;
         }
 
         public static void OnAddBuff(this UIMainBuffItemComponent self, BuffC buffHandler)

@@ -106,7 +106,11 @@ namespace ET.Client
         public static void CheckSkilPositionSet(this ES_ButtonPositionSet self)
         {
             long userid = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
-            string positonlist = PlayerPrefsHelp.GetString($"PlayerPrefsHelp.SkillPostion_{userid}");
+            string positonlist;
+            using (zstring.Block())
+            {
+                positonlist = PlayerPrefsHelp.GetString(zstring.Format("PlayerPrefsHelp.SkillPostion_{0}", userid));
+            }
 
             string[] vector2list = positonlist.Split('@');
 
@@ -210,7 +214,10 @@ namespace ET.Client
 
             positonlist = positonlist.Substring(0, positonlist.Length - 1);
             long userid = self.Root().GetComponent<UserInfoComponentC>().UserInfo.UserId;
-            PlayerPrefsHelp.SetString($"PlayerPrefsHelp.SkillPostion_{userid}", positonlist);
+            using (zstring.Block())
+            {
+                PlayerPrefsHelp.SetString(zstring.Format("PlayerPrefsHelp.SkillPostion_{0}", userid), positonlist);
+            }
 
             self.HideEventTrigger();
         }

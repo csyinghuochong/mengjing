@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.MainActivityTipTimer)]
-    public class MainActivityTipTimer: ATimer<ES_MainActivityTip>
+    public class MainActivityTipTimer : ATimer<ES_MainActivityTip>
     {
         protected override void Run(ES_MainActivityTip self)
         {
@@ -14,13 +14,16 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
 
-    [EntitySystemOf(typeof (ES_MainActivityTip))]
-    [FriendOfAttribute(typeof (ES_MainActivityTip))]
+    [EntitySystemOf(typeof(ES_MainActivityTip))]
+    [FriendOfAttribute(typeof(ES_MainActivityTip))]
     public static partial class ES_MainActivityTipSystem
     {
         [EntitySystem]
@@ -85,7 +88,7 @@ namespace ET.Client
                 self.ActivityShowList.Add(worldSayConfig);
             }
 
-            self.ActivityShowList.Sort(delegate(ActivityTipConfig a, ActivityTipConfig b) { return (a.OpenTime > b.OpenTime? 1 : 0); });
+            self.ActivityShowList.Sort(delegate(ActivityTipConfig a, ActivityTipConfig b) { return (a.OpenTime > b.OpenTime ? 1 : 0); });
 
             self.StartTimer();
         }
@@ -99,7 +102,7 @@ namespace ET.Client
             }
 
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
-            long nextTime = self.Index == 0? self.ActivityShowList[0].OpenTime : self.ActivityShowList[0].CloseTime;
+            long nextTime = self.Index == 0 ? self.ActivityShowList[0].OpenTime : self.ActivityShowList[0].CloseTime;
             nextTime = Math.Max(nextTime, TimeHelper.ServerNow() + 1);
 
             self.ActivtyCur = self.ActivityShowList[0];
@@ -119,7 +122,7 @@ namespace ET.Client
                 self.ActivityShowList.RemoveAt(0);
             }
 
-            self.Index = self.Index == 0? 1 : 0;
+            self.Index = self.Index == 0 ? 1 : 0;
             self.StartTimer();
         }
 

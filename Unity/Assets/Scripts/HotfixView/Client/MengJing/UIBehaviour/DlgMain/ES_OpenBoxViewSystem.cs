@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.OpenBoxTimer)]
-    public class OpenBoxTimer: ATimer<ES_OpenBox>
+    public class OpenBoxTimer : ATimer<ES_OpenBox>
     {
         protected override void Run(ES_OpenBox self)
         {
@@ -14,13 +14,16 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
 
-    [EntitySystemOf(typeof (ES_OpenBox))]
-    [FriendOfAttribute(typeof (ES_OpenBox))]
+    [EntitySystemOf(typeof(ES_OpenBox))]
+    [FriendOfAttribute(typeof(ES_OpenBox))]
     public static partial class ES_OpenBoxSystem
     {
         [EntitySystem]
@@ -64,7 +67,7 @@ namespace ET.Client
         public static void OnOpenBox(this ES_OpenBox self, Unit box)
         {
             self.EndTime = 0;
-            self.BoxUnitId = box != null? box.Id : 0;
+            self.BoxUnitId = box != null ? box.Id : 0;
             self.uiTransform.gameObject.SetActive(box != null);
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
 
@@ -102,7 +105,11 @@ namespace ET.Client
             if (itemneeds.Length > 2 && !bagComponent.CheckNeedItem(itemneeds))
             {
                 self.uiTransform.gameObject.SetActive(false);
-                FlyTipComponent.Instance.ShowFlyTip($"道具不足，需要道具 {CommonViewHelper.GetNeedItemDesc(itemneeds)}！");
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("道具不足，需要道具 {0}！", CommonViewHelper.GetNeedItemDesc(itemneeds)));
+                }
+
                 return;
             }
 

@@ -54,7 +54,10 @@ namespace ET.Client
             if (response.LearnId != 0)
             {
                 ItemConfig itemConfig = ItemConfigCategory.Instance.Get(response.LearnId);
-                FlyTipComponent.Instance.ShowFlyTip($"恭喜你学会制作 {itemConfig.ItemName}");
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("恭喜你学会制作 {0}", itemConfig.ItemName));
+                }
             }
 
             self.Root().GetComponent<JiaYuanComponentC>().LearnMakeIds_7 = response.LearnMakeIds;

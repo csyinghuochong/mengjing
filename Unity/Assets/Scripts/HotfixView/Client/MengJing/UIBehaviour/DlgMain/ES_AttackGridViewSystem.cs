@@ -12,8 +12,7 @@ namespace ET.Client
         {
             self.uiTransform = transform;
 
-            self.E_Btn_SkillStartEventTrigger.RegisterEvent(EventTriggerType.PointerDown,
-                (pdata) => { self.PointerDown(pdata as PointerEventData); });
+            self.E_Btn_SkillStartEventTrigger.RegisterEvent(EventTriggerType.PointerDown, (pdata) => { self.PointerDown(pdata as PointerEventData); });
             self.E_Btn_SkillStartEventTrigger.RegisterEvent(EventTriggerType.EndDrag, (pdata) => { self.OnEndDrag(pdata as PointerEventData); });
             self.E_Btn_SkillStartEventTrigger.RegisterEvent(EventTriggerType.PointerUp, (pdata) => { self.PointerUp(pdata as PointerEventData); });
         }

@@ -98,18 +98,18 @@ namespace ET.Client
             string expStr = rolePetInfo.PetExp.ToString();
             string upExpStr = expConfig.UpExp.ToString();
 
-            if (rolePetInfo.PetExp >= 10000)
-            {
-                expStr = (int)(rolePetInfo.PetExp / 10000) + GameSettingLanguge.Instance.LoadLocalization("万");
-            }
-
-            if (expConfig.UpExp >= 10000)
-            {
-                upExpStr = (int)(expConfig.UpExp / 10000) + GameSettingLanguge.Instance.LoadLocalization("万");
-            }
-
             using (zstring.Block())
             {
+                if (rolePetInfo.PetExp >= 10000)
+                {
+                    expStr = (zstring)(int)(rolePetInfo.PetExp / 10000) + GameSettingLanguge.Instance.LoadLocalization("万");
+                }
+
+                if (expConfig.UpExp >= 10000)
+                {
+                    upExpStr = (zstring)(int)(expConfig.UpExp / 10000) + GameSettingLanguge.Instance.LoadLocalization("万");
+                }
+
                 self.E_Text_PetExpText.text = zstring.Format("{0}/{1}", expStr, upExpStr);
                 self.E_ImageExpValueImage.transform.localScale = new Vector3(Mathf.Clamp(rolePetInfo.PetExp * 1f / expConfig.UpExp, 0f, 1f), 1f, 1f);
 

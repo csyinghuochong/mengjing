@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_RoleHead))]
-    [FriendOfAttribute(typeof (ES_RoleHead))]
+    [EntitySystemOf(typeof(ES_RoleHead))]
+    [FriendOfAttribute(typeof(ES_RoleHead))]
     public static partial class ES_RoleHeadSystem
     {
         [EntitySystem]
@@ -40,7 +40,10 @@ namespace ET.Client
         public static void OnUpdateCombat(this ES_RoleHead self)
         {
             long combat = self.UserInfoComponent.UserInfo.Combat;
-            self.E_CombatText.text = $"战力: {combat}";
+            using (zstring.Block())
+            {
+                self.E_CombatText.text = zstring.Format("战力: {0}", combat);
+            }
         }
 
         public static void OnImagePetHeadIcon(this ES_RoleHead self)
@@ -67,7 +70,8 @@ namespace ET.Client
         {
             int sceneType = self.Root().GetComponent<MapComponent>().SceneType;
             RolePetInfo rolePetInfo = self.Root().GetComponent<PetComponentC>().GetFightPet();
-            self.EG_PetIconSetRectTransform.gameObject.SetActive(!CommonHelp.IsBanHaoZone(self.Root().GetComponent<PlayerComponent>().ServerItem.ServerId) && rolePetInfo != null &&
+            self.EG_PetIconSetRectTransform.gameObject.SetActive(
+                !CommonHelp.IsBanHaoZone(self.Root().GetComponent<PlayerComponent>().ServerItem.ServerId) && rolePetInfo != null &&
                 sceneType != SceneTypeEnum.RunRace);
             if (rolePetInfo == null)
             {
@@ -82,7 +86,11 @@ namespace ET.Client
             self.E_ImagePetHeadIconImage.sprite = sp;
             self.E_Lab_PetNameText.text = rolePetInfo.PetName;
             Unit pet = self.Root().CurrentScene().GetComponent<UnitComponent>().Get(rolePetInfo.Id);
-            self.E_Lab_PetLvText.text = GameSettingLanguge.Instance.LoadLocalization("等级") + ":" + rolePetInfo.PetLv;
+            using (zstring.Block())
+            {
+                self.E_Lab_PetLvText.text = zstring.Format("{0}:{1}", GameSettingLanguge.Instance.LoadLocalization("等级"), rolePetInfo.PetLv);
+            }
+
             self.OnUpdatePetHP(pet);
         }
 
@@ -95,7 +103,11 @@ namespace ET.Client
         //角色经验更新
         public static void UpdateShowRoleExp(this ES_RoleHead self)
         {
-            self.E_RoleLvText.text = GameSettingLanguge.Instance.LoadLocalization("等级") + ":" + self.UserInfoComponent.UserInfo.Lv;
+            using (zstring.Block())
+            {
+                self.E_RoleLvText.text = zstring.Format("{0}:{1}", GameSettingLanguge.Instance.LoadLocalization("等级"),
+                    self.UserInfoComponent.UserInfo.Lv);
+            }
         }
 
         //角色疲劳更新
@@ -103,7 +115,12 @@ namespace ET.Client
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             int maxPiLao = unit.GetMaxPiLao();
-            self.E_RolePiLaoText.text = GameSettingLanguge.Instance.LoadLocalization("体力:") + self.UserInfoComponent.UserInfo.PiLao + "/" + maxPiLao;
+            using (zstring.Block())
+            {
+                self.E_RolePiLaoText.text = zstring.Format("{0}{1}/{2}", GameSettingLanguge.Instance.LoadLocalization("体力:"),
+                    self.UserInfoComponent.UserInfo.PiLao, maxPiLao);
+            }
+
             self.E_RolePiLaoImgImage.fillAmount = 1f * self.UserInfoComponent.UserInfo.PiLao / maxPiLao;
         }
 
@@ -112,10 +129,15 @@ namespace ET.Client
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
-            int skillNumber = 1 + numericComponent.GetAsInt(NumericType.MakeType_2) > 0? 1 : 0;
+            int skillNumber = 1 + numericComponent.GetAsInt(NumericType.MakeType_2) > 0 ? 1 : 0;
             int maxPiLao = unit.GetMaxHuoLi(skillNumber);
 
-            self.E_RoleHuoLiText.text = GameSettingLanguge.Instance.LoadLocalization("活力:") + self.UserInfoComponent.UserInfo.Vitality + "/" + maxPiLao;
+            using (zstring.Block())
+            {
+                self.E_RoleHuoLiText.text = zstring.Format("{0}{1}/{2}", GameSettingLanguge.Instance.LoadLocalization("活力:"),
+                    self.UserInfoComponent.UserInfo.Vitality, maxPiLao);
+            }
+
             self.E_RoleHuoLiImgImage.fillAmount = 1f * self.UserInfoComponent.UserInfo.Vitality / maxPiLao;
         }
 

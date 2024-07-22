@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.JoystickTimer)]
-    public class JoystickTimer: ATimer<ES_JoystickMove>
+    public class JoystickTimer : ATimer<ES_JoystickMove>
     {
         protected override void Run(ES_JoystickMove self)
         {
@@ -16,13 +16,16 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
 
-    [EntitySystemOf(typeof (ES_JoystickMove))]
-    [FriendOfAttribute(typeof (ES_JoystickMove))]
+    [EntitySystemOf(typeof(ES_JoystickMove))]
+    [FriendOfAttribute(typeof(ES_JoystickMove))]
     public static partial class ES_JoystickMoveSystem
     {
         [EntitySystem]
@@ -93,9 +96,9 @@ namespace ET.Client
             self.E_YaoGanDiFixImage.gameObject.SetActive(operateMode == 0);
             self.E_YaoGanDiMoveImage.gameObject.SetActive(operateMode == 1);
 
-            self.E_CenterShowImage.transform.SetParent(operateMode == 0? self.E_YaoGanDiFixImage.transform
+            self.E_CenterShowImage.transform.SetParent(operateMode == 0 ? self.E_YaoGanDiFixImage.transform
                     : self.E_YaoGanDiMoveImage.transform);
-            self.E_CenterShowImage.transform.SetParent(operateMode == 0? self.E_YaoGanDiFixImage.transform
+            self.E_CenterShowImage.transform.SetParent(operateMode == 0 ? self.E_YaoGanDiFixImage.transform
                     : self.E_YaoGanDiMoveImage.transform);
 
             self.E_CenterShowImage.gameObject.SetActive(self.OperateMode == 0);
@@ -179,7 +182,7 @@ namespace ET.Client
 
         private static GameObject GetYaoGanDi(this ES_JoystickMove self)
         {
-            return self.OperateMode == 0? self.E_YaoGanDiFixImage.gameObject : self.E_YaoGanDiMoveImage.gameObject;
+            return self.OperateMode == 0 ? self.E_YaoGanDiFixImage.gameObject : self.E_YaoGanDiMoveImage.gameObject;
         }
 
         private static int GetDirection(this ES_JoystickMove self, PointerEventData pdata)
@@ -273,7 +276,10 @@ namespace ET.Client
 
             self.LastShowTip = Time.time;
             string monsterName = MonsterConfigCategory.Instance.Get(monsterId).MonsterName;
-            FlyTipComponent.Instance.ShowFlyTip($"请先消灭{monsterName}");
+            using (zstring.Block())
+            {
+                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("请先消灭{0}", monsterName));
+            }
         }
 
         private static float CanMoveDistance(this ES_JoystickMove self, Unit unit, Quaternion rotation)
@@ -291,7 +297,11 @@ namespace ET.Client
                 Physics.Raycast(target + new Vector3(0f, 10f, 0f), Vector3.down, out hit, 100, self.BuildingLayer);
                 if (hit.collider != null)
                 {
-                    Log.Debug($" hit.collider != null: i : {i}   x: {target.x}  z:{target.z} ");
+                    using (zstring.Block())
+                    {
+                        Log.Debug(zstring.Format(" hit.collider != null: i : {0}   x: {1}  z:{2} ", i, target.x, target.z));
+                    }
+
                     break;
                 }
             }

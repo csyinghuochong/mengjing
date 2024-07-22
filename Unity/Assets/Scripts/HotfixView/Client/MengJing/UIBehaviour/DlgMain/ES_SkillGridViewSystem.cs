@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.SkillInfoShowTimer)]
-    public class SkillInfoShowTimer: ATimer<ES_SkillGrid>
+    public class SkillInfoShowTimer : ATimer<ES_SkillGrid>
     {
         protected override void Run(ES_SkillGrid self)
         {
@@ -15,13 +15,16 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
 
-    [EntitySystemOf(typeof (ES_SkillGrid))]
-    [FriendOfAttribute(typeof (ES_SkillGrid))]
+    [EntitySystemOf(typeof(ES_SkillGrid))]
+    [FriendOfAttribute(typeof(ES_SkillGrid))]
     public static partial class ES_SkillGridSystem
     {
         [EntitySystem]
@@ -81,7 +84,7 @@ namespace ET.Client
 
         public static int GetSkillId(this ES_SkillGrid self)
         {
-            return self.SkillBaseConfig != null? self.SkillBaseConfig.Id : 0;
+            return self.SkillBaseConfig != null ? self.SkillBaseConfig.Id : 0;
         }
 
         public static void OnUpdate(this ES_SkillGrid self, long leftCDTime, long pulicCd)
@@ -211,7 +214,12 @@ namespace ET.Client
                 BagInfo bagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfoByConfigId(self.SkillPro.SkillID);
                 if (bagInfo == null)
                 {
-                    FlyTipComponent.Instance.ShowFlyTip($"道具 {ItemConfigCategory.Instance.Get(self.SkillPro.SkillID).ItemName} 不足");
+                    using (zstring.Block())
+                    {
+                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("道具 {0} 不足",
+                            ItemConfigCategory.Instance.Get(self.SkillPro.SkillID).ItemName));
+                    }
+
                     return;
                 }
 
@@ -449,7 +457,11 @@ namespace ET.Client
                 int skillid = SkillHelp.GetWeaponSkill(skillpro.SkillID, UnitHelper.GetEquipType(self.Root()), skillSetComponent.SkillList);
                 if (!SkillConfigCategory.Instance.Contain(skillid))
                 {
-                    Log.Error($"skillid == null: {skillpro.SkillID} {skillid}");
+                    using (zstring.Block())
+                    {
+                        Log.Error(zstring.Format("skillid == null: {0} {1}", skillpro.SkillID, skillid));
+                    }
+
                     self.SkillPro = null;
                     return;
                 }
@@ -472,7 +484,11 @@ namespace ET.Client
                     if (!SkillConfigCategory.Instance.Contain(skillid))
                     {
                         self.SkillPro = null;
-                        Log.Error($"skillid == null: {skillpro.SkillID} {skillid}");
+                        using (zstring.Block())
+                        {
+                            Log.Error(zstring.Format("skillid == null: {0} {1}", skillpro.SkillID, skillid));
+                        }
+
                         return;
                     }
 

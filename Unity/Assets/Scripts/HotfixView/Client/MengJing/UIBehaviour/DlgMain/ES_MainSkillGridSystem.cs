@@ -5,8 +5,8 @@ using Image = UnityEngine.UI.Image;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_MainSkillGrid))]
-    [FriendOfAttribute(typeof (ES_MainSkillGrid))]
+    [EntitySystemOf(typeof(ES_MainSkillGrid))]
+    [FriendOfAttribute(typeof(ES_MainSkillGrid))]
     public static partial class ES_MainSkillGridSystem
     {
         [EntitySystem]
@@ -69,7 +69,7 @@ namespace ET.Client
 
         public static int GetSkillId(this ES_MainSkillGrid self)
         {
-            return self.SkillBaseConfig != null? self.SkillBaseConfig.Id : 0;
+            return self.SkillBaseConfig != null ? self.SkillBaseConfig.Id : 0;
         }
 
         public static void OnUpdate(this ES_MainSkillGrid self, long leftCDTime, long pulicCd)
@@ -455,7 +455,11 @@ namespace ET.Client
                 int skillid = SkillHelp.GetWeaponSkill(skillpro.SkillID, UnitHelper.GetEquipType(self.Root()), skillSetComponent.SkillList);
                 if (!SkillConfigCategory.Instance.Contain(skillid))
                 {
-                    Log.Error($"skillid == null: {skillpro.SkillID} {skillid}");
+                    using (zstring.Block())
+                    {
+                        Log.Error(zstring.Format("skillid == null: {0} {1}", skillpro.SkillID, skillid));
+                    }
+
                     self.SkillPro = null;
                     return;
                 }
@@ -482,7 +486,11 @@ namespace ET.Client
                     if (!SkillConfigCategory.Instance.Contain(skillid))
                     {
                         self.SkillPro = null;
-                        Log.Error($"skillid == null: {skillpro.SkillID} {skillid}");
+                        using (zstring.Block())
+                        {
+                            Log.Error(zstring.Format("skillid == null: {0} {1}", skillpro.SkillID, skillid));
+                        }
+
                         return;
                     }
 

@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_PaiMaiSellItem))]
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [EntitySystemOf(typeof (ES_PaiMaiSell))]
-    [FriendOfAttribute(typeof (ES_PaiMaiSell))]
+    [FriendOf(typeof(Scroll_Item_PaiMaiSellItem))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [EntitySystemOf(typeof(ES_PaiMaiSell))]
+    [FriendOfAttribute(typeof(ES_PaiMaiSell))]
     public static partial class ES_PaiMaiSellSystem
     {
         [EntitySystem]
@@ -62,7 +62,7 @@ namespace ET.Client
             }
 
             int zone = self.Root().GetComponent<PlayerComponent>().ServerItem.ServerId;
-            int openday = ServerHelper.GetServeOpenrDay( zone);
+            int openday = ServerHelper.GetServeOpenrDay(zone);
 
             self.PaiMaiItemInfos = response.PaiMaiItemInfos;
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
@@ -73,7 +73,12 @@ namespace ET.Client
             float sellgold_1 = sellgold * 0.0001f;
             float todayGold_1 = todayGold * 0.0001f;
 
-            self.E_PaiMaiGoldTextText.text = $"今日获利:{CommonViewHelper.ShowFloatValue(sellgold_1)}万/{CommonViewHelper.ShowFloatValue(todayGold_1)}万";
+            using (zstring.Block())
+            {
+                self.E_PaiMaiGoldTextText.text = zstring.Format("今日获利:{0}万/{1}万", CommonViewHelper.ShowFloatValue(sellgold_1),
+                    CommonViewHelper.ShowFloatValue(todayGold_1));
+            }
+
             self.UpdateSellItemUILIist(self.CurrentItemType);
         }
 
@@ -256,7 +261,10 @@ namespace ET.Client
             self.E_PaiMaiSellItemsLoopVerticalScrollRect.SetVisible(true, self.ShowPaiMaiItemInfos.Count);
 
             int maxNum = GlobalValueConfigCategory.Instance.Get(50).Value2;
-            self.E_Text_SellTimeText.text = "已上架:" + $"{self.PaiMaiItemInfos.Count}/{maxNum}";
+            using (zstring.Block())
+            {
+                self.E_Text_SellTimeText.text = zstring.Format("已上架:{0}/{1}", self.PaiMaiItemInfos.Count, maxNum);
+            }
         }
     }
 }

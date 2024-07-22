@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.UIMonsterSingingTimer)]
-    public class UIMonsterSingingTimer: ATimer<ES_MainHpBar>
+    public class UIMonsterSingingTimer : ATimer<ES_MainHpBar>
     {
         protected override void Run(ES_MainHpBar self)
         {
@@ -14,13 +14,16 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
 
-    [EntitySystemOf(typeof (ES_MainHpBar))]
-    [FriendOfAttribute(typeof (ES_MainHpBar))]
+    [EntitySystemOf(typeof(ES_MainHpBar))]
+    [FriendOfAttribute(typeof(ES_MainHpBar))]
     public static partial class ES_MainHpBarSystem
     {
         [EntitySystem]
@@ -125,7 +128,10 @@ namespace ET.Client
                 self.E_Lab_OwnerText.color = new Color(255f / 255f, 99f / 255f, 66f / 255f); //红色
             }
 
-            self.E_Lab_OwnerText.text = $"掉落归属:{unitbelong.GetComponent<UnitInfoComponent>().UnitName}";
+            using (zstring.Block())
+            {
+                self.E_Lab_OwnerText.text = zstring.Format("掉落归属:{0}", unitbelong.GetComponent<UnitInfoComponent>().UnitName);
+            }
         }
 
         public static void OnLockUnit(this ES_MainHpBar self, Unit unit)
@@ -193,7 +199,10 @@ namespace ET.Client
             }
 
             float value = hurt / 10000f;
-            return value.ToString("0.#") + "万";
+            using (zstring.Block())
+            {
+                return (zstring)value.ToString("0.#") + "万";
+            }
         }
 
         public static void UpdateHurtText(this ES_MainHpBar self)
@@ -205,8 +214,11 @@ namespace ET.Client
             else
             {
                 self.EG_HurtTextNodeRectTransform.gameObject.SetActive(true);
-                self.E_HurtTextPlayerText.text = "玩家: " + self.ShowHurtString(self.PlayerHurt);
-                self.E_HurtTextPetText.text = "宠物: " + self.ShowHurtString(self.PetHurt);
+                using (zstring.Block())
+                {
+                    self.E_HurtTextPlayerText.text = zstring.Format("玩家: {0}", self.ShowHurtString(self.PlayerHurt));
+                    self.E_HurtTextPetText.text = zstring.Format("宠物: {0}", self.ShowHurtString(self.PetHurt));
+                }
             }
         }
 
@@ -309,7 +321,10 @@ namespace ET.Client
         public static void UpdateModelShowView(this ES_MainHpBar self, int monsterId)
         {
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(monsterId);
-            self.ES_ModelShow.ShowOtherModel("Monster/" + monsterConfig.MonsterModelID).Coroutine();
+            using (zstring.Block())
+            {
+                self.ES_ModelShow.ShowOtherModel(zstring.Format("Monster/{0}", monsterConfig.MonsterModelID)).Coroutine();
+            }
         }
 
         public static void ShowBossHPBar(this ES_MainHpBar self, Unit unit)
