@@ -52,30 +52,34 @@ namespace ET.Client
                 return;
             }
 
-            PopupTipHelp.OpenPopupTip(self.Root(), $"小龟大赛", $"是否消耗{GlobalValueConfigCategory.Instance.Get(98).Value}金币支持该小龟?", async () =>
+            using (zstring.Block())
             {
-                int error = await ActivityNetHelper.TurtleSupportRequest(self.Root(), supportId);
-                if (error != ErrorCode.ERR_Success)
-                {
-                    return;
-                }
+                PopupTipHelp.OpenPopupTip(self.Root(), $"小龟大赛", zstring.Format("是否消耗{0}金币支持该小龟?", GlobalValueConfigCategory.Instance.Get(98).Value),
+                    async () =>
+                    {
+                        int error = await ActivityNetHelper.TurtleSupportRequest(self.Root(), supportId);
+                        if (error != ErrorCode.ERR_Success)
+                        {
+                            return;
+                        }
 
-                if (supportId == 20099011)
-                {
-                    self.View.E_BtnText1Text.text = "竞猜小龟";
-                }
-                else if (supportId == 20099012)
-                {
-                    self.View.E_BtnText2Text.text = "竞猜小龟";
-                }
-                else if (supportId == 20099013)
-                {
-                    self.View.E_BtnText3Text.text = "竞猜小龟";
-                }
+                        if (supportId == 20099011)
+                        {
+                            self.View.E_BtnText1Text.text = "竞猜小龟";
+                        }
+                        else if (supportId == 20099012)
+                        {
+                            self.View.E_BtnText2Text.text = "竞猜小龟";
+                        }
+                        else if (supportId == 20099013)
+                        {
+                            self.View.E_BtnText3Text.text = "竞猜小龟";
+                        }
 
-                self.SupportId = supportId;
-                await self.InitInfo();
-            }).Coroutine();
+                        self.SupportId = supportId;
+                        await self.InitInfo();
+                    }).Coroutine();
+            }
 
             await ETTask.CompletedTask;
         }
@@ -96,13 +100,16 @@ namespace ET.Client
 
             self.SupportId = response.SupportId;
 
-            self.View.E_WinNumText1Text.text = $"获胜次数:{response.WinTimes[0]}";
-            self.View.E_WinNumText2Text.text = $"获胜次数:{response.WinTimes[1]}";
-            self.View.E_WinNumText3Text.text = $"获胜次数:{response.WinTimes[2]}";
+            using (zstring.Block())
+            {
+                self.View.E_WinNumText1Text.text = zstring.Format("获胜次数:{0}", response.WinTimes[0]);
+                self.View.E_WinNumText2Text.text = zstring.Format("获胜次数:{0}", response.WinTimes[1]);
+                self.View.E_WinNumText3Text.text = zstring.Format("获胜次数:{0}", response.WinTimes[2]);
 
-            self.View.E_SupportNumText1Text.text = $"本次支持数:{response.SupportTimes[0]}";
-            self.View.E_SupportNumText2Text.text = $"本次支持数:{response.SupportTimes[1]}";
-            self.View.E_SupportNumText2Text.text = $"本次支持数:{response.SupportTimes[2]}";
+                self.View.E_SupportNumText1Text.text = zstring.Format("本次支持数:{0}", response.SupportTimes[0]);
+                self.View.E_SupportNumText2Text.text = zstring.Format("本次支持数:{0}", response.SupportTimes[1]);
+                self.View.E_SupportNumText2Text.text = zstring.Format("本次支持数:{0}", response.SupportTimes[2]);
+            }
 
             if (response.SupportId == 20099011)
             {
@@ -130,7 +137,10 @@ namespace ET.Client
                 long endTime = self.EndTime - curTime;
                 if (endTime > 0)
                 {
-                    self.View.E_TimeTextText.text = $"活动开启倒计时 {endTime / 60}分{endTime % 60}秒";
+                    using (zstring.Block())
+                    {
+                        self.View.E_TimeTextText.text = zstring.Format("活动开启倒计时 {0}分{1}秒", endTime / 60, endTime % 60);
+                    }
                 }
                 else
                 {

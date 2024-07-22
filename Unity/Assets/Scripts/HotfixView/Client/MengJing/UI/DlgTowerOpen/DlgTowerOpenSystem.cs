@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.TowerOpenTimer)]
-    public class TowerOpenTimer: ATimer<DlgTowerOpen>
+    public class TowerOpenTimer : ATimer<DlgTowerOpen>
     {
         protected override void Run(DlgTowerOpen self)
         {
@@ -14,12 +14,15 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
 
-    [FriendOf(typeof (DlgTowerOpen))]
+    [FriendOf(typeof(DlgTowerOpen))]
     public static class DlgTowerOpenSystem
     {
         public static void RegisterUIEvent(this DlgTowerOpen self)
@@ -119,7 +122,10 @@ namespace ET.Client
                 numMax = 50;
             }
 
-            self.View.E_TextTipText.text = "挑战之地：" + TowerConfigCategory.Instance.Get(towerId).CengNum + "/" + numMax;
+            using (zstring.Block())
+            {
+                self.View.E_TextTipText.text = zstring.Format("挑战之地：{0}/{1}", TowerConfigCategory.Instance.Get(towerId).CengNum, numMax);
+            }
         }
     }
 }

@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgUnionDonationRecordViewComponent))]
-    [FriendOf(typeof (DlgUnionDonationRecord))]
+    [FriendOf(typeof(DlgUnionDonationRecordViewComponent))]
+    [FriendOf(typeof(DlgUnionDonationRecord))]
     public static class DlgUnionDonationRecordSystem
     {
         public static void RegisterUIEvent(this DlgUnionDonationRecord self)
@@ -47,15 +47,22 @@ namespace ET.Client
                 GameObject HeadIcon = rc.Get<GameObject>("HeadIcon");
                 DonationRecord donationRecord = response.DonationRecords[i];
                 DateTime dateTime = TimeInfo.Instance.ToDateTime(donationRecord.Time);
-                if (donationRecord.Gold > 0)
+                using (zstring.Block())
                 {
-                    TextContent.GetComponent<Text>().text =
-                            $"玩家 <color=#{CommonHelp.QualityReturnColor(4)}>{donationRecord.Name}</color> {dateTime.ToShortTimeString()} 捐献： <color=#{CommonHelp.QualityReturnColor(2)}>{donationRecord.Gold}</color>金币";
-                }
-                else
-                {
-                    TextContent.GetComponent<Text>().text =
-                            $"玩家 <color=#{CommonHelp.QualityReturnColor(4)}>{donationRecord.Name}</color> {dateTime.ToShortTimeString()} 捐献： <color=#{CommonHelp.QualityReturnColor(2)}>{donationRecord.Diamond}</color>钻石";
+                    if (donationRecord.Gold > 0)
+                    {
+                        TextContent.GetComponent<Text>().text =
+                                zstring.Format("玩家 <color=#{0}>{1}</color> {2} 捐献： <color=#{3}>{4}</color>金币",
+                                    CommonHelp.QualityReturnColor(4), donationRecord.Name, dateTime.ToShortTimeString(),
+                                    CommonHelp.QualityReturnColor(2), donationRecord.Gold);
+                    }
+                    else
+                    {
+                        TextContent.GetComponent<Text>().text =
+                                zstring.Format("玩家 <color=#{0}>{1}</color> {2} 捐献： <color=#{3}>{4}</color>钻石",
+                                    CommonHelp.QualityReturnColor(4), donationRecord.Name, dateTime.ToShortTimeString(),
+                                    CommonHelp.QualityReturnColor(2), donationRecord.Diamond);
+                    }
                 }
 
                 HeadIcon.GetComponent<Image>().sprite = self.Root().GetComponent<ResourcesLoaderComponent>()

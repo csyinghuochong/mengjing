@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (DlgTowerFightReward))]
+    [FriendOf(typeof(DlgTowerFightReward))]
     public static class DlgTowerFightRewardSystem
     {
         public static void RegisterUIEvent(this DlgTowerFightReward self)
@@ -39,15 +39,21 @@
             TowerConfig towerConfig = TowerConfigCategory.Instance.Get(towerId);
             if (message.BattleResult == CombatResultEnum.Fail)
             {
-                self.View.E_Text_ResultText.text = $"挑战失败";
+                self.View.E_Text_ResultText.text = "挑战失败";
             }
             else
             {
-                self.View.E_Text_ResultText.text = $"你当前成功完成挑战{towerConfig.CengNum}波,获得奖励如下:";
+                using (zstring.Block())
+                {
+                    self.View.E_Text_ResultText.text = zstring.Format("你当前成功完成挑战{0}波,获得奖励如下:", towerConfig.CengNum);
+                }
             }
 
-            string rewardList = $"1;{message.RewardGold}@2;{message.RewardExp}";
-            self.View.ES_RewardList.Refresh(rewardList);
+            using (zstring.Block())
+            {
+                string rewardList = zstring.Format("1;{0}@2;{1}", message.RewardGold, message.RewardExp);
+                self.View.ES_RewardList.Refresh(rewardList);
+            }
         }
 
         public static void OnBtn_Return(this DlgTowerFightReward self)

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgSolo))]
+    [FriendOf(typeof(DlgSolo))]
     public static class DlgSoloSystem
     {
         public static void RegisterUIEvent(this DlgSolo self)
@@ -66,8 +66,12 @@ namespace ET.Client
                 ReferenceCollector rc = gameObject.GetComponent<ReferenceCollector>();
                 rc.Get<GameObject>("Text_Name").GetComponent<Text>().text = response.SoloPlayerResultInfoList[i].Name;
                 rc.Get<GameObject>("Text_Rank").GetComponent<Text>().text = (i + 1).ToString();
-                rc.Get<GameObject>("Text_Combat").GetComponent<Text>().text =
-                        $"{response.SoloPlayerResultInfoList[i].WinNum}胜{response.SoloPlayerResultInfoList[i].FailNum}败";
+                using (zstring.Block())
+                {
+                    rc.Get<GameObject>("Text_Combat").GetComponent<Text>().text =
+                            zstring.Format("{0}胜{1}败", response.SoloPlayerResultInfoList[i].WinNum, response.SoloPlayerResultInfoList[i].FailNum);
+                }
+
                 rc.Get<GameObject>("Text_JiFen").GetComponent<Text>().text = response.SoloPlayerResultInfoList[i].Combat.ToString();
                 rc.Get<GameObject>("ImageHeadIcon").GetComponent<Image>().sprite =
                         self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(
@@ -79,7 +83,7 @@ namespace ET.Client
         {
             if (self.Root().GetComponent<BattleMessageComponent>().SoloPiPeiStartTime == 0)
             {
-                self.View.E_Text_MatchText.text = $"点击下方开始匹配对手";
+                self.View.E_Text_MatchText.text = "点击下方开始匹配对手";
                 return;
             }
 
@@ -94,7 +98,10 @@ namespace ET.Client
 
                 TimeSpan timeCha = nowDateTime - startDateTime;
 
-                self.View.E_Text_MatchText.text = $"匹配时间:{timeCha.Minutes}分{timeCha.Seconds}秒";
+                using (zstring.Block())
+                {
+                    self.View.E_Text_MatchText.text = zstring.Format("匹配时间:{0}分{1}秒", timeCha.Minutes, timeCha.Seconds);
+                }
 
                 await timerComponent.WaitAsync(1000);
                 if (self.IsDisposed)

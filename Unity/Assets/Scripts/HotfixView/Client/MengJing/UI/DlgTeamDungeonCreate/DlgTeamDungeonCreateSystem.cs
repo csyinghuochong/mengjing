@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgTeamDungeonCreate))]
+    [FriendOf(typeof(DlgTeamDungeonCreate))]
     public static class DlgTeamDungeonCreateSystem
     {
         public static void RegisterUIEvent(this DlgTeamDungeonCreate self)
@@ -41,7 +41,11 @@ namespace ET.Client
 
                 //更新显示
                 ReferenceCollector rcSon = item.GetComponent<ReferenceCollector>();
-                rcSon.Get<GameObject>("Lab_Lv").GetComponent<Text>().text = "进入等级:" + sceneConfig[i].EnterLv + "级";
+                using (zstring.Block())
+                {
+                    rcSon.Get<GameObject>("Lab_Lv").GetComponent<Text>().text = zstring.Format("进入等级:{0}级", sceneConfig[i].EnterLv);
+                }
+
                 rcSon.Get<GameObject>("Lab_Name").GetComponent<Text>().text = sceneConfig[i].Name;
 
                 string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.TiTleIcon, sceneConfig[i].Icon);
@@ -122,7 +126,11 @@ namespace ET.Client
             self.View.ES_RewardList.Refresh(rewardItems);
 
             self.View.E_TextLevelLimitText.text = sceneConfig.EnterLv.ToString();
-            self.View.E_TextPlayerLimitText.text = $"{sceneConfig.PlayerLimit}-3人";
+            using (zstring.Block())
+            {
+                self.View.E_TextPlayerLimitText.text = zstring.Format("{0}-3人", sceneConfig.PlayerLimit);
+            }
+
             self.View.E_TextFubenDescText.text = sceneConfig.ChapterDes;
             self.View.E_TextFubenName2Text.text = sceneConfig.Name;
 
@@ -149,7 +157,12 @@ namespace ET.Client
                 BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
                 if (bagComponent.GetItemNumber(CommonHelp.ShenYuanCostId) < 1)
                 {
-                    FlyTipComponent.Instance.ShowFlyTip($"需要道具{ItemConfigCategory.Instance.Get(CommonHelp.ShenYuanCostId).ItemName}！");
+                    using (zstring.Block())
+                    {
+                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("需要道具{0}！",
+                            ItemConfigCategory.Instance.Get(CommonHelp.ShenYuanCostId).ItemName));
+                    }
+
                     return;
                 }
 
@@ -169,7 +182,7 @@ namespace ET.Client
 
                 if (totalTimes - times > 0 && totalTimes_2 - times_2 <= 0)
                 {
-                    PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", $"帮助副本次数已尽，开启副本会消耗正常次数", async () =>
+                    PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", "帮助副本次数已尽，开启副本会消耗正常次数", async () =>
                     {
                         int errorCode = await TeamNetHelper.RequestTeamDungeonCreate(self.Root(), self.FubenId, dungeonType);
                         if (errorCode != ErrorCode.ERR_Success)

@@ -1,7 +1,7 @@
 ﻿namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class DataUpdate_BagItemUpdate_DlgUnionMysteryRefresh: AEvent<Scene, BagItemUpdate>
+    public class DataUpdate_BagItemUpdate_DlgUnionMysteryRefresh : AEvent<Scene, BagItemUpdate>
     {
         protected override async ETTask Run(Scene root, BagItemUpdate args)
         {
@@ -11,9 +11,9 @@
         }
     }
 
-    [FriendOf(typeof (ES_UnionMystery_A))]
-    [FriendOf(typeof (ES_UnionMystery_B))]
-    [FriendOf(typeof (DlgUnionMystery))]
+    [FriendOf(typeof(ES_UnionMystery_A))]
+    [FriendOf(typeof(ES_UnionMystery_B))]
+    [FriendOf(typeof(DlgUnionMystery))]
     public static class DlgUnionMysterySystem
     {
         public static void RegisterUIEvent(this DlgUnionMystery self)
@@ -27,7 +27,10 @@
 
             self.View.ES_ModelShow.Camera.localPosition = new(0f, 115, 257f);
             NpcConfig npcConfig = NpcConfigCategory.Instance.Get(self.Root().GetComponent<UIComponent>().CurrentNpcId);
-            self.View.ES_ModelShow.ShowOtherModel("Npc/" + npcConfig.Asset.ToString()).Coroutine();
+            using (zstring.Block())
+            {
+                self.View.ES_ModelShow.ShowOtherModel(zstring.Format("Npc/{0}", npcConfig.Asset)).Coroutine();
+            }
         }
 
         private static void OnFunctionSetBtn(this DlgUnionMystery self, int index)

@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (DlgUnionDonation))]
+    [FriendOf(typeof(DlgUnionDonation))]
     public static class DlgUnionDonationSystem
     {
         public static void RegisterUIEvent(this DlgUnionDonation self)
@@ -18,8 +18,13 @@
         public static async ETTask OnUpdateUI(this DlgUnionDonation self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            self.View.E_Text_Tip_4Text.text = $"捐献次数： {unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.UnionDonationNumber)}/5次";
-            self.View.E_Text_Tip_6Text.text = $"捐献次数： {unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.UnionDiamondDonationNumber)}/10次";
+            using (zstring.Block())
+            {
+                self.View.E_Text_Tip_4Text.text = zstring.Format("捐献次数： {0}/5次",
+                    unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.UnionDonationNumber));
+                self.View.E_Text_Tip_6Text.text = zstring.Format("捐献次数： {0}/10次",
+                    unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.UnionDiamondDonationNumber));
+            }
 
             //客户端获取家族等级
             long unionId = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.UnionId_0);
@@ -32,8 +37,11 @@
             UnionConfig unionCof = UnionConfigCategory.Instance.Get(respose.UnionMyInfo.Level);
 
             self.UnionLevel = respose.UnionMyInfo.Level;
-            self.View.E_Text_Tip_3Text.text = "消耗:" + unionCof.DonateGold + "金币";
-            self.View.E_Text_Tip_5Text.text = "消耗:" + unionCof.DonateDiamond + "钻石";
+            using (zstring.Block())
+            {
+                self.View.E_Text_Tip_3Text.text = zstring.Format("消耗:{0}金币", unionCof.DonateGold);
+                self.View.E_Text_Tip_5Text.text = zstring.Format("消耗:{0}钻石", unionCof.DonateDiamond);
+            }
         }
 
         public static void OnButton_Record(this DlgUnionDonation self)

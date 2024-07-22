@@ -87,8 +87,12 @@ namespace ET.Client
 
             if (haveGem)
             {
-                PopupTipHelp.OpenPopupTip(self.Root(), "系统提示", $"制造道具的装备材料中{tip}镶嵌宝石,制造会导致<color='#55FF00'>宝石消失!</color>请问是否继续制造此道具",
-                    () => { self.RequestEquipMake().Coroutine(); }, null).Coroutine();
+                using (zstring.Block())
+                {
+                    PopupTipHelp.OpenPopupTip(self.Root(), "系统提示",
+                        zstring.Format("制造道具的装备材料中{0}镶嵌宝石,制造会导致<color='#55FF00'>宝石消失!</color>请问是否继续制造此道具", tip),
+                        () => { self.RequestEquipMake().Coroutine(); }, null).Coroutine();
+                }
             }
             else
             {
@@ -122,7 +126,10 @@ namespace ET.Client
 
             // 显示消耗活力
             self.View.E_Lab_HuoLiText.text = equipMakeConfig.CostVitality.ToString();
-            self.View.E_Text_CurrentText.text = $"当前活力:  {self.Root().GetComponent<UserInfoComponentC>().UserInfo.Vitality}";
+            using (zstring.Block())
+            {
+                self.View.E_Text_CurrentText.text = zstring.Format("当前活力:  {0}", self.Root().GetComponent<UserInfoComponentC>().UserInfo.Vitality);
+            }
         }
     }
 }

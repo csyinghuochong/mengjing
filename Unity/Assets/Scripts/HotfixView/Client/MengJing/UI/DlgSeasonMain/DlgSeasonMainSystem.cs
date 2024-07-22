@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.SeasonTowerTimer)]
-    public class SeasonTowerTimer: ATimer<DlgSeasonMain>
+    public class SeasonTowerTimer : ATimer<DlgSeasonMain>
     {
         protected override void Run(DlgSeasonMain self)
         {
@@ -13,12 +13,15 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
 
-    [FriendOf(typeof (DlgSeasonMain))]
+    [FriendOf(typeof(DlgSeasonMain))]
     public static class DlgSeasonMainSystem
     {
         public static void RegisterUIEvent(this DlgSeasonMain self)
@@ -64,7 +67,10 @@ namespace ET.Client
                 int showTime = self.CDdownTimeNumber;
                 int minute = showTime / 60;
                 int sceond = showTime % 60;
-                self.View.E_CDdownTimeTextText.text = $"倒计时 {minute}:{sceond}";
+                using (zstring.Block())
+                {
+                    self.View.E_CDdownTimeTextText.text = zstring.Format("倒计时 {0}:{1}", minute, sceond);
+                }
             }
 
             self.CDdownTimeNumber--;

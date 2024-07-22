@@ -136,7 +136,12 @@ namespace ET.Client
                     long itemNum = self.Root().GetComponent<BagComponentC>().GetItemNumber(costItemID);
                     self.View.EG_EnergySkillRectTransform.gameObject.SetActive(true);
                     //获取
-                    self.View.E_Lab_MoNnengHintText.text = ItemConfigCategory.Instance.Get(costItemID).ItemName + "  " + itemNum + "/" + 5;
+                    using (zstring.Block())
+                    {
+                        self.View.E_Lab_MoNnengHintText.text =
+                                zstring.Format("{0}  {1}/5", ItemConfigCategory.Instance.Get(costItemID).ItemName, itemNum);
+                    }
+
                     break;
                 case 5: //补偿大师
                     self.View.E_TaskFubenItemsLoopVerticalScrollRect.gameObject.SetActive(true);
@@ -179,7 +184,11 @@ namespace ET.Client
                         ActivityConfig activityConfig = ActivityConfigCategory.Instance.Get(nextid);
                         string[] riqi = activityConfig.Par_1.Split(';');
                         string speek = self.View.E_Lab_NpcSpeakText.text;
-                        self.View.E_Lab_NpcSpeakText.text = $"{speek} 下次领取时间:{riqi[0]}月{riqi[1]}日 {activityConfig.Par_4}";
+                        using (zstring.Block())
+                        {
+                            self.View.E_Lab_NpcSpeakText.text =
+                                    zstring.Format("{0} 下次领取时间:{1}月{2}日 {3}", speek, riqi[0], riqi[1], activityConfig.Par_4);
+                        }
                     }
 
                     break;
@@ -238,8 +247,11 @@ namespace ET.Client
             }
 
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(ConfigHelper.PetFramgeItemId());
-            PopupTipHelp.OpenPopupTip(self.Root(), "碎片兑换", $"是否消耗一个神兽碎片兑换一个{itemConfig.ItemName}",
-                () => { self.RequestFramegeDuiHuan().Coroutine(); }, null).Coroutine();
+            using (zstring.Block())
+            {
+                PopupTipHelp.OpenPopupTip(self.Root(), "碎片兑换", zstring.Format("是否消耗一个神兽碎片兑换一个{0}", itemConfig.ItemName),
+                    () => { self.RequestFramegeDuiHuan().Coroutine(); }, null).Coroutine();
+            }
         }
 
         public static async ETTask RequestFramegeDuiHuan(this DlgTaskGet self)
@@ -278,14 +290,17 @@ namespace ET.Client
             if (npcType == 2)
             {
                 SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(configId);
-                string desStr = "是否进入" + sceneConfig.Name + "?";
-                if (sceneConfig.DayEnterNum >= 1)
-                {
-                    desStr += "\n提示:每天只能进入" + sceneConfig.DayEnterNum + "次";
-                }
 
-                PopupTipHelp.OpenPopupTip(self.Root(), "进入地图", desStr,
-                    () => { self.RequestEnterFuben(configId).Coroutine(); }).Coroutine();
+                using (zstring.Block())
+                {
+                    zstring desStr = zstring.Format("是否进入{0}?", sceneConfig.Name);
+                    if (sceneConfig.DayEnterNum >= 1)
+                    {
+                        desStr += zstring.Format("\n提示:每天只能进入{0}次", sceneConfig.DayEnterNum);
+                    }
+
+                    PopupTipHelp.OpenPopupTip(self.Root(), "进入地图", desStr, () => { self.RequestEnterFuben(configId).Coroutine(); }).Coroutine();
+                }
             }
         }
 
@@ -459,7 +474,7 @@ namespace ET.Client
             for (int i = 0; i < self.ScrollItemTaskGetItems.Count; i++)
             {
                 Scroll_Item_TaskGetItem scrollItemTaskGetItem = self.ScrollItemTaskGetItems[i];
-                
+
                 if (scrollItemTaskGetItem.uiTransform == null)
                 {
                     continue;

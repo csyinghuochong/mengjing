@@ -2,7 +2,7 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgStore))]
+    [FriendOf(typeof(DlgStore))]
     public static class DlgStoreSystem
     {
         public static void RegisterUIEvent(this DlgStore self)
@@ -53,7 +53,10 @@ namespace ET.Client
             self.AddUIScrollItems(ref self.ScrollItemStoreItems, self.ShowStores.Count);
             self.View.E_StoreItemsLoopVerticalScrollRect.SetVisible(true, self.ShowStores.Count);
 
-            self.View.ES_ModelShow.ShowOtherModel("Npc/" + npcConfig.Asset).Coroutine();
+            using (zstring.Block())
+            {
+                self.View.ES_ModelShow.ShowOtherModel(zstring.Format("Npc/{0}", npcConfig.Asset)).Coroutine();
+            }
         }
 
         private static void OnStoreItemsRefresh(this DlgStore self, Transform transform, int index)

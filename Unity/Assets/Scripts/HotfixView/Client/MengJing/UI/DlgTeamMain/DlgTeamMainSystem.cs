@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.UITeamDropTimer)]
-    public class UITeamDropTimer: ATimer<DlgTeamMain>
+    public class UITeamDropTimer : ATimer<DlgTeamMain>
     {
         protected override void Run(DlgTeamMain self)
         {
@@ -14,12 +14,15 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
 
-    [FriendOf(typeof (DlgTeamMain))]
+    [FriendOf(typeof(DlgTeamMain))]
     public static class DlgTeamMainSystem
     {
         public static void RegisterUIEvent(this DlgTeamMain self)
@@ -64,7 +67,10 @@ namespace ET.Client
             self.DropInfos.RemoveAt(0);
             self.View.EG_TeamDropItemRectTransform.gameObject.SetActive(true);
             self.View.ES_CommonItem.UpdateItem(new() { ItemID = self.CurDrop.ItemID, ItemNum = self.CurDrop.ItemNum }, ItemOperateEnum.None);
-            Log.Debug($"self.DropInfos {self.DropInfos.Count}");
+            using (zstring.Block())
+            {
+                Log.Debug(zstring.Format("self.DropInfos {0}", self.DropInfos.Count));
+            }
         }
 
         public static void SendTeamPick(this DlgTeamMain self, DropInfo dropInfo, int needType)
@@ -129,7 +135,10 @@ namespace ET.Client
                 timeStr = 0;
             }
 
-            self.View.E_Label_LeftTimeText.text = $"拾取剩余:{timeStr}秒";
+            using (zstring.Block())
+            {
+                self.View.E_Label_LeftTimeText.text = zstring.Format("拾取剩余:{0}秒", timeStr);
+            }
         }
     }
 }

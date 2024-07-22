@@ -13,7 +13,10 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
@@ -57,7 +60,10 @@ namespace ET.Client
                 self.FightTime = 1;
             }
 
-            self.View.E_TextHurtText.text = $"伤害总值:{self.HurtValue}\n伤害秒值:{(int)((float)self.HurtValue / self.FightTime)}";
+            using (zstring.Block())
+            {
+                self.View.E_TextHurtText.text = zstring.Format("伤害总值:{0}\n伤害秒值:{1}", self.HurtValue, (int)((float)self.HurtValue / self.FightTime));
+            }
         }
 
         public static void BeginTimer(this DlgTrialMain self)
@@ -101,12 +107,16 @@ namespace ET.Client
                 self.Root().GetComponent<ClientSenderCompnent>().Call(C2M_TrialDungeonFinishRequest.Create()).Coroutine();
                 self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
 
-                self.View.E_TextCoundownText.text = $"未能在60秒内击败怪物,请点击重新挑战";
+                self.View.E_TextCoundownText.text = "未能在60秒内击败怪物,请点击重新挑战";
 
                 return;
             }
 
-            self.View.E_TextCoundownText.text = $"倒计时 {self.Countdown - 1}";
+            using (zstring.Block())
+            {
+                self.View.E_TextCoundownText.text = zstring.Format("倒计时 {0}", self.Countdown - 1);
+            }
+
             self.Countdown--;
             self.FightTime++;
         }

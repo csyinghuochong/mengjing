@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [FriendOf(typeof (DlgZhuaPu))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [FriendOf(typeof(DlgZhuaPu))]
     public static class DlgZhuaPuSystem
     {
         public static void RegisterUIEvent(this DlgZhuaPu self)
@@ -123,7 +123,10 @@ namespace ET.Client
             }
 
             int gailv = CommonHelp.GetZhuPuGaiLv(self.MonsterId, self.ItemId, 1);
-            self.View.E_TextGaiLvText.text = $"抓捕成功率： {gailv * 0.01f}%";
+            using (zstring.Block())
+            {
+                self.View.E_TextGaiLvText.text = zstring.Format("抓捕成功率： {0}%", gailv * 0.01f);
+            }
         }
 
         public static void OnInitUI(this DlgZhuaPu self, Unit unitmonster)
@@ -161,7 +164,7 @@ namespace ET.Client
             }
 
             float distance = Vector3.Distance(self.View.E_Img_ChanZiImage.transform.localPosition, self.View.E_Img_PosImage.transform.localPosition);
-            string jiacheng = distance <= 10f? "2" : "1";
+            string jiacheng = distance <= 10f ? "2" : "1";
             self.Root().GetComponent<TimerComponent>().Remove(ref self.Timer);
 
             M2C_JingLingCatchResponse response = await JingLingNetHelper.JingLingCatchRequest(self.Root(), self.MonsterUnitid, self.ItemId, jiacheng);
