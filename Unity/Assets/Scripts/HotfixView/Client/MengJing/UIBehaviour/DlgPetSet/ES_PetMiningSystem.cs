@@ -73,7 +73,11 @@ namespace ET.Client
             for (int i = 0; i < self.TeamTipList.Count; i++)
             {
                 int openLv = ConfigData.PetMiningTeamOpenLevel[i];
-                self.TeamTipList[i].text = $"{openLv}级开启";
+                using (zstring.Block())
+                {
+                    self.TeamTipList[i].text = zstring.Format("{0}级开启", openLv);
+                }
+
                 self.TeamTipList[i].gameObject.SetActive(openLv > userInfo.Lv);
             }
 
@@ -160,7 +164,7 @@ namespace ET.Client
         {
             int chatchun = 0;
             int zone = self.Root().GetComponent<PlayerComponent>().ServerItem.ServerId;
-            int openDay = ServerHelper.GetServeOpenrDay( zone);
+            int openDay = ServerHelper.GetServeOpenrDay(zone);
 
             List<PetMingPlayerInfo> petMingPlayers = self.GetSelfPetMing();
             for (int i = 0; i < petMingPlayers.Count; i++)
@@ -194,7 +198,10 @@ namespace ET.Client
 
             self.E_BuildingList.gameObject.SetActive(false);
             self.E_BuildingList.gameObject.SetActive(true);
-            self.E_Text_Chanchu_1.text = $"{chatchun}/小时";
+            using (zstring.Block())
+            {
+                self.E_Text_Chanchu_1.text = zstring.Format("{0}/小时", chatchun);
+            }
         }
 
         public static List<PetMingPlayerInfo> GetSelfPetMing(this ES_PetMining self)
@@ -273,7 +280,10 @@ namespace ET.Client
             var path = ABPathHelper.GetJpgPath(baginfs[page]);
             Sprite atlas = self.Root().GetComponent<ResourcesLoaderComponent>().LoadAssetSync<Sprite>(path);
             self.E_ImageMineDi.sprite = atlas;
-            self.E_Text_OccNumber.text = $"当前占领{occNumber}/{ConfigData.PetMiningList[mineType].Count}";
+            using (zstring.Block())
+            {
+                self.E_Text_OccNumber.text = zstring.Format("当前占领{0}/{1}", occNumber, ConfigData.PetMiningList[mineType].Count);
+            }
 
             //self.PetMiningNode.GetComponent<RectTransform>().sizeDelta = new Vector2(maxWidth, self.PetMiningNode.GetComponent<RectTransform>().sizeDelta.y);
         }

@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [EntitySystemOf(typeof (ES_ProtectEquip))]
-    [FriendOfAttribute(typeof (ES_ProtectEquip))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [EntitySystemOf(typeof(ES_ProtectEquip))]
+    [FriendOfAttribute(typeof(ES_ProtectEquip))]
     public static partial class ES_ProtectEquipSystem
     {
         [EntitySystem]
@@ -138,8 +138,12 @@ namespace ET.Client
                 return;
             }
 
-            string tip = isprotectd? "锁定" : "解锁";
-            FlyTipComponent.Instance.ShowFlyTip($"装备{tip}成功");
+            string tip = isprotectd ? "锁定" : "解锁";
+            using (zstring.Block())
+            {
+                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("装备{0}成功", tip));
+            }
+
             self.XilianBagInfo = self.Root().GetComponent<BagComponentC>().GetBagInfo(self.XilianBagInfo.BagInfoID);
             self.OnXiLianReturn();
         }

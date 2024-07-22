@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_PetMiningItem))]
-    [FriendOfAttribute(typeof (ES_PetMiningItem))]
+    [EntitySystemOf(typeof(ES_PetMiningItem))]
+    [FriendOfAttribute(typeof(ES_PetMiningItem))]
     public static partial class ES_PetMiningItemSystem
     {
         [EntitySystem]
@@ -44,13 +44,16 @@ namespace ET.Client
 
             self.E_ImageIcon.sprite = sp;
 
-            self.E_TextMine.text = mineBattleConfig.Name + (hexin? "(核心矿)" : string.Empty);
+            using (zstring.Block())
+            {
+                self.E_TextMine.text = zstring.Format("{0}{1}", mineBattleConfig.Name, (hexin ? "(核心矿)" : string.Empty));
 
-            int zone = self.Root().GetComponent<PlayerComponent>().ServerItem.ServerId;
-            int openDay = ServerHelper.GetServeOpenrDay( zone);
-            float coffi = CommonHelp.GetMineCoefficient(openDay, mingType, index, petMineExtend);
-            int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi);
-            self.E_TextChanChu.text = $"{chanchu}/小时";
+                int zone = self.Root().GetComponent<PlayerComponent>().ServerItem.ServerId;
+                int openDay = ServerHelper.GetServeOpenrDay(zone);
+                float coffi = CommonHelp.GetMineCoefficient(openDay, mingType, index, petMineExtend);
+                int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi);
+                self.E_TextChanChu.text = zstring.Format("{0}/小时", chanchu);
+            }
         }
 
         /// <summary>
@@ -69,7 +72,11 @@ namespace ET.Client
 
             if (petMingPlayerInfo != null)
             {
-                playerName = "拥有者：" + petMingPlayerInfo.PlayerName;
+                using (zstring.Block())
+                {
+                    playerName = zstring.Format("拥有者：{0}", petMingPlayerInfo.PlayerName);
+                }
+
                 confids = petMingPlayerInfo.PetConfig;
 
                 for (int i = 0; i < self.E_PetIconList.Length; i++)

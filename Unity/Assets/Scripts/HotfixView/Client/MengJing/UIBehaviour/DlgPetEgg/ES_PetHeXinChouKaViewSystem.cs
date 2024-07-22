@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_PetHeXinChouKa))]
-    [FriendOfAttribute(typeof (ES_PetHeXinChouKa))]
+    [EntitySystemOf(typeof(ES_PetHeXinChouKa))]
+    [FriendOfAttribute(typeof(ES_PetHeXinChouKa))]
     public static partial class ES_PetHeXinChouKaSystem
     {
         [EntitySystem]
@@ -46,8 +46,12 @@ namespace ET.Client
             }
 
             long haveNumber10 = self.Root().GetComponent<BagComponentC>().GetItemNumber(int.Parse(itemInfo10[0]));
-            self.E_Text_DiamondNumberText.text = $"{haveNumber10}/{(int)(int.Parse(itemInfo10[1]) * discount)}";
-            self.E_Text_DiamondNumberText.color = haveNumber10 >= (int)(int.Parse(itemInfo10[1]) * discount)? Color.white : Color.red;
+            using (zstring.Block())
+            {
+                self.E_Text_DiamondNumberText.text = zstring.Format("{0}/{1}", haveNumber10, (int)(int.Parse(itemInfo10[1]) * discount));
+            }
+
+            self.E_Text_DiamondNumberText.color = haveNumber10 >= (int)(int.Parse(itemInfo10[1]) * discount) ? Color.white : Color.red;
 
             string[] itemInfo1 = GlobalValueConfigCategory.Instance.Get(110).Value.Split('@')[0].Split(';');
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.ItemIcon, ItemConfigCategory.Instance.Get(int.Parse(itemInfo1[0])).Icon);
@@ -55,8 +59,12 @@ namespace ET.Client
 
             self.E_ItemImageIconImage.sprite = sp;
             long haveNumber1 = self.Root().GetComponent<BagComponentC>().GetItemNumber(int.Parse(itemInfo1[0]));
-            self.E_Text_CostNumberText.text = haveNumber1 + "/" + itemInfo1[1];
-            self.E_Text_CostNumberText.color = (haveNumber1 >= int.Parse(itemInfo1[1]))? Color.white : Color.red;
+            using (zstring.Block())
+            {
+                self.E_Text_CostNumberText.text = zstring.Format("{0}/{1}", haveNumber1, itemInfo1[1]);
+            }
+
+            self.E_Text_CostNumberText.color = (haveNumber1 >= int.Parse(itemInfo1[1])) ? Color.white : Color.red;
         }
 
         public static void OnBtn_RolePetHeXin(this ES_PetHeXinChouKa self)

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.PetEggListItemTimer)]
-    public class PetEggListItemTimer: ATimer<ES_PetEggListItem>
+    public class PetEggListItemTimer : ATimer<ES_PetEggListItem>
     {
         protected override void Run(ES_PetEggListItem self)
         {
@@ -15,13 +15,16 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
 
-    [EntitySystemOf(typeof (ES_PetEggListItem))]
-    [FriendOfAttribute(typeof (ES_PetEggListItem))]
+    [EntitySystemOf(typeof(ES_PetEggListItem))]
+    [FriendOfAttribute(typeof(ES_PetEggListItem))]
     public static partial class ES_PetEggListItemSystem
     {
         [EntitySystem]
@@ -80,7 +83,11 @@ namespace ET.Client
             }
 
             int costValue = CommonHelp.ReturnPetOpenTimeDiamond(self.RolePetEgg.KeyId, self.RolePetEgg.Value);
-            PopupTipHelp.OpenPopupTip(self.Root(), "开启宠物蛋", $"开启需要花费 {costValue}钻石", () => { self.OnButtonGet().Coroutine(); }).Coroutine();
+            using (zstring.Block())
+            {
+                PopupTipHelp.OpenPopupTip(self.Root(), "开启宠物蛋", zstring.Format("开启需要花费 {0}钻石", costValue), () => { self.OnButtonGet().Coroutine(); })
+                        .Coroutine();
+            }
         }
 
         public static async ETTask OnButtonFuHua(this ES_PetEggListItem self)
@@ -138,7 +145,11 @@ namespace ET.Client
         public static void OnTimer(this ES_PetEggListItem self)
         {
             long timeNow = self.RolePetEgg.Value - TimeHelper.ServerNow();
-            self.E_Text_TimeText.text = "剩余时间:" + TimeHelper.ShowLeftTime(timeNow);
+            using (zstring.Block())
+            {
+                self.E_Text_TimeText.text = zstring.Format("剩余时间:{0}", TimeHelper.ShowLeftTime(timeNow));
+            }
+
             if (timeNow <= 0)
             {
                 self.SetFuHuaEnd();
@@ -152,7 +163,11 @@ namespace ET.Client
 
             string[] useparams = ItemConfigCategory.Instance.Get(self.RolePetEgg.KeyId).ItemUsePar.Split('@');
             long timeNow = long.Parse(useparams[0]);
-            self.E_Text_TimeText.text = "孵化时间:" + TimeHelper.ShowLeftTime(timeNow * 1000);
+            using (zstring.Block())
+            {
+                self.E_Text_TimeText.text = zstring.Format("孵化时间:{0}", TimeHelper.ShowLeftTime(timeNow * 1000));
+            }
+
             self.E_ButtonOpenButton.gameObject.SetActive(false);
             self.E_ButtonGetButton.gameObject.SetActive(false);
         }

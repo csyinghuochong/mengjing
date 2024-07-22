@@ -62,7 +62,7 @@ namespace ET.Client
             int totalTimes = numericComponent.GetAsInt(NumericType.PetExploreNumber);
             using (zstring.Block())
             {
-                self.E_Text_TotalNumberText.text = (zstring)"今日累计次数：" + totalTimes;
+                self.E_Text_TotalNumberText.text = zstring.Format("今日累计次数：{0}", totalTimes);
             }
 
             self.E_Text_PetExploreLucklyText.text = numericComponent.GetAsInt(NumericType.PetExploreLuckly).ToString();
@@ -94,7 +94,7 @@ namespace ET.Client
             long haveNumber = self.Root().GetComponent<BagComponentC>().GetItemNumber(int.Parse(itemInfo[0]));
             using (zstring.Block())
             {
-                self.E_Text_CostNumberText.text = (zstring)haveNumber + "/" + itemInfo[1];
+                self.E_Text_CostNumberText.text = zstring.Format("{0}/{1}", haveNumber, itemInfo[1]);
             }
 
             self.E_Text_CostNumberText.color = haveNumber >= int.Parse(itemInfo[1]) ? Color.white : Color.red;

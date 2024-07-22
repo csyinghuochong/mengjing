@@ -45,7 +45,10 @@ namespace ET.Client
             }
 
             self.SetShouHuActive(petComponent.PetShouHuActive - 1);
-            FlyTipComponent.Instance.ShowFlyTip($"激活: {ConfigData.PetShouHuAttri[petComponent.PetShouHuActive - 1].Value}");
+            using (zstring.Block())
+            {
+                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("激活: {0}", ConfigData.PetShouHuAttri[petComponent.PetShouHuActive - 1].Value));
+            }
         }
 
         public static async ETTask OnButtonShouHuHandler(this ES_PetShouHu self, long petid)
