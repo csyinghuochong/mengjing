@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.BattleMainTimer)]
-    public class BattleMainTimer: ATimer<DlgBattleMain>
+    public class BattleMainTimer : ATimer<DlgBattleMain>
     {
         protected override void Run(DlgBattleMain self)
         {
@@ -18,7 +18,7 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (DlgBattleMain))]
+    [FriendOf(typeof(DlgBattleMain))]
     public static class DlgBattleMainSystem
     {
         public static void RegisterUIEvent(this DlgBattleMain self)
@@ -54,7 +54,10 @@ namespace ET.Client
             }
 
             self.CDTime -= 1000;
-            self.View.E_CountDownTimeText.text = "倒计时: " + TimeHelper.ShowLeftTime(self.CDTime);
+            using (zstring.Block())
+            {
+                self.View.E_CountDownTimeText.text = zstring.Format("倒计时: {0}", TimeHelper.ShowLeftTime(self.CDTime));
+            }
         }
 
         public static void OnUpdateUI(this DlgBattleMain self, M2C_BattleInfoResult message)
@@ -66,7 +69,11 @@ namespace ET.Client
         public static void OnUpdateSelfKill(this DlgBattleMain self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            self.View.E_TextVS_KillText.text = "自身已战胜" + unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.BattleTodayKill) + "个玩家";
+            using (zstring.Block())
+            {
+                self.View.E_TextVS_KillText.text =
+                        zstring.Format("自身已战胜{0}个玩家", unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.BattleTodayKill));
+            }
         }
     }
 }

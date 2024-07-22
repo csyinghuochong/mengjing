@@ -115,10 +115,7 @@ namespace ET.Client
             string itemList = "";
             for (int i = 0; i < droplist.Count; i++)
             {
-                using (zstring.Block())
-                {
-                    itemList += (zstring)droplist[i].ItemID + ";" + 1 + "@";
-                }
+                itemList += droplist[i].ItemID + ";" + 1 + "@";
             }
 
             itemList += dropShow;
@@ -188,7 +185,10 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             NumericComponentC numericComponent = unit.GetComponent<NumericComponentC>();
             int totalTimes = numericComponent.GetAsInt(NumericType.ChouKa);
-            self.View.E_Text_TotalNumberText.text = $"今日累计次数：{totalTimes}";
+            using (zstring.Block())
+            {
+                self.View.E_Text_TotalNumberText.text = zstring.Format("今日累计次数：{0}", totalTimes);
+            }
         }
 
         public static void OnUpdateMianFeiTime(this DlgChouKa self)

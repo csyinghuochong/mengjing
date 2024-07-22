@@ -2,7 +2,7 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgCellDungeonRevive))]
+    [FriendOf(typeof(DlgCellDungeonRevive))]
     public static class DlgCellDungeonReviveSystem
     {
         public static void RegisterUIEvent(this DlgCellDungeonRevive self)
@@ -27,7 +27,7 @@ namespace ET.Client
         public static void Check(this DlgCellDungeonRevive self, int leftTime)
         {
             self.LeftTime = leftTime;
-            self.View.E_Text_ExitTipText.text = $"{leftTime}秒后退出副本";
+            self.View.E_Text_ExitTipText.text = zstring.Format("{0}秒后退出副本", leftTime);
             if (leftTime <= 0)
             {
                 self.OnAuto_Exit();
@@ -53,7 +53,7 @@ namespace ET.Client
         public static void OnInitUI(this DlgCellDungeonRevive self, int seneTypeEnum)
         {
             self.SceneType = seneTypeEnum;
-            self.LeftTime = seneTypeEnum == SceneTypeEnum.TeamDungeon? 3 : 10;
+            self.LeftTime = seneTypeEnum == SceneTypeEnum.TeamDungeon ? 3 : 10;
 
             self.BegingTimer().Coroutine();
 
@@ -74,12 +74,12 @@ namespace ET.Client
             long needNum = int.Parse(needList[1]);
             if (selfNum >= needNum)
             {
-                self.View.E_Text_CostText.text = selfNum + "/" + needNum;
+                self.View.E_Text_CostText.text = zstring.Format("{0}/{1}", selfNum, needNum);
                 self.View.E_Text_CostText.color = Color.green;
             }
             else
             {
-                self.View.E_Text_CostText.text = selfNum + "/" + needNum + "(" + "道具不足" + ")";
+                self.View.E_Text_CostText.text = zstring.Format("{0}/{1}(道具不足)", selfNum, needNum);
                 self.View.E_Text_CostText.color = Color.yellow;
             }
 
@@ -135,13 +135,16 @@ namespace ET.Client
             {
                 if (self.LeftTime > 0)
                 {
-                    if (self.SceneType == SceneTypeEnum.LocalDungeon)
+                    using (zstring.Block())
                     {
-                        FlyTipComponent.Instance.ShowFlyTip($"{self.LeftTime}秒后可返回主城！");
-                    }
-                    else
-                    {
-                        FlyTipComponent.Instance.ShowFlyTip($"{self.LeftTime}秒后可返回出生点！");
+                        if (self.SceneType == SceneTypeEnum.LocalDungeon)
+                        {
+                            FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0}秒后可返回主城！", self.LeftTime));
+                        }
+                        else
+                        {
+                            FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0}秒后可返回出生点！", self.LeftTime));
+                        }
                     }
                 }
                 else

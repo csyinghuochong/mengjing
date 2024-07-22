@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgChouKaReward))]
+    [FriendOf(typeof(DlgChouKaReward))]
     public static class DlgChouKaRewardSystem
     {
         public static void RegisterUIEvent(this DlgChouKaReward self)
@@ -20,7 +20,10 @@ namespace ET.Client
         public static void OnInitUI(this DlgChouKaReward self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            self.View.E_TextTitleText.text = $"今日探宝次数:{unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ChouKa)}";
+            using (zstring.Block())
+            {
+                self.View.E_TextTitleText.text = zstring.Format("今日探宝次数:{0}", unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ChouKa));
+            }
 
             self.TakeCardRewardConfigs = TakeCardRewardConfigCategory.Instance.GetAll().Values.ToList();
 

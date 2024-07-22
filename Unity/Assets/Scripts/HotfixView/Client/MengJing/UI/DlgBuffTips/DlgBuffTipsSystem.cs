@@ -2,7 +2,7 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgBuffTips))]
+    [FriendOf(typeof(DlgBuffTips))]
     public static class DlgBuffTipsSystem
     {
         public static void RegisterUIEvent(this DlgBuffTips self)
@@ -34,10 +34,13 @@ namespace ET.Client
             self.View.E_Lab_SkillNameText.text = skillBufConfig.BuffName;
             self.View.E_Lab_SkillDesText.text = skillBufConfig.BuffDescribe;
 
-            self.View.E_Lab_BuffTimeText.text = GameSettingLanguge.Instance.LoadLocalization("剩余时间") + ":" + showStr;
+            using (zstring.Block())
+            {
+                self.View.E_Lab_BuffTimeText.text = zstring.Format("{0}:{1}", GameSettingLanguge.Instance.LoadLocalization("剩余时间"), showStr);
 
-            self.View.EG_PositionNodeRectTransform.localPosition = vector3 + new Vector3(100, 0f, 0f);
-            self.View.E_Lab_SpellcasterText.text = $"施法者：{spellcast}";
+                self.View.EG_PositionNodeRectTransform.localPosition = vector3 + new Vector3(100, 0f, 0f);
+                self.View.E_Lab_SpellcasterText.text = zstring.Format("施法者：{0}", spellcast);
+            }
         }
     }
 }

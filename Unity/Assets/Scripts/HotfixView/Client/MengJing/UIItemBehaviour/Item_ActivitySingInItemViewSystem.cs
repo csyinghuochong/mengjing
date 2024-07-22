@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_ActivitySingInItem))]
-    [EntitySystemOf(typeof (Scroll_Item_ActivitySingInItem))]
+    [FriendOf(typeof(Scroll_Item_ActivitySingInItem))]
+    [EntitySystemOf(typeof(Scroll_Item_ActivitySingInItem))]
     public static partial class Scroll_Item_ActivitySingInItemSystem
     {
         [EntitySystem]
@@ -36,7 +36,7 @@ namespace ET.Client
             int index = int.Parse(activityConfig.Par_1);
             self.ActivityConfig = activityConfig;
 
-            self.E_Label_ItemNameText.text = $"第{index}天";
+            self.E_Label_ItemNameText.text = zstring.Format("第{0}天", index);
 
             int current = index % 2;
             self.Image_ItemIconList[current].SetActive(true);

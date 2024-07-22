@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class BagItemUpdate_RefreshAppraisalSelectItem: AEvent<Scene, BagItemUpdate>
+    public class BagItemUpdate_RefreshAppraisalSelectItem : AEvent<Scene, BagItemUpdate>
     {
         protected override async ETTask Run(Scene scene, BagItemUpdate args)
         {
@@ -13,9 +13,9 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [FriendOf(typeof (ES_CommonItem))]
-    [FriendOf(typeof (DlgAppraisalSelect))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [FriendOf(typeof(ES_CommonItem))]
+    [FriendOf(typeof(DlgAppraisalSelect))]
     public static class DlgAppraisalSelectSystem
     {
         public static void RegisterUIEvent(this DlgAppraisalSelect self)
@@ -43,8 +43,11 @@ namespace ET.Client
             self.View.ES_CommonItem_1.UpdateItem(bagInfo, ItemOperateEnum.None);
             ItemConfig itemConfig_app = ItemConfigCategory.Instance.Get(self.AppraisalItemConfigId);
             self.View.ES_CommonItem_2.uiTransform.gameObject.SetActive(false);
-            self.View.E_Tip_1Text.text = $"需要消耗：{itemConfig_app.ItemName}";
-            self.View.E_EquipLevelText.text = itemConfig.UseLv + "级";
+            using (zstring.Block())
+            {
+                self.View.E_Tip_1Text.text = zstring.Format("需要消耗：{0}", itemConfig_app.ItemName);
+                self.View.E_EquipLevelText.text = zstring.Format("{0}级", itemConfig.UseLv);
+            }
 
             self.RefreshCommonItems();
         }
@@ -61,7 +64,11 @@ namespace ET.Client
             self.BagInfo_Appri = bagInfo;
             self.View.ES_CommonItem_2.UpdateItem(bagInfo, ItemOperateEnum.None);
             self.View.ES_CommonItem_2.uiTransform.gameObject.SetActive(true);
-            self.View.E_JianDingQualityText.text = "品质:" + bagInfo.ItemPar;
+            using (zstring.Block())
+            {
+                self.View.E_JianDingQualityText.text = zstring.Format("品质:{0}", bagInfo.ItemPar);
+            }
+
             string jianDingStr = "大海捞针";
             int chaValue = 0;
             if (!string.IsNullOrEmpty(bagInfo.ItemPar))
@@ -118,7 +125,10 @@ namespace ET.Client
             }
 
             JianDingDate jiandingDate = ItemHelper.GetEquipZhuanJingPro(equipCof.Id, bagInfo.ItemID, zizhi, true);
-            self.View.E_JianDingShowProText.text = "范围:" + jiandingDate.MinNum + "-" + jiandingDate.MaxNum;
+            using (zstring.Block())
+            {
+                self.View.E_JianDingShowProText.text = zstring.Format("范围:{0}-{1}", jiandingDate.MinNum, jiandingDate.MaxNum);
+            }
 
             self.UpdateSelect(bagInfo);
         }
@@ -143,12 +153,10 @@ namespace ET.Client
             {
                 ItemConfig itemConfig_a = ItemConfigCategory.Instance.Get(a.ItemID);
                 ItemConfig itemConfig_b = ItemConfigCategory.Instance.Get(b.ItemID);
-                int jianDingLva = itemConfig_a.ItemSubType == 121 && !string.IsNullOrEmpty(a.ItemPar)? int.Parse(a.ItemPar) : 0;
-                int jianDingLvb = itemConfig_b.ItemSubType == 121 && !string.IsNullOrEmpty(a.ItemPar)? int.Parse(b.ItemPar) : 0;
+                int jianDingLva = itemConfig_a.ItemSubType == 121 && !string.IsNullOrEmpty(a.ItemPar) ? int.Parse(a.ItemPar) : 0;
+                int jianDingLvb = itemConfig_b.ItemSubType == 121 && !string.IsNullOrEmpty(a.ItemPar) ? int.Parse(b.ItemPar) : 0;
                 return jianDingLvb - jianDingLva;
             });
-
-
 
             self.AddUIScrollItems(ref self.ScrollItemCommonItems, self.ShowBagInfos.Count);
             self.View.E_CommonItemsLoopVerticalScrollRect.SetVisible(true, self.ShowBagInfos.Count);

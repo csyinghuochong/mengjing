@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.DungeonHappyMainTimer)]
-    public class DungeonHappyMainTimer: ATimer<DlgDungeonHappyMain>
+    public class DungeonHappyMainTimer : ATimer<DlgDungeonHappyMain>
     {
         protected override void Run(DlgDungeonHappyMain self)
         {
@@ -19,7 +19,7 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (DlgDungeonHappyMain))]
+    [FriendOf(typeof(DlgDungeonHappyMain))]
     public static class DlgDungeonHappyMainSystem
     {
         public static void RegisterUIEvent(this DlgDungeonHappyMain self)
@@ -55,11 +55,17 @@ namespace ET.Client
             endTime /= 1000;
             if (endTime > 60)
             {
-                self.View.E_EndTimeTextText.text = $"神秘之门倒计时 {endTime / 60}:{endTime % 60}";
+                using (zstring.Block())
+                {
+                    self.View.E_EndTimeTextText.text = zstring.Format("神秘之门倒计时 {0}:{1}", endTime / 60, endTime % 60);
+                }
             }
             else
             {
-                self.View.E_EndTimeTextText.text = $"神秘之门还剩{endTime % 60}秒，活动结束将强制离开地图哦。";
+                using (zstring.Block())
+                {
+                    self.View.E_EndTimeTextText.text = zstring.Format("神秘之门还剩{0}秒，活动结束将强制离开地图哦。", endTime % 60);
+                }
             }
 
             if (endTime <= 60)
@@ -84,7 +90,10 @@ namespace ET.Client
                 moveTime /= 1000;
                 int minute = (int)(moveTime / 60);
                 int second = (int)(moveTime % 60);
-                self.View.E_TextTip_1Text.text = $"{minute}:{second}";
+                using (zstring.Block())
+                {
+                    self.View.E_TextTip_1Text.text = zstring.Format("{0}:{1}", minute, second);
+                }
             }
             else
             {
@@ -98,16 +107,19 @@ namespace ET.Client
             long lastmovetime = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.HappyMoveTime);
             self.NextMoveTime = lastmovetime;
 
-            //金币消耗
-            GlobalValueConfig globalValueConfig1 = GlobalValueConfigCategory.Instance.Get(94);
-            self.View.E_TextTip_2Text.text = $"金币消耗:{globalValueConfig1.Value2}";
+            using (zstring.Block())
+            {
+                //金币消耗
+                GlobalValueConfig globalValueConfig1 = GlobalValueConfigCategory.Instance.Get(94);
+                self.View.E_TextTip_2Text.text = zstring.Format("金币消耗:{0}", globalValueConfig1.Value2);
 
-            //钻石消耗
-            GlobalValueConfig globalValueConfig2 = GlobalValueConfigCategory.Instance.Get(95);
-            self.View.E_TextTip_3Text.text = $"钻石消耗:{globalValueConfig2.Value2}";
+                //钻石消耗
+                GlobalValueConfig globalValueConfig2 = GlobalValueConfigCategory.Instance.Get(95);
+                self.View.E_TextTip_3Text.text = zstring.Format("钻石消耗:{0}", globalValueConfig2.Value2);
 
-            int useTimes = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HappyMoveNumber);
-            self.View.E_TextTip_MianFeiTimeText.text = $"移动次数: {5 - useTimes}/5";
+                int useTimes = unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.HappyMoveNumber);
+                self.View.E_TextTip_MianFeiTimeText.text = zstring.Format("移动次数: {0}/5", 5 - useTimes);
+            }
         }
 
         public static void OnButtonPick(this DlgDungeonHappyMain self)
@@ -155,22 +167,26 @@ namespace ET.Client
                     return;
                 }
 
-                PopupTipHelp.OpenPopupTip(self.Root(), "神秘之门", $"是否消耗{globalValueConfig.Value2}金币?", async () =>
+                using (zstring.Block())
                 {
-                    long instanceId = self.InstanceId;
-                    int error = await ActivityNetHelper.DungeonHappyMoveRequest(self.Root(), moveType);
-                    if (instanceId != self.InstanceId || error != ErrorCode.ERR_Success)
+                    PopupTipHelp.OpenPopupTip(self.Root(), "神秘之门", zstring.Format("是否消耗{0}金币?", globalValueConfig.Value2), async () =>
                     {
-                        return;
-                    }
+                        long instanceId = self.InstanceId;
+                        int error = await ActivityNetHelper.DungeonHappyMoveRequest(self.Root(), moveType);
+                        if (instanceId != self.InstanceId || error != ErrorCode.ERR_Success)
+                        {
+                            return;
+                        }
 
-                    Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                        Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
-                    FunctionEffect.PlayDropEffect(unit, 30000003);
-                    self.OnButtonPick();
+                        FunctionEffect.PlayDropEffect(unit, 30000003);
+                        self.OnButtonPick();
 
-                    self.OnUpdateMoney();
-                }).Coroutine();
+                        self.OnUpdateMoney();
+                    }).Coroutine();
+                }
+
                 return;
             }
 
@@ -183,22 +199,26 @@ namespace ET.Client
                     return;
                 }
 
-                PopupTipHelp.OpenPopupTip(self.Root(), "神秘之门", $"是否消耗{globalValueConfig.Value2}钻石?", async () =>
+                using (zstring.Block())
                 {
-                    long instanceId = self.InstanceId;
-                    int error = await ActivityNetHelper.DungeonHappyMoveRequest(self.Root(), moveType);
-                    if (instanceId != self.InstanceId || error != ErrorCode.ERR_Success)
+                    PopupTipHelp.OpenPopupTip(self.Root(), "神秘之门", zstring.Format("是否消耗{0}钻石?", globalValueConfig.Value2), async () =>
                     {
-                        return;
-                    }
+                        long instanceId = self.InstanceId;
+                        int error = await ActivityNetHelper.DungeonHappyMoveRequest(self.Root(), moveType);
+                        if (instanceId != self.InstanceId || error != ErrorCode.ERR_Success)
+                        {
+                            return;
+                        }
 
-                    Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                        Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
-                    FunctionEffect.PlayDropEffect(unit, 30000003);
-                    self.OnButtonPick();
+                        FunctionEffect.PlayDropEffect(unit, 30000003);
+                        self.OnButtonPick();
 
-                    self.OnUpdateMoney();
-                }).Coroutine();
+                        self.OnUpdateMoney();
+                    }).Coroutine();
+                }
+
                 return;
             }
 

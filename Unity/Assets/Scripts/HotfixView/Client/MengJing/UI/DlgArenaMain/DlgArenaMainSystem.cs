@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (DlgArenaMain))]
+    [FriendOf(typeof(DlgArenaMain))]
     public static class DlgArenaMainSystem
     {
         public static void RegisterUIEvent(this DlgArenaMain self)
@@ -28,7 +28,10 @@
             }
             else
             {
-                self.View.E_TextVSText.text = $"剩余人数： {message.LeftPlayer}";
+                using (zstring.Block())
+                {
+                    self.View.E_TextVSText.text = zstring.Format("剩余人数： {0}", message.LeftPlayer);
+                }
             }
         }
 
