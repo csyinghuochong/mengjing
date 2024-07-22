@@ -3,7 +3,7 @@
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.AuctionTimer)]
-    public class AuctionTimer: ATimer<DlgPaiMaiAuction>
+    public class AuctionTimer : ATimer<DlgPaiMaiAuction>
     {
         protected override void Run(DlgPaiMaiAuction self)
         {
@@ -13,12 +13,15 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
 
-    [FriendOf(typeof (DlgPaiMaiAuction))]
+    [FriendOf(typeof(DlgPaiMaiAuction))]
     public static class DlgPaiMaiAuctionSystem
     {
         public static void RegisterUIEvent(this DlgPaiMaiAuction self)
@@ -69,7 +72,11 @@ namespace ET.Client
                 return;
             }
 
-            self.View.E_Text_2Text.text = "剩余时间:" + TimeHelper.ShowLeftTime(self.LeftTime * 1000);
+            using (zstring.Block())
+            {
+                self.View.E_Text_2Text.text = zstring.Format("剩余时间:{0}", TimeHelper.ShowLeftTime(self.LeftTime * 1000));
+            }
+
             self.LeftTime--;
         }
 
@@ -136,7 +143,11 @@ namespace ET.Client
                 return;
             }
 
-            PopupTipHelp.OpenPopupTip(self.Root(), "参与竞拍", $"扣除{returngold}金币的保证金", () => { self.RquestCanYu().Coroutine(); }, null).Coroutine();
+            using (zstring.Block())
+            {
+                PopupTipHelp.OpenPopupTip(self.Root(), "参与竞拍", zstring.Format("扣除{0}金币的保证金", returngold), () => { self.RquestCanYu().Coroutine(); },
+                    null).Coroutine();
+            }
         }
 
         public static async ETTask RquestCanYu(this DlgPaiMaiAuction self)
@@ -169,7 +180,11 @@ namespace ET.Client
             }
 
             self.OnUpdateUI(response.AuctionItem, response.AuctionNumber, response.AuctionPrice);
-            self.View.E_TextAuctionPlayerText.text = "出价玩家:" + response.AuctionPlayer;
+            using (zstring.Block())
+            {
+                self.View.E_TextAuctionPlayerText.text = zstring.Format("出价玩家:{0}", response.AuctionPlayer);
+            }
+
             self.View.ES_CommonItem.E_ItemNumText.text = response.AuctionNumber.ToString();
             self.AuctionStart = response.AuctionStart;
 
@@ -179,8 +194,11 @@ namespace ET.Client
             if (response.AuctionJoin)
             {
                 int returngold = (int)(response.AuctionStart * 0.1f);
-                string text = $"已经缴纳{returngold}保证金";
-                self.View.E_TextBaoZhenJinText.text = text;
+                using (zstring.Block())
+                {
+                    string text = zstring.Format("已经缴纳{0}保证金", returngold);
+                    self.View.E_TextBaoZhenJinText.text = text;
+                }
             }
             else
             {
@@ -206,7 +224,10 @@ namespace ET.Client
             int itmenumber = int.Parse(infos[1]);
             long price = long.Parse(infos[2]);
             self.OnUpdateUI(itmeid, itmenumber, price);
-            self.View.E_TextAuctionPlayerText.text = "出价玩家:" + infos[3];
+            using (zstring.Block())
+            {
+                self.View.E_TextAuctionPlayerText.text = zstring.Format("出价玩家:{0}", infos[3]);
+            }
         }
     }
 }

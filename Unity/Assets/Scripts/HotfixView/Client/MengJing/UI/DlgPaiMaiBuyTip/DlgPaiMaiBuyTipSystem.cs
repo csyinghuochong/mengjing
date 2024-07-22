@@ -2,7 +2,7 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgPaiMaiBuyTip))]
+    [FriendOf(typeof(DlgPaiMaiBuyTip))]
     public static class DlgPaiMaiBuyTipSystem
     {
         public static void RegisterUIEvent(this DlgPaiMaiBuyTip self)
@@ -26,8 +26,11 @@ namespace ET.Client
             self.View.ES_CommonItem.UpdateItem(self.PaiMaiItemInfo.BagInfo, ItemOperateEnum.None);
             self.BuyNum = 1;
             self.View.E_Lab_RmbNumInputField.text = self.BuyNum.ToString();
-            self.View.E_UnitPriceTextText.text = $"单价：{self.PaiMaiItemInfo.Price}";
-            self.View.E_TotalPriceTextText.text = $"总价：{self.PaiMaiItemInfo.Price * self.BuyNum}";
+            using (zstring.Block())
+            {
+                self.View.E_UnitPriceTextText.text = zstring.Format("单价：{0}", self.PaiMaiItemInfo.Price);
+                self.View.E_TotalPriceTextText.text = zstring.Format("总价：{0}", self.PaiMaiItemInfo.Price * self.BuyNum);
+            }
         }
 
         public static void OnClickChangeBuyNum(this DlgPaiMaiBuyTip self, int num)
@@ -44,7 +47,10 @@ namespace ET.Client
             }
 
             self.View.E_Lab_RmbNumInputField.text = self.BuyNum.ToString();
-            self.View.E_TotalPriceTextText.text = $"总价：{self.PaiMaiItemInfo.Price * self.BuyNum}";
+            using (zstring.Block())
+            {
+                self.View.E_TotalPriceTextText.text = zstring.Format("总价：{0}", self.PaiMaiItemInfo.Price * self.BuyNum);
+            }
         }
 
         public static async ETTask OnBtn_Buy(this DlgPaiMaiBuyTip self)

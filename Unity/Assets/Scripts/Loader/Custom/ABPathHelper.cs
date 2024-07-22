@@ -7,79 +7,164 @@
     {
         public static string GetMaterialPath(string fileName)
         {
-            return $"Assets/Bundles/Material/{fileName}.mat";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Material/{0}.mat", fileName);
+            }
+
+            return prefabPath;
         }
 
         public static string GetTexturePath(string fileName)
         {
-            return $"Assets/Bundles/Altas/{fileName}.prefab";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Altas/{0}.prefab", fileName);
+            }
+
+            return prefabPath;
         }
 
         public static string GetUGUIPath(string name)
         {
-            return $"Assets/Bundles/UI/{name}.prefab";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/UI/{0}.prefab", name);
+            }
+
+            return prefabPath;
         }
 
         public static string GetConfigPath(string fileName)
         {
-            return $"Assets/Bundles/Config/{fileName}.bytes";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Config/{0}.bytes", fileName);
+            }
+
+            return prefabPath;
         }
+
         public static string GetNormalConfigPath(string fileName)
         {
-            return $"Assets/Bundles/Independent/{fileName}.prefab";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Independent/{0}.prefab", fileName);
+            }
+
+            return prefabPath;
         }
 
         public static string GetAudioPath(string fileName)
         {
-            return $"Assets/Bundles/Audio/{fileName}.mp3";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Audio/{0}.mp3", fileName);
+            }
+
+            return prefabPath;
         }
 
         public static string GetAudioOggPath(string fileName)
         {
-            return $"Assets/Bundles/Audio/{fileName}.ogg";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Audio/{0}.ogg", fileName);
+            }
+
+            return prefabPath;
         }
 
         public static string GetSoundPath(string fileName)
         {
-            return $"Assets/Bundles/Sound/{fileName}.prefab";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Sound/{0}.prefab", fileName);
+            }
+
+            return prefabPath;
         }
 
         public static string GetUnitPath(string fileName)
         {
-            return $"Assets/Bundles/Unit/{fileName}.prefab";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Unit/{0}.prefab", fileName);
+            }
+
+            return prefabPath;
         }
 
         public static string GetItemPath(string fileName)
         {
-            return $"Assets/Bundles/Unit/ItemModel/{fileName}.prefab";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Unit/ItemModel/{0}.prefab", fileName);
+            }
+
+            return prefabPath;
         }
 
         public static string GetScenePath(string fileName)
         {
-            return $"Assets/Bundles/Scenes/{fileName}.unity";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Scenes/{0}.unity", fileName);
+            }
+
+            return prefabPath;
         }
 
         public static string GetEffetPath(string fileName)
         {
-            return $"Assets/Bundles/Effect/{fileName}.prefab";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Effect/{0}.prefab", fileName);
+            }
+
+            return prefabPath;
         }
 
         //技能特效
         public static string GetSkillEffetPath(string fileName)
         {
-            return $"Assets/Bundles/Effect/SkillEffect/{fileName}.prefab";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Effect/SkillEffect/{0}.prefab", fileName);
+            }
+
+            return prefabPath;
         }
 
         //技能受击特效
         public static string GetSkillHitEffetPath(string fileName)
         {
-            return $"Assets/Bundles/Effect/SkillHitEffect/{fileName}.prefab";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Effect/SkillHitEffect/{0}.prefab", fileName);
+            }
+
+            return prefabPath;
         }
 
         //图集2
-        public static string GetAtlasPath_2( string path, string name)
+        public static string GetAtlasPath_2(string path, string name)
         {
-            if (path == "PropertyIcon" )
+            if (path == "PropertyIcon")
             {
                 name = "PetPro_2";
             }
@@ -93,25 +178,49 @@
                 name = "80000001";
             }
 
-            return $"Assets/Bundles/Icon/{path}/{name}.png";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Icon/{0}/{1}.png", path, name);
+            }
+
+            return prefabPath;
         }
 
         //图集
         public static string GetAtlasPath(string path)
         {
-            return $"Assets/Bundles/Atlas/{path}.prefab";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Atlas/{0}.prefab", path);
+            }
+
+            return prefabPath;
         }
-        
+
         //Png
         public static string GetJpgPath(string path)
         {
-            return $"Assets/Bundles/Jpg/{path}.jpg";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Jpg/{0}.jpg", path);
+            }
+
+            return prefabPath;
         }
 
         //文本
         public static string GetTextPath(string text)
         {
-            return $"Assets/Bundles/Text/{text}.txt";
+            string prefabPath;
+            using (zstring.Block())
+            {
+                prefabPath = zstring.Format("Assets/Bundles/Text/{0}.txt", text);
+            }
+
+            return prefabPath;
         }
     }
 }

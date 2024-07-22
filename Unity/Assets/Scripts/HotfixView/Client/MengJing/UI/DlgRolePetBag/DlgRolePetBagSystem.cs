@@ -119,7 +119,11 @@ namespace ET.Client
                 scrollItemRolePetBagItem.OnImage_ItemButton();
             }
 
-            self.View.E_TextNumberText.text = $"宠物数量： {rolePetInfos.Count}/{GlobalValueConfigCategory.Instance.Get(119).Value2}";
+            using (zstring.Block())
+            {
+                self.View.E_TextNumberText.text =
+                        zstring.Format("宠物数量： {0}/{1}", rolePetInfos.Count, GlobalValueConfigCategory.Instance.Get(119).Value2);
+            }
         }
 
         public static void OnClickPetHandler(this DlgRolePetBag self, RolePetInfo rolePetInfo)
@@ -146,18 +150,22 @@ namespace ET.Client
         public static void UpdatePetZizhi(this DlgRolePetBag self, RolePetInfo rolePetInfo)
         {
             PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
-            self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_Hp}/{petConfig.ZiZhi_Hp_Max}";
-            self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_Act}/{petConfig.ZiZhi_Act_Max}";
-            self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_Def}/{petConfig.ZiZhi_Def_Max}";
-            self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_Adf}/{petConfig.ZiZhi_Adf_Max}";
-            self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{rolePetInfo.ZiZhi_MageAct}/{petConfig.ZiZhi_MageAct_Max}";
-            self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                    $"{CommonViewHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang)}/{CommonViewHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max)}";
+            using (zstring.Block())
+            {
+                self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Hp, petConfig.ZiZhi_Hp_Max);
+                self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Act, petConfig.ZiZhi_Act_Max);
+                self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Def, petConfig.ZiZhi_Def_Max);
+                self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Adf, petConfig.ZiZhi_Adf_Max);
+                self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_MageAct, petConfig.ZiZhi_MageAct_Max);
+                self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
+                        zstring.Format("{0}/{1}", CommonViewHelper.ShowFloatValue(rolePetInfo.ZiZhi_ChengZhang),
+                            CommonViewHelper.ShowFloatValue((float)petConfig.ZiZhi_ChengZhang_Max));
+            }
 
             ResourcesLoaderComponent resourcesLoaderComponent = self.Root().GetComponent<ResourcesLoaderComponent>();
             Sprite sprite16 = resourcesLoaderComponent.LoadAssetSync<Sprite>("Assets/Bundles/Icon/OtherIcon/Pro_16.png");

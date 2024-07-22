@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgPetChouKaGet))]
+    [FriendOf(typeof(DlgPetChouKaGet))]
     public static class DlgPetChouKaGetSystem
     {
         public static void RegisterUIEvent(this DlgPetChouKaGet self)
@@ -29,7 +29,10 @@ namespace ET.Client
             self.View.ES_ModelShow.SetPosition(Vector3.zero, new Vector3(0f, 115, 257f));
 
             PetSkinConfig petSkinConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
-            self.View.ES_ModelShow.ShowOtherModel("Pet/" + petSkinConfig.SkinID).Coroutine();
+            using (zstring.Block())
+            {
+                self.View.ES_ModelShow.ShowOtherModel(zstring.Format("Pet/{0}", petSkinConfig.SkinID)).Coroutine();
+            }
         }
 
         private static void OnBtn_Close(this DlgPetChouKaGet self)
@@ -76,7 +79,8 @@ namespace ET.Client
                 self.View.EG_PiFuJiHuoRectTransform.gameObject.SetActive(false);
             }
 
-            self.View.E_Text_TipText.text = $"{petConfig.PetName}";
+            self.View.E_Text_TipText.text = petConfig.PetName;
+
             ReferenceCollector rc = self.View.EG_PetSkinIconRectTransform.GetComponent<ReferenceCollector>();
             PetSkinConfig skillConfig = PetSkinConfigCategory.Instance.Get(rolePetInfo.SkinId);
             string path = ABPathHelper.GetAtlasPath_2(ABAtlasTypes.PetHeadIcon, skillConfig.IconID.ToString());
@@ -123,7 +127,10 @@ namespace ET.Client
 
             PetConfig petConfig = PetConfigCategory.Instance.Get(rolePetInfo.ConfigId);
 
-            self.View.E_Text_PetLevelText.text = rolePetInfo.PetLv.ToString() + "级";
+            using (zstring.Block())
+            {
+                self.View.E_Text_PetLevelText.text = zstring.Format("{0}级", rolePetInfo.PetLv.ToString());
+            }
 
             self.View.E_Text_QualityText.text = CommonViewHelper.GetPetQualityName(petConfig.PetQuality);
             self.View.E_Text_QualityText.color = CommonViewHelper.QualityReturnColor(petConfig.PetQuality);
@@ -131,32 +138,32 @@ namespace ET.Client
             using (zstring.Block())
             {
                 self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        (zstring)$"{rolePetInfo.ZiZhi_Hp}/{petConfig.ZiZhi_Hp_Max}";
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Hp, petConfig.ZiZhi_Hp_Max);
                 self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        (zstring)$"{rolePetInfo.ZiZhi_Act}/{petConfig.ZiZhi_Act_Max}";
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Act, petConfig.ZiZhi_Act_Max);
                 self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        (zstring)$"{rolePetInfo.ZiZhi_Def}/{petConfig.ZiZhi_Def_Max}";
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Def, petConfig.ZiZhi_Def_Max);
                 self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        (zstring)$"{rolePetInfo.ZiZhi_Adf}/{petConfig.ZiZhi_Adf_Max}";
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_Adf, petConfig.ZiZhi_Adf_Max);
                 self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        (zstring)$"{rolePetInfo.ZiZhi_MageAct}/{petConfig.ZiZhi_MageAct_Max}";
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_MageAct, petConfig.ZiZhi_MageAct_Max);
                 self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiValue").GetComponent<Text>().text =
-                        (zstring)$"{rolePetInfo.ZiZhi_ChengZhang}/{petConfig.ZiZhi_ChengZhang_Max}";
+                        zstring.Format("{0}/{1}", rolePetInfo.ZiZhi_ChengZhang, petConfig.ZiZhi_ChengZhang_Max.ToString());
 
                 if (oldPetInfo != null)
                 {
                     self.PetZiZhiItemList[0].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
-                            (zstring)"(提升" + (rolePetInfo.ZiZhi_Hp - oldPetInfo.ZiZhi_Hp) + "点)";
+                            zstring.Format("(提升{0}点", rolePetInfo.ZiZhi_Hp - oldPetInfo.ZiZhi_Hp);
                     self.PetZiZhiItemList[1].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
-                            (zstring)"(提升" + (rolePetInfo.ZiZhi_Act - oldPetInfo.ZiZhi_Act) + "点)";
+                            zstring.Format("(提升{0}点", rolePetInfo.ZiZhi_Act - oldPetInfo.ZiZhi_Act);
                     self.PetZiZhiItemList[2].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
-                            (zstring)"(提升" + (rolePetInfo.ZiZhi_Def - oldPetInfo.ZiZhi_Def) + "点)";
+                            zstring.Format("(提升{0}点", rolePetInfo.ZiZhi_Def - oldPetInfo.ZiZhi_Def);
                     self.PetZiZhiItemList[3].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
-                            (zstring)"(提升" + (rolePetInfo.ZiZhi_Adf - oldPetInfo.ZiZhi_Adf) + "点)";
+                            zstring.Format("(提升{0}点", rolePetInfo.ZiZhi_Adf - oldPetInfo.ZiZhi_Adf);
                     self.PetZiZhiItemList[4].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
-                            (zstring)"(提升" + (rolePetInfo.ZiZhi_MageAct - oldPetInfo.ZiZhi_MageAct) + "点)";
+                            zstring.Format("(提升{0}点", rolePetInfo.ZiZhi_MageAct - oldPetInfo.ZiZhi_MageAct);
                     self.PetZiZhiItemList[5].transform.Find("Text_ZiZhiAddValue").GetComponent<Text>().text =
-                            (zstring)"(提升" + (rolePetInfo.ZiZhi_ChengZhang - oldPetInfo.ZiZhi_ChengZhang) + "点)";
+                            zstring.Format("(提升{0}点", rolePetInfo.ZiZhi_ChengZhang - oldPetInfo.ZiZhi_ChengZhang);
                 }
 
                 self.PetZiZhiItemList[0].transform.Find("ImageExpValue").localScale =

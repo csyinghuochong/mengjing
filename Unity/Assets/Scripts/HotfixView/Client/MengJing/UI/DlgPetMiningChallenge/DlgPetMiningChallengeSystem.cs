@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_PetMiningChallengeItem))]
-    [FriendOf(typeof (DlgPetMiningChallenge))]
+    [FriendOf(typeof(Scroll_Item_PetMiningChallengeItem))]
+    [FriendOf(typeof(DlgPetMiningChallenge))]
     public static class DlgPetMiningChallengeSystem
     {
         public static void RegisterUIEvent(this DlgPetMiningChallenge self)
@@ -18,23 +18,23 @@ namespace ET.Client
             self.View.E_ButtonConfirmButton.AddListener(self.OnButtonConfirm);
             self.View.E_ButtonResetButton.AddListener(self.OnButtonReset);
 
-            GameObject gameObject_0 = self.View.EG_DefendTeamRectTransform.Find($"PetIcon_{0}").gameObject;
+            GameObject gameObject_0 = self.View.EG_DefendTeamRectTransform.Find("PetIcon_0").gameObject;
             gameObject_0.GetComponent<Button>().onClick.AddListener(() => { self.RequestPetInfo(0).Coroutine(); });
             self.PetIconList.Add(gameObject_0.GetComponent<Image>());
 
-            GameObject gameObject_1 = self.View.EG_DefendTeamRectTransform.Find($"PetIcon_{1}").gameObject;
+            GameObject gameObject_1 = self.View.EG_DefendTeamRectTransform.Find("PetIcon_1").gameObject;
             gameObject_1.GetComponent<Button>().onClick.AddListener(() => { self.RequestPetInfo(1).Coroutine(); });
             self.PetIconList.Add(gameObject_1.GetComponent<Image>());
 
-            GameObject gameObject_2 = self.View.EG_DefendTeamRectTransform.Find($"PetIcon_{2}").gameObject;
+            GameObject gameObject_2 = self.View.EG_DefendTeamRectTransform.Find("PetIcon_2").gameObject;
             gameObject_2.GetComponent<Button>().onClick.AddListener(() => { self.RequestPetInfo(2).Coroutine(); });
             self.PetIconList.Add(gameObject_2.GetComponent<Image>());
 
-            GameObject gameObject_3 = self.View.EG_DefendTeamRectTransform.Find($"PetIcon_{3}").gameObject;
+            GameObject gameObject_3 = self.View.EG_DefendTeamRectTransform.Find("PetIcon_3").gameObject;
             gameObject_3.GetComponent<Button>().onClick.AddListener(() => { self.RequestPetInfo(3).Coroutine(); });
             self.PetIconList.Add(gameObject_3.GetComponent<Image>());
 
-            GameObject gameObject_4 = self.View.EG_DefendTeamRectTransform.Find($"PetIcon_{4}").gameObject;
+            GameObject gameObject_4 = self.View.EG_DefendTeamRectTransform.Find("PetIcon_4").gameObject;
             gameObject_4.GetComponent<Button>().onClick.AddListener(() => { self.RequestPetInfo(4).Coroutine(); });
             self.PetIconList.Add(gameObject_4.GetComponent<Image>());
         }
@@ -95,7 +95,10 @@ namespace ET.Client
             SceneConfig sceneConfig = SceneConfigCategory.Instance.Get(sceneid);
 
             int useTime = (int)self.Root().GetComponent<UserInfoComponentC>().GetSceneFubenTimes(sceneid);
-            self.View.E_TextChallengeTimeText.text = $"挑战剩余次数:{sceneConfig.DayEnterNum - useTime}/10";
+            using (zstring.Block())
+            {
+                self.View.E_TextChallengeTimeText.text = zstring.Format("挑战剩余次数:{0}/10", sceneConfig.DayEnterNum - useTime);
+            }
         }
 
         public static async ETTask RequestPetInfo(this DlgPetMiningChallenge self, int index)
@@ -127,7 +130,8 @@ namespace ET.Client
                 return;
             }
 
-            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetInfo>().OnUpdateUI(response.RolePetInfos, response.PetHeXinList, response.Ks, response.Vs);
+            self.Root().GetComponent<UIComponent>().GetDlgLogic<DlgPetInfo>()
+                    .OnUpdateUI(response.RolePetInfos, response.PetHeXinList, response.Ks, response.Vs);
         }
 
         public static void OnSelectTeam(this DlgPetMiningChallenge self, int teamid)
@@ -156,18 +160,25 @@ namespace ET.Client
             self.View.E_Text_mingText.text = mineBattleConfig.Name;
 
             int zone = self.Root().GetComponent<PlayerComponent>().ServerItem.ServerId;
-            int openDay = ServerHelper.GetServeOpenrDay( zone);
+            int openDay = ServerHelper.GetServeOpenrDay(zone);
             float coffi = CommonHelp.GetMineCoefficient(openDay, mineType, position, uIPetMining.PetMineExtend);
             int chanchu = (int)(mineBattleConfig.GoldOutPut * coffi);
 
-            self.View.E_Text_chanchuText.text = $"产出:{chanchu}小时";
+            using (zstring.Block())
+            {
+                self.View.E_Text_chanchuText.text = zstring.Format("产出:{0}小时", chanchu);
+            }
 
             self.PetMingPlayerInfo = petMingPlayerInfo;
             string playerName = string.Empty;
             List<int> confids = new List<int>();
             if (petMingPlayerInfo != null)
             {
-                playerName = $"占领者:{petMingPlayerInfo.PlayerName}";
+                using (zstring.Block())
+                {
+                    playerName = zstring.Format("占领者:{0}", petMingPlayerInfo.PlayerName);
+                }
+
                 confids = petMingPlayerInfo.PetConfig;
             }
             else
@@ -176,6 +187,7 @@ namespace ET.Client
             }
 
             self.View.E_Text_playerText.text = playerName;
+
             for (int i = 0; i < self.PetIconList.Count; i++)
             {
                 if (i >= confids.Count || confids[i] == 0)
@@ -207,7 +219,11 @@ namespace ET.Client
             TimerComponent timerComponent = self.Root().GetComponent<TimerComponent>();
             while (cdTime > 0)
             {
-                self.View.E_TextChallengeCDText.text = "挑战冷却时间: " + TimeHelper.ShowLeftTime(cdTime);
+                using (zstring.Block())
+                {
+                    self.View.E_TextChallengeCDText.text = zstring.Format("挑战冷却时间: {0}", TimeHelper.ShowLeftTime(cdTime));
+                }
+
                 await timerComponent.WaitAsync(1000);
                 if (instanceid != self.InstanceId)
                 {

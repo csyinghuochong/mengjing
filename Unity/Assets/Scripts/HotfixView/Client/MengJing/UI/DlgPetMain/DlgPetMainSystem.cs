@@ -17,7 +17,10 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
@@ -95,7 +98,10 @@ namespace ET.Client
         public static void UpdateHurtValue(this DlgPetMain self, long unitId)
         {
             PetBattleInfo petBattleInfo = self.PetBattleList[unitId];
-            self.PetBattleList[unitId].Text.text = $"造成伤害:{petBattleInfo.hurt} 承受伤害:{petBattleInfo.receive}";
+            using (zstring.Block())
+            {
+                self.PetBattleList[unitId].Text.text = zstring.Format("造成伤害:{0} 承受伤害:{1}", petBattleInfo.hurt, petBattleInfo.receive);
+            }
         }
 
         public static void InitHpList(this DlgPetMain self)

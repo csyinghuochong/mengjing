@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgPetEggChouKaReward))]
+    [FriendOf(typeof(DlgPetEggChouKaReward))]
     public static class DlgPetEggChouKaRewardSystem
     {
         public static void RegisterUIEvent(this DlgPetEggChouKaReward self)
@@ -20,7 +20,11 @@ namespace ET.Client
         private static void OnInitUI(this DlgPetEggChouKaReward self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            self.View.E_TextTitleText.text = $"今日探索次数:{unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetExploreNumber)}";
+            using (zstring.Block())
+            {
+                self.View.E_TextTitleText.text =
+                        zstring.Format("今日探索次数:{0}", unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.PetExploreNumber));
+            }
 
             self.ShowInfo.Clear();
             foreach (KeyValuePair<int, string> keyValuePair in ConfigData.PetExploreReward)

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgRoleXiLianNumReward))]
+    [FriendOf(typeof(DlgRoleXiLianNumReward))]
     public static class DlgRoleXiLianNumRewardSystem
     {
         public static void RegisterUIEvent(this DlgRoleXiLianNumReward self)
@@ -20,7 +20,11 @@ namespace ET.Client
         private static void OnInitUI(this DlgRoleXiLianNumReward self)
         {
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
-            self.View.E_TextTitleText.text = $"今日洗练次数:{unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemXiLianNumber)}";
+            using (zstring.Block())
+            {
+                self.View.E_TextTitleText.text =
+                        zstring.Format("今日洗练次数:{0}", unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.ItemXiLianNumber));
+            }
 
             self.ShowInfo.Clear();
             foreach (KeyValuePair<int, string> keyValuePair in ConfigData.ItemXiLianNumReward)
@@ -34,7 +38,8 @@ namespace ET.Client
 
         private static void OnRoleXiLianNumRewardItemsRefresh(this DlgRoleXiLianNumReward self, Transform transform, int index)
         {
-            Scroll_Item_RoleXiLianNumRewardItem scrollItemRoleXiLianNumRewardItem = self.ScrollItemRoleXiLianNumRewardItems[index].BindTrans(transform);
+            Scroll_Item_RoleXiLianNumRewardItem scrollItemRoleXiLianNumRewardItem =
+                    self.ScrollItemRoleXiLianNumRewardItems[index].BindTrans(transform);
             scrollItemRoleXiLianNumRewardItem.OnUpdateUI(self.ShowInfo[index]);
         }
 

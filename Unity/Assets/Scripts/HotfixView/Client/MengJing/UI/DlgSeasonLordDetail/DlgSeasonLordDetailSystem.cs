@@ -69,7 +69,10 @@ namespace ET.Client
             // int fubenid = numericComponent.GetAsInt(NumericType.SeasonBossFuben);
             int fubenid = 10001;
             DungeonConfig dungeonConfig = DungeonConfigCategory.Instance.Get(fubenid);
-            self.View.E_PositionTextText.text = $"即将出现在{dungeonConfig.ChapterName}中...";
+            using (zstring.Block())
+            {
+                self.View.E_PositionTextText.text = zstring.Format("即将出现在{0}中...", dungeonConfig.ChapterName);
+            }
 
             int bossId = SeasonHelper.SeasonBossId;
             MonsterConfig monsterConfig = MonsterConfigCategory.Instance.Get(bossId);
@@ -145,7 +148,10 @@ namespace ET.Client
                     DateTime nowTime = TimeInfo.Instance.ToDateTime(now);
                     DateTime endTime = TimeInfo.Instance.ToDateTime(end);
                     TimeSpan ts = endTime - nowTime;
-                    self.View.E_RefreshTimeTextText.text = $"剩余时间:{ts.Days}天{ts.Hours}时{ts.Minutes}分{ts.Seconds}秒";
+                    using (zstring.Block())
+                    {
+                        self.View.E_RefreshTimeTextText.text = zstring.Format("剩余时间:{0}天{1}时{2}分{3}秒", ts.Days, ts.Hours, ts.Minutes, ts.Seconds);
+                    }
                 }
                 else
                 {

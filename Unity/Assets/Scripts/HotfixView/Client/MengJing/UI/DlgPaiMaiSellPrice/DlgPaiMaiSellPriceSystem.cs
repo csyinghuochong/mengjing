@@ -2,7 +2,7 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgPaiMaiSellPrice))]
+    [FriendOf(typeof(DlgPaiMaiSellPrice))]
     public static class DlgPaiMaiSellPriceSystem
     {
         public static void RegisterUIEvent(this DlgPaiMaiSellPrice self)
@@ -111,8 +111,12 @@ namespace ET.Client
                 int nowPrice = (int)((float)paiMaiItemInfo.Price);
                 if (nowPrice < (int)(oldPrice * 0.5f))
                 {
-                    FlyTipComponent.Instance.ShowFlyTip(
-                        GameSettingLanguge.Instance.LoadLocalization("出售价格过低,当前最低价格为:" + (int)(oldPrice * 0.5f) * paiMaiItemInfo.BagInfo.ItemNum));
+                    using (zstring.Block())
+                    {
+                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("{0}{1}", GameSettingLanguge.Instance.LoadLocalization("出售价格过低,当前最低价格为:"),
+                            (int)(oldPrice * 0.5f) * paiMaiItemInfo.BagInfo.ItemNum));
+                    }
+
                     return;
                 }
             }
@@ -133,9 +137,12 @@ namespace ET.Client
             if (itemConfig.ItemQuality >= 4 && response.PaiMaiItemInfo != null)
             {
                 long paimaiItemId = response.PaiMaiItemInfo.Id;
-                string text =
-                        $"在拍卖行上架道具<color=#{CommonHelp.QualityReturnColor(4)}>{itemConfig.ItemName}</color>！<color=#00FF00>点击前往拍卖行 </color><link=paimai_{itemConfig.ItemType}_{paimaiItemId}></link>";
-                ChatNetHelper.RequestSendChat(self.Root(), ChannelEnum.PaiMai, text).Coroutine();
+                using (zstring.Block())
+                {
+                    string text = zstring.Format("在拍卖行上架道具<color=#{0}>{1}</color>！<color=#00FF00>点击前往拍卖行 </color><link=paimai_{2}_{3}></link>",
+                        CommonHelp.QualityReturnColor(4), itemConfig.ItemName, itemConfig.ItemType, paimaiItemId);
+                    ChatNetHelper.RequestSendChat(self.Root(), ChannelEnum.PaiMai, text).Coroutine();
+                }
             }
 
             dlgPaiMai.View.ES_PaiMaiSell.OnPaiBuyShangJia(response.PaiMaiItemInfo);

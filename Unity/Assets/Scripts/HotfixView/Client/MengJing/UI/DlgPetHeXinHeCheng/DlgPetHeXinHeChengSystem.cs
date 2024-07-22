@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgPetHeXinHeChengViewComponent))]
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [FriendOf(typeof (ES_CommonItem))]
-    [FriendOf(typeof (DlgPetHeXinHeCheng))]
+    [FriendOf(typeof(DlgPetHeXinHeChengViewComponent))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [FriendOf(typeof(ES_CommonItem))]
+    [FriendOf(typeof(DlgPetHeXinHeCheng))]
     public static class DlgPetHeXinHeChengSystem
     {
         public static void RegisterUIEvent(this DlgPetHeXinHeCheng self)
@@ -70,8 +70,12 @@ namespace ET.Client
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(self.ShowBagInfos[index].ItemID);
             scrollItemCommonItem.ES_CommonItem.HideItemName();
             scrollItemCommonItem.ES_CommonItem.SetEventTrigger(true);
-            scrollItemCommonItem.ES_CommonItem.E_ItemNumText.text = $"{itemConfig.UseLv}级";
-            scrollItemCommonItem.uiTransform.GetChild(0).name = $"PetHeXinHeCheng_Image_ItemButton@{self.ShowBagInfos[index].BagInfoID}";
+            using (zstring.Block())
+            {
+                scrollItemCommonItem.ES_CommonItem.E_ItemNumText.text = zstring.Format("{0}级", itemConfig.UseLv);
+                scrollItemCommonItem.uiTransform.GetChild(0).name =
+                        zstring.Format("PetHeXinHeCheng_Image_ItemButton@{0}", self.ShowBagInfos[index].BagInfoID);
+            }
         }
 
         private static async ETTask PointerDown(this DlgPetHeXinHeCheng self, BagInfo binfo, PointerEventData pdata)

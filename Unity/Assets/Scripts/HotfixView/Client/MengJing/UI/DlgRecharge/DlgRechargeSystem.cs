@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgRecharge))]
+    [FriendOf(typeof(DlgRecharge))]
     public static class DlgRechargeSystem
     {
         public static void RegisterUIEvent(this DlgRecharge self)
@@ -168,7 +168,10 @@ namespace ET.Client
             }
             catch (Exception ex)
             {
-                Log.Debug("UIRecharge ex:" + ex);
+                using (zstring.Block())
+                {
+                    Log.Debug(zstring.Format("UIRecharge ex:{0}", ex.ToString()));
+                }
             }
 
 #endif

@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [FriendOf(typeof (DlgSeasonJingHeZhuru))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [FriendOf(typeof(DlgSeasonJingHeZhuru))]
     public static class DlgSeasonJingHeZhuruSystem
     {
         public static void RegisterUIEvent(this DlgSeasonJingHeZhuru self)
@@ -35,7 +35,10 @@ namespace ET.Client
             self.MaxAdd = 0;
             self.CostIds.Clear();
             self.UpdateItemList();
-            self.View.E_NowQualityTextText.text = $"当前品质:{self.MainBagInfo.ItemPar}";
+            using (zstring.Block())
+            {
+                self.View.E_NowQualityTextText.text = zstring.Format("当前品质:{0}", self.MainBagInfo.ItemPar);
+            }
         }
 
         public static void InitInfo(this DlgSeasonJingHeZhuru self, BagInfo bagInfo)
@@ -44,7 +47,11 @@ namespace ET.Client
             self.View.ES_CommonItem.UpdateItem(bagInfo, ItemOperateEnum.None);
             ItemConfig itemConfig = ItemConfigCategory.Instance.Get(bagInfo.ItemID);
             self.View.E_ItemNameTextText.text = itemConfig.ItemName;
-            self.View.E_NowQualityTextText.text = $"当前品质:{bagInfo.ItemPar}";
+            using (zstring.Block())
+            {
+                self.View.E_NowQualityTextText.text = zstring.Format("当前品质:{0}", bagInfo.ItemPar);
+            }
+
             self.View.E_AddQualityTextText.text = "";
 
             self.UpdateItemList();
@@ -53,7 +60,7 @@ namespace ET.Client
         private static void OnBagItemsRefresh(this DlgSeasonJingHeZhuru self, Transform transform, int index)
         {
             Scroll_Item_CommonItem scrollItemCommonItem = self.ScrollItemCommonItems[index].BindTrans(transform);
-            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count? self.ShowBagInfos[index] : null, ItemOperateEnum.None, self.OnSelect);
+            scrollItemCommonItem.Refresh(index < self.ShowBagInfos.Count ? self.ShowBagInfos[index] : null, ItemOperateEnum.None, self.OnSelect);
         }
 
         public static void UpdateItemList(this DlgSeasonJingHeZhuru self)

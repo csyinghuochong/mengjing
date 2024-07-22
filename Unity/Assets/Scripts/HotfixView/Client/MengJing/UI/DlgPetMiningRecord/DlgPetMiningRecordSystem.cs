@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgPetMiningRecord))]
+    [FriendOf(typeof(DlgPetMiningRecord))]
     public static class DlgPetMiningRecordSystem
     {
         public static void RegisterUIEvent(this DlgPetMiningRecord self)
@@ -41,9 +41,13 @@ namespace ET.Client
                 gameObject.SetActive(true);
 
                 MineBattleConfig mineBattleConfig = MineBattleConfigCategory.Instance.Get(petMingRecord.MineType);
-                string content =
-                        $"玩家 {response.PetMingRecords[i].WinPlayer} {TimeInfo.Instance.ToDateTime(petMingRecord.Time)} 占领了你的{mineBattleConfig.Name}";
-                gameObject.transform.Find("Text").GetComponent<Text>().text = content;
+                using (zstring.Block())
+                {
+                    string content = zstring.Format("玩家 {0} {1} 占领了你的{2}",
+                        response.PetMingRecords[i].WinPlayer, TimeInfo.Instance.ToDateTime(petMingRecord.Time).ToString(), mineBattleConfig.Name);
+                    gameObject.transform.Find("Text").GetComponent<Text>().text = content;
+                }
+
                 CommonViewHelper.SetParent(gameObject, self.View.EG_BuildingList2RectTransform.gameObject);
             }
         }

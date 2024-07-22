@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace ET.Client
 {
     [Event(SceneType.Demo)]
-    public class OnSkillUse_DlgRunRaceMainRefresh: AEvent<Scene, OnSkillUse>
+    public class OnSkillUse_DlgRunRaceMainRefresh : AEvent<Scene, OnSkillUse>
     {
         protected override async ETTask Run(Scene scene, OnSkillUse args)
         {
@@ -16,7 +16,7 @@ namespace ET.Client
     }
 
     [Event(SceneType.Demo)]
-    public class UpdateUserBuffSkill_DlgRunRaceMainRefresh: AEvent<Scene, UpdateUserBuffSkill>
+    public class UpdateUserBuffSkill_DlgRunRaceMainRefresh : AEvent<Scene, UpdateUserBuffSkill>
     {
         protected override async ETTask Run(Scene scene, UpdateUserBuffSkill args)
         {
@@ -25,9 +25,9 @@ namespace ET.Client
         }
     }
 
-    [FriendOf(typeof (DlgRunRaceMainViewComponent))]
-    [FriendOf(typeof (ES_SkillGrid))]
-    [FriendOf(typeof (DlgRunRaceMain))]
+    [FriendOf(typeof(DlgRunRaceMainViewComponent))]
+    [FriendOf(typeof(ES_SkillGrid))]
+    [FriendOf(typeof(DlgRunRaceMain))]
     public static class DlgRunRaceMainSystem
     {
         public static void RegisterUIEvent(this DlgRunRaceMain self)
@@ -83,7 +83,7 @@ namespace ET.Client
             for (int i = 0; i < self.UISkillGrids.Count; i++)
             {
                 ES_SkillGrid esSkillGrid = self.UISkillGrids[i];
-                
+
                 if (esSkillGrid.SkillPro == null)
                 {
                     continue;
@@ -150,13 +150,20 @@ namespace ET.Client
                 long readyTime = self.ReadyTime - curTime;
                 if (readyTime > 0)
                 {
-                    self.View.E_ReadyTimeTextText.text = $"奔跑准备时间 {readyTime / 60}:{readyTime % 60}";
+                    using (zstring.Block())
+                    {
+                        self.View.E_ReadyTimeTextText.text = zstring.Format($"奔跑准备时间 {0}:{1}", readyTime / 60, readyTime % 60);
+                    }
+
                     self.View.E_TransformTimeTextText.text = string.Empty;
                 }
                 else if (endTime > 0)
                 {
-                    self.View.E_ReadyTimeTextText.text = $"活动结束倒计时 {endTime / 60}:{endTime % 60}";
-                    self.View.E_TransformTimeTextText.text = $"下次变身时间:  {leftTime / 60}:{leftTime % 60}";
+                    using (zstring.Block())
+                    {
+                        self.View.E_ReadyTimeTextText.text = zstring.Format("活动结束倒计时 {0}:{1}", endTime / 60, endTime % 60);
+                        self.View.E_TransformTimeTextText.text = zstring.Format("下次变身时间:  {0}:{1}", leftTime / 60, leftTime % 60);
+                    }
                 }
 
                 await timerComponent.WaitAsync(1000);
@@ -169,7 +176,11 @@ namespace ET.Client
 
         public static void UpdateNextTransformTime(this DlgRunRaceMain self, M2C_RunRaceBattleInfo message)
         {
-            Log.Debug($"下次变身时间:  {message.NextTransforTime - TimeHelper.ServerNow()}");
+            using (zstring.Block())
+            {
+                Log.Debug(zstring.Format("下次变身时间:  {0}", message.NextTransforTime - TimeHelper.ServerNow()));
+            }
+
             self.NextTransformTime = message.NextTransforTime;
         }
 
@@ -209,13 +220,20 @@ namespace ET.Client
         {
             if (rankingInfo.PlayerLv < 0)
             {
-                gameObject.GetComponentInChildren<Text>().text = $"第{i + 1}名 {rankingInfo.PlayerName}  还剩:{rankingInfo.Combat * 0.01}";
+                using (zstring.Block())
+                {
+                    gameObject.GetComponentInChildren<Text>().text = zstring.Format("第{0}名 {1}  还剩:{2}", i + 1, rankingInfo.PlayerName,
+                        (rankingInfo.Combat * 0.01).ToString());
+                }
             }
             else
             {
                 DateTime dateTime = TimeInfo.Instance.ToDateTime(rankingInfo.Combat);
-                string showTime = $"{dateTime.Hour}:{dateTime.Minute}:{dateTime.Second}";
-                gameObject.GetComponentInChildren<Text>().text = $"第{i + 1}名 {rankingInfo.PlayerName}  时间:{showTime}";
+                using (zstring.Block())
+                {
+                    string showTime = zstring.Format("{0}:{1}:{2}", dateTime.Hour, dateTime.Minute, dateTime.Second);
+                    gameObject.GetComponentInChildren<Text>().text = zstring.Format("第{0}名 {1}  时间:{2}", i + 1, rankingInfo.PlayerName, showTime);
+                }
             }
         }
 

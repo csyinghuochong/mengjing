@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgPetFormationViewComponent))]
-    [FriendOf(typeof (ES_PetFormationSet))]
-    [FriendOf(typeof (Scroll_Item_PetFormationItem))]
-    [FriendOf(typeof (DlgPetFormation))]
+    [FriendOf(typeof(DlgPetFormationViewComponent))]
+    [FriendOf(typeof(ES_PetFormationSet))]
+    [FriendOf(typeof(Scroll_Item_PetFormationItem))]
+    [FriendOf(typeof(DlgPetFormation))]
     public static class DlgPetFormationSystem
     {
         public static void RegisterUIEvent(this DlgPetFormation self)
@@ -35,10 +35,13 @@ namespace ET.Client
             List<long> pets = self.PetTeamList;
             for (int i = 0; i < pets.Count; i++)
             {
-                number += (pets[i] != 0? 1 : 0);
+                number += (pets[i] != 0 ? 1 : 0);
             }
 
-            self.View.E_TextNumberText.text = $"阵容限制：{number}/5";
+            using (zstring.Block())
+            {
+                self.View.E_TextNumberText.text = zstring.Format("阵容限制：{0}/5", number);
+            }
         }
 
         public static void UpdateFighting(this DlgPetFormation self, int sceneType)
@@ -119,7 +122,7 @@ namespace ET.Client
             int number = 0;
             for (int i = 0; i < self.PetTeamList.Count; i++)
             {
-                number += (self.PetTeamList[i] != 0? 1 : 0);
+                number += (self.PetTeamList[i] != 0 ? 1 : 0);
             }
 
             if (index != -1 && number >= 5 && self.PetTeamList[index] == 0 && operateType != 2)

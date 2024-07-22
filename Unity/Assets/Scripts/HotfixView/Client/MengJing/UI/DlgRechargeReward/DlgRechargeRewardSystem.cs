@@ -2,7 +2,7 @@
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgRechargeReward))]
+    [FriendOf(typeof(DlgRechargeReward))]
     public static class DlgRechargeRewardSystem
     {
         public static void RegisterUIEvent(this DlgRechargeReward self)
@@ -33,7 +33,7 @@ namespace ET.Client
         public static async ETTask OnButtonReward(this DlgRechargeReward self)
         {
             int page = self.CurrentIndex;
-            int rechargeNumber = page == 0? 50 : 98;
+            int rechargeNumber = page == 0 ? 50 : 98;
 
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
             if (userInfoComponent.UserInfo.RechargeReward.Contains(rechargeNumber))
@@ -45,7 +45,11 @@ namespace ET.Client
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
             if (unit.GetComponent<NumericComponentC>().GetAsInt(NumericType.RechargeNumber) < rechargeNumber)
             {
-                FlyTipComponent.Instance.ShowFlyTip($"充值金额不足 {rechargeNumber}元");
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("充值金额不足 {0}元", rechargeNumber));
+                }
+
                 return;
             }
 
@@ -72,7 +76,7 @@ namespace ET.Client
 
         public static void UpdateUI(this DlgRechargeReward self, int page)
         {
-            int rechargeNumber = page == 0? 50 : 98;
+            int rechargeNumber = page == 0 ? 50 : 98;
             UserInfoComponentC userInfoComponent = self.Root().GetComponent<UserInfoComponentC>();
 
             Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
@@ -91,7 +95,10 @@ namespace ET.Client
                 self.View.E_ImageReceivedImage.gameObject.SetActive(userInfoComponent.UserInfo.RechargeReward.Contains(rechargeNumber));
             }
 
-            self.View.E_TextTipText.text = $"累冲{rechargeNumber}元， 获得以下奖励";
+            using (zstring.Block())
+            {
+                self.View.E_TextTipText.text = zstring.Format("累冲{0}元， 获得以下奖励", rechargeNumber);
+            }
 
             string reward = ConfigData.RechargeReward[rechargeNumber];
             List<RewardItem> Recharge = ItemHelper.GetRewardItems(reward);
