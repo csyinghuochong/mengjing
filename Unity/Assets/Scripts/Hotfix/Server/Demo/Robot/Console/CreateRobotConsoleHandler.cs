@@ -17,6 +17,7 @@ namespace ET.Server
                 }
                 default:
                 {
+                    //CreateRobot –Num=100
                     CreateRobotArgs options = null;
                     Parser.Default.ParseArguments<CreateRobotArgs>(content.Split(' '))
                             .WithNotParsed(error => throw new Exception($"CreateRobotArgs error!"))

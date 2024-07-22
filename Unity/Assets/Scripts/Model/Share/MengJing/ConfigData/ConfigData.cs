@@ -16,6 +16,8 @@ namespace ET
             10010042, 10010043
         };
         
+        public const string RobotPassWord = "et@#robot";
+        
         //客戶端活动提示
         [StaticField]
         public static List<ActivityTipConfig> ActivityShowList = new List<ActivityTipConfig>()
