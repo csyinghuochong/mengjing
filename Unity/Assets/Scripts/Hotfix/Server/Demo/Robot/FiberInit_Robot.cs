@@ -25,8 +25,14 @@ namespace ET.Client
 
             await LoginHelper.Login(root, root.Name, ConfigData.RobotPassWord);
             
-            await LoginHelper.LoginGameAsync(root);
+            PlayerComponent playerComponent = root.GetComponent<PlayerComponent>();
+            if (playerComponent.CreateRoleList.Count == 0)
+            {
+                await LoginHelper.RequestCreateRole(root, playerComponent.AccountId, 1, "机器人" + playerComponent.Account);
+            }
             
+            await LoginHelper.LoginGameAsync(root);
+
             //root.AddComponent<AIComponent, int>(1);
         }
     }

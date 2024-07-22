@@ -11,7 +11,7 @@ namespace ET.Client
         public List<ServerItem> AllServerList { get; set; } = new(); //服务器列表存内容
 
         //当前角色列表数据
-        public List<CreateRoleInfo> CreateRoleList = new();
+        public List<CreateRoleInfo> CreateRoleList{ get; set; }  = new();
 
         public PlayerInfo PlayerInfo { get; set; }
 
