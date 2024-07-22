@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (DlgJiaYuanRecord))]
+    [FriendOf(typeof(DlgJiaYuanRecord))]
     public static class DlgJiaYuanRecordSystem
     {
         public static void RegisterUIEvent(this DlgJiaYuanRecord self)
@@ -34,24 +34,30 @@ namespace ET.Client
                 string time = TimeInfo.Instance.ToDateTime(jiaYuanRecord.Time).ToString();
                 time = time.Substring(5, time.Length - 5);
                 Text Text = gameObject.transform.Find("Text").GetComponent<Text>();
-                string tip = string.Empty;
-                tip = $"{time} 玩家<color=#9CA606>{jiaYuanRecord.PlayerName}</color>";
-                switch (jiaYuanRecord.OperateType)
+                zstring tip = string.Empty;
+                using (zstring.Block())
                 {
-                    case JiaYuanOperateType.Visit:
-                        tip += " 来到你的家园逛了一圈。";
-                        break;
-                    case JiaYuanOperateType.GatherPlant:
-                        tip += $" 在你的家园拾取了<color=#9CA606> {JiaYuanFarmConfigCategory.Instance.Get(jiaYuanRecord.OperateId).Name}</color>";
-                        break;
-                    case JiaYuanOperateType.GatherPasture:
-                        tip += $" 在你的家园拾取了<color=#9CA606> {JiaYuanPastureConfigCategory.Instance.Get(jiaYuanRecord.OperateId).Name}</color>";
-                        break;
-                    case JiaYuanOperateType.Pick:
-                        tip += $" 在你的家园清理了<color=#9CA606> {MonsterConfigCategory.Instance.Get(jiaYuanRecord.OperateId).MonsterName}</color>";
-                        break;
-                    default:
-                        break;
+                    tip = zstring.Format("{0} 玩家<color=#9CA606>{1}</color>", time, jiaYuanRecord.PlayerName);
+                    switch (jiaYuanRecord.OperateType)
+                    {
+                        case JiaYuanOperateType.Visit:
+                            tip += " 来到你的家园逛了一圈。";
+                            break;
+                        case JiaYuanOperateType.GatherPlant:
+                            tip += zstring.Format(" 在你的家园拾取了<color=#9CA606> {0}</color>",
+                                JiaYuanFarmConfigCategory.Instance.Get(jiaYuanRecord.OperateId).Name);
+                            break;
+                        case JiaYuanOperateType.GatherPasture:
+                            tip += zstring.Format(" 在你的家园拾取了<color=#9CA606> {0}</color>",
+                                JiaYuanPastureConfigCategory.Instance.Get(jiaYuanRecord.OperateId).Name);
+                            break;
+                        case JiaYuanOperateType.Pick:
+                            tip += zstring.Format(" 在你的家园清理了<color=#9CA606> {0}</color>",
+                                MonsterConfigCategory.Instance.Get(jiaYuanRecord.OperateId).MonsterName);
+                            break;
+                        default:
+                            break;
+                    }
                 }
 
                 Text.text = tip;

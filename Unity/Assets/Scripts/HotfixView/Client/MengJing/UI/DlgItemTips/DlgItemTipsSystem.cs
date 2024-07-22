@@ -63,7 +63,10 @@ namespace ET.Client
                 itemTypename = "家园烹饪";
             }
 
-            self.View.E_ItemTypeText.text = "类型:" + itemTypename;
+            using (zstring.Block())
+            {
+                self.View.E_ItemTypeText.text = zstring.Format("类型:{0}", itemTypename);
+            }
 
             //显示是否绑定
             if (bagInfo.isBinging)
@@ -113,9 +116,11 @@ namespace ET.Client
             {
                 using (zstring.Block())
                 {
-                    self.View.E_ItemDesText.GetComponent<Text>().text = (zstring)itemDes + "\n" + "\n" + $"鉴定符品质:{bagInfo.ItemPar}" + "\n" +
-                            "品质越高,鉴定出极品的概率越高。" + "\n" +
-                            "鉴定符品质与制造者熟练度相关。";
+                    using (zstring.Block())
+                    {
+                        self.View.E_ItemDesText.GetComponent<Text>().text =
+                                zstring.Format("{0}\n\n鉴定符品质:{1}\n品质越高,鉴定出极品的概率越高。\n鉴定符品质与制造者熟练度相关。", itemDes, bagInfo.ItemPar);
+                    }
                 }
             }
 
@@ -125,7 +130,7 @@ namespace ET.Client
                 string[] addList = itemConfig.ItemUsePar.Split(';')[0].Split(',');
                 using (zstring.Block())
                 {
-                    self.View.E_ItemDesText.GetComponent<Text>().text = (zstring)itemDes + "\n" + "\n" + "烹饪品质:" + bagInfo.ItemPar;
+                    self.View.E_ItemDesText.GetComponent<Text>().text = zstring.Format("{0}\n\n烹饪品质:{1}", itemDes, bagInfo.ItemPar);
                 }
             }
 
@@ -135,7 +140,7 @@ namespace ET.Client
                 SkillConfig skillCof = SkillConfigCategory.Instance.Get(int.Parse(itemConfig.ItemUsePar));
                 using (zstring.Block())
                 {
-                    self.View.E_ItemDesText.GetComponent<Text>().text = (zstring)itemDes + "\n" + "\n" + $"技能描述:{skillCof.SkillDescribe}";
+                    self.View.E_ItemDesText.GetComponent<Text>().text = zstring.Format("{0}\n\n技能描述:{1}", itemDes, skillCof.SkillDescribe);
                 }
             }
 
@@ -145,8 +150,8 @@ namespace ET.Client
                 int sceneID = int.Parse(self.BagInfo.ItemPar.Split('@')[0]);
                 using (zstring.Block())
                 {
-                    self.View.E_ItemDesText.GetComponent<Text>().text =
-                            (zstring)itemConfig.ItemDes + "\n前往地图:" + DungeonConfigCategory.Instance.Get(sceneID).ChapterName + "开启藏宝图!";
+                    self.View.E_ItemDesText.GetComponent<Text>().text = zstring.Format("{0}\n前往地图:{1}开启藏宝图!", itemConfig.ItemDes,
+                        DungeonConfigCategory.Instance.Get(sceneID).ChapterName);
                 }
             }
 
@@ -612,7 +617,7 @@ namespace ET.Client
                 string fumopro;
                 using (zstring.Block())
                 {
-                    fumopro = (zstring)"当前附魔属性<color=#BEFF34>" + equipfumo + "</color> \n是否覆盖已有属性\n" + itemfumo + "\n此附魔道具已消耗";
+                    fumopro = zstring.Format("当前附魔属性<color=#BEFF34>{0}</color> \n是否覆盖已有属性\n{1}\n此附魔道具已消耗", equipfumo, itemfumo);
                 }
 
                 BagClientNetHelper.SendFumoUse(self.Root(), self.BagInfo, hideProLists).Coroutine();
@@ -633,7 +638,7 @@ namespace ET.Client
                 await BagClientNetHelper.SendFumoPro(self.Root(), 0);
                 using (zstring.Block())
                 {
-                    FlyTipComponent.Instance.ShowFlyTip((zstring)$"附魔属性 {itemfumo}");
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("附魔属性 {0}", itemfumo));
                 }
 
                 self.OnCloseTips();
@@ -683,7 +688,7 @@ namespace ET.Client
         {
             using (zstring.Block())
             {
-                EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = (zstring)$"1_{self.BagInfo.BagInfoID}" });
+                EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = zstring.Format("1_{0}", self.BagInfo.BagInfoID) });
             }
 
             self.OnCloseTips();
@@ -693,7 +698,7 @@ namespace ET.Client
         {
             using (zstring.Block())
             {
-                EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = (zstring)$"0_{self.BagInfo.BagInfoID}" });
+                EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = zstring.Format("0_{0}", self.BagInfo.BagInfoID) });
             }
 
             self.OnCloseTips();

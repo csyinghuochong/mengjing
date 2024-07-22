@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.UIHappyMainTimer)]
-    public class UIHappyMainTimer: ATimer<DlgHappyMain>
+    public class UIHappyMainTimer : ATimer<DlgHappyMain>
     {
         protected override void Run(DlgHappyMain self)
         {
@@ -14,7 +14,10 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
@@ -69,7 +72,10 @@ namespace ET.Client
                 leftTime /= 1000;
                 int minute = (int)(leftTime / 60);
                 int second = (int)(leftTime % 60);
-                self.View.E_TextCoundownText.text = $"下次道具刷新: {minute}:{second}";
+                using (zstring.Block())
+                {
+                    self.View.E_TextCoundownText.text = zstring.Format("下次道具刷新: {0}:{1}", minute, second);
+                }
             }
             else
             {
@@ -81,11 +87,17 @@ namespace ET.Client
             long endTime = self.EndTime - curTime;
             if (endTime > 60)
             {
-                self.View.E_EndTimeTextText.text = $"活动结束倒计时 {endTime / 60}:{endTime % 60}";
+                using (zstring.Block())
+                {
+                    self.View.E_EndTimeTextText.text = zstring.Format("活动结束倒计时 {0}:{1}", endTime / 60, endTime % 60);
+                }
             }
             else
             {
-                self.View.E_EndTimeTextText.text = $"活动结束还剩{endTime % 60}秒，活动结束将强制离开地图哦。";
+                using (zstring.Block())
+                {
+                    self.View.E_EndTimeTextText.text = zstring.Format("活动结束还剩{0}秒，活动结束将强制离开地图哦。", endTime % 60);
+                }
             }
 
             if (endTime <= 0)
@@ -115,13 +127,16 @@ namespace ET.Client
             long lastmovetime = unit.GetComponent<NumericComponentC>().GetAsLong(NumericType.HappyMoveTime);
             self.NextMoveTime = lastmovetime;
 
-            //金币消耗
-            GlobalValueConfig globalValueConfig1 = GlobalValueConfigCategory.Instance.Get(94);
-            self.View.E_TextTip_2Text.text = $"金币消耗:{globalValueConfig1.Value2}";
+            using (zstring.Block())
+            {
+                //金币消耗
+                GlobalValueConfig globalValueConfig1 = GlobalValueConfigCategory.Instance.Get(94);
+                self.View.E_TextTip_2Text.text = zstring.Format("金币消耗:{0}", globalValueConfig1.Value2);
 
-            //钻石消耗
-            GlobalValueConfig globalValueConfig2 = GlobalValueConfigCategory.Instance.Get(95);
-            self.View.E_TextTip_3Text.text = $"钻石消耗:{globalValueConfig2.Value2}";
+                //钻石消耗
+                GlobalValueConfig globalValueConfig2 = GlobalValueConfigCategory.Instance.Get(95);
+                self.View.E_TextTip_3Text.text = zstring.Format("钻石消耗:{0}", globalValueConfig2.Value2);
+            }
         }
 
         public static void OnButtonPick(this DlgHappyMain self)
@@ -169,22 +184,26 @@ namespace ET.Client
                     return;
                 }
 
-                PopupTipHelp.OpenPopupTip(self.Root(), "喜从天降", $"是否消耗{globalValueConfig.Value2}金币?", async () =>
+                using (zstring.Block())
                 {
-                    long instanceId = self.InstanceId;
-                    int error = await ActivityNetHelper.HappyMoveRequest(self.Root(), moveType);
-                    if (instanceId != self.InstanceId || error != ErrorCode.ERR_Success)
+                    PopupTipHelp.OpenPopupTip(self.Root(), "喜从天降", zstring.Format("是否消耗{0}金币?", globalValueConfig.Value2), async () =>
                     {
-                        return;
-                    }
+                        long instanceId = self.InstanceId;
+                        int error = await ActivityNetHelper.HappyMoveRequest(self.Root(), moveType);
+                        if (instanceId != self.InstanceId || error != ErrorCode.ERR_Success)
+                        {
+                            return;
+                        }
 
-                    Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                        Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
-                    FunctionEffect.PlayDropEffect(unit, 30000003);
-                    self.OnButtonPick();
+                        FunctionEffect.PlayDropEffect(unit, 30000003);
+                        self.OnButtonPick();
 
-                    self.OnUpdateMoney();
-                }).Coroutine();
+                        self.OnUpdateMoney();
+                    }).Coroutine();
+                }
+
                 return;
             }
 
@@ -197,22 +216,26 @@ namespace ET.Client
                     return;
                 }
 
-                PopupTipHelp.OpenPopupTip(self.Root(), "喜从天降", $"是否消耗{globalValueConfig.Value2}钻石?", async () =>
+                using (zstring.Block())
                 {
-                    long instanceId = self.InstanceId;
-                    int error = await ActivityNetHelper.HappyMoveRequest(self.Root(), moveType);
-                    if (instanceId != self.InstanceId || error != ErrorCode.ERR_Success)
+                    PopupTipHelp.OpenPopupTip(self.Root(), "喜从天降", zstring.Format("是否消耗{0}钻石?", globalValueConfig.Value2), async () =>
                     {
-                        return;
-                    }
+                        long instanceId = self.InstanceId;
+                        int error = await ActivityNetHelper.HappyMoveRequest(self.Root(), moveType);
+                        if (instanceId != self.InstanceId || error != ErrorCode.ERR_Success)
+                        {
+                            return;
+                        }
 
-                    Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
+                        Unit unit = UnitHelper.GetMyUnitFromClientScene(self.Root());
 
-                    FunctionEffect.PlayDropEffect(unit, 30000003);
-                    self.OnButtonPick();
+                        FunctionEffect.PlayDropEffect(unit, 30000003);
+                        self.OnButtonPick();
 
-                    self.OnUpdateMoney();
-                }).Coroutine();
+                        self.OnUpdateMoney();
+                    }).Coroutine();
+                }
+
                 return;
             }
 
@@ -230,11 +253,10 @@ namespace ET.Client
 
             self.OnUpdateMoney();
         }
+
         [EntitySystem]
         private static void Awake(this DlgHappyMain self)
         {
-
         }
-        
     }
 }

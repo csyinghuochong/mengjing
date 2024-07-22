@@ -89,21 +89,27 @@ namespace ET.Client
             if (equipinfo.FumoProLists.Count > 0)
             {
                 string equipfumo = ItemViewHelp.GetFumpProDesc(equipinfo.FumoProLists);
-                string fumopro = $"当前附魔属性<color=#BEFF34>{equipfumo}</color> \n是否覆盖已有属性\n{itemfumo}\n此附魔道具已消耗";
-                BagClientNetHelper.SendFumoUse(self.Root(), self.FumoItemInfo, hideProLists).Coroutine();
-                PopupTipHelp.OpenPopupTip(self.Root(), "装备附魔", fumopro, async () =>
+                using (zstring.Block())
                 {
-                    await BagClientNetHelper.SendFumoPro(self.Root(), index);
-                    FlyTipComponent.Instance.ShowFlyTip($"附魔属性 {itemfumo}");
+                    string fumopro = zstring.Format("当前附魔属性<color=#BEFF34>{0}</color> \n是否覆盖已有属性\n{1}\n此附魔道具已消耗", equipfumo, itemfumo);
+                    BagClientNetHelper.SendFumoUse(self.Root(), self.FumoItemInfo, hideProLists).Coroutine();
+                    PopupTipHelp.OpenPopupTip(self.Root(), "装备附魔", fumopro, async () =>
+                    {
+                        await BagClientNetHelper.SendFumoPro(self.Root(), index);
+                        FlyTipComponent.Instance.ShowFlyTip(zstring.Format("附魔属性 {0}", itemfumo));
 
-                    self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemFumoSelect);
-                }, () => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemFumoSelect); }).Coroutine();
+                        self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemFumoSelect);
+                    }, () => { self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemFumoSelect); }).Coroutine();
+                }
             }
             else
             {
                 await BagClientNetHelper.SendFumoUse(self.Root(), self.FumoItemInfo, hideProLists);
                 await BagClientNetHelper.SendFumoPro(self.Root(), index);
-                FlyTipComponent.Instance.ShowFlyTip($"附魔属性 {itemfumo}");
+                using (zstring.Block())
+                {
+                    FlyTipComponent.Instance.ShowFlyTip(zstring.Format("附魔属性 {0}", itemfumo));
+                }
 
                 self.Root().GetComponent<UIComponent>().CloseWindow(WindowID.WindowID_ItemFumoSelect);
             }

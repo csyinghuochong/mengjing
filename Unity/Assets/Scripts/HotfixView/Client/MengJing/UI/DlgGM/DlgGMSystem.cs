@@ -1,6 +1,6 @@
 ﻿namespace ET.Client
 {
-    [FriendOf(typeof (DlgGM))]
+    [FriendOf(typeof(DlgGM))]
     public static class DlgGMSystem
     {
         public static void RegisterUIEvent(this DlgGM self)
@@ -93,7 +93,10 @@
 
             if (response.Error == 0)
             {
-                self.View.E_Text_OnLineNumberText.text = $"玩家:{response.OnLineNumber}机器人:{response.OnLineRobot}";
+                using (zstring.Block())
+                {
+                    self.View.E_Text_OnLineNumberText.text = zstring.Format("玩家:{0}机器人:{1}", response.OnLineNumber, response.OnLineRobot);
+                }
             }
             else
             {

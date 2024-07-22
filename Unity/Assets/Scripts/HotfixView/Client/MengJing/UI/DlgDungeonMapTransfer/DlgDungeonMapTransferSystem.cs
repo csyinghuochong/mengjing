@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ET.Client
 {
     [Invoke(TimerInvokeType.MapTransferBossRefreshTimer)]
-    public class MapTransferBossRefreshTimer: ATimer<DlgDungeonMapTransfer>
+    public class MapTransferBossRefreshTimer : ATimer<DlgDungeonMapTransfer>
     {
         protected override void Run(DlgDungeonMapTransfer self)
         {
@@ -15,12 +15,15 @@ namespace ET.Client
             }
             catch (Exception e)
             {
-                Log.Error($"move timer error: {self.Id}\n{e}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("move timer error: {0}\n{1}", self.Id, e.ToString()));
+                }
             }
         }
     }
 
-    [FriendOf(typeof (DlgDungeonMapTransfer))]
+    [FriendOf(typeof(DlgDungeonMapTransfer))]
     public static class DlgDungeonMapTransferSystem
     {
         public static void RegisterUIEvent(this DlgDungeonMapTransfer self)
@@ -153,8 +156,11 @@ namespace ET.Client
                     int hour = (int)time / 3600;
                     int min = (int)((time - (hour * 3600)) / 60);
                     int sec = (int)(time - (hour * 3600) - (min * 60));
-                    string showStr = hour + "时" + min + "分" + sec + "秒";
-                    self.BossRefreshObjs[it.Key].text = $"刷新时间:{showStr}";
+                    using (zstring.Block())
+                    {
+                        string showStr = zstring.Format("{0}时{1}分{2}秒", hour, min, sec);
+                        self.BossRefreshObjs[it.Key].text = zstring.Format("刷新时间:{0}", showStr);
+                    }
                 }
                 else
                 {

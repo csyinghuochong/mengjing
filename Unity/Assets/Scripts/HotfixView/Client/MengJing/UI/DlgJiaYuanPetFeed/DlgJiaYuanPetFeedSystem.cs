@@ -67,7 +67,11 @@ namespace ET.Client
             JiaYuanPet jiaYuanPet = jiaYuanComponent.GetJiaYuanPet(self.JiaYuanPet.unitId);
             if (jiaYuanPet == null)
             {
-                Log.Error($"UIJiaYuanPetFeed:  {self.Root().GetComponent<PlayerComponent>().CurrentRoleId}");
+                using (zstring.Block())
+                {
+                    Log.Error(zstring.Format("UIJiaYuanPetFeed:  {0}", self.Root().GetComponent<PlayerComponent>().CurrentRoleId));
+                }
+
                 return;
             }
 
@@ -77,7 +81,10 @@ namespace ET.Client
             }
 
             int addExp = CommonHelp.GetJiaYuanPetExp(jiaYuanPet.PetLv, jiaYuanPet.MoodValue);
-            self.View.E_Text_HourExpText.text = $"经验收益: {addExp}/小时";
+            using (zstring.Block())
+            {
+                self.View.E_Text_HourExpText.text = zstring.Format("经验收益: {0}/小时", addExp);
+            }
 
             self.View.E_Text_PetNameText.text = jiaYuanPet.PetName;
         }
@@ -185,7 +192,10 @@ namespace ET.Client
             M2C_JiaYuanPetFeedResponse response = await JiaYuanNetHelper.JiaYuanPetFeedRequest(self.Root(), self.JiaYuanPet.unitId, idslist);
             self.Root().GetComponent<JiaYuanComponentC>().JiaYuanPetList_2 = response.JiaYuanPetList;
 
-            FlyTipComponent.Instance.ShowFlyTip($"宠物增加 {response.MoodAdd}心情值");
+            using (zstring.Block())
+            {
+                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("宠物增加 {0}心情值", response.MoodAdd));
+            }
 
             self.OnUpdateItemList();
             self.OnUpdatePetInfo();
@@ -252,7 +262,10 @@ namespace ET.Client
             }
 
             self.IsHoldDown = true;
-            EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = $"1_{binfo.BagInfoID}" });
+            using (zstring.Block())
+            {
+                EventSystem.Instance.Publish(self.Root(), new HuiShouSelect() { DataParamString = zstring.Format("1_{0}", binfo.BagInfoID) });
+            }
 
             await self.Root().GetComponent<TimerComponent>().WaitAsync(500);
             if (!self.IsHoldDown)
