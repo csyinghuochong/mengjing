@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_PetListItem))]
-    [EntitySystemOf(typeof (ES_ProtectPet))]
-    [FriendOfAttribute(typeof (ES_ProtectPet))]
+    [FriendOf(typeof(Scroll_Item_PetListItem))]
+    [EntitySystemOf(typeof(ES_ProtectPet))]
+    [FriendOfAttribute(typeof(ES_ProtectPet))]
     public static partial class ES_ProtectPetSystem
     {
         [EntitySystem]
@@ -83,8 +83,12 @@ namespace ET.Client
                 return;
             }
 
-            string tip = isprotectd? "锁定" : "解锁";
-            FlyTipComponent.Instance.ShowFlyTip($"宠物{tip}成功");
+            string tip = isprotectd ? "锁定" : "解锁";
+            using (zstring.Block())
+            {
+                FlyTipComponent.Instance.ShowFlyTip(zstring.Format("宠物{0}成功", tip));
+            }
+
             self.Root().GetComponent<PetComponentC>().OnPetProtect(self.PetInfoId, isprotectd);
             self.OnInitPetList();
             self.OnClickPetHandler(self.PetInfoId);

@@ -146,7 +146,7 @@ namespace ET.Client
             using (zstring.Block())
             {
                 PopupTipHelp.OpenPopupTip(self.Root(), "购买格子",
-                    (zstring)"是否花费" + CommonViewHelper.GetNeedItemDesc(buyCellCost.Cost) + "购买一个背包格子?",
+                    zstring.Format("是否花费{0}购买一个背包格子?", CommonViewHelper.GetNeedItemDesc(buyCellCost.Cost)),
                     () => { BagClientNetHelper.RequestBuyBagCell(self.Root(), 0).Coroutine(); }, null).Coroutine();
             }
 
@@ -249,7 +249,7 @@ namespace ET.Client
 
             using (zstring.Block())
             {
-                PopupTipHelp.OpenPopupTip(self.Root(), "合成宝石", (zstring)"一键合成消耗" + costgold + "金币",
+                PopupTipHelp.OpenPopupTip(self.Root(), "合成宝石", zstring.Format("一键合成消耗{0}金币", costgold),
                             () => { BagClientNetHelper.RquestGemHeCheng(self.Root(), 0).Coroutine(); }, null)
                         .Coroutine();
             }

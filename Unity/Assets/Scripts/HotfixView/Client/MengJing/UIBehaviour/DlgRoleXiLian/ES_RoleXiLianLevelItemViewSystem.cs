@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_RoleXiLianLevelItem))]
-    [FriendOfAttribute(typeof (ES_RoleXiLianLevelItem))]
+    [EntitySystemOf(typeof(ES_RoleXiLianLevelItem))]
+    [FriendOfAttribute(typeof(ES_RoleXiLianLevelItem))]
     public static partial class ES_RoleXiLianLevelItemSystem
     {
         [EntitySystem]
@@ -60,25 +60,29 @@ namespace ET.Client
             bool actived = shuliandu >= equipXiLianConfig.NeedShuLianDu;
             self.E_Image_AcvityedImage.gameObject.SetActive(userInfo.XiuLianRewardIds.Contains(xilianId));
             self.E_ButtonGetButton.gameObject.SetActive(actived && !userInfo.XiuLianRewardIds.Contains(xilianId));
-            self.E_TextShuLianDuText.text = actived? $"{equipXiLianConfig.NeedShuLianDu}/{equipXiLianConfig.NeedShuLianDu}"
-                    : $"{shuliandu}/{equipXiLianConfig.NeedShuLianDu}";
-            float progress = shuliandu * 1f / equipXiLianConfig.NeedShuLianDu;
-            self.E_ImageExpImage.fillAmount = Mathf.Min(progress, 1f);
-            self.E_TextTitleText.text = equipXiLianConfig.Title;
-            self.E_TextLevelTipText.text = "获得" + equipXiLianConfig.Title + "，洗炼获得高品质属性概率提升";
-
-            if (equipXiLianConfig.ProList_Type[0] != 0)
+            using (zstring.Block())
             {
-                if (NumericHelp.GetNumericValueType(equipXiLianConfig.ProList_Type[0]) == 2)
+                self.E_TextShuLianDuText.text = actived ? zstring.Format("{0}/{1}", equipXiLianConfig.NeedShuLianDu, equipXiLianConfig.NeedShuLianDu)
+                        : zstring.Format("{0}/{1}", shuliandu, equipXiLianConfig.NeedShuLianDu);
+                float progress = shuliandu * 1f / equipXiLianConfig.NeedShuLianDu;
+                self.E_ImageExpImage.fillAmount = Mathf.Min(progress, 1f);
+                self.E_TextTitleText.text = equipXiLianConfig.Title;
+                self.E_TextLevelTipText.text = zstring.Format("获得{0}，洗炼获得高品质属性概率提升", equipXiLianConfig.Title);
+
+                if (equipXiLianConfig.ProList_Type[0] != 0)
                 {
-                    float fvalue = equipXiLianConfig.ProList_Value[0] * 0.001f;
-                    string svalue = fvalue.ToString("0.#####");
-                    self.E_TextAttributeText.text = $"{ItemViewHelp.GetAttributeName(equipXiLianConfig.ProList_Type[0])} +{svalue}%";
-                }
-                else
-                {
-                    self.E_TextAttributeText.text =
-                            $"{ItemViewHelp.GetAttributeName(equipXiLianConfig.ProList_Type[0])} +{equipXiLianConfig.ProList_Value[0]}";
+                    if (NumericHelp.GetNumericValueType(equipXiLianConfig.ProList_Type[0]) == 2)
+                    {
+                        float fvalue = equipXiLianConfig.ProList_Value[0] * 0.001f;
+                        string svalue = fvalue.ToString("0.#####");
+                        self.E_TextAttributeText.text =
+                                zstring.Format("{0} +{1}%", ItemViewHelp.GetAttributeName(equipXiLianConfig.ProList_Type[0]), svalue);
+                    }
+                    else
+                    {
+                        self.E_TextAttributeText.text = zstring.Format("{0} +{1}", ItemViewHelp.GetAttributeName(equipXiLianConfig.ProList_Type[0]),
+                            equipXiLianConfig.ProList_Value[0]);
+                    }
                 }
             }
         }

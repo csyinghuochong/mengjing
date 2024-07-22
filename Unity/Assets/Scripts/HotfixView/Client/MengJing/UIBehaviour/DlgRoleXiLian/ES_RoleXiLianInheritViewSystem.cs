@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace ET.Client
 {
-    [FriendOf(typeof (Scroll_Item_CommonItem))]
-    [FriendOf(typeof (ES_CommonItem))]
-    [EntitySystemOf(typeof (ES_RoleXiLianInherit))]
-    [FriendOfAttribute(typeof (ES_RoleXiLianInherit))]
+    [FriendOf(typeof(Scroll_Item_CommonItem))]
+    [FriendOf(typeof(ES_CommonItem))]
+    [EntitySystemOf(typeof(ES_RoleXiLianInherit))]
+    [FriendOfAttribute(typeof(ES_RoleXiLianInherit))]
     public static partial class ES_RoleXiLianInheritSystem
     {
         [EntitySystem]
@@ -74,8 +74,12 @@ namespace ET.Client
             self.ES_CommonItem_Cost.E_ItemNumText.gameObject.SetActive(false);
 
             BagComponentC bagComponent = self.Root().GetComponent<BagComponentC>();
-            self.E_Text_CostValueText.text = $"{bagComponent.GetItemNumber(costitemid)}/{constitemnumber}";
-            self.E_Text_CostValueText.color = bagComponent.GetItemNumber(int.Parse(costitem[0])) >= int.Parse(costitem[1])? Color.green : Color.red;
+            using (zstring.Block())
+            {
+                self.E_Text_CostValueText.text = zstring.Format("{0}/{1}", bagComponent.GetItemNumber(costitemid), constitemnumber);
+            }
+
+            self.E_Text_CostValueText.color = bagComponent.GetItemNumber(int.Parse(costitem[0])) >= int.Parse(costitem[1]) ? Color.green : Color.red;
 
             self.E_Text_CostNameText.text = ItemConfigCategory.Instance.Get(bagInfoNeed.ItemID).ItemName;
             self.E_Text_CostNameText.color = FunctionUI.QualityReturnColorDi((int)ItemConfigCategory.Instance.Get(bagInfoNeed.ItemID).ItemQuality);
@@ -86,7 +90,10 @@ namespace ET.Client
 
             int maxTimes = GlobalValueConfigCategory.Instance.Get(117).Value2;
             self.E_ProgressBarImgImage.fillAmount = bagInfo.InheritTimes * 1f / maxTimes;
-            self.E_InheritTimesTextText.text = $"{bagInfo.InheritTimes}/{maxTimes}次";
+            using (zstring.Block())
+            {
+                self.E_InheritTimesTextText.text = zstring.Format("{0}/{1}次", bagInfo.InheritTimes, maxTimes);
+            }
         }
 
         public static void OnXiLianReturn(this ES_RoleXiLianInherit self)
@@ -210,9 +217,12 @@ namespace ET.Client
             int skillid = response.InheritSkills[0];
             SkillConfig skillConfig = SkillConfigCategory.Instance.Get(skillid);
             // 二次确认框
-            PopupTipHelp.OpenPopupTip(self.Root(), "传承鉴定",
-                $"传承鉴定效果：{skillConfig.SkillDescribe}\n传承装备只有{maxInheritTimes}次重新鉴定传承的机会\n请问是否覆盖原始传承鉴定效果?",
-                () => { self.RequestInheritSelect().Coroutine(); }, () => { self.OnXiLianReturn(); }).Coroutine();
+            using (zstring.Block())
+            {
+                PopupTipHelp.OpenPopupTip(self.Root(), "传承鉴定",
+                    zstring.Format("传承鉴定效果：{0}\n传承装备只有{1}次重新鉴定传承的机会\n请问是否覆盖原始传承鉴定效果?", skillConfig.SkillDescribe, maxInheritTimes),
+                    () => { self.RequestInheritSelect().Coroutine(); }, () => { self.OnXiLianReturn(); }).Coroutine();
+            }
         }
 
         public static async ETTask RequestInheritSelect(this ES_RoleXiLianInherit self)

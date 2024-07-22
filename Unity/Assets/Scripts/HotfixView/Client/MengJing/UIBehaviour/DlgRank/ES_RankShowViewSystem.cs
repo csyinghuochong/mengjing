@@ -2,8 +2,8 @@
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_RankShow))]
-    [FriendOfAttribute(typeof (ES_RankShow))]
+    [EntitySystemOf(typeof(ES_RankShow))]
+    [FriendOfAttribute(typeof(ES_RankShow))]
     public static partial class ES_RankShowSystem
     {
         [EntitySystem]
@@ -74,7 +74,10 @@ namespace ET.Client
                 rank++;
             }
 
-            self.E_Text_MyRankText.text = myRank == -1? "我的排名: 未上榜" : $"我的排名: {myRank}";
+            using (zstring.Block())
+            {
+                self.E_Text_MyRankText.text = myRank == -1 ? "我的排名: 未上榜" : zstring.Format("我的排名: {0}", myRank);
+            }
 
             self.AddUIScrollItems(ref self.ScrollItemRankShowItems, self.ShowRankingInfos.Count);
             self.E_RankShowItemsLoopVerticalScrollRect.SetVisible(true, self.ShowRankingInfos.Count);

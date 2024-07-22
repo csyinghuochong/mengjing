@@ -92,7 +92,7 @@ namespace ET.Client
             string qianghuaName = ItemViewData.EquipWeiZhiToName[subType].Name;
             using (zstring.Block())
             {
-                self.E_QiangHuaNameText.text = (zstring)$"{qianghuaName}强化 +{qianghuaLevel}";
+                self.E_QiangHuaNameText.text = zstring.Format("{0}强化 +{1}", qianghuaName, qianghuaLevel);
             }
 
             EquipQiangHuaConfig equipQiangHuaConfig = QiangHuaHelper.GetQiangHuaConfig(subType, qianghuaLevel);
@@ -101,10 +101,10 @@ namespace ET.Client
             string svalue = fvalue.ToString("0.#####");
             using (zstring.Block())
             {
-                self.E_Attribute1Text.text = (zstring)"对应部位提升 " + svalue + "%属性";
+                self.E_Attribute1Text.text = zstring.Format("对应部位提升 {0}%属性", svalue);
             }
 
-            self.ES_EquipSetItem.E_QiangHuaLvText.text = (zstring)"+{qianghuaLevel}";
+            self.ES_EquipSetItem.E_QiangHuaLvText.text = zstring.Format("+{0}", qianghuaLevel);
             self.E_QiangHuaNameText.text = ItemViewData.EquipWeiZhiToName[subType].Name;
             esRoleQiangHuaItem.OnUpateUI(qianghuaLevel);
 
@@ -123,18 +123,15 @@ namespace ET.Client
             svalue = fvalue.ToString("0.#####");
             using (zstring.Block())
             {
-                self.E_Attribute2Text.text = (zstring)"对应部位提升 " + svalue + "%属性";
-            }
+                self.E_Attribute2Text.text = zstring.Format("对应部位提升 {0}%属性", svalue);
 
-            string costItems = equipQiangHuaConfig.CostItem;
-            costItems += (zstring)$"@1;{equipQiangHuaConfig.CostGold}";
-            self.ES_CostList.Refresh(costItems);
+                string costItems = equipQiangHuaConfig.CostItem;
+                costItems += zstring.Format("@1;{0}", equipQiangHuaConfig.CostGold);
+                self.ES_CostList.Refresh(costItems);
 
-            using (zstring.Block())
-            {
-                self.E_SuccessRateText.text = (zstring)"强化成功率: " + (int)(equipQiangHuaConfig.SuccessPro * 100) + "%";
+                self.E_SuccessRateText.text = zstring.Format("强化成功率: {0}%", (int)(equipQiangHuaConfig.SuccessPro * 100));
                 double addPro = QiangHuaHelper.GetQiangHuaConfig(subType, qianghuaLevel).AdditionPro * bagComponent.QiangHuaFails[subType];
-                self.E_SuccessAdditionText.text = (zstring)"附加成功率 " + (int)(addPro * 100) + "%";
+                self.E_SuccessAdditionText.text = zstring.Format("附加成功率 {0}%", (int)(addPro * 100));
             }
         }
 
@@ -153,7 +150,7 @@ namespace ET.Client
             string costItems = equipQiangHuaConfig.CostItem;
             using (zstring.Block())
             {
-                costItems += (zstring)"@1;" + equipQiangHuaConfig.CostGold;
+                costItems += zstring.Format("@1;{0}", equipQiangHuaConfig.CostGold);
             }
 
             if (!bagComponent.CheckNeedItem(costItems))

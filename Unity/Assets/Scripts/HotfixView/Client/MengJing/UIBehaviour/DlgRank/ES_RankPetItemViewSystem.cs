@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 namespace ET.Client
 {
-    [EntitySystemOf(typeof (ES_RankPetItem))]
-    [FriendOfAttribute(typeof (ES_RankPetItem))]
+    [EntitySystemOf(typeof(ES_RankPetItem))]
+    [FriendOfAttribute(typeof(ES_RankPetItem))]
     public static partial class ES_RankPetItemSystem
     {
         [EntitySystem]
@@ -81,7 +81,11 @@ namespace ET.Client
             }
             else
             {
-                self.E_Lab_TeamNameText.text = rankPetInfo.PlayerName + "的队伍";
+                using (zstring.Block())
+                {
+                    self.E_Lab_TeamNameText.text = zstring.Format("{0}的队伍", rankPetInfo.PlayerName);
+                }
+
                 self.E_Lab_OwnerText.text = rankPetInfo.PlayerName;
             }
 
@@ -117,7 +121,7 @@ namespace ET.Client
             List<long> teamList = self.Root().GetComponent<PetComponentC>().TeamPetList;
             for (int i = 0; i < teamList.Count; i++)
             {
-                teamNumber += (teamList[i] != 0? 1 : 0);
+                teamNumber += (teamList[i] != 0 ? 1 : 0);
             }
 
             if (teamNumber < 3)
