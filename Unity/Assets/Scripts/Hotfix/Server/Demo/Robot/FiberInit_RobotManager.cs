@@ -1,4 +1,5 @@
 using System;
+using ET.Server;
 
 namespace ET.Client
 {
@@ -18,7 +19,7 @@ namespace ET.Client
             root.AddComponent<PlayerComponent>();
             root.AddComponent<CurrentScenesComponent>();
             root.AddComponent<ObjectWait>();
-
+            root.AddComponent<RobotManagerComponent>();
             await ETTask.CompletedTask;
         }
     }

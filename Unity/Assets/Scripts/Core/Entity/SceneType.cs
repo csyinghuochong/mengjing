@@ -40,7 +40,7 @@ namespace ET
         Solo = 1L << 33,
         LoginCenter = 1L << 34,
         ReCharge = 1L << 35,
-        RobotManager = 1 << 36,
+        RobotManager = 1L << 36,
 
         // 客户端
         Demo = 1L << 50,

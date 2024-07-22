@@ -45,7 +45,7 @@ namespace ET.Client
             
             await EventSystem.Instance.PublishAsync(root, new AppStartInitFinish());
             
-            await LoginHelper.Login(root, "1001_ET", ConfigData.RobotPassWord);
+            await LoginHelper.Login(root, root.Name, ConfigData.RobotPassWord);
             //await LoginHelper.Login(root, "1001_ET" + root.Name, ConfigData.RobotPassWord);
             
             if (playerComponent.CreateRoleList.Count == 0)

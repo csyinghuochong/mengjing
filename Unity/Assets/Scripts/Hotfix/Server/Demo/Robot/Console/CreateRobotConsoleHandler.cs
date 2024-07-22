@@ -17,7 +17,7 @@ namespace ET.Server
                 }
                 default:
                 {
-                    //CreateRobot –Num=100
+                    //CreateRobot --Num=1 --RobotId=1001
                     CreateRobotArgs options = null;
                     Parser.Default.ParseArguments<CreateRobotArgs>(content.Split(' '))
                             .WithNotParsed(error => throw new Exception($"CreateRobotArgs error!"))
@@ -30,7 +30,7 @@ namespace ET.Server
                     TimerComponent timerComponent = fiber.Root.GetComponent<TimerComponent>();
                     for (int i = 0; i < options.Num; ++i)
                     {
-                        await robotManagerComponent.NewRobot($"Robot_{i}");
+                        await robotManagerComponent.NewRobot($"{options.RobotId}_{i}");
                         Log.Console($"create robot {i}");
                         await timerComponent.WaitAsync(2000);
                     }

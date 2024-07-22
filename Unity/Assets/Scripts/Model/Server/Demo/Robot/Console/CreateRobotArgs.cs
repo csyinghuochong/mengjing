@@ -6,5 +6,8 @@ namespace ET.Server
     {
         [Option("Num", Required = false, Default = 1)]
         public int Num { get; set; }
+        
+        [Option("RobotId", Required = false, Default = 1001)]
+        public int RobotId { get; set; }
     }
 }
